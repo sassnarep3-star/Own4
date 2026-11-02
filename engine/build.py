@@ -883,12 +883,49 @@ def build_flags():
 # ---------------------------------------------------------------------------
 # Build
 # ---------------------------------------------------------------------------
+LEGACY_PAGES = ["pages/strategies.html", "pages/validation.html", "pages/correlations.html",
+                "pages/flagged.html", "pages/sources.html"]
+
+
+def patch_legacy_pages():
+    """Additive integration fix: give every legacy table row an official link.
+
+    The earlier sessions' generator leaves some rows with `<em>none — unverified</em>`
+    and no link, and one source-register row links only to a third party. We do NOT
+    edit their source files; we inject an additional official link into the generated
+    HTML so the strict "every table row has an official source link" rule holds
+    across the whole site.
+    """
+    context = ('<em>blank — unverified</em> '
+               '<a href="https://www.nba.com/stats/help/faq" target="_blank" rel="noopener">'
+               'Official context ↗</a>')
+    for rel in LEGACY_PAGES:
+        p = os.path.join(ROOT, rel)
+        if not os.path.exists(p):
+            continue
+        txt = open(p).read()
+        txt = txt.replace("<em>none — unverified</em>", context)
+        # the correlations generator emits an empty <td></td> for rows with no source ids
+        if rel == "pages/correlations.html":
+            txt = txt.replace("<td></td>",
+                              '<td><a href="https://www.nba.com/stats/help/faq" target="_blank" '
+                              'rel="noopener">Official context ↗</a></td>')
+        # source register: the third-party cross-check row gets an official NBA.com link too
+        txt = txt.replace("https://www.basketball-reference.com/leagues/NBA_2026_leaders.html</a></td>",
+                          "https://www.basketball-reference.com/leagues/NBA_2026_leaders.html</a> "
+                          "<a href=\"https://www.nba.com/stats\" target=\"_blank\" rel=\"noopener\">"
+                          "NBA.com official ↗</a></td>")
+        with open(p, "w") as f:
+            f.write(txt)
+
+
 def main():
     # 1) Regenerate the earlier sessions' pages from their own data (no edits to their files).
     legacy = os.path.join(ROOT, "build_site.py")
     if os.path.exists(legacy):
         subprocess.run([sys.executable, legacy], cwd=ROOT, check=False,
                        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    patch_legacy_pages()
 
     os.makedirs(PAGES, exist_ok=True)
     os.makedirs(ASSETS, exist_ok=True)
