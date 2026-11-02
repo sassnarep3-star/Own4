@@ -152,7 +152,7 @@ def parl_rows():
     for r in order:
         rk = PARL_RANK.get(id(r))
         if not r.get("n"):
-            rows.append(["—", E(r["name"]), str(r["legs"]), "0", "", "", "", "", "", "",
+            rows.append(["—", E(r["name"]), str(r["legs"]), "0", "", "", "", "",
                          f'<span class="chip bad">G2✗</span> <span class="muted">{E(r.get("note", ""))}</span>', tier_badge("No award"), "0", srclinks(["SRC-13", "SRC-15"])])
             continue
         rows.append([
