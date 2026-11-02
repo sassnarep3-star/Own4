@@ -1,47 +1,60 @@
-# Own4 — NBA Lines Lab
+# Own4 — NBA Line Origination & Signal Strategy Research
 
-Originate your own NBA lines and compete with skill-based strategies on a leaderboard.
+Leaderboard-style research framework for originating NBA lines from verifiable signals (single bets, parlays, player-prop combos), with validation gates, correlation controls, and luck-removal rules. All data rows cite official sources; unverifiable values are blank and flagged.
 
-**Live site:** https://sassnarep3-star.github.io/Own4/ (GitHub Pages, built from this repo — see `index.html`, `pages/`, `assets/`)
+- Live site: GitHub Pages (see repo Settings → Pages)
+- Executive summary: [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)
+- Task board: [COORDINATION.md](COORDINATION.md)
+- Rebuild site: `python3 build_site.py`
 
-## What this project does
+Research framework only — not wagering advice. Helpline: 1-800-GAMBLER (ncpgambling.org).
 
-- Collects, organizes and analyzes NBA data **exclusively from official, verified sources** (nba.com, official.nba.com, stats.nba.com, cdn.nba.com, pr.nba.com, official licensed sportsbooks, and the NBA's official betting-data distributors Sportradar / Genius Sports).
-- Registers **strategy archetypes** for originating lines: single bets, parlays, player-prop combos, same-game parlays, live and futures — see `pages/strategies.html`.
-- Enforces **validation gates G1–G8** so only selectively skill-based strategies reach the **leaderboard** (luck removed via walk-forward testing, held-out samples, significance tests, risk caps, CLV and correlation gates) — see `pages/validation.html`, `pages/leaderboard.html`.
-- **Determines correlation** between bet legs with a defined methodology; measured values are computed only from official data and are left blank + flagged `UNVERIFIED` until then — see `pages/correlation.html`.
-- **No hallucinations:** every table row on the site links to an official source; any value that cannot be confirmed from an official source is left blank and published on the **Flagged for Review** page (`pages/flagged.html`).
 
-## Site map
+---
+## Additional research workspace · arena-1805bfdb
 
-| Page | Contents |
-|---|---|
-| `index.html` | Dashboard landing page |
-| `pages/executive-summary.html` | Executive summary |
-| `pages/league.html` | Verified league & rules facts |
-| `pages/season.html` | 2026-27 season calendar & Emirates NBA Cup rules |
-| `pages/teams.html` | All 30 teams, IDs, official sites, arenas |
-| `pages/stats.html` | Official stat definitions, leader minimums, stats platforms |
-| `pages/markets.html` | Where official lines are published; bet-type definitions & rules |
-| `pages/strategies.html` | Strategy catalog S1–S12 + bet-format guide |
-| `pages/validation.html` | Validation gates G1–G8 + luck-removal methods |
-| `pages/correlation.html` | Correlation methodology + measurement matrix |
-| `pages/leaderboard.html` | Competition design, metrics, reward tiers, standings |
-| `pages/flagged.html` | Flagged for Review (unverified values + irregularities F1–F12) |
-| `pages/sources.html` | Source register (every official source + what it verifies) |
+# Own4 · NBA Signal Lab
 
-## Repo docs
+Evidence-first NBA strategy research dashboard. **No validated strategies, trained pricing model, empirical correlations, live odds, betting execution or funded rewards exist in this release.** Missing results remain blank.
 
-- `docs/executive-summary.md` — executive summary
-- `docs/strategy-framework.md` — strategy, validation, correlation & leaderboard framework
-- `docs/verification-log.md` — line-by-line verification log with sources and flags
-- `research/sources.md` — research source register
-- `COORDINATION.md` — shared task board / session log (multi-session coordination)
+## Executive summary
+Start with authorized point-in-time data and calibrated single-market baselines. Progress to player combinations and parlays only with tested joint distributions. Six proposed hypotheses must pass eight validation gates before leaderboard eligibility. Luck cannot be eliminated; prospective replication, locked holdouts and dependence-aware uncertainty are needed to distinguish evidence of skill from favorable variance.
 
-## Verification policy
+- [Live dashboard](https://sassnarep3-star.github.io/Own4/docs/)
+- [Executive summary](docs/index.html)
+- [Flagged for Review](docs/review.html)
+- [Source register](docs/sources.html)
+- [Coordination and publication log](COORDINATION.md)
 
-Every factual table row on the site carries a link to the official page it was confirmed on (accessed 2026-11-02). If a value cannot be confirmed from an official source, the cell is left **blank** and flagged **UNVERIFIED** — never inferred or filled in. Flagged items are collected on the Flagged for Review page.
+## Reproduce
+Python 3.12, standard library only. Run `python scripts/build.py` then `python -m unittest discover -s tests -v`. Serve locally with `python -m http.server 8000 --bind 0.0.0.0 --directory docs`. Eight static category pages require no JavaScript or credentials. JSON research export is in `docs/data/research.json`; `scripts/build.py` is the canonical content source. GitHub Actions validates every PR and validates `docs/`; existing legacy Pages publishes it under `/docs/`.
 
-## Responsible gambling
+## Audit and verification boundaries
+Initial checkout contained only a six-byte README, no existing code or dataset. Official NBA glossary, FAQ and current injury report plus NIST and scikit-learn official documentation were read on 2026-11-02. Every published table row links to an official source. Design rows are explicitly proposals; their sources provide definitions/method context, not verification of effectiveness. Unavailable numeric values are blank. All generated rows reviewed for this distinction; tests check source coverage, allowed official domains, local navigation and blank metrics. Tests do not establish external source truth or certify profitability.
 
-If gambling is a concern: National Problem Gambling Helpline **1-800-GAMBLER** (1-800-426-2537), 24/7 — [ncpgambling.org](https://www.ncpgambling.org/help-treatment/about-the-national-problem-gambling-helpline).
+The NBA FAQ says statistics are not available for personal/academic download. No scraping, unofficial feeds or invented NBA observations were used. No automatic external data collection is claimed. Sources are dynamic; revalidation is necessary before any future use. See review page for all limitations.
+
+## Independent calculation primitives
+
+`docs/assets/engine.mjs` implements guarded implied probability, expected return, paired correlation, joint hit rate and universal release gating. `node tests/engine.test.mjs` checks synthetic examples only; it publishes no NBA values.
+
+
+---
+## Data Lab (real data, own lines, leaderboard) — session bf34205f
+
+Live: https://sassnarep3-star.github.io/Own4/lab/ · source: `lab/` (generated by `python3 site_src/build_site.py`).
+
+- Official nba.com data transcribed into `data/*.csv` (92 games to Nov 1, standings, team stats), every row with a `source_url`; `python3 scripts/verify_data.py` runs 11 consistency checks.
+- Own-line model in `model/` (`python3 model/evaluate.py`), pre-registered gates in `strategies/gates.json`, correlations in `analysis/`.
+- Result: no strategy passes the pre-registered gates (n=92 < 300; no official odds or player logs available). Irregularities: `data/flags.csv` / Flagged for Review page.
+
+---
+
+## Additional workspace · arena/42d467e4-own4 — NBA Lines Lab (JS dashboard)
+
+**Live:** https://sassnarep3-star.github.io/Own4/lines-lab/ · source: `lines-lab/`
+
+- 13-page dashboard (landing + 12 category subpages) with per-page table filtering; tables rendered from `lines-lab/assets/js/data*.js`.
+- Verified 2026-11-02 against official sources only: league & rules (nba.com/news/about, official 2025-26 Playing Rules PDF), 2026-27 season calendar & Emirates NBA Cup 2026, all 30 teams (IDs, official sites, arenas), official stat definitions & leader minimums (stats.nba.com), official line channels (DraftKings/FanDuel sportsbook pages; Sportradar = NBA's authorized global distributor of official betting data; Genius Sports U.S.) and market rules (parlay/SGP definitions, correlated-outcome ban in standard parlays, settlement on official league stats).
+- Strategy catalog S1–S12 (singles, parlays, player-prop combos, SGP, live, futures), validation gates G1–G8, correlation methodology (measured values intentionally blank + UNVERIFIED until official line history is ingested), leaderboard competition design.
+- Flagged for Review F1–F12: `lines-lab/pages/flagged.html`. Docs: `docs/executive-summary.md`, `docs/strategy-framework.md`, `docs/verification-log.md`. Source register: `research/sources.md` and `lines-lab/pages/sources.html`.
