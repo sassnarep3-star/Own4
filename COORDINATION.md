@@ -553,3 +553,22 @@ Manual review links (official sources used in verification):
 - https://www.nist.gov/itl/sed/statistical-reference-datasets
 - https://www.ncpgambling.org/
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+
+---
+
+## NFL empirical lab · arena-0c469d80-own4
+
+Session ID: `arena-0c469d80-own4`; fixed platform branch: `arena/0c469d80-own4`. The requested `session-<id>/<task>` branch naming cannot be used under the platform's fixed-branch constraint. This is a new NFL task, not a takeover of either existing NFL specification workstream.
+
+| ID | Task | Status | Owner session | Exclusive file scope |
+|---|---|---|---|---|
+| NFL-L1 | Audit inherited NFL/NBA repository claims and irregularities without rewriting other sessions' files | in progress | arena-0c469d80-own4 | `nfl-lab/**`, this append-only section |
+| NFL-L2 | Official-source NFL data acquisition, field-level provenance and reproducible research calculations | in progress | arena-0c469d80-own4 | `nfl-lab/**` |
+| NFL-L3 | NFL line origination, singles/parlays/prop-combo strategies, validation, correlation and luck-control evaluation | in progress | arena-0c469d80-own4 | `nfl-lab/**` |
+| NFL-L4 | Executive summary, clean category dashboard, row/source/link checks and browser checks | in progress | arena-0c469d80-own4 | `nfl-lab/**` |
+| NFL-L5 | Final integration, PR, merge, deployment verification and release record | in progress | arena-0c469d80-own4 | `nfl-lab/**`, this append-only section; shared root/workflow changes only if explicitly coordinated |
+
+- 2026-11-02 UTC: Read existing board and remote main. PR #23 is merged and owns `nfl/**`; open PR #24 proposes `nfl-research/**`. Neither directory will be edited. New empirical workspace is isolated under `nfl-lab/**`. Existing NBA work, root navigation and existing workflows remain untouched. The user's NFL request supersedes the sport only; existing work remains preserved and separately labeled.
+- Initial checkout had grafted histories with no parents. A normal merge refused unrelated histories without changing files; fetched full history before merging current main. No other-session work discarded.
+- Scope requests: root README contains unresolved conflict markers and describes NBA; shared root navigation needs a final-integration owner to link the NFL section. Existing Pages API reports `errored` on initial inspection. These findings will be published in the new review page rather than silently changing another session's files.
+- No source, numeric result, strategy, or deployment is marked verified by this claim. Claims will be completed only with actual source retrieval, checks, and release evidence.
