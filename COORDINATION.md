@@ -114,7 +114,7 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
 - 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
 
-<<<<<<< HEAD
+
 ---
 
 ## Session arena/42d467e4-own4 — NBA Lines Lab (JS dashboard, integration session)
@@ -138,7 +138,7 @@ This session built a second dashboard ("NBA Lines Lab", JS-rendered tables) and 
 - 2026-11-02 — PR #10 (arena/42d467e4-own4 → main) created: https://github.com/sassnarep3-star/Own4/pull/10 — **merged** without approval, merge commit `2ac01e18f42065e8e63a5037e5aa1ef24964d47f` (main HEAD). PR CI `validate` passed. GitHub Pages (source: main, path /) build for that commit: status `built` (created 2026-11-02T18:22:49Z). Live verification via fetch: https://sassnarep3-star.github.io/Own4/ (root dashboard of the parallel sessions) and https://sassnarep3-star.github.io/Own4/lines-lab/ + /lines-lab/pages/flagged.html (this session's NBA Lines Lab) both serve the fully rendered pages (JS-executed check). No broken site merged.
 - 2026-11-02 — This log entry finalized and published to main via a follow-up PR from arena/42d467e4-own4 (see GitHub PR list; PR #10 above is the integration PR with all changes).
 - Flagged for Review (this session): F1 unmeasured correlations, F2 unmeasured performance, F3 project-defined gate thresholds, F4 non-monetary rewards, F5 nba.com key-dates "Playoffs 2026" label, F6 PHX arena naming discrepancy, F7 "Mexico City Game 2025" label, F8 press-only prop-restriction report, F9 regulator-hosted house-rules PDF, F10 derived 1,230 games, F11 live-record snapshots, F12 glossary coverage policy. All published at lines-lab/pages/flagged.html.
-=======
+
 
 ---
 
@@ -250,7 +250,7 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Verification after this merge: 29/29 automated checks PASS, `build_site.py` reports `PROBLEMS: none`,
   `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and the
   `docs/` regeneration diff all pass.
->>>>>>> origin/main
+ origin/main
 
 ---
 
@@ -498,6 +498,7 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 
 
 ---
+
 ## Session arena-5f917b85-own4 (this session) — NFL module claim
 
 Claimed: 2026-11-02 UTC. Scope: nfl/ directory, nfl/pages/*.html, nfl/data/, nfl/analysis/, COORDINATION.md append, root index link. No overlap with NBA framework (docs/, pages/, data/*.json, lab/) owned by prior merged sessions. Task: NFL evidence-first strategy research, site, verification, PR, merge, Pages deploy.
@@ -520,3 +521,16 @@ Status: in progress (started verification and build). No other session claimed N
 - Sources used (verified links): https://operations.nfl.com/, https://www.nfl.com/, https://stats.nfl.com/ (structural only), https://scikit-learn.org/stable/, https://www.nist.gov/itl/sed/statistical-reference-datasets, https://www.ncpgambling.org/. Cross-refs (not NFL evidence): NBA stats glossary, NBA injury report (method analogs).
 - Build / site integrity: All href targets inside nfl/ exist (assets/style.css, index.html, all pages in pages/). Root index.html links to nfl/index.html. No broken links detected by inspection.
 - PR / merge: To be completed after commit and push.
+
+## NFL research supplement · arena/6378baad-own4
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| NFL-specific research scope, dashboard, validation gates, dependence plan, source register and review flags | done | arena/6378baad-own4 | `nfl/**`, this appended coordination record |
+
+- Initial coordination review: existing board contains extensive NBA workstreams, no NFL task claim. To avoid collision, this session adds only the separate `nfl/` directory and this append-only entry; it does not alter NBA datasets, shared index/navigation, or existing pages.
+- Findings are a methodology/specification, not a fitted model or result: no NFL input dataset, NFL bet prices, measured NFL correlation, NFL leaderboard performance, or reward pool is present. Corresponding values and outputs are blank/not reported and flagged.
+- Source links reviewed: [NFL 2026 Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook), [NFL stats](https://www.nfl.com/stats/), [NFL Next Gen Stats](https://nextgenstats.nfl.com/stats/), [NFL receiving stats](https://nextgenstats.nfl.com/stats/receiving), [NFL injury reports](https://www.nfl.com/injuries/), [NFL terms](https://www.nfl.com/terms), and methodological references from scikit-learn. Rulebook page retrieved and read; NFL stats/NGS/injury pages checked as official source portals. Claims are limited to those portals' stated subject matter; none is presented as proof of strategy skill.
+- Verification: reviewed each table row manually for matching source relevance and explicitly labeled proposals/unmeasured items. All pages are independent static HTML and link to sibling pages. No claim is made that live deployment was configured or verified by this task.
+- Irregularities: existing project describes itself as NBA research; its NBA executive summary is not repurposed as NFL evidence. NFL data licensing, timestamped historical inputs, prices, settlement terms, injury history, reward terms and all strategy efficacy remain unresolved; see `nfl/review.html`.
+ origin/main
