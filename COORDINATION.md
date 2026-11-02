@@ -553,3 +553,12 @@ Manual review links (official sources used in verification):
 - https://www.nist.gov/itl/sed/statistical-reference-datasets
 - https://www.ncpgambling.org/
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+## Session arena/1699c9cc-own4 — NFL research
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| NFL source research, strategy specification, dashboard, flags, local validation and integration | in progress | arena/1699c9cc-own4 | nfl-research/** and this appended coordination section |
+
+2026-11-02: Concurrent session 6378baad's `nfl/**` claim became visible only after main advanced. Rebase conflict in COORDINATION.md resolved by retaining all main content and appending this log. To preserve that session's NFL files, this session moved its own independently developed contribution to `nfl-research/**`. Fixed Arena branch is required. Shared root navigation is outside scope; request to final integrator: link NFL sections.
+
+- Second concurrent main advance (PR #25): rebased again, resolving coordination conflict by preserving main and appending this session record.
