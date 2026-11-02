@@ -496,3 +496,10 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
 - Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
 
+
+---
+## Session arena-5f917b85-own4 (this session) — NFL module claim
+
+Claimed: 2026-11-02 UTC. Scope: nfl/ directory, nfl/pages/*.html, nfl/data/, nfl/analysis/, COORDINATION.md append, root index link. No overlap with NBA framework (docs/, pages/, data/*.json, lab/) owned by prior merged sessions. Task: NFL evidence-first strategy research, site, verification, PR, merge, Pages deploy.
+
+Status: in progress (started verification and build). No other session claimed NFL scope.
