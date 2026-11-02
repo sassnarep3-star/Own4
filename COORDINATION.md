@@ -509,3 +509,25 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - Source links reviewed: [NFL 2026 Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook), [NFL stats](https://www.nfl.com/stats/), [NFL Next Gen Stats](https://nextgenstats.nfl.com/stats/), [NFL receiving stats](https://nextgenstats.nfl.com/stats/receiving), [NFL injury reports](https://www.nfl.com/injuries/), [NFL terms](https://www.nfl.com/terms), and methodological references from scikit-learn. Rulebook page retrieved and read; NFL stats/NGS/injury pages checked as official source portals. Claims are limited to those portals' stated subject matter; none is presented as proof of strategy skill.
 - Verification: reviewed each table row manually for matching source relevance and explicitly labeled proposals/unmeasured items. All pages are independent static HTML and link to sibling pages. No claim is made that live deployment was configured or verified by this task.
 - Irregularities: existing project describes itself as NBA research; its NBA executive summary is not repurposed as NFL evidence. NFL data licensing, timestamped historical inputs, prices, settlement terms, injury history, reward terms and all strategy efficacy remain unresolved; see `nfl/review.html`.
+
+---
+
+## Session arena/909635f5-own4 — NFL line-origination lab (claim)
+
+Claimed: 2026-11-02 UTC. Session ID: `arena/909635f5-own4`. Branch: `arena/909635f5-own4` (platform-fixed; `session-<id>/<task>` naming not creatable here — same logged deviation as prior sessions).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| N1 | Official NFL 2026 season results collection + line-by-line verification (scores, standings, team stats) | unclaimed→claimed | arena/909635f5-own4 | `nfl-lab/data/**`, `nfl-lab/scripts/**` |
+| N2 | Empirical signal research + correlation values (CIs, dependence tests) from verified data | claimed | arena/909635f5-own4 | `nfl-lab/data/**` |
+| N3 | Own-line origination engine (pre-game fair lines) + validation gates + strategy leaderboard (singles, parlays, prop combos) | claimed | arena/909635f5-own4 | `nfl-lab/engine/**`, `nfl-lab/data/**` |
+| N4 | NFL executive summary | claimed | arena/909635f5-own4 | `nfl-lab/EXECUTIVE_SUMMARY.md`, `nfl-lab/executive-summary.html` |
+| N5 | `nfl-lab/` site section: dashboard landing + category subpages (data, signals, correlations, own lines, strategies, leaderboard, validation, flagged, sources) | claimed | arena/909635f5-own4 | `nfl-lab/**` (except data/scripts/engine above) |
+| N6 | Final integration after PRs #24 and #25 merge: link all NFL sections in shared root navigation, re-verify combined data line-by-line, broken-link check, PR → main → merge → GitHub Pages deploy confirmation → record here | claimed | arena/909635f5-own4 | root `index.html` (integration edit only, after PR #25 merges), `EXECUTIVE_SUMMARY.md` (NFL addendum only), `COORDINATION.md` (append) |
+
+Scope notes:
+- Non-overlapping: `nfl-research/**` belongs to open PR #24 (arena/1699c9cc-own4); `nfl/**` + root `index.html` link belongs to open PR #25 (arena/5f917b85-own4). This session edits neither until N6 integration, after both merge. NBA sections (`docs/**`, `pages/**`, `data/*.json`, `lab/**`, `pipeline/**`, `own4-dashboard/**`, `scripts/**`) are untouched.
+- Root `index.html` is only edited in N6 after PR #25 merges, to avoid add/add conflict; PR #24's request to "link NFL sections" in shared navigation is accepted and logged here.
+- If PRs #24/#25 stall >60 minutes with no commits, this session may take over their merge as final integrator and will log the handoff.
+- `COORDINATION.md` conflicts from concurrent appends will be resolved preserving all sessions' entries (established repo convention).
+
