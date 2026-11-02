@@ -7,6 +7,7 @@ OK_HOSTS = {"www.nba.com", "github.com", "docs.github.com"}
 errs = []; n_links = n_rows = 0; pages = []
 for dp, dn, fn in os.walk(ROOT):
     dn[:] = [d for d in dn if d not in (".git", "node_modules")]
+    if os.path.relpath(dp, ROOT).split(os.sep)[0] != "lab": continue   # only this session's data lab (lab/); the framework site/docs are other sessions' and have their own tests
     pages += [os.path.join(dp, f) for f in fn if f.endswith(".html")]
 for p in sorted(pages):
     s = open(p).read(); rel = os.path.relpath(p, ROOT)
@@ -23,7 +24,7 @@ for p in sorted(pages):
         for r in re.findall(r"<tr>(.*?)</tr>", tb, re.S):
             n_rows += 1
             if 'href="https://' not in r: errs.append(f"{rel}: table row without https source link: {re.sub('<[^>]+>', ' ', r)[:80]}")
-for need in ("index.html", ".nojekyll", "pages/flagged.html", "pages/executive-summary.html"):
+for need in (".nojekyll", "lab/index.html", "lab/pages/flagged.html", "lab/pages/executive-summary.html", "lab/assets/style.css"):
     if not os.path.exists(os.path.join(ROOT, need)): errs.append("missing " + need)
 print(f"{len(pages)} pages, {n_links} links, {n_rows} table rows checked, {len(errs)} problems")
 for e in errs[:50]: print(" -", e)

@@ -4,6 +4,7 @@ Run from anywhere:  python3 site_src/build_site.py"""
 import csv, html, json, os, datetime
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 D = os.path.join(ROOT, "data")
+OUT = os.path.join(ROOT, "lab")   # published at /Own4/lab/ (root index/pages/docs belong to other sessions' framework site)
 REPO = "https://github.com/sassnarep3-star/Own4"
 def rd(n): return list(csv.DictReader(open(os.path.join(D, n), newline="")))
 E = html.escape
@@ -40,13 +41,13 @@ document.querySelectorAll('th').forEach(th=>th.addEventListener('click',()=>{con
 </script>"""
 def page(path, title, body, lead=""):
     depth = path.count("/"); pre = "../" * depth
-    nav = "".join(f'<a href="{pre}{h}" class="{"on" if h == path else ""}">{E(t)}</a>' for h, t in NAV)
+    nav = "".join(f'<a href="{pre}{h}" class="{"on" if h == path else ""}">{E(t)}</a>' for h, t in NAV) + f'<a href="{pre}../index.html">Research framework site ↗</a>'
     out = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{E(title)} · Own4</title><link rel="stylesheet" href="{pre}assets/style.css"></head><body>
-<header class="top"><a class="brand" href="{pre}index.html">Own4 · NBA own-line lab</a><nav>{nav}</nav></header>
+<header class="top"><a class="brand" href="{pre}index.html">Own4 · NBA own-line data lab</a><nav>{nav}</nav></header>
 <main><h1>{E(title)}</h1><p class="lead">{lead}</p>{body}</main>
 <footer>Built {BUILT} from <a href="{REPO}">{REPO.split('//')[1]}</a>. Source data: nba.com official pages (links in every table row). Research output only — virtual rewards, not betting advice, no real-money stakes.</footer>{JS}</body></html>"""
-    p = os.path.join(ROOT, path); os.makedirs(os.path.dirname(p), exist_ok=True); open(p, "w").write(out)
+    p = os.path.join(OUT, path); os.makedirs(os.path.dirname(p), exist_ok=True); open(p, "w").write(out)
 SCORE = "https://www.nba.com/games?date=2026-11-01"
 nflag = len(flags); nval = sum(1 for x in lb if x["tier"] in ("Forecast-validated",))
 m = res["margin"]; tt = res["total"]; ts = res["tests"]; pr = res["prob"]
@@ -183,7 +184,7 @@ rows = [[x["flag_id"], tag(x["severity"], sev[x["severity"]]), E(x["area"]), E(x
          a(x["source_url"], "official source") + " · " + a(x["second_source_url"], "2nd link")] for x in flags]
 body = "<p>Irregularities, unverified values and known limits. None blocks the build; each has an official link for manual review. Values that could not be confirmed were left blank, not inferred.</p>" + \
        table(["ID", "Severity", "Area", "Description", "Evidence", "Resolution needed", "Status", "Links"], rows, "fl", True, wrapcols=(3, 5))
-page("pages/flagged.html", "Flagged for review", body, f"{len(flags)} items — machine-readable copy: <a href='../data/flags.csv'>data/flags.csv</a>.")
+page("pages/flagged.html", "Flagged for review", body, f"{len(flags)} items — machine-readable copy: <a href='../../data/flags.csv'>data/flags.csv</a>.")
 # ------------------------------------------------------------ repo review
 rr = rd("../repo_review/files.csv"); rf = rd("../repo_review/findings.csv")
 body = "<h2>Findings</h2>" + table(["ID", "Finding", "Evidence", "Official reference", "Status"], [[x["id"], E(x["finding"]), E(x["evidence"]), a(x["reference_url"], "link"), tag(x["status"], "warn" if x["status"] != "ok" else "ok")] for x in rf], "rf", wrapcols=(1, 2)) + \
@@ -204,7 +205,7 @@ body = f"""<h2>Model</h2><ul><li><b>Rating</b>: R = (Σ margin + k·R₂₅)/(n 
 <h2>Luck-removal protocol</h2><ul><li>Gates and strategy catalogue committed before evaluation (<a href="{REPO}/commit/0b97f52">commit 0b97f52</a>); walk-forward with strict date cut-off; proper scoring rules; paired bootstrap (10,000 reps, seed 20261102); Bonferroni across 6 tests; min n=300; half-sample stability; market gate for any real-money use.</li></ul>
 <h2>Data checks (<code>scripts/verify_data.py</code>)</h2>{table(['Check','Result','Detail','Source'],vrows,'vc',wrapcols=(0,2))}
 <h2>Official sources used</h2>{table(['URL','Content','Used in','Link'],[[E(u),E(d),E(f_),a(u,'open')] for u,d,f_ in srcs],'src',wrapcols=(1,))}
-<h2>Downloads</h2><p>{' · '.join(a('../data/'+n,n) for n in sorted(x for x in os.listdir(D) if x.endswith('.csv')))}</p>
+<h2>Downloads</h2><p>{' · '.join(a('../../data/'+n,n) for n in sorted(x for x in os.listdir(D) if x.endswith('.csv')))}</p>
 <h2>Reproduce</h2><pre><code>python3 scripts/verify_data.py\npython3 model/evaluate.py\npython3 analysis/correlations.py\npython3 scripts/make_repo_review.py\npython3 site_src/build_site.py\npython3 scripts/check_site.py</code></pre>"""
 page("pages/methodology.html", "Methodology & sources", body, "How lines are made, how strategies are judged, where every number comes from.")
 print("site built", BUILT)

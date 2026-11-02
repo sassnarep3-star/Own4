@@ -5,7 +5,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 REPO = "https://github.com/sassnarep3-star/Own4"
 def sh(*c): return subprocess.run(c, cwd=ROOT, capture_output=True, text=True).stdout
 files = sorted(x for x in sh("git", "ls-files", "--cached", "--others", "--exclude-standard").split("\n") if x)
-skip = lambda p: p.startswith("repo_review/") or p == "index.html" or p.startswith("pages/")
+skip = lambda p: p.startswith("repo_review/") or p.startswith("lab/")
 orig = set(sh("git", "ls-tree", "-r", "--name-only", "319d6b05a6ff2b3d05d82cd313b69d61e72afb50").split())
 rows = []; tot_rows = tot_src = 0; secrets = []
 for p in files:
