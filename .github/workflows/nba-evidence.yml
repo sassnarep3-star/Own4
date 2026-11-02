@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.11'
       - name: Verify committed source extracts
         run: python collect_evidence.py
       - name: Test pricing, settlement and leakage controls
@@ -36,7 +36,9 @@ jobs:
       - name: Check JavaScript
         run: node --check site/assets/app.js
       - name: Confirm deterministic data and site
-        run: git diff --exit-code -- data/research.json data/evidence_receipt.json site
+        run: |
+          git diff --stat -- data/research.json data/evidence_receipt.json site
+          git diff --exit-code -- data/research.json data/evidence_receipt.json site
       - uses: actions/upload-artifact@v4
         with:
           name: nba-evidence-site
