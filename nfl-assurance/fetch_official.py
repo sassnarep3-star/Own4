@@ -20,10 +20,11 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 RAW = ROOT / 'sources'
-HEADERS = {'User-Agent': 'Mozilla/5.0 (compatible; Own4-source-audit/1.0)',
-           'Accept': 'text/html,application/json,application/pdf;q=0.9,*/*;q=0.8',
-           'Accept-Language': 'en-US,en;q=0.9'}
-SCHEDULES = [(year, week, f'https://www.nfl.com/scores/{year}/reg{week}')
+HEADERS = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+           'Accept': 'text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8',
+           'Accept-Language': 'en-US,en;q=0.9', 'Accept-Encoding': 'gzip, deflate',
+           'Connection': 'close'}
+SCHEDULES = [(year, week, f'https://www.nfl.com/schedules/{year}/by-week/week-{week}')
              for year, weeks in [(2024, 18), (2025, 18), (2026, 8)]
              for week in range(1, weeks + 1)]
 REFERENCES = [

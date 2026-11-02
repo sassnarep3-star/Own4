@@ -12,6 +12,7 @@ on:
     branches: [main, arena/0c469d80-own4]
     paths:
       - 'nfl-assurance/acquisition.json'
+      - 'nfl-assurance/fetch_official.py'
       - '.github/workflows/nfl-assurance.yml'
   pull_request:
     paths:
@@ -44,6 +45,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
