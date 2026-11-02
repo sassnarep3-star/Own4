@@ -206,7 +206,7 @@ def run():
     # Gate statuses apply to release as a betting strategy, not to code execution.
     gate_defs = [
         ("G01", "Official provenance", "Every input value has an official NBA source and passes integrity checks.", "pass"),
-        ("G02", "No future information", "All features precede the date being predicted; parameters frozen after training.", "pass"),
+        ("G02", "No future information", "All evaluation features precede the date being predicted; parameters frozen after training. Training-only residual fitting may use the full training window.", "pass"),
         ("G03", "Sample size", f"At least {protocol['minimum_settled_selections']} settled selections and {protocol['minimum_distinct_dates']} distinct dates.", "fail"),
         ("G04", "Official executable prices", "Timestamped official sportsbook quotes, limits and applicable rules for every selection.", "unverified"),
         ("G05", "Settlement audit", "Operator-specific pushes, voids, participation and overtime rules matched to every ticket.", "unverified"),

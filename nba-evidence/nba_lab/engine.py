@@ -40,7 +40,7 @@ def ev_per_unit(p: float, decimal: float) -> float:
 
 
 def half_line(x: float) -> float:
-    """Nearest half-integer, excluding integer pushes; ties go upward."""
+    """Lower-bracket half-point line floor(x)+0.5; never an integer push."""
     if not isfinite(x):
         raise ValueError("Line must be finite")
     return floor(x) + 0.5

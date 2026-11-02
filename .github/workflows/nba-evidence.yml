@@ -1,0 +1,45 @@
+name: Validate NBA Evidence
+on:
+  push:
+    paths:
+      - 'nba-evidence/**'
+      - '.github/workflows/nba-evidence.yml'
+  pull_request:
+    paths:
+      - 'nba-evidence/**'
+      - '.github/workflows/nba-evidence.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: nba-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify committed source extracts
+        run: python collect_evidence.py
+      - name: Test pricing, settlement and leakage controls
+        run: python -m unittest discover -s tests -v
+      - name: Recompute research
+        run: python -m nba_lab.analysis
+      - name: Inventory repository without editing peer files
+        run: python audit_repo.py
+      - name: Build static dashboard
+        run: python build_site.py
+      - name: Verify every table row and local link
+        run: python verify_site.py
+      - name: Check JavaScript
+        run: node --check site/assets/app.js
+      - name: Confirm deterministic data and site
+        run: git diff --exit-code -- data/research.json data/evidence_receipt.json site
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nba-evidence-site
+          path: nba-evidence/site
