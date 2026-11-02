@@ -35,6 +35,11 @@ REFERENCES = [
     ('sample-game', 'https://www.nfl.com/games/cowboys-at-eagles-2025-reg-1?tab=stats'),
     ('upcoming-game', 'https://www.nfl.com/games/bears-at-seahawks-2026-reg-8'),
     ('stats-portal', 'https://www.nfl.com/stats/'),
+    ('receiving-leaders', 'https://www.nfl.com/stats/player-stats/category/receiving/2026/reg/all/receivingyards/desc'),
+    ('passing-leaders', 'https://www.nfl.com/stats/player-stats/category/passing/2026/reg/all/passingyards/desc'),
+    ('rushing-leaders', 'https://www.nfl.com/stats/player-stats/category/rushing/2026/reg/all/rushingyards/desc'),
+    ('sample-receiver-logs', 'https://www.nfl.com/players/jaxon-smith-njigba/stats/logs/'),
+    ('sample-qb-logs', 'https://www.nfl.com/players/caleb-williams/stats/logs/'),
 ]
 
 def fetch_one(item):
