@@ -33,10 +33,10 @@ only `README.md`, 6 bytes).
 | --- | --- | --- | --- | --- |
 | T00 | Board creation, governance, environment note, session claim | done | session-3ab8432d | `COORDINATION.md` |
 | T01 | Repo review, source registry, official-source link catalog, irregularities | done | session-3ab8432d | `README.md`, `REPO_REVIEW.md`, `SOURCES.md` |
-| T02 | Requirements register (full list, line-by-line, traceable) | in progress | session-3ab8432d | `REQUIREMENTS.md` |
-| T03 | Official data collection (NBA.com standings, team/player stats), raw snapshots | unclaimed | — | `data/raw/*`, `scripts/fetch_official.py` |
-| T04 | Derived data: own NBA lines, fair-price model, explicit formulas | unclaimed | — | `data/derived/*`, `scripts/build_lines.py`, `LINES.md` |
-| T05 | Strategy research: singles, parlays, prop combos; validation gates | unclaimed | — | `STRATEGIES.md`, `scripts/validate_strategies.py`, `data/strategies/*` |
+| T02 | Requirements register (full list, line-by-line, traceable) | done | session-3ab8432d | `REQUIREMENTS.md` |
+| T03 | Official data collection (NBA.com standings, team/player stats), raw snapshots | done | session-3ab8432d | `data/raw/*`, `data/sources.json`, `scripts/fetch_official.py`, `scripts/common.py`, `scripts/model.py` |
+| T04 | Derived data: own NBA lines, fair-price model, explicit formulas | done | session-3ab8432d | `data/derived/*`, `scripts/build_lines.py`, `LINES.md` |
+| T05 | Strategy research: singles, parlays, prop combos; validation gates | in progress | session-3ab8432d | `STRATEGIES.md`, `scripts/validate_strategies.py`, `data/strategies/*` |
 | T06 | Correlation analysis from verified official values only | unclaimed | — | `CORRELATIONS.md`, `scripts/correlations.py`, `data/correlations/*` |
 | T07 | Skill-vs-luck gates, leaderboard with reward rules | unclaimed | — | `LEADERBOARD.md`, `data/leaderboard/*` |
 | T08 | Verification ledger: every row ↔ official source; blanks + flags | unclaimed | — | `VERIFICATION.md`, `scripts/verify.py`, `data/verification/*` |
@@ -81,3 +81,21 @@ only `README.md`, 6 bytes).
 | --- | --- | --- |
 | 2026-11-02 | session-3ab8432d | T00 done. Claimed T01 (`README.md`, `REPO_REVIEW.md`, `SOURCES.md`). |
 | 2026-11-02 | session-3ab8432d | T01 done. Claimed T02 (`REQUIREMENTS.md`). |
+| 2026-11-02 | session-3ab8432d | T02 done. Claimed T03 (`data/raw/*`, `data/sources.json`, fetch/model/common scripts). |
+| 2026-11-02 | session-3ab8432d | T03 done. Claimed T04 (`data/derived/*`, `scripts/build_lines.py`, `LINES.md`). |
+| 2026-11-02 | session-3ab8432d | T04 done. Claimed T05 (`STRATEGIES.md`, `scripts/validate_strategies.py`, `data/strategies/*`). |
+
+### T02 — done (2026-11-02)
+- Sources: [NBA.com Standings](https://www.nba.com/standings), [NBA.com Stat Glossary](https://www.nba.com/stats/help/glossary), [GitHub repo](https://github.com/sassnarep3-star/Own4).
+- Verification: 55 atomic requirement rows (R1.01–R7.08) each with a deliverable, official evidence link and status.
+- Irregularities: R6.06 recorded as `partial (flagged)` — the platform forbids per-session branches (IR-13).
+
+### T03 — done (2026-11-02)
+- Sources: 22 usable official pages recorded in `SOURCES.md` and `scripts/fetch_official.py` (NBA.com standings, teams advanced 2025-26/2026-27, teams traditional 2026-27, players traditional 2026-27, games pages for 2026-10-23/24/26/28/30/31 and 2026-11-01/02/04, box score, stat glossary, NBA rulebook, NBA betting-data releases, NBA Communications).
+- Verification: every raw row carries an official `source` URL and a retrieval date. 30 standings rows, 30+30 advanced rows, 30 traditional rows, 8 player rows, 14 slate games, 62 settled games. All JSON validated with `python3 -m json.tool`.
+- Irregularities: IR-06 (62/92 coverage), IR-07 (`/null` player links), IR-08 (rulebook heading only), IR-09 (CDN HTTP 500), IR-11 (8/442 player rows), IR-12 (home/away not exposed), IR-15 (truncated Flagg row).
+
+### T04 — done (2026-11-02)
+- Sources: [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26), [NBA.com Advanced 2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27), [NBA.com Stat Glossary](https://www.nba.com/stats/help/glossary), [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04), official settled-score pages.
+- Verification: `scripts/build_lines.py` regenerates all 14 fair lines and the backtest; L(2025-26)=114.7600, L(2026-27)=111.9733, sigma=14.5764 from 41 pre-slate games. No invented constants. Train/holdout split by date.
+- Irregularities: IR-04 (no market odds), IR-12 (no per-game HCA), IR-14 (0.780 train → 0.476 holdout accuracy, negative Brier skill). Market/prop/M2-moneyline cells are `null` with `unverified` flags.
