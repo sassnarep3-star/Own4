@@ -1,0 +1,14 @@
+{
+  "project":"NFL Signal Lab — NFL module",
+  "date":"2026-11-02",
+  "gates":[
+    {"id":"G1","name":"Data rights","requirement":"Authorized historical feed + operator price archive","status":"BLOCKED","evidence":"No download license secured; viewing pages not a download license","source":"https://operations.nfl.com/"},
+    {"id":"G2","name":"Official source","requirement":"Every claim backed by official/trusted source link","status":"PASSED (structural)","evidence":"Every table row carries https source link","source":"https://www.nfl.com/"},
+    {"id":"G3","name":"Calibration","requirement":"Probabilities calibrated to observed frequencies","status":"NOT TESTED","evidence":"No calibration dataset; no observed returns","source":"https://scikit-learn.org/stable/modules/calibration.html"},
+    {"id":"G4","name":"Correlation check","requirement":"Dependence register completed; no hidden overlap","status":"NOT TESTED","evidence":"Specification built; coefficients unmeasured","source":"pages/correlations.html"},
+    {"id":"G5","name":"Cost / pricing","requirement":"Price archive verified; cost per bet recorded","status":"BLOCKED","evidence":"No price archive; all odds blank by policy","source":"https://www.ncpgambling.org/"},
+    {"id":"G6","name":"Chronological holdout","requirement":"Locked train/test split with no leakage","status":"NOT TESTED","evidence":"No fitted model; no holdout executed","source":"https://scikit-learn.org/stable/modules/cross_validation.html"},
+    {"id":"G7","name":"Trial registry","requirement":"Every strategy logged before first evaluation","status":"PASSED (structural)","evidence":"All strategy IDs registered pre-evaluation (S-01..S-05, P-01..P-04, PR-01..PR-04)","source":"../index.html"}
+  ],
+  "note":"Gates registered before first evaluation. No strategy passes all gates. Unverified values blank."
+}

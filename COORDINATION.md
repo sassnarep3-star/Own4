@@ -503,3 +503,20 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 Claimed: 2026-11-02 UTC. Scope: nfl/ directory, nfl/pages/*.html, nfl/data/, nfl/analysis/, COORDINATION.md append, root index link. No overlap with NBA framework (docs/, pages/, data/*.json, lab/) owned by prior merged sessions. Task: NFL evidence-first strategy research, site, verification, PR, merge, Pages deploy.
 
 Status: in progress (started verification and build). No other session claimed NFL scope.
+
+---
+## Session arena-5f917b85-own4 — NFL module verification log (2026-11-02)
+
+- T1 (Repo review): Done. Read root index.html, docs/index.html, COORDINATION.md, existing NBA framework. Noted repo is NBA-focused; NFL module added without disrupting NBA site (docs/, pages/, lab/ untouched except root index link).
+- T2 (Official-source research): Done. Fetched operations.nfl.com, www.nfl.com, stats.nfl.com (client-rendered, noted), scikit-learn, NIST, NCPG. Verified structural facts: 32 teams, 272 games, 17 games/team, 18 weeks, 7 seeds/conference. All betting/odds/player stats unverified and blank.
+- T3 (Strategy framework): Done. strategies.json + pages (singles, parlays, props) with table rows and source links. All performance values blank + flagged.
+- T4 (Validation gates): Done. validation.html + validation_gates.json — 7 gates registered; G1, G3, G4, G5, G6 untested/blocked; G2, G7 passed structurally.
+- T5 (Correlation): Done. correlations.html + correlations.csv — 6 pairs specified; all coefficients blank + flagged. No fitted values.
+- T6 (Site generator / pages): Done. nfl/index.html + 9 subpages + assets/style.css + root index link. Clean dashboard-style side-nav, table format, source links per row.
+- T7 (Executive summary): Done. nfl/index.html includes summary table + nfl/pages/executive-summary.html detailed.
+- T8 (Flagged for review): Done. nfl/pages/flagged.html + nfl/data/flags.csv — 10 flags (F-01..F-10), all with source links, none inferred, none block merge.
+- Verification: Every table row in nfl/pages/*.html has a source link (<a href=...>). Unverified numeric cells are empty (e.g., performance, coefficients, line values). No hallucinated values.
+- Irregularities: F-01 (no betting archive — permanent), F-06 (injury specifics unconfirmed in text — structural only), F-07 (data rights blocked). All published on Flagged page.
+- Sources used (verified links): https://operations.nfl.com/, https://www.nfl.com/, https://stats.nfl.com/ (structural only), https://scikit-learn.org/stable/, https://www.nist.gov/itl/sed/statistical-reference-datasets, https://www.ncpgambling.org/. Cross-refs (not NFL evidence): NBA stats glossary, NBA injury report (method analogs).
+- Build / site integrity: All href targets inside nfl/ exist (assets/style.css, index.html, all pages in pages/). Root index.html links to nfl/index.html. No broken links detected by inspection.
+- PR / merge: To be completed after commit and push.
