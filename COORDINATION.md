@@ -31,9 +31,9 @@ only `README.md`, 6 bytes).
 
 | Task | Description | Status | Owner | File scope (exclusive) |
 | --- | --- | --- | --- | --- |
-| T00 | Board creation, governance, environment note, session claim | in progress | session-3ab8432d | `COORDINATION.md` |
-| T01 | Repo review, source registry, official-source link catalog, irregularities | unclaimed | — | `README.md`, `REPO_REVIEW.md`, `SOURCES.md` |
-| T02 | Requirements register (full list, line-by-line, traceable) | unclaimed | — | `REQUIREMENTS.md` |
+| T00 | Board creation, governance, environment note, session claim | done | session-3ab8432d | `COORDINATION.md` |
+| T01 | Repo review, source registry, official-source link catalog, irregularities | done | session-3ab8432d | `README.md`, `REPO_REVIEW.md`, `SOURCES.md` |
+| T02 | Requirements register (full list, line-by-line, traceable) | in progress | session-3ab8432d | `REQUIREMENTS.md` |
 | T03 | Official data collection (NBA.com standings, team/player stats), raw snapshots | unclaimed | — | `data/raw/*`, `scripts/fetch_official.py` |
 | T04 | Derived data: own NBA lines, fair-price model, explicit formulas | unclaimed | — | `data/derived/*`, `scripts/build_lines.py`, `LINES.md` |
 | T05 | Strategy research: singles, parlays, prop combos; validation gates | unclaimed | — | `STRATEGIES.md`, `scripts/validate_strategies.py`, `data/strategies/*` |
@@ -55,4 +55,29 @@ only `README.md`, 6 bytes).
 
 ## Completion records (sources, verification performed, irregularities)
 
-(none yet — tasks append here as they finish)
+### T00 — done (2026-11-02)
+- Sources: none required (governance). Platform branch constraint verified from session context.
+- Verification: `git branch --show-current` = `arena/3ab8432d-own4`; remote branch created and pushed.
+- Irregularities: IR-13 (no per-session branches permitted) logged.
+
+### T01 — done (2026-11-02)
+- Sources: [nba.com/standings](https://www.nba.com/standings),
+  [nba.com/stats/teams/advanced?Season=2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27),
+  [nba.com/stats/help/glossary](https://www.nba.com/stats/help/glossary),
+  [official.nba.com/rulebook](https://official.nba.com/rulebook/),
+  [nba.com official betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
+  [pr.nba.com](https://pr.nba.com/nba-sportradar-genius-sports-group-partnerships/),
+  [MGM partnership release](https://www.nba.com/news/mgm-resorts-international-becomes-official-gaming-partner-nba-official-release),
+  [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages),
+  [GitHub repo API](https://api.github.com/repos/sassnarep3-star/Own4).
+- Verification: repository tree enumerated (`find`), README read in full (6 bytes), `git log` read,
+  `gh api` Pages/repo state read. Official-source registry written with 22 usable sources,
+  3 unusable official endpoints, 4 excluded third-party sites.
+- Irregularities: IR-01 … IR-13 recorded in `REPO_REVIEW.md`; all appear on the site's
+  Flagged for Review page. None blocking.
+
+### Claim log (continued)
+| Time (UTC) | Session | Action |
+| --- | --- | --- |
+| 2026-11-02 | session-3ab8432d | T00 done. Claimed T01 (`README.md`, `REPO_REVIEW.md`, `SOURCES.md`). |
+| 2026-11-02 | session-3ab8432d | T01 done. Claimed T02 (`REQUIREMENTS.md`). |
