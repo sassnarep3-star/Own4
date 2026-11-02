@@ -461,8 +461,8 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 |---|---|---|---|
 | T01 Requirements, source policy, official evidence | in progress | 91dfd6a4 | `nba-evidence/docs/REQUIREMENTS.md`, `nba-evidence/docs/SOURCES.md`, `nba-evidence/data/**`, `nba-evidence/collect_evidence.py` |
 | T02 Strategy research, probability engine, validation and tests | in progress | 91dfd6a4 | `nba-evidence/nba_lab/**`, `nba-evidence/tests/**`, `nba-evidence/docs/METHODOLOGY.md`, `nba-evidence/pyproject.toml` |
-| T03 Dashboard, evidence tables, executive summary | unclaimed | — | `nba-evidence/site/**`, `nba-evidence/docs/EXECUTIVE_SUMMARY.md`, `nba-evidence/README.md` |
-| T04 Final integration, verification, Pages and PR | unclaimed | — | `.github/workflows/nba-evidence.yml`, `nba-evidence/verify_site.py`, deployment records in this board |
+| T03 Dashboard, evidence tables, executive summary | in progress | 91dfd6a4 | `nba-evidence/site/**`, `nba-evidence/docs/EXECUTIVE_SUMMARY.md`, `nba-evidence/README.md` |
+| T04 Final integration, verification, Pages and PR | in progress | 91dfd6a4 | `.github/workflows/nba-evidence.yml`, `nba-evidence/verify_site.py`, deployment records in this board |
 
 All scopes except this board are disjoint. T01 is claimed now; subsequent tasks will be claimed before their implementation starts. No shared integration output exists yet.
 
@@ -473,3 +473,7 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Safety standard: no invented games, odds, returns, correlations, or validation passes. A positive simulated or retrospective result is not proof of a betting edge. Unverified items do not block publication but cannot qualify a strategy.
 
 - 2026-11-02: Claimed T02 before implementation. T01 primary-source inspection remains in progress; no overlapping session claims were found.
+
+- 2026-11-02: Claimed T03/T04 in the non-overlapping `nba-evidence/` scope after inspecting the concurrent main update. Root navigation change request: add a link to `/Own4/nba-evidence/` when its owning integration session next updates the root; this session will not edit that owner's index. Direct publication uses the existing main/root Pages configuration.
+- Conflict handling: the first `git pull --rebase` after merging concurrent main replayed already-merged history and hit an add/add board conflict. The rebase was aborted without discarding either history; the preserved merge was checked against the remote assigned branch and pushed normally. Subsequent branch-only pulls are clean. No force push was used.
+- Primary NBA results inspected: official date scoreboards for 2025-01-01 through 2025-01-08 (62 games); two complete official player box scores (0022400465 and 0022400487). These are small factual research extracts, not an automated bulk NBA download. NBA FAQ download restrictions are recorded and respected; no unofficial data feed is substituted.
