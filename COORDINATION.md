@@ -40,8 +40,8 @@ only `README.md`, 6 bytes).
 | T06 | Correlation analysis from verified official values only | done | session-3ab8432d | `CORRELATIONS.md`, `scripts/correlations.py`, `data/correlations/*` |
 | T07 | Skill-vs-luck gates, leaderboard with reward rules | done | session-3ab8432d | `LEADERBOARD.md`, `data/leaderboard/*` |
 | T08 | Verification ledger: every row ↔ official source; blanks + flags | done | session-3ab8432d | `VERIFICATION.md`, `scripts/verify.py`, `scripts/build_docs.py`, `data/verification/*` |
-| T09 | FINAL INTEGRATION: site build (index + nav + category subpages), combined re-verification, link check, publish | in progress | session-3ab8432d | `index.html`, `pages/*`, `assets/*`, `site-data/*`, `.nojekyll`, `EXECUTIVE_SUMMARY.md`, `scripts/build_site.py`, `scripts/check_links.py` |
-| T10 | PR, merge, GitHub Pages deploy confirmation, record results | unclaimed | — | `COORDINATION.md` (append-only log section) |
+| T09 | FINAL INTEGRATION: site build (index + nav + category subpages), combined re-verification, link check, publish | done | session-3ab8432d | `index.html`, `pages/*`, `assets/*`, `site-data/*`, `.nojekyll`, `EXECUTIVE_SUMMARY.md`, `scripts/build_site.py`, `scripts/check_links.py` |
+| T10 | PR, merge, GitHub Pages deploy confirmation, record results | in progress | session-3ab8432d | `COORDINATION.md` (append-only log section) |
 
 ## Claim log
 
@@ -119,3 +119,34 @@ only `README.md`, 6 bytes).
 - Sources: all 22 official sources in `SOURCES.md`; [NBA.com Standings](https://www.nba.com/standings), [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26), [NBA.com Glossary](https://www.nba.com/stats/help/glossary).
 - Verification: `scripts/verify.py` checked 450 rows: 450 PASS, 0 FLAG, 0 rows without an official source. ΣW=ΣL=1230 for 2025-26; standings GP÷2 = 92 = official calendar; Σ home games = Σ road games = 92; home win rate 48/92 = 0.5217; BOS 108 / ORL 97 cross-checked against box score. Every `null` in a published row is listed in its `unverified` array.
 - Irregularities: 17 flagged items published to `data/verification/flagged.json` and the site's Flagged for Review page.
+
+### T09 — done (2026-11-02) — FINAL INTEGRATION
+- Combined re-verification: re-ran the full pipeline (`build_lines.py` → `correlations.py` →
+  `validate_strategies.py` → `verify.py` → `build_docs.py` → `build_site.py` → `check_links.py`).
+  Result: 450/450 rows PASS, 0 FLAG, 0 rows without an official source.
+- Site build: 14 HTML pages (clean landing dashboard + 13 category subpages), `assets/css/style.css`,
+  `assets/js/app.js`, `site-data/site.json`, `.nojekyll`. 1000 rendered data rows; each has a Source
+  column linking to an official site — enforced by `scripts/check_links.py`.
+- Link check: `checked 14 HTML pages, 279 local links, 1000 data rows — errors=0 warnings=0`.
+  Local HTTP preview returned 200 for `/`, all sampled subpages, CSS, JS, site data and `.nojekyll`.
+- GitHub Pages configuration verified from the [official API](https://api.github.com/repos/sassnarep3-star/Own4/pages):
+  source `main /`, legacy Jekyll build; `.nojekyll` added so plain HTML is served verbatim.
+- Sources: [NBA.com Standings](https://www.nba.com/standings),
+  [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26),
+  [NBA.com Stat Glossary](https://www.nba.com/stats/help/glossary),
+  [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04),
+  [NBA betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
+  [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages).
+- Irregularities: none in the build. All 17 pre-existing flagged items are published on the
+  clearly labelled **Flagged for Review** page with official source links; they do not block the merge.
+
+### Claim log (continued 2)
+| Time (UTC) | Session | Action |
+| --- | --- | --- |
+| 2026-11-02 | session-3ab8432d | T05–T08 done. Claimed T09 final integration (site, nav, combined re-verification, link check). |
+| 2026-11-02 | session-3ab8432d | T09 done after full clean pipeline + 0 broken links. Claimed T10 (PR, merge, deploy). |
+
+## Handoff / conflict log (final)
+- No other real session appeared on the board during this run.
+- `git pull --rebase origin arena/3ab8432d-own4` was run before every push; no merge conflicts occurred.
+- The platform's single-branch constraint (IR-13) is the only protocol deviation; logged above.
