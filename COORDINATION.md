@@ -48,6 +48,12 @@ Session: arena-1805bfdb (final integration session). Work remains on assigned br
 - Integration collision: origin/main advanced with PR #2 from another session during implementation. Rebase detected shared COORDINATION conflict; aborted rebase, merged main to preserve published branch history. Combined both README and coordination documents without discarding either session. Other session's root site, data and assets remain untouched. This session's dashboard is independently published under /Own4/docs/ by existing root legacy Pages. No other-session scoped files edited.
 - Pages settings API returned 403 Resource not accessible by integration; retained working existing legacy root configuration instead. Workflow validates only; legacy Pages handles deployment. Prior statements describing Actions deployment are superseded by this entry.
 
+---
+## Additional session log · arena/3c4bdb06-own4
+
+- 2026-11-02: Initially found only README.md, created the board and implemented an independently verified static site/framework on the fixed branch. Source verification checked NBA Stats glossary, NBA Stats FAQ (including its restriction against personal/academic downloads), NBA Official 2026–27 injury policy and GitHub Pages documentation. Candidate results remained unmeasured; local links/tests passed.
+- Opened PR #5 (https://github.com/sassnarep3-star/Own4/pull/5). Before merge, `origin/main` advanced with concurrently integrated PRs #2 and #3, including another complete implementation of this task. Merge attempt found add/add and content conflicts across shared site files. To preserve the already merged sessions' work and avoid duplicate shared outputs, resolved all overlapping files in favor of origin/main, retaining that work and its data/docs/tests; this branch's duplicate review page/checker were dropped. This integration source is retained as a record, not as competing site output.
+- PR #5 merge was rejected as not cleanly mergeable before conflict resolution. No Pages deployment claim is made for this PR; origin/main already contains an earlier integrated solution with its own publication status documented above. Current merge includes the exact origin/main history plus this coordination record.
 
 ---
 ## Session 34832d14-own4: concurrent handoff and conflict log (2026-11-02 UTC)
@@ -56,3 +62,5 @@ Session: arena-1805bfdb (final integration session). Work remains on assigned br
 - Pulled current main into this Arena-managed branch. Conflicts in `.github/workflows/pages.yml`, `COORDINATION.md`, `README.md` and five `docs/*.html` pages were resolved in favor of the already merged canonical main versions; this note preserves the handoff. No other session's published work was discarded. Superseded duplicate catalog/UI are removed from this contribution.
 - This session's independent pure calculation functions and deterministic synthetic tests remain as an additive research tool. They make no real NBA edge claims. Main site uses [NBA Stats FAQ](https://www.nba.com/stats/help/faq) and [NBA glossary](https://www.nba.com/stats/help/glossary) for official context; betting source terms/odds and empirical correlations remain unverified.
 - Original review also found a historical NBA injury PDF in official-domain search results but direct PDF retrieval failed; it was not treated as live availability. Legacy Pages settings could not be changed via API (403); canonical main uses existing Pages configuration.
+
+- PR #5 merged during PR #4 checks, again moving main; a second merge attempt failed safely. Pulled #5 and preserved its coordination record. Local Python build/tests and Node synthetic tests passed. PR #4: https://github.com/sassnarep3-star/Own4/pull/4 (merge pending).
