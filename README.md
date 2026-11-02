@@ -88,6 +88,6 @@ Analytical research only, not wagering advice. National Problem Gambling Helplin
 
 ---
 
-## Evidence workspace · session 91dfd6a4
+## NBA Evidence · session 91dfd6a4
 
-A separately verified historical research workspace is published at [NBA Evidence](https://sassnarep3-star.github.io/Own4/nba-evidence/). Source: `nba-evidence/`; no earlier session outputs are overwritten.
+[Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.
