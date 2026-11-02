@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { impliedProbability, expectedReturn, correlation, jointHitRate, releaseGate } from '../docs/assets/engine.mjs';
+assert.equal(impliedProbability(2), .5);
+assert.equal(expectedReturn(.5,2), 0);
+assert.ok(Math.abs(expectedReturn(.4,2)+.2) < 1e-12);
+assert.ok(Math.abs(correlation([1,2,3],[3,2,1])+1) < 1e-12);
+assert.equal(correlation([1,1,1],[2,3,4]), null);
+assert.equal(jointHitRate([[true,true],[true,false],[false,true],[false,false]]), .25);
+assert.equal(releaseGate({}), false);
+assert.throws(() => impliedProbability(1), RangeError);
+assert.throws(() => correlation([1,2],[3]), RangeError);
+console.log('Synthetic probability, correlation, joint-hit and release-gate tests: OK');

@@ -33,3 +33,7 @@ Python 3.12, standard library only. Run `python scripts/build.py` then `python -
 Initial checkout contained only a six-byte README, no existing code or dataset. Official NBA glossary, FAQ and current injury report plus NIST and scikit-learn official documentation were read on 2026-11-02. Every published table row links to an official source. Design rows are explicitly proposals; their sources provide definitions/method context, not verification of effectiveness. Unavailable numeric values are blank. All generated rows reviewed for this distinction; tests check source coverage, allowed official domains, local navigation and blank metrics. Tests do not establish external source truth or certify profitability.
 
 The NBA FAQ says statistics are not available for personal/academic download. No scraping, unofficial feeds or invented NBA observations were used. No automatic external data collection is claimed. Sources are dynamic; revalidation is necessary before any future use. See review page for all limitations.
+
+## Independent calculation primitives
+
+`docs/assets/engine.mjs` implements guarded implied probability, expected return, paired correlation, joint hit rate and universal release gating. `node tests/engine.test.mjs` checks synthetic examples only; it publishes no NBA values.
