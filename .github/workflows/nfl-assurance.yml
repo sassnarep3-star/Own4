@@ -1,4 +1,4 @@
-name: NFL empirical lab
+name: NFL assurance lab
 on:
   workflow_dispatch:
     inputs:
@@ -11,16 +11,16 @@ on:
   push:
     branches: [main, arena/0c469d80-own4]
     paths:
-      - 'nfl-lab/**'
-      - '.github/workflows/nfl-lab.yml'
+      - 'nfl-assurance/acquisition.json'
+      - '.github/workflows/nfl-assurance.yml'
   pull_request:
     paths:
-      - 'nfl-lab/**'
-      - '.github/workflows/nfl-lab.yml'
+      - 'nfl-assurance/**'
+      - '.github/workflows/nfl-assurance.yml'
 permissions:
   contents: read
 concurrency:
-  group: nfl-lab-${{ github.ref }}-${{ github.event_name }}
+  group: nfl-assurance-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: false
 jobs:
   validate:
@@ -33,9 +33,9 @@ jobs:
         with:
           python-version: '3.12'
       - name: Reproducible data, calculations, site and source/link audit
-        run: python nfl-lab/run.py --check
+        run: python nfl-assurance/run.py --check
   acquire:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/arena/0c469d80-own4'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -48,15 +48,17 @@ jobs:
         with:
           python-version: '3.12'
       - name: Fetch public official sources with provenance
-        run: python nfl-lab/fetch_official.py --phase "${{ inputs.phase }}"
+        run: PHASE=$(python -c 'import json; print(json.load(open("nfl-assurance/acquisition.json"))["phase"])')
+          if [ "$PHASE" = "off" ]; then echo 'Acquisition disabled'; exit 0; fi
+          python nfl-assurance/fetch_official.py --phase "$PHASE"
       - name: Preserve source snapshots only on this session branch
         if: always() && github.ref == 'refs/heads/arena/0c469d80-own4'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add nfl-lab/sources
+          git add nfl-assurance/sources
           if ! git diff --cached --quiet; then
-            git commit -m 'data: preserve official NFL source snapshots (${{ inputs.phase }})'
+            git commit -m 'data: preserve official NFL source snapshots (push acquisition)'
             git pull --rebase origin arena/0c469d80-own4
             git push origin arena/0c469d80-own4
           fi
