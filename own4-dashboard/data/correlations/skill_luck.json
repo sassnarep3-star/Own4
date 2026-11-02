@@ -1,0 +1,76 @@
+{
+  "retrieved_utc": "2026-11-02",
+  "luck_removal_method": [
+    "Pre-register hypotheses before looking at results (see REQUIREMENTS.md R1.09-R1.12).",
+    "Use only out-of-sample seasons / chronological train-holdout splits; no in-sample tuning counts as skill.",
+    "Compare against exact binomial nulls (coin flip) and permutation nulls for correlations.",
+    "Report 95% Wilson intervals for accuracy and bootstrap intervals for correlations.",
+    "Apply Benjamini-Hochberg FDR correction across the full family of tested correlations.",
+    "Require positive Brier skill score on the holdout window before any reward is assigned.",
+    "Require minimum sample size (G3) and verified market prices (G7) before a bet strategy can be deployed."
+  ],
+  "decomposition": [
+    {
+      "label": "2025-26 full season: WIN% explained by NetRtg",
+      "n": 30,
+      "pearson_r": 0.9706771222554095,
+      "systematic_variance_share_r2": 0.9422140756700431,
+      "residual_variance_share": 0.057785924329956884,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck."
+    },
+    {
+      "label": "2026-27 in progress: WIN% explained by NetRtg",
+      "n": 30,
+      "pearson_r": 0.8863138960853636,
+      "systematic_variance_share_r2": 0.7855523223940167,
+      "residual_variance_share": 0.21444767760598327,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck."
+    },
+    {
+      "label": "Cross-season: 2026-27 WIN% explained by 2025-26 NetRtg",
+      "n": 30,
+      "pearson_r": 0.48006010062249893,
+      "systematic_variance_share_r2": 0.23045770020968379,
+      "residual_variance_share": 0.7695422997903162,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck."
+    }
+  ],
+  "backtest_evidence": {
+    "train": {
+      "n": 41,
+      "winner_accuracy": 0.7804878048780488,
+      "binomial_p_two_sided_vs_0_5": 0.000430857042374555,
+      "brier_score": 0.19517221738320725,
+      "brier_skill_score_vs_0_5": 0.219311130467171,
+      "pred_vs_actual_margin_permutation_p": 0.020348982550872457
+    },
+    "holdout": {
+      "n": 21,
+      "winner_accuracy": 0.47619047619047616,
+      "binomial_p_two_sided_vs_0_5": 1.0,
+      "brier_score": 0.26588104121138734,
+      "brier_skill_score_vs_0_5": -0.06352416484554935,
+      "pred_vs_actual_margin_permutation_p": 0.09399530023498825
+    },
+    "sources": [
+      "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+      "https://www.nba.com/games?date=2026-10-23",
+      "https://www.nba.com/games?date=2026-10-28",
+      "https://www.nba.com/games?date=2026-10-30",
+      "https://www.nba.com/games?date=2026-11-01"
+    ]
+  },
+  "finding": "The prior-season rating model looks strong in the training window but its holdout winner accuracy is below 50% and its holdout Brier skill score is negative. Under the pre-registered luck-removal rules it is therefore classified as NOT skill-based and is ineligible for rewards."
+}

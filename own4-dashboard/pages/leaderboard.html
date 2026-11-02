@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leaderboard &amp; rewards · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link active" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Leaderboard &amp; rewards</div><h1>Leaderboard &amp; rewards</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      <div class="kpi-grid"><a class="kpi" href="leaderboard.html"><div class="kpi-label">Eligible signals</div><div class="kpi-value">4</div><div class="kpi-sub">Division A</div></a><a class="kpi" href="leaderboard.html"><div class="kpi-label">Top reward</div><div class="kpi-value">100 pts</div><div class="kpi-sub">rank 1 signal</div></a><a class="kpi" href="leaderboard.html"><div class="kpi-label">Eligible bet strategies</div><div class="kpi-value">0</div><div class="kpi-sub">Division B</div></a></div>
+      <div class="callout callout-info"><div class="callout-title">Competition result</div><div class="callout-body">Division A ranks 4 out-of-sample research signals that cleared provenance, completeness, out-of-sample and FDR gates. Division B has zero eligible betting strategies: no strategy cleared all validation gates, so every ROI / CLV / profit / reward cell is blank and flagged UNVERIFIED.</div></div><h2>Division A — research signal leaderboard</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Rank</th>
+<th>ID</th>
+<th>Signal</th>
+<th>n</th>
+<th>Out-of-sample r</th>
+<th>BH q</th>
+<th>Bootstrap 95% CI</th>
+<th>Score</th>
+<th>Reward (pts)</th>
+<th>Eligibility</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>SIG-01</td>
+<td>Prior-season WIN% -&gt; next-season WIN%</td>
+<td>30</td>
+<td>0.483</td>
+<td>0.0145</td>
+<td>0.144 … 0.755</td>
+<td>0.483</td>
+<td>100</td>
+<td><span class="badge badge-ok">eligible</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>SIG-02</td>
+<td>Prior-season NetRtg -&gt; next-season WIN%</td>
+<td>30</td>
+<td>0.480</td>
+<td>0.0145</td>
+<td>0.149 … 0.750</td>
+<td>0.480</td>
+<td>60</td>
+<td><span class="badge badge-ok">eligible</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>SIG-03</td>
+<td>Prior-season PACE -&gt; next-season PACE</td>
+<td>30</td>
+<td>0.449</td>
+<td>0.0233</td>
+<td>0.127 … 0.696</td>
+<td>0.449</td>
+<td>30</td>
+<td><span class="badge badge-ok">eligible</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>SIG-04</td>
+<td>Prior-season NetRtg -&gt; next-season NetRtg</td>
+<td>30</td>
+<td>0.417</td>
+<td>0.0383</td>
+<td>0.098 … 0.683</td>
+<td>0.417</td>
+<td>10</td>
+<td><span class="badge badge-ok">eligible</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>—</td>
+<td>SIG-05</td>
+<td>Prior-season NetRtg -&gt; next-season team PTS (control)</td>
+<td>30</td>
+<td>0.062</td>
+<td>0.8063</td>
+<td>-0.252 … 0.453</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">not eligible</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">Ranked by out-of-sample Pearson r computed only from official values. Ineligible rows have blank score/reward.</p>
+</div><h2>Division B — betting strategy leaderboard</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Family</th>
+<th>Strategy</th>
+<th>Verdict</th>
+<th>Gates PASS</th>
+<th>Gates FAIL</th>
+<th>UNVERIFIED</th>
+<th>Net ROI</th>
+<th>Score</th>
+<th>Reward (pts)</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>S-01</td>
+<td>Single bet</td>
+<td>Prior-season NetRtg fair moneyline (M1)</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Single bet</td>
+<td>Current-season NetRtg moneyline (M2)</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Single bet</td>
+<td>Pace-model total over/under</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>Single bet</td>
+<td>Home-court favourite</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Single bet</td>
+<td>LAST10 / streak continuation</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Single bet</td>
+<td>Cross-season persistence of team strength</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>P-01</td>
+<td>Parlay</td>
+<td>2-leg cross-game moneyline parlay (independent legs)</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>3</td>
+<td>5</td>
+<td>2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>P-02</td>
+<td>Parlay</td>
+<td>Same-game parlay: favourite ML + over total</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>3</td>
+<td>5</td>
+<td>2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>P-03</td>
+<td>Parlay</td>
+<td>3-leg cross-slate parlay</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>3</td>
+<td>5</td>
+<td>2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>PP-01</td>
+<td>Player prop combo</td>
+<td>Player points over (season-average baseline)</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>PP-02</td>
+<td>Player prop combo</td>
+<td>Same-player PTS + REB + AST combo</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>5</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PP-03</td>
+<td>Player prop combo</td>
+<td>3-pointers made over</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PP-04</td>
+<td>Player prop combo</td>
+<td>Two-player same-game prop combo</td>
+<td><span class="badge badge-warn">NOT VALIDATED (unverified data)</span></td>
+<td>2</td>
+<td>4</td>
+<td>4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">Zero eligible strategies. All performance and reward cells are blank + UNVERIFIED.</p>
+</div><h2>Reward rules</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Division</th>
+<th>#</th>
+<th>Rule</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>Division A (signals)</td>
+<td>1</td>
+<td>Eligibility: G1 PASS, G2 PASS, G4 PASS, G5 PASS (BH-FDR q&lt;0.05), G10 PASS, positive out-of-sample r.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Division A (signals)</td>
+<td>2</td>
+<td>Ranking: descending out-of-sample Pearson r computed only from official NBA.com values.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Division A (signals)</td>
+<td>3</td>
+<td>Rewards: rank 1 = 100 pts, rank 2 = 60 pts, rank 3 = 30 pts, rank 4 = 10 pts.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Division A (signals)</td>
+<td>4</td>
+<td>Signals are ranked on predictive association, NOT on betting profit.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Division B (bet strategies)</td>
+<td>1</td>
+<td>Eligibility: all applicable gates G1-G10 must be PASS (N/A ignored).</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Division B (bet strategies)</td>
+<td>2</td>
+<td>Ranking: descending net ROI after verified vig using official market prices.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Division B (bet strategies)</td>
+<td>3</td>
+<td>Rewards: rank 1 = 500 pts, rank 2 = 300 pts, rank 3 = 150 pts.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Division B (bet strategies)</td>
+<td>4</td>
+<td>A strategy with any FAIL or UNVERIFIED gate is NOT ELIGIBLE and receives a blank reward.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Division B (bet strategies)</td>
+<td>5</td>
+<td>Current result: 0 of 13 strategies eligible; 0 points awarded in Division B.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+</tbody></table>
+</div><p><strong>Reward schedule is a competition specification authored for this project; it is not an official NBA reward and involves no money. No reward is claimed for any betting strategy in this snapshot.</strong> Reward unit: leaderboard points (non-monetary research credit).</p>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>

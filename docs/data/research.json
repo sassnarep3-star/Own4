@@ -1,0 +1,465 @@
+{
+  "reviewed": "2026-11-02",
+  "sources": {
+    "NBA glossary": [
+      "https://www.nba.com/stats/help/glossary",
+      "NBA metric definitions; reviewed glossary excerpts including usage and true shooting."
+    ],
+    "NBA FAQ": [
+      "https://www.nba.com/stats/help/faq",
+      "NBA states statistics are not available for download for academic or personal use; dated 2013 pace example is not current data."
+    ],
+    "NBA injuries": [
+      "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "Teams report affected participation; reports update continually. Prior-season URL redirected here."
+    ],
+    "Cross-validation": [
+      "https://scikit-learn.org/stable/modules/cross_validation.html",
+      "Official project documentation: training/test separation; repeated tuning on test data leaks information."
+    ],
+    "Calibration": [
+      "https://scikit-learn.org/stable/modules/calibration.html",
+      "Official project documentation: reliability curves, Brier and log loss; Brier alone does not measure calibration alone."
+    ],
+    "NIST dependence": [
+      "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+      "Autocorrelation detects non-randomness; the stated time-series definition assumes equally spaced observations."
+    ],
+    "NIST reference": [
+      "https://www.nist.gov/itl/sed/statistical-reference-datasets",
+      "Reference datasets with certified computational results evaluate statistical software."
+    ]
+  },
+  "pages": {
+    "index": [
+      "Executive summary",
+      "Originate probabilities. Prove the edge.",
+      [
+        "An evidence-first NBA research desk, not a picks service. No strategy is validated, no rewards are paid, and no live betting recommendations are issued.",
+        "Luck cannot be removed from sports outcomes. The objective is to quantify uncertainty and test whether a repeatable signal survives unseen data, costs and selection bias."
+      ],
+      [
+        "Priority",
+        "Finding / decision",
+        "Classification",
+        "Source"
+      ],
+      [
+        [
+          "01 \u00b7 Data before models",
+          "Obtain an authorized, point-in-time historical feed and official operator price/rules archive before fitting or claiming an edge. NBA viewing pages are not a download license.",
+          "Blocked \u00b7 data rights",
+          "NBA FAQ"
+        ],
+        [
+          "02 \u00b7 Singles first",
+          "Proposed order: team moneyline/spread/total \u2192 individual props \u2192 joint prop combinations \u2192 parlays. Establish marginal calibration before joint modeling.",
+          "Project design \u00b7 not validated",
+          "Calibration"
+        ],
+        [
+          "03 \u00b7 Skill evidence",
+          "Use locked chronological holdouts and a complete trial registry; rank only strategies passing every gate. No observed return or correlation is currently available.",
+          "Project design \u00b7 not validated",
+          "Cross-validation"
+        ],
+        [
+          "04 \u00b7 Publication",
+          "Publish evidence, blanks and failures together. No numeric NBA lines, player projections, or empirical performance claims are supported in this release.",
+          "Data unavailable",
+          "NBA FAQ"
+        ]
+      ]
+    ],
+    "sources": [
+      "Evidence library",
+      "Official sources, bounded claims.",
+      [
+        "Reviewed on 2026-11-02 UTC. These links support the stated definitions and methodological background, not the profitability of any proposed strategy. Sources are dynamic; this is a review snapshot, not a continuous data feed."
+      ],
+      [
+        "Reference",
+        "Verified scope",
+        "Status",
+        "Source"
+      ],
+      [
+        [
+          "NBA glossary",
+          "NBA metric definitions; reviewed glossary excerpts including usage and true shooting.",
+          "Reviewed \u00b7 bounded claim",
+          "NBA glossary"
+        ],
+        [
+          "NBA FAQ",
+          "NBA states statistics are not available for download for academic or personal use; dated 2013 pace example is not current data.",
+          "Reviewed \u00b7 bounded claim",
+          "NBA FAQ"
+        ],
+        [
+          "NBA injuries",
+          "Teams report affected participation; reports update continually. Prior-season URL redirected here.",
+          "Reviewed \u00b7 bounded claim",
+          "NBA injuries"
+        ],
+        [
+          "Cross-validation",
+          "Official project documentation: training/test separation; repeated tuning on test data leaks information.",
+          "Reviewed \u00b7 bounded claim",
+          "Cross-validation"
+        ],
+        [
+          "Calibration",
+          "Official project documentation: reliability curves, Brier and log loss; Brier alone does not measure calibration alone.",
+          "Reviewed \u00b7 bounded claim",
+          "Calibration"
+        ],
+        [
+          "NIST dependence",
+          "Autocorrelation detects non-randomness; the stated time-series definition assumes equally spaced observations.",
+          "Reviewed \u00b7 bounded claim",
+          "NIST dependence"
+        ],
+        [
+          "NIST reference",
+          "Reference datasets with certified computational results evaluate statistical software.",
+          "Reviewed \u00b7 bounded claim",
+          "NIST reference"
+        ]
+      ]
+    ],
+    "strategies": [
+      "Strategy laboratory",
+      "Six hypotheses. No declared winners.",
+      [
+        "All entries are proposed research, not official recommendations or demonstrated edges. Every strategy requires gates G1\u2013G8. Links support inputs or methods only."
+      ],
+      [
+        "Strategy / market",
+        "Signal and proposed model",
+        "Specific failure test",
+        "Source"
+      ],
+      [
+        [
+          "S1 \u00b7 Team singles",
+          "Regularized opponent-adjusted efficiency and home/rest features; model joint scores to price win, margin and total.",
+          "Compare against expanding-history and no-vig market baselines on the same prediction times.",
+          "NBA glossary"
+        ],
+        [
+          "S2 \u00b7 Totals single",
+          "Possession pace \u00d7 offensive efficiency; estimate score dispersion rather than using a point estimate alone.",
+          "Reject if pace adds no held-out loss improvement; test overtime and rule consistency.",
+          "NBA glossary"
+        ],
+        [
+          "S3 \u00b7 Player single",
+          "Minutes distribution \u00d7 per-minute opportunity \u00d7 conversion; shrink small samples.",
+          "Availability scenarios must use only reports published before forecast cutoff; never treat uncertain status as zero minutes.",
+          "NBA injuries"
+        ],
+        [
+          "S4 \u00b7 Player PRA combo",
+          "Joint points, rebounds and assists simulation; sum each simulated outcome for a PRA line.",
+          "Compare joint distribution tails with held-out observed sums; never sum independent variances without testing dependence.",
+          "NBA glossary"
+        ],
+        [
+          "S5 \u00b7 Same-game parlay",
+          "Simulate shared pace, lineup, minutes and possessions, then settle all legs per scenario.",
+          "Evaluate joint hits; pairwise correlation does not uniquely determine a multi-leg joint distribution.",
+          "Calibration"
+        ],
+        [
+          "S6 \u00b7 Cross-game parlay",
+          "Model joint hits with shared day/regime effects; compare with independent-leg baseline as a hypothesis only.",
+          "Reject if joint probability uncertainty consumes the price edge; do not assume different games imply independence.",
+          "NIST dependence"
+        ]
+      ]
+    ],
+    "validation": [
+      "Validation gates",
+      "Earn eligibility, not a lucky streak.",
+      [
+        "These are proposed project acceptance policies, not thresholds mandated by any source. Every gate is currently NOT RUN. Freeze thresholds and power analysis before any holdout is opened. Failure or missing evidence makes a strategy ineligible."
+      ],
+      [
+        "Gate",
+        "Required evidence / rejection rule",
+        "Current result",
+        "Source"
+      ],
+      [
+        [
+          "G1 \u00b7 Provenance",
+          "Official record URL, rights, retrieval/publication UTC, event and player IDs, units, revisions, hashes; reject missing provenance.",
+          "NOT RUN",
+          "NBA FAQ"
+        ],
+        [
+          "G2 \u00b7 Leakage",
+          "Features and prices available before cutoff; group same-game records; chronological train/validation/test; fit transforms on training only.",
+          "NOT RUN",
+          "Cross-validation"
+        ],
+        [
+          "G3 \u00b7 Baselines",
+          "Beat prespecified naive and market baselines on held-out proper scoring loss with paired uncertainty intervals. Market baseline needs captured two-sided prices.",
+          "NOT RUN",
+          "Calibration"
+        ],
+        [
+          "G4 \u00b7 Calibration",
+          "Reliability bins with counts and intervals; log loss and Brier alongside calibration curves; predefined tolerances, including joint hits.",
+          "NOT RUN",
+          "Calibration"
+        ],
+        [
+          "G5 \u00b7 Selection bias",
+          "Register all variants and failed trials; nested chronological tuning, untouched final holdout, family-wise adjustment across all candidates.",
+          "NOT RUN",
+          "Cross-validation"
+        ],
+        [
+          "G6 \u00b7 Economic evidence",
+          "Executable timestamped prices and official settlement rules; positive lower simultaneous confidence bound on net return after costs; power analysis must be adequate.",
+          "NOT RUN",
+          "Cross-validation"
+        ],
+        [
+          "G7 \u00b7 Dependence / robustness",
+          "Resample game/day blocks; test season, roster and odds regimes, tails and drawdown. Register block length and confidence level before testing.",
+          "NOT RUN",
+          "NIST dependence"
+        ],
+        [
+          "G8 \u00b7 Prospective replication",
+          "Lock code, data and strategy version; shadow predictions timestamped before games; independent replication; invalidate on drift or provenance failure.",
+          "NOT RUN",
+          "Cross-validation"
+        ]
+      ]
+    ],
+    "correlations": [
+      "Dependence register",
+      "Unknown is not zero.",
+      [
+        "All numeric cells below are intentionally blank: no authorized matched observations were acquired. Correlation must be estimated by market, threshold, horizon and population, with sample count and uncertainty. None has been inferred from basketball intuition."
+      ],
+      [
+        "Pair / target",
+        "Proposed estimator and controls",
+        "n",
+        "Correlation",
+        "95% interval",
+        "Source"
+      ],
+      [
+        [
+          "Player points \u2194 assists",
+          "Pearson and rank association of held-out residuals conditional on minutes, role and pace",
+          "",
+          "",
+          "",
+          "NBA glossary"
+        ],
+        [
+          "Player points \u2194 rebounds",
+          "Residual association; block bootstrap by game; inspect nonlinear tails",
+          "",
+          "",
+          "",
+          "NBA glossary"
+        ],
+        [
+          "Teammate props",
+          "Paired-game residuals; account for shared minutes, possessions and lineup",
+          "",
+          "",
+          "",
+          "NBA glossary"
+        ],
+        [
+          "Parlay leg hits",
+          "Binary hit association at exact quoted thresholds; joint hit calibration and game-block intervals",
+          "",
+          "",
+          "",
+          "Calibration"
+        ],
+        [
+          "Cross-game returns",
+          "Day-block dependence and regime sensitivity; irregular game spacing is not equal time spacing",
+          "",
+          "",
+          "",
+          "NIST dependence"
+        ]
+      ]
+    ],
+    "pricing": [
+      "Pricing specification",
+      "A distribution becomes a fair line.",
+      [
+        "Mathematical definitions and proposed implementation specification only. No fitted NBA pricing engine or authorized odds feed is present. These equations do not establish a profitable bet. Official links provide statistical background, not bookmaker-specific settlement terms."
+      ],
+      [
+        "Output",
+        "Definition / method",
+        "Safeguard",
+        "Source"
+      ],
+      [
+        [
+          "Moneyline",
+          "For non-push win probability p: fair decimal odds = 1/p. American = \u2212100p/(1\u2212p) if p \u2265 0.5; otherwise 100(1\u2212p)/p.",
+          "Require 0 < p < 1; retain unrounded probability.",
+          "Calibration"
+        ],
+        [
+          "Spread / total",
+          "Use predictive margin/total distribution; fair 50% threshold from its median, not necessarily its mean.",
+          "Discrete outcomes and pushes require explicit settlement probabilities.",
+          "Calibration"
+        ],
+        [
+          "Push-aware fair price",
+          "With win w, loss l and push u summing to 1: fair decimal = 1+l/w; net EV at decimal d = w(d\u22121)\u2212l.",
+          "Void and partial settlement require operator-specific rules, not this simple formula.",
+          "Calibration"
+        ],
+        [
+          "No-vig baseline",
+          "For exhaustive non-push two-way decimal prices d1,d2: q1=(1/d1)/[(1/d1)+(1/d2)].",
+          "Proportional normalization is a modeling convention, not recovered truth.",
+          "Calibration"
+        ],
+        [
+          "Parlay / combo",
+          "Estimate probability of all legs winning from joint scenarios; fair non-push decimal = 1/P(all wins).",
+          "Do not multiply marginals unless independence is justified; void/reprice rules can change payout.",
+          "Calibration"
+        ],
+        [
+          "Predictive uncertainty",
+          "Export probability, fair price, model version, cutoff UTC, data hash and interval for every forecast.",
+          "Abstain when uncertainty, missing data or non-executable prices invalidate edge.",
+          "Cross-validation"
+        ]
+      ]
+    ],
+    "leaderboard": [
+      "Research leaderboard",
+      "No rank without validation.",
+      [
+        "Competition specification only: separate tracks prevent incomparable markets from competing on raw hit rate. There are no entrants with tested predictions and no funded reward pool. Blank metrics are unavailable, not zero."
+      ],
+      [
+        "Track",
+        "Candidate IDs",
+        "Eligible rank",
+        "Held-out loss",
+        "Net ROI",
+        "Reward status",
+        "Source"
+      ],
+      [
+        [
+          "Team singles",
+          "S1, S2",
+          "",
+          "",
+          "",
+          "Unfunded \u00b7 ineligible",
+          "Calibration"
+        ],
+        [
+          "Player singles",
+          "S3",
+          "",
+          "",
+          "",
+          "Unfunded \u00b7 ineligible",
+          "Calibration"
+        ],
+        [
+          "Player combos",
+          "S4",
+          "",
+          "",
+          "",
+          "Unfunded \u00b7 ineligible",
+          "Calibration"
+        ],
+        [
+          "Parlays",
+          "S5, S6",
+          "",
+          "",
+          "",
+          "Unfunded \u00b7 ineligible",
+          "Calibration"
+        ]
+      ]
+    ],
+    "review": [
+      "Flagged for Review",
+      "Open issues, visible by design.",
+      [
+        "These issues do not block publication of this research site. They DO block declaring strategies validated, publishing unsupported NBA lines, or awarding performance rewards."
+      ],
+      [
+        "ID",
+        "Irregularity / limitation",
+        "Resolution required",
+        "Source"
+      ],
+      [
+        [
+          "F01",
+          "NBA FAQ disallows personal/academic stats download; no licensed history acquired.",
+          "Authorized machine-readable feed and terms review; no undocumented scraping.",
+          "NBA FAQ"
+        ],
+        [
+          "F02",
+          "No official bookmaker historical quotes, jurisdiction-specific settlement or execution archive verified.",
+          "Obtain authorized operator history before EV/ROI/closing-price claims.",
+          "NBA FAQ"
+        ],
+        [
+          "F03",
+          "Empirical correlations, fair lines, returns, sample sizes and uncertainty unavailable.",
+          "Keep numeric fields blank until reproducible matched-data analysis.",
+          "NIST dependence"
+        ],
+        [
+          "F04",
+          "Injury source requested with 2025\u201326 URL redirected to 2026\u201327.",
+          "Use resolved current URL; snapshot the actual report before each prediction. No player status was extracted.",
+          "NBA injuries"
+        ],
+        [
+          "F05",
+          "NBA FAQ contains explicitly dated March 2013 pace examples.",
+          "Do not present these figures as current season values.",
+          "NBA FAQ"
+        ],
+        [
+          "F06",
+          "Proposed methods and competition rules are not source-verified profitable strategies.",
+          "Run all gates; no guarantee of skill-only returns or removal of luck.",
+          "Cross-validation"
+        ],
+        [
+          "F07",
+          "No reward funding, live data automation, trained model or prospective trial exists.",
+          "This release is a static research foundation, not an operational betting system.",
+          "Calibration"
+        ]
+      ]
+    ]
+  }
+}

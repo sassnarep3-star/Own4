@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation gates · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link active" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Validation gates</div><h1>Validation gates</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      <div class="kpi-grid"><a class="kpi" href="validation.html"><div class="kpi-label">Gates</div><div class="kpi-value">10</div><div class="kpi-sub">G1–G10</div></a><a class="kpi" href="validation.html"><div class="kpi-label">Holdout n</div><div class="kpi-value">21</div><div class="kpi-sub">chronological</div></a><a class="kpi" href="validation.html"><div class="kpi-label">Holdout accuracy</div><div class="kpi-value">0.476</div><div class="kpi-sub">below 0.500</div></a></div>
+      <div class="callout callout-info"><div class="callout-title">Gate rule</div><div class="callout-body">A strategy is VALIDATED only if every applicable gate is PASS. N/A is ignored. Any FAIL or UNVERIFIED blocks validation and leaves ROI/CLV/profit/reward blank.</div></div><h2>Gate definitions</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Gate</th>
+<th>Name</th>
+<th>Pass criterion</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>G1</td>
+<td>Official provenance</td>
+<td>Every numeric input traces to an allowlisted official NBA/league URL with a retrieval date.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a></td>
+</tr>
+<tr>
+<td>G2</td>
+<td>Data completeness</td>
+<td>All fields required by the strategy are present and verified; no blank/unverified inputs.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>G3</td>
+<td>Minimum sample size</td>
+<td>n &gt;= 200 independent settled observations before any strategy-level performance claim.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a></td>
+</tr>
+<tr>
+<td>G4</td>
+<td>Out-of-sample evaluation</td>
+<td>Evaluation data must not have been used to build or calibrate the model.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a></td>
+</tr>
+<tr>
+<td>G5</td>
+<td>Significance after multiple testing</td>
+<td>Permutation test with Benjamini-Hochberg FDR q &lt; 0.05 over the full tested family.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>G6</td>
+<td>Skill-vs-luck (luck removal)</td>
+<td>Positive holdout Brier skill score AND exact binomial p &lt; 0.05 on holdout winner accuracy.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>G7</td>
+<td>Economic validity</td>
+<td>Verified official market odds / vig available so edge, CLV and net ROI can be computed.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>G8</td>
+<td>Parlay / prop correlation guard</td>
+<td>Leg correlations measured from official data; dependent legs explicitly modelled (not assumed independent).</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>G9</td>
+<td>Walk-forward stability</td>
+<td>At least 3 chronological out-of-sample folds, all with non-negative skill.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>G10</td>
+<td>Reproducibility</td>
+<td>All published numbers regenerated by committed scripts from committed raw official snapshots.</td>
+<td class="src-cell"><a class="src-chip" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">GitHub repo ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Settlement backtest — no lookahead</h2><p>The M1 prior-season model uses only the official 2025-26 advanced table (82 GP per team). The residual scale was estimated on games dated 2026-10-23 … 2026-10-28, then applied to the chronological holdout (2026-10-30 … 2026-11-01) and to the future 2026-11-04 slate. All final scores are official NBA.com values.</p><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Window</th>
+<th>n</th>
+<th>Winner acc.</th>
+<th>95% Wilson CI</th>
+<th>Binomial p</th>
+<th>Brier</th>
+<th>Brier skill</th>
+<th>Margin MAE</th>
+<th>Total MAE</th>
+<th>r(pred, actual)</th>
+<th>Permutation p</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>train 2026-10-23..2026-10-28 (used to estimate sigma)</td>
+<td>41</td>
+<td>0.780</td>
+<td>0.633 … 0.880</td>
+<td>0.0004</td>
+<td>0.1952</td>
+<td>0.2193</td>
+<td>10.39</td>
+<td>15.07</td>
+<td>0.358</td>
+<td>0.0203</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">Games 2026-10-24 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-26" target="_blank" rel="noopener">Games 2026-10-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">Games 2026-10-30 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">Games 2026-10-31 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>holdout 2026-10-30..2026-11-01 (out-of-sample)</td>
+<td>21</td>
+<td>0.476</td>
+<td>0.283 … 0.676</td>
+<td>1.0000</td>
+<td>0.2659</td>
+<td>-0.0635</td>
+<td>13.73</td>
+<td>18.53</td>
+<td>0.375</td>
+<td>0.0940</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">Games 2026-10-24 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-26" target="_blank" rel="noopener">Games 2026-10-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">Games 2026-10-30 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">Games 2026-10-31 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>all 62 settled games (descriptive only)</td>
+<td>62</td>
+<td>0.677</td>
+<td>0.554 … 0.780</td>
+<td>0.0071</td>
+<td>0.2191</td>
+<td>0.1235</td>
+<td>11.52</td>
+<td>16.24</td>
+<td>0.317</td>
+<td>0.0131</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">Games 2026-10-24 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-26" target="_blank" rel="noopener">Games 2026-10-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">Games 2026-10-30 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">Games 2026-10-31 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+</tbody></table>
+</div><div class="callout callout-warn"><div class="callout-title">Decisive finding</div><div class="callout-body">Training accuracy 0.780 collapses to 0.476 on the holdout (n=21); holdout Brier skill is -0.064 and the exact binomial p is 1.0000. The model is <strong>not skill-based</strong>.</div></div><h2>Gate-by-gate matrix (all strategies)</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Family</th>
+<th>G1</th>
+<th>G2</th>
+<th>G3</th>
+<th>G4</th>
+<th>G5</th>
+<th>G6</th>
+<th>G7</th>
+<th>G8</th>
+<th>G9</th>
+<th>G10</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>S-01</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Single bet</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>P-01</td>
+<td>Parlay</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>P-02</td>
+<td>Parlay</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>P-03</td>
+<td>Parlay</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>PP-01</td>
+<td>Player prop combo</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>PP-02</td>
+<td>Player prop combo</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PP-03</td>
+<td>Player prop combo</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PP-04</td>
+<td>Player prop combo</td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-muted">UNVERIFIED</span></td>
+<td><span class="badge badge-warn">FAIL</span></td>
+<td><span class="badge badge-ok">PASS</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">Every strategy's ROI / CLV / profit / reward is blank because no strategy clears all applicable gates.</p>
+</div><h2>Verification ledger summary</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Metric</th>
+<th>Value</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>Rows checked</td>
+<td>452</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Passed</td>
+<td>452</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a></td>
+</tr>
+<tr>
+<td>Flagged inconsistencies</td>
+<td>0</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>Rows without official source</td>
+<td>0</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+</tbody></table>
+</div>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>
