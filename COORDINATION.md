@@ -553,3 +553,12 @@ Manual review links (official sources used in verification):
 - https://www.nist.gov/itl/sed/statistical-reference-datasets
 - https://www.ncpgambling.org/
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+
+---
+## NFL independent research and integration · arena/67233374-own4
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| Audit existing NFL supplement, official-source research, extend NFL analysis and dashboard, validation and deployment | in progress | arena/67233374-own4 | `nfl-study/**`, append-only `COORDINATION.md` |
+
+- 2026-11-02: Read coordination board; NFL supplement under `nfl/**` completed by session arena/6378baad-own4. Preserve its scope. This session is constrained to its assigned Arena branch, not a `session-*` branch. Initial rebase conflicted because checkout was shallow; aborted without discarding work, unshallowed, then fast-forwarded to main with no conflict. New work is separate under `nfl-study/`. Shared navigation changes, if needed, are requested from the responsible integrator rather than editing another session's files.
