@@ -302,8 +302,9 @@ def build_dashboard():
          OFFICIAL_BADGE, srcrow([S_STAND, S_TEAM])],
         ["F02", esc("56 official final scores across six dates form the verified sample; 10 are NBA Cup group-play games"),
          OFFICIAL_BADGE, srcrow(GAME_URLS)],
-        ["F03", esc("Correlation coefficients are computable from official inputs; +/- vs WIN%% r = %s (q = %s)" %
-                    (R["correlations"][9]["r"], R["correlations"][9]["q_bh"])),
+        ["F03", esc("Correlation coefficients are computable from official inputs; +/- vs WIN%% r = %s (BH-FDR q %s)" %
+                    (R["correlations"][9]["r"],
+                     "<0.0001" if R["correlations"][9]["q_bh"] == 0 else R["correlations"][9]["q_bh"])),
          DERIVED_BADGE, srcrow([S_TEAM, S_STAND, S_GLOSS])],
         ["F05", esc("15 Own4 fair lines originated for the 11/02/2026 slate from official +/- and PPG"),
          DERIVED_BADGE, srcrow([S_TEAM, S_SLATE])],

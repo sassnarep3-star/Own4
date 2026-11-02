@@ -170,8 +170,8 @@ I-02: GitHub Pages is a legacy build from `main` `/` (queried via `https://api.g
 | T09 | Clean category-organised dashboard site, all rows source-linked | done | session-fa175f65 | index.html, pages/*.html, assets/official.css, engine/build.py |
 | T10 | Flagged for Review page | done | session-fa175f65 | pages/flagged-for-review.html, official/flags.json |
 | T11 | Automated line-by-line verification + broken-link check | done | session-fa175f65 | engine/verify.py, official/verification.json |
-| T12 | Final integration: merge concurrent work, re-verify combined data, confirm build/no broken links | in progress | session-fa175f65 | COORDINATION.md |
-| T13 | PR → merge → Pages deploy confirmation → record PR link + merge result | in progress | session-fa175f65 | COORDINATION.md |
+| T12 | Final integration: merge concurrent work, re-verify combined data, confirm build/no broken links | done | session-fa175f65 | COORDINATION.md |
+| T13 | PR → merge → Pages deploy confirmation → record PR link + merge result | done | session-fa175f65 | COORDINATION.md |
 
 ### Claim log
 
@@ -225,3 +225,15 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Verification after this merge: 29/29 automated checks PASS, `build_site.py` reports `PROBLEMS: none`,
   `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and the
   `docs/` regeneration diff all pass.
+
+### PR / merge / deploy record — COMPLETE
+
+- **PR**: https://github.com/sassnarep3-star/Own4/pull/13 — "Final integration: verified 2026-27 NBA data, computed correlations, originated lines, gates/leaderboard and integrated Pages site". Base `main`, head `arena/fa175f65-own4`. Body contains the change summary, all official sources used and all 17 flagged irregularities.
+- **CI**: the required `validate` workflow passed (run `41499420902`); locally `engine/verify.py` reported 29/29 PASS, `build_site.py` reported `PROBLEMS: none`, and `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and `git diff --exit-code -- docs` all passed. No broken links. No failed build, check or deploy needed a retry.
+- **Merge result**: MERGED at 2026-11-02T18:19:50Z, merge commit `5a5cff2646b308ae26c4dd48c7d3bf5f75bd100f`, no approval required (per the brief). `origin/main` head = `5a5cff2`.
+- **GitHub Pages deploy**: CONFIRMED. `https://api.github.com/repos/sassnarep3-star/Own4/pages` reports `status: built`, legacy build from `main` `/`; `pages/builds/latest` for commit `5a5cff2646b308ae26c4dd48c7d3bf5f75bd100f` reports `status: built` with `error: null`. Live site verified by fetching
+  https://sassnarep3-star.github.io/Own4/ (integrated dashboard, 10 KPI cards, executive findings, category directory) and
+  https://sassnarep3-star.github.io/Own4/pages/flagged-for-review.html (all 17 flagged items with official links).
+- Live site: https://sassnarep3-star.github.io/Own4/
+- Flagged irregularities have `needs review` status, are published on the clearly labelled Flagged for Review page, and did not block the merge (as instructed).
+- This documentation sync is delivered by a short follow-up PR from the same pinned branch; PR #13 above is the project's integration PR.
