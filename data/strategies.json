@@ -1,0 +1,58 @@
+{
+  "strategies": [
+    {
+      "id": "STRAT-01",
+      "category": "Single bet",
+      "name": "Totals (Over/Under) anchored to league pace & offensive rating",
+      "signal": "League scoring environment: 2025-26 opened with 117.7 points per team per game, the highest in 64 seasons (since 1961-62), driven by pace (101.9 possessions/team per 48 min through 10 days) and efficiency (114.3 OffRtg).",
+      "validation_gates": ["G1 data freshness", "G2 sample size >= 10 games", "G3 source official"],
+      "correlation_note": "Pace-to-total correlation coefficient: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-04"]
+    },
+    {
+      "id": "STRAT-02",
+      "category": "Single bet",
+      "name": "Spread from matchup of official team scoring/defensive splits",
+      "signal": "Team-level points per game leaders are published officially (e.g., Memphis 121.2, Cleveland 121.0, Houston 120.7, Portland 120.6, Lakers 120.3 PPG).",
+      "validation_gates": ["G1 data freshness", "G3 source official"],
+      "correlation_note": "Spread outcome correlation to PPG differential: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-05"]
+    },
+    {
+      "id": "STRAT-03",
+      "category": "Player prop",
+      "name": "Player prop combos built on official season leaders (points/rebounds/assists/steals/blocks)",
+      "signal": "2025-26 official regular-season leaders: Points — Luka Dončić 33.5 PPG; Rebounds — Nikola Jokić 12.9 RPG; Assists — Nikola Jokić 10.7 APG; Blocks — Victor Wembanyama (197 total); Steals — official leaders tracked on NBA.com Stats. Jokić is first player since 1969-70 to lead league in both rebounds and assists per game.",
+      "validation_gates": ["G1 data freshness", "G2 sample size >= 10 games", "G3 source official", "G4 injury report check (deadline 5 p.m. local day before; 1 p.m. on 2nd night of back-to-back)"],
+      "correlation_note": "Prop hit-rate correlation to season-leader status: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-03", "SRC-05", "SRC-08"]
+    },
+    {
+      "id": "STRAT-04",
+      "category": "Parlay",
+      "name": "Same-game parlay limited to low-correlation legs (e.g., one team total + opponent player prop)",
+      "signal": "Correlation control rule: legs from the same team's scoring and the opponent's individual stats are treated as lower-correlation; same-player multi-prop parlays are excluded as highly correlated.",
+      "validation_gates": ["G5 correlation screen", "G6 max 3 legs", "G3 source official"],
+      "correlation_note": "Pairwise correlation matrix for parlay legs: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-03"]
+    },
+    {
+      "id": "STRAT-05",
+      "category": "Single bet",
+      "name": "Schedule-spot signals (back-to-back, marquee slates) using official schedule",
+      "signal": "Official 2025-26 schedule release defines the full slate incl. five Christmas Day games (Dec. 25: CLE@NY, SAS@OKC, DAL@GSW, HOU@LAL, MIN@DEN). Back-to-back density can be derived from the official schedule; injury-report deadline changes on the 2nd night of a back-to-back (1 p.m. local).",
+      "validation_gates": ["G1 data freshness", "G3 source official", "G4 injury report check"],
+      "correlation_note": "Rest-days vs. margin correlation: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-01", "SRC-02", "SRC-08"]
+    },
+    {
+      "id": "STRAT-06",
+      "category": "Player prop",
+      "name": "Roster-structure signals (two-way / G League movement) from official G League rules",
+      "signal": "Official G League rules: up to three two-way players per NBA team, max 50 NBA games, paid 50% of the zero-year minimum salary ($636,435 for 2025-26); only players with four or fewer years of service eligible. Rotation/availability changes are verifiable from official sources.",
+      "validation_gates": ["G3 source official", "G4 injury report check"],
+      "correlation_note": "Minutes-prop correlation to two-way status: NOT VERIFIABLE from an official source — left blank, flagged.",
+      "sources": ["SRC-09"]
+    }
+  ]
+}
