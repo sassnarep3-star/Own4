@@ -534,3 +534,22 @@ Status: in progress (started verification and build). No other session claimed N
 - Verification: reviewed each table row manually for matching source relevance and explicitly labeled proposals/unmeasured items. All pages are independent static HTML and link to sibling pages. No claim is made that live deployment was configured or verified by this task.
 - Irregularities: existing project describes itself as NBA research; its NBA executive summary is not repurposed as NFL evidence. NFL data licensing, timestamped historical inputs, prices, settlement terms, injury history, reward terms and all strategy efficacy remain unresolved; see `nfl/review.html`.
  origin/main
+
+---
+## Session arena-5f917b85-own4 — FINAL INTEGRATION (2026-11-02 UTC)
+
+- PR #25 opened: https://github.com/sassnarep3-star/Own4/pull/25
+- Merge: direct merge to main performed (branch `arena/5f917b85-own4` -> `main`) at commit `68a92f5`; prior PR merge blocked by base-modification; resolved by direct merge preserving all work.
+- Other session work preserved: `nfl/correlation.html`, `nfl/index.html` (other version), `nfl/review.html`, `nfl/sources.html`, `nfl/validation.html` from `arena/6378baad-own4` kept at root; my enhanced module lives in `nfl/pages/` with `nfl/index.html` resolving to full dashboard.
+- GitHub Pages status: `building` (source `/`, main branch) — build started for merge commit; expected live at https://sassnarep3-star.github.io/Own4/nfl/ once complete.
+- Verification performed: every nfl/pages/*.html row checked for source link; unverified numeric cells left empty; 10 flags published; no inferences made; no performance claims.
+- Executive summary: nfl/index.html contains verified structural findings + cleared/unverified items; nfl/pages/executive-summary.html detailed.
+
+Manual review links (official sources used in verification):
+- https://operations.nfl.com/
+- https://www.nfl.com/
+- https://stats.nfl.com/
+- https://scikit-learn.org/stable/
+- https://www.nist.gov/itl/sed/statistical-reference-datasets
+- https://www.ncpgambling.org/
+- NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
