@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="on">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Correlation values</h1>
+<p class="lede">Pre-registered pairs only (params v1.0). Two-sided t-test p-values;
+significance level 0.05. Blocked pairs stay blank — never inferred.</p>
+<table class=""><thead><tr><th>ID</th><th>Pair</th><th>r</th><th>p</th><th>n</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td>C1</td><td>Designated home field vs win (phi)</td><td>0.0796</td><td>0.233027</td><td>226</td><td>decisive non-neutral games, team-game level (2 obs per game; p-values approximate under within-game clustering)</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C2</td><td>Rest-day differential (home minus away) vs home win</td><td>0.3359</td><td>0.000523</td><td>103</td><td>games where both sides have a prior game; decisive only; point-biserial</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C3</td><td>Home side on short rest (<=5 days) vs home win (phi)</td><td>0.1131</td><td>0.255288</td><td>103</td><td>decisive games; week 1 excluded (no prior)</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C4</td><td>Previous-game margin vs current-game win (point-biserial)</td><td>0.0295</td><td>0.672629</td><td>208</td><td>team-games with a prior game; observations clustered within games (p-values approximate); ties=0.5</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C5a</td><td>Thursday-game home win x Sunday-night home win (phi)</td><td>0.488</td><td>0.219944</td><td>8</td><td>parlay leg independence test; official SNF slots identified from weekly page headers; n < pre-registered minimum 30 -> underpowered, reported as inconclusive</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C5b</td><td>Early x late Sunday window home win (phi)</td><td>—</td><td>—</td><td>0</td><td>BLOCKED: official schedule extraction exposes dates but not kickoff windows; no value computed, flagged</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>C6</td><td>Team passing yards per game vs team wins (point-biserial)</td><td>0.3641</td><td>0.040511</td><td>32</td><td>cross-section n=32, season-to-date; column semantics confirmed by cross-matching player tables (e.g., Purdy 211/146/69.2/8.3/1748 equals SF team row)</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr></tbody></table>
+<p class="note">C2 is the strongest measured dependence (rest differential vs winning).
+C4 (momentum) and C1 (home field) are not significant at n available. C5a is underpowered
+(n=8 &lt; 30 required); C5b could not be computed from official schedule fields (no kickoff
+window) and is flagged instead of estimated.</p>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

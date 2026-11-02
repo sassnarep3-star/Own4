@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="on">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Flagged for review</h1>
+<p class="lede">Every irregularity, blank, and blocked item — published, not hidden.
+Nothing here blocks the site; all of it blocks <i>validation claims</i>.</p>
+<table class=""><thead><tr><th>ID</th><th>Item</th><th>What we did instead</th><th>Source</th></tr></thead><tbody><tr><td>FL-01</td><td>No official source publishes betting lines/odds</td><td>All market cells blank on own-lines and leaderboard (G7 BLOCKED).</td><td><a href="https://www.nfl.com/terms">www.nfl.com/terms</a></td></tr><tr><td>FL-02</td><td>Player prop combo data (S7) not ingested</td><td>Official game-level player logs unavailable in bulk; no correlation computed or inferred.</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr><tr><td>FL-03</td><td>Reward pool terms unpublished</td><td>Rewards column blank; policy-only description (G8 BLOCKED).</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr><tr><td>FL-04</td><td>C5b early/late Sunday windows blocked</td><td>Official schedule extraction exposes dates, not kickoff windows; value left blank.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>FL-05</td><td>S1 calibration gate failed</td><td>ECE 0.1191 > 0.10 on holdout; published as FAIL, not tuned away.</td><td><a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn.org/stable/modules/calibration.html</a></td></tr><tr><td>FL-06</td><td>S4 totals model worse than baseline</td><td>MAE 11.46 vs 11.3; strategy not validated.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>FL-07</td><td>Small samples everywhere</td><td>Holdout n=56 (<300); rest signal n=25; parlay n=8 — all wide-CI, underpowered.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>FL-08</td><td>Week 8 MNF pending</td><td>Bears at Seahawks unplayed at cut-off; excluded from dataset, listed as upcoming.</td><td><a href="https://www.nfl.com/games/bears-at-seahawks-2026-reg-8">www.nfl.com/games/bears-at-seahawks-2026-reg-8</a></td></tr><tr><td>FL-09</td><td>International neutral-site games</td><td>6 neutral-site games flagged in data; designated-home splits include them (SIG-01b reported separately).</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-1">www.nfl.com/schedules/2026/by-week/week-1</a></td></tr><tr><td>FL-10</td><td>Week 1 page header oddity</td><td>nfl.com labels the Sep 9 game 'Sunday Night Football' while the game line says Wednesday, September 9th; recorded verbatim as Wednesday.</td><td><a href="https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1">www.nfl.com/games/patriots-at-seahawks-2026-reg-1</a></td></tr><tr><td>FL-11</td><td>Chunk-boundary data gap resolved</td><td>A schedule page extraction gap cut the WAS@DAL Week 2 score; filled only after reading the official NFL Game Center box (WAS 20, DAL 37).</td><td><a href="https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2">www.nfl.com/games/commanders-at-cowboys-2026-reg-2</a></td></tr><tr><td>FL-12</td><td>Team-stats columns partially unlabeled</td><td>Only cross-confirmed columns (ATT/CMP/CMP%/Y/A/YDS/TD/INT) were kept; unnamed columns were discarded, not guessed.</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr><tr><td>FL-13</td><td>Tie game handling</td><td>NYG 27–27 WAS (W5) recorded; ties count 0.5 in rates and Elo (pre-registered).</td><td><a href="https://www.nfl.com/games/giants-at-commanders-2026-reg-5">www.nfl.com/games/giants-at-commanders-2026-reg-5</a></td></tr><tr><td>FL-14</td><td>Injuries & transactions not modeled</td><td>Official injury reports exist but a timestamped pre-kickoff history feed was not ingested; no availability assumptions made.</td><td><a href="https://www.nfl.com/injuries/">www.nfl.com/injuries/</a></td></tr><tr><td>FL-15</td><td>No funding/operator terms</td><td>No stakes, limits, or settlement rules from any official source; strategy economics untested (G8 BLOCKED).</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr></tbody></table>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>
