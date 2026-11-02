@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html" class="on">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html">Strategies & Leaderboard</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav></header>
+<main>
+
+<h2>Dashboard</h2>
+<p>Own-line research pipeline for the NBA 2026-27 season. Every number on this
+site is computed from <strong>official NBA sources</strong> (or a partner source that is
+sample-verified against the NBA) and each table row carries its source link.
+Market odds/spreads/totals are <strong>never</strong> recorded: no official source for them
+exists — see <a href="flagged.html">Flagged for Review</a> item Q1.</p>
+<div class="cards">
+<div class="card"><div class="v">92</div><div class="k">completed games reconciled vs official standings</div></div><div class="card"><div class="v">300/300</div><div class="k">standings cells matched (line by line)</div></div><div class="card"><div class="v">92/92</div><div class="k">final scores dual-sourced (NBA × ESPN)</div></div><div class="card"><div class="v">184/184</div><div class="k">official leader stat-lines verified</div></div><div class="card"><div class="v">0.2309</div><div class="k">walk-forward Brier (vs 0.2366 prior · 0.2500 const)</div></div><div class="card"><div class="v">15</div><div class="k">pre-tip own lines originated (Nov 2 slate)</div></div><div class="card"><div class="v">10</div><div class="k">documented signals with methods + CIs</div></div><div class="card"><div class="v">4</div><div class="k">flagged items (none block publish)</div></div>
+</div>
+<div class="note goodnote"><strong>Verification headline:</strong> all 300
+computed standings cells match the official table exactly, all 92 final scores
+agree across two independent sources, and 184/184
+official game-leader stat lines match the partner box scores. One transcription error
+(BKN OT cell) was caught by this audit and corrected — see
+<a href="verification.html">Verification</a>.</div>
+<h3>Session tasks</h3>
+<table class="data"><thead><tr><th>Task</th><th>Status</th><th>Scope</th><th>Audit</th></tr></thead>
+<tbody><tr><td>P1</td><td>done</td><td>Automated official-NBA fetch pipeline (cdn/stats/HTML + ESPN partner fallback, full provenance manifest)</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P2</td><td>done</td><td>2026-27 standings dataset transcribed line-by-line from nba.com/standings</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P3</td><td>done</td><td>Elo fair-odds engine (documented params, official prior, walk-forward)</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P4</td><td>done</td><td>Empirical signals: home, rest, margins, totals, correlations, prop benchmarks</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P5</td><td>done</td><td>Row-level source audit (scripts/audit_rows.py)</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P6</td><td>done</td><td>This site section (dashboard, model, signals, strategies, verification, flagged, sources)</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr><tr><td>P7</td><td>in progress</td><td>Integration: merge main, link check, PR → main, merge, Pages deploy, record</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">run log</a></td></tr></tbody></table>
+<h3>Quick links</h3>
+<ul>
+<li><a href="executive-summary.html">Executive summary</a> — key findings and decisions</li>
+<li><a href="model.html">Own lines &amp; model</a> — Elo ratings, fair odds, pre-tip Nov 2 lines</li>
+<li><a href="signals.html">Signals</a> — 10 documented empirical findings</li>
+<li><a href="strategies.html">Strategies &amp; leaderboard</a> — gates, paper rewards, status</li>
+<li><a href="standings.html">Verified standings</a> — every row linked to nba.com</li>
+</ul>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>

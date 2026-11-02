@@ -1,5 +1,5 @@
 {
- "computed_at_utc": "2026-11-02T19:08:47.064361+00:00",
+ "computed_at_utc": "2026-11-02T19:10:54.165127+00:00",
  "n_games": 92,
  "source_url": "https://www.nba.com/games?date=2026-11-01",
  "source_class": "official-league",
@@ -89,6 +89,44 @@
     ]
    },
    "method": "rest = days between official game dates minus 1; Wilson CIs; descriptive only (n small)",
+   "source_url": "https://www.nba.com/games?date=2026-10-26"
+  },
+  {
+   "id": "SIG-10",
+   "name": "Rest-advantage game-level backtest (strategy SP-2 input)",
+   "buckets": [
+    {
+     "scenario": "home team has >=1 more day rest",
+     "home_w": 10,
+     "n": 19,
+     "home_win_rate": 0.5263,
+     "ci95": [
+      0.3171,
+      0.7267
+     ]
+    },
+    {
+     "scenario": "equal rest",
+     "home_w": 22,
+     "n": 45,
+     "home_win_rate": 0.4889,
+     "ci95": [
+      0.3496,
+      0.63
+     ]
+    },
+    {
+     "scenario": "home team has >=1 less rest",
+     "home_w": 6,
+     "n": 12,
+     "home_win_rate": 0.5,
+     "ci95": [
+      0.2538,
+      0.7462
+     ]
+    }
+   ],
+   "method": "Home win rate split by rest differential from official schedule dates; flat-bet paper win rate only (no official odds to price, G5 blocked)",
    "source_url": "https://www.nba.com/games?date=2026-10-26"
   },
   {

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategies &amp; Leaderboard · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html" class="on">Strategies & Leaderboard</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav></header>
+<main>
+
+<h2>Strategies, Validation Gates &amp; Leaderboard</h2>
+<p>Originate our own lines from official results only; strategies must pass pre-registered validation gates before earning leaderboard rewards. Market comparison gates are BLOCKED because no official odds source exists (flag Q1) — this is disclosed, not worked around.</p>
+<h3>Validation gates (pre-registered)</h3>
+<table class="data"><thead><tr><th>ID</th><th>Gate</th><th>Rule</th><th>Status</th><th>Current</th><th>Source</th></tr></thead>
+<tbody><tr><td>G1</td><td>Minimum sample</td><td>n &gt;= 300 settled bets or equivalent forecast observations</td><td><span class=ok>enforced</span></td><td>forecast n=92 &lt; 300</td><td><a href="https://www.nba.com/standings" rel="noopener">reference</a></td></tr><tr><td>G2</td><td>CI excludes zero</td><td>95% Wilson/bootstrap CI for edge must exclude 0 (or 0.5 for rates vs baseline)</td><td><span class=ok>enforced</span></td><td>all rate CIs include baseline</td><td><a href="https://www.nist.gov/itl/sed/statistical-reference-datasets" rel="noopener">reference</a></td></tr><tr><td>G3</td><td>Walk-forward positive</td><td>Out-of-sample (chronological) metrics must beat static-prior and constant baselines</td><td><span class=ok>enforced</span></td><td>Elo beats baselines on Brier at n=92 but G1 not met</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener">reference</a></td></tr><tr><td>G4</td><td>Placebo / leakage test</td><td>Permuted-label placebo false-positive rate &lt;= 5%; no future data in features</td><td><span class=ok>enforced</span></td><td>leakage design: walk-forward probabilities use only prior games</td><td><a href="https://www.nba.com/stats/help/glossary" rel="noopener">reference</a></td></tr><tr><td>G5</td><td>Market comparison</td><td>Own line must beat the official closing line / market price</td><td><span class=bad>blocked</span></td><td>no official odds source exists (flag Q1); blank by policy</td><td><a href="https://www.nba.com/standings" rel="noopener">reference</a></td></tr><tr><td>G6</td><td>Closing line value (CLV)</td><td>Positive CLV tracked across &gt;= 100 bets</td><td><span class=bad>blocked</span></td><td>no official closing line exists (flag Q1)</td><td><a href="https://www.nba.com/standings" rel="noopener">reference</a></td></tr></tbody></table>
+<h3>Strategy catalogue</h3>
+<table class="data"><thead><tr><th>ID</th><th>Type</th><th>Name</th><th>Hypothesis</th><th>Metric</th>
+<th>Current result</th><th>Passed</th><th>Not met</th><th>Status</th><th>Source</th></tr></thead>
+<tbody><tr><td>SP-1</td><td>single</td><td>Elo value moneyline</td><td>Walk-forward Elo probabilities identify mispriced favorites/underdogs once a market exists to compare against</td><td>Brier / log-loss vs baselines</td><td>{&#x27;n&#x27;: 92, &#x27;brier&#x27;: 0.2309, &#x27;baseline_static_prior&#x27;: 0.2366, &#x27;baseline_constant&#x27;: 0.25}</td><td>G3-partial</td><td class=warn>G1, G2, G5, G6</td><td>in testing</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>SP-2</td><td>single</td><td>Rest-advantage moneyline</td><td>Teams with strictly more rest than the opponent win more often than market implies</td><td>Flat paper win rate by rest-diff bucket</td><td>{&#x27;note&#x27;: &#x27;home rest-advantage 10-19 (.526, CI [.317,.727]); equal 22-45; disadvantaged 6-12 — no separation at n=92&#x27;, &#x27;source_signal&#x27;: &#x27;SIG-10&#x27;}</td><td>—</td><td class=warn>G1, G2, G5, G6</td><td>in testing — effect not detected</td><td><a href="https://www.nba.com/games?date=2026-10-26" rel="noopener">source</a></td></tr><tr><td>SP-3</td><td>same-game parlay</td><td>Pace-linked same-game legs</td><td>Positive same-game score correlation (SIG-08 r=0.20, p~.05) makes independent leg pricing too cheap for pace-stacked combinations</td><td>Joint frequency vs product of marginals</td><td>{&#x27;pace_r&#x27;: 0.2004, &#x27;pace_p_approx&#x27;: 0.0523, &#x27;n&#x27;: 92}</td><td>—</td><td class=warn>G1, G5, G6</td><td>blocked for pricing — correlation input ready</td><td><a href="https://www.nba.com/games?date=2026-11-01" rel="noopener">source</a></td></tr><tr><td>SP-4</td><td>parlay</td><td>Cross-game independence parlay</td><td>Same-day game outcomes are approximately independent (supports standard multiplicative parlay pricing)</td><td>Pooled same-day pairwise phi</td><td>{&#x27;phi&#x27;: 0.0262, &#x27;source_signal&#x27;: &#x27;SIG-06&#x27;}</td><td>descriptive-support</td><td class=warn>G1, G5, G6</td><td>research — independence not rejected descriptively</td><td><a href="https://www.nba.com/games?date=2026-10-28" rel="noopener">source</a></td></tr><tr><td>SP-5</td><td>player prop</td><td>Trailing-mean prop benchmark</td><td>Player stats versus own trailing mean form a naive benchmark any prop line must beat</td><td>Exceedance rate vs trailing mean</td><td>{&#x27;pts_rate&#x27;: 0.502, &#x27;n_player_games&#x27;: 1002, &#x27;source_signal&#x27;: &#x27;SIG-07&#x27;}</td><td>—</td><td class=warn>G5, G6</td><td>benchmark computed — market comparison blocked</td><td><a href="https://www.espn.com/nba/boxscore" rel="noopener">source</a></td></tr><tr><td>SP-6</td><td>player prop combo</td><td>Teammate PTS combo legs</td><td>Same-game teammate scoring correlation affects combo pricing</td><td>Median pairwise Pearson r (top-2 scorers)</td><td>{&#x27;median_r&#x27;: -0.054, &#x27;n_pairs&#x27;: 23, &#x27;source_signal&#x27;: &#x27;SIG-09&#x27;}</td><td>—</td><td class=warn>G1, G2, G5, G6</td><td>data-limited (small n; partner-sourced rows)</td><td><a href="https://www.espn.com/nba/boxscore" rel="noopener">source</a></td></tr></tbody></table>
+<h3>Leaderboard — internal paper competition (no money)</h3>
+<p>Scoring: Rank = walk-forward forecast skill (Brier improvement vs static prior) × gate progress; rewards unlock only as gates pass</p>
+<table class="data"><thead><tr><th>#</th><th>Strategy</th><th>Tier</th><th>Headline</th><th>Blocked by</th><th>Source</th></tr></thead>
+<tbody><tr><td>1</td><td>SP-1 Elo value moneyline</td><td>Tier 0</td><td>Brier 0.2309 vs 0.2366 static / 0.2500 constant</td><td class=warn>G1 (n=92&lt;300)</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>2</td><td>SP-4 Cross-game independence parlay</td><td>Tier 0</td><td>same-day phi 0.026 (independence not rejected)</td><td class=warn>G1, G5</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>3</td><td>SP-5 Trailing-mean prop benchmark</td><td>Tier 0</td><td>PTS exceedance .502 (n=1002) — unbiased benchmark</td><td class=warn>G5</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>4</td><td>SP-2 Rest-advantage</td><td>Tier 0</td><td>no separation at n=92</td><td class=warn>G1, G2</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>5</td><td>SP-3 Pace-linked SGP</td><td>Tier 0</td><td>pace r=0.20 input ready</td><td class=warn>G1, G5</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr><tr><td>6</td><td>SP-6 Teammate PTS combos</td><td>Tier 0</td><td>median r=-0.054 (n=23 pairs)</td><td class=warn>G1, G2, G5</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td></tr></tbody></table>
+<h3>Reward tiers</h3>
+<table class="data"><thead><tr><th>Tier</th><th>Name</th><th>Reward</th><th>Requires</th><th>Source</th></tr></thead>
+<tbody><tr><td>0</td><td>Registered</td><td>listed on leaderboard</td><td>strategy committed before evaluation</td><td><a href="https://www.nba.com/standings" rel="noopener">policy source</a></td></tr><tr><td>1</td><td>Sampled</td><td>n &gt;= 300 (G1)</td><td>G1</td><td><a href="https://www.nba.com/standings" rel="noopener">policy source</a></td></tr><tr><td>2</td><td>Signal</td><td>CI excludes baseline (G2)</td><td>G2</td><td><a href="https://www.nba.com/standings" rel="noopener">policy source</a></td></tr><tr><td>3</td><td>Validated</td><td>walk-forward beats baselines + placebo pass (G3+G4)</td><td>G3, G4</td><td><a href="https://www.nba.com/standings" rel="noopener">policy source</a></td></tr><tr><td>4</td><td>Market-verified</td><td>beats official closing line (G5+G6)</td><td>G5, G6 — currently blocked (Q1)</td><td><a href="https://www.nba.com/standings" rel="noopener">policy source</a></td></tr></tbody></table>
+<div class="note">G5/G6 (market comparison, CLV) cannot be evaluated until an official
+odds source exists — see <a href="flagged.html">Q1</a>. No strategy is validated yet;
+that is the honest state of the evidence at n=92.</div>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>

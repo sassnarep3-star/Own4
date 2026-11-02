@@ -329,6 +329,27 @@ def reconcile(games, standings):
 # ------------------------------------------------------------------
 # 4. Elo walk-forward + own lines
 # ------------------------------------------------------------------
+
+def attach_rest(completed):
+    """rest_days = days since team's previous game - 1 (0 = back-to-back)."""
+    from datetime import date as _date
+    def d(s):
+        y, m, dd = map(int, s.split("-"))
+        return _date(y, m, dd)
+    dates_by_team = {}
+    for g in sorted(completed, key=lambda x: x["date"]):
+        for side in ("home", "away"):
+            dates_by_team.setdefault(g[side]["tricode"], []).append(g["date"])
+    for g in sorted(completed, key=lambda x: x["date"]):
+        gd = d(g["date"])
+        for side in ("home", "away"):
+            ab = g[side]["tricode"]
+            prev = [x for x in dates_by_team[ab] if d(x) < gd]
+            g["rest_" + side] = (gd - d(max(prev))).days - 1 if prev else None
+        h, a = g.get("rest_home"), g.get("rest_away")
+        g["rest_diff"] = (h - a) if (h is not None and a is not None) else None
+    return completed
+
 def elo_run(completed, prior, standings):
     r0 = {}
     for conf in ("east", "west"):
@@ -488,29 +509,13 @@ def signals(completed, preds, conf_of):
         "source_url": NBA_GAMES_URL.format(d="2026-10-21"),
     })
 
-    # rest buckets (team-game level)
-    by_team = {}
-    for g in sorted(completed, key=lambda x: x["date"]):
-        for side in ("home", "away"):
-            ab = g[side]["tricode"]
-            by_team.setdefault(ab, []).append(g["date"])
-    rest_rows = []
+    # rest buckets (team-game level) — uses rest_home/rest_away attached earlier
     bucket = {0: {"w": 0, "n": 0}, 1: {"w": 0, "n": 0}, 2: {"w": 0, "n": 0}}
     opp_b2b = {"w": 0, "n": 0}
-    from datetime import date as _date
-    def d(s):
-        y, m, dd = map(int, s.split("-"))
-        return _date(y, m, dd)
-    # need opponent rest: recompute per game
-    for g in sorted(completed, key=lambda x: x["date"]):
-        gd = d(g["date"])
-        rests = {}
+    rd_bucket = {1: {"w": 0, "n": 0}, 0: {"w": 0, "n": 0}, -1: {"w": 0, "n": 0}}
+    for g in completed:
         for side in ("home", "away"):
-            ab = g[side]["tricode"]
-            prev = [x for x in by_team[ab] if d(x) < gd]
-            rests[side] = (gd - d(max(prev))).days - 1 if prev else None
-        for side in ("home", "away"):
-            r = rests[side]
+            r = g.get("rest_" + side)
             if r is None:
                 continue
             key = 0 if r == 0 else (1 if r == 1 else 2)
@@ -518,9 +523,14 @@ def signals(completed, preds, conf_of):
             bucket[key]["n"] += 1
             bucket[key]["w"] += int(won)
             opp = "away" if side == "home" else "home"
-            if rests[opp] == 0:
+            if g.get("rest_" + opp) == 0:
                 opp_b2b["n"] += 1
                 opp_b2b["w"] += int(won)
+        rd = g.get("rest_diff")
+        if rd is not None:
+            k2 = 1 if rd >= 1 else (-1 if rd <= -1 else 0)
+            rd_bucket[k2]["n"] += 1
+            rd_bucket[k2]["w"] += int(g["home"]["score"] > g["away"]["score"])
     labels = {0: "back-to-back (0 days off)", 1: "1 day off", 2: "2+ days off"}
     rest_items = []
     for k in (0, 1, 2):
@@ -539,7 +549,21 @@ def signals(completed, preds, conf_of):
         "method": "rest = days between official game dates minus 1; Wilson CIs; descriptive only (n small)",
         "source_url": NBA_GAMES_URL.format(d="2026-10-26"),
     })
-
+    # SIG-10: rest-advantage game-level backtest (SP-2 strategy input)
+    rd_items = []
+    for k, nm in ((1, "home team has >=1 more day rest"), (0, "equal rest"),
+                  (-1, "home team has >=1 less rest")):
+        b = rd_bucket[k]
+        if b["n"]:
+            lo, hi = wilson(b["w"], b["n"])
+            rd_items.append({"scenario": nm, "home_w": b["w"], "n": b["n"],
+                             "home_win_rate": round(b["w"] / b["n"], 4), "ci95": [lo, hi]})
+    out["items"].append({
+        "id": "SIG-10", "name": "Rest-advantage game-level backtest (strategy SP-2 input)",
+        "buckets": rd_items,
+        "method": "Home win rate split by rest differential from official schedule dates; flat-bet paper win rate only (no official odds to price, G5 blocked)",
+        "source_url": NBA_GAMES_URL.format(d="2026-10-26"),
+    })
     # totals distribution (research benchmark — NOT a market line)
     totals = sorted(g["home"]["score"] + g["away"]["score"] for g in completed)
     out["items"].append({
@@ -898,6 +922,7 @@ def main():
                 "nba_url": g["source_url"], "espn_url": row["source_url"]})
 
     completed, recon = reconcile(games, standings)
+    completed = attach_rest(completed)
     print(f"completed: {len(completed)}; recon cells {recon['cells_matched']}/{recon['cells_checked']}; "
           f"mismatches {len(recon['mismatches'])}")
     print(f"espn cross-check: {xcheck['matched']}/{xcheck['checked']} matched, "

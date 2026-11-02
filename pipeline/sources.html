@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html">Strategies & Leaderboard</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a><a href="sources.html" class="on">Sources</a></nav></header>
+<main>
+
+<h2>Source Registry</h2>
+<p>Only the sources below may back a value in pipeline/ datasets. Every dataset row must carry source_url. If a value cannot be confirmed from a source here, it is left blank and listed in flagged_pipeline.json. Market odds/spreads/totals have NO official source and are never recorded.</p>
+<h3>Approved sources</h3>
+<table class="data"><thead><tr><th>ID</th><th>Name</th><th>URL</th><th>Class</th><th>Used for</th><th>Verified</th></tr></thead>
+<tbody><tr><td>SRC-P01</td><td>NBA.com official standings (2026-27, live)</td><td><a href="https://www.nba.com/standings" rel="noopener">https://www.nba.com/standings</a></td><td>official-league</td><td>Canonical standings table; full reconciliation of the 92 completed games (W-L, home/road, conf, last10, streak, OT).</td><td>2026-11-02</td></tr><tr><td>SRC-P02</td><td>NBA.com official standings (2025-26 final)</td><td><a href="https://www.nba.com/standings?Season=2025-26" rel="noopener">https://www.nba.com/standings?Season=2025-26</a></td><td>official-league</td><td>Documented Elo-model prior (initial ratings from final win percentages).</td><td>2026-11-02</td></tr><tr><td>SRC-P03</td><td>NBA.com daily scores pages</td><td><a href="https://www.nba.com/games?date=2026-11-01" rel="noopener">https://www.nba.com/games?date=2026-11-01</a></td><td>official-league</td><td>Per-date final scores and NBA game deep links (pattern /games?date=YYYY-MM-DD; game links /game/&lt;slug&gt;-&lt;id&gt;).</td><td>2026-11-02</td></tr><tr><td>SRC-P04</td><td>NBA official 2026-27 playing rules (PDF)</td><td><a href="https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2026/10/2026-27-Official-NBA-Playing-Rules.pdf" rel="noopener">https://ak-static.cms.nba.com/wp-content/uploads/sites/4/202</a></td><td>official-league</td><td>Game structure facts (period length, OT length, rosters) referenced in strategy docs.</td><td>2026-11-02</td></tr><tr><td>SRC-P05</td><td>NBA official injury report policy page</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/" rel="noopener">https://official.nba.com/nba-injury-report-2026-27-season/</a></td><td>official-league</td><td>Injury-report timing policy referenced in signal documentation.</td><td>2026-11-02</td></tr><tr><td>SRC-P06</td><td>ESPN scoreboards/summaries API (ESPN, official NBA broadcast partner)</td><td><a href="https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard" rel="noopener">https://site.api.espn.com/apis/site/v2/sports/basketball/nba</a></td><td>official-broadcast-partner</td><td>Bulk game results and player box scores when NBA JSON endpoints return 403/timeouts from datacenter clients (recorded in data/manifest.json). Game rows are additionally reconciled line-by-line against SRC-P01; player rows are sample-verified against NBA official box-score pages.</td><td>2026-11-02</td></tr><tr><td>SRC-P07</td><td>NBA.com official box score pages</td><td><a href="https://www.nba.com/game/atl-vs-orl-0022600085/box-score" rel="noopener">https://www.nba.com/game/atl-vs-orl-0022600085/box-score</a></td><td>official-league</td><td>Sample verification of player-level rows sourced from SRC-P06.</td><td>2026-11-02</td></tr><tr><td>SRC-P08</td><td>GitHub Actions fetch log + manifest</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">https://github.com/sassnarep3-star/Own4/actions</a></td><td>internal-audit</td><td>Provenance: every raw file fetched by scripts/fetch_official.py with URL, status, timestamp in data/manifest.json.</td><td>2026-11-02</td></tr></tbody></table>
+<h3>Explicitly excluded (observed irregularities)</h3>
+<table class="data"><thead><tr><th>URL</th><th>Reason</th><th>Policy</th></tr></thead>
+<tbody><tr><td><a href="https://www.basketball-reference.com/leagues/NBA_2027_standings.html" rel="noopener">https://www.basketball-reference.com/leagues/NBA_2027_standings.html</a></td><td>Third-party aggregator; observed stale vs live NBA.com (page-age 2026-10-31 vs live 2026-11-02) — used only as an early cross-check, never as a source of record.</td><td><a href="https://www.nba.com/standings" rel="noopener">policy</a></td></tr><tr><td><a href="https://whynba.com/standings/" rel="noopener">https://whynba.com/standings/</a></td><td>Unofficial fan site presenting itself as standings.</td><td><a href="https://www.nba.com/standings" rel="noopener">policy</a></td></tr><tr><td><a href="https://standingstoday.com/nba/" rel="noopener">https://standingstoday.com/nba/</a></td><td>Unofficial aggregator.</td><td><a href="https://www.nba.com/standings" rel="noopener">policy</a></td></tr></tbody></table>
+<p class="small">Fetch provenance for every raw file (URL, HTTP status, timestamp) is in
+<a href="https://github.com/sassnarep3-star/Own4/blob/arena/75685c60-own4/data/manifest.json">data/manifest.json</a>.</p>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>
