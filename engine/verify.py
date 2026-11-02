@@ -251,7 +251,7 @@ def main():
     idx = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     missing = [p for p in [os.path.relpath(f, ROOT).replace(os.sep, "/") for f in html_files]
                if p not in ("index.html",) and p not in idx
-               and not p.startswith(("docs/", "lab/"))]
+               and not p.startswith(("docs/", "lab/", "lines-lab/"))]
     ok &= check("Dashboard directory links to every generated page", not missing,
                 "Pages not reachable from the dashboard: %s" % (missing[:12] or "none"),
                 ["https://github.com/sassnarep3-star/Own4/blob/main/index.html"])

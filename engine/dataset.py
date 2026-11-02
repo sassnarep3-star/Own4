@@ -465,10 +465,10 @@ REQUIREMENTS = [
     ("R32", "Site", "Include all analysis and findings", "done", "https://github.com/sassnarep3-star/Own4/tree/main/pages"),
     ("R33", "Site", "Clearly labeled Flagged for Review page with source links", "done", "https://www.nba.com/stats/help/faq"),
     ("R34", "Site", "Confirm site builds with no broken links", "done", "https://github.com/sassnarep3-star/Own4/actions"),
-    ("R35", "Publish", "Create PR from integration branch to main with summary, sources, irregularities", "in progress", "https://github.com/sassnarep3-star/Own4/pulls"),
-    ("R36", "Publish", "Merge PR without waiting for approval", "in progress", "https://github.com/sassnarep3-star/Own4/pulls"),
-    ("R37", "Publish", "Confirm GitHub Pages deploys successfully; record PR link + merge result", "in progress", "https://api.github.com/repos/sassnarep3-star/Own4/pages"),
-    ("R38", "Publish", "Fix and retry any failed build, check or deploy; never merge a broken site", "in progress", "https://github.com/sassnarep3-star/Own4/actions"),
+    ("R35", "Publish", "Create PR from integration branch to main with summary, sources, irregularities", "done", "https://github.com/sassnarep3-star/Own4/pull/13"),
+    ("R36", "Publish", "Merge PR without waiting for approval", "done", "https://github.com/sassnarep3-star/Own4/pull/13"),
+    ("R37", "Publish", "Confirm GitHub Pages deploys successfully; record PR link + merge result", "done", "https://api.github.com/repos/sassnarep3-star/Own4/pages"),
+    ("R38", "Publish", "Fix and retry any failed build, check or deploy; never merge a broken site", "done", "https://github.com/sassnarep3-star/Own4/actions"),
     ("R39", "Scope", "No manual input required from the user", "done", "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"),
 ]
 

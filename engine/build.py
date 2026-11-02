@@ -154,6 +154,7 @@ NAV = [
         ("pages/flagged.html", "Flags · main"),
         ("pages/sources.html", "Sources · main"),
         ("lab/index.html", "Data Lab · /lab/"),
+        ("lines-lab/index.html", "NBA Lines Lab · /lines-lab/"),
         ("docs/index.html", "NBA Signal Lab · /docs/"),
     ]),
 ]
@@ -302,8 +303,9 @@ def build_dashboard():
          OFFICIAL_BADGE, srcrow([S_STAND, S_TEAM])],
         ["F02", esc("56 official final scores across six dates form the verified sample; 10 are NBA Cup group-play games"),
          OFFICIAL_BADGE, srcrow(GAME_URLS)],
-        ["F03", esc("Correlation coefficients are computable from official inputs; +/- vs WIN%% r = %s (q = %s)" %
-                    (R["correlations"][9]["r"], R["correlations"][9]["q_bh"])),
+        ["F03", esc("Correlation coefficients are computable from official inputs; +/- vs WIN%% r = %s (BH-FDR q %s)" %
+                    (R["correlations"][9]["r"],
+                     "<0.0001" if R["correlations"][9]["q_bh"] == 0 else R["correlations"][9]["q_bh"])),
          DERIVED_BADGE, srcrow([S_TEAM, S_STAND, S_GLOSS])],
         ["F05", esc("15 Own4 fair lines originated for the 11/02/2026 slate from official +/- and PPG"),
          DERIVED_BADGE, srcrow([S_TEAM, S_SLATE])],
@@ -354,6 +356,7 @@ def build_dashboard():
                 ['<a href="pages/flagged.html">Flags · main ↗</a>', esc("Earlier session's 17 irregularities."), links([S_FAQ], "NBA.com ↗")],
                 ['<a href="pages/sources.html">Sources · main ↗</a>', esc("Earlier session's source register."), links([S_TEAM], "NBA.com ↗")],
                 ['<a href="lab/index.html">Data Lab · /lab/ ↗</a>', esc("Separate session's 92 official 2026-27 games and prospective own lines."), links([S_SLATE], "NBA.com ↗")],
+                ['<a href="lines-lab/index.html">NBA Lines Lab · /lines-lab/ ↗</a>', esc("Separate session's dashboard with league, teams, markets, strategies, correlations, validation and review pages."), links([S_STAND], "NBA.com ↗")],
                 ['<a href="docs/index.html">NBA Signal Lab · /docs/ ↗</a>', esc("Specification dashboard with evidence library, pricing spec and review page."), links([S_FAQ], "NBA.com ↗")],
             ], "All parallel-session output is preserved and reachable")
             + h(2, "Verification status")
