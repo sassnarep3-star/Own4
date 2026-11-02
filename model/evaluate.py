@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Walk-forward evaluation + leaderboard + own lines for the 2026-11-02 slate.
-Run:  python3 model/evaluate.py [--lines-only]
+Run:  python3 model/evaluate.py [--refresh-lines]
 Thresholds come from strategies/gates.json (pre-registered in commit 0b97f52 before this code was run)."""
 import csv, json, math, os, subprocess, sys, datetime
 sys.path.insert(0, os.path.dirname(__file__))
@@ -142,8 +142,10 @@ for b in GATES["catalogue"]:
     if b.get("status") == "Blocked":
         lb.append(dict(id=b["id"], target=b["target"], metric="", strategy_value="", baseline_value="", gain="", ci_family_lo="", ci_family_hi="", ci95_lo="", ci95_hi="",
                        n_eval=0, G1="", G2="", G3="", G4="", G5="", G6="", G7="", score=0, tier="Blocked", reward_units=0, reason=b["reason"]))
+for x in lb:
+    x["source_url"] = "https://www.nba.com/stats/players/boxscores" if x["id"].startswith("PROP") else ("https://www.nba.com/games" if x["id"] == "MARKET-SINGLES" else "https://www.nba.com/games?date=2026-10-20")
 fields = ["id", "target", "metric", "strategy_value", "baseline_value", "gain", "ci_family_lo", "ci_family_hi", "ci95_lo", "ci95_hi", "n_eval",
-          "G1", "G2", "G3", "G4", "G5", "G6", "G7", "score", "tier", "reward_units", "reason"]
+          "G1", "G2", "G3", "G4", "G5", "G6", "G7", "score", "tier", "reward_units", "reason", "source_url"]
 with open(os.path.join(D, "leaderboard.csv"), "w", newline="") as f:
     w = csv.DictWriter(f, fields, extrasaction="ignore"); w.writeheader()
     for x in lb:
@@ -185,7 +187,8 @@ for s in slate:
                   "model": "BLEND-41 (k=41, H=%.3f)" % H, "generated_utc": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%MZ"),
                   "exploratory_total_minus_observed_bias": round(t - res["total"]["BLEND-41-TOTAL"]["bias"], 1), "not_modelled": "injuries, rest/back-to-back, travel, lineup",
                   "source_url": s["source_url"], "game_page_url": s["game_page_url"]})
-if "--lines-only" not in sys.argv or True:
+# Prospective lines are FROZEN once written (committed before tip-off); pass --refresh-lines to overwrite deliberately.
+if "--refresh-lines" in sys.argv or not os.path.exists(os.path.join(D, "own_lines_2026-11-02.csv")):
     with open(os.path.join(D, "own_lines_2026-11-02.csv"), "w", newline="") as f:
         w = csv.DictWriter(f, list(lines[0].keys())); w.writeheader(); w.writerows(lines)
 res["own_lines_sigma"] = dict(sigma_margin=sm, sigma_total=st, rho_margin_total_residual=rho)
