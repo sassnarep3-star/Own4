@@ -8,7 +8,7 @@ import sys
 
 ROOT = Path(__file__).resolve().parent
 SITE = ROOT.parent
-ALLOWED = {'nfl.com', 'www.nfl.com', 'operations.nfl.com', 'nextgenstats.nfl.com', 'scikit-learn.org', 'www.itl.nist.gov'}
+ALLOWED = {'nfl.com', 'www.nfl.com', 'operations.nfl.com', 'nextgenstats.nfl.com', 'scikit-learn.org', 'www.itl.nist.gov', 'docs.github.com'}
 
 class Audit(HTMLParser):
     def __init__(self):
