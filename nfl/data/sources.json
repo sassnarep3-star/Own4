@@ -1,0 +1,19 @@
+{
+  "project":"NFL Signal Lab — NFL module",
+  "date":"2026-11-02",
+  "sources":[
+    {"id":"SRC-01","url":"https://operations.nfl.com/","domain":"operations.nfl.com","role":"League operations, schedule creation, rules reference","fetch":"OK (structure confirmed)","verified_claims":"32 teams; 272 games; schedule process; rulebook link"},
+    {"id":"SRC-02","url":"https://www.nfl.com/","domain":"www.nfl.com","role":"Official news, schedule release, injury policy announcements","fetch":"OK (news content)","verified_claims":"Schedule release; injury policy structure; season overview"},
+    {"id":"SRC-03","url":"https://stats.nfl.com/","domain":"stats.nfl.com","role":"Official stats hub (client-rendered)","fetch":"Failed / client-rendered","verified_claims":"Structural reference only; no machine-readable stats confirmed"},
+    {"id":"SRC-04","url":"https://scikit-learn.org/stable/","domain":"scikit-learn.org","role":"Calibration / cross-validation methodology","fetch":"Verified (method docs)","verified_claims":"Calibration curves; cross-validation methods"},
+    {"id":"SRC-05","url":"https://www.nist.gov/itl/sed/statistical-reference-datasets","domain":"nist.gov","role":"Statistical reference for correlation / dependence","fetch":"Verified (structural)","verified_claims":"Reference framework for dependence measures"},
+    {"id":"SRC-06","url":"https://www.ncpgambling.org/","domain":"ncpgambling.org","role":"Responsible gaming / helpline","fetch":"Verified (helpline page)","verified_claims":"1-800-MY-RESET"},
+    {"id":"SRC-07","url":"https://www.pro-football-reference.com/","domain":"pro-football-reference.com","role":"Trusted historical reference (not official but authoritative)","fetch":"Cited structurally","verified_claims":"Historical structural reference; not used for live claims"}
+  ],
+  "cross_refs":[
+    {"id":"REF-NBA-01","url":"https://www.nba.com/stats/help/glossary","note":"Method comparison only; not NFL evidence"},
+    {"id":"REF-NBA-02","url":"https://official.nba.com/nba-injury-report-2026-27-season/","note":"Method comparison only; analog for injury-policy structure"}
+  ],
+  "policy":"Every claim must cite a source from this list or a verified trusted source. Unverified values stay blank and are flagged.",
+  "note":"Stats hub (SRC-03) is client-rendered; no machine-readable data confirmed from fetch. All market/odds values blank by policy."
+}

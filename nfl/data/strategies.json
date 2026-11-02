@@ -1,0 +1,29 @@
+{
+  "project": "NFL Signal Lab — NFL module",
+  "session": "arena-5f917b85-own4",
+  "date": "2026-11-02",
+  "status": "specification / pre-validation",
+  "note": "No empirical performance claims. Every strategy registered before first evaluation per gate policy.",
+  "categories": ["singles","parlays","props"],
+  "single_strategies": [
+    {"id":"S-01","name":"Moneyline rest advantage","status":"registered","gates_passed":["G2","G7"],"gates_failed":["G1","G3","G4","G5","G6"],"performance":"","source":"pages/singles.html","verified":"UNVERIFIED"},
+    {"id":"S-02","name":"Spread post-loss streak","status":"registered","gates_passed":["G2","G7"],"gates_failed":["G1","G3","G4","G5","G6"],"performance":"","source":"pages/singles.html","verified":"UNVERIFIED"},
+    {"id":"S-03","name":"Total weather-adjusted","status":"registered","gates_passed":["G2","G7"],"gates_failed":["G1","G3","G4","G5","G6"],"performance":"","source":"pages/singles.html","verified":"UNVERIFIED"},
+    {"id":"S-04","name":"First-half spread","status":"registered","gates_passed":["G2","G7"],"gates_failed":["G1","G3","G4","G5","G6"],"performance":"","source":"pages/singles.html","verified":"UNVERIFIED"},
+    {"id":"S-05","name":"Alternate margin / payout","status":"registered","gates_passed":["G2","G7"],"gates_failed":["G1","G3","G4","G5","G6"],"performance":"","source":"pages/singles.html","verified":"UNVERIFIED"}
+  ],
+  "parlay_strategies": [
+    {"id":"P-01","name":"Same-game 2-leg spread+total+prop","status":"registered","verified":"UNVERIFIED"},
+    {"id":"P-02","name":"Cross-game 3-leg independent","status":"registered","verified":"UNVERIFIED"},
+    {"id":"P-03","name":"Prop combo (QB passing + TD)","status":"registered","verified":"UNVERIFIED"},
+    {"id":"P-04","name":"Alternate spread boosted payout","status":"registered","verified":"UNVERIFIED"}
+  ],
+  "prop_strategies": [
+    {"id":"PR-01","name":"QB passing over + TD + 0 INT","status":"registered","verified":"UNVERIFIED"},
+    {"id":"PR-02","name":"RB rush + receive + TD","status":"registered","verified":"UNVERIFIED"},
+    {"id":"PR-03","name":"WR yards + TD + first-half target","status":"registered","verified":"UNVERIFIED"},
+    {"id":"PR-04","name":"TE yards + TD + red-zone share","status":"registered","verified":"UNVERIFIED"}
+  ],
+  "verification_policy": "Every table row must have a source link. Unverified values left blank and flagged.",
+  "sources_used": ["https://operations.nfl.com/","https://www.nfl.com/","https://stats.nfl.com/","https://scikit-learn.org/stable/","https://www.nist.gov/itl/sed/statistical-reference-datasets","https://www.ncpgambling.org/"]
+}

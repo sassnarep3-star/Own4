@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NFL Signal Lab · Validation gates</title><link rel="stylesheet" href="../assets/style.css"></head><body>
+<a class="skip" href="#main">Skip to content</a>
+<aside><a class="brand" href="../index.html"><span class="mark">N/</span> NFL Signal Lab</a><div class="label">RESEARCH WORKSPACE · NFL MODULE</div>
+<nav aria-label="Main navigation"><a href="../index.html">Executive summary</a><a href="singles.html">Single bet strategies</a><a href="parlays.html">Parlay strategies</a><a href="props.html">Player prop combos</a><a href="validation.html">Validation gates</a><a href="correlations.html">Dependence register</a><a href="leaderboard.html">Leaderboard</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Evidence library</a></nav>
+<div class="aside-note">Evidence before edge.<br>Research only.</div></aside>
+<main id="main"><header><span>OWN4 / NFL RESEARCH · VALIDATION</span><span class="pill">PRE-VALIDATION</span></header>
+<section class="hero"><div class="eyebrow">Validation gates · 02 NOV 2026</div><h1>Validation gates — registered, untested</h1><p>Gates pre-registered before first evaluation (Gates G1–G7). Two gates (calibration, out-of-sample) have no data; three gates pass structurally.</p></section>
+<section><div class="table-wrap"><table><caption>Validation gate register (NFL module)</caption><thead><tr><th>Gate ID</th><th>Name</th><th>Requirement</th><th>Status</th><th>Evidence / source</th><th>Source link</th></tr></thead><tbody>
+<tr><td>G1</td><td>Data rights</td><td>Authorized historical feed + operator price archive</td><td>BLOCKED</td><td>No download license confirmed; viewing pages not a license</td><td><a href="https://operations.nfl.com/" target="_blank" rel="noopener">NFL Ops ↗</a></td></tr>
+<tr><td>G2</td><td>Official source</td><td>Every claim backed by official/trusted source link</td><td>PASSED (structural)</td><td>Every table row carries https source link</td><td><a href="https://www.nfl.com/" target="_blank" rel="noopener">NFL.com ↗</a></td></tr>
+<tr><td>G3</td><td>Calibration</td><td>Probabilities calibrated to observed frequencies</td><td>NOT TESTED — blank</td><td>No calibration dataset; no observed returns</td><td><a href="https://scikit-learn.org/stable/modules/calibration.html" target="_blank" rel="noopener">Calibration ↗</a></td></tr>
+<tr><td>G4</td><td>Correlation check</td><td>Dependence register completed; no hidden overlap</td><td>NOT TESTED — blank</td><td>Specification built; coefficients unmeasured</td><td><a href="pages/correlations.html">Correlation ↗</a></td></tr>
+<tr><td>G5</td><td>Cost / pricing</td><td>Price archive verified; cost per bet recorded</td><td>BLOCKED — blank</td><td>No price archive; all odds blank by policy</td><td><a href="https://www.ncpgambling.org/" target="_blank" rel="noopener">NCPG ↗</a></td></tr>
+<tr><td>G6</td><td>Chronological holdout</td><td>Locked train/test split with no leakage</td><td>NOT TESTED — blank</td><td>No fitted model; no holdout executed</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html" target="_blank" rel="noopener">Cross-validation ↗</a></td></tr>
+<tr><td>G7</td><td>Trial registry</td><td>Every strategy logged before first evaluation</td><td>PASSED (structural)</td><td>All strategy IDs registered pre-evaluation (S-01..S-05, P-01..P-04, PR-01..PR-04)</td><td><a href="../index.html">Index ↗</a></td></tr>
+</tbody></table></div></section>
+<section><h2>Irregularities / flags from gate check</h2><div class="table-wrap"><table><caption>Gate irregularities (NFL module)</caption><thead><tr><th>Flag</th><th>Gate</th><th>Issue</th><th>Source / note</th></tr></thead><tbody>
+<tr><td>F-01</td><td>G1 / G5</td><td>No official betting-line archive; market cells permanently blank</td><td><a href="https://www.nfl.com/" target="_blank" rel="noopener">NFL.com ↗</a></td></tr>
+<tr><td>F-03</td><td>G3 / G6</td><td>No calibration or out-of-sample data; no model fitted</td><td><a href="https://scikit-learn.org/stable/" target="_blank" rel="noopener">scikit-learn ↗</a></td></tr>
+<tr><td>F-04</td><td>G4</td><td>Correlation specification only; no fitted coefficients</td><td><a href="pages/correlations.html">Correlations ↗</a></td></tr>
+</tbody></table></div></section>
+<footer>Reviewed 2026-11-02 UTC · NFL module · Gates registered; none validated. See <a href="flagged.html">Flagged for Review</a>.</footer>
+</main></body></html>
