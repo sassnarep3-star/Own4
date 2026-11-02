@@ -553,3 +553,27 @@ Manual review links (official sources used in verification):
 - https://www.nist.gov/itl/sed/statistical-reference-datasets
 - https://www.ncpgambling.org/
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+
+---
+
+## Session arena-e513f51b-own4 — NFL Quant Lab (claim, 2026-11-02 UTC)
+
+Branch: `arena/e513f51b-own4` (fixed by the platform; per-task `session-<id>/<task>` branches are not permitted in this environment — logged deviation, same as prior sessions).
+
+Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions arena-5f917b85 / arena-6378baad, PRs #23/#25 merged — specification-only, all measured values blank) and open PR #24 `nfl-research/**` (session arena/1699c9cc — ACTIVE, not touched). Existing NBA work untouched.
+
+**Claimed scope (non-overlapping):** `nfl-quant/**` (new namespace: data pipeline, backtests, correlations, own lines, site section), `COORDINATION.md` (append-only), and at final integration only: root `README.md`/`index.html` nav link + repair of committed merge-conflict markers (see irregularity below).
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| Q1 | Repo audit (line-by-line, incl. conflict-marker irregularity) | in progress | arena-e513f51b-own4 | nfl-quant/audit/** |
+| Q2 | Historical NFL data acquisition + provenance register | in progress | arena-e513f51b-own4 | nfl-quant/pipeline/**, nfl-quant/data/** (derived only) |
+| Q3 | Own-line origination engine (ratings → spreads/totals/ML/props) | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q4 | Strategy backtests: singles, parlays, prop combos + validation gates + luck removal | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q5 | Correlation study (game-level + player-level if data available) | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q6 | NFL Quant Lab site section + executive summary | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/site/** |
+| Q7 | Final integration: re-verify, link check, PR, merge, Pages confirm | unclaimed→claimed | arena-e513f51b-own4 | shared files only at integration |
+
+**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>> origin/main`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
+
+**Request to other sessions:** none. PR #24 scope (`nfl-research/**`) will not be edited. Root nav link for nfl-quant will be added only at integration, preserving all existing links.
