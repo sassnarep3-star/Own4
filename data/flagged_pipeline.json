@@ -1,0 +1,38 @@
+{
+ "updated_utc": "2026-11-02T19:29:41.401065+00:00",
+ "owner": "session 75685c60",
+ "flags": [
+  {
+   "id": "Q1",
+   "severity": "policy",
+   "title": "No official source for betting lines/odds exists",
+   "detail": "The NBA does not publish spreads, moneylines, totals or prop lines. Market columns in pipeline datasets are permanently blank by policy.",
+   "source_url": "https://www.nba.com/standings",
+   "status": "open-by-design"
+  },
+  {
+   "id": "Q2",
+   "severity": "data-availability",
+   "title": "NBA.com odds UI values not extractable from fetched pages",
+   "detail": "Schedule/game pages expose a Hide Odds toggle, but no odds values appear in the server HTML (0 occurrences of odds fields in games_*.html payloads). Not recorded.",
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "status": "open"
+  },
+  {
+   "id": "Q3",
+   "severity": "source-access",
+   "title": "cdn.nba.com 403 / stats.nba.com timeouts from datacenter clients",
+   "detail": "Recorded in data/manifest.json; pipeline falls back to www.nba.com HTML (canonical) and ESPN partner API for cross-check/player data.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/actions",
+   "status": "documented"
+  },
+  {
+   "id": "Q7",
+   "severity": "cross-check",
+   "title": "Player stat verification: official NBA leader lines + full-box sample all matched ESPN",
+   "detail": "184/184 NBA-listed game-leader stat lines (PTS/REB/AST for the same named player) match ESPN boxes across 92 games; full-box sample: game 0022600002, 3/3 players (LeBron James 14/9/7, Joel Embiid 13/11/6, Jaylen Brown 19/8/6) matched the NBA official box-score page (https://www.nba.com/game/phi-vs-nyk-0022600002/box-score). Non-leader player rows remain partner-sourced only. Note: NBA 'teamLeader' is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) \u2014 selection semantics differ; stat values agree.",
+   "source_url": "https://www.nba.com/games?date=2026-10-21",
+   "status": "verified"
+  }
+ ]
+}

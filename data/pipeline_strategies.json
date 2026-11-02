@@ -1,0 +1,41 @@
+{
+ "owner": "session 75685c60",
+ "updated_utc": "2026-11-02T19:10:00+00:00",
+ "philosophy": "Originate our own lines from official results only; strategies must pass pre-registered validation gates before earning leaderboard rewards. Market comparison gates are BLOCKED because no official odds source exists (flag Q1) — this is disclosed, not worked around.",
+ "gates": [
+  {"id": "G1", "name": "Minimum sample", "rule": "n >= 300 settled bets or equivalent forecast observations", "status": "enforced", "current_note": "forecast n=92 < 300", "source_url": "https://www.nba.com/standings"},
+  {"id": "G2", "name": "CI excludes zero", "rule": "95% Wilson/bootstrap CI for edge must exclude 0 (or 0.5 for rates vs baseline)", "status": "enforced", "current_note": "all rate CIs include baseline", "source_url": "https://www.nist.gov/itl/sed/statistical-reference-datasets"},
+  {"id": "G3", "name": "Walk-forward positive", "rule": "Out-of-sample (chronological) metrics must beat static-prior and constant baselines", "status": "enforced", "current_note": "Elo beats baselines on Brier at n=92 but G1 not met", "source_url": "https://scikit-learn.org/stable/modules/cross_validation.html"},
+  {"id": "G4", "name": "Placebo / leakage test", "rule": "Permuted-label placebo false-positive rate <= 5%; no future data in features", "status": "enforced", "current_note": "leakage design: walk-forward probabilities use only prior games", "source_url": "https://www.nba.com/stats/help/glossary"},
+  {"id": "G5", "name": "Market comparison", "rule": "Own line must beat the official closing line / market price", "status": "blocked", "current_note": "no official odds source exists (flag Q1); blank by policy", "source_url": "https://www.nba.com/standings"},
+  {"id": "G6", "name": "Closing line value (CLV)", "rule": "Positive CLV tracked across >= 100 bets", "status": "blocked", "current_note": "no official closing line exists (flag Q1)", "source_url": "https://www.nba.com/standings"}
+ ],
+ "strategies": [
+  {"id": "SP-1", "type": "single", "name": "Elo value moneyline", "hypothesis": "Walk-forward Elo probabilities identify mispriced favorites/underdogs once a market exists to compare against", "inputs": ["official final scores", "official prior-season standings"], "metric": "Brier / log-loss vs baselines", "current": {"n": 92, "brier": 0.2309, "baseline_static_prior": 0.2366, "baseline_constant": 0.25}, "gates_passed": ["G3-partial"], "gates_not_met": ["G1", "G2", "G5", "G6"], "status": "in testing", "source_url": "https://www.nba.com/standings"},
+  {"id": "SP-2", "type": "single", "name": "Rest-advantage moneyline", "hypothesis": "Teams with strictly more rest than the opponent win more often than market implies", "inputs": ["official schedule dates", "official final scores"], "metric": "Flat paper win rate by rest-diff bucket", "current": {"note": "home rest-advantage 10-19 (.526, CI [.317,.727]); equal 22-45; disadvantaged 6-12 — no separation at n=92", "source_signal": "SIG-10"}, "gates_passed": [], "gates_not_met": ["G1", "G2", "G5", "G6"], "status": "in testing — effect not detected", "source_url": "https://www.nba.com/games?date=2026-10-26"},
+  {"id": "SP-3", "type": "same-game parlay", "name": "Pace-linked same-game legs", "hypothesis": "Positive same-game score correlation (SIG-08 r=0.20, p~.05) makes independent leg pricing too cheap for pace-stacked combinations", "inputs": ["official final scores"], "metric": "Joint frequency vs product of marginals", "current": {"pace_r": 0.2004, "pace_p_approx": 0.0523, "n": 92}, "gates_passed": [], "gates_not_met": ["G1", "G5", "G6"], "status": "blocked for pricing — correlation input ready", "source_url": "https://www.nba.com/games?date=2026-11-01"},
+  {"id": "SP-4", "type": "parlay", "name": "Cross-game independence parlay", "hypothesis": "Same-day game outcomes are approximately independent (supports standard multiplicative parlay pricing)", "inputs": ["official final scores"], "metric": "Pooled same-day pairwise phi", "current": {"phi": 0.0262, "source_signal": "SIG-06"}, "gates_passed": ["descriptive-support"], "gates_not_met": ["G1", "G5", "G6"], "status": "research — independence not rejected descriptively", "source_url": "https://www.nba.com/games?date=2026-10-28"},
+  {"id": "SP-5", "type": "player prop", "name": "Trailing-mean prop benchmark", "hypothesis": "Player stats versus own trailing mean form a naive benchmark any prop line must beat", "inputs": ["ESPN partner box scores", "official NBA leader lines (verification)"], "metric": "Exceedance rate vs trailing mean", "current": {"pts_rate": 0.502, "n_player_games": 1002, "source_signal": "SIG-07"}, "gates_passed": [], "gates_not_met": ["G5", "G6"], "status": "benchmark computed — market comparison blocked", "source_url": "https://www.espn.com/nba/boxscore"},
+  {"id": "SP-6", "type": "player prop combo", "name": "Teammate PTS combo legs", "hypothesis": "Same-game teammate scoring correlation affects combo pricing", "inputs": ["ESPN partner box scores", "official NBA leader verification"], "metric": "Median pairwise Pearson r (top-2 scorers)", "current": {"median_r": -0.054, "n_pairs": 23, "source_signal": "SIG-09"}, "gates_passed": [], "gates_not_met": ["G1", "G2", "G5", "G6"], "status": "data-limited (small n; partner-sourced rows)", "source_url": "https://www.espn.com/nba/boxscore"}
+ ],
+ "leaderboard": {
+  "type": "internal paper competition (no money, no real wagers)",
+  "scoring": "Rank = walk-forward forecast skill (Brier improvement vs static prior) × gate progress; rewards unlock only as gates pass",
+  "reward_tiers": [
+    {"tier": 0, "name": "Registered", "reward": "listed on leaderboard", "requires": "strategy committed before evaluation"},
+    {"tier": 1, "name": "Sampled", "reward": "n >= 300 (G1)", "requires": "G1"},
+    {"tier": 2, "name": "Signal", "reward": "CI excludes baseline (G2)", "requires": "G2"},
+    {"tier": 3, "name": "Validated", "reward": "walk-forward beats baselines + placebo pass (G3+G4)", "requires": "G3, G4"},
+    {"tier": 4, "name": "Market-verified", "reward": "beats official closing line (G5+G6)", "requires": "G5, G6 — currently blocked (Q1)"}
+  ],
+  "current_standings": [
+    {"rank": 1, "strategy": "SP-1 Elo value moneyline", "tier": 0, "headline": "Brier 0.2309 vs 0.2366 static / 0.2500 constant", "blocked_by": "G1 (n=92<300)"},
+    {"rank": 2, "strategy": "SP-4 Cross-game independence parlay", "tier": 0, "headline": "same-day phi 0.026 (independence not rejected)", "blocked_by": "G1, G5"},
+    {"rank": 3, "strategy": "SP-5 Trailing-mean prop benchmark", "tier": 0, "headline": "PTS exceedance .502 (n=1002) — unbiased benchmark", "blocked_by": "G5"},
+    {"rank": 4, "strategy": "SP-2 Rest-advantage", "tier": 0, "headline": "no separation at n=92", "blocked_by": "G1, G2"},
+    {"rank": 5, "strategy": "SP-3 Pace-linked SGP", "tier": 0, "headline": "pace r=0.20 input ready", "blocked_by": "G1, G5"},
+    {"rank": 6, "strategy": "SP-6 Teammate PTS combos", "tier": 0, "headline": "median r=-0.054 (n=23 pairs)", "blocked_by": "G1, G2, G5"}
+  ],
+  "source_url": "https://www.nba.com/standings"
+ }
+}

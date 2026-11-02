@@ -1,0 +1,936 @@
+{
+ "note": "Walk-forward: each p_home uses only games before that game.",
+ "metrics_summary": {
+  "n": 92,
+  "brier_elo_walkforward": 0.2309,
+  "brier_constant_0.5": 0.25,
+  "brier_static_prior": 0.2366,
+  "logloss_elo_walkforward": 0.6545,
+  "logloss_constant_0.5": 0.6931,
+  "logloss_static_prior": 0.6661,
+  "margin_proxy_c": 0.13062,
+  "margin_proxy_note": "least squares: margin ~ c * (R_home + H - R_away), in-sample, flagged as fit on n<=92"
+ },
+ "predictions": [
+  {
+   "game_id": "0022600003",
+   "date": "2026-10-20",
+   "home": "SAS",
+   "away": "OKC",
+   "p_home": 0.5317,
+   "home_win": 0,
+   "margin": -12,
+   "source_url": "https://www.nba.com/game/okc-vs-sas-0022600003"
+  },
+  {
+   "game_id": "0022600002",
+   "date": "2026-10-20",
+   "home": "NYK",
+   "away": "PHI",
+   "p_home": 0.5526,
+   "home_win": 0,
+   "margin": -6,
+   "source_url": "https://www.nba.com/game/phi-vs-nyk-0022600002"
+  },
+  {
+   "game_id": "0022600001",
+   "date": "2026-10-20",
+   "home": "DET",
+   "away": "BOS",
+   "p_home": 0.5443,
+   "home_win": 1,
+   "margin": 8,
+   "source_url": "https://www.nba.com/game/bos-vs-det-0022600001"
+  },
+  {
+   "game_id": "0022600086",
+   "date": "2026-10-21",
+   "home": "WAS",
+   "away": "MIL",
+   "p_home": 0.5044,
+   "home_win": 1,
+   "margin": 12,
+   "source_url": "https://www.nba.com/game/mil-vs-was-0022600086"
+  },
+  {
+   "game_id": "0022600087",
+   "date": "2026-10-21",
+   "home": "BKN",
+   "away": "CHA",
+   "p_home": 0.4854,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/cha-vs-bkn-0022600087"
+  },
+  {
+   "game_id": "0022600088",
+   "date": "2026-10-21",
+   "home": "TOR",
+   "away": "CHI",
+   "p_home": 0.5672,
+   "home_win": 1,
+   "margin": 43,
+   "source_url": "https://www.nba.com/game/chi-vs-tor-0022600088"
+  },
+  {
+   "game_id": "0022600089",
+   "date": "2026-10-21",
+   "home": "MEM",
+   "away": "UTA",
+   "p_home": 0.5422,
+   "home_win": 1,
+   "margin": 20,
+   "source_url": "https://www.nba.com/game/uta-vs-mem-0022600089"
+  },
+  {
+   "game_id": "0022600093",
+   "date": "2026-10-21",
+   "home": "LAC",
+   "away": "SAC",
+   "p_home": 0.5775,
+   "home_win": 1,
+   "margin": 25,
+   "source_url": "https://www.nba.com/game/sac-vs-lac-0022600093"
+  },
+  {
+   "game_id": "0022600004",
+   "date": "2026-10-21",
+   "home": "MIA",
+   "away": "MIN",
+   "p_home": 0.5233,
+   "home_win": 0,
+   "margin": -25,
+   "source_url": "https://www.nba.com/game/min-vs-mia-0022600004"
+  },
+  {
+   "game_id": "0022600085",
+   "date": "2026-10-21",
+   "home": "ORL",
+   "away": "ATL",
+   "p_home": 0.5338,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/atl-vs-orl-0022600085"
+  },
+  {
+   "game_id": "0022600091",
+   "date": "2026-10-21",
+   "home": "HOU",
+   "away": "DAL",
+   "p_home": 0.5898,
+   "home_win": 1,
+   "margin": 18,
+   "source_url": "https://www.nba.com/game/dal-vs-hou-0022600091"
+  },
+  {
+   "game_id": "0022600005",
+   "date": "2026-10-21",
+   "home": "LAL",
+   "away": "GSW",
+   "p_home": 0.5692,
+   "home_win": 1,
+   "margin": 22,
+   "source_url": "https://www.nba.com/game/gsw-vs-lal-0022600005"
+  },
+  {
+   "game_id": "0022600090",
+   "date": "2026-10-21",
+   "home": "NOP",
+   "away": "IND",
+   "p_home": 0.5506,
+   "home_win": 0,
+   "margin": -3,
+   "source_url": "https://www.nba.com/game/ind-vs-nop-0022600090"
+  },
+  {
+   "game_id": "0022600092",
+   "date": "2026-10-21",
+   "home": "POR",
+   "away": "PHX",
+   "p_home": 0.5296,
+   "home_win": 1,
+   "margin": 41,
+   "source_url": "https://www.nba.com/game/phx-vs-por-0022600092"
+  },
+  {
+   "game_id": "0022600006",
+   "date": "2026-10-22",
+   "home": "PHI",
+   "away": "CLE",
+   "p_home": 0.5323,
+   "home_win": 1,
+   "margin": 8,
+   "source_url": "https://www.nba.com/game/cle-vs-phi-0022600006"
+  },
+  {
+   "game_id": "0022600007",
+   "date": "2026-10-22",
+   "home": "OKC",
+   "away": "DEN",
+   "p_home": 0.5707,
+   "home_win": 1,
+   "margin": 12,
+   "source_url": "https://www.nba.com/game/den-vs-okc-0022600007"
+  },
+  {
+   "game_id": "0022600097",
+   "date": "2026-10-23",
+   "home": "WAS",
+   "away": "TOR",
+   "p_home": 0.4711,
+   "home_win": 0,
+   "margin": -10,
+   "source_url": "https://www.nba.com/game/tor-vs-was-0022600097"
+  },
+  {
+   "game_id": "0022600094",
+   "date": "2026-10-23",
+   "home": "CHA",
+   "away": "ATL",
+   "p_home": 0.5307,
+   "home_win": 0,
+   "margin": -47,
+   "source_url": "https://www.nba.com/game/atl-vs-cha-0022600094"
+  },
+  {
+   "game_id": "0022600096",
+   "date": "2026-10-23",
+   "home": "ORL",
+   "away": "MIN",
+   "p_home": 0.4983,
+   "home_win": 0,
+   "margin": -22,
+   "source_url": "https://www.nba.com/game/min-vs-orl-0022600096"
+  },
+  {
+   "game_id": "0022600095",
+   "date": "2026-10-23",
+   "home": "IND",
+   "away": "DAL",
+   "p_home": 0.5416,
+   "home_win": 0,
+   "margin": -16,
+   "source_url": "https://www.nba.com/game/dal-vs-ind-0022600095"
+  },
+  {
+   "game_id": "0022600098",
+   "date": "2026-10-23",
+   "home": "MIA",
+   "away": "DET",
+   "p_home": 0.4721,
+   "home_win": 0,
+   "margin": -17,
+   "source_url": "https://www.nba.com/game/det-vs-mia-0022600098"
+  },
+  {
+   "game_id": "0022600100",
+   "date": "2026-10-23",
+   "home": "UTA",
+   "away": "NOP",
+   "p_home": 0.521,
+   "home_win": 1,
+   "margin": 1,
+   "source_url": "https://www.nba.com/game/nop-vs-uta-0022600100"
+  },
+  {
+   "game_id": "0022600101",
+   "date": "2026-10-23",
+   "home": "GSW",
+   "away": "MEM",
+   "p_home": 0.5327,
+   "home_win": 0,
+   "margin": -3,
+   "source_url": "https://www.nba.com/game/mem-vs-gsw-0022600101"
+  },
+  {
+   "game_id": "0022600103",
+   "date": "2026-10-23",
+   "home": "SAC",
+   "away": "POR",
+   "p_home": 0.4614,
+   "home_win": 0,
+   "margin": -8,
+   "source_url": "https://www.nba.com/game/por-vs-sac-0022600103"
+  },
+  {
+   "game_id": "0022600008",
+   "date": "2026-10-23",
+   "home": "BOS",
+   "away": "NYK",
+   "p_home": 0.543,
+   "home_win": 1,
+   "margin": 4,
+   "source_url": "https://www.nba.com/game/nyk-vs-bos-0022600008"
+  },
+  {
+   "game_id": "0022600009",
+   "date": "2026-10-23",
+   "home": "SAS",
+   "away": "HOU",
+   "p_home": 0.5303,
+   "home_win": 0,
+   "margin": -4,
+   "source_url": "https://www.nba.com/game/hou-vs-sas-0022600009"
+  },
+  {
+   "game_id": "0022600102",
+   "date": "2026-10-23",
+   "home": "LAL",
+   "away": "LAC",
+   "p_home": 0.5586,
+   "home_win": 1,
+   "margin": 8,
+   "source_url": "https://www.nba.com/game/lac-vs-lal-0022600102"
+  },
+  {
+   "game_id": "0022600099",
+   "date": "2026-10-23",
+   "home": "MIL",
+   "away": "CHI",
+   "p_home": 0.5418,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/chi-vs-mil-0022600099"
+  },
+  {
+   "game_id": "0022600105",
+   "date": "2026-10-24",
+   "home": "CLE",
+   "away": "BKN",
+   "p_home": 0.6017,
+   "home_win": 1,
+   "margin": 4,
+   "source_url": "https://www.nba.com/game/bkn-vs-cle-0022600105"
+  },
+  {
+   "game_id": "0022600108",
+   "date": "2026-10-24",
+   "home": "CHI",
+   "away": "WAS",
+   "p_home": 0.5584,
+   "home_win": 0,
+   "margin": -4,
+   "source_url": "https://www.nba.com/game/was-vs-chi-0022600108"
+  },
+  {
+   "game_id": "0022600104",
+   "date": "2026-10-24",
+   "home": "CHA",
+   "away": "MIA",
+   "p_home": 0.5588,
+   "home_win": 1,
+   "margin": 5,
+   "source_url": "https://www.nba.com/game/mia-vs-cha-0022600104"
+  },
+  {
+   "game_id": "0022600106",
+   "date": "2026-10-24",
+   "home": "PHI",
+   "away": "MIL",
+   "p_home": 0.6083,
+   "home_win": 1,
+   "margin": 11,
+   "source_url": "https://www.nba.com/game/mil-vs-phi-0022600106"
+  },
+  {
+   "game_id": "0022600109",
+   "date": "2026-10-24",
+   "home": "DAL",
+   "away": "SAS",
+   "p_home": 0.4866,
+   "home_win": 0,
+   "margin": -16,
+   "source_url": "https://www.nba.com/game/sas-vs-dal-0022600109"
+  },
+  {
+   "game_id": "0022600107",
+   "date": "2026-10-24",
+   "home": "ATL",
+   "away": "HOU",
+   "p_home": 0.5347,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/hou-vs-atl-0022600107"
+  },
+  {
+   "game_id": "0022600110",
+   "date": "2026-10-24",
+   "home": "DEN",
+   "away": "NOP",
+   "p_home": 0.5938,
+   "home_win": 1,
+   "margin": 6,
+   "source_url": "https://www.nba.com/game/nop-vs-den-0022600110"
+  },
+  {
+   "game_id": "0022600111",
+   "date": "2026-10-24",
+   "home": "PHX",
+   "away": "GSW",
+   "p_home": 0.556,
+   "home_win": 1,
+   "margin": 9,
+   "source_url": "https://www.nba.com/game/gsw-vs-phx-0022600111"
+  },
+  {
+   "game_id": "0022600113",
+   "date": "2026-10-25",
+   "home": "BKN",
+   "away": "IND",
+   "p_home": 0.5289,
+   "home_win": 0,
+   "margin": -27,
+   "source_url": "https://www.nba.com/game/ind-vs-bkn-0022600113"
+  },
+  {
+   "game_id": "0022600115",
+   "date": "2026-10-25",
+   "home": "MIN",
+   "away": "TOR",
+   "p_home": 0.5473,
+   "home_win": 1,
+   "margin": 23,
+   "source_url": "https://www.nba.com/game/tor-vs-min-0022600115"
+  },
+  {
+   "game_id": "0022600117",
+   "date": "2026-10-25",
+   "home": "PHI",
+   "away": "DET",
+   "p_home": 0.5118,
+   "home_win": 0,
+   "margin": -13,
+   "source_url": "https://www.nba.com/game/det-vs-phi-0022600117"
+  },
+  {
+   "game_id": "0022600112",
+   "date": "2026-10-25",
+   "home": "UTA",
+   "away": "LAL",
+   "p_home": 0.4359,
+   "home_win": 0,
+   "margin": -9,
+   "source_url": "https://www.nba.com/game/lal-vs-uta-0022600112"
+  },
+  {
+   "game_id": "0022600116",
+   "date": "2026-10-25",
+   "home": "OKC",
+   "away": "LAC",
+   "p_home": 0.6022,
+   "home_win": 1,
+   "margin": 7,
+   "source_url": "https://www.nba.com/game/lac-vs-okc-0022600116"
+  },
+  {
+   "game_id": "0022600114",
+   "date": "2026-10-25",
+   "home": "NYK",
+   "away": "ORL",
+   "p_home": 0.5615,
+   "home_win": 0,
+   "margin": -9,
+   "source_url": "https://www.nba.com/game/orl-vs-nyk-0022600114"
+  },
+  {
+   "game_id": "0022600118",
+   "date": "2026-10-25",
+   "home": "SAC",
+   "away": "MEM",
+   "p_home": 0.4827,
+   "home_win": 0,
+   "margin": -11,
+   "source_url": "https://www.nba.com/game/mem-vs-sac-0022600118"
+  },
+  {
+   "game_id": "0022600119",
+   "date": "2026-10-26",
+   "home": "CHA",
+   "away": "WAS",
+   "p_home": 0.5787,
+   "home_win": 1,
+   "margin": 7,
+   "source_url": "https://www.nba.com/game/was-vs-cha-0022600119"
+  },
+  {
+   "game_id": "0022600123",
+   "date": "2026-10-26",
+   "home": "MIL",
+   "away": "IND",
+   "p_home": 0.5181,
+   "home_win": 1,
+   "margin": 8,
+   "source_url": "https://www.nba.com/game/ind-vs-mil-0022600123"
+  },
+  {
+   "game_id": "0022600126",
+   "date": "2026-10-26",
+   "home": "UTA",
+   "away": "MEM",
+   "p_home": 0.4737,
+   "home_win": 0,
+   "margin": -5,
+   "source_url": "https://www.nba.com/game/mem-vs-uta-0022600126"
+  },
+  {
+   "game_id": "0022600120",
+   "date": "2026-10-26",
+   "home": "CLE",
+   "away": "MIN",
+   "p_home": 0.4894,
+   "home_win": 1,
+   "margin": 2,
+   "source_url": "https://www.nba.com/game/min-vs-cle-0022600120"
+  },
+  {
+   "game_id": "0022600122",
+   "date": "2026-10-26",
+   "home": "MIA",
+   "away": "DAL",
+   "p_home": 0.5425,
+   "home_win": 0,
+   "margin": -4,
+   "source_url": "https://www.nba.com/game/dal-vs-mia-0022600122"
+  },
+  {
+   "game_id": "0022600121",
+   "date": "2026-10-26",
+   "home": "BOS",
+   "away": "CHI",
+   "p_home": 0.5992,
+   "home_win": 1,
+   "margin": 35,
+   "source_url": "https://www.nba.com/game/chi-vs-bos-0022600121"
+  },
+  {
+   "game_id": "0022600124",
+   "date": "2026-10-26",
+   "home": "OKC",
+   "away": "PHX",
+   "p_home": 0.6157,
+   "home_win": 1,
+   "margin": 11,
+   "source_url": "https://www.nba.com/game/phx-vs-okc-0022600124"
+  },
+  {
+   "game_id": "0022600125",
+   "date": "2026-10-26",
+   "home": "HOU",
+   "away": "ATL",
+   "p_home": 0.56,
+   "home_win": 1,
+   "margin": 10,
+   "source_url": "https://www.nba.com/game/atl-vs-hou-0022600125"
+  },
+  {
+   "game_id": "0022600127",
+   "date": "2026-10-26",
+   "home": "DEN",
+   "away": "GSW",
+   "p_home": 0.5995,
+   "home_win": 0,
+   "margin": -20,
+   "source_url": "https://www.nba.com/game/gsw-vs-den-0022600127"
+  },
+  {
+   "game_id": "0022600128",
+   "date": "2026-10-27",
+   "home": "BOS",
+   "away": "BKN",
+   "p_home": 0.6542,
+   "home_win": 1,
+   "margin": 1,
+   "source_url": "https://www.nba.com/game/bkn-vs-bos-0022600128"
+  },
+  {
+   "game_id": "0022600131",
+   "date": "2026-10-27",
+   "home": "LAL",
+   "away": "POR",
+   "p_home": 0.5645,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/por-vs-lal-0022600131"
+  },
+  {
+   "game_id": "0022600129",
+   "date": "2026-10-27",
+   "home": "NYK",
+   "away": "DET",
+   "p_home": 0.4506,
+   "home_win": 1,
+   "margin": 14,
+   "source_url": "https://www.nba.com/game/det-vs-nyk-0022600129"
+  },
+  {
+   "game_id": "0022600130",
+   "date": "2026-10-27",
+   "home": "SAS",
+   "away": "SAC",
+   "p_home": 0.6445,
+   "home_win": 1,
+   "margin": 27,
+   "source_url": "https://www.nba.com/game/sac-vs-sas-0022600130"
+  },
+  {
+   "game_id": "0022600134",
+   "date": "2026-10-28",
+   "home": "DET",
+   "away": "CHA",
+   "p_home": 0.5855,
+   "home_win": 1,
+   "margin": 8,
+   "source_url": "https://www.nba.com/game/cha-vs-det-0022600134"
+  },
+  {
+   "game_id": "0022600133",
+   "date": "2026-10-28",
+   "home": "CLE",
+   "away": "WAS",
+   "p_home": 0.6081,
+   "home_win": 1,
+   "margin": 10,
+   "source_url": "https://www.nba.com/game/was-vs-cle-0022600133"
+  },
+  {
+   "game_id": "0022600136",
+   "date": "2026-10-28",
+   "home": "TOR",
+   "away": "ORL",
+   "p_home": 0.5658,
+   "home_win": 1,
+   "margin": 30,
+   "source_url": "https://www.nba.com/game/orl-vs-tor-0022600136"
+  },
+  {
+   "game_id": "0022600138",
+   "date": "2026-10-28",
+   "home": "MIL",
+   "away": "HOU",
+   "p_home": 0.4265,
+   "home_win": 0,
+   "margin": -32,
+   "source_url": "https://www.nba.com/game/hou-vs-mil-0022600138"
+  },
+  {
+   "game_id": "0022600141",
+   "date": "2026-10-28",
+   "home": "UTA",
+   "away": "SAS",
+   "p_home": 0.4186,
+   "home_win": 0,
+   "margin": -6,
+   "source_url": "https://www.nba.com/game/sas-vs-uta-0022600141"
+  },
+  {
+   "game_id": "0022600142",
+   "date": "2026-10-28",
+   "home": "DAL",
+   "away": "OKC",
+   "p_home": 0.411,
+   "home_win": 1,
+   "margin": 24,
+   "source_url": "https://www.nba.com/game/okc-vs-dal-0022600142"
+  },
+  {
+   "game_id": "0022600140",
+   "date": "2026-10-28",
+   "home": "NOP",
+   "away": "DEN",
+   "p_home": 0.4796,
+   "home_win": 0,
+   "margin": -13,
+   "source_url": "https://www.nba.com/game/den-vs-nop-0022600140"
+  },
+  {
+   "game_id": "0022600139",
+   "date": "2026-10-28",
+   "home": "MIN",
+   "away": "GSW",
+   "p_home": 0.6155,
+   "home_win": 0,
+   "margin": -5,
+   "source_url": "https://www.nba.com/game/gsw-vs-min-0022600139"
+  },
+  {
+   "game_id": "0022600135",
+   "date": "2026-10-28",
+   "home": "IND",
+   "away": "PHI",
+   "p_home": 0.4627,
+   "home_win": 0,
+   "margin": -5,
+   "source_url": "https://www.nba.com/game/phi-vs-ind-0022600135"
+  },
+  {
+   "game_id": "0022600132",
+   "date": "2026-10-28",
+   "home": "ATL",
+   "away": "MIA",
+   "p_home": 0.6004,
+   "home_win": 0,
+   "margin": -12,
+   "source_url": "https://www.nba.com/game/mia-vs-atl-0022600132"
+  },
+  {
+   "game_id": "0022600137",
+   "date": "2026-10-28",
+   "home": "CHI",
+   "away": "NYK",
+   "p_home": 0.4769,
+   "home_win": 0,
+   "margin": -6,
+   "source_url": "https://www.nba.com/game/nyk-vs-chi-0022600137"
+  },
+  {
+   "game_id": "0022600143",
+   "date": "2026-10-28",
+   "home": "LAC",
+   "away": "LAL",
+   "p_home": 0.4861,
+   "home_win": 0,
+   "margin": -16,
+   "source_url": "https://www.nba.com/game/lal-vs-lac-0022600143"
+  },
+  {
+   "game_id": "0022600144",
+   "date": "2026-10-29",
+   "home": "ATL",
+   "away": "CLE",
+   "p_home": 0.5061,
+   "home_win": 1,
+   "margin": 3,
+   "source_url": "https://www.nba.com/game/cle-vs-atl-0022600144"
+  },
+  {
+   "game_id": "0022600146",
+   "date": "2026-10-29",
+   "home": "POR",
+   "away": "MEM",
+   "p_home": 0.5689,
+   "home_win": 0,
+   "margin": -21,
+   "source_url": "https://www.nba.com/game/mem-vs-por-0022600146"
+  },
+  {
+   "game_id": "0022600145",
+   "date": "2026-10-29",
+   "home": "NOP",
+   "away": "SAC",
+   "p_home": 0.5609,
+   "home_win": 1,
+   "margin": 12,
+   "source_url": "https://www.nba.com/game/sac-vs-nop-0022600145"
+  },
+  {
+   "game_id": "0022600017",
+   "date": "2026-10-30",
+   "home": "BKN",
+   "away": "DET",
+   "p_home": 0.3834,
+   "home_win": 0,
+   "margin": -16,
+   "source_url": "https://www.nba.com/game/det-vs-bkn-0022600017"
+  },
+  {
+   "game_id": "0022600019",
+   "date": "2026-10-30",
+   "home": "TOR",
+   "away": "ORL",
+   "p_home": 0.596,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/orl-vs-tor-0022600019"
+  },
+  {
+   "game_id": "0022600020",
+   "date": "2026-10-30",
+   "home": "MIA",
+   "away": "IND",
+   "p_home": 0.5624,
+   "home_win": 1,
+   "margin": 20,
+   "source_url": "https://www.nba.com/game/ind-vs-mia-0022600020"
+  },
+  {
+   "game_id": "0022600022",
+   "date": "2026-10-30",
+   "home": "MIN",
+   "away": "LAC",
+   "p_home": 0.5996,
+   "home_win": 1,
+   "margin": 26,
+   "source_url": "https://www.nba.com/game/lac-vs-min-0022600022"
+  },
+  {
+   "game_id": "0022600018",
+   "date": "2026-10-30",
+   "home": "PHI",
+   "away": "NYK",
+   "p_home": 0.5526,
+   "home_win": 1,
+   "margin": 5,
+   "source_url": "https://www.nba.com/game/nyk-vs-phi-0022600018"
+  },
+  {
+   "game_id": "0022600015",
+   "date": "2026-10-30",
+   "home": "WAS",
+   "away": "CHA",
+   "p_home": 0.4741,
+   "home_win": 1,
+   "margin": 16,
+   "source_url": "https://www.nba.com/game/cha-vs-was-0022600015"
+  },
+  {
+   "game_id": "0022600016",
+   "date": "2026-10-30",
+   "home": "BOS",
+   "away": "CHI",
+   "p_home": 0.6387,
+   "home_win": 1,
+   "margin": 14,
+   "source_url": "https://www.nba.com/game/chi-vs-bos-0022600016"
+  },
+  {
+   "game_id": "0022600021",
+   "date": "2026-10-30",
+   "home": "DAL",
+   "away": "HOU",
+   "p_home": 0.44,
+   "home_win": 1,
+   "margin": 5,
+   "source_url": "https://www.nba.com/game/hou-vs-dal-0022600021"
+  },
+  {
+   "game_id": "0022600023",
+   "date": "2026-10-30",
+   "home": "GSW",
+   "away": "LAL",
+   "p_home": 0.4638,
+   "home_win": 1,
+   "margin": 17,
+   "source_url": "https://www.nba.com/game/lal-vs-gsw-0022600023"
+  },
+  {
+   "game_id": "0022600024",
+   "date": "2026-10-30",
+   "home": "PHX",
+   "away": "DEN",
+   "p_home": 0.5085,
+   "home_win": 0,
+   "margin": -7,
+   "source_url": "https://www.nba.com/game/den-vs-phx-0022600024"
+  },
+  {
+   "game_id": "0022600149",
+   "date": "2026-10-31",
+   "home": "NOP",
+   "away": "ATL",
+   "p_home": 0.4714,
+   "home_win": 1,
+   "margin": 22,
+   "source_url": "https://www.nba.com/game/atl-vs-nop-0022600149"
+  },
+  {
+   "game_id": "0022600151",
+   "date": "2026-10-31",
+   "home": "MIL",
+   "away": "CLE",
+   "p_home": 0.4501,
+   "home_win": 0,
+   "margin": -25,
+   "source_url": "https://www.nba.com/game/cle-vs-mil-0022600151"
+  },
+  {
+   "game_id": "0022600148",
+   "date": "2026-10-31",
+   "home": "CHA",
+   "away": "PHI",
+   "p_home": 0.4806,
+   "home_win": 0,
+   "margin": -5,
+   "source_url": "https://www.nba.com/game/phi-vs-cha-0022600148"
+  },
+  {
+   "game_id": "0022600150",
+   "date": "2026-10-31",
+   "home": "MEM",
+   "away": "SAC",
+   "p_home": 0.6594,
+   "home_win": 1,
+   "margin": 31,
+   "source_url": "https://www.nba.com/game/sac-vs-mem-0022600150"
+  },
+  {
+   "game_id": "0022600152",
+   "date": "2026-10-31",
+   "home": "SAS",
+   "away": "MIN",
+   "p_home": 0.5301,
+   "home_win": 1,
+   "margin": 10,
+   "source_url": "https://www.nba.com/game/min-vs-sas-0022600152"
+  },
+  {
+   "game_id": "0022600153",
+   "date": "2026-10-31",
+   "home": "HOU",
+   "away": "OKC",
+   "p_home": 0.5352,
+   "home_win": 1,
+   "margin": 21,
+   "source_url": "https://www.nba.com/game/okc-vs-hou-0022600153"
+  },
+  {
+   "game_id": "0022600147",
+   "date": "2026-10-31",
+   "home": "UTA",
+   "away": "POR",
+   "p_home": 0.4329,
+   "home_win": 0,
+   "margin": -22,
+   "source_url": "https://www.nba.com/game/por-vs-uta-0022600147"
+  },
+  {
+   "game_id": "0022600154",
+   "date": "2026-11-01",
+   "home": "ORL",
+   "away": "BOS",
+   "p_home": 0.4711,
+   "home_win": 0,
+   "margin": -11,
+   "source_url": "https://www.nba.com/game/bos-vs-orl-0022600154"
+  },
+  {
+   "game_id": "0022600157",
+   "date": "2026-11-01",
+   "home": "LAL",
+   "away": "TOR",
+   "p_home": 0.5546,
+   "home_win": 1,
+   "margin": 6,
+   "source_url": "https://www.nba.com/game/tor-vs-lal-0022600157"
+  },
+  {
+   "game_id": "0022600156",
+   "date": "2026-11-01",
+   "home": "GSW",
+   "away": "LAC",
+   "p_home": 0.5715,
+   "home_win": 1,
+   "margin": 12,
+   "source_url": "https://www.nba.com/game/lac-vs-gsw-0022600156"
+  },
+  {
+   "game_id": "0022600155",
+   "date": "2026-11-01",
+   "home": "IND",
+   "away": "BKN",
+   "p_home": 0.5596,
+   "home_win": 0,
+   "margin": -8,
+   "source_url": "https://www.nba.com/game/bkn-vs-ind-0022600155"
+  }
+ ]
+}
