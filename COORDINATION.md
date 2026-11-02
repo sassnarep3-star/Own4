@@ -481,7 +481,7 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 | CI on main | validate run 41509440796 — success |
 | GitHub Pages | pages build and deployment run 41509438935 — success (2026-11-02) |
 | Live section | https://sassnarep3-star.github.io/Own4/pipeline/ (dashboard + 8 subpages; flagged page verified live with cache-bust) |
-| Record PR | follow-up PR carries this record to `main` (see log entry below) |
+| Record PR | PR #19 (this record): MERGED 2026-11-02T19:26:09Z, commit `8d89e1dd` — https://github.com/sassnarep3-star/Own4/pull/19 (CI on #19: run 41509818962 success) |
 
 ### Irregularities (published at `pipeline/flagged.html`; none block merge)
 - **Q1** No official NBA source publishes betting lines/odds → all market cells blank by policy (permanent).
