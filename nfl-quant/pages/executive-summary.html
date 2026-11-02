@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Summary · NFL Quant Lab</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body><div class="layout"><aside>
+<a class="brand" href="../index.html">🏈 NFL Quant Lab<span>Own4 · line origination research</span></a>
+<div class="navgroup">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav active" href="executive-summary.html">Executive Summary</a><div class="navgroup">Data &amp; Lines</div><a class="nav" href="data-sources.html">Data & Sources</a><a class="nav" href="own-lines.html">Originated Lines · Wk 9</a><a class="nav" href="correlations.html">Correlations</a><div class="navgroup">Strategies</div><a class="nav" href="singles.html">Single Bets</a><a class="nav" href="parlays.html">Parlays & SGP</a><a class="nav" href="props.html">Player Props</a><a class="nav" href="validation.html">Validation & Luck</a><a class="nav" href="leaderboard.html">Leaderboard & Rewards</a><div class="navgroup">Governance</div><a class="nav" href="sources.html">Official Source Register</a><a class="nav" href="audit.html">Repo Audit</a><a class="nav" href="flagged.html">⚑ Flagged for Review</a>
+</aside><main>
+<div class="topbar"><div class="crumb">Overview / Executive Summary</div><div class="stamp">Data snapshot 2026-11-02 UTC · GitHub Pages</div></div>
+<h1>Executive Summary</h1>
+
+<p class="lede">Session arena-e513f51b-own4 · 2026-11-02 · full method in <a href="validation.html">Validation</a>, data in <a href="data-sources.html">Data & Sources</a>.</p>
+<h2>What was built</h2>
+<div class="panel"><p>A complete, reproducible NFL line-origination and strategy-validation pipeline: 7,548 archived games
+(1999–2026), a walk-forward ridge ratings engine, 5 registered betting strategies + 3 research-only constructions,
+8 pre-registered validation gates, a 16-estimate correlation study, and a 15-game Week 9 own-line slate.
+Everything runs from cited, checksummed archives; 15/15 integrity checks and 13/13 official NFL.com score checks pass.</p></div>
+<h2>Headline results (computed; vs archived closing lines — third-party, not official)</h2>
+<div class="tw"><table><caption>Key findings</caption><thead><tr><th>Finding</th><th>Value</th><th>Type</th><th>Source</th></tr></thead><tbody><tr><td>Model forecast skill vs naive baseline (holdout MAE)</td><td>10.326 vs 11.11 pts — model wins</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/forecast_skill.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Model vs efficient closing market (holdout MAE)</td><td>10.326 vs 9.871 pts — market wins</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/forecast_skill.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Best single strategy S1 (spread divergence ≥1.5)</td><td>1,599 bets, ROI 0.26%, 95% CI [-4.40%, 4.84%] → Bronze (luck)</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/strategy_results.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Cross-game 2-leg parlays S4</td><td>7,635 bets, ROI 0.03% → Bronze (luck)</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/strategy_results.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Strategies passing all gates / rewards awarded</td><td>0 / 0 of 1,000 points</td><td><span class="badge warn">FINDING</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/leaderboard.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>QB1 passing ↔ WR1 receiving correlation (2021–22)</td><td>r = 0.667 [0.631, 0.700]</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/correlations.csv" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>QB-over + WR1-over same-game combo lift</td><td>1.45× the independent product [1.36, 1.55]</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/props_summary.json" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Favorite-cover vs over dependence</td><td>φ ≈ −0.002 (1999–2025) — essentially independent</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/correlations.csv" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr><tr><td>Current home-field advantage (2026 estimate)</td><td>1.12 pts (was ~3 pts historically)</td><td><span class="badge derived">DERIVED</span></td><td><span class="badge derived">DERIVED</span> <a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/hfa_by_season.csv" target="_blank" rel="noopener">data/code ↗</a> <a class="src" href="flagged.html#QF-02">unverified-official</a></td></tr></tbody></table></div>
+<h2>How luck is removed</h2>
+<div class="panel"><ul>
+<li>Chronological dev (1999–2012) / validation (2013–2016) / holdout (2017–2025) split; hyperparameters and thresholds frozen before the holdout is evaluated once.</li>
+<li>Look-ahead perturbation test passes: permuting future results leaves same-date predictions identical.</li>
+<li>Week-clustered bootstrap 95% CIs; matched-random permutation p-values; Holm correction across the 5-strategy primary family.</li>
+<li>500 random-placebo strategies: mean ROI -2.99% (the vig), 8.0% still show positive ROI by chance — exactly why the gates exist.</li>
+<li>Season-stability and single-season-profit-concentration checks; forward replication (G8) still pending.</li>
+</ul></div>
+<h2>What this does NOT show</h2>
+<div class="panel warn"><ul>
+<li>No strategy beats a sportsbook at closing lines. Edges were tested only against the transparent archived market.</li>
+<li>Player-prop results use a rolling-mean <em>proxy</em> market (2021–22), not real prop prices — Gate G7 fails by design.</li>
+<li>2026 player props are blocked (no authorized 2026 player feed). All market lines are third-party archive values.</li>
+<li>Correlations and backtest metrics are computed, not official; data licensing needs review before production.</li>
+</ul></div>
+<h2>Next steps (no manual input required to reproduce)</h2>
+<div class="panel"><ol>
+<li>Re-run <code>python3 nfl-quant/pipeline/01_provenance.py … 07_verify_publish.py</code> then <code>python3 nfl-quant/site/build_site.py</code>.</li>
+<li>Log timestamped 2026 own-line predictions weekly to satisfy G8 forward replication.</li>
+<li>Acquire licensed/official historical lines + 2026 player data; re-test prop combos against real SGP prices.</li>
+</ol></div>
+
+<footer>NFL Quant Lab — analytical research only, <strong>not wagering advice</strong>. Every table row links to a source;
+values with no official source are labeled DERIVED / 3RD-PARTY and flagged on the
+<a href="flagged.html">⚑ Flagged for Review</a> page.
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG ↗</a></footer>
+</main></div></body></html>

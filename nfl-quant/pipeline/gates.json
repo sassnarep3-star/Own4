@@ -1,0 +1,46 @@
+{
+  "pre_registered": "2026-11-02T21:05:00Z",
+  "pre_registered_before_backtest": true,
+  "note": "This file is committed BEFORE any holdout backtest is run. Thresholds marked 'tuned_on_dev' are selected on dev/validation seasons only and frozen before the holdout is evaluated once. Project-defined thresholds are not official NFL values and are labeled as such on the site.",
+  "splits": {
+    "dev": {"seasons": [1999, 2012], "purpose": "hyperparameter tuning (decay, ridge)"},
+    "validation": {"seasons": [2013, 2016], "purpose": "strategy threshold selection, min 100 bets"},
+    "holdout": {"seasons": [2017, 2025], "purpose": "evaluated exactly once, frozen config"},
+    "live_paper": {"seasons": [2026], "purpose": "prospective timestamped own-line log (forward validation)"}
+  },
+  "gates": [
+    {"id": "G1", "name": "Provenance & integrity", "rule": "All inputs carry source URL + commit SHA + sha256; integrity checks pass (no duplicate game_id, scores consistent with result/total fields, chronological order)."},
+    {"id": "G2", "name": "Minimum sample", "rule": ">= 300 settled holdout bets spanning >= 3 seasons. Project-defined threshold."},
+    {"id": "G3", "name": "Positive net ROI", "rule": "Holdout ROI > 0 after vig using archived closing odds (default -110 per side when archive odds missing)."},
+    {"id": "G4", "name": "Luck removal / significance", "rule": "Week-clustered bootstrap 95% CI lower bound > 0 AND matched-random permutation p < 0.05 AND Holm-adjusted p < 0.05 across all registered holdout trials."},
+    {"id": "G5", "name": "Robustness", "rule": "Positive ROI in >= 60% of holdout seasons AND no single season contributes > 50% of total profit."},
+    {"id": "G6", "name": "No look-ahead", "rule": "Every feature uses only games strictly before kickoff week; perturbation test (altering future results) leaves predictions unchanged."},
+    {"id": "G7", "name": "Pricing realism", "rule": "Bets priced at archived closing lines/odds only. Parlay payout uses a verified sportsbook rule or a stated assumption flagged as unverified. Proxy markets (e.g., rolling-mean prop lines) FAIL G7 by construction."},
+    {"id": "G8", "name": "Forward replication", "rule": "Prospective timestamped predictions logged for >= 1 full season and re-tested. Not yet satisfiable in this session; no strategy can be final-Gold until G8 passes."}
+  ],
+  "tiers": {
+    "Gold (provisional)": "G1-G7 all pass (G8 pending forward replication)",
+    "Silver": "G1-G3 pass, raw significance passes but Holm or robustness fails",
+    "Bronze": "G1-G3 pass, significance fails (edge indistinguishable from luck)",
+    "Research-only": "G7 fails (proxy market or unverified pricing) regardless of ROI",
+    "Rejected": "G3 fails (no positive net edge) or G1/G6 fails",
+    "Blocked": "Required official/archived input unavailable; value left blank and flagged"
+  },
+  "rewards": {
+    "type": "non-monetary research points only; no money, no prizes funded",
+    "pool": 1000,
+    "allocation": "Split equally among strategies reaching Gold (provisional). If none pass, 0 points awarded and pool rolls over. Silver/Bronze earn leaderboard recognition only."
+  },
+  "strategies_registered": [
+    {"id": "S1", "family": "single-spread", "rule": "Bet the side whose model margin disagrees with archived closing spread by >= theta points. theta tuned on validation from {1.5, 2.5, 3.5}."},
+    {"id": "S2", "family": "single-total", "rule": "Bet over/under when model total disagrees with archived closing total by >= theta points. theta tuned on validation from {2.0, 3.0, 4.0}."},
+    {"id": "S3", "family": "single-moneyline", "rule": "Bet ML when model win probability exceeds archived implied probability (vig-removed) by >= theta. theta tuned on validation from {0.03, 0.05, 0.07}."},
+    {"id": "S4", "family": "parlay-cross-game", "rule": "2-leg parlay of two S1 selections from different games in the same week; standard 2-team parlay payout (verified or flagged). All pairs per week."},
+    {"id": "S5", "family": "same-game-combo", "rule": "Favorite-cover + under / dog-cover + over joint probabilities vs product of marginals; fair-price monitor only. G7 fails unless official SGP prices archived (they are not)."},
+    {"id": "S6", "family": "prop-single", "rule": "Player yards over/under vs PROXY line = rolling 4-game mean (2021-2022 only). Research-only: G7 fails by construction."},
+    {"id": "S7", "family": "prop-combo", "rule": "Same-game QB passing yards + WR1 receiving yards joint over-probability vs independence; fair parlay multiplier from empirical joint. Research-only: G7 fails (no archived prop prices)."},
+    {"id": "C1", "family": "control", "rule": "Always bet home favorite ATS at closing line (control)."},
+    {"id": "C2", "family": "control", "rule": "Random-side ATS placebo, 500 draws (luck calibration)."}
+  ],
+  "forecast_skill_leaderboard": "Separate from betting ROI: model forecast accuracy (MAE, RMSE, Brier/log-loss) vs naive baselines and vs market-implied forecasts. Beating naive baselines demonstrates modeling skill even when no betting edge exists at efficient closing lines."
+}
