@@ -1,0 +1,44 @@
+name: Validate NFL evidence lab
+on:
+  push:
+    paths:
+      - 'nfl-lab/**'
+      - 'index.html'
+      - '.github/workflows/nfl-lab.yml'
+  pull_request:
+    paths:
+      - 'nfl-lab/**'
+      - 'index.html'
+      - '.github/workflows/nfl-lab.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: nfl-lab-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Export official snapshot
+        run: python nfl-lab/collect.py
+      - name: Run pre-registered models and gates
+        run: python nfl-lab/engine.py
+      - name: Inventory repository and source relevance
+        run: python nfl-lab/audit.py
+      - name: Build dashboard
+        run: python nfl-lab/build.py
+      - name: Unit and integration tests
+        run: python nfl-lab/tests.py
+      - name: Verify snapshot, sources and navigation
+        run: python nfl-lab/verify.py
+      - name: Rebuild with verification report and re-verify
+        run: |
+          python nfl-lab/build.py
+          python nfl-lab/verify.py
+      - name: Ensure generated lab outputs are committed
+        run: git diff --exit-code -- nfl-lab index.html

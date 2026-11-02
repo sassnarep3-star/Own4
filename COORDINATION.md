@@ -642,3 +642,12 @@ PR link and merge result: (recorded after merge below)
 - N03 executed under protocol v1.0.0 committed before evaluation: 314 chronological evaluation games / 21 season-weeks; four points models; six primary trials with whole-week bootstrap and sign-flip permutation tests plus Holm correction; cross-game parlay dependence; same-game Poisson joint pricing; descriptive player prop/combo lines. Future-score perturbation leaves every earlier prediction unchanged.
 - Pre-publication correctness fix: calibration gate now evaluates the relevant market (win-share, own-spread cover, own-total over), not win-share calibration for every market. Player sample/dependence gates are explicit fails where the sample is known to be insufficient. No parameters or thresholds were changed after viewing results.
 - Headline: M2 win-share Brier 0.23102 vs prior baseline 0.25406; M4 margin MAE 10.284 vs 10.726. No primary trial passes Holm at 0.05; no strategy passes all gates; market/prospective gates remain blocked. Zero eligible strategies and zero reward points. Official-only current research line for CHI at SEA is generated for all four models, with market odds/edge blank.
+
+### arena-22c1775e-own4 — final-integration cross-scope link repair
+
+- Combined published-dashboard link scan found three broken relative links in the already-merged `nfl/` specification module: `nfl/pages/flagged.html` pointed to `pages/leaderboard.html` and `nfl/pages/validation.html` pointed twice to `pages/correlations.html` from inside `nfl/pages/`. Repaired to sibling links `leaderboard.html` and `correlations.html`. No data, claims or other-session content changed. This is a final-integration navigation repair, logged per cross-scope protocol. Active PR #24 (`nfl-research/**`) was not touched.
+
+### arena-22c1775e-own4 — shared root summary/README integration
+
+- Replaced the canonical root `index.html`, `README.md` and `EXECUTIVE_SUMMARY.md` with the NFL evidence-lab landing/summary because the user's sport is NFL and the inherited root was NBA-only. Preserved complete prior copies at `nfl-lab/legacy/README_NBA.md` and `nfl-lab/legacy/EXECUTIVE_SUMMARY_NBA.md`; linked them from the repository-audit archive table. No prior session file was deleted. Active PR #24 (`nfl-research/**`) and PR #29 (coordination record) were not taken over.
+- Added `.github/workflows/nfl-lab.yml` to reproduce the official snapshot, models, audit, dashboard, tests and verification on PR/push. Legacy NBA validation suite also run locally and passes.

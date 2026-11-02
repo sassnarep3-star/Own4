@@ -1,0 +1,105 @@
+{
+  "pass": true,
+  "failed": [],
+  "checks": [
+    {
+      "name": "Snapshot hash manifest",
+      "status": "pass",
+      "detail": "7 files checked; mismatches: []",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG",
+      "required": true
+    },
+    {
+      "name": "Official row source coverage",
+      "status": "pass",
+      "detail": "392 games + 96 standings + 28 player rows have official NFL source URLs.",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "required": true
+    },
+    {
+      "name": "Source register",
+      "status": "pass",
+      "detail": "47 HTTPS source records.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/data/sources.json",
+      "required": true
+    },
+    {
+      "name": "Standings reconciliation",
+      "status": "pass",
+      "detail": "320/320 cells match official standings.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG",
+      "required": true
+    },
+    {
+      "name": "Future-outcome leakage",
+      "status": "pass",
+      "detail": "1516 earlier prediction rows unchanged after perturbing final-week scores.",
+      "source_url": "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html",
+      "required": true
+    },
+    {
+      "name": "Blank-policy enforcement",
+      "status": "pass",
+      "detail": "Market odds/edge and unverified cross-player correlation remain null/blank.",
+      "source_url": "https://www.nfl.com/games/bears-at-seahawks-2026-reg-8",
+      "required": true
+    },
+    {
+      "name": "Gate/reward consistency",
+      "status": "pass",
+      "detail": "No strategy is eligible unless every gate passes; zero rewards awarded.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/results/leaderboard.json",
+      "required": true
+    },
+    {
+      "name": "Generated table row sources",
+      "status": "pass",
+      "detail": "3020 generated data rows checked; 0 lack an allowed official/method/governance source link.",
+      "source_url": "https://github.com/sassnarep3-star/Own4",
+      "required": true
+    },
+    {
+      "name": "Internal navigation/assets",
+      "status": "pass",
+      "detail": "19 HTML files checked; 0 broken relative links/assets.",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "required": true
+    },
+    {
+      "name": "Accessibility basics",
+      "status": "pass",
+      "detail": "lang, skip link, scoped table headers and image alt checks.",
+      "source_url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "required": true
+    },
+    {
+      "name": "Combined published navigation",
+      "status": "pass",
+      "detail": "128 published HTML files checked; broken: none",
+      "source_url": "https://github.com/sassnarep3-star/Own4",
+      "required": true
+    },
+    {
+      "name": "Shared conflict markers",
+      "status": "pass",
+      "detail": "Marker scan: none",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "required": true
+    },
+    {
+      "name": "Repository inventory",
+      "status": "pass",
+      "detail": "501 files, 147228 text lines, 6153 HTML rows, 25270 CSV rows inventoried.",
+      "source_url": "https://github.com/sassnarep3-star/Own4",
+      "required": true
+    },
+    {
+      "name": "GitHub Pages deployment",
+      "status": "pending",
+      "detail": "Pre-merge verification complete; live deployment will be recorded after merge.",
+      "source_url": "https://api.github.com/repos/sassnarep3-star/Own4/pages",
+      "required": false
+    }
+  ],
+  "conclusion": "All required pre-merge checks pass. Deployment is pending until merge."
+}

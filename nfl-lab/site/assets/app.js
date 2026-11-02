@@ -1,0 +1,2 @@
+
+document.querySelectorAll('input[data-filter]').forEach(function(input){input.addEventListener('input',function(){var q=this.value.toLowerCase();var id=this.getAttribute('data-filter');var table=id?document.getElementById(id):this.closest('main').querySelector('table');if(!table)return;table.querySelectorAll('tbody tr').forEach(function(tr){tr.style.display=tr.textContent.toLowerCase().includes(q)?'':'none';});});});
