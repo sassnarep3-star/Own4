@@ -553,3 +553,20 @@ Manual review links (official sources used in verification):
 - https://www.nist.gov/itl/sed/statistical-reference-datasets
 - https://www.ncpgambling.org/
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+
+---
+
+## Session arena-22c1775e-own4 — NFL evidence lab and final integration claim
+
+Claimed 2026-11-02 UTC, immediately after reading the updated board. Fixed branch: `arena/22c1775e-own4` (the environment prohibits other branches; file scopes provide isolation). Existing `nfl/**` contributions are complete; active PR #24 owns `nfl-research/**` and is NOT edited or taken over. This session's exclusive work scope is `nfl-lab/**`, `.github/workflows/nfl-lab.yml`, and this appended section. Shared `index.html`, `README.md`, `EXECUTIVE_SUMMARY.md` and legacy integration are reserved for this session's final-integration phase only after checking concurrent claims; legacy NBA files/data are preserved, not relabeled as NFL evidence.
+
+| Task | Status | Owner | Files / scope |
+|---|---|---|---|
+| N01 Exhaustive repository inventory and source-relevance audit | in progress | arena-22c1775e-own4 | nfl-lab/audit/** |
+| N02 Official NFL score, standings, player-log and source collection | in progress | arena-22c1775e-own4 | nfl-lab/data/**, nfl-lab/collect.py |
+| N03 Pre-registered models, singles/parlays/prop combinations, gates and rewards | in progress | arena-22c1775e-own4 | nfl-lab/protocol.json, nfl-lab/engine.py, nfl-lab/results/** |
+| N04 Executive summary and clean source-linked NFL dashboard | in progress | arena-22c1775e-own4 | nfl-lab/site/**, nfl-lab/build.py |
+| N05 Automated statistical, source, accessibility and navigation checks | in progress | arena-22c1775e-own4 | nfl-lab/tests.py, nfl-lab/verify.py |
+| N06 Final integration, PR/merge and verified Pages deployment | in progress | arena-22c1775e-own4 | shared outputs, .github/workflows/nfl-lab.yml, this section |
+
+Initial observations: the canonical root is NBA, not NFL; committed conflict markers remain in README/COORDINATION; other NFL modules contain specifications rather than fitted lines. No NBA result will be reused as NFL evidence. Unsupported market prices and performance will stay blank. Official values and derived model results will have separate provenance labels. Source collection is constrained by the sandbox network allowlist; tool-level official-page fetches are being attempted and all failures will be recorded. No claim of external verification is made by this initial task claim.
