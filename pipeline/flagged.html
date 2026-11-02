@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flagged for Review · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html">Strategies & Leaderboard</a><a href="verification.html">Verification</a><a href="flagged.html" class="on">Flagged for Review</a><a href="sources.html">Sources</a></nav></header>
+<main>
+
+<h2>Flagged for Review</h2>
+<p>Unverified values, blocked comparisons, and irregularities found while building this
+pipeline. <strong>None of these blocks publication</strong> — they are published here for your review.</p>
+<table class="data"><thead><tr><th>ID</th><th>Severity</th><th>Title</th><th>Detail</th><th>Source</th><th>Status</th></tr></thead>
+<tbody><tr><td>Q1</td><td>policy</td><td>No official source for betting lines/odds exists</td><td>The NBA does not publish spreads, moneylines, totals or prop lines. Market columns in pipeline datasets are permanently blank by policy.</td><td><a href="https://www.nba.com/standings" rel="noopener">source</a></td><td>open-by-design</td></tr><tr><td>Q2</td><td>data-availability</td><td>NBA.com odds UI values not extractable from fetched pages</td><td>Schedule/game pages expose a Hide Odds toggle, but no odds values appear in the server HTML (0 occurrences of odds fields in games_*.html payloads). Not recorded.</td><td><a href="https://www.nba.com/games?date=2026-11-02" rel="noopener">source</a></td><td>open</td></tr><tr><td>Q3</td><td>source-access</td><td>cdn.nba.com 403 / stats.nba.com timeouts from datacenter clients</td><td>Recorded in data/manifest.json; pipeline falls back to www.nba.com HTML (canonical) and ESPN partner API for cross-check/player data.</td><td><a href="https://github.com/sassnarep3-star/Own4/actions" rel="noopener">source</a></td><td>documented</td></tr><tr><td>Q7</td><td>cross-check</td><td>Player stat verification: official NBA leader lines + full-box sample all matched ESPN</td><td>184/184 NBA-listed game-leader stat lines (PTS/REB/AST for the same named player) match ESPN boxes across 92 games; full-box sample: game 0022600002, 3/3 players (LeBron James 14/9/7, Joel Embiid 13/11/6, Jaylen Brown 19/8/6) matched the NBA official box-score page (https://www.nba.com/game/phi-vs-nyk-0022600002/box-score). Non-leader player rows remain partner-sourced only. Note: NBA &#x27;teamLeader&#x27; is not always the team&#x27;s top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ; stat values agree.</td><td><a href="https://www.nba.com/games?date=2026-10-21" rel="noopener">source</a></td><td>verified</td></tr></tbody></table>
+<p class="small">Repo-wide flags from other sessions live on the root site's flagged pages
+(<a href="../index.html">home</a> · <a href="../docs/review.html">docs review</a> ·
+<a href="../lab/pages/flagged.html">data lab</a>).</p>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>

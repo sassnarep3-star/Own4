@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Verification · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html">Strategies & Leaderboard</a><a href="verification.html" class="on">Verification</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav></header>
+<main>
+
+<h2>Verification</h2>
+<p>Line-by-line verification performed by <span class="mono">scripts/build_signals.py</span>
+(compute) and <span class="mono">scripts/audit_rows.py</span> (row/source audit).</p>
+<h3>Layer 1 — Standings reconciliation (300/300 cells)</h3>
+<p class="small">Every completed game was re-sorted chronologically and each team's
+W-L, win%, GB, CONF, HOME, ROAD, OT, LAST10, STREAK recomputed, then compared cell-by-cell
+to the official table. Checked at 2026-11-02T19:10:54.163807+00:00. DIV not recomputed (division
+membership out of pipeline scope — noted, not inferred).</p>
+<table class="data"><thead><tr><th>Team</th><th>Conf</th><th>Cells matched</th><th>Result</th><th>Source</th></tr></thead>
+<tbody><tr><td>Philadelphia 76ers</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Detroit Pistons</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Boston Celtics</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Cleveland Cavaliers</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Toronto Raptors</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Washington Wizards</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Atlanta Hawks</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Charlotte Hornets</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Orlando Magic</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>New York Knicks</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Miami Heat</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Indiana Pacers</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Chicago Bulls</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Milwaukee Bucks</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Brooklyn Nets</td><td>East</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Memphis Grizzlies</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Houston Rockets</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Portland Trail Blazers</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Los Angeles Lakers</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Oklahoma City Thunder</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>San Antonio Spurs</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Dallas Mavericks</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Denver Nuggets</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Golden State Warriors</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Minnesota Timberwolves</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>New Orleans Pelicans</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Phoenix Suns</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>LA Clippers</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Utah Jazz</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr><tr><td>Sacramento Kings</td><td>West</td><td>10/10</td><td><span class="ok">all match</span></td><td><a href="https://www.nba.com/standings" rel="noopener">official table</a></td></tr></tbody></table>
+<h3>Layer 2 — Dual-source final scores</h3>
+<table class="data"><thead><tr><th>Check</th><th>Result</th><th>Detail</th><th>Source</th></tr></thead><tbody>
+<tr><td>NBA official finals vs ESPN partner</td><td class="ok">92/92</td>
+<td>0 score mismatches, 0 missing</td>
+<td><a href="https://www.nba.com/games?date=2026-11-01" rel="noopener">NBA daily pages</a></td></tr>
+<tr><td>Official leader stat-lines vs ESPN box (PTS/REB/AST, same player)</td>
+<td class="ok">184/184</td>
+<td>across 92 games with boxscores</td>
+<td><a href="https://www.nba.com/games?date=2026-10-21" rel="noopener">NBA daily pages</a></td></tr>
+<tr><td>Full box-score sample (game 0022600002, all players read from official page)</td>
+<td class="ok">3/3</td>
+<td>LeBron James 14/9/7 · Joel Embiid 13/11/6 · Jaylen Brown 19/8/6 identical on both sources</td>
+<td><a href="https://www.nba.com/game/phi-vs-nyk-0022600002/box-score" rel="noopener">official box score</a></td></tr>
+<tr><td>Standings internal consistency (92 W = 92 L = official calendar count)</td>
+<td class="ok">92 = 92</td><td>sum of all team wins equals sum of losses equals games through Nov 1</td>
+<td><a href="https://www.nba.com/standings" rel="noopener">official</a></td></tr>
+</tbody></table>
+<h3>Corrections made by the audit</h3>
+<div class="note">Transcription error caught: BKN OT cell was written as 0-0; computed
+results from the actual games showed 0-1 (game 0022600128, BKN 124 @ BOS 125, Final/OT).
+The official page confirms 0-1. Corrected in data/standings.json with an inline
+correction note. No other cell needed correction.</div>
+<h3>Known scope limits (not failures)</h3>
+<ul>
+<li>DIV cells published but not recomputed (no division-membership dataset in pipeline).</li>
+<li>Non-leader player rows are partner-sourced (flagged); leader rows and the full-box
+sample are officially verified.</li>
+<li>All market columns blank by policy (Q1).</li>
+</ul>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>

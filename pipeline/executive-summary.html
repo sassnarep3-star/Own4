@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Summary · Own4 NBA Signal Pipeline</title>
+<style>
+:root{--bg:#0f1420;--panel:#171d2c;--line:#273048;--txt:#e7ebf3;--mut:#93a0bd;--acc:#4da3ff;--ok:#39c07f;--warn:#f0b23c;--bad:#e5606f}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--txt)}
+header{background:var(--panel);border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:5}
+header h1{margin:0;font-size:18px;display:inline-block}
+header .sub{color:var(--mut);font-size:12px;margin-left:10px}
+nav{margin-top:8px;display:flex;flex-wrap:wrap;gap:6px}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;padding:5px 10px;border:1px solid var(--line);border-radius:14px}
+nav a.on,.nav a:hover{color:var(--txt);border-color:var(--acc);background:#1b2438}
+main{max-width:1180px;margin:0 auto;padding:22px}
+h2{font-size:20px;margin:26px 0 10px;border-left:3px solid var(--acc);padding-left:9px}
+h3{font-size:16px;margin:20px 0 8px;color:#cdd6ea}
+p,li{color:#c9d2e6}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px;margin:14px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.card .v{font-size:26px;font-weight:700}
+.card .k{color:var(--mut);font-size:12px;margin-top:4px}
+table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:13.5px;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+th{background:#1d2538;color:#aebbd8;text-align:left;padding:9px 10px;font-weight:600;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #222b41;vertical-align:top}
+tr:last-child td{border-bottom:none}
+td a{color:var(--acc);text-decoration:none}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:10px;border:1px solid var(--line);color:var(--mut)}
+.ok{color:var(--ok);font-weight:600}
+.warn{color:var(--warn);font-weight:600}
+.bad{color:var(--bad);font-weight:600}
+.blank{color:var(--mut);border-bottom:1px dashed var(--warn);cursor:help}
+.note{background:#1a2135;border:1px solid var(--line);border-left:3px solid var(--warn);padding:10px 14px;border-radius:6px;font-size:13.5px;color:#d5dcef;margin:12px 0}
+.goodnote{border-left-color:var(--ok)}
+code{background:#10162a;padding:2px 6px;border-radius:4px;font-size:12.5px}
+footer{color:var(--mut);font-size:12.5px;padding:26px 22px;border-top:1px solid var(--line);margin-top:30px;text-align:center}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace}
+.small{font-size:12.5px;color:var(--mut)}
+</style></head>
+<body>
+<header><h1>NBA Signal Pipeline</h1><span class="sub">session 75685c60 · verified data · own-line engine · official sources only</span>
+<nav><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive Summary</a><a href="standings.html">Standings</a><a href="model.html">Own Lines & Model</a><a href="signals.html">Signals</a><a href="strategies.html">Strategies & Leaderboard</a><a href="verification.html">Verification</a><a href="flagged.html">Flagged for Review</a><a href="sources.html">Sources</a></nav></header>
+<main>
+
+<h2>Executive Summary</h2>
+<p><strong>Goal.</strong> Originate our own NBA lines and compete strategies on an internal
+leaderboard with pre-registered validation gates, removing luck via walk-forward
+testing, confidence intervals, and leakage controls. Singles, parlays, and player-prop
+combos are all in scope.</p>
+<h3>What is verified (this session)</h3>
+<ul>
+<li><strong>92 completed games</strong> parsed from official NBA daily pages; every final score agrees
+with the ESPN partner source (92/92).</li>
+<li><strong>Full standings reconciliation:</strong> 300/300 cells
+(W-L, win%, GB, conf, home, road, OT, last10, streak × 30 teams) computed from the
+games match <a href="https://www.nba.com/standings">nba.com/standings</a> exactly.</li>
+<li><strong>Player layer:</strong> 184/184 official leader
+stat-lines verified; full-box sample 3/3 vs the official box-score page; 2,509 player-game
+rows are partner-sourced (flagged as such).</li>
+<li><strong>Prior season</strong> for the model prior transcribed from
+<a href="https://www.nba.com/standings?Season=2025-26">official 2025-26 standings</a>.</li>
+</ul>
+<h3>Model &amp; own lines</h3>
+<ul>
+<li>Elo walk-forward (K=20, H=25, margin multiplier, official prior):
+<strong>Brier 0.2309</strong> vs 0.2366 static prior and
+0.25 constant — better than both at n=92, but
+<strong>not validated</strong>: gate G1 needs n≥300.</li>
+<li><strong>15 pre-tip fair moneylines/spreads originated</strong> for the Nov 2 slate
+(first tip 23:00 UTC) — market comparison columns are blank by policy (Q1).</li>
+</ul>
+<h3>Key empirical findings</h3>
+<ul>
+<li>Home win rate 0.5217 (n=92, Wilson CI
+[0.4209, 0.6209]) — includes 0.5; no bankable home edge detected.</li>
+<li>Rest effects are null at this sample (SIG-03/SIG-10, all CIs overlap 0.5).</li>
+<li>Same-game pace correlation r=0.2004 (p≈0.052) — mild dependence relevant to
+same-game parlay pricing (SP-3).</li>
+<li>Same-day cross-game outcome φ=0.026 — independence assumption not rejected (SP-4).</li>
+<li>Player trailing-mean benchmark is essentially unbiased for PTS (50.2%, n=1,002) —
+naive prop lines based only on trailing averages have no built-in edge (SP-5).</li>
+</ul>
+<h3>Leaderboard &amp; rewards</h3>
+<p>Six strategies registered (tier 0). Rewards are internal paper-tier unlocks gated by
+G1–G6; G5/G6 (market comparison, CLV) are <strong>blocked</strong> because no official odds
+source exists — disclosed, not worked around. See
+<a href="strategies.html">Strategies &amp; Leaderboard</a>.</p>
+<h3>Irregularities (all on <a href="flagged.html">Flagged for Review</a>)</h3>
+<ul>
+<li>Q1 — no official source exists for any market line (permanent blanks).</li>
+<li>Q2 — NBA.com odds UI values are not present in server HTML; not recorded.</li>
+<li>Q3 — cdn.nba.com/stats.nba.com block datacenter clients; logged, with HTML fallback.</li>
+<li>Q4–Q6 — none fired (zero reconciliation mismatches after correction; model beats baselines).</li>
+<li>Q7 — player verification results, including the note that NBA's "teamLeader" is not
+always the top scorer (values still agree).</li>
+<li>This session also <strong>caught and corrected its own transcription error</strong> (BKN OT
+cell) via the reconciliation audit — evidence the audit works.</li>
+</ul>
+<p class="small">Full methods: <a href="verification.html">Verification</a> ·
+sources: <a href="sources.html">Sources</a> · model: <a href="model.html">Own Lines &amp; Model</a></p>
+
+</main>
+<footer>Generated by scripts/build_pipeline_site.py from verified datasets ·
+<a href="../index.html">Repo home</a> · <a href="../lab/index.html">Data Lab</a> · <a href="../docs/index.html">Research Docs</a> ·
+every table row links its source · unverified values are blank and flagged</footer>
+</body></html>

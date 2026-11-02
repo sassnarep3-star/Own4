@@ -429,3 +429,55 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
   [NBA.com standings](https://www.nba.com/standings).
 - **Flagged irregularities** remain published and non-blocking on
   <https://sassnarep3-star.github.io/Own4/own4-dashboard/pages/flagged.html> (IR-01…IR-19).
+
+---
+
+## Session 75685c60 · official-data pipeline + Elo fair-odds engine — branch `arena/75685c60-own4`
+
+Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (requested `session-<id>/<task>` naming not creatable here; deviation logged). Started from an empty checkout (base `319d6b0`); discovered other sessions' merged work after pushing its first claim. Nothing from other sessions was discarded or overwritten.
+
+**Claimed file scope (non-overlapping):**
+- `scripts/fetch_official.py`, `scripts/build_signals.py`, `scripts/build_pipeline_site.py`, `scripts/audit_rows.py`
+- `.github/workflows/fetch-nba-data.yml`
+- `data/standings.json`, `data/prior_2025-26.json`, `data/manifest.json`, `data/raw/**`, `data/games_official.json`, `data/reconciliation.json`, `data/model_ratings.json`, `data/predictions.json`, `data/signals.json`, `data/player_gamelogs.json`, `data/own_lines_2026-11-02.json`, `data/pipeline_strategies.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json`
+- `pipeline/**` (this session's site section; root `index.html`, `pages/**`, `docs/**`, `lab/**`, `own4-dashboard/**`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/flagged.json`, `data/sources.json` etc. NOT edited here)
+- `COORDINATION.md` (append-only, own section)
+
+| ID | Task | Status | Owner | Files |
+|----|------|--------|-------|-------|
+| P1 | Automated official-NBA data pipeline (runner egress; cdn/stats 403s recorded; nba.com HTML + ESPN partner fallback) with provenance manifest | done | 75685c60 | `scripts/fetch_official.py`, `.github/workflows/fetch-nba-data.yml`, `data/manifest.json`, `data/raw/**` |
+| P2 | Verified 2026-27 standings (30 rows, transcribed line-by-line vs nba.com/standings) + 2025-26 official prior | done | 75685c60 | `data/standings.json`, `data/prior_2025-26.json` |
+| P3 | Elo fair-odds engine: walk-forward probabilities, fair moneylines/spreads, pre-tip own lines | done | 75685c60 | `scripts/build_signals.py`, `data/model_ratings.json`, `data/predictions.json`, `data/own_lines_2026-11-02.json` |
+| P4 | Empirical signals (home, rest, margins, totals, pace, parlay dependence, prop benchmarks) with Wilson CIs | done | 75685c60 | `data/signals.json`, `data/games_official.json`, `data/player_gamelogs.json` |
+| P5 | Row-level source audit (`scripts/audit_rows.py`) | done | 75685c60 | `scripts/audit_rows.py` |
+| P6 | `pipeline/` site section: dashboard, exec summary, standings, own lines/model, signals, strategies/leaderboard, verification, flagged, sources | done | 75685c60 | `pipeline/**`, `scripts/build_pipeline_site.py`, `data/pipeline_strategies.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json` |
+| P7 | Integration: merge main (keep all sessions), validation suite, PR → main, merge, Pages verify, record | in progress | 75685c60 | this file, PR record below |
+
+### Verification performed (session 75685c60) — all against official sources
+
+| Layer | Result | Source |
+|---|---|---|
+| Standings transcription → recomputation from the 92 completed games (W-L, win%, GB, CONF, HOME, ROAD, OT, LAST10, STREAK × 30 teams) | **300/300 cells match, 0 mismatches** | [nba.com/standings](https://www.nba.com/standings) |
+| Final scores dual-source (NBA daily pages × ESPN partner API) | **92/92 identical, 0 mismatches** | [nba.com/games](https://www.nba.com/games?date=2026-11-01), [ESPN API](https://site.api.espn.com/) |
+| Internal consistency: Σ wins = Σ losses = official calendar count through Nov 1 | **92 = 92 = 92** | [nba.com/standings](https://www.nba.com/standings) |
+| Official NBA game-leader stat lines (PTS/REB/AST, same named player) vs ESPN boxes | **184/184 match** across 92 games | [nba.com/games](https://www.nba.com/games?date=2026-10-21) |
+| Full box-score sample (game 0022600002: LeBron James 14/9/7, Joel Embiid 13/11/6, Jaylen Brown 19/8/6) | **3/3 match** | [official box score](https://www.nba.com/game/phi-vs-nyk-0022600002/box-score) |
+| Prior-season records for model prior (30 teams) | transcribed, both chunks | [nba.com/standings?Season=2025-26](https://www.nba.com/standings?Season=2025-26) |
+| Row/source audit of pipeline site (161 table rows, 66 unique external links, internal links, JSON source_url coverage, flags published) | **all pass** (`scripts/audit_rows.py`) | this repo |
+| Official rulebook PDF located for game-structure facts | confirmed reachable | [2026-27 Official NBA Playing Rules](https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2026/10/2026-27-Official-NBA-Playing-Rules.pdf) |
+
+### Model / strategy findings (pre-registered params, walk-forward, no leakage)
+- Elo walk-forward Brier **0.2309** vs 0.2366 static prior vs 0.2500 constant (n=92): better than both, but **G1 (n≥300) not met → not validated**; honest status recorded on the leaderboard.
+- 15 pre-tip own lines originated for the Nov 2 slate (first tip 23:00 UTC); market columns permanently blank (Q1).
+- Rest effects null at n=92 (SIG-03/SIG-10 CIs all include 0.5); same-day parlay-leg φ=0.026 (independence not rejected); same-game pace r=0.2004 (p≈0.052); player trailing-mean PTS benchmark 0.502 (n=1002) — no naive prop edge.
+
+### Irregularities (published at `pipeline/flagged.html`; none block merge)
+- **Q1** No official NBA source publishes betting lines/odds → all market cells blank by policy (permanent).
+- **Q2** NBA.com odds UI toggle exists but no odds values in server HTML → not recorded.
+- **Q3** cdn.nba.com returns 403 and stats.nba.com times out from datacenter clients (recorded in `data/manifest.json`); pipeline uses official nba.com HTML + ESPN partner API (sample-verified vs NBA).
+- **Q4** (reconciliation mismatches) — fired once: this session's own BKN OT transcription error (0-0 → official 0-1, game 0022600128 Final/OT); **corrected** and documented inline; after correction 300/300.
+- **Q5** NBA vs ESPN score mismatches — none (0/92).
+- **Q6** Elo vs baseline — not fired (Elo beats both baselines; G1 still unmet).
+- **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
+- Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
+
