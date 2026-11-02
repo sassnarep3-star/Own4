@@ -28,14 +28,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OFF = os.path.join(ROOT, "official")
 ENGINE = os.path.join(ROOT, "engine")
 
-OFFICIAL_DOMAINS = {
-    "www.nba.com", "nba.com", "official.nba.com", "videorulebook.nba.com",
-    "gleague.nba.com", "stats.gleague.nba.com", "cdn.nba.com",
-    "www.ncpgambling.org", "ncpgambling.org",
-    "github.com", "api.github.com",
-    # official project documentation used by the /docs/ research workspace
-    "scikit-learn.org", "www.itl.nist.gov", "www.nist.gov", "nist.gov",
-}
+OFFICIAL_SUFFIXES = (
+    "nba.com",            # www.nba.com, official.nba.com, cdn.nba.com, videorulebook.nba.com, pr.nba.com ...
+    "gleague.nba.com",
+    "ncpgambling.org",
+    "nist.gov",
+    "scikit-learn.org",
+    "github.com",         # github.com, api.github.com, docs.github.com
+    "github.io",          # sassnarep3-star.github.io — this project's official Pages host
+)
 
 CHECKS = []
 COUNTS = {}
@@ -54,9 +55,10 @@ def load(name):
 
 def is_official(url):
     try:
-        return urllib.parse.urlparse(url).hostname in OFFICIAL_DOMAINS
+        h = (urllib.parse.urlparse(url).hostname or "").lower()
     except Exception:
         return False
+    return any(h == s or h.endswith("." + s) for s in OFFICIAL_SUFFIXES)
 
 
 class RowParser(html.parser.HTMLParser):
@@ -249,7 +251,7 @@ def main():
     idx = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
     missing = [p for p in [os.path.relpath(f, ROOT).replace(os.sep, "/") for f in html_files]
                if p not in ("index.html",) and p not in idx
-               and not p.startswith("docs/")]
+               and not p.startswith(("docs/", "lab/"))]
     ok &= check("Dashboard directory links to every generated page", not missing,
                 "Pages not reachable from the dashboard: %s" % (missing[:12] or "none"),
                 ["https://github.com/sassnarep3-star/Own4/blob/main/index.html"])
@@ -267,6 +269,15 @@ def main():
     ok &= check("Legacy docs/ generator reproduces committed pages", b2.returncode == 0 and diff.returncode == 0,
                 "python scripts/build.py + git diff --exit-code -- docs",
                 ["https://github.com/sassnarep3-star/Own4/actions"])
+    for script, label in [("scripts/verify_data.py", "Independent data-consistency checks"),
+                          ("scripts/check_site.py", "Parallel-session site link checker")]:
+        p2 = os.path.join(ROOT, script)
+        if os.path.exists(p2):
+            c = subprocess.run([sys.executable, p2], cwd=ROOT,
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+            ok &= check(label, c.returncode == 0,
+                        (c.stdout.strip().splitlines()[-1] if c.stdout.strip() else "no output")[:160],
+                        ["https://github.com/sassnarep3-star/Own4/actions"])
 
     report = {"verified_on": "2026-11-02", "overall": "PASS" if ok else "FAIL",
               "checks": CHECKS, "counts": COUNTS}

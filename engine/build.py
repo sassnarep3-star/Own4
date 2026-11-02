@@ -135,7 +135,7 @@ NAV = [
         ("pages/research-backtest.html", "Backtest & Luck Removal"),
     ]),
     ("Competition", [
-        ("pages/leaderboard.html", "Leaderboard & Rewards"),
+        ("pages/competition.html", "Leaderboard & Rewards"),
     ]),
     ("Governance", [
         ("pages/official-sources.html", "Source Register"),
@@ -143,12 +143,17 @@ NAV = [
         ("pages/verification.html", "Verification Report"),
         ("pages/flagged-for-review.html", "⚑ Flagged for Review"),
     ]),
-    ("Parallel-session work (retained)", [
-        ("pages/strategies.html", "Strategies · legacy"),
-        ("pages/validation.html", "Gates · legacy"),
-        ("pages/correlations.html", "Correlations · legacy"),
-        ("pages/flagged.html", "Flags · legacy"),
-        ("pages/sources.html", "Sources · legacy"),
+    ("Parallel-session site (retained)", [
+        ("pages/summary.html", "Executive Summary · main"),
+        ("pages/leaderboard.html", "Leaderboard · main"),
+        ("pages/research.html", "Research · main"),
+        ("pages/audit.html", "Audit · main"),
+        ("pages/correlations.html", "Correlations · main"),
+        ("pages/strategies.html", "Strategies · main"),
+        ("pages/validation.html", "Gates · main"),
+        ("pages/flagged.html", "Flags · main"),
+        ("pages/sources.html", "Sources · main"),
+        ("lab/index.html", "Data Lab · /lab/"),
         ("docs/index.html", "NBA Signal Lab · /docs/"),
     ]),
 ]
@@ -332,6 +337,25 @@ def build_dashboard():
             + h(2, "Site directory")
             + table(["Category", "Page", "Path", "Official source"], dir_rows,
                     "Every subpage, organised by category")
+            + h(2, "Parallel sessions' published research")
+            + '<div class="panel">Several other sessions published their own framework, research engine and '
+              'Data Lab on this repository. All of their pages are retained and linked below and in the '
+              'sidebar. Their computed results use a third-party historical mirror and are labelled '
+              'unverified / provisional by those sessions; this final integration does not promote them to '
+              'verified NBA values. ' + links([S_FAQ], "NBA Stats FAQ ↗") + '</div>'
+            + table(["Page", "What it contains", "Official source"], [
+                ['<a href="pages/summary.html">Executive Summary · main ↗</a>', esc("Earlier session's key results, limits and next steps."), links([S_FAQ], "NBA.com ↗")],
+                ['<a href="pages/leaderboard.html">Leaderboard · main ↗</a>', esc("Earlier session's strategy tiers, gate results and reward points."), links([S_GLOSS], "NBA.com ↗")],
+                ['<a href="pages/research.html">Research · main ↗</a>', esc("Earlier session's method, data provenance, system tests and findings."), links([S_FAQ], "NBA.com ↗")],
+                ['<a href="pages/audit.html">Audit · main ↗</a>', esc("Earlier session's 27 line-by-line checks against official pages."), links([S_TEAM], "NBA.com ↗")],
+                ['<a href="pages/correlations.html">Correlations · main ↗</a>', esc("Earlier session's computed coefficients with confidence intervals."), links([S_GLOSS], "NBA.com ↗")],
+                ['<a href="pages/strategies.html">Strategies · main ↗</a>', esc("Earlier session's six concepts."), links([S_GLOSS], "NBA.com ↗")],
+                ['<a href="pages/validation.html">Gates · main ↗</a>', esc("Earlier session's 12 validation gates."), links([S_FAQ], "NBA.com ↗")],
+                ['<a href="pages/flagged.html">Flags · main ↗</a>', esc("Earlier session's 17 irregularities."), links([S_FAQ], "NBA.com ↗")],
+                ['<a href="pages/sources.html">Sources · main ↗</a>', esc("Earlier session's source register."), links([S_TEAM], "NBA.com ↗")],
+                ['<a href="lab/index.html">Data Lab · /lab/ ↗</a>', esc("Separate session's 92 official 2026-27 games and prospective own lines."), links([S_SLATE], "NBA.com ↗")],
+                ['<a href="docs/index.html">NBA Signal Lab · /docs/ ↗</a>', esc("Specification dashboard with evidence library, pricing spec and review page."), links([S_FAQ], "NBA.com ↗")],
+            ], "All parallel-session output is preserved and reachable")
             + h(2, "Verification status")
             + table(["Check", "Result", "Official source"], [
                 ["Every table row carries an official source link", badge("PASS", "ok"),
@@ -776,7 +800,7 @@ def build_leaderboard():
                     "Rewards are project policy, not official NBA values")
             + '<p class="note">Ranking on gate count does not imply profitability. No strategy has a validated '
               'edge, no odds are available from an official source, and no bet is executed.</p>')
-    page("Leaderboard & Rewards", "Competition / Leaderboard", body, "pages/leaderboard.html")
+    page("Leaderboard & Rewards", "Competition / Leaderboard", body, "pages/competition.html")
 
 
 # ---------------------------------------------------------------------------

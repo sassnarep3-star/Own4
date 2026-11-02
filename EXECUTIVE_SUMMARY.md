@@ -1,65 +1,42 @@
 # Executive Summary — Own4: NBA Line Origination & Signal Strategy Research
 
-**Date:** 2026-11-02 · **Branch:** arena/689eb52e-own4 · **Scope:** research framework only — no real wagering.
+## What this is
 
-## What this project is
-A leaderboard-style research framework for originating NBA lines from verifiable signals across three bet structures — single bets, parlays, and player-prop combos — where every strategy must pass defined validation gates before it earns leaderboard credit. The goal is to remove luck and keep only selectively skill-based, repeatable signals.
+- A research framework for originating NBA lines — own projections for game totals, spreads, player props, parlays and prop combos — judged on a leaderboard where a strategy only earns credit if it survives 12 validation gates built to strip out luck. Date: 2026-11-02.
 
-## Key findings (all from official sources)
-1. **The 2025-26 scoring environment is historically fast.** The league opened the season at 117.7 points per team per game — the highest in 64 seasons — driven by pace (101.9 possessions/team/48 min through 10 days) and 114.3 offensive rating. [nba.com](https://www.nba.com/news/10-numbers-know-first-10-days-2025-26)
-2. **Official season leaders anchor prop research.** 2025-26 regular-season leaders include Luka Dončić (33.5 PPG), Nikola Jokić (12.9 RPG, 10.7 APG — first player since 1969-70 to lead both rebounds and assists), Victor Wembanyama (197 blocks). [nba.com](https://www.nba.com/news/4-key-stats-takeaways-2025-26-season) · [stats hub](https://www.nba.com/stats)
-3. **Availability is officially governed.** The NBA Injury Report requires participation status by 5 p.m. local the day before a game and 1 p.m. on the second night of a back-to-back, with continual game-day updates. [official.nba.com](https://official.nba.com/nba-injury-report-2025-26-season/)
-4. **Schedule structure is fully official.** The complete 2025-26 schedule, including five Christmas Day games (Dec. 25), is published by the league. [nba.com](https://www.nba.com/news/2025-26-nba-regular-season-schedule)
-5. **Roster mechanics are official.** Up to three two-way players per team, max 50 NBA games, four-or-fewer years of service. [gleague.nba.com](https://gleague.nba.com/nba-g-league-101-two-way-contracts)
+## Headline results (computed, historical, versus a proxy — not sportsbook prices)
 
-## Strategy framework
-Six strategies (STRAT-01…06) covering totals, spreads, player props, same-game parlays, schedule spots, and roster-structure signals. Each must pass seven validation gates (G1–G7): data freshness, sample size ≥ 10 games, official-source-only, injury-report check, correlation screen, parlay cap of 3 legs, and a luck-removal/repeatability review.
+- 9 strategies × 3 edge thresholds = 27 registered single/prop trials, evaluated once on 4,144 frozen holdout games (2020-21 → 2023-24) after fitting on 10,327 dev games.
+- 1 trial(s) pass every gate (Provisional Gold), 13 are Silver (statistically significant after Holm correction but underpowered or direction-biased). Best by edge lower bound: P4 top 10% — 60.6% on 4,573 bets (Silver); P4 top 25% — 58.2% on 11,951 bets (Silver); P1 top 10% — 58.5% on 4,634 bets (Silver); P3 top 10% — 57.3% on 4,457 bets (Silver); M2 top 10% — 59.3% on 636 bets (Silver).
+- Parlays/combos: 5 of 11 constructions pass every gate; same-player prop combos are blocked because their legs are correlated (ρ≈0.15–0.19) and books reprice such combos.
+- Game totals from rest alone carry no signal; pace/league-drift gives a modest edge; point-spread rest effects are small but real; player-prop edges come mostly from minutes information the proxy ignores.
 
-## Correlation policy
-Numeric correlation coefficients between signals and outcomes **cannot be confirmed from official sources**, so they are left blank and published on the Flagged for Review page rather than inferred. Only structural (by-construction) correlations — e.g., same-player parlay legs being highly correlated — are stated qualitatively.
+## How luck is removed
 
-## Irregularities flagged for review
-- All correlation coefficients, sportsbook odds, and backtest win rates are unverifiable from official sources (blank + flagged).
-- The steals leader and full-season league pace are not individually stated in the cited official articles (blank + flagged).
+- Chronological dev/holdout design: all features use only earlier games (perturbation tests pass); models and thresholds are fitted on dev seasons and frozen before the holdout is evaluated.
+- Date-clustered standard errors, Holm correction over all 27 trials, season-by-season and alternating-week repeatability, threshold robustness, a directional-null test, and placebo strategies (0 of 2,700 random strategies passed the significance gate).
+
+## Correlation values (computed)
+
+- Same player (holdout): points↔rebounds +0.25, points↔assists +0.14, rebounds↔assists +0.18. Teammate top-2 scorers +0.01; opposing top scorers +0.09; top scorer vs game total +0.24.
+- No official source publishes any of these coefficients, so the official-source column stays blank and the computed values are labeled unverified.
+
+## Audit of the existing repo
+
+- 27 claims re-checked against official pages today: 13 verified, 5 corrected, 5 unverified (values blanked/flagged), 4 cited sources that did not support their use.
+- Notable: the helpline was listed as 1-800-GAMBLER but the official NCPG page lists 1-800-MY-RESET; Dončić 33.5 PPG, Jokić 12.9/10.7 and the team PPG list appear in no retrievable official page text; the gate thresholds had been cited to NBA articles that do not mention them.
+
+## What this does NOT show
+
+- No strategy beats a sportsbook: no betting lines were used (not official, not available). Edges are versus a transparent proxy that ignores minutes, injuries and matchups; a real market would erase much of the player-prop edge.
+- The holdout was viewed once before a redesign (flagged) and prospective replication (G12) has not been run — hence “Provisional”. Data ends 2023-24; the NBA is now in 2026-27.
+- Research data is a third-party mirror (⚠) checked against the official box score on 1 game only; NBA.com states its stats are not available for download, so licensing must be resolved before production use.
+- Parlay returns assume −110 per leg with no correlation repricing.
+
+## Next steps that need outside input
+
+- Licensed/official historical data through 2025-26 and archived sportsbook lines; then re-run `python research/run_all.py` and log live (timestamped) predictions for gate G12.
 
 ## Responsible gambling
-This is an analytical research project, not wagering advice. If gambling is a concern for you or someone you know: National Problem Gambling Helpline, 1-800-GAMBLER, 24/7 — [ncpgambling.org](https://www.ncpgambling.org/help-treatment)
 
-
----
-
-## Final integration addendum · session-fa175f65 (2026-11-02 UTC)
-
-The earlier sections above are retained unchanged from the parallel sessions. This addendum records the
-final integration session's verified 2026-27 contribution; where an earlier value could not be confirmed
-from an official source it is published on the Flagged for Review page and left blank in this project's tables.
-
-- **Data**: 30 official standings rows, 30 official team-stat rows, 56 official final scores across six dates,
-  30 official player season leaders, 20 official daily leaders and the official 15-game 2026-11-02 slate —
-  all transcribed line by line with per-row official links (`official/*.json`, `pages/official-sources.html`).
-  Sources: https://www.nba.com/standings · https://www.nba.com/stats/teams/traditional ·
-  https://www.nba.com/stats/overview · https://www.nba.com/games?date=2026-11-02
-- **Correlation values**: computed (not inferred) from official inputs, with Pearson r, two-sided p,
-  Fisher-z 95% CI and Benjamini-Hochberg FDR q; plus a signal matrix, same-player prop correlations,
-  cross-game margin correlation, and the NBA FAQ's officially quoted PIE/winning-percentage R-squared .908.
-  These are derived descriptive statistics, not official NBA publications and not predictive skill.
-  Source: https://www.nba.com/stats/help/faq
-- **Originated lines**: Own4 Fair Line v1 produces 15 fair spreads/totals/moneylines, 3 two-leg parlays and
-  30 fair player-prop lines from official +/- and scoring averages, with dispersion calibrated from official
-  results. No sportsbook price is copied; every market-price field is blank and flagged.
-  Source: https://www.nba.com/stats/teams/traditional
-- **Remove luck**: strictly walk-forward backtest (prior-date official scores only), exact binomial test,
-  10,000-run permutation null, Wilson 95% CI, chronological split and BH-FDR across the strategy family.
-  With 38 graded games, winner accuracy 0.6053 (95% CI [0.447, 0.744], exact p = 0.2559, permutation
-  p = 0.1268): chance cannot be excluded.
-- **Leaderboard**: six pre-registered strategies, ten validation gates, zero strategies validated,
-  zero rewards awarded. Selectively skill-based means no strategy is promoted on a short, noisy sample.
-- **Irregularities**: 17 flagged items, including a stale injury-report URL, a source/claim mismatch,
-  an image-only statistic, an outdated helpline number, a conflicting official score, the NBA Stats FAQ
-  data-use restriction and the absence of official odds. Non-blocking; published on
-  `pages/flagged-for-review.html` with official links.
-- **Responsible gambling**: the official NCPG page publishes 1-800-MY-RESET (1-800-697-3738).
-  https://www.ncpgambling.org/help-treatment
-
-Full detail and every table: the live GitHub Pages site (`index.html` → category subpages).
-Reproduce: `python3 engine/dataset.py && python3 engine/analysis.py && python3 engine/build.py && python3 engine/verify.py`.
+- This is analysis, not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET — https://www.ncpgambling.org/help-treatment
