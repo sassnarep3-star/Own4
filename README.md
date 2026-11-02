@@ -5,9 +5,11 @@ Leaderboard-style research framework for originating NBA lines from verifiable s
 - Live site: GitHub Pages (see repo Settings → Pages)
 - Executive summary: [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)
 - Task board: [COORDINATION.md](COORDINATION.md)
-- Rebuild site: `python3 build_site.py`
+- Rebuild site: `python3 build_site.py` (stdlib only; fails on a broken link or a table row without a source link)
+- Computed research (sessions a4ec3896): [research/README.md](research/README.md) · [AUDIT.md](AUDIT.md) · leaderboard on the site (`pages/leaderboard.html`)
+- Related sites in this repo: `docs/` (specification dashboard) and `lab/` (Data Lab with 92 official 2026-27 games)
 
-Research framework only — not wagering advice. Helpline: 1-800-GAMBLER (ncpgambling.org).
+Research framework only — not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET ([ncpgambling.org/help-treatment](https://www.ncpgambling.org/help-treatment)); an earlier 1-800-GAMBLER reference was corrected during the audit.
 
 
 ---
@@ -50,6 +52,7 @@ Live: https://sassnarep3-star.github.io/Own4/lab/ · source: `lab/` (generated b
 
 ---
 
+<<<<<<< HEAD
 ## Additional workspace · arena/42d467e4-own4 — NBA Lines Lab (JS dashboard)
 
 **Live:** https://sassnarep3-star.github.io/Own4/lines-lab/ · source: `lines-lab/`
@@ -58,3 +61,30 @@ Live: https://sassnarep3-star.github.io/Own4/lab/ · source: `lab/` (generated b
 - Verified 2026-11-02 against official sources only: league & rules (nba.com/news/about, official 2025-26 Playing Rules PDF), 2026-27 season calendar & Emirates NBA Cup 2026, all 30 teams (IDs, official sites, arenas), official stat definitions & leader minimums (stats.nba.com), official line channels (DraftKings/FanDuel sportsbook pages; Sportradar = NBA's authorized global distributor of official betting data; Genius Sports U.S.) and market rules (parlay/SGP definitions, correlated-outcome ban in standard parlays, settlement on official league stats).
 - Strategy catalog S1–S12 (singles, parlays, player-prop combos, SGP, live, futures), validation gates G1–G8, correlation methodology (measured values intentionally blank + UNVERIFIED until official line history is ingested), leaderboard competition design.
 - Flagged for Review F1–F12: `lines-lab/pages/flagged.html`. Docs: `docs/executive-summary.md`, `docs/strategy-framework.md`, `docs/verification-log.md`. Source register: `research/sources.md` and `lines-lab/pages/sources.html`.
+=======
+---
+
+## Final integration addendum · `session-fa175f65` (2026-11-02 UTC)
+
+This repository also contains the final integration session's verified 2026-27 research, kept in a separate
+namespace so the parallel sessions' work above is preserved unchanged.
+
+- **Live site**: https://sassnarep3-star.github.io/Own4/ — dashboard at the root, subpages organised by
+  category (Official Data / Originated Lines / Strategy Research / Competition / Governance).
+- **Verified data**: `official/*.json` — 30 standings rows, 30 team-stat rows, 56 official final scores,
+  30 player season leaders, 20 daily leaders and the official 15-game 2026-11-02 slate. Every row carries the
+  exact official URL. Sources: https://www.nba.com/standings · https://www.nba.com/stats/teams/traditional ·
+  https://www.nba.com/stats/overview · https://www.nba.com/games?date=2026-11-02
+- **Reproduce**: `python3 engine/dataset.py && python3 engine/analysis.py && python3 engine/build.py && python3 engine/verify.py`.
+  `engine/build.py` runs the legacy `build_site.py` first, so the earlier sessions' pages keep regenerating.
+- **Findings**: real computed correlation values (r, p, 95% CI, BH-FDR q), originated fair lines for singles,
+  parlays and player-prop combos, ten validation gates, a strictly walk-forward backtest with a permutation
+  luck test, and a leaderboard that awards zero rewards because no strategy passes all gates.
+- **Flagged for Review**: `pages/flagged-for-review.html` — every irregularity and every blank/unverified
+  value, each with an official source link. Flagged items are non-blocking.
+- **Executive summary**: `EXECUTIVE_SUMMARY.md` (addendum) and `pages/executive-summary.html`.
+- **Coordination / conflict / PR / deploy record**: `COORDINATION.md`.
+
+Analytical research only, not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
+(1-800-697-3738) — https://www.ncpgambling.org/help-treatment
+>>>>>>> origin/main

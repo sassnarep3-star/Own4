@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Own4 — verified NBA line origination and signal strategy research">
+<title>Strategy Catalog · Own4</title>
+<link rel="stylesheet" href="../assets/official.css">
+</head><body>
+<div class="layout">
+<aside><a class="brand" href="../index.html">🏀 Own4 <span>/ NBA Research</span></a>
+<div class="sub">Verified 2026-27 · final integration</div>
+<nav aria-label="Main navigation"><div class="navcat">Overview</div>
+<a href="../index.html">Dashboard</a>
+<a href="../pages/executive-summary.html">Executive Summary</a>
+<a href="../pages/requirements.html">Requirements Register</a>
+<div class="navcat">Official Data · 2026-27</div>
+<a href="../pages/data-standings.html">Standings</a>
+<a href="../pages/data-team-stats.html">Team Stats</a>
+<a href="../pages/data-games.html">Games &amp; Scores</a>
+<a href="../pages/data-players.html">Player Leaders</a>
+<div class="navcat">Originated Lines</div>
+<a href="../pages/lines-single.html">Single Bets</a>
+<a href="../pages/lines-parlays.html">Parlays</a>
+<a href="../pages/lines-props.html">Player Prop Combos</a>
+<div class="navcat">Strategy Research</div>
+<a class="active" href="../pages/research-strategies.html">Strategy Catalog</a>
+<a href="../pages/research-validation.html">Validation Gates</a>
+<a href="../pages/research-correlations.html">Correlations</a>
+<a href="../pages/research-backtest.html">Backtest &amp; Luck Removal</a>
+<div class="navcat">Competition</div>
+<a href="../pages/competition.html">Leaderboard &amp; Rewards</a>
+<div class="navcat">Governance</div>
+<a href="../pages/official-sources.html">Source Register</a>
+<a href="../pages/repo-audit.html">Repo Audit</a>
+<a href="../pages/verification.html">Verification Report</a>
+<a href="../pages/flagged-for-review.html">⚑ Flagged for Review</a>
+<div class="navcat">Parallel-session site (retained)</div>
+<a href="../pages/summary.html">Executive Summary · main</a>
+<a href="../pages/leaderboard.html">Leaderboard · main</a>
+<a href="../pages/research.html">Research · main</a>
+<a href="../pages/audit.html">Audit · main</a>
+<a href="../pages/correlations.html">Correlations · main</a>
+<a href="../pages/strategies.html">Strategies · main</a>
+<a href="../pages/validation.html">Gates · main</a>
+<a href="../pages/flagged.html">Flags · main</a>
+<a href="../pages/sources.html">Sources · main</a>
+<a href="../lab/index.html">Data Lab · /lab/</a>
+<a href="../docs/index.html">NBA Signal Lab · /docs/</a></nav></aside>
+<main>
+<div class="topbar"><div class="crumb">Strategy Research / Strategies</div><div class="stamp">Verified 2026-11-02 UTC · GitHub Pages</div></div>
+<h1>Strategy Catalog</h1><p class="lede">Six pre-registered strategies covering single bets, parlays and player-prop combos. Each is evaluated against all ten validation gates.</p><div class="panel warn"><h3>How to read this page</h3><p>OFFICIAL values are transcribed line by line from NBA.com and each row links to the exact page. DERIVED values are reproducible computations from those official inputs (<code>engine/analysis.py</code>) — they are <strong>not</strong> official NBA publications and <strong>not</strong> sportsbook prices. No official league source publishes betting lines, odds or closing prices, so every market-price field is intentionally blank and flagged (I-12, I-13). <a href="https://www.nba.com/stats/help/faq" target="_blank" rel="noopener">NBA Stats FAQ ↗</a> <a href="https://github.com/sassnarep3-star/Own4/blob/main/engine/analysis.py" target="_blank" rel="noopener">Analysis code ↗</a></p></div><div class="tw"><table><caption>Strategy catalog · all metrics DERIVED; blank cells are unverified</caption><thead><tr><th scope="col">ID</th><th scope="col">Category</th><th scope="col">Name</th><th scope="col">Pre-registered specification</th><th scope="col">Metric</th><th scope="col">Value</th><th scope="col">p</th><th scope="col">BH q</th><th scope="col">n</th><th scope="col">Status</th><th scope="col">Gates</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>OW-S01</td><td>Single bet — spread</td><td>Prior-margin power rating (walk-forward)</td><td>Predicted first-listed margin = mean prior margin(A) - mean prior margin(B), computed only from official final scores dated before the game.</td><td>Pred/actual margin correlation</td><td>0.332</td><td>0.0420</td><td>0.1681</td><td>38</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-10-21" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com ↗</a></td></tr><tr><td>OW-S02</td><td>Single bet — moneyline</td><td>Prior-margin winner pick (walk-forward)</td><td>Back the team with the higher prior mean margin; graded against the official final score.</td><td>Winner accuracy</td><td>0.6053</td><td>0.2559</td><td>0.5118</td><td>38</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-10-21" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com ↗</a></td></tr><tr><td>OW-S03</td><td>Single bet — total</td><td>Prior scoring-average total (walk-forward)</td><td>Predicted total = mean prior points scored(A) + mean prior points scored(B); graded by error against the official final total.</td><td>Pred/actual total correlation</td><td>-0.07</td><td>0.6772</td><td>0.6772</td><td>38</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-10-21" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com ↗</a></td></tr><tr><td>OW-S04</td><td>Parlay — 2 legs</td><td>Two-leg cross-game winner parlay</td><td>On each date, parlay the predicted winners of the two games with the largest |predicted margin|; hit requires both leg wins. Chance baseline under independence = 0.25.</td><td>Parlay hit rate</td><td>0.4</td><td>0.6045</td><td>0.6772</td><td>5</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-10-21" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">NBA.com ↗</a> <a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com ↗</a></td></tr><tr><td>OW-S05</td><td>Player prop — single</td><td>Season-average fair prop line</td><td>Originate a fair PTS/REB/AST line equal to the official season average. No official source publishes graded prop outcomes, so no performance metric can be computed.</td><td>Graded prop observations</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td>0</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">NBA.com ↗</a></td></tr><tr><td>OW-S06</td><td>Player prop combo — SGP</td><td>Correlated PTS+REB+AST combo</td><td>Construct a 3-leg same-player combo from official season averages; report the measured inter-leg correlations. Correlation-adjusted joint price requires a joint distribution no official source publishes.</td><td>Correlation-adjusted joint price</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td>0</td><td><span class="badge fail">NOT VALIDATED</span></td><td>5 / 10</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">NBA.com ↗</a></td></tr></tbody></table></div><div class="panel"><h3>Selective activation</h3><p>A strategy is activated only when all ten gates pass. No strategy currently qualifies; the leaderboard therefore awards zero rewards. See <a href="research-validation.html">Validation Gates</a> and <a href="leaderboard.html">Leaderboard</a>.</p></div>
+<footer>Own4 — NBA line origination &amp; signal-strategy research. Analytical research only, not wagering advice.
+Every table row links to an official source; unconfirmable values are blank and on the
+<a href="../pages/flagged-for-review.html">⚑ Flagged for Review</a> page.
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">Official NCPG ↗</a></footer>
+</main></div></body></html>

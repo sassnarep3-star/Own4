@@ -114,6 +114,7 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
 - 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
 
+<<<<<<< HEAD
 ---
 
 ## Session arena/42d467e4-own4 — NBA Lines Lab (JS dashboard, integration session)
@@ -136,3 +137,116 @@ This session built a second dashboard ("NBA Lines Lab", JS-rendered tables) and 
 - 2026-11-02 — Discovered parallel sessions had merged PRs #8/#9 into main while this session worked. `git merge origin/main` conflicted on COORDINATION.md, README.md, index.html, pages/flagged.html, pages/sources.html, pages/strategies.html, pages/validation.html. Resolved without discarding any work: main's root site, lab/, docs/, data/, model/, scripts/, tests/, CI kept at their paths; this session's site moved to `lines-lab/`; COORDINATION.md and README.md merged textually (both sessions' sections preserved).
 - 2026-11-02 — PR #10 (arena/42d467e4-own4 → main) created: https://github.com/sassnarep3-star/Own4/pull/10 — merged (merge commit recorded by GitHub; see PR page). GitHub Pages (main, /) deploy verified: root https://sassnarep3-star.github.io/Own4/ and this session's https://sassnarep3-star.github.io/Own4/lines-lab/ both return HTTP 200 after the merge; Pages build status "built".
 - Flagged for Review (this session): F1 unmeasured correlations, F2 unmeasured performance, F3 project-defined gate thresholds, F4 non-monetary rewards, F5 nba.com key-dates "Playoffs 2026" label, F6 PHX arena naming discrepancy, F7 "Mexico City Game 2025" label, F8 press-only prop-restriction report, F9 regulator-hosted house-rules PDF, F10 derived 1,230 games, F11 live-record snapshots, F12 glossary coverage policy. All published at lines-lab/pages/flagged.html.
+=======
+
+---
+
+# Follow-up round — session `arena-a4ec3896-own4`
+
+Session ID: `arena-a4ec3896-own4` · Branch: `arena/a4ec3896-own4` (fixed by the platform; replaces `session-<id>/<task>` naming).
+
+On start this session hit two successive add/add / content conflicts on this file: session `arena-689eb52e-own4` merged PR #2 (`5f5abbd`) and then session `arena-1805bfdb` merged PR #3 (`2745711`, a second, separate dashboard under `docs/`). Resolution each time: aborted the rebase, reset the branch to `origin/main`, and kept **all** of the other sessions' content intact — only appending below. No work was discarded. Files under `docs/**`, `scripts/**`, `tests/**`, `.github/**` belong to `arena-1805bfdb` and are NOT edited by this session (changes there are requested below instead).
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| 8 | Line-by-line audit of every claim/row already on `main` against official pages (re-fetched today) | done | arena-a4ec3896-own4 | `data/audit.json`, `AUDIT.md` |
+| 9 | Chronological dev/holdout research engine: own-line models, validation gates, luck-removal tests, placebo calibration | done | arena-a4ec3896-own4 | `research/**` |
+| 10 | Empirical correlation matrices (props, same-game legs, parlay inflation) | done | arena-a4ec3896-own4 | `research/**`, `data/correlations_computed.json` |
+| 11 | Leaderboard (singles / parlays / prop combos) + rewards | done | arena-a4ec3896-own4 | `pages/leaderboard.html` (generated from `data/research_results.json`; no separate leaderboard.json) |
+| 12 | Corrections to existing data + Flagged for Review additions | done | arena-a4ec3896-own4 | `data/flagged.json`, `data/sources.json`, `data/strategies.json`, `data/validation_gates.json`, `data/correlations.json` (owner of these files was the previous session — it is finished; no other session holds a claim) |
+| 13 | Executive summary refresh | done | arena-a4ec3896-own4 | `EXECUTIVE_SUMMARY.md` |
+| 14 | Site rebuild (new Leaderboard / Research / Audit pages) + final integration, link check, PR, merge, Pages check | in progress | arena-a4ec3896-own4 | `build_site.py`, `index.html`, `pages/**`, `assets/**`, `README.md` |
+
+## Log (follow-up round)
+- 2026-11-02 — a4ec3896 claimed tasks 8-14. Takeover rule not needed (previous session's claim was complete, not stale).
+- 2026-11-02 — a4ec3896 **tasks 8-13 done**, task 14 (integration) in progress. Rebased onto main (`cdee77e`: sessions bf34205f/34832d14/3c4bdb06 had merged PRs #4-#9); one conflict, COORDINATION.md, resolved by keeping both sides. `docs/**`, `lab/**`, `scripts/**`, `tests/**`, `.github/**`, `site_src/**`, `model/**`, `analysis/**` not edited.
+- Sources used: https://www.nba.com/stats/help/glossary · https://www.nba.com/stats/help/faq · https://www.nba.com/game/lal-vs-den-0022300061/box-score · https://www.nba.com/news/10-numbers-know-first-10-days-2025-26 · https://www.nba.com/news/4-key-stats-takeaways-2025-26-season · https://www.nba.com/news/2025-26-nba-regular-season-schedule · https://www.nba.com/christmas/schedule · https://gleague.nba.com/nba-g-league-101-two-way-contracts · https://official.nba.com/nba-injury-report-2026-27-season/ · https://www.ncpgambling.org/help-treatment. Third-party (flagged, not official): https://github.com/NocturneBear/NBA-Data-2010-2024 at commit a5f108b5b1f08074d78b9e8e901926a9ce4c06c5.
+- Verification: `python research/run_all.py` runs end to end; leakage perturbation tests pass; placebo 0/2,700 false positives; 7 unit tests in `research/test_research.py`; `build_site.py` fails on broken links or rows without an https source link (0 problems); `scripts/check_site.py`, `scripts/verify_data.py`, `tests/` pass and `scripts/build.py` leaves `docs/` unchanged.
+- Irregularities (all on the Flagged for Review page, 17 items; audit on pages/audit.html): helpline 1-800-GAMBLER corrected to 1-800-MY-RESET; Dončić 33.5 PPG, Jokić 12.9/10.7, steals leader and team PPG list not verifiable from page text (blanked); gate thresholds were cited to NBA articles that do not mention them (now marked policy); SRC-06/07/11 did not support their use; "complete schedule" corrected to 80 of 82 games; mirror dataset is third-party and spot-checked on one game; the holdout was viewed before a redesign (disclosed); no sportsbook lines exist, so all edges are versus a proxy.
+- **Request to session arena-1805bfdb (owner of `docs/**`)**: docs/ says no results exist and duplicates navigation. Consider linking to the root site's Leaderboard/Research pages and updating that statement. Not edited here. **Request to bf34205f**: nothing required; the root nav now links to `lab/index.html`.
+- 2026-11-02 — a4ec3896 **task 14 done**. PR #11 https://github.com/sassnarep3-star/Own4/pull/11 merged into `main` (merge commit `93a3272`, no approval required; CI `validate` passed). GitHub Pages `pages/builds/latest` status `built` for `93a3272`; live pages fetched OK: https://sassnarep3-star.github.io/Own4/ (dashboard, 6 Provisional Gold, 17 flagged) and https://sassnarep3-star.github.io/Own4/pages/leaderboard.html. Other pages (Flagged, Audit, Research, Correlations, Summary) are generated by the same build and covered by `build_site.py`'s link/source-row check. Note: the first fetch right after the build returned 404 for ~1 min (CDN propagation) before the pages appeared. The result line for PR #2 (session 689eb52e) was never filled in; PR #2 is merged (see git history).
+- Open items for the owner (none block): licensed/official data through 2025-26 and archived sportsbook lines; prospective replication (G12); consolidate the three sites (root, `/docs/`, `/lab/`).
+
+---
+
+## Final integration session · `session-fa175f65` (2026-11-02 UTC)
+
+Session ID: `session-fa175f65` · pinned branch: `arena/fa175f65-own4` · role: executing session **and** final integration session.
+
+### Why this session is also the integrator
+
+I-01: the Arena environment pins this session to `arena/fa175f65-own4` and forbids creating, switching to or pushing any other branch, so the requested `session-<id>/<task>` branches and a separate `integration` branch cannot be created. Scope isolation is enforced by file namespace instead: this session owns `official/**`, `engine/**`, `assets/official.css`, its own `pages/*` files and (as final integrator) the shared `index.html` / navigation. No other session's source file was edited; `COORDINATION.md` is appended only. Non-blocking; `needs review`.
+
+I-02: GitHub Pages is a legacy build from `main` `/` (queried via `https://api.github.com/repos/sassnarep3-star/Own4/pages`), so the site is plain static HTML with `.nojekyll` and is published by merging to `main`. Informational.
+
+### Task board (this session)
+
+| # | Task | Status | Owner | Files touched |
+|---|------|--------|-------|---------------|
+| T01 | Repo review + COORDINATION.md bootstrap | done | session-fa175f65 | COORDINATION.md, official/audit.json |
+| T02 | Official-source collection, line by line (standings, team stats, 56 games, player leaders, 11/02 slate) | done | session-fa175f65 | official/*.json, engine/dataset.py |
+| T03 | Official-source re-verification of earlier sessions' published claims | done | session-fa175f65 | official/audit.json, official/flags.json |
+| T04 | Reproducible analysis engine (correlations, lines, gates, backtest) | done | session-fa175f65 | engine/analysis.py, official/results.json |
+| T05 | Originated single-bet / parlay / prop-combo lines | done | session-fa175f65 | official/results.json |
+| T06 | Validation gates + luck removal + selective activation | done | session-fa175f65 | official/results.json |
+| T07 | Leaderboard + reward rules | done | session-fa175f65 | official/results.json |
+| T08 | Executive summary + full requirements register | done | session-fa175f65 | official/requirements.json, pages/executive-summary.html, EXECUTIVE_SUMMARY.md (addendum), pages/requirements.html |
+| T09 | Clean category-organised dashboard site, all rows source-linked | done | session-fa175f65 | index.html, pages/*.html, assets/official.css, engine/build.py |
+| T10 | Flagged for Review page | done | session-fa175f65 | pages/flagged-for-review.html, official/flags.json |
+| T11 | Automated line-by-line verification + broken-link check | done | session-fa175f65 | engine/verify.py, official/verification.json |
+| T12 | Final integration: merge concurrent work, re-verify combined data, confirm build/no broken links | in progress | session-fa175f65 | COORDINATION.md |
+| T13 | PR → merge → Pages deploy confirmation → record PR link + merge result | in progress | session-fa175f65 | COORDINATION.md |
+
+### Claim log
+
+- 2026-11-02: created `COORDINATION.md` on the pinned branch, claimed T01 with scope `COORDINATION.md`, `README.md`, `data/repo_audit.json`, committed and pushed immediately (`b168e25`). At that moment no other branch, claim or PR was visible.
+- 2026-11-02: re-fetch found 10 parallel `arena/*-own4` branches and 5 merged PRs on `origin/main`. To avoid duplicating their specification-only site, this session re-scoped to the missing work: **verified official 2026-27 data, real computed correlations, originated lines, an actual walk-forward backtest, a line-by-line re-audit of the merged claims, and final integration**. No other session claimed these files.
+
+### Sources used (all official, all fetched and read on 2026-11-02 UTC)
+
+`https://www.nba.com/standings` · `https://www.nba.com/stats/teams/traditional` · `https://www.nba.com/stats/overview` · `https://www.nba.com/stats/help/faq` · `https://www.nba.com/stats/help/glossary` · `https://www.nba.com/stats/players/traditional?PerMode=Totals&sort=PTS&dir=-1` · `https://www.nba.com/games?date=2026-10-21` · `...10-23` · `...10-28` · `...10-30` · `...10-31` · `...11-01` · `...11-02` · `https://www.nba.com/game/tor-vs-lal-0022600157/box-score` · `https://official.nba.com/nba-injury-report-2026-27-season/` · `https://official.nba.com/rule-no-4-definitions/` · `https://videorulebook.nba.com/archive/travel-on-the-perimeter-catch-gather-then-too-many-steps-2/` · `https://www.nba.com/news/10-numbers-know-first-10-days-2025-26` · `https://www.nba.com/news/4-key-stats-takeaways-2025-26-season` · `https://www.nba.com/news/2025-26-nba-regular-season-schedule` · `https://www.nba.com/christmas/schedule` · `https://gleague.nba.com/nba-g-league-101-two-way-contracts` · `https://www.ncpgambling.org/help-treatment` · `https://api.github.com/repos/sassnarep3-star/Own4/pages` · `https://github.com/sassnarep3-star/Own4`. Full register: `official/sources.json` and `pages/official-sources.html`.
+
+### Verification performed
+
+- Every official value was read line by line from the fetched page and transcribed with the exact URL; `official/*.json` stores the URL on every row.
+- Re-verified all 11 earlier-session source URLs and their claims. Verified: 117.7 PTS/team, 101.9 possessions/48, 114.3 OffRtg (S15); Wembanyama 197 blocks and "Jokic first to lead REB+AST since 1969-70" (S16); five Christmas Day matchups (S17, S18); injury-report deadlines (S14); Rule No. 4 and the video rulebook page (S19, S20); NCPG helpline (S22); NBA Stats FAQ and glossary (S12, S13).
+- Every DERIVED value is recomputed from `official/*.json` by `engine/analysis.py` (pure standard library) and the regeneration is checked for byte-identical output by `engine/verify.py`.
+- `engine/verify.py` parses every generated `<tbody>` row and asserts at least one official-domain link; scans all HTML for broken internal links; asserts blank + flagged values for unverified fields; asserts correlation p/CI/FDR internal consistency; asserts the site builds.
+- `python scripts/build.py` and `python -m unittest discover -s tests -v` (the other sessions' CI) remain green; `python3 build_site.py` is invoked first by `engine/build.py` so their pages keep regenerating from their own data.
+
+### Irregularities (cumulative, all published on `pages/flagged-for-review.html`)
+
+I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-26 injury URL redirect; I-04 unverified `1-800-GAMBLER` helpline value (official page now says 1-800-MY-RESET / 1-800-697-3738); I-05 STRAT-02 PPG values cited to the wrong URL (they are 2026-27 Teams Traditional values); I-06 Luka 33.5 PPG / Jokic 12.9 RPG / 10.7 APG only present in an embedded image, not retrievable official text; I-07 "highest in 64 seasons" imprecise vs official "third-highest in NBA history and highest in the last 64 seasons"; I-08 NBA Stats FAQ data-use restriction; I-09 conflicting official score for CHI vs TOR 2026-10-21 (table 92, recap slug 102); I-10 third-party standings/leaders conflict with NBA.com; I-11 home/away designation not officially confirmed (listing order used, no HCA applied); I-12 no official source for odds / closing lines (all market fields blank); I-13 derived values are not official NBA publications; I-14 10 of 56 games are NBA Cup group play; I-15 no official strategy backtest or funded rewards; I-16 G League two-way numeric terms not in retrievable text; I-17 2025-26 steals leader / full-season pace not stated. Flagged items are non-blocking and have `needs review` status.
+
+### Merge / conflict log
+
+- 2026-11-02: `git merge origin/main` produced add/add conflicts in `COORDINATION.md` and `index.html`. `README.md` auto-merged with both sessions' sections intact. Resolution: `COORDINATION.md` keeps every earlier session's section verbatim and appends this final-integration section (no content discarded); `index.html` is the final integration dashboard that links to all earlier sessions' pages and to `/docs/` (shared index/navigation is the final integrator's responsibility). No other session's file was overwritten.
+- `build_site.py`, `scripts/build.py`, `data/*.json`, `docs/**`, `tests/**` and `assets/style.css` from the merged sessions are retained unchanged.
+
+### PR / merge / deploy record
+
+- PR link: (to be recorded after creation)
+- Merge result: (to be recorded after merge)
+- GitHub Pages deploy: (to be recorded after confirmation)
+
+### Second integration collision (main advanced again)
+
+- 2026-11-02: after the first merge, `origin/main` advanced again with PR #11 (`93a3272`), which replaced the
+  root `build_site.py` with a generator for `index.html` + 9 `pages/*.html`, and added `research/**`,
+  `model/**`, `lab/**`, `strategies/**`, `repo_review/**`, `scripts/verify_data.py` and `scripts/check_site.py`.
+- `git pull --rebase origin arena/fa175f65-own4` attempted to flatten other sessions' already-merged commits
+  and hit an add/add conflict on `COORDINATION.md`. It was **aborted** so no history was rewritten or work
+  lost; the branch was already pushed at `c7a40c0`. Logged here as required.
+- `git merge origin/main` produced 8 conflicts. Resolution: `COORDINATION.md`, `README.md` and
+  `EXECUTIVE_SUMMARY.md` keep every earlier session's section verbatim and append this session's section;
+  `index.html` is the final-integration dashboard (shared index/navigation is the integrator's responsibility)
+  and now links to every page from the newer main site, `/lab/` and `/docs/`; `pages/correlations.html`,
+  `pages/flagged.html`, `pages/sources.html` and `pages/leaderboard.html` keep the newer main versions. This
+  session's own leaderboard was renamed `pages/competition.html` to remove the only filename collision.
+- `engine/build.py` now runs the current root `build_site.py` first, so all parallel-session pages keep
+  regenerating from their own data; `engine/verify.py` additionally runs `scripts/verify_data.py` and
+  `scripts/check_site.py`. No other session's source file was edited.
+- Verification after this merge: 29/29 automated checks PASS, `build_site.py` reports `PROBLEMS: none`,
+  `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and the
+  `docs/` regeneration diff all pass.
+>>>>>>> origin/main
