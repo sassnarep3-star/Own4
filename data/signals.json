@@ -1,0 +1,345 @@
+{
+ "computed_at_utc": "2026-11-02T19:08:47.064361+00:00",
+ "n_games": 92,
+ "source_url": "https://www.nba.com/games?date=2026-11-01",
+ "source_class": "official-league",
+ "items": [
+  {
+   "id": "SIG-01",
+   "name": "Home win rate (2026-27 to date)",
+   "value": 0.5217,
+   "k": 48,
+   "n": 92,
+   "ci95": [
+    0.4209,
+    0.6209
+   ],
+   "method": "Wilson interval on official final scores; home = second team listed on NBA game page",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "id": "SIG-02",
+   "name": "Margin distribution",
+   "mean_abs_margin": 13.45,
+   "median_abs_margin": 11,
+   "close_le_5": {
+    "k": 18,
+    "n": 92,
+    "rate": 0.1957,
+    "ci95": [
+     0.1275,
+     0.2882
+    ]
+   },
+   "blowout_ge_25": {
+    "k": 13,
+    "n": 92,
+    "rate": 0.1413,
+    "ci95": [
+     0.0845,
+     0.2269
+    ]
+   },
+   "ot_games": 4,
+   "method": "abs(home score - away score) from official finals; OT = period > 4",
+   "source_url": "https://www.nba.com/games?date=2026-10-21"
+  },
+  {
+   "id": "SIG-03",
+   "name": "Team win rate by rest (team-game level)",
+   "buckets": [
+    {
+     "rest": "back-to-back (0 days off)",
+     "w": 15,
+     "n": 30,
+     "win_rate": 0.5,
+     "ci95": [
+      0.3315,
+      0.6685
+     ]
+    },
+    {
+     "rest": "1 day off",
+     "w": 51,
+     "n": 101,
+     "win_rate": 0.505,
+     "ci95": [
+      0.4091,
+      0.6005
+     ]
+    },
+    {
+     "rest": "2+ days off",
+     "w": 12,
+     "n": 23,
+     "win_rate": 0.5217,
+     "ci95": [
+      0.3296,
+      0.7076
+     ]
+    }
+   ],
+   "opponent_on_b2b": {
+    "w": 15,
+    "n": 30,
+    "win_rate": 0.5,
+    "ci95": [
+     0.3315,
+     0.6685
+    ]
+   },
+   "method": "rest = days between official game dates minus 1; Wilson CIs; descriptive only (n small)",
+   "source_url": "https://www.nba.com/games?date=2026-10-26"
+  },
+  {
+   "id": "SIG-04",
+   "name": "Game total points distribution (research benchmark, not a betting line)",
+   "mean": 227.4,
+   "median": 228,
+   "p10": 202,
+   "p90": 252,
+   "n": 92,
+   "method": "sum of official final scores; explicitly NOT an over/under line \u2014 no official line exists (Q1)",
+   "source_url": "https://www.nba.com/games?date=2026-11-01"
+  },
+  {
+   "id": "SIG-05",
+   "name": "Pregame model signal vs outcome",
+   "pearson_p_home_prob_vs_home_win": 0.3828,
+   "p_value_approx": 0.0001,
+   "pearson_p_home_prob_vs_margin": 0.3724,
+   "n": 92,
+   "method": "Pearson on walk-forward Elo probabilities (no leakage: each p uses only prior games)",
+   "source_url": "https://www.nba.com/games?date=2026-11-01"
+  },
+  {
+   "id": "SIG-06",
+   "name": "Same-day game-outcome dependence (parlay independence check)",
+   "phi": 0.0262,
+   "n_pairs": 357,
+   "method": "pooled2x2 phi across all unordered same-day game pairs; H0 (bookmaker independence pricing) => phi=0; small-n descriptive",
+   "source_url": "https://www.nba.com/games?date=2026-10-28",
+   "caveat": "Pairs share days, not fully independent observations; treat as descriptive diagnostics only."
+  },
+  {
+   "id": "SIG-08",
+   "name": "Same-game pace correlation (home score vs away score)",
+   "pearson_r": 0.2004,
+   "p_value_approx": 0.0523,
+   "n": 92,
+   "method": "Pearson correlation of the two teams' final scores; positive r means same-game 'over/under-style' legs move together \u2014 independent parlay pricing would understate joint probability (no official totals line exists to price against, Q1)",
+   "source_url": "https://www.nba.com/games?date=2026-11-01",
+   "source_class": "official-league"
+  },
+  {
+   "id": "SIG-07",
+   "name": "Player stat vs own trailing mean (prop-style descriptor)",
+   "buckets": {
+    "pts": {
+     "exceeded": 503,
+     "n": 1002,
+     "rate": 0.502,
+     "ci95": [
+      0.4711,
+      0.5329
+     ]
+    },
+    "reb": {
+     "exceeded": 486,
+     "n": 1002,
+     "rate": 0.485,
+     "ci95": [
+      0.4542,
+      0.516
+     ]
+    },
+    "ast": {
+     "exceeded": 452,
+     "n": 1002,
+     "rate": 0.4511,
+     "ci95": [
+      0.4205,
+      0.482
+     ]
+    }
+   },
+   "method": "For each player-game with >=3 prior games this season: exceeded own mean of prior PTS/REB/AST (strictly greater). Pooled Wilson CIs. Descriptive only \u2014 NOT a comparison to any betting line (no official line exists, Q1).",
+   "source_url": "https://www.espn.com/nba/boxscore",
+   "source_class": "official-broadcast-partner",
+   "verification": "leader rows verified against official NBA box (see reconciliation in flagged_pipeline Q7)"
+  },
+  {
+   "id": "SIG-09",
+   "name": "Same-game teammate PTS correlation (top-2 scorers)",
+   "pairs": [
+    {
+     "team": "DET",
+     "player_a": "Cade Cunningham",
+     "player_b": "Duncan Robinson",
+     "r": -0.009,
+     "n": 6
+    },
+    {
+     "team": "BOS",
+     "player_a": "Jayson Tatum",
+     "player_b": "Paul George",
+     "r": -0.707,
+     "n": 6
+    },
+    {
+     "team": "NYK",
+     "player_a": "Jalen Brunson",
+     "player_b": "Karl-Anthony Towns",
+     "r": -0.365,
+     "n": 6
+    },
+    {
+     "team": "PHI",
+     "player_a": "Tyrese Maxey",
+     "player_b": "Jaylen Brown",
+     "r": -0.577,
+     "n": 6
+    },
+    {
+     "team": "SAS",
+     "player_a": "Victor Wembanyama",
+     "player_b": "Dylan Harper",
+     "r": 0.13,
+     "n": 6
+    },
+    {
+     "team": "OKC",
+     "player_a": "Shai Gilgeous-Alexander",
+     "player_b": "Ajay Mitchell",
+     "r": -0.236,
+     "n": 6
+    },
+    {
+     "team": "MIA",
+     "player_a": "Giannis Antetokounmpo",
+     "player_b": "Bam Adebayo",
+     "r": -0.449,
+     "n": 6
+    },
+    {
+     "team": "LAL",
+     "player_a": "Luka Doncic",
+     "player_b": "Austin Reaves",
+     "r": -0.025,
+     "n": 6
+    },
+    {
+     "team": "ORL",
+     "player_a": "Franz Wagner",
+     "player_b": "Desmond Bane",
+     "r": 0.619,
+     "n": 6
+    },
+    {
+     "team": "ATL",
+     "player_a": "Nickeil Alexander-Walker",
+     "player_b": "Jalen Johnson",
+     "r": -0.026,
+     "n": 7
+    },
+    {
+     "team": "WAS",
+     "player_a": "Anthony Davis",
+     "player_b": "Trae Young",
+     "r": -0.008,
+     "n": 6
+    },
+    {
+     "team": "MIL",
+     "player_a": "Tyler Herro",
+     "player_b": "Jaime Jaquez Jr.",
+     "r": 0.224,
+     "n": 6
+    },
+    {
+     "team": "BKN",
+     "player_a": "Michael Porter Jr.",
+     "player_b": "Julius Randle",
+     "r": 0.845,
+     "n": 6
+    },
+    {
+     "team": "CHA",
+     "player_a": "Brandon Miller",
+     "player_b": "Naz Reid",
+     "r": 0.043,
+     "n": 7
+    },
+    {
+     "team": "TOR",
+     "player_a": "Scottie Barnes",
+     "player_b": "RJ Barrett",
+     "r": -0.377,
+     "n": 6
+    },
+    {
+     "team": "CHI",
+     "player_a": "Caleb Wilson",
+     "player_b": "Norman Powell",
+     "r": -0.08,
+     "n": 6
+    },
+    {
+     "team": "UTA",
+     "player_a": "Keyonte George",
+     "player_b": "Darryn Peterson",
+     "r": -0.054,
+     "n": 6
+    },
+    {
+     "team": "NOP",
+     "player_a": "Zion Williamson",
+     "player_b": "Saddiq Bey",
+     "r": -0.648,
+     "n": 6
+    },
+    {
+     "team": "IND",
+     "player_a": "Pascal Siakam",
+     "player_b": "Andrew Nembhard",
+     "r": -0.549,
+     "n": 6
+    },
+    {
+     "team": "HOU",
+     "player_a": "Kevin Durant",
+     "player_b": "Jabari Smith Jr.",
+     "r": 0.215,
+     "n": 7
+    },
+    {
+     "team": "LAC",
+     "player_a": "Darius Garland",
+     "player_b": "Keaton Wagler",
+     "r": 0.033,
+     "n": 6
+    },
+    {
+     "team": "SAC",
+     "player_a": "Darius Acuff Jr.",
+     "player_b": "Zach LaVine",
+     "r": -0.656,
+     "n": 6
+    },
+    {
+     "team": "CLE",
+     "player_a": "Donovan Mitchell",
+     "player_b": "Evan Mobley",
+     "r": -0.541,
+     "n": 6
+    }
+   ],
+   "median_r": -0.054,
+   "n_pairs": 23,
+   "method": "Per-team Pearson r on paired PTS in common games, n>=6; pair chosen in-sample by season totals (selection flagged); small-n descriptive; source partner box scores with official-leader verification",
+   "source_url": "https://www.espn.com/nba/boxscore",
+   "source_class": "official-broadcast-partner",
+   "caveat": "Player-level rows depend on ESPN partner box scores; official-leader cross-check results in data/flagged_pipeline.json (Q7)."
+  }
+ ]
+}

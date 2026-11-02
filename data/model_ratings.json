@@ -1,0 +1,261 @@
+{
+ "params": {
+  "init_formula": "R0 = 1500 + 120 * (prior_season_win_pct - 0.5)",
+  "prior_source": "https://www.nba.com/standings?Season=2025-26",
+  "home_advantage_elo": 25.0,
+  "K": 20.0,
+  "margin_multiplier": "G = ln(1 + abs(margin)) / ln(1 + 15)",
+  "win_probability": "p = 1 / (1 + 10^(-(R_a + H - R_b)/400))  [R_a = home]",
+  "margin_proxy_fit": "least squares: margin ~ c * (R_home + H - R_away), in-sample, flagged as fit on n<=92"
+ },
+ "metrics": {
+  "n": 92,
+  "brier_elo_walkforward": 0.2309,
+  "brier_constant_0.5": 0.25,
+  "brier_static_prior": 0.2366,
+  "logloss_elo_walkforward": 0.6545,
+  "logloss_constant_0.5": 0.6931,
+  "logloss_static_prior": 0.6661,
+  "calibration": [
+   {
+    "bin": "[0.0,0.4)",
+    "n": 1,
+    "mean_p": 0.3834,
+    "observed": 0.0
+   },
+   {
+    "bin": "[0.4,0.5)",
+    "n": 26,
+    "mean_p": 0.4636,
+    "observed": 0.2692
+   },
+   {
+    "bin": "[0.5,0.6)",
+    "n": 54,
+    "mean_p": 0.5517,
+    "observed": 0.5926
+   },
+   {
+    "bin": "[0.6,0.7)",
+    "n": 11,
+    "mean_p": 0.6226,
+    "observed": 0.8182
+   }
+  ],
+  "margin_proxy_c": 0.13062,
+  "margin_proxy_note": "least squares: margin ~ c * (R_home + H - R_away), in-sample, flagged as fit on n<=92"
+ },
+ "ratings": [
+  {
+   "abbr": "HOU",
+   "rating": 1560.48,
+   "prior_r0": 1516.1,
+   "team": "Houston Rockets",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "DET",
+   "rating": 1558.28,
+   "prior_r0": 1527.8,
+   "team": "Detroit Pistons",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "BOS",
+   "rating": 1547.63,
+   "prior_r0": 1521.95,
+   "team": "Boston Celtics",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "SAS",
+   "rating": 1547.23,
+   "prior_r0": 1530.73,
+   "team": "San Antonio Spurs",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "OKC",
+   "rating": 1540.26,
+   "prior_r0": 1533.66,
+   "team": "Oklahoma City Thunder",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "LAL",
+   "rating": 1538.08,
+   "prior_r0": 1517.56,
+   "team": "Los Angeles Lakers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "PHI",
+   "rating": 1536.27,
+   "prior_r0": 1505.85,
+   "team": "Philadelphia 76ers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "MIN",
+   "rating": 1535.05,
+   "prior_r0": 1511.71,
+   "team": "Minnesota Timberwolves",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "CLE",
+   "rating": 1529.78,
+   "prior_r0": 1516.1,
+   "team": "Cleveland Cavaliers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "MEM",
+   "rating": 1527.94,
+   "prior_r0": 1476.59,
+   "team": "Memphis Grizzlies",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "POR",
+   "rating": 1527.03,
+   "prior_r0": 1501.46,
+   "team": "Portland Trail Blazers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "DEN",
+   "rating": 1520.37,
+   "prior_r0": 1519.02,
+   "team": "Denver Nuggets",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "TOR",
+   "rating": 1512.47,
+   "prior_r0": 1507.32,
+   "team": "Toronto Raptors",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "GSW",
+   "rating": 1511.93,
+   "prior_r0": 1494.15,
+   "team": "Golden State Warriors",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "NYK",
+   "rating": 1506.81,
+   "prior_r0": 1517.56,
+   "team": "New York Knicks",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "DAL",
+   "rating": 1497.67,
+   "prior_r0": 1478.05,
+   "team": "Dallas Mavericks",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "ATL",
+   "rating": 1496.39,
+   "prior_r0": 1507.32,
+   "team": "Atlanta Hawks",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "MIA",
+   "rating": 1489.51,
+   "prior_r0": 1502.93,
+   "team": "Miami Heat",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "PHX",
+   "rating": 1486.03,
+   "prior_r0": 1505.85,
+   "team": "Phoenix Suns",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "ORL",
+   "rating": 1485.64,
+   "prior_r0": 1505.85,
+   "team": "Orlando Magic",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "CHA",
+   "rating": 1485.34,
+   "prior_r0": 1504.39,
+   "team": "Charlotte Hornets",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "NOP",
+   "rating": 1475.4,
+   "prior_r0": 1478.05,
+   "team": "New Orleans Pelicans",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "LAC",
+   "rating": 1471.05,
+   "prior_r0": 1501.46,
+   "team": "LA Clippers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "WAS",
+   "rating": 1470.03,
+   "prior_r0": 1464.88,
+   "team": "Washington Wizards",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "CHI",
+   "rating": 1451.09,
+   "prior_r0": 1485.37,
+   "team": "Chicago Bulls",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "MIL",
+   "rating": 1448.82,
+   "prior_r0": 1486.83,
+   "team": "Milwaukee Bucks",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "BKN",
+   "rating": 1443.96,
+   "prior_r0": 1469.27,
+   "team": "Brooklyn Nets",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "IND",
+   "rating": 1442.85,
+   "prior_r0": 1467.8,
+   "team": "Indiana Pacers",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "UTA",
+   "rating": 1435.51,
+   "prior_r0": 1472.2,
+   "team": "Utah Jazz",
+   "source_url": "https://www.nba.com/standings"
+  },
+  {
+   "abbr": "SAC",
+   "rating": 1421.12,
+   "prior_r0": 1472.2,
+   "team": "Sacramento Kings",
+   "source_url": "https://www.nba.com/standings"
+  }
+ ],
+ "computed_at_utc": "2026-11-02T19:08:47.518913+00:00"
+}
