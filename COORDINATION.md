@@ -26,36 +26,33 @@ Branch: `arena/689eb52e-own4` (fixed for this session)
 - Every table row on the site carries a source link. Unverifiable values are blank + flagged.
 - Site is static (no build step); link integrity checked by scanning all hrefs against files present.
 
+
 ---
-
-## Concurrent integration handoff: session 34832d14-own4
-
-Main received PR #2 from another session while this session was preparing PR #4. Its shared root site, builder, data and summaries were preserved without overwriting. The three conflicts (COORDINATION.md, README.md, index.html) were resolved by preserving main as the primary site and keeping this session’s separately scoped `docs/**` research dashboard. The earlier simultaneous claims were made from the empty initial checkout before either session observed the other; no work was silently discarded.
+## Additional research workspace · arena-1805bfdb
 
 # Coordination board
 
-Session ID: `34832d14-own4` (Arena-managed branch `arena/34832d14-own4`). Repository was an empty README at start; no other claims were present. The Arena branch is fixed for this session, so the requested `session-<id>/<task>` branch pattern cannot be used.
+Session: arena-1805bfdb (final integration session). Work remains on assigned branch `arena/1805bfdb-own4`; additional branches are not permitted by this environment.
 
-| Task | Status | Owner | File scope | Updated (UTC) |
-|---|---|---|---|---|
-| Research, verification, strategy design, dashboard, QA and integration | done | 34832d14-own4 | `README.md`, `COORDINATION.md`, `index.html`, `.nojekyll`, `docs/**`, `scripts/**`, `.github/**`, `package.json` | 2026-11-02 |
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Repository audit, official-source research, methodology, dashboard, tests and Pages integration | in progress | arena-1805bfdb | README.md, COORDINATION.md, docs/**, scripts/**, tests/**, .github/workflows/**, package.json |
 
-## Handoff / conflicts
+## Activity
+- 2026-11-02: Initial repository contains only README.md (`# Own4`); no implementation, datasets, claims, credentials or other session claims found. Claimed initial implementation and final integration. No parallel tasks exist.
+- Initial claim push: remote session branch did not yet exist; pull from that ref failed without changing files. Rebased against origin/main and created only the assigned remote branch. No conflict or other-session changes.
+- 2026-11-02: Reviewed official NBA glossary https://www.nba.com/stats/help/glossary ; FAQ https://www.nba.com/stats/help/faq ; current injury index https://official.nba.com/nba-injury-report-2026-27-season/ ; NIST https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm and https://www.nist.gov/itl/sed/statistical-reference-datasets ; official scikit-learn documentation https://scikit-learn.org/stable/modules/cross_validation.html and https://scikit-learn.org/stable/modules/calibration.html . Read returned source content and bounded claims to inspected passages.
+- Implemented eight static pages, 47 source-linked rows, six research hypotheses, eight proposed gates, pricing specification, leaderboard policy, blank dependence register and seven review issues. No authorized observations acquired, no performance results invented. Research is a specification, not a fitted betting system.
+- Verification: reviewed source-to-claim scope per generated row; links on proposal rows support background, not efficacy. All internal navigation targets exist; official-domain/source coverage and blank numeric result tests pass. Initial page-count expectation of nine was corrected to the actual eight categories. Three automated tests pass. External source pages fetched successfully; no unsupported claim that every outgoing third-party navigation link was crawled.
+- F01–F07 are published on docs/review.html and have status needs review: data rights, price archive, unavailable empirical metrics, injury redirect, stale FAQ example, unvalidated methods, unfunded/unimplemented operations. These do not block publishing the research site.
+- Integration collision: origin/main advanced with PR #2 from another session during implementation. Rebase detected shared COORDINATION conflict; aborted rebase, merged main to preserve published branch history. Combined both README and coordination documents without discarding either session. Other session's root site, data and assets remain untouched. This session's dashboard is independently published under /Own4/docs/ by existing root legacy Pages. No other-session scoped files edited.
+- Pages settings API returned 403 Resource not accessible by integration; retained working existing legacy root configuration instead. Workflow validates only; legacy Pages handles deployment. Prior statements describing Actions deployment are superseded by this entry.
 
-- No other task claims or concurrent edits observed at claim time. Shared outputs are owned by this single integration session.
 
-## Verification log
+---
+## Session 34832d14-own4: concurrent handoff and conflict log (2026-11-02 UTC)
 
-- Pending research and implementation. No empirical NBA correlations, odds, performance rankings or line values have yet been verified.
-
-## Research and implementation review (2026-11-02 UTC)
-
-- Official sources directly opened: [NBA games](https://www.nba.com/games), [Stats glossary](https://www.nba.com/stats/help/glossary), [Stats FAQ](https://www.nba.com/stats/help/faq), [team advanced stats](https://www.nba.com/stats/teams/advanced), [player traditional stats](https://www.nba.com/stats/players/traditional), [player box scores](https://www.nba.com/stats/players/boxscores-traditional), [lineup traditional stats](https://www.nba.com/stats/lineups/traditional), [betting partnership release](https://www.nba.com/news/draftkings-fanduel-become-nbas-co-official-sports-betting-partners), [responsible gaming release](https://pr.nba.com/nba-wnba-responsible-gaming-campaign).
-- Irregularity: [NBA-issued 2026-10-30 injury report](https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-10-30_07_00PM.pdf) appeared in official-domain search excerpts but direct retrieval failed. Historical report is not a current availability feed. See site flag F03.
-- Rights restriction: the [NBA Stats FAQ](https://www.nba.com/stats/help/faq) says no stats download for academic or personal use. No scraper, stat exports, odds archive, or fabricated empirical values were added. See F01, F02, F04–F06 on the Flagged for Review page.
-- Row-by-row checks: each of 8 strategies, 9 gates, 5 correlation pairs, 6 flags, 8 requirements and 10 source rows links an NBA-owned source. Source links verify input definitions/context, not original proposed model efficacy. All empirical estimate fields remain blank. Static local link and catalog tests: `npm test` passed.
-- User-requested session branches cannot be created because Arena requires work on `arena/34832d14-own4`. No other claims or edits observed.
-
-- Publishing setup: Pages is already configured to build from `main` root (legacy mode). Attempting to switch to Actions via the Pages API returned HTTP 403 (integration permission); preserved the existing deployment mode, added a root redirect to `docs/index.html`, and kept Actions for CI only. This configuration change is recorded as an irregularity, not an empirical data issue.
-
-- Push preparation after integrating main: `git pull --rebase origin arena/34832d14-own4` attempted to replay a concurrent main commit onto this merged graph and conflicted in COORDINATION.md, README.md, and index.html. The rebase was aborted intact (no other session work removed); the previously completed merge resolution remains in commit `01470ba`. Remote session branch had zero commits not present locally, so a normal branch-only push is safe.
+- Initial empty checkout led to independent simultaneous claim and research work before any other claim was visible. Session #2 and #3 subsequently merged to main; their root site and `docs/` dashboard are canonical. PR #4 was initially mergeable but became conflicting when #3 merged during the check/merge window. The first merge attempt failed safely without changing main.
+- Pulled current main into this Arena-managed branch. Conflicts in `.github/workflows/pages.yml`, `COORDINATION.md`, `README.md` and five `docs/*.html` pages were resolved in favor of the already merged canonical main versions; this note preserves the handoff. No other session's published work was discarded. Superseded duplicate catalog/UI are removed from this contribution.
+- This session's independent pure calculation functions and deterministic synthetic tests remain as an additive research tool. They make no real NBA edge claims. Main site uses [NBA Stats FAQ](https://www.nba.com/stats/help/faq) and [NBA glossary](https://www.nba.com/stats/help/glossary) for official context; betting source terms/odds and empirical correlations remain unverified.
+- Original review also found a historical NBA injury PDF in official-domain search results but direct PDF retrieval failed; it was not treated as live availability. Legacy Pages settings could not be changed via API (403); canonical main uses existing Pages configuration.
