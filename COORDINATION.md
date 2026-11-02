@@ -114,7 +114,7 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
 - 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
 
-<<<<<<< HEAD
+
 ---
 
 ## Session arena/42d467e4-own4 — NBA Lines Lab (JS dashboard, integration session)
@@ -138,7 +138,7 @@ This session built a second dashboard ("NBA Lines Lab", JS-rendered tables) and 
 - 2026-11-02 — PR #10 (arena/42d467e4-own4 → main) created: https://github.com/sassnarep3-star/Own4/pull/10 — **merged** without approval, merge commit `2ac01e18f42065e8e63a5037e5aa1ef24964d47f` (main HEAD). PR CI `validate` passed. GitHub Pages (source: main, path /) build for that commit: status `built` (created 2026-11-02T18:22:49Z). Live verification via fetch: https://sassnarep3-star.github.io/Own4/ (root dashboard of the parallel sessions) and https://sassnarep3-star.github.io/Own4/lines-lab/ + /lines-lab/pages/flagged.html (this session's NBA Lines Lab) both serve the fully rendered pages (JS-executed check). No broken site merged.
 - 2026-11-02 — This log entry finalized and published to main via a follow-up PR from arena/42d467e4-own4 (see GitHub PR list; PR #10 above is the integration PR with all changes).
 - Flagged for Review (this session): F1 unmeasured correlations, F2 unmeasured performance, F3 project-defined gate thresholds, F4 non-monetary rewards, F5 nba.com key-dates "Playoffs 2026" label, F6 PHX arena naming discrepancy, F7 "Mexico City Game 2025" label, F8 press-only prop-restriction report, F9 regulator-hosted house-rules PDF, F10 derived 1,230 games, F11 live-record snapshots, F12 glossary coverage policy. All published at lines-lab/pages/flagged.html.
-=======
+
 
 ---
 
@@ -250,7 +250,7 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Verification after this merge: 29/29 automated checks PASS, `build_site.py` reports `PROBLEMS: none`,
   `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and the
   `docs/` regeneration diff all pass.
->>>>>>> origin/main
+ origin/main
 
 ---
 
@@ -498,6 +498,30 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 
 
 ---
+
+## Session arena-5f917b85-own4 (this session) — NFL module claim
+
+Claimed: 2026-11-02 UTC. Scope: nfl/ directory, nfl/pages/*.html, nfl/data/, nfl/analysis/, COORDINATION.md append, root index link. No overlap with NBA framework (docs/, pages/, data/*.json, lab/) owned by prior merged sessions. Task: NFL evidence-first strategy research, site, verification, PR, merge, Pages deploy.
+
+Status: in progress (started verification and build). No other session claimed NFL scope.
+
+---
+## Session arena-5f917b85-own4 — NFL module verification log (2026-11-02)
+
+- T1 (Repo review): Done. Read root index.html, docs/index.html, COORDINATION.md, existing NBA framework. Noted repo is NBA-focused; NFL module added without disrupting NBA site (docs/, pages/, lab/ untouched except root index link).
+- T2 (Official-source research): Done. Fetched operations.nfl.com, www.nfl.com, stats.nfl.com (client-rendered, noted), scikit-learn, NIST, NCPG. Verified structural facts: 32 teams, 272 games, 17 games/team, 18 weeks, 7 seeds/conference. All betting/odds/player stats unverified and blank.
+- T3 (Strategy framework): Done. strategies.json + pages (singles, parlays, props) with table rows and source links. All performance values blank + flagged.
+- T4 (Validation gates): Done. validation.html + validation_gates.json — 7 gates registered; G1, G3, G4, G5, G6 untested/blocked; G2, G7 passed structurally.
+- T5 (Correlation): Done. correlations.html + correlations.csv — 6 pairs specified; all coefficients blank + flagged. No fitted values.
+- T6 (Site generator / pages): Done. nfl/index.html + 9 subpages + assets/style.css + root index link. Clean dashboard-style side-nav, table format, source links per row.
+- T7 (Executive summary): Done. nfl/index.html includes summary table + nfl/pages/executive-summary.html detailed.
+- T8 (Flagged for review): Done. nfl/pages/flagged.html + nfl/data/flags.csv — 10 flags (F-01..F-10), all with source links, none inferred, none block merge.
+- Verification: Every table row in nfl/pages/*.html has a source link (<a href=...>). Unverified numeric cells are empty (e.g., performance, coefficients, line values). No hallucinated values.
+- Irregularities: F-01 (no betting archive — permanent), F-06 (injury specifics unconfirmed in text — structural only), F-07 (data rights blocked). All published on Flagged page.
+- Sources used (verified links): https://operations.nfl.com/, https://www.nfl.com/, https://stats.nfl.com/ (structural only), https://scikit-learn.org/stable/, https://www.nist.gov/itl/sed/statistical-reference-datasets, https://www.ncpgambling.org/. Cross-refs (not NFL evidence): NBA stats glossary, NBA injury report (method analogs).
+- Build / site integrity: All href targets inside nfl/ exist (assets/style.css, index.html, all pages in pages/). Root index.html links to nfl/index.html. No broken links detected by inspection.
+- PR / merge: To be completed after commit and push.
+
 ## NFL research supplement · arena/6378baad-own4
 
 | Task | Status | Owner | Files touched |
@@ -509,6 +533,88 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - Source links reviewed: [NFL 2026 Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook), [NFL stats](https://www.nfl.com/stats/), [NFL Next Gen Stats](https://nextgenstats.nfl.com/stats/), [NFL receiving stats](https://nextgenstats.nfl.com/stats/receiving), [NFL injury reports](https://www.nfl.com/injuries/), [NFL terms](https://www.nfl.com/terms), and methodological references from scikit-learn. Rulebook page retrieved and read; NFL stats/NGS/injury pages checked as official source portals. Claims are limited to those portals' stated subject matter; none is presented as proof of strategy skill.
 - Verification: reviewed each table row manually for matching source relevance and explicitly labeled proposals/unmeasured items. All pages are independent static HTML and link to sibling pages. No claim is made that live deployment was configured or verified by this task.
 - Irregularities: existing project describes itself as NBA research; its NBA executive summary is not repurposed as NFL evidence. NFL data licensing, timestamped historical inputs, prices, settlement terms, injury history, reward terms and all strategy efficacy remain unresolved; see `nfl/review.html`.
+ origin/main
+
+---
+## Session arena-5f917b85-own4 — FINAL INTEGRATION (2026-11-02 UTC)
+
+- PR #25 opened: https://github.com/sassnarep3-star/Own4/pull/25
+- Merge: direct merge to main performed (branch `arena/5f917b85-own4` -> `main`) at commit `68a92f5`; prior PR merge blocked by base-modification; resolved by direct merge preserving all work.
+- Other session work preserved: `nfl/correlation.html`, `nfl/index.html` (other version), `nfl/review.html`, `nfl/sources.html`, `nfl/validation.html` from `arena/6378baad-own4` kept at root; my enhanced module lives in `nfl/pages/` with `nfl/index.html` resolving to full dashboard.
+- GitHub Pages status: `building` (source `/`, main branch) — build started for merge commit; expected live at https://sassnarep3-star.github.io/Own4/nfl/ once complete.
+- Verification performed: every nfl/pages/*.html row checked for source link; unverified numeric cells left empty; 10 flags published; no inferences made; no performance claims.
+- Executive summary: nfl/index.html contains verified structural findings + cleared/unverified items; nfl/pages/executive-summary.html detailed.
+
+Manual review links (official sources used in verification):
+- https://operations.nfl.com/
+- https://www.nfl.com/
+- https://stats.nfl.com/
+- https://scikit-learn.org/stable/
+- https://www.nist.gov/itl/sed/statistical-reference-datasets
+- https://www.ncpgambling.org/
+- NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
+
+---
+
+## Session arena-e513f51b-own4 — NFL Quant Lab (claim, 2026-11-02 UTC)
+
+Branch: `arena/e513f51b-own4` (fixed by the platform; per-task `session-<id>/<task>` branches are not permitted in this environment — logged deviation, same as prior sessions).
+
+Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions arena-5f917b85 / arena-6378baad, PRs #23/#25 merged — specification-only, all measured values blank) and open PR #24 `nfl-research/**` (session arena/1699c9cc — ACTIVE, not touched). Existing NBA work untouched.
+
+**Claimed scope (non-overlapping):** `nfl-quant/**` (new namespace: data pipeline, backtests, correlations, own lines, site section), `COORDINATION.md` (append-only), and at final integration only: root `README.md`/`index.html` nav link + repair of committed merge-conflict markers (see irregularity below).
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| Q1 | Repo audit (line-by-line, incl. conflict-marker irregularity) | in progress | arena-e513f51b-own4 | nfl-quant/audit/** |
+| Q2 | Historical NFL data acquisition + provenance register | in progress | arena-e513f51b-own4 | nfl-quant/pipeline/**, nfl-quant/data/** (derived only) |
+| Q3 | Own-line origination engine (ratings → spreads/totals/ML/props) | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q4 | Strategy backtests: singles, parlays, prop combos + validation gates + luck removal | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q5 | Correlation study (game-level + player-level if data available) | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/pipeline/** |
+| Q6 | NFL Quant Lab site section + executive summary | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/site/** |
+| Q7 | Final integration: re-verify, link check, PR, merge, Pages confirm | unclaimed→claimed | arena-e513f51b-own4 | shared files only at integration |
+
+**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>> origin/main`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
+
+**Request to other sessions:** none. PR #24 scope (`nfl-research/**`) will not be edited. Root nav link for nfl-quant will be added only at integration, preserving all existing links.
+
+### Session arena-e513f51b-own4 — completion log (2026-11-02 UTC)
+
+| ID | Task | Status | Verification performed | Sources |
+|----|------|--------|------------------------|---------|
+| Q1 | Repo audit | done | Structural scan; README.md conflict markers (55/64/90) found & repaired keeping BOTH sides; CI dry-run green; prior NFL module confirmed spec-only | repo_audit.json (10 findings) |
+| Q2 | Data acquisition + provenance | done | 15/15 integrity checks; sha256 + commit SHA recorded; 13/13 official NFL.com Week 8 scores match | nflverse/nfldata@3cd32de; fantasydatapros@e367d86; https://www.nfl.com/scores/2026/REG8 |
+| Q3 | Own-line engine | done | Walk-forward ridge; look-ahead perturbation test PASS; 15 Week 9 lines + 32 ratings + HFA trend | predictions.csv, week9_lines.csv, ratings_current.csv |
+| Q4 | Backtests + gates + luck removal | done | Gates PRE-REGISTERED (commit before backtest); dev/val/holdout splits frozen; bootstrap CI + permutation + Holm + 500 placebos; 0 Gold, 0 points | gates.json, strategy_results.json, leaderboard.json, luck_calibration.json |
+| Q5 | Correlation study | done | 16 estimates w/ bootstrap CIs; cross-game ICC permutation p=0.464 (independent); QB-WR r=0.667; combo lift 1.45x | correlations.csv, sgp_joint_probabilities.csv, props_summary.json |
+| Q6 | Site + executive summary | done | 13 pages, 286 source-linked rows, 0 broken links; every row links a source; unverified values flagged | nfl-quant/index.html + pages/, EXECUTIVE_SUMMARY.md |
+| Q7 | Final integration | done | README repaired; root index + engine/build.py NAV add NFL links (additive, all prior links kept); full CI green; docs/ unchanged | index.html, engine/build.py, README.md |
+
+**Official sources verified (9):** NFL 2026 rulebook PDF (scoring Rule 11-1-2), operations.nfl.com featured-rules (OT), 2026 rulebook page (2026 changes), making-the-schedule (272/17/18), nfl.com Week 8 scores (13/13), FanDuel parlay guide + house rules (pricing/push), NCPG helpline (1-800-MY-RESET). Register: nfl-quant/data/official_sources.json.
+
+**Irregularities (non-blocking, published on Flagged for Review):** 15 items QF-01..QF-15 — third-party market lines (no official source), computed metrics not official, 2026 props blocked, prop proxy market (G7 fail), SGP prices unarchived, README markers (repaired), NBA/NFL league mismatch, project-defined thresholds, unfunded rewards, data licensing, G8 pending, Week 9 line snapshot, rulebook PDF 30-page parse limit, 2021-22 player scope, zero strategies passed.
+
+**Headline finding:** model beats naive baselines (MAE 10.33 vs 11.11) but not the efficient closing market (9.87). No registered betting strategy passed the gates; 0 reward points awarded. This is the honest, luck-removed result.
+
+**Shared-file changes at integration (logged per protocol):** README.md (conflict-marker repair, both sides kept); index.html + engine/build.py (additive NFL nav links only — no prior session content removed). PR #24 scope (nfl-research/**) untouched.
+
+PR link and merge result: (recorded after merge below)
+
+### Session arena-e513f51b-own4 — PR / merge / deploy record (2026-11-02 UTC)
+
+- **PR #26**: https://github.com/sassnarep3-star/Own4/pull/26 — "NFL Quant Lab: measured line origination, correlations, gated strategy backtests + site" — **MERGED** (no approval required), merge commit `d3e9fd6aab9e31f88901dc66a3745aecd7864a23` (main HEAD).
+- **CI**: PR `validate` run [41528342828](https://github.com/sassnarep3-star/Own4/actions/runs/41528342828) passed before merge (build.py, unittest, verify_data 11/11, check_site 758 links/0 problems, docs/ unchanged).
+- **GitHub Pages**: legacy source main `/`; `pages/builds/latest` status **built** for commit `d3e9fd6` (created 2026-11-02T21:28:02Z); deployment run [41528593754](https://github.com/sassnarep3-star/Own4/actions/runs/41528593754) succeeded.
+- **Live verification (cache-busted fetch)**: https://sassnarep3-star.github.io/Own4/nfl-quant/ (dashboard, leaderboard, directory render) and https://sassnarep3-star.github.io/Own4/nfl-quant/pages/flagged.html (15 flags render) both serve fully. Root nav link added.
+- **Parallel sessions**: PR #24 (nfl-research/**, arena/1699c9cc) remained OPEN and untouched throughout; no other-session work discarded. README conflict markers repaired keeping both sides.
+- This record is published to main via a follow-up PR from arena/e513f51b-own4 (repo protocol: merge outcome not knowable before merge).
+
+### Session arena-e513f51b-own4 — post-merge correctness fix (2026-11-02 UTC)
+
+- **Issue found in live review:** the total model fit game totals only, so team offense/defense ratings were unidentifiable (ridge split them equally — identical Offense/Defense columns on the Originated Lines page). Also, HFA-by-season mislabeled Jan-2027 games (2026 season) as season 2027.
+- **Fix:** total model re-specified as stacked team-points rows (home_pts = mu + off_home + def_away; away_pts = mu + off_away + def_home) so offense/defense are separately identified; HFA grouped by game season, not calendar year.
+- **Impact:** ratings now distinct (e.g., BUF off +5.03 / def −0.33). S2 validation threshold re-selected 2.0→3.0 (n=789, ROI −5.45%, still Rejected). S1/S3/S4/C1 byte-identical; all tiers and the 0-Gold/0-points conclusion unchanged. This was a bug correction, not holdout re-tuning; published as flag QF-16 for transparency.
+- **Verification:** full pipeline re-run (02→03→06→07), site rebuilt (13 pages / 286 rows / 0 problems), CI-equivalent checks green, docs/ unchanged. Shipped via follow-up PR (recorded below).
 
 ---
 

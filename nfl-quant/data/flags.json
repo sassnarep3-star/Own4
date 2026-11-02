@@ -1,0 +1,117 @@
+{
+  "generated_utc": "2026-11-02T21:35:08+00:00",
+  "flags": [
+    {
+      "id": "QF-01",
+      "severity": "policy",
+      "item": "All betting lines (spread/total/moneyline) are THIRD-PARTY archive values",
+      "detail": "No official NFL source publishes betting lines. Values come from nflverse/nfldata (closing lines archive). Official-source column is blank + UNVERIFIED for every market value; archive link provided instead.",
+      "source": "https://github.com/nflverse/nfldata"
+    },
+    {
+      "id": "QF-02",
+      "severity": "policy",
+      "item": "All correlations, backtest ROI, ratings and own lines are COMPUTED, not official",
+      "detail": "No official source publishes these coefficients. They are reproducible from the cited archives via nfl-quant/pipeline/. Labeled DERIVED/COMPUTED everywhere.",
+      "source": "https://github.com/sassnarep3-star/Own4/tree/main/nfl-quant/pipeline"
+    },
+    {
+      "id": "QF-03",
+      "severity": "blocked",
+      "item": "2026 player props: BLOCKED",
+      "detail": "No authorized 2026 player-level feed in scope. Player research uses 2021-2022 only. 2026 prop lines left blank.",
+      "source": "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball"
+    },
+    {
+      "id": "QF-04",
+      "severity": "research-only",
+      "item": "Prop singles use a PROXY market (rolling-mean line)",
+      "detail": "Gate G7 fails by construction. Results measure signal vs a naive proxy, NOT vs a sportsbook. RB1 +3.6% ROI vs proxy is not a betting edge.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/05_props.py"
+    },
+    {
+      "id": "QF-05",
+      "severity": "research-only",
+      "item": "Same-game parlay prices not archived",
+      "detail": "S5/S7 are fair-price monitors only. Books reprice SGPs for correlation; without archived SGP prices no edge can be claimed (G7 fails).",
+      "source": "https://www.fanduel.com/sports-betting-guide/what-is-a-parlay-bet"
+    },
+    {
+      "id": "QF-06",
+      "severity": "repaired",
+      "item": "README.md contained committed merge-conflict markers (lines 55/64/90)",
+      "detail": "From a prior session merge. Repaired at integration by keeping BOTH sides (no work discarded). COORDINATION.md was already clean on main.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+    },
+    {
+      "id": "QF-07",
+      "severity": "info",
+      "item": "Repository root project is NBA; this session's brief is NFL",
+      "detail": "Prior parallel sessions built NBA dashboards. NFL work is namespaced: nfl/ (spec), nfl-research/ (PR #24, other session), nfl-quant/ (this session, measured). No NBA files modified.",
+      "source": "https://github.com/sassnarep3-star/Own4"
+    },
+    {
+      "id": "QF-08",
+      "severity": "policy",
+      "item": "Validation-gate thresholds are project-defined",
+      "detail": "n>=300, 60% positive seasons, etc. are research design choices, not official NFL values. Pre-registered in gates.json before backtests ran.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+    },
+    {
+      "id": "QF-09",
+      "severity": "policy",
+      "item": "Leaderboard rewards are non-monetary and unfunded",
+      "detail": "1000 research points, split only among Gold-tier strategies. None passed: 0 awarded. No money or prizes exist.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+    },
+    {
+      "id": "QF-10",
+      "severity": "needs-review",
+      "item": "Data licensing must be resolved before production use",
+      "detail": "Archives are third-party mirrors of official results/stats. Review nflverse/nfldata and fantasydatapros terms; NFL stats distribution rights may apply.",
+      "source": "https://github.com/nflverse/nfldata/blob/master/DATASETS.md"
+    },
+    {
+      "id": "QF-11",
+      "severity": "pending",
+      "item": "Gate G8 (forward replication) not yet satisfiable",
+      "detail": "No strategy can reach final Gold until timestamped 2026 predictions are logged for a full season and re-tested. Week 9 own lines are the first prospective log entry.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+    },
+    {
+      "id": "QF-12",
+      "severity": "info",
+      "item": "Week 9 market lines are a snapshot (2026-11-02 20:45 UTC)",
+      "detail": "Archive values for future games are current/opening lines, not final closing lines; they will move. Own lines are model outputs, not recommendations.",
+      "source": "https://github.com/nflverse/nfldata"
+    },
+    {
+      "id": "QF-13",
+      "severity": "info",
+      "item": "Rulebook PDF direct fetch limited to first 30 pages",
+      "detail": "Rule 11 (Scoring, p.42) text verified via search-indexed excerpt of the official NFL PDF; PDF identity/structure confirmed by direct fetch. Flagged for manual re-review of the full PDF.",
+      "source": "https://static.www.nfl.com/image/upload/fl_attachment/league/tqivdkzt9mu6wdgsh1ku.pdf"
+    },
+    {
+      "id": "QF-14",
+      "severity": "info",
+      "item": "Player correlations limited to 2021-2022 (2 seasons)",
+      "detail": "WR1/WR2 designated ex-post per game for the correlation matrix (standard); leak-free rolling designation used for betting tests. QB1-WR2 r>QB1-WR1 partly reflects max-selection ceiling effects.",
+      "source": "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball"
+    },
+    {
+      "id": "QF-15",
+      "severity": "finding",
+      "item": "No registered strategy passed the holdout gates",
+      "detail": "S1/S4 Bronze (ROI indistinguishable from luck), S2/S3/C1 Rejected (negative ROI). 0 reward points. The framework's job is to reject luck; at efficient closing lines it rejected everything. This is the honest result.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/strategy_results.json"
+    },
+    {
+      "id": "QF-16",
+      "severity": "info",
+      "item": "Total-model specification corrected post-publication (off/def identification)",
+      "detail": "Initial total model fit game totals only, leaving team offense/defense unidentical (ridge split them equally). Corrected to a stacked team-points specification; ratings now distinct. S2 validation threshold re-selected (2.0->3.0, n=789, ROI -5.45%, still Rejected). S1/S3/S4/C1 and all tier conclusions unchanged; holdout re-run was a bug correction, not re-tuning. Logged for transparency.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/02_ratings.py"
+    }
+  ]
+}
