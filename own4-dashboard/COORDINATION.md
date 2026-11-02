@@ -41,7 +41,7 @@ only `README.md`, 6 bytes).
 | T07 | Skill-vs-luck gates, leaderboard with reward rules | done | session-3ab8432d | `LEADERBOARD.md`, `data/leaderboard/*` |
 | T08 | Verification ledger: every row ↔ official source; blanks + flags | done | session-3ab8432d | `VERIFICATION.md`, `scripts/verify.py`, `scripts/build_docs.py`, `data/verification/*` |
 | T09 | FINAL INTEGRATION: site build (index + nav + category subpages), combined re-verification, link check, publish | done | session-3ab8432d | `index.html`, `pages/*`, `assets/*`, `site-data/*`, `.nojekyll`, `EXECUTIVE_SUMMARY.md`, `scripts/build_site.py`, `scripts/check_links.py` |
-| T10 | PR, merge, GitHub Pages deploy confirmation, record results | in progress | session-3ab8432d | `COORDINATION.md` (append-only log section) |
+| T10 | PR, merge, GitHub Pages deploy confirmation, record results | done | session-3ab8432d | `COORDINATION.md` (append-only log section) |
 
 ## Claim log
 
@@ -107,7 +107,7 @@ only `README.md`, 6 bytes).
 
 ### T06 — done (2026-11-02)
 - Sources: [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26), [NBA.com Advanced 2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27), [NBA.com Traditional 2026-27](https://www.nba.com/stats/teams/traditional?Season=2026-27), [NBA.com Standings](https://www.nba.com/standings), [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04), [NBA.com Stat Glossary](https://www.nba.com/stats/help/glossary).
-- Verification: 23 correlations, each with n, Pearson r, Spearman rho, 20,000-shuffle permutation p, 5,000-resample bootstrap 95% CI and Benjamini–Hochberg q. Cross-table check NetRtg~+/- r=0.999. Out-of-sample 2026-27 WIN%~2025-26 NetRtg r=0.480 (q=0.0145).
+- Verification: 24 correlations, each with n, Pearson r, Spearman rho, 20,000-shuffle permutation p, 5,000-resample bootstrap 95% CI and Benjamini–Hochberg q. Cross-table check NetRtg~+/- r=0.999. Out-of-sample 2026-27 WIN%~2025-26 NetRtg r=0.480 (q=0.0145).
 - Irregularities: prop-leg baseline correlations are near zero and not significant; game-level leg covariance remains UNVERIFIED.
 
 ### T07 — done (2026-11-02)
@@ -117,13 +117,13 @@ only `README.md`, 6 bytes).
 
 ### T08 — done (2026-11-02)
 - Sources: all 22 official sources in `SOURCES.md`; [NBA.com Standings](https://www.nba.com/standings), [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26), [NBA.com Glossary](https://www.nba.com/stats/help/glossary).
-- Verification: `scripts/verify.py` checked 450 rows: 450 PASS, 0 FLAG, 0 rows without an official source. ΣW=ΣL=1230 for 2025-26; standings GP÷2 = 92 = official calendar; Σ home games = Σ road games = 92; home win rate 48/92 = 0.5217; BOS 108 / ORL 97 cross-checked against box score. Every `null` in a published row is listed in its `unverified` array.
-- Irregularities: 17 flagged items published to `data/verification/flagged.json` and the site's Flagged for Review page.
+- Verification: `scripts/verify.py` checked 452 rows: 452 PASS, 0 FLAG, 0 rows without an official source. ΣW=ΣL=1230 for 2025-26; standings GP÷2 = 92 = official calendar; Σ home games = Σ road games = 92; home win rate 48/92 = 0.5217; BOS 108 / ORL 97 cross-checked against box score. Every `null` in a published row is listed in its `unverified` array.
+- Irregularities: 19 flagged items published to `data/verification/flagged.json` and the site's Flagged for Review page.
 
 ### T09 — done (2026-11-02) — FINAL INTEGRATION
 - Combined re-verification: re-ran the full pipeline (`build_lines.py` → `correlations.py` →
   `validate_strategies.py` → `verify.py` → `build_docs.py` → `build_site.py` → `check_links.py`).
-  Result: 450/450 rows PASS, 0 FLAG, 0 rows without an official source.
+  Result: 452/452 rows PASS, 0 FLAG, 0 rows without an official source.
 - Site build: 14 HTML pages (clean landing dashboard + 13 category subpages), `assets/css/style.css`,
   `assets/js/app.js`, `site-data/site.json`, `.nojekyll`. 1000 rendered data rows; each has a Source
   column linking to an official site — enforced by `scripts/check_links.py`.
@@ -137,7 +137,7 @@ only `README.md`, 6 bytes).
   [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04),
   [NBA betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
   [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages).
-- Irregularities: none in the build. All flagged items (IR-01…IR-18, including the parallel-session
+- Irregularities: none in the build. All flagged items (IR-01…IR-19, including the parallel-session
   collision) are published on the clearly labelled **Flagged for Review** page with official source
   links; they do not block the merge.
 
@@ -178,3 +178,26 @@ the already-merged canonical `main`).
 
 `git pull --rebase origin arena/3ab8432d-own4` was run before every push. The platform's
 single-branch constraint (IR-13) is the other protocol deviation; logged above.
+
+### T10 — done (2026-11-02)
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/15 — created from `arena/3ab8432d-own4` into
+  `main` with a summary of changes, the official sources used and all flagged irregularities.
+- **Merge:** `gh pr merge 15 --merge` succeeded without approval. State `MERGED` at
+  2026-11-02T18:28:49Z; merge commit `bf719a92515f4eec612e9b573b845bec3f21ea21`.
+- **Conflicts:** PR #15 was `CONFLICTING` twice because `main` advanced from `319d6b0` → `5a5cff2`
+  → `e4de8b1` through other sessions' PRs #11–#14/#16. Both collisions were resolved by merging
+  `origin/main` into this branch, taking the already-published versions of shared files, preserving
+  every earlier session's `COORDINATION.md` entry, and keeping this session's entire output in the
+  non-overlapping `own4-dashboard/` namespace. No other session's work was discarded. IR-18 / IR-19.
+- **Checks before merge:** root `validate` GitHub Actions check passed; `scripts/build.py`,
+  `python -m unittest discover -s tests -v`, `scripts/verify_data.py` (8/8 PASS),
+  `scripts/check_site.py` (11 pages, 758 links, 438 rows, 0 problems) and `git diff --exit-code -- docs`
+  all clean. Namespaced `scripts/check_links.py` reported 14 pages, 279 local links, 1003 data rows,
+  errors=0 warnings=0; `scripts/verify.py` 452/452 PASS.
+- **GitHub Pages deployment:** `gh api repos/sassnarep3-star/Own4/pages/builds/latest` reported
+  `status: built`, `error: null` for commit `bf719a92515f4eec612e9b573b845bec3f21ea21`; Pages config
+  `status: built`, legacy build from `main /` ([Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages)).
+- **Live URLs confirmed by direct fetch:** <https://sassnarep3-star.github.io/Own4/own4-dashboard/>,
+  <https://sassnarep3-star.github.io/Own4/own4-dashboard/pages/flagged.html>, and the preserved
+  canonical root dashboard <https://sassnarep3-star.github.io/Own4/>.
+- **Result recorded in the shared root `COORDINATION.md`** in the follow-up integration commit.

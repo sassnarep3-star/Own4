@@ -402,3 +402,30 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
   other session's work was discarded.
 - **PR:** https://github.com/sassnarep3-star/Own4/pull/15 . **Merge result and Pages deployment
   confirmation:** recorded in the follow-up entry below after the merge completes.
+
+---
+## Session `arena/3ab8432d-own4` — FINAL RESULT (PR / merge / deploy)
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/15 — summary of changes, official sources and
+  flagged irregularities included in the PR body.
+- **Merge result: MERGED** (no approval required). `gh pr merge 15 --merge` succeeded at
+  2026-11-02T18:28:49Z; merge commit **`bf719a92515f4eec612e9b573b845bec3f21ea21`**.
+- **Conflicts handled:** PR #15 was `CONFLICTING` twice as `main` advanced (`319d6b0` → `5a5cff2`
+  → `e4de8b1`) through concurrent sessions' PRs #11–#14/#16. Both times `origin/main` was merged
+  into this branch, shared files were resolved in favour of the already-published canonical versions,
+  and this session's output stayed in `own4-dashboard/`. No other session's work was discarded.
+- **Build / checks:** root `validate` CI check passed; `scripts/build.py`, 3 unit tests,
+  `scripts/verify_data.py`, `scripts/check_site.py` (0 problems) and the `docs/` diff check all clean.
+  Namespaced `check_links.py`: 14 pages / 279 local links / 1003 data rows / **0 errors, 0 warnings**;
+  `verify.py`: 452/452 rows PASS, 0 rows without an official source.
+- **GitHub Pages deploy: CONFIRMED.** `.../pages/builds/latest` returned `status: built`,
+  `error: null` for commit `bf719a9...`; Pages config `status: built` (legacy, `main /`).
+  Live fetches succeeded for <https://sassnarep3-star.github.io/Own4/own4-dashboard/>, its
+  Flagged for Review page, and the preserved canonical root dashboard
+  <https://sassnarep3-star.github.io/Own4/>.
+- **Sources:** [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages),
+  [Pull request #15](https://github.com/sassnarep3-star/Own4/pull/15),
+  [commit bf719a9](https://github.com/sassnarep3-star/Own4/commit/bf719a92515f4eec612e9b573b845bec3f21ea21),
+  [NBA.com standings](https://www.nba.com/standings).
+- **Flagged irregularities** remain published and non-blocking on
+  <https://sassnarep3-star.github.io/Own4/own4-dashboard/pages/flagged.html> (IR-01…IR-19).

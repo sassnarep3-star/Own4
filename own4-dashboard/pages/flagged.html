@@ -21,7 +21,7 @@
       </div>
     </header>
     <div class="content">
-      <div class="kpi-grid"><a class="kpi" href="flagged.html"><div class="kpi-label">Flagged items</div><div class="kpi-value">18</div><div class="kpi-sub">non-blocking</div></a><a class="kpi" href="flagged.html"><div class="kpi-label">Blank line fields</div><div class="kpi-value">140</div><div class="kpi-sub">never inferred</div></a></div>
+      <div class="kpi-grid"><a class="kpi" href="flagged.html"><div class="kpi-label">Flagged items</div><div class="kpi-value">19</div><div class="kpi-sub">non-blocking</div></a><a class="kpi" href="flagged.html"><div class="kpi-label">Blank line fields</div><div class="kpi-value">140</div><div class="kpi-sub">never inferred</div></a></div>
       <div class="callout callout-warn"><div class="callout-title">Flagged for Review</div><div class="callout-body">These irregularities and unverified items are published here for your review after the site is live. Per the project instructions they do <strong>not</strong> block the merge or deployment. Every row links to an official site; third-party evidence is shown only as additional context.</div></div><h2>Irregularities & unverified items</h2><div class="table-wrap">
 <table class="data-table"><thead><tr>
 <th>ID</th>
@@ -169,10 +169,18 @@
 <tr>
 <td>IR-18</td>
 <td><span class="badge badge-warn">High</span></td>
-<td>Parallel-session collision: concurrent sessions merged PRs #11-#13 into main, publishing a canonical root dashboard overlapping this session&#x27;s index.html, pages/*, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md and data/sources.json. PR #15 was CONFLICTING.</td>
+<td>Parallel-session collision: concurrent sessions merged PRs #11-#14/#16 into main, publishing a canonical root dashboard overlapping this session&#x27;s index.html, pages/*, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md and data/sources.json. PR #15 was CONFLICTING.</td>
 <td>resolved</td>
 <td><span class="badge badge-warn">needs review</span></td>
 <td class="src-cell"><a class="src-chip" href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub API ↗</a></td>
+</tr>
+<tr>
+<td>IR-19</td>
+<td><span class="badge badge-muted">Low</span></td>
+<td>The shared root COORDINATION.md committed by earlier concurrent sessions contains an unresolved git conflict-marker block (&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD ... &gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/main) around the arena/42d467e4-own4 section. Left verbatim to avoid discarding another session&#x27;s work; flagged for manual cleanup.</td>
+<td><span class="blank">—</span> <span class="badge badge-muted">N/A</span></td>
+<td><span class="badge badge-warn">needs review</span></td>
+<td class="src-cell"><a class="src-chip" href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">GitHub repo ↗</a></td>
 </tr>
 </tbody></table>
 </div><h2>Blank cells on the Lines page (one row per game)</h2><div class="table-wrap">

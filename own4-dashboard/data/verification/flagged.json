@@ -142,10 +142,18 @@
     {
       "id": "IR-18",
       "severity": "High",
-      "item": "Parallel-session collision: concurrent sessions merged PRs #11-#13 into main, publishing a canonical root dashboard overlapping this session's index.html, pages/*, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md and data/sources.json. PR #15 was CONFLICTING.",
+      "item": "Parallel-session collision: concurrent sessions merged PRs #11-#14/#16 into main, publishing a canonical root dashboard overlapping this session's index.html, pages/*, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md and data/sources.json. PR #15 was CONFLICTING.",
       "value": "resolved",
       "status": "needs review",
       "source": "https://api.github.com/repos/sassnarep3-star/Own4/pages"
+    },
+    {
+      "id": "IR-19",
+      "severity": "Low",
+      "item": "The shared root COORDINATION.md committed by earlier concurrent sessions contains an unresolved git conflict-marker block (<<<<<<< HEAD ... >>>>>>> origin/main) around the arena/42d467e4-own4 section. Left verbatim to avoid discarding another session's work; flagged for manual cleanup.",
+      "value": "—",
+      "status": "needs review",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
     }
   ]
 }
