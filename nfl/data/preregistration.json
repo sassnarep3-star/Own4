@@ -103,6 +103,15 @@
     {"id":"S13","class":"prop_combo","market":"QB prop + team total combo","signal":"QB passing yards over median AND team points over median"},
     {"id":"S14","class":"prop_combo","market":"same-QB alt-line combo","signal":"QB passing yards over median AND attempts over median"}
   ],
+  "clarification_log": [
+    {
+      "recorded_utc": "2026-11-02",
+      "before_strategy_analysis": true,
+      "item": "The word 'median' in strategy_catalog S12/S13/S14 and 'league-mean total' in S05/S11 are defined as: fixed thresholds computed ONLY on the development weeks (Weeks 1-2) and on strictly-prior-weeks league totals, respectively. No holdout-week value is used to set a threshold.",
+      "min_qb_prior_games": 2,
+      "reason": "Removes any ambiguity that could be read as look-ahead; no frozen numeric parameter was changed."
+    }
+  ],
   "luck_removal": {
     "chronological_dev_holdout": true,
     "weeks_dev": [1, 2],

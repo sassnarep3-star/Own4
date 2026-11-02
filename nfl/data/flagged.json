@@ -1,0 +1,251 @@
+{
+  "page_title": "Flagged for Review",
+  "items": [
+    {
+      "id": "F-01",
+      "title": "Repository scope mismatch (NBA archive vs NFL request)",
+      "status": "needs review",
+      "detail": "The checked-in repository is an NBA line-origination workspace (README, data/, docs/, engine/, lab/, own4-dashboard/). The user request is NFL. All prior NBA outputs are retained as archive and are NOT used as NFL evidence. This NFL deliverable lives entirely in nfl/** plus NFL_EXECUTIVE_SUMMARY.md.",
+      "impact": "Do not read NBA standings, NBA leaderboards or NBA 'verified' claims as NFL findings.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "F-02",
+      "title": "No official NFL betting lines or closing lines",
+      "status": "needs review",
+      "detail": "https://www.nfl.com/odds/ returned the official 404 'Flag on the Play' page on 2026-11-02. No official NFL source publishes market spreads, totals, moneylines or closing lines. All market-price and CLV cells are BLANK. Gate G10 therefore fails for every strategy and closing-line value cannot be computed.",
+      "impact": "CLV test and market comparison are impossible; do not substitute third-party odds.",
+      "urls": [
+        "https://www.nfl.com/odds/",
+        "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
+      ]
+    },
+    {
+      "id": "F-03",
+      "title": "Committed unresolved Git conflict markers in shared files",
+      "status": "needs review",
+      "detail": "COORDINATION.md and README.md contain literal <<<<<<< HEAD / ======= / >>>>>>> origin/main markers committed by earlier sessions. They are preserved, not deleted, and repaired in final integration by keeping both sides.",
+      "impact": "Shared-file editing must not discard either side's text.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+        "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+      ]
+    },
+    {
+      "id": "F-04",
+      "title": "All model parameters are project-defined, not official",
+      "status": "explained",
+      "detail": "K=20, Elo divisor 400, 25 points per rating unit, +2.5 home advantage, 13.5-point margin sigma, Pythagorean exponent 2.37, total shrink 0.5 and the 2025 prior are engineering choices. No official NFL source publishes or endorses them. They are frozen in nfl/data/preregistration.json.",
+      "impact": "Fair lines are ORIGINATED, not verified market prices.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://github.com/sassnarep3-star/Own4/blob/arena/01575b2d-own4/nfl/data/preregistration.json",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "id": "F-05",
+      "title": "Correlation thresholds and leg definitions are project-defined",
+      "status": "explained",
+      "detail": "The ≥24 home points and ≥45 total points leg definitions, the 0.20 dependence block threshold and the 0.05 alpha are project policy, not official NFL values. Some correlation pairs have n below 20 or use non-independent pairs.",
+      "impact": "Correlation values are computed from official data but the cut-offs are policy.",
+      "urls": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm"
+      ]
+    },
+    {
+      "id": "F-06",
+      "title": "Validation-gate thresholds are project policy",
+      "status": "explained",
+      "detail": "n ≥ 300 graded independent observations is a project-set minimum sample. It is not an official NFL or regulatory requirement.",
+      "impact": "Every strategy fails G2 in this 8-week sample.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "id": "F-07",
+      "title": "-110 break-even and payout economics have no official NFL source",
+      "status": "needs review",
+      "detail": "The 0.5238 break-even hit rate is a sportsbook-pricing convention; no official NFL page publishes it. Operator settlement rules use official governing-body statistics, but the price/juice is not confirmed from an official source in this project.",
+      "impact": "Gate G5 and parlay break-even values are policy; leave 'official price' blank.",
+      "urls": [
+        "https://www.goldennugget.com/lake-charles/casino/draftkings-sportsbook-bar-grill/draftkings-sportsbook-house-rules/",
+        "https://www.goldennugget.com/contentassets/9800d7ef44d6474dad6cd3e69d29dd99/draftkings-gnlc-retail-house-rules-v15.pdf",
+        "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
+      ]
+    },
+    {
+      "id": "F-08",
+      "title": "DraftKings correlated-parlay clause only partially retrievable",
+      "status": "needs review",
+      "detail": "The official operator House Rules page (Version 18 – 09.03.2026) and the official v15 PDF were fetched, but the regulator-hosted copy that carries the full parlay definition ('two or more legs ... requires every leg to be settled as won') and the correlated-selection prohibition failed to download in full. The clause exists in the official-page search index but the complete rule text was not read line by line.",
+      "impact": "Do not state a specific void/correlation rule as fully verified; the project simply refuses to price correlated legs independently.",
+      "urls": [
+        "https://www.goldennugget.com/lake-charles/casino/draftkings-sportsbook-bar-grill/draftkings-sportsbook-house-rules/",
+        "https://www.goldennugget.com/contentassets/9800d7ef44d6474dad6cd3e69d29dd99/draftkings-gnlc-retail-house-rules-v15.pdf",
+        "https://massgaming.com/wp-content/uploads/DraftKings-House-Rules-5.14.24.pdf"
+      ]
+    },
+    {
+      "id": "F-09",
+      "title": "Rewards are non-monetary and unfunded",
+      "status": "needs review",
+      "detail": "The leaderboard competition awards Gold/Silver/Bronze status points (100/60/30). There is no funded prize pool, sponsor, or official NFL reward programme. No external reward claim is made.",
+      "impact": "Reward tiers are project mechanics only.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
+      ]
+    },
+    {
+      "id": "F-10",
+      "title": "Scoring point values left blank",
+      "status": "needs review",
+      "detail": "The official 2026 Rulebook page confirms Rule 11 sections (Value of Scores, Touchdown, Try, Field Goal, Safety) but the numeric point values (6/3/2/1/2) were not retrievable in the fetched official page text. The value cells are BLANK rather than filled from memory.",
+      "impact": "Never infer rulebook numbers.",
+      "urls": [
+        "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+        "https://operations.nfl.com/the-rules/nfl-rulebook/"
+      ]
+    },
+    {
+      "id": "F-11",
+      "title": "Small sample; no validated skill-based strategy",
+      "status": "needs review",
+      "detail": "120 official finals across 8 weeks, 88 walk-forward predictions, 60 QB rows. No strategy passes all 12 gates; 0 rewards awarded. The 0.586 winner accuracy is not significant after multiple-testing control.",
+      "impact": "Publish no 'winning strategy' claim.",
+      "urls": [
+        "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "F-12",
+      "title": "Home/away designation for international and neutral-site games",
+      "status": "needs review",
+      "detail": "NFL.com lists home/away designations for international games (e.g. Week 9 Bengals at Falcons in Madrid). Home-field advantage is set to zero for the games explicitly marked neutral in the official schedule data; other designations are taken verbatim from NFL.com and not reinterpreted.",
+      "impact": "A small number of fair spreads may differ from a true-venue model.",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-9",
+        "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced",
+        "https://www.nfl.com/news/2026-27-national-football-league-important-dates"
+      ]
+    },
+    {
+      "id": "F-13",
+      "title": "Live in-season snapshot; Week 8 Monday game not final",
+      "status": "needs review",
+      "detail": "At retrieval (2026-11-02 UTC) Bears at Seahawks (W8 MNF) had not concluded and is excluded from all 120 finals. 2026 standings are a live snapshot and will change after that game and Week 9.",
+      "impact": "Any recomputation after Week 8 MNF will legitimately differ.",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://www.nfl.com/schedules/2026/by-week/week-9",
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "F-14",
+      "title": "Duplicate legacy dashboards with conflicting leaderboard claims",
+      "status": "needs review",
+      "detail": "Root index.html, docs/, lab/, lines-lab/, own4-dashboard/ and pipeline/ each contain prior-session NBA dashboards and leaderboard/summary claims. They are retained as archive; this NFL site is a separate namespace and does not endorse or reconcile those numbers.",
+      "impact": "Read only nfl/** for NFL findings.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://github.com/sassnarep3-star/Own4/tree/main/docs",
+        "https://github.com/sassnarep3-star/Own4/tree/main/lab"
+      ]
+    },
+    {
+      "id": "F-15",
+      "title": "NBA-named CI workflow and NBA fetch workflow",
+      "status": "needs review",
+      "detail": ".github/workflows/pages.yml is named 'Validate NBA research workspace' and .github/workflows/fetch-nba-data.yml fetches NBA data. Final integration adds NFL checks while keeping the legacy NBA checks passing; the NBA fetch workflow is left untouched.",
+      "impact": "Workflow name is stale but the checks remain valid.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/pages.yml",
+        "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/fetch-nba-data.yml"
+      ]
+    },
+    {
+      "id": "F-16",
+      "title": "Player-prop medians come from 8 quarterbacks only",
+      "status": "needs review",
+      "detail": "The 60 game-log rows cover 8 official NFL.com QB stat pages, not the full league. Dev-set medians are computed from 16 Week 1-2 rows and are not league-wide distributions.",
+      "impact": "Prop-combo results are illustrative, not a validated player-prop market.",
+      "urls": [
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc",
+        "https://www.nfl.com/players/jordan-love/stats/",
+        "https://www.nfl.com/players/patrick-mahomes/stats/"
+      ]
+    },
+    {
+      "id": "F-17",
+      "title": "Cross-game parlay combinations share legs",
+      "status": "needs review",
+      "detail": "Week-level parlay combinations reuse the same games, so the combinations are not independent observations. Wilson intervals and binomial p-values for S09/S10 are therefore naïve and must not be treated as confirmatory.",
+      "impact": "G2 is not satisfied by counting parlay combinations.",
+      "urls": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "F-18",
+      "title": "Parallel-session branch/worktree convention not available",
+      "status": "explained",
+      "detail": "The user requested one branch/worktree named session-<id>/<task> per task. This platform pins the session to a single branch arena/01575b2d-own4 and forbids creating or pushing other branches. Non-overlap is instead enforced by the nfl/** file namespace; the deviation is logged in COORDINATION.md.",
+      "impact": "Only one branch is pushed; no parallel branch merge was performed.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "F-19",
+      "title": "No official injury/availability data ingested for Week 9",
+      "status": "needs review",
+      "detail": "Only the official reporting DEADLINES are verified (Practice Report by 4:00 p.m. NY Wed/Thu/Fri for Sunday games; Game Status Report Friday). No team injury report was transcribed, so availability signals are absent from the Week 9 lines.",
+      "impact": "Week 9 fair lines do not adjust for injuries.",
+      "urls": [
+        "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+        "https://www.nfl.com/schedules/2026/by-week/week-9"
+      ]
+    },
+    {
+      "id": "F-20",
+      "title": "Tie game handling",
+      "status": "explained",
+      "detail": "Week 5 Giants 27, Commanders 27 is a tie. Winner accuracy excludes it; Brier/log loss treat it as y=0.5. This is project policy, consistent with the official standings which record a T column.",
+      "impact": "One observation is removed from winner grading.",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "F-21",
+      "title": "Pre-registration clarification recorded before strategy analysis",
+      "status": "explained",
+      "detail": "The ambiguous word 'median' in S12/S13/S14 is defined in clarification_log as a fixed Weeks 1-2 development-set median, with a minimum of 2 strictly-prior QB games. No frozen numeric parameter was changed; the clarification was written before analysis.py executed.",
+      "impact": "Prop-combo thresholds are reproducible and free of look-ahead.",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc"
+      ]
+    }
+  ]
+}

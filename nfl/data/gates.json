@@ -1,0 +1,101 @@
+{
+  "gates": [
+    {
+      "id": "G1",
+      "name": "Official provenance",
+      "rule": "Every input row carries an https URL on an official domain; recomputation matches the official standings.",
+      "type": "evidence",
+      "official_basis": "S01–S24"
+    },
+    {
+      "id": "G2",
+      "name": "Minimum sample",
+      "rule": "n >= 300 graded, independent observations",
+      "threshold": 300,
+      "type": "project_policy",
+      "official_value": null,
+      "flag_id": "F-06"
+    },
+    {
+      "id": "G3",
+      "name": "No look-ahead / walk-forward",
+      "rule": "All features strictly earlier than the graded game; perturbation test must not change any prediction.",
+      "type": "method",
+      "official_basis": "S30"
+    },
+    {
+      "id": "G4",
+      "name": "Out-of-sample skill",
+      "rule": "Model Brier strictly below the 0.25 constant-probability baseline and below the static prior model.",
+      "type": "method",
+      "official_basis": "S29"
+    },
+    {
+      "id": "G5",
+      "name": "Break-even edge",
+      "rule": "Lower bound of the Wilson 95% CI on hit rate must exceed 0.5238 (-110 break-even).",
+      "threshold": 0.5238,
+      "type": "project_policy",
+      "official_value": null,
+      "flag_id": "F-07"
+    },
+    {
+      "id": "G6",
+      "name": "Multiple-testing control",
+      "rule": "Benjamini/Hochberg q <= 0.05 across the whole strategy family.",
+      "alpha": 0.05,
+      "type": "method",
+      "official_basis": "S28"
+    },
+    {
+      "id": "G7",
+      "name": "Repeatability",
+      "rule": "Edge direction positive in both disjoint chronological halves.",
+      "type": "method",
+      "official_basis": "S29"
+    },
+    {
+      "id": "G8",
+      "name": "Permutation / luck test",
+      "rule": "Permutation p <= 0.05 against shuffled predictions.",
+      "alpha": 0.05,
+      "type": "method",
+      "official_basis": "S30"
+    },
+    {
+      "id": "G9",
+      "name": "Correlation control",
+      "rule": "Parlay / prop-combo legs with |r| >= 0.20 must be priced jointly; same-player legs with |r| >= 0.20 are blocked.",
+      "threshold": 0.2,
+      "type": "project_policy",
+      "official_value": null,
+      "flag_id": "F-05"
+    },
+    {
+      "id": "G10",
+      "name": "Market / closing-line value",
+      "rule": "Requires an official market price and closing line; no official NFL source publishes betting lines, so this gate fails for every strategy.",
+      "type": "evidence",
+      "official_basis": "S15",
+      "blocked": true
+    },
+    {
+      "id": "G11",
+      "name": "Pre-registration",
+      "rule": "Parameters frozen before the first analysis run and committed to the repository.",
+      "type": "evidence",
+      "official_basis": "S34"
+    },
+    {
+      "id": "G12",
+      "name": "Reproducibility",
+      "rule": "All published numbers regenerate from checked-in data + code; every table row has an official source link.",
+      "type": "evidence",
+      "official_basis": "S34"
+    }
+  ],
+  "model_brier": 0.23463188918317038,
+  "model_brier_baseline": 0.2471590909090909,
+  "model_brier_static": 0.238809988453784,
+  "note": "G2 and G10 fail for every strategy in this 8-week sample. See Flagged for Review."
+}

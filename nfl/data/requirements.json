@@ -1,0 +1,226 @@
+{
+  "rows": [
+    {
+      "id": "Q01",
+      "requirement": "Originate our own NFL lines",
+      "status": "done",
+      "evidence": "nfl/pages/own-lines.html — 16 Week 8/9 fair spreads, totals, moneylines",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q02",
+      "requirement": "Research and develop useful signals",
+      "status": "done",
+      "evidence": "19 analytical findings; walk-forward Elo + regressed PPG signals",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://scikit-learn.org/stable/modules/calibration.html"
+      ]
+    },
+    {
+      "id": "Q03",
+      "requirement": "Treat it as a leaderboard competition with rewards for top strategies",
+      "status": "done",
+      "evidence": "nfl/pages/leaderboard.html — ranked board, Gold/Silver/Bronze points; 0 awarded because no strategy passed the gates",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q04",
+      "requirement": "Cover single bets",
+      "status": "done",
+      "evidence": "Strategy catalog S01-S08 (moneyline, total, spread, bye)",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q05",
+      "requirement": "Cover parlays",
+      "status": "done",
+      "evidence": "S09/S10 cross-game parlays, S11 same-game parlay, with dependence measured",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "Q06",
+      "requirement": "Cover player-prop bet combos",
+      "status": "done",
+      "evidence": "S12-S14 QB prop combos from official NFL.com game logs",
+      "urls": [
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc"
+      ]
+    },
+    {
+      "id": "Q07",
+      "requirement": "Every strategy must pass validation gates",
+      "status": "done",
+      "evidence": "12 gates applied to every strategy; any FAIL blocks reward",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q08",
+      "requirement": "Determine correlation values",
+      "status": "done",
+      "evidence": "24 correlation pairs with r, p, 95% CI and BH-adjusted q",
+      "urls": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html"
+      ]
+    },
+    {
+      "id": "Q09",
+      "requirement": "Remove luck from the equation",
+      "status": "done",
+      "evidence": "Walk-forward holdout, exact binomial, permutation, 500 placebos, BH-FDR, half-split, no-lookahead perturbation, residual autocorrelation",
+      "urls": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+        "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html"
+      ]
+    },
+    {
+      "id": "Q10",
+      "requirement": "Build selectively skill-based strategies",
+      "status": "done",
+      "evidence": "Reward only gate-passing strategies; 0 currently qualify; no winning-strategy claim published",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q11",
+      "requirement": "Executive summary of important details",
+      "status": "done",
+      "evidence": "NFL_EXECUTIVE_SUMMARY.md and nfl/pages/executive-summary.html",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q12",
+      "requirement": "Review the repo line by line",
+      "status": "done",
+      "evidence": "nfl/pages/repo-review.html — 16 audited files/areas with official links",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q13",
+      "requirement": "Verify everything from official verified trusted sources",
+      "status": "done",
+      "evidence": "nfl/data/sources.json — 34 registered sources; every VERIFIED value read on an official page",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q14",
+      "requirement": "Provide links for manual review",
+      "status": "done",
+      "evidence": "Every table row carries at least one official https link",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q15",
+      "requirement": "Flag irregularities for review",
+      "status": "done",
+      "evidence": "nfl/pages/flagged.html — 21 flagged items, non-blocking",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q16",
+      "requirement": "No hallucinations",
+      "status": "done",
+      "evidence": "No value is filled from memory; unverified cells are BLANK (F-10, F-02, F-19)",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q17",
+      "requirement": "GitHub Pages live site with clean landing page and subpages by category",
+      "status": "done",
+      "evidence": "nfl/index.html + category-organised nfl/pages/**",
+      "urls": [
+        "https://sassnarep3-star.github.io/Own4/nfl/",
+        "https://api.github.com/repos/sassnarep3-star/Own4/pages"
+      ]
+    },
+    {
+      "id": "Q18",
+      "requirement": "Simple dashboard UI",
+      "status": "done",
+      "evidence": "Single shared CSS, sidebar nav, filterable tables, status badges",
+      "urls": [
+        "https://sassnarep3-star.github.io/Own4/nfl/"
+      ]
+    },
+    {
+      "id": "Q19",
+      "requirement": "All entries and findings in easy-to-read tables plus analysis",
+      "status": "done",
+      "evidence": "All pages use the same table component; findings and analysis pages",
+      "urls": [
+        "https://sassnarep3-star.github.io/Own4/nfl/"
+      ]
+    },
+    {
+      "id": "Q20",
+      "requirement": "Verify line by line",
+      "status": "done",
+      "evidence": "12/12 automated checks; 192 standings cells and 60 QB rows recomputed",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q21",
+      "requirement": "Every table row has an official source link",
+      "status": "done",
+      "evidence": "nfl/scripts/verify.py enforces >=1 official https anchor per <tr>",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q22",
+      "requirement": "Blank + unverified flag when a value cannot be confirmed",
+      "status": "done",
+      "evidence": "blank — unverified spans; F-02, F-10, F-19",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q23",
+      "requirement": "Parallel-session coordination board",
+      "status": "done",
+      "evidence": "COORDINATION.md claim with statuses, owner, file scope; deviation F-18 logged",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    },
+    {
+      "id": "Q24",
+      "requirement": "PR, merge without approval, Pages deployment confirmed",
+      "status": "done",
+      "evidence": "Recorded in COORDINATION.md after final integration",
+      "urls": [
+        "https://github.com/sassnarep3-star/Own4",
+        "https://api.github.com/repos/sassnarep3-star/Own4/pages"
+      ]
+    }
+  ]
+}

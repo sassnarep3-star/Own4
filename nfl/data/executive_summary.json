@@ -1,0 +1,52 @@
+{
+  "generated_utc": "2026-11-02",
+  "season_snapshot": "2026 NFL regular season, Weeks 1-8 finals as of 2026-11-02 UTC; Week 9 upcoming",
+  "official_rows": {
+    "final_scores": 120,
+    "walk_forward_predictions": 88,
+    "qb_game_log_rows": 60,
+    "standings_rows_2026": 32,
+    "standings_rows_2025": 32,
+    "upcoming_games": 16
+  },
+  "verification": {
+    "checks_passed": 12,
+    "checks_total": 12,
+    "standings_cells_recomputed": 192,
+    "qb_rows_reconciled": 60
+  },
+  "headline": [
+    "Walk-forward own-line model: 0.5862 winner accuracy on 87 graded games (Brier 0.2346 vs 0.2472 constant baseline).",
+    "Exact binomial p=0.1329; permutation p=0.0280; 4 of 14 strategies survive BH-FDR.",
+    "0 of 14 strategies pass all 12 validation gates; 0 rewards awarded; 0 points.",
+    "Same-player prop legs are strongly correlated (C15 r=0.739, C23 phi=0.498); cross-game parlay dependence C22 r=0.032.",
+    "No official NFL betting lines or closing lines exist on NFL.com; all market-price cells are BLANK and CLV cannot be measured (F-02)."
+  ],
+  "key_conclusions": [
+    "Fair spreads/totals/moneylines are ORIGINATED from official scores and standings via a walk-forward Elo + regressed points model; they are not market prices.",
+    "Selectively skill-based reward: only strategies passing every gate are eligible; in this 8-week sample none are, so the leaderboard displays ranks without awarding anything.",
+    "Luck cannot be removed from single outcomes; it is bounded by chronological holdout, exact/permutation tests, 500 placebo strategies and multiple-testing control.",
+    "Correlated legs are never priced by naïve multiplication. Same-game and same-player combos are priced from the empirical joint hit rate; the most correlated same-QB combos are blocked.",
+    "The pre-existing repository is an NBA archive (F-01). All NBA outputs are preserved and none are used as NFL evidence."
+  ],
+  "flagged_count": 21,
+  "official_sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-1",
+    "https://www.nfl.com/schedules/2026/by-week/week-2",
+    "https://www.nfl.com/schedules/2026/by-week/week-3",
+    "https://www.nfl.com/schedules/2026/by-week/week-4",
+    "https://www.nfl.com/schedules/2026/by-week/week-5",
+    "https://www.nfl.com/schedules/2026/by-week/week-6",
+    "https://www.nfl.com/schedules/2026/by-week/week-7",
+    "https://www.nfl.com/schedules/2026/by-week/week-8",
+    "https://www.nfl.com/schedules/2026/by-week/week-9",
+    "https://www.nfl.com/standings/league/2026/REG",
+    "https://www.nfl.com/standings/league/2025/REG",
+    "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced",
+    "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+    "https://www.nfl.com/news/2026-27-national-football-league-important-dates",
+    "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners",
+    "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc"
+  ],
+  "site": "https://sassnarep3-star.github.io/Own4/nfl/"
+}

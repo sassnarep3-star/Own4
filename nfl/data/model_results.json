@@ -1,0 +1,112 @@
+{
+  "model": "Elo + regressed points-per-game own-line engine",
+  "parameters": {
+    "initial_rating": 1500.0,
+    "k_factor": 20.0,
+    "elo_divisor": 400.0,
+    "rating_to_points_divisor": 25.0,
+    "home_advantage_points": 2.5,
+    "margin_sigma_points": 13.5,
+    "prior_season": 2025,
+    "prior_pythagorean_exponent": 2.37,
+    "prior_rating_scale": 200.0,
+    "total_shrink": 0.5,
+    "min_team_games_for_total": 3,
+    "win_probability": "p = Phi(predicted_home_margin / margin_sigma_points), Phi = standard normal CDF",
+    "fair_moneyline": "American odds from p; no vig, no margin",
+    "fair_spread_home": "-predicted_home_margin (negative = home favored)",
+    "fair_total": "league_prior_mean_total + total_shrink * (raw_expected_total - league_prior_mean_total)",
+    "elo_update": "margin-based: delta = k_factor * (home_win_score - 1/(1+10^(-(rating_diff)/elo_divisor)))",
+    "elo_update_margin_multiplier": "log(|actual_margin|+1) scaling, capped at 2.0"
+  },
+  "parameters_are_project_defined": true,
+  "walk_forward": {
+    "n_predictions": 88,
+    "n_graded_winners": 87,
+    "n_ties": 1,
+    "winner_correct": 51,
+    "winner_accuracy": 0.5862068965517241,
+    "brier": 0.23463188918317038,
+    "brier_baseline_050": 0.2471590909090909,
+    "brier_static_prior_model": 0.238809988453784,
+    "brier_skill_vs_baseline": 0.012527201725920529,
+    "log_loss": 0.6672852562015629,
+    "margin_mae": 8.851740909090907,
+    "total_mae": 11.282806818181815,
+    "beats_constant_baseline": true,
+    "beats_static_prior_model": true,
+    "half_split": {
+      "W3-5": {
+        "n": 46,
+        "correct": 27,
+        "accuracy": 0.5869565217391305
+      },
+      "W6-8": {
+        "n": 41,
+        "correct": 24,
+        "accuracy": 0.5853658536585366
+      }
+    },
+    "note": "Brier and log loss include the single tie as y=0.5; winner accuracy excludes ties."
+  },
+  "no_lookahead_perturbation": {
+    "test": "Perturb one Week 8 official score by +7 home points and recompute",
+    "weeks_compared": "3-7 (plus all 8 holdout weeks checked)",
+    "predictions_compared": 75,
+    "identical": true,
+    "conclusion": "No future information enters a prediction",
+    "method_source": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+    "data_source": "https://www.nfl.com/games/browns-at-steelers-2026-reg-8"
+  },
+  "final_ratings": {
+    "ATL": 1474.16,
+    "AZ": 1443.255,
+    "BAL": 1500.983,
+    "BUF": 1565.042,
+    "CAR": 1471.242,
+    "CHI": 1531.374,
+    "CIN": 1513.72,
+    "CLE": 1469.126,
+    "DAL": 1483.104,
+    "DEN": 1550.07,
+    "DET": 1532.501,
+    "GB": 1517.128,
+    "HOU": 1513.856,
+    "IND": 1480.625,
+    "JAX": 1562.948,
+    "KC": 1533.868,
+    "LA": 1546.231,
+    "LAC": 1454.414,
+    "LV": 1450.48,
+    "MIA": 1437.636,
+    "MIN": 1541.678,
+    "NE": 1557.597,
+    "NO": 1453.248,
+    "NYG": 1493.053,
+    "NYJ": 1427.999,
+    "PHI": 1474.367,
+    "PIT": 1532.145,
+    "SEA": 1567.353,
+    "SF": 1553.75,
+    "TB": 1489.597,
+    "TEN": 1408.281,
+    "WAS": 1459.816
+  },
+  "own_line_count": 16,
+  "official_data_sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-1",
+    "https://www.nfl.com/schedules/2026/by-week/week-2",
+    "https://www.nfl.com/schedules/2026/by-week/week-3",
+    "https://www.nfl.com/schedules/2026/by-week/week-4",
+    "https://www.nfl.com/schedules/2026/by-week/week-5",
+    "https://www.nfl.com/schedules/2026/by-week/week-6",
+    "https://www.nfl.com/schedules/2026/by-week/week-7",
+    "https://www.nfl.com/schedules/2026/by-week/week-8",
+    "https://www.nfl.com/schedules/2026/by-week/week-9",
+    "https://www.nfl.com/standings/league/2025/REG"
+  ],
+  "method_sources": [
+    "https://scikit-learn.org/stable/modules/calibration.html",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm"
+  ]
+}

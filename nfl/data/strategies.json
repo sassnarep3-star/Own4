@@ -1,0 +1,998 @@
+{
+  "breakeven_single_project_policy": 0.5238,
+  "null_note": "Singles: 0.5. 2/3-leg parlays and prop combos: product of per-leg chance rates.",
+  "strategies": [
+    {
+      "id": "S01",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "Elo model probability, all games",
+      "n": 87,
+      "effective_n": 87,
+      "hits": 51,
+      "hit_rate": 0.5862068965517241,
+      "null_prob": 0.5,
+      "wilson_low": 0.4812159672619939,
+      "wilson_high": 0.6839068763683301,
+      "edge_vs_null": 0.08620689655172409,
+      "breakeven": 0.5238,
+      "binomial_p": 0.13290188519545756,
+      "permutation_p": 0.07646176911544228,
+      "half_split": {
+        "W3-5": {
+          "n": 46,
+          "hit_rate": 0.5869565217391305,
+          "edge": 0.08695652173913049
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.5853658536585366,
+          "edge": 0.08536585365853655
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.20673626585960067,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required",
+        "G5: Wilson lower bound 0.481 ≤ break-even 0.5238",
+        "G6: BH q=0.2067 > 0.05",
+        "G8: permutation p=0.0765 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S02",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "Elo model probability, only |p-0.5| >= 0.08",
+      "n": 42,
+      "effective_n": 42,
+      "hits": 26,
+      "hit_rate": 0.6190476190476191,
+      "null_prob": 0.5,
+      "wilson_low": 0.4681404026715268,
+      "wilson_high": 0.7500027423604485,
+      "edge_vs_null": 0.11904761904761907,
+      "breakeven": 0.5238,
+      "binomial_p": 0.1641494017831057,
+      "permutation_p": 0.08295852073963018,
+      "half_split": {
+        "W3-5": {
+          "n": 18,
+          "hit_rate": 0.6666666666666666,
+          "edge": 0.16666666666666663
+        },
+        "W6-8": {
+          "n": 24,
+          "hit_rate": 0.5833333333333334,
+          "edge": 0.08333333333333337
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bengals-at-ravens-2026-reg-7",
+        "https://www.nfl.com/games/broncos-at-49ers-2026-reg-4",
+        "https://www.nfl.com/games/browns-at-steelers-2026-reg-8"
+      ],
+      "q_bh": 0.22980916249634795,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=42 < 300 required",
+        "G5: Wilson lower bound 0.468 ≤ break-even 0.5238",
+        "G6: BH q=0.2298 > 0.05",
+        "G8: permutation p=0.0830 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S03",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "2025 Pythagorean prior only, no in-season update",
+      "n": 87,
+      "effective_n": 87,
+      "hits": 50,
+      "hit_rate": 0.5747126436781609,
+      "null_prob": 0.5,
+      "wilson_low": 0.4698388741794012,
+      "wilson_high": 0.6732675903002129,
+      "edge_vs_null": 0.07471264367816088,
+      "breakeven": 0.5238,
+      "binomial_p": 0.1979791406725088,
+      "permutation_p": 0.08995502248875563,
+      "half_split": {
+        "W3-5": {
+          "n": 46,
+          "hit_rate": 0.5434782608695652,
+          "edge": 0.04347826086956519
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.6097560975609756,
+          "edge": 0.1097560975609756
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.2519734517650112,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required",
+        "G5: Wilson lower bound 0.470 ≤ break-even 0.5238",
+        "G6: BH q=0.2520 > 0.05",
+        "G8: permutation p=0.0900 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S04",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "Always select the home team",
+      "n": 87,
+      "effective_n": 87,
+      "hits": 45,
+      "hit_rate": 0.5172413793103449,
+      "null_prob": 0.5,
+      "wilson_low": 0.4137512133636875,
+      "wilson_high": 0.6192733553623774,
+      "edge_vs_null": 0.017241379310344862,
+      "breakeven": 0.5238,
+      "binomial_p": 0.8303730096857188,
+      "permutation_p": 0.41879060469765117,
+      "half_split": {
+        "W3-5": {
+          "n": 46,
+          "hit_rate": 0.5217391304347826,
+          "edge": 0.021739130434782594
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.5121951219512195,
+          "edge": 0.012195121951219523
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.8303730096857188,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required",
+        "G5: Wilson lower bound 0.414 ≤ break-even 0.5238",
+        "G6: BH q=0.8304 > 0.05",
+        "G8: permutation p=0.4188 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S05",
+      "class": "single",
+      "market": "total",
+      "signal": "Regressed points-per-game total vs the pre-registered league-prior mean",
+      "n": 88,
+      "effective_n": 88,
+      "hits": 48,
+      "hit_rate": 0.5454545454545454,
+      "null_prob": 0.5,
+      "wilson_low": 0.44170066774534067,
+      "wilson_high": 0.6454059625578509,
+      "edge_vs_null": 0.045454545454545414,
+      "breakeven": 0.5238,
+      "binomial_p": 0.45574127943793447,
+      "permutation_p": 0.23638180909545228,
+      "half_split": {
+        "W3-5": {
+          "n": 47,
+          "hit_rate": 0.574468085106383,
+          "edge": 0.07446808510638303
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.5121951219512195,
+          "edge": 0.012195121951219523
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.5316981593442569,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=88 < 300 required",
+        "G5: Wilson lower bound 0.442 ≤ break-even 0.5238",
+        "G6: BH q=0.5317 > 0.05",
+        "G8: permutation p=0.2364 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S06",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "Better prior-weeks net points per game wins",
+      "n": 71,
+      "effective_n": 71,
+      "hits": 44,
+      "hit_rate": 0.6197183098591549,
+      "null_prob": 0.5,
+      "wilson_low": 0.5034185628665777,
+      "wilson_high": 0.7237282654806456,
+      "edge_vs_null": 0.11971830985915488,
+      "breakeven": 0.5238,
+      "binomial_p": 0.05681467793283829,
+      "permutation_p": 0.0239880059970015,
+      "half_split": {
+        "W3-5": {
+          "n": 30,
+          "hit_rate": 0.7,
+          "edge": 0.19999999999999996
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.5609756097560976,
+          "edge": 0.060975609756097615
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.11362935586567657,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "PASS",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 8,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=71 < 300 required",
+        "G5: Wilson lower bound 0.503 ≤ break-even 0.5238",
+        "G6: BH q=0.1136 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S07",
+      "class": "single",
+      "market": "moneyline",
+      "signal": "Team returning from an official bye week",
+      "n": 10,
+      "effective_n": 10,
+      "hits": 9,
+      "hit_rate": 0.9,
+      "null_prob": 0.5,
+      "wilson_low": 0.5958499732047615,
+      "wilson_high": 0.9821237869049271,
+      "edge_vs_null": 0.4,
+      "breakeven": 0.5238,
+      "binomial_p": 0.02148437500000002,
+      "permutation_p": 0.01199400299850075,
+      "half_split": {
+        "W3-5": {
+          "n": 0,
+          "hit_rate": null,
+          "edge": null
+        },
+        "W6-8": {
+          "n": 10,
+          "hit_rate": 0.9,
+          "edge": 0.4
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/bengals-at-ravens-2026-reg-7",
+        "https://www.nfl.com/games/chargers-at-chiefs-2026-reg-6",
+        "https://www.nfl.com/games/chargers-at-rams-2026-reg-8",
+        "https://www.nfl.com/games/colts-at-jaguars-2026-reg-8"
+      ],
+      "q_bh": 0.06015625000000006,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS",
+        "G6": "FAIL",
+        "G7": "FAIL",
+        "G8": "PASS",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 8,
+      "gates_failed": [
+        "G2",
+        "G6",
+        "G7",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=10 < 300 required",
+        "G6: BH q=0.0602 > 0.05",
+        "G7: edge direction not positive in both halves",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S08",
+      "class": "single",
+      "market": "spread",
+      "signal": "Predicted margin direction vs zero (no market line)",
+      "n": 87,
+      "effective_n": 87,
+      "hits": 51,
+      "hit_rate": 0.5862068965517241,
+      "null_prob": 0.5,
+      "wilson_low": 0.4812159672619939,
+      "wilson_high": 0.6839068763683301,
+      "edge_vs_null": 0.08620689655172409,
+      "breakeven": 0.5238,
+      "binomial_p": 0.13290188519545756,
+      "permutation_p": 0.062468765617191405,
+      "half_split": {
+        "W3-5": {
+          "n": 46,
+          "hit_rate": 0.5869565217391305,
+          "edge": 0.08695652173913049
+        },
+        "W6-8": {
+          "n": 41,
+          "hit_rate": 0.5853658536585366,
+          "edge": 0.08536585365853655
+        }
+      },
+      "legs": 1,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 0.20673626585960067,
+      "dependence_r": null,
+      "dependence_source_corr": null,
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "FAIL",
+        "G9": "N/A",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 7,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required",
+        "G5: Wilson lower bound 0.481 ≤ break-even 0.5238",
+        "G6: BH q=0.2067 > 0.05",
+        "G8: permutation p=0.0625 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S09",
+      "class": "parlay",
+      "market": "2-leg cross-game parlay",
+      "signal": "Two Elo moneyline picks in the same week",
+      "n": 591,
+      "effective_n": 87,
+      "hits": 203,
+      "hit_rate": 0.34348561759729274,
+      "null_prob": 0.25,
+      "wilson_low": 0.30632163392104483,
+      "wilson_high": 0.38267112665961023,
+      "edge_vs_null": 0.09348561759729274,
+      "breakeven": 0.27436644000000004,
+      "binomial_p": 4.256988220783666e-07,
+      "permutation_p": 0.0004997501249375312,
+      "half_split": {
+        "W3-5": {
+          "n": 331,
+          "hit_rate": 0.338368580060423,
+          "edge": 0.08836858006042297
+        },
+        "W6-8": {
+          "n": 260,
+          "hit_rate": 0.35,
+          "edge": 0.09999999999999998
+        }
+      },
+      "legs": 2,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 2.979891754548566e-06,
+      "dependence_r": 0.03171184567708364,
+      "dependence_source_corr": "C22",
+      "statistical_validity_note": "INVALID FOR INFERENCE: the 2/3-leg combinations reuse the same games, so the very small p-value is an artefact of counting correlated combinations as if they were independent. See F-17.",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "PASS",
+        "G9": "PASS",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 9,
+      "gates_failed": [
+        "G2",
+        "G6",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required (591 parlay combinations share legs)",
+        "G6: p-value invalid — parlay combinations are not independent observations (F-17)",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S10",
+      "class": "parlay",
+      "market": "3-leg cross-game parlay",
+      "signal": "Three Elo moneyline picks in the same week",
+      "n": 2498,
+      "effective_n": 87,
+      "hits": 504,
+      "hit_rate": 0.20176140912730184,
+      "null_prob": 0.125,
+      "wilson_low": 0.18648720507986966,
+      "wilson_high": 0.21795147557803696,
+      "edge_vs_null": 0.07676140912730184,
+      "breakeven": 0.14371314127200002,
+      "binomial_p": 3.8525617013099634e-27,
+      "permutation_p": 0.0004997501249375312,
+      "half_split": {
+        "W3-5": {
+          "n": 1484,
+          "hit_rate": 0.19137466307277629,
+          "edge": 0.06637466307277629
+        },
+        "W6-8": {
+          "n": 1014,
+          "hit_rate": 0.21696252465483234,
+          "edge": 0.09196252465483234
+        }
+      },
+      "legs": 3,
+      "source_urls": [
+        "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+        "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+        "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+        "https://www.nfl.com/games/bears-at-packers-2026-reg-5"
+      ],
+      "q_bh": 5.393586381833949e-26,
+      "dependence_r": 0.03171184567708364,
+      "dependence_source_corr": "C22",
+      "statistical_validity_note": "INVALID FOR INFERENCE: the 2/3-leg combinations reuse the same games, so the very small p-value is an artefact of counting correlated combinations as if they were independent. See F-17.",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS",
+        "G6": "FAIL",
+        "G7": "PASS",
+        "G8": "PASS",
+        "G9": "PASS",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 9,
+      "gates_failed": [
+        "G2",
+        "G6",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=87 < 300 required (2498 parlay combinations share legs)",
+        "G6: p-value invalid — parlay combinations are not independent observations (F-17)",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S11",
+      "class": "parlay",
+      "market": "same-game parlay (SGP)",
+      "signal": "Home win AND over the pre-registered league-mean total",
+      "n": 28,
+      "effective_n": 28,
+      "hits": 2,
+      "hit_rate": 0.07142857142857142,
+      "null_prob": 0.25,
+      "wilson_low": 0.019812064115305755,
+      "wilson_high": 0.22645362568399052,
+      "edge_vs_null": -0.17857142857142858,
+      "breakeven": 0.27436644000000004,
+      "binomial_p": 0.02785202373528557,
+      "permutation_p": 0.9945027486256871,
+      "half_split": {
+        "W3-5": {
+          "n": 11,
+          "hit_rate": 0.18181818181818182,
+          "edge": -0.06818181818181818
+        },
+        "W6-8": {
+          "n": 17,
+          "hit_rate": 0.0,
+          "edge": -0.25
+        }
+      },
+      "legs": 2,
+      "source_urls": [
+        "https://www.nfl.com/games/bengals-at-ravens-2026-reg-7",
+        "https://www.nfl.com/games/bills-at-rams-2026-reg-5",
+        "https://www.nfl.com/games/broncos-at-49ers-2026-reg-4",
+        "https://www.nfl.com/games/buccaneers-at-cowboys-2026-reg-5"
+      ],
+      "q_bh": 0.064988055382333,
+      "dependence_r": 0.5666666666666667,
+      "dependence_source_corr": "C21",
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "FAIL",
+        "G8": "FAIL",
+        "G9": "PASS",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 6,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=28 < 300 required",
+        "G5: Wilson lower bound 0.020 ≤ break-even 0.2744",
+        "G6: BH q=0.0650 > 0.05",
+        "G7: edge direction not positive in both halves",
+        "G8: permutation p=0.9945 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S12",
+      "class": "prop_combo",
+      "market": "QB prop combo",
+      "signal": "QB passing yards over median AND completions over median",
+      "n": 27,
+      "effective_n": 27,
+      "hits": 16,
+      "hit_rate": 0.5925925925925926,
+      "null_prob": 0.25,
+      "wilson_low": 0.4072670096806468,
+      "wilson_high": 0.7548524292560443,
+      "edge_vs_null": 0.34259259259259256,
+      "breakeven": 0.27436644000000004,
+      "binomial_p": 0.0001619134771333476,
+      "permutation_p": 0.0004997501249375312,
+      "half_split": {
+        "W3-5": {
+          "n": 14,
+          "hit_rate": 0.6428571428571429,
+          "edge": 0.3928571428571429
+        },
+        "W6-8": {
+          "n": 13,
+          "hit_rate": 0.5384615384615384,
+          "edge": 0.28846153846153844
+        }
+      },
+      "legs": 2,
+      "source_urls": [
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/",
+        "https://www.nfl.com/players/joe-burrow/stats/",
+        "https://www.nfl.com/players/jordan-love/stats/"
+      ],
+      "q_bh": 0.0007555962266222888,
+      "dependence_r": 0.49760765550239233,
+      "dependence_source_corr": "C23",
+      "statistical_validity_note": "The small p-value versus a 0.25 independence null reflects strong same-player leg correlation, NOT predictive skill. G9 blocks these combos.",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS",
+        "G6": "PASS",
+        "G7": "PASS",
+        "G8": "PASS",
+        "G9": "FAIL",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 9,
+      "gates_failed": [
+        "G2",
+        "G9",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=27 < 300 required",
+        "G9: same-player leg dependence |r|=0.498 ≥ 0.20 → blocked",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S13",
+      "class": "prop_combo",
+      "market": "QB prop + team total combo",
+      "signal": "QB passing yards over median AND team points over median",
+      "n": 13,
+      "effective_n": 13,
+      "hits": 4,
+      "hit_rate": 0.3076923076923077,
+      "null_prob": 0.25,
+      "wilson_low": 0.12680703655710515,
+      "wilson_high": 0.5763065681945096,
+      "edge_vs_null": 0.05769230769230771,
+      "breakeven": 0.27436644000000004,
+      "binomial_p": 0.7483489811420436,
+      "permutation_p": 0.42478760619690153,
+      "half_split": {
+        "W3-5": {
+          "n": 8,
+          "hit_rate": 0.25,
+          "edge": 0.0
+        },
+        "W6-8": {
+          "n": 5,
+          "hit_rate": 0.4,
+          "edge": 0.15000000000000002
+        }
+      },
+      "legs": 2,
+      "source_urls": [
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/",
+        "https://www.nfl.com/players/josh-allen/stats/",
+        "https://www.nfl.com/players/patrick-mahomes/stats/"
+      ],
+      "q_bh": 0.8059142873837393,
+      "dependence_r": 0.08184475910711347,
+      "dependence_source_corr": "C24",
+      "statistical_validity_note": "",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "FAIL",
+        "G6": "FAIL",
+        "G7": "FAIL",
+        "G8": "FAIL",
+        "G9": "PASS",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 6,
+      "gates_failed": [
+        "G2",
+        "G5",
+        "G6",
+        "G7",
+        "G8",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=13 < 300 required",
+        "G5: Wilson lower bound 0.127 ≤ break-even 0.2744",
+        "G6: BH q=0.8059 > 0.05",
+        "G7: edge direction not positive in both halves",
+        "G8: permutation p=0.4248 > 0.05",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    },
+    {
+      "id": "S14",
+      "class": "prop_combo",
+      "market": "same-QB alt-line combo",
+      "signal": "QB passing yards over median AND attempts over median",
+      "n": 31,
+      "effective_n": 31,
+      "hits": 17,
+      "hit_rate": 0.5483870967741935,
+      "null_prob": 0.25,
+      "wilson_low": 0.37772167637354503,
+      "wilson_high": 0.7083826401947998,
+      "edge_vs_null": 0.2983870967741935,
+      "breakeven": 0.27436644000000004,
+      "binomial_p": 0.0005004542233681448,
+      "permutation_p": 0.0009995002498750624,
+      "half_split": {
+        "W3-5": {
+          "n": 15,
+          "hit_rate": 0.6666666666666666,
+          "edge": 0.41666666666666663
+        },
+        "W6-8": {
+          "n": 16,
+          "hit_rate": 0.4375,
+          "edge": 0.1875
+        }
+      },
+      "legs": 2,
+      "source_urls": [
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/",
+        "https://www.nfl.com/players/joe-burrow/stats/",
+        "https://www.nfl.com/players/jordan-love/stats/"
+      ],
+      "q_bh": 0.001751589781788507,
+      "dependence_r": 0.6919336756978257,
+      "dependence_source_corr": "C14",
+      "statistical_validity_note": "The small p-value versus a 0.25 independence null reflects strong same-player leg correlation, NOT predictive skill. G9 blocks these combos.",
+      "gates": {
+        "G1": "PASS",
+        "G2": "FAIL",
+        "G3": "PASS",
+        "G4": "PASS",
+        "G5": "PASS",
+        "G6": "PASS",
+        "G7": "PASS",
+        "G8": "PASS",
+        "G9": "FAIL",
+        "G10": "FAIL",
+        "G11": "PASS",
+        "G12": "PASS"
+      },
+      "gates_passed": 9,
+      "gates_failed": [
+        "G2",
+        "G9",
+        "G10"
+      ],
+      "eligible": false,
+      "ineligible_reasons": [
+        "G2: effective n=31 < 300 required",
+        "G9: same-player leg dependence |r|=0.692 ≥ 0.20 → blocked",
+        "G10: no official NFL market price or closing line exists"
+      ],
+      "reward_points": 0,
+      "reward_tier": ""
+    }
+  ]
+}

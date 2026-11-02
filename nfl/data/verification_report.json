@@ -1,0 +1,158 @@
+{
+  "title": "Line-by-line verification ledger",
+  "generated_from": "official NFL.com by-week schedule pages and standings pages",
+  "checks": [
+    {
+      "check": "Every raw score line parses to a game with an official NFL.com game URL",
+      "result": "PASS",
+      "detail": "120 games parsed; 0 parse errors",
+      "source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://www.nfl.com/schedules/2026/by-week/week-9"
+      ]
+    },
+    {
+      "check": "Game URLs are unique (no duplicated or dropped games)",
+      "result": "PASS",
+      "detail": "120 unique URLs / 120 rows",
+      "source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://www.nfl.com/schedules/2026/by-week/week-9"
+      ]
+    },
+    {
+      "check": "Weekly game counts match the official by-week pages",
+      "result": "PASS",
+      "detail": "W1..W8 = 16, 16, 16, 16, 15, 14, 14, 13; official byes W5(2), W6(4), W7(4), W8(4)",
+      "source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "check": "All 32 standings rows recomputed cell-by-cell from the 120 official game scores",
+      "result": "PASS",
+      "detail": "192 cells compared (W/L/T/PF/PA/NET PTS x 32); 0 mismatches",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "check": "League scoring identity: sum of points for equals sum of points against",
+      "result": "PASS",
+      "detail": "sum PF = 5528, sum PA = 5528, sum of all game totals = 5528",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "check": "League win/loss/tie identity",
+      "result": "PASS",
+      "detail": "W=119, L=119, T=2, tied games=1",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "check": "Every 2026 standings row has NET_PTS = PF - PA and an official URL",
+      "result": "PASS",
+      "detail": "32/32 rows satisfy the identity; 32/32 carry the official standings URL",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "check": "2025 standings: 32 teams, 17 games each, balanced W/L and PF/PA",
+      "result": "PASS",
+      "detail": "rows=32, team-games=544, sum W=271, sum PF=12519, NET_PTS identity 32/32",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2025/REG"
+      ]
+    },
+    {
+      "check": "All 60 official QB game-log rows reconciled to the official game scores",
+      "result": "PASS",
+      "detail": "60 rows; 60 score reconciliations; opponent + comp<=att checked; 0 discrepancies",
+      "source_urls": [
+        "https://www.nfl.com/players/jordan-love/stats/",
+        "https://www.nfl.com/players/patrick-mahomes/stats/",
+        "https://www.nfl.com/players/josh-allen/stats/",
+        "https://www.nfl.com/players/joe-burrow/stats/",
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/",
+        "https://www.nfl.com/players/matthew-stafford/stats/",
+        "https://www.nfl.com/players/drake-maye/stats/",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "check": "Every row in every data table has an https official source link",
+      "result": "PASS",
+      "detail": "156 rows across 5 CSVs; 0 missing source_url",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.nfl.com/standings/league/2025/REG",
+        "https://www.nfl.com/schedules/2026/by-week/week-9"
+      ]
+    },
+    {
+      "check": "Upcoming Week 8/9 slate carries official game and week URLs",
+      "result": "PASS",
+      "detail": "16 upcoming rows (1 pending Week 8 game + 15 Week 9 games)",
+      "source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://www.nfl.com/schedules/2026/by-week/week-9"
+      ]
+    },
+    {
+      "check": "Pre-registration committed before analysis with frozen parameters",
+      "result": "PASS",
+      "detail": "12 gates, 14 strategies, 24 correlation pairs pre-registered",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4"
+      ]
+    }
+  ],
+  "checks_passed": 12,
+  "checks_total": 12,
+  "official_game_rows": 120,
+  "standings_cells_compared": 192,
+  "qb_rows_compared": 60,
+  "csv_rows_provenance_checked": 156,
+  "note": "Every check above is reproducible by running `python nfl/engine/dataset.py`."
+}

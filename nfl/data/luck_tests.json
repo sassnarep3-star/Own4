@@ -1,0 +1,46 @@
+{
+  "winner_k": 51,
+  "winner_n": 87,
+  "winner_accuracy": 0.5862068965517241,
+  "wilson_low": 0.4812159672619939,
+  "wilson_high": 0.6839068763683301,
+  "exact_binomial_p_vs_050": 0.13290188519545756,
+  "permutation_p": 0.02798600699650175,
+  "permutation_iterations": 2000,
+  "permutation_null": "Shuffle the home/away pick vector across the 87 graded games (preserving the number of home picks and the observed outcomes) and count agreements; p = fraction of shuffles reaching the observed correct count. This conditional null differs from the exact binomial vs 0.5.",
+  "placebo_strategies": 500,
+  "placebo_best_accuracy": 0.6896551724137931,
+  "placebo_passing_p005": 11,
+  "bh_significant_strategies": 4,
+  "lag1_autocorrelation_of_probability_residuals": -0.013690765915411497,
+  "no_lookahead_identical": true,
+  "half_split": {
+    "W3-5": {
+      "n": 46,
+      "correct": 27,
+      "accuracy": 0.5869565217391305
+    },
+    "W6-8": {
+      "n": 41,
+      "correct": 24,
+      "accuracy": 0.5853658536585366
+    }
+  },
+  "claim": "Luck cannot be removed from individual game outcomes. These tests bound the probability that the observed edge arose from chance.",
+  "method_sources": [
+    "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+    "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+    "https://scikit-learn.org/stable/modules/calibration.html",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm"
+  ],
+  "data_sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-1",
+    "https://www.nfl.com/schedules/2026/by-week/week-2",
+    "https://www.nfl.com/schedules/2026/by-week/week-3",
+    "https://www.nfl.com/schedules/2026/by-week/week-4",
+    "https://www.nfl.com/schedules/2026/by-week/week-5",
+    "https://www.nfl.com/schedules/2026/by-week/week-6",
+    "https://www.nfl.com/schedules/2026/by-week/week-7",
+    "https://www.nfl.com/schedules/2026/by-week/week-8"
+  ]
+}

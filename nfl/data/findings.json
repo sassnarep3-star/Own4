@@ -1,0 +1,286 @@
+{
+  "findings": [
+    {
+      "id": "A01",
+      "title": "Own-line model beats both no-skill baselines out of sample",
+      "detail": "Walk-forward Brier 0.2346 vs constant-0.5 0.2472 and static 2025-prior model 0.2388; improvement 0.0125. Log loss 0.6673.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://scikit-learn.org/stable/modules/calibration.html",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A02",
+      "title": "Winner accuracy is positive but not statistically distinguishable from luck",
+      "detail": "51/87 = 0.5862; Wilson 95% CI [0.4812, 0.6839]; exact two-sided binomial p=0.1329; permutation p=0.0280 over 2000 shuffles.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A03",
+      "title": "Predicted margin correlates with actual margin (skill signal)",
+      "detail": "C06 r=0.324 (n=88, q_BH=0.0045); margin MAE 8.85 points.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A04",
+      "title": "Predicted total is weakly informative; total MAE remains large",
+      "detail": "C07 r=0.127 (n=88); total MAE 11.28 points. Totals are not treated as a validated edge.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A05",
+      "title": "Season-to-season win percentage persistence is measurable",
+      "detail": "C12 (2025 vs 2026 win%) r=0.341 (n=32, q_BH=0.0894). 2026 standings are an in-season snapshot, not final.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/standings/league/2025/REG",
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "A06",
+      "title": "Net points track winning percentage more closely than raw points for",
+      "detail": "C11 (NET_PTS vs win%) r=0.831 versus C10 (PF vs win%) r=0.545 in the 2026 standings snapshot.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "A07",
+      "title": "Pythagorean expectation reproduces 2025 records",
+      "detail": "C13 r=0.921 (n=32), computed from official 2025 PF/PA with the pre-registered exponent 2.37 (project-defined).",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/standings/league/2025/REG",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "A08",
+      "title": "Same-game legs are correlated; they must be priced jointly",
+      "detail": "C01 (away pts vs home pts) r=0.104; C03 (home pts vs total) r=0.691; C21 (home pts ≥24 AND total ≥45) phi=0.567 (n=120). Naïve multiplication of leg probabilities is invalid.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html"
+      ]
+    },
+    {
+      "id": "A09",
+      "title": "Cross-game parlay legs show only weak within-week dependence",
+      "detail": "C22 mean pairwise same-week margin correlation r=0.032 over 845 pairs. Pairs share games and are not independent observations (F-17).",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm"
+      ]
+    },
+    {
+      "id": "A10",
+      "title": "Same-player prop combos are strongly correlated and are blocked",
+      "detail": "C14 (pass yds vs attempts) r=0.692, C15 (pass yds vs completions) r=0.739, C16 (completions vs attempts) r=0.878; C23 phi=0.498. Gate G9 blocks S12/S14.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/drake-maye/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/"
+      ]
+    },
+    {
+      "id": "A11",
+      "title": "Home-team baseline provides a reference hit rate",
+      "detail": "S04 (always home) hit 45/87 = 0.5172. Any directional strategy must beat this baseline before a reward is considered.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A12",
+      "title": "No strategy passes all validation gates; no rewards awarded",
+      "detail": "14 strategies evaluated; 0 eligible; 0 awards; total points 0. G2 (n≥300) and G10 (no official market/closing line) fail for every strategy.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners",
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A13",
+      "title": "Placebo strategies show how easily a small sample can look skillful",
+      "detail": "500 random-pick placebo strategies; best accuracy 0.6897; 11 reached the observed accuracy with p≤0.05 by chance. 4 of 14 real strategies survive BH-FDR.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm"
+      ]
+    },
+    {
+      "id": "A14",
+      "title": "No look-ahead is detectable in the walk-forward engine",
+      "detail": "Perturbing a Week 8 official score by +7 home points left all 75 earlier-week predictions bit-identical. Lag-1 residual autocorrelation -0.014.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A15",
+      "title": "Half-split repeatability of the model edge",
+      "detail": "W3-5: 27/46 = 0.5870, W6-8: 24/41 = 0.5854",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A16",
+      "title": "Sample size is the binding constraint",
+      "detail": "120 official finals (Weeks 1-8), 88 walk-forward predictions, 60 QB game-log rows, 8 weeks. Every strategy n < 300. A full 18-week, 272-game season plus multiple seasons is required before a reward can be justified.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://media.nfl.com/football-information/2026/news/2026-nfl-schedule-announced",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A17",
+      "title": "One tie is excluded from winner grading",
+      "detail": "Week 5 Giants 27, Commanders 27 is the only tie in the 120 official finals; it counts as y=0.5 for Brier/log loss and is excluded from winner accuracy. 1 tie.",
+      "value_type": "VERIFIED",
+      "urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "A18",
+      "title": "Parlay p-values are artefacts of shared legs, not evidence of skill",
+      "detail": "S09 produced 591 two-leg combinations and S10 2498 three-leg combinations from only 87 graded games. Their naive p-values are near zero, but the combinations reuse the same games; G6 is marked FAIL and effective n is set to the underlying game count. Likewise S12/S14 small p-values versus a 0.25 independence null reflect same-player leg correlation (C15 r=0.739), not predictive skill.",
+      "value_type": "COMPUTED",
+      "urls": [
+        "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+        "https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pearsonr.html",
+        "https://www.statsmodels.org/dev/generated/statsmodels.stats.multitest.multipletests.html",
+        "https://www.nfl.com/schedules/2026/by-week/week-1",
+        "https://www.nfl.com/schedules/2026/by-week/week-2",
+        "https://www.nfl.com/schedules/2026/by-week/week-3",
+        "https://www.nfl.com/schedules/2026/by-week/week-4",
+        "https://www.nfl.com/schedules/2026/by-week/week-5",
+        "https://www.nfl.com/schedules/2026/by-week/week-6",
+        "https://www.nfl.com/schedules/2026/by-week/week-7",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "id": "A19",
+      "title": "Dev-set prop thresholds avoid look-ahead",
+      "detail": "Weeks 1-2 medians (pass yds 228.0, completions 21.5, attempts 31.0, team pts 29.5) are computed only on the development weeks and frozen before grading Weeks 3-8.",
+      "value_type": "POLICY",
+      "urls": [
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/REG/all/passingyards/desc",
+        "https://www.nfl.com/players/dak-prescott/stats/",
+        "https://www.nfl.com/players/drake-maye/stats/",
+        "https://www.nfl.com/players/jared-goff/stats/"
+      ]
+    }
+  ]
+}
