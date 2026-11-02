@@ -1,0 +1,249 @@
+{
+  "audited_on": "2026-11-02",
+  "method": "Every claim on the pre-existing root site (merged PR #2) and the docs/ dashboard (merged PR #3) was re-checked against the cited official page, fetched live on 2026-11-02. Verdicts: VERIFIED = exact figure/statement found in the page text; CORRECTED = discrepancy found and fixed in this PR; UNVERIFIED = not found in the retrievable page text, value removed/left blank and flagged; NOT SUPPORTED = the cited page does not support the way it was used.",
+  "rows": [
+    {
+      "id": "A01",
+      "claim": "League scored 117.7 points per team per game; highest in the last 64 seasons (since 1961-62)",
+      "where": "data/strategies.json STRAT-01; EXECUTIVE_SUMMARY.md",
+      "verdict": "VERIFIED",
+      "official_says": "\"The league has scored 117.7 points (per team) per game. That would be the third-highest mark in NBA history and the highest in the last 64 seasons (since 1961-62).\" Stats are through Oct. 30, 2025 (first 10 days).",
+      "action": "Kept. Context added: this is a 10-day sample; the same article says pace often slows and efficiency almost always rises over a season.",
+      "source": "SRC-04"
+    },
+    {
+      "id": "A02",
+      "claim": "101.9 possessions per team per 48 min and 114.3 offensive rating through 10 days",
+      "where": "data/strategies.json STRAT-01",
+      "verdict": "VERIFIED",
+      "official_says": "\"The 101.9 possessions (per team) per 48 minutes ... highest rate in the 30 years of play-by-play data\"; \"the league's 114.3 points scored per 100 possessions\". The article's own table shows full-season pace fell and OffRtg rose vs. the first 10 days in each of the last three seasons.",
+      "action": "Kept; context added.",
+      "source": "SRC-04"
+    },
+    {
+      "id": "A03",
+      "claim": "Luka Dončić led 2025-26 scoring at 33.5 PPG",
+      "where": "data/strategies.json STRAT-03; EXECUTIVE_SUMMARY.md",
+      "verdict": "UNVERIFIED",
+      "official_says": "Page text confirms Dončić won the 2025-26 scoring title (\"2025-26: Luka Dončić\"). The 33.5 PPG figure appears only inside an embedded image from an NBA Communications post; it is not in the retrievable page text.",
+      "action": "Figure 33.5 removed (blank) and flagged. Scoring-title fact retained.",
+      "source": "SRC-03"
+    },
+    {
+      "id": "A04",
+      "claim": "Nikola Jokić 12.9 RPG and 10.7 APG",
+      "where": "data/strategies.json STRAT-03; EXECUTIVE_SUMMARY.md",
+      "verdict": "UNVERIFIED",
+      "official_says": "Text confirms Jokić led the NBA in rebounds and assists; the per-game values are only in the embedded image.",
+      "action": "Figures 12.9 / 10.7 removed (blank) and flagged. Leadership fact retained.",
+      "source": "SRC-03"
+    },
+    {
+      "id": "A05",
+      "claim": "Jokić first player to lead the NBA in both rebounds and assists per game since 1969-70",
+      "where": "EXECUTIVE_SUMMARY.md",
+      "verdict": "VERIFIED",
+      "official_says": "\"Nikola Jokić is the first player to lead the NBA in both rebounds and assists per game in a season since 1969-70, when leaders began to be determined by per-game averages.\"",
+      "action": "Kept.",
+      "source": "SRC-03"
+    },
+    {
+      "id": "A06",
+      "claim": "Victor Wembanyama led the league with 197 blocks",
+      "where": "data/strategies.json STRAT-03",
+      "verdict": "VERIFIED",
+      "official_says": "\"His 197 blocks led the league\".",
+      "action": "Kept.",
+      "source": "SRC-03"
+    },
+    {
+      "id": "A07",
+      "claim": "Five Christmas Day games on Dec. 25 (18th consecutive year)",
+      "where": "data/strategies.json STRAT-05; EXECUTIVE_SUMMARY.md",
+      "verdict": "VERIFIED",
+      "official_says": "\"The NBA will feature five games on Christmas Day (Thursday, Dec. 25) for the 18th consecutive year\" (schedule release, Aug. 14, 2025) and the NBA Christmas page.",
+      "action": "Kept.",
+      "source": "SRC-01"
+    },
+    {
+      "id": "A08",
+      "claim": "Christmas matchups CLE@NYK, SAS@OKC, DAL@GSW, HOU@LAL, MIN@DEN",
+      "where": "data/strategies.json STRAT-05",
+      "verdict": "VERIFIED",
+      "official_says": "Cavaliers at Knicks (noon ET), Spurs at Thunder (2:30), Mavericks at Warriors (5), Rockets at Lakers (8), Timberwolves at Nuggets (10:30).",
+      "action": "Kept.",
+      "source": "SRC-02"
+    },
+    {
+      "id": "A09",
+      "claim": "\"The complete 2025-26 schedule\" is published",
+      "where": "EXECUTIVE_SUMMARY.md finding 4",
+      "verdict": "CORRECTED",
+      "official_says": "The release defines \"dates and opponents for 80 of each team's 82 games\"; the two unassigned games per team (Dec. 9-15) depend on Emirates NBA Cup results.",
+      "action": "Wording corrected to 80 of 82 games.",
+      "source": "SRC-01"
+    },
+    {
+      "id": "A10",
+      "claim": "Team PPG leaders: Memphis 121.2, Cleveland 121.0, Houston 120.7, Portland 120.6, Lakers 120.3",
+      "where": "data/strategies.json STRAT-02",
+      "verdict": "UNVERIFIED",
+      "official_says": "No retrievable official page text contains these values. The cited NBA Stats hub renders its tables client-side, so the numbers could not be read; the 10-days article gives no such list.",
+      "action": "Values removed (blank) and flagged.",
+      "source": "SRC-05"
+    },
+    {
+      "id": "A11",
+      "claim": "Two-way contracts: up to three players, max 50 NBA games, 50% of zero-year minimum ($636,435 for 2025-26)",
+      "where": "data/strategies.json STRAT-06; EXECUTIVE_SUMMARY.md",
+      "verdict": "VERIFIED",
+      "official_says": "\"NBA teams may have up to three players under NBA Two-Way Contracts ... not play more than 50 games with their NBA team. The annual salary ... is equal to 50% of the NBA minimum salary applicable a player with zero NBA Years of Service (i.e., $636,435 for 2025-26).\"",
+      "action": "Kept. The 2026-27 amount is not stated on the page: left blank/flagged.",
+      "source": "SRC-09"
+    },
+    {
+      "id": "A12",
+      "claim": "Eligibility \"four or fewer years of service\"",
+      "where": "data/strategies.json STRAT-06; EXECUTIVE_SUMMARY.md",
+      "verdict": "CORRECTED",
+      "official_says": "\"Only players in their fourth NBA season or earlier are able to sign Two-Way Contracts\".",
+      "action": "Reworded to the official phrasing (\"fourth NBA season or earlier\").",
+      "source": "SRC-09"
+    },
+    {
+      "id": "A13",
+      "claim": "Injury report: status due 5 p.m. local the day before; 1 p.m. on second night of a back-to-back; continual updates",
+      "where": "data/validation_gates.json; EXECUTIVE_SUMMARY.md",
+      "verdict": "VERIFIED",
+      "official_says": "\"By 5 p.m. local time the day before a game ... For the second game of a back-to-back, teams must report the above information by 1 p.m. local time on the day of the game ... Reports are updated on a continual basis throughout the day.\"",
+      "action": "Kept. Cited URL (…injury-report-2025-26-season/) now resolves to the 2026-27 page; source URL updated to the 2026-27 page.",
+      "source": "SRC-08"
+    },
+    {
+      "id": "A14",
+      "claim": "Helpline \"1-800-GAMBLER\"",
+      "where": "README.md; EXECUTIVE_SUMMARY.md; build_site.py footer",
+      "verdict": "CORRECTED",
+      "official_says": "The NCPG page lists the National Problem Gambling Helpline as \"1-800-MY-RESET\".",
+      "action": "Replaced everywhere with 1-800-MY-RESET.",
+      "source": "SRC-10"
+    },
+    {
+      "id": "A15",
+      "claim": "Gate G3 \"official source only\" cites NBA Rule No. 4 (Definitions)",
+      "where": "data/validation_gates.json; data/sources.json SRC-06",
+      "verdict": "NOT SUPPORTED",
+      "official_says": "Rule No. 4 defines basket, dribble, fouls, etc. It says nothing about data-sourcing policy.",
+      "action": "Citation removed; SRC-06 kept in the source list only as an 'audit only' reference (not used as evidence by any row).",
+      "source": "SRC-06"
+    },
+    {
+      "id": "A16",
+      "claim": "SRC-07 (video rulebook traveling example) listed as a source",
+      "where": "data/sources.json",
+      "verdict": "NOT SUPPORTED",
+      "official_says": "Page is a single traveling-violation clip; not used by any strategy, gate or finding.",
+      "action": "Not used as evidence; kept only as an 'audit only' reference in the source list.",
+      "source": "SRC-07"
+    },
+    {
+      "id": "A17",
+      "claim": "SRC-11 Basketball-Reference listed as \"trusted cross-check\"",
+      "where": "data/sources.json",
+      "verdict": "NOT SUPPORTED",
+      "official_says": "Not an official site, and not cited by any row; conflicts with the \"official sources only\" rule.",
+      "action": "Dropped from the source list.",
+      "source": "SRC-05"
+    },
+    {
+      "id": "A18",
+      "claim": "Gate rules (sample ≥10 games, parlay cap 3 legs, repeatability, correlation screen) carry source IDs SRC-03/04/05",
+      "where": "data/validation_gates.json",
+      "verdict": "NOT SUPPORTED",
+      "official_says": "The cited NBA articles are statistical write-ups; none defines or recommends these thresholds. They are project policy.",
+      "action": "Gates rewritten as executed project policies (type: policy); source links retained only where an official page genuinely supports a component (injury report, stat definitions).",
+      "source": "SRC-04"
+    },
+    {
+      "id": "A19",
+      "claim": "Whole project is anchored on the 2025-26 season",
+      "where": "EXECUTIVE_SUMMARY.md; data/*.json",
+      "verdict": "CORRECTED",
+      "official_says": "Today (2026-11-02) the NBA site lists 2026-27 as the current season; the injury-report and G League pages are already 2026-27 pages.",
+      "action": "Summary now states 2025-26 figures are last season's; research uses 2010-11 → 2023-24 history.",
+      "source": "SRC-05"
+    },
+    {
+      "id": "A20",
+      "claim": "NBA.com stats may be downloaded/used for research",
+      "where": "docs/review.html F01 (other session)",
+      "verdict": "VERIFIED",
+      "official_says": "FAQ: \"Are your statistics available for download, or in CSV form? Our stats are not available for download for either academic or personal use. They are for viewing and enjoying on NBA.com/Stats.\"",
+      "action": "This project's research uses a third-party GitHub mirror of NBA box scores; raw data is NOT committed here, only derived aggregates. Flagged as a data-rights irregularity.",
+      "source": "SRC-12"
+    },
+    {
+      "id": "A21",
+      "claim": "A combined PTS+REB+AST stat exists on NBA.com",
+      "where": "research (market P4)",
+      "verdict": "VERIFIED",
+      "official_says": "FAQ: \"The statistic representing the combined PTS+REB+AST is currently unavailable\".",
+      "action": "PRA is computed in this repo by summing official box-score components (PTS, REB, AST).",
+      "source": "SRC-12"
+    },
+    {
+      "id": "A22",
+      "claim": "Pace = possessions per 48 minutes",
+      "where": "research/prep.py",
+      "verdict": "VERIFIED",
+      "official_says": "Glossary: \"PACE ... The number of possessions per 48 minutes for a team or player.\" The glossary gives no box-score formula for possessions.",
+      "action": "The possession estimator FGA + 0.44·FTA − OREB + TOV is project-defined (standard box-score approximation; the 0.44 FTA factor appears in the official TS% formula only). Flagged.",
+      "source": "SRC-13"
+    },
+    {
+      "id": "A23",
+      "claim": "Third-party mirror rows equal official box scores",
+      "where": "research data (NocturneBear/NBA-Data-2010-2024 @ a5f108b)",
+      "verdict": "UNVERIFIED",
+      "official_says": "Spot check, official box score for LAL @ DEN, Oct. 24, 2023 (game 0022300061; final LAL 107, DEN 119): LeBron James 29:01, 21 PTS, 8 REB, 5 AST; Anthony Davis 34:09, 17 PTS, 8 REB, 4 AST. Mirror values are identical. Only 1 game / 2 players / 1 final score were compared.",
+      "action": "Mirror treated as UNVERIFIED beyond this sample (≈492k player-game rows). Results are labeled computed, not official.",
+      "source": "SRC-14"
+    },
+    {
+      "id": "A24",
+      "claim": "docs/review.html F04: injury URL for 2025-26 redirected to 2026-27",
+      "where": "docs/ (other session)",
+      "verdict": "VERIFIED",
+      "official_says": "Fetching the 2025-26 URL returned the page titled \"NBA Injury Report: 2026-27 Season\".",
+      "action": "Confirmed; no change.",
+      "source": "SRC-08"
+    },
+    {
+      "id": "A25",
+      "claim": "docs/review.html F05: FAQ pace example is dated March 2013",
+      "where": "docs/ (other session)",
+      "verdict": "VERIFIED",
+      "official_says": "FAQ pace table is labeled \"stats as of 3/19/2013\".",
+      "action": "Confirmed; no change.",
+      "source": "SRC-12"
+    },
+    {
+      "id": "A26",
+      "claim": "index.html links to EXECUTIVE_SUMMARY.md",
+      "where": "build_site.py",
+      "verdict": "CORRECTED",
+      "official_says": "Live site serves the .md as raw text (no styling).",
+      "action": "Summary is now also published as a styled page (pages/summary.html); the Markdown file is kept in the repo.",
+      "source": "SRC-05"
+    },
+    {
+      "id": "A27",
+      "claim": "Two separate sites exist (root site and /docs dashboard) with duplicate navigation and conflicting leaderboard statements",
+      "where": "index.html vs docs/index.html",
+      "verdict": "UNVERIFIED",
+      "official_says": "Repository structure issue, not an official-source claim.",
+      "action": "Root site links to the docs/ dashboard in its navigation. docs/ is owned by session 1805bfdb and is not edited here (its CI diff check would fail). Request logged in COORDINATION.md.",
+      "source": "SRC-05"
+    }
+  ]
+}
