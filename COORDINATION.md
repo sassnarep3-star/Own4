@@ -496,3 +496,16 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
 - Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
 
+
+---
+## NFL research supplement · arena/6378baad-own4
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| NFL-specific research scope, dashboard, validation gates, dependence plan, source register and review flags | done | arena/6378baad-own4 | `nfl/**`, this appended coordination record |
+
+- Initial coordination review: existing board contains extensive NBA workstreams, no NFL task claim. To avoid collision, this session adds only the separate `nfl/` directory and this append-only entry; it does not alter NBA datasets, shared index/navigation, or existing pages.
+- Findings are a methodology/specification, not a fitted model or result: no NFL input dataset, NFL bet prices, measured NFL correlation, NFL leaderboard performance, or reward pool is present. Corresponding values and outputs are blank/not reported and flagged.
+- Source links reviewed: [NFL 2026 Rulebook](https://operations.nfl.com/rules-officiating/2026-nfl-rulebook), [NFL stats](https://www.nfl.com/stats/), [NFL Next Gen Stats](https://nextgenstats.nfl.com/stats/), [NFL receiving stats](https://nextgenstats.nfl.com/stats/receiving), [NFL injury reports](https://www.nfl.com/injuries/), [NFL terms](https://www.nfl.com/terms), and methodological references from scikit-learn. Rulebook page retrieved and read; NFL stats/NGS/injury pages checked as official source portals. Claims are limited to those portals' stated subject matter; none is presented as proof of strategy skill.
+- Verification: reviewed each table row manually for matching source relevance and explicitly labeled proposals/unmeasured items. All pages are independent static HTML and link to sibling pages. No claim is made that live deployment was configured or verified by this task.
+- Irregularities: existing project describes itself as NBA research; its NBA executive summary is not repurposed as NFL evidence. NFL data licensing, timestamped historical inputs, prices, settlement terms, injury history, reward terms and all strategy efficacy remain unresolved; see `nfl/review.html`.
