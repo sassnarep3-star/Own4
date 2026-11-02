@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Fetch official NFL pages and trusted partner scoreboard JSON with full provenance.
 
-Run by .github/workflows/fetch-nfl-quant.yml on the GitHub-hosted runner, which has
+Run by .github/workflows/fetch-nfl-origin.yml on the GitHub-hosted runner, which has
 outbound access to www.nfl.com and site.api.espn.com. The Arena sandbox shell does not,
 so this script must not be run locally as a data source.
 
@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 from urllib.parse import urlparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RAW_DIR = os.path.join(ROOT, "data", "nfl-quant", "raw")
+RAW_DIR = os.path.join(ROOT, "data", "nfl-origin", "raw")
 MANIFEST = os.path.join(RAW_DIR, "manifest.json")
 
 HEADERS = {
@@ -208,7 +208,7 @@ def main() -> int:
         url = src["url"]
         sid = source_id(url)
         ext = ".json" if src["kind"] == "partner_scoreboard" else ".html"
-        rel = f"data/nfl-quant/raw/{sid}{ext}.gz"
+        rel = f"data/nfl-origin/raw/{sid}{ext}.gz"
         out = os.path.join(ROOT, rel)
         data, status = fetch(url)
         item = {

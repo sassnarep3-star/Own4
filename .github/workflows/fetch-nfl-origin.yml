@@ -1,8 +1,8 @@
-name: fetch-nfl-quant
+name: fetch-nfl-origin
 
 # Manual, isolated provenance fetch for the NFL quantitative workspace.
 # The Arena sandbox shell cannot reach www.nfl.com; the GitHub-hosted runner can.
-# Only data/nfl-quant/raw/** is committed by this workflow.
+# Only data/nfl-origin/raw/** is committed by this workflow.
 
 on:
   workflow_dispatch:
@@ -10,8 +10,8 @@ on:
     branches:
       - arena/7f8d7277-own4
     paths:
-      - scripts/nfl_quant_fetch.py
-      - .github/workflows/fetch-nfl-quant.yml
+      - scripts/nfl_origin_fetch.py
+      - .github/workflows/fetch-nfl-origin.yml
 
 permissions:
   contents: write
@@ -30,10 +30,10 @@ jobs:
       - name: Fetch official NFL sources and partner cross-check
         run: |
           set -o pipefail
-          python3 scripts/nfl_quant_fetch.py 2>&1 | tee nfl_quant_fetch.log
+          python3 scripts/nfl_origin_fetch.py 2>&1 | tee nfl_origin_fetch.log
           python3 - <<'PY'
           import json
-          m = json.load(open("data/nfl-quant/raw/manifest.json"))
+          m = json.load(open("data/nfl-origin/raw/manifest.json"))
           official_ok = sum(1 for i in m["items"] if i["official"] and i["http_status"] == 200)
           partner_ok = sum(1 for i in m["items"] if not i["official"] and i["http_status"] == 200)
           print(f"official_ok={official_ok} partner_ok={partner_ok} total_ok={m['ok_count']} failed={m['fail_count']}")
@@ -46,7 +46,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/nfl-quant/raw nfl_quant_fetch.log || true
+          git add data/nfl-origin/raw nfl_origin_fetch.log || true
           if git diff --cached --quiet; then
             echo "no raw-data changes"
           else

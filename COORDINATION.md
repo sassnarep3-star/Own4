@@ -555,52 +555,58 @@ Manual review links (official sources used in verification):
 - NFL module site (pending Pages build): https://sassnarep3-star.github.io/Own4/nfl/
 
 ---
-## Session `arena-7f8d7277-own4` — NFL quantitative workspace (superseding claim, 2026-11-02 UTC)
+## Session `arena-7f8d7277-own4` — NFL line-origination quantitative workspace (final claim, 2026-11-02 UTC)
 
 Session ID: `arena-7f8d7277`. Platform pins this session to `arena/7f8d7277-own4`; the requested
 `session-<id>/<task>` branch and a separate `integration` branch cannot be created here (deviation
 logged, same as prior sessions). Scope isolation is by file namespace.
 
-**Conflict / handoff log.** This session's first claim was written at 20:51 UTC on base `ab9051a` and
-claimed `nfl/**`. While official-source research was in progress, `origin/main` advanced to `506694e`:
-sessions `arena-5f917b85-own4` and `arena-6378baad-own4` had already published NFL specification work
-under `nfl/**`, and PR #24 from `arena/1699c9cc-own4` was open with `nfl-research/**`. A `git pull
---rebase` produced a `COORDINATION.md` conflict. Rebase was aborted safely; `origin/main` was merged and
-**every line of the other sessions' coordination records is preserved verbatim**. This session's
-overlapping initial claim is withdrawn and replaced by the non-overlapping scope below. No other
-session's file or claim is overwritten. PR #24 remains open and its `nfl-research/**` scope is not
-touched. The merge resolution replaced only the conflicted duplicate of this session's own claim with
-the corrected claim below; the pre-existing literal conflict markers earlier in `COORDINATION.md` (an
+**Conflict / handoff log (two rounds).** This session's first claim was written at 20:51 UTC on base
+`ab9051a` and claimed `nfl/**`. While official-source research was in progress, `origin/main` advanced
+to `506694e`: sessions `arena-5f917b85-own4` and `arena-6378baad-own4` had already published NFL
+specification work under `nfl/**`, and PR #24 from `arena/1699c9cc-own4` was open with
+`nfl-research/**`. A `git pull --rebase` produced a `COORDINATION.md` conflict. Rebase was aborted
+safely; `origin/main` was merged and **every line of the other sessions' coordination records was
+preserved verbatim**. This session's overlapping initial claim was withdrawn. A second re-check of all
+remote session branches then found that `arena-e513f51b-own4` had claimed `nfl-quant/**` (NFL Quant
+Lab) and `arena-22c1775e-own4` / `arena-909635f5-own4` had claimed `nfl-lab/**`, while
+`arena-67233374-own4` claimed `nfl-study/**`. This session therefore moved its own freshly fetched
+raw snapshots, script and workflow from `nfl-quant/**` to the unused `nfl-origin/**` namespace.
+The raw bytes were moved without modification; all SHA-256 hashes in the provenance manifest remain
+valid. No other session's file or claim is overwritten. PR #24 remains open and its `nfl-research/**`
+scope is not touched. The pre-existing literal conflict markers earlier in `COORDINATION.md` (an
 irregularity from prior sessions) were left untouched and are flagged in this session's repo review.
 
-**Claimed file scope (non-overlapping):** `nfl-quant/**`, `data/nfl-quant/**`,
-`scripts/nfl_quant_*.py`, `NFL_QUANT_EXECUTIVE_SUMMARY.md`, `NFL_QUANT_REPO_REVIEW.md`, plus the two
-**new** workflow files `.github/workflows/fetch-nfl-quant.yml` and
-`.github/workflows/nfl-quant-validate.yml` (no existing workflow is modified), and append-only
+**Claimed file scope (non-overlapping):** `nfl-origin/**`, `data/nfl-origin/**`,
+`scripts/nfl_origin_*.py`, `NFL_ORIGIN_EXECUTIVE_SUMMARY.md`, `NFL_ORIGIN_REPO_REVIEW.md`, plus the two
+**new** workflow files `.github/workflows/fetch-nfl-origin.yml` and
+`.github/workflows/nfl-origin-validate.yml` (no existing workflow is modified), and append-only
 `COORDINATION.md`.
 
-Explicitly **not** edited: `nfl/**`, `nfl-research/**`, root `index.html`, `pages/**`, `docs/**`,
-`lab/**`, `lines-lab/**`, `own4-dashboard/**`, `pipeline/**`, any `data/*.json` outside
-`data/nfl-quant/**`, `README.md`, `EXECUTIVE_SUMMARY.md`, or any pre-existing workflow.
+Explicitly **not** edited: `nfl/**`, `nfl-research/**`, `nfl-lab/**`, `nfl-quant/**`, `nfl-study/**`,
+root `index.html`, `pages/**`, `docs/**`, `lab/**`, `lines-lab/**`, `own4-dashboard/**`,
+`pipeline/**`, any `data/*.json` outside `data/nfl-origin/**`, `README.md`,
+`EXECUTIVE_SUMMARY.md`, or any pre-existing workflow.
 
 | ID | Task | Status | Owner session | Files touched |
 |----|------|--------|---------------|---------------|
-| Q1 | Repo review + irregularity audit + official-source NFL research | in progress | arena-7f8d7277 | `NFL_QUANT_REPO_REVIEW.md`, `data/nfl-quant/**` |
-| Q2 | NFL strategy framework: singles, parlays, player-prop combos, own lines, validation gates, correlation values, skill-vs-luck leaderboard | in progress | arena-7f8d7277 | `data/nfl-quant/**`, `scripts/nfl_quant_*.py` |
-| Q3 | NFL quantitative executive summary | in progress | arena-7f8d7277 | `NFL_QUANT_EXECUTIVE_SUMMARY.md` |
-| Q4 | GitHub Pages NFL quantitative site: clean landing + category subpages + tables + Flagged for Review | in progress | arena-7f8d7277 | `nfl-quant/**`, `scripts/nfl_quant_build_site.py` |
-| Q5 | Final integration: line-by-line official-source verification, build, no broken links | in progress | arena-7f8d7277 | `nfl-quant/**`, `data/nfl-quant/**`, `scripts/nfl_quant_verify.py` |
+| Q1 | Repo review + irregularity audit + official-source NFL research | in progress | arena-7f8d7277 | `NFL_ORIGIN_REPO_REVIEW.md`, `data/nfl-origin/**` |
+| Q2 | NFL strategy framework: singles, parlays, player-prop combos, own lines, validation gates, correlation values, skill-vs-luck leaderboard | in progress | arena-7f8d7277 | `data/nfl-origin/**`, `scripts/nfl_origin_*.py` |
+| Q3 | NFL quantitative executive summary | in progress | arena-7f8d7277 | `NFL_ORIGIN_EXECUTIVE_SUMMARY.md` |
+| Q4 | GitHub Pages NFL quantitative site: clean landing + category subpages + tables + Flagged for Review | in progress | arena-7f8d7277 | `nfl-origin/**`, `scripts/nfl_origin_build_site.py` |
+| Q5 | Final integration: line-by-line official-source verification, build, no broken links | in progress | arena-7f8d7277 | `nfl-origin/**`, `data/nfl-origin/**`, `scripts/nfl_origin_verify.py` |
 | Q6 | PR → merge (no approval wait) → GitHub Pages deploy confirmation → record PR link + merge result | in progress | arena-7f8d7277 | this file |
 
 **Relationship to prior NFL sessions.** The already-published `nfl/**` work is a methodology/specification
-with numeric results blank. This session adds a distinct quantitative layer: official NFL.com game and
-standings data, reproducible own lines, measured correlations, pre-registered validation gates, a
-skill-vs-luck leaderboard, and row-level source verification. It does not duplicate or overwrite those
-specification pages.
+with numeric results blank. Other sessions claim `nfl-research/**`, `nfl-lab/**`, `nfl-quant/**` and
+`nfl-study/**`. This session adds a distinct quantitative layer under `nfl-origin/**`: official NFL.com
+game and standings data, reproducible own lines, measured correlations, pre-registered validation
+gates, a skill-vs-luck leaderboard, and row-level source verification. It does not duplicate or
+overwrite those specification pages.
 
 **Shared-output request (logged, not edited):** root `index.html` already links to `nfl/index.html`. A
-later final integration session may add a `NFL Quant · /nfl-quant/` link to root navigation; this
-session will not edit that shared file.
+later final integration session may add a `NFL Origin Lab · /nfl-origin/` link to root navigation;
+this session will not edit that shared file.
 
 **Initial irregularity (to publish on Flagged for Review):** IR-NFL-01 — the pre-existing repository is
 largely NBA-focused and now contains multiple independently created NFL specification dashboards; the
