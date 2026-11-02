@@ -101,7 +101,7 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 | T6 | Site generator + pages | done | bf34205f | `site_src/**`, `assets/**` |
 | T7 | Executive summary | done | bf34205f | `site_src/executive_summary*` |
 | T8 | Flagged-for-review page | done | bf34205f | `data/flags.csv` |
-| T9 | Final integration (re-verify, build, PR, merge, Pages check) | in progress | bf34205f | `index.html`, `pages/**`, `COORDINATION.md` |
+| T9 | Final integration (re-verify, build, PR, merge, Pages check) | done | bf34205f | `index.html`, `pages/**`, `COORDINATION.md` |
 
 ## Log
 
@@ -112,3 +112,4 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - 2026-11-02 18:3x UTC — T1 (repo review: `repo_review/`, `scripts/make_repo_review.py`), T6/T7 (site generator `site_src/build_site.py`, 11 pages incl. executive summary) and T8 (`data/flags.csv`, 15 flags) done. T9 in progress: verify_data 11/11, check_site 0 problems; next: PR to main, merge, Pages check.
 - Resolved while reviewing: flag F-05 (game ID 0022600021) is an NBA Cup group-stage ID block per nba.com game page/schedule; downgraded to 'explained, needs confirmation'.
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
+- 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
