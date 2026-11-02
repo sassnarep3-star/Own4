@@ -1,0 +1,87 @@
+{
+ "generated_from": [
+  "nfl-lab/data/games_2026.csv",
+  "nfl-lab/data/standings_2026.csv"
+ ],
+ "official_sources": [
+  "https://www.nfl.com/schedules/2026/by-week/week-1 \u2026 week-8",
+  "https://www.nfl.com/standings/league/2026/REG",
+  "https://www.nfl.com/standings/division/2026/REG"
+ ],
+ "checks": [
+  {
+   "check": "120 completed games",
+   "pass": true,
+   "detail": "n=120"
+  },
+  {
+   "check": "32 standings rows",
+   "pass": true,
+   "detail": "n=32"
+  },
+  {
+   "check": "game slugs unique",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "all scores numeric",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "exactly one tie in log (NYG-WAS W5)",
+   "pass": true,
+   "detail": "giants-at-commanders-2026-reg-5"
+  },
+  {
+   "check": "every standings cell matches recomputation from game log (32 teams x 13 fields)",
+   "pass": true,
+   "detail": "0 mismatches: "
+  },
+  {
+   "check": "sum(standings PF) == sum(game scores)",
+   "pass": true,
+   "detail": "5528 vs 5528"
+  },
+  {
+   "check": "sum(W) == sum(L) and sum(T) == 2 x ties_in_log",
+   "pass": true,
+   "detail": "W=119 L=119 T=2 ties_in_log=1"
+  },
+  {
+   "check": "team-games == 2 x games",
+   "pass": true,
+   "detail": "240 vs 240"
+  },
+  {
+   "check": "16 teams with 7 games (one bye each W5-W8 + MNF-pending CHI/SEA), 16 with 8",
+   "pass": true,
+   "detail": "7-game=['BUF', 'CAR', 'CHI', 'CIN', 'DET', 'HOU', 'JAX', 'KC', 'LAC', 'MIA', 'MIN', 'NO', 'NYG', 'SEA', 'SF', 'WAS']"
+  },
+  {
+   "check": "week 5: byes ['CAR', 'KC'] are exactly teams not playing",
+   "pass": true,
+   "detail": "played=30 overlap=[]"
+  },
+  {
+   "check": "week 6: byes ['CIN', 'DET', 'MIA', 'MIN'] are exactly teams not playing",
+   "pass": true,
+   "detail": "played=28 overlap=[]"
+  },
+  {
+   "check": "week 7: byes ['BUF', 'JAX', 'LAC', 'WAS'] are exactly teams not playing",
+   "pass": true,
+   "detail": "played=28 overlap=[]"
+  },
+  {
+   "check": "week 8: byes ['HOU', 'NO', 'NYG', 'SF'] are exactly teams not playing",
+   "pass": true,
+   "detail": "played=26 overlap=[]"
+  }
+ ],
+ "all_pass": true,
+ "games": 120,
+ "standings_rows": 32,
+ "cells_compared": 480
+}

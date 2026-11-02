@@ -40,3 +40,26 @@
 ## Responsible gambling
 
 - This is analysis, not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET — https://www.ncpgambling.org/help-treatment
+
+## NFL addendum (added at final integration, session arena/909635f5-own4, 2026-11-02 UTC)
+
+The repository now carries four independent NFL research sections, all linked from the root
+dashboard navigation. Each was produced by a separate session with its own pre-registration,
+verification and flags; none claims a validated betting edge:
+
+| Section | Content | Headline status |
+|---------|---------|-----------------|
+| `nfl/` (PRs #23/#25) | Specification pages: correlation, validation, sources, review | Structure-only; all measured values blank + flagged |
+| `nfl-quant/` (PRs #26–#28) | Historical NFL quant lab: ratings engine, backtests, props research, Week 9 lines, 13-page site | Measured outputs with its own gates/flags; see its executive summary |
+| `nfl-research/` (PR #24, integrated here) | Research specification + dashboard | Unvalidated specification; empirical modelling flagged as needs-review |
+| `nfl-lab/` (this session) | Verified 2026 data (120 games, 480/480 standings cells), 13 signals, 7 correlations, walk-forward Elo, 16 own lines, 8-gate leaderboard, 11-page site | **0 of 8 strategies reward-eligible**; holdout Brier 0.249 (n=56 < 300 gate) — NOT VALIDATED; all market cells blank (no official line source) |
+
+NFL findings detailed in `nfl-lab/EXECUTIVE_SUMMARY.md` and each section's own summary.
+Shared rule across sections: every table row links to an official source (nfl.com /
+operations.nfl.com), unconfirmable values stay blank and appear on a "Flagged for Review"
+page, and nothing merges without the full validation suite green (CI: `pages.yml`).
+
+Sources: https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/schedules/ ·
+https://operations.nfl.com/rules-officiating/2026-nfl-rulebook ·
+https://scikit-learn.org/stable/modules/cross_validation.html ·
+https://www.ncpgambling.org/

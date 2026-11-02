@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="on">Sources</a></nav>
+</header>
+<main>
+
+<h1>Source register</h1>
+<p class="lede">Every table row on this site links to an official source. This page lists
+what each source supports and what was verified against it.</p>
+<table class=""><thead><tr><th>Source</th><th>What it supports</th><th>Verification performed</th><th>Retrieved</th></tr></thead><tbody><tr><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">nfl.com weekly schedules (W1–W9)</a></td><td>Game results, dates, neutral-site markers, upcoming slate, SNF slots</td><td>120 games + 16 upcoming rows transcribed</td><td>2026-11-02</td></tr><tr><td><a href="https://www.nfl.com/standings/league/2026/REG">nfl.com league standings</a></td><td>W-L-T, PCT, PF, PA, NET, HOME, ROAD, DIV, CONF, STRK ×32</td><td>480 cells recomputed from game log — all match</td><td>2026-11-02</td></tr><tr><td><a href="https://www.nfl.com/standings/division/2026/REG">nfl.com division standings</a></td><td>Division membership (8 divisions ×4)</td><td>Encoded in verification script</td><td>2026-11-02</td></tr><tr><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">nfl.com team passing stats</a></td><td>Team ATT/CMP/CMP%/Y/A/YDS/TD/INT</td><td>Columns cross-confirmed vs player tables; unnamed columns discarded</td><td>2026-11-02</td></tr><tr><td><a href="https://www.nfl.com/games/commanders-at-cowboys-2026-reg-2">nfl.com game center</a></td><td>WAS 20–DAL 37 final + box</td><td>Filled extraction gap</td><td>2026-11-02</td></tr><tr><td><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook">2026 NFL rulebook (operations.nfl.com)</a></td><td>Rules/officiating context</td><td>Referenced for structure claims</td><td>2026-11-02</td></tr><tr><td><a href="https://www.nfl.com/injuries/">nfl.com injuries</a></td><td>Injury report portal</td><td>Portal verified; historical feed not ingested (FL-14)</td><td>2026-11-02</td></tr><tr><td><a href="https://nextgenstats.nfl.com/stats/">NFL Next Gen Stats</a></td><td>Tracking stats portal</td><td>Portal noted; not used as input</td><td>2026-11-02</td></tr><tr><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn cross-validation docs</a></td><td>Walk-forward / leakage methodology</td><td>Methodological basis for G2</td><td>2026-11-02</td></tr><tr><td><a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn calibration docs</a></td><td>Brier, reliability, calibration</td><td>Basis for G5</td><td>2026-11-02</td></tr><tr><td><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">NIST handbook (autocorrelation)</a></td><td>Dependence testing caution</td><td>Basis for C-series notes</td><td>2026-11-02</td></tr><tr><td><a href="https://www.ncpgambling.org/">National Council on Problem Gambling</a></td><td>Responsible-play / reward caution</td><td>Basis for reward blanks</td><td>2026-11-02</td></tr></tbody></table>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

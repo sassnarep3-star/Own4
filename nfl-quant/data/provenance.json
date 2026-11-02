@@ -1,0 +1,140 @@
+{
+  "generated_utc": "2026-11-02T21:07:27+00:00",
+  "sources": [
+    {
+      "id": "SRC-GAMES",
+      "file": "games.csv",
+      "repo": "https://github.com/nflverse/nfldata",
+      "commit": "3cd32debd8c1bb0eb71ac4092584524e8d2c9cde",
+      "commit_date": "2026-11-02T20:45:18Z",
+      "download_url": "https://codeload.github.com/nflverse/nfldata/tar.gz/refs/heads/master",
+      "downloaded_utc": "2026-11-02T21:07:27+00:00",
+      "contents": "NFL games 1999-2026: official final scores + third-party closing spreads/totals/moneylines, schedule, venue, weather, QB/coach names",
+      "official_status": "Scores: third-party archive of official NFL results (spot-checked vs nfl.com). Lines: THIRD-PARTY, no official league source exists.",
+      "license_note": "See repo DATASETS.md / README for terms. Verify rights before production use.",
+      "sha256": "86b10c995aa0327e332901b20753555eede1161edb89bb301dc644de82f80f1d"
+    },
+    {
+      "id": "SRC-WEEKLY-2021",
+      "file": "2022/07-Data Visualizations/01-Weekly Fantasy Stats - 2021/{1..18}.csv",
+      "repo": "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball",
+      "commit": "e367d869b2da48b031c9633797ae6a76a7cb8098",
+      "commit_date": "2023-08-26T16:03:39Z",
+      "download_url": "https://codeload.github.com/fantasydatapros/LearnPythonWithFantasyFootball/tar.gz/refs/heads/master",
+      "downloaded_utc": "2026-11-02T21:07:27+00:00",
+      "contents": "2021 per-player per-week passing/rushing/receiving yards, TDs, targets, receptions (PFR schema)",
+      "official_status": "THIRD-PARTY archive of official NFL box-score statistics. Cross-checked vs play-by-play (exact match).",
+      "sha256": "dbbb7936bb65830ec2ab60a1a2f54e3148a5ec4489113dc94c200db87afb4a7a"
+    },
+    {
+      "id": "SRC-WEEKLY-2022",
+      "file": "2023/07-Data Visualizations/01-Weekly Fantasy Stats - 2022/{1..18}.csv",
+      "repo": "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball",
+      "commit": "e367d869b2da48b031c9633797ae6a76a7cb8098",
+      "download_url": "https://codeload.github.com/fantasydatapros/LearnPythonWithFantasyFootball/tar.gz/refs/heads/master",
+      "downloaded_utc": "2026-11-02T21:07:27+00:00",
+      "contents": "2022 per-player per-week stats (nflverse schema incl. EPA, air yards, target share)",
+      "official_status": "THIRD-PARTY archive of official NFL box-score statistics; EPA fields are computed model values.",
+      "sha256": "72ede9011e79c3ccd6100a79e468cdf07957206a0c4e9ee8561dfb4e29baad57"
+    },
+    {
+      "id": "SRC-PBP",
+      "file": "2022/08-Finding TD Regression Candidates/1-Play by Play Data - 2021.csv",
+      "repo": "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball",
+      "commit": "e367d869b2da48b031c9633797ae6a76a7cb8098",
+      "download_url": "https://codeload.github.com/fantasydatapros/LearnPythonWithFantasyFootball/tar.gz/refs/heads/master",
+      "downloaded_utc": "2026-11-02T21:07:27+00:00",
+      "contents": "nflfastR play-by-play 2021 incl. EPA per play (382 columns, 50,712 plays)",
+      "official_status": "THIRD-PARTY (nflfastR) derivative of official NFL play-by-play. EPA is a computed model value, not an official statistic.",
+      "sha256": "a62d4a7691d9a881220e47274167e71306afc01c237208e9b2811aa1cc2829f7"
+    }
+  ],
+  "integrity_checks": [
+    {
+      "check": "unique game_id",
+      "pass": true,
+      "detail": "7548 rows, 7548 unique"
+    },
+    {
+      "check": "result == home_score - away_score",
+      "pass": true,
+      "detail": "7396 played games"
+    },
+    {
+      "check": "total == home_score + away_score",
+      "pass": true,
+      "detail": "7396 played games"
+    },
+    {
+      "check": "32 franchises after code normalization",
+      "pass": true,
+      "detail": "raw 35 codes; OAK->LV, SD->LAC, STL->LA; normalized 32"
+    },
+    {
+      "check": "seasons 1999-2026",
+      "pass": true,
+      "detail": "1999-2026"
+    },
+    {
+      "check": "regular-season games per season sane",
+      "pass": true,
+      "detail": "248 (1999-2001), 256 (2002-2020), 272 (2021+), 2026 in progress"
+    },
+    {
+      "check": "no negative scores",
+      "pass": true,
+      "detail": "min scores >= 0"
+    },
+    {
+      "check": "spread_line convention: positive = home favored",
+      "pass": true,
+      "detail": "corr(result, spread_line) = 0.425; DATASETS.md confirms positive = home favored"
+    },
+    {
+      "check": "home +7 favorites win majority (sign check)",
+      "pass": true,
+      "detail": "home +7+ favorites win 0.803 of 1704"
+    },
+    {
+      "check": "spread sign agrees with moneyline favorite",
+      "pass": true,
+      "detail": "0.9826 agreement over 5415 games"
+    },
+    {
+      "check": "2021 weekly PFR schema loads",
+      "pass": true,
+      "detail": "400 rows week 1"
+    },
+    {
+      "check": "2022 weekly nflverse schema loads",
+      "pass": true,
+      "detail": "317 rows week 1"
+    },
+    {
+      "check": "2021 PFR team codes mappable",
+      "pass": true,
+      "detail": "unmapped: []"
+    },
+    {
+      "check": "2022 team codes already normalized",
+      "pass": true,
+      "detail": "nflverse codes"
+    },
+    {
+      "check": "weekly vs PBP receiving yards DAL W1 2021",
+      "pass": true,
+      "detail": "all 8 DAL receivers match play-by-play sums exactly"
+    }
+  ],
+  "all_checks_pass": true,
+  "conventions": {
+    "result": "home_score - away_score",
+    "spread_line": "points home team is favored by; POSITIVE = home favorite (opposite of sportsbook home-spread notation)",
+    "franchise_normalization": {
+      "OAK": "LV",
+      "SD": "LAC",
+      "STL": "LA"
+    }
+  },
+  "policy": "Every published numeric row links to its source. Official-source column is left blank + flagged UNVERIFIED whenever no official source publishes the value (all betting lines, all computed correlations/backtest results). Computed values are reproducible from the cited archives via this pipeline."
+}

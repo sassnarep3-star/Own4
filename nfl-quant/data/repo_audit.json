@@ -1,0 +1,95 @@
+{
+  "generated_utc": "2026-11-02T21:35:08+00:00",
+  "findings": [
+    {
+      "id": "RA-01",
+      "file": "README.md",
+      "lines": "55, 64, 90",
+      "finding": "Committed merge-conflict markers (<<<<<<< HEAD / ======= / >>>>>>> origin/main)",
+      "severity": "high",
+      "action": "Repaired at integration: both sides kept, markers removed. No session work discarded.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+    },
+    {
+      "id": "RA-02",
+      "file": "(repo-wide)",
+      "lines": "-",
+      "finding": "Root project identity is NBA line origination; current session brief is NFL",
+      "severity": "info",
+      "action": "NFL work namespaced under nfl-quant/ (this session), alongside prior nfl/ spec and nfl-research/ (open PR #24). NBA outputs untouched.",
+      "source": "https://github.com/sassnarep3-star/Own4"
+    },
+    {
+      "id": "RA-03",
+      "file": "data/raw/espn/*.json, data/raw/nba/*",
+      "lines": "-",
+      "finding": "53 MB of NBA raw content (e.g., Celtics box scores) from prior NBA sessions; not NFL data",
+      "severity": "info",
+      "action": "Retained (other sessions' scope). Not used by NFL Quant Lab.",
+      "source": "https://github.com/sassnarep3-star/Own4/tree/main/data/raw"
+    },
+    {
+      "id": "RA-04",
+      "file": "fetch.log",
+      "lines": "1-20+",
+      "finding": "Historical NBA fetch failures (403 cdn.nba.com, timeouts stats.nba.com)",
+      "severity": "info",
+      "action": "Informational; NFL session used GitHub-archived data + official page fetches instead.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/fetch.log"
+    },
+    {
+      "id": "RA-05",
+      "file": ".github/workflows/pages.yml",
+      "lines": "all",
+      "finding": "CI 'validate' runs scripts/build.py, unittest, verify_data.py, check_site.py, git diff docs",
+      "severity": "verified",
+      "action": "Ran all steps locally: PASS (8 pages/47 rows; 11/11 data checks; 11 pages/758 links/0 problems). NFL additions do not touch docs/.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/pages.yml"
+    },
+    {
+      "id": "RA-06",
+      "file": "nfl/data/*.json",
+      "lines": "all",
+      "finding": "Prior NFL module (PRs #23/#25) is specification-only: all performance/correlation values blank + UNVERIFIED, consistent with its self-description",
+      "severity": "verified",
+      "action": "No irregularity; nfl-quant/ adds the measured layer those modules explicitly lacked.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl/data/strategies.json"
+    },
+    {
+      "id": "RA-07",
+      "file": "(data convention)",
+      "lines": "-",
+      "finding": "nflverse games.csv spread_line is POSITIVE when home is favored \u2014 opposite of standard sportsbook home-spread notation",
+      "severity": "verified",
+      "action": "Verified vs DATASETS.md, corr(result,spread)=+0.43, moneyline agreement 99%+. Documented in provenance.json; all settlement code uses the verified convention.",
+      "source": "https://github.com/nflverse/nfldata/blob/master/DATASETS.md"
+    },
+    {
+      "id": "RA-08",
+      "file": "(coordination)",
+      "lines": "-",
+      "finding": "Open PR #24 (arena/1699c9cc, nfl-research/**) is an active parallel session",
+      "severity": "info",
+      "action": "Scope not touched. Integration preserves it; final merge order coordinated via COORDINATION.md.",
+      "source": "https://github.com/sassnarep3-star/Own4/pull/24"
+    },
+    {
+      "id": "RA-09",
+      "file": "nfl-quant/data/provenance.json",
+      "lines": "all",
+      "finding": "Data integrity: 15/15 checks pass; official NFL.com score spot-check 13/13 match",
+      "severity": "verified",
+      "action": "Published on Data & Sources page.",
+      "source": "https://www.nfl.com/scores/2026/REG8"
+    },
+    {
+      "id": "RA-10",
+      "file": "COORDINATION.md",
+      "lines": "all",
+      "finding": "No conflict markers on current main (prior session repaired); append-only session logs intact",
+      "severity": "verified",
+      "action": "This session appends its claim/log per protocol.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+    }
+  ]
+}
