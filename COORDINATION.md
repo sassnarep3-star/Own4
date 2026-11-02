@@ -621,3 +621,12 @@ clearly namespaced quantitative NFL section rather than overwriting prior sessio
   from the 120 official finals matched all 192 standings cells (0 mismatches); ESPN partner JSON
   matched 392/392 final scores; 10/10 sampled official game centers matched. Lines were pre-registered
   in commit `92a4be936de5a761ec900f406b9e38be420e1e2d` **before** model evaluation.
+- 2026-11-02 UTC (arena-7f8d7277) — Model `nfl-origin-elo-v1` evaluated after the pre-registered gates
+  were committed. Fixed-parameter walk-forward Elo produced 392 predictions from 272 official 2025
+  finals + 120 official 2026 finals; 16 pre-game own lines were originated for the remaining week-8
+  game and all week-9 games. Two tie games were excluded from binary winner metrics (flagged).
+  Twelve strategies cover singles, parlays, player-prop combos and CLV. Eight have computed metrics;
+  four are blocked by missing official player/price data. Gate results: G1 FAIL (120<300), G2/G3/G4/
+  G5/G7 PASS, G6/G8 REVIEW (overlapping parlay pairs), G9/G10/G11/G12 BLOCKED. **Zero strategies
+  pass every gate; zero rewards awarded.** Same-week 2-leg parlay phi = -0.027983 (831 overlapping
+  pairs; CI approximate). All market-price, ROI, CLV and reward fields are blank and flagged.

@@ -230,5 +230,120 @@
       "https://www.nfl.com/stats/player-stats/",
       "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
     ]
+  },
+  {
+    "flag_id": "IR-NFL-18",
+    "title": "Tie games excluded from binary winner metrics",
+    "detail": "2 official final games ended tied; binary Brier/accuracy metrics exclude them and the count is disclosed.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "tie_winner_probability"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/standings/league/2026/reg",
+      "https://www.nfl.com/schedules/2025/by-week/week-1",
+      "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "https://github.com/sassnarep3-star/Own4/blob/main/scripts/nfl_origin_model.py"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-19",
+    "title": "No strategy passes every validation gate",
+    "detail": "G1, G9, G10, G11 and G12 fail or are blocked; the leaderboard is provisional and awards no rewards.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "validated_strategy_count",
+      "reward_points"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/standings/league/2026/reg",
+      "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners",
+      "https://github.com/sassnarep3-star/Own4/blob/main/data/nfl-origin/validation_gates_results.json"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-20",
+    "title": "Validation thresholds and model constants are project-defined",
+    "detail": "Gate thresholds, Elo K, home advantage, rest coefficients and bootstrap settings are pre-registered engineering choices, not official NFL statistics.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "threshold_official_status"
+    ],
+    "source_urls": [
+      "https://www.itl.nist.gov/div898/handbook/prc/section2/prc24.htm",
+      "https://github.com/sassnarep3-star/Own4/blob/main/scripts/nfl_origin_model.py",
+      "https://github.com/sassnarep3-star/Own4/blob/main/data/nfl-origin/validation_gates.json"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-21",
+    "title": "Rest and neutral-site fields use ESPN partner data",
+    "detail": "Kickoff UTC, rest days and neutral-site flags come from the ESPN partner scoreboard, cross-checked against official NFL schedule/game links, and are labelled partner-sourced.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "rest_diff_days",
+      "neutral_site"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&limit=500",
+      "https://github.com/sassnarep3-star/Own4/blob/main/data/nfl-origin/flags.json"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-22",
+    "title": "First game lacks a prior league average for projected total",
+    "detail": "The walk-forward total projection is blank for the first chronological game because no prior official game exists; no value is imputed.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "pred_total"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2025/by-week/week-1",
+      "https://github.com/sassnarep3-star/Own4/blob/main/scripts/nfl_origin_model.py"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-23",
+    "title": "Fair lines are model outputs, not betting lines",
+    "detail": "Own moneyline, spread and total columns are derived fair prices. NFL.com publishes no official odds; every market-price cell is blank.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "market_moneyline",
+      "market_spread",
+      "market_total"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners",
+      "https://www.nfl.com/standings/league/2026/reg",
+      "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "https://github.com/sassnarep3-star/Own4/blob/main/data/nfl-origin/flags.json"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-24",
+    "title": "Parlay pair observations are not independent",
+    "detail": "Same-week parlay pairs and triples reuse the same games, so the bootstrap and Fisher CIs assume independence they do not have. G6 and G8 are marked REVIEW rather than PASS; reported phi/joint rates remain descriptive only.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "bh_q",
+      "parlay_ci_low",
+      "parlay_ci_high"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&limit=500",
+      "https://www.itl.nist.gov/div898/handbook/prc/section2/prc24.htm",
+      "https://github.com/sassnarep3-star/Own4/blob/main/scripts/nfl_origin_model.py",
+      "https://github.com/sassnarep3-star/Own4/blob/main/data/nfl-origin/validation_gates_results.json"
+    ]
   }
 ]
