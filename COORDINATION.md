@@ -451,7 +451,7 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 | P4 | Empirical signals (home, rest, margins, totals, pace, parlay dependence, prop benchmarks) with Wilson CIs | done | 75685c60 | `data/signals.json`, `data/games_official.json`, `data/player_gamelogs.json` |
 | P5 | Row-level source audit (`scripts/audit_rows.py`) | done | 75685c60 | `scripts/audit_rows.py` |
 | P6 | `pipeline/` site section: dashboard, exec summary, standings, own lines/model, signals, strategies/leaderboard, verification, flagged, sources | done | 75685c60 | `pipeline/**`, `scripts/build_pipeline_site.py`, `data/pipeline_strategies.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json` |
-| P7 | Integration: merge main (keep all sessions), validation suite, PR → main, merge, Pages verify, record | in progress | 75685c60 | this file, PR record below |
+| P7 | Integration: merge main (keep all sessions), validation suite, PR → main, merge, Pages verify, record | done | 75685c60 | this file, PR record below |
 
 ### Verification performed (session 75685c60) — all against official sources
 
@@ -470,6 +470,18 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - Elo walk-forward Brier **0.2309** vs 0.2366 static prior vs 0.2500 constant (n=92): better than both, but **G1 (n≥300) not met → not validated**; honest status recorded on the leaderboard.
 - 15 pre-tip own lines originated for the Nov 2 slate (first tip 23:00 UTC); market columns permanently blank (Q1).
 - Rest effects null at n=92 (SIG-03/SIG-10 CIs all include 0.5); same-day parlay-leg φ=0.026 (independence not rejected); same-game pace r=0.2004 (p≈0.052); player trailing-mean PTS benchmark 0.502 (n=1002) — no naive prop edge.
+
+### Deployment record (session 75685c60)
+
+| Event | Result |
+|---|---|
+| PR to main | PR #18: https://github.com/sassnarep3-star/Own4/pull/18 |
+| Merge | MERGED 2026-11-02T19:23:07Z, merge commit `8c33b307` (gh pr merge --merge, no approval wait) |
+| CI on PR | validate run 41509339594 — success (repo suite: build.py, unittest ×3, verify_data, check_site, docs diff) |
+| CI on main | validate run 41509440796 — success |
+| GitHub Pages | pages build and deployment run 41509438935 — success (2026-11-02) |
+| Live section | https://sassnarep3-star.github.io/Own4/pipeline/ (dashboard + 8 subpages; flagged page verified live with cache-bust) |
+| Record PR | follow-up PR carries this record to `main` (see log entry below) |
 
 ### Irregularities (published at `pipeline/flagged.html`; none block merge)
 - **Q1** No official NBA source publishes betting lines/odds → all market cells blank by policy (permanent).
