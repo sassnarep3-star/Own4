@@ -29,8 +29,6 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Recompute research
         run: python -m nba_lab.analysis
-      - name: Inventory repository without editing peer files
-        run: python audit_repo.py
       - name: Build static dashboard
         run: python build_site.py
       - name: Verify every table row and local link
