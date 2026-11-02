@@ -50,7 +50,8 @@ jobs:
         with:
           python-version: '3.12'
       - name: Fetch public official sources with provenance
-        run: PHASE=$(python -c 'import json; print(json.load(open("nfl-assurance/acquisition.json"))["phase"])')
+        run: |
+          PHASE=$(python -c 'import json; print(json.load(open("nfl-assurance/acquisition.json"))["phase"])')
           if [ "$PHASE" = "off" ]; then echo 'Acquisition disabled'; exit 0; fi
           python nfl-assurance/fetch_official.py --phase "$PHASE"
       - name: Preserve source snapshots only on this session branch
@@ -58,6 +59,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if [ ! -d nfl-assurance/sources ]; then echo 'No source directory produced'; exit 0; fi
           git add nfl-assurance/sources
           if ! git diff --cached --quiet; then
             git commit -m 'data: preserve official NFL source snapshots (push acquisition)'
