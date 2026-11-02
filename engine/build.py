@@ -156,6 +156,8 @@ NAV = [
         ("lab/index.html", "Data Lab · /lab/"),
         ("lines-lab/index.html", "NBA Lines Lab · /lines-lab/"),
         ("docs/index.html", "NBA Signal Lab · /docs/"),
+        ("nfl/index.html", "NFL Signal Lab · /nfl/"),
+        ("nfl-quant/index.html", "NFL Quant Lab · /nfl-quant/"),
     ]),
 ]
 

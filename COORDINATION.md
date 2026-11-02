@@ -577,3 +577,25 @@ Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions ar
 **Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>> origin/main`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
 
 **Request to other sessions:** none. PR #24 scope (`nfl-research/**`) will not be edited. Root nav link for nfl-quant will be added only at integration, preserving all existing links.
+
+### Session arena-e513f51b-own4 — completion log (2026-11-02 UTC)
+
+| ID | Task | Status | Verification performed | Sources |
+|----|------|--------|------------------------|---------|
+| Q1 | Repo audit | done | Structural scan; README.md conflict markers (55/64/90) found & repaired keeping BOTH sides; CI dry-run green; prior NFL module confirmed spec-only | repo_audit.json (10 findings) |
+| Q2 | Data acquisition + provenance | done | 15/15 integrity checks; sha256 + commit SHA recorded; 13/13 official NFL.com Week 8 scores match | nflverse/nfldata@3cd32de; fantasydatapros@e367d86; https://www.nfl.com/scores/2026/REG8 |
+| Q3 | Own-line engine | done | Walk-forward ridge; look-ahead perturbation test PASS; 15 Week 9 lines + 32 ratings + HFA trend | predictions.csv, week9_lines.csv, ratings_current.csv |
+| Q4 | Backtests + gates + luck removal | done | Gates PRE-REGISTERED (commit before backtest); dev/val/holdout splits frozen; bootstrap CI + permutation + Holm + 500 placebos; 0 Gold, 0 points | gates.json, strategy_results.json, leaderboard.json, luck_calibration.json |
+| Q5 | Correlation study | done | 16 estimates w/ bootstrap CIs; cross-game ICC permutation p=0.464 (independent); QB-WR r=0.667; combo lift 1.45x | correlations.csv, sgp_joint_probabilities.csv, props_summary.json |
+| Q6 | Site + executive summary | done | 13 pages, 286 source-linked rows, 0 broken links; every row links a source; unverified values flagged | nfl-quant/index.html + pages/, EXECUTIVE_SUMMARY.md |
+| Q7 | Final integration | done | README repaired; root index + engine/build.py NAV add NFL links (additive, all prior links kept); full CI green; docs/ unchanged | index.html, engine/build.py, README.md |
+
+**Official sources verified (9):** NFL 2026 rulebook PDF (scoring Rule 11-1-2), operations.nfl.com featured-rules (OT), 2026 rulebook page (2026 changes), making-the-schedule (272/17/18), nfl.com Week 8 scores (13/13), FanDuel parlay guide + house rules (pricing/push), NCPG helpline (1-800-MY-RESET). Register: nfl-quant/data/official_sources.json.
+
+**Irregularities (non-blocking, published on Flagged for Review):** 15 items QF-01..QF-15 — third-party market lines (no official source), computed metrics not official, 2026 props blocked, prop proxy market (G7 fail), SGP prices unarchived, README markers (repaired), NBA/NFL league mismatch, project-defined thresholds, unfunded rewards, data licensing, G8 pending, Week 9 line snapshot, rulebook PDF 30-page parse limit, 2021-22 player scope, zero strategies passed.
+
+**Headline finding:** model beats naive baselines (MAE 10.33 vs 11.11) but not the efficient closing market (9.87). No registered betting strategy passed the gates; 0 reward points awarded. This is the honest, luck-removed result.
+
+**Shared-file changes at integration (logged per protocol):** README.md (conflict-marker repair, both sides kept); index.html + engine/build.py (additive NFL nav links only — no prior session content removed). PR #24 scope (nfl-research/**) untouched.
+
+PR link and merge result: (recorded after merge below)
