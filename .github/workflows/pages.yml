@@ -1,4 +1,4 @@
-name: Verify and publish NBA Signal Lab
+name: Verify NBA Signal Lab
 on:
   push:
     branches: [main]
@@ -7,13 +7,8 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
-concurrency:
-  group: pages
-  cancel-in-progress: false
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,17 +17,3 @@ jobs:
           node-version: '22'
       - name: Verify catalog and local links
         run: npm test
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4

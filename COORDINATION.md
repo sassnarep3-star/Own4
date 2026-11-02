@@ -4,7 +4,7 @@ Session ID: `34832d14-own4` (Arena-managed branch `arena/34832d14-own4`). Reposi
 
 | Task | Status | Owner | File scope | Updated (UTC) |
 |---|---|---|---|---|
-| Research, verification, strategy design, dashboard, QA and integration | done | 34832d14-own4 | `README.md`, `COORDINATION.md`, `docs/**`, `scripts/**`, `.github/**`, `package.json` | 2026-11-02 |
+| Research, verification, strategy design, dashboard, QA and integration | done | 34832d14-own4 | `README.md`, `COORDINATION.md`, `index.html`, `.nojekyll`, `docs/**`, `scripts/**`, `.github/**`, `package.json` | 2026-11-02 |
 
 ## Handoff / conflicts
 
@@ -21,3 +21,5 @@ Session ID: `34832d14-own4` (Arena-managed branch `arena/34832d14-own4`). Reposi
 - Rights restriction: the [NBA Stats FAQ](https://www.nba.com/stats/help/faq) says no stats download for academic or personal use. No scraper, stat exports, odds archive, or fabricated empirical values were added. See F01, F02, F04–F06 on the Flagged for Review page.
 - Row-by-row checks: each of 8 strategies, 9 gates, 5 correlation pairs, 6 flags, 8 requirements and 10 source rows links an NBA-owned source. Source links verify input definitions/context, not original proposed model efficacy. All empirical estimate fields remain blank. Static local link and catalog tests: `npm test` passed.
 - User-requested session branches cannot be created because Arena requires work on `arena/34832d14-own4`. No other claims or edits observed.
+
+- Publishing setup: Pages is already configured to build from `main` root (legacy mode). Attempting to switch to Actions via the Pages API returned HTTP 403 (integration permission); preserved the existing deployment mode, added a root redirect to `docs/index.html`, and kept Actions for CI only. This configuration change is recorded as an irregularity, not an empirical data issue.
