@@ -526,3 +526,9 @@ open). Shared NBA outputs (`index.html`, `pages/**`, `build_site.py`, `docs/**`,
 entirely NBA-focused (standings, NBA rules, NBA model, NBA pages) although the current brief says
 "NFL". This session adds a separate, clearly namespaced NFL section rather than overwriting prior
 sessions' NBA work; a root-level cross-link decision is reserved for final integration.
+- 2026-11-02 20:5x UTC — Scope amendment: this session also owns two **new** workflow files
+  `.github/workflows/fetch-nfl-data.yml` and `.github/workflows/nfl-validate.yml` (no existing workflow is
+  modified). These are needed to retrieve official NFL pages from the GitHub runner because this sandbox's
+  shell egress is restricted to GitHub/npm/PyPI hosts, while the `fetch_page` research tool can read the
+  official pages. Raw responses and their SHA-256 hashes go into `data/nfl/raw/**`; no other session's
+  workflow or data path is touched.
