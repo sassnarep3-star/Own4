@@ -548,3 +548,5 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - 2026-11-02: Integrated later main commit `ab9051a` (session 75685c60, pipeline/ and raw data). Preserved all its files; this session remains isolated in nba-evidence/. Its ESPN partner-sourced player rows are not promoted to official-NBA-verified by this session.
 
 - Conflict log: a subsequent pull/rebase again attempted to replay merged concurrent history after main advanced. It was aborted without data loss; the merge commit was pushed to the assigned branch only. Later integration will use an explicit merge of main and preserve both sides.
+
+- 2026-11-02: T01/T02 implementation complete: 62 official game rows, 38 official player rows, 15 source-register entries, 57 evidence checks, 22 unit tests. T03 static dashboard built: 17 pages, 886 source-linked rows, 351 local links. No strategy qualified; test Brier 0.307626 vs baseline 0.271975. T04 final integration in progress. Sources and detailed limits are published in nba-evidence/site/sources.html and flagged.html.
