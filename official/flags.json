@@ -1,0 +1,158 @@
+{
+  "verified_on": "2026-11-02",
+  "flags": [
+    {
+      "id": "I-01",
+      "severity": "process",
+      "item": "Per-task session branches / separate integration branch",
+      "detail": "Environment pins this session to arena/fa175f65-own4 and forbids other branches. Scope isolation enforced by file scope in COORDINATION.md instead.",
+      "value": "",
+      "unverified": false,
+      "source": "https://github.com/sassnarep3-star/Own4/branches"
+    },
+    {
+      "id": "I-02",
+      "severity": "process",
+      "item": "GitHub Pages legacy build",
+      "detail": "Pages is legacy from main /; plain static HTML with .nojekyll; publish by merging to main.",
+      "value": "",
+      "unverified": false,
+      "source": "https://api.github.com/repos/sassnarep3-star/Own4/pages"
+    },
+    {
+      "id": "I-03",
+      "severity": "source",
+      "item": "Stale injury-report URL in merged data/sources.json (SRC-08)",
+      "detail": "https://official.nba.com/nba-injury-report-2025-26-season/ resolves to the 2026-27 page. Policy wording (5 p.m. local day before; 1 p.m. second night of back-to-back) is still verified.",
+      "value": "",
+      "unverified": false,
+      "source": "https://official.nba.com/nba-injury-report-2026-27-season/"
+    },
+    {
+      "id": "I-04",
+      "severity": "value",
+      "item": "Helpline number in merged site footer / executive summary",
+      "detail": "Site says 1-800-GAMBLER. The official NCPG page publishes 1-800-MY-RESET (1-800-697-3738). The 1-800-GAMBLER value could not be confirmed; it is left blank here.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://www.ncpgambling.org/help-treatment"
+    },
+    {
+      "id": "I-05",
+      "severity": "source",
+      "item": "STRAT-02 PPG values cited to the wrong URL",
+      "detail": "Memphis 121.2 / Cleveland 121.0 / Houston 120.7 / Portland 120.6 / Lakers 120.3 are 2026-27 values from Teams Traditional, not the generic stats hub. Corrected official link provided; values re-verified on this site.",
+      "value": "",
+      "unverified": false,
+      "source": "https://www.nba.com/stats/teams/traditional"
+    },
+    {
+      "id": "I-06",
+      "severity": "value",
+      "item": "2025-26 leader numbers inside an embedded image",
+      "detail": "Luka Doncic 33.5 PPG, Jokic 12.9 RPG, Jokic 10.7 APG appear only in an embedded X/Twitter graphic, not in retrievable official text. Left blank / unverified. Wembanyama 197 blocks and 'Jokic first since 1969-70' ARE confirmed in official text.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://www.nba.com/news/4-key-stats-takeaways-2025-26-season"
+    },
+    {
+      "id": "I-07",
+      "severity": "wording",
+      "item": "'Highest in 64 seasons' phrasing",
+      "detail": "Official article says 117.7 PTS/team/game is the third-highest in NBA history and the highest in the last 64 seasons (since 1961-62). 117.7 / 101.9 possessions / 114.3 OffRtg are verified; the shortened phrasing is imprecise.",
+      "value": "",
+      "unverified": false,
+      "source": "https://www.nba.com/news/10-numbers-know-first-10-days-2025-26"
+    },
+    {
+      "id": "I-08",
+      "severity": "rights",
+      "item": "NBA Stats usage restriction",
+      "detail": "NBA Stats FAQ: 'Our stats are not available for download for either academic or personal use. They are for viewing and enjoying on NBA.com/Stats'. No automated download/scraping was used; values were transcribed by hand with official links for manual review. Please review data-use permissions before any operational use.",
+      "value": "",
+      "unverified": false,
+      "source": "https://www.nba.com/stats/help/faq"
+    },
+    {
+      "id": "I-09",
+      "severity": "value",
+      "item": "Conflicting official score for CHI vs TOR, 2026-10-21 (0022600088)",
+      "detail": "NBA.com games page score table shows Bulls 92, Raptors 135; the official recap slug on the same page reads 'raptors-135-bulls-102'. Both are official. The table value (92) is used and the conflict is flagged; do not treat this row as settled.",
+      "value": "92 (conflict flagged)",
+      "unverified": true,
+      "source": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "id": "I-10",
+      "severity": "source",
+      "item": "Third-party sources disagree with official NBA.com",
+      "detail": "Basketball-Reference, ESPN, FOX Sports, Yahoo Sports and standingstoday snapshots disagree with NBA.com standings/leaders (e.g. West leader). Only NBA.com values are used. Third-party pages are not used as data sources.",
+      "value": "",
+      "unverified": false,
+      "source": "https://www.nba.com/standings"
+    },
+    {
+      "id": "I-11",
+      "severity": "interpretation",
+      "item": "Home/away designation not officially confirmed",
+      "detail": "NBA.com matchup URLs use AAA-vs-HHH ordering. No official page explicitly defines the convention, so tables use 'first-listed / second-listed' and NO home-court adjustment is applied. Home-court advantage value is left blank.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://www.nba.com/games?date=2026-11-02"
+    },
+    {
+      "id": "I-12",
+      "severity": "value",
+      "item": "Sportsbook / market odds and closing lines",
+      "detail": "No official NBA source publishes betting lines, odds, vig or closing lines. Every market-price field on this site is intentionally blank and unverified; originated lines are model outputs, not market prices.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://www.nba.com/stats/help/faq"
+    },
+    {
+      "id": "I-13",
+      "severity": "derived",
+      "item": "Computed values are not official NBA publications",
+      "detail": "Correlation coefficients, originated lines, backtest metrics, probabilities and gate results are reproducible computations from official inputs, NOT official NBA values. Each derived table links to the official input pages and to the checked-in code. Do not cite them as league-published figures.",
+      "value": "",
+      "unverified": false,
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/engine/analysis.py"
+    },
+    {
+      "id": "I-14",
+      "severity": "sample",
+      "item": "NBA Cup group-play games inside the game sample",
+      "detail": "10 of the 56 collected games (2026-10-30) are labelled Emirates NBA Cup group play on NBA.com. They are included as displayed but are listed separately in the games table; any strategy using them should be reviewed for competition-context effects.",
+      "value": "",
+      "unverified": false,
+      "source": "https://www.nba.com/games?date=2026-10-30"
+    },
+    {
+      "id": "I-15",
+      "severity": "value",
+      "item": "No official source for strategy backtest win rates or rewards",
+      "detail": "Leaderboard rewards are unfunded and no strategy has been activated: every strategy fails at least one validation gate (sample size, luck control, or market-independent verification). No performance value is inferred.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+    },
+    {
+      "id": "I-16",
+      "severity": "value",
+      "item": "G League two-way numeric terms not confirmed in retrievable text",
+      "detail": "The merged strategy STRAT-06 states 'up to three two-way players, max 50 NBA games, $636,435 for 2025-26, four-or-fewer years'. The fetched G League page's retrievable text did not contain these figures. They are left blank / unverified on this site.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://gleague.nba.com/nba-g-league-101-two-way-contracts"
+    },
+    {
+      "id": "I-17",
+      "severity": "value",
+      "item": "2025-26 steals leader / full-season league pace",
+      "detail": "Not stated in the cited official articles' retrievable text. Left blank, carried over from the merged Flagged for Review page.",
+      "value": "blank — unverified",
+      "unverified": true,
+      "source": "https://www.nba.com/news/4-key-stats-takeaways-2025-26-season"
+    }
+  ]
+}
