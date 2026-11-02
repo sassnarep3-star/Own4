@@ -237,3 +237,7 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Live site: https://sassnarep3-star.github.io/Own4/
 - Flagged irregularities have `needs review` status, are published on the clearly labelled Flagged for Review page, and did not block the merge (as instructed).
 - This documentation sync is delivered by a short follow-up PR from the same pinned branch; PR #13 above is the project's integration PR.
+
+### Follow-up documentation PR
+
+- **PR**: https://github.com/sassnarep3-star/Own4/pull/14 — "Post-merge: record PR #13 merge/deploy result and final verification report". Documentation-only sync from the same pinned branch; no data, line, strategy or gate value changed. Merge result and Pages redeploy are confirmed in the repository's GitHub PR/Pages history after this PR is merged without approval.
