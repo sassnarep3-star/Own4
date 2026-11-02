@@ -1,0 +1,62 @@
+name: NFL empirical lab
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: Public official-source acquisition phase
+        required: true
+        default: discovery
+        type: choice
+        options: [discovery, schedules, references]
+  push:
+    branches: [main, arena/0c469d80-own4]
+    paths:
+      - 'nfl-lab/**'
+      - '.github/workflows/nfl-lab.yml'
+  pull_request:
+    paths:
+      - 'nfl-lab/**'
+      - '.github/workflows/nfl-lab.yml'
+permissions:
+  contents: read
+concurrency:
+  group: nfl-lab-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: false
+jobs:
+  validate:
+    if: github.event_name != 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproducible data, calculations, site and source/link audit
+        run: python nfl-lab/run.py --check
+  acquire:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch public official sources with provenance
+        run: python nfl-lab/fetch_official.py --phase "${{ inputs.phase }}"
+      - name: Preserve source snapshots only on this session branch
+        if: always() && github.ref == 'refs/heads/arena/0c469d80-own4'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add nfl-lab/sources
+          if ! git diff --cached --quiet; then
+            git commit -m 'data: preserve official NFL source snapshots (${{ inputs.phase }})'
+            git pull --rebase origin arena/0c469d80-own4
+            git push origin arena/0c469d80-own4
+          fi
