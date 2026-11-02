@@ -731,4 +731,16 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Findings: locked-test Brier 0.307626 vs baseline 0.271975; no validated betting edge; zero qualified strategies and zero rewards. Official historical prices, personalized prop forecasts and short-sample CIs remain blank. The 14 workspace flags and 10 repository review records are published, non-blocking for site publication.
 - Audit snapshot: 542 tracked files / 154,934 text lines at commit `9d639540c38a470517bb579f1e02a6aa451e7e20`, plus targeted primary-source cross-checks. This is not a claim that every inherited numeric row was independently re-fetched.
 - Peer work: all root and namespaced NBA/NFL outputs preserved. Only this workspace, its isolated workflow, and append-only shared coordination/README links were changed. Peer PR #29 is a documentation update and does not claim this workspace.
-- Publication target: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ under the existing verified main/root GitHub Pages configuration. PR/merge/deploy results will be appended after actual completion.
+- Publication target: https://sassnarep3-star.github.io/Own4/nba-evidence/site/site/ under the existing verified main/root GitHub Pages configuration. PR/merge/deploy results will be appended after actual completion.
+
+
+### 91dfd6a4 — FINAL PR / MERGE / DEPLOY RESULT
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/31 — **MERGED** without waiting for approval at 2026-11-02T22:39:52Z.
+- **Merge commit:** `43240309f5ba9217afdded7ef26ef25640b1ae3f`.
+- **PR checks:** `Validate NBA Evidence` https://github.com/sassnarep3-star/Own4/actions/runs/41538723567 and `Validate NBA research workspace` https://github.com/sassnarep3-star/Own4/actions/runs/41538723571 — both success.
+- **Main checks:** evidence run https://github.com/sassnarep3-star/Own4/actions/runs/41539162732 and inherited validation run https://github.com/sassnarep3-star/Own4/actions/runs/41539162724 — both success.
+- **GitHub Pages:** https://github.com/sassnarep3-star/Own4/actions/runs/41539161177 — success for the merge commit. The official Pages API https://api.github.com/repos/sassnarep3-star/Own4/pages/builds/latest reports `status: built`, `error.message: null`, commit `43240309f5ba9217afdded7ef26ef25640b1ae3f`.
+- **Live:** https://sassnarep3-star.github.io/Own4/nba-evidence/site/ ; executive summary and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html fetched successfully. The pre-existing root dashboard https://sassnarep3-star.github.io/Own4/ also remains live.
+- **Task status:** T01 done; T02 done; T03 done; T04 done. All peer namespaces preserved. No strategy qualification or reward award is implied by publication.
+- **Post-merge documentation:** correct the workspace URL to include `/site/`, remove a duplicate executive-summary table heading, and mark the publication requirement delivered. This documentation follow-up is published from the same fixed Arena branch; its actual PR/merge result is recorded below after completion.

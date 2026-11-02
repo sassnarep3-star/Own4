@@ -90,4 +90,4 @@ Analytical research only, not wagering advice. National Problem Gambling Helplin
 
 ## NBA Evidence · session 91dfd6a4
 
-[Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.
+[Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/site/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.

@@ -4,7 +4,7 @@ Evidence-first NBA line-origination pilot. Open `site/index.html` or the publish
 
 ## Reproduce
 
-Python 3.11 (pinned for byte-identical floating-point output), standard library only:
+Python 3.11+, standard library only:
 
 ```sh
 python collect_evidence.py
