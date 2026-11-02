@@ -57,3 +57,5 @@ Session ID: `34832d14-own4` (Arena-managed branch `arena/34832d14-own4`). Reposi
 - User-requested session branches cannot be created because Arena requires work on `arena/34832d14-own4`. No other claims or edits observed.
 
 - Publishing setup: Pages is already configured to build from `main` root (legacy mode). Attempting to switch to Actions via the Pages API returned HTTP 403 (integration permission); preserved the existing deployment mode, added a root redirect to `docs/index.html`, and kept Actions for CI only. This configuration change is recorded as an irregularity, not an empirical data issue.
+
+- Push preparation after integrating main: `git pull --rebase origin arena/34832d14-own4` attempted to replay a concurrent main commit onto this merged graph and conflicted in COORDINATION.md, README.md, and index.html. The rebase was aborted intact (no other session work removed); the previously completed merge resolution remains in commit `01470ba`. Remote session branch had zero commits not present locally, so a normal branch-only push is safe.
