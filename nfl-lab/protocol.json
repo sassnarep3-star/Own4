@@ -41,7 +41,7 @@
     "team_a_spread": "Half-integer handicap minimizing absolute distance of modeled cover probability to 0.5; tie chooses the smaller threshold.",
     "total": "Half-integer threshold minimizing absolute distance of modeled over probability to 0.5; tie chooses the smaller threshold.",
     "moneyline": "Own win-share probability P(win)+0.5*P(tie); fair decimal odds=1/p. This is a project draw-half convention, NOT a verified sportsbook settlement rule.",
-    "cross_game_parlay": "Two eligible favorite legs in the same season-week, sorted by official game ID and paired deterministically. Joint p=p1*p2+rho*sqrt(p1*(1-p1)*p2*(1-p2)), clipped to Frechet bounds. Rho uses only earlier weeks.",
+    "cross_game_parlay": "Two eligible favorite outright-win legs in the same season-week, sorted by official game ID and paired deterministically. Leg p=P(outright win); a tied game is a lost leg for this research event, not a claimed sportsbook settlement. Joint p=p1*p2+rho*sqrt(p1*(1-p1)*p2*(1-p2)), clipped to Frechet bounds. Rho uses only earlier weeks.",
     "same_game_combo": "Spread/total joint probability is summed over the same Poisson score grid, never multiplied as if independent. Model-implied dependence is not an empirical sportsbook correlation.",
     "player_prop": "Half-integer line nearest the empirical median of observed 2026 regular-season values. Descriptive only; no availability or market-edge claim.",
     "player_combo": "Same-player receptions and receiving-yard thresholds are evaluated on paired observed games. Cross-player same-game dependence is left blank without paired observations."
