@@ -496,3 +496,41 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
 - Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
 
+
+---
+
+## Session `01575b2d` — NFL line origination & signal-strategy research (2026-11-02 UTC)
+
+**Session ID:** `01575b2d` · **Branch:** `arena/01575b2d-own4` (pinned by the platform).
+
+**Board read before starting:** yes. All earlier sessions (`689eb52e`, `1805bfdb`, `3c4bdb06`, `34832d14`, `bf34205f`, `42d467e4`, `a4ec3896`, `fa175f65`, `3ab8432d`, `75685c60`) are recorded as **done/merged** (PRs #1–#22); no task is `in progress` or `unclaimed` with a live owner, and PR #22 is the current `main` HEAD `ab9051a`. Therefore there is no live claim to collide with; no other session's work is edited or discarded.
+
+**Deviation logged (required by the platform):** the task asks each session to work on a branch/worktree named `session-<id>/<task>`. This environment pins this session to the single branch `arena/01575b2d-own4` and forbids creating/pushing other branches. Non-overlapping scopes are therefore enforced by **file namespace** (`nfl/**`) rather than by branch name, following the precedent already used by sessions `1805bfdb`, `3ab8432d` and `75685c60`. `git pull --rebase` is run before every push.
+
+**Scope owned by this session (no other session touches these paths):**
+- `nfl/**` — all new NFL data, engine, site pages, CSS/JS, docs and tests
+- `NFL_EXECUTIVE_SUMMARY.md` — new executive summary at repo root (new file, previously unowned)
+
+**Shared outputs (final integration phase N9 only):**
+- `COORDINATION.md` (append-only), `README.md` (append-only section)
+- `index.html` and `engine/build.py` (root landing/navigation: add the NFL entry only; all existing NBA content preserved)
+- `.github/workflows/pages.yml` (add NFL verification steps only)
+
+**First irregularity found (to be published on the Flagged for Review page):** the entire pre-existing repository is an **NBA** research project (`README.md`, `EXECUTIVE_SUMMARY.md`, root site, `docs/`, `lab/`, `lines-lab/`, `own4-dashboard/`, `pipeline/`, `.github/workflows/fetch-nba-data.yml`), while this request is explicitly **NFL**. Prior NBA outputs are retained as an archive and are **not** presented as NFL findings. `COORDINATION.md` and `README.md` also contain unresolved Git conflict markers (`<<<<<<< HEAD` / `=======` / `>>>>>>> origin/main`) committed by an earlier merge; these are flagged and will be repaired in N9 without deleting either side's text.
+
+### Task board (session `01575b2d`)
+
+| ID | Task | Status | Owner | Files touched |
+|----|------|--------|-------|---------------|
+| N1 | Repo review line-by-line + irregularity register | in progress | 01575b2d | `nfl/data/repo_findings.json`, `nfl/pages/repo-review.html` |
+| N2 | Official NFL source register + verified league facts (rules, standings, schedule, glossary, integrity policy) | unclaimed | — | `nfl/data/sources.json`, `nfl/data/league_facts.json`, `nfl/pages/sources.html`, `nfl/pages/league.html` |
+| N3 | Official game / standings / player-stat datasets, transcribed line-by-line with per-row source URLs | unclaimed | — | `nfl/data/games.csv`, `nfl/data/standings.csv`, `nfl/data/player_stats.csv`, `nfl/pages/data.html` |
+| N4 | Own-line engine: pre-registered Elo/power model → fair spreads, totals, moneylines; single / parlay / prop-combo pricing | unclaimed | — | `nfl/engine/*.py`, `nfl/data/own_lines.json`, `nfl/pages/own-lines.html` |
+| N5 | Strategy catalogue, validation gates, luck-removal tests, leaderboard + rewards | unclaimed | — | `nfl/data/strategies.json`, `nfl/data/gates.json`, `nfl/data/leaderboard.json`, `nfl/pages/strategies.html`, `nfl/pages/validation.html`, `nfl/pages/leaderboard.html` |
+| N6 | Empirical correlation values (r, CI, p, BH-FDR) + parlay dependence | unclaimed | — | `nfl/data/correlations.json`, `nfl/pages/correlations.html` |
+| N7 | Executive summary + Flagged for Review page | unclaimed | — | `NFL_EXECUTIVE_SUMMARY.md`, `nfl/pages/executive-summary.html`, `nfl/pages/flagged.html`, `nfl/data/flagged.json` |
+| N8 | Clean NFL landing page + category subpages; every table row source-linked; build/link/row verification | unclaimed | — | `nfl/index.html`, `nfl/pages/**`, `nfl/assets/*`, `nfl/scripts/build_site.py`, `nfl/scripts/verify.py` |
+| N9 | Final integration: re-verify combined data line-by-line, no broken links, PR → `main`, merge, Pages deploy confirmation, record | unclaimed | — | shared outputs listed above |
+
+### Claim log
+- 2026-11-02 — Claimed N1. Sources, verification performed and irregularities will be recorded here as each task completes. Nothing is marked verified without fetching and reading an official page.
