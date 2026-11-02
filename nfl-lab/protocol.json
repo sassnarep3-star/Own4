@@ -1,0 +1,89 @@
+{
+  "version": "1.0.0",
+  "registered_on": "2026-11-02",
+  "status": "Pre-registered before implementation or evaluation of NFL model outputs",
+  "objective": "Originate reproducible NFL research lines and test probabilistic skill. No claim of sportsbook profitability without executable prices.",
+  "data": {
+    "official_games": 392,
+    "seasons": [2025, 2026],
+    "prior_seasons": [2024, 2025],
+    "development": "2025 weeks 1–5 initialize form and the online rest coefficient; never counted as holdout.",
+    "evaluation": "2025 week 6 through 2026 week 8, in chronological whole-week blocks. Only earlier games update ratings.",
+    "cutoff": "2026-11-02",
+    "venue": "No home/away assignment is inferred from listing order. No home-field coefficient is used. The upcoming game's venue alone is officially confirmed.",
+    "missing": "Missing player statistics remain missing; no zero filling or complete-case imputation."
+  },
+  "models": {
+    "M1": {"name": "Prior-season points baseline", "role": "control", "prior_weight": 8, "decay": 0.0, "rest": false},
+    "M2": {"name": "Shrunk rolling points", "role": "candidate", "prior_weight": 8, "decay": 0.85, "rest": false},
+    "M3": {"name": "Faster form sensitivity", "role": "sensitivity; not a primary trial", "prior_weight": 4, "decay": 0.70, "rest": false},
+    "M4": {"name": "Online rest overlay", "role": "candidate", "prior_weight": 8, "decay": 0.85, "rest": true}
+  },
+  "fixed_parameters": {
+    "score_distribution": "Independent Poisson team scores, integer grid 0..100; explicitly a model assumption, not an official NFL distribution.",
+    "lambda_floor": 1.0,
+    "prior_shrinkage_games": 4,
+    "rest_ridge": 16,
+    "rest_feature_clip_days": 4,
+    "rest_default_days": 7,
+    "cross_game_dependence_ridge": 64,
+    "cross_game_dependence_bound": 0.2,
+    "favorite_probability_thresholds": [0.55, 0.6, 0.65],
+    "primary_favorite_threshold": 0.6,
+    "bootstrap_replicates": 4999,
+    "permutation_replicates": 4999,
+    "random_seed": 20261102,
+    "confidence_level": 0.95,
+    "alpha": 0.05,
+    "calibration_bins": 5
+  },
+  "line_definitions": {
+    "team_a_spread": "Half-integer handicap minimizing absolute distance of modeled cover probability to 0.5; tie chooses the smaller threshold.",
+    "total": "Half-integer threshold minimizing absolute distance of modeled over probability to 0.5; tie chooses the smaller threshold.",
+    "moneyline": "Own win-share probability P(win)+0.5*P(tie); fair decimal odds=1/p. This is a project draw-half convention, NOT a verified sportsbook settlement rule.",
+    "cross_game_parlay": "Two eligible favorite legs in the same season-week, sorted by official game ID and paired deterministically. Joint p=p1*p2+rho*sqrt(p1*(1-p1)*p2*(1-p2)), clipped to Frechet bounds. Rho uses only earlier weeks.",
+    "same_game_combo": "Spread/total joint probability is summed over the same Poisson score grid, never multiplied as if independent. Model-implied dependence is not an empirical sportsbook correlation.",
+    "player_prop": "Half-integer line nearest the empirical median of observed 2026 regular-season values. Descriptive only; no availability or market-edge claim.",
+    "player_combo": "Same-player receptions and receiving-yard thresholds are evaluated on paired observed games. Cross-player same-game dependence is left blank without paired observations."
+  },
+  "primary_trial_family": [
+    "M2 win-share Brier improvement vs M1",
+    "M4 win-share Brier improvement vs M1",
+    "M2 margin MSE improvement vs M1",
+    "M4 margin MSE improvement vs M1",
+    "M2 total MSE improvement vs M1",
+    "M4 total MSE improvement vs M1"
+  ],
+  "multiplicity": "Holm adjustment across all six primary trials. M3, threshold sensitivity, correlations and parlay experiments are exploratory and cannot earn rewards.",
+  "uncertainty": "Seeded percentile bootstrap resamples entire season-weeks. Primary skill null uses whole-week sign-flip permutations. These reduce, but cannot eliminate, luck; exchangeability and limited-cluster assumptions remain.",
+  "gates": [
+    {"id": "G01", "name": "Official input integrity", "rule": "Every input observation has an official source; season game totals reconcile to official W/L/T/PF/PA; no missing-value fill.", "source_ids": ["NFL-2025-W18", "STAND-2025", "STAND-2026"]},
+    {"id": "G02", "name": "Temporal isolation", "rule": "All features use earlier games only; changing future outcomes must not change an earlier prediction.", "source_ids": ["SPLITS"]},
+    {"id": "G03", "name": "Effective sample", "rule": "Singles: at least 300 games and 20 season-weeks. Parlays: at least 150 tickets and 20 weeks. Each player market: at least 100 observed player-games. Thresholds are project policy, not NFL facts.", "source_ids": ["BOOTSTRAP"]},
+    {"id": "G04", "name": "Skill vs baseline", "rule": "Paired week-bootstrap 95% lower bound for relevant loss improvement > 0 and Holm-adjusted primary permutation p < 0.05.", "source_ids": ["BOOTSTRAP", "CALIBRATION"]},
+    {"id": "G05", "name": "Calibration", "rule": "Equal-frequency five-bin ECE <= 0.04; no bin with at least 20 observations may have absolute predicted/observed gap > 0.10. Project policy.", "source_ids": ["CALIBRATION"]},
+    {"id": "G06", "name": "Repeatability", "rule": "Relevant loss improvement > 0 in both 2025 and 2026 evaluation blocks and after leaving out any one season-week.", "source_ids": ["SPLITS"]},
+    {"id": "G07", "name": "Dependence control", "rule": "Parlay joint model must beat an independent-product model on paired week-bootstrap Brier improvement with lower bound > 0; same-game and player combos require empirical paired validation, not a model-only coefficient.", "source_ids": ["CORRELATION", "BOOTSTRAP"]},
+    {"id": "G08", "name": "Executable market edge", "rule": "Timestamped sportsbook prices, settlement/void rules and de-vigged probabilities; net ROI after vig with week-bootstrap 95% lower bound > 0 and positive closing-line value. Missing inputs block this gate.", "source_ids": ["GAME"]},
+    {"id": "G09", "name": "Availability and operational controls", "rule": "Point-in-time injury/lineup information, active roster, market limits and void/dead-heat rules verified before every selection. Current profile status alone is insufficient.", "source_ids": ["INJURIES", "GAME"]},
+    {"id": "G10", "name": "Prospective replication", "rule": "At least 100 future selections locked before kickoff under this frozen protocol, with positive lower-bound net ROI and no post-hoc redesign.", "source_ids": ["SPLITS"]},
+    {"id": "G11", "name": "Multiplicity and null control", "rule": "All primary trials accounted for; Holm correction and dependence-aware null test executed. Exploratory variants cannot displace primary results.", "source_ids": ["FDR"]},
+    {"id": "G12", "name": "Reward governance", "rule": "Only non-monetary badges; no entry fee, stake, cash prize or profit promise. A badge requires every applicable gate; blocked is not passed.", "source_ids": ["REPO"]}
+  ],
+  "leaderboard": {
+    "divisions": ["Singles", "Parlays", "Player prop combinations"],
+    "eligible_rank_metric": "Lower 95% week-bootstrap bound of net ROI after vig, only after all gates pass.",
+    "research_display": "Show measured probability loss and sample size separately; never label it betting ROI.",
+    "rewards": {"Gold": "All gates and 100 prospective selections", "Silver": "All retrospective gates; prospective replication pending; no reward", "Research only": "Any failed or blocked gate; no reward"},
+    "funded": false,
+    "tie_break": "No eligible strategies means no ranking and no reward; do not manufacture a winner."
+  },
+  "disclosures": [
+    "No sportsbook odds archive or executable price feed was verified. All market odds, CLV, ROI and market-edge fields remain blank.",
+    "Official schedule excerpts were read through the research tool; bash/CI cannot access NFL hosts. This is a verified snapshot, not an automatic live feed.",
+    "The points-only model omits quarterback changes, injuries, weather, roster strength, pace, EPA and venue. It is a baseline, not a production pricing engine.",
+    "Independent Poisson scores and draw-half moneylines are modeling conventions. Actual NFL scoring and book settlement differ.",
+    "Player logs are small and some cells are blank. Same-player correlation is mechanically related and not evidence of a profitable sportsbook prop.",
+    "Luck cannot be removed completely. The gates control leakage, selection, dependence and multiple testing; they do not guarantee future profits."
+  ]
+}
