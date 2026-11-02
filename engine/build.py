@@ -154,6 +154,7 @@ NAV = [
         ("pages/flagged.html", "Flags · main"),
         ("pages/sources.html", "Sources · main"),
         ("lab/index.html", "Data Lab · /lab/"),
+        ("lines-lab/index.html", "NBA Lines Lab · /lines-lab/"),
         ("docs/index.html", "NBA Signal Lab · /docs/"),
     ]),
 ]
@@ -355,6 +356,7 @@ def build_dashboard():
                 ['<a href="pages/flagged.html">Flags · main ↗</a>', esc("Earlier session's 17 irregularities."), links([S_FAQ], "NBA.com ↗")],
                 ['<a href="pages/sources.html">Sources · main ↗</a>', esc("Earlier session's source register."), links([S_TEAM], "NBA.com ↗")],
                 ['<a href="lab/index.html">Data Lab · /lab/ ↗</a>', esc("Separate session's 92 official 2026-27 games and prospective own lines."), links([S_SLATE], "NBA.com ↗")],
+                ['<a href="lines-lab/index.html">NBA Lines Lab · /lines-lab/ ↗</a>', esc("Separate session's dashboard with league, teams, markets, strategies, correlations, validation and review pages."), links([S_STAND], "NBA.com ↗")],
                 ['<a href="docs/index.html">NBA Signal Lab · /docs/ ↗</a>', esc("Specification dashboard with evidence library, pricing spec and review page."), links([S_FAQ], "NBA.com ↗")],
             ], "All parallel-session output is preserved and reachable")
             + h(2, "Verification status")

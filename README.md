@@ -52,6 +52,16 @@ Live: https://sassnarep3-star.github.io/Own4/lab/ · source: `lab/` (generated b
 
 ---
 
+<<<<<<< HEAD
+## Additional workspace · arena/42d467e4-own4 — NBA Lines Lab (JS dashboard)
+
+**Live:** https://sassnarep3-star.github.io/Own4/lines-lab/ · source: `lines-lab/`
+
+- 13-page dashboard (landing + 12 category subpages) with per-page table filtering; tables rendered from `lines-lab/assets/js/data*.js`.
+- Verified 2026-11-02 against official sources only: league & rules (nba.com/news/about, official 2025-26 Playing Rules PDF), 2026-27 season calendar & Emirates NBA Cup 2026, all 30 teams (IDs, official sites, arenas), official stat definitions & leader minimums (stats.nba.com), official line channels (DraftKings/FanDuel sportsbook pages; Sportradar = NBA's authorized global distributor of official betting data; Genius Sports U.S.) and market rules (parlay/SGP definitions, correlated-outcome ban in standard parlays, settlement on official league stats).
+- Strategy catalog S1–S12 (singles, parlays, player-prop combos, SGP, live, futures), validation gates G1–G8, correlation methodology (measured values intentionally blank + UNVERIFIED until official line history is ingested), leaderboard competition design.
+- Flagged for Review F1–F12: `lines-lab/pages/flagged.html`. Docs: `docs/executive-summary.md`, `docs/strategy-framework.md`, `docs/verification-log.md`. Source register: `research/sources.md` and `lines-lab/pages/sources.html`.
+=======
 ---
 
 ## Final integration addendum · `session-fa175f65` (2026-11-02 UTC)
@@ -77,3 +87,4 @@ namespace so the parallel sessions' work above is preserved unchanged.
 
 Analytical research only, not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
 (1-800-697-3738) — https://www.ncpgambling.org/help-treatment
+>>>>>>> origin/main
