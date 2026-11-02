@@ -32,6 +32,8 @@ ai = g.away_team.map(tidx).to_numpy()
 dates = g.gameday.to_numpy(dtype="datetime64[ns]")
 y_margin = g.result.to_numpy(dtype=float).copy()
 y_total = g.total.to_numpy(dtype=float).copy()
+y_home_pts = g.home_score.to_numpy(dtype=float).copy()
+y_away_pts = g.away_score.to_numpy(dtype=float).copy()
 played_mask = g.result.notna().to_numpy()
 
 def design_margin(h, a):
@@ -43,13 +45,16 @@ def design_margin(h, a):
     return X
 
 def design_total(h, a):
-    X = np.zeros((len(h), 2 * NT + 1))
-    r = np.arange(len(h))
-    X[r, h] = 1.0            # off home
-    X[r, a] = 1.0            # off away
-    X[r, NT + h] = 1.0       # def home
-    X[r, NT + a] = 1.0       # def away
-    X[:, 2 * NT] = 1.0       # intercept
+    # Stacked team-points rows (2 per game) so offense/defense are separately identified:
+    #   home_pts = mu + off_home + def_away ; away_pts = mu + off_away + def_home
+    n = len(h)
+    X = np.zeros((2 * n, 2 * NT + 1))
+    r = np.arange(n)
+    X[r, h] = 1.0            # home offense
+    X[r, NT + a] = 1.0       # away defense
+    X[r + n, a] = 1.0        # away offense
+    X[r + n, NT + h] = 1.0   # home defense
+    X[:, 2 * NT] = 1.0       # intercept = avg team points
     return X
 
 def fit_predict(train_idx, pred_h, pred_a, ref_date, halflife, ridge, kind):
@@ -63,7 +68,8 @@ def fit_predict(train_idx, pred_h, pred_a, ref_date, halflife, ridge, kind):
         p = NT + 1
     else:
         X = design_total(hi[train_idx], ai[train_idx])
-        y = y_total[train_idx]
+        y = np.concatenate([y_home_pts[train_idx], y_away_pts[train_idx]])
+        w = np.concatenate([w, w])
         p = 2 * NT + 1
     XtW = X.T * w
     A = XtW @ X
@@ -75,9 +81,9 @@ def fit_predict(train_idx, pred_h, pred_a, ref_date, halflife, ridge, kind):
         return beta[pred_h] - beta[pred_a] + beta[NT], beta[NT]
     else:
         mu = beta[2 * NT]
-        tot = mu + beta[pred_h] + beta[pred_a] + beta[NT + pred_h] + beta[NT + pred_a]
-        htt = mu / 2 + beta[pred_h] + beta[NT + pred_a]
-        att = mu / 2 + beta[pred_a] + beta[NT + pred_h]
+        tot = 2 * mu + beta[pred_h] + beta[pred_a] + beta[NT + pred_h] + beta[NT + pred_a]
+        htt = mu + beta[pred_h] + beta[NT + pred_a]
+        att = mu + beta[pred_a] + beta[NT + pred_h]
         return tot, htt, att
 
 # group games by date; train = played games strictly before date
@@ -156,9 +162,10 @@ write_df(g[["game_id", "season", "week", "gameday", "away_team", "home_team",
          "predictions.csv")
 
 # HFA by season (mean of date-level HFA estimates within season, final config)
+date_season = {str(k.date()): int(v) for k, v in g.groupby("gameday").season.first().items()}
 hfa_rows = []
 for d, v in hfa_map.items():
-    hfa_rows.append({"date": d, "season": int(d[:4]), "hfa": v})
+    hfa_rows.append({"date": d, "season": date_season.get(d, int(d[:4])), "hfa": v})
 hfa_df = pd.DataFrame(hfa_rows).groupby("season").hfa.mean().round(3).reset_index()
 write_df(hfa_df, "hfa_by_season.csv")
 

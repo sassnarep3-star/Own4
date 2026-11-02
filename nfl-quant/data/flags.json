@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-11-02T21:21:19+00:00",
+  "generated_utc": "2026-11-02T21:35:08+00:00",
   "flags": [
     {
       "id": "QF-01",
@@ -105,6 +105,13 @@
       "item": "No registered strategy passed the holdout gates",
       "detail": "S1/S4 Bronze (ROI indistinguishable from luck), S2/S3/C1 Rejected (negative ROI). 0 reward points. The framework's job is to reject luck; at efficient closing lines it rejected everything. This is the honest result.",
       "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/strategy_results.json"
+    },
+    {
+      "id": "QF-16",
+      "severity": "info",
+      "item": "Total-model specification corrected post-publication (off/def identification)",
+      "detail": "Initial total model fit game totals only, leaving team offense/defense unidentical (ridge split them equally). Corrected to a stacked team-points specification; ratings now distinct. S2 validation threshold re-selected (2.0->3.0, n=789, ROI -5.45%, still Rejected). S1/S3/S4/C1 and all tier conclusions unchanged; holdout re-run was a bug correction, not re-tuning. Logged for transparency.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/02_ratings.py"
     }
   ]
 }

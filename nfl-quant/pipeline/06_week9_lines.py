@@ -36,11 +36,14 @@ def fit_current(kind):
         p = NT + 1
     else:
         hl, ridge = cfg["total_config"]["halflife_days"], cfg["total_config"]["ridge"]
-        X = np.zeros((len(played), 2 * NT + 1)); r = np.arange(len(played))
-        X[r, h] = 1; X[r, a] = 1; X[r, NT + h] = 1; X[r, NT + a] = 1; X[:, 2 * NT] = 1
-        y = played.total.to_numpy(dtype=float)
+        n = len(played)
+        X = np.zeros((2 * n, 2 * NT + 1)); r = np.arange(n)
+        X[r, h] = 1; X[r, NT + a] = 1; X[r + n, a] = 1; X[r + n, NT + h] = 1; X[:, 2 * NT] = 1
+        y = np.concatenate([played.home_score.to_numpy(dtype=float), played.away_score.to_numpy(dtype=float)])
         p = 2 * NT + 1
     w = 0.5 ** (age / hl)
+    if kind == "total":
+        w = np.concatenate([w, w])
     XtW = X.T * w
     A = XtW @ X + np.diag(np.concatenate([np.full(p - 1, ridge), [1e-6]]))
     return np.linalg.solve(A, XtW @ y)

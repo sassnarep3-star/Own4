@@ -186,7 +186,7 @@ no official league source exists for betting lines (flagged). Nothing here is a 
  ["Strategies", '<a href="pages/leaderboard.html">Leaderboard & Rewards</a>', "Tiers, scores, non-monetary reward policy", derived("data/leaderboard.json")],
  ["Governance", '<a href="pages/sources.html">Official Source Register</a>', "9 verified official facts with links + method", off("https://operations.nfl.com/")],
  ["Governance", '<a href="pages/audit.html">Repo Audit</a>', "10 findings incl. conflict-marker repair", derived("data/repo_audit.json")],
- ["Governance", '<a href="pages/flagged.html">⚑ Flagged for Review</a>', "15 flagged items, all non-blocking", derived("data/flags.json")],
+ ["Governance", '<a href="pages/flagged.html">⚑ Flagged for Review</a>', f"{len(flags)} flagged items, all non-blocking", derived("data/flags.json")],
 ])}
 """
 page("index.html", "NFL Quant Lab — Dashboard", "Overview / Dashboard", body)
@@ -479,7 +479,7 @@ for f in flags:
 body = f"""
 <p class="lede">Every irregularity and every value with no official source, published for post-launch review.
 <strong>Flagged items are non-blocking</strong> — they do not prevent publication or merge. Request changes anytime.</p>
-{table("15 flagged items", ["ID","Severity","Item","Detail","Source"], flag_rows)}
+{table(f"{len(flags)} flagged items", ["ID","Severity","Item","Detail","Source"], flag_rows)}
 """
 page("flagged.html", "⚑ Flagged for Review", "Governance / Flagged for Review", body)
 
@@ -540,7 +540,7 @@ season-stability checks; G8 forward replication pending.
 ## Limits / flagged (non-blocking)
 No strategy beats closing lines; props use a proxy market (G7 fails); 2026 props blocked; all market lines
 third-party; computed metrics not official; data licensing needs review; README conflict markers repaired at
-integration (both sides kept). See site Flagged for Review page (15 items).
+integration (both sides kept). See site Flagged for Review page ({len(flags)} items).
 
 ## Reproduce
 python3 nfl-quant/pipeline/01_provenance.py && ... && python3 nfl-quant/pipeline/07_verify_publish.py

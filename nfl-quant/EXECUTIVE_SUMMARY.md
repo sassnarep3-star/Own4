@@ -19,13 +19,13 @@ validation gates, a 16-estimate correlation study, and a 15-game 2026 Week 9 own
 ## How luck is removed
 Chronological dev/validation/holdout splits with frozen config; look-ahead perturbation test (pass);
 week-clustered bootstrap CIs; matched-random permutation + Holm across the primary family; 500-placebo
-calibration (mean ROI -2.99%, 8.0% positive by chance);
+calibration (mean ROI -2.96%, 6.2% positive by chance);
 season-stability checks; G8 forward replication pending.
 
 ## Limits / flagged (non-blocking)
 No strategy beats closing lines; props use a proxy market (G7 fails); 2026 props blocked; all market lines
 third-party; computed metrics not official; data licensing needs review; README conflict markers repaired at
-integration (both sides kept). See site Flagged for Review page (15 items).
+integration (both sides kept). See site Flagged for Review page (16 items).
 
 ## Reproduce
 python3 nfl-quant/pipeline/01_provenance.py && ... && python3 nfl-quant/pipeline/07_verify_publish.py

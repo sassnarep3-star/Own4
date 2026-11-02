@@ -608,3 +608,10 @@ PR link and merge result: (recorded after merge below)
 - **Live verification (cache-busted fetch)**: https://sassnarep3-star.github.io/Own4/nfl-quant/ (dashboard, leaderboard, directory render) and https://sassnarep3-star.github.io/Own4/nfl-quant/pages/flagged.html (15 flags render) both serve fully. Root nav link added.
 - **Parallel sessions**: PR #24 (nfl-research/**, arena/1699c9cc) remained OPEN and untouched throughout; no other-session work discarded. README conflict markers repaired keeping both sides.
 - This record is published to main via a follow-up PR from arena/e513f51b-own4 (repo protocol: merge outcome not knowable before merge).
+
+### Session arena-e513f51b-own4 — post-merge correctness fix (2026-11-02 UTC)
+
+- **Issue found in live review:** the total model fit game totals only, so team offense/defense ratings were unidentifiable (ridge split them equally — identical Offense/Defense columns on the Originated Lines page). Also, HFA-by-season mislabeled Jan-2027 games (2026 season) as season 2027.
+- **Fix:** total model re-specified as stacked team-points rows (home_pts = mu + off_home + def_away; away_pts = mu + off_away + def_home) so offense/defense are separately identified; HFA grouped by game season, not calendar year.
+- **Impact:** ratings now distinct (e.g., BUF off +5.03 / def −0.33). S2 validation threshold re-selected 2.0→3.0 (n=789, ROI −5.45%, still Rejected). S1/S3/S4/C1 byte-identical; all tiers and the 0-Gold/0-points conclusion unchanged. This was a bug correction, not holdout re-tuning; published as flag QF-16 for transparency.
+- **Verification:** full pipeline re-run (02→03→06→07), site rebuilt (13 pages / 286 rows / 0 problems), CI-equivalent checks green, docs/ unchanged. Shipped via follow-up PR (recorded below).
