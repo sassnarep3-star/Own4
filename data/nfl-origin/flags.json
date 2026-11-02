@@ -1,0 +1,234 @@
+[
+  {
+    "flag_id": "IR-NFL-01",
+    "title": "Repository is NBA-focused and has multiple NFL specification dashboards",
+    "detail": "The brief says NFL lines; the inherited repo is largely NBA research. Prior sessions published nfl/**, nfl-research/**, nfl-lab/**, nfl-quant/** and nfl-study/** claims. This session uses the unclaimed nfl-origin/** namespace.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://github.com/sassnarep3-star/Own4",
+      "https://www.nfl.com/"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-02",
+    "title": "COORDINATION.md contains literal merge-conflict markers",
+    "detail": "Lines inherited from earlier sessions contain unresolved <<<<<<< / ======= / >>>>>>> markers. They are preserved verbatim and flagged, not silently edited.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-03",
+    "title": "README.md contains unresolved merge-conflict markers",
+    "detail": "The inherited root README includes an unresolved conflict section and describes NBA research. It is outside this session's scope and is not edited.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-04",
+    "title": "No official NFL betting-line or price archive",
+    "detail": "NFL.com publishes schedules, standings, stats and integrity policy but no official odds/closing-line archive. All market-price cells are blank.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "market_moneyline",
+      "market_spread",
+      "market_total",
+      "closing_line_value",
+      "roi"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners",
+      "https://www.nfl.com/schedules/"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-05",
+    "title": "Week 9 injury report not yet published",
+    "detail": "The official injuries portal still showed week 8 at retrieval. No injury adjustment is applied to upcoming lines.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "week9_injury_status"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/injuries/"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-06",
+    "title": "Listed home team may not be true home team at neutral sites",
+    "detail": "Official game URLs use an 'away-at-home' listing order. ESPN partner JSON neutralSite flags are used only as a cross-check; no home-field advantage is applied where the partner marks a game neutral.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "official_home_designation"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2026/by-week/week-1",
+      "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&limit=500"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-07",
+    "title": "Official schedule body hides scores but game links expose them",
+    "detail": "Week-18 and some scoreboard tiles show 'Hidden Score' in the rendered body; the accessible official game-link text contains the final score. Parsed rows use the official link text.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2025/by-week/week-18",
+      "https://www.nfl.com/schedules/2026/by-week/week-8"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-08",
+    "title": "Kickoff ISO timestamps are partner-sourced",
+    "detail": "NFL.com link text gives weekday/month/day but not a full ISO timestamp; ESPN partner JSON supplies kickoff UTC for rest calculations. It is labelled partner-sourced, not an NFL publication.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "kickoff_utc"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/schedules/2026/by-week/week-9",
+      "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&limit=500"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-09",
+    "title": "Player stats table does not publish team affiliation",
+    "detail": "NFL.com player category tables list player and aggregate values but no team column; team cells are blank.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "team"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/stats/player-stats/category/passing/2026/reg/all/passingyards/desc"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-10",
+    "title": "No funded leaderboard reward pool is defined by an official source",
+    "detail": "The brief describes a leaderboard competition with rewards, but no official NFL or repository source defines a prize pool or reward points. Reward fields are blank.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "reward_points",
+      "prize_pool"
+    ],
+    "source_urls": [
+      "https://github.com/sassnarep3-star/Own4",
+      "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-11",
+    "title": "Derived model outputs are not official NFL publications",
+    "detail": "Elo ratings, fair lines, correlations, Brier scores and leaderboard scores are reproducible computations from official inputs; they are not published NFL values.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "elo_rating",
+      "fair_moneyline",
+      "fair_spread",
+      "fair_total",
+      "correlation",
+      "brier",
+      "skill_score"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/standings/league/2026/reg",
+      "https://www.nfl.com/schedules/2026/by-week/week-8",
+      "https://www.itl.nist.gov/div898/handbook/prc/section2/prc24.htm"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-12",
+    "title": "2026 out-of-sample holdout is below 300 games",
+    "detail": "Only 120 2026 regular-season games were final at retrieval; the pre-registered G1 gate requires at least 300 holdout observations.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "validated_strategy_count"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/standings/league/2026/reg",
+      "https://www.nfl.com/schedules/2026/by-week/week-8"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-13",
+    "title": "Root navigation does not link nfl-origin/",
+    "detail": "Root index.html already links the earlier nfl/ module. A root link to this section is logged as a shared-output request rather than editing another session's navigation.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://github.com/sassnarep3-star/Own4/blob/main/index.html",
+      "https://sassnarep3-star.github.io/Own4/nfl/"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-14",
+    "title": "2025 ESPN calendar file mixes seasons",
+    "detail": "The ESPN dates=2025 response includes 2024 week 18 and 2024 postseason events; parsing filters on season.year and season.type==2.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2025&limit=500",
+      "https://www.nfl.com/standings/league/2025/reg"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-15",
+    "title": "Official standings heading contains template placeholders",
+    "detail": "The 2026 NFL.com standings page renders '$year$ NFL $displayname$ Standings' in its heading. The table values are used; the heading artifact is not.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [],
+    "source_urls": [
+      "https://www.nfl.com/standings/league/2026/reg"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-16",
+    "title": "One week-8 game was still scheduled at retrieval",
+    "detail": "Chicago at Seattle (2026 week 8) had not kicked off; it is excluded from completed-game verification and included in the upcoming own-line slate.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "bears_seahawks_final_score"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/games/bears-at-seahawks-2026-reg-8",
+      "https://www.nfl.com/schedules/2026/by-week/week-8"
+    ]
+  },
+  {
+    "flag_id": "IR-NFL-17",
+    "title": "Player-level game logs and prop prices are unavailable from official sources",
+    "detail": "Official NFL.com publishes season player tables, not a downloadable official game-log/prop-price archive. Player-prop combo correlations remain blank.",
+    "status": "needs review",
+    "blocking": false,
+    "unverified_fields": [
+      "player_prop_correlation",
+      "prop_combo_price"
+    ],
+    "source_urls": [
+      "https://www.nfl.com/stats/player-stats/",
+      "https://www.nfl.com/news/nfl-draftkings-fanduel-fanatics-sports-betting-partners"
+    ]
+  }
+]

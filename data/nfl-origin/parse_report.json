@@ -1,0 +1,152 @@
+{
+  "checks": [
+    {
+      "name": "standings_2025_rows",
+      "result": "PASS",
+      "detail": "32 official standings rows parsed",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2025/reg"
+      ]
+    },
+    {
+      "name": "standings_2026_rows",
+      "result": "PASS",
+      "detail": "32 official standings rows parsed",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/reg"
+      ]
+    },
+    {
+      "name": "team_alias_map",
+      "result": "PASS",
+      "detail": "32 official team short-name aliases",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/reg"
+      ]
+    },
+    {
+      "name": "standings_2026_recompute",
+      "result": "PASS",
+      "detail": "32 teams \u00d7 6 cells; 0 mismatches",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/reg",
+        "https://www.nfl.com/schedules/2026/by-week/week-8"
+      ]
+    },
+    {
+      "name": "espn_score_cross_check_all",
+      "result": "PASS",
+      "detail": "392 final scores matched ESPN partner JSON; 0 mismatches",
+      "source_urls": [
+        "https://www.nfl.com/schedules/2026/by-week/week-8",
+        "https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?dates=2026&limit=500"
+      ]
+    },
+    {
+      "name": "team_stats_passing_rows",
+      "result": "PASS",
+      "detail": "32 official team rows for passing",
+      "source_urls": [
+        "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all"
+      ]
+    },
+    {
+      "name": "team_stats_rushing_rows",
+      "result": "PASS",
+      "detail": "32 official team rows for rushing",
+      "source_urls": [
+        "https://www.nfl.com/stats/team-stats/offense/rushing/2026/reg/all"
+      ]
+    },
+    {
+      "name": "team_stats_receiving_rows",
+      "result": "PASS",
+      "detail": "32 official team rows for receiving",
+      "source_urls": [
+        "https://www.nfl.com/stats/team-stats/offense/receiving/2026/reg/all"
+      ]
+    },
+    {
+      "name": "team_stats_scoring_rows",
+      "result": "PASS",
+      "detail": "32 official team rows for scoring",
+      "source_urls": [
+        "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all"
+      ]
+    },
+    {
+      "name": "team_stats_downs_rows",
+      "result": "PASS",
+      "detail": "32 official team rows for downs",
+      "source_urls": [
+        "https://www.nfl.com/stats/team-stats/offense/downs/2026/reg/all"
+      ]
+    },
+    {
+      "name": "player_stats_passing_rows",
+      "result": "PASS",
+      "detail": "25 official player rows for passing",
+      "source_urls": [
+        "https://www.nfl.com/stats/player-stats/category/passing/2026/reg/all/passingyards/desc"
+      ]
+    },
+    {
+      "name": "player_stats_rushing_rows",
+      "result": "PASS",
+      "detail": "25 official player rows for rushing",
+      "source_urls": [
+        "https://www.nfl.com/stats/player-stats/category/rushing/2026/reg/all/rushingyards/desc"
+      ]
+    },
+    {
+      "name": "player_stats_receiving_rows",
+      "result": "PASS",
+      "detail": "25 official player rows for receiving",
+      "source_urls": [
+        "https://www.nfl.com/stats/player-stats/category/receiving/2026/reg/all/receivingreceptions/desc"
+      ]
+    },
+    {
+      "name": "injury_rows_with_game_status",
+      "result": "PASS",
+      "detail": "132 official injury rows with Out/Questionable/game status",
+      "source_urls": [
+        "https://www.nfl.com/injuries/"
+      ]
+    },
+    {
+      "name": "game_center_sample",
+      "result": "PASS",
+      "detail": "10/10 official game-center final scores match official schedule link text",
+      "source_urls": [
+        "https://www.nfl.com/games/cowboys-at-eagles-2025-reg-1",
+        "https://www.nfl.com/games/chiefs-at-chargers-2025-reg-1",
+        "https://www.nfl.com/games/buccaneers-at-falcons-2025-reg-1"
+      ]
+    },
+    {
+      "name": "source_manifest_all_200",
+      "result": "PASS",
+      "detail": "57/57 sources returned HTTP 200",
+      "source_urls": [
+        "https://www.nfl.com/standings/league/2026/reg"
+      ]
+    }
+  ],
+  "counts": {
+    "standings_recompute_mismatches": 0,
+    "official_sources": 57,
+    "official_sources_failed": 0,
+    "standings_2025_rows": 32,
+    "standings_2026_rows": 32,
+    "games_2025_rows": 272,
+    "games_2025_final": 272,
+    "games_2026_rows": 136,
+    "games_2026_final": 120,
+    "games_2026_scheduled": 16,
+    "espn_cross_check_match": 392,
+    "espn_cross_check_mismatch": 0,
+    "espn_cross_check_no_event": 0
+  },
+  "mismatches": []
+}
