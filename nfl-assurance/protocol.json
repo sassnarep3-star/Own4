@@ -1,0 +1,69 @@
+{
+  "id": "NFL-ASSURANCE-PROTOCOL-1",
+  "registered_utc": "2026-11-02",
+  "status": "Pre-registered before this workspace computes any model metric. Researcher has seen public current-season scores; this is not a claim of a pristine human-blinded holdout.",
+  "sport": "NFL",
+  "scope": {
+    "seasons": [2024, 2025, 2026],
+    "season_type": "REG",
+    "current_cutoff": "2026 regular-season week 8; only games whose official embedded summary phase is FINAL or FINAL_OVERTIME at retrieval",
+    "warmup": "2024 regular season and earlier games within the evaluation window are used only as prior information",
+    "evaluation": "Expanding weekly out-of-sample evaluation beginning 2025 week 1; every prediction is frozen before that week's outcomes enter the rating/history state",
+    "exclusions": ["postseason", "preseason", "live/in-progress games", "unverified fields", "third-party observations", "market prices without an operator timestamp and settlement rule"]
+  },
+  "official_data_policy": {
+    "facts": "Only values explicitly present in an official NFL response are transcribed. Missing values remain null/blank and are flagged.",
+    "derived": "Probabilities, fair lines, correlations and test statistics are computed outputs, never described as official NFL publications or sportsbook offers.",
+    "snapshots": "Acquisition records URL, retrieval time, HTTP status and SHA-256. Full expressive HTML is not intended for public redistribution; the release keeps factual extractions and hashes under a rights review flag.",
+    "source": "https://www.nfl.com/legal/terms/"
+  },
+  "models": [
+    {"id": "M00", "name": "Constant baseline", "market": "winner", "rule": "p(home win among non-ties)=0.5; tie probability is the expanding prior tie rate with one pseudo-tie in 100 pseudo-games", "parameters": {}, "tuning": "none"},
+    {"id": "M01", "name": "Margin-adjusted Elo", "market": "winner", "rule": "Expected home score uses (home_rating + home_advantage - away_rating)/400 in a base-10 logistic. Update after each final game using margin multiplier ln(1+abs(margin))/ln(18), clipped to [0.5,2.0]. Regress team ratings 25% toward 1500 at season boundary.", "parameters": {"k": 12, "home_advantage": 45, "scale": 400, "initial_rating": 1500, "season_reversion": 0.25, "margin_multiplier_min": 0.5, "margin_multiplier_max": 2.0}, "tuning": "fixed before evaluation; no holdout search"},
+    {"id": "M02", "name": "Elo plus rest logistic", "market": "winner", "rule": "Ridge logistic regression on [1, Elo rating difference/100, rest-day difference/3], fitted only on prior final non-tie games with L2=10. Before 80 prior observations use M01. Rest is capped to [-10,10] days; first game of a team's season has rest null and uses league-median prior rest only if at least 20 prior rest observations exist, otherwise zero.", "parameters": {"l2": 10, "min_prior_games": 80, "rest_scale": 3, "rest_cap_days": 10}, "tuning": "fixed before evaluation"},
+    {"id": "M03", "name": "Scoring environment", "market": "spread/total", "rule": "Expected team points are the average of its prior points-for and opponent prior points-against, shrunk to the prior league team-game mean with four pseudo-games. Margin forecast is (home_rating+45-away_rating)/25. Fair half-point lines add the median prior residual and round to the nearest half-point away from an integer. Cover/over probabilities use the prior empirical residual distribution.", "parameters": {"pseudo_games": 4, "elo_points_divisor": 25, "home_advantage": 45}, "tuning": "fixed before evaluation"}
+  ],
+  "strategies": [
+    {"id": "S01", "category": "single", "name": "Calibrated favorite moneyline", "model": "M02", "selection": "Only if a verified operator price implies an after-cost edge whose dependence-aware lower confidence bound is positive", "status": "blocked: no verified operator price archive"},
+    {"id": "S02", "category": "single", "name": "Opponent-adjusted spread", "model": "M03", "selection": "Compare own half-point spread with a verified operator line; require price, push/void rules and edge gates", "status": "blocked: no verified operator price archive"},
+    {"id": "S03", "category": "single", "name": "Scoring-environment total", "model": "M03", "selection": "Compare own total with a verified operator total; require weather/availability timestamp and edge gates", "status": "blocked: no verified operator price archive"},
+    {"id": "P01", "category": "parlay", "name": "Two-game winner parlay", "model": "M01/M02 joint scenarios", "selection": "Choose the two highest calibrated edges only after weekly dependence and operator combo price are verified", "status": "blocked: no combo prices or prospective ticket sample"},
+    {"id": "P02", "category": "parlay", "name": "Two-game total parlay", "model": "M03 joint scenarios", "selection": "Use week-clustered joint scenarios; never assume independent legs solely because games differ", "status": "blocked: no combo prices or prospective ticket sample"},
+    {"id": "PR01", "category": "player_prop_combo", "name": "Receptions plus receiving yards", "model": "player empirical joint distribution", "selection": "Same-player joint distribution from official logs; require availability, operator thresholds, combo price and settlement terms", "status": "blocked: selected-panel sample below gate and no operator prices"},
+    {"id": "PR02", "category": "player_prop_combo", "name": "Passing yards plus passing touchdowns", "model": "player empirical joint distribution", "selection": "Same-player joint distribution from official logs; no independence multiplication", "status": "blocked: selected-panel sample below gate and no operator prices"},
+    {"id": "SGP01", "category": "same_game_combo", "name": "Player volume plus team win", "model": "game/player joint scenarios", "selection": "Condition player volume on game state and team win; require verified same-game combo price", "status": "blocked: no verified combo prices or validated joint model"}
+  ],
+  "gates": [
+    {"id": "G01", "name": "Source and integrity", "rule": "Every factual row has an official source URL; snapshot hashes match; game IDs unique; quarter scores sum to totals; no future outcome enters a prediction", "threshold": "100% of published factual rows; zero integrity failures"},
+    {"id": "G02", "name": "Sample size", "rule": "Minimum out-of-sample observations", "threshold": "singles >=300 games; player props >=1000 player-games; combos >=200 settled tickets"},
+    {"id": "G03", "name": "Skill versus baseline", "rule": "Lower Brier and log loss than baseline; paired week-cluster bootstrap 95% CI of Brier improvement excludes zero; BH-FDR across registered model comparisons", "threshold": "CI lower bound >0 and q<0.05", "bootstrap_replicates": 2000, "seed": 20261102},
+    {"id": "G04", "name": "Calibration", "rule": "Five equal-count probability bins on out-of-sample predictions; report observed frequency and Wilson interval", "threshold": "expected calibration error <=0.03 and no bin absolute gap >0.10"},
+    {"id": "G05", "name": "Verified price and edge", "rule": "Timestamped operator offer, de-vig method, settlement/void/push rules, limits and slippage recorded", "threshold": "after-cost expected ROI lower 95% dependence-aware bound >0 and point estimate >=2%"},
+    {"id": "G06", "name": "Dependence and combo pricing", "rule": "Joint probabilities calibrated; compare with independence product using game/week-clustered uncertainty", "threshold": "joint model beats independence product under G03; no unpriced correlation assumption"},
+    {"id": "G07", "name": "Leakage and placebo controls", "rule": "Future-feature perturbation must change predictions; within-week outcome permutation null must not reproduce the observed skill gain", "threshold": "zero leakage-test failures; observed improvement above 95th percentile of 1000 placebo replicates"},
+    {"id": "G08", "name": "Robustness", "rule": "Rolling block stability and concentration checks", "threshold": "positive Brier improvement in >=60% of season-week blocks; no single week contributes >25% of total improvement"},
+    {"id": "G09", "name": "Execution and settlement", "rule": "Operator-specific acceptance, void, push, dead-heat, inactive-player and payout-cap rules archived; paper ledger reconciled", "threshold": "100% rule coverage; zero unresolved settlement mismatches"},
+    {"id": "G10", "name": "Prospective replication", "rule": "Lock code, parameters and selection before future events; no post-hoc exclusions", "threshold": ">=100 future settled observations/tickets and repeat pass of applicable gates"}
+  ],
+  "correlation_policy": {
+    "statistics": ["Pearson r", "Spearman rho", "paired joint hit rate where applicable"],
+    "uncertainty": "2000 bootstrap replicates; resample whole games for same-game pairs and whole season-weeks for cross-game pairs; percentile 95% intervals; BH-FDR within the registered family",
+    "interpretation": "Correlation is association, not causation or betting edge. Zero correlation does not establish independence. Player panel is selected from current official leaders and is descriptive, not a population-wide prop validation.",
+    "player_panel": {"receiving_yards_top": 10, "passing_yards_top": 5, "rushing_yards_top": 5, "plus": "official skill leaders in the next scheduled game if not already included", "selection_source": "NFL.com 2026 regular-season category tables at retrieval"}
+  },
+  "leaderboard": {
+    "divisions": ["single-game forecasts", "parlay joint forecasts", "player-prop combo forecasts"],
+    "ranking": "Eligible entries ranked by out-of-sample log loss, then Brier improvement versus baseline, then lower maximum drawdown. Forecast-only research ranking is shown separately and is not reward eligibility.",
+    "rewards": "Non-monetary badges only until every applicable gate passes and an operator-independent reward policy is published. No funded prize pool, wager placement, or promised return.",
+    "reward_pool": null,
+    "anti_luck": "No reward for raw hit rate or short-run ROI; frozen protocol, dependence-aware intervals, multiplicity control, placebo tests and prospective replication are required."
+  },
+  "responsible_use": "Research only; not wagering advice. Luck cannot be eliminated. No strategy is validated for betting in this release.",
+  "method_sources": [
+    "https://scikit-learn.org/stable/modules/cross_validation.html",
+    "https://scikit-learn.org/stable/modules/calibration.html",
+    "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm",
+    "https://www.nfl.com/legal/terms/",
+    "https://www.ncpgambling.org/help-treatment/"
+  ]
+}
