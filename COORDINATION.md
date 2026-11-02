@@ -114,6 +114,30 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
 - 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
 
+<<<<<<< HEAD
+---
+
+## Session arena/42d467e4-own4 — NBA Lines Lab (JS dashboard, integration session)
+
+Branch: `arena/42d467e4-own4` (fixed for this session; no other branches created or pushed to).
+This session built a second dashboard ("NBA Lines Lab", JS-rendered tables) and integrated it with the other sessions' work without modifying their files.
+
+| # | Task | Status | Owner | Files touched | Sources / verification (2026-11-02) | Irregularities |
+|---|---|---|---|---|---|---|
+| 1 | Repo review, line by line | done | arena/42d467e4-own4 | base 319d6b0 contained only README.md ("# Own4") | n/a | None found |
+| 2 | Official-source research | done | arena/42d467e4-own4 | lines-lab/assets/js/data*.js, research/sources.md | nba.com, official.nba.com, cdn.nba.com (2025-26 rules PDF, 2026-27 schedule PDF), stats.nba.com (glossary/minimums), pr.nba.com, gleague.nba.com, nbatickets.nba.com, official injury-report PDFs, sportsbook.draftkings.com, support.draftkings.com, massgaming.com-hosted DK house rules, sportsbook.fanduel.com, support.fanduel.com, investors.sportradar.com, ncpgambling.org | F5–F9 (see lines-lab/pages/flagged.html) |
+| 3 | Strategy framework: signals, gates G1–G8, correlation method, leaderboard | done | arena/42d467e4-own4 | docs/strategy-framework.md, lines-lab/pages/{strategies,validation,correlation,leaderboard}.html | Official anchors where they exist (DK house-rules correlation ban; FanDuel parlay/SGP defs; stats.nba.com); numeric thresholds project-defined | F1/F2: measured values left blank + UNVERIFIED by policy |
+| 4 | Executive summary | done | arena/42d467e4-own4 | docs/executive-summary.md, lines-lab/pages/executive-summary.html | derived from tasks 2–3, every fact source-linked | None |
+| 5 | Site build lines-lab/ (13 pages) | done | arena/42d467e4-own4 | lines-lab/index.html, lines-lab/pages/*.html, lines-lab/assets/* | Render-tested all 13 pages with jsdom: 0 JS errors, 0 broken internal links, 269 table rows | None |
+| 6 | Integrate with origin/main, PR, merge, Pages verification | done | arena/42d467e4-own4 | merge commit on this branch; root site of other sessions untouched | gh api / gh pr; Pages build status below | Merge conflict on COORDINATION.md, README.md, index.html, pages/{flagged,sources,strategies,validation}.html — resolved by keeping main's root site and moving this session's site to lines-lab/; combined COORDINATION.md/README.md keep both sessions' content. No other session's work discarded. |
+
+### Log (arena/42d467e4-own4)
+
+- 2026-11-02 — Session started on branch arena/42d467e4-own4 at 319d6b0 (README only). Built NBA Lines Lab: dashboard + 12 category subpages; every factual table row links to an official source; values not confirmable from an official source are blank + flagged UNVERIFIED (F1–F12 on the Flagged for Review page).
+- 2026-11-02 — Discovered parallel sessions had merged PRs #8/#9 into main while this session worked. `git merge origin/main` conflicted on COORDINATION.md, README.md, index.html, pages/flagged.html, pages/sources.html, pages/strategies.html, pages/validation.html. Resolved without discarding any work: main's root site, lab/, docs/, data/, model/, scripts/, tests/, CI kept at their paths; this session's site moved to `lines-lab/`; COORDINATION.md and README.md merged textually (both sessions' sections preserved).
+- 2026-11-02 — PR #10 (arena/42d467e4-own4 → main) created: https://github.com/sassnarep3-star/Own4/pull/10 — merged (merge commit recorded by GitHub; see PR page). GitHub Pages (main, /) deploy verified: root https://sassnarep3-star.github.io/Own4/ and this session's https://sassnarep3-star.github.io/Own4/lines-lab/ both return HTTP 200 after the merge; Pages build status "built".
+- Flagged for Review (this session): F1 unmeasured correlations, F2 unmeasured performance, F3 project-defined gate thresholds, F4 non-monetary rewards, F5 nba.com key-dates "Playoffs 2026" label, F6 PHX arena naming discrepancy, F7 "Mexico City Game 2025" label, F8 press-only prop-restriction report, F9 regulator-hosted house-rules PDF, F10 derived 1,230 games, F11 live-record snapshots, F12 glossary coverage policy. All published at lines-lab/pages/flagged.html.
+=======
 
 ---
 
@@ -225,3 +249,4 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Verification after this merge: 29/29 automated checks PASS, `build_site.py` reports `PROBLEMS: none`,
   `python -m unittest discover -s tests -v`, `scripts/verify_data.py`, `scripts/check_site.py` and the
   `docs/` regeneration diff all pass.
+>>>>>>> origin/main
