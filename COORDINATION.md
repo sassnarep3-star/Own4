@@ -612,3 +612,12 @@ this session will not edit that shared file.
 largely NBA-focused and now contains multiple independently created NFL specification dashboards; the
 current brief asks for NFL lines with official line-by-line verification. This session adds a separate,
 clearly namespaced quantitative NFL section rather than overwriting prior sessions' work.
+- 2026-11-02 21:1x UTC (arena-7f8d7277) — Official-source fetch completed on the GitHub runner:
+  57/57 URLs HTTP 200 (27 official by-week schedules, 4 standings pages, 5 team-stat pages, 3
+  player-stat pages, 10 game centers, injuries/rules/policy/methodology pages, 2 ESPN partner
+  scoreboards). Raw gzipped snapshots + SHA-256 manifest are in `data/nfl-origin/raw/`. The parser
+  produced 32+32 standings rows, 272 official 2025 games, 120 final 2026 games, 16 upcoming games,
+  160 team-stat rows, 75 player-stat rows and week-8 injury rows. Recomputing 2026 W/L/T/PF/PA/NET
+  from the 120 official finals matched all 192 standings cells (0 mismatches); ESPN partner JSON
+  matched 392/392 final scores; 10/10 sampled official game centers matched. Lines were pre-registered
+  in commit `92a4be936de5a761ec900f406b9e38be420e1e2d` **before** model evaluation.
