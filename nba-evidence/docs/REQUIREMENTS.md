@@ -20,5 +20,5 @@
 | REQ-16 | Clean landing page and category subpages | delivered | Responsive static dashboard with search, grouped navigation, source links and downloadable data. |
 | REQ-17 | Coordinate parallel sessions | delivered with platform deviation | Claims, append-only logs, preserved peer namespaces and conflict records. Fixed Arena branch overrides requested branch naming. |
 | REQ-18 | Final integration and no broken links | delivered | 17 pages; 1,041 table rows with source links; 351 local links checked; 22 unit tests and 57 evidence checks pass. |
-| REQ-19 | PR, merge and GitHub Pages deployment | pending publication | Will record actual PR, merge commit and deployment result; never predeclare success. |
+| REQ-19 | PR, merge and GitHub Pages deployment | delivered | PR #31 merged at 43240309f5ba9217afdded7ef26ef25640b1ae3f; GitHub Pages built that commit and live pages were fetched successfully. |
 | REQ-20 | Flagged items do not block publication | implemented | Needs-review findings are published separately from strategy qualification; they still block unsupported claims. |
