@@ -546,3 +546,5 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Primary NBA results inspected: official date scoreboards for 2025-01-01 through 2025-01-08 (62 games); two complete official player box scores (0022400465 and 0022400487). These are small factual research extracts, not an automated bulk NBA download. NBA FAQ download restrictions are recorded and respected; no unofficial data feed is substituted.
 
 - 2026-11-02: Integrated later main commit `ab9051a` (session 75685c60, pipeline/ and raw data). Preserved all its files; this session remains isolated in nba-evidence/. Its ESPN partner-sourced player rows are not promoted to official-NBA-verified by this session.
+
+- Conflict log: a subsequent pull/rebase again attempted to replay merged concurrent history after main advanced. It was aborted without data loss; the merge commit was pushed to the assigned branch only. Later integration will use an explicit merge of main and preserve both sides.
