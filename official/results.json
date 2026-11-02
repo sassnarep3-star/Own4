@@ -1,0 +1,3509 @@
+{
+  "meta": {
+    "generated_on": "2026-11-02",
+    "season": "2026-27",
+    "kind": "derived",
+    "disclaimer": "All values in this file are reproducible computations from official NBA.com inputs, NOT official NBA values and NOT market odds. See Flags I-13 / I-12.",
+    "inputs": [
+      {
+        "id": "official/standings.json",
+        "source_url": "https://www.nba.com/standings"
+      },
+      {
+        "id": "official/team_stats.json",
+        "source_url": "https://www.nba.com/stats/teams/traditional"
+      },
+      {
+        "id": "official/games.json",
+        "source_url": "https://www.nba.com/games?date=2026-10-21, https://www.nba.com/games?date=2026-10-23, https://www.nba.com/games?date=2026-10-28, https://www.nba.com/games?date=2026-10-30, https://www.nba.com/games?date=2026-10-31, https://www.nba.com/games?date=2026-11-01"
+      },
+      {
+        "id": "official/slate.json",
+        "source_url": "https://www.nba.com/games?date=2026-11-02"
+      },
+      {
+        "id": "official/players.json",
+        "source_url": "https://www.nba.com/games?date=2026-11-02"
+      },
+      {
+        "id": "engine/analysis.py",
+        "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/engine/analysis.py"
+      }
+    ],
+    "code_url": "https://github.com/sassnarep3-star/Own4/blob/main/engine/analysis.py",
+    "rebuild_command": "python3 engine/dataset.py && python3 engine/analysis.py"
+  },
+  "correlations": [
+    {
+      "pair": "Points per game  vs  Winning %",
+      "metric": "PTS",
+      "n": 30,
+      "r": 0.449,
+      "p": 0.0128,
+      "ci_lo": 0.106,
+      "ci_hi": 0.697,
+      "q_bh": 0.0347,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "Field-goal %  vs  Winning %",
+      "metric": "FG_pct",
+      "n": 30,
+      "r": 0.426,
+      "p": 0.0189,
+      "ci_lo": 0.078,
+      "ci_hi": 0.682,
+      "q_bh": 0.0347,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "3-point %  vs  Winning %",
+      "metric": "3P_pct",
+      "n": 30,
+      "r": 0.486,
+      "p": 0.0065,
+      "ci_lo": 0.153,
+      "ci_hi": 0.72,
+      "q_bh": 0.0347,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "Free-throw %  vs  Winning %",
+      "metric": "FT_pct",
+      "n": 30,
+      "r": 0.234,
+      "p": 0.2129,
+      "ci_lo": -0.138,
+      "ci_hi": 0.548,
+      "q_bh": 0.2927,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": false
+    },
+    {
+      "pair": "Rebounds per game  vs  Winning %",
+      "metric": "REB",
+      "n": 30,
+      "r": 0.251,
+      "p": 0.1818,
+      "ci_lo": -0.121,
+      "ci_hi": 0.56,
+      "q_bh": 0.2857,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": false
+    },
+    {
+      "pair": "Assists per game  vs  Winning %",
+      "metric": "AST",
+      "n": 30,
+      "r": 0.201,
+      "p": 0.2879,
+      "ci_lo": -0.172,
+      "ci_hi": 0.523,
+      "q_bh": 0.3519,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": false
+    },
+    {
+      "pair": "Turnovers per game  vs  Winning %",
+      "metric": "TOV",
+      "n": 30,
+      "r": -0.462,
+      "p": 0.0102,
+      "ci_lo": -0.705,
+      "ci_hi": -0.122,
+      "q_bh": 0.0347,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "Steals per game  vs  Winning %",
+      "metric": "STL",
+      "n": 30,
+      "r": 0.113,
+      "p": 0.5528,
+      "ci_lo": -0.258,
+      "ci_hi": 0.455,
+      "q_bh": 0.6081,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": false
+    },
+    {
+      "pair": "Blocks per game  vs  Winning %",
+      "metric": "BLK",
+      "n": 30,
+      "r": 0.436,
+      "p": 0.0159,
+      "ci_lo": 0.09,
+      "ci_hi": 0.688,
+      "q_bh": 0.0347,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "Point differential per game (+/-)  vs  Winning %",
+      "metric": "plus_minus",
+      "n": 30,
+      "r": 0.887,
+      "p": 0.0,
+      "ci_lo": 0.773,
+      "ci_hi": 0.945,
+      "q_bh": 0.0,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": true
+    },
+    {
+      "pair": "Minutes per game  vs  Winning %",
+      "metric": "MIN",
+      "n": 30,
+      "r": 0.016,
+      "p": 0.9316,
+      "ci_lo": -0.346,
+      "ci_hi": 0.374,
+      "q_bh": 0.9316,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "significant_after_fdr": false
+    }
+  ],
+  "correlation_matrix": {
+    "keys": [
+      "PTS",
+      "FG_pct",
+      "3P_pct",
+      "REB",
+      "AST",
+      "TOV",
+      "plus_minus"
+    ],
+    "rows": [
+      {
+        "metric": "PTS",
+        "values": [
+          1.0,
+          0.736,
+          0.451,
+          0.19,
+          0.614,
+          -0.279,
+          0.624
+        ]
+      },
+      {
+        "metric": "FG_pct",
+        "values": [
+          null,
+          1.0,
+          0.445,
+          -0.207,
+          0.379,
+          -0.077,
+          0.52
+        ]
+      },
+      {
+        "metric": "3P_pct",
+        "values": [
+          null,
+          null,
+          1.0,
+          0.139,
+          0.317,
+          0.073,
+          0.537
+        ]
+      },
+      {
+        "metric": "REB",
+        "values": [
+          null,
+          null,
+          null,
+          1.0,
+          0.063,
+          -0.093,
+          0.331
+        ]
+      },
+      {
+        "metric": "AST",
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          1.0,
+          -0.503,
+          0.375
+        ]
+      },
+      {
+        "metric": "TOV",
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          1.0,
+          -0.417
+        ]
+      },
+      {
+        "metric": "plus_minus",
+        "values": [
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1.0
+        ]
+      }
+    ]
+  },
+  "pair_correlations": [
+    {
+      "pair": "PTS vs plus_minus",
+      "n": 30,
+      "r": 0.624,
+      "p": 0.0002,
+      "ci_lo": 0.34,
+      "ci_hi": 0.804,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "pair": "PTS vs REB",
+      "n": 30,
+      "r": 0.19,
+      "p": 0.3137,
+      "ci_lo": -0.182,
+      "ci_hi": 0.515,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "pair": "AST vs TOV",
+      "n": 30,
+      "r": -0.503,
+      "p": 0.0046,
+      "ci_lo": -0.731,
+      "ci_hi": -0.174,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "pair": "3P_pct vs PTS",
+      "n": 30,
+      "r": 0.451,
+      "p": 0.0123,
+      "ci_lo": 0.109,
+      "ci_hi": 0.698,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "pair": "REB vs BLK",
+      "n": 30,
+      "r": 0.191,
+      "p": 0.3112,
+      "ci_lo": -0.181,
+      "ci_hi": 0.516,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "pair": "FG_pct vs plus_minus",
+      "n": 30,
+      "r": 0.52,
+      "p": 0.0033,
+      "ci_lo": 0.196,
+      "ci_hi": 0.741,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    }
+  ],
+  "official_quoted_correlation": [
+    {
+      "pair": "Team PIE rating vs team winning percentage (R-squared)",
+      "value": 0.908,
+      "kind": "official quoted value",
+      "note": "Quoted verbatim from the NBA Stats FAQ. Historical/illustrative FAQ example; not a 2026-27 measurement and not a betting signal.",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    }
+  ],
+  "prop_correlations": [
+    {
+      "pair": "PPG vs RPG (team season leaders)",
+      "n": 30,
+      "r": -0.102,
+      "p": 0.5917,
+      "ci_lo": -0.446,
+      "ci_hi": 0.268,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "pair": "PPG vs APG (team season leaders)",
+      "n": 30,
+      "r": -0.082,
+      "p": 0.666,
+      "ci_lo": -0.43,
+      "ci_hi": 0.287,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "pair": "RPG vs APG (team season leaders)",
+      "n": 30,
+      "r": 0.075,
+      "p": 0.6947,
+      "ci_lo": -0.293,
+      "ci_hi": 0.424,
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    }
+  ],
+  "cross_game_correlation": {
+    "n_pairs": 259,
+    "r": 0.152,
+    "p": 0.0143,
+    "ci_lo": 0.031,
+    "ci_hi": 0.269,
+    "kind": "derived",
+    "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+    "source_urls": [
+      "https://www.nba.com/games?date=2026-10-21",
+      "https://www.nba.com/games?date=2026-10-23",
+      "https://www.nba.com/games?date=2026-10-28",
+      "https://www.nba.com/games?date=2026-10-30",
+      "https://www.nba.com/games?date=2026-10-31",
+      "https://www.nba.com/games?date=2026-11-01"
+    ]
+  },
+  "game_distribution": {
+    "n": 56,
+    "margin_a_mean": -1.768,
+    "margin_a_sd": 18.43,
+    "total_mean": 225.375,
+    "total_sd": 20.453,
+    "abs_margin_mean": 15.054,
+    "team_b_win_rate": 0.482,
+    "kind": "derived",
+    "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+    "source_urls": [
+      "https://www.nba.com/games?date=2026-10-21",
+      "https://www.nba.com/games?date=2026-10-23",
+      "https://www.nba.com/games?date=2026-10-28",
+      "https://www.nba.com/games?date=2026-10-30",
+      "https://www.nba.com/games?date=2026-10-31",
+      "https://www.nba.com/games?date=2026-11-01"
+    ]
+  },
+  "lines": [
+    {
+      "game_id": "0022600158",
+      "matchup": "OKC vs CLE",
+      "team_a": "OKC",
+      "team_b": "CLE",
+      "tip_et": "7:00 PM ET",
+      "rating_a": -0.5,
+      "rating_b": 5.0,
+      "fair_spread_first": -5.5,
+      "fair_total": 227.5,
+      "p_first_win": 0.3827,
+      "fair_ml_first": 161,
+      "fair_ml_second": -161,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/okc-vs-cle-0022600158"
+    },
+    {
+      "game_id": "0022600163",
+      "matchup": "CHI vs PHI",
+      "team_a": "CHI",
+      "team_b": "PHI",
+      "tip_et": "7:30 PM ET",
+      "rating_a": -15.8,
+      "rating_b": 3.9,
+      "fair_spread_first": -19.7,
+      "fair_total": 222.2,
+      "p_first_win": 0.1426,
+      "fair_ml_first": 601,
+      "fair_ml_second": -601,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/chi-vs-phi-0022600163"
+    },
+    {
+      "game_id": "0022600160",
+      "matchup": "ATL vs IND",
+      "team_a": "ATL",
+      "team_b": "IND",
+      "tip_et": "7:30 PM ET",
+      "rating_a": 0.9,
+      "rating_b": -3.9,
+      "fair_spread_first": 4.8,
+      "fair_total": 229.0,
+      "p_first_win": 0.6027,
+      "fair_ml_first": -152,
+      "fair_ml_second": 152,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/atl-vs-ind-0022600160"
+    },
+    {
+      "game_id": "0022600161",
+      "matchup": "BKN vs NYK",
+      "team_a": "BKN",
+      "team_b": "NYK",
+      "tip_et": "7:30 PM ET",
+      "rating_a": -7.8,
+      "rating_b": -0.7,
+      "fair_spread_first": -7.1,
+      "fair_total": 215.2,
+      "p_first_win": 0.35,
+      "fair_ml_first": 186,
+      "fair_ml_second": -186,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/bkn-vs-nyk-0022600161"
+    },
+    {
+      "game_id": "0022600162",
+      "matchup": "WAS vs ORL",
+      "team_a": "WAS",
+      "team_b": "ORL",
+      "tip_et": "7:30 PM ET",
+      "rating_a": 0.8,
+      "rating_b": -9.0,
+      "fair_spread_first": 9.8,
+      "fair_total": 218.2,
+      "p_first_win": 0.7025,
+      "fair_ml_first": -236,
+      "fair_ml_second": 236,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/was-vs-orl-0022600162"
+    },
+    {
+      "game_id": "0022600159",
+      "matchup": "DET vs CHA",
+      "team_a": "DET",
+      "team_b": "CHA",
+      "tip_et": "7:30 PM ET",
+      "rating_a": 8.0,
+      "rating_b": -8.1,
+      "fair_spread_first": 16.1,
+      "fair_total": 208.1,
+      "p_first_win": 0.8088,
+      "fair_ml_first": -423,
+      "fair_ml_second": 423,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/det-vs-cha-0022600159"
+    },
+    {
+      "game_id": "0022600164",
+      "matchup": "SAC vs DAL",
+      "team_a": "SAC",
+      "team_b": "DAL",
+      "tip_et": "8:00 PM ET",
+      "rating_a": -19.0,
+      "rating_b": 2.5,
+      "fair_spread_first": -21.5,
+      "fair_total": 223.3,
+      "p_first_win": 0.1217,
+      "fair_ml_first": 722,
+      "fair_ml_second": -722,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/sac-vs-dal-0022600164"
+    },
+    {
+      "game_id": "0022600166",
+      "matchup": "MIL vs MIN",
+      "team_a": "MIL",
+      "team_b": "MIN",
+      "tip_et": "8:00 PM ET",
+      "rating_a": -13.2,
+      "rating_b": 11.3,
+      "fair_spread_first": -24.5,
+      "fair_total": 233.0,
+      "p_first_win": 0.0919,
+      "fair_ml_first": 989,
+      "fair_ml_second": -989,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/mil-vs-min-0022600166"
+    },
+    {
+      "game_id": "0022600165",
+      "matchup": "NOP vs MEM",
+      "team_a": "NOP",
+      "team_b": "MEM",
+      "tip_et": "8:00 PM ET",
+      "rating_a": 1.8,
+      "rating_b": 15.2,
+      "fair_spread_first": -13.4,
+      "fair_total": 240.9,
+      "p_first_win": 0.2336,
+      "fair_ml_first": 328,
+      "fair_ml_second": -328,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/nop-vs-mem-0022600165"
+    },
+    {
+      "game_id": "0022600167",
+      "matchup": "BOS vs HOU",
+      "team_a": "BOS",
+      "team_b": "HOU",
+      "tip_et": "8:30 PM ET",
+      "rating_a": 9.5,
+      "rating_b": 12.4,
+      "fair_spread_first": -2.9,
+      "fair_total": 239.4,
+      "p_first_win": 0.4375,
+      "fair_ml_first": 129,
+      "fair_ml_second": -129,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/bos-vs-hou-0022600167"
+    },
+    {
+      "game_id": "0022600168",
+      "matchup": "UTA vs SAS",
+      "team_a": "UTA",
+      "team_b": "SAS",
+      "tip_et": "8:30 PM ET",
+      "rating_a": -10.2,
+      "rating_b": 7.2,
+      "fair_spread_first": -17.4,
+      "fair_total": 226.0,
+      "p_first_win": 0.1726,
+      "fair_ml_first": 480,
+      "fair_ml_second": -480,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/uta-vs-sas-0022600168"
+    },
+    {
+      "game_id": "0022600169",
+      "matchup": "POR vs DEN",
+      "team_a": "POR",
+      "team_b": "DEN",
+      "tip_et": "9:00 PM ET",
+      "rating_a": 11.4,
+      "rating_b": -1.2,
+      "fair_spread_first": 12.6,
+      "fair_total": 234.6,
+      "p_first_win": 0.7529,
+      "fair_ml_first": -305,
+      "fair_ml_second": 305,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/por-vs-den-0022600169"
+    },
+    {
+      "game_id": "0022600171",
+      "matchup": "TOR vs LAC",
+      "team_a": "TOR",
+      "team_b": "LAC",
+      "tip_et": "10:00 PM ET",
+      "rating_a": 7.8,
+      "rating_b": -7.3,
+      "fair_spread_first": 15.1,
+      "fair_total": 224.7,
+      "p_first_win": 0.7937,
+      "fair_ml_first": -385,
+      "fair_ml_second": 385,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/tor-vs-lac-0022600171"
+    },
+    {
+      "game_id": "0022600170",
+      "matchup": "PHX vs GSW",
+      "team_a": "PHX",
+      "team_b": "GSW",
+      "tip_et": "10:00 PM ET",
+      "rating_a": -12.5,
+      "rating_b": 2.9,
+      "fair_spread_first": -15.4,
+      "fair_total": 229.7,
+      "p_first_win": 0.2017,
+      "fair_ml_first": 396,
+      "fair_ml_second": -396,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/phx-vs-gsw-0022600170"
+    },
+    {
+      "game_id": "0022600172",
+      "matchup": "MIA vs LAL",
+      "team_a": "MIA",
+      "team_b": "LAL",
+      "tip_et": "10:00 PM ET",
+      "rating_a": -3.2,
+      "rating_b": 5.3,
+      "fair_spread_first": -8.5,
+      "fair_total": 238.6,
+      "p_first_win": 0.3223,
+      "fair_ml_first": 210,
+      "fair_ml_second": -210,
+      "market_spread": "",
+      "market_total": "",
+      "market_odds": "",
+      "unverified_fields": [
+        "market_spread",
+        "market_total",
+        "market_odds"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "game_url": "https://www.nba.com/game/mia-vs-lal-0022600172"
+    }
+  ],
+  "parlays": [
+    {
+      "id": "PAR-166-164",
+      "leg1": "MIL vs MIN",
+      "leg2": "SAC vs DAL",
+      "p_leg1": 0.0919,
+      "p_leg2": 0.1217,
+      "p_joint_independent": 0.0112,
+      "fair_decimal_odds": 89.412,
+      "fair_american_odds": 8841,
+      "market_parlay_price": "",
+      "unverified_fields": [
+        "market_parlay_price"
+      ],
+      "cross_game_margin_r": 0.152,
+      "cross_game_margin_ci": [
+        0.031,
+        0.269
+      ],
+      "cross_game_pair_n": 259,
+      "kind": "derived",
+      "note": "Joint probability assumes independence of the two games. The measured cross-game margin correlation (computed from official results) is shown with its confidence interval; a wide interval means independence is not established. Market parlay price is blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "PAR-166-163",
+      "leg1": "MIL vs MIN",
+      "leg2": "CHI vs PHI",
+      "p_leg1": 0.0919,
+      "p_leg2": 0.1426,
+      "p_joint_independent": 0.0131,
+      "fair_decimal_odds": 76.307,
+      "fair_american_odds": 7531,
+      "market_parlay_price": "",
+      "unverified_fields": [
+        "market_parlay_price"
+      ],
+      "cross_game_margin_r": 0.152,
+      "cross_game_margin_ci": [
+        0.031,
+        0.269
+      ],
+      "cross_game_pair_n": 259,
+      "kind": "derived",
+      "note": "Joint probability assumes independence of the two games. The measured cross-game margin correlation (computed from official results) is shown with its confidence interval; a wide interval means independence is not established. Market parlay price is blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "PAR-164-163",
+      "leg1": "SAC vs DAL",
+      "leg2": "CHI vs PHI",
+      "p_leg1": 0.1217,
+      "p_leg2": 0.1426,
+      "p_joint_independent": 0.0174,
+      "fair_decimal_odds": 57.622,
+      "fair_american_odds": 5662,
+      "market_parlay_price": "",
+      "unverified_fields": [
+        "market_parlay_price"
+      ],
+      "cross_game_margin_r": 0.152,
+      "cross_game_margin_ci": [
+        0.031,
+        0.269
+      ],
+      "cross_game_pair_n": 259,
+      "kind": "derived",
+      "note": "Joint probability assumes independence of the two games. The measured cross-game margin correlation (computed from official results) is shown with its confidence interval; a wide interval means independence is not established. Market parlay price is blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    }
+  ],
+  "props": [
+    {
+      "abbr": "OKC",
+      "player": "Shai Gilgeous-Alexander",
+      "fair_pts": 26.0,
+      "fair_reb": 4.5,
+      "fair_ast": 3.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1628983/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1628983/"
+    },
+    {
+      "abbr": "CLE",
+      "player": "Donovan Mitchell",
+      "fair_pts": 22.7,
+      "fair_reb": 5.3,
+      "fair_ast": 4.5,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1628378/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1628378/"
+    },
+    {
+      "abbr": "CHI",
+      "player": "Caleb Wilson",
+      "fair_pts": 21.2,
+      "fair_reb": 6.7,
+      "fair_ast": 2.5,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1643410/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1643410/"
+    },
+    {
+      "abbr": "PHI",
+      "player": "Tyrese Maxey",
+      "fair_pts": 29.6,
+      "fair_reb": 4.1,
+      "fair_ast": 4.4,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630178/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630178/"
+    },
+    {
+      "abbr": "ATL",
+      "player": "Jalen Johnson",
+      "fair_pts": 18.3,
+      "fair_reb": 9.0,
+      "fair_ast": 7.9,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630552/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630552/"
+    },
+    {
+      "abbr": "IND",
+      "player": "Pascal Siakam",
+      "fair_pts": 21.4,
+      "fair_reb": 7.4,
+      "fair_ast": 4.0,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1627783/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1627783/"
+    },
+    {
+      "abbr": "BKN",
+      "player": "Julius Randle",
+      "fair_pts": 20.8,
+      "fair_reb": 7.2,
+      "fair_ast": 5.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/203944/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/203944/"
+    },
+    {
+      "abbr": "NYK",
+      "player": "Karl-Anthony Towns",
+      "fair_pts": 21.8,
+      "fair_reb": 13.5,
+      "fair_ast": 3.2,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1626157/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1626157/"
+    },
+    {
+      "abbr": "WAS",
+      "player": "Trae Young",
+      "fair_pts": 20.7,
+      "fair_reb": 3.7,
+      "fair_ast": 10.2,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629027/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629027/"
+    },
+    {
+      "abbr": "ORL",
+      "player": "Franz Wagner",
+      "fair_pts": 19.7,
+      "fair_reb": 6.7,
+      "fair_ast": 7.8,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630532/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630532/"
+    },
+    {
+      "abbr": "DET",
+      "player": "Cade Cunningham",
+      "fair_pts": 22.2,
+      "fair_reb": 5.5,
+      "fair_ast": 7.2,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630595/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630595/"
+    },
+    {
+      "abbr": "CHA",
+      "player": "Brandon Miller",
+      "fair_pts": 24.4,
+      "fair_reb": 6.1,
+      "fair_ast": 2.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1641706/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1641706/"
+    },
+    {
+      "abbr": "SAC",
+      "player": "Domantas Sabonis",
+      "fair_pts": 16.0,
+      "fair_reb": 15.8,
+      "fair_ast": 7.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1627734/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1627734/"
+    },
+    {
+      "abbr": "DAL",
+      "player": "Cooper Flagg",
+      "fair_pts": 26.8,
+      "fair_reb": 6.0,
+      "fair_ast": 6.6,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1642843/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1642843/"
+    },
+    {
+      "abbr": "MIL",
+      "player": "Tyler Herro",
+      "fair_pts": 22.0,
+      "fair_reb": 4.8,
+      "fair_ast": 4.2,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629639/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629639/"
+    },
+    {
+      "abbr": "MIN",
+      "player": "Jaden McDaniels",
+      "fair_pts": 17.3,
+      "fair_reb": 6.0,
+      "fair_ast": 3.6,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630183/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630183/"
+    },
+    {
+      "abbr": "NOP",
+      "player": "Zion Williamson",
+      "fair_pts": 20.7,
+      "fair_reb": 4.3,
+      "fair_ast": 2.5,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629627/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629627/"
+    },
+    {
+      "abbr": "MEM",
+      "player": "Ty Jerome",
+      "fair_pts": 25.8,
+      "fair_reb": 3.2,
+      "fair_ast": 5.8,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629660/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629660/"
+    },
+    {
+      "abbr": "BOS",
+      "player": "Jayson Tatum",
+      "fair_pts": 28.3,
+      "fair_reb": 6.0,
+      "fair_ast": 7.7,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1628369/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1628369/"
+    },
+    {
+      "abbr": "HOU",
+      "player": "Alperen Sengun",
+      "fair_pts": 22.8,
+      "fair_reb": 9.0,
+      "fair_ast": 7.4,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630578/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630578/"
+    },
+    {
+      "abbr": "UTA",
+      "player": "Keyonte George",
+      "fair_pts": 21.7,
+      "fair_reb": 3.8,
+      "fair_ast": 6.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1641718/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1641718/"
+    },
+    {
+      "abbr": "SAS",
+      "player": "Victor Wembanyama",
+      "fair_pts": 28.0,
+      "fair_reb": 10.7,
+      "fair_ast": 3.0,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1641705/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1641705/"
+    },
+    {
+      "abbr": "POR",
+      "player": "Deni Avdija",
+      "fair_pts": 23.0,
+      "fair_reb": 7.0,
+      "fair_ast": 5.6,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630166/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630166/"
+    },
+    {
+      "abbr": "DEN",
+      "player": "Nikola Jokic",
+      "fair_pts": 21.2,
+      "fair_reb": 9.8,
+      "fair_ast": 9.2,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/203999/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/203999/"
+    },
+    {
+      "abbr": "TOR",
+      "player": "Scottie Barnes",
+      "fair_pts": 24.8,
+      "fair_reb": 6.7,
+      "fair_ast": 4.5,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1630567/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1630567/"
+    },
+    {
+      "abbr": "LAC",
+      "player": "Darius Garland",
+      "fair_pts": 20.8,
+      "fair_reb": 1.3,
+      "fair_ast": 6.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629636/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629636/"
+    },
+    {
+      "abbr": "PHX",
+      "player": "Devin Booker",
+      "fair_pts": 22.3,
+      "fair_reb": 3.8,
+      "fair_ast": 5.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1626164/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1626164/"
+    },
+    {
+      "abbr": "GSW",
+      "player": "Stephen Curry",
+      "fair_pts": 29.2,
+      "fair_reb": 3.8,
+      "fair_ast": 4.0,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/201939/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/201939/"
+    },
+    {
+      "abbr": "MIA",
+      "player": "Giannis Antetokounmpo",
+      "fair_pts": 28.2,
+      "fair_reb": 12.3,
+      "fair_ast": 5.5,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/203507/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/203507/"
+    },
+    {
+      "abbr": "LAL",
+      "player": "Luka Doncic",
+      "fair_pts": 37.7,
+      "fair_reb": 8.2,
+      "fair_ast": 7.3,
+      "market_pts_line": "",
+      "market_reb_line": "",
+      "market_ast_line": "",
+      "unverified_fields": [
+        "market_pts_line",
+        "market_reb_line",
+        "market_ast_line"
+      ],
+      "kind": "derived",
+      "note": "Fair line is set equal to the official season average displayed by NBA.com. This is a stated modeling choice, not an official prop line. Market lines are blank + flagged (I-12).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02",
+        "https://www.nba.com/stats/player/1629029/"
+      ],
+      "player_url": "https://www.nba.com/stats/player/1629029/"
+    }
+  ],
+  "prop_combos": [
+    {
+      "player": "Shai Gilgeous-Alexander",
+      "abbr": "OKC",
+      "legs": [
+        "PTS >= 26.0",
+        "REB >= 4.5",
+        "AST >= 3.3"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "player": "Donovan Mitchell",
+      "abbr": "CLE",
+      "legs": [
+        "PTS >= 22.7",
+        "REB >= 5.3",
+        "AST >= 4.5"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "player": "Caleb Wilson",
+      "abbr": "CHI",
+      "legs": [
+        "PTS >= 21.2",
+        "REB >= 6.7",
+        "AST >= 2.5"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "player": "Tyrese Maxey",
+      "abbr": "PHI",
+      "legs": [
+        "PTS >= 29.6",
+        "REB >= 4.1",
+        "AST >= 4.4"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "player": "Jalen Johnson",
+      "abbr": "ATL",
+      "legs": [
+        "PTS >= 18.3",
+        "REB >= 9.0",
+        "AST >= 7.9"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "player": "Pascal Siakam",
+      "abbr": "IND",
+      "legs": [
+        "PTS >= 21.4",
+        "REB >= 7.4",
+        "AST >= 4.0"
+      ],
+      "p_joint_if_independent": 0.125,
+      "measured_ppg_rpg_r": -0.102,
+      "measured_ppg_apg_r": -0.082,
+      "measured_rpg_apg_r": 0.075,
+      "p_joint_correlation_adjusted": "",
+      "unverified_fields": [
+        "p_joint_correlation_adjusted"
+      ],
+      "kind": "derived",
+      "note": "Under independence the 3-leg joint probability is 0.5^3 = 0.125. The measured same-player correlations show legs are not independent, so a correlation-adjusted price would require a joint distribution that no official source publishes. That value is left blank + flagged.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    }
+  ],
+  "backtest": {
+    "total_official_games": 56,
+    "graded_games": 38,
+    "ungraded_games": 18,
+    "ungraded_reason": "No prior official games existed before 2026-10-21 (and for teams with no prior appearance); predictions are left blank rather than inferred.",
+    "winner_hits": 23,
+    "winner_accuracy": 0.6053,
+    "binomial_p_two_sided": 0.2559,
+    "permutation_p": 0.1268,
+    "wilson_ci": [
+      0.447,
+      0.744
+    ],
+    "margin_mae": 21.395,
+    "margin_bias": -2.022,
+    "margin_pred_actual_r": 0.332,
+    "margin_pred_actual_p": 0.042,
+    "total_mae": 22.129,
+    "total_bias": -3.239,
+    "total_pred_actual_r": -0.07,
+    "total_pred_actual_p": 0.6772,
+    "parlay_attempts": 5,
+    "parlay_hits": 2,
+    "parlay_hit_rate": 0.4,
+    "parlay_null_rate": 0.25,
+    "parlay_binomial_p": 0.6045,
+    "kind": "derived",
+    "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13).",
+    "source_urls": [
+      "https://www.nba.com/games?date=2026-10-21",
+      "https://www.nba.com/games?date=2026-10-23",
+      "https://www.nba.com/games?date=2026-10-28",
+      "https://www.nba.com/games?date=2026-10-30",
+      "https://www.nba.com/games?date=2026-10-31",
+      "https://www.nba.com/games?date=2026-11-01"
+    ]
+  },
+  "graded_games": [
+    {
+      "game_id": "0022600085",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600086",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600004",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600087",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600088",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600090",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600089",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600091",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600005",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600092",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600093",
+      "date": "2026-10-21",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-21"
+    },
+    {
+      "game_id": "0022600099",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "CHI vs MIL",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": -31.0,
+      "actual_margin": 7,
+      "pred_total": 208.0,
+      "actual_total": 257,
+      "winner_correct": false,
+      "margin_error": 38.0,
+      "total_error": 49.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/chi-vs-mil-0022600099"
+    },
+    {
+      "game_id": "0022600008",
+      "date": "2026-10-23",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-23"
+    },
+    {
+      "game_id": "0022600097",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "TOR vs WAS",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 31.0,
+      "actual_margin": 10,
+      "pred_total": 263.0,
+      "actual_total": 214,
+      "winner_correct": true,
+      "margin_error": -21.0,
+      "total_error": -49.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/tor-vs-was-0022600097"
+    },
+    {
+      "game_id": "0022600094",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "ATL vs CHA",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 0.0,
+      "actual_margin": 47,
+      "pred_total": 242.0,
+      "actual_total": 209,
+      "winner_correct": false,
+      "margin_error": 47.0,
+      "total_error": -33.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/atl-vs-cha-0022600094"
+    },
+    {
+      "game_id": "0022600096",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "MIN vs ORL",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 32.0,
+      "actual_margin": 22,
+      "pred_total": 256.0,
+      "actual_total": 208,
+      "winner_correct": true,
+      "margin_error": -10.0,
+      "total_error": -48.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/min-vs-orl-0022600096"
+    },
+    {
+      "game_id": "0022600095",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "DAL vs IND",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": -21.0,
+      "actual_margin": 16,
+      "pred_total": 233.0,
+      "actual_total": 226,
+      "winner_correct": false,
+      "margin_error": 37.0,
+      "total_error": -7.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/dal-vs-ind-0022600095"
+    },
+    {
+      "game_id": "0022600098",
+      "date": "2026-10-23",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-23"
+    },
+    {
+      "game_id": "0022600009",
+      "date": "2026-10-23",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-23"
+    },
+    {
+      "game_id": "0022600100",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "NOP vs UTA",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 17.0,
+      "actual_margin": -1,
+      "pred_total": 223.0,
+      "actual_total": 239,
+      "winner_correct": false,
+      "margin_error": -18.0,
+      "total_error": 16.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/nop-vs-uta-0022600100"
+    },
+    {
+      "game_id": "0022600101",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "MEM vs GSW",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 42.0,
+      "actual_margin": 3,
+      "pred_total": 228.0,
+      "actual_total": 219,
+      "winner_correct": true,
+      "margin_error": -39.0,
+      "total_error": -9.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/mem-vs-gsw-0022600101"
+    },
+    {
+      "game_id": "0022600102",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "LAC vs LAL",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 3.0,
+      "actual_margin": -8,
+      "pred_total": 248.0,
+      "actual_total": 242,
+      "winner_correct": false,
+      "margin_error": -11.0,
+      "total_error": -6.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/lac-vs-lal-0022600102"
+    },
+    {
+      "game_id": "0022600103",
+      "date": "2026-10-23",
+      "graded": true,
+      "matchup": "POR vs SAC",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 66.0,
+      "actual_margin": 8,
+      "pred_total": 220.0,
+      "actual_total": 248,
+      "winner_correct": true,
+      "margin_error": -58.0,
+      "total_error": 28.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-23",
+      "game_url": "https://www.nba.com/game/por-vs-sac-0022600103"
+    },
+    {
+      "game_id": "0022600135",
+      "date": "2026-10-28",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-28"
+    },
+    {
+      "game_id": "0022600134",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "CHA vs DET",
+      "prior_n_a": 2,
+      "prior_n_b": 1,
+      "pred_margin": -37.0,
+      "actual_margin": -8,
+      "pred_total": 223.5,
+      "actual_total": 186,
+      "winner_correct": true,
+      "margin_error": 29.0,
+      "total_error": -37.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/cha-vs-det-0022600134"
+    },
+    {
+      "game_id": "0022600132",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "MIA vs ATL",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": -48.0,
+      "actual_margin": 12,
+      "pred_total": 238.5,
+      "actual_total": 246,
+      "winner_correct": false,
+      "margin_error": 60.0,
+      "total_error": 7.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/mia-vs-atl-0022600132"
+    },
+    {
+      "game_id": "0022600133",
+      "date": "2026-10-28",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-28"
+    },
+    {
+      "game_id": "0022600136",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "ORL vs TOR",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": -41.0,
+      "actual_margin": -30,
+      "pred_total": 232.5,
+      "actual_total": 228,
+      "winner_correct": true,
+      "margin_error": 11.0,
+      "total_error": -4.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/orl-vs-tor-0022600136"
+    },
+    {
+      "game_id": "0022600138",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "HOU vs MIL",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": 20.5,
+      "actual_margin": 32,
+      "pred_total": 241.5,
+      "actual_total": 232,
+      "winner_correct": true,
+      "margin_error": 11.5,
+      "total_error": -9.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/hou-vs-mil-0022600138"
+    },
+    {
+      "game_id": "0022600139",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "GSW vs MIN",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": -36.0,
+      "actual_margin": 5,
+      "pred_total": 229.5,
+      "actual_total": 233,
+      "winner_correct": false,
+      "margin_error": 41.0,
+      "total_error": 3.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/gsw-vs-min-0022600139"
+    },
+    {
+      "game_id": "0022600140",
+      "date": "2026-10-28",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-28"
+    },
+    {
+      "game_id": "0022600137",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "NYK vs CHI",
+      "prior_n_a": 1,
+      "prior_n_b": 2,
+      "pred_margin": 14.0,
+      "actual_margin": 6,
+      "pred_total": 215.0,
+      "actual_total": 260,
+      "winner_correct": true,
+      "margin_error": -8.0,
+      "total_error": 45.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/nyk-vs-chi-0022600137"
+    },
+    {
+      "game_id": "0022600141",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "SAS vs UTA",
+      "prior_n_a": 1,
+      "prior_n_b": 2,
+      "pred_margin": 5.5,
+      "actual_margin": 6,
+      "pred_total": 221.5,
+      "actual_total": 228,
+      "winner_correct": true,
+      "margin_error": 0.5,
+      "total_error": 6.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/sas-vs-uta-0022600141"
+    },
+    {
+      "game_id": "0022600142",
+      "date": "2026-10-28",
+      "graded": false,
+      "reason": "no prior official games for one or both teams; prediction left blank (unverified)",
+      "source_url": "https://www.nba.com/games?date=2026-10-28"
+    },
+    {
+      "game_id": "0022600143",
+      "date": "2026-10-28",
+      "graded": true,
+      "matchup": "LAL vs LAC",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": 6.5,
+      "actual_margin": 16,
+      "pred_total": 245.0,
+      "actual_total": 190,
+      "winner_correct": true,
+      "margin_error": 9.5,
+      "total_error": -55.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-28",
+      "game_url": "https://www.nba.com/game/lal-vs-lac-0022600143"
+    },
+    {
+      "game_id": "0022600015",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "CHA vs WAS",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": -13.33,
+      "actual_margin": -16,
+      "pred_total": 207.0,
+      "actual_total": 174,
+      "winner_correct": true,
+      "margin_error": -2.67,
+      "total_error": -33.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/cha-vs-was-0022600015"
+    },
+    {
+      "game_id": "0022600018",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "NYK vs PHI",
+      "prior_n_a": 2,
+      "prior_n_b": 1,
+      "pred_margin": -4.0,
+      "actual_margin": -5,
+      "pred_total": 232.0,
+      "actual_total": 191,
+      "winner_correct": true,
+      "margin_error": -1.0,
+      "total_error": -41.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/nyk-vs-phi-0022600018"
+    },
+    {
+      "game_id": "0022600016",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "CHI vs BOS",
+      "prior_n_a": 3,
+      "prior_n_b": 1,
+      "pred_margin": -18.0,
+      "actual_margin": -14,
+      "pred_total": 224.0,
+      "actual_total": 236,
+      "winner_correct": true,
+      "margin_error": 4.0,
+      "total_error": 12.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/chi-vs-bos-0022600016"
+    },
+    {
+      "game_id": "0022600017",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "DET vs BKN",
+      "prior_n_a": 2,
+      "prior_n_b": 1,
+      "pred_margin": 19.5,
+      "actual_margin": 16,
+      "pred_total": 215.5,
+      "actual_total": 204,
+      "winner_correct": true,
+      "margin_error": -3.5,
+      "total_error": -11.5,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/det-vs-bkn-0022600017"
+    },
+    {
+      "game_id": "0022600019",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "ORL vs TOR",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": -47.33,
+      "actual_margin": 7,
+      "pred_total": 231.0,
+      "actual_total": 235,
+      "winner_correct": false,
+      "margin_error": 54.33,
+      "total_error": 4.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/orl-vs-tor-0022600019"
+    },
+    {
+      "game_id": "0022600020",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "IND vs MIA",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": 4.0,
+      "actual_margin": -20,
+      "pred_total": 227.67,
+      "actual_total": 270,
+      "winner_correct": false,
+      "margin_error": -24.0,
+      "total_error": 42.33,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/ind-vs-mia-0022600020"
+    },
+    {
+      "game_id": "0022600021",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "HOU vs DAL",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": 10.67,
+      "actual_margin": -5,
+      "pred_total": 241.67,
+      "actual_total": 227,
+      "winner_correct": false,
+      "margin_error": -15.67,
+      "total_error": -14.67,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/hou-vs-dal-0022600021"
+    },
+    {
+      "game_id": "0022600022",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "LAC vs MIN",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": -13.67,
+      "actual_margin": -26,
+      "pred_total": 228.33,
+      "actual_total": 228,
+      "winner_correct": true,
+      "margin_error": -12.33,
+      "total_error": -0.33,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/lac-vs-min-0022600022"
+    },
+    {
+      "game_id": "0022600023",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "LAL vs GSW",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": 22.0,
+      "actual_margin": -17,
+      "pred_total": 229.0,
+      "actual_total": 207,
+      "winner_correct": false,
+      "margin_error": -39.0,
+      "total_error": -22.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/lal-vs-gsw-0022600023"
+    },
+    {
+      "game_id": "0022600024",
+      "date": "2026-10-30",
+      "graded": true,
+      "matchup": "DEN vs PHX",
+      "prior_n_a": 1,
+      "prior_n_b": 1,
+      "pred_margin": 54.0,
+      "actual_margin": 7,
+      "pred_total": 187.0,
+      "actual_total": 247,
+      "winner_correct": true,
+      "margin_error": -47.0,
+      "total_error": 60.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-30",
+      "game_url": "https://www.nba.com/game/den-vs-phx-0022600024"
+    },
+    {
+      "game_id": "0022600147",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "POR vs UTA",
+      "prior_n_a": 2,
+      "prior_n_b": 3,
+      "pred_margin": 32.83,
+      "actual_margin": 22,
+      "pred_total": 237.33,
+      "actual_total": 202,
+      "winner_correct": true,
+      "margin_error": -10.83,
+      "total_error": -35.33,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/por-vs-uta-0022600147"
+    },
+    {
+      "game_id": "0022600148",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "PHI vs CHA",
+      "prior_n_a": 2,
+      "prior_n_b": 4,
+      "pred_margin": 21.0,
+      "actual_margin": 5,
+      "pred_total": 195.75,
+      "actual_total": 213,
+      "winner_correct": true,
+      "margin_error": -16.0,
+      "total_error": 17.25,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/phi-vs-cha-0022600148"
+    },
+    {
+      "game_id": "0022600149",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "ATL vs NOP",
+      "prior_n_a": 3,
+      "prior_n_b": 3,
+      "pred_margin": 19.67,
+      "actual_margin": -22,
+      "pred_total": 235.67,
+      "actual_total": 220,
+      "winner_correct": false,
+      "margin_error": -41.67,
+      "total_error": -15.67,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/atl-vs-nop-0022600149"
+    },
+    {
+      "game_id": "0022600151",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "CLE vs MIL",
+      "prior_n_a": 1,
+      "prior_n_b": 3,
+      "pred_margin": 27.0,
+      "actual_margin": 25,
+      "pred_total": 234.67,
+      "actual_total": 247,
+      "winner_correct": true,
+      "margin_error": -2.0,
+      "total_error": 12.33,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/cle-vs-mil-0022600151"
+    },
+    {
+      "game_id": "0022600152",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "MIN vs SAS",
+      "prior_n_a": 4,
+      "prior_n_b": 2,
+      "pred_margin": 16.0,
+      "actual_margin": -10,
+      "pred_total": 235.25,
+      "actual_total": 232,
+      "winner_correct": false,
+      "margin_error": -26.0,
+      "total_error": -3.25,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/min-vs-sas-0022600152"
+    },
+    {
+      "game_id": "0022600150",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "SAC vs MEM",
+      "prior_n_a": 2,
+      "prior_n_b": 2,
+      "pred_margin": -28.0,
+      "actual_margin": -31,
+      "pred_total": 225.0,
+      "actual_total": 241,
+      "winner_correct": true,
+      "margin_error": -3.0,
+      "total_error": 16.0,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/sac-vs-mem-0022600150"
+    },
+    {
+      "game_id": "0022600153",
+      "date": "2026-10-31",
+      "graded": true,
+      "matchup": "OKC vs HOU",
+      "prior_n_a": 1,
+      "prior_n_b": 4,
+      "pred_margin": -36.25,
+      "actual_margin": -21,
+      "pred_total": 217.25,
+      "actual_total": 217,
+      "winner_correct": true,
+      "margin_error": 15.25,
+      "total_error": -0.25,
+      "source_url": "https://www.nba.com/games?date=2026-10-31",
+      "game_url": "https://www.nba.com/game/okc-vs-hou-0022600153"
+    },
+    {
+      "game_id": "0022600154",
+      "date": "2026-11-01",
+      "graded": true,
+      "matchup": "BOS vs ORL",
+      "prior_n_a": 2,
+      "prior_n_b": 4,
+      "pred_margin": 22.0,
+      "actual_margin": 11,
+      "pred_total": 225.5,
+      "actual_total": 205,
+      "winner_correct": true,
+      "margin_error": -11.0,
+      "total_error": -20.5,
+      "source_url": "https://www.nba.com/games?date=2026-11-01",
+      "game_url": "https://www.nba.com/game/bos-vs-orl-0022600154"
+    },
+    {
+      "game_id": "0022600155",
+      "date": "2026-11-01",
+      "graded": true,
+      "matchup": "BKN vs IND",
+      "prior_n_a": 2,
+      "prior_n_b": 4,
+      "pred_margin": -2.0,
+      "actual_margin": 8,
+      "pred_total": 214.0,
+      "actual_total": 188,
+      "winner_correct": false,
+      "margin_error": 10.0,
+      "total_error": -26.0,
+      "source_url": "https://www.nba.com/games?date=2026-11-01",
+      "game_url": "https://www.nba.com/game/bkn-vs-ind-0022600155"
+    },
+    {
+      "game_id": "0022600156",
+      "date": "2026-11-01",
+      "graded": true,
+      "matchup": "LAC vs GSW",
+      "prior_n_a": 4,
+      "prior_n_b": 4,
+      "pred_margin": -5.5,
+      "actual_margin": -12,
+      "pred_total": 217.5,
+      "actual_total": 236,
+      "winner_correct": true,
+      "margin_error": -6.5,
+      "total_error": 18.5,
+      "source_url": "https://www.nba.com/games?date=2026-11-01",
+      "game_url": "https://www.nba.com/game/lac-vs-gsw-0022600156"
+    },
+    {
+      "game_id": "0022600157",
+      "date": "2026-11-01",
+      "graded": true,
+      "matchup": "TOR vs LAL",
+      "prior_n_a": 4,
+      "prior_n_b": 4,
+      "pred_margin": 11.75,
+      "actual_margin": -6,
+      "pred_total": 235.0,
+      "actual_total": 256,
+      "winner_correct": false,
+      "margin_error": -17.75,
+      "total_error": 21.0,
+      "source_url": "https://www.nba.com/games?date=2026-11-01",
+      "game_url": "https://www.nba.com/game/tor-vs-lal-0022600157"
+    }
+  ],
+  "parlay_attempts": [
+    {
+      "date": "2026-10-23",
+      "legs": [
+        "POR vs SAC",
+        "MEM vs GSW"
+      ],
+      "hit": true,
+      "source_url": "https://www.nba.com/games?date=2026-10-23"
+    },
+    {
+      "date": "2026-10-28",
+      "legs": [
+        "MIA vs ATL",
+        "ORL vs TOR"
+      ],
+      "hit": false,
+      "source_url": "https://www.nba.com/games?date=2026-10-28"
+    },
+    {
+      "date": "2026-10-30",
+      "legs": [
+        "DEN vs PHX",
+        "ORL vs TOR"
+      ],
+      "hit": false,
+      "source_url": "https://www.nba.com/games?date=2026-10-30"
+    },
+    {
+      "date": "2026-10-31",
+      "legs": [
+        "OKC vs HOU",
+        "POR vs UTA"
+      ],
+      "hit": true,
+      "source_url": "https://www.nba.com/games?date=2026-10-31"
+    },
+    {
+      "date": "2026-11-01",
+      "legs": [
+        "BOS vs ORL",
+        "TOR vs LAL"
+      ],
+      "hit": false,
+      "source_url": "https://www.nba.com/games?date=2026-11-01"
+    }
+  ],
+  "gates": [
+    {
+      "id": "G01",
+      "name": "Official provenance",
+      "rule": "Every input value has an official source URL; unverifiable values blank + flagged.",
+      "threshold": "100% of rows",
+      "source_urls": [
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "id": "G02",
+      "name": "Pre-registration",
+      "rule": "Strategy specification frozen in the repository before any evaluation.",
+      "threshold": "frozen spec present",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    },
+    {
+      "id": "G03",
+      "name": "No look-ahead",
+      "rule": "Only official data strictly earlier than the game date may be used.",
+      "threshold": "0 violations",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "G04",
+      "name": "Minimum sample",
+      "rule": "A strategy needs at least 200 graded, independent observations.",
+      "threshold": "n >= 200",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "G05",
+      "name": "Chronological out-of-sample holdout",
+      "rule": "At least 30% of observations held out chronologically, with >= 100 holdout observations.",
+      "threshold": "holdout n >= 100",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "G06",
+      "name": "Significance after multiple-testing control",
+      "rule": "Two-sided p < 0.05 after Benjamini-Hochberg FDR across the strategy family.",
+      "threshold": "q < 0.05",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    },
+    {
+      "id": "G07",
+      "name": "Luck removal / effect size",
+      "rule": "95% Wilson lower bound on accuracy must exceed the chance baseline, and a permutation test must reject the luck null.",
+      "threshold": "CI lower > 0.500 and permutation p < 0.05",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    },
+    {
+      "id": "G08",
+      "name": "Family-wise dependence control",
+      "rule": "All tested signals entered into one pre-declared family; parlay legs screened with a measured correlation and CI.",
+      "threshold": "pre-declared family + measured rho",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional"
+      ]
+    },
+    {
+      "id": "G09",
+      "name": "Reproducibility",
+      "rule": "Results regenerate identically from checked-in official data + code; site has no broken links.",
+      "threshold": "byte-identical regeneration",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/engine/analysis.py"
+      ]
+    },
+    {
+      "id": "G10",
+      "name": "Market-independent verification",
+      "rule": "An official closing line must exist to compute closing-line value; no official source publishes odds.",
+      "threshold": "official closing line available",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    }
+  ],
+  "strategies": [
+    {
+      "id": "OW-S01",
+      "category": "Single bet — spread",
+      "name": "Prior-margin power rating (walk-forward)",
+      "spec": "Predicted first-listed margin = mean prior margin(A) - mean prior margin(B), computed only from official final scores dated before the game.",
+      "metric_label": "Pred/actual margin correlation",
+      "metric_value": 0.332,
+      "p_value": 0.042,
+      "q_value": 0.1681,
+      "n": 38,
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=38 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=38 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "id": "OW-S02",
+      "category": "Single bet — moneyline",
+      "name": "Prior-margin winner pick (walk-forward)",
+      "spec": "Back the team with the higher prior mean margin; graded against the official final score.",
+      "metric_label": "Winner accuracy",
+      "metric_value": 0.6053,
+      "p_value": 0.2559,
+      "q_value": 0.5118,
+      "n": 38,
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=38 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=38 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "id": "OW-S03",
+      "category": "Single bet — total",
+      "name": "Prior scoring-average total (walk-forward)",
+      "spec": "Predicted total = mean prior points scored(A) + mean prior points scored(B); graded by error against the official final total.",
+      "metric_label": "Pred/actual total correlation",
+      "metric_value": -0.07,
+      "p_value": 0.6772,
+      "q_value": 0.6772,
+      "n": 38,
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=38 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=38 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "id": "OW-S04",
+      "category": "Parlay — 2 legs",
+      "name": "Two-leg cross-game winner parlay",
+      "spec": "On each date, parlay the predicted winners of the two games with the largest |predicted margin|; hit requires both leg wins. Chance baseline under independence = 0.25.",
+      "metric_label": "Parlay hit rate",
+      "metric_value": 0.4,
+      "p_value": 0.6045,
+      "q_value": 0.6772,
+      "n": 5,
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=5 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=5 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "id": "OW-S05",
+      "category": "Player prop — single",
+      "name": "Season-average fair prop line",
+      "spec": "Originate a fair PTS/REB/AST line equal to the official season average. No official source publishes graded prop outcomes, so no performance metric can be computed.",
+      "metric_label": "Graded prop observations",
+      "metric_value": "",
+      "p_value": "",
+      "q_value": "",
+      "n": 0,
+      "unverified_fields": [
+        "metric_value",
+        "p_value",
+        "q_value"
+      ],
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=0 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=0 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "id": "OW-S06",
+      "category": "Player prop combo — SGP",
+      "name": "Correlated PTS+REB+AST combo",
+      "spec": "Construct a 3-leg same-player combo from official season averages; report the measured inter-leg correlations. Correlation-adjusted joint price requires a joint distribution no official source publishes.",
+      "metric_label": "Correlation-adjusted joint price",
+      "metric_value": "",
+      "p_value": "",
+      "q_value": "",
+      "n": 0,
+      "unverified_fields": [
+        "metric_value",
+        "p_value",
+        "q_value"
+      ],
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "gate_results": [
+        {
+          "gate": "G01",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G02",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G03",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G04",
+          "result": "fail",
+          "detail": "graded n=0 < 200"
+        },
+        {
+          "gate": "G05",
+          "result": "fail",
+          "detail": "held-out n=0 < 100"
+        },
+        {
+          "gate": "G06",
+          "result": "fail",
+          "detail": ""
+        },
+        {
+          "gate": "G07",
+          "result": "fail",
+          "detail": "Wilson 95% lower bound=0.447; permutation p=0.1268"
+        },
+        {
+          "gate": "G08",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G09",
+          "result": "pass",
+          "detail": ""
+        },
+        {
+          "gate": "G10",
+          "result": "fail",
+          "detail": "no official closing line exists (blank + flagged I-12)"
+        }
+      ],
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    }
+  ],
+  "leaderboard": [
+    {
+      "strategy_id": "OW-S01",
+      "name": "Prior-margin power rating (walk-forward)",
+      "category": "Single bet — spread",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "strategy_id": "OW-S02",
+      "name": "Prior-margin winner pick (walk-forward)",
+      "category": "Single bet — moneyline",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "strategy_id": "OW-S03",
+      "name": "Prior scoring-average total (walk-forward)",
+      "category": "Single bet — total",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "strategy_id": "OW-S04",
+      "name": "Two-leg cross-game winner parlay",
+      "category": "Parlay — 2 legs",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "strategy_id": "OW-S05",
+      "name": "Season-average fair prop line",
+      "category": "Player prop — single",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    },
+    {
+      "strategy_id": "OW-S06",
+      "name": "Correlated PTS+REB+AST combo",
+      "category": "Player prop combo — SGP",
+      "gates_passed": 5,
+      "gates_total": 10,
+      "status": "NOT VALIDATED",
+      "reward_points": 0,
+      "reward_note": "No reward: strategy did not pass all validation gates.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ],
+      "kind": "derived",
+      "note": "DERIVED — reproducible computation from official values; not an official NBA publication. Inputs and code are linked on every row (see Flags I-13)."
+    }
+  ],
+  "reward_policy": [
+    {
+      "tier": "1st",
+      "requirement": "All 10 gates pass AND highest out-of-sample score",
+      "reward": "0 (no eligible strategies)",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    },
+    {
+      "tier": "2nd",
+      "requirement": "All 10 gates pass AND second-highest score",
+      "reward": "0 (no eligible strategies)",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    },
+    {
+      "tier": "3rd",
+      "requirement": "All 10 gates pass AND third-highest score",
+      "reward": "0 (no eligible strategies)",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    },
+    {
+      "tier": "Activation",
+      "requirement": "Rewards are unfunded; a strategy earns credit only after gate activation and prospective replication.",
+      "reward": "unfunded",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "finding": "All 30 official 2026-27 standings rows and all 30 official team-stat rows were transcribed from NBA.com and are reproduced here with per-row official links.",
+      "source_urls": [
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/teams/traditional"
+      ]
+    },
+    {
+      "id": "F02",
+      "finding": "A 56-game official final-score sample across six dates (2026-10-21 to 2026-11-01) is the largest verified dataset available; 10 of the 56 games are NBA Cup group-play games (I-14).",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "F03",
+      "finding": "Numeric correlation coefficients ARE computable from official inputs. The strongest relationship with winning percentage is reported with r, p, 95% CI and BH-FDR q on the Correlations page. These are derived in-sample descriptive statistics, not official publications and not predictive skill (I-13).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ]
+    },
+    {
+      "id": "F04",
+      "finding": "The NBA Stats FAQ itself publishes an official illustrative correlation: team PIE rating and winning percentage correlate at R-squared .908. It is historical FAQ context, not a 2026-27 measurement or a betting signal.",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    },
+    {
+      "id": "F05",
+      "finding": "Own4 fair lines for the 15 official 2026-11-02 games were originated from official +/- ratings and official per-game scoring averages, with a margin dispersion estimated from official results. No market price was copied or inferred (I-12).",
+      "source_urls": [
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "id": "F06",
+      "finding": "Cross-game margin correlation was measured from official results and is reported with a confidence interval, so parlay independence is treated as an assumption to test rather than a fact.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "F07",
+      "finding": "Same-player prop legs are not independent: PPG/RPG, PPG/APG and RPG/APG correlations across the 30 official season leaders are reported. A correlation-adjusted joint price is left blank because no official source publishes the joint distribution.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-11-02"
+      ]
+    },
+    {
+      "id": "F08",
+      "finding": "A strictly walk-forward backtest (only prior-date official scores) graded 38 of 56 games. Winner accuracy 0.6053 (95% Wilson CI [0.447, 0.744]) with exact binomial p=0.2559 and permutation p=0.1268: chance cannot be excluded.",
+      "source_urls": [
+        "https://www.nba.com/games?date=2026-10-21",
+        "https://www.nba.com/games?date=2026-10-23",
+        "https://www.nba.com/games?date=2026-10-28",
+        "https://www.nba.com/games?date=2026-10-30",
+        "https://www.nba.com/games?date=2026-10-31",
+        "https://www.nba.com/games?date=2026-11-01"
+      ]
+    },
+    {
+      "id": "F09",
+      "finding": "No strategy passes all ten validation gates. Sample-size, luck-removal and market-independent-verification gates fail, so the leaderboard awards zero rewards. This is the intended 'remove luck / selectively skill-based' outcome: no strategy is promoted on a short, noisy sample.",
+      "source_urls": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/official/results.json"
+      ]
+    },
+    {
+      "id": "F10",
+      "finding": "The merged site from earlier sessions was re-audited line by line. Verified claims were retained; stale links, a source/claim mismatch, imprecise wording, an image-only statistic, an outdated helpline number and a conflicting official score are published on the Flagged for Review page.",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq",
+        "https://www.nba.com/stats/teams/traditional",
+        "https://www.nba.com/stats/help/faq"
+      ]
+    },
+    {
+      "id": "F11",
+      "finding": "The NBA Stats FAQ restricts downloading statistics for academic or personal use. This project used no automated download or scraping; values were read from displayed pages and each row links back to the official page for manual review (I-08).",
+      "source_urls": [
+        "https://www.nba.com/stats/help/faq"
+      ]
+    }
+  ]
+}
