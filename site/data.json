@@ -1,0 +1,120 @@
+{
+  "sources": [
+    {
+      "id": "glossary",
+      "name": "NBA Stats glossary",
+      "url": "https://www.nba.com/stats/help/glossary",
+      "finding": "Pace is possessions per 48 minutes; offensive rating is points per 100 possessions; net rating is offensive minus defensive rating.",
+      "status": "verified"
+    },
+    {
+      "id": "faq",
+      "name": "NBA Stats FAQ",
+      "url": "https://www.nba.com/stats/help/faq",
+      "finding": "Pace changes raw per-game statistics; compare on a per-possession basis.",
+      "status": "verified"
+    },
+    {
+      "id": "injury",
+      "name": "NBA official injury reports",
+      "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+      "finding": "Teams submit participation statuses before games; reports are continually updated. No individual report snapshot is imported.",
+      "status": "verified"
+    },
+    {
+      "id": "stats",
+      "name": "NBA Stats games",
+      "url": "https://www.nba.com/stats/games",
+      "finding": "Candidate source for completed game results; historical dataset has not been ingested or audited.",
+      "status": "unverified"
+    },
+    {
+      "id": "ncpg",
+      "name": "Singapore National Council on Problem Gambling",
+      "url": "https://www.ncpg.org.sg/rg/about-rg/what-is-responsible-gambling",
+      "finding": "Set a gambling budget and time/frequency limits; gambling involves risk.",
+      "status": "verified"
+    }
+  ],
+  "strategies": [
+    {
+      "id": "single",
+      "name": "Single-game side or total",
+      "signal": "Estimate possession-adjusted scoring distribution; compare calibrated probability with offered implied probability after costs.",
+      "inputs": "NBA pace, ratings, schedule, injury timestamp; independently licensed timestamped market odds",
+      "correlation": "Not applicable for one outcome; model-feature dependencies must still be audited.",
+      "gate": "Out-of-time calibration + positive net expected value + adequate sample + valid market snapshot",
+      "source": "glossary",
+      "state": "research only"
+    },
+    {
+      "id": "parlay",
+      "name": "Cross-game parlay",
+      "signal": "Estimate joint probability with simulation, not product of marginal probabilities unless independence is tested.",
+      "inputs": "Verified single-leg models; simultaneous market quotes and settlement rules",
+      "correlation": "Estimate pairwise outcome covariance and uncertainty from held-out games; joint dependency is not identified by a single correlation coefficient.",
+      "gate": "All legs pass single-leg gate; joint model beats independent baseline and net offered payout threshold",
+      "source": "faq",
+      "state": "research only"
+    },
+    {
+      "id": "props",
+      "name": "Player prop combination",
+      "signal": "Model minutes and per-minute production conditional on availability and rotation; simulate shared game environment.",
+      "inputs": "NBA box scores and timestamped injury report; licensed prop lines and rules",
+      "correlation": "Measure residual within-game correlation of minutes, pace and production; bootstrap by game/date.",
+      "gate": "Report fresh at freeze time; calibrated joint probabilities and robust positive net EV",
+      "source": "injury",
+      "state": "research only"
+    }
+  ],
+  "gates": [
+    {
+      "name": "Provenance",
+      "rule": "Every observation has official game ID, source URL, event timestamp and capture timestamp; missing facts stay blank.",
+      "source": "stats"
+    },
+    {
+      "name": "No leakage",
+      "rule": "Use only facts public before the quoted line was available; freeze training, validation and test chronologically.",
+      "source": "stats"
+    },
+    {
+      "name": "Probability quality",
+      "rule": "Compare log loss and Brier score against simple predeclared baselines; publish reliability bins and uncertainty intervals.",
+      "source": "faq"
+    },
+    {
+      "name": "Economic quality",
+      "rule": "Track settled ROI, net expected value and closing-line comparison with rules, voids and fees captured; no claim from backtest alone.",
+      "source": "stats"
+    },
+    {
+      "name": "Selection & safety",
+      "rule": "Reject stale quotes, unclear settlement, thin samples or missing injury snapshots; limit risk and never chase losses.",
+      "source": "ncpg"
+    }
+  ],
+  "flags": [
+    {
+      "item": "Historical market prices and settlement terms",
+      "reason": "No official verified public bookmaker feed or license established. No odds, expected value or realized ROI can be calculated.",
+      "source": "stats"
+    },
+    {
+      "item": "Empirical correlations / rankings",
+      "reason": "No timestamped paired outcome dataset has been collected; correlation values and leaderboards remain blank.",
+      "source": "glossary"
+    },
+    {
+      "item": "Current player availability",
+      "reason": "Official injury-report landing page is verified, but no timestamped player-level snapshot is imported. Do not assume current availability.",
+      "source": "injury"
+    },
+    {
+      "item": "Luck elimination",
+      "reason": "Uncertainty in sporting outcomes cannot be eliminated. Skill can only be evaluated via pre-registered, out-of-time calibration and repeated trials.",
+      "source": "faq"
+    }
+  ]
+}

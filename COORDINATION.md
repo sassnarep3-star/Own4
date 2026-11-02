@@ -4,8 +4,8 @@ Session: `arena/7b975fa4-own4` (Arena requires work on this fixed branch; no ses
 
 | Task | Status | Owner | File scope | Sources / verification / irregularities |
 | --- | --- | --- | --- | --- |
-| Official-source research and requirements | in progress | arena/7b975fa4-own4 | `research/**`, `README.md` | Pending source verification. |
-| Dashboard, data, tests and Pages workflow | in progress | arena/7b975fa4-own4 | `site/**`, `.github/**`, `scripts/**` | Pending build and link checks. |
+| Official-source research and requirements | done | arena/7b975fa4-own4 | `research/**`, `README.md` | Checked NBA glossary, FAQ, official injury report landing page and Singapore NCPG; see research/EXECUTIVE_SUMMARY.md. No empirical odds or coefficients verified. |
+| Dashboard, data, tests and Pages workflow | done | arena/7b975fa4-own4 | `site/**`, `.github/**`, `scripts/**` | `python scripts/check.py` passed; external link availability and Pages deployment pending. |
 | Final integration and publication | unclaimed | — | shared outputs, PR and Pages | Must verify before merge. |
 
 ## Requests and handoffs
