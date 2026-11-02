@@ -18,6 +18,7 @@ NAV = [
     ("pages/correlations.html", "Correlations"),
     ("pages/flagged.html", "Flagged for Review"),
     ("pages/sources.html", "Sources"),
+    ("lab/index.html", "Data Lab (real data & results)"),
 ]
 
 def page(title, body, path):
@@ -54,7 +55,7 @@ page("Dashboard", f"""
 </div>
 <h2>Strategies overview</h2>
 <table><tr><th>ID</th><th>Category</th><th>Strategy</th><th>Sources</th></tr>{rows}</table>
-<p class="note">Full detail on the <a href="pages/strategies.html">Strategies</a> page. See <a href="EXECUTIVE_SUMMARY.md">EXECUTIVE_SUMMARY.md</a> for the summary.</p>
+<p class="note"><b>Real data and measured results</b> (92 official games, own lines for 2 Nov 2026, walk-forward leaderboard, correlations, data audit) are in the <a href="lab/index.html">Data Lab</a>. Full detail on the <a href="pages/strategies.html">Strategies</a> page. See <a href="EXECUTIVE_SUMMARY.md">EXECUTIVE_SUMMARY.md</a> for the summary.</p>
 """, "index.html")
 
 # Strategies
