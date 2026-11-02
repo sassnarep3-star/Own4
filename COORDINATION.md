@@ -16,8 +16,8 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 |----|------|--------|---------------|------------------------|
 | T1 | Repo review (line-by-line) | in progress | bf34205f | `repo_review/**` |
 | T2 | Official data collection + reconciliation | done | bf34205f | `data/**`, `scripts/verify_data.py` |
-| T3 | Own-line model + pre-tip lines for 2026-11-02 slate | in progress | bf34205f | `model/**`, `data/own_lines_*.csv` |
-| T4 | Strategy catalogue, leaderboard, validation gates | in progress | bf34205f | `strategies/**` |
+| T3 | Own-line model + pre-tip lines for 2026-11-02 slate | done | bf34205f | `model/**`, `data/own_lines_*.csv` |
+| T4 | Strategy catalogue, leaderboard, validation gates | done | bf34205f | `strategies/**` |
 | T5 | Correlation analysis | in progress | bf34205f | `analysis/**` |
 | T6 | Site generator + pages | unclaimed | bf34205f (planned) | `site_src/**`, `assets/**` |
 | T7 | Executive summary | unclaimed | bf34205f (planned) | `site_src/executive_summary*` |
@@ -28,3 +28,4 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 
 - 2026-11-02 17:5x UTC — session `bf34205f` read repo (README.md only, content `# Own4`), created this file, claimed T1 and T2.
 - 2026-11-02 18:4x UTC — T2 done: 92 games + official tables + Nov 2 slate committed; `scripts/verify_data.py` passes 11/11 checks (DAL/ATL PTS/g differ by 0.33/0.19 between scoreboard sums and the stats page; margins agree; flagged). Claimed T3, T4, T5.
+- 2026-11-02 18:1x UTC — T3/T4 done. Gates pre-registered in commit 0b97f52 BEFORE `model/evaluate.py` was first run. Own lines for the 15-game Nov 2 slate committed before the first tip (7:00 PM ET = 00:00 UTC Nov 3). Result: no strategy is Forecast-validated (n=92 < 300; CIs include 0); 3 blocked for data.
