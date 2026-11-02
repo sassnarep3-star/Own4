@@ -3,7 +3,7 @@
 every table body row carries at least one https link (official source)."""
 import os, re, sys, urllib.parse
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-OK_HOSTS = {"www.nba.com", "github.com", "docs.github.com"}
+OK_HOSTS = {"www.nba.com", "github.com", "docs.github.com", "sassnarep3-star.github.io"}
 errs = []; n_links = n_rows = 0; pages = []
 for dp, dn, fn in os.walk(ROOT):
     dn[:] = [d for d in dn if d not in (".git", "node_modules")]
