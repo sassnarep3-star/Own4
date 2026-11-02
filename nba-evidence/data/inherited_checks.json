@@ -1,0 +1,32 @@
+[
+  {
+    "command": "python scripts/build.py",
+    "exit": 0,
+    "output": "Built 8 pages; 47 source-linked rows.\n"
+  },
+  {
+    "command": "python -m unittest discover -s tests -v",
+    "exit": 0,
+    "output": "test_official_sources (test_site.Site.test_official_sources) ... ok\ntest_pages_and_links (test_site.Site.test_pages_and_links) ... ok\ntest_unverified_metrics_blank (test_site.Site.test_unverified_metrics_blank) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.009s\n\nOK\n"
+  },
+  {
+    "command": "python scripts/verify_data.py",
+    "exit": 0,
+    "output": "PASS 30 distinct teams \nPASS games: unique game_id 92 games\nPASS game-level data reproduces official 2026-27 team table (GP, W, L, +/- per game) for all 30 teams []\nPASS game-level PTS/g equals official stats page for 28/30 teams; DAL and ATL differ slightly (flagged, unresolved) games minus stats page, pts/g: {'DAL': 0.33, 'ATL': 0.19}\nPASS 2026-27 standings W-L and home/road splits equal split recomputed from game-level data (30 teams) []\nPASS 2025-26: W+L=82; home+road+neutral = overall; standings = stats-page W-L; home split on stats page = standings home record (30 teams) []\nPASS 2025-26 all-games +/- sums to ~0 (tol = 3 sd of rounding noise) sum(GP*+/-)=-16.4, tol=38.9\nPASS 2026-27 +/- GP-weighted sums to ~0 sum(GP*+/-)=0.5, tol=3.1\nPASS 2025-26 home +/-: GP-weighted league mean is the home-court margin (informational) 1.725 pts/game over 1225 home games\nPASS slate: 15 games, each of the 30 teams exactly once \nPASS slate: game ids contiguous 0022600158..172 \n"
+  },
+  {
+    "command": "python scripts/check_site.py",
+    "exit": 0,
+    "output": "11 pages, 758 links, 438 table rows checked, 0 problems\n"
+  },
+  {
+    "command": "python engine/verify.py",
+    "exit": 1,
+    "output": "VERIFICATION: FAIL (29 checks, 27 passed)\n  FAIL: Dashboard directory links to every generated page \u2014 Pages not reachable from the dashboard: ['own4-dashboard/index.html', 'own4-dashboard/pages/correlations.html', 'own4-dashboard/pages/data.html', 'own4-dashboard/pages/executive-summary.html', 'own4-dashboard/pages/flagged.html', 'own4-dashboard/pages/leaderboard.html', 'own4-dashboard/pages/lines.html', 'own4-dashboard/pages/repo-review.html', 'own4-dashboard/pages/requirements.html', 'own4-dashboard/pages/skill-vs-luck.html', 'own4-dashboard/pages/sources.html', 'own4-dashboard/pages/strategies.html']\n  FAIL: Legacy docs/ generator reproduces committed pages \u2014 python scripts/build.py + git diff --exit-code -- docs\n"
+  },
+  {
+    "command": "python own4-dashboard/scripts/check_links.py",
+    "exit": 0,
+    "output": "checked 14 HTML pages, 279 local links, 1006 data rows\nerrors=0 warnings=0\n"
+  }
+]
