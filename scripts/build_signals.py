@@ -174,7 +174,7 @@ def parse_nba_games():
                 "home_leader": home_leader,
                 "away_leader": away_leader,
                 "source_url": (
-                    f"https://www.nba.com/game/{slug}" if slug
+                    f"https://www.nba.com/game/{slug}-{gid}" if slug
                     else NBA_GAMES_URL.format(d=date)
                 ),
                 "source_date_page": NBA_GAMES_URL.format(d=date),

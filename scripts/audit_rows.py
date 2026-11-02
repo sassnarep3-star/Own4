@@ -96,8 +96,13 @@ def audit_json_rows():
 
     rows_with_sources("standings.json", lambda d: d["east"] + d["west"])
     rows_with_sources("prior_2025-26.json", lambda d: d["east"] + d["west"])
-    rows_with_sources("games_official.json", lambda d: d["games"])
-    rows_with_sources("games_official.json", lambda d: d["scheduled"])
+    def _games(d):
+        for g in d["games"] + d["scheduled"]:
+            if g.get("game_id") and g.get("game_id") not in str(g.get("source_url", "")) \
+               and "nba.com/games?date=" not in str(g.get("source_url", "")):
+                add("games_official.json", f"game {g['game_id']} source_url missing game id: {g.get('source_url')}")
+        return d["games"] + d["scheduled"]
+    rows_with_sources("games_official.json", _games)
     rows_with_sources("model_ratings.json", lambda d: d["ratings"])
     rows_with_sources("own_lines_2026-11-02.json", lambda d: d["lines"])
     rows_with_sources("signals.json", lambda d: d["items"])
