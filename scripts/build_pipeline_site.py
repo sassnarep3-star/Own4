@@ -139,7 +139,7 @@ def build():
             ("P4", "done", "Empirical signals: home, rest, margins, totals, correlations, prop benchmarks"),
             ("P5", "done", "Row-level source audit (scripts/audit_rows.py)"),
             ("P6", "done", "This site section (dashboard, model, signals, strategies, verification, flagged, sources)"),
-            ("P7", "in progress", "Integration: merge main, link check, PR → main, merge, Pages deploy, record"),
+            ("P7", "done", "Integration: merged main (all sessions preserved), CI green, PR #18 merged, Pages deployed, record committed"),
         ]
     )
     body = f"""
