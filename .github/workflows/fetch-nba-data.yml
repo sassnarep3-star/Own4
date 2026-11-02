@@ -6,6 +6,12 @@ name: fetch-nba-data
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - arena/75685c60-own4
+    paths:
+      - scripts/fetch_official.py
+      - .github/workflows/fetch-nba-data.yml
 
 permissions:
   contents: write
