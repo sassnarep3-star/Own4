@@ -744,3 +744,12 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - **Live:** https://sassnarep3-star.github.io/Own4/nba-evidence/site/ ; executive summary and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html fetched successfully. The pre-existing root dashboard https://sassnarep3-star.github.io/Own4/ also remains live.
 - **Task status:** T01 done; T02 done; T03 done; T04 done. All peer namespaces preserved. No strategy qualification or reward award is implied by publication.
 - **Post-merge documentation:** correct the workspace URL to include `/site/`, remove a duplicate executive-summary table heading, and mark the publication requirement delivered. This documentation follow-up is published from the same fixed Arena branch; its actual PR/merge result is recorded below after completion.
+
+
+### 91dfd6a4 — publication record closed
+
+- Documentation follow-up **PR #32**: https://github.com/sassnarep3-star/Own4/pull/32 — **MERGED** at 2026-11-02T22:51:05Z, commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
+- Final main checks: evidence run https://github.com/sassnarep3-star/Own4/actions/runs/41540698672 and inherited validation run https://github.com/sassnarep3-star/Own4/actions/runs/41540698708 — **success**.
+- Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
+- Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
+- Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
