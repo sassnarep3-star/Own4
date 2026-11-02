@@ -1,0 +1,564 @@
+{
+  "retrieved_utc": "2026-11-02",
+  "method": "Pearson r and Spearman rho on official NBA.com values. Two-sided permutation p-value (20,000 shuffles, seed 20261102). Percentile bootstrap 95% CI (5,000 resamples, seed 20261102). Benjamini-Hochberg FDR q across all 24 reported correlations.",
+  "sources": [
+    "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+    "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+    "https://www.nba.com/stats/teams/traditional?Season=2026-27",
+    "https://www.nba.com/standings",
+    "https://www.nba.com/games?date=2026-11-04",
+    "https://www.nba.com/stats/help/glossary"
+  ],
+  "count": 24,
+  "rows": [
+    {
+      "id": "2025-26 WIN% ~ NetRtg",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "NetRtg",
+      "y": "2025-26 WIN%",
+      "pearson_r": 0.9706771222554095,
+      "spearman_rho": 0.950663134869194,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.9431504893422961,
+        0.9867622026311557
+      ],
+      "r_squared": 0.9422140756700431,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Systematic strength vs wins over a full official season.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 WIN% ~ OffRtg",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "OffRtg",
+      "y": "2025-26 WIN%",
+      "pearson_r": 0.8903421895184997,
+      "spearman_rho": 0.8975161467637964,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.8288693542490704,
+        0.9391839200743053
+      ],
+      "r_squared": 0.7927092144365961,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Offensive rating alone.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 WIN% ~ DefRtg",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "DefRtg",
+      "y": "2025-26 WIN%",
+      "pearson_r": -0.8868788940697289,
+      "spearman_rho": -0.8370849951227288,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        -0.9542644878615888,
+        -0.7814720088779153
+      ],
+      "r_squared": 0.7865541727463453,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Defensive rating alone; a negative r is expected.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 WIN% ~ PACE",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "PACE",
+      "y": "2025-26 WIN%",
+      "pearson_r": -0.3703851821989784,
+      "spearman_rho": -0.38979861434421026,
+      "permutation_p": 0.0423978801059947,
+      "bootstrap_ci95": [
+        -0.628662658386915,
+        -0.06453247678920893
+      ],
+      "r_squared": 0.13718518319257045,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Pace is a null-style control signal.",
+      "bh_q": 0.053555216975993296,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 NetRtg ~ PACE",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "PACE",
+      "y": "2025-26 NetRtg",
+      "pearson_r": -0.380970303106143,
+      "spearman_rho": -0.38429016466399646,
+      "permutation_p": 0.037798110094495276,
+      "bootstrap_ci95": [
+        -0.6686274975627008,
+        -0.04125631070431443
+      ],
+      "r_squared": 0.14513837184878647,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Parlay-leg check: are strength and pace independent legs?",
+      "bh_q": 0.0503974801259937,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 OffRtg ~ PACE",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "PACE",
+      "y": "2025-26 OffRtg",
+      "pearson_r": -0.4076979654229118,
+      "spearman_rho": -0.4494769752992867,
+      "permutation_p": 0.025498725063746813,
+      "bootstrap_ci95": [
+        -0.7051667249651571,
+        -0.041114503209885404
+      ],
+      "r_squared": 0.1662176310099818,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Parlay-leg check: offense vs pace.",
+      "bh_q": 0.040572971351432424,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2025-26 OffRtg ~ DefRtg",
+      "group": "2025-26 season (n=30, 82 GP each)",
+      "n": 30,
+      "x": "DefRtg",
+      "y": "2025-26 OffRtg",
+      "pearson_r": -0.6770053320263411,
+      "spearman_rho": -0.7172921010360543,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        -0.8301001111548565,
+        -0.47752722695039584
+      ],
+      "r_squared": 0.4583362195920963,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Do teams trade offence for defence?",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 WIN% ~ NetRtg",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "NetRtg",
+      "y": "2026-27 WIN%",
+      "pearson_r": 0.8863138960853636,
+      "spearman_rho": 0.8755696290900613,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.794310963587414,
+        0.9459790001705259
+      ],
+      "r_squared": 0.7855523223940167,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Concurrent, small-sample; NOT out-of-sample.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 WIN% ~ OffRtg",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "OffRtg",
+      "y": "2026-27 WIN%",
+      "pearson_r": 0.6988608215869915,
+      "spearman_rho": 0.7012269362759597,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.4654549501400467,
+        0.876699909709154
+      ],
+      "r_squared": 0.4884064479492447,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Concurrent.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 WIN% ~ DefRtg",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "DefRtg",
+      "y": "2026-27 WIN%",
+      "pearson_r": -0.7436133527865278,
+      "spearman_rho": -0.7550682468440245,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        -0.8570908651949609,
+        -0.5825983738627833
+      ],
+      "r_squared": 0.5529608184424212,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Concurrent.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 PTS ~ NetRtg",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "NetRtg",
+      "y": "2026-27 PTS",
+      "pearson_r": 0.623562734604243,
+      "spearman_rho": 0.66815047281429,
+      "permutation_p": 0.0002999850007499625,
+      "bootstrap_ci95": [
+        0.4407102732151968,
+        0.7822162636094929
+      ],
+      "r_squared": 0.38883048398712167,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/stats/teams/traditional?Season=2026-27"
+      ],
+      "note": "Parlay-leg check: team points vs strength.",
+      "bh_q": 0.00071996400179991,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 PTS ~ PACE",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "PACE",
+      "y": "2026-27 PTS",
+      "pearson_r": 0.4000727801436195,
+      "spearman_rho": 0.41264189760083064,
+      "permutation_p": 0.02704864756762162,
+      "bootstrap_ci95": [
+        0.05684480338141912,
+        0.6583881694051394
+      ],
+      "r_squared": 0.16005822941184492,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/stats/teams/traditional?Season=2026-27",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Parlay-leg check: totals legs.",
+      "bh_q": 0.040572971351432424,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 NetRtg ~ PACE",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "PACE",
+      "y": "2026-27 NetRtg",
+      "pearson_r": -0.26284812742207625,
+      "spearman_rho": -0.12505562972852693,
+      "permutation_p": 0.15944202789860507,
+      "bootstrap_ci95": [
+        -0.5928983552577964,
+        0.19922734625678631
+      ],
+      "r_squared": 0.06908913808929203,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/stats/help/glossary"
+      ],
+      "note": "Parlay-leg check.",
+      "bh_q": 0.19133043347832607,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 NetRtg ~ +/- (traditional)",
+      "group": "2026-27 season (n=30, 4-7 GP each)",
+      "n": 30,
+      "x": "+/- (traditional)",
+      "y": "2026-27 NetRtg",
+      "pearson_r": 0.9986460885404089,
+      "spearman_rho": 0.9978863116593581,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.9975927328077024,
+        0.9992982867695103
+      ],
+      "r_squared": 0.9972940101570583,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/stats/teams/traditional?Season=2026-27"
+      ],
+      "note": "Cross-table consistency check between two official tables.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 WIN% ~ 2025-26 NetRtg",
+      "group": "Cross-season OUT-OF-SAMPLE (n=30)",
+      "n": 30,
+      "x": "2025-26 NetRtg",
+      "y": "2026-27 WIN%",
+      "pearson_r": 0.48006010062249893,
+      "spearman_rho": 0.4946392592382111,
+      "permutation_p": 0.007249637518124094,
+      "bootstrap_ci95": [
+        0.14919956120598937,
+        0.7500368914675384
+      ],
+      "r_squared": 0.23045770020968379,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Prior-season strength predicting next-season win rate.",
+      "bh_q": 0.014499275036248186,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 NetRtg ~ 2025-26 NetRtg",
+      "group": "Cross-season OUT-OF-SAMPLE (n=30)",
+      "n": 30,
+      "x": "2025-26 NetRtg",
+      "y": "2026-27 NetRtg",
+      "pearson_r": 0.41715074599094587,
+      "spearman_rho": 0.4143302180685358,
+      "permutation_p": 0.022348882555872206,
+      "bootstrap_ci95": [
+        0.09815805991292738,
+        0.6825921467407973
+      ],
+      "r_squared": 0.17401474488080265,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+      ],
+      "note": "Rating stability across seasons (roster/regime change).",
+      "bh_q": 0.03831237009578092,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 WIN% ~ 2025-26 WIN%",
+      "group": "Cross-season OUT-OF-SAMPLE (n=30)",
+      "n": 30,
+      "x": "2025-26 WIN%",
+      "y": "2026-27 WIN%",
+      "pearson_r": 0.48296037771344535,
+      "spearman_rho": 0.5212127285512058,
+      "permutation_p": 0.006849657517124144,
+      "bootstrap_ci95": [
+        0.1442196179390502,
+        0.7553314247491735
+      ],
+      "r_squared": 0.2332507264411138,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Naive persistence baseline.",
+      "bh_q": 0.014499275036248186,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 PACE ~ 2025-26 PACE",
+      "group": "Cross-season OUT-OF-SAMPLE (n=30)",
+      "n": 30,
+      "x": "2025-26 PACE",
+      "y": "2026-27 PACE",
+      "pearson_r": 0.44913834027595806,
+      "spearman_rho": 0.4946595460614152,
+      "permutation_p": 0.012599370031498426,
+      "bootstrap_ci95": [
+        0.12726285830644773,
+        0.6956165461827526
+      ],
+      "r_squared": 0.2017252487058423,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+      ],
+      "note": "Is pace a repeatable (skill-like) team trait?",
+      "bh_q": 0.023260375442766323,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 PTS ~ 2025-26 NetRtg",
+      "group": "Cross-season OUT-OF-SAMPLE (n=30)",
+      "n": 30,
+      "x": "2025-26 NetRtg",
+      "y": "2026-27 PTS",
+      "pearson_r": 0.06167511006700146,
+      "spearman_rho": 0.08435344077169084,
+      "permutation_p": 0.744162791860407,
+      "bootstrap_ci95": [
+        -0.252024395585726,
+        0.45272923172479174
+      ],
+      "r_squared": 0.0038038192017767446,
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/traditional?Season=2026-27"
+      ],
+      "note": "Prior strength vs current scoring (null-style check).",
+      "bh_q": 0.8062553394069427,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "Prop leg RPG ~ PPG",
+      "group": "Player prop combos (n=28 official team leaders)",
+      "n": 28,
+      "x": "PPG",
+      "y": "Prop leg RPG",
+      "pearson_r": -0.06476866745486984,
+      "spearman_rho": 0.0012332147645709376,
+      "permutation_p": 0.7418629068546573,
+      "bootstrap_ci95": [
+        -0.4718648176060869,
+        0.3828904850373802
+      ],
+      "r_squared": 0.0041949802838795154,
+      "sources": [
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Correlation between two same-game prop legs.",
+      "bh_q": 0.8062553394069427,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "Prop leg APG ~ PPG",
+      "group": "Player prop combos (n=28 official team leaders)",
+      "n": 28,
+      "x": "PPG",
+      "y": "Prop leg APG",
+      "pearson_r": -0.018121271356715783,
+      "spearman_rho": -0.06602739973831492,
+      "permutation_p": 0.927253637318134,
+      "bootstrap_ci95": [
+        -0.4044097209550397,
+        0.341447659783865
+      ],
+      "r_squared": 0.00032838047558372786,
+      "sources": [
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Correlation between two same-game prop legs.",
+      "bh_q": 0.927253637318134,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "Prop leg APG ~ RPG",
+      "group": "Player prop combos (n=28 official team leaders)",
+      "n": 28,
+      "x": "RPG",
+      "y": "Prop leg APG",
+      "pearson_r": 0.05559550754886018,
+      "spearman_rho": 0.04002193132825169,
+      "permutation_p": 0.7726613669316534,
+      "bootstrap_ci95": [
+        -0.3205048526181449,
+        0.42339112580586974
+      ],
+      "r_squared": 0.0030908604596153696,
+      "sources": [
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Correlation between two same-game prop legs.",
+      "bh_q": 0.8062553394069427,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 HOME WIN% ~ OVERALL WIN%",
+      "group": "Standings legs (n=30)",
+      "n": 30,
+      "x": "OVERALL WIN%",
+      "y": "2026-27 HOME WIN%",
+      "pearson_r": 0.8405784614433686,
+      "spearman_rho": 0.8513656445714757,
+      "permutation_p": 4.999750012499375e-05,
+      "bootstrap_ci95": [
+        0.7289772198197793,
+        0.9164172230588015
+      ],
+      "r_squared": 0.7065721498425006,
+      "sources": [
+        "https://www.nba.com/standings"
+      ],
+      "note": "Parlay-leg dependence: home form is not independent of overall form.",
+      "bh_q": 0.00013332666699998334,
+      "significant_after_fdr": true,
+      "interpretation": "significant after BH-FDR correction"
+    },
+    {
+      "id": "2026-27 ROAD WIN% ~ HOME WIN%",
+      "group": "Standings legs (n=30)",
+      "n": 30,
+      "x": "HOME WIN%",
+      "y": "2026-27 ROAD WIN%",
+      "pearson_r": 0.38034816538929145,
+      "spearman_rho": 0.4139400638764257,
+      "permutation_p": 0.0367981600919954,
+      "bootstrap_ci95": [
+        0.12058276175358426,
+        0.6114077211854805
+      ],
+      "r_squared": 0.1446647269149998,
+      "sources": [
+        "https://www.nba.com/standings"
+      ],
+      "note": "Home/road split reliability.",
+      "bh_q": 0.0503974801259937,
+      "significant_after_fdr": false,
+      "interpretation": "not significant after BH-FDR correction"
+    }
+  ]
+}

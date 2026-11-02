@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link active" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Executive summary</div><h1>Executive summary</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      
+      <p><strong>Snapshot:</strong> 2026-11-02 (UTC) · <strong>Season:</strong> 2026-27 in progress (4–7 GP per team) <strong>Live site:</strong> https://sassnarep3-star.github.io/Own4/own4-dashboard/ · <strong>Branch:</strong> <code>arena/3ab8432d-own4</code></p>
+<h2>What was built</h2>
+<p>A fully autonomous, source-verified research pipeline and GitHub Pages dashboard that collects official NBA data, <strong>originates our own fair NBA lines</strong>, researches single-bet / parlay / player-prop strategies, measures correlations, passes every strategy through validation gates, removes luck via out-of-sample and permutation testing, and runs a leaderboard competition with rewards. Every table row carries a link to an official site; unconfirmable values are blank and flagged on a dedicated <strong>Flagged for Review</strong> page.</p>
+<h2>Headline numbers (all computed from official NBA.com values)</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>Item</th>
+<th>Value</th>
+<th>Status</th>
+<th>Official source</th>
+</tr></thead><tbody>
+<tr><td>Official sources in registry</td><td>22 usable + 3 unusable official endpoints</td><td>verified</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td></tr>
+<tr><td>Rows checked line by line</td><td>451</td><td>451 PASS / 0 FLAG</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Glossary</a></td></tr>
+<tr><td>Teams covered</td><td>30 (two full official seasons)</td><td>verified</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">NBA.com Advanced 2025-26</a></td></tr>
+<tr><td>Settled games transcribed</td><td>62 of 92</td><td>partial, flagged</td><td><a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com Games 2026-10-23</a></td></tr>
+<tr><td>Our own fair lines originated</td><td>14 games (2026-11-04 slate)</td><td>derived, formula published</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td></tr>
+<tr><td>Correlations computed</td><td>24 (Pearson, Spearman, permutation p, BH q, bootstrap CI)</td><td>verified</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">NBA.com Advanced 2026-27</a></td></tr>
+<tr><td>Strategies / validation gates</td><td>13 / 10</td><td>verified</td><td><a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com Games 2026-11-01</a></td></tr>
+<tr><td>Strategies passing every gate</td><td>0</td><td>NOT VALIDATED</td><td><a href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA betting-data policy</a></td></tr>
+<tr><td>Eligible research signals</td><td>4 (top reward 100 pts)</td><td>verified</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td></tr>
+<tr><td>Flagged items</td><td>18</td><td>published, non-blocking</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td></tr>
+</tbody></table></div>
+<h2>Most important findings</h2>
+<ol><li><strong>In-sample success is not skill.</strong> Our prior-season rating model</li></ol>
+<p>(<a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">official 2025-26 advanced table</a>, 82 GP per team) picked    <code>0.780</code> of training-window winners but only    <code>0.476</code> of the chronological holdout    (n=21); holdout binomial p =    <code>1.0000</code>, Brier skill score    <code>-0.064</code> — <a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">official settled scores</a>.    It is classified <strong>NOT skill-based</strong> and receives no reward.</p>
+<ol><li><strong>A naive baseline beat the model.</strong> Picking the team with the better official 2025-26 record</li></ol>
+<p>was correct <code>0.710</code> of the time vs the    model&#x27;s <code>0.677</code> over 62 games.</p>
+<ol><li><strong>Team strength is highly stable within a season but only moderately across seasons.</strong></li></ol>
+<p>2025-26 <code>WIN% ~ NetRtg</code> r = <code>0.971</code>; the true    out-of-sample <code>2026-27 WIN% ~ 2025-26 NetRtg</code> r =    <code>0.480</code> (BH q =    <code>0.0145</code>) — <a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">official source</a>.</p>
+<ol><li><strong>Parlay legs are not independent.</strong> 2026-27 <code>PTS ~ NetRtg</code> r =</li></ol>
+<p><code>0.624</code> and <code>PTS ~ PACE</code> r =    <code>0.400</code>. Same-game parlay/SGP prices require a joint    model that cannot be verified here, so they are left blank.</p>
+<ol><li><strong>Prop combos are data-limited.</strong> Leg correlations across 28 official team-leader baselines</li></ol>
+<p>are near zero and not significant, but game-level player logs are unavailable from free    official NBA pages, so fair prop lines are blank and UNVERIFIED —    <a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">official player table</a>.</p>
+<h2>Decisions</h2>
+<ul><li><strong>No betting strategy is marked validated and no Division B reward is awarded.</strong> This is a</li></ul>
+<p>deliberate result of the validation gates, not a missing feature.</p>
+<ul><li><strong>No market odds, vig, ROI, closing-line value or edge appears anywhere.</strong> The</li></ul>
+<p><a href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA&#x27;s own release</a> says official betting data is distributed to licensed   operators; the <a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com games page</a> exposes no odds values in retrieved   content. Blank + flagged, per the no-hallucination rule.</p>
+<ul><li><strong>Four out-of-sample research signals are ranked</strong> in Division A (100 / 60 / 30 / 10 pts).</li></ul>
+<p>These are predictive associations, not betting profits.</p>
+<ul><li><strong>17 irregularities</strong> including the 62/92 game coverage gap, <code>/null</code> player links on NBA.com,</li></ul>
+<p>unavailable official CDN JSON, and the platform&#x27;s single-branch constraint are published on   the Flagged for Review page and do not block the merge.</p>
+<h2>Governance</h2>
+<p><code>COORDINATION.md</code> records 11 tasks with owner, status and exclusive file scopes, small frequent commits, <code>git pull --rebase</code> before every push, completion records with sources and verification, and a final integration pass (T09) that re-verifies all combined data, checks links and publishes. The platform pins this session to one branch, so per-session branches/worktrees are replaced by non-overlapping file scopes (IR-13). PR, merge and Pages deployment results are recorded in T10.</p>
+<h2>Reproduce</h2>
+<p><code>python3 scripts/build_lines.py &amp;&amp; python3 scripts/correlations.py &amp;&amp; python3 scripts/validate_strategies.py &amp;&amp; python3 scripts/verify.py &amp;&amp; python3 scripts/build_docs.py &amp;&amp; python3 scripts/build_site.py &amp;&amp; python3 scripts/check_links.py</code></p>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>

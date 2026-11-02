@@ -355,3 +355,50 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 
 - 2026-11-02: while PR #14 was open, `origin/main` advanced with PR #10 (`2ac01e1`, session `arena/42d467e4`), adding a separate `lines-lab/` dashboard, `docs/*.md` notes and `research/sources.md`. PR #14 became CONFLICTING.
 - Resolution: merged `origin/main` into the pinned branch; the only conflict was `COORDINATION.md`, resolved by keeping every other session's section verbatim and appending this session's record. Added `lines-lab/index.html` to the integrated dashboard's sidebar and directory so the new site is reachable. No other session's file was edited or discarded.
+
+---
+## Session `arena/3ab8432d-own4` (session-3ab8432d) — final integration & conflict handoff
+
+- 2026-11-02 UTC. At this session's start `main` was `319d6b0` with only `README.md` (6 bytes) and
+  no `COORDINATION.md`, so this session created the board, claimed T00–T09 and built an
+  independently verified dashboard. Its own full task board and completion records are retained at
+  [`own4-dashboard/COORDINATION.md`](own4-dashboard/COORDINATION.md).
+- **Conflict:** PR **[#15](https://github.com/sassnarep3-star/Own4/pull/15)** from
+  `arena/3ab8432d-own4` → `main` was reported `CONFLICTING` because concurrent sessions had merged
+  PRs #11–#13 and advanced `main` to `e4de8b1` (PRs #11–#14 and #16), publishing the canonical root dashboard and owning
+  `index.html`, `pages/*`, `README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`,
+  `data/sources.json`, `assets/*`, `data/*` and `scripts/*`.
+- **Resolution (no other session's work discarded):** `origin/main` was fetched and merged into this
+  branch. The single `modify/delete` conflict on `README.md` was resolved in favour of `origin/main`.
+  All of this session's files were moved into the non-overlapping `own4-dashboard/` namespace before
+  the merge, so the canonical root site, its data, docs, tests and assets remain **byte-for-byte
+  unchanged**. The shared root `COORDINATION.md` is the canonical board; this section is appended
+  rather than replacing any earlier session's entry. This follows the repo's existing precedent of
+  publishing colliding dashboards under `/docs/` and `/lab/`.
+- **This session's deliverables:** 14-page dashboard at
+  <https://sassnarep3-star.github.io/Own4/own4-dashboard/>; 30-team official standings/advanced/
+  traditional tables for two seasons, 62 officially settled games, 14 own fair lines with published
+  formulas, 13 strategies × 10 validation gates, 23 correlations with permutation p / bootstrap CI /
+  BH-FDR, a skill-vs-luck decomposition, a two-division leaderboard, 451-row verification ledger and
+  a **Flagged for Review** page (18 items, IR-01…IR-18).
+- **Verification:** full pipeline re-run clean — 451/451 rows PASS, 0 FLAG, 0 rows without an official
+  source; `scripts/check_links.py` reports 14 pages, 279 local links, 1003 data rows, **errors=0
+  warnings=0**. Every table row carries an official source link; unconfirmable values are blank and
+  flagged. Sources: [NBA.com standings](https://www.nba.com/standings),
+  [NBA.com advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26),
+  [NBA.com advanced 2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27),
+  [NBA.com stat glossary](https://www.nba.com/stats/help/glossary),
+  [NBA.com games 2026-11-04](https://www.nba.com/games?date=2026-11-04),
+  [NBA official betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
+  [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages).
+- **Flagged irregularities** (do not block the merge): no official market odds/closing lines; 2026-27
+  season only 4–7 GP per team; 62/92 games transcribed; 8/442 player rows; no home/away designation;
+  in-sample accuracy collapsing out-of-sample (0.780 → 0.476); 0 eligible Division B strategies;
+  platform single-branch constraint IR-13; parallel-session collision IR-18.
+- A second integration collision occurred while PR #15 was open: `main` advanced from
+  `5a5cff2` to `e4de8b1` with another session's `lines-lab/` dashboard and further board entries.
+  `origin/main` was merged again into this branch; the only conflict was `COORDINATION.md`, resolved
+  by keeping every earlier session's entry verbatim and re-appending this session's section. No
+  other session's work was discarded.
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/15 . **Merge result and Pages deployment
+  confirmation:** recorded in the follow-up entry below after the merge completes.

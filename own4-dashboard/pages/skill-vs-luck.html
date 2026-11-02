@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Skill vs luck · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link active" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Skill vs luck</div><h1>Skill vs luck</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      <div class="kpi-grid"><a class="kpi" href="skill-vs-luck.html"><div class="kpi-label">Train accuracy</div><div class="kpi-value">0.780</div><div class="kpi-sub">in-sample, not rewarded</div></a><a class="kpi" href="skill-vs-luck.html"><div class="kpi-label">Holdout accuracy</div><div class="kpi-value">0.476</div><div class="kpi-sub">out-of-sample</div></a><a class="kpi" href="skill-vs-luck.html"><div class="kpi-label">Holdout Brier skill</div><div class="kpi-value">-0.064</div><div class="kpi-sub">negative → no skill</div></a></div>
+      <div class="callout callout-warn"><div class="callout-title">Finding</div><div class="callout-body">The prior-season rating model looks strong in the training window but its holdout winner accuracy is below 50% and its holdout Brier skill score is negative. Under the pre-registered luck-removal rules it is therefore classified as NOT skill-based and is ineligible for rewards.</div></div><h2>Luck-removal rules (pre-registered)</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>#</th>
+<th>Rule</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>Pre-register hypotheses before looking at results (see REQUIREMENTS.md R1.09-R1.12).</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Use only out-of-sample seasons / chronological train-holdout splits; no in-sample tuning counts as skill.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Compare against exact binomial nulls (coin flip) and permutation nulls for correlations.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Report 95% Wilson intervals for accuracy and bootstrap intervals for correlations.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>Apply Benjamini-Hochberg FDR correction across the full family of tested correlations.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Require positive Brier skill score on the holdout window before any reward is assigned.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Require minimum sample size (G3) and verified market prices (G7) before a bet strategy can be deployed.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA News ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Variance decomposition</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Relationship</th>
+<th>n</th>
+<th>Pearson r</th>
+<th>Systematic share (r²)</th>
+<th>Residual share</th>
+<th>Interpretation</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>2025-26 full season: WIN% explained by NetRtg</td>
+<td>30</td>
+<td>0.971</td>
+<td>0.942</td>
+<td>0.058</td>
+<td>Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 in progress: WIN% explained by NetRtg</td>
+<td>30</td>
+<td>0.886</td>
+<td>0.786</td>
+<td>0.214</td>
+<td>Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>Cross-season: 2026-27 WIN% explained by 2025-26 NetRtg</td>
+<td>30</td>
+<td>0.480</td>
+<td>0.230</td>
+<td>0.770</td>
+<td>Descriptive variance partition only. The residual share combines genuine team change, schedule effects, injuries and chance; it is NOT a causal estimate of luck.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Out-of-sample evidence</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Window</th>
+<th>n</th>
+<th>Winner acc.</th>
+<th>Binomial p</th>
+<th>Brier</th>
+<th>Brier skill</th>
+<th>Permutation p</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>train</td>
+<td>41</td>
+<td>0.780</td>
+<td>0.0004</td>
+<td>0.1952</td>
+<td>0.2193</td>
+<td>0.0203</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">Games 2026-10-30 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+<tr>
+<td>holdout</td>
+<td>21</td>
+<td>0.476</td>
+<td>1.0000</td>
+<td>0.2659</td>
+<td>-0.0635</td>
+<td>0.0940</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">Games 2026-10-30 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">Games 2026-11-01 ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Selectively skill-based selection</h2><p>Only signals that clear provenance, completeness, out-of-sample, FDR-significance and reproducibility gates enter the leaderboard. In-sample accuracy never earns rewards; bet strategies additionally need sample size, positive holdout skill, verified market prices and walk-forward stability. In this snapshot that selects 4 research signals and 0 betting strategies.</p>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>

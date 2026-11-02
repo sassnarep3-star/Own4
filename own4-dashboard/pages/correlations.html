@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Correlations · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link active" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Correlations</div><h1>Correlations</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      <div class="kpi-grid"><a class="kpi" href="correlations.html"><div class="kpi-label">Correlations</div><div class="kpi-value">24</div><div class="kpi-sub">Pearson + Spearman</div></a><a class="kpi" href="correlations.html"><div class="kpi-label">Significant after FDR</div><div class="kpi-value">16</div><div class="kpi-sub">BH q &lt; 0.05</div></a><a class="kpi" href="correlations.html"><div class="kpi-label">Best out-of-sample r</div><div class="kpi-value">0.483</div><div class="kpi-sub">prior→current WIN%</div></a></div>
+      <div class="callout callout-info"><div class="callout-title">Method</div><div class="callout-body">Pearson r and Spearman rho on official NBA.com values. Two-sided permutation p-value (20,000 shuffles, seed 20261102). Percentile bootstrap 95% CI (5,000 resamples, seed 20261102). Benjamini-Hochberg FDR q across all 24 reported correlations.</div></div><h2>All correlation values</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Pair (y ~ x)</th>
+<th>Group</th>
+<th>n</th>
+<th>Pearson r</th>
+<th>Spearman ρ</th>
+<th>Perm. p</th>
+<th>BH q</th>
+<th>Bootstrap 95% CI</th>
+<th>r²</th>
+<th>Sig. after FDR</th>
+<th>Note</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>2025-26 WIN% ~ NetRtg</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>0.971</td>
+<td>0.951</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.943 … 0.987</td>
+<td>0.942</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Systematic strength vs wins over a full official season.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 WIN% ~ OffRtg</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>0.890</td>
+<td>0.898</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.829 … 0.939</td>
+<td>0.793</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Offensive rating alone.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 WIN% ~ DefRtg</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>-0.887</td>
+<td>-0.837</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>-0.954 … -0.781</td>
+<td>0.787</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Defensive rating alone; a negative r is expected.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 WIN% ~ PACE</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>-0.370</td>
+<td>-0.390</td>
+<td>0.0424</td>
+<td>0.0536</td>
+<td>-0.629 … -0.065</td>
+<td>0.137</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Pace is a null-style control signal.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 NetRtg ~ PACE</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>-0.381</td>
+<td>-0.384</td>
+<td>0.0378</td>
+<td>0.0504</td>
+<td>-0.669 … -0.041</td>
+<td>0.145</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Parlay-leg check: are strength and pace independent legs?</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 OffRtg ~ PACE</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>-0.408</td>
+<td>-0.449</td>
+<td>0.0255</td>
+<td>0.0406</td>
+<td>-0.705 … -0.041</td>
+<td>0.166</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Parlay-leg check: offense vs pace.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2025-26 OffRtg ~ DefRtg</td>
+<td>2025-26 season (n=30, 82 GP each)</td>
+<td>30</td>
+<td>-0.677</td>
+<td>-0.717</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>-0.830 … -0.478</td>
+<td>0.458</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Do teams trade offence for defence?</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 WIN% ~ NetRtg</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>0.886</td>
+<td>0.876</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.794 … 0.946</td>
+<td>0.786</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Concurrent, small-sample; NOT out-of-sample.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 WIN% ~ OffRtg</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>0.699</td>
+<td>0.701</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.465 … 0.877</td>
+<td>0.488</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Concurrent.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 WIN% ~ DefRtg</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>-0.744</td>
+<td>-0.755</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>-0.857 … -0.583</td>
+<td>0.553</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Concurrent.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 PTS ~ NetRtg</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>0.624</td>
+<td>0.668</td>
+<td>0.0003</td>
+<td>0.0007</td>
+<td>0.441 … 0.782</td>
+<td>0.389</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Parlay-leg check: team points vs strength.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 PTS ~ PACE</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>0.400</td>
+<td>0.413</td>
+<td>0.0270</td>
+<td>0.0406</td>
+<td>0.057 … 0.658</td>
+<td>0.160</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Parlay-leg check: totals legs.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 NetRtg ~ PACE</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>-0.263</td>
+<td>-0.125</td>
+<td>0.1594</td>
+<td>0.1913</td>
+<td>-0.593 … 0.199</td>
+<td>0.069</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Parlay-leg check.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 NetRtg ~ +/- (traditional)</td>
+<td>2026-27 season (n=30, 4-7 GP each)</td>
+<td>30</td>
+<td>0.999</td>
+<td>0.998</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.998 … 0.999</td>
+<td>0.997</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Cross-table consistency check between two official tables.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 WIN% ~ 2025-26 NetRtg</td>
+<td>Cross-season OUT-OF-SAMPLE (n=30)</td>
+<td>30</td>
+<td>0.480</td>
+<td>0.495</td>
+<td>0.0072</td>
+<td>0.0145</td>
+<td>0.149 … 0.750</td>
+<td>0.230</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Prior-season strength predicting next-season win rate.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 NetRtg ~ 2025-26 NetRtg</td>
+<td>Cross-season OUT-OF-SAMPLE (n=30)</td>
+<td>30</td>
+<td>0.417</td>
+<td>0.414</td>
+<td>0.0223</td>
+<td>0.0383</td>
+<td>0.098 … 0.683</td>
+<td>0.174</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Rating stability across seasons (roster/regime change).</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 WIN% ~ 2025-26 WIN%</td>
+<td>Cross-season OUT-OF-SAMPLE (n=30)</td>
+<td>30</td>
+<td>0.483</td>
+<td>0.521</td>
+<td>0.0068</td>
+<td>0.0145</td>
+<td>0.144 … 0.755</td>
+<td>0.233</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Naive persistence baseline.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 PACE ~ 2025-26 PACE</td>
+<td>Cross-season OUT-OF-SAMPLE (n=30)</td>
+<td>30</td>
+<td>0.449</td>
+<td>0.495</td>
+<td>0.0126</td>
+<td>0.0233</td>
+<td>0.127 … 0.696</td>
+<td>0.202</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Is pace a repeatable (skill-like) team trait?</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 PTS ~ 2025-26 NetRtg</td>
+<td>Cross-season OUT-OF-SAMPLE (n=30)</td>
+<td>30</td>
+<td>0.062</td>
+<td>0.084</td>
+<td>0.7442</td>
+<td>0.8063</td>
+<td>-0.252 … 0.453</td>
+<td>0.004</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Prior strength vs current scoring (null-style check).</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">Traditional 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>Prop leg RPG ~ PPG</td>
+<td>Player prop combos (n=28 official team leaders)</td>
+<td>28</td>
+<td>-0.065</td>
+<td>0.001</td>
+<td>0.7419</td>
+<td>0.8063</td>
+<td>-0.472 … 0.383</td>
+<td>0.004</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Correlation between two same-game prop legs.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Prop leg APG ~ PPG</td>
+<td>Player prop combos (n=28 official team leaders)</td>
+<td>28</td>
+<td>-0.018</td>
+<td>-0.066</td>
+<td>0.9273</td>
+<td>0.9273</td>
+<td>-0.404 … 0.341</td>
+<td>0.000</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Correlation between two same-game prop legs.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>Prop leg APG ~ RPG</td>
+<td>Player prop combos (n=28 official team leaders)</td>
+<td>28</td>
+<td>0.056</td>
+<td>0.040</td>
+<td>0.7727</td>
+<td>0.8063</td>
+<td>-0.321 … 0.423</td>
+<td>0.003</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Correlation between two same-game prop legs.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 HOME WIN% ~ OVERALL WIN%</td>
+<td>Standings legs (n=30)</td>
+<td>30</td>
+<td>0.841</td>
+<td>0.851</td>
+<td>0.0000</td>
+<td>0.0001</td>
+<td>0.729 … 0.916</td>
+<td>0.707</td>
+<td><span class="badge badge-ok">YES</span></td>
+<td>Parlay-leg dependence: home form is not independent of overall form.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+<tr>
+<td>2026-27 ROAD WIN% ~ HOME WIN%</td>
+<td>Standings legs (n=30)</td>
+<td>30</td>
+<td>0.380</td>
+<td>0.414</td>
+<td>0.0368</td>
+<td>0.0504</td>
+<td>0.121 … 0.611</td>
+<td>0.145</td>
+<td><span class="badge badge-muted">no</span></td>
+<td>Home/road split reliability.</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">Every row is computed from official NBA.com values; blank values would be flagged UNVERIFIED. No value is inferred.</p>
+</div><h2>Findings</h2>
+<ul><li><strong>Full-season structure:</strong> 2025-26 <code>WIN% ~ NetRtg</code> r = <code>0.971</code></li></ul>
+<p>(n=30, 82 GP each) — <a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">official source</a>. This is a descriptive identity-like   relationship, not a betting edge.</p>
+<ul><li><strong>Cross-table check:</strong> 2026-27 <code>NetRtg ~ +/-</code> r = <code>0.999</code></li></ul>
+<p>across two independent official tables, confirming transcription consistency —   <a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">advanced</a> · <a href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">traditional</a>.</p>
+<ul><li><strong>Out-of-sample predictive signal:</strong> <code>2026-27 WIN% ~ 2025-26 NetRtg</code> r =</li></ul>
+<p><code>0.480</code>, q =   <code>0.0145</code> — <a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">official source</a>.</p>
+<ul><li><strong>Parlay leg dependence:</strong> 2026-27 <code>PTS ~ NetRtg</code> r =</li></ul>
+<p><code>0.624</code> and <code>PTS ~ PACE</code> r =   <code>0.400</code> — same-game legs are <strong>not</strong> independent.</p>
+<ul><li><strong>Prop-leg baselines (n=28 official team leaders):</strong> <code>RPG ~ PPG</code> r =</li></ul>
+<p><code>-0.065</code>, <code>APG ~ PPG</code> r =   <code>-0.018</code>, <code>APG ~ RPG</code> r =   <code>0.056</code>; all q &gt; 0.05 —   <a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">official source</a>. These are *baseline* correlations, not game-level leg   covariances, which remain UNVERIFIED.</p>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>
