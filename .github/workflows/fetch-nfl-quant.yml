@@ -1,0 +1,50 @@
+name: fetch-nfl-quant
+
+# Manual, isolated provenance fetch for the NFL quantitative workspace.
+# The Arena sandbox shell cannot reach www.nfl.com; the GitHub-hosted runner can.
+# Only data/nfl-quant/raw/** is committed by this workflow.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout session branch
+        uses: actions/checkout@v4
+        with:
+          ref: arena/7f8d7277-own4
+          fetch-depth: 0
+
+      - name: Fetch official NFL sources and partner cross-check
+        run: |
+          set -o pipefail
+          python3 scripts/nfl_quant_fetch.py 2>&1 | tee nfl_quant_fetch.log
+          python3 - <<'PY'
+          import json
+          m = json.load(open("data/nfl-quant/raw/manifest.json"))
+          official_ok = sum(1 for i in m["items"] if i["official"] and i["http_status"] == 200)
+          partner_ok = sum(1 for i in m["items"] if not i["official"] and i["http_status"] == 200)
+          print(f"official_ok={official_ok} partner_ok={partner_ok} total_ok={m['ok_count']} failed={m['fail_count']}")
+          if official_ok < 25:
+              raise SystemExit("fewer than 25 official sources fetched")
+          PY
+
+      - name: Commit raw provenance snapshots
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/nfl-quant/raw nfl_quant_fetch.log || true
+          if git diff --cached --quiet; then
+            echo "no raw-data changes"
+          else
+            git commit -m "data: fetch official NFL snapshots for quant workspace [skip ci]"
+            git pull --rebase origin arena/7f8d7277-own4
+            git push origin arena/7f8d7277-own4
+          fi
