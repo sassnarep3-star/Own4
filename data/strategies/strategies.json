@@ -1,0 +1,1055 @@
+{
+  "retrieved_utc": "2026-11-02",
+  "count": 13,
+  "families": [
+    "Single bet",
+    "Parlay",
+    "Player prop combo"
+  ],
+  "rows": [
+    {
+      "id": "S-01",
+      "family": "Single bet",
+      "name": "Prior-season NetRtg fair moneyline (M1)",
+      "hypothesis": "Teams with higher official 2025-26 NetRtg win more often in 2026-27.",
+      "inputs": "2025-26 OffRtg/DefRtg/PACE (82 GP per team); 62 official settled scores.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "All inputs from NBA.com advanced/games pages.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G2": {
+          "status": "PASS",
+          "evidence": "No missing model inputs.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 settled games < 200 required.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "PASS",
+          "evidence": "Holdout 2026-10-30..11-01 not used for calibration; sigma fitted on earlier games.",
+          "source": "https://www.nba.com/games?date=2026-10-30"
+        },
+        "G5": {
+          "status": "FAIL",
+          "evidence": "Holdout margin permutation p=0.0940 (>=0.05).",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G6": {
+          "status": "FAIL",
+          "evidence": "Holdout accuracy 0.476, binomial p=1.000, Brier skill -0.064.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds; ROI/CLV cannot be computed (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet — no legs.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "2 chronological windows only; 3 folds required.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproduced by scripts/build_lines.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "train_accuracy": 0.7804878048780488,
+        "holdout_accuracy": 0.47619047619047616,
+        "holdout_brier_skill": -0.06352416484554935,
+        "margin_mae": 13.727970952380955,
+        "total_mae": 18.53295638095238
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04",
+        "https://www.nba.com/games?date=2026-11-01"
+      ],
+      "note": "Strong train-window accuracy (0.780) collapses to 0.476 on holdout. Classified NOT skill-based.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "S-02",
+      "family": "Single bet",
+      "name": "Current-season NetRtg moneyline (M2)",
+      "hypothesis": "Teams with higher 2026-27 NetRtg win their next game.",
+      "inputs": "2026-27 official advanced ratings (4-7 GP per team).",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official 2026-27 advanced table.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "No out-of-sample probability calibration; M2 moneyline left blank.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Ratings include the games being evaluated (in-season look-ahead).",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "No pre-registered out-of-sample test for M2.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "No holdout test performed for M2.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproduced by scripts/build_lines.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Published only as an uncalibrated projected spread/total; moneyline deliberately blank.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "S-03",
+      "family": "Single bet",
+      "name": "Pace-model total over/under",
+      "hypothesis": "Projected total from official PACE and ratings identifies over/under value.",
+      "inputs": "2025-26 PACE, OffRtg, DefRtg; market total required for a bet.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official advanced tables.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Market total missing.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "PASS",
+          "evidence": "Prior-season inputs only.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "No significance test against a market line.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "FAIL",
+          "evidence": "Holdout total MAE 18.53 pts, total bias -6.41.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market total (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproduced by scripts/build_lines.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "holdout_total_mae": 18.53295638095238
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Fair total is published; a bet requires a market total, which is UNVERIFIED.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "S-04",
+      "family": "Single bet",
+      "name": "Home-court favourite",
+      "hypothesis": "Back the home side using the league home win rate from official standings.",
+      "inputs": "2026-27 standings HOME/ROAD splits; per-game home designation required.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official standings HOME/ROAD columns.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Home/away designation not exposed on the official games page (IR-12).",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Standings are concurrent with the games evaluated.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "League home rate reproducible from scripts/verify.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "league-level home win rate published, per-game designation blank"
+      },
+      "sources": [
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Only the league-level aggregate is verified; per-game application is UNVERIFIED.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "S-05",
+      "family": "Single bet",
+      "name": "LAST10 / streak continuation",
+      "hypothesis": "Teams on a winning LAST10 / streak keep winning.",
+      "inputs": "2026-27 official standings LAST10 and STREAK columns.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official standings LAST10/STREAK.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Requires market odds and bet settlement.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Concurrent standings.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested; classic multiple-testing risk.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Inputs committed in data/raw/standings_2026_27.json.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/standings"
+      ],
+      "note": "Included as a research candidate only; no performance claim.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "S-06",
+      "family": "Single bet",
+      "name": "Cross-season persistence of team strength",
+      "hypothesis": "Prior-season official NetRtg predicts next-season win rate.",
+      "inputs": "2025-26 NetRtg, 2026-27 standings WIN% (n=30, out-of-sample).",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Both seasons official.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G2": {
+          "status": "PASS",
+          "evidence": "Complete 30-team join.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=30 team-seasons < 200 bet-level observations.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "PASS",
+          "evidence": "True out-of-sample season.",
+          "source": "https://www.nba.com/standings"
+        },
+        "G5": {
+          "status": "PASS",
+          "evidence": "r=0.480, q=0.0145.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G6": {
+          "status": "FAIL",
+          "evidence": "Correlation signal is not a settled bet; no Brier skill demonstrated.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single bet.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "Two seasons only; 3 folds required.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproduced by scripts/correlations.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "out_of_sample_r": 0.48006010062249893
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/standings"
+      ],
+      "note": "Eligible for the SIGNAL research leaderboard, not for the betting-strategy leaderboard.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "P-01",
+      "family": "Parlay",
+      "name": "2-leg cross-game moneyline parlay (independent legs)",
+      "hypothesis": "Combine two M1 fair-price picks from different games.",
+      "inputs": "M1 projections; leg independence assumption.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official ratings + official schedule.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Market prices for both legs missing.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "PASS",
+          "evidence": "Prior-season inputs.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G5": {
+          "status": "FAIL",
+          "evidence": "No parlay-level significance test.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "FAIL",
+          "evidence": "Underlying M1 holdout Brier skill is negative.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "UNVERIFIED",
+          "evidence": "Cross-game leg covariance not measurable from available official data.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproducible from committed data.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Parlay price is the product of leg probabilities only under independence, which is UNVERIFIED.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "P-02",
+      "family": "Parlay",
+      "name": "Same-game parlay: favourite ML + over total",
+      "hypothesis": "Combine a moneyline and a total in one game; both legs depend on the same rating/pace inputs.",
+      "inputs": "2026-27 official NetRtg, PTS, PACE correlations (n=30).",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official advanced + traditional tables.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Market prices missing.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Correlations are concurrent, in-season.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2026-27"
+        },
+        "G5": {
+          "status": "PASS",
+          "evidence": "PTS~NetRtg r=0.624, q=0.0007.",
+          "source": "https://www.nba.com/stats/teams/traditional?Season=2026-27"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not settled as a bet.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "FAIL",
+          "evidence": "Legs are NOT independent: measured r(PTS,NetRtg)=0.624, r(PTS,PACE)=0.400; no joint model verified.",
+          "source": "https://www.nba.com/stats/teams/traditional?Season=2026-27"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Correlations reproduced by scripts/correlations.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "leg_corr_pts_netrtg": 0.623562734604243,
+        "leg_corr_pts_pace": 0.4000727801436195
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/stats/teams/traditional?Season=2026-27",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Measured leg correlation is published; treating legs as independent would be an inference, so it is not done.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "P-03",
+      "family": "Parlay",
+      "name": "3-leg cross-slate parlay",
+      "hypothesis": "Combine three M1 picks across the 2026-11-04 slate.",
+      "inputs": "M1 fair prices for 14 official scheduled games.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official schedule + ratings.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "Market prices missing.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=62 < 200.",
+          "source": "https://www.nba.com/games?date=2026-10-23"
+        },
+        "G4": {
+          "status": "PASS",
+          "evidence": "Prior-season inputs.",
+          "source": "https://www.nba.com/stats/teams/advanced?Season=2025-26"
+        },
+        "G5": {
+          "status": "FAIL",
+          "evidence": "No parlay-level test.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "FAIL",
+          "evidence": "Underlying M1 holdout skill negative.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official market odds (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "UNVERIFIED",
+          "evidence": "3-leg covariance matrix unavailable.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproducible from committed data.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/stats/teams/advanced?Season=2025-26",
+        "https://www.nba.com/stats/teams/advanced?Season=2026-27",
+        "https://www.nba.com/standings",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Variance compounds with leg count; no reward is assigned without verified prices.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "PP-01",
+      "family": "Player prop combo",
+      "name": "Player points over (season-average baseline)",
+      "hypothesis": "Bet over when a player's season PPG baseline suggests value.",
+      "inputs": "Official 2026-27 player season averages; game-level distribution required.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official player traditional table and games-page season leaders.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "No game-level player logs from free official pages (IR-11); fair line cannot be computed.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=8 transcribed player rows (442 exist); 0 settled prop bets.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Season averages include all games played; no holdout.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official prop market prices (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single leg.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Baselines committed in data/raw/.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "transcribed_player_rows": 8,
+        "official_page_rows": 442
+      },
+      "sources": [
+        "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame",
+        "https://www.nba.com/games?date=2026-11-04"
+      ],
+      "note": "Season-average baseline is verified; the fair prop line itself is blank + UNVERIFIED.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "PP-02",
+      "family": "Player prop combo",
+      "name": "Same-player PTS + REB + AST combo",
+      "hypothesis": "Combine three same-player prop legs using measured leg correlations.",
+      "inputs": "28 official team-leader PPG/RPG/APG baselines.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official NBA.com games page season leaders.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "No game-level logs; no fair lines.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "n=28 baselines, 0 settled combos.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Concurrent season averages.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G5": {
+          "status": "FAIL",
+          "evidence": "Baseline leg correlations all q>0.05.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not settled.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official prop market prices (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "UNVERIFIED",
+          "evidence": "Baseline correlations measured, but within-player game-level covariance is UNVERIFIED.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No walk-forward folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Reproduced by scripts/correlations.py.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "leg_corr_r": null,
+        "note": "Official 28 team-leader baselines: r(RPG,PPG)=-0.065, r(APG,PPG)=-0.018, r(APG,RPG)=0.056; all q>0.05."
+      },
+      "sources": [
+        "https://www.nba.com/games?date=2026-11-04",
+        "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+      ],
+      "note": "Official 28 team-leader baselines: r(RPG,PPG)=-0.065, r(APG,PPG)=-0.018, r(APG,RPG)=0.056; all q>0.05.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "PP-03",
+      "family": "Player prop combo",
+      "name": "3-pointers made over",
+      "hypothesis": "Bet over on a player's 3PM using official season 3PM averages.",
+      "inputs": "Official 3PM per game; game-level distribution required.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official player traditional 3PM column.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "No game-level 3PM logs.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "0 settled prop bets.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Concurrent averages.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not settled.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official prop prices (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "N/A",
+          "evidence": "Single leg.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Inputs committed.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+      ],
+      "note": "3PM averages are verified; fair line blank.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    },
+    {
+      "id": "PP-04",
+      "family": "Player prop combo",
+      "name": "Two-player same-game prop combo",
+      "hypothesis": "Combine points props of the two official team leaders in one game.",
+      "inputs": "28 official team-leader PPG baselines + official schedule.",
+      "gates": {
+        "G1": {
+          "status": "PASS",
+          "evidence": "Official games page leaders and matchups.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G2": {
+          "status": "FAIL",
+          "evidence": "No game-level logs, no fair lines.",
+          "source": "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+        },
+        "G3": {
+          "status": "FAIL",
+          "evidence": "0 settled combos.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G4": {
+          "status": "FAIL",
+          "evidence": "Concurrent averages.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G5": {
+          "status": "UNVERIFIED",
+          "evidence": "Not tested.",
+          "source": "https://www.nba.com/stats/help/glossary"
+        },
+        "G6": {
+          "status": "UNVERIFIED",
+          "evidence": "Not settled.",
+          "source": "https://www.nba.com/games?date=2026-11-01"
+        },
+        "G7": {
+          "status": "UNVERIFIED",
+          "evidence": "No official prop prices (IR-04).",
+          "source": "https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group"
+        },
+        "G8": {
+          "status": "UNVERIFIED",
+          "evidence": "Cross-player within-game covariance not obtainable from official free pages.",
+          "source": "https://www.nba.com/games?date=2026-11-04"
+        },
+        "G9": {
+          "status": "FAIL",
+          "evidence": "No folds.",
+          "source": "https://www.nba.com/games?date=2026-10-28"
+        },
+        "G10": {
+          "status": "PASS",
+          "evidence": "Inputs committed.",
+          "source": "https://github.com/sassnarep3-star/Own4"
+        }
+      },
+      "verdict": "NOT VALIDATED (unverified data)",
+      "roi": null,
+      "closing_line_value": null,
+      "net_profit": null,
+      "reward": null,
+      "metrics": {
+        "note": "no verified performance"
+      },
+      "sources": [
+        "https://www.nba.com/games?date=2026-11-04",
+        "https://www.nba.com/stats/players/traditional?Season=2026-27&PerMode=PerGame"
+      ],
+      "note": "Same-game correlation is UNVERIFIED; no parlay price is fabricated.",
+      "blank_fields": [
+        "roi",
+        "closing_line_value",
+        "net_profit",
+        "reward"
+      ],
+      "unverified": true
+    }
+  ]
+}

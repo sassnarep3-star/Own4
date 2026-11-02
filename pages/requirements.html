@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Requirements · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link active" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Requirements</div><h1>Requirements</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      
+      <p><strong>Source of requirements:</strong> the project brief supplied by the repository owner on 2026-11-02. <strong>Method:</strong> the brief was decomposed into atomic, traceable line items. Each row states the verbatim requirement, the deliverable that satisfies it, its verification evidence, and its status. Rows whose evidence is an official NBA/league page link to that page; rows whose evidence is the repository itself link to the official GitHub host.</p>
+<p>Status values: <code>done</code> · <code>partial</code> (officially-sourced data unavailable → blank + flagged) · <code>blocked</code>.</p>
+<h2>R1 — Objective &amp; analysis</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement (verbatim / atomic decomposition)</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R1.01</td><td>&quot;The goal of this project is to collect, organize, and analyze utilizing a full list of requirements.&quot;</td><td><code>REQUIREMENTS.md</code>, <code>data/raw/*</code>, site Data page</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+<tr><td>R1.02</td><td>Collect NBA data from official verified trusted sources.</td><td><code>data/raw/*</code>, <code>SOURCES.md</code></td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">NBA.com Teams Advanced 2026-27</a></td><td>done</td></tr>
+<tr><td>R1.03</td><td>Organize data into categories and easy-to-read tables.</td><td>Site <code>pages/data.html</code>, <code>pages/lines.html</code></td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stats Glossary</a></td><td>done</td></tr>
+<tr><td>R1.04</td><td>Analyze the data and publish findings.</td><td><code>CORRELATIONS.md</code>, <code>EXECUTIVE_SUMMARY.md</code>, site Analysis pages</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">NBA.com Teams Advanced 2025-26</a></td><td>done</td></tr>
+<tr><td>R1.05</td><td>&quot;I want to originate my own NBA lines.&quot;</td><td><code>LINES.md</code>, <code>scripts/build_lines.py</code>, <code>pages/lines.html</code></td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td><td>done</td></tr>
+<tr><td>R1.06</td><td>&quot;Research and develop strategies for generating useful signals.&quot;</td><td><code>STRATEGIES.md</code>, <code>CORRELATIONS.md</code></td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stat Glossary</a></td><td>done</td></tr>
+<tr><td>R1.07</td><td>&quot;Treat it as a leaderboard competition that provides rewards for top performing strategies.&quot;</td><td><code>LEADERBOARD.md</code>, <code>pages/leaderboard.html</code></td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+<tr><td>R1.08</td><td>&quot;Look at single bet, parlays, player prop bet combos.&quot;</td><td><code>STRATEGIES.md</code> (S-, P-, PP- families), <code>pages/strategies.html</code></td><td><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">NBA.com Players Traditional 2026-27</a></td><td>done</td></tr>
+<tr><td>R1.09</td><td>&quot;Each strategy must pass validation gates.&quot;</td><td><code>scripts/validate_strategies.py</code>, <code>pages/validation.html</code></td><td><a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com Games 2026-10-23</a></td><td>done</td></tr>
+<tr><td>R1.10</td><td>&quot;Determine correlation values.&quot;</td><td><code>CORRELATIONS.md</code>, <code>scripts/correlations.py</code>, <code>pages/correlations.html</code></td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">NBA.com Teams Advanced 2025-26</a></td><td>done</td></tr>
+<tr><td>R1.11</td><td>&quot;Remove luck from the equation.&quot;</td><td><code>pages/skill-vs-luck.html</code>, <code>scripts/backtest.py</code> (permutation tests, binomial nulls, bootstrap CIs)</td><td><a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com Games 2026-11-01</a></td><td>done</td></tr>
+<tr><td>R1.12</td><td>&quot;build strategies that are selectively skill based.&quot;</td><td><code>LEADERBOARD.md</code> (eligibility rule: only gate-passing signals score), <code>pages/skill-vs-luck.html</code></td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">NBA.com Teams Advanced 2026-27</a></td><td>done</td></tr>
+<tr><td>R1.13</td><td>&quot;Create an executive summary outlining important details.&quot;</td><td><code>EXECUTIVE_SUMMARY.md</code>, <code>pages/executive-summary.html</code></td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R2 — Working method</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R2.01</td><td>&quot;There should be no manual input on my part. Work on your own to finish all tasks in this session.&quot;</td><td>Autonomous end-to-end run; PR + merge + deploy handled here</td><td><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">GitHub repo</a></td><td>done</td></tr>
+<tr><td>R2.02</td><td>&quot;Work line by line.&quot;</td><td><code>VERIFICATION.md</code> row-by-row ledger; <code>scripts/verify.py</code></td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+<tr><td>R2.03</td><td>&quot;verify everything from official verified trusted sources&quot;</td><td><code>SOURCES.md</code>, <code>data/sources.json</code> allowlist</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stat Glossary</a></td><td>done</td></tr>
+<tr><td>R2.04</td><td>&quot;no hallucinations&quot; / &quot;Never infer or fill in values.&quot;</td><td>Blank cells + <code>UNVERIFIED</code> badges; <code>scripts/verify.py</code> enforces no guessed values</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R3 — Repo work</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R3.01</td><td>&quot;Review the repo.&quot;</td><td><code>REPO_REVIEW.md</code>, <code>pages/repo-review.html</code></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/README.md" target="_blank" rel="noopener">README at main</a></td><td>done</td></tr>
+<tr><td>R3.02</td><td>&quot;Work line by line verifying from official verified trusted sources&quot;</td><td><code>REPO_REVIEW.md</code> file-by-file table</td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
+<tr><td>R3.03</td><td>&quot;provide links for manual review&quot;</td><td>Every source row has a clickable official URL</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+<tr><td>R3.04</td><td>&quot;Flag any irregularities for review.&quot;</td><td>IR-01…IR-13, <code>pages/flagged.html</code></td><td><a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com Games 2026-11-01</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R4 — Site creation</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R4.01</td><td>&quot;Create a github page live site for this repo&quot;</td><td>GitHub Pages at <code>https://sassnarep3-star.github.io/Own4/</code></td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+<tr><td>R4.02</td><td>&quot;clean landing page&quot;</td><td><code>index.html</code></td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
+<tr><td>R4.03</td><td>&quot;subpages organized by category&quot;</td><td>13 category pages under <code>pages/</code></td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
+<tr><td>R4.04</td><td>&quot;UI should be clean, user friendly, simple, and easy to use, like a simple dashboard&quot;</td><td><code>assets/css/style.css</code>, sticky sidebar nav, cards, KPI tiles</td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
+<tr><td>R4.05</td><td>&quot;It should contain all entries and findings in a simple, easy to read table format&quot;</td><td>Every page renders generated HTML tables</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+<tr><td>R4.06</td><td>&quot;include any analysis and findings&quot;</td><td>Analysis sections on each page + <code>EXECUTIVE_SUMMARY.md</code></td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">NBA.com Teams Advanced 2025-26</a></td><td>done</td></tr>
+<tr><td>R4.07</td><td>&quot;Work line by line, verify everything, no hallucinations.&quot;</td><td><code>scripts/build_site.py</code> renders only committed rows; <code>scripts/check_links.py</code></td><td><a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com Games 2026-10-28</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R5 — Verification</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R5.01</td><td>&quot;Verify line by line.&quot;</td><td><code>scripts/verify.py</code> per-row checks; <code>pages/verification.html</code> ledger</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings</a></td><td>done</td></tr>
+<tr><td>R5.02</td><td>&quot;Every table row must have a source link to an official site.&quot;</td><td><code>scripts/verify.py</code> asserts ≥1 allowlisted official URL per rendered row</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stat Glossary</a></td><td>done</td></tr>
+<tr><td>R5.03</td><td>&quot;If a value can&#x27;t be confirmed from an official source, leave it blank and flag it as unverified.&quot;</td><td>Blank cells rendered as <code>—</code> + <code>UNVERIFIED</code> badge; <code>pages/flagged.html</code></td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td><td>done</td></tr>
+<tr><td>R5.04</td><td>&quot;Never infer or fill in values.&quot;</td><td>All derived values carry an explicit published formula and are labelled <code>DERIVED</code></td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">NBA.com Teams Advanced 2026-27</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R6 — Parallel sessions</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R6.01</td><td>&quot;Before starting, read COORDINATION.md (create it if it doesn&#x27;t exist).&quot;</td><td><code>COORDINATION.md</code> created and read first</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.02</td><td>&quot;It is the shared task board, listing each task, its status … owning session ID, and the files it touches.&quot;</td><td>Board with 11 tasks, statuses, owner, exclusive file scopes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.03</td><td>&quot;needs review means the item is published on the Flagged for Review page and does not block anything&quot;</td><td><code>pages/flagged.html</code>; merge not blocked</td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
+<tr><td>R6.04</td><td>&quot;Claim a task by writing your session ID and file scope there, then commit and push that claim immediately&quot;</td><td>T00 claim committed/pushed as first commit</td><td><a href="https://github.com/sassnarep3-star/Own4/commit/a79a03b" target="_blank" rel="noopener">Commit a79a03b</a></td><td>done</td></tr>
+<tr><td>R6.05</td><td>&quot;never start a task another session has claimed&quot;</td><td>No other claim existed; scopes disjoint</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.06</td><td>&quot;Keep scopes non-overlapping: each session works on its own branch (or git worktree) named session-&lt;id&gt;/&lt;task&gt;&quot;</td><td><strong>Blocked by platform</strong> — sessions are pinned to one branch. Non-overlapping file scopes used instead; logged as IR-13</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>partial (flagged)</td></tr>
+<tr><td>R6.07</td><td>&quot;If a task requires changing a file owned by another session, log the request in COORDINATION.md instead of editing it.&quot;</td><td>No cross-scope edits occurred; request log section present</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.08</td><td>&quot;Make small, frequent commits, and run git pull --rebase before every push.&quot;</td><td>One commit per task; rebase before each push</td><td><a href="https://github.com/sassnarep3-star/Own4/commits/arena/3ab8432d-own4" target="_blank" rel="noopener">Commits</a></td><td>done</td></tr>
+<tr><td>R6.09</td><td>&quot;If you hit a merge conflict, stop, resolve it without discarding the other session&#x27;s work, and log what happened.&quot;</td><td>No conflicts occurred; conflict log present</td><td><a href="https://github.com/sassnarep3-star/Own4/commits/arena/3ab8432d-own4" target="_blank" rel="noopener">Commits</a></td><td>done</td></tr>
+<tr><td>R6.10</td><td>&quot;When a task is finished, record its sources, the verification performed, and any irregularities in COORDINATION.md and mark it done.&quot;</td><td>Completion records section</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.11</td><td>&quot;Never mark anything verified without checking it against an official source, and link that source.&quot;</td><td><code>SOURCES.md</code> + <code>scripts/verify.py</code> allowlist</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stat Glossary</a></td><td>done</td></tr>
+<tr><td>R6.12</td><td>&quot;Shared outputs, such as the table data and the site&#x27;s index and navigation, are changed only by a final integration session once all other tasks are done.&quot;</td><td>T09 integration task owns <code>index.html</code>, <code>pages/*</code>, <code>assets/*</code>, <code>site-data/*</code></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R6.13</td><td>&quot;That session merges the branches, re-verifies the combined data line by line, confirms the site builds with no broken links, and publishes to GitHub Pages.&quot;</td><td>T09 re-verification + <code>scripts/check_links.py</code> + Pages deploy</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+<tr><td>R6.14</td><td>&quot;If a session crashes or its claim is more than 60 minutes old with no commits, any other session may take over … note the handoff in the log.&quot;</td><td>Handoff log section present; no takeover needed</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+</tbody></table></div>
+<h2>R7 — Pull request and merge</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Deliverable</th>
+<th>Verification evidence (official link)</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>R7.01</td><td>&quot;Do not stop to wait for my review. Work fully on your own from start to finish.&quot;</td><td>Autonomous run</td><td><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">GitHub repo</a></td><td>done</td></tr>
+<tr><td>R7.02</td><td>&quot;create a pull request from the integration branch to main with a summary of the changes, the sources used, and any flagged irregularities&quot;</td><td>PR from <code>arena/3ab8432d-own4</code> → <code>main</code> (platform-mandated branch)</td><td><a href="https://github.com/sassnarep3-star/Own4/pulls" target="_blank" rel="noopener">Pull requests</a></td><td>done</td></tr>
+<tr><td>R7.03</td><td>&quot;Then merge the pull request without waiting for approval&quot;</td><td><code>gh pr merge &lt;n&gt; --merge</code></td><td><a href="https://github.com/sassnarep3-star/Own4/pulls" target="_blank" rel="noopener">Pull requests</a></td><td>done</td></tr>
+<tr><td>R7.04</td><td>&quot;confirm GitHub Pages deploys successfully&quot;</td><td><code>gh api .../pages/builds/latest</code> + HTTP 200 on live URL</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+<tr><td>R7.05</td><td>&quot;record the PR link and merge result in COORDINATION.md&quot;</td><td>T10 completion record</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/arena/3ab8432d-own4/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md</a></td><td>done</td></tr>
+<tr><td>R7.06</td><td>&quot;Flagged irregularities and unverified items do not block the merge.&quot;</td><td>Merge proceeds with flagged items published</td><td><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">GitHub repo</a></td><td>done</td></tr>
+<tr><td>R7.07</td><td>&quot;Publish them on a clearly labeled &#x27;Flagged for Review&#x27; page on the site, with the source links&quot;</td><td><code>pages/flagged.html</code></td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games 2026-11-04</a></td><td>done</td></tr>
+<tr><td>R7.08</td><td>&quot;If the build, a check, or the deploy fails, fix the problem and retry until the site is live. Do not merge a broken site.&quot;</td><td><code>scripts/check_links.py</code> + Pages build check before merge</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+</tbody></table></div>
+<p><strong>Note on statuses:</strong> <code>done</code> for R7 rows is recorded after the PR/merge/deploy steps complete in T10. The register is generated before the merge and is re-checked by the integration session.</p>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>

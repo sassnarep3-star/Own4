@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our own lines · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link active" href="lines.html">Our own lines</a><a class="nav-link" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Our own lines</div><h1>Our own lines</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      <div class="kpi-grid"><a class="kpi" href="lines.html"><div class="kpi-label">Games priced</div><div class="kpi-value">14</div><div class="kpi-sub">2026-11-04 slate</div></a><a class="kpi" href="lines.html"><div class="kpi-label">Model</div><div class="kpi-value">M1</div><div class="kpi-sub">prior-season ratings</div></a><a class="kpi" href="lines.html"><div class="kpi-label">Sigma</div><div class="kpi-value">14.58</div><div class="kpi-sub">train-window residual</div></a></div>
+      <div class="callout callout-info"><div class="callout-title">These are our own lines</div><div class="callout-body">Zero-margin fair prices originated from official NBA.com ratings. They are <strong>model outputs, not sportsbook prices</strong>. No market odds, home-court adjustment, blend weight or vig is assumed: those cells are blank + UNVERIFIED.</div></div><h2>Model parameters (all derived from official data)</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Derived from</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>League avg rating 2025-26 (L)</td>
+<td>114.7600</td>
+<td>mean of 30 official OffRtg/DefRtg rows</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a></td>
+</tr>
+<tr>
+<td>League avg rating 2026-27 (L)</td>
+<td>111.9733</td>
+<td>mean of 30 official OffRtg/DefRtg rows</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>Residual margin sigma</td>
+<td>14.5764</td>
+<td>41 official settled games before the slate</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>Train residual bias</td>
+<td>2.3845</td>
+<td>reported as a diagnostic, not applied as a correction</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>League home win rate</td>
+<td>48/92 = 0.5217</td>
+<td>official standings HOME columns; NOT applied per game (IR-12)</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Formulas</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>#</th>
+<th>Formula / definition</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>1</td>
+<td>L = (mean(OffRtg) + mean(DefRtg)) / 2 over the 30 official team rows of one season</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>P = (PACE_a + PACE_b) / 2</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>E_a = OffRtg_a + DefRtg_b - L ; E_b = OffRtg_b + DefRtg_a - L</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>S_a = E_a * P / 100 ; S_b = E_b * P / 100</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>fair_spread_a = -(S_a - S_b) ; fair_total = S_a + S_b</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>sigma = sd( (actual margin) - (projected margin) ) over TRAIN settled games only</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>p_a = Phi( (S_a - S_b) / sigma ) ; fair American odds from p (zero margin)</td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+</tbody></table>
+</div><h2>Originated fair lines — 2026-11-04 slate (14 games)</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Matchup</th>
+<th>Time ET</th>
+<th>Proj A</th>
+<th>Proj B</th>
+<th>Fair spread A</th>
+<th>Fair total</th>
+<th>Fair ML A</th>
+<th>Fair ML B</th>
+<th>P(A)</th>
+<th>M2 spread A</th>
+<th>M2 total</th>
+<th>Market spread/total</th>
+<th>Edge vs market</th>
+<th>Home-court adj.</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>ATL vs WAS</td>
+<td>7:00 PM ET</td>
+<td>124.8</td>
+<td>110.5</td>
+<td>-14.25</td>
+<td>235.3</td>
+<td>-509</td>
+<td>+509</td>
+<td>0.836</td>
+<td>0.20</td>
+<td>223.7</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>PHI vs DET</td>
+<td>7:00 PM ET</td>
+<td>108.6</td>
+<td>117.1</td>
+<td>8.51</td>
+<td>225.7</td>
+<td>+258</td>
+<td>-258</td>
+<td>0.280</td>
+<td>4.37</td>
+<td>202.8</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>MIL vs BOS</td>
+<td>7:30 PM ET</td>
+<td>105.8</td>
+<td>119.8</td>
+<td>13.96</td>
+<td>225.6</td>
+<td>+491</td>
+<td>-491</td>
+<td>0.169</td>
+<td>23.50</td>
+<td>233.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>CHA vs BKN</td>
+<td>7:30 PM ET</td>
+<td>118.9</td>
+<td>104.4</td>
+<td>-14.54</td>
+<td>223.3</td>
+<td>-528</td>
+<td>+528</td>
+<td>0.841</td>
+<td>0.69</td>
+<td>202.8</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>CHI vs NYK</td>
+<td>7:30 PM ET</td>
+<td>110.1</td>
+<td>121.9</td>
+<td>11.75</td>
+<td>232.1</td>
+<td>+376</td>
+<td>-376</td>
+<td>0.210</td>
+<td>15.01</td>
+<td>228.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>CLE vs OKC</td>
+<td>8:00 PM ET</td>
+<td>110.6</td>
+<td>117.6</td>
+<td>6.94</td>
+<td>228.2</td>
+<td>+215</td>
+<td>-215</td>
+<td>0.317</td>
+<td>-5.01</td>
+<td>221.9</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>UTA vs NOP</td>
+<td>8:00 PM ET</td>
+<td>118.4</td>
+<td>122.3</td>
+<td>3.89</td>
+<td>240.6</td>
+<td>+153</td>
+<td>-153</td>
+<td>0.395</td>
+<td>12.17</td>
+<td>226.0</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>IND vs MEM</td>
+<td>8:00 PM ET</td>
+<td>115.7</td>
+<td>117.5</td>
+<td>1.83</td>
+<td>233.3</td>
+<td>+122</td>
+<td>-122</td>
+<td>0.450</td>
+<td>18.44</td>
+<td>228.6</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>MIN vs HOU</td>
+<td>8:30 PM ET</td>
+<td>112.1</td>
+<td>114.4</td>
+<td>2.28</td>
+<td>226.4</td>
+<td>+128</td>
+<td>-128</td>
+<td>0.438</td>
+<td>1.31</td>
+<td>228.8</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>TOR vs DEN</td>
+<td>9:00 PM ET</td>
+<td>115.5</td>
+<td>117.8</td>
+<td>2.29</td>
+<td>233.3</td>
+<td>+128</td>
+<td>-128</td>
+<td>0.438</td>
+<td>-9.59</td>
+<td>227.1</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>POR vs PHX</td>
+<td>9:00 PM ET</td>
+<td>111.1</td>
+<td>112.8</td>
+<td>1.70</td>
+<td>223.9</td>
+<td>+120</td>
+<td>-120</td>
+<td>0.454</td>
+<td>-21.62</td>
+<td>242.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>DAL vs SAS</td>
+<td>9:30 PM ET</td>
+<td>107.7</td>
+<td>121.4</td>
+<td>13.73</td>
+<td>229.1</td>
+<td>+477</td>
+<td>-477</td>
+<td>0.173</td>
+<td>3.91</td>
+<td>225.4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>LAL vs SAC</td>
+<td>10:00 PM ET</td>
+<td>122.1</td>
+<td>111.0</td>
+<td>-11.16</td>
+<td>233.1</td>
+<td>-351</td>
+<td>+351</td>
+<td>0.778</td>
+<td>-24.41</td>
+<td>243.4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+<tr>
+<td>MIA vs LAC</td>
+<td>10:30 PM ET</td>
+<td>117.1</td>
+<td>116.0</td>
+<td>-1.11</td>
+<td>233.1</td>
+<td>-113</td>
+<td>+113</td>
+<td>0.530</td>
+<td>-3.18</td>
+<td>230.4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">Advanced 25-26 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">Advanced 26-27 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Glossary ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">Games 2026-10-23 ↗</a> <a class="src-chip" href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">Games 2026-10-28 ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">M1 = prior-season model (validated out-of-sample). M2 = current-season ratings, no out-of-sample calibration, so its moneyline is blank. Market, edge and home-court cells are UNVERIFIED.</p>
+</div><h2>Player-prop baselines & unverified fair lines (28 official team leaders)</h2><div class="table-wrap">
+<table class="data-table"><thead><tr>
+<th>Matchup</th>
+<th>Side</th>
+<th>Season leader</th>
+<th>PPG</th>
+<th>RPG</th>
+<th>APG</th>
+<th>Fair PTS line</th>
+<th>Fair REB line</th>
+<th>Fair AST line</th>
+<th>Market prop price</th>
+<th>Official source</th></tr></thead><tbody>
+<tr>
+<td>ATL vs WAS</td>
+<td>A</td>
+<td>Jalen Johnson</td>
+<td>18.3</td>
+<td>9.0</td>
+<td>7.9</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630552/jalen-johnson" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>ATL vs WAS</td>
+<td>B</td>
+<td>Trae Young</td>
+<td>20.7</td>
+<td>3.7</td>
+<td>10.2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629027/trae-young" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PHI vs DET</td>
+<td>A</td>
+<td>Tyrese Maxey</td>
+<td>29.6</td>
+<td>4.1</td>
+<td>4.4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630178/tyrese-maxey" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>PHI vs DET</td>
+<td>B</td>
+<td>Cade Cunningham</td>
+<td>22.2</td>
+<td>5.5</td>
+<td>7.2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630595/cade-cunningham" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIL vs BOS</td>
+<td>A</td>
+<td>Tyler Herro</td>
+<td>22.0</td>
+<td>4.8</td>
+<td>4.2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629639/tyler-herro" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIL vs BOS</td>
+<td>B</td>
+<td>Jayson Tatum</td>
+<td>28.3</td>
+<td>6.0</td>
+<td>7.7</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1628369/jayson-tatum" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CHA vs BKN</td>
+<td>A</td>
+<td>Brandon Miller</td>
+<td>24.4</td>
+<td>6.1</td>
+<td>2.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1641706/brandon-miller" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CHA vs BKN</td>
+<td>B</td>
+<td>Julius Randle</td>
+<td>20.8</td>
+<td>7.2</td>
+<td>5.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/203944/julius-randle" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CHI vs NYK</td>
+<td>A</td>
+<td>Caleb Wilson</td>
+<td>21.2</td>
+<td>6.7</td>
+<td>2.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1643410/caleb-wilson" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CHI vs NYK</td>
+<td>B</td>
+<td>Karl-Anthony Towns</td>
+<td>21.8</td>
+<td>13.5</td>
+<td>3.2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1626157/karl-anthony-towns" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CLE vs OKC</td>
+<td>A</td>
+<td>Donovan Mitchell</td>
+<td>22.7</td>
+<td>5.3</td>
+<td>4.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1628378/donovan-mitchell" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>CLE vs OKC</td>
+<td>B</td>
+<td>Shai Gilgeous-Alexander</td>
+<td>26.0</td>
+<td>4.5</td>
+<td>3.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1628983/shai-gilgeous-alexander" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>UTA vs NOP</td>
+<td>A</td>
+<td>Keyonte George</td>
+<td>21.7</td>
+<td>3.8</td>
+<td>6.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1641718/keyonte-george" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>UTA vs NOP</td>
+<td>B</td>
+<td>Zion Williamson</td>
+<td>20.7</td>
+<td>4.3</td>
+<td>2.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629627/zion-williamson" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>IND vs MEM</td>
+<td>A</td>
+<td>Pascal Siakam</td>
+<td>21.4</td>
+<td>7.4</td>
+<td>4.0</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1627783/pascal-siakam" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>IND vs MEM</td>
+<td>B</td>
+<td>Ty Jerome</td>
+<td>25.8</td>
+<td>3.2</td>
+<td>5.8</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629660/ty-jerome" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIN vs HOU</td>
+<td>A</td>
+<td>Jaden McDaniels</td>
+<td>17.3</td>
+<td>6.0</td>
+<td>3.6</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630183/jaden-mcdaniels" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIN vs HOU</td>
+<td>B</td>
+<td>Alperen Sengun</td>
+<td>22.8</td>
+<td>9.0</td>
+<td>7.4</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630578/alperen-sengun" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>TOR vs DEN</td>
+<td>A</td>
+<td>Scottie Barnes</td>
+<td>24.8</td>
+<td>6.7</td>
+<td>4.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630567/scottie-barnes" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>TOR vs DEN</td>
+<td>B</td>
+<td>Nikola Jokić</td>
+<td>21.2</td>
+<td>9.8</td>
+<td>9.2</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/203999/nikola-joki%C4%87" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>POR vs PHX</td>
+<td>A</td>
+<td>Deni Avdija</td>
+<td>23.0</td>
+<td>7.0</td>
+<td>5.6</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1630166/deni-avdija" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>POR vs PHX</td>
+<td>B</td>
+<td>Devin Booker</td>
+<td>22.3</td>
+<td>3.8</td>
+<td>5.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1626164/devin-booker" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>DAL vs SAS</td>
+<td>A</td>
+<td>Cooper Flagg</td>
+<td>26.8</td>
+<td>6.0</td>
+<td>6.6</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1642843/cooper-flagg" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>DAL vs SAS</td>
+<td>B</td>
+<td>Victor Wembanyama</td>
+<td>28.0</td>
+<td>10.7</td>
+<td>3.0</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1641705/victor-wembanyama" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>LAL vs SAC</td>
+<td>A</td>
+<td>Luka Dončić</td>
+<td>37.7</td>
+<td>8.2</td>
+<td>7.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629029/luka-don%C4%8Di%C4%87" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>LAL vs SAC</td>
+<td>B</td>
+<td>Domantas Sabonis</td>
+<td>16.0</td>
+<td>15.8</td>
+<td>7.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1627734/domantas-sabonis" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIA vs LAC</td>
+<td>A</td>
+<td>Giannis Antetokounmpo</td>
+<td>28.2</td>
+<td>12.3</td>
+<td>5.5</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/203507/giannis-antetokounmpo" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+<tr>
+<td>MIA vs LAC</td>
+<td>B</td>
+<td>Darius Garland</td>
+<td>20.8</td>
+<td>1.3</td>
+<td>6.3</td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td><span class="blank">—</span> <span class="badge badge-unverified">UNVERIFIED</span></td>
+<td class="src-cell"><a class="src-chip" href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games 2026-11-04 ↗</a> <a class="src-chip" href="https://www.nba.com/player/1629636/darius-garland" target="_blank" rel="noopener">Player page ↗</a> <a class="src-chip" href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">Players 26-27 ↗</a></td>
+</tr>
+</tbody></table>
+<p class="table-note">PPG/RPG/APG are verified official season averages. A fair over/under requires a game-level distribution that free official NBA pages do not provide, so every fair line is blank + UNVERIFIED (IR-11).</p>
+</div><h2>Caveats</h2><ul><li>No home/away designation is asserted; per-game home-court adjustment is UNVERIFIED.</li><li>No market or closing odds are available from free official NBA pages (IR-04); all market columns are blank.</li><li>M2 (current-season) lines use only 4-7 games per team and have no out-of-sample calibration; their moneyline is blank.</li><li>Fair prices are zero-margin model outputs, NOT sportsbook prices and NOT betting advice.</li></ul>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>

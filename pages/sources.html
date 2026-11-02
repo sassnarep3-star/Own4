@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Source registry · Own4 NBA Research</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head><body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="brand" href="../index.html">
+      <span class="brand-mark">O4</span><span><strong>Own4</strong><small>NBA lines &amp; signals</small></span>
+    </a>
+    <div class="nav"><div class="nav-group"><div class="nav-group-title">Start</div><a class="nav-link" href="../index.html">Overview</a><a class="nav-link" href="executive-summary.html">Executive summary</a><a class="nav-link" href="requirements.html">Requirements</a></div><div class="nav-group"><div class="nav-group-title">Data &amp; lines</div><a class="nav-link" href="data.html">Official data</a><a class="nav-link" href="lines.html">Our own lines</a><a class="nav-link active" href="sources.html">Source registry</a></div><div class="nav-group"><div class="nav-group-title">Research</div><a class="nav-link" href="strategies.html">Strategies</a><a class="nav-link" href="validation.html">Validation gates</a><a class="nav-link" href="correlations.html">Correlations</a><a class="nav-link" href="skill-vs-luck.html">Skill vs luck</a></div><div class="nav-group"><div class="nav-group-title">Competition</div><a class="nav-link" href="leaderboard.html">Leaderboard &amp; rewards</a></div><div class="nav-group"><div class="nav-group-title">Governance</div><a class="nav-link" href="verification.html">Verification ledger</a><a class="nav-link" href="repo-review.html">Repo review</a><a class="nav-link" href="flagged.html">⚑ Flagged for Review</a></div></div>
+    <div class="sidebar-foot">Snapshot 2026-11-02 UTC<br>Official-source verified</div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="crumb">Own4 / Source registry</div><h1>Source registry</h1></div>
+      <div class="topbar-right">
+        <span class="pill">verified snapshot</span>
+        <input id="globalFilter" class="filter" type="search" placeholder="Filter table rows…" aria-label="Filter table rows">
+      </div>
+    </header>
+    <div class="content">
+      
+      <p><strong>Retrieval date for every source below:</strong> 2026-11-02 (UTC) unless noted. <strong>Definition of &quot;official&quot;:</strong> a page on <code>nba.com</code>, <code>official.nba.com</code>, <code>pr.nba.com</code> (NBA Communications), or <code>cdn.nba.com</code>. Only these domains are admitted into verified tables. Third-party aggregators are <strong>excluded</strong> and listed at the bottom of this file.</p>
+<p>Every row in the registry was opened and read in this session. Where a page did not expose a value, the value is recorded as <strong>UNVERIFIED</strong> rather than guessed.</p>
+<h2>A. Data sources (values transcribed line by line)</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Official site (manual review link)</th>
+<th>What was verified</th>
+<th>Rows used</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>SRC-01</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com Standings 2026-27</a></td><td>30 team rows: W, L, WIN%, CONF, DIV, HOME, ROAD, OT, LAST10, STREAK; tie-break procedures</td><td>30</td><td>verified</td></tr>
+<tr><td>SRC-02</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2026-27" target="_blank" rel="noopener">NBA.com Teams Advanced 2026-27</a></td><td>30 team rows: GP, W, L, OffRtg, DefRtg, NetRtg, PACE, TS%, POSS</td><td>30</td><td>verified</td></tr>
+<tr><td>SRC-03</td><td><a href="https://www.nba.com/stats/teams/advanced?Season=2025-26" target="_blank" rel="noopener">NBA.com Teams Advanced 2025-26</a></td><td>30 team rows, each GP=82: GP, W, L, OffRtg, DefRtg, NetRtg, PACE</td><td>30</td><td>verified</td></tr>
+<tr><td>SRC-04</td><td><a href="https://www.nba.com/stats/teams/traditional?Season=2026-27" target="_blank" rel="noopener">NBA.com Teams Traditional 2026-27</a></td><td>30 team rows: GP, W, L, PTS, FG%, 3PM, 3P%, REB, AST, +/-</td><td>30</td><td>verified</td></tr>
+<tr><td>SRC-05</td><td><a href="https://www.nba.com/stats/players/traditional?Season=2026-27&amp;PerMode=PerGame" target="_blank" rel="noopener">NBA.com Players Traditional 2026-27 (Per Game)</a></td><td>Page reports 442 rows; top 8 player rows transcribed: GP, PTS, REB, AST, 3PM, FG%</td><td>8 of 442</td><td>partial / flagged</td></tr>
+<tr><td>SRC-06</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com Games, 2026-11-04</a></td><td>14 scheduled games; 28 per-team &quot;Season Leaders&quot; rows with PPG/RPG/APG</td><td>14 + 28</td><td>verified</td></tr>
+<tr><td>SRC-07</td><td><a href="https://www.nba.com/games?date=2026-11-01" target="_blank" rel="noopener">NBA.com Games, 2026-11-01</a></td><td>4 Final scores with game IDs</td><td>4</td><td>verified</td></tr>
+<tr><td>SRC-08</td><td><a href="https://www.nba.com/games?date=2026-10-31" target="_blank" rel="noopener">NBA.com Games, 2026-10-31</a></td><td>7 Final scores with game IDs</td><td>7</td><td>verified</td></tr>
+<tr><td>SRC-09</td><td><a href="https://www.nba.com/games?date=2026-10-30" target="_blank" rel="noopener">NBA.com Games, 2026-10-30</a></td><td>10 Final scores with game IDs (Emirates NBA Cup group games)</td><td>10</td><td>verified</td></tr>
+<tr><td>SRC-10</td><td><a href="https://www.nba.com/games?date=2026-10-28" target="_blank" rel="noopener">NBA.com Games, 2026-10-28</a></td><td>12 Final scores with game IDs</td><td>12</td><td>verified</td></tr>
+<tr><td>SRC-11</td><td><a href="https://www.nba.com/games?date=2026-10-26" target="_blank" rel="noopener">NBA.com Games, 2026-10-26</a></td><td>9 Final scores with game IDs</td><td>9</td><td>verified</td></tr>
+<tr><td>SRC-12</td><td><a href="https://www.nba.com/games?date=2026-10-24" target="_blank" rel="noopener">NBA.com Games, 2026-10-24</a></td><td>8 Final scores with game IDs</td><td>8</td><td>verified</td></tr>
+<tr><td>SRC-13</td><td><a href="https://www.nba.com/games?date=2026-10-23" target="_blank" rel="noopener">NBA.com Games, 2026-10-23</a></td><td>12 Final scores with game IDs</td><td>12</td><td>verified</td></tr>
+<tr><td>SRC-14</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">NBA.com Games, 2026-11-02</a></td><td>15 scheduled games; monthly game-count calendar used for cross-check</td><td>15 + calendar</td><td>verified</td></tr>
+<tr><td>SRC-15</td><td><a href="https://www.nba.com/game/okc-vs-cle-0022600158" target="_blank" rel="noopener">NBA.com Game detail OKC vs CLE, 2026-11-02</a></td><td>Schedule cross-check for 2026-11-02 and 2026-11-04 game IDs</td><td>29</td><td>verified</td></tr>
+<tr><td>SRC-16</td><td><a href="https://www.nba.com/game/bos-vs-orl-0022600154/box-score" target="_blank" rel="noopener">NBA.com Game box score BOS vs ORL, 2026-11-01</a></td><td>Score cross-check (BOS 108, ORL 97) and player box-score row</td><td>1</td><td>verified</td></tr>
+<tr><td>SRC-17</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">NBA.com Stat Glossary</a></td><td>Official definitions: <code>NetRtg = OffRtg − DefRtg</code> (point differential per 100 possessions); <code>PACE</code> = possessions per 48 minutes; <code>OffRtg</code>, <code>DefRtg</code>, <code>TS%</code></td><td>definitions</td><td>verified</td></tr>
+<tr><td>SRC-18</td><td><a href="https://official.nba.com/rulebook/" target="_blank" rel="noopener">NBA Official Rulebook</a></td><td>NBA rulebook landing page. Only the heading was returned on retrieval; no rule text usable</td><td>0</td><td>flagged — content unavailable</td></tr>
+<tr><td>SRC-19</td><td><a href="https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group" target="_blank" rel="noopener">NBA.com: NBA extends U.S. betting data partnerships (2020-10-29)</a></td><td>NBA statement that official betting data is distributed to *licensed operators*; this is why free public market/closing odds are not an official NBA.com data product</td><td>policy</td><td>verified</td></tr>
+<tr><td>SRC-20</td><td><a href="https://pr.nba.com/nba-sportradar-genius-sports-group-partnerships/" target="_blank" rel="noopener">NBA Communications: betting data partnerships</a></td><td>Official league communications on official betting data distribution</td><td>policy</td><td>verified</td></tr>
+<tr><td>SRC-21</td><td><a href="https://www.nba.com/news/mgm-resorts-international-becomes-official-gaming-partner-nba-official-release" target="_blank" rel="noopener">NBA.com: MGM Resorts becomes official gaming partner</a></td><td>Official league statement on integrity and official data in sports betting</td><td>policy</td><td>verified</td></tr>
+<tr><td>SRC-22</td><td><a href="https://www.nba.com/nba-cup/2026" target="_blank" rel="noopener">NBA.com NBA Cup 2026</a></td><td>Confirms 2026 NBA Cup competition exists; explains Cup-labelled games on 2026-10-30</td><td>context</td><td>verified (nav link only)</td></tr>
+</tbody></table></div>
+<h2>B. Official endpoints attempted and unusable (flagged, not used)</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>ID</th>
+<th>Official site</th>
+<th>Result</th>
+<th>Consequence</th>
+</tr></thead><tbody>
+<tr><td>SRC-23</td><td><a href="https://cdn.nba.com/static/json/liveData/scoreboard/scoreboard_20261031.json" target="_blank" rel="noopener">cdn.nba.com liveData scoreboard 2026-10-31</a></td><td>HTTP 500 on retrieval</td><td>settled-game collection done from NBA.com games pages instead</td></tr>
+<tr><td>SRC-24</td><td><a href="https://cdn.nba.com/static/json/staticData/scheduleLeagueV2_1.json" target="_blank" rel="noopener">cdn.nba.com staticData scheduleLeagueV2</a></td><td>HTTP 500 on retrieval</td><td>schedule taken from NBA.com games pages instead</td></tr>
+<tr><td>SRC-25</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">NBA.com games page odds toggle</a></td><td>Page shows a &quot;HIDE ODDS&quot; control but <strong>no odds values</strong> were exposed in the retrieved content</td><td><strong>market odds / closing lines = UNVERIFIED</strong>, left blank everywhere</td></tr>
+</tbody></table></div>
+<h2>C. Excluded third-party sources (NOT official — never used in verified tables)</h2>
+<div class="table-wrap"><table class="data-table"><thead><tr>
+<th>Site</th>
+<th>Link</th>
+<th>Reason for exclusion</th>
+</tr></thead><tbody>
+<tr><td>Basketball-Reference</td><td><a href="https://www.basketball-reference.com/leagues/NBA_2026_leaders.html" target="_blank" rel="noopener">2025-26 leaders</a></td><td>Third-party statistics aggregator, not an official league source <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com official reference</a></td></tr>
+<tr><td>Kalshi</td><td><a href="https://kalshi.com/nba/leaders" target="_blank" rel="noopener">NBA leaders</a></td><td>Prediction-market site, not an official league source <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com official reference</a></td></tr>
+<tr><td>Land of Basketball</td><td><a href="https://www.landofbasketball.com/yearbyyear/2025_2026_season_leaders.htm" target="_blank" rel="noopener">2025-26 season leaders</a></td><td>Third-party aggregator <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com official reference</a></td></tr>
+<tr><td>whynba.com</td><td><a href="https://whynba.com/league-leaders/" target="_blank" rel="noopener">league leaders</a></td><td>Third-party; 2026-27 values shown are implausible (e.g. &quot;Paul George 38.0 PPG&quot;, multiple players at &quot;100&quot; 3P%) — flagged as an irregularity <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com official reference</a></td></tr>
+</tbody></table></div>
+<h2>D. Source integrity checks performed</h2>
+<ol><li><strong>Season completeness</strong> — <code>SRC-03</code>: all 30 teams report GP = 82 (a completed 2025-26 regular season), and the sum of wins equals the sum of losses. Computed in <code>scripts/verify.py</code>.</li><li><strong>Standings internal consistency</strong> — <code>SRC-01</code>: for each of 30 rows, HOME W-L + ROAD W-L = overall W-L; W + L = GP. Computed row by row in <code>scripts/verify.py</code>.</li><li><strong>Cross-table GP consistency</strong> — <code>SRC-01</code> vs <code>SRC-02</code> vs <code>SRC-04</code>: games played agree for all 30 teams.</li><li><strong>Schedule/standings reconciliation</strong> — sum of team GP on <code>SRC-01</code> ÷ 2 equals the official game count for 2026-10-20 … 2026-11-01 shown in the <code>SRC-14</code> calendar.</li><li><strong>Score cross-check</strong> — <code>SRC-07</code> score for BOS vs ORL matches <code>SRC-16</code> box score header.</li><li><strong>Coverage</strong> — 62 of the 92 games played in the snapshot window were transcribed from official games pages. The remaining 30 are not included in any table; this is disclosed on the Flagged for Review page.</li></ol>
+    </div>
+    <footer class="footer">
+      <span>Own4 · research &amp; validation only, not betting advice.</span>
+      <span><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">Repository ↗</a>
+      · <a href="https://www.nba.com/standings" target="_blank" rel="noopener">NBA.com standings ↗</a></span>
+    </footer>
+  </main>
+</div>
+<script src="../assets/js/app.js"></script>
+</body></html>
