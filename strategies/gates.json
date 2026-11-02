@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "preregistered_utc": "2026-11-02T18:50Z",
+  "note": "Committed BEFORE any model evaluation was run. Thresholds below may not be changed after results are seen; any change must be a new version with a logged reason.",
+  "data_scope": "2026-27 regular season games 2026-10-20..2026-11-01 (92 games, official nba.com scoreboard pages) + official 2025-26 team tables.",
+  "targets": {
+    "margin": "home points - away points; error metric = MAE (points)",
+    "total": "home points + away points; error metric = MAE (points)",
+    "win": "home team wins; probability metric = Brier score",
+    "parlay": "2-leg same-game parlay (favourite wins AND total over own line); probability metric = Brier score"
+  },
+  "walk_forward_rule": "A prediction for a game on date D may use only games with date < D (strictly earlier; same-day games excluded) plus the official 2025-26 tables. Parameters are either declared a priori or tuned only on games that precede the evaluation window.",
+  "bootstrap": {"method": "paired bootstrap over games", "reps": 10000, "seed": 20261102, "ci": "percentile", "alpha_family": 0.05, "multiple_testing": "Bonferroni across the m non-baseline testable strategies in the catalogue: CI level = 1 - 0.05/m (two-sided). The single pre-declared primary strategies (BLEND-41 margin and total) are also reported at plain 95%."},
+  "gates": [
+    {"id": "G1", "name": "Provenance", "points": 10, "required": false, "rule": "Every input comes from an official nba.com page with a source_url in the data row, and scripts/verify_data.py passes."},
+    {"id": "G2", "name": "Walk-forward / no look-ahead", "points": 10, "required": false, "rule": "Evaluation code obeys walk_forward_rule (asserted in code)."},
+    {"id": "G3", "name": "Sample size", "points": 20, "required": true, "rule": "At least 300 out-of-sample evaluated games (probability targets: 300 games after the first 30 games of the season)."},
+    {"id": "G4", "name": "Significance vs strongest baseline", "points": 25, "required": true, "rule": "Lower bound of the bootstrap CI of (baseline error - strategy error) is > 0 (for Brier targets: baseline Brier - strategy Brier)."},
+    {"id": "G5", "name": "Calibration", "points": 15, "required": false, "rule": "Probability targets: strategy Brier <= baseline Brier AND |mean predicted - observed rate| <= 0.05. Point-forecast targets: |mean signed error| <= 1.5 points."},
+    {"id": "G6", "name": "Market edge / closing-line value", "points": 20, "required": true, "required_for": "betting use only", "rule": "Beats an OFFICIAL closing market price out of sample. No official odds source is available to this project; this gate is 'not testable' and earns 0."},
+    {"id": "G7", "name": "Stability", "points": 10, "required": false, "rule": "Error improvement vs baseline has the same sign in both chronological halves of the evaluation sample."}
+  ],
+  "tiers": {
+    "Forecast-validated": "G3 and G4 pass and total score >= 60. Eligible for a virtual reward.",
+    "Betting-validated": "Forecast-validated AND G6 pass. Only these may ever be staked with real money. (None can exist until an official odds source is added.)",
+    "Provisional": "G1, G2 pass and point estimate beats baseline but G3 or G4 fails: monitored, reward = 0. Outcome is indistinguishable from luck at this sample size.",
+    "Rejected": "G1 or G2 fails, or the point estimate does not beat the baseline.",
+    "Blocked": "Required data is not available from an official source; not evaluated, reward = 0."
+  },
+  "reward_rule": "Virtual pool of 1000 stake units (NOT real money). Split pro rata to total gate score among Forecast-validated strategies only; Betting-validated strategies get x2 weight. If no strategy qualifies the pool is unallocated (0 for everyone). Baselines are never rewarded.",
+  "catalogue": [
+    {"id": "BASE-HCA", "target": "margin", "type": "baseline", "definition": "margin = H (mean 2025-26 home +/-), no team information"},
+    {"id": "BASE-LGTOTAL", "target": "total", "type": "baseline", "definition": "total = league-average total so far (2025-26 PTS/g x2 before the first game)"},
+    {"id": "BASE-HOMEWIN", "target": "win", "type": "baseline", "definition": "P(home wins) = 2025-26 home win rate (home W / home GP)"},
+    {"id": "BASE-INDEP", "target": "parlay", "type": "baseline", "definition": "joint probability = product of leg probabilities (independence)"},
+    {"id": "PRIOR-ONLY", "target": "margin", "type": "strategy", "definition": "margin = R25_home - R25_away + H, R = 2025-26 +/- per game"},
+    {"id": "CURRENT-ONLY", "target": "margin", "type": "strategy", "definition": "margin = R26_home - R26_away + H with R26 = season-to-date margin per game (0 with no games)"},
+    {"id": "BLEND-41", "target": "margin", "type": "strategy", "primary": true, "definition": "R = (n*R26 + 41*R25)/(n+41), n = games played; margin = R_home - R_away + H. k=41 declared a priori (half of an 82-game season)."},
+    {"id": "BLEND-41-TOTAL", "target": "total", "type": "strategy", "primary": true, "definition": "total = O_home + D_away + O_away + D_home - 2L with O = points for, D = points against per game, blended with k=41 as above; L = league mean points per team per game"},
+    {"id": "BLEND-41-WIN", "target": "win", "type": "strategy", "definition": "P(home wins) = Phi(margin / sigma), sigma = expanding-window SD of residuals of BLEND-41 (needs >= 30 earlier games)"},
+    {"id": "PARLAY-CORR", "target": "parlay", "type": "strategy", "definition": "joint probability from a bivariate normal with correlation estimated on earlier games (margin vs total residual)"},
+    {"id": "PROP-POINTS", "target": "player prop", "type": "strategy", "status": "Blocked", "reason": "no official bulk player game-log source retrieved"},
+    {"id": "PROP-COMBO", "target": "player prop combo / SGP", "type": "strategy", "status": "Blocked", "reason": "no official player game logs and no official prop lines"},
+    {"id": "MARKET-SINGLES", "target": "spread / moneyline vs book", "type": "strategy", "status": "Blocked", "reason": "no official odds source"}
+  ],
+  "sensitivity_and_robustness": "k in {0,10,20,41,60,82,1000} reported for BLEND margin, labelled exploratory and NOT used for ranking. A nested check tunes k on games through 2026-10-26 and evaluates on later games."
+}

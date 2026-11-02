@@ -1,0 +1,92 @@
+{
+  "gates": [
+    {
+      "id": "G1",
+      "name": "Temporal integrity (no look-ahead)",
+      "type": "executed test",
+      "rule": "Every feature for a game uses only earlier games of the same season (shift-by-one). Perturbation test: adding 40 points to a game's own result must leave that game's features unchanged (team test) and adding 30 points to a player's box score must leave that player-game's features unchanged (player test), while later games change.",
+      "sources": [
+        "SRC-13"
+      ]
+    },
+    {
+      "id": "G2",
+      "name": "Sample size",
+      "type": "policy",
+      "rule": "Holdout must contain at least 1,000 settled bets (singles/props) or 300 parlays. Underpowered results cannot earn the top tier.",
+      "sources": []
+    },
+    {
+      "id": "G3",
+      "name": "Beats the market proxy",
+      "type": "policy",
+      "rule": "Mean absolute error of the strategy's line must be lower than the market-proxy line (50/50 season-to-date/recency blend) on all holdout rows, one-sided p < 0.05 with date-clustered standard errors.",
+      "sources": []
+    },
+    {
+      "id": "G4",
+      "name": "Statistical significance after multiple testing",
+      "type": "policy",
+      "rule": "Hit rate must exceed the 52.38% break-even implied by an ASSUMED −110 price (1/1.9091) with Holm-adjusted one-sided p < 0.05 across ALL registered trials (27 single/prop trials). Parlay types are tested on ROI > 0 with Holm across the parlay types that could be built. Standard errors are clustered by game date.",
+      "sources": []
+    },
+    {
+      "id": "G5",
+      "name": "Repeatability (luck removal)",
+      "type": "policy",
+      "rule": "Hit rate > 50% in at least 3 of the 4 holdout seasons, > 50% in the dev sample at the same threshold, and > 50% in both alternating-week halves of the holdout.",
+      "sources": []
+    },
+    {
+      "id": "G6",
+      "name": "Threshold robustness",
+      "type": "policy",
+      "rule": "Hit rate > 50% at all three pre-registered edge thresholds (top 50%, 25%, 10% of dev |edge|), so the result does not hinge on one cut-off.",
+      "sources": []
+    },
+    {
+      "id": "G7",
+      "name": "No directional bias",
+      "type": "policy",
+      "rule": "Share of Over/Home sides must stay within 35%–65%, and the hit rate must beat a directional null (each season's own over-rate) with p < 0.05 — a strategy cannot win by just always leaning one way.",
+      "sources": []
+    },
+    {
+      "id": "G8",
+      "name": "Parlay correlation screen",
+      "type": "policy",
+      "rule": "Average pairwise correlation between leg outcomes must satisfy |ρ| ≤ 0.10, because the ASSUMED independent-leg price would otherwise be mispriced (sportsbooks reprice correlated legs).",
+      "sources": []
+    },
+    {
+      "id": "G9",
+      "name": "Parlay size cap",
+      "type": "policy",
+      "rule": "At most 3 legs per parlay.",
+      "sources": []
+    },
+    {
+      "id": "G10",
+      "name": "Availability check",
+      "type": "policy + official process",
+      "rule": "Props are voided if the player does not play (as books do). For live use, the official NBA Injury Report must be checked: status due 5 p.m. local the day before a game; 1 p.m. local on the second night of a back-to-back; updated continually on game day. This check is NOT automated in the backtest (historical reports not collected).",
+      "sources": [
+        "SRC-08"
+      ]
+    },
+    {
+      "id": "G11",
+      "name": "Placebo calibration (system)",
+      "type": "executed test",
+      "rule": "Random-side strategies placed on identical bet sets must pass the significance gate no more often than 5% of the time (observed: 0 of 2,700).",
+      "sources": []
+    },
+    {
+      "id": "G12",
+      "name": "Prospective replication",
+      "type": "NOT RUN",
+      "rule": "Strategy must replicate on games played AFTER the code and thresholds were frozen. Not possible with the available dataset (ends 2023-24); this is why the highest tier is labeled \"Provisional\".",
+      "sources": []
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+:root{--navy:#0b2545;--blue:#1d4ed8;--sky:#eff5ff;--ink:#16202f;--mut:#637083;--line:#e2e8f2;--bg:#f5f7fb;--amber:#b45309;--amberbg:#fff7e6;--green:#15803d;--greenbg:#eafaf0;--red:#b91c1c;--redbg:#fdecec}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+.layout{display:grid;grid-template-columns:262px minmax(0,1fr);min-height:100vh}
+aside{background:var(--navy);color:#dce8fa;padding:22px 16px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .brand{display:block;color:#fff;font-size:1.12rem;font-weight:700;letter-spacing:.01em;margin:0 0 4px}
+aside .brand span{color:#7fb2ff}
+aside .sub{color:#9db5d8;font-size:.78rem;margin-bottom:20px}
+.navcat{color:#7fa6da;text-transform:uppercase;letter-spacing:.09em;font-size:.68rem;font-weight:700;margin:18px 8px 6px}
+aside nav a{display:block;color:#cfe0fa;padding:7px 10px;border-radius:7px;font-size:.86rem}
+aside nav a:hover{background:#153765;color:#fff;text-decoration:none}
+aside nav a.active{background:var(--blue);color:#fff;font-weight:600}
+main{padding:0 30px 60px;max-width:1500px;width:100%}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0 14px;border-bottom:1px solid var(--line);margin-bottom:24px;flex-wrap:wrap}
+.topbar .crumb{color:var(--mut);font-size:.82rem;text-transform:uppercase;letter-spacing:.08em}
+.topbar .stamp{font-size:.8rem;color:var(--mut)}
+h1{font-size:1.85rem;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:1.2rem;margin:32px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+h3{font-size:1rem;margin:22px 0 8px}
+p.lede{color:var(--mut);margin:0 0 18px;max-width:1000px}
+p{max-width:1100px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;box-shadow:0 1px 2px rgba(16,32,64,.03)}
+.card b{display:block;font-size:1.6rem;color:var(--navy);line-height:1.2}
+.card span{font-size:.78rem;color:var(--mut)}
+.card.accent{background:var(--sky);border-color:#cfe0ff}
+.card.warn{background:var(--amberbg);border-color:#f3dcae}
+.panel{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:16px 0}
+.panel.warn{background:var(--amberbg);border-color:#f1d9a8}
+.panel.ok{background:var(--greenbg);border-color:#c8ecd5}
+.panel h3{margin-top:0}
+.tw{overflow:auto;border:1px solid var(--line);border-radius:9px;background:#fff;margin:12px 0 22px}
+table{border-collapse:collapse;width:100%;font-size:.86rem}
+caption{caption-side:top;text-align:left;padding:11px 12px;color:var(--mut);font-size:.8rem;background:#fbfcff}
+th{background:var(--navy);color:#fff;text-align:left;padding:9px 11px;position:sticky;top:0;white-space:nowrap;font-weight:600;font-size:.79rem}
+td{padding:8px 11px;border-top:1px solid #eef2f8;vertical-align:top}
+tbody tr:nth-child(even) td{background:#fafbfe}
+tbody tr:hover td{background:var(--sky)}
+td a{white-space:nowrap}
+.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:.7rem;font-weight:700;white-space:nowrap}
+.badge.green{background:var(--greenbg);color:var(--green)}.badge.amber{background:var(--amberbg);color:var(--amber)}
+.badge.red{background:var(--redbg);color:var(--red)}.badge.neutral{background:#eef2f8;color:#42526b}
+.badge.ok{background:var(--greenbg);color:var(--green)}.badge.fail{background:var(--redbg);color:var(--red)}
+.blank{color:var(--red);font-style:italic;font-size:.82rem}
+.note{font-size:.83rem;color:var(--mut)}
+code{background:#eef2f8;padding:1px 5px;border-radius:4px;font-size:.84rem}
+ul{max-width:1100px;padding-left:20px}li{margin:5px 0}
+.flag{background:var(--amberbg);border:1px solid #f1d9a8;border-radius:9px;padding:12px 16px;margin:16px 0;font-size:.9rem}
+footer{color:var(--mut);font-size:.8rem;border-top:1px solid var(--line);margin-top:40px;padding-top:16px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{position:static;height:auto}main{padding:0 16px 40px}}

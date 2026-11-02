@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Own4 — verified NBA line origination and signal strategy research">
+<title>Repo Audit · Own4</title>
+<link rel="stylesheet" href="../assets/official.css">
+</head><body>
+<div class="layout">
+<aside><a class="brand" href="../index.html">🏀 Own4 <span>/ NBA Research</span></a>
+<div class="sub">Verified 2026-27 · final integration</div>
+<nav aria-label="Main navigation"><div class="navcat">Overview</div>
+<a href="../index.html">Dashboard</a>
+<a href="../pages/executive-summary.html">Executive Summary</a>
+<a href="../pages/requirements.html">Requirements Register</a>
+<div class="navcat">Official Data · 2026-27</div>
+<a href="../pages/data-standings.html">Standings</a>
+<a href="../pages/data-team-stats.html">Team Stats</a>
+<a href="../pages/data-games.html">Games &amp; Scores</a>
+<a href="../pages/data-players.html">Player Leaders</a>
+<div class="navcat">Originated Lines</div>
+<a href="../pages/lines-single.html">Single Bets</a>
+<a href="../pages/lines-parlays.html">Parlays</a>
+<a href="../pages/lines-props.html">Player Prop Combos</a>
+<div class="navcat">Strategy Research</div>
+<a href="../pages/research-strategies.html">Strategy Catalog</a>
+<a href="../pages/research-validation.html">Validation Gates</a>
+<a href="../pages/research-correlations.html">Correlations</a>
+<a href="../pages/research-backtest.html">Backtest &amp; Luck Removal</a>
+<div class="navcat">Competition</div>
+<a href="../pages/competition.html">Leaderboard &amp; Rewards</a>
+<div class="navcat">Governance</div>
+<a href="../pages/official-sources.html">Source Register</a>
+<a class="active" href="../pages/repo-audit.html">Repo Audit</a>
+<a href="../pages/verification.html">Verification Report</a>
+<a href="../pages/flagged-for-review.html">⚑ Flagged for Review</a>
+<div class="navcat">Parallel-session site (retained)</div>
+<a href="../pages/summary.html">Executive Summary · main</a>
+<a href="../pages/leaderboard.html">Leaderboard · main</a>
+<a href="../pages/research.html">Research · main</a>
+<a href="../pages/audit.html">Audit · main</a>
+<a href="../pages/correlations.html">Correlations · main</a>
+<a href="../pages/strategies.html">Strategies · main</a>
+<a href="../pages/validation.html">Gates · main</a>
+<a href="../pages/flagged.html">Flags · main</a>
+<a href="../pages/sources.html">Sources · main</a>
+<a href="../lab/index.html">Data Lab · /lab/</a>
+<a href="../lines-lab/index.html">NBA Lines Lab · /lines-lab/</a>
+<a href="../docs/index.html">NBA Signal Lab · /docs/</a></nav></aside>
+<main>
+<div class="topbar"><div class="crumb">Governance / Repo Audit</div><div class="stamp">Verified 2026-11-02 UTC · GitHub Pages</div></div>
+<h1>Repository Audit — Line by Line</h1><p class="lede">Review of the repository, the merged work from parallel sessions, and every cited official source.</p><div class="panel ok">The repo at session start contained a single 6-byte README.md (<code># Own4</code>) with no data, code, credentials or claims. That was verified with git and the official GitHub tree. <a href="https://github.com/sassnarep3-star/Own4/tree/319d6b05a6ff2b3d05d82cd313b69d61e72afb50" target="_blank" rel="noopener">GitHub ↗</a></div><div class="tw"><table><caption>15 audit lines · irregularities are also on Flagged for Review</caption><thead><tr><th scope="col">Target</th><th scope="col">Line / location</th><th scope="col">Observed</th><th scope="col">Status</th><th scope="col">Note</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>README.md (initial commit)</td><td>1</td><td># Own4</td><td><span class="badge ok">VERIFIED</span></td><td>6 bytes, one line. No other files, data, claims or credentials in the initial commit.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/319d6b05a6ff2b3d05d82cd313b69d61e72afb50/README.md" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>Repository root at session start</td><td>n/a</td><td>1 file (README.md) + .git</td><td><span class="badge ok">VERIFIED</span></td><td>Confirmed with git ls-tree / find. No datasets existed to verify.</td><td><a href="https://github.com/sassnarep3-star/Own4/tree/319d6b05a6ff2b3d05d82cd313b69d61e72afb50" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>GitHub Pages configuration</td><td>n/a</td><td>build_type=legacy; source=main /</td><td><span class="badge ok">VERIFIED</span></td><td>Queried with gh api. https_enforced=true, html_url https://sassnarep3-star.github.io/Own4/</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>Remote branches at session start</td><td>n/a</td><td>origin/main only</td><td><span class="badge ok">VERIFIED</span></td><td>Later re-fetch found 10 parallel session branches and 5 merged PRs; logged in COORDINATION.md.</td><td><a href="https://github.com/sassnarep3-star/Own4/branches" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>data/sources.json (merged from other sessions)</td><td>SRC-08</td><td>2025-26 injury URL now returns 2026-27 page</td><td><span class="badge fail">FLAGGED</span></td><td>I-03: redirect. Policy text (5 p.m. / 1 p.m.) is still present and verified.</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>index.html / EXECUTIVE_SUMMARY.md (merged)</td><td>footer / responsible gambling</td><td>1-800-GAMBLER</td><td><span class="badge fail">FLAGGED</span></td><td>I-04: official NCPG page now publishes 1-800-MY-RESET (1-800-697-3738). Value not confirmed.</td><td><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>data/strategies.json (merged)</td><td>STRAT-02 signal</td><td>PPG values cited to https://www.nba.com/stats</td><td><span class="badge fail">FLAGGED</span></td><td>I-05: values are 2026-27 and appear on Teams Traditional, not the stats hub. Corrected source linked here.</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>EXECUTIVE_SUMMARY.md (merged)</td><td>Key findings 2</td><td>Luka 33.5 PPG / Jokic 12.9 RPG / 10.7 APG</td><td><span class="badge fail">FLAGGED</span></td><td>I-06: those numbers appear only inside an embedded image; not present in retrievable official text. 197 blocks and &#x27;first since 1969-70&#x27; ARE verified in text.</td><td><a href="https://www.nba.com/news/4-key-stats-takeaways-2025-26-season" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>EXECUTIVE_SUMMARY.md (merged)</td><td>Key findings 1</td><td>highest in 64 seasons</td><td><span class="badge fail">FLAGGED</span></td><td>I-07: official text says &#x27;third-highest mark in NBA history and the highest in the last 64 seasons&#x27;. 117.7 / 101.9 / 114.3 all verified.</td><td><a href="https://www.nba.com/news/10-numbers-know-first-10-days-2025-26" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>NBA Stats FAQ</td><td>Are your statistics available for download?</td><td>not available for download for academic or personal use</td><td><span class="badge fail">FLAGGED</span></td><td>I-08: data-usage restriction. This project transcribes displayed values by hand with source links; no automated download was performed.</td><td><a href="https://www.nba.com/stats/help/faq" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>NBA.com 2026-10-21 score table</td><td>CHI vs TOR (0022600088)</td><td>92 / 135 vs recap slug 102 / 135</td><td><span class="badge fail">FLAGGED</span></td><td>I-09: conflicting official values; the score table value (92) is used and the conflict is flagged.</td><td><a href="https://www.nba.com/games?date=2026-10-21" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>Third-party standings pages</td><td>n/a</td><td>disagree with official NBA.com standings</td><td><span class="badge fail">FLAGGED</span></td><td>I-10: Basketball-Reference/ESPN/FOX/Yahoo/standingstoday snapshots conflict with NBA.com. Only NBA.com is used as data.</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>NBA.com matchup URL convention</td><td>n/a</td><td>AAA-vs-HHH ordering</td><td><span class="badge fail">FLAGGED</span></td><td>I-11: home/away designation not confirmed by an official explanatory page; tables use listing order and no home-court adjustment is applied.</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>GitHub Pages API (permissions)</td><td>n/a</td><td>legacy build retained</td><td><span class="badge ok">VERIFIED</span></td><td>I-02: plain static HTML + .nojekyll; publishing occurs by merging to main.</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">Official ↗</a></td></tr><tr><td>Arena branch policy</td><td>n/a</td><td>single pinned branch arena/fa175f65-own4</td><td><span class="badge fail">FLAGGED</span></td><td>I-01: requested per-task session branches / separate integration branch cannot be created in this environment.</td><td><a href="https://github.com/sassnarep3-star/Own4/branches" target="_blank" rel="noopener">Official ↗</a></td></tr></tbody></table></div><h2>Parallel-session coordination</h2><div class="tw"><table><caption>Coordination record</caption><thead><tr><th scope="col">Item</th><th scope="col">Detail</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>Other session branches found</td><td>10 arena/*-own4 branches and 5 merged PRs were present on re-fetch; their published site, data, docs and tests were retained.</td><td><a href="https://github.com/sassnarep3-star/Own4/branches" target="_blank" rel="noopener">GitHub ↗</a></td></tr><tr><td>Conflict handling</td><td>Scope isolation by file namespace: official/, engine/, assets/official.css and new pages/* files. COORDINATION.md is appended only. Shared index.html regenerated by the final integration session.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">GitHub ↗</a></td></tr><tr><td>Legacy generators retained</td><td>build_site.py and scripts/build.py still run; engine/build.py invokes build_site.py first so other sessions&#x27; pages keep regenerating.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/build_site.py" target="_blank" rel="noopener">GitHub ↗</a></td></tr></tbody></table></div>
+<footer>Own4 — NBA line origination &amp; signal-strategy research. Analytical research only, not wagering advice.
+Every table row links to an official source; unconfirmable values are blank and on the
+<a href="../pages/flagged-for-review.html">⚑ Flagged for Review</a> page.
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">Official NCPG ↗</a></footer>
+</main></div></body></html>

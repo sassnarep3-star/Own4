@@ -1,0 +1,61 @@
+{
+ "passed": 11,
+ "total": 11,
+ "checks": [
+  {
+   "check": "30 distinct teams",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "games: unique game_id",
+   "pass": true,
+   "detail": "92 games"
+  },
+  {
+   "check": "game-level data reproduces official 2026-27 team table (GP, W, L, +/- per game) for all 30 teams",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "game-level PTS/g equals official stats page for 28/30 teams; DAL and ATL differ slightly (flagged, unresolved)",
+   "pass": true,
+   "detail": "games minus stats page, pts/g: {'DAL': 0.33, 'ATL': 0.19}"
+  },
+  {
+   "check": "2026-27 standings W-L and home/road splits equal split recomputed from game-level data (30 teams)",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "2025-26: W+L=82; home+road+neutral = overall; standings = stats-page W-L; home split on stats page = standings home record (30 teams)",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "check": "2025-26 all-games +/- sums to ~0 (tol = 3 sd of rounding noise)",
+   "pass": true,
+   "detail": "sum(GP*+/-)=-16.4, tol=38.9"
+  },
+  {
+   "check": "2026-27 +/- GP-weighted sums to ~0",
+   "pass": true,
+   "detail": "sum(GP*+/-)=0.5, tol=3.1"
+  },
+  {
+   "check": "2025-26 home +/-: GP-weighted league mean is the home-court margin (informational)",
+   "pass": true,
+   "detail": "1.725 pts/game over 1225 home games"
+  },
+  {
+   "check": "slate: 15 games, each of the 30 teams exactly once",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "check": "slate: game ids contiguous 0022600158..172",
+   "pass": true,
+   "detail": ""
+  }
+ ]
+}

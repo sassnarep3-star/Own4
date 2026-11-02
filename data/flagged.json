@@ -1,0 +1,109 @@
+{
+  "flagged": [
+    {
+      "item": "All numeric correlation coefficients (pace↔total, PPG↔spread, leader↔prop, rest↔margin)",
+      "reason": "Cannot be confirmed from any official source; the official-source column is left blank. Computed estimates (from a third-party mirror, unverified) are published separately on the Correlations page.",
+      "sources": []
+    },
+    {
+      "item": "Sportsbook lines/odds (any market price)",
+      "reason": "Odds are commercial data, not published by official league sources; no values entered.",
+      "sources": []
+    },
+    {
+      "item": "2025-26 steals leader name",
+      "reason": "NBA.com leaders article highlights points/rebounds/assists/blocks; steals leader value not individually stated in the cited official article — left blank.",
+      "sources": [
+        "SRC-03",
+        "SRC-05"
+      ]
+    },
+    {
+      "item": "League-wide average pace for full 2025-26 season",
+      "reason": "Official article gives first-10-days pace (101.9) only; full-season figure not stated in official source — left blank.",
+      "sources": [
+        "SRC-04"
+      ]
+    },
+    {
+      "item": "Backtest results are COMPUTED from a third-party mirror, not an official source",
+      "reason": "Official NBA.com tables are not downloadable (FAQ) so the 2010-11→2023-24 box scores come from a GitHub mirror (commit a5f108b). Only 1 game / 2 players / 1 final score were checked against the official box score. Treat every research number as computed and unverified; raw rows are not committed.",
+      "sources": [
+        "SRC-12",
+        "SRC-14",
+        "SRC-15"
+      ]
+    },
+    {
+      "item": "Data-rights question",
+      "reason": "NBA.com FAQ says stats are not available for download for academic or personal use. Whether the mirror's redistribution/use is permitted is not established. Obtain licensed data before any production use.",
+      "sources": [
+        "SRC-12"
+      ]
+    },
+    {
+      "item": "No sportsbook lines were used",
+      "reason": "Sportsbook prices are commercial data, not published by official league sources. 'Own lines' are evaluated against a transparent market PROXY (50/50 season-to-date and recency blend) at an ASSUMED −110 price. Edges versus this proxy are NOT evidence of edges versus real markets, which price minutes, injuries and matchups far better.",
+      "sources": []
+    },
+    {
+      "item": "Holdout was opened more than once",
+      "reason": "Design iteration 1 compared strategies against a naive season-to-date baseline and showed implausibly high hit rates (e.g., ~61% on totals, ~58% on player points just by betting recency form — see Research page control). The baseline was then replaced by the stronger proxy and strategies redefined. Because the 2020-21→2023-24 holdout was viewed before the redesign, it is not a pristine out-of-sample test. Prospective replication (gate G12) is required.",
+      "sources": []
+    },
+    {
+      "item": "Top tier is 'Provisional Gold' only",
+      "reason": "Gate G12 (prospective replication) cannot run: the mirror ends at 2023-24 and no 2024-25/2025-26 official data was obtainable. No strategy is called validated.",
+      "sources": []
+    },
+    {
+      "item": "Possession estimator is project-defined",
+      "reason": "Official glossary defines PACE as possessions per 48 minutes but gives no box-score possession formula. Project uses FGA + 0.44·FTA − OREB + TOV.",
+      "sources": [
+        "SRC-13"
+      ]
+    },
+    {
+      "item": "Re-weighting 'control' strategies (T3, M1)",
+      "reason": "These only re-weight the recency term already inside the proxy. Their wins show the proxy's 0.5 recency weight is arbitrary, not market inefficiency. They are shown but never ranked.",
+      "sources": []
+    },
+    {
+      "item": "Parlay prices are assumed",
+      "reason": "Each parlay leg is priced at an ASSUMED −110 (decimal 1.9091) with no correlation repricing. Same-player combos show the highest ROI precisely because their legs are positively correlated (ρ≈0.15–0.20); books reprice or restrict such combos, so those ROIs are not achievable. They are blocked by gate G8.",
+      "sources": []
+    },
+    {
+      "item": "Unverified figures removed from earlier pages",
+      "reason": "Dončić 33.5 PPG, Jokić 12.9 RPG / 10.7 APG (values only inside an image on the cited NBA.com page) and the team PPG leaders list (Memphis 121.2 etc.; no retrievable official text) were removed.",
+      "sources": [
+        "SRC-03",
+        "SRC-05"
+      ]
+    },
+    {
+      "item": "2026-27 two-way salary",
+      "reason": "The official G League page states the two-way salary only for 2025-26 ($636,435); the 2026-27 amount is not stated — left blank.",
+      "sources": [
+        "SRC-09"
+      ]
+    },
+    {
+      "item": "Season scope",
+      "reason": "Today the NBA is in 2026-27. The earlier pages' 2025-26 figures are last season's; the research history ends 2023-24 (two seasons missing).",
+      "sources": [
+        "SRC-05"
+      ]
+    },
+    {
+      "item": "Seasons with irregular structure kept in the sample",
+      "reason": "2011-12 (66-game lockout season) and 2019-20 (suspended/bubble) are in the dev sample; 2020-21 (72-game, COVID protocols) is in the holdout. Dates/game counts are as in the mirror; not verified against official schedules.",
+      "sources": []
+    },
+    {
+      "item": "Three sites in one repo (this site, /docs/ and /lab/)",
+      "reason": "This root site (computed research on 2010-2024 history), the /docs/ dashboard (session arena-1805bfdb: specification, states no results exist) and the /lab/ Data Lab (session bf34205f: 92 official 2026-27 games, own lines for 2026-11-02; its flags F-01..F-16 are on its own Flagged page) coexist under separate generators. Their conclusions are consistent (no strategy validated; no sportsbook prices) but their statements differ in scope; docs/ says no results exist, which is out of date relative to this site. docs/ and lab/ were not edited here (CI checks docs/); a request is logged in COORDINATION.md. The owner should decide whether to consolidate.",
+      "sources": []
+    }
+  ]
+}
