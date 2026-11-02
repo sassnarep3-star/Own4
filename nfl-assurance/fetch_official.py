@@ -80,12 +80,15 @@ def fetch_one(item):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--phase', choices=['discovery', 'schedules', 'references'], default='schedules')
+    parser.add_argument('--phase', choices=['discovery', 'schedules', 'references', 'players'], default='schedules')
     args = parser.parse_args()
     if args.phase == 'discovery':
         items = [('sample-schedule', SCHEDULES[0][2])] + REFERENCES[:2] + REFERENCES[4:6]
     elif args.phase == 'references':
         items = REFERENCES
+    elif args.phase == 'players':
+        panel = json.loads((ROOT / 'data' / 'player_panel.json').read_text())
+        items = [(f"player-{p['slug']}", f"https://www.nfl.com/players/{p['slug']}/stats/logs/") for p in panel]
     else:
         items = [(f'schedule-{year}-{week:02}', url) for year, week, url in SCHEDULES]
     with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
