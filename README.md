@@ -85,3 +85,9 @@ namespace so the parallel sessions' work above is preserved unchanged.
 
 Analytical research only, not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
 (1-800-697-3738) — https://www.ncpgambling.org/help-treatment
+
+---
+
+## NBA Evidence · session 91dfd6a4
+
+[Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.

@@ -1,0 +1,142 @@
+[
+  {
+    "id": "REQ-01",
+    "requirement": "Collect, organize and analyze NBA data",
+    "status": "delimited pilot",
+    "evidence": "62 official final scores and 38 official player rows; not a complete league database.",
+    "source_id": "NBA-GAMES"
+  },
+  {
+    "id": "REQ-02",
+    "requirement": "Originate own NBA lines",
+    "status": "implemented",
+    "evidence": "39 historical validation/test fair spreads, totals and moneylines; explicitly not sportsbook quotes or current picks.",
+    "source_id": "NBA-GAMES"
+  },
+  {
+    "id": "REQ-03",
+    "requirement": "Research useful signals",
+    "status": "implemented; no edge established",
+    "evidence": "Eight preregistered-for-this-pilot hypotheses; locked test underperformed the probability baseline.",
+    "source_id": "SK-CAL"
+  },
+  {
+    "id": "REQ-04",
+    "requirement": "Single bets",
+    "status": "implemented",
+    "evidence": "Moneyline, spread and total hypotheses with official-price abstention.",
+    "source_id": "BET365-BB"
+  },
+  {
+    "id": "REQ-05",
+    "requirement": "Parlays",
+    "status": "research only",
+    "evidence": "Cross-game disjoint-team examples and same-game joint residual experiment; no official ticket prices.",
+    "source_id": "FD-SGP"
+  },
+  {
+    "id": "REQ-06",
+    "requirement": "Player prop combinations",
+    "status": "research only",
+    "evidence": "Points/rebounds, points/assists and PRA cohort thresholds; no personalized player forecasts.",
+    "source_id": "NBA-BKNMIL"
+  },
+  {
+    "id": "REQ-07",
+    "requirement": "Every strategy passes validation gates before release",
+    "status": "enforced; none qualified",
+    "evidence": "Ten fail-closed gates; missing evidence never counts as a pass.",
+    "source_id": "DSR"
+  },
+  {
+    "id": "REQ-08",
+    "requirement": "Determine correlation values",
+    "status": "descriptive estimates",
+    "evidence": "Game-level and minutes-residualized player correlations; confidence intervals suppressed for too few clusters.",
+    "source_id": "NIST-COV"
+  },
+  {
+    "id": "REQ-09",
+    "requirement": "Remove luck and identify skill",
+    "status": "cannot guarantee",
+    "evidence": "Leakage controls, matched baseline, date-cluster policy, multiple-testing gate and prospective replication. Randomness cannot be eliminated.",
+    "source_id": "NBER-MULTIPLE"
+  },
+  {
+    "id": "REQ-10",
+    "requirement": "Leaderboard competition with rewards",
+    "status": "implemented; zero awards",
+    "evidence": "Diagnostic probability ranking is separate from betting eligibility. 1,000 non-monetary points remain unawarded.",
+    "source_id": "DSR"
+  },
+  {
+    "id": "REQ-11",
+    "requirement": "Executive summary",
+    "status": "delivered",
+    "evidence": "Executive summary page and Markdown document state findings and limitations.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-12",
+    "requirement": "No manual user input",
+    "status": "delivered",
+    "evidence": "Research, code, data checks, site generation and publication run without user-supplied credentials or choices.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-13",
+    "requirement": "Review repo line by line",
+    "status": "mechanical scan + targeted primary checks",
+    "evidence": "Every tracked text line scanned; not every inherited fact independently re-fetched. Distinction published in audit.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-14",
+    "requirement": "Official source on every table row",
+    "status": "enforced in this workspace",
+    "evidence": "Static HTML source-column check; derived rows link to official input sources and expose formulas.",
+    "source_id": "NBA-GAMES"
+  },
+  {
+    "id": "REQ-15",
+    "requirement": "Unconfirmed values blank and flagged",
+    "status": "enforced",
+    "evidence": "Null market prices, ROI, personalized props and unsupported intervals; Flagged for Review page.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-16",
+    "requirement": "Clean landing page and category subpages",
+    "status": "delivered",
+    "evidence": "Responsive static dashboard with search, grouped navigation, source links and downloadable data.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-17",
+    "requirement": "Coordinate parallel sessions",
+    "status": "delivered with platform deviation",
+    "evidence": "Claims, append-only logs, preserved peer namespaces and conflict records. Fixed Arena branch overrides requested branch naming.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-18",
+    "requirement": "Final integration and no broken links",
+    "status": "delivered",
+    "evidence": "17 pages; 1,041 table rows with source links; 351 local links checked; 22 unit tests and 57 evidence checks pass.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-19",
+    "requirement": "PR, merge and GitHub Pages deployment",
+    "status": "pending publication",
+    "evidence": "Will record actual PR, merge commit and deployment result; never predeclare success.",
+    "source_id": "NBA-FAQ"
+  },
+  {
+    "id": "REQ-20",
+    "requirement": "Flagged items do not block publication",
+    "status": "implemented",
+    "evidence": "Needs-review findings are published separately from strategy qualification; they still block unsupported claims.",
+    "source_id": "NBA-FAQ"
+  }
+]

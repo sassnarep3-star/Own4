@@ -664,3 +664,71 @@ Scope notes:
   - Local CI all green before opening: `scripts/build.py`, `unittest discover` (6/6 incl. new `tests/test_nfl_lab.py`), `scripts/verify_data.py`, `scripts/check_site.py` (758 links/0 problems), `nfl-lab/scripts/verify_data.py` (14 checks), `nfl-lab/scripts/audit_site.py` (297 rows/0 problems), `git diff --exit-code -- docs`; `engine/verify.py` failure set unchanged (pre-existing raw-snapshot findings only).
   - GitHub Actions on PR #30: `validate` PASS.
 - Sources/verification/irregularities: see `nfl-lab/sources.html`, `nfl-lab/data/verification_report.json`, `nfl-lab/flagged.html` (FL-01…FL-15). Merge result + Pages deploy confirmation recorded in the closing entry below (added after merge).
+
+
+---
+
+## Session 91dfd6a4 — concurrent integration handoff
+
+- At this session's start, its checkout contained only README.md. While primary sources were being inspected, `origin/main` advanced through other sessions' PRs to `2d967f5`.
+- An add/add conflict occurred in COORDINATION.md. The complete existing canonical board is retained first, followed by this session's original claim record. README.md similarly retains both sessions' content; pre-existing conflict markers are an inherited irregularity to be removed as part of final integration.
+- All earlier namespaces, including the canonical root site, docs/, lab/, lines-lab/, own4-dashboard/, data/, engine/, scripts/ and tests/, are preserved. This session's outputs are now exclusively in `nba-evidence/` plus a separate `.github/workflows/nba-evidence.yml`. The initial task scopes above were updated before any implementation to prevent overlap.
+- This session is the final integrator for its own non-overlapping evidence workspace, not an editor of other sessions' data. No active claims were found in the open PR list. Shared root index/navigation remain owned by earlier sessions; the requested addition of a link to this workspace is logged here rather than editing their files. The namespaced site is directly publishable under the existing Pages configuration.
+- Platform constraint: all work stays on `arena/91dfd6a4-own4`; the requested session-* branch naming cannot be used. The branch restriction takes precedence.
+- Audit boundary: inherited source labels will not automatically be accepted as independent verification. The new workspace records primary-source extracts actually inspected in this session and distinguishes local consistency checks from external fact verification.
+
+
+### Original session claim record (preserved)
+
+# Coordination board
+
+## Active session
+
+- Session: `91dfd6a4` (Arena branch `arena/91dfd6a4-own4`).
+- Claimed: 2026-11-02 UTC.
+- Repository initially contained only `README.md`; no prior coordination board or competing claims were present.
+- Branch policy: this Arena session is restricted to its assigned branch. That branch is used for all work and final integration; no additional branches are created. Other sessions must claim disjoint files and rebase before pushing. This is an explicit platform constraint, not a claim that the requested `session-<id>/<task>` naming was used.
+- Shared-file protocol: reserve a scope here before editing shared outputs; preserve all existing entries; pull/rebase before pushing. If a conflict occurs, retain both sessions' work and record resolution.
+
+## Tasks and file scopes
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| T01 Requirements, source policy, official evidence | in progress | 91dfd6a4 | `nba-evidence/docs/REQUIREMENTS.md`, `nba-evidence/docs/SOURCES.md`, `nba-evidence/data/**`, `nba-evidence/collect_evidence.py` |
+| T02 Strategy research, probability engine, validation and tests | in progress | 91dfd6a4 | `nba-evidence/nba_lab/**`, `nba-evidence/tests/**`, `nba-evidence/docs/METHODOLOGY.md`, `nba-evidence/pyproject.toml` |
+| T03 Dashboard, evidence tables, executive summary | in progress | 91dfd6a4 | `nba-evidence/site/**`, `nba-evidence/docs/EXECUTIVE_SUMMARY.md`, `nba-evidence/README.md` |
+| T04 Final integration, verification, Pages and PR | in progress | 91dfd6a4 | `.github/workflows/nba-evidence.yml`, `nba-evidence/verify_site.py`, deployment records in this board |
+
+All scopes except this board are disjoint. T01 is claimed now; subsequent tasks will be claimed before their implementation starts. No shared integration output exists yet.
+
+## Log
+
+- 2026-11-02: Inspected repository and branch. Created board and claimed T01 before implementation. No data has been labeled verified yet.
+- Verification standard: a primary official NBA source for league facts/results; an operator's own published rules for settlement; original peer-reviewed/publisher sources for statistical methods. Third-party API clients are implementation references only, never evidence of a fact. Derived calculations must identify their formula, inputs and source records; estimates are not official facts. Missing values stay null and are flagged.
+- Safety standard: no invented games, odds, returns, correlations, or validation passes. A positive simulated or retrospective result is not proof of a betting edge. Unverified items do not block publication but cannot qualify a strategy.
+
+- 2026-11-02: Claimed T02 before implementation. T01 primary-source inspection remains in progress; no overlapping session claims were found.
+
+- 2026-11-02: Claimed T03/T04 in the non-overlapping `nba-evidence/` scope after inspecting the concurrent main update. Root navigation change request: add a link to `/Own4/nba-evidence/` when its owning integration session next updates the root; this session will not edit that owner's index. Direct publication uses the existing main/root Pages configuration.
+- Conflict handling: the first `git pull --rebase` after merging concurrent main replayed already-merged history and hit an add/add board conflict. The rebase was aborted without discarding either history; the preserved merge was checked against the remote assigned branch and pushed normally. Subsequent branch-only pulls are clean. No force push was used.
+- Primary NBA results inspected: official date scoreboards for 2025-01-01 through 2025-01-08 (62 games); two complete official player box scores (0022400465 and 0022400487). These are small factual research extracts, not an automated bulk NBA download. NBA FAQ download restrictions are recorded and respected; no unofficial data feed is substituted.
+
+- 2026-11-02: Integrated later main commit `ab9051a` (session 75685c60, pipeline/ and raw data). Preserved all its files; this session remains isolated in nba-evidence/. Its ESPN partner-sourced player rows are not promoted to official-NBA-verified by this session.
+
+- Conflict log: a subsequent pull/rebase again attempted to replay merged concurrent history after main advanced. It was aborted without data loss; the merge commit was pushed to the assigned branch only. Later integration will use an explicit merge of main and preserve both sides.
+
+- 2026-11-02: T01/T02 implementation complete: 62 official game rows, 38 official player rows, 15 source-register entries, 57 evidence checks, 22 unit tests. T03 static dashboard built: 17 pages, 886 source-linked rows, 351 local links. No strategy qualified; test Brier 0.307626 vs baseline 0.271975. T04 final integration in progress. Sources and detailed limits are published in nba-evidence/site/sources.html and flagged.html.
+
+- Final integration: merged current main into the fixed Arena branch. Conflicts in COORDINATION.md and README.md were resolved by preserving the complete latest main text and appending this session's record/link. No peer namespace was changed. An open peer documentation PR is not a claim on nba-evidence/; its later changes can merge normally.
+
+
+### 91dfd6a4 — pre-merge integration result
+
+- T01, T02 and T03: **done**. T04: final checks passed, ready for PR.
+- Sources: 15 primary-source register entries; 62 game rows from eight official NBA date pages; 38 player rows from two official NBA box scores. Exact links and inspection scope are in `nba-evidence/data/sources.json`, `games.csv`, `players.csv` and the published source register.
+- Verification: 57/57 evidence checks; 22/22 unit tests; 17 static pages; 1,041 table rows with official/primary or canonical-repository references; 351 local links checked; zero errors. Browser-DOM search and mobile-navigation tests passed. The site has no third-party runtime dependency.
+- CI: `Validate NBA Evidence` run https://github.com/sassnarep3-star/Own4/actions/runs/41537893867 **success**; inherited `Validate NBA research workspace` run https://github.com/sassnarep3-star/Own4/actions/runs/41537893513 **success**. Python is pinned to 3.11 for byte-identical research output.
+- Findings: locked-test Brier 0.307626 vs baseline 0.271975; no validated betting edge; zero qualified strategies and zero rewards. Official historical prices, personalized prop forecasts and short-sample CIs remain blank. The 14 workspace flags and 10 repository review records are published, non-blocking for site publication.
+- Audit snapshot: 542 tracked files / 154,934 text lines at commit `9d639540c38a470517bb579f1e02a6aa451e7e20`, plus targeted primary-source cross-checks. This is not a claim that every inherited numeric row was independently re-fetched.
+- Peer work: all root and namespaced NBA/NFL outputs preserved. Only this workspace, its isolated workflow, and append-only shared coordination/README links were changed. Peer PR #29 is a documentation update and does not claim this workspace.
+- Publication target: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ under the existing verified main/root GitHub Pages configuration. PR/merge/deploy results will be appended after actual completion.
