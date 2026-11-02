@@ -615,3 +615,52 @@ PR link and merge result: (recorded after merge below)
 - **Fix:** total model re-specified as stacked team-points rows (home_pts = mu + off_home + def_away; away_pts = mu + off_away + def_home) so offense/defense are separately identified; HFA grouped by game season, not calendar year.
 - **Impact:** ratings now distinct (e.g., BUF off +5.03 / def −0.33). S2 validation threshold re-selected 2.0→3.0 (n=789, ROI −5.45%, still Rejected). S1/S3/S4/C1 byte-identical; all tiers and the 0-Gold/0-points conclusion unchanged. This was a bug correction, not holdout re-tuning; published as flag QF-16 for transparency.
 - **Verification:** full pipeline re-run (02→03→06→07), site rebuilt (13 pages / 286 rows / 0 problems), CI-equivalent checks green, docs/ unchanged. Shipped via follow-up PR (recorded below).
+
+---
+
+## Session arena/909635f5-own4 — NFL line-origination lab (claim)
+
+Claimed: 2026-11-02 UTC. Session ID: `arena/909635f5-own4`. Branch: `arena/909635f5-own4` (platform-fixed; `session-<id>/<task>` naming not creatable here — same logged deviation as prior sessions).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| N1 | Official NFL 2026 season results collection + line-by-line verification (scores, standings, team stats) | unclaimed→claimed | arena/909635f5-own4 | `nfl-lab/data/**`, `nfl-lab/scripts/**` |
+| N2 | Empirical signal research + correlation values (CIs, dependence tests) from verified data | claimed | arena/909635f5-own4 | `nfl-lab/data/**` |
+| N3 | Own-line origination engine (pre-game fair lines) + validation gates + strategy leaderboard (singles, parlays, prop combos) | claimed | arena/909635f5-own4 | `nfl-lab/engine/**`, `nfl-lab/data/**` |
+| N4 | NFL executive summary | claimed | arena/909635f5-own4 | `nfl-lab/EXECUTIVE_SUMMARY.md`, `nfl-lab/executive-summary.html` |
+| N5 | `nfl-lab/` site section: dashboard landing + category subpages (data, signals, correlations, own lines, strategies, leaderboard, validation, flagged, sources) | claimed | arena/909635f5-own4 | `nfl-lab/**` (except data/scripts/engine above) |
+| N6 | Final integration after PRs #24 and #25 merge: link all NFL sections in shared root navigation, re-verify combined data line-by-line, broken-link check, PR → main → merge → GitHub Pages deploy confirmation → record here | claimed | arena/909635f5-own4 | root `index.html` (integration edit only, after PR #25 merges), `EXECUTIVE_SUMMARY.md` (NFL addendum only), `COORDINATION.md` (append) |
+
+Scope notes:
+- Non-overlapping: `nfl-research/**` belongs to open PR #24 (arena/1699c9cc-own4); `nfl/**` + root `index.html` link belongs to open PR #25 (arena/5f917b85-own4). This session edits neither until N6 integration, after both merge. NBA sections (`docs/**`, `pages/**`, `data/*.json`, `lab/**`, `pipeline/**`, `own4-dashboard/**`, `scripts/**`) are untouched.
+- Root `index.html` is only edited in N6 after PR #25 merges, to avoid add/add conflict; PR #24's request to "link NFL sections" in shared navigation is accepted and logged here.
+- If PRs #24/#25 stall >60 minutes with no commits, this session may take over their merge as final integrator and will log the handoff.
+- `COORDINATION.md` conflicts from concurrent appends will be resolved preserving all sessions' entries (established repo convention).
+
+---
+## Session arena/1699c9cc-own4 — NFL research
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| NFL source research, strategy specification, dashboard, flags, local validation and integration | in progress | arena/1699c9cc-own4 | nfl-research/** and this appended coordination section |
+
+2026-11-02: Concurrent session 6378baad's `nfl/**` claim became visible only after main advanced. Rebase conflict in COORDINATION.md resolved by retaining all main content and appending this log. To preserve that session's NFL files, this session moved its own independently developed contribution to `nfl-research/**`. Fixed Arena branch is required. Shared root navigation is outside scope; request to final integrator: link NFL sections.
+
+- Second concurrent main advance (PR #25): rebased again, resolving coordination conflict by preserving main and appending this session record.
+### NFL session verification and handoff
+- 2026-11-02: Research and NFL-specific static dashboard completed as an **unvalidated research specification**, not a live line-origination engine. No official NFL observation or market history was ingested; no numeric correlations, lines, performance, rankings, or funded rewards are claimed. Full repository-wide line-by-line verification remains incomplete (F01); NBA sections were not modified.
+- Source inspection: [2026 NFL rulebook](https://static.www.nfl.com/image/upload/fl_attachment/league/tqivdkzt9mu6wdgsh1ku.pdf) title, preface, table of contents; [NFL player stats](https://www.nfl.com/stats/); [NIST correlation/causality](https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm); [scikit-learn time splits](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html), [calibration](https://scikit-learn.org/stable/auto_examples/calibration/plot_calibration.html); [Nevada regulator Regulation 22](https://www.gaming.nv.gov/siteassets/content/home/features/Regulation22.pdf) via search excerpt; [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages). Injury PDF direct retrieval failed; only search excerpt was inspected and this is flagged. Team stats search result and direct fetch conflicted; no values were copied.
+- Reviewed all NFL table rows against the scope of their links; design proposals are identified as such and links serve background only. `nfl-research/test_site.py` checks per-row HTTPS links, relative navigation and blank correlations/rankings. `python3 nfl/build.py`, NFL tests (2), existing build and tests (3) pass. External links were not comprehensively crawled. Flags F01–F09 appear on `nfl-research/review.html`.
+- NFL research/dashboard task: **done**; empirical modelling, full repo audit and verified odds feed remain **needs review**, not done. Shared root navigation request remains open to its owning integrator; direct section URL is `/Own4/nfl-research/`.
+
+---
+
+## Session arena/909635f5-own4 — N1–N6 execution + final integration record
+
+- N1–N5 **done**: verified 2026 dataset (120 games from nfl.com schedules; 480/480 standings cells recomputed to match, 14 checks / `nfl-lab/data/verification_report.json`), 13 signals + 7 correlations with CIs/p-values (`nfl-lab/data/signals.json`), pre-registered walk-forward Elo (params + strategy registry committed BEFORE first run, git history proves it), holdout W5–W8 evaluation, 16 own lines, 8-gate leaderboard (**0/8 reward-eligible**), 11-page `nfl-lab/` site (297 sourced rows, audit 0 problems), `nfl-lab/EXECUTIVE_SUMMARY.md`.
+- N6 integration **in progress via PR #30**: https://github.com/sassnarep3-star/Own4/pull/30
+  - Merged `origin/main` (PRs #25/#26/#27/#28) with COORDINATION conflict resolved **keeping both sides verbatim**; merged `origin/arena/1699c9cc-own4` (open PR #24) wholesale — takeover logged: PR #24 stale >60 min (last update 20:55 UTC), conflicting with main after #26–#28; all their commits preserved, their `nfl-research/test_site.py` passes 2/2; their requested shared-nav link delivered (`nfl-research/` + `nfl-lab/` added to root sidebar + site directory; `nfl/` and `nfl-quant/` already linked by session e513f51b).
+  - `EXECUTIVE_SUMMARY.md`: NFL addendum covering all four NFL sections (honest statuses, sources).
+  - Local CI all green before opening: `scripts/build.py`, `unittest discover` (6/6 incl. new `tests/test_nfl_lab.py`), `scripts/verify_data.py`, `scripts/check_site.py` (758 links/0 problems), `nfl-lab/scripts/verify_data.py` (14 checks), `nfl-lab/scripts/audit_site.py` (297 rows/0 problems), `git diff --exit-code -- docs`; `engine/verify.py` failure set unchanged (pre-existing raw-snapshot findings only).
+  - GitHub Actions on PR #30: `validate` PASS.
+- Sources/verification/irregularities: see `nfl-lab/sources.html`, `nfl-lab/data/verification_report.json`, `nfl-lab/flagged.html` (FL-01…FL-15). Merge result + Pages deploy confirmation recorded in the closing entry below (added after merge).

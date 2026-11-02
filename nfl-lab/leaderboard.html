@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="on">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Leaderboard</h1>
+<p class="lede">Ranked by the pre-registered primary metric (holdout Brier, lower better;
+tie-break log loss) among probabilistic strategies. Reward eligibility requires ALL gates
+G1–G8 to PASS — currently zero strategies qualify.</p>
+<table class=""><thead><tr><th>ID</th><th>Strategy</th><th>Primary metric</th><th>n</th><th>Gate status</th><th>Reward eligible</th><th>Source</th></tr></thead><tbody><tr><td>S8</td><td>Elo + rest filter (subset)</td><td>0.15091</td><td>11</td><td>G3 fail · G7/G8 blocked</td><td>NO</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S1</td><td>Elo sides (holdout)</td><td>0.24907</td><td>56</td><td>G3 fail · G5 fail (ECE 0.1191) · G7/G8 blocked</td><td>NO</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>B0</td><td>Baseline: constant train rate (reference)</td><td>0.25279</td><td>56</td><td>reference only</td><td>NO</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>B1</td><td>Baseline: pre-game record diff (reference)</td><td>0.28874</td><td>56</td><td>reference only</td><td>NO</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S4</td><td>Totals model (MAE)</td><td>11.46 (baseline 11.3)</td><td>56</td><td>G4 fail (worse than baseline) · G7/G8 blocked</td><td>NO</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>S2</td><td>Home straight-up</td><td>0.5395 (win rate)</td><td>114</td><td>CI includes 0.5 · G7 blocked</td><td>NO</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>S3</td><td>Rest advantage</td><td>0.8400 (win rate)</td><td>25</td><td>G3 fail · G7 blocked</td><td>NO</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>S6</td><td>Parlay leg independence</td><td>φ=0.488 p=0.220</td><td>8</td><td>underpowered (n<30) · G7/G8 blocked</td><td>NO</td><td><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm</a></td></tr><tr><td>S5</td><td>Momentum</td><td>r=0.030 p=0.673</td><td>208</td><td>no signal · G7 blocked</td><td>NO</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>S7</td><td>Player prop combos</td><td></td><td></td><td>BLOCKED (no data) — value blank</td><td>NO</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr></tbody></table>
+<p class="note">Reward pool: blank — no official source publishes reward terms for this
+project (<a href="https://www.ncpgambling.org/">NCPG</a> for responsible-play context). Ranking is informational.</p>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

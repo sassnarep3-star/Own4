@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="on">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Strategies (registered before evaluation)</h1>
+<p class="lede">Eight strategies in <code>strategy_registry.json v1.0</code>, frozen before
+any holdout evaluation. Status reflects gate outcomes only — no strategy is advertised as winning.</p>
+<table class=""><thead><tr><th>ID</th><th>Strategy</th><th>Market</th><th>Status</th><th>Gate outcome detail</th><th>Source</th></tr></thead><tbody><tr><td>S1</td><td>Elo sides (single bet)</td><td>moneyline</td><td><span class="b bad">NOT VALIDATED</span></td><td>Holdout Brier beats baselines (G4 PASS) but G3 sample-size FAIL (n=56<300), G5 calibration FAIL (ECE>0.10), G7/G8 BLOCKED.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S2</td><td>Home field straight-up (single bet)</td><td>moneyline</td><td><span class="b bad">NOT VALIDATED</span></td><td>Home win 0.540 [0.448, 0.628] includes 0.5; no price to compare (G7 blocked).</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S3</td><td>Rest advantage (single bet)</td><td>moneyline</td><td><span class="b bad">NOT VALIDATED</span></td><td>Rest-advantaged side 0.840 [0.654, 0.936] but n=25 < 300 (G3) and G7 blocked.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>S4</td><td>Totals model (single bet)</td><td>over/under</td><td><span class="b bad">NOT VALIDATED</span></td><td>Holdout MAE 11.46 worse than constant baseline 11.30 (G4 FAIL); G7 blocked.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S5</td><td>Momentum (single bet)</td><td>moneyline</td><td><span class="b bad">NOT VALIDATED</span></td><td>Momentum correlation r=0.030 p=0.673 — no signal; G7 blocked.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>S6</td><td>Two-leg cross-game parlay</td><td>parlay</td><td><span class="b bad">NOT VALIDATED</span></td><td>Leg independence n=8 < 30 minimum — inconclusive; G7/G8 blocked.</td><td><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm</a></td></tr><tr><td>S7</td><td>Player prop combo (same-game)</td><td>player props</td><td><span class="b warn">BLOCKED</span></td><td>Official game-level player logs not ingested; no correlation computed or inferred.</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr><tr><td>S8</td><td>Elo + rest filter (single bet)</td><td>moneyline</td><td><span class="b bad">NOT VALIDATED</span></td><td>Elo+rest aligned subset n=11, Brier 0.151 (descriptive only; G3 fails).</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr></tbody></table>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

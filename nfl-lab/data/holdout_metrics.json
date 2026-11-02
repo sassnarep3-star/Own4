@@ -1,0 +1,226 @@
+{
+ "margin_scale_fitted": 3.0,
+ "margin_scale_fit_sse": 10325.02,
+ "train_weeks": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "holdout_weeks": [
+  5,
+  6,
+  7,
+  8
+ ],
+ "B0_constant_p": 0.5625,
+ "holdout": {
+  "elo": {
+   "n": 56,
+   "brier": 0.24907,
+   "log_loss": 0.69973,
+   "ece": 0.1191,
+   "calibration_bins": [
+    {
+     "n": 11,
+     "mean_p": 0.4565,
+     "mean_y": 0.3182
+    },
+    {
+     "n": 11,
+     "mean_p": 0.5373,
+     "mean_y": 0.4545
+    },
+    {
+     "n": 11,
+     "mean_p": 0.5822,
+     "mean_y": 0.4545
+    },
+    {
+     "n": 11,
+     "mean_p": 0.638,
+     "mean_y": 0.6364
+    },
+    {
+     "n": 12,
+     "mean_p": 0.7347,
+     "mean_y": 0.5
+    }
+   ]
+  },
+  "B0_constant": {
+   "n": 56,
+   "brier": 0.25279,
+   "log_loss": 0.70775,
+   "ece": 0.1696,
+   "calibration_bins": [
+    {
+     "n": 11,
+     "mean_p": 0.5625,
+     "mean_y": 0.5
+    },
+    {
+     "n": 11,
+     "mean_p": 0.5625,
+     "mean_y": 0.3636
+    },
+    {
+     "n": 11,
+     "mean_p": 0.5625,
+     "mean_y": 0.3636
+    },
+    {
+     "n": 11,
+     "mean_p": 0.5625,
+     "mean_y": 0.3636
+    },
+    {
+     "n": 12,
+     "mean_p": 0.5625,
+     "mean_y": 0.75
+    }
+   ]
+  },
+  "B1_record_diff": {
+   "n": 56,
+   "brier": 0.28874,
+   "log_loss": 0.86741,
+   "ece": 0.232,
+   "calibration_bins": [
+    {
+     "n": 11,
+     "mean_p": 0.0825,
+     "mean_y": 0.4091
+    },
+    {
+     "n": 11,
+     "mean_p": 0.2195,
+     "mean_y": 0.2727
+    },
+    {
+     "n": 11,
+     "mean_p": 0.412,
+     "mean_y": 0.6364
+    },
+    {
+     "n": 11,
+     "mean_p": 0.6634,
+     "mean_y": 0.5455
+    },
+    {
+     "n": 12,
+     "mean_p": 0.9206,
+     "mean_y": 0.5
+    }
+   ]
+  }
+ },
+ "train_view_elo": {
+  "n": 64,
+  "brier": 0.23745,
+  "log_loss": 0.6669,
+  "ece": 0.0938,
+  "calibration_bins": [
+   {
+    "n": 12,
+    "mean_p": 0.507,
+    "mean_y": 0.3333
+   },
+   {
+    "n": 13,
+    "mean_p": 0.5729,
+    "mean_y": 0.6923
+   },
+   {
+    "n": 13,
+    "mean_p": 0.5925,
+    "mean_y": 0.6154
+   },
+   {
+    "n": 13,
+    "mean_p": 0.6132,
+    "mean_y": 0.4615
+   },
+   {
+    "n": 13,
+    "mean_p": 0.6847,
+    "mean_y": 0.6923
+   }
+  ]
+ },
+ "s8_elo_plus_rest_filter": {
+  "n": 11,
+  "brier": 0.15091,
+  "log_loss": 0.48269,
+  "ece": 0.284,
+  "calibration_bins": [
+   {
+    "n": 2,
+    "mean_p": 0.5098,
+    "mean_y": 0.5
+   },
+   {
+    "n": 2,
+    "mean_p": 0.5471,
+    "mean_y": 1.0
+   },
+   {
+    "n": 2,
+    "mean_p": 0.5953,
+    "mean_y": 1.0
+   },
+   {
+    "n": 2,
+    "mean_p": 0.6523,
+    "mean_y": 1.0
+   },
+   {
+    "n": 3,
+    "mean_p": 0.7688,
+    "mean_y": 1.0
+   }
+  ]
+ },
+ "totals_holdout": {
+  "model_mae": 11.46,
+  "baseline_mae": 11.3,
+  "model_bias": 0.11,
+  "baseline_total": 46.22,
+  "n": 56
+ },
+ "gates_S1": {
+  "G1_provenance": {
+   "result": "PASS",
+   "detail": "all inputs carry official nfl.com source URLs; verification_report.json 14/14"
+  },
+  "G2_leakage": {
+   "result": "PASS",
+   "detail": "chronological walk-forward; scale/baselines fitted on weeks 1-4; holdout weeks 5-8 evaluated once after params commit"
+  },
+  "G3_sample_size": {
+   "result": "FAIL",
+   "detail": "holdout n=56, required >= 300"
+  },
+  "G4_baseline": {
+   "result": "PASS",
+   "detail": "Elo 0.24907 vs B0 0.25279 vs B1 0.28874 (holdout Brier)"
+  },
+  "G5_calibration": {
+   "result": "FAIL",
+   "detail": "holdout ECE(5-bin)=0.1191 (threshold 0.10)"
+  },
+  "G6_registry": {
+   "result": "PASS",
+   "detail": "strategy_registry.json v1.0 registered before evaluation"
+  },
+  "G7_market": {
+   "result": "BLOCKED",
+   "detail": "no official operator price archive exists; market comparison impossible"
+  },
+  "G8_costs": {
+   "result": "BLOCKED",
+   "detail": "no official operator settlement/limits terms published"
+  }
+ },
+ "S1_reward_eligible": false
+}

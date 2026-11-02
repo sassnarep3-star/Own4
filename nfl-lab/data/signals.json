@@ -1,0 +1,245 @@
+{
+ "design": "pre-registered nfl-lab/params.json v1.0; inputs verified by scripts/verify_data.py",
+ "inputs": [
+  "nfl-lab/data/games_2026.csv",
+  "nfl-lab/data/standings_2026.csv",
+  "nfl-lab/data/team_passing_2026.csv"
+ ],
+ "signals": [
+  {
+   "id": "SIG-01",
+   "name": "Designated-home win rate (excl. neutral sites)",
+   "value": 0.5395,
+   "ci95": [
+    0.4482,
+    0.6282
+   ],
+   "n": 114,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "ties count as 0.5"
+  },
+  {
+   "id": "SIG-01b",
+   "name": "Designated-home win rate (international neutral-site games)",
+   "value": 0.1667,
+   "ci95": [
+    0.0301,
+    0.5635
+   ],
+   "n": 6,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "note": "Melbourne, Rio, London x3, Saint-Denis; small n"
+  },
+  {
+   "id": "SIG-02",
+   "name": "Win rate on short rest (0-5 days)",
+   "value": 0.5,
+   "ci95": [
+    0.268,
+    0.732
+   ],
+   "n": 14,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "team-games with a prior 2026 game; rest = days since previous game"
+  },
+  {
+   "id": "SIG-03",
+   "name": "Win rate on normal rest (6-8 days)",
+   "value": 0.4497,
+   "ci95": [
+    0.3767,
+    0.525
+   ],
+   "n": 169,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "team-games with a prior 2026 game; rest = days since previous game"
+  },
+  {
+   "id": "SIG-04",
+   "name": "Win rate on long rest (9+ days incl. bye)",
+   "value": 0.84,
+   "ci95": [
+    0.6535,
+    0.936
+   ],
+   "n": 25,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "team-games with a prior 2026 game; rest = days since previous game"
+  },
+  {
+   "id": "SIG-09",
+   "name": "Games decided by <= 7 points (one score)",
+   "value": 0.5417,
+   "ci95": [
+    0.4526,
+    0.6281
+   ],
+   "n": 120,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "mean |margin| = 10.28 pts"
+  },
+  {
+   "id": "SIG-10",
+   "name": "Mean combined points (game total)",
+   "value": 46.07,
+   "ci95": [
+    43.49,
+    48.64
+   ],
+   "n": 120,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "sd = 14.4"
+  },
+  {
+   "id": "SIG-06",
+   "name": "Designated-home win rate on Thursday games",
+   "value": 0.7143,
+   "ci95": [
+    0.3589,
+    0.9178
+   ],
+   "n": 7,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": ""
+  },
+  {
+   "id": "SIG-07",
+   "name": "Designated-home win rate on Sunday games",
+   "value": 0.5202,
+   "ci95": [
+    0.4229,
+    0.616
+   ],
+   "n": 99,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": ""
+  },
+  {
+   "id": "SIG-08",
+   "name": "Designated-home win rate on Monday games",
+   "value": 0.5714,
+   "ci95": [
+    0.2505,
+    0.8418
+   ],
+   "n": 7,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": ""
+  },
+  {
+   "id": "SIG-11a",
+   "name": "Home win rate when home side has 3+ days more rest",
+   "value": 0.9286,
+   "ci95": [
+    0.6853,
+    0.9873
+   ],
+   "n": 14,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": ""
+  },
+  {
+   "id": "SIG-11b",
+   "name": "Away win rate when away side has 3+ days more rest",
+   "value": 0.7273,
+   "ci95": [
+    0.4344,
+    0.9025
+   ],
+   "n": 11,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": ""
+  },
+  {
+   "id": "SIG-11",
+   "name": "Rest-advantaged side win rate (3+ days edge, either side)",
+   "value": 0.84,
+   "ci95": [
+    0.6535,
+    0.936
+   ],
+   "n": 25,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "games where both sides have a prior 2026 game; ties count 0.5"
+  }
+ ],
+ "correlations": [
+  {
+   "id": "C1",
+   "name": "Designated home field vs win (phi)",
+   "kind": "phi",
+   "n": 226,
+   "r": 0.0796,
+   "p": 0.233027,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "decisive non-neutral games, team-game level (2 obs per game; p-values approximate under within-game clustering)"
+  },
+  {
+   "id": "C2",
+   "name": "Rest-day differential (home minus away) vs home win",
+   "kind": "point-biserial",
+   "n": 103,
+   "r": 0.3359,
+   "p": 0.000523,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "games where both sides have a prior game; decisive only; point-biserial"
+  },
+  {
+   "id": "C3",
+   "name": "Home side on short rest (<=5 days) vs home win (phi)",
+   "kind": "phi",
+   "n": 103,
+   "r": 0.1131,
+   "p": 0.255288,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "decisive games; week 1 excluded (no prior)"
+  },
+  {
+   "id": "C4",
+   "name": "Previous-game margin vs current-game win (point-biserial)",
+   "kind": "point-biserial",
+   "n": 208,
+   "r": 0.0295,
+   "p": 0.672629,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "team-games with a prior game; observations clustered within games (p-values approximate); ties=0.5"
+  },
+  {
+   "id": "C5a",
+   "name": "Thursday-game home win x Sunday-night home win (phi)",
+   "kind": "phi",
+   "n": 8,
+   "r": 0.488,
+   "p": 0.219944,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "parlay leg independence test; official SNF slots identified from weekly page headers; n < pre-registered minimum 30 -> underpowered, reported as inconclusive"
+  },
+  {
+   "id": "C5b",
+   "name": "Early x late Sunday window home win (phi)",
+   "kind": "phi",
+   "n": 0,
+   "r": null,
+   "p": null,
+   "ci_note": "",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "note": "BLOCKED: official schedule extraction exposes dates but not kickoff windows; no value computed, flagged"
+  },
+  {
+   "id": "C6",
+   "name": "Team passing yards per game vs team wins (point-biserial)",
+   "kind": "point-biserial",
+   "n": 32,
+   "r": 0.3641,
+   "p": 0.040511,
+   "ci_note": "two-sided t-test",
+   "source": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all",
+   "note": "cross-section n=32, season-to-date; column semantics confirmed by cross-matching player tables (e.g., Purdy 211/146/69.2/8.3/1748 equals SF team row)"
+  }
+ ]
+}

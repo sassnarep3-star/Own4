@@ -1,0 +1,15 @@
+{
+  "registry_version": "1.0",
+  "registered_utc": "2026-11-02",
+  "note": "Pre-registered before evaluation. Adding strategies requires a version bump with date and reason.",
+  "strategies": [
+    {"id": "S1", "name": "Elo sides (single bet)", "market": "moneyline", "signal": "walk-forward Elo win probability, weeks 5-8 holdout", "selection": "all games, model probability reported; no price comparison available"},
+    {"id": "S2", "name": "Home field straight-up (single bet)", "market": "moneyline", "signal": "designated home team win rate excluding neutral sites", "selection": "all non-neutral games, descriptive"},
+    {"id": "S3", "name": "Rest advantage (single bet)", "market": "moneyline", "signal": "games where one side has 3+ more days of rest than the other", "selection": "rest-advantaged side"},
+    {"id": "S4", "name": "Totals model (single bet)", "market": "over/under", "signal": "shrunk scoring-adjusted expected total vs actual", "selection": "report model total and calibration error; no market total available"},
+    {"id": "S5", "name": "Momentum (single bet)", "market": "moneyline", "signal": "previous-game margin vs current-game win", "selection": "team-games with a prior game; descriptive correlation"},
+    {"id": "S6", "name": "Two-leg cross-game parlay", "market": "parlay", "signal": "independence of two slate slots (TNF x SNF; early x late Sunday)", "selection": "slot-pair home-win indicators across weeks"},
+    {"id": "S7", "name": "Player prop combo (same-game)", "market": "player props", "signal": "same-game QB-WR / teammate prop dependence", "selection": "BLOCKED: requires official game-level player logs; not ingested"},
+    {"id": "S8", "name": "Elo + rest filter (single bet)", "market": "moneyline", "signal": "Elo side only when rest advantage also aligns", "selection": "holdout subset; registered for multiple-testing accounting"}
+  ]
+}

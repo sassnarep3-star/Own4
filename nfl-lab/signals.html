@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="on">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Signals</h1>
+<p class="lede">Descriptive statistics computed only from the verified game log.
+95% Wilson intervals for proportions; small n means wide intervals — that is the point.</p>
+<table class=""><thead><tr><th>ID</th><th>Signal</th><th>Value</th><th>95% CI</th><th>n</th><th>Note</th><th>Source</th></tr></thead><tbody><tr><td>SIG-01</td><td>Designated-home win rate (excl. neutral sites)</td><td>0.5395</td><td>[0.4482, 0.6282]</td><td>114</td><td>ties count as 0.5</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-01b</td><td>Designated-home win rate (international neutral-site games)</td><td>0.1667</td><td>[0.0301, 0.5635]</td><td>6</td><td>Melbourne, Rio, London x3, Saint-Denis; small n</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-1">www.nfl.com/schedules/2026/by-week/week-1</a></td></tr><tr><td>SIG-02</td><td>Win rate on short rest (0-5 days)</td><td>0.5</td><td>[0.268, 0.732]</td><td>14</td><td>team-games with a prior 2026 game; rest = days since previous game</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-03</td><td>Win rate on normal rest (6-8 days)</td><td>0.4497</td><td>[0.3767, 0.525]</td><td>169</td><td>team-games with a prior 2026 game; rest = days since previous game</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-04</td><td>Win rate on long rest (9+ days incl. bye)</td><td>0.84</td><td>[0.6535, 0.936]</td><td>25</td><td>team-games with a prior 2026 game; rest = days since previous game</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-09</td><td>Games decided by <= 7 points (one score)</td><td>0.5417</td><td>[0.4526, 0.6281]</td><td>120</td><td>mean |margin| = 10.28 pts</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-10</td><td>Mean combined points (game total)</td><td>46.07</td><td>[43.49, 48.64]</td><td>120</td><td>sd = 14.4</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-06</td><td>Designated-home win rate on Thursday games</td><td>0.7143</td><td>[0.3589, 0.9178]</td><td>7</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-07</td><td>Designated-home win rate on Sunday games</td><td>0.5202</td><td>[0.4229, 0.616]</td><td>99</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-08</td><td>Designated-home win rate on Monday games</td><td>0.5714</td><td>[0.2505, 0.8418]</td><td>7</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-11a</td><td>Home win rate when home side has 3+ days more rest</td><td>0.9286</td><td>[0.6853, 0.9873]</td><td>14</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-11b</td><td>Away win rate when away side has 3+ days more rest</td><td>0.7273</td><td>[0.4344, 0.9025]</td><td>11</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>SIG-11</td><td>Rest-advantaged side win rate (3+ days edge, either side)</td><td>0.84</td><td>[0.6535, 0.936]</td><td>25</td><td>games where both sides have a prior 2026 game; ties count 0.5</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr></tbody></table>
+<p class="note">Observations within a game are dependent (one side wins, one loses);
+team-level rates and their intervals are descriptive. See
+<a href="correlations.html">correlations</a> for hypothesis tests.</p>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

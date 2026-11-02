@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="on">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<section class="hero">
+<h1>NFL Line Origination Lab</h1>
+<p>Originate NFL probabilities from official data, quantify uncertainty, and let strategies
+earn eligibility through pre-registered validation gates. Luck cannot be removed from
+sports outcomes — it is measured, bounded, and reported instead.</p>
+</section>
+<div class="cards">
+  <div class="card"><div class="num">120</div><div class="lbl">completed 2026 games
+    <div class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></div></div></div>
+  <div class="card"><div class="num">480/480</div><div class="lbl">standings cells verified
+    <div class="src"><a href="https://www.nfl.com/standings/league/2026/REG">www.nfl.com/standings/league/2026/REG</a></div></div></div>
+  <div class="card"><div class="num">56</div><div class="lbl">locked holdout games (W5–W8)
+    <div class="src"><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></div></div></div>
+  <div class="card"><div class="num">4/8</div><div class="lbl">validation gates passed for S1 Elo
+    <div class="src"><a href="validation.html">see gates</a></div></div></div>
+  <div class="card"><div class="num">0</div><div class="lbl">reward-eligible strategies (honest status)
+    <div class="src"><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></div></div></div>
+</div>
+<h2>Headline findings (all measured, all sourced)</h2>
+<table class=""><thead><tr><th>Finding</th><th>Value</th><th>Status</th><th>Detail page</th><th>Source</th></tr></thead><tbody><tr><td>Rest advantage (SIG-11)</td><td>0.840 [0.654, 0.936], n=25</td><td><span class="b warn">UNDERPOWERED</span></td><td><a href="signals.html">signals</a></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Rest differential vs win (C2)</td><td>r=0.336, p=0.0005, n=103</td><td><span class="b ok">PASS</span></td><td><a href="correlations.html">correlations</a></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Home field (C1)</td><td>φ=0.080, p=0.233, n=226</td><td><span class="b warn">INCONCLUSIVE</span></td><td><a href="correlations.html">correlations</a></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Momentum (C4)</td><td>r=0.030, p=0.673, n=208 — null</td><td><span class="b warn">INCONCLUSIVE</span></td><td><a href="correlations.html">correlations</a></td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Elo holdout Brier (S1)</td><td>0.24907 vs B0 0.25279 vs B1 0.28874</td><td><span class="b bad">NOT VALIDATED</span></td><td><a href="leaderboard.html">leaderboard</a></td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Market comparison</td><td>all market cells blank</td><td><span class="b warn">BLOCKED</span></td><td><a href="flagged.html">flagged</a></td><td><a href="https://www.nfl.com/terms">www.nfl.com/terms</a></td></tr></tbody></table>
+<h2>Sections</h2>
+<div class="tiles">
+<a class="tile" href="executive-summary.html"><b>Executive summary</b></a>
+<a class="tile" href="data.html"><b>Data</b></a>
+<a class="tile" href="signals.html"><b>Signals</b></a>
+<a class="tile" href="correlations.html"><b>Correlations</b></a>
+<a class="tile" href="own-lines.html"><b>Own lines</b></a>
+<a class="tile" href="strategies.html"><b>Strategies</b></a>
+<a class="tile" href="leaderboard.html"><b>Leaderboard</b></a>
+<a class="tile" href="validation.html"><b>Validation gates</b></a>
+<a class="tile" href="flagged.html"><b>Flagged for review</b></a>
+<a class="tile" href="sources.html"><b>Sources</b></a></div>
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

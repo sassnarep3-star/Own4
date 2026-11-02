@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation gates · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="on">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Validation gates</h1>
+<p class="lede">Gates frozen in <code>params.json v1.0</code> before the first model run.
+A strategy is validated only if ALL eight pass. Results below are for S1 (Elo sides).</p>
+<table class=""><thead><tr><th>Gate</th><th>Result</th><th>Detail</th><th>Source</th></tr></thead><tbody><tr><td>G1 · Provenance</td><td><span class="b ok">PASS</span></td><td>all inputs carry official nfl.com source URLs; verification_report.json 14/14</td><td><a href="https://www.nfl.com/standings/league/2026/REG">www.nfl.com/standings/league/2026/REG</a></td></tr><tr><td>G2 · Leakage control</td><td><span class="b ok">PASS</span></td><td>chronological walk-forward; scale/baselines fitted on weeks 1-4; holdout weeks 5-8 evaluated once after params commit</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>G3 · Sample size (n≥300)</td><td><span class="b bad">FAIL</span></td><td>holdout n=56, required >= 300</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>G4 · Baseline comparison</td><td><span class="b ok">PASS</span></td><td>Elo 0.24907 vs B0 0.25279 vs B1 0.28874 (holdout Brier)</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>G5 · Calibration (ECE≤0.10)</td><td><span class="b bad">FAIL</span></td><td>holdout ECE(5-bin)=0.1191 (threshold 0.10)</td><td><a href="https://scikit-learn.org/stable/modules/calibration.html">scikit-learn.org/stable/modules/calibration.html</a></td></tr><tr><td>G6 · Trial registry</td><td><span class="b ok">PASS</span></td><td>strategy_registry.json v1.0 registered before evaluation</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>G7 · Market comparison</td><td><span class="b warn">BLOCKED</span></td><td>no official operator price archive exists; market comparison impossible</td><td><a href="https://www.nfl.com/terms">www.nfl.com/terms</a></td></tr><tr><td>G8 · Costs & settlement terms</td><td><span class="b warn">BLOCKED</span></td><td>no official operator settlement/limits terms published</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr></tbody></table>
+<h2>Anti-luck protocol</h2>
+<table class=""><thead><tr><th>Step</th><th>Mechanism</th><th>Source</th></tr></thead><tbody><tr><td>Pre-registration</td><td>params + strategy registry committed before evaluation; git history proves ordering.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Walk-forward</td><td>Every probability uses only games that had finished before kickoff.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Locked holdout</td><td>Weeks 5–8 evaluated once, after fitting on weeks 1–4.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Uncertainty</td><td>Wilson 95% intervals on all rates; p-values on all correlations.</td><td><a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm">www.itl.nist.gov/div898/handbook/eda/section3/eda35c.htm</a></td></tr><tr><td>Multiple testing</td><td>All strategies registered up-front; no silent additions.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Honest failure</td><td>G3/G5 failures published as-is; null results kept (momentum, home field).</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr></tbody></table>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>

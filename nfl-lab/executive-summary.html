@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Line Origination Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="badge-logo">NFL</span> Line Origination Lab
+    <span class="sub">Own4 · evidence-first research · not a betting service</span></div>
+  <nav><a href="index.html" class="">Dashboard</a>
+<a href="executive-summary.html" class="on">Executive summary</a>
+<a href="data.html" class="">Data</a>
+<a href="signals.html" class="">Signals</a>
+<a href="correlations.html" class="">Correlations</a>
+<a href="own-lines.html" class="">Own lines</a>
+<a href="strategies.html" class="">Strategies</a>
+<a href="leaderboard.html" class="">Leaderboard</a>
+<a href="validation.html" class="">Validation gates</a>
+<a href="flagged.html" class="">Flagged for review</a>
+<a href="sources.html" class="">Sources</a></nav>
+</header>
+<main>
+
+<h1>Executive summary</h1>
+<p class="lede">The lab now contains a fully verified 2026 NFL dataset, a pre-registered
+walk-forward line-origination model, measured signals and correlations, and an honest
+validation-gate leaderboard. No strategy has been validated; nothing is inferred or filled in.</p>
+<table class=""><thead><tr><th>Area</th><th>What was done</th><th>Result / status</th><th>Source</th></tr></thead><tbody><tr><td>Goal</td><td>Originate own NFL lines (moneyline, spread, total), test singles / parlays / prop-combo strategies on validation gates with correlation analysis.</td><td>Specification + measured results published; no strategy is validated.</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Verified data</td><td>120 completed 2026 regular-season games transcribed from official weekly schedules; 32-team league standings transcribed.</td><td>14 automated checks, 480/480 cells match recomputation; 0 mismatches.</td><td><a href="https://www.nfl.com/standings/league/2026/REG">www.nfl.com/standings/league/2026/REG</a></td></tr><tr><td>Model</td><td>Walk-forward Elo (K=20, HFA=65, MOV multiplier), margin scale + baselines fitted on weeks 1–4 only; holdout weeks 5–8 locked.</td><td>Holdout Brier 0.24907 (n=56); beats both baselines but fails G3 (n<300) and G5 (ECE 0.1191>0.10).</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Own lines</td><td>16 upcoming games (W8 MNF + full W9 slate) with fair moneylines, model spreads and totals.</td><td>Published with market columns permanently blank — no official line source exists (G7 blocked).</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Signals</td><td>Home field, rest buckets, margins, totals, day-of-week, rest-differential, momentum, passing vs wins.</td><td>Rest differential is the only signal with p<0.001; home-field and momentum are not significant.</td><td><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm</a></td></tr><tr><td>Parlays</td><td>TNF×SNF leg-independence φ tested across 8 weeks.</td><td>r=0.488, p=0.220, n=8 — below pre-registered minimum n=30: inconclusive, not evidence of independence or dependence.</td><td><a href="https://www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm">www.itl.nist.gov/div898/handbook/ppc/section1/ppc136.htm</a></td></tr><tr><td>Props</td><td>Same-game player-prop combo dependence (S7).</td><td>BLOCKED: official game-level player logs not ingested; no value computed or inferred.</td><td><a href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all">www.nfl.com/stats/team-stats/offense/passing/2026/reg/all</a></td></tr><tr><td>Rewards</td><td>Leaderboard rewards only for strategies passing ALL gates G1–G8.</td><td>0 strategies eligible. Reward pool terms: blank + flagged (no official source publishes them).</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr></tbody></table>
+<h2>Numbers that matter</h2>
+<table class=""><thead><tr><th>Metric</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Verified games / standings cells</td><td>120 games · 480 cells · 0 mismatches</td><td><a href="https://www.nfl.com/standings/league/2026/REG">www.nfl.com/standings/league/2026/REG</a></td></tr><tr><td>Holdout Brier — Elo vs constant vs record</td><td>0.24907 / 0.25279 / 0.28874</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Totals model vs baseline MAE (holdout)</td><td>11.46 vs 11.3 (model worse → S4 not validated)</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Strongest measured signal</td><td>Rest-advantaged side 0.840 [0.654, 0.936] (n=25, underpowered)</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-8">www.nfl.com/schedules/2026/by-week/week-8</a></td></tr><tr><td>Gates passed (S1 Elo)</td><td>4/8 — G3, G5 fail; G7, G8 blocked → NOT VALIDATED</td><td><a href="https://scikit-learn.org/stable/modules/cross_validation.html">scikit-learn.org/stable/modules/cross_validation.html</a></td></tr><tr><td>Reward-eligible strategies</td><td>0 of 8 registered</td><td><a href="https://www.ncpgambling.org/">www.ncpgambling.org/</a></td></tr></tbody></table>
+<h2>What is deliberately blank</h2>
+<ul class="plain">
+<li>Every market price, spread and total from operators — no official source publishes them (see <a href="flagged.html">flagged</a>).</li>
+<li>Prop-combo correlation values — game-level player logs were not ingested (S7 blocked).</li>
+<li>Reward pool amounts — no official terms exist.</li>
+</ul>
+
+</main>
+<footer>Generated 2026-11-02 from line-by-line verified official nfl.com data ·
+<a href="sources.html">Source register</a> · <a href="flagged.html">Flagged items</a> ·
+<a href="../index.html">Repo site home</a></footer>
+</body>
+</html>
