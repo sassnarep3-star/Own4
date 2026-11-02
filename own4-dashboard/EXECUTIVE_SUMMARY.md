@@ -1,7 +1,7 @@
 # Executive Summary — Own4 NBA Lines, Signals & Leaderboard
 
 **Snapshot:** 2026-11-02 (UTC) · **Season:** 2026-27 in progress (4–7 GP per team)
-**Live site:** https://sassnarep3-star.github.io/Own4/ · **Branch:** `arena/3ab8432d-own4`
+**Live site:** https://sassnarep3-star.github.io/Own4/own4-dashboard/ · **Branch:** `arena/3ab8432d-own4`
 
 ## What was built
 
@@ -17,7 +17,7 @@ flagged on a dedicated **Flagged for Review** page.
 | Item | Value | Status | Official source |
 | --- | --- | --- | --- |
 | Official sources in registry | 22 usable + 3 unusable official endpoints | verified | [NBA.com Standings](https://www.nba.com/standings) |
-| Rows checked line by line | 450 | 450 PASS / 0 FLAG | [NBA.com Glossary](https://www.nba.com/stats/help/glossary) |
+| Rows checked line by line | 451 | 451 PASS / 0 FLAG | [NBA.com Glossary](https://www.nba.com/stats/help/glossary) |
 | Teams covered | 30 (two full official seasons) | verified | [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26) |
 | Settled games transcribed | 62 of 92 | partial, flagged | [NBA.com Games 2026-10-23](https://www.nba.com/games?date=2026-10-23) |
 | Our own fair lines originated | 14 games (2026-11-04 slate) | derived, formula published | [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04) |
@@ -25,7 +25,7 @@ flagged on a dedicated **Flagged for Review** page.
 | Strategies / validation gates | 13 / 10 | verified | [NBA.com Games 2026-11-01](https://www.nba.com/games?date=2026-11-01) |
 | Strategies passing every gate | 0 | NOT VALIDATED | [NBA betting-data policy](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group) |
 | Eligible research signals | 4 (top reward 100 pts) | verified | [NBA.com Standings](https://www.nba.com/standings) |
-| Flagged items | 17 | published, non-blocking | [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04) |
+| Flagged items | 18 | published, non-blocking | [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04) |
 
 ## Most important findings
 

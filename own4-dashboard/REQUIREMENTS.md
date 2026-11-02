@@ -48,7 +48,7 @@ Status values: `done` · `partial` (officially-sourced data unavailable → blan
 
 | ID | Requirement | Deliverable | Verification evidence (official link) | Status |
 | --- | --- | --- | --- | --- |
-| R4.01 | "Create a github page live site for this repo" | GitHub Pages at `https://sassnarep3-star.github.io/Own4/` | [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages) | done |
+| R4.01 | "Create a github page live site for this repo" | GitHub Pages dashboard at `https://sassnarep3-star.github.io/Own4/own4-dashboard/` (namespaced to preserve concurrent sessions' canonical root site) | [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages) | done |
 | R4.02 | "clean landing page" | `index.html` | [GitHub repo tree](https://github.com/sassnarep3-star/Own4/tree/main) | done |
 | R4.03 | "subpages organized by category" | 13 category pages under `pages/` | [GitHub repo tree](https://github.com/sassnarep3-star/Own4/tree/main) | done |
 | R4.04 | "UI should be clean, user friendly, simple, and easy to use, like a simple dashboard" | `assets/css/style.css`, sticky sidebar nav, cards, KPI tiles | [GitHub repo tree](https://github.com/sassnarep3-star/Own4/tree/main) | done |
@@ -99,3 +99,8 @@ Status values: `done` · `partial` (officially-sourced data unavailable → blan
 
 **Note on statuses:** `done` for R7 rows is recorded after the PR/merge/deploy steps complete in T10.
 The register is generated before the merge and is re-checked by the integration session.
+
+**Note on paths:** all paths in this register are relative to the `own4-dashboard/` namespace.
+Concurrent sessions had already published a canonical dashboard at the site root; this session's
+dashboard was placed under its own directory so that no root file owned by another session was
+overwritten (see the conflict log in the root `COORDINATION.md`).

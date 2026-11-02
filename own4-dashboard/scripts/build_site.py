@@ -355,7 +355,11 @@ glance = render_table(
 index_body = (
     callout("Read this first", "This is a <strong>research and validation</strong> dashboard, not betting advice. "
             "Every value comes from an official NBA/league page or a committed formula; anything that cannot be "
-            "confirmed is blank and flagged on the <a href=\"" + nav_href("index.html", "pages/flagged.html") + "\">Flagged for Review</a> page.", "info")
+            "confirmed is blank and flagged on the <a href=\"" + nav_href("index.html", "pages/flagged.html") + "\">Flagged for Review</a> page. "
+            "Concurrent sessions had already published the canonical root dashboard at "
+            "<a href=\"https://sassnarep3-star.github.io/Own4/\" target=\"_blank\" rel=\"noopener\">/Own4/</a>; "
+            "to preserve their work, this independently verified dashboard is published in its own "
+            "<code>/Own4/own4-dashboard/</code> namespace.", "info")
     + f'<h2>Key findings</h2><div class="findings">{cards}</div>'
     + f"<h2>At a glance</h2>{glance}"
     + "<h2>What this site contains</h2>" + para(

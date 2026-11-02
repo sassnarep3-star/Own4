@@ -472,6 +472,7 @@ flag_rows = [
     {"id": "IR-15", "severity": "Medium", "item": "Cooper Flagg player row was truncated by the retrieval tool; five fields blank + UNVERIFIED.", "value": "—", "status": "UNVERIFIED", "source": SRC["players_2026"]},
     {"id": "IR-16", "severity": "Medium", "item": "No strategy cleared all validation gates; Division B leaderboard has no eligible entries and no rewards.", "value": "0 eligible", "status": "needs review", "source": SRC["betting_data"]},
     {"id": "IR-17", "severity": "Low", "item": "Home/away convention cannot be settled from official data: the second-listed team won 31/62 (0.500) in the transcribed sample vs a verified league home win rate of 48/92 (0.5217). No convention is asserted.", "value": "31 / 62", "status": "UNVERIFIED", "source": SRC["games_1101"]},
+    {"id": "IR-18", "severity": "High", "item": "Parallel-session collision: concurrent sessions merged PRs #11-#13 into main, publishing a canonical root dashboard overlapping this session's index.html, pages/*, README.md, COORDINATION.md, EXECUTIVE_SUMMARY.md and data/sources.json. PR #15 was CONFLICTING.", "value": "resolved", "status": "needs review", "source": SRC["pages_api"]},
 ]
 write_json(VERIFICATION / "flagged.json", {
     "retrieved_utc": "2026-11-02",

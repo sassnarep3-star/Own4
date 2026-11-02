@@ -14,7 +14,13 @@ rewards for top-performing strategies. It covers single bets, parlays and player
 
 ## Live site
 
-GitHub Pages: <https://sassnarep3-star.github.io/Own4/>
+GitHub Pages: <https://sassnarep3-star.github.io/Own4/own4-dashboard/>
+
+> **Parallel-session note.** Concurrent sessions already published the canonical root dashboard at
+> <https://sassnarep3-star.github.io/Own4/>. To preserve their work (per `COORDINATION.md`), this
+> session's independently verified dashboard is published under its own namespace
+> `/Own4/own4-dashboard/`. All files of this session live in this directory; no root file owned by
+> another session was overwritten.
 
 | Section | Contents |
 | --- | --- |
@@ -40,6 +46,8 @@ GitHub Pages: <https://sassnarep3-star.github.io/Own4/>
 `EXECUTIVE_SUMMARY.md`.
 
 ## Reproduce
+
+Run these from inside the `own4-dashboard/` directory:
 
 ```bash
 python3 scripts/build_lines.py          # derive our own lines from official snapshots

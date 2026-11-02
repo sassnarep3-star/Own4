@@ -137,8 +137,9 @@ only `README.md`, 6 bytes).
   [NBA.com Games 2026-11-04](https://www.nba.com/games?date=2026-11-04),
   [NBA betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
   [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages).
-- Irregularities: none in the build. All 17 pre-existing flagged items are published on the
-  clearly labelled **Flagged for Review** page with official source links; they do not block the merge.
+- Irregularities: none in the build. All flagged items (IR-01…IR-18, including the parallel-session
+  collision) are published on the clearly labelled **Flagged for Review** page with official source
+  links; they do not block the merge.
 
 ### Claim log (continued 2)
 | Time (UTC) | Session | Action |
@@ -147,6 +148,33 @@ only `README.md`, 6 bytes).
 | 2026-11-02 | session-3ab8432d | T09 done after full clean pipeline + 0 broken links. Claimed T10 (PR, merge, deploy). |
 
 ## Handoff / conflict log (final)
-- No other real session appeared on the board during this run.
-- `git pull --rebase origin arena/3ab8432d-own4` was run before every push; no merge conflicts occurred.
-- The platform's single-branch constraint (IR-13) is the only protocol deviation; logged above.
+
+**CONFLICT — 2026-11-02, T10.** PR #15 (`arena/3ab8432d-own4` → `main`) was reported
+`mergeable: CONFLICTING`. Investigation showed `origin/main` had advanced from `319d6b0` to
+`5a5cff2` via PRs #11–#13 merged by other concurrent sessions
+(`arena/689eb52e-own4`, `arena/1805bfdb-own4`, `arena/a4ec3896-own4`, `arena/fa175f65-own4`,
+`arena/3c4bdb06-own4`, session `34832d14-own4`). Those sessions had already published a canonical
+root dashboard and owned `index.html`, `pages/*`, `README.md`, `COORDINATION.md`,
+`EXECUTIVE_SUMMARY.md`, `data/sources.json`, `assets/*`, `data/*` and `scripts/*`.
+
+At this session's start none of that work existed on `main` (only `README.md`, 6 bytes), so the
+initial claim was legitimate. On detecting the collision, work was **stopped** and resolution was
+performed without discarding any other session's work:
+
+1. `origin/main` was fetched and read in full; its root tree is preserved verbatim in the merge.
+2. Every file this session created was moved into the non-overlapping `own4-dashboard/` namespace
+   (site, docs, data, scripts, assets). No root file owned by another session is overwritten.
+3. The shared root `COORDINATION.md` from `origin/main` is kept, with an appended handoff/PR record
+   for this session (T10), rather than replaced by this session's board.
+4. This session's full task board and completion records are retained at
+   `own4-dashboard/COORDINATION.md`.
+5. The dashboard is published at `https://sassnarep3-star.github.io/Own4/own4-dashboard/`;
+   the canonical root dashboard at `https://sassnarep3-star.github.io/Own4/` remains untouched.
+6. IR-18 was added to the Flagged for Review page and `REPO_REVIEW.md`.
+
+This follows the repository's own precedent (see the root board's earlier entries: colliding
+sessions publish their dashboards under `/docs/` and `/lab/` and resolve shared files in favour of
+the already-merged canonical `main`).
+
+`git pull --rebase origin arena/3ab8432d-own4` was run before every push. The platform's
+single-branch constraint (IR-13) is the other protocol deviation; logged above.

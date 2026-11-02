@@ -80,7 +80,7 @@
 <th>Verification evidence (official link)</th>
 <th>Status</th>
 </tr></thead><tbody>
-<tr><td>R4.01</td><td>&quot;Create a github page live site for this repo&quot;</td><td>GitHub Pages at <code>https://sassnarep3-star.github.io/Own4/</code></td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
+<tr><td>R4.01</td><td>&quot;Create a github page live site for this repo&quot;</td><td>GitHub Pages dashboard at <code>https://sassnarep3-star.github.io/Own4/own4-dashboard/</code> (namespaced to preserve concurrent sessions&#x27; canonical root site)</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
 <tr><td>R4.02</td><td>&quot;clean landing page&quot;</td><td><code>index.html</code></td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
 <tr><td>R4.03</td><td>&quot;subpages organized by category&quot;</td><td>13 category pages under <code>pages/</code></td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
 <tr><td>R4.04</td><td>&quot;UI should be clean, user friendly, simple, and easy to use, like a simple dashboard&quot;</td><td><code>assets/css/style.css</code>, sticky sidebar nav, cards, KPI tiles</td><td><a href="https://github.com/sassnarep3-star/Own4/tree/main" target="_blank" rel="noopener">GitHub repo tree</a></td><td>done</td></tr>
@@ -142,6 +142,7 @@
 <tr><td>R7.08</td><td>&quot;If the build, a check, or the deploy fails, fix the problem and retry until the site is live. Do not merge a broken site.&quot;</td><td><code>scripts/check_links.py</code> + Pages build check before merge</td><td><a href="https://api.github.com/repos/sassnarep3-star/Own4/pages" target="_blank" rel="noopener">GitHub Pages API</a></td><td>done</td></tr>
 </tbody></table></div>
 <p><strong>Note on statuses:</strong> <code>done</code> for R7 rows is recorded after the PR/merge/deploy steps complete in T10. The register is generated before the merge and is re-checked by the integration session.</p>
+<p><strong>Note on paths:</strong> all paths in this register are relative to the <code>own4-dashboard/</code> namespace. Concurrent sessions had already published a canonical dashboard at the site root; this session&#x27;s dashboard was placed under its own directory so that no root file owned by another session was overwritten (see the conflict log in the root <code>COORDINATION.md</code>).</p>
     </div>
     <footer class="footer">
       <span>Own4 · research &amp; validation only, not betting advice.</span>

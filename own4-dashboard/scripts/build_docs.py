@@ -258,7 +258,7 @@ source links (`data/verification/flagged.json`). They do not block the merge.
 w("EXECUTIVE_SUMMARY.md", f"""# Executive Summary — Own4 NBA Lines, Signals & Leaderboard
 
 **Snapshot:** 2026-11-02 (UTC) · **Season:** 2026-27 in progress (4–7 GP per team)
-**Live site:** https://sassnarep3-star.github.io/Own4/ · **Branch:** `arena/3ab8432d-own4`
+**Live site:** https://sassnarep3-star.github.io/Own4/own4-dashboard/ · **Branch:** `arena/3ab8432d-own4`
 
 ## What was built
 
