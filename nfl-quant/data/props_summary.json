@@ -1,0 +1,50 @@
+{
+  "generated_utc": "2026-11-02T21:15:19+00:00",
+  "tier": "Research-only (G7 fails: proxy market, no archived prop prices)",
+  "proxy_line_rule": "rolling 4-game mean entering week, rounded to 0.5; min 3 prior games",
+  "projection_rule": "rolling mean x (opponent rolling yards-allowed-to-position / league average)",
+  "bet_rule": "|projection - proxy line| >= 5 yards; over/under accordingly; priced at -110 for illustration",
+  "singles_vs_proxy": {
+    "QB1": {
+      "n_bets": 722,
+      "wins": 330,
+      "losses": 391,
+      "pushes": 1,
+      "hit_rate_ex_push": 0.4577,
+      "roi_at_minus110": -0.126,
+      "breakeven_hit_rate": 0.5238
+    },
+    "RB1": {
+      "n_bets": 593,
+      "wins": 318,
+      "losses": 268,
+      "pushes": 7,
+      "hit_rate_ex_push": 0.5427,
+      "roi_at_minus110": 0.0356,
+      "breakeven_hit_rate": 0.5238
+    },
+    "WR1": {
+      "n_bets": 559,
+      "wins": 273,
+      "losses": 286,
+      "pushes": 0,
+      "hit_rate_ex_push": 0.4884,
+      "roi_at_minus110": -0.0677,
+      "breakeven_hit_rate": 0.5238
+    }
+  },
+  "combo_QB1_WR1": {
+    "n_team_games": 800,
+    "p_qb1_over_proxy": 0.4637,
+    "p_wr1_over_proxy": 0.4088,
+    "p_joint_both_over": 0.275,
+    "p_product_if_independent": 0.1896,
+    "correlation_lift_joint_over_product": 1.4507,
+    "lift_ci95": [
+      1.3611,
+      1.5546
+    ],
+    "fair_2leg_multiplier_vs_independent": 1.4507,
+    "interpretation": "A same-game QB-over + WR1-over parlay is worth ~lift x the independent-leg product probability. Books reprice SGPs; without archived SGP prices no edge can be claimed (G7 fails)."
+  }
+}
