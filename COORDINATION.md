@@ -496,3 +496,33 @@ Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (req
 - **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
 - Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
 
+
+---
+## Session `arena-7f8d7277-own4` — NFL scope (2026-11-02 UTC)
+
+Session ID: `arena-7f8d7277`. Platform pins this session to `arena/7f8d7277-own4`; the requested
+`session-<id>/<task>` branch and a separate `integration` branch cannot be created here (deviation
+logged, same as prior sessions). Scope isolation is by file namespace. This session is the executing
+session **and** final integration session for the NFL work; no other active claim was found when the
+board was read (all prior in-progress entries belong to completed/merged NBA sessions and no PRs are
+open). Shared NBA outputs (`index.html`, `pages/**`, `build_site.py`, `docs/**`, `lab/**`,
+`lines-lab/**`, `own4-dashboard/**`, `pipeline/**`, `data/*.json` outside `data/nfl/**`,
+`README.md`, `EXECUTIVE_SUMMARY.md`, `.github/workflows/**`) are **not** edited by this session.
+`COORDINATION.md` is append-only.
+
+**Claimed file scope (non-overlapping):** `nfl/**`, `data/nfl/**`, `scripts/nfl_*.py`,
+`NFL_EXECUTIVE_SUMMARY.md`, `NFL_REPO_REVIEW.md`, plus append-only `COORDINATION.md`.
+
+| ID | Task | Status | Owner session | Files touched |
+|----|------|--------|---------------|---------------|
+| N1 | Repo review + irregularity audit + official-source NFL research | in progress | arena-7f8d7277 | `NFL_REPO_REVIEW.md`, `data/nfl/**` |
+| N2 | NFL strategy framework: singles, parlays, player-prop combos, own lines, validation gates, correlation values, skill-vs-luck leaderboard | in progress | arena-7f8d7277 | `data/nfl/**`, `scripts/nfl_*.py` |
+| N3 | NFL executive summary | in progress | arena-7f8d7277 | `NFL_EXECUTIVE_SUMMARY.md` |
+| N4 | GitHub Pages NFL site: clean landing + category subpages + tables + Flagged for Review | in progress | arena-7f8d7277 | `nfl/**`, `scripts/nfl_build_site.py` |
+| N5 | Final integration: line-by-line official-source verification, build, no broken links | in progress | arena-7f8d7277 | `nfl/**`, `data/nfl/**`, `scripts/nfl_verify.py` |
+| N6 | PR → merge (no approval wait) → GitHub Pages deploy confirmation → record PR link + merge result | in progress | arena-7f8d7277 | this file |
+
+**Initial irregularity (to publish on Flagged for Review):** IR-NFL-01 — the pre-existing repository is
+entirely NBA-focused (standings, NBA rules, NBA model, NBA pages) although the current brief says
+"NFL". This session adds a separate, clearly namespaced NFL section rather than overwriting prior
+sessions' NBA work; a root-level cross-link decision is reserved for final integration.
