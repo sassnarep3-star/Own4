@@ -67,7 +67,7 @@ STATS_STANDINGS = (
     f"&Season={SEASON}&SeasonType=Regular%20Season"
 )
 ESPN_SCOREBOARD = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates={ymd}"
-ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={eid}"
+ESPN_SUMMARY = "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={event_id}"
 
 manifest = {"updated_utc": None, "season": SEASON, "items": []}
 
@@ -198,10 +198,14 @@ def main():
         time.sleep(0.35)
     print(f"espn summaries fetched: {ok}")
 
-    save_manifest()
     okn = sum(1 for i in manifest["items"] if i["http_status"] == 200)
     print(f"manifest: {len(manifest['items'])} items, {okn} ok")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    code = 1
+    try:
+        code = main() or 0
+    finally:
+        save_manifest()
+    sys.exit(code)
