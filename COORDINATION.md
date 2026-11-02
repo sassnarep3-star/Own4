@@ -113,3 +113,25 @@ The task brief asks for per-task branches named `session-<id>/<task>`. This sess
 - Resolved while reviewing: flag F-05 (game ID 0022600021) is an NBA Cup group-stage ID block per nba.com game page/schedule; downgraded to 'explained, needs confirmation'.
 - 2026-11-02 18:1x UTC (bf34205f) — T9 integration: merged `origin/main` (kept every other session's file), moved this session's site to `lab/`, added a "Data Lab" link to the root nav/dashboard generator (`build_site.py`, regenerated `index.html`/`pages/*`), added `verify_data.py` + `check_site.py` steps to `.github/workflows/pages.yml`, appended a Data Lab section to README. Checks: verify_data 11/11, check_site 0 problems (11 lab pages, 758 links, 438 table rows each with an https source link), `scripts/build.py` leaves `docs/` unchanged, framework unit tests OK. PR #8 opened; merge result to be recorded below.
 - 2026-11-02 18:1x UTC (bf34205f) — **PR #8 merged**: https://github.com/sassnarep3-star/Own4/pull/8 (merge commit `7f184f4b614fac8259bc4c611653911f189c7945`, merged 18:10:04 UTC, no approval required). CI `validate` passed on the PR (incl. verify_data + check_site). Pages (legacy, main `/`): `pages/builds/latest` status `built` for the merge commit; live checks via cache-busting URLs: https://sassnarep3-star.github.io/Own4/lab/ (dashboard, 16 flags, 15 own lines) and https://sassnarep3-star.github.io/Own4/lab/pages/flagged.html loaded. T9 done. Open flags: see `data/flags.csv` (none blocking).
+
+
+---
+
+# Follow-up round — session `arena-a4ec3896-own4`
+
+Session ID: `arena-a4ec3896-own4` · Branch: `arena/a4ec3896-own4` (fixed by the platform; replaces `session-<id>/<task>` naming).
+
+On start this session hit two successive add/add / content conflicts on this file: session `arena-689eb52e-own4` merged PR #2 (`5f5abbd`) and then session `arena-1805bfdb` merged PR #3 (`2745711`, a second, separate dashboard under `docs/`). Resolution each time: aborted the rebase, reset the branch to `origin/main`, and kept **all** of the other sessions' content intact — only appending below. No work was discarded. Files under `docs/**`, `scripts/**`, `tests/**`, `.github/**` belong to `arena-1805bfdb` and are NOT edited by this session (changes there are requested below instead).
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| 8 | Line-by-line audit of every claim/row already on `main` against official pages (re-fetched today) | in progress | arena-a4ec3896-own4 | `data/audit.json`, `AUDIT.md` |
+| 9 | Walk-forward research engine: own-line models, validation gates, luck-removal tests, placebo calibration | in progress | arena-a4ec3896-own4 | `research/**` |
+| 10 | Empirical correlation matrices (props, same-game legs, parlay inflation) | in progress | arena-a4ec3896-own4 | `research/**`, `data/correlations_computed.json` |
+| 11 | Leaderboard (singles / parlays / prop combos) + rewards | in progress | arena-a4ec3896-own4 | `data/leaderboard.json` |
+| 12 | Corrections to existing data + Flagged for Review additions | in progress | arena-a4ec3896-own4 | `data/flagged.json`, `data/sources.json`, `data/strategies.json`, `data/validation_gates.json`, `data/correlations.json` (owner of these files was the previous session — it is finished; no other session holds a claim) |
+| 13 | Executive summary refresh | in progress | arena-a4ec3896-own4 | `EXECUTIVE_SUMMARY.md` |
+| 14 | Site rebuild (new Leaderboard / Research / Audit pages) + final integration, link check, PR, merge, Pages check | in progress | arena-a4ec3896-own4 | `build_site.py`, `index.html`, `pages/**`, `assets/**`, `README.md` |
+
+## Log (follow-up round)
+- 2026-11-02 — a4ec3896 claimed tasks 8-14. Takeover rule not needed (previous session's claim was complete, not stale).
