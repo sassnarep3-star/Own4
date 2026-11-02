@@ -74,7 +74,7 @@ pages['review.html'] = ('Flagged for Review', '''<p class="eyebrow">04 / OPEN IT
 ('F06 · Terms link redirect','nfl/sources.html links /terms, which redirected to subscription terms during inspection. General terms are at /legal/terms/.','Review applicable terms for each specific service.',TERMS),
 ('F07 · Injury history','NFL injury page shows week reports, but no immutable historical as-of archive is established here.','Cannot use present-day report as a point-in-time backtest.',INJ),
 ('F08 · User intent vs build','Reward competition, financial rewards, automatic licensed input pipeline and wager execution are not implemented or funded.','Competition is a design, not an operating service.',TERMS),
-('F09 · Navigation','Prior NFL supplement and this independent NFL section are separate from the existing NBA root navigation.','Root integrator must link NFL sections; direct section URLs remain available.',NFL),
+('F09 · Navigation','The root now links to the NFL module; this independent NFL section is not linked from shared navigation.','Request a root integrator link to this section; direct section URLs remain available.',NFL),
 ('F10 · External link checks','Some official sites can block automated clients or change content. Static local link validation cannot establish every third-party destination or source claim.','Review manually; do not claim full external-link crawl.',NFL),
 ])) + '''<p>Other workstreams have their own flags; see the <a href="../nfl/review.html">previous NFL review</a> and <a href="../index.html">repository root</a>. No claim is made that the entire NBA repository has been re-verified in this session.</p>''')
 
@@ -90,10 +90,10 @@ pages['sources.html'] = ('Source register', '''<p class="eyebrow">05 / EVIDENCE<
 ('scikit-learn · cross-validation','Documentation warns against testing on training data and repeatedly tuning on test data.','Split design here is a proposal.',CV),
 ('scikit-learn · calibration','Documentation explains probability calibration.','Calibration alone does not establish a betting edge.',CAL),
 ('NIST · autocorrelation','Handbook discusses dependence between values of a time series at different times.','Does not provide NFL correlation values or validate the proposed block bootstrap.',NIST),
-])) + '''<p>Existing NFL research: <a href="../nfl/index.html">NFL supplement</a>. Previous work contains additional NBA materials; links do not make those materials NFL evidence.</p>''')
+])) + '''<p>Existing NFL research: <a href="../nfl/index.html">NFL module</a> and <a href="../nfl/sources.html">earlier source register</a>. Previous work contains additional NBA materials; links do not make those materials NFL evidence.</p>''')
 
 nav = [('index.html','Overview'),('strategies.html','Strategies'),('validation.html','Validation'),('correlations.html','Correlation'),('review.html','Flagged for Review'),('sources.html','Sources')]
 for filename, (title, content) in pages.items():
     menu = ''.join(f'<a {"aria-current=page" if target == filename else ""} href="{target}">{label}</a>' for target, label in nav)
-    doc = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} · Own4 NFL</title><link rel="stylesheet" href="style.css"></head><body><header><div class="bar"><a class="brand" href="index.html"><span class="mark">O</span> OWN4 <small> / NFL</small></a><nav aria-label="NFL sections">{menu}</nav></div></header><main>{content}</main><footer>Independent research · As of 02 Nov 2026 · <a href="../nfl/index.html">Earlier NFL supplement</a> · <a href="../index.html">Repository home</a></footer></body></html>'''
+    doc = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{escape(title)} · Own4 NFL</title><link rel="stylesheet" href="style.css"></head><body><header><div class="bar"><a class="brand" href="index.html"><span class="mark">O</span> OWN4 <small> / NFL</small></a><nav aria-label="NFL sections">{menu}</nav></div></header><main>{content}</main><footer>Independent research · As of 02 Nov 2026 · <a href="../nfl/index.html">NFL module</a> · <a href="../index.html">Repository home</a></footer></body></html>'''
     (ROOT / filename).write_text(doc + '\n', encoding='utf-8')
