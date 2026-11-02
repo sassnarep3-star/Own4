@@ -5,9 +5,11 @@ Leaderboard-style research framework for originating NBA lines from verifiable s
 - Live site: GitHub Pages (see repo Settings → Pages)
 - Executive summary: [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)
 - Task board: [COORDINATION.md](COORDINATION.md)
-- Rebuild site: `python3 build_site.py`
+- Rebuild site: `python3 build_site.py` (stdlib only; fails on a broken link or a table row without a source link)
+- Computed research (sessions a4ec3896): [research/README.md](research/README.md) · [AUDIT.md](AUDIT.md) · leaderboard on the site (`pages/leaderboard.html`)
+- Related sites in this repo: `docs/` (specification dashboard) and `lab/` (Data Lab with 92 official 2026-27 games)
 
-Research framework only — not wagering advice. Helpline: 1-800-GAMBLER (ncpgambling.org).
+Research framework only — not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET ([ncpgambling.org/help-treatment](https://www.ncpgambling.org/help-treatment)); an earlier 1-800-GAMBLER reference was corrected during the audit.
 
 
 ---
