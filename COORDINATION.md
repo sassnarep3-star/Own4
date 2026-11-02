@@ -19,7 +19,7 @@ Branch: `arena/689eb52e-own4` (fixed for this session)
 
 - 2026-11-02 — Session arena-689eb52e-own4 claimed tasks 1–7 (sole active session; no other claims found). Repo was empty except README.md ("# Own4"). No conflicts.
 - 2026-11-02 — All research rows cite official/trusted sources (nba.com, official.nba.com, stats.nba.com, gleague.nba.com, ncpgambling.org). Market/odds values and correlation coefficients that cannot be confirmed from an official source are left blank and listed on the Flagged for Review page.
-- 2026-11-02 — PR link and merge result: (to be recorded after merge)
+- 2026-11-02 — PR https://github.com/sassnarep3-star/Own4/pull/2 merged into main at 2026-11-02T17:55:58Z (--merge). GitHub Pages deployed from main root: status "built", live at https://sassnarep3-star.github.io/Own4/ . All tasks done.
 
 ## Verification notes
 
