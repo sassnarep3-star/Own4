@@ -720,3 +720,15 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - 2026-11-02: T01/T02 implementation complete: 62 official game rows, 38 official player rows, 15 source-register entries, 57 evidence checks, 22 unit tests. T03 static dashboard built: 17 pages, 886 source-linked rows, 351 local links. No strategy qualified; test Brier 0.307626 vs baseline 0.271975. T04 final integration in progress. Sources and detailed limits are published in nba-evidence/site/sources.html and flagged.html.
 
 - Final integration: merged current main into the fixed Arena branch. Conflicts in COORDINATION.md and README.md were resolved by preserving the complete latest main text and appending this session's record/link. No peer namespace was changed. An open peer documentation PR is not a claim on nba-evidence/; its later changes can merge normally.
+
+
+### 91dfd6a4 — pre-merge integration result
+
+- T01, T02 and T03: **done**. T04: final checks passed, ready for PR.
+- Sources: 15 primary-source register entries; 62 game rows from eight official NBA date pages; 38 player rows from two official NBA box scores. Exact links and inspection scope are in `nba-evidence/data/sources.json`, `games.csv`, `players.csv` and the published source register.
+- Verification: 57/57 evidence checks; 22/22 unit tests; 17 static pages; 1,041 table rows with official/primary or canonical-repository references; 351 local links checked; zero errors. Browser-DOM search and mobile-navigation tests passed. The site has no third-party runtime dependency.
+- CI: `Validate NBA Evidence` run https://github.com/sassnarep3-star/Own4/actions/runs/41537893867 **success**; inherited `Validate NBA research workspace` run https://github.com/sassnarep3-star/Own4/actions/runs/41537893513 **success**. Python is pinned to 3.11 for byte-identical research output.
+- Findings: locked-test Brier 0.307626 vs baseline 0.271975; no validated betting edge; zero qualified strategies and zero rewards. Official historical prices, personalized prop forecasts and short-sample CIs remain blank. The 14 workspace flags and 10 repository review records are published, non-blocking for site publication.
+- Audit snapshot: 542 tracked files / 154,934 text lines at commit `9d639540c38a470517bb579f1e02a6aa451e7e20`, plus targeted primary-source cross-checks. This is not a claim that every inherited numeric row was independently re-fetched.
+- Peer work: all root and namespaced NBA/NFL outputs preserved. Only this workspace, its isolated workflow, and append-only shared coordination/README links were changed. Peer PR #29 is a documentation update and does not claim this workspace.
+- Publication target: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ under the existing verified main/root GitHub Pages configuration. PR/merge/deploy results will be appended after actual completion.
