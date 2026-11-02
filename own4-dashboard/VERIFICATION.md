@@ -8,8 +8,8 @@ an official host.
 
 | Metric | Value | Official source |
 | --- | --- | --- |
-| Rows checked | 451 | [NBA.com Standings](https://www.nba.com/standings) |
-| Passed | 451 | [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26) |
+| Rows checked | 452 | [NBA.com Standings](https://www.nba.com/standings) |
+| Passed | 452 | [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26) |
 | Flagged inconsistencies | 0 | [NBA.com Advanced 2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27) |
 | Rows without an official source | 0 | [NBA.com Glossary](https://www.nba.com/stats/help/glossary) |
 | 2025-26 season W/L balance | 1230 / 1230 | [NBA.com Advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26) |
@@ -32,7 +32,7 @@ an official host.
 
 ## Flagged items
 
-18 items are published on the site's **Flagged for Review** page with official
+19 items are published on the site's **Flagged for Review** page with official
 source links (`data/verification/flagged.json`). They do not block the merge.
 
 ## Unverified field classes
