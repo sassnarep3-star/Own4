@@ -599,3 +599,12 @@ Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions ar
 **Shared-file changes at integration (logged per protocol):** README.md (conflict-marker repair, both sides kept); index.html + engine/build.py (additive NFL nav links only — no prior session content removed). PR #24 scope (nfl-research/**) untouched.
 
 PR link and merge result: (recorded after merge below)
+
+### Session arena-e513f51b-own4 — PR / merge / deploy record (2026-11-02 UTC)
+
+- **PR #26**: https://github.com/sassnarep3-star/Own4/pull/26 — "NFL Quant Lab: measured line origination, correlations, gated strategy backtests + site" — **MERGED** (no approval required), merge commit `d3e9fd6aab9e31f88901dc66a3745aecd7864a23` (main HEAD).
+- **CI**: PR `validate` run [41528342828](https://github.com/sassnarep3-star/Own4/actions/runs/41528342828) passed before merge (build.py, unittest, verify_data 11/11, check_site 758 links/0 problems, docs/ unchanged).
+- **GitHub Pages**: legacy source main `/`; `pages/builds/latest` status **built** for commit `d3e9fd6` (created 2026-11-02T21:28:02Z); deployment run [41528593754](https://github.com/sassnarep3-star/Own4/actions/runs/41528593754) succeeded.
+- **Live verification (cache-busted fetch)**: https://sassnarep3-star.github.io/Own4/nfl-quant/ (dashboard, leaderboard, directory render) and https://sassnarep3-star.github.io/Own4/nfl-quant/pages/flagged.html (15 flags render) both serve fully. Root nav link added.
+- **Parallel sessions**: PR #24 (nfl-research/**, arena/1699c9cc) remained OPEN and untouched throughout; no other-session work discarded. README conflict markers repaired keeping both sides.
+- This record is published to main via a follow-up PR from arena/e513f51b-own4 (repo protocol: merge outcome not knowable before merge).
