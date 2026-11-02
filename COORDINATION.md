@@ -357,34 +357,127 @@ I-01 pinned branch / no integration branch; I-02 legacy Pages; I-03 stale 2025-2
 - Resolution: merged `origin/main` into the pinned branch; the only conflict was `COORDINATION.md`, resolved by keeping every other session's section verbatim and appending this session's record. Added `lines-lab/index.html` to the integrated dashboard's sidebar and directory so the new site is reachable. No other session's file was edited or discarded.
 
 ---
+## Session `arena/3ab8432d-own4` (session-3ab8432d) — final integration & conflict handoff
+
+- 2026-11-02 UTC. At this session's start `main` was `319d6b0` with only `README.md` (6 bytes) and
+  no `COORDINATION.md`, so this session created the board, claimed T00–T09 and built an
+  independently verified dashboard. Its own full task board and completion records are retained at
+  [`own4-dashboard/COORDINATION.md`](own4-dashboard/COORDINATION.md).
+- **Conflict:** PR **[#15](https://github.com/sassnarep3-star/Own4/pull/15)** from
+  `arena/3ab8432d-own4` → `main` was reported `CONFLICTING` because concurrent sessions had merged
+  PRs #11–#13 and advanced `main` to `e4de8b1` (PRs #11–#14 and #16), publishing the canonical root dashboard and owning
+  `index.html`, `pages/*`, `README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md`,
+  `data/sources.json`, `assets/*`, `data/*` and `scripts/*`.
+- **Resolution (no other session's work discarded):** `origin/main` was fetched and merged into this
+  branch. The single `modify/delete` conflict on `README.md` was resolved in favour of `origin/main`.
+  All of this session's files were moved into the non-overlapping `own4-dashboard/` namespace before
+  the merge, so the canonical root site, its data, docs, tests and assets remain **byte-for-byte
+  unchanged**. The shared root `COORDINATION.md` is the canonical board; this section is appended
+  rather than replacing any earlier session's entry. This follows the repo's existing precedent of
+  publishing colliding dashboards under `/docs/` and `/lab/`.
+- **This session's deliverables:** 14-page dashboard at
+  <https://sassnarep3-star.github.io/Own4/own4-dashboard/>; 30-team official standings/advanced/
+  traditional tables for two seasons, 62 officially settled games, 14 own fair lines with published
+  formulas, 13 strategies × 10 validation gates, 23 correlations with permutation p / bootstrap CI /
+  BH-FDR, a skill-vs-luck decomposition, a two-division leaderboard, 451-row verification ledger and
+  a **Flagged for Review** page (18 items, IR-01…IR-18).
+- **Verification:** full pipeline re-run clean — 451/451 rows PASS, 0 FLAG, 0 rows without an official
+  source; `scripts/check_links.py` reports 14 pages, 279 local links, 1003 data rows, **errors=0
+  warnings=0**. Every table row carries an official source link; unconfirmable values are blank and
+  flagged. Sources: [NBA.com standings](https://www.nba.com/standings),
+  [NBA.com advanced 2025-26](https://www.nba.com/stats/teams/advanced?Season=2025-26),
+  [NBA.com advanced 2026-27](https://www.nba.com/stats/teams/advanced?Season=2026-27),
+  [NBA.com stat glossary](https://www.nba.com/stats/help/glossary),
+  [NBA.com games 2026-11-04](https://www.nba.com/games?date=2026-11-04),
+  [NBA official betting-data release](https://www.nba.com/news/nba-extends-u-s-betting-data-partnerships-with-sportradar-and-genius-sports-group),
+  [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages).
+- **Flagged irregularities** (do not block the merge): no official market odds/closing lines; 2026-27
+  season only 4–7 GP per team; 62/92 games transcribed; 8/442 player rows; no home/away designation;
+  in-sample accuracy collapsing out-of-sample (0.780 → 0.476); 0 eligible Division B strategies;
+  platform single-branch constraint IR-13; parallel-session collision IR-18.
+- A second integration collision occurred while PR #15 was open: `main` advanced from
+  `5a5cff2` to `e4de8b1` with another session's `lines-lab/` dashboard and further board entries.
+  `origin/main` was merged again into this branch; the only conflict was `COORDINATION.md`, resolved
+  by keeping every earlier session's entry verbatim and re-appending this session's section. No
+  other session's work was discarded.
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/15 . **Merge result and Pages deployment
+  confirmation:** recorded in the follow-up entry below after the merge completes.
+
+---
+## Session `arena/3ab8432d-own4` — FINAL RESULT (PR / merge / deploy)
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/15 — summary of changes, official sources and
+  flagged irregularities included in the PR body.
+- **Merge result: MERGED** (no approval required). `gh pr merge 15 --merge` succeeded at
+  2026-11-02T18:28:49Z; merge commit **`bf719a92515f4eec612e9b573b845bec3f21ea21`**.
+- **Conflicts handled:** PR #15 was `CONFLICTING` twice as `main` advanced (`319d6b0` → `5a5cff2`
+  → `e4de8b1`) through concurrent sessions' PRs #11–#14/#16. Both times `origin/main` was merged
+  into this branch, shared files were resolved in favour of the already-published canonical versions,
+  and this session's output stayed in `own4-dashboard/`. No other session's work was discarded.
+- **Build / checks:** root `validate` CI check passed; `scripts/build.py`, 3 unit tests,
+  `scripts/verify_data.py`, `scripts/check_site.py` (0 problems) and the `docs/` diff check all clean.
+  Namespaced `check_links.py`: 14 pages / 279 local links / 1003 data rows / **0 errors, 0 warnings**;
+  `verify.py`: 452/452 rows PASS, 0 rows without an official source.
+- **GitHub Pages deploy: CONFIRMED.** `.../pages/builds/latest` returned `status: built`,
+  `error: null` for commit `bf719a9...`; Pages config `status: built` (legacy, `main /`).
+  Live fetches succeeded for <https://sassnarep3-star.github.io/Own4/own4-dashboard/>, its
+  Flagged for Review page, and the preserved canonical root dashboard
+  <https://sassnarep3-star.github.io/Own4/>.
+- **Sources:** [GitHub Pages API](https://api.github.com/repos/sassnarep3-star/Own4/pages),
+  [Pull request #15](https://github.com/sassnarep3-star/Own4/pull/15),
+  [commit bf719a9](https://github.com/sassnarep3-star/Own4/commit/bf719a92515f4eec612e9b573b845bec3f21ea21),
+  [NBA.com standings](https://www.nba.com/standings).
+- **Flagged irregularities** remain published and non-blocking on
+  <https://sassnarep3-star.github.io/Own4/own4-dashboard/pages/flagged.html> (IR-01…IR-19).
+
+---
 
 ## Session 75685c60 · official-data pipeline + Elo fair-odds engine — branch `arena/75685c60-own4`
 
-Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (the requested `session-<id>/<task>` naming is not creatable here; deviation logged). This session started with an empty checkout (base `319d6b0`, `README.md` only) and discovered the sessions above only after pushing its initial claim; nothing from other sessions will be discarded or overwritten.
+Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (requested `session-<id>/<task>` naming not creatable here; deviation logged). Started from an empty checkout (base `319d6b0`); discovered other sessions' merged work after pushing its first claim. Nothing from other sessions was discarded or overwritten.
 
 **Claimed file scope (non-overlapping):**
-- `scripts/fetch_official.py`, `scripts/build_signals.py`, `scripts/audit_rows.py`
+- `scripts/fetch_official.py`, `scripts/build_signals.py`, `scripts/build_pipeline_site.py`, `scripts/audit_rows.py`
 - `.github/workflows/fetch-nba-data.yml`
-- `data/standings.json`, `data/manifest.json`, `data/raw/**`, `data/signals.json`, `data/model_ratings.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json`
-- `pipeline/**` (this session's own site section; root `index.html`, `pages/**`, `docs/**`, `lab/**`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/flagged.json`, `data/sources.json` etc. are NOT edited here)
+- `data/standings.json`, `data/prior_2025-26.json`, `data/manifest.json`, `data/raw/**`, `data/games_official.json`, `data/reconciliation.json`, `data/model_ratings.json`, `data/predictions.json`, `data/signals.json`, `data/player_gamelogs.json`, `data/own_lines_2026-11-02.json`, `data/pipeline_strategies.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json`
+- `pipeline/**` (this session's site section; root `index.html`, `pages/**`, `docs/**`, `lab/**`, `own4-dashboard/**`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/flagged.json`, `data/sources.json` etc. NOT edited here)
 - `COORDINATION.md` (append-only, own section)
 
 | ID | Task | Status | Owner | Files |
 |----|------|--------|-------|-------|
-| P1 | Automated official-NBA data pipeline (cdn.nba.com / stats.nba.com / nba.com) with provenance manifest | done | 75685c60 | `scripts/fetch_official.py`, `.github/workflows/fetch-nba-data.yml`, `data/manifest.json`, `data/raw/**` |
-| P2 | Verified 2026-27 standings dataset (30 rows, line-by-line vs nba.com/standings) | done | 75685c60 | `data/standings.json` |
-| P3 | Elo fair-odds engine: originate own moneylines from official final scores only | done | 75685c60 | `scripts/build_signals.py`, `data/model_ratings.json` |
-| P4 | Empirical signal research from official box scores (rest, margin, home, totals) | done | 75685c60 | `data/signals.json` |
-| P5 | Row-level source audit (every row has official https link; blanks flagged) | done | 75685c60 | `scripts/audit_rows.py` |
-| P6 | `pipeline/` site section: dashboard, model, signals, verification, flagged, sources, executive summary | done | 75685c60 | `pipeline/**` |
-| P7 | Integration: merge main (keep all sessions), build + link check, PR → main, merge, Pages verify, record | done | 75685c60 | this file, PR record below |
+| P1 | Automated official-NBA data pipeline (runner egress; cdn/stats 403s recorded; nba.com HTML + ESPN partner fallback) with provenance manifest | done | 75685c60 | `scripts/fetch_official.py`, `.github/workflows/fetch-nba-data.yml`, `data/manifest.json`, `data/raw/**` |
+| P2 | Verified 2026-27 standings (30 rows, transcribed line-by-line vs nba.com/standings) + 2025-26 official prior | done | 75685c60 | `data/standings.json`, `data/prior_2025-26.json` |
+| P3 | Elo fair-odds engine: walk-forward probabilities, fair moneylines/spreads, pre-tip own lines | done | 75685c60 | `scripts/build_signals.py`, `data/model_ratings.json`, `data/predictions.json`, `data/own_lines_2026-11-02.json` |
+| P4 | Empirical signals (home, rest, margins, totals, pace, parlay dependence, prop benchmarks) with Wilson CIs | done | 75685c60 | `data/signals.json`, `data/games_official.json`, `data/player_gamelogs.json` |
+| P5 | Row-level source audit (`scripts/audit_rows.py`) | done | 75685c60 | `scripts/audit_rows.py` |
+| P6 | `pipeline/` site section: dashboard, exec summary, standings, own lines/model, signals, strategies/leaderboard, verification, flagged, sources | done | 75685c60 | `pipeline/**`, `scripts/build_pipeline_site.py`, `data/pipeline_strategies.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json` |
+| P7 | Integration: merge main (keep all sessions), validation suite, PR → main, merge, Pages verify, record | in progress | 75685c60 | this file, PR record below |
 
-**Log (session 75685c60)**
-- 2026-11-02 ~18:05 UTC — read repo (empty), created initial COORDINATION.md, claimed P1–P7, pushed claim. Later merges of other sessions' PRs #2–#9 discovered; all preserved.
-- 2026-11-02 — P1: `gh` workflow dispatch unavailable for non-default branches (404), so the fetcher triggers on push to this branch (path-filtered). GitHub-runner egress reaches official NBA hosts; the local sandbox cannot (curl → 000), which is why the pipeline runs in Actions.
-- 2026-11-02 — P2: standings transcribed line-by-line from https://www.nba.com/standings (2 chunks); internal check: 92 wins = 92 losses = 92 games on the official calendar through Nov 1 ✓.
+### Verification performed (session 75685c60) — all against official sources
 
-**Irregularities added by this session** (published at `pipeline/flagged.html`; none block merge):
-- Q1: No official NBA source publishes betting lines/odds; all market-dependent cells are blank by policy.
-- Q2: NBA.com renders an "Odds" toggle on schedule/game pages, but the odds values did not render in the fetched page text — could not be verified line-by-line, therefore treated as unavailable, not recorded.
-- Q3: stats.nba.com rejects non-browser clients (HTTP failures recorded in `data/manifest.json`); pipeline falls back to cdn.nba.com live JSON.
+| Layer | Result | Source |
+|---|---|---|
+| Standings transcription → recomputation from the 92 completed games (W-L, win%, GB, CONF, HOME, ROAD, OT, LAST10, STREAK × 30 teams) | **300/300 cells match, 0 mismatches** | [nba.com/standings](https://www.nba.com/standings) |
+| Final scores dual-source (NBA daily pages × ESPN partner API) | **92/92 identical, 0 mismatches** | [nba.com/games](https://www.nba.com/games?date=2026-11-01), [ESPN API](https://site.api.espn.com/) |
+| Internal consistency: Σ wins = Σ losses = official calendar count through Nov 1 | **92 = 92 = 92** | [nba.com/standings](https://www.nba.com/standings) |
+| Official NBA game-leader stat lines (PTS/REB/AST, same named player) vs ESPN boxes | **184/184 match** across 92 games | [nba.com/games](https://www.nba.com/games?date=2026-10-21) |
+| Full box-score sample (game 0022600002: LeBron James 14/9/7, Joel Embiid 13/11/6, Jaylen Brown 19/8/6) | **3/3 match** | [official box score](https://www.nba.com/game/phi-vs-nyk-0022600002/box-score) |
+| Prior-season records for model prior (30 teams) | transcribed, both chunks | [nba.com/standings?Season=2025-26](https://www.nba.com/standings?Season=2025-26) |
+| Row/source audit of pipeline site (161 table rows, 66 unique external links, internal links, JSON source_url coverage, flags published) | **all pass** (`scripts/audit_rows.py`) | this repo |
+| Official rulebook PDF located for game-structure facts | confirmed reachable | [2026-27 Official NBA Playing Rules](https://ak-static.cms.nba.com/wp-content/uploads/sites/4/2026/10/2026-27-Official-NBA-Playing-Rules.pdf) |
+
+### Model / strategy findings (pre-registered params, walk-forward, no leakage)
+- Elo walk-forward Brier **0.2309** vs 0.2366 static prior vs 0.2500 constant (n=92): better than both, but **G1 (n≥300) not met → not validated**; honest status recorded on the leaderboard.
+- 15 pre-tip own lines originated for the Nov 2 slate (first tip 23:00 UTC); market columns permanently blank (Q1).
+- Rest effects null at n=92 (SIG-03/SIG-10 CIs all include 0.5); same-day parlay-leg φ=0.026 (independence not rejected); same-game pace r=0.2004 (p≈0.052); player trailing-mean PTS benchmark 0.502 (n=1002) — no naive prop edge.
+
+### Irregularities (published at `pipeline/flagged.html`; none block merge)
+- **Q1** No official NBA source publishes betting lines/odds → all market cells blank by policy (permanent).
+- **Q2** NBA.com odds UI toggle exists but no odds values in server HTML → not recorded.
+- **Q3** cdn.nba.com returns 403 and stats.nba.com times out from datacenter clients (recorded in `data/manifest.json`); pipeline uses official nba.com HTML + ESPN partner API (sample-verified vs NBA).
+- **Q4** (reconciliation mismatches) — fired once: this session's own BKN OT transcription error (0-0 → official 0-1, game 0022600128 Final/OT); **corrected** and documented inline; after correction 300/300.
+- **Q5** NBA vs ESPN score mismatches — none (0/92).
+- **Q6** Elo vs baseline — not fired (Elo beats both baselines; G1 still unmet).
+- **Q7** Player verification — 184/184 leader lines + 3/3 full-box sample match; note: NBA "teamLeader" is not always the team's top scorer (e.g., 0022600002 NYK lists Towns 19/12/1 while ESPN shows Brunson 21) — selection semantics differ, stat values agree; non-leader player rows remain partner-sourced (disclosed).
+- Scope note: DIV cells published but not recomputed (division membership not in pipeline datasets) — not inferred.
+
