@@ -1,0 +1,11 @@
+{
+  "gates": [
+    {"id": "G1", "name": "Data freshness", "rule": "Stat inputs must come from the current season's official stats hub and be re-pulled each slate; stale data fails the gate.", "sources": ["SRC-05"]},
+    {"id": "G2", "name": "Sample size", "rule": "A signal needs at least 10 games of sample before it is eligible; early-season noise fails the gate.", "sources": ["SRC-04"]},
+    {"id": "G3", "name": "Official source only", "rule": "Every row must link to an official/trusted source (nba.com, official.nba.com, stats.nba.com, gleague.nba.com). Unverifiable values are left blank and flagged, never inferred.", "sources": ["SRC-05", "SRC-06"]},
+    {"id": "G4", "name": "Injury/availability check", "rule": "Check the official NBA Injury Report: participation status due 5 p.m. local the day before a game, 1 p.m. local on the second night of a back-to-back; reports update continually on game day.", "sources": ["SRC-08"]},
+    {"id": "G5", "name": "Correlation screen", "rule": "Parlay legs must pass a correlation screen; same-player multi-leg combos are rejected as highly correlated. Correlation values not confirmable from official sources are flagged, not filled in.", "sources": ["SRC-03"]},
+    {"id": "G6", "name": "Parlay size cap", "rule": "Parlays capped at 3 legs to limit compounding of correlated/luck-driven outcomes.", "sources": ["SRC-03"]},
+    {"id": "G7", "name": "Luck-removal review", "rule": "Strategies are graded on repeatability: a strategy must show the signal persisting across independent samples before leaderboard credit; single-game variance does not count.", "sources": ["SRC-03", "SRC-04"]}
+  ]
+}
