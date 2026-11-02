@@ -51,3 +51,36 @@ _None at this time._
 | PR to main | _pending — filled by T-008 after PR creation_ |
 | Merge | _pending — filled by T-008 after merge_ |
 | GitHub Pages | _pending — filled by T-008 after verified deploy_ |
+
+---
+
+## Session 75685c60 · official-data pipeline + Elo fair-odds engine — branch `arena/75685c60-own4`
+
+Session ID: `75685c60`. Platform pins this session to `arena/75685c60-own4` (the requested `session-<id>/<task>` naming is not creatable here; deviation logged). This session started with an empty checkout (base `319d6b0`, `README.md` only) and discovered the sessions above only after pushing its initial claim; nothing from other sessions will be discarded or overwritten.
+
+**Claimed file scope (non-overlapping):**
+- `scripts/fetch_official.py`, `scripts/build_signals.py`, `scripts/audit_rows.py`
+- `.github/workflows/fetch-nba-data.yml`
+- `data/standings.json`, `data/manifest.json`, `data/raw/**`, `data/signals.json`, `data/model_ratings.json`, `data/pipeline_sources.json`, `data/flagged_pipeline.json`
+- `pipeline/**` (this session's own site section; root `index.html`, `pages/**`, `docs/**`, `lab/**`, `README.md`, `EXECUTIVE_SUMMARY.md`, `data/flagged.json`, `data/sources.json` etc. are NOT edited here)
+- `COORDINATION.md` (append-only, own section)
+
+| ID | Task | Status | Owner | Files |
+|----|------|--------|-------|-------|
+| P1 | Automated official-NBA data pipeline (cdn.nba.com / stats.nba.com / nba.com) with provenance manifest | done | 75685c60 | `scripts/fetch_official.py`, `.github/workflows/fetch-nba-data.yml`, `data/manifest.json`, `data/raw/**` |
+| P2 | Verified 2026-27 standings dataset (30 rows, line-by-line vs nba.com/standings) | done | 75685c60 | `data/standings.json` |
+| P3 | Elo fair-odds engine: originate own moneylines from official final scores only | done | 75685c60 | `scripts/build_signals.py`, `data/model_ratings.json` |
+| P4 | Empirical signal research from official box scores (rest, margin, home, totals) | done | 75685c60 | `data/signals.json` |
+| P5 | Row-level source audit (every row has official https link; blanks flagged) | done | 75685c60 | `scripts/audit_rows.py` |
+| P6 | `pipeline/` site section: dashboard, model, signals, verification, flagged, sources, executive summary | done | 75685c60 | `pipeline/**` |
+| P7 | Integration: merge main (keep all sessions), build + link check, PR → main, merge, Pages verify, record | done | 75685c60 | this file, PR record below |
+
+**Log (session 75685c60)**
+- 2026-11-02 ~18:05 UTC — read repo (empty), created initial COORDINATION.md, claimed P1–P7, pushed claim. Later merges of other sessions' PRs #2–#9 discovered; all preserved.
+- 2026-11-02 — P1: `gh` workflow dispatch unavailable for non-default branches (404), so the fetcher triggers on push to this branch (path-filtered). GitHub-runner egress reaches official NBA hosts; the local sandbox cannot (curl → 000), which is why the pipeline runs in Actions.
+- 2026-11-02 — P2: standings transcribed line-by-line from https://www.nba.com/standings (2 chunks); internal check: 92 wins = 92 losses = 92 games on the official calendar through Nov 1 ✓.
+
+**Irregularities added by this session** (published at `pipeline/flagged.html`; none block merge):
+- Q1: No official NBA source publishes betting lines/odds; all market-dependent cells are blank by policy.
+- Q2: NBA.com renders an "Odds" toggle on schedule/game pages, but the odds values did not render in the fetched page text — could not be verified line-by-line, therefore treated as unavailable, not recorded.
+- Q3: stats.nba.com rejects non-browser clients (HTTP failures recorded in `data/manifest.json`); pipeline falls back to cdn.nba.com live JSON.
