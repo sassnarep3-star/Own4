@@ -141,6 +141,7 @@ NAV = [
         ("pages/official-sources.html", "Source Register"),
         ("pages/repo-audit.html", "Repo Audit"),
         ("pages/verification.html", "Verification Report"),
+        ("verification-2026-11-05/index.html", "2026-11-05 Independent Audit"),
         ("pages/flagged-for-review.html", "⚑ Flagged for Review"),
     ]),
     ("Parallel-session site (retained)", [
@@ -328,12 +329,17 @@ def build_dashboard():
 
     body = (h(1, "NBA Line Origination — Research Dashboard",
               "Collect, organize and analyze NBA data; originate our own lines; develop signals that survive "
-              "validation gates; remove luck; and rank only selectively skill-based strategies.")
+              "validation gates; quantify luck; and rank only selectively skill-based strategies.")
             + '<div class="cards">%s</div>' % cardhtml
             + '<div class="panel warn"><strong>⚑ Flagged for Review</strong> — irregularities and every '
               'unverifiable value are published on the '
               '<a href="pages/flagged-for-review.html">Flagged for Review page</a>. '
               'Flagged items do not block publication.</div>'
+            + '<div class="panel warn"><strong>Independent audit · 05 Nov 2026:</strong> '
+              'NBA HTML rows have source links (presence only, not proof of claim). '
+              'Earlier NFL pages have 45 rows missing external citations. '
+              'No validated betting edge is established by this audit. '
+              '<a href="verification-2026-11-05/flagged.html">See flagged findings</a>.</div>'
             + derived_banner()
             + h(2, "Executive findings")
             + table(["ID", "Finding", "Value type", "Official source"], summary_rows,
@@ -363,8 +369,8 @@ def build_dashboard():
             ], "All parallel-session output is preserved and reachable")
             + h(2, "Verification status")
             + table(["Check", "Result", "Official source"], [
-                ["Every table row carries an official source link", badge("PASS", "ok"),
-                 srcrow([S_REPO + "/blob/main/engine/verify.py"])],
+                ["NBA HTML rows contain an HTTPS link (not claim verification)", badge("STRUCTURAL", "amber"),
+                 srcrow([S_REPO + "/blob/main/verification-2026-11-05/report.json"])],
                 ["Unconfirmable values blank + flagged", badge("PASS", "ok"),
                  srcrow([S_REPO + "/blob/main/official/flags.json"])],
                 ["Derived values regenerate from checked-in code + data", badge("PASS", "ok"),
