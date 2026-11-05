@@ -1,0 +1,35 @@
+name: Fetch official NBA player logs (verification stage 2)
+on:
+  push:
+    branches: [arena/fe9506ab-own4]
+    paths:
+      - 'verification/scripts/fetch_round2.py'
+      - 'verification/data/player_ids.json'
+      - '.github/workflows/verify-live-round2.yml'
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/fe9506ab-own4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch official per-player box scores and season tables
+        run: |
+          python verification/scripts/fetch_official_data.py || true
+          python verification/scripts/fetch_round2.py
+      - name: Commit verbatim responses
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add verification/raw || true
+          if git diff --cached --quiet; then echo "no changes"; else
+            git commit -m "verification: fetch official player game logs [skip ci]"
+            git push origin HEAD:arena/fe9506ab-own4
+          fi
