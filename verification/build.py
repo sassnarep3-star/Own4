@@ -129,11 +129,14 @@ NAV = [
         ("verified/flagged.html", "⚑ Flagged for review", "flags"),
     ]),
     ("Retained workspaces", [
-        ("pages/legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
+        ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),
         ("lab/index.html", "Data Lab", "legacy"),
         ("lines-lab/index.html", "NBA Lines Lab", "legacy"),
         ("nba-evidence/site/index.html", "NBA Evidence", "legacy"),
+        ("verification-2026-11-05/index.html", "Independent audit · 2026-11-05", "legacy"),
+        ("verification-2026-11-05/flagged.html", "Independent audit · flags", "legacy"),
+        ("status/index.html", "Status review", "legacy"),
     ]),
 ]
 
@@ -237,7 +240,7 @@ def build_index():
         ("F10", "Player-prop combinations are blocked at the data layer: official season averages exist, official per-game logs do not, so no prop variance or prop-pair correlation is published.",
          badge("blocked — data", "blocked"), [src("S5")]),
     ]
-    frows = [(a, b, c, d) for a, b, c, d in findings]
+    frows = [(a, b, c, " ".join(d)) for a, b, c, d in findings]
 
     tiles = [
         ("verified/standings.html", "Official data", "30 standings rows and 30 team-stat rows, each with the exact nba.com URL and the official team link.", "Read the data"),
@@ -833,7 +836,7 @@ def build_audit():
         ("A04", "The published +/- column is not internally consistent", "The 30 values sum to -5.3 instead of 0. Cause unexplained; the column is displayed but not used as a model input.", "flagged", src("S2")),
         ("A05", "Third-party data exists in the repository", "data/raw/espn/ holds ESPN scoreboard and summary JSON, and other workspaces were built on a third-party mirror. None of it is official and none of it is used here.", "excluded", repo("data/raw/espn")),
         ("A06", "Multiple overlapping dashboards", "Root, pages/, docs/, lab/, lines-lab/, nba-evidence/ and four NFL workspaces. This release makes the root page canonical and links the rest; no peer file was edited or deleted.", "retained", repo("COORDINATION.md")),
-        ("A07", "The previous landing page presented 2026-11-02 values as current", "It carried the correct date but is now stale. A copy is preserved at pages/legacy-root-dashboard.html and linked from the sidebar.", "superseded", repo("pages/legacy-root-dashboard.html")),
+        ("A07", "The previous landing page presented 2026-11-02 values as current", "It carried the correct date but is now stale. A copy of the peer-refreshed legacy page is preserved at legacy-root-dashboard.html and linked from the sidebar.", "superseded", repo("pages/legacy-root-dashboard.html")),
         ("A08", "No automated check tied published numbers to their data files", "This session adds verification/verify_site.py, which fails when a table row lacks a source link, a local link is broken, or a page is missing its navigation and helpline footer.", "fixed", repo("verification/verify_site.py")),
         ("A09", "GitHub Pages serves the repository root through the legacy configuration", "The Pages API reports build_type legacy, source main, path /, status built. No settings change was needed or attempted.", "verified", src("S11")),
         ("A11", "The +/- column was spot-checked on a single-team official page",

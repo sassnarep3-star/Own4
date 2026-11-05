@@ -54,6 +54,7 @@ PLACEHOLDER_PATTERNS = [
     (re.compile(r"%\("), "unformatted %(name)s marker"),
     (re.compile(r"\bTODO\b"), "TODO marker"),
     (re.compile(r"\bundefined\b"), "undefined sentinel"),
+    (re.compile(r"<td[^>]*>\s*(\[&#x27;|\[')"), "python list rendered into a cell"),
 ]
 
 errors = []
