@@ -1,0 +1,38 @@
+name: Verify bounded NBA audit and published navigation
+on:
+  push:
+    paths:
+      - 'verification-2026-11-05/**'
+      - 'index.html'
+      - 'engine/build.py'
+      - 'nfl/pages/flagged.html'
+      - 'nfl/pages/validation.html'
+      - '**/*.html'
+      - '.github/workflows/verification-2026-11-05.yml'
+  pull_request:
+    paths:
+      - 'verification-2026-11-05/**'
+      - 'index.html'
+      - 'engine/build.py'
+      - 'nfl/pages/flagged.html'
+      - 'nfl/pages/validation.html'
+      - '**/*.html'
+      - '.github/workflows/verification-2026-11-05.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Recompute HTML source-link and navigation coverage
+        run: python3 verification-2026-11-05/build.py
+      - name: Test audit and reject broken published links
+        run: python3 -m unittest discover -s verification-2026-11-05 -v
+      - name: Ensure checked-in static audit matches source
+        run: git diff --exit-code -- verification-2026-11-05/

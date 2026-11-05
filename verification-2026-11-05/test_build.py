@@ -36,6 +36,12 @@ class AuditTests(unittest.TestCase):
         _,_,broken = b.scan(files)
         self.assertEqual([],broken, f'Broken published local links: {broken[:10]}')
 
+    def test_root_discovery_survives_regeneration(self):
+        route = 'verification-2026-11-05/index.html'
+        self.assertIn(route, (b.ROOT/'index.html').read_text())
+        self.assertIn(route, (b.ROOT/'engine/build.py').read_text())
+        self.assertIn('2026-11-05/flagged.html', (b.ROOT/'index.html').read_text())
+
     def test_spot_checked_score_matches_frozen_extract(self):
         import csv
         with (b.ROOT/'nba-evidence/data/games.csv').open(newline='') as f:
