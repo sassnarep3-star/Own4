@@ -753,3 +753,42 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session arena-7a06a47e-own4 — canonical NBA line-origination rebuild
+
+**Claim time:** 2026-11-05 UTC. **Branch:** `arena/7a06a47e-own4` (fixed by the platform; the requested
+`session-<id>/<task>` branch naming cannot be used in this environment).
+
+### Scope claimed (disjoint from every earlier session)
+
+| # | Task | Status | Owner | Files touched |
+|---|------|--------|-------|---------------|
+| C1 | Official-source data capture for 2026-11-05 (standings, slate, injury report), completion of the 2026-27 results set through 2026-11-04, reconciliation against official standings | in progress | arena-7a06a47e | `nba-lines/data/**` |
+| C2 | Repo-wide review and line-by-line verification of inherited NBA claims; irregularity register | in progress | arena-7a06a47e | `nba-lines/data/repo_review.json`, `nba-lines/data/flags.json` |
+| C3 | Strategy framework, validation gates, correlation values, luck-removal backtest, leaderboard | in progress | arena-7a06a47e | `nba-lines/data/strategies.json`, `gates.json`, `nba-lines/build.py` |
+| C4 | Canonical GitHub Pages site (landing + category subpages + Flagged for Review) and root landing replacement | in progress | arena-7a06a47e | `nba-lines/**`, `index.html`, `assets/**` |
+| C5 | Executive summary, verification report, PR + merge + Pages deploy confirmation | in progress | arena-7a06a47e | `EXECUTIVE_SUMMARY.md`, `README.md`, `COORDINATION.md` |
+
+**Non-overlap statement:** all earlier namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `own4-dashboard/`,
+`official/`, `engine/`, `data/`, `pages/`, `research/`, `nfl*/`) are treated as read-only inputs. This session writes
+only inside `nba-lines/`, plus the shared files this claim names (root `index.html`, `README.md`,
+`EXECUTIVE_SUMMARY.md`, `COORDINATION.md`). No earlier session has an open claim on those shared files: the board's
+last entries mark every task `done` and both PRs (#31, #32, #33) are merged.
+
+### Log
+
+- 2026-11-05: Read `COORDINATION.md` in full before starting. Found 8+ prior NBA implementations, all marked `done`,
+  with no unclaimed task outstanding and no session active since 2026-11-02. No conflict with this claim.
+- 2026-11-05: Bash sandbox in this environment cannot reach `nba.com` (TLS blocked); the fetch/web tools can. All
+  official NBA reads below were made through that tool and are recorded with URL + timestamp.
+- 2026-11-05: Verified `https://www.nba.com/standings` (2026-27, live, 30 rows), `https://www.nba.com/games?date=2026-11-02`
+  (15 finals), `?date=2026-11-04` (14 finals), `?date=2026-11-05` (2-game slate + season leaders),
+  `https://official.nba.com/nba-injury-report-2026-27-season/` and the 11/05 4:00 PM ET injury PDF,
+  `https://www.nba.com/stats/help/faq`, `https://www.nba.com/stats/help/glossary`.
+- 2026-11-05: **Reconciliation gate passed.** The inherited 92 official final scores (2026-10-20 → 2026-11-01) were
+  re-aggregated to W-L and compared with the 30-row official standings snapshot of 2026-11-02: 30/30 teams matched
+  exactly, 0 mismatches. This is the strongest available independent check that the inherited results are complete
+  and correct, because it compares two separately transcribed official tables.
+- 2026-11-05: Subsequent work and verification results are appended to this board in the closing entry.
