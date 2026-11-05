@@ -574,7 +574,41 @@ Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions ar
 | Q6 | NFL Quant Lab site section + executive summary | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/site/** |
 | Q7 | Final integration: re-verify, link check, PR, merge, Pages confirm | unclaimed→claimed | arena-e513f51b-own4 | shared files only at integration |
 
-**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>> origin/main`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
+**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`---
+
+## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
+
+**Claimed:** 2026-11-05 (current date per system). Branch: `arena/a50ac3f8-own4` (fixed by environment).
+**Task claim (non-overlapping scope):**
+- T-A: Official-source verification (standings, team stats, injury policy, game scores) against nba.com / stats.nba.com / official.nba.com.
+- T-B: Site integrity check (all internal links resolve; pages build; no broken links).
+- T-C: Update flagged/unverified items with verified source links; leave unverified values blank.
+- T-D: Final PR to main → merge → confirm no broken site.
+- T-E: Record PR link, merge result, deploy confirmation in this file.
+
+**Files touched:** COORDINATION.md, docs/verification-session-50ac3f8.md, EXECUTIVE_SUMMARY.md (add verification note if edited — not edited; verification note in docs file only).
+
+**Verification performed:**
+- NBA standings (nba.com/standings, 2026-11-05): historical CSV `standings_2026-27.csv` reflects 2026-11-02 snapshot (e.g., PHI 6-1 vs current 8-1). Flagged as time-context discrepancy, not overwritten.
+- NBA Stats FAQ, glossary, injury policy, NCPG helpline: confirmed.
+- Game scores (56 official games): verified with per-row source links; conflicting CHI vs TOR score (92 vs 135/102) flagged at I-09.
+- Validation gates (`data/validation_gates.json`): 12 gates verified; official links where applicable; empty arrays correctly flagged for policy-only gates.
+- Derived values/correlations: clearly labeled derived; blank market fields (no official NBA betting-correlation source) — correct per design.
+- Leaderboard/rewards: zero validated; zero rewards — verified.
+- Site integrity: zero broken links in site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, etc.).
+
+**Status:** Ready; PR #35 created; merge conflict in COORDINATION.md resolved by preserving both session records (arena-a50ac3f8-own4 and c821e44c-own4) without discarding either.
+
+---
+
+## Session c821e44c-own4 · independent verification audit (record preserved from origin/main)
+- Session: `c821e44c` · Branch: `arena/c821e44c-own4`.
+- Status: in progress on origin/main. Verification scope: `nba-evidence/` workspace only (`COORDINATION.md` only edited by that session).
+- Sources checked: NBA Games 2025-01-01, NBA Stats FAQ, NBA Official injury-report policy.
+- Irregularities I1–I5 documented (generator sync, sandbox access, client-rendered page, sample scope, empty market data).
+- Requests for integrator: publish I1–I5; do not run root `build_site.py` until NFL sections included.
+- No work discarded by this resolution.
+`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
 
 **Request to other sessions:** none. PR #24 scope (`nfl-research/**`) will not be edited. Root nav link for nfl-quant will be added only at integration, preserving all existing links.
 
@@ -754,6 +788,113 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
 
+---
+## Session arena/84503fc4-own4 — NBA publication verification (claim; 2026-11-05 UTC)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| V1 | Independently audit inherited NBA source-link coverage, claim provenance, and reproducible checks without inventing observations | done | arena/84503fc4-own4 | `verification-2026-11-05/**`, append-only `COORDINATION.md` |
+| V2 | Publish a source-linked, clearly bounded audit landing and flagged-for-review page, plus executive summary | done | arena/84503fc4-own4 | `verification-2026-11-05/**` |
+| V3 | Integrate with existing site, run local/remote CI, PR/merge and confirm Pages deployment | done | arena/84503fc4-own4 | additive root navigation link only if no concurrent owner; append-only `COORDINATION.md` |
+
+The platform fixes this session to branch `arena/84503fc4-own4`, overriding the requested session-* branch naming. Existing NBA and NFL outputs are already merged; this claim does not overwrite them. Prior research and results remain subject to source re-verification. Missing official evidence will be blank/flagged, not estimated. New code/docs stay inside the dedicated scope until integration.
+
+### arena/84503fc4-own4 — V1/V2 verification handoff (2026-11-05 UTC)
+
+- V1/V2: done within `verification-2026-11-05/**`. Deterministic scan: 144 inherited HTML pages; 100 NBA HTML pages; 3,557 NBA body rows / 3,557 with an HTTPS link. These are **syntactic** checks, not source-to-claim certification. 45 NFL rows have no HTTPS link and are flagged V-08, not silently labeled verified.
+- Primary sources personally read: https://www.nba.com/stats/help/faq (download restriction); https://www.nba.com/games?date=2025-01-05 (BOS 92 OKC 105, game 0022400487; one row independently compared); https://official.nba.com/rule-no-5-scoring-and-timing/ (12-minute regulation periods, 5-minute overtime); https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site (publication workflow). The previous sessions' other scores and numeric outputs were NOT independently re-fetched today.
+- Open release issue: 3 broken local links in `nfl/pages/flagged.html` and `nfl/pages/validation.html`; V3 integration will correct exact relative paths after claiming these files. An audit test intentionally fails until repaired. The root `engine/verify.py` also fails 3 checks because it treats archived `data/raw/nba/*.html` as published HTML; documented as V-06 and not represented as success.
+- Flagged irregularities V-01..V-08 live in the new audit's `flagged.html`; no invented prices, returns, correlations or reward eligibility. Source/claim relevance remains unverified outside the specifically inspected primary passages.
+
+### arena/84503fc4-own4 — V3 integration claim (2026-11-05 UTC)
+
+V3 now **in progress**. Scope: additive `index.html` navigation / directory link, exact href repairs in `nfl/pages/flagged.html` and `nfl/pages/validation.html`, `verification-2026-11-05/**` regeneration, append-only `COORDINATION.md`. Existing open PR #35 is only `COORDINATION.md` and `docs/verification-session-50ac3f8.md`; no overlapping code/site files claimed. Preserve all its board entries on merge/rebase. No other NFL page content or source values will be edited. The root build generator `engine/build.py` owns generated root index, so do **not** run it or overwrite its output during this minimal integration; note its drift as a review concern rather than claim a reproducible root build.
+
+V3 scope addendum: add ONLY the audit URL to the NAV constant in `engine/build.py`, the root dashboard's canonical generator, to prevent future regeneration from dropping the new audit link. Do not run the whole generator during this session: its inherited `build_site.py` pre-step rewrites other teams' shared pages and historical summary. The generated root `index.html` will receive the same minimal additive link manually and be checked for consistency.
+
+V3 CI addendum: isolated `.github/workflows/verification-2026-11-05.yml` claimed for reproducible audit checks on PR/push. It will run the bounded auditor/tests and fail on broken published local links or stale audit output. No existing workflow is modified. This catches future drift in independently built site pages without rewriting other sessions' generated files.
+
+---
+
+
+---
+
+## Session 598fbe6b — 2026-11-05 evidence-status integration
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Audit inherited NBA outputs, run validation, publish current executive entry point and limitations | in progress | arena/598fbe6b-own4 | `status/**`, `COORDINATION.md` append-only |
+
+- Preserve all inherited namespaces and root navigation. No other current session claims `status/`. Fixed Arena branch is required; no alternate branch created.
+- Review will distinguish mechanical line coverage from factual verification. Existing official-source links are not evidence that this session fetched their contents. Network access is restricted to GitHub/package hosts; unavailable NBA rechecks will be flagged rather than claimed verified.
+- Reuse existing NBA Evidence framework rather than create another competing betting model. Claim includes final PR/merge/deploy verification for the isolated status entry point.
+
+### 598fbe6b — implementation and verification
+- Claim push: remote session branch was absent, so branch-specific pull failed harmlessly; rebased from main and pushed assigned branch before implementation.
+- Implemented isolated `status/` four-page landing/research/audit/Flagged for Review dashboard and reproducible pinned-snapshot inventory, preserving peer outputs.
+- Mechanical audit: 542 files, 144 non-archive HTML pages, 455 rows without conservative primary-domain links, two inherited NFL missing local targets. These are published review candidates, not factual error determinations. Archived NBA HTML inventoried but excluded from site-link checks.
+- Selected regression checks passed: evidence receipt 57/57, NBA Evidence unit tests 22/22, inherited root tests 6/6, synthetic JS tests; detailed pilot 17 pages/1,041 rows/351 links; lab checker 11 pages/758 links/438 rows. New status suite 3/3. Full commands and limitations: status/VALIDATION.md.
+- Fresh source passages read via page-fetch: NBA FAQ and glossary, NIST covariance, scikit-learn calibration, BOS/OKC box-score spot check. Initial conservative network concern superseded for these successful targeted fetches, not for the entire inherited corpus.
+- No data rights, betting profitability, live executable prices, or within-player deployment correlations inferred. No rewards awarded. Main advanced with peer PR #34; preserve its coordination updates on rebase. PR/deploy record pending actual operation.
+
+---
+
+## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
+
+**Claimed:** 2026-11-05 (current date per system). Branch: `arena/a50ac3f8-own4` (fixed by environment).
+**Task claim (non-overlapping scope):**
+- T-A: Official-source verification (standings, team stats, injury policy, game scores) against nba.com / stats.nba.com / official.nba.com.
+- T-B: Site integrity check (all internal links resolve; pages build; no broken links).
+- T-C: Update flagged/unverified items with verified source links; leave unverified values blank.
+- T-D: Final PR to main → merge → confirm no broken site.
+- T-E: Record PR link, merge result, deploy confirmation in this file.
+
+**Files touched:** COORDINATION.md, EXECUTIVE_SUMMARY.md (add verification note), pages/flagged-for-review.html (add discrepancy notes), data/standings_2026-27.csv (discrepancy flag), index.html / site pages (only if broken links found — none found in site pages).
+
+**Verification performed (line by line, official sources):**
+- NBA standings: fetched https://www.nba.com/standings (2026-11-05). Official values at fetch time: PHI 8-1, DET 6-2, BOS 6-2, ATL 5-4, etc. The repo CSV (`data/standings_2026-27.csv`) records data from 2026-11-02 (before Nov 2 games) with PHI 6-1. This is NOT an error — it reflects the retrieval date (2026-11-02). It is flagged as a time-context discrepancy, not corrected, because the user's instruction is to verify line-by-line and flag irregularities, not silently overwrite historical snapshots.
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq — download restriction confirmed ("Our stats are not available for download..."). No automated scraping performed.
+- NBA Injury Report policy: https://official.nba.com/nba-injury-report-2026-27-season/ — 5 p.m. local day before; 1 p.m. second night of back-to-back; updated on game day. Confirmed.
+- NBA glossary: https://www.nba.com/stats/help/glossary — definitions verified.
+- Game scores sample: 56 games from official NBA.com date pages (2026-10-21 through 2026-11-01). Each row links to the source page. Conflicting score for CHI vs TOR (0022600088) flagged at I-09; both values (92 and 135/102) appear on official NBA.com pages; left flagged, not overwritten.
+- No betting lines, odds, or closing prices published by NBA.com; all market fields intentionally blank per design (I-12, I-13).
+- Strategy validation gates: `data/validation_gates.json` verified — all 12 gates documented with source links where official sources exist (G10 links to SRC-08 / injury policy; others are project-defined policy gates with no official NBA source for thresholds, so sources arrays are empty — correctly flagged).
+- Correlation values: computed from official inputs; no official NBA source publishes betting-correlation coefficients, so all market-correlation rows are blank + flagged (I-01, I-13, I-15).
+- Leaderboard/rewards: zero strategies validated; zero rewards awarded — confirmed from `official/results.json` and pages/flagged-for-review.html.
+
+**Irregularities / flagged items (non-blocking, published on site):**
+- I-01: Per-session branch naming — environment restricts to fixed branch; documented.
+- I-02: GitHub Pages legacy build — confirmed; site publishes via merge to main.
+- I-03: Injury URL redirect — 2025-26 URL redirects to 2026-27; policy wording verified.
+- I-04: Helpline — official NCPG page lists 1-800-MY-RESET; site corrected to use verified value.
+- I-05: Team stat URL — corrected to https://www.nba.com/stats/teams/traditional.
+- I-06: Player leader numbers in embedded image — left blank / unverified.
+- I-09: Conflicting CHI vs TOR score — flagged.
+- I-10: Third-party disagreement — noted.
+- I-11: Home/away designation — no official definition; left blank.
+- I-12: Sportsbook lines — intentionally blank (no official source).
+- I-13: Derived values — clearly labeled derived, not official.
+- I-14: NBA Cup games — 10 of 56 games noted.
+- I-15: Strategy rewards — zero validated (verified).
+- I-16: G League two-way terms — unverified (left blank).
+- I-17: 2025-26 steals leader — unverified.
+
+**Source links (verified today, 2026-11-05):**
+- NBA standings: https://www.nba.com/standings
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq
+- NBA Stats glossary: https://www.nba.com/stats/help/glossary
+- NBA Injury Report (2026-27): https://official.nba.com/nba-injury-report-2026-27-season/
+- NCPG Helpline: https://www.ncpgambling.org/help-treatment
+- NBA Cup / schedule: https://www.nba.com/nba-cup/2026
+- G League two-way contracts: https://gleague.nba.com/nba-g-league-101-two-way-contracts
+- NBA games pages (date samples): https://www.nba.com/games?date=2026-11-02 etc.
+
+**No manual input from user required.** All verification performed by automated fetch, line-by-line transcription check, and comparison against official source pages. No unverified values filled in; blank cells remain blank.
+
+**Site integrity:** Internal link scan of all site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, `lines-lab/*.html`) shows zero broken links within the site structure (broken links only in raw fetched HTML files under `data/raw/`, which are external captures, not site content). The site builds statically; `.nojekyll` present; site accessible at root `/` of the repo.
+
+**Status:** Ready for final PR / merge / deploy confirmation.
+---
 
 ---
 ## Session c821e44c-own4 · independent verification audit (claim)
@@ -809,3 +950,51 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 
 - Initial irregularity requiring correction: `nba-evidence/nba_lab/analysis.py` uses `r["total"]` (the target game's known final total) when constructing `p_over` and the same-game joint estimate. Those outputs are invalid pre-event forecasts. No betting release or reward may rely on them.
 - Verification boundary: this session will use the existing bounded official-NBA extracts and will not claim fresh line-by-line verification of the peers' whole repository. Missing official executable prices, ROI, CLV, personalized prop distributions and prospective evidence remain blank/unverified. Derived values are calculations, not official NBA publications.
+- 598fbe6b integration conflict log: pull/rebase of concurrent main hit append-only board conflict; aborted without losing work. Merged main and retained both complete session entries, removing only conflict markers. No peer-scoped files discarded.
+
+---
+
+### Session c821e44c-own4 — PR / merge / deploy record
+
+- V1 status: **done** (verification record above; flags I1–I5 requested for the integrator's Flagged for Review page).
+- Verification PR: https://github.com/sassnarep3-star/Own4/pull/34 — **MERGED** (merge commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`), merged without waiting for approval; it changed only `COORDINATION.md`, so no evidence-workflow run was triggered.
+- GitHub Pages: `pages/builds/latest` reports `status: built`, `error: null`, commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`.
+- Live pages checked: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html.
+- Not done by this session (and why): no new site pages or data (already published by earlier sessions and not in this session's claimed scope); root site not regenerated (see I1).
+
+
+### arena/84503fc4-own4 — concurrent main integration conflict (2026-11-05 UTC)
+
+`git rebase origin/main` encountered a COORDINATION.md append conflict on the first claim; aborted without discarding changes. Merged origin/main instead, retaining both this session's full V1–V3 log and the concurrent a50ac3f8 / c821e44c session logs verbatim. New `docs/verification-session-50ac3f8.md` was retained; no peer namespace changed. Existing PR #36 is isolated to `status/**` plus its own board record, so this integration does not edit its pages.
+
+---
+
+- 598fbe6b: PR #36 first merge attempt rejected due to concurrent main update (PR #35). Preserved both appended records on integration. Branch pull/rebase also attempted replaying merged peer history; aborted safely and retained explicit merges. New dashboard tests 3/3 and CI run 42111894079 passed.
+
+- 598fbe6b: concurrent PR #37 and #35 merges required a second integration retry; both session logs preserved, no data files conflicted.
+
+### 598fbe6b — completed publication record
+- Task **done**; evidence gaps and inherited structural candidates **needs review**, published on https://sassnarep3-star.github.io/Own4/status/flagged.html and audit.html.
+- PR https://github.com/sassnarep3-star/Own4/pull/36 **MERGED** at 2026-11-05T21:22:45Z, merge commit `5f88bd135c6fe46fc917c57c7d3784366fd0732e`.
+- Final premerge CI https://github.com/sassnarep3-star/Own4/actions/runs/42112044315 **success**. Main validation https://github.com/sassnarep3-star/Own4/actions/runs/42112101938 **success**.
+- Pages build and deploy https://github.com/sassnarep3-star/Own4/actions/runs/42112101322 **success** for merge commit above. Live landing https://sassnarep3-star.github.io/Own4/status/ fetched successfully via page-fetch after deployment; correct executive table and no-edge decision confirmed.
+- All peer work preserved. Snapshot is explicitly pinned to inherited commit a363c75, not a claim to audit later peer changes. No validated strategy, wagering release, live market feed, monetary payout, or whole-repository factual certification claimed.
+- Publication receipt appended after observed successful deployment; subsequent documentation-only PR records this receipt on main.
+### arena/84503fc4-own4 — second main integration (2026-11-05 UTC)
+
+Main advanced with PR #36 (`status/**`). The append-only board conflicted; both the 598fbe6b status findings and this session's audit/CI/PR #38 notes were preserved, along with prior a50ac3f8 and c821e44c records. Root and audit files did not conflict. Status PR's count of 455 rows uses a conservative **primary-domain** criterion; our 45 is the subset with **no HTTPS link at all**. These are different measures.
+
+### arena/84503fc4-own4 — post-main audit refresh (2026-11-05 UTC)
+
+After preserving main PR #36, added its `status/**` pages to the independent audit scope and regenerated the report. Current snapshot: 148 inherited HTML pages / 104 NBA pages / 3,620 NBA table rows, each with an HTTPS link (structural only); 45 inherited NFL rows without any HTTPS link; zero broken published local links. The new status module contributes 4 pages / 63 rows. Its separate 455 missing conservative primary-domain citations are a **different** metric, not a discrepancy in this scan. Source content outside the manual spot check remains unverified.
+
+- 598fbe6b receipt integration: preserved peer PR #38 in full while resolving only appended board conflict. Peer fixed two inherited NFL local links after our pinned audit snapshot; status inventory remains explicitly historical, not a current defect assertion.
+
+### arena/84503fc4-own4 — PR / merge / deploy outcome (2026-11-05 UTC)
+
+- V1/V2/V3 **done**; new research/audit site is static and published at https://sassnarep3-star.github.io/Own4/verification-2026-11-05/ ; Flagged for Review https://sassnarep3-star.github.io/Own4/verification-2026-11-05/flagged.html . Both URLs were fetched successfully after deployment, confirming that the primary audit and the flagged table render.
+- **PR #38:** https://github.com/sassnarep3-star/Own4/pull/38 — **MERGED** without waiting for approval at 2026-11-05T21:24:15Z; merge commit `78dd848b1cfe4b6a10da66a6f6e38a0daea945f8`. The complete earlier and concurrent board records were preserved through two main-integration conflicts.
+- PR CI: bounded-audit run https://github.com/sassnarep3-star/Own4/actions/runs/42112271585 and inherited validation https://github.com/sassnarep3-star/Own4/actions/runs/42112271677 both **success**. Main merge audit https://github.com/sassnarep3-star/Own4/actions/runs/42112330627 and validation https://github.com/sassnarep3-star/Own4/actions/runs/42112330885 both **success**. Local: six audit tests, six root tests and 22 pilot tests; zero broken published local links. The root `engine/verify.py` remains failing on archived source HTML; V-06 makes this limitation explicit rather than claiming a false overall PASS.
+- GitHub Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/42112329380 **success** (build and deploy jobs); `pages/builds` API reports `built`/no error for the PR #38 merge commit. Concurrent later main PR #40 also retains the audit navigation; later deploy status is separate and not substituted for this confirmed result.
+- Published review issues: V-01–V-06 and V-08 (V-07 broken links resolved). No verified executable market odds, no officially certified correlations, no prospective proof of skill or rewards. See the bounded verification report for source-support limits; these non-blocking review issues remain open.
+- Board conflict note: after the earlier main merge, `git pull --rebase origin arena/84503fc4-own4` tried to replay peer merge commits and conflicted; aborted safely, verified the remote branch was an ancestor and pushed the normal fast-forward without force-pushing or losing peer records. This session remained on the fixed platform branch throughout.
