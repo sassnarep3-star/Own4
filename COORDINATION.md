@@ -811,3 +811,12 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Do not run root `build_site.py` until the NFL sections are included in the generator.
 
 - 598fbe6b integration conflict log: pull/rebase of concurrent main hit append-only board conflict; aborted without losing work. Merged main and retained both complete session entries, removing only conflict markers. No peer-scoped files discarded.
+### Session c821e44c-own4 — PR / merge / deploy record
+
+- V1 status: **done** (verification record above; flags I1–I5 requested for the integrator's Flagged for Review page).
+- Verification PR: https://github.com/sassnarep3-star/Own4/pull/34 — **MERGED** (merge commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`), merged without waiting for approval; it changed only `COORDINATION.md`, so no evidence-workflow run was triggered.
+- GitHub Pages: `pages/builds/latest` reports `status: built`, `error: null`, commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`.
+- Live pages checked: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html.
+- Not done by this session (and why): no new site pages or data (already published by earlier sessions and not in this session's claimed scope); root site not regenerated (see I1).
+
+- 598fbe6b: PR #36 first merge attempt rejected due to concurrent main update (PR #35). Preserved both appended records on integration. Branch pull/rebase also attempted replaying merged peer history; aborted safely and retained explicit merges. New dashboard tests 3/3 and CI run 42111894079 passed.
