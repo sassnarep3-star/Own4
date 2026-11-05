@@ -1,0 +1,140 @@
+{
+ "snapshot": "2026-11-05",
+ "checks": [
+  {
+   "id": "C01",
+   "name": "Standings page and Teams-Traditional page agree on W-L for all 30 teams",
+   "expected": "0 mismatched teams",
+   "actual": "0 mismatched teams",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/standings",
+   "note": "Two separately rendered official pages; agreement is evidence the transcription is faithful."
+  },
+  {
+   "id": "C02",
+   "name": "League-wide wins equal league-wide losses (every game has one of each)",
+   "expected": "121 = 121",
+   "actual": "121 W vs 121 L",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/standings",
+   "note": ""
+  },
+  {
+   "id": "C03",
+   "name": "Sum of team GP is even and equals twice the number of games played",
+   "expected": "even, 242 team-games",
+   "actual": "242 team-games -> 121 games",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "note": ""
+  },
+  {
+   "id": "C04",
+   "name": "Both official pages list the same 30 team ids",
+   "expected": "30 identical (abbr, id) pairs",
+   "actual": "30 pairs, identical=True",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "note": ""
+  },
+  {
+   "id": "C05",
+   "name": "Inherited 2026-11-02 records + the 29 freshly verified finals = live 2026-11-05 records",
+   "expected": "0 teams disagree",
+   "actual": "0 of 30 teams disagree",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "note": "30 independent team-by-team tests. Agreement corroborates both the inherited snapshot and the new transcription."
+  },
+  {
+   "id": "C06",
+   "name": "Every date in the inherited game sample holds exactly the number of games the official calendar lists",
+   "expected": "no date short of the official count",
+   "actual": "6 dates checked; mismatches=none",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/games?date=2026-10-20",
+   "note": ""
+  },
+  {
+   "id": "C07",
+   "name": "Games in the published sample vs games actually played",
+   "expected": "121 games played as of the snapshot",
+   "actual": "85 in sample (70.2%); 36 games on 7 dates of the season are not in the sample",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/games?date=2026-10-20",
+   "note": "Coverage gap is published as flag F-COVERAGE; the model is fitted on the sample only."
+  },
+  {
+   "id": "C08",
+   "name": "No duplicate game id and no team listed twice on the same date",
+   "expected": "0 duplicates, no same-date repeat",
+   "actual": "0 duplicates; same-date repeat=False",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "note": ""
+  },
+  {
+   "id": "C09",
+   "name": "Each fresh score's official game link is away-vs-home with the same game id",
+   "expected": "29 links match the pattern",
+   "actual": "all match",
+   "status": "PASS",
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "note": ""
+  },
+  {
+   "id": "C10",
+   "name": "Published team +/- does not sum to zero",
+   "expected": "",
+   "actual": "sum of the 30 published +/- values = -5.3; mean PTS 113.44 vs mean implied points allowed 113.62 (difference -0.18). Because every game awards the same points to both sides the true sum is 0. Consistent with one-decimal rounding, but larger than the +/-1.5 bound that pure rounding allows, so it is reported, not corrected, and the column is not used as a model input (flag F-PLUSMINUS).",
+   "status": "NOTE",
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "note": ""
+  },
+  {
+   "id": "C11",
+   "name": "Within the inherited 2026-11-02 snapshot, standings and team stats agree on W-L",
+   "expected": "0 mismatched teams",
+   "actual": "0 mismatched",
+   "status": "PASS",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/official/standings.json",
+   "note": ""
+  },
+  {
+   "id": "C12",
+   "name": "The 56 inherited game rows were not individually re-fetched",
+   "expected": "",
+   "actual": "They carry their own official source URL and game link, and check C05/C06 corroborates them league-wide and date-by-date, but no row-by-row re-fetch was performed (flag F-INHERITED).",
+   "status": "NOTE",
+   "source_url": "https://www.nba.com/games?date=2026-10-21",
+   "note": ""
+  },
+  {
+   "id": "C13",
+   "name": "The official games page renders an odds toggle but no odds values in the fetched text",
+   "expected": "",
+   "actual": "The page shows 'HIDE ODDS'; no price values were present in the retrieved page text, so no price was transcribed. Whether those prices are official NBA data or a partner feed is not established here; they are treated as unavailable and no ROI is computed (flag F-PRICE).",
+   "status": "NOTE",
+   "source_url": "https://www.nba.com/games?date=2026-11-05",
+   "note": ""
+  }
+ ],
+ "summary": {
+  "pass": 10,
+  "fail": 0,
+  "note": 3,
+  "sample_games": 85,
+  "official_games": 121,
+  "coverage_pct": 70.24793388429752,
+  "missing_games": 36,
+  "missing_dates": [
+   "2026-10-20",
+   "2026-10-22",
+   "2026-10-24",
+   "2026-10-25",
+   "2026-10-26",
+   "2026-10-27",
+   "2026-10-29"
+  ]
+ }
+}

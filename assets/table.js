@@ -1,5 +1,54 @@
-document.querySelectorAll('input.filter').forEach(function(inp){
-  var wrap=inp.nextElementSibling; if(!wrap) return; var rows=wrap.querySelectorAll('tbody tr');
-  inp.addEventListener('input',function(){var q=inp.value.toLowerCase();
-    rows.forEach(function(r){r.style.display=r.textContent.toLowerCase().indexOf(q)>-1?'':'none';});});
-});
+/* Own4 canonical dashboard — progressive enhancement only.
+   Adds a text filter above every data table. With JavaScript disabled the
+   site is fully readable; nothing depends on this file. */
+(function () {
+  "use strict";
+
+  function ready(fn) {
+    if (document.readyState !== "loading") { fn(); }
+    else { document.addEventListener("DOMContentLoaded", fn); }
+  }
+
+  ready(function () {
+    var tables = document.querySelectorAll(".tw table");
+    Array.prototype.forEach.call(tables, function (table, i) {
+      var rows = table.tBodies[0] ? table.tBodies[0].rows : null;
+      if (!rows || rows.length < 8) { return; }
+
+      var wrap = document.createElement("div");
+      wrap.className = "filter";
+      var label = document.createElement("label");
+      label.setAttribute("for", "filter-" + i);
+      label.className = "small muted";
+      label.textContent = "Filter rows";
+      var input = document.createElement("input");
+      input.type = "search";
+      input.id = "filter-" + i;
+      input.placeholder = "Type to filter this table\u2026";
+      input.setAttribute("aria-controls", "table-" + i);
+      var count = document.createElement("span");
+      count.className = "count";
+      count.setAttribute("aria-live", "polite");
+      table.id = "table-" + i;
+
+      function apply() {
+        var q = input.value.toLowerCase().trim();
+        var shown = 0;
+        Array.prototype.forEach.call(rows, function (row) {
+          var hit = q === "" || row.textContent.toLowerCase().indexOf(q) !== -1;
+          row.style.display = hit ? "" : "none";
+          if (hit) { shown++; }
+        });
+        count.textContent = shown + " of " + rows.length + " rows";
+      }
+
+      input.addEventListener("input", apply);
+      input.addEventListener("search", apply);
+      wrap.appendChild(label);
+      wrap.appendChild(input);
+      wrap.appendChild(count);
+      table.parentNode.parentNode.insertBefore(wrap, table.parentNode);
+      apply();
+    });
+  });
+})();
