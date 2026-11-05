@@ -993,6 +993,18 @@ def main():
     for p in sorted(BUILT):
         print("  ", p)
 
+    # Final integration (session arena/6c423a51, 2026-11-05): the canonical landing page
+    # and the verified/ category pages are generated from the newer verified snapshot by
+    # verification/build.py. Run it last so this legacy pipeline can never leave a stale
+    # root page in place. It writes only index.html, verified/** and assets/canonical.*.
+    canonical = os.path.join(ROOT, "verification", "build.py")
+    if os.path.exists(canonical):
+        res = subprocess.run([sys.executable, canonical], cwd=ROOT, check=False,
+                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        print((res.stdout or "").strip())
+        if res.returncode != 0:
+            print("WARNING: verification/build.py failed; root index.html may be stale")
+
 
 if __name__ == "__main__":
     main()

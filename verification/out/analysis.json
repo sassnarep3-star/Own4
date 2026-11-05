@@ -1,0 +1,1334 @@
+{
+ "snapshot": "2026-11-05",
+ "generated_by": "verification/analysis.py",
+ "sample": {
+  "games": 85,
+  "graded": 35,
+  "skipped_insufficient_history": 50,
+  "dates": [
+   "2026-10-21",
+   "2026-10-23",
+   "2026-10-28",
+   "2026-10-30",
+   "2026-10-31",
+   "2026-11-01",
+   "2026-11-02",
+   "2026-11-04"
+  ],
+  "official_season_games": 121
+ },
+ "metrics": {
+  "winner_accuracy": 0.5714285714285714,
+  "wins": 20,
+  "graded": 35,
+  "home_baseline_accuracy": 0.6,
+  "binom_p_vs_0_5": 0.49955983320251107,
+  "binom_p_vs_home_baseline": 0.7002608484245056,
+  "accuracy_bootstrap_ci": [
+   0.4,
+   0.7428571428571429
+  ],
+  "mae_margin": 12.10379486217027,
+  "mae_total": 15.123140315401308,
+  "mae_total_baseline": 15.859055340545488,
+  "mae_total_improvement": 0.7359150251441804,
+  "permutation_p_totals": 0.026097390260973904,
+  "sigma_margin": 13.984254551263,
+  "home_edge_points": 1.361904761904762,
+  "league_avg_team_points_sample": 112.65294117647059,
+  "power_games_needed_for_55pct_edge": 620
+ },
+ "blocks": [
+  {
+   "block": 1,
+   "from": "2026-10-30",
+   "to": "2026-11-02",
+   "games": 11,
+   "accuracy": 0.45454545454545453,
+   "mae_total": 17.727173853056037,
+   "over_baseline": true
+  },
+  {
+   "block": 2,
+   "from": "2026-11-02",
+   "to": "2026-11-04",
+   "games": 11,
+   "accuracy": 0.7272727272727273,
+   "mae_total": 19.275149271749452,
+   "over_baseline": true
+  },
+  {
+   "block": 3,
+   "from": "2026-11-04",
+   "to": "2026-11-04",
+   "games": 13,
+   "accuracy": 0.5384615384615384,
+   "mae_total": 9.406488974321945,
+   "over_baseline": true
+  }
+ ],
+ "calibration": [
+  {
+   "bin": "0.00\u20130.45",
+   "games": 8,
+   "predicted_mean": 0.42742877152515835,
+   "observed_home_win_rate": 0.25
+  },
+  {
+   "bin": "0.45\u20130.55",
+   "games": 9,
+   "predicted_mean": 0.5016016153082623,
+   "observed_home_win_rate": 0.7777777777777778
+  },
+  {
+   "bin": "0.55\u20131.00",
+   "games": 18,
+   "predicted_mean": 0.6068709879260267,
+   "observed_home_win_rate": 0.6666666666666666
+  }
+ ],
+ "brier": 0.2368638028009198,
+ "brier_improvement_ci": [
+  -0.01732794952027239,
+  0.04155106767828354
+ ],
+ "graded_games": [
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600015",
+   "away": "CHA",
+   "home": "WAS",
+   "pred_margin": 1.7272727272727337,
+   "pred_total": 224.09090909090907,
+   "actual_margin": 16,
+   "actual_total": 174,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/cha-vs-was-0022600015"
+  },
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600019",
+   "away": "ORL",
+   "home": "TOR",
+   "pred_margin": 6.691833590138671,
+   "pred_total": 225.0792540792541,
+   "actual_margin": -7,
+   "actual_total": 235,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/orl-vs-tor-0022600019"
+  },
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600020",
+   "away": "IND",
+   "home": "MIA",
+   "pred_margin": -0.4287878787878725,
+   "pred_total": 227.63636363636363,
+   "actual_margin": 20,
+   "actual_total": 270,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/ind-vs-mia-0022600020"
+  },
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600021",
+   "away": "HOU",
+   "home": "DAL",
+   "pred_margin": -1.0119225037257848,
+   "pred_total": 226.6230598669623,
+   "actual_margin": 5,
+   "actual_total": 227,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/hou-vs-dal-0022600021"
+  },
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600022",
+   "away": "LAC",
+   "home": "MIN",
+   "pred_margin": 2.3797653958944522,
+   "pred_total": 224.50865800865802,
+   "actual_margin": 26,
+   "actual_total": 228,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/lac-vs-min-0022600022"
+  },
+  {
+   "date": "2026-10-30",
+   "game_id": "0022600023",
+   "away": "LAL",
+   "home": "GSW",
+   "pred_margin": -2.0793650793650897,
+   "pred_total": 225.50105708245246,
+   "actual_margin": 17,
+   "actual_total": 207,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-10-30",
+   "game_url": "https://www.nba.com/game/lal-vs-gsw-0022600023"
+  },
+  {
+   "date": "2026-10-31",
+   "game_id": "0022600149",
+   "away": "ATL",
+   "home": "NOP",
+   "pred_margin": -2.069877883310724,
+   "pred_total": 226.83462282398455,
+   "actual_margin": 22,
+   "actual_total": 220,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-10-31",
+   "game_url": "https://www.nba.com/game/atl-vs-nop-0022600149"
+  },
+  {
+   "date": "2026-11-01",
+   "game_id": "0022600156",
+   "away": "LAC",
+   "home": "GSW",
+   "pred_margin": 2.0112612612612537,
+   "pred_total": 223.4074074074074,
+   "actual_margin": 12,
+   "actual_total": 236,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-01",
+   "game_url": "https://www.nba.com/game/lac-vs-gsw-0022600156"
+  },
+  {
+   "date": "2026-11-01",
+   "game_id": "0022600157",
+   "away": "TOR",
+   "home": "LAL",
+   "pred_margin": -0.7183333333333195,
+   "pred_total": 223.8371212121212,
+   "actual_margin": 6,
+   "actual_total": 256,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-01",
+   "game_url": "https://www.nba.com/game/tor-vs-lal-0022600157"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600159",
+   "away": "DET",
+   "home": "CHA",
+   "pred_margin": -3.2967032967033134,
+   "pred_total": 218.20353330879647,
+   "actual_margin": -33,
+   "actual_total": 215,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/det-vs-cha-0022600159"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600160",
+   "away": "ATL",
+   "home": "IND",
+   "pred_margin": -1.8205128205128176,
+   "pred_total": 227.4606542882405,
+   "actual_margin": -4,
+   "actual_total": 212,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/atl-vs-ind-0022600160"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600161",
+   "away": "BKN",
+   "home": "NYK",
+   "pred_margin": 1.2669735327962997,
+   "pred_total": 221.2064714946071,
+   "actual_margin": 13,
+   "actual_total": 193,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/bkn-vs-nyk-0022600161"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600162",
+   "away": "WAS",
+   "home": "ORL",
+   "pred_margin": -1.8814102564102626,
+   "pred_total": 223.4871794871795,
+   "actual_margin": -9,
+   "actual_total": 197,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/was-vs-orl-0022600162"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600163",
+   "away": "CHI",
+   "home": "PHI",
+   "pred_margin": 3.7682379349046187,
+   "pred_total": 225.48882265275708,
+   "actual_margin": 19,
+   "actual_total": 233,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/chi-vs-phi-0022600163"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600164",
+   "away": "SAC",
+   "home": "DAL",
+   "pred_margin": 5.009700665188461,
+   "pred_total": 226.13868523949168,
+   "actual_margin": -15,
+   "actual_total": 215,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/sac-vs-dal-0022600164"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600165",
+   "away": "NOP",
+   "home": "MEM",
+   "pred_margin": 3.029344651332579,
+   "pred_total": 224.7112193362193,
+   "actual_margin": -1,
+   "actual_total": 269,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/nop-vs-mem-0022600165"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600166",
+   "away": "MIL",
+   "home": "MIN",
+   "pred_margin": 6.159340659340657,
+   "pred_total": 228.6730769230769,
+   "actual_margin": 12,
+   "actual_total": 212,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/mil-vs-min-0022600166"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600167",
+   "away": "BOS",
+   "home": "HOU",
+   "pred_margin": 2.2682435211847007,
+   "pred_total": 224.10957504034428,
+   "actual_margin": 16,
+   "actual_total": 202,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/bos-vs-hou-0022600167"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600168",
+   "away": "UTA",
+   "home": "SAS",
+   "pred_margin": 3.573555320648339,
+   "pred_total": 224.65162993572085,
+   "actual_margin": 22,
+   "actual_total": 216,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/uta-vs-sas-0022600168"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600171",
+   "away": "TOR",
+   "home": "LAC",
+   "pred_margin": -2.8906655142610305,
+   "pred_total": 225.40301003344482,
+   "actual_margin": -7,
+   "actual_total": 243,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/tor-vs-lac-0022600171"
+  },
+  {
+   "date": "2026-11-02",
+   "game_id": "0022600172",
+   "away": "MIA",
+   "home": "LAL",
+   "pred_margin": 2.896153846153851,
+   "pred_total": 228.58058608058607,
+   "actual_margin": 21,
+   "actual_total": 255,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-02",
+   "game_url": "https://www.nba.com/game/mia-vs-lal-0022600172"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600173",
+   "away": "PHI",
+   "home": "DET",
+   "pred_margin": 3.0183150183150076,
+   "pred_total": 220.94366197183095,
+   "actual_margin": -6,
+   "actual_total": 218,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/phi-vs-det-0022600173"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600174",
+   "away": "ATL",
+   "home": "WAS",
+   "pred_margin": 1.0025083612040078,
+   "pred_total": 223.15811965811966,
+   "actual_margin": -15,
+   "actual_total": 225,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/atl-vs-was-0022600174"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600175",
+   "away": "MIL",
+   "home": "BOS",
+   "pred_margin": 5.023056244830428,
+   "pred_total": 225.50443449244818,
+   "actual_margin": 7,
+   "actual_total": 211,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/mil-vs-bos-0022600175"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600176",
+   "away": "CHA",
+   "home": "BKN",
+   "pred_margin": 3.635764944275593,
+   "pred_total": 215.52413127413126,
+   "actual_margin": 10,
+   "actual_total": 218,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/cha-vs-bkn-0022600176"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600177",
+   "away": "CHI",
+   "home": "NYK",
+   "pred_margin": 4.5539136302294025,
+   "pred_total": 226.1773504273504,
+   "actual_margin": 30,
+   "actual_total": 240,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/chi-vs-nyk-0022600177"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600178",
+   "away": "IND",
+   "home": "MEM",
+   "pred_margin": 5.546130952380963,
+   "pred_total": 227.56547619047618,
+   "actual_margin": -4,
+   "actual_total": 210,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/ind-vs-mem-0022600178"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600179",
+   "away": "UTA",
+   "home": "NOP",
+   "pred_margin": 4.379460745440127,
+   "pred_total": 225.76673326673327,
+   "actual_margin": 7,
+   "actual_total": 233,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/uta-vs-nop-0022600179"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600180",
+   "away": "CLE",
+   "home": "OKC",
+   "pred_margin": -1.6307977736549333,
+   "pred_total": 225.66666666666663,
+   "actual_margin": 8,
+   "actual_total": 240,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/cle-vs-okc-0022600180"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600181",
+   "away": "MIN",
+   "home": "HOU",
+   "pred_margin": 2.1875901875901747,
+   "pred_total": 224.5632911392405,
+   "actual_margin": -10,
+   "actual_total": 224,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/min-vs-hou-0022600181"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600182",
+   "away": "TOR",
+   "home": "DEN",
+   "pred_margin": -0.7045454545454675,
+   "pred_total": 226.56818181818184,
+   "actual_margin": 19,
+   "actual_total": 237,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/tor-vs-den-0022600182"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600183",
+   "away": "POR",
+   "home": "PHX",
+   "pred_margin": -3.936581158115814,
+   "pred_total": 224.73863636363637,
+   "actual_margin": -13,
+   "actual_total": 251,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/por-vs-phx-0022600183"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600184",
+   "away": "DAL",
+   "home": "SAS",
+   "pred_margin": 2.4845399698340884,
+   "pred_total": 225.0878674171357,
+   "actual_margin": 1,
+   "actual_total": 223,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/dal-vs-sas-0022600184"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600185",
+   "away": "LAL",
+   "home": "SAC",
+   "pred_margin": -2.517394822006466,
+   "pred_total": 227.19685886402755,
+   "actual_margin": -13,
+   "actual_total": 219,
+   "winner_correct": true,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/lal-vs-sac-0022600185"
+  },
+  {
+   "date": "2026-11-04",
+   "game_id": "0022600186",
+   "away": "MIA",
+   "home": "LAC",
+   "pred_margin": 1.0054945054944966,
+   "pred_total": 230.03375196232338,
+   "actual_margin": -1,
+   "actual_total": 233,
+   "winner_correct": false,
+   "source_url": "https://www.nba.com/games?date=2026-11-04",
+   "game_url": "https://www.nba.com/game/mia-vs-lac-0022600186"
+  }
+ ],
+ "ratings": [
+  {
+   "abbr": "POR",
+   "team": "Portland Trail Blazers",
+   "n": 5,
+   "off": 116.55565610859729,
+   "def": 109.47873303167421,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "MIN",
+   "team": "Minnesota Timberwolves",
+   "n": 7,
+   "off": 115.21490196078432,
+   "def": 109.88156862745099,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "DET",
+   "team": "Detroit Pistons",
+   "n": 5,
+   "off": 112.78642533936652,
+   "def": 107.55565610859729,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "HOU",
+   "team": "Houston Rockets",
+   "n": 7,
+   "off": 114.74823529411765,
+   "def": 109.68156862745099,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "LAL",
+   "team": "Los Angeles Lakers",
+   "n": 7,
+   "off": 115.74823529411765,
+   "def": 111.14823529411765,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "TOR",
+   "team": "Toronto Raptors",
+   "n": 7,
+   "off": 116.68156862745099,
+   "def": 112.81490196078431,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "MEM",
+   "team": "Memphis Grizzlies",
+   "n": 5,
+   "off": 116.01719457013574,
+   "def": 112.24796380090498,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "NYK",
+   "team": "New York Knicks",
+   "n": 5,
+   "off": 112.94027149321268,
+   "def": 109.8633484162896,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "PHI",
+   "team": "Philadelphia 76ers",
+   "n": 5,
+   "off": 112.32488687782805,
+   "def": 109.24796380090498,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "ATL",
+   "team": "Atlanta Hawks",
+   "n": 6,
+   "off": 114.65882352941176,
+   "def": 111.87310924369748,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "SAS",
+   "team": "San Antonio Spurs",
+   "n": 5,
+   "off": 113.8633484162896,
+   "def": 111.1710407239819,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "DEN",
+   "team": "Denver Nuggets",
+   "n": 4,
+   "off": 114.18529411764706,
+   "def": 111.60196078431373,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "CLE",
+   "team": "Cleveland Cavaliers",
+   "n": 4,
+   "off": 115.51862745098039,
+   "def": 113.68529411764706,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "BOS",
+   "team": "Boston Celtics",
+   "n": 5,
+   "off": 111.01719457013574,
+   "def": 109.47873303167421,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "NOP",
+   "team": "New Orleans Pelicans",
+   "n": 6,
+   "off": 114.80168067226892,
+   "def": 113.87310924369748,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "GSW",
+   "team": "Golden State Warriors",
+   "n": 6,
+   "off": 113.23025210084033,
+   "def": 112.37310924369748,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "DAL",
+   "team": "Dallas Mavericks",
+   "n": 6,
+   "off": 112.80168067226892,
+   "def": 112.01596638655462,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "WAS",
+   "team": "Washington Wizards",
+   "n": 6,
+   "off": 110.37310924369748,
+   "def": 110.23025210084033,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "BKN",
+   "team": "Brooklyn Nets",
+   "n": 5,
+   "off": 107.70950226244344,
+   "def": 109.09411764705882,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "MIA",
+   "team": "Miami Heat",
+   "n": 6,
+   "off": 116.15882352941176,
+   "def": 118.30168067226892,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "OKC",
+   "team": "Oklahoma City Thunder",
+   "n": 4,
+   "off": 111.35196078431373,
+   "def": 114.01862745098039,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "LAC",
+   "team": "LA Clippers",
+   "n": 7,
+   "off": 111.54823529411765,
+   "def": 114.54823529411765,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "IND",
+   "team": "Indiana Pacers",
+   "n": 7,
+   "off": 110.94823529411765,
+   "def": 114.01490196078431,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "SAC",
+   "team": "Sacramento Kings",
+   "n": 5,
+   "off": 110.78642533936652,
+   "def": 115.55565610859729,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "ORL",
+   "team": "Orlando Magic",
+   "n": 6,
+   "off": 109.30168067226892,
+   "def": 114.44453781512605,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "PHX",
+   "team": "Phoenix Suns",
+   "n": 4,
+   "off": 111.35196078431373,
+   "def": 116.68529411764706,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "UTA",
+   "team": "Utah Jazz",
+   "n": 6,
+   "off": 109.65882352941176,
+   "def": 115.0873949579832,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "MIL",
+   "team": "Milwaukee Bucks",
+   "n": 6,
+   "off": 111.0873949579832,
+   "def": 117.87310924369748,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "CHA",
+   "team": "Charlotte Hornets",
+   "n": 7,
+   "off": 103.94823529411765,
+   "def": 111.41490196078432,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  },
+  {
+   "abbr": "CHI",
+   "team": "Chicago Bulls",
+   "n": 6,
+   "off": 112.51596638655462,
+   "def": 120.01596638655462,
+   "source_url": "https://www.nba.com/stats/teams/traditional"
+  }
+ ],
+ "team_correlations": [
+  {
+   "feature": "plus_minus",
+   "label": "Point differential per game",
+   "n": 30,
+   "r": 0.9206397425973166,
+   "ci_low": 0.8384740556087091,
+   "ci_high": 0.9618757741072027,
+   "p": 0.0,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": true,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "PTS",
+   "label": "Points per game",
+   "n": 30,
+   "r": 0.5396760533306705,
+   "ci_low": 0.22270756725462382,
+   "ci_high": 0.7534525057274699,
+   "p": 0.001707390998526126,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": true,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "FG_pct",
+   "label": "Field-goal %",
+   "n": 30,
+   "r": 0.5058890751091759,
+   "ci_low": 0.17807516707109466,
+   "ci_high": 0.7326315996520919,
+   "p": 0.0037886774353235175,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": true,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "3P_pct",
+   "label": "Three-point %",
+   "n": 30,
+   "r": 0.4479253568033419,
+   "ci_low": 0.10452347634793857,
+   "ci_high": 0.6958953569216039,
+   "p": 0.01224254797063562,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": true,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "FT_pct",
+   "label": "Free-throw %",
+   "n": 30,
+   "r": 0.20387949232716632,
+   "ci_low": -0.1687874206209545,
+   "ci_high": 0.525546530729217,
+   "p": 0.2826234084244428,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": false,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "REB",
+   "label": "Rebounds per game",
+   "n": 30,
+   "r": 0.25064867318416195,
+   "ci_low": -0.12050200100032915,
+   "ci_high": 0.560320401770519,
+   "p": 0.18326804758959447,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": false,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "AST",
+   "label": "Assists per game",
+   "n": 30,
+   "r": 0.23368558663828262,
+   "ci_low": -0.13822037101041565,
+   "ci_high": 0.54783290766174,
+   "p": 0.21604145262944852,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": false,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "TOV",
+   "label": "Turnovers per game",
+   "n": 30,
+   "r": -0.5238100671993839,
+   "ci_low": -0.7437283459898791,
+   "ci_high": -0.20158189779200905,
+   "p": 0.0025114510943688995,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": true,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "STL",
+   "label": "Steals per game",
+   "n": 30,
+   "r": 0.2033650992749966,
+   "ci_low": -0.1693087282097433,
+   "ci_high": 0.5251579982455717,
+   "p": 0.2838744631687211,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": false,
+   "bh_threshold": 0.025
+  },
+  {
+   "feature": "BLK",
+   "label": "Blocks per game",
+   "n": 30,
+   "r": 0.2876099037248356,
+   "ci_low": -0.08105834075370466,
+   "ci_high": 0.5870506964668892,
+   "p": 0.1240861841451053,
+   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "standings_url": "https://www.nba.com/standings",
+   "bh_reject": false,
+   "bh_threshold": 0.025
+  }
+ ],
+ "game_correlations": [
+  {
+   "label": "Home team points vs away team points in the same game",
+   "why": "Pace dependence: if a game is fast, both teams score more. This is the dependence that makes same-game total legs correlated.",
+   "n": 85,
+   "r": 0.12492079602147518,
+   "ci_low": -0.09061580873896931,
+   "ci_high": 0.3292782954710386,
+   "p": 0.2554773111933075,
+   "source_url": "https://www.nba.com/games?date=2026-11-04"
+  },
+  {
+   "label": "Winning margin vs game total (graded sample)",
+   "why": "Dependence between a winner leg and a total leg inside one same-game parlay.",
+   "n": 35,
+   "r": 0.06784684317668277,
+   "ci_low": -0.27153912672360137,
+   "ci_high": 0.3922252816402298,
+   "p": 0.7006892358683159,
+   "source_url": "https://www.nba.com/games?date=2026-11-02"
+  },
+  {
+   "label": "Originated margin vs actual margin (model discrimination)",
+   "why": "If this is near zero the originated spread carries no information.",
+   "n": 35,
+   "r": 0.2508760318079841,
+   "ci_low": -0.08988523983028338,
+   "ci_high": 0.5390556031910364,
+   "p": 0.14702499090735732,
+   "source_url": "https://www.nba.com/games?date=2026-11-04"
+  },
+  {
+   "label": "Originated total vs actual total (model discrimination)",
+   "why": "Same test for the totals market.",
+   "n": 35,
+   "r": 0.24979415094898186,
+   "ci_low": -0.09103000807502787,
+   "ci_high": 0.5382362732132723,
+   "p": 0.14885404965866433,
+   "source_url": "https://www.nba.com/games?date=2026-11-02"
+  }
+ ],
+ "parlay_dependence": {
+  "legs": "leg 1 = originated winner; leg 2 = over the originated total",
+  "n": 35,
+  "p_leg1": 0.5714285714285714,
+  "p_leg2": 0.5142857142857142,
+  "p_independent": 0.29387755102040813,
+  "p_joint_observed": 0.2571428571428571,
+  "joint_hits": 9,
+  "gap": -0.03673469387755102,
+  "note": "Observed joint frequency vs the independence product, on the same sample. Small n: the gap is descriptive, not significant."
+ },
+ "own_lines": [
+  {
+   "game_id": "0022600187",
+   "date": "2026-11-05",
+   "tip_et": "9:00 PM ET",
+   "away": "ORL",
+   "away_name": "Orlando Magic",
+   "home": "PHX",
+   "home_name": "Phoenix Suns",
+   "home_off": 111.35196078431373,
+   "home_def": 116.68529411764706,
+   "home_n": 4,
+   "away_off": 109.30168067226892,
+   "away_def": 114.44453781512605,
+   "away_n": 6,
+   "fair_home_pts": 113.57920168067227,
+   "fair_away_pts": 112.3125350140056,
+   "fair_total": 225.8917366946779,
+   "fair_margin_home": 1.2666666666666657,
+   "fair_line_home": -1.5,
+   "fair_total_line": 226.0,
+   "home_win_prob": 0.5360860676163539,
+   "price": null,
+   "price_note": "blank \u2014 no official NBA source publishes a price; see flag F-PRICE",
+   "source_url": "https://www.nba.com/games?date=2026-11-05",
+   "game_url": "https://www.nba.com/game/orl-vs-phx-0022600187"
+  },
+  {
+   "game_id": "0022600188",
+   "date": "2026-11-05",
+   "tip_et": "10:00 PM ET",
+   "away": "MIA",
+   "away_name": "Miami Heat",
+   "home": "GSW",
+   "home_name": "Golden State Warriors",
+   "home_off": 113.23025210084033,
+   "home_def": 112.37310924369748,
+   "home_n": 6,
+   "away_off": 116.15882352941176,
+   "away_def": 118.30168067226892,
+   "away_n": 6,
+   "fair_home_pts": 116.446918767507,
+   "fair_away_pts": 113.58501400560225,
+   "fair_total": 230.03193277310925,
+   "fair_margin_home": 2.8619047619047535,
+   "fair_line_home": -3.0,
+   "fair_total_line": 230.0,
+   "home_win_prob": 0.5810779623399506,
+   "price": null,
+   "price_note": "blank \u2014 no official NBA source publishes a price; see flag F-PRICE",
+   "source_url": "https://www.nba.com/games?date=2026-11-05",
+   "game_url": "https://www.nba.com/game/mia-vs-gsw-0022600188"
+  }
+ ],
+ "props": [
+  {
+   "player": "Franz Wagner",
+   "team": "ORL",
+   "team_name": "Orlando Magic",
+   "market": "Points",
+   "reference_line": 20.3,
+   "rpg": 6.1,
+   "apg": 7.6,
+   "variance": null,
+   "over_prob": null,
+   "edge": null,
+   "status": "REFERENCE ONLY \u2014 no game-log distribution, no opponent adjustment, no injury status",
+   "source_url": "https://www.nba.com/games?date=2026-11-05"
+  },
+  {
+   "player": "Devin Booker",
+   "team": "PHX",
+   "team_name": "Phoenix Suns",
+   "market": "Points",
+   "reference_line": 24.7,
+   "rpg": 3.2,
+   "apg": 4.7,
+   "variance": null,
+   "over_prob": null,
+   "edge": null,
+   "status": "REFERENCE ONLY \u2014 no game-log distribution, no opponent adjustment, no injury status",
+   "source_url": "https://www.nba.com/games?date=2026-11-05"
+  },
+  {
+   "player": "Giannis Antetokounmpo",
+   "team": "MIA",
+   "team_name": "Miami Heat",
+   "market": "Points",
+   "reference_line": 28.3,
+   "rpg": 12.5,
+   "apg": 5.8,
+   "variance": null,
+   "over_prob": null,
+   "edge": null,
+   "status": "REFERENCE ONLY \u2014 no game-log distribution, no opponent adjustment, no injury status",
+   "source_url": "https://www.nba.com/games?date=2026-11-05"
+  },
+  {
+   "player": "Stephen Curry",
+   "team": "GSW",
+   "team_name": "Golden State Warriors",
+   "market": "Points",
+   "reference_line": 30.0,
+   "rpg": 4.2,
+   "apg": 4.5,
+   "variance": null,
+   "over_prob": null,
+   "edge": null,
+   "status": "REFERENCE ONLY \u2014 no game-log distribution, no opponent adjustment, no injury status",
+   "source_url": "https://www.nba.com/games?date=2026-11-05"
+  }
+ ],
+ "gates": [
+  {
+   "id": "G1",
+   "name": "Minimum out-of-sample sample",
+   "type": "statistical",
+   "rule": "At least 300 graded out-of-sample games (identical to the floor used by the other NBA workspaces in this repository).",
+   "status": "FAIL",
+   "evidence": "35 graded games (floor 300)",
+   "rationale": "Below 300 games the standard error of a win-rate estimate is larger than the edge being claimed; a 55% strategy needs roughly that many games before a one-sided 5% test can fire."
+  },
+  {
+   "id": "G2",
+   "name": "Probabilistic calibration",
+   "type": "statistical",
+   "rule": "Brier score strictly better than the naive 0.5-probability baseline, with a paired bootstrap 95% CI on the improvement that excludes zero.",
+   "status": "FAIL",
+   "evidence": "model Brier 0.2369 vs 0.2500 baseline; paired bootstrap 95% CI on the improvement = [-0.0173, 0.0416]",
+   "rationale": "Probability quality, not hit rate, is what a staking plan consumes."
+  },
+  {
+   "id": "G3",
+   "name": "Discrimination vs home baseline",
+   "type": "statistical",
+   "rule": "Winner accuracy strictly above the always-pick-the-home-team baseline with a one-sided exact binomial p < 0.05.",
+   "status": "FAIL",
+   "evidence": "accuracy 0.5714 (20/35) vs home baseline 0.6000; one-sided p = 0.7003",
+   "rationale": "Home advantage is free information; a model that cannot beat it has no signal."
+  },
+  {
+   "id": "G4",
+   "name": "Totals skill",
+   "type": "statistical",
+   "rule": "Mean absolute error of predicted game total below the naive league-average-total baseline, permutation p < 0.05.",
+   "status": "PASS",
+   "evidence": "MAE 15.123 vs baseline 15.859; permutation p = 0.0261",
+   "rationale": "Totals markets are the cleanest place to detect a genuine pace/efficiency signal."
+  },
+  {
+   "id": "G5",
+   "name": "Temporal stability",
+   "type": "statistical",
+   "rule": "The claimed metric must be positive in each of at least three disjoint, equal-count time blocks of the walk-forward sample.",
+   "status": "FAIL",
+   "evidence": "block 1 0.455 (n=11); block 2 0.727 (n=11); block 3 0.538 (n=13)",
+   "rationale": "A signal that exists only in one stretch is indistinguishable from variance."
+  },
+  {
+   "id": "G6",
+   "name": "Dependence control for combinations",
+   "type": "policy+statistical",
+   "rule": "Any parlay or player-prop combination must be priced with a measured dependence adjustment (correlation with 95% CI), not with an independence assumption.",
+   "status": "PASS",
+   "evidence": "correlation reported for every combination (see Correlations page); parlay legs priced with the measured dependence, not independence",
+   "rationale": "Legs inside one game are not independent; independent pricing systematically overstates the joint probability of positively correlated legs."
+  },
+  {
+   "id": "G7",
+   "name": "Executable price",
+   "type": "market",
+   "rule": "The strategy must be graded against an official or licensed closing price so that expected value and return can be computed.",
+   "status": "BLOCKED",
+   "evidence": "no official closing price exists in any official NBA source; ROI not computable",
+   "rationale": "An edge that is never compared to a price cannot be monetised."
+  },
+  {
+   "id": "G8",
+   "name": "Multiple-testing control",
+   "type": "statistical",
+   "rule": "Every claimed edge must survive Benjamini-Hochberg FDR control at q < 0.05 across all strategies and markets tested in the same run.",
+   "status": "FAIL",
+   "evidence": "strategy-level tests m=2 (winner p=0.4996, totals p=0.0261); Benjamini-Hochberg at q=0.05 sets the smallest threshold to 0.0250, so no strategy claim survives",
+   "rationale": "Testing many strategies guarantees some look good by chance."
+  },
+  {
+   "id": "G9",
+   "name": "Source and usage compliance",
+   "type": "policy",
+   "rule": "Every input must come from an official source with a per-row URL, and the NBA Stats FAQ restriction on downloading their statistics must be acknowledged on the published site.",
+   "status": "PASS",
+   "evidence": "every published row links to its official page; NBA Stats FAQ restriction acknowledged on the Flagged page",
+   "rationale": "Reproducibility and lawful use are preconditions, not optional extras."
+  },
+  {
+   "id": "G10",
+   "name": "Deterministic reproduction",
+   "type": "engineering",
+   "rule": "One documented command must regenerate the transcription, the model output and every published page. The transcription must be byte-identical on rebuild; the statistical output must reproduce the same values within published tolerances, and the site checks and publication invariants must pass.",
+   "status": "PASS",
+   "evidence": "five-command rebuild; transcription reproduces byte-identically, statistics are pinned by verification/assert_publication.py, site by verification/verify_site.py (every data row source-linked, 0 broken links)",
+   "rationale": "A number nobody can rebuild is a rumour."
+  }
+ ],
+ "strategies": [
+  {
+   "id": "S1",
+   "name": "Single \u2014 game winner (moneyline)",
+   "family": "single",
+   "priced_by": "originated win probability",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Fails the sample floor and the price gate like every other strategy in this run."
+  },
+  {
+   "id": "S2",
+   "name": "Single \u2014 originated spread",
+   "family": "single",
+   "priced_by": "originated margin distribution",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Fails the sample floor and the price gate like every other strategy in this run."
+  },
+  {
+   "id": "S3",
+   "name": "Single \u2014 originated game total",
+   "family": "single",
+   "priced_by": "originated total distribution",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Fails the sample floor and the price gate like every other strategy in this run."
+  },
+  {
+   "id": "S4",
+   "name": "Same-game 2-leg parlay \u2014 winner + total",
+   "family": "parlay",
+   "priced_by": "dependence-adjusted joint",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Fails the sample floor and the price gate like every other strategy in this run."
+  },
+  {
+   "id": "S5",
+   "name": "Cross-game 2-leg parlay \u2014 two winners",
+   "family": "parlay",
+   "priced_by": "independence across games",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Fails the sample floor and the price gate like every other strategy in this run."
+  },
+  {
+   "id": "S6",
+   "name": "Player prop single \u2014 points",
+   "family": "player-prop",
+   "priced_by": "unavailable",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "No official player game logs are available to this session, so no per-game distribution, variance or pair correlation can be measured."
+  },
+  {
+   "id": "S7",
+   "name": "Player prop combo \u2014 two teammates",
+   "family": "player-prop",
+   "priced_by": "unavailable",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "No official player game logs are available to this session, so no per-game distribution, variance or pair correlation can be measured."
+  },
+  {
+   "id": "S8",
+   "name": "Same-game parlay \u2014 3 legs with alternate lines",
+   "family": "parlay",
+   "priced_by": "unavailable",
+   "gates_passed": 4,
+   "gates_total": 10,
+   "failed_gates": [
+    "G1",
+    "G2",
+    "G3",
+    "G5",
+    "G7",
+    "G8"
+   ],
+   "status": "NO QUALIFICATION",
+   "blocked_reason": "Alternate-line pricing requires a full joint distribution of the game outcome; not identifiable from 85 official finals."
+  }
+ ],
+ "rewards": {
+  "awarded": 0,
+  "pool": "notional only \u2014 no funds exist",
+  "reason": "No strategy passes all ten gates; the competition awards nothing."
+ }
+}
