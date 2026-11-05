@@ -36,7 +36,9 @@ def remove_vig_two_way(a: float, b: float) -> tuple[float, float]:
 
 
 def ev_per_unit(p: float, decimal: float) -> float:
-    return probability(p) * (decimal - 1) - (1 - probability(p))
+    p = probability(p)
+    implied_probability(decimal)  # validates the quote; no market value is invented
+    return p * (decimal - 1) - (1 - p)
 
 
 def half_line(x: float) -> float:
@@ -48,6 +50,8 @@ def half_line(x: float) -> float:
 
 def kelly_fraction(p: float, decimal: float, cap: float = 0.01) -> float:
     """Research-only capped Kelly. Missing price never implies a stake."""
+    p = probability(p)
+    implied_probability(decimal)
     if not isfinite(cap) or not 0 <= cap <= 1:
         raise ValueError("Invalid stake cap")
     b = decimal - 1
@@ -119,16 +123,84 @@ def binary_correlation(x: list[int], y: list[int]) -> dict:
             "phi": (ab - a * b) / sqrt(denominator) if denominator else None}
 
 
+def same_game_probabilities(prediction: dict, residuals: list[dict]) -> dict:
+    """Estimate favorite/over probabilities from pre-event fields only.
+
+    ``predicted_margin`` and ``predicted_total`` are pregame expectations. The
+    observed final ``total`` is deliberately neither read nor accepted as a
+    substitute. Each training residual pair is shifted by those expectations
+    before evaluating the favorite and the originated half-point total line.
+    """
+    if not residuals:
+        raise ValueError("Nonempty chronological training residuals required")
+    p1 = probability(prediction["p1"])
+    predicted_margin = prediction["predicted_margin"]
+    predicted_total = prediction["predicted_total"]
+    total_line = prediction["total_line"]
+    if not all(isfinite(x) for x in (predicted_margin, predicted_total, total_line)):
+        raise ValueError("Pregame margin/total forecasts and line must be finite")
+    favorite1 = p1 >= .5
+    sign = 1 if favorite1 else -1
+    over_trials = []
+    joint_trials = []
+    for residual in residuals:
+        simulated_total = predicted_total + residual["total"]
+        over = simulated_total > total_line
+        over_trials.append(over)
+        favorite_wins = sign * (predicted_margin + residual["margin"]) > 0
+        joint_trials.append(favorite_wins and over)
+    p_favorite = p1 if favorite1 else 1 - p1
+    p_over = mean(over_trials)
+    # Retain the pilot's registered 0.5 joint smoothing. This is not tuned on
+    # validation or test outcomes and does not make the tiny sample adequate.
+    p_joint = (sum(joint_trials) + .5) / (len(joint_trials) + 1)
+    return {
+        "favorite": prediction["team1"] if favorite1 else prediction["team2"],
+        "p_favorite": p_favorite,
+        "p_over": p_over,
+        "p_sgp": p_joint,
+        "p_sgp_independent": p_favorite * p_over,
+        "residual_pairs": len(residuals),
+    }
+
+
+def reliability_bins(probs: list[float], outcomes: list[int],
+                     edges: tuple[float, ...] = (0, .25, .5, .75, 1)) -> list[dict]:
+    """Nonempty fixed-bin calibration diagnostics; no calibration claim by itself."""
+    if len(probs) != len(outcomes) or not probs:
+        raise ValueError("Paired nonempty probability/outcome arrays required")
+    if tuple(edges) != (0, .25, .5, .75, 1):
+        raise ValueError("This descriptive pilot uses fixed quartile probability bins")
+    for p, y in zip(probs, outcomes):
+        probability(p)
+        if y not in {0, 1}:
+            raise ValueError("Binary outcomes required")
+    rows = []
+    for low, high in zip(edges, edges[1:]):
+        pairs = [(p, y) for p, y in zip(probs, outcomes)
+                 if low <= p < high or (high == 1 and p == 1)]
+        if pairs:
+            rows.append({"bin": f"[{low:g}, {high:g}{']' if high == 1 else ')'}",
+                         "n": len(pairs), "mean_probability": mean(p for p, _ in pairs),
+                         "observed_rate": mean(y for _, y in pairs)})
+    return rows
+
+
 def brier(probs: list[float], outcomes: list[int]) -> float:
     if len(probs) != len(outcomes) or not probs:
         raise ValueError("Paired nonempty probability/outcome arrays required")
+    if any(y not in {0, 1} for y in outcomes):
+        raise ValueError("Binary outcomes required")
     return mean((probability(p) - y) ** 2 for p, y in zip(probs, outcomes))
 
 
 def log_loss(probs: list[float], outcomes: list[int]) -> float:
     if len(probs) != len(outcomes) or not probs:
         raise ValueError("Paired nonempty arrays required")
-    return mean(-log(max(1e-12, p if y else 1 - p)) for p, y in zip(probs, outcomes))
+    if any(y not in {0, 1} for y in outcomes):
+        raise ValueError("Binary outcomes required")
+    return mean(-log(max(1e-12, probability(p) if y else 1 - probability(p)))
+                for p, y in zip(probs, outcomes))
 
 
 def mae(predicted: list[float], actual: list[float]) -> float:
