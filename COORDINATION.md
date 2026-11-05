@@ -753,3 +753,29 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session `arena/e7299c63-own4` — settlement of the 2026-11-02 own-lines slate + official data refresh (claim, 2026-11-05 UTC)
+
+Session ID: `arena/e7299c63-own4` · pinned branch: `arena/e7299c63-own4` (per platform constraint; `session-<id>/<task>` naming not creatable — same deviation as prior sessions, logged).
+
+At session start: `main` == this branch @ `a363c75` ("Merge pull request #33"). Open PR #29 (`arena/e513f51b-own4`, COORDINATION-only) is NOT owned by this session and is not touched by it. No other session holds an `in progress` claim on main.
+
+**Claimed scope (non-overlapping):**
+- `update/**` (new): official 2026-11-02 slate settlement vs the repo's pre-registered own lines; official results 2026-11-03 (0 games, dark day per official calendar), 2026-11-04 (14 games) and the 2026-11-05 schedule (2 games, unplayed at fetch time); line-by-line transcription from nba.com with per-row source URLs; verification script; standalone dashboard page.
+- `COORDINATION.md` (append-only), `EXECUTIVE_SUMMARY.md` (append-only addendum), root `index.html` (additive link only), `README.md` (additive section only).
+- No other session's files are edited. Shared root navigation gains one additive link; existing links are preserved verbatim.
+
+**Task board (this session):**
+
+| ID | Task | Status | Files |
+|----|------|--------|-------|
+| U1 | Settle the 2026-11-02 own-lines slate vs official final scores (line-by-line) | in progress | `update/settlement_2026-11-02.json`, `update/verify_update.py` |
+| U2 | Official data refresh 2026-11-03…2026-11-05 (0/14/2 games) | in progress | `update/games_2026-11-03_to_2026-11-05.json` |
+| U3 | Re-verification spot checks (NCPG helpline; official games pages; repo suites) | in progress | `update/recheck_2026-11-05.md` |
+| U4 | Dashboard page + root nav link | unclaimed→claimed | `update/index.html`, root `index.html` (additive) |
+| U5 | Site build, link check, PR → merge → Pages confirm, record here + EXECUTIVE_SUMMARY addendum | unclaimed→claimed | shared files only at integration |
+
+Rules carried over from earlier sessions: every published row carries an official (nba.com / ncpgambling.org) source URL; unconfirmable values stay blank and are flagged; no strategy-validation claims from n=15; nothing merges until the repo's verification suites pass; flagged irregularities do not block the merge.
+
