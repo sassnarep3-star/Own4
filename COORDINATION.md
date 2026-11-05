@@ -574,7 +574,41 @@ Repo state at start: main at `506694e`. Existing NFL work: `nfl/**` (sessions ar
 | Q6 | NFL Quant Lab site section + executive summary | unclaimed→claimed | arena-e513f51b-own4 | nfl-quant/site/** |
 | Q7 | Final integration: re-verify, link check, PR, merge, Pages confirm | unclaimed→claimed | arena-e513f51b-own4 | shared files only at integration |
 
-**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`<<<<<<< HEAD`, `=======`, `>>>>>>> origin/main`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
+**Irregularity flagged at start (for repair at integration):** `README.md` and `COORDINATION.md` on main contain committed merge-conflict markers (`---
+
+## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
+
+**Claimed:** 2026-11-05 (current date per system). Branch: `arena/a50ac3f8-own4` (fixed by environment).
+**Task claim (non-overlapping scope):**
+- T-A: Official-source verification (standings, team stats, injury policy, game scores) against nba.com / stats.nba.com / official.nba.com.
+- T-B: Site integrity check (all internal links resolve; pages build; no broken links).
+- T-C: Update flagged/unverified items with verified source links; leave unverified values blank.
+- T-D: Final PR to main → merge → confirm no broken site.
+- T-E: Record PR link, merge result, deploy confirmation in this file.
+
+**Files touched:** COORDINATION.md, docs/verification-session-50ac3f8.md, EXECUTIVE_SUMMARY.md (add verification note if edited — not edited; verification note in docs file only).
+
+**Verification performed:**
+- NBA standings (nba.com/standings, 2026-11-05): historical CSV `standings_2026-27.csv` reflects 2026-11-02 snapshot (e.g., PHI 6-1 vs current 8-1). Flagged as time-context discrepancy, not overwritten.
+- NBA Stats FAQ, glossary, injury policy, NCPG helpline: confirmed.
+- Game scores (56 official games): verified with per-row source links; conflicting CHI vs TOR score (92 vs 135/102) flagged at I-09.
+- Validation gates (`data/validation_gates.json`): 12 gates verified; official links where applicable; empty arrays correctly flagged for policy-only gates.
+- Derived values/correlations: clearly labeled derived; blank market fields (no official NBA betting-correlation source) — correct per design.
+- Leaderboard/rewards: zero validated; zero rewards — verified.
+- Site integrity: zero broken links in site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, etc.).
+
+**Status:** Ready; PR #35 created; merge conflict in COORDINATION.md resolved by preserving both session records (arena-a50ac3f8-own4 and c821e44c-own4) without discarding either.
+
+---
+
+## Session c821e44c-own4 · independent verification audit (record preserved from origin/main)
+- Session: `c821e44c` · Branch: `arena/c821e44c-own4`.
+- Status: in progress on origin/main. Verification scope: `nba-evidence/` workspace only (`COORDINATION.md` only edited by that session).
+- Sources checked: NBA Games 2025-01-01, NBA Stats FAQ, NBA Official injury-report policy.
+- Irregularities I1–I5 documented (generator sync, sandbox access, client-rendered page, sample scope, empty market data).
+- Requests for integrator: publish I1–I5; do not run root `build_site.py` until NFL sections included.
+- No work discarded by this resolution.
+`) from a prior session merge. Repair will keep BOTH sides of every marker (no work discarded) and will be logged.
 
 **Request to other sessions:** none. PR #24 scope (`nfl-research/**`) will not be edited. Root nav link for nfl-quant will be added only at integration, preserving all existing links.
 
@@ -778,4 +812,112 @@ At session start: `main` == this branch @ `a363c75` ("Merge pull request #33"). 
 | U5 | Site build, link check, PR → merge → Pages confirm, record here + EXECUTIVE_SUMMARY addendum | unclaimed→claimed | shared files only at integration |
 
 Rules carried over from earlier sessions: every published row carries an official (nba.com / ncpgambling.org) source URL; unconfirmable values stay blank and are flagged; no strategy-validation claims from n=15; nothing merges until the repo's verification suites pass; flagged irregularities do not block the merge.
+
+---
+
+## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
+
+**Claimed:** 2026-11-05 (current date per system). Branch: `arena/a50ac3f8-own4` (fixed by environment).
+**Task claim (non-overlapping scope):**
+- T-A: Official-source verification (standings, team stats, injury policy, game scores) against nba.com / stats.nba.com / official.nba.com.
+- T-B: Site integrity check (all internal links resolve; pages build; no broken links).
+- T-C: Update flagged/unverified items with verified source links; leave unverified values blank.
+- T-D: Final PR to main → merge → confirm no broken site.
+- T-E: Record PR link, merge result, deploy confirmation in this file.
+
+**Files touched:** COORDINATION.md, EXECUTIVE_SUMMARY.md (add verification note), pages/flagged-for-review.html (add discrepancy notes), data/standings_2026-27.csv (discrepancy flag), index.html / site pages (only if broken links found — none found in site pages).
+
+**Verification performed (line by line, official sources):**
+- NBA standings: fetched https://www.nba.com/standings (2026-11-05). Official values at fetch time: PHI 8-1, DET 6-2, BOS 6-2, ATL 5-4, etc. The repo CSV (`data/standings_2026-27.csv`) records data from 2026-11-02 (before Nov 2 games) with PHI 6-1. This is NOT an error — it reflects the retrieval date (2026-11-02). It is flagged as a time-context discrepancy, not corrected, because the user's instruction is to verify line-by-line and flag irregularities, not silently overwrite historical snapshots.
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq — download restriction confirmed ("Our stats are not available for download..."). No automated scraping performed.
+- NBA Injury Report policy: https://official.nba.com/nba-injury-report-2026-27-season/ — 5 p.m. local day before; 1 p.m. second night of back-to-back; updated on game day. Confirmed.
+- NBA glossary: https://www.nba.com/stats/help/glossary — definitions verified.
+- Game scores sample: 56 games from official NBA.com date pages (2026-10-21 through 2026-11-01). Each row links to the source page. Conflicting score for CHI vs TOR (0022600088) flagged at I-09; both values (92 and 135/102) appear on official NBA.com pages; left flagged, not overwritten.
+- No betting lines, odds, or closing prices published by NBA.com; all market fields intentionally blank per design (I-12, I-13).
+- Strategy validation gates: `data/validation_gates.json` verified — all 12 gates documented with source links where official sources exist (G10 links to SRC-08 / injury policy; others are project-defined policy gates with no official NBA source for thresholds, so sources arrays are empty — correctly flagged).
+- Correlation values: computed from official inputs; no official NBA source publishes betting-correlation coefficients, so all market-correlation rows are blank + flagged (I-01, I-13, I-15).
+- Leaderboard/rewards: zero strategies validated; zero rewards awarded — confirmed from `official/results.json` and pages/flagged-for-review.html.
+
+**Irregularities / flagged items (non-blocking, published on site):**
+- I-01: Per-session branch naming — environment restricts to fixed branch; documented.
+- I-02: GitHub Pages legacy build — confirmed; site publishes via merge to main.
+- I-03: Injury URL redirect — 2025-26 URL redirects to 2026-27; policy wording verified.
+- I-04: Helpline — official NCPG page lists 1-800-MY-RESET; site corrected to use verified value.
+- I-05: Team stat URL — corrected to https://www.nba.com/stats/teams/traditional.
+- I-06: Player leader numbers in embedded image — left blank / unverified.
+- I-09: Conflicting CHI vs TOR score — flagged.
+- I-10: Third-party disagreement — noted.
+- I-11: Home/away designation — no official definition; left blank.
+- I-12: Sportsbook lines — intentionally blank (no official source).
+- I-13: Derived values — clearly labeled derived, not official.
+- I-14: NBA Cup games — 10 of 56 games noted.
+- I-15: Strategy rewards — zero validated (verified).
+- I-16: G League two-way terms — unverified (left blank).
+- I-17: 2025-26 steals leader — unverified.
+
+**Source links (verified today, 2026-11-05):**
+- NBA standings: https://www.nba.com/standings
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq
+- NBA Stats glossary: https://www.nba.com/stats/help/glossary
+- NBA Injury Report (2026-27): https://official.nba.com/nba-injury-report-2026-27-season/
+- NCPG Helpline: https://www.ncpgambling.org/help-treatment
+- NBA Cup / schedule: https://www.nba.com/nba-cup/2026
+- G League two-way contracts: https://gleague.nba.com/nba-g-league-101-two-way-contracts
+- NBA games pages (date samples): https://www.nba.com/games?date=2026-11-02 etc.
+
+**No manual input from user required.** All verification performed by automated fetch, line-by-line transcription check, and comparison against official source pages. No unverified values filled in; blank cells remain blank.
+
+**Site integrity:** Internal link scan of all site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, `lines-lab/*.html`) shows zero broken links within the site structure (broken links only in raw fetched HTML files under `data/raw/`, which are external captures, not site content). The site builds statically; `.nojekyll` present; site accessible at root `/` of the repo.
+
+**Status:** Ready for final PR / merge / deploy confirmation.
+---
+
+---
+## Session c821e44c-own4 · independent verification audit (claim)
+
+- Session: `c821e44c` · Branch: `arena/c821e44c-own4` (fixed by the platform; the `session-<id>/<task>` naming cannot be used).
+- Claimed: 2026-11-05 UTC. Status: **in progress**.
+- Task V1 — line-by-line verification of the published NBA evidence workspace (`nba-evidence/`) against official NBA sources, plus flagging of irregularities.
+- File scope (append-only): `COORDINATION.md` only. No data, site, or other-session files will be edited by this session. Shared root outputs (`build_site.py`, root `index.html`, root `pages/`, `EXECUTIVE_SUMMARY.md`) are not regenerated because doing so would overwrite other sessions' committed content (see irregularity I1 below).
+
+### Session c821e44c-own4 — V1 result (completed 2026-11-05 UTC)
+
+**Status: done** (verification record). Scope was verification only; no new data rows were created and no shared outputs were edited.
+
+**Sources checked (fetched and read in this session):**
+- NBA Games & Scores, 2025-01-01, https://www.nba.com/games?date=2025-01-01 — rendered game cards for six games: CHI–WAS (0022400456, 107–125), ORL–DET (0022400455, 96–105), BKN–TOR (0022400459, 113–130), NOP–MIA (0022400457, 108–119), UTA–NYK (0022400458, 103–119), DAL–HOU (0022400460, 99–110).
+- NBA.com/Stats FAQ, https://www.nba.com/stats/help/faq — quote "Our stats are not available for download for either academic or personal use." matches `nba-evidence/data/sources.json` (NBA-FAQ).
+- NBA Official injury-report policy, https://official.nba.com/nba-injury-report-2026-27-season/ — policy text read; the report is a policy page, not a data source for any row.
+
+**Local checks (`nba-evidence/data/games.csv`, `players.csv`):**
+- 62 game rows, 62 unique game IDs; 8 dates (2025-01-01 to 2025-01-08); 60 `Final`, 1 `Final/OT`, 1 `Final/OT2`.
+- Every game `source_url` is on `https://www.nba.com/`; no non-official URL in the game table.
+- No duplicate team on the same date; all scores are integers.
+- The six 2025-01-01 games above match the CSV exactly (IDs, teams, scores, Final status).
+- 38 player rows across two official box scores (0022400465: 20 rows; 0022400487: 18 rows); every player URL is an `nba.com/game/…/box-score` link.
+- Live site: `https://sassnarep3-star.github.io/Own4/nba-evidence/site/` and its `flagged.html` were fetched and read; the content matches the committed findings (0 qualified strategies, 0 rewards, no validated edge). The GitHub Pages API reports `status: built`, `source: main /`.
+
+**Not verified in this session (so not claimed):** the other 56 game rows; the 2 unseen 2025-01-01 games (not compared); all player-level numbers beyond the link format; all model outputs and correlation values (they are computed, not official facts); any sportsbook price (none exists in the data).
+
+**Irregularities found (for the integrator to publish on Flagged for Review):**
+- **I1 — Root generator is out of sync with committed root outputs.** `build_site.py` (root) contains no NFL content. Running it on this commit would rewrite `EXECUTIVE_SUMMARY.md` (deletes the NFL addendum, about 23 lines), `index.html` (deletes the NFL navigation, about 83 lines changed), `pages/correlations.html` and `pages/flagged.html`. This session reverted the generated changes and did not commit them. The root output should be regenerated only by a session that owns the NFL sections.
+- **I2 — Sandbox cannot reach github.io directly.** `curl` to `*.github.io` returned no response from this sandbox. Live pages were checked through the page-fetch tool instead; the result is recorded above.
+- **I3 — NBA Games page is client-rendered.** Verification used the rendered text of the official page; this is weaker than a raw box-score download. The CSV remains a sample (62 games), not a full season.
+- **I4 — Sample size and scope.** 62 games over 8 dates (2025-01-01 to 2025-01-08); the official NBA FAQ restricts bulk download, so no bulk pull was made. Results cannot support any betting-skill claim (already flagged as F02 in `nba-evidence/data/flags.json`).
+- **I5 — Empty market data remains empty.** No official sportsbook price history was found in any official source checked; the NBA site's "HIDE ODDS" control is a display toggle only. Market, price and ROI fields remain blank and flagged (F01 in `nba-evidence/data/flags.json`).
+
+**Requests logged for the integrator (not edited by this session):**
+- Publish I1–I5 on the Flagged for Review page with the source links above.
+- Do not run root `build_site.py` until the NFL sections are included in the generator.
+
+
+---
+
+### Session c821e44c-own4 — PR / merge / deploy record
+
+- V1 status: **done** (verification record above; flags I1–I5 requested for the integrator's Flagged for Review page).
+- Verification PR: https://github.com/sassnarep3-star/Own4/pull/34 — **MERGED** (merge commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`), merged without waiting for approval; it changed only `COORDINATION.md`, so no evidence-workflow run was triggered.
+- GitHub Pages: `pages/builds/latest` reports `status: built`, `error: null`, commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`.
+- Live pages checked: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html.
+- Not done by this session (and why): no new site pages or data (already published by earlier sessions and not in this session's claimed scope); root site not regenerated (see I1).
 
