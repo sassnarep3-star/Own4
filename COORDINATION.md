@@ -753,3 +753,23 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session `arena/6c423a51-own4` — fresh verification + canonical consolidated dashboard (2026-11-05)
+
+**Claim status: in progress.** All prior board items are `done`/`needs review` and their last commits are from 2026-11-02 (more than 60 minutes old), so this session takes the final-integration role and no other live claim is displaced.
+
+Context found at claim time: `origin/main` = `a363c75356658db670445bb42541d3c5d30a2298`, working tree clean, GitHub Pages live from `main` `/` (legacy, status `built`). The repo contains multiple independently built NBA dashboards (root site, `pages/`, `docs/`, `lab/`, `lines-lab/`, `nba-evidence/site/`, `verified/` does not yet exist). The stored "official" snapshot in `official/` and `data/` is dated **2026-11-02**; it is now 2026-11-05, so the snapshot is stale and must be re-verified rather than re-published as current.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|-------------------------------|
+| N1 | Fresh official-source snapshot for 2026-11-05 (standings, team stats, results, player game logs) | in progress | arena-6c423a51-own4 | `verification/collect_2026-11-05.py`, `verification/data/*` |
+| N2 | Line-by-line reconciliation of the stored 2026-11-02 snapshot against live official pages, corroborated with official 11/03–11/04 results | unclaimed | arena-6c423a51-own4 | `verification/reconcile.py`, `verification/out/*` |
+| N3 | Canonical consolidated dashboard: one clean landing page + category subpages + Flagged for Review | unclaimed | arena-6c423a51-own4 | `index.html`, `verified/**`, `assets/canonical.css` |
+| N4 | Independent analysis: own-line origination, correlations, gates, luck-removal backtest on the fresh sample | unclaimed | arena-6c423a51-own4 | `verification/analysis.py`, `verification/out/*` |
+| N5 | Build/verify harness + CI workflow + link integrity; PR, merge, Pages deploy confirmation | unclaimed | arena-6c423a51-own4 | `verification/verify_site.py`, `.github/workflows/canonical-site.yml` |
+
+### Log
+
+- 2026-11-05 — Claimed N1–N5. No other session is active in this checkout; no `session-<id>/<task>` branches exist on the remote beyond merged Arena branches. Scope deliberately excludes every peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`): those are linked, never edited. The only shared files this session changes are the root landing page `index.html` and append-only `README.md`/`COORDINATION.md` entries, which is the final-integration scope defined in the board rules.
