@@ -76,12 +76,12 @@ class P(html.parser.HTMLParser):
         a = dict(attrs)
         if tag == "a" and "href" in a:
             self.links.append(a["href"])
-        if tag in ("script", "link") and a.get("src"):
+            if self.cur_row is not None:
+                self.cur_row.append(a["href"])
+        if tag == "script" and a.get("src"):
             self.links.append(a["src"])
         if tag == "link" and a.get("href"):
             self.links.append(a["href"])
-            if self.cur_row is not None:
-                self.cur_row.append(a["href"])
         if "id" in a:
             self.ids.add(a["id"])
         if tag == "tbody":

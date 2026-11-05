@@ -764,12 +764,61 @@ Context found at claim time: `origin/main` = `a363c75356658db670445bb42541d3c5d3
 
 | # | Task | Status | Owner session | Files touched (exclusive scope) |
 |---|------|--------|---------------|-------------------------------|
-| N1 | Fresh official-source snapshot for 2026-11-05 (standings, team stats, results, player game logs) | in progress | arena-6c423a51-own4 | `verification/collect_2026-11-05.py`, `verification/data/*` |
-| N2 | Line-by-line reconciliation of the stored 2026-11-02 snapshot against live official pages, corroborated with official 11/03–11/04 results | unclaimed | arena-6c423a51-own4 | `verification/reconcile.py`, `verification/out/*` |
-| N3 | Canonical consolidated dashboard: one clean landing page + category subpages + Flagged for Review | unclaimed | arena-6c423a51-own4 | `index.html`, `verified/**`, `assets/canonical.css` |
-| N4 | Independent analysis: own-line origination, correlations, gates, luck-removal backtest on the fresh sample | unclaimed | arena-6c423a51-own4 | `verification/analysis.py`, `verification/out/*` |
-| N5 | Build/verify harness + CI workflow + link integrity; PR, merge, Pages deploy confirmation | unclaimed | arena-6c423a51-own4 | `verification/verify_site.py`, `.github/workflows/canonical-site.yml` |
+| N1 | Fresh official-source snapshot for 2026-11-05 (standings, team stats, results, player game logs) | done | arena-6c423a51-own4 | `verification/collect_2026-11-05.py`, `verification/data/*` |
+| N2 | Line-by-line reconciliation of the stored 2026-11-02 snapshot against live official pages, corroborated with official 11/02–11/04 results | done | arena-6c423a51-own4 | `verification/reconcile.py`, `verification/out/*` |
+| N3 | Canonical consolidated dashboard: one clean landing page + category subpages + Flagged for Review | done | arena-6c423a51-own4 | `index.html`, `verified/**`, `assets/canonical.css`, `assets/canonical.js` |
+| N4 | Independent analysis: own-line origination, correlations, gates, luck-removal backtest on the fresh sample | done | arena-6c423a51-own4 | `verification/analysis.py`, `verification/out/*` |
+| N5 | Build/verify harness + CI workflow + link integrity; PR, merge, Pages deploy confirmation | in progress (merge/deploy record pending) | arena-6c423a51-own4 | `verification/verify_site.py`, `.github/workflows/canonical-site.yml` |
 
 ### Log
 
 - 2026-11-05 — Claimed N1–N5. No other session is active in this checkout; no `session-<id>/<task>` branches exist on the remote beyond merged Arena branches. Scope deliberately excludes every peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`): those are linked, never edited. The only shared files this session changes are the root landing page `index.html` and append-only `README.md`/`COORDINATION.md` entries, which is the final-integration scope defined in the board rules.
+
+### N1–N4 completion record (2026-11-05)
+
+**Sources read this session** (full scope in `verification/data/sources.json`): nba.com/standings ·
+nba.com/stats/teams/traditional · nba.com/games?date=2026-11-02 · nba.com/games?date=2026-11-04 ·
+nba.com/games?date=2026-11-05 · nba.com/games?date=2026-10-20 (October calendar) · nba.com/stats/help/glossary ·
+nba.com/stats/help/faq · official.nba.com/nba-injury-report-2026-27-season · api.github.com Pages endpoint ·
+ncpgambling.org. The NBA Stats FAQ download restriction was respected: values were read from the public pages and
+transcribed with their URLs; no scraping, API extraction or bulk copy.
+
+**Verification performed.** `verification/reconcile.py` runs 13 mechanical checks: 10 pass, 0 fail, 3 explicit
+notes (C10 published `+/-` sums to −5.3 instead of 0; C12 the 56 inherited rows were not individually re-fetched;
+C13 the official games page renders an odds toggle but exposed no price values). Headline checks: the standings
+and teams-traditional pages agree on W-L for all 30 teams; league wins equal league losses (121 = 121); every
+sampled date holds exactly the official calendar count; and each team's inherited 2026-11-02 record plus its
+results in the 29 freshly verified games equals its live 2026-11-05 record for **30 of 30 teams**. Published sample
+= 85 of 121 games (70.2%); the 36 games on 2026-10-20/22/24/25/26/27/29 are absent and used nowhere.
+
+**Analysis performed.** Shrunk offense/defense ratings from official finals only (k = 8, home edge k = 20, both
+pre-registered in `verification/data/gates.json` before the run); originated fair totals/spreads/win probabilities
+for the two 11/05 games; 10 team correlations with Fisher CIs and BH-FDR; 4 game-level dependence measures; a
+strict walk-forward backtest (35 graded games); exact binomial tests, 10,000-resample bootstrap, 10,000-shuffle
+permutation test, three-block stability and a power analysis.
+
+**Findings.** Winner accuracy 0.5714 (20/35) vs 0.6000 always-pick-home, one-sided p = 0.7003; bootstrap interval
+[0.4000, 0.7429]. Totals MAE 15.123 vs 15.859 naive baseline, permutation p = 0.0261 — nominal only, fails the
+300-game floor and fails BH at q = 0.05 with m = 2. 5 of 10 team correlations survive FDR. Gates 4 pass / 5 fail /
+1 blocked. **0 of 8 strategies qualify; 0 rewards awarded.** ~620 graded games would be needed to detect a real
+55% edge at 80% power.
+
+**Irregularities flagged (13, non-blocking, published on `/verified/flagged.html` with official and repository
+links):** stale 2026-11-02 snapshot superseded; 70.2% coverage; `+/-` sum −5.3; no official price (gate G7 blocked);
+NBA Stats FAQ download restriction; no player game logs (prop variance and prop-pair correlation blank, S6/S7
+blocked); 56 inherited rows not re-fetched; nominal totals result fails FDR; availability not transcribed;
+third-party ESPN/mirror data elsewhere in the repo excluded; duplicate overlapping dashboards retained; home edge
+unstable; Pages deploys through the legacy configuration.
+
+**Scope discipline.** New files only under `verification/` and `verified/`, plus `assets/canonical.css`,
+`assets/canonical.js`, the workflow, and the root `index.html` (final-integration scope). Append-only edits to
+`README.md`, `EXECUTIVE_SUMMARY.md` and this board. The previous root dashboard was preserved at
+`pages/legacy-root-dashboard.html`. `engine/build.py` received one additive step (call `verification/build.py`
+last) so the legacy pipeline cannot regress the root page; the legacy generator's own `assets/table.js` was
+restored byte-for-byte after a collision with this session's script, which now lives in `assets/canonical.js`.
+No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was edited or deleted.
+
+**Site verification.** `verification/verify_site.py`: 14 pages, 344 data-table rows, every row carrying an
+official or repository source link, every local link and anchor resolving, navigation and helpline footer present
+on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
+committing) and is enforced by `.github/workflows/canonical-site.yml`.

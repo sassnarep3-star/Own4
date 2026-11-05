@@ -1,0 +1,72 @@
+name: Validate canonical NBA dashboard
+
+# Rebuilds the 2026-11-05 verified snapshot, the model and the published site from
+# checked-in code, then enforces the publication rules:
+#   * every data-table row must carry an official / repository source link;
+#   * every local link must resolve (anchors included);
+#   * every page must keep its navigation and responsible-gambling footer;
+#   * the rebuild must be byte-identical, so no published number can drift from its data.
+# It does not deploy: GitHub Pages serves this repository through the existing legacy
+# main//root configuration. This workflow is a gate, not a publisher.
+
+on:
+  push:
+    paths:
+      - 'verification/**'
+      - 'verified/**'
+      - 'index.html'
+      - 'assets/canonical.css'
+      - 'assets/canonical.js'
+      - '.github/workflows/canonical-site.yml'
+  pull_request:
+    paths:
+      - 'verification/**'
+      - 'verified/**'
+      - 'index.html'
+      - 'assets/canonical.css'
+      - 'assets/canonical.js'
+      - '.github/workflows/canonical-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild snapshot, checks, model and site
+        run: |
+          python3 verification/collect_2026-11-05.py
+          python3 verification/reconcile.py
+          python3 verification/analysis.py
+          python3 verification/build.py
+
+      - name: Verify every table row and every local link
+        run: python3 verification/verify_site.py
+
+      - name: Confirm no reconciliation check fails
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          r = json.load(open('verification/out/reconciliation.json'))
+          s = r['summary']
+          print("pass=%(pass)d fail=%(fail)d note=%(note)d coverage=%(coverage_pct).1f%%" % s)
+          sys.exit(1 if s['fail'] else 0)
+          PY
+
+      - name: Confirm the published output is byte-identical
+        run: |
+          git diff --stat -- verification/data verification/out verified index.html
+          git diff --exit-code -- verification/data verification/out verified index.html
+
+      - name: Check the dashboard script parses
+        run: node --check assets/canonical.js
