@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Originated lines · Own4</title>
+<meta name="description" content="Originated NBA fair totals, spreads and win probabilities for 2026-11-05, plus parlay dependence and prop reference lines.">
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NBA line origination</span></a>
+  <div class="tag">Verified snapshot 2026-11-05 · official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../verified/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-05</div><a class="nav" href="../verified/standings.html">Standings</a><a class="nav" href="../verified/team-stats.html">Team stats</a><a class="nav" href="../verified/games.html">Games &amp; scores</a><div class="grp">Originated lines</div><a class="nav active" href="../verified/own-lines.html">Singles</a><a class="nav active" href="../verified/own-lines.html#parlays">Parlays &amp; dependence</a><a class="nav active" href="../verified/own-lines.html#props">Player props</a><div class="grp">Strategy research</div><a class="nav" href="../verified/strategies.html">Strategy catalog</a><a class="nav" href="../verified/validation.html">Validation gates</a><a class="nav" href="../verified/correlations.html">Correlations</a><a class="nav" href="../verified/backtest.html">Backtest &amp; luck</a><div class="grp">Competition</div><a class="nav" href="../verified/leaderboard.html">Leaderboard &amp; rewards</a><div class="grp">Governance</div><a class="nav" href="../verified/sources.html">Source register</a><a class="nav" href="../verified/audit.html">Repo audit</a><a class="nav" href="../verified/flagged.html">⚑ Flagged for review</a><div class="grp">Retained workspaces</div><a class="nav" href="../pages/legacy-root-dashboard.html">Previous root dashboard</a><a class="nav" href="../docs/index.html">NBA Signal Lab</a><a class="nav" href="../lab/index.html">Data Lab</a><a class="nav" href="../lines-lab/index.html">NBA Lines Lab</a><a class="nav" href="../nba-evidence/site/index.html">NBA Evidence</a></nav>
+  <a class="flag" href="../verified/flagged.html">⚑ 13 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Originated lines / Singles</div>
+
+<h1 id="singles">Originated lines — singles, parlays and props</h1>
+<p class="lede">Own4's own numbers for the two games scheduled on 2026-11-05. The model turns official final scores
+into shrunk offense and defense ratings, then produces a fair total, a fair spread and a win probability.
+No bookmaker price is used, because no official NBA source publishes one.</p>
+
+<div class="panel warn"><strong>Availability-blind and price-blind.</strong> These are team-strength lines. They do
+not know who is injured (the official injury report was not transcribed, flag F-INJURY) and they are not compared
+with any market, so no edge, stake or expected return is claimed. Every price column is blank by design.</div>
+
+<h2>Single bets — one market, one game</h2>
+<div class="tw"><table><caption>Originated lines for 2026-11-05 · 2 games</caption><thead><tr><th scope="col">Game</th><th scope="col" class="num">Fair away pts</th><th scope="col" class="num">Fair home pts</th><th scope="col" class="num">Originated margin (home)</th><th scope="col">Fair spread</th><th scope="col" class="num">Fair total</th><th scope="col" class="num">Home win prob.</th><th scope="col" class="num">Break-even decimal odds (derived)</th><th scope="col">Market price / edge</th><th scope="col">Official source</th></tr></thead><tbody><tr><td><strong>Orlando Magic @ Phoenix Suns</strong><br><span class='small muted'>ORL · tip 9:00 PM ET</span></td><td class="num">112.3</td><td class="num">113.6</td><td class="num">+1.3</td><td><strong>PHX −1.5</strong></td><td class="num"><strong>226.0</strong></td><td class="num">53.6%</td><td class="num">1.87</td><td><span class="blank">blank — unverified</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Slate ↗</a> <a href="https://www.nba.com/game/orl-vs-phx-0022600187" target="_blank" rel="noopener">Game ↗</a></td></tr><tr><td><strong>Miami Heat @ Golden State Warriors</strong><br><span class='small muted'>MIA · tip 10:00 PM ET</span></td><td class="num">113.6</td><td class="num">116.4</td><td class="num">+2.9</td><td><strong>GSW −3.0</strong></td><td class="num"><strong>230.0</strong></td><td class="num">58.1%</td><td class="num">1.72</td><td><span class="blank">blank — unverified</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Slate ↗</a> <a href="https://www.nba.com/game/mia-vs-gsw-0022600188" target="_blank" rel="noopener">Game ↗</a></td></tr></tbody></table></div>
+<p class="note">"Fair line" is the negative of the originated home margin rounded to the nearest half point;
+"fair total" is the originated total rounded to the nearest half point. Win probability uses the residual standard
+deviation of the walk-forward margin model (σ = 13.98) applied to the originated margin. The rating table
+below shows the inputs: shrunk points scored and allowed per game, where the shrinkage constant k = 8 was
+pre-registered before the run.</p>
+
+<h3>Model inputs — ten strongest ratings</h3>
+<div class="tw"><table><caption>Top ten ratings after empirical-Bayes shrinkage</caption><thead><tr><th scope="col">Team</th><th scope="col" class="num">Games in sample</th><th scope="col" class="num">Points scored (shrunk)</th><th scope="col" class="num">Points allowed (shrunk)</th><th scope="col" class="num">Net</th><th scope="col">Official source</th></tr></thead><tbody><tr><td><strong>POR</strong> Portland Trail Blazers</td><td class="num">5</td><td class="num">116.6</td><td class="num">109.5</td><td class="num">+7.1</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>MIN</strong> Minnesota Timberwolves</td><td class="num">7</td><td class="num">115.2</td><td class="num">109.9</td><td class="num">+5.3</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>DET</strong> Detroit Pistons</td><td class="num">5</td><td class="num">112.8</td><td class="num">107.6</td><td class="num">+5.2</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>HOU</strong> Houston Rockets</td><td class="num">7</td><td class="num">114.7</td><td class="num">109.7</td><td class="num">+5.1</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>LAL</strong> Los Angeles Lakers</td><td class="num">7</td><td class="num">115.7</td><td class="num">111.1</td><td class="num">+4.6</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>TOR</strong> Toronto Raptors</td><td class="num">7</td><td class="num">116.7</td><td class="num">112.8</td><td class="num">+3.9</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>MEM</strong> Memphis Grizzlies</td><td class="num">5</td><td class="num">116.0</td><td class="num">112.2</td><td class="num">+3.8</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>NYK</strong> New York Knicks</td><td class="num">5</td><td class="num">112.9</td><td class="num">109.9</td><td class="num">+3.1</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>PHI</strong> Philadelphia 76ers</td><td class="num">5</td><td class="num">112.3</td><td class="num">109.2</td><td class="num">+3.1</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr><tr><td><strong>ATL</strong> Atlanta Hawks</td><td class="num">6</td><td class="num">114.7</td><td class="num">111.9</td><td class="num">+2.8</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a></td></tr></tbody></table></div>
+
+<h2 id="parlays">Parlays — why the legs cannot be multiplied</h2>
+<p>Inside a single game the legs are not independent. Two measurable dependencies matter for a winner-plus-total
+parlay, and both are reported with a confidence interval on the <a href="correlations.html">Correlations</a> page.
+On the graded sample the observed joint hit rate of the originated winner and the originated over was
+<strong>0.2571</strong> against an independence product of <strong>0.2939</strong> — a gap of
+<strong>-0.0367</strong> on 35 games. The gap is descriptive, not significant, and it is the reason gate G6
+forbids independence pricing.</p>
+<div class="tw"><table><caption>Measured dependence for a same-game parlay · 35 graded games</caption><thead><tr><th scope="col">Parlay structure</th><th scope="col" class="num">Leg 1 prob.</th><th scope="col" class="num">Leg 2 prob.</th><th scope="col" class="num">Independence product</th><th scope="col" class="num">Observed joint</th><th scope="col" class="num">Gap</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Originated winner + over the originated total (same game)</td><td class="num">57.1%</td><td class="num">51.4%</td><td class="num">29.4%</td><td class="num">25.7%</td><td class="num">-0.0367</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Analysis ↗</a></td></tr></tbody></table></div>
+
+<h2 id="props">Player props — reference points only</h2>
+<p>Official season averages exist for the leading player of each team on the slate. Per-game distributions do not:
+no official game logs are available under the official-source rule, so variance, hit rate around a line and
+teammate-to-teammate correlation cannot be measured. Rather than invent them, the probability and edge columns are
+blank and strategies S6 and S7 are blocked (flag F-PROPS).</p>
+<div class="tw"><table><caption>Player-prop reference points for 2026-11-05 · 4 rows</caption><thead><tr><th scope="col">Player</th><th scope="col">Team</th><th scope="col">Market</th><th scope="col" class="num">Reference line (season avg)</th><th scope="col" class="num">RPG</th><th scope="col" class="num">APG</th><th scope="col">Over probability</th><th scope="col">Edge</th><th scope="col">Status</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>Franz Wagner</td><td>ORL Orlando Magic</td><td>Points</td><td class="num">20.3</td><td class="num">6.1</td><td class="num">7.6</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="badge blocked">reference only</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Season leaders ↗</a></td></tr><tr><td>Devin Booker</td><td>PHX Phoenix Suns</td><td>Points</td><td class="num">24.7</td><td class="num">3.2</td><td class="num">4.7</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="badge blocked">reference only</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Season leaders ↗</a></td></tr><tr><td>Giannis Antetokounmpo</td><td>MIA Miami Heat</td><td>Points</td><td class="num">28.3</td><td class="num">12.5</td><td class="num">5.8</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="badge blocked">reference only</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Season leaders ↗</a></td></tr><tr><td>Stephen Curry</td><td>GSW Golden State Warriors</td><td>Points</td><td class="num">30.0</td><td class="num">4.2</td><td class="num">4.5</td><td><span class="blank">blank — unverified</span></td><td><span class="blank">blank — unverified</span></td><td><span class="badge blocked">reference only</span></td><td><a href="https://www.nba.com/games?date=2026-11-05" target="_blank" rel="noopener">Season leaders ↗</a></td></tr></tbody></table></div>
+<p class="note">A "reference line" is the player's official season average, which is a description of the past,
+not a forecast. No over/under probability is published for any player.</p>
+
+<footer>
+<p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
+Snapshot <strong>2026-11-05</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../verified/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

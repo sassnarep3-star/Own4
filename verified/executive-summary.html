@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · Own4</title>
+<meta name="description" content="Executive summary of the Own4 NBA line-origination research, snapshot 2026-11-05.">
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NBA line origination</span></a>
+  <div class="tag">Verified snapshot 2026-11-05 · official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav active" href="../verified/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-05</div><a class="nav" href="../verified/standings.html">Standings</a><a class="nav" href="../verified/team-stats.html">Team stats</a><a class="nav" href="../verified/games.html">Games &amp; scores</a><div class="grp">Originated lines</div><a class="nav" href="../verified/own-lines.html">Singles</a><a class="nav" href="../verified/own-lines.html#parlays">Parlays &amp; dependence</a><a class="nav" href="../verified/own-lines.html#props">Player props</a><div class="grp">Strategy research</div><a class="nav" href="../verified/strategies.html">Strategy catalog</a><a class="nav" href="../verified/validation.html">Validation gates</a><a class="nav" href="../verified/correlations.html">Correlations</a><a class="nav" href="../verified/backtest.html">Backtest &amp; luck</a><div class="grp">Competition</div><a class="nav" href="../verified/leaderboard.html">Leaderboard &amp; rewards</a><div class="grp">Governance</div><a class="nav" href="../verified/sources.html">Source register</a><a class="nav" href="../verified/audit.html">Repo audit</a><a class="nav" href="../verified/flagged.html">⚑ Flagged for review</a><div class="grp">Retained workspaces</div><a class="nav" href="../pages/legacy-root-dashboard.html">Previous root dashboard</a><a class="nav" href="../docs/index.html">NBA Signal Lab</a><a class="nav" href="../lab/index.html">Data Lab</a><a class="nav" href="../lines-lab/index.html">NBA Lines Lab</a><a class="nav" href="../nba-evidence/site/index.html">NBA Evidence</a></nav>
+  <a class="flag" href="../verified/flagged.html">⚑ 13 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Overview / Executive summary</div>
+
+<h1>Executive summary</h1>
+<p class="lede">Own4 builds its own NBA numbers from official league data, tests whether any of them carry signal
+after luck is removed, and publishes the scoreboard even when the answer is no. Snapshot <strong>2026-11-05</strong>.</p>
+
+<h2>1. What this release is</h2>
+<p>A verified data snapshot, a transparent line-origination model, a pre-registered gate system, and a competition
+design that pays nothing until a strategy clears every gate. It is research infrastructure with an honest scoreboard,
+not a tip sheet.</p>
+
+<h2>2. Data</h2>
+<p>30 standings rows, 30 team-stat rows and 2 scheduled games were read from nba.com on
+2026-11-05. 29 final scores were read from the official games pages for 2026-11-02 and 2026-11-04.
+56 further final scores were already in the repository from 2026-11-02 and were corroborated rather than
+re-fetched: each sampled date holds exactly the number of games the official calendar lists, and all 30 teams'
+records advance exactly by their results in the newly verified games. The sample covers <strong>70.2%</strong>
+of the season to date (85 of 121 games); seven October dates, 36 games, were never captured and are
+excluded from every calculation.</p>
+
+<h2>3. Originated lines</h2>
+<p>The model converts official final scores into shrunk per-team offense and defense ratings and produces a fair
+total, a fair spread and a win probability. For 2026-11-05 it originates
+<strong>ORL at PHX</strong>: fair total <strong>226.0</strong>, fair spread PHX −1.5. And
+<strong>MIA at GSW</strong>: fair total <strong>230.0</strong>, fair spread GSW −3.0. Every price field is blank:
+no official NBA source publishes a price, and the official games page's odds toggle exposed no values to this
+session. No expected value, stake or return is claimed.</p>
+
+<h2>4. Signal research</h2>
+<p>Ten team-level correlations were measured with confidence intervals and FDR control; <strong>5 survive</strong>
+at q = 0.05 — point differential (r = 0.921), points per game (r = 0.540), field-goal percentage
+(r = 0.506), three-point percentage (r = 0.448) and turnovers (r = -0.524, negative). Same-game pace
+dependence between the two teams' points is small (r = 0.125 on 85 games), which is itself a useful
+negative result for parlay pricing. Player-to-player prop correlations cannot be measured at all without per-game
+logs, so they are blank rather than assumed.</p>
+
+<h2>5. Luck removal</h2>
+<p>The strict walk-forward backtest grades 35 games. Winner accuracy is <strong>0.5714</strong> against a
+free home-team baseline of <strong>0.6000</strong> — the model loses, with a one-sided p of 0.7003. The
+bootstrap interval on accuracy runs [0.4000, 0.7429] and establishes nothing either way. The totals model
+does beat its naive baseline by 0.736 points of MAE (permutation p = 0.0261), but fails the 300-game floor
+and fails Benjamini-Hochberg once both strategy tests are counted. A real 55% edge would need about
+<strong>620 graded games</strong> to be detected with 80% power.</p>
+
+<h2>6. Gates and competition</h2>
+<p>Of ten pre-registered gates, 4 pass, 5 fail and 1 is blocked for lack of a price.
+<strong>Zero of eight strategies qualify and zero rewards are awarded.</strong> The leaderboard is published empty on
+purpose: partial credit is how variance gets paid.</p>
+
+<h2>7. What is not known</h2>
+<p>Prices, player game logs, player availability and 36 games of this season are missing. The published +/-
+column does not sum to zero. The inherited game rows were not individually re-fetched. These are listed on the
+<a href="flagged.html">Flagged for review</a> page with the page and file behind each one.</p>
+
+<h2>8. What would change the conclusion</h2>
+<p>In order: an official or licensed price history so that expected value is computable; a complete season of
+official finals to clear the sample floor; official per-game player logs to make prop work possible at all; and
+availability data so team lines stop being strength-only. Until then the correct output of this system is a verified
+dataset and a scoreboard of zeroes.</p>
+
+<h2>Reference</h2>
+<div class="tw"><table><caption>References</caption><thead><tr><th scope="col">Reference</th><th scope="col">Used for</th><th scope="col">Link</th></tr></thead><tbody><tr><td>NBA.com standings</td><td>30 standings rows</td><td><a href="https://www.nba.com/standings" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NBA.com Teams — Traditional</td><td>30 team-stat rows</td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NBA.com Games &amp; Scores</td><td>All final scores and the 11/05 slate</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NBA Stats glossary</td><td>Column definitions</td><td><a href="https://www.nba.com/stats/help/glossary" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NBA Stats FAQ</td><td>Usage restriction</td><td><a href="https://www.nba.com/stats/help/faq" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NBA injury report 2026-27</td><td>Required availability check (not transcribed)</td><td><a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener">Open ↗</a></td></tr><tr><td>NCPG helpline</td><td>Responsible gambling footer</td><td><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">Open ↗</a></td></tr></tbody></table></div>
+
+<footer>
+<p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
+Snapshot <strong>2026-11-05</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../verified/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

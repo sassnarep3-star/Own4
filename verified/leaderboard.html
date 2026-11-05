@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard &amp; rewards · Own4</title>
+<meta name="description" content="NBA strategy competition leaderboard with zero qualified strategies and zero rewards awarded.">
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NBA line origination</span></a>
+  <div class="tag">Verified snapshot 2026-11-05 · official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../verified/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-05</div><a class="nav" href="../verified/standings.html">Standings</a><a class="nav" href="../verified/team-stats.html">Team stats</a><a class="nav" href="../verified/games.html">Games &amp; scores</a><div class="grp">Originated lines</div><a class="nav" href="../verified/own-lines.html">Singles</a><a class="nav" href="../verified/own-lines.html#parlays">Parlays &amp; dependence</a><a class="nav" href="../verified/own-lines.html#props">Player props</a><div class="grp">Strategy research</div><a class="nav" href="../verified/strategies.html">Strategy catalog</a><a class="nav" href="../verified/validation.html">Validation gates</a><a class="nav" href="../verified/correlations.html">Correlations</a><a class="nav" href="../verified/backtest.html">Backtest &amp; luck</a><div class="grp">Competition</div><a class="nav active" href="../verified/leaderboard.html">Leaderboard &amp; rewards</a><div class="grp">Governance</div><a class="nav" href="../verified/sources.html">Source register</a><a class="nav" href="../verified/audit.html">Repo audit</a><a class="nav" href="../verified/flagged.html">⚑ Flagged for review</a><div class="grp">Retained workspaces</div><a class="nav" href="../pages/legacy-root-dashboard.html">Previous root dashboard</a><a class="nav" href="../docs/index.html">NBA Signal Lab</a><a class="nav" href="../lab/index.html">Data Lab</a><a class="nav" href="../lines-lab/index.html">NBA Lines Lab</a><a class="nav" href="../nba-evidence/site/index.html">NBA Evidence</a></nav>
+  <a class="flag" href="../verified/flagged.html">⚑ 13 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Competition / Leaderboard</div>
+
+<h1>Leaderboard and rewards</h1>
+<p class="lede">The competition is designed to reward demonstrated, replicated skill — not a hot week. A strategy
+earns a place only by clearing all ten gates; until then its reward is exactly zero, however good its record looks.</p>
+
+<div class="panel"><h3>Scoring rules</h3><p>Eligibility: all ten gates must pass on the same locked snapshot.
+Ranking among eligible strategies is by <strong>out-of-sample Brier score</strong> for probability markets and by
+<strong>MAE</strong> for line markets, with the sample size and the FDR-adjusted p-value published next to each rank.
+A strategy that fails a gate scores nothing — there is no partial credit for a good-looking record, because partial
+credit is how luck gets paid.</p></div>
+
+<div class="panel bad"><h3>Standings: no qualified entries</h3><p>Zero of eight strategies qualify, so the reward
+pool is unpaid. This is the correct output of the design, not a failure of it: the sample is 35 graded games against
+a 300-game floor, and the one nominal signal does not survive multiple-testing control.</p></div>
+<div class="tw"><table><caption>Leaderboard · snapshot 2026-11-05 · rewards awarded: 0</caption><thead><tr><th scope="col">ID</th><th scope="col">Strategy</th><th scope="col">Family</th><th scope="col">Gates passed</th><th scope="col">Status</th><th scope="col">Reward</th><th scope="col">Why</th><th scope="col">Source</th></tr></thead><tbody><tr><td>S1</td><td>Single — game winner (moneyline)</td><td>single</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Fails the sample floor and the price gate like every other strategy in this run.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S2</td><td>Single — originated spread</td><td>single</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Fails the sample floor and the price gate like every other strategy in this run.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S3</td><td>Single — originated game total</td><td>single</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Fails the sample floor and the price gate like every other strategy in this run.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S4</td><td>Same-game 2-leg parlay — winner + total</td><td>parlay</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Fails the sample floor and the price gate like every other strategy in this run.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S5</td><td>Cross-game 2-leg parlay — two winners</td><td>parlay</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Fails the sample floor and the price gate like every other strategy in this run.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S6</td><td>Player prop single — points</td><td>player-prop</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>No official player game logs are available to this session, so no per-game distribution, variance or pair correlation can be measured.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S7</td><td>Player prop combo — two teammates</td><td>player-prop</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>No official player game logs are available to this session, so no per-game distribution, variance or pair correlation can be measured.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr><tr><td>S8</td><td>Same-game parlay — 3 legs with alternate lines</td><td>parlay</td><td>4 / 10</td><td><span class="badge fail">no qualification</span></td><td>0</td><td>Alternate-line pricing requires a full joint distribution of the game outcome; not identifiable from 85 official finals.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json" target="_blank" rel="noopener">Scoring input ↗</a></td></tr></tbody></table></div>
+
+<h2>What a qualifying submission would look like</h2>
+<div class="panel"><p>It would need a locked, timestamped snapshot; at least 300 graded games; a price from an
+official or licensed source so expected value is computable; a measured dependence adjustment for every combination;
+FDR survival across every test in the run; and the same sign of edge in three separate time blocks. None of those
+conditions is met by anything published so far in this repository.</p></div>
+
+<footer>
+<p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
+Snapshot <strong>2026-11-05</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../verified/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

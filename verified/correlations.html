@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · Own4</title>
+<meta name="description" content="Measured NBA correlations with confidence intervals and FDR control, including same-game parlay dependence.">
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NBA line origination</span></a>
+  <div class="tag">Verified snapshot 2026-11-05 · official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../verified/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-05</div><a class="nav" href="../verified/standings.html">Standings</a><a class="nav" href="../verified/team-stats.html">Team stats</a><a class="nav" href="../verified/games.html">Games &amp; scores</a><div class="grp">Originated lines</div><a class="nav" href="../verified/own-lines.html">Singles</a><a class="nav" href="../verified/own-lines.html#parlays">Parlays &amp; dependence</a><a class="nav" href="../verified/own-lines.html#props">Player props</a><div class="grp">Strategy research</div><a class="nav" href="../verified/strategies.html">Strategy catalog</a><a class="nav" href="../verified/validation.html">Validation gates</a><a class="nav active" href="../verified/correlations.html">Correlations</a><a class="nav" href="../verified/backtest.html">Backtest &amp; luck</a><div class="grp">Competition</div><a class="nav" href="../verified/leaderboard.html">Leaderboard &amp; rewards</a><div class="grp">Governance</div><a class="nav" href="../verified/sources.html">Source register</a><a class="nav" href="../verified/audit.html">Repo audit</a><a class="nav" href="../verified/flagged.html">⚑ Flagged for review</a><div class="grp">Retained workspaces</div><a class="nav" href="../pages/legacy-root-dashboard.html">Previous root dashboard</a><a class="nav" href="../docs/index.html">NBA Signal Lab</a><a class="nav" href="../lab/index.html">Data Lab</a><a class="nav" href="../lines-lab/index.html">NBA Lines Lab</a><a class="nav" href="../nba-evidence/site/index.html">NBA Evidence</a></nav>
+  <a class="flag" href="../verified/flagged.html">⚑ 13 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Strategy research / Correlations</div>
+
+<h1>Correlations</h1>
+<p class="lede">Every correlation on this page is computed from the verified snapshot, carries a 95% confidence
+interval from the Fisher z transform, and is tested against a null of zero. The team table applies
+Benjamini-Hochberg control because ten features were tested at once.</p>
+
+<h2>Team-level: what tracks winning</h2>
+<div class="tw"><table><caption>Team-level correlation with win percentage · n = 30 · BH at q = 0.05</caption><thead><tr><th scope="col">Feature (from official team table)</th><th scope="col" class="num">n</th><th scope="col" class="num">r vs win%</th><th scope="col">95% CI</th><th scope="col" class="num">p</th><th scope="col">FDR</th><th scope="col">Official sources</th></tr></thead><tbody><tr><td>Point differential per game</td><td class="num">30</td><td class="num">0.9206</td><td>[0.8385, 0.9619]</td><td class="num">&lt;0.0001</td><td><span class="badge pass">survives FDR</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Points per game</td><td class="num">30</td><td class="num">0.5397</td><td>[0.2227, 0.7535]</td><td class="num">0.0017</td><td><span class="badge pass">survives FDR</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Field-goal %</td><td class="num">30</td><td class="num">0.5059</td><td>[0.1781, 0.7326]</td><td class="num">0.0038</td><td><span class="badge pass">survives FDR</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Three-point %</td><td class="num">30</td><td class="num">0.4479</td><td>[0.1045, 0.6959]</td><td class="num">0.0122</td><td><span class="badge pass">survives FDR</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Free-throw %</td><td class="num">30</td><td class="num">0.2039</td><td>[-0.1688, 0.5255]</td><td class="num">0.2826</td><td><span class="badge neutral">does not survive</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Rebounds per game</td><td class="num">30</td><td class="num">0.2506</td><td>[-0.1205, 0.5603]</td><td class="num">0.1833</td><td><span class="badge neutral">does not survive</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Assists per game</td><td class="num">30</td><td class="num">0.2337</td><td>[-0.1382, 0.5478]</td><td class="num">0.2160</td><td><span class="badge neutral">does not survive</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Turnovers per game</td><td class="num">30</td><td class="num">-0.5238</td><td>[-0.7437, -0.2016]</td><td class="num">0.0025</td><td><span class="badge pass">survives FDR</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Steals per game</td><td class="num">30</td><td class="num">0.2034</td><td>[-0.1693, 0.5252]</td><td class="num">0.2839</td><td><span class="badge neutral">does not survive</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr><tr><td>Blocks per game</td><td class="num">30</td><td class="num">0.2876</td><td>[-0.0811, 0.5871]</td><td class="num">0.1241</td><td><span class="badge neutral">does not survive</span></td><td><a href="https://www.nba.com/stats/teams/traditional" target="_blank" rel="noopener">Team table ↗</a> <a href="https://www.nba.com/standings" target="_blank" rel="noopener">Standings ↗</a></td></tr></tbody></table></div>
+<p class="note">n = 30 teams, so these are relationships between team season-to-date statistics, not betting signals.
+Point differential explains most of the variance in win percentage by construction. The interesting measurements are
+the ones that survive FDR but are not mechanical: three-point percentage (r = 0.448) and turnovers
+(r = -0.524, negative). Free-throw percentage, rebounds, assists, steals and blocks do not survive.</p>
+
+<h2>Game-level: dependence that a parlay must price</h2>
+<div class="tw"><table><caption>Game-level dependence in the verified sample</caption><thead><tr><th scope="col">Measured relationship</th><th scope="col" class="num">n</th><th scope="col" class="num">r</th><th scope="col">95% CI</th><th scope="col" class="num">p</th><th scope="col">What it means</th><th scope="col">Official source</th></tr></thead><tbody><tr><td>Home team points vs away team points in the same game</td><td class="num">85</td><td class="num">0.1249</td><td>[-0.0906, 0.3293]</td><td class="num">0.2555</td><td>Pace dependence: if a game is fast, both teams score more. This is the dependence that makes same-game total legs correlated.</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games ↗</a></td></tr><tr><td>Winning margin vs game total (graded sample)</td><td class="num">35</td><td class="num">0.0678</td><td>[-0.2715, 0.3922]</td><td class="num">0.7007</td><td>Dependence between a winner leg and a total leg inside one same-game parlay.</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">Games ↗</a></td></tr><tr><td>Originated margin vs actual margin (model discrimination)</td><td class="num">35</td><td class="num">0.2509</td><td>[-0.0899, 0.5391]</td><td class="num">0.1470</td><td>If this is near zero the originated spread carries no information.</td><td><a href="https://www.nba.com/games?date=2026-11-04" target="_blank" rel="noopener">Games ↗</a></td></tr><tr><td>Originated total vs actual total (model discrimination)</td><td class="num">35</td><td class="num">0.2498</td><td>[-0.0910, 0.5382]</td><td class="num">0.1489</td><td>Same test for the totals market.</td><td><a href="https://www.nba.com/games?date=2026-11-02" target="_blank" rel="noopener">Games ↗</a></td></tr></tbody></table></div>
+<p class="note">The first row is the pace dependence that makes two teams' points move together; here it is small
+(r = 0.125) on 85 games, which is itself a finding: on this sample, a game's two totals are close to
+independent. The second row is the dependence between the two legs of a winner-plus-total same-game parlay.</p>
+
+<h2>Parlay dependence, priced</h2>
+<div class="panel"><p>Leg 1: originated winner (hit rate <strong>0.5714</strong>). Leg 2: over the originated total
+(hit rate <strong>0.5143</strong>). Multiplying gives <strong>0.2939</strong>; the observed joint hit rate is
+<strong>0.2571</strong> over 35 graded games, a gap of <strong>-0.0367</strong>. With n = 35 the
+interval around that gap is wide, so the number is published as a measured quantity with its uncertainty, not as a
+pricing rule. This is the reason gate G6 exists.</p></div>
+
+<h2>What cannot be measured, and is therefore blank</h2>
+<div class="panel bad"><p><strong>Teammate-to-teammate player correlations are blank.</strong> A prop combo's edge
+lives almost entirely in the correlation between the two players' outcomes (shared minutes, shared pace, shared
+garbage time). Measuring it needs per-game logs, which the official-source rule does not provide here. The
+corresponding strategies are blocked, not assumed independent — assuming independence would be the single easiest
+way to manufacture a fake edge on this page.</p></div>
+
+<footer>
+<p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
+Snapshot <strong>2026-11-05</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../verified/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>
