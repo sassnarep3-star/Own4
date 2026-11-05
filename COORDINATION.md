@@ -753,3 +753,24 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session arena/ecd80a99-own4 — Live verified NBA slate + out-of-sample test (claim)
+
+Session: `arena/ecd80a99-own4` · branch `arena/ecd80a99-own4` (platform-pinned; `session-<id>/<task>` branches not creatable — same logged deviation as prior sessions).
+Claimed: 2026-11-05 UTC.
+
+**Why a new namespace.** Prior sessions published at `/`, `pages/`, `docs/`, `lab/`, `lines-lab/`, `nfl*`, `nba-evidence/`. All are preserved untouched. This session writes only to a new directory `nba-live/` plus append-only shared files, so no scope overlaps.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| L1 | Fresh official 2026-27 collection: standings, team stats, 11-04 slate results, 11-05 slate, injury report — every row with exact NBA.com URL + fetch timestamp | in progress | arena/ecd80a99-own4 | `nba-live/data/**`, `nba-live/collect.py` |
+| L2 | Pre-registered own-line model + strict walk-forward / out-of-sample test on the 2026-11-04 slate (14 games, unseen by any prior session) | in progress | arena/ecd80a99-own4 | `nba-live/model/**`, `nba-live/data/own_lines_2026-11-05.csv` |
+| L3 | Correlation values + dependence-aware uncertainty + luck removal (permutation/placebo tests) | in progress | arena/ecd80a99-own4 | `nba-live/analysis/**` |
+| L4 | Strategy leaderboard for singles, parlays, player-prop combos with validation gates | in progress | arena/ecd80a99-own4 | `nba-live/strategies/**` |
+| L5 | Clean dashboard site: landing + category subpages, every row source-linked | in progress | arena/ecd80a99-own4 | `nba-live/site/**` |
+| L6 | Executive summary | in progress | arena/ecd80a99-own4 | `nba-live/EXECUTIVE_SUMMARY.md` |
+| L7 | Integration: link `nba-live/` from root nav, broken-link check, PR → merge → Pages confirmation | in progress | arena/ecd80a99-own4 | `README.md`, `COORDINATION.md` (append), root `index.html` (nav link only) |
+
+**Note on the pre-existing board rows marked `in progress`.** Rows in the sections above (e.g. task 7 of 689eb52e, task 14 of a4ec3896, T04 of 91dfd6a4, T12/T13 of fa175f65) belong to sessions that already merged their PRs (#4–#33) and whose work is live; they were never flipped to `done` in the table. This session does not edit or override them, and does not take over their namespaces. The only genuinely open PR from a prior session is #29 (documentation-only append to this file).
