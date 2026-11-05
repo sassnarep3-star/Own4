@@ -753,3 +753,61 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
+
+**Claimed:** 2026-11-05 (current date per system). Branch: `arena/a50ac3f8-own4` (fixed by environment).
+**Task claim (non-overlapping scope):**
+- T-A: Official-source verification (standings, team stats, injury policy, game scores) against nba.com / stats.nba.com / official.nba.com.
+- T-B: Site integrity check (all internal links resolve; pages build; no broken links).
+- T-C: Update flagged/unverified items with verified source links; leave unverified values blank.
+- T-D: Final PR to main → merge → confirm no broken site.
+- T-E: Record PR link, merge result, deploy confirmation in this file.
+
+**Files touched:** COORDINATION.md, EXECUTIVE_SUMMARY.md (add verification note), pages/flagged-for-review.html (add discrepancy notes), data/standings_2026-27.csv (discrepancy flag), index.html / site pages (only if broken links found — none found in site pages).
+
+**Verification performed (line by line, official sources):**
+- NBA standings: fetched https://www.nba.com/standings (2026-11-05). Official values at fetch time: PHI 8-1, DET 6-2, BOS 6-2, ATL 5-4, etc. The repo CSV (`data/standings_2026-27.csv`) records data from 2026-11-02 (before Nov 2 games) with PHI 6-1. This is NOT an error — it reflects the retrieval date (2026-11-02). It is flagged as a time-context discrepancy, not corrected, because the user's instruction is to verify line-by-line and flag irregularities, not silently overwrite historical snapshots.
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq — download restriction confirmed ("Our stats are not available for download..."). No automated scraping performed.
+- NBA Injury Report policy: https://official.nba.com/nba-injury-report-2026-27-season/ — 5 p.m. local day before; 1 p.m. second night of back-to-back; updated on game day. Confirmed.
+- NBA glossary: https://www.nba.com/stats/help/glossary — definitions verified.
+- Game scores sample: 56 games from official NBA.com date pages (2026-10-21 through 2026-11-01). Each row links to the source page. Conflicting score for CHI vs TOR (0022600088) flagged at I-09; both values (92 and 135/102) appear on official NBA.com pages; left flagged, not overwritten.
+- No betting lines, odds, or closing prices published by NBA.com; all market fields intentionally blank per design (I-12, I-13).
+- Strategy validation gates: `data/validation_gates.json` verified — all 12 gates documented with source links where official sources exist (G10 links to SRC-08 / injury policy; others are project-defined policy gates with no official NBA source for thresholds, so sources arrays are empty — correctly flagged).
+- Correlation values: computed from official inputs; no official NBA source publishes betting-correlation coefficients, so all market-correlation rows are blank + flagged (I-01, I-13, I-15).
+- Leaderboard/rewards: zero strategies validated; zero rewards awarded — confirmed from `official/results.json` and pages/flagged-for-review.html.
+
+**Irregularities / flagged items (non-blocking, published on site):**
+- I-01: Per-session branch naming — environment restricts to fixed branch; documented.
+- I-02: GitHub Pages legacy build — confirmed; site publishes via merge to main.
+- I-03: Injury URL redirect — 2025-26 URL redirects to 2026-27; policy wording verified.
+- I-04: Helpline — official NCPG page lists 1-800-MY-RESET; site corrected to use verified value.
+- I-05: Team stat URL — corrected to https://www.nba.com/stats/teams/traditional.
+- I-06: Player leader numbers in embedded image — left blank / unverified.
+- I-09: Conflicting CHI vs TOR score — flagged.
+- I-10: Third-party disagreement — noted.
+- I-11: Home/away designation — no official definition; left blank.
+- I-12: Sportsbook lines — intentionally blank (no official source).
+- I-13: Derived values — clearly labeled derived, not official.
+- I-14: NBA Cup games — 10 of 56 games noted.
+- I-15: Strategy rewards — zero validated (verified).
+- I-16: G League two-way terms — unverified (left blank).
+- I-17: 2025-26 steals leader — unverified.
+
+**Source links (verified today, 2026-11-05):**
+- NBA standings: https://www.nba.com/standings
+- NBA Stats FAQ: https://www.nba.com/stats/help/faq
+- NBA Stats glossary: https://www.nba.com/stats/help/glossary
+- NBA Injury Report (2026-27): https://official.nba.com/nba-injury-report-2026-27-season/
+- NCPG Helpline: https://www.ncpgambling.org/help-treatment
+- NBA Cup / schedule: https://www.nba.com/nba-cup/2026
+- G League two-way contracts: https://gleague.nba.com/nba-g-league-101-two-way-contracts
+- NBA games pages (date samples): https://www.nba.com/games?date=2026-11-02 etc.
+
+**No manual input from user required.** All verification performed by automated fetch, line-by-line transcription check, and comparison against official source pages. No unverified values filled in; blank cells remain blank.
+
+**Site integrity:** Internal link scan of all site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, `lines-lab/*.html`) shows zero broken links within the site structure (broken links only in raw fetched HTML files under `data/raw/`, which are external captures, not site content). The site builds statically; `.nojekyll` present; site accessible at root `/` of the repo.
+
+**Status:** Ready for final PR / merge / deploy confirmation.
