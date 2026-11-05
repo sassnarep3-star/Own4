@@ -1,0 +1,45 @@
+name: Fetch official NBA data (verification stage)
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/fe9506ab-own4]
+    paths:
+      - 'verification/scripts/fetch_official_data.py'
+      - '.github/workflows/verify-live.yml'
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/fe9506ab-own4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Fetch official NBA pages (verbatim, with provenance)
+        run: python verification/scripts/fetch_official_data.py
+      - name: Summarise
+        run: |
+          python - <<'PY'
+          import json
+          m = json.load(open("verification/raw/manifest.json"))
+          print("ok=%s failed=%s" % (m["ok"], m["failed"]))
+          for i in m["items"]:
+              if not i["http_status"]:
+                  print("  FAIL", i["url"], i.get("error"))
+          PY
+      - name: Commit raw responses + manifest
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add verification/raw || true
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "verification: fetch official NBA pages [skip ci]"
+            git push origin HEAD:arena/fe9506ab-own4
+          fi
