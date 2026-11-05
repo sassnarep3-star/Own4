@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Strategy catalog · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html" class="active">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Strategy catalog</h1>
+<p class="lede">Twelve pre-registered strategies across singles, parlays and player props, with their grading status and the exact reason each is or is not eligible.</p>
+<div class="callout warn"><strong>Twelve strategies, eight gradeable.</strong> The four prop strategies cannot be graded yet: grading requires settled outcomes at the originated line, and the logs needed for that are three days stale and partner-sourced. They are listed, specified and explicitly ungraded rather than quietly dropped.</div>
+<div class="filters" data-table-tools="t-strategies"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="ID">ID</option><option value="Family">Family</option><option value="Definition">Definition</option><option value="n">n</option><option value="Result">Result</option><option value="Status">Status</option><option value="Why not eligible">Why not eligible</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-strategies" data-sourced="1">
+<caption>The full catalog. Definitions were fixed before the backtest ran.</caption>
+<thead><tr><th class="">ID</th><th class="">Family</th><th class="">Definition</th><th class="num">n</th><th class="">Result</th><th class="">Status</th><th class="">Why not eligible</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">S01</td><td class="">Single</td><td class="">Moneyline from the rating model; probability from the normal margin model.</td><td class="num">96</td><td class="">skill +0.1685</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S02</td><td class="">Single</td><td class="">Point-estimate spread from the rating model; graded on absolute margin error.</td><td class="num">96</td><td class="">skill +0.1176</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300; CI lower bound -0.003 &lt;= 0; permutation p 0.400 &gt;= 0.01</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S03</td><td class="">Single</td><td class="">Additive team-totals model; graded on absolute total error.</td><td class="num">96</td><td class="">skill +0.0201</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300; CI lower bound -0.073 &lt;= 0; permutation p 0.653 &gt;= 0.01</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S04</td><td class="">Single</td><td class="">Rating model plus a 1.2-point penalty for a team on a back-to-back.</td><td class="num">96</td><td class="">skill +0.1728</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S05</td><td class="">Single</td><td class="">Rating model plus a mild overlay toward the last-10-game form.</td><td class="num">96</td><td class="">skill +0.1690</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S06</td><td class="">Parlay</td><td class="">Two legs in different games; joint price uses independence.</td><td class="num">95</td><td class="">skill -0.0241</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=95 &lt; 300; no permutation test</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S07</td><td class="">Parlay</td><td class="">Same game: home moneyline plus over the fair total, priced with measured dependence.</td><td class="num">96</td><td class="">skill +0.0839</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300; no permutation test</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S08</td><td class="">Parlay</td><td class="">Same game: home -3.5 plus under the fair total, priced with measured dependence.</td><td class="num">96</td><td class="">skill +0.0019</td><td class=""><span class="badge b-pass">pass</span> graded</td><td class="">n=96 &lt; 300; no permutation test</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S09</td><td class="">Prop</td><td class="">Points prop from the official season average with an empirical residual band.</td><td class="num"><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="badge b-needs-review">needs review</span></td><td class="">Not gradeable: no graded outcome history and no official price archive.</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S10</td><td class="">Prop</td><td class="">Points+rebounds+assists combo using the measured within-player correlations.</td><td class="num"><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="badge b-needs-review">needs review</span></td><td class="">Not gradeable: no graded outcome history and no official price archive.</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S11</td><td class="">Prop</td><td class="">Two teammates stacked, using the measured teammate correlation.</td><td class="num"><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="badge b-needs-review">needs review</span></td><td class="">Not gradeable: no graded outcome history and no official price archive.</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+<tr><td class="">S12</td><td class="">Prop</td><td class="">Prop re-anchored for opponent pace and defence. Not implemented: no official pace feed.</td><td class="num"><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="blank" title="Unverified or unavailable — see Flagged for review">—</span></td><td class=""><span class="badge b-info">not implemented</span></td><td class="">Not gradeable: no graded outcome history and no official price archive.</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived</a></td></td></tr>
+</tbody></table></div>
+<h2>Families and what distinguishes them</h2>
+<h3>Singles</h3>
+<p>S01–S05 all price off the same rating backbone but differ in the signal layered on top: none (S01, S02), an independent totals model (S03), rest (S04) or recent form (S05). Because they share a backbone, their results are correlated, which is why the leaderboard's separation between them is not treated as meaningful. The honest reading is that the backbone carries the signal and the overlays are indistinguishable on 96 games.</p>
+<h3>Parlays</h3>
+<p>S06–S08 exist to test a specific claim: that dependence matters. They are graded on joint-probability accuracy, not on a bet record, because a bet record would require market prices that do not exist here.</p>
+<h3>Player props</h3>
+<p>S09–S12 are the strategy class most people actually want. They need three things this repository does not have from an official source: per-player game logs at usable volume, minutes projections, and an official pace/defence table. Each is specified; each is blocked; all four are flagged.</p>
+<div class="callout "><strong>Why no strategy is called a winner.</strong> A positive skill score is not a validated strategy. The gate list requires sample size, a bootstrap interval excluding zero, a permutation p below 0.01, calibration within tolerance, multiple-testing control and a price archive. Three of those fail, so the correct verdict is 'promising backbone, unvalidated strategy'.</div>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

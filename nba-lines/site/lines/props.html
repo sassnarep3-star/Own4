@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Player props and prop combos · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html" class="active">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Player props and prop combos</h1>
+<p class="lede">Twelve originated prop lines anchored on official season averages, and the measured dependence that reprices every two-leg combo.</p>
+<div class="callout warn"><strong>The anchor is official; the volatility is not.</strong> Each player's mean is copied from the official game card. The probability around it uses a pooled within-player residual standard deviation from partner-sourced game logs, because the four players on tonight's slate have only 4-6 logged games each (flags F05, F06, F07).</div>
+<h2>Originated prop lines</h2>
+<p class="meta">Line = the official season average rounded to the nearest half point, which is how prop boards are priced. P(over) = 1 - Phi((line - mean)/sd) using the pooled residual sd for that stat.</p>
+<div class="filters" data-table-tools="t-props"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Player">Player</option><option value="Team">Team</option><option value="Stat">Stat</option><option value="Official average">Official average</option><option value="Originated line">Originated line</option><option value="P(over)">P(over)</option><option value="Residual sd">Residual sd</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-props" data-sourced="1">
+<caption>Twelve props, four players, three stats.</caption>
+<thead><tr><th class="">Player</th><th class="">Team</th><th class="">Stat</th><th class="num">Official average</th><th class="num">Originated line</th><th class="num">P(over)</th><th class="num">Residual sd</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">Franz Wagner</td><td class="">ORL</td><td class="">PTS</td><td class="num">20.3</td><td class="num">20.5</td><td class="num">48.4%</td><td class="num">5.06</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Franz Wagner</td><td class="">ORL</td><td class="">REB</td><td class="num">6.1</td><td class="num">6.0</td><td class="num">51.9%</td><td class="num">2.08</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Franz Wagner</td><td class="">ORL</td><td class="">AST</td><td class="num">7.6</td><td class="num">7.5</td><td class="num">52.6%</td><td class="num">1.52</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Devin Booker</td><td class="">PHX</td><td class="">PTS</td><td class="num">24.7</td><td class="num">24.5</td><td class="num">51.6%</td><td class="num">5.06</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Devin Booker</td><td class="">PHX</td><td class="">REB</td><td class="num">3.2</td><td class="num">3.0</td><td class="num">53.8%</td><td class="num">2.08</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Devin Booker</td><td class="">PHX</td><td class="">AST</td><td class="num">4.7</td><td class="num">4.5</td><td class="num">55.3%</td><td class="num">1.52</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">MIA</td><td class="">PTS</td><td class="num">28.3</td><td class="num">28.5</td><td class="num">48.4%</td><td class="num">5.06</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">MIA</td><td class="">REB</td><td class="num">12.5</td><td class="num">12.5</td><td class="num">50.0%</td><td class="num">2.08</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">MIA</td><td class="">AST</td><td class="num">5.8</td><td class="num">6.0</td><td class="num">44.7%</td><td class="num">1.52</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">GSW</td><td class="">PTS</td><td class="num">30.0</td><td class="num">30.0</td><td class="num">50.0%</td><td class="num">5.06</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">GSW</td><td class="">REB</td><td class="num">4.2</td><td class="num">4.0</td><td class="num">53.8%</td><td class="num">2.08</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">GSW</td><td class="">AST</td><td class="num">4.5</td><td class="num">4.5</td><td class="num">50.0%</td><td class="num">1.52</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate (official average)</a></td></td></tr>
+</tbody></table></div>
+<h2>Prop combinations and the dependence that changes the price</h2>
+<p class="meta">These are the same player's stats in the same game. Positive within-player correlation means the legs co-occur more often than independence implies, so an independent pricer understates the joint probability.</p>
+<div class="filters" data-table-tools="t-combos"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Player">Player</option><option value="Leg A">Leg A</option><option value="Leg B">Leg B</option><option value="r">r</option><option value="Joint">Joint</option><option value="If independent">If independent</option><option value="Effect">Effect</option><option value="Fair decimal">Fair decimal</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-combos" data-sourced="1">
+<caption>Two-leg prop combos at the originated lines.</caption>
+<thead><tr><th class="">Player</th><th class="">Leg A</th><th class="">Leg B</th><th class="num">r</th><th class="num">Joint</th><th class="num">If independent</th><th class="num">Effect</th><th class="num">Fair decimal</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">Devin Booker</td><td class="">PTS over 24.5</td><td class="">REB over 3.0</td><td class="num">0.268</td><td class="num">33.0%</td><td class="num">27.8%</td><td class="num">+0.0522</td><td class="num">3.032</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Devin Booker</td><td class="">PTS over 24.5</td><td class="">AST over 4.5</td><td class="num">0.153</td><td class="num">31.1%</td><td class="num">28.5%</td><td class="num">+0.0263</td><td class="num">3.212</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Devin Booker</td><td class="">REB over 3.0</td><td class="">AST over 4.5</td><td class="num">0.189</td><td class="num">33.0%</td><td class="num">29.7%</td><td class="num">+0.0325</td><td class="num">3.031</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Franz Wagner</td><td class="">PTS over 20.5</td><td class="">REB over 6.0</td><td class="num">0.268</td><td class="num">29.2%</td><td class="num">25.1%</td><td class="num">+0.0410</td><td class="num">3.420</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Franz Wagner</td><td class="">PTS over 20.5</td><td class="">AST over 7.5</td><td class="num">0.153</td><td class="num">27.4%</td><td class="num">25.5%</td><td class="num">+0.0190</td><td class="num">3.651</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Franz Wagner</td><td class="">REB over 6.0</td><td class="">AST over 7.5</td><td class="num">0.189</td><td class="num">30.5%</td><td class="num">27.3%</td><td class="num">+0.0315</td><td class="num">3.282</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">PTS over 28.5</td><td class="">REB over 12.5</td><td class="num">0.268</td><td class="num">28.1%</td><td class="num">24.2%</td><td class="num">+0.0390</td><td class="num">3.557</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">PTS over 28.5</td><td class="">AST over 6.0</td><td class="num">0.153</td><td class="num">24.0%</td><td class="num">21.7%</td><td class="num">+0.0229</td><td class="num">4.173</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Giannis Antetokounmpo</td><td class="">REB over 12.5</td><td class="">AST over 6.0</td><td class="num">0.189</td><td class="num">25.6%</td><td class="num">22.4%</td><td class="num">+0.0325</td><td class="num">3.903</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">PTS over 30.0</td><td class="">REB over 4.0</td><td class="num">0.268</td><td class="num">31.7%</td><td class="num">26.9%</td><td class="num">+0.0476</td><td class="num">3.157</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">PTS over 30.0</td><td class="">AST over 4.5</td><td class="num">0.153</td><td class="num">27.5%</td><td class="num">25.0%</td><td class="num">+0.0245</td><td class="num">3.643</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+<tr><td class="">Stephen Curry</td><td class="">REB over 4.0</td><td class="">AST over 4.5</td><td class="num">0.189</td><td class="num">30.4%</td><td class="num">26.9%</td><td class="num">+0.0348</td><td class="num">3.290</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Correlation from committed logs</a></td></td></tr>
+</tbody></table></div>
+<div class="callout good"><strong>Why 0.26 matters.</strong> Points and rebounds correlate at r&nbsp;=&nbsp;0.268 on 1,951 within-player residuals (95% CI 0.226 to 0.309, BH q ≈ 0). That is the single most useful number on this page for pricing: a points-plus-rebounds combo for a heavy-minutes starter is systematically more likely than the product of its legs, by roughly 0.03 to 0.05 in absolute probability.</div>
+<div class="callout "><strong>What would change these numbers, and what would not.</strong> Player-specific variance, minutes projections and opponent defensive context would all change them. A different book's line would not: these are model outputs, not quotes, and no official market price is available to compare against.</div>
+<h2>Formulas</h2>
+<pre>line      = round(mean * 2) / 2                      mean = official season average
+P(over)   = 1 - Phi((line - mean) / sd)               sd = pooled within-player residual sd
+P(A and B)= bivariate_normal(z_a, z_b; rho)           z = probit(1 - P(over))</pre>
+<p class="meta">Combo dependence uses the pooled within-player correlation for the pair, not a player-specific estimate, because per-player samples are too small. Flagged as F05/F07.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

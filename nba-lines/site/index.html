@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NBA line origination: verified signals, gated strategies · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="index.html" class="active">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="data/standings.html">Standings</a><a href="data/results.html">Game results</a><a href="data/slate.html">Tonight&#x27;s slate</a><a href="data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="lines/singles.html">Singles</a><a href="lines/parlays.html">Parlays &amp; SGP</a><a href="lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="research/strategies.html">Strategy catalog</a><a href="research/correlations.html">Correlations</a><a href="research/gates.html">Validation gates</a><a href="research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="governance/methodology.html">Method &amp; requirements</a><a href="governance/sources.html">Source register</a><a href="governance/repo-review.html">Repo review</a><a href="governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="index.html">Dashboard</a></div>
+<h1>NBA line origination: verified signals, gated strategies</h1>
+<p class="lede">A dashboard for originating your own NBA lines from official 2026-27 data, then refusing to reward a strategy until it survives sample, calibration, dependence and luck gates.</p>
+<div class="kpis">
+<div class="kpi good"><div class="v">121</div><div class="l">Official finals</div><div class="note">2026-10-20 → 2026-11-04</div></div>
+<div class="kpi good"><div class="v">30/30</div><div class="l">Teams reconciled</div><div class="note">W-L rebuilt from finals</div></div>
+<div class="kpi"><div class="v">96</div><div class="l">Graded predictions</div><div class="note">strictly walk-forward</div></div>
+<div class="kpi bad"><div class="v">0</div><div class="l">Reward-eligible</div><div class="note">gates G3/G9 fail</div></div>
+<div class="kpi warn"><div class="v">2</div><div class="l">Games tonight</div><div class="note">2026-11-05</div></div>
+<div class="kpi warn"><div class="v">18</div><div class="l">Flagged items</div><div class="note">published, non-blocking</div></div>
+</div>
+<div class="callout good"><strong>Headline.</strong> The model is informative and the leaderboard refuses to pay it. Out-of-sample Brier score is <code>0.2104</code> against a <code>0.2531</code> constant-home baseline (skill <code>+0.173</code>, permutation p&nbsp;=&nbsp;<code>0.0002</code>), but with 96 graded games, an expected-calibration error of 0.104 and no official price archive, no strategy clears the pre-registered bar for a reward.</div>
+<div class="callout "><strong>The largest verification result is not a model, it is a reconciliation.</strong> Summing the 121 committed final scores reproduces all 30 official win-loss records exactly. That is the check that makes the dataset trustworthy, because it compares two separately transcribed official tables rather than trusting either one.</div>
+<div class="callout "><strong>The correlation that actually matters for pricing is not the one people assume.</strong> Within a game, margin and total are nearly independent (r&nbsp;=&nbsp;+0.035), so spread-plus-total same-game parlays barely move when dependence is accounted for. The material dependence is inside a player's own stat line: points and rebounds correlate at r&nbsp;=&nbsp;+0.268 on 1,951 within-player residuals, which lifts a two-leg prop combo by up to 0.05 in absolute probability versus pricing the legs as independent.</div>
+<h2>Originated lines for tonight</h2>
+<p class="meta">Two games. Spread is stated from the home team's perspective; a negative number means the home team is favoured. Model = ridge-shrunk opponent-adjusted margin with a 2025-26 prior, plus a separate additive totals model. No market price is used anywhere.</p>
+<div class="filters" data-table-tools="t-tonight"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Game">Game</option><option value="Tip (ET)">Tip (ET)</option><option value="Fair spread">Fair spread</option><option value="Fair total">Fair total</option><option value="Home ML">Home ML</option><option value="Away ML">Away ML</option><option value="P(home)">P(home)</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-tonight" data-sourced="1">
+<caption>Fair (zero-hold) numbers, not predictions of a market price.</caption>
+<thead><tr><th class="">Game</th><th class="">Tip (ET)</th><th class="num">Fair spread</th><th class="num">Fair total</th><th class="num">Home ML</th><th class="num">Away ML</th><th class="num">P(home)</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class=""><a href="https://www.nba.com/game/orl-vs-phx-0022600187" rel="noopener">ORL@PHX</a></td><td class="">9:00 PM ET</td><td class="num">-1.6</td><td class="num">223.4</td><td class="num">-120</td><td class="num">+120</td><td class="num">54.6%</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA games</a></td></td></tr>
+<tr><td class=""><a href="https://www.nba.com/game/mia-vs-gsw-0022600188" rel="noopener">MIA@GSW</a></td><td class="">10:00 PM ET</td><td class="num">-2.6</td><td class="num">239.1</td><td class="num">-136</td><td class="num">+136</td><td class="num">57.6%</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA games</a></td></td></tr>
+</tbody></table></div>
+<p class="meta">Full pricing detail, break-even probabilities and the two-leg combinations: <a href="lines/singles.html">singles</a> · <a href="lines/parlays.html">parlays &amp; SGP</a> · <a href="lines/props.html">player props</a>.</p>
+<h2>What each section gives you</h2>
+<div class="cards">
+<div class="card"><h3>Official data</h3><p>Standings, 121 finals, tonight's slate and the 4:00 PM ET availability report — each row carries the exact official URL.</p><a class="go" href="data/standings.html">Open official data →</a></div>
+<div class="card"><h3>Originated lines</h3><p>Singles, parlays and player-prop combos priced from the model, with the fair price, the probability and the dependence used.</p><a class="go" href="lines/singles.html">Open originated lines →</a></div>
+<div class="card"><h3>Strategy research</h3><p>Twelve strategies, ten validation gates, measured correlations with confidence intervals, and a permutation luck test.</p><a class="go" href="research/strategies.html">Open strategy research →</a></div>
+<div class="card"><h3>Competition</h3><p>A pre-registered leaderboard. Rewards are defined in advance and nobody qualifies — that is the result, not a bug.</p><a class="go" href="competition/leaderboard.html">Open the leaderboard →</a></div>
+<div class="card"><h3>Repo review</h3><p>16 findings from a line-by-line review of the inherited repository, including coefficients that cannot be reproduced.</p><a class="go" href="governance/repo-review.html">Open the repo review →</a></div>
+<div class="card"><h3>Flagged for review</h3><p>18 items that could not be verified or that are provisional, each with the reason and a source link.</p><a class="go" href="governance/flagged.html">Open flagged items →</a></div>
+</div>
+<h2>The verification contract</h2>
+<ol>
+<li><strong>One source per row.</strong> Every table row links to an official NBA page or to the committed data file it was computed from. <code>verify.py</code> fails the build otherwise.</li>
+<li><strong>No inferred values.</strong> If an official page does not state it, the cell is blank and the item appears on the flagged page. Blank cells are never silently treated as zero.</li>
+<li><strong>No self-graded edge.</strong> A model comparing its line to its own line is circular, so no ROI, no expected value and no closure-line value is claimed: there is no official price archive.</li>
+<li><strong>Luck is measured, not asserted.</strong> Every skill number is accompanied by a paired bootstrap interval and a permutation test that shuffles the prediction-to-outcome assignment.</li>
+</ol>
+<p class="meta">Rebuild everything with <code>python3 collect_official.py &amp;&amp; python3 engine.py &amp;&amp; python3 audit.py &amp;&amp; python3 build.py &amp;&amp; python3 verify.py</code>. The engine is seeded, so the numbers are byte-identical on re-run.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="assets/app.js"></script>
+</body>
+</html>

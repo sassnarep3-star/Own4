@@ -1,0 +1,171 @@
+{
+ "register_version": "1.0",
+ "compiled_at": "2026-11-05",
+ "compiled_by": "session arena-7a06a47e-own4",
+ "tier_legend": {
+  "1": "Primary/league-official, or the official documentation of the method used.",
+  "2": "Trusted third party that is not the league; conclusions depending on it are flagged."
+ },
+ "sources": [
+  {
+   "id": "S01",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA 2026-27 Regular Season Standings",
+   "url": "https://www.nba.com/standings",
+   "retrieved_at": "2026-11-05",
+   "used_for": "All 30 team records (W, L, WIN%, GB, CONF, DIV, HOME, ROAD, NEUTRAL, OT, LAST10, STREAK) and the official tie-break procedures text.",
+   "inspected": "Full rendered standings table, Eastern and Western Conference, 15 rows each."
+  },
+  {
+   "id": "S02",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA Games & Scores \u2014 2026-11-02",
+   "url": "https://www.nba.com/games?date=2026-11-02",
+   "retrieved_at": "2026-11-05",
+   "used_for": "15 final scores and official game IDs for 2026-11-02.",
+   "inspected": "All 15 game cards on the rendered page (game ID, both team records, both final scores)."
+  },
+  {
+   "id": "S03",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA Games & Scores \u2014 2026-11-04",
+   "url": "https://www.nba.com/games?date=2026-11-04",
+   "retrieved_at": "2026-11-05",
+   "used_for": "14 final scores and official game IDs for 2026-11-04.",
+   "inspected": "All 14 game cards, including two overtime finals (UTA@NOP, MIA@LAC)."
+  },
+  {
+   "id": "S04",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA Games & Scores \u2014 2026-11-05 (slate)",
+   "url": "https://www.nba.com/games?date=2026-11-05",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Tonight's 2-game slate: tip times, team records, official game IDs, and official season leaders (PPG/RPG/APG) for the four teams playing.",
+   "inspected": "Both game cards in full, including Season Leaders tables and radio broadcast lines."
+  },
+  {
+   "id": "S05",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA Injury Report: 2026-27 Season (policy + index)",
+   "url": "https://official.nba.com/nba-injury-report-2026-27-season/",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Official injury-report submission deadlines and the index of dated report PDFs.",
+   "inspected": "Policy paragraphs and the 2026-11-05 report index."
+  },
+  {
+   "id": "S06",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "Injury Report 11/05/26 04:00 PM ET (PDF)",
+   "url": "https://ak-static.cms.nba.com/referee/injury/Injury-Report_2026-11-05_04_00PM.pdf",
+   "retrieved_at": "2026-11-05",
+   "used_for": "13 player availability rows (Current Status + Reason) for the two 2026-11-05 games; team-level NOT YET SUBMITTED states for 2026-11-06 games.",
+   "inspected": "Full parsed table of the 4:00 PM ET edition."
+  },
+  {
+   "id": "S07",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA.com/Stats Frequently Asked Questions",
+   "url": "https://www.nba.com/stats/help/faq",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Governance: the league states its stats \"are not available for download for either academic or personal use\"; also the statement that a combined PTS+REB+AST statistic is unavailable.",
+   "inspected": "FAQ headings 'Are your statistics available for download, or in CSV form?' and 'Where can I find the \"Combined PTS, AST + REB\" statistic?'."
+  },
+  {
+   "id": "S08",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA.com/Stats Stat Glossary",
+   "url": "https://www.nba.com/stats/help/glossary",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Official definitions of the statistics used in team and player models (PTS, REB, AST, PACE, etc.).",
+   "inspected": "Glossary entries for the scoring, rebounding, assist and pace terms referenced in this research."
+  },
+  {
+   "id": "S09",
+   "tier": 1,
+   "owner": "NBA (league)",
+   "title": "NBA Games & Scores \u2014 2026-10-20 \u2026 2026-11-01 (inherited raw pages)",
+   "url": "https://www.nba.com/games?date=2026-11-01",
+   "retrieved_at": "2026-11-02 (inherited)",
+   "used_for": "92 final scores for 2026-10-20 through 2026-11-01, inherited from earlier sessions and re-verified in this session by reconciliation against S01.",
+   "inspected": "Inherited transcription (data/games_2026-27.csv); not re-read page by page in this session. Verification is the aggregate reconciliation described in the verification report."
+  },
+  {
+   "id": "S10",
+   "tier": 2,
+   "owner": "Elias Sports Bureau (via ESPN, NBA broadcast partner)",
+   "title": "ESPN box-score summaries (inherited extract)",
+   "url": "https://www.espn.com/nba/game/_/gameId/401909088",
+   "retrieved_at": "2026-11-02 (inherited)",
+   "used_for": "Individual player PTS/REB/AST rows used only for player-prop correlation estimates. Labelled partner-sourced, not league-official.",
+   "inspected": "Inherited raw JSON in data/raw/espn. Not re-fetched in this session; every conclusion drawn from it is flagged."
+  },
+  {
+   "id": "S11",
+   "tier": 1,
+   "owner": "NIST (U.S. Department of Commerce)",
+   "title": "NIST/SEMATECH e-Handbook 1.3.5.9: Measures of Skewness and Kurtosis / 7.1.3: What is a statistical test of a hypothesis",
+   "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm",
+   "retrieved_at": "2026-11-02 (inherited citation), re-checked 2026-11-05",
+   "used_for": "Method authority for the distributional and hypothesis-testing language used in the luck-removal section.",
+   "inspected": "Section index and definitions of hypothesis testing and confidence intervals."
+  },
+  {
+   "id": "S12",
+   "tier": 1,
+   "owner": "scikit-learn developers",
+   "title": "Cross-validation: evaluating estimator performance (TimeSeriesSplit)",
+   "url": "https://scikit-learn.org/stable/modules/cross_validation.html",
+   "retrieved_at": "2026-11-02 (inherited citation), re-checked 2026-11-05",
+   "used_for": "Method authority for strictly forward-chaining (walk-forward) validation and the leakage rules enforced in the gates.",
+   "inspected": "Sections on cross-validation and time-series-aware splitting."
+  },
+  {
+   "id": "S13",
+   "tier": 1,
+   "owner": "scikit-learn developers",
+   "title": "Probability calibration of classifiers",
+   "url": "https://scikit-learn.org/stable/modules/calibration.html",
+   "retrieved_at": "2026-11-02 (inherited citation), re-checked 2026-11-05",
+   "used_for": "Method authority for the reliability/calibration gate (G6) applied to moneyline probabilities.",
+   "inspected": "Sections on reliability diagrams and calibration curves."
+  },
+  {
+   "id": "S14",
+   "tier": 1,
+   "owner": "National Council on Problem Gambling",
+   "title": "Help & Treatment (National Problem Gambling Helpline)",
+   "url": "https://www.ncpgambling.org/help-treatment",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Responsible-gambling notice published on every page.",
+   "inspected": "Helpline page header and 1-800-MY-RESET number."
+  },
+  {
+   "id": "S15",
+   "tier": 1,
+   "owner": "Benjamini & Hochberg (1995), J. R. Statist. Soc. B 57(1):289-300",
+   "title": "Controlling the false discovery rate: a practical and powerful approach to multiple testing",
+   "url": "https://doi.org/10.1111/j.2517-6161.1995.tb02031.x",
+   "retrieved_at": "2026-11-02 (inherited citation)",
+   "used_for": "Method used for BH-FDR q-values across the correlation and strategy families.",
+   "inspected": "Method definition as reproduced in the repo's earlier methodology notes; DOI resolves to the publisher record."
+  },
+  {
+   "id": "S16",
+   "tier": 1,
+   "owner": "GitHub, Inc.",
+   "title": "REST API: GitHub Pages builds (deployment status used as evidence)",
+   "url": "https://docs.github.com/en/rest/pages/pages",
+   "retrieved_at": "2026-11-05",
+   "used_for": "Official evidence that the published site build succeeded (status field).",
+   "inspected": "Pages REST reference for the builds endpoint."
+  }
+ ]
+}

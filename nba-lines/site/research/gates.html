@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation gates · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html" class="active">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Validation gates</h1>
+<p class="lede">Ten pre-registered gates, the measured value against each, and exactly which three failures stop every reward.</p>
+<div class="kpis">
+<div class="kpi good"><div class="v">7</div><div class="l">Gates passed</div><div class="note">of 10</div></div>
+<div class="kpi bad"><div class="v">3</div><div class="l">Gates failed</div><div class="note">of 10</div></div>
+<div class="kpi warn"><div class="v">0</div><div class="l">Gates pending</div><div class="note">of 10</div></div>
+<div class="kpi bad"><div class="v">0</div><div class="l">Rewards paid</div><div class="note">by policy</div></div>
+</div>
+<div class="callout "><strong>Pre-registered before the backtest.</strong> The gate list and its thresholds were written into the repository in the same commit series that produced the engine, and the engine cannot change a threshold. A gate that can be relaxed after seeing the result is not a gate.</div>
+<div class="filters" data-table-tools="t-gates"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="ID">ID</option><option value="Gate">Gate</option><option value="Rule">Rule</option><option value="Measured value">Measured value</option><option value="Status">Status</option><option value="Method">Method</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-gates" data-sourced="1">
+<caption>Ten gates. A strategy must pass all of them to be reward-eligible.</caption>
+<thead><tr><th class="">ID</th><th class="">Gate</th><th class="">Rule</th><th class="">Measured value</th><th class="">Status</th><th class="">Method</th></tr></thead><tbody>
+<tr><td class="">G1</td><td class="">Point-in-time integrity</td><td class="">Every scoring input must exist before the tip-off it predicts; no same-game information.</td><td class="">121/121 games predicted from prior games only</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G2</td><td class="">Source verification</td><td class="">Every published value carries a link to an official source; unverifiable values blank.</td><td class="">results + standings reconciled 30/30 teams</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G3</td><td class="">Sample sufficiency</td><td class="">At least 300 independently graded predictions before any reward.</td><td class="">96 graded predictions</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G4</td><td class="">Out-of-sample positive skill</td><td class="">Bootstrap 95% lower bound of skill score must exceed 0.</td><td class="">best skill 0.1728 (S04), CI lower bound 0.0240</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G5</td><td class="">Luck test</td><td class="">Permutation test p &lt; 0.01 that the observed skill exceeds chance.</td><td class="">best permutation p = 0.0002 (S04)</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G6</td><td class="">Calibration</td><td class="">Expected calibration error &lt;= 0.05 and reliability slope within [0.80, 1.20].</td><td class="">ECE 0.1037, slope 0.899 (S04)</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="https://scikit-learn.org/stable/modules/calibration.html" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G7</td><td class="">Dependence accounting</td><td class="">Parlay and same-game legs must use measured dependence, never the independence assumption.</td><td class="">measured r(margin,total) = 0.0351; joint model used in S07/S08</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G8</td><td class="">Multiple-testing control</td><td class="">BH-FDR q &lt; 0.10 across the whole strategy family.</td><td class="">min BH q = 0.00e+00 over 15 tests (10 correlations + 5 strategy luck tests)</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G9</td><td class="">Market price evidence</td><td class="">Positive recognised edge requires official or verifiable closing prices (CLV), not a model&#x27;s own price.</td><td class="">no official price archive available</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+<tr><td class="">G10</td><td class="">Reproducibility</td><td class="">Deterministic rebuild, zero broken links, zero unsourced table rows.</td><td class="">build.py + verify.py deterministic; see verification report</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">Method</a></td></td></tr>
+</tbody></table></div>
+<h2>What each gate is for</h2>
+<h3>G3 — sample sufficiency</h3>
+<p>96 scored games against a 300-game requirement. At a true skill difference of 0.05 in Brier score, 96 games cannot distinguish a good model from a lucky one; the standard error of the skill estimate alone is around 0.07. This single gate is why the leaderboard pays nobody.</p>
+<h3>G4 — out-of-sample positive skill</h3>
+ <p>A paired bootstrap over games, not a single point estimate. The interval must exclude zero. S01, S04 and S05 clear it; S02 and S03 do not. The bootstrap's percentiles are computed from 4,000 resamples of the graded set.</p>
+<h3>G5 — luck test</h3>
+ <p>The observed skill is compared with the distribution of skill obtained when the prediction-to-outcome pairing is shuffled 4,000 times. This is the closest thing to a direct measurement of 'how often would noise look this good'.</p>
+<h3>G6 — calibration</h3>
+ <p>Five equal-count bins, expected calibration error, and a reliability slope. A model can rank games correctly and still be badly calibrated, and a mis-calibrated probability is unusable for pricing regardless of its discrimination. This gate fails: ECE 0.104.</p>
+<h3>G9 — market price evidence</h3>
+ <p>The hard one. Recognising an edge requires a price someone else will take the other side of. Without a price archive there is no edge to measure, only a model opinion. No official price source exists in this repository, so this gate cannot pass, no matter how good the model gets.</p>
+<p class="meta">Method sources: <a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener">scikit-learn cross-validation</a>, <a href="https://scikit-learn.org/stable/modules/calibration.html" rel="noopener">probability calibration</a>, <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm" rel="noopener">NIST hypothesis-testing handbook</a>.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

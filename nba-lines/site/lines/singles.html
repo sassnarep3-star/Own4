@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Singles: fair spread, total and moneyline · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html" class="active">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Singles: fair spread, total and moneyline</h1>
+<p class="lede">Tonight's two games priced from the rating and totals models, with the break-even probability behind every number.</p>
+<div class="callout warn"><strong>These are fair prices, not edges.</strong> A fair price is the number at which the model believes a bet is worth exactly zero. Turning it into an edge requires a market price to compare against, and no official price archive exists in this repository (flag F01, gate G9).</div>
+<h2>Spread, total and moneyline</h2>
+<div class="filters" data-table-tools="t-lines"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Game">Game</option><option value="Tip (ET)">Tip (ET)</option><option value="Fair spread">Fair spread</option><option value="Fair total">Fair total</option><option value="Fair team totals (A/H)">Fair team totals (A/H)</option><option value="Home ML">Home ML</option><option value="Away ML">Away ML</option><option value="P(home)">P(home)</option><option value="Home rating">Home rating</option><option value="Away rating">Away rating</option><option value="Out (H/A)">Out (H/A)</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-lines" data-sourced="1">
+<caption>Home spread sign convention: negative = home favoured. Ratings are points per game versus a league-average opponent on a neutral floor.</caption>
+<thead><tr><th class="">Game</th><th class="">Tip (ET)</th><th class="num">Fair spread</th><th class="num">Fair total</th><th class="">Fair team totals (A/H)</th><th class="num">Home ML</th><th class="num">Away ML</th><th class="num">P(home)</th><th class="num">Home rating</th><th class="num">Away rating</th><th class="">Out (H/A)</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class=""><a href="https://www.nba.com/game/orl-vs-phx-0022600187" rel="noopener">ORL@PHX</a></td><td class="">9:00 PM ET</td><td class="num">-1.6</td><td class="num">223.4</td><td class="">110.9 / 112.5</td><td class="num">-120</td><td class="num">+120</td><td class="num">54.6%</td><td class="num">-1.47</td><td class="num">-1.96</td><td class="">3 / 5</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+<tr><td class=""><a href="https://www.nba.com/game/mia-vs-gsw-0022600188" rel="noopener">MIA@GSW</a></td><td class="">10:00 PM ET</td><td class="num">-2.6</td><td class="num">239.1</td><td class="">118.2 / 120.9</td><td class="num">-136</td><td class="num">+136</td><td class="num">57.6%</td><td class="num">+1.45</td><td class="num">-0.08</td><td class="">2 / 2</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+</tbody></table></div>
+<h2>Break-even probabilities</h2>
+<p class="meta">The probability that makes a bet at that price break even. Read this as the model's opinion of the true chance, not as a recommendation. Over/under at the fair total is exactly 50% by construction — that is what makes it the fair total.</p>
+<div class="tablewrap"><table class="data" id="t-be" data-sourced="1">
+<thead><tr><th class="">Game</th><th class="num">P(home ML)</th><th class="num">P(home -3.5)</th><th class="num">P(over fair total)</th><th class="num">P(under fair total)</th><th class="num">Fair total</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">ORL@PHX</td><td class="num">54.8%</td><td class="num">45.2%</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">223.4</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+<tr><td class="">MIA@GSW</td><td class="num">57.1%</td><td class="num">47.6%</td><td class="num">50.0%</td><td class="num">50.0%</td><td class="num">239.1</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+</tbody></table></div>
+<h2>How each number is built</h2>
+<pre>margin_home = rating_home - rating_away + home_court
+rating_i    = (sum_targets + lambda * prior_2025_26_i) / (games_i + lambda)      lambda = 12
+            where target = opponent_rating + margin  (or opponent_rating - margin when away)
+            iterated to convergence, then centred so the league mean rating is 0
+total       = base + offset_home + offset_away                                   lambda = 12
+P(home)     = Phi(margin_home / sigma_margin)                     sigma_margin = 13.716
+fair ML     = -100p/(1-p) if p >= 0.5 else +100(1-p)/p
+home total  = (mu_total + mu_margin)/2      away total = (mu_total - mu_margin)/2</pre>
+<h2>Out-of-sample accuracy of these lines</h2>
+<div class="kpis">
+<div class="kpi"><div class="v">10.85</div><div class="l">Spread MAE</div><div class="note">points, vs 12.29 constant baseline</div></div>
+<div class="kpi"><div class="v">15.66</div><div class="l">Total MAE</div><div class="note">points, vs 15.99 constant baseline</div></div>
+<div class="kpi warn"><div class="v">1.11</div><div class="l">Home court</div><div class="note">points (provisional, flag F04)</div></div>
+<div class="kpi"><div class="v">226.9</div><div class="l">League mean total</div><div class="note">2026-27 to date</div></div>
+</div>
+<div class="callout warn"><strong>Read the totals result honestly.</strong> The totals model scores a skill of +0.0201 against a constant-league-average baseline, and its bootstrap interval (-0.073 to +0.106) contains zero. On 96 games there is no evidence it beats just using the league average. The moneyline model is the one with a signal that survives its interval.</div>
+<p class="meta">Full per-game line-versus-actual table: <a href="../research/backtest.html">walk-forward &amp; luck</a>.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

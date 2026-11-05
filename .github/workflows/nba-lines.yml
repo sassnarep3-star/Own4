@@ -1,0 +1,68 @@
+name: Validate NBA Line Lab
+
+# Rebuilds the whole nba-lines pipeline from committed inputs and fails on any
+# drift. The engine is seeded and touches no network, so this is a real
+# reproducibility test rather than a smoke test.
+
+on:
+  push:
+    paths:
+      - 'nba-lines/**'
+      - '.github/workflows/nba-lines.yml'
+  pull_request:
+    paths:
+      - 'nba-lines/**'
+      - '.github/workflows/nba-lines.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: nba-lines
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild official captures
+        run: python3 collect_official.py
+
+      - name: Recompute model, correlations, backtest, gates, leaderboard
+        run: python3 engine.py
+
+      - name: Recompute audit registers
+        run: python3 audit.py
+
+      - name: Build the static site
+        run: python3 build.py
+
+      - name: Verify sources, links, allow-list, blanks, invariants, determinism
+        run: python3 verify.py
+
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Confirm the committed artefacts reproduce byte for byte
+        run: |
+          git diff --stat -- data site ../index.html
+          git diff --exit-code -- data site ../index.html
+
+      - name: Confirm the JSON payloads are valid
+        run: |
+          for f in data/*.json site/data/*.json; do
+            python3 -c "import json,sys; json.load(open(sys.argv[1]))" "$f"
+          done
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nba-lines-site
+          path: nba-lines/site
+          retention-days: 14

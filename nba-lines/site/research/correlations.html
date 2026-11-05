@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Correlation values · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html" class="active">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Correlation values</h1>
+<p class="lede">Ten measured correlations with confidence intervals and false-discovery control — the inputs that decide how every parlay and prop combo is priced.</p>
+<div class="callout good"><strong>Every coefficient here is computed in this session from files in this repository.</strong> Ten tests, controlled with Benjamini–Hochberg at q < 0.10 across the whole family, including the five strategy luck tests. That is stricter than reporting the smallest p-value and calling it a discovery — which is exactly what the repository's earlier correlation file did (finding R02).</div>
+<div class="filters" data-table-tools="t-corr"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Pair">Pair</option><option value="Detail">Detail</option><option value="n">n</option><option value="r">r</option><option value="95% CI">95% CI</option><option value="p">p</option><option value="BH q">BH q</option><option value="Data tier">Data tier</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-corr" data-sourced="1">
+<caption>Correlation values with confidence intervals and false-discovery control.</caption>
+<thead><tr><th class="">Pair</th><th class="">Detail</th><th class="num">n</th><th class="num">r</th><th class="num">95% CI</th><th class="num">p</th><th class="num">BH q</th><th class="">Data tier</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">Margin vs total</td><td class="">Team markets, within game</td><td class="num">121</td><td class="num">0.0180</td><td class="num">-0.161 to 0.196</td><td class="num">8.45e-01</td><td class="num">8.45e-01</td><td class="">Official league finals</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-04" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Home points vs away points</td><td class="">Team markets, within game</td><td class="num">121</td><td class="num">0.1994</td><td class="num">0.022 to 0.365</td><td class="num">2.84e-02</td><td class="num">4.73e-02</td><td class="">Official league finals</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-04" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">|Margin| vs total</td><td class="">Blowout vs scoring level</td><td class="num">121</td><td class="num">-0.1008</td><td class="num">-0.274 to 0.079</td><td class="num">2.71e-01</td><td class="num">3.39e-01</td><td class="">Official league finals</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-04" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Margin vs home points</td><td class="">Which leg drives the margin</td><td class="num">121</td><td class="num">0.6410</td><td class="num">0.522 to 0.735</td><td class="num">2.38e-15</td><td class="num">8.93e-15</td><td class="">Official league finals</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-04" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Same-day total vs next-game total</td><td class="">Probe for cross-game dependence used by cross-game parlays</td><td class="num">106</td><td class="num">0.1838</td><td class="num">-0.007 to 0.362</td><td class="num">5.93e-02</td><td class="num">8.21e-02</td><td class="">Official league finals</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-04" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Player PTS vs REB (within-player residuals)</td><td class="">Partner-sourced game logs; demeaned per player</td><td class="num">1951</td><td class="num">0.2679</td><td class="num">0.226 to 0.309</td><td class="num">2.08e-33</td><td class="num">1.56e-32</td><td class="">Partner game logs (flagged)</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/player_gamelogs.json" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Player PTS vs AST (within-player residuals)</td><td class="">Partner-sourced game logs; demeaned per player</td><td class="num">1951</td><td class="num">0.1535</td><td class="num">0.110 to 0.197</td><td class="num">9.46e-12</td><td class="num">2.84e-11</td><td class="">Partner game logs (flagged)</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/player_gamelogs.json" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Player REB vs AST (within-player residuals)</td><td class="">Partner-sourced game logs; demeaned per player</td><td class="num">1951</td><td class="num">0.1892</td><td class="num">0.146 to 0.232</td><td class="num">3.48e-17</td><td class="num">1.74e-16</td><td class="">Partner game logs (flagged)</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/player_gamelogs.json" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">PRA vs PTS (residuals)</td><td class="">Prop-combo dependence</td><td class="num">1951</td><td class="num">0.9090</td><td class="num">0.901 to 0.916</td><td class="num">0.00e+00</td><td class="num">0.00e+00</td><td class="">Partner game logs (flagged)</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/player_gamelogs.json" rel="noopener">Source</a></td></td></tr>
+<tr><td class="">Teammate PTS vs teammate PTS</td><td class="">Top-two-minute players, same team, same game</td><td class="num">184</td><td class="num">-0.1388</td><td class="num">-0.278 to 0.006</td><td class="num">6.02e-02</td><td class="num">8.21e-02</td><td class="">Partner game logs (flagged)</td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/player_gamelogs.json" rel="noopener">Source</a></td></td></tr>
+</tbody></table></div>
+<h2>Reading these numbers</h2>
+<h3>Margin versus total: the null result that saves money</h3>
+<p>r&nbsp;=&nbsp;+0.0180 (95% CI -0.161 to +0.196). Margin and total are effectively independent within a game over these 121 finals. Practical consequence: a spread-plus-total same-game parlay can be priced by multiplication with negligible error, and any model that claims a large dependence benefit from that pair is wrong.</p>
+<h3>Player stats: the dependence that does matter</h3>
+<p>Within-player residuals correlate at roughly 0.15–0.27 across the three scoring stats. Because these are demeaned per player, the coefficients are not contaminated by the fact that good players are good at everything; they measure whether a player's <em>deviation</em> in one stat travels with his deviation in another in the same game. It does, mildly — minutes and game script move all three together.</p>
+<h3>Teammates: the one that does not clear the bar</h3>
+ <p>The teammate points correlation is negative, which is what a usage trade-off should look like, but p&nbsp;=&nbsp;0.060 and q&nbsp;=&nbsp;0.075. It is not significant, so the teammate-stack strategy (S11) stays ungraded and no stack line is published (flag F08).</p>
+<h3>Cross-game: an assumption, labelled as one</h3>
+<p>Consecutive same-day totals correlate at a level that neither confirms nor rejects independence. The cross-game parlay therefore uses independence, and flag F09 records that this is an assumption rather than a verified fact.</p>
+<h2>Method</h2>
+<pre>r        = Pearson product-moment correlation
+95% CI   = Fisher z transform: tanh(atanh(r) +/- 1.96/sqrt(n-3))
+p        = two-sided Student t with df = n - 2
+q        = Benjamini-Hochberg step-up across the whole test family</pre>
+<p class="meta">Method sources: <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x" rel="noopener">Benjamini &amp; Hochberg (1995)</a>, <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm" rel="noopener">NIST/SEMATECH handbook</a>.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

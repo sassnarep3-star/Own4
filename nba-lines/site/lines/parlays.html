@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parlays and same-game combinations · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html" class="active">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Parlays and same-game combinations</h1>
+<p class="lede">Joint pricing with measured dependence instead of the independence shortcut, plus three graded parlay constructs.</p>
+<div class="callout "><strong>Parlay arithmetic that matters.</strong> A two-leg parlay's fair price is the joint probability of both legs, and the joint is <em>not</em> the product unless the legs are independent. For legs in different games independence is an assumption (flag F09). For legs in the same game it is false, and the size of the error is measurable.</div>
+<h2>Tonight: same-game combinations</h2>
+<p class="meta">Joint probabilities from a bivariate normal with the measured margin/total correlation (r = +0.0351). Note how small the dependence effect is for team markets: that measurement is the point.</p>
+<div class="filters" data-table-tools="t-sgp"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="Game">Game</option><option value="Legs">Legs</option><option value="Fair joint">Fair joint</option><option value="Fair decimal">Fair decimal</option><option value="If priced independent">If priced independent</option><option value="Dependence effect">Dependence effect</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-sgp" data-sourced="1">
+<caption>Two-leg same-game parlays at the model's own fair lines.</caption>
+<thead><tr><th class="">Game</th><th class="">Legs</th><th class="num">Fair joint</th><th class="num">Fair decimal</th><th class="num">If priced independent</th><th class="num">Dependence effect</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class=""><a href="https://www.nba.com/game/orl-vs-phx-0022600187" rel="noopener">ORL@PHX</a></td><td class="">Home ML + over fair total</td><td class="num">27.9%</td><td class="num">3.579</td><td class="num">27.4%</td><td class="num">+0.0055</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+<tr><td class=""><a href="https://www.nba.com/game/orl-vs-phx-0022600187" rel="noopener">ORL@PHX</a></td><td class="">Home -3.5 + under fair total</td><td class="num">22.1%</td><td class="num">4.534</td><td class="num">22.6%</td><td class="num">-0.0055</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+<tr><td class=""><a href="https://www.nba.com/game/mia-vs-gsw-0022600188" rel="noopener">MIA@GSW</a></td><td class="">Home ML + over fair total</td><td class="num">29.1%</td><td class="num">3.434</td><td class="num">28.6%</td><td class="num">+0.0055</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+<tr><td class=""><a href="https://www.nba.com/game/mia-vs-gsw-0022600188" rel="noopener">MIA@GSW</a></td><td class="">Home -3.5 + under fair total</td><td class="num">23.2%</td><td class="num">4.302</td><td class="num">23.8%</td><td class="num">-0.0056</td><td class=""><td class="src"><a href="https://www.nba.com/games?date=2026-11-05" rel="noopener">NBA slate</a></td></td></tr>
+</tbody></table></div>
+<h2>Graded parlay strategies</h2>
+<p class="meta">Each construct is graded on how well its joint probability predicted the realised joint outcome, across every graded game. The baseline is the unconditional realised joint rate — a model that cannot beat the base rate has added nothing.</p>
+<div class="filters" data-table-tools="t-parlay-grade"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="ID">ID</option><option value="Construct">Construct</option><option value="n">n</option><option value="Joint Brier">Joint Brier</option><option value="Independence Brier">Independence Brier</option><option value="Realised rate">Realised rate</option><option value="Skill">Skill</option><option value="Dependence used">Dependence used</option><option value="Verdict">Verdict</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-parlay-grade" data-sourced="1">
+<caption>S06 cross-game, S07/S08 same-game.</caption>
+<thead><tr><th class="">ID</th><th class="">Construct</th><th class="num">n</th><th class="num">Joint Brier</th><th class="num">Independence Brier</th><th class="num">Realised rate</th><th class="num">Skill</th><th class="">Dependence used</th><th class="">Verdict</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">S06</td><td class="">Two-leg cross-game parlay (home ML + next-game over, independence)</td><td class="num">95</td><td class="num">0.2251</td><td class="num">0.2251</td><td class="num">0.326</td><td class="num">-0.0241</td><td class="">0 (assumed independent)</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived from committed finals</a></td></td></tr>
+<tr><td class="">S07</td><td class="">Same-game parlay: home ML + over the fair total</td><td class="num">96</td><td class="num">0.1893</td><td class="num">0.1894</td><td class="num">0.292</td><td class="num">+0.0839</td><td class="">measured r(margin,total)</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived from committed finals</a></td></td></tr>
+<tr><td class="">S08</td><td class="">Same-game parlay: home -3.5 + under the fair total</td><td class="num">96</td><td class="num">0.1646</td><td class="num">0.1649</td><td class="num">0.208</td><td class="num">+0.0019</td><td class="">measured r(margin,total)</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nba-lines/data/derived.json" rel="noopener">Derived from committed finals</a></td></td></tr>
+</tbody></table></div>
+<div class="callout warn"><strong>The dependence adjustment is real but small for team markets.</strong> With r&nbsp;=&nbsp;+0.035, switching from independence to the measured joint moves the Brier score by +0.0003 at most. Pricing a spread-plus-total SGP as independent is therefore a rounding error, not a business model. Player-level dependence is a different story — see the props page, where two-leg combos move by up to 0.05 in probability.</div>
+<div class="callout bad"><strong>Cross-game parlays get worse, not better.</strong> S06's joint Brier is higher than the base rate (skill -0.0241): chaining two unrelated legs compounds error faster than it compounds edge, and no cross-game dependence was verified to exploit.</div>
+<h2>Rule of construction</h2>
+<pre>fair_decimal = 1 / P(both legs)
+P(both)       = P(leg1) * P(leg2)                     only if independent
+P(both)       = bivariate_normal(mu1, s1, s2, rho)    what this page uses
+fair_american = -100p/(1-p) if p >= 0.5 else +100(1-p)/p</pre>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

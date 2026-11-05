@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method and requirements · Own4 NBA Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<div class="shell">
+<aside class="nav">
+<a class="brand" href="../index.html">Own4 <span>NBA Line Lab</span></a>
+<div class="brand-sub">Verified 2026-27 research</div>
+<div class="navgroup"><h3>Overview</h3><a href="../index.html">Dashboard</a></div><div class="navgroup"><h3>Official data</h3><a href="../data/standings.html">Standings</a><a href="../data/results.html">Game results</a><a href="../data/slate.html">Tonight&#x27;s slate</a><a href="../data/availability.html">Player availability</a></div><div class="navgroup"><h3>Originated lines</h3><a href="../lines/singles.html">Singles</a><a href="../lines/parlays.html">Parlays &amp; SGP</a><a href="../lines/props.html">Player props</a></div><div class="navgroup"><h3>Strategy research</h3><a href="../research/strategies.html">Strategy catalog</a><a href="../research/correlations.html">Correlations</a><a href="../research/gates.html">Validation gates</a><a href="../research/backtest.html">Walk-forward &amp; luck</a></div><div class="navgroup"><h3>Competition</h3><a href="../competition/leaderboard.html">Leaderboard</a></div><div class="navgroup"><h3>Governance</h3><a href="../governance/methodology.html" class="active">Method &amp; requirements</a><a href="../governance/sources.html">Source register</a><a href="../governance/repo-review.html">Repo review</a><a href="../governance/flagged.html">Flagged for review</a></div>
+<div class="navfoot">
+Data as of <strong>2026-11-05</strong><br>
+121 official finals · 0 reward-eligible<br>
+<a href="../governance/flagged.html">18 flagged items</a>
+</div>
+</aside>
+<main>
+<div class="crumbs"><a href="../index.html">Dashboard</a></div>
+<h1>Method and requirements</h1>
+<p class="lede">Every requirement traced to its delivery, the formulas behind every number, the data policy, and the weaknesses stated plainly.</p>
+<h2>Requirements and how each was met</h2>
+<div class="filters" data-table-tools="t-req"><input type="search" placeholder="Filter rows…" aria-label="Filter rows"><select aria-label="Filter by column"><option value="">All columns</option><option value="__blank__">Hide blank cells</option><option value="#">#</option><option value="Requirement">Requirement</option><option value="Delivered as">Delivered as</option><option value="Status">Status</option></select><span class="count"></span></div>
+<div class="tablewrap"><table class="data" id="t-req" data-sourced="1">
+<caption>Requirement traceability. Two requirements cannot be met from official sources and are recorded as failures rather than glossed.</caption>
+<thead><tr><th class="">#</th><th class="">Requirement</th><th class="">Delivered as</th><th class="">Status</th><th class="">Source</th></tr></thead><tbody>
+<tr><td class="">1</td><td class="">Collect and organise a full set of NBA requirements</td><td class="">This page plus the source register; every requirement traceable to an official page.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://www.nba.com/stats/help/faq" rel="noopener">NBA stats help</a></td></td></tr>
+<tr><td class="">2</td><td class="">Research and develop strategies for generating useful signals</td><td class="">Twelve strategies in three families, each specified and eight graded.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../research/strategies.html" rel="noopener">Strategy catalog</a></td></td></tr>
+<tr><td class="">3</td><td class="">Originate own NBA lines</td><td class="">Fair spread, total, team totals, moneyline and 12 prop lines for tonight.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../lines/singles.html" rel="noopener">Singles</a></td></td></tr>
+<tr><td class="">4</td><td class="">Single bets, parlays, player-prop combos</td><td class="">Three pages: singles, parlays/SGP, props/combos.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../lines/parlays.html" rel="noopener">Parlays</a></td></td></tr>
+<tr><td class="">5</td><td class="">Every strategy must pass validation gates</td><td class="">Ten pre-registered gates; a strategy is eligible only if all pass.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../research/gates.html" rel="noopener">Gates</a></td></td></tr>
+<tr><td class="">6</td><td class="">Determine correlation values</td><td class="">Ten coefficients with CIs, p-values and BH q-values, computed in-repo.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../research/correlations.html" rel="noopener">Correlations</a></td></td></tr>
+<tr><td class="">7</td><td class="">Remove luck from the equation</td><td class="">Walk-forward scoring, paired bootstrap, 4,000-draw permutation test, FDR control.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../research/backtest.html" rel="noopener">Backtest</a></td></td></tr>
+<tr><td class="">8</td><td class="">Selectively skill-based strategies</td><td class="">Skill separated from luck explicitly; only the rating backbone survives the luck test.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../competition/leaderboard.html" rel="noopener">Leaderboard</a></td></td></tr>
+<tr><td class="">9</td><td class="">Leaderboard competition with rewards</td><td class="">Points pre-registered at 40/25/15 with an all-gates requirement; zero awarded this week.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="../competition/leaderboard.html" rel="noopener">Leaderboard</a></td></td></tr>
+<tr><td class="">10</td><td class="">Executive summary</td><td class="">Repository EXECUTIVE_SUMMARY.md plus the dashboard overview.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/EXECUTIVE_SUMMARY.md" rel="noopener">Summary</a></td></td></tr>
+<tr><td class="">11</td><td class="">Official-source verification, blanks flagged</td><td class="">One link per table row enforced by verify.py; 18 flagged items published.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="flagged.html" rel="noopener">Flagged</a></td></td></tr>
+<tr><td class="">12</td><td class="">Live site with category subpages</td><td class="">17 pages under /nba-lines/site/ plus a root landing page on GitHub Pages.</td><td class=""><span class="badge b-pass">pass</span></td><td class=""><td class="src"><a href="https://docs.github.com/en/rest/pages/pages" rel="noopener">Pages API</a></td></td></tr>
+<tr><td class="">13</td><td class="">Official historical prices for edge measurement</td><td class="">Not delivered: no official price archive is available. Blocks G9.</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="flagged.html" rel="noopener">Flagged F01</a></td></td></tr>
+<tr><td class="">14</td><td class="">Player-level official logs at usable volume</td><td class="">Not delivered: the league forbids downloading its stats. Props use flagged partner data.</td><td class=""><span class="badge b-fail">fail</span></td><td class=""><td class="src"><a href="https://www.nba.com/stats/help/faq" rel="noopener">NBA Stats FAQ</a></td></td></tr>
+</tbody></table></div>
+<h2>Data policy</h2>
+<p>The league's FAQ states that its statistics "are not available for download for either academic or personal use". This release therefore contains no bulk extract of league data. What it contains is 30 standings rows, 121 final scores, 2 slate entries and 13 availability rows, each read from a publicly displayed page and stored with the exact URL. The one large third-party extract already in the repository (47 MB of partner box scores) predates this session and is flagged under R05 rather than extended.</p>
+<h2>Reproduce</h2>
+<pre>cd nba-lines
+python3 collect_official.py   # transcription register -> data/*.json
+python3 engine.py             # model, correlations, backtest, gates, leaderboard
+python3 audit.py              # repo review + flagged registers
+python3 build.py              # 17 static pages + root landing page
+python3 verify.py             # source links, internal links, blanks, determinism
+python3 -m unittest discover -s tests -v</pre>
+<p>Standard library only, no network access, seeded randomness (seed = <code>20261105</code>), so two runs produce identical output. A CI workflow re-runs the whole chain and fails on any diff.</p>
+<h2>Model, in one place</h2>
+<pre># ratings (points per game vs a league-average opponent)
+target_home = margin + r_away - H          target_away = r_home + H - margin
+r_i = (sum(targets_i) + 12 * prior_i) / (games_i + 12)       iterated 400x, then centred
+H   = mean(margin - (r_home - r_away))                        re-estimated each iteration
+
+# totals (additive, centred, shrunk toward the 2025-26 tendency)
+total = base + off_home + off_away        off_i = (sum(totals - base - off_opp) + 12*prior_i)/(games_i+12)
+
+# probabilities
+P(home) = Phi(margin / sigma_margin)      sigma from walk-forward residuals
+P(both) = bivariate normal with measured r(margin, total)</pre>
+<p>The prior is the 2025-26 per-game point differential from the official team-stats table; the totals prior is derived as <code>2*PTS - plus_minus</code> minus the league mean, which reconstructs a team's average game total from two published columns.</p>
+<h2>Known weaknesses</h2>
+<ul>
+<li>Ninety-six graded games. Every interval on this site is wide, and the correct reading of a wide interval is 'unknown', not 'close to zero'.</li>
+<li>No market prices, so no edge can be measured (F01, G9).</li>
+<li>No injury, lineup or fatigue adjustment baked into the ratings — shown as context instead.</li>
+<li>Prop volatility is pooled across players rather than estimated per player (F05).</li>
+<li>The 2025-26 prior is an inherited transcription, internally consistent but not re-read this session (F11).</li>
+</ul>
+<p class="meta">Method sources: <a href="https://www.itl.nist.gov/div898/handbook/eda/section3/eda35.htm" rel="noopener">NIST/SEMATECH</a>, <a href="https://scikit-learn.org/stable/modules/cross_validation.html" rel="noopener">scikit-learn</a>, <a href="https://scikit-learn.org/stable/modules/calibration.html" rel="noopener">calibration</a>, <a href="https://doi.org/10.1111/j.2517-6161.1995.tb02031.x" rel="noopener">Benjamini–Hochberg</a>.</p>
+<footer class="site">
+<p>Research only — not wagering advice, and not a betting product. Every value on this site is either copied from an
+official NBA page or computed from committed data by a formula on the <a href="../governance/methodology.html">method
+page</a>; anything that could not be verified is left blank and listed on
+<a href="../governance/flagged.html">Flagged for review</a>.</p>
+<p>Problem gambling? National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> ·
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org/help-treatment</a></p>
+<p>Built by session <code>arena-7a06a47e-own4</code>. Source: <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com/sassnarep3-star/Own4</a>.
+Static pages, no tracking, no third-party scripts.</p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

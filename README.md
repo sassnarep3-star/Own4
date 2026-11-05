@@ -1,3 +1,53 @@
+# Own4 — NBA Line Origination
+
+**Canonical, reproducible release: 2026-11-05** · session `arena-7a06a47e-own4`
+
+**[→ Open the dashboard](https://sassnarep3-star.github.io/Own4/nba-lines/site/)**
+
+A working pipeline that captures official 2026-27 NBA data, originates its own spread, total, moneyline and
+player-prop lines, measures the dependence between every leg it might combine, removes luck with a strict
+walk-forward backtest and a permutation test, and then refuses to reward a strategy until it passes ten
+pre-registered gates.
+
+| | |
+|---|---|
+| Official data | 121 finals (2026-10-20 → 2026-11-04), 30 standings rows, tonight's slate, 13 availability rows |
+| Verification | **30/30 teams reconciled** against the official standings, zero mismatches |
+| Out-of-sample Brier | `0.2104` vs `0.2531` constant-home baseline (96 graded games) |
+| Skill / luck | `+0.1730`, bootstrap CI `+0.020` to `+0.310`, permutation p = `0.0002` |
+| Correlations | 10 values with 95% CIs and BH q-values, computed in-repo |
+| Reward-eligible strategies | **0 of 12** — gates G3 (sample) and G9 (no prices) fail |
+| Flagged for review | 18 items, published and non-blocking |
+
+- [Executive summary](EXECUTIVE_SUMMARY.md) — canonical result, then the superseded 2026-11-02 text preserved
+- [Flagged for review](https://sassnarep3-star.github.io/Own4/nba-lines/site/governance/flagged.html)
+- [Repository review](https://sassnarep3-star.github.io/Own4/nba-lines/site/governance/repo-review.html) — 16 findings
+- [Source register](https://sassnarep3-star.github.io/Own4/nba-lines/site/governance/sources.html)
+- [Task board](COORDINATION.md)
+
+**Rebuild:** `cd nba-lines && python3 collect_official.py && python3 engine.py && python3 audit.py && python3 build.py && python3 verify.py && python3 -m unittest discover -s tests -v`
+(standard library only, seeded, byte-reproducible; `verify.py` runs 2,400+ checks and fails the build on an
+unsourced table row, a broken link, a non-allow-listed citation host, or a non-deterministic page).
+
+**The honest headline:** the rating model contains real forecasting information and it has not earned a reward.
+There is no official price archive, so no expected value, ROI or closing-line value is claimed anywhere in this
+release. That limitation is the finding, not an omission.
+
+Research only — not wagering advice. National Problem Gambling Helpline **1-800-MY-RESET**
+(https://www.ncpgambling.org/help-treatment).
+
+---
+
+# Earlier workspaces (preserved, reviewed, not canonical)
+
+The sections below are retained unchanged from earlier sessions so their work is not lost. Their claims are
+reviewed in the [repository review](https://sassnarep3-star.github.io/Own4/nba-lines/site/governance/repo-review.html)
+and are not endorsed by the release above. In particular, finding R02 records a published correlation table whose
+input dataset is not in this repository, and finding R16 records that this file previously carried a headline
+claim contradicting the evidence workspace.
+
+---
+
 # Own4 — NBA Line Origination & Signal Strategy Research
 
 Leaderboard-style research framework for originating NBA lines from verifiable signals (single bets, parlays, player-prop combos), with validation gates, correlation controls, and luck-removal rules. All data rows cite official sources; unverifiable values are blank and flagged.
