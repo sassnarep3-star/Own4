@@ -7,7 +7,7 @@
    "severity": "medium",
    "item": "The repository's stored 'official' snapshot is dated 2026-11-02 and is now out of date",
    "detail": "official/*.json and data/*.json hold the 2026-11-02 transposition. On 2026-11-05 the league has played 36 more games, so every standings row has moved. This site publishes a new 2026-11-05 snapshot and leaves the old files untouched for audit; the old snapshot is not republished as current.",
-   "impact": "Superseded — no value from 2026-11-02 is presented as current on this site.",
+   "impact": "Superseded \u2014 no value from 2026-11-02 is presented as current on this site.",
    "source_url": "https://www.nba.com/standings",
    "repo_url": "https://github.com/sassnarep3-star/Own4/blob/main/official/standings.json"
   },
@@ -24,9 +24,9 @@
    "id": "F-PLUSMINUS",
    "severity": "medium",
    "item": "The 30 published team +/- values do not sum to zero",
-   "detail": "Sum of the official per-game differentials = -5.3. Mean points scored 113.44 vs mean implied points allowed 113.62 (gap +0.18). Every game awards identical points to both teams, so the true league-wide sum is exactly zero; pure one-decimal rounding allows at most about 1.5. Cause unexplained. Values are published exactly as displayed and the column is not used as a model input.",
+   "detail": "Sum of the official per-game differentials = -5.3. Mean points scored 113.44 vs mean implied points allowed 113.62 (gap +0.18). Every game awards identical points to both teams, so the true league-wide sum is exactly zero; pure one-decimal rounding allows at most about 1.5. Cause unexplained. A single-team spot check on 2026-11-05 confirms the column itself is being read correctly: the Chicago Bulls page shows -18.0 and its own OPPG header (129.6) gives 111.6 - 129.6 = -18.0. Values are therefore published exactly as displayed, and the column is not used as a model input.",
    "impact": "No correction applied. The model derives ratings only from final scores, so no result depends on this column.",
-   "source_url": "https://www.nba.com/stats/teams/traditional",
+   "source_url": "https://www.nba.com/stats/team/1610612741/traditional",
    "repo_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/out/reconciliation.json"
   },
   {

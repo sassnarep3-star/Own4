@@ -77,7 +77,7 @@ def main():
         "index.html": 10, "verified/standings.html": 30, "verified/team-stats.html": 30,
         "verified/games.html": 102, "verified/own-lines.html": 2, "verified/strategies.html": 11,
         "verified/validation.html": 13, "verified/backtest.html": 44, "verified/leaderboard.html": 8,
-        "verified/correlations.html": 14, "verified/sources.html": 12, "verified/audit.html": 23,
+        "verified/correlations.html": 14, "verified/sources.html": 13, "verified/audit.html": 24,
         "verified/flagged.html": 13, "verified/executive-summary.html": 7,
     }
     for rel, rows in pages.items():

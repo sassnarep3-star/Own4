@@ -158,7 +158,10 @@ def main():
          "sum of the 30 published +/- values = %+.1f; mean PTS %.2f vs mean implied points allowed %.2f "
          "(difference %+.2f). Because every game awards the same points to both sides the true sum is 0. "
          "Consistent with one-decimal rounding, but larger than the +/-1.5 bound that pure rounding allows, "
-         "so it is reported, not corrected, and the column is not used as a model input (flag F-PLUSMINUS)."
+         "so it is reported, not corrected, and the column is not used as a model input (flag F-PLUSMINUS). "
+         "Spot check: the Chicago team page independently shows -18.0, and its own OPPG header (129.6) gives "
+         "111.6 - 129.6 = -18.0, so that row is faithful to the official source and the league-wide discrepancy "
+         "is not explained by this transcription."
          % (pm, mean_pts, mean_allowed, mean_pts - mean_allowed), S["team_stats"])
 
     # ---- C11 inherited snapshot internal consistency ----

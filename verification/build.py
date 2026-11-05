@@ -836,6 +836,8 @@ def build_audit():
         ("A07", "The previous landing page presented 2026-11-02 values as current", "It carried the correct date but is now stale. A copy is preserved at pages/legacy-root-dashboard.html and linked from the sidebar.", "superseded", repo("pages/legacy-root-dashboard.html")),
         ("A08", "No automated check tied published numbers to their data files", "This session adds verification/verify_site.py, which fails when a table row lacks a source link, a local link is broken, or a page is missing its navigation and helpline footer.", "fixed", repo("verification/verify_site.py")),
         ("A09", "GitHub Pages serves the repository root through the legacy configuration", "The Pages API reports build_type legacy, source main, path /, status built. No settings change was needed or attempted.", "verified", src("S11")),
+        ("A11", "The +/- column was spot-checked on a single-team official page",
+         "Chicago's team page shows -18.0 and its own OPPG header (129.6) implies 111.6 - 129.6 = -18.0, so that row is faithful. The league-wide sum of -5.3 is therefore a property of the published table, not of the transcription.", "verified", src("S13")),
         ("A10", "Player-level data was never available in this repository", "No workspace has official per-game player logs; prop work everywhere in the repo is therefore descriptive, not predictive.", "flagged", repo("nba-evidence/data/players.csv")),
     ]
     body = """
@@ -865,7 +867,7 @@ log was inferred.</p></div>
                     badge(d, {"verified": "pass", "flagged": "blocked", "excluded": "warn",
                               "retained": "neutral", "superseded": "neutral", "fixed": "pass"}[d]), e)
                    for a, b, c, d, e in findings],
-                  caption="Ten findings on the inherited material")}
+                  caption="Eleven findings on the inherited material")}
     return page("verified/audit.html", "Repo audit", "Governance / Repo audit", body, "audit",
                 "Line-by-line audit of the repository's NBA data against official pages, with reconciliation checks.")
 

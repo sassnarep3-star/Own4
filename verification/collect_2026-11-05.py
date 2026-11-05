@@ -145,6 +145,16 @@ SOURCES = [
         "contains": "deployment status",
     },
     {
+        "id": "S13",
+        "name": "NBA.com Stats — Chicago Bulls team page, 2026-27 traditional",
+        "url": "https://www.nba.com/stats/team/1610612741/traditional",
+        "domain": "nba.com",
+        "official": True,
+        "read_on": FETCHED_UTC,
+        "read_scope": "Single-team spot check of the anomalous +/- column: GP, MIN, PTS, W-L, FG%, 3P%, FT%, REB, AST, TOV, STL, BLK, +/- and the page's OPPG header value (129.6).",
+        "contains": "1 team row + OPPG header",
+    },
+    {
         "id": "S12",
         "name": "National Council on Problem Gambling — helpline",
         "url": "https://www.ncpgambling.org/help-treatment",

@@ -41,8 +41,8 @@ PAGES = [
     ("verified/correlations.html", 14),
     ("verified/backtest.html", 44),
     ("verified/leaderboard.html", 8),
-    ("verified/sources.html", 12),
-    ("verified/audit.html", 23),
+    ("verified/sources.html", 13),
+    ("verified/audit.html", 24),
     ("verified/flagged.html", 13),
 ]
 

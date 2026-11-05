@@ -818,7 +818,7 @@ last) so the legacy pipeline cannot regress the root page; the legacy generator'
 restored byte-for-byte after a collision with this session's script, which now lives in `assets/canonical.js`.
 No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was edited or deleted.
 
-**Site verification.** `verification/verify_site.py`: 14 pages, 344 data-table rows, every row carrying an
+**Site verification.** `verification/verify_site.py`: 14 pages, 346 data-table rows, every row carrying an
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
