@@ -80,8 +80,8 @@ sampled date holds exactly the number of games the official calendar lists, and 
 exactly by their results in the newly verified games. Coverage is 85 of 121 games (70.2%); 36 games on seven
 October dates were never captured and appear in no calculation.
 
-**Originated lines.** For 2026-11-05 the model originates ORL at PHX with a fair total of 225.9 (PHX −1.5) and
-MIA at GSW with a fair total of 230.0 (GSW −3.0). Every price field is blank: no official NBA source publishes a
+**Originated lines.** For 2026-11-05 the model originates ORL at PHX with a total of 225.9, published as a
+half-point line of 226.0 (PHX −1.5), and MIA at GSW with a total of 230.0 on the same line (GSW −3.0). Every price field is blank: no official NBA source publishes a
 price, and the official games page's odds toggle exposed no values. No expected value, stake or return is claimed.
 
 **Signal and luck.** Ten team-level correlations were measured with 95% confidence intervals and

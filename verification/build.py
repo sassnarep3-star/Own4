@@ -387,7 +387,7 @@ def build_games():
         rows.append(("2026-10-21" if False else r["date"], r["game_id"],
                      "%s @ %s" % (esc(r["team_a"]), esc(r["team_b"])),
                      "%d–%d" % (r["team_a_pts"], r["team_b_pts"]), esc(str(r["total_pts"])),
-                     ("%+d" % r["margin_a"]), badge("inherited · corroborated", "neutral"),
+                     ("%+d" % (r["team_b_pts"] - r["team_a_pts"])), badge("inherited · corroborated", "neutral"),
                      ext(r["source_url"], "Date page ↗") + " " + ext(r["game_url"], "Game ↗")))
     for r in FRESH:
         rows.append((r["date"], r["game_id"], "%s @ %s" % (esc(r["away"]), esc(r["home"])),
@@ -448,8 +448,8 @@ def build_lines():
                  ("%s −%.1f" % (esc(l["away"]), abs(l["fair_line_home"])))
         breakeven = (1.0 / l["home_win_prob"]) if l["home_win_prob"] else None
         rows.append((
-            "<strong>%s @ %s</strong><br><span class='small muted'>%s · tip %s</span>" % (
-                esc(l["away_name"]), esc(l["home_name"]), esc(l["away"]), esc(l["tip_et"])),
+            "<strong>%s @ %s</strong><br><span class='small muted'>%s @ %s · tip %s</span>" % (
+                esc(l["away_name"]), esc(l["home_name"]), esc(l["away"]), esc(l["home"]), esc(l["tip_et"])),
             num(l["fair_away_pts"]), num(l["fair_home_pts"]),
             "%+.1f" % m,
             "<strong>%s</strong>" % esc(spread),
@@ -510,7 +510,7 @@ not a forecast. No over/under probability is published for any player.</p>
 """ % {
         "snap": SNAPSHOT,
         "t": table(["Game", "Fair away pts", "Fair home pts", "Originated margin (home)",
-                    "Fair spread", "Fair total", "Home win prob.",
+                    "Fair spread", "Fair total (rounded line)", "Home win prob.",
                     "Break-even decimal odds (derived)", "Market price / edge", "Official source"],
                    rows, caption="Originated lines for 2026-11-05 · %d games" % len(rows),
                    numeric=(1, 2, 3, 5, 6, 7)),
@@ -935,8 +935,9 @@ excluded from every calculation.</p>
 <h2>3. Originated lines</h2>
 <p>The model converts official final scores into shrunk per-team offense and defense ratings and produces a fair
 total, a fair spread and a win probability. For 2026-11-05 it originates
-<strong>%(g1)s at %(h1)s</strong>: fair total <strong>%(t1)s</strong>, %(sp1)s. And
-<strong>%(g2)s at %(h2)s</strong>: fair total <strong>%(t2)s</strong>, %(sp2)s. Every price field is blank:
+<strong>%(g1)s at %(h1)s</strong>: originated total <strong>%(p1)s</strong> published as a half-point line of
+<strong>%(t1)s</strong>, %(sp1)s. And <strong>%(g2)s at %(h2)s</strong>: originated total <strong>%(p2)s</strong>,
+line <strong>%(t2)s</strong>, %(sp2)s. Every price field is blank:
 no official NBA source publishes a price, and the official games page's odds toggle exposed no values to this
 session. No expected value, stake or return is claimed.</p>
 
@@ -983,6 +984,7 @@ dataset and a scoreboard of zeroes.</p>
         "t1": num(AN["own_lines"][0]["fair_total_line"]), "t2": num(AN["own_lines"][1]["fair_total_line"]),
         "h1": esc(AN["own_lines"][0]["home"]), "h2": esc(AN["own_lines"][1]["home"]),
         "sp1": spread_text(AN["own_lines"][0]), "sp2": spread_text(AN["own_lines"][1]),
+        "p1": num(AN["own_lines"][0]["fair_total"]), "p2": num(AN["own_lines"][1]["fair_total"]),
         "nsurv": len(surv),
         "r1": corr[0]["r"], "r2": corr[1]["r"], "r3": corr[2]["r"], "r4": corr[3]["r"], "r5": corr[7]["r"],
         "rpace": AN["game_correlations"][0]["r"], "npace": AN["game_correlations"][0]["n"],
