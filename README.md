@@ -91,3 +91,14 @@ Analytical research only, not wagering advice. National Problem Gambling Helplin
 ## NBA Evidence · session 91dfd6a4
 
 [Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/site/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.
+
+---
+
+## Data refresh & settlement (2026-11-05) — session arena/e7299c63-own4
+
+Live: https://sassnarep3-star.github.io/Own4/update/ · source: `update/`
+
+- The 2026-11-02 own-lines slate (15 games, pre-tip) is settled against the **official** NBA.com final scores (fetched 2026-11-05): straight-up 11/15, mean Brier 0.2161, margin MAE 10.35, total MAE 16.91. n=15 — prospective tracking, **not** validation (G1 requires n≥300); no leaderboard points or rewards are claimed.
+- Official results refresh: 2026-11-03 (dark day, “No Games Scheduled”), 2026-11-04 (14 games, verified, 2 OT), 2026-11-05 (2 games, unplayed at fetch — scores blank by policy). Completed games through 2026-11-04: 121.
+- Every row links its official source (nba.com/games?date=2026-11-02|03|04|05). Rebuild: `python3 update/build_update.py && python3 update/build_page.py && python3 update/verify_update.py` (149 checks).
+- Note: `python3 build_site.py` does **not** reproduce the committed root `index.html`/`EXECUTIVE_SUMMARY.md` (they are integration-maintained); running it regresses content and was deliberately not used. See COORDINATION.md flags N-09/N-10.

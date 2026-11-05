@@ -63,3 +63,16 @@ Sources: https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/sc
 https://operations.nfl.com/rules-officiating/2026-nfl-rulebook ·
 https://scikit-learn.org/stable/modules/cross_validation.html ·
 https://www.ncpgambling.org/
+
+---
+
+## Addendum — 2026-11-05 UTC (session `arena/e7299c63-own4`): prospective settlement of the 2026-11-02 slate + official refresh
+
+The repository's own pre-tip lines for the 2026-11-02 slate (committed before the first tip) are now **settled against the official final scores** (NBA.com, fetched 2026-11-05; see `update/settlement_2026-11-02.json` and the live page `/update/`):
+
+- Straight-up 11/15 (73.3%); home-spread covers 6/15; overs vs own total 4/15; totals picks 5/15; mean Brier 0.2161; margin MAE 10.35 pts; total MAE 16.91 pts; one OT game (NOP 135–134 MEM).
+- **This is not validation.** n=15 vs G1's n≥300; the result is consistent with the repo's standing conclusion that no strategy is validated and zero rewards are awarded. No leaderboard points are claimed from it.
+- Official refresh: 2026-11-03 dark day ("No Games Scheduled"); 2026-11-04 — 14 games, all Final (2 OT), transcribed line-by-line with leaders and displayed records; 2026-11-05 — 2 games unplayed at fetch (scores blank). Completed games through 2026-11-04: **121** (92 lab + 15 official 11-02 + 0 + 14).
+- Every row on `update/` links its official nba.com source; unconfirmable/unplayed values are blank by policy. NCPG helpline (1-800-MY-RESET) re-confirmed.
+- New irregularities flagged (N-01…N-10, see `update/recheck_2026-11-05.md`): standings drift (as-of 2026-11-02), raw NBA.com HTML captures committed under `data/raw/nba/` (~53 MB, possibly redistribution-restricted), `engine/verify.py` 26/29 (scans those captures; not CI-gating), and `build_site.py` not reproducing the committed root site (root `index.html`/`EXECUTIVE_SUMMARY.md` are integration-maintained; regeneration regresses content — flagged, not fixed).
+- Verification: `python3 update/verify_update.py` → 149/149 PASS (independent recompute from raw points; teams/ids cross-checked against the repo slate; aggregates recomputed). Repo CI suites re-run clean 2026-11-05.
