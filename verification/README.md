@@ -1,7 +1,9 @@
 # `verification/` — verified 2026-11-05 snapshot, model and site
 
 Everything the canonical dashboard shows is produced here. Standard library only, no network calls,
-no secrets, deterministic output.
+no secrets. Rebuilding twice in the same environment is byte-identical; the transcription is byte-identical
+in any environment, and the statistical output is pinned by `assert_publication.py` because libm and RNG tie
+handling can move a last-digit p-value across C libraries.
 
 ```bash
 python3 verification/collect_2026-11-05.py   # transcription + source register  -> verification/data/
@@ -9,6 +11,7 @@ python3 verification/reconcile.py            # 13 audit checks                  
 python3 verification/analysis.py             # model, gates, correlations, tests -> verification/out/analysis.json
 python3 verification/build.py                # root index.html + verified/*.html
 python3 verification/verify_site.py          # link + source-link gate (exits non-zero on failure)
+python3 verification/assert_publication.py   # numerical invariants the published claims depend on
 ```
 
 `python3 engine/build.py` still builds the earlier sessions' pages and now calls `verification/build.py`

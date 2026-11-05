@@ -63,10 +63,22 @@ jobs:
           sys.exit(1 if s['fail'] else 0)
           PY
 
-      - name: Confirm the published output is byte-identical
+      - name: Transcription must rebuild byte-identically
+        # verification/data/ is pure literals: no arithmetic, no randomness, so any diff
+        # here is a real defect. This is the strict half of the reproducibility gate.
         run: |
-          git diff --stat -- verification/data verification/out verified index.html
-          git diff --exit-code -- verification/data verification/out verified index.html
+          git diff --stat -- verification/data
+          git diff --exit-code -- verification/data
+
+      - name: Statistical output must rebuild to the same substantive result
+        # The strict half stops here on purpose: the analysis calls libm (math.erf) and a
+        # seeded RNG, so a different C library can move a tie inside the permutation loop
+        # and shift a p-value in the last digit. These invariants pin everything the
+        # published claims depend on, and print the drift for the record.
+        run: |
+          echo "--- drift between the committed site and this runner's rebuild ---"
+          git diff --stat -- verification/out verified index.html || true
+          python3 verification/assert_publication.py
 
       - name: Check the dashboard script parses
         run: node --check assets/canonical.js

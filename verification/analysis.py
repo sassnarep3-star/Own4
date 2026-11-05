@@ -520,7 +520,8 @@ def main():
             value = "every published row links to its official page; NBA Stats FAQ restriction acknowledged on the Flagged page"
             status = "PASS"
         elif gid == "G10":
-            value = "one command rebuild + automated site checks (verification/verify_site.py)"
+            value = ("five-command rebuild; transcription reproduces byte-identically, statistics are pinned by "
+                     "verification/assert_publication.py, site by verification/verify_site.py (344 source-linked rows, 0 broken links)")
             status = "PASS"
         gate_results.append({"id": gid, "name": g["name"], "type": g["type"], "rule": g["rule"],
                              "status": status, "evidence": value, "rationale": g["rationale"]})

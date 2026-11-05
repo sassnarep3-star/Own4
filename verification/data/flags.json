@@ -114,7 +114,7 @@
    "id": "F-DEPLOY",
    "severity": "low",
    "item": "GitHub Pages deploys through the repository's legacy main/root configuration, not a dedicated workflow",
-   "detail": "The Pages API reports build_type 'legacy', source main, path '/', status 'built'. No Pages-setting change was attempted. Site validation is done by verification/verify_site.py, which runs locally and can run in CI, but the deployment itself is the platform's legacy build.",
+   "detail": "The Pages API reports build_type 'legacy', source main, path '/', status 'built'. No Pages-setting change was attempted. Site validation is done by verification/verify_site.py and verification/assert_publication.py, which run locally and in CI, but the deployment itself is the platform's legacy build. Note: a rebuild on a different C library can move a last-digit p-value through libm/tie effects, so CI enforces byte-identical transcription plus numerical invariants rather than a whole-site byte diff; this was observed when the first validation run on the runner differed from the local rebuild.",
    "impact": "The site is static; there is no server-side computation and no external runtime dependency.",
    "source_url": "https://api.github.com/repos/sassnarep3-star/Own4/pages",
    "repo_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/verify_site.py"
