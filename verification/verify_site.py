@@ -76,6 +76,10 @@ class P(html.parser.HTMLParser):
         a = dict(attrs)
         if tag == "a" and "href" in a:
             self.links.append(a["href"])
+        if tag in ("script", "link") and a.get("src"):
+            self.links.append(a["src"])
+        if tag == "link" and a.get("href"):
+            self.links.append(a["href"])
             if self.cur_row is not None:
                 self.cur_row.append(a["href"])
         if "id" in a:
@@ -142,8 +146,8 @@ def check_page(rel, min_rows):
         errors.append("%s: navigation block missing" % rel)
     if "1-800-MY-RESET" not in raw or "ncpgambling.org" not in raw:
         errors.append("%s: responsible-gambling footer missing" % rel)
-    if 'assets/canonical.css' not in raw:
-        errors.append("%s: stylesheet link missing" % rel)
+    if "assets/canonical.js" not in raw:
+        errors.append("%s: canonical script reference missing" % rel)
 
     for pattern, label in PLACEHOLDER_PATTERNS:
         m = pattern.search(raw)

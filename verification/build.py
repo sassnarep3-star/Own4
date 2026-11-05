@@ -180,7 +180,7 @@ def page(path, title, crumb, body, active, desc):
 %(footer)s
 </main>
 </div>
-<script src="%(prefix)sassets/table.js" defer></script>
+<script src="%(prefix)sassets/canonical.js" defer></script>
 </body>
 </html>
 """ % {
