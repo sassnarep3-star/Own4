@@ -753,3 +753,13 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+## Session 598fbe6b — 2026-11-05 evidence-status integration
+
+| Task | Status | Owner | Scope |
+|---|---|---|---|
+| Audit inherited NBA outputs, run validation, publish current executive entry point and limitations | in progress | arena/598fbe6b-own4 | `status/**`, `COORDINATION.md` append-only |
+
+- Preserve all inherited namespaces and root navigation. No other current session claims `status/`. Fixed Arena branch is required; no alternate branch created.
+- Review will distinguish mechanical line coverage from factual verification. Existing official-source links are not evidence that this session fetched their contents. Network access is restricted to GitHub/package hosts; unavailable NBA rechecks will be flagged rather than claimed verified.
+- Reuse existing NBA Evidence framework rather than create another competing betting model. Claim includes final PR/merge/deploy verification for the isolated status entry point.
