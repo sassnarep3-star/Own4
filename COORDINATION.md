@@ -777,7 +777,7 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Every game `source_url` is on `https://www.nba.com/`; no non-official URL in the game table.
 - No duplicate team on the same date; all scores are integers.
 - The six 2025-01-01 games above match the CSV exactly (IDs, teams, scores, Final status).
-- 38 player rows across two official box scores (0022400487, 0022400465 family); every player URL is an `nba.com/game/…/box-score` link.
+- 38 player rows across two official box scores (0022400465: 20 rows; 0022400487: 18 rows); every player URL is an `nba.com/game/…/box-score` link.
 - Live site: `https://sassnarep3-star.github.io/Own4/nba-evidence/site/` and its `flagged.html` were fetched and read; the content matches the committed findings (0 qualified strategies, 0 rewards, no validated edge). The GitHub Pages API reports `status: built`, `source: main /`.
 
 **Not verified in this session (so not claimed):** the other 56 game rows; the 2 unseen 2025-01-01 games (not compared); all player-level numbers beyond the link format; all model outputs and correlation values (they are computed, not official facts); any sportsbook price (none exists in the data).
