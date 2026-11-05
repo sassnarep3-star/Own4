@@ -10,7 +10,7 @@ import json
 ROOT = Path(__file__).resolve().parent.parent
 HERE = Path(__file__).resolve().parent
 NBA_MODULES = {'index.html', 'pages', 'docs', 'lab', 'lines-lab', 'nba-evidence',
-               'own4-dashboard', 'pipeline'}
+               'own4-dashboard', 'pipeline', 'status'}
 # A fixed inherited-page universe keeps the report stable across regeneration.
 MODULES = NBA_MODULES | {'nfl', 'nfl-lab', 'nfl-quant', 'nfl-research'}
 REPO = 'https://github.com/sassnarep3-star/Own4/blob/main/'

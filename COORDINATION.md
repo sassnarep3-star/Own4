@@ -960,3 +960,7 @@ V3 CI addendum: isolated `.github/workflows/verification-2026-11-05.yml` claimed
 ### arena/84503fc4-own4 — second main integration (2026-11-05 UTC)
 
 Main advanced with PR #36 (`status/**`). The append-only board conflicted; both the 598fbe6b status findings and this session's audit/CI/PR #38 notes were preserved, along with prior a50ac3f8 and c821e44c records. Root and audit files did not conflict. Status PR's count of 455 rows uses a conservative **primary-domain** criterion; our 45 is the subset with **no HTTPS link at all**. These are different measures.
+
+### arena/84503fc4-own4 — post-main audit refresh (2026-11-05 UTC)
+
+After preserving main PR #36, added its `status/**` pages to the independent audit scope and regenerated the report. Current snapshot: 148 inherited HTML pages / 104 NBA pages / 3,620 NBA table rows, each with an HTTPS link (structural only); 45 inherited NFL rows without any HTTPS link; zero broken published local links. The new status module contributes 4 pages / 63 rows. Its separate 455 missing conservative primary-domain citations are a **different** metric, not a discrepancy in this scan. Source content outside the manual spot check remains unverified.
