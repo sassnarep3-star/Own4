@@ -63,3 +63,41 @@ Sources: https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/sc
 https://operations.nfl.com/rules-officiating/2026-nfl-rulebook ·
 https://scikit-learn.org/stable/modules/cross_validation.html ·
 https://www.ncpgambling.org/
+
+
+---
+
+# Addendum — verified snapshot 2026-11-05 (session `arena/6c423a51-own4`)
+
+The sections above describe the 2026-11-02 snapshot. On 2026-11-05 the official pages were re-read and the
+numbers moved: the league has played 121 games. This addendum supersedes the earlier figures wherever they
+conflict, and the full version is published as a page at
+https://sassnarep3-star.github.io/Own4/verified/executive-summary.html
+
+**Data.** 30 standings rows, 30 team-stat rows, 2 scheduled games and 29 final scores were re-read from nba.com
+on 2026-11-05. 56 further final scores inherited from 2026-11-02 were corroborated rather than re-fetched: every
+sampled date holds exactly the number of games the official calendar lists, and all 30 teams' records advance
+exactly by their results in the newly verified games. Coverage is 85 of 121 games (70.2%); 36 games on seven
+October dates were never captured and appear in no calculation.
+
+**Originated lines.** For 2026-11-05 the model originates ORL at PHX with a total of 225.9, published as a
+half-point line of 226.0 (PHX −1.5), and MIA at GSW with a total of 230.0 on the same line (GSW −3.0). Every price field is blank: no official NBA source publishes a
+price, and the official games page's odds toggle exposed no values. No expected value, stake or return is claimed.
+
+**Signal and luck.** Ten team-level correlations were measured with 95% confidence intervals and
+Benjamini-Hochberg control; five survive at q = 0.05 (point differential r = 0.921, points r = 0.540, FG% r = 0.506,
+3P% r = 0.448, turnovers r = −0.524). Same-game pace dependence between the two teams' points is small
+(r = 0.125 on 85 games). The strict walk-forward backtest grades 35 games: winner accuracy 0.5714 against a 0.6000
+always-pick-home baseline (one-sided p = 0.7003), bootstrap interval [0.4000, 0.7429]. The originated total beats
+its naive baseline by 0.7359 MAE (permutation p = 0.0261) but fails the 300-game floor and fails BH once both
+strategy tests are counted. A real 55% edge would need about 620 graded games to be detected at 80% power.
+
+**Gates and competition.** Ten pre-registered gates: 4 pass, 5 fail, 1 blocked (no official price). Zero of eight
+strategies qualify; zero rewards are awarded. Partial credit is how variance gets paid.
+
+**Flags.** Prices, player game logs, player availability and 36 games are missing; the published +/- column sums to
+−5.3 instead of 0 and is not used as a model input; the 56 inherited rows were not individually re-fetched. All 13
+items are published with official and repository links on `/verified/flagged.html`.
+
+Research only — not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
+(https://www.ncpgambling.org/help-treatment).

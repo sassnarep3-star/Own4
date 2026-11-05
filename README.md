@@ -1,5 +1,13 @@
 # Own4 — NBA Line Origination & Signal Strategy Research
 
+> **Canonical dashboard — verified 2026-11-05 snapshot: https://sassnarep3-star.github.io/Own4/**
+> One clean landing page plus category subpages (official data, originated lines, strategy research,
+> competition, governance). Every data row links to the official NBA page it came from; unconfirmable values
+> are blank and listed on the [Flagged for review](https://sassnarep3-star.github.io/Own4/verified/flagged.html)
+> page. Rebuild with the five commands in [`verification/README.md`](verification/README.md).
+> Result of this snapshot: **no strategy qualifies, zero rewards awarded** — see
+> [Backtest & luck](https://sassnarep3-star.github.io/Own4/verified/backtest.html).
+
 Leaderboard-style research framework for originating NBA lines from verifiable signals (single bets, parlays, player-prop combos), with validation gates, correlation controls, and luck-removal rules. All data rows cite official sources; unverifiable values are blank and flagged.
 
 - Live site: GitHub Pages (see repo Settings → Pages)
@@ -91,3 +99,28 @@ Analytical research only, not wagering advice. National Problem Gambling Helplin
 ## NBA Evidence · session 91dfd6a4
 
 [Open the evidence dashboard](https://sassnarep3-star.github.io/Own4/nba-evidence/site/) · source `nba-evidence/`. Independently inspected historical NBA extracts, reproducible fair lines, eight gated strategy hypotheses and an explicit no-edge finding. Earlier workspaces remain preserved.
+
+
+---
+
+## Canonical verified snapshot · session `arena/6c423a51-own4` (2026-11-05)
+
+The repository's stored NBA snapshot was dated 2026-11-02. This session re-read the official pages on
+2026-11-05, verified them line by line, measured signal and luck, and rebuilt the root dashboard so that one
+page is the entry point for the whole repository.
+
+- **Live:** https://sassnarep3-star.github.io/Own4/ · **Flagged:** `/verified/flagged.html`
+- **Source of truth:** `verification/` — `collect_2026-11-05.py` (transcription with per-value official URLs),
+  `reconcile.py` (13 audit checks), `analysis.py` (model, gates, correlations, backtest), `build.py` (site),
+  `verify_site.py` (fails on a broken link or an unsourced table row).
+- **Data:** 30 standings rows, 30 team-stat rows, 2 scheduled games and 29 final scores re-read on 2026-11-05;
+  56 inherited final scores corroborated, not re-fetched. Sample = 85 of 121 games played (70.2%); the 36 games
+  on seven October dates were never captured and are used nowhere.
+- **Findings:** walk-forward winner accuracy 0.5714 on 35 graded games vs a 0.6000 home baseline (one-sided
+  p = 0.7003); originated totals beat the naive baseline by 0.74 MAE (permutation p = 0.0261) but fail the
+  300-game floor and Benjamini-Hochberg at q = 0.05; 5 of 10 team correlations survive FDR; prop-pair
+  correlations are blank because no official game logs exist here.
+- **Outcome:** 0 of 8 strategies qualify, 0 rewards, 13 items flagged for review. No price, edge, stake or
+  return is claimed anywhere.
+- **Not changed:** every peer workspace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) and every prior
+  data file. The previous root dashboard is preserved at `pages/legacy-root-dashboard.html`.
