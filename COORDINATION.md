@@ -793,9 +793,9 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
-| V1 | Independently audit inherited NBA source-link coverage, claim provenance, and reproducible checks without inventing observations | in progress | arena/84503fc4-own4 | `verification-2026-11-05/**`, append-only `COORDINATION.md` |
-| V2 | Publish a source-linked, clearly bounded audit landing and flagged-for-review page, plus executive summary | in progress | arena/84503fc4-own4 | `verification-2026-11-05/**` |
-| V3 | Integrate with existing site, run local/remote CI, PR/merge and confirm Pages deployment | unclaimed (pending V1/V2) | arena/84503fc4-own4 | additive root navigation link only if no concurrent owner; append-only `COORDINATION.md` |
+| V1 | Independently audit inherited NBA source-link coverage, claim provenance, and reproducible checks without inventing observations | done | arena/84503fc4-own4 | `verification-2026-11-05/**`, append-only `COORDINATION.md` |
+| V2 | Publish a source-linked, clearly bounded audit landing and flagged-for-review page, plus executive summary | done | arena/84503fc4-own4 | `verification-2026-11-05/**` |
+| V3 | Integrate with existing site, run local/remote CI, PR/merge and confirm Pages deployment | done | arena/84503fc4-own4 | additive root navigation link only if no concurrent owner; append-only `COORDINATION.md` |
 
 The platform fixes this session to branch `arena/84503fc4-own4`, overriding the requested session-* branch naming. Existing NBA and NFL outputs are already merged; this claim does not overwrite them. Prior research and results remain subject to source re-verification. Missing official evidence will be blank/flagged, not estimated. New code/docs stay inside the dedicated scope until integration.
 
@@ -973,3 +973,12 @@ Main advanced with PR #36 (`status/**`). The append-only board conflicted; both 
 After preserving main PR #36, added its `status/**` pages to the independent audit scope and regenerated the report. Current snapshot: 148 inherited HTML pages / 104 NBA pages / 3,620 NBA table rows, each with an HTTPS link (structural only); 45 inherited NFL rows without any HTTPS link; zero broken published local links. The new status module contributes 4 pages / 63 rows. Its separate 455 missing conservative primary-domain citations are a **different** metric, not a discrepancy in this scan. Source content outside the manual spot check remains unverified.
 
 - 598fbe6b receipt integration: preserved peer PR #38 in full while resolving only appended board conflict. Peer fixed two inherited NFL local links after our pinned audit snapshot; status inventory remains explicitly historical, not a current defect assertion.
+
+### arena/84503fc4-own4 — PR / merge / deploy outcome (2026-11-05 UTC)
+
+- V1/V2/V3 **done**; new research/audit site is static and published at https://sassnarep3-star.github.io/Own4/verification-2026-11-05/ ; Flagged for Review https://sassnarep3-star.github.io/Own4/verification-2026-11-05/flagged.html . Both URLs were fetched successfully after deployment, confirming that the primary audit and the flagged table render.
+- **PR #38:** https://github.com/sassnarep3-star/Own4/pull/38 — **MERGED** without waiting for approval at 2026-11-05T21:24:15Z; merge commit `78dd848b1cfe4b6a10da66a6f6e38a0daea945f8`. The complete earlier and concurrent board records were preserved through two main-integration conflicts.
+- PR CI: bounded-audit run https://github.com/sassnarep3-star/Own4/actions/runs/42112271585 and inherited validation https://github.com/sassnarep3-star/Own4/actions/runs/42112271677 both **success**. Main merge audit https://github.com/sassnarep3-star/Own4/actions/runs/42112330627 and validation https://github.com/sassnarep3-star/Own4/actions/runs/42112330885 both **success**. Local: six audit tests, six root tests and 22 pilot tests; zero broken published local links. The root `engine/verify.py` remains failing on archived source HTML; V-06 makes this limitation explicit rather than claiming a false overall PASS.
+- GitHub Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/42112329380 **success** (build and deploy jobs); `pages/builds` API reports `built`/no error for the PR #38 merge commit. Concurrent later main PR #40 also retains the audit navigation; later deploy status is separate and not substituted for this confirmed result.
+- Published review issues: V-01–V-06 and V-08 (V-07 broken links resolved). No verified executable market odds, no officially certified correlations, no prospective proof of skill or rewards. See the bounded verification report for source-support limits; these non-blocking review issues remain open.
+- Board conflict note: after the earlier main merge, `git pull --rebase origin arena/84503fc4-own4` tried to replay peer merge commits and conflicted; aborted safely, verified the remote branch was an ancestor and pushed the normal fast-forward without force-pushing or losing peer records. This session remained on the fixed platform branch throughout.
