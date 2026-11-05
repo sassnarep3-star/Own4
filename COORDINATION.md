@@ -918,3 +918,11 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - 598fbe6b: PR #36 first merge attempt rejected due to concurrent main update (PR #35). Preserved both appended records on integration. Branch pull/rebase also attempted replaying merged peer history; aborted safely and retained explicit merges. New dashboard tests 3/3 and CI run 42111894079 passed.
 
 - 598fbe6b: concurrent PR #37 and #35 merges required a second integration retry; both session logs preserved, no data files conflicted.
+
+### 598fbe6b — completed publication record
+- Task **done**; evidence gaps and inherited structural candidates **needs review**, published on https://sassnarep3-star.github.io/Own4/status/flagged.html and audit.html.
+- PR https://github.com/sassnarep3-star/Own4/pull/36 **MERGED** at 2026-11-05T21:22:45Z, merge commit `5f88bd135c6fe46fc917c57c7d3784366fd0732e`.
+- Final premerge CI https://github.com/sassnarep3-star/Own4/actions/runs/42112044315 **success**. Main validation https://github.com/sassnarep3-star/Own4/actions/runs/42112101938 **success**.
+- Pages build and deploy https://github.com/sassnarep3-star/Own4/actions/runs/42112101322 **success** for merge commit above. Live landing https://sassnarep3-star.github.io/Own4/status/ fetched successfully via page-fetch after deployment; correct executive table and no-edge decision confirmed.
+- All peer work preserved. Snapshot is explicitly pinned to inherited commit a363c75, not a claim to audit later peer changes. No validated strategy, wagering release, live market feed, monetary payout, or whole-repository factual certification claimed.
+- Publication receipt appended after observed successful deployment; subsequent documentation-only PR records this receipt on main.
