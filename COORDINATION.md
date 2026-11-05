@@ -792,3 +792,20 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 **Requests logged for the integrator (not edited by this session):**
 - Publish I1–I5 on the Flagged for Review page with the source links above.
 - Do not run root `build_site.py` until the NFL sections are included in the generator.
+
+---
+## Session arena-bbbfaead-own4 — quantitative leakage correction and release hardening
+
+- Session: `bbbfaead` · fixed Arena branch: `arena/bbbfaead-own4` · claimed: 2026-11-05 UTC.
+- Active peer scopes observed before claiming: `a50ac3f8` owns broad official-source/site verification and shared-root verification notes; `598fbe6b` owns `status/**`; `c821e44c` verification is merged/done. This claim does not duplicate those tasks.
+- Platform constraint: only the assigned branch may be used; the requested per-task/integration branch names cannot be created. Scope isolation is used instead.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| Q1 | Audit and correct the quantitative pilot's same-game leakage; add regression tests | in progress | bbbfaead | `nba-evidence/nba_lab/**`, `nba-evidence/tests/**`, `nba-evidence/data/research.json`, `nba-evidence/docs/METHODOLOGY.md` |
+| Q2 | Harden singles/parlay/prop diagnostics, dependence uncertainty and fail-closed gates without inventing prices | in progress | bbbfaead | same quantitative scope plus `nba-evidence/data/protocol.json`, `nba-evidence/data/flags.json` |
+| Q3 | Rebuild the evidence dashboard and executive findings; verify rows/local links | unclaimed | bbbfaead | `nba-evidence/build_site.py`, `nba-evidence/verify_site.py`, `nba-evidence/site/**`, `nba-evidence/docs/EXECUTIVE_SUMMARY.md`, `nba-evidence/README.md` |
+| Q4 | Final integration PR → merge → Pages deployment record | unclaimed | bbbfaead | `COORDINATION.md` append-only; shared root navigation only if still unclaimed at integration |
+
+- Initial irregularity requiring correction: `nba-evidence/nba_lab/analysis.py` uses `r["total"]` (the target game's known final total) when constructing `p_over` and the same-game joint estimate. Those outputs are invalid pre-event forecasts. No betting release or reward may rely on them.
+- Verification boundary: this session will use the existing bounded official-NBA extracts and will not claim fresh line-by-line verification of the peers' whole repository. Missing official executable prices, ROI, CLV, personalized prop distributions and prospective evidence remain blank/unverified. Derived values are calculations, not official NBA publications.
