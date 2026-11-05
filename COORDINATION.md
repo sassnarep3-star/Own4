@@ -753,3 +753,14 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+## Session arena/84503fc4-own4 — NBA publication verification (claim; 2026-11-05 UTC)
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| V1 | Independently audit inherited NBA source-link coverage, claim provenance, and reproducible checks without inventing observations | in progress | arena/84503fc4-own4 | `verification-2026-11-05/**`, append-only `COORDINATION.md` |
+| V2 | Publish a source-linked, clearly bounded audit landing and flagged-for-review page, plus executive summary | in progress | arena/84503fc4-own4 | `verification-2026-11-05/**` |
+| V3 | Integrate with existing site, run local/remote CI, PR/merge and confirm Pages deployment | unclaimed (pending V1/V2) | arena/84503fc4-own4 | additive root navigation link only if no concurrent owner; append-only `COORDINATION.md` |
+
+The platform fixes this session to branch `arena/84503fc4-own4`, overriding the requested session-* branch naming. Existing NBA and NFL outputs are already merged; this claim does not overwrite them. Prior research and results remain subject to source re-verification. Missing official evidence will be blank/flagged, not estimated. New code/docs stay inside the dedicated scope until integration.
