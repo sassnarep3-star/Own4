@@ -13,10 +13,15 @@ Log loss = −mean(y·log(p) + (1−y)·log(1−p))
 EV per unit = p·(decimal−1) − (1−p)
 Fair decimal = 1/p
 5. Correlation and combinations
-Pearson correlation uses sample covariance normalized by both standard deviations. Player residuals remove a fitted linear minutes relationship across the pooled sample. Binary dependence reports observed joint hits, the product of marginals, φ and joint/product lift. These are descriptive—not a full joint distribution. Same-game experiments resample paired training residuals; cross-game products are explicitly conditional on an unverified independence assumption.
+Pearson correlation uses sample covariance normalized by both standard deviations. Player residuals remove a fitted linear minutes relationship across the pooled sample. Binary dependence reports observed joint hits, the product of marginals, φ and joint/product lift. These are descriptive—not a full joint distribution.
+Corrective revision Q-LEAK-2026-11-05 constructs same-game forecasts from
+predicted_margin + margin_residual
+and
+predicted_total + total_residual
+. The previous version incorrectly read the target final total and centered favorite residuals around zero; those outputs are withdrawn. Training residuals now come from expanding earlier-date folds, excluding the first date with no earlier prior. Observed outcomes are attached only after probabilities are frozen. The product reference and joint estimator do not use identical favorite-marginal estimators, so their comparison is not a dependence-only ablation. Cross-game products remain explicitly conditional on an unverified independence assumption.
 6. Skill, luck and selection
 There is no honest way to remove all luck. Freeze the full trial registry, prevent leakage, use matched baselines, resample whole dates rather than individual games, control the complete hypothesis family, and require prospective multi-season replication. Suppress the planned bootstrap interval below 20 distinct dates. Even a valid interval would not capture every regime change or hidden dependency.
-The Holm primitive is tested but no family-wise significant strategy claim is made: the pilot lacks the required sample and price series. Deflated Sharpe is not computed from invented returns. The financial-paper thresholds are not copied into NBA as official facts.
+The Holm primitive is tested but no family-wise significant strategy claim is made: the pilot lacks the required sample and price series. Deflated Sharpe is not computed from invented returns. The financial-paper thresholds are not copied into NBA as official facts. Because the defective same-game outputs had already been inspected, the corrected retrospective comparison and added diagnostics are exploratory; a new prospective sample is required for confirmation.
 7. Settlement and risk
 Settlement must use the operator and market rules in force when the price was accepted. Pushes and voids can reduce a ticket's multiplier; a loss loses the ticket. The engine tests these mechanics but does not assert universal sportsbook rules. Kelly is capped at 1% in the research primitive and is not a recommendation to stake. No actual wager is placed.
 8. Release policy

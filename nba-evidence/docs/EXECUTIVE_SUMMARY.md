@@ -20,8 +20,9 @@ This is a bounded, reproducible research pilot—not a current betting slate or 
 - Test Brier: **0.3076**, versus **0.2720** for the frozen training team1 base rate. The model underperformed.
 - Test log loss: **1.0286**, versus **0.7418** for the baseline.
 - Margin MAE: **12.222** points. Total-line MAE: **12.958**, versus **12.962** for the training mean. This tiny difference is not evidence of edge.
-- Same-game joint residual Brier: **0.1092**, versus **0.1199** for a product estimate. Exploratory only; 23 training residual pairs and 24 test events.
-- Player correlations are pooled between-player estimates from two games, not within-player parlay dependence. Short-sample confidence intervals are suppressed.
+- Same-game joint residual Brier: **0.1185**, versus **0.1348** for a product estimate. Exploratory only; 15 expanding residual pairs on 2 dates, 24 test events on 3 dates, and no supportable dependence-aware interval.
+- **Correction Q-LEAK-2026-11-05:** previous same-game probabilities used the target final total and failed to center favorite residuals on expected margin. Those outputs are withdrawn. Corrected formulas use predicted margin/total and strictly earlier-date residual folds. Earlier outputs had been inspected, so this is not a pristine confirmatory holdout.
+- Player correlations are pooled between-player estimates from two games, not within-player parlay dependence. Short-sample confidence intervals are suppressed. Cohort prop probabilities are applied unchanged to every held-out player and are not personalized forecasts.
 
 ## Missing evidence
 
@@ -37,7 +38,7 @@ The Milwaukee player-minute values sum to 240:01. This source irregularity is re
 
 ## Competition
 
-Forecast diagnostics are ranked separately from betting eligibility. All ten gates must pass before a strategy can receive rewards. The proposed 60/30/10 allocation of 1,000 research points is non-monetary and currently entirely unawarded.
+Forecast diagnostics are ranked separately from betting eligibility and only within matched market divisions on identical outcomes. All ten gates must pass before a strategy can receive rewards. The proposed 60/30/10 allocation of 1,000 research points is non-monetary and currently entirely unawarded.
 
 ## Repository coordination
 

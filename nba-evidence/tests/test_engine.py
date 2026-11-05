@@ -88,6 +88,36 @@ class StatisticsTests(unittest.TestCase):
         self.assertTrue(release_gates(gates)['qualified'])
         with self.assertRaises(ValueError): release_gates([])
 
+    def test_reliability_bins(self):
+        rows = reliability_bins([.1, .2, .8], [0, 1, 1])
+        self.assertEqual([r['n'] for r in rows], [2, 1])
+        self.assertAlmostEqual(rows[0]['mean_probability'], .15)
+        self.assertAlmostEqual(rows[0]['observed_rate'], .5)
+        self.assertEqual(rows[1]['bin'], '[0.75, 1]')
+        with self.assertRaises(ValueError): reliability_bins([.2], [2])
+
+    def test_same_game_probabilities_ignore_observed_total(self):
+        pregame = {'team1':'A','team2':'B','p1':.7,'predicted_margin':6.0,
+                   'predicted_total':220.25,'total_line':220.5}
+        residuals = [{'margin':3,'total':2},{'margin':-4,'total':-8},
+                     {'margin':7,'total':1},{'margin':-2,'total':5}]
+        high_final = same_game_probabilities({**pregame,'total':999}, residuals)
+        low_final = same_game_probabilities({**pregame,'total':0}, residuals)
+        self.assertEqual(high_final, low_final)
+        self.assertNotIn('sgp_hit', high_final)
+        self.assertNotIn('over_hit', high_final)
+        self.assertEqual(high_final['residual_pairs'], 4)
+
+    def test_same_game_shifts_margin_and_total_residuals(self):
+        base = {'team1':'A','team2':'B','p1':.7,
+                'predicted_total':100.0,'total_line':100.5}
+        residuals = [{'margin':-10,'total':1},{'margin':10,'total':1}]
+        large = same_game_probabilities({**base,'predicted_margin':20}, residuals)
+        small = same_game_probabilities({**base,'predicted_margin':0}, residuals)
+        self.assertAlmostEqual(large['p_sgp'], 2.5/3)
+        self.assertAlmostEqual(small['p_sgp'], 1.5/3)
+        self.assertEqual(large['p_over'], small['p_over'])
+
 
 class DataAndLeakageTests(unittest.TestCase):
     @classmethod
@@ -149,5 +179,65 @@ class DataAndLeakageTests(unittest.TestCase):
         for g in original_train:m2.update(g['team1'],g['score1'],g['team2'],g['score2'])
         self.assertEqual(dict(m.stats),dict(m2.stats))
         self.assertEqual(before['logistic'], self.result['logistic'])
+
+    def test_held_out_total_mutation_cannot_change_pregame_probabilities(self):
+        from copy import deepcopy
+        changed = deepcopy(self.games)
+        last_date = self.result['protocol']['test_dates'][-1]
+        for game in changed:
+            if game['date'] == last_date:
+                game['score1'] += 50
+                game['score2'] += 50
+                game['total'] += 100  # Margin and winner stay fixed; only total outcome changes.
+        mutated = run(write=False, games_override=changed, players_override=self.players)
+        original_rows = {r['game_id']:r for r in self.result['predictions'] if r['date'] == last_date}
+        mutated_rows = {r['game_id']:r for r in mutated['predictions'] if r['date'] == last_date}
+        self.assertEqual(original_rows.keys(), mutated_rows.keys())
+        for game_id, original in original_rows.items():
+            changed_row = mutated_rows[game_id]
+            for key in ('p1','predicted_total','total_line','p_over','p_sgp','p_sgp_independent'):
+                self.assertEqual(original[key], changed_row[key], (game_id,key))
+        self.assertTrue(any(original_rows[game_id]['over_hit'] != mutated_rows[game_id]['over_hit']
+                            for game_id in original_rows))
+
+    def test_expanding_residuals_use_only_earlier_dates(self):
+        residuals = self.result['training_residuals']
+        self.assertEqual(len(residuals), 15)
+        self.assertEqual(self.result['sgp']['training_pairs'], 15)
+        self.assertEqual(self.result['sgp']['training_dates'], 2)
+        for row in residuals:
+            self.assertTrue(row['prior_dates'])
+            self.assertLess(max(row['prior_dates']), row['date'])
+            self.assertGreater(row['date'], '2025-01-01')
+
+    def test_same_game_interval_remains_suppressed(self):
+        self.assertEqual(self.result['sgp']['dates'], 3)
+        self.assertIsNone(self.result['sgp']['brier_difference_ci'])
+        self.assertEqual(self.result['revision']['id'], 'Q-LEAK-2026-11-05')
+
+    def test_prop_diagnostic_rows_fail_closed(self):
+        rows = self.result['prop_predictions']
+        self.assertEqual(len(rows), 54)
+        self.assertTrue(all(r['book_decimal'] is None and r['roi'] is None for r in rows))
+        for prop in self.result['props']:
+            own = [r for r in rows if r['prop_id'] == prop['id']]
+            self.assertEqual(sum(r['actual_hit'] for r in own), prop['test_hits'])
+            self.assertIsNone(prop['test_metrics']['brier_difference_ci'])
+            self.assertTrue(all(r['forecast_probability'] == prop['forecast_probability'] for r in own))
+
+    def test_leaderboards_rank_only_matched_divisions(self):
+        for key, score in (('leaderboard','brier'),('point_leaderboard','mae')):
+            rows = self.result[key]
+            divisions = {r['division'] for r in rows}
+            self.assertGreater(len(divisions), 1)
+            for division in divisions:
+                own = [r for r in rows if r['division'] == division]
+                self.assertEqual([r[score] for r in own], sorted(r[score] for r in own))
+                self.assertEqual(len({r['n'] for r in own}), 1)
+                for row in own:
+                    expected = 1 + sum(other[score] < row[score] for other in own)
+                    self.assertEqual(row['diagnostic_rank'], expected)
+        pra = [r for r in self.result['leaderboard'] if r['division'] == 'Player cohort / PRA']
+        self.assertEqual({r['diagnostic_rank'] for r in pra}, {1})
 
 if __name__ == '__main__':unittest.main()

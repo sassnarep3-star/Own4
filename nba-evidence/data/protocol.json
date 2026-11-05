@@ -21,5 +21,19 @@
   "reward_type": "Non-monetary research points; no funded prize or payment",
   "search_registry": ["rolling-strength-moneyline", "rolling-strength-spread", "rolling-strength-total", "cross-game-pair", "same-game-favorite-over", "player-points-rebounds", "player-points-assists", "player-pra"],
   "tuning_policy": "No hyperparameter tuning on validation or test outcomes. All choices above are fixed for this retrospective pilot. Retrospective registration cannot erase prior researcher knowledge.",
-  "notes": ["No historical sportsbook quotes are available from an inspected official source.", "No home-court adjustment: display order is not treated as verified home/away across the sample.", "No injury, lineup, rest, travel or referee features are invented.", "Player thresholds are cohort-level experimental lines, not personalized player forecasts.", "No strategy can earn rewards without every release gate passing."]
+  "notes": ["No historical sportsbook quotes are available from an inspected official source.", "No home-court adjustment: display order is not treated as verified home/away across the sample.", "No injury, lineup, rest, travel or referee features are invented.", "Player thresholds are cohort-level experimental lines, not personalized player forecasts.", "No strategy can earn rewards without every release gate passing."],
+  "corrective_revisions": [
+    {
+      "id": "Q-LEAK-2026-11-05",
+      "registered_on": "2026-11-05",
+      "reason": "Target-final-total leakage and an unshifted favorite-margin simulation found in the previous same-game estimator during code audit.",
+      "changes": [
+        "Replace observed target total with predicted_total and center favorite simulations on predicted_margin when shifting residual pairs.",
+        "Fit residual pairs with expanding earlier-date folds; exclude the first date with no earlier prior.",
+        "Add held-out outcome-mutation and pre-event-field-only regression tests.",
+        "Add matched-division diagnostics without changing release thresholds or model hyperparameters."
+      ],
+      "holdout_policy": "Corrected same-game and new descriptive diagnostics are exploratory, not a pristine confirmatory evaluation. No reward eligibility changes."
+    }
+  ]
 }

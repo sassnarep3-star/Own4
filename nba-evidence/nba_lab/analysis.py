@@ -9,7 +9,8 @@ from statistics import mean, median
 from math import sqrt
 from .engine import (RollingStrength, fit_logistic, logistic_predict, half_line,
                      fair_decimal, brier, log_loss, mae, pearson, residualize_minutes,
-                     binary_correlation, date_cluster_bootstrap, release_gates)
+                     binary_correlation, date_cluster_bootstrap, release_gates,
+                     same_game_probabilities, reliability_bins)
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -46,9 +47,53 @@ def grouped(rows):
     return dict(sorted(result.items()))
 
 
-def run():
+def expanding_training_residuals(train: list[dict], prior_games: int) -> list[dict]:
+    """Out-of-fold training residuals using strictly earlier dates only.
+
+    The first date has no pre-sample official prior and is excluded rather than
+    backfilling it with a mean computed from its own or later outcomes.
+    """
+    residuals = []
+    earlier = []
+    for date, rows in grouped(train).items():
+        if earlier:
+            prior = mean(score for g in earlier for score in (g["score1"], g["score2"]))
+            state = RollingStrength(prior, prior_games)
+            for _, previous_rows in grouped(earlier).items():
+                for g in previous_rows:
+                    state.update(g["team1"], g["score1"], g["team2"], g["score2"])
+            # Predict the complete current date before exposing any current result.
+            pending = [(g, state.predict(g["team1"], g["team2"])) for g in rows]
+            for g, p in pending:
+                residuals.append({
+                    "date": date, "game_id": g["game_id"],
+                    "margin": g["margin"] - p["margin"],
+                    "total": g["total"] - p["total"],
+                    "predicted_margin": p["margin"], "predicted_total": p["total"],
+                    "prior_dates": sorted({x["date"] for x in earlier}),
+                    "source_url": g["source_url"],
+                })
+        earlier.extend(rows)
+    return residuals
+
+
+def rank_diagnostics(rows: list[dict], score_key: str) -> list[dict]:
+    """Rank matched outcomes within divisions; equal scores share a rank."""
+    rows = sorted(rows, key=lambda row: (row["division"], row[score_key], row["id"]))
+    for row in rows:
+        row["diagnostic_rank"] = 1 + sum(
+            other[score_key] < row[score_key]
+            for other in rows if other["division"] == row["division"])
+    return rows
+
+
+def run(*, write: bool = True, games_override: list[dict] | None = None,
+        players_override: list[dict] | None = None):
     protocol = json.loads((DATA / "protocol.json").read_text())
-    games, players = load_inputs()
+    if (games_override is None) != (players_override is None):
+        raise ValueError("Supply both normalized input tables or neither")
+    games, players = (load_inputs() if games_override is None
+                      else (games_override, players_override))
     train_dates = sorted({g["date"] for g in games if g["date"] <= protocol["train_through"]})
     train = [g for g in games if g["date"] in train_dates]
     prior_mean = mean(score for g in train for score in (g["score1"], g["score2"]))
@@ -106,43 +151,51 @@ def run():
                 "brier": brier(ps, ys), "baseline_brier": brier(base, ys),
                 "log_loss": log_loss(ps, ys), "baseline_log_loss": log_loss(base, ys),
                 "margin_mae": mae([r["mean1"] - r["mean2"] for r in rows], [r["margin"] for r in rows]),
+                "baseline_margin_mae": mae([0] * len(rows), [r["margin"] for r in rows]),
                 "total_mae": mae([r["total_line"] for r in rows], [r["total"] for r in rows]),
                 "baseline_total_mae": mae([prior_total] * len(rows), [r["total"] for r in rows]),
                 "mean_probability": mean(ps), "observed_rate": mean(ys),
                 "directional_accuracy": mean((r["p1"] > .5) == bool(y) for r, y in zip(rows, ys)),
+                "reliability": reliability_bins(ps, ys),
                 "brier_difference_ci": date_cluster_bootstrap(
                     [{"date": r["date"], "diff": (r["baseline_p1"] - y) ** 2 - (r["p1"] - y) ** 2}
                      for r, y in zip(rows, ys)], "diff", protocol["bootstrap_replicates"], protocol["bootstrap_seed"])}
     validation = [r for r in predictions if r["split"] == "validation"]
     test = [r for r in predictions if r["split"] == "test"]
-    # Training residuals come from a frozen training-only probability fit and
-    # rolling means that never used same-day outcomes. No test residual is used.
-    train_state = RollingStrength(prior_mean, protocol["shrinkage_prior_games"])
-    train_residuals = []
-    for date, rows in grouped(train).items():
-        pending = [(g, train_state.predict(g["team1"], g["team2"])) for g in rows]
-        for g, p in pending:
-            train_residuals.append({"margin": g["margin"] - p["margin"], "total": g["total"] - p["total"]})
-        for g in rows:
-            train_state.update(g["team1"], g["score1"], g["team2"], g["score2"])
+    # Corrective revision Q-LEAK-2026-11-05: residual fitting is expanding and
+    # same-game probabilities never read the target game's final total.
+    train_residuals = expanding_training_residuals(train, protocol["shrinkage_prior_games"])
     for r in validation + test:
         favorite1 = r["p1"] >= .5
-        sign = 1 if favorite1 else -1
-        hits = [sign * x["margin"] > 0 and r["total"] + x["total"] > r["total_line"] for x in train_residuals]
-        r["favorite"] = r["team1"] if favorite1 else r["team2"]
-        r["p_favorite"] = r["p1"] if favorite1 else 1 - r["p1"]
-        r["p_over"] = mean(r["total"] + x["total"] > r["total_line"] for x in train_residuals)
-        # Explicitly a tiny-sample smoothed empirical residual estimate, not a market price.
-        r["p_sgp"] = (sum(hits) + .5) / (len(hits) + 1)
-        r["p_sgp_independent"] = r["p_favorite"] * r["p_over"]
-        r["sgp_hit"] = int((r["team1_won"] == int(favorite1)) and r["total"] > r["total_line"])
+        r.update(same_game_probabilities(r, train_residuals))
+        # Outcomes are attached only after every pre-event probability is frozen.
+        r["over_hit"] = int(r["total"] > r["total_line"])
+        r["sgp_hit"] = int((r["team1_won"] == int(favorite1)) and r["over_hit"])
     sgp_test = [r for r in test]
-    sgp_metrics = {"n": len(sgp_test), "joint_estimate_brier": brier([r["p_sgp"] for r in sgp_test], [r["sgp_hit"] for r in sgp_test]),
-                   "independent_brier": brier([r["p_sgp_independent"] for r in sgp_test], [r["sgp_hit"] for r in sgp_test]),
-                   "hits": sum(r["sgp_hit"] for r in sgp_test), "observed_rate": mean(r["sgp_hit"] for r in sgp_test),
-                   "mean_joint_estimate": mean(r["p_sgp"] for r in sgp_test),
-                   "residual_correlation": pearson([r["margin"] for r in train_residuals], [r["total"] for r in train_residuals])}
-    # Three non-overlapping test-date pairs: strongest favorite on each date.
+    sgp_joint = [r["p_sgp"] for r in sgp_test]
+    sgp_independent = [r["p_sgp_independent"] for r in sgp_test]
+    sgp_outcomes = [r["sgp_hit"] for r in sgp_test]
+    sgp_metrics = {"n": len(sgp_test), "dates": len({r["date"] for r in sgp_test}),
+                   "training_pairs": len(train_residuals),
+                   "training_dates": len({r["date"] for r in train_residuals}),
+                   "joint_estimate_brier": brier(sgp_joint, sgp_outcomes),
+                   "independent_brier": brier(sgp_independent, sgp_outcomes),
+                   "joint_estimate_log_loss": log_loss(sgp_joint, sgp_outcomes),
+                   "independent_log_loss": log_loss(sgp_independent, sgp_outcomes),
+                   "over_brier": brier([r["p_over"] for r in sgp_test], [r["over_hit"] for r in sgp_test]),
+                   "hits": sum(sgp_outcomes), "observed_rate": mean(sgp_outcomes),
+                   "mean_joint_estimate": mean(sgp_joint),
+                   "mean_independent_estimate": mean(sgp_independent),
+                   "residual_correlation": pearson([r["margin"] for r in train_residuals], [r["total"] for r in train_residuals]),
+                   "reliability": reliability_bins(sgp_joint, sgp_outcomes),
+                   "brier_difference_ci": date_cluster_bootstrap(
+                       [{"date": r["date"],
+                         "diff": (r["p_sgp_independent"] - r["sgp_hit"]) ** 2 -
+                                 (r["p_sgp"] - r["sgp_hit"]) ** 2} for r in sgp_test],
+                       "diff", protocol["bootstrap_replicates"], protocol["bootstrap_seed"]),
+                   "status": "Exploratory corrected forecast; no official ticket price or release qualification"}
+    # All eligible pairings among the strongest favorite on each test date.
+    # Tickets can share a date/team and are not independent observations.
     # Selection uses model probabilities only; no official parlay price exists.
     by_date = grouped(test)
     favorites = [max(rows, key=lambda r: r["p_favorite"]) for rows in by_date.values()]
@@ -166,6 +219,7 @@ def run():
     thresholds = {k: half_line(median(p[k] for p in train_players)) for k in ("points", "rebounds", "assists", "pra")}
     prop_specs = [("PR", "points", "rebounds"), ("PA", "points", "assists"), ("PRA", "pra", None)]
     props = []
+    prop_predictions = []
     for sid, a, b in prop_specs:
         keys = [a] + ([b] if b else [])
         train_x = [int(p[a] > thresholds[a]) for p in train_players]
@@ -175,18 +229,46 @@ def run():
             test_y = [int(p[b] > thresholds[b]) for p in test_players]
             tr = binary_correlation(train_x, train_y)
             te = binary_correlation(test_x, test_y)
-            ptrain, ptest = tr["p_joint"], te["p_joint"]
             line = " + ".join(f"{k} > {thresholds[k]:g}" for k in keys)
         else:
             tr = te = None
-            ptrain, ptest = mean(train_x), mean(test_x)
             line = f"PRA > {thresholds['pra']:g}"
+
+        def prop_hit(player):
+            return int(all(player[k] > thresholds[k] for k in keys))
+
+        train_outcomes = [prop_hit(p) for p in train_players]
+        test_outcomes = [prop_hit(p) for p in test_players]
+        ptrain, ptest = mean(train_outcomes), mean(test_outcomes)
+        # Registered 0.5 smoothing produces a usable diagnostic probability;
+        # it is not personalized and is not an executable betting forecast.
+        forecast_probability = (sum(train_outcomes) + .5) / (len(train_outcomes) + 1)
+        forecast = [forecast_probability] * len(test_outcomes)
+        baseline = [.5] * len(test_outcomes)
+        test_metric = {
+            "brier": brier(forecast, test_outcomes),
+            "log_loss": log_loss(forecast, test_outcomes),
+            "baseline_brier": brier(baseline, test_outcomes),
+            "baseline_log_loss": log_loss(baseline, test_outcomes),
+            "reliability": reliability_bins(forecast, test_outcomes),
+            "brier_difference_ci": None,
+            "ci_reason": "Only one test date; dependence-aware interval unavailable",
+        }
         props.append({"id": sid, "line": line, "train_n": len(train_players), "test_n": len(test_players),
                       "train_joint_rate": ptrain, "test_joint_rate": ptest,
-                      "test_hits": round(ptest * len(test_players)),
-                      "train_binary": tr, "test_binary": te,
+                      "test_hits": sum(test_outcomes), "forecast_probability": forecast_probability,
+                      "train_binary": tr, "test_binary": te, "test_metrics": test_metric,
                       "official_quote": None, "roi": None,
                       "source_urls": sorted({p["source_url"] for p in players})})
+        for player, outcome in zip(test_players, test_outcomes):
+            prop_predictions.append({
+                "prop_id": sid, "date": player["date"], "game_id": player["game_id"],
+                "player_id": player["player_id"], "player": player["player"],
+                "team": player["team"], "line": line,
+                "forecast_probability": forecast_probability,
+                "fair_decimal": fair_decimal(forecast_probability), "actual_hit": outcome,
+                "book_decimal": None, "roi": None, "source_url": player["source_url"],
+            })
     correlations = []
     for name, xkey, ykey in [("Team1 vs team2 score", "score1", "score2"),
                               ("Margin vs total", "margin", "total")]:
@@ -206,7 +288,7 @@ def run():
     # Gate statuses apply to release as a betting strategy, not to code execution.
     gate_defs = [
         ("G01", "Official provenance", "Every input value has an official NBA source and passes integrity checks.", "pass"),
-        ("G02", "No future information", "All evaluation features precede the date being predicted; parameters frozen after training. Training-only residual fitting may use the full training window.", "pass"),
+        ("G02", "No future information", "All evaluation features precede the date being predicted; parameters frozen after training. Same-game residual folds use strictly earlier dates; observed totals are attached only after probabilities are frozen.", "pass"),
         ("G03", "Sample size", f"At least {protocol['minimum_settled_selections']} settled selections and {protocol['minimum_distinct_dates']} distinct dates.", "fail"),
         ("G04", "Official executable prices", "Timestamped official sportsbook quotes, limits and applicable rules for every selection.", "unverified"),
         ("G05", "Settlement audit", "Operator-specific pushes, voids, participation and overtime rules matched to every ticket.", "unverified"),
@@ -234,15 +316,48 @@ def run():
                            "test_plan": test_plan, "gates": sg, "release": release_gates(sg),
                            "measured_roi": None, "correlation_for_pricing": None,
                            "source_url": "https://www.nba.com/stats/help/glossary"})
-    leaderboard = [{"id": "M01", "name": "Rolling strength + logistic", "division": "Forecast diagnostic",
-                    "n": len(test), "brier": metrics(test)["brier"], "log_loss": metrics(test)["log_loss"],
-                    "qualified": False, "reward_points": 0},
-                   {"id": "B01", "name": "Frozen training team1 base rate", "division": "Forecast diagnostic",
-                    "n": len(test), "brier": metrics(test)["baseline_brier"], "log_loss": metrics(test)["baseline_log_loss"],
-                    "qualified": False, "reward_points": 0}]
-    leaderboard.sort(key=lambda r: r["brier"])
-    for rank, row in enumerate(leaderboard, 1):
-        row["diagnostic_rank"] = rank
+    test_metric = metrics(test)
+    game_method_source = "https://www.nba.com/games?date=2025-01-08"
+    leaderboard = [
+        {"id": "M01", "name": "Rolling strength + logistic", "division": "Moneyline / team1 win",
+         "n": len(test), "brier": test_metric["brier"], "log_loss": test_metric["log_loss"],
+         "qualified": False, "reward_points": 0, "source_url": game_method_source},
+        {"id": "B01", "name": "Frozen training team1 base rate", "division": "Moneyline / team1 win",
+         "n": len(test), "brier": test_metric["baseline_brier"], "log_loss": test_metric["baseline_log_loss"],
+         "qualified": False, "reward_points": 0, "source_url": game_method_source},
+        {"id": "J01", "name": "Paired chronological residuals", "division": "Same-game / favorite + over",
+         "n": sgp_metrics["n"], "brier": sgp_metrics["joint_estimate_brier"],
+         "log_loss": sgp_metrics["joint_estimate_log_loss"], "qualified": False,
+         "reward_points": 0, "source_url": game_method_source},
+        {"id": "J02", "name": "Product of marginals (assumption)", "division": "Same-game / favorite + over",
+         "n": sgp_metrics["n"], "brier": sgp_metrics["independent_brier"],
+         "log_loss": sgp_metrics["independent_log_loss"], "qualified": False,
+         "reward_points": 0, "source_url": game_method_source},
+    ]
+    for prop in props:
+        division = f"Player cohort / {prop['id']}"
+        source_url = test_players[0]["source_url"]
+        leaderboard.extend([
+            {"id": f"P-{prop['id']}", "name": "Smoothed training cohort rate", "division": division,
+             "n": prop["test_n"], "brier": prop["test_metrics"]["brier"],
+             "log_loss": prop["test_metrics"]["log_loss"], "qualified": False,
+             "reward_points": 0, "source_url": source_url},
+            {"id": f"B-{prop['id']}", "name": "Constant 50% baseline", "division": division,
+             "n": prop["test_n"], "brier": prop["test_metrics"]["baseline_brier"],
+             "log_loss": prop["test_metrics"]["baseline_log_loss"], "qualified": False,
+             "reward_points": 0, "source_url": source_url},
+        ])
+    leaderboard = rank_diagnostics(leaderboard, "brier")
+    point_leaderboard = rank_diagnostics([
+        {"id": "M-MARGIN", "name": "Rolling strength expected margin", "division": "Margin / team1 minus team2",
+         "n": len(test), "mae": test_metric["margin_mae"], "source_url": game_method_source},
+        {"id": "B-MARGIN", "name": "Zero-margin baseline (no venue inference)", "division": "Margin / team1 minus team2",
+         "n": len(test), "mae": test_metric["baseline_margin_mae"], "source_url": game_method_source},
+        {"id": "M-TOTAL", "name": "Originated half-point total", "division": "Total / combined points",
+         "n": len(test), "mae": test_metric["total_mae"], "source_url": game_method_source},
+        {"id": "B-TOTAL", "name": "Frozen training total mean", "division": "Total / combined points",
+         "n": len(test), "mae": test_metric["baseline_total_mae"], "source_url": game_method_source},
+    ], "mae")
     source_rows = []
     for kind, rows in (("game", games), ("player", players)):
         for row in rows:
@@ -259,11 +374,22 @@ def run():
               "prior": {"team_points": prior_mean, "team1_win_rate": prior_win, "total": prior_total},
               "logistic": logistic, "validation": metrics(validation), "test": metrics(test),
               "predictions": validation + test, "features": feature_rows, "sgp": sgp_metrics,
+              "training_residuals": train_residuals,
               "cross_game": cross, "player_thresholds": thresholds, "props": props,
+              "prop_predictions": prop_predictions,
               "correlations": correlations, "gates": gates, "strategies": strategies,
-              "leaderboard": leaderboard, "reward_pool_points": protocol["reward_pool_points"],
+              "leaderboard": leaderboard, "point_leaderboard": point_leaderboard,
+              "reward_pool_points": protocol["reward_pool_points"],
               "rewards_awarded": 0, "source_rows": source_rows,
               "qualified_strategies": 0, "official_price_rows": 0,
+              "revision": {
+                  "id": "Q-LEAK-2026-11-05", "date": "2026-11-05",
+                  "reason": "Code audit found that the previous same-game estimator used the target final total and did not center favorite simulations on predicted_margin.",
+                  "correction": "Shift chronological margin/total residual pairs by predicted_margin and predicted_total; expanding residual folds exclude the first date; outcome-mutation and deterministic-shift regression tests enforce the formulas.",
+                  "invalidated_outputs": ["previous p_over", "previous p_sgp", "previous p_sgp_independent", "previous same-game Brier comparison"],
+                  "unchanged": ["source extracts", "date splits", "moneyline model settings", "release thresholds", "zero-reward policy"],
+                  "holdout_boundary": "The original outputs had been inspected, so corrected same-game results are not a pristine confirmatory holdout."
+              },
               "limitations": ["Retrospective pilot, not prospective preregistration.",
                               "Only 62 games over eight dates; no full-season representativeness.",
                               "Only two complete player box scores; no personalized player prop forecasts.",
@@ -271,8 +397,10 @@ def run():
                               "No home/away, injury, lineup, rest, travel or referee adjustment.",
                               "Date-cluster intervals suppressed below 20 dates; luck cannot be eliminated.",
                               "Cohort-level prop thresholds are experimental, not official or personalized lines.",
+                              "Previous same-game outputs were invalidated by target-total leakage; corrected outputs remain exploratory and require new prospective replication.",
                               "Model-derived values are calculations from cited inputs, not official NBA betting lines."]}
-    (DATA / "research.json").write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
+    if write:
+        (DATA / "research.json").write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n")
     return result
 
 
