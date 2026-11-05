@@ -788,7 +788,7 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
 
-<<<<<<< HEAD
+
 ---
 
 ## Session arena-a50ac3f8-own4 (this session) — Final verification, site confirmation, PR/merge
@@ -846,7 +846,7 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 **Site integrity:** Internal link scan of all site pages (`index.html`, `pages/*.html`, `docs/*.html`, `lab/*.html`, `lines-lab/*.html`) shows zero broken links within the site structure (broken links only in raw fetched HTML files under `data/raw/`, which are external captures, not site content). The site builds statically; `.nojekyll` present; site accessible at root `/` of the repo.
 
 **Status:** Ready for final PR / merge / deploy confirmation.
-=======
+---
 
 ---
 ## Session c821e44c-own4 · independent verification audit (claim)
@@ -885,4 +885,15 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 **Requests logged for the integrator (not edited by this session):**
 - Publish I1–I5 on the Flagged for Review page with the source links above.
 - Do not run root `build_site.py` until the NFL sections are included in the generator.
->>>>>>> origin/main
+
+
+---
+
+### Session c821e44c-own4 — PR / merge / deploy record
+
+- V1 status: **done** (verification record above; flags I1–I5 requested for the integrator's Flagged for Review page).
+- Verification PR: https://github.com/sassnarep3-star/Own4/pull/34 — **MERGED** (merge commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`), merged without waiting for approval; it changed only `COORDINATION.md`, so no evidence-workflow run was triggered.
+- GitHub Pages: `pages/builds/latest` reports `status: built`, `error: null`, commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`.
+- Live pages checked: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html.
+- Not done by this session (and why): no new site pages or data (already published by earlier sessions and not in this session's claimed scope); root site not regenerated (see I1).
+
