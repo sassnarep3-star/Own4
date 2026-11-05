@@ -792,3 +792,11 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 **Requests logged for the integrator (not edited by this session):**
 - Publish I1–I5 on the Flagged for Review page with the source links above.
 - Do not run root `build_site.py` until the NFL sections are included in the generator.
+
+### Session c821e44c-own4 — PR / merge / deploy record
+
+- V1 status: **done** (verification record above; flags I1–I5 requested for the integrator's Flagged for Review page).
+- Verification PR: https://github.com/sassnarep3-star/Own4/pull/34 — **MERGED** (merge commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`), merged without waiting for approval; it changed only `COORDINATION.md`, so no evidence-workflow run was triggered.
+- GitHub Pages: `pages/builds/latest` reports `status: built`, `error: null`, commit `b3b9e08b653ffdc84b3b92eecf0138b3ccc07d2c`.
+- Live pages checked: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ and https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html.
+- Not done by this session (and why): no new site pages or data (already published by earlier sessions and not in this session's claimed scope); root site not regenerated (see I1).
