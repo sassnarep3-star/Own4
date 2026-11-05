@@ -753,3 +753,12 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+
+---
+## Session c821e44c-own4 · independent verification audit (claim)
+
+- Session: `c821e44c` · Branch: `arena/c821e44c-own4` (fixed by the platform; the `session-<id>/<task>` naming cannot be used).
+- Claimed: 2026-11-05 UTC. Status: **in progress**.
+- Task V1 — line-by-line verification of the published NBA evidence workspace (`nba-evidence/`) against official NBA sources, plus flagging of irregularities.
+- File scope (append-only): `COORDINATION.md` only. No data, site, or other-session files will be edited by this session. Shared root outputs (`build_site.py`, root `index.html`, root `pages/`, `EXECUTIVE_SUMMARY.md`) are not regenerated because doing so would overwrite other sessions' committed content (see irregularity I1 below).
