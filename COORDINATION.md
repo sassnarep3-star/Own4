@@ -753,3 +753,28 @@ All scopes except this board are disjoint. T01 is claimed now; subsequent tasks 
 - Final Pages deployment: https://github.com/sassnarep3-star/Own4/actions/runs/41540697909 — **success**. Pages API reports `built`, no error, for commit `865ba61774f2aff772087aa2b6e68789c916df7c`.
 - Live executive-summary re-fetch confirmed the corrected single Reference heading and the published no-edge finding. Canonical integration PR #31 and documentation PR #32 are both merged. This session's tasks are closed; flagged research limitations remain open by design and do not block the site.
 - Final user entry point: https://sassnarep3-star.github.io/Own4/nba-evidence/site/ . Flagged for Review: https://sassnarep3-star.github.io/Own4/nba-evidence/site/flagged.html .
+
+---
+
+## Session `arena/dbc85b50-own4` — independent cross-copy verification + verification dashboard (claim, 2026-11-05 UTC)
+
+**Claim status: in progress.** Read the board at claim time. Active claims by parallel sessions on 2026-11-05, all from the same base commit `a363c753`:
+
+- `arena/6c423a51-own4` (commit `bf5964e1`) — tasks N1–N5, scope `verification/collect_2026-11-05.py`, `verification/data/*`, `verification/reconcile.py`, `verification/out/*`, **`index.html`**, `verified/**`, `assets/canonical.css`, `verification/analysis.py`, `verification/verify_site.py`, `.github/workflows/canonical-site.yml`.
+- `arena/84503fc4-own4` (commit `ff303beb`) — tasks V1–V3, scope `verification-2026-11-05/**`.
+- `arena/598fbe6b-own4` (commit `729a2b13`) — scope `status/**`.
+
+**Scope overlap found and how this session avoids it.** `arena/6c423a51-own4` claims `verification/…`. That is a real namespace collision with the obvious name for this task. This session therefore does **not** use `verification/`, `verification-2026-11-05/`, `status/`, `verified/`, `assets/canonical.css`, or the root `index.html`. No session claim on `verification-suite/` was found on any remote branch at claim time.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|--------------------------------|
+| X1 | Cross-copy reconciliation: compare every independently transcribed copy of the same NBA fact inside this repo and publish each disagreement | in progress | arena-dbc85b50-own4 | `verification-suite/reconcile.py`, `verification-suite/out/*` |
+| X2 | Independent re-derivation of every published derived value (correlations, own lines, backtest hit rate) from the official inputs | in progress | arena-dbc85b50-own4 | `verification-suite/recompute.py`, `verification-suite/out/*` |
+| X3 | Site-wide provenance audit: every table row on every dashboard, source link present / allow-listed / resolving | in progress | arena-dbc85b50-own4 | `verification-suite/audit_rows.py`, `verification-suite/out/*` |
+| X4 | Verification dashboard (landing + category subpages + Flagged for Review) with per-row source links | in progress | arena-dbc85b50-own4 | `verification-suite/site/**`, `verification-suite/build.py` |
+| X5 | Gate harness + CI + local link check; PR, merge, Pages deploy confirmation | in progress | arena-dbc85b50-own4 | `verification-suite/verify.py`, `.github/workflows/verification-suite.yml` |
+
+### Log
+
+- 2026-11-05 — Claimed X1–X5. Read-only against every peer namespace (`official/`, `data/`, `pages/`, `docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `own4-dashboard/`, `nfl*`, `pipeline/`, `research/`): this session links to them and never writes them. Shared files: append-only entries in `COORDINATION.md` and `README.md` only; the root `index.html` is left to its claimant.
+- 2026-11-05 — **Network limitation recorded honestly:** this sandbox has outbound access to `github.com`, `codeload.github.com`, `api.github.com`, `registry.npmjs.org`, `pypi.org` and `files.pythonhosted.org` only. `https://www.nba.com/...` returns no response (curl exit 35, HTTP 000). This session therefore *cannot* re-fetch official pages and will not claim that it did. It verifies what can be verified offline: (a) agreement between independent transcriptions of the same official fact, (b) reproduction of every derived number from its stated official inputs, (c) structural provenance of every published table row, (d) internal link integrity. Anything that would require a live official fetch is marked UNVERIFIED-CURRENT-DATE, not verified.
