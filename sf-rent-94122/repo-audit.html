@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Repository Line-by-Line Audit &amp; Irregularities · SF 94122 Rent Compliance Dashboard</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <a class="brand" href="index.html">
+        SF 94122 Rent Study
+        <span>1940 Building · Outer Sunset · Anonymized</span>
+      </a>
+      <nav>
+        <div class="nav-group">Dashboard</div>
+        <a class="nav-link" href="index.html"><span>Overview Dashboard</span></a>
+        <a class="nav-link" href="executive-summary.html"><span>Executive Summary</span></a>
+        <div class="nav-group">Core Research</div>
+        <a class="nav-link" href="units-analysis.html"><span>Unit 1 &amp; Unit 2 Analysis</span></a>
+        <a class="nav-link" href="laws-and-caps.html"><span>Local, State &amp; Federal Laws</span></a>
+        <a class="nav-link" href="landlord-practices.html"><span>Corporate vs. Individual</span></a>
+        <div class="nav-group">Compliance &amp; Fair Housing</div>
+        <a class="nav-link" href="notice-and-scrutiny.html"><span>Notice &amp; Lawyer Scrutiny</span></a>
+        <div class="nav-group">Verification</div>
+        <a class="nav-link active" href="repo-audit.html"><span>Repo Line-by-Line Audit</span></a>
+        <a class="nav-link" href="sources.html"><span>Official Source Registry</span></a>
+        <a class="nav-link" href="flagged.html"><span>Flagged for Review</span><span class="nav-badge">12</span></a>
+        <div class="nav-group">Repository</div>
+        <a class="nav-link" href="../index.html"><span>&larr; Repository Root</span></a>
+      </nav>
+      <div class="sidebar-footer">
+        Verified: <strong>2026-11-06</strong><br>
+        Official sources: <strong>38</strong><br>
+        Zero personal tenant data stored.<br>
+        <a href="EXECUTIVE_SUMMARY.md">Executive Summary (.md)</a> ·
+        <a href="REPO_REVIEW.md">Repo Audit (.md)</a>
+      </div>
+    </aside>
+    <div class="content-area">
+      <header class="topbar">
+        <div class="topbar-meta">
+          <span class="pill pill-ok">1.6% SF Cap (3/1/26–2/28/27)</span>
+          <span class="pill pill-ok">100% Anonymized</span>
+          <a class="pill pill-flag" href="flagged.html">12 Flagged / Blank Items</a>
+        </div>
+        <div class="search-box">
+          <label for="table-filter" id="filter-count" style="font-size:0.8rem;color:#526377;">Filter tables:</label>
+          <input id="table-filter" type="search" placeholder="Search statutes, units, rates, flags...">
+        </div>
+      </header>
+      <main id="main-content">
+        <div class="page-header">
+          <div class="eyebrow">Category 6 · Repository Review</div>
+          <h1>Repository Line-by-Line Audit &amp; Irregularities</h1>
+          <p class="lede">Complete audit of sassnarep3-star/Own4, broken HTTP 404 link detection in peer module rental-sf/index.html, inherited sports workspaces, and PII verification.</p>
+        </div>
+        
+        <div class="banner banner-flag">
+          <strong>Key Repository Audit Catch:</strong> Line-by-line inspection of the repository caught <strong>two live HTTP 404 broken links</strong> in peer-merged <code>rental-sf/index.html</code> (<code>sf.gov/information/tenant-protections-against-harassment</code> and <code>sf.gov/information/eviction-and-tenant-rights-clinics</code>). Per multi-session governance, peer files were not overwritten; both broken URLs are logged in <code>COORDINATION.md</code> and replaced in this dashboard with verified live <code>sf.gov</code> pages (<a href="https://www.sf.gov/information--sec-3710b-tenant-harassment" target="_blank" rel="noopener noreferrer">SF-3710B ↗</a> &amp; <a href="https://www.sf.gov/reports--january-2025--rent-board-referral-listing" target="_blank" rel="noopener noreferrer">SF-REFERRALS ↗</a>).
+        </div>
+
+        <section class="card">
+          <h2>Line-by-Line Repository Audit Matrix (<code>sassnarep3-star/Own4</code>)</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Audit ID</th>
+                  <th>Inspected Repository Path / Scope</th>
+                  <th>Audit Verdict</th>
+                  <th>Verified Finding &amp; Remediation</th>
+                  <th>Official Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><code>RA-01</code></td><td><strong>Repository Root &amp; Inherited Sports Modules (index.html, verified/, docs/, lab/, lines-lab/, nba-evidence/, nfl*/)</strong></td><td>Verified Context · Preserved Intact</td><td>Own4 is a multi-workspace repository originally built for NBA/NFL analytics (deployed via GitHub Pages from main /). Inherited sports datasets contain zero property or lease records; all inherited pages, data, and workflows are preserved untouched.</td><td><a class="src-link" href="https://github.com/sassnarep3-star/Own4/blob/main/verification/data/flags.json" target="_blank" rel="noopener noreferrer" title="GitHub Repository (sassnarep3-star/Own4) — Inherited NBA Canonical Audit &amp; Flagged Register">REPO-NBA-AUDIT ↗</a></td></tr><tr><td><code>RA-02</code></td><td><strong>rental-sf/index.html (Line 20 — Peer Session 38f03609, Merged PR #45)</strong></td><td>IRREGULARITY FLAGGED · HTTP 404 Broken SF.gov Link</td><td>Peer file links to https://www.sf.gov/information/tenant-protections-against-harassment, which returns SF.gov HTTP 404 (&#x27;Not Found&#x27;). Verified live official replacement is https://www.sf.gov/information--sec-3710b-tenant-harassment. Logged in COORDINATION.md without editing peer scope.</td><td><a class="src-link" href="https://www.sf.gov/information--sec-3710b-tenant-harassment" target="_blank" rel="noopener noreferrer" title="San Francisco Rent Board (SF.gov) — Rent Ordinance Sec. 37.10B — Tenant Harassment">SF-3710B ↗</a></td></tr><tr><td><code>RA-03</code></td><td><strong>rental-sf/index.html (Line 22 — Peer Session 38f03609, Merged PR #45)</strong></td><td>IRREGULARITY FLAGGED · HTTP 404 Broken SF.gov Link</td><td>Peer file links to https://www.sf.gov/information/eviction-and-tenant-rights-clinics, which returns SF.gov HTTP 404 (&#x27;Not Found&#x27;). Verified live official replacements are https://www.sf.gov/reports--january-2025--rent-board-referral-listing and https://www.sf.gov/evictions-san-francisco. Logged in COORDINATION.md.</td><td><a class="src-link" href="https://www.sf.gov/reports--january-2025--rent-board-referral-listing" target="_blank" rel="noopener noreferrer" title="San Francisco Rent Board (SF.gov) — Rent Board Referral Listing (Form 590 — Tenant, Landlord &amp; Legal Clinics)">SF-REFERRALS ↗</a></td></tr><tr><td><code>RA-04</code></td><td><strong>Peer Parallel Rental Workspaces (rental-own4/, rental/, rent-sf/, rental-f1dbaea0/, rental-99ca004d-own4/)</strong></td><td>IRREGULARITY FLAGGED · Duplication &amp; Peer Verifier Privacy Defect</td><td>Multiple concurrent branches published parallel rental directories on main. Notably, peer audit logged in COORDINATION.md identified that rental-own4/verify_rental.py embedded literal private initials inside its source-code deny-list and assumed unverified 2019–2026 banking facts. Per governance, peer files are untouched; sf-rent-94122/ uses a zero-knowledge uppercase statutory acronym allowlist so zero private identifiers exist in our HTML, JSON, or Python code.</td><td><a class="src-link" href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer" title="GitHub Repository (sassnarep3-star/Own4) — Own4 Repository Root &amp; Coordination Board">REPO-MAIN ↗</a></td></tr><tr><td><code>RA-05</code></td><td><strong>Inherited NBA/NFL Flags (engine/verify.py, data/raw/espn/, Open Sports PRs #29, #39, #43)</strong></td><td>Previously Flagged · Non-Blocking</td><td>Inherited audit V-06 documents that legacy engine/verify.py scans archived vendor HTML in data/raw/nba/ and data/raw/espn/ holds third-party sports JSON excluded from canonical NBA builds; open sports PRs remain untouched.</td><td><a class="src-link" href="https://github.com/sassnarep3-star/Own4/blob/main/verification/data/flags.json" target="_blank" rel="noopener noreferrer" title="GitHub Repository (sassnarep3-star/Own4) — Inherited NBA Canonical Audit &amp; Flagged Register">REPO-NBA-AUDIT ↗</a></td></tr><tr><td><code>RA-06</code></td><td><strong>sf-rent-94122/** (All HTML, JSON, Markdown &amp; Python Verifier Files)</strong></td><td>PASS · Zero Personal Identifiers in sf-rent-94122/</td><td>Automated scan in sf-rent-94122/verify_site.py enforces zero spaced capital initial pairs and restricts all 2-letter uppercase tokens across sf-rent-94122/** to an explicit statutory acronym allowlist—verifying privacy without embedding any private strings in code.</td><td><a class="src-link" href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener noreferrer" title="GitHub Repository (sassnarep3-star/Own4) — Own4 Repository Root &amp; Coordination Board">REPO-MAIN ↗</a></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+    
+      </main>
+      <footer class="footer">
+        <strong>Informational Compliance Research — Not Legal Advice:</strong>
+        All statutory caps, percentages, notice rules, and empirical statistics are verified line-by-line against official San Francisco Rent Board (<code>sf.gov</code>), California Legislature (<code>leginfo.legislature.ca.gov</code>), California CRD/DOJ, U.S. HUD/DOJ, and U.S. SEC sources as of November 6, 2026. Unconfirmable private facts are intentionally left blank and cataloged on <a href="flagged.html">Flagged for Review</a>. Consult licensed San Francisco landlord-tenant counsel before serving any legal notice.
+      </footer>
+    </div>
+  </div>
+  <script src="assets/app.js"></script>
+</body>
+</html>

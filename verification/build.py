@@ -139,6 +139,12 @@ NAV = [
         ("status/index.html", "Status review", "legacy"),
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
     ]),
+    ("Rental research · 2026-11-06", [
+        ("sf-rent-94122/index.html", "SF 94122 rent compliance (9 pages)", "legacy"),
+        ("sf-rent-94122/flagged.html", "⚑ SF 94122 — flagged (12)", "legacy"),
+        ("rental-f1dbaea0/index.html", "RentCheck SF · 94122", "legacy"),
+        ("rental-f1dbaea0/flagged.html", "⚑ Rental — flagged (f1dbaea0)", "legacy"),
+    ]),
 ]
 
 FOOTER = """<footer>
