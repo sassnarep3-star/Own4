@@ -1097,6 +1097,38 @@ committing) and is enforced by `.github/workflows/canonical-site.yml`.
 
 ---
 
+## Rental increase project — San Francisco, Outer Sunset 94122 · session arena/99ca004d-own4 (2026-11-06)
+
+Project: collect, organize, and analyze rental-increase requirements for two rent-controlled units in a building
+built in 1940 (San Francisco Rent Ordinance area, ZIP 94122). Personal tenant information is anonymized (placeholder
+names only); dates and amounts are kept exact. This is a separate project namespace from the NBA/NFL research
+sessions above; those namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verification/`,
+`verified/`, `engine/`) are linked, never edited by this session.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|---------------------------------|
+| R1 | Coordination board bootstrap + task claims | done | arena/99ca004d-own4 | COORDINATION.md |
+| R2 | Official-source research: SF Rent Ordinance / Rent Board allowable increases, CA AB 1482, CA Civil Code 827, federal Fair Housing Act | done | arena/99ca004d-own4 | rental/sources.md |
+| R3 | Executive summary (anonymized; internal personal info only; placeholder names) | done | arena/99ca004d-own4 | rental/EXECUTIVE_SUMMARY.md |
+| R4 | Site creation: landing page + category subpages + data tables + Flagged for Review page | done | arena/99ca004d-own4 | rental-99ca004d-own4/index.html, rental-99ca004d-own4/pages/*.html, rental-99ca004d-own4/assets/* |
+| R5 | Line-by-line verification: every table row carries an official source link; unverifiable values blank + flagged | done | arena/99ca004d-own4 | rental/* |
+| R6 | Pull request to main + merge + GitHub Pages deploy confirmation | in progress | arena/99ca004d-own4 | — |
+
+## Log
+
+- 2026-11-06 — Session arena/99ca004d-own4 claimed the rental-increase project (tasks R1–R6, sole active session). Prior session records above are preserved verbatim; no peer files edited and no peer namespaces touched.
+- Official sources read this session (all fetched directly, no scraping):
+  * SF Rent Board / SF.gov: allowable rent increase 1.6% effective 3/1/26–2/28/27 (60% of Bay Area CPI-U increase); 1.4% effective 3/1/25–2/28/26; units built on/before 6/13/1979 have rent control + eviction protection; increase once every 12 months, first increase 12 months after lease began; 30-day written notice (90-day if >10% combined in a year); +5 days if mailed; notice must state dollar amount, percentage, effective date; rent increase license required via Housing Inventory; no limit on initial rent for a vacant unit; banked increases allowed. https://www.sf.gov/learn-about-rent-increases-san-francisco/ and https://www.sf.gov/news--annual-rent-increase-3126-22827-announced/
+  * SF.gov "Learn about San Francisco rental laws": coverage rule (built on/before June 13, 1979); AB 1482 note; Rent Board counselor 415-252-4600. https://www.sf.gov/learn-about-san-francisco-rental-laws/
+  * SF.gov "Evictions in San Francisco": 17 just cause reasons; Eviction Defense Collaborative 415-659-9184 (free legal help); Rent Board Referral Listing. https://sf.gov/evictions-san-francisco
+  * SF.gov "The California Tenant Protection Act of 2019 (AB 1482)": statewide cap 5% + CPI, max 10%; SF max 8.8% effective 8/1/26–7/31/27 (5% + 3.8% CPI); units under local rent control below 5%+CPI are exempt from the state cap; just cause after 12 months occupancy; damages up to 3x; effective 1/1/2020, sunsets 1/1/2030. https://www.sf.gov/reports/august-2023/california-tenant-protection-act-2019-ab-1482 and https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201920200AB1482
+  * CA Civil Code 827 (leginfo.legislature.ca.gov): 30-day notice if increase ≤10% (combined in prior 12 months); 90-day notice if >10%; mail service per CCP 1013.
+  * HUD.gov Fair Housing Act overview: prohibits discrimination based on race, color, national origin, religion, sex, familial status, disability; complaint filing at HUD. https://www.hud.gov/helping-americans/fair-housing-act-overview
+- Privacy rule: no personal tenant names or identifying details are stored in the repo. Placeholder names (Tenant A, Tenant B, …) are used; dates and rent amounts are kept exact.
+- 2026-11-06 — Tasks R1–R5 complete. Site built under rental/ (10 HTML pages + CSS). Every table row carries an official source link (sf.gov, leginfo.legislature.ca.gov, hud.gov, sfplanninggis.org); link integrity check passed (0 broken internal links, 0 non-official external domains). Verified figures: SF allowable increase 1.6% eff. 3/1/26–2/28/27; prior 1.4% eff. 3/1/25–2/28/26; AB 1482 cap 5%+CPI max 10% (SF 8.8% eff. 8/1/26–7/31/27); Civil Code §827 30-day/90-day notice; HUD Fair Housing Act protected classes. Computations: Unit 1 $3,995 × 1.6% = $63.92 → $4,058.92; Unit 2 $3,150 × 1.6% = $50.40 → $3,200.40 (no rounding up). Flagged (non-blocking, published on rental/pages/flagged.html): F1 Unit 1 partial tenancy change; F2 Unit 2 banked increases since 2019; F3 post-2/28/27 percentage; F4 no federal rent-control source; F5 CA retaliation/protected-class list; F6 Rent Ordinance exemptions.
+- 2026-11-06 — COLLISION: origin/main (commit 7a8f253 "Add source-linked San Francisco rental review dashboard") already contains a peer rental implementation under `rental/`, `rent-sf/`, and `rental-own4/` namespaces, merged after this branch's base. My `rental/` tree collided (add/add on `rental/index.html`).
+- 2026-11-06 — RESOLUTION (per protocol, no peer work discarded): moved my tree to `rental-99ca004d-own4/` (session-scoped, non-overlapping). Peer namespaces `rental/`, `rent-sf/`, `rental-own4/` are preserved untouched. All relative links inside my tree remain valid after the move. Re-merged origin/main cleanly after the move.
+- 2026-11-06 — Task R6 in progress: PR #51 open; body to be repaired (shell mangled backticks); merge and GitHub Pages deployment pending.
 ## Session `arena/f1dbaea0-own4` — SF rental-increase research + repo review + Pages site (2026-11-06)
 
 **Context found at claim time.** Working tree clean on branch `arena/f1dbaea0-own4`. All prior board items are `done`/`needs review`; last peer commits are 2026-11-02/2026-11-05 (>60 min old), so nothing live is displaced. The repo root site is the canonical NBA dashboard owned by earlier integration sessions — this session does NOT edit peer namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verified/`, `verification/`, `engine/`). New work lives under `rental-f1dbaea0/`, plus append-only records (`README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` untouched) and one additive link in root `index.html`.
