@@ -1107,12 +1107,12 @@ sessions above; those namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`
 
 | # | Task | Status | Owner session | Files touched (exclusive scope) |
 |---|------|--------|---------------|---------------------------------|
-| R1 | Coordination board bootstrap + task claims | in progress | arena/99ca004d-own4 | COORDINATION.md |
+| R1 | Coordination board bootstrap + task claims | done | arena/99ca004d-own4 | COORDINATION.md |
 | R2 | Official-source research: SF Rent Ordinance / Rent Board allowable increases, CA AB 1482, CA Civil Code 827, federal Fair Housing Act | done | arena/99ca004d-own4 | rental/sources.md |
-| R3 | Executive summary (anonymized; internal personal info only; placeholder names) | unclaimed | arena/99ca004d-own4 | rental/EXECUTIVE_SUMMARY.md |
-| R4 | Site creation: landing page + category subpages + data tables + Flagged for Review page | unclaimed | arena/99ca004d-own4 | rental/index.html, rental/pages/*.html, rental/assets/* |
-| R5 | Line-by-line verification: every table row carries an official source link; unverifiable values blank + flagged | unclaimed | arena/99ca004d-own4 | rental/* |
-| R6 | Pull request to main + merge + GitHub Pages deploy confirmation | unclaimed | arena/99ca004d-own4 | — |
+| R3 | Executive summary (anonymized; internal personal info only; placeholder names) | done | arena/99ca004d-own4 | rental/EXECUTIVE_SUMMARY.md |
+| R4 | Site creation: landing page + category subpages + data tables + Flagged for Review page | done | arena/99ca004d-own4 | rental/index.html, rental/pages/*.html, rental/assets/* |
+| R5 | Line-by-line verification: every table row carries an official source link; unverifiable values blank + flagged | done | arena/99ca004d-own4 | rental/* |
+| R6 | Pull request to main + merge + GitHub Pages deploy confirmation | in progress | arena/99ca004d-own4 | — |
 
 ## Log
 
@@ -1125,3 +1125,5 @@ sessions above; those namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`
   * CA Civil Code 827 (leginfo.legislature.ca.gov): 30-day notice if increase ≤10% (combined in prior 12 months); 90-day notice if >10%; mail service per CCP 1013.
   * HUD.gov Fair Housing Act overview: prohibits discrimination based on race, color, national origin, religion, sex, familial status, disability; complaint filing at HUD. https://www.hud.gov/helping-americans/fair-housing-act-overview
 - Privacy rule: no personal tenant names or identifying details are stored in the repo. Placeholder names (Tenant A, Tenant B, …) are used; dates and rent amounts are kept exact.
+- 2026-11-06 — Tasks R1–R5 complete. Site built under rental/ (10 HTML pages + CSS). Every table row carries an official source link (sf.gov, leginfo.legislature.ca.gov, hud.gov, sfplanninggis.org); link integrity check passed (0 broken internal links, 0 non-official external domains). Verified figures: SF allowable increase 1.6% eff. 3/1/26–2/28/27; prior 1.4% eff. 3/1/25–2/28/26; AB 1482 cap 5%+CPI max 10% (SF 8.8% eff. 8/1/26–7/31/27); Civil Code §827 30-day/90-day notice; HUD Fair Housing Act protected classes. Computations: Unit 1 $3,995 × 1.6% = $63.92 → $4,058.92; Unit 2 $3,150 × 1.6% = $50.40 → $3,200.40 (no rounding up). Flagged (non-blocking, published on rental/pages/flagged.html): F1 Unit 1 partial tenancy change; F2 Unit 2 banked increases since 2019; F3 post-2/28/27 percentage; F4 no federal rent-control source; F5 CA retaliation/protected-class list; F6 Rent Ordinance exemptions.
+- 2026-11-06 — Task R6 in progress: preparing PR to main and GitHub Pages deployment.
