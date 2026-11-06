@@ -148,3 +148,13 @@ checklist. Tenant details are **anonymized**; dates and amounts are preserved. N
   **Recommendation: raise both units, same documented method.**
 - **Flagged for Review:** 17 items — 14 open (banking-rule conflict, 2027-28 rate unpublished,
   coverage facts, fee unverified, …), non-blocking; must be resolved before serving any notice.
+
+---
+
+## Additional research workspace · Rental Increase SF (arena/b867679d-own4, 2026-11-06)
+
+New, self-contained project: verified analysis of rent-increase law and practice for two rent-controlled units (Outer Sunset, SF 94122; built 1940). Static site under [`rental-own4/`](rental-own4/index.html) — landing dashboard, executive summary, law tables (local/state/federal), unit-by-unit math with banking audit, notice & process, corporate vs. individual owner practice, tenant-lawyer review checklist (one-unit vs. both-units discrimination analysis), market context, source register (S1–S27, official sources only) and a Flagged-for-review page. **Occupant names are withheld everywhere (placeholders Tenant A–F); dates and amounts are as documented.** Not legal advice.
+- Landing: `rental-own4/index.html` → live at `/Own4/rental-own4/index.html` after Pages deploy.
+- Anonymized repo-level summary: `EXECUTIVE_SUMMARY_SF_RENTAL.md`.
+- Verification: `python3 rental-own4/verify_rental.py` (local link integrity, source-link coverage, privacy scan) — 0 errors, 0 warnings as of 2026-11-06.
+- The root NBA dashboard (`index.html`) is intentionally untouched: it is rebuilt byte-identically by the canonical NBA verification workflow.
