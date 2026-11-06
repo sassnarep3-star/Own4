@@ -1109,3 +1109,19 @@ committing) and is enforced by `.github/workflows/canonical-site.yml`.
 **Review flags / limitations:** facts and claimed 1940 year/ZIP/coverage are user-supplied and not certified; Unit 1 tenancy/anniversary issue unresolved; Unit 2 past increase history unresolved; no independent market-comparable source; no legal counsel review occurred. No assertion that a specified increase has attorney approval. General description of large vs individual owner workflows is labeled as unsourced operational context, not a verified universal practice. No assertion that free attorney service is guaranteed; official clinic link is given with eligibility/availability caveat.
 
 **Status: done with non-blocking review flags.** No PR/merge/deployment claim made in this work record.
+
+---
+## San Francisco Rental Increase Research & Dashboard (ZIP 94122) · session `arena/3a52f5fc-own4` · 2026-11-06 UTC
+
+**Coordination & Branch Note:** Arena fixes this session to branch `arena/3a52f5fc-own4` (creating `session-<id>/<task>` branches is disallowed by platform policy). Other parallel sessions on 2026-11-06 claimed `rental-sf/**`, `rental/**`, `rental-increases/**`, and `rent-sf/**`. To ensure zero file-scope overlap with any peer session or inherited NBA/NFL workspace, this session claims exclusive namespace `sf-rent-94122/**` and `.github/workflows/sf-rent-94122.yml`, plus append-only records in `COORDINATION.md` and an additive navigation entry in `verification/build.py` during final integration.
+
+**Privacy & PII Rule:** Personal tenant identifiers from the prompt are strictly internal-only and never committed anywhere in the repository or public site. Placeholder names (`Tenant A1`, `Tenant A2`, `Tenant A3`, `Tenant A4` for Unit 1; `Tenant B1`, `Tenant B2` for Unit 2) are used throughout while keeping dates (`February 1, 2025`, `April 1, 2026`, `June 1, 2019`), monthly rent amounts (`$3,995`, `$3,150`), building year (`1940`), and general location (`San Francisco Outer Sunset, ZIP 94122`) intact as instructed.
+
+| Task ID | Task Description | Status | Owner Session | Exclusive File Scope |
+|---|---|---|---|---|
+| SF94122-1 | Repo review & inherited module/irregularity audit (including peer `rental-sf/` & legacy sports workspaces) | in progress | `arena/3a52f5fc-own4` | `sf-rent-94122/data/repo_audit.json`, `sf-rent-94122/REPO_REVIEW.md` |
+| SF94122-2 | Official-source verification (SF Rent Board 571 schedule, SF Admin. Code Ch. 37 & 37A, Rules § 6.14, CA Civ. Code §§ 827, 1947.12, 1954.53, Gov. Code § 12955 FEHA, 42 U.S.C. § 3604 FHA, SEC/corporate & SF public datasets) | in progress | `arena/3a52f5fc-own4` | `sf-rent-94122/data/*.json` |
+| SF94122-3 | Anonymized Executive Summary & Unit 1 / Unit 2 legal-arithmetic analysis (continuing original occupant analysis, banked increase math, one-unit vs both-units scrutiny) | in progress | `arena/3a52f5fc-own4` | `sf-rent-94122/EXECUTIVE_SUMMARY.md`, `sf-rent-94122/data/analysis.json` |
+| SF94122-4 | Multi-page GitHub Pages dashboard (`sf-rent-94122/index.html` + category subpages + `flagged.html`), deterministic generator, line-by-line source verifier, PII scanner & CI workflow | in progress | `arena/3a52f5fc-own4` | `sf-rent-94122/**`, `.github/workflows/sf-rent-94122.yml` |
+| SF94122-5 | Final integration, root navigation link, PR to `main`, merge, and GitHub Pages live deployment verification | unclaimed (final step) | `arena/3a52f5fc-own4` | `COORDINATION.md` (append-only), `verification/build.py` -> `index.html`/`verified/*.html` (additive nav) |
+
