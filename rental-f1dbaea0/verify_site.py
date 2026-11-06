@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-rental/verify_site.py — verification harness for the rental research site.
+rental-f1dbaea0/verify_site.py — verification harness for the rental research site.
 
 Fails loudly (exit 1) on any of:
   1. a missing page;
@@ -9,7 +9,7 @@ Fails loudly (exit 1) on any of:
   4. template/placeholder leakage ("{{", "}}", "TODO", "%(", "undefined", " nan ");
   5. a page missing the disclaimer footer.
 
-Usage:  python3 rental/verify_site.py
+Usage:  python3 rental-f1dbaea0/verify_site.py
 """
 import html.parser
 import os
@@ -88,7 +88,7 @@ def check_page(name):
 
 def main():
     total_rows = failed = 0
-    print("== rental/ site verification ==")
+    print("== rental-f1dbaea0/ site verification ==")
     for page in PAGES:
         probs = check_page(page)
         src = open(os.path.join(HERE, page), encoding="utf-8").read() if os.path.exists(os.path.join(HERE, page)) else ""

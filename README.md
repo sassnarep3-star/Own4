@@ -133,12 +133,12 @@ two-unit building in San Francisco’s Outer Sunset (ZIP 94122)** — under SF, 
 federal law — with the full unit-by-unit math, notice procedure, and a tenant-lawyer scrutiny
 checklist. Tenant details are **anonymized**; dates and amounts are preserved. Not legal advice.
 
-- **Site:** https://sassnarep3-star.github.io/Own4/rental/ (landing, exec summary, laws,
+- **Site:** https://sassnarep3-star.github.io/Own4/rental-f1dbaea0/ (landing, exec summary, laws,
   unit analysis, scenarios, practice & notice, discrimination analysis, Flagged for Review,
   source register). Linked from the root sidebar (marked `LOCAL ADDITION`); if a future peer
   rebuild of `index.html` overwrites it, re-add or see the board.
-- **Repo:** `rental/` — `EXECUTIVE_SUMMARY.md`, `data/findings.json`, `verify_site.py`
-  (row-source + link integrity harness — PASS), `rental/flagged.html` on the site.
+- **Repo:** `rental-f1dbaea0/` — `EXECUTIVE_SUMMARY.md`, `data/findings.json`, `verify_site.py`
+  (row-source + link integrity harness — PASS), `rental-f1dbaea0/flagged.html` on the site.
 - **Repo review:** `repo_review/REVIEW-2026-11-06.md` — structure, secrets/PII scans (clean),
   CI reality, raw-dump footprint (`data/raw/` ≈ 53 MB), 4 tracked `.pyc`, RQ-1…RQ-12.
 - **Headline:** 1.6% annual allowable (2026-03→2027-02, SF Rent Board); Unit 1 → $4,058.92

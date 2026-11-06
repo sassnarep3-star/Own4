@@ -1106,9 +1106,9 @@ committing) and is enforced by `.github/workflows/canonical-site.yml`.
 | # | Task | Status | Owner session | Files touched (exclusive scope) |
 |---|------|--------|---------------|--------------------------------|
 | R1 | Repo review: structure, tests/workflows, privacy & irregularities scan, link check | done | arena-f1dbaea0-own4 | `repo_review/REVIEW-2026-11-06.md` (new, additive) |
-| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | done | arena-f1dbaea0-own4 | `rental/data/*.json` |
-| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | done | arena-f1dbaea0-own4 | `rental/EXECUTIVE_SUMMARY.md`, `rental/data/findings.json` |
-| R4 | GitHub Pages section `rental/` — landing + category subpages + Flagged for Review (table rows all source-linked) | done | arena-f1dbaea0-own4 | `rental/**` |
+| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/data/*.json` |
+| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/EXECUTIVE_SUMMARY.md`, `rental-f1dbaea0/data/findings.json` |
+| R4 | GitHub Pages section `rental-f1dbaea0/` — landing + category subpages + Flagged for Review (table rows all source-linked) | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/**` |
 | R5 | Final integration: re-verify combined output, link integrity, additive root-index link, additive README entry, PR to main, merge, Pages deploy confirmation | in progress | arena-f1dbaea0-own4 | `index.html` (additive only), `README.md` (append only), `COORDINATION.md` (append only) |
 
 ### Log
