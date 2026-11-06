@@ -1094,3 +1094,23 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+
+## Session `arena/f1dbaea0-own4` — SF rental-increase research + repo review + Pages site (2026-11-06)
+
+**Context found at claim time.** Working tree clean on branch `arena/f1dbaea0-own4`. All prior board items are `done`/`needs review`; last peer commits are 2026-11-02/2026-11-05 (>60 min old), so nothing live is displaced. The repo root site is the canonical NBA dashboard owned by earlier integration sessions — this session does NOT edit peer namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verified/`, `verification/`, `engine/`). New work lives under `rental/`, plus append-only records (`README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` untouched) and one additive link in root `index.html`.
+
+**Personal data handling.** The brief contains private tenant details. On the public site and in all committed files, tenant names are anonymized to placeholders (initials/unit labels only as in the brief, rendered as "Unit 1" / "Unit 2" / "Household A"). No further personal information (addresses beyond the already-public ZIP 94122, contact details, IDs) is published. Dates and dollar amounts are kept as provided. All analysis is informational, not legal advice.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|--------------------------------|
+| R1 | Repo review: structure, tests/workflows, privacy & irregularities scan, link check | in progress | arena-f1dbaea0-own4 | `repo_review/REVIEW-2026-11-06.md` (new, additive) |
+| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | in progress | arena-f1dbaea0-own4 | `rental/data/*.json` |
+| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | in progress | arena-f1dbaea0-own4 | `rental/EXECUTIVE_SUMMARY.md`, `rental/data/analysis.md` |
+| R4 | GitHub Pages section `rental/` — landing + category subpages + Flagged for Review (table rows all source-linked) | in progress | arena-f1dbaea0-own4 | `rental/**` |
+| R5 | Final integration: re-verify combined output, link integrity, additive root-index link, additive README entry, PR to main, merge, Pages deploy confirmation | in progress | arena-f1dbaea0-own4 | `index.html` (additive only), `README.md` (append only), `COORDINATION.md` (append only) |
+
+### Log
+
+- 2026-11-06 — Claimed R1–R5. No other session active in this checkout. Sources will be limited to official/primary (sf.gov / sfgov.org / sfrentboard, leginfo.legislature.ca.gov, ca.gov, hud.gov, epa/uscourts as applicable) plus clearly-flagged reputable reporting labeled non-official. Anything not confirmable is left blank and published on `rental/flagged.html`.
