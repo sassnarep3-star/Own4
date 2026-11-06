@@ -1,0 +1,39 @@
+name: Validate SF 94122 Rent Compliance Dashboard
+
+on:
+  push:
+    paths:
+      - 'sf-rent-94122/**'
+      - '.github/workflows/sf-rent-94122.yml'
+  pull_request:
+    paths:
+      - 'sf-rent-94122/**'
+      - '.github/workflows/sf-rent-94122.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-sf-rent-94122:
+    name: Build, verify links/sources/blanks/privacy, and run unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild sf-rent-94122 static dashboard and markdown deliverables
+        run: python3 sf-rent-94122/build_site.py
+
+      - name: Verify every table row source link, blank cell, local link, and privacy guard
+        run: python3 sf-rent-94122/verify_site.py
+
+      - name: Run sf-rent-94122 unit tests
+        run: python3 -m unittest discover -s sf-rent-94122 -p "test_*.py" -v
+
+      - name: Confirm deterministic byte-identical rebuild
+        run: git diff --exit-code -- sf-rent-94122
