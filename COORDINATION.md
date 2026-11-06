@@ -1094,3 +1094,14 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+## Rental research and publication · session arena/7affa728-own4 (2026-11-06 UTC)
+
+The Arena branch is fixed; the requested per-task branch names cannot be created. This session is the sole integration session for the new rental project. Earlier in-progress integration entries are historical (last repository commit Nov 5, over 60 minutes old); no existing work is displaced. The repository contains unrelated, retained sports dashboards, so the rental landing and its subpages will live at `/rental/` rather than replacing their root landing.
+
+| Task | Status | Owner | Exclusive file scope |
+|---|---|---|---|
+| Official-source research, anonymized rental dashboard, review flags, integration and release | in progress | arena/7affa728-own4 | `rental/**`, `COORDINATION.md` append-only |
+
+No private names or initials will be committed. User-provided case facts are not independently verified; their calculations are conditional, not official findings. All previous namespaces remain unchanged.
