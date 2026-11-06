@@ -1096,6 +1096,41 @@ on every page, no placeholder values. The five-command rebuild is byte-identical
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
 
 ---
+## Session arena/b867679d-own4 — Rental Increase SF (new project) (2026-11-06)
+
+New, self-contained project. Does not touch peer NBA/NFL namespaces. Root `index.html` receives at most a small additive link; no peer file edits planned.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|--------------------------------|
+| R1 | Official-source research (SF Rent Board, CA Civil Code, federal) for two rent-controlled units, 94122 | done | arena/b867679d-own4 | rental-own4/data/*.json |
+| R2 | Analysis: allowable increases, banking, notice rules, discrimination review, both-vs-one unit question | done | arena/b867679d-own4 | rental-own4/*.html |
+| R3 | Executive summary (anonymized; personal info internal-only) | done | arena/b867679d-own4 | rental-own4/executive-summary.html, EXECUTIVE_SUMMARY_SF_RENTAL.md |
+| R4 | GitHub Pages static subpages (dashboard layout, table format, Flagged for Review) | done | arena/b867679d-own4 | rental-own4/**, assets/rental.css |
+| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | in progress | arena/b867679d-own4 | COORDINATION.md, workflow (none needed — static under /rental-own4/) |
+
+### Notes
+- Personal tenant names are NOT published anywhere in the repo or site. Units are labeled "Unit 1" / "Unit 2"; tenants are placeholders ("Tenant A/B/C"). Dates and amounts are preserved as provided.
+- Sources: sf.gov (Rent Board announcements, Rent Ordinance pages, 571 Allowable Annual Increases table PDF), leginfo.legislature.ca.gov (CIV 827, 827 notice; CIV 1954.53 Costa-Hawkins; CIV 1947.12 AB 1482), bls.gov CPI Sep 2026, calcivilrights.ca.gov. Anything not confirmable from an official source is left blank or labeled unverified on the Flagged for Review page.
+
+### 2026-11-06 — Session arena/b867679d-own4 completion record (R1–R5)
+
+**Delivered** (branch `arena/b867679d-own4`):
+- `rental-own4/` static site (10 pages): index dashboard, executive-summary, laws, analysis (unit math + banking audit), process (notice/license/reasons), corporate (corps vs owners), scrutiny (tenant-lawyer checklist + one-vs-both-units), market, sources (S1–S27), flagged (F1–F16), plus `rental-own4/data/sources.json`, `rental-own4/data/analysis.json`, `rental-own4/verify_rental.py`, `assets/rental.css`.
+- `EXECUTIVE_SUMMARY_SF_RENTAL.md` at repo root (anonymized).
+- README append (additive only).
+
+**Verification performed**
+- Official sources read 2026-11-06: sf.gov rent-increases page, 3/1/26 announcement, table 571 PDF, banked-rent-increases page, rental-laws page, landlord-petitions page, tenant-and-landlord-resources; leginfo.legislature.ca.gov CIV 827/1941.1/1942.5/1946.2/1947.12/1954.53/51, GOV 12955; bls.gov CPI Sep 2026 (USDL-26-1574); govinfo.gov 42 U.S.C. §3604; calcivilrights.ca.gov release 2025-04-17; huduser.gov FMR portal (unreadable → F5 blank); data.census.gov (blocked → blank); sfplanninggis.org PIM; SEC EDGAR search links (manual review).
+- Arithmetic independently recomputed (python): U1 1.6% = $63.92 → $4,058.92; U2 1.6% = $50.40 → $3,200.40; U2 banked pool 1.8+0.7+2.3+3.6+1.7+1.4 = 11.5% (+1.6%) = 13.1% × $3,150.00 = $412.65 → $3,562.65; U1 skipped 1.4% = $55.93 (not bankable; 24-month rule).
+- `rental-own4/verify_rental.py`: 0 errors, 0 warnings (local links resolve; every table row source-linked or badged; word-boundary scan finds no documented personal identifiers).
+- Root `index.html` NOT modified (enforced byte-identical NBA rebuild in `.github/workflows/canonical-site.yml`); site published under `/rental-own4/`. Logged as F16.
+
+**Irregularities flagged (F1–F16)**: see `rental-own4/flagged.html`. Headline ones: Unit 2 rent history unverified (entire 11.5% bank pool), built-1940 coverage proof, HUD FMR and ACS values unverifiable (left blank), rent-index YoY only secondarily reported (shelter +3.2% verified), 2027–28 allowable rate unpublished, banking 24-month/anniversary interaction needs Rent Board counselor, pending (unenacted) banked-cap ordinance, license not yet evidenced.
+
+**PR/merge record**: see below.
+
+**Namespace rename (2026-11-06).** This session initially published under `rental/`, unaware that three concurrent sessions had already merged rental workspaces to main during the same hour (`rent-sf/` — arena/dd9ee9d8-own4; `rental-sf/` — arena/38f03609-own4, linked from canonical nav; `rental/` — arena/7affa728-own4, merged via PR #48/#46 chain). To avoid overwriting peer output, this session's namespace was renamed `rental/` → `rental-own4/` (all internal links are relative and unchanged; assets remain at `assets/rental.css`). No peer file was edited. `rental/verify_rental.py` → `rental-own4/verify_rental.py` now scans `rental-own4/`. Re-verification after rename: 0 errors, 0 warnings. Peer duplication of coverage is flagged for owner review (see F16); this session did not attempt to consolidate four published rental dashboards.
+
 ## Session arena/dd9ee9d8-own4 — San Francisco rental research (2026-11-06 UTC)
 
 | Task | Status | Owner | Exclusive scope |
