@@ -1276,6 +1276,12 @@ No private names or initials will be committed. User-provided case facts are not
 
 - Pull-rebase of the session branch attempted to replay the already merged peer commit and conflicted on the board; aborted without loss. The session remote remains an ancestor, so the subsequent normal push preserves all peer and session history.
 
+### PR and deployment status · 2026-11-06
+- [PR #48](https://github.com/sassnarep3-star/Own4/pull/48) merged at 13:38:55 UTC, merge commit `c800c1e1fbbdc6aec17fe59204e38aa478f0cdf5`. PR checks passed before merge, including bounded audit, research workspace validation and canonical-site validation.
+- The Pages builds for the merge and subsequent main updates were cancelled as newer concurrent main deployments superseded them: [42227193052](https://github.com/sassnarep3-star/Own4/actions/runs/42227193052), [42227338482](https://github.com/sassnarep3-star/Own4/actions/runs/42227338482), and [42227684828](https://github.com/sassnarep3-star/Own4/actions/runs/42227684828). The newer deployment is pending. Live `/rental/` returned 404 at the last check; deployment success is not claimed.
+- **Deployment confirmed:** [Pages run 42228267838](https://github.com/sassnarep3-star/Own4/actions/runs/42228267838) completed successfully for commit `bbc433048873af8642feda01e49ecd88bdfb9a71`, which includes PR #48's merge. Both https://sassnarep3-star.github.io/Own4/rental/index.html and https://sassnarep3-star.github.io/Own4/rental/review.html were fetched successfully and checked after deployment. The prior Pages API status had reported errors for cancelled/superseded runs; the successful Actions deployment and live content supersede that earlier status. Rental work status: **done**, case-specific gaps **needs review**.
+
+---
 - Second concurrent integration: PR #48 advanced main and caused an append-only board conflict. Both records and all peer namespaces retained. The initial PR #46 merge attempt failed safely; no merge was performed. A pull-rebase of the session branch had previously replayed the peer merge and conflicted, so it was aborted and a normal fast-forward push used to preserve history.
 
 ### 2026-11-06 — PR #49 merged + Pages outcome (session arena/b867679d-own4)
@@ -1284,3 +1290,7 @@ No private names or initials will be committed. User-provided case facts are not
 - Verification after rename/merge: `python3 rental-own4/verify_rental.py` → 0 errors, 0 warnings; root `index.html` byte-identical to canonical; privacy scan clean.
 - GitHub Pages: legacy build from main `/`. Last GOOD build: fbd3368 (2026-11-06T13:36:07Z, status built). EVERY build since 13:38:56Z has returned status errored / "Page build failed.": c800c1e (13:38:56), 786070d (13:40:02), 70cb861 (13:42:35, this PR's merge), e7afc9d (13:45:15). Repo is healthy by static checks: .nojekyll present, 647 files, ~63 MB, no unusual filenames, no NUL bytes. A POST to /pages/builds returned 403 (integration token may not request builds), so retries are triggered only by pushes to main. The build failures span four consecutive commits by three different sessions within seven minutes and are uncorrelated with any single commit's content (fbd3368, which differs from c800c1e only by the new rental/ static files, built fine at 13:36). Suspected Pages service-side incident; retrying via this append. If the next build errors again, the site content is valid and the failure is environmental — owner should check githubstatus.com / Pages settings or support.
 - Live URL after a successful build: https://sassnarep3-star.github.io/Own4/rental-own4/index.html
+
+- Receipt integration: concurrent rental sessions advanced main again. Resolved the append-only coordination conflict by retaining both sides; no peer files changed.
+
+- Session-branch pull-rebase attempted to replay already merged peer history; aborted without loss, then used a verified fast-forward push.
