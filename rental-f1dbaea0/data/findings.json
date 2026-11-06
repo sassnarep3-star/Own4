@@ -1,0 +1,72 @@
+{
+  "project": "Rental increase research - SF Outer Sunset (94122)",
+  "prepared": "2026-11-06",
+  "session": "arena/f1dbaea0-own4",
+  "privacy": "Tenant identities anonymized; dates and amounts preserved as provided; no personal information published.",
+  "units": {
+    "unit_1": {
+      "lease_start": "2025-02-01",
+      "base_rent": 3995.00,
+      "continuing_tenancy": "2026-04-01 at unchanged $3,995.00; at least one original occupant remains",
+      "anniversary": "February 1",
+      "increases_taken": "none since 2025-02-01"
+    },
+    "unit_2": {
+      "lease_start": "2019-06-01",
+      "base_rent": 3150.00,
+      "continuing_tenancy": "continuously occupied by same occupants since 2019-06-01",
+      "anniversary": "June 1",
+      "increases_taken": "none known since 2019-06-01"
+    }
+  },
+  "allowable_increases_official": {
+    "2026-03-01/2027-02-28": 1.6,
+    "2025-03-01/2026-02-28": 1.4,
+    "2024-03-01/2025-02-29": 1.7,
+    "2023-03-01/2024-02-29": 3.6,
+    "2022-03-01/2023-02-28": 2.3,
+    "2021-03-01/2022-02-28": 0.7,
+    "2020-03-01/2021-02-28": 1.8,
+    "2019-03-01/2020-02-29": 2.6,
+    "history_1982_2027_min": 0.1,
+    "history_1982_2027_max": 7.0,
+    "history_median_1992_93_1_6pct_row_used": 1.9,
+    "history_mean_1992_93_1_6pct_row_used": 2.443,
+    "source": "https://www.sf.gov/documents/34344/571_Allowable_Annual_Increases_26-27_1.pdf"
+  },
+  "calculations": {
+    "unit_1_annual_2026_27": {"pct": 1.6, "delta": 63.92, "new_base": 4058.92},
+    "unit_1_annual_plus_banked_2025_26": {"pct": 3.0, "delta": 119.85, "new_base": 4114.85, "note": "banked 1.4% eligibility depends on flag F1"},
+    "unit_2_banked_12_month_reading": {"pct": 13.1, "delta": 412.65, "new_base": 3562.65, "note": "sum of 1.8+0.7+2.3+3.6+1.7+1.4+1.6"},
+    "unit_2_banked_24_month_reading": {"pct": 10.1, "delta": 318.15, "new_base": 3468.15, "note": "sum of 1.8+0.7+2.3+3.6+1.7 only; 1.4% banks 2027-06-01; 1.6% banks 2028-06-01"},
+    "unit_2_2027_28_annual_component": "UNVERIFIED - not published as of 2026-11-06; left blank (flag F2)"
+  },
+  "scenarios": [
+    {"id": "A", "label": "annual allowable only", "risk": "lowest"},
+    {"id": "B1", "label": "annual + banked, 12-month reading", "risk": "moderate - flag F1"},
+    {"id": "B2", "label": "banked, strict 24-month reading (conservative)", "risk": "lowest-of-banked options"},
+    {"id": "C", "label": "Rent Board-supervised petition passthroughs", "risk": "complex"}
+  ],
+  "recommendation": "Apply the same documented formula-based method to BOTH units (uniform policy); confirm coverage; verify license; serve proper written notices; unit 1: 2027-02-01 +1.6%; unit 2: 2027-06-01 with banked package >=90-day notice after counselor confirmation of banking rule.",
+  "unverified_or_flagged": ["F1","F2","F3","F4","F5","F6","F7","F8","F10","F12","F13","F14","F15","F16","F17"],
+  "verified_closed_this_session": ["F9","F11"],
+  "sources": [
+    {"id": "S-01", "url": "https://www.sf.gov/news--annual-rent-increase-3126-22827-announced", "supports": "1.6% for 2026-27"},
+    {"id": "S-02", "url": "https://www.sf.gov/news--annual-rent-increase-3125-22826-announced", "supports": "1.4% for 2025-26"},
+    {"id": "S-03", "url": "https://www.sf.gov/documents/34344/571_Allowable_Annual_Increases_26-27_1.pdf", "supports": "full official history 1982-2027"},
+    {"id": "S-04", "url": "https://www.sf.gov/learn-about-rent-increases-san-francisco/", "supports": "procedure, notice, roommate rule, banking example"},
+    {"id": "S-05", "url": "https://sf.gov/information/banked-rent-increases", "supports": "banking rules (24-month reading)"},
+    {"id": "S-06", "url": "https://sf.gov/information/annual-rent-increase-multiple-years", "supports": "banking math, 35-day mailed rule"},
+    {"id": "S-07", "url": "https://www.sf.gov/learn-about-san-francisco-rental-laws/", "supports": "coverage presumption"},
+    {"id": "S-09", "url": "https://sf.gov/reports/august-2023/california-tenant-protection-act-2019-ab-1482", "supports": "AB 1482 details, 8.8% SF cap"},
+    {"id": "S-15", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=827.", "supports": "30/90-day written notice"},
+    {"id": "S-16", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CCP&sectionNum=1013.", "supports": "+5 days mailed in-state"},
+    {"id": "S-17", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1947.12.", "supports": "AB 1482 statute"},
+    {"id": "S-18", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1954.52.", "supports": "Costa-Hawkins"},
+    {"id": "S-19", "url": "https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=1942.5.", "supports": "retaliation bar"},
+    {"id": "S-20", "url": "https://www.hud.gov/helping-americans/fair-housing-act-overview", "supports": "FHA protected classes"},
+    {"id": "S-21a", "url": "https://www.justice.gov/archives/opa/pr/justice-department-sues-realpage-algorithmic-pricing-scheme-harms-millions-american-renters", "supports": "DOJ v RealPage 2024-08-23"},
+    {"id": "S-21b", "url": "https://www.justice.gov/archives/opa/pr/justice-department-sues-six-large-landlords-algorithmic-pricing-scheme-harms-millions", "supports": "DOJ amended complaint 2025-01"},
+    {"id": "S-22", "url": "https://calcivilrights.ca.gov/housing/", "supports": "FEHA protected classes incl. source of income"}
+  ]
+}
