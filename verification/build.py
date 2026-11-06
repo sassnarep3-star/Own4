@@ -137,6 +137,7 @@ NAV = [
         ("verification-2026-11-05/index.html", "Independent audit · 2026-11-05", "legacy"),
         ("verification-2026-11-05/flagged.html", "Independent audit · flags", "legacy"),
         ("status/index.html", "Status review", "legacy"),
+        ("rental-sf/index.html", "SF rental increase review", "legacy"),
     ]),
 ]
 
