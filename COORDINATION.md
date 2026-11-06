@@ -1105,12 +1105,49 @@ committing) and is enforced by `.github/workflows/canonical-site.yml`.
 
 | # | Task | Status | Owner session | Files touched (exclusive scope) |
 |---|------|--------|---------------|--------------------------------|
-| R1 | Repo review: structure, tests/workflows, privacy & irregularities scan, link check | in progress | arena-f1dbaea0-own4 | `repo_review/REVIEW-2026-11-06.md` (new, additive) |
-| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | in progress | arena-f1dbaea0-own4 | `rental/data/*.json` |
-| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | in progress | arena-f1dbaea0-own4 | `rental/EXECUTIVE_SUMMARY.md`, `rental/data/analysis.md` |
-| R4 | GitHub Pages section `rental/` — landing + category subpages + Flagged for Review (table rows all source-linked) | in progress | arena-f1dbaea0-own4 | `rental/**` |
+| R1 | Repo review: structure, tests/workflows, privacy & irregularities scan, link check | done | arena-f1dbaea0-own4 | `repo_review/REVIEW-2026-11-06.md` (new, additive) |
+| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | done | arena-f1dbaea0-own4 | `rental/data/*.json` |
+| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | done | arena-f1dbaea0-own4 | `rental/EXECUTIVE_SUMMARY.md`, `rental/data/findings.json` |
+| R4 | GitHub Pages section `rental/` — landing + category subpages + Flagged for Review (table rows all source-linked) | done | arena-f1dbaea0-own4 | `rental/**` |
 | R5 | Final integration: re-verify combined output, link integrity, additive root-index link, additive README entry, PR to main, merge, Pages deploy confirmation | in progress | arena-f1dbaea0-own4 | `index.html` (additive only), `README.md` (append only), `COORDINATION.md` (append only) |
 
 ### Log
 
 - 2026-11-06 — Claimed R1–R5. No other session active in this checkout. Sources will be limited to official/primary (sf.gov / sfgov.org / sfrentboard, leginfo.legislature.ca.gov, ca.gov, hud.gov, epa/uscourts as applicable) plus clearly-flagged reputable reporting labeled non-official. Anything not confirmable is left blank and published on `rental/flagged.html`.
+
+### R1–R4 completion record (2026-11-06, session f1dbaea0)
+
+**Sources read this session (official/primary only; all fetched 2026-11-06).** SF.gov / SF Rent Board:
+news 2026-01-14 (1.6%) & 2024-11-19 (1.4%) announcements; "Allowable Annual Increases" official PDF 1982→2027
+(2026-27: 1.6%); "Learn about rent increases", "Banked rent increases", "Annual rent increase for multiple
+years", "Learn about San Francisco rental laws", "Evictions in San Francisco", "Overview of Just Cause
+Evictions" (17 grounds, Topic 201), "Costa-Hawkins partial exemption", "AB 1482" explainer (8.8% SF cap
+Aug 2026–Jul 2027), "Landlord Petitions and Passthroughs", "Housing Inventory FAQ". leginfo.legislature.ca.gov:
+CIV 827, CIV 1942.5, CIV 1947.12 (SB 567), CIV 1954.52, CCP 1013. hud.gov Fair Housing Act overview.
+justice.gov PR 24-1047 (RealPage, 2024-08-23) & PR 25-21 (six landlords, 2025-01). calcivilrights.ca.gov FEHA
+housing page. Full register: `rental/sources.html` (IDs S-01…S-23, R-01…R-02). Third-party blogs were used
+only to locate official pages and are never cited for legal propositions.
+
+**Verification performed.** `python3 rental/verify_site.py` → PASS (9 pages; every `<tbody>` row carries a
+source link; all internal links/anchors resolve; no placeholder leakage; disclaimer on every page).
+`python3 -m unittest discover -s tests` → 6/6 OK; `node --check assets/canonical.js` → OK. Local preview of all
+9 pages + root: HTTP 200. `findings.json` parses. PII/secret scan of tracked tree: no tenant data, no secrets
+(see `repo_review/REVIEW-2026-11-06.md`).
+
+**Key verified facts.** 2026-27 allowable = 1.6%; history min 0.1%/max 7.0%/median 1.9%/mean ≈2.4% (1992-93
+footnoted dual row; 1.6% used, flagged F10). Unit 1 ($3,995, Feb 1 anniversary, continuing tenancy 2026-04-01):
++1.6% = $63.92 → $4,058.92 (2027-02-01); +1.4% banked (12-month reading) → 3.0% = $119.85 → $4,114.85.
+Unit 2 ($3,150, Jun 1 anniversary, never increased): banked 12-month reading = 13.1% = $412.65 → $3,562.65;
+strict 24-month reading = 10.1% = $318.15 → $3,468.15 (>10% ⇒ 90-day / 95 mailed notice either way); 2027-28
+annual rate UNPUBLISHED — left blank (F2). AB 1482 (5%+CPI/10%, SF 8.8%) is overridden by the stricter local
+cap. No federal rent cap (claim from silence — flagged F13). FHA + FEHA apply; uniform method for both units
+recommended; 15-point tenant-lawyer scrutiny checklist published.
+
+**Irregularities published (non-blocking):** site → `/rental/flagged.html` flags F1–F17 (banking-rule conflict
+between official sf.gov pages — F1/F5 pivot Unit 2's bank; coverage facts unverified — F3; 2027-28 rate — F2;
+fee unverified — F8; 17-vs-16 just-cause count — F7; repo hygiene F14 incl. ~53 MB `data/raw/` dumps and 4
+tracked `.pyc`). Repo review: `repo_review/REVIEW-2026-11-06.md` (RQ-1…RQ-12; owner decision needed on LICENSE).
+
+**Scope discipline.** New namespace `rental/**` only; `repo_review/` new file; append-only edits to `README.md`
+and this board; one marked additive nav block in root `index.html` (peer-generated — re-add after a peer
+rebuild if overwritten). No peer namespace edited. No tenant personal information published anywhere.
