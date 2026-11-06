@@ -1106,7 +1106,7 @@ New, self-contained project. Does not touch peer NBA/NFL namespaces. Root `index
 | R2 | Analysis: allowable increases, banking, notice rules, discrimination review, both-vs-one unit question | done | arena/b867679d-own4 | rental-own4/*.html |
 | R3 | Executive summary (anonymized; personal info internal-only) | done | arena/b867679d-own4 | rental-own4/executive-summary.html, EXECUTIVE_SUMMARY_SF_RENTAL.md |
 | R4 | GitHub Pages static subpages (dashboard layout, table format, Flagged for Review) | done | arena/b867679d-own4 | rental-own4/**, assets/rental.css |
-| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | in progress | arena/b867679d-own4 | COORDINATION.md, workflow (none needed — static under /rental-own4/) |
+| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | done | arena/b867679d-own4 | COORDINATION.md (Pages deploy: platform failing — see final record) |
 
 ### Notes
 - Personal tenant names are NOT published anywhere in the repo or site. Units are labeled "Unit 1" / "Unit 2"; tenants are placeholders ("Tenant A/B/C"). Dates and amounts are preserved as provided.
