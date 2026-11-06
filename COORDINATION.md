@@ -1094,3 +1094,22 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+
+## New task claim · San Francisco rental-increase review · `arena/8eb1de75-own4` · 2026-11-06 UTC
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|---|---|---|---|
+| SF1 | Official-source research: SF rent-control rules, California notice/state-cap rules, federal fair-housing rules, applicable unit analysis | in progress | `arena/8eb1de75-own4` | `rental-sf/**`, this append-only coordination section |
+| SF2 | Anonymized San Francisco rental increase dashboard, category pages, executive summary, sources, flagged review, verification/build checks | in progress | `arena/8eb1de75-own4` | `rental-sf/**` |
+
+### Claim / scope notes
+
+- 2026-11-06: Read the existing coordination board before work. No San Francisco rental task or active rental-scope claim is listed. The board and repository are legacy NBA-line research, with the existing root dashboard and multiple retained workspaces. To avoid breaking or overwriting that published unrelated work, this task is isolated under `rental-sf/`; the existing root `index.html`, root navigation, NBA data, generators, workflows and other sessions' files are out of scope.
+- The Arena-pinned branch is `arena/8eb1de75-own4`; the requested `session-<id>/<task>` branch and separate integration branch cannot be created in this environment. The current pinned branch will be used, and this session will be the final integrator for its isolated rental site only.
+- Public pages will omit all tenant initials/names and use neutral unit labels. User-supplied tenancy dates and amounts will be explicitly marked owner-reported and not independently verifiable from official public records; sources will not be represented as confirming private tenancy facts. No addresses beyond the user-authorized general location / ZIP will be published.
+- Initial claim scope: `rental-sf/**` plus append-only edits here. Any site build and source verification is limited to this namespace; publication will be a standalone GitHub Pages subpath if the repository's existing Pages configuration permits it.
+
