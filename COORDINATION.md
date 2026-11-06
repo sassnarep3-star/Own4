@@ -1094,3 +1094,12 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+## Rental research session arena/a3668a57-own4 — 2026-11-06
+
+| Task | Status | Owner | Exclusive scope |
+|---|---|---|---|
+| Official-source rental law research, anonymized analysis, static rental dashboard, tests, final integration and publication | in progress | arena/a3668a57-own4 | `rental/**`, additive root `index.html` navigation, this board entry |
+
+Prior board claims concern different NBA work. Any pending historical claims are over 60 minutes old; existing work will be preserved. The environment requires the fixed Arena branch rather than separate session branches. Tenant identities will not be committed. Source and verification results to follow.
