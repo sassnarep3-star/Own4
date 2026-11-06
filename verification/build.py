@@ -264,7 +264,7 @@ def build_index():
     )
 
     body = """
-<div class="panel"><strong>New research:</strong> <a href="rental/index.html">San Francisco rental increase dashboard →</a> · Official-source guidance and anonymized unit analysis.</div>
+<div class="panel"><strong>New research:</strong> <a href="rental-review/index.html">San Francisco rental increase dashboard →</a> · Official-source guidance and anonymized unit analysis.</div>
 <h1>NBA line origination — verified research dashboard</h1>
 <p class="lede">Collect official NBA data, originate our own lines, develop signals that survive pre-registered
 gates, remove luck from the comparison, and rank only strategies that are selectively skill based.
