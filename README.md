@@ -124,3 +124,12 @@ page is the entry point for the whole repository.
   return is claimed anywhere.
 - **Not changed:** every peer workspace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) and every prior
   data file. The previous root dashboard is preserved at `pages/legacy-root-dashboard.html`.
+
+---
+## Additional research workspace · Rental Increase SF (arena/b867679d-own4, 2026-11-06)
+
+New, self-contained project: verified analysis of rent-increase law and practice for two rent-controlled units (Outer Sunset, SF 94122; built 1940). Static site under [`rental/`](rental/index.html) — landing dashboard, executive summary, law tables (local/state/federal), unit-by-unit math with banking audit, notice & process, corporate vs. individual owner practice, tenant-lawyer review checklist (one-unit vs. both-units discrimination analysis), market context, source register (S1–S27, official sources only) and a Flagged-for-review page. **Occupant names are withheld everywhere (placeholders Tenant A–F); dates and amounts are as documented.** Not legal advice.
+- Landing: `rental/index.html` → live at `/Own4/rental/index.html` after Pages deploy.
+- Anonymized repo-level summary: `EXECUTIVE_SUMMARY_SF_RENTAL.md`.
+- Verification: `python3 rental/verify_rental.py` (local link integrity, source-link coverage, privacy scan) — 0 errors, 0 warnings as of 2026-11-06.
+- The root NBA dashboard (`index.html`) is intentionally untouched: it is rebuilt byte-identically by the canonical NBA verification workflow.
