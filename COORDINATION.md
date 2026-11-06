@@ -1196,7 +1196,7 @@ New, self-contained project. Does not touch peer NBA/NFL namespaces. Root `index
 | R2 | Analysis: allowable increases, banking, notice rules, discrimination review, both-vs-one unit question | done | arena/b867679d-own4 | rental-own4/*.html |
 | R3 | Executive summary (anonymized; personal info internal-only) | done | arena/b867679d-own4 | rental-own4/executive-summary.html, EXECUTIVE_SUMMARY_SF_RENTAL.md |
 | R4 | GitHub Pages static subpages (dashboard layout, table format, Flagged for Review) | done | arena/b867679d-own4 | rental-own4/**, assets/rental.css |
-| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | in progress | arena/b867679d-own4 | COORDINATION.md, workflow (none needed — static under /rental-own4/) |
+| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | done | arena/b867679d-own4 | COORDINATION.md (Pages deploy: platform failing — see final record) |
 
 ### Notes
 - Personal tenant names are NOT published anywhere in the repo or site. Units are labeled "Unit 1" / "Unit 2"; tenants are placeholders ("Tenant A/B/C"). Dates and amounts are preserved as provided.
@@ -1290,6 +1290,13 @@ No private names or initials will be committed. User-provided case facts are not
 - Verification after rename/merge: `python3 rental-own4/verify_rental.py` → 0 errors, 0 warnings; root `index.html` byte-identical to canonical; privacy scan clean.
 - GitHub Pages: legacy build from main `/`. Last GOOD build: fbd3368 (2026-11-06T13:36:07Z, status built). EVERY build since 13:38:56Z has returned status errored / "Page build failed.": c800c1e (13:38:56), 786070d (13:40:02), 70cb861 (13:42:35, this PR's merge), e7afc9d (13:45:15). Repo is healthy by static checks: .nojekyll present, 647 files, ~63 MB, no unusual filenames, no NUL bytes. A POST to /pages/builds returned 403 (integration token may not request builds), so retries are triggered only by pushes to main. The build failures span four consecutive commits by three different sessions within seven minutes and are uncorrelated with any single commit's content (fbd3368, which differs from c800c1e only by the new rental/ static files, built fine at 13:36). Suspected Pages service-side incident; retrying via this append. If the next build errors again, the site content is valid and the failure is environmental — owner should check githubstatus.com / Pages settings or support.
 - Live URL after a successful build: https://sassnarep3-star.github.io/Own4/rental-own4/index.html
+
+### 2026-11-06 — Pages outcome, final (session arena/b867679d-own4)
+
+- PR #52 (this record) merged; PR #49 (site) merged 2026-11-06T13:42:34Z as 70cb861. Peer PR #50 (rental-f1dbaea0) merged 13:45:15Z; peer PR #53 (7affa728) merged 13:50:50Z — all after the first failure.
+- Consecutive "Page build failed." results: c800c1e (13:38:56), 786070d (13:40:02), 70cb861 (13:42:35 — this session's PR #49), e7afc9d (13:45:15), bbc4330 (13:46:54), 18885eb (~13:50:11, building), ebebe44 (13:50:50). fbd3368 (13:36:07) is the last good build and remains what the legacy site serves; /rental-own4/ content in that snapshot predates PR #50/#53 but includes this session's full site.
+- Diagnosis: content-independent platform failure (7 consecutive builds by 4 different sessions over ~12 minutes; repo healthy: .nojekyll, 647 files, ~63 MB, no unusual paths; POST /pages/builds = 403 for this integration; no ability to switch Pages source to GitHub Actions). Not fixable from this workspace. Owner actions: check githubstatus.com / Pages incident, or switch Pages source to GitHub Actions (Settings → Pages) at a convenient time, then push any commit to main to trigger a fresh deploy — the merged content will deploy as-is.
+- Live (last good) URL: https://sassnarep3-star.github.io/Own4/rental-own4/index.html — currently serves the previous deployment snapshot until the platform recovers.
 
 - Receipt integration: concurrent rental sessions advanced main again. Resolved the append-only coordination conflict by retaining both sides; no peer files changed.
 
