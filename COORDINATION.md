@@ -1094,3 +1094,12 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+## Session arena/dd9ee9d8-own4 — San Francisco rental research (2026-11-06 UTC)
+
+| Task | Status | Owner | Exclusive scope |
+|---|---|---|---|
+| R1: official-source research, anonymized rental dashboard, review flags, tests, integration and publication | in progress | arena/dd9ee9d8-own4 | `rent-sf/**`, append-only `COORDINATION.md` |
+
+This is a distinct project in an existing public repository, not a replacement for the existing sports dashboards. The platform fixes this session to its assigned branch, so requested per-task branches cannot be created. Historical sports claims and open PRs are left untouched. No personal names, initials or address will be published; user-provided amounts and dates are labeled as unverified and retained where relevant.
