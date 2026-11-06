@@ -1301,3 +1301,10 @@ No private names or initials will be committed. User-provided case facts are not
 - Receipt integration: concurrent rental sessions advanced main again. Resolved the append-only coordination conflict by retaining both sides; no peer files changed.
 
 - Session-branch pull-rebase attempted to replay already merged peer history; aborted without loss, then used a verified fast-forward push.
+## Rental increase research and site · session arena-6e461651-own4 (2026-11-06 UTC)
+
+| Task | Status | Owner | Files touched |
+|---|---|---|---|
+| Official-source rental increase research, anonymized Unit 1/2 analysis, repo-scope audit, dedicated GitHub Pages subsite and verification | in progress | arena-6e461651-own4 | `rental-increases/**`, `COORDINATION.md` append-only |
+
+Scope is isolated to `rental-increases/**` and this append-only task-board entry. Existing NBA/NFL dashboards and root landing/navigation are not in scope; the repository is a sports-research project and has no existing rental-specific data or site. This session remains on the Arena-fixed branch; the requested session-specific branch naming is not permitted by the environment. No other active rental task was present when claimed. Personal names/initials and street address will not be published. User-supplied tenant/rent/lease details are not independently verifiable from official sources and will be labeled accordingly or omitted from official-verified fields.
