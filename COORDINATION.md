@@ -1096,6 +1096,96 @@ on every page, no placeholder values. The five-command rebuild is byte-identical
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
 
 ---
+
+## Rental increase project — San Francisco, Outer Sunset 94122 · session arena/99ca004d-own4 (2026-11-06)
+
+Project: collect, organize, and analyze rental-increase requirements for two rent-controlled units in a building
+built in 1940 (San Francisco Rent Ordinance area, ZIP 94122). Personal tenant information is anonymized (placeholder
+names only); dates and amounts are kept exact. This is a separate project namespace from the NBA/NFL research
+sessions above; those namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verification/`,
+`verified/`, `engine/`) are linked, never edited by this session.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|---------------------------------|
+| R1 | Coordination board bootstrap + task claims | done | arena/99ca004d-own4 | COORDINATION.md |
+| R2 | Official-source research: SF Rent Ordinance / Rent Board allowable increases, CA AB 1482, CA Civil Code 827, federal Fair Housing Act | done | arena/99ca004d-own4 | rental/sources.md |
+| R3 | Executive summary (anonymized; internal personal info only; placeholder names) | done | arena/99ca004d-own4 | rental/EXECUTIVE_SUMMARY.md |
+| R4 | Site creation: landing page + category subpages + data tables + Flagged for Review page | done | arena/99ca004d-own4 | rental-99ca004d-own4/index.html, rental-99ca004d-own4/pages/*.html, rental-99ca004d-own4/assets/* |
+| R5 | Line-by-line verification: every table row carries an official source link; unverifiable values blank + flagged | done | arena/99ca004d-own4 | rental/* |
+| R6 | Pull request to main + merge + GitHub Pages deploy confirmation | in progress | arena/99ca004d-own4 | — |
+
+## Log
+
+- 2026-11-06 — Session arena/99ca004d-own4 claimed the rental-increase project (tasks R1–R6, sole active session). Prior session records above are preserved verbatim; no peer files edited and no peer namespaces touched.
+- Official sources read this session (all fetched directly, no scraping):
+  * SF Rent Board / SF.gov: allowable rent increase 1.6% effective 3/1/26–2/28/27 (60% of Bay Area CPI-U increase); 1.4% effective 3/1/25–2/28/26; units built on/before 6/13/1979 have rent control + eviction protection; increase once every 12 months, first increase 12 months after lease began; 30-day written notice (90-day if >10% combined in a year); +5 days if mailed; notice must state dollar amount, percentage, effective date; rent increase license required via Housing Inventory; no limit on initial rent for a vacant unit; banked increases allowed. https://www.sf.gov/learn-about-rent-increases-san-francisco/ and https://www.sf.gov/news--annual-rent-increase-3126-22827-announced/
+  * SF.gov "Learn about San Francisco rental laws": coverage rule (built on/before June 13, 1979); AB 1482 note; Rent Board counselor 415-252-4600. https://www.sf.gov/learn-about-san-francisco-rental-laws/
+  * SF.gov "Evictions in San Francisco": 17 just cause reasons; Eviction Defense Collaborative 415-659-9184 (free legal help); Rent Board Referral Listing. https://sf.gov/evictions-san-francisco
+  * SF.gov "The California Tenant Protection Act of 2019 (AB 1482)": statewide cap 5% + CPI, max 10%; SF max 8.8% effective 8/1/26–7/31/27 (5% + 3.8% CPI); units under local rent control below 5%+CPI are exempt from the state cap; just cause after 12 months occupancy; damages up to 3x; effective 1/1/2020, sunsets 1/1/2030. https://www.sf.gov/reports/august-2023/california-tenant-protection-act-2019-ab-1482 and https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201920200AB1482
+  * CA Civil Code 827 (leginfo.legislature.ca.gov): 30-day notice if increase ≤10% (combined in prior 12 months); 90-day notice if >10%; mail service per CCP 1013.
+  * HUD.gov Fair Housing Act overview: prohibits discrimination based on race, color, national origin, religion, sex, familial status, disability; complaint filing at HUD. https://www.hud.gov/helping-americans/fair-housing-act-overview
+- Privacy rule: no personal tenant names or identifying details are stored in the repo. Placeholder names (Tenant A, Tenant B, …) are used; dates and rent amounts are kept exact.
+- 2026-11-06 — Tasks R1–R5 complete. Site built under rental/ (10 HTML pages + CSS). Every table row carries an official source link (sf.gov, leginfo.legislature.ca.gov, hud.gov, sfplanninggis.org); link integrity check passed (0 broken internal links, 0 non-official external domains). Verified figures: SF allowable increase 1.6% eff. 3/1/26–2/28/27; prior 1.4% eff. 3/1/25–2/28/26; AB 1482 cap 5%+CPI max 10% (SF 8.8% eff. 8/1/26–7/31/27); Civil Code §827 30-day/90-day notice; HUD Fair Housing Act protected classes. Computations: Unit 1 $3,995 × 1.6% = $63.92 → $4,058.92; Unit 2 $3,150 × 1.6% = $50.40 → $3,200.40 (no rounding up). Flagged (non-blocking, published on rental/pages/flagged.html): F1 Unit 1 partial tenancy change; F2 Unit 2 banked increases since 2019; F3 post-2/28/27 percentage; F4 no federal rent-control source; F5 CA retaliation/protected-class list; F6 Rent Ordinance exemptions.
+- 2026-11-06 — COLLISION: origin/main (commit 7a8f253 "Add source-linked San Francisco rental review dashboard") already contains a peer rental implementation under `rental/`, `rent-sf/`, and `rental-own4/` namespaces, merged after this branch's base. My `rental/` tree collided (add/add on `rental/index.html`).
+- 2026-11-06 — RESOLUTION (per protocol, no peer work discarded): moved my tree to `rental-99ca004d-own4/` (session-scoped, non-overlapping). Peer namespaces `rental/`, `rent-sf/`, `rental-own4/` are preserved untouched. All relative links inside my tree remain valid after the move. Re-merged origin/main cleanly after the move.
+- 2026-11-06 — Task R6 in progress: PR #51 open; body to be repaired (shell mangled backticks); merge and GitHub Pages deployment pending.
+## Session `arena/f1dbaea0-own4` — SF rental-increase research + repo review + Pages site (2026-11-06)
+
+**Context found at claim time.** Working tree clean on branch `arena/f1dbaea0-own4`. All prior board items are `done`/`needs review`; last peer commits are 2026-11-02/2026-11-05 (>60 min old), so nothing live is displaced. The repo root site is the canonical NBA dashboard owned by earlier integration sessions — this session does NOT edit peer namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verified/`, `verification/`, `engine/`). New work lives under `rental-f1dbaea0/`, plus append-only records (`README.md`, `COORDINATION.md`, `EXECUTIVE_SUMMARY.md` untouched) and one additive link in root `index.html`.
+
+**Personal data handling.** The brief contains private tenant details. On the public site and in all committed files, tenant names are anonymized to placeholders (initials/unit labels only as in the brief, rendered as "Unit 1" / "Unit 2" / "Household A"). No further personal information (addresses beyond the already-public ZIP 94122, contact details, IDs) is published. Dates and dollar amounts are kept as provided. All analysis is informational, not legal advice.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|--------------------------------|
+| R1 | Repo review: structure, tests/workflows, privacy & irregularities scan, link check | done | arena-f1dbaea0-own4 | `repo_review/REVIEW-2026-11-06.md` (new, additive) |
+| R2 | Official-source research: SF Rent Ordinance, AB 1482 / Civil Code 1947.12 & 827, Costa-Hawkins, federal FHA/HUD, SF Rent Board 2025–2026 & 2026–2027 allowable increases, banking, just-cause, tenant-lawyer resources | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/data/*.json` |
+| R3 | Analysis + executive summary (reasonable/normal increases, corporate vs individual practice, notice process, one-unit vs both-unit scrutiny) | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/EXECUTIVE_SUMMARY.md`, `rental-f1dbaea0/data/findings.json` |
+| R4 | GitHub Pages section `rental-f1dbaea0/` — landing + category subpages + Flagged for Review (table rows all source-linked) | done | arena-f1dbaea0-own4 | `rental-f1dbaea0/**` |
+| R5 | Final integration: re-verify combined output, link integrity, additive root-index link, additive README entry, PR to main, merge, Pages deploy confirmation | in progress | arena-f1dbaea0-own4 | `index.html` (additive only), `README.md` (append only), `COORDINATION.md` (append only) |
+
+### Log
+
+- 2026-11-06 — Claimed R1–R5. No other session active in this checkout. Sources will be limited to official/primary (sf.gov / sfgov.org / sfrentboard, leginfo.legislature.ca.gov, ca.gov, hud.gov, epa/uscourts as applicable) plus clearly-flagged reputable reporting labeled non-official. Anything not confirmable is left blank and published on `rental-f1dbaea0/flagged.html`.
+
+### R1–R4 completion record (2026-11-06, session f1dbaea0)
+
+**Sources read this session (official/primary only; all fetched 2026-11-06).** SF.gov / SF Rent Board:
+news 2026-01-14 (1.6%) & 2024-11-19 (1.4%) announcements; "Allowable Annual Increases" official PDF 1982→2027
+(2026-27: 1.6%); "Learn about rent increases", "Banked rent increases", "Annual rent increase for multiple
+years", "Learn about San Francisco rental laws", "Evictions in San Francisco", "Overview of Just Cause
+Evictions" (17 grounds, Topic 201), "Costa-Hawkins partial exemption", "AB 1482" explainer (8.8% SF cap
+Aug 2026–Jul 2027), "Landlord Petitions and Passthroughs", "Housing Inventory FAQ". leginfo.legislature.ca.gov:
+CIV 827, CIV 1942.5, CIV 1947.12 (SB 567), CIV 1954.52, CCP 1013. hud.gov Fair Housing Act overview.
+justice.gov PR 24-1047 (RealPage, 2024-08-23) & PR 25-21 (six landlords, 2025-01). calcivilrights.ca.gov FEHA
+housing page. Full register: `rental-f1dbaea0/sources.html` (IDs S-01…S-23, R-01…R-02). Third-party blogs were used
+only to locate official pages and are never cited for legal propositions.
+
+**Verification performed.** `python3 rental-f1dbaea0/verify_site.py` → PASS (9 pages; every `<tbody>` row carries a
+source link; all internal links/anchors resolve; no placeholder leakage; disclaimer on every page).
+`python3 -m unittest discover -s tests` → 6/6 OK; `node --check assets/canonical.js` → OK. Local preview of all
+9 pages + root: HTTP 200. `findings.json` parses. PII/secret scan of tracked tree: no tenant data, no secrets
+(see `repo_review/REVIEW-2026-11-06.md`).
+
+**Key verified facts.** 2026-27 allowable = 1.6%; history min 0.1%/max 7.0%/median 1.9%/mean ≈2.4% (1992-93
+footnoted dual row; 1.6% used, flagged F10). Unit 1 ($3,995, Feb 1 anniversary, continuing tenancy 2026-04-01):
++1.6% = $63.92 → $4,058.92 (2027-02-01); +1.4% banked (12-month reading) → 3.0% = $119.85 → $4,114.85.
+Unit 2 ($3,150, Jun 1 anniversary, never increased): banked 12-month reading = 13.1% = $412.65 → $3,562.65;
+strict 24-month reading = 10.1% = $318.15 → $3,468.15 (>10% ⇒ 90-day / 95 mailed notice either way); 2027-28
+annual rate UNPUBLISHED — left blank (F2). AB 1482 (5%+CPI/10%, SF 8.8%) is overridden by the stricter local
+cap. No federal rent cap (claim from silence — flagged F13). FHA + FEHA apply; uniform method for both units
+recommended; 15-point tenant-lawyer scrutiny checklist published.
+
+**Irregularities published (non-blocking):** site → `/rental-f1dbaea0/flagged.html` flags F1–F17 (banking-rule conflict
+between official sf.gov pages — F1/F5 pivot Unit 2's bank; coverage facts unverified — F3; 2027-28 rate — F2;
+fee unverified — F8; 17-vs-16 just-cause count — F7; repo hygiene F14 incl. ~53 MB `data/raw/` dumps and 4
+tracked `.pyc`). Repo review: `repo_review/REVIEW-2026-11-06.md` (RQ-1…RQ-12; owner decision needed on LICENSE).
+
+**Scope discipline.** New namespace `rental-f1dbaea0/**` only; `repo_review/` new file; append-only edits to `README.md`
+and this board; one marked additive nav block in root `index.html` (peer-generated — re-add after a peer
+rebuild if overwritten). No peer namespace edited. No tenant personal information published anywhere.
+
+---
+
 ## Session arena/b867679d-own4 — Rental Increase SF (new project) (2026-11-06)
 
 New, self-contained project. Does not touch peer NBA/NFL namespaces. Root `index.html` receives at most a small additive link; no peer file edits planned.
@@ -1186,6 +1276,12 @@ No private names or initials will be committed. User-provided case facts are not
 
 - Pull-rebase of the session branch attempted to replay the already merged peer commit and conflicted on the board; aborted without loss. The session remote remains an ancestor, so the subsequent normal push preserves all peer and session history.
 
+### PR and deployment status · 2026-11-06
+- [PR #48](https://github.com/sassnarep3-star/Own4/pull/48) merged at 13:38:55 UTC, merge commit `c800c1e1fbbdc6aec17fe59204e38aa478f0cdf5`. PR checks passed before merge, including bounded audit, research workspace validation and canonical-site validation.
+- The Pages builds for the merge and subsequent main updates were cancelled as newer concurrent main deployments superseded them: [42227193052](https://github.com/sassnarep3-star/Own4/actions/runs/42227193052), [42227338482](https://github.com/sassnarep3-star/Own4/actions/runs/42227338482), and [42227684828](https://github.com/sassnarep3-star/Own4/actions/runs/42227684828). The newer deployment is pending. Live `/rental/` returned 404 at the last check; deployment success is not claimed.
+- **Deployment confirmed:** [Pages run 42228267838](https://github.com/sassnarep3-star/Own4/actions/runs/42228267838) completed successfully for commit `bbc433048873af8642feda01e49ecd88bdfb9a71`, which includes PR #48's merge. Both https://sassnarep3-star.github.io/Own4/rental/index.html and https://sassnarep3-star.github.io/Own4/rental/review.html were fetched successfully and checked after deployment. The prior Pages API status had reported errors for cancelled/superseded runs; the successful Actions deployment and live content supersede that earlier status. Rental work status: **done**, case-specific gaps **needs review**.
+
+---
 - Second concurrent integration: PR #48 advanced main and caused an append-only board conflict. Both records and all peer namespaces retained. The initial PR #46 merge attempt failed safely; no merge was performed. A pull-rebase of the session branch had previously replayed the peer merge and conflicted, so it was aborted and a normal fast-forward push used to preserve history.
 
 ### 2026-11-06 — PR #49 merged + Pages outcome (session arena/b867679d-own4)
@@ -1201,3 +1297,7 @@ No private names or initials will be committed. User-provided case facts are not
 - Consecutive "Page build failed." results: c800c1e (13:38:56), 786070d (13:40:02), 70cb861 (13:42:35 — this session's PR #49), e7afc9d (13:45:15), bbc4330 (13:46:54), 18885eb (~13:50:11, building), ebebe44 (13:50:50). fbd3368 (13:36:07) is the last good build and remains what the legacy site serves; /rental-own4/ content in that snapshot predates PR #50/#53 but includes this session's full site.
 - Diagnosis: content-independent platform failure (7 consecutive builds by 4 different sessions over ~12 minutes; repo healthy: .nojekyll, 647 files, ~63 MB, no unusual paths; POST /pages/builds = 403 for this integration; no ability to switch Pages source to GitHub Actions). Not fixable from this workspace. Owner actions: check githubstatus.com / Pages incident, or switch Pages source to GitHub Actions (Settings → Pages) at a convenient time, then push any commit to main to trigger a fresh deploy — the merged content will deploy as-is.
 - Live (last good) URL: https://sassnarep3-star.github.io/Own4/rental-own4/index.html — currently serves the previous deployment snapshot until the platform recovers.
+
+- Receipt integration: concurrent rental sessions advanced main again. Resolved the append-only coordination conflict by retaining both sides; no peer files changed.
+
+- Session-branch pull-rebase attempted to replay already merged peer history; aborted without loss, then used a verified fast-forward push.
