@@ -1094,3 +1094,34 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+
+## Rental increase project — San Francisco, Outer Sunset 94122 · session arena/99ca004d-own4 (2026-11-06)
+
+Project: collect, organize, and analyze rental-increase requirements for two rent-controlled units in a building
+built in 1940 (San Francisco Rent Ordinance area, ZIP 94122). Personal tenant information is anonymized (placeholder
+names only); dates and amounts are kept exact. This is a separate project namespace from the NBA/NFL research
+sessions above; those namespaces (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`, `verification/`,
+`verified/`, `engine/`) are linked, never edited by this session.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|---------------------------------|
+| R1 | Coordination board bootstrap + task claims | in progress | arena/99ca004d-own4 | COORDINATION.md |
+| R2 | Official-source research: SF Rent Ordinance / Rent Board allowable increases, CA AB 1482, CA Civil Code 827, federal Fair Housing Act | done | arena/99ca004d-own4 | rental/sources.md |
+| R3 | Executive summary (anonymized; internal personal info only; placeholder names) | unclaimed | arena/99ca004d-own4 | rental/EXECUTIVE_SUMMARY.md |
+| R4 | Site creation: landing page + category subpages + data tables + Flagged for Review page | unclaimed | arena/99ca004d-own4 | rental/index.html, rental/pages/*.html, rental/assets/* |
+| R5 | Line-by-line verification: every table row carries an official source link; unverifiable values blank + flagged | unclaimed | arena/99ca004d-own4 | rental/* |
+| R6 | Pull request to main + merge + GitHub Pages deploy confirmation | unclaimed | arena/99ca004d-own4 | — |
+
+## Log
+
+- 2026-11-06 — Session arena/99ca004d-own4 claimed the rental-increase project (tasks R1–R6, sole active session). Prior session records above are preserved verbatim; no peer files edited and no peer namespaces touched.
+- Official sources read this session (all fetched directly, no scraping):
+  * SF Rent Board / SF.gov: allowable rent increase 1.6% effective 3/1/26–2/28/27 (60% of Bay Area CPI-U increase); 1.4% effective 3/1/25–2/28/26; units built on/before 6/13/1979 have rent control + eviction protection; increase once every 12 months, first increase 12 months after lease began; 30-day written notice (90-day if >10% combined in a year); +5 days if mailed; notice must state dollar amount, percentage, effective date; rent increase license required via Housing Inventory; no limit on initial rent for a vacant unit; banked increases allowed. https://www.sf.gov/learn-about-rent-increases-san-francisco/ and https://www.sf.gov/news--annual-rent-increase-3126-22827-announced/
+  * SF.gov "Learn about San Francisco rental laws": coverage rule (built on/before June 13, 1979); AB 1482 note; Rent Board counselor 415-252-4600. https://www.sf.gov/learn-about-san-francisco-rental-laws/
+  * SF.gov "Evictions in San Francisco": 17 just cause reasons; Eviction Defense Collaborative 415-659-9184 (free legal help); Rent Board Referral Listing. https://sf.gov/evictions-san-francisco
+  * SF.gov "The California Tenant Protection Act of 2019 (AB 1482)": statewide cap 5% + CPI, max 10%; SF max 8.8% effective 8/1/26–7/31/27 (5% + 3.8% CPI); units under local rent control below 5%+CPI are exempt from the state cap; just cause after 12 months occupancy; damages up to 3x; effective 1/1/2020, sunsets 1/1/2030. https://www.sf.gov/reports/august-2023/california-tenant-protection-act-2019-ab-1482 and https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201920200AB1482
+  * CA Civil Code 827 (leginfo.legislature.ca.gov): 30-day notice if increase ≤10% (combined in prior 12 months); 90-day notice if >10%; mail service per CCP 1013.
+  * HUD.gov Fair Housing Act overview: prohibits discrimination based on race, color, national origin, religion, sex, familial status, disability; complaint filing at HUD. https://www.hud.gov/helping-americans/fair-housing-act-overview
+- Privacy rule: no personal tenant names or identifying details are stored in the repo. Placeholder names (Tenant A, Tenant B, …) are used; dates and rent amounts are kept exact.
