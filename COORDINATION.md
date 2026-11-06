@@ -1094,3 +1094,18 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+## Rental increase SF task · session arena/38f03609-own4 · 2026-11-06 UTC
+
+**Claim:** task completed in isolated `rental-sf/` scope plus one final-integration navigation entry in `verification/build.py`. No existing task was in progress with an active owner visible in this checkout; existing NBA research namespaces were left intact.
+
+**Deliverables:** `rental-sf/index.html` is the privacy-preserving dashboard (summary, two unit calculation rows, laws/process, fair-practice guidance, and Flagged for Review); `rental-sf/README.md` describes scope; `verification/build.py` adds a navigation link from the root site. Tenant names/initials and all personal identifiers are omitted. User-provided dates and rent amounts remain visible as requested.
+
+**Official sources read/checked:** SF.gov Rent Board rent increase instructions (current 1.6% rate for Mar 1 2026–Feb 28 2027, base-rent calculation, anniversary, license, notice and mailing rules): https://www.sf.gov/learn-about-rent-increases-san-francisco ; SF AB 1482 guidance: https://www.sf.gov/reports--california-tenant-protection-act-2019-ab-1482 ; SF landlord petitions/passthroughs: https://www.sf.gov/landlord-petitions-and-passthroughs ; SF banked rent increases: https://www.sf.gov/information/banked-rent-increases ; SF Housing Inventory: https://sf.gov/information/rent-board-housing-inventory-frequently-asked-questions-faq ; HUD Fair Housing Act overview: https://www.hud.gov/program_offices/fair_housing_equal_opp/fair_housing_act_overview ; California Civil Rights Department: https://calcivilrights.ca.gov/housing/ ; SF tenant harassment protections: https://www.sf.gov/information/tenant-protections-against-harassment .
+
+**Checks:** read the official SF rent-increase instructions page; verified rate and operational terms against the page; computed 3995×.016=63.92 and 3150×.016=50.40; noted that changed Unit 1 occupants, anniversary/base rent, Unit 2 banked history, unit eligibility, rent license, and current rate at effective date require verification. Unknown accumulated increase amounts and market comparisons are blank. `python3 verification/build.py` and `python3 verification/verify_site.py` pass (14 generated pages, 346 source-linked NBA rows; renter dashboard remains isolated and externally linked only through nav).
+
+**Review flags / limitations:** facts and claimed 1940 year/ZIP/coverage are user-supplied and not certified; Unit 1 tenancy/anniversary issue unresolved; Unit 2 past increase history unresolved; no independent market-comparable source; no legal counsel review occurred. No assertion that a specified increase has attorney approval. General description of large vs individual owner workflows is labeled as unsourced operational context, not a verified universal practice. No assertion that free attorney service is guaranteed; official clinic link is given with eligibility/availability caveat.
+
+**Status: done with non-blocking review flags.** No PR/merge/deployment claim made in this work record.
