@@ -1094,3 +1094,20 @@ No peer namespace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) was e
 official or repository source link, every local link and anchor resolving, navigation and helpline footer present
 on every page, no placeholder values. The five-command rebuild is byte-identical on a second run (checked before
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
+
+---
+## Session arena/b867679d-own4 — Rental Increase SF (new project) (2026-11-06)
+
+New, self-contained project. Does not touch peer NBA/NFL namespaces. Root `index.html` receives at most a small additive link; no peer file edits planned.
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|--------------------------------|
+| R1 | Official-source research (SF Rent Board, CA Civil Code, federal) for two rent-controlled units, 94122 | done | arena/b867679d-own4 | rental/data/*.json |
+| R2 | Analysis: allowable increases, banking, notice rules, discrimination review, both-vs-one unit question | done | arena/b867679d-own4 | rental/*.html |
+| R3 | Executive summary (anonymized; personal info internal-only) | done | arena/b867679d-own4 | rental/executive-summary.html, EXECUTIVE_SUMMARY_SF_RENTAL.md |
+| R4 | GitHub Pages static subpages (dashboard layout, table format, Flagged for Review) | done | arena/b867679d-own4 | rental/**, assets/rental.css |
+| R5 | Final integration: line-by-line source verification, PR to main, merge, Pages confirm | in progress | arena/b867679d-own4 | COORDINATION.md, workflow (none needed — static under /rental/) |
+
+### Notes
+- Personal tenant names are NOT published anywhere in the repo or site. Units are labeled "Unit 1" / "Unit 2"; tenants are placeholders ("Tenant A/B/C"). Dates and amounts are preserved as provided.
+- Sources: sf.gov (Rent Board announcements, Rent Ordinance pages, 571 Allowable Annual Increases table PDF), leginfo.legislature.ca.gov (CIV 827, 827 notice; CIV 1954.53 Costa-Hawkins; CIV 1947.12 AB 1482), bls.gov CPI Sep 2026, calcivilrights.ca.gov. Anything not confirmable from an official source is left blank or labeled unverified on the Flagged for Review page.
