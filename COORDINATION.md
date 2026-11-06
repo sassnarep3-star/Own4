@@ -1096,6 +1096,24 @@ on every page, no placeholder values. The five-command rebuild is byte-identical
 committing) and is enforced by `.github/workflows/canonical-site.yml`.
 
 ---
+## Rental research and publication · session arena/7affa728-own4 (2026-11-06 UTC)
+
+The Arena branch is fixed; the requested per-task branch names cannot be created. This session is the sole integration session for the new rental project. Earlier in-progress integration entries are historical (last repository commit Nov 5, over 60 minutes old); no existing work is displaced. The repository contains unrelated, retained sports dashboards, so the rental landing and its subpages will live at `/rental/` rather than replacing their root landing.
+
+| Task | Status | Owner | Exclusive file scope |
+|---|---|---|---|
+| Official-source research, anonymized rental dashboard, review flags, integration and release | in progress | arena/7affa728-own4 | `rental/**`, `COORDINATION.md` append-only |
+
+No private names or initials will be committed. User-provided case facts are not independently verified; their calculations are conditional, not official findings. All previous namespaces remain unchanged.
+
+### Rental integration verification · 2026-11-06
+- Research and site: **done**, scoped to `rental/**`. Official claims checked against [SF current rates](https://www.sf.gov/reports--current-rates-including-rent-increase-relocation-sec-deposit), [annual rules and notice](https://www.sf.gov/learn-about-rent-increases-san-francisco), [banking](https://www.sf.gov/information--banked-rent-increases), [Housing Inventory](https://www.sf.gov/rent-board-housing-inventory), [coverage](https://www.sf.gov/learn-about-san-francisco-rental-laws), [roommates](https://www.sf.gov/information--rent-increases-under-section-614-and-costa-hawkins), [AB 1482](https://www.sf.gov/reports--california-tenant-protection-act-2019-ab-1482), [CRD fair housing](https://calcivilrights.ca.gov/housing/), [HUD](https://www.hud.gov/news/hud-no-26-069), [O&M petition](https://www.sf.gov/file/530-om-petition-fillable-324pdf), [capital improvements](https://www.sf.gov/information--capital-improvement-petitions), [notice regulations](https://www.sf.gov/reports--december-2022--rent-board-rules-and-regulations-part-iv-rent-increases-not-requiring), [forms](https://www.sf.gov/rent-board-forms-forms-center), [referrals](https://www.sf.gov/reports/november-2024/rent-board-referral-listing), and [city assistance report](https://media.api.sf.gov/documents/120882_-_Housing_Trust_Fund_Five-Year_Report_-_2018-2023.pdf).
+- Reviewed each rental table row against the linked official text, separating source-supported legal rules from explicitly conditional arithmetic and unverified user assertions. No claim of legal review or independent property verification. Dates, amounts, ZIP and occupancy can still be identifying in combination; this risk is published on the review page. No names, initials or exact address are in new site files.
+- Irregularities **needs review** at `/rental/review.html`: property status/coverage, lawful base rents, leases, last increases, license status, banked amounts, service and effective dates, legal review, corporate vs individual benchmarks, inconsistent dates in a city worked example, and residual privacy risk. These do not block publishing; they do block representing an increase as ready to serve.
+- Verification: `python3 rental/verify.py` passed: 5 pages, 40 source-linked rows, local navigation, arithmetic, deterministic rebuild. Existing bounded audit tests and 6 root tests passed; `scripts/verify_data.py` and `scripts/check_site.py` passed. An unused obsolete SF annual-increase URL returned a not-found page during source checking; it was removed. Existing root dashboard and peer namespaces preserved.
+- PR / deployment: in progress; results to be recorded after confirmation.
+
+---
 ## Rental increase SF task · session arena/38f03609-own4 · 2026-11-06 UTC
 
 **Claim:** task completed in isolated `rental-sf/` scope plus one final-integration navigation entry in `verification/build.py`. No existing task was in progress with an active owner visible in this checkout; existing NBA research namespaces were left intact.
@@ -1109,3 +1127,8 @@ committing) and is enforced by `.github/workflows/canonical-site.yml`.
 **Review flags / limitations:** facts and claimed 1940 year/ZIP/coverage are user-supplied and not certified; Unit 1 tenancy/anniversary issue unresolved; Unit 2 past increase history unresolved; no independent market-comparable source; no legal counsel review occurred. No assertion that a specified increase has attorney approval. General description of large vs individual owner workflows is labeled as unsourced operational context, not a verified universal practice. No assertion that free attorney service is guaranteed; official clinic link is given with eligibility/availability caveat.
 
 **Status: done with non-blocking review flags.** No PR/merge/deployment claim made in this work record.
+
+### Concurrent integration reconciliation · 2026-11-06
+- During PR #48, main advanced with PR #45 from another session, which had an independent rental site (`rental-sf/**`) and root navigation. The two sessions could not see each other’s initial claims at checkout. Rebase encountered a single append-only board conflict and was aborted; merged main instead, retaining both complete board entries and all peer files. The earlier sole-session assumption is superseded by this record. The peer site stays intact; this session contributes its separate multi-page `/rental/` research, without overwriting peer navigation.
+
+- Pull-rebase of the session branch attempted to replay the already merged peer commit and conflicted on the board; aborted without loss. The session remote remains an ancestor, so the subsequent normal push preserves all peer and session history.
