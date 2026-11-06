@@ -146,5 +146,5 @@ checklist. Tenant details are **anonymized**; dates and amounts are preserved. N
   notice, pending counselor confirmation of the banking-rule conflict (flag F1). AB 1482 backstop
   8.8% (SF) does not override the stricter local cap. Federal law: no cap — FHA/antitrust only.
   **Recommendation: raise both units, same documented method.**
-- **Flagged for Review:** 15 open items (banking-rule conflict, 2027-28 rate unpublished,
-  coverage facts, fee unverified, …) — non-blocking; must be resolved before serving any notice.
+- **Flagged for Review:** 17 items — 14 open (banking-rule conflict, 2027-28 rate unpublished,
+  coverage facts, fee unverified, …), non-blocking; must be resolved before serving any notice.
