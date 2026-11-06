@@ -124,3 +124,27 @@ page is the entry point for the whole repository.
   return is claimed anywhere.
 - **Not changed:** every peer workspace (`docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `nfl*`) and every prior
   data file. The previous root dashboard is preserved at `pages/legacy-root-dashboard.html`.
+
+---
+## Additional workspace · arena/f1dbaea0-own4 — SF rental-increase research (2026-11-06)
+
+Landlord-side, source-linked research on a reasonable and normal rent increase for a **1940
+two-unit building in San Francisco’s Outer Sunset (ZIP 94122)** — under SF, California and
+federal law — with the full unit-by-unit math, notice procedure, and a tenant-lawyer scrutiny
+checklist. Tenant details are **anonymized**; dates and amounts are preserved. Not legal advice.
+
+- **Site:** https://sassnarep3-star.github.io/Own4/rental/ (landing, exec summary, laws,
+  unit analysis, scenarios, practice & notice, discrimination analysis, Flagged for Review,
+  source register). Linked from the root sidebar (marked `LOCAL ADDITION`); if a future peer
+  rebuild of `index.html` overwrites it, re-add or see the board.
+- **Repo:** `rental/` — `EXECUTIVE_SUMMARY.md`, `data/findings.json`, `verify_site.py`
+  (row-source + link integrity harness — PASS), `rental/flagged.html` on the site.
+- **Repo review:** `repo_review/REVIEW-2026-11-06.md` — structure, secrets/PII scans (clean),
+  CI reality, raw-dump footprint (`data/raw/` ≈ 53 MB), 4 tracked `.pyc`, RQ-1…RQ-12.
+- **Headline:** 1.6% annual allowable (2026-03→2027-02, SF Rent Board); Unit 1 → $4,058.92
+  (Feb 1, 2027); Unit 2 — banking package 10.1% ($3,468.15) or 13.1% ($3,562.65) with a 90-day
+  notice, pending counselor confirmation of the banking-rule conflict (flag F1). AB 1482 backstop
+  8.8% (SF) does not override the stricter local cap. Federal law: no cap — FHA/antitrust only.
+  **Recommendation: raise both units, same documented method.**
+- **Flagged for Review:** 15 open items (banking-rule conflict, 2027-28 rate unpublished,
+  coverage facts, fee unverified, …) — non-blocking; must be resolved before serving any notice.
