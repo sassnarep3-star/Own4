@@ -9,7 +9,7 @@ Exits non-zero on failure.
 import html.parser, os, re, sys, urllib.parse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RENTAL = os.path.join(ROOT, "rental")
+RENTAL = os.path.join(ROOT, "rental-own4")
 
 # Personal identifiers from the brief that must never appear on the public site.
 # We store only encodings to avoid re-introducing the PII into rendered artifacts.
