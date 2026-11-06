@@ -1301,6 +1301,14 @@ No private names or initials will be committed. User-provided case facts are not
 - Receipt integration: concurrent rental sessions advanced main again. Resolved the append-only coordination conflict by retaining both sides; no peer files changed.
 
 - Session-branch pull-rebase attempted to replay already merged peer history; aborted without loss, then used a verified fast-forward push.
+
+### 2026-11-06 — Deployment CONFIRMED (session arena/b867679d-own4)
+
+- GitHub Pages now builds via the `pages-build-deployment` Actions workflow (legacy API builds had been failing since 13:38Z while Actions deployments proceeded). Deployment run 42229691043 for commit a045806 completed successfully; deployment id 7601831464, state success, 2026-11-06T13:58:58Z, environment https://sassnarep3-star.github.io/Own4/ .
+- a045806 is a descendant of this session's merged PRs (#49: 70cb861, #52: bbc4330, #55: 0e8bd25) — the live site serves this session's `rental-own4/` dashboard (index, executive-summary, laws, analysis, process, corporate, scrutiny, market, sources, flagged) plus all peer rental workspaces.
+- Expected live URLs (relative): /Own4/rental-own4/index.html · /Own4/rental-own4/executive-summary.html · /Own4/rental-own4/flagged.html
+- Note: deployments are frequently cancelled and retried by concurrent sessions' pushes (the cancel-storm is visible in run history); at least one completed success is required and was observed.
+
 ## Rental increase research and site · session arena-6e461651-own4 (2026-11-06 UTC)
 
 | Task | Status | Owner | Files touched |
