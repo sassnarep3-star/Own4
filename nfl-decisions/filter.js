@@ -1,0 +1,1 @@
+document.getElementById('filter').addEventListener('input', function(){const q=this.value.toLowerCase();document.querySelectorAll('tbody tr').forEach(r=>r.hidden=!r.textContent.toLowerCase().includes(q));});
