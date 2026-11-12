@@ -1373,6 +1373,26 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
 
 ---
+## Session arena/8184197d-own4 — NFL Intelligence build-out (2026-11-12 UTC)
+
+Branch: `arena/8184197d-own4` (Arena-fixed session branch; the `session-<id>/<task>` naming requested in the brief is not permitted by this environment). Base commit `a10610b`.
+
+| Task | Status | File scope |
+|---|---|---|
+| Repo review (line-by-line audit of NFL + repo hygiene, official-source cross-checks) | in progress | `nfl-intel/REPO_REVIEW.md` (new), read-only scans elsewhere; append-only COORDINATION.md |
+| Verified data capture: official 2026-27 NFL standings, Week 10 schedule + bye teams, Week 10 official injury report transcription | in progress | `nfl-intel/data/*.json` (new) |
+| Originated lines (own model, Pythagorean + net PPG, pre-registered, no market claim), correlations w/ p-values + BH-FDR, luck-removal gates | in progress | `nfl-intel/data/*.json`, `nfl-intel/engine/*.py` |
+| Strategy framework (singles, parlays, prop combos), validation gates, leaderboard competition + rewards policy, correlation values | in progress | `nfl-intel/data/*.json` |
+| Injury tracker + backup-deficiency watchlist (starter DNP/LP → backup ID unverified/flagged) | in progress | `nfl-intel/data/injuries*.json` |
+| Suggestions register + decision Q&A (questions/info/answers needed before decisions; missing-info discovery suggestions; review workflow, no auto-implement) | in progress | `nfl-intel/data/suggestions.json`, `nfl-intel/data/questions.json` |
+| GitHub Pages site `nfl-intel/` (landing + category subpages, tables w/ per-row source links, build + link/row-source verifier) | in progress | `nfl-intel/**` (new directory only; root index.html and peer workspaces untouched) |
+| Executive summary + PR + merge + Pages deploy confirmation | in progress | `nfl-intel/EXECUTIVE_SUMMARY.md`, COORDINATION.md append-only |
+
+Scope is isolated to `nfl-intel/**` plus append-only `COORDINATION.md`. Root `index.html` and all peer workspaces (`docs/`, `lab/`, `lines-lab/`, `nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nba-evidence/`, `rental-*`, …) are NOT modified. No other session currently claims `nfl-intel/**`.
+
+Official sources fetched and read 2026-11-12 (UTC): https://www.nfl.com/standings/ (all 32 teams, 2026 REG) · https://www.nfl.com/scores (Week 10 slate + bye teams) · https://www.nfl.com/injuries/ (Week 10 official report, chunks 0–4 read; LAC/BAL reported no injuries). Unverifiable values are left blank and flagged on the Flagged for Review page.
+--- (main-side concurrent session log retained below)
+
 
 ## Session `arena/1d2cb84b-own4` — NFL requirements, decision register, own lines & skill gates (2026-11-12)
 
@@ -1723,3 +1743,14 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 - **Follow-up:** a second small PR corrects the injuries page subtitle (it still said the depth gap kept the page blank) and adds this record.
 
 **Scope note for the next session:** `nfl-hub/**` is now owned by the merged Line Genesis build plus this module. Any further work on it should start from `main` and run `python3 nfl-hub/build.py && python3 nfl-hub/verify.py`; the gate fails on a one-byte drift, a table row without a source link, or a page without the navigation and helpline footer.
+
+## Session arena/8184197d-own4 — NFL Intelligence: build complete, pre-merge record (2026-11-12 UTC)
+
+- Claimed scope `nfl-intel/**` + append-only COORDINATION.md; no peer files edited. Root `index.html` not modified by this session (it differs from base on main via peer PR #69; the canonical rebuild lock was peer-managed).
+- Concurrent same-brief NFL namespaces now on main: `nfl-audit/`, `nfl-decision/`, `nfl-decisions/`, `nfl-edge/`, `nfl-hub/` (built by other sessions from the same request). This session's `nfl-intel/` is an independent build with its own data capture, engine, gates and flags; no peer files were read into this build except one consistency cross-check of `nfl-lab/data/games_2026.csv` (120 games; 0 mismatches).
+- Delivered: official-source transcription (standings 32/32 with consistency gate PASS — W=L=135, PF=PA=6246; Week 10 slate 14 games; bye CHI/DEN/PHI/TB; official Week-10 injury report: 6 explicit game statuses + 68-row DNP/LP watchlist, backup mapping flagged UNVERIFIED); originated lines (model v1, pre-registered, git-committed pre-slate; all UNVERIFIED vs market — no official line source exists); n=32 correlations with Student-t p and Benjamini–Hochberg q; 8 pre-registered strategies behind gates G1–G10; luck-removal protocol; **0 reward-eligible, 0 rewards**; leaderboard with honest zeros; Decision Q&A (16 questions; 9 UNKNOWN/PARTIAL and blocking) and a 12-item Suggestion register with a no-auto-implement review protocol; repo review RR-01..RR-14; executive summary; 16-page site under `nfl-intel/`.
+- Verification performed: `nfl-intel/engine/analyze.py` (recomputes metrics/correlations/lines; consistency gate enforced); `nfl-intel/engine/verify_site.py` — **PASS** (16 pages, 224 data-rows all carrying source links, 326 local links resolve, no localhost refs); PR #70 checks: audit pass, validate pass.
+- Merge conflict on COORDINATION.md vs origin/main resolved by retaining BOTH sides (this session's claim + concurrent peer log); no peer content discarded.
+- Flagged for Review (16 items, page `nfl-intel/pages/flagged.html`): F-01..F-16 (unverified σ/exponent/moneylines, Munich venue, injury backup mapping, DNP≠Out, FDR-limited n=32 correlations, market blindness, 0-reward gates, repo hygiene RR-02/03/04/05, nfl-lab audit boundary).
+- Pages deployment: to be confirmed after merge; live URL expected at https://sassnarep3-star.github.io/Own4/nfl-intel/
+- PR: https://github.com/sassnarep3-star/Own4/pull/70 — merging per standing instruction (no approval wait).

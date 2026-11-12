@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "title": "Flagged for Review \u2014 every unverified value, assumption and irregularity (non-blocking)",
+    "rule": "These items are published for review. They block nothing, but none of them may be treated as verified until resolved. Each links to the best official source available."
+  },
+  "flags": [
+    {
+      "id": "F-01",
+      "item": "Pythagorean exponent 2.37",
+      "detail": "Literature constant used for Pythag metrics; NOT an official NFL value. Affects pythag/luck_delta columns only.",
+      "source": "https://www.nfl.com/standings/",
+      "resolution": "Replace with fitted exponent if backtest harness (SUG-05) is built"
+    },
+    {
+      "id": "F-02",
+      "item": "Margin sigma 13.45",
+      "detail": "Historical NFL margin standard deviation (literature); used for P(home) and fair moneylines. UNVERIFIED vs official source.",
+      "source": "https://www.nfl.com/scores",
+      "resolution": "Fit sigma on verified game-log history (SUG-05)"
+    },
+    {
+      "id": "F-03",
+      "item": "Fair moneylines",
+      "detail": "Derived from model v1 via F-02; no market comparison possible (G7 blocked); informational only, NOT executable prices.",
+      "source": "https://www.nfl.com/scores",
+      "resolution": "License odds archive (SUG-02)"
+    },
+    {
+      "id": "F-04",
+      "item": "NE\u2013DET venue (Munich international)",
+      "detail": "Schedule page shows a 'Munich 2026' banner above the NE\u2013DET listing; venue not independently re-verified; line impact assumed neutral-site via model (no explicit HFA term).",
+      "source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "resolution": "Confirm official venue via NFL.com game page / international announcement"
+    },
+    {
+      "id": "F-05",
+      "item": "Injury report lacks starter/backup mapping",
+      "detail": "Official report gives practice participation, not depth order. All 'replacement' and unit-deficiency implications in this dashboard are analytical proposals, not official fact.",
+      "source": "https://www.nfl.com/injuries/",
+      "resolution": "Ingest official depth charts (SUG-01)"
+    },
+    {
+      "id": "F-06",
+      "item": "Game statuses largely unlisted",
+      "detail": "Only 6 of ~250 report rows carry a game_status (Out/Questionable). 'DNP' \u2260 Out. Do not treat any DNP row as ruled-out for Sunday.",
+      "source": "https://www.nfl.com/injuries/",
+      "resolution": "Re-fetch before kickoff windows; transcribe final statuses when posted"
+    },
+    {
+      "id": "F-07",
+      "item": "Correlations are season-to-date, n=32, in-sample",
+      "detail": "r(net_ppg,pct)=+0.876 etc. describe this season only; not predictive validation; BH-FDR applied across the 6 tests.",
+      "source": "https://www.nfl.com/standings/",
+      "resolution": "Rolling/out-of-sample monitoring (SUG-12) after SUG-05"
+    },
+    {
+      "id": "F-08",
+      "item": "No official odds/line source \u2014 all lines unverifiable vs market",
+      "detail": "G7/G8 blocked; ROI, CLV, beat-market claims impossible; every originated line is model output, not advice.",
+      "source": "https://www.nfl.com/scores",
+      "resolution": "SUG-02"
+    },
+    {
+      "id": "F-09",
+      "item": "Sample size: 136 team-games played league-wide; zero strategy \u2265 300 graded games",
+      "detail": "G3 FAIL for every strategy; all rewards = 0; leaderboard publishes zeros by design.",
+      "source": "https://www.nfl.com/standings/",
+      "resolution": "Backtest harness (SUG-05)"
+    },
+    {
+      "id": "F-10",
+      "item": "Week 10 includes Thursday (already played by some readers) \u2014 model committed before kickoff but results may leak into viewing",
+      "detail": "Pre-registration is by commit time; TNF W10-01 (WAS@NYG, 2026-11-12 8:15PM ET) may conclude before this page is read. Treat lines as research, not picks.",
+      "source": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "resolution": "Timestamped lock before each slate (SUG-04)"
+    },
+    {
+      "id": "F-11",
+      "item": "Repo hygiene: 4 tracked .pyc files under own4-dashboard/scripts/__pycache__/",
+      "detail": "Despite .gitignore covering *.pyc, these were committed. Harmless content but irregular; also ~53MB of tracked raw HTML dumps under data/raw/ and no LICENSE file.",
+      "source": "https://github.com/sassnarep3-star/Own4",
+      "resolution": "Untrack pyc via PR; consider raw-data storage policy; add LICENSE \u2014 separate change, needs owner decision"
+    },
+    {
+      "id": "F-12",
+      "item": "Parallel duplicate dashboards in repo (nfl/, nfl-lab/, nfl-quant/, nfl-research/, nfl-intel/)",
+      "detail": "Multiple sessions produced overlapping NFL outputs; canonical entry point unresolved; root index.html rebuild locked by NBA canonical workflow.",
+      "source": "https://github.com/sassnarep3-star/Own4",
+      "resolution": "Owner decision (Q-12, SUG-08)"
+    },
+    {
+      "id": "F-13",
+      "item": "Standings cross-check between official pages",
+      "detail": "2026-11-12 standings and Week 10 scores page records agree for all 28 teams playing this week (spot-verified: WAS 2-5-1, NYG 5-2-1, CHI 7-2, DEN 7-2, PHI 2-7, TB 3-6). Drives/variance beyond team-game level not re-derived.",
+      "source": "https://www.nfl.com/standings/",
+      "resolution": "Full re-derivation from play-by-play is out of scope; note only"
+    },
+    {
+      "id": "F-14",
+      "item": "nfl-lab peer data used for one audit check",
+      "detail": "nfl-lab/data/games_2026.csv (120 games) was re-checked for internal consistency only (0 mismatches vs its standings). Its provenance beyond file-stated nfl.com game URLs was NOT independently re-verified line-by-line.",
+      "source": "https://www.nfl.com/standings/",
+      "resolution": "Random-sample audit of 20 game rows vs official box scores (Q-08)"
+    },
+    {
+      "id": "F-15",
+      "item": "Bye 4th team and international venue details",
+      "detail": "Bye teams CHI, DEN, PHI are visible in the scores page's 'Teams on Bye' section; the 4th entry rendered as a truncated 'T\u2026' and was confirmed as TB (3-6) via the same page's later chunk. NE\u2013DET appears under a 'Munich 2026' international banner; venue not re-verified against an official announcement.",
+      "source": "https://www.nfl.com/scores",
+      "resolution": "Confirm official 2026 international schedule via NFL.com announcement"
+    },
+    {
+      "id": "F-16",
+      "item": "Rewards are virtual-only; no cash, no eligibility to claim prizes",
+      "detail": "Leaderboard pays nothing real; 'rewards' is a review/selection mechanism until Q-05/Q-06/Q-07/Q-11 are resolved with counsel and budget.",
+      "source": "https://www.ncpgambling.org/help-treatment",
+      "resolution": "Governance decision (SUG-07)"
+    }
+  ]
+}
