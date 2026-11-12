@@ -1,0 +1,305 @@
+{
+  "generated_utc": "2026-11-12T17:30:00Z",
+  "purpose": "Improve decision quality before any further build. Each item is a proposal, not a change that has been implemented silently. Review order: read the Questions Register, choose an option here, record the choice in the Decision Log.",
+  "how_to_review": [
+    "Start with the three 'decision gates' D1-D3 below. Nothing else should be built until they are answered.",
+    "For each suggestion, read the evidence links. A suggestion that depends on missing information is marked BLOCKED and points to the question that must be answered first.",
+    "Pick one option per decision, write it in data/decision_log.json with your name, date and reason, then open a task. Undecided items stay proposed; they do not block the site.",
+    "Re-check any suggestion whose assumption is 'the market is inefficient'. The current evidence says the opposite for game markets."
+  ],
+  "decision_gates": [
+    {
+      "id": "D1",
+      "question": "Which NFL workspace is canonical?",
+      "why": "Four dashboards publish different lines for the same weeks. A reader cannot tell which is current, and search engines will split authority across all four.",
+      "options": [
+        {
+          "id": "D1-a",
+          "name": "Keep nfl-hub and freeze the other four",
+          "pros": "One maintained surface; this hub reconciles to official standings and publishes its own limits.",
+          "cons": "Older pages remain reachable and may contradict the hub."
+        },
+        {
+          "id": "D1-b",
+          "name": "Keep nfl-quant and extend it",
+          "pros": "It already has a pipeline and pre-registered gates.",
+          "cons": "Its lines are Week 9 and its 2026 market inputs are stale; extending it would mix two methodologies."
+        },
+        {
+          "id": "D1-c",
+          "name": "Publish a comparison page and keep all five",
+          "pros": "Maximum transparency.",
+          "cons": "Worst for a casual reader; the contradiction remains."
+        }
+      ],
+      "recommendation": "D1-a. Add a banner to the four older NFL pages pointing to the hub, and remove them from the root navigation. Keep them as an archive."
+    },
+    {
+      "id": "D2",
+      "question": "Buy or license a real market feed, or stay archive-only?",
+      "why": "With no timestamped market/player feed there is no way to measure closing-line value, price props, or validate parlay payouts. Every strategy is capped at 'research-only'.",
+      "options": [
+        {
+          "id": "D2-a",
+          "name": "License a commercial odds + player-prop API with historical timestamps",
+          "pros": "Unlocks CLV, prop lines, SGP pricing and honest G7.",
+          "cons": "Recurring cost; contract review; redistribution limits."
+        },
+        {
+          "id": "D2-b",
+          "name": "Stay with free archives",
+          "pros": "Zero cost, fully reproducible.",
+          "cons": "No 2026 lines, no props, no parlay prices; cannot validate a real edge."
+        },
+        {
+          "id": "D2-c",
+          "name": "Manual price snapshots at fixed times",
+          "pros": "Cheap.",
+          "cons": "Not reproducible, not auditable, and conflicts with the no-manual-input requirement."
+        }
+      ],
+      "recommendation": "D2-a if the project is meant to produce executable lines; otherwise D2-b and accept that the output stays a research demo."
+    },
+    {
+      "id": "D3",
+      "question": "What does the leaderboard actually reward?",
+      "why": "Rewarding raw ROI rewards luck. A strategy can top a table with 40 bets and no skill.",
+      "options": [
+        {
+          "id": "D3-a",
+          "name": "Reward the lower confidence bound of net ROI after gates",
+          "pros": "Punishes small samples and variance; aligns reward with evidence.",
+          "cons": "Harder to explain."
+        },
+        {
+          "id": "D3-b",
+          "name": "Reward raw ROI with a minimum sample",
+          "pros": "Simple.",
+          "cons": "Still luck-dominated until n is large."
+        },
+        {
+          "id": "D3-c",
+          "name": "No rewards until G8 forward replication passes",
+          "pros": "Most conservative.",
+          "cons": "Nothing to compete over for a full season."
+        }
+      ],
+      "recommendation": "D3-a, with the pool rolling over when no strategy qualifies. This is what the current leaderboard implements: 0 points awarded because no strategy passed."
+    }
+  ],
+  "suggestions": [
+    {
+      "id": "S-01",
+      "title": "One canonical hub, four archived workspaces",
+      "problem": "nfl/, nfl-lab/, nfl-quant/ and nfl-research/ all publish NFL lines and strategy pages. They disagree and two carry dead citations.",
+      "proposal": "Make nfl-hub/ canonical. Add a one-line banner to each older page and drop them from the root nav. Do not delete them.",
+      "impact": "High",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": "D1",
+      "status": "proposed",
+      "evidence": [
+        "SRC-15",
+        "SRC-16"
+      ]
+    },
+    {
+      "id": "S-02",
+      "title": "Make the Questions Register the front door",
+      "problem": "Decisions are being made before the missing inputs are named.",
+      "proposal": "Link 'Open Questions' in the primary nav of every page and show the three decision gates on the landing page.",
+      "impact": "High",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "implemented in this build",
+      "evidence": [
+        "nfl-hub/pages/questions.html"
+      ]
+    },
+    {
+      "id": "S-03",
+      "title": "Timestamp every number, and show staleness",
+      "problem": "Week 8 and Week 9 lines are still presented as current on older pages, with no staleness marker.",
+      "proposal": "Every table gets an 'as of' badge computed from its data file; a build fails if a slate page is older than the next kickoff.",
+      "impact": "High",
+      "effort": "M",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "proposed",
+      "evidence": [
+        "SRC-02"
+      ]
+    },
+    {
+      "id": "S-04",
+      "title": "Replace point-ROI ranking with a lower-bound score",
+      "problem": "Raw ROI on a few hundred bets is mostly luck; the ladder currently has no statistically defensible ordering.",
+      "proposal": "Rank by the 5th-percentile week-clustered bootstrap ROI, with 0 for anything that fails G2/G3.",
+      "impact": "High",
+      "effort": "M",
+      "risk": "Low",
+      "depends_on": "D3",
+      "status": "implemented in this build",
+      "evidence": [
+        "nfl-hub/data/strategies/results.json"
+      ]
+    },
+    {
+      "id": "S-05",
+      "title": "Publish falsification criteria per strategy",
+      "problem": "A backtest can always be re-sliced until it looks good.",
+      "proposal": "Each strategy states in advance what result would make it be abandoned, and the pipeline refuses to re-run the holdout after a failure without a new pre-registration commit.",
+      "impact": "High",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "partially implemented (gates pre-registered before results)",
+      "evidence": [
+        "nfl-hub/data/gates.json"
+      ]
+    },
+    {
+      "id": "S-06",
+      "title": "Anchor the model to the market, not to itself",
+      "problem": "The model's margin MAE (10.39) is worse than the closing line's (9.87) on the holdout. A pure model cannot beat the line; a residual model might.",
+      "proposal": "Model the residual (actual minus closing line) with injury/rest/quarterback features, and judge it by CLV rather than by ROI on a small sample.",
+      "impact": "High",
+      "effort": "L",
+      "risk": "Medium",
+      "depends_on": "D2",
+      "status": "proposed",
+      "evidence": [
+        "nfl-hub/data/model/model_card.json"
+      ]
+    },
+    {
+      "id": "S-07",
+      "title": "Automate daily official-report snapshots with diffs",
+      "problem": "The injury page changes through the week and 90 minutes before kickoff. This build captured one Thursday snapshot; six players had formal designations.",
+      "proposal": "A scheduled job stores the official report daily with a timestamp and publishes a diff (new Out, upgraded to Questionable, etc.).",
+      "impact": "High",
+      "effort": "M",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "proposed",
+      "evidence": [
+        "SRC-03"
+      ]
+    },
+    {
+      "id": "S-08",
+      "title": "Do not publish a starter/backup index without an official depth source",
+      "problem": "The requested 2nd/3rd/4th-string deficiency measure has no official input: NFL.com depth-chart URLs return 404.",
+      "proposal": "Keep the index blank and flagged. Either license a depth/snap-count feed or use official transaction news for named changes only (as done for quarterbacks here).",
+      "impact": "High",
+      "effort": "M",
+      "risk": "High if guessed",
+      "depends_on": "D2",
+      "status": "blocked",
+      "evidence": [
+        "SRC-14"
+      ]
+    },
+    {
+      "id": "S-09",
+      "title": "Separate 'verified', 'derived' and 'assumed' at the cell level",
+      "problem": "Mixing official facts with model output in one table invites readers to treat both as equally certain.",
+      "proposal": "Three badges on every value, plus a filter. Assumed values (e.g. -110, +164 parlay payout) must be visibly assumed.",
+      "impact": "Medium",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "implemented in this build",
+      "evidence": [
+        "nfl-hub/data/gates.json"
+      ]
+    },
+    {
+      "id": "S-10",
+      "title": "Add a Decision Log page with revisit dates",
+      "problem": "Suggestions can be accepted and then forgotten; nobody knows why a choice was made.",
+      "proposal": "data/decision_log.json with id, date, decision, owner, rationale, revisit date, and a rendered page. Empty entries are shown as 'awaiting decision'.",
+      "impact": "High",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "implemented (empty log)",
+      "evidence": [
+        "nfl-hub/data/decision_log.json"
+      ]
+    },
+    {
+      "id": "S-11",
+      "title": "Machine-readable data next to every page",
+      "problem": "Reviewers cannot diff a table or reuse it without scraping.",
+      "proposal": "Every page links its source JSON with a schema version and a sha256.",
+      "impact": "Medium",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "implemented in this build",
+      "evidence": [
+        "nfl-hub/data/"
+      ]
+    },
+    {
+      "id": "S-12",
+      "title": "Add a link-integrity check for citations, not just internal links",
+      "problem": "Two prior-session NFL citations return 404 and were never caught.",
+      "proposal": "CI fetches every external citation and fails on 404, with an allowlist for pages that block bots.",
+      "impact": "High",
+      "effort": "M",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "proposed",
+      "evidence": [
+        "SRC-15",
+        "SRC-16"
+      ]
+    },
+    {
+      "id": "S-13",
+      "title": "Responsible-gambling and jurisdiction review",
+      "problem": "The site discusses betting strategy; the legal status of a paid competition and of publishing picks is unresolved.",
+      "proposal": "Keep the site non-monetary and educational; add a helpline footer (present) and answer Q-13/Q-14 before any payout or 'pick' publication.",
+      "impact": "Medium",
+      "effort": "S",
+      "risk": "High if ignored",
+      "depends_on": null,
+      "status": "proposed",
+      "evidence": [
+        "SRC-17",
+        "SRC-18"
+      ]
+    },
+    {
+      "id": "S-14",
+      "title": "Trim repository weight and duplicate raw dumps",
+      "problem": "The repository ships 53 MB of raw dumps plus four tracked .pyc files and five versions of some dashboards.",
+      "proposal": "Move raw archives to a release or external store; delete tracked bytecode; add a size budget to CI.",
+      "impact": "Medium",
+      "effort": "M",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "proposed",
+      "evidence": [
+        "repo measurement 2026-11-12"
+      ]
+    },
+    {
+      "id": "S-15",
+      "title": "Add search, filters and a compact print view",
+      "problem": "The hub already has 14 pages; a reviewer on a phone cannot find a team quickly.",
+      "proposal": "Client-side filter on every table, sticky headers (present), and print CSS so a page can be reviewed on paper.",
+      "impact": "Medium",
+      "effort": "S",
+      "risk": "Low",
+      "depends_on": null,
+      "status": "partially implemented",
+      "evidence": [
+        "nfl-hub/assets/hub.css"
+      ]
+    }
+  ]
+}

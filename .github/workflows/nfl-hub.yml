@@ -1,0 +1,50 @@
+name: Validate NFL Line Genesis
+
+# Rebuilds every published number from the committed data, then enforces the
+# publication rules for this workspace:
+#   * the rebuild must be byte-identical (no number can drift from its data);
+#   * every data-table row must carry a source link;
+#   * every local link and anchor must resolve;
+#   * no page may cite a URL recorded as dead;
+#   * every page keeps navigation and the responsible-gambling footer.
+# This workflow validates only. GitHub Pages serves the repository from main / root.
+
+on:
+  push:
+    paths:
+      - 'nfl-hub/**'
+      - '.github/workflows/nfl-hub.yml'
+  pull_request:
+    paths:
+      - 'nfl-hub/**'
+      - '.github/workflows/nfl-hub.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild model, backtest, correlations and lines
+        run: python3 nfl-hub/pipeline/run_all.py
+
+      - name: Rebuild the static site
+        run: python3 nfl-hub/build.py
+
+      - name: Data and HTML must not drift from the committed build
+        run: |
+          git diff --stat -- nfl-hub/data nfl-hub/pages nfl-hub/index.html
+          git diff --exit-code -- nfl-hub/data nfl-hub/pages nfl-hub/index.html
+
+      - name: Verify every row, link, anchor and disclosure
+        run: python3 nfl-hub/verify.py

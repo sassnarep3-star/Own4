@@ -1,0 +1,420 @@
+{
+  "generated_utc": "2026-11-12T17:30:00Z",
+  "register_purpose": "Every question that must be answered before a decision is reasonable, with what we know, what we do not know, and the evidence that would settle it.",
+  "rows": [
+    {
+      "id": "Q-01",
+      "category": "Data",
+      "question": "What are the 2026 records, points for and points against through Week 9?",
+      "decision_blocked": "Anything that depends on team strength: ratings, own lines, seeding.",
+      "known": "Answered. All 32 teams reconcile field by field between the archive and NFL.com: W-L-T, PF, PA and tie percentage. 136 games played.",
+      "known_source": [
+        "SRC-01",
+        "reconciliation.json"
+      ],
+      "missing": "Nothing for this question.",
+      "evidence_needed": "Done.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-02",
+      "category": "Data",
+      "question": "Which 14 games are in Week 10, when do they kick off, and who is on bye?",
+      "decision_blocked": "Generating any line without knowing the slate.",
+      "known": "Answered. 14 games Nov 12-16; byes are CHI, DEN, PHI and TB; kickoff times and networks captured.",
+      "known_source": [
+        "SRC-02",
+        "schedule_week10_2026.json"
+      ],
+      "missing": "Nothing for this question.",
+      "evidence_needed": "Done.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-03",
+      "category": "Data",
+      "question": "How does the NFL compute winning percentage with ties?",
+      "decision_blocked": "Reconciling standings; a naive formula falsely flags two teams.",
+      "known": "Answered. NFL.com uses (W + T/2) / G: NYG 5-2-1 = 0.688, WAS 2-5-1 = 0.313. A W/G formula yields 0.625 and 0.250 and would report two false mismatches.",
+      "known_source": [
+        "SRC-01"
+      ],
+      "missing": "Nothing.",
+      "evidence_needed": "Done.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-04",
+      "category": "Market",
+      "question": "Does any official NFL source publish betting lines?",
+      "decision_blocked": "Whether a line can ever be labelled 'official'.",
+      "known": "Partially answered. No NFL lines were found in NFL.com, NFL Operations or NFL terms during this review; NFL.com's terms govern content use and no odds feed was offered. The 2026 nflverse archive contains zero closing lines. Establishing a universal negative is not possible from a sample of pages, so the claim is bounded to 'no official odds publication was found'.",
+      "known_source": [
+        "SRC-12",
+        "SRC-18"
+      ],
+      "missing": "A definitive licensing statement from the NFL about odds redistribution.",
+      "evidence_needed": "Written confirmation from the NFL or a licensed distributor.",
+      "priority": "P0",
+      "status": "Partially answered",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-05",
+      "category": "Injuries",
+      "question": "Does the NFL publish an official depth chart (starter / 2nd / 3rd / 4th string)?",
+      "decision_blocked": "The requested defensive backup-deficiency index; any claim that a player is a starter.",
+      "known": "Answered for the URL tested. https://www.nfl.com/teams/kansas-city-chiefs/depth-chart returns '404 - Flag on the Play'. No official depth chart was located. Therefore starter/backup labels are left blank except where official news explicitly names a change.",
+      "known_source": [
+        "SRC-14"
+      ],
+      "missing": "An official depth-chart or snap-count publication, if one exists in another location.",
+      "evidence_needed": "A working official depth URL or a licensed snap-count feed.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-06",
+      "category": "Model",
+      "question": "Do our originated lines beat the closing line?",
+      "decision_blocked": "Whether to bet, publish, or sell any line.",
+      "known": "Answered: no. Holdout 2017-2025 margin MAE is 10.392 for the model versus 9.871 for the closing line; total MAE 11.971 vs 10.470. The market is the better forecast.",
+      "known_source": [
+        "model_card.json"
+      ],
+      "missing": "Nothing; the comparison is direct.",
+      "evidence_needed": "Done.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-07",
+      "category": "Props",
+      "question": "Can 2026 player props be priced?",
+      "decision_blocked": "Prop singles, prop combos and any player-level strategy.",
+      "known": "Blocked. No authorized 2026 player-level feed and no archived prop prices are in scope. No value is published.",
+      "known_source": [
+        "SRC-12"
+      ],
+      "missing": "A licensed player-stat and prop-price feed with timestamps.",
+      "evidence_needed": "Contract with a data provider; sample file with historical prop lines.",
+      "priority": "P0",
+      "status": "Blocked",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-08",
+      "category": "Correlation",
+      "question": "How correlated are same-game parlay legs?",
+      "decision_blocked": "SGP pricing and whether a combo is mispriced.",
+      "known": "Partially answered for game markets. Favourite-cover vs under phi = 0.0117 (n=3,291, 95% CI -0.0225 to 0.0459): effectively independent. Player-leg correlations are blocked.",
+      "known_source": [
+        "correlations.json"
+      ],
+      "missing": "Player-level legs and archived SGP prices.",
+      "evidence_needed": "Q-07 feed plus SGP price snapshots.",
+      "priority": "P1",
+      "status": "Partially answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-09",
+      "category": "Injuries",
+      "question": "Which starting-quarterback changes are confirmed for Week 10?",
+      "decision_blocked": "Quarterback-adjusted lines.",
+      "known": "Answered for four teams. SEA: Darnold out, Lock starts (article body read). CLE: Watson starts (roundup). ARI: Beck starts (roundup). MIA: McCord in line for first start (headline only).",
+      "known_source": [
+        "SRC-05",
+        "SRC-06",
+        "SRC-10"
+      ],
+      "missing": "Confirmation of the Miami change from the article body; Baltimore's replacement.",
+      "evidence_needed": "Read the Miami article; official Baltimore depth statement.",
+      "priority": "P0",
+      "status": "Partially answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-10",
+      "category": "Injuries",
+      "question": "Is Lamar Jackson on injured reserve, and who starts for Baltimore?",
+      "decision_blocked": "Baltimore's line; the integrity of the injury page.",
+      "known": "Contradiction found. NFL.com's Nov 5 roundup headline says Baltimore officially placed Jackson on IR; the Week 10 injury page lists Baltimore as 'No Injuries Reported'. No replacement starter is named on that page.",
+      "known_source": [
+        "SRC-07",
+        "SRC-03"
+      ],
+      "missing": "A current official statement resolving the contradiction.",
+      "evidence_needed": "NFL.com transaction entry or Ravens official announcement.",
+      "priority": "P0",
+      "status": "Open",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-11",
+      "category": "Injuries",
+      "question": "How many players carry a formal game designation at capture time?",
+      "decision_blocked": "Any 'who is out' dashboard claim.",
+      "known": "Answered: six league-wide (2 WAS, 1 NYG, 3 NE). Everyone else has practice status only. The official page updates later in the week and again before kickoff.",
+      "known_source": [
+        "SRC-03"
+      ],
+      "missing": "The final Saturday/Sunday report.",
+      "evidence_needed": "A kickoff-day snapshot.",
+      "priority": "P0",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-12",
+      "category": "Legal",
+      "question": "May this repository redistribute NFL scores and page extracts?",
+      "decision_blocked": "Publishing a data product; mirroring official content.",
+      "known": "Not answered. NFL.com terms were located but not legally reviewed; the historical archive carries its own upstream licence. No redistribution clearance was obtained.",
+      "known_source": [
+        "SRC-18",
+        "SRC-12"
+      ],
+      "missing": "Legal review and the archive's exact licence terms.",
+      "evidence_needed": "Counsel opinion; written licence confirmation.",
+      "priority": "P0",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-13",
+      "category": "Legal",
+      "question": "Is a paid or prize-based prediction competition lawful where the owner resides (Alberta, Canada)?",
+      "decision_blocked": "Any monetary reward, leaderboard prize or public contest.",
+      "known": "Not answered. Rewards are therefore non-monetary reputation points only, with no cash and no pooled stakes.",
+      "known_source": [
+        "SRC-17"
+      ],
+      "missing": "Jurisdictional legal advice; provincial gaming rules.",
+      "evidence_needed": "Written legal opinion.",
+      "priority": "P0",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-14",
+      "category": "Competition",
+      "question": "Can rewards be monetary, and who funds them?",
+      "decision_blocked": "Reward design; whether to advertise a prize.",
+      "known": "Currently non-monetary by design (see gates.json). No prize pool is funded.",
+      "known_source": [
+        "gates.json"
+      ],
+      "missing": "Funding source and legal clearance (Q-13).",
+      "evidence_needed": "Decision from owner plus Q-13.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-15",
+      "category": "Model",
+      "question": "What sample size is enough to call a strategy skilled?",
+      "decision_blocked": "Promoting any strategy above Bronze.",
+      "known": "Project-defined, not official: >=300 settled holdout bets across >=3 seasons, plus bootstrap lower bound > 0 and a placebo p < 0.05 adjusted for multiple trials. At a 52.4% break-even rate, hundreds of bets are needed before a 2-3% edge is distinguishable from noise.",
+      "known_source": [
+        "gates.json"
+      ],
+      "missing": "An agreed false-positive budget from the owner.",
+      "evidence_needed": "Owner decision; power calculation for the target edge.",
+      "priority": "P1",
+      "status": "Partially answered",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-16",
+      "category": "Operations",
+      "question": "What is the staking plan and bankroll unit?",
+      "decision_blocked": "Any ROI that maps to money; risk of ruin.",
+      "known": "Not defined. All results are in flat 1-unit stakes, which is a measurement convention, not advice.",
+      "known_source": [
+        "results.json"
+      ],
+      "missing": "Bankroll, unit size, maximum exposure, stop-loss.",
+      "evidence_needed": "Owner policy.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-17",
+      "category": "Operations",
+      "question": "Who has final authority over a decision, and how often is it reviewed?",
+      "decision_blocked": "Accepting any suggestion; resolving D1-D3.",
+      "known": "Not defined. Suggestions stay 'proposed' until a named owner records a decision.",
+      "known_source": [
+        "suggestions.json"
+      ],
+      "missing": "Named decision owner and cadence.",
+      "evidence_needed": "Owner statement.",
+      "priority": "P0",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-18",
+      "category": "Site",
+      "question": "Which of the five NFL workspaces is canonical?",
+      "decision_blocked": "Navigation, SEO, and which numbers a reader should trust.",
+      "known": "Not decided. This build adds nfl-hub/ as a sixth and does not edit the other four. The four publish different lines and two cite dead URLs.",
+      "known_source": [
+        "SRC-15",
+        "SRC-16"
+      ],
+      "missing": "Owner choice (D1).",
+      "evidence_needed": "Decision logged in decision_log.json.",
+      "priority": "P0",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-19",
+      "category": "Model",
+      "question": "What counts as success: ROI, closing-line value, or calibration?",
+      "decision_blocked": "Leaderboard rules and whether a strategy is 'good'.",
+      "known": "Not decided. This build reports all three; the model is calibrated within roughly five points but has no edge versus the line.",
+      "known_source": [
+        "model_card.json"
+      ],
+      "missing": "Owner definition of success.",
+      "evidence_needed": "Owner decision.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-20",
+      "category": "Model",
+      "question": "How long must a strategy run forward before it is trusted?",
+      "decision_blocked": "Any claim stronger than 'provisional'.",
+      "known": "Gate G8 requires at least one full prospective season. None has been completed, so nothing can be Gold.",
+      "known_source": [
+        "gates.json"
+      ],
+      "missing": "A start date for the forward log.",
+      "evidence_needed": "Timestamped forward predictions for a season.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-21",
+      "category": "Injuries",
+      "question": "What is the injury-impact hypothesis, and how will it be tested?",
+      "decision_blocked": "Adding injuries to the model without guessing.",
+      "known": "Not tested. No historical injury dataset could be downloaded in this environment (the archive's release assets are unreachable from the sandbox), so no injury coefficient is estimated.",
+      "known_source": [
+        "injuries.json"
+      ],
+      "missing": "Historical injury data aligned to games; a pre-registered effect size.",
+      "evidence_needed": "Dataset plus pre-registration, then a holdout test.",
+      "priority": "P1",
+      "status": "Blocked",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-22",
+      "category": "Injuries",
+      "question": "If no official depth chart exists, what is a defensible definition of 'starter'?",
+      "decision_blocked": "The 2nd/3rd/4th-string deficiency index.",
+      "known": "Not answered. Candidate definitions (first snap on offense/defence, >50% snap share) require snap counts, which are not in scope.",
+      "known_source": [
+        "SRC-14"
+      ],
+      "missing": "Snap-count data and an agreed threshold.",
+      "evidence_needed": "Snap-count feed; owner approval of a definition.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-23",
+      "category": "Data",
+      "question": "Which team code convention applies (LA vs LAR, AZ vs ARI)?",
+      "decision_blocked": "Joining any official table to the archive.",
+      "known": "Answered. The archive uses LA and AZ; NFL.com uses LAR and ARI. A mapping is applied and documented; no rows were dropped.",
+      "known_source": [
+        "SRC-01",
+        "SRC-12"
+      ],
+      "missing": "Nothing.",
+      "evidence_needed": "Done.",
+      "priority": "P2",
+      "status": "Answered",
+      "owner": "Research"
+    },
+    {
+      "id": "Q-24",
+      "category": "Market",
+      "question": "What is a real parlay price, and does the book adjust for correlation?",
+      "decision_blocked": "Parlay and SGP profitability.",
+      "known": "Assumed only. A standard 2-team payout of +164 is used and flagged; no archived parlay price exists. G7 therefore fails for every parlay strategy.",
+      "known_source": [
+        "results.json"
+      ],
+      "missing": "Archived parlay/SGP prices.",
+      "evidence_needed": "Q-04 feed with parlay prices.",
+      "priority": "P1",
+      "status": "Blocked",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-25",
+      "category": "Site",
+      "question": "Should individual picks be published publicly?",
+      "decision_blocked": "Site content policy.",
+      "known": "This build publishes lines and model probabilities with explicit 'not advice' labels, and no stake advice. Public pick publication has not been reviewed for regulatory exposure.",
+      "known_source": [
+        "SRC-18"
+      ],
+      "missing": "Legal review; owner policy.",
+      "evidence_needed": "Q-13 outcome.",
+      "priority": "P1",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-26",
+      "category": "Operations",
+      "question": "What is the data budget and refresh cadence?",
+      "decision_blocked": "Choice of vendor; freshness of every table.",
+      "known": "No budget is defined. The current snapshot is manual/one-off and is labelled as such.",
+      "known_source": [
+        "sources.json"
+      ],
+      "missing": "Budget and cadence.",
+      "evidence_needed": "Owner decision.",
+      "priority": "P2",
+      "status": "Open",
+      "owner": "Owner"
+    },
+    {
+      "id": "Q-27",
+      "category": "Model",
+      "question": "Are the project's gate thresholds calibrated to any external standard?",
+      "decision_blocked": "Defensibility of the pass/fail line.",
+      "known": "No. They are project-defined research choices (n>=300, 60% positive seasons, p<0.05), not NFL or regulatory standards.",
+      "known_source": [
+        "gates.json"
+      ],
+      "missing": "External benchmark or power analysis.",
+      "evidence_needed": "Statistical review.",
+      "priority": "P2",
+      "status": "Answered",
+      "owner": "Research"
+    }
+  ]
+}
