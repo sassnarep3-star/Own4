@@ -1374,6 +1374,90 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 
 ---
 
+## Session `arena/1d2cb84b-own4` — NFL requirements, decision register, own lines & skill gates (2026-11-12)
+
+**Session ID:** `1d2cb84b-own4` · **Branch:** `arena/1d2cb84b-own4` (fixed by platform; the requested
+`session-<id>/<task>` naming is not permitted here) · **Base commit:** `a10610b`
+
+### Claim (pushed before work started)
+
+| # | Task | Status | Owner session | File scope (exclusive) |
+|---|------|--------|---------------|------------------------|
+| N1 | Read repo, existing NFL workspaces, coordination board; no peer files edited | done | arena/1d2cb84b-own4 | COORDINATION.md (append-only) |
+| N2 | Official-source collection: 2026 Week 10 schedule, standings, team stats, Week 10 injury report; every value with its nfl.com URL | in progress | arena/1d2cb84b-own4 | nfl-edge/data/official_*.json |
+| N3 | Requirements traceability (full list of the user's requirements → status → evidence) | unclaimed→in progress | arena/1d2cb84b-own4 | nfl-edge/data/requirements.json |
+| N4 | Decision register: questions, known/unknown information, answers, what unlocks a decision, suggestions to discover missing information | in progress | arena/1d2cb84b-own4 | nfl-edge/data/questions.json |
+| N5 | Suggestions section (proposed changes with impact/effort/prerequisites/review status) | in progress | arena/1d2cb84b-own4 | nfl-edge/data/suggestions.json |
+| N6 | Own-line origination: model, official-input ratings, Week 10 originated spreads/totals/MLs, market comparison left blank | in progress | arena/1d2cb84b-own4 | nfl-edge/data/own_lines.json, nfl-edge/scripts/model.py |
+| N7 | Signal research + validation gates + luck removal + leaderboard/rewards policy (singles, parlays, prop combos) | in progress | arena/1d2cb84b-own4 | nfl-edge/data/strategies.json, gates.json, results.json |
+| N8 | Injury/availability intelligence, including explicit starter-vs-backup evidence gap | in progress | arena/1d2cb84b-own4 | nfl-edge/data/availability.json |
+| N9 | Static site (landing + category subpages + Flagged for Review), build + row-source/link verifier | pending | arena/1d2cb84b-own4 | nfl-edge/** |
+| N10 | Executive summary (`NFL_EXECUTIVE_SUMMARY.md`) + repo review of NFL workspaces (`nfl-edge/REPO_REVIEW.md`) | pending | arena/1d2cb84b-own4 | those two files |
+| N11 | Root `index.html` navigation link to the new NFL dashboard (additive only) | pending | arena/1d2cb84b-own4 | index.html (single additive link) |
+| N12 | PR to main, merge, confirm Pages deploy, record PR/receipt here | pending | arena/1d2cb84b-own4 | COORDINATION.md (append-only) |
+
+**Coordination note.** No other session is active in this checkout: working tree was clean at `a10610b`, and
+every prior board item is `done` / `needs review` with last commits on 2026-11-06 (>60 min old). Peer NFL
+namespaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`) are **read-only** for this session — the new
+work is namespaced under `nfl-edge/` and never regenerates peer files. The only shared files touched are
+append-only records (`COORDINATION.md`, `README.md` addendum) plus one additive link in the root `index.html`.
+Root `verification/build.py` is **not** run by this session: it rewrites `index.html` and would delete this
+session's navigation link (this is the previously logged irregularity I1, see the 2026-11-05 board entry);
+the new link is additive and does not change any existing root content.
+
+### N1–N10 complete · 2026-11-12 (session `1d2cb84b-own4`)
+
+**Delivered (all inside `nfl-edge/`, nothing peer-owned edited):**
+`data/official_standings.json` (32 clubs), `data/team_stats_2026.json` + `data/team_stats_defense_2026.json`
+(32 clubs each, six league-wide identities exact), `data/games_2026.json` (136 games, weeks 1–9),
+`data/slate_week10.json` (14 games, 4 byes), `data/injuries_week10.json` (275 players, 28 clubs),
+`data/availability.json`, `data/own_lines_2026.json` (14 originated lines), `data/ratings_2026.json`,
+`data/results.json` (walk-forward backtest + gates), `data/correlations.json`, `data/gates.json` (10
+pre-registered gates), `data/questions.json` (22 questions, 7 blocked decisions), `data/suggestions.json`
+(16), `data/requirements.json` (26), `data/flags.json` (16), `data/integrity.json` (15 checks).
+Scripts: `make_games.py`, `make_injuries.py`, `build_stats.py`, `model.py`, `build_site.py`, `verify_site.py`.
+Site: 22 pages at `/nfl-edge/` (root `index.html` received one additive nav link).
+
+**Sources read on 2026-11-12 (official):** https://www.nfl.com/standings/ ·
+https://www.nfl.com/schedules/2026/by-week/week-8 · week-9 · week-10 · https://www.nfl.com/schedules/2026/ ·
+https://www.nfl.com/stats/team-stats/offense/{scoring,passing,rushing}/2026/reg/all ·
+https://www.nfl.com/stats/team-stats/defense/{scoring,passing,rushing}/2026/reg/all ·
+https://www.nfl.com/injuries/ · https://www.nfl.com/stats/player-stats/ ·
+https://www.nfl.com/teams/washington-commanders/roster (depth-chart URL returns 404) ·
+https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again ·
+https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11 ·
+https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start ·
+https://www.ncpgambling.org/help-treatment/ · third-party archive
+https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/predictions.csv (closing lines; labelled
+third-party everywhere).
+
+**Verification:** `python3 nfl-edge/scripts/build_stats.py` → 15/15 checks pass (exits non-zero on any
+failure). `python3 nfl-edge/scripts/verify_site.py` → 22 pages, 889 table rows all carrying a source link,
+628 local links resolved including anchors, 1,093 external links all https, 0 errors. Two bugs were found and
+fixed inside this session's own engine before publication: a market-line sign flip that made the closing line
+look worse than it is, and a parlay settlement bug that turned a lost leg into a win. Both were caught by
+cross-checking against the peer workspace's independently reported MAE ordering (market < us < naive).
+
+**Headline result (unchanged, negative):** 0 of 4 strategies qualify; 0 of 1,000 reward points. Spread MAE
+own 10.502 vs closing line 9.871 vs naive 11.231. S1 −3.12% (n=1,540), S2 −5.32% (n=1,187), S3 −8.45%
+(n=2,060), S4 −15.74% (n=155); placebo p 0.37–0.63.
+
+**Irregularities (non-blocking, published on `/nfl-edge/pages/flagged.html`):** F-01 no 2026 price archive;
+F-02 no official player-game logs or prop prices (props blocked); F-03 no depth chart or snap counts
+(starter/backup blocked); F-04 home-field 1.5 pts is a model assumption; F-05 model loses to the closing
+line; F-06 calibration bias +0.651; **F-07 the peer 2026 archive omitted 16 of 136 games** (restored from
+official week pages, peer file untouched); **F-08 the peer 2026 archive tags 272 rows as season 2026**;
+F-09 120 scores corroborated by aggregate reconciliation rather than page-by-page; F-10 hand transcription
+of HTML tables; F-11 gate thresholds are design choices; F-12 53 MB `data/raw/`, 4 tracked `.pyc`, ~20
+duplicate workspaces; **F-13 root `index.html` is regenerated by `verification/build.py`, which deletes
+hand-added nav links** (confirmed again this session in a scratch copy — the NFL link is therefore additive
+and the root generator was not run); F-14 injury data is a single snapshot; F-15 negative ROI ≠ worthless;
+F-16 no jurisdiction/licence decision.
+
+**Coordination:** no other session was active (tree clean at `a10610b`, all prior items done/needs-review,
+last peer commit 2026-11-06). No peer namespace edited. One claim of general applicability for future
+sessions: the root `verification/build.py` will delete any hand-added `index.html` link on its next run, so
+any session adding a root link must also add it to that generator's `NAV` or accept the link disappearing.
 ## Session `arena/e2b19bf6-own4` — NFL decision-intelligence layer, question register, suggestions board & canonical NFL site (2026-11-12)
 
 **Session ID:** `arena/e2b19bf6-own4` · **Branch:** `arena/e2b19bf6-own4` (platform-pinned; `session-<id>/<task>` naming not creatable in this harness — same logged deviation as every prior session) · **Base:** `a10610bed12589273e11c73b35d1473968ab915f` (main)

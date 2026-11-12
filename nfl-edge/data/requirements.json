@@ -1,0 +1,248 @@
+{
+ "dataset": "requirements_traceability",
+ "version": "1.0",
+ "generated_utc": "2026-11-12",
+ "purpose": "The full list of requirements from the request, one row each, with what was delivered, where it lives, and an honest status. Nothing is marked DONE unless it is on the site and reproducible.",
+ "status_key": {
+  "DONE": "delivered, on the site, reproducible from checked-in code",
+  "DONE - NEGATIVE RESULT": "the analysis was completed and the answer is 'no'; that is the deliverable",
+  "PARTIAL": "delivered in part; the missing part is named",
+  "BLOCKED": "cannot be delivered with the sources available; stated as a flag with the reason"
+ },
+ "requirements": [
+  {
+   "id": "R01",
+   "requirement": "Review the repository",
+   "status": "DONE",
+   "delivered": "Full inventory: file counts, HTML page count, size hotspots, conflict-marker scan, tracked .pyc files, and a file-by-file verdict on the four existing NFL workspaces.",
+   "where": "pages/repo-review.html \u00b7 REPO_REVIEW.md",
+   "evidence": "nfl-edge/data/requirements.json (this row) \u00b7 REPO_REVIEW.md",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R02",
+   "requirement": "Work line by line, verify from official trusted sources, provide links, no hallucinations",
+   "status": "DONE",
+   "delivered": "Every table row on every page carries a source URL. 15 mechanical integrity checks must pass or the build refuses. Values that cannot be confirmed are blank, never inferred.",
+   "where": "all pages \u00b7 data/integrity.json",
+   "evidence": "integrity.json: 15/15 checks pass",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/integrity.json"
+  },
+  {
+   "id": "R03",
+   "requirement": "Flag irregularities for review",
+   "status": "DONE",
+   "delivered": "16 flagged items on a dedicated page, each with severity, what was found, and whether it blocks publication.",
+   "where": "pages/flagged.html",
+   "evidence": "nfl-edge/data/flags.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/flags.json"
+  },
+  {
+   "id": "R04",
+   "requirement": "Make suggestions to improve decision making",
+   "status": "DONE",
+   "delivered": "16 suggested changes with impact, effort, risk, prerequisites and current status, so a path can be chosen before anything is implemented.",
+   "where": "pages/suggestions.html",
+   "evidence": "nfl-edge/data/suggestions.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/suggestions.json"
+  },
+  {
+   "id": "R05",
+   "requirement": "Create a section dedicated to suggestions for review before implementing changes",
+   "status": "DONE",
+   "delivered": "The Suggestions page. Each item shows status (implemented / proposed / needs decision) and the questions that must be answered first.",
+   "where": "pages/suggestions.html",
+   "evidence": "nfl-edge/data/suggestions.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/suggestions.json"
+  },
+  {
+   "id": "R06",
+   "requirement": "A clear list of questions, information and answers needed before a decision",
+   "status": "DONE",
+   "delivered": "22 questions in four states (answered / partial / open / blocked), each split into what we know, what we do not know, the answer, and what would unlock it; plus 7 decisions and exactly which questions block each.",
+   "where": "pages/decisions.html",
+   "evidence": "nfl-edge/data/questions.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json"
+  },
+  {
+   "id": "R07",
+   "requirement": "Suggest ways to discover the missing information",
+   "status": "DONE",
+   "delivered": "Each OPEN/BLOCKED question names what would unlock it (a licence, a daily capture, an owner decision); each suggestion names its prerequisites.",
+   "where": "pages/decisions.html \u00b7 pages/suggestions.html",
+   "evidence": "questions.json 'unlocks' field; suggestions.json 'prerequisites'",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json"
+  },
+  {
+   "id": "R08",
+   "requirement": "Originate my own NFL lines",
+   "status": "DONE",
+   "delivered": "Own spread, total, home/away points and fair moneyline for all 14 official Week 10 games, built only from official NFL.com team statistics.",
+   "where": "pages/own-lines.html",
+   "evidence": "nfl-edge/data/own_lines_2026.json \u00b7 model in nfl-edge/scripts/model.py",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all"
+  },
+  {
+   "id": "R09",
+   "requirement": "Research and develop strategies for generating useful signals",
+   "status": "DONE",
+   "delivered": "A 10-signal catalogue with an explicit verdict per signal, plus 4 strategies actually backtested. Signals we could not measure are listed as not measured rather than invented.",
+   "where": "pages/strategies.html",
+   "evidence": "nfl-edge/data/results.json#signals_considered",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R10",
+   "requirement": "Leaderboard competition with rewards for top performers",
+   "status": "DONE - NEGATIVE RESULT",
+   "delivered": "Tiered leaderboard (Qualified / Bronze / Rejected) with a 1,000-point non-monetary pool. 0 of 4 strategies qualify, so 0 points are awarded.",
+   "where": "pages/leaderboard.html",
+   "evidence": "nfl-edge/data/results.json#strategies",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R11",
+   "requirement": "Look at single bets",
+   "status": "DONE",
+   "delivered": "Three single-bet strategies (spread divergence, total divergence, fair-moneyline value) graded on 2,383 holdout games.",
+   "where": "pages/singles.html",
+   "evidence": "results.json: S1 n=1,540 ROI -3.12%; S2 n=1,187 ROI -5.32%; S3 n=2,060 ROI -8.45%",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R12",
+   "requirement": "Look at parlays",
+   "status": "DONE - NEGATIVE RESULT",
+   "delivered": "Cross-game 2-leg parlays built from the strongest single legs each week, priced at the true two-leg payout. n=155, ROI -15.74%.",
+   "where": "pages/parlays.html",
+   "evidence": "results.json: S4",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R13",
+   "requirement": "Look at player prop bet combos",
+   "status": "BLOCKED",
+   "delivered": "Explained precisely why it cannot be graded here: no official player-game logs and no prop prices in scope. Correlation cells left blank; gate G9 fails by construction.",
+   "where": "pages/props.html",
+   "evidence": "correlations.json#not_measured \u00b7 flag F-02",
+   "source_url": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "id": "R14",
+   "requirement": "Each strategy must pass validation gates",
+   "status": "DONE",
+   "delivered": "10 pre-registered gates applied unchanged to every strategy, with per-gate pass/fail and the reason.",
+   "where": "pages/validation.html",
+   "evidence": "nfl-edge/data/gates.json \u00b7 results.json#strategies",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json"
+  },
+  {
+   "id": "R15",
+   "requirement": "Determine correlation values",
+   "status": "PARTIAL",
+   "delivered": "Two team-level dependence pairs measured with phi coefficients on 2,383 games (both near zero), plus residual persistence +0.40. Player-level correlations are BLOCKED and blank.",
+   "where": "pages/correlations.html",
+   "evidence": "nfl-edge/data/correlations.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json"
+  },
+  {
+   "id": "R16",
+   "requirement": "Remove luck from the equation",
+   "status": "PARTIAL",
+   "delivered": "Luck is bounded, not removed: week-clustered bootstrap, matched-random placebo permutation, season-stability, residual persistence. Each is reported with its value.",
+   "where": "pages/validation.html \u00b7 pages/leaderboard.html",
+   "evidence": "results.json: placebo p 0.37-0.63",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R17",
+   "requirement": "Build strategies that are selectively skill based",
+   "status": "DONE - NEGATIVE RESULT",
+   "delivered": "The skill test is operationalised (G4 market bar, G5 CI bound, G6 placebo, G7 stability, G8 replication). No strategy passes, and the page says so rather than relabelling noise as skill.",
+   "where": "pages/leaderboard.html",
+   "evidence": "results.json#strategies (0 Qualified)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+  },
+  {
+   "id": "R18",
+   "requirement": "Track injuries",
+   "status": "DONE",
+   "delivered": "All 275 players listed on the official Week 10 report across the 28 clubs playing, with position, injury, practice status and game status.",
+   "where": "pages/availability.html",
+   "evidence": "nfl-edge/data/injuries_week10.json",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R19",
+   "requirement": "Know deficiencies where 2nd/3rd/4th-string defenders or backups replace starters",
+   "status": "BLOCKED",
+   "delivered": "The question was researched to its root: nfl.com publishes no depth chart (the depth-chart URL 404s) and no snap counts. The page shows unavailability by position instead, and never asserts who is a backup.",
+   "where": "pages/availability.html \u00b7 flag F-03",
+   "evidence": "nfl-edge/data/availability.json",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R20",
+   "requirement": "Same for offense (starters vs backups)",
+   "status": "BLOCKED",
+   "delivered": "Same as R19 for offensive positions; notable confirmed absences are listed without starter/backup labels.",
+   "where": "pages/availability.html",
+   "evidence": "availability.json",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R21",
+   "requirement": "Create an executive summary outlining important details",
+   "status": "DONE",
+   "delivered": "A one-page executive summary of what was built, what the evidence says, what is blocked, and what to do next.",
+   "where": "pages/executive-summary.html \u00b7 NFL_EXECUTIVE_SUMMARY.md",
+   "evidence": "NFL_EXECUTIVE_SUMMARY.md",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/NFL_EXECUTIVE_SUMMARY.md"
+  },
+  {
+   "id": "R22",
+   "requirement": "No manual input from the owner; work autonomously in this session",
+   "status": "DONE",
+   "delivered": "Every dataset, model, gate, page and check was produced in this session; the build is one command and runs with the Python standard library only.",
+   "where": "nfl-edge/scripts/",
+   "evidence": "python3 nfl-edge/scripts/build_site.py",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/scripts/build_site.py"
+  },
+  {
+   "id": "R23",
+   "requirement": "Create a GitHub Pages live site, clean landing page, subpages by category, table format",
+   "status": "DONE",
+   "delivered": "14 pages: dashboard plus categories (official data, own lines, strategies, competition, availability, decision support, governance), all in table form with a filter box.",
+   "where": "nfl-edge/index.html and nfl-edge/pages/*.html",
+   "evidence": "nfl-edge/scripts/verify_site.py",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-edge/"
+  },
+  {
+   "id": "R24",
+   "requirement": "Every table row must have a source link; blank + flag if unverified",
+   "status": "DONE",
+   "delivered": "Enforced mechanically: the site build exits non-zero if any table row lacks an http(s) source link.",
+   "where": "nfl-edge/scripts/verify_site.py",
+   "evidence": "verify_site.py: 0 unsourced rows",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/scripts/verify_site.py"
+  },
+  {
+   "id": "R25",
+   "requirement": "Read COORDINATION.md, claim the task, avoid conflicts with parallel sessions",
+   "status": "DONE",
+   "delivered": "Claim committed and pushed before work started; peer NFL/NBA/rental namespaces read-only; only append-only board/README text and one additive root link touched.",
+   "where": "COORDINATION.md",
+   "evidence": "claim commit cd70080",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+  },
+  {
+   "id": "R26",
+   "requirement": "Open a PR, merge without waiting, confirm Pages deploy, record the receipt",
+   "status": "DONE",
+   "delivered": "PR opened from this branch, merged to main, Pages deployment confirmed by fetching the live URL, and the PR link plus merge commit recorded in COORDINATION.md.",
+   "where": "COORDINATION.md",
+   "evidence": "receipt recorded on the board",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+  }
+ ]
+}

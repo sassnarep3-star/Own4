@@ -1,0 +1,115 @@
+{
+ "dataset": "integrity_checks",
+ "generated_utc": "2026-11-12",
+ "description": "Mechanical consistency checks over the transcribed official values. A pass means the two official figures agree with each other; it does not mean a third party audited the transcription.",
+ "n_checks": 15,
+ "n_pass": 15,
+ "n_fail": 0,
+ "checks": [
+  {
+   "id": "C1",
+   "check": "PF - PA equals published NET PTS for every team",
+   "pass": true,
+   "detail": "32/32 rows agree; mismatches: none",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "C2",
+   "check": "Sum of PF equals sum of PA across the league",
+   "pass": true,
+   "detail": "PF=6246 PA=6246",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "C3",
+   "check": "Sum of wins equals sum of losses",
+   "pass": true,
+   "detail": "W=135 L=135 T=2",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "C4",
+   "check": "League total points on the offence page equals league PF on the standings page",
+   "pass": true,
+   "detail": "offence page=6246 standings=6246",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all"
+  },
+  {
+   "id": "C5",
+   "check": "League total points allowed on the defence page equals league PA on the standings page",
+   "pass": true,
+   "detail": "defence page=6246 standings=6246",
+   "source_url": "https://www.nfl.com/stats/team-stats/defense/scoring/2026/reg/all"
+  },
+  {
+   "id": "C6",
+   "check": "League offence pass_yds equals league defence pass_yds allowed",
+   "pass": true,
+   "detail": "offence=63556 defence=63556",
+   "source_url": "https://www.nfl.com/stats/team-stats/"
+  },
+  {
+   "id": "C7",
+   "check": "League offence pass_td equals league defence pass_td allowed",
+   "pass": true,
+   "detail": "offence=411 defence=411",
+   "source_url": "https://www.nfl.com/stats/team-stats/"
+  },
+  {
+   "id": "C8",
+   "check": "League offence rush_yds equals league defence rush_yds allowed",
+   "pass": true,
+   "detail": "offence=30580 defence=30580",
+   "source_url": "https://www.nfl.com/stats/team-stats/"
+  },
+  {
+   "id": "C9",
+   "check": "League offence rush_td equals league defence rush_td allowed",
+   "pass": true,
+   "detail": "offence=257 defence=257",
+   "source_url": "https://www.nfl.com/stats/team-stats/"
+  },
+  {
+   "id": "C10",
+   "check": "W-L-T / PF / PA recomputed from the game archive match the official standings",
+   "pass": true,
+   "detail": "games=136 teams_checked=32 mismatches=none",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "C11",
+   "check": "Games per week look like complete NFL weeks (13-16 per week, no gaps)",
+   "pass": true,
+   "detail": "per-week counts: {1: 16, 2: 16, 3: 16, 4: 16, 5: 15, 6: 14, 7: 14, 8: 14, 9: 15}",
+   "source_url": "https://www.nfl.com/schedules/2026/"
+  },
+  {
+   "id": "C12",
+   "check": "Week 10 slate has 14 games and 28 distinct clubs (4 clubs on the official bye list)",
+   "pass": true,
+   "detail": "games=14 distinct_teams=28",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "C13",
+   "check": "Every Week 10 game has an official nfl.com game page URL",
+   "pass": true,
+   "detail": "14/14",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "C14",
+   "check": "Injury report has one section for each of the 28 clubs playing in Week 10",
+   "pass": true,
+   "detail": "club sections=28, all 28 Week 10 clubs present",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "C15",
+   "check": "Every injury row carries the official injuries-page URL it was read from",
+   "pass": true,
+   "detail": "rows=275, 100% sourced",
+   "source_url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}

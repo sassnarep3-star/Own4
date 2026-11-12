@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repo review &middot; NFL Edge</title>
+<meta name="description" content="Repository review: inventory, verdict on each existing NFL workspace, and the irregularities found.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav active" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Governance / Repo review</div>
+<h1>Repository review</h1>
+<p class="lede">A file-by-file review of the repository as found, with a verdict on each existing NFL workspace and the irregularities worth fixing.</p>
+<h2>Inventory at the start of this session</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Item</th><th>Value</th><th>Note</th><th>Source</th></tr></thead><tbody>
+<tr><td>Files tracked</td><td class="num">675</td><td>Excluding .git</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>HTML pages</td><td class="num">220</td><td>Many are generated duplicates across workspaces</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>Raw scrape dump</td><td class="num">53 MB in data/raw/</td><td>Committed archive of ESPN/NBA HTML and JSON; not used by the canonical site</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/tree/main/data/raw" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>Tracked .pyc files</td><td class="num">4</td><td>Build artefacts under own4-dashboard/scripts/__pycache__ (F-12)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/tree/main/own4-dashboard/scripts" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>Parallel workspaces</td><td class="num">~20</td><td>NBA (x8), NFL (x4), SF rental (x6), status, evidence</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>Merge-conflict markers</td><td class="num">0</td><td>Scanned every .md/.json/.csv/.html/.py file</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+</tbody></table></div>
+<h2>Verdict on each existing NFL workspace</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Workspace</th><th>What it contains</th><th>Verdict</th><th>Reason</th><th>Source</th></tr></thead><tbody>
+<tr><td>nfl/</td><td>Specification pages: strategies, gates, leaderboard design, source list. HTML only.</td><td><span class="badge warn">superseded</span></td><td>Design without measured results; correctly labels its own unverified values. Kept as-is.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/index.html" target="_blank" rel="noopener">index.html ↗</a></td></tr>
+<tr><td>nfl-research/</td><td>A short generated site with a builder and a test script.</td><td><span class="badge warn">superseded</span></td><td>Small; overlaps nfl/ in purpose. No measured backtest.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-research/index.html" target="_blank" rel="noopener">index.html ↗</a></td></tr>
+<tr><td>nfl-lab/</td><td>2026 season archive: games, standings, team passing, own lines, signals, leaderboard.</td><td><span class="badge fail">useful but incomplete</span></td><td>Its games file is missing 16 of 136 games (F-07). The rest of the workspace is usable and its own-lines table is well structured.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/data/games_2026.csv" target="_blank" rel="noopener">games_2026.csv ↗</a></td></tr>
+<tr><td>nfl-quant/</td><td>The largest measured workspace: 1999-2026 archive, walk-forward model, 5 strategies, 16 correlations, 3 MB of outputs.</td><td><span class="badge ok">most developed</span></td><td>Good method and an honest negative result. Two issues: its 2026 archive rows cannot all be real games (F-08), and its prop results are priced against a proxy line (Q10).</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/EXECUTIVE_SUMMARY.md" target="_blank" rel="noopener">EXECUTIVE_SUMMARY.md ↗</a></td></tr>
+</tbody></table></div>
+<p class="note">This session did not modify any of the four. All are preserved verbatim; the new workspace is <code>nfl-edge/</code>.</p>
+<h2>Irregularities found</h2>
+<div class="tw">
+<table>
+<caption>All 16 flagged items (also on the Flagged for review page)</caption>
+<thead><tr><th>ID</th><th>Area</th><th>Finding</th><th>Recommended action</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>F-01</strong></td><td>Market data</td><td>No official NFL source publishes betting lines, and no 2026 closing or prop prices exist anywhere in this repository.</td><td>Obtain a licensed price archive with timestamps before any 2026 price comparison is published.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-02</strong></td><td>Player data</td><td>No authorised player-level game logs and no prop prices, so player-prop strategies and prop correlations cannot be graded.</td><td>Licensed player-game data plus archived prop prices; then re-register the gate.</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-03</strong></td><td>Depth chart</td><td>The starter/backup question cannot be answered from official sources: nfl.com has no depth chart and no snap counts.</td><td>A licensed depth chart with snap counts, or club-issued depth charts captured weekly.</td><td><a class="src" href="https://www.nfl.com/teams/washington-commanders/roster" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-04</strong></td><td>Line origination</td><td>The 1.5-point home-field value used for the 2026 originated lines is a model assumption, not an official value.</td><td>Either publish a measured HFA with a confidence interval or keep the label. Do not present it as official.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/own_lines_2026.json" target="_blank" rel="noopener">own_lines_2026.json ↗</a></td></tr>
+<tr><td><strong>F-05</strong></td><td>Model performance</td><td>Our model is less accurate than the closing line: spread MAE 10.502 vs 9.871 points; total 10.830 vs 10.470.</td><td>None: publish as-is. Revisit only with a pre-registered model change.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>F-06</strong></td><td>Calibration</td><td>The model&#x27;s 90% interval covers 89.34% of holdout games (fine) but the mean residual is +0.651 points (fails the pre-registered 0.5 bar).</td><td>A pre-registered v1.1 with a corrected home-field term; must be a new gate version, not a tweak after the fact.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>F-07</strong></td><td>Repository</td><td>The peer 2026 game archive in nfl-lab/data/games_2026.csv was missing 16 of 136 games (all of Week 9 plus the Week 8 Monday game).</td><td>The owning session should either adopt nfl-edge/data/games_2026.json or refresh its own generator to include weeks 8-9.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/integrity.json" target="_blank" rel="noopener">integrity.json ↗</a></td></tr>
+<tr><td><strong>F-08</strong></td><td>Repository</td><td>The peer archive nfl-quant/data/predictions.csv contains 272 rows tagged season 2026, but the 2026 season is only at Week 10 (136 games played).</td><td>Owning session to confirm what the 2026 rows represent.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/predictions.csv" target="_blank" rel="noopener">predictions.csv ↗</a></td></tr>
+<tr><td><strong>F-09</strong></td><td>Sources</td><td>Two datasets are corroborated by aggregate identity rather than by re-reading every page.</td><td>Optional: spot-check the 120 inherited scores against the official game pages before any high-stakes use.</td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-10</strong></td><td>Sources</td><td>The official team-statistics pages are HTML tables with no stable machine-readable export; every value on this site was transcribed by hand into JSON.</td><td>Add a second independent read per row (suggestion S-16).</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-11</strong></td><td>Gates</td><td>Gate thresholds (300 bets, 60% positive seasons, |bias| &lt; 0.5, p &lt; 0.05) are research design choices, not official NFL values.</td><td>Independent review of gate thresholds (suggestion S-05).</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>F-12</strong></td><td>Repository</td><td>The repository carries 53 MB of raw archived HTML/JSON in data/raw/, four tracked .pyc files, and about twenty parallel workspaces including three competing SF rental sites.</td><td>Add data/raw/ and __pycache__/ to .gitignore; untrack .pyc; decide on one canonical dashboard (suggestions S-11).</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td><strong>F-13</strong></td><td>Site</td><td>The repository root index.html is generated by verification/build.py and running it deletes any hand-added navigation link.</td><td>Add the NFL link to verification/build.py NAV and regenerate, or accept that the NFL page is reachable by URL only from the root.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py" target="_blank" rel="noopener">build.py ↗</a></td></tr>
+<tr><td><strong>F-14</strong></td><td>Availability</td><td>The injury dataset is a single snapshot taken 2026-11-12; the official report moves daily and game status is final only 90 minutes before kickoff.</td><td>Scheduled daily capture.</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>F-15</strong></td><td>Leaderboard</td><td>A negative holdout ROI does not prove the model is worthless, and a positive one would not prove skill.</td><td>Read the leaderboard as &#x27;what survived&#x27;, not &#x27;what lost&#x27;.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>F-16</strong></td><td>Governance</td><td>No jurisdiction, licence or terms-of-use decision exists for this project.</td><td>Answer Q12 before any commercial use.</td><td><a class="src" href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">ncpgambling.org</a></td></tr>
+</tbody></table></div>
+<div class="panel warn"><strong>The one that mattered.</strong> The peer game archive was missing every Week 9 game and the Week 8 Monday game. Any rate statistic computed from it would have been wrong for 16 of 136 games &mdash; about 12% of the season. That is why every data file on this site is now checked against the official standings before it is used.</div>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

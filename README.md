@@ -158,3 +158,30 @@ New, self-contained project: verified analysis of rent-increase law and practice
 - Anonymized repo-level summary: `EXECUTIVE_SUMMARY_SF_RENTAL.md`.
 - Verification: `python3 rental-own4/verify_rental.py` (local link integrity, source-link coverage, privacy scan) — 0 errors, 0 warnings as of 2026-11-06.
 - The root NBA dashboard (`index.html`) is intentionally untouched: it is rebuilt byte-identically by the canonical NBA verification workflow.
+
+---
+
+## NFL Edge · session `arena/1d2cb84b-own4` (2026-11-12)
+
+Own-line origination, pre-registered validation gates and a decision register for NFL betting signals,
+built from official NFL.com data only. **Live:** https://sassnarep3-star.github.io/Own4/nfl-edge/
+
+- **Headline:** 0 of 4 registered strategies qualify and 0 of 1,000 reward points are awarded. Our spread
+  model beats a naive baseline (10.502 vs 11.231 points MAE) but loses to the closing line (9.871), so
+  nothing here is a price, a pick or an edge.
+- **Data:** 32-club standings, 32-club offence/defence team stats, 136 games (weeks 1-9, including 16 games
+  that were missing from the peer archive), the 14-game Week 10 slate and the official Week 10 injury report
+  (275 players). Every table row links to its official source; unverifiable values are blank and flagged.
+- **Blocked, and said so:** player props (no official per-game player logs or prop prices) and
+  starter-vs-backup depth (the league publishes no depth chart — the depth-chart URL returns 404 — and no
+  snap counts).
+- **Decision support:** 22 questions split into known / unknown / answer / what-would-unlock-it, 7 blocked
+  decisions, 16 suggestions with impact/effort/risk/prerequisites, 16 flagged items.
+- **Reproduce:** `python3 nfl-edge/scripts/make_games.py && python3 nfl-edge/scripts/make_injuries.py &&
+  python3 nfl-edge/scripts/build_stats.py && python3 nfl-edge/scripts/model.py &&
+  python3 nfl-edge/scripts/build_site.py && python3 nfl-edge/scripts/verify_site.py`
+- Executive summary: [`NFL_EXECUTIVE_SUMMARY.md`](NFL_EXECUTIVE_SUMMARY.md) · repo review:
+  [`nfl-edge/REPO_REVIEW.md`](nfl-edge/REPO_REVIEW.md) · coordination: [`COORDINATION.md`](COORDINATION.md).
+- Peer NFL workspaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`) were read, not modified.
+
+Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-800-697-3738).
