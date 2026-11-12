@@ -1371,3 +1371,12 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 - `rental-own4/` is live at a direct URL but is not linked from the root dashboard; multiple parallel rental directories are now present. A single canonical output/navigation decision is still needed.
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
+
+## NFL decision review integration · arena/009a9652-own4 · 2026-11-12
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Review existing NFL evidence; add decision questions, suggestions, injury specification, gated strategy register and executive summary | in progress | arena/009a9652-own4 | `nfl-decisions/**` (new, isolated) |
+| Final integration navigation, tests, PR, merge and deployment evidence | in progress | arena/009a9652-own4 | additive `index.html` link and matching `verification/build.py` link; `.github/workflows/nfl-decisions.yml`; append-only `COORDINATION.md` |
+
+No peer namespace will be edited. Existing NFL implementations are retained and linked, not duplicated as new empirical findings. Old overlapping final-integration claims are >60 minutes old; taking only the additive navigation scope. Fixed Arena branch retained per environment requirement rather than creating session branches. Current external official facts will be marked unverified if this environment cannot retrieve official sources. Initial repository inspection found third-party inputs in nfl-quant and NBA-centric canonical root; these require explicit review, not silent certification.
