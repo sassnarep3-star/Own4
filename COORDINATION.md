@@ -1371,3 +1371,11 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 - `rental-own4/` is live at a direct URL but is not linked from the root dashboard; multiple parallel rental directories are now present. A single canonical output/navigation decision is still needed.
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
+
+## Session arena/08883ee9-own4 — NFL decision and evidence review (2026-11-12)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Review existing NFL implementations, inspect official sources, publish decision-ready NFL suggestions, outstanding questions and flags, test and integrate | in progress | arena/08883ee9-own4 | `nfl-decision/**`, append-only `COORDINATION.md`; root navigation only if final integration permits |
+
+The Arena-assigned branch is fixed; no new session branch will be created. Existing NFL namespaces are outside this claim and will not be overwritten. Previous NFL claims are historical; any contemporaneous competing work will be preserved. Evidence and unresolved limitations will be recorded here.
