@@ -30,13 +30,20 @@ PPE_GRID = [18, 20, 22, 24, 26, 28, 30, 32]
 BLEND_GRID = [0.0, 0.2, 0.35, 0.5, 0.65, 0.8, 1.0]
 
 
-def load():
-    rows = [r for r in csv.DictReader(open(SRC)) if r["result"] not in ("", "NA")]
+def load(include_unplayed=False):
+    """Settled games only by default. include_unplayed also returns unplayed rows
+    (their result stays blank) so the frozen model can forecast a forward slate."""
+    rows = []
+    for r in csv.DictReader(open(SRC)):
+        settled = r["result"] not in ("", "NA")
+        if not settled and not include_unplayed:
+            continue
+        rows.append(r)
     rows.sort(key=lambda r: (int(r["season"]), int(r["week"]), r["gameday"], r["game_id"]))
     return rows
 
 
-def run(rows, ppe, blend, collect=True):
+def run(rows, ppe, blend, collect=True, forecast_only_unplayed=False):
     """Walk forward. Returns predictions; ratings state is rebuilt from scratch."""
     elo, w, pf, pa = {}, {}, {}, {}
     league_tot = None          # running decayed league average points-per-team
@@ -56,10 +63,12 @@ def run(rows, ppe, blend, collect=True):
             elo.setdefault(t, 1500.0); w.setdefault(t, 0.0)
             pf.setdefault(t, 0.0); pa.setdefault(t, 0.0)
 
-        if collect:
+        unplayed = r["result"] in ("", "NA")
+        if collect and not (forecast_only_unplayed and not unplayed):
             rec = {"game_id": r["game_id"], "season": s, "week": int(r["week"]),
                    "date": r["gameday"], "away": a, "home": h,
-                   "result": float(r["result"]), "total": float(r["total"]),
+                   "result": None if unplayed else float(r["result"]),
+                   "total": None if unplayed else float(r["total"]),
                    "spread_line": float(r["spread_line"]) if r["spread_line"] not in ("", "NA") else None,
                    "total_line": float(r["total_line"]) if r["total_line"] not in ("", "NA") else None}
             rec["pred_margin"] = (elo[h] + HFA_ELO - elo[a]) / ppe
@@ -77,6 +86,8 @@ def run(rows, ppe, blend, collect=True):
             rec["league_avg_team_pts"] = round(lg, 3)
             preds.append(rec)
 
+        if unplayed:
+            continue        # nothing to learn from; state is unchanged
         # ---- update state with the actual result -------------------------
         m = r["result"] = float(r["result"])
         tot = float(r["total"])
@@ -143,6 +154,14 @@ def main():
                          round(p["pred_margin"], 3), round(p["pred_total"], 3),
                          p["league_avg_team_pts"]])
     print(f"wrote {len(preds)} walk-forward predictions -> {OUT}/walkforward.csv")
+
+    # ---- forward slate: forecast the unplayed remainder of 2026 ----------
+    slate = run(load(include_unplayed=True), ppe, blend, forecast_only_unplayed=True)
+    slate = [p for p in slate if p["result"] is None]
+    json.dump({"generated_utc": "2026-11-12", "pts_per_elo": ppe, "totals_blend": blend,
+               "n_forward_games": len(slate), "games": slate},
+              open(os.path.join(OUT, "forward_slate.json"), "w"), indent=1)
+    print(f"forward slate: {len(slate)} unplayed games forecast -> {OUT}/forward_slate.json")
 
 
 if __name__ == "__main__":

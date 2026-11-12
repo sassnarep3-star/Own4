@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questions &amp;amp; gaps · NFL Decision Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand">NFL <span>Decision Lab</span></div>
+  <nav class="main"><a href="index.html" class="">Overview</a><a href="executive-summary.html" class="">Executive summary</a><a href="questions.html" class="on">Questions & gaps</a><a href="suggestions.html" class="">Suggestions</a><a href="injuries.html" class="">Injuries & depth</a><a href="own-lines.html" class="">Own lines</a><a href="leaderboard.html" class="">Leaderboard</a><a href="validation.html" class="">Validation gates</a><a href="correlations.html" class="">Correlations</a><a href="props.html" class="">Prop combos</a><a href="data.html" class="">Data & provenance</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for review</a><a href="sources.html" class="">Sources</a></nav>
+</div></header>
+<div class="layout">
+  <aside class="side"><h4>Decide</h4><a href="index.html" class="">Overview</a><a href="executive-summary.html" class="">Executive summary</a><a href="questions.html" class="on">Questions & gaps</a><a href="suggestions.html" class="">Suggestions</a><h4>Evidence</h4><a href="injuries.html" class="">Injuries & depth</a><a href="own-lines.html" class="">Own lines</a><a href="leaderboard.html" class="">Leaderboard</a><a href="validation.html" class="">Validation gates</a><a href="correlations.html" class="">Correlations</a><a href="props.html" class="">Prop combos</a><h4>Audit</h4><a href="data.html" class="">Data & provenance</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for review</a><a href="sources.html" class="">Sources</a></aside>
+  <main>
+    <h1>Questions &amp;amp; gaps</h1>
+    <p class="lede">What must be answered before any decision is reasonable — separating what we know from what we do not.</p>
+    <div class="cards"><div class="card"><div class="k">Answered</div><div class="v">3</div><div class="s">verified against a source</div></div><div class="card"><div class="k">Partly answered</div><div class="v">4</div><div class="s">some evidence, a gap remains</div></div><div class="card"><div class="k">Open</div><div class="v">9</div><div class="s">blocks a decision</div></div></div><div class="note warn"><b>How to read this.</b> Each question lists what is <b>known</b> with a source, what is <b>not known</b>, why that blocks a decision, and which suggestion would obtain it. A blank <b>Answer</b> means no verified answer exists — nothing was inferred to fill it.</div><div class="tbl-wrap"><table><thead><tr><th class="">ID</th><th class="">Group</th><th class="c">Status</th><th class="">Blocks</th><th class="">Question</th></tr></thead><tbody><tr><td class=""><a href="#Q01">Q01</a></td><td class="">Market access</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">every betting strategy</td><td class="">Where do we get a legally usable, archived price history for NFL markets?</td></tr><tr><td class=""><a href="#Q02">Q02</a></td><td class="">Market access</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">all rewards</td><td class="">What legal jurisdiction governs the project, and is commercial publication of derived lines permitted?</td></tr><tr><td class=""><a href="#Q03">Q03</a></td><td class="">Injuries and depth</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">injury-adjusted lines</td><td class="">Can we obtain reliable 1st/2nd/3rd-string depth-chart labels for all 32 teams?</td></tr><tr><td class=""><a href="#Q04">Q04</a></td><td class="">Injuries and depth</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">historical injury backtests</td><td class="">Is there an official archive of past-week practice reports?</td></tr><tr><td class=""><a href="#Q05">Q05</a></td><td class="">Injuries and depth</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">depth-weighted ratings</td><td class="">How should a missing starter be converted into a points adjustment?</td></tr><tr><td class=""><a href="#Q06">Q06</a></td><td class="">Strategy and validation</td><td class="c"><span class="pill p-good">known</span></td><td class="">nothing - answered</td><td class="">Does a model built only from archived scores beat the closing line?</td></tr><tr><td class=""><a href="#Q07">Q07</a></td><td class="">Strategy and validation</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">Gold tier for any strategy</td><td class="">What sample size do we need before a 55% hit rate is distinguishable from luck?</td></tr><tr><td class=""><a href="#Q08">Q08</a></td><td class="">Strategy and validation</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">prop strategies</td><td class="">Are player-prop combos positively correlated enough to break independent pricing?</td></tr><tr><td class=""><a href="#Q09">Q09</a></td><td class="">Strategy and validation</td><td class="c"><span class="pill p-good">known</span></td><td class="">nothing - answered</td><td class="">Can parlay legs be multiplied together as if independent?</td></tr><tr><td class=""><a href="#Q10">Q10</a></td><td class="">Strategy and validation</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">any claim of skill</td><td class="">What is our definition of &#x27;skill&#x27; that cannot be faked by re-running the search?</td></tr><tr><td class=""><a href="#Q11">Q11</a></td><td class="">Data rights</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">publication</td><td class="">May third-party archives be redistributed on a public site?</td></tr><tr><td class=""><a href="#Q12">Q12</a></td><td class="">Data rights</td><td class="c"><span class="pill p-good">known</span></td><td class="">nothing - answered</td><td class="">Do the 2026 numbers on this site match an official source?</td></tr><tr><td class=""><a href="#Q13">Q13</a></td><td class="">Data rights</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">prop expansion</td><td class="">Can we obtain an official 2026 player-level box-score feed?</td></tr><tr><td class=""><a href="#Q14">Q14</a></td><td class="">Product</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">reward design</td><td class="">What exactly does a &#x27;reward&#x27; pay, and who funds it?</td></tr><tr><td class=""><a href="#Q15">Q15</a></td><td class="">Product</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">everything downstream</td><td class="">Which single dashboard is canonical?</td></tr><tr><td class=""><a href="#Q16">Q16</a></td><td class="">Product</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">nothing - answered</td><td class="">Is the site actually live and does it build without broken links?</td></tr></tbody></table></div><h2>Market access</h2><div class="qa" id="Q01">
+  <div class="q"><span class="id">Q01</span><span class="txt">Where do we get a legally usable, archived price history for NFL markets?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: every betting strategy</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>No official NFL source publishes betting lines; the league site renders an odds toggle but exposes no values. Archived closing lines exist only in third-party repositories. <span class="src">[<a href="https://www.nfl.com/games">nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693</a> · <a href="https://github.com/nflverse/nfldata">repo: nfl-quant/data/provenance.json (closing lines from nflverse/nfldata, third-party)</a>]</span></dd>
+    <dt>Not known</dt><dd>Whether a licensed price archive (or a sportsbook data agreement) is available, and under what terms it may be stored and republished.</dd>
+    <dt>Why it blocks</dt><dd>Without archived prices every ROI is priced at an ASSUMED -110. Gate G7 can never pass, so no strategy can reach Gold and no reward can be paid honestly.</dd>
+    <dt>Suggestion</dt><dd>S14 - buy or license an odds archive before spending more effort on model refinement.</dd>
+  </dl></div></div><div class="qa" id="Q02">
+  <div class="q"><span class="id">Q02</span><span class="txt">What legal jurisdiction governs the project, and is commercial publication of derived lines permitted?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: all rewards</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>Public-advisory helplines exist and are cited site-wide as good practice. <span class="src">[<a href="https://www.ncpgambling.org/help-treatment">NCPG help and treatment</a>]</span></dd>
+    <dt>Not known</dt><dd>Operating jurisdiction, licence status, and whether derived probabilities may be shown publicly.</dd>
+    <dt>Why it blocks</dt><dd>Reward design, disclaimers and even the legality of publishing picks depend on it.</dd>
+    <dt>Suggestion</dt><dd>S15 - obtain a written legal position before any reward is described as anything other than research points.</dd>
+  </dl></div></div><h2>Injuries and depth</h2><div class="qa" id="Q03">
+  <div class="q"><span class="id">Q03</span><span class="txt">Can we obtain reliable 1st/2nd/3rd-string depth-chart labels for all 32 teams?</span>
+    <span class="pill p-warn">partial</span>
+    <span class="pill p-neu">blocks: injury-adjusted lines</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>No official NFL depth chart was found. https://www.nfl.com/depth-charts/ returns HTTP 404.</b></dd>
+    <dt>Known</dt><dd>The official Week 10 injury report publishes practice status and game status per player for 28 of 32 clubs (LAC and BAL both read &#x27;No Injuries Reported&#x27;). Official NFL.com news articles name specific replacements. <span class="src">[<a href="https://www.nfl.com/injuries/">Official NFL injury report, Week 10</a> · <a href="https://www.nfl.com/depth-charts/">NFL.com depth charts (404)</a>]</span></dd>
+    <dt>Not known</dt><dd>A machine-readable string chart, and therefore the ability to distinguish &#x27;2nd string replaces starter&#x27; from &#x27;starter returns&#x27;.</dd>
+    <dt>Why it blocks</dt><dd>The brief asks for 2nd/3rd/4th-string deficiency tracking. Without official string labels, any such label would be invented by this project.</dd>
+    <dt>Suggestion</dt><dd>S02 - publish only the 13 replacements that an official NFL.com article explicitly names, and label the rest BLOCKED.</dd>
+  </dl></div></div><div class="qa" id="Q04">
+  <div class="q"><span class="id">Q04</span><span class="txt">Is there an official archive of past-week practice reports?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: historical injury backtests</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>nfl.com/injuries/ shows only the current week. <span class="src">[<a href="https://www.nfl.com/injuries/">Official NFL injury report</a>]</span></dd>
+    <dt>Not known</dt><dd>Any official historical snapshot.</dd>
+    <dt>Why it blocks</dt><dd>Injury effects cannot be measured, so no injury signal can pass any validation gate. Any claimed injury edge would be anecdote, not evidence.</dd>
+    <dt>Suggestion</dt><dd>S16 - capture the official report into a dated JSON snapshot every week starting now, so a backtest becomes possible in a future season.</dd>
+  </dl></div></div><div class="qa" id="Q05">
+  <div class="q"><span class="id">Q05</span><span class="txt">How should a missing starter be converted into a points adjustment?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: depth-weighted ratings</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The official injury designations are defined by the Competition Committee and contain no numeric value. <span class="src">[<a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693">Competition Committee injury-report revisions</a>]</span></dd>
+    <dt>Not known</dt><dd>A published, official points-per-player impact. None exists.</dd>
+    <dt>Why it blocks</dt><dd>Any adjustment would be a modelling assumption. It must be pre-registered and treated as a hypothesis, never as a verified quantity.</dd>
+    <dt>Suggestion</dt><dd>S03 - hold the adjustment at zero until the depth table has enough observations to estimate it.</dd>
+  </dl></div></div><h2>Strategy and validation</h2><div class="qa" id="Q06">
+  <div class="q"><span class="id">Q06</span><span class="txt">Does a model built only from archived scores beat the closing line?</span>
+    <span class="pill p-good">known</span>
+    <span class="pill p-neu">blocks: nothing - answered</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>No. Holdout (2018-2025): the best spread strategy returned +1.09% at an ASSUMED -110 with a 95% bootstrap CI of [-4.65%, +7.03%] and FDR q = 0.199. It cannot be distinguished from luck.</b></dd>
+    <dt>Known</dt><dd>Full backtest in data/backtest.json; methodological detail on the Validation page. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/backtest.json">repo: nfl-decision/data/backtest.json</a>]</span></dd>
+    <dt>Not known</dt><dd>Whether additional inputs (injuries, depth, pace, weather) would change this. That is a hypothesis, not a finding.</dd>
+    <dt>Why it blocks</dt><dd>It does not block; it sets the honest baseline. 0 of 1000 reward points are awarded.</dd>
+    <dt>Suggestion</dt><dd>S08 - stop refining the spread model and redirect effort to the forecast leaderboard, which is price-independent.</dd>
+  </dl></div></div><div class="qa" id="Q07">
+  <div class="q"><span class="id">Q07</span><span class="txt">What sample size do we need before a 55% hit rate is distinguishable from luck?</span>
+    <span class="pill p-warn">partial</span>
+    <span class="pill p-neu">blocks: Gold tier for any strategy</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>At 80% power and a two-sided 5% test, detecting 55% against the 52.4% break-even needs roughly 620 bets.</b></dd>
+    <dt>Known</dt><dd>Computed in 03_backtest.py; the holdout supplied 948 S1 bets but only across 8 seasons with 1 dominant season. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/backtest.json">repo: nfl-decision/data/backtest.json (G2/G5 diagnostics)</a>]</span></dd>
+    <dt>Not known</dt><dd>Whether the owner is willing to fund a multi-season forward paper-trading period. That is the only way to reach that n honestly.</dd>
+    <dt>Why it blocks</dt><dd>Rewards paid on fewer than 300 bets would be rewarding luck.</dd>
+    <dt>Suggestion</dt><dd>S09 - pay forecast-skill rewards now and hold betting rewards until a forward record exists.</dd>
+  </dl></div></div><div class="qa" id="Q08">
+  <div class="q"><span class="id">Q08</span><span class="txt">Are player-prop combos positively correlated enough to break independent pricing?</span>
+    <span class="pill p-warn">partial</span>
+    <span class="pill p-neu">blocks: prop strategies</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>Yes, strongly. P(QB pass-yards over) = 0.4645, P(WR1 rec-yards over) = 0.4072, joint = 0.2740 vs 0.1892 if independent - a lift of 1.45x, phi = 0.346 with a 95% CI of [0.284, 0.406].</b></dd>
+    <dt>Known</dt><dd>Measured on 803 team-games from 2021-2022 archived per-player box scores. Thresholds are PROXY lines (rolling means), not sportsbook prices. <span class="src">[<a href="https://github.com/fantasydatapros/LearnPythonWithFantasyFootball">repo: nfl-quant/data/prop_combo_legs.csv (third-party PFR-schema archive)</a>]</span></dd>
+    <dt>Not known</dt><dd>The price a sportsbook would charge for the same combo - books reprice correlated SGP legs, so the lift may already be in the price.</dd>
+    <dt>Why it blocks</dt><dd>G7 blocks it: without archived SGP prices the +45% lift is not demonstrably tradeable.</dd>
+    <dt>Suggestion</dt><dd>S10 - pursue archived SGP prices; this is the single most promising unpriced signal in the repo.</dd>
+  </dl></div></div><div class="qa" id="Q09">
+  <div class="q"><span class="id">Q09</span><span class="txt">Can parlay legs be multiplied together as if independent?</span>
+    <span class="pill p-good">known</span>
+    <span class="pill p-neu">blocks: nothing - answered</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>Yes for cross-game legs. phi between two same-week cover legs = -0.0057 with a bootstrap CI spanning 0, and the same-week cover-count chi-square/df ratio is close to 1.0 (no overdispersion). Same-game cover and over legs are also near-independent (phi = 0.0077).</b></dd>
+    <dt>Known</dt><dd>Computed over 7,087 games and 472 weeks. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/correlations.json">repo: nfl-decision/data/correlations.json (D1, D1b, D2)</a>]</span></dd>
+    <dt>Not known</dt><dd>Nothing for cross-game parlays. For same-game parlays, prop-level dependence is material (Q08) and must be priced.</dd>
+    <dt>Why it blocks</dt><dd>It does not block; it licenses the S4 cross-game parlay construction.</dd>
+    <dt>Suggestion</dt><dd>S11 - keep cross-game parlay multiplication and never multiply same-player prop legs without a repricing model.</dd>
+  </dl></div></div><div class="qa" id="Q10">
+  <div class="q"><span class="id">Q10</span><span class="txt">What is our definition of &#x27;skill&#x27; that cannot be faked by re-running the search?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: any claim of skill</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The repo pre-registers gates (data/gates.json), freezes model knobs on 1999-2012, and scores 2018-2025 exactly once. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/gates.json">repo: nfl-decision/data/gates.json</a>]</span></dd>
+    <dt>Not known</dt><dd>How many strategies may be tried before the family-wise error rate must be re-controlled, and who approves a new strategy as pre-registered.</dd>
+    <dt>Why it blocks</dt><dd>Each new strategy tried silently multiplies the false-positive rate. Without a written cap, the leaderboard can be gamed by search.</dd>
+    <dt>Suggestion</dt><dd>S12 - cap the registered family per season and require a written pre-registration before any new threshold is scored.</dd>
+  </dl></div></div><h2>Data rights</h2><div class="qa" id="Q11">
+  <div class="q"><span class="id">Q11</span><span class="txt">May third-party archives be redistributed on a public site?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: publication</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>All 2026 scores on the site reconcile 160/160 cells to nfl.com; historical lines and player data come from third-party repositories whose terms must be checked before production use. <span class="src">[<a href="https://github.com/nflverse/nfldata">nflverse/nfldata terms</a> · <a href="https://github.com/fantasydatapros/LearnPythonWithFantasyFootball">fantasydatapros archive</a>]</span></dd>
+    <dt>Not known</dt><dd>The rights position on redistribution and on any commercial use.</dd>
+    <dt>Why it blocks</dt><dd>Publishing derived tables may be restricted even if the underlying facts are not copyrightable.</dd>
+    <dt>Suggestion</dt><dd>S13 - publish only derived aggregates and link to the archive; store raw data out of Git if a licence requires it.</dd>
+  </dl></div></div><div class="qa" id="Q12">
+  <div class="q"><span class="id">Q12</span><span class="txt">Do the 2026 numbers on this site match an official source?</span>
+    <span class="pill p-good">known</span>
+    <span class="pill p-neu">blocks: nothing - answered</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>Yes. Every one of the 32 teams&#x27; W-L-T, points-for and points-against (160 cells) recomputes exactly from the 136-game log built here, and the game log was reconciled against nfl.com scores and standings.</b></dd>
+    <dt>Known</dt><dd>01_results.py reproduces this on demand; 5/5 checks pass. <span class="src">[<a href="https://www.nfl.com/standings/league/2026/REG">2026 league standings</a> · <a href="https://www.nfl.com/scores/2026/REG9">Week 9 scores</a>]</span></dd>
+    <dt>Not known</dt><dd>Nothing. Any later change to a score invalidates this and must be re-run.</dd>
+    <dt>Why it blocks</dt><dd>It does not block; it is the provenance floor for everything else.</dd>
+    <dt>Suggestion</dt><dd>S01 - re-run 01_results.py every week before publishing.</dd>
+  </dl></div></div><div class="qa" id="Q13">
+  <div class="q"><span class="id">Q13</span><span class="txt">Can we obtain an official 2026 player-level box-score feed?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: prop expansion</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The repository&#x27;s player data is 2021-2022 only. nfl.com/stats is client-rendered and the Stats download policy must be respected. <span class="src">[<a href="https://www.nfl.com/stats/">NFL player stats</a>]</span></dd>
+    <dt>Not known</dt><dd>Whether an authorised feed or a licence can be obtained.</dd>
+    <dt>Why it blocks</dt><dd>No 2026 props means the prop combos in Q08 cannot be extended to the current season.</dd>
+    <dt>Suggestion</dt><dd>S17 - treat an official player feed as the highest-value data purchase.</dd>
+  </dl></div></div><h2>Product</h2><div class="qa" id="Q14">
+  <div class="q"><span class="id">Q14</span><span class="txt">What exactly does a &#x27;reward&#x27; pay, and who funds it?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: reward design</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>Only non-monetary research points exist today; 1000 betting points and 600 forecast points are proposed, with 0 awarded. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/gates.json">repo: nfl-decision/data/gates.json (reward_policy)</a>]</span></dd>
+    <dt>Not known</dt><dd>Budget, funding source, and whether any reward can legally be tied to wagering performance.</dd>
+    <dt>Why it blocks</dt><dd>A reward tied to betting ROI in a jurisdiction where that is regulated is a legal question, not a design question.</dd>
+    <dt>Suggestion</dt><dd>S15 - decouple rewards from money; pay in reputation and compute credits until a legal opinion exists.</dd>
+  </dl></div></div><div class="qa" id="Q15">
+  <div class="q"><span class="id">Q15</span><span class="txt">Which single dashboard is canonical?</span>
+    <span class="pill p-bad">unknown</span>
+    <span class="pill p-neu">blocks: everything downstream</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The repository currently holds five NFL namespaces built by different sessions: nfl/, nfl-research/, nfl-lab/, nfl-quant/ and this nfl-decision/. <span class="src">[<a href="https://github.com/sassnarep3-star/Own4">repo root navigation</a>]</span></dd>
+    <dt>Not known</dt><dd>Which one the owner will treat as the source of truth.</dd>
+    <dt>Why it blocks</dt><dd>Duplicated, partially conflicting dashboards make it impossible to know which number is authoritative.</dd>
+    <dt>Suggestion</dt><dd>S04 - adopt nfl-decision/ as the decision layer, keep the others as cited archives, and mark superseded pages.</dd>
+  </dl></div></div><div class="qa" id="Q16">
+  <div class="q"><span class="id">Q16</span><span class="txt">Is the site actually live and does it build without broken links?</span>
+    <span class="pill p-warn">partial</span>
+    <span class="pill p-neu">blocks: nothing - answered</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><b>Pages is served from the legacy branch build of main. This session verifies every generated page, every internal link and every table row&#x27;s source before merge.</b></dd>
+    <dt>Known</dt><dd>GitHub Pages API reported build_type &#x27;legacy&#x27;, source branch main, path /. <span class="src">[<a href="https://api.github.com/repos/sassnarep3-star/Own4/pages">GitHub Pages API</a>]</span></dd>
+    <dt>Not known</dt><dd>Whether the legacy builder will succeed on the next push; it has failed for environmental reasons before.</dd>
+    <dt>Why it blocks</dt><dd>It does not block design work, but it must be checked again after merge.</dd>
+    <dt>Suggestion</dt><dd>S18 - verify the deployed URL after merge and record the run id.</dd>
+  </dl></div></div>
+  </main>
+</div>
+<footer class="foot">
+  <p><b>Analytical research only — not wagering advice.</b> No money, prizes or wagering are offered.
+  Every numeric cell is either transcribed from an official NFL page or computed in this repository;
+  cells that could not be confirmed are left blank and listed on the
+  <a href="flagged.html">Flagged for review</a> page.</p>
+  <p>If gambling is a problem for you or someone you know, the National Council on Problem Gambling
+  operates a 24/7 confidential helpline: <a href="https://www.ncpgambling.org/help-treatment">1-800-MY-RESET (1-800-697-3738)</a>.</p>
+  <p>Generated 2026-11-12 by session <code>arena/e2b19bf6-own4</code>. Data: <a href="data.html">provenance</a>.</p>
+</footer>
+</body></html>
