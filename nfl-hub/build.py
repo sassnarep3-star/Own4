@@ -907,7 +907,7 @@ suggestion S-16 would transcribe all 16 weekly books into a ledger.</p>
 </section>
 """
     page("pages/injuries.html", "Injuries & availability",
-         "What the official Week 10 report confirms, the three verified quarterback changes, and the depth-chart gap that keeps the backup-deficiency index blank.",
+         "What the official Week 10 report confirms, the verified quarterback changes, and the depth-chart gap that official game books partly close.",
          body, active="pages/injuries.html")
 
 
