@@ -1371,3 +1371,44 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 - `rental-own4/` is live at a direct URL but is not linked from the root dashboard; multiple parallel rental directories are now present. A single canonical output/navigation decision is still needed.
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
+
+---
+
+## Session `arena/e2b19bf6-own4` — NFL decision-intelligence layer, question register, suggestions board & canonical NFL site (2026-11-12)
+
+**Session ID:** `arena/e2b19bf6-own4` · **Branch:** `arena/e2b19bf6-own4` (platform-pinned; `session-<id>/<task>` naming not creatable in this harness — same logged deviation as every prior session) · **Base:** `a10610bed12589273e11c73b35d1473968ab915f` (main)
+
+**Claim status:** in progress. At claim time the last commits on `main` are from 2026-11-06 (six days old) and every board entry above is `done` or `needs review`; no unexpired claim exists, so this session also serves as **final integration session** for its own scope.
+
+**User brief (this session):** NFL. Review the repo line by line against official sources; build a question/information register that lists what must be answered before any decision; add a dedicated Suggestions section so a reviewer can compare and choose a path before implementing; origin own NFL lines; research signal strategies; run them as a leaderboard competition with validation gates, correlation values, luck removal and skill screens; cover singles, parlays and player-prop combos; track injuries and offensive/defensive depth-chart deficiencies (2nd/3rd/4th string replacements); produce an executive summary; publish a clean GitHub Pages dashboard with subpages and a Flagged for Review page; PR + merge + deploy confirmation.
+
+**Non-overlapping file scope (exclusive to this session):**
+
+| Scope | Paths |
+|---|---|
+| New NFL decision layer (site + data + scripts) | `nfl-decision/**` |
+| Injury / depth-chart tracker data | `nfl-decision/data/injuries_*.json`, `nfl-decision/data/depth_deficiency_*.json` |
+| Question register | `nfl-decision/data/questions.json`, `nfl-decision/pages/questions.html` |
+| Suggestions board | `nfl-decision/data/suggestions.json`, `nfl-decision/pages/suggestions.html` |
+| Own-line origination for the current week | `nfl-decision/data/own_lines_*.json` |
+| Append-only | `COORDINATION.md` (this section) |
+| Integration-only (shared) | root `index.html` nav entry, `README.md` additive section — only after it is confirmed no peer session is editing them |
+
+**Peer namespaces respected, linked but never edited:** `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`, `docs/`, `lab/`, `lines-lab/`, `pipeline/`, `verified/`, `verification*/`, `nba-evidence/`, `own4-dashboard/`, `rental*/`, `rent-*/`.
+
+### Task board (this session)
+
+| # | Task | Status | Files |
+|---|------|--------|-------|
+| D1 | Line-by-line repo review of every NFL namespace, with official-source spot checks | in progress | `nfl-decision/pages/repo-review.html`, `nfl-decision/data/repo_review.json` |
+| D2 | Question / information / answer register (what we know, what we don't, what blocks a decision) | unclaimed | `nfl-decision/data/questions.json` |
+| D3 | Suggestions board (each suggestion = context, options, evidence, cost, risk, recommendation) | unclaimed | `nfl-decision/data/suggestions.json` |
+| D4 | Injury + depth-chart deficiency tracker from nfl.com official injury report | unclaimed | `nfl-decision/data/injuries_*.json` |
+| D5 | Own-line origination for current week + validation gates + leaderboard + luck removal | unclaimed | `nfl-decision/data/*` |
+| D6 | Canonical `nfl-decision/` dashboard site + Flagged for Review | unclaimed | `nfl-decision/**` |
+| D7 | Executive summary | unclaimed | `nfl-decision/EXECUTIVE_SUMMARY.md` |
+| D8 | Final integration: verify, build, PR → main, merge, Pages deploy confirmation | unclaimed | root `index.html` (nav), `COORDINATION.md` |
+
+### Log
+
+- 2026-11-12 — Claimed D1–D8 and pushed this claim before any implementation, per the board protocol. No peer files touched.
