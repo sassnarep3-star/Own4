@@ -979,11 +979,13 @@ def build_repo_review():
     body.append("<h3>Namespaces</h3>")
     body.append(table(["Namespace", "Published pages", "Table rows", "Files", "Source"], rows,
                       numeric_from=1))
-    body.append("""<div class="crit"><strong>Finding: the repository contains six separate NFL namespaces.</strong>
-<code>nfl/</code>, <code>nfl-lab/</code>, <code>nfl-quant/</code>, <code>nfl-research/</code>,
-<code>nfl-decisions/</code> and this one, <code>nfl-lines/</code>, were each produced by a different agent session.
-A reader cannot tell which NFL output is authoritative. This session does not edit any of the other five; the
-consolidation is logged as suggestion SG-11 for you to decide.</div>""")
+    nfl_ns = sorted(n["namespace"] for n in a["namespaces"] if n["namespace"].startswith("nfl"))
+    body.append('<div class="crit"><strong>Finding: the repository contains %d separate NFL namespaces.</strong> '
+                '%s were each produced by a different agent session. A reader cannot tell which NFL output is '
+                'authoritative. This session edits only <code>nfl-lines/</code> and does not touch any of the '
+                'other %d; consolidation is logged as irregularity IR-09 / suggestion SG-11 for you to decide.'
+                '</div>' % (len(nfl_ns),
+                            ", ".join("<code>%s/</code>" % n for n in nfl_ns), len(nfl_ns) - 1))
     body.append("<h3>Broken local links</h3>")
     if a["broken_links"]:
         rows = ["<tr><td>%s</td><td>%s</td></tr>" % (esc(b["page"]), esc(b["href"])) for b in a["broken_links"]]
@@ -1002,10 +1004,11 @@ consolidation is logged as suggestion SG-11 for you to decide.</div>""")
 <ul class="tight">
 <li>It does not check that any value on any page is <em>correct</em>. Counting rows and resolving hrefs says
 nothing about correctness.</li>
-<li>It does not review the other namespaces' content. Reading 213 published pages line by line against their
+<li>It does not review the other namespaces' content. Reading %d published pages line by line against their
 sources is a multi-session job, and the honest scope of this session is stated rather than implied.</li>
-<li>It does not certify the 3,866 links it resolved as pointing at the intended target.</li>
-</ul>""")
+<li>It does not certify the %s links it resolved as pointing at the intended target.</li>
+</ul>""" % (a["totals"]["published_html_pages"],
+            "<span class='n'>{:,}</span>".format(a["totals"]["local_hrefs_checked"])))
     return page("Repo review", "pages/repo-review.html", "".join(body),
                 "A mechanical scan of the repository: files, pages, namespaces and link integrity.")
 

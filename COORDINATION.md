@@ -1840,9 +1840,12 @@ site is labelled third-party and linked to that archive. Nothing official is cla
   every generated page, resolves every local href, and fails if any `<tbody>` row has no
   link at all. Current result: **20 pages, 1,140 local links checked, 0 broken, 969 data
   rows, 969 rows carrying a link, 43 blank (unverified) cells published as blanks.**
-- **Repository audit:** 382 files, 213 published pages, 22 namespaces, 3,866 local hrefs
+- **Repository audit:** 528 files, 313 published pages, 28 namespaces, 7,075 local hrefs
   checked, **0 broken local links**. Counts rows and resolves hrefs only — it does not
-  certify that any value on any page is correct, and the page says so.
+  certify that any value on any page is correct, and the page says so. Note the repository
+  grew during this session: three more NFL namespaces (`nfl-edge/`, `nfl-hub/`, `nfl-intel/`,
+  plus `nfl-audit/` and `nfl-decision/`) were merged by peer sessions, so the audit was re-run
+  after the final rebase and the published figures are the post-rebase ones.
 - **Determinism:** re-running `run_all.py` reproduces every derived JSON byte-for-byte
   apart from the `generated_utc` stamp. CI normalises that field out before hashing.
 
@@ -1858,8 +1861,9 @@ IR-07 Only 45 of 4,055 historical games were re-read from official pages.
 IR-08 The rest-differential term is large (0.71 pts/day) and drives the single biggest
 model–market disagreement (PIT @ CIN, −3.56 vs +3.5, a 7.06-point gap). Flagged as the
 most likely source of a spurious edge.
-IR-09 Six overlapping NFL namespaces exist (`nfl/`, `nfl-lab/`, `nfl-quant/`,
-`nfl-research/`, `nfl-decisions/`, `nfl-lines/`) — logged as suggestion SG-11, not acted on.
+IR-09 Eleven overlapping NFL namespaces exist (`nfl/`, `nfl-audit/`, `nfl-decision/`,
+`nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-intel/`, `nfl-lab/`, `nfl-lines/`, `nfl-quant/`,
+`nfl-research/`) — logged as suggestion SG-11, not acted on.
 IR-10 Week 10 market lines are not closing lines; the week is in progress.
 IR-11 The model has no quarterback or depth-chart feature, so it cannot see the confirmed
 Miami and Arizona quarterback changes.
@@ -1885,6 +1889,24 @@ schedule pages instead of fabricating game URLs.
 
 #### Requests logged for other sessions (no file edited)
 
-- **SG-11 / IR-09** asks for a decision on consolidating the six overlapping NFL
+- **SG-11 / IR-09** asks for a decision on consolidating the eleven overlapping NFL
   namespaces. This session will not move or delete any of them.
 - **IR-05** asks for a licence review of the nflverse archive before any non-research use.
+
+### Merge-conflict log · 2026-11-12 (rebase onto `origin/main`)
+
+`git pull --rebase origin main` before the final push hit two conflicts. Both were
+resolved as **supersets** — no peer content was discarded.
+
+1. `COORDINATION.md` (my claim commit vs. peer records for PRs #60–#71). Resolved by
+   removing the conflict markers and keeping **both** records in full, append-only,
+   with the peer content first. No line from either side was dropped.
+2. `index.html` (my additive nav block vs. peers' nav blocks). Peers had added entries
+   for `nfl-research/`, `nfl-lab/`, `nfl-quant/` and others while I worked. Resolved by
+   taking the peer nav line **verbatim** and appending only my seven marked entries
+   before `</nav>`. No existing link was altered or removed.
+
+Rebase completed cleanly after both resolutions. Because the repository grew during the
+session, `engine/repo_audit.py` was re-run after the rebase and the site was rebuilt, so
+every published figure reflects the post-rebase tree (528 files / 313 pages / 7,075
+hrefs / 0 broken / 11 NFL namespaces).

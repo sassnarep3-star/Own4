@@ -146,7 +146,9 @@
   ],
   "suggestions": [
     {
-      "id": "SG-01", "priority": "P1", "area": "Model",
+      "id": "SG-01",
+      "priority": "P1",
+      "area": "Model",
       "suggestion": "Feed the official injury report into the forecast, starting with one feature: whether the club's most-used QB earlier in the season is the named starter.",
       "why": "The single largest own-line disagreement in Week 10 (MIA @ IND, 8.18 points on the total) sits on a game where the official page states Miami's QB is on injured reserve and a first-time starter is in line.",
       "evidence": "https://www.nfl.com/injuries/ , https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
@@ -154,7 +156,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-02", "priority": "P1", "area": "Data acquisition",
+      "id": "SG-02",
+      "priority": "P1",
+      "area": "Data acquisition",
       "suggestion": "Acquire an official depth-chart source so 2nd/3rd/4th-string replacements can be identified.",
       "why": "The requirement 'know any deficiencies such as 2nd, 3rd or 4th string backups having to replace starters' cannot be met from the injury report alone - it has no depth rank.",
       "evidence": "https://www.nfl.com/injuries/",
@@ -162,7 +166,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-03", "priority": "P1", "area": "Evaluation",
+      "id": "SG-03",
+      "priority": "P1",
+      "area": "Evaluation",
       "suggestion": "Acquire timestamped opening and closing lines so every edge is measured against a price that actually existed when the bet could be placed.",
       "why": "Right now the model can only be measured against a closing line it has no hope of beating, which makes the whole evaluation pessimistic but also unverifiable in the optimistic direction.",
       "evidence": "No official source exists; this is a commercial purchase.",
@@ -170,7 +176,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-04", "priority": "P2", "area": "Model",
+      "id": "SG-04",
+      "priority": "P2",
+      "area": "Model",
       "suggestion": "Replace the linear rest term with a categorical short-week / normal / bye feature and re-register the parameters before the next run.",
       "why": "A linear 0.71 points per day produces a 4.9-point bye effect, which is the main driver of the largest spread disagreement in Week 10.",
       "evidence": "data/derived/own_lines_week10.json (PIT @ CIN)",
@@ -178,7 +186,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-05", "priority": "P2", "area": "Verification",
+      "id": "SG-05",
+      "priority": "P2",
+      "area": "Verification",
       "suggestion": "Extend the official score spot-check from 3 weeks of 2026 to one week per season across the whole evaluation window.",
       "why": "The archive is trusted on 45 games. The other 4,010 are unverified against a primary source.",
       "evidence": "https://www.nfl.com/scores/2026/REG9 pattern applies to every season and week",
@@ -186,7 +196,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-06", "priority": "P2", "area": "Site",
+      "id": "SG-06",
+      "priority": "P2",
+      "area": "Site",
       "suggestion": "Publish the decision register as the entry point to the site, above the model output.",
       "why": "Right now the most valuable content on the site is the list of things we do not know. Burying it under a table of lines inverts the value.",
       "evidence": "This page",
@@ -194,7 +206,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-07", "priority": "P2", "area": "Competition",
+      "id": "SG-07",
+      "priority": "P2",
+      "area": "Competition",
       "suggestion": "Require every submitted strategy to declare its parameters in a file committed BEFORE its first run, and reject any strategy whose parameters were changed after results were seen.",
       "why": "This is the only mechanism that separates a strategy from a curve fit. It is already applied to the house model (data/model_params.json carries a registration timestamp).",
       "evidence": "data/model_params.json",
@@ -202,7 +216,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-08", "priority": "P3", "area": "Model",
+      "id": "SG-08",
+      "priority": "P3",
+      "area": "Model",
       "suggestion": "Add a player-prop module, but publish no numbers until a verifiable prop price history exists.",
       "why": "The engine for prop combinations is specified here, but the NFL publishes no prop lines and no verifiable prop archive was available to this session, so every prop cell is blank by design.",
       "evidence": "No official source; flagged IR-08",
@@ -210,7 +226,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-09", "priority": "P3", "area": "Operations",
+      "id": "SG-09",
+      "priority": "P3",
+      "area": "Operations",
       "suggestion": "Automate the weekly pipeline: fetch the official schedule, injury report and standings, regenerate the lines, re-run the gates, and publish - without manual input.",
       "why": "Today the official pages are read and transcribed by hand. That does not scale past one week and introduces transcription risk.",
       "evidence": "https://www.nfl.com/injuries/ , https://www.nfl.com/standings/league/2026/REG , https://www.nfl.com/schedules/2026/REG10",
@@ -218,7 +236,9 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-10", "priority": "P3", "area": "Verification",
+      "id": "SG-10",
+      "priority": "P3",
+      "area": "Verification",
       "suggestion": "Verify or drop the archive's weather fields.",
       "why": "The best-performing strategy on the board is built entirely on an unverified wind field.",
       "evidence": "data/raw/nfldata_games.csv",
@@ -226,15 +246,19 @@
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-11", "priority": "P3", "area": "Repo hygiene",
-      "suggestion": "Consolidate the six overlapping NFL namespaces in this repository behind one canonical site.",
+      "id": "SG-11",
+      "priority": "P3",
+      "area": "Repo hygiene",
+      "suggestion": "Consolidate the eleven overlapping NFL namespaces in this repository behind one canonical site, or publish an explicit index stating which one is authoritative.",
       "why": "The repository contains nfl/, nfl-lab/, nfl-quant/, nfl-research/, nfl-decisions/ and this one. A reader cannot tell which is authoritative.",
       "evidence": "Repo review page",
       "success_test": "One NFL namespace is declared canonical and the others are either removed or explicitly archived in the README.",
       "status": "proposed - not approved"
     },
     {
-      "id": "SG-12", "priority": "P3", "area": "Governance",
+      "id": "SG-12",
+      "priority": "P3",
+      "area": "Governance",
       "suggestion": "Define and fund the leaderboard reward before any strategy becomes eligible.",
       "why": "Choosing a prize after seeing who is winning invites gaming the metric.",
       "evidence": "data/derived/leaderboard.json (currently 0 eligible)",
