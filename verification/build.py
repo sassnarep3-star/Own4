@@ -138,6 +138,7 @@ NAV = [
         ("verification-2026-11-05/flagged.html", "Independent audit · flags", "legacy"),
         ("status/index.html", "Status review", "legacy"),
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
+        ("nfl-decisions/index.html", "NFL Decision Desk · questions &amp; suggestions", "legacy"),
     ]),
     # Restored 2026-11-12: this block previously existed only as a hand edit to index.html,
     # so a regen silently dropped another session's published link. Kept in the generator now.
