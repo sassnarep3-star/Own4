@@ -1761,3 +1761,15 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 - GitHub Actions runs for merge commit on `main` all completed success: `pages build and deployment` (43262391727) ✓, `Validate NBA research workspace` (43262393483) ✓, `Verify bounded NBA audit and published navigation` (43262393574) ✓.
 - Live site fetched successfully 2026-11-12: https://sassnarep3-star.github.io/Own4/nfl-intel/ (landing + all subpages reachable via relative links). Flagged page: https://sassnarep3-star.github.io/Own4/nfl-intel/pages/flagged.html
 - Flagged for Review (16 items, non-blocking) remain published for owner decision; 0-reward leaderboard is intentional. Decision Q&A lists 9 blocking unknowns requiring owner input (budget/licensed data, rewards governance, canonical-site decision, reviewer cadence). No other session's claim was modified; peer files were preserved through the merge conflict resolution (both sides retained).
+## NFL Line-Origination Lab · arena/b4aafa88-own4 · 2026-11-12
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| NFL line origination: verified dataset, forecast model, own lines, strategy gates, correlations, luck/skill split, leaderboard, injury/deficiency tracking, executive summary, site, repo review | in progress | arena/b4aafa88-own4 | `nfl-lines/**` (new, isolated), append-only `COORDINATION.md`, additive root `index.html` nav link only |
+
+**Non-overlapping scope statement.** Peer session `arena/009a9652-own4` owns `nfl-decisions/**`, `verification/build.py`, `.github/workflows/nfl-decisions.yml` and its own additive root-link edit. This session will NOT edit any file in that scope. This session's contribution is a *different artifact type*: a quantitative line-origination lab with a measured backtest, not a decision register. Existing namespaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nfl-decisions/`, `docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `status/`, `verified/`, `verification/`, `rental*/`) are read-only and will be linked, never edited. Only additive navigation entries are made to root `index.html`; existing lines are preserved on rebase.
+
+### Claim log
+- 2026-11-12: Pulled/rebased `origin/main` before claiming; main advanced to `243686a` (peer PR #60, `nfl-decisions/**`). Rebase was clean.
+- 2026-11-12: Data sources identified. **Official**: nfl.com standings/scores/schedule/stats/injuries, operations.nfl.com rules. **Third-party archive (explicitly labelled, never passed off as official)**: `nflverse/nfldata` `data/games.csv` at commit `6ea0be6dd9bfc95c818c05568753bc70f1986ea2` (fetched via GitHub blob API). The NFL publishes no official betting lines; every market line on this site is labelled third-party and every number that cannot be confirmed from an official NFL page is left blank and flagged.
+- Full log, sources, verification and irregularities recorded at the end of this section on completion.
