@@ -1,0 +1,20 @@
+{
+  "meta": {"title":"Strategy leaderboard & reward policy v1.0","source_url":"https://www.nfl.com/scores"},
+  "policy": [
+    "Eligibility: strategy must PASS G1–G10. Any FAIL/BLOCKED ⇒ reward = 0.",
+    "Scoring (if eligible): +1 per unit of CLV vs closing line; −1 per unit of loss; drawdown penalty;luck-adjusted z vs permutation null must exceed +2.0.",
+    "Reward tiers (virtual, for review/selection only — NOT cash): Gold (top z with all gates passed), Silver, Bronze. Real-world rewards require a funded budget and compliance review — see Questions Q-07.",
+    "Anti-luck rules: minimum n=300; BH-FDR; walk-forward only; holdout locked; strategy count counted in multiple-testing correction.",
+    "Week 10 2026 outcome: 0 of 8 strategies eligible. All rewards 0. This is the gates working as designed, not a bug."
+  ],
+  "rows": [
+    {"strategy":"S1","gates_passed":"4/10","eligible":false,"reward":0,"rank":null,"note":"Sample too small; no market comparison"},
+    {"strategy":"S2","gates_passed":"4/10","eligible":false,"reward":0,"rank":null,"note":"Correlated with S1; joint testing required first"},
+    {"strategy":"S3","gates_passed":"4/10","eligible":false,"reward":0,"rank":null,"note":"Sample too small"},
+    {"strategy":"S4","gates_passed":"2/10","eligible":false,"reward":0,"rank":null,"note":"Backup mapping unverified; manual step rejected"},
+    {"strategy":"S5","gates_passed":"3/10","eligible":false,"reward":0,"rank":null,"note":"Correlation control not measurable yet"},
+    {"strategy":"S6","gates_passed":"0/10","eligible":false,"reward":0,"rank":null,"note":"No official player game logs — r BLANK"},
+    {"strategy":"S7","gates_passed":"4/10","eligible":false,"reward":0,"rank":null,"note":"Not applicable this slate; sample too small"},
+    {"strategy":"S8","gates_passed":"0/10","eligible":false,"reward":0,"rank":null,"note":"No official consensus source"}
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "title": "Descriptive correlations (n=32, 2026 season to date)",
+    "note": "Descriptive, in-sample, season-to-date. NOT predictive validation. Multiple testing: Benjamini\u2013Hochberg across 6 tests. p from Student-t (df=30).",
+    "source_url": "https://www.nfl.com/standings/"
+  },
+  "correlations": [
+    {
+      "x": "net_ppg",
+      "y": "pct",
+      "label": "Point differential per game vs win percentage",
+      "n": 32,
+      "r": 0.8758,
+      "t": 9.9378,
+      "df": 30,
+      "p": 0.0,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 0.0,
+      "fdr_survives_0.05": true
+    },
+    {
+      "x": "off_ppg",
+      "y": "pct",
+      "label": "Points for per game vs win percentage",
+      "n": 32,
+      "r": 0.6938,
+      "t": 5.276,
+      "df": 30,
+      "p": 1.1e-05,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 1.6e-05,
+      "fdr_survives_0.05": true
+    },
+    {
+      "x": "def_ppg",
+      "y": "pct",
+      "label": "Points against per game vs win percentage",
+      "n": 32,
+      "r": -0.6665,
+      "t": 4.8972,
+      "df": 30,
+      "p": 3.1e-05,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 3.7e-05,
+      "fdr_survives_0.05": true
+    },
+    {
+      "x": "off_ppg",
+      "y": "def_ppg",
+      "label": "Points for per game vs points against per game",
+      "n": 32,
+      "r": -0.2063,
+      "t": 1.1547,
+      "df": 30,
+      "p": 0.257336,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 0.257336,
+      "fdr_survives_0.05": false
+    },
+    {
+      "x": "off_ppg",
+      "y": "net_ppg",
+      "label": "Points for per game vs point differential per game",
+      "n": 32,
+      "r": 0.8019,
+      "t": 7.3504,
+      "df": 30,
+      "p": 0.0,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 0.0,
+      "fdr_survives_0.05": true
+    },
+    {
+      "x": "def_ppg",
+      "y": "net_ppg",
+      "label": "Points against per game vs point differential per game",
+      "n": 32,
+      "r": -0.7501,
+      "t": 6.2119,
+      "df": 30,
+      "p": 1e-06,
+      "source_url": "https://www.nfl.com/standings/",
+      "bh_q": 2e-06,
+      "fdr_survives_0.05": true
+    }
+  ]
+}

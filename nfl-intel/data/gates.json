@@ -1,0 +1,15 @@
+{
+  "meta": {"title":"Validation gates G1–G10 (mandatory for reward eligibility)","source_url":"https://www.nfl.com/standings/"},
+  "gates": [
+    {"id":"G1","name":"Provenance","requirement":"Every input row carries an official, verifiable source URL; transcribed values re-checked against source.","status":"PASS (standings/schedule/injury rows); PARTIAL (backup identities)"},
+    {"id":"G2","name":"No leakage / pre-registration","requirement":"Model, parameters and strategy registered (git-committed) before the events settle; chronological walk-forward only.","status":"PASS (this file + model committed 2026-11-12 pre-slate)"},
+    {"id":"G3","name":"Sample size ≥ 300 graded games","requirement":"Per strategy AND per market.","status":"FAIL (n far below 300 for every strategy)"},
+    {"id":"G4","name":"Beat baselines","requirement":"Beat (a) home-always, (b) favorite-always, (c) naive flat model on Brier/MAE with paired test.","status":"NOT REACHED"},
+    {"id":"G5","name":"Calibration ECE ≤ 0.10","requirement":"10-bin expected calibration error on walk-forward predictions.","status":"NOT REACHED"},
+    {"id":"G6","name":"Registry completeness","requirement":"Strategy in registry with hash-tagged params before first evaluation.","status":"PASS"},
+    {"id":"G7","name":"Market comparison","requirement":"Edge vs a real, time-stamped operator line from a verifiable source; lines captured pre-game.","status":"BLOCKED (no official/verifiable line archive in workspace)"},
+    {"id":"G8","name":"Costs & settlement","requirement":"ROI measured net of vig and push rules, settled on official final scores/stats.","status":"BLOCKED (depends on G7)"},
+    {"id":"G9","name":"Correlation control","requirement":"Parlay/prop legs priced from measured joint distribution; report r, 95% CI, p; ban independence assumption when |r|>0.10 or p<0.05.","status":"FAIL for prop combos (no data — r BLANK); design PASS otherwise"},
+    {"id":"G10","name":"Multiple testing / luck removal","requirement":"Benjamini–Hochberg FDR across all reported tests; permutation test on headline metric; luck quantified vs null.","status":"PASS (design; 6 correlations reported with q-values)"}
+  ]
+}
