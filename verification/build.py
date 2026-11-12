@@ -138,6 +138,7 @@ NAV = [
         ("verification-2026-11-05/flagged.html", "Independent audit · flags", "legacy"),
         ("status/index.html", "Status review", "legacy"),
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
+        ("nfl-decisions/index.html", "NFL Decision Desk · questions &amp; suggestions", "legacy"),
     ]),
 ]
 
