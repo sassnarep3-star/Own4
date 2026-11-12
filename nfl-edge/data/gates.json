@@ -1,0 +1,40 @@
+{
+  "dataset": "pre_registered_validation_gates",
+  "version": "1.0",
+  "frozen_utc": "2026-11-12",
+  "pre_registration_note": "These gates were written into the repository before the holdout backtest numbers were produced, and the backtest applies them unchanged. Changing a gate after seeing a result is the exact failure mode this file exists to prevent; any change must be a new version with a note saying what moved and why.",
+  "tier_policy": {
+    "Qualified": "all gates pass -> eligible for reward points",
+    "Bronze (no reward)": "5-9 gates pass -> listed on the leaderboard, zero points, no claim of edge",
+    "Rejected": "<5 gates pass -> listed as rejected, zero points"
+  },
+  "reward_policy": {
+    "total_points_in_pool": 1000,
+    "points_awarded_rule": "1000 points to a strategy only if every gate passes; otherwise 0. No partial credit, no discretionary bonuses.",
+    "cash_or_prize_value": 0,
+    "reason": "Non-monetary. A cash prize on an unvalidated model turns research into promotion."
+  },
+  "gates": [
+    {"id": "G1", "name": "Sample floor", "rule": "n >= 300 graded bets in the holdout",
+     "why": "Below ~300 bets, a 52% hit rate is statistically indistinguishable from 50% at conventional confidence."},
+    {"id": "G2", "name": "Beats a naive baseline", "rule": "own-line MAE < naive baseline MAE for both spread and total",
+     "why": "A model that cannot beat 'assume a 0-point margin / league-average total' has no information in it."},
+    {"id": "G3", "name": "Calibration", "rule": "empirical 90% interval coverage between 0.85 and 0.95, and |mean residual| < 0.5 points",
+     "why": "Probabilities are only usable if the stated uncertainty matches reality."},
+    {"id": "G4", "name": "Market-informed bar", "rule": "own-line spread MAE <= closing-line MAE",
+     "why": "The closing line is the strongest public forecast. A line originator that is less accurate than it is not adding information.",
+     "warning": "Passing G4 is necessary, not sufficient: the market is also where the price is set."},
+    {"id": "G5", "name": "Positive ROI with a lower confidence bound above zero", "rule": "holdout ROI > 0 and the week-clustered bootstrap 2.5th percentile > 0",
+     "why": "A positive point estimate is not evidence; the lower bound has to clear zero."},
+    {"id": "G6", "name": "Not luck (placebo test)", "rule": "matched-random placebo permutation p < 0.05",
+     "why": "Bet the same number of bets, in the same weeks, on random sides; if random does as well, the result was variance."},
+    {"id": "G7", "name": "Stability across seasons", "rule": "positive ROI in at least 60% of holdout seasons that had bets",
+     "why": "One hot season is a story, not a strategy."},
+    {"id": "G8", "name": "Prospective replication", "rule": "the same rule, frozen, earns a positive ROI on games played after the freeze date",
+     "why": "This is the only test that removes the researcher's degrees of freedom entirely."},
+    {"id": "G9", "name": "Prop and parlay priceability", "rule": "every leg is priced from an archived or official quote, and joint dependence is measured, not assumed",
+     "why": "Multiplying independent leg probabilities in the same game overstates the parlay price; without measured dependence and archived prices there is no bet to grade."},
+    {"id": "G10", "name": "Source and honesty gate", "rule": "every published row carries a source link; every unverifiable value is blank and flagged",
+     "why": "An accurate number with no provenance is unusable, and a filled-in guess is worse than a blank."}
+  ]
+}

@@ -1,0 +1,345 @@
+{
+ "dataset": "walk_forward_validation",
+ "generated_utc": "2026-11-12",
+ "splits": {
+  "dev": [
+   1999,
+   2012
+  ],
+  "validation": [
+   2013,
+   2016
+  ],
+  "holdout": [
+   2017,
+   2025
+  ]
+ },
+ "frozen_config": {
+  "edge_threshold_pts": 2.0,
+  "prior_games": 4.0,
+  "carryover": 0.35,
+  "ml_edge_threshold": 0.03,
+  "bootstrap_iters": 4000,
+  "permutation_iters": 2000
+ },
+ "market_data_source": "THIRD-PARTY nflverse closing-line archive inside nfl-quant/data/predictions.csv; no official NFL source publishes betting lines (flag F-01)",
+ "metrics": {
+  "n_holdout_games": 2383,
+  "holdout_seasons": [
+   2017,
+   2025
+  ],
+  "spread_mae": {
+   "own_model": 10.5023,
+   "market_closing_line": 9.8708,
+   "naive_zero_margin": 11.2308
+  },
+  "total_mae": {
+   "own_model": 10.8299,
+   "market_closing_line": 10.47,
+   "naive_holdout_mean": 11.0423
+  },
+  "calibration": {
+   "interval": "90% (1.645 sigma)",
+   "empirical_coverage": 0.8934,
+   "mean_residual_home_margin": 0.651
+  },
+  "winner_accuracy": 0.6017,
+  "home_baseline_accuracy": 0.5432
+ },
+ "strategies": [
+  {
+   "id": "S1_spread",
+   "label": "S1 \u00b7 spread divergence (own line vs closing line, >= 2.0 pts)",
+   "n_bets": 1540,
+   "roi": -0.0312,
+   "roi_ci95": [
+    -0.0784,
+    0.0154
+   ],
+   "permutation_p": 0.4098,
+   "gates": {
+    "G1": {
+     "pass": true,
+     "detail": "n=1540 (floor 300)"
+    },
+    "G2": {
+     "pass": true,
+     "detail": "own MAE 10.502 vs naive 11.231 (spread); 10.830 vs 11.042 (total)"
+    },
+    "G3": {
+     "pass": false,
+     "detail": "coverage 0.8934, bias 0.6510"
+    },
+    "G4": {
+     "pass": false,
+     "detail": "own 10.502 vs market 9.871"
+    },
+    "G5": {
+     "pass": false,
+     "detail": "ROI -0.0312, 95% CI [-0.0784, 0.0154]"
+    },
+    "G6": {
+     "pass": false,
+     "detail": "permutation p=0.4098"
+    },
+    "G7": {
+     "pass": false,
+     "detail": "positive in 3 of 9 seasons with bets"
+    },
+    "G8": {
+     "pass": false,
+     "detail": "no 2026 closing-line archive exists, so prospective out-of-sample replication cannot be measured yet"
+    },
+    "G9": {
+     "pass": false,
+     "detail": "no official player-level game data or prop prices in scope: prop-combo strategies cannot be graded"
+    },
+    "G10": {
+     "pass": true,
+     "detail": "every row traces to a cited source and every unverifiable value is blank and flagged"
+    }
+   },
+   "gates_passed": 3,
+   "gates_total": 10,
+   "tier": "Rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S2_total",
+   "label": "S2 \u00b7 total divergence (own total vs closing total, >= 2.0 pts)",
+   "n_bets": 1187,
+   "roi": -0.0532,
+   "roi_ci95": [
+    -0.1036,
+    0.0002
+   ],
+   "permutation_p": 0.3693,
+   "gates": {
+    "G1": {
+     "pass": true,
+     "detail": "n=1187 (floor 300)"
+    },
+    "G2": {
+     "pass": true,
+     "detail": "own MAE 10.502 vs naive 11.231 (spread); 10.830 vs 11.042 (total)"
+    },
+    "G3": {
+     "pass": false,
+     "detail": "coverage 0.8934, bias 0.6510"
+    },
+    "G4": {
+     "pass": false,
+     "detail": "own 10.502 vs market 9.871"
+    },
+    "G5": {
+     "pass": false,
+     "detail": "ROI -0.0532, 95% CI [-0.1036, 0.0002]"
+    },
+    "G6": {
+     "pass": false,
+     "detail": "permutation p=0.3693"
+    },
+    "G7": {
+     "pass": false,
+     "detail": "positive in 2 of 9 seasons with bets"
+    },
+    "G8": {
+     "pass": false,
+     "detail": "no 2026 closing-line archive exists, so prospective out-of-sample replication cannot be measured yet"
+    },
+    "G9": {
+     "pass": false,
+     "detail": "no official player-level game data or prop prices in scope: prop-combo strategies cannot be graded"
+    },
+    "G10": {
+     "pass": true,
+     "detail": "every row traces to a cited source and every unverifiable value is blank and flagged"
+    }
+   },
+   "gates_passed": 3,
+   "gates_total": 10,
+   "tier": "Rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S3_moneyline",
+   "label": "S3 \u00b7 fair-moneyline value (own p vs de-vigged market p, >= 3 pts)",
+   "n_bets": 2060,
+   "roi": -0.0845,
+   "roi_ci95": [
+    -0.1491,
+    -0.017
+   ],
+   "permutation_p": 0.6267,
+   "gates": {
+    "G1": {
+     "pass": true,
+     "detail": "n=2060 (floor 300)"
+    },
+    "G2": {
+     "pass": true,
+     "detail": "own MAE 10.502 vs naive 11.231 (spread); 10.830 vs 11.042 (total)"
+    },
+    "G3": {
+     "pass": false,
+     "detail": "coverage 0.8934, bias 0.6510"
+    },
+    "G4": {
+     "pass": false,
+     "detail": "own 10.502 vs market 9.871"
+    },
+    "G5": {
+     "pass": false,
+     "detail": "ROI -0.0845, 95% CI [-0.1491, -0.017]"
+    },
+    "G6": {
+     "pass": false,
+     "detail": "permutation p=0.6267"
+    },
+    "G7": {
+     "pass": false,
+     "detail": "positive in 1 of 9 seasons with bets"
+    },
+    "G8": {
+     "pass": false,
+     "detail": "no 2026 closing-line archive exists, so prospective out-of-sample replication cannot be measured yet"
+    },
+    "G9": {
+     "pass": false,
+     "detail": "no official player-level game data or prop prices in scope: prop-combo strategies cannot be graded"
+    },
+    "G10": {
+     "pass": true,
+     "detail": "every row traces to a cited source and every unverifiable value is blank and flagged"
+    }
+   },
+   "gates_passed": 3,
+   "gates_total": 10,
+   "tier": "Rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S4_parlay",
+   "label": "S4 \u00b7 cross-game 2-leg parlay built from S1/S2 legs",
+   "n_bets": 155,
+   "roi": -0.1574,
+   "roi_ci95": null,
+   "permutation_p": null,
+   "gates": {
+    "G1": {
+     "pass": false,
+     "detail": "n=155 (floor 300)"
+    },
+    "G2": {
+     "pass": true,
+     "detail": "own MAE 10.502 vs naive 11.231 (spread); 10.830 vs 11.042 (total)"
+    },
+    "G3": {
+     "pass": false,
+     "detail": "coverage 0.8934, bias 0.6510"
+    },
+    "G4": {
+     "pass": false,
+     "detail": "own 10.502 vs market 9.871"
+    },
+    "G5": {
+     "pass": false,
+     "detail": "not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release"
+    },
+    "G6": {
+     "pass": false,
+     "detail": "not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release"
+    },
+    "G7": {
+     "pass": false,
+     "detail": "not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release"
+    },
+    "G8": {
+     "pass": false,
+     "detail": "no 2026 closing-line archive exists, so prospective out-of-sample replication cannot be measured yet"
+    },
+    "G9": {
+     "pass": false,
+     "detail": "no official player-level game data or prop prices in scope: prop-combo strategies cannot be graded"
+    },
+    "G10": {
+     "pass": true,
+     "detail": "every row traces to a cited source and every unverifiable value is blank and flagged"
+    }
+   },
+   "gates_passed": 2,
+   "gates_total": 10,
+   "tier": "Rejected",
+   "reward_points": 0
+  }
+ ],
+ "signals_considered": [
+  {
+   "id": "SG-1",
+   "signal": "own line vs closing line divergence (spread)",
+   "evidence_in_repo": "measured, holdout",
+   "verdict": "no edge after costs (see S1)"
+  },
+  {
+   "id": "SG-2",
+   "signal": "own total vs closing total divergence",
+   "evidence_in_repo": "measured, holdout",
+   "verdict": "no edge after costs (see S2)"
+  },
+  {
+   "id": "SG-3",
+   "signal": "fair moneyline vs de-vigged market moneyline",
+   "evidence_in_repo": "measured, holdout",
+   "verdict": "no edge (see S3)"
+  },
+  {
+   "id": "SG-4",
+   "signal": "rest / short-week asymmetry (Thursday games)",
+   "evidence_in_repo": "not measured",
+   "verdict": "needs schedule-rest join; not attempted - flagged"
+  },
+  {
+   "id": "SG-5",
+   "signal": "starter-out impact priced via injury report",
+   "evidence_in_repo": "not measured",
+   "verdict": "needs a depth-chart/participation source that does not exist on nfl.com (flag F-03)"
+  },
+  {
+   "id": "SG-6",
+   "signal": "backup-quarterback drop-off",
+   "evidence_in_repo": "qualitative only",
+   "verdict": "needs player-level official data (F-02)"
+  },
+  {
+   "id": "SG-7",
+   "signal": "weather",
+   "evidence_in_repo": "not collected",
+   "verdict": "no official machine-readable source in scope - flagged"
+  },
+  {
+   "id": "SG-8",
+   "signal": "key-number effects (3, 7, 10)",
+   "evidence_in_repo": "not measured",
+   "verdict": "requires price history by number - flagged"
+  },
+  {
+   "id": "SG-9",
+   "signal": "referee/penalty tendencies",
+   "evidence_in_repo": "not collected",
+   "verdict": "no official per-official assignment feed used here - flagged"
+  },
+  {
+   "id": "SG-10",
+   "signal": "situational: divisional dog, primetime under",
+   "evidence_in_repo": "not measured",
+   "verdict": "would need multiple-testing control before any claim"
+  }
+ ],
+ "restrictions": [
+  "2026 market prices do not exist in any archive in scope: all 2026 divergence and ROI cells are blank.",
+  "Player-level props cannot be graded: no official player-game log and no prop prices in scope (F-02).",
+  "A reject/near-zero ROI result is the expected outcome against efficient closing lines; it is reported unchanged rather than optimised away."
+ ]
+}
