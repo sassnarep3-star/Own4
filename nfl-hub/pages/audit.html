@@ -28,12 +28,12 @@
 <main id="main">
 <div class="eyebrow">Repository review</div>
 <h1>Repository review</h1>
-<p class="lede">A line-by-line read of the four prior NFL workspaces, with measured sizes, live-tested citations and a self-review of this build.</p>
+<p class="lede">A line-by-line read of the five prior NFL workspaces, with measured sizes, live-tested citations and a self-review of this build.</p>
 
-<div class="banner"><b>Review method.</b> Every file in the four NFL workspaces was read; page counts and sizes were measured;
+<div class="banner"><b>Review method.</b> Every file in the five prior NFL workspaces was read; page counts and sizes were measured;
 a sample of cited URLs was fetched live; and each workspace's published slate was compared with the current Week 10 slate.</div>
 <section>
-<h2>Prior workspaces</h2>
+<h2>Prior workspaces (5)</h2>
 <article class="card wide">
 <div class="cardtop"><b class="mono">nfl/</b> <span class="badge info">9 pages</span> <span class="badge info">128 KB</span></div>
 <p><b>What it is.</b> Specification dashboard: singles, parlays, props, gates, leaderboard, sources.</p>
@@ -58,11 +58,17 @@ a sample of cited URLs was fetched live; and each workspace's published slate wa
 <p class="good"><b>What it does well.</b> Self-contained and small; tests its own internal links.</p>
 <div class="tw"><table class=""><thead><tr><th>Severity</th><th>Finding</th><th>Evidence</th></tr></thead><tbody><tr><td><span class="badge warn">medium</span></td><td>Publishes strategy candidates without measured results or an explicit &#x27;unmeasured&#x27; badge per row</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/audit.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><span class="badge warn">low</span></td><td>Duplicates the category set of the other three, adding reader confusion</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/audit.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
 <p class="rec"><b>Recommendation.</b> Archive; the category taxonomy is reused in the hub navigation.</p>
+</article><article class="card wide">
+<div class="cardtop"><b class="mono">nfl-decisions/</b> <span class="badge info">8 pages</span> <span class="badge info">116 KB</span></div>
+<p><b>What it is.</b> Governance/decision desk: decision questions, suggestions, availability and replacement tracking, flagged items, an unverified metric register and a proposed leaderboard policy. Publishes no lines.</p>
+<p class="good"><b>What it does well.</b> Runs its own structural verifier; keeps every metric blank and marked unverified rather than filling it; explicitly states that source links support context, not profitability or approval. No invented numbers.</p>
+<div class="tw"><table class=""><thead><tr><th>Severity</th><th>Finding</th><th>Evidence</th></tr></thead><tbody><tr><td><span class="badge warn">medium</span></td><td>Duplicates the purpose of this hub&#x27;s suggestions and questions pages, creating two decision registers for the same decisions</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/audit.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><span class="badge warn">low</span></td><td>No originated lines, so it cannot answer the line-origination requirement on its own</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/audit.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
+<p class="rec"><b>Recommendation.</b> Keep the register but consolidate: one canonical decision surface (see D1). Its blank-metric discipline is the right pattern.</p>
 </article>
 </section>
 <section>
 <h2>What is actually wrong, in one line</h2>
-<p>The repository has five NFL surfaces and no canonical marker. The most serious defects are dead citations (2), a stale slate presented as current (2 workspaces), and a missing official depth-chart source. None of these blocks publishing this hub, because the hub states each limitation in place.</p>
+<p>The repository now has six NFL surfaces (four dashboards, one decision desk, this hub) and no canonical marker. The most serious defects are dead citations (2), a stale slate presented as current (2 workspaces), two competing decision registers, and a missing official depth-chart source. None of these blocks publishing this hub, because the hub states each limitation in place.</p>
 </section>
 <section>
 <h2>Self-review of this hub</h2>

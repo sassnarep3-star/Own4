@@ -86,6 +86,26 @@
         }
       ],
       "recommendation": "Archive; the category taxonomy is reused in the hub navigation."
+    },
+    {
+      "path": "nfl-decisions/",
+      "pages": 8,
+      "size": "116 KB",
+      "what_it_is": "Governance/decision desk: decision questions, suggestions, availability and replacement tracking, flagged items, an unverified metric register and a proposed leaderboard policy. Publishes no lines.",
+      "verified_good": "Runs its own structural verifier; keeps every metric blank and marked unverified rather than filling it; explicitly states that source links support context, not profitability or approval. No invented numbers.",
+      "findings": [
+        {
+          "severity": "medium",
+          "finding": "Duplicates the purpose of this hub's suggestions and questions pages, creating two decision registers for the same decisions",
+          "evidence": "repo measurement"
+        },
+        {
+          "severity": "low",
+          "finding": "No originated lines, so it cannot answer the line-origination requirement on its own",
+          "evidence": "repo measurement"
+        }
+      ],
+      "recommendation": "Keep the register but consolidate: one canonical decision surface (see D1). Its blank-metric discipline is the right pattern."
     }
   ],
   "hub_self_review": [
@@ -115,5 +135,5 @@
       "evidence": "data/flags.json"
     }
   ],
-  "irregularities_summary": "The repository has five NFL surfaces and no canonical marker. The most serious defects are dead citations (2), a stale slate presented as current (2 workspaces), and a missing official depth-chart source. None of these blocks publishing this hub, because the hub states each limitation in place."
+  "irregularities_summary": "The repository now has six NFL surfaces (four dashboards, one decision desk, this hub) and no canonical marker. The most serious defects are dead citations (2), a stale slate presented as current (2 workspaces), two competing decision registers, and a missing official depth-chart source. None of these blocks publishing this hub, because the hub states each limitation in place."
 }

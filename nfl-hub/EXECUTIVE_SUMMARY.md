@@ -62,7 +62,7 @@ pre-registration, not a reason to re-tune.
 
 ## 5. Five decisions that unlock the next phase
 
-1. **D1 — Canonical workspace.** Keep `nfl-hub`, banner and archive the other four NFL dashboards.
+1. **D1 — Canonical workspace.** Keep `nfl-hub` for lines and evidence, fold or annex `nfl-decisions/` as governance, and banner the four older dashboards.
 2. **D2 — Market data.** License a timestamped odds and prop feed, or accept permanent research-only status.
 3. **D3 — Reward rule.** Rank by the lower confidence bound, roll the pool over when nothing qualifies.
 4. **Q-05 — Define "starter".** Without snap counts the defensive-depth request cannot be met honestly.
