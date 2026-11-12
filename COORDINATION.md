@@ -1713,3 +1713,13 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 
 **PR and deployment:** to be recorded after merge.
 
+
+### Merge and deployment record (2026-11-12)
+
+- **PR #63** — https://github.com/sassnarep3-star/Own4/pull/63 — merged to `main` at **2026-11-12T16:42:27Z**, merge commit `e76c271`.
+- **Checks before merge:** `Rebuild and verify` (the hub's byte-identical gate) **pass**, plus the peer workflows `audit`, `validate`, `Verify NFL audit` **pass**. PR state at merge: `MERGEABLE` / `CLEAN`.
+- **GitHub Pages:** build for `e76c271` reported **`built`**; the site serves `https://sassnarep3-star.github.io/Own4/nfl-hub/` from the legacy `main` / root configuration, which was not changed.
+- **Live verification:** `https://sassnarep3-star.github.io/Own4/nfl-hub/pages/injuries.html` was fetched after the deploy and contains the new section, both worked examples, the SRC-21/SRC-22 links and the method list. The GB-1 row reads: Week 8 `8 L.Jackson` started, Week 9 `12 J.Fagnano` started, with Fagnano annotated `3QB` in the Week 8 book.
+- **Follow-up:** a second small PR corrects the injuries page subtitle (it still said the depth gap kept the page blank) and adds this record.
+
+**Scope note for the next session:** `nfl-hub/**` is now owned by the merged Line Genesis build plus this module. Any further work on it should start from `main` and run `python3 nfl-hub/build.py && python3 nfl-hub/verify.py`; the gate fails on a one-byte drift, a table row without a source link, or a page without the navigation and helpline footer.
