@@ -1,0 +1,55 @@
+{
+ "dataset": "measured_correlation",
+ "generated_utc": "2026-11-12",
+ "sample": "2017-2025 regular-season games with archived closing lines (third-party archive)",
+ "n": 2383,
+ "legs": [
+  {
+   "pair": "favourite covers the spread vs game goes over the total",
+   "method": "phi coefficient on binary outcomes; positive means the two legs co-move",
+   "phi": -0.0079,
+   "p_leg_a": 0.4222,
+   "p_leg_b": 0.4817,
+   "joint_rate": 0.2014,
+   "independent_expectation": 0.2034,
+   "interpretation": "near zero: pricing a same-game parlay of these two legs by multiplication is approximately correct on this sample, but the sign/size must be re-measured per game.",
+   "source_url": "https://github.com/nassnarep3-star/Own4"
+  },
+  {
+   "pair": "home win vs game goes over the total",
+   "method": "phi coefficient on binary outcomes",
+   "phi": 0.011,
+   "p_leg_a": 0.5413,
+   "p_leg_b": 0.4817,
+   "joint_rate": 0.2635,
+   "independent_expectation": 0.2608,
+   "interpretation": "near zero; no measured dependence on this sample.",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  }
+ ],
+ "residual_persistence": {
+  "value": 0.3997,
+  "method": "correlation of consecutive-season mean own-vs-actual spread error",
+  "interpretation": "If this is not clearly positive, the model's spread error has no season-to-season memory, i.e. what looks like edge in one season does not carry into the next. This is the anti-luck test that matters for a leaderboard."
+ },
+ "not_measured": [
+  {
+   "pair": "QB passing yards vs WR1 receiving yards (same game)",
+   "status": "BLANK - blocked",
+   "reason": "requires official player-game logs and prop prices; neither is in this repository in an authorised form. Left blank rather than copied from a peer estimate (flag F-02).",
+   "source_url": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "pair": "RB rushing yards vs team total (same game)",
+   "status": "BLANK - blocked",
+   "reason": "same as above",
+   "source_url": "https://www.nfl.com/stats/player-stats/"
+  },
+  {
+   "pair": "same-game parlay leg correlation for player props",
+   "status": "BLANK - blocked",
+   "reason": "same as above; no archived SGP prices exist",
+   "source_url": "https://www.nfl.com/stats/player-stats/"
+  }
+ ]
+}

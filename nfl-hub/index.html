@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="NFL line origination, with the evidence attached — NFL Line Genesis: originated lines, validation gates, correlations and a decision register built only from source-linked data.">
+<title>NFL line origination, with the evidence attached · NFL Line Genesis</title>
+<link rel="stylesheet" href="assets/hub.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside>
+  <a class="brand" href="index.html"><span class="mark">O4</span><span class="bname">NFL Line Genesis<small>OWN4 · NFL RESEARCH</small></span></a>
+  <nav aria-label="Sections"><div class="navgrp">Overview</div><a class="nav active" href="index.html">Dashboard</a><a class="nav" href="pages/executive-summary.html">Executive summary</a><a class="nav" href="pages/requirements.html">Requirements coverage</a><div class="navgrp">Decide</div><a class="nav" href="pages/suggestions.html">Suggestions &amp; decisions</a><a class="nav" href="pages/questions.html">Open questions</a><a class="nav" href="pages/flagged.html">Flagged for review</a><div class="navgrp">This week</div><a class="nav" href="pages/own-lines.html">Originated lines</a><a class="nav" href="pages/injuries.html">Injuries &amp; availability</a><div class="navgrp">Evidence</div><a class="nav" href="pages/strategies.html">Strategy catalogue</a><a class="nav" href="pages/validation.html">Validation &amp; luck</a><a class="nav" href="pages/correlations.html">Correlations</a><a class="nav" href="pages/leaderboard.html">Leaderboard &amp; rewards</a><div class="navgrp">Data</div><a class="nav" href="pages/data.html">Official data</a><a class="nav" href="pages/sources.html">Source register</a><a class="nav" href="pages/audit.html">Repository review</a></nav>
+  <div class="sidebox">
+    <b>Snapshot</b><br>12 Nov 2026 · Week 10<br>
+    <span class="dot warn"></span>No validated edge<br>
+    <span class="dot ok"></span>32/32 official reconciliation
+  </div>
+  <a class="back" href="../index.html">← OWN4 home</a>
+</aside>
+<div class="content">
+<header class="top">
+  <span class="kicker">NFL LINE GENESIS</span>
+  <span class="topnote">Research, not betting advice · No official NFL endorsement</span>
+</header>
+<main id="main">
+<div class="eyebrow">Dashboard</div>
+<h1>NFL line origination, with the evidence attached</h1>
+<p class="lede">Originated Week 10 lines, pre-registered validation gates, correlation measurements, availability tracking and a decision register — built from source-linked data only.</p>
+
+<div class="banner">
+  <div><b>Decision status: do not bet these lines.</b> The model is worse than the closing line at forecasting margins
+  (MAE 10.392 vs 9.871 on the 2017-2025 holdout), and no
+  registered strategy passes the validation gates. The value of this build is the evidence trail and the questions it forces.</div>
+</div>
+<section class="kpis"><div class="kpi"><b>32/32</b><span>teams reconciled to NFL.com standings, field by field</span></div><div class="kpi"><b>14</b><span>Week 10 games with an originated line</span></div><div class="kpi"><b>0</b><span>strategies that pass every gate</span></div><div class="kpi"><b>6</b><span>players with a formal game designation at capture</span></div></section>
+
+<section>
+<h2>Week 10 — originated lines</h2>
+<p class="sub">Generated 12 Nov 2026 before the first kickoff. Every value is model output; the market column is deliberately blank
+because no official NFL odds publication exists and the archive has no 2026 closing lines.
+<a href="pages/own-lines.html" target="_blank" rel="noopener">Method and look-ahead tests ↗</a></p>
+<div class="tw"><table class=""><thead><tr><th>Date</th><th>Matchup</th><th>Home line</th><th>Total</th><th>Home win</th><th>Market</th><th>Source</th></tr></thead><tbody><tr><td><span class="mono">11-12</span></td><td><b>WAS</b> <span class="muted">2-5-1</span> at <b>NYG</b> <span class="muted">5-2-1</span></td><td><span class="mono">HOME -5.0</span></td><td><span class="mono">42.5</span></td><td><span class="mono">64.7%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>NE</b> <span class="muted">5-4-0</span> at <b>DET</b> <span class="muted">6-2-0</span></td><td><span class="mono">HOME -7.4</span></td><td><span class="mono">52.5</span></td><td><span class="mono">71.4%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>KC</b> <span class="muted">6-2-0</span> at <b>ATL</b> <span class="muted">3-6-0</span></td><td><span class="mono">HOME +6.4</span></td><td><span class="mono">42.0</span></td><td><span class="mono">31.4%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>HOU</b> <span class="muted">3-5-0</span> at <b>CLE</b> <span class="muted">5-4-0</span></td><td><span class="mono">HOME +4.6</span></td><td><span class="mono">48.5</span></td><td><span class="mono">36.4%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/texans-at-browns-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>MIN</b> <span class="muted">6-2-0</span> at <b>GB</b> <span class="muted">6-3-0</span></td><td><span class="mono">HOME -6.1</span></td><td><span class="mono">36.0</span></td><td><span class="mono">67.8%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/vikings-at-packers-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>MIA</b> <span class="muted">1-7-0</span> at <b>IND</b> <span class="muted">2-7-0</span></td><td><span class="mono">HOME -1.2</span></td><td><span class="mono">42.5</span></td><td><span class="mono">53.8%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/dolphins-at-colts-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>CAR</b> <span class="muted">3-5-0</span> at <b>NO</b> <span class="muted">3-5-0</span></td><td><span class="mono">HOME -3.7</span></td><td><span class="mono">49.5</span></td><td><span class="mono">61.0%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/panthers-at-saints-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>BUF</b> <span class="muted">7-1-0</span> at <b>NYJ</b> <span class="muted">2-7-0</span></td><td><span class="mono">HOME +15.3</span></td><td><span class="mono">54.5</span></td><td><span class="mono">12.4%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/bills-at-jets-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>JAX</b> <span class="muted">6-2-0</span> at <b>TEN</b> <span class="muted">1-7-0</span></td><td><span class="mono">HOME +14.4</span></td><td><span class="mono">53.0</span></td><td><span class="mono">13.8%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/jaguars-at-titans-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>LA</b> <span class="muted">5-4-0</span> at <b>ARI</b> <span class="muted">3-6-0</span></td><td><span class="mono">HOME +9.4</span></td><td><span class="mono">43.0</span></td><td><span class="mono">23.8%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/rams-at-cardinals-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>SEA</b> <span class="muted">5-4-0</span> at <b>LV</b> <span class="muted">4-5-0</span></td><td><span class="mono">HOME +8.2</span></td><td><span class="mono">50.5</span></td><td><span class="mono">26.6%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>SF</b> <span class="muted">7-1-0</span> at <b>DAL</b> <span class="muted">4-5-0</span></td><td><span class="mono">HOME +3.7</span></td><td><span class="mono">59.0</span></td><td><span class="mono">38.9%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-15</span></td><td><b>PIT</b> <span class="muted">6-2-0</span> at <b>CIN</b> <span class="muted">6-2-0</span></td><td><span class="mono">HOME -2.3</span></td><td><span class="mono">49.5</span></td><td><span class="mono">56.9%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/steelers-at-bengals-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr><tr><td><span class="mono">11-16</span></td><td><b>LAC</b> <span class="muted">0-8-0</span> at <b>BAL</b> <span class="muted">4-5-0</span></td><td><span class="mono">HOME -4.5</span></td><td><span class="mono">45.0</span></td><td><span class="mono">63.2%</span></td><td><span class="blank" title="No official 2026 market line">—</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a> <a href="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10" title="Official game page" target="_blank" rel="noopener">NFL.com ↗</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Three decisions that block everything else</h2>
+<p class="sub">These are the choices a reviewer must make before more building is reasonable. Full option analysis:
+<a href="pages/suggestions.html" target="_blank" rel="noopener">Suggestions &amp; decisions ↗</a>.</p>
+<div class="grid3"><article class="card">
+<div class="cardtop"><span class="badge amber">D1</span> <b>Which NFL workspace is canonical?</b></div>
+<p>Five earlier NFL surfaces publish different material (four dashboards plus a decision desk), and two decision registers now exist. A reader cannot tell which is current, and search authority is split across all of them.</p>
+<ul class="opts"><li><b>D1-a</b> Keep nfl-hub and freeze the other four — <span class="muted">One maintained surface; this hub reconciles to official standings and publishes its own limits.</span> <span class="neg">Risk: Older pages remain reachable and may contradict the hub.</span></li><li><b>D1-b</b> Keep nfl-quant and extend it — <span class="muted">It already has a pipeline and pre-registered gates.</span> <span class="neg">Risk: Its lines are Week 9 and its 2026 market inputs are stale; extending it would mix two methodologies.</span></li><li><b>D1-c</b> Publish a comparison page and keep all five — <span class="muted">Maximum transparency.</span> <span class="neg">Risk: Worst for a casual reader; the contradiction remains.</span></li><li><b>D1-d</b> Keep nfl-hub for lines/evidence and nfl-decisions for governance, cross-link them — <span class="muted">Each surface keeps one job; no register is discarded.</span> <span class="neg">Risk: Two registries to maintain; the reader must know which to open.</span></li></ul>
+<p class="rec"><b>Recommendation:</b> D1-a plus D1-d: nfl-hub becomes the single lines/evidence surface, nfl-decisions is kept only as its governance annex (or its unique questions are merged in and it is banner-archived). Banner the four dashboards. Do not delete anything.</p>
+</article><article class="card">
+<div class="cardtop"><span class="badge amber">D2</span> <b>Buy or license a real market feed, or stay archive-only?</b></div>
+<p>With no timestamped market/player feed there is no way to measure closing-line value, price props, or validate parlay payouts. Every strategy is capped at &#x27;research-only&#x27;.</p>
+<ul class="opts"><li><b>D2-a</b> License a commercial odds + player-prop API with historical timestamps — <span class="muted">Unlocks CLV, prop lines, SGP pricing and honest G7.</span> <span class="neg">Risk: Recurring cost; contract review; redistribution limits.</span></li><li><b>D2-b</b> Stay with free archives — <span class="muted">Zero cost, fully reproducible.</span> <span class="neg">Risk: No 2026 lines, no props, no parlay prices; cannot validate a real edge.</span></li><li><b>D2-c</b> Manual price snapshots at fixed times — <span class="muted">Cheap.</span> <span class="neg">Risk: Not reproducible, not auditable, and conflicts with the no-manual-input requirement.</span></li></ul>
+<p class="rec"><b>Recommendation:</b> D2-a if the project is meant to produce executable lines; otherwise D2-b and accept that the output stays a research demo.</p>
+</article><article class="card">
+<div class="cardtop"><span class="badge amber">D3</span> <b>What does the leaderboard actually reward?</b></div>
+<p>Rewarding raw ROI rewards luck. A strategy can top a table with 40 bets and no skill.</p>
+<ul class="opts"><li><b>D3-a</b> Reward the lower confidence bound of net ROI after gates — <span class="muted">Punishes small samples and variance; aligns reward with evidence.</span> <span class="neg">Risk: Harder to explain.</span></li><li><b>D3-b</b> Reward raw ROI with a minimum sample — <span class="muted">Simple.</span> <span class="neg">Risk: Still luck-dominated until n is large.</span></li><li><b>D3-c</b> No rewards until G8 forward replication passes — <span class="muted">Most conservative.</span> <span class="neg">Risk: Nothing to compete over for a full season.</span></li></ul>
+<p class="rec"><b>Recommendation:</b> D3-a, with the pool rolling over when no strategy qualifies. This is what the current leaderboard implements: 0 points awarded because no strategy passed.</p>
+</article></div>
+</section>
+
+<section>
+<h2>What is verified, and what is not</h2>
+<div class="two">
+<div class="panel okpanel">
+<h3>Verified against an official source</h3>
+<ul>
+<li>All 32 team records, points for/against and tie percentages — <a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">NFL.com standings ↗</a>.</li>
+<li>All 14 Week 10 fixtures, kickoff times and byes — <a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">NFL.com Week 10 schedule ↗</a>.</li>
+<li>Six formal injury designations and three confirmed quarterback changes — <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official injury report ↗</a> and NFL.com news.</li>
+<li>Replacement starters, from official game books: Baltimore's Week 9 quarterback was a player the Week 8 book codes <b>3QB</b> — <a class="src official" href="https://static.www.nfl.com/image/upload/v1793965716/gamecenter/ab380826-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener" title="NFL.com - Game Book PDF, Week 9, Jacksonville at Baltimore">SRC-22</a>. Two worked examples on <a href="pages/injuries.html">Injuries &amp; availability</a>.</li>
+<li>The 2026 rule changes — <a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener">NFL Operations rulebook ↗</a>.</li>
+</ul>
+</div>
+<div class="panel badpanel">
+<h3>Missing, blank and flagged</h3>
+<ul>
+<li>2026 market lines, closing-line value and any market comparison: <b>no source in scope</b>.</li>
+<li>Pre-kickoff starter / backup order: <b>NFL.com publishes no depth chart</b> (verified 404). Post-game starters are proven from game books; next week's depth is not.</li>
+<li>Player props and prop combos: <b>no authorized player feed or prop prices</b>.</li>
+<li>Injury causes for most players: the official table leaves the cause blank.</li>
+</ul>
+<p><a href="pages/questions.html">Open questions register →</a></p>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Top flagged items</h2>
+<p class="sub">Full list with severity and source: <a href="pages/flagged.html">Flagged for review</a>.</p>
+<div class="tw"><table class=""><thead><tr><th>Severity</th><th>Item</th><th>Detail</th><th>Source</th></tr></thead><tbody><tr><td><span class="badge bad">Blocking for claims</span></td><td>No 2026 market lines exist in scope</td><td>The archive contains zero closing lines for 2026 and no official NFL odds publication was found. Every 2026 market comparison and closing-line-value metric is blank, not imputed.</td><td><a class="src archive" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener" title="nflverse/nfldata archive">SRC-12</a></td></tr><tr><td><span class="badge bad">Blocking for props</span></td><td>Player props cannot be priced</td><td>No authorized 2026 player-level feed and no archived prop prices. S6/S7 publish no values and no ROI.</td><td><a class="src archive" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener" title="nflverse/nfldata archive">SRC-12</a></td></tr><tr><td><span class="badge warn">Disclosure</span></td><td>All lines, ratings and correlations are DERIVED, not official</td><td>They are computed by this repository from a third-party archive. A source link on a derived row points to the data/code, not to an NFL publication.</td><td><a class="src archive" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener" title="nflverse/nfldata archive">SRC-12</a></td></tr><tr><td><span class="badge warn">Verified absence</span></td><td>No official depth chart was found (tested NFL.com URL returns 404)</td><td>The NFL.com depth-chart URL tested returns 404 and no official depth publication was located. Starter/backup/2nd/3rd/4th-string status is therefore blank for every defensive player; only named quarterback changes from official news are published.</td><td><a class="src official" href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener" title="NFL.com depth-chart URL — 404">SRC-14</a></td></tr><tr><td><span class="badge warn">Contradiction in official sources</span></td><td>Ravens listed as &#x27;No Injuries Reported&#x27; while Lamar Jackson is on IR</td><td>The Week 10 injury page says Baltimore has no injuries reported; an NFL.com roundup dated Nov 5 says Baltimore officially placed Jackson on injured reserve. Both are official. Unresolved; no Ravens line adjustment is made.</td><td><a class="src official" href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-thursday-nov-5" target="_blank" rel="noopener" title="NFL.com — Ravens officially place Lamar Jackson on IR">SRC-07</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>How the numbers are produced</h2>
+<ol class="steps">
+<li><b>Collect.</b> Official standings, schedule and injury report are captured with timestamps. History comes from a pinned third-party archive commit.</li>
+<li><b>Reconcile.</b> The archive is re-aggregated and compared with the official standings for all 32 teams before any model runs.</li>
+<li><b>Model.</b> A walk-forward Elo and exponentially weighted points model produce a margin and total for each game, using only prior weeks.</li>
+<li><b>Pre-register.</b> Gates and strategy rules are committed to git <i>before</i> the holdout is scored.</li>
+<li><b>Test.</b> Holdout ROI, week-clustered bootstrap intervals, placebo permutations and Holm correction decide the tier.</li>
+<li><b>Publish the failures.</b> Anything unverified is blank and flagged rather than estimated.</li>
+</ol>
+</section>
+
+<footer>
+  <p><b>Limits.</b> Lines and ratings are derived model output from a third-party archive, not official NFL data. Market lines, depth charts and player-prop values are unavailable and are left blank. Nothing here is a recommendation to wager.</p>
+  <p>Support: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline ↗</a> · <a href="https://www.nfl.com/terms" target="_blank" rel="noopener">NFL.com terms ↗</a> · <a href="pages/sources.html">Source register</a></p>
+</footer>
+</main>
+</div>
+</div>
+<script src="assets/hub.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parlays &middot; NFL Edge</title>
+<meta name="description" content="Cross-game NFL parlay results with true two-leg pricing, gate results and the compounding-vig explanation.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav active" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Strategies / Parlays</div>
+<h1>Parlays</h1>
+<p class="lede">Cross-game two-leg parlays built from the strongest single-bet legs each week. Same-game combinations are excluded on purpose: their legs are not independent, and this repository cannot price them without archived same-game prices.</p>
+<div class="panel info"><h3>Pricing rule</h3><p>Two legs at &minus;110 have a true payout of (1.9091&sup2; &minus; 1) = <strong>2.6458</strong> units profit per unit staked. A push leg voids that leg rather than the ticket. No same-game correlation adjustment is applied because cross-game legs are independent by construction; where legs <em>are</em> correlated, the measured phi values are on the <a href="correlations.html">correlation page</a>.</p></div>
+<div class="tw">
+<table>
+<caption>Cross-game 2-leg parlay result</caption>
+<thead><tr><th>ID</th><th>Construction</th><th>Parlays</th><th>ROI</th><th>Placebo p</th><th>Verdict</th><th>Gates</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>S4</strong></td><td>S4 · cross-game 2-leg parlay built from S1/S2 legs</td><td class="num">155</td><td class="num">-15.74%</td><td class="num"><span class="blank">not tested</span></td><td><span class="badge fail">fail</span></td><td class="num">2/10</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+</tbody></table></div>
+<div class="tw">
+<table>
+<caption>Gate-by-gate result for S4</caption>
+<thead><tr><th>Gate</th><th>Name</th><th>Pre-registered rule</th><th>Result</th><th>Measured value</th><th>Why it matters</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>G1</strong></td><td>Sample floor</td><td>n &gt;= 300 graded bets in the holdout</td><td><span class="badge fail">fail</span></td><td>n=155 (floor 300)</td><td>Below ~300 bets, a 52% hit rate is statistically indistinguishable from 50% at conventional confidence.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G2</strong></td><td>Beats a naive baseline</td><td>own-line MAE &lt; naive baseline MAE for both spread and total</td><td><span class="badge ok">pass</span></td><td>own MAE 10.502 vs naive 11.231 (spread); 10.830 vs 11.042 (total)</td><td>A model that cannot beat &#x27;assume a 0-point margin / league-average total&#x27; has no information in it.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G3</strong></td><td>Calibration</td><td>empirical 90% interval coverage between 0.85 and 0.95, and |mean residual| &lt; 0.5 points</td><td><span class="badge fail">fail</span></td><td>coverage 0.8934, bias 0.6510</td><td>Probabilities are only usable if the stated uncertainty matches reality.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G4</strong></td><td>Market-informed bar</td><td>own-line spread MAE &lt;= closing-line MAE</td><td><span class="badge fail">fail</span></td><td>own 10.502 vs market 9.871</td><td>The closing line is the strongest public forecast. A line originator that is less accurate than it is not adding information.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G5</strong></td><td>Positive ROI with a lower confidence bound above zero</td><td>holdout ROI &gt; 0 and the week-clustered bootstrap 2.5th percentile &gt; 0</td><td><span class="badge fail">fail</span></td><td>not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release</td><td>A positive point estimate is not evidence; the lower bound has to clear zero.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G6</strong></td><td>Not luck (placebo test)</td><td>matched-random placebo permutation p &lt; 0.05</td><td><span class="badge fail">fail</span></td><td>not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release</td><td>Bet the same number of bets, in the same weeks, on random sides; if random does as well, the result was variance.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G7</strong></td><td>Stability across seasons</td><td>positive ROI in at least 60% of holdout seasons that had bets</td><td><span class="badge fail">fail</span></td><td>not evaluated: the parlay construction is a mechanical combination of the S1/S2 legs, so it inherits their failure and has no independent luck test in this release</td><td>One hot season is a story, not a strategy.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G8</strong></td><td>Prospective replication</td><td>the same rule, frozen, earns a positive ROI on games played after the freeze date</td><td><span class="badge fail">fail</span></td><td>no 2026 closing-line archive exists, so prospective out-of-sample replication cannot be measured yet</td><td>This is the only test that removes the researcher&#x27;s degrees of freedom entirely.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G9</strong></td><td>Prop and parlay priceability</td><td>every leg is priced from an archived or official quote, and joint dependence is measured, not assumed</td><td><span class="badge fail">fail</span></td><td>no official player-level game data or prop prices in scope: prop-combo strategies cannot be graded</td><td>Multiplying independent leg probabilities in the same game overstates the parlay price; without measured dependence and archived prices there is no bet to grade.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G10</strong></td><td>Source and honesty gate</td><td>every published row carries a source link; every unverifiable value is blank and flagged</td><td><span class="badge ok">pass</span></td><td>every row traces to a cited source and every unverifiable value is blank and flagged</td><td>An accurate number with no provenance is unusable, and a filled-in guess is worse than a blank.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+</tbody></table></div>
+<div class="panel warn"><strong>Why parlays lose more than singles.</strong> Each leg carries the same negative expectation, and multiplying them compounds it: &minus;3.1% per leg becomes &minus;15.7% per two-leg ticket. A parlay is not a way to amplify an edge that is not there.</div>
+<p class="note">n = 155 is far below the 300-bet floor, so even a positive result here could not have been certified. The gate table says so explicitly rather than leaving the reader to notice.</p>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

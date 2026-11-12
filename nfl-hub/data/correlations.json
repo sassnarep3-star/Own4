@@ -1,0 +1,109 @@
+{
+  "generated_utc": "2026-11-12T17:00:00Z",
+  "sample": "Regular-season games 2013-2025 with archived closing lines",
+  "rows": [
+    {
+      "id": "C-01",
+      "question": "Are the closing spread and closing total of the same game correlated?",
+      "r": 0.0007,
+      "ci95": [
+        -0.0328,
+        0.0343
+      ],
+      "n": 3407,
+      "method": "Pearson r",
+      "status": "DERIVED",
+      "note": "Tests whether a game's expected margin carries information about its expected pace.",
+      "source": "computed from data/source/games.csv (nflverse archive) \u2014 reproducible via pipeline/correlations.py"
+    },
+    {
+      "id": "C-02",
+      "question": "Are the final margin and final total of the same game correlated?",
+      "r": 0.0359,
+      "ci95": [
+        0.0023,
+        0.0694
+      ],
+      "n": 3407,
+      "method": "Pearson r",
+      "status": "DERIVED",
+      "note": "Game-script dependence: blowouts can suppress or inflate totals.",
+      "source": "computed from data/source/games.csv (nflverse archive) \u2014 reproducible via pipeline/correlations.py"
+    },
+    {
+      "id": "C-03",
+      "question": "Within one game, does the favourite covering correlate with the under hitting?",
+      "r": 0.0117,
+      "ci95": [
+        -0.0225,
+        0.0459
+      ],
+      "n": 3291,
+      "method": "Phi",
+      "status": "DERIVED",
+      "note": "This is the dependence a same-game parlay must price. A negative phi means the book's independent multiplication overprices the combo.",
+      "source": "computed from data/source/games.csv (nflverse archive) \u2014 reproducible via pipeline/correlations.py"
+    },
+    {
+      "id": "C-04",
+      "question": "Does the model's disagreement with the closing line predict the actual result?",
+      "r": 0.0272,
+      "ci95": [
+        -0.0064,
+        0.0607
+      ],
+      "n": 3407,
+      "method": "Pearson r",
+      "status": "DERIVED",
+      "note": "If this is ~0 the model has no exploitable information at closing prices.",
+      "source": "computed from data/source/games.csv (nflverse archive) \u2014 reproducible via pipeline/correlations.py"
+    },
+    {
+      "id": "C-05",
+      "question": "Do two legs of a cross-game parlay on the same week move together?",
+      "r": -0.0122,
+      "ci95": [
+        -0.0251,
+        0.0008
+      ],
+      "n": 22932,
+      "method": "Phi",
+      "status": "DERIVED",
+      "note": "Near zero is expected: independent games. It is the assumption behind multiplying parlay legs.",
+      "source": "computed from data/source/games.csv (nflverse archive) \u2014 reproducible via pipeline/correlations.py"
+    },
+    {
+      "id": "C-06",
+      "question": "Do a quarterback's passing yards and his team's total points correlate in the same game?",
+      "r": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0,
+      "method": "Pearson r",
+      "status": "BLOCKED",
+      "note": "No authorized 2026 player-level feed and no player game logs are bundled in this workspace. No value is estimated.",
+      "source": "Open Question Q-07"
+    },
+    {
+      "id": "C-07",
+      "question": "Do two same-game player prop legs (e.g. QB passing yards + WR1 receiving yards) correlate?",
+      "r": null,
+      "ci95": [
+        null,
+        null
+      ],
+      "n": 0,
+      "method": "Pearson r",
+      "status": "BLOCKED",
+      "note": "Requires player-level data and archived same-game parlay prices. Neither is in scope. No proxy is substituted.",
+      "source": "Open Question Q-08"
+    }
+  ],
+  "interpretation_guard": [
+    "Correlation is not causation and not an edge.",
+    "All values are DERIVED from a third-party archive, not official NFL statistics.",
+    "Confidence intervals are Fisher-z approximations and ignore week clustering; treat them as indicative."
+  ]
+}

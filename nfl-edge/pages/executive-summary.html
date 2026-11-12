@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary &middot; NFL Edge</title>
+<meta name="description" content="One-screen executive summary of the NFL edge research: findings, negative results, blocked items and next steps.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav active" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Overview / Executive summary</div>
+<h1>Executive summary</h1>
+<p class="lede">What was built, what the evidence says, what is blocked, and what to do next. One screen, no adjectives.</p>
+<h2>One line per finding</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Category</th><th>Item</th><th>Finding</th><th>Status</th><th>Source</th></tr></thead><tbody>
+<tr><td>Data</td><td>2026 standings, 32 clubs</td><td>Read from nfl.com; PF&minus;PA reproduces NET PTS on all 32 rows and league PF = league PA = 6,246.</td><td><span class="badge ok">OFFICIAL</span></td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Data</td><td>2026 team statistics, offence and defence</td><td>32 clubs x scoring/passing/rushing on both sides of the ball; six league-wide identities reconcile exactly.</td><td><span class="badge ok">OFFICIAL</span></td><td><a class="src" href="https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Data</td><td>Game archive, weeks 1&ndash;9</td><td>136 games. 16 were missing from the peer archive and were restored from official week pages; the archive now reproduces every club's record and points for/against exactly.</td><td><span class="badge ok">RECONCILED</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/integrity.json" target="_blank" rel="noopener">integrity.json ↗</a></td></tr>
+<tr><td>Data</td><td>Week 10 injury report</td><td>275 players across 28 clubs with practice and game status. No depth chart exists in the source.</td><td><span class="badge ok">OFFICIAL</span></td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Lines</td><td>Own lines, Week 10</td><td>14 games: spread, total, projected points and fair moneyline, from official team stats.</td><td><span class="badge ok">DERIVED</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/own_lines_2026.json" target="_blank" rel="noopener">own_lines_2026.json ↗</a></td></tr>
+<tr><td>Evidence</td><td>Forecast accuracy</td><td>Spread MAE 10.502 (own) vs 9.871 (closing line) vs 11.231 (naive zero margin). Total MAE 10.830 vs 10.470 vs 11.042.</td><td><span class="badge fail">NEGATIVE</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Evidence</td><td>Strategy results</td><td>S1 &minus;3.12% (n=1,540), S2 &minus;5.32% (n=1,187), S3 &minus;8.45% (n=2,060), S4 &minus;15.74% (n=155). No gate set is passed.</td><td><span class="badge fail">NEGATIVE</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Evidence</td><td>Luck</td><td>Week-clustered bootstrap CIs, matched-random placebo (p 0.37&ndash;0.63), season stability, residual persistence +0.40. Nothing survives.</td><td><span class="badge ok">MEASURED</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+<tr><td>Blocked</td><td>Player props and prop combos</td><td>No official player-game logs and no prop prices. Correlation cells are blank, not estimated.</td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Blocked</td><td>Starter vs 2nd/3rd/4th string</td><td>The official source publishes no depth chart (the depth-chart URL returns 404) and no snap counts. No starter/backup claim is made anywhere.</td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/teams/washington-commanders/roster" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Blocked</td><td>Any 2026 price or edge</td><td>No official NFL odds source exists; no licensed 2026 price archive is in scope. Market cells are blank.</td><td><span class="badge fail">BLOCKED</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com</a></td></tr>
+</tbody></table></div>
+<h2>The three decisions this evidence supports</h2>
+<ol class="tight"><li><strong>Do not publish picks or prices.</strong> Our own lines are a model output; the market they would be compared with does not exist in this repository, and our model is worse than the closing line on accuracy anyway.</li><li><strong>Keep the leaderboard as a rejection machine.</strong> Its job is to stop a lucky backtest from becoming a paid strategy. Today it rejected everything, which is the correct output for public-data rules against efficient prices.</li><li><strong>Buy data or change the question.</strong> The two blocked requirements (props and starter/backup effects) are blocked by licensing, not by method. Either licence the data or redefine the product as a decision-support and data-coverage tool.</li></ol>
+<h2>What to read next</h2>
+<p><a href="decisions.html">Questions and decisions</a> (what is answered, what is not, and what would unlock each one) &middot; <a href="suggestions.html">Suggestions</a> (16 changes with impact, effort, risk and prerequisites) &middot; <a href="flagged.html">Flagged for review</a> (16 irregularities and caveats) &middot; <a href="validation.html">Validation and luck</a> (the ten gates).</p>
+<h2>Decisions blocked</h2>
+<div class="tw">
+<table>
+<thead><tr><th>ID</th><th>Decision</th><th>Status</th><th>Blocked by questions</th><th>Unlock condition</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>D1</strong></td><td>Publish betting recommendations</td><td>BLOCKED BY EVIDENCE</td><td>Q1, Q3, Q7, Q12</td><td>one strategy passing all ten pre-registered gates, including prospective replication (G8)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D2</strong></td><td>Pay any part of the 1,000-point reward pool</td><td>NO - pool not payable</td><td>Q16, Q17</td><td>a strategy at Qualified tier; 0 of 4 strategies qualify today</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D3</strong></td><td>Treat originated Week 10 lines as prices to bet into</td><td>NO</td><td>Q2, Q6, Q12</td><td>an official or licensed 2026 closing-line archive to measure divergence against</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D4</strong></td><td>Claim our model has skill at picking games</td><td>NO</td><td>Q3, Q4, Q8</td><td>the model must first beat the closing line on MAE (it does not: 10.50 vs 9.87)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D5</strong></td><td>Add player-prop strategy results to the leaderboard</td><td>BLOCKED BY DATA</td><td>Q9, Q10, Q11</td><td>authorised official player-game logs plus archived prop prices</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D6</strong></td><td>Use injury/backup information as a live signal</td><td>BLOCKED BY DATA</td><td>Q13, Q14, Q15</td><td>a depth-chart source with an official or licensed starter/backup designation</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+<tr><td><strong>D7</strong></td><td>Point the canonical site at this NFL dashboard instead of the NBA dashboard</td><td>OWNER DECISION</td><td>Q18, Q19</td><td>your answer; the NFL dashboard is currently an additional section, not a replacement</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/questions.json" target="_blank" rel="noopener">questions.json ↗</a></td></tr>
+</tbody></table></div>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+name: Validate NFL Decision Lab
+
+# Rebuilds the NFL decision layer from checked-in code, then enforces the publication rules:
+#   * every data-table row must carry a source link;
+#   * every local link and in-page anchor must resolve;
+#   * the generated site must rebuild byte-identically (no published number can drift);
+#   * the official reconciliation must keep passing 160/160 cells;
+#   * gate G7 must stay failed while no price archive exists (a passing G7 would be a bug).
+# It does not deploy: GitHub Pages serves this repository through the legacy main//root build.
+
+on:
+  push:
+    paths:
+      - 'nfl-decision/**'
+      - '.github/workflows/nfl-decision.yml'
+  pull_request:
+    paths:
+      - 'nfl-decision/**'
+      - '.github/workflows/nfl-decision.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild every data file and the site
+        run: |
+          python3 nfl-decision/scripts/01_results.py
+          python3 nfl-decision/scripts/02_model.py
+          python3 nfl-decision/scripts/03_backtest.py
+          python3 nfl-decision/scripts/04_correlations.py
+          python3 nfl-decision/scripts/05_props.py
+          python3 nfl-decision/scripts/06_own_lines.py
+          python3 nfl-decision/scripts/07_forecast.py
+          python3 nfl-decision/scripts/08_build_site.py
+
+      - name: Verify links and that every table row carries a source
+        run: python3 nfl-decision/scripts/09_verify.py
+
+      - name: The 2026 reconciliation must still match all 160 official cells
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          r = json.load(open('nfl-decision/data/results_2026.json'))
+          for c in r['checks']:
+              print(('PASS ' if c['pass'] else 'FAIL ') + c['check'] + ' :: ' + c['detail'])
+          sys.exit(0 if all(c['pass'] for c in r['checks']) else 1)
+          PY
+
+      - name: No strategy may claim Gold while G7 is unpassable
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          b = json.load(open('nfl-decision/data/backtest.json'))
+          bad = [t['id'] for t in b['holdout'] if t.get('tier') == 'Gold' or t.get('reward_points')]
+          print('strategies claiming Gold or points:', bad or 'none')
+          sys.exit(1 if bad else 0)
+          PY
+
+      - name: Generated site must rebuild byte-identically
+        run: git diff --exit-code -- nfl-decision '*.html'

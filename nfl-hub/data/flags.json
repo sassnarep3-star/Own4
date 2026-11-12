@@ -1,0 +1,149 @@
+{
+  "generated_utc": "2026-11-12T17:35:00Z",
+  "flags": [
+    {
+      "id": "F-01",
+      "severity": "Blocking for claims",
+      "item": "No 2026 market lines exist in scope",
+      "detail": "The archive contains zero closing lines for 2026 and no official NFL odds publication was found. Every 2026 market comparison and closing-line-value metric is blank, not imputed.",
+      "source": "SRC-12",
+      "status": "needs review"
+    },
+    {
+      "id": "F-02",
+      "severity": "Disclosure",
+      "item": "All lines, ratings and correlations are DERIVED, not official",
+      "detail": "They are computed by this repository from a third-party archive. A source link on a derived row points to the data/code, not to an NFL publication.",
+      "source": "SRC-12",
+      "status": "disclosed"
+    },
+    {
+      "id": "F-03",
+      "severity": "Blocking for props",
+      "item": "Player props cannot be priced",
+      "detail": "No authorized 2026 player-level feed and no archived prop prices. S6/S7 publish no values and no ROI.",
+      "source": "SRC-12",
+      "status": "blocked"
+    },
+    {
+      "id": "F-04",
+      "severity": "Verified absence",
+      "item": "No official depth chart was found (tested NFL.com URL returns 404)",
+      "detail": "The NFL.com depth-chart URL tested returns 404 and no official depth publication was located. Starter/backup/2nd/3rd/4th-string status is therefore blank for every defensive player; only named quarterback changes from official news are published.",
+      "source": "SRC-14",
+      "status": "needs review"
+    },
+    {
+      "id": "F-05",
+      "severity": "Contradiction in official sources",
+      "item": "Ravens listed as 'No Injuries Reported' while Lamar Jackson is on IR",
+      "detail": "The Week 10 injury page says Baltimore has no injuries reported; an NFL.com roundup dated Nov 5 says Baltimore officially placed Jackson on injured reserve. Both are official. Unresolved; no Ravens line adjustment is made.",
+      "source": "SRC-07",
+      "status": "needs review"
+    },
+    {
+      "id": "F-06",
+      "severity": "Snapshot limit",
+      "item": "Only six players had a formal game designation at capture",
+      "detail": "Captured Thursday. Most players had practice status only; final designations appear later. The site must not be read as a kickoff-day inactive list.",
+      "source": "SRC-03",
+      "status": "disclosed"
+    },
+    {
+      "id": "F-07",
+      "severity": "Data gap",
+      "item": "The injury table's cause column is blank for most players",
+      "detail": "Practice status is published but the injury cause is often empty, so cause-specific analysis is not possible from the table alone.",
+      "source": "SRC-03",
+      "status": "needs review"
+    },
+    {
+      "id": "F-08",
+      "severity": "Repo duplication",
+      "item": "Five earlier NFL workspaces remain live alongside this hub",
+      "detail": "nfl/, nfl-lab/, nfl-quant/, nfl-research/ and nfl-decisions/ all present NFL material, with different scopes and different weeks. nfl-lab and nfl-quant still show Week 8/9 lines as current, and two decision registers now exist (nfl-decisions/ and this hub). No canonical marker.",
+      "source": "repo measurement",
+      "status": "needs review"
+    },
+    {
+      "id": "F-09",
+      "severity": "Dead citations",
+      "item": "Two NFL.com URLs cited by nfl/ return 404",
+      "detail": "https://www.nfl.com/news/nfl-injury-report-policy-2026 and https://www.nfl.com/news/nfl-2026-schedule-release both return '404 - Flag on the Play'. They must not be reused.",
+      "source": "SRC-15",
+      "status": "needs review"
+    },
+    {
+      "id": "F-10",
+      "severity": "Stale output",
+      "item": "Own lines for Week 8 and Week 9 are still presented on older pages",
+      "detail": "nfl-lab publishes Week 8/9 lines and nfl-quant publishes Week 9 lines without a staleness banner. Week 10 is the current slate.",
+      "source": "repo measurement",
+      "status": "needs review"
+    },
+    {
+      "id": "F-11",
+      "severity": "Hygiene",
+      "item": "Repository ships 53 MB of raw dumps and four tracked .pyc files",
+      "detail": "Measured on 2026-11-12. This is unrelated to NFL accuracy but affects clone size and reviewability.",
+      "source": "repo measurement",
+      "status": "needs review"
+    },
+    {
+      "id": "F-12",
+      "severity": "Resolved trap",
+      "item": "Winning percentage with ties is not W/G",
+      "detail": "NFL.com uses (W + T/2)/G. Using W/G produces two false mismatches (NYG, WAS). Documented so a future reviewer does not 'fix' a correct value.",
+      "source": "SRC-01",
+      "status": "resolved"
+    },
+    {
+      "id": "F-13",
+      "severity": "Resolved mapping",
+      "item": "Team codes differ between sources",
+      "detail": "Archive uses LA and AZ; NFL.com uses LAR and ARI. Mapped explicitly; no rows dropped.",
+      "source": "SRC-01",
+      "status": "resolved"
+    },
+    {
+      "id": "F-14",
+      "severity": "Method limit",
+      "item": "Correlation confidence intervals ignore week clustering",
+      "detail": "Fisher-z intervals treat games as independent. They are indicative, not exact; the backtest intervals do cluster by week.",
+      "source": "correlations.json",
+      "status": "disclosed"
+    },
+    {
+      "id": "F-15",
+      "severity": "Gate failure",
+      "item": "No strategy passes the forward-replication gate",
+      "detail": "G8 requires a full prospective season. Nothing can be rated above provisional; the leaderboard awards zero points.",
+      "source": "gates.json",
+      "status": "disclosed"
+    },
+    {
+      "id": "F-16",
+      "severity": "Mismatch",
+      "item": "A prior NFL page cites the NBA injury report as an NFL policy cross-reference",
+      "detail": "nfl/ links official.nba.com for an NFL injury-policy point. The leagues have different policies; the link does not support the claim.",
+      "source": "repo measurement",
+      "status": "needs review"
+    },
+    {
+      "id": "F-17",
+      "severity": "Assumption",
+      "item": "Parlay payouts are assumed, not archived",
+      "detail": "+164 for a two-team parlay is a standard-price assumption. G7 fails by construction; no parlay ROI may be read as a market result.",
+      "source": "results.json",
+      "status": "disclosed"
+    },
+    {
+      "id": "F-18",
+      "severity": "Coverage",
+      "item": "Replacement starters are proven only after the game",
+      "detail": "Official game books identify the player who actually started and, where printed, his depth code (for example 3QB). They are published after the game, so they support verification and back-testing, not a pre-kickoff line. Only two examples were transcribed; the league-wide ledger does not exist yet (suggestion S-16).",
+      "source": "data/gamebooks.json",
+      "status": "disclosed"
+    }
+  ]
+}

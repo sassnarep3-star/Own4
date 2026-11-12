@@ -1,0 +1,29 @@
+name: Validate NFL audit
+on:
+  push:
+    paths:
+      - 'nfl-audit/**'
+      - '.github/workflows/nfl-audit.yml'
+  pull_request:
+    paths:
+      - 'nfl-audit/**'
+      - '.github/workflows/nfl-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    name: Rebuild and verify NFL audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the site from data
+        run: python3 nfl-audit/scripts/build.py
+      - name: Verify links, sources, stamps and rebuild drift
+        run: python3 nfl-audit/scripts/verify.py
+      - name: Confirm the build is committed (no drift between data and pages)
+        run: git diff --exit-code -- nfl-audit

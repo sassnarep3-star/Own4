@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Correlation register — NFL Line Genesis: originated lines, validation gates, correlations and a decision register built only from source-linked data.">
+<title>Correlation register · NFL Line Genesis</title>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside>
+  <a class="brand" href="../index.html"><span class="mark">O4</span><span class="bname">NFL Line Genesis<small>OWN4 · NFL RESEARCH</small></span></a>
+  <nav aria-label="Sections"><div class="navgrp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Requirements coverage</a><div class="navgrp">Decide</div><a class="nav" href="../pages/suggestions.html">Suggestions &amp; decisions</a><a class="nav" href="../pages/questions.html">Open questions</a><a class="nav" href="../pages/flagged.html">Flagged for review</a><div class="navgrp">This week</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/injuries.html">Injuries &amp; availability</a><div class="navgrp">Evidence</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation &amp; luck</a><a class="nav active" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; rewards</a><div class="navgrp">Data</div><a class="nav" href="../pages/data.html">Official data</a><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/audit.html">Repository review</a></nav>
+  <div class="sidebox">
+    <b>Snapshot</b><br>12 Nov 2026 · Week 10<br>
+    <span class="dot warn"></span>No validated edge<br>
+    <span class="dot ok"></span>32/32 official reconciliation
+  </div>
+  <a class="back" href="../../index.html">← OWN4 home</a>
+</aside>
+<div class="content">
+<header class="top">
+  <span class="kicker">NFL LINE GENESIS</span>
+  <span class="topnote">Research, not betting advice · No official NFL endorsement</span>
+</header>
+<main id="main">
+<div class="eyebrow">Correlations</div>
+<h1>Correlation register</h1>
+<p class="lede">Measured dependence for spreads, totals, same-game combos and cross-game parlays — with the two prop correlations blocked rather than guessed.</p>
+
+<div class="banner"><b>Correlation is not an edge.</b> These coefficients describe dependence between outcomes. They do not
+establish a profitable relationship, and none of them is an official NFL statistic — all are computed from the pinned archive.</div>
+
+<section>
+<h2>Register</h2>
+<p class="sub">Sample: regular-season games 2013-2025 with archived closing lines. CIs are Fisher-z approximations and ignore
+week clustering; the backtest intervals do cluster.</p>
+<div class="tw"><table class=""><thead><tr><th>ID</th><th>Question</th><th>r</th><th>95% CI</th><th>n</th><th>Method</th><th>Status</th><th>Reading</th><th>Source</th></tr></thead><tbody><tr><td><b>C-01</b></td><td>Are the closing spread and closing total of the same game correlated?</td><td><span class="mono">+0.0007</span></td><td>-0.033 to +0.034</td><td>3,407</td><td>Pearson r</td><td><span class="badge info">DERIVED</span></td><td>Tests whether a game&#x27;s expected margin carries information about its expected pace.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-02</b></td><td>Are the final margin and final total of the same game correlated?</td><td><span class="mono">+0.0359</span></td><td>+0.002 to +0.069</td><td>3,407</td><td>Pearson r</td><td><span class="badge info">DERIVED</span></td><td>Game-script dependence: blowouts can suppress or inflate totals.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-03</b></td><td>Within one game, does the favourite covering correlate with the under hitting?</td><td><span class="mono">+0.0117</span></td><td>-0.022 to +0.046</td><td>3,291</td><td>Phi</td><td><span class="badge info">DERIVED</span></td><td>This is the dependence a same-game parlay must price. A negative phi means the book&#x27;s independent multiplication overprices the combo.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-04</b></td><td>Does the model&#x27;s disagreement with the closing line predict the actual result?</td><td><span class="mono">+0.0272</span></td><td>-0.006 to +0.061</td><td>3,407</td><td>Pearson r</td><td><span class="badge info">DERIVED</span></td><td>If this is ~0 the model has no exploitable information at closing prices.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-05</b></td><td>Do two legs of a cross-game parlay on the same week move together?</td><td><span class="mono">-0.0122</span></td><td>-0.025 to +0.001</td><td>22,932</td><td>Phi</td><td><span class="badge info">DERIVED</span></td><td>Near zero is expected: independent games. It is the assumption behind multiplying parlay legs.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-06</b></td><td>Do a quarterback&#x27;s passing yards and his team&#x27;s total points correlate in the same game?</td><td><span class="blank" title="not computed">—</span></td><td><span class="blank" title="insufficient data">—</span></td><td>0</td><td>Pearson r</td><td><span class="badge bad">BLOCKED</span></td><td>No authorized 2026 player-level feed and no player game logs are bundled in this workspace. No value is estimated.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>C-07</b></td><td>Do two same-game player prop legs (e.g. QB passing yards + WR1 receiving yards) correlate?</td><td><span class="blank" title="not computed">—</span></td><td><span class="blank" title="insufficient data">—</span></td><td>0</td><td>Pearson r</td><td><span class="badge bad">BLOCKED</span></td><td>Requires player-level data and archived same-game parlay prices. Neither is in scope. No proxy is substituted.</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>What this means for parlays and combos</h2>
+<ul>
+<li><b>Cross-game parlays:</b> legs are effectively independent (C-05 phi -0.0122). Multiplying
+probabilities is defensible; the book's payout assumption is the weak link, not the maths.</li>
+<li><b>Same-game game-market combos:</b> favourite-cover vs under is near zero (C-03 phi +0.0117),
+so an SGP on those two legs carries no meaningful dependence correction.</li>
+<li><b>Player props:</b> the two correlations that matter most for prop combos (C-06, C-07) are <b>blocked</b>. They are not
+approximated. Any prop-combo pricing before Q-07 is answered would be fabricated.</li>
+</ul>
+</section>
+
+<section>
+<h2>Method notes</h2>
+<ul><li>Correlation is not causation and not an edge.</li><li>All values are DERIVED from a third-party archive, not official NFL statistics.</li><li>Confidence intervals are Fisher-z approximations and ignore week clustering; treat them as indicative.</li></ul>
+</section>
+
+<footer>
+  <p><b>Limits.</b> Lines and ratings are derived model output from a third-party archive, not official NFL data. Market lines, depth charts and player-prop values are unavailable and are left blank. Nothing here is a recommendation to wager.</p>
+  <p>Support: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline ↗</a> · <a href="https://www.nfl.com/terms" target="_blank" rel="noopener">NFL.com terms ↗</a> · <a href="../pages/sources.html">Source register</a></p>
+</footer>
+</main>
+</div>
+</div>
+<script src="../assets/hub.js" defer></script>
+</body>
+</html>

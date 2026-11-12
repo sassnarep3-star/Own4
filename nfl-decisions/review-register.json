@@ -1,0 +1,360 @@
+{
+  "questions": [
+    "Decision questions",
+    [
+      {
+        "id": "Q01",
+        "topic": "What is the authoritative NFL dataset?",
+        "known": "Several NFL namespaces exist.",
+        "missing": "Complete independently rechecked, timestamped official game and player observations.",
+        "action": "Inventory each field; retrieve official gamebooks and retain exact excerpts, retrieval times and hashes.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q02",
+        "topic": "Are predictions genuinely pregame?",
+        "known": "Historical files are available; their existence does not prove pregame availability.",
+        "missing": "Feature publication times and immutable prediction receipts.",
+        "action": "Reject every feature with known_at later than prediction_at; freeze training cutoffs.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q03",
+        "topic": "Can lines be executed?",
+        "known": "Research forecasts are not executable quotes.",
+        "missing": "Official operator odds, timestamps, limits, settlement rules and permission to collect.",
+        "action": "Keep price and ROI blank until authorized operator records exist.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q04",
+        "topic": "Who actually replaces an absent player?",
+        "known": "Injury report includes practice and game statuses.",
+        "missing": "Official depth rank, active status, expected role, participation and replacement quality.",
+        "action": "Join official team depth charts, transactions and game-day inactives; do not infer a replacement from an injury.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q05",
+        "topic": "Does a strategy improve decisions?",
+        "known": "A held-out set reduces training/test leakage risk.",
+        "missing": "Locked future test outcomes and uncertainty-adjusted baseline comparisons.",
+        "action": "Freeze hypotheses, metric, sample/power plan and family of tests before evaluation.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q06",
+        "topic": "Who funds rewards and on what terms?",
+        "known": "No funded competition is established by this review.",
+        "missing": "Budget, eligibility, jurisdiction, anti-gaming policy and approved payout rules.",
+        "action": "Use paper-only recognition; block monetary awards pending governance approval.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "Q07",
+        "topic": "Can luck be removed?",
+        "known": "Evaluation can overfit the validation set too.",
+        "missing": "Repeated prospective performance and confidence intervals.",
+        "action": "Estimate uncertainty, never claim luck eliminated or guaranteed profit.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      }
+    ]
+  ],
+  "suggestions": [
+    "Suggestions for review",
+    [
+      {
+        "id": "S01 \u00b7 P0",
+        "topic": "Evidence contract first",
+        "known": "Sources differ across inherited dashboards.",
+        "missing": "Field-level official provenance and data rights.",
+        "action": "Recommended first path: build an immutable official-source registry. Acceptance: every populated observation has URL, exact excerpt, as-of time and hash.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S02 \u00b7 P0",
+        "topic": "One NFL entry point",
+        "known": "Root dashboard is NBA-focused.",
+        "missing": "Decision on canonical empirical NFL implementation.",
+        "action": "Publish this review hub now; retain old namespaces as historical research, not newly verified findings.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S03 \u00b7 P0",
+        "topic": "Availability and replacement monitor",
+        "known": "Official injury report is accessible as a snapshot.",
+        "missing": "Validated automated feed, team depth charts, inactives and participation.",
+        "action": "Propose authorized scheduled collection, change alerts and hard freshness checks. Fail closed on stale or missing evidence.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S04 \u00b7 P1",
+        "topic": "Start with singles",
+        "known": "Singles need fewer joint-model assumptions than combinations (design rationale, not a proven edge).",
+        "missing": "Calibrated outcome distributions and executable prices.",
+        "action": "Compare simple rating and team-strength baselines on chronological holdouts before promoting complexity.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S05 \u00b7 P1",
+        "topic": "Prospective shadow leaderboard",
+        "known": "Historical rankings can reward selection noise.",
+        "missing": "Locked strategy versions, prediction ledger and future outcomes.",
+        "action": "Rank eligible strategies by preregistered lower confidence bound of baseline-adjusted score; show sample size and uncertainty.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S06 \u00b7 P2",
+        "topic": "Parlays only after joint validation",
+        "known": "Pairwise coefficients alone do not establish a multi-leg joint distribution.",
+        "missing": "Aligned leg outcomes, joint probabilities, operator combination quotes.",
+        "action": "Use held-out joint-event calibration, tail stress tests and exposure caps. Never multiply marginals without evidence.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S07 \u00b7 P2",
+        "topic": "Player prop combos last",
+        "known": "Replacement roles may change opportunities; this is a hypothesis.",
+        "missing": "Official per-game usage, role snapshots, full marginal distributions and joint outcomes.",
+        "action": "Model shared game pace and role uncertainty; test same-player and same-team overlap before any reward eligibility.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "S08 \u00b7 P1",
+        "topic": "Decision change log",
+        "known": "This hub separates proposals from implementation.",
+        "missing": "Human approval of model/data-source changes.",
+        "action": "Keep status proposed / approved / rejected / implemented with rationale and version. No suggestion here changes a betting model automatically.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      }
+    ]
+  ],
+  "strategies": [
+    "Strategies and validation",
+    [
+      {
+        "id": "T01",
+        "topic": "Single: team-strength distribution",
+        "known": "Research hypothesis only.",
+        "missing": "Official historical scores, schedule context and holdout evaluation.",
+        "action": "Fit home-margin and total distributions using prior-only data; report fair spread, total and win probability with uncertainty.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "T02",
+        "topic": "Single: replacement-impact signal",
+        "known": "Research hypothesis only.",
+        "missing": "Actual replacement role, prior usage and opponent matchup evidence.",
+        "action": "Compare injury-aware model to identical injury-blind baseline; isolate incremental held-out skill.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "T03",
+        "topic": "Cross-game parlay",
+        "known": "Research hypothesis only.",
+        "missing": "Aligned outcomes and measured cross-game dependence.",
+        "action": "Validate joint hit probabilities and expected payoff against recorded operator prices.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "T04",
+        "topic": "Same-game parlay",
+        "known": "Research hypothesis only.",
+        "missing": "Shared game-state distribution and joint-event calibration.",
+        "action": "Simulate conditional outcomes; compare joint predictions with held-out joint observations.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "T05",
+        "topic": "Player prop combination",
+        "known": "Research hypothesis only.",
+        "missing": "Player usage, role, availability, official game logs and operator settlement.",
+        "action": "Fit count/yardage distributions; validate tails and shared opportunities, not just average yards.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G01",
+        "topic": "Gate: evidence / rights / freshness",
+        "known": "Mandatory proposed gate for all strategies.",
+        "missing": "Pass evidence.",
+        "action": "Fail on missing provenance, permission, pregame timestamps or fresh availability.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G02",
+        "topic": "Gate: leakage / reproducibility",
+        "known": "Mandatory proposed gate for all strategies.",
+        "missing": "Pass evidence.",
+        "action": "Freeze code, seed, data hash and strategy version; chronological validation with no same-game leakage.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G03",
+        "topic": "Gate: calibration / baseline improvement",
+        "known": "Mandatory proposed gate for all strategies.",
+        "missing": "Pass evidence and preregistered tolerances.",
+        "action": "Use log loss/Brier for probabilities and distribution scoring for margins; compare with simple baseline.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G04",
+        "topic": "Gate: luck / multiple comparisons",
+        "known": "Mandatory proposed gate for all strategies.",
+        "missing": "Power plan, test-family register and untouched prospective outcomes.",
+        "action": "Block bootstrap by game/week; adjust for all tried strategies; require improvement interval above zero under frozen rules.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G05",
+        "topic": "Gate: joint dependence",
+        "known": "Mandatory proposed gate for combinations.",
+        "missing": "Joint outcomes, coefficients with sample sizes/CIs and joint calibration.",
+        "action": "Estimate only on training folds; verify on held-out joint events, including rare-tail sensitivity.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "G06",
+        "topic": "Gate: economics / stability / governance",
+        "known": "Mandatory proposed gate for rewards.",
+        "missing": "Executable odds, costs, stability by season/role, drawdown limits and funded approval.",
+        "action": "No ROI or cash prize eligibility before all applicable gates pass. Missing evidence means blocked, not passed.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Proposed \u2014 not approved"
+      }
+    ]
+  ],
+  "injuries": [
+    "Availability and replacement tracking",
+    [
+      {
+        "id": "I01",
+        "topic": "Observed official snapshot",
+        "known": "Week 10 injury page retrieved 2026-11-12; Lucas Patrick: C, Concussion, Did Not Participate In Practice, Out (Commanders).",
+        "missing": "Report publication time, replacement identity and depth rank.",
+        "action": "Preserve this limited excerpt; do not infer starter/backup status or a line adjustment.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Verified excerpt \u2014 snapshot only"
+      },
+      {
+        "id": "I02",
+        "topic": "Observed official snapshot",
+        "known": "Same retrieved page: Malik Harrison: LB, Groin, Limited Participation in Practice, Questionable (Giants).",
+        "missing": "Final active status, role, backup rank and expected snaps.",
+        "action": "Questionable is preserved verbatim; no numerical probability assigned.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Verified excerpt \u2014 snapshot only"
+      },
+      {
+        "id": "I03",
+        "topic": "Both offensive and defensive replacement chains",
+        "known": "Required schema: team, position, player, depth rank, predecessor, effective_at, known_at, official URL.",
+        "missing": "Verified rank-1/2/3/4 chains and role evidence.",
+        "action": "Leave ranks blank until official team evidence is acquired; never equate roster order with depth rank.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "I04",
+        "topic": "Deficiency hypothesis",
+        "known": "No defensive/offensive deficiency is established here.",
+        "missing": "Opponent-adjusted impact with sample size and uncertainty.",
+        "action": "Test position-specific matchup deltas, shrink small samples and separate role changes from player quality.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      },
+      {
+        "id": "I05",
+        "topic": "Automated operation",
+        "known": "This static site is not a live injury collector.",
+        "missing": "Authorized collection endpoint, rate policy, durable storage and scheduled monitoring.",
+        "action": "Proposed: poll permitted reports, diff versions, reconcile IDs and suppress affected prices if stale. No active live-monitor claim.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Proposed \u2014 not approved"
+      }
+    ]
+  ],
+  "flagged": [
+    "Flagged for Review",
+    [
+      {
+        "id": "F01",
+        "topic": "Third-party NFL inputs",
+        "known": "nfl-quant/data/provenance.json lists nflverse and fantasydatapros archives.",
+        "missing": "Full official row-by-row corroboration.",
+        "action": "Do not promote inherited results as official-source-only verified. See linked repository evidence.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Needs review"
+      },
+      {
+        "id": "F02",
+        "topic": "Inherited NFL freshness",
+        "known": "nfl-lab/data/verification_report.json describes an earlier eight-week dataset.",
+        "missing": "Current official field-by-field re-verification.",
+        "action": "Structural checks are not independent external fact verification; do not reuse old lines as current.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Needs review"
+      },
+      {
+        "id": "F03",
+        "topic": "Injury-policy source returned 404",
+        "known": "Attempted operations.nfl.com/inside-football-ops/players-legends/player-health-safety/injury-report-policy/ returned flag-on-play 404 on 2026-11-12.",
+        "missing": "Current policy text.",
+        "action": "Leave policy requirements unverified; use accessible injury page only for observed status excerpts.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Needs review"
+      },
+      {
+        "id": "F04",
+        "topic": "Correlation and economics not established",
+        "known": "No coefficient, price, ROI or performance number is newly certified here.",
+        "missing": "Officially sourced aligned observations and reproducible calculation.",
+        "action": "Values remain blank in the metric register; inherited third-party experiments are context, not verification.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Needs review"
+      },
+      {
+        "id": "F05",
+        "topic": "Rewards and skill claims blocked",
+        "known": "No strategy passes the gates in this review.",
+        "missing": "Prospective evidence and governance.",
+        "action": "No funded payouts or guarantee of skill. Randomness cannot be removed from NFL outcomes.",
+        "source": "https://scikit-learn.org/stable/modules/cross_validation.html",
+        "status": "Needs review"
+      },
+      {
+        "id": "F06",
+        "topic": "Repository audit scope",
+        "known": "Read coordination, workflow files and selected NFL source/provenance/model reports.",
+        "missing": "Independent line-by-line factual recheck of every inherited namespace.",
+        "action": "This is a bounded audit, not certification of the entire repository. Preserve unrelated work.",
+        "source": "https://www.nfl.com/injuries/",
+        "status": "Needs review"
+      }
+    ]
+  ]
+}

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrity checks &middot; NFL Edge</title>
+<meta name="description" content="Fifteen mechanical integrity checks over the transcribed official NFL values, all passing.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav active" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Governance / Integrity checks</div>
+<h1>Integrity checks</h1>
+<p class="lede">Fifteen mechanical checks that must pass or the build refuses to publish. They test whether the official numbers agree with each other and with the game archive &mdash; not whether a third party re-read the pages.</p>
+<div class="tw">
+<table>
+<caption>15 of 15 checks pass</caption>
+<thead><tr><th>ID</th><th>Check</th><th>Result</th><th>Measured detail</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>C1</strong></td><td>PF - PA equals published NET PTS for every team</td><td><span class="badge ok">pass</span></td><td>32/32 rows agree; mismatches: none</td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C2</strong></td><td>Sum of PF equals sum of PA across the league</td><td><span class="badge ok">pass</span></td><td>PF=6246 PA=6246</td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C3</strong></td><td>Sum of wins equals sum of losses</td><td><span class="badge ok">pass</span></td><td>W=135 L=135 T=2</td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C4</strong></td><td>League total points on the offence page equals league PF on the standings page</td><td><span class="badge ok">pass</span></td><td>offence page=6246 standings=6246</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C5</strong></td><td>League total points allowed on the defence page equals league PA on the standings page</td><td><span class="badge ok">pass</span></td><td>defence page=6246 standings=6246</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/defense/scoring/2026/reg/all" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C6</strong></td><td>League offence pass_yds equals league defence pass_yds allowed</td><td><span class="badge ok">pass</span></td><td>offence=63556 defence=63556</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C7</strong></td><td>League offence pass_td equals league defence pass_td allowed</td><td><span class="badge ok">pass</span></td><td>offence=411 defence=411</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C8</strong></td><td>League offence rush_yds equals league defence rush_yds allowed</td><td><span class="badge ok">pass</span></td><td>offence=30580 defence=30580</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C9</strong></td><td>League offence rush_td equals league defence rush_td allowed</td><td><span class="badge ok">pass</span></td><td>offence=257 defence=257</td><td><a class="src" href="https://www.nfl.com/stats/team-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C10</strong></td><td>W-L-T / PF / PA recomputed from the game archive match the official standings</td><td><span class="badge ok">pass</span></td><td>games=136 teams_checked=32 mismatches=none</td><td><a class="src" href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C11</strong></td><td>Games per week look like complete NFL weeks (13-16 per week, no gaps)</td><td><span class="badge ok">pass</span></td><td>per-week counts: {1: 16, 2: 16, 3: 16, 4: 16, 5: 15, 6: 14, 7: 14, 8: 14, 9: 15}</td><td><a class="src" href="https://www.nfl.com/schedules/2026/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C12</strong></td><td>Week 10 slate has 14 games and 28 distinct clubs (4 clubs on the official bye list)</td><td><span class="badge ok">pass</span></td><td>games=14 distinct_teams=28</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C13</strong></td><td>Every Week 10 game has an official nfl.com game page URL</td><td><span class="badge ok">pass</span></td><td>14/14</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C14</strong></td><td>Injury report has one section for each of the 28 clubs playing in Week 10</td><td><span class="badge ok">pass</span></td><td>club sections=28, all 28 Week 10 clubs present</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td><strong>C15</strong></td><td>Every injury row carries the official injuries-page URL it was read from</td><td><span class="badge ok">pass</span></td><td>rows=275, 100% sourced</td><td><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+</tbody></table></div>
+<div class="panel info"><h3>What these checks can and cannot prove</h3><p>They prove the transcribed official values are mutually consistent, and that the game archive reproduces every club&rsquo;s record and points exactly. They cannot catch a typo that is internally consistent, and they do not certify that an outgoing link still resolves to the same content today. That gap is flag F-10 and suggestion S-16.</p></div>
+<p class="note">Regenerate with <code>python3 nfl-edge/scripts/build_stats.py</code>, which exits non-zero on any failure.</p>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leaderboard &amp; rewards &middot; NFL Edge</title>
+<meta name="description" content="NFL strategy leaderboard: tiers, gates, bootstrap intervals and a non-monetary reward pool that awarded zero points because nothing qualified.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav active" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Strategies / Leaderboard & rewards</div>
+<h1>Leaderboard and rewards</h1>
+<p class="lede">The competition structure, the scoring, and the result: no strategy qualifies, so no reward points are awarded. The pool is non-monetary and stays unspent.</p>
+<div class="panel warn"><strong>0 of 4 strategies qualified. 0 of 1000 reward points awarded.</strong> This is the designed outcome when public-data rules meet efficient closing lines, not a temporary setback to be tuned away.</div>
+<div class="tw">
+<table>
+<caption>Strategies ranked by holdout ROI (negative is worse)</caption>
+<thead><tr><th>ID</th><th>Strategy</th><th>Bets</th><th>ROI</th><th>Bootstrap 95% CI</th><th>Placebo p</th><th>Gates</th><th>Tier</th><th>Points</th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>S1_spread</strong></td><td>S1 · spread divergence (own line vs closing line, &gt;= 2.0 pts)</td><td class="num">1540</td><td class="num">-3.12%</td><td class="num">[-7.84%, 1.54%]</td><td class="num">0.41</td><td class="num">3/10</td><td><span class="badge fail">Rejected</span></td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>S2_total</strong></td><td>S2 · total divergence (own total vs closing total, &gt;= 2.0 pts)</td><td class="num">1187</td><td class="num">-5.32%</td><td class="num">[-10.36%, 0.02%]</td><td class="num">0.37</td><td class="num">3/10</td><td><span class="badge fail">Rejected</span></td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>S3_moneyline</strong></td><td>S3 · fair-moneyline value (own p vs de-vigged market p, &gt;= 3 pts)</td><td class="num">2060</td><td class="num">-8.45%</td><td class="num">[-14.91%, -1.70%]</td><td class="num">0.63</td><td class="num">3/10</td><td><span class="badge fail">Rejected</span></td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td><strong>S4_parlay</strong></td><td>S4 · cross-game 2-leg parlay built from S1/S2 legs</td><td class="num">155</td><td class="num">-15.74%</td><td class="num"><span class="blank">blank</span></td><td class="num"><span class="blank">blank</span></td><td class="num">2/10</td><td><span class="badge fail">Rejected</span></td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+</tbody></table></div>
+<h2>Reward and tier policy</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Tier</th><th>Requirement</th><th>Meaning</th><th>Points</th><th>Source</th></tr></thead><tbody>
+<tr><td>Pool</td><td>1000</td><td>1000 points to a strategy only if every gate passes; otherwise 0. No partial credit, no discretionary bonuses.</td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td>Qualified</td><td>all 10 gates</td><td>all gates pass -&gt; eligible for reward points</td><td class="num">1000</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td>Bronze (no reward)</td><td>5-9 gates</td><td>5-9 gates pass -&gt; listed on the leaderboard, zero points, no claim of edge</td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td>Rejected</td><td>&lt;5 gates</td><td>&lt;5 gates pass -&gt; listed as rejected, zero points</td><td class="num">0</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+</tbody></table></div>
+<p class="note">Cash value is zero by policy: a cash prize on an unvalidated model turns research into advertising. Points are a ranking device, nothing more (decision D2).</p>
+<h2>How a strategy enters the competition</h2>
+<ol class="tight"><li>Write the rule down: the exact trigger, the market, and the size rule.</li><li>Register it in the strategy catalogue and in the gate file, with a version number, before running it.</li><li>Run it once on the holdout with the frozen configuration and publish the result whatever it is.</li><li>Only a full gate pass earns points. A change to the rule starts a new version with its own line in the catalogue.</li></ol>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
