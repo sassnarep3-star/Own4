@@ -54,12 +54,21 @@ jobs:
         run: python3 engine/build_site.py
 
       - name: Check the committed pages match the committed data
+        # pages/repo-review.html is excluded from the hard gate: it embeds a live
+        # scan of the WHOLE repository, so any file a peer session adds to any other
+        # namespace changes it independently of anything under nfl-lines/. It is
+        # regenerated and link-checked by the audit step below; here it only warns.
         run: |
           changed=0
           for f in $(git ls-files 'nfl-lines/pages/*.html' 'nfl-lines/index.html'); do
             cur=$(sha256sum "$f" | cut -d' ' -f1)
             old=$(git show "HEAD:$f" | sha256sum | cut -d' ' -f1)
-            if [ "$cur" != "$old" ]; then echo "::error::page out of sync with committed data: $f"; changed=1; fi
+            if [ "$cur" = "$old" ]; then continue; fi
+            if [ "$f" = "nfl-lines/pages/repo-review.html" ]; then
+              echo "::warning::repository audit page is behind the tree (expected when a peer namespace changed): $f"
+            else
+              echo "::error::page out of sync with committed data: $f"; changed=1
+            fi
           done
           if [ "$changed" != "0" ]; then
             echo "Run 'python3 engine/build_site.py' in nfl-lines/ and commit the result."
