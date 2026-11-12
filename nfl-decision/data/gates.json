@@ -1,0 +1,58 @@
+{
+ "pre_registered_utc": "2026-11-12",
+ "pre_registered_before_backtest": true,
+ "note": "Committed to the repository BEFORE 03_backtest.py was first executed. All thresholds are project-defined research design choices, not official NFL values.",
+ "splits": {
+  "dev":        {"seasons": [1999, 2012], "purpose": "calibrate the 2 model knobs in 02_model.py"},
+  "validation": {"seasons": [2013, 2017], "purpose": "select one strategy threshold per strategy"},
+  "holdout":    {"seasons": [2018, 2025], "purpose": "scored exactly once with the frozen configuration"},
+  "live_paper": {"seasons": [2026], "purpose": "prospective own-line log; forward replication"}
+ },
+ "pricing_assumption": {
+  "spread_and_total": "-110 on both sides (decimal 1.9090909), used ONLY because no official price archive exists",
+  "status": "ASSUMED, NOT ARCHIVED. This assumption is the reason gate G7 fails for every betting strategy.",
+  "parlay": "2-leg payout = product of the two leg decimals; no same-game correlation repricing is applied to cross-game parlays (cross-game legs are independent by construction)"
+ },
+ "gates": [
+  {"id": "G1", "name": "Provenance & integrity", "rule": "Every input row carries an official URL or a cited archive; the 2026 score subset must reconcile 160/160 cells to nfl.com standings."},
+  {"id": "G2", "name": "Minimum sample", "rule": ">= 300 settled holdout bets spanning >= 3 distinct seasons."},
+  {"id": "G3", "name": "Positive net ROI", "rule": "Holdout ROI > 0 after vig at the stated price assumption."},
+  {"id": "G4", "name": "Luck removed", "rule": "Week-clustered bootstrap 95% CI lower bound > 0 AND matched-random permutation p < 0.05 AND Benjamini-Hochberg FDR q < 0.05 within the tested strategy family."},
+  {"id": "G5", "name": "Robustness", "rule": "Positive ROI in >= 60% of holdout seasons AND no single season supplies > 50% of total profit."},
+  {"id": "G6", "name": "No look-ahead", "rule": "Perturbation test: replacing every result after cut-point T leaves every prediction before T bit-identical."},
+  {"id": "G7", "name": "Pricing realism", "rule": "Stakes must be settled at prices from an official/authoritative odds archive. No official NFL odds source exists; every strategy therefore fails G7 permanently."},
+  {"id": "G8", "name": "Forward replication", "rule": "Prospective timestamped record for >= 1 full season. Cannot be satisfied inside a single session."}
+ ],
+ "tiers": {
+  "Gold": "G1-G7 pass",
+  "Silver": "G1-G6 pass, G7 fails",
+  "Bronze": "G1, G2, G6, G7 pass; G3 or G4 fails (edge indistinguishable from luck)",
+  "Rejected": "G3 fails (negative edge) or G1/G6 fails",
+  "Research-only": "G7 fails (pricing not archived) regardless of ROI",
+  "Blocked": "A required official input does not exist; the value is left blank"
+ },
+ "reward_policy": {
+  "type": "non-monetary research points; no money, prizes or wagering is offered",
+  "betting_pool": 1000,
+  "betting_allocation": "split equally among strategies reaching Gold",
+  "forecast_pool": 600,
+  "forecast_allocation": "600/300/100 to the top 3 forecast-skill strategies; forecast skill is price-independent and therefore rewardable even though G7 blocks betting ROI",
+  "note": "If no strategy reaches Gold, 0 betting points are awarded and the pool rolls over to the next assessment."
+ },
+ "strategies_registered": [
+  {"id": "S1", "family": "single-spread", "rule": "Bet the side where (pred_margin + spread_line) points away from the market by >= theta. theta in {1.0, 2.0, 3.0}.",
+   "thresholds": [1.0, 2.0, 3.0]},
+  {"id": "S2", "family": "single-total", "rule": "Bet over when pred_total - total_line >= theta, under when <= -theta. theta in {1.5, 2.5, 3.5}.",
+   "thresholds": [1.5, 2.5, 3.5]},
+  {"id": "S4", "family": "parlay-cross-game", "rule": "Two S1 legs from DIFFERENT games in the SAME week; payout = product of the two leg decimals. Requires both legs S1-qualified at the selected theta.",
+   "thresholds": [1.0, 2.0, 3.0]},
+  {"id": "S5", "family": "control-home-dog", "rule": "Bet the home team ATS whenever it is not the favourite (spread_line >= 0). Placebo control, no model input."},
+  {"id": "S6", "family": "control-home-fav", "rule": "Bet the home team ATS whenever it is the favourite (spread_line < 0). Placebo control, no model input."}
+ ],
+ "prop_note": "S3 (prop singles) and S7 (prop combos) are NOT registered as betting strategies in this session because no 2026 player-level feed and no archived prop prices exist. Player-prop combo research is published as a correlation study (07_props.py) with zero claimed prices.",
+ "forecast_skill_leaderboard": {
+  "metrics": ["margin MAE", "margin RMSE", "ATS-correct rate vs market", "Brier score for home win", "total MAE"],
+  "baselines": ["naive: home team by 2.0 points, total = league mean", "market-implied: margin = -spread_line, total = total_line"],
+  "rewardable": "yes - depends only on archived results and archived closing lines, not on any odds price"
+ }
+}
