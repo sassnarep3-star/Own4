@@ -140,6 +140,18 @@ NAV = [
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
         ("nfl-decisions/index.html", "NFL Decision Desk · questions &amp; suggestions", "legacy"),
     ]),
+    # Restored 2026-11-12: this block previously existed only as a hand edit to index.html,
+    # so a regen silently dropped another session's published link. Kept in the generator now.
+    ("Rental research · 2026-11-06", [
+        ("rental-f1dbaea0/index.html", "RentCheck SF · 94122", "legacy"),
+        ("rental-f1dbaea0/flagged.html", "⚑ Rental — flagged", "legacy"),
+    ]),
+    ("NFL research · 2026-11-12", [
+        ("nfl-hub/index.html", "NFL Line Genesis", "legacy"),
+        ("nfl-hub/pages/suggestions.html", "NFL suggestions &amp; decisions", "legacy"),
+        ("nfl-hub/pages/questions.html", "NFL open questions", "legacy"),
+        ("nfl-hub/pages/flagged.html", "⚑ NFL flagged for review", "legacy"),
+    ]),
 ]
 
 FOOTER = """<footer>

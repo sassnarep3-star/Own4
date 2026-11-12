@@ -1372,6 +1372,32 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
 
+---
+
+## Session arena/0b66981b-own4 — NFL Line Genesis (consolidated NFL hub) · 2026-11-12
+
+Session ID: `arena-0b66981b-own4` · Branch: `arena/0b66981b-own4` (platform-fixed; per-task `session-<id>/<task>` branches cannot be created in this harness, logged as a deviation, same as prior sessions).
+
+Start state: `main` at `a10610b` (PR #58). Four independent NFL workspaces already exist from earlier sessions (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`) plus NBA and SF-rental projects. This session **adds** a new, self-contained namespace `nfl-hub/**` and does not edit peer namespaces, except (a) an appended root-navigation entry in `verification/build.py` + regenerated `index.html`, done only after the hub verified clean, and (b) append-only edits to `README.md` / this board.
+
+### Task board
+
+| ID | Task | Status | Owner session | File scope (exclusive) |
+|----|------|--------|---------------|------------------------|
+| N1 | Repo review line-by-line (four NFL workspaces) + flag irregularities | in progress | arena/0b66981b-own4 | `nfl-hub/pages/audit.html`, `nfl-hub/data/audit.json` |
+| N2 | Official-source capture (standings, Week 10 schedule, injury report, rules) with URLs + timestamps | in progress | arena/0b66981b-own4 | `nfl-hub/data/official/*.json` |
+| N3 | Historical dataset provenance + reconciliation to official standings | in progress | arena/0b66981b-own4 | `nfl-hub/data/source/**`, `nfl-hub/pipeline/*` |
+| N4 | Model v1: walk-forward ratings, own lines for Week 10, totals, moneyline | unclaimed | arena/0b66981b-own4 | `nfl-hub/pipeline/`, `nfl-hub/data/model/*` |
+| N5 | Strategy registry, pre-registered gates, backtest, luck removal | unclaimed | arena/0b66981b-own4 | `nfl-hub/data/strategies/*` |
+| N6 | Correlation register (game, parlay, SGP, prop-combo) | unclaimed | arena/0b66981b-own4 | `nfl-hub/data/correlations.json` |
+| N7 | Injury / availability pressure module (official report only) | unclaimed | arena/0b66981b-own4 | `nfl-hub/data/injuries.json` |
+| N8 | Suggestions section + decision review workflow | unclaimed | arena/0b66981b-own4 | `nfl-hub/data/suggestions.json` |
+| N9 | Open Questions & Information Register (what is known / unknown / needed) | unclaimed | arena/0b66981b-own4 | `nfl-hub/data/questions.json` |
+| N10 | Executive summary + static site build + verifier | unclaimed | arena/0b66981b-own4 | `nfl-hub/build.py`, `nfl-hub/verify.py`, pages |
+| N11 | Final integration: re-verify, root nav, PR, merge, Pages confirmation | unclaimed | arena/0b66981b-own4 | `verification/build.py` nav, `index.html`, `COORDINATION.md` |
+
+**Conflict rule for this session:** no peer file is edited. If a peer rebuild overwrites the root navigation entry, re-add it from `nfl-hub/build.py --nav-patch`. No other session has claimed any NFL file in this window.
+
 ## NFL decision review integration · arena/009a9652-own4 · 2026-11-12
 
 | Task | Status | Owner | File scope |
