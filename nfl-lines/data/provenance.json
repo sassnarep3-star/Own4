@@ -1,0 +1,115 @@
+{
+  "id": "provenance",
+  "note": "Every source below was read directly during this session on 2026-11-12. Nothing is cited that was not fetched and read. Sources are split into OFFICIAL (published by the NFL) and THIRD-PARTY (not published by the NFL).",
+  "sources": [
+    {
+      "id": "SRC-01", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/standings/league/2026/REG",
+      "title": "2026 NFL League Standings",
+      "method": "Page fetched and read directly (2 chunks). All 32 rows transcribed into data/official/standings_2026.json.",
+      "used_for": "Standings table, and as the reference for integrity check IC-04 (W/L/T/PF/PA recomputed from the game log for all 32 teams).",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-02", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/standings/",
+      "title": "2026 NFL Division Standings",
+      "method": "Page fetched and read directly. Used to confirm division groupings.",
+      "used_for": "Cross-check of the league standings and division assignment.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-03", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/stats/team-stats/",
+      "title": "NFL 2026 REG - offense passing stats",
+      "method": "Page fetched and read directly. All 32 rows transcribed into data/official/team_stats_offense_passing_2026.json.",
+      "used_for": "Official team statistics table.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-04", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/injuries/",
+      "title": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season",
+      "method": "Page fetched and read directly (chunks 0-5 of 7; chunks 5-6 are news and footer). All 14 games and 275 player rows transcribed into data/official/injuries_week10_2026.json.",
+      "used_for": "Injury and unit-deficiency tracking; official QB-change news headlines.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-05", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/scores/2026/REG1",
+      "title": "NFL 2026 Week 1 Scores",
+      "method": "Page fetched and read directly (2 chunks). All 16 games compared to the archive.",
+      "used_for": "Official verification of archive scores. 16 of 16 match.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-06", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/scores/2026/REG8",
+      "title": "NFL 2026 Week 8 Scores",
+      "method": "Page fetched and read directly (2 chunks). All 14 games compared to the archive.",
+      "used_for": "Official verification of archive scores. 14 of 14 match.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-07", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/scores/2026/REG9",
+      "title": "NFL 2026 Week 9 Scores",
+      "method": "Page fetched and read directly (2 chunks). All 15 games compared to the archive.",
+      "used_for": "Official verification of archive scores. 15 of 15 match.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-08", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/scores/2026/REG5",
+      "title": "NFL 2026 Week 5 Scores",
+      "method": "Page fetched; every score rendered as the literal text 'Hidden Score'. No value could be read.",
+      "used_for": "Not usable. Recorded as irregularity IR-01.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-09", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/schedules/2026/REG10",
+      "title": "NFL Schedules: Games, Times, Matchups & Tickets (Week 10)",
+      "method": "Page fetched and read directly (chunk 0 of 3). Confirmed the Week 10 slate, kickoff dates, times and networks.",
+      "used_for": "Week 10 matchup confirmation and official game-page URL pattern.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-10", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/injuries/",
+      "title": "Official NFL news links shown on the Week 10 injury page",
+      "method": "21 news URLs were read from the official injury page markup. The linked articles were NOT individually fetched in this session; only the headline text and URL, as published by NFL.com, are reproduced.",
+      "used_for": "Official confirmation of quarterback changes and injured-reserve moves.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-11", "official": false,
+      "publisher": "nflverse / nfldata (third-party GitHub repository)",
+      "url": "https://github.com/nflverse/nfldata",
+      "title": "data/games.csv - NFL games 1999-2026",
+      "method": "Fetched through the GitHub blob API at commit 6ea0be6dd9bfc95c818c05568753bc70f1986ea2 (commit date 2026-11-12T16:15:19Z). Stored verbatim at data/raw/nfldata_games.csv. SHA-256 dd6ea9377b6400535d8bc78f1346872dfdcf01f4c073dac9579dce7dc145fbfc, 2,189,964 bytes, 7,548 rows.",
+      "used_for": "Final scores (verified 45/45 against SRC-05/06/07), schedule, rest days, venue, roof/surface, weather, starting quarterback names, and third-party closing market lines.",
+      "caveat": "THIRD-PARTY. The NFL publishes no official odds, so the market spread, total, moneyline and prices in this file have no official counterpart and are labelled third-party everywhere they appear.",
+      "verified_utc": "2026-11-12T00:00:00Z"
+    }
+  ],
+  "derived_artefacts": [
+    {"file": "data/derived/verification.json", "contents": "Official score spot-check (45 games) and seven structural integrity checks."},
+    {"file": "data/derived/walkforward_forecasts.json", "contents": "4,055 out-of-sample forecasts, one row per game, with the own line, the market line, the edge and the outcome."},
+    {"file": "data/derived/strategy_results.json", "contents": "15 strategies with bets, per-period results, luck bands and the eight validation gates."},
+    {"file": "data/derived/leaderboard.json", "contents": "Ranking by z-score against break-even rather than by ROI."},
+    {"file": "data/derived/correlations.json", "contents": "13 measured correlations with confidence intervals, base rates, margin distribution and probability calibration."},
+    {"file": "data/derived/own_lines_week10.json", "contents": "Originated lines for every remaining 2026 regular-season game, with Week 10 broken out."},
+    {"file": "data/derived/deficiency.json", "contents": "Unit-deficiency read for all 28 teams playing in Week 10."}
+  ]
+}

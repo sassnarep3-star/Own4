@@ -1765,7 +1765,7 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 
 | Task | Status | Owner | File scope |
 |---|---|---|---|
-| NFL line origination: verified dataset, forecast model, own lines, strategy gates, correlations, luck/skill split, leaderboard, injury/deficiency tracking, executive summary, site, repo review | in progress | arena/b4aafa88-own4 | `nfl-lines/**` (new, isolated), append-only `COORDINATION.md`, additive root `index.html` nav link only |
+| NFL line origination: verified dataset, forecast model, own lines, strategy gates, correlations, luck/skill split, leaderboard, injury/deficiency tracking, executive summary, site, repo review | **done** | arena/b4aafa88-own4 | `nfl-lines/**` (new, isolated), append-only `COORDINATION.md`, additive root `index.html` nav link only |
 
 **Non-overlapping scope statement.** Peer session `arena/009a9652-own4` owns `nfl-decisions/**`, `verification/build.py`, `.github/workflows/nfl-decisions.yml` and its own additive root-link edit. This session will NOT edit any file in that scope. This session's contribution is a *different artifact type*: a quantitative line-origination lab with a measured backtest, not a decision register. Existing namespaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nfl-decisions/`, `docs/`, `lab/`, `lines-lab/`, `nba-evidence/`, `status/`, `verified/`, `verification/`, `rental*/`) are read-only and will be linked, never edited. Only additive navigation entries are made to root `index.html`; existing lines are preserved on rebase.
 
@@ -1773,3 +1773,118 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 - 2026-11-12: Pulled/rebased `origin/main` before claiming; main advanced to `243686a` (peer PR #60, `nfl-decisions/**`). Rebase was clean.
 - 2026-11-12: Data sources identified. **Official**: nfl.com standings/scores/schedule/stats/injuries, operations.nfl.com rules. **Third-party archive (explicitly labelled, never passed off as official)**: `nflverse/nfldata` `data/games.csv` at commit `6ea0be6dd9bfc95c818c05568753bc70f1986ea2` (fetched via GitHub blob API). The NFL publishes no official betting lines; every market line on this site is labelled third-party and every number that cannot be confirmed from an official NFL page is left blank and flagged.
 - Full log, sources, verification and irregularities recorded at the end of this section on completion.
+
+### Completion record · 2026-11-12
+
+**Status: done.** All work is in `nfl-lines/**` plus one additive root navigation entry.
+No peer-owned file was touched (`nfl-decisions/**`, `verification/build.py`,
+`.github/workflows/nfl-decisions.yml` are owned by `arena/009a9652-own4`).
+
+#### What was built
+
+`nfl-lines/` — a 20-page static site plus the engine that produces it:
+
+| Page | Contents |
+|---|---|
+| `index.html` | Dashboard: 8 KPI cards, headline finding, where to start, provenance chain |
+| `pages/executive-summary.html` | Requirement-5 executive summary: what is known, unknown, decided |
+| `pages/decisions.html` | Q01–Q15 decision register (requirement 2) |
+| `pages/suggestions.html` | SG-01…SG-12 ranked suggestions, P1/P2/P3, none auto-approved (requirement 1) |
+| `pages/own-lines.html` | 136 originated Week 10–18 lines next to the market number (requirement 3) |
+| `pages/strategies.html` | 15-strategy registry: 11 singles, 2 cross-game parlays, 1 SGP, 1 moneyline pair |
+| `pages/singles.html` | Per-strategy cards, 8 gate results, season-by-season detail |
+| `pages/parlays.html` | 2-leg and 3-leg cross-game parlays, correlation-aware pricing |
+| `pages/props.html` | Prop engine; player-prop cells blank + flagged (no verifiable source) |
+| `pages/validation.html` | G1–G8 gate matrix across all 15 strategies |
+| `pages/correlations.html` | CR-01…CR-13 Pearson r with 95% CI and n |
+| `pages/leaderboard.html` | Ranked board with reward eligibility |
+| `pages/skill-vs-luck.html` | No-skill band, calibrated probabilities, bets-needed-to-prove |
+| `pages/injuries.html` | Official Week 10 injury report, 28 team rows, unit deficiency (requirement 4) |
+| `pages/data-results.html` | 272 official 2026 game results |
+| `pages/data-standings.html` | 32-team official standings |
+| `pages/data-team-stats.html` | 32-team official offense passing |
+| `pages/repo-review.html` | Mechanical repository audit (requirement 7) |
+| `pages/sources.html` | SRC-01…SRC-11, official/third-party split, how each was verified |
+| `pages/flagged.html` | IR-01…IR-15 published, not hidden (requirement 9) |
+
+#### Sources read (all fetched and read directly in this session)
+
+**Official (NFL.com):**
+https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/standings/ ·
+https://www.nfl.com/stats/team-stats/ · https://www.nfl.com/injuries/ ·
+https://www.nfl.com/scores/2026/REG1 · https://www.nfl.com/scores/2026/REG5 ·
+https://www.nfl.com/scores/2026/REG8 · https://www.nfl.com/scores/2026/REG9 ·
+https://www.nfl.com/schedules/2026/REG10
+
+**Third-party (explicitly labelled, never presented as official):**
+https://github.com/nflverse/nfldata `data/games.csv` at commit
+`6ea0be6dd9bfc95c818c05568753bc70f1986ea2`,
+sha256 `dd6ea9377b6400535d8bc78f1346872dfdcf01f4c073dac9579dce7dc145fbfc`, 7,548 rows, 1999–2026.
+
+The NFL publishes no betting lines. Every market spread, total, moneyline and price on this
+site is labelled third-party and linked to that archive. Nothing official is claimed for them.
+
+#### Verification performed
+
+- **Official spot-check:** 45 of 45 games (2026 Weeks 1, 8, 9) re-read from NFL.com score
+  pages and compared to the archive. Zero mismatches, zero missing. Week 5 renders
+  "Hidden Score" and could not be checked (IR-01).
+- **Integrity checks IC-01…IC-07:** all pass (272-game schedule; 136/136 completed games
+  scored; 136 future games unscored; W/L/T/PF/PA recomputed for all 32 teams vs the
+  official standings; league PF = PA = 6246; 136/136 closing spreads present; seasons 1999–2026).
+- **Walk-forward discipline:** 4,055 forecasts, 2011–2026, model refitted before every
+  kick-off on strictly earlier games only, 14-season training cap.
+- **Pre-registration:** `data/model_params.json` carries a `registered_utc` timestamp
+  written before the first backtest run.
+- **Verification rule 9 enforced mechanically:** `nfl-lines/engine/verify_site.py` walks
+  every generated page, resolves every local href, and fails if any `<tbody>` row has no
+  link at all. Current result: **20 pages, 1,140 local links checked, 0 broken, 969 data
+  rows, 969 rows carrying a link, 43 blank (unverified) cells published as blanks.**
+- **Repository audit:** 382 files, 213 published pages, 22 namespaces, 3,866 local hrefs
+  checked, **0 broken local links**. Counts rows and resolves hrefs only — it does not
+  certify that any value on any page is correct, and the page says so.
+- **Determinism:** re-running `run_all.py` reproduces every derived JSON byte-for-byte
+  apart from the `generated_utc` stamp. CI normalises that field out before hashing.
+
+#### Irregularities (published on `nfl-lines/pages/flagged.html`, none blocking)
+
+IR-01 Week 5 2026 renders "Hidden Score" — unverifiable against the primary source.
+IR-02 The NFL publishes no betting lines — every market cell is third-party.
+IR-03 The official injury report carries no depth-chart rank — every depth-rank cell blank.
+IR-04 No verifiable player-prop lines or player game logs — every player-prop cell blank.
+IR-05 Third-party archive licence not reviewed line by line — research use only.
+IR-06 Weather for future games cannot be verified — wind/roof flags used structurally only.
+IR-07 Only 45 of 4,055 historical games were re-read from official pages.
+IR-08 The rest-differential term is large (0.71 pts/day) and drives the single biggest
+model–market disagreement (PIT @ CIN, −3.56 vs +3.5, a 7.06-point gap). Flagged as the
+most likely source of a spurious edge.
+IR-09 Six overlapping NFL namespaces exist (`nfl/`, `nfl-lab/`, `nfl-quant/`,
+`nfl-research/`, `nfl-decisions/`, `nfl-lines/`) — logged as suggestion SG-11, not acted on.
+IR-10 Week 10 market lines are not closing lines; the week is in progress.
+IR-11 The model has no quarterback or depth-chart feature, so it cannot see the confirmed
+Miami and Arizona quarterback changes.
+IR-12 LAC and BAL report "No Injuries Reported" — a Monday report, not a clean bill of health.
+IR-13 Player-to-club pairings in the injury table were transcribed as published and not
+individually cross-checked against club rosters.
+IR-14 Fitted home-field advantage (1.58 pts) is below the usual published range.
+IR-15 Per-game NFL.com URLs follow a name-slug pattern; the site links the verified
+schedule pages instead of fabricating game URLs.
+
+#### Cross-session notes
+
+- Peer session `arena/009a9652-own4` owns `nfl-decisions/**`. This session read it but did
+  not edit it. Its decision register and this lab are complementary and both are linked
+  from the root navigation.
+- Root `index.html`: **additive only.** Six new `<a>` entries in the existing nav list,
+  wrapped in an HTML comment marking the owning session so a peer rebuild can restore them.
+  No existing line was changed or removed.
+- New CI: `.github/workflows/nfl-lines.yml`, triggered only by `nfl-lines/**` paths. It
+  re-runs the official spot-check, rebuilds the derived data, rebuilds the site, and fails
+  if any link is broken, any row lacks a source link, or the rebuild no longer reproduces
+  the committed numbers.
+
+#### Requests logged for other sessions (no file edited)
+
+- **SG-11 / IR-09** asks for a decision on consolidating the six overlapping NFL
+  namespaces. This session will not move or delete any of them.
+- **IR-05** asks for a licence review of the nflverse archive before any non-research use.
