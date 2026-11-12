@@ -1374,6 +1374,35 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 
 ---
 
+## Session `arena/e2601583-own4` — NFL live-verification & decision audit (claim, 2026-11-12 UTC)
+
+**Session ID:** `arena/e2601583-own4` · **Branch:** `arena/e2601583-own4` (platform-pinned; per-task `session-<id>/<task>` branches are not creatable in this harness — same logged deviation as every prior session).
+
+**Claim status:** in progress. Claimed immediately (before any implementation) per the board rule.
+
+**Peer claims detected at checkout (not to be touched):**
+| Session | Scope claimed | Evidence |
+|---|---|---|
+| `arena/08883ee9-own4` | `nfl-decision/**`, append-only board, root nav if final integration permits | branch `arena/08883ee9-own4`, commit "Claim NFL decision and evidence review" |
+| `arena/e2b19bf6-own4` | `nfl-decision/**` (same path as 08883ee9), `COORDINATION.md`, root `index.html`/`README.md` integration | branch `arena/e2b19bf6-own4`, commit "Claim D1-D8: NFL decision layer, question register, suggestions board…" |
+| `arena/009a9652-own4` | `nfl-decisions/**` (plural), additive `index.html` link, `verification/build.py` link, `.github/workflows/nfl-decisions.yml` | branch `arena/009a9652-own4` |
+
+**Irregularity logged for the peers:** `arena/08883ee9-own4` and `arena/e2b19bf6-own4` claim the *same* path `nfl-decision/**`; `arena/009a9652-own4` claims `nfl-decisions/**` and the shared `index.html` + `verification/build.py`. Two sessions editing one directory, and two sessions editing the same shared nav file, will collide. This session does not arbitrate peer scopes and edits none of those paths.
+
+**This session's exclusive scope (new, non-overlapping):**
+| ID | Task | Status | Files |
+|---|---|---|---|
+| A1 | Live official NFL capture 2026-11-12: Week 10 official injury report (player rows with official links), official standings, official schedules W8–W10 | in progress | `nfl-audit/data/raw/**`, `nfl-audit/scripts/collect.py` |
+| A2 | Independent line-by-line re-verification of the *existing* NFL namespaces' stored data against official pages; publish pass/fail per row and every mismatch | in progress | `nfl-audit/data/verification.json`, `nfl-audit/pages/verification.html` |
+| A3 | Injury + depth-deficiency tracker (2nd/3rd/4th-string replacements) built from official injury/roster data only; blank where official depth data is unavailable | in progress | `nfl-audit/data/injuries.json`, `nfl-audit/data/depth.json` |
+| A4 | Decision-readiness register: every question / piece of information / answer needed before a decision, with known/unknown/blocking status and a discovery suggestion for each unknown | in progress | `nfl-audit/data/questions.json`, `nfl-audit/pages/questions.html` |
+| A5 | Suggestions board (dedicated section): ranked options a reviewer can choose from before any implementation, incl. leaderboard/gate/correlation/luck-removal improvements | in progress | `nfl-audit/data/suggestions.json`, `nfl-audit/pages/suggestions.html` |
+| A6 | Executive summary | in progress | `nfl-audit/EXECUTIVE_SUMMARY.md`, `nfl-audit/pages/executive-summary.html` |
+| A7 | Site: landing dashboard + category subpages + Flagged for Review, every table row source-linked | in progress | `nfl-audit/index.html`, `nfl-audit/pages/**`, `nfl-audit/assets/**` |
+| A8 | Verifier (fails on a row without an official link, a broken local link, or a filled value without evidence) | in progress | `nfl-audit/scripts/verify.py` |
+| A9 | PR → merge → Pages deploy confirmation, recorded here | in progress | this file |
+
+**Not edited by this session:** `nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nfl-decision/`, `nfl-decisions/`, `docs/`, `verified/`, `verification*/`, `data/`, `lab/`, `lines-lab/`, `rental*/`, `rent-*/`, root `index.html`. Root navigation link request: add `nfl-audit/index.html` to the root sidebar *after* the two peer sessions above finish their own root-nav edits, to avoid a three-way `verification/build.py` conflict.
 ## Session arena/0b66981b-own4 — NFL Line Genesis (consolidated NFL hub) · 2026-11-12
 
 Session ID: `arena-0b66981b-own4` · Branch: `arena/0b66981b-own4` (platform-fixed; per-task `session-<id>/<task>` branches cannot be created in this harness, logged as a deviation, same as prior sessions).

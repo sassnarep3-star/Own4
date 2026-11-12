@@ -152,6 +152,18 @@ NAV = [
         ("nfl-hub/pages/questions.html", "NFL open questions", "legacy"),
         ("nfl-hub/pages/flagged.html", "⚑ NFL flagged for review", "legacy"),
     ]),
+    # Added 2026-11-12 by session arena/e2601583-own4: its own audit dashboard, plus the
+    # four earlier NFL workspaces, which were reachable only by direct URL otherwise.
+    ("NFL audit · 2026-11-12", [
+        ("nfl-audit/index.html", "NFL audit &amp; suggestions", "legacy"),
+        ("nfl-audit/pages/questions.html", "NFL questions register", "legacy"),
+        ("nfl-audit/pages/injuries.html", "NFL injury tracker", "legacy"),
+        ("nfl-audit/pages/flagged.html", "⚑ NFL audit flags", "legacy"),
+        ("nfl/index.html", "NFL research (specification)", "legacy"),
+        ("nfl-research/index.html", "NFL research dashboard", "legacy"),
+        ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
+        ("nfl-quant/index.html", "NFL quant pipeline", "legacy"),
+    ]),
 ]
 
 FOOTER = """<footer>
