@@ -34,6 +34,7 @@ CARD = load("model", "model_card.json")
 RESULTS = load("strategies", "results.json")
 CORR = load("correlations.json")
 INJ = load("injuries.json")
+GB = load("gamebooks.json")
 SUG = load("suggestions.json")
 QREG = load("questions.json")
 FLAGS = load("flags.json")["flags"]
@@ -272,6 +273,7 @@ because no official NFL odds publication exists and the archive has no 2026 clos
 <li>All 32 team records, points for/against and tie percentages — {a('https://www.nfl.com/standings/', 'NFL.com standings')}.</li>
 <li>All 14 Week 10 fixtures, kickoff times and byes — {a(FIX['source'], 'NFL.com Week 10 schedule')}.</li>
 <li>Six formal injury designations and three confirmed quarterback changes — {a('https://www.nfl.com/injuries/', 'official injury report')} and NFL.com news.</li>
+<li>Replacement starters, from official game books: Baltimore's Week 9 quarterback was a player the Week 8 book codes <b>3QB</b> — {src('SRC-22')}. Two worked examples on <a href="pages/injuries.html">Injuries &amp; availability</a>.</li>
 <li>The 2026 rule changes — {a('https://operations.nfl.com/rules-officiating/2026-nfl-rulebook', 'NFL Operations rulebook')}.</li>
 </ul>
 </div>
@@ -279,7 +281,7 @@ because no official NFL odds publication exists and the archive has no 2026 clos
 <h3>Missing, blank and flagged</h3>
 <ul>
 <li>2026 market lines, closing-line value and any market comparison: <b>no source in scope</b>.</li>
-<li>Starter / backup / 2nd-3rd-4th string status: <b>NFL.com has no depth chart</b> (verified 404).</li>
+<li>Pre-kickoff starter / backup order: <b>NFL.com publishes no depth chart</b> (verified 404). Post-game starters are proven from game books; next week's depth is not.</li>
 <li>Player props and prop combos: <b>no authorized player feed or prop prices</b>.</li>
 <li>Injury causes for most players: the official table leaves the cause blank.</li>
 </ul>
@@ -833,6 +835,11 @@ def injuries():
                for r in INJ["qb_depth_changes"]]
     oth = [[f'<b>{E(r["team"])}</b>', E(r["player"]), E(r["position"]), E(r["status"]), src(r["source"])]
            for r in INJ["other_verified_availability"]]
+    gb_rows = [[f'<b>{E(r["id"])}</b>', f'<b>{E(r["team"])}</b> {E(r["position"])}',
+                f'W{r["week_before"]}: {E(r["before"])}', f'W{r["week_after"]}: {E(r["after"])}',
+                E(r["depth_evidence"]) + ("" if r["reason"] else " " + badge("reason blank", "warn")),
+                src(r["before_source"]) + " " + src(r["after_source"])]
+               for r in GB["examples"]]
     body = f"""
 <div class="banner"><b>Snapshot, not a live feed.</b> Captured Thursday of Week 10. Only six players league-wide had a formal
 game designation at that moment; the final inactives are published later. Practice status is not a prediction of availability.</div>
@@ -861,16 +868,36 @@ the report is practice-status only and is not listed here.</p>
 </section>
 
 <section>
-<h2>The defensive backup problem — why it is blank</h2>
+<h2>Replacement starters, verified from official game books</h2>
+<p class="sub">A game book is the NFL's own post-game record of who took the first snap, who came on, and who did not
+dress. Comparing the same position across two consecutive weeks proves a replacement without a depth chart and without
+inference. Two worked examples follow; both PDFs are linked so either can be checked by hand.</p>
+{table(["Example", "Team / position", "Week 8 book", "Week 9 book", "What the two books prove", "Sources"], gb_rows)}
+<h3 style="margin-top:1.4rem">Method, step by step</h3>
+<ol>{''.join(f"<li>{E(x)}</li>" for x in GB['method'])}</ol>
+<div class="two">
+<div class="panel"><h3>What a game book proves</h3><ul>{''.join(f"<li>{E(x)}</li>" for x in GB['what_it_proves'])}</ul></div>
+<div class="panel"><h3>What it cannot prove</h3><ul>{''.join(f"<li>{E(x)}</li>" for x in GB['what_it_does_not_prove'])}</ul></div>
+</div>
+<ul>{''.join(f"<li>{E(x)}</li>" for x in GB['limits'])}</ul>
+<p class="sub"><b>Weekly capacity:</b> {E(GB['weekly_capability'])}</p>
+</section>
+
+<section>
+<h2>The defensive backup problem — why it is still blank</h2>
 <div class="panel badpanel">
 <p><b>Requested:</b> know when defences are down to 2nd, 3rd or 4th-string players.</p>
 <p><b>Verified blocker:</b> the NFL.com team depth-chart URL returns "404 - Flag on the Play" ({src('SRC-14')}) and no official
 depth publication was located. The official injury report names the player and his practice status, but not his place on the
 depth chart.</p>
-<p><b>Therefore:</b> the starter-weighted availability index is <b>not computed</b> — no number is published, because any number
-would imply unverified starter status. Offensive "starters vs backups" has the same limitation.</p>
-<p><b>What would settle it:</b> a licensed snap-count feed or an official depth chart, plus an explicit definition of "starter"
-(see <a href="pages/questions.html#q-05">Q-05</a> and <a href="pages/questions.html#q-21">Q-21</a>).</p>
+<p><b>Partly closed:</b> the game books above prove who actually started at each position and, in GB-1, that a player coded
+<b>3QB</b> took the first snap the following week. That settles the post-game question — was this a third-string replacement? —
+but not the pre-kickoff one: who starts on Sunday?</p>
+<p><b>Therefore:</b> the starter-weighted availability index is still <b>not computed</b>. A number used to price a future game
+would imply a depth order that no official source publishes before kickoff. Offensive "starters vs backups" has the same limitation.</p>
+<p><b>What would settle it:</b> a licensed pre-kickoff depth or snap-count feed, plus an explicit definition of "starter"
+(see <a href="pages/questions.html#q-05">Q-05</a> and <a href="pages/questions.html#q-21">Q-21</a>). For the post-game side,
+suggestion S-16 would transcribe all 16 weekly books into a ledger.</p>
 </div>
 </section>
 
@@ -1061,7 +1088,7 @@ a sample of cited URLs was fetched live; and each workspace's published slate wa
 
 # ---------------------------------------------------------------- requirements
 REQS = [
- ("R1", "A section dedicated to suggestions, so a path can be reviewed and chosen before implementation", "pages/suggestions.html", "Met", "15 suggestions with options, effort, risk, dependencies and a decision log"),
+ ("R1", "A section dedicated to suggestions, so a path can be reviewed and chosen before implementation", "pages/suggestions.html", "Met", "16 suggestions with options, effort, risk, dependencies and a decision log"),
  ("R2", "A clear list of questions, information and answers needed before a decision", "pages/questions.html", "Met", "27 questions; 8 answered with sources, 3 blocked"),
  ("R3", "Originate own NFL lines", "pages/own-lines.html", "Met", "14 Week 10 lines, pre-kickoff, with look-ahead tests"),
  ("R4", "Research and develop strategies for useful signals", "pages/strategies.html", "Met", "7 pre-registered families; 3 measured, 4 fail pricing or are blocked"),
@@ -1071,12 +1098,12 @@ REQS = [
  ("R8", "Determine correlation values", "pages/correlations.html", "Partial", "5 measured for game markets; 2 prop correlations blocked"),
  ("R9", "Remove luck and build selectively skill-based strategies", "pages/validation.html", "Met", "Week-clustered bootstrap, placebo permutation, Holm correction; no strategy survived"),
  ("R10", "Track injuries", "pages/injuries.html", "Partial", "Official report captured; 6 formal designations; final inactives not yet published"),
- ("R11", "Know defensive deficiencies when 2nd/3rd/4th-string players replace starters", "pages/injuries.html", "Blocked", "No official depth chart (404); index deliberately blank"),
- ("R12", "Same for offensive starters and backups", "pages/injuries.html", "Partial", "Quarterback changes verified; other positions blocked by the same gap"),
+ ("R11", "Know defensive deficiencies when 2nd/3rd/4th-string players replace starters", "pages/injuries.html", "Partial", "No official depth chart (404); game books prove post-game replacements (GB-1: a 3QB started) but not pre-kickoff depth"),
+ ("R12", "Same for offensive starters and backups", "pages/injuries.html", "Partial", "Two official game books verify the quarterback and guard changes; other positions and pre-kickoff depth remain blank"),
  ("R13", "Executive summary outlining important details", "pages/executive-summary.html", "Met", "Situation, verified, missing, findings, decisions"),
  ("R14", "No manual input; complete the work autonomously", "pages/audit.html", "Met", "Pipeline and site rebuild from committed data; no hand-entered value"),
- ("R15", "Verify every row against an official source and link it", "pages/sources.html", "Met", "20 sources; every row links a source or a DERIVED badge"),
- ("R16", "Review the repo line by line and flag irregularities", "pages/audit.html", "Met", "4 workspaces reviewed; 17 flags with severity"),
+ ("R15", "Verify every row against an official source and link it", "pages/sources.html", "Met", "23 sources; every row links a source or a DERIVED badge"),
+ ("R16", "Review the repo line by line and flag irregularities", "pages/audit.html", "Met", "4 workspaces reviewed; 18 flags with severity"),
  ("R17", "Clean, simple, user-friendly dashboard with category subpages", "../index.html", "Met", "15 pages, grouped navigation, filterable tables"),
  ("R18", "All entries and findings in simple tables", "../index.html", "Met", "Every page is table-first"),
  ("R19", "Leave unverified values blank and flag them", "pages/flagged.html", "Met", "Market lines, depth, props and injury causes are blank"),

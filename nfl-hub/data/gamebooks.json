@@ -1,0 +1,61 @@
+{
+  "generated_utc": "2026-11-12",
+  "status": "verified from official game books",
+  "summary": "The official NFL game book, published after each game, lists both starting lineups, every substitution with the player's depth code (for example 3QB), the Did Not Play list and the Not Active list. Comparing the same position across consecutive weeks therefore proves who actually started in place of whom, without a depth chart and without inference. This is a post-game proof, not a pre-kickoff prediction.",
+  "what_it_proves": [
+    "Which player took the first snap at each position, per team, per game.",
+    "That the player who started was below the man he replaced on the depth chart, when the replacement is annotated with a depth code such as 3QB.",
+    "The direction of a lineup change: inactive one week and starting the next is a promotion, not an injury replacement."
+  ],
+  "what_it_does_not_prove": [
+    "Why the change happened. The game book does not carry an injury designation; the reason stays blank unless the official status report for that week is also captured.",
+    "The depth order before kickoff. The book is published after the game, so it cannot be used to price a game that has not been played.",
+    "Anything about a player who was active but did not start, unless he appears in the substitution list."
+  ],
+  "method": [
+    "Open the game centre on NFL.com and download the Game Book (PDF) for the week to be checked.",
+    "Read the Lineups block: it gives the starting player by position and jersey number for both teams.",
+    "Read the Substitutions block: entries are annotated with a depth code, for example '3QB J.Fagnano', meaning third quarterback.",
+    "Read the Did Not Play and Not Active lists to separate a benching from an absence.",
+    "Compare the same position against the previous week's book. Name a replacement only when both books agree on the change; leave the reason blank unless the official status report for that week names it."
+  ],
+  "weekly_capability": "16 game books per week (one per game), covering both teams; roughly 30 minutes to transcribe by hand, or scriptable from the PDF text layer.",
+  "examples": [
+    {
+      "id": "GB-1",
+      "team": "BAL",
+      "position": "QB",
+      "week_before": 8,
+      "week_after": 9,
+      "before": "8 L.Jackson started at quarterback for Baltimore in Week 8 at Buffalo.",
+      "after": "12 J.Fagnano started at quarterback for Baltimore in Week 9 against Jacksonville.",
+      "depth_evidence": "The Week 8 game book lists Fagnano under Substitutions annotated 3QB - the third quarterback. A player coded third-string in one book started the next.",
+      "reason": "",
+      "reason_note": "Left blank on purpose: the Week 9 Baltimore status report was not captured in this session, and the game book does not state a reason.",
+      "before_source": "SRC-21",
+      "after_source": "SRC-22",
+      "game_centre": "SRC-23"
+    },
+    {
+      "id": "GB-2",
+      "team": "BAL",
+      "position": "RG",
+      "week_before": 8,
+      "week_after": 9,
+      "before": "G Ioane appears on the Week 8 Not Active list, so he did not dress at Buffalo.",
+      "after": "Ioane started at right guard for Baltimore in Week 9.",
+      "depth_evidence": "The change runs in the opposite direction to GB-1: a player who was inactive became a starter. A lineup change on its own is therefore not evidence of an injury replacement.",
+      "reason": "",
+      "reason_note": "Blank: the books record the change, not its cause.",
+      "before_source": "SRC-21",
+      "after_source": "SRC-22",
+      "game_centre": "SRC-23"
+    }
+  ],
+  "limits": [
+    "Post-game only: usable for verifying and back-testing replacement starters, not for setting a pre-kickoff line.",
+    "The depth code is quoted only where the game book prints one; most substitutes carry no code, so their depth rank stays blank.",
+    "Names must be transcribed by hand or with a PDF text extractor; the PDFs carry an NFL copyright notice, so they are cited and summarised, never redistributed.",
+    "Two examples establish that the method works. They do not establish the size of the effect on results - that needs a full season of books (see suggestion S-16)."
+  ]
+}

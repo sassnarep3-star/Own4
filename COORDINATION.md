@@ -1670,3 +1670,46 @@ source links; per the brief they do not block publication. The two findings wort
 anything else is built: **there is no official price source**, so no betting reward can honestly be paid, and
 **there is no official depth chart**, so the 2nd/3rd/4th-string tracking the brief asks for can only be published
 for the 13 cases an official article explicitly confirms.
+
+## Session `arena/d89b5d1a-own4` — NFL decision hub, second integration pass: collision, resolution and additive delivery (2026-11-12)
+
+**Status:** resolved on `arena/d89b5d1a-own4`. Nothing in the canonical hub was deleted or rewritten; one additive module was merged into it.
+
+### What happened
+
+The claim entry for this session (above) reserved `nfl-hub/**` while `main` was six days stale and no unexpired claim was visible. During the work, a parallel session (`NFL Line Genesis`) claimed and merged its own `nfl-hub/**` — 49 files, 15 pages, its own `build.py` and `verify.py`, CI on `nfl-hub/**`, and a root navigation entry pointing at `nfl-hub/pages/*`. Both builds chose the same directory name, so the two trees conflicted file-for-file (`AA` on every hub file).
+
+### Resolution
+
+1. **The peer build stays canonical.** It is already merged, deployed and CI-gated on a byte-identical rebuild, and it covers more of the brief on market comparison (archived closing lines, true holdout, market MAE 9.871 vs model 10.392).
+2. **This session's parallel 17-page hub was not merged over it.** Merging two incompatible generators into one directory would have produced a site neither verifier could pass. The duplicate implementation was dropped rather than published as a sixth competing NFL dashboard.
+3. **The one thing the canonical hub could not source was ported in:** official game-book proof of replacement starters. This is new verified evidence, not a rewrite.
+
+### What this session adds to the canonical hub
+
+| File | Change |
+|---|---|
+| `nfl-hub/data/gamebooks.json` | **New.** Official method, two worked examples, capacity, and explicit limits. |
+| `nfl-hub/build.py` | New section on the injuries page; rewritten depth-chart panel ("partly closed"); one bullet on the executive summary; requirements R11/R12 raised from Blocked/Partial to Partial with evidence; R1/R15/R16 counts corrected. |
+| `nfl-hub/data/sources.json` | +SRC-21 (Week 8 game-book PDF), +SRC-22 (Week 9 PDF), +SRC-23 (Week 8 game centre). |
+| `nfl-hub/data/flags.json` | +F-18: replacement starters are provable only after the game. |
+| `nfl-hub/data/suggestions.json` | +S-16: transcribe all 16 weekly game books into a starter-change ledger. |
+
+### The verified evidence
+
+- **GB-1 (BAL QB).** Week 8 book: `8 L.Jackson` started at Buffalo. Week 9 book: `12 J.Fagnano` started against Jacksonville. The Week 8 book lists Fagnano under Substitutions annotated **`3QB`** — the third quarterback. A player coded third-string in one official book took the first snap the next week.
+- **GB-2 (BAL RG).** The same pair of books runs the other way: Ioane is on the Week 8 **Not Active** list and starts in Week 9. A lineup change is therefore not by itself an injury replacement.
+- **Reason left blank** in both rows: neither book states why, and the Week 9 Baltimore status report was not captured. No inference was made.
+
+### Verification after the patch
+
+`python3 nfl-hub/build.py` → 15 pages. `python3 nfl-hub/verify.py` → **PASS, 141 checks, 354 table rows, 767 links, byte-identical rebuild.** Every new table row carries SRC-21/SRC-22. The new page text cites only `nfl.com` and `static.www.nfl.com`.
+
+### Irregularities noted (not edited)
+
+- **Duplicate work is the real defect here, not the code.** Two sessions reserved the same directory because the board did not show the other's claim at read time. Recommendation: the claim entry must be pushed *before* any build, and the claiming session should `git fetch` main immediately before writing, not only before pushing.
+- `nfl-hub/data/source/games.csv` and `closing_lines.csv` are committed third-party archive files. The peer's `provenance.json` records **CC-BY-4.0 per the upstream README**, which is adequate attribution but should be confirmed at the upstream repository before redistribution; no change was made to their files.
+- This session's original 17-page hub, its 92-check verifier and its independent reconciliation (15/15 Week 9 finals, 352/352 standings cells) are **not published**. They were reproducible checks, not unique evidence; the canonical hub performs its own reconciliation (32/32 teams, 14/14 fixtures). Recorded here so the work is not mistaken for lost data.
+
+**PR and deployment:** to be recorded after merge.
+
