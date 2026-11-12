@@ -33,14 +33,14 @@ row lacks a source link, or if any page cites a URL recorded as dead.
 | Week 10 fixtures | [NFL.com Week 10 schedule](https://www.nfl.com/schedules/2026/by-week/week-10) | Official, 14/14 reconciled |
 | Injuries | [Official Week 10 injury report](https://www.nfl.com/injuries/) | Official snapshot, 6 formal designations |
 | Historical games and closing lines | [nflverse/nfldata](https://github.com/nflverse/nfldata) commit `6ea0be6` | Third-party archive, hashed |
-| Depth charts | — | **Does not exist officially** (NFL.com 404) → blank |
+| Depth charts | — | **No official source found** (tested NFL.com URL returns 404) → blank |
 | 2026 market lines | — | **Not in scope** → blank |
 | Player props | — | **Blocked** (no player feed, no prop prices) |
 
 ## What is deliberately blank
 
 - 2026 market lines, closing-line value and any market comparison.
-- Starter / backup / 2nd-3rd-4th-string status (no official depth chart).
+- Starter / backup / 2nd-3rd-4th-string status (no official depth chart found).
 - Player prop lines, prop results and prop correlations.
 - Injury causes for most players (blank in the official table).
 - The defensive availability index (it would require unverified starter status).

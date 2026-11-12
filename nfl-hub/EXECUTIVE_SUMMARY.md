@@ -17,7 +17,7 @@ purchases.
 | Week 10 fixtures and byes | 14/14 matched by pairing and date; byes CHI, DEN, PHI, TB | <https://www.nfl.com/schedules/2026/by-week/week-10> |
 | Formal injury designations | 6 players league-wide at capture (2 WAS, 1 NYG, 3 NE) | <https://www.nfl.com/injuries/> |
 | Quarterback changes | SEA (Lock for Darnold), CLE (Watson), ARI (Beck); MIA headline only | <https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again> |
-| No official depth chart | NFL.com depth-chart URL returns 404 | <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart> |
+| No official depth chart found | tested NFL.com depth-chart URL returns 404 | <https://www.nfl.com/teams/kansas-city-chiefs/depth-chart> |
 | Rules context | 2026 rule changes | <https://operations.nfl.com/rules-officiating/2026-nfl-rulebook> |
 
 Internal consistency checks: the archive reproduces 136 completed games with zero duplicate ids, zero score mismatches,
@@ -72,7 +72,7 @@ pre-registration, not a reason to re-tune.
 
 Seventeen items, including: two dead NFL.com citations inherited from `nfl/`; a stale Week 8/9 slate still presented
 as current on `nfl-lab/` and `nfl-quant/`; an official contradiction (Ravens "No Injuries Reported" while Lamar Jackson
-is on injured reserve); no official depth chart; and the absence of any 2026 market price. Full list:
+is on injured reserve); no official depth chart found; and the absence of any 2026 market price. Full list:
 `nfl-hub/pages/flagged.html`.
 
 ## 7. Why this is safe to publish

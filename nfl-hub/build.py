@@ -544,8 +544,8 @@ def own_lines():
                    f'{r["w"]}-{r["l"]}-{r["t"]}', f'{r["pf"]}', f'{r["pa"]}', src("SRC-01")])
     body = f"""
 <div class="banner"><b>These are not sportsbook lines.</b> They are this model's estimates for 14 Week 10 games, generated
-12 Nov 2026 before the first kickoff. The market column is blank because no official or licensed 2026 market price exists in
-scope. Do not compare these to a book you have not verified.</div>
+12 Nov 2026 before the first kickoff. The market column is blank because no official or licensed 2026 market price was found
+in scope. Do not compare these to a book you have not verified.</div>
 
 <section>
 <h2>Method</h2>
@@ -582,8 +582,9 @@ scope. Do not compare these to a book you have not verified.</div>
 
 <section>
 <h2>Why the market column is empty</h2>
-<p>The archive contains zero closing lines for 2026, and no official NFL odds publication was found. Filling that column from
-memory, a screenshot, or an unlicensed aggregator would break the verification rule. It stays blank until Q-04 is answered.</p>
+<p>The archive contains zero closing lines for 2026, and no official NFL odds publication was found on the pages reviewed.
+Filling that column from memory, a screenshot, or an unlicensed aggregator would break the verification rule. It stays blank
+until Q-04 is answered.</p>
 </section>
 """
     page("pages/own-lines.html", "Originated lines — Week 10",
@@ -863,9 +864,9 @@ the report is practice-status only and is not listed here.</p>
 <h2>The defensive backup problem — why it is blank</h2>
 <div class="panel badpanel">
 <p><b>Requested:</b> know when defences are down to 2nd, 3rd or 4th-string players.</p>
-<p><b>Verified blocker:</b> NFL.com returns "404 - Flag on the Play" for a team depth-chart URL ({src('SRC-14')}). There is no
-official publication that assigns starter/backup order. The official injury report names the player and the practice status,
-but not his place on the depth chart.</p>
+<p><b>Verified blocker:</b> the NFL.com team depth-chart URL returns "404 - Flag on the Play" ({src('SRC-14')}) and no official
+depth publication was located. The official injury report names the player and his practice status, but not his place on the
+depth chart.</p>
 <p><b>Therefore:</b> the starter-weighted availability index is <b>not computed</b> — no number is published, because any number
 would imply unverified starter status. Offensive "starters vs backups" has the same limitation.</p>
 <p><b>What would settle it:</b> a licensed snap-count feed or an official depth chart, plus an explicit definition of "starter"
@@ -963,8 +964,9 @@ def sources():
 not an NFL publication, the row carries a third-party or DERIVED badge instead.</div>
 <section>
 <h2>Register</h2>
-<p class="sub">Twenty sources: 18 official NFL pages, one third-party archive, one helpline. Two entries are recorded
-specifically because they return 404 and must not be cited.</p>
+<p class="sub">{len(SOURCES['sources'])} sources: {sum(1 for x in SOURCES['sources'] if x['official'])} official NFL pages and
+{sum(1 for x in SOURCES['sources'] if not x['official'])} non-official references. Two entries are recorded specifically
+because they return 404 and must not be cited.</p>
 {table(["ID", "Name", "URL", "Type", "Status", "What it supports", "Retrieved"], rows)}
 </section>
 <section>
