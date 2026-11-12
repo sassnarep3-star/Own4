@@ -1570,3 +1570,54 @@ No peer namespace will be edited. Existing NFL implementations are retained and 
   736/736 data-table rows sourced, 0 broken links · `verification/verify_site.py` → pass · `scripts/build.py` → pass ·
   `scripts/check_site.py` → 0 problems · `unittest discover` → 6/6 OK · `git diff -- docs` → clean. Root `index.html`
   still carries every peer nav entry.
+
+---
+
+## Session `arena/e72ac2db-own4` — NFL verification & consolidation audit (claim, 2026-11-12 UTC)
+
+**Session ID:** `arena/e72ac2db-own4` · **Branch:** `arena/e72ac2db-own4` (platform-pinned; per-task
+`session-<id>/<task>` branches are not creatable in this harness — same logged deviation as every prior session).
+**Base:** `5d29b0f` (main, PR #65 merged).
+
+**Claim status:** in progress. Claimed immediately (before any implementation) per the board rule.
+
+**Peer claims detected at checkout (not to be touched):**
+| Session | Scope | State at checkout |
+|---|---|---|
+| `arena/009a9652-own4` | `nfl-decisions/**` + root nav + `nfl-decisions.yml` | merged (PR #60/#61) |
+| `arena/0b66981b-own4` | `nfl-hub/**` + root nav + `nfl-hub.yml` | merged (PR #62) |
+| `arena/e2601583-own4` | `nfl-audit/**` + root nav + `nfl-audit.yml` | merged (PR #64) |
+| `arena/e2b19bf6-own4` | `nfl-decision/**` + root nav + `nfl-decision.yml` | merged (PR #65) |
+| `arena/1d2cb84b-own4` | `nfl-edge/**` + root nav + `NFL_EXECUTIVE_SUMMARY.md` | open PR #66 (mergeable, checks pending) |
+| `arena/d89b5d1a-own4` | second `nfl-hub/**` implementation + root nav | open PR #63 (CONFLICTING with merged `nfl-hub/**`) |
+| `arena/08883ee9-own4` | `nfl-decision/**` pricing primitives | branch only, no PR |
+| `arena/8184197d-own4` | `nfl-intel/` claim only | branch only, no files |
+| `arena/b4aafa88-own4` | `nfl-lines/**` claim only | branch only, no files |
+
+**Irregularities logged for peers (not edited here):** PR #63 re-implements the already-merged `nfl-hub/**`
+path and is CONFLICTING; its owner should close it or rename to a distinct namespace. PR #66 (`nfl-edge/**`)
+is the only open NFL PR that is mergeable; its owner should merge it after checks pass. This session does not
+merge, close, or edit any peer PR or peer namespace.
+
+**This session's exclusive scope (new, non-overlapping):** independent verification & consolidation audit —
+no new model, no new prices, no competing picks. It re-verifies peer claims against official sources and
+publishes a consolidated decision surface.
+
+| ID | Task | Status | Files |
+|---|---|---|---|
+| E1 | Line-by-line repo review of all 8 merged NFL workspaces + 2 open-PR workspaces against official sources; pass/fail per workspace | in progress | `nfl-e72ac2db/data/workspace_audit.json`, `nfl-e72ac2db/pages/repo-review.html` |
+| E2 | Consolidated executive summary (synthesis of peer findings, no new empirical claim) | in progress | `nfl-e72ac2db/EXECUTIVE_SUMMARY.md`, `nfl-e72ac2db/pages/executive-summary.html` |
+| E3 | Deduplicated questions register (known/unknown/answer/unlock + discovery method per item) | in progress | `nfl-e72ac2db/data/questions.json`, `nfl-e72ac2db/pages/questions.html` |
+| E4 | Deduplicated suggestions board (ranked options with effort/risk/prerequisites; reviewer chooses before implementation) | in progress | `nfl-e72ac2db/data/suggestions.json`, `nfl-e72ac2db/pages/suggestions.html` |
+| E5 | Injury/depth cross-check: fresh official injury report vs peer injury tables; 2nd/3rd/4th-string evidence gap stated, blanks kept blank | in progress | `nfl-e72ac2db/data/injuries.json`, `nfl-e72ac2db/pages/injuries.html` |
+| E6 | Cross-workspace own-lines / gates / leaderboard / correlations comparison (peer numbers cited, no new model) | in progress | `nfl-e72ac2db/data/comparison.json`, `nfl-e72ac2db/pages/lines.html`, `nfl-e72ac2db/pages/leaderboard.html` |
+| E7 | Static site (landing + category subpages + Flagged for Review), every table row source-linked | in progress | `nfl-e72ac2db/index.html`, `nfl-e72ac2db/pages/**`, `nfl-e72ac2db/assets/**` |
+| E8 | Verifier (fails on row without official link, broken local link, or filled value without evidence) + CI gate | in progress | `nfl-e72ac2db/scripts/verify.py`, `.github/workflows/nfl-e72ac2db.yml` |
+| E9 | Final integration: root nav via `verification/build.py` + regenerated `index.html`, PR → merge → Pages confirmation | in progress | `verification/build.py` (additive NAV only), `index.html` (regenerated), this file |
+
+**Not edited by this session:** `nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nfl-decisions/`,
+`nfl-hub/`, `nfl-audit/`, `nfl-decision/`, `docs/`, `verified/`, `verification*/` (except the single additive
+NAV entry in `verification/build.py` at integration time), `data/`, `lab/`, `lines-lab/`, `rental*/`,
+`rent-*/`, `nfl-edge/` (open PR #66), and the second `nfl-hub/` (open PR #63). Root navigation is changed
+only at final integration after the hub verifies clean, by editing `verification/build.py` NAV and
+regenerating `index.html` so the canonical byte-identical rebuild gate keeps passing.
