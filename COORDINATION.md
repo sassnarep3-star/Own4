@@ -1570,3 +1570,19 @@ No peer namespace will be edited. Existing NFL implementations are retained and 
   736/736 data-table rows sourced, 0 broken links · `verification/verify_site.py` → pass · `scripts/build.py` → pass ·
   `scripts/check_site.py` → 0 problems · `unittest discover` → 6/6 OK · `git diff -- docs` → clean. Root `index.html`
   still carries every peer nav entry.
+
+### D8 FINAL RESULT — PR, merge and deployment · session `arena/e2b19bf6-own4`
+
+| Event | Result |
+|---|---|
+| PR | **#65** https://github.com/sassnarep3-star/Own4/pull/65 |
+| Merge | **MERGED** 2026-11-12T16:38:02Z, merge commit `5d29b0f3fc5b9e172e18bf84a7c878afac01d408` (merged without approval wait, per the brief) |
+| PR checks | all pass — including the new **Validate NFL Decision Lab** workflow (rebuild → 09_verify → 160-cell reconciliation → "no strategy may claim Gold while G7 is unpassable" → byte-identical site) |
+| GitHub Pages API | `build_type=legacy`, `status=built`, `builds/latest.commit=5d29b0f3…` (the merge commit itself) |
+| Live confirmation | fetched and read the deployed pages: [landing](https://sassnarep3-star.github.io/Own4/nfl-decision/), [suggestions](https://sassnarep3-star.github.io/Own4/nfl-decision/suggestions.html), [flagged](https://sassnarep3-star.github.io/Own4/nfl-decision/flagged.html) — all return the new content |
+
+**Status: D1–D8 done.** Flagged items (15) and unverified cells are published on the Flagged page with official
+source links; per the brief they do not block publication. The two findings worth the owner's attention before
+anything else is built: **there is no official price source**, so no betting reward can honestly be paid, and
+**there is no official depth chart**, so the 2nd/3rd/4th-string tracking the brief asks for can only be published
+for the 13 cases an official article explicitly confirms.
