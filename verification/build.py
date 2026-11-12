@@ -139,6 +139,21 @@ NAV = [
         ("status/index.html", "Status review", "legacy"),
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
     ]),
+    # Added 2026-11-12 by session arena/e2601583-own4 (nfl-audit). The two rental
+    # links below were added by hand to index.html by session arena/f1dbaea0 and were
+    # silently dropped by every rebuild; they are now part of the generator so they
+    # survive. No peer content is removed by this change.
+    ("NFL · 2026-11-12 audit", [
+        ("nfl-audit/index.html", "NFL decision dashboard", "nfl"),
+        ("nfl-audit/pages/suggestions.html", "NFL suggestions", "nfl"),
+        ("nfl-audit/pages/questions.html", "NFL questions", "nfl"),
+        ("nfl-audit/pages/injuries.html", "NFL injury tracker", "nfl"),
+        ("nfl-audit/pages/flagged.html", "⚑ NFL flagged for review", "nfl"),
+    ]),
+    ("Rental research · 2026-11-06", [
+        ("rental-f1dbaea0/index.html", "RentCheck SF · 94122", "rental"),
+        ("rental-f1dbaea0/flagged.html", "⚑ Rental — flagged (f1dbaea0)", "rental"),
+    ]),
 ]
 
 FOOTER = """<footer>
