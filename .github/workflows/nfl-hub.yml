@@ -38,13 +38,23 @@ jobs:
       - name: Rebuild model, backtest, correlations and lines
         run: python3 nfl-hub/pipeline/run_all.py
 
-      - name: Rebuild the static site
-        run: python3 nfl-hub/build.py
+      - name: Keep the recomputed tree for comparison
+        run: rm -rf /tmp/recomputed && cp -r nfl-hub/data /tmp/recomputed
 
-      - name: Data and HTML must not drift from the committed build
+      - name: Restore the committed data so the published HTML is built from it
+        run: git checkout -- nfl-hub/data
+
+      - name: Recomputation must match the committed data
+        # math.erf comes from the platform C library, so the last bits can differ
+        # between runners. Structure, counts, labels and tiers must match exactly;
+        # floats must agree to 1e-6 relative. See nfl-hub/compare.py.
+        run: python3 nfl-hub/compare.py /tmp/recomputed nfl-hub/data
+
+      - name: Published HTML must match the committed data byte for byte
         run: |
-          git diff --stat -- nfl-hub/data nfl-hub/pages nfl-hub/index.html
-          git diff --exit-code -- nfl-hub/data nfl-hub/pages nfl-hub/index.html
+          python3 nfl-hub/build.py
+          git diff --stat -- nfl-hub/pages nfl-hub/index.html
+          git diff --exit-code -- nfl-hub/pages nfl-hub/index.html
 
       - name: Verify every row, link, anchor and disclosure
         run: python3 nfl-hub/verify.py
