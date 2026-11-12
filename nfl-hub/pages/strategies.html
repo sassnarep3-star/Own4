@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Strategy catalogue — NFL Line Genesis: originated lines, validation gates, correlations and a decision register built only from source-linked data.">
+<title>Strategy catalogue · NFL Line Genesis</title>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside>
+  <a class="brand" href="../index.html"><span class="mark">O4</span><span class="bname">NFL Line Genesis<small>OWN4 · NFL RESEARCH</small></span></a>
+  <nav aria-label="Sections"><div class="navgrp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Requirements coverage</a><div class="navgrp">Decide</div><a class="nav" href="../pages/suggestions.html">Suggestions &amp; decisions</a><a class="nav" href="../pages/questions.html">Open questions</a><a class="nav" href="../pages/flagged.html">Flagged for review</a><div class="navgrp">This week</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/injuries.html">Injuries &amp; availability</a><div class="navgrp">Evidence</div><a class="nav active" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation &amp; luck</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; rewards</a><div class="navgrp">Data</div><a class="nav" href="../pages/data.html">Official data</a><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/audit.html">Repository review</a></nav>
+  <div class="sidebox">
+    <b>Snapshot</b><br>12 Nov 2026 · Week 10<br>
+    <span class="dot warn"></span>No validated edge<br>
+    <span class="dot ok"></span>32/32 official reconciliation
+  </div>
+  <a class="back" href="../../index.html">← OWN4 home</a>
+</aside>
+<div class="content">
+<header class="top">
+  <span class="kicker">NFL LINE GENESIS</span>
+  <span class="topnote">Research, not betting advice · No official NFL endorsement</span>
+</header>
+<main id="main">
+<div class="eyebrow">Strategy catalogue</div>
+<h1>Strategy catalogue</h1>
+<p class="lede">Seven pre-registered families covering singles, parlays and prop combos — with the gate each one fails.</p>
+
+<div class="banner"><b>All seven registered strategies fail.</b> Three single-bet families were scored on the holdout and
+lost money; the parlay and SGP families fail the pricing gate by construction; both prop families are blocked for lack of data.</div>
+
+<section>
+<h2>Catalogue</h2>
+<p class="sub">Rules and thresholds were committed to git before the holdout was scored. Theta values are chosen on
+2013-2016 validation only. See <a href="validation.html">Validation &amp; luck</a> for the numbers.</p>
+<div class="tw"><table class=""><thead><tr><th>ID</th><th>Family</th><th>Name</th><th>Rule</th><th>Pricing</th><th>Gate</th><th>Tier</th><th>Source</th></tr></thead><tbody><tr><td><b>S1</b></td><td>single-bet</td><td>Model edge vs closing spread</td><td>Bet the side where the model&#x27;s home margin disagrees with the market&#x27;s implied home margin by &gt;= theta points.</td><td>archived closing spread, -110 per side</td><td><span class="badge bad">G3 fails</span></td><td><span class="badge bad">Rejected</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S2</b></td><td>single-bet</td><td>Model edge vs closing total</td><td>Bet over/under where the model total disagrees with the closing total by &gt;= theta points.</td><td>archived closing total, -110</td><td><span class="badge bad">G3 fails</span></td><td><span class="badge bad">Rejected</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S3</b></td><td>single-bet</td><td>Moneyline value</td><td>Bet the moneyline when model win probability exceeds the vig-free market implied probability by &gt;= theta.</td><td>archived closing moneyline</td><td><span class="badge bad">G3 fails</span></td><td><span class="badge bad">Rejected</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S4</b></td><td>parlay</td><td>2-leg cross-game parlay</td><td>Combine two S1 selections from different games in the same week.</td><td>ASSUMED standard 2-team payout 2.64 (+164); flagged, because sportsbook parlay pricing is not archived.</td><td><span class="badge bad">G3 fails</span></td><td><span class="badge warn">Research-only</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S5</b></td><td>same-game-parlay</td><td>Favourite-cover + under SGP</td><td>Compare the empirical joint probability of (favourite covers) AND (under hits) with the product of their marginals to size the dependence correction.</td><td>No archived SGP price; fair-price monitor only.</td><td><span class="badge bad">G7 fails</span></td><td><span class="badge warn">Research-only</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S6</b></td><td>player-prop</td><td>Player prop single</td><td>Over/under on a player stat versus a model line built from that player&#x27;s prior games.</td><td>No authorized 2026 player-level feed and no archived prop prices in scope.</td><td><span class="badge bad">G7 fails</span></td><td><span class="badge bad">Blocked</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td><b>S7</b></td><td>player-prop-combo</td><td>Same-game prop combo</td><td>Joint probability of two correlated player legs vs the product of marginals.</td><td>No archived prop or combo prices.</td><td><span class="badge bad">G7 fails</span></td><td><span class="badge bad">Blocked</span></td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>Coverage of the requested bet types</h2>
+<div class="tw"><table class="tight"><thead><tr><th>Requested</th><th>Covered by</th><th>Status</th><th>Note</th><th>Evidence</th></tr></thead><tbody><tr><td>Single bets</td><td>S1 spread, S2 total, S3 moneyline</td><td><span class="badge ok">measured</span></td><td>Holdout 2017-2025 at archived closing lines</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td>Parlays</td><td>S4 cross-game 2-leg</td><td><span class="badge warn">assumption</span></td><td>Payout is assumed +164; no archived parlay price, so G7 fails</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td>Player prop combos</td><td>S6 single, S7 same-game combo</td><td><span class="badge bad">blocked</span></td><td>No player feed and no prop prices; no values published</td><td><a href="questions.html#q-07">Q-07</a></td></tr><tr><td>Same-game game-market combos</td><td>S5 favourite-cover + under</td><td><span class="badge info">correlation only</span></td><td>phi measured; no SGP price, so it is a monitor not a bet</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/correlations.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
+</section>
+
+<footer>
+  <p><b>Limits.</b> Lines and ratings are derived model output from a third-party archive, not official NFL data. Market lines, depth charts and player-prop values are unavailable and are left blank. Nothing here is a recommendation to wager.</p>
+  <p>Support: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline ↗</a> · <a href="https://www.nfl.com/terms" target="_blank" rel="noopener">NFL.com terms ↗</a> · <a href="../pages/sources.html">Source register</a></p>
+</footer>
+</main>
+</div>
+</div>
+<script src="../assets/hub.js" defer></script>
+</body>
+</html>

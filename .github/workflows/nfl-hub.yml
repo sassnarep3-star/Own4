@@ -1,0 +1,60 @@
+name: Validate NFL Line Genesis
+
+# Rebuilds every published number from the committed data, then enforces the
+# publication rules for this workspace:
+#   * the rebuild must be byte-identical (no number can drift from its data);
+#   * every data-table row must carry a source link;
+#   * every local link and anchor must resolve;
+#   * no page may cite a URL recorded as dead;
+#   * every page keeps navigation and the responsible-gambling footer.
+# This workflow validates only. GitHub Pages serves the repository from main / root.
+
+on:
+  push:
+    paths:
+      - 'nfl-hub/**'
+      - '.github/workflows/nfl-hub.yml'
+  pull_request:
+    paths:
+      - 'nfl-hub/**'
+      - '.github/workflows/nfl-hub.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild model, backtest, correlations and lines
+        run: python3 nfl-hub/pipeline/run_all.py
+
+      - name: Keep the recomputed tree for comparison
+        run: rm -rf /tmp/recomputed && cp -r nfl-hub/data /tmp/recomputed
+
+      - name: Restore the committed data so the published HTML is built from it
+        run: git checkout -- nfl-hub/data
+
+      - name: Recomputation must match the committed data
+        # math.erf comes from the platform C library, so the last bits can differ
+        # between runners. Structure, counts, labels and tiers must match exactly;
+        # floats must agree to 1e-6 relative. See nfl-hub/compare.py.
+        run: python3 nfl-hub/compare.py /tmp/recomputed nfl-hub/data
+
+      - name: Published HTML must match the committed data byte for byte
+        run: |
+          python3 nfl-hub/build.py
+          git diff --stat -- nfl-hub/pages nfl-hub/index.html
+          git diff --exit-code -- nfl-hub/pages nfl-hub/index.html
+
+      - name: Verify every row, link, anchor and disclosure
+        run: python3 nfl-hub/verify.py

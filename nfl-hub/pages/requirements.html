@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Requirements coverage — NFL Line Genesis: originated lines, validation gates, correlations and a decision register built only from source-linked data.">
+<title>Requirements coverage · NFL Line Genesis</title>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside>
+  <a class="brand" href="../index.html"><span class="mark">O4</span><span class="bname">NFL Line Genesis<small>OWN4 · NFL RESEARCH</small></span></a>
+  <nav aria-label="Sections"><div class="navgrp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav active" href="../pages/requirements.html">Requirements coverage</a><div class="navgrp">Decide</div><a class="nav" href="../pages/suggestions.html">Suggestions &amp; decisions</a><a class="nav" href="../pages/questions.html">Open questions</a><a class="nav" href="../pages/flagged.html">Flagged for review</a><div class="navgrp">This week</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/injuries.html">Injuries &amp; availability</a><div class="navgrp">Evidence</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation &amp; luck</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; rewards</a><div class="navgrp">Data</div><a class="nav" href="../pages/data.html">Official data</a><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/audit.html">Repository review</a></nav>
+  <div class="sidebox">
+    <b>Snapshot</b><br>12 Nov 2026 · Week 10<br>
+    <span class="dot warn"></span>No validated edge<br>
+    <span class="dot ok"></span>32/32 official reconciliation
+  </div>
+  <a class="back" href="../../index.html">← OWN4 home</a>
+</aside>
+<div class="content">
+<header class="top">
+  <span class="kicker">NFL LINE GENESIS</span>
+  <span class="topnote">Research, not betting advice · No official NFL endorsement</span>
+</header>
+<main id="main">
+<div class="eyebrow">Requirements coverage</div>
+<h1>Requirements coverage</h1>
+<p class="lede">Every requirement in the brief, where it is handled, and whether it is met, partial or blocked.</p>
+
+<div class="banner"><b>Traceability, not a victory lap.</b> Each requirement from the brief is mapped to where it is handled
+and to its honest status. "Partial" and "Blocked" are outcomes, not omissions.</div>
+<section>
+<h2>Coverage</h2>
+<div class="kpis">
+<div class="kpi"><b>15</b><span>requirements met</span></div>
+<div class="kpi"><b>4</b><span>partially met</span></div>
+<div class="kpi"><b>1</b><span>blocked by missing data</span></div>
+<div class="kpi"><b>20</b><span>requirements traced</span></div>
+</div>
+<div class="tw"><table class=""><thead><tr><th>ID</th><th>Requirement</th><th>Where it is handled</th><th>Status</th><th>Evidence / limit</th></tr></thead><tbody><tr><td><b>R1</b></td><td>A section dedicated to suggestions, so a path can be reviewed and chosen before implementation</td><td><a href="suggestions.html">pages/suggestions.html</a></td><td><span class="badge ok">Met</span></td><td>15 suggestions with options, effort, risk, dependencies and a decision log</td></tr><tr><td><b>R2</b></td><td>A clear list of questions, information and answers needed before a decision</td><td><a href="questions.html">pages/questions.html</a></td><td><span class="badge ok">Met</span></td><td>27 questions; 8 answered with sources, 3 blocked</td></tr><tr><td><b>R3</b></td><td>Originate own NFL lines</td><td><a href="own-lines.html">pages/own-lines.html</a></td><td><span class="badge ok">Met</span></td><td>14 Week 10 lines, pre-kickoff, with look-ahead tests</td></tr><tr><td><b>R4</b></td><td>Research and develop strategies for useful signals</td><td><a href="strategies.html">pages/strategies.html</a></td><td><span class="badge ok">Met</span></td><td>7 pre-registered families; 3 measured, 4 fail pricing or are blocked</td></tr><tr><td><b>R5</b></td><td>Treat it as a leaderboard competition with rewards for top strategies</td><td><a href="leaderboard.html">pages/leaderboard.html</a></td><td><span class="badge ok">Met</span></td><td>Confidence-bound ranking; 1,000-point pool; 0 awarded because nothing qualified</td></tr><tr><td><b>R6</b></td><td>Cover single bets, parlays and player prop combos</td><td><a href="strategies.html">pages/strategies.html</a></td><td><span class="badge warn">Partial</span></td><td>Singles and parlays measured; props blocked for lack of data</td></tr><tr><td><b>R7</b></td><td>Each strategy must pass validation gates</td><td><a href="validation.html">pages/validation.html</a></td><td><span class="badge ok">Met</span></td><td>G1-G8 with a gate matrix; G8 impossible this session</td></tr><tr><td><b>R8</b></td><td>Determine correlation values</td><td><a href="correlations.html">pages/correlations.html</a></td><td><span class="badge warn">Partial</span></td><td>5 measured for game markets; 2 prop correlations blocked</td></tr><tr><td><b>R9</b></td><td>Remove luck and build selectively skill-based strategies</td><td><a href="validation.html">pages/validation.html</a></td><td><span class="badge ok">Met</span></td><td>Week-clustered bootstrap, placebo permutation, Holm correction; no strategy survived</td></tr><tr><td><b>R10</b></td><td>Track injuries</td><td><a href="injuries.html">pages/injuries.html</a></td><td><span class="badge warn">Partial</span></td><td>Official report captured; 6 formal designations; final inactives not yet published</td></tr><tr><td><b>R11</b></td><td>Know defensive deficiencies when 2nd/3rd/4th-string players replace starters</td><td><a href="injuries.html">pages/injuries.html</a></td><td><span class="badge bad">Blocked</span></td><td>No official depth chart (404); index deliberately blank</td></tr><tr><td><b>R12</b></td><td>Same for offensive starters and backups</td><td><a href="injuries.html">pages/injuries.html</a></td><td><span class="badge warn">Partial</span></td><td>Quarterback changes verified; other positions blocked by the same gap</td></tr><tr><td><b>R13</b></td><td>Executive summary outlining important details</td><td><a href="executive-summary.html">pages/executive-summary.html</a></td><td><span class="badge ok">Met</span></td><td>Situation, verified, missing, findings, decisions</td></tr><tr><td><b>R14</b></td><td>No manual input; complete the work autonomously</td><td><a href="audit.html">pages/audit.html</a></td><td><span class="badge ok">Met</span></td><td>Pipeline and site rebuild from committed data; no hand-entered value</td></tr><tr><td><b>R15</b></td><td>Verify every row against an official source and link it</td><td><a href="sources.html">pages/sources.html</a></td><td><span class="badge ok">Met</span></td><td>20 sources; every row links a source or a DERIVED badge</td></tr><tr><td><b>R16</b></td><td>Review the repo line by line and flag irregularities</td><td><a href="audit.html">pages/audit.html</a></td><td><span class="badge ok">Met</span></td><td>4 workspaces reviewed; 17 flags with severity</td></tr><tr><td><b>R17</b></td><td>Clean, simple, user-friendly dashboard with category subpages</td><td><a href="../index.html">../index.html</a></td><td><span class="badge ok">Met</span></td><td>15 pages, grouped navigation, filterable tables</td></tr><tr><td><b>R18</b></td><td>All entries and findings in simple tables</td><td><a href="../index.html">../index.html</a></td><td><span class="badge ok">Met</span></td><td>Every page is table-first</td></tr><tr><td><b>R19</b></td><td>Leave unverified values blank and flag them</td><td><a href="flagged.html">pages/flagged.html</a></td><td><span class="badge ok">Met</span></td><td>Market lines, depth, props and injury causes are blank</td></tr><tr><td><b>R20</b></td><td>Coordinate with parallel sessions, then PR, merge and confirm Pages</td><td><a href="audit.html">pages/audit.html</a></td><td><span class="badge ok">Met</span></td><td>COORDINATION.md updated; PR and deploy recorded there</td></tr></tbody></table></div>
+</section>
+<section>
+<h2>What is genuinely unfinished</h2>
+<ul>
+<li>The defensive backup index (R11): impossible without depth or snap-count data.</li>
+<li>Player props (R6): impossible without a player feed and prop prices.</li>
+<li>Final injury statuses (R10): the official page updates after this snapshot.</li>
+<li>Forward replication (R7/R9): requires a full season of timestamped predictions.</li>
+</ul>
+</section>
+
+<footer>
+  <p><b>Limits.</b> Lines and ratings are derived model output from a third-party archive, not official NFL data. Market lines, depth charts and player-prop values are unavailable and are left blank. Nothing here is a recommendation to wager.</p>
+  <p>Support: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline ↗</a> · <a href="https://www.nfl.com/terms" target="_blank" rel="noopener">NFL.com terms ↗</a> · <a href="../pages/sources.html">Source register</a></p>
+</footer>
+</main>
+</div>
+</div>
+<script src="../assets/hub.js" defer></script>
+</body>
+</html>
