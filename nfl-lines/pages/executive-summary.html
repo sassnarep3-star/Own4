@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary &middot; NFL Line Lab</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header>
+  <h1>NFL Line Lab <span class="tag">originate &middot; validate &middot; rank</span></h1>
+  <nav><a href="../index.html">Overview</a><a href="../pages/decisions.html">Decision register</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/flagged.html">Flagged</a></nav>
+</header>
+<div class="wrap">
+<aside><h4>Overview</h4><a href="../index.html">Overview</a><h4>Decide</h4><a class='on' href="../pages/executive-summary.html">Executive summary</a><a href="../pages/decisions.html">Decision register</a><a href="../pages/suggestions.html">Suggestions</a><h4>Lines &amp; strategies</h4><a href="../pages/own-lines.html">Own lines (Week 10)</a><a href="../pages/strategies.html">Strategy registry</a><a href="../pages/singles.html">Single bets</a><a href="../pages/parlays.html">Parlays</a><a href="../pages/props.html">Prop combos</a><a href="../pages/validation.html">Validation gates</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/skill-vs-luck.html">Skill vs luck</a><h4>Data</h4><a href="../pages/injuries.html">Injuries &amp; deficiency</a><a href="../pages/data-results.html">Data: results</a><a href="../pages/data-standings.html">Data: standings</a><a href="../pages/data-team-stats.html">Data: team stats</a><h4>Governance</h4><a href="../pages/repo-review.html">Repo review</a><a href="../pages/sources.html">Sources</a><a href="../pages/flagged.html">Flagged for review</a></aside>
+<main>
+<h2>Executive summary</h2>
+<p class='lead'>The whole picture in one page: what was built, what it found, and what is still unknown.</p>
+<div class="cards"><div class="card"><div class="k">4055</div><div class="l">out-of-sample forecasts</div><div class="s">2011-2026, refit before each kick-off</div></div><div class="card"><div class="k">0.0072</div><div class="l">edge-to-result correlation</div><div class="s">95% CI [-0.0236, 0.038]</div></div><div class="card"><div class="k">0.4393</div><div class="l">market spread correlation</div><div class="s">own model 0.3384</div></div><div class="card"><div class="k">0.3135</div><div class="l">market total correlation</div><div class="s">own model 0.1942</div></div><div class="card"><div class="k">0.22652</div><div class="l">own Brier score</div><div class="s">market 0.21059, naive 0.24729</div></div><div class="card"><div class="k">0 of 15</div><div class="l">strategies reward-eligible</div><div class="s">none clears all eight gates</div></div></div><h3>What was built</h3>
+<p>An end-to-end line-origination and validation system for the NFL, run on 2026 Week 10 data. It originates its
+own spread, total, team totals, win probability and moneyline for every game; measures the disagreement against the
+market; turns that disagreement into bets across singles, parlays and a same-game combo; and then refuses to reward
+any of them until they pass eight pre-declared gates. Injuries and unit deficiency are tracked from the official
+NFL injury report for all 14 Week 10 games.</p>
+
+<h3>What the evidence says</h3>
+<ul class="tight">
+<li><strong>The originated lines track the market but do not beat it.</strong> The correlation between my line and
+the actual margin is 0.3384; the market's is 0.4393. On totals, mine is 0.1942 against the market's 0.3135. Mean absolute error on
+the spread is 10.56 points against the market's 10.01.</li>
+<li><strong>The disagreement carries no information.</strong> If the model had skill, a bigger gap between my line
+and the closing line would produce a bigger cover margin. Measured: r = 0.0072, 95% CI [-0.0236, 0.038], p = 0.645059 over 4055 games.
+The interval contains zero.</li>
+<li><strong>The probabilities are honest but not sharp enough.</strong> Brier score 0.22652 against the market's 0.21059 and
+a naive baseline of 0.24729. The model is well calibrated (weighted reliability error 0.00088) &mdash; when it says 65%,
+teams win about 67% of the time &mdash; it simply does not know anything the market does not.</li>
+<li><strong>No strategy has demonstrated skill.</strong> 15 strategies were tested. The best by return on
+investment, unders in windy outdoor games, made +7.77% over 303 bets; the no-skill simulation puts 95% of
+luck-only outcomes between &minus;11.08% and +10.82%. It sits inside that band, and its p-value rises from 0.17
+to 0.44 once you correct for having tested 15 strategies.</li>
+<li><strong>Nothing is reward-eligible, and that is the intended output.</strong> The gates exist so that a
+strategy cannot be rewarded for being lucky.</li>
+</ul><h3>The three gaps that matter most</h3>
+<ol class="tight">
+<li><strong>Quarterback and injury information is not in the model.</strong> Week 10 MIA @ IND: the market total
+is 38.5, mine is 46.68, an 8.18-point gap. The official injury page the same day reports Miami placing its
+quarterback on injured reserve with a first-time starter in line. The model does not know that. Source:
+<a href="https://www.nfl.com/injuries/">nfl.com/injuries</a>.</li>
+<li><strong>Depth-chart rank is not published.</strong> The official report gives position and status, never
+whether a player is a starter or a 2nd, 3rd or 4th string replacement. Every depth-rank cell is blank by design.</li>
+<li><strong>Only closing lines exist.</strong> Every edge here is measured against a price that is already final.
+If the model's advantage lives in an earlier number, the current evaluation cannot see it.</li>
+</ol><h3>Decisions awaiting you</h3><div class="tools"><input class="filter" placeholder="Filter rows&hellip;"><span class="small"></span></div><div class="scroll"><table><thead><tr><th>#</th><th>Question</th><th>Decidable now</th><th></th></tr></thead><tbody><tr><td>Q01</td><td>Can my own lines beat the closing market line?</td><td><span class='pill ok'>Yes - the answer is no, on this evidence.</span></td><td><a href='decisions.html#Q01'>detail</a></td></tr><tr><td>Q02</td><td>Should injury and depth information be part of the model?</td><td><span class='pill no'>No - the pipeline exists but is not wired in.</span></td><td><a href='decisions.html#Q02'>detail</a></td></tr><tr><td>Q03</td><td>Can we identify 2nd, 3rd and 4th string replacements for injured starters?</td><td><span class='pill no'>No.</span></td><td><a href='decisions.html#Q03'>detail</a></td></tr><tr><td>Q04</td><td>Does the market misprice same-game parlays through correlation?</td><td><span class='pill tp'>Partially - for side+total legs the answer is that the independence assumption is close enough; for player-prop legs it is unknowable with current data.</span></td><td><a href='decisions.html#Q04'>detail</a></td></tr><tr><td>Q05</td><td>Are we measuring against the right price: closing line or the line we could actually bet?</td><td><span class='pill no'>No.</span></td><td><a href='decisions.html#Q05'>detail</a></td></tr><tr><td>Q06</td><td>Is any observed return skill or luck?</td><td><span class='pill ok'>Yes - on this evidence, no strategy has demonstrated skill.</span></td><td><a href='decisions.html#Q06'>detail</a></td></tr><tr><td>Q07</td><td>How should multiple strategies be judged at once?</td><td><span class='pill ok'>Yes.</span></td><td><a href='decisions.html#Q07'>detail</a></td></tr><tr><td>Q08</td><td>Is there an official NFL source for betting lines?</td><td><span class='pill ok'>Yes - the gap is permanent and must be disclosed, not filled.</span></td><td><a href='decisions.html#Q08'>detail</a></td></tr><tr><td>Q09</td><td>Is the historical archive trustworthy?</td><td><span class='pill tp'>Partially.</span></td><td><a href='decisions.html#Q09'>detail</a></td></tr><tr><td>Q10</td><td>What should be staked, and by whom?</td><td><span class='pill no'>No.</span></td><td><a href='decisions.html#Q10'>detail</a></td></tr><tr><td>Q11</td><td>Should playoff and international games be modelled the same way?</td><td><span class='pill tp'>Partially.</span></td><td><a href='decisions.html#Q11'>detail</a></td></tr><tr><td>Q12</td><td>Is the rest / bye-week term in the model too strong?</td><td><span class='pill no'>No - flagged, not resolved.</span></td><td><a href='decisions.html#Q12'>detail</a></td></tr><tr><td>Q13</td><td>Which data rights apply to the archive?</td><td><span class='pill no'>No.</span></td><td><a href='decisions.html#Q13'>detail</a></td></tr><tr><td>Q14</td><td>Does the model know the weather?</td><td><span class='pill no'>No.</span></td><td><a href='decisions.html#Q14'>detail</a></td></tr><tr><td>Q15</td><td>What is the leaderboard actually rewarding?</td><td><span class='pill tp'>Partially - the ranking rule is settled; the reward is not.</span></td><td><a href='decisions.html#Q15'>detail</a></td></tr></tbody></table></div><h3>Irregularities</h3><p>15 items are published on the <a href='flagged.html'>Flagged for review</a> page rather than fixed silently. The most consequential: Week 5 2026 scores could not be read from NFL.com (rendered as 'Hidden Score'); no official NFL odds exist, so every market line is third-party; and the injury report carries no depth-chart rank.</p>
+</main></div>
+<footer>Static site generated by <code>nfl-lines/engine/build_site.py</code>. Official data from
+<a href="https://www.nfl.com/">NFL.com</a>. Market lines are third-party &mdash; the NFL publishes no official odds.
+Model outputs are forecasts, not facts.</footer>
+<script src="../assets/app.js"></script>
+</body></html>

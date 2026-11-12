@@ -1,0 +1,83 @@
+name: nfl-lines verify
+
+# Scope: nfl-lines/** only. Owned by session arena/b4aafa88-own4.
+# Rebuilds the derived data, regenerates the static site, then checks every
+# local link resolves and every published table row carries a source link.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nfl-lines/**'
+      - '.github/workflows/nfl-lines.yml'
+  pull_request:
+    paths:
+      - 'nfl-lines/**'
+      - '.github/workflows/nfl-lines.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pandas
+
+      - name: Verify the archive against the official transcription
+        working-directory: nfl-lines
+        run: python3 -c "
+          import sys; sys.path.insert(0, 'engine')
+          import dataset as D
+          games = D.normalise_archive(D.load_archive())
+          standings = D.load_json(D.os.path.join(D.OFFICIAL, 'standings_2026.json'))
+          v = D.verify_against_official(games)
+          ic = D.integrity_checks(games, standings)
+          print('spot-check', v['matched'], '/', v['games_compared'])
+          assert v['matched'] == v['games_compared'], 'official spot-check failed'
+          assert v['mismatched'] == 0 and v['missing_in_archive'] == 0
+          failed = [r['id'] for r in ic if not r.get('passed')]
+          print('integrity checks failed:', failed)
+          assert not failed, 'integrity checks failed'
+        "
+
+      - name: Rebuild derived data
+        working-directory: nfl-lines
+        run: python3 run_all.py
+
+      - name: Rebuild the static site
+        working-directory: nfl-lines
+        run: python3 engine/build_site.py
+
+      - name: Repo audit (read only)
+        working-directory: nfl-lines
+        run: python3 engine/repo_audit.py
+
+      - name: Verify links and row-level source coverage
+        working-directory: nfl-lines
+        run: python3 engine/verify_site.py
+
+      - name: Fail if the rebuild changed committed numbers
+        # The pipeline is deterministic apart from the "generated_utc" stamp in
+        # data/derived/summary.json, so that field is normalised out of the hash.
+        run: |
+          changed=0
+          for f in $(git ls-files 'nfl-lines/data/derived/*.json' 'nfl-lines/pages/*.html' 'nfl-lines/index.html'); do
+            cur=$(sed 's/"generated_utc": "[^"]*"/"generated_utc": ""/' "$f" | sha256sum | cut -d' ' -f1)
+            old=$(git show "HEAD:$f" | sed 's/"generated_utc": "[^"]*"/"generated_utc": ""/' | sha256sum | cut -d' ' -f1)
+            if [ "$cur" != "$old" ]; then echo "changed: $f"; changed=1; fi
+          done
+          if [ "$changed" != "0" ]; then
+            echo "::error::rebuild produced output that differs from what is committed."
+          fi
+          exit $changed

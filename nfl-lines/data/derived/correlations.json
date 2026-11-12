@@ -1,0 +1,505 @@
+{
+  "correlations": [
+    {
+      "id": "CR-01",
+      "group": "Forecast skill",
+      "label": "Own-line edge vs actual result against the market spread",
+      "variable_x": "own spread - market spread",
+      "variable_y": "actual home margin - market spread",
+      "pearson_r": 0.0072,
+      "n": 4055,
+      "ci95": [
+        -0.0236,
+        0.038
+      ],
+      "p_value": 0.645059,
+      "note": "The single most important number on this site: if the model has skill, a bigger disagreement with the closing line should produce a bigger cover margin."
+    },
+    {
+      "id": "CR-02",
+      "group": "Forecast skill",
+      "label": "Own-total edge vs actual result against the market total",
+      "variable_x": "own total - market total",
+      "variable_y": "actual total - market total",
+      "pearson_r": -0.0158,
+      "n": 4055,
+      "ci95": [
+        -0.0466,
+        0.015
+      ],
+      "p_value": 0.313562,
+      "note": "Same test for the totals market."
+    },
+    {
+      "id": "CR-03",
+      "group": "Forecast accuracy",
+      "label": "Own spread vs actual home margin",
+      "variable_x": "own spread (home favoured +)",
+      "variable_y": "actual home margin",
+      "pearson_r": 0.3384,
+      "n": 4055,
+      "ci95": [
+        0.3108,
+        0.3653
+      ],
+      "p_value": 0.0,
+      "note": "Accuracy of the originated line."
+    },
+    {
+      "id": "CR-04",
+      "group": "Forecast accuracy",
+      "label": "Market closing spread vs actual home margin",
+      "variable_x": "market closing spread",
+      "variable_y": "actual home margin",
+      "pearson_r": 0.4393,
+      "n": 4055,
+      "ci95": [
+        0.4142,
+        0.4638
+      ],
+      "p_value": 0.0,
+      "note": "Benchmark: the same correlation for the third-party closing line."
+    },
+    {
+      "id": "CR-05",
+      "group": "Forecast accuracy",
+      "label": "Own total vs actual total",
+      "variable_x": "own total",
+      "variable_y": "actual total",
+      "pearson_r": 0.1942,
+      "n": 4055,
+      "ci95": [
+        0.1644,
+        0.2237
+      ],
+      "p_value": 0.0,
+      "note": "Accuracy of the originated total."
+    },
+    {
+      "id": "CR-06",
+      "group": "Forecast accuracy",
+      "label": "Market closing total vs actual total",
+      "variable_x": "market closing total",
+      "variable_y": "actual total",
+      "pearson_r": 0.3135,
+      "n": 4055,
+      "ci95": [
+        0.2854,
+        0.341
+      ],
+      "p_value": 0.0,
+      "note": "Benchmark for the total."
+    },
+    {
+      "id": "CR-07",
+      "group": "Parlay structure",
+      "label": "Home covers the spread AND the game goes over",
+      "variable_x": "home covers (1/0)",
+      "variable_y": "over (1/0)",
+      "pearson_r": 0.0083,
+      "n": 3912,
+      "ci95": [
+        -0.0231,
+        0.0396
+      ],
+      "p_value": 0.604185,
+      "note": "Correlation between the two legs of the most common NFL same-game parlay. A non-zero value means the independence price is wrong."
+    },
+    {
+      "id": "CR-08",
+      "group": "Parlay structure",
+      "label": "Favourite covers AND the game goes over",
+      "variable_x": "favourite covers (1/0)",
+      "variable_y": "over (1/0)",
+      "pearson_r": -0.0167,
+      "n": 3908,
+      "ci95": [
+        -0.0481,
+        0.0146
+      ],
+      "p_value": 0.295388,
+      "note": "The exact structure priced by strategy C-SGP-FAV-OVER."
+    },
+    {
+      "id": "CR-09",
+      "group": "Parlay structure",
+      "label": "Final margin vs game total",
+      "variable_x": "home margin",
+      "variable_y": "game total",
+      "pearson_r": 0.0309,
+      "n": 4055,
+      "ci95": [
+        0.0001,
+        0.0616
+      ],
+      "p_value": 0.049249,
+      "note": "A positive value means blowouts are also high-scoring games."
+    },
+    {
+      "id": "CR-10",
+      "group": "Team totals",
+      "label": "Home team points vs away team points",
+      "variable_x": "home points",
+      "variable_y": "away points",
+      "pearson_r": -0.0401,
+      "n": 4055,
+      "ci95": [
+        -0.0708,
+        -0.0094
+      ],
+      "p_value": 0.010555,
+      "note": "Usually slightly negative: a bigger share for one team means less for the other."
+    },
+    {
+      "id": "CR-11",
+      "group": "Situational",
+      "label": "Rest differential vs home margin",
+      "variable_x": "home rest days - away rest days",
+      "variable_y": "home margin",
+      "pearson_r": 0.0298,
+      "n": 4055,
+      "ci95": [
+        -0.001,
+        0.0605
+      ],
+      "p_value": 0.058105,
+      "note": "Tests whether the rest differential carries information."
+    },
+    {
+      "id": "CR-12",
+      "group": "Market efficiency",
+      "label": "Market spread vs own spread",
+      "variable_x": "market closing spread",
+      "variable_y": "own spread",
+      "pearson_r": 0.7313,
+      "n": 4055,
+      "ci95": [
+        0.7166,
+        0.7453
+      ],
+      "p_value": 0.0,
+      "note": "How close the originated line is to the closing market line."
+    },
+    {
+      "id": "CR-13",
+      "group": "Market efficiency",
+      "label": "Market total vs own total",
+      "variable_x": "market closing total",
+      "variable_y": "own total",
+      "pearson_r": 0.6938,
+      "n": 4055,
+      "ci95": [
+        0.6774,
+        0.7094
+      ],
+      "p_value": 0.0,
+      "note": "Same for the total."
+    }
+  ],
+  "base_rates": {
+    "games": 4055,
+    "home_win_rate": 0.5502,
+    "home_ats_cover_rate": 0.4883,
+    "away_ats_cover_rate": 0.5117,
+    "ats_pushes": 107,
+    "over_rate": 0.4924,
+    "under_rate": 0.5076,
+    "total_pushes": 36,
+    "favourite_ats_cover_rate": 0.4767,
+    "favourite_ats_n": 4051,
+    "mean_abs_own_spread_error": 10.563,
+    "mean_abs_market_spread_error": 10.014,
+    "mean_abs_own_total_error": 10.771,
+    "mean_abs_market_total_error": 10.429
+  },
+  "margin_distribution": [
+    {
+      "margin": -21,
+      "games": 39,
+      "share": 0.0096
+    },
+    {
+      "margin": -20,
+      "games": 33,
+      "share": 0.0081
+    },
+    {
+      "margin": -19,
+      "games": 21,
+      "share": 0.0052
+    },
+    {
+      "margin": -18,
+      "games": 37,
+      "share": 0.0091
+    },
+    {
+      "margin": -17,
+      "games": 62,
+      "share": 0.0153
+    },
+    {
+      "margin": -16,
+      "games": 44,
+      "share": 0.0109
+    },
+    {
+      "margin": -15,
+      "games": 28,
+      "share": 0.0069
+    },
+    {
+      "margin": -14,
+      "games": 98,
+      "share": 0.0242
+    },
+    {
+      "margin": -13,
+      "games": 42,
+      "share": 0.0104
+    },
+    {
+      "margin": -12,
+      "games": 30,
+      "share": 0.0074
+    },
+    {
+      "margin": -11,
+      "games": 37,
+      "share": 0.0091
+    },
+    {
+      "margin": -10,
+      "games": 86,
+      "share": 0.0212
+    },
+    {
+      "margin": -9,
+      "games": 23,
+      "share": 0.0057
+    },
+    {
+      "margin": -8,
+      "games": 72,
+      "share": 0.0178
+    },
+    {
+      "margin": -7,
+      "games": 179,
+      "share": 0.0441
+    },
+    {
+      "margin": -6,
+      "games": 124,
+      "share": 0.0306
+    },
+    {
+      "margin": -5,
+      "games": 85,
+      "share": 0.021
+    },
+    {
+      "margin": -4,
+      "games": 106,
+      "share": 0.0261
+    },
+    {
+      "margin": -3,
+      "games": 270,
+      "share": 0.0666
+    },
+    {
+      "margin": -2,
+      "games": 87,
+      "share": 0.0215
+    },
+    {
+      "margin": -1,
+      "games": 88,
+      "share": 0.0217
+    },
+    {
+      "margin": 0,
+      "games": 14,
+      "share": 0.0035
+    },
+    {
+      "margin": 1,
+      "games": 90,
+      "share": 0.0222
+    },
+    {
+      "margin": 2,
+      "games": 94,
+      "share": 0.0232
+    },
+    {
+      "margin": 3,
+      "games": 311,
+      "share": 0.0767
+    },
+    {
+      "margin": 4,
+      "games": 95,
+      "share": 0.0234
+    },
+    {
+      "margin": 5,
+      "games": 79,
+      "share": 0.0195
+    },
+    {
+      "margin": 6,
+      "games": 150,
+      "share": 0.037
+    },
+    {
+      "margin": 7,
+      "games": 179,
+      "share": 0.0441
+    },
+    {
+      "margin": 8,
+      "games": 98,
+      "share": 0.0242
+    },
+    {
+      "margin": 9,
+      "games": 39,
+      "share": 0.0096
+    },
+    {
+      "margin": 10,
+      "games": 120,
+      "share": 0.0296
+    },
+    {
+      "margin": 11,
+      "games": 50,
+      "share": 0.0123
+    },
+    {
+      "margin": 12,
+      "games": 44,
+      "share": 0.0109
+    },
+    {
+      "margin": 13,
+      "games": 46,
+      "share": 0.0113
+    },
+    {
+      "margin": 14,
+      "games": 103,
+      "share": 0.0254
+    },
+    {
+      "margin": 15,
+      "games": 39,
+      "share": 0.0096
+    },
+    {
+      "margin": 16,
+      "games": 50,
+      "share": 0.0123
+    },
+    {
+      "margin": 17,
+      "games": 78,
+      "share": 0.0192
+    },
+    {
+      "margin": 18,
+      "games": 55,
+      "share": 0.0136
+    },
+    {
+      "margin": 19,
+      "games": 22,
+      "share": 0.0054
+    },
+    {
+      "margin": 20,
+      "games": 48,
+      "share": 0.0118
+    },
+    {
+      "margin": 21,
+      "games": 60,
+      "share": 0.0148
+    }
+  ],
+  "calibration": {
+    "n_games": 4041,
+    "model_brier": 0.22652,
+    "market_brier": 0.21059,
+    "baseline_brier": 0.24729,
+    "baseline_home_win_rate": 0.5521,
+    "model_log_loss": 0.64394,
+    "market_log_loss": 0.6086,
+    "reliability_mse_weighted": 0.00088,
+    "reliability_bins": [
+      {
+        "bin": "0.0-0.1",
+        "n": 0,
+        "mean_predicted": null,
+        "actual_rate": null
+      },
+      {
+        "bin": "0.1-0.2",
+        "n": 8,
+        "mean_predicted": 0.1816,
+        "actual_rate": 0.0
+      },
+      {
+        "bin": "0.2-0.3",
+        "n": 139,
+        "mean_predicted": 0.2647,
+        "actual_rate": 0.3165
+      },
+      {
+        "bin": "0.3-0.4",
+        "n": 436,
+        "mean_predicted": 0.358,
+        "actual_rate": 0.3853
+      },
+      {
+        "bin": "0.4-0.5",
+        "n": 813,
+        "mean_predicted": 0.4519,
+        "actual_rate": 0.4108
+      },
+      {
+        "bin": "0.5-0.6",
+        "n": 1040,
+        "mean_predicted": 0.5502,
+        "actual_rate": 0.5298
+      },
+      {
+        "bin": "0.6-0.7",
+        "n": 933,
+        "mean_predicted": 0.6476,
+        "actual_rate": 0.672
+      },
+      {
+        "bin": "0.7-0.8",
+        "n": 542,
+        "mean_predicted": 0.7387,
+        "actual_rate": 0.7232
+      },
+      {
+        "bin": "0.8-0.9",
+        "n": 129,
+        "mean_predicted": 0.8311,
+        "actual_rate": 0.8837
+      },
+      {
+        "bin": "0.9-1.0",
+        "n": 1,
+        "mean_predicted": 0.9108,
+        "actual_rate": 1.0
+      }
+    ],
+    "reading": "Lower Brier score and lower log loss are better. The market row is the benchmark built from the third-party closing moneylines with the overround removed two-way."
+  }
+}
