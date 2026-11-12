@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions · NFL Decision Lab</title>
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header class="top"><div class="wrap">
+  <div class="brand">NFL <span>Decision Lab</span></div>
+  <nav class="main"><a href="index.html" class="">Overview</a><a href="executive-summary.html" class="">Executive summary</a><a href="questions.html" class="">Questions & gaps</a><a href="suggestions.html" class="on">Suggestions</a><a href="injuries.html" class="">Injuries & depth</a><a href="own-lines.html" class="">Own lines</a><a href="leaderboard.html" class="">Leaderboard</a><a href="validation.html" class="">Validation gates</a><a href="correlations.html" class="">Correlations</a><a href="props.html" class="">Prop combos</a><a href="data.html" class="">Data & provenance</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for review</a><a href="sources.html" class="">Sources</a></nav>
+</div></header>
+<div class="layout">
+  <aside class="side"><h4>Decide</h4><a href="index.html" class="">Overview</a><a href="executive-summary.html" class="">Executive summary</a><a href="questions.html" class="">Questions & gaps</a><a href="suggestions.html" class="on">Suggestions</a><h4>Evidence</h4><a href="injuries.html" class="">Injuries & depth</a><a href="own-lines.html" class="">Own lines</a><a href="leaderboard.html" class="">Leaderboard</a><a href="validation.html" class="">Validation gates</a><a href="correlations.html" class="">Correlations</a><a href="props.html" class="">Prop combos</a><h4>Audit</h4><a href="data.html" class="">Data & provenance</a><a href="repo-review.html" class="">Repo review</a><a href="flagged.html" class="">Flagged for review</a><a href="sources.html" class="">Sources</a></aside>
+  <main>
+    <h1>Suggestions</h1>
+    <p class="lede">Options, evidence, cost and risk side by side — so you can choose a path instead of inheriting one.</p>
+    <div class="note"><b>This page exists so a decision can be made before code changes.</b> Nothing here has been implemented. Each item lists the context, the options considered, the evidence, the cost, the risk and a recommendation. Accept, reject or defer each one.</div><div class="tbl-wrap"><table><thead><tr><th class="">ID</th><th class="">Group</th><th class="">Suggestion</th><th class="c">Cost</th><th class="c">Risk</th><th class="c">Status</th></tr></thead><tbody><tr><td class=""><a href="#S01">S01</a></td><td class="">Data integrity</td><td class="">Re-run the official reconciliation before every publish</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S02">S02</a></td><td class="">Injuries and depth</td><td class="">Publish depth deficiencies only where an official article names the replacement</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S03">S03</a></td><td class="">Model</td><td class="">Hold the injury adjustment at zero until it can be estimated</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S04">S04</a></td><td class="">Product</td><td class="">Adopt one canonical NFL dashboard and mark the others as archive</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S05">S05</a></td><td class="">Injuries and depth</td><td class="">Weight the depth signal by position scarcity, not by star power</td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">proposed</span></td></tr><tr><td class=""><a href="#S06">S06</a></td><td class="">Validation</td><td class="">Split the leaderboard into two boards: forecast skill and betting ROI</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S07">S07</a></td><td class="">Validation</td><td class="">Report a season-concentration number on every strategy</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S08">S08</a></td><td class="">Model</td><td class="">Stop refining the spread model; redirect effort to forecast skill</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S09">S09</a></td><td class="">Rewards</td><td class="">Hold betting rewards until a forward record exists; pay forecast rewards now</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S10">S10</a></td><td class="">Props</td><td class="">Pursue archived same-game-parlay prices as the top data purchase</td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">proposed</span></td></tr><tr><td class=""><a href="#S11">S11</a></td><td class="">Parlays</td><td class="">Allow cross-game parlay multiplication; never allow naive same-player prop multiplication</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S12">S12</a></td><td class="">Validation</td><td class="">Cap the registered strategy family per season</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S13">S13</a></td><td class="">Data rights</td><td class="">Publish derived aggregates only; keep raw third-party archives out of Git if a licence requires it</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">proposed</span></td></tr><tr><td class=""><a href="#S14">S14</a></td><td class="">Market access</td><td class="">Buy or license an archived odds history before any further model work</td><td class="c"><span class="pill p-bad">high</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S15">S15</a></td><td class="">Rewards</td><td class="">Pay rewards in reputation and compute credits, never cash tied to wagering</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S16">S16</a></td><td class="">Injuries and depth</td><td class="">Snapshot the official injury report weekly into dated JSON</td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr><tr><td class=""><a href="#S17">S17</a></td><td class="">Data rights</td><td class="">Treat an official 2026 player feed as the highest-value data purchase after odds</td><td class="c"><span class="pill p-bad">high</span></td><td class="c"><span class="pill p-warn">medium</span></td><td class="c"><span class="pill p-warn">proposed</span></td></tr><tr><td class=""><a href="#S18">S18</a></td><td class="">Product</td><td class="">Verify the deployed URL after every merge, and record the run id</td><td class="c"><span class="pill p-good">none</span></td><td class="c"><span class="pill p-good">low</span></td><td class="c"><span class="pill p-good">recommended</span></td></tr></tbody></table></div><div class="sugg" id="S01">
+  <div class="hd"><span class="id">S01</span><span class="t">Re-run the official reconciliation before every publish</span>
+    <span class="pill p-neu">Data integrity</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> The repo&#x27;s own 120-game 2026 log was missing CHI@SEA (Week 8, 34-17). All 32 team records now recompute exactly, 160/160 cells, only after that game was added.</p>
+    <p><b>Why it matters.</b> A single missing game silently corrupts every rating that follows it. The error was invisible until the standings were recomputed from scratch.</p>
+    <div class="opt"><div><div class="h">option</div>Add the reconciliation as a required CI step</div><div><div class="h">evidence</div>5/5 checks, ~1s runtime, zero cost</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: none identified</div></div><div class="opt"><div><div class="h">option</div>Rely on the peer data as published</div><div><div class="h">evidence</div>Fails: the log was incomplete</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: silent rating corruption</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt the CI step. Make a failed reconciliation block the deploy.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="data.html">repo: nfl-decision/scripts/01_results.py (5 checks)</a> · <a href="https://www.nfl.com/standings/league/2026/REG">Official 2026 standings</a> · <a href="https://www.nfl.com/games/bears-at-seahawks-2026-reg-8">The missing game</a></p>
+  </div></div><div class="sugg" id="S02">
+  <div class="hd"><span class="id">S02</span><span class="t">Publish depth deficiencies only where an official article names the replacement</span>
+    <span class="pill p-neu">Injuries and depth</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> The brief asks for 2nd/3rd/4th-string tracking. No official NFL depth chart exists (nfl.com/depth-charts returns 404). 13 replacements are, however, named explicitly in official NFL.com reporting.</p>
+    <p><b>Why it matters.</b> You asked for no hallucinations. Labelling a player &#x27;3rd string&#x27; without an official chart would be exactly that. There are two honest choices: publish the 13 verified cases, or publish nothing.</p>
+    <div class="opt"><div><div class="h">option</div>Publish the 13 article-verified replacements and label everything else BLOCKED</div><div><div class="h">evidence</div>13 rows, each with a quoted sentence and an nfl.com link</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: the table is short</div></div><div class="opt"><div><div class="h">option</div>Infer string depth from roster seniority or snap counts</div><div><div class="h">evidence</div>No official source supports this</div><div><div class="h">cost / failure mode</div>Effort: high. Failure: invented labels</div></div><div class="opt"><div><div class="h">option</div>Buy a depth-chart feed</div><div><div class="h">evidence</div>Not yet priced or scoped</div><div><div class="h">cost / failure mode</div>Effort: unknown. Failure: recurring cost</div></div>
+    <div class="rec"><b>Recommendation.</b> Option 1 now, Option 3 on a two-week trial if depth data proves decision-relevant.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://www.nfl.com/injuries/">Official injury report, Week 10</a> · <a href="https://www.nfl.com/depth-charts/">NFL.com depth charts (404)</a> · <a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11">Depth-chart news roundup</a></p>
+  </div></div><div class="sugg" id="S03">
+  <div class="hd"><span class="id">S03</span><span class="t">Hold the injury adjustment at zero until it can be estimated</span>
+    <span class="pill p-neu">Model</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> No official source publishes points-per-missing-starter. The archived score model already carries a 13.6-point residual standard deviation.</p>
+    <p><b>Why it matters.</b> An invented injury adjustment would look like precision while adding unmeasured noise. At n=136 current-season games, no injury effect is estimable anyway.</p>
+    <div class="opt"><div><div class="h">option</div>Zero adjustment, disclosed</div><div><div class="h">evidence</div>Transparent; no false precision</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: misses real injury effects</div></div><div class="opt"><div><div class="h">option</div>Hand-set adjustment per position</div><div><div class="h">evidence</div>No evidence base</div><div><div class="h">cost / failure mode</div>Effort: medium. Failure: unfalsifiable and looks like data</div></div>
+    <div class="rec"><b>Recommendation.</b> Keep at zero. Revisit only when S16 has produced a multi-season injury archive.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="own-lines.html">repo: data/model_config.json</a></p>
+  </div></div><div class="sugg" id="S04">
+  <div class="hd"><span class="id">S04</span><span class="t">Adopt one canonical NFL dashboard and mark the others as archive</span>
+    <span class="pill p-neu">Product</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Five NFL namespaces exist: nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-decision/. They disagree in places and only two carry measured results.</p>
+    <p><b>Why it matters.</b> A decision surface with five competing front doors cannot be used to make a decision. The user asked for a clean dashboard.</p>
+    <div class="opt"><div><div class="h">option</div>nfl-decision/ becomes the decision layer; others become cited archives</div><div><div class="h">evidence</div>Only this namespace has a question register, a suggestions board and 160/160 provenance</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: some peer detail is one click deeper</div></div><div class="opt"><div><div class="h">option</div>Merge all five namespace sites into one page tree</div><div><div class="h">evidence</div>Preserves everything but is a large, conflict-prone edit across other sessions&#x27; scopes</div><div><div class="h">cost / failure mode</div>Effort: high. Failure: high merge-conflict risk</div></div><div class="opt"><div><div class="h">option</div>Leave all five live and unlinked</div><div><div class="h">evidence</div>Current state</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: ambiguity persists</div></div>
+    <div class="rec"><b>Recommendation.</b> Option 1. Add a superseded banner to the older pages in a later, single-owner PR.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4">repo root</a></p>
+  </div></div><div class="sugg" id="S05">
+  <div class="hd"><span class="id">S05</span><span class="t">Weight the depth signal by position scarcity, not by star power</span>
+    <span class="pill p-neu">Injuries and depth</span><span class="pill p-warn">cost: medium</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> A missing QB1 forces a different kind of replacement than a missing WR3. Officials named replacement QBs at SEA (Lock), MIA (McCord), BAL (Brissett, after an undrafted 3rd-stringer started), AZ (rookie Carson Beck) and CLE.</p>
+    <p><b>Why it matters.</b> QB is the only position where official NFL.com articles consistently confirm who starts. That makes QB depth the one place where a verified signal can exist today.</p>
+    <div class="opt"><div><div class="h">option</div>Track QB depth only, with confirmed starters</div><div><div class="h">evidence</div>5 of the 13 verified cases are QB</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: narrow</div></div><div class="opt"><div><div class="h">option</div>Track every position equally</div><div><div class="h">evidence</div>Non-QB starters are rarely confirmed in official reporting</div><div><div class="h">cost / failure mode</div>Effort: high. Failure: mostly blank rows</div></div>
+    <div class="rec"><b>Recommendation.</b> Option 1, and treat &#x27;backup QB confirmed starter&#x27; as the first candidate signal to test formally.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again">SEA QB</a> · <a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start">MIA QB</a> · <a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season">BAL QB</a></p>
+  </div></div><div class="sugg" id="S06">
+  <div class="hd"><span class="id">S06</span><span class="t">Split the leaderboard into two boards: forecast skill and betting ROI</span>
+    <span class="pill p-neu">Validation</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Every betting strategy failed the pricing gate, so the current leaderboard is all zeros and cannot rank anything. Forecast skill is measurable today without any price.</p>
+    <p><b>Why it matters.</b> You asked for a leaderboard competition with rewards for top strategies. If every row is zero, the competition is dead on arrival. Forecast skill gives a live, honest competition immediately.</p>
+    <div class="opt"><div><div class="h">option</div>Two pools: 600 forecast points (paid now) and 1000 betting points (held until G7 passes)</div><div><div class="h">evidence</div>Forecast skill is price-independent and already measured</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: none identified</div></div><div class="opt"><div><div class="h">option</div>Pay only on betting ROI</div><div><div class="h">evidence</div>All five strategies scored 0; the board would stay empty</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: no competition</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt the two-board design. It is the single highest-leverage change on this page.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/gates.json">repo: data/gates.json (reward_policy)</a> · <a href="leaderboard.html">Measured results</a></p>
+  </div></div><div class="sugg" id="S07">
+  <div class="hd"><span class="id">S07</span><span class="t">Report a season-concentration number on every strategy</span>
+    <span class="pill p-neu">Validation</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> S1 shows +1.09% overall, but 98% of the profit came from one season and only 5 of 8 seasons were positive.</p>
+    <p><b>Why it matters.</b> A single season carrying the P&amp;L is the classic signature of luck. Hiding it behind an aggregate ROI is how honest projects become dishonest.</p>
+    <div class="opt"><div><div class="h">option</div>Show max-single-season profit share and positive-season count next to every ROI</div><div><div class="h">evidence</div>Already computed in the backtest</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: none</div></div><div class="opt"><div><div class="h">option</div>Show ROI only</div><div><div class="h">evidence</div>Conventional but misleading</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: reputation</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt. It costs nothing and it is already in the JSON.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/backtest.json">repo: data/backtest.json (season_stats)</a></p>
+  </div></div><div class="sugg" id="S08">
+  <div class="hd"><span class="id">S08</span><span class="t">Stop refining the spread model; redirect effort to forecast skill</span>
+    <span class="pill p-neu">Model</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> The walk-forward Elo explains far less than the market: corr(model margin, realised margin) = 0.357 vs corr(market spread, realised margin) = 0.430. The model also correlates 0.790 with the market, so it has little independent information.</p>
+    <p><b>Why it matters.</b> Sunk effort into a model that tracks the market is the most common failure mode in this space. The evidence says further tuning will not produce a priceable edge.</p>
+    <div class="opt"><div><div class="h">option</div>Freeze S1 as a benchmark and stop tuning it</div><div><div class="h">evidence</div>The evidence in data/correlations.json</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: none</div></div><div class="opt"><div><div class="h">option</div>Add more features to the same model family</div><div><div class="h">evidence</div>No evidence that new score-derived features close a 0.073 correlation gap</div><div><div class="h">cost / failure mode</div>Effort: high. Failure: overfitting</div></div>
+    <div class="rec"><b>Recommendation.</b> Freeze it. Any new feature must be pre-registered as a separate strategy and scored on the forecast board first.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/correlations.json">repo: data/correlations.json (C1 vs C2)</a></p>
+  </div></div><div class="sugg" id="S09">
+  <div class="hd"><span class="id">S09</span><span class="t">Hold betting rewards until a forward record exists; pay forecast rewards now</span>
+    <span class="pill p-neu">Rewards</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Gate G8 (forward replication) cannot be satisfied in a single session. The 2026 season is 9 weeks in, giving 136 settled games - far below the ~620 needed to detect a 55% edge.</p>
+    <p><b>Why it matters.</b> Paying for in-sample performance rewards luck and destroys the leaderboard&#x27;s credibility on the first bad season.</p>
+    <div class="opt"><div><div class="h">option</div>Hold the betting pool; award forecast points immediately</div><div><div class="h">evidence</div>Power analysis in data/backtest.json</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: none</div></div><div class="opt"><div><div class="h">option</div>Pay out now on backtest ROI</div><div><div class="h">evidence</div>0 of 5 strategies passed G3-G5</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: rewards noise</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt the hold. State the rollover rule on the Leaderboard page, which it already does.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="validation.html">Power analysis and gates</a></p>
+  </div></div><div class="sugg" id="S10">
+  <div class="hd"><span class="id">S10</span><span class="t">Pursue archived same-game-parlay prices as the top data purchase</span>
+    <span class="pill p-neu">Props</span><span class="pill p-warn">cost: medium</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> The QB-over + WR1-over combo fires 27.40% of the time against 18.92% if the legs were independent - a 1.45x lift, phi = 0.346 [0.284, 0.406] on 803 team-games.</p>
+    <p><b>Why it matters.</b> This is the largest measured signal in the repository. It is also the one most likely to be already priced in, because books explicitly reprice correlated same-game legs. Only real SGP prices can settle that.</p>
+    <div class="opt"><div><div class="h">option</div>Buy an SGP price archive and re-test</div><div><div class="h">evidence</div>The lift is measured; the price is not</div><div><div class="h">cost / failure mode</div>Effort: medium. Failure: cost without edge</div></div><div class="opt"><div><div class="h">option</div>Assume a generic SGP multiplier</div><div><div class="h">evidence</div>No official or verifiable default exists</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: a made-up price</div></div>
+    <div class="rec"><b>Recommendation.</b> Buy only a short trial window first. This is the one place where new spend could revealed a real edge.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/props.json">repo: data/props.json</a> · <a href="https://www.fanduel.com/sports-betting-guide/what-is-a-parlay-bet">FanDuel parlay guide (payout mechanics)</a></p>
+  </div></div><div class="sugg" id="S11">
+  <div class="hd"><span class="id">S11</span><span class="t">Allow cross-game parlay multiplication; never allow naive same-player prop multiplication</span>
+    <span class="pill p-neu">Parlays</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Cross-game legs are independent (phi = -0.0057, CI spans 0; chi-square/df near 1). Same-game cover/over legs are near-independent (phi = 0.0077). But same-player prop legs are strongly dependent (phi = 0.346).</p>
+    <p><b>Why it matters.</b> Multiplying dependent prop legs produces a joint probability that is wrong by 45% - enough to turn a losing bet into an apparently winning one on paper.</p>
+    <div class="opt"><div><div class="h">option</div>Encode the rule in the parlay builder</div><div><div class="h">evidence</div>Three measured dependence tests</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: none</div></div><div class="opt"><div><div class="h">option</div>Treat all legs as independent</div><div><div class="h">evidence</div>Fails on the prop evidence</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: systematic mispricing</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt and enforce it in code, not just in prose.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/correlations.json">repo: data/correlations.json (D1, D1b, D2)</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/props.json">repo: data/props.json</a></p>
+  </div></div><div class="sugg" id="S12">
+  <div class="hd"><span class="id">S12</span><span class="t">Cap the registered strategy family per season</span>
+    <span class="pill p-neu">Validation</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Five strategies were tested and BH-FDR was applied across them. Every additional threshold tried loosens the guarantee.</p>
+    <p><b>Why it matters.</b> An uncapped search makes it certain that something will eventually look skilful. The cap is what makes the leaderboard meaningful.</p>
+    <div class="opt"><div><div class="h">option</div>Cap at 8 registered strategies per season, each pre-registered in data/gates.json</div><div><div class="h">evidence</div>Standard practice for multiple-testing control</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: less freedom to explore</div></div><div class="opt"><div><div class="h">option</div>No cap; apply FDR after the fact</div><div><div class="h">evidence</div>Weaker guarantee</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: p-hacking</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt the cap. Put rejections on the Flagged page rather than silently dropping them.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/gates.json">repo: data/gates.json</a></p>
+  </div></div><div class="sugg" id="S13">
+  <div class="hd"><span class="id">S13</span><span class="t">Publish derived aggregates only; keep raw third-party archives out of Git if a licence requires it</span>
+    <span class="pill p-neu">Data rights</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Historical closing lines and 2021-2022 player data come from third-party repositories. The 2026 scores are official and reconcile exactly.</p>
+    <p><b>Why it matters.</b> Redistribution terms and copyright in a factual database are different questions. Publishing aggregates plus links is the lower-risk path.</p>
+    <div class="opt"><div><div class="h">option</div>Aggregates + links, raw archive excluded by .gitignore</div><div><div class="h">evidence</div>Lowest legal exposure</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: reproducibility needs a fetch step</div></div><div class="opt"><div><div class="h">option</div>Commit everything</div><div><div class="h">evidence</div>Maximum reproducibility</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: unresourced distribution</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt for new data. Do not retroactively delete existing files without the owner&#x27;s agreement.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/nflverse/nfldata">nflverse terms</a></p>
+  </div></div><div class="sugg" id="S14">
+  <div class="hd"><span class="id">S14</span><span class="t">Buy or license an archived odds history before any further model work</span>
+    <span class="pill p-neu">Market access</span><span class="pill p-bad">cost: high</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Every ROI on this site is priced at an ASSUMED -110. Gate G7 therefore fails for all five strategies and no reward can honestly be paid.</p>
+    <p><b>Why it matters.</b> This is the binding constraint on the entire project. Everything else is secondary to it.</p>
+    <div class="opt"><div><div class="h">option</div>License a line-history provider</div><div><div class="h">evidence</div>Unblocks G7 for every future strategy</div><div><div class="h">cost / failure mode</div>Effort: medium. Failure: recurring cost</div></div><div class="opt"><div><div class="h">option</div>Continue with assumed -110</div><div><div class="h">evidence</div>Nothing new can be validated</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: the project cannot progress past Bronze</div></div>
+    <div class="rec"><b>Recommendation.</b> Do this first, before any additional data or model spend.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data/gates.json">repo: data/gates.json (G7)</a></p>
+  </div></div><div class="sugg" id="S15">
+  <div class="hd"><span class="id">S15</span><span class="t">Pay rewards in reputation and compute credits, never cash tied to wagering</span>
+    <span class="pill p-neu">Rewards</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Reward policy is proposed but unfunded. An official helpline is cited site-wide.</p>
+    <p><b>Why it matters.</b> A cash prize tied to betting performance is a regulated activity in many jurisdictions. Reputation points and compute credits are not.</p>
+    <div class="opt"><div><div class="h">option</div>Non-monetary points only</div><div><div class="h">evidence</div>Zero legal exposure identified</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: weaker incentive</div></div><div class="opt"><div><div class="h">option</div>Cash prizes</div><div><div class="h">evidence</div>Requires legal review</div><div><div class="h">cost / failure mode</div>Effort: high. Failure: regulatory risk</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt non-monetary only, as the site already states.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://www.ncpgambling.org/help-treatment">NCPG</a></p>
+  </div></div><div class="sugg" id="S16">
+  <div class="hd"><span class="id">S16</span><span class="t">Snapshot the official injury report weekly into dated JSON</span>
+    <span class="pill p-neu">Injuries and depth</span><span class="pill p-good">cost: low</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> No official archive of past practice reports exists, so injury effects can never be back-tested from history.</p>
+    <p><b>Why it matters.</b> Without a snapshot started now, this question stays unanswerable forever. With one, it becomes answerable next season.</p>
+    <div class="opt"><div><div class="h">option</div>Weekly GitHub Action writes a dated snapshot</div><div><div class="h">evidence</div>The report is public and stable within a week</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: same-week revisions are lost</div></div><div class="opt"><div><div class="h">option</div>Rely on memory and articles</div><div><div class="h">evidence</div>Not reproducible</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: no backtest, ever</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt now. The cost of starting late is permanent.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://www.nfl.com/injuries/">Official injury report</a></p>
+  </div></div><div class="sugg" id="S17">
+  <div class="hd"><span class="id">S17</span><span class="t">Treat an official 2026 player feed as the highest-value data purchase after odds</span>
+    <span class="pill p-neu">Data rights</span><span class="pill p-bad">cost: high</span>
+    <span class="pill p-warn">risk: medium</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Player data stops at 2022 in this repository, so the prop signal cannot be extended to the current season.</p>
+    <p><b>Why it matters.</b> Props are where the only material correlation lives. Without a current player feed, that finding cannot be cashed in.</p>
+    <div class="opt"><div><div class="h">option</div>License a player feed</div><div><div class="h">evidence</div>Extends the prop study to 2026</div><div><div class="h">cost / failure mode</div>Effort: medium. Failure: cost</div></div><div class="opt"><div><div class="h">option</div>Keep 2021-2022 only</div><div><div class="h">evidence</div>Honest but frozen</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: stale</div></div>
+    <div class="rec"><b>Recommendation.</b> Second priority after S14.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://www.nfl.com/stats/">Official player stats</a></p>
+  </div></div><div class="sugg" id="S18">
+  <div class="hd"><span class="id">S18</span><span class="t">Verify the deployed URL after every merge, and record the run id</span>
+    <span class="pill p-neu">Product</span><span class="pill p-good">cost: none</span>
+    <span class="pill p-good">risk: low</span></div>
+  <div class="bd">
+    <p><b>Context.</b> Earlier sessions recorded Pages builds that errored repeatedly for environmental reasons while the content itself was valid.</p>
+    <p><b>Why it matters.</b> A site that is merged but not deployed is not a deliverable. Only a fetched URL proves publication.</p>
+    <div class="opt"><div><div class="h">option</div>Post-merge fetch of every new page plus the run id</div><div><div class="h">evidence</div>Already the practice in the best prior records</div><div><div class="h">cost / failure mode</div>Effort: low. Failure: none</div></div><div class="opt"><div><div class="h">option</div>Assume the merge deployed it</div><div><div class="h">evidence</div>Has already failed at least once</div><div><div class="h">cost / failure mode</div>Effort: none. Failure: silent 404s</div></div>
+    <div class="rec"><b>Recommendation.</b> Adopt.</div>
+    <p style="margin:9px 0 0" class="src">Evidence: <a href="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">GitHub Pages docs</a></p>
+  </div></div>
+  </main>
+</div>
+<footer class="foot">
+  <p><b>Analytical research only — not wagering advice.</b> No money, prizes or wagering are offered.
+  Every numeric cell is either transcribed from an official NFL page or computed in this repository;
+  cells that could not be confirmed are left blank and listed on the
+  <a href="flagged.html">Flagged for review</a> page.</p>
+  <p>If gambling is a problem for you or someone you know, the National Council on Problem Gambling
+  operates a 24/7 confidential helpline: <a href="https://www.ncpgambling.org/help-treatment">1-800-MY-RESET (1-800-697-3738)</a>.</p>
+  <p>Generated 2026-11-12 by session <code>arena/e2b19bf6-own4</code>. Data: <a href="data.html">provenance</a>.</p>
+</footer>
+</body></html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Executive summary — NFL Line Genesis: originated lines, validation gates, correlations and a decision register built only from source-linked data.">
+<title>Executive summary · NFL Line Genesis</title>
+<link rel="stylesheet" href="../assets/hub.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="shell">
+<aside>
+  <a class="brand" href="../index.html"><span class="mark">O4</span><span class="bname">NFL Line Genesis<small>OWN4 · NFL RESEARCH</small></span></a>
+  <nav aria-label="Sections"><div class="navgrp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav active" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Requirements coverage</a><div class="navgrp">Decide</div><a class="nav" href="../pages/suggestions.html">Suggestions &amp; decisions</a><a class="nav" href="../pages/questions.html">Open questions</a><a class="nav" href="../pages/flagged.html">Flagged for review</a><div class="navgrp">This week</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/injuries.html">Injuries &amp; availability</a><div class="navgrp">Evidence</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation &amp; luck</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; rewards</a><div class="navgrp">Data</div><a class="nav" href="../pages/data.html">Official data</a><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/audit.html">Repository review</a></nav>
+  <div class="sidebox">
+    <b>Snapshot</b><br>12 Nov 2026 · Week 10<br>
+    <span class="dot warn"></span>No validated edge<br>
+    <span class="dot ok"></span>32/32 official reconciliation
+  </div>
+  <a class="back" href="../../index.html">← OWN4 home</a>
+</aside>
+<div class="content">
+<header class="top">
+  <span class="kicker">NFL LINE GENESIS</span>
+  <span class="topnote">Research, not betting advice · No official NFL endorsement</span>
+</header>
+<main id="main">
+<div class="eyebrow">Executive summary</div>
+<h1>Executive summary</h1>
+<p class="lede">What is verified, what is missing, what the numbers actually say, and the five decisions that unlock the next phase.</p>
+
+<div class="banner"><b>Bottom line.</b> The plumbing works and the evidence is honest: official data reconciles 32/32,
+the lines are generated before kickoff without look-ahead, and every strategy fails. The next decision is not a model
+change — it is whether to buy a real market feed (D2) and which dashboard is canonical (D1).</div>
+
+<section>
+<h2>1. Situation</h2>
+<p>The repository already contained five separate NFL surfaces built by earlier sessions — four dashboards plus a
+governance desk (`nfl-decisions/`) — publishing different scopes and different weeks with no canonical marker. Two cite NFL.com URLs that return 404. This build adds a sixth, self-contained
+workspace that does three things the others do not: it reconciles every number to the live official source, it pre-registers
+the gates before measuring, and it publishes a decision register instead of only results.</p>
+</section>
+
+<section>
+<h2>2. What was verified</h2>
+<div class="tw"><table class="tight"><thead><tr><th>Claim</th><th>Verification</th><th>Source</th></tr></thead><tbody><tr><td>2026 records & points, 32 teams</td><td>32/32 matched on W-L-T, PF, PA and tie percentage</td><td><a class="src official" href="https://www.nfl.com/standings/" target="_blank" rel="noopener" title="NFL.com — 2026 Division Standings">SRC-01</a></td></tr><tr><td>Week 10 fixtures & byes</td><td>14/14 games matched by pairing and date; byes CHI, DEN, PHI, TB</td><td><a class="src official" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener" title="NFL.com — 2026 Week 10 schedule">SRC-02</a></td></tr><tr><td>Injury designations</td><td>6 players with formal Out/Questionable; all others practice-status only</td><td><a class="src official" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener" title="NFL.com — Official injury report, Week 10 2026">SRC-03</a></td></tr><tr><td>Quarterback changes</td><td>SEA (Lock for Darnold), CLE (Watson), ARI (Beck); MIA headline only</td><td><a class="src official" href="https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again" target="_blank" rel="noopener" title="NFL.com — Darnold ruled out; Lock expected to start">SRC-05</a> <a class="src official" href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" target="_blank" rel="noopener" title="NFL.com — News roundup, Wednesday Nov 11">SRC-06</a> <a class="src official" href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start" target="_blank" rel="noopener" title="NFL.com — Dolphins place Malik Willis on IR">SRC-10</a></td></tr><tr><td>No official depth chart</td><td>NFL.com depth-chart URL returns 404</td><td><a class="src official" href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener" title="NFL.com depth-chart URL — 404">SRC-14</a></td></tr><tr><td>Model vs market</td><td>Holdout margin MAE 10.392 vs 9.871; totals 11.971 vs 10.47</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/model_card.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td>Strategy performance</td><td>0 of 7 strategies passed; S1 holdout ROI -5.28%</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/strategies/results.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr><tr><td>Look-ahead</td><td>Deleting or rewriting all post-Week-9 results leaves all 14 lines unchanged</td><td><a class="src derived" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/model/week10_lines.json" target="_blank" rel="noopener" title="Computed in this repository — not an official NFL value">DERIVED</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>3. What was not verified — and is therefore blank</h2>
+<div class="tw"><table class="tight"><thead><tr><th>Missing input</th><th>Consequence</th><th>Question</th></tr></thead><tbody><tr><td>Official or licensed 2026 market lines</td><td>No market comparison, no closing-line value, no ROI against a real price</td><td><a href="questions.html#q-04">Q-04</a></td></tr><tr><td>Official depth chart / snap counts</td><td>2nd/3rd/4th-string deficiency index cannot be computed</td><td><a href="questions.html#q-05">Q-05</a></td></tr><tr><td>Player-level feed and prop prices</td><td>Props and prop combos are blocked; no values published</td><td><a href="questions.html#q-07">Q-07</a></td></tr><tr><td>Final pre-kickoff injury report</td><td>Only six formal designations at snapshot time</td><td><a href="questions.html#q-11">Q-11</a></td></tr><tr><td>Legal review of rewards and redistribution</td><td>Rewards stay non-monetary; public picks not cleared</td><td><a href="questions.html#q-13">Q-13</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>4. Findings that change decisions</h2>
+<ol>
+<li><b>The market is a better forecaster than the model.</b> On 2,383 holdout games the closing line beats the model on
+margin MAE (9.87 vs 10.39) and totals (10.47 vs 11.97). A standalone model cannot be the product; a residual model judged
+by closing-line value is the defensible path.</li>
+<li><b>Luck is not removed by a good story.</b> S1 earns +4.6% on the 2013-2016 validation seasons and then loses 5.3% on the holdout.
+The placebo test puts that result at p=0.60 — indistinguishable from random side selection.</li>
+<li><b>Same-game legs are close to independent in the game markets.</b> Favourite-cover vs under phi = 0.0117
+(95% CI -0.0225 to 0.0459). Player-leg dependence is unknown, not small.</li>
+<li><b>Availability is the biggest unexploited input — and the least verifiable.</b> Three quarterback changes are confirmed,
+but defensive depth is not published officially, so any "backup deficiency" number would be invented.</li>
+<li><b>Five earlier NFL surfaces are a decision hazard.</b> They disagree, two carry dead citations, and two publish decision registers. One lines/evidence surface must be canonical.</li>
+</ol>
+</section>
+
+<section>
+<h2>5. Recommended path (decisions, not implementation)</h2>
+<div class="tw"><table class="tight"><thead><tr><th>Priority</th><th>Decision</th><th>Recommendation</th><th>Why now</th><th>Detail</th></tr></thead><tbody><tr><td>1</td><td>D1 canonical workspace</td><td>Keep nfl-hub; banner and archive the other four</td><td>Prevents contradictory published lines</td><td><a href="../index.html">hub</a></td></tr><tr><td>2</td><td>D2 market data</td><td>License a timestamped odds + prop feed, or accept research-only status</td><td>Unlocks every blocked strategy and G7</td><td><a href="suggestions.html">D2</a></td></tr><tr><td>3</td><td>D3 reward rule</td><td>Rank by lower confidence bound; roll the pool over when nothing qualifies</td><td>Stops luck from winning the competition</td><td><a href="leaderboard.html">rule</a></td></tr><tr><td>4</td><td>Q-05 depth definition</td><td>License snap counts and define 'starter' explicitly</td><td>The requested defensive-depth measure is impossible without it</td><td><a class="src official" href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener" title="NFL.com depth-chart URL — 404">SRC-14</a></td></tr><tr><td>5</td><td>Q-13 legal</td><td>Obtain a written opinion before any prize or public picks</td><td>Reward and publication exposure</td><td><a href="questions.html#q-13">Q-13</a></td></tr></tbody></table></div>
+</section>
+
+<section>
+<h2>6. What exists in this build</h2>
+<p>15 pages: dashboard, executive summary, requirements coverage, suggestions & decisions, open questions, originated lines,
+injuries, strategy catalogue, validation, correlations, leaderboard, official data, sources, repository review and flagged
+items. Every table row carries a source link or an explicit DERIVED badge. The pipeline rebuilds every number from the
+committed data; the verifier fails the build on an unsourced row or a broken internal link.</p>
+</section>
+
+<footer>
+  <p><b>Limits.</b> Lines and ratings are derived model output from a third-party archive, not official NFL data. Market lines, depth charts and player-prop values are unavailable and are left blank. Nothing here is a recommendation to wager.</p>
+  <p>Support: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline ↗</a> · <a href="https://www.nfl.com/terms" target="_blank" rel="noopener">NFL.com terms ↗</a> · <a href="../pages/sources.html">Source register</a></p>
+</footer>
+</main>
+</div>
+</div>
+<script src="../assets/hub.js" defer></script>
+</body>
+</html>

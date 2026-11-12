@@ -1,0 +1,64 @@
+{
+ "generated_utc": "2026-11-12",
+ "source": "nfl-quant/data/prop_combo_legs.csv",
+ "source_note": "Third-party archive of official NFL box scores (2021-2022). Thresholds (qb_line, wr_line) are PROXY lines from a rolling mean, not sportsbook prices.",
+ "n_team_games": 803,
+ "seasons": [
+  2021,
+  2022
+ ],
+ "teams_covered": 32,
+ "combo": {
+  "leg_a": "QB passing yards over proxy line",
+  "leg_b": "WR1 receiving yards over proxy line",
+  "p_a": 0.4645,
+  "p_b": 0.4072,
+  "p_both": 0.274,
+  "independence_expected": 0.1892,
+  "lift": 1.4484,
+  "phi": 0.3461,
+  "phi_ci95": [
+   0.2837,
+   0.4056
+  ],
+  "verdict": "positive dependence: joint probability exceeds the product of the marginals, so an independent-lines parlay UNDERPRICES this combo"
+ },
+ "yard_level_correlation": {
+  "r": 0.4383,
+  "ci95": [
+   0.3807,
+   0.4926
+  ],
+  "label": "QB passing yards vs WR1 receiving yards, same team-game"
+ },
+ "singles": {
+  "QB1": {
+   "n": 803,
+   "over_rate": 0.4645,
+   "breakeven_at_minus110": 0.5238,
+   "beats_breakeven": false
+  },
+  "WR1": {
+   "n": 803,
+   "over_rate": 0.4072,
+   "breakeven_at_minus110": 0.5238,
+   "beats_breakeven": false
+  }
+ },
+ "gates": {
+  "G2_min_sample": {
+   "pass": true,
+   "detail": "n=803 team-games but only 2021-2022 seasons (2 < 3 required)"
+  },
+  "G7_pricing": {
+   "pass": false,
+   "detail": "No archived prop prices and no 2026 player feed. Proxy lines are not tradeable prices."
+  },
+  "status": "Blocked - research-only. No prop strategy can be scored on the betting leaderboard."
+ },
+ "what_would_unblock_it": [
+  "An official or licensed 2026 player-level box-score feed (nfl.com/stats is client-rendered and the stats download policy must be respected).",
+  "An archived sportsbook price history for player props including same-game-parlay repricing.",
+  "A minimum of three seasons of player-level data so the >=300-bet / >=3-season gate can be met."
+ ]
+}

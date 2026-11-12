@@ -1,0 +1,139 @@
+{
+  "generated_utc": "2026-11-12T17:35:00Z",
+  "method": "Read every file in the four NFL workspaces, counted their pages and rows, tested a sample of their cited URLs against the live official site, and compared their published slate to the current Week 10 slate.",
+  "workspaces": [
+    {
+      "path": "nfl/",
+      "pages": 9,
+      "size": "128 KB",
+      "what_it_is": "Specification dashboard: singles, parlays, props, gates, leaderboard, sources.",
+      "verified_good": "Clear separation of specification from measurement; flagged unmeasured values instead of inventing them; every table row carries a source link.",
+      "findings": [
+        {
+          "severity": "high",
+          "finding": "Cites two NFL.com URLs that return 404",
+          "evidence": "SRC-15, SRC-16"
+        },
+        {
+          "severity": "medium",
+          "finding": "Uses official.nba.com as a cross-reference for NFL injury policy",
+          "evidence": "repo measurement"
+        },
+        {
+          "severity": "low",
+          "finding": "No slate is dated; a reader cannot tell whether it is current",
+          "evidence": "repo measurement"
+        }
+      ],
+      "recommendation": "Freeze and banner-link to nfl-hub. Do not delete: it documents the original requirement set."
+    },
+    {
+      "path": "nfl-lab/",
+      "pages": 11,
+      "size": "308 KB",
+      "what_it_is": "Model + signals + own lines dashboard with a verification report.",
+      "verified_good": "The verification report recomputes all 32 standings rows from its game log (32 x 13 fields) and documents exactly one tie. That is a genuinely good integrity pattern.",
+      "findings": [
+        {
+          "severity": "medium",
+          "finding": "Own lines stop at Week 8/9 but the pages present them without a staleness marker",
+          "evidence": "nfl-lab/data/own_lines_2026.csv"
+        },
+        {
+          "severity": "low",
+          "finding": "No market comparison; columns are blank without a visible flag in the table",
+          "evidence": "repo measurement"
+        }
+      ],
+      "recommendation": "Keep as an archive; its reconciliation idea is reused here."
+    },
+    {
+      "path": "nfl-quant/",
+      "pages": 13,
+      "size": "3.0 MB",
+      "what_it_is": "Pipeline-driven measured backtest with pre-registered gates, bootstrap CIs and placebo tests.",
+      "verified_good": "Best practice in the repository: gates committed before backtests, holdout frozen, permutation tests, explicit flag list, honest 'no strategy passed' status.",
+      "findings": [
+        {
+          "severity": "medium",
+          "finding": "Week 9 lines are the newest, so the published slate is a week stale",
+          "evidence": "nfl-quant/data/week9_meta.json"
+        },
+        {
+          "severity": "low",
+          "finding": "Market values are third-party and flagged, but the page still shows divergences that can read as edges",
+          "evidence": "nfl-quant/data/flags.json"
+        }
+      ],
+      "recommendation": "Cite as prior art; do not extend. This hub reuses its gate design and season splits."
+    },
+    {
+      "path": "nfl-research/",
+      "pages": 8,
+      "size": "52 KB",
+      "what_it_is": "Lightweight strategy/validation/correlation/leaderboard pages with a test script.",
+      "verified_good": "Self-contained and small; tests its own internal links.",
+      "findings": [
+        {
+          "severity": "medium",
+          "finding": "Publishes strategy candidates without measured results or an explicit 'unmeasured' badge per row",
+          "evidence": "repo measurement"
+        },
+        {
+          "severity": "low",
+          "finding": "Duplicates the category set of the other three, adding reader confusion",
+          "evidence": "repo measurement"
+        }
+      ],
+      "recommendation": "Archive; the category taxonomy is reused in the hub navigation."
+    },
+    {
+      "path": "nfl-decisions/",
+      "pages": 8,
+      "size": "116 KB",
+      "what_it_is": "Governance/decision desk: decision questions, suggestions, availability and replacement tracking, flagged items, an unverified metric register and a proposed leaderboard policy. Publishes no lines.",
+      "verified_good": "Runs its own structural verifier; keeps every metric blank and marked unverified rather than filling it; explicitly states that source links support context, not profitability or approval. No invented numbers.",
+      "findings": [
+        {
+          "severity": "medium",
+          "finding": "Duplicates the purpose of this hub's suggestions and questions pages, creating two decision registers for the same decisions",
+          "evidence": "repo measurement"
+        },
+        {
+          "severity": "low",
+          "finding": "No originated lines, so it cannot answer the line-origination requirement on its own",
+          "evidence": "repo measurement"
+        }
+      ],
+      "recommendation": "Keep the register but consolidate: one canonical decision surface (see D1). Its blank-metric discipline is the right pattern."
+    }
+  ],
+  "hub_self_review": [
+    {
+      "check": "Official standings reconciled to archive",
+      "result": "32/32 teams, all fields, including tie percentage",
+      "evidence": "data/reconciliation.json"
+    },
+    {
+      "check": "Week 10 fixtures reconciled",
+      "result": "14/14 games matched by pairing and date; byes CHI, DEN, PHI, TB",
+      "evidence": "data/reconciliation.json"
+    },
+    {
+      "check": "Look-ahead tests",
+      "result": "Passed: deleting or rewriting all post-Week-9 results leaves all 14 lines identical",
+      "evidence": "data/model/week10_lines.json"
+    },
+    {
+      "check": "Pre-registration ordering",
+      "result": "gates.json and strategies.json committed before results.json",
+      "evidence": "git history"
+    },
+    {
+      "check": "Unverified values",
+      "result": "Market lines, depth charts, prop values and injury causes left blank and flagged",
+      "evidence": "data/flags.json"
+    }
+  ],
+  "irregularities_summary": "The repository now has six NFL surfaces (four dashboards, one decision desk, this hub) and no canonical marker. The most serious defects are dead citations (2), a stale slate presented as current (2 workspaces), two competing decision registers, and a missing official depth-chart source. None of these blocks publishing this hub, because the hub states each limitation in place."
+}
