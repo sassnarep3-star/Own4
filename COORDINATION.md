@@ -1371,3 +1371,36 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 - `rental-own4/` is live at a direct URL but is not linked from the root dashboard; multiple parallel rental directories are now present. A single canonical output/navigation decision is still needed.
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
+
+---
+
+## Session `arena/1d2cb84b-own4` — NFL requirements, decision register, own lines & skill gates (2026-11-12)
+
+**Session ID:** `1d2cb84b-own4` · **Branch:** `arena/1d2cb84b-own4` (fixed by platform; the requested
+`session-<id>/<task>` naming is not permitted here) · **Base commit:** `a10610b`
+
+### Claim (pushed before work started)
+
+| # | Task | Status | Owner session | File scope (exclusive) |
+|---|------|--------|---------------|------------------------|
+| N1 | Read repo, existing NFL workspaces, coordination board; no peer files edited | done | arena/1d2cb84b-own4 | COORDINATION.md (append-only) |
+| N2 | Official-source collection: 2026 Week 10 schedule, standings, team stats, Week 10 injury report; every value with its nfl.com URL | in progress | arena/1d2cb84b-own4 | nfl-edge/data/official_*.json |
+| N3 | Requirements traceability (full list of the user's requirements → status → evidence) | unclaimed→in progress | arena/1d2cb84b-own4 | nfl-edge/data/requirements.json |
+| N4 | Decision register: questions, known/unknown information, answers, what unlocks a decision, suggestions to discover missing information | in progress | arena/1d2cb84b-own4 | nfl-edge/data/questions.json |
+| N5 | Suggestions section (proposed changes with impact/effort/prerequisites/review status) | in progress | arena/1d2cb84b-own4 | nfl-edge/data/suggestions.json |
+| N6 | Own-line origination: model, official-input ratings, Week 10 originated spreads/totals/MLs, market comparison left blank | in progress | arena/1d2cb84b-own4 | nfl-edge/data/own_lines.json, nfl-edge/scripts/model.py |
+| N7 | Signal research + validation gates + luck removal + leaderboard/rewards policy (singles, parlays, prop combos) | in progress | arena/1d2cb84b-own4 | nfl-edge/data/strategies.json, gates.json, results.json |
+| N8 | Injury/availability intelligence, including explicit starter-vs-backup evidence gap | in progress | arena/1d2cb84b-own4 | nfl-edge/data/availability.json |
+| N9 | Static site (landing + category subpages + Flagged for Review), build + row-source/link verifier | pending | arena/1d2cb84b-own4 | nfl-edge/** |
+| N10 | Executive summary (`NFL_EXECUTIVE_SUMMARY.md`) + repo review of NFL workspaces (`nfl-edge/REPO_REVIEW.md`) | pending | arena/1d2cb84b-own4 | those two files |
+| N11 | Root `index.html` navigation link to the new NFL dashboard (additive only) | pending | arena/1d2cb84b-own4 | index.html (single additive link) |
+| N12 | PR to main, merge, confirm Pages deploy, record PR/receipt here | pending | arena/1d2cb84b-own4 | COORDINATION.md (append-only) |
+
+**Coordination note.** No other session is active in this checkout: working tree was clean at `a10610b`, and
+every prior board item is `done` / `needs review` with last commits on 2026-11-06 (>60 min old). Peer NFL
+namespaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`) are **read-only** for this session — the new
+work is namespaced under `nfl-edge/` and never regenerates peer files. The only shared files touched are
+append-only records (`COORDINATION.md`, `README.md` addendum) plus one additive link in the root `index.html`.
+Root `verification/build.py` is **not** run by this session: it rewrites `index.html` and would delete this
+session's navigation link (this is the previously logged irregularity I1, see the 2026-11-05 board entry);
+the new link is additive and does not change any existing root content.
