@@ -1374,6 +1374,97 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 
 ---
 
+## Session `arena/e2b19bf6-own4` — NFL decision-intelligence layer, question register, suggestions board & canonical NFL site (2026-11-12)
+
+**Session ID:** `arena/e2b19bf6-own4` · **Branch:** `arena/e2b19bf6-own4` (platform-pinned; `session-<id>/<task>` naming not creatable in this harness — same logged deviation as every prior session) · **Base:** `a10610bed12589273e11c73b35d1473968ab915f` (main)
+
+**Claim status:** in progress. At claim time the last commits on `main` are from 2026-11-06 (six days old) and every board entry above is `done` or `needs review`; no unexpired claim exists, so this session also serves as **final integration session** for its own scope.
+
+**User brief (this session):** NFL. Review the repo line by line against official sources; build a question/information register that lists what must be answered before any decision; add a dedicated Suggestions section so a reviewer can compare and choose a path before implementing; origin own NFL lines; research signal strategies; run them as a leaderboard competition with validation gates, correlation values, luck removal and skill screens; cover singles, parlays and player-prop combos; track injuries and offensive/defensive depth-chart deficiencies (2nd/3rd/4th string replacements); produce an executive summary; publish a clean GitHub Pages dashboard with subpages and a Flagged for Review page; PR + merge + deploy confirmation.
+
+**Non-overlapping file scope (exclusive to this session):**
+
+| Scope | Paths |
+|---|---|
+| New NFL decision layer (site + data + scripts) | `nfl-decision/**` |
+| Injury / depth-chart tracker data | `nfl-decision/data/injuries_*.json`, `nfl-decision/data/depth_deficiency_*.json` |
+| Question register | `nfl-decision/data/questions.json`, `nfl-decision/pages/questions.html` |
+| Suggestions board | `nfl-decision/data/suggestions.json`, `nfl-decision/pages/suggestions.html` |
+| Own-line origination for the current week | `nfl-decision/data/own_lines_*.json` |
+| Append-only | `COORDINATION.md` (this section) |
+| Integration-only (shared) | root `index.html` nav entry, `README.md` additive section — only after it is confirmed no peer session is editing them |
+
+**Peer namespaces respected, linked but never edited:** `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`, `docs/`, `lab/`, `lines-lab/`, `pipeline/`, `verified/`, `verification*/`, `nba-evidence/`, `own4-dashboard/`, `rental*/`, `rent-*/`.
+
+### Task board (this session)
+
+| # | Task | Status | Files |
+|---|------|--------|-------|
+| D1 | Line-by-line repo review of every NFL namespace, with official-source spot checks | in progress | `nfl-decision/pages/repo-review.html`, `nfl-decision/data/repo_review.json` |
+| D2 | Question / information / answer register (what we know, what we don't, what blocks a decision) | unclaimed | `nfl-decision/data/questions.json` |
+| D3 | Suggestions board (each suggestion = context, options, evidence, cost, risk, recommendation) | unclaimed | `nfl-decision/data/suggestions.json` |
+| D4 | Injury + depth-chart deficiency tracker from nfl.com official injury report | unclaimed | `nfl-decision/data/injuries_*.json` |
+| D5 | Own-line origination for current week + validation gates + leaderboard + luck removal | unclaimed | `nfl-decision/data/*` |
+| D6 | Canonical `nfl-decision/` dashboard site + Flagged for Review | unclaimed | `nfl-decision/**` |
+| D7 | Executive summary | unclaimed | `nfl-decision/EXECUTIVE_SUMMARY.md` |
+| D8 | Final integration: verify, build, PR → main, merge, Pages deploy confirmation | unclaimed | root `index.html` (nav), `COORDINATION.md` |
+
+### Log
+
+- 2026-11-12 — Claimed D1–D8 and pushed this claim before any implementation, per the board protocol. No peer files touched.
+
+### D1–D8 execution record (2026-11-12)
+
+| # | Task | Status | Where |
+|---|------|--------|-------|
+| D1 | Line-by-line repo review of every NFL namespace | done | `nfl-decision/repo-review.html`, `nfl-decision/data/repo_review` (in generator) |
+| D2 | Question / information / answer register | done | `nfl-decision/data/questions.py` → `questions.html` (16 questions) |
+| D3 | Suggestions board | done | `nfl-decision/data/suggestions.py` → `suggestions.html` (18 suggestions) |
+| D4 | Injury + depth-deficiency tracker | done | `nfl-decision/data/injuries_wk10.py` → `injuries.html` (276 player rows, 13 verified depth rows) |
+| D5 | Own lines + gates + leaderboard + luck removal | done | `nfl-decision/scripts/0{1..7}_*.py`, `data/*.json` |
+| D6 | Canonical dashboard site + Flagged for Review | done | `nfl-decision/*.html` (14 pages) |
+| D7 | Executive summary | done | `nfl-decision/EXECUTIVE_SUMMARY.md`, `executive-summary.html` |
+| D8 | Final integration: verify, PR, merge, deploy | in progress | `index.html` nav, `.github/workflows/nfl-decision.yml`, this file |
+
+**Official sources read this session (fetched and read directly, 2026-11-12):** nfl.com/scores/2026/REG9 ·
+nfl.com/standings/league/2026/REG · nfl.com/games/bears-at-seahawks-2026-reg-8 · nfl.com/schedules/2026/by-week/week-10 ·
+nfl.com/injuries/ · nfl.com/news/nfl-week-10-injury-report-2026-season ·
+nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11 ·
+nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again ·
+nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start ·
+nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season ·
+nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693 ·
+nfl.com/teams/ · nfl.com/depth-charts/ (HTTP 404) · api.github.com/repos/sassnarep3-star/Own4/pages · ncpgambling.org.
+
+**Verification performed.**
+
+| Check | Result |
+|---|---|
+| 2026 game log rebuilt from official pages | **136 games**, Weeks 1–9 |
+| All 32 teams' W-L-T / PF / PA recomputed vs nfl.com standings | **160/160 cells match, 0 mismatches** |
+| Defect found in the peer 2026 dataset | `nfl-lab/data/games_2026.csv` held 120 of 121 Week 1–8 games; **CHI 34 – SEA 17 (Week 8) was missing**. Corrected only in this session's own file; the peer file was **not** edited per the board rules. |
+| Irregularity found in the archived line column | `spread_line` is the **home team's favoured-by** margin, not the conventional home line. A naive sign reading gives a 60.0% home-cover rate and ROIs above +50%. Verified: spread_line ≥ +7 → 80.5% home win rate; ≤ −7 → 23.1%. Documented in the code and published as flag F-04. |
+| Holdout scored once (2018–2025), 5 strategies | S1 +1.09% [−4.65%, +7.03%] q=0.199 → Bronze; S2/S4/S5/S6 negative → Rejected. **0 of 1000 betting points awarded.** |
+| Look-ahead perturbation test | changing 1,616 later results changed **0** earlier predictions |
+| Placebo calibration | 12 random strategies: mean ROI −4.59%, best +3.80%, 8% positive |
+| Forecast leaderboard (price-independent) | market MAE 9.844 < own model 10.440 < naive 11.055; **600 points awarded** to skilled forecasters |
+| Prop combo dependence | phi = 0.346, 95% CI [0.284, 0.406], lift 1.45× on 803 team-games |
+| Site audit | **14 pages, 736 data-table rows, 736 carry a source link (100%), 0 broken links, 0 dangling anchors** |
+| Rebuild determinism | re-running 02–08 produces a byte-identical site (`git diff` clean) |
+| Inherited CI | `verification/verify_site.py` (14 pages / 346 rows) pass · `scripts/build.py` pass · `scripts/check_site.py` 0 problems · `unittest discover` 6/6 OK · `git diff -- docs` clean |
+
+**Peer-file discipline.** No file in `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`, `docs/`, `lab/`, `lines-lab/`,
+`pipeline/`, `verified/`, `verification*/`, `nba-evidence/`, `own4-dashboard/` or `rental*/` was modified.
+The only shared file edited is the root `index.html` (one additive navigation link) and this board.
+
+**Flagged for review (published at `nfl-decision/flagged.html`, 15 items, none blocking):** F-01 no official odds source
+(G7 permanently fails) · F-02 no official depth chart (404) · F-03 the missing Week 8 game · F-04 inverted spread sign ·
+F-05 blank injury cells · F-06 "No Injuries Reported" taken verbatim · F-07 no 2026 player feed · F-08 in-sample
+recalibration for the Week 10 lines (disclosed) · F-09 −110 is an assumption · F-10 peer claims not re-verified ·
+F-11 five competing NFL dashboards · F-12 no odds values in nfl.com HTML · F-13 Thursday game excluded from the forward
+log · F-14 no historical injury archive · F-15 no playoff/tiebreaker claims.
+
+---
 ## Session `arena/e2601583-own4` — NFL live-verification & decision audit (claim, 2026-11-12 UTC)
 
 **Session ID:** `arena/e2601583-own4` · **Branch:** `arena/e2601583-own4` (platform-pinned; per-task `session-<id>/<task>` branches are not creatable in this harness — same logged deviation as every prior session).
@@ -1450,3 +1541,32 @@ No peer namespace will be edited. Existing NFL implementations are retained and 
 - Pages Actions run **43258435492 succeeded**, verification and deployment jobs both successful: https://github.com/sassnarep3-star/Own4/actions/runs/43258435492 . Independently fetched public landing https://sassnarep3-star.github.io/Own4/nfl-decisions/ and Flagged page https://sassnarep3-star.github.io/Own4/nfl-decisions/flagged.html after deployment; returned the new content. **Site confirmed live.**
 - CI warnings, nonblocking: inherited actions target Node 20 and runner forces Node 24; ubuntu-latest migration notice. No build/deploy failure. Retain as maintenance items, not strategy evidence.
 - Scope remains bounded: no full-repository factual certification, no live injury/depth collector, no executable own lines, no newly certified empirical correlations, no proven skill-only betting strategy and no funded prizes. These operational/research gaps are explicitly needs review on the site. No user manual input required for publication.
+
+---
+
+---
+
+### Concurrent-integration record · session `arena/e2b19bf6-own4` (2026-11-12, after merge)
+
+- **Collision.** While this session worked, `origin/main` advanced through PRs #60–#64, which added three more NFL
+  namespaces (`nfl-decisions/`, `nfl-hub/`, `nfl-audit/`) from other sessions. The first `git pull --rebase` failed on
+  `COORDINATION.md` and was **aborted without loss**. `origin/main` was then merged into this branch so its history is
+  retained. Conflicts: `COORDINATION.md` (both records kept verbatim, append-only) and `index.html` (resolved as a
+  **superset**: main's navigation, which already links all five earlier NFL workspaces, plus this session's
+  `nfl-decision/index.html` entry). No peer file was discarded or edited.
+- **Independent agreement.** Peer session `e2601583` (`nfl-hub`) independently reached the same two blocking findings
+  published here: **F-01 no 2026/official market lines** and **F-02 no official depth chart (the NFL.com URL returns
+  404)**. They also flag the Baltimore "No Injuries Reported" contradiction (their F-05, this session's F-06) and the
+  absence of a 2026 player-prop feed (their F-03, this session's F-07). These are the same facts arrived at
+  independently, which raises confidence; neither session copied the other.
+- **Overlap disclosed, not hidden.** There are now **eight** NFL workspaces: `nfl/`, `nfl-research/`, `nfl-lab/`,
+  `nfl-quant/`, `nfl-decisions/`, `nfl-hub/`, `nfl-audit/` and `nfl-decision/`. Suggestion **S04** (adopt one canonical
+  dashboard) is now more urgent, not less. This session deliberately did **not** rename or consolidate peer work.
+- **What still distinguishes `nfl-decision/`:** it is the only workspace that (a) reconciles all 160 official
+  standings cells from a rebuilt 136-game log, (b) publishes a numbered question register with explicit
+  known/unknown/blocking fields, (c) publishes a numbered suggestions board with options, cost, risk and a
+  recommendation per item, and (d) scores a **price-independent** forecast leaderboard that can actually pay rewards.
+- **Post-merge re-verification (re-run after the merge, not reused from before):** `09_verify.py` → 14 pages,
+  736/736 data-table rows sourced, 0 broken links · `verification/verify_site.py` → pass · `scripts/build.py` → pass ·
+  `scripts/check_site.py` → 0 problems · `unittest discover` → 6/6 OK · `git diff -- docs` → clean. Root `index.html`
+  still carries every peer nav entry.

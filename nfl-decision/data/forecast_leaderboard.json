@@ -1,0 +1,72 @@
+{
+ "generated_utc": "2026-11-12",
+ "holdout_seasons": [
+  2018,
+  2025
+ ],
+ "n_holdout_games": 2127,
+ "n_games_with_lines": 2127,
+ "brier_note": "Brier uses sigma=13.623 (realised residual sd of the margin model) for every forecaster except F2, which is calibrated the same way for comparability.",
+ "board": [
+  {
+   "forecaster": "F2 Market closing line",
+   "n": 2127,
+   "margin_mae": 9.844,
+   "margin_rmse": 12.772,
+   "total_mae": 10.387,
+   "ats_accuracy": null,
+   "brier": 0.2113,
+   "note": "Third-party closing line, inverted to a home margin. The benchmark.",
+   "reward_points": 0,
+   "ats_note": "not applicable - the market line is the benchmark",
+   "benchmark": true
+  },
+  {
+   "forecaster": "F1 Own Elo model",
+   "n": 2127,
+   "margin_mae": 10.44,
+   "margin_rmse": 13.429,
+   "total_mae": 11.138,
+   "ats_accuracy": 0.4993,
+   "brier": 0.2292,
+   "note": "This repository's walk-forward model. Knobs frozen on 1999-2012.",
+   "reward_points": 300
+  },
+  {
+   "forecaster": "F3 Home team by 2",
+   "n": 2127,
+   "margin_mae": 11.055,
+   "margin_rmse": 14.316,
+   "total_mae": 11.202,
+   "ats_accuracy": 0.5118,
+   "brier": 0.2489,
+   "note": "Naive: every home team wins by 2, total = 2 x running league average.",
+   "reward_points": 200
+  },
+  {
+   "forecaster": "F4 League average only",
+   "n": 2127,
+   "margin_mae": 11.06,
+   "margin_rmse": 14.324,
+   "total_mae": 10.983,
+   "ats_accuracy": 0.5166,
+   "brier": 0.2492,
+   "note": "Naive: historical mean home margin (2.2) and mean total (44.4) from the whole archive.",
+   "reward_points": 100
+  },
+  {
+   "forecaster": "F5 Random margin",
+   "n": 2127,
+   "margin_mae": 15.723,
+   "margin_rmse": 19.782,
+   "total_mae": 15.983,
+   "ats_accuracy": 0.5046,
+   "brier": 0.3332,
+   "note": "Seeded random draw from the realised distribution. A floor, not a forecaster.",
+   "reward_points": 0
+  }
+ ],
+ "forecast_pool": 600,
+ "allocation": "300 / 200 / 100 to the top 3 skilled forecasters on holdout margin MAE. The market benchmark is excluded from rewards.",
+ "honest_note": "The market wins. No forecaster in this repository beats the closing line, and none is claimed to. Rewards here measure relative skill against naive baselines, not a tradeable edge."
+}
