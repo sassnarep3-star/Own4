@@ -91,6 +91,27 @@
    "pass": true,
    "detail": "Patrick Mahomes appears on the Week 10 report (KC, Full Participation) and in the 2026 passing table with 2037 yards.",
    "source": "S1, S8"
+  },
+  {
+   "id": "V13",
+   "check": "nfl-audit published pages rebuild byte-identically and every table row carries an official https link",
+   "pass": true,
+   "detail": "scripts/verify.py: 13 pages, 0 broken local links, 0 unsourced table rows, 0 drift, footer and capture stamp present on every page.",
+   "source": "repository (nfl-audit/scripts/verify.py)"
+  },
+  {
+   "id": "V14",
+   "check": "No value on this site is published without an official source; blanks are declared",
+   "pass": true,
+   "detail": "276/276 injury rows carry an official player URL and the report URL; 32/32 standings rows and 15/15 finals carry official URLs; 18 flagged items and 5 blank-register entries name every blank and why it is blank.",
+   "source": "S1, S2, S3"
+  },
+  {
+   "id": "V15",
+   "check": "V01 reconciliation repeated at cell level: 32 teams x 5 fields = 160 comparisons",
+   "pass": true,
+   "detail": "Stored Week 8 (W,L,T,PF,PA) + official Week 9 finals + CHI@SEA Week 8 = official standings today, 160/160 cells equal.",
+   "source": "S2, S3, S5"
   }
  ]
 }
