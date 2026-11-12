@@ -1,0 +1,96 @@
+{
+ "generated_utc": "2026-11-12",
+ "checks": [
+  {
+   "id": "V01",
+   "check": "Every stored Week-8 team record + official Week 9 results = official standings today (W, L, T, PF, PA)",
+   "pass": true,
+   "detail": "32 teams compared, 0 mismatches",
+   "source": "S2, S3, S5"
+  },
+  {
+   "id": "V02",
+   "check": "Official standings are internally consistent (sum W = sum L; PF = PA; net points sum to zero)",
+   "pass": true,
+   "detail": "W=135, L=135, PF-PA=0",
+   "source": "S2"
+  },
+  {
+   "id": "V03",
+   "check": "Winning percentage recomputes from W-L-T using (W + 0.5*T)/(W+L+T), rounded half-up to 3 places",
+   "pass": true,
+   "detail": "32 teams recomputed; mismatches: none. Note: 0.3125 rounds to 0.312 under banker's rounding and 0.313 half-up; the official value is 0.313, so half-up is the league convention.",
+   "source": "S2"
+  },
+  {
+   "id": "V04",
+   "check": "Stored nfl-lab game log is internally consistent (120 unique games, numeric scores, team-games = 2 x games)",
+   "pass": true,
+   "detail": "games=120, unique slugs=True, numeric=True, team-games=240",
+   "source": "repository + S5"
+  },
+  {
+   "id": "V05",
+   "check": "All 15 Week 9 final scores match the official Week 9 schedule page",
+   "pass": true,
+   "detail": "15 games checked, 0 mismatches",
+   "source": "S3"
+  },
+  {
+   "id": "V06",
+   "check": "The two NFL workspaces originate different \"own lines\" for the same games",
+   "pass": true,
+   "detail": "14 shared Week 9 games; sample: JAX@BAL: quant 3.8 vs lab +0.5 (\u03943.3); CIN@ATL: quant 1.6 vs lab +1.5 (\u03940.1); CLE@NO: quant -1.6 vs lab -0.5 (\u03941.1); DAL@IND: quant 0.0 vs lab -0.0 (\u03940.0). Both cannot be canonical (flag F16).",
+   "source": "repository"
+  },
+  {
+   "id": "V07b",
+   "check": "Sign convention is proved from the file itself, not assumed",
+   "pass": true,
+   "detail": "15 rows: (-own_spread_home) - market_spread_home_fav_pts equals the stored divergence column on 15/15 rows (tolerance 0.06); exceptions []. Encoding: own home margin = -own_spread_home, market home margin = market_spread_home_fav_pts.",
+   "source": "repository"
+  },
+  {
+   "id": "V07",
+   "check": "Week 9 own lines can now be graded against official finals (market columns are third-party, not official)",
+   "pass": true,
+   "detail": "nfl-quant own spread MAE 10.571 vs market 8.75 (n=14); nfl-quant own total MAE 11.021 vs market 9.214 (n=14); nfl-lab home-margin MAE 12.095 (n=14). Single-slate, n=15: descriptive only, no skill claim (flag F17).",
+   "source": "S3 + repository"
+  },
+  {
+   "id": "V08",
+   "check": "nfl-quant power ratings track official point differential (Spearman rank correlation)",
+   "pass": true,
+   "detail": "Spearman rho = 0.842 on 32 teams after aliasing ['ARI'] to official codes. Strength of agreement is not a skill claim; ratings include priors.",
+   "source": "S2 + repository"
+  },
+  {
+   "id": "V09",
+   "check": "Every one of the 32 teams is accounted for in the Week 10 injury picture",
+   "pass": true,
+   "detail": "rows for 26 teams + byes ['CHI', 'DEN', 'PHI', 'TB'] + 'no injuries reported' ['BAL', 'LAC'] = 32",
+   "source": "S1, S4"
+  },
+  {
+   "id": "V10",
+   "check": "Week 10 official slate is 14 games covering 28 distinct teams (4 on bye)",
+   "pass": true,
+   "detail": "games=14, distinct teams=28",
+   "source": "S4"
+  },
+  {
+   "id": "V11",
+   "check": "Every injury row links to its official nfl.com player page and to the official report",
+   "pass": true,
+   "detail": "276 rows, all with nfl.com player URL",
+   "source": "S1"
+  },
+  {
+   "id": "V12",
+   "check": "A player named in the injury report is also present in the official season stat table (identity cross-check)",
+   "pass": true,
+   "detail": "Patrick Mahomes appears on the Week 10 report (KC, Full Participation) and in the 2026 passing table with 2037 yards.",
+   "source": "S1, S8"
+  }
+ ]
+}

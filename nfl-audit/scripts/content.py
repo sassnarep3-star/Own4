@@ -393,8 +393,41 @@ FLAGS = [
      "The repository's legacy Pages build reports status 'errored' ('Page build failed') on the latest "
      "build for commit a10610b, dated 2026-11-06.",
      "GitHub Pages API (builds/latest)", "Open — must be rechecked after this session's merge."),
+    ("F16", "Two workspaces, two different own lines",
+     "nfl-lab and nfl-quant both publish 'own lines' for the same Week 9 games and they disagree — e.g. "
+     "JAX@BAL is 3.8 in nfl-quant and HOME +0.5 in nfl-lab (a 3.3-point gap).",
+     "repository (nfl-quant/data/week9_lines.csv, nfl-lab/data/own_lines_2026.csv) + S3",
+     "Open — both are internally consistent, so the repository must pick one as canonical (Q10)."),
+    ("F17", "Single-slate grading is descriptive only",
+     "Grading the stored Week 9 lines against official finals gives MAE 10.571 (own spread) vs 8.750 "
+     "(third-party market) over 14 games, and 11.021 vs 9.214 for totals. Fourteen correlated games is "
+     "not evidence of anything.",
+     "S3 + repository", "Open — published as a descriptive number, never as skill."),
+    ("F18", "Leaderboard tier vs interval",
+     "nfl-quant awards a 'Bronze' tier to S1 on a point ROI of +0.26% while its own bootstrap 5th "
+     "percentile is -3.63%; S4 is Bronze at +0.03% with a 5th percentile of -7.79%.",
+     "repository (nfl-quant/data/leaderboard.json)",
+     "Open — a tier that ignores its own interval rewards luck (S12/S13)."),
     ("F15", "Stored team codes vs official",
      "The stored nfl-lab standings are consistent with official values for every cell checked, but the "
      "stored file has no capture timestamp column.",
      "S2 + repository file", "Explained — freshness is published per page instead."),
 ]
+
+# Per-row source specs (source-register IDs, "repository", or an https URL).
+QUESTION_SOURCE = {
+    "Q01": "S1", "Q02": "repository:provenance", "Q03": "S6", "Q04": "S1", "Q05": "S1",
+    "Q06": "S3", "Q07": "S10", "Q08": "repository:leaderboard", "Q09": "S10",
+    "Q10": "S3", "Q11": "S4", "Q12": "S2", "Q13": "S1", "Q14": "S1",
+}
+SUGGESTION_SOURCE = {
+    "S01": "S3", "S02": "S1", "S03": "S1", "S04": "S1", "S05": "S3", "S06": "S2",
+    "S07": "S1", "S08": "S11", "S09": "S2", "S10": "repository:provenance", "S11": "S10",
+    "S12": "repository:leaderboard", "S13": "repository:leaderboard", "S14": "S1", "S15": "S4",
+}
+GATE_SOURCE = "S14"
+BLANK_REGISTER_SOURCE = {"Price, edge, expected value, ROI": "S1",
+                         "Starters replaced / string order": "S6",
+                         "Correlation coefficients and joint probabilities": "S10",
+                         "Rewards": "repository:leaderboard",
+                         "Injury type on %d rows, game status on %d rows": "S1"}
