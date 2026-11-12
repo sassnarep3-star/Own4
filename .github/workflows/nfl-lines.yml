@@ -1,8 +1,9 @@
 name: nfl-lines verify
 
 # Scope: nfl-lines/** only. Owned by session arena/b4aafa88-own4.
-# Rebuilds the derived data, regenerates the static site, then checks every
-# local link resolves and every published table row carries a source link.
+# Re-verifies the archive against the official transcription, rebuilds the derived
+# data, regenerates the static site, then checks that every local link resolves and
+# every published table row carries a source link.
 
 on:
   push:
@@ -36,20 +37,7 @@ jobs:
 
       - name: Verify the archive against the official transcription
         working-directory: nfl-lines
-        run: python3 -c "
-          import sys; sys.path.insert(0, 'engine')
-          import dataset as D
-          games = D.normalise_archive(D.load_archive())
-          standings = D.load_json(D.os.path.join(D.OFFICIAL, 'standings_2026.json'))
-          v = D.verify_against_official(games)
-          ic = D.integrity_checks(games, standings)
-          print('spot-check', v['matched'], '/', v['games_compared'])
-          assert v['matched'] == v['games_compared'], 'official spot-check failed'
-          assert v['mismatched'] == 0 and v['missing_in_archive'] == 0
-          failed = [r['id'] for r in ic if not r.get('passed')]
-          print('integrity checks failed:', failed)
-          assert not failed, 'integrity checks failed'
-        "
+        run: python3 engine/ci_check.py
 
       - name: Rebuild derived data
         working-directory: nfl-lines
@@ -59,7 +47,7 @@ jobs:
         working-directory: nfl-lines
         run: python3 engine/build_site.py
 
-      - name: Repo audit (read only)
+      - name: Repository audit (read only)
         working-directory: nfl-lines
         run: python3 engine/repo_audit.py
 
@@ -68,7 +56,7 @@ jobs:
         run: python3 engine/verify_site.py
 
       - name: Fail if the rebuild changed committed numbers
-        # The pipeline is deterministic apart from the "generated_utc" stamp in
+        # The pipeline is deterministic apart from the generated_utc stamp in
         # data/derived/summary.json, so that field is normalised out of the hash.
         run: |
           changed=0
