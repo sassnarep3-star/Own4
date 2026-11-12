@@ -115,6 +115,9 @@ def table(headers, rows, cap=None, cls="", numeric=(), note=None, source_header=
         out.append("<caption>%s</caption>" % cap)
     out.append("<thead><tr>" + "".join("<th>%s</th>" % h for h in headers) + "</tr></thead><tbody>")
     for r in rows:
+        if len(r) != len(headers):
+            raise ValueError("column mismatch in %r: %d cells for %d headers" % (cap, len(r), len(headers)))
+    for r in rows:
         if not r or "<a class=\"src\"" not in r[-1]:
             raise ValueError("unsourced table row in %r: %r" % (cap, r))
         cells = []
@@ -739,8 +742,8 @@ def build_validation():
     for x in g["gates"]:
         res_all = ", ".join("%s %s" % (s["id"], "pass" if s["gates"][x["id"]]["pass"] else "fail") for s in res["strategies"])
         rows.append(["<strong>%s</strong>" % esc(x["id"]), esc(x["name"]), esc(x["rule"]), esc(x["why"]),
-                     esc(res_all), "", src("https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json")])
-    body.append(table(["Gate", "Name", "Pre-registered rule", "Why it exists", "Result by strategy", "", "Source"],
+                     esc(res_all), src("https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json")])
+    body.append(table(["Gate", "Name", "Pre-registered rule", "Why it exists", "Result by strategy", "Source"],
                       rows, cap="The ten pre-registered gates and how each strategy fared"))
     body.append('<p class="note">Thresholds are design choices, not official NFL values (flag F-11). '
                 'Tier policy: Qualified = all ten pass and earns points; Bronze = 5-9; Rejected = fewer than 5. '
