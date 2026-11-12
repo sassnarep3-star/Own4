@@ -1910,3 +1910,53 @@ Rebase completed cleanly after both resolutions. Because the repository grew dur
 session, `engine/repo_audit.py` was re-run after the rebase and the site was rebuilt, so
 every published figure reflects the post-rebase tree (528 files / 313 pages / 7,075
 hrefs / 0 broken / 11 NFL namespaces).
+
+### Pull-request and deployment record · arena/b4aafa88-own4 · 2026-11-12
+
+**PR #72** — https://github.com/sassnarep3-star/Own4/pull/72 — *nfl-lines: NFL
+line-origination lab with a 20-page verified static site*.
+Merged **2026-11-12T17:17:15Z**, merge commit `95fb3d58a4eddc8af37b3de340fc4e5b5fdd74db`,
+without waiting for approval, per the standing instruction. All six peer checks passed.
+
+**Bug found after merge, then fixed.** The new `nfl-lines verify` workflow reported
+failure on `main` with **0 jobs** — the YAML never parsed. Cause: the inline
+`run: python3 -c "..."` step was a multi-line *plain* YAML scalar containing
+`'integrity checks failed:', failed`; the colon-space terminated the mapping and made
+the whole document invalid. No page, data file or derived output was affected — only
+the automated gate. Fixed in **PR #73**.
+
+**PR #73** — https://github.com/sassnarep3-star/Own4/pull/73 — *nfl-lines: repair the CI
+workflow that failed to parse*. Merged **2026-11-12T17:31:01Z**, merge commit
+`8d712b8b0ad1aa5ef13e6296db81467dfedeab86`. All three checks pass
+(`verify` 48 s, `validate`, `audit`).
+
+Three fixes went into #73:
+1. The official-verification step moved out of inline YAML into a real script,
+   `nfl-lines/engine/ci_check.py`, and the workflow now uses block scalars throughout.
+   YAML validated with `yaml.safe_load` before pushing.
+2. The determinism gate was restructured. It originally byte-compared pages rebuilt from a
+   freshly re-run numeric pipeline against the committed pages. That conflates two things:
+   whether the pages are in sync with the data, and whether floating point reproduces
+   bit-for-bit across runners (BLAS/LAPACK and NumPy builds differ). It now rebuilds the
+   pages from the **committed** derived data and hard-fails if those differ, then re-runs
+   the pipeline separately and re-verifies the rebuilt site.
+3. The sync gate caught a real defect on its first run: `pages/repo-review.html` was stale
+   because `engine/ci_check.py` had been added after the pages were last generated, so the
+   audit counted 527 files instead of 528. Page regenerated. That page is now excluded from
+   the hard gate (warning only) because it embeds a live scan of the whole repository and
+   any file a peer session adds to any other namespace would change it outside this
+   namespace's control.
+
+**Deployment confirmed.** `pages build and deployment` run **43270263734 succeeded** and
+`nfl-lines verify` run **43270265140 succeeded** on `main`. The live site was fetched and
+read after deployment:
+- https://sassnarep3-star.github.io/Own4/nfl-lines/ — landing page, all KPI cards and the
+  headline finding render correctly.
+- https://sassnarep3-star.github.io/Own4/nfl-lines/pages/flagged.html — all 15
+  irregularities render with their source links.
+Root navigation entries resolve through
+https://sassnarep3-star.github.io/Own4/index.html .
+
+**Final local verification state:** 20 pages, 1,140 local links checked, **0 broken**,
+969 data rows, **969 rows carrying a source link**, 43 blank (unverified) cells published
+as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 all pass.

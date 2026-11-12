@@ -288,10 +288,11 @@ def build_index():
     best = lb[0] if lb else None
     if best:
         body.append("<h3>Best result on the board (and why it still does not count)</h3>")
-        body.append("<p>%s: %s bets, ROI %s, %s%% win rate against a %s%% break-even, p = %s "
+        body.append("<p>%s: %s bets, ROI %s%s, %s%% win rate against a %s%% break-even, p = %s "
                     "(%s after correction for testing %d strategies). It passes %s gates. "
                     "<a href='pages/leaderboard.html'>See the full board</a>.</p>"
-                    % (esc(best["name"]), best["n"], esc(best["roi"]),
+                    % (esc(best["name"]), best["n"],
+                       "+" if (best["roi"] or 0) > 0 else "", esc(pct(best["roi"])),
                        esc(round(best["win_rate"] * 100, 1)), esc(round(best["break_even_rate"] * 100, 1)),
                        esc(best["p_value"]), esc(best["p_value_bh"]), len(lb), esc(best["gates_passed"])))
     return page("Overview", "index.html", "".join(body),
