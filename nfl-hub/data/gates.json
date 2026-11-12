@@ -1,0 +1,44 @@
+{
+  "pre_registered_utc": "2026-11-12T16:45:00Z",
+  "pre_registration_statement": "This file and data/strategies.json are committed to git BEFORE pipeline/backtest.py is executed on the holdout seasons. The git history is the proof of ordering: the commit containing this file precedes the commit containing data/strategies/results.json.",
+  "inherits_from": {
+    "workspace": "nfl-quant",
+    "file": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json",
+    "note": "Gate design and season splits are carried forward from the prior session's pre-registration so this hub does not silently re-tune on the same data. Thresholds here are project-defined, not official NFL values."
+  },
+  "splits": {
+    "dev": [1999, 2012],
+    "validation": [2013, 2016],
+    "holdout": [2017, 2025],
+    "live_paper": [2026],
+    "rule": "Hyper-parameters and bet-selection thresholds are chosen on dev/validation only. Holdout is scored exactly once by the committed pipeline."
+  },
+  "gates": [
+    {"id": "G1", "name": "Provenance & integrity", "rule": "Every input carries a URL, retrieval time and sha256; no duplicate game_id; scores consistent with result/total; standings reconcile to the official source."},
+    {"id": "G2", "name": "Minimum sample", "rule": ">= 300 settled holdout bets across >= 3 seasons (project-defined)."},
+    {"id": "G3", "name": "Positive net ROI", "rule": "Holdout ROI > 0 after vig, priced at archived closing lines/odds (default -110 when odds missing)."},
+    {"id": "G4", "name": "Luck removal", "rule": "Week-clustered bootstrap 95% CI lower bound > 0 AND placebo-permutation p < 0.05 AND Holm-adjusted p < 0.05 across the registered single-bet trials."},
+    {"id": "G5", "name": "Robustness", "rule": "Positive ROI in >= 60% of holdout seasons and no single season contributes > 50% of total profit."},
+    {"id": "G6", "name": "No look-ahead", "rule": "Features use only games strictly before the kickoff week; a perturbation test (rewriting future results) must leave predictions unchanged."},
+    {"id": "G7", "name": "Pricing realism", "rule": "Bets priced at archived closing lines/odds. Parlay payouts use a stated assumption and are flagged; proxy markets FAIL G7 by construction."},
+    {"id": "G8", "name": "Forward replication", "rule": "Prospective timestamped predictions for >= 1 full season. Cannot pass in this session; caps any strategy at Gold (provisional)."}
+  ],
+  "tiers": {
+    "Gold (provisional)": "G1-G7 pass, G8 pending",
+    "Silver": "G1-G3 pass; raw significance passes but Holm or robustness fails",
+    "Bronze": "G1-G3 pass; significance fails (indistinguishable from luck)",
+    "Research-only": "G7 fails (proxy or assumed pricing) regardless of ROI",
+    "Rejected": "G3 fails or G1/G6 fails",
+    "Blocked": "Required input unavailable; value left blank and flagged"
+  },
+  "rewards": {
+    "type": "non-monetary reputation points only; no cash, prizes or pooled stakes",
+    "pool_points": 1000,
+    "allocation": "Split equally among strategies reaching Gold (provisional). If none pass, 0 awarded and the pool rolls over. Silver/Bronze receive recognition only.",
+    "why_non_monetary": "Paying out on wagering outcomes raises licensing, tax and consumer-protection questions that are not resolved for this project; see the Open Questions register (Q-14)."
+  },
+  "controls": {
+    "C1": "Always bet the home favourite ATS at the closing line.",
+    "C2": "Random-side placebo, 2000 draws, used to calibrate how often luck alone produces the observed ROI."
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "blend_weight_points": 0.5,
+  "elo_to_points_slope": 0.0602,
+  "sigma": 13.182,
+  "dev": {
+    "n": 3560,
+    "mae_margin_model": 10.95,
+    "mae_margin_market": 10.576,
+    "mae_margin_naive_home_2_5": 11.539,
+    "rmse_margin_model": 13.885,
+    "rmse_margin_market": 13.49,
+    "mae_total_model": 11.953,
+    "mae_total_market": 10.722
+  },
+  "validation": {
+    "n": 1024,
+    "mae_margin_model": 10.294,
+    "mae_margin_market": 10.09,
+    "mae_margin_naive_home_2_5": 11.056,
+    "rmse_margin_model": 13.175,
+    "rmse_margin_market": 12.992,
+    "mae_total_model": 11.819,
+    "mae_total_market": 10.582
+  },
+  "holdout": {
+    "n": 2383,
+    "mae_margin_model": 10.392,
+    "mae_margin_market": 9.871,
+    "mae_margin_naive_home_2_5": 11.116,
+    "rmse_margin_model": 13.354,
+    "rmse_margin_market": 12.811,
+    "mae_total_model": 11.971,
+    "mae_total_market": 10.47
+  },
+  "calibration_holdout": [
+    {
+      "bin": "0.0-0.2",
+      "n": 55,
+      "predicted_home_win_rate": 0.161,
+      "actual_home_win_rate": 0.236
+    },
+    {
+      "bin": "0.2-0.4",
+      "n": 393,
+      "predicted_home_win_rate": 0.321,
+      "actual_home_win_rate": 0.338
+    },
+    {
+      "bin": "0.4-0.6",
+      "n": 865,
+      "predicted_home_win_rate": 0.504,
+      "actual_home_win_rate": 0.454
+    },
+    {
+      "bin": "0.6-0.8",
+      "n": 832,
+      "predicted_home_win_rate": 0.69,
+      "actual_home_win_rate": 0.669
+    },
+    {
+      "bin": "0.8-1.0",
+      "n": 238,
+      "predicted_home_win_rate": 0.858,
+      "actual_home_win_rate": 0.815
+    }
+  ],
+  "honest_reading": "The model is compared with the closing line, not only with a naive baseline. If MAE_margin_market is lower than MAE_margin_model, the market is the better forecast and the model has no demonstrated forecasting edge. This is reported as-is.",
+  "splits": {
+    "dev": [
+      1999,
+      2012
+    ],
+    "validation": [
+      2013,
+      2016
+    ],
+    "holdout": [
+      2017,
+      2025
+    ]
+  }
+}

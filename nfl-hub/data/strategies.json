@@ -1,0 +1,13 @@
+{
+  "registered_utc": "2026-11-12T16:45:00Z",
+  "note": "Registered before the holdout was scored. theta values are selected on validation seasons only, then frozen.",
+  "strategies": [
+    {"id": "S1", "family": "single-bet", "name": "Model edge vs closing spread", "rule": "Bet the side where the model's home margin disagrees with the market's implied home margin by >= theta points.", "theta_grid": [1.5, 2.5, 3.5], "pricing": "archived closing spread, -110 per side", "gate_notes": "G7 passes only for seasons with archived closing lines."},
+    {"id": "S2", "family": "single-bet", "name": "Model edge vs closing total", "rule": "Bet over/under where the model total disagrees with the closing total by >= theta points.", "theta_grid": [2.0, 3.0, 4.0], "pricing": "archived closing total, -110", "gate_notes": "Same as S1."},
+    {"id": "S3", "family": "single-bet", "name": "Moneyline value", "rule": "Bet the moneyline when model win probability exceeds the vig-free market implied probability by >= theta.", "theta_grid": [0.03, 0.05, 0.07], "pricing": "archived closing moneyline", "gate_notes": "Requires both moneylines archived; otherwise the game is skipped, never imputed."},
+    {"id": "S4", "family": "parlay", "name": "2-leg cross-game parlay", "rule": "Combine two S1 selections from different games in the same week.", "pricing": "ASSUMED standard 2-team payout 2.64 (+164); flagged, because sportsbook parlay pricing is not archived.", "gate_notes": "G7 FAILS: payout is an assumption, not an archived price. Research-only by construction."},
+    {"id": "S5", "family": "same-game-parlay", "name": "Favourite-cover + under SGP", "rule": "Compare the empirical joint probability of (favourite covers) AND (under hits) with the product of their marginals to size the dependence correction.", "pricing": "No archived SGP price; fair-price monitor only.", "gate_notes": "G7 FAILS: no verified SGP price. Produces a correlation value, not a bet."},
+    {"id": "S6", "family": "player-prop", "name": "Player prop single", "rule": "Over/under on a player stat versus a model line built from that player's prior games.", "pricing": "No authorized 2026 player-level feed and no archived prop prices in scope.", "gate_notes": "BLOCKED. No values published; see Open Question Q-07."},
+    {"id": "S7", "family": "player-prop-combo", "name": "Same-game prop combo", "rule": "Joint probability of two correlated player legs vs the product of marginals.", "pricing": "No archived prop or combo prices.", "gate_notes": "BLOCKED. See Q-07/Q-08."}
+  ]
+}
