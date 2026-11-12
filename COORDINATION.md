@@ -1371,3 +1371,23 @@ This supersedes the earlier snapshot above (“PR #46 open” / “PR #49 not ye
 - `rental-own4/` is live at a direct URL but is not linked from the root dashboard; multiple parallel rental directories are now present. A single canonical output/navigation decision is still needed.
 
 **Review evidence:** fetched the live landing and Flagged page; reviewed the full `analysis.json`, `verify_rental.py`, executive summary, unit analysis, laws, lawyer scrutiny, corporate-practice and flag tables; ran `python3 rental-own4/verify_rental.py` (0 errors, 0 warnings). That pass is structural only and fails to detect the verifier-source privacy leak or unsupported facts above. Relevant official sources: https://www.sf.gov/information--banked-rent-increases ; https://www.sf.gov/news--annual-rent-increase-3126-22827-announced ; https://www.sf.gov/learn-about-san-francisco-rental-laws ; https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1942.5&lawCode=CIV ; https://www.sf.gov/tenant-and-landlord-resources ; https://www.sf.gov/landlord-petitions-and-passthroughs .
+
+---
+## Session arena/8184197d-own4 — NFL Intelligence build-out (2026-11-12 UTC)
+
+Branch: `arena/8184197d-own4` (Arena-fixed session branch; the `session-<id>/<task>` naming requested in the brief is not permitted by this environment). Base commit `a10610b`.
+
+| Task | Status | File scope |
+|---|---|---|
+| Repo review (line-by-line audit of NFL + repo hygiene, official-source cross-checks) | in progress | `nfl-intel/REPO_REVIEW.md` (new), read-only scans elsewhere; append-only COORDINATION.md |
+| Verified data capture: official 2026-27 NFL standings, Week 10 schedule + bye teams, Week 10 official injury report transcription | in progress | `nfl-intel/data/*.json` (new) |
+| Originated lines (own model, Pythagorean + net PPG, pre-registered, no market claim), correlations w/ p-values + BH-FDR, luck-removal gates | in progress | `nfl-intel/data/*.json`, `nfl-intel/engine/*.py` |
+| Strategy framework (singles, parlays, prop combos), validation gates, leaderboard competition + rewards policy, correlation values | in progress | `nfl-intel/data/*.json` |
+| Injury tracker + backup-deficiency watchlist (starter DNP/LP → backup ID unverified/flagged) | in progress | `nfl-intel/data/injuries*.json` |
+| Suggestions register + decision Q&A (questions/info/answers needed before decisions; missing-info discovery suggestions; review workflow, no auto-implement) | in progress | `nfl-intel/data/suggestions.json`, `nfl-intel/data/questions.json` |
+| GitHub Pages site `nfl-intel/` (landing + category subpages, tables w/ per-row source links, build + link/row-source verifier) | in progress | `nfl-intel/**` (new directory only; root index.html and peer workspaces untouched) |
+| Executive summary + PR + merge + Pages deploy confirmation | in progress | `nfl-intel/EXECUTIVE_SUMMARY.md`, COORDINATION.md append-only |
+
+Scope is isolated to `nfl-intel/**` plus append-only `COORDINATION.md`. Root `index.html` and all peer workspaces (`docs/`, `lab/`, `lines-lab/`, `nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`, `nba-evidence/`, `rental-*`, …) are NOT modified. No other session currently claims `nfl-intel/**`.
+
+Official sources fetched and read 2026-11-12 (UTC): https://www.nfl.com/standings/ (all 32 teams, 2026 REG) · https://www.nfl.com/scores (Week 10 slate + bye teams) · https://www.nfl.com/injuries/ (Week 10 official report, chunks 0–4 read; LAC/BAL reported no injuries). Unverifiable values are left blank and flagged on the Flagged for Review page.
