@@ -1754,3 +1754,10 @@ The claim entry for this session (above) reserved `nfl-hub/**` while `main` was 
 - Flagged for Review (16 items, page `nfl-intel/pages/flagged.html`): F-01..F-16 (unverified σ/exponent/moneylines, Munich venue, injury backup mapping, DNP≠Out, FDR-limited n=32 correlations, market blindness, 0-reward gates, repo hygiene RR-02/03/04/05, nfl-lab audit boundary).
 - Pages deployment: to be confirmed after merge; live URL expected at https://sassnarep3-star.github.io/Own4/nfl-intel/
 - PR: https://github.com/sassnarep3-star/Own4/pull/70 — merging per standing instruction (no approval wait).
+
+## Session arena/8184197d-own4 — PR #70 merged; Pages deployment CONFIRMED (2026-11-12 UTC)
+
+- PR #70 merged at 2026-11-12T16:46:53Z, merge commit `71f41a2f1733f6da116a770a161dcf27aa5b7e42` (https://github.com/sassnarep3-star/Own4/pull/70).
+- GitHub Actions runs for merge commit on `main` all completed success: `pages build and deployment` (43262391727) ✓, `Validate NBA research workspace` (43262393483) ✓, `Verify bounded NBA audit and published navigation` (43262393574) ✓.
+- Live site fetched successfully 2026-11-12: https://sassnarep3-star.github.io/Own4/nfl-intel/ (landing + all subpages reachable via relative links). Flagged page: https://sassnarep3-star.github.io/Own4/nfl-intel/pages/flagged.html
+- Flagged for Review (16 items, non-blocking) remain published for owner decision; 0-reward leaderboard is intentional. Decision Q&A lists 9 blocking unknowns requiring owner input (budget/licensed data, rewards governance, canonical-site decision, reviewer cadence). No other session's claim was modified; peer files were preserved through the merge conflict resolution (both sides retained).
