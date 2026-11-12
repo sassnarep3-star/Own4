@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Player props &middot; NFL Edge</title>
+<meta name="description" content="Why player-prop strategies are blocked in this project: no official per-game player logs and no archived prop prices.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav active" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Strategies / Player props</div>
+<h1>Player props</h1>
+<p class="lede">This page is deliberately empty of results. Player-prop strategies cannot be graded with the sources this project is allowed to use, and inventing a proxy would produce numbers that look like evidence and are not.</p>
+<div class="panel warn"><strong>Blocked, with the reason named.</strong> Grading a prop requires two things: official player-game outcomes, and the price the market actually offered. nfl.com publishes season-to-date player leaderboards only (no per-game logs in machine-readable form), and no prop prices exist anywhere in this repository. Without both, a "prop strategy" is a guess about a guess.</div>
+<div class="tw">
+<table>
+<caption>What exists, what is missing, and why nothing is graded</caption>
+<thead><tr><th>Item</th><th>Status</th><th>Requirement or note</th><th>Result</th><th>Source</th></tr></thead><tbody>
+<tr><td>Prop singles (over/under on a player stat)</td><td><span class="badge fail">BLOCKED</span></td><td>Needs per-game player outcomes and archived prop prices</td><td><span class="blank">blank</span></td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Prop combos (2+ props, same game)</td><td><span class="badge fail">BLOCKED</span></td><td>Needs the above plus measured joint dependence; multiplying legs is invalid where they co-move</td><td><span class="blank">blank</span></td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>QB / WR correlation</td><td><span class="badge fail">BLOCKED</span></td><td>Player-level pair; no logs in scope</td><td><span class="blank">blank</span></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+<tr><td>Season-to-date player leaderboards</td><td><span class="badge ok">AVAILABLE</span></td><td>Published by the league and readable; they are season aggregates, not per-game outcomes, so they cannot settle a single-game prop</td><td>readable</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+</tbody></table></div>
+<h2>What would make this page real</h2>
+<ol class="tight"><li>An authorised per-game player-stat feed (the league publishes aggregates; per-game data is licensed).</li><li>An archived prop price with a timestamp, so the price being tested is the price that existed.</li><li>A pre-registered gate version that adds a dependence correction for same-game combos.</li></ol>
+<p class="note">A peer workspace in this repository reported a QB-over + WR1-over joint lift of 1.45x. It was measured against a rolling-mean <em>proxy</em> line, not a sportsbook, and that workspace's own flags record the gate as failed. It is not imported here (see Q10).</p>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

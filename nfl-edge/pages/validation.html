@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Validation &amp; luck &middot; NFL Edge</title>
+<meta name="description" content="Ten pre-registered validation gates plus four bounds on luck, with the measured value for every gate.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav active" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Strategies / Validation & luck</div>
+<h1>Validation and luck</h1>
+<p class="lede">Ten gates, frozen before any result was produced, plus four separate bounds on luck. A strategy qualifies only if all ten pass. None does.</p>
+<div class="tw">
+<table>
+<caption>The ten pre-registered gates and how each strategy fared</caption>
+<thead><tr><th>Gate</th><th>Name</th><th>Pre-registered rule</th><th>Why it exists</th><th>Result by strategy</th><th></th><th>Source</th></tr></thead><tbody>
+<tr><td><strong>G1</strong></td><td>Sample floor</td><td>n &gt;= 300 graded bets in the holdout</td><td>Below ~300 bets, a 52% hit rate is statistically indistinguishable from 50% at conventional confidence.</td><td>S1_spread pass, S2_total pass, S3_moneyline pass, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G2</strong></td><td>Beats a naive baseline</td><td>own-line MAE &lt; naive baseline MAE for both spread and total</td><td>A model that cannot beat &#x27;assume a 0-point margin / league-average total&#x27; has no information in it.</td><td>S1_spread pass, S2_total pass, S3_moneyline pass, S4_parlay pass</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G3</strong></td><td>Calibration</td><td>empirical 90% interval coverage between 0.85 and 0.95, and |mean residual| &lt; 0.5 points</td><td>Probabilities are only usable if the stated uncertainty matches reality.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G4</strong></td><td>Market-informed bar</td><td>own-line spread MAE &lt;= closing-line MAE</td><td>The closing line is the strongest public forecast. A line originator that is less accurate than it is not adding information.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G5</strong></td><td>Positive ROI with a lower confidence bound above zero</td><td>holdout ROI &gt; 0 and the week-clustered bootstrap 2.5th percentile &gt; 0</td><td>A positive point estimate is not evidence; the lower bound has to clear zero.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G6</strong></td><td>Not luck (placebo test)</td><td>matched-random placebo permutation p &lt; 0.05</td><td>Bet the same number of bets, in the same weeks, on random sides; if random does as well, the result was variance.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G7</strong></td><td>Stability across seasons</td><td>positive ROI in at least 60% of holdout seasons that had bets</td><td>One hot season is a story, not a strategy.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G8</strong></td><td>Prospective replication</td><td>the same rule, frozen, earns a positive ROI on games played after the freeze date</td><td>This is the only test that removes the researcher&#x27;s degrees of freedom entirely.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G9</strong></td><td>Prop and parlay priceability</td><td>every leg is priced from an archived or official quote, and joint dependence is measured, not assumed</td><td>Multiplying independent leg probabilities in the same game overstates the parlay price; without measured dependence and archived prices there is no bet to grade.</td><td>S1_spread fail, S2_total fail, S3_moneyline fail, S4_parlay fail</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+<tr><td><strong>G10</strong></td><td>Source and honesty gate</td><td>every published row carries a source link; every unverifiable value is blank and flagged</td><td>An accurate number with no provenance is unusable, and a filled-in guess is worse than a blank.</td><td>S1_spread pass, S2_total pass, S3_moneyline pass, S4_parlay pass</td><td></td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json" target="_blank" rel="noopener">gates.json ↗</a></td></tr>
+</tbody></table></div>
+<p class="note">Thresholds are design choices, not official NFL values (flag F-11). Tier policy: Qualified = all ten pass and earns points; Bronze = 5-9; Rejected = fewer than 5. Only Qualified earns any of the 1,000-point pool.</p>
+<h2>How luck is bounded</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Bound</th><th>Method</th><th>What it rules out</th><th>Where it enters</th><th>Source</th></tr></thead><tbody>
+<tr><td>Week-clustered bootstrap</td><td>Resample weeks, not bets, 4,000 times; report the 2.5th and 97.5th percentile ROI</td><td>Bets inside a week share injuries, weather and referee crews, so resampling individual bets understates uncertainty</td><td>gate G5</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Matched-random placebo</td><td>Bet the same number of bets in the same weeks on random sides, 2,000 times; p = share of placebo runs at least as good</td><td>If random sides do as well, the rule added nothing</td><td>gate G6</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Season stability</td><td>Positive ROI in >= 60% of holdout seasons that had bets</td><td>One hot season is a story; a rule should repeat</td><td>gate G7</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Residual persistence</td><td>Correlation of consecutive-season mean spread error</td><td>Persistent error is a bias to fix, not skill to sell</td><td>diagnostic</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+<tr><td>Prospective replication</td><td>Freeze the rule, then grade games played after the freeze</td><td>The only test that removes researcher choice</td><td>gate G8 (not yet possible)</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">nfl.com</a></td></tr>
+</tbody></table></div>
+<div class="panel warn"><strong>Luck cannot be removed.</strong> It can only be bounded, and the bounds can only fail a strategy or leave it unproven. Nothing in this repository certifies skill; the strongest honest statement is that every registered rule is statistically indistinguishable from chance after costs, and three are worse than chance.</div>
+<h2>Splits and frozen configuration</h2>
+<div class="tw">
+<table>
+<caption>Chronological splits; no shuffling, no look-ahead</caption>
+<thead><tr><th>Split</th><th>Seasons</th><th>Use</th><th>Source</th></tr></thead><tbody>
+<tr><td>Dev</td><td>1999&ndash;2012</td><td>design and parameter choice</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Validation</td><td>2013&ndash;2016</td><td>sanity check, no tuning</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+<tr><td>Holdout</td><td>2017&ndash;2025 (2383 games)</td><td>reported once, unchanged</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json" target="_blank" rel="noopener">results.json ↗</a></td></tr>
+</tbody></table></div>
+<p class="note">Frozen configuration: edge threshold 2.0 points, prior 4.0 games, carryover 0.35, moneyline edge 3 points, 4,000 bootstrap resamples, 2,000 placebo permutations.</p>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>

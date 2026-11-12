@@ -1,0 +1,312 @@
+{
+ "dataset": "decision_register",
+ "version": "1.0",
+ "generated_utc": "2026-11-12",
+ "purpose": "Every question that has to be answered before a decision can reasonably be made, split into what we already know, what we do not know, what the answer is, and what would unlock a decision. A question is only marked ANSWERED where the answer is established by a cited official source or by a reproducible measurement in this repository. Everything else is OPEN, and an OPEN question never gets a filled-in value; it gets a blank and a flag.",
+ "status_key": {
+  "ANSWERED": "settled by a cited official source or a reproducible in-repo measurement",
+  "PARTIAL": "part of the answer is established, part is not; the missing part is named",
+  "OPEN": "no answer can be given from the information we have",
+  "BLOCKED": "an answer is conceivable but a source or authorisation we do not have is required"
+ },
+ "decisions_blocked": [
+  {
+   "id": "D1",
+   "decision": "Publish betting recommendations",
+   "status": "BLOCKED BY EVIDENCE",
+   "blocking_questions": [
+    "Q1",
+    "Q3",
+    "Q7",
+    "Q12"
+   ],
+   "what_would_unblock": "one strategy passing all ten pre-registered gates, including prospective replication (G8)"
+  },
+  {
+   "id": "D2",
+   "decision": "Pay any part of the 1,000-point reward pool",
+   "status": "NO - pool not payable",
+   "blocking_questions": [
+    "Q16",
+    "Q17"
+   ],
+   "what_would_unblock": "a strategy at Qualified tier; 0 of 4 strategies qualify today"
+  },
+  {
+   "id": "D3",
+   "decision": "Treat originated Week 10 lines as prices to bet into",
+   "status": "NO",
+   "blocking_questions": [
+    "Q2",
+    "Q6",
+    "Q12"
+   ],
+   "what_would_unblock": "an official or licensed 2026 closing-line archive to measure divergence against"
+  },
+  {
+   "id": "D4",
+   "decision": "Claim our model has skill at picking games",
+   "status": "NO",
+   "blocking_questions": [
+    "Q3",
+    "Q4",
+    "Q8"
+   ],
+   "what_would_unblock": "the model must first beat the closing line on MAE (it does not: 10.50 vs 9.87)"
+  },
+  {
+   "id": "D5",
+   "decision": "Add player-prop strategy results to the leaderboard",
+   "status": "BLOCKED BY DATA",
+   "blocking_questions": [
+    "Q9",
+    "Q10",
+    "Q11"
+   ],
+   "what_would_unblock": "authorised official player-game logs plus archived prop prices"
+  },
+  {
+   "id": "D6",
+   "decision": "Use injury/backup information as a live signal",
+   "status": "BLOCKED BY DATA",
+   "blocking_questions": [
+    "Q13",
+    "Q14",
+    "Q15"
+   ],
+   "what_would_unblock": "a depth-chart source with an official or licensed starter/backup designation"
+  },
+  {
+   "id": "D7",
+   "decision": "Point the canonical site at this NFL dashboard instead of the NBA dashboard",
+   "status": "OWNER DECISION",
+   "blocking_questions": [
+    "Q18",
+    "Q19"
+   ],
+   "what_would_unblock": "your answer; the NFL dashboard is currently an additional section, not a replacement"
+  }
+ ],
+ "questions": [
+  {
+   "id": "Q1",
+   "question": "Does any strategy we run actually beat the closing line?",
+   "status": "ANSWERED",
+   "known": "Measured walk-forward on 2,383 holdout games, 2017-2025, frozen config. S1 spread: 1,540 bets, ROI -3.12%, bootstrap 95% CI [-7.84%, +1.54%], placebo p=0.41. S2 total: 1,187 bets, ROI -5.32%. S3 moneyline: 2,060 bets, ROI -8.45%. S4 2-leg cross-game parlay: 155 bets, ROI -15.74%.",
+   "unknown": "Whether a different, still-unwritten rule would beat it.",
+   "answer": "No. Every registered strategy is negative after the vig, and none is statistically distinguishable from break-even except in the wrong direction (S3's upper bound is -1.70%).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json",
+   "unlocks": "Nothing. This closes D4 in the negative."
+  },
+  {
+   "id": "Q2",
+   "question": "Do we have a market line to compare our own lines to, for 2026?",
+   "status": "ANSWERED",
+   "known": "No official NFL source publishes betting lines or prices - that is league-wide, not a gap in this collection. The only prices in this repository are a third-party nflverse closing-line archive inside the peer nfl-quant workspace, and it holds no 2026 prices. This session did not verify the NFL's commercial data-distribution arrangements from an official league source, so none is claimed here; the Sportradar/Genius Sports note that appears in this repository concerns the NBA, not the NFL.",
+   "unknown": "Whether a licensed price feed will ever be available to this project.",
+   "answer": "No 2026 market price exists in scope. Every 2026 market and divergence cell is therefore blank.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "unlocks": "Blocks D3 and all 2026 profitability questions."
+  },
+  {
+   "id": "Q3",
+   "question": "Is our spread model more accurate than the market?",
+   "status": "ANSWERED",
+   "known": "Holdout mean absolute error, spread: ours 10.502 points, closing line 9.871 points, naive zero-margin 11.231 points. Total: ours 10.830, closing line 10.470, naive league-average 11.042.",
+   "unknown": "Whether a richer model (injuries, rest, weather) closes the 0.63-point gap.",
+   "answer": "No. We beat the naive baseline but lose to the closing line on both markets. That is the normal, expected result and it is the honest one.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json",
+   "unlocks": "Gate G4 fails for every strategy."
+  },
+  {
+   "id": "Q4",
+   "question": "Is the model's stated uncertainty honest?",
+   "status": "ANSWERED",
+   "known": "Nominal 90% interval coverage is 89.34% empirically (target 0.85-0.95, so this passes) but the mean residual is +0.651 points, i.e. the model systematically under-predicts the home team's margin (|bias| < 0.5 was the pre-registered bar).",
+   "unknown": "Whether the bias is a home-field constant error or a ratings error.",
+   "answer": "Partly. The interval width is right; the centre is off by 0.65 points toward the away team. Gate G3 fails on the bias test only.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json",
+   "unlocks": "A single-parameter fix (raise HFA by ~0.65) could be tested, but it must be a new pre-registered version, not a post-hoc tweak."
+  },
+  {
+   "id": "Q5",
+   "question": "Can luck be removed from the leaderboard?",
+   "status": "ANSWERED",
+   "known": "Luck cannot be removed; it can only be bounded. We use four bounds: week-clustered bootstrap CIs, a matched-random placebo permutation test, a season-stability requirement, and a residual-persistence check.",
+   "unknown": "Residual persistence is +0.40 across consecutive seasons, which is weak evidence that the model's spread error partly repeats - i.e. a persistent bias, not a persistent edge.",
+   "answer": "No strategy can be certified skill-based. The most defensible statement is: at efficient closing lines, a small public-data model is not distinguishable from chance after costs.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json",
+   "unlocks": "Sets expectation for D2 and D4."
+  },
+  {
+   "id": "Q6",
+   "question": "What exactly are we allowed to call an official NFL source?",
+   "status": "ANSWERED",
+   "known": "nfl.com pages (standings, schedules by week, injuries, team stats, player stats, game pages) and operations.nfl.com. Team websites are club-operated, not league-official. Betting lines, projected lines and SGP prices have no official league source.",
+   "unknown": "Whether the league will publish any machine-readable official API to the public. Its current stats pages are HTML-only.",
+   "answer": "Only league-operated pages count. Everything else is labelled third-party or left blank.",
+   "source_url": "https://www.nfl.com/standings/",
+   "unlocks": "Constrains every other answer on this site."
+  },
+  {
+   "id": "Q7",
+   "question": "How big a sample is enough before a leaderboard result means anything?",
+   "status": "ANSWERED",
+   "known": "The pre-registered floor is 300 graded bets (gate G1) plus a lower bootstrap bound above zero (G5) plus a placebo p below 0.05 (G6).",
+   "unknown": "Nothing fundamental; the exact thresholds are research design choices, not official values, and are labelled as such.",
+   "answer": "300 bets is the floor, not a target. At -110 pricing you need about 52.4% winners to break even, and detecting a 2-point edge needs thousands of graded bets.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json",
+   "unlocks": "Explains why 155 parlay bets cannot be judged at all."
+  },
+  {
+   "id": "Q8",
+   "question": "Does the 2026 season give us enough games to originate lines responsibly?",
+   "status": "ANSWERED",
+   "known": "Every club has played exactly 9 games through Week 9 (verified: 136 games, 32 clubs, aggregate W-L-T and PF-PA match the official standings with 0 mismatches).",
+   "unknown": "Whether 9 games of same-season data is better than a shrunk historical prior.",
+   "answer": "Nine games is thin. Our model therefore shrinks every rating toward the league mean with a 4-game prior and carries 35% of last season's rating into the early weeks.",
+   "source_url": "https://www.nfl.com/standings/",
+   "unlocks": "Justifies the shrinkage design; does not justify confidence."
+  },
+  {
+   "id": "Q9",
+   "question": "Can we grade player-prop strategies today?",
+   "status": "BLOCKED",
+   "known": "nfl.com publishes season-to-date player leaderboards (passing, rushing, receiving, etc.), but this repository holds no official player-game logs and no archived prop prices.",
+   "unknown": "Whether a licensed player-level feed can be obtained.",
+   "answer": "No. Every prop-strategy result cell is blank and gate G9 fails by construction.",
+   "source_url": "https://www.nfl.com/stats/player-stats/",
+   "unlocks": "Blocks D5."
+  },
+  {
+   "id": "Q10",
+   "question": "Are the prop correlations published by the peer NFL workspace usable here?",
+   "status": "ANSWERED",
+   "known": "A peer session (nfl-quant) reported a QB1-over + WR1-over joint lift of 1.45x, measured against a rolling-mean PROXY line rather than a sportsbook line, and its own flag list marks that gate (G7) as failed.",
+   "unknown": "Whether the same lift appears against real prop prices.",
+   "answer": "No. The number is reproducible but it prices a proxy, not a market; adopting it would import an unverified edge claim. We left prop correlation blank and said why.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/props_summary.json",
+   "unlocks": "Prevents a false prop claim from entering the new leaderboard."
+  },
+  {
+   "id": "Q11",
+   "question": "Is a same-game parlay priced by multiplying legs?",
+   "status": "ANSWERED",
+   "known": "Measured on 2,383 holdout games: favourite-covers vs over phi = -0.0079 (joint 20.14% vs 20.34% independent); home-win vs over phi = +0.0110 (joint 26.35% vs 26.08%).",
+   "unknown": "The dependence for player-prop legs, which we cannot measure (see Q9).",
+   "answer": "For these two team-level pairs, multiplication is approximately right on this sample. For player props it is unknown and must stay blank.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json",
+   "unlocks": "Allows cross-game parlays to be graded (S4) but not same-game prop combos."
+  },
+  {
+   "id": "Q12",
+   "question": "Which betting markets are even legal/licensable for a project like this?",
+   "status": "OPEN",
+   "known": "The repository has no licence, and no jurisdiction has been specified by the owner.",
+   "unknown": "Jurisdiction of the operator; whether any data redistribution is permitted.",
+   "answer": "",
+   "source_url": "https://www.ncpgambling.org/help-treatment/",
+   "unlocks": "Must be answered before any commercial use of lines or data. Does not block publishing research."
+  },
+  {
+   "id": "Q13",
+   "question": "Does nfl.com publish starters vs backups so we can measure backup impact?",
+   "status": "ANSWERED",
+   "known": "No. The official injury page publishes player, position, injury, practice status and game status only. The team 'depth-chart' URL on nfl.com returns a 404 (checked 2026-11-12). The club roster page lists position and experience but no depth rank.",
+   "unknown": "Whether a licensed depth-chart feed (e.g. club releases, Elias, Sportradar) can be obtained.",
+   "answer": "No official starter/backup designation exists in our sources. We therefore record injuries without asserting who is a backup.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "unlocks": "Blocks D6 until a depth source exists."
+  },
+  {
+   "id": "Q14",
+   "question": "How much do we lose by not knowing who is a backup?",
+   "status": "PARTIAL",
+   "known": "We can measure the raw count of unavailable players by position per club from the official report (e.g. 275 listed players across 28 clubs for Week 10, of whom the clubs ruled 'Out' are known).",
+   "unknown": "The performance step-down from starter to backup for each position.",
+   "answer": "Unknown. Any published 'backup penalty' number without a depth chart would be invented.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/injuries_week10.json",
+   "unlocks": "A future study: roster + snap counts + participation, all licensed."
+  },
+  {
+   "id": "Q15",
+   "question": "Where do we get snap counts / participation to know who actually replaced whom?",
+   "status": "BLOCKED",
+   "known": "The NFL's official statistics pages do not publish snap counts. They are a licensed product.",
+   "unknown": "Cost and terms.",
+   "answer": "",
+   "source_url": "https://www.nfl.com/stats/player-stats/",
+   "unlocks": "Required for any real 'second-string' analysis."
+  },
+  {
+   "id": "Q16",
+   "question": "Should the reward pool be points or money?",
+   "status": "ANSWERED",
+   "known": "Policy: non-monetary, 1,000 points, zero cash, awarded only at Qualified tier.",
+   "unknown": "Nothing, unless the owner wants otherwise.",
+   "answer": "Points only. Paying cash for an unvalidated model promotes it.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json",
+   "unlocks": "Closes D2's policy half; the evidence half stays closed by Q1."
+  },
+  {
+   "id": "Q17",
+   "question": "How does a strategy get on the leaderboard at all?",
+   "status": "ANSWERED",
+   "known": "It must be registered in the strategy catalogue with its rule, its data source and its gate thresholds before it is run; results are then published whatever they say.",
+   "unknown": "Who administers the registration (currently: whoever writes the file).",
+   "answer": "Registration is a file in the repository, pre-registered and version-controlled.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json",
+   "unlocks": "Makes the competition auditable by anyone who can read the repo."
+  },
+  {
+   "id": "Q18",
+   "question": "Should the NFL work replace the NBA dashboard as the site's front page?",
+   "status": "OPEN",
+   "known": "The repository's root dashboard is an NBA line-origination dashboard built by earlier sessions and regenerated byte-for-byte by a checked-in build script. This session added `nfl-edge/` and one navigation link without touching that output.",
+   "unknown": "The owner's intent: one sport, the other, or both.",
+   "answer": "",
+   "source_url": "https://sassnarep3-star.github.io/Own4/",
+   "unlocks": "Owner decision D7. Replacing the root page would break the NBA build check unless both are regenerated together."
+  },
+  {
+   "id": "Q19",
+   "question": "Can the repository keep growing as parallel session workspaces indefinitely?",
+   "status": "OPEN",
+   "known": "The repo now holds 675 files and roughly 20 parallel workspaces (NBA, NFL x4, SF rental x6, status, evidence) with duplicated dashboards and, in one case, three competing rental sites.",
+   "unknown": "Which workspaces the owner considers canonical.",
+   "answer": "",
+   "source_url": "https://github.com/sassnarep3-star/Own4",
+   "unlocks": "A consolidation decision; see suggestion S-11."
+  },
+  {
+   "id": "Q20",
+   "question": "Is the peer game archive inside this repository trustworthy?",
+   "status": "ANSWERED",
+   "known": "nfl-lab/data/games_2026.csv held 120 games (weeks 1-8). It omitted all 15 Week 9 games and the Week 8 Monday game. Its per-team aggregates implied every club had played 7-9 games.",
+   "unknown": "Nothing; the gap is now filled.",
+   "answer": "It was incomplete, and any metric computed from it alone would have been wrong for 16 of 136 games. After restoring the 16 missing games from the official week pages, the archive reconciles to the official standings for all 32 clubs with 0 mismatches.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/integrity.json",
+   "unlocks": "This is an irregularity for the Flagged for Review page (F-07)."
+  },
+  {
+   "id": "Q21",
+   "question": "Do the peer workspaces' published results still match their own data?",
+   "status": "PARTIAL",
+   "known": "nfl-quant's published claims were re-checked where they could be recomputed (holdout MAE 10.326 vs naive 11.11 vs market 9.871 - our independently built model lands at 10.502/11.231/9.871, i.e. the same shape). Its 1999-2026 archive has 7,239 rows with 272 rows for the 2026 season, which cannot be complete games because the season is in week 10.",
+   "unknown": "Whether the 2026 rows in that archive are real, placeholder, or future fixtures.",
+   "answer": "",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/predictions.csv",
+   "unlocks": "Flagged as F-08; needs the owning session to confirm."
+  },
+  {
+   "id": "Q22",
+   "question": "What would make this project worth continuing?",
+   "status": "OPEN",
+   "known": "The measured answer today is: a public-data NFL model does not beat the closing line, and every strategy loses the vig.",
+   "unknown": "Whether the owner wants (a) a rigorous 'no edge' lab, (b) a data-coverage product, or (c) a search for genuinely proprietary signals (licenced data, faster injury news).",
+   "answer": "",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json",
+   "unlocks": "The single most important question on this page. See suggestions S-01 to S-03."
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+  "dataset": "suggestions",
+  "version": "1.0",
+  "generated_utc": "2026-11-12",
+  "how_to_use": "Every row is a proposal, not an implemented change except where status says IMPLEMENTED. Impact, effort and risk are this session's judgement and are labelled as judgement. Prerequisites name the questions (Q-ids in the decision register) that must be answered first. Choose a path, then set its status to accepted/maybe/rejected in this file; the page re-renders from this JSON and nothing else.",
+  "verdict_key": {
+    "IMPLEMENTED": "already built in nfl-edge/ and visible on this site",
+    "PROPOSED": "suggested, not built",
+    "NEEDS DECISION": "cannot proceed without an owner answer"
+  },
+  "suggestions": [
+    {
+      "id": "S-01", "area": "Strategy / decision making", "status": "IMPLEMENTED",
+      "suggestion": "Publish the negative result first and loudly: the front page states that 0 of 4 strategies qualify and shows the closing-line MAE gap in one line.",
+      "why": "The single most useful decision input is 'this does not work yet'. Hiding it wastes the next three months of effort on a dead end and is how betting projects normally fail.",
+      "impact": "HIGH", "effort": "LOW", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/"
+    },
+    {
+      "id": "S-02", "area": "Strategy", "status": "PROPOSED",
+      "suggestion": "Change the target from 'beat the spread' to 'beat the total, narrowly, and only in high-variance spots' - our total model is 0.36 points behind the closing line versus 0.63 for the spread, and its holdout ROI (-5.3%) is less bad than the moneyline (-8.5%).",
+      "why": "Pick the fight where the gap is smallest. The totals market has fewer public-data participants than sides.",
+      "impact": "MEDIUM", "effort": "MEDIUM", "risk": "MEDIUM",
+      "prerequisites": ["Q1", "Q3"],
+      "note": "Must be pre-registered as a new gate version before it is run, otherwise it is a post-hoc search."
+    },
+    {
+      "id": "S-03", "area": "Strategy", "status": "NEEDS DECISION",
+      "suggestion": "Decide what the project is for: (a) a rigorous 'no-edge' research lab, (b) a data-coverage and decision-support product, or (c) a hunt for proprietary signal that requires licensed data. The measured evidence supports (a) or (b) today, not (c) without budget.",
+      "why": "Every other priority depends on this answer (Q22).",
+      "impact": "HIGH", "effort": "LOW", "risk": "LOW",
+      "prerequisites": ["Q22"], "owner_of_change": "owner"
+    },
+    {
+      "id": "S-04", "area": "Validation", "status": "IMPLEMENTED",
+      "suggestion": "Freeze ten pre-registered gates in a versioned JSON file and evaluate them unchanged, with a placebo/permutation test and season-stability requirement as the anti-luck core.",
+      "why": "Gates are the only thing separating a leaderboard from a highlight reel. Versioning stops 'move the goalposts until it passes'.",
+      "impact": "HIGH", "effort": "MEDIUM", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/data/gates.json"
+    },
+    {
+      "id": "S-05", "area": "Validation", "status": "PROPOSED",
+      "suggestion": "Add a formal multiple-testing correction across the whole strategy family (Benjamini-Hochberg) and report q-values next to each placebo p-value.",
+      "why": "Four strategies were tested here; if the catalogue grows to twenty, a p<0.05 will appear by chance. The NBA workspace already does BH-FDR, so the method is available in-repo.",
+      "impact": "MEDIUM", "effort": "LOW", "risk": "LOW",
+      "prerequisites": ["Q7"], "note": "Not implemented here because the placebo p-values are all far from significance (0.37-0.63); a correction would change no conclusion, so it was left as a proposal rather than claimed as done."
+    },
+    {
+      "id": "S-06", "area": "Data coverage", "status": "IMPLEMENTED",
+      "suggestion": "Reconcile every game archive against the official standings before using it, and refuse to publish if the aggregate check fails.",
+      "why": "It caught a real 16-game hole in the peer archive (weeks 8-9) that would have skewed every rate statistic.",
+      "impact": "HIGH", "effort": "LOW", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/scripts/build_stats.py"
+    },
+    {
+      "id": "S-07", "area": "Injuries / availability", "status": "IMPLEMENTED",
+      "suggestion": "Publish the official Week 10 injury report per club, with practice and game status, and explicitly state that no starter/backup label exists in that source.",
+      "why": "The honest version of the injury requirement: it shows what the league actually discloses so the gap is visible rather than papered over.",
+      "impact": "HIGH", "effort": "LOW", "risk": "LOW",
+      "prerequisites": ["Q13"], "owner_of_change": "nfl-edge/data/injuries_week10.json"
+    },
+    {
+      "id": "S-08", "area": "Injuries / availability", "status": "PROPOSED",
+      "suggestion": "Obtain a licensed depth chart + snap counts and build a 'starter-out weight' per club: expected minutes lost by position, then regress margin on it.",
+      "why": "This is the only way to answer the backup-deficiency question with numbers instead of adjectives.",
+      "impact": "HIGH", "effort": "HIGH", "risk": "MEDIUM",
+      "prerequisites": ["Q13", "Q15"], "note": "Requires budget or a licence; cannot be done from nfl.com alone."
+    },
+    {
+      "id": "S-09", "area": "Data coverage", "status": "PROPOSED",
+      "suggestion": "Capture a point-in-time snapshot of the official injury report daily (Wed/Thu/Fri) instead of once, because availability news moves the line and a single crawl cannot show the move.",
+      "why": "Without the timestamp sequence you cannot test the only form of injury edge that plausibly exists: being faster than the price.",
+      "impact": "MEDIUM", "effort": "MEDIUM", "risk": "LOW",
+      "prerequisites": ["Q2"], "note": "Needs a scheduled job and a price source to compare against."
+    },
+    {
+      "id": "S-10", "area": "Site / usability", "status": "IMPLEMENTED",
+      "suggestion": "One dashboard with category subpages, every table row carrying a source link, and a build script that fails if a row has no source or a link is broken.",
+      "why": "A reader can audit any number in two clicks; a broken link or unsourced row cannot reach the live site.",
+      "impact": "HIGH", "effort": "MEDIUM", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/scripts/build_site.py"
+    },
+    {
+      "id": "S-11", "area": "Site / usability", "status": "NEEDS DECISION",
+      "suggestion": "Consolidate the repository. Twenty parallel workspaces with duplicated dashboards (and three competing SF rental sites) make it impossible for a reader to know which number is current.",
+      "why": "Duplication is now a correctness risk, not just clutter: two dashboards can disagree and both claim 'verified'.",
+      "impact": "HIGH", "effort": "MEDIUM", "risk": "MEDIUM",
+      "prerequisites": ["Q19"], "owner_of_change": "owner + integration session"
+    },
+    {
+      "id": "S-12", "area": "Decision making", "status": "IMPLEMENTED",
+      "suggestion": "Keep a decision register that separates ANSWERED from OPEN, and block each major decision on named questions (D1-D7).",
+      "why": "It converts 'we should think about it' into a checklist with a stopping condition.",
+      "impact": "HIGH", "effort": "LOW", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/data/questions.json"
+    },
+    {
+      "id": "S-13", "area": "Governance", "status": "PROPOSED",
+      "suggestion": "Publish a one-page methodology PDF for each released model version: inputs, freeze date, gate results, and the exact commit hash.",
+      "why": "Makes the leaderboard reproducible by a third party, which is the only substitute for trust.",
+      "impact": "MEDIUM", "effort": "LOW", "risk": "LOW",
+      "prerequisites": ["Q17"]
+    },
+    {
+      "id": "S-14", "area": "Strategy", "status": "PROPOSED",
+      "suggestion": "Test the one signal we can measure cheaply and that the market may under-price: rest/short-week asymmetry (Thursday games, off a Monday game).",
+      "why": "It needs only the schedule we already have plus results; it is a genuinely different information set from 'team strength', which the market already nails.",
+      "impact": "MEDIUM", "effort": "LOW", "risk": "MEDIUM",
+      "prerequisites": ["Q1"], "note": "Not implemented this session: the schedule-to-rest join must be built from official week pages and pre-registered before any result is shown."
+    },
+    {
+      "id": "S-15", "area": "Risk / responsible gambling", "status": "IMPLEMENTED",
+      "suggestion": "Keep reward points non-monetary with zero cash value, and carry the NCPG helpline on every page.",
+      "why": "A monetary leaderboard on an unvalidated model is an advertisement for losing money.",
+      "impact": "MEDIUM", "effort": "LOW", "risk": "LOW",
+      "prerequisites": [], "owner_of_change": "nfl-edge/"
+    },
+    {
+      "id": "S-16", "area": "Data coverage", "status": "PROPOSED",
+      "suggestion": "Add a second, independent official check per data point where one exists: e.g. cross-check each game score against the club page and the league scoreboard on the same date.",
+      "why": "A transcription error in a single source is invisible to every internal consistency test we run. Two independent official renderings would catch it.",
+      "impact": "MEDIUM", "effort": "MEDIUM", "risk": "LOW",
+      "prerequisites": []
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlation &middot; NFL Edge</title>
+<meta name="description" content="Measured NFL parlay-leg correlation with phi coefficients, residual persistence, and an explicit list of what cannot be measured.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Edge <span>Own4 &middot; line origination</span></a>
+  <div class="tag">Snapshot <strong>2026-11-12</strong> &middot; official sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team statistics</a><a class="nav" href="../pages/scores.html">Games & scores</a><a class="nav" href="../pages/schedule.html">Week 10 schedule</a><div class="grp">Own lines</div><a class="nav" href="../pages/own-lines.html">Originated lines</a><a class="nav active" href="../pages/correlations.html">Correlation</a><div class="grp">Strategies</div><a class="nav" href="../pages/strategies.html">Signal catalogue</a><a class="nav" href="../pages/singles.html">Single bets</a><a class="nav" href="../pages/parlays.html">Parlays</a><a class="nav" href="../pages/props.html">Player props</a><a class="nav" href="../pages/validation.html">Validation & luck</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & backups</a><div class="grp">Decision support</div><a class="nav" href="../pages/requirements.html">Requirements</a><a class="nav" href="../pages/decisions.html">Questions & decisions</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">Flagged for review</a></nav>
+  <a class="flaglink" href="../pages/flagged.html">&#9873; 16 items flagged for review</a>
+  <div class="sidefoot">0 of 4 strategies qualify<br>0 reward points awarded</div>
+</aside>
+<main class="main" id="main">
+<div class="crumb">Own lines / Correlation</div>
+<h1>Correlation and dependence</h1>
+<p class="lede">What parlay legs do to each other, measured. Two team-level pairs are measured; every player-level pair is blank because the data does not exist here.</p>
+<div class="tw">
+<table>
+<caption>Measured on 2383 holdout games (2017&ndash;2025)</caption>
+<thead><tr><th>Leg pair</th><th>Method</th><th>phi</th><th>Joint rate</th><th>If independent</th><th>Reading</th><th>Source</th></tr></thead><tbody>
+<tr><td>favourite covers the spread vs game goes over the total</td><td>phi coefficient on binary outcomes; positive means the two legs co-move</td><td class="num">-0.0079</td><td class="num">20.14%</td><td class="num">20.34%</td><td>near zero: pricing a same-game parlay of these two legs by multiplication is approximately correct on this sample, but the sign/size must be re-measured per game.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+<tr><td>home win vs game goes over the total</td><td>phi coefficient on binary outcomes</td><td class="num">0.0110</td><td class="num">26.35%</td><td class="num">26.08%</td><td>near zero; no measured dependence on this sample.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+</tbody></table></div>
+<div class="panel info"><h3>How to read phi</h3><p>phi is the correlation between two yes/no outcomes. Zero means the legs are independent, so multiplying their probabilities gives the right joint price. Positive means they co-move and multiplying <em>understates</em> the true joint price; negative means multiplying overstates it. Both values above are within 0.011 of zero, so for these two team-level pairs, multiplication is a defensible approximation on this sample.</p></div>
+<h2>The anti-luck test: does the model&rsquo;s error persist?</h2>
+<div class="tw">
+<table>
+<thead><tr><th>Quantity</th><th>Method</th><th>Value</th><th>Reading</th><th>Source</th></tr></thead><tbody>
+<tr><td>Consecutive-season mean spread error</td><td>correlation of consecutive-season mean own-vs-actual spread error</td><td class="num">0.3997</td><td>If this is not clearly positive, the model&#x27;s spread error has no season-to-season memory, i.e. what looks like edge in one season does not carry into the next. This is the anti-luck test that matters for a leaderboard.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/correlations.json" target="_blank" rel="noopener">correlations.json ↗</a></td></tr>
+</tbody></table></div>
+<p class="note">A value near +0.40 means the model is <em>consistently wrong in the same direction</em> about a third of the time &mdash; that is a bias to fix, not an edge to sell. Genuine skill would show up as profits persisting, which the leaderboard does not find.</p>
+<h2>Not measured, and why</h2>
+<div class="tw">
+<table>
+<caption>Correlations that would be needed for player-prop combos</caption>
+<thead><tr><th>Leg pair</th><th>Status</th><th>Reason it is blank</th><th>Source</th></tr></thead><tbody>
+<tr><td>QB passing yards vs WR1 receiving yards (same game)</td><td><span class="badge fail">BLANK</span></td><td>requires official player-game logs and prop prices; neither is in this repository in an authorised form. Left blank rather than copied from a peer estimate (flag F-02).</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>RB rushing yards vs team total (same game)</td><td><span class="badge fail">BLANK</span></td><td>same as above</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+<tr><td>same-game parlay leg correlation for player props</td><td><span class="badge fail">BLANK</span></td><td>same as above; no archived SGP prices exist</td><td><a class="src" href="https://www.nfl.com/stats/player-stats/" target="_blank" rel="noopener">nfl.com</a></td></tr>
+</tbody></table></div>
+<p class="note">These blanks are the honest answer to "determine correlation values": the team-level values are measured, the player-level values cannot be, because there are no official player-game logs and no prop prices in scope (flags F-02, F-03).</p>
+<footer>
+<p><strong>Own4 &middot; NFL Edge</strong> &mdash; analytical research only, <strong>not wagering advice</strong>.
+Snapshot 2026-11-12. Every table row links to the source it was read from; every value that could not be
+confirmed from an official source is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &middot;
+<a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG &nearr;</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js" defer></script>
+</body>
+</html>
