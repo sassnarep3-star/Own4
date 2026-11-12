@@ -42,10 +42,10 @@ S = [
   cost="none", risk="low", decided_by="owner", status="recommended"),
 
  dict(id="S04", group="Product", title="Adopt one canonical NFL dashboard and mark the others as archive",
-  context="Five NFL namespaces exist: nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-decision/. They disagree in places and only two carry measured results.",
+  context="Eight NFL namespaces exist: nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-decisions/, nfl-hub/, nfl-audit/ and nfl-decision/. Three carry measured results and two independently reached the same blocking findings.",
   why_it_matters="A decision surface with five competing front doors cannot be used to make a decision. The user asked for a clean dashboard.",
   options=[
-    ("nfl-decision/ becomes the decision layer; others become cited archives", "Only this namespace has a question register, a suggestions board and 160/160 provenance", "Effort: low. Failure: some peer detail is one click deeper"),
+    ("nfl-decision/ becomes the decision layer; others become cited archives", "Only this namespace has a numbered question register, a numbered suggestions board and 160/160 official provenance", "Effort: low. Failure: some peer detail is one click deeper"),
     ("Merge all five namespace sites into one page tree", "Preserves everything but is a large, conflict-prone edit across other sessions' scopes", "Effort: high. Failure: high merge-conflict risk"),
     ("Leave all five live and unlinked", "Current state", "Effort: none. Failure: ambiguity persists")],
   recommendation="Option 1. Add a superseded banner to the older pages in a later, single-owner PR.",
