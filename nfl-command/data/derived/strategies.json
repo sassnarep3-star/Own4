@@ -1,0 +1,1129 @@
+{
+  "registry": {
+    "id": "strategy-registry-preregistered",
+    "registered_utc": "2026-11-13T00:00:00Z",
+    "registered_before": "engine/02_analyze.py was executed for the first time",
+    "note": "The full family below is registered before any result is computed. It is the family that the Benjamini-Hochberg FDR control in gate G5 applies to. Thresholds are project-defined design choices, not official NFL or sportsbook policy.",
+    "price_source": {
+      "official": false,
+      "publisher": "nflverse / nfldata",
+      "url": "https://github.com/nflverse/nfldata",
+      "commit": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+      "file": "data/games.csv",
+      "sha256": "0114259438549a7c0bf201f7c91944f8ec1c02dba7339673b07d3129a5ff81df",
+      "note": "THIRD-PARTY ARCHIVE. The NFL publishes no betting lines. Every price used in this project comes from this archive and is labelled third-party everywhere it appears. Official-only tables leave the price cells blank.",
+      "spread_convention": "Determined empirically over 7,413 archive rows: the archive's spread_line equals the expected home margin, so the HOME team's line is -spread_line and the home team covers when actual_margin > spread_line. The competing reading gives a 59.2% home cover rate over the same rows against 47.6% for the adopted reading, and the adopted reading is the only one consistent with the archive's own moneyline signs."
+    },
+    "betting_strategies": [
+      {
+        "id": "S1",
+        "name": "ATS edge (1.5 pp)",
+        "market": "spread",
+        "rule": "Bet the side with the larger model-versus-vig-removed-market cover probability, only when the edge is at least 1.5 percentage points.",
+        "threshold": 0.015,
+        "legs": 1
+      },
+      {
+        "id": "S2",
+        "name": "ATS edge (3.0 pp)",
+        "market": "spread",
+        "rule": "Same rule as S1 with a 3.0 percentage point edge floor.",
+        "threshold": 0.03,
+        "legs": 1
+      },
+      {
+        "id": "S3",
+        "name": "Total edge (2.0 pp)",
+        "market": "total",
+        "rule": "Bet over or under the market total when the model over-probability differs from the vig-removed market over-probability by at least 2.0 percentage points.",
+        "threshold": 0.02,
+        "legs": 1
+      },
+      {
+        "id": "S4",
+        "name": "Moneyline edge (2.0 pp)",
+        "market": "moneyline",
+        "rule": "Bet the moneyline when the model win probability differs from the vig-removed market win probability by at least 2.0 percentage points.",
+        "threshold": 0.02,
+        "legs": 1
+      },
+      {
+        "id": "S5",
+        "name": "Favourite-only ATS",
+        "market": "spread",
+        "rule": "Bet the market favourite at the spread whenever the model also makes that side the favourite by at least 1 point.",
+        "threshold": 1.0,
+        "legs": 1
+      },
+      {
+        "id": "S6",
+        "name": "Small-line ATS",
+        "market": "spread",
+        "rule": "Bet the market favourite at the spread whenever the market line is 3.0 points or smaller and the model agrees the favourite should cover.",
+        "threshold": 3.0,
+        "legs": 1
+      },
+      {
+        "id": "P1",
+        "name": "2-leg ATS parlay",
+        "market": "parlay",
+        "rule": "Combine the two highest-edge S1 legs from two different games in the same week into a parlay priced at the product of the two decimal odds.",
+        "threshold": 0.015,
+        "legs": 2
+      },
+      {
+        "id": "P2",
+        "name": "3-leg ATS parlay",
+        "market": "parlay",
+        "rule": "Combine the three highest-edge S1 legs from three different games in the same week.",
+        "threshold": 0.015,
+        "legs": 3
+      },
+      {
+        "id": "P3",
+        "name": "ATS + total parlay",
+        "market": "parlay",
+        "rule": "Combine the highest-edge S1 leg with the highest-edge S3 leg from two different games in the same week.",
+        "threshold": 0.015,
+        "legs": 2
+      },
+      {
+        "id": "C1",
+        "name": "Player prop combo (two players, different games)",
+        "market": "prop",
+        "rule": "No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.",
+        "threshold": null,
+        "legs": 2,
+        "status": "blocked"
+      },
+      {
+        "id": "C2",
+        "name": "Same-game player prop pair",
+        "market": "prop",
+        "rule": "No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.",
+        "threshold": null,
+        "legs": 2,
+        "status": "blocked"
+      }
+    ],
+    "forecast_variants": [
+      {
+        "id": "V1",
+        "name": "Pre-registered model",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      {
+        "id": "V2",
+        "name": "Slower ratings (alpha 0.06)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      {
+        "id": "V3",
+        "name": "Faster ratings (alpha 0.20)",
+        "alpha": 0.2,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      {
+        "id": "V4",
+        "name": "No home-field advantage",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 0.0,
+        "use_rest": false,
+        "use_hfa": false
+      },
+      {
+        "id": "V5",
+        "name": "No mean reversion",
+        "alpha": 0.12,
+        "rho": 0.0,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      {
+        "id": "V6",
+        "name": "With rest differential",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": true,
+        "use_hfa": true
+      },
+      {
+        "id": "V7",
+        "name": "Corrected model (primary)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      {
+        "id": "V8",
+        "name": "Corrected model with rest differential",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": true,
+        "use_hfa": true
+      }
+    ],
+    "reward_policy": {
+      "betting_board": "A strategy earns reward points only if gates G1 to G9 all pass. Points = round(100 x t-statistic of the holdout ROI against the no-edge null), capped at 1,000 and floored at 0.",
+      "forecast_board": "A forecast variant earns reward points only if G1, G6 and G9 pass. Points = round(50 x z), where z = (MAE of the naive baseline - MAE of the variant) divided by the standard error of the paired per-game difference, capped at 500 and floored at 0. This board needs no prices, so it can be paid even though the NFL publishes no betting lines.",
+      "currency": "Points are non-monetary until the owner funds a pool. No pool is funded in this project; this is recorded as an open item for the owner.",
+      "currency_source": null
+    }
+  },
+  "results": [
+    {
+      "id": "S1",
+      "name": "ATS edge (1.5 pp)",
+      "market": "spread",
+      "legs": 1,
+      "rule": "Bet the side with the larger model-versus-vig-removed-market cover probability, only when the edge is at least 1.5 percentage points.",
+      "status": "Evaluated",
+      "threshold": 0.015,
+      "bets": 326,
+      "wins": 130,
+      "pushes": 5,
+      "losses": 191,
+      "roi": -0.15,
+      "roi_ci_low": -0.30641471182706903,
+      "roi_ci_high": 0.02676555480699302,
+      "permutation_p": 0.48095190480951905,
+      "t_stat": -1.7746899964483436,
+      "by_season": {
+        "2025": {
+          "bets": 215,
+          "roi": -0.16066
+        },
+        "2026": {
+          "bets": 111,
+          "roi": -0.12936
+        }
+      },
+      "placebo": {
+        "placebo_strategies": 1000,
+        "bets_each": 326,
+        "roi_p05": -0.3593116501950619,
+        "roi_median": -0.30735858192694415,
+        "roi_p95": -0.258437207405353,
+        "placebo_false_positive_rate": 0.0
+      },
+      "gates": {
+        "G1": {
+          "status": "Pass",
+          "value": 326,
+          "detail": "326 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.15,
+          "detail": "holdout ROI -0.15"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.48095190480951905,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.30641471182706903,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Pass",
+          "value": {
+            "roi": -0.15,
+            "placebo_p95": -0.258437207405353,
+            "placebo_false_positive_rate": 0.0
+          },
+          "detail": "ROI must beat the 95th percentile of 1000 skill-free peer strategies that place the same number of bets, and the peer false-positive rate must not exceed 10%"
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 0.8416658334166583,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 5,
+      "gates_failed": 4,
+      "gates_blocked": 0,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "S2",
+      "name": "ATS edge (3.0 pp)",
+      "market": "spread",
+      "legs": 1,
+      "rule": "Same rule as S1 with a 3.0 percentage point edge floor.",
+      "status": "Evaluated",
+      "threshold": 0.03,
+      "bets": 265,
+      "wins": 100,
+      "pushes": 4,
+      "losses": 161,
+      "roi": -0.21642,
+      "roi_ci_low": -0.3677972807457932,
+      "roi_ci_high": -0.06258331970283834,
+      "permutation_p": 0.4126587341265873,
+      "t_stat": -2.791158840349327,
+      "by_season": {
+        "2025": {
+          "bets": 174,
+          "roi": -0.20017
+        },
+        "2026": {
+          "bets": 91,
+          "roi": -0.2475
+        }
+      },
+      "placebo": {
+        "placebo_strategies": 1000,
+        "bets_each": 265,
+        "roi_p05": -0.4113776894893064,
+        "roi_median": -0.33913542598275204,
+        "roi_p95": -0.26836720282232335,
+        "placebo_false_positive_rate": 0.0
+      },
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 265,
+          "detail": "265 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.21642,
+          "detail": "holdout ROI -0.21642"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.4126587341265873,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.3677972807457932,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Pass",
+          "value": {
+            "roi": -0.21642,
+            "placebo_p95": -0.26836720282232335,
+            "placebo_false_positive_rate": 0.0
+          },
+          "detail": "ROI must beat the 95th percentile of 1000 skill-free peer strategies that place the same number of bets, and the peer false-positive rate must not exceed 10%"
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 0.8416658334166583,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 4,
+      "gates_failed": 5,
+      "gates_blocked": 0,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "S3",
+      "name": "Total edge (2.0 pp)",
+      "market": "total",
+      "legs": 1,
+      "rule": "Bet over or under the market total when the model over-probability differs from the vig-removed market over-probability by at least 2.0 percentage points.",
+      "status": "Blocked",
+      "bets": 0,
+      "roi": null,
+      "roi_ci_low": null,
+      "roi_ci_high": null,
+      "permutation_p": null,
+      "blocked_reason": "The market price for a total cannot be verified. The archive's over and under prices failed the calibration audit in data/price_determination.json, and a total has no moneyline from which a market probability could be reconstructed. The NFL publishes no betting lines at all. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.",
+      "source_ids": [],
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 0,
+          "detail": "0 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": null,
+          "detail": "holdout ROI n/a"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": null,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": null,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "No p-value was computed, so the family-wise control cannot be evaluated."
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 4,
+      "gates_blocked": 2,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "S4",
+      "name": "Moneyline edge (2.0 pp)",
+      "market": "moneyline",
+      "legs": 1,
+      "rule": "Bet the moneyline when the model win probability differs from the vig-removed market win probability by at least 2.0 percentage points.",
+      "status": "Evaluated",
+      "threshold": 0.02,
+      "bets": 343,
+      "wins": 149,
+      "pushes": 2,
+      "losses": 192,
+      "roi": -0.10704,
+      "roi_ci_low": -0.22623476215132918,
+      "roi_ci_high": 0.015187990861613113,
+      "permutation_p": 0.984001599840016,
+      "t_stat": -1.7150175432245078,
+      "by_season": {
+        "2025": {
+          "bets": 227,
+          "roi": -0.15538
+        },
+        "2026": {
+          "bets": 116,
+          "roi": -0.01243
+        }
+      },
+      "placebo": {
+        "placebo_strategies": 1000,
+        "bets_each": 343,
+        "roi_p05": -0.33981848788464686,
+        "roi_median": -0.29730353721901337,
+        "roi_p95": -0.25107771827172476,
+        "placebo_false_positive_rate": 0.0
+      },
+      "gates": {
+        "G1": {
+          "status": "Pass",
+          "value": 343,
+          "detail": "343 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.10704,
+          "detail": "holdout ROI -0.10704"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.984001599840016,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.22623476215132918,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Pass",
+          "value": {
+            "roi": -0.10704,
+            "placebo_p95": -0.25107771827172476,
+            "placebo_false_positive_rate": 0.0
+          },
+          "detail": "ROI must beat the 95th percentile of 1000 skill-free peer strategies that place the same number of bets, and the peer false-positive rate must not exceed 10%"
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 1.0,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 5,
+      "gates_failed": 4,
+      "gates_blocked": 0,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "S5",
+      "name": "Favourite-only ATS",
+      "market": "spread",
+      "legs": 1,
+      "rule": "Bet the market favourite at the spread whenever the model also makes that side the favourite by at least 1 point.",
+      "status": "Evaluated",
+      "threshold": 1.0,
+      "bets": 335,
+      "wins": 273,
+      "pushes": 5,
+      "losses": 57,
+      "roi": 0.02266,
+      "roi_ci_low": -0.03151249147052164,
+      "roi_ci_high": 0.07483069982722532,
+      "permutation_p": 0.6721327867213278,
+      "t_stat": 0.8313538102749236,
+      "by_season": {
+        "2025": {
+          "bets": 226,
+          "roi": 0.03028
+        },
+        "2026": {
+          "bets": 109,
+          "roi": 0.00685
+        }
+      },
+      "placebo": {
+        "placebo_strategies": 1000,
+        "bets_each": 335,
+        "roi_p05": -0.34916051659101005,
+        "roi_median": -0.30314284767210953,
+        "roi_p95": -0.2550890761840428,
+        "placebo_false_positive_rate": 0.0
+      },
+      "gates": {
+        "G1": {
+          "status": "Pass",
+          "value": 335,
+          "detail": "335 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Pass",
+          "value": 0.02266,
+          "detail": "holdout ROI 0.02266"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.6721327867213278,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.03151249147052164,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Pass",
+          "value": {
+            "roi": 0.02266,
+            "placebo_p95": -0.2550890761840428,
+            "placebo_false_positive_rate": 0.0
+          },
+          "detail": "ROI must beat the 95th percentile of 1000 skill-free peer strategies that place the same number of bets, and the peer false-positive rate must not exceed 10%"
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 0.9409859014098589,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 6,
+      "gates_failed": 3,
+      "gates_blocked": 0,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "S6",
+      "name": "Small-line ATS",
+      "market": "spread",
+      "legs": 1,
+      "rule": "Bet the market favourite at the spread whenever the market line is 3.0 points or smaller and the model agrees the favourite should cover.",
+      "status": "Evaluated",
+      "threshold": 3.0,
+      "bets": 116,
+      "wins": 69,
+      "pushes": 5,
+      "losses": 42,
+      "roi": -0.04352,
+      "roi_ci_low": -0.17505711790793527,
+      "roi_ci_high": 0.08960580002318572,
+      "permutation_p": 0.36236376362363765,
+      "t_stat": -0.6354377415690678,
+      "by_season": {
+        "2025": {
+          "bets": 76,
+          "roi": -0.02585
+        },
+        "2026": {
+          "bets": 40,
+          "roi": -0.0771
+        }
+      },
+      "placebo": {
+        "placebo_strategies": 1000,
+        "bets_each": 116,
+        "roi_p05": -0.6731012573605837,
+        "roi_median": -0.46099615569290353,
+        "roi_p95": -0.25108688048391214,
+        "placebo_false_positive_rate": 0.0
+      },
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 116,
+          "detail": "116 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.04352,
+          "detail": "holdout ROI -0.04352"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.36236376362363765,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.17505711790793527,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Pass",
+          "value": {
+            "roi": -0.04352,
+            "placebo_p95": -0.25108688048391214,
+            "placebo_false_positive_rate": 0.0
+          },
+          "detail": "ROI must beat the 95th percentile of 1000 skill-free peer strategies that place the same number of bets, and the peer false-positive rate must not exceed 10%"
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 0.8416658334166583,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 4,
+      "gates_failed": 5,
+      "gates_blocked": 0,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "P1",
+      "name": "2-leg ATS parlay",
+      "market": "parlay",
+      "legs": 2,
+      "rule": "Combine the two highest-edge S1 legs from two different games in the same week into a parlay priced at the product of the two decimal odds.",
+      "status": "Evaluated",
+      "threshold": 0.015,
+      "bets": 30,
+      "wins": 0,
+      "pushes": 0,
+      "losses": 0,
+      "roi": -0.42641,
+      "roi_ci_low": -0.861029155293877,
+      "roi_ci_high": 0.12189410821049022,
+      "permutation_p": 0.45215478452154784,
+      "t_stat": -1.6281102337588131,
+      "by_season": {
+        "2025": {
+          "bets": 21,
+          "roi": -0.66064
+        },
+        "2026": {
+          "bets": 9,
+          "roi": 0.12015
+        }
+      },
+      "placebo": null,
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 30,
+          "detail": "30 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.42641,
+          "detail": "holdout ROI -0.42641"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 0.45215478452154784,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -0.861029155293877,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 0.8416658334166583,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 5,
+      "gates_blocked": 1,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "P2",
+      "name": "3-leg ATS parlay",
+      "market": "parlay",
+      "legs": 3,
+      "rule": "Combine the three highest-edge S1 legs from three different games in the same week.",
+      "status": "Evaluated",
+      "threshold": 0.015,
+      "bets": 29,
+      "wins": 0,
+      "pushes": 0,
+      "losses": 0,
+      "roi": -0.4881,
+      "roi_ci_low": -1.0,
+      "roi_ci_high": 0.18575183200582604,
+      "permutation_p": 1.0,
+      "t_stat": -1.5606385769035542,
+      "by_season": {
+        "2025": {
+          "bets": 20,
+          "roi": -0.57019
+        },
+        "2026": {
+          "bets": 9,
+          "roi": -0.30566
+        }
+      },
+      "placebo": null,
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 29,
+          "detail": "29 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": -0.4881,
+          "detail": "holdout ROI -0.4881"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": 1.0,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": -1.0,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Fail",
+          "value": 1.0,
+          "detail": "Benjamini-Hochberg q across the 7 evaluated strategies"
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 5,
+      "gates_blocked": 1,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "P3",
+      "name": "ATS + total parlay",
+      "market": "parlay",
+      "legs": 2,
+      "rule": "Combine the highest-edge S1 leg with the highest-edge S3 leg from two different games in the same week.",
+      "status": "Blocked",
+      "bets": 0,
+      "roi": null,
+      "roi_ci_low": null,
+      "roi_ci_high": null,
+      "permutation_p": null,
+      "blocked_reason": "The market price for a total cannot be verified. The archive's over and under prices failed the calibration audit in data/price_determination.json, and a total has no moneyline from which a market probability could be reconstructed. The NFL publishes no betting lines at all. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.",
+      "source_ids": [],
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 0,
+          "detail": "0 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": null,
+          "detail": "holdout ROI n/a"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": null,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": null,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "No p-value was computed, so the family-wise control cannot be evaluated."
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 4,
+      "gates_blocked": 2,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "C1",
+      "name": "Player prop combo (two players, different games)",
+      "market": "prop",
+      "legs": 2,
+      "rule": "No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.",
+      "status": "Blocked",
+      "bets": 0,
+      "roi": null,
+      "roi_ci_low": null,
+      "roi_ci_high": null,
+      "permutation_p": null,
+      "blocked_reason": "No official player game log and no verifiable player prop price were found in any official NFL source, so the strategy cannot be priced, tested or settled. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.",
+      "source_ids": [],
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 0,
+          "detail": "0 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": null,
+          "detail": "holdout ROI n/a"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": null,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": null,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "No p-value was computed, so the family-wise control cannot be evaluated."
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 4,
+      "gates_blocked": 2,
+      "reward_eligible": false,
+      "reward_points": 0
+    },
+    {
+      "id": "C2",
+      "name": "Same-game player prop pair",
+      "market": "prop",
+      "legs": 2,
+      "rule": "No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.",
+      "status": "Blocked",
+      "bets": 0,
+      "roi": null,
+      "roi_ci_low": null,
+      "roi_ci_high": null,
+      "permutation_p": null,
+      "blocked_reason": "No official player game log and no verifiable player prop price were found in any official NFL source, so the strategy cannot be priced, tested or settled. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.",
+      "source_ids": [],
+      "gates": {
+        "G1": {
+          "status": "Fail",
+          "value": 0,
+          "detail": "0 graded holdout bets (floor 300)"
+        },
+        "G2": {
+          "status": "Fail",
+          "value": null,
+          "detail": "holdout ROI n/a"
+        },
+        "G3": {
+          "status": "Fail",
+          "value": null,
+          "detail": "one-sided permutation p-value (floor 0.05)"
+        },
+        "G4": {
+          "status": "Fail",
+          "value": null,
+          "detail": "lower bound of the 95% bootstrap interval for ROI"
+        },
+        "G6": {
+          "status": "Pass",
+          "value": 0,
+          "detail": "earlier forecasts changed when 422 holdout outcomes were perturbed: 0"
+        },
+        "G9": {
+          "status": "Pass",
+          "value": {
+            "holdout_skill_points": 0.5189,
+            "seasons_non_negative": 4,
+            "seasons_evaluated": 4
+          },
+          "detail": "The price-independent forecast skill of the model that selects the bets (the pre-registered V1 model) must beat the naive baseline on the holdout and must be non-negative in at least 2 of the 2023-2026 validation and holdout seasons. Holdout skill +0.5189 points of mean absolute error; non-negative in 4 of 4 seasons."
+        },
+        "G7": {
+          "status": "Pass",
+          "value": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+          "detail": "Every price comes from a recorded third-party archive with a commit SHA and a SHA-256 checksum, and every price column was audited for calibration before use. The NFL publishes no betting lines, so this gate can only be satisfied by a non-official source and every such row is labelled third-party. See data/price_determination.json."
+        },
+        "G8": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "The placebo null is only implemented for single-bet strategies."
+        },
+        "G5": {
+          "status": "Blocked",
+          "value": null,
+          "detail": "No p-value was computed, so the family-wise control cannot be evaluated."
+        }
+      },
+      "gates_passed": 3,
+      "gates_failed": 4,
+      "gates_blocked": 2,
+      "reward_eligible": false,
+      "reward_points": 0
+    }
+  ],
+  "note": "Every price in this file comes from the third-party archive recorded in the registry. The NFL publishes no betting lines, so no ROI here can be described as officially verified."
+}

@@ -1,0 +1,61 @@
+{
+  "rows": [
+    {
+      "id": "IC-01",
+      "name": "2026 standings reconciliation",
+      "detail": "W, L, T, PF and PA recomputed from the third-party game log for all 32 teams and compared with the official NFL.com league standings page.",
+      "result": "PASS",
+      "detail_value": "32 of 32 teams match",
+      "mismatches": [],
+      "source_ids": [
+        "SRC-01"
+      ]
+    },
+    {
+      "id": "IC-02",
+      "name": "Look-ahead integrity test",
+      "detail": "The outcome of all 422 holdout games was shifted by 7 points and the forecast engine re-run.",
+      "result": "PASS",
+      "detail_value": "0 forecasts made before the holdout changed",
+      "source_ids": []
+    },
+    {
+      "id": "IC-03",
+      "name": "Spread line convention",
+      "detail": "The archive's spread_line was tested against the actual margin under both possible readings and against the archive's own moneyline signs.",
+      "result": "PASS",
+      "detail_value": "Adopted reading (the home line is -spread_line) gives a 60.14% home cover rate over 7413 rows; the rejected reading gives 48.96%. The moneyline cross-check agrees with the adopted reading in 99.39% of 5432 games.",
+      "source_ids": []
+    },
+    {
+      "id": "IC-04",
+      "name": "League totals balance",
+      "detail": "Points for and points allowed summed over every 2026 game must be equal.",
+      "result": "PASS",
+      "detail_value": "points for 6291, points against 6291",
+      "source_ids": [
+        "SRC-01"
+      ]
+    },
+    {
+      "id": "IC-05",
+      "name": "Tied games handled",
+      "detail": "The 2026 season contains one tied game. Ties must be a push for spread, total and moneyline bets, never a win.",
+      "result": "PASS",
+      "detail_value": "1 tie(s) in 2026",
+      "source_ids": [
+        "SRC-01"
+      ]
+    },
+    {
+      "id": "IC-06",
+      "name": "Own line coverage of the Week 10 slate",
+      "detail": "Every scheduled Week 10 game must have an own line.",
+      "result": "FAIL",
+      "detail_value": "13 of 14 games",
+      "source_ids": [
+        "SRC-02"
+      ]
+    }
+  ]
+}

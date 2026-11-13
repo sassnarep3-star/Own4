@@ -1,0 +1,36 @@
+{
+  "id": "spread-convention-determination",
+  "determined_utc": "2026-11-13T00:00:00Z",
+  "data": {
+    "file": "data/raw/nfldata_games.csv",
+    "sha256": "0114259438549a7c0bf201f7c91944f8ec1c02dba7339673b07d3129a5ff81df",
+    "source": "https://github.com/nflverse/nfldata",
+    "commit": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+    "status": "THIRD-PARTY ARCHIVE. The NFL publishes no betting lines."
+  },
+  "question": "Does the archive's spread_line belong to the home team or to the away team?",
+  "adopted": {
+    "id": "A",
+    "rule": "The archive's spread_line is the AWAY team's line. The home team's line is -spread_line. The home team covers when the actual margin (home minus away) is greater than -spread_line.",
+    "rows": 7413,
+    "home_cover_rate_all": 0.60144,
+    "home_cover_rate_2026": 0.55474,
+    "home_team_is_spread_favourite_share": 0.6494,
+    "moneyline_agreement_rate": 0.99392,
+    "moneyline_games_tested": 5432,
+    "reason": "The moneyline cross-check agrees with this reading in 99.39% of the 5432 games that carry both a spread and a moneyline. The home cover rate of 60.14% is coherent with the share of games in which the home team is the spread favourite (64.94%): a favourite covering a three-point line wins about six times in ten, so the two numbers must agree."
+  },
+  "rejected": {
+    "id": "B",
+    "rule": "The archive's spread_line is the HOME team's line. The home team covers when the actual margin is greater than +spread_line.",
+    "rows": 7413,
+    "home_cover_rate_all": 0.48961,
+    "home_cover_rate_2026": 0.43066,
+    "home_team_is_spread_favourite_share": 0.3506,
+    "moneyline_agreement_rate": 0.00589,
+    "moneyline_games_tested": 5432,
+    "reason": "The moneyline cross-check agrees with this reading in only 0.59% of the same 5432 games, which is the rate you would expect by chance. The reading is therefore rejected."
+  },
+  "supersedes": "The descriptive sentence about the spread convention in data/strategy_registry_preregistered.json and the note in data/gates_preregistered.json were written before this determination was made and quoted the cover rate under the rejected reading. The thresholds registered in those files are unchanged. This file is the dated, reproducible record of the convention.",
+  "how_to_reproduce": "python3 engine/00_convention.py"
+}

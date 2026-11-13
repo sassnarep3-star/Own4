@@ -1,0 +1,438 @@
+{
+  "name": "NFL Command Center walk-forward rating model",
+  "parameters": {
+    "registered_utc": "2026-11-13T00:00:00Z",
+    "rating_alpha": 0.12,
+    "rating_alpha_note": "Share of the residual applied to the team's offensive and defensive rating after each game.",
+    "mean_reversion_rho": 0.03,
+    "mean_reversion_note": "Share of a team's rating reverted toward the league mean after each game.",
+    "home_field_advantage_points": 1.5,
+    "home_field_advantage_note": "Fixed project assumption, applied only when the designated home team hosted the game. Neutral-site games (recorded in the location field) get no home-field advantage.",
+    "league_mean_prior_points": 21.5,
+    "league_mean_prior_games": 64,
+    "league_mean_note": "Prior for the league mean points per team per game, used with an expanding window of prior results.",
+    "sigma_prior_points": 13.5,
+    "sigma_prior_games": 32,
+    "sigma_note": "Prior for the residual standard deviation used to convert a point differential into a win probability.",
+    "min_games_before_forecast": 0,
+    "min_games_note": "No minimum; the model may forecast from the first game of the archive, but such forecasts are flagged as cold-start."
+  },
+  "parameters_source": "data/gates_preregistered.json (committed before the engine first ran)",
+  "method": "Each team carries an offensive rating (points scored above the league mean) and a defensive rating (points allowed below the league mean). Ratings are updated after every game with the residual from that game's forecast, re-identified each game by shifting the mean offensive rating into the defensive ratings, and reverted toward the league mean. The league mean and the residual standard deviation use expanding windows with the pre-registered priors. A game is forecast with the information available before it.",
+  "home_field_advantage": "1.5 points, applied only when the designated home team hosted the game. The 2026 season has 7 neutral-site games, where no home-field advantage is applied.",
+  "splits": {
+    "development": "1999-2022 (model may be inspected; no threshold is tuned on the holdout)",
+    "validation": "2023-2024",
+    "holdout": "2025-2026 (scored once; no parameter is changed after the holdout is read)",
+    "note": "The holdout is defined by calendar season, so every holdout game is strictly later than every validation game. The engine processes games in chronological order and never uses a later result to set an earlier forecast."
+  },
+  "look_ahead_test": {
+    "games_before_holdout": 6991,
+    "forecasts_changed": 0,
+    "holdout_games_perturbed": 422
+  },
+  "baselines": {
+    "holdout": {
+      "label": "holdout 2025-2026",
+      "n_games": 422,
+      "n_with_market_spread": 422,
+      "n_with_verified_reference_price": 422,
+      "n_with_market_moneyline": 422,
+      "own_brier": 0.224905,
+      "market_brier": 0.212493,
+      "calibration": [
+        {
+          "n": 42,
+          "mean_predicted": 0.2392,
+          "observed_win_rate": 0.2619,
+          "gap": 0.0227
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.3535,
+          "observed_win_rate": 0.3333,
+          "gap": -0.0201
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.4199,
+          "observed_win_rate": 0.3571,
+          "gap": -0.0628
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.4794,
+          "observed_win_rate": 0.5238,
+          "gap": 0.0444
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.5291,
+          "observed_win_rate": 0.381,
+          "gap": -0.1481
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.5845,
+          "observed_win_rate": 0.619,
+          "gap": 0.0346
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.64,
+          "observed_win_rate": 0.5714,
+          "gap": -0.0685
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.6923,
+          "observed_win_rate": 0.5952,
+          "gap": -0.097
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.7497,
+          "observed_win_rate": 0.7143,
+          "gap": -0.0354
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.8363,
+          "observed_win_rate": 0.8095,
+          "gap": -0.0268
+        }
+      ],
+      "n_with_market_total": 422,
+      "own_spread_mae": 10.3108,
+      "market_spread_mae": 9.5983,
+      "naive_spread_mae": 10.9171,
+      "own_total_mae": 10.818,
+      "market_total_mae": 10.4645,
+      "naive_total_mae": 11.2062
+    },
+    "season_2026": {
+      "label": "2026",
+      "n_games": 137,
+      "n_with_market_spread": 137,
+      "n_with_verified_reference_price": 137,
+      "n_with_market_moneyline": 137,
+      "own_brier": 0.223406,
+      "market_brier": 0.216855,
+      "calibration": [
+        {
+          "n": 13,
+          "mean_predicted": 0.2538,
+          "observed_win_rate": 0.1538,
+          "gap": -0.1
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.3499,
+          "observed_win_rate": 0.1538,
+          "gap": -0.1961
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.4212,
+          "observed_win_rate": 0.3077,
+          "gap": -0.1136
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.4864,
+          "observed_win_rate": 0.6923,
+          "gap": 0.2059
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.5352,
+          "observed_win_rate": 0.4615,
+          "gap": -0.0736
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.5832,
+          "observed_win_rate": 0.5385,
+          "gap": -0.0447
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.6361,
+          "observed_win_rate": 0.4615,
+          "gap": -0.1746
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.6905,
+          "observed_win_rate": 0.5385,
+          "gap": -0.1521
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.7399,
+          "observed_win_rate": 0.5385,
+          "gap": -0.2014
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.7984,
+          "observed_win_rate": 0.8462,
+          "gap": 0.0478
+        },
+        {
+          "n": 7,
+          "mean_predicted": 0.8592,
+          "observed_win_rate": 0.8571,
+          "gap": -0.0021
+        }
+      ],
+      "n_with_market_total": 137,
+      "own_spread_mae": 10.1832,
+      "market_spread_mae": 9.4489,
+      "naive_spread_mae": 10.562,
+      "own_total_mae": 11.0956,
+      "market_total_mae": 10.5511,
+      "naive_total_mae": 11.5547
+    },
+    "all": {
+      "label": "1999-2026",
+      "n_games": 7413,
+      "n_with_market_spread": 7413,
+      "n_with_verified_reference_price": 5432,
+      "n_with_market_moneyline": 5432,
+      "own_brier": 0.222873,
+      "market_brier": 0.211526,
+      "calibration": [
+        {
+          "n": 741,
+          "mean_predicted": 0.2407,
+          "observed_win_rate": 0.2955,
+          "gap": 0.0549
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.3541,
+          "observed_win_rate": 0.3671,
+          "gap": 0.013
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.4268,
+          "observed_win_rate": 0.4588,
+          "gap": 0.032
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.4863,
+          "observed_win_rate": 0.502,
+          "gap": 0.0157
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.5361,
+          "observed_win_rate": 0.5236,
+          "gap": -0.0125
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.5818,
+          "observed_win_rate": 0.6181,
+          "gap": 0.0363
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.6304,
+          "observed_win_rate": 0.6343,
+          "gap": 0.0038
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.6844,
+          "observed_win_rate": 0.6653,
+          "gap": -0.0191
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.7462,
+          "observed_win_rate": 0.7328,
+          "gap": -0.0134
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.8382,
+          "observed_win_rate": 0.8178,
+          "gap": -0.0204
+        }
+      ],
+      "n_with_market_total": 7413,
+      "own_spread_mae": 10.6783,
+      "market_spread_mae": 10.2551,
+      "naive_spread_mae": 11.5257,
+      "own_total_mae": 10.9686,
+      "market_total_mae": 10.6177,
+      "naive_total_mae": 11.2235
+    }
+  },
+  "ratings_after_last_game": {
+    "ATL": {
+      "offense": -2.011,
+      "defense": 1.162,
+      "games": 460
+    },
+    "AZ": {
+      "offense": -1.764,
+      "defense": 3.429,
+      "games": 456
+    },
+    "BAL": {
+      "offense": 0.033,
+      "defense": 0.17,
+      "games": 478
+    },
+    "BUF": {
+      "offense": 7.707,
+      "defense": -0.901,
+      "games": 461
+    },
+    "CAR": {
+      "offense": -1.288,
+      "defense": 2.623,
+      "games": 461
+    },
+    "CHI": {
+      "offense": 2.573,
+      "defense": -1.447,
+      "games": 457
+    },
+    "CIN": {
+      "offense": 4.978,
+      "defense": 2.06,
+      "games": 458
+    },
+    "CLE": {
+      "offense": -5.638,
+      "defense": -0.65,
+      "games": 450
+    },
+    "DAL": {
+      "offense": 3.317,
+      "defense": 4.182,
+      "games": 461
+    },
+    "DEN": {
+      "offense": 0.526,
+      "defense": -3.693,
+      "games": 464
+    },
+    "DET": {
+      "offense": 5.179,
+      "defense": 0.454,
+      "games": 453
+    },
+    "GB": {
+      "offense": 1.038,
+      "defense": -2.2,
+      "games": 479
+    },
+    "HOU": {
+      "offense": 1.584,
+      "defense": -2.305,
+      "games": 413
+    },
+    "IND": {
+      "offense": 0.441,
+      "defense": 3.76,
+      "games": 474
+    },
+    "JAX": {
+      "offense": 4.478,
+      "defense": -4.024,
+      "games": 456
+    },
+    "KC": {
+      "offense": -0.238,
+      "defense": -3.817,
+      "games": 474
+    },
+    "LA": {
+      "offense": 3.401,
+      "defense": -2.193,
+      "games": 472
+    },
+    "LAC": {
+      "offense": -3.65,
+      "defense": -0.391,
+      "games": 460
+    },
+    "LV": {
+      "offense": -1.897,
+      "defense": 4.398,
+      "games": 455
+    },
+    "MIA": {
+      "offense": -3.961,
+      "defense": 1.193,
+      "games": 454
+    },
+    "MIN": {
+      "offense": -3.942,
+      "defense": -6.816,
+      "games": 462
+    },
+    "NE": {
+      "offense": 1.382,
+      "defense": -1.748,
+      "games": 492
+    },
+    "NO": {
+      "offense": -2.307,
+      "defense": 1.854,
+      "games": 464
+    },
+    "NYG": {
+      "offense": -1.873,
+      "defense": 0.381,
+      "games": 464
+    },
+    "NYJ": {
+      "offense": -4.136,
+      "defense": 4.149,
+      "games": 458
+    },
+    "PHI": {
+      "offense": -3.411,
+      "defense": -1.804,
+      "games": 482
+    },
+    "PIT": {
+      "offense": -1.057,
+      "defense": -2.501,
+      "games": 475
+    },
+    "SEA": {
+      "offense": 2.151,
+      "defense": -5.276,
+      "games": 478
+    },
+    "SF": {
+      "offense": 3.426,
+      "defense": -0.853,
+      "games": 470
+    },
+    "TB": {
+      "offense": -0.325,
+      "defense": -1.402,
+      "games": 465
+    },
+    "TEN": {
+      "offense": -4.44,
+      "defense": 3.858,
+      "games": 463
+    },
+    "WAS": {
+      "offense": -0.273,
+      "defense": 1.599,
+      "games": 457
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "rows": [
+    {
+      "id": "CR-01",
+      "name": "Own margin error vs rest differential",
+      "n": 422,
+      "r": 0.1692,
+      "ci_low": 0.07495,
+      "ci_high": 0.26045,
+      "p": 0.000482,
+      "q": 0.000964,
+      "scope": "holdout 2025-2026",
+      "note": "A positive value means the model under-predicts the home team when the home team has had more rest."
+    },
+    {
+      "id": "CR-02",
+      "name": "Own total error vs rest differential",
+      "n": 422,
+      "r": 0.04556,
+      "ci_low": -0.05012,
+      "ci_high": 0.14041,
+      "p": 0.350519,
+      "q": 0.350519,
+      "scope": "holdout 2025-2026",
+      "note": "Tests whether scoring totals react to rest in a way the model does not capture."
+    },
+    {
+      "id": "CR-03",
+      "name": "Own predicted margin vs the market spread",
+      "n": 422,
+      "r": 0.83814,
+      "ci_low": 0.80727,
+      "ci_high": 0.86444,
+      "p": 0.0,
+      "q": 0.0,
+      "scope": "holdout 2025-2026",
+      "note": "How strongly the own model agrees with the third-party closing line."
+    },
+    {
+      "id": "CR-04",
+      "name": "Own margin error vs the size of the actual margin",
+      "n": 422,
+      "r": 0.16187,
+      "ci_low": 0.06745,
+      "ci_high": 0.25341,
+      "p": 0.000846,
+      "q": 0.001354,
+      "scope": "holdout 2025-2026",
+      "note": "A negative value means the model over-predicts the favourite: it over-states the margin of large favourites and under-states the margin of large underdogs."
+    },
+    {
+      "id": "CR-05",
+      "name": "Same-week parlay leg dependence (cover rate lift)",
+      "n": 50441,
+      "r": 0.99868,
+      "ci_low": null,
+      "ci_high": null,
+      "p": null,
+      "q": null,
+      "scope": "1999-2026, all same-week game pairs",
+      "note": "Joint rate at which two different games in the same week both cover, divided by the product of the two marginal cover rates. 1.00 means the legs are independent and a parlay prices as the product. Values above 1.00 mean parlays pay less than the product of the singles."
+    },
+    {
+      "id": "CR-06",
+      "name": "Same-game ATS and total joint hit rate",
+      "n": 7413,
+      "r": 0.28787,
+      "ci_low": null,
+      "ci_high": null,
+      "p": null,
+      "q": null,
+      "scope": "1999-2026, every game with both a spread and a total",
+      "note": "The joint rate at which the home side covers the spread and the game also goes over the total. This is the dependence a same-game parlay has to price; the product of the two marginal rates is the independent assumption."
+    },
+    {
+      "id": "CR-07",
+      "name": "Product of the marginal same-game rates",
+      "n": 7413,
+      "r": 0.28861,
+      "ci_low": null,
+      "ci_high": null,
+      "p": null,
+      "q": null,
+      "scope": "1999-2026",
+      "note": "The independent assumption for CR-06. Comparing CR-06 with CR-07 gives the same-game dependence."
+    },
+    {
+      "id": "CR-08",
+      "name": "Carried-in offensive rating vs 2026 points scored",
+      "n": 137,
+      "r": 0.17488,
+      "ci_low": 0.00738,
+      "ci_high": 0.33283,
+      "p": 0.040959,
+      "q": 0.054612,
+      "scope": "2026",
+      "note": "The rating a team carried into the 2026 season against the points it actually scored in 2026. The rating was fitted on 2025 and earlier results, so this is an out-of-sample test of the rating."
+    },
+    {
+      "id": "CR-09",
+      "name": "Carried-in defensive rating vs 2026 points conceded",
+      "n": 137,
+      "r": 0.15261,
+      "ci_low": -0.0155,
+      "ci_high": 0.31233,
+      "p": 0.07502,
+      "q": 0.085737,
+      "scope": "2026",
+      "note": "The defence's rating carried into the 2026 season against the points it actually conceded in 2026."
+    },
+    {
+      "id": "CR-10",
+      "name": "Own predicted total vs actual total",
+      "n": 422,
+      "r": 0.25014,
+      "ci_low": 0.15847,
+      "ci_high": 0.33754,
+      "p": 0.0,
+      "q": 0.0,
+      "scope": "holdout 2025-2026",
+      "note": "Fit of the own scoring model on the holdout."
+    },
+    {
+      "id": "CR-11",
+      "name": "Own win probability vs home-win outcome",
+      "n": 422,
+      "r": 0.32422,
+      "ci_low": 0.23607,
+      "ci_high": 0.40708,
+      "p": 0.0,
+      "q": 0.0,
+      "scope": "holdout 2025-2026",
+      "note": "For a perfectly calibrated model this correlation equals the square root of the base rate times one minus the base rate, which here is 0.500. A value well below that reference means the model is under-confident: its probabilities sit too close to one half. See the calibration table on the Own Lines page."
+    }
+  ],
+  "note": "Correlations marked third-party in scope use the archive's closing lines. Correlations computed on model errors use only the own model and the official final scores."
+}
