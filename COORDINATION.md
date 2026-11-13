@@ -1988,4 +1988,10 @@ Session ID: `arena/40caaa81-own4` · Branch: `arena/40caaa81-own4` (pinned; no o
 
 ### Pull-request and deployment record
 
-*(to be recorded after PR merge)*
+**PR #75** — https://github.com/sassnarep3-star/Own4/pull/75 — *NFL review: session arena/40caaa81-own4 coordination record and verification*.
+Merged **2026-11-13**, merge commit `45efdcbf631d5ab3b5beb3861c484b2cbe46498b`, without waiting for approval, per standing instructions.
+CI: no dedicated workflow for nfl-edge/; site verification run locally (`verify_site.py` PASS: 22 pages, 889 sourced rows, 0 errors).
+Pages: API status `built` after merge; live site confirmed at https://sassnarep3-star.github.io/Own4/nfl-edge/ (dashboard, leaderboard, originated lines, decisions, suggestions, flagged-for-review all render).
+Root navigation: index.html already links to nfl-edge/index.html and nfl-edge/pages/flagged.html.
+
+**Result:** All user-requested deliverables are implemented, verified, and live. Zero reward points awarded (0 of 4 strategies qualify). All unverified values are blank and flagged (F-01–F-16). No manual owner input was required.
