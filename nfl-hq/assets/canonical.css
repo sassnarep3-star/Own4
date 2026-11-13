@@ -1,0 +1,127 @@
+/* Own4 canonical dashboard — no dependencies, no framework, no tracking. */
+:root{
+  --ink:#10151c; --ink-2:#3b4654; --ink-3:#67717f;
+  --bg:#f6f7f9; --panel:#ffffff; --line:#e2e6eb;
+  --brand:#0b5cd5; --brand-soft:#eaf1fd;
+  --ok:#0f7b4f; --ok-soft:#e7f6ee;
+  --warn:#a3560a; --warn-soft:#fdf1e2;
+  --bad:#a3182a; --bad-soft:#fdecee;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--brand);text-decoration:none}
+a:hover,a:focus{text-decoration:underline}
+code{font-family:var(--mono);font-size:.9em;background:#f0f2f5;padding:.1em .35em;border-radius:4px}
+
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+/* ---------- sidebar ---------- */
+.side{width:250px;flex:0 0 250px;background:#0f1621;color:#cfd7e3;padding:20px 14px 40px;
+  position:sticky;top:0;max-height:100vh;overflow-y:auto}
+.side .brand{display:block;color:#fff;font-weight:700;font-size:17px;letter-spacing:.2px;margin-bottom:2px}
+.side .brand span{color:#8fa2bb;font-weight:500;font-size:12px;display:block}
+.side .tag{font-size:11px;color:#8fa2bb;margin:8px 0 16px}
+.side .grp{font-size:10.5px;text-transform:uppercase;letter-spacing:.09em;color:#7c8ba1;margin:18px 8px 6px}
+.side a.nav{display:block;padding:6px 9px;border-radius:7px;color:#cfd7e3;font-size:13.5px;line-height:1.35}
+.side a.nav:hover{background:#1a2331;text-decoration:none;color:#fff}
+.side a.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.side .flag{margin-top:22px;display:block;background:#2a1d1d;border:1px solid #4a2b2b;color:#f3c9c9;
+  padding:9px 10px;border-radius:8px;font-size:12.5px}
+/* ---------- main ---------- */
+.main{flex:1 1 auto;min-width:0;padding:26px 30px 60px;max-width:1280px}
+.crumb{font-size:11.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:4px}
+h1{font-size:27px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.2px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+p{margin:0 0 12px;color:var(--ink-2)}
+p.lede{font-size:16px;color:var(--ink);max-width:74ch}
+.muted{color:var(--ink-3)}
+.small{font-size:12.5px}
+.note{font-size:12.5px;color:var(--ink-3);background:#fff;border:1px dashed var(--line);
+  border-radius:8px;padding:10px 12px}
+
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 13px}
+.card b{display:block;font-size:23px;line-height:1.15;letter-spacing:-.5px}
+.card span{display:block;font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.35}
+.card.ok{border-color:#bfe3cf;background:var(--ok-soft)}
+.card.warn{border-color:#f0d5b0;background:var(--warn-soft)}
+.card.bad{border-color:#f2c2c8;background:var(--bad-soft)}
+.card.brand{border-color:#c9dbfa;background:var(--brand-soft)}
+
+/* ---------- panels ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:14px 0}
+.panel.warn{background:var(--warn-soft);border-color:#f0d5b0}
+.panel.bad{background:var(--bad-soft);border-color:#f2c2c8}
+.panel.ok{background:var(--ok-soft);border-color:#bfe3cf}
+.panel h3{margin-top:0}
+.panel p:last-child{margin-bottom:0}
+
+/* ---------- tables ---------- */
+.tw{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+caption{caption-side:top;text-align:left;padding:10px 12px 8px;font-size:12px;color:var(--ink-3);
+  border-bottom:1px solid var(--line);background:#fbfcfd}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f2f5f9;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3);
+  white-space:nowrap;position:sticky;top:0;z-index:1}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.3px}
+tbody tr:hover{background:#fafbfd}
+tbody tr:last-child td{border-bottom:none}
+.blank{color:#9aa3af;font-style:italic;font-size:12px}
+
+/* ---------- badges ---------- */
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;
+  padding:2px 7px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.badge.pass,.badge.ok{background:var(--ok-soft);color:var(--ok);border-color:#bfe3cf}
+.badge.fail,.badge.bad{background:var(--bad-soft);color:var(--bad);border-color:#f2c2c8}
+.badge.blocked,.badge.warn{background:var(--warn-soft);color:var(--warn);border-color:#f0d5b0}
+.badge.official{background:var(--brand-soft);color:var(--brand);border-color:#c9dbfa}
+.badge.derived{background:#eef0ff;color:#3b3fa8;border-color:#d4d6f7}
+.badge.neutral{background:#f2f4f7;color:var(--ink-2);border-color:var(--line)}
+
+/* ---------- tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;margin:16px 0}
+.tile{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:inherit}
+.tile:hover{border-color:#c9dbfa;background:#fcfdff;text-decoration:none;box-shadow:0 1px 2px rgba(16,21,28,.05)}
+.tile b{display:block;font-size:14.5px;margin-bottom:3px}
+.tile span{display:block;font-size:12.5px;color:var(--ink-3);line-height:1.45}
+.tile em{font-style:normal;font-size:11px;color:var(--brand);font-weight:600}
+
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+footer p{color:var(--ink-3);font-size:12px;margin:0 0 6px}
+
+/* ---------- filter ---------- */
+.filter{display:flex;gap:10px;align-items:center;margin:12px 0 0;flex-wrap:wrap}
+.filter input{flex:1 1 240px;max-width:340px;padding:7px 10px;border:1px solid var(--line);
+  border-radius:8px;font-size:13px;background:#fff;color:var(--ink)}
+.filter .count{font-size:12px;color:var(--ink-3)}
+
+@media (max-width:860px){
+  .wrap{flex-direction:column}
+  .side{width:100%;flex:0 0 auto;position:static;max-height:none;padding:14px}
+  .side .grp{margin-top:12px}
+  .side nav{display:flex;flex-wrap:wrap;gap:4px}
+  .side a.nav{padding:5px 8px;font-size:12.5px;background:#182130}
+  .main{padding:18px 16px 44px}
+  h1{font-size:22px}
+  table{font-size:12px}
+  th,td{padding:7px 8px}
+}
+@media print{
+  .side,.filter{display:none}
+  .main{max-width:none;padding:0}
+  .tw{overflow:visible}
+}
+
+/* ---------- nfl-hq additions ---------- */
+h2:first-of-type{margin-top:22px}
+.tw + .note{margin-top:-6px}
+td ul{margin:0;padding-left:16px}
+.panel ul{margin:0 0 8px;padding-left:18px}
+.panel li{margin-bottom:5px}
+caption{font-weight:600;color:var(--ink-2)}
+h2 + .tw{margin-top:6px}

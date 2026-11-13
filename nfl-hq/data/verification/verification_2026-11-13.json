@@ -158,30 +158,17 @@
     }
    ],
    "prior_source_url": "https://www.nfl.com/standings/league/2026/REG",
-   "finding": "29 of 32 teams are cell-for-cell identical. The only changes are WAS and NYG, and both are explained by one game: Commanders 24, Giants 21 on Thursday 12 November, which NFL.com's scores page shows as Final and which the standings page absorbed between the two reads."
+   "finding": "29 of 32 teams are cell-for-cell identical across 512 compared cells. 3 teams moved across 25 cells (PIT, NYG, WAS). Columns that moved: conf, conf_pct, div, div_pct, home, l, last5, net_pts, pa, pct, pf, road, streak, w. The only result known to have landed between the two reads is the Thursday 12 November game, Commanders 24 - Giants 21, which NFL.com's scores page shows as Final. NFL.com does not state why any standings value changed, so every moved cell is listed here rather than explained away."
   },
   "team_stats": {
    "rows_compared": 32,
    "cells_compared": 576,
-   "teams_identical": 28,
+   "teams_identical": 30,
    "teams_changed": [
-    "AZ",
     "WAS",
-    "NYG",
-    "LA"
+    "NYG"
    ],
    "cell_diffs": [
-    {
-     "team": "AZ",
-     "team_name": "Arizona Cardinals",
-     "changed": [
-      {
-       "column": "archive_abbr",
-       "prior": "ARI",
-       "current": "AZ"
-      }
-     ]
-    },
     {
      "team": "WAS",
      "team_name": "Washington Commanders",
@@ -333,21 +320,22 @@
        "current": "142"
       }
      ]
-    },
-    {
-     "team": "LA",
-     "team_name": "Los Angeles Rams",
-     "changed": [
-      {
-       "column": "archive_abbr",
-       "prior": "LAR",
-       "current": "LA"
-      }
-     ]
     }
    ],
    "prior_source_url": "https://www.nfl.com/stats/team-stats/",
-   "finding": "30 of 32 teams are cell-for-cell identical. Only WAS and NYG moved, again because of the Thursday night game."
+   "derived_abbr_mapping_diffs": [
+    {
+     "team": "AZ",
+     "prior": "ARI",
+     "current": "AZ"
+    },
+    {
+     "team": "LA",
+     "prior": "LAR",
+     "current": "LA"
+    }
+   ],
+   "finding": "30 of 32 teams are cell-for-cell identical across 576 compared official cells. 2 teams moved across 28 cells (WAS, NYG). Columns that moved: att, cmp, cmp_pct, first_downs, first_pct, int, longest, pass_td, pass_yds, passes_20plus, passes_40plus, rating, sack_yards, sacks, yds_per_att. NFL.com does not state why a value changed, so no cause is asserted here; the Thursday 12 November game is the only result known to have landed between the two reads. Separately, the derived archive-abbreviation column differs for AZ: ARI to AZ, LA: LAR to LA. That column is computed here, not published by the NFL, and it is recorded as an irregularity."
   },
   "injuries": {
    "prior_player_rows": 276,

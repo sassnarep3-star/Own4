@@ -454,6 +454,49 @@ def spot_check():
     return doc
 
 
+def standings_finding(prev, standings, teams_changed, diffs, checked):
+    """Derived, never written by hand: the numbers in the sentence come from the diff itself."""
+    total = len(prev["rows"])
+    identical = total - len(teams_changed)
+    if not teams_changed:
+        return ("All %d teams are cell-for-cell identical to the 2026-11-12 snapshot across %d "
+                "compared cells." % (total, checked))
+    ncells = sum(len(d["changed"]) for d in diffs)
+    names = ", ".join(teams_changed)
+    cols = sorted({c["column"] for d in diffs for c in d["changed"]})
+    return ("%d of %d teams are cell-for-cell identical across %d compared cells. %d teams moved "
+            "across %d cells (%s). Columns that moved: %s. The only result known to have landed "
+            "between the two reads is the Thursday 12 November game, Commanders 24 - Giants 21, "
+            "which NFL.com's scores page shows as Final. NFL.com does not state why any standings "
+            "value changed, so every moved cell is listed here rather than explained away."
+            % (identical, total, checked, len(teams_changed), ncells, names, ", ".join(cols)))
+
+
+def stats_finding(prev, teams_changed, diffs, checked, derived_map):
+    """Descriptive only. NFL.com publishes no reason for a change, so none is asserted."""
+    total = len(prev["rows"])
+    identical = total - len(teams_changed)
+    base = ("%d of %d teams are cell-for-cell identical across %d compared official cells."
+            % (identical, total, checked))
+    if not teams_changed:
+        tail = " No official value moved."
+    else:
+        ncells = sum(len(d["changed"]) for d in diffs)
+        names = ", ".join(teams_changed)
+        cols = sorted({c["column"] for d in diffs for c in d["changed"]})
+        tail = (" %d teams moved across %d cells (%s). Columns that moved: %s. NFL.com does not "
+                "state why a value changed, so no cause is asserted here; the Thursday 12 November "
+                "game is the only result known to have landed between the two reads."
+                % (len(teams_changed), ncells, names, ", ".join(cols)))
+    if derived_map:
+        pairs = ", ".join("%s: %s to %s" % (d["team"], d["prior"], d["current"]) for d in derived_map)
+        tail += (" Separately, the derived archive-abbreviation column differs for %s. That column "
+                 "is computed here, not published by the NFL, and it is recorded as an irregularity."
+                 % pairs)
+    return base + tail
+
+
+
 # ------------------------------------------- diff against the 2026-11-12 peer
 def diff_against_prior(standings, team_stats, injuries_rows, deficiency):
     peer = os.path.join(os.path.dirname(ROOT), "nfl-lines", "data", "official")
@@ -484,10 +527,7 @@ def diff_against_prior(standings, team_stats, injuries_rows, deficiency):
             "teams_identical": len(prev["rows"]) - len(teams_changed),
             "teams_changed": teams_changed, "cell_diffs": diffs,
             "prior_source_url": NFL_STANDINGS,
-            "finding": ("29 of 32 teams are cell-for-cell identical. The only changes are WAS and "
-                        "NYG, and both are explained by one game: Commanders 24, Giants 21 on "
-                        "Thursday 12 November, which NFL.com's scores page shows as Final and "
-                        "which the standings page absorbed between the two reads."),
+            "finding": standings_finding(prev, standings, teams_changed, diffs, checked),
         }
 
     # team stats
@@ -496,7 +536,7 @@ def diff_against_prior(standings, team_stats, injuries_rows, deficiency):
         prev = json.load(open(p))
         cols = prev["columns"]
         cur_by = {r[1]: r for r in team_stats["rows"]}
-        diffs, teams_changed = [], []
+        diffs, teams_changed, derived_map = [], [], []
         checked = 0
         for s in prev["rows"]:
             cur = cur_by[s[1]]
@@ -509,6 +549,11 @@ def diff_against_prior(standings, team_stats, injuries_rows, deficiency):
                 else:
                     a = cur[cols.index(c)]
                 checked += 1
+                if c == "archive_abbr":
+                    # derived mapping column, not an official value: recorded separately
+                    if not num_eq(str(s[i]), str(a)):
+                        derived_map.append(dict(team=s[1], prior=s[i], current=a))
+                    continue
                 if not num_eq(str(s[i]), str(a)):
                     changed.append(dict(column=c, prior=s[i], current=a))
             if changed:
@@ -519,8 +564,8 @@ def diff_against_prior(standings, team_stats, injuries_rows, deficiency):
             "teams_identical": len(prev["rows"]) - len(teams_changed),
             "teams_changed": teams_changed, "cell_diffs": diffs,
             "prior_source_url": NFL_TEAM_STATS,
-            "finding": ("30 of 32 teams are cell-for-cell identical. Only WAS and NYG moved, "
-                        "again because of the Thursday night game."),
+            "derived_abbr_mapping_diffs": derived_map,
+            "finding": stats_finding(prev, teams_changed, diffs, checked, derived_map),
         }
 
     # injuries
