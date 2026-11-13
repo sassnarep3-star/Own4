@@ -229,3 +229,20 @@ originated Week 11 own lines, 6 registered strategies with 10 pre-registered gat
 16-item suggestions board, line-by-line repo review, and 16 flagged items. Every table row links an
 official nfl.com source; unverifiable values (market prices, prop prices, depth-chart string labels) are
 blank and flagged — never inferred. Source of truth: `nfl-command/` (see `nfl-command/README.md`).
+## NFL Decision & Strategy Hub (`nfl-arena/`, session arena/d6c72eb4-own4, 2026-11-13)
+
+A decision layer over the whole NFL research estate, plus the first depth-string
+injury tracker. Live at https://sassnarep3-star.github.io/Own4/nfl-arena/ after merge.
+
+- **Executive summary** — `nfl-arena/pages/executive-summary.html`
+- **Questions & answers register** — what is known/unknown before each decision (D-A…D-F), with discovery actions for every gap
+- **Suggestions queue** — 12 proposals with decision paths A/B/C; nothing is implemented until a reviewer picks a path
+- **Strategies & validation gates** — signal research, singles/parlays/prop-combo families, pre-registered gates VG-1…VG-8, luck-removal formulas
+- **Leaderboard & rewards** — 15 registered strategies with Wilson 95% intervals, required-n (80% power) and BH-FDR verdicts beside every ROI; 0 reward-eligible
+- **Injuries & depth deficiencies** — official Week 10 report (326 rows) joined to Starter/2nd/3rd/4th-string depth charts for 8 teams; backup-QB and forced-replacement situations with sources
+- **Line-by-line verification** — 64 checks vs official sources: 0 mismatches, 18 flagged (timing/legend issues)
+- **Flagged for Review** — 13 irregularities (A-01…A-13) with evidence and the reviewer decision each needs
+
+Data pipeline: `python3 nfl-arena/scripts/build_data.py` then `python3 nfl-arena/scripts/build_site.py`,
+validated by `python3 nfl-arena/scripts/check_links.py` (every table row must carry a source link;
+unverifiable values are published blank and flagged).

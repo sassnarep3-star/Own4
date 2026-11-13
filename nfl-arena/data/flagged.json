@@ -1,0 +1,159 @@
+{
+ "dataset": "flagged_irregularities",
+ "session": "arena/d6c72eb4-own4",
+ "captured_utc": "2026-11-13",
+ "policy": "Nothing here blocks publication. Each row states what was found, the evidence, and what a reviewer should decide. Unverified values stay blank on every page; they are never filled in by inference.",
+ "rows": [
+  {
+   "id": "A-01",
+   "severity": "data-quality",
+   "area": "Depth charts",
+   "title": "ESPN status marker 'D' is not defined in ESPN's own glossary",
+   "detail": "The depth charts show the marker 'D' next to four players (MIA WR Chris Bell, SEA LT Charles Cross, SEA LG Quenton Nelson, GB LB Zaire Franklin). ESPN's published glossary on the same page lists only P, Q, O, PUP, SUS, IR. 'D' most likely means Doubtful, but that is an inference, so every 'D' cell is carried verbatim and labelled unverified.",
+   "evidence_urls": [
+    "https://www.espn.com/nfl/team/depth/_/name/sea/seattle-seahawks",
+    "https://www.espn.com/nfl/team/depth/_/name/mia/miami-dolphins"
+   ],
+   "reviewer_decision": "Accept the industry reading 'Doubtful' and normalise it, or leave cells blank/verbatim until ESPN defines it."
+  },
+  {
+   "id": "A-02",
+   "severity": "source-conflict",
+   "area": "Injuries",
+   "title": "Arden Key (IND): official report says Questionable, ESPN depth chart says IR",
+   "detail": "The official NFL.com Week 10 report lists Arden Key (DE, hamstring) as Full Participation with Game Status Questionable. The ESPN Colts depth chart shows him in the 3rd-string LDE slot with an IR marker. Sources disagree; both are published as captured.",
+   "evidence_urls": [
+    "https://www.nfl.com/injuries/",
+    "https://www.espn.com/nfl/team/depth/_/name/ind/indianapolis-colts"
+   ],
+   "reviewer_decision": "Treat the official report as authoritative for game status (recommended), or wait for Saturday inactives."
+  },
+  {
+   "id": "A-03",
+   "severity": "timing",
+   "area": "Injuries",
+   "title": "Sam Darnold (SEA): Friday report carries no game status, NFL.com news and ESPN say Out",
+   "detail": "The official report row shows 'Did Not Participate In Practice' with a blank Game Status, while the NFL.com news item (same site) says 'Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again' and the ESPN chart marks him O. The designation apparently post-dates the report table.",
+   "evidence_urls": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+    "https://www.espn.com/nfl/team/depth/_/name/sea/seattle-seahawks"
+   ],
+   "reviewer_decision": "Use the news designation (recommended, cited) and refresh after the Saturday inactives release."
+  },
+  {
+   "id": "A-04",
+   "severity": "source-conflict",
+   "area": "Injuries",
+   "title": "Kyler Murray (MIN): report shows DNP with no designation, ESPN marks him O",
+   "detail": "Same pattern as A-03 but without an NFL.com news item naming the designation. Treated as unverified; the tracker shows the ESPN marker with its source and keeps the official game status blank.",
+   "evidence_urls": [
+    "https://www.nfl.com/injuries/",
+    "https://www.espn.com/nfl/team/depth/_/name/min/minnesota-vikings"
+   ],
+   "reviewer_decision": "Wait for the Saturday designation before acting on MIN QB depth."
+  },
+  {
+   "id": "A-05",
+   "severity": "data-quality",
+   "area": "Peer data",
+   "title": "nfl-lines injury capture predates Friday game-status designations",
+   "detail": "nfl-lines/data/derived/deficiency.json shows questionable=0 for every team because it was captured before Friday's Out/Questionable designations existed. My Friday capture shows, e.g., NE with 3 Out and 9 Questionable. Counted rows per team also differ slightly (Wednesday/Thursday additions). This is a staleness issue, not a transcription error.",
+   "evidence_urls": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/deficiency.json",
+    "https://www.nfl.com/injuries/"
+   ],
+   "reviewer_decision": "Automate a Friday re-capture (see suggestion S-04) or accept the tracker as Wednesday-state data."
+  },
+  {
+   "id": "A-06",
+   "severity": "source-conflict",
+   "area": "Market lines",
+   "title": "WAS @ NYG Thursday spread differs between datasets (1.5 archive closing vs 2.5 nfl-lines capture)",
+   "detail": "The nflverse archive games.csv holds spread_line 1.5 for the settled Thursday game; the nfl-lines walk-forward file recorded market_spread_line 2.5 (an earlier market number). Totals agree at 40.5. Sign convention of spread_line in the archive is also not documented in the files (home-perspective assumed) \u2014 see Q-07.",
+   "evidence_urls": [
+    "https://github.com/nflverse/nfldata",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/own_lines_week10.json"
+   ],
+   "reviewer_decision": "Standardise on one market source with explicit capture timestamps (see suggestion S-05)."
+  },
+  {
+   "id": "A-07",
+   "severity": "process",
+   "area": "Repository",
+   "title": "Eleven overlapping NFL namespaces duplicate each other",
+   "detail": "nfl/, nfl-audit/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-lab/, nfl-lines/, nfl-quant/, nfl-research/ each publish NFL analysis. Facts can drift between them (this review already found A-05/A-06 drift). Peer sessions logged this as SG-11 / IR-09 without acting.",
+   "evidence_urls": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "reviewer_decision": "Pick one canonical NFL namespace for facts and demote the rest to archives (see suggestion S-01)."
+  },
+  {
+   "id": "A-08",
+   "severity": "process",
+   "area": "Repository",
+   "title": "COORDINATION.md header still titles the project 'NBA Line Origination Research'",
+   "detail": "The shared task board header predates the NFL work; the file now mostly documents NFL sessions. Cosmetic, but misleading for new sessions.",
+   "evidence_urls": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+   ],
+   "reviewer_decision": "Retitle to reflect the multi-project state (see suggestion S-02)."
+  },
+  {
+   "id": "A-09",
+   "severity": "data-quality",
+   "area": "Market lines",
+   "title": "Week 10 lines are pre-game, not closing lines",
+   "detail": "13 of 14 Week 10 games are unplayed as of 2026-11-13. Only the Thursday game has settled. Any model-vs-market gap computed on Week 10 is against an in-progress market number and will move.",
+   "evidence_urls": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "reviewer_decision": "Re-settle Week 10 with closing numbers after MNF (see suggestion S-06)."
+  },
+  {
+   "id": "A-10",
+   "severity": "data-quality",
+   "area": "Injuries",
+   "title": "Official report shows blank 'Injuries' and 'Game Status' cells for many players",
+   "detail": "As published: players with no injury designation but limited/DNP practice appear with blank cells. These blanks are preserved as blanks. They are not zeros and not 'probable'.",
+   "evidence_urls": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "reviewer_decision": "None needed; documented behaviour of the source."
+  },
+  {
+   "id": "A-11",
+   "severity": "scope",
+   "area": "Depth charts",
+   "title": "Depth-string verification covers 8 of 32 teams this cycle",
+   "detail": "NE, BAL, MIA, SEA, DET, IND, MIN, GB were depth-verified from ESPN charts (the teams with confirmed starter absences). The other 24 teams have official injury rows but blank depth-string columns.",
+   "evidence_urls": [
+    "https://www.espn.com/nfl/depth"
+   ],
+   "reviewer_decision": "Fund a full 32-team capture cadence (see suggestion S-03)."
+  },
+  {
+   "id": "A-12",
+   "severity": "source-type",
+   "area": "Depth charts",
+   "title": "Depth charts are third-party (ESPN/RotoWire), not published by the NFL",
+   "detail": "The NFL does not publish official depth charts. Every string rank (Starter/2nd/3rd/4th) on this site comes from ESPN's chart (data powered by RotoWire) and is labelled THIRD-PARTY everywhere it appears.",
+   "evidence_urls": [
+    "https://www.espn.com/nfl/team/depth/_/name/ne/new-england-patriots"
+   ],
+   "reviewer_decision": "Accept third-party depth with labels (recommended), or leave string columns blank."
+  },
+  {
+   "id": "A-13",
+   "severity": "data-quality",
+   "area": "Player props",
+   "title": "No verifiable player-prop PRICES exist; player game logs DO exist (this finding amends the original A-13)",
+   "detail": "Player game logs are published officially on nfl.com player pages (Summary/Logs/Career tabs) \u2014 verified 2026-11-13 on https://www.nfl.com/players/drake-maye/stats (Recent Games + Career tables). Peer session arena/1880ad1e-own4 first unblocked this. What remains unavailable everywhere: player-prop betting PRICES (the NFL publishes no odds at all) \u2014 so prop rows are gradeable but not price-verifiable, and every prop-price cell stays blank.",
+   "evidence_urls": [
+    "https://www.nfl.com/players/drake-maye/stats",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/props.html"
+   ],
+   "reviewer_decision": "Accept official logs as the grading source for prop strategies (recommended) and keep all price cells blank until a licensed odds feed exists (S-07)."
+  }
+ ]
+}
