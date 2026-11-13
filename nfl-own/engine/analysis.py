@@ -971,6 +971,20 @@ def main():
     forecasts = build_forecasts(games)
     results = run_strategies(forecasts)
     corr = correlations(games, players)
+    hold = [f for f in forecasts if f["season"] >= HOLDOUT_START and f["mkt_spread"] is not None]
+    accuracy = {
+        "dataset": "own_line_accuracy_vs_closing_line",
+        "n": len(hold),
+        "spread_mae_own": mean([abs(f["home_score"] - f["away_score"] - f["own_margin"]) for f in hold]),
+        "spread_mae_market": mean([abs(f["home_score"] - f["away_score"] - f["mkt_spread"]) for f in hold]),
+        "spread_mae_naive_hfa": mean([abs(f["home_score"] - f["away_score"] - 1.58) for f in hold]),
+        "total_mae_own": mean([abs(f["home_score"] + f["away_score"] - f["own_total"]) for f in hold]),
+        "total_mae_market": mean([abs(f["home_score"] + f["away_score"] - f["mkt_total"]) for f in hold]),
+        "mean_abs_disagreement": mean([abs(f["own_margin"] - f["mkt_spread"]) for f in hold]),
+        "meaning": "Our own line is worse than the closing line it would have to beat. A naive "
+                   "home-field-only forecast is shown as the floor.",
+        "source_url_archive": "https://github.com/nflverse/nfldata",
+    }
     luck = luck_battery(games, results)
     ratings, lines, meta = originate(None, standings, slate, team_stats, games)
 
@@ -1181,6 +1195,7 @@ def main():
                     "lucky window.",
             "rows": eligibility,
         },
+        "accuracy.json": accuracy,
         "integrity.json": {"dataset": "analysis_integrity", "official": integrity},
         "questions.json": {"dataset": "decision_register", "rows": questions_register(integrity)},
         "suggestions.json": {"dataset": "suggestions_register", "rows": suggestions_register()},
