@@ -153,7 +153,7 @@ Q = [
  dict(id="Q15", group="Product", status=UNKNOWN, blocks="everything downstream",
    question="Which single dashboard is canonical?",
    answer="",
-   known="The repository currently holds five NFL namespaces built by different sessions: nfl/, nfl-research/, nfl-lab/, nfl-quant/ and this nfl-decision/.",
+   known="The repository currently holds eight NFL namespaces built by different sessions: nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-decisions/, nfl-hub/, nfl-audit/ and this nfl-decision/.",
    known_sources=[("repo root navigation", "https://github.com/sassnarep3-star/Own4")],
    unknown="Which one the owner will treat as the source of truth.",
    why_it_blocks="Duplicated, partially conflicting dashboards make it impossible to know which number is authoritative.",
