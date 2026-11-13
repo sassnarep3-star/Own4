@@ -72,10 +72,10 @@ def pearson(xs, ys):
     n = len(xs)
     if n < 3:
         return None
-    mx, my = sum(xs) / n, sum(ys) / n
-    sxy = sum((x - mx) * (y - my) for x, y in zip(xs, ys))
-    sxx = sum((x - mx) ** 2 for x in xs)
-    syy = sum((y - my) ** 2 for y in ys)
+    mx, my = mean(xs), mean(ys)
+    sxy = math.fsum((x - mx) * (y - my) for x, y in zip(xs, ys))
+    sxx = math.fsum((x - mx) ** 2 for x in xs)
+    syy = math.fsum((y - my) ** 2 for y in ys)
     if sxx <= 0 or syy <= 0:
         return None
     return sxy / math.sqrt(sxx * syy)
@@ -100,7 +100,7 @@ def binom_p(k, n, p=0.5):
     """One-sided exact binomial tail P(X >= k)."""
     if n == 0:
         return 1.0
-    return sum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k, n + 1))
+    return math.fsum(math.comb(n, i) * p ** i * (1 - p) ** (n - i) for i in range(k, n + 1))
 
 
 def bh_fdr(pvals):
@@ -117,8 +117,15 @@ def bh_fdr(pvals):
     return q
 
 
+def _fsum_sum(xs):
+    """Sum with math.fsum, which is correctly rounded and therefore identical on every Python
+    version. Builtin sum() became compensated in 3.12 and can differ from 3.11 in the last bit,
+    which would make the published files rebuild differently on CI than locally."""
+    return math.fsum(xs)
+
+
 def mean(xs):
-    return sum(xs) / len(xs) if xs else None
+    return _fsum_sum(xs) / len(xs) if xs else None
 
 
 def r2(x):
@@ -502,7 +509,7 @@ def run_strategies(forecasts):
         for l in legs:
             seas[l[1]].append(l[0])
         stable = [s for s in seas if len(seas[s]) >= 20]
-        ok_seasons = [s for s in stable if (sum(seas[s]) / len(seas[s])) > be]
+        ok_seasons = [s for s in stable if mean(seas[s]) > be]
         stability = (len(ok_seasons) / len(stable)) if stable else None
         # G9 week-clustered bootstrap
         clusters = defaultdict(list)
@@ -514,7 +521,7 @@ def run_strategies(forecasts):
             for _ in range(2000):
                 pick = [RNG.choice(keys) for _ in keys]
                 vals = [v for kk in pick for v in clusters[kk]]
-                boot.append(sum(vals) / len(vals))
+                boot.append(mean(vals))
             boot.sort()
             lo, hi = boot[int(0.025 * len(boot))], boot[int(0.975 * len(boot)) - 1]
         else:
