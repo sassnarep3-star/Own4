@@ -159,7 +159,8 @@ def load_games():
 # --------------------------------------------------------------------------- ratings
 # Model configuration. Chosen on the DEV window only (seasons 2002-2010 forecasts), never on
 # the holdout, which starts in 2017. The grid and its results are printed by
-# engine/tune.py and recorded in data/derived/model_selection.json.
+# engine/tune.py (a development-only check that re-scores the same grid and confirms these
+# constants) and recorded in data/derived/model_selection.json.
 SEASONS_BACK = 3
 RIDGE = 40.0
 HFA_PRIOR = 1.8
@@ -593,18 +594,23 @@ def correlations(games, players):
             val = g[5]                                # yards column in every log kind
             by_game[(p["team"], wk)][slug] = val
     pairs = [
-        ("C5", "QB passing yards vs his WR receiving yards (same game)", "drake-maye", "a-j-brown"),
-        ("C6", "QB passing yards vs his RB rushing yards (same game)", "drake-maye", "jahmyr-gibbs"),
-        ("C7", "QB passing yards vs his WR receiving yards (same game)", "jared-goff", "amon-ra-st-brown"),
-        ("C8", "QB passing yards vs his WR receiving yards (same game)", "josh-allen", "a-j-brown"),
-        ("C9", "Same-club RB rushing yards vs WR receiving yards", "jahmyr-gibbs", "amon-ra-st-brown"),
+        ("C5", "QB passing yards vs his WR receiving yards (same game, same club)",
+         "jared-goff", "amon-ra-st-brown", True),
+        ("C6", "RB rushing yards vs WR receiving yards (same game, same club)",
+         "jahmyr-gibbs", "amon-ra-st-brown", True),
+        ("C7", "QB passing yards vs his WR receiving yards (same game, same club)",
+         "drake-maye", "a-j-brown", True),
+        ("C8", "Control: two players in DIFFERENT clubs, matched by week",
+         "drake-maye", "jahmyr-gibbs", False),
     ]
-    for cid, label, a, b in pairs:
+    for cid, label, a, b, same_club in pairs:
         pa, pb = logs[a], logs[b]
-        # join on (week) inside the same club only
         ma = {g[0]: g[5] for g in pa["games"]}
         mb = {g[0]: g[5] for g in pb["games"]}
-        common = sorted(set(ma) & set(mb)) if pa["team"] == pb["team"] else []
+        if same_club and pa["team"] != pb["team"]:
+            common = []
+        else:
+            common = sorted(set(ma) & set(mb))
         if len(common) >= 4:
             xs = [ma[w] for w in common]
             ys = [mb[w] for w in common]
@@ -612,14 +618,19 @@ def correlations(games, players):
             lo, hi = fisher_ci(r, len(common))
             corr.append({"id": cid, "level": "player", "label": label, "r": r2(r),
                          "ci_lo": r2(lo), "ci_hi": r2(hi), "n": len(common),
-                         "note": "Official per-game logs, weeks %s." % ",".join(str(w) for w in common),
+                         "note": "Official per-game logs, %s weeks %s. %s" % (
+                             "shared" if same_club else "same",
+                             ",".join(str(w) for w in common),
+                             "Same club, so dependence is expected." if same_club else
+                             "Different clubs: the value should be near zero, which is the point "
+                             "of a control."),
                          "a": a, "b": b,
                          "source_url": logs[a]["url"] + " | " + logs[b]["url"]})
         else:
             corr.append({"id": cid, "level": "player", "label": label, "r": None,
                          "ci_lo": None, "ci_hi": None, "n": len(common),
-                         "note": "Not enough overlapping official game logs in this session "
-                                 "(needs 4+ shared weeks). Blank, not estimated.",
+                         "note": "Only %d shared official week(s) in this session; 4 are needed. "
+                                 "Published blank rather than estimated." % len(common),
                          "a": a, "b": b,
                          "source_url": logs[a]["url"] + " | " + logs[b]["url"]})
     return corr
@@ -1031,39 +1042,55 @@ def main():
             won = actual > own_line
             prop_grade.append({"slug": slug, "week": p["games"][i][0],
                                "own_line": own_line, "actual": actual, "over_won": won})
+    prop_names = {"PR1": "QB passing yards over the own line",
+                  "PR2": "WR receiving yards over the own line",
+                  "PR3": "RB rushing yards over the own line"}
     for p_sid, fam in (("PR1", "passing"), ("PR2", "receiving"), ("PR3", "rushing")):
         subset = [x for x in prop_grade
                   if players["logs"][x["slug"]]["kind"] == fam]
         n = len(subset)
         k = sum(1 for x in subset if x["over_won"])
         rate = (k / n) if n else None
-        prop_rows.append({"id": p_sid, "n": n, "over_rate": rate,
+        prop_rows.append({"id": p_sid, "name": prop_names[p_sid], "n": n, "over_rate": rate,
                           "note": "Over rate against a rolling own line built only from earlier "
-                                  "official games. Small n; no gate can pass at this sample."})
+                                  "official games. %d graded decisions; no sample gate can pass." % n})
     # same-player combos: joint hit rate vs the product of the two legs
     combos = []
     lg = players["logs"]
-    for cid, a, b, label in (
-            ("PR4", "drake-maye", "a-j-brown", "QB over + WR over (New England, same game)"),
-            ("PR5", "drake-maye", "jahmyr-gibbs", "QB over + RB over (different clubs - control)")):
-        ma = {g[0]: g[5] for g in lg[a]["games"]}
-        mb = {g[0]: g[5] for g in lg[b]["games"]}
-        common = sorted(set(ma) & set(mb))
-        if len(common) < 4 or lg[a]["team"] != lg[b]["team"]:
-            combos.append({"id": cid, "label": label, "n": 0, "joint": None, "independent": None,
-                           "note": "No same-club overlapping official logs in this session; the "
-                                   "combo cannot be graded and is left blank."})
+    for cid, a, b, label, same_club in (
+            ("PR4", "jared-goff", "amon-ra-st-brown",
+             "QB over + his WR over, same club and same game (Detroit)", True),
+            ("PR5", "drake-maye", "jahmyr-gibbs",
+             "Control: QB over + a RB over from a DIFFERENT club, matched by week", False)):
+        la = {g[0]: g[5] for g in lg[a]["games"]}
+        lb = {g[0]: g[5] for g in lg[b]["games"]}
+        if same_club and lg[a]["team"] != lg[b]["team"]:
+            common = []
+        else:
+            common = sorted(set(la) & set(lb))
+        if len(common) < 4:
+            combos.append({"id": cid, "label": label, "n": len(common), "r": None, "joint": None,
+                           "independent": None,
+                           "note": "Only %d shared official week(s); 4 are needed, so the combo is "
+                                   "published blank rather than estimated." % len(common)})
             continue
-        xs, ys = [ma[w] for w in common], [mb[w] for w in common]
+        xs, ys = [la[w] for w in common], [lb[w] for w in common]
         r = pearson(xs, ys)
-        pa = sum(1 for x in xs if x > mean(xs)) / len(xs)
-        pb = sum(1 for y in ys if y > mean(ys)) / len(ys)
-        joint = sum(1 for x, y in zip(xs, ys) if x > mean(xs) and y > mean(ys)) / len(xs)
+        ma_, mb_ = mean(xs), mean(ys)
+        pa = sum(1 for x in xs if x > ma_) / len(xs)
+        pb = sum(1 for y in ys if y > mb_) / len(ys)
+        joint = sum(1 for x, y in zip(xs, ys) if x > ma_ and y > mb_) / len(xs)
+        # the same-week correlation of these legs prices the combo; the product of the legs is
+        # what a naive parlay builder would assume.
+        independent = pa * pb
         combos.append({"id": cid, "label": label, "n": len(common), "r": r2(r),
-                       "p_a": pa, "p_b": pb, "joint": joint, "independent": pa * pb,
-                       "note": "Joint hit rate against the product of the two legs. A gap means "
-                               "multiplicative pricing is wrong for this pair."})
-
+                       "p_a": pa, "p_b": pb, "joint": joint, "independent": independent,
+                       "lift": (joint / independent) if independent else None,
+                       "note": "Joint hit rate against the product of the two legs. A lift away "
+                               "from 1.0 means multiplicative parlay pricing is wrong for this "
+                               "pair. %s" % ("Same club: dependence expected." if same_club
+                                             else "Different clubs: near 1.0 is the expected "
+                                                  "control.")})
     # ---- competition table
     board = []
     points_per_gate = 50
@@ -1088,7 +1115,7 @@ def main():
                       "tier": "Rejected", "eligible": False, "points_awarded": 0,
                       "grades_basis": "12 pre-registered gates; rewards pay only on 12/12"})
     for pr in prop_rows:
-        board.append({"rank": 0, "id": pr["id"], "family": "prop", "name": pr["id"],
+        board.append({"rank": 0, "id": pr["id"], "family": "prop", "name": pr["name"],
                       "n": pr["n"], "hit_rate": pr["over_rate"], "break_even": 0.5,
                       "p_value": None, "q_value": None, "bootstrap": [None, None],
                       "placebo_p": None, "gates_passed": "2/12",

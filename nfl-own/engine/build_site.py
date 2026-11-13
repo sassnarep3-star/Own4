@@ -772,27 +772,29 @@ def build():
              'claimed as an edge. What it does prove is that the data exists and the method works, '
              'so the next session can scale it by reading more logs (suggestion S-01).</p></div>')
     rows = []
+    cat = {"PR1": "passing", "PR2": "receiving", "PR3": "rushing"}
     for pr in strategies["prop"]:
-        rows.append([esc(pr["id"]), num(pr["n"], 0), pct(pr["over_rate"]),
+        rows.append([esc(pr["id"]), esc(pr["name"]), num(pr["n"], 0), pct(pr["over_rate"]),
                      esc(pr["note"]),
-                     link("https://www.nfl.com/stats/player-stats/category/passing/2026/reg/all/passingyards/desc",
-                          "leaderboard")])
-    b.append(table(["Strategy", "Decisions", "Over rate", "Construction", "Source"], rows,
-                   numeric=(1, 2), note="Over rate against a rolling own line. No gate can pass at "
-                                        "this sample size; the rows are shown so the method is auditable."))
+                     link("https://www.nfl.com/stats/player-stats/category/%s/2026/reg/all"
+                          % cat[pr["id"]], "leaderboard")])
+    b.append(table(["Strategy", "What it bets", "Decisions", "Over rate", "Construction", "Source"],
+                   rows, numeric=(2, 3),
+                   note="Over rate against a rolling own line. No gate can pass at this sample "
+                        "size; the rows are shown so the method is auditable."))
     b.append("<h2>Prop combos: is the joint rate the product of the legs?</h2>")
     rows = []
     for c in strategies["combos"]:
         rows.append([esc(c["id"]), esc(c["label"]), num(c["n"], 0),
-                     num(c.get("r"), 3), num(c.get("joint"), 3), num(c.get("independent"), 3),
-                     esc(c["note"]),
+                     num(c.get("r"), 3), pct(c.get("joint")), pct(c.get("independent")),
+                     num(c.get("lift"), 2), esc(c["note"]),
                      link("https://www.nfl.com/players/drake-maye/stats/logs/", "logs")])
-    b.append(table(["ID", "Combo", "N", "r", "Joint rate", "Product of legs", "Note", "Source"],
-                   rows, numeric=(2, 3, 4, 5),
+    b.append(table(["ID", "Combo", "N", "r", "Joint rate", "Product of legs", "Lift", "Note",
+                    "Source"], rows, numeric=(2, 3, 4, 5, 6),
                    note="Where the joint rate and the product differ, multiplicative parlay "
-                        "pricing is wrong for that pair. Two combos could not be graded because the "
-                        "two players share too few weeks in the official logs; those rows are blank, "
-                        "not estimated."))
+                        "pricing is wrong for that pair. Where the two players share fewer than "
+                        "four official weeks the row is blank, not estimated. Lift is the joint "
+                        "rate divided by the product of the legs: 1.00 means independence."))
     b.append('<div class="box"><p><strong>Why same-player combos are different.</strong> A '
              'quarterback\'s passing yards and his receiver\'s receiving yards move together: the '
              'receiver gains exactly what the passer throws. Multiplying their probabilities '
