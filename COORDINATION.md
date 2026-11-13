@@ -1960,3 +1960,76 @@ https://sassnarep3-star.github.io/Own4/index.html .
 **Final local verification state:** 20 pages, 1,140 local links checked, **0 broken**,
 969 data rows, **969 rows carrying a source link**, 43 blank (unverified) cells published
 as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 all pass.
+
+---
+
+## Session `arena/582300df-own4` — NFL Command Center (canonical NFL decision dashboard)
+
+**Session ID:** `arena/582300df-own4` · **Branch:** `arena/582300df-own4` (platform-pinned; the requested
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior
+session) · **Base commit:** `553c3f053608fd74043192864908508bef60ebfd` (main, PR #74)
+
+**Claim pushed before any implementation.** At claim time `origin/main` held exactly one remote branch
+(`main`); no other Arena branch and no other session claim was visible, so no peer work is displaced. The
+last peer commits are from 2026-11-12 (2026-11-06 for the older workstreams) and every board item above is
+`done` or `needs review`.
+
+### Why a new namespace
+
+Eleven NFL workspaces already exist on `main` (`nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`,
+`nfl-decisions/`, `nfl-hub/`, `nfl-intel/`, `nfl-audit/`, `nfl-decision/`, `nfl-edge/`, `nfl-lines/`) and
+several of them carry a *canonical* claim from earlier sessions. This session therefore:
+
+* does **not** edit any of them, and does **not** rename, move or delete any of them;
+* builds its own isolated namespace `nfl-command/**` with its **own independently captured official data**
+  (it does not inherit peer numbers);
+* publishes the **cross-namespace audit** the brief asks for ("review the repo, work line by line, flag
+  irregularities") — every one of the eleven NFL workspaces plus the root site is audited mechanically and
+  its irregularities are listed with links;
+* records a **consolidation recommendation** in the suggestions board, and does **not** implement it,
+  because the brief requires a reviewer to choose a path before changes are made.
+
+### Claimed file scope (exclusive to this session)
+
+| Path | Contents |
+|---|---|
+| `nfl-command/**` | New isolated namespace: data capture, engine, gates, site, verifier |
+| `nfl-command/EXECUTIVE_SUMMARY.md` | Executive summary |
+| `.github/workflows/nfl-command.yml` | Isolated CI: rebuild → verify → byte-identical gate |
+| `COORDINATION.md` | Append-only (this section and later records) |
+| `README.md` | Append-only addendum |
+| `index.html` | **One additive** navigation link at final integration only |
+
+**Read-only for this session (never edited):** `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`,
+`nfl-decisions/`, `nfl-hub/`, `nfl-intel/`, `nfl-audit/`, `nfl-decision/`, `nfl-edge/`, `nfl-lines/`,
+`docs/`, `lab/`, `lines-lab/`, `pipeline/`, `verified/`, `verification*/`, `data/`, `engine/`, `scripts/`,
+`tests/`, `nba-evidence/`, `status/`, `rental*/`, `rent-*/`, `own4-dashboard/`.
+
+### Task board (this session)
+
+| ID | Task | Status | Owner session | File scope |
+|----|------|--------|---------------|------------|
+| C1 | Repo review, line by line: all 11 NFL workspaces + root site, mechanical + official-source checks, irregularity register | in progress | arena/582300df-own4 | `nfl-command/data/repo_review.json`, `nfl-command/pages/repo-review.html` |
+| C2 | Official-source capture: 2026 standings, Week 10 slate/byes, official injury report, team stats, official results, rules | in progress | arena/582300df-own4 | `nfl-command/data/official/*.json` |
+| C3 | Own-line origination (walk-forward model, no market claim) | in progress | arena/582300df-own4 | `nfl-command/engine/*.py`, `nfl-command/data/derived/*.json` |
+| C4 | Strategy registry: singles, parlays, player-prop combos | in progress | arena/582300df-own4 | `nfl-command/data/derived/strategies.json` |
+| C5 | Pre-registered validation gates + luck-removal protocol + skill screens | in progress | arena/582300df-own4 | `nfl-command/data/derived/gates.json`, `nfl-command/data/derived/luck.json` |
+| C6 | Correlation register (game-level, parlay legs, prop combos) with CIs, p, BH-FDR | in progress | arena/582300df-own4 | `nfl-command/data/derived/correlations.json` |
+| C7 | Leaderboard competition + reward policy | in progress | arena/582300df-own4 | `nfl-command/data/derived/leaderboard.json` |
+| C8 | Injury tracker + 2nd/3rd/4th-string depth-deficiency watchlist | in progress | arena/582300df-own4 | `nfl-command/data/derived/injuries.json`, `nfl-command/data/derived/deficiency.json` |
+| C9 | Requirements traceability register (every requirement from the brief → status → evidence) | in progress | arena/582300df-own4 | `nfl-command/data/requirements.json` |
+| C10 | Decision register: question / information / answer / blocker / discovery suggestion | in progress | arena/582300df-own4 | `nfl-command/data/questions.json` |
+| C11 | Suggestions board with a review workflow (nothing auto-implemented) | in progress | arena/582300df-own4 | `nfl-command/data/suggestions.json` |
+| C12 | Site: landing + category subpages + Flagged for Review; row-level source links; verifier | in progress | arena/582300df-own4 | `nfl-command/**` |
+| C13 | Executive summary | in progress | arena/582300df-own4 | `nfl-command/EXECUTIVE_SUMMARY.md` |
+| C14 | Final integration: re-verify line by line, link check, PR → main → merge → Pages deploy confirmation | pending | arena/582300df-own4 | root `index.html` (one additive link), `COORDINATION.md`, `README.md` |
+
+### Log
+
+- 2026-11-13 — Claimed C1–C14 and pushed this claim before any implementation, per the board protocol.
+  Verified at claim time: `origin/main` == `553c3f0` (PR #74, `nfl-lines`); no other remote branch; working
+  tree clean; no peer claim younger than 60 minutes.
+- 2026-11-13 — Network note: `bash`/`curl` egress is restricted to GitHub + package hosts, so `www.nfl.com`
+  is **not** reachable from the shell. Official NFL pages are captured with the environment's page-fetch
+  tool (which does reach `nfl.com`) and each capture is recorded with its URL and read timestamp. The
+  third-party archive used for *prices* is fetched from `codeload.github.com` and pinned to a commit SHA.
