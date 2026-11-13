@@ -2511,3 +2511,42 @@ Brief requirement → home on site → verdict (re-read this session):
 
 No requirement is missing a home. The open items are quality defects (VR-01…VR-05) and
 review ergonomics (VR-07), all published as proposals rather than implemented.
+
+### Session arena-107d5836-own4 — COMPLETION RECORD (2026-11-13 UTC)
+
+**PR:** https://github.com/sassnarep3-star/Own4/pull/88 — merged to main without approval wait
+as instructed (**merge commit `4730072`**), after all checks passed on the head commit
+`5dd6e70`: Rebuild and verify ×2, audit, validate, verify ×2 — all green.
+
+**Rebase log:** before the PR, `git pull --rebase origin main` hit two conflicts, both resolved
+as append-only supersets: (1) `COORDINATION.md` — kept session arena/22679198's claim +
+completion record AND this session's claim; (2) `index.html` nav — kept every peer entry
+(nfl-arena etc.) AND this session's two verification links. A third conflict (my claim commit)
+was applied first without further issue. All local gates re-run green on the combined tree:
+verification-2026-11-05 unittest ×6, verify_site (14 pages / 346 rows), assert_publication,
+pages suite (build + tests ×6 + verify_data + check_site), plus a full-repo scan:
+**382 pages, 23,413 link references, 0 broken** (includes peers' nfl-arena / nfl-own /
+nfl-command namespaces).
+
+**GitHub Pages:** deployment confirmed live by fetching the deployed URLs —
+`/Own4/verification-2026-11-13/`, `/Own4/verification-2026-11-13/flagged.html` (full VR-01…VR-07
+content), and the root dashboard all serve the post-merge tree. **Build-status anomaly recorded:**
+the Pages API reports `errored / "Page build failed"` for merge commits `75d9fbd` (PR #83),
+`22e6d79` (PR #87) and `4730072` (PR #88), yet the artifacts for `4730072` (this session's pages,
+which exist only in that commit) are demonstrably served, and neighbouring builds
+(`2f96aa0`, `fd76f0f`, `7ba2ae4`, `74f783d`, `0c2da76`) report `built`. The failures cluster
+seconds apart (22:08:50 and 22:09:11), consistent with a transient/racing build rather than a
+content defect; a manual rebuild trigger is not permitted to this token (HTTP 403), so the next
+push to main is used to re-trigger and re-check. No broken site is being declared on the basis
+of a status flag alone — content was re-fetched and verified after the flag.
+
+**Left open on purpose (other sessions' claims, not touched):** PR #29 (coordination record),
+#39 + #43 (NBA line lab), #47 + #56 + #59 (SF rental dashboards) — all predate this session's
+work and belong to verticals outside the NFL verification scope.
+
+**Final state of this session's scope:** all three tasks (S1 verification, S2 coverage map,
+S3 integration) done; deliverables live at
+https://sassnarep3-star.github.io/Own4/verification-2026-11-13/ and .../flagged.html;
+7 irregularities published for review (VR-01…VR-07), 7 proposed suggestions (VR-S1…VR-S7)
+awaiting owner choice, nothing inferred, no peer file edited beyond the additive root/generator
+nav entries recorded in the S1-S2 commit.
