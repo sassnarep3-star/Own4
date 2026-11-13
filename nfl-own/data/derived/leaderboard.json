@@ -1,7 +1,13 @@
 {
  "dataset": "competition_leaderboard",
- "points_policy": "50 points per gate passed, paid only on a 12/12 finish.",
+ "points_policy": "1000 points per qualifying strategy, paid only on a 12/12 finish; no partial credit (adopted from nfl-edge/data/gates.json).",
  "total_points_awarded": 0,
+ "reward_policy": {
+  "points_per_qualifying_strategy": 1000,
+  "rule": "A strategy earns 1000 points only if all twelve gates pass; otherwise 0. No partial credit and no discretionary bonus. This is the repository's existing rule, not a new one.",
+  "points_available_across_entries": 19000,
+  "adopted_from": "nfl-edge/data/gates.json"
+ },
  "rewards_note": "Points, not money. Zero points awarded because no entry reached 12/12.",
  "rows": [
   {

@@ -307,6 +307,7 @@ def build():
     elig = load("eligibility.json")
     games = load("games.json")
     acc = load("accuracy.json")
+    policy = load("leaderboard.json")["reward_policy"]
     AMO, AMK = acc["spread_mae_own"], acc["spread_mae_market"]
     TMO, TMK = acc["total_mae_own"], acc["total_mae_market"]
     NAIVE = acc["spread_mae_naive_hfa"]
@@ -334,7 +335,7 @@ def build():
             format(sum(r["pf"] for r in standings["rows"]), ","))),
         (str(len(board["rows"])), "strategies graded", "12 pre-registered gates each"),
         ("0", "reward-eligible strategies",
-         "600 points is the maximum any single entry can earn"),
+         "1,000 points each, paid only on a 12/12 finish"),
         ("0", "market prices held", "no official line exists to source"),
         ("%d%%" % round(100 * best["hit_rate"], 1), "best holdout hit rate",
          "%s on %s decisions" % (best["id"], format(best["n"], ","))),
@@ -344,18 +345,20 @@ def build():
                     '<div class="s">%s</div></div>' % (esc(n), esc(l), esc(s)))
     body.append("</div>")
 
+    avail = format(policy["points_available_across_entries"], ",")
     body.append('<div class="box bad"><p><strong>Headline, stated without softening.</strong> '
-                '<strong>0 of %d registered strategies qualify and 0 reward points have been '
-                'awarded</strong> (a perfect twelve-of-twelve entry would earn 600: twelve gates '
-                'at 50 points). The best holdout hit rate is %s%% against a %s%% break-even, '
-                'and it does not survive the split-half retest. The own-line model is worse than '
-                'the closing line it would have to beat on spread error (MAE %.3f vs %.3f, naive '
-                'home-field-only %.3f) on %s holdout games. That is the expected result for public '
-                'data measured against efficient closing lines, and it is published unchanged.'
-                '</p></div>'
-                % (len(board["rows"]), num(100 * best["hit_rate"], 1),
-                   num(100 * best["break_even"], 2), AMO, AMK, NAIVE,
-                   format(acc["n"], ",")))
+                '<strong>0 of %d registered strategies qualify and 0 reward points are '
+                'awarded</strong> (1,000 per qualifying strategy, paid only on a twelve-of-twelve '
+                'finish with no partial credit, so %s points were on the table and none was earned). '
+                'The best '
+                'holdout hit rate is %s%% against a %s%% break-even, and it does not survive the '
+                'split-half retest. The own-line model is worse than the closing line it would '
+                'have to beat on spread error (MAE %.3f vs %.3f, naive home-field-only %.3f) on '
+                '%s holdout games. That is the expected result for public data measured against '
+                'efficient closing lines, and it is published unchanged.</p></div>'
+                % (len(board["rows"]), avail,
+                   num(100 * best["hit_rate"], 1), num(100 * best["break_even"], 2),
+                   AMO, AMK, NAIVE, format(acc["n"], ",")))
 
     body.append("<h2>Read the site in this order</h2>")
     body.append('<div class="grid2">')
@@ -931,15 +934,17 @@ def build():
     # ================================================================= leaderboard
     b = ["<h1>Leaderboard and rewards</h1>"]
     b.append('<p class="lede">A leaderboard competition where points are paid for passing gates, '
-             'never for a lucky hit rate. Fifty points per gate, paid only on a twelve-of-'
-             'twelve finish, so the maximum on offer across %d entries is %s points.</p>'
-             % (len(board["rows"]), format(50 * 12 * len(board["rows"]), ",")))
+             'never for a lucky hit rate. A thousand points per strategy, paid only on a '
+             'twelve-of-twelve finish with no partial credit, so the maximum on offer across %d '
+             'entries is %s points. The rule is the repository\'s existing one, adopted from '
+             'nfl-edge, not a new policy.</p>'
+             % (len(board["rows"]), format(policy["points_available_across_entries"], ",")))
     b.append('<div class="kpis">')
     for n, l, s in [
         (str(len(board["rows"])), "entries graded", "singles, parlays and props"),
         ("0", "reward-eligible", "no entry reached 12/12"),
-        ("0", "points awarded", "%s points were on the table across %d entries"
-         % (format(50 * 12 * len(board["rows"]), ","), len(board["rows"]))),
+        ("0", "points awarded", "of %s on the table across %d entries"
+         % (format(policy["points_available_across_entries"], ","), len(board["rows"]))),
         (pct(board["rows"][0]["hit_rate"]), "top hit rate", board["rows"][0]["id"]),
     ]:
         b.append('<div class="kpi"><span class="n">%s</span><span class="l">%s</span>'
