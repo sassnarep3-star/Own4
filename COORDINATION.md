@@ -2268,3 +2268,31 @@ identity, or (c) a model output whose inputs are (a)/(b) and whose formula is pu
 is inferred; gaps are blank + flagged (16 flags on pages/flagged.html).
 
 - 2026-11-13 — PR/merge result to be recorded below after integration.
+
+### 2026-11-13 — A9 FINAL RESULT — PR, merge and deployment · session arena-934af359-own4
+
+**PR #82** — https://github.com/sassnarep3-star/Own4/pull/82 — *nfl-command: verified NFL
+line-origination dashboard (2026-11-13)*. Merged **2026-11-13T21:57Z**, merge commit
+`2f96aa02152814126483e2aa40c6c138fa202fe5`, no approval required. All checks passed on the PR
+(`nfl-command verify` incl. recompute + rebuild + row/link verifier + determinism gate; plus repo
+`verify` / `validate` / `audit`).
+
+- **Concurrent-integration record:** `origin/main` advanced through peer PRs **#75–#81** (sessions
+  3676fae4, 40caaa81, 22679198, 1880ad1e — `nfl-own/`, `nfl-origination/`, root nav + `verified/`
+  refreshes) while this session worked. Merge conflicts on `COORDINATION.md`, `README.md`, `index.html`
+  were resolved by **union**: every peer entry kept, both coordination records preserved, root
+  navigation contains all peer blocks plus this session's comment-marked block. No peer work discarded.
+- **Deployment CONFIRMED.** `pages build and deployment` for the merge commit: status **built**
+  (created 2026-11-13T21:57:35Z). Live checks after propagation (fetched and read):
+  - https://sassnarep3-star.github.io/Own4/nfl-command/ — dashboard renders (KPIs, headline verdict,
+    correlations table with source links).
+  - https://sassnarep3-star.github.io/Own4/nfl-command/pages/flagged.html — all 16 flags render with
+    source links.
+  - https://sassnarep3-star.github.io/Own4/ — root dashboard serves with the union navigation.
+- **Final local verification state:** 17 pages, 762 table rows, **762 carrying an https source link**,
+  0 broken internal links (`nfl-command/engine/verify_site.py`). Standings identities 32/32; passer-rating
+  identity 32/32; 137-game archive 0-mismatch vs official standings; 3/3 official game-page spot checks
+  exact. Open flags: F-01…F-16 + I-02 (all on `nfl-command/pages/flagged.html`; none blocking).
+
+Tasks A1–A9: **done**. Sources, verification and irregularities recorded in the table above and on the
+site's Repo Review / Flagged pages.
