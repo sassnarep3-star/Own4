@@ -13,7 +13,6 @@ from __future__ import annotations
 import html
 import json
 import os
-from datetime import datetime, timezone
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(ROOT)
@@ -22,7 +21,6 @@ PAGES = os.path.join(ROOT, "pages")
 os.makedirs(PAGES, exist_ok=True)
 
 SNAPSHOT = "2026-11-13"
-BUILD_UTC = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 NFL_STANDINGS = "https://www.nfl.com/standings/league/2026/REG"
 NFL_TEAM_STATS = "https://www.nfl.com/stats/team-stats/"
@@ -128,6 +126,10 @@ def badge(kind, text):
 
 def src_link(url, label):
     return a(url, label + " &#8599;")
+
+
+NFL_NAMESPACE_COUNT = len([d for d in os.listdir(REPO)
+                           if d.startswith("nfl") and os.path.isdir(os.path.join(REPO, d))])
 
 
 # ------------------------------------------------------------------ nav model
@@ -389,9 +391,9 @@ def p_executive_summary():
 
     body.append('<h2>Requirement coverage at a glance</h2>')
     req = requirement_rows()
-    done = sum(1 for r in req if r[1].startswith("Done"))
-    partial = sum(1 for r in req if r[1].startswith("Partial"))
-    blocked = sum(1 for r in req if r[1].startswith("Blocked"))
+    done = sum(1 for r in REQUIREMENTS if r[2] == "Done")
+    partial = sum(1 for r in REQUIREMENTS if r[2] == "Partial")
+    blocked = sum(1 for r in REQUIREMENTS if r[2] == "Blocked")
     body.append(kpi_cards([
         (str(len(req)), "requirements tracked", "brand"),
         (str(done), "done", "ok"),
@@ -615,7 +617,7 @@ QUESTIONS = [
      "Project owner, to decide whether a full re-read is worth the effort.",
      "Blocking", "pages/repo-review.html"),
     ("Q18", "Which namespace is canonical, and what happens to the other NFL workspaces?",
-     "The repository carried eleven NFL namespaces before this integration, each with its own copy of the questions, suggestions and flags.",
+     "The repository carried %d overlapping NFL namespaces before this integration, each with its own copy of the questions, suggestions and flags." % NFL_NAMESPACE_COUNT,
      "This site is the canonical entry point and every other namespace is linked and described on the namespace map.",
      "No decision has been taken to retire, archive or merge the duplicates, and several peer pages carry a hard-coded namespace count that is now stale.",
      "Project owner.",
@@ -670,11 +672,12 @@ def p_questions():
 SUGGESTIONS = [
     ("S01", "Consolidate the NFL work into one canonical, category-organised site and keep every other "
             "namespace as a linked research workspace.",
-     "Before this integration the repository carried eleven separate NFL namespaces, each with its own "
-     "copy of the suggestions board, the question register and the flagged page. A reviewer had eleven "
-     "places to look for the same answer and no single place that was current.",
-     "Option A: keep all eleven and cross-link. Option B: publish one canonical site and archive the "
-     "rest read-only. Option C: pick one peer namespace and rewrite it.",
+     "The repository carries %d overlapping NFL namespaces, each with its own copy of the suggestions "
+     "board, the question register and the flagged page, so a reviewer has that many places to look "
+     "for the same answer and no single place that is current."
+     % NFL_NAMESPACE_COUNT,
+     "Option A: keep all of them and cross-link. Option B: publish one canonical site and archive "
+     "the rest read-only. Option C: pick one peer namespace and rewrite it.",
      "Option B was implemented: this site is the canonical entry point and the namespace map describes "
      "what each peer workspace contains so nothing is hidden or lost.",
      "Low", "High", "Implement", "None - done in this session",
@@ -1450,8 +1453,9 @@ def p_repo_review():
                 '<li><strong>Every market value in the repository is third-party</strong>, because the '
                 'NFL publishes no betting lines. This is labelled throughout and is not a defect, but '
                 'it is the largest single dependency in the research.</li>'
-                '<li><strong>Eleven overlapping NFL namespaces</strong> each carried their own copy of '
-                'the questions, suggestions and flagged pages before this integration.</li></ul></div>')
+                '<li><strong>%d overlapping NFL namespaces</strong> each carried their own copy of '
+                'the questions, suggestions and flagged pages, and more were still being added by '
+                'peer sessions while this site was built.</li></ul></div>' % NFL_NAMESPACE_COUNT)
     body.append('<h2>See also</h2>')
     body.append('<p>The <a href="pages/architecture.html">namespace map</a> lists every published '
                 'namespace in the repository and what it contains, so a reviewer can find the peer '
@@ -1559,13 +1563,25 @@ NAMESPACES = [
 
 def p_architecture():
     body = ['<p class="lede">Every published namespace in the repository and what it contains. '
-            'Eleven NFL workspaces were built by parallel sessions before this integration, each with '
+            '%d NFL workspaces were built by parallel sessions, each with ' % NFL_NAMESPACE_COUNT +
             'its own copy of the questions, suggestions and flagged pages. This site is the canonical '
             'entry point; the rest are research workspaces, and none of them has been deleted or '
             'rewritten.</p>']
     rows = []
     missing = []
-    for slug, name, contains, kind in NAMESPACES:
+    described = {n[0]: n for n in NAMESPACES}
+    entries = list(NAMESPACES)
+    for d in sorted(os.listdir(REPO)):
+        if not os.path.isdir(os.path.join(REPO, d)) or d.startswith("."):
+            continue
+        if d in described or d in ("assets", "node_modules"):
+            continue
+        if not os.path.exists(os.path.join(REPO, d, "index.html")):
+            continue
+        entries.append((d, d, "Added by a peer session after this page was written. No "
+                              "description has been recorded for it yet; open it to see what it "
+                              "contains.", "Research workspace"))
+    for slug, name, contains, kind in entries:
         href = ("@@ROOT@@index.html" if slug == "nfl-hq" else "@@ROOT@@%s/index.html" % slug)
         target = (os.path.join(ROOT, "index.html") if slug == "nfl-hq"
                   else os.path.join(REPO, slug, "index.html"))
@@ -1584,7 +1600,8 @@ def p_architecture():
         note = ("%d listed namespaces have no index.html in the repository, so no link is "
                 "published for them: %s. That is recorded as an irregularity rather than guessed at."
                 % (len(missing), ", ".join(missing)))
-    body.append(table("Published namespaces &#183; %d namespaces" % len(rows),
+    body.append(table("Published namespaces &#183; %d namespaces, discovered at build time"
+                      % len(rows),
                       [("Namespace", ""), ("Name", ""), ("What it contains", ""), ("Role", ""),
                        ("Open", "")], rows, filt=True, note=note))
     body.append('<div class="panel warn"><h3>The decision this map is waiting on</h3><p>Nothing has been '
@@ -1664,15 +1681,17 @@ FLAGS = [
      "archive alone. The score spot-check is therefore strong for the recent weeks and unverified for "
      "the earlier ones.",
      NFL_SCORES9, "Needs review - coverage gap"),
-    ("F15", "The repository carried eleven overlapping NFL namespaces before this integration",
-     "Each had its own copy of the suggestions board, the question register and the flagged page. This "
-     "site is now the canonical entry point and the namespace map describes the rest. Nothing has been "
-     "deleted.",
+    ("F15", "The repository carries %d overlapping NFL namespaces" % NFL_NAMESPACE_COUNT,
+     "Each had its own copy of the suggestions board, the question register and the flagged page, and "
+     "more were still being added by peer sessions while this site was built. This site is the "
+     "canonical entry point and the namespace map describes the rest, including the namespaces that "
+     "appeared after this page was first written. Nothing has been deleted. The count is computed "
+     "from the tree at build time, so it cannot go stale the way the hand-written counts did.",
      REPO_OWN4, "Needs review - architecture decision outstanding"),
     ("F16", "Several peer pages carry a hard-coded count of NFL namespaces that is now stale",
      "The count was written by each session before the other sessions merged, so it went stale as the "
-     "repository grew. One peer pull request is open with an accuracy fix to that count, and this "
-     "integration has added a twelfth namespace. The authoritative count is on the namespace map.",
+     "repository grew. Peer pull requests have since been merged correcting some of those counts. "
+     "The authoritative count is computed from the tree and published on the namespace map.",
      PEER_DECISION, "Needs review - peer file, not edited by this session"),
     ("F17", "Weather for future games cannot be verified from any official source",
      "Wind, temperature, roof and surface come from the third-party archive. One strategy depends on "
@@ -1694,6 +1713,13 @@ def site_verification():
         return json.load(open(path, encoding="utf-8"))
     except (ValueError, OSError):
         return None
+
+
+def page_href(pg):
+    """A verifier page key -> a link that actually resolves, for both site and root pages."""
+    if pg.startswith("(repo root) "):
+        return "@@ROOT@@" + pg[len("(repo root) "):]
+    return "@@ROOT@@nfl-hq/" + pg
 
 
 def blank_inventory():
@@ -1721,7 +1747,7 @@ def blank_inventory():
         if not d["data_rows"]:
             continue
         rows.append([cell(pg), cell(d["data_rows"], cls="num"), cell(d["blank_cells"], cls="num"),
-                     '<td>%s</td>' % src_link("@@ROOT@@nfl-hq/%s" % pg, "open")])
+                     '<td>%s</td>' % src_link(page_href(pg), "open")])
     out.append(table("Blank cells by page &#183; %d pages, %d data rows"
                      % (len(rows), v["data_rows"]),
                      [("Page", ""), ("Data rows", "num"), ("Blank cells", "num"),
@@ -1740,7 +1766,7 @@ def blank_inventory():
     if detail:
         top = sorted(detail, key=lambda d: -d["blank_cells"])[:25]
         rows = [[cell(d["page"]), cell(d["blank_cells"], cls="num"), cell(d["row"]),
-                 '<td>%s</td>' % src_link("@@ROOT@@nfl-hq/%s" % d["page"], "open")]
+                 '<td>%s</td>' % src_link(page_href(d["page"]), "open")]
                 for d in top]
         out.append(table("The 25 rows carrying the most blank cells",
                          [("Page", ""), ("Blanks", "num"), ("Row as published", ""),
