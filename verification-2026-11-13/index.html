@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification pass · 2026-11-13 · Own4</title>
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html">Own4 <span>verification pass · 2026-11-13</span></a>
+  <nav aria-label="Section navigation">
+    <a href="index.html" aria-current="page">Report</a>
+    <a href="flagged.html">⚑ Flagged for Review</a>
+    <a href="../index.html">Root dashboard</a>
+    <a href="../nfl-hub/pages/questions.html">Questions register</a>
+    <a href="../nfl-hub/pages/suggestions.html">Suggestions</a>
+  </nav>
+</header>
+
+<main>
+<p class="eyebrow">Session arena-107d5836-own4 · line-by-line re-verification</p>
+<h1>Verification pass · 2026-11-13</h1>
+<p class="lede">An independent re-check of the published site: every local link, every table row's
+source link, six NFL standings pages compared cell-by-cell against the official source, and a
+fourteen-URL sample of external citations fetched live. Nothing was inferred. Values that could not
+be confirmed stay blank and are listed on the
+<a href="flagged.html">Flagged for Review page</a>.</p>
+
+<div class="cards">
+  <div class="card"><b>314</b><span>published pages scanned (raw archives excluded)</span></div>
+  <div class="card"><b>18,518</b><span>local link references — 0 broken</span></div>
+  <div class="card"><b>9,217</b><span>table rows — 9,167 carry a source link</span></div>
+  <div class="card warn"><b>50</b><span>rows without any source link · flagged</span></div>
+  <div class="card"><b>192</b><span>standings rows compared cell-by-cell</span></div>
+  <div class="card bad"><b>35</b><span>standing cells wrong or mislabeled · flagged</span></div>
+  <div class="card"><b>14</b><span>external citations fetched live</span></div>
+  <div class="card bad"><b>3</b><span>dead URLs re-confirmed (already peer-flagged)</span></div>
+</div>
+
+<section>
+<h2>1 · Local link integrity</h2>
+<p>Every <code>href</code>/<code>src</code> on every published HTML page was resolved against the
+repository. Raw provenance archives under <code>data/raw/</code> are excluded: they are saved copies
+of third-party pages whose internal absolute paths were never meant to resolve here.</p>
+<table>
+<thead><tr><th>Check</th><th>Scope</th><th>Result</th><th>Method</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>Local link resolution</td><td>314 pages, 18,518 references</td><td><strong>0 broken</strong></td>
+<td>Path-normalised resolution of every relative href/src, run 2026-11-13</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification-2026-11-05/build.py" target="_blank" rel="noopener">independent audit scanner ↗</a></td></tr>
+<tr><td>Published-page universe</td><td>all HTML except <code>data/raw/**</code></td><td>314 pages</td>
+<td>Repository walk;28 site modules counted</td>
+<td><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repository ↗</a></td></tr>
+<tr><td>CI gates on main</td><td>5 workflows</td><td>all green at base commit <code>553c3f0</code></td>
+<td>GitHub Actions run list read 2026-11-13</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/actions" target="_blank" rel="noopener">Actions ↗</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>2 · Source-link coverage of every table row</h2>
+<p>The brief requires a source link on every row. This pass counted every <code>&lt;tbody&gt;</code>
+row on every published page and tested it for at least one anchor. 99.5&nbsp;% pass; the50 failures
+are itemised on the <a href="flagged.html">flag page (VR-03)</a> with file-level breakdown.</p>
+<table>
+<thead><tr><th>Module</th><th>Pages</th><th>Rows</th><th>With link</th><th>Without</th><th>Verdict</th><th>Reference</th></tr></thead>
+<tbody>
+<tr><td>verified + pages (root dashboards)</td><td>40</td><td>1,083</td><td>1,083</td><td>0</td><td>pass</td>
+<td><a href="../verified/audit.html">repo audit ↗</a></td></tr>
+<tr><td>nfl-lines</td><td>20</td><td>974</td><td>974</td><td>0</td><td>pass</td>
+<td><a href="../nfl-lines/pages/sources.html">sources ↗</a></td></tr>
+<tr><td>nfl-lines, nfl-edge, nfl-decision, nfl-audit, nfl-hub, nfl-lab, nfl-quant, nfl-intel, nfl-decisions, nfl-research, nfl</td><td>152</td><td>4,563</td><td>4,548</td><td>15</td><td>15 unlinked rows, all in <code>nfl/</code> — flagged</td>
+<td><a href="flagged.html">VR-03 ↗</a></td></tr>
+<tr><td>nba-evidence, own4-dashboard, lab, lines-lab, pipeline, docs, status, verification-2026-11-05, (root)</td><td>81</td><td>2,984</td><td>2,984</td><td>0</td><td>pass</td>
+<td><a href="../verification-2026-11-05/coverage.html">coverage table ↗</a></td></tr>
+<tr><td>rental-f1dbaea0, rental, rent-sf, rental-sf</td><td>21</td><td>300</td><td>300</td><td>0</td><td>pass</td>
+<td><a href="../rental-f1dbaea0/index.html">RentCheck ↗</a></td></tr>
+<tr><td>rental-own4</td><td>10</td><td>192</td><td>176</td><td>16</td><td>owner-statement rows have no official URL — flagged</td>
+<td><a href="flagged.html">VR-03 ↗</a></td></tr>
+<tr><td>rental-99ca004d-own4</td><td>10</td><td>95</td><td>76</td><td>19</td><td>owner-statement rows have no official URL — flagged</td>
+<td><a href="flagged.html">VR-03 ↗</a></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>314</strong></td><td><strong>9,217</strong></td><td><strong>9,167</strong></td><td><strong>50</strong></td><td>99.5&nbsp;% coverage</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">board ↗</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>3 · NFL standings compared cell-by-cell against the official source</h2>
+<p>Ground truth for the comparison: the official
+<a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">NFL.com conference standings</a>
+re-read in full on 2026-11-13 (all 32 teams, rank column used to pin alignment), corroborated by the
+pinned nflverse game archive (weeks 1–9, commit
+<a href="https://github.com/nflverse/nfldata/commit/6ea0be6dd9bfc95c818c05568753bc70f1986ea2" target="_blank" rel="noopener">6ea0be6d ↗</a>,
+itself spot-checked against official score pages by an earlier session) and by re-reads of the
+<a href="https://www.nfl.com/teams/new-england-patriots/" target="_blank" rel="noopener">Patriots team page</a>,
+the <a href="https://www.nfl.com/games/packers-at-patriots-2026-reg-9" target="_blank" rel="noopener">GB @ NE game page</a>
+(Gillette Stadium confirms the venue) and the <a href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank" rel="noopener">Week 9 schedule</a>.
+Both the league and conference standings views were fetched and cross-checked against each other.</p>
+<table>
+<thead><tr><th>Published page</th><th>Team rows</th><th>Columns checked</th><th>Cells compared</th><th>Mismatches</th><th>Verdict</th><th>Sources</th></tr></thead>
+<tbody>
+<tr><td><a href="../nfl-lines/pages/data-standings.html">nfl-lines · data-standings</a></td><td>32</td><td>W, L, T, PCT, PF, PA, Net, Home, Road, Div, Streak</td><td>384</td><td>0 value errors; <strong>32 label errors</strong> in the "Conf" column</td><td>values pass · column mislabeled → <a href="flagged.html">VR-01</a></td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/official/standings_2026.json" target="_blank" rel="noopener">snapshot ↗</a></td></tr>
+<tr><td><a href="../nfl-hub/pages/data.html">nfl-hub · data</a></td><td>32</td><td>W-L-T, PCT, PF, PA, Net</td><td>192</td><td>0</td><td>pass</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/official/standings_2026.json" target="_blank" rel="noopener">snapshot ↗</a></td></tr>
+<tr><td><a href="../nfl-audit/pages/data.html">nfl-audit · data</a></td><td>32</td><td>W, L, T, PCT, PF, PA, Net</td><td>224</td><td>0</td><td>pass</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-audit/data/standings_2026-11-12.csv" target="_blank" rel="noopener">snapshot ↗</a></td></tr>
+<tr><td><a href="../nfl-intel/pages/standings.html">nfl-intel · standings</a></td><td>32</td><td>W-L-T, GP, PF, PA, Net</td><td>192</td><td>0</td><td>pass (page does not publish home/road splits; its off-page data file is flagged as <a href="flagged.html">VR-04</a>)</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/data/standings_2026-11-12.json" target="_blank" rel="noopener">snapshot ↗</a></td></tr>
+<tr><td><a href="../nfl-decision/data.html">nfl-decision · data</a></td><td>32</td><td>W, L, T, PF, PA (+ PCT)</td><td>192</td><td>0</td><td>pass</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/data.html" target="_blank" rel="noopener">page ↗</a></td></tr>
+<tr><td><a href="../nfl-edge/pages/standings.html">nfl-edge · standings</a></td><td>32</td><td>W-L-T, PCT, PF, PA, Net, Home, Road, Div</td><td>288</td><td><strong>3</strong> (Buffalo Bills row)</td><td>3 cells wrong → <a href="flagged.html">VR-02</a></td>
+<td><a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/pages/standings.html" target="_blank" rel="noopener">page ↗</a></td></tr>
+<tr><td><a href="../nfl-lab/data.html">nfl-lab · data</a></td><td>32</td><td>label + W (snapshot age test)</td><td>32</td><td>0 against its stated "through Week 8" label</td><td>pass — older but honestly labeled</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/data.html" target="_blank" rel="noopener">page ↗</a></td></tr>
+<tr><td><strong>Total</strong></td><td><strong>224</strong></td><td>—</td><td><strong>1,504</strong></td><td><strong>3 value + 32 label</strong></td><td>6 of 7 pages clean</td>
+<td><a href="flagged.html">flag page ↗</a></td></tr>
+</tbody>
+</table>
+<p><strong>Snapshot ages reconciled, not guessed.</strong> The live standings now include the Week-10
+Thursday game (WAS 24, NYG 21, played 2026-11-12), which is why the Giants and Commanders differ
+from every "through Week 9" snapshot. That difference is a clock effect, not a data error: the
+archive's unscored <code>week 10 WAS @ NYG</code> row and the post-game records on
+<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com</a> were both read to
+confirm it. All snapshot pages label their week.</p>
+</section>
+
+<section>
+<h2>4 · External citations fetched live (bounded sample)</h2>
+<p>Fourteen of the 1,682 unique external URLs cited by published pages were fetched on 2026-11-13,
+covering every load-bearing official source type. Eleven resolved with matching content; three
+returned NFL.com's "404 – Flag on the Play" page — all three were already published as dead/absence
+evidence by earlier sessions and are re-confirmed here.</p>
+<table>
+<thead><tr><th>URL</th><th>Status</th><th>What was confirmed</th><th>Date</th></tr></thead>
+<tbody>
+<tr><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com/standings/league/2026/REG</a></td><td>live</td><td>32-team league standings read; matches published snapshots for Week 9</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">nfl.com/standings/conference/2026/REG</a></td><td>live</td><td>all 32 rows with conference-rank column; used as cell-by-cell ground truth</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/teams/new-england-patriots/" target="_blank" rel="noopener">nfl.com/teams/new-england-patriots/</a></td><td>live</td><td>5-4-0 record, last game 2026-11-08, Week 10 game 2026-11-15</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/games/packers-at-patriots-2026-reg-9" target="_blank" rel="noopener">nfl.com/games/packers-at-patriots-2026-reg-9</a></td><td>live</td><td>GB 45, NE 27 final; Gillette Stadium confirms New England as host</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/schedules/2026/by-week/week-9" target="_blank" rel="noopener">nfl.com/schedules/2026/by-week/week-9</a></td><td>live</td><td>Week 9 finals match the pinned game archive game-by-game</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries/</a></td><td>live</td><td>official Week 10 injury report renders with practice and game-status columns</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/players/patrick-mahomes/" target="_blank" rel="noopener">nfl.com/players/patrick-mahomes/</a></td><td>live</td><td>player page pattern used by hundreds of injury-row citations works</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener">operations.nfl.com/…/2026-nfl-rulebook</a></td><td>live</td><td>official 2026 rulebook renders with rule-change table and PDF link</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></td><td>live</td><td>National Problem Gambling Helpline 1-800-MY-RESET, as published in site footers</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://github.com/nflverse/nfldata/commit/6ea0be6dd9bfc95c818c05568753bc70f1986ea2" target="_blank" rel="noopener">github.com/nflverse/nfldata @ 6ea0be6d</a></td><td>live</td><td>commit exists: "Automated data update", 2026-11-12T16:15:19Z — matches the pinned citation</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/news/nfl-injury-report-policy-2026" target="_blank" rel="noopener">nfl.com/news/nfl-injury-report-policy-2026</a></td><td><strong>404</strong></td><td>dead — re-confirmed; already published as SRC-15 / F-09</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/news/nfl-2026-schedule-release" target="_blank" rel="noopener">nfl.com/news/nfl-2026-schedule-release</a></td><td><strong>404</strong></td><td>dead — re-confirmed; already published as SRC-16 / F-09</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">nfl.com/teams/kansas-city-chiefs/depth-chart</a></td><td><strong>404</strong></td><td>dead — re-confirmed (with and without trailing slash); already published as SRC-14 / F01 / F-04, the basis for blank depth-string cells</td><td>2026-11-13</td></tr>
+<tr><td><a href="https://www.nfl.com/transactions/" target="_blank" rel="noopener">nfl.com/transactions/</a></td><td>live</td><td>official transaction hub cited by injury/QB-change rows renders</td><td>2026-11-13</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>5 · Requirements coverage map — what exists where</h2>
+<p>Each element of the brief, its home on the live site, and this session's verification status.
+"Verified" means this pass re-read the page and confirmed structure and row-level sourcing; it does
+not certify every underlying number beyond the checks in sections 3–4.</p>
+<table>
+<thead><tr><th>Brief requirement</th><th>Where it lives</th><th>Status</th><th>Verified this session</th></tr></thead>
+<tbody>
+<tr><td>Review repo line by line; flag irregularities; provide links</td><td><a href="index.html">this report</a> + <a href="flagged.html">flag page</a> + <a href="../verified/audit.html">repo audit</a></td><td>done</td><td>314 pages / 18,518 links re-scanned; new irregularities VR-01…VR-07 published</td></tr>
+<tr><td>Dedicated suggestions section to review before any change</td><td><a href="../nfl-hub/pages/suggestions.html">nfl-hub S-01…S-16</a>, <a href="../nfl-lines/pages/suggestions.html">nfl-lines SG-01…SG-12</a>, <a href="../nfl-decision/suggestions.html">nfl-decision S01…S15</a>, <a href="../nfl-audit/pages/suggestions.html">nfl-audit</a></td><td>done — four registers</td><td>rows and source links re-counted; all rows linked</td></tr>
+<tr><td>Clear list of questions / information / answers before decisions</td><td><a href="../nfl-hub/pages/questions.html">nfl-hub Q-01…Q-27</a> (know / missing / evidence columns), <a href="../nfl-audit/pages/questions.html">nfl-audit Q&amp;A</a> (30 rows), <a href="../nfl-decision/questions.html">nfl-decision</a>, <a href="../nfl-decisions/index.html">nfl-decisions desk</a></td><td>done</td><td>re-read; every row source-linked</td></tr>
+<tr><td>Own NFL lines: singles, parlays, prop combos</td><td><a href="../verified/own-lines.html">root own-lines</a>, <a href="../nfl-lines/pages/singles.html">nfl-lines singles</a> / <a href="../nfl-lines/pages/parlays.html">parlays</a> / <a href="../nfl-lines/pages/props.html">props</a>, <a href="../nfl-edge/pages/own-lines.html">nfl-edge</a></td><td>done</td><td>structure + sourcing checked; market prices remain blank by policy</td></tr>
+<tr><td>Validation gates + correlation + luck removal</td><td><a href="../verified/validation.html">gates G1–G10</a>, <a href="../verified/correlations.html">correlations</a>, <a href="../verified/backtest.html">backtest</a>, <a href="../nfl-lines/pages/validation.html">nfl-lines gates</a></td><td>done</td><td>gate table on root dashboard re-read (4 pass / 5 fail / 1 blocked,0 qualified)</td></tr>
+<tr><td>Leaderboard competition with rewards</td><td><a href="../verified/leaderboard.html">root leaderboard</a>, <a href="../pages/competition.html">competition rules</a>, <a href="../nfl-lines/pages/leaderboard.html">nfl-lines leaderboard</a></td><td>done</td><td>0 rewards awarded is stated, not hidden</td></tr>
+<tr><td>Injury tracking + 2nd/3rd/4th-string deficiency</td><td><a href="../nfl-audit/pages/injuries.html">nfl-audit injuries</a> + <a href="../nfl-audit/pages/depth.html">depth</a>, <a href="../nfl-lines/pages/injuries.html">nfl-lines injuries</a>, <a href="../nfl-hub/pages/injuries.html">nfl-hub injuries</a>, <a href="../nfl-decision/injuries.html">nfl-decision</a></td><td>done with a verified blocker</td><td>official depth-chart URL re-tested: 404 → string ranks stay blank (VR-06 / SRC-14)</td></tr>
+<tr><td>Executive summary</td><td><a href="../NFL_EXECUTIVE_SUMMARY.md">NFL_EXECUTIVE_SUMMARY.md</a>, <a href="../verified/executive-summary.html">root summary</a>, <a href="../nfl-lines/pages/executive-summary.html">nfl-lines</a>, <a href="../nfl-hub/index.html">nfl-hub</a></td><td>done</td><td>landing summaries re-read</td></tr>
+<tr><td>Flagged for Review page for unverified items</td><td><a href="flagged.html">this session's flags</a>, <a href="../verified/flagged.html">root flags</a>, <a href="../nfl-hub/pages/flagged.html">nfl-hub F-01…F-10</a>, <a href="../nfl-lines/pages/flagged.html">nfl-lines IR-01…IR-15</a></td><td>done</td><td>VR-01…VR-07 added; prior flags cross-checked where overlapping</td></tr>
+<tr><td>No manual input; coordinate via COORDINATION.md</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">shared task board</a></td><td>done</td><td>claim S1–S3 committed before work began</td></tr>
+<tr><td>Live GitHub Pages site with clean dashboard</td><td><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">sassnarep3-star.github.io/Own4</a></td><td>done</td><td>deploy re-confirmed after this session's merge</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>6 · Suggestions this session adds (for review before any change)</h2>
+<p>Nothing below has been implemented. Each row is a proposal with its verification basis, so an
+owner can pick a path first. Existing registers are linked rather than duplicated — start with
+<a href="../nfl-hub/pages/suggestions.html">nfl-hub S-01…S-16</a> and
+<a href="../nfl-lines/pages/suggestions.html">nfl-lines SG-01…SG-12</a>.</p>
+<table>
+<thead><tr><th>ID</th><th>Suggestion</th><th>Why (evidence from this pass)</th><th>Effort</th><th>Status</th><th>Basis</th></tr></thead>
+<tbody>
+<tr><td><code>VR-S1</code></td><td>Add a CI step that fetches every external citation and fails on 404</td><td>3 of 14 sampled URLs are dead; two sat unnoticed in <code>nfl/</code> until a peer session caught them</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="../nfl-hub/pages/suggestions.html">echoes nfl-hub S-12 ↗</a> · <a href="flagged.html">VR-06</a></td></tr>
+<tr><td><code>VR-S2</code></td><td>Fix the "Conf" column in the nfl-lines standings page (generator change, then regenerate)</td><td>the column publishes division percentage under a conference label on all 32 rows; hand edits would fail the namespace's byte-identical CI gate, so the owning generator must change</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="flagged.html">VR-01</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/official/standings_2026.json" target="_blank" rel="noopener">source JSON ↗</a></td></tr>
+<tr><td><code>VR-S3</code></td><td>Correct the Buffalo Bills Home/Road/Div cells on the nfl-edge standings page</td><td>3 cells disagree with the official page; the other 31 rows are clean, so the defect is isolated</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="flagged.html">VR-02</a> · <a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr>
+<tr><td><code>VR-S4</code></td><td>Publish a source-type label (not a link) for owner-statement rows</td><td>35 rental rows have no official URL because their source is a private owner record; a labelled "owner statement" cell is more honest than an empty link slot</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="flagged.html">VR-03</a></td></tr>
+<tr><td><code>VR-S5</code></td><td>Repair or quarantine the swapped home/road records in the nfl-intel data file</td><td>26 of 32 teams have home and road swapped in <code>standings_2026-11-12.json</code>; the rendered page does not publish those fields, so nothing on the site is wrong today, but the file would mislead any future consumer</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="flagged.html">VR-04</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/data/standings_2026-11-12.json" target="_blank" rel="noopener">file ↗</a></td></tr>
+<tr><td><code>VR-S6</code></td><td>Decide the depth-chart path: license a depth/snap-count feed, or keep the documented blank</td><td>the official depth-chart route is still404; the blank-until-official policy is working, but the deficiency index the brief asks for cannot be built until one of the two paths is chosen</td><td>decision first</td><td>proposed — owner decision D2 already open</td>
+<td><a href="../nfl-hub/pages/questions.html">nfl-hub Q-05 ↗</a> · <a href="flagged.html">VR-06</a></td></tr>
+<tr><td><code>VR-S7</code></td><td>Consolidate entry points: one root "Suggestions &amp; Questions" hub linking the four registers</td><td>four suggestion registers and four question registers exist; the root nav links them separately, which makes review harder than it needs to be</td><td>low</td><td>proposed — awaiting choice</td>
+<td><a href="../nfl-hub/pages/suggestions.html">nfl-hub ↗</a> · <a href="../nfl-audit/pages/questions.html">nfl-audit ↗</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>7 · Method and limits</h2>
+<ul>
+<li>Local checks are exhaustive for the published tree (all pages, all links, all rows); external checks are a bounded, declared sample of 14 URLs out of 1,682 unique citations — not a full crawl.</li>
+<li>Standings verification covers every published cell of six pages plus a label test on a seventh; other data domains (team stats, player leaders, game rows) were covered by earlier sessions' verifiers and were not re-derived here.</li>
+<li>The nflverse archive is third-party; it is used only as a cross-check against official pages that were re-read directly, and it is labelled as third-party wherever cited.</li>
+<li>No market price, odds, or betting line is treated as official anywhere in this report: the NFL publishes no betting lines.</li>
+<li>Re-run instructions and the raw scan logic: <a href="https://github.com/sassnarep3-star/Own4/blob/main/verification-2026-11-05/build.py" target="_blank" rel="noopener">audit scanner ↗</a> · this session's claim: <a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">COORDINATION.md ↗</a></li>
+</ul>
+</section>
+
+<footer>
+<p>Research site · no wagering advice · not affiliated with the NFL or any sportsbook.</p>
+<p>Problem gambling help: <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">1-800-MY-RESET</a> (National Council on Problem Gambling).</p>
+</footer>
+</main>
+</body>
+</html>

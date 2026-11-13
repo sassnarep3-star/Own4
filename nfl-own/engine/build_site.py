@@ -792,7 +792,8 @@ def build():
         rows.append([esc(c["id"]), esc(c["label"]), num(c["n"], 0),
                      num(c.get("r"), 3), pct(c.get("joint")), pct(c.get("independent")),
                      num(c.get("lift"), 2), esc(c["note"]),
-                     link("https://www.nfl.com/players/drake-maye/stats/logs/", "logs")])
+                     link(c["url_a"], c["player_a"].replace("-", " ").title().split()[-1])
+                     + " · " + link(c["url_b"], c["player_b"].replace("-", " ").title().split()[-1])])
     b.append(table(["ID", "Combo", "N", "r", "Joint rate", "Product of legs", "Lift", "Note",
                     "Source"], rows, numeric=(2, 3, 4, 5, 6),
                    note="Where the joint rate and the product differ, multiplicative parlay "

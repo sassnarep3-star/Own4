@@ -216,6 +216,11 @@ NAV = [
         ("rental-f1dbaea0/index.html", "RentCheck SF · 94122", "legacy"),
         ("rental-f1dbaea0/flagged.html", "⚑ Rental — flagged", "legacy"),
     ]),
+    # Added 2026-11-13 by session arena/107d5836-own4: line-by-line re-verification pass.
+    ("Independent verification · 2026-11-13", [
+        ("verification-2026-11-13/index.html", "Verification report", "legacy"),
+        ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
+    ]),
 ]
 
 FOOTER = """<footer>

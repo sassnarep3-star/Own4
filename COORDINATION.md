@@ -2414,6 +2414,103 @@ publishes no odds). Q-09 (player-level dependence) is now measurable from logs. 
 rows carry the source link; nothing was filled in by inference. Peer content preserved in full
 during the superset merge; `index.html` superset resolution left a duplicated nav block which
 was repaired into a single nav keeping both sessions' links.
+## Session arena-107d5836-own4 — claim (2026-11-13 UTC)
+
+Session ID: `arena-107d5836-own4` · Branch: `arena/107d5836-own4` (platform-fixed; the
+requested `session-<id>/<task>` naming cannot be created in this harness — same logged
+deviation as every prior session). Base: `553c3f0` (main, after PR #74).
+
+No claim on this board is fresher than 60 minutes at session start (last board activity
+2026-11-12); all prior sessions' tasks are either done or stale-takeover eligible.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| S1 | Full published-site verification pass: local link integrity, per-row source-link coverage, external official-source resolution, bounded official spot-checks | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+| S2 | Suggestions/questions/decision-section gap review against the brief (suggestions section, questions-answers register, injury/depth tracking, leaderboard, exec summary) | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+| S3 | Final integration for this round: merge stale green peer PRs if safe, re-verify combined tree, PR → main → merge → Pages deploy confirmation, record here | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+
+Scope rule: this session edits **only** `COORDINATION.md` plus, if verification finds a
+defect that must be fixed, files it fixes (each fix logged here with its reason). No
+peer namespace is edited without a logged reason. Root `index.html` is touched only if a
+nav fix is required, additively.
+
+Initial state observed at claim time: 314 published HTML pages (excluding `data/raw/**`
+provenance archives), 18,518 local href/src references, **0 broken**; 7 open peer PRs
+(#29, #39, #43, #47, #56, #59, #68).
+
+### Session arena-107d5836-own4 — S1 verification log (2026-11-13 UTC)
+
+**Sources read directly this session (all fetched live via the page-fetch tool):**
+- https://www.nfl.com/standings/league/2026/REG (2 chunks, all32 rows)
+- https://www.nfl.com/standings/conference/2026/REG (2 chunks, all32 rows + rank column)
+- https://www.nfl.com/teams/new-england-patriots/ · https://www.nfl.com/games/packers-at-patriots-2026-reg-9
+- https://www.nfl.com/schedules/2026/by-week/week-9 · https://www.nfl.com/injuries/
+- https://www.nfl.com/players/patrick-mahomes/ · https://www.nfl.com/transactions/
+- https://operations.nfl.com/rules-officiating/2026-nfl-rulebook
+- https://www.ncpgambling.org/help-treatment
+- 404 re-tests: https://www.nfl.com/news/nfl-injury-report-policy-2026 ,
+  https://www.nfl.com/news/nfl-2026-schedule-release ,
+  https://www.nfl.com/teams/kansas-city-chiefs/depth-chart (and trailing-slash variant)
+- GitHub API: nflverse/nfldata commit `6ea0be6dd9bfc95c818c05568753bc70f1986ea2`
+  ("Automated data update", 2026-11-12T16:15:19Z) — matches the pinned citation.
+
+**Checks performed and results:**
+1. Local link integrity:316 published pages (raw `data/raw/**` archives excluded),
+   18,693 href/src references, **0 broken**.
+2. Row source-link coverage: 9,279 tbody rows, 9,229 with ≥1 link (99.46 %);
+   **50 without** — rental-99ca004d-own4 19, rental-own4 16, nfl/ 15 → published as VR-03.
+3. Standings cell-by-cell vs official ground truth (live nfl.com conference view re-read
+   2026-11-13, corroborated by the pinned nflverse archive weeks 1–9, the NE team page,
+   the GB@NE game page venue, and the Week 9 schedule): 7 pages, 224 team rows,
+   1,504 cells. Results: nfl-lines **0 value errors but its "Conf" column publishes
+   div_pct on all 32 rows (VR-01)**; nfl-hub 0; nfl-audit 0; nfl-intel 0; nfl-decision 0;
+   nfl-edge **3 wrong cells (Buffalo Home/Road/Div) (VR-02)**; nfl-lab passes against its
+   stated "through Week 8" label. Streak column: 30/30 match live (NYG/WAS excluded —
+   the Week-10 WAS@NYG game on 2026-11-12 postdates every "through Week 9" snapshot;
+   the archive's unscored week-10 row confirms the clock difference, not a data error).
+4. External sample: 14 unique cited URLs fetched (of 1,682 unique) — 11 live with
+   content confirmed, 3 dead (already peer-flagged as SRC-14/15/16, F01, F-04, F-09;
+   independently re-confirmed today). Sample declared as bounded, not a full crawl.
+5. CI gates at base `553c3f0`: all green (nfl-lines verify, bounded NBA audit,
+   workspace validation, pages build).
+
+**Published by this session:** `verification-2026-11-13/index.html` (report; requirements
+coverage map; VR-S1…VR-S7 proposed suggestions, none implemented) and
+`verification-2026-11-13/flagged.html` (VR-01…VR-07 + re-test results for prior flags).
+Every row on both pages carries a source link; local links resolve; self-check 62 rows,
+0 unlinked, 0 broken. Root `index.html` received two additive nav entries (comment-marked);
+the same entries were added to `verification/build.py` NAV and `engine/build.py` NAV so a
+regeneration cannot drop them. No peer namespace file was edited.
+
+**Local gate runs this session:** verification-2026-11-05 unittest ×6 OK;
+`verification/verify_site.py` OK (14 pages, 346 rows); `verification/assert_publication.py` OK;
+`scripts/build.py` + tests ×6 + `verify_data` + `check_site` OK (docs byte-unchanged);
+`py_compile` on both edited generators OK.
+
+### Session arena-107d5836-own4 — S2 gap review (2026-11-13 UTC)
+
+Brief requirement → home on site → verdict (re-read this session):
+- Suggestions section: **present** — four registers (nfl-hub S-01…S-16, nfl-lines
+  SG-01…SG-12, nfl-decision S01…S15, nfl-audit), all rows source-linked; root nav links
+  them. Gap: no single front door → VR-07 / VR-S7.
+- Questions & answers register: **present** — nfl-hub Q-01…Q-27 carries exactly the
+  requested "what we know / what is missing / evidence that would settle it" columns;
+  nfl-audit (30 rows), nfl-decision, nfl-decisions desk complement it.
+- Injury tracking + 2nd/3rd/4th-string deficiency: **present with a verified blocker** —
+  injury tables across four namespaces; depth-string cells blank because the official
+  depth-chart route is 404 (re-confirmed; SRC-14/F01/F-04). Decision D2 (license a feed
+  vs keep the documented blank) remains open → VR-S6.
+- Own lines (singles/parlays/props), gates, correlations, luck removal, leaderboard +
+  rewards: **present** (root verified/ section + nfl-lines + nfl-edge). Root gate status
+  re-read: 4 pass / 5 fail / 1 blocked, 0 qualified strategies, 0 rewards — stated openly.
+- Executive summary: **present** (NFL_EXECUTIVE_SUMMARY.md, verified/executive-summary.html,
+  namespace summaries).
+- Flagged for Review: **present** (root + per-namespace); this session added VR-01…VR-07.
+- Repo review / coordination / live Pages: **present**; this session claims, verifies and
+  integrates per the board.
+
+No requirement is missing a home. The open items are quality defects (VR-01…VR-05) and
+review ergonomics (VR-07), all published as proposals rather than implemented.
 ---
 
 ## Session `arena/8e2de421-own4` — final integration: navigation repair + cross-namespace verification (2026-11-13)

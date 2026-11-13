@@ -142,6 +142,8 @@ NAV = [
         ("pages/repo-audit.html", "Repo Audit"),
         ("pages/verification.html", "Verification Report"),
         ("verification-2026-11-05/index.html", "2026-11-05 Independent Audit"),
+        ("verification-2026-11-13/index.html", "2026-11-13 Verification Pass"),
+        ("verification-2026-11-13/flagged.html", "2026-11-13 Verification Flags"),
         ("pages/flagged-for-review.html", "⚑ Flagged for Review"),
     ]),
     ("Parallel-session site (retained)", [
