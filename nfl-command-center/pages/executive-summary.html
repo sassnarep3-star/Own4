@@ -32,10 +32,10 @@
 <main>
 
 <h2>Summary</h2>
-<p>Eighteen prior NFL workspaces were found in this repository. They overlap heavily, they disagree in places, and 28 of their files still carry placeholder text. This session built a separate, clean, source-linked site from official NFL pages and a pinned third-party archive, audited every other file in the repository without editing any of it, and published the result as a single site with fifteen pages.</p>
+<p>16 prior NFL workspaces were found in this repository. They overlap heavily, they disagree in places, and 34 of their files still carry placeholder text. This session built a separate, clean, source-linked site from official NFL pages and a pinned third-party archive, audited every other file in the repository without editing any of it, and published the result as a single site with fifteen pages.</p>
 <h2>What was built</h2>
 <div class="grid">
-<div class="card"><div class="k">Official standings rows</div><div class="v">32</div><div class="d">all reconciled against the game log</div></div><div class="card"><div class="k">Own lines</div><div class="v">13</div><div class="d">Week 10 games still to be played</div></div><div class="card"><div class="k">Injury rows normalised</div><div class="v">326</div><div class="d">0 conflicts with the official report</div></div><div class="card"><div class="k">Files audited</div><div class="v">1127</div><div class="d">53 flagged</div></div><div class="card"><div class="k">Table rows without a source</div><div class="v">1,275</div><div class="d">in the eleven prior namespaces, listed for review</div></div><div class="card"><div class="k">Reward points</div><div class="v">221</div><div class="d">forecast board only</div></div>
+<div class="card"><div class="k">Official standings rows</div><div class="v">32</div><div class="d">all reconciled against the game log</div></div><div class="card"><div class="k">Own lines</div><div class="v">13</div><div class="d">Week 10 games still to be played</div></div><div class="card"><div class="k">Injury rows normalised</div><div class="v">326</div><div class="d">0 conflicts with the official report</div></div><div class="card"><div class="k">Files audited</div><div class="v">1127</div><div class="d">53 flagged</div></div><div class="card"><div class="k">Table rows without a source</div><div class="v">1,447</div><div class="d">across the audited namespaces, listed for review</div></div><div class="card"><div class="k">Reward points</div><div class="v">221</div><div class="d">forecast board only</div></div>
 </div>
 <h2>What the numbers say</h2>
 <table class=""><thead><tr>
@@ -53,7 +53,7 @@
 <h2>What was found</h2>
 <ul class="tight">
 <li><strong>Official data reconciles exactly.</strong> Every team's 2026 wins, losses, ties, points for and points against recomputed from the game log match the official NFL.com league standings page. League points for and points against are equal at 6,291, and the season's one tie is handled as a push everywhere.</li>
-<li><strong>No betting strategy is activated.</strong> Of 7 evaluated strategies, none passes the validation gates. The best holdout return is 2.27%, from a strategy with a permutation p-value of 1.000. A placebo null built from a thousand skill-free peers places the 95th percentile of the peer return at -25.11%.</li>
+<li><strong>No betting strategy is activated.</strong> Of 7 evaluated strategies, none passes the validation gates. The best holdout return is 2.27%, from strategy S5 on 335 bets, with a permutation p-value of 0.672. A placebo null built from a thousand skill-free peers places the 95th percentile of the peer return at -25.51%.</li>
 <li><strong>Forecast skill is real but modest.</strong> The corrected model beats the naive baseline on the holdout by 0.61 points of mean absolute error, and the difference is non-negative in all four validation and holdout seasons. It does not beat the market line, which is 1.32 points better than the naive baseline.</li>
 <li><strong>The third-party price columns are defective.</strong> The archive's spread price columns are anti-calibrated over 5,432 games and its over price sign carries no information over 5,429 games. The spread strategies were rebuilt on a reference probability reconstructed from the market's moneyline and line; the total strategies are blocked because a total has no moneyline to reconstruct from.</li>
 <li><strong>The pre-registered model had a defect that was found on the development window and corrected before the corrected model was scored.</strong> A three percent per-game mean reversion applied to a mean-zero rating is a decay of the whole scale, which left the ratings with a standard deviation of 1.3 points after a season. The correction was selected on 1999 to 2022 only and registered in a dated amendment before the holdout was rescored.</li>
@@ -64,7 +64,7 @@
 <li>That any betting strategy has an edge. The evidence points the other way.</li>
 <li>That the model can beat a closing line. It cannot at present.</li>
 <li>That the depth position of most replacement starters is known. Only one is.</li>
-<li>That the eleven prior workspaces should be merged. That is a decision for the owner and is written up as suggestion S-01.</li>
+<li>That the 16 prior NFL workspaces should be merged. That is a decision for the owner and is written up as suggestion S-01.</li>
 </ul>
 <div class="note warn"><strong>Nothing here is a betting recommendation.</strong> No strategy on this site is activated. The betting board pays nothing. If gambling is a problem, contact the National Council on Problem Gambling on 1-800-522-4700 or ncpgambling.org.</div>
 

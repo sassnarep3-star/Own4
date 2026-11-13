@@ -495,6 +495,9 @@ def placebo_null(legs, spec, n_placebo=1000, seed=SEED):
 def main():
     games = load_games()
     games_by_id = {g["game_id"]: g for g in games}
+    # the archive also carries lines for games that have not been played, which
+    # is what the third-party market table publishes for the Week 10 slate
+    all_games_by_id = {g["game_id"]: g for g in load_games(include_unplayed=True)}
     fc_data = load_json(os.path.join(DERIVED, "forecasts.json"))
     fc = fc_data["forecasts"]
     fc_up = fc_data.get("upcoming_forecasts", [])
@@ -872,7 +875,7 @@ def main():
         f = fc_by_id.get(gid)
         if f is None:
             continue
-        g = games_by_id.get(gid)
+        g = games_by_id.get(gid) or all_games_by_id.get(f["game_id"])
         own_lines.append({
             "game_id": gid, "archive_game_id": f["game_id"],
             "away": gm["away"], "home": gm["home"],
@@ -889,6 +892,14 @@ def main():
             "home_rated_games": f["home_games_played"], "away_rated_games": f["away_games_played"],
             "cold_start": f["cold_start"],
             "market_spread_home": None, "market_total": None, "market_home_ml": None,
+            # the third-party archive's own values, published only in the table
+            # that is labelled as third-party
+            "third_party_spread_home": (round(-g["spread_line"], 2)
+                                         if g is not None and g.get("spread_line") is not None else None),
+            "third_party_total": (round(g["total_line"], 2)
+                                  if g is not None and g.get("total_line") is not None else None),
+            "third_party_home_ml": (g.get("home_moneyline")
+                                    if g is not None else None),
             "market_note": "No official NFL source publishes betting lines, so the market cells are left blank by policy. The third-party archive does carry a line for this game, but the archive's line is a third-party value and is therefore shown only in the third-party priced table, never in an official-sourced table.",
             "model": "walk-forward rating model, parameters pre-registered in data/gates_preregistered.json"})
 

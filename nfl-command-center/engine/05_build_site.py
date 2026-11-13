@@ -33,6 +33,14 @@ OFFICIAL_SOURCES = {
 }
 
 BLANK = '<span class="unverified">not confirmed by an official source</span>'
+# A value that could not be computed at all, as opposed to a value that no
+# official source publishes. The two are different claims and must read
+# differently on the page.
+NOT_COMPUTED = '<span class="unverified">not computed: strategy blocked</span>'
+# a Pearson interval and a p value do not apply to a rate ratio
+NOT_CORRELATION = '<span class="unverified">not applicable: a rate ratio, not a Pearson correlation</span>'
+# a practice report that the page capture did not carry
+NOT_CAPTURED = '<span class="unverified">not readable in the capture</span>'
 
 CSS = """
 :root{--ink:#11151c;--muted:#5a6672;--line:#d8dee6;--bg:#fbfcfd;--accent:#0b4f8a;
@@ -126,6 +134,14 @@ def table(headers, rows, cls=""):
     return "\n".join(out)
 
 
+def matchup(game_id):
+    """2026_10_BUF_NYJ -> BUF at NYJ"""
+    parts = game_id.split("_")
+    if len(parts) >= 4 and parts[0].isdigit():
+        return "%s at %s" % (parts[2], parts[3])
+    return game_id
+
+
 def td(v, cls=""):
     c = ' class="%s"' % cls if cls else ""
     return "<td%s>%s</td>" % (c, v)
@@ -216,6 +232,8 @@ def main():
         "{audit_rows_unlinked}": "{:,}".format(t["table_rows"] - t["table_rows_with_a_link"]),
         "{audit_official_links}": "{:,}".format(t["official_links"]),
         "{audit_conflicts}": str(t["cross_namespace_record_conflicts"]),
+        "{audit_html_pages}": str(sum(v["html"] for k, v in audit["namespaces"].items() if k.startswith("nfl"))),
+        "{audit_nflns}": str(len([k for k in audit["namespaces"] if k.startswith("nfl")])),
     }
 
     def write(fn, title, body):
@@ -229,6 +247,11 @@ def main():
     hb = leaderboard["baselines"]["holdout"]
     n_out = sum(1 for s in strategies["results"] if s["status"] == "Evaluated")
     n_blocked = sum(1 for s in strategies["results"] if s["status"] == "Blocked")
+    # the best return and the p-value that belongs to it, not the best p-value
+    priced = [s for s in strategies["results"] if s.get("roi") is not None]
+    best_strategy = max(priced, key=lambda s: s["roi"]) if priced else {}
+    n_nfl_namespaces = len([k for k in audit["namespaces"] if k.startswith("nfl")])
+    n_unplayed = sum(1 for r in own_lines["rows"] if not r.get("played"))
     body = """
 <h2>What this site is</h2>
 <p>This is the clean, source-linked NFL site built from scratch for the current week. It holds the official 2026 standings, the official Week 10 slate, the official injury designations, own model lines, a validated strategy leaderboard, measured correlations, a full repository audit and a register of every open decision.</p>
@@ -252,7 +275,7 @@ def main():
 </ul>
 """ % {
         "cards": "".join([
-            card("Own lines", "14", "Week 10 games with a model line", "own-lines.html", "own-lines.html"),
+            card("Own lines", str(n_unplayed), "Week 10 games still to be played", "own-lines.html", "own-lines.html"),
             card("Holdout spread error", "%.2f pts" % hb["own_spread_mae"], "own model, against a market line of %.2f and a naive baseline of %.2f" % (hb["market_spread_mae"], hb["naive_spread_mae"])),
             card("Strategies evaluated", str(n_out), "%d blocked for want of a verifiable price" % n_blocked, "strategies.html", "strategies.html"),
             card("Reward points paid", str(sum(r["reward_points"] for r in leaderboard["forecast_board"])), "forecast board only; the betting board pays nothing", "strategies.html", "strategies.html"),
@@ -289,7 +312,7 @@ def main():
     elig = [r for r in leaderboard["forecast_board"] if r["reward_points"] > 0]
     body = """
 <h2>Summary</h2>
-<p>Eighteen prior NFL workspaces were found in this repository. They overlap heavily, they disagree in places, and 28 of their files still carry placeholder text. This session built a separate, clean, source-linked site from official NFL pages and a pinned third-party archive, audited every other file in the repository without editing any of it, and published the result as a single site with fifteen pages.</p>
+<p>%(nnflns)d prior NFL workspaces were found in this repository. They overlap heavily, they disagree in places, and %(nplaceholders)d of their files still carry placeholder text. This session built a separate, clean, source-linked site from official NFL pages and a pinned third-party archive, audited every other file in the repository without editing any of it, and published the result as a single site with fifteen pages.</p>
 <h2>What was built</h2>
 <div class="grid">
 %(cards)s
@@ -299,7 +322,7 @@ def main():
 <h2>What was found</h2>
 <ul class="tight">
 <li><strong>Official data reconciles exactly.</strong> Every team's 2026 wins, losses, ties, points for and points against recomputed from the game log match the official NFL.com league standings page. League points for and points against are equal at 6,291, and the season's one tie is handled as a push everywhere.</li>
-<li><strong>No betting strategy is activated.</strong> Of %(neval)d evaluated strategies, none passes the validation gates. The best holdout return is %(best)s, from a strategy with a permutation p-value of %(bestp)s. A placebo null built from a thousand skill-free peers places the 95th percentile of the peer return at %(p95)s.</li>
+<li><strong>No betting strategy is activated.</strong> Of %(neval)d evaluated strategies, none passes the validation gates. The best holdout return is %(best)s, from strategy %(bestid)s on %(bestbets)d bets, with a permutation p-value of %(bestp)s. A placebo null built from a thousand skill-free peers places the 95th percentile of the peer return at %(p95)s.</li>
 <li><strong>Forecast skill is real but modest.</strong> The corrected model beats the naive baseline on the holdout by %(skill)s points of mean absolute error, and the difference is non-negative in all four validation and holdout seasons. It does not beat the market line, which is %(mkt)s points better than the naive baseline.</li>
 <li><strong>The third-party price columns are defective.</strong> The archive's spread price columns are anti-calibrated over 5,432 games and its over price sign carries no information over 5,429 games. The spread strategies were rebuilt on a reference probability reconstructed from the market's moneyline and line; the total strategies are blocked because a total has no moneyline to reconstruct from.</li>
 <li><strong>The pre-registered model had a defect that was found on the development window and corrected before the corrected model was scored.</strong> A three percent per-game mean reversion applied to a mean-zero rating is a decay of the whole scale, which left the ratings with a standard deviation of 1.3 points after a season. The correction was selected on 1999 to 2022 only and registered in a dated amendment before the holdout was rescored.</li>
@@ -310,7 +333,7 @@ def main():
 <li>That any betting strategy has an edge. The evidence points the other way.</li>
 <li>That the model can beat a closing line. It cannot at present.</li>
 <li>That the depth position of most replacement starters is known. Only one is.</li>
-<li>That the eleven prior workspaces should be merged. That is a decision for the owner and is written up as suggestion S-01.</li>
+<li>That the %(nnflns)d prior NFL workspaces should be merged. That is a decision for the owner and is written up as suggestion S-01.</li>
 </ul>
 <div class="note warn"><strong>Nothing here is a betting recommendation.</strong> No strategy on this site is activated. The betting board pays nothing. If gambling is a problem, contact the National Council on Problem Gambling on 1-800-522-4700 or ncpgambling.org.</div>
 """ % {
@@ -319,7 +342,9 @@ def main():
             card("Own lines", "13", "Week 10 games still to be played"),
             card("Injury rows normalised", str(injuries["reconciliation"]["rows_total"]), "0 conflicts with the official report"),
             card("Files audited", str(audit["totals"]["files_audited"]), "%d flagged" % audit["totals"]["files_flagged"]),
-            card("Table rows without a source", "1,275", "in the eleven prior namespaces, listed for review"),
+            card("Table rows without a source", "{:,}".format(
+                audit["totals"]["table_rows"] - audit["totals"]["table_rows_with_a_link"]),
+                "across the audited namespaces, listed for review"),
             card("Reward points", str(sum(r["reward_points"] for r in leaderboard["forecast_board"])), "forecast board only"),
         ]),
         "table": table(
@@ -340,9 +365,13 @@ def main():
               td("out of 6,991 earlier forecasts"),
               src_cell(OFFICIAL_SOURCES["repo"][0], "this project")]]),
         "neval": n_out,
-        "best": "%.2f%%" % (100 * max([s["roi"] for s in strategies["results"] if s["roi"] is not None] or [0])),
-        "bestp": "%.3f" % max([s["permutation_p"] for s in strategies["results"] if s["permutation_p"] is not None] or [0]),
-        "p95": "%.2f%%" % (100 * max([s["placebo"]["roi_p95"] for s in strategies["results"] if s.get("placebo")] or [0])),
+        "best": "%.2f%%" % (100 * best_strategy["roi"]),
+        "bestid": best_strategy["id"],
+        "bestp": "%.3f" % best_strategy["permutation_p"],
+        "bestbets": best_strategy["bets"],
+        "p95": "%.2f%%" % (100 * best_strategy["placebo"]["roi_p95"]) if best_strategy.get("placebo") else "not available",
+        "nnflns": n_nfl_namespaces,
+        "nplaceholders": audit["totals"]["files_with_placeholders"],
         "skill": "%.2f" % (hb["naive_spread_mae"] - hb["own_spread_mae"]),
         "mkt": "%.2f" % (hb["naive_spread_mae"] - hb["market_spread_mae"]),
     }
@@ -370,12 +399,13 @@ def main():
                 {"id": "F-05", "name": "The pre-registered model had a rating decay defect",
                  "detail": "A three percent per-game mean reversion applied to a mean-zero rating removes essentially the whole rating within a season, leaving a rating standard deviation of 1.3 points. The defect was found and fixed using the 1999 to 2022 development window only, and the fix was registered in a dated amendment before the corrected model was scored on the holdout."},
                 {"id": "F-06", "name": "No betting strategy separates itself from chance",
-                 "detail": "The best evaluated strategy returns 2.27% on 335 holdout bets with a permutation p-value of 0.672, which does not clear the 0.05 floor. The placebo null places the 95th percentile of a thousand skill-free peers above it. Nothing is activated."},
+                 "detail": "The best evaluated strategy returns 2.27% on 335 holdout bets with a permutation p-value of 0.672, which does not clear the 0.05 floor. The placebo null places the 95th percentile of a thousand skill-free peers above it. Nothing is activated.",
+                 "source": OFFICIAL_SOURCES["repo"][0]},
                 {"id": "F-07", "name": "The own model beats the naive baseline but not the market",
                  "detail": "On the holdout the own model's spread error is 10.31 points, the naive baseline is 10.92 and the market line is 9.60. The forecast board rewards the first comparison, which needs no price. The betting board would need the second, and no strategy achieves it."},
                 {"id": "F-08", "name": "The official sources rarely state a replacement starter's depth",
-                 "detail": "Seven depth deficiency rows are supported by an official article or an official game book. Only the two Baltimore quarterback rows carry an official depth-chart code. The other five are blank and marked unverified rather than guessed."},
-                {"id": "F-09", "name": "The prior workspaces carry 1,275 table rows with no source link",
+                 "detail": "Seven depth deficiency rows are supported by an official article or an official game book. Exactly one carries an officially stated depth position; the other six are blank and marked unverified rather than guessed."},
+                {"id": "F-09", "name": "The other namespaces carry table rows with no source link",
                  "detail": "Across {audit_files} audited files there are {audit_rows} table rows, of which {audit_rows_linked} carry a link and {audit_rows_unlinked} do not. {audit_flagged} files are flagged and {audit_placeholders} still contain placeholder text. The prior namespaces are outside this session's claim, so they were read and audited but not rewritten."},
                 {"id": "F-10", "name": "Player prop strategies cannot be priced from any official source",
                  "detail": "The NFL publishes no player prop prices and no official player game log was found for the current week. The two prop strategies are Blocked rather than evaluated: no return is reported for them and no reward is offered."},
@@ -400,7 +430,7 @@ def main():
     body = """
 <h2>Flagged for review</h2>
 <p>Nothing on this page blocks publication. Every item is published so that a reviewer can decide what to do with it. Each row links to the file and to the source that would settle it.</p>
-<div class="note warn"><strong>Scope.</strong> The eleven prior NFL namespaces are outside this session's claim in COORDINATION.md. The entries below are read-only findings about those files. No file outside <code>nfl-command-center/</code> was edited.</div>
+<div class="note warn"><strong>Scope.</strong> The other NFL namespaces are outside this session's claim in COORDINATION.md. The entries below are read-only findings about those files. No file outside <code>nfl-command-center/</code> was edited.</div>
 <h2>Open items in this site</h2>
 %(open)s
 <h2>Files flagged by the repository audit</h2>
@@ -431,7 +461,7 @@ def main():
               td("The reward policy was pre-registered as non-monetary until the owner funds a pool."),
               td("Owner decision. Written up as suggestion S-05."),
               src_cell(OFFICIAL_SOURCES["repo"][0], "github.com")],
-             [td("Consolidation of the eleven prior workspaces"),
+             [td("Consolidation of the prior NFL workspaces"),
               td("They overlap heavily and are outside this session's claim."),
               td("Owner decision after reading the audit. Written up as suggestion S-01."),
               src_cell(OFFICIAL_SOURCES["repo"][0], "github.com")]]),
@@ -536,8 +566,14 @@ def main():
               td(BLANK), td(BLANK), src_cell(r["url"], "nfl.com game page")]
              for r in own_lines["rows"]]),
         "mkt": table(
-            ["Matchup", "Third-party market spread (home)", "Third-party market total", "Third-party source", "Official source"],
-            [[td("%s at %s" % (r["away"], r["home"])), td(BLANK), td(BLANK),
+            ["Matchup", "Third-party market spread (home)", "Third-party market total",
+             "Third-party home moneyline", "Third-party source", "Official source"],
+            [[td("%s at %s" % (r["away"], r["home"])),
+              td("%.2f" % r["third_party_spread_home"], "num")
+              if r.get("third_party_spread_home") is not None else BLANK,
+              td("%.2f" % r["third_party_total"], "num")
+              if r.get("third_party_total") is not None else BLANK,
+              td(str(r["third_party_home_ml"])) if r.get("third_party_home_ml") is not None else BLANK,
               src_cell(OFFICIAL_SOURCES["archive"][0], "nflverse/nfldata"),
               src_cell(r["url"], "nfl.com game page")]
              for r in own_lines["rows"]]),
@@ -549,8 +585,8 @@ def main():
     for s in strategies["results"]:
         gate_rows.append([td(s["id"]), td(s["name"]),
                            td('<span class="badge %s">%s</span>' % ("pass" if s["status"] == "Evaluated" else "blocked", s["status"])),
-                           td(s["bets"], "num"), td("%.2f%%" % (100 * s["roi"]) if s["roi"] is not None else BLANK, "num"),
-                           td("%.3f" % s["permutation_p"] if s["permutation_p"] is not None else BLANK, "num"),
+                           td(s["bets"], "num"), td("%.2f%%" % (100 * s["roi"]) if s["roi"] is not None else NOT_COMPUTED, "num"),
+                           td("%.3f" % s["permutation_p"] if s["permutation_p"] is not None else NOT_COMPUTED, "num"),
                            td("%d / %d" % (s.get("gates_passed", 0), len(s.get("gates", {})))),
                            td("yes" if s.get("reward_eligible") else "no"),
                            src_cell(OFFICIAL_SOURCES["archive"][0], "archive")])
@@ -595,9 +631,9 @@ def main():
         "luck": table(
             ["ID", "Bets", "Win rate", "Luck band half-width", "Bets needed for 80% power", "Source"],
             [[td(l["id"]), td(l["bets"], "num"),
-              td("%.4f" % l["win_rate"] if l.get("win_rate") is not None else BLANK, "num"),
-              td("%.4f" % l["luck_band_half_width"] if l.get("luck_band_half_width") is not None else BLANK, "num"),
-              td(l.get("bets_needed_for_80pct_power") if l.get("bets_needed_for_80pct_power") else BLANK, "num"),
+              td("%.4f" % l["win_rate"] if l.get("win_rate") is not None else NOT_COMPUTED, "num"),
+              td("%.4f" % l["luck_band_half_width"] if l.get("luck_band_half_width") is not None else NOT_COMPUTED, "num"),
+              td(l.get("bets_needed_for_80pct_power") if l.get("bets_needed_for_80pct_power") else NOT_COMPUTED, "num"),
               src_cell(OFFICIAL_SOURCES["repo"][0], "github.com")]
              for l in luck["rows"]]),
         "gates": table(
@@ -617,9 +653,10 @@ def main():
         ["ID", "What is correlated", "Scope", "n", "r", "95% interval", "p", "q", "Reading", "Source"],
         [[td(c["id"]), td(c["name"]), td(c["scope"]), td(c["n"], "num"),
           td("%.5f" % c["r"] if c["r"] is not None else BLANK, "num"),
-          td("%.5f to %.5f" % (c["ci_low"], c["ci_high"]) if c.get("ci_low") is not None else BLANK),
-          td("%.6f" % c["p"] if c.get("p") is not None else BLANK, "num"),
-          td("%.6f" % c["q"] if c.get("q") is not None else BLANK, "num"),
+          td("%.5f to %.5f" % (c["ci_low"], c["ci_high"]) if c.get("ci_low") is not None
+             else NOT_CORRELATION),
+          td("%.6f" % c["p"] if c.get("p") is not None else NOT_CORRELATION, "num"),
+          td("%.6f" % c["q"] if c.get("q") is not None else NOT_CORRELATION, "num"),
           td(c["note"]), src_cell(OFFICIAL_SOURCES["repo"][0], "github.com")]
          for c in correlations["rows"]])}
     write("correlations.html", "Correlations", body)
@@ -645,18 +682,18 @@ def main():
         "officialonly": injuries["reconciliation"]["official_designations_not_present_in_the_capture"],
         "tc": table(
             ["Game", "Team", "Out", "Doubtful", "Questionable", "Source"],
-            [[td(c["game_id"]), td(c["team"]), td(c["out"], "num"), td(c["doubtful"], "num"), td(c["questionable"], "num"),
+            [[td(matchup(c["game_id"])), td(c["team"]), td(c["out"], "num"), td(c["doubtful"], "num"), td(c["questionable"], "num"),
               src_cell(c["source_url"], "nfl.com")]
              for c in injuries["team_counts"]]),
         "oo": table(
             ["Game", "Team", "Player", "Position", "Injury", "Status", "Source"],
-            [[td(o["game_id"]), td(o["team"]), td(o["player"]), td(o["position"]), td(o["injury"]), td(o["status"]),
+            [[td(matchup(o["game_id"])), td(o["team"]), td(o["player"]), td(o["position"]), td(o["injury"]), td(o["status"]),
               src_cell(o["source_url"], "nfl.com")]
              for o in injuries["reconciliation"]["official_only"]]),
         "rowtable": table(
             ["Game", "Team", "Player", "Pos", "Injury", "Practice status", "Game status", "Verification", "Source"],
-            [[td(r["game_id"]), td(r["team"]), td(r["player"]), td(r["position"]),
-              td(r["injury"] or BLANK), td(r["practice_status"] or BLANK),
+            [[td(matchup(r["game_id"])), td(r["team"]), td(r["player"]), td(r["position"]),
+              td(r["injury"] or BLANK), td(r["practice_status"] or NOT_CAPTURED),
               td(r["game_status"] or BLANK), td(r["verification"]),
               src_cell(r.get("source_url"), "nfl.com")]
              for r in injuries["rows"]]),
@@ -667,7 +704,7 @@ def main():
     body = """
 <h2>Depth deficiencies</h2>
 <p>%(rule)s</p>
-<p>%(count)d rows are supported by an official source. %(ver)d carry an officially stated depth position; the other %(unver)d are blank in the depth column and marked unverified.</p>
+<p>%(count)d rows are supported by an official source. %(ver)d of them carries an officially stated depth position; the other %(unver)d are blank in the depth column and marked unverified.</p>
 %(table)s
 """ % {
         "rule": depth["rule"],
