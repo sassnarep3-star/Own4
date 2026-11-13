@@ -28,9 +28,10 @@ from lib import DERIVED, ROOT, dump_json, load_json
 
 REPO = os.path.dirname(ROOT)  # the repository root, one level above this namespace
 
-NFL_NAMESPACES = ["nfl", "nfl-audit", "nfl-decision", "nfl-decisions", "nfl-edge",
-                   "nfl-hub", "nfl-intel", "nfl-lab", "nfl-lines", "nfl-quant",
-                   "nfl-research"]
+NFL_NAMESPACES = ["nfl", "nfl-arena", "nfl-audit", "nfl-command", "nfl-decision",
+                   "nfl-decisions", "nfl-edge", "nfl-hub", "nfl-integration",
+                   "nfl-intel", "nfl-lab", "nfl-lines", "nfl-origination", "nfl-own",
+                   "nfl-quant", "nfl-research"]
 
 OFFICIAL_HOST = re.compile(r"(nfl\.com|static\.www\.nfl\.com|profootballhof\.com|operations\.nfl\.com)", re.I)
 THIRD_PARTY_HOST = re.compile(r"(github\.com/nflverse|github\.com/scrape|fanduel|draftkings|betmgm|"
@@ -100,16 +101,22 @@ def audit_file(path):
 
 def main():
     rows = []
+    SKIP_DIRS = (".git", "node_modules", "__pycache__", ".arena", "dist", "build")
     for dirpath, dirnames, filenames in os.walk(REPO):
-        dirnames[:] = [d for d in dirnames
-                       if d not in (".git", "node_modules", "__pycache__", ".arena", "dist", "build")]
-        for fn in filenames:
+        # sorted, so the audit output does not depend on the order the file
+        # system happens to hand the walk
+        dirnames[:] = sorted(d for d in dirnames if d not in SKIP_DIRS)
+        for fn in sorted(filenames):
             p = os.path.join(dirpath, fn)
             if p.startswith(ROOT):
+                continue
+            if os.path.basename(p) == ".git":
+                # a linked worktree stores .git as a file, not a directory
                 continue
             a = audit_file(p)
             if a:
                 rows.append(a)
+    rows.sort(key=lambda r: r["file"])
 
     # ---------------- per-namespace summary ---------------------------------
     ns = defaultdict(lambda: {"files": 0, "html": 0, "official_links": 0, "third_party_links": 0,
@@ -169,8 +176,8 @@ def main():
     official_records = {r["team"]: r for r in standings["rows"]}
     for ns_name in NFL_NAMESPACES:
         for dirpath, dirnames, filenames in os.walk(os.path.join(REPO, ns_name)):
-            dirnames[:] = [d for d in dirnames if d not in (".git", "node_modules")]
-            for fn in filenames:
+            dirnames[:] = sorted(d for d in dirnames if d not in (".git", "node_modules"))
+            for fn in sorted(filenames):
                 if not fn.endswith((".json", ".md", ".html")):
                     continue
                 p = os.path.join(dirpath, fn)

@@ -2689,3 +2689,10 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - 2026-11-13 — Repository audit re-run after the merge: **1,127 files audited, 53 flagged,
   34 carrying placeholder text, 12,978 table rows of which 1,447 carry
   no source link, 0 team-record conflicts against the official standings.**
+- 2026-11-13 — **Audit made environment-independent.** The first repository audit walked the file system in
+  whatever order the operating system handed it and counted a linked worktree's `.git` pointer as a file, so the
+  same repository produced a different file count and a different flag order on the CI runner. The audit now
+  sorts the walk, skips `.git` whether it is a directory or a file, and sorts its output. The CI gate was changed
+  accordingly: the invariant now enforced is that **two consecutive builds of the same tree are byte-identical**,
+  not that the build reproduces a snapshot, because the audit reads the whole repository and any other namespace
+  merged into `main` legitimately moves the totals.
