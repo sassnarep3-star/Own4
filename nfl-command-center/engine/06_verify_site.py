@@ -12,7 +12,7 @@ Checks, per generated page:
   5. a value that is not confirmed by an official source is rendered blank
      with the unverified marker, never silently filled in.
 
-Run: python3 nfl-command/engine/06_verify_site.py
+Run: python3 nfl-command-center/engine/06_verify_site.py
 """
 import html.parser
 import json

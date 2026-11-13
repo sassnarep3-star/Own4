@@ -200,7 +200,7 @@ def main():
     res = {
         "id": "repo-audit",
         "generated_utc": "2026-11-13T00:00:00Z",
-        "scope": "Every file in the repository outside nfl-command. This session does not edit any other namespace; the audit only reads.",
+        "scope": "Every file in the repository outside nfl-command-center. This session does not edit any other namespace; the audit only reads.",
         "method": [
             "Each file is read as text. Links are extracted with a URL pattern and classified as official NFL, named third-party or other.",
             "A file is flagged when it makes numeric claims without any source, provenance or citation wording, when a table has rows but no links, when placeholder text survives, or when it contains no link at all.",

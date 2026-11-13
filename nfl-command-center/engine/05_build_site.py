@@ -4,7 +4,7 @@ Every page is generated from the captured data. Every table row carries a
 source link. A value that no official source confirms is rendered blank with
 an explicit unverified marker rather than being filled in.
 
-Writes: nfl-command/pages/*.html
+Writes: nfl-command-center/pages/*.html
 """
 import html
 import json
@@ -158,7 +158,7 @@ def page(title, body, active):
 <footer class="site"><div class="wrap">
   <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
   <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
-  <p class="small">Built %(built)s by <code>nfl-command/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+  <p class="small">Built %(built)s by <code>nfl-command-center/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
 </div></footer>
 </body>
 </html>
@@ -386,7 +386,7 @@ def main():
     body = """
 <h2>Flagged for review</h2>
 <p>Nothing on this page blocks publication. Every item is published so that a reviewer can decide what to do with it. Each row links to the file and to the source that would settle it.</p>
-<div class="note warn"><strong>Scope.</strong> The eleven prior NFL namespaces are outside this session's claim in COORDINATION.md. The entries below are read-only findings about those files. No file outside <code>nfl-command/</code> was edited.</div>
+<div class="note warn"><strong>Scope.</strong> The eleven prior NFL namespaces are outside this session's claim in COORDINATION.md. The entries below are read-only findings about those files. No file outside <code>nfl-command-center/</code> was edited.</div>
 <h2>Open items in this site</h2>
 %(open)s
 <h2>Files flagged by the repository audit</h2>
