@@ -1097,7 +1097,8 @@ def main():
             common = sorted(set(la) & set(lb))
         if len(common) < 4:
             combos.append({"id": cid, "label": label, "n": len(common), "r": None, "joint": None,
-                           "independent": None,
+                           "independent": None, "player_a": a, "player_b": b,
+                           "url_a": lg[a]["url"], "url_b": lg[b]["url"],
                            "note": "Only %d shared official week(s); 4 are needed, so the combo is "
                                    "published blank rather than estimated." % len(common)})
             continue
@@ -1112,6 +1113,7 @@ def main():
         independent = pa * pb
         combos.append({"id": cid, "label": label, "n": len(common), "r": r2(r),
                        "p_a": pa, "p_b": pb, "joint": joint, "independent": independent,
+                       "player_a": a, "player_b": b, "url_a": lg[a]["url"], "url_b": lg[b]["url"],
                        "lift": (joint / independent) if independent else None,
                        "note": "Joint hit rate against the product of the two legs. A lift away "
                                "from 1.0 means multiplicative parlay pricing is wrong for this "
