@@ -1,0 +1,45 @@
+{
+ "computed_utc": "2026-11-13T22:05Z",
+ "method": "phi coefficient on walk-forward predictions for 2026 weeks 3-10 (each prediction made from pre-game data only).",
+ "scope_warning": "These are MODEL-INTERNAL joint rates (our spread/total lines), not market lines. They answer: do our own line errors co-occur? Market-based correlations (cover vs over against a sportsbook line) cannot be computed: no licensed price archive exists in any official NFL source (flag F-01).",
+ "measured": [
+  {
+   "pair": "Favorite covers our spread AND game goes over our total",
+   "phi": -0.1656,
+   "joint_rate": 0.2381,
+   "independence_product": 0.2794,
+   "n": 105,
+   "split_half_phi_early": -0.0772,
+   "split_half_phi_late": -0.2741,
+   "source_rows": "https://www.nfl.com/schedules/2026/ (each graded game row links its official game page)"
+  },
+  {
+   "pair": "Home win AND game goes over our total",
+   "phi": -0.2166,
+   "joint_rate": 0.2,
+   "independence_product": 0.254,
+   "n": 105,
+   "source_rows": "https://www.nfl.com/schedules/2026/"
+  }
+ ],
+ "blank_unverified": [
+  {
+   "item": "Player-prop leg correlations (e.g., QB passing yards with WR receptions)",
+   "value": null,
+   "reason": "No official per-game player logs and no prop prices exist in any official source reachable by this project. Never estimated from proxies.",
+   "flag": "F-02"
+  },
+  {
+   "item": "Market cover vs market over correlation",
+   "value": null,
+   "reason": "No licensed market price archive.",
+   "flag": "F-01"
+  },
+  {
+   "item": "Same-game parlay dependence (team total vs player props)",
+   "value": null,
+   "reason": "Requires official player-level outcomes.",
+   "flag": "F-02"
+  }
+ ]
+}

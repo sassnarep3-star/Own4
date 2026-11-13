@@ -1,0 +1,92 @@
+name: nfl-origination verify
+
+# Gate for the nfl-origination namespace only. It rebuilds every derived number from the
+# committed official transcriptions and committed code, then fails if:
+#   * any data-table row carries no source link;
+#   * any local link or anchor is broken;
+#   * any page is missing the responsible-gambling footer or the "not wagering advice" line;
+#   * any published claim contradicts the computed evidence (e.g. a gate silently turns green);
+#   * the rebuild is not reproducible, i.e. a published number has drifted from its data.
+#
+# It does not deploy. GitHub Pages serves the repository root from main, so publishing happens
+# on merge, not here.
+
+on:
+  push:
+    paths:
+      - 'nfl-origination/**'
+      - '.github/workflows/nfl-origination.yml'
+  pull_request:
+    paths:
+      - 'nfl-origination/**'
+      - '.github/workflows/nfl-origination.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Snapshot the committed artefacts
+        # Taken BEFORE the rebuild, so the comparison has something to compare against.
+        run: |
+          mkdir -p "$RUNNER_TEMP/snapshot"
+          cp -r nfl-origination/data nfl-origination/pages "$RUNNER_TEMP/snapshot/"
+
+      - name: Run the full pipeline
+        run: python3 nfl-origination/run_all.py
+
+      - name: The rebuild must be reproducible
+        # A byte-for-byte diff is the wrong test across environments: floating-point results can
+        # differ in the last digit between Python versions and C libraries, and `statistics`
+        # changed its summation in 3.12. compare.py instead requires every non-numeric byte to
+        # match exactly and every number to agree to 1e-9 relative -- far tighter than any real
+        # regression, and blind to libm noise.
+        run: python3 nfl-origination/compare.py "$RUNNER_TEMP/snapshot" nfl-origination
+
+      - name: Reconciliation must pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          r = json.load(open('nfl-origination/data/derived/reconcile.json'))
+          s = r['summary']
+          print("checks pass=%(pass)d fail=%(fail)d cells=%(cells_2026_ok)d/%(cells_2026)d" % s)
+          sys.exit(1 if s['fail'] else 0)
+          PY
+
+      - name: No gate may turn green without the evidence
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          g = json.load(open('nfl-origination/data/derived/gates.json'))
+          blocked = [x['id'] for x in g['gates'] if x['status'] == 'blocked']
+          awarded = g['scoreboard']['awarded']
+          print("blocked gates:", blocked, "awarded:", awarded)
+          # G7 (an executable archived price) cannot pass: the NFL publishes no odds.
+          if blocked != ['G7']:
+              print("FAIL: G7 must be the only blocked gate")
+              sys.exit(1)
+          if awarded != 0:
+              print("FAIL: a reward may not be paid while a gate is blocked")
+              sys.exit(1)
+          PY
+
+      - name: Placebos must not pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('nfl-origination/data/derived/strategies.json'))['strategies']
+          bad = [x['id'] for x in s if x.get('fdr_pass')]
+          print("strategies passing FDR:", bad or "none")
+          sys.exit(1 if bad else 0)
+          PY

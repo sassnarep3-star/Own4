@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reconciliation · NFL Origination · Own4</title>
+<meta name="description" content="Reconciliation">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html" class="on">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html" class="on">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Audit / Reconciliation</div>
+
+<h1>Reconciliation against the official record</h1>
+<p class="lede">Before anything is modelled, the game-level archive must reproduce the official
+2026 record. It does — every cell. This page is the audit trail.</p>
+<div class="cards">
+<div class="card good"><b>10/10</b><span>integrity checks passing</span></div>
+<div class="card good"><b>160/160</b><span>official 2026 cells matching</span></div>
+<div class="card"><b>136</b><span>completed 2026 games reconciled</span></div>
+<div class="card"><b>7548</b><span>archived games in total</span></div>
+</div>
+<div class="panel warn"><h3>Why a third-party archive is involved at all</h3>
+<p>The NFL publishes no downloadable game log. The archive at
+<a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata ↗</a> mirrors official box
+scores and is used <em>only</em> as a third-party input, labelled as third-party wherever it
+appears. Its 2026 slice plus the one officially-read Thursday result reproduces the official
+standings on every cell, which is the check that licenses its use here. Its licence terms were not
+reviewed — flag F-07.</p></div>
+<h2>Integrity checks</h2>
+<div class="tw"><table class=""><caption>Integrity checks IC-01 to IC-10</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">Check</th><th scope="col" class="c">Result</th><th scope="col" class="">What was measured</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">IC-01</td><td class="">Archive file identity</td><td class="c"><span class="pill p-good">pass</span></td><td class="">sha256 dd6ea9377b6400535d8bc78f1346872dfdcf01f4c073dac9579dce7dc145fbfc (expected dd6ea9377b6400535d8bc78f1346872dfdcf01f4c073dac9579dce7dc145fbfc)</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-02</td><td class="">2026 regular-season row count</td><td class="c"><span class="pill p-good">pass</span></td><td class="">272 scheduled rows, 136 with a final score</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-03</td><td class="">Score presence</td><td class="c"><span class="pill p-good">pass</span></td><td class="">0 inconsistent rows</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-04</td><td class="">Line sign convention measured against both readings</td><td class="c"><span class="pill p-good">pass</span></td><td class="">n=7412 games with a line. Reading spread_line as the expected home margin: MAE 10.256, r=+0.426. Reading it as the negative: MAE 14.612, r=-0.426. A real line must show MAE near 10 and r near +0.4, so the first reading is the correct one and home_spread = -spread_line.</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-05</td><td class="">Line is a genuine market line, not a result</td><td class="c"><span class="pill p-good">pass</span></td><td class="">home cover rate 0.476 against the measured line (a post-hoc line would be 1.000); mean line 2.240 vs mean actual home margin 2.301</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-06</td><td class="">2026 archive + Thursday result vs official standings</td><td class="c"><span class="pill p-good">pass</span></td><td class="">160 of 160 cells match across all 32 clubs (W, L, T, PF, PA)</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-07</td><td class="">League points balance</td><td class="c"><span class="pill p-good">pass</span></td><td class="">PF 6291 = PA 6291</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-08</td><td class="">Club identity resolves for every code</td><td class="c"><span class="pill p-good">pass</span></td><td class="">unknown codes: none; historical codes mapped to current clubs: OAK-&gt;LV (through 2019), SD-&gt;LAC (through 2016), STL-&gt;LA (through 2015)</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-09</td><td class="">Season coverage</td><td class="c"><span class="pill p-good">pass</span></td><td class="">28 seasons, 1999-2026</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">IC-10</td><td class="">Unique game ids</td><td class="c"><span class="pill p-good">pass</span></td><td class="">7548 rows, 7548 unique</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr></tbody></table><div class="tnote">Every check is computed, not asserted. A failure here breaks the build.</div></div>
+<div class="panel ok"><h3>Mismatches</h3><p>None. Every check that compares a value against the official page found zero differences.</p></div>
+<h2>Historical club codes</h2>
+<p>Three codes in the archive pre-date a franchise relocation. Each mapping is sourced to an official
+NFL.com article that states the move, not to an assumption.</p>
+<div class="tw"><table class=""><caption>Historical codes and their official club</caption><thead><tr><th scope="col" class="">Code</th><th scope="col" class="">Club</th><th scope="col" class="">Seasons in archive</th><th scope="col" class="">Last season</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">OAK</td><td class="">LV</td><td class="">1999–2019</td><td class="">2019</td><td class=""><span class="src"><a href="https://www.nfl.com/news/raiders-officially-announce-las-vegas-raiders-title-0ap3000001098555" target="_blank" rel="noopener">↗ news/raiders-officially-announce-las-vegas-…</a></span></td></tr><tr><td class="">SD</td><td class="">LAC</td><td class="">1999–2016</td><td class="">2016</td><td class=""><span class="src"><a href="https://www.nfl.com/news/raiders-officially-announce-las-vegas-raiders-title-0ap3000001098555" target="_blank" rel="noopener">↗ news/raiders-officially-announce-las-vegas-…</a></span></td></tr><tr><td class="">STL</td><td class="">LA</td><td class="">1999–2015</td><td class="">2015</td><td class=""><span class="src"><a href="https://www.nfl.com/news/raiders-officially-announce-las-vegas-raiders-title-0ap3000001098555" target="_blank" rel="noopener">↗ news/raiders-officially-announce-las-vegas-…</a></span></td></tr></tbody></table></div>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

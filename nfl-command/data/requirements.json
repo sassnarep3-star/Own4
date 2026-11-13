@@ -1,0 +1,120 @@
+{
+ "title": "Full requirements list (from project brief)",
+ "captured_utc": "2026-11-13",
+ "rows": [
+  {
+   "id": "R1",
+   "requirement": "Collect, organize and analyze NFL information against a full list of requirements",
+   "status": "done",
+   "where": "This page; data/; pages/data.html",
+   "evidence": "32 standings rows, 137 verified games, 326 injury rows, 32 passing rows all captured 2026-11-13 from nfl.com"
+  },
+  {
+   "id": "R2",
+   "requirement": "Suggestions section to improve decision making; reviewer chooses best path before implementation",
+   "status": "done",
+   "where": "pages/suggestions.html",
+   "evidence": "16 proposals with impact/effort/risk/prerequisites; nothing implemented without review"
+  },
+  {
+   "id": "R3",
+   "requirement": "Clear list of questions, information and answers needed before decisions; know what we have and lack; suggestions to discover missing information",
+   "status": "done",
+   "where": "pages/questions.html",
+   "evidence": "20 questions each split known/unknown/answer/unlock path; discovery actions named"
+  },
+  {
+   "id": "R4",
+   "requirement": "Originate our own NFL lines",
+   "status": "done",
+   "where": "pages/own-lines.html",
+   "evidence": "Week 11 spread, total, projected scores, win probability for all 13 games from official team data only"
+  },
+  {
+   "id": "R5",
+   "requirement": "Research and develop strategies generating useful signals (singles, parlays, player-prop combos)",
+   "status": "done",
+   "where": "pages/strategies.html",
+   "evidence": "6 registered strategies; S5/S6 blocked at data level and never faked"
+  },
+  {
+   "id": "R6",
+   "requirement": "Leaderboard competition with rewards for top-performing strategies",
+   "status": "done",
+   "where": "pages/leaderboard.html",
+   "evidence": "Competition rules + scoring; 0 of 6,000 points awarded because no strategy passes all gates"
+  },
+  {
+   "id": "R7",
+   "requirement": "Every strategy passes validation gates",
+   "status": "done",
+   "where": "pages/validation.html",
+   "evidence": "10 pre-registered gates committed to git before the backtest ran"
+  },
+  {
+   "id": "R8",
+   "requirement": "Determine correlation values",
+   "partial": "done where data exists",
+   "status": "partial",
+   "where": "pages/correlations.html",
+   "evidence": "Game-level phi measured on 105 walk-forward graded games; market and player-prop correlations blank + flagged (F-01/F-02)"
+  },
+  {
+   "id": "R9",
+   "requirement": "Remove luck from the equation; selectively skill-based strategies",
+   "status": "done",
+   "where": "pages/validation.html, pages/leaderboard.html",
+   "evidence": "Walk-forward only, frozen holdout, 10,000 placebo runs, week-clustered bootstrap, pre-registration; current signals do not clear the luck bar"
+  },
+  {
+   "id": "R10",
+   "requirement": "Track injuries and defense/offense deficiencies (2nd/3rd/4th string replacing starters)",
+   "partial": "tracked; string designation unverified",
+   "status": "partial",
+   "where": "pages/injuries.html, pages/depth.html",
+   "evidence": "326-row official register + position-side aggregates + official news starter changes; league publishes no depth chart, so 'starter vs 2nd/3rd/4th string' is blank/flagged (F-08)"
+  },
+  {
+   "id": "R11",
+   "requirement": "Executive summary of important details",
+   "status": "done",
+   "where": "pages/executive-summary.html, EXECUTIVE_SUMMARY.md",
+   "evidence": "Written from verified data with links"
+  },
+  {
+   "id": "R12",
+   "requirement": "No manual input from the requester; finish all tasks in session",
+   "status": "done",
+   "where": "COORDINATION.md",
+   "evidence": "All tasks executed autonomously 2026-11-13"
+  },
+  {
+   "id": "R13",
+   "requirement": "Repo review line by line; official sources with links; flag irregularities",
+   "status": "done",
+   "where": "pages/repo-review.html",
+   "evidence": "Cross-namespace reconciliation + 3 game-page spot checks + 2 direct page reads; irregularities flagged F-06/F-07/F-12/F-13"
+  },
+  {
+   "id": "R14",
+   "requirement": "GitHub Pages site: clean landing + category subpages, dashboard, tables with all entries and findings",
+   "status": "done",
+   "where": "nfl-command/index.html + 17 pages",
+   "evidence": "Static site, no JS required; every table row source-linked"
+  },
+  {
+   "id": "R15",
+   "requirement": "Verify line by line; every row has official source link; blanks + flags for unconfirmed values; never infer",
+   "status": "done",
+   "where": "pages/flagged.html, engine/verify_site.py",
+   "evidence": "Automated verifier fails the build on any unsourced row or broken link"
+  },
+  {
+   "id": "R16",
+   "requirement": "Parallel-session coordination via COORDINATION.md",
+   "status": "done",
+   "where": "COORDINATION.md",
+   "evidence": "Claim pushed before work began; scope non-overlap statement published"
+  }
+ ]
+}

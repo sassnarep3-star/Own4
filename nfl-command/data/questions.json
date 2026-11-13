@@ -1,0 +1,227 @@
+{
+ "title": "Decision register \u2014 questions, information and answers",
+ "captured_utc": "2026-11-13",
+ "how_to_read": "Each question lists what we KNOW (with official source), what we DO NOT KNOW, the current ANSWER/status, and exactly WHAT WOULD UNLOCK it. A decision is 'ready' only when every question it depends on is answered or explicitly accepted as risk.",
+ "rows": [
+  {
+   "id": "Q1",
+   "topic": "Market prices",
+   "question": "Where can we obtain a licensed betting-line archive (spreads, totals, moneylines) to grade S1-S4 against?",
+   "known": "The NFL publishes no betting lines on nfl.com; no price data exists anywhere in this repository.",
+   "unknown": "Whether a rights-cleared commercial feed (e.g., a licensed odds provider) fits the project's budget and data-use terms.",
+   "answer": "BLOCKED \u2014 every market column is blank, never proxied.",
+   "unlock": "Ingest a licensed odds feed; then gate G6 becomes evaluable.",
+   "discover": "Request trial access from licensed odds vendors; document terms; store closing lines at kick-off.",
+   "status": "blocked"
+  },
+  {
+   "id": "Q2",
+   "topic": "Player props",
+   "question": "What official source gives per-game player outcomes (passing/rushing/receiving yards, receptions) for 2026?",
+   "known": "nfl.com player pages show season totals; the team-stats page shows team aggregates only in the fetched rendering.",
+   "unknown": "Whether nfl.com game-book PDFs (linked per game) contain full player lines at scale, and whether bulk use is permitted.",
+   "answer": "BLOCKED for prop-combo grading \u2014 S5/S6 registered but nothing graded.",
+   "unlock": "Confirm a per-game player-stats source with usage rights; ingest 2026 game books.",
+   "discover": "Inspect the official game-book PDFs (linked from each game page) on a sample of games; if complete, automate extraction.",
+   "status": "blocked"
+  },
+  {
+   "id": "Q3",
+   "topic": "Depth charts",
+   "question": "Which players are starters vs 2nd/3rd/4th string on each unit?",
+   "known": "The official injury report gives practice and game status only. Official news names some starters (e.g., 'Drew Lock expected to start').",
+   "unknown": "The league publishes no depth chart (no official depth-chart page exists on nfl.com).",
+   "answer": "UNVERIFIED \u2014 starter/backup columns are blank by policy; deficiency tracking uses absences + official news instead.",
+   "unlock": "A league-published depth chart, or snap-count data from official game books.",
+   "discover": "Extract snap counts from official game-book PDFs to derive on-field usage tiers empirically.",
+   "status": "open"
+  },
+  {
+   "id": "Q4",
+   "topic": "Injury impact",
+   "question": "How much does losing a specific starter move our line?",
+   "known": "326 official Week 10 injury rows;14 Out, 11 Questionable.",
+   "unknown": "Player-level value (no official player valuation exists; no snap counts).",
+   "answer": "Not quantified \u2014 would be inference. Lines are published without injury adjustments.",
+   "unlock": "Player usage data (snaps) + a pre-registered valuation model.",
+   "discover": "Pre-register an injury-adjustment model before looking at results, then test on future weeks.",
+   "status": "open"
+  },
+  {
+   "id": "Q5",
+   "topic": "Lamar Jackson timeline",
+   "question": "What is Lamar Jackson's actual absence timeline?",
+   "known": "Official nfl.com articles state both '6-9 weeks' (Nov 5) and '6-10 weeks' (Nov 13).",
+   "unknown": "Which timeline is authoritative.",
+   "answer": "Unresolved official-source discrepancy \u2014 flagged F-07. BAL lines carry no QB adjustment either way.",
+   "unlock": "A later official team statement.",
+   "discover": "Monitor nfl.com news; record every timeline statement with its date.",
+   "status": "partial"
+  },
+  {
+   "id": "Q6",
+   "topic": "BAL quarterback depth",
+   "question": "Who starts at QB for Baltimore now, and is he a backup/third string?",
+   "known": "Lamar Jackson on IR (official); Tyler Huntley out for season (official).",
+   "unknown": "The official starter name for Week 10/11 is not stated on the pages fetched this session.",
+   "answer": "Open. The depth page lists BAL's QB absences without asserting a string number.",
+   "unlock": "Official depth-chart or week inactives article naming the starter.",
+   "discover": "Read the official Week 10 inactives/news pages Sunday; record starter names with links.",
+   "status": "open"
+  },
+  {
+   "id": "Q7",
+   "topic": "Sample size",
+   "question": "How many graded selections are needed before rewards can be earned?",
+   "known": "Gate G2 requires >= 300 graded selections; the 2026 season offers at most ~272 games.",
+   "unknown": "Nothing \u2014 this is a design constant.",
+   "answer": "Multi-season accumulation is required: 2026 alone can never qualify a game-level strategy.",
+   "unlock": "Ingest 2024-2025 official archives and re-grade with the same frozen gates.",
+   "discover": "Extend the verified-games archive to prior seasons via official week pages.",
+   "status": "answered"
+  },
+  {
+   "id": "Q8",
+   "topic": "Holdout size",
+   "question": "Is a 30-game holdout (weeks 8-10) enough to separate skill from luck?",
+   "known": "Bootstrap CI of margin-MAE improvement is [-2.47, +3.74] points/game \u2014 includes 0.",
+   "unknown": "True effect size.",
+   "answer": "No \u2014 the holdout direction is positive but not yet distinguishable from luck. This is why G5 fails honestly.",
+   "unlock": "Larger frozen holdout (rest of 2026 + 2025).",
+   "discover": "Freeze the model now; grade forward without changes.",
+   "status": "answered"
+  },
+  {
+   "id": "Q9",
+   "topic": "Home advantage",
+   "question": "Why is fitted 2026 home-field advantage only +0.08 points?",
+   "known": "Historical NFL HFA is ~2.5 points; our fit on 137 games gives +0.08.",
+   "unknown": "Whether this reflects 2026 specifics, the peer archive's neutral flags (F-06), or noise.",
+   "answer": "Flagged F-05. Lines published with the fitted value; sensitivity noted.",
+   "unlock": "More games (season end) or corrected neutral flags.",
+   "discover": "Verify the 6 peer-flagged neutral games against official game pages.",
+   "status": "partial"
+  },
+  {
+   "id": "Q10",
+   "topic": "Correlations",
+   "question": "How correlated are parlay legs in practice?",
+   "known": "Game-level phi (model-internal): favorite-covers/over = -0.17; home-win/over = -0.22 on 105 games.",
+   "unknown": "Market-based correlations; all player-prop correlations.",
+   "answer": "Multiplicative pricing is NOT defensible for these pairs (|phi| up to 0.22); player-level remains blank.",
+   "unlock": "Market prices (Q1) and player outcomes (Q2).",
+   "discover": "Same as Q1/Q2.",
+   "status": "partial"
+  },
+  {
+   "id": "Q11",
+   "topic": "Totals model",
+   "question": "Can totals be forecast better than the naive running average?",
+   "known": "Holdout total MAE 11.35 vs naive 11.25 \u2014 model is slightly worse.",
+   "unknown": "Whether weather/QB inputs would help.",
+   "answer": "No current edge on totals; published unchanged.",
+   "unlock": "New pre-registered features (wind, QB status) tested on future weeks.",
+   "discover": "Pre-register a weather-feature model before Week 12.",
+   "status": "answered"
+  },
+  {
+   "id": "Q12",
+   "topic": "Rewards",
+   "question": "What do winners actually receive?",
+   "known": "Competition design allocates 6,000 reputation points; 0 awarded so far.",
+   "unknown": "Whether the requester wants funded prizes or recognition only.",
+   "answer": "Points are project reputation only (F-04).",
+   "unlock": "A decision on prize structure.",
+   "discover": "Reviewer chooses on the suggestions board (SUG-09).",
+   "status": "needs decision"
+  },
+  {
+   "id": "Q13",
+   "topic": "Data rights",
+   "question": "May NFL.com data be republished and used for betting research?",
+   "known": "Pages are publicly readable; this project stores transcribed values with source links.",
+   "unknown": "NFL digital-property terms of service were not examined this session.",
+   "answer": "Unverified legal position (F-14) \u2014 research use only for now.",
+   "unlock": "A legal review of NFL terms.",
+   "discover": "Read nfl.com terms of service; record relevant clauses.",
+   "status": "open"
+  },
+  {
+   "id": "Q14",
+   "topic": "Weekly cadence",
+   "question": "How often should lines and injury data refresh?",
+   "known": "Injury reports update daily in season; lines need kick-off prices.",
+   "unknown": "Automation capacity of this repository (currently manual agent sessions).",
+   "answer": "Weekly snapshots at minimum; injury pages should refresh Fri/Sat before kick-off.",
+   "unlock": "A scheduled CI job.",
+   "discover": "SUG-05 proposes a weekly capture workflow.",
+   "status": "needs decision"
+  },
+  {
+   "id": "Q15",
+   "topic": "SGP pricing",
+   "question": "Can same-game parlays be priced without proprietary SGP boards?",
+   "known": "SGP prices are bookmaker-proprietary; official sources publish none.",
+   "unknown": "Nothing \u2014 the answer is no.",
+   "answer": "S6 stays blocked; no proxy SGP pricing is invented.",
+   "unlock": "Licensed SGP prices.",
+   "discover": "None available from official sources; revisit if a licensed feed (Q1) includes SGP.",
+   "status": "blocked"
+  },
+  {
+   "id": "Q16",
+   "topic": "Backup-string tracking",
+   "question": "Can we tell when a 2nd/3rd/4th-string player replaces a starter on defense?",
+   "known": "Injury Out/DNP statuses and official news name affected players; e.g., BUF added S Amani Hooker via trade (official news).",
+   "unknown": "Who lines up where \u2014 no official depth chart or snap data in scope.",
+   "answer": "Partial: absence-based deficiency tracking only (pages/depth.html).",
+   "unlock": "Snap counts from official game books (see Q3).",
+   "discover": "Sample-extract one game book to test feasibility.",
+   "status": "partial"
+  },
+  {
+   "id": "Q17",
+   "topic": "Model stability",
+   "question": "Do model improvements hold across season halves?",
+   "known": "Margin-MAE improvement is same-signed in weeks 3-6 (0.27 pts/game) and 7-10 (1.51 pts/game).",
+   "unknown": "Whether that continues.",
+   "answer": "G8 passes on sign consistency; magnitude unproven.",
+   "unlock": "Forward grading weeks 11-18.",
+   "discover": "Freeze and grade forward.",
+   "status": "answered"
+  },
+  {
+   "id": "Q18",
+   "topic": "Closing-line value",
+   "question": "Is our line sharper than the closing line?",
+   "known": "Nothing \u2014 no closing prices exist in any official source.",
+   "unknown": "Everything about CLV.",
+   "answer": "Cannot be answered without Q1.",
+   "unlock": "Q1.",
+   "discover": "Q1.",
+   "status": "blocked"
+  },
+  {
+   "id": "Q19",
+   "topic": "Neutral games",
+   "question": "Which 2026 games are officially neutral-site?",
+   "known": "W10 NE@DET is official (Munich, on the official week page); W11 MIN@SF is official (Mexico City).",
+   "unknown": "Why the peer archive flags 6 other games neutral (incl. IND@WAS, BAL@DAL).",
+   "answer": "Flagged F-06; model zeroes HFA only for officially confirmed games... and peer-flagged games in the fit (sensitivity ~0).",
+   "unlock": "Official game pages for those 6 games.",
+   "discover": "Fetch the 6 game pages; record venue.",
+   "status": "partial"
+  },
+  {
+   "id": "Q20",
+   "topic": "Workspace sprawl",
+   "question": "Which of the 12 NFL workspaces is canonical?",
+   "known": "Each prior session published its own site under /nfl-*/.",
+   "unknown": "The requester's preference.",
+   "answer": "None is canonical yet; this workspace adds verified 2026-11-13 data and links the rest (F-13).",
+   "unlock": "A reviewer decision (SUG-12).",
+   "discover": "Reviewer picks an entry point on the suggestions board.",
+   "status": "needs decision"
+  }
+ ]
+}

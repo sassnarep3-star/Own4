@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions board · Own4 NFL Own Lines</title>
+<meta name="description" content="Source-linked NFL line origination, strategy competition and decision support. Every row cites an official source.">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2430;--line:#233043;--ink:#e6edf3;--dim:#93a1b1;
+  --acc:#4aa3ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--chip:#1f2b3a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+aside{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 14px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.brand span{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.08em;
+  text-transform:uppercase}
+.tag{font-size:11px;color:var(--dim);margin:6px 0 14px}
+nav .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7c8f;
+  margin:16px 0 5px}
+nav a{display:block;padding:5px 9px;border-radius:6px;color:#c6d2de;font-size:13.5px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--chip);color:#fff;font-weight:600}
+main{flex:1;min-width:0;padding:26px 34px 80px;max-width:1500px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+.crumb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.lede{color:#c9d5e1;max-width:1000px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:23px;font-weight:700;display:block;line-height:1.2}
+.kpi .l{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--dim);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  margin:12px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:#a9b8c8;position:sticky;top:0}
+tbody tr:hover{background:#18202b}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:#5b6b7c;font-style:italic}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.note-pill{color:var(--warn);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--chip);
+  font-size:11.5px;color:#c6d2de;margin-right:4px}
+.chip.g{background:#12341c;color:#7ee787}
+.chip.b{background:#3b1517;color:#ff9c96}
+.chip.w{background:#3a2c0b;color:#f0c05a}
+.note{font-size:12.5px;color:var(--dim);margin:6px 0 18px;max-width:1000px}
+.box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:13px 16px;margin:16px 0}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box p{margin:4px 0}
+sup a{font-size:11px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--dim);max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+code{background:#0b1016;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul.tight{margin:6px 0 14px;padding-left:20px}
+ul.tight li{margin:3px 0}
+@media(max-width:900px){
+  aside{position:static;height:auto;width:100%;flex:none}
+  .layout{flex-direction:column}
+  main{padding:18px}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <a class="brand" href="../index.html">Own4 · NFL <span>Own lines · gates · competition</span></a>
+  <div class="tag">Snapshot 2026-11-13 · official NFL.com sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Start</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-13</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team stats</a><a class="nav" href="../pages/schedule.html">Schedule & results</a><a class="nav" href="../pages/players.html">Player leaders & logs</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><div class="grp">Originated lines</div><a class="nav" href="../pages/own-lines.html">Week 11 own lines</a><a class="nav" href="../pages/props.html">Player props & combos</a><a class="nav" href="../pages/parlays.html">Parlays & dependence</a><div class="grp">Strategy competition</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation gates</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/luck.html">Backtest & luck</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & depth</a><div class="grp">Decisions</div><a class="nav" href="../pages/questions.html">Questions register</a><a class="nav" href="../pages/decisions.html">Decisions to make</a><a class="nav active" href="../pages/suggestions.html">Suggestions board</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a></nav>
+</aside>
+<main class="main" id="main">
+<p class="crumb">Decisions / Suggestions</p>
+<h1>Suggestions board</h1><p class="lede">A dedicated place to review proposals and choose a path before anything is implemented. Every suggestion states its impact, effort, risk and what has to be true first.</p><div class="box good"><p><strong>How to use this page.</strong> Read the impact column first. The four decisions marked <em>needs decision</em> are the ones that change what this project is; everything else can proceed without you.</p></div><div class="tw"><table><thead><tr><th>ID</th><th>Suggestion</th><th>Effort</th><th>Risk</th><th>Why it matters</th><th>Prerequisite</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td>S-01</td><td><span class="chip w">high</span> Read more official player game logs</td><td>medium</td><td>low</td><td>Each log is one page read; 100 logs would give prop research a usable sample.</td><td>Nothing - official and free.</td><td>proposed</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-02</td><td><span class="chip w">high</span> Licence a depth chart and snap counts</td><td>high</td><td>low</td><td>This is the only way to answer the 2nd/3rd/4th-string question.</td><td>Budget and a vendor.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-03</td><td><span class="chip w">high</span> Licence historical and live odds</td><td>high</td><td>medium</td><td>Without prices, no edge can ever be priced. Every strategy stays unpriced.</td><td>Budget and a vendor.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-04</td><td><span class="chip w">high</span> Redefine the product as decision support</td><td>low</td><td>low</td><td>Publish coverage, prices-blank discipline and honest grades instead of picks.</td><td>A decision from the owner.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-05</td><td><span class="chip w">high</span> Join historical injury reports to results</td><td>medium</td><td>medium</td><td>Turns the availability tracker into a measured effect instead of a list.</td><td>Archived injury pages per week.</td><td>proposed</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-06</td><td><span class="chip ">medium</span> Add a second official season to the model</td><td>low</td><td>low</td><td>One season of official data cannot show stability.</td><td>Reading the 2025 pages the same way.</td><td>proposed</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-07</td><td><span class="chip w">high</span> Keep the leaderboard as a rejection machine</td><td>low</td><td>low</td><td>It rejected everything, which is the correct output for public data against efficient prices. Its value is stopping a lucky backtest from shipping.</td><td>Nothing.</td><td>implemented</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-08</td><td><span class="chip w">high</span> Publish a sealed prospective log</td><td>low</td><td>low</td><td>Writes each prediction to an append-only file before kickoff, which is the only way to pass G12.</td><td>A weekly run.</td><td>proposed</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-09</td><td><span class="chip ">medium</span> Consolidate the eleven NFL namespaces</td><td>medium</td><td>high</td><td>The repo has 11 NFL workspaces with overlapping claims. One canonical site plus an archive index would stop contradictions like the props-blocked error.</td><td>Owner decision; other sessions own those files.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-10</td><td><span class="chip g">low</span> Reconcile the published AVG column (IC-07)</td><td>low</td><td>low</td><td>Four of 32 rows do not reproduce yds/att. Publish our own computed average.</td><td>Nothing - already handled here.</td><td>implemented</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-11</td><td><span class="chip ">medium</span> Fix the root nav regression (R-01)</td><td>low</td><td>medium</td><td>A routine rebuild deletes peer navigation links from the root dashboard.</td><td>The owner of verification/build.py.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-12</td><td><span class="chip ">medium</span> Add a per-game official score check to CI</td><td>low</td><td>low</td><td>Weekly re-read of the finished games would catch a stale snapshot immediately.</td><td>A workflow run.</td><td>proposed</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-13</td><td><span class="chip ">medium</span> Widen prop combos only after joint measurement</td><td>low</td><td>low</td><td>Same-player combos are positively correlated; price them jointly or not at all.</td><td>Nothing - method already here.</td><td>implemented</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-14</td><td><span class="chip ">medium</span> Publish payoff assumptions explicitly</td><td>low</td><td>low</td><td>Every break-even rate on this site assumes -110 both ways. A different price changes every number.</td><td>Real prices would replace the assumption.</td><td>implemented</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-15</td><td><span class="chip g">low</span> Add a stale-data banner per page</td><td>low</td><td>low</td><td>Each page states the UTC capture time so a reader can see how old it is.</td><td>Nothing.</td><td>implemented</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>S-16</td><td><span class="chip w">high</span> Decide whether to accept backtest-only evidence</td><td>low</td><td>high</td><td>If the owner accepts backtests, rewards can be paid on them; this site recommends not to, because luck cannot be excluded (L4).</td><td>An explicit owner decision.</td><td>needs decision</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr></tbody></table></div><p class="note">Status is one of implemented (done in this session), proposed (safe to do next) or needs decision (the owner has to choose). Impact is coloured by priority.</p><h2>If you only read one thing</h2><div class="box warn"><p><strong>S-04 decides the rest.</strong> If this stays a betting-edge project, suggestions S-02 and S-03 (licences) have to be funded, because neither the depth chart nor the price exists for free. If it becomes a decision-support and data-coverage tool, the honest version is already written and only needs more official logs (S-01) and a weekly refresh (S-12).</p></div>
+<footer>
+<p><strong>Own4 · NFL Own Lines</strong> — analytical research, <strong>not wagering advice</strong>.
+Every data row links to the official NFL.com page it was read from on 2026-11-13 (UTC); every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../pages/flagged.html">Flagged for review</a> page. No market price exists anywhere in this
+repository, so no edge, stake or return is claimed.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decisions to make · Own4 NFL Own Lines</title>
+<meta name="description" content="Source-linked NFL line origination, strategy competition and decision support. Every row cites an official source.">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2430;--line:#233043;--ink:#e6edf3;--dim:#93a1b1;
+  --acc:#4aa3ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--chip:#1f2b3a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+aside{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 14px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.brand span{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.08em;
+  text-transform:uppercase}
+.tag{font-size:11px;color:var(--dim);margin:6px 0 14px}
+nav .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7c8f;
+  margin:16px 0 5px}
+nav a{display:block;padding:5px 9px;border-radius:6px;color:#c6d2de;font-size:13.5px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--chip);color:#fff;font-weight:600}
+main{flex:1;min-width:0;padding:26px 34px 80px;max-width:1500px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+.crumb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.lede{color:#c9d5e1;max-width:1000px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:23px;font-weight:700;display:block;line-height:1.2}
+.kpi .l{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--dim);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  margin:12px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:#a9b8c8;position:sticky;top:0}
+tbody tr:hover{background:#18202b}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:#5b6b7c;font-style:italic}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.note-pill{color:var(--warn);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--chip);
+  font-size:11.5px;color:#c6d2de;margin-right:4px}
+.chip.g{background:#12341c;color:#7ee787}
+.chip.b{background:#3b1517;color:#ff9c96}
+.chip.w{background:#3a2c0b;color:#f0c05a}
+.note{font-size:12.5px;color:var(--dim);margin:6px 0 18px;max-width:1000px}
+.box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:13px 16px;margin:16px 0}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box p{margin:4px 0}
+sup a{font-size:11px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--dim);max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+code{background:#0b1016;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul.tight{margin:6px 0 14px;padding-left:20px}
+ul.tight li{margin:3px 0}
+@media(max-width:900px){
+  aside{position:static;height:auto;width:100%;flex:none}
+  .layout{flex-direction:column}
+  main{padding:18px}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <a class="brand" href="../index.html">Own4 · NFL <span>Own lines · gates · competition</span></a>
+  <div class="tag">Snapshot 2026-11-13 · official NFL.com sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Start</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-13</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team stats</a><a class="nav" href="../pages/schedule.html">Schedule & results</a><a class="nav" href="../pages/players.html">Player leaders & logs</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><div class="grp">Originated lines</div><a class="nav" href="../pages/own-lines.html">Week 11 own lines</a><a class="nav" href="../pages/props.html">Player props & combos</a><a class="nav" href="../pages/parlays.html">Parlays & dependence</a><div class="grp">Strategy competition</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation gates</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/luck.html">Backtest & luck</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & depth</a><div class="grp">Decisions</div><a class="nav" href="../pages/questions.html">Questions register</a><a class="nav active" href="../pages/decisions.html">Decisions to make</a><a class="nav" href="../pages/suggestions.html">Suggestions board</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a></nav>
+</aside>
+<main class="main" id="main">
+<p class="crumb">Decisions / Decisions</p>
+<h1>Decisions to make</h1><p class="lede">Seven decisions, each with the exact questions blocking it and the recommended path. Nothing here has been implemented on the owner's behalf.</p><div class="tw"><table><thead><tr><th>ID</th><th>Decision</th><th>Blocked by</th><th>Why it is a real fork</th><th>Recommended path</th><th>Status</th><th>Source</th></tr></thead><tbody><tr><td>D1</td><td>What is this product for?</td><td>Q01, Q04, Q11, Q14</td><td>Either a decision-support tool over official data, or a betting model that needs licensed prices. The current evidence supports the first and cannot support the second.</td><td>Decision support (S-04), with the leaderboard kept as a rejection machine (S-07).</td><td>open</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D2</td><td>Do we buy data?</td><td>Q02, Q04, Q05</td><td>A depth chart with snap counts and a licensed odds archive. Both are licensing problems, not method problems.</td><td>Price the licences before doing more modelling (S-02, S-03).</td><td>open</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D3</td><td>Do we pay rewards on backtests?</td><td>Q07, Q11</td><td>No. Backtest-only evidence cannot exclude luck; the split-half retest killed the two best-looking entries.</td><td>Pay only on prospective replication (G12 / S-08).</td><td>recommend no</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D4</td><td>Do we publish picks?</td><td>Q04, Q10</td><td>The own-line model is worse than the closing line, and no price exists to bet against.</td><td>Publish projections with inputs, never picks.</td><td>recommend no</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D5</td><td>Do we scale player props?</td><td>Q01, Q14</td><td>The data exists and reconciles. Only seven logs were read here.</td><td>Read more official logs (S-01) before registering prop strategies at scale.</td><td>recommend yes</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D6</td><td>What happens to the eleven NFL namespaces?</td><td>Q15</td><td>They overlap and contradict each other; one of them wrongly recorded props as blocked.</td><td>Consolidate under one canonical NFL site with an archive index (S-09).</td><td>open</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>D7</td><td>How is the snapshot kept current?</td><td>Q13, Q15</td><td>This session&#x27;s snapshot already differs from the 2026-11-12 one by a completed game.</td><td>Add a weekly official re-read to CI (S-12) and a visible capture timestamp per page.</td><td>recommend yes</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr></tbody></table></div><p class="note">Each decision names the questions from the register that block it. None of these has been actioned; they are the owner's calls.</p>
+<footer>
+<p><strong>Own4 · NFL Own Lines</strong> — analytical research, <strong>not wagering advice</strong>.
+Every data row links to the official NFL.com page it was read from on 2026-11-13 (UTC); every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../pages/flagged.html">Flagged for review</a> page. No market price exists anywhere in this
+repository, so no edge, stake or return is claimed.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body></html>

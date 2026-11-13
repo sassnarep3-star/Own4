@@ -1,0 +1,31 @@
+{
+  "dataset": "correlation_register",
+  "session": "arena/d6c72eb4-own4",
+  "captured_utc": "2026-11-13",
+  "note": "Values below are quoted from nfl-lines/data/derived/correlations.json (computed on 4,055 walk-forward games 2011-2026; re-verified for internal consistency in this session). Player-level and same-game prop dependence rows are blank — no verified source exists (A-13/Q-04/Q-09).",
+  "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json",
+  "rows": [
+    {"id": "CR-01", "group": "Forecast skill", "label": "Own-line edge vs actual result against the market spread", "pearson_r": 0.0072, "n": 4055, "ci95": [-0.0236, 0.038], "p_value": 0.645059, "reading": "No detectable edge: the model's spread gap does not predict beating the spread."},
+    {"id": "CR-02", "group": "Forecast skill", "label": "Own-total edge vs actual result against the market total", "pearson_r": -0.0158, "n": 4055, "ci95": [-0.0466, 0.015], "p_value": 0.313562, "reading": "No detectable edge on totals."},
+    {"id": "CR-03", "group": "Forecast accuracy", "label": "Own spread vs actual home margin", "pearson_r": 0.3384, "n": 4055, "ci95": [0.3108, 0.3653], "p_value": 0.0, "reading": "Model correlates with outcomes, but weaker than the market."},
+    {"id": "CR-04", "group": "Forecast accuracy", "label": "Market closing spread vs actual home margin", "pearson_r": 0.4393, "n": 4055, "ci95": [0.4142, 0.4638], "p_value": 0.0, "reading": "The market is the better forecaster (0.4393 > 0.3384)."},
+    {"id": "CR-05", "group": "Forecast accuracy", "label": "Own total vs actual total", "pearson_r": 0.1942, "n": 4055, "ci95": [0.1644, 0.2237], "p_value": 0.0, "reading": "Model totals track outcomes weakly."},
+    {"id": "CR-06", "group": "Forecast accuracy", "label": "Market closing total vs actual total", "pearson_r": 0.3135, "n": 4055, "ci95": [0.2854, 0.341], "p_value": 0.0, "reading": "Market totals again outperform the model."},
+    {"id": "CR-07", "group": "Parlay structure", "label": "Home covers the spread AND the game goes over", "pearson_r": 0.0083, "n": 3912, "ci95": [-0.0231, 0.0396], "p_value": 0.604185, "reading": "Near-zero dependence: side+over same-game legs behave close to independent."},
+    {"id": "CR-08", "group": "Parlay structure", "label": "Favourite covers AND the game goes over", "pearson_r": -0.0167, "n": 3908, "ci95": [-0.0481, 0.0146], "p_value": 0.295388, "reading": "Near-zero dependence."},
+    {"id": "CR-09", "group": "Parlay structure", "label": "Final margin vs game total", "pearson_r": 0.0309, "n": 4055, "ci95": [0.0001, 0.0616], "p_value": 0.049249, "reading": "Marginal; not significant after family correction."},
+    {"id": "CR-10", "group": "Team totals", "label": "Home team points vs away team points", "pearson_r": -0.0401, "n": 4055, "ci95": [-0.0708, -0.0094], "p_value": 0.010555, "reading": "Slight negative game-script dependence between the two team totals."},
+    {"id": "CR-11", "group": "Situational", "label": "Rest differential vs home margin", "pearson_r": 0.0298, "n": 4055, "ci95": [-0.001, 0.0605], "p_value": 0.058105, "reading": "Weak; yet the model's rest term is large (Q-02) — inconsistency under review."},
+    {"id": "CR-12", "group": "Market efficiency", "label": "Market closing spread vs own spread", "pearson_r": 0.7313, "n": 4055, "ci95": [0.7166, 0.7453], "p_value": 0.0, "reading": "Model and market agree broadly; the disagreements are the strategy candidates."},
+    {"id": "CR-13", "group": "Market efficiency", "label": "Market closing total vs own total", "pearson_r": 0.6938, "n": 4055, "ci95": [0.6774, 0.7094], "p_value": 0.0, "reading": "Broad agreement on totals."},
+    {"id": "CR-P1", "group": "Player props", "label": "QB passing yards vs WR receiving yards (same game)", "pearson_r": null, "n": null, "ci95": null, "p_value": null, "reading": "BLANK — no verified player game logs (A-13). Flagged, never inferred."},
+    {"id": "CR-P2", "group": "Player props", "label": "Team total vs RB rush yards (same game)", "pearson_r": null, "n": null, "ci95": null, "p_value": null, "reading": "BLANK — same reason."},
+    {"id": "CR-P3", "group": "Player props", "label": "Game spread vs player TD props (same game)", "pearson_r": null, "n": null, "ci95": null, "p_value": null, "reading": "BLANK — same reason."}
+  ],
+  "parlay_pricing_guidance": [
+    "Cross-game legs: independence is a fair approximation (verified by construction; no shared game state).",
+    "Same-game side+total legs: measured dependence ≈ 0 (CR-07/CR-08) — independent pricing is defensible for these pairs only.",
+    "Same-game team totals: slight negative dependence (CR-10) — price jointly, do not multiply naive probabilities.",
+    "Any leg involving a player prop: CANNOT be priced yet (CR-P1..P3 blank). Player-prop combos stay behind the FAM-3 gate."
+  ]
+}

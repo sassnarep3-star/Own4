@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Validation gates · NFL Origination · Own4</title>
+<meta name="description" content="Validation gates">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html" class="on">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html" class="on">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Evidence / Validation gates</div>
+
+<h1>Validation gates</h1>
+<p class="lede">Ten gates, all written down before the holdout was scored. A strategy cannot appear
+as a qualifier without clearing every gate that is not blocked — and one gate is permanently
+blocked, which is why nothing qualifies.</p>
+<div class="cards">
+<div class="card good"><b>5</b><span>pass</span></div>
+<div class="card bad"><b>4</b><span>fail</span></div>
+<div class="card warn"><b>1</b><span>blocked</span></div>
+<div class="card bad"><b>0 / 1000</b><span>reward points awarded</span></div>
+</div>
+<div class="panel bad"><h3>Scoreboard</h3>
+<p>No reward can be paid while any gate is open. Blocking gates: <strong>G4, G5, G7, G8, G9</strong>.</p></div>
+<h2>The gates</h2>
+<div class="tw"><table class=""><caption>Ten pre-registered gates with their evidence</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">Gate</th><th scope="col" class="c">Status</th><th scope="col" class="">Evidence from this run</th><th scope="col" class="">Rule</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">G1</td><td class="">Data reconciliation to the official record</td><td class="c"><span class="pill p-good">pass</span></td><td class="">10 of 10 integrity checks pass; 160 of 160 official 2026 W/L/T/PF/PA cells match</td><td class="">Every integrity check must pass before any number is published.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G2</td><td class="">Minimum out-of-sample sample</td><td class="c"><span class="pill p-good">pass</span></td><td class="">2126 graded games in the 2018-2025 holdout (floor 1000)</td><td class="">At least 1,000 out-of-sample games before a skill claim.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G3</td><td class="">Beats the naive baseline</td><td class="c"><span class="pill p-good">pass</span></td><td class="">margin MAE 10.913 (own) vs 11.067 (naive home)</td><td class="">The model must beat the do-nothing baseline.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G4</td><td class="">Beats the closing line</td><td class="c"><span class="pill p-bad">fail</span></td><td class="">margin MAE 10.913 (own) vs 9.848 (closing line)</td><td class="">Beating a naive baseline is not skill; the closing line is the real opponent.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G5</td><td class="">Survives multiple-testing control</td><td class="c"><span class="pill p-bad">fail</span></td><td class="">7 strategies tested (including placebos); 0 survive Benjamini-Hochberg at q=0.05</td><td class="">No strategy may be called skilful unless it survives FDR across everything tried.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G6</td><td class="">Placebos fail (the screen is not too loose)</td><td class="c"><span class="pill p-good">pass</span></td><td class="">2 pre-registered placebo strategies; 0 passed FDR</td><td class="">If a placebo can pass, the screen is too loose to be published as skill.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G7</td><td class="">Executable, archived price</td><td class="c"><span class="pill p-warn">blocked</span></td><td class="">The NFL publishes no betting odds. Every ROI here is priced at an ASSUMED -110; closing lines come from a third-party archive and no price history was licensed.</td><td class="">An edge must be measured against a price that could actually have been taken.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G8</td><td class="">Uncertainty reported and bounded away from zero</td><td class="c"><span class="pill p-bad">fail</span></td><td class="">0 strategies have a week-clustered 95% CI on ROI entirely above zero (of 5 priced)</td><td class="">A positive point estimate is not enough; the interval must exclude zero.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G9</td><td class="">Profit is not one season in disguise</td><td class="c"><span class="pill p-bad">fail</span></td><td class="">1 profitable strategies spread their profit over seasons; every profitable strategy discloses the share of its profit coming from its single best season</td><td class="">No single season may supply the majority of a strategy&#x27;s profit.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">G10</td><td class="">Deterministic reproduction</td><td class="c"><span class="pill p-good">pass</span></td><td class="">Every random draw uses seed 20261113; re-running run_all.py reproduces each derived JSON byte for byte apart from the timestamp.</td><td class="">CI must be able to regenerate every published number from committed code.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr></tbody></table></div>
+<div class="panel warn"><h3>Why a gate can be "blocked" rather than failed</h3>
+<p>A failed gate means the evidence exists and is negative. A <em>blocked</em> gate means the
+evidence cannot exist: G7 requires an executable, archived price, and the NFL publishes no odds at
+all. Blocked is not a pass. It is the reason the reward pool stays unpaid rather than being awarded
+for a good-looking backtest.</p></div>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

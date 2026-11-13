@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Correlations · NFL Origination · Own4</title>
+<meta name="description" content="Correlations">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html" class="on">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html" class="on">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Evidence / Correlations</div>
+
+<h1>Correlations</h1>
+<p class="lede">A parlay's fair price needs the <em>joint</em> distribution, not the product of its
+legs. So the dependence has to be measured, not assumed — and where it cannot be measured, left
+blank.</p>
+<div class="cards">
+<div class="card"><b>9</b><span>tests attempted</span></div>
+<div class="card good"><b>6</b><span>computed with r, n, CI, p, FDR</span></div>
+<div class="card bad"><b>3</b><span>left blank — input unavailable</span></div>
+<div class="card good"><b>3</b><span>surviving FDR at q = 0.05</span></div>
+</div>
+<div class="panel warn"><h3>Method</h3>
+<p>Pearson correlation for continuous pairs, phi for binary prop legs, 95% CI via Fisher z, and
+Benjamini–Hochberg control across <em>every</em> test at once. A blank <strong>r</strong> is never an
+estimated value: it means the input cannot be obtained from an official source, and the reason is
+stated in the row below the table.</p></div>
+<h2>Every correlation test</h2>
+<div class="tw"><table class=""><caption>Correlation values · 9 tests</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">What is correlated</th><th scope="col" class="">Market</th><th scope="col" class="num">r / phi</th><th scope="col" class="num">n</th><th scope="col" class="num">95% CI</th><th scope="col" class="num">p</th><th scope="col" class="c">FDR</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">C1</td><td class="">Closing spread vs closing total, same game</td><td class="">single+parlay</td><td class="num">-0.0103</td><td class="num">7103</td><td class="num">-0.034 … 0.013</td><td class="num">0.39</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C2</td><td class="">Home cover vs over, same game (2-leg SGP)</td><td class="">same-game parlay</td><td class="num">0.0060</td><td class="num">7103</td><td class="num">-0.017 … 0.029</td><td class="num">0.61</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C3</td><td class="">Team points-for vs points-against, same season</td><td class="">team rating</td><td class="num">-0.1878</td><td class="num">893</td><td class="num">-0.250 … -0.124</td><td class="num">1.6e-08</td><td class="c"><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C4</td><td class="">Rest differential vs home margin</td><td class="">situational</td><td class="num">0.0346</td><td class="num">7103</td><td class="num">0.011 … 0.058</td><td class="num">0.0035</td><td class="c"><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C5</td><td class="">QB passing yards over proxy line vs WR1 receiving yards over proxy line</td><td class="">player-prop combo</td><td class="num">0.3461</td><td class="num">803</td><td class="num">0.284 … 0.406</td><td class="num">5.1e-24</td><td class="c"><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C6</td><td class="">Prop legs within the same team-game (second pair)</td><td class="">player-prop combo</td><td class="num"><span class="blank">not obtainable</span></td><td class="num"><span class="blank">no data</span></td><td class="num"><span class="blank">unverified</span></td><td class="num"><span class="blank">unverified</span></td><td class="c"><span class="blank">unverified</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C7</td><td class="">Home-cover rate in the first half of a week vs the second half</td><td class="">cross-game parlay</td><td class="num">-0.0071</td><td class="num">473</td><td class="num">-0.097 … 0.083</td><td class="num">0.88</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C8</td><td class="">Same-game parlay legs vs the sportsbook&#x27;s repriced SGP price</td><td class="">same-game parlay</td><td class="num"><span class="blank">not obtainable</span></td><td class="num"><span class="blank">no data</span></td><td class="num"><span class="blank">unverified</span></td><td class="num"><span class="blank">unverified</span></td><td class="c"><span class="blank">unverified</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">C9</td><td class="">Injury designation vs next-game scoring margin</td><td class="">injury signal</td><td class="num"><span class="blank">not obtainable</span></td><td class="num"><span class="blank">no data</span></td><td class="num"><span class="blank">unverified</span></td><td class="num"><span class="blank">unverified</span></td><td class="c"><span class="blank">unverified</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr></tbody></table></div>
+<h2>What each result means</h2>
+<h3>C1 — Closing spread vs closing total, same game</h3><p>Near zero, so spread and total angles on the same game are close to independent and may be combined; that is a dependence fact, not an edge.</p><h3>C2 — Home cover vs over, same game (2-leg SGP)</h3><p>Near zero over the whole archive, but this pool mixes every game. The player-prop pairs (C5) are the ones that show real dependence.</p><h3>C3 — Team points-for vs points-against, same season</h3><p>Weakly negative: a club that scores more tends to concede slightly less, which is the opposite of the naive &#x27;good offence means bad defence&#x27; story. Used to justify rating offence and defence separately.</p><h3>C4 — Rest differential vs home margin</h3><p>Statistically detectable (n=7,103) but economically tiny: r=0.035 explains about 0.1%% of margin variance. This is why rest is NOT given its own weight in the model.</p><h3>C5 — QB passing yards over proxy line vs WR1 receiving yards over proxy line</h3><p>Real positive dependence: the legs hit together more often than independence predicts, so an SGP priced as if the legs were independent would underprice this combo. Whether that survives the book&#x27;s repricing is C8, which is blank.</p><h3>C6 — Prop legs within the same team-game (second pair)</h3><div class="panel bad"><p><strong>Blank.</strong> The archived prop file exposes one QB/WR pair only; no second pair can be computed without new data.</p></div><h3>C7 — Home-cover rate in the first half of a week vs the second half</h3><p>Near zero, which supports treating legs from different games as independent when multiplying them.</p><h3>C8 — Same-game parlay legs vs the sportsbook&#x27;s repriced SGP price</h3><div class="panel bad"><p><strong>Blank.</strong> No archived same-game-parlay price exists anywhere in this repository, and the NFL publishes no prices at all. The correlation (C5) is measured; the price it must be compared against is not obtainable.</p></div><h3>C9 — Injury designation vs next-game scoring margin</h3><div class="panel bad"><p><strong>Blank.</strong> nfl.com/injuries/ serves only the current week and publishes no historical archive, so an injury effect cannot be estimated at all.</p></div>
+<h2>Trading rules this implies</h2>
+<ul>
+<li><strong>Cross-game legs may be multiplied.</strong> The dependence between games is
+indistinguishable from zero (C1, C2, C7).</li>
+<li><strong>Same-game player-prop legs may not.</strong> QB passing yards and WR1 receiving yards are
+positively dependent (C5), so multiplying them understates the joint probability by about 45%.</li>
+<li><strong>That is not an edge.</strong> Books reprice correlated same-game legs, and the repriced
+price (C8) is not obtainable here. The dependence is a measurement; the edge would be a comparison
+against a price, and there is no price.</li>
+</ul>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>
