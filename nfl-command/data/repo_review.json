@@ -1,0 +1,878 @@
+{
+ "title": "Repo review \u2014 line-by-line verification against official sources",
+ "captured_utc": "2026-11-13",
+ "method": "(1) Inventory every NFL namespace in the repository. (2) Cross-check each namespace's standings snapshot against standings transcribed live from nfl.com/standings on 2026-11-13. (3) Verify the peer 2026 game archive by aggregate reconciliation and three individual official game-page spot checks. (4) Record every irregularity with its official links.",
+ "inventory": [
+  {
+   "namespace": "nfl/",
+   "content": "Strategy framework site (singles/parlays/props, gates, correlations)",
+   "review": "Structure only; its numeric claims are pre-2026-11-13 and superseded by live captures here."
+  },
+  {
+   "namespace": "nfl-audit/",
+   "content": "Week 10 audit site (injuries, depth, questions, suggestions)",
+   "review": "Overlaps this workspace's scope; contents not re-verified line-by-line (its data predates 2026-11-13)."
+  },
+  {
+   "namespace": "nfl-decision/",
+   "content": "Decision-intelligence site (backtest, own lines wk10)",
+   "review": "Not re-verified; see F-13."
+  },
+  {
+   "namespace": "nfl-decisions/",
+   "content": "Decision register + suggestions site",
+   "review": "Not re-verified; see F-13."
+  },
+  {
+   "namespace": "nfl-edge/",
+   "content": "22-page site incl. 136-game verified archive",
+   "review": "Games archive verified here (0-mismatch reconciliation + 3/3 spot checks). Standings agree 30/32 vs fresh (WAS/NYG explained by TNF). Situational-record columns appear shifted \u2014 see irregularity I-02."
+  },
+  {
+   "namespace": "nfl-hub/",
+   "content": "Hub with nflverse source games.csv (1999-2026, third-party)",
+   "review": "Standings agree 29/31 comparable rows (WAS/NYG explained). Uses 'ARI' abbreviation vs nfl.com 'AZ' (mapping note, not a defect). nflverse CSV is THIRD-PARTY data \u2014 not used in this workspace."
+  },
+  {
+   "namespace": "nfl-intel/",
+   "content": "NFL intelligence site",
+   "review": "Standings agree 30/32 vs fresh (WAS/NYG explained)."
+  },
+  {
+   "namespace": "nfl-lab/",
+   "content": "Data lab (2026-11-02 snapshot)",
+   "review": "Standings snapshot predates Weeks 9-10 (30 rows differ, consistent with its date). Historical, not a defect."
+  },
+  {
+   "namespace": "nfl-lines/",
+   "content": "Line-origination lab with engine + CI",
+   "review": "Standings agree 30/32 vs fresh (WAS/NYG explained)."
+  },
+  {
+   "namespace": "nfl-quant/",
+   "content": "Quant lab (nflverse-derived 1999-2025 backtests)",
+   "review": "Uses third-party nflverse archive incl. market lines; those rows are NOT official and are not used here (F-01)."
+  },
+  {
+   "namespace": "nfl-research/",
+   "content": "Research site stub",
+   "review": "No data claims found."
+  },
+  {
+   "namespace": "nfl-command/",
+   "content": "This session's workspace (2026-11-13 verified captures)",
+   "review": "All rows freshly captured or reconciled today."
+  }
+ ],
+ "mechanical_checks": [
+  {
+   "id": "M-01",
+   "check": "Standings transcription identities (pct, net=PF-PA, home+road=W+L+T)",
+   "result": "32/32 pass",
+   "source": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "M-02",
+   "check": "Passer-rating identity on team passing stats",
+   "result": "32/32 reproduce published Rate within 0.15",
+   "source": "https://www.nfl.com/stats/team-stats/"
+  },
+  {
+   "id": "M-03",
+   "check": "137-game archive reproduces official W-L-T/PF/PA for all 32 clubs",
+   "result": "0 mismatches; league PF=PA=6,291",
+   "source": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "M-04",
+   "check": "Official game-page spot check: NE 10 @ SEA 13 (Week 1, Sep 9)",
+   "result": "exact match",
+   "source": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1"
+  },
+  {
+   "id": "M-05",
+   "check": "Official game-page spot check: PHI 7 @ CHI 27 (Week 3, Sep 28)",
+   "result": "exact match",
+   "source": "https://www.nfl.com/games/eagles-at-bears-2026-reg-3"
+  },
+  {
+   "id": "M-06",
+   "check": "Official game-page spot check: TEN 36 @ CIN 43 OT (Week 8, Nov 1)",
+   "result": "exact match",
+   "source": "https://www.nfl.com/games/titans-at-bengals-2026-reg-8"
+  },
+  {
+   "id": "M-07",
+   "check": "W10 final read directly from official week page: WAS 24 @ NYG 21",
+   "result": "exact match",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "M-08",
+   "check": "Week 11 slate + byes transcribed from official week page",
+   "result": "13 games, 6 byes (ATL/CLE/GB/LAR/NE/SEA)",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "M-09",
+   "check": "Injury register verbatim from official Week 10 report",
+   "result": "326 rows / 28 teams; game+practice statuses as published",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "M-10",
+   "check": "Site verifier: every table row has an https source link; internal links resolve",
+   "result": "see site build output (engine/verify_site.py)",
+   "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/engine/verify_site.py"
+  }
+ ],
+ "cross_namespace_reconciliation": [
+  {
+   "check": "nfl-edge/data/official_standings.json (captured 2026-11-12) vs fresh official standings",
+   "path": "nfl-edge/data/official_standings.json",
+   "snapshot_note": "Peer snapshot 2026-11-12. Expect only WAS and NYG to differ (peer predates the Week 10 TNF final WAS 24-21 NYG).",
+   "rows_compared": 32,
+   "mismatches": 2,
+   "detail": [
+    {
+     "abbr": "NYG",
+     "peer": [
+      5,
+      2,
+      1,
+      182,
+      172
+     ],
+     "fresh_2026-11-13": [
+      5,
+      3,
+      1,
+      203,
+      196
+     ]
+    },
+    {
+     "abbr": "WAS",
+     "peer": [
+      2,
+      5,
+      1,
+      172,
+      202
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      1,
+      196,
+      223
+     ]
+    }
+   ]
+  },
+  {
+   "check": "nfl-lines/data/official/standings_2026.json vs fresh official standings",
+   "path": "nfl-lines/data/official/standings_2026.json",
+   "snapshot_note": "Peer snapshot 2026-11-12 (columns parsed per its 'columns' key: w,l,t,pct,pf,pa).",
+   "rows_compared": 32,
+   "mismatches": 2,
+   "detail": [
+    {
+     "abbr": "NYG",
+     "peer": [
+      5,
+      2,
+      1,
+      182,
+      172
+     ],
+     "fresh_2026-11-13": [
+      5,
+      3,
+      1,
+      203,
+      196
+     ]
+    },
+    {
+     "abbr": "WAS",
+     "peer": [
+      2,
+      5,
+      1,
+      172,
+      202
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      1,
+      196,
+      223
+     ]
+    }
+   ]
+  },
+  {
+   "check": "nfl-intel/data/standings_2026-11-12.json vs fresh official standings",
+   "path": "nfl-intel/data/standings_2026-11-12.json",
+   "snapshot_note": "Peer snapshot 2026-11-12.",
+   "rows_compared": 32,
+   "mismatches": 2,
+   "detail": [
+    {
+     "abbr": "NYG",
+     "peer": [
+      5,
+      2,
+      1,
+      182,
+      172
+     ],
+     "fresh_2026-11-13": [
+      5,
+      3,
+      1,
+      203,
+      196
+     ]
+    },
+    {
+     "abbr": "WAS",
+     "peer": [
+      2,
+      5,
+      1,
+      172,
+      202
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      1,
+      196,
+      223
+     ]
+    }
+   ]
+  },
+  {
+   "check": "nfl-hub/data/official/standings_2026.json vs fresh official standings",
+   "path": "nfl-hub/data/official/standings_2026.json",
+   "snapshot_note": "Peer snapshot (2026-11-12 (before Week 10)).",
+   "rows_compared": 31,
+   "mismatches": 2,
+   "detail": [
+    {
+     "abbr": "NYG",
+     "peer": [
+      5,
+      2,
+      1,
+      182,
+      172
+     ],
+     "fresh_2026-11-13": [
+      5,
+      3,
+      1,
+      203,
+      196
+     ]
+    },
+    {
+     "abbr": "WAS",
+     "peer": [
+      2,
+      5,
+      1,
+      172,
+      202
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      1,
+      196,
+      223
+     ]
+    }
+   ]
+  },
+  {
+   "check": "nfl-lab/data/standings_2026.csv vs fresh official standings",
+   "path": "nfl-lab/data/standings_2026.csv",
+   "snapshot_note": "HISTORICAL snapshot from session bf34205f (2026-11-02, through ~Week 8). Many differences expected and correct for its date; listed for completeness, not as defects.",
+   "rows_compared": 32,
+   "mismatches": 30,
+   "detail": [
+    {
+     "abbr": "BUF",
+     "peer": [
+      6,
+      1,
+      0,
+      233,
+      181
+     ],
+     "fresh_2026-11-13": [
+      7,
+      1,
+      0,
+      256,
+      187
+     ]
+    },
+    {
+     "abbr": "MIN",
+     "peer": [
+      6,
+      1,
+      0,
+      140,
+      93
+     ],
+     "fresh_2026-11-13": [
+      6,
+      2,
+      0,
+      146,
+      116
+     ]
+    },
+    {
+     "abbr": "SF",
+     "peer": [
+      6,
+      1,
+      0,
+      197,
+      139
+     ],
+     "fresh_2026-11-13": [
+      7,
+      1,
+      0,
+      235,
+      156
+     ]
+    },
+    {
+     "abbr": "DEN",
+     "peer": [
+      6,
+      2,
+      0,
+      172,
+      165
+     ],
+     "fresh_2026-11-13": [
+      7,
+      2,
+      0,
+      198,
+      186
+     ]
+    },
+    {
+     "abbr": "CHI",
+     "peer": [
+      5,
+      2,
+      0,
+      180,
+      143
+     ],
+     "fresh_2026-11-13": [
+      7,
+      2,
+      0,
+      241,
+      184
+     ]
+    },
+    {
+     "abbr": "CIN",
+     "peer": [
+      5,
+      2,
+      0,
+      206,
+      158
+     ],
+     "fresh_2026-11-13": [
+      6,
+      2,
+      0,
+      240,
+      175
+     ]
+    },
+    {
+     "abbr": "DET",
+     "peer": [
+      5,
+      2,
+      0,
+      203,
+      180
+     ],
+     "fresh_2026-11-13": [
+      6,
+      2,
+      0,
+      222,
+      189
+     ]
+    },
+    {
+     "abbr": "JAX",
+     "peer": [
+      5,
+      2,
+      0,
+      196,
+      111
+     ],
+     "fresh_2026-11-13": [
+      6,
+      2,
+      0,
+      229,
+      121
+     ]
+    },
+    {
+     "abbr": "KC",
+     "peer": [
+      5,
+      2,
+      0,
+      167,
+      131
+     ],
+     "fresh_2026-11-13": [
+      6,
+      2,
+      0,
+      202,
+      143
+     ]
+    },
+    {
+     "abbr": "NYG",
+     "peer": [
+      4,
+      2,
+      1,
+      163,
+      161
+     ],
+     "fresh_2026-11-13": [
+      5,
+      3,
+      1,
+      203,
+      196
+     ]
+    },
+    {
+     "abbr": "CLE",
+     "peer": [
+      5,
+      3,
+      0,
+      139,
+      173
+     ],
+     "fresh_2026-11-13": [
+      5,
+      4,
+      0,
+      161,
+      196
+     ]
+    },
+    {
+     "abbr": "GB",
+     "peer": [
+      5,
+      3,
+      0,
+      171,
+      164
+     ],
+     "fresh_2026-11-13": [
+      6,
+      3,
+      0,
+      216,
+      191
+     ]
+    },
+    {
+     "abbr": "NE",
+     "peer": [
+      5,
+      3,
+      0,
+      184,
+      162
+     ],
+     "fresh_2026-11-13": [
+      5,
+      4,
+      0,
+      211,
+      207
+     ]
+    },
+    {
+     "abbr": "SEA",
+     "peer": [
+      4,
+      3,
+      0,
+      168,
+      125
+     ],
+     "fresh_2026-11-13": [
+      5,
+      4,
+      0,
+      202,
+      162
+     ]
+    },
+    {
+     "abbr": "BAL",
+     "peer": [
+      4,
+      4,
+      0,
+      179,
+      203
+     ],
+     "fresh_2026-11-13": [
+      4,
+      5,
+      0,
+      189,
+      236
+     ]
+    },
+    {
+     "abbr": "LV",
+     "peer": [
+      4,
+      4,
+      0,
+      221,
+      230
+     ],
+     "fresh_2026-11-13": [
+      4,
+      5,
+      0,
+      238,
+      268
+     ]
+    },
+    {
+     "abbr": "LA",
+     "peer": [
+      4,
+      4,
+      0,
+      194,
+      168
+     ],
+     "fresh_2026-11-13": [
+      5,
+      4,
+      0,
+      214,
+      181
+     ]
+    },
+    {
+     "abbr": "CAR",
+     "peer": [
+      3,
+      4,
+      0,
+      178,
+      193
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      0,
+      199,
+      219
+     ]
+    },
+    {
+     "abbr": "AZ",
+     "peer": [
+      3,
+      5,
+      0,
+      175,
+      238
+     ],
+     "fresh_2026-11-13": [
+      3,
+      6,
+      0,
+      178,
+      255
+     ]
+    },
+    {
+     "abbr": "ATL",
+     "peer": [
+      3,
+      5,
+      0,
+      171,
+      189
+     ],
+     "fresh_2026-11-13": [
+      3,
+      6,
+      0,
+      188,
+      223
+     ]
+    },
+    {
+     "abbr": "DAL",
+     "peer": [
+      3,
+      5,
+      0,
+      219,
+      213
+     ],
+     "fresh_2026-11-13": [
+      4,
+      5,
+      0,
+      246,
+      236
+     ]
+    },
+    {
+     "abbr": "TB",
+     "peer": [
+      3,
+      5,
+      0,
+      178,
+      151
+     ],
+     "fresh_2026-11-13": [
+      3,
+      6,
+      0,
+      202,
+      178
+     ]
+    },
+    {
+     "abbr": "WAS",
+     "peer": [
+      2,
+      4,
+      1,
+      159,
+      182
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      1,
+      196,
+      223
+     ]
+    },
+    {
+     "abbr": "HOU",
+     "peer": [
+      2,
+      5,
+      0,
+      165,
+      170
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      0,
+      209,
+      192
+     ]
+    },
+    {
+     "abbr": "NO",
+     "peer": [
+      2,
+      5,
+      0,
+      162,
+      194
+     ],
+     "fresh_2026-11-13": [
+      3,
+      5,
+      0,
+      185,
+      216
+     ]
+    },
+    {
+     "abbr": "IND",
+     "peer": [
+      2,
+      6,
+      0,
+      161,
+      222
+     ],
+     "fresh_2026-11-13": [
+      2,
+      7,
+      0,
+      184,
+      249
+     ]
+    },
+    {
+     "abbr": "NYJ",
+     "peer": [
+      2,
+      6,
+      0,
+      170,
+      188
+     ],
+     "fresh_2026-11-13": [
+      2,
+      7,
+      0,
+      182,
+      223
+     ]
+    },
+    {
+     "abbr": "PHI",
+     "peer": [
+      2,
+      6,
+      0,
+      137,
+      202
+     ],
+     "fresh_2026-11-13": [
+      2,
+      7,
+      0,
+      148,
+      221
+     ]
+    },
+    {
+     "abbr": "MIA",
+     "peer": [
+      1,
+      6,
+      0,
+      117,
+      181
+     ],
+     "fresh_2026-11-13": [
+      1,
+      7,
+      0,
+      126,
+      200
+     ]
+    },
+    {
+     "abbr": "LAC",
+     "peer": [
+      0,
+      7,
+      0,
+      99,
+      175
+     ],
+     "fresh_2026-11-13": [
+      0,
+      8,
+      0,
+      121,
+      219
+     ]
+    }
+   ]
+  }
+ ],
+ "irregularities": [
+  {
+   "id": "I-01",
+   "title": "WAS/NYG rows differ between 2026-11-12 peer snapshots and 2026-11-13 official standings",
+   "status": "explained",
+   "detail": "The Week 10 TNF final (WAS 24-21 NYG) was played between the captures. Peer NYG 5-2-1 182-172 + 21-24 loss = 5-3-1 203-196 exactly; peer WAS 2-5-1 172-202 + 24-21 win = 3-5-1 196-223 exactly.",
+   "sources": [
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+    "https://www.nfl.com/standings/"
+   ]
+  },
+  {
+   "id": "I-02",
+   "title": "nfl-edge official_standings.json situational records appear column-shifted",
+   "status": "needs review",
+   "detail": "BUF row shows home '4-0-0' and road '0-1-0' and div '3-1-0', while the official page shows home 3-1-0, road 4-0-0, div 0-1-0 (and non-conf 3-0-0). The peer fields look shifted by one column. W-L-T-PF-PA in the same file are correct.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ]
+  },
+  {
+   "id": "I-03",
+   "title": "Peer archive neutral-site flags unconfirmed",
+   "status": "needs review",
+   "detail": "See F-06.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/"
+   ]
+  },
+  {
+   "id": "I-04",
+   "title": "Lamar Jackson absence timeline inconsistency inside nfl.com",
+   "status": "needs review",
+   "detail": "See F-07.",
+   "sources": [
+    "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season",
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13"
+   ]
+  },
+  {
+   "id": "I-05",
+   "title": "nfl-hub uses 'ARI' where nfl.com uses 'AZ'",
+   "status": "explained",
+   "detail": "Abbreviation mapping difference between NFLverse-style and nfl.com; no numeric conflict.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ]
+  },
+  {
+   "id": "I-06",
+   "title": "Third-party archives present in the repo",
+   "status": "needs review",
+   "detail": "nfl-hub/data/source/games.csv and nfl-lines/data/raw/nfldata_games.csv are nflverse (non-official) datasets with market lines. Not used in this workspace. A reviewer should decide whether they may remain in the repo (F-14).",
+   "sources": []
+  }
+ ]
+}

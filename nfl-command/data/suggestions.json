@@ -1,0 +1,183 @@
+{
+ "title": "Suggestions board \u2014 choose a path before anything is implemented",
+ "captured_utc": "2026-11-13",
+ "how_to_read": "Nothing on this board has been implemented. Each row states the problem, the proposal, impact, effort, risk, prerequisites and current status. A reviewer picks the best path; implementation happens only after that choice.",
+ "rows": [
+  {
+   "id": "SUG-01",
+   "title": "Ingest a licensed odds feed (closing lines)",
+   "problem": "S1-S4 and gate G6 cannot be evaluated without market prices (Q1, Q18).",
+   "proposal": "Procure rights-cleared closing lines for 2026 weeks 11-18 and future seasons; store with capture timestamps.",
+   "impact": "high",
+   "effort": "medium",
+   "risk": "cost/licensing",
+   "prerequisites": "Budget decision; data-rights review (Q13)",
+   "status": "needs decision"
+  },
+  {
+   "id": "SUG-02",
+   "title": "Extract player stats from official game books",
+   "problem": "Player-prop combos (S5/S6) and prop correlations are blocked (Q2).",
+   "proposal": "Parse the per-game official game-book PDFs (linked from every nfl.com game page) into a player-outcomes table.",
+   "impact": "high",
+   "effort": "high",
+   "risk": "parse reliability",
+   "prerequisites": "Feasibility sample on 2-3 game books",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-03",
+   "title": "Derive snap-count depth tiers",
+   "problem": "'2nd/3rd/4th string' designation is unverifiable from any league page (Q3, Q16).",
+   "proposal": "Derive empirical usage tiers (starter = majority snaps) from game books; keep official-news starter names as the authoritative overlay.",
+   "impact": "high",
+   "effort": "high",
+   "risk": "definition disputes",
+   "prerequisites": "SUG-02",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-04",
+   "title": "Pre-register an injury-adjustment model",
+   "problem": "Lines currently ignore injuries even though 14 Out statuses exist (Q4).",
+   "proposal": "Before Week 12, register a fixed injury-value model (e.g., positional replacement deltas), then test walk-forward on weeks 12-18.",
+   "impact": "medium",
+   "effort": "medium",
+   "risk": "overfitting on small samples",
+   "prerequisites": "None (uses existing injury register)",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-05",
+   "title": "Weekly automated capture job",
+   "problem": "Data freshness depends on agent sessions (Q14).",
+   "proposal": "A scheduled workflow re-fetches standings, slate, injuries each Friday; snapshot diffs land in data/ with timestamps.",
+   "impact": "medium",
+   "effort": "low",
+   "risk": "page-format drift",
+   "prerequisites": "None",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-06",
+   "title": "Freeze model v1 and grade weeks 11-18 forward",
+   "problem": "Holdout too small to separate skill from luck (Q8).",
+   "proposal": "Freeze this model exactly as committed; grade every week forward with the same gates; no tuning.",
+   "impact": "high",
+   "effort": "low",
+   "risk": "none (discipline only)",
+   "prerequisites": "None",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-07",
+   "title": "Extend verified archive to 2024-2025",
+   "problem": "Gate G2 (>=300 graded selections) cannot be met on 2026 alone (Q7).",
+   "proposal": "Capture official week pages for 2024-2025 and reconcile the same way as 2026 (aggregate + spot checks).",
+   "impact": "high",
+   "effort": "medium",
+   "risk": "source drift on old pages",
+   "prerequisites": "None",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-08",
+   "title": "Verify the 6 disputed neutral-site games",
+   "problem": "Peer archive flags 6 games neutral without official confirmation (Q19, F-06).",
+   "proposal": "Fetch the 6 official game pages; record venue; correct flags.",
+   "impact": "low",
+   "effort": "low",
+   "risk": "none",
+   "prerequisites": "None",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-09",
+   "title": "Decide the reward structure",
+   "problem": "Rewards are reputation points only (Q12).",
+   "proposal": "Choose: (a) points only, (b) funded prizes with rules, (c) recognition badges. Record decision here before any leaderboard payout.",
+   "impact": "medium",
+   "effort": "low",
+   "risk": "expectation mismatch",
+   "prerequisites": "Reviewer decision",
+   "status": "needs decision"
+  },
+  {
+   "id": "SUG-10",
+   "title": "QB-status feature for the totals model",
+   "problem": "Totals model slightly worse than naive (Q11).",
+   "proposal": "Pre-register QB availability features (from official news) before Week 12 and test forward.",
+   "impact": "medium",
+   "effort": "medium",
+   "risk": "overfitting",
+   "prerequisites": "SUG-06 discipline",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-11",
+   "title": "Legal review of NFL data terms",
+   "problem": "Data-use rights unverified (Q13).",
+   "proposal": "Read nfl.com terms of service; record clauses governing stats/scraping/republication.",
+   "impact": "medium",
+   "effort": "low",
+   "risk": "none",
+   "prerequisites": "None",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-12",
+   "title": "Choose one canonical NFL dashboard",
+   "problem": "12 overlapping NFL workspaces confuse readers (Q20, F-13).",
+   "proposal": "Reviewer picks an entry hub (this workspace, nfl-edge, or a new index page); others remain as archives with a banner.",
+   "impact": "high",
+   "effort": "low",
+   "risk": "none",
+   "prerequisites": "Reviewer decision",
+   "status": "needs decision"
+  },
+  {
+   "id": "SUG-13",
+   "title": "Closing-line-value tracker",
+   "problem": "Cannot tell if our lines are sharp (Q18).",
+   "proposal": "Once SUG-01 exists, log our line at publication and compare with kick-off close on every game.",
+   "impact": "high",
+   "effort": "low",
+   "risk": "none",
+   "prerequisites": "SUG-01",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-14",
+   "title": "Weather inputs for totals",
+   "problem": "Totals model underperforms (Q11).",
+   "proposal": "Add forecast wind/temperature from official stadium reports when available; pre-register before use.",
+   "impact": "low",
+   "effort": "medium",
+   "risk": "data availability",
+   "prerequisites": "SUG-06",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-15",
+   "title": "Publish weekly decision digest",
+   "problem": "Reviewers need a recurring decision point.",
+   "proposal": "Each Friday, auto-generate a digest: new injuries, changed starter statuses, own lines vs prior, open questions.",
+   "impact": "medium",
+   "effort": "medium",
+   "risk": "noise",
+   "prerequisites": "SUG-05",
+   "status": "proposed"
+  },
+  {
+   "id": "SUG-16",
+   "title": "Keep the no-fabrication verifier permanent",
+   "problem": "Row-level sourcing can regress over time.",
+   "proposal": "Keep engine/verify_site.py as a required CI gate on every future change to this workspace.",
+   "impact": "high",
+   "effort": "low",
+   "risk": "none",
+   "prerequisites": "None",
+   "status": "implemented"
+  }
+ ]
+}

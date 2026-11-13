@@ -215,3 +215,15 @@ Source-linked NFL line origination, a gated strategy competition, and decision s
   only; CI gate in `.github/workflows/nfl-own.yml`; 17 tests in `nfl-own/tests/`.
 
 Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-800-697-3738).
+
+---
+
+## NFL Command · session `arena-934af359-own4` (2026-11-13)
+
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-command/ — verified-2026-11-13 NFL dashboard:
+originated Week 11 own lines, 6 registered strategies with 10 pre-registered gates and a leaderboard
+(0 of 6,000 points awarded — nothing passes), walk-forward backtest with placebo/bootstrap luck removal,
+326-row official injury register with depth-deficiency tracking, a 20-question decision register, a
+16-item suggestions board, line-by-line repo review, and 16 flagged items. Every table row links an
+official nfl.com source; unverifiable values (market prices, prop prices, depth-chart string labels) are
+blank and flagged — never inferred. Source of truth: `nfl-command/` (see `nfl-command/README.md`).

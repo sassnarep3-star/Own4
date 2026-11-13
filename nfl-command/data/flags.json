@@ -1,0 +1,162 @@
+{
+ "title": "Flagged for Review \u2014 irregularities and unverified items",
+ "captured_utc": "2026-11-13",
+ "policy": "Flagged items never block publication. Each row says what is uncertain, what the official sources say, and what would clear it. Values that cannot be confirmed from an official source are BLANK in the data tables, not zero and not inferred.",
+ "rows": [
+  {
+   "id": "F-01",
+   "severity": "high",
+   "item": "No market price archive exists",
+   "detail": "The NFL publishes no betting lines; no licensed feed is in this repository. All market columns (market spread/total/ML) are blank; S1-S4 ROI claims are impossible; gate G6 is BLOCKED.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "clear": "Ingest a licensed odds feed (SUG-01)."
+  },
+  {
+   "id": "F-02",
+   "severity": "high",
+   "item": "No official per-game player logs or prop prices in scope",
+   "detail": "Player-prop combos S5/S6 and all player-level correlations are blank and ungraded. Never estimated from proxies.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/"
+   ],
+   "clear": "Game-book extraction (SUG-02) or licensed player data."
+  },
+  {
+   "id": "F-03",
+   "severity": "low",
+   "item": "7 unlabeled columns on the official team-stats page",
+   "detail": "The fetched rendering of nfl.com/stats/team-stats shows 15 numeric columns; only the first 8 (Att, Cmp, Cmp%, Yds/Att, Yds, TD, INT, Rate) could be verified by arithmetic identities and are transcribed. The rest are omitted rather than guessed.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/"
+   ],
+   "clear": "Fetch the page with column headers visible; transcribe with headers."
+  },
+  {
+   "id": "F-04",
+   "severity": "low",
+   "item": "Rewards are reputation points only",
+   "detail": "The leaderboard awards points within this research project; no monetary prize is funded.",
+   "sources": [],
+   "clear": "Reviewer decision (SUG-09)."
+  },
+  {
+   "id": "F-05",
+   "severity": "medium",
+   "item": "Fitted 2026 home-field advantage is near zero (+0.08)",
+   "detail": "Historical NFL HFA is about 2.5 points. Our fit on 137 verified 2026 games gives +0.08. Could be noise, 2026 specifics, or the disputed neutral flags (F-06). Published as fitted; no manual adjustment.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/"
+   ],
+   "clear": "More games; corrected neutral flags (SUG-08)."
+  },
+  {
+   "id": "F-06",
+   "severity": "medium",
+   "item": "Peer archive flags 6 games as neutral without official confirmation",
+   "detail": "nfl-edge/data/games_2026.json marks SF@LA(W1), BAL@DAL(W3), IND@WAS(W4), PHI@JAX(W5), HOU@JAX(W6), PIT@NO(W7) neutral. Only NE@DET (Munich, W10) and MIN@SF (Mexico City, W11) are confirmed neutral from official pages fetched this session.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "clear": "Fetch the 6 game pages; record venue (SUG-08)."
+  },
+  {
+   "id": "F-07",
+   "severity": "low",
+   "item": "Official-source inconsistency: Lamar Jackson timeline",
+   "detail": "nfl.com news states 6-9 weeks (Nov 5 article) and 6-10 weeks (Nov 13 roundup) for the same injury.",
+   "sources": [
+    "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season",
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13"
+   ],
+   "clear": "A later definitive team statement."
+  },
+  {
+   "id": "F-08",
+   "severity": "high",
+   "item": "No official depth chart exists",
+   "detail": "The league publishes no depth-chart page. 'Starter / 2nd / 3rd / 4th string' is therefore UNVERIFIED on every injury and depth row and is never inferred. Deficiency tracking uses absences (Out/DNP/Questionable) and official news starter statements only.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "clear": "Snap-count derivation from game books (SUG-03) or a league depth chart."
+  },
+  {
+   "id": "F-09",
+   "severity": "low",
+   "item": "Injury report is a moving snapshot",
+   "detail": "Rows reflect the Week 10 report as fetched 2026-11-13 21:35 UTC. Statuses change daily; this page is a snapshot, not live.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "clear": "Scheduled refresh (SUG-05)."
+  },
+  {
+   "id": "F-10",
+   "severity": "medium",
+   "item": "2026 alone can never pass gate G2",
+   "detail": "G2 requires >=300 graded selections; a season has 272 games. Multi-season accumulation is required by design (Q7).",
+   "sources": [],
+   "clear": "Ingest 2024-2025 (SUG-07)."
+  },
+  {
+   "id": "F-11",
+   "severity": "low",
+   "item": "Game scores verified by reconciliation + spot checks, not full refetch",
+   "detail": "137 game rows are verified by (a) 0-mismatch aggregate reconciliation against the official standings page read 2026-11-13, (b) three game-page spot checks (NE@SEA W1, PHI@CHI W3, TEN@CIN W8) all exact, (c) the W10 final read directly. Each row still carries its official game-page URL for manual review.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "clear": "Row-by-row official refetch if desired."
+  },
+  {
+   "id": "F-12",
+   "severity": "low",
+   "item": "Peer injury counts differ from this session's",
+   "detail": "nfl-edge (fetched 2026-11-12) recorded 275 players/28 clubs for Week 10; this session's 2026-11-13 transcription has 326 rows across 28 teams. Different fetch times and inclusion rules can both be correct.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "clear": "Line-by-line comparison of the two registers if needed."
+  },
+  {
+   "id": "F-13",
+   "severity": "medium",
+   "item": "12 overlapping NFL workspaces",
+   "detail": "nfl/, nfl-audit/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-lab/, nfl-lines/, nfl-quant/, nfl-research/ (+ nfl-command/) each publish partial answers. Risk of contradictory readings for a reviewer.",
+   "sources": [],
+   "clear": "Reviewer picks a canonical hub (SUG-12)."
+  },
+  {
+   "id": "F-14",
+   "severity": "medium",
+   "item": "NFL data-use terms not reviewed",
+   "detail": "This project transcribes public page values with source links for research. nfl.com terms of service were not examined in this session.",
+   "sources": [],
+   "clear": "Legal review (SUG-11)."
+  },
+  {
+   "id": "F-15",
+   "severity": "low",
+   "item": "Totals model slightly worse than naive on holdout",
+   "detail": "Total MAE 11.35 vs naive 11.25 on weeks 8-10. Published unchanged rather than tuned.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/"
+   ],
+   "clear": "Pre-registered feature additions tested forward (SUG-10/SUG-14)."
+  },
+  {
+   "id": "F-16",
+   "severity": "low",
+   "item": "Standings snapshot includes the same-day TNF final",
+   "detail": "Standings captured 2026-11-13 21:25 UTC include WAS 24-21 NYG (Nov 12). Peer 2026-11-12 snapshots predate it; their WAS/NYG rows differ from ours and both are internally consistent.",
+   "sources": [
+    "https://www.nfl.com/standings/",
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+   ],
+   "clear": "None needed \u2014 explained."
+  }
+ ]
+}

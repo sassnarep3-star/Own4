@@ -1,0 +1,201 @@
+{
+ "computed_utc": "2026-11-13T22:05Z",
+ "competition_design": {
+  "name": "NFL Line-Origination Leaderboard (season 2026)",
+  "scoring": "Each registered strategy earns 1,000 reward points only if it passes ALL 10 pre-registered gates on the frozen holdout. Partial credit: 0. Points are reputation/karma within this research project; no monetary prizes are funded (flag F-04).",
+  "anti_luck_rule": "A strategy cannot place on the leaderboard from in-sample performance, from fewer than 300 graded selections, or without beating the 95th percentile of 10,000 placebo runs. This is what removes luck from the ranking.",
+  "reward_pool": {
+   "total_points_available": 6000,
+   "awarded": 0,
+   "note": "0 of 6,000 points awarded \u2014 no strategy passes all gates (2026-11-13 run)."
+  }
+ },
+ "results": [
+  {
+   "id": "S1",
+   "name": "Spread singles (divergence)",
+   "bet_type": "Single \u2014 point spread",
+   "status": "BLOCKED \u2014 no licensed/official market price archive",
+   "gates": {
+    "G1": "pass",
+    "G2": "fail (insufficient sample: 22 holdout selections with |model margin - naive| >= 2.0, < 300)",
+    "G3": "pass",
+    "G4": "pass",
+    "G5": "fail",
+    "G6": "BLOCKED (no market price archive)",
+    "G7": "pass",
+    "G8": "pass",
+    "G9": "pass (flat staking registered)",
+    "G10": "pass"
+   },
+   "passed": 6,
+   "blocked": 1,
+   "failed": 2,
+   "tier": "rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S2",
+   "name": "Total singles (divergence)",
+   "bet_type": "Single \u2014 game total",
+   "status": "BLOCKED \u2014 no licensed/official market price archive",
+   "gates": {
+    "G1": "pass",
+    "G2": "fail (insufficient sample: 17 holdout selections with |model total - naive| >= 2.0, < 300)",
+    "G3": "pass",
+    "G4": "fail",
+    "G5": "fail (CI computed for margin improvement only; total-improvement CI includes 0 on n=22 holdout games)",
+    "G6": "BLOCKED (no market price archive)",
+    "G7": "pass",
+    "G8": "pass",
+    "G9": "pass (flat staking registered)",
+    "G10": "pass"
+   },
+   "passed": 5,
+   "blocked": 1,
+   "failed": 3,
+   "tier": "rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S3",
+   "name": "Moneyline value singles",
+   "bet_type": "Single \u2014 moneyline",
+   "status": "BLOCKED \u2014 no licensed/official market price archive",
+   "gates": {
+    "G1": "pass",
+    "G2": "fail (insufficient sample: 30 holdout winner calls, < 300)",
+    "G3": "pass",
+    "G4": "pass",
+    "G5": "fail",
+    "G6": "BLOCKED (no market price archive)",
+    "G7": "pass",
+    "G8": "pass",
+    "G9": "pass (flat staking registered)",
+    "G10": "pass"
+   },
+   "passed": 6,
+   "blocked": 1,
+   "failed": 2,
+   "tier": "rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S4",
+   "name": "Cross-game 2-leg parlays",
+   "bet_type": "Parlay \u2014 2 legs, different games",
+   "status": "BLOCKED \u2014 prices missing; game-level leg correlation measured separately",
+   "gates": {
+    "G1": "pass",
+    "G2": "fail (insufficient sample: leg grading requires prices; only leg independence is testable, < 300)",
+    "G3": "pass",
+    "G4": "fail",
+    "G5": "fail",
+    "G6": "BLOCKED (no market price archive)",
+    "G7": "pass",
+    "G8": "pass",
+    "G9": "pass (flat staking registered)",
+    "G10": "pass"
+   },
+   "passed": 5,
+   "blocked": 1,
+   "failed": 3,
+   "tier": "rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S5",
+   "name": "Player-prop combos (2-3 legs)",
+   "bet_type": "Parlay \u2014 player props",
+   "status": "BLOCKED \u2014 league publishes no per-game player logs via any page in scope and no prop prices exist officially",
+   "gates": {
+    "G1": "pass",
+    "G2": "BLOCKED (no graded selections possible)",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G7": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G10": "pass"
+   },
+   "passed": 2,
+   "blocked": 8,
+   "failed": 0,
+   "tier": "rejected",
+   "reward_points": 0
+  },
+  {
+   "id": "S6",
+   "name": "Same-game parlay (SGP)",
+   "bet_type": "SGP \u2014 correlated legs, one game",
+   "status": "BLOCKED \u2014 same as S5, plus SGP pricing is proprietary",
+   "gates": {
+    "G1": "pass",
+    "G2": "BLOCKED (no graded selections possible)",
+    "G3": "BLOCKED",
+    "G4": "BLOCKED",
+    "G5": "BLOCKED",
+    "G6": "BLOCKED",
+    "G7": "BLOCKED",
+    "G8": "BLOCKED",
+    "G9": "BLOCKED",
+    "G10": "pass"
+   },
+   "passed": 2,
+   "blocked": 8,
+   "failed": 0,
+   "tier": "rejected",
+   "reward_points": 0
+  }
+ ],
+ "holdout_metrics": {
+  "n": 30,
+  "mae_margin": 10.309223148279282,
+  "base_mae_margin": 12.633333333333333,
+  "mae_total": 11.349503968253968,
+  "base_mae_total": 11.253158479968793,
+  "accuracy": 0.7333333333333333,
+  "base_accuracy": 0.5
+ },
+ "early_metrics": {
+  "n": 61,
+  "mae_margin": 8.188959427581072,
+  "base_mae_margin": 8.460421545667447,
+  "mae_total": 12.223770491803279,
+  "base_mae_total": 11.86152538044313,
+  "accuracy": 0.5901639344262295,
+  "base_accuracy": 0.4918032786885246
+ },
+ "late_metrics": {
+  "n": 44,
+  "mae_margin": 10.638098204259755,
+  "base_mae_margin": 12.151298701298701,
+  "mae_total": 11.0432224025974,
+  "base_mae_total": 10.660824540049726,
+  "accuracy": 0.6818181818181818,
+  "base_accuracy": 0.45454545454545453
+ },
+ "all_metrics": {
+  "n": 105,
+  "mae_margin": 9.21526520066547,
+  "base_mae_margin": 10.007074829931973,
+  "mae_total": 11.72906462585034,
+  "base_mae_total": 11.358374552087799,
+  "accuracy": 0.6285714285714286,
+  "base_accuracy": 0.47619047619047616
+ },
+ "luck_tests": {
+  "placebo_p_accuracy_holdout": 0.0076,
+  "observed_accuracy_holdout": 0.7333,
+  "placebo_p_mae_improvement": 0.0004,
+  "mae_improvement_per_game": 2.3241,
+  "bootstrap_95ci_mae_improvement": [
+   -2.4742,
+   3.7368
+  ],
+  "iters": 10000,
+  "seed": 20261113
+ }
+}
