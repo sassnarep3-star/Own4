@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for Review · 2026-11-13 · Own4</title>
+<link rel="stylesheet" href="../assets/canonical.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="../index.html">Own4 <span>flagged for review · 2026-11-13</span></a>
+  <nav aria-label="Section navigation">
+    <a href="index.html">Report</a>
+    <a href="flagged.html" aria-current="page">⚑ Flagged for Review</a>
+    <a href="../index.html">Root dashboard</a>
+    <a href="../nfl-hub/pages/questions.html">Questions register</a>
+    <a href="../nfl-hub/pages/suggestions.html">Suggestions</a>
+  </nav>
+</header>
+
+<main>
+<p class="eyebrow">Session arena-107d5836-own4 · irregularities found 2026-11-13</p>
+<h1>Flagged for Review</h1>
+<p class="lede">Seven irregularities found by this pass. None blocks publication; all are published
+here instead of being fixed in place, because the affected files belong to other sessions and two of
+the fixes must go through generators that CI rebuilds byte-for-byte. Every row carries its evidence
+and source links so a reviewer can confirm each claim directly. Blank or wrong values are never
+repaired by inference.</p>
+
+<div class="cards">
+  <div class="card bad"><b>VR-01</b><span>mislabeled standings column ·32 rows</span></div>
+  <div class="card bad"><b>VR-02</b><span>3 wrong cells · Buffalo Bills row</span></div>
+  <div class="card warn"><b>VR-03</b><span>50 table rows without any source link</span></div>
+  <div class="card warn"><b>VR-04</b><span>26 teams' home/road swapped in one data file</span></div>
+  <div class="card"><b>VR-05</b><span>team-code drift ARI vs AZ · cosmetic</span></div>
+  <div class="card warn"><b>VR-06</b><span>3 dead official URLs re-confirmed</span></div>
+  <div class="card"><b>VR-07</b><span>entry-point sprawl · four registers</span></div>
+</div>
+
+<section>
+<h2>New irregularities (this session)</h2>
+<table>
+<thead><tr><th>ID</th><th>Issue</th><th>Status</th><th>Evidence (exact)</th><th>Scope</th><th>Sources to confirm</th><th>Suggested action</th></tr></thead>
+<tbody>
+<tr><td><code>VR-01</code></td>
+<td>The standings table column labeled <strong>"Conf"</strong> on <a href="../nfl-lines/pages/data-standings.html">nfl-lines/pages/data-standings.html</a> contains the <strong>division</strong> percentage (<code>div_pct</code>), not any conference value; the real conference record exists in the source JSON but is not published.</td>
+<td><span class="badge">needs review</span></td>
+<td>Header reads <code>… Div, Conf, Streak</code>. Buffalo's cell under "Conf" is <code>0.0</code> = its division percentage (division 0-1-0); Denver's is <code>0.667</code> = 2/3. The official page shows Buffalo's conference record as 4-1-0 and Denver's as 3-1-0. All32 rows affected.</td>
+<td>32 rows × 1 column (label only; the other11 checked columns are value-correct)</td>
+<td><a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">official standings ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/official/standings_2026.json" target="_blank" rel="noopener">source JSON (columns list) ↗</a></td>
+<td>Fix the generator's column mapping, then regenerate — hand edits fail the namespace's byte-identical CI gate (<a href="index.html">VR-S2</a>)</td></tr>
+
+<tr><td><code>VR-02</code></td>
+<td>On <a href="../nfl-edge/pages/standings.html">nfl-edge/pages/standings.html</a> the <strong>Buffalo Bills</strong> row publishes wrong Home, Road and Div records.</td>
+<td><span class="badge">needs review</span></td>
+<td>Page shows Home <code>4-0-0</code>, Road <code>0-1-0</code>, Div <code>3-1-0</code>. The official conference standings show Home <code>3-1-0</code>, Road <code>4-0-0</code>, Div <code>0-1-0</code>, and the pinned game archive derives the same. The other 31 rows match cell-for-cell.</td>
+<td>3 cells on 1 row</td>
+<td><a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">official standings ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/pages/standings.html" target="_blank" rel="noopener">page ↗</a></td>
+<td>Correct the three cells through the owning generator and re-run the namespace verifier (<a href="index.html">VR-S3</a>)</td></tr>
+
+<tr><td><code>VR-03</code></td>
+<td><strong>50 published table rows carry no source link at all</strong> — the brief requires a link on every row.</td>
+<td><span class="badge">needs review</span></td>
+<td><code>rental-99ca004d-own4/</code>19 rows (corporations-vs-owners7, unit-1 6, unit-2 5, discrimination1); <code>rental-own4/</code>16 rows (executive-summary5, index5, corporate3, analysis2, flagged1); <code>nfl/</code>15 rows (pages/correlations6, correlation5, validation2, pages/flagged1, pages/executive-summary1). Rental rows cite "owner statement" (no official URL exists); <code>nfl/</code> rows are specification rows whose values are already blank + UNVERIFIED.</td>
+<td>50 rows across14 files in3 modules</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification-2026-11-05/report.json" target="_blank" rel="noopener">audit report ↗</a> · <a href="../rental-own4/flagged.html">rental flags ↗</a> · <a href="../nfl/pages/flagged.html">nfl flags ↗</a></td>
+<td>Label owner-statement rows with a source <em>type</em> cell (<a href="index.html">VR-S4</a>); keep <code>nfl/</code> blanks as-is or add a policy link — do not invent URLs</td></tr>
+
+<tr><td><code>VR-04</code></td>
+<td>In <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/data/standings_2026-11-12.json" target="_blank" rel="noopener">nfl-intel/data/standings_2026-11-12.json</a> the <code>home</code> and <code>road</code> records are swapped for26 of32 teams, and New England's <code>home</code> (3-0-0) does not even reconcile with its own 5-4 record.</td>
+<td><span class="badge">needs review</span></td>
+<td>Cross-compared against the official standings and the game archive: e.g. Buffalo home published 4-0-0 vs official 3-1-0; New England home published 3-0-0 vs official 3-1-0 (3-0 + 2-3 ≠ 5-4). The JSON is not linked from any rendered page, so no site figure is wrong today.</td>
+<td>data file only (≈27 team entries)</td>
+<td><a href="https://www.nfl.com/standings/conference/2026/REG" target="_blank" rel="noopener">official standings ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/data/standings_2026-11-12.json" target="_blank" rel="noopener">file ↗</a></td>
+<td>Repair or quarantine the file before any future consumer reads it (<a href="index.html">VR-S5</a>)</td></tr>
+
+<tr><td><code>VR-05</code></td>
+<td>Team-code drift: <a href="../nfl-hub/pages/data.html">nfl-hub</a> publishes Arizona as <code>ARI</code> while the official site and most other namespaces use <code>AZ</code>.</td>
+<td><span class="badge">low</span></td>
+<td>Name ("Arizona Cardinals"), record, points and percentage all match the official page; only the abbreviation differs from nfl.com's <code>AZ</code>. Caused one false "missing row" during this pass's automated comparison until mapped.</td>
+<td>1 row, cosmetic</td>
+<td><a href="https://www.nfl.com/teams/arizona-cardinals/" target="_blank" rel="noopener">official team page ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/official/standings_2026.json" target="_blank" rel="noopener">data file ↗</a></td>
+<td>Align the abbreviation at the next data refresh; not urgent</td></tr>
+
+<tr><td><code>VR-06</code></td>
+<td>Three cited official URLs are dead (404 "Flag on the Play") — <strong>re-confirmed 2026-11-13</strong>.</td>
+<td><span class="badge">needs review</span> · already peer-flagged</td>
+<td><code>nfl-injury-report-policy-2026</code> and <code>nfl-2026-schedule-release</code> (cited by <code>nfl/</code> pages) and the <code>teams/…/depth-chart</code> route (cited as absence evidence) all return NFL.com's 404 page, with and without trailing slash. Earlier sessions already published these as SRC-15/SRC-16/F-09 and SRC-14/F01/F-04; this pass independently reproduced each404.</td>
+<td>3 URLs across ≈25 citation sites</td>
+<td><a href="https://www.nfl.com/news/nfl-injury-report-policy-2026" target="_blank" rel="noopener">policy URL ↗</a> · <a href="https://www.nfl.com/news/nfl-2026-schedule-release" target="_blank" rel="noopener">schedule URL ↗</a> · <a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">depth-chart URL ↗</a> · <a href="../nfl-hub/pages/flagged.html">peer flag F-09 ↗</a></td>
+<td>Keep them only as dead-link evidence; add external-link CI (<a href="index.html">VR-S1</a>); depth path needs the D2 decision</td></tr>
+
+<tr><td><code>VR-07</code></td>
+<td>Entry-point sprawl: four suggestion registers and four question registers exist across namespaces; the root nav links them as separate items with no single review entry.</td>
+<td><span class="badge">needs review</span></td>
+<td>Suggestions: nfl-hub S-01…S-16, nfl-lines SG-01…SG-12, nfl-decision S01…S15, nfl-audit. Questions: nfl-hub Q-01…Q-27, nfl-audit (30 rows), nfl-decision, nfl-decisions desk. Prior session already logged the wider consolidation question as SG-11/IR-09 (eleven NFL namespaces).</td>
+<td>navigation / governance</td>
+<td><a href="../nfl-hub/pages/suggestions.html">nfl-hub suggestions ↗</a> · <a href="../nfl-lines/pages/suggestions.html">nfl-lines suggestions ↗</a> · <a href="../nfl-audit/pages/questions.html">nfl-audit questions ↗</a> · <a href="../nfl-decisions/index.html">decision desk ↗</a></td>
+<td>Choose one front door for review before any consolidation (<a href="index.html">VR-S7</a>); do not delete peer registers</td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>Prior flags re-tested this session (no change)</h2>
+<table>
+<thead><tr><th>Prior flag</th><th>Claim</th><th>Re-test result 2026-11-13</th><th>Sources</th></tr></thead>
+<tbody>
+<tr><td><a href="../nfl-hub/pages/flagged.html">nfl-hub F-09 / SRC-15 / SRC-16</a></td>
+<td>Two <code>nfl.com/news</code> citations return 404 and must not be reused</td>
+<td><strong>re-confirmed</strong> — both URLs still serve "404 – Flag on the Play"</td>
+<td><a href="https://www.nfl.com/news/nfl-injury-report-policy-2026" target="_blank" rel="noopener">policy ↗</a> · <a href="https://www.nfl.com/news/nfl-2026-schedule-release" target="_blank" rel="noopener">schedule ↗</a></td></tr>
+<tr><td><a href="../nfl-audit/pages/flagged.html">nfl-audit F01 / nfl-hub SRC-14 / F-04</a></td>
+<td>No official depth chart exists; depth-string cells stay blank</td>
+<td><strong>re-confirmed</strong> — depth-chart route still404 (both slash variants); official roster page still publishes no depth order</td>
+<td><a href="https://www.nfl.com/teams/kansas-city-chiefs/depth-chart" target="_blank" rel="noopener">depth chart ↗</a> · <a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">roster ↗</a></td></tr>
+<tr><td><a href="../nfl-lines/pages/flagged.html">nfl-lines IR-02</a></td>
+<td>The NFL publishes no betting lines; every market cell is third-party or blank</td>
+<td><strong>no change</strong> — no official odds page was located on nfl.com or operations.nfl.com in this pass either</td>
+<td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a> · <a href="https://operations.nfl.com/rules-officiating/2026-nfl-rulebook" target="_blank" rel="noopener">operations.nfl.com ↗</a></td></tr>
+<tr><td><a href="../verified/flagged.html">root flags (13 items)</a></td>
+<td>Unverifiable values published as blanks, not filled in</td>
+<td><strong>no change</strong> — blank-cell policy still holds;20,799 empty cells counted this pass, all intentional</td>
+<td><a href="../verified/flagged.html">flag page ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/flags.json" target="_blank" rel="noopener">flags.json ↗</a></td></tr>
+</tbody>
+</table>
+</section>
+
+<section>
+<h2>What this page does not claim</h2>
+<ul>
+<li>It does not certify any betting line, price, or strategy result — no official odds source exists (<a href="../nfl-lines/pages/flagged.html">IR-02</a>).</li>
+<li>It does not claim a full crawl of all 1,682 external citations; the sample of 14 is declared and bounded (<a href="index.html">section 4 of the report</a>).</li>
+<li>It does not modify any peer namespace; all fixes are proposals awaiting an owner's choice (<a href="index.html">section 6</a>).</li>
+</ul>
+</section>
+
+<footer>
+<p>Research site · no wagering advice · not affiliated with the NFL or any sportsbook.</p>
+<p>Problem gambling help: <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">1-800-MY-RESET</a> (National Council on Problem Gambling).</p>
+</footer>
+</main>
+</body>
+</html>
