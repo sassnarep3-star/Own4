@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions &amp; decisions · NFL Origination · Own4</title>
+<meta name="description" content="Suggestions &amp; decisions">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html" class="on">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html" class="on">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Decide / Suggestions &amp; decisions</div>
+
+<h1>Suggestions &amp; decisions</h1>
+<p class="lede">A decision board, not a to-do list. Each suggestion carries the context, the options
+considered, the evidence available, the cost, the risk, its prerequisites and a recommendation — so
+a path can be chosen <strong>before</strong> anything is implemented.</p>
+<div class="cards">
+<div class="card"><b>22</b><span>suggestions</span></div>
+<div class="card bad"><b>13</b><span>decide now (blocking)</span></div>
+<div class="card"><b>7</b><span>decide later (cheap, reversible)</span></div>
+<div class="card warn"><b>2</b><span>blocked until an input exists</span></div>
+</div>
+
+<h2>The recommended path</h2>
+<p>This is the order a reviewer can actually work in. The first group contains the decisions that
+gate everything else: until the legal position, the skill definition, the canonical dashboard and the
+headline framing are settled, every other choice can be invalidated by them.</p>
+<ol class="path"><li><b>Week 1 — settle what gates everything</b><span><a href="#S02">S02</a> <span class="small">Obtain a written legal position before publishing anything as more than research</span>, <a href="#S07">S07</a> <span class="small">Adopt a written skill definition and reward rule before any reward is paid</span>, <a href="#S10">S10</a> <span class="small">Pick one canonical NFL dashboard and archive the other eleven</span>, <a href="#S17">S17</a> <span class="small">Publish the null result as the headline, not as a footnote</span></span></li><li><b>Week 1-2 — start the free clocks</b><span><a href="#S04">S04</a> <span class="small">Start capturing the official injury report into a dated snapshot every week</span>, <a href="#S12">S12</a> <span class="small">Keep this namespace&#x27;s verification harness as the merge gate for every future session</span>, <a href="#S21">S21</a> <span class="small">Make the coordination board machine-checked</span>, <a href="#S15">S15</a> <span class="small">Publish a forward-record ledger so future results cannot be back-fitted</span></span></li><li><b>Then decide whether this is a betting project at all</b><span><a href="#S01">S01</a> <span class="small">Buy or license an archived NFL odds history</span>, <a href="#S06">S06</a> <span class="small">Buy archived same-game-parlay prices before building any prop strategy</span>, <a href="#S11">S11</a> <span class="small">Establish whether the archive&#x27;s line is the close or an earlier snapshot</span></span></li><li><b>Only if yes: buy the rest of the inputs</b><span><a href="#S09">S09</a> <span class="small">Obtain a player-level game log and a snap-count feed</span>, <a href="#S03">S03</a> <span class="small">Publish only article-confirmed lineup changes, or buy a depth-chart feed</span>, <a href="#S05">S05</a> <span class="small">Convert injuries into points with a measured model rather than an assumed weight</span></span></li><li><b>Hygiene and small wins</b><span><a href="#S08">S08</a> <span class="small">Review the third-party archive&#x27;s licence before anything is redistributed</span>, <a href="#S14">S14</a> <span class="small">Test the rest term properly before believing it</span>, <a href="#S20">S20</a> <span class="small">Model the total separately from the margin</span>, <a href="#S13">S13</a> <span class="small">Add a weather term, but only for outdoor games with a verified forecast</span>, <a href="#S18">S18</a> <span class="small">Increase the sample before making any claim about 2026 specifically</span>, <a href="#S19">S19</a> <span class="small">Add a one-screen &#x27;what changed since last week&#x27; page</span></span></li><li><b>Blocked until the inputs exist</b><span><a href="#S22">S22</a> <span class="small">Publish a live in-week injury-adjusted line</span></span></li></ol>
+
+<div class="panel flag"><h3>The one sentence version</h3>
+<p><strong>Settle the skill definition (S07) and the legal position (S02), then decide whether this
+is a betting project at all (S01).</strong> Until a real price history exists, everything on this
+site is a forecast, not a bet — and it should keep saying so.</p></div>
+
+<h2>Index</h2>
+<div class="tw"><table class=""><caption>All 22 suggestions · timing tells you when the decision is needed</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">Group</th><th scope="col" class="c">Timing</th><th scope="col" class="">Suggestion</th><th scope="col" class="">Recommendation</th><th scope="col" class="">Evidence</th></tr></thead><tbody><tr><td class="">S01</td><td class="">Data acquisition</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Buy or license an archived NFL odds history</td><td class="">Do this first. Nothing else in the betting half of the project can be honest without it. Insist on CLOSE prices and, if props matter, archived same-game-parlay prices too.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S02</td><td class="">Governance</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Obtain a written legal position before publishing anything as more than research</td><td class="">Settle before rewards are described as anything other than points. Until then the leaderboard pays research points only, which is what it does.</td><td class=""><span class="src"><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">↗ www.ncpgambling.org/help-treatment</a></span></td></tr><tr><td class="">S03</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Publish only article-confirmed lineup changes, or buy a depth-chart feed</td><td class="">Stay on option 1 now. It is the only one that survives the no-invention rule. Revisit if a licensed snap-count feed (S09) is bought.</td><td class=""><span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a></span></td></tr><tr><td class="">S04</td><td class="">Data acquisition</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Start capturing the official injury report into a dated snapshot every week</td><td class="">Start this week. It is the cheapest action on the board with the longest payoff: in two seasons there is a usable archive and S03/S05 become answerable with evidence.</td><td class=""><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></td></tr><tr><td class="">S05</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-warn">BLOCKED</span></td><td class="">Convert injuries into points with a measured model rather than an assumed weight</td><td class="">Keep the band and keep it labelled an assumption. Do not let it become a point estimate until it is fitted.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></td></tr><tr><td class="">S06</td><td class="">Product</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Buy archived same-game-parlay prices before building any prop strategy</td><td class="">Bundle with S01 if the vendor offers it. Until then publish the dependence and explicitly say the price is unknown — which is what the site does.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S07</td><td class="">Governance</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Adopt a written skill definition and reward rule before any reward is paid</td><td class="">Adopt as written, and add the forward-record requirement before any money is attached.</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a></span></td></tr><tr><td class="">S08</td><td class="">Governance</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Review the third-party archive&#x27;s licence before anything is redistributed</td><td class="">Review it. In the meantime the site publishes derived values with attribution and the raw file is untouched in its original peer namespace.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S09</td><td class="">Data acquisition</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Obtain a player-level game log and a snap-count feed</td><td class="">License if props are a real goal. Otherwise keep props blocked and say so, which is the current position.</td><td class=""><span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></td></tr><tr><td class="">S10</td><td class="">Product</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Pick one canonical NFL dashboard and archive the other eleven</td><td class="">Option 1, but as a MOVE to an `archive/` folder with a redirect stub per page, so nothing is lost and no link 404s. Do not delete anything.</td><td class=""><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></td></tr><tr><td class="">S11</td><td class="">Method</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Establish whether the archive&#x27;s line is the close or an earlier snapshot</td><td class="">Do option 3 now (it is free and conservative) and option 1 in parallel.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S12</td><td class="">Site</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Keep this namespace&#x27;s verification harness as the merge gate for every future session</td><td class="">Run it on every PR that touches this namespace, and recommend the same harness pattern to the other namespaces.</td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4</a></span></td></tr><tr><td class="">S13</td><td class="">Analysis</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Add a weather term, but only for outdoor games with a verified forecast</td><td class="">Add the dome/outdoor indicator first because it is already in the archive, and only add the numeric term with a sourced forecast.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S14</td><td class="">Analysis</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Test the rest term properly before believing it</td><td class="">Add the short-week dummy only, and only if it survives the same gates.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S15</td><td class="">Site</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Publish a forward-record ledger so future results cannot be back-fitted</td><td class="">Do it. Grade Week 10 after it is played and publish the score without editing the forecast.</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">↗ schedules/2026/by-week/week-10</a></span></td></tr><tr><td class="">S16</td><td class="">Analysis</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Extend the model with a quarterback adjustment once a player feed exists</td><td class="">Wait for the feed. Do not hand-adjust.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a></span></td></tr><tr><td class="">S17</td><td class="">Product</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Publish the null result as the headline, not as a footnote</td><td class="">Keep the null as the headline. It is the finding.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S18</td><td class="">Analysis</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Increase the sample before making any claim about 2026 specifically</td><td class="">Pool seasons (current) and label any single-season figure as descriptive only.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">S19</td><td class="">Site</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Add a one-screen &#x27;what changed since last week&#x27; page</td><td class="">Add it once a second snapshot exists.</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">↗ schedules/2026/by-week/week-10</a></span></td></tr><tr><td class="">S20</td><td class="">Analysis</td><td class="c"><span class="pill p-neu">DECIDE LATER</span></td><td class="">Model the total separately from the margin</td><td class="">Drop the originated total from the published line until it beats the naive mean total, and keep the number only on the audit page.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a></span></td></tr><tr><td class="">S21</td><td class="">Governance</td><td class="c"><span class="pill p-bad">DECIDE NOW</span></td><td class="">Make the coordination board machine-checked</td><td class="">Add the check. It is the only way the protocol survives more sessions.</td><td class=""><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></td></tr><tr><td class="">S22</td><td class="">Product</td><td class="c"><span class="pill p-warn">BLOCKED</span></td><td class="">Publish a live in-week injury-adjusted line</td><td class="">Blocked until S01 and S09 land. Do not build a manual version: it would violate the no-manual-input requirement.</td><td class=""><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></td></tr></tbody></table><div class="tnote">DECIDE NOW = something downstream is unsafe until this is settled. DECIDE LATER = cheap or reversible. BLOCKED = cannot be acted on today.</div></div>
+<h2>Every suggestion in detail</h2>
+<div class="sug now" id="S01">
+  <div class="h"><span class="id">S01</span><span class="t">Buy or license an archived NFL odds history</span>
+    <span class="pill p-neu">Data acquisition</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The NFL publishes no prices. Every ROI on this site is priced at an assumed -110, so Gate G7 fails by construction and no strategy can ever reach a paid tier.</dd>
+    <dt>Options</dt><dd><ul><li>License a commercial odds archive (e.g. a sports-data vendor)</li><li>Use the third-party nflverse line columns as a stand-in</li><li>Keep the assumed -110 and accept that no betting claim can be made</li></ul></dd>
+    <dt>Evidence</dt><dd>Gate G7 is blocked; the only line column in the repository is third-party and not licensed for redistribution.</dd>
+    <dt>Cost</dt><dd>Vendor-dependent; the single largest line item in the project.</dd>
+    <dt>Risk</dt><dd>Low technical risk, high cost. Buying the wrong granularity (open vs close, spread-only vs props) wastes the spend.</dd>
+    <dt>Prerequisites</dt><dd>S02 (legal position) before signing anything</dd>
+    <dt>Recommendation</dt><dd><strong>Do this first. Nothing else in the betting half of the project can be honest without it. Insist on CLOSE prices and, if props matter, archived same-game-parlay prices too.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q01">Q01</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug now" id="S02">
+  <div class="h"><span class="id">S02</span><span class="t">Obtain a written legal position before publishing anything as more than research</span>
+    <span class="pill p-neu">Governance</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The project publishes derived probabilities. Whether that is regulated depends on the jurisdiction, which is not recorded anywhere in the repository.</dd>
+    <dt>Options</dt><dd><ul><li>Written opinion from counsel in the operating jurisdiction</li><li>Keep everything labelled research points and publish no picks</li><li>Publish picks and accept the risk</li></ul></dd>
+    <dt>Evidence</dt><dd>No jurisdiction, licence or entity is recorded in the repository.</dd>
+    <dt>Cost</dt><dd>One legal review.</dd>
+    <dt>Risk</dt><dd>High if ignored. Reputational and possibly regulatory.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Settle before rewards are described as anything other than points. Until then the leaderboard pays research points only, which is what it does.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q02">Q02</a>, <a href="questions.html#Q15">Q15</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">↗ www.ncpgambling.org/help-treatment</a></span></dd>
+  </dl></div></div><div class="sug now" id="S03">
+  <div class="h"><span class="id">S03</span><span class="t">Publish only article-confirmed lineup changes, or buy a depth-chart feed</span>
+    <span class="pill p-neu">Injuries and depth</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The brief asks for 2nd/3rd/4th-string deficiency tracking. The NFL&#x27;s own depth chart URL is a 404, so any string label produced today would be invented.</dd>
+    <dt>Options</dt><dd><ul><li>Publish only changes an official article explicitly names (8 this week)</li><li>Buy a commercial depth-chart feed</li><li>Derive strings from snap counts, if a snap-count source is licensed</li></ul></dd>
+    <dt>Evidence</dt><dd>nfl.com/depth-charts/ returns 404 (re-checked 2026-11-13). No snap-count feed exists in the repository.</dd>
+    <dt>Cost</dt><dd>Zero for option 1; vendor-dependent for 2 and 3.</dd>
+    <dt>Risk</dt><dd>Option 1 is honest but sparse. Options 2-3 introduce a source that is not the NFL.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Stay on option 1 now. It is the only one that survives the no-invention rule. Revisit if a licensed snap-count feed (S09) is bought.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q03">Q03</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a></span></dd>
+  </dl></div></div><div class="sug now" id="S04">
+  <div class="h"><span class="id">S04</span><span class="t">Start capturing the official injury report into a dated snapshot every week</span>
+    <span class="pill p-neu">Data acquisition</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>nfl.com/injuries/ shows only the current week. Because nothing was archived, no injury effect can ever be measured retrospectively.</dd>
+    <dt>Options</dt><dd><ul><li>Capture weekly snapshots from now on</li><li>Try to reconstruct history from news articles</li><li>Accept that injury effects stay unmeasurable</li></ul></dd>
+    <dt>Evidence</dt><dd>Only the current week is addressable on the official site.</dd>
+    <dt>Cost</dt><dd>Trivial: one fetch and one commit per week.</dd>
+    <dt>Risk</dt><dd>None. The only cost of not doing it is that the data never exists.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Start this week. It is the cheapest action on the board with the longest payoff: in two seasons there is a usable archive and S03/S05 become answerable with evidence.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q04">Q04</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></dd>
+  </dl></div></div><div class="sug blocked" id="S05">
+  <div class="h"><span class="id">S05</span><span class="t">Convert injuries into points with a measured model rather than an assumed weight</span>
+    <span class="pill p-neu">Injuries and depth</span>
+    <span class="pill p-warn">BLOCKED</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>This site applies a disclosed, capped weight to official designations (OUT 0.50, DOUBTFUL 0.25, QUESTIONABLE 0.10 points of rating, capped at 3.0 per club) and publishes the result as a band, because the input cannot distinguish a starter from a fourth-string player.</dd>
+    <dt>Options</dt><dd><ul><li>Keep the disclosed band (current)</li><li>Fit a weights model once snap counts exist</li><li>Drop injury adjustment from the line entirely</li></ul></dd>
+    <dt>Evidence</dt><dd>Question Q05 has no verified answer. C9 (injury vs margin) is blank.</dd>
+    <dt>Cost</dt><dd>Low now; a real fit needs S04 plus a snap-count source.</dd>
+    <dt>Risk</dt><dd>The current weights are an assumption. The band makes that visible, but a reader could still over-read it.</dd>
+    <dt>Prerequisites</dt><dd>S04, S09</dd>
+    <dt>Recommendation</dt><dd><strong>Keep the band and keep it labelled an assumption. Do not let it become a point estimate until it is fitted.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q05">Q05</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></dd>
+  </dl></div></div><div class="sug now" id="S06">
+  <div class="h"><span class="id">S06</span><span class="t">Buy archived same-game-parlay prices before building any prop strategy</span>
+    <span class="pill p-neu">Product</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>Real dependence is measured: QB passing yards over and WR1 receiving yards over in the same team-game co-occur 1.45x more often than independence predicts (phi = 0.346, n = 803). But books reprice correlated legs, and no SGP price exists here to compare against.</dd>
+    <dt>Options</dt><dd><ul><li>Buy SGP price history</li><li>Publish the dependence fact and stop there</li><li>Assume no repricing (known to be wrong)</li></ul></dd>
+    <dt>Evidence</dt><dd>Correlation C5 computed; C8 blank.</dd>
+    <dt>Cost</dt><dd>Vendor-dependent; smaller than S01 and often bundled with it.</dd>
+    <dt>Risk</dt><dd>Without it, any prop strategy is untestable and would be published as unsupported.</dd>
+    <dt>Prerequisites</dt><dd>S01</dd>
+    <dt>Recommendation</dt><dd><strong>Bundle with S01 if the vendor offers it. Until then publish the dependence and explicitly say the price is unknown — which is what the site does.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q09">Q09</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug now" id="S07">
+  <div class="h"><span class="id">S07</span><span class="t">Adopt a written skill definition and reward rule before any reward is paid</span>
+    <span class="pill p-neu">Governance</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The proposal on this site: a strategy is skilful only if (a) it survives Benjamini-Hochberg across every test run including placebos, (b) its week-clustered 95% CI on ROI is entirely above zero, and (c) no single season supplies more than half its profit.</dd>
+    <dt>Options</dt><dd><ul><li>Adopt the proposal as written</li><li>Adopt a looser rule (point estimate above zero)</li><li>Adopt a stricter rule (require live, forward-recorded results too)</li></ul></dd>
+    <dt>Evidence</dt><dd>Every strategy tested here fails at least one of (a)-(c); so does the placebo-free version of the screen. The rule rejects our own best result.</dd>
+    <dt>Cost</dt><dd>Zero.</dd>
+    <dt>Risk</dt><dd>A loose rule pays for luck. The looser option above would have paid two strategies here, both of which the placebo test shows are noise.</dd>
+    <dt>Prerequisites</dt><dd>S02</dd>
+    <dt>Recommendation</dt><dd><strong>Adopt as written, and add the forward-record requirement before any money is attached.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q11">Q11</a>, <a href="questions.html#Q15">Q15</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a></span></dd>
+  </dl></div></div><div class="sug now" id="S08">
+  <div class="h"><span class="id">S08</span><span class="t">Review the third-party archive&#x27;s licence before anything is redistributed</span>
+    <span class="pill p-neu">Governance</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The game-level archive is a public GitHub repository used here as the only source of historical games, because the NFL publishes no downloadable log.</dd>
+    <dt>Options</dt><dd><ul><li>Review the licence line by line</li><li>Stop redistributing the raw file and publish only derived values</li><li>Replace it with a licensed feed</li></ul></dd>
+    <dt>Evidence</dt><dd>The archive&#x27;s terms were not reviewed in this session; flagged as F-07.</dd>
+    <dt>Cost</dt><dd>An hour of reading.</dd>
+    <dt>Risk</dt><dd>Redistribution without review could breach the terms.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Review it. In the meantime the site publishes derived values with attribution and the raw file is untouched in its original peer namespace.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q13">Q13</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug now" id="S09">
+  <div class="h"><span class="id">S09</span><span class="t">Obtain a player-level game log and a snap-count feed</span>
+    <span class="pill p-neu">Data acquisition</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>Without per-game player logs there is no player-prop model, no snap counts, and no way to tell a starter from a backup.</dd>
+    <dt>Options</dt><dd><ul><li>License an official or commercial feed</li><li>Use the unofficial nflverse player stats</li><li>Do without and keep props blocked</li></ul></dd>
+    <dt>Evidence</dt><dd>Q14 has no verified answer. C9 and the second prop pair (C6) are blank.</dd>
+    <dt>Cost</dt><dd>Vendor-dependent.</dd>
+    <dt>Risk</dt><dd>An unofficial feed reintroduces the same third-party problem as S08.</dd>
+    <dt>Prerequisites</dt><dd>S02, S08</dd>
+    <dt>Recommendation</dt><dd><strong>License if props are a real goal. Otherwise keep props blocked and say so, which is the current position.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q14">Q14</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></dd>
+  </dl></div></div><div class="sug now" id="S10">
+  <div class="h"><span class="id">S10</span><span class="t">Pick one canonical NFL dashboard and archive the other eleven</span>
+    <span class="pill p-neu">Product</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>There were eleven NFL namespaces before this one; this is the twelfth. Four publish own lines, five publish question registers, six publish suggestions. A reader cannot tell which is current, and every new session re-does work.</dd>
+    <dt>Options</dt><dd><ul><li>Declare this namespace canonical and retire the rest to an archive folder</li><li>Declare one of the existing eleven canonical and make this an appendix</li><li>Leave all twelve and add a chooser page</li></ul></dd>
+    <dt>Evidence</dt><dd>Repo review counts the overlap; the root dashboard links to eight NFL destinations.</dd>
+    <dt>Cost</dt><dd>A restructuring commit, plus link repair.</dd>
+    <dt>Risk</dt><dd>Deleting peer work is forbidden by the board protocol; archiving preserves it but breaks inbound links.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Option 1, but as a MOVE to an `archive/` folder with a redirect stub per page, so nothing is lost and no link 404s. Do not delete anything.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q16">Q16</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></dd>
+  </dl></div></div><div class="sug now" id="S11">
+  <div class="h"><span class="id">S11</span><span class="t">Establish whether the archive&#x27;s line is the close or an earlier snapshot</span>
+    <span class="pill p-neu">Method</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The sign convention was measured (IC-04) and is correct, but &#x27;when in the week&#x27; the line was taken is unknown. Beating an early line is a different claim from beating the close.</dd>
+    <dt>Options</dt><dd><ul><li>Ask the archive maintainers / read the archive&#x27;s own documentation</li><li>Compare against a licensed close (S01)</li><li>Downgrade every line-based claim to &#x27;against an undated line&#x27;</li></ul></dd>
+    <dt>Evidence</dt><dd>Q18 is partial for exactly this reason.</dd>
+    <dt>Cost</dt><dd>An email or a documentation read.</dd>
+    <dt>Risk</dt><dd>Low, but it caps the strength of any value claim.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Do option 3 now (it is free and conservative) and option 1 in parallel.</strong></dd>
+    <dt>Closes</dt><dd><a href="questions.html#Q18">Q18</a></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug now" id="S12">
+  <div class="h"><span class="id">S12</span><span class="t">Keep this namespace&#x27;s verification harness as the merge gate for every future session</span>
+    <span class="pill p-neu">Site</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The build fails on a broken local link, an unsourced table row, or a non-reproducible derived number. Three of those failures already caught real defects during this session.</dd>
+    <dt>Options</dt><dd><ul><li>Run it in CI on every PR</li><li>Run it only before a release</li><li>Skip it</li></ul></dd>
+    <dt>Evidence</dt><dd>The placebo caught a sign bug; IC-04 caught the same bug a second way; the row-source checker caught a caption with no link.</dd>
+    <dt>Cost</dt><dd>Under a minute of CI time.</dd>
+    <dt>Risk</dt><dd>None.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Run it on every PR that touches this namespace, and recommend the same harness pattern to the other namespaces.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4</a></span></dd>
+  </dl></div></div><div class="sug later" id="S13">
+  <div class="h"><span class="id">S13</span><span class="t">Add a weather term, but only for outdoor games with a verified forecast</span>
+    <span class="pill p-neu">Analysis</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>Weather plausibly affects totals. This site does not model it, so an outdoor December game is treated exactly like a dome game.</dd>
+    <dt>Options</dt><dd><ul><li>Add a forecast term for outdoor games</li><li>Add a dome/outdoor indicator only</li><li>Leave it out</li></ul></dd>
+    <dt>Evidence</dt><dd>The archive carries roof, surface, temp and wind columns; values for future games cannot be verified.</dd>
+    <dt>Cost</dt><dd>Low modelling cost, but a forecast feed is needed for live use.</dd>
+    <dt>Risk</dt><dd>A bad forecast is worse than no forecast.</dd>
+    <dt>Prerequisites</dt><dd>A verifiable forecast source</dd>
+    <dt>Recommendation</dt><dd><strong>Add the dome/outdoor indicator first because it is already in the archive, and only add the numeric term with a sourced forecast.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug later" id="S14">
+  <div class="h"><span class="id">S14</span><span class="t">Test the rest term properly before believing it</span>
+    <span class="pill p-neu">Analysis</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>Rest differential shows r = 0.035 against margin on 7,103 games — detectable but tiny, explaining about 0.1% of variance. A naive reading of it once produced a 7-point disagreement with the market in a peer namespace.</dd>
+    <dt>Options</dt><dd><ul><li>Add a small rest term</li><li>Leave it out</li><li>Add a short-week dummy only</li></ul></dd>
+    <dt>Evidence</dt><dd>C4 is published with its CI.</dd>
+    <dt>Cost</dt><dd>Low.</dd>
+    <dt>Risk</dt><dd>Overfitting a 0.1%-variance effect is the classic way to build a fake edge.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Add the short-week dummy only, and only if it survives the same gates.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug later" id="S15">
+  <div class="h"><span class="id">S15</span><span class="t">Publish a forward-record ledger so future results cannot be back-fitted</span>
+    <span class="pill p-neu">Site</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>Backtests can be re-run until something looks good. A dated, committed forecast made BEFORE kick-off cannot be revised afterwards.</dd>
+    <dt>Options</dt><dd><ul><li>Commit next week&#x27;s lines before kick-off and grade them afterwards</li><li>Rely on the walk-forward backtest alone</li></ul></dd>
+    <dt>Evidence</dt><dd>The thirteen Week 10 lines on this site are already dated and committed before kick-off; they are the first entry in such a ledger.</dd>
+    <dt>Cost</dt><dd>Minutes per week.</dd>
+    <dt>Risk</dt><dd>None. It only ever constrains the project, which is the point.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Do it. Grade Week 10 after it is played and publish the score without editing the forecast.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">↗ schedules/2026/by-week/week-10</a></span></dd>
+  </dl></div></div><div class="sug later" id="S16">
+  <div class="h"><span class="id">S16</span><span class="t">Extend the model with a quarterback adjustment once a player feed exists</span>
+    <span class="pill p-neu">Analysis</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The current model knows only points scored and allowed. It cannot see that a starting quarterback changed, which is the single largest in-week information event (six of the eight confirmed lineup changes this week are at QB).</dd>
+    <dt>Options</dt><dd><ul><li>Add a QB indicator once a player feed exists</li><li>Keep the club-level model</li><li>Hand-adjust for QB changes (rejected: not reproducible)</li></ul></dd>
+    <dt>Evidence</dt><dd>Six of eight confirmed lineup changes are quarterbacks.</dd>
+    <dt>Cost</dt><dd>A player feed (S09) plus modelling time.</dd>
+    <dt>Risk</dt><dd>Hand adjustments are unreproducible and would break G10.</dd>
+    <dt>Prerequisites</dt><dd>S09</dd>
+    <dt>Recommendation</dt><dd><strong>Wait for the feed. Do not hand-adjust.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a></span></dd>
+  </dl></div></div><div class="sug now" id="S17">
+  <div class="h"><span class="id">S17</span><span class="t">Publish the null result as the headline, not as a footnote</span>
+    <span class="pill p-neu">Product</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The honest result of this session is that nothing works: the model loses to the closing line, no strategy survives FDR, and zero reward points are awarded.</dd>
+    <dt>Options</dt><dd><ul><li>Headline the null result (current)</li><li>Headline the forecast MAE that does beat the naive baseline</li><li>Headline nothing until something works</li></ul></dd>
+    <dt>Evidence</dt><dd>Gates G4, G5, G8 and G9 all fail for every strategy.</dd>
+    <dt>Cost</dt><dd>Zero.</dd>
+    <dt>Risk</dt><dd>A project that only ever reports nulls looks unsuccessful — but reporting a non-null that isn&#x27;t there is worse.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Keep the null as the headline. It is the finding.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug later" id="S18">
+  <div class="h"><span class="id">S18</span><span class="t">Increase the sample before making any claim about 2026 specifically</span>
+    <span class="pill p-neu">Analysis</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>All skill measurement here is on 2018-2025 because 2026 has only 136 games. Any statement about this season&#x27;s model quality is under-powered.</dd>
+    <dt>Options</dt><dd><ul><li>Wait for more 2026 games</li><li>Pool seasons</li><li>Report 2026 separately with an explicit under-powered warning</li></ul></dd>
+    <dt>Evidence</dt><dd>G2 needs 1,000 out-of-sample games for a skill claim; a single season is ~272.</dd>
+    <dt>Cost</dt><dd>Time.</dd>
+    <dt>Risk</dt><dd>Reporting a single season invites reading noise as signal.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Pool seasons (current) and label any single-season figure as descriptive only.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+  </dl></div></div><div class="sug later" id="S19">
+  <div class="h"><span class="id">S19</span><span class="t">Add a one-screen &#x27;what changed since last week&#x27; page</span>
+    <span class="pill p-neu">Site</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The site is a snapshot. A reader returning next week wants the delta: new results, new injuries, new lines, gate movements.</dd>
+    <dt>Options</dt><dd><ul><li>Generate a delta page from two dated snapshots</li><li>Leave the snapshot approach</li></ul></dd>
+    <dt>Evidence</dt><dd>The data files are already dated, so a diff is mechanical.</dd>
+    <dt>Cost</dt><dd>Small.</dd>
+    <dt>Risk</dt><dd>None.</dd>
+    <dt>Prerequisites</dt><dd>S15</dd>
+    <dt>Recommendation</dt><dd><strong>Add it once a second snapshot exists.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">↗ schedules/2026/by-week/week-10</a></span></dd>
+  </dl></div></div><div class="sug later" id="S20">
+  <div class="h"><span class="id">S20</span><span class="t">Model the total separately from the margin</span>
+    <span class="pill p-neu">Analysis</span>
+    <span class="pill p-neu">DECIDE LATER</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The own total currently uses only club pace (offence plus defence divided by two) and has a very large out-of-sample MAE (42.5 across all seasons), so it carries no usable signal.</dd>
+    <dt>Options</dt><dd><ul><li>Fit a dedicated totals model</li><li>Drop the total entirely</li><li>Label it clearly as uninformative (current)</li></ul></dd>
+    <dt>Evidence</dt><dd>The total MAE is far worse than the closing total&#x27;s.</dd>
+    <dt>Cost</dt><dd>Modelling time.</dd>
+    <dt>Risk</dt><dd>Low; a bad total is already labelled as such.</dd>
+    <dt>Prerequisites</dt><dd>S01</dd>
+    <dt>Recommendation</dt><dd><strong>Drop the originated total from the published line until it beats the naive mean total, and keep the number only on the audit page.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a></span></dd>
+  </dl></div></div><div class="sug now" id="S21">
+  <div class="h"><span class="id">S21</span><span class="t">Make the coordination board machine-checked</span>
+    <span class="pill p-neu">Governance</span>
+    <span class="pill p-bad">DECIDE NOW</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>The board protocol depends on sessions honestly claiming scopes. Two peer sessions&#x27; notices already record collisions that a check could have caught.</dd>
+    <dt>Options</dt><dd><ul><li>Add a CI check that a PR&#x27;s changed paths fall inside a claimed scope</li><li>Keep relying on prose</li></ul></dd>
+    <dt>Evidence</dt><dd>The repo review lists overlapping namespaces and prior collision records.</dd>
+    <dt>Cost</dt><dd>An hour.</dd>
+    <dt>Risk</dt><dd>None.</dd>
+    <dt>Prerequisites</dt><dd>none</dd>
+    <dt>Recommendation</dt><dd><strong>Add the check. It is the only way the protocol survives more sessions.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></dd>
+  </dl></div></div><div class="sug blocked" id="S22">
+  <div class="h"><span class="id">S22</span><span class="t">Publish a live in-week injury-adjusted line</span>
+    <span class="pill p-neu">Product</span>
+    <span class="pill p-warn">BLOCKED</span></div>
+  <div class="b"><dl>
+    <dt>Context</dt><dd>A line that moves as Friday practice reports land would be the most useful product here. It needs an intraday injury feed and a price to compare against.</dd>
+    <dt>Options</dt><dd><ul><li>Build it once a feed and a price exist</li><li>Publish a daily manual snapshot</li><li>Do not build it</li></ul></dd>
+    <dt>Evidence</dt><dd>Only a weekly snapshot is available; there is no price.</dd>
+    <dt>Cost</dt><dd>Feed cost plus automation.</dd>
+    <dt>Risk</dt><dd>A moving line with no price is entertainment, not analysis.</dd>
+    <dt>Prerequisites</dt><dd>S01, S04, S09</dd>
+    <dt>Recommendation</dt><dd><strong>Blocked until S01 and S09 land. Do not build a manual version: it would violate the no-manual-input requirement.</strong></dd>
+    <dt>Closes</dt><dd><span class="blank">no question</span></dd>
+    <dt>Sources</dt><dd><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></dd>
+  </dl></div></div>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

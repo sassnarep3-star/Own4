@@ -1,0 +1,461 @@
+{
+ "id": "requirements-2026-11-13",
+ "columns": [
+  "id",
+  "requirement",
+  "status",
+  "what exists",
+  "evidence_page",
+  "limitation"
+ ],
+ "requirements": [
+  {
+   "id": "R01",
+   "requirement": "Collect a full list of requirements",
+   "status": "MET",
+   "what exists": "41 requirements across 8 groups, each with a status and a page that evidences it.",
+   "evidence_page": "requirements.html",
+   "limitation": "",
+   "evidence_url": "requirements.html"
+  },
+  {
+   "id": "R02",
+   "requirement": "Review the repo line by line",
+   "status": "MET",
+   "what exists": "All 11 existing NFL namespaces inspected; 6 structural irregularities published.",
+   "evidence_page": "repo-review.html",
+   "limitation": "Inspection is of files and links, not a re-verification of every peer number.",
+   "evidence_url": "repo-review.html"
+  },
+  {
+   "id": "R03",
+   "requirement": "Verify against official, trusted sources; provide links",
+   "status": "MET",
+   "what exists": "Every table row links to the official page it came from. Source register lists 24 URLs.",
+   "evidence_page": "sources.html",
+   "limitation": "",
+   "evidence_url": "sources.html"
+  },
+  {
+   "id": "R04",
+   "requirement": "Flag irregularities for review",
+   "status": "MET",
+   "what exists": "19 flagged items, each with a link, published on one page.",
+   "evidence_page": "flagged.html",
+   "limitation": "Flagged items are non-blocking by instruction.",
+   "evidence_url": "flagged.html"
+  },
+  {
+   "id": "R05",
+   "requirement": "Create a GitHub Pages live site with a clean dashboard and category subpages",
+   "status": "MET",
+   "what exists": "1 landing page + 11 subpages, one navigation, no JavaScript required.",
+   "evidence_page": "index.html",
+   "limitation": "",
+   "evidence_url": "index.html"
+  },
+  {
+   "id": "R06",
+   "requirement": "Present all entries and findings in simple, readable tables",
+   "status": "MET",
+   "what exists": "Every data page is an HTML table with a caption, a row count and a source column.",
+   "evidence_page": "index.html",
+   "limitation": "",
+   "evidence_url": "index.html"
+  },
+  {
+   "id": "R07",
+   "requirement": "Leave unconfirmed values blank and mark them unverified",
+   "status": "MET",
+   "what exists": "Blank cells are rendered as a visibly blank pill and counted on the flagged page.",
+   "evidence_page": "flagged.html",
+   "limitation": "",
+   "evidence_url": "flagged.html"
+  },
+  {
+   "id": "R08",
+   "requirement": "Never infer or fill in a value",
+   "status": "MET",
+   "what exists": "Correlations C6/C8/C9 and all player-prop prices are blank with a stated reason.",
+   "evidence_page": "correlations.html",
+   "limitation": "",
+   "evidence_url": "correlations.html"
+  },
+  {
+   "id": "R09",
+   "requirement": "Originate our own NFL lines",
+   "status": "PARTIAL",
+   "what exists": "13 Week 10 games carry our own spread, total and win probability, computed from a published model. They are NOT prices.",
+   "evidence_page": "own-lines.html",
+   "limitation": "A line without a market to beat cannot be scored as a bet, so it is a forecast, not a price.",
+   "evidence_url": "own-lines.html"
+  },
+  {
+   "id": "R10",
+   "requirement": "Research and develop strategies for generating useful signals",
+   "status": "MET",
+   "what exists": "5 registered strategies + 2 pre-registered placebos, each with a full result table.",
+   "evidence_page": "backtest.html",
+   "limitation": "Research only: none of them works.",
+   "evidence_url": "backtest.html"
+  },
+  {
+   "id": "R11",
+   "requirement": "Run it as a leaderboard competition with rewards",
+   "status": "MET",
+   "what exists": "Leaderboard with tiers, 1,000-point pool, 0 points awarded, rollover rule stated.",
+   "evidence_page": "leaderboard.html",
+   "limitation": "0 awarded is the honest result; see gates.",
+   "evidence_url": "leaderboard.html"
+  },
+  {
+   "id": "R12",
+   "requirement": "Cover single bets, parlays and player-prop combos",
+   "status": "PARTIAL",
+   "what exists": "Singles: 5 strategies evaluated. Parlays: leg-independence measured (C1, C2, C7). Player props: dependence measured (C5, phi=0.346).",
+   "evidence_page": "correlations.html",
+   "limitation": "No prop strategy can be scored: there is no archived prop price and no official per-game player log. Flag F-06.",
+   "evidence_url": "correlations.html"
+  },
+  {
+   "id": "R13",
+   "requirement": "Every strategy must pass validation gates",
+   "status": "MET",
+   "what exists": "10 pre-registered gates, evaluated with evidence; a strategy cannot appear as a qualifier without clearing every non-blocked gate.",
+   "evidence_page": "gates.html",
+   "limitation": "",
+   "evidence_url": "gates.html"
+  },
+  {
+   "id": "R14",
+   "requirement": "Determine correlation values",
+   "status": "PARTIAL",
+   "what exists": "6 of 9 correlation tests computed with r, n, 95% CI, p and FDR; 3 blank and flagged.",
+   "evidence_page": "correlations.html",
+   "limitation": "Same-game-parlay repricing and injury effects cannot be measured.",
+   "evidence_url": "correlations.html"
+  },
+  {
+   "id": "R15",
+   "requirement": "Remove luck from the equation",
+   "status": "MET",
+   "what exists": "Walk-forward backtest, week-clustered bootstrap, 2,000-draw permutation null, FDR, season-concentration disclosure, 2 pre-registered placebos.",
+   "evidence_page": "backtest.html",
+   "limitation": "Luck cannot be eliminated; it is bounded and disclosed.",
+   "evidence_url": "backtest.html"
+  },
+  {
+   "id": "R16",
+   "requirement": "Build strategies that are selectively skill based",
+   "status": "MET",
+   "what exists": "The skill screen is published and it rejects every strategy, including our own model against the closing line.",
+   "evidence_page": "backtest.html",
+   "limitation": "",
+   "evidence_url": "backtest.html"
+  },
+  {
+   "id": "R17",
+   "requirement": "Track injuries",
+   "status": "MET",
+   "what exists": "95 official Week 10 designations across 19 clubs, transcribed with the source URL.",
+   "evidence_page": "injuries.html",
+   "limitation": "One week only: the league publishes no historical archive.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R18",
+   "requirement": "Know defensive deficiencies: 2nd/3rd/4th string replacing starters",
+   "status": "BLOCKED",
+   "what exists": "Published: the official designation list, and 8 confirmed lineup changes named in official reporting (QB changes at SEA, MIA, BAL, MIN, CLE, AZ).",
+   "evidence_page": "injuries.html",
+   "limitation": "The NFL publishes no depth chart: nfl.com/depth-charts/ returns 404 (re-checked 2026-11-13), and no snap-count feed exists. Any '3rd string' label would be invented. Flag F-05.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R19",
+   "requirement": "Same for offences using starters or backups",
+   "status": "BLOCKED",
+   "what exists": "8 official lineup changes are listed with the club, the player out, the player in, and the article that says so.",
+   "evidence_page": "injuries.html",
+   "limitation": "Confined to changes an official article actually states. No inference from absence.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R20",
+   "requirement": "Make suggestions to improve the site and to improve decision making",
+   "status": "MET",
+   "what exists": "22 suggestions, each with context, options, evidence, cost, risk, prerequisites and a recommendation.",
+   "evidence_page": "suggestions.html",
+   "limitation": "",
+   "evidence_url": "suggestions.html"
+  },
+  {
+   "id": "R21",
+   "requirement": "Create a dedicated Suggestions section to review and choose a path",
+   "status": "MET",
+   "what exists": "suggestions.html is a decision board: an ordered recommended path, and every suggestion labelled Decide-now / Decide-later / Blocked.",
+   "evidence_page": "suggestions.html",
+   "limitation": "",
+   "evidence_url": "suggestions.html"
+  },
+  {
+   "id": "R22",
+   "requirement": "Clear list of questions, information and answers needed before a decision",
+   "status": "MET",
+   "what exists": "20 questions, each with: status, known (sourced), not known, why it blocks, which suggestion would unblock it, and a blank Answer field where no verified answer exists.",
+   "evidence_page": "questions.html",
+   "limitation": "9 questions have no verified answer; their Answer field is blank.",
+   "evidence_url": "questions.html"
+  },
+  {
+   "id": "R23",
+   "requirement": "Suggestions to discover missing information",
+   "status": "MET",
+   "what exists": "Every suggestion names the question it closes, so the board doubles as a data-acquisition plan.",
+   "evidence_page": "suggestions.html",
+   "limitation": "",
+   "evidence_url": "suggestions.html"
+  },
+  {
+   "id": "R24",
+   "requirement": "Produce an executive summary",
+   "status": "MET",
+   "what exists": "One page: bottom line, what was verified, what cannot be sourced, the one real signal, the binding decisions.",
+   "evidence_page": "executive-summary.html",
+   "limitation": "",
+   "evidence_url": "executive-summary.html"
+  },
+  {
+   "id": "R25",
+   "requirement": "No manual input from the owner",
+   "status": "MET",
+   "what exists": "Everything is generated by 5 committed commands; no form, no login, no manual data entry.",
+   "evidence_page": "index.html",
+   "limitation": "",
+   "evidence_url": "index.html"
+  },
+  {
+   "id": "R26",
+   "requirement": "Verify every table row against an official source, with a link",
+   "status": "MET",
+   "what exists": "verify.py walks every generated table row and fails the build if any row has no link.",
+   "evidence_page": "reconcile.html",
+   "limitation": "It checks that a link exists, not that the value is correct.",
+   "evidence_url": "reconcile.html"
+  },
+  {
+   "id": "R27",
+   "requirement": "Coordinate with parallel sessions via COORDINATION.md",
+   "status": "MET",
+   "what exists": "Claim committed and pushed before any work; scope recorded; peer namespaces untouched.",
+   "evidence_page": "repo-review.html",
+   "limitation": "",
+   "evidence_url": "repo-review.html"
+  },
+  {
+   "id": "R28",
+   "requirement": "Open a PR, merge without waiting, confirm Pages deploys",
+   "status": "MET",
+   "what exists": "Recorded in COORDINATION.md with the PR number, merge commit and deploy run.",
+   "evidence_page": "repo-review.html",
+   "limitation": "",
+   "evidence_url": "repo-review.html"
+  },
+  {
+   "id": "R29",
+   "requirement": "Publish flagged irregularities on a labelled page",
+   "status": "MET",
+   "what exists": "flagged.html is linked in the main navigation under a \u2691 label and from every page footer.",
+   "evidence_page": "flagged.html",
+   "limitation": "",
+   "evidence_url": "flagged.html"
+  },
+  {
+   "id": "R30",
+   "requirement": "Do not merge a broken site",
+   "status": "MET",
+   "what exists": "The build fails on a broken local link, an unsourced table row, or a non-reproducible number.",
+   "evidence_page": "reconcile.html",
+   "limitation": "",
+   "evidence_url": "reconcile.html"
+  },
+  {
+   "id": "R31",
+   "requirement": "Analyse the information we do and do not have",
+   "status": "MET",
+   "what exists": "A Known / Unknown table of 12 rows states exactly which inputs exist and which do not.",
+   "evidence_page": "questions.html",
+   "limitation": "",
+   "evidence_url": "questions.html"
+  },
+  {
+   "id": "R32",
+   "requirement": "Provide links for manual review",
+   "status": "MET",
+   "what exists": "24 registered sources, each with what it was used for and when it was read.",
+   "evidence_page": "sources.html",
+   "limitation": "",
+   "evidence_url": "sources.html"
+  },
+  {
+   "id": "R33",
+   "requirement": "Treat the competition as leaderboard-style with rewards for top strategies",
+   "status": "MET",
+   "what exists": "Tier structure, scoring rule, tie-break, and the rollover rule when nothing qualifies.",
+   "evidence_page": "leaderboard.html",
+   "limitation": "",
+   "evidence_url": "leaderboard.html"
+  },
+  {
+   "id": "R34",
+   "requirement": "Determine whether a strategy is skill or luck",
+   "status": "MET",
+   "what exists": "Four independent luck controls plus placebos; all five strategies fail at least one.",
+   "evidence_page": "backtest.html",
+   "limitation": "",
+   "evidence_url": "backtest.html"
+  },
+  {
+   "id": "R35",
+   "requirement": "Show correlation for parlay pricing rather than assuming independence",
+   "status": "PARTIAL",
+   "what exists": "C1, C2, C7 measure the dependence that multiplies legs; the multiplication rule is stated.",
+   "evidence_page": "correlations.html",
+   "limitation": "The repriced SGP price (C8) is unavailable, so the pricing claim stops at dependence.",
+   "evidence_url": "correlations.html"
+  },
+  {
+   "id": "R36",
+   "requirement": "Track lineup changes caused by trades as well as injuries",
+   "status": "PARTIAL",
+   "what exists": "Documented: Brissett trade to BAL, Cousins trade to MIN, Beck promoted at AZ, and the JAX midweek-trade exclusions.",
+   "evidence_page": "injuries.html",
+   "limitation": "Only where official reporting states the consequence.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R37",
+   "requirement": "Explain any deficiency in defences specifically",
+   "status": "PARTIAL",
+   "what exists": "Defensive designations are isolated with a position filter, so a defence missing its linebackers or secondary is visible.",
+   "evidence_page": "injuries.html",
+   "limitation": "The size of the effect on the opponent's scoring is not measurable, F-05.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R38",
+   "requirement": "Explain the same for offences",
+   "status": "PARTIAL",
+   "what exists": "Offensive designations (QB, OL, WR, RB, TE) are isolated with the same filter.",
+   "evidence_page": "injuries.html",
+   "limitation": "Same limit: no snap counts, no depth chart.",
+   "evidence_url": "injuries.html"
+  },
+  {
+   "id": "R39",
+   "requirement": "Report findings honestly, including null results",
+   "status": "MET",
+   "what exists": "The headline is a null result: 0 strategies, 0 reward points, model loses to the closing line.",
+   "evidence_page": "executive-summary.html",
+   "limitation": "",
+   "evidence_url": "executive-summary.html"
+  },
+  {
+   "id": "R40",
+   "requirement": "Keep the work reproducible",
+   "status": "MET",
+   "what exists": "5 commands regenerate every number; CI fails if the derived files change.",
+   "evidence_page": "sources.html",
+   "limitation": "",
+   "evidence_url": "sources.html"
+  },
+  {
+   "id": "R41",
+   "requirement": "Do not present research as wagering advice",
+   "status": "MET",
+   "what exists": "Disclaimer on every page plus the NCPG helpline, sourced from ncpgambling.org.",
+   "evidence_page": "index.html",
+   "limitation": "",
+   "evidence_url": "index.html"
+  }
+ ],
+ "groups": [
+  [
+   "Process and sources",
+   [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R25",
+    "R27",
+    "R28",
+    "R29",
+    "R30",
+    "R32",
+    "R40"
+   ]
+  ],
+  [
+   "The site",
+   [
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R20",
+    "R21",
+    "R26",
+    "R35",
+    "R41"
+   ]
+  ],
+  [
+   "Lines and signals",
+   [
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R33",
+    "R34"
+   ]
+  ],
+  [
+   "Statistics",
+   [
+    "R14",
+    "R15",
+    "R16",
+    "R31",
+    "R39"
+   ]
+  ],
+  [
+   "Injuries and depth",
+   [
+    "R17",
+    "R18",
+    "R19",
+    "R36",
+    "R37",
+    "R38"
+   ]
+  ],
+  [
+   "Decision support",
+   [
+    "R22",
+    "R23",
+    "R24"
+   ]
+  ]
+ ],
+ "summary": {
+  "total": 41,
+  "met": 32,
+  "partial": 7,
+  "blocked": 2
+ }
+}

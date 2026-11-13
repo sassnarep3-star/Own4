@@ -154,6 +154,15 @@ NAV = [
     ]),
     # Added 2026-11-12 by session arena/e2601583-own4: its own audit dashboard, plus the
     # four earlier NFL workspaces, which were reachable only by direct URL otherwise.
+    # Added 2026-11-13 by session arena/22679198-own4. Kept in the generator, not only in
+    # index.html, because this file rebuilds the root page and would drop a hand edit.
+    ("NFL origination · 2026-11-13", [
+        ("nfl-origination/pages/index.html", "NFL Origination — dashboard", "legacy"),
+        ("nfl-origination/pages/suggestions.html", "NFL suggestions & decisions", "legacy"),
+        ("nfl-origination/pages/questions.html", "NFL questions & unknowns", "legacy"),
+        ("nfl-origination/pages/own-lines.html", "NFL own lines · Week 10", "legacy"),
+        ("nfl-origination/pages/flagged.html", "⚑ NFL origination — flagged", "legacy"),
+    ]),
     ("NFL audit · 2026-11-12", [
         ("nfl-audit/index.html", "NFL audit &amp; suggestions", "legacy"),
         ("nfl-audit/pages/questions.html", "NFL questions register", "legacy"),
