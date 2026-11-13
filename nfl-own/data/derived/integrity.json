@@ -1,0 +1,267 @@
+{
+ "dataset": "analysis_integrity",
+ "official": {
+  "dataset": "nfl_2026_official_integrity_checks",
+  "captured_utc": "2026-11-13",
+  "checks": [
+   {
+    "id": "IC-01",
+    "name": "Every win is somebody else's loss",
+    "result": "pass",
+    "detail": "sum W 136 = sum L 136"
+   },
+   {
+    "id": "IC-02",
+    "name": "League points scored equals points allowed",
+    "result": "pass",
+    "detail": "sum PF 6291 = sum PA 6291"
+   },
+   {
+    "id": "IC-03",
+    "name": "Games implied by the standings reconcile with the schedule",
+    "result": "pass",
+    "detail": "137 game-equivalents (136 through Week 9 + 1 Week 10 final)"
+   },
+   {
+    "id": "IC-04",
+    "name": "Week 9 carried 15 games and Week 10 had 14",
+    "result": "pass",
+    "detail": "15 Week 9 rows, 14 Week 10 rows"
+   },
+   {
+    "id": "IC-05",
+    "name": "Peer Week 9 totals plus one Week 10 final equal today's league totals",
+    "result": "pass",
+    "detail": "peer PF 6,246 + 24 + 21 = 6291 (published 6291); peer W 135 + 1 = 136 (published 136)"
+   },
+   {
+    "id": "IC-06",
+    "name": "Published passing percentage equals completions divided by attempts",
+    "result": "pass",
+    "detail": "0 of 32 rows deviate"
+   },
+   {
+    "id": "IC-07",
+    "name": "Published passing average reproduces yards divided by attempts",
+    "result": "note",
+    "detail": "4 of 32 rows deviate by 0.1 in both directions: [('JAX', 8.546, 8.6), ('KC', 7.745, 7.8), ('PIT', 6.452, 6.4), ('SEA', 7.253, 7.2)] - the published AVG column is recorded but never used; the site publishes yds/att"
+   },
+   {
+    "id": "IC-08",
+    "name": "Published rushing average reproduces yards divided by attempts",
+    "result": "pass",
+    "detail": "0 of 32 rows deviate"
+   },
+   {
+    "id": "IC-09",
+    "name": "League passing yards gained equals passing yards allowed",
+    "result": "pass",
+    "detail": "64098 = 64098"
+   },
+   {
+    "id": "IC-10",
+    "name": "League passing touchdowns scored equals allowed",
+    "result": "pass",
+    "detail": "415 = 415"
+   },
+   {
+    "id": "IC-11",
+    "name": "League rushing yards gained equals allowed",
+    "result": "pass",
+    "detail": "30801 = 30801"
+   },
+   {
+    "id": "IC-12",
+    "name": "League rushing touchdowns scored equals allowed",
+    "result": "pass",
+    "detail": "259 = 259"
+   },
+   {
+    "id": "IC-13",
+    "name": "League passing attempts equal attempts faced by defences",
+    "result": "pass",
+    "detail": "9037 = 9037"
+   },
+   {
+    "id": "IC-14",
+    "name": "NE club passing exceeds the Drake Maye season line by a small residual",
+    "result": "pass",
+    "detail": "club minus Maye = {'att': 9, 'cmp': 5, 'yds': 67, 'td': 0, 'int': 0} (a single backup throwing 9 passes explains it)"
+   },
+   {
+    "id": "IC-14b",
+    "name": "Team sacks equal the quarterback's sacks exactly",
+    "result": "pass",
+    "detail": "club 20 sck/103 yds = Maye 20 sck/103 yds"
+   },
+   {
+    "id": "IC-15:drake-maye:cmp",
+    "name": "Drake Maye game logs sum to the published season cmp",
+    "result": "pass",
+    "detail": "logs 178 vs season 178"
+   },
+   {
+    "id": "IC-15:drake-maye:att",
+    "name": "Drake Maye game logs sum to the published season att",
+    "result": "pass",
+    "detail": "logs 272 vs season 272"
+   },
+   {
+    "id": "IC-15:drake-maye:yds",
+    "name": "Drake Maye game logs sum to the published season yds",
+    "result": "pass",
+    "detail": "logs 2282 vs season 2282"
+   },
+   {
+    "id": "IC-15:drake-maye:td",
+    "name": "Drake Maye game logs sum to the published season td",
+    "result": "pass",
+    "detail": "logs 18 vs season 18"
+   },
+   {
+    "id": "IC-15:drake-maye:int",
+    "name": "Drake Maye game logs sum to the published season int",
+    "result": "pass",
+    "detail": "logs 11 vs season 11"
+   },
+   {
+    "id": "IC-15:drake-maye:sck",
+    "name": "Drake Maye game logs sum to the published season sck",
+    "result": "pass",
+    "detail": "logs 20 vs season 20"
+   },
+   {
+    "id": "IC-15:drake-maye:sckyds",
+    "name": "Drake Maye game logs sum to the published season sckyds",
+    "result": "pass",
+    "detail": "logs 103 vs season 103"
+   },
+   {
+    "id": "IC-15:josh-allen:cmp",
+    "name": "Josh Allen game logs sum to the published season cmp",
+    "result": "pass",
+    "detail": "logs 156 vs season 156"
+   },
+   {
+    "id": "IC-15:josh-allen:att",
+    "name": "Josh Allen game logs sum to the published season att",
+    "result": "pass",
+    "detail": "logs 236 vs season 236"
+   },
+   {
+    "id": "IC-15:josh-allen:yds",
+    "name": "Josh Allen game logs sum to the published season yds",
+    "result": "pass",
+    "detail": "logs 2027 vs season 2027"
+   },
+   {
+    "id": "IC-15:josh-allen:td",
+    "name": "Josh Allen game logs sum to the published season td",
+    "result": "pass",
+    "detail": "logs 12 vs season 12"
+   },
+   {
+    "id": "IC-15:josh-allen:int",
+    "name": "Josh Allen game logs sum to the published season int",
+    "result": "pass",
+    "detail": "logs 6 vs season 6"
+   },
+   {
+    "id": "IC-15:josh-allen:sck",
+    "name": "Josh Allen game logs sum to the published season sck",
+    "result": "pass",
+    "detail": "logs 17 vs season 17"
+   },
+   {
+    "id": "IC-15:josh-allen:sckyds",
+    "name": "Josh Allen game logs sum to the published season sckyds",
+    "result": "pass",
+    "detail": "logs 109 vs season 109"
+   },
+   {
+    "id": "IC-15:jared-goff:cmp",
+    "name": "Jared Goff game logs sum to the published season cmp",
+    "result": "pass",
+    "detail": "logs 185 vs season 185"
+   },
+   {
+    "id": "IC-15:jared-goff:att",
+    "name": "Jared Goff game logs sum to the published season att",
+    "result": "pass",
+    "detail": "logs 273 vs season 273"
+   },
+   {
+    "id": "IC-15:jared-goff:yds",
+    "name": "Jared Goff game logs sum to the published season yds",
+    "result": "pass",
+    "detail": "logs 2134 vs season 2134"
+   },
+   {
+    "id": "IC-15:jared-goff:td",
+    "name": "Jared Goff game logs sum to the published season td",
+    "result": "pass",
+    "detail": "logs 15 vs season 15"
+   },
+   {
+    "id": "IC-15:jared-goff:int",
+    "name": "Jared Goff game logs sum to the published season int",
+    "result": "pass",
+    "detail": "logs 2 vs season 2"
+   },
+   {
+    "id": "IC-15:jared-goff:sck",
+    "name": "Jared Goff game logs sum to the published season sck",
+    "result": "pass",
+    "detail": "logs 19 vs season 19"
+   },
+   {
+    "id": "IC-15:jared-goff:sckyds",
+    "name": "Jared Goff game logs sum to the published season sckyds",
+    "result": "pass",
+    "detail": "logs 129 vs season 129"
+   },
+   {
+    "id": "IC-16:amon-ra-st-brown",
+    "name": "Amon-Ra St. Brown game logs sum to the published season totals",
+    "result": "pass",
+    "detail": "logs (61, 657, 5) vs season (61, 657, 5)"
+   },
+   {
+    "id": "IC-16:ja-marr-chase",
+    "name": "Ja'Marr Chase game logs sum to the published season totals",
+    "result": "pass",
+    "detail": "logs (53, 647, 7) vs season (53, 647, 7)"
+   },
+   {
+    "id": "IC-16:a-j-brown",
+    "name": "A.J. Brown game logs sum to a published season total",
+    "result": "note",
+    "detail": "no published season total exists for this player on the pages read, so the log rows are published and the season columns are left blank"
+   },
+   {
+    "id": "IC-16:jahmyr-gibbs",
+    "name": "Jahmyr Gibbs game logs sum to the published season totals",
+    "result": "pass",
+    "detail": "logs (177, 847, 9) vs season (177, 847, 9)"
+   },
+   {
+    "id": "IC-17",
+    "name": "Week 11 has 13 games, 26 clubs and 6 byes",
+    "result": "pass",
+    "detail": "13 games, 26 distinct clubs, 6 byes, no overlap"
+   },
+   {
+    "id": "IC-18",
+    "name": "Every slate club exists in the standings",
+    "result": "pass",
+    "detail": "32 of 32 clubs present"
+   }
+  ],
+  "summary": {
+   "total": 42,
+   "pass": 40,
+   "note": 2,
+   "fail": 0
+  }
+ }
+}

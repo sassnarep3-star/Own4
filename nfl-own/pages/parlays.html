@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Parlays &amp; dependence · Own4 NFL Own Lines</title>
+<meta name="description" content="Source-linked NFL line origination, strategy competition and decision support. Every row cites an official source.">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2430;--line:#233043;--ink:#e6edf3;--dim:#93a1b1;
+  --acc:#4aa3ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--chip:#1f2b3a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+aside{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 14px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.brand span{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.08em;
+  text-transform:uppercase}
+.tag{font-size:11px;color:var(--dim);margin:6px 0 14px}
+nav .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7c8f;
+  margin:16px 0 5px}
+nav a{display:block;padding:5px 9px;border-radius:6px;color:#c6d2de;font-size:13.5px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--chip);color:#fff;font-weight:600}
+main{flex:1;min-width:0;padding:26px 34px 80px;max-width:1500px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+.crumb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.lede{color:#c9d5e1;max-width:1000px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:23px;font-weight:700;display:block;line-height:1.2}
+.kpi .l{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--dim);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  margin:12px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:#a9b8c8;position:sticky;top:0}
+tbody tr:hover{background:#18202b}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:#5b6b7c;font-style:italic}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.note-pill{color:var(--warn);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--chip);
+  font-size:11.5px;color:#c6d2de;margin-right:4px}
+.chip.g{background:#12341c;color:#7ee787}
+.chip.b{background:#3b1517;color:#ff9c96}
+.chip.w{background:#3a2c0b;color:#f0c05a}
+.note{font-size:12.5px;color:var(--dim);margin:6px 0 18px;max-width:1000px}
+.box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:13px 16px;margin:16px 0}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box p{margin:4px 0}
+sup a{font-size:11px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--dim);max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+code{background:#0b1016;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul.tight{margin:6px 0 14px;padding-left:20px}
+ul.tight li{margin:3px 0}
+@media(max-width:900px){
+  aside{position:static;height:auto;width:100%;flex:none}
+  .layout{flex-direction:column}
+  main{padding:18px}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <a class="brand" href="../index.html">Own4 · NFL <span>Own lines · gates · competition</span></a>
+  <div class="tag">Snapshot 2026-11-13 · official NFL.com sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Start</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-13</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team stats</a><a class="nav" href="../pages/schedule.html">Schedule & results</a><a class="nav" href="../pages/players.html">Player leaders & logs</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><div class="grp">Originated lines</div><a class="nav" href="../pages/own-lines.html">Week 11 own lines</a><a class="nav" href="../pages/props.html">Player props & combos</a><a class="nav active" href="../pages/parlays.html">Parlays & dependence</a><div class="grp">Strategy competition</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation gates</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/luck.html">Backtest & luck</a><div class="grp">Availability</div><a class="nav" href="../pages/availability.html">Injuries & depth</a><div class="grp">Decisions</div><a class="nav" href="../pages/questions.html">Questions register</a><a class="nav" href="../pages/decisions.html">Decisions to make</a><a class="nav" href="../pages/suggestions.html">Suggestions board</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a></nav>
+</aside>
+<main class="main" id="main">
+<p class="crumb">Originated lines / Parlays</p>
+<h1>Parlays and dependence</h1><p class="lede">Three registered parlay constructions, one per family: cross-game two-leg, cross-game three-leg, and a same-game spread-plus-total pair.</p><div class="tw"><table><thead><tr><th>ID</th><th>Construction</th><th class="num">Parlays</th><th class="num">Hit rate</th><th class="num">Break-even</th><th class="num">p</th><th>95% CI</th><th>Gates</th><th>Tier</th><th>Source</th></tr></thead><tbody><tr><td>P1</td><td>Cross-game 2-leg parlay from the top-2 spread edges of a week</td><td class="num">161</td><td class="num">24.8%</td><td class="num">27.44%</td><td class="num">0.770</td><td>0.186 – 0.317</td><td>3/12</td><td>Rejected</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>P2</td><td>Cross-game 3-leg parlay from the top-3 spread edges of a week</td><td class="num">159</td><td class="num">11.3%</td><td class="num">14.37%</td><td class="num">0.864</td><td>0.069 – 0.164</td><td>3/12</td><td>Rejected</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>P3</td><td>Same-game 2-leg: spread + total on the same game</td><td class="num">101</td><td class="num">20.8%</td><td class="num">27.44%</td><td class="num">0.933</td><td>0.129 – 0.287</td><td>3/12</td><td>Rejected</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr></tbody></table></div><p class="note">Break-even assumes −110 on each leg, so a two-leg parlay must clear 27.44% and a three-leg 14.37%. The week-clustered bootstrap interval is the honest one because legs from the same week share conditions.</p><h2>Dependence: what we measured</h2><div class="tw"><table><thead><tr><th>ID</th><th>Pair</th><th class="num">r</th><th class="num">95% CI</th><th class="num">N</th><th>Method</th><th>Source</th></tr></thead><tbody><tr><td>C1</td><td>Favourite covers vs game goes over</td><td class="num">-0.0323</td><td class="num">-0.0713 – 0.0067</td><td class="num">2519</td><td>Favourite-cover and over flags across the same holdout games.</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>C2</td><td>Home win vs game goes over</td><td class="num">0.0014</td><td class="num">-0.0377 – 0.0404</td><td class="num">2519</td><td>Home-win and over flags across the same holdout games.</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>C3</td><td>Home margin vs game total</td><td class="num">0.0145</td><td class="num">-0.0246 – 0.0535</td><td class="num">2519</td><td>Point margin against total points, same games.</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr><tr><td>C4</td><td>Rest differential vs home margin</td><td class="num">0.0418</td><td class="num">0.0027 – 0.0807</td><td class="num">2519</td><td>Home-minus-away rest days against margin.</td><td><a href="https://github.com/nflverse/nfldata">archive</a> · <span class="blank" style="font-style:normal">official:</span> <a href="https://www.nfl.com/standings/league/2026/REG">standings</a></td></tr></tbody></table></div><p class="note">Team-level pairs are near zero, so multiplicative pricing is defensible for these pairs. Player-level pairs are on the <a href="correlations.html">correlations</a> page.</p><div class="box warn"><p><strong>What a parlay costs you.</strong> Two legs at −110 each need 27.44% joint hit rate to break even, and three legs need 14.37%. Every extra leg multiplies the margin the book keeps. That arithmetic is independent of any model, which is why no parlay strategy here is close to eligible.</p></div>
+<footer>
+<p><strong>Own4 · NFL Own Lines</strong> — analytical research, <strong>not wagering advice</strong>.
+Every data row links to the official NFL.com page it was read from on 2026-11-13 (UTC); every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../pages/flagged.html">Flagged for review</a> page. No market price exists anywhere in this
+repository, so no edge, stake or return is claimed.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body></html>

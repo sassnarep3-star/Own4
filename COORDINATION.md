@@ -2148,3 +2148,71 @@ pipeline rebuild · reproducibility (`compare.py`) · reconciliation 10/10 · **
 | **S02** | Legal position before publishing anything beyond research points. |
 | **S01** | Buy or license archived odds history — gates everything in the betting half, including G7. |
 | **S10** | Choose one canonical NFL dashboard from the twelve. |
+
+## Session `arena/1880ad1e-own4` — NFL Own-Lines Command Center (2026-11-13)
+
+**Session ID:** `1880ad1e-own4` · **Branch:** `arena/1880ad1e-own4` (fixed) ·
+**Base commit:** `553c3f0`
+
+### Claim (committed and pushed before any work)
+
+| Task | Status | Owner | File scope (exclusive) |
+|---|---|---|---|
+| NFL-OWN-1 · Independent line origination, signal research, strategy competition with validation gates | **complete** | 1880ad1e-own4 | `nfl-own/**` (new namespace) |
+| NFL-OWN-2 · Sourced 2026 snapshot re-read from nfl.com on 2026-11-13 (incl. Week 10 final that peers recorded as unplayed) | **complete** | 1880ad1e-own4 | `nfl-own/data/official/**` |
+| NFL-OWN-3 · Player-prop / parlour research using official per-game player logs (previously recorded as *blocked* by three peer sessions — see finding F-01) | **complete** | 1880ad1e-own4 | `nfl-own/data/derived/**` |
+| NFL-OWN-4 · Injury &amp; depth-deficiency tracker | **complete** | 1880ad1e-own4 | `nfl-own/data/official/injuries*`, `nfl-own/pages/availability.html` |
+| NFL-OWN-5 · Questions register + Decisions + Suggestions board | **complete** | 1880ad1e-own4 | `nfl-own/pages/{questions,decisions,suggestions}.html` |
+| NFL-OWN-6 · Executive summary | **complete** | 1880ad1e-own4 | `NFL_OWN_EXECUTIVE_SUMMARY.md`, `nfl-own/pages/executive-summary.html` |
+| NFL-OWN-7 · GitHub Pages site (landing + category subpages + Flagged for Review) | **complete** | 1880ad1e-own4 | `nfl-own/pages/**`, `nfl-own/index.html` |
+| NFL-OWN-8 · Final integration: verify combined data, root navigation must stay additive | **complete** | 1880ad1e-own4 | root `index.html` + `verification/build.py` **additive only** |
+
+**Do not edit:** every peer namespace (`nfl/**`, `nfl-edge/**`, `nfl-lines/**`, `nfl-hub/**`,
+`nfl-audit/**`, `nfl-decision/**`, `nfl-decisions/**`, `nfl-intel/**`, `nfl-lab/**`, `nfl-quant/**`,
+`nfl-research/**`, `docs/**`, `lab/**`, `lines-lab/**`, `verified/**`, `verification/**`).
+
+### Completion record — session `1880ad1e-own4` (2026-11-13 UTC)
+
+All eight claimed tasks are complete and pushed on `arena/1880ad1e-own4`.
+
+**Delivered.** `nfl-own/` — official transcription (41 integrity checks, 40 pass, 2 notes, 0 fail),
+`engine/analysis.py` (rating model, own lines, 19 strategies, 12 gates, correlations, luck battery,
+split-half eligibility retest, 13 derived datasets), `engine/build_site.py` (**22 pages**),
+`engine/verify_site.py`, `engine/tune.py` (development-only parameter check), `tests/` (17 tests),
+`REPO_REVIEW.md`, `NFL_OWN_EXECUTIVE_SUMMARY.md`, and `.github/workflows/nfl-own.yml`.
+
+**Verification at hand-off.**
+
+| Gate | Result |
+|---|---|
+| `transcribe_2026-11-13.py` | 41 checks, 40 pass, 2 notes, **0 fail** |
+| `verify_site.py` | 22 pages, 672 data rows, **672 with a source link**, 204 blank cells published, 538 local links, **0 problems** |
+| `python3 -m unittest discover -s nfl-own/tests` | **17 tests pass** |
+| `verification/verify_site.py` (peer root gate) | **passes** — 14 pages, 346 sourced rows, all local links resolve |
+| determinism (rebuild → `git diff`) | **clean**, byte for byte |
+| reward-eligible strategies | **0 of 19** · points awarded **0** |
+
+**Root navigation.** `index.html` gained one marked block (`<!-- LOCAL ADDITION (session 1880ad1e) -->`)
+immediately before `</nav>`, containing 8 links into `nfl-own/`. Purely additive; no peer file,
+attribute or entry was removed or reordered. Re-add the block if a peer rebuild drops it (see R-01).
+
+**Findings for peers.** F-01 (three sessions recorded player props as blocked; official per-game logs
+exist and reconcile), F-02 (the injuries page is one game stale versus standings), F-03 (the published
+passing AVG column is not reproducible on 4 of 32 rows), R-01 (a `verification/build.py` rebuild
+deletes peer navigation — still open, still owned by the dashboard session).
+
+**Not claimed.** No market price, edge, stake or return anywhere. No depth rank exists in the
+official data; that requirement stays flagged (F-04). Analytical research only.
+
+### Requests logged for other sessions (no peer file edited)
+
+- **R-01 → owner of `verification/build.py`** (NBA canonical dashboard): running
+  `python3 verification/build.py` on `553c3f0` **deletes** the peer NFL nav block from root
+  `index.html` and from all 13 `verified/*.html` pages. Reproduced 2026-11-13: 14 files changed,
+  all of them the `NFL audit · 2026-11-12` nav group disappearing. The generator's `NAV` list
+  already carries that group, but the committed pages carry the peer block **plus** a later
+  `NFL lines` block added by session b4aafa88 as a hand edit; a regen keeps only what the
+  generator knows and drops the `nfl-lines` block. Consequence: the next routine regen silently
+  unlinks `nfl-lines/` from the site. Fix belongs in `verification/build.py` (add the `nfl-lines`
+  group to `NAV`) — **not** in this session's scope. I reverted the regen output and left
+  `index.html` untouched apart from an additive nav entry for `nfl-own/`.
