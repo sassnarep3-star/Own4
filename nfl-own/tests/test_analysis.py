@@ -102,6 +102,20 @@ class TestGatesAndRewards(unittest.TestCase):
             self.assertEqual(r["points_awarded"], 0, r["id"])
             self.assertNotEqual(r["gates_passed"], "12/12", r["id"])
 
+    def test_reward_policy_matches_the_repository_rule(self):
+        """The competition must use the repository's existing 1,000-points-per-qualifier rule,
+        all or nothing, rather than a policy invented in this workspace."""
+        board = derived("leaderboard.json")
+        pol = board["reward_policy"]
+        self.assertEqual(pol["points_per_qualifying_strategy"], 1000)
+        self.assertIn("nfl-edge/data/gates.json", pol["adopted_from"])
+        self.assertEqual(pol["points_available_across_entries"],
+                         1000 * len(board["rows"]))
+        for r in board["rows"]:
+            self.assertIn(r["points_awarded"], (0, 1000), r["id"])
+            if r["gates_passed"] != "12/12":
+                self.assertEqual(r["points_awarded"], 0, r["id"])
+
     def test_every_strategy_fails_prospective_replication(self):
         strat = derived("strategies.json")
         for sid, r in strat["results"].items():

@@ -1120,7 +1120,10 @@ def main():
                                                   "control.")})
     # ---- competition table
     board = []
-    points_per_gate = 50
+    # Reward policy, adopted from the repository's existing NFL competition
+    # (nfl-edge/data/gates.json: "1000 points to a strategy only if every gate passes; otherwise 0.
+    # No partial credit, no discretionary bonuses."). This workspace adds no new policy of its own.
+    REWARD_PER_QUALIFIER = 1000
     for sid, r in results.items():
         gd = r.get("gate_detail", {})
         passed = sum(1 for v in gd.values() if v)
@@ -1131,7 +1134,7 @@ def main():
             "q_value": r.get("q_value"), "bootstrap": [r.get("bootstrap_lo"), r.get("bootstrap_hi")],
             "placebo_p": r.get("placebo_p"), "gates_passed": r.get("gates_passed"),
             "tier": r.get("tier"), "eligible": r.get("eligible_for_reward", False),
-            "points_awarded": (points_per_gate * passed) if r.get("eligible_for_reward") else 0,
+            "points_awarded": REWARD_PER_QUALIFIER if r.get("eligible_for_reward") else 0,
             "grades_basis": "12 pre-registered gates; rewards pay only on 12/12",
         })
     for c in combos:
@@ -1221,8 +1224,16 @@ def main():
         },
         "leaderboard.json": {
             "dataset": "competition_leaderboard",
-            "points_policy": "50 points per gate passed, paid only on a 12/12 finish.",
+            "points_policy": "1000 points per qualifying strategy, paid only on a 12/12 finish; "
+                             "no partial credit (adopted from nfl-edge/data/gates.json).",
             "total_points_awarded": total_points,
+            "reward_policy": {
+                "points_per_qualifying_strategy": REWARD_PER_QUALIFIER,
+                "rule": "A strategy earns 1000 points only if all twelve gates pass; otherwise 0. "
+                        "No partial credit and no discretionary bonus. This is the repository's "
+                        "existing rule, not a new one.",
+                "points_available_across_entries": REWARD_PER_QUALIFIER * len(board),
+                "adopted_from": "nfl-edge/data/gates.json"},
             "rewards_note": "Points, not money. Zero points awarded because no entry reached 12/12.",
             "rows": board,
         },
