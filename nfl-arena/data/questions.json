@@ -1,0 +1,140 @@
+{
+  "dataset": "questions_information_needs",
+  "session": "arena/d6c72eb4-own4",
+  "captured_utc": "2026-11-13",
+  "purpose": "A decision cannot be reasonably made until the questions below are answered. Each row states what we know today (with evidence), what is missing, and the concrete action that would discover the missing information. Status key: ANSWERED = settled by a cited source or a reproducible in-repo measurement; OPEN = missing information; the discovery action is how we would close it.",
+  "status_key": {
+    "ANSWERED": "Settled by a cited official/trusted source or a reproducible in-repo measurement",
+    "OPEN": "Missing information — a decision touching this area stays blocked"
+  },
+  "decisions_blocked": [
+    {"id": "D-A", "decision": "Publish betting recommendations or 'edges' to a user", "status": "BLOCKED", "blocked_by": ["Q-01", "Q-02", "Q-05", "Q-07"]},
+    {"id": "D-B", "decision": "Award leaderboard reward points to a strategy", "status": "BLOCKED", "blocked_by": ["Q-01", "Q-02", "Q-03"]},
+    {"id": "D-C", "decision": "Use player-prop combos as a strategy family", "status": "BLOCKED", "blocked_by": ["Q-04"]},
+    {"id": "D-D", "decision": "Consolidate the eleven NFL namespaces", "status": "BLOCKED", "blocked_by": ["Q-10"]},
+    {"id": "D-E", "decision": "Treat depth-string tracker output as decision input for 24 unverified teams", "status": "BLOCKED", "blocked_by": ["Q-06"]},
+    {"id": "D-F", "decision": "Act on any Week 10 model-market gap", "status": "BLOCKED", "blocked_by": ["Q-05", "Q-08"]}
+  ],
+  "questions": [
+    {
+      "id": "Q-01",
+      "question": "Do any registered strategies beat the closing line after removing luck?",
+      "status": "ANSWERED (negatively, current cycle)",
+      "what_we_know": "n=92 settled bets in the confirmatory sample; every strategy's Benjamini-Hochberg-adjusted p-value is above 0.05; 0 of 4 registered strategies in nfl-edge qualify; 0 of 15 in nfl-lines are reward-eligible; model Brier 0.2265 vs market 0.2106 (market is better calibrated).",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json"],
+      "what_is_missing": "A larger settled sample (n>=300 per strategy is the pre-registered floor) and independent confirmation seasons.",
+      "discovery_action": "Keep paper-trading every strategy each week and re-run the gates after Week 18; re-evaluate at n>=300.",
+      "blocks": ["D-A", "D-B"]
+    },
+    {
+      "id": "Q-02",
+      "question": "Is the model's biggest apparent edge real or an artifact of the rest-differential term?",
+      "status": "OPEN",
+      "what_we_know": "The largest model-market gap (PIT @ CIN, 7.06 pts) is driven by a 7-vs-14 rest differential. The fitted rest term (0.71 pts/day) is large and the fitted home-field advantage (1.58 pts) is below the usual published range.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/own_lines_week10.json", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/flagged.html"],
+      "what_is_missing": "An ablation: refit without the rest term and measure out-of-sample error; compare against published rest-advantage research.",
+      "discovery_action": "Run a pre-registered ablation study (rest term on/off) over the same walk-forward window; publish both error distributions.",
+      "blocks": ["D-A", "D-F"]
+    },
+    {
+      "id": "Q-03",
+      "question": "How much of a strategy's ROI can be explained by variance alone at its sample size?",
+      "status": "ANSWERED (method exists)",
+      "what_we_know": "Luck-removal is implemented: Wilson 95% intervals on win rates, normal-approximation power (required n for 80% power), z-scores and BH-FDR across the strategy family are computed for all 15 registered strategies (see Leaderboard page). All current intervals include break-even.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json"],
+      "what_is_missing": "Nothing for the current method; a deflated-Sharpe layer for ROI-ranked lists is a nice-to-have (see S-09).",
+      "discovery_action": "Keep the luck layer attached to every leaderboard refresh; no decision on rewards until intervals exclude break-even.",
+      "blocks": ["D-B"]
+    },
+    {
+      "id": "Q-04",
+      "question": "What are verifiable player-prop lines and player game logs for the 2026 season?",
+      "status": "OPEN",
+      "what_we_know": "Nothing official: the NFL publishes no prop prices, and no in-repo source carries player game logs. All prop cells are blank across every namespace (IR-04, F-02, A-13).",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/props.html"],
+      "what_is_missing": "A licensed odds source for props and an official player-stats feed (nfl.com player pages or an authorized API).",
+      "discovery_action": "Connect a licensed feed or scrape policy-compliant official player pages; until then prop-combo strategies cannot register (S-07).",
+      "blocks": ["D-C"]
+    },
+    {
+      "id": "Q-05",
+      "question": "What is the sign convention and capture time of every market line we use?",
+      "status": "OPEN",
+      "what_we_know": "The same Thursday game carries spread 1.5 in the nflverse archive and 2.5 in the nfl-lines capture. The archive column name 'spread_line' is not documented in the files themselves (home-perspective assumed).",
+      "evidence": ["https://github.com/nflverse/nfldata", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/own_lines_week10.json"],
+      "what_is_missing": "A data dictionary entry per source plus a captured_utc stamp per line snapshot.",
+      "discovery_action": "Read the nfldata repository documentation (README/CONTRIBUTING) and record the convention in SOURCES; add capture timestamps going forward (S-05).",
+      "blocks": ["D-A", "D-F"]
+    },
+    {
+      "id": "Q-06",
+      "question": "Which teams are actually starting 2nd/3rd/4th-string players in place of starters this week?",
+      "status": "ANSWERED for 8 teams; OPEN for 24",
+      "what_we_know": "For NE, BAL, MIA, SEA, DET, IND, MIN, GB the Starter/2nd/3rd/4th strings are verified from ESPN depth charts and joined to the official injury report: 3 CRITICAL gaps (IND LS, MIN WR3, NE FB have no listed replacement), 7 MODERATE 2nd-string forced replacements (incl. SEA QB Drew Lock for Sam Darnold, DET LCB Khalil Dorsey for D.J. Reed, NE LCB Charles Woods for Carlton Davis III), plus backup-QB situations in BAL (Brissett for IR'd Lamar Jackson) and MIA (McCord first start, Willis on IR) confirmed by NFL.com news.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/depth_deficiency.json", "https://www.nfl.com/injuries/", "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"],
+      "what_is_missing": "Depth charts for the remaining 24 teams; snap-count verification that the listed strings match actual usage.",
+      "discovery_action": "Extend the capture to all 32 teams each Friday and add weekly snap counts as a cross-check (S-03).",
+      "blocks": ["D-E"]
+    },
+    {
+      "id": "Q-07",
+      "question": "Do our originated lines improve decisions once injuries/depth are fed in?",
+      "status": "OPEN",
+      "what_we_know": "Both line engines currently have no quarterback or depth-chart feature (nfl-lines IR-11), while this week's slate has confirmed starter QB changes in BAL, MIA, SEA and possibly MIN/ARI/CLE. The model cannot see them.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/flagged.html", "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"],
+      "what_is_missing": "A pre-registered experiment: same model with and without a QB/depth availability feature, measured on walk-forward error and CLV proxy.",
+      "discovery_action": "Add the feature behind a gate and run the ablation (S-08); only then judge whether lines 'improve decisions'.",
+      "blocks": ["D-A", "D-F"]
+    },
+    {
+      "id": "Q-08",
+      "question": "What will Week 10 closing lines be, and do the gaps shrink or grow into close?",
+      "status": "OPEN",
+      "what_we_know": "13 of 14 games are unplayed; only WAS@NYG has a settled result (24-21, underdog covered +1.5, total 45 went over 40.5).",
+      "evidence": ["https://www.espn.com/nfl/game/_/gameId/401873052/commanders-giants"],
+      "what_is_missing": "Closing lines for the remaining games (available after kickoff per game).",
+      "discovery_action": "Re-pull the archive after MNF and re-settle every Week 10 row (S-06).",
+      "blocks": ["D-F"]
+    },
+    {
+      "id": "Q-09",
+      "question": "How should correlation between legs be priced in same-game parlays and prop combos?",
+      "status": "PARTIAL",
+      "what_we_know": "Game-level correlations are computed on 4,000+ games (e.g., market closing spread vs actual home margin r=0.4393; own spread vs actual margin r=0.3384; own-line edge vs result r=0.0072 — i.e., no detectable edge). Player-level and same-game leg correlations are blank.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json"],
+      "what_is_missing": "Player-level joint distributions (blocked by Q-04) and a same-game dependence model.",
+      "discovery_action": "Once player data exists, estimate pairwise tail dependence and price it into the parlay engine (S-10).",
+      "blocks": ["D-C"]
+    },
+    {
+      "id": "Q-10",
+      "question": "Which namespace is the single source of truth for NFL facts?",
+      "status": "OPEN",
+      "what_we_know": "Eleven NFL namespaces publish overlapping facts; this review found real drift already (A-05, A-06). Peer sessions logged the problem (SG-11/IR-09) but none acted.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4"],
+      "what_is_missing": "An owner decision on canonical vs archive.",
+      "discovery_action": "Reviewer picks a canonical namespace from the Suggestions queue (S-01); integration session executes.",
+      "blocks": ["D-D"]
+    },
+    {
+      "id": "Q-11",
+      "question": "Are injury-report designations captured at the right time each week?",
+      "status": "ANSWERED (no)",
+      "what_we_know": "The peer captures predate Friday designations, so questionables show as 0 league-wide (A-05). Friday-state capture (this session) shows NE alone with 9 Questionable.",
+      "evidence": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/verification.json"],
+      "what_is_missing": "A scheduled Friday/Saturday capture, including the Saturday inactives release.",
+      "discovery_action": "Automation: scheduled refresh job at Friday report time and post-inactives (S-04).",
+      "blocks": ["D-E"]
+    },
+    {
+      "id": "Q-12",
+      "question": "What do official sources say about weather, rest and situational spots for future games?",
+      "status": "OPEN",
+      "what_we_know": "Rest days are in the archive (home_rest/away_rest). Weather for future games cannot be verified from an official source before game day (peer IR-06).",
+      "evidence": ["https://github.com/nflverse/nfldata"],
+      "what_is_missing": "An official forecast source with retrieval timestamps.",
+      "discovery_action": "Add a forecast capture on game-day mornings only (not before), stamped and linked (S-11).",
+      "blocks": []
+    }
+  ]
+}

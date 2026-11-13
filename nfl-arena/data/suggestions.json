@@ -1,0 +1,192 @@
+{
+  "dataset": "suggestions_review_queue",
+  "session": "arena/d6c72eb4-own4",
+  "captured_utc": "2026-11-13",
+  "how_to_use": "Every row is a PROPOSAL. Nothing here is implemented except where status says IMPLEMENTED (this session's own deliverables). A reviewer chooses a decision path (A/B/C) per row BEFORE anything is built. 'Reversible' means a wrong choice can be undone without losing data; 'One-way door' means choose carefully.",
+  "verdict_key": {
+    "PROPOSED": "Awaiting reviewer decision — not implemented",
+    "IMPLEMENTED": "Already built in nfl-arena/ and visible on this site this session"
+  },
+  "rows": [
+    {
+      "id": "S-01",
+      "area": "Site / information architecture",
+      "problem": "Eleven overlapping NFL namespaces duplicate facts and drift apart (A-05, A-06, A-07).",
+      "proposal": "Declare one canonical NFL facts namespace and demote the rest to archives linked from it.",
+      "decision_paths": [
+        {"path": "A", "label": "Do nothing", "consequence": "Drift continues; reviewers must read 11 sites."},
+        {"path": "B", "label": "Declare nfl-lines canonical for numbers, nfl-arena canonical for decision layer, others archive", "consequence": "Cheap, reversible, additive; needs a nav note."},
+        {"path": "C", "label": "Physically merge all NFL content into one namespace", "consequence": "Cleanest end state but one-way door for old links; needs a link-redirect map."}
+      ],
+      "recommended_path": "B",
+      "impact": "high", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4"]
+    },
+    {
+      "id": "S-02",
+      "area": "Process",
+      "problem": "COORDINATION.md is titled 'NBA Line Origination Research' though it now records mostly NFL work (A-08).",
+      "proposal": "Retitle to 'Own4 — Multi-Project Research Task Board' and add a one-line scope note per project.",
+      "decision_paths": [
+        {"path": "A", "label": "Leave as is", "consequence": "New sessions keep misreading scope."},
+        {"path": "B", "label": "Retitle + scope note", "consequence": "Cosmetic, reversible."},
+        {"path": "C", "label": "Split into per-project boards", "consequence": "More structure, more files to keep in sync."}
+      ],
+      "recommended_path": "B",
+      "impact": "low", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"]
+    },
+    {
+      "id": "S-03",
+      "area": "Injury / depth tracker",
+      "problem": "Depth-string verification covers 8 of 32 teams (A-11); the other 24 have blank string columns.",
+      "proposal": "Capture all 32 ESPN depth charts every Friday and join them to the official report automatically.",
+      "decision_paths": [
+        {"path": "A", "label": "Keep 8-team manual capture", "consequence": "Tracker stays partial; blanks persist."},
+        {"path": "B", "label": "32-team weekly capture, scripted", "consequence": "Full coverage; ~32 source pages per week; still third-party strings (A-12)."},
+        {"path": "C", "label": "32-team capture + snap-count cross-check from game books", "consequence": "Strongest evidence that listed strings match actual usage; highest effort."}
+      ],
+      "recommended_path": "B (C later, when snap counts are available)",
+      "impact": "high", "effort": "medium", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://www.espn.com/nfl/depth"]
+    },
+    {
+      "id": "S-04",
+      "area": "Injury / depth tracker",
+      "problem": "Captures miss Friday game-status designations and Saturday inactives (A-05, Q-11).",
+      "proposal": "Schedule two automated refreshes per week: Friday after the designation release, and Saturday/Sunday after inactives.",
+      "decision_paths": [
+        {"path": "A", "label": "Ad-hoc manual capture", "consequence": "Stale designations keep appearing."},
+        {"path": "B", "label": "Two scheduled refreshes, timestamped", "consequence": "Designations current at decision time; cheap."},
+        {"path": "C", "label": "Refresh + alerting when a starter flips to Out", "consequence": "Fastest signal; needs a delivery channel."}
+      ],
+      "recommended_path": "B",
+      "impact": "high", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "S-05",
+      "area": "Market data",
+      "problem": "The same game carries different market numbers in different files, with no capture timestamps (A-06).",
+      "proposal": "Standardise market data on one archive with a per-row captured_utc stamp and a documented sign convention.",
+      "decision_paths": [
+        {"path": "A", "label": "Leave both", "consequence": "Gaps keep appearing between namespaces."},
+        {"path": "B", "label": "nfldata = source of record + dictionary + timestamps", "consequence": "One number per market; reversible."},
+        {"path": "C", "label": "Two-source reconciliation (archive vs broker feed) with variance flags", "consequence": "Best quality; needs second licensed source."}
+      ],
+      "recommended_path": "B",
+      "impact": "high", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/nflverse/nfldata"]
+    },
+    {
+      "id": "S-06",
+      "area": "Model evaluation",
+      "problem": "Week 10 gaps are measured against in-progress market numbers (A-09).",
+      "proposal": "Re-settle every week only against closing lines, after the final game of the week.",
+      "decision_paths": [
+        {"path": "A", "label": "Evaluate on live numbers", "consequence": "Edges appear and vanish with the market."},
+        {"path": "B", "label": "Closing-line-only settlement", "consequence": "Standard, defensible; results lag by days."},
+        {"path": "C", "label": "Both, labelled (open vs close) with CLV column", "consequence": "More insight, slightly more work."}
+      ],
+      "recommended_path": "C",
+      "impact": "medium", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/nflverse/nfldata"]
+    },
+    {
+      "id": "S-07",
+      "area": "Player props",
+      "problem": "No verifiable player-prop prices or game logs exist in any source (A-13, Q-04); prop strategies are stuck at the gate.",
+      "proposal": "Connect a licensed prop-odds source plus an official player-stat feed before registering prop-combo strategies.",
+      "decision_paths": [
+        {"path": "A", "label": "Drop the prop family", "consequence": "Scope shrinks to sides/totals; no blank columns left."},
+        {"path": "B", "label": "Licensed feeds when budget allows", "consequence": "Unlocks prop combos and player-level correlation (Q-09)."},
+        {"path": "C", "label": "Synthetic prop prices for research only", "consequence": "Fast but risks unverifiable numbers; must never be labelled verified."}
+      ],
+      "recommended_path": "B (A if no budget)",
+      "impact": "medium", "effort": "high", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/props.html"]
+    },
+    {
+      "id": "S-08",
+      "area": "Line origination",
+      "problem": "Both models are blind to confirmed QB changes and depth losses (Q-07, peer IR-11).",
+      "proposal": "Add a pre-registered QB/depth availability feature and measure it by walk-forward ablation before trusting any gap it creates.",
+      "decision_paths": [
+        {"path": "A", "label": "Keep team-level only", "consequence": "Model keeps missing the biggest weekly information shocks."},
+        {"path": "B", "label": "Feature + ablation gate", "consequence": "Evidence-based decision on inclusion."},
+        {"path": "C", "label": "Full player-level market (EPA-based) rebuild", "consequence": "Best long-term model; large effort."}
+      ],
+      "recommended_path": "B (C as a follow-on research track)",
+      "impact": "high", "effort": "medium", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"]
+    },
+    {
+      "id": "S-09",
+      "area": "Leaderboard / luck removal",
+      "problem": "ROI-ranked lists reward variance unless luck is deflated explicitly (Q-03).",
+      "proposal": "Add a deflated-Sharpe / multiple-testing layer to every ranked list alongside the existing Wilson + BH-FDR columns.",
+      "decision_paths": [
+        {"path": "A", "label": "Keep current columns", "consequence": "Acceptable for n<300; weaker for large strategy pools."},
+        {"path": "B", "label": "Add deflated-Sharpe column", "consequence": "One more computed column; reversible."},
+        {"path": "C", "label": "Bayesian skill posterior per strategy", "consequence": "Richest; needs priors decided up front."}
+      ],
+      "recommended_path": "B",
+      "impact": "medium", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json"]
+    },
+    {
+      "id": "S-10",
+      "area": "Correlation / parlays",
+      "problem": "Same-game leg dependence and player-prop dependence are unmeasured (Q-09).",
+      "proposal": "Estimate same-game dependence from settled game data first (team totals vs spread, total vs moneyline), then extend to props when player data exists.",
+      "decision_paths": [
+        {"path": "A", "label": "Price parlays as independent legs", "consequence": "Systematic mispricing of correlated combos."},
+        {"path": "B", "label": "Game-level dependence now, props later", "consequence": "Improves parlay pricing with data we already have."},
+        {"path": "C", "label": "Wait for player data, do it once", "consequence": "No partial improvement."}
+      ],
+      "recommended_path": "B",
+      "impact": "medium", "effort": "medium", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json"]
+    },
+    {
+      "id": "S-11",
+      "area": "Weather / situational",
+      "problem": "Weather for future games is unverifiable ahead of time (peer IR-06); wind is used structurally in one strategy.",
+      "proposal": "Capture forecasts only on game-day mornings with retrieval timestamps and source links; never store earlier guesses.",
+      "decision_paths": [
+        {"path": "A", "label": "Ignore weather", "consequence": "Wind/roof strategies can't be graded properly."},
+        {"path": "B", "label": "Game-day-morning capture, stamped", "consequence": "Verifiable; short lead time."},
+        {"path": "C", "label": "Multi-day forecast archive", "consequence": "More data, more unverifiable early values."}
+      ],
+      "recommended_path": "B",
+      "impact": "low", "effort": "low", "reversible": true,
+      "status": "PROPOSED",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/flagged.html"]
+    },
+    {
+      "id": "S-12",
+      "area": "Decision layer (this site)",
+      "problem": "Improvement ideas previously lived inside individual namespaces, so nobody reviewed them as a queue.",
+      "proposal": "Keep this Suggestions page as the standing review queue: proposals, decision paths, and a reviewer verdict column that a future integration session implements.",
+      "decision_paths": [
+        {"path": "A", "label": "One-off review, then archive", "consequence": "Queue goes stale."},
+        {"path": "B", "label": "Standing queue with verdicts recorded here", "consequence": "Traceable decisions; small upkeep."},
+        {"path": "C", "label": "Queue + issue-tracker mirror", "consequence": "Better notifications; two places to maintain."}
+      ],
+      "recommended_path": "B",
+      "impact": "medium", "effort": "low", "reversible": true,
+      "status": "IMPLEMENTED (this page exists; verdicts still awaited)",
+      "evidence_urls": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/pages/suggestions.html"]
+    }
+  ]
+}

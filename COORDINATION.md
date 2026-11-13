@@ -2321,3 +2321,83 @@ NFL Decision Lab namespace fix) is noted; its namespace is out of my scope.
 **2026-11-13 claim audit:** all prior task-board rows examined; every prior claim is
 either `done` or owned by an older session whose work is already merged (PRs #2–#74).
 No other active claim covers `nfl-arena/**`. No conflicts with any open PR file scope.
+
+---
+
+## Session arena/d6c72eb4-own4 — NFL Decision & Strategy Hub (completion record, 2026-11-13)
+
+All claimed tasks D1–D8 are **done**. Scope remained exactly as claimed: `nfl-arena/**`,
+`.github/workflows/nfl-arena.yml`, append-only `COORDINATION.md`, additive-only root `index.html`
+nav (marked `LOCAL ADDITION (session d6c72eb4)`), append-only `README.md`. No other session's
+files were edited.
+
+### Deliverables
+
+| Task | Result | Files |
+|------|--------|-------|
+| D1 Line-by-line repo review | 64 verification rows, **0 mismatches**, 18 flagged (timing/legend, non-blocking) | `nfl-arena/pages/verification.html`, `nfl-arena/data/verification.json` |
+| D2 Suggestions review queue | 12 proposals, each with decision paths A/B/C + reviewer-verdict slot; nothing implemented before a path is chosen | `nfl-arena/pages/suggestions.html`, `nfl-arena/data/suggestions.json` |
+| D3 Questions/answers register | 12 questions (7 open) + 6 blocked decisions (D-A…D-F) with discovery actions | `nfl-arena/pages/questions.html`, `nfl-arena/data/questions.json` |
+| D4 Strategies, leaderboard, gates, correlation, luck removal | Signal research (SIG-01…07), families FAM-1…3, gates VG-1…VG-8, competition + 1,000-pt reward rule, 15 strategies with Wilson/required-n/BH verdicts (0 eligible), 13 correlation values + 3 blank prop rows | `nfl-arena/pages/strategies.html`, `leaderboard.html`, `correlation.html` |
+| D5 Injury + depth-deficiency tracker | Official Week 10 report captured in full (326 rows, 28 teams) + ESPN Starter/2nd/3rd/4th depth for 8 teams joined into 113 findings (3 CRITICAL, 7 MODERATE forced replacements); backup-QB table with official news links | `nfl-arena/pages/injuries.html`, `nfl-arena/data/*` |
+| D6 Executive summary | Written, evidence-linked | `nfl-arena/pages/executive-summary.html` |
+| D7 Site integration | 11-page static site; checker: 169 local links resolve, 154 table rows all https-source-linked; root nav additive | `nfl-arena/`, `index.html`, `README.md` |
+| D8 PR → merge → Pages | See record below | `COORDINATION.md` |
+
+### Sources (all fetched and read in this session)
+
+**Official (nfl.com):** https://www.nfl.com/injuries/ (full Week 10 report, 8 chunks, transcribed
+line by line into `nfl-arena/data/raw/nfl_injuries_week10_2026.md`) ·
+https://www.nfl.com/standings/league/2026/REG (full 32-team table, transcribed into
+`nfl-arena/data/raw/nfl_standings_2026_week10.json`) · official news items linked from the
+injury page (Lamar Jackson IR/Huntley out for season; Willis IR/McCord first start; Darnold
+ruled out/Lock starts; Watson starts; Beck starts; Jacobs surgery; Nacua likely IR).
+
+**Third-party (labelled everywhere):** ESPN/RotoWire depth charts for NE, BAL, MIA, SEA, DET,
+IND, MIN, GB (Starter/2nd/3rd/4th + status markers, transcribed to
+`nfl-arena/data/raw/espn_depth_week10.json`) · nflverse/nfldata `master` (pushed 2026-11-13T21:15Z,
+games/closing_lines/initial_lines/standings/rosters/teams downloaded via codeload) · ESPN gamecast
+WAS@NYG (401873052).
+
+### Verification performed
+
+- 32/32 team W-L-T + PF/PA recomputed from 137 scored 2026 REG games in the archive **match the
+  official nfl.com standings exactly** (alias ARI↔AZ documented).
+- Settled Thursday game WAS 24-21 NYG confirmed in the archive and on ESPN; market numbers differ
+  between sources (archive 1.5/40.5 vs nfl-lines capture 2.5/40.5) → flagged A-06, not resolved.
+- Base rates recomputed 2011-2026 (n=4,056; home 0.5500; over 0.4925) — agree with nfl-lines
+  published values within one filtered game.
+- Peer tooling re-run: `nfl-edge/scripts/verify_site.py` PASS (22 pages, 889 sourced rows, 0 errors);
+  nfl-lines walk-forward PIT@CIN gap (−3.56 vs +3.5) reproduced exactly from committed data.
+- Fresh Friday injury capture vs peer capture compared team by team (32 rows): designations differ
+  because the peer capture predates Friday — flagged A-05, neither side edited.
+- Site gate: `nfl-arena/scripts/check_links.py` — every local link resolves; **every table row on
+  every page carries an https source link**; unverifiable cells published blank + flagged.
+
+### Irregularities (published on `nfl-arena/pages/flagged.html`, none blocking)
+
+A-01 ESPN marker "D" undefined in ESPN's own glossary (4 players) — carried verbatim, unverified.
+A-02 Arden Key (IND): official Questionable vs ESPN IR — sources conflict.
+A-03 Sam Darnold (SEA): report has no designation; NFL.com news + ESPN say Out.
+A-04 Kyler Murray (MIN): report DNP/no designation vs ESPN O.
+A-05 Peer injury captures predate Friday designations (questionables show as 0 league-wide).
+A-06 WAS@NYG spread differs across datasets (1.5 vs 2.5); archive sign convention undocumented (Q-05).
+A-07 Eleven overlapping NFL namespaces (peer SG-11/IR-09) — still open, reviewer decision S-01.
+A-08 COORDINATION.md header still says "NBA Line Origination Research".
+A-09 Week 10 lines are pre-game, not closing (13 of 14 unplayed).
+A-10 Official report publishes blank cells — preserved as blanks.
+A-11 Depth strings verified for 8 of 32 teams this cycle; the other 24 stay blank + flagged.
+A-12 Depth charts are third-party (ESPN/RotoWire); the NFL publishes none.
+A-13 No verifiable player-prop lines/logs anywhere — prop cells blank repo-wide.
+
+### Cross-session notes
+
+- Root `index.html`: **additive only** — one marked nav block (`LOCAL ADDITION (session d6c72eb4)`).
+- Peer PR #68 (`arena/e2b19bf6-own4`) left untouched (nfl-decision namespace, out of scope).
+- 2026-11-13 rebase conflict on COORDINATION.md (peer session arena/40caaa81-own4 appended its
+  PR #75/#76 record concurrently) resolved as a **superset**: both records kept, peer first.
+  No peer content discarded.
+
+### Pull-request and deployment record · arena/d6c72eb4-own4
+
+(to be completed after merge)

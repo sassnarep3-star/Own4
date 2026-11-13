@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary — NFL Decision & Strategy Hub</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+<h1><a href="../index.html">NFL Decision & Strategy Hub</a></h1>
+<div class="tag">Own4 · session arena/d6c72eb4-own4 · data captured 2026-11-13 · every row source-linked · unverified values blank + flagged</div>
+<nav class="top"><a class="" href="../index.html">Home</a><a class="active" href="executive-summary.html">Executive Summary</a><a class="" href="questions.html">Questions & Answers</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="strategies.html">Strategies & Gates</a><a class="" href="leaderboard.html">Leaderboard</a><a class="" href="correlation.html">Correlation</a><a class="" href="injuries.html">Injuries & Depth</a><a class="" href="verification.html">Verification</a><a class="" href="flagged.html">Flagged for Review</a><a class="" href="sources.html">Sources</a></nav>
+</div></header>
+<main>
+
+<h2>Executive Summary</h2>
+<p class="lead">2026-11-13 · Week 10 of the 2026 NFL season · session arena/d6c72eb4-own4</p>
+
+<div class="panel"><h3>Bottom line</h3>
+<ul class="tight">
+<li><b>The numbers in this repository hold up.</b> 64 line-by-line checks this session produced <b>0 mismatches</b> against official sources: all 32 teams' records and points recomputed from the game archive match nfl.com standings exactly; the settled Thursday game (WAS 24-21 NYG) matches two independent sources.</li>
+<li><b>No strategy currently qualifies as skill.</b> 0 of 15 registered strategies pass the pre-registered gates; every Wilson interval contains break-even and every BH-FDR-adjusted p-value exceeds 0.05. The leaderboard is, by design, a rejection machine until n≥300 per strategy.</li>
+<li><b>The market still out-predicts our model</b> (closing spread vs outcome r=0.4393 vs model 0.3384; Brier 0.2106 vs 0.2265). Origination is research, not an edge claim.</li>
+<li><b>Availability is the live information edge to watch:</b> this week's tracker finds 3 CRITICAL and 7 MODERATE forced-replacement situations — SEA starting 2nd-string QB Drew Lock, MIA starting Kyle McCord in his first career start after Malik Willis went to IR, BAL running on Jacoby Brissett with Lamar Jackson on IR, DET replacing LCB1 with only one backup listed, IND without a listed long snapper, NE's LCB down to a questionable 2nd string, GB without Josh Jacobs.</li>
+<li><b>Six decisions are blocked</b> on open questions (publish recommendations, award rewards, prop combos, namespace consolidation, unverified-team depth, acting on Week 10 gaps). The <a href="questions.html">Q&amp;A register</a> and <a href="suggestions.html">suggestions queue</a> tell you exactly what to resolve and in what order.</li>
+</ul></div>
+
+<div class="panel"><h3>What was verified (this session)</h3>
+<ul class="tight">
+<li>Official NFL.com Week 10 injury report captured in full and transcribed line by line (326 rows, 28 teams; the 4 bye teams absent as expected).</li>
+<li>Official 2026 standings captured in full; W-L-T/PF/PA recomputed independently from the nflverse game archive — 32/32 exact.</li>
+<li>Peer labs re-verified with their own tooling: nfl-edge verifier PASS (22 pages, 889 sourced rows, 0 errors); nfl-lines state consistent with its committed data; the flagged PIT@CIN 7.06-pt model-market gap reproduced exactly.</li>
+<li>Base rates recomputed (home win 0.5500, over rate 0.4925 over 2011-2026) — match the published values within one filtered game.</li>
+</ul></div>
+
+<div class="panel"><h3>What is missing (and how we will find it)</h3>
+<ul class="tight">
+<li>Player-prop prices and player game logs — no source exists; prop strategies stay behind the gate (Q-04, S-07).</li>
+<li>Market-line conventions and capture timestamps — one game already carries two different spreads in two files (A-06); fix before any CLV claim (Q-05, S-05).</li>
+<li>Depth strings for 24 of 32 teams — extend the Friday capture (Q-06, S-03).</li>
+<li>Friday/Saturday designation refresh — current peer captures predate them (A-05, S-04).</li>
+<li>QB/depth features in the line model — it cannot see the confirmed QB changes this week (Q-07, S-08).</li>
+</ul></div>
+
+<div class="panel"><h3>Recommended next moves (choose on the Suggestions page)</h3>
+<ol class="tight">
+<li>S-04: schedule the Friday + inactives injury refresh (cheap, high impact).</li>
+<li>S-05: standardise market data with timestamps and a documented sign convention.</li>
+<li>S-03: extend depth-string capture to all 32 teams.</li>
+<li>S-08: pre-register the QB/depth feature ablation before Week 11.</li>
+<li>S-01: declare canonical namespaces and stop the drift (A-07).</li>
+</ol>
+<p class="small">Nothing above is implemented except this session's own deliverables; each item waits for a path decision on the <a href="suggestions.html">Suggestions page</a>.</p></div>
+
+<div class="panel"><h3>Responsible-use note</h3>
+<p class="small">This hub publishes research, verification and decision support. It does not publish betting advice, and no reward points have been awarded to any strategy. Sample sizes are below every pre-registered floor; past performance in the tables is quoted for research review only. If wagering is legal where you live, treat every number here as unproven until the gates say otherwise.</p></div>
+
+</main>
+<footer class="site">Built by nfl-arena/scripts/build_site.py from nfl-arena/data/*.json. Official sources: nfl.com. Third-party sources are labelled everywhere. This site publishes research and decision support only — it does not publish betting advice.</footer>
+</body></html>
