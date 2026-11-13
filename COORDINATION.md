@@ -2296,3 +2296,28 @@ line-origination dashboard (2026-11-13)*. Merged **2026-11-13T21:57Z**, merge co
 
 Tasks A1–A9: **done**. Sources, verification and irregularities recorded in the table above and on the
 site's Repo Review / Flagged pages.
+## Session arena/d6c72eb4-own4 — NFL Decision & Strategy Hub (claim)
+
+- **Session ID:** `arena-d6c72eb4-own4`
+- **Branch:** `arena/d6c72eb4-own4` (fixed by this environment; all work happens on this branch — this session is simultaneously its own task session and the final integration session for its scope)
+- **Status:** in progress (claim written 2026-11-13 UTC, pushed immediately)
+
+| # | Task | Status | Owner | File scope |
+|---|------|--------|-------|-----------|
+| D1 | Line-by-line repo review: verify existing NFL findings against official sources (nfl.com first), provide links for manual review, flag irregularities | in progress | arena-d6c72eb4-own4 | `nfl-arena/verification.*` |
+| D2 | Suggestions review queue: every improvement suggestion with decision paths, so a reviewer can choose a path before anything is implemented | in progress | arena/d6c72eb4-own4 | `nfl-arena/suggestions.*` |
+| D3 | Questions / information / answers register: what is known, unknown, and required before decisions can be made; suggestions to discover missing information | in progress | arena/d6c72eb4-own4 | `nfl-arena/questions.*` |
+| D4 | Line-origination strategy research: signals, leaderboard competition with rewards, single/parlay/prop-combo strategies, validation gates, correlation values, luck-vs-skill | in progress | arena/d6c72eb4-own4 | `nfl-arena/strategies.*`, `nfl-arena/leaderboard.*`, `nfl-arena/correlation.*` |
+| D5 | Injury + depth-deficiency tracker: starters vs 2nd/3rd/4th-string replacements on offense and defense | in progress | arena/d6c72eb4-own4 | `nfl-arena/injuries.*` |
+| D6 | Executive summary | in progress | arena/d6c72eb4-own4 | `nfl-arena/executive-summary.*` |
+| D7 | Site integration: clean landing + category subpages in `nfl-arena/`, additive root nav, link check | in progress | arena/d6c72eb4-own4 | `nfl-arena/**`, `index.html` (additive only), `README.md` (append-only) |
+| D8 | PR to main, merge without waiting, confirm GitHub Pages deploy, record links | in progress | arena/d6c72eb4-own4 | `COORDINATION.md` |
+
+**Scope rules for this claim:** no files owned by other sessions are edited. Shared files
+(`COORDINATION.md`, `index.html`, `README.md`) are append-only / additive-nav-only, matching
+the convention established by peer sessions. Open peer PR #68 (`arena/e2b19bf6-own4`,
+NFL Decision Lab namespace fix) is noted; its namespace is out of my scope.
+
+**2026-11-13 claim audit:** all prior task-board rows examined; every prior claim is
+either `done` or owned by an older session whose work is already merged (PRs #2–#74).
+No other active claim covers `nfl-arena/**`. No conflicts with any open PR file scope.
