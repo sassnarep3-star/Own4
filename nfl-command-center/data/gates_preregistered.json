@@ -1,0 +1,41 @@
+{
+  "id": "gates-preregistered",
+  "registered_utc": "2026-11-13T00:00:00Z",
+  "registered_before": "engine/01_forecast.py and engine/02_analyze.py were executed for the first time",
+  "note": "This file was committed to git BEFORE the forecast engine or the backtest was run. Thresholds are project-defined design choices, not official NFL or sportsbook policy, and are flagged as such on the Flagged for Review page. A gate that cannot be evaluated is Blocked, not Passed.",
+  "splits": {
+    "development": "1999-2022 (model may be inspected; no threshold is tuned on the holdout)",
+    "validation": "2023-2024",
+    "holdout": "2025-2026 (scored once; no parameter is changed after the holdout is read)",
+    "note": "The holdout is defined by calendar season, so every holdout game is strictly later than every validation game. The engine processes games in chronological order and never uses a later result to set an earlier forecast."
+  },
+  "gates": [
+    {"id":"G1","name":"Minimum graded sample","type":"pass_fail","threshold":"at least 300 graded bets in the holdout for the strategy under evaluation","rationale":"Below 300 graded bets no NFL strategy can be separated from luck at conventional confidence; this floor is a project-defined design choice."},
+    {"id":"G2","name":"Positive point estimate","type":"pass_fail","threshold":"holdout ROI > 0% and holdout ROI > 0% for the price-independent forecast-skill metric","rationale":"A strategy that does not make money on the holdout cannot be rewarded, regardless of significance."},
+    {"id":"G3","name":"Permutation significance","type":"pass_fail","threshold":"one-sided permutation p-value < 0.05, labels shuffled within the strategy 10,000 times","rationale":"Removes any assumption that bets are independent."},
+    {"id":"G4","name":"Interval excludes break-even","type":"pass_fail","threshold":"lower bound of the 95% bootstrap confidence interval for ROI > 0%","rationale":"A point estimate above zero whose interval includes zero is not evidence of skill."},
+    {"id":"G5","name":"Multiple-comparison control","type":"pass_fail","threshold":"Benjamini-Hochberg FDR q < 0.05 across the whole strategy family tested","rationale":"Twelve strategies are tested; without family-wise control the chance of a false positive is far above 5%."},
+    {"id":"G6","name":"Look-ahead integrity","type":"pass_fail","threshold":"perturbing the outcome of any holdout game must not change any forecast made before that game (exact equality of the earlier forecast array)","rationale":"A forecast contaminated by a later result cannot be validated on the same data."},
+    {"id":"G7","name":"Price provenance","type":"pass_fail","threshold":"every price used must come from a recorded source with a retrievable URL, commit SHA and checksum, and every row must be labelled with that source's official/third-party status","rationale":"An unpriced result cannot be audited. The NFL publishes no betting lines, so every price in this project is third-party and must be labelled as such."},
+    {"id":"G8","name":"Luck / placebo calibration","type":"pass_fail","threshold":"the strategy's one-sided p-value must beat the 95th percentile of a 1,000-strategy placebo null on the same holdout, and the placebo false-positive rate must not exceed 10%","rationale":"If random strategies routinely beat the null at the stated threshold, the threshold itself is not evidence of skill."},
+    {"id":"G9","name":"Skill stability","type":"pass_fail","threshold":"the strategy's price-independent forecast skill must beat the naive baseline on the holdout, and the strategy must be non-negative in at least 2 of the 3 seasons in the validation+holdout window","rationale":"Skill that appears in one season and disappears in the next is luck with a time stamp."},
+    {"id":"G10","name":"Reward eligibility","type":"pass_fail","threshold":"a strategy earns reward points only if G1-G9 all pass; points are non-monetary until the owner funds a pool","rationale":"Separates the forecast board (which can be paid because it needs no prices) from the betting board (which needs prices that the NFL does not publish)."}
+  ],
+  "model_parameters": {
+    "registered_utc": "2026-11-13T00:00:00Z",
+    "rating_alpha": 0.12,
+    "rating_alpha_note": "Share of the residual applied to the team's offensive and defensive rating after each game.",
+    "mean_reversion_rho": 0.03,
+    "mean_reversion_note": "Share of a team's rating reverted toward the league mean after each game.",
+    "home_field_advantage_points": 1.5,
+    "home_field_advantage_note": "Fixed project assumption, applied only when the designated home team hosted the game. Neutral-site games (recorded in the location field) get no home-field advantage.",
+    "league_mean_prior_points": 21.5,
+    "league_mean_prior_games": 64,
+    "league_mean_note": "Prior for the league mean points per team per game, used with an expanding window of prior results.",
+    "sigma_prior_points": 13.5,
+    "sigma_prior_games": 32,
+    "sigma_note": "Prior for the residual standard deviation used to convert a point differential into a win probability.",
+    "min_games_before_forecast": 0,
+    "min_games_note": "No minimum; the model may forecast from the first game of the archive, but such forecasts are flagged as cold-start."
+  }
+}

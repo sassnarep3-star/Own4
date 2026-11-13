@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decisions - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html">Findings</a>
+  <a href="flagged-for-review.html">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html" class="on">Decisions</a>
+  <a href="suggestions.html">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html">Methodology</a>
+</div></nav>
+<main>
+
+<h2>Decision register</h2>
+<p>Each entry separates what is known from what is not, gives the answer that was acted on, names the blocker and gives a route to discover whatever is still missing. Nothing here was decided by assumption.</p>
+<table class=""><thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>Known</th>
+<th>Unknown</th>
+<th>Answer</th>
+<th>Blocker</th>
+<th>How to find out</th>
+<th>Status</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>D-01</td><td>Which source is authoritative for the 2026 standings, the Week 10 slate and the injury designations?</td><td>NFL.com publishes the league standings page, the week schedule page, the rendered injuries page and a dedicated Week 10 injury report article.</td><td>Nothing material for the current week.</td><td>NFL.com only. Every standings, slate and injury value on this site comes from an official NFL page and carries that page's link.</td><td>None.</td><td>Re-read the same pages and compare the SHA of the captured JSON.</td><td>Closed</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-02</td><td>Where do betting lines come from, given that the NFL publishes none?</td><td>The archive at github.com/nflverse/nfldata carries a line, a moneyline and a price for every game.</td><td>Nothing about the archive's own provenance of the prices.</td><td>The archive is used and labelled third-party everywhere. The NFL publishes no betting lines, so no price on this site is officially verifiable and the market cells in official tables stay blank.</td><td>No official betting-line source exists. This is a permanent property of the sport, not a gap that can be closed.</td><td>None available. A sportsbook or a line aggregator would be a commercial third-party source and would still not be official.</td><td>Closed with a permanent constraint</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-03</td><td>Is the archive's spread_line the home team's line or the away team's line?</td><td>A regression of the actual margin on spread_line has slope +1.04 and intercept -0.04. The moneyline cross check agrees with the away-line reading in 99.41% of 5,432 games.</td><td>Nothing that the two checks leave open.</td><td>The archive's spread_line is the away team's line, so the home line is -spread_line.</td><td>None.</td><td>Re-run python3 engine/00_convention.py.</td><td>Closed. Recorded in data/spread_convention_determination.json.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-04</td><td>Can the archive's spread and total price columns be used to price a bet?</td><td>The vig-removed probability from the spread prices is anti-calibrated: the games it prices at 0.45 cover 69% of the time and the games it prices at 0.55 cover 45% of the time. The over price sign does not predict the over rate at all.</td><td>Why the columns are wrong. The archive does not document the price source.</td><td>No. The spread strategies use a reference probability reconstructed from the market's moneyline and line, and the total strategies are Blocked because a total has no moneyline to reconstruct from.</td><td>The total strategies cannot be priced from any source found.</td><td>Ask the archive maintainers on github.com/nflverse/nfldata, or find a second archive with a documented price pipeline and test it the same way.</td><td>Closed for the spread strategies. The total strategies stay Blocked.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-05</td><td>Is the pre-registered model as specified fit to use?</td><td>A 3% per-game reversion applied to a mean-zero rating is a multiplicative decay of the whole scale. After one season the rating standard deviation was 1.3 points.</td><td>Whether the original author meant per game or per season. The parameter file was written before any run, so there is no evidence either way from the results.</td><td>The defect was corrected and the correction was selected on the 1999-2022 development window only. The pre-registered variants are still reported as diagnostics.</td><td>None.</td><td>Re-run python3 engine/00_sweep_development.py.</td><td>Closed. Recorded in data/parameter_amendment_1.json.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-06</td><td>May the holdout be scored more than once?</td><td>The holdout is the 2025-2026 season. It was scored with the defective model before the defect was found, then rescored after the correction.</td><td>Nothing.</td><td>The holdout was scored once with the corrected model. The earlier defective-model result is discarded and is not published as a result. The correction was justified on the development window, and the amendment file was committed before the corrected model was scored.</td><td>None, provided the amendment is published with the result.</td><td>The commit order in the history is the evidence.</td><td>Closed. Published openly on the methodology page.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-07</td><td>What can be claimed about a player prop strategy?</td><td>NFL.com publishes no player prop prices and no downloadable player game log was found for the current week.</td><td>Nothing that would change the answer.</td><td>The two player prop strategies are Blocked, not evaluated. No return is reported and no reward is offered.</td><td>No verifiable price source.</td><td>Check the NFL.com stats and player pages for an official game log, and look for a published official prop feed.</td><td>Closed as Blocked</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-08</td><td>How deep is the replacement starter on the depth chart?</td><td>The official depth chart news names a replacement starter for Baltimore, Arizona, Cleveland and Miami but does not give a depth position. The official game books give a depth position for one quarterback.</td><td>The depth position of every other replacement.</td><td>The depth cell is blank and marked unverified unless an official game book states it.</td><td>The official game book for a game exists only after the game is played.</td><td>Re-read the game book PDF for each Week 10 game once it is published.</td><td>Open. Updates weekly as game books appear.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-09</td><td>Should the prior NFL namespaces be merged into one site?</td><td>They hold many HTML pages between them, mostly with source links, and they overlap heavily. The repository audit shows 1,447 table rows without a source link across the repository.</td><td>Whether the prior namespaces are still in use by their authors.</td><td>No merge is performed. This session does not edit any other namespace, and the overlap is recorded so the owner can decide.</td><td>The claim in COORDINATION.md reserves this session's scope to nfl-command-center.</td><td>Read the claims and verification records in COORDINATION.md.</td><td>Open. Recorded as suggestion S-01.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-10</td><td>Can the model beat the closing line?</td><td>On the holdout the own model's spread error is 10.31 points against the market line's 9.60 and the naive baseline's 10.92.</td><td>Whether a materially different model would close the gap.</td><td>No strategy in the registered family has a verified edge. The betting board pays nothing and the forecast board pays for forecast skill only.</td><td>A materially better model would need a different formulation, not a different parameter.</td><td>Suggestion S-03 describes the options.</td><td>Closed for this model family. Open as a research question.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-11</td><td>What is the reward currency?</td><td>The reward policy was pre-registered as non-monetary until the owner funds a pool.</td><td>The size of any pool and who is paid.</td><td>Points only. No money moves.</td><td>Owner decision.</td><td>Owner instruction.</td><td>Open. Recorded as suggestion S-05.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-12</td><td>How much of the archive can be treated as official?</td><td>The archive holds final scores, dates, venues, rest days and lines. NFL.com publishes the same final scores.</td><td>Nothing that the reconciliation does not already cover.</td><td>The 2026 scores reconcile exactly with the official standings page for all 32 teams, so the archive is accepted for scores and rejected for prices.</td><td>None.</td><td>Re-run the reconciliation in engine/02_analyze.py.</td><td>Closed</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-13</td><td>Should the site publish the market lines next to the own lines?</td><td>Every market value comes from a third-party archive and no official source publishes a line.</td><td>Nothing.</td><td>The official tables keep the market cells blank. The third-party values appear only in tables that are labelled third-party in the column header and in every row.</td><td>None.</td><td>None needed.</td><td>Closed</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>D-14</td><td>Which of the prior NFL workspaces is the strongest?</td><td>The prior records name nfl-lines as the strongest quantitative candidate, nfl-decision as the questions and suggestions candidate and nfl-hub as the source of the replacement starter game book proof.</td><td>None that the audit changes.</td><td>These are treated as audit candidates, not as verified conclusions. The audit confirms nfl-lines and nfl-decision carry the largest volumes of source-linked tables.</td><td>They are outside this session's claim, so they were read and audited but not rewritten.</td><td>Read the per-file findings in data/derived/repo_audit.json.</td><td>Closed as a reading, open as a consolidation decision.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command-center/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>

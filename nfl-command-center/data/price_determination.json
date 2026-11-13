@@ -1,0 +1,318 @@
+{
+  "id": "price-determination",
+  "determined_utc": "2026-11-13T00:00:00Z",
+  "why_this_was_done": "The first run of the strategy engine produced an implausible return for a spread strategy, which is the documented trigger for a price-source audit. The audit found a real defect in the third-party archive.",
+  "data": {
+    "file": "data/raw/nfldata_games.csv",
+    "sha256": "0114259438549a7c0bf201f7c91944f8ec1c02dba7339673b07d3129a5ff81df",
+    "source": "https://github.com/nflverse/nfldata",
+    "commit": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+    "status": "THIRD-PARTY ARCHIVE. The NFL publishes no betting lines, so no price in this project can be officially verified."
+  },
+  "line_convention": {
+    "adopted": "The archive's spread_line is the AWAY team's line. The home team's line is -spread_line. The home team covers when the actual margin is greater than -spread_line.",
+    "moneyline_games_tested": 5432,
+    "moneyline_agreement_adopted": 0.99411,
+    "moneyline_agreement_rejected": 0.00571,
+    "regression_of_margin_on_spread_line": {
+      "slope": 1.04467,
+      "intercept": -0.0395
+    },
+    "regression_note": "A slope of about +1 and an intercept of about 0 means the expected margin moves one point for each point of spread_line, so a positive spread_line means the home team is the favourite."
+  },
+  "column_audit": {
+    "moneyline": {
+      "usable": true,
+      "games_with_prices": 5432,
+      "median_overround": 0.02473,
+      "calibration": [
+        {
+          "market_probability": 0.1,
+          "n": 20,
+          "observed_frequency": 0.2
+        },
+        {
+          "market_probability": 0.15,
+          "n": 53,
+          "observed_frequency": 0.1509
+        },
+        {
+          "market_probability": 0.2,
+          "n": 111,
+          "observed_frequency": 0.1892
+        },
+        {
+          "market_probability": 0.25,
+          "n": 210,
+          "observed_frequency": 0.2667
+        },
+        {
+          "market_probability": 0.3,
+          "n": 276,
+          "observed_frequency": 0.25
+        },
+        {
+          "market_probability": 0.35,
+          "n": 316,
+          "observed_frequency": 0.3513
+        },
+        {
+          "market_probability": 0.4,
+          "n": 418,
+          "observed_frequency": 0.3947
+        },
+        {
+          "market_probability": 0.45,
+          "n": 378,
+          "observed_frequency": 0.4444
+        },
+        {
+          "market_probability": 0.5,
+          "n": 316,
+          "observed_frequency": 0.4747
+        },
+        {
+          "market_probability": 0.55,
+          "n": 470,
+          "observed_frequency": 0.5511
+        },
+        {
+          "market_probability": 0.6,
+          "n": 548,
+          "observed_frequency": 0.5438
+        },
+        {
+          "market_probability": 0.65,
+          "n": 555,
+          "observed_frequency": 0.636
+        },
+        {
+          "market_probability": 0.7,
+          "n": 524,
+          "observed_frequency": 0.6718
+        },
+        {
+          "market_probability": 0.75,
+          "n": 504,
+          "observed_frequency": 0.7599
+        },
+        {
+          "market_probability": 0.8,
+          "n": 395,
+          "observed_frequency": 0.7899
+        },
+        {
+          "market_probability": 0.85,
+          "n": 221,
+          "observed_frequency": 0.8869
+        },
+        {
+          "market_probability": 0.9,
+          "n": 106,
+          "observed_frequency": 0.9434
+        },
+        {
+          "market_probability": 0.95,
+          "n": 11,
+          "observed_frequency": 1.0
+        }
+      ],
+      "sign_direction_test": {
+        "home_price_negative": {
+          "n": 0,
+          "observed_home_win_rate": 0.0
+        },
+        "home_price_positive": {
+          "n": 5432,
+          "observed_home_win_rate": 0.5552
+        }
+      },
+      "verdict": "Sound. The vig-removed moneyline probability tracks the actual home-win rate closely, and the price sign carries the right direction."
+    },
+    "spread_price": {
+      "usable": false,
+      "games_with_prices": 5432,
+      "median_overround": 0.0243,
+      "calibration": [
+        {
+          "market_probability": 0.45,
+          "n": 402,
+          "observed_frequency": 0.6928
+        },
+        {
+          "market_probability": 0.5,
+          "n": 4666,
+          "observed_frequency": 0.5908
+        },
+        {
+          "market_probability": 0.55,
+          "n": 363,
+          "observed_frequency": 0.449
+        },
+        {
+          "market_probability": 0.6,
+          "n": 1,
+          "observed_frequency": 0.0
+        }
+      ],
+      "sign_direction_test": {
+        "home_price_negative": {
+          "n": 0,
+          "observed_home_win_rate": 0.0
+        },
+        "home_price_positive": {
+          "n": 5432,
+          "observed_home_win_rate": 0.5552
+        }
+      },
+      "agreement_with_line_direction": 0.35972,
+      "verdict": "NOT USABLE. The vig-removed probability derived from these prices is anti-calibrated: the games the archive prices as most likely to cover are the ones that cover least. The sign of the home price agrees with the line only about as often as chance. The side assignment or the price itself is wrong in this archive."
+    },
+    "total_price": {
+      "usable": false,
+      "games_with_prices": 5429,
+      "calibration": [
+        {
+          "market_probability": 0.45,
+          "n": 56,
+          "observed_frequency": 0.4286
+        },
+        {
+          "market_probability": 0.5,
+          "n": 5285,
+          "observed_frequency": 0.4986
+        },
+        {
+          "market_probability": 0.55,
+          "n": 88,
+          "observed_frequency": 0.4773
+        }
+      ],
+      "sign_direction_test": {
+        "over_price_negative": {
+          "n": 0,
+          "observed_over_rate": 0.0
+        },
+        "over_price_positive": {
+          "n": 5429,
+          "observed_over_rate": 0.4905
+        }
+      },
+      "verdict": "NOT USABLE. The over price sign does not predict whether the game goes over the line, and almost every game is priced at exactly 0.50. There is also no moneyline for a total, so a total market probability cannot be reconstructed from verified quotes."
+    }
+  },
+  "reference_price_method": {
+    "applies_to": "the spread strategies (S1, S2, S5, S6, P1, P2)",
+    "step_1": "Take the vig-removed moneyline probability of the home team from the archive, which is the only verified market probability in the archive.",
+    "step_2": "Convert it into a market expected margin using the pre-registered residual standard deviation prior of 13.5 points: mu_market = sigma x inverse_normal(P_home).",
+    "step_3": "Evaluate the market's own line against that margin: P(home covers) = normal_cdf(inverse_normal(P_home) - home_line / sigma), where home_line = -spread_line.",
+    "step_4": "Turn that fair probability into a decimal settlement price and charge the archive's median observed overround of 0.0247 against it, so the settlement price is what a bookmaker charging that margin would quote.",
+    "sigma_points": 13.5,
+    "median_overround_applied": 0.02473,
+    "validation": [
+      {
+        "market_probability": 0.05,
+        "n": 173,
+        "observed_frequency": 0.0347
+      },
+      {
+        "market_probability": 0.1,
+        "n": 161,
+        "observed_frequency": 0.1118
+      },
+      {
+        "market_probability": 0.15,
+        "n": 215,
+        "observed_frequency": 0.0907
+      },
+      {
+        "market_probability": 0.2,
+        "n": 176,
+        "observed_frequency": 0.1818
+      },
+      {
+        "market_probability": 0.25,
+        "n": 212,
+        "observed_frequency": 0.2311
+      },
+      {
+        "market_probability": 0.3,
+        "n": 335,
+        "observed_frequency": 0.2731
+      },
+      {
+        "market_probability": 0.35,
+        "n": 271,
+        "observed_frequency": 0.3506
+      },
+      {
+        "market_probability": 0.4,
+        "n": 175,
+        "observed_frequency": 0.4029
+      },
+      {
+        "market_probability": 0.45,
+        "n": 229,
+        "observed_frequency": 0.4607
+      },
+      {
+        "market_probability": 0.5,
+        "n": 13,
+        "observed_frequency": 0.5385
+      },
+      {
+        "market_probability": 0.55,
+        "n": 228,
+        "observed_frequency": 0.5197
+      },
+      {
+        "market_probability": 0.6,
+        "n": 195,
+        "observed_frequency": 0.5359
+      },
+      {
+        "market_probability": 0.65,
+        "n": 343,
+        "observed_frequency": 0.6297
+      },
+      {
+        "market_probability": 0.7,
+        "n": 488,
+        "observed_frequency": 0.6547
+      },
+      {
+        "market_probability": 0.75,
+        "n": 353,
+        "observed_frequency": 0.7592
+      },
+      {
+        "market_probability": 0.8,
+        "n": 312,
+        "observed_frequency": 0.7981
+      },
+      {
+        "market_probability": 0.85,
+        "n": 429,
+        "observed_frequency": 0.8508
+      },
+      {
+        "market_probability": 0.9,
+        "n": 432,
+        "observed_frequency": 0.9086
+      },
+      {
+        "market_probability": 0.95,
+        "n": 692,
+        "observed_frequency": 0.9697
+      }
+    ],
+    "validation_note": "The reconstructed probability is well calibrated against the actual home-cover rate, which is the test the archive's own spread price fails.",
+    "not_used_for": "the total strategies, because a total market probability cannot be reconstructed from a verified quote. Those strategies are Blocked, not evaluated."
+  },
+  "moneyline_settlement": {
+    "applies_to": "the moneyline strategy (S4)",
+    "method": "The archive's own quoted moneyline prices are used for settlement, and the vig-removed moneyline probability is the reference probability."
+  },
+  "supersedes": "The descriptive price notes in data/strategy_registry_preregistered.json predate this audit. The registered thresholds and rules are unchanged; only the source of the reference price for the spread strategies is corrected, because the audit found the originally assumed price columns unusable.",
+  "how_to_reproduce": "python3 engine/00_price_audit.py"
+}

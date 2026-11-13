@@ -1,0 +1,82 @@
+name: NFL Command Center
+
+# Rebuilds the NFL Command Center from checked-in data and enforces the
+# publication rules for that namespace:
+#   * the engine must rebuild the derived data and the pages;
+#   * every data-table row must carry a source link;
+#   * every local link must resolve;
+#   * no placeholder text may reach the published pages.
+# It does not deploy: GitHub Pages serves this repository from the main branch
+# through the existing legacy main//root configuration, so a merge to main is
+# the deployment.
+
+on:
+  push:
+    paths:
+      - 'nfl-command-center/**'
+      - '.github/workflows/nfl-command-center.yml'
+  pull_request:
+    paths:
+      - 'nfl-command-center/**'
+      - '.github/workflows/nfl-command-center.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-verify:
+    name: Rebuild and verify the NFL Command Center
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild the data
+        run: |
+          python3 nfl-command-center/engine/00_convention.py
+          python3 nfl-command-center/engine/00_price_audit.py
+          python3 nfl-command-center/engine/00_sweep_development.py
+          python3 nfl-command-center/engine/01_forecast.py
+          python3 nfl-command-center/engine/02_analyze.py
+          python3 nfl-command-center/engine/03_injuries.py
+          python3 nfl-command-center/engine/04_audit_repo.py
+          python3 nfl-command-center/engine/05_build_site.py
+
+      - name: Verify the site
+        run: python3 nfl-command-center/engine/06_verify_site.py
+
+      - name: The build must be deterministic
+        run: |
+          # The audit reads the whole repository, so the page content moves when
+          # any other namespace is merged. The invariant that must hold is that
+          # the same inputs give the same bytes: build twice and compare.
+          cp -r nfl-command-center/pages /tmp/pages-run1
+          python3 nfl-command-center/engine/05_build_site.py > /dev/null
+          diff -r /tmp/pages-run1 nfl-command-center/pages && echo "the build is byte-identical across runs"
+          python3 nfl-command-center/engine/06_verify_site.py
+
+      - name: The look-ahead test must still pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          fc = json.load(open('nfl-command-center/data/derived/forecasts.json'))
+          changed = fc['look_ahead_test']['forecasts_changed']
+          print('forecasts made before the holdout that changed: %d' % changed)
+          sys.exit(1 if changed else 0)
+          PY
+
+      - name: No strategy may be reward eligible unless every gate passes
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('nfl-command-center/data/derived/strategies.json'))
+          bad = [r['id'] for r in s['results']
+                 if r.get('reward_eligible') and any(g['status'] != 'Pass' for g in r['gates'].values())]
+          print('strategies marked eligible with a failing gate: %s' % (bad or 'none'))
+          sys.exit(1 if bad else 0)
+          PY

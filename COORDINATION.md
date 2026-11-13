@@ -1963,6 +1963,93 @@ as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 
 
 ---
 
+## Session `arena/582300df-own4` — NFL Command Center (canonical NFL decision dashboard)
+
+**Session ID:** `arena/582300df-own4` · **Branch:** `arena/582300df-own4` (platform-pinned; the requested
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior
+session) · **Base commit:** `553c3f053608fd74043192864908508bef60ebfd` (main, PR #74)
+
+**Claim pushed before any implementation.** At claim time `origin/main` held exactly one remote branch
+(`main`); no other Arena branch and no other session claim was visible, so no peer work is displaced. The
+last peer commits are from 2026-11-12 (2026-11-06 for the older workstreams) and every board item above is
+`done` or `needs review`.
+
+### Why a new namespace
+
+Eleven NFL workspaces already exist on `main` (`nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`,
+`nfl-decisions/`, `nfl-hub/`, `nfl-intel/`, `nfl-audit/`, `nfl-decision/`, `nfl-edge/`, `nfl-lines/`) and
+several of them carry a *canonical* claim from earlier sessions. This session therefore:
+
+* does **not** edit any of them, and does **not** rename, move or delete any of them;
+* builds its own isolated namespace `nfl-command/**` with its **own independently captured official data**
+  (it does not inherit peer numbers);
+* publishes the **cross-namespace audit** the brief asks for ("review the repo, work line by line, flag
+  irregularities") — every one of the eleven NFL workspaces plus the root site is audited mechanically and
+  its irregularities are listed with links;
+* records a **consolidation recommendation** in the suggestions board, and does **not** implement it,
+  because the brief requires a reviewer to choose a path before changes are made.
+
+### Claimed file scope (exclusive to this session)
+
+| Path | Contents |
+|---|---|
+| `nfl-command/**` | New isolated namespace: data capture, engine, gates, site, verifier |
+| `nfl-command/EXECUTIVE_SUMMARY.md` | Executive summary |
+| `.github/workflows/nfl-command.yml` | Isolated CI: rebuild → verify → byte-identical gate |
+| `COORDINATION.md` | Append-only (this section and later records) |
+| `README.md` | Append-only addendum |
+| `index.html` | **One additive** navigation link at final integration only |
+
+**Read-only for this session (never edited):** `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`,
+`nfl-decisions/`, `nfl-hub/`, `nfl-intel/`, `nfl-audit/`, `nfl-decision/`, `nfl-edge/`, `nfl-lines/`,
+`docs/`, `lab/`, `lines-lab/`, `pipeline/`, `verified/`, `verification*/`, `data/`, `engine/`, `scripts/`,
+`tests/`, `nba-evidence/`, `status/`, `rental*/`, `rent-*/`, `own4-dashboard/`.
+
+### Task board (this session)
+
+| ID | Task | Status | Owner session | File scope |
+|----|------|--------|---------------|------------|
+| C1 | Repo review, line by line: all 11 NFL workspaces + root site, mechanical + official-source checks, irregularity register | done | arena/582300df-own4 | `nfl-command/engine/04_audit_repo.py`, `nfl-command/data/derived/repo_audit.json`, `nfl-command/pages/audit.html` |
+| C2 | Official-source capture: 2026 standings, Week 10 slate/byes, official injury report, team stats, official results, rules | done | arena/582300df-own4 | `nfl-command/data/official/*.json` |
+| C3 | Own-line origination (walk-forward model, no market claim) | done | arena/582300df-own4 | `nfl-command/engine/01_forecast.py`, `nfl-command/data/derived/forecasts.json`, `nfl-command/data/derived/own_lines.json` |
+| C4 | Strategy registry: singles, parlays, player-prop combos | done | arena/582300df-own4 | `nfl-command/data/strategy_registry_preregistered.json`, `nfl-command/data/derived/strategies.json` |
+| C5 | Pre-registered validation gates + luck-removal protocol + skill screens | done | arena/582300df-own4 | `nfl-command/data/gates_preregistered.json`, `nfl-command/data/derived/luck.json` |
+| C6 | Correlation register (game-level, parlay legs, prop combos) with CIs, p, BH-FDR | done | arena/582300df-own4 | `nfl-command/data/derived/correlations.json` |
+| C7 | Leaderboard competition + reward policy | done | arena/582300df-own4 | `nfl-command/data/derived/leaderboard.json` |
+| C8 | Injury tracker + 2nd/3rd/4th-string depth-deficiency watchlist | done | arena/582300df-own4 | `nfl-command/engine/03_injuries.py`, `nfl-command/data/derived/injuries_week10_normalized.json`, `nfl-command/data/derived/depth_deficiency_week10.json` |
+| C9 | Requirements traceability register (every requirement from the brief → status → evidence) | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/traceability.html` |
+| C10 | Decision register: question / information / answer / blocker / discovery suggestion | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/decisions.html` |
+| C11 | Suggestions board with a review workflow (nothing auto-implemented) | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/suggestions.html` |
+| C12 | Site: landing + category subpages + Flagged for Review; row-level source links; verifier | done | arena/582300df-own4 | `nfl-command/pages/*.html`, `nfl-command/assets/command.css`, `nfl-command/engine/05_build_site.py`, `nfl-command/engine/06_verify_site.py` |
+| C13 | Executive summary | done | arena/582300df-own4 | `nfl-command/pages/executive-summary.html`, `nfl-command/README.md` |
+| C14 | Final integration: re-verify line by line, link check, PR → main → merge → Pages deploy confirmation | pending | arena/582300df-own4 | root `index.html` (one additive link), `COORDINATION.md`, `README.md` |
+
+### Log
+
+- 2026-11-13 — Claimed C1–C14 and pushed this claim before any implementation, per the board protocol.
+  Verified at claim time: `origin/main` == `553c3f0` (PR #74, `nfl-lines`); no other remote branch; working
+  tree clean; no peer claim younger than 60 minutes.
+- 2026-11-13 — Network note: `bash`/`curl` egress is restricted to GitHub + package hosts, so `www.nfl.com`
+  is **not** reachable from the shell. Official NFL pages are captured with the environment's page-fetch
+  tool (which does reach `nfl.com`) and each capture is recorded with its URL and read timestamp. The
+  third-party archive used for *prices* is fetched from `codeload.github.com` and pinned to a commit SHA.
+- 2026-11-13 — Scope note: the file paths in the C1–C13 scope column were updated to the paths actually
+  built. The claim, the session ID and the exclusive scope are unchanged.
+- 2026-11-13 — Two dated determinations were committed before any result was scored on them:
+  `data/spread_convention_determination.json` (the archive's `spread_line` is the away team's line, proved by
+  a moneyline cross check at 99.41% agreement and by a regression of the margin on the line) and
+  `data/price_determination.json` (the archive's spread and total price columns fail a calibration test, so the
+  reference price for the spread strategies is reconstructed from the market's moneyline and line, and the total
+  strategies are Blocked).
+- 2026-11-13 — `data/parameter_amendment_1.json` records a defect in the pre-registered model: a 3% per-game mean
+  reversion applied to a mean-zero rating is a decay of the whole scale, which left the rating standard deviation
+  at 1.3 points after a season. The defect was found and the correction selected on the 1999-2022 development
+  window only, and the amendment was committed before the corrected model was scored on the 2025-2026 holdout.
+- 2026-11-13 — The site is 15 pages under `nfl-command/pages/`, built deterministically by
+  `nfl-command/engine/05_build_site.py` and checked by `nfl-command/engine/06_verify_site.py`, which fails the
+  build if any table row lacks a source link, if any local link does not resolve, or if placeholder text reaches a
+  page. The root `index.html` gained one additive navigation block, marked as a local addition in the same way as
+  the earlier `nfl-lines` block, so a peer rebuild can re-add it.
 ## Session `arena/22679198-own4` — NFL origination & decision consolidation (claim, 2026-11-13 UTC)
 
 **Session ID:** `arena/22679198-own4` · **Branch:** `arena/22679198-own4` (platform-pinned; per-task `session-<id>/<task>` branches cannot be created in this harness — same logged deviation as every prior session) · **Base:** `553c3f053608fd74043192864908508bef60ebfd` (main)
@@ -2582,3 +2669,30 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+- 2026-11-13 — **Namespace collision with session `arena/934af359-own4` and its resolution.** That session
+  published a `nfl-command/` namespace (PR #82) and it is live on `main`. This session had filed its own C1-C14
+  claim for `nfl-command/` earlier the same day, but the peer namespace reached `main` first. To avoid touching
+  another session's published scope, this session **renamed its namespace to `nfl-command-center/`** and changed
+  every internal path, the CI workflow (`.github/workflows/nfl-command-center.yml`) and the root navigation.
+  **No file of the peer's `nfl-command/` namespace was edited, moved or deleted.** The peer namespace remains
+  published and reachable at `https://sassnarep3-star.github.io/Own4/nfl-command/`.
+- 2026-11-13 — **Root navigation integrated through the generator.** The root navigation is owned by
+  `verification/build.py`, not by a hand edit to `index.html`. This session added its fifteen links to the existing
+  `NFL research` group in `verification/build.py` and regenerated `index.html` with the generator, so the links
+  survive a rebuild. The earlier hand-added block in `index.html` was dropped in favour of the generator-owned one.
+- 2026-11-13 — **Merge resolution log.** `main` was merged into this branch with three conflicts, all resolved
+  superset-style with no peer work discarded: `COORDINATION.md` (both sections kept, peer sections first), the
+  CI workflow filename (the peer's `nfl-command.yml` kept, this session's file renamed to `nfl-command-center.yml`)
+  and `index.html` (the generator-owned version taken, then regenerated with this session's links added to
+  `verification/build.py`).
+- 2026-11-13 — Repository audit re-run after the merge: **1,127 files audited, 53 flagged,
+  34 carrying placeholder text, 12,978 table rows of which 1,447 carry
+  no source link, 0 team-record conflicts against the official standings.**
+- 2026-11-13 — **Audit made environment-independent.** The first repository audit walked the file system in
+  whatever order the operating system handed it and counted a linked worktree's `.git` pointer as a file, so the
+  same repository produced a different file count and a different flag order on the CI runner. The audit now
+  sorts the walk, skips `.git` whether it is a directory or a file, and sorts its output. The CI gate was changed
+  accordingly: the invariant now enforced is that **two consecutive builds of the same tree are byte-identical**,
+  not that the build reproduces a snapshot, because the audit reads the whole repository and any other namespace
+  merged into `main` legitimately moves the totals.

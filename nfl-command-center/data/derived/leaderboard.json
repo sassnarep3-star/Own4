@@ -1,0 +1,786 @@
+{
+  "forecast_board": [
+    {
+      "id": "V8",
+      "name": "Corrected model with rest differential",
+      "params": {
+        "id": "V8",
+        "name": "Corrected model with rest differential",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": true,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.2271,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 10.7763,
+      "brier": 0.222962,
+      "z_vs_naive": 2.3371,
+      "skill_points_by_season": {
+        "2023": 0.82,
+        "2024": 0.8651,
+        "2025": 0.7408,
+        "2026": 0.5843
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": true,
+      "eligibility_note": "Eligible for reward points under data/parameter_amendment_1.json.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Pass"
+      },
+      "reward_points": 117,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V7",
+      "name": "Corrected model (primary)",
+      "params": {
+        "id": "V7",
+        "name": "Corrected model (primary)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.3108,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 10.818,
+      "brier": 0.224905,
+      "z_vs_naive": 2.0727,
+      "skill_points_by_season": {
+        "2023": 0.772,
+        "2024": 0.9727,
+        "2025": 0.7155,
+        "2026": 0.3789
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": true,
+      "eligibility_note": "Eligible for reward points under data/parameter_amendment_1.json.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Pass"
+      },
+      "reward_points": 104,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V6",
+      "name": "With rest differential",
+      "params": {
+        "id": "V6",
+        "name": "With rest differential",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": true,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.294,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.0918,
+      "brier": 0.233004,
+      "z_vs_naive": 5.0673,
+      "skill_points_by_season": {
+        "2023": 0.4436,
+        "2024": 0.447,
+        "2025": 0.6269,
+        "2026": 0.6152
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V3",
+      "name": "Faster ratings (alpha 0.20)",
+      "params": {
+        "id": "V3",
+        "name": "Faster ratings (alpha 0.20)",
+        "alpha": 0.2,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.3491,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.226,
+      "brier": 0.232342,
+      "z_vs_naive": 3.6048,
+      "skill_points_by_season": {
+        "2023": 0.3173,
+        "2024": 0.5961,
+        "2025": 0.6574,
+        "2026": 0.3819
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V5",
+      "name": "No mean reversion",
+      "params": {
+        "id": "V5",
+        "name": "No mean reversion",
+        "alpha": 0.12,
+        "rho": 0.0,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.3825,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.0802,
+      "brier": 0.22134,
+      "z_vs_naive": 1.5738,
+      "skill_points_by_season": {
+        "2023": 0.604,
+        "2024": 0.8725,
+        "2025": 0.7149,
+        "2026": 0.1593
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V1",
+      "name": "Pre-registered model",
+      "params": {
+        "id": "V1",
+        "name": "Pre-registered model",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.3981,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.1225,
+      "brier": 0.2354,
+      "z_vs_naive": 4.5565,
+      "skill_points_by_season": {
+        "2023": 0.3769,
+        "2024": 0.5072,
+        "2025": 0.5942,
+        "2026": 0.3623
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V4",
+      "name": "No home-field advantage",
+      "params": {
+        "id": "V4",
+        "name": "No home-field advantage",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 0.0,
+        "use_rest": false,
+        "use_hfa": false
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.4299,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.1523,
+      "brier": 0.235782,
+      "z_vs_naive": 5.2958,
+      "skill_points_by_season": {
+        "2023": 0.2092,
+        "2024": 0.4573,
+        "2025": 0.5276,
+        "2026": 0.403
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    },
+    {
+      "id": "V2",
+      "name": "Slower ratings (alpha 0.06)",
+      "params": {
+        "id": "V2",
+        "name": "Slower ratings (alpha 0.06)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "spread_mae": 10.5637,
+      "naive_spread_mae": 10.9171,
+      "total_mae": 11.104,
+      "brier": 0.240848,
+      "z_vs_naive": 4.1628,
+      "skill_points_by_season": {
+        "2023": 0.3244,
+        "2024": 0.3381,
+        "2025": 0.4077,
+        "2026": 0.2403
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "reward_eligible_variant": false,
+      "eligibility_note": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+      "gates": {
+        "G1": "Pass",
+        "G2": "Pass",
+        "G6": "Pass",
+        "G9": "Pass",
+        "G10": "Fail"
+      },
+      "reward_points": 0,
+      "reward_formula": "round(50 x z) where z is the paired z statistic of the holdout mean absolute error improvement over the naive baseline; capped at 500 and floored at 0"
+    }
+  ],
+  "variants": [
+    {
+      "id": "V1",
+      "name": "Pre-registered model",
+      "params": {
+        "id": "V1",
+        "name": "Pre-registered model",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.3981,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.5189,
+      "holdout_total_mae": 11.1225,
+      "holdout_brier": 0.2354,
+      "skill_points_by_season": {
+        "2023": 0.3769,
+        "2024": 0.5072,
+        "2025": 0.5942,
+        "2026": 0.3623
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 4.5565
+    },
+    {
+      "id": "V2",
+      "name": "Slower ratings (alpha 0.06)",
+      "params": {
+        "id": "V2",
+        "name": "Slower ratings (alpha 0.06)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.5637,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.3534,
+      "holdout_total_mae": 11.104,
+      "holdout_brier": 0.240848,
+      "skill_points_by_season": {
+        "2023": 0.3244,
+        "2024": 0.3381,
+        "2025": 0.4077,
+        "2026": 0.2403
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 4.1628
+    },
+    {
+      "id": "V3",
+      "name": "Faster ratings (alpha 0.20)",
+      "params": {
+        "id": "V3",
+        "name": "Faster ratings (alpha 0.20)",
+        "alpha": 0.2,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.3491,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.568,
+      "holdout_total_mae": 11.226,
+      "holdout_brier": 0.232342,
+      "skill_points_by_season": {
+        "2023": 0.3173,
+        "2024": 0.5961,
+        "2025": 0.6574,
+        "2026": 0.3819
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 3.6048
+    },
+    {
+      "id": "V4",
+      "name": "No home-field advantage",
+      "params": {
+        "id": "V4",
+        "name": "No home-field advantage",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 0.0,
+        "use_rest": false,
+        "use_hfa": false
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.4299,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.4872,
+      "holdout_total_mae": 11.1523,
+      "holdout_brier": 0.235782,
+      "skill_points_by_season": {
+        "2023": 0.2092,
+        "2024": 0.4573,
+        "2025": 0.5276,
+        "2026": 0.403
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 5.2958
+    },
+    {
+      "id": "V5",
+      "name": "No mean reversion",
+      "params": {
+        "id": "V5",
+        "name": "No mean reversion",
+        "alpha": 0.12,
+        "rho": 0.0,
+        "hfa": 1.5,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.3825,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.5346,
+      "holdout_total_mae": 11.0802,
+      "holdout_brier": 0.22134,
+      "skill_points_by_season": {
+        "2023": 0.604,
+        "2024": 0.8725,
+        "2025": 0.7149,
+        "2026": 0.1593
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 1.5738
+    },
+    {
+      "id": "V6",
+      "name": "With rest differential",
+      "params": {
+        "id": "V6",
+        "name": "With rest differential",
+        "alpha": 0.12,
+        "rho": 0.03,
+        "hfa": 1.5,
+        "use_rest": true,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.294,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.6231,
+      "holdout_total_mae": 11.0918,
+      "holdout_brier": 0.233004,
+      "skill_points_by_season": {
+        "2023": 0.4436,
+        "2024": 0.447,
+        "2025": 0.6269,
+        "2026": 0.6152
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 5.0673
+    },
+    {
+      "id": "V7",
+      "name": "Corrected model (primary)",
+      "params": {
+        "id": "V7",
+        "name": "Corrected model (primary)",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": false,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.3108,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.6062,
+      "holdout_total_mae": 10.818,
+      "holdout_brier": 0.224905,
+      "skill_points_by_season": {
+        "2023": 0.772,
+        "2024": 0.9727,
+        "2025": 0.7155,
+        "2026": 0.3789
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 2.0727
+    },
+    {
+      "id": "V8",
+      "name": "Corrected model with rest differential",
+      "params": {
+        "id": "V8",
+        "name": "Corrected model with rest differential",
+        "alpha": 0.06,
+        "rho": 0.03,
+        "rho_application": "per_season",
+        "hfa": 2.0,
+        "use_rest": true,
+        "use_hfa": true
+      },
+      "holdout_games": 422,
+      "holdout_spread_mae": 10.2271,
+      "holdout_naive_mae": 10.9171,
+      "holdout_skill_points": 0.69,
+      "holdout_total_mae": 10.7763,
+      "holdout_brier": 0.222962,
+      "skill_points_by_season": {
+        "2023": 0.82,
+        "2024": 0.8651,
+        "2025": 0.7408,
+        "2026": 0.5843
+      },
+      "seasons_non_negative": 4,
+      "seasons_evaluated": 4,
+      "z_vs_naive": 2.3371
+    }
+  ],
+  "policy": {
+    "betting_board": "A strategy earns reward points only if gates G1 to G9 all pass. Points = round(100 x t-statistic of the holdout ROI against the no-edge null), capped at 1,000 and floored at 0.",
+    "forecast_board": "A forecast variant earns reward points only if G1, G6 and G9 pass. Points = round(50 x z), where z = (MAE of the naive baseline - MAE of the variant) divided by the standard error of the paired per-game difference, capped at 500 and floored at 0. This board needs no prices, so it can be paid even though the NFL publishes no betting lines.",
+    "currency": "Points are non-monetary until the owner funds a pool. No pool is funded in this project; this is recorded as an open item for the owner.",
+    "currency_source": null
+  },
+  "baselines": {
+    "holdout": {
+      "label": "holdout 2025-2026",
+      "n_games": 422,
+      "n_with_market_spread": 422,
+      "n_with_verified_reference_price": 422,
+      "n_with_market_moneyline": 422,
+      "own_brier": 0.224905,
+      "market_brier": 0.212493,
+      "calibration": [
+        {
+          "n": 42,
+          "mean_predicted": 0.2392,
+          "observed_win_rate": 0.2619,
+          "gap": 0.0227
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.3535,
+          "observed_win_rate": 0.3333,
+          "gap": -0.0201
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.4199,
+          "observed_win_rate": 0.3571,
+          "gap": -0.0628
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.4794,
+          "observed_win_rate": 0.5238,
+          "gap": 0.0444
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.5291,
+          "observed_win_rate": 0.381,
+          "gap": -0.1481
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.5845,
+          "observed_win_rate": 0.619,
+          "gap": 0.0346
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.64,
+          "observed_win_rate": 0.5714,
+          "gap": -0.0685
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.6923,
+          "observed_win_rate": 0.5952,
+          "gap": -0.097
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.7497,
+          "observed_win_rate": 0.7143,
+          "gap": -0.0354
+        },
+        {
+          "n": 42,
+          "mean_predicted": 0.8363,
+          "observed_win_rate": 0.8095,
+          "gap": -0.0268
+        }
+      ],
+      "n_with_market_total": 422,
+      "own_spread_mae": 10.3108,
+      "market_spread_mae": 9.5983,
+      "naive_spread_mae": 10.9171,
+      "own_total_mae": 10.818,
+      "market_total_mae": 10.4645,
+      "naive_total_mae": 11.2062
+    },
+    "season_2026": {
+      "label": "2026",
+      "n_games": 137,
+      "n_with_market_spread": 137,
+      "n_with_verified_reference_price": 137,
+      "n_with_market_moneyline": 137,
+      "own_brier": 0.223406,
+      "market_brier": 0.216855,
+      "calibration": [
+        {
+          "n": 13,
+          "mean_predicted": 0.2538,
+          "observed_win_rate": 0.1538,
+          "gap": -0.1
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.3499,
+          "observed_win_rate": 0.1538,
+          "gap": -0.1961
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.4212,
+          "observed_win_rate": 0.3077,
+          "gap": -0.1136
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.4864,
+          "observed_win_rate": 0.6923,
+          "gap": 0.2059
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.5352,
+          "observed_win_rate": 0.4615,
+          "gap": -0.0736
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.5832,
+          "observed_win_rate": 0.5385,
+          "gap": -0.0447
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.6361,
+          "observed_win_rate": 0.4615,
+          "gap": -0.1746
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.6905,
+          "observed_win_rate": 0.5385,
+          "gap": -0.1521
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.7399,
+          "observed_win_rate": 0.5385,
+          "gap": -0.2014
+        },
+        {
+          "n": 13,
+          "mean_predicted": 0.7984,
+          "observed_win_rate": 0.8462,
+          "gap": 0.0478
+        },
+        {
+          "n": 7,
+          "mean_predicted": 0.8592,
+          "observed_win_rate": 0.8571,
+          "gap": -0.0021
+        }
+      ],
+      "n_with_market_total": 137,
+      "own_spread_mae": 10.1832,
+      "market_spread_mae": 9.4489,
+      "naive_spread_mae": 10.562,
+      "own_total_mae": 11.0956,
+      "market_total_mae": 10.5511,
+      "naive_total_mae": 11.5547
+    },
+    "all": {
+      "label": "1999-2026",
+      "n_games": 7413,
+      "n_with_market_spread": 7413,
+      "n_with_verified_reference_price": 5432,
+      "n_with_market_moneyline": 5432,
+      "own_brier": 0.222873,
+      "market_brier": 0.211526,
+      "calibration": [
+        {
+          "n": 741,
+          "mean_predicted": 0.2407,
+          "observed_win_rate": 0.2955,
+          "gap": 0.0549
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.3541,
+          "observed_win_rate": 0.3671,
+          "gap": 0.013
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.4268,
+          "observed_win_rate": 0.4588,
+          "gap": 0.032
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.4863,
+          "observed_win_rate": 0.502,
+          "gap": 0.0157
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.5361,
+          "observed_win_rate": 0.5236,
+          "gap": -0.0125
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.5818,
+          "observed_win_rate": 0.6181,
+          "gap": 0.0363
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.6304,
+          "observed_win_rate": 0.6343,
+          "gap": 0.0038
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.6844,
+          "observed_win_rate": 0.6653,
+          "gap": -0.0191
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.7462,
+          "observed_win_rate": 0.7328,
+          "gap": -0.0134
+        },
+        {
+          "n": 741,
+          "mean_predicted": 0.8382,
+          "observed_win_rate": 0.8178,
+          "gap": -0.0204
+        }
+      ],
+      "n_with_market_total": 7413,
+      "own_spread_mae": 10.6783,
+      "market_spread_mae": 10.2551,
+      "naive_spread_mae": 11.5257,
+      "own_total_mae": 10.9686,
+      "market_total_mae": 10.6177,
+      "naive_total_mae": 11.2235
+    }
+  }
+}

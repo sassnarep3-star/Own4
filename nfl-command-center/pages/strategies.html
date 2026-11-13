@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html">Findings</a>
+  <a href="flagged-for-review.html">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html">Decisions</a>
+  <a href="suggestions.html">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html" class="on">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html">Methodology</a>
+</div></nav>
+<main>
+
+<h2>The two boards</h2>
+<p>The <strong>forecast board</strong> compares the own model with a naive pick-em baseline. It needs no price, so it can be scored and paid. The <strong>betting board</strong> needs a price, and no strategy in the registered family clears the gates.</p>
+<h2>Forecast board</h2>
+<p>A variant earns reward points only if gates G1, G2, G6 and G9 pass. Points are round(50 times z), where z is the paired z statistic of the holdout improvement over the naive baseline, capped at 500. Variants V1 to V6 are shown for transparency but are not eligible: they use the model as it was originally registered, before the rating decay defect was corrected.</p>
+<table class=""><thead><tr>
+<th>Variant</th>
+<th>Holdout spread error</th>
+<th>Naive baseline</th>
+<th>z</th>
+<th>G1</th>
+<th>G2</th>
+<th>G6</th>
+<th>G9</th>
+<th>Points</th>
+<th>Eligible</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>V8 Corrected model with rest differential</td><td class="num">10.2271</td><td class="num">10.9171</td><td class="num">2.3371</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">117</td><td>yes</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V7 Corrected model (primary)</td><td class="num">10.3108</td><td class="num">10.9171</td><td class="num">2.0727</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">104</td><td>yes</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V6 With rest differential</td><td class="num">10.2940</td><td class="num">10.9171</td><td class="num">5.0673</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V3 Faster ratings (alpha 0.20)</td><td class="num">10.3491</td><td class="num">10.9171</td><td class="num">3.6048</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V5 No mean reversion</td><td class="num">10.3825</td><td class="num">10.9171</td><td class="num">1.5738</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V1 Pre-registered model</td><td class="num">10.3981</td><td class="num">10.9171</td><td class="num">4.5565</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V4 No home-field advantage</td><td class="num">10.4299</td><td class="num">10.9171</td><td class="num">5.2958</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>V2 Slower ratings (alpha 0.06)</td><td class="num">10.5637</td><td class="num">10.9171</td><td class="num">4.1628</td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td><span class="badge pass">Pass</span></td><td class="num">0</td><td>no</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h2>Betting board</h2>
+<p>A strategy earns reward points only if gates G1 to G9 all pass. Points are round(100 times the t statistic of the holdout return against the no-edge null), capped at 1,000.</p>
+<table class=""><thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>Status</th>
+<th>Bets</th>
+<th>Holdout return</th>
+<th>Permutation p</th>
+<th>Gates passed</th>
+<th>Reward eligible</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>S1</td><td>ATS edge (1.5 pp)</td><td><span class="badge pass">Evaluated</span></td><td class="num">326</td><td class="num">-15.00%</td><td class="num">0.481</td><td>5 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>S2</td><td>ATS edge (3.0 pp)</td><td><span class="badge pass">Evaluated</span></td><td class="num">265</td><td class="num">-21.64%</td><td class="num">0.413</td><td>4 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>S3</td><td>Total edge (2.0 pp)</td><td><span class="badge blocked">Blocked</span></td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>S4</td><td>Moneyline edge (2.0 pp)</td><td><span class="badge pass">Evaluated</span></td><td class="num">343</td><td class="num">-10.70%</td><td class="num">0.984</td><td>5 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>S5</td><td>Favourite-only ATS</td><td><span class="badge pass">Evaluated</span></td><td class="num">335</td><td class="num">2.27%</td><td class="num">0.672</td><td>6 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>S6</td><td>Small-line ATS</td><td><span class="badge pass">Evaluated</span></td><td class="num">116</td><td class="num">-4.35%</td><td class="num">0.362</td><td>4 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>P1</td><td>2-leg ATS parlay</td><td><span class="badge pass">Evaluated</span></td><td class="num">30</td><td class="num">-42.64%</td><td class="num">0.452</td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>P2</td><td>3-leg ATS parlay</td><td><span class="badge pass">Evaluated</span></td><td class="num">29</td><td class="num">-48.81%</td><td class="num">1.000</td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>P3</td><td>ATS + total parlay</td><td><span class="badge blocked">Blocked</span></td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>C1</td><td>Player prop combo (two players, different games)</td><td><span class="badge blocked">Blocked</span></td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>C2</td><td>Same-game player prop pair</td><td><span class="badge blocked">Blocked</span></td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td>3 / 9</td><td>no</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+</tbody></table>
+<h2>Blocked strategies</h2>
+<p>A strategy whose price cannot be verified is Blocked, not evaluated. No return is reported for it and it earns nothing.</p>
+<table class=""><thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>Why it is blocked</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>S3</td><td>Total edge (2.0 pp)</td><td>The market price for a total cannot be verified. The archive's over and under prices failed the calibration audit in data/price_determination.json, and a total has no moneyline from which a market probability could be reconstructed. The NFL publishes no betting lines at all. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>P3</td><td>ATS + total parlay</td><td>The market price for a total cannot be verified. The archive's over and under prices failed the calibration audit in data/price_determination.json, and a total has no moneyline from which a market probability could be reconstructed. The NFL publishes no betting lines at all. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>C1</td><td>Player prop combo (two players, different games)</td><td>No official player game log and no verifiable player prop price were found in any official NFL source, so the strategy cannot be priced, tested or settled. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>C2</td><td>Same-game player prop pair</td><td>No official player game log and no verifiable player prop price were found in any official NFL source, so the strategy cannot be priced, tested or settled. The strategy is Blocked, not evaluated: no return is reported for it and it earns no reward points.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h2>Luck band</h2>
+<p>The luck band is the half-width of the interval that pure chance around a fifty percent base rate would produce at each strategy's sample size. An observed edge smaller than its own luck band has not separated itself from luck.</p>
+<table class=""><thead><tr>
+<th>ID</th>
+<th>Bets</th>
+<th>Win rate</th>
+<th>Luck band half-width</th>
+<th>Bets needed for 80% power</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>S1</td><td class="num">326</td><td class="num">0.4050</td><td class="num">0.0543</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S2</td><td class="num">265</td><td class="num">0.3831</td><td class="num">0.0602</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S3</td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S4</td><td class="num">343</td><td class="num">0.4370</td><td class="num">0.0529</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S5</td><td class="num">335</td><td class="num">0.8273</td><td class="num">0.0535</td><td class="num">16</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S6</td><td class="num">116</td><td class="num">0.6216</td><td class="num">0.0910</td><td class="num">133</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>P1</td><td class="num">30</td><td class="num">0.0000</td><td class="num">0.1789</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>P2</td><td class="num">29</td><td class="num">0.0000</td><td class="num">0.1820</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>P3</td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>C1</td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>C2</td><td class="num">0</td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="num"><span class="unverified">not computed: strategy blocked</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h2>The ten gates</h2>
+<table class=""><thead><tr>
+<th>Gate</th>
+<th>Name</th>
+<th>Threshold</th>
+<th>Why</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>G1</td><td>Minimum graded sample</td><td>at least 300 graded bets in the holdout for the strategy under evaluation</td><td>Below 300 graded bets no NFL strategy can be separated from luck at conventional confidence; this floor is a project-defined design choice.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G2</td><td>Positive point estimate</td><td>holdout ROI > 0% and holdout ROI > 0% for the price-independent forecast-skill metric</td><td>A strategy that does not make money on the holdout cannot be rewarded, regardless of significance.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G3</td><td>Permutation significance</td><td>one-sided permutation p-value < 0.05, labels shuffled within the strategy 10,000 times</td><td>Removes any assumption that bets are independent.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G4</td><td>Interval excludes break-even</td><td>lower bound of the 95% bootstrap confidence interval for ROI > 0%</td><td>A point estimate above zero whose interval includes zero is not evidence of skill.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G5</td><td>Multiple-comparison control</td><td>Benjamini-Hochberg FDR q < 0.05 across the whole strategy family tested</td><td>Twelve strategies are tested; without family-wise control the chance of a false positive is far above 5%.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G6</td><td>Look-ahead integrity</td><td>perturbing the outcome of any holdout game must not change any forecast made before that game (exact equality of the earlier forecast array)</td><td>A forecast contaminated by a later result cannot be validated on the same data.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G7</td><td>Price provenance</td><td>every price used must come from a recorded source with a retrievable URL, commit SHA and checksum, and every row must be labelled with that source's official/third-party status</td><td>An unpriced result cannot be audited. The NFL publishes no betting lines, so every price in this project is third-party and must be labelled as such.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G8</td><td>Luck / placebo calibration</td><td>the strategy's one-sided p-value must beat the 95th percentile of a 1,000-strategy placebo null on the same holdout, and the placebo false-positive rate must not exceed 10%</td><td>If random strategies routinely beat the null at the stated threshold, the threshold itself is not evidence of skill.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G9</td><td>Skill stability</td><td>the strategy's price-independent forecast skill must beat the naive baseline on the holdout, and the strategy must be non-negative in at least 2 of the 3 seasons in the validation+holdout window</td><td>Skill that appears in one season and disappears in the next is luck with a time stamp.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>G10</td><td>Reward eligibility</td><td>a strategy earns reward points only if G1-G9 all pass; points are non-monetary until the owner funds a pool</td><td>Separates the forecast board (which can be paid because it needs no prices) from the betting board (which needs prices that the NFL does not publish).</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command-center/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>

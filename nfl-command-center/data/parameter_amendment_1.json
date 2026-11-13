@@ -1,0 +1,48 @@
+{
+  "id": "parameter-amendment-1",
+  "registered_utc": "2026-11-13T00:00:00Z",
+  "registered_before": "the corrected model was scored on the 2025-2026 holdout",
+  "why": "The pre-registered model was implemented literally and the implementation was found to be defective. The defect was found and diagnosed on the 1999-2022 development window only. The correction below was selected on the development window only. The registered thresholds, the validation gates and the holdout definition are unchanged.",
+  "defect": {
+    "what": "data/gates_preregistered.json registers the mean reversion as a share of a team's rating reverted toward the league mean after each game, with rho = 0.03. Because the ratings are re-identified to a zero mean after every game, the league mean is zero and a per-game share acts only as a multiplicative decay of the entire rating scale. A 3% decay applied after every game removes essentially the whole rating within a season: the end-of-season rating standard deviation was about 1.3 points, against the roughly 6 to 9 points that real team strength differences produce.",
+    "development_window_evidence": {
+      "window": "1999-2022",
+      "mean_absolute_error_of_the_margin_per_game": {
+        "per_game_reversion_alpha_0.12": 11.0349,
+        "per_season_reversion_alpha_0.12": 10.8833
+      },
+      "note": "The same rating update with the reversion applied once between seasons instead of after every game produces a lower error on the development window, which is the only window used to make this decision."
+    }
+  },
+  "primary_variant": {
+    "id": "V7",
+    "name": "Corrected model: reversion applied between seasons",
+    "alpha": 0.06,
+    "rho": 0.03,
+    "rho_application": "per_season",
+    "hfa": 2.0,
+    "use_rest": false,
+    "use_hfa": true
+  },
+  "development_window_selection": {
+    "window": "1999-2022",
+    "objective": "lowest mean absolute error of the game margin",
+    "grid": "alpha in {0.02, 0.04, 0.06, 0.08, 0.10} crossed with home field advantage in {0.0, 1.0, 1.5, 2.0, 2.5, 3.0}, with rho = 0.03 applied between seasons",
+    "selected": "alpha 0.06, home field advantage 2.0 points",
+    "selected_development_mean_absolute_error": 10.7249,
+    "selected_development_correlation_of_predicted_and_actual_margin": 0.3707,
+    "runner_up": "alpha 0.06, home field advantage 2.5 points, development mean absolute error 10.7277",
+    "holdout_used_in_this_selection": false,
+    "reproduce_with": "python3 engine/00_sweep_development.py"
+  },
+  "variants_added": [
+    {"id": "V7", "name": "Corrected model (primary)", "alpha": 0.06, "rho": 0.03, "rho_application": "per_season", "hfa": 2.0, "use_rest": false, "use_hfa": true},
+    {"id": "V8", "name": "Corrected model with rest differential", "alpha": 0.06, "rho": 0.03, "rho_application": "per_season", "hfa": 2.0, "use_rest": true, "use_hfa": true}
+  ],
+  "variants_retained_from_the_original_registration": "V1 to V6 are retained and reported. V1 to V6 use the defective per-game reversion and are therefore reported as diagnostics, not as candidates for reward. The reward board is decided among V7 and V8 only.",
+  "reward_board_scope": {
+    "eligible_variants": ["V7", "V8"],
+    "rule": "The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.",
+    "family_size_for_the_false_discovery_control": 2
+  }
+}

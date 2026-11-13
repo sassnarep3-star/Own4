@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findings - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html" class="on">Findings</a>
+  <a href="flagged-for-review.html">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html">Decisions</a>
+  <a href="suggestions.html">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html">Methodology</a>
+</div></nav>
+<main>
+
+<h2>Findings</h2>
+<p>Each finding below is backed by a check that can be re-run. Nothing here is asserted without a source.</p>
+<h3>F-01 - The official data reconciles exactly</h3><p>Recomputing every team&#x27;s 2026 record and points from the game log reproduces the official NFL.com league standings for all 32 teams, with no mismatch. League points for and points against are both 6,291, and the single tied game is treated as a push for spread, total and moneyline bets.</p><h3>F-02 - The archive&#x27;s spread line is the away team&#x27;s line</h3><p>A regression of the actual margin on the archive&#x27;s spread line has a slope of 1.04 and an intercept of -0.04, so a positive spread line means the home team is the favourite. The moneyline cross check agrees in 99.41% of 5,432 games. The rejected reading agrees in 0.57%.</p><h3>F-03 - The archive&#x27;s spread and total prices fail a calibration test</h3><p>Games the archive prices at 0.45 for the home side to cover actually cover 69% of the time, and games it prices at 0.55 cover 45% of the time. The over price sign does not predict the over rate: 49.0% when negative and 49.5% when positive, against a 49.1% base rate. The moneyline columns, by contrast, are well calibrated and were retained.</p><h3>F-04 - The forecast engine has no look-ahead</h3><p>Shifting the outcome of all 422 holdout games by seven points and re-running the engine changes none of the 6,991 forecasts made before the holdout. The test is recorded in every run.</p><h3>F-05 - The pre-registered model had a rating decay defect</h3><p>A three percent per-game mean reversion applied to a mean-zero rating removes essentially the whole rating within a season, leaving a rating standard deviation of 1.3 points. The defect was found and fixed using the 1999 to 2022 development window only, and the fix was registered in a dated amendment before the corrected model was scored on the holdout.</p><h3>F-06 - No betting strategy separates itself from chance</h3><p>The best evaluated strategy returns 2.27% on 335 holdout bets with a permutation p-value of 0.672, which does not clear the 0.05 floor. The placebo null places the 95th percentile of a thousand skill-free peers above it. Nothing is activated.</p><h3>F-07 - The own model beats the naive baseline but not the market</h3><p>On the holdout the own model&#x27;s spread error is 10.31 points, the naive baseline is 10.92 and the market line is 9.60. The forecast board rewards the first comparison, which needs no price. The betting board would need the second, and no strategy achieves it.</p><h3>F-08 - The official sources rarely state a replacement starter&#x27;s depth</h3><p>Seven depth deficiency rows are supported by an official article or an official game book. Exactly one carries an officially stated depth position; the other six are blank and marked unverified rather than guessed.</p><h3>F-09 - The other namespaces carry table rows with no source link</h3><p>Across 1,127 audited files there are 12,978 table rows, of which 11,531 carry a link and 1,447 do not. 53 files are flagged and 34 still contain placeholder text. The prior namespaces are outside this session&#x27;s claim, so they were read and audited but not rewritten.</p><h3>F-10 - Player prop strategies cannot be priced from any official source</h3><p>The NFL publishes no player prop prices and no official player game log was found for the current week. The two prop strategies are Blocked rather than evaluated: no return is reported for them and no reward is offered.</p>
+<h2>Integrity checks</h2>
+<table class=""><thead><tr>
+<th>Check</th>
+<th>Result</th>
+<th>Detail</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>IC-01 2026 standings reconciliation</td><td><span class="badge pass">PASS</span></td><td>32 of 32 teams match</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">nfl.com</a></td></tr>
+<tr><td>IC-02 Look-ahead integrity test</td><td><span class="badge pass">PASS</span></td><td>0 forecasts made before the holdout changed</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">this project</a></td></tr>
+<tr><td>IC-03 Spread line convention</td><td><span class="badge pass">PASS</span></td><td>Adopted reading (the home line is -spread_line) gives a 60.14% home cover rate over 7413 rows; the rejected reading gives 48.96%. The moneyline cross-check agrees with the adopted reading in 99.39% of 5432 games.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">this project</a></td></tr>
+<tr><td>IC-04 League totals balance</td><td><span class="badge pass">PASS</span></td><td>points for 6291, points against 6291</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">nfl.com</a></td></tr>
+<tr><td>IC-05 Tied games handled</td><td><span class="badge pass">PASS</span></td><td>1 tie(s) in 2026</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">nfl.com</a></td></tr>
+<tr><td>IC-06 Own line coverage of the Week 10 slate</td><td><span class="badge pass">PASS</span></td><td>14 of 14 games</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">this project</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command-center/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>
