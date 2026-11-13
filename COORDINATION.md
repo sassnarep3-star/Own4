@@ -1995,3 +1995,13 @@ Pages: API status `built` after merge; live site confirmed at https://sassnarep3
 Root navigation: index.html already links to nfl-edge/index.html and nfl-edge/pages/flagged.html.
 
 **Result:** All user-requested deliverables are implemented, verified, and live. Zero reward points awarded (0 of 4 strategies qualify). All unverified values are blank and flagged (F-01–F-16). No manual owner input was required.
+
+## Session arena/3676fae4-own4 — NFL freshness and stale-line audit (2026-11-13 UTC)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Re-check the merged NFL line lab against current official Week 10 pages; publish any confirmed freshness discrepancy and a proposal for preventing stale lines | in progress | arena/3676fae4-own4 | `COORDINATION.md`, `nfl-lines/data/flags.json`, `nfl-lines/data/decisions.json`, `nfl-lines/data/provenance.json`, `nfl-lines/engine/build_site.py`, generated `nfl-lines/pages/flagged.html`, `nfl-lines/pages/suggestions.html`, `nfl-lines/pages/decisions.html`, `nfl-lines/pages/executive-summary.html`, `nfl-lines/pages/sources.html`, `nfl-lines/index.html` |
+
+- Claim made on the fixed current branch `arena/3676fae4-own4`; no other session claim was present for these NFL line-lab files. Existing implementation work and generated pages are not being replaced or consolidated.
+- Initial finding to verify/document: the NFL Week 10 score page currently shows Washington 24–21 New York Giants, Final, while the Week 10 injury snapshot and model archive describe those teams with their pre-game records and treat all 14 Week 10 games as unplayed. This suggests a post-kickoff stale-slate hazard; no model data will be silently rewritten from this observation.
+- This is a focused final-integration quality follow-up. Source check and build/link verification results will be recorded below before marking done.
