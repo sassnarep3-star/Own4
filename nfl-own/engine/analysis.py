@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import csv
 import json
+import errno
 import math
 import os
 import random
@@ -115,6 +116,25 @@ def bh_fdr(pvals):
         q[i] = val
         prev = val
     return q
+
+
+def stable(obj, sig=12):
+    """Round every float in a payload to 12 significant-ish decimal places before publishing.
+
+    Why this exists: the libm implementations of math.erf and math.exp differ in the last bit
+    between platforms and CPython versions, so a raw float can rebuild differently on CI than
+    locally. Rounding to 12 decimals removes that last-bit noise while keeping far more precision
+    than any published claim uses, and it makes the determinism gate meaningful instead of flaky.
+    """
+    if isinstance(obj, float):
+        # 12 significant digits: enough to keep a p-value of 1e-9 readable, few enough to drop the
+        # last-bit noise that a different libm can introduce.
+        return float("%.*g" % (sig, obj)) + 0.0
+    if isinstance(obj, dict):
+        return {k: stable(v, sig) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [stable(v, sig) for v in obj]
+    return obj
 
 
 def _fsum_sum(xs):
@@ -1237,7 +1257,7 @@ def main():
     }
     for name, payload in out.items():
         with open(os.path.join(DERIVED, name), "w", encoding="utf-8") as fh:
-            json.dump(payload, fh, indent=1)
+            json.dump(stable(payload), fh, indent=1)
             fh.write("\n")
         print("wrote", name)
     print("strategies:", len(results), "reward-eligible:",
