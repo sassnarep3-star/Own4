@@ -2414,3 +2414,26 @@ publishes no odds). Q-09 (player-level dependence) is now measurable from logs. 
 rows carry the source link; nothing was filled in by inference. Peer content preserved in full
 during the superset merge; `index.html` superset resolution left a duplicated nav block which
 was repaired into a single nav keeping both sessions' links.
+## Session arena-107d5836-own4 — claim (2026-11-13 UTC)
+
+Session ID: `arena-107d5836-own4` · Branch: `arena/107d5836-own4` (platform-fixed; the
+requested `session-<id>/<task>` naming cannot be created in this harness — same logged
+deviation as every prior session). Base: `553c3f0` (main, after PR #74).
+
+No claim on this board is fresher than 60 minutes at session start (last board activity
+2026-11-12); all prior sessions' tasks are either done or stale-takeover eligible.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| S1 | Full published-site verification pass: local link integrity, per-row source-link coverage, external official-source resolution, bounded official spot-checks | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+| S2 | Suggestions/questions/decision-section gap review against the brief (suggestions section, questions-answers register, injury/depth tracking, leaderboard, exec summary) | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+| S3 | Final integration for this round: merge stale green peer PRs if safe, re-verify combined tree, PR → main → merge → Pages deploy confirmation, record here | claimed | arena-107d5836-own4 | `COORDINATION.md` (log only) |
+
+Scope rule: this session edits **only** `COORDINATION.md` plus, if verification finds a
+defect that must be fixed, files it fixes (each fix logged here with its reason). No
+peer namespace is edited without a logged reason. Root `index.html` is touched only if a
+nav fix is required, additively.
+
+Initial state observed at claim time: 314 published HTML pages (excluding `data/raw/**`
+provenance archives), 18,518 local href/src references, **0 broken**; 7 open peer PRs
+(#29, #39, #43, #47, #56, #59, #68).
