@@ -1963,6 +1963,57 @@ as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 
 
 ---
 
+## Session `arena/22679198-own4` — NFL origination & decision consolidation (claim, 2026-11-13 UTC)
+
+**Session ID:** `arena/22679198-own4` · **Branch:** `arena/22679198-own4` (platform-pinned; per-task `session-<id>/<task>` branches cannot be created in this harness — same logged deviation as every prior session) · **Base:** `553c3f053608fd74043192864908508bef60ebfd` (main)
+
+**Claim status:** in progress, pushed before any implementation.
+
+**Peer claims detected at checkout (not to be touched):** every board entry above is `done` or `needs review`.
+Eleven NFL namespaces already exist (`nfl/`, `nfl-audit/`, `nfl-decision/`, `nfl-decisions/`, `nfl-edge/`,
+`nfl-hub/`, `nfl-intel/`, `nfl-lab/`, `nfl-lines/`, `nfl-quant/`, `nfl-research/`). No unexpired claim is open,
+so this session also serves as **final integration session for its own scope**.
+
+**Non-overlapping file scope (exclusive to this session):**
+
+| Scope | Paths |
+|---|---|
+| New NFL origination namespace (site, data, pipeline) | `nfl-origination/**` |
+| Verifiable requirement checklist | `nfl-origination/data/requirements.py` → `requirements.html` |
+| Question / information / answer register | `nfl-origination/data/questions.py` → `questions.html` |
+| **Dedicated suggestions + decision board** | `nfl-origination/data/suggestions.py` → `suggestions.html` |
+| Official-snapshot transcription (dated 2026-11-13) | `nfl-origination/data/official/**` |
+| Own-line origination + gates + leaderboard + luck removal | `nfl-origination/pipeline/**` |
+| Injury + depth-deficiency tracker | `nfl-origination/pipeline/injuries.py` → `injuries.html` |
+| Executive summary | `nfl-origination/EXECUTIVE_SUMMARY.md`, `nfl-origination/pages/executive-summary.html` |
+| Repo review (line by line, all NFL namespaces) | `nfl-origination/pages/repo-review.html` |
+| CI gate for this namespace | `.github/workflows/nfl-origination.yml` |
+| Append-only | `COORDINATION.md` (this section), `README.md` (additive), root `index.html` + `verification/build.py` NAV (additive, one block) |
+
+**Peer namespaces respected, linked but never edited:** all eleven NFL namespaces above, `docs/`, `lab/`,
+`lines-lab/`, `nba-evidence/`, `verified/`, `verification*/`, `verification-2026-11-05/`, `nba-evidence/`,
+`own4-dashboard/`, `rental*/`, `rent-*/`, `status/`, `official/`, `data/`, `analysis/`, `model/`, `engine/`,
+`pipeline/`, `scripts/`, `tests/`.
+
+### Task board (this session)
+
+| # | Task | Status | Files |
+|---|---|---|---|
+| O1 | Line-by-line repo review of all eleven NFL namespaces, with official-source spot checks | in progress | `nfl-origination/pages/repo-review.html` |
+| O2 | Requirement checklist mapped to evidence and status | unclaimed | `nfl-origination/data/requirements.py` |
+| O3 | Question / information / answer register (known, unknown, blank answer, unblocker) | unclaimed | `nfl-origination/data/questions.py` |
+| O4 | Dedicated suggestions section with decision board and recommended path | unclaimed | `nfl-origination/data/suggestions.py` |
+| O5 | Fresh official snapshot 2026-11-13 (Week 10 results + schedule + injuries + standings) | unclaimed | `nfl-origination/data/official/**` |
+| O6 | Own-line origination for the 13 unplayed Week 10 games | unclaimed | `nfl-origination/pipeline/**` |
+| O7 | Strategy competition: gates, correlations, luck removal, leaderboard | unclaimed | `nfl-origination/pipeline/**` |
+| O8 | Injury + depth-deficiency tracker | unclaimed | `nfl-origination/pipeline/injuries.py` |
+| O9 | Site build + link/source verification harness | unclaimed | `nfl-origination/build.py`, `nfl-origination/verify.py` |
+| O10 | Executive summary | unclaimed | `nfl-origination/EXECUTIVE_SUMMARY.md` |
+| O11 | Final integration: verify, PR → main, merge, Pages deploy confirmation | unclaimed | root `index.html`, `verification/build.py`, this file |
+
+### Log
+
+- 2026-11-13 — Claimed O1–O11 and pushed this claim before any implementation, per the board protocol. No peer file touched.
 ## Session `arena/40caaa81-own4` — NFL line-origination review and integration (2026-11-13)
 
 Session ID: `arena/40caaa81-own4` · Branch: `arena/40caaa81-own4` (pinned; no other branches created or pushed) · Base: `main` at `553c3f0` (identical at session start).

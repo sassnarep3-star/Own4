@@ -1,0 +1,164 @@
+{
+ "id": "correlations-2026-11-13",
+ "method": {
+  "correlation": "Pearson for continuous pairs; phi for binary prop legs",
+  "ci": "95% CI via Fisher z",
+  "fdr": "Benjamini-Hochberg at q = 0.05 across every computed test",
+  "rule": "A blank r means the required input is not obtainable from an official source. It is never estimated or filled in."
+ },
+ "items": [
+  {
+   "id": "C1",
+   "name": "Closing spread vs closing total, same game",
+   "market": "single+parlay",
+   "r": -0.01025633428362335,
+   "n": 7103,
+   "ci95": [
+    -0.033504641564666815,
+    0.013003066219411618
+   ],
+   "p_value": 0.38744109764937174,
+   "blank_reason": "",
+   "scope": "every archived regular-season game with a line",
+   "interpretation": "Near zero, so spread and total angles on the same game are close to independent and may be combined; that is a dependence fact, not an edge.",
+   "fdr_pass": false,
+   "fdr_threshold": 0.03333333333333333
+  },
+  {
+   "id": "C2",
+   "name": "Home cover vs over, same game (2-leg SGP)",
+   "market": "same-game parlay",
+   "r": 0.0060346983880458505,
+   "n": 7103,
+   "ci95": [
+    -0.017224017867207675,
+    0.029286887081980753
+   ],
+   "p_value": 0.611092040514641,
+   "blank_reason": "",
+   "scope": "every archived game with a line",
+   "interpretation": "Near zero over the whole archive, but this pool mixes every game. The player-prop pairs (C5) are the ones that show real dependence.",
+   "fdr_pass": false,
+   "fdr_threshold": 0.041666666666666664
+  },
+  {
+   "id": "C3",
+   "name": "Team points-for vs points-against, same season",
+   "market": "team rating",
+   "r": -0.18775290473287837,
+   "n": 893,
+   "ci95": [
+    -0.25027398664797745,
+    -0.12367243343008712
+   ],
+   "p_value": 1.5755404299527818e-08,
+   "blank_reason": "",
+   "scope": "club-seasons with at least 8 games",
+   "interpretation": "Weakly negative: a club that scores more tends to concede slightly less, which is the opposite of the naive 'good offence means bad defence' story. Used to justify rating offence and defence separately.",
+   "fdr_pass": true,
+   "fdr_threshold": 0.016666666666666666
+  },
+  {
+   "id": "C4",
+   "name": "Rest differential vs home margin",
+   "market": "situational",
+   "r": 0.034636495962626905,
+   "n": 7103,
+   "ci95": [
+    0.011389371336721145,
+    0.05784619883792589
+   ],
+   "p_value": 0.0035059144656490637,
+   "blank_reason": "",
+   "scope": "games where the archive records both rest values",
+   "interpretation": "Statistically detectable (n=7,103) but economically tiny: r=0.035 explains about 0.1%% of margin variance. This is why rest is NOT given its own weight in the model.",
+   "fdr_pass": true,
+   "fdr_threshold": 0.025000000000000005
+  },
+  {
+   "id": "C5",
+   "name": "QB passing yards over proxy line vs WR1 receiving yards over proxy line",
+   "market": "player-prop combo",
+   "r": 0.34612581064515097,
+   "n": 803,
+   "ci95": [
+    0.2837358114604964,
+    0.4055976409612823
+   ],
+   "p_value": 5.1415713708827485e-24,
+   "blank_reason": "",
+   "scope": "803 team-games, seasons 2021, 2022",
+   "p_leg_a": 0.46450809464508097,
+   "p_leg_b": 0.40722291407222916,
+   "observed_joint": 0.273972602739726,
+   "independent_expectation": 0.1891583399115087,
+   "lift": 1.4483770732387204,
+   "kind": "phi (binary over/under)",
+   "interpretation": "Real positive dependence: the legs hit together more often than independence predicts, so an SGP priced as if the legs were independent would underprice this combo. Whether that survives the book's repricing is C8, which is blank.",
+   "fdr_pass": true,
+   "fdr_threshold": 0.008333333333333333
+  },
+  {
+   "id": "C6",
+   "name": "Prop legs within the same team-game (second pair)",
+   "market": "player-prop combo",
+   "r": null,
+   "n": 0,
+   "ci95": null,
+   "p_value": null,
+   "blank_reason": "The archived prop file exposes one QB/WR pair only; no second pair can be computed without new data.",
+   "scope": "",
+   "fdr_pass": null,
+   "fdr_threshold": null
+  },
+  {
+   "id": "C7",
+   "name": "Home-cover rate in the first half of a week vs the second half",
+   "market": "cross-game parlay",
+   "r": -0.007122374437041308,
+   "n": 473,
+   "ci95": [
+    -0.09722083617706162,
+    0.08309187684982577
+   ],
+   "p_value": 0.8772206261552777,
+   "blank_reason": "",
+   "scope": "week-level, 473 week-slates",
+   "interpretation": "Near zero, which supports treating legs from different games as independent when multiplying them.",
+   "fdr_pass": false,
+   "fdr_threshold": 0.05000000000000001
+  },
+  {
+   "id": "C8",
+   "name": "Same-game parlay legs vs the sportsbook's repriced SGP price",
+   "market": "same-game parlay",
+   "r": null,
+   "n": 0,
+   "ci95": null,
+   "p_value": null,
+   "blank_reason": "No archived same-game-parlay price exists anywhere in this repository, and the NFL publishes no prices at all. The correlation (C5) is measured; the price it must be compared against is not obtainable.",
+   "scope": "",
+   "fdr_pass": null,
+   "fdr_threshold": null
+  },
+  {
+   "id": "C9",
+   "name": "Injury designation vs next-game scoring margin",
+   "market": "injury signal",
+   "r": null,
+   "n": 0,
+   "ci95": null,
+   "p_value": null,
+   "blank_reason": "nfl.com/injuries/ serves only the current week and publishes no historical archive, so an injury effect cannot be estimated at all.",
+   "scope": "",
+   "fdr_pass": null,
+   "fdr_threshold": null
+  }
+ ],
+ "summary": {
+  "tests": 9,
+  "computed": 6,
+  "blank": 3,
+  "survive_fdr": 3
+ }
+}

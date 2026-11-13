@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL Origination · Own4</title>
+<meta name="description" content="Executive summary">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Start / Executive summary</div>
+
+<h1>Executive summary</h1>
+<p class="lede">Snapshot <strong>2026-11-13</strong>. What was verified, what could not be, what was
+measured, and what has to be decided next.</p>
+
+<h2>The bottom line in one paragraph</h2>
+<div class="panel bad">
+<p>The data is sound and the scoreboard is empty. All <strong>160</strong> recomputed 2026 record
+cells match nfl.com, all <strong>10</strong> integrity checks pass, and the Week 10 slate,
+its one completed result and <strong>95</strong> injury designations were transcribed from
+official pages on 2026-11-13. But our own rating model, which does beat a naive baseline
+(MAE <strong>10.913</strong> vs 11.067), <strong>loses to the closing line</strong>
+(<strong>9.848</strong>) over 2126 out-of-sample games. <strong>0 of 7</strong>
+registered strategies qualify, both pre-registered placebos fail as they must, and
+<strong>0 of 1,000 reward points are awarded.</strong> No price, stake, edge or return is claimed
+anywhere, because the NFL publishes no odds at all.</p></div>
+
+<h2>What was verified against official sources</h2>
+<div class="tw"><table class=""><caption>Verified against an official source · every row source-linked</caption><thead><tr><th scope="col" class="">Claim</th><th scope="col" class="">Result</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">32 clubs, W-L-T-PF-PA</td><td class="">160 of 160 cells match nfl.com exactly</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a></span></td></tr><tr><td class="">2026 game log</td><td class="">136 completed games; 272 scheduled rows</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">Week 10 slate</td><td class="">14 games, kick-off times, networks, 4 byes</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">↗ schedules/2026/by-week/week-10</a></span></td></tr><tr><td class="">Week 10 result so far</td><td class="">WAS 24–21 NYG (Thursday)</td><td class=""><span class="src"><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">↗ games/commanders-at-giants-2026-reg-10</a></span></td></tr><tr><td class="">Injury designations</td><td class="">95 across 19 clubs</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></td></tr><tr><td class="">Confirmed lineup changes</td><td class="">8, each named in official NFL.com reporting</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a></span></td></tr><tr><td class="">Integrity checks</td><td class="">10 of 10 pass</td><td class=""><span class="src"><a href="reconcile.html">reconcile.html</a></span></td></tr></tbody></table></div>
+
+<h2>Three things the brief asks for that cannot be sourced</h2>
+<ol>
+<li><strong>1st/2nd/3rd/4th-string depth labels.</strong> The league publishes no depth chart;
+<code>nfl.com/depth-charts/</code> is a 404, re-checked on 2026-11-13. Labelling a player
+"3rd string" would be invention. Only the 8 lineup changes an official article
+explicitly names are published, and everything else is marked blocked.</li>
+<li><strong>A real betting edge.</strong> With no official price, Gate G7 can never pass. Every
+return figure here rests on an assumed −110 and is labelled as such.</li>
+<li><strong>Historical injury backtests.</strong> <code>nfl.com/injuries/</code> serves the current
+week only. No injury effect is measurable, so none is claimed.</li>
+</ol>
+
+<h2>The one real signal</h2>
+<div class="panel ok">
+<p>A quarterback's passing-yardage over and his WR1's receiving-yardage over, in the same team-game,
+co-occur <strong>1.45×</strong> more often than independence predicts: phi =
+<strong>0.346</strong>, n = 803, 95% CI <strong>0.284–0.406</strong>. That is genuine
+dependence in the data, and it means an independent-parlay price would <em>underprice</em> the combo
+— if the book did not reprice it. It does. No archived same-game-parlay price exists here, so the
+dependence is a measured fact, <strong>not</strong> a claimed edge. Buying that price history is the
+single most promising spend in the project (suggestion S01/S06).</p>
+<p>Cross-game parlay legs, by contrast, really are independent: the first half of a week's
+home-cover rate has r = −0.007 against the second half (473 week-slates), and spread vs total within
+a game has r = −0.010 (7,103 games). Those may be multiplied safely.</p></div>
+
+<h2>What cannot be verified — and is therefore blank</h2>
+<div class="tw"><table class=""><caption>Not obtainable from an official source · left blank</caption><thead><tr><th scope="col" class="">Input</th><th scope="col" class="">Why it is missing</th><th scope="col" class="">Source checked</th></tr></thead><tbody><tr><td class="">Betting prices</td><td class="">The NFL publishes none. Every ROI uses an assumed −110.</td><td class=""><span class="src"><a href="https://www.nfl.com/games" target="_blank" rel="noopener">↗ games</a></span></td></tr><tr><td class="">Depth-chart strings</td><td class="">nfl.com/depth-charts/ returns 404. No 2nd/3rd/4th-string label can be sourced.</td><td class=""><span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a></span></td></tr><tr><td class="">Per-game player logs</td><td class="">Player stats are presented client-side; no official per-game feed was obtained.</td><td class=""><span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></td></tr><tr><td class="">Historical injury reports</td><td class="">Only the current week is served.</td><td class=""><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></td></tr><tr><td class="">Same-game-parlay prices</td><td class="">No archived SGP price exists, so C8 is blank.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">Archive licence terms</td><td class="">Not reviewed line by line.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr></tbody></table></div>
+
+<h2>Own lines for the 13 unplayed games</h2>
+<p>Our own spread, total and win probability, fitted only on games played before the slate. The
+injury adjustment is published as a <em>band</em>, not a point estimate, because the official report
+gives a game status and not a snap count. Median band width across the 13 games:
+<strong>1.1</strong> points.</p>
+<div class="tw"><table class=""><caption>Our originated lines · Week 10, 2026</caption><thead><tr><th scope="col" class="">Game</th><th scope="col" class="">Date</th><th scope="col" class="num">Our spread (home)</th><th scope="col" class="num">Our total</th><th scope="col" class="num">Home win prob</th><th scope="col" class="c">Injury band (home)</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">NE@DET</td><td class="">2026-11-15</td><td class="num">-6.8</td><td class="num">45.6</td><td class="num">31%</td><td class="c">-6.4 … -5.4</td><td class=""><span class="src"><a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10" target="_blank" rel="noopener">↗ games/patriots-at-lions-2026-reg-10</a></span></td></tr><tr><td class="">KC@ATL</td><td class="">2026-11-15</td><td class="num">-1.4</td><td class="num">45.3</td><td class="num">46%</td><td class="c">-1.0 … +0.1</td><td class=""><span class="src"><a href="https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10" target="_blank" rel="noopener">↗ games/chiefs-at-falcons-2026-reg-10</a></span></td></tr><tr><td class="">HOU@CLE</td><td class="">2026-11-15</td><td class="num">-1.3</td><td class="num">42.5</td><td class="num">46%</td><td class="c">-0.4 … +2.5</td><td class=""><span class="src"><a href="https://www.nfl.com/games/texans-at-browns-2026-reg-10" target="_blank" rel="noopener">↗ games/texans-at-browns-2026-reg-10</a></span></td></tr><tr><td class="">MIN@GB</td><td class="">2026-11-15</td><td class="num">+5.1</td><td class="num">45.7</td><td class="num">65%</td><td class="c">+5.1 … +5.1</td><td class=""><span class="src"><a href="https://www.nfl.com/games/vikings-at-packers-2026-reg-10" target="_blank" rel="noopener">↗ games/vikings-at-packers-2026-reg-10</a></span></td></tr><tr><td class="">MIA@IND</td><td class="">2026-11-15</td><td class="num">+5.4</td><td class="num">44.9</td><td class="num">66%</td><td class="c">+3.9 … -0.4</td><td class=""><span class="src"><a href="https://www.nfl.com/games/dolphins-at-colts-2026-reg-10" target="_blank" rel="noopener">↗ games/dolphins-at-colts-2026-reg-10</a></span></td></tr><tr><td class="">CAR@NO</td><td class="">2026-11-15</td><td class="num">+5.3</td><td class="num">45.5</td><td class="num">65%</td><td class="c">+4.9 … +3.7</td><td class=""><span class="src"><a href="https://www.nfl.com/games/panthers-at-saints-2026-reg-10" target="_blank" rel="noopener">↗ games/panthers-at-saints-2026-reg-10</a></span></td></tr><tr><td class="">BUF@NYJ</td><td class="">2026-11-15</td><td class="num">-1.5</td><td class="num">42.6</td><td class="num">46%</td><td class="c">-1.2 … -0.2</td><td class=""><span class="src"><a href="https://www.nfl.com/games/bills-at-jets-2026-reg-10" target="_blank" rel="noopener">↗ games/bills-at-jets-2026-reg-10</a></span></td></tr><tr><td class="">JAX@TEN</td><td class="">2026-11-15</td><td class="num">+2.3</td><td class="num">43.2</td><td class="num">57%</td><td class="c">+1.8 … +0.3</td><td class=""><span class="src"><a href="https://www.nfl.com/games/jaguars-at-titans-2026-reg-10" target="_blank" rel="noopener">↗ games/jaguars-at-titans-2026-reg-10</a></span></td></tr><tr><td class="">LA@AZ</td><td class="">2026-11-15</td><td class="num">-3.9</td><td class="num">45.4</td><td class="num">39%</td><td class="c">-3.9 … -3.9</td><td class=""><span class="src"><a href="https://www.nfl.com/games/rams-at-cardinals-2026-reg-10" target="_blank" rel="noopener">↗ games/rams-at-cardinals-2026-reg-10</a></span></td></tr><tr><td class="">SEA@LV</td><td class="">2026-11-15</td><td class="num">-4.4</td><td class="num">45.2</td><td class="num">37%</td><td class="c">-4.5 … -4.6</td><td class=""><span class="src"><a href="https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10" target="_blank" rel="noopener">↗ games/seahawks-at-raiders-2026-reg-10</a></span></td></tr><tr><td class="">SF@DAL</td><td class="">2026-11-15</td><td class="num">+3.5</td><td class="num">45.0</td><td class="num">60%</td><td class="c">+2.0 … -2.3</td><td class=""><span class="src"><a href="https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10" target="_blank" rel="noopener">↗ games/49ers-at-cowboys-2026-reg-10</a></span></td></tr><tr><td class="">PIT@CIN</td><td class="">2026-11-15</td><td class="num">-2.6</td><td class="num">43.1</td><td class="num">42%</td><td class="c">-3.2 … -4.9</td><td class=""><span class="src"><a href="https://www.nfl.com/games/steelers-at-bengals-2026-reg-10" target="_blank" rel="noopener">↗ games/steelers-at-bengals-2026-reg-10</a></span></td></tr><tr><td class="">LAC@BAL</td><td class="">2026-11-16</td><td class="num">+5.5</td><td class="num">43.5</td><td class="num">66%</td><td class="c">+5.5 … +5.5</td><td class=""><span class="src"><a href="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10" target="_blank" rel="noopener">↗ games/chargers-at-ravens-2026-reg-10</a></span></td></tr></tbody></table><div class="tnote">Spread is the expected home margin (positive = home favoured). These are forecasts, not prices: no market exists here to bet against.</div></div>
+
+<h2>What to decide next</h2>
+<p>The <a href="suggestions.html">Suggestions &amp; decisions</a> page holds
+<strong>22</strong> items. Four are binding:</p>
+<ul>
+<li><strong>S07</strong> — adopt a written skill definition before any reward is paid. The one
+proposed here rejects our own best result, which is the point.</li>
+<li><strong>S02</strong> — obtain a legal position before publishing anything as more than research
+points.</li>
+<li><strong>S01</strong> — buy or license an archived odds history. This is the constraint on
+everything else in the betting half of the project.</li>
+<li><strong>S10</strong> — choose one canonical NFL dashboard; twelve now compete.</li>
+</ul>
+
+<h2>Method and honesty controls</h2>
+<ul>
+<li>Model knobs frozen in <code>data/model_params.json</code> with a timestamp written before the
+holdout was read; the holdout (2018–2025) scored exactly once.</li>
+<li>Walk-forward: the model is refitted before every kick-off on strictly earlier games, and the
+home-field term uses prior seasons only.</li>
+<li>Week-clustered bootstrap CI on every ROI, so correlated same-week results cannot inflate
+significance; a 2,000-draw matched-permutation null; Benjamini–Hochberg FDR across every test
+including placebos; and season-concentration disclosure for every profitable strategy.</li>
+<li>Two pre-registered placebos that must fail. They do. During this session a placebo
+<em>passed</em>, which exposed a sign-convention bug in the line column; the bug was fixed, the
+episode is published as flag F-08, and it is why gate G6 exists.</li>
+</ul>
+
+<h2>Irregularities found (published, non-blocking)</h2>
+<p>20 items on <a href="flagged.html">Flagged for review</a>. The three that matter most: a
+<strong>missing official price source</strong> (F-01), <strong>no depth chart at all</strong> (F-02),
+and a <strong>sign-convention error this project made and corrected</strong> (F-08), recorded rather
+than deleted.</p>
+<p class="small">Analytical research only — not wagering advice. NCPG Helpline 1-800-MY-RESET
+(1-800-697-3738).</p>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>
