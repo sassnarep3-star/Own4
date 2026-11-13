@@ -1,67 +1,164 @@
 {
-  "dataset": "strategy_research_and_competition",
-  "session": "arena/d6c72eb4-own4",
-  "captured_utc": "2026-11-13",
-  "note": "Framework document. Method rows describe planned/registered methodology; numeric results are quoted from cited in-repo files and were re-checked in this session's verification pass. No performance number appears here without a source.",
-  "signals": [
-    {"id": "SIG-01", "name": "Line-origination gap (model vs market)", "how": "Walk-forward team-strength model produces a spread/total per game; signal = |own - market| above a threshold. Pre-registered thresholds 3.0 and 4.0 pts are backtested in-repo.", "status": "Registered and backtested (S-SP-3.0, S-SP-4.0 in the leaderboard); edge not significant after BH-FDR.", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"},
-    {"id": "SIG-02", "name": "Closing-line value (CLV)", "how": "Compare the price obtained at bet time with the closing number; positive CLV is the most robust skill proxy in market betting.", "status": "Method adopted in the gate design; per-bet CLV history requires timestamped market snapshots (blocked by Q-05/S-05).", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/questions.json"},
-    {"id": "SIG-03", "name": "Injury/depth availability shock", "how": "Track starter absences by unit (this site's depth tracker) and measure market underreaction the following week.", "status": "Tracker live for 8 teams; signal NOT registered as a strategy yet — needs the S-08 ablation first.", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/depth_deficiency.json"},
-    {"id": "SIG-04", "name": "Rest / travel differential", "how": "Back the side with >= 3 extra rest days.", "status": "Registered and backtested (S-REST-3: n=874, ROI -1.42%); the model's rest term is under suspicion (Q-02).", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"},
-    {"id": "SIG-05", "name": "Weather (wind) on totals", "how": "Unders in outdoor games with forecast wind >= 15 mph, captured game-day morning only.", "status": "Registered and backtested (S-WIND-UNDER: n=303, ROI +7.77%, BH-adjusted p=0.444 — not distinguishable from luck). Forecast capture method per S-11.", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"},
-    {"id": "SIG-06", "name": "Backup-quarterback / lineup deficiency", "how": "Fade or shade teams starting 2nd/3rd/4th-string players at premium positions.", "status": "Data now exists (depth_deficiency.json); NOT registered — must be pre-registered before Week 11 to avoid post-hoc fitting.", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/depth_deficiency.json"},
-    {"id": "SIG-07", "name": "Player-prop combo mispricing", "how": "Correlated prop combos (QB-WR, game script) priced as independent legs by the market.", "status": "BLOCKED: no verifiable prop prices or player logs (Q-04, A-13).", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/flagged.json"}
-  ],
-  "families": [
-    {"id": "FAM-1", "name": "Single bets", "definition": "One side, total or (future) prop, graded at closing prices.", "requirements": "n>=300 graded; every bet timestamped vs closing line; flat or Kelly-capped stake pre-registered."},
-    {"id": "FAM-2", "name": "Parlays (cross-game)", "definition": "2-5 legs from different games; correlation assumed 0 across games (supported: CR-07/CR-08 show near-zero same-game side-total dependence; cross-game pairs are independent by construction).", "requirements": "Legs individually pass FAM-1 gates; combined price from the same market source; dependence documented in the correlation register."},
-    {"id": "FAM-3", "name": "Same-game parlays & player-prop combos", "definition": "Legs inside one game (side/total/team totals/player props).", "requirements": "BLOCKED until Q-04/Q-09 close. Must price dependence explicitly (S-10) — the market does not offer free correlated combos."}
-  ],
-  "validation_gates": [
-    {"id": "VG-1", "name": "Data integrity", "rule": "Every input traceable to a source link; unverifiable values blank and flagged; no inferred fills.", "mirrors": "nfl-edge G10 (source and honesty gate)"},
-    {"id": "VG-2", "name": "Pre-registration", "rule": "Signal definition, thresholds, stake rule and gate set are written to the repo BEFORE the first graded bet of the confirmation window.", "mirrors": "nfl-edge G6/G8 discipline; nfl-lines pre-registration note"},
-    {"id": "VG-3", "name": "Sample floor", "rule": "n >= 300 graded bets in the confirmatory window before any reward consideration.", "mirrors": "nfl-edge G1"},
-    {"id": "VG-4", "name": "Luck removal", "rule": "BH-FDR across the strategy family at q=0.05; Wilson 95% interval on hit rate must exclude break-even; ROI list deflated (S-09).", "mirrors": "nfl-edge G6 (placebo), nfl-lines z-score/p_value_bh columns"},
-    {"id": "VG-5", "name": "Market bar", "rule": "Strategy must show positive CLV or beat the closing line; beating the opening line only is insufficient.", "mirrors": "nfl-edge G4"},
-    {"id": "VG-6", "name": "Stability", "rule": "Positive ROI in >= 2 separate seasons and no single season > 60% of total profit; max drawdown published.", "mirrors": "nfl-edge G7; nfl-lines max_drawdown_units"},
-    {"id": "VG-7", "name": "Prospective replication", "rule": "After passing, the strategy must replicate prospectively (paper) before any reward is paid.", "mirrors": "nfl-edge G8"},
-    {"id": "VG-8", "name": "Priceability", "rule": "Every leg obtainable at a real published price; parlay/prop families additionally pass the dependence check.", "mirrors": "nfl-edge G9"}
-  ],
-  "competition": {
-    "name": "Own4 Strategy Leaderboard",
-    "entry": "Any session or user may register a strategy by opening a registered entry: id, family, signal definition, stake rule, gate set version. Entries are pre-registered before grading.",
-    "scoring": "Primary: BH-FDR-adjusted significance at the sample floor. Secondary (published, never hidden): ROI, Wilson interval, CLV, max drawdown, seasons stable.",
-    "reward_pool": {
-      "total_points": 1000,
-      "rule": "1,000 points to the single strategy that passes ALL gates at the sample floor in a season; 0 otherwise. No partial credit, no discretionary bonuses.",
-      "reason": "Non-monetary. A cash prize on an unvalidated model turns research into promotion.",
-      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json"
-    },
-    "tiers": {
-      "Qualified": "All gates pass -> eligible for the reward decision",
-      "Bronze (no reward)": "5-9 gates pass -> listed, zero points, no claim of edge",
-      "Rejected": "<5 gates pass -> listed as rejected, zero points"
-    },
-    "anti_gaming": [
-      "Strategy ids are immutable after first graded bet; changes create a new id.",
-      "Multiple-testing is handled by BH-FDR across ALL registered strategies of the season, not per author.",
-      "Any strategy whose edge disappears against closing lines is rejected regardless of ROI vs opening lines.",
-      "Leaderboard publishes the luck columns (Wilson, required-n, BH) next to ROI so variance cannot masquerade as skill."
-    ],
-    "current_state": "0 of 15 registered strategies (nfl-lines walk-forward set) are reward-eligible; all BH-adjusted p-values exceed 0.05; confirmation windows below the 300-bet floor. The competition is, by design, currently a rejection machine."
+ "dataset": "strategy_research_and_competition",
+ "session": "arena/d6c72eb4-own4",
+ "captured_utc": "2026-11-13",
+ "note": "Framework document. Method rows describe planned/registered methodology; numeric results are quoted from cited in-repo files and were re-checked in this session's verification pass. No performance number appears here without a source.",
+ "signals": [
+  {
+   "id": "SIG-01",
+   "name": "Line-origination gap (model vs market)",
+   "how": "Walk-forward team-strength model produces a spread/total per game; signal = |own - market| above a threshold. Pre-registered thresholds 3.0 and 4.0 pts are backtested in-repo.",
+   "status": "Registered and backtested (S-SP-3.0, S-SP-4.0 in the leaderboard); edge not significant after BH-FDR.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"
   },
-  "luck_removal": {
-    "principles": [
-      "Skill = performance that variance alone cannot explain, at the strategy's sample size, after correcting for the number of strategies tried.",
-      "Every ranked list carries: n, ROI, win rate, break-even rate, Wilson 95% interval, required-n for 80% power, raw p, BH-adjusted p, max drawdown.",
-      "A strategy whose Wilson interval contains break-even is reported as 'not distinguishable from luck' regardless of point estimate.",
-      "ROI-only leaderboards are prohibited."
-    ],
-    "formulas": [
-      "Wilson 95% interval: center = (p + z^2/2n)/(1+z^2/n), half = z*sqrt(p(1-p)/n + z^2/4n^2)/(1+z^2/n), z=1.96",
-      "Required n for 80% power at observed edge: n ≈ (1.96+0.84)^2 * p(1-p) / (p - p_break_even)^2 (normal approximation)",
-      "Multiple testing: Benjamini-Hochberg at q=0.05 across the whole registered family"
-    ],
-    "computed_on": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json"
+  {
+   "id": "SIG-02",
+   "name": "Closing-line value (CLV)",
+   "how": "Compare the price obtained at bet time with the closing number; positive CLV is the most robust skill proxy in market betting.",
+   "status": "Method adopted in the gate design; per-bet CLV history requires timestamped market snapshots (blocked by Q-05/S-05).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/questions.json"
+  },
+  {
+   "id": "SIG-03",
+   "name": "Injury/depth availability shock",
+   "how": "Track starter absences by unit (this site's depth tracker) and measure market underreaction the following week.",
+   "status": "Tracker live for 8 teams; signal NOT registered as a strategy yet \u2014 needs the S-08 ablation first.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/depth_deficiency.json"
+  },
+  {
+   "id": "SIG-04",
+   "name": "Rest / travel differential",
+   "how": "Back the side with >= 3 extra rest days.",
+   "status": "Registered and backtested (S-REST-3: n=874, ROI -1.42%); the model's rest term is under suspicion (Q-02).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"
+  },
+  {
+   "id": "SIG-05",
+   "name": "Weather (wind) on totals",
+   "how": "Unders in outdoor games with forecast wind >= 15 mph, captured game-day morning only.",
+   "status": "Registered and backtested (S-WIND-UNDER: n=303, ROI +7.77%, BH-adjusted p=0.444 \u2014 not distinguishable from luck). Forecast capture method per S-11.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"
+  },
+  {
+   "id": "SIG-06",
+   "name": "Backup-quarterback / lineup deficiency",
+   "how": "Fade or shade teams starting 2nd/3rd/4th-string players at premium positions.",
+   "status": "Data now exists (depth_deficiency.json); NOT registered \u2014 must be pre-registered before Week 11 to avoid post-hoc fitting.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/depth_deficiency.json"
+  },
+  {
+   "id": "SIG-07",
+   "name": "Player-prop combo mispricing",
+   "how": "Correlated prop combos (QB-WR, game script) priced as independent legs by the market.",
+   "status": "Grading data EXISTS (official nfl.com game logs, verified 2026-11-13). Prices BLOCKED: no verified prop odds anywhere. Combos can be pre-registered and graded on logs but cannot pass the priceability gate until an odds feed exists.",
+   "source_url": "https://www.nfl.com/players/drake-maye/stats"
   }
+ ],
+ "families": [
+  {
+   "id": "FAM-1",
+   "name": "Single bets",
+   "definition": "One side, total or (future) prop, graded at closing prices.",
+   "requirements": "n>=300 graded; every bet timestamped vs closing line; flat or Kelly-capped stake pre-registered."
+  },
+  {
+   "id": "FAM-2",
+   "name": "Parlays (cross-game)",
+   "definition": "2-5 legs from different games; correlation assumed 0 across games (supported: CR-07/CR-08 show near-zero same-game side-total dependence; cross-game pairs are independent by construction).",
+   "requirements": "Legs individually pass FAM-1 gates; combined price from the same market source; dependence documented in the correlation register."
+  },
+  {
+   "id": "FAM-3",
+   "name": "Same-game parlays & player-prop combos",
+   "definition": "Legs inside one game (side/total/team totals/player props).",
+   "requirements": "Leg grades come from official nfl.com game logs (available). Leg PRICES must come from a licensed odds feed (missing) \u2014 the family stays behind the gate until prices exist (Q-04); dependence must be priced explicitly (S-10)."
+  }
+ ],
+ "validation_gates": [
+  {
+   "id": "VG-1",
+   "name": "Data integrity",
+   "rule": "Every input traceable to a source link; unverifiable values blank and flagged; no inferred fills.",
+   "mirrors": "nfl-edge G10 (source and honesty gate)"
+  },
+  {
+   "id": "VG-2",
+   "name": "Pre-registration",
+   "rule": "Signal definition, thresholds, stake rule and gate set are written to the repo BEFORE the first graded bet of the confirmation window.",
+   "mirrors": "nfl-edge G6/G8 discipline; nfl-lines pre-registration note"
+  },
+  {
+   "id": "VG-3",
+   "name": "Sample floor",
+   "rule": "n >= 300 graded bets in the confirmatory window before any reward consideration.",
+   "mirrors": "nfl-edge G1"
+  },
+  {
+   "id": "VG-4",
+   "name": "Luck removal",
+   "rule": "BH-FDR across the strategy family at q=0.05; Wilson 95% interval on hit rate must exclude break-even; ROI list deflated (S-09).",
+   "mirrors": "nfl-edge G6 (placebo), nfl-lines z-score/p_value_bh columns"
+  },
+  {
+   "id": "VG-5",
+   "name": "Market bar",
+   "rule": "Strategy must show positive CLV or beat the closing line; beating the opening line only is insufficient.",
+   "mirrors": "nfl-edge G4"
+  },
+  {
+   "id": "VG-6",
+   "name": "Stability",
+   "rule": "Positive ROI in >= 2 separate seasons and no single season > 60% of total profit; max drawdown published.",
+   "mirrors": "nfl-edge G7; nfl-lines max_drawdown_units"
+  },
+  {
+   "id": "VG-7",
+   "name": "Prospective replication",
+   "rule": "After passing, the strategy must replicate prospectively (paper) before any reward is paid.",
+   "mirrors": "nfl-edge G8"
+  },
+  {
+   "id": "VG-8",
+   "name": "Priceability",
+   "rule": "Every leg obtainable at a real published price; parlay/prop families additionally pass the dependence check.",
+   "mirrors": "nfl-edge G9"
+  }
+ ],
+ "competition": {
+  "name": "Own4 Strategy Leaderboard",
+  "entry": "Any session or user may register a strategy by opening a registered entry: id, family, signal definition, stake rule, gate set version. Entries are pre-registered before grading.",
+  "scoring": "Primary: BH-FDR-adjusted significance at the sample floor. Secondary (published, never hidden): ROI, Wilson interval, CLV, max drawdown, seasons stable.",
+  "reward_pool": {
+   "total_points": 1000,
+   "rule": "1,000 points to the single strategy that passes ALL gates at the sample floor in a season; 0 otherwise. No partial credit, no discretionary bonuses.",
+   "reason": "Non-monetary. A cash prize on an unvalidated model turns research into promotion.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json"
+  },
+  "tiers": {
+   "Qualified": "All gates pass -> eligible for the reward decision",
+   "Bronze (no reward)": "5-9 gates pass -> listed, zero points, no claim of edge",
+   "Rejected": "<5 gates pass -> listed as rejected, zero points"
+  },
+  "anti_gaming": [
+   "Strategy ids are immutable after first graded bet; changes create a new id.",
+   "Multiple-testing is handled by BH-FDR across ALL registered strategies of the season, not per author.",
+   "Any strategy whose edge disappears against closing lines is rejected regardless of ROI vs opening lines.",
+   "Leaderboard publishes the luck columns (Wilson, required-n, BH) next to ROI so variance cannot masquerade as skill."
+  ],
+  "current_state": "0 of 15 registered strategies (nfl-lines walk-forward set) are reward-eligible; all BH-adjusted p-values exceed 0.05; confirmation windows below the 300-bet floor. The competition is, by design, currently a rejection machine."
+ },
+ "luck_removal": {
+  "principles": [
+   "Skill = performance that variance alone cannot explain, at the strategy's sample size, after correcting for the number of strategies tried.",
+   "Every ranked list carries: n, ROI, win rate, break-even rate, Wilson 95% interval, required-n for 80% power, raw p, BH-adjusted p, max drawdown.",
+   "A strategy whose Wilson interval contains break-even is reported as 'not distinguishable from luck' regardless of point estimate.",
+   "ROI-only leaderboards are prohibited."
+  ],
+  "formulas": [
+   "Wilson 95% interval: center = (p + z^2/2n)/(1+z^2/n), half = z*sqrt(p(1-p)/n + z^2/4n^2)/(1+z^2/n), z=1.96",
+   "Required n for 80% power at observed edge: n \u2248 (1.96+0.84)^2 * p(1-p) / (p - p_break_even)^2 (normal approximation)",
+   "Multiple testing: Benjamini-Hochberg at q=0.05 across the whole registered family"
+  ],
+  "computed_on": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json"
+ }
 }

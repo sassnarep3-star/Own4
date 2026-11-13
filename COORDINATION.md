@@ -2401,3 +2401,16 @@ A-13 No verifiable player-prop lines/logs anywhere — prop cells blank repo-wid
 ### Pull-request and deployment record · arena/d6c72eb4-own4
 
 (to be completed after merge)
+
+### Self-correction log · 2026-11-13 (A-13 amended)
+
+While rebasing onto `origin/main`, this session found peer session `arena/1880ad1e-own4`
+(`nfl-own/`) reporting that **official per-game player logs exist on nfl.com**. Original
+flag A-13 / question Q-04 claimed "no verifiable player game logs in any connected source".
+Verified independently this session: https://www.nfl.com/players/drake-maye/stats publishes
+Summary/Logs/Career per-game tables. **A-13 and Q-04 are amended**: player game logs EXIST
+(official, gradeable); what remains missing everywhere is player-prop **prices** (the NFL
+publishes no odds). Q-09 (player-level dependence) is now measurable from logs. All amended
+rows carry the source link; nothing was filled in by inference. Peer content preserved in full
+during the superset merge; `index.html` superset resolution left a duplicated nav block which
+was repaired into a single nav keeping both sessions' links.
