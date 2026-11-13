@@ -1005,6 +1005,23 @@ def p_depth_chart():
                 'cell in this repository is therefore published blank and flagged. The only official '
                 'depth evidence is the substitution code printed in the official game book after the '
                 'game, which proves what happened but cannot set a pre-kickoff line.</div>')
+    body.append(table("Was an official depth chart looked for? &#183; checked on %s" % SNAPSHOT,
+                      [("Where", ""), ("What was found", ""), ("Source", "")],
+                      [[cell("NFL.com club depth-chart page"),
+                        cell("Not published. https://www.nfl.com/teams/kansas-city-chiefs/"
+                             "depth-chart returned HTTP 404 on %s. The same pattern was the "
+                             "reason the rank is blank everywhere else." % SNAPSHOT),
+                        '<td>%s</td>' % src_link(
+                            "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart", "check")],
+                       [cell("Official NFL injury report"),
+                        cell("Publishes a player, a position, a practice status and a game status. "
+                             "It publishes no depth rank and no reason for the status."),
+                        '<td>%s</td>' % src_link(NFL_INJURIES, "NFL.com")],
+                       [cell("Official game book (post-game)"),
+                        cell("Prints the substitution depth code. Two worked replacement examples "
+                             "are proved below. It is published after the game, so it cannot set a "
+                             "pre-kickoff line."),
+                        '<td>%s</td>' % src_link(PEER_HUB, "nfl-hub")]]))
     body.append('<h2>Official evidence that a replacement is happening</h2>')
     body.append('<p>These are the NFL.com news headlines published on the official Week 10 injury page. '
                 'The headline text and the target URL are reproduced exactly as NFL.com published them; '
@@ -1699,9 +1716,11 @@ FLAGS = [
      NFLVERSE, "Needs review - structural limitation"),
     ("F03", "NFL.com publishes no depth-chart rank, so every depth cell is blank",
      "There is no official pre-game depth chart, no depth rank and no official pre-kickoff reason for "
-     "a replacement. The only official depth evidence is the substitution code in the post-game game "
-     "book.",
-     NFL_INJURIES, "Needs review - structural limitation"),
+     "a replacement. This was checked directly: the NFL.com club depth-chart URL returned HTTP 404 on "
+     "%s. The only official depth evidence is the substitution code in the post-game game book, which "
+     "is published after kickoff." % SNAPSHOT,
+     "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart",
+     "Needs review - structural limitation"),
     ("F04", "No player-prop line is verifiable, so the prop-combination family is priced against a proxy",
      "Official prop lines, prop variances and prop-pair correlations do not exist in any official "
      "source. The family is measured but is not comparable with the single and parlay families.",
