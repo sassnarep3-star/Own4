@@ -47,8 +47,18 @@ jobs:
         run: |
           git status --porcelain -- nfl-origination
           git diff --stat -- nfl-origination/data nfl-origination/pages
-          git diff -- nfl-origination/data nfl-origination/pages | head -200
+          git diff -- nfl-origination/data nfl-origination/pages > drift.txt || true
+          wc -l drift.txt
+          head -c 1500 drift.txt
           git diff --exit-code -- nfl-origination/data nfl-origination/pages
+
+      - name: Upload drift
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift
+          path: drift.txt
+          if-no-files-found: warn
 
       - name: Reconciliation must pass
         run: |
