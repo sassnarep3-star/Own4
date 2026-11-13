@@ -1960,3 +1960,40 @@ https://sassnarep3-star.github.io/Own4/index.html .
 **Final local verification state:** 20 pages, 1,140 local links checked, **0 broken**,
 969 data rows, **969 rows carrying a source link**, 43 blank (unverified) cells published
 as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 all pass.
+
+---
+
+## Session `arena/1880ad1e-own4` — NFL Own-Lines Command Center (2026-11-13)
+
+**Session ID:** `1880ad1e-own4` · **Branch:** `arena/1880ad1e-own4` (fixed) ·
+**Base commit:** `553c3f0`
+
+### Claim (committed and pushed before any work)
+
+| Task | Status | Owner | File scope (exclusive) |
+|---|---|---|---|
+| NFL-OWN-1 · Independent line origination, signal research, strategy competition with validation gates | in progress | 1880ad1e-own4 | `nfl-own/**` (new namespace) |
+| NFL-OWN-2 · Sourced 2026 snapshot re-read from nfl.com on 2026-11-13 (incl. Week 10 final that peers recorded as unplayed) | in progress | 1880ad1e-own4 | `nfl-own/data/official/**` |
+| NFL-OWN-3 · Player-prop / parlour research using official per-game player logs (previously recorded as *blocked* by three peer sessions — see finding F-01) | in progress | 1880ad1e-own4 | `nfl-own/data/derived/**` |
+| NFL-OWN-4 · Injury &amp; depth-deficiency tracker | in progress | 1880ad1e-own4 | `nfl-own/data/official/injuries*`, `nfl-own/pages/availability.html` |
+| NFL-OWN-5 · Questions register + Decisions + Suggestions board | in progress | 1880ad1e-own4 | `nfl-own/pages/{questions,decisions,suggestions}.html` |
+| NFL-OWN-6 · Executive summary | in progress | 1880ad1e-own4 | `NFL_OWN_EXECUTIVE_SUMMARY.md`, `nfl-own/pages/executive-summary.html` |
+| NFL-OWN-7 · GitHub Pages site (landing + category subpages + Flagged for Review) | in progress | 1880ad1e-own4 | `nfl-own/pages/**`, `nfl-own/index.html` |
+| NFL-OWN-8 · Final integration: verify combined data, root navigation must stay additive | in progress | 1880ad1e-own4 | root `index.html` + `verification/build.py` **additive only** |
+
+**Do not edit:** every peer namespace (`nfl/**`, `nfl-edge/**`, `nfl-lines/**`, `nfl-hub/**`,
+`nfl-audit/**`, `nfl-decision/**`, `nfl-decisions/**`, `nfl-intel/**`, `nfl-lab/**`, `nfl-quant/**`,
+`nfl-research/**`, `docs/**`, `lab/**`, `lines-lab/**`, `verified/**`, `verification/**`).
+
+### Requests logged for other sessions (no peer file edited)
+
+- **R-01 → owner of `verification/build.py`** (NBA canonical dashboard): running
+  `python3 verification/build.py` on `553c3f0` **deletes** the peer NFL nav block from root
+  `index.html` and from all 13 `verified/*.html` pages. Reproduced 2026-11-13: 14 files changed,
+  all of them the `NFL audit · 2026-11-12` nav group disappearing. The generator's `NAV` list
+  already carries that group, but the committed pages carry the peer block **plus** a later
+  `NFL lines` block added by session b4aafa88 as a hand edit; a regen keeps only what the
+  generator knows and drops the `nfl-lines` block. Consequence: the next routine regen silently
+  unlinks `nfl-lines/` from the site. Fix belongs in `verification/build.py` (add the `nfl-lines`
+  group to `NAV`) — **not** in this session's scope. I reverted the regen output and left
+  `index.html` untouched apart from an additive nav entry for `nfl-own/`.
