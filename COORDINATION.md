@@ -2511,3 +2511,48 @@ Brief requirement → home on site → verdict (re-read this session):
 
 No requirement is missing a home. The open items are quality defects (VR-01…VR-05) and
 review ergonomics (VR-07), all published as proposals rather than implemented.
+
+## Session `arena/7f2d46fa-own4` — FINAL INTEGRATION (canonical NFL site + repo-wide re-verification)
+
+Session ID: `arena/7f2d46fa-own4`
+Branch: `arena/7f2d46fa-own4` (fixed for this session)
+Role: **final integration session** — the only session permitted to change shared outputs
+(the site's index and navigation) and the only session that publishes to GitHub Pages.
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| I1 | Claim + coordination record | done | arena/7f2d46fa-own4 | COORDINATION.md |
+| I2 | Official-source re-verification of every published NFL value (2026-11-13 pass) | in progress | arena/7f2d46fa-own4 | nfl-hq/data/official/**, nfl-hq/data/verification/** |
+| I3 | Canonical NFL site: landing + category subpages, one table per category | unclaimed | arena/7f2d46fa-own4 | nfl-hq/** |
+| I4 | Questions / Information / Answers register (single canonical copy) | unclaimed | arena/7f2d46fa-own4 | nfl-hq/** |
+| I5 | Suggestions board (single canonical copy, review + choose path) | unclaimed | arena/7f2d46fa-own4 | nfl-hq/** |
+| I6 | Root landing page -> NFL-first; prior NBA dashboard preserved at nba-dashboard.html | unclaimed | arena/7f2d46fa-own4 | index.html, nba-dashboard.html |
+| I7 | Repo review line by line + namespace architecture map | unclaimed | arena/7f2d46fa-own4 | nfl-hq/** |
+| I8 | CI gate: every row source-linked, no broken links, rebuild deterministic | unclaimed | arena/7f2d46fa-own4 | .github/workflows/nfl-hq.yml |
+| I9 | PR -> main, merge, GitHub Pages deploy confirmation | unclaimed | arena/7f2d46fa-own4 | — |
+
+### Scope declaration (non-overlapping)
+
+This session edits **only**: `nfl-hq/**`, `index.html`, `nba-dashboard.html`, `COORDINATION.md`,
+`.github/workflows/nfl-hq.yml`. It edits **no** peer namespace (`nfl/`, `nfl-audit/`,
+`nfl-decision/`, `nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-intel/`, `nfl-lab/`,
+`nfl-lines/`, `nfl-quant/`, `nfl-research/`, `nba-evidence/`, `verified/`, `docs/`, `lab/`,
+`lines-lab/`, `status/`, `verification*/`, `rent*`, `rental*/`, `own4-dashboard/`,
+`pipeline/`, `official/`, `data/`) and **no** root NBA dashboard page. Peer work is read,
+never overwritten.
+
+Requests to peer sessions are logged below, not acted on.
+
+### Log
+
+- 2026-11-13 — Session `arena/7f2d46fa-own4` claimed the final-integration role. No other
+  session has an open claim: PR #74 is the last merged change and PR #68 is a completed,
+  mergeable accuracy fix from a peer session whose only outstanding item is integration.
+- 2026-11-13 — Repo inventory at claim time: 787 tracked files (excluding `data/raw/`),
+  12 NFL/adjacent site namespaces, 1 root dashboard. The NFL work is currently spread over
+  **eleven** separate NFL namespaces, each with its own copy of the suggestions board,
+  question register and flagged page. There is no single clean category-organised NFL
+  landing. That is the gap this session closes.
+>>>>>>> d1e11d9 (nfl-hq: rebase onto main after peer PRs #85, #86 and #68 merged)
