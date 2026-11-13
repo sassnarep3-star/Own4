@@ -203,6 +203,7 @@ def main():
     amendment = load_json(os.path.join(ROOT, "data", "parameter_amendment_1.json"))
 
     src_of = {s["id"]: s["url"] for s in articles["sources"]}
+    own_by_id = {r["game_id"]: r for r in own_lines["rows"]}
     written = []
 
     def write(fn, title, body):
@@ -261,10 +262,12 @@ def main():
         "slate_table": table(
             ["Matchup", "Day and time", "Network", "Own spread", "Own total", "Source"],
             [[td("%s at %s" % (g["away"], g["home"])), td("%s, %s" % (g["day"], g["kickoff"])), td(g["network"]),
-              td("%.2f" % own_lines["rows"][i]["own_spread_home"], "num") if i < len(own_lines["rows"]) else BLANK,
-              td("%.2f" % own_lines["rows"][i]["own_total"], "num") if i < len(own_lines["rows"]) else BLANK,
+              td("%.2f" % own_by_id[g["game_id"]]["own_spread_home"], "num")
+              if g["game_id"] in own_by_id and not own_by_id[g["game_id"]].get("played") else td("already played"),
+              td("%.2f" % own_by_id[g["game_id"]]["own_total"], "num")
+              if g["game_id"] in own_by_id and not own_by_id[g["game_id"]].get("played") else BLANK,
               src_cell(g["url"], "nfl.com game page")]
-             for i, g in enumerate(slate["games"])]),
+             for g in slate["games"]]),
     }
     write("index.html", "Overview", body)
 
@@ -512,8 +515,10 @@ def main():
         "own": table(
             ["Matchup", "Kickoff", "Own spread (home)", "Own total", "Own home win probability", "Home games rated", "Market spread", "Market total", "Source"],
             [[td("%s at %s" % (r["away"], r["home"])), td("%s, %s" % (r["day"], r["kickoff"])),
-              td("%.2f" % r["own_spread_home"], "num"), td("%.2f" % r["own_total"], "num"),
-              td("%.4f" % r["own_home_win_prob"], "num"), td(r["home_rated_games"], "num"),
+              td("%.2f" % r["own_spread_home"], "num") if not r.get("played") else td("already played"),
+              td("%.2f" % r["own_total"], "num") if not r.get("played") else BLANK,
+              td("%.4f" % r["own_home_win_prob"], "num") if not r.get("played") else BLANK,
+              td(r["home_rated_games"], "num"),
               td(BLANK), td(BLANK), src_cell(r["url"], "nfl.com game page")]
              for r in own_lines["rows"]]),
         "mkt": table(

@@ -861,8 +861,11 @@ def main():
 
     # ---------------------------------------------------------------- own lines
     slate = load_json(os.path.join(ROOT, "data", "official", "slate_week10_2026.json"))
-    fc_by_id = {f["game_id"]: f for f in fc}
-    fc_by_id.update({f["game_id"]: f for f in fc_up})
+    def norm_gid(gid):
+        # the third-party archive uses ARI where NFL.com uses AZ
+        return gid.replace("_ARI", "_AZ")
+    fc_by_id = {norm_gid(f["game_id"]): f for f in fc}
+    fc_by_id.update({norm_gid(f["game_id"]): f for f in fc_up})
     own_lines = []
     for gm in slate["games"]:
         gid = gm["game_id"]
@@ -871,7 +874,11 @@ def main():
             continue
         g = games_by_id.get(gid)
         own_lines.append({
-            "game_id": gid, "away": gm["away"], "home": gm["home"],
+            "game_id": gid, "archive_game_id": f["game_id"],
+            "away": gm["away"], "home": gm["home"],
+            "played": f["played"],
+            "result": (("%s %d, %s %d" % (gm["home"], f["actual_home_pts"], gm["away"], f["actual_away_pts"]))
+                       if f["played"] and f.get("actual_home_pts") is not None else None),
             "day": gm["day"], "kickoff": gm["kickoff"], "network": gm["network"],
             "url": gm["url"], "status": gm["status"],
             "own_spread_home": round(f["pred_margin"], 2),

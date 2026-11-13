@@ -98,6 +98,7 @@ def run(variant=None, games=None):
             "home_games_played": games_played[h], "away_games_played": games_played[a],
             "cold_start": games_played[h] < 8 or games_played[a] < 8,
             "actual_margin": g["margin"], "actual_total": g["total"],
+            "actual_home_pts": g["home_pts"], "actual_away_pts": g["away_pts"],
             "played": g["played"],
             "margin_error": round(g["margin"] - pred_margin, 3) if g["played"] else None,
             "total_error": round(g["total"] - pred_total, 3) if g["played"] else None,
