@@ -1,0 +1,96 @@
+{
+ "dataset": "flagged_irregularities",
+ "rows": [
+  {
+   "id": "F-01",
+   "issue": "Three earlier NFL sessions recorded player props as blocked; they are not.",
+   "detail": "nfl.com/players/<slug>/stats/logs/ publishes per-game logs and they reconcile to season totals (IC-15, IC-16).",
+   "source_url": "https://www.nfl.com/players/drake-maye/stats/logs/",
+   "status": "corrected here"
+  },
+  {
+   "id": "F-02",
+   "issue": "Week 10 injury page still shows pre-game records (WAS 3-5-1, NYG 5-3-1).",
+   "detail": "The Thursday game finished 24-21 on 2026-11-12; live standings show WAS 3-5-1 / NYG 5-3-1 including it. The injury page was not refreshed after the game.",
+   "source_url": "https://www.nfl.com/schedules/2026/REG10",
+   "status": "flagged, non-blocking"
+  },
+  {
+   "id": "F-03",
+   "issue": "Published passing AVG does not reproduce yds/att on 4 of 32 rows.",
+   "detail": "JAX 8.6 vs 8.546, KC 7.8 vs 7.745, PIT 6.4 vs 6.452, SEA 7.2 vs 7.253 - both directions, so it is not a rounding rule. The published column is recorded but never used; the site publishes its own yds/att (IC-07).",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all",
+   "status": "recorded"
+  },
+  {
+   "id": "F-04",
+   "issue": "No official depth chart exists, so 2nd/3rd/4th-string replacement is not derivable.",
+   "detail": "The club depth-chart URL returns 404; the roster page carries no depth rank. Availability is published by position, never as a starter/backup label.",
+   "source_url": "https://www.nfl.com/teams/new-england-patriots/depthchart",
+   "status": "blocked"
+  },
+  {
+   "id": "F-05",
+   "issue": "The historical archive is third-party and its licence was not reviewed.",
+   "detail": "7,548 games with closing spread and total; used for research only.",
+   "source_url": "https://github.com/nflverse/nfldata",
+   "status": "flagged"
+  },
+  {
+   "id": "F-06",
+   "issue": "No market price exists for 2026, so every market cell is blank.",
+   "detail": "The NFL publishes no lines; no licensed price archive is in scope.",
+   "source_url": "https://www.nfl.com/scores/2026/REG10",
+   "status": "blocked"
+  },
+  {
+   "id": "F-07",
+   "issue": "Home-field advantage carries a 0.85 haircut that is a judgement call.",
+   "detail": "Measured 2017-2025 home margin, then multiplied by 0.85 to shrink toward published ranges. The raw value and the used value are both published.",
+   "source_url": "nfl-lines/data/raw/nfldata_games.csv",
+   "status": "flagged"
+  },
+  {
+   "id": "F-08",
+   "issue": "Player-level correlations rest on 3-8 official games each.",
+   "detail": "Sample sizes are printed next to every r. Nothing is claimed beyond those samples.",
+   "source_url": "https://www.nfl.com/players/jahmyr-gibbs/stats/logs/",
+   "status": "flagged"
+  },
+  {
+   "id": "F-09",
+   "issue": "A.J. Brown's season receiving total is not published on any page read.",
+   "detail": "He is outside the top-25 leaderboard, so his season columns are blank and only his game log is published (IC-16).",
+   "source_url": "https://www.nfl.com/players/a-j-brown/stats/logs/",
+   "status": "blank, unverified"
+  },
+  {
+   "id": "F-10",
+   "issue": "The row-level identity of the 15-value team passing table is partially proven.",
+   "detail": "Columns 1-8 and 14-15 are proven by arithmetic; columns 9-13 (first downs, 20+, 40+, long) are omitted rather than guessed.",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all",
+   "status": "omitted"
+  },
+  {
+   "id": "F-11",
+   "issue": "R-01: a root dashboard rebuild deletes peer NFL navigation.",
+   "detail": "Reproduced 2026-11-13 on 553c3f0: 14 files lose the nfl-lines nav block.",
+   "source_url": "verification/build.py",
+   "status": "requested from peer session"
+  },
+  {
+   "id": "F-12",
+   "issue": "Break-even rates assume -110 on every leg.",
+   "detail": "51.35% for two-leg, 52.38%... every threshold here moves with the price.",
+   "source_url": "https://www.ncpgambling.org/help-treatment/",
+   "status": "assumption, stated"
+  },
+  {
+   "id": "F-13",
+   "issue": "No strategy has passed G12 (prospective replication).",
+   "detail": "Backtest-only evidence cannot exclude luck; see luck.json L4.",
+   "source_url": "nfl-own/data/derived/luck.json",
+   "status": "open"
+  }
+ ]
+}

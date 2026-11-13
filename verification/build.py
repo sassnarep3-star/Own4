@@ -191,6 +191,23 @@ NAV = [
         ("nfl-command/pages/injuries.html", "NFL Command — injuries", "legacy"),
         ("nfl-command/pages/depth.html", "NFL Command — depth &amp; deficiencies", "legacy"),
         ("nfl-command/pages/flagged.html", "⚑ NFL Command — flagged for review", "legacy"),
+        # Added 2026-11-13 by session arena/582300df-own4 (NFL Command Center). The
+        # namespace is nfl-command-center/ because nfl-command/ was already published
+        # by session arena/934af359-own4; this session did not touch that namespace.
+        ("nfl-command-center/pages/index.html", "NFL Command Center — dashboard", "legacy"),
+        ("nfl-command-center/pages/executive-summary.html", "NFL Command Center — executive summary", "legacy"),
+        ("nfl-command-center/pages/findings.html", "NFL Command Center — findings", "legacy"),
+        ("nfl-command-center/pages/traceability.html", "NFL Command Center — traceability", "legacy"),
+        ("nfl-command-center/pages/decisions.html", "NFL Command Center — decision register", "legacy"),
+        ("nfl-command-center/pages/suggestions.html", "NFL Command Center — suggestions", "legacy"),
+        ("nfl-command-center/pages/own-lines.html", "NFL Command Center — own lines", "legacy"),
+        ("nfl-command-center/pages/strategies.html", "NFL Command Center — strategy leaderboard", "legacy"),
+        ("nfl-command-center/pages/correlations.html", "NFL Command Center — correlations", "legacy"),
+        ("nfl-command-center/pages/injuries.html", "NFL Command Center — injuries", "legacy"),
+        ("nfl-command-center/pages/depth-chart.html", "NFL Command Center — depth chart", "legacy"),
+        ("nfl-command-center/pages/audit.html", "NFL Command Center — repository audit", "legacy"),
+        ("nfl-command-center/pages/methodology.html", "NFL Command Center — methodology", "legacy"),
+        ("nfl-command-center/pages/flagged-for-review.html", "⚑ NFL Command Center — flagged for review", "legacy"),
         ("nfl-arena/index.html", "NFL Decision &amp; Strategy Hub", "legacy"),
         ("nfl-arena/pages/executive-summary.html", "Hub executive summary", "legacy"),
         ("nfl-arena/pages/questions.html", "Questions &amp; answers register", "legacy"),

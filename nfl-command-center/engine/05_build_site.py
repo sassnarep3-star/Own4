@@ -206,7 +206,21 @@ def main():
     own_by_id = {r["game_id"]: r for r in own_lines["rows"]}
     written = []
 
+    t = audit["totals"]
+    tokens = {
+        "{audit_files}": "{:,}".format(t["files_audited"]),
+        "{audit_flagged}": str(t["files_flagged"]),
+        "{audit_placeholders}": str(t["files_with_placeholders"]),
+        "{audit_rows}": "{:,}".format(t["table_rows"]),
+        "{audit_rows_linked}": "{:,}".format(t["table_rows_with_a_link"]),
+        "{audit_rows_unlinked}": "{:,}".format(t["table_rows"] - t["table_rows_with_a_link"]),
+        "{audit_official_links}": "{:,}".format(t["official_links"]),
+        "{audit_conflicts}": str(t["cross_namespace_record_conflicts"]),
+    }
+
     def write(fn, title, body):
+        for k, v in tokens.items():
+            body = body.replace(k, v)
         with open(os.path.join(PAGES, fn), "w", encoding="utf-8") as fh:
             fh.write(page(title, body, fn))
         written.append(fn)
@@ -362,7 +376,7 @@ def main():
                 {"id": "F-08", "name": "The official sources rarely state a replacement starter's depth",
                  "detail": "Seven depth deficiency rows are supported by an official article or an official game book. Only the two Baltimore quarterback rows carry an official depth-chart code. The other five are blank and marked unverified rather than guessed."},
                 {"id": "F-09", "name": "The prior workspaces carry 1,275 table rows with no source link",
-                 "detail": "Across 927 audited files there are 10,442 table rows, of which 9,167 carry a link and 1,275 do not. Forty-five files are flagged and 28 still contain placeholder text. The prior namespaces are outside this session's claim, so they were read and audited but not rewritten."},
+                 "detail": "Across {audit_files} audited files there are {audit_rows} table rows, of which {audit_rows_linked} carry a link and {audit_rows_unlinked} do not. {audit_flagged} files are flagged and {audit_placeholders} still contain placeholder text. The prior namespaces are outside this session's claim, so they were read and audited but not rewritten."},
                 {"id": "F-10", "name": "Player prop strategies cannot be priced from any official source",
                  "detail": "The NFL publishes no player prop prices and no official player game log was found for the current week. The two prop strategies are Blocked rather than evaluated: no return is reported for them and no reward is offered."},
             ]),
@@ -694,7 +708,7 @@ def main():
 <h2>By namespace</h2>
 %(ns)s
 <h2>Files with a finding</h2>
-<p>%(nflag)d files are flagged. The full list of all 927 audited files, with the findings for each and a manual review link, is published as JSON in the repository.</p>
+<p>%(nflag)d files are flagged. The full list of all {audit_files} audited files, with the findings for each and a manual review link, is published as JSON in the repository.</p>
 %(files)s
 """ % {
         "scope": audit["scope"],

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questions &amp; gaps · NFL Origination · Own4</title>
+<meta name="description" content="Questions &amp; gaps">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html" class="on">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html" class="on">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Decide / Questions &amp; unknowns</div>
+
+<h1>Questions &amp; unknowns</h1>
+<p class="lede">What must be answered before any decision is reasonable — with the known separated
+from the unknown. A blank <strong>Answer</strong> means no verified answer exists; nothing was
+inferred to fill it.</p>
+<div class="cards">
+<div class="card"><b>20</b><span>questions</span></div>
+<div class="card good"><b>7</b><span>answered from a source</span></div>
+<div class="card warn"><b>4</b><span>partly answered, gap named</span></div>
+<div class="card bad"><b>9</b><span>no verified answer</span></div>
+<div class="card flag"><b>9</b><span>answer fields left blank</span></div>
+</div>
+<div class="panel warn"><h3>How to read this</h3>
+<p>Each entry answers five things: what is <strong>known</strong> (with the official link), what is
+<strong>not known</strong>, <strong>why that blocks a decision</strong>, and which
+<strong>suggestion</strong> would obtain the missing input. When no verified answer exists the
+Answer cell stays blank and is counted above. <strong>9 of 20</strong> questions
+currently have no verified answer.</p></div>
+<h2>The register</h2>
+<div class="tw"><table class=""><caption>All 20 questions · status, what it blocks, and what would unblock it</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">Group</th><th scope="col" class="c">Status</th><th scope="col" class="">Question</th><th scope="col" class="">Blocks</th><th scope="col" class="">Known sources</th><th scope="col" class="">Unblocked by</th></tr></thead><tbody><tr><td class="">Q01</td><td class="">Market access</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">Where do we get a legally usable, archived price history for NFL markets?</td><td class="">Every betting strategy. Without a price, Gate G7 can never pass.</td><td class=""><span class="src"><a href="https://www.nfl.com/games" target="_blank" rel="noopener">↗ games</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><a href="suggestions.html#S01">S01</a></td></tr><tr><td class="">Q02</td><td class="">Market access</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">Which jurisdiction governs this project, and may derived lines be published?</td><td class="">Any reward described as anything more than research points.</td><td class=""><span class="src"><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">↗ www.ncpgambling.org/help-treatment</a></span></td><td class=""><a href="suggestions.html#S02">S02</a></td></tr><tr><td class="">Q03</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-good">known</span></td><td class="">Does the NFL publish an official depth chart?</td><td class="">Nothing further — this is answered. It does block depth-weighted rating (Q05).</td><td class=""><span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></td><td class=""><a href="suggestions.html#S03">S03</a></td></tr><tr><td class="">Q04</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">Is there an official archive of past weeks&#x27; injury reports?</td><td class="">Every historical injury backtest, and therefore every injury-adjusted line claim.</td><td class=""><span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></td><td class=""><a href="suggestions.html#S04">S04</a></td></tr><tr><td class="">Q05</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">How should a missing starter be converted into a points adjustment?</td><td class="">Any depth-weighted rating. This site publishes the sensitivity band instead of a point estimate.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693" target="_blank" rel="noopener">↗ news/competition-committee-approves-revisio…</a> <a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></td><td class=""><a href="suggestions.html#S05">S05</a></td></tr><tr><td class="">Q06</td><td class="">Injuries and depth</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">Which clubs have a confirmed change to who actually starts?</td><td class="">Nothing — this is answered as far as official sources allow.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a> <a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a> <a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season" target="_blank" rel="noopener">↗ news/ravens-lamar-jackson-right-thumb-out-6…</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q07</td><td class="">Strategy and validation</td><td class="c"><span class="pill p-good">known</span></td><td class="">Does a model built only from archived scores beat the closing line?</td><td class="">Nothing — this is answered, and the answer is negative.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q08</td><td class="">Strategy and validation</td><td class="c"><span class="pill p-good">known</span></td><td class="">What sample size is needed before a 55% hit rate is distinguishable from luck?</td><td class="">Nothing — answered. It is the reason G2 exists.</td><td class=""><span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q09</td><td class="">Strategy and validation</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">Are player-prop combos positively correlated enough to break independent pricing?</td><td class="">Any prop-combo strategy on the leaderboard.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><a href="suggestions.html#S06">S06</a></td></tr><tr><td class="">Q10</td><td class="">Strategy and validation</td><td class="c"><span class="pill p-good">known</span></td><td class="">Can parlay legs from different games be multiplied as if independent?</td><td class="">Nothing — answered for cross-game legs. Within-game legs are C2/C5.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q11</td><td class="">Strategy and validation</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">What definition of &#x27;skill&#x27; cannot be faked by re-running the search?</td><td class="">The reward design. A loose definition would pay for luck.</td><td class=""><span class="blank">no external source</span></td><td class=""><a href="suggestions.html#S07">S07</a></td></tr><tr><td class="">Q12</td><td class="">Data rights</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">Do the 2026 numbers on this site match an official source?</td><td class="">Nothing — answered.</td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">↗ games/commanders-at-giants-2026-reg-10</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q13</td><td class="">Data rights</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">May third-party archives be redistributed on a public site?</td><td class="">Any use beyond research, and any redistribution of the raw archive.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><a href="suggestions.html#S08">S08</a></td></tr><tr><td class="">Q14</td><td class="">Data rights</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">Can we obtain an official 2026 player-level box-score feed?</td><td class="">Any 2026 player-prop model, and any prop strategy on the leaderboard.</td><td class=""><span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></td><td class=""><a href="suggestions.html#S09">S09</a></td></tr><tr><td class="">Q15</td><td class="">Product</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">What exactly does a reward pay, and who funds it?</td><td class="">The leaderboard&#x27;s final design.</td><td class=""><span class="blank">no external source</span></td><td class=""><a href="suggestions.html#S07">S07</a></td></tr><tr><td class="">Q16</td><td class="">Product</td><td class="c"><span class="pill p-bad">unknown</span></td><td class="">Which single NFL dashboard is canonical?</td><td class="">Any reader knowing where to look, and any future session knowing what is current.</td><td class=""><span class="blank">no external source</span></td><td class=""><a href="suggestions.html#S10">S10</a></td></tr><tr><td class="">Q17</td><td class="">Product</td><td class="c"><span class="pill p-good">known</span></td><td class="">Is the site actually live, and does it build without broken links?</td><td class="">Nothing — answered.</td><td class=""><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></td><td class=""><span class="blank">none</span></td></tr><tr><td class="">Q18</td><td class="">Method</td><td class="c"><span class="pill p-warn">partial</span></td><td class="">Is the archive&#x27;s line column a price or an expectation?</td><td class="">Any precise claim about closing-line value.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><a href="suggestions.html#S11">S11</a></td></tr><tr><td class="">Q19</td><td class="">Method</td><td class="c"><span class="pill p-good">known</span></td><td class="">Does the injury adjustment change any originated line materially?</td><td class="">Nothing — answered, and the answer bounds the claim.</td><td class=""><span class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></td><td class=""><a href="suggestions.html#S05">S05</a></td></tr><tr><td class="">Q20</td><td class="">Method</td><td class="c"><span class="pill p-good">known</span></td><td class="">Did the placeholder strategies pass, and what does that prove?</td><td class="">Nothing — answered.</td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td><td class=""><span class="blank">none</span></td></tr></tbody></table><div class="tnote">A blank in the Unblocked-by column means no further information is needed to close the question. A blank in the sources column means the question is about this project's own choices rather than about an external fact.</div></div>
+<h2>Market access</h2><div class="qa" id="Q01">
+  <div class="q"><span class="id">Q01</span><span class="txt">Where do we get a legally usable, archived price history for NFL markets?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Every betting strategy. Without a price, Gate G7 can never pass.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The NFL publishes no betting prices anywhere on nfl.com; the game pages carry no odds values. The only line data in this repository is a third-party archive (nflverse/nfldata), used and labelled as third-party. <span class="src"><a href="https://www.nfl.com/games" target="_blank" rel="noopener">↗ games</a> <a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd>Whether a licensed price archive can be obtained, at what cost, and on what terms it may be stored and republished.</dd>
+    <dt>Why it blocks</dt><dd>Every betting strategy. Without a price, Gate G7 can never pass.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S01">S01</a></dd>
+  </dl></div></div><div class="qa" id="Q02">
+  <div class="q"><span class="id">Q02</span><span class="txt">Which jurisdiction governs this project, and may derived lines be published?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Any reward described as anything more than research points.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>Responsible-gambling help is published and cited site-wide as good practice. <span class="src"><a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">↗ www.ncpgambling.org/help-treatment</a></span></dd>
+    <dt>Not known</dt><dd>The operating jurisdiction, any licence status, and whether publishing derived probabilities is permitted there.</dd>
+    <dt>Why it blocks</dt><dd>Any reward described as anything more than research points.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S02">S02</a></dd>
+  </dl></div></div></div><h2>Injuries and depth</h2><div class="qa" id="Q03">
+  <div class="q"><span class="id">Q03</span><span class="txt">Does the NFL publish an official depth chart?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing further — this is answered. It does block depth-weighted rating (Q05).</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>No. https://www.nfl.com/depth-charts/ returns a 404 &#x27;Flag on the Play&#x27; page, re-checked on 2026-11-13. There is therefore no official source for a 1st/2nd/3rd/4th-string label.</dd>
+    <dt>Known</dt><dd>The official injury report gives per-player practice status and game status for every club with a Week 10 game. <span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a> <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing further — this is answered. It does block depth-weighted rating (Q05).</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S03">S03</a></dd>
+  </dl></div></div><div class="qa" id="Q04">
+  <div class="q"><span class="id">Q04</span><span class="txt">Is there an official archive of past weeks&#x27; injury reports?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Every historical injury backtest, and therefore every injury-adjusted line claim.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>nfl.com/injuries/ serves only the current week. Live pages from earlier weeks are not addressable. <span class="src"><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">↗ injuries/</a></span></dd>
+    <dt>Not known</dt><dd>Whether any official historical snapshot exists at any price.</dd>
+    <dt>Why it blocks</dt><dd>Every historical injury backtest, and therefore every injury-adjusted line claim.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S04">S04</a></dd>
+  </dl></div></div><div class="qa" id="Q05">
+  <div class="q"><span class="id">Q05</span><span class="txt">How should a missing starter be converted into a points adjustment?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Any depth-weighted rating. This site publishes the sensitivity band instead of a point estimate.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The published designation (OUT / DOUBTFUL / QUESTIONABLE) is available for 19 of 32 clubs this week. The league&#x27;s own injury-report policy explains what those words mean. <span class="src"><a href="https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693" target="_blank" rel="noopener">↗ news/competition-committee-approves-revisio…</a> <a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></dd>
+    <dt>Not known</dt><dd>Any measured conversion from &#x27;player out&#x27; to points. It needs snap counts and per-player value, neither of which is published.</dd>
+    <dt>Why it blocks</dt><dd>Any depth-weighted rating. This site publishes the sensitivity band instead of a point estimate.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S05">S05</a></dd>
+  </dl></div></div><div class="qa" id="Q06">
+  <div class="q"><span class="id">Q06</span><span class="txt">Which clubs have a confirmed change to who actually starts?</span>
+    <span class="pill p-warn">partial</span> <span class="pill p-neu">blocks: Nothing — this is answered as far as official sources allow.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>Eight, each named in official NFL.com reporting: SEA (Lock for Darnold), MIA (McCord for Willis), BAL (Brissett, with Jackson and Huntley on IR), MIN (Cousins for Murray), CLE (Watson for Sanders), AZ (Beck for Brissett), plus the Ravens&#x27; Week 9 third-string start by Fagnano and Milroe backing up Lock.</dd>
+    <dt>Known</dt><dd>Each change is transcribed with the article that states it. <span class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a> <a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" target="_blank" rel="noopener">↗ news/nfl-news-roundup-latest-league-updates…</a> <a href="https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season" target="_blank" rel="noopener">↗ news/ravens-lamar-jackson-right-thumb-out-6…</a></span></dd>
+    <dt>Not known</dt><dd>Whether any of these changes is already reflected in the third-party line.</dd>
+    <dt>Why it blocks</dt><dd>Nothing — this is answered as far as official sources allow.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div></div><h2>Strategy and validation</h2><div class="qa" id="Q07">
+  <div class="q"><span class="id">Q07</span><span class="txt">Does a model built only from archived scores beat the closing line?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — this is answered, and the answer is negative.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>No. Out of sample over 2018-2025 (2,126 graded games) our own model has a margin MAE of 10.913 against the closing line&#x27;s 9.848 and a naive baseline&#x27;s 11.067. It beats the naive baseline and loses to the market.</dd>
+    <dt>Known</dt><dd>The full walk-forward ledger is published game by game. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — this is answered, and the answer is negative.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div><div class="qa" id="Q08">
+  <div class="q"><span class="id">Q08</span><span class="txt">What sample size is needed before a 55% hit rate is distinguishable from luck?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — answered. It is the reason G2 exists.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>At -110 the break-even hit rate is 110/210 = 52.38%. Detecting 55% against that null needs roughly n = 1,700 bets for 80% power at alpha 0.05. Every strategy tested here falls short except the two benchmarks.</dd>
+    <dt>Known</dt><dd>The arithmetic is reproducible: z = (0.55-0.5238)/sqrt(0.5238*0.4762/n). <span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered. It is the reason G2 exists.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div><div class="qa" id="Q09">
+  <div class="q"><span class="id">Q09</span><span class="txt">Are player-prop combos positively correlated enough to break independent pricing?</span>
+    <span class="pill p-warn">partial</span> <span class="pill p-neu">blocks: Any prop-combo strategy on the leaderboard.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>Yes on the dependence, unknown on the price. QB passing yards over and WR1 receiving yards over in the same team-game show phi = 0.346 (n=803, 95% CI 0.284-0.406), a 1.45x lift over independence. Whether that survives the book&#x27;s own repricing is unmeasured.</dd>
+    <dt>Known</dt><dd>The dependence is measured and published with its CI. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd>The repriced same-game-parlay price (correlation C8 is blank).</dd>
+    <dt>Why it blocks</dt><dd>Any prop-combo strategy on the leaderboard.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S06">S06</a></dd>
+  </dl></div></div><div class="qa" id="Q10">
+  <div class="q"><span class="id">Q10</span><span class="txt">Can parlay legs from different games be multiplied as if independent?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — answered for cross-game legs. Within-game legs are C2/C5.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>Yes for cross-game legs. The home-cover rate in the first half of a week has r = -0.007 against the second half across 473 week-slates, and spread-vs-total within a game has r = -0.010 across 7,103 games.</dd>
+    <dt>Known</dt><dd>Both correlations are published with n and CI. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered for cross-game legs. Within-game legs are C2/C5.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div><div class="qa" id="Q11">
+  <div class="q"><span class="id">Q11</span><span class="txt">What definition of &#x27;skill&#x27; cannot be faked by re-running the search?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: The reward design. A loose definition would pay for luck.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>This site&#x27;s proposal: a strategy is skilful only if it survives FDR across every test run including placebos, has a week-clustered CI above zero, and earns less than 50% of its profit in any single season. </dd>
+    <dt>Not known</dt><dd>Whether that definition is the one the owner wants to adopt, and whether it is strict enough to stop a determined search.</dd>
+    <dt>Why it blocks</dt><dd>The reward design. A loose definition would pay for luck.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S07">S07</a></dd>
+  </dl></div></div></div><h2>Data rights</h2><div class="qa" id="Q12">
+  <div class="q"><span class="id">Q12</span><span class="txt">Do the 2026 numbers on this site match an official source?</span>
+    <span class="pill p-warn">partial</span> <span class="pill p-neu">blocks: Nothing — answered.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>Yes for 160 of 160 cells. All 32 clubs&#x27; W, L, T, PF and PA, recomputed from the archive plus the one official Thursday result, match the official standings exactly. The archive is 136 games; the 137th was played after it was cut.</dd>
+    <dt>Known</dt><dd>The reconciliation is published check by check (IC-01 to IC-10). <span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a> <a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">↗ games/commanders-at-giants-2026-reg-10</a></span></dd>
+    <dt>Not known</dt><dd>Nothing about the 2026 totals.</dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div><div class="qa" id="Q13">
+  <div class="q"><span class="id">Q13</span><span class="txt">May third-party archives be redistributed on a public site?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Any use beyond research, and any redistribution of the raw archive.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>The archive is a public GitHub repository. Its licence terms were not reviewed line by line in this session. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd>Whether the terms permit redistribution of derived values, or of the raw file.</dd>
+    <dt>Why it blocks</dt><dd>Any use beyond research, and any redistribution of the raw archive.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S08">S08</a></dd>
+  </dl></div></div><div class="qa" id="Q14">
+  <div class="q"><span class="id">Q14</span><span class="txt">Can we obtain an official 2026 player-level box-score feed?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Any 2026 player-prop model, and any prop strategy on the leaderboard.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>nfl.com/stats/ presents player statistics in a client-rendered interface. The NFL&#x27;s published terms for automated download were not established in this session. <span class="src"><a href="https://www.nfl.com/stats/" target="_blank" rel="noopener">↗ stats/</a></span></dd>
+    <dt>Not known</dt><dd>Whether a licensed feed or an official download endpoint exists.</dd>
+    <dt>Why it blocks</dt><dd>Any 2026 player-prop model, and any prop strategy on the leaderboard.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S09">S09</a></dd>
+  </dl></div></div></div><h2>Product</h2><div class="qa" id="Q15">
+  <div class="q"><span class="id">Q15</span><span class="txt">What exactly does a reward pay, and who funds it?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: The leaderboard&#x27;s final design.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>This site treats rewards as research points (pool of 1,000) precisely because no funding or legal basis exists to pay anything else. </dd>
+    <dt>Not known</dt><dd>Whether a real reward is intended, its currency, and its funding source.</dd>
+    <dt>Why it blocks</dt><dd>The leaderboard&#x27;s final design.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S07">S07</a></dd>
+  </dl></div></div><div class="qa" id="Q16">
+  <div class="q"><span class="id">Q16</span><span class="txt">Which single NFL dashboard is canonical?</span>
+    <span class="pill p-bad">unknown</span> <span class="pill p-neu">blocks: Any reader knowing where to look, and any future session knowing what is current.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd><span class="blank">no verified answer — left blank</span></dd>
+    <dt>Known</dt><dd>Eleven NFL namespaces existed when this session started; this one is the twelfth. They overlap heavily: four publish own Lines, five publish questions, six publish suggestions. </dd>
+    <dt>Not known</dt><dd>Which one the owner wants to keep, and whether the rest should be archived.</dd>
+    <dt>Why it blocks</dt><dd>Any reader knowing where to look, and any future session knowing what is current.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S10">S10</a></dd>
+  </dl></div></div><div class="qa" id="Q17">
+  <div class="q"><span class="id">Q17</span><span class="txt">Is the site actually live, and does it build without broken links?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — answered.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>Yes. GitHub Pages serves the repository root on main; this namespace is published under /nfl-origination/. The local build fails on any broken local link or any unsourced table row.</dd>
+    <dt>Known</dt><dd>The verification harness output is published on the audit page. <span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div></div><h2>Method</h2><div class="qa" id="Q18">
+  <div class="q"><span class="id">Q18</span><span class="txt">Is the archive&#x27;s line column a price or an expectation?</span>
+    <span class="pill p-warn">partial</span> <span class="pill p-neu">blocks: Any precise claim about closing-line value.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>An expectation: spread_line is the expected home margin, positive when the home team is favoured. Measured, not assumed: reading it that way gives MAE 9.83 and r = +0.43 against actual margin; the opposite reading gives MAE 14.31 and r = -0.43, which no real market line can produce.</dd>
+    <dt>Known</dt><dd>The check (IC-04) compares both readings explicitly and fails the build if the wrong one wins. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd>Whether the archive&#x27;s line is the CLOSE or a snapshot earlier in the week.</dd>
+    <dt>Why it blocks</dt><dd>Any precise claim about closing-line value.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S11">S11</a></dd>
+  </dl></div></div><div class="qa" id="Q19">
+  <div class="q"><span class="id">Q19</span><span class="txt">Does the injury adjustment change any originated line materially?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — answered, and the answer bounds the claim.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>It moves five of thirteen games by more than one point under the central scenario, and it flips the side of zero in one game (HOU@CLE). It is published as a band, not as a point estimate, precisely because the input cannot support precision.</dd>
+    <dt>Known</dt><dd>The band is on the own-lines page next to every game. <span class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" target="_blank" rel="noopener">↗ news/nfl-week-10-injury-report-2026-season</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered, and the answer bounds the claim.</dd>
+    <dt>Unblocked by</dt><dd><a href="suggestions.html#S05">S05</a></dd>
+  </dl></div></div><div class="qa" id="Q20">
+  <div class="q"><span class="id">Q20</span><span class="txt">Did the placeholder strategies pass, and what does that prove?</span>
+    <span class="pill p-good">known</span> <span class="pill p-neu">blocks: Nothing — answered.</span></div>
+  <div class="b"><dl>
+    <dt>Answer</dt><dd>No. Both pre-registered placebos fail FDR. In an earlier version of this pipeline, the placebo PASSED — which exposed a sign-convention bug in the line column. That is exactly what a placebo is for, and it is recorded on the audit page rather than deleted.</dd>
+    <dt>Known</dt><dd>The placebo result is published with the same statistics as the real strategies. <span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></dd>
+    <dt>Not known</dt><dd><span class="blank">none</span></dd>
+    <dt>Why it blocks</dt><dd>Nothing — answered.</dd>
+    <dt>Unblocked by</dt><dd><span class="blank">no suggestion needed</span></dd>
+  </dl></div></div></div>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

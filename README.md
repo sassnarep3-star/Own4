@@ -185,3 +185,64 @@ built from official NFL.com data only. **Live:** https://sassnarep3-star.github.
 - Peer NFL workspaces (`nfl/`, `nfl-lab/`, `nfl-quant/`, `nfl-research/`) were read, not modified.
 
 Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-800-697-3738).
+
+---
+
+## NFL Own Lines · session `arena/1880ad1e-own4` (2026-11-13)
+
+Source-linked NFL line origination, a gated strategy competition, and decision support.
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-own/ · **Workspace:** `nfl-own/`
+· **Executive summary:** [`NFL_OWN_EXECUTIVE_SUMMARY.md`](NFL_OWN_EXECUTIVE_SUMMARY.md)
+· **Repo review:** [`nfl-own/REPO_REVIEW.md`](nfl-own/REPO_REVIEW.md)
+
+- **Headline:** 0 of 19 registered strategies qualify and 0 reward points have been awarded.
+  The rule is the repository's existing one — 1,000 points per strategy, paid only on a
+  twelve-of-twelve finish, no partial credit — so 19,000 points were on the table.
+  Best holdout hit rate 56.1% against a 52.38% break-even, and it fails the split-half retest. The
+  own-line model is worse than the closing line it would have to beat (spread MAE 10.752 vs 9.850
+  over 2,519 holdout games).
+- **Re-read, not inherited:** the official snapshot was re-read from nfl.com on **2026-11-13**. One
+  more game is final than in the 2026-11-12 snapshot, so the league has played **137** games and
+  Washington is 3-5-1.
+- **Unblocked a peer error:** official **per-game player logs** exist and reconcile to season totals,
+  so player props are gradeable. Three earlier NFL sessions recorded them as blocked (flag F-01).
+- **Blocked, and said so:** 2nd/3rd/4th-string replacement (the league publishes **no depth chart** —
+  the club depth-chart URL returns 404) and any 2026 market price or edge.
+- **Site:** 22 pages, dashboard plus category subpages, a **Suggestions board** (16 proposals with
+  impact/effort/risk/prerequisites), a **Questions register** (15 items: known / unknown / answer /
+  what-would-unlock-it), 7 decisions, and 13 items on **Flagged for Review**. 672 data rows, 672 with
+  a source link, 218 unverified cells published blank.
+- **Reproduce:** `python3 nfl-own/data/official/transcribe_2026-11-13.py && python3 nfl-own/engine/analysis.py
+  && python3 nfl-own/engine/build_site.py && python3 nfl-own/engine/verify_site.py`. Standard library
+  only; CI gate in `.github/workflows/nfl-own.yml`; 17 tests in `nfl-own/tests/`.
+
+Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-800-697-3738).
+
+---
+
+## NFL Command · session `arena-934af359-own4` (2026-11-13)
+
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-command/ — verified-2026-11-13 NFL dashboard:
+originated Week 11 own lines, 6 registered strategies with 10 pre-registered gates and a leaderboard
+(0 of 6,000 points awarded — nothing passes), walk-forward backtest with placebo/bootstrap luck removal,
+326-row official injury register with depth-deficiency tracking, a 20-question decision register, a
+16-item suggestions board, line-by-line repo review, and 16 flagged items. Every table row links an
+official nfl.com source; unverifiable values (market prices, prop prices, depth-chart string labels) are
+blank and flagged — never inferred. Source of truth: `nfl-command/` (see `nfl-command/README.md`).
+## NFL Decision & Strategy Hub (`nfl-arena/`, session arena/d6c72eb4-own4, 2026-11-13)
+
+A decision layer over the whole NFL research estate, plus the first depth-string
+injury tracker. Live at https://sassnarep3-star.github.io/Own4/nfl-arena/ after merge.
+
+- **Executive summary** — `nfl-arena/pages/executive-summary.html`
+- **Questions & answers register** — what is known/unknown before each decision (D-A…D-F), with discovery actions for every gap
+- **Suggestions queue** — 12 proposals with decision paths A/B/C; nothing is implemented until a reviewer picks a path
+- **Strategies & validation gates** — signal research, singles/parlays/prop-combo families, pre-registered gates VG-1…VG-8, luck-removal formulas
+- **Leaderboard & rewards** — 15 registered strategies with Wilson 95% intervals, required-n (80% power) and BH-FDR verdicts beside every ROI; 0 reward-eligible
+- **Injuries & depth deficiencies** — official Week 10 report (326 rows) joined to Starter/2nd/3rd/4th-string depth charts for 8 teams; backup-QB and forced-replacement situations with sources
+- **Line-by-line verification** — 64 checks vs official sources: 0 mismatches, 18 flagged (timing/legend issues)
+- **Flagged for Review** — 13 irregularities (A-01…A-13) with evidence and the reviewer decision each needs
+
+Data pipeline: `python3 nfl-arena/scripts/build_data.py` then `python3 nfl-arena/scripts/build_site.py`,
+validated by `python3 nfl-arena/scripts/check_links.py` (every table row must carry a source link;
+unverifiable values are published blank and flagged).

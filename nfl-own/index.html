@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard · Own4 NFL Own Lines</title>
+<meta name="description" content="Source-linked NFL line origination, strategy competition and decision support. Every row cites an official source.">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2430;--line:#233043;--ink:#e6edf3;--dim:#93a1b1;
+  --acc:#4aa3ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--chip:#1f2b3a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+aside{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 14px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.brand span{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.08em;
+  text-transform:uppercase}
+.tag{font-size:11px;color:var(--dim);margin:6px 0 14px}
+nav .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7c8f;
+  margin:16px 0 5px}
+nav a{display:block;padding:5px 9px;border-radius:6px;color:#c6d2de;font-size:13.5px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--chip);color:#fff;font-weight:600}
+main{flex:1;min-width:0;padding:26px 34px 80px;max-width:1500px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+.crumb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.lede{color:#c9d5e1;max-width:1000px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:23px;font-weight:700;display:block;line-height:1.2}
+.kpi .l{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--dim);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  margin:12px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:#a9b8c8;position:sticky;top:0}
+tbody tr:hover{background:#18202b}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:#5b6b7c;font-style:italic}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.note-pill{color:var(--warn);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--chip);
+  font-size:11.5px;color:#c6d2de;margin-right:4px}
+.chip.g{background:#12341c;color:#7ee787}
+.chip.b{background:#3b1517;color:#ff9c96}
+.chip.w{background:#3a2c0b;color:#f0c05a}
+.note{font-size:12.5px;color:var(--dim);margin:6px 0 18px;max-width:1000px}
+.box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:13px 16px;margin:16px 0}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box p{margin:4px 0}
+sup a{font-size:11px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--dim);max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+code{background:#0b1016;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul.tight{margin:6px 0 14px;padding-left:20px}
+ul.tight li{margin:3px 0}
+@media(max-width:900px){
+  aside{position:static;height:auto;width:100%;flex:none}
+  .layout{flex-direction:column}
+  main{padding:18px}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <a class="brand" href="index.html">Own4 · NFL <span>Own lines · gates · competition</span></a>
+  <div class="tag">Snapshot 2026-11-13 · official NFL.com sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Start</div><a class="nav active" href="index.html">Dashboard</a><a class="nav" href="pages/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-13</div><a class="nav" href="pages/standings.html">Standings</a><a class="nav" href="pages/team-stats.html">Team stats</a><a class="nav" href="pages/schedule.html">Schedule & results</a><a class="nav" href="pages/players.html">Player leaders & logs</a><a class="nav" href="pages/integrity.html">Integrity checks</a><div class="grp">Originated lines</div><a class="nav" href="pages/own-lines.html">Week 11 own lines</a><a class="nav" href="pages/props.html">Player props & combos</a><a class="nav" href="pages/parlays.html">Parlays & dependence</a><div class="grp">Strategy competition</div><a class="nav" href="pages/strategies.html">Strategy catalogue</a><a class="nav" href="pages/validation.html">Validation gates</a><a class="nav" href="pages/leaderboard.html">Leaderboard & rewards</a><a class="nav" href="pages/correlations.html">Correlations</a><a class="nav" href="pages/luck.html">Backtest & luck</a><div class="grp">Availability</div><a class="nav" href="pages/availability.html">Injuries & depth</a><div class="grp">Decisions</div><a class="nav" href="pages/questions.html">Questions register</a><a class="nav" href="pages/decisions.html">Decisions to make</a><a class="nav" href="pages/suggestions.html">Suggestions board</a><div class="grp">Governance</div><a class="nav" href="pages/sources.html">Source register</a><a class="nav" href="pages/repo-review.html">Repo review</a><a class="nav" href="pages/flagged.html">⚑ Flagged for review</a></nav>
+</aside>
+<main class="main" id="main">
+<p class="crumb">Dashboard</p>
+<h1>NFL own lines: what is true, what we built, what survived</h1><p class="lede">A decision dashboard for originating NFL lines from <strong>official NFL.com data only</strong>. The snapshot below was re-read on <strong>2026-11-13 (UTC)</strong> rather than inherited from an earlier session, and it already differs from the 2026-11-12 snapshot in the repo: one more game is final and the league has played <strong>137</strong> games. Everything is graded against pre-registered gates, and nothing is priced against a market because no official price exists.</p><div class="kpis"><div class="kpi"><span class="n">32</span><span class="l">clubs verified</span><div class="s">W 136 = L 136, PF = PA = 6,291</div></div><div class="kpi"><span class="n">19</span><span class="l">strategies graded</span><div class="s">12 pre-registered gates each</div></div><div class="kpi"><span class="n">0</span><span class="l">reward-eligible strategies</span><div class="s">1,000 points each, paid only on a 12/12 finish</div></div><div class="kpi"><span class="n">0</span><span class="l">market prices held</span><div class="s">no official line exists to source</div></div><div class="kpi"><span class="n">56%</span><span class="l">best holdout hit rate</span><div class="s">S8 on 212 decisions</div></div><div class="kpi"><span class="n">15</span><span class="l">open questions</span><div class="s">each with what would unlock it</div></div></div><div class="box bad"><p><strong>Headline, stated without softening.</strong> <strong>0 of 19 registered strategies qualify and 0 reward points are awarded</strong> (1,000 per qualifying strategy, paid only on a twelve-of-twelve finish with no partial credit, so 19,000 points were on the table and none was earned). The best holdout hit rate is 56.1% against a 52.38% break-even, and it does not survive the split-half retest. The own-line model is worse than the closing line it would have to beat on spread error (MAE 10.752 vs 9.850, naive home-field-only 11.101) on 2,519 holdout games. That is the expected result for public data measured against efficient closing lines, and it is published unchanged.</p></div><h2>Read the site in this order</h2><div class="grid2"><div class="kpi"><span class="l">Executive summary</span><p style="margin:6px 0 0"><a href="pages/executive-summary.html">Executive summary</a></p><div class="s">The whole finding on one page, including what is blocked and why.</div></div><div class="kpi"><span class="l">Questions register</span><p style="margin:6px 0 0"><a href="pages/questions.html">Questions register</a></p><div class="s">15 questions split into what we know, what we do not know, the answer, and what would unlock it.</div></div><div class="kpi"><span class="l">Suggestions board</span><p style="margin:6px 0 0"><a href="pages/suggestions.html">Suggestions board</a></p><div class="s">16 proposals with impact, effort, risk and prerequisites, so a path can be chosen before anything is built.</div></div><div class="kpi"><span class="l">Week 11 own lines</span><p style="margin:6px 0 0"><a href="pages/own-lines.html">Week 11 own lines</a></p><div class="s">Thirteen originated spreads, totals and fair moneylines with every model input printed.</div></div><div class="kpi"><span class="l">Leaderboard &amp; rewards</span><p style="margin:6px 0 0"><a href="pages/leaderboard.html">Leaderboard &amp; rewards</a></p><div class="s">The competition: every strategy, its gates, its points. Currently zero.</div></div><div class="kpi"><span class="l">Flagged for review</span><p style="margin:6px 0 0"><a href="pages/flagged.html">Flagged for review</a></p><div class="s">13 irregularities and unverified values, each with a source link.</div></div></div><h2>What changed in this session</h2><ul class='tight'><li>The official snapshot was re-read from nfl.com on 2026-11-13: the Week 10 Thursday game is now final (WAS 24, NYG 21), so the league has played 137 games, not 136.</li><li><strong>Player props are not blocked.</strong> nfl.com publishes a full per-game log for every player, and the logs sum exactly to the published season totals. Three earlier NFL sessions recorded props as blocked; that was wrong (flag F-01).</li><li>Eleven team-stat columns were omitted rather than guessed, because the retrieved tables carried no readable header row. Four that could be proven by arithmetic are published.</li><li>Nineteen strategies were registered and nineteen were rejected. Two failed the split-half retest after passing their headline sample gate.</li><li>The archive's spread sign convention was established empirically, not assumed; an earlier draft of this session had it backwards and produced impossible 80% hit rates. That error is documented in the repo review.</li></ul>
+<footer>
+<p><strong>Own4 · NFL Own Lines</strong> — analytical research, <strong>not wagering advice</strong>.
+Every data row links to the official NFL.com page it was read from on 2026-11-13 (UTC); every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="pages/flagged.html">Flagged for review</a> page. No market price exists anywhere in this
+repository, so no edge, stake or return is claimed.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body></html>

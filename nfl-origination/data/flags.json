@@ -1,0 +1,451 @@
+{
+ "id": "flags-2026-11-13",
+ "flagged": [
+  {
+   "id": "F-01",
+   "severity": "blocker for betting claims",
+   "kind": "missing official source",
+   "title": "The NFL publishes no betting odds, so no price can be verified",
+   "detail": "Every ROI on this site is priced at an ASSUMED -110. Closing lines come from a third-party archive, are labelled as such everywhere they appear, and are not licensed for redistribution.",
+   "consequence": "Gate G7 is permanently blocked; no strategy can reach a paid tier.",
+   "sources": [
+    "https://www.nfl.com/games",
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-02",
+   "severity": "high",
+   "kind": "source does not exist",
+   "title": "No official NFL depth chart exists",
+   "detail": "https://www.nfl.com/depth-charts/ returns a 404 'Flag on the Play' page. It was re-read on 2026-11-13 and produced the same 404. There is therefore no official source for 1st/2nd/3rd/4th-string labels, which the brief asks for explicitly.",
+   "consequence": "The site publishes only lineup changes an official article names. Every string label would be an invention, so none is published.",
+   "sources": [
+    "https://www.nfl.com/depth-charts/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-03",
+   "severity": "low",
+   "kind": "internal inconsistency in an official page",
+   "title": "The Week 10 Thursday game's drive list does not reconcile to its own quarter box score",
+   "detail": "The game centre page for WAS@NYG publishes a 24-21 final and a quarter box score of 0-0 / 10-7 / 7-7 / 7-7, but the scoring-drive list underneath shows drives that would sum differently. Only the quarter box score and the final are transcribed; the drive list is not used anywhere.",
+   "consequence": "One game's scoring sequence is not published. The final and quarters are.",
+   "sources": [
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-04",
+   "severity": "medium",
+   "kind": "missing data in an official page",
+   "title": "Six clubs have no OUT/DOUBTFUL/QUESTIONABLE block in the official Week 10 report",
+   "detail": "MIN, GB, LA, AZ, LAC and BAL have no designation block rendered in the report table on nfl.com/nfl-week-10-injury-report-2026-season, although nfl.com/injuries/ does list practice participation for several of them.",
+   "consequence": "No designation is recorded for those clubs. Absence of a designation is NOT recorded as availability. Flagged rather than inferred.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+    "https://www.nfl.com/injuries/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-05",
+   "severity": "high",
+   "kind": "method assumption",
+   "title": "The injury adjustment is an assumption, not a measurement",
+   "detail": "The published designation says nothing about whether a player is a starter. The weights (OUT 0.50, DOUBTFUL 0.25, QUESTIONABLE 0.10 points of club rating, capped at 3.0 per club) were chosen, not fitted. They are applied at three multipliers and published as a band so the assumption is visible.",
+   "consequence": "The injury-adjusted line is a sensitivity view, not a forecast. The published line is the no-adjustment line.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-06",
+   "severity": "high",
+   "kind": "missing official source",
+   "title": "No official per-game player log and no archived prop price",
+   "detail": "Player props cannot be modelled for 2026, and no sportsbook prop price exists in the repository. The dependence measurement (C5) uses a third-party 2021-2022 archive with PROXY thresholds from a rolling mean, not real market lines.",
+   "consequence": "No prop-combo strategy can be scored. C6 and C8 are blank.",
+   "sources": [
+    "https://github.com/nflverse/nfldata",
+    "https://www.nfl.com/stats/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-07",
+   "severity": "medium",
+   "kind": "licence not reviewed",
+   "title": "The third-party archive's licence was not reviewed line by line",
+   "detail": "nfl-lines/data/raw/nfldata_games.csv (nflverse/nfldata) is the only historical game source. Its terms of use were not reviewed in this session.",
+   "consequence": "Research use only until reviewed. Raised as suggestion S08.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-08",
+   "severity": "medium",
+   "kind": "sign-convention bug found and fixed",
+   "title": "An earlier version of this pipeline read the archive's line column backwards",
+   "detail": "The first draft treated spread_line as the home team's favoured-by margin and negated it. That produced impossible results: the model appeared to beat the closing line by 3.4 points of MAE, one strategy showed +47% ROI, and -- the giveaway -- a pre-registered PLACEBO passed FDR. The convention was then measured against both readings (IC-04) and the bug fixed. The placebo now fails, as it must.",
+   "consequence": "This entry is kept deliberately. The corrected numbers are the ones published. The episode is the reason Gate G6 (placebos must fail) exists.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": true
+  },
+  {
+   "id": "F-09",
+   "severity": "medium",
+   "kind": "sourced correction of a peer claim",
+   "title": "A peer namespace records the archive's line convention incorrectly",
+   "detail": "Peer files describe spread_line as the home team's favoured-by margin. Measured against actual results, that reading gives a negative correlation with the home margin (r = -0.43) and MAE 14.31, which no genuine market line can produce. The correct reading gives r = +0.43 and MAE 9.83. The peer files are NOT edited here, per the board rules; the correction is logged for the owning sessions.",
+   "consequence": "Any peer result that relied on the inverted sign should be treated as suspect until re-checked by its owning session.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-10",
+   "severity": "low",
+   "kind": "not re-verified",
+   "title": "Peer namespaces were inspected structurally, not re-verified numerically",
+   "detail": "Eleven peer NFL namespaces were read for structure, links and duplication. Their individual numeric claims were not re-derived from official sources in this session.",
+   "consequence": "Nothing on this site depends on a peer number. Treat peer figures as unverified by this session.",
+   "sources": [
+    "https://sassnarep3-star.github.io/Own4/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-11",
+   "severity": "medium",
+   "kind": "repo irregularity",
+   "title": "Twelve overlapping NFL namespaces now exist",
+   "detail": "nfl/, nfl-audit/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-lab/, nfl-lines/, nfl-origination/, nfl-quant/, nfl-research/. Four publish own lines, five publish question registers, six publish suggestions.",
+   "consequence": "A reader cannot tell which is current. Raised as suggestion S10.",
+   "sources": [
+    "https://sassnarep3-star.github.io/Own4/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-12",
+   "severity": "low",
+   "kind": "missing data in an official page",
+   "title": "The official injury report provides no historical archive",
+   "detail": "nfl.com/injuries/ serves the current week only. No dated snapshot existed before this session, so no injury effect can be back-tested.",
+   "consequence": "Correlation C9 is blank. Raised as suggestion S04.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-13",
+   "severity": "low",
+   "kind": "proxy input",
+   "title": "Prop thresholds are proxy lines, not market lines",
+   "detail": "The 2021-2022 prop archive's qb_line and wr_line fields are rolling-mean thresholds, not sportsbook prices. The measured dependence (phi = 0.346) is real for those thresholds; it is not a claim about a specific market line.",
+   "consequence": "C5 is a dependence fact. It is not a betting edge.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-14",
+   "severity": "low",
+   "kind": "undated input",
+   "title": "The archive's line is not marked as a close",
+   "detail": "The sign convention is verified (IC-04) but the time within the week at which the line was captured is not stated. Beating an early line is a different claim from beating the close.",
+   "consequence": "All line comparisons are described as 'against the archived line', never 'against the closing line' in a value sense. Raised as S11.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-15",
+   "severity": "low",
+   "kind": "limitation of the model",
+   "title": "The model cannot see a quarterback change",
+   "detail": "The rating is built only from club points scored and allowed. Six of the eight confirmed lineup changes this week are at quarterback, and the model is blind to all of them.",
+   "consequence": "The originated lines do not price QB news. Raised as suggestion S16.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-16",
+   "severity": "medium",
+   "kind": "under-powered claim risk",
+   "title": "2026 alone is far too small to support any skill claim",
+   "detail": "2026 has 136 graded games. The pre-registered floor for a skill claim is 1,000 out-of-sample games. Everything measured here uses the 2018-2025 pool.",
+   "consequence": "No single-season claim is made anywhere. Gate G2 enforces this.",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-17",
+   "severity": "low",
+   "kind": "source checked and unusable",
+   "title": "Official team history pages are not available",
+   "detail": "https://www.nfl.com/teams/las-vegas-raiders/history/ returns a 404. Franchise relocations are therefore sourced to official news articles rather than history pages, and each mapping states its season boundary.",
+   "consequence": "OAK->LV, SD->LAC and STL->LA mappings are documented with a news-article source, not a history page.",
+   "sources": [
+    "https://www.nfl.com/teams/las-vegas-raiders/history/",
+    "https://www.nfl.com/news/raiders-officially-announce-las-vegas-raiders-title-0ap3000001098555"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-18",
+   "severity": "low",
+   "kind": "scope limit",
+   "title": "Practice participation is not transcribed as its own column",
+   "detail": "nfl.com/injuries/ publishes DNP / limited / full per player. This site uses the game-status designation (OUT / DOUBTFUL / QUESTIONABLE) as its single injury field, because that is what the per-game report publishes in a comparable form.",
+   "consequence": "A player listed as limited with no game status appears in the source but not in the designation table.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "resolved": false
+  },
+  {
+   "id": "F-20",
+   "severity": "low",
+   "kind": "internal contradiction found and fixed",
+   "title": "The dashboard tiles and the executive findings disagreed on the gate score",
+   "detail": "An earlier build of this site showed '0 of 10 gates pass' in one card while the same page's link text said '5 pass / 4 fail / 1 blocked'. The card was a leftover literal; it is now derived from gates.json. The verification harness now also asserts that the two cannot diverge.",
+   "consequence": "No number was wrong in the data, but the page contradicted itself. Recorded because a reader should be able to trust that a published inconsistency would be reported, not quietly patched.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "resolved": true
+  },
+  {
+   "id": "F-19",
+   "severity": "low",
+   "kind": "time-of-read",
+   "title": "Every page on this site is a snapshot of 2026-11-13",
+   "detail": "Official pages change. The standings, slate and injury report were read on 2026-11-13 and carry that date in every file name. The Thursday result was already final; the other thirteen games had not been played.",
+   "consequence": "Re-read the sources before reusing any number. Nothing here auto-updates.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "resolved": false
+  }
+ ],
+ "sources": [
+  {
+   "id": "S-01",
+   "publisher": "NFL.com",
+   "what": "2026 league standings, all 32 clubs",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "read": "2026-11-13",
+   "used_for": "standings.html; reconciliation IC-06; the model's club list"
+  },
+  {
+   "id": "S-02",
+   "publisher": "NFL.com",
+   "what": "2026 Week 10 schedule, kick-off times, networks, byes",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "read": "2026-11-13",
+   "used_for": "own-lines.html; the 14-game slate and the 4 bye clubs"
+  },
+  {
+   "id": "S-03",
+   "publisher": "NFL.com",
+   "what": "Official latest injury report (Week 10)",
+   "url": "https://www.nfl.com/injuries/",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; practice participation; the depth-charts 404 reference"
+  },
+  {
+   "id": "S-04",
+   "publisher": "NFL.com",
+   "what": "Week 10 injury report: player statuses per game",
+   "url": "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; all 95 designations"
+  },
+  {
+   "id": "S-05",
+   "publisher": "NFL.com",
+   "what": "News roundup, Friday 13 November 2026",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; confirmed lineup changes"
+  },
+  {
+   "id": "S-06",
+   "publisher": "NFL.com",
+   "what": "News roundup, Wednesday 11 November 2026",
+   "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; Beck, Watson, Cousins starting changes"
+  },
+  {
+   "id": "S-07",
+   "publisher": "NFL.com",
+   "what": "Game centre: Commanders at Giants, Week 10",
+   "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "read": "2026-11-13",
+   "used_for": "slate.html; the one completed Week 10 result (24-21)"
+  },
+  {
+   "id": "S-08",
+   "publisher": "NFL.com",
+   "what": "Darnold ruled out; Drew Lock expected to start",
+   "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; SEA and the Milroe backup note"
+  },
+  {
+   "id": "S-09",
+   "publisher": "NFL.com",
+   "what": "Willis to IR; McCord in line for first start",
+   "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; MIA"
+  },
+  {
+   "id": "S-10",
+   "publisher": "NFL.com",
+   "what": "Lamar Jackson out 6-9 weeks; Brissett trade",
+   "url": "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season",
+   "read": "2026-11-13",
+   "used_for": "injuries.html; BAL and the 'third-stringer' quote"
+  },
+  {
+   "id": "S-11",
+   "publisher": "NFL.com",
+   "what": "Raiders officially announce the Las Vegas name",
+   "url": "https://www.nfl.com/news/raiders-officially-announce-las-vegas-raiders-title-0ap3000001098555",
+   "read": "2026-11-13",
+   "used_for": "franchise mapping OAK -> LV"
+  },
+  {
+   "id": "S-12",
+   "publisher": "NFL.com",
+   "what": "Chargers announce relocation to Los Angeles",
+   "url": "https://www.nfl.com/news/chargers-announce-decision-to-relocate-to-los-angeles-0ap3000000773179",
+   "read": "2026-11-13",
+   "used_for": "franchise mapping SD -> LAC"
+  },
+  {
+   "id": "S-13",
+   "publisher": "NFL.com",
+   "what": "NFL owners approve the Raiders' move to Las Vegas",
+   "url": "https://www.nfl.com/news/nfl-owners-approve-raiders-move-to-las-vegas-0ap3000000795413",
+   "read": "2026-11-13",
+   "used_for": "franchise mapping STL -> LA"
+  },
+  {
+   "id": "S-14",
+   "publisher": "NFL.com",
+   "what": "Competition committee injury-report revisions",
+   "url": "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+   "read": "2026-11-13",
+   "used_for": "what the designation words mean"
+  },
+  {
+   "id": "S-15",
+   "publisher": "NFL.com",
+   "what": "Depth charts (requested)",
+   "url": "https://www.nfl.com/depth-charts/",
+   "read": "2026-11-13",
+   "used_for": "F-02: verified to return a 404"
+  },
+  {
+   "id": "S-16",
+   "publisher": "NFL.com",
+   "what": "Games index",
+   "url": "https://www.nfl.com/games",
+   "read": "2026-11-13",
+   "used_for": "F-01: verified to carry no odds values"
+  },
+  {
+   "id": "S-17",
+   "publisher": "NFL.com",
+   "what": "Stats index",
+   "url": "https://www.nfl.com/stats/",
+   "read": "2026-11-13",
+   "used_for": "Q14: player statistics are presented client-side"
+  },
+  {
+   "id": "S-18",
+   "publisher": "NFL.com",
+   "what": "Raiders team page",
+   "url": "https://www.nfl.com/teams/las-vegas-raiders/",
+   "read": "2026-11-13",
+   "used_for": "club identity and the 3rd AFC West standing"
+  },
+  {
+   "id": "S-19",
+   "publisher": "NFL.com",
+   "what": "Chargers team page",
+   "url": "https://www.nfl.com/teams/los-angeles-chargers/",
+   "read": "2026-11-13",
+   "used_for": "club identity and the 0-8 record"
+  },
+  {
+   "id": "S-20",
+   "publisher": "NFL.com",
+   "what": "Raiders history page (requested)",
+   "url": "https://www.nfl.com/teams/las-vegas-raiders/history/",
+   "read": "2026-11-13",
+   "used_for": "F-17: verified to return a 404"
+  },
+  {
+   "id": "S-21",
+   "publisher": "NCPG",
+   "what": "National Council on Problem Gambling: help and treatment",
+   "url": "https://www.ncpgambling.org/help-treatment",
+   "read": "2026-11-13",
+   "used_for": "responsible-gambling footer on every page"
+  },
+  {
+   "id": "S-22",
+   "publisher": "nflverse (third-party)",
+   "what": "nflverse/nfldata game archive",
+   "url": "https://github.com/nflverse/nfldata",
+   "read": "2026-11-13",
+   "used_for": "every historical game, line and result; labelled third-party everywhere"
+  },
+  {
+   "id": "S-23",
+   "publisher": "GitHub",
+   "what": "Repository and Pages settings",
+   "url": "https://api.github.com/repos/sassnarep3-star/Own4/pages",
+   "read": "2026-11-13",
+   "used_for": "deploy confirmation: build_type legacy, source main:/"
+  },
+  {
+   "id": "S-24",
+   "publisher": "Live site",
+   "what": "Published dashboard",
+   "url": "https://sassnarep3-star.github.io/Own4/",
+   "read": "2026-11-13",
+   "used_for": "post-deploy check"
+  }
+ ],
+ "summary": {
+  "flags": 20,
+  "open": 18,
+  "resolved": 2,
+  "blockers": 1,
+  "sources": 24,
+  "official_sources": 20
+ }
+}

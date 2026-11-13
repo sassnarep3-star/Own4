@@ -1,0 +1,83 @@
+{
+ "dataset": "dev_window_model_selection",
+ "note": "The rating model's two free parameters were chosen by minimising mean absolute spread error on the DEV window only: forecasts for seasons 2002-2010, each fitted on seasons strictly before it. The holdout (2017-) was not consulted. Fewer than 300 decisions per window here, so the selection is documented rather than celebrated.",
+ "grid": [
+  {
+   "seasons_back": 3,
+   "ridge": 6.0,
+   "dev_mae": 11.415,
+   "n": 2304
+  },
+  {
+   "seasons_back": 3,
+   "ridge": 15.0,
+   "dev_mae": 11.296,
+   "n": 2304
+  },
+  {
+   "seasons_back": 3,
+   "ridge": 40.0,
+   "dev_mae": 11.276,
+   "n": 2304
+  },
+  {
+   "seasons_back": 3,
+   "ridge": 100.0,
+   "dev_mae": 11.376,
+   "n": 2304
+  },
+  {
+   "seasons_back": 5,
+   "ridge": 6.0,
+   "dev_mae": 11.408,
+   "n": 2304
+  },
+  {
+   "seasons_back": 5,
+   "ridge": 15.0,
+   "dev_mae": 11.314,
+   "n": 2304
+  },
+  {
+   "seasons_back": 5,
+   "ridge": 40.0,
+   "dev_mae": 11.289,
+   "n": 2304
+  },
+  {
+   "seasons_back": 5,
+   "ridge": 100.0,
+   "dev_mae": 11.373,
+   "n": 2304
+  },
+  {
+   "seasons_back": 8,
+   "ridge": 6.0,
+   "dev_mae": 11.398,
+   "n": 2304
+  },
+  {
+   "seasons_back": 8,
+   "ridge": 15.0,
+   "dev_mae": 11.318,
+   "n": 2304
+  },
+  {
+   "seasons_back": 8,
+   "ridge": 40.0,
+   "dev_mae": 11.3,
+   "n": 2304
+  },
+  {
+   "seasons_back": 8,
+   "ridge": 100.0,
+   "dev_mae": 11.377,
+   "n": 2304
+  }
+ ],
+ "chosen": {
+  "seasons_back": 3,
+  "ridge": 40.0
+ },
+ "archive_source": "https://github.com/nflverse/nfldata"
+}

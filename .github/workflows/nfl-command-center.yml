@@ -13,12 +13,12 @@ name: NFL Command Center
 on:
   push:
     paths:
-      - 'nfl-command/**'
-      - '.github/workflows/nfl-command.yml'
+      - 'nfl-command-center/**'
+      - '.github/workflows/nfl-command-center.yml'
   pull_request:
     paths:
-      - 'nfl-command/**'
-      - '.github/workflows/nfl-command.yml'
+      - 'nfl-command-center/**'
+      - '.github/workflows/nfl-command-center.yml'
   workflow_dispatch:
 
 permissions:
@@ -38,28 +38,28 @@ jobs:
 
       - name: Rebuild the data
         run: |
-          python3 nfl-command/engine/00_convention.py
-          python3 nfl-command/engine/00_price_audit.py
-          python3 nfl-command/engine/00_sweep_development.py
-          python3 nfl-command/engine/01_forecast.py
-          python3 nfl-command/engine/02_analyze.py
-          python3 nfl-command/engine/03_injuries.py
-          python3 nfl-command/engine/04_audit_repo.py
-          python3 nfl-command/engine/05_build_site.py
+          python3 nfl-command-center/engine/00_convention.py
+          python3 nfl-command-center/engine/00_price_audit.py
+          python3 nfl-command-center/engine/00_sweep_development.py
+          python3 nfl-command-center/engine/01_forecast.py
+          python3 nfl-command-center/engine/02_analyze.py
+          python3 nfl-command-center/engine/03_injuries.py
+          python3 nfl-command-center/engine/04_audit_repo.py
+          python3 nfl-command-center/engine/05_build_site.py
 
       - name: Verify the site
-        run: python3 nfl-command/engine/06_verify_site.py
+        run: python3 nfl-command-center/engine/06_verify_site.py
 
       - name: The published pages must rebuild identically
         run: |
-          git diff --stat -- nfl-command/pages nfl-command/assets
-          git diff --exit-code -- nfl-command/pages nfl-command/assets
+          git diff --stat -- nfl-command-center/pages nfl-command-center/assets
+          git diff --exit-code -- nfl-command-center/pages nfl-command-center/assets
 
       - name: The look-ahead test must still pass
         run: |
           python3 - <<'PY'
           import json, sys
-          fc = json.load(open('nfl-command/data/derived/forecasts.json'))
+          fc = json.load(open('nfl-command-center/data/derived/forecasts.json'))
           changed = fc['look_ahead_test']['forecasts_changed']
           print('forecasts made before the holdout that changed: %d' % changed)
           sys.exit(1 if changed else 0)
@@ -69,7 +69,7 @@ jobs:
         run: |
           python3 - <<'PY'
           import json, sys
-          s = json.load(open('nfl-command/data/derived/strategies.json'))
+          s = json.load(open('nfl-command-center/data/derived/strategies.json'))
           bad = [r['id'] for r in s['results']
                  if r.get('reward_eligible') and any(g['status'] != 'Pass' for g in r['gates'].values())]
           print('strategies marked eligible with a failing gate: %s' % (bad or 'none'))

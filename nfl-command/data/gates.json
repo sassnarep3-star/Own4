@@ -1,0 +1,67 @@
+{
+ "title": "Pre-registered validation gates (frozen before backtest)",
+ "frozen_utc": "2026-11-13T21:50Z",
+ "statement": "These gates were written and committed to git BEFORE engine/analyze.py was first executed in this session. A strategy must pass ALL gates to enter the leaderboard's rewarded tier. Gates are not modified after results are seen; any change creates a new gate version.",
+ "gates": [
+  {
+   "id": "G1",
+   "name": "Data integrity",
+   "rule": "Every input row is source-linked to an official nfl.com page; aggregate reconciliation (W-L-T, PF, PA) has 0 mismatches.",
+   "blocking": true
+  },
+  {
+   "id": "G2",
+   "name": "Sample size",
+   "rule": "Strategy-level ROI claims require >= 300 graded selections; below that the strategy is graded 'insufficient sample' and earns no rewards.",
+   "blocking": true
+  },
+  {
+   "id": "G3",
+   "name": "Walk-forward only",
+   "rule": "Every prediction is generated from data strictly before the game date. No future information, no refitting on holdout.",
+   "blocking": true
+  },
+  {
+   "id": "G4",
+   "name": "Holdout direction",
+   "rule": "Point estimate beats the naive baseline on the frozen holdout (weeks 8-10 of 2026).",
+   "blocking": true
+  },
+  {
+   "id": "G5",
+   "name": "Uncertainty",
+   "rule": "95% week-clustered bootstrap CI of the improvement over baseline excludes 0.",
+   "blocking": true
+  },
+  {
+   "id": "G6",
+   "name": "Closing-line test",
+   "rule": "Strategy must beat the closing line at kick-off on >= 55% of selections. BLOCKED: no official or licensed betting-line archive exists in this repository; gate cannot be evaluated until a rights-cleared price source is ingested.",
+   "blocking": true
+  },
+  {
+   "id": "G7",
+   "name": "Luck removal",
+   "rule": "Matched-random placebo test: observed improvement must exceed the 95th percentile of 10,000 label-shuffled placebo runs (p < 0.05).",
+   "blocking": true
+  },
+  {
+   "id": "G8",
+   "name": "Stability",
+   "rule": "Improvement sign consistent across two disjoint season splits (weeks 3-6 vs weeks 7-10).",
+   "blocking": true
+  },
+  {
+   "id": "G9",
+   "name": "Risk discipline",
+   "rule": "Documented staking (flat or fractional Kelly capped at 0.25); max single selection <= 2% of bankroll; drawdown stop at -15%.",
+   "blocking": true
+  },
+  {
+   "id": "G10",
+   "name": "Reproducibility",
+   "rule": "Deterministic rebuild from committed data; engine/verify_site.py passes (no broken links, every table row source-linked).",
+   "blocking": true
+  }
+ ]
+}

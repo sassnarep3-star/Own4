@@ -1,0 +1,294 @@
+{
+ "id": "strategies-2026-11-13",
+ "holding": "1 unit per bet, priced at an ASSUMED -110 unless stated",
+ "assumed_price": "-110",
+ "strategies": [
+  {
+   "id": "S1",
+   "name": "Own rating vs closing spread, 2-point margin filter",
+   "market": "spread",
+   "placebo": false,
+   "n_bets": 1560,
+   "roi": -0.031993006993007465,
+   "ci95": [
+    -0.08058375634517852,
+    0.014579759862778702
+   ],
+   "hit_rate": 0.507051282051282,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.2888555722138931,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 18,
+   "footnote": "Line is the third-party closing line; NFL publishes none.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.0071428571428571435,
+   "season_units": {
+    "2018": -5.090909090909087,
+    "2019": -8.81818181818182,
+    "2020": 18.181818181818144,
+    "2021": -13.363636363636378,
+    "2022": -5.36363636363636,
+    "2023": -30.18181818181813,
+    "2024": -10.090909090909106,
+    "2025": 4.8181818181818015
+   },
+   "best_season_share_of_profit": 0.7905138339920951
+  },
+  {
+   "id": "S2",
+   "name": "Always take the home side (benchmark, not a strategy)",
+   "market": "spread",
+   "placebo": false,
+   "n_bets": 2126,
+   "roi": -0.09304712220987023,
+   "ci95": [
+    -0.11888111888111984,
+    -0.0680657011358369
+   ],
+   "hit_rate": 0.47507055503292567,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.9905047476261869,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 18,
+   "footnote": "Benchmark only: measures how hard the home side is to beat.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.042857142857142864,
+   "season_units": {
+    "2018": -28.818181818181817,
+    "2019": -53.6363636363637,
+    "2020": -12.545454545454575,
+    "2021": -25.727272727272823,
+    "2022": -24.727272727272723,
+    "2023": -27.636363636363633,
+    "2024": -10.454545454545451,
+    "2025": -14.272727272727286
+   },
+   "best_season_share_of_profit": null
+  },
+  {
+   "id": "S3",
+   "name": "Own total vs closing total, 3-point filter",
+   "market": "total",
+   "placebo": false,
+   "n_bets": 1103,
+   "roi": -0.04978158740624778,
+   "ci95": [
+    -0.10560398505604035,
+    0.007380073800738055
+   ],
+   "hit_rate": 0.49773345421577514,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.5712143928035982,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 18,
+   "footnote": "Line is the third-party closing total.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.021428571428571432,
+   "season_units": {
+    "2018": 3.999999999999994,
+    "2019": 2.909090909090911,
+    "2020": -23.272727272727288,
+    "2021": 3.636363636363628,
+    "2022": -12.454545454545464,
+    "2023": -3.454545454545464,
+    "2024": -10.81818181818183,
+    "2025": -15.454545454545462
+   },
+   "best_season_share_of_profit": 0.3793103448275861
+  },
+  {
+   "id": "S4",
+   "name": "Away-favoured games: take the home underdog",
+   "market": "spread",
+   "placebo": false,
+   "n_bets": 1285,
+   "roi": -0.12345242306331901,
+   "ci95": [
+    -0.1670761670761678,
+    -0.08638451900320282
+   ],
+   "hit_rate": 0.4591439688715953,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.9975012493753124,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 18,
+   "footnote": "",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.05,
+   "season_units": {
+    "2018": -27.636363636363622,
+    "2019": -40.45454545454544,
+    "2020": -21.090909090909076,
+    "2021": -23.54545454545453,
+    "2022": -26.727272727272705,
+    "2023": -7.545454545454545,
+    "2024": 1.2727272727272636,
+    "2025": -12.909090909090915
+   },
+   "best_season_share_of_profit": 1.0
+  },
+  {
+   "id": "S5",
+   "name": "Back the home side when it is the more rested team",
+   "market": "spread",
+   "placebo": false,
+   "n_bets": 404,
+   "roi": -0.04545454545454557,
+   "ci95": [
+    -0.12612035851472508,
+    0.037859895715257136
+   ],
+   "hit_rate": 0.5,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.5167416291854073,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 17,
+   "footnote": "Rest differential comes from the third-party archive schedule fields.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.014285714285714287,
+   "season_units": {
+    "2018": -5.545454545454544,
+    "2019": -2.090909090909089,
+    "2020": 1.5454545454545472,
+    "2021": 0.818181818181819,
+    "2022": 2.8181818181818183,
+    "2023": -7.999999999999999,
+    "2024": -1.5454545454545432,
+    "2025": -6.363636363636362
+   },
+   "best_season_share_of_profit": 0.5438596491228068
+  },
+  {
+   "id": "P1",
+   "name": "Placebo: bet every third game in date order",
+   "market": "spread",
+   "placebo": true,
+   "n_bets": 709,
+   "roi": -0.1033465828952439,
+   "ci95": [
+    -0.17007956175818512,
+    -0.03193407159412814
+   ],
+   "hit_rate": 0.4696755994358251,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.9450274862568716,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 18,
+   "footnote": "Pre-registered placebo.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.03571428571428571,
+   "season_units": {
+    "2018": -15.363636363636372,
+    "2019": -16.272727272727288,
+    "2020": -4.818181818181818,
+    "2021": -14.636363636363651,
+    "2022": -6.000000000000009,
+    "2023": -20.36363636363638,
+    "2024": -0.2727272727272708,
+    "2025": 4.454545454545457
+   },
+   "best_season_share_of_profit": 1.0
+  },
+  {
+   "id": "P2",
+   "name": "Placebo: over in even weeks",
+   "market": "total",
+   "placebo": true,
+   "n_bets": 1041,
+   "roi": -0.05370709981661083,
+   "ci95": [
+    -0.10389610389610457,
+    -0.007905138339921002
+   ],
+   "hit_rate": 0.4956772334293948,
+   "breakeven_hit_rate_at_minus110": 0.5238095238095238,
+   "p_value": 0.6211894052973513,
+   "seasons": [
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+   ],
+   "n_weeks": 9,
+   "footnote": "Pre-registered placebo.",
+   "verdict": "",
+   "fdr_pass": false,
+   "fdr_threshold": 0.028571428571428574,
+   "season_units": {
+    "2018": -8.363636363636362,
+    "2019": -27.36363636363635,
+    "2020": -16.00000000000001,
+    "2021": -6.181818181818196,
+    "2022": -21.45454545454547,
+    "2023": -0.6363636363636394,
+    "2024": 14.90909090909089,
+    "2025": 9.181818181818171
+   },
+   "best_season_share_of_profit": 0.6188679245283019
+  }
+ ]
+}
