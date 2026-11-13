@@ -1,0 +1,848 @@
+{
+ "dataset": "registered_strategies",
+ "holdout": [
+  2017,
+  2026
+ ],
+ "dev": [
+  2002,
+  2010
+ ],
+ "break_even_single": 0.5238095238095238,
+ "break_even_parlay": {
+  "2": 0.2743764172335601,
+  "3": 0.14372098045567436
+ },
+ "registration_note": "The rules were written before any backtest in this session. G11 is recorded as passed for that reason, and the git history shows the order.",
+ "gates": [
+  {
+   "id": "G1",
+   "name": "Sample floor",
+   "test": "At least 300 graded decisions in the holdout window."
+  },
+  {
+   "id": "G2",
+   "name": "Hit rate over break-even",
+   "test": "Hit rate must exceed the break-even implied by -110 on every leg."
+  },
+  {
+   "id": "G3",
+   "name": "Two-sided significance",
+   "test": "p below 0.05 against the break-even rate."
+  },
+  {
+   "id": "G4",
+   "name": "Multiple-comparison control",
+   "test": "Benjamini-Hochberg q at 0.05 across every registered strategy."
+  },
+  {
+   "id": "G5",
+   "name": "Holdout only",
+   "test": "Evaluated on the frozen holdout; nothing refitted on it."
+  },
+  {
+   "id": "G6",
+   "name": "Placebo / matched-random control",
+   "test": "Must beat 95% of matched random selections of the same size."
+  },
+  {
+   "id": "G7",
+   "name": "Season stability",
+   "test": "Above break-even in at least 60% of seasons with 20+ decisions."
+  },
+  {
+   "id": "G8",
+   "name": "Threshold robustness",
+   "test": "Must survive moving the threshold one step."
+  },
+  {
+   "id": "G9",
+   "name": "Cluster-aware interval",
+   "test": "Week-clustered bootstrap interval must exclude break-even."
+  },
+  {
+   "id": "G10",
+   "name": "No look-ahead",
+   "test": "Every forecast input must predate kickoff (perturbation test)."
+  },
+  {
+   "id": "G11",
+   "name": "Pre-registration",
+   "test": "Configuration frozen and recorded before the holdout was evaluated."
+  },
+  {
+   "id": "G12",
+   "name": "Prospective replication",
+   "test": "Timestamped forward predictions; not yet available."
+  }
+ ],
+ "definitions": [
+  {
+   "id": "S1",
+   "family": "single",
+   "name": "Spread divergence >= 2.0 points",
+   "rule": "Bet the side where the own line differs from the third-party closing line by 2+ points."
+  },
+  {
+   "id": "S2",
+   "family": "single",
+   "name": "Spread divergence >= 3.5 points",
+   "rule": "Same rule, wider threshold; fewer bets, larger disagreement."
+  },
+  {
+   "id": "S3",
+   "family": "single",
+   "name": "Total divergence >= 2.0 points",
+   "rule": "Bet over when the own total is 2+ above the closing total, under when 2+ below."
+  },
+  {
+   "id": "S4",
+   "family": "single",
+   "name": "Rest advantage >= 3 days",
+   "rule": "Bet the side with 3+ more days of rest."
+  },
+  {
+   "id": "S5",
+   "family": "single",
+   "name": "Short-week fade of the road team",
+   "rule": "Bet the home team when the visitor played 4 or fewer days earlier."
+  },
+  {
+   "id": "S6",
+   "family": "single",
+   "name": "Wind >= 15 mph: under",
+   "rule": "Bet the under in outdoor games with wind of 15 mph or more."
+  },
+  {
+   "id": "S7",
+   "family": "single",
+   "name": "Divisional home underdog getting 1-3 points",
+   "rule": "Bet a divisional home underdog with a handicap between 1 and 3 points."
+  },
+  {
+   "id": "S8",
+   "family": "single",
+   "name": "Large home underdog",
+   "rule": "Bet a home underdog getting 7.0 points or more."
+  },
+  {
+   "id": "S9",
+   "family": "single",
+   "name": "Both clubs out of a bye: under",
+   "rule": "Bet the under when both clubs had 13+ days of rest."
+  },
+  {
+   "id": "S11",
+   "family": "single",
+   "name": "Home underdog with a rest advantage",
+   "rule": "Home underdog getting 3+ points with at least 2 more rest days than the visitor."
+  },
+  {
+   "id": "S12",
+   "family": "single",
+   "name": "Big total divergence >= 5.0 points",
+   "rule": "The same rule as S3 at a wider threshold; isolates extreme disagreements."
+  },
+  {
+   "id": "P1",
+   "family": "parlay",
+   "name": "Cross-game 2-leg parlay from the top-2 spread edges of a week",
+   "rule": "Legs are the two largest spread disagreements that week, from different games."
+  },
+  {
+   "id": "P2",
+   "family": "parlay",
+   "name": "Cross-game 3-leg parlay from the top-3 spread edges of a week",
+   "rule": "Three legs, three different games."
+  },
+  {
+   "id": "P3",
+   "family": "parlay",
+   "name": "Same-game 2-leg: spread + total on the same game",
+   "rule": "The largest spread disagreement and the total disagreement on that same game."
+  },
+  {
+   "id": "PR1",
+   "family": "prop",
+   "name": "QB passing yards over the own line",
+   "rule": "Own line is the mean of the player's earlier official games this season."
+  },
+  {
+   "id": "PR2",
+   "family": "prop",
+   "name": "WR receiving yards over the own line",
+   "rule": "Same construction for receivers."
+  },
+  {
+   "id": "PR3",
+   "family": "prop",
+   "name": "RB rushing yards over the own line",
+   "rule": "Same construction for running backs."
+  },
+  {
+   "id": "PR4",
+   "family": "prop",
+   "name": "Same-player prop combo: QB + his WR, same game",
+   "rule": "Two legs on the same club; the dependency is measured, not assumed."
+  },
+  {
+   "id": "PR5",
+   "family": "prop",
+   "name": "Cross-club prop combo (control)",
+   "rule": "Two legs from different clubs: the dependency should be near zero, which is the point."
+  }
+ ],
+ "results": {
+  "S1": {
+   "id": "S1",
+   "family": "single",
+   "name": "Spread divergence >= 2.0 points",
+   "rule": "Bet the side where the own line differs from the third-party closing line by 2+ points.",
+   "n": 1710,
+   "wins": 880,
+   "hit_rate": 0.5146198830409356,
+   "break_even": 0.5238095238095238,
+   "z": -0.7608859102526867,
+   "p_value": 0.7766373925411836,
+   "bootstrap_lo": 0.49031476997578693,
+   "bootstrap_hi": 0.5384615384615384,
+   "seasons_graded": 10,
+   "season_stability": 0.4,
+   "placebo_p": 0.0,
+   "gate_detail": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G2",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S2": {
+   "id": "S2",
+   "family": "single",
+   "name": "Spread divergence >= 3.5 points",
+   "rule": "Same rule, wider threshold; fewer bets, larger disagreement.",
+   "n": 1217,
+   "wins": 630,
+   "hit_rate": 0.5176663927691043,
+   "break_even": 0.5238095238095238,
+   "z": -0.42909951208912117,
+   "p_value": 0.6660745963310555,
+   "bootstrap_lo": 0.49065800162469536,
+   "bootstrap_hi": 0.5441640378548895,
+   "seasons_graded": 10,
+   "season_stability": 0.4,
+   "placebo_p": 0.0,
+   "gate_detail": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G2",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S3": {
+   "id": "S3",
+   "family": "single",
+   "name": "Total divergence >= 2.0 points",
+   "rule": "Bet over when the own total is 2+ above the closing total, under when 2+ below.",
+   "n": 1640,
+   "wins": 813,
+   "hit_rate": 0.49573170731707317,
+   "break_even": 0.5238095238095238,
+   "z": -2.276712581197636,
+   "p_value": 0.9885983026356839,
+   "bootstrap_lo": 0.47255369928400953,
+   "bootstrap_hi": 0.5173886516168396,
+   "seasons_graded": 10,
+   "season_stability": 0.2,
+   "placebo_p": 0.0,
+   "gate_detail": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G2",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S4": {
+   "id": "S4",
+   "family": "single",
+   "name": "Rest advantage >= 3 days",
+   "rule": "Bet the side with 3+ more days of rest.",
+   "n": 538,
+   "wins": 274,
+   "hit_rate": 0.5092936802973977,
+   "break_even": 0.5238095238095238,
+   "z": -0.6741497342158453,
+   "p_value": 0.7498919384984322,
+   "bootstrap_lo": 0.4662045060658579,
+   "bootstrap_hi": 0.5542857142857143,
+   "seasons_graded": 10,
+   "season_stability": 0.4,
+   "placebo_p": 0.038,
+   "gate_detail": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G2",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S5": {
+   "id": "S5",
+   "family": "single",
+   "name": "Short-week fade of the road team",
+   "rule": "Bet the home team when the visitor played 4 or fewer days earlier.",
+   "n": 148,
+   "wins": 75,
+   "hit_rate": 0.5067567567567568,
+   "break_even": 0.5238095238095238,
+   "z": -0.41538295287962557,
+   "p_value": 0.6610692079904157,
+   "bootstrap_lo": 0.4276315789473684,
+   "bootstrap_hi": 0.5845070422535211,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 0.19,
+   "gate_detail": {
+    "G1": false,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "3/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S6": {
+   "id": "S6",
+   "family": "single",
+   "name": "Wind >= 15 mph: under",
+   "rule": "Bet the under in outdoor games with wind of 15 mph or more.",
+   "n": 170,
+   "wins": 96,
+   "hit_rate": 0.5647058823529412,
+   "break_even": 0.5238095238095238,
+   "z": 1.06765773922561,
+   "p_value": 0.14283746405902725,
+   "bootstrap_lo": 0.4878048780487805,
+   "bootstrap_hi": 0.6386138613861386,
+   "seasons_graded": 3,
+   "season_stability": 0.3333333333333333,
+   "placebo_p": 0.012,
+   "gate_detail": {
+    "G1": false,
+    "G2": true,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9284435163836772,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G1",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S7": {
+   "id": "S7",
+   "family": "single",
+   "name": "Divisional home underdog getting 1-3 points",
+   "rule": "Bet a divisional home underdog with a handicap between 1 and 3 points.",
+   "n": 0,
+   "gate_detail": {
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "status": "no decisions in the holdout",
+   "q_value": null,
+   "gates_passed": "1/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G10",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S8": {
+   "id": "S8",
+   "family": "single",
+   "name": "Large home underdog",
+   "rule": "Bet a home underdog getting 7.0 points or more.",
+   "n": 212,
+   "wins": 119,
+   "hit_rate": 0.5613207547169812,
+   "break_even": 0.5238095238095238,
+   "z": 1.093584127338978,
+   "p_value": 0.1370687069041251,
+   "bootstrap_lo": 0.49523809523809526,
+   "bootstrap_hi": 0.6274509803921569,
+   "seasons_graded": 4,
+   "season_stability": 0.75,
+   "placebo_p": 0.002,
+   "gate_detail": {
+    "G1": false,
+    "G2": true,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": true,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9284435163836772,
+   "gates_passed": "6/12",
+   "gates_failed": [
+    "G1",
+    "G3",
+    "G4",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Bronze",
+   "eligible_for_reward": false
+  },
+  "S9": {
+   "id": "S9",
+   "family": "single",
+   "name": "Both clubs out of a bye: under",
+   "rule": "Bet the under when both clubs had 13+ days of rest.",
+   "n": 25,
+   "wins": 15,
+   "hit_rate": 0.6,
+   "break_even": 0.5238095238095238,
+   "z": 0.7627700713964733,
+   "p_value": 0.22280026644883846,
+   "bootstrap_lo": 0.4,
+   "bootstrap_hi": 0.8,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 0.141,
+   "gate_detail": {
+    "G1": false,
+    "G2": true,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9654678212783,
+   "gates_passed": "4/12",
+   "gates_failed": [
+    "G1",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S11": {
+   "id": "S11",
+   "family": "single",
+   "name": "Home underdog with a rest advantage",
+   "rule": "Home underdog getting 3+ points with at least 2 more rest days than the visitor.",
+   "n": 54,
+   "wins": 27,
+   "hit_rate": 0.5,
+   "break_even": 0.5238095238095238,
+   "z": -0.3503245248726857,
+   "p_value": 0.6369524190837355,
+   "bootstrap_lo": 0.36363636363636365,
+   "bootstrap_hi": 0.6379310344827587,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 0.387,
+   "gate_detail": {
+    "G1": false,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "3/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "S12": {
+   "id": "S12",
+   "family": "single",
+   "name": "Big total divergence >= 5.0 points",
+   "rule": "The same rule as S3 at a wider threshold; isolates extreme disagreements.",
+   "n": 665,
+   "wins": 337,
+   "hit_rate": 0.5067669172932331,
+   "break_even": 0.5238095238095238,
+   "z": -0.8799739013093786,
+   "p_value": 0.810563275947109,
+   "bootstrap_lo": 0.4703389830508475,
+   "bootstrap_hi": 0.5417298937784522,
+   "seasons_graded": 10,
+   "season_stability": 0.4,
+   "placebo_p": 0.022,
+   "gate_detail": {
+    "G1": true,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": true,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "5/12",
+   "gates_failed": [
+    "G2",
+    "G3",
+    "G4",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "P1": {
+   "id": "P1",
+   "family": "parlay",
+   "name": "Cross-game 2-leg parlay from the top-2 spread edges of a week",
+   "rule": "Legs are the two largest spread disagreements that week, from different games.",
+   "n": 161,
+   "wins": 40,
+   "hit_rate": 0.2484472049689441,
+   "break_even": 0.2743764172335601,
+   "z": -0.737349136807554,
+   "p_value": 0.7695449709595741,
+   "bootstrap_lo": 0.18633540372670807,
+   "bootstrap_hi": 0.3167701863354037,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 1.0,
+   "gate_detail": {
+    "G1": false,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "3/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "P2": {
+   "id": "P2",
+   "family": "parlay",
+   "name": "Cross-game 3-leg parlay from the top-3 spread edges of a week",
+   "rule": "Three legs, three different games.",
+   "n": 159,
+   "wins": 18,
+   "hit_rate": 0.11320754716981132,
+   "break_even": 0.14372098045567436,
+   "z": -1.0967860068652542,
+   "p_value": 0.8636325257035986,
+   "bootstrap_lo": 0.06918238993710692,
+   "bootstrap_hi": 0.16352201257861634,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 1.0,
+   "gate_detail": {
+    "G1": false,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "3/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  },
+  "P3": {
+   "id": "P3",
+   "family": "parlay",
+   "name": "Same-game 2-leg: spread + total on the same game",
+   "rule": "The largest spread disagreement and the total disagreement on that same game.",
+   "n": 101,
+   "wins": 21,
+   "hit_rate": 0.2079207920792079,
+   "break_even": 0.2743764172335601,
+   "z": -1.496798536466313,
+   "p_value": 0.9327771563817004,
+   "bootstrap_lo": 0.12871287128712872,
+   "bootstrap_hi": 0.2871287128712871,
+   "seasons_graded": 0,
+   "season_stability": null,
+   "placebo_p": 1.0,
+   "gate_detail": {
+    "G1": false,
+    "G2": false,
+    "G3": false,
+    "G5": true,
+    "G6": false,
+    "G7": false,
+    "G9": false,
+    "G10": true,
+    "G4": false,
+    "G11": true,
+    "G12": false,
+    "G8": false
+   },
+   "q_value": 0.9885983026356839,
+   "gates_passed": "3/12",
+   "gates_failed": [
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G6",
+    "G7",
+    "G8",
+    "G9",
+    "G12"
+   ],
+   "tier": "Rejected",
+   "eligible_for_reward": false
+  }
+ },
+ "prop": [
+  {
+   "id": "PR1",
+   "n": 16,
+   "over_rate": 0.625,
+   "note": "Over rate against a rolling own line built only from earlier official games. Small n; no gate can pass at this sample."
+  },
+  {
+   "id": "PR2",
+   "n": 10,
+   "over_rate": 0.2,
+   "note": "Over rate against a rolling own line built only from earlier official games. Small n; no gate can pass at this sample."
+  },
+  {
+   "id": "PR3",
+   "n": 5,
+   "over_rate": 0.4,
+   "note": "Over rate against a rolling own line built only from earlier official games. Small n; no gate can pass at this sample."
+  }
+ ],
+ "combos": [
+  {
+   "id": "PR4",
+   "label": "QB over + WR over (New England, same game)",
+   "n": 0,
+   "joint": null,
+   "independent": null,
+   "note": "No same-club overlapping official logs in this session; the combo cannot be graded and is left blank."
+  },
+  {
+   "id": "PR5",
+   "label": "QB over + RB over (different clubs - control)",
+   "n": 0,
+   "joint": null,
+   "independent": null,
+   "note": "No same-club overlapping official logs in this session; the combo cannot be graded and is left blank."
+  }
+ ]
+}

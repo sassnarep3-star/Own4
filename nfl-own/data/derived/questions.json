@@ -1,0 +1,140 @@
+{
+ "dataset": "decision_register",
+ "rows": [
+  {
+   "id": "Q01",
+   "question": "Do we have official per-game player data for props?",
+   "known": "Yes. nfl.com/players/<slug>/stats/logs/ publishes a full per-game log per player, and the logs sum exactly to the published season totals (IC-15/16, 5 of 6 players check out).",
+   "unknown": "Complete coverage of every player, and any per-game data for defensive players.",
+   "answer": "Props are NOT blocked. Three earlier sessions recorded them as blocked; that was wrong (flag F-01).",
+   "unlock": "Nothing - resolved 2026-11-13.",
+   "status": "answered"
+  },
+  {
+   "id": "Q02",
+   "question": "Does the NFL publish a depth chart with 1st/2nd/3rd string?",
+   "known": "No. The team depth-chart URL returns 404 for every club tried; the official roster page lists players, jersey numbers, positions and roster status (ACT) but no depth rank.",
+   "unknown": "Who is the backup at each position. This is not published by the league at all.",
+   "answer": "Starter-vs-backup replacement cannot be derived from official sources.",
+   "unlock": "A licensed depth-chart or snap-count feed (see S-02).",
+   "status": "blocked"
+  },
+  {
+   "id": "Q03",
+   "question": "What do we know about injuries right now?",
+   "known": "The official Week 10 injury report covers 14 games with practice status and game status per player, and it still shows pre-game records for the Week 10 clubs.",
+   "unknown": "Severity, expected games missed, and who replaces whom.",
+   "answer": "We can quantify unavailability by club and position; we cannot say who the backup is.",
+   "unlock": "A published participation/snap feed.",
+   "status": "partial"
+  },
+  {
+   "id": "Q04",
+   "question": "Do we have a 2026 market price to compare our lines against?",
+   "known": "No. The NFL publishes no prices and this repository holds no licensed 2026 line archive.",
+   "unknown": "Every closing price, every prop price, every parlay price.",
+   "answer": "No 2026 edge, divergence or return can be computed or claimed.",
+   "unlock": "A licensed historical and live odds feed.",
+   "status": "blocked"
+  },
+  {
+   "id": "Q05",
+   "question": "Is the third-party archive good enough for the backtest?",
+   "known": "7,548 regular-season games, 1999-2026, with closing spread and total. Peer sessions spot-checked 45 of 45 official scores with zero mismatches.",
+   "unknown": "Its licence status, and whether its closing lines are true closing prices.",
+   "answer": "Usable for research; not usable for any commercial claim.",
+   "unlock": "Written licence review (flag F-05).",
+   "status": "partial"
+  },
+  {
+   "id": "Q06",
+   "question": "How big must the sample be before a strategy can be believed?",
+   "known": "L3 computes it: about 2,300 graded decisions for a 55% edge at 80% power.",
+   "unknown": "Whether any genuine edge exists at all in public data.",
+   "answer": "The 300-decision gate G1 is a floor, not a sufficient sample.",
+   "unlock": "Nothing - this is arithmetic.",
+   "status": "answered"
+  },
+  {
+   "id": "Q07",
+   "question": "Can luck be removed entirely?",
+   "known": "No. It can only be bounded: pre-registration, holdout, clustered intervals, placebo tests, FDR control and prospective replication.",
+   "unknown": "The true edge of any strategy until prospective replication exists.",
+   "answer": "G12 (prospective replication) is the only gate that genuinely removes hindsight.",
+   "unlock": "Run the leaderboard forward with timestamped predictions.",
+   "status": "open"
+  },
+  {
+   "id": "Q08",
+   "question": "Which correlations did we actually measure?",
+   "known": "Team-level: favourite-cover vs over phi = -0.0079; home win vs over phi = +0.0110; home margin vs total and rest vs margin, computed on the holdout.",
+   "unknown": "Player-level correlations beyond the seven official logs read here.",
+   "answer": "Team-level pairs are near zero, so multiplicative parlay pricing is defensible for those pairs. Player-level values come from small samples and are labelled as such.",
+   "unlock": "More official game logs (one page per player per season).",
+   "status": "partial"
+  },
+  {
+   "id": "Q09",
+   "question": "What is the injury-to-performance link, quantified?",
+   "known": "Nothing yet. We have Week 10 availability and the archive's results, but the archive has no injury field.",
+   "unknown": "Any measured effect of a missing starter or backup on spread or total.",
+   "answer": "No injury effect is claimed anywhere on this site.",
+   "unlock": "Historical injury reports joined game by game (see S-05).",
+   "status": "open"
+  },
+  {
+   "id": "Q10",
+   "question": "Does the own-line model beat the closing line?",
+   "known": "No. In the holdout the own spread is worse than the closing line on mean absolute error.",
+   "unknown": "Whether a better model with injuries and player data could close the gap.",
+   "answer": "Own lines are not yet a price. They are a structured projection.",
+   "unlock": "Add the injury and player features, then re-register the gates.",
+   "status": "partial"
+  },
+  {
+   "id": "Q11",
+   "question": "Are the leaderboard rewards real?",
+   "known": "No. Rewards are competition points, not money, and no strategy has earned any.",
+   "unknown": "Whether any strategy will ever pass every gate.",
+   "answer": "Zero points awarded in this release, and that is the honest output.",
+   "unlock": "Prospective replication with live, timestamped decisions.",
+   "status": "answered"
+  },
+  {
+   "id": "Q12",
+   "question": "Are parlays additive or does correlation matter?",
+   "known": "Measured phi for the pairs we can check; same-player prop combos are positively correlated by construction and their joint hit rate is measured here.",
+   "unknown": "Book repricing behaviour on correlated combos, which needs real prices.",
+   "answer": "Correlated legs must be priced jointly, not multiplied. Our own numbers show the gap.",
+   "unlock": "Real SGP prices.",
+   "status": "partial"
+  },
+  {
+   "id": "Q13",
+   "question": "Is any team-level signal stable into Week 11?",
+   "known": "Ratings are shrunk by 6 games and use only official 2026 results.",
+   "unknown": "Whether mid-season ratings persist; we have one season of official data.",
+   "answer": "Projections are published with their inputs so the shrinkage is auditable.",
+   "unlock": "Multiple official seasons with the same pipeline.",
+   "status": "partial"
+  },
+  {
+   "id": "Q14",
+   "question": "What is missing to originate player-prop lines with confidence?",
+   "known": "Seven official per-game logs, read here, plus 75 season leaders.",
+   "unknown": "Every other player's game log (each needs its own page read), and any prop price.",
+   "answer": "We can originate props for 7 players today, honestly labelled as small-sample.",
+   "unlock": "Read more logs; see S-01.",
+   "status": "partial"
+  },
+  {
+   "id": "Q15",
+   "question": "Which irregularity in the current repo blocks us?",
+   "known": "Rebuilding the root dashboard silently deletes peer NFL navigation (R-01); the Week 10 injury page still shows pre-game records; the published AVG column does not reproduce yds/att on 4 of 32 rows (IC-07).",
+   "unknown": "Whether the peer sessions intend to consolidate the eleven NFL namespaces.",
+   "answer": "None of these blocks publication; all are published on the Flagged page.",
+   "unlock": "Peer sessions act on R-01 and the consolidation decision.",
+   "status": "open"
+  }
+ ]
+}
