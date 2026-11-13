@@ -1960,3 +1960,34 @@ https://sassnarep3-star.github.io/Own4/index.html .
 **Final local verification state:** 20 pages, 1,140 local links checked, **0 broken**,
 969 data rows, **969 rows carrying a source link**, 43 blank (unverified) cells published
 as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 all pass.
+
+---
+
+## Session `arena/934af359-own4` — NFL verification pass, consolidated command dashboard (2026-11-13 UTC)
+
+**Session ID:** `arena-934af359-own4` · **Branch:** `arena/934af359-own4` (platform-fixed; per-task
+`session-<id>/<task>` branches cannot be created in this harness — same logged deviation as every prior
+session). **Base:** `553c3f053608fd74043192864908508bef60ebfd` (main).
+
+### Task claim (2026-11-13)
+
+| # | Task | Status | Owner | File scope |
+|---|------|--------|-------|------------|
+| A1 | Repo review (line-by-line of NFL namespaces vs official sources) | in progress | arena-934af359-own4 | `nfl-command/pages/repo-review.html`, `nfl-command/data/repo_review.json` |
+| A2 | Official data capture 2026-11-13 (standings, results, Week 11 slate, injuries, team stats) | in progress | arena-934af359-own4 | `nfl-command/data/**` |
+| A3 | Own-line model + Week 11 originated lines | in progress | arena-934af359-own4 | `nfl-command/engine/**` |
+| A4 | Strategy framework: singles, parlays, prop combos, validation gates, correlations, luck removal, leaderboard + rewards | in progress | arena-934af359-own4 | `nfl-command/data/strategies.json`, `nfl-command/pages/{strategies,validation,correlations,leaderboard}.html` |
+| A5 | Injury + depth-deficiency tracking (starter/backup coverage) | in progress | arena-934af359-own4 | `nfl-command/pages/{injuries,depth}.html` |
+| A6 | Decision layer: requirements, question register, suggestions board | in progress | arena-934af359-own4 | `nfl-command/pages/{requirements,questions,suggestions}.html` |
+| A7 | Executive summary | in progress | arena-934af359-own4 | `nfl-command/EXECUTIVE_SUMMARY.md`, `nfl-command/pages/executive-summary.html` |
+| A8 | Site build + verification (every table row source-linked) | in progress | arena-934af359-own4 | `nfl-command/index.html`, `nfl-command/pages/**`, `nfl-command/build.py`, `nfl-command/verify.py` |
+| A9 | Integration: root nav link (additive), PR to main, merge, Pages confirmation | in progress | arena-934af359-own4 | `index.html` (additive link only), `COORDINATION.md` |
+
+**Non-overlapping scope statement.** All prior namespaces (`nfl/`, `nfl-audit/`, `nfl-decision/`,
+`nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-intel/`, `nfl-lab/`, `nfl-lines/`, `nfl-quant/`,
+`nfl-research/`, plus all NBA/rental namespaces) are **read-only** to this session. This session adds only
+`nfl-command/**`, one additive navigation entry in root `index.html`, and appended entries in
+`COORDINATION.md`/`README.md`. No other session was found active at start (main HEAD `553c3f0`,
+2026-11-12T17:31Z merge; all prior claims marked done).
+
+- 2026-11-13 — Claim written; pushing immediately. No conflicting claim found in the board.
