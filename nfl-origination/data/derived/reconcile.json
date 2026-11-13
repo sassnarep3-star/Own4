@@ -33,14 +33,22 @@
   },
   {
    "id": "IC-04",
-   "name": "Line sign convention measured, not assumed",
-   "detail": "home_fav_by >= +7 -> 80.4% home win rate (n=1707); <= -7 -> 23.3% (n=527). Confirms home_fav_by is the home team's favoured-by margin, so home_spread = -home_fav_by.",
-   "pass": true
+   "name": "Line sign convention measured against both readings",
+   "detail": "n=7412 games with a line. Reading spread_line as the expected home margin: MAE 10.256, r=+0.426. Reading it as the negative: MAE 14.612, r=-0.426. A real line must show MAE near 10 and r near +0.4, so the first reading is the correct one and home_spread = -spread_line.",
+   "pass": true,
+   "metrics": {
+    "mae_direct": 10.25586886130599,
+    "mae_flipped": 14.612182946573125,
+    "r_direct": 0.4262343669882014,
+    "r_flipped": -0.4262343669882014,
+    "home_cover_rate_at_this_line": 0.4761198057204533,
+    "n": 7412
+   }
   },
   {
    "id": "IC-05",
-   "name": "Home margin derivation",
-   "detail": "0 contradictions",
+   "name": "Line is a genuine market line, not a result",
+   "detail": "home cover rate 0.476 against the measured line (a post-hoc line would be 1.000); mean line 2.240 vs mean actual home margin 2.301",
    "pass": true
   },
   {

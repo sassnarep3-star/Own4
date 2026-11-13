@@ -1,0 +1,88 @@
+{
+ "id": "gates-2026-11-13",
+ "gates": [
+  {
+   "id": "G1",
+   "name": "Data reconciliation to the official record",
+   "status": "pass",
+   "evidence": "10 of 10 integrity checks pass; 160 of 160 official 2026 W/L/T/PF/PA cells match",
+   "rule": "Every integrity check must pass before any number is published."
+  },
+  {
+   "id": "G2",
+   "name": "Minimum out-of-sample sample",
+   "status": "pass",
+   "evidence": "2126 graded games in the 2018-2025 holdout (floor 1000)",
+   "rule": "At least 1,000 out-of-sample games before a skill claim."
+  },
+  {
+   "id": "G3",
+   "name": "Beats the naive baseline",
+   "status": "pass",
+   "evidence": "margin MAE 10.913 (own) vs 11.067 (naive home)",
+   "rule": "The model must beat the do-nothing baseline."
+  },
+  {
+   "id": "G4",
+   "name": "Beats the closing line",
+   "status": "fail",
+   "evidence": "margin MAE 10.913 (own) vs 9.848 (closing line)",
+   "rule": "Beating a naive baseline is not skill; the closing line is the real opponent."
+  },
+  {
+   "id": "G5",
+   "name": "Survives multiple-testing control",
+   "status": "fail",
+   "evidence": "7 strategies tested (including placebos); 0 survive Benjamini-Hochberg at q=0.05",
+   "rule": "No strategy may be called skilful unless it survives FDR across everything tried."
+  },
+  {
+   "id": "G6",
+   "name": "Placebos fail (the screen is not too loose)",
+   "status": "pass",
+   "evidence": "2 pre-registered placebo strategies; 0 passed FDR",
+   "rule": "If a placebo can pass, the screen is too loose to be published as skill."
+  },
+  {
+   "id": "G7",
+   "name": "Executable, archived price",
+   "status": "blocked",
+   "evidence": "The NFL publishes no betting odds. Every ROI here is priced at an ASSUMED -110; closing lines come from a third-party archive and no price history was licensed.",
+   "rule": "An edge must be measured against a price that could actually have been taken."
+  },
+  {
+   "id": "G8",
+   "name": "Uncertainty reported and bounded away from zero",
+   "status": "fail",
+   "evidence": "0 strategies have a week-clustered 95% CI on ROI entirely above zero (of 5 priced)",
+   "rule": "A positive point estimate is not enough; the interval must exclude zero."
+  },
+  {
+   "id": "G9",
+   "name": "Profit is not one season in disguise",
+   "status": "fail",
+   "evidence": "1 profitable strategies spread their profit over seasons; every profitable strategy discloses the share of its profit coming from its single best season",
+   "rule": "No single season may supply the majority of a strategy's profit."
+  },
+  {
+   "id": "G10",
+   "name": "Deterministic reproduction",
+   "status": "pass",
+   "evidence": "Every random draw uses seed 20261113; re-running run_all.py reproduces each derived JSON byte for byte apart from the timestamp.",
+   "rule": "CI must be able to regenerate every published number from committed code."
+  }
+ ],
+ "scoreboard": {
+  "pool": 1000,
+  "awarded": 0,
+  "blocked_by": [
+   "G4",
+   "G5",
+   "G7",
+   "G8",
+   "G9"
+  ],
+  "qualifiers": [],
+  "note": "No reward can be paid while any gate is open."
+ }
+}

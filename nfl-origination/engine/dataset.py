@@ -27,6 +27,7 @@ import sys
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "engine"))
 
+import stats                                        # noqa: E402
 from teams import TEAMS, ARCHIVE_ALIAS, FRANCHISE_HISTORY   # noqa: E402
 
 ARCHIVE = ROOT.parent / "nfl-lines" / "data" / "raw" / "nfldata_games.csv"
@@ -88,8 +89,13 @@ def normalise(rows):
             "played": hs is not None and as_ is not None,
             "home_margin": (hs - as_) if (hs is not None and as_ is not None) else None,
             "total": (hs + as_) if (hs is not None and as_ is not None) else None,
-            "home_fav_by": sl,                       # archive convention, kept verbatim
-            "home_spread": (-sl) if sl is not None else None,   # conventional home line
+            "spread_line": sl,                       # archive column, kept verbatim
+            # `spread_line` in this archive IS the expected home margin (positive = home
+            # favoured). This was measured, not assumed -- see IC-04. The market's expected
+            # home margin is therefore spread_line itself, and no sign flip is applied.
+            "market_home_margin": sl,
+            # the conventional "home spread" a bookmaker quotes is its negative
+            "home_spread": (-sl) if sl is not None else None,
             "total_line": tl,
             "roof": r["roof"] or None,
             "surface": r["surface"] or None,
@@ -126,30 +132,38 @@ def reconcile(games, slate, standings_doc):
     checks.append({"id": "IC-03", "name": "Score presence", "detail": "%d inconsistent rows" % len(bad),
                    "pass": not bad})
 
-    # IC-04 line convention, measured on the whole archive
-    withline = [g for g in games if g["played"] and g["home_fav_by"] is not None]
-    buckets = {"+7 or more": [], "-7 or less": []}
-    for g in withline:
-        if g["home_fav_by"] >= 7:
-            buckets["+7 or more"].append(g["home_margin"])
-        elif g["home_fav_by"] <= -7:
-            buckets["-7 or less"].append(g["home_margin"])
-    hi = sum(1 for m in buckets["+7 or more"] if m > 0) / float(len(buckets["+7 or more"]))
-    lo = sum(1 for m in buckets["-7 or less"] if m > 0) / float(len(buckets["-7 or less"]))
+    # IC-04 line convention, measured on the whole archive, both candidate readings compared
+    withline = [g for g in games if g["played"] and g["spread_line"] is not None]
+    mae_direct = sum(abs(g["home_margin"] - g["spread_line"]) for g in withline) / len(withline)
+    mae_flipped = sum(abs(g["home_margin"] + g["spread_line"]) for g in withline) / len(withline)
+    corr_direct = stats.pearson([g["spread_line"] for g in withline],
+                                [g["home_margin"] for g in withline])
+    corr_flipped = stats.pearson([-g["spread_line"] for g in withline],
+                                 [g["home_margin"] for g in withline])
+    cover_direct = sum(1 for g in withline if g["home_margin"] > g["spread_line"]) / float(len(withline))
     checks.append({
-        "id": "IC-04", "name": "Line sign convention measured, not assumed",
-        "detail": ("home_fav_by >= +7 -> %.1f%% home win rate (n=%d); <= -7 -> %.1f%% (n=%d). "
-                   "Confirms home_fav_by is the home team's favoured-by margin, so "
-                   "home_spread = -home_fav_by."
-                   % (hi * 100, len(buckets["+7 or more"]), lo * 100, len(buckets["-7 or less"]))),
-        "pass": hi > 0.70 and lo < 0.30,
+        "id": "IC-04", "name": "Line sign convention measured against both readings",
+        "detail": ("n=%d games with a line. Reading spread_line as the expected home margin: "
+                   "MAE %.3f, r=%+.3f. Reading it as the negative: MAE %.3f, r=%+.3f. "
+                   "A real line must show MAE near 10 and r near +0.4, so the first reading is "
+                   "the correct one and home_spread = -spread_line."
+                   % (len(withline), mae_direct, corr_direct, mae_flipped, corr_flipped)),
+        "pass": mae_direct < 11.0 and mae_flipped > 13.0 and corr_direct > 0.3 and corr_flipped < -0.3,
+        "metrics": {"mae_direct": mae_direct, "mae_flipped": mae_flipped,
+                    "r_direct": corr_direct, "r_flipped": corr_flipped,
+                    "home_cover_rate_at_this_line": cover_direct, "n": len(withline)},
     })
 
-    # IC-05 archive `result` column equals home minus away
-    mism = [g["game_id"] for g in withline if g["home_fav_by"] is not None
-            and g["played"] and g["home_margin"] != g["home_margin"]]  # never true
-    checks.append({"id": "IC-05", "name": "Home margin derivation", "detail": "%d contradictions" % len(mism),
-                   "pass": not mism})
+    # IC-05 the line predicts the result: home-cover rate must be close to a coin flip
+    checks.append({
+        "id": "IC-05", "name": "Line is a genuine market line, not a result",
+        "detail": ("home cover rate %.3f against the measured line (a post-hoc line would be "
+                   "1.000); mean line %.3f vs mean actual home margin %.3f"
+                   % (cover_direct,
+                      sum(g["spread_line"] for g in withline) / len(withline),
+                      sum(g["home_margin"] for g in withline) / len(withline))),
+        "pass": 0.44 < cover_direct < 0.56,
+    })
 
     # IC-06 the 2026 archive + the one Thursday result reconciles to the official standings
     official = {r[1]: r for r in standings_doc["rows"]}
