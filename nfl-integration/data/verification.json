@@ -126,7 +126,7 @@
    "check": "python3 verification-2026-11-05/build.py; unittest discover -s verification-2026-11-05",
    "scope": "148 published pages, all local links",
    "result": "PASS",
-   "detail": "6/6 tests OK; 0 broken local links; 45 pre-existing rows without source links reported (see INT-09).",
+   "detail": "6/6 tests OK; 0 broken local links; 45 pre-existing rows without source links reported (see INT-09). The audit counts 148 inherited pages and does not scan the nfl-* namespaces — those are covered by their own verifiers (V-005..V-013, V-024..V-027) plus this site's own verify.py (V-023).",
    "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/verification-2026-11-05.yml"
   },
   {
@@ -195,10 +195,10 @@
   {
    "id": "V-022",
    "area": "root navigation integration",
-   "check": "index.html contains every one of the 11 NFL namespaces; generator regeneration is byte-identical",
-   "scope": "verification/build.py NAV, index.html, verified/*.html",
+   "check": "index.html contains every NFL workspace; generator regeneration is byte-identical; nav is a superset of both merged sides",
+   "scope": "verification/build.py NAV (56 entries in one NFL group), index.html, verified/*.html",
    "result": "PASS",
-   "detail": "After the repair, re-running python3 verification/build.py produces no diff (the hand-added links are now generator-owned), and the root landing links nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-lines/, nfl-edge/, nfl-decision/, nfl-decisions/, nfl-hub/, nfl-audit/ and nfl-intel/ plus this review.",
+   "detail": "After the repair, re-running python3 verification/build.py produces no diff and the group \"NFL research · 16 workspaces (2026-11-13)\" links all 15 peer namespaces plus this review. Superset proof vs origin/main: all 92 hrefs present (96 total); superset vs the pre-merge branch: all 67 present. Hand-added-only links absorbed: nfl-own (8), nfl-command (9), nfl-arena (7); generator-owned nfl-origination (5) folded in; orphaned nfl-intel restored; duplicated NFL-audit block from main removed.",
    "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
   },
   {
@@ -209,6 +209,42 @@
    "result": "PASS",
    "detail": "Every table row carries an https source link; all internal links and anchors resolve; no placeholder values; helpline footer present.",
    "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-integration/verify.py"
+  },
+  {
+   "id": "V-024",
+   "area": "nfl-origination verifier",
+   "check": "python3 nfl-origination/verify.py",
+   "scope": "dashboard, suggestions, questions, own lines, flagged",
+   "result": "PASS",
+   "detail": "Every data row source-linked, every local link resolves, disclaimer present, no claim contradicts evidence.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/verify.py"
+  },
+  {
+   "id": "V-025",
+   "area": "nfl-own verifier",
+   "check": "python3 nfl-own/engine/verify_site.py; unittest discover -s nfl-own/tests",
+   "scope": "nfl-own site + analysis tests",
+   "result": "PASS",
+   "detail": "VERIFY PASSED (0 problems); analysis tests OK.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-own/engine/verify_site.py"
+  },
+  {
+   "id": "V-026",
+   "area": "nfl-command verifier",
+   "check": "python3 nfl-command/engine/verify_site.py",
+   "scope": "17 pages, 762 table rows, all sourced",
+   "result": "PASS",
+   "detail": "Every table row carries an official source link or explicit unverified marker; no broken internal links.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/engine/verify_site.py"
+  },
+  {
+   "id": "V-027",
+   "area": "nfl-arena verifier",
+   "check": "python3 nfl-arena/scripts/check_links.py",
+   "scope": "169 local links, 155 table rows",
+   "result": "PASS",
+   "detail": "All local links resolve; every row carries an https source link.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/scripts/check_links.py"
   }
  ]
 }

@@ -24,9 +24,9 @@
   {
    "id": "INT-03",
    "severity": "needs review",
-   "status": "open",
+   "status": "merged; S04 still open",
    "title": "Stale PR #68 taken over; its namespace count is already outdated",
-   "detail": "PR #68 (nfl-decision namespace-count fix, five -> eight) had no commits for over 24 hours and was taken over per the board's stale-claim rule. At takeover time the repository holds ELEVEN NFL namespaces, so the merged text says eight. The count will keep drifting as sessions add namespaces; suggestion S04 in nfl-decision (adopt one canonical dashboard) is the durable fix.",
+   "detail": "PR #68 (nfl-decision namespace-count fix, five -> eight) had no commits for over 24 hours and was taken over per the board stale-claim rule; merged 2026-11-13T22:07Z as merge commit 0c2da76. By merge time the repository held fifteen peer NFL namespaces, so the merged text says eight — the count keeps drifting as sessions add namespaces, and suggestion S04 in nfl-decision (adopt one canonical dashboard) remains the durable fix.",
    "source_url": "https://github.com/sassnarep3-star/Own4/pull/68",
    "clearing_action": "Owner decision on S04, or make the count non-numeric."
   },
@@ -88,8 +88,8 @@
    "id": "INT-10",
    "severity": "needs review",
    "status": "open",
-   "title": "Eleven overlapping NFL namespaces remain unconsolidated",
-   "detail": "nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-lines/, nfl-edge/, nfl-decision/, nfl-decisions/, nfl-hub/, nfl-audit/ and nfl-intel/ all publish NFL research. This integration makes every one of them reachable from a single organised NFL category on the root landing page (no link removed), but it does not merge their content. The consolidation suggestion (S04 in nfl-decision, SG-11 in nfl-lines) stays open for the owner.",
+   "title": "Fifteen overlapping NFL namespaces remain unconsolidated",
+   "detail": "nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-lines/, nfl-edge/, nfl-decision/, nfl-decisions/, nfl-hub/, nfl-audit/, nfl-intel/, nfl-origination/, nfl-own/, nfl-command/ and nfl-arena/ all publish NFL research. Four of them (nfl-origination, nfl-own, nfl-command, nfl-arena) arrived while this session worked (PRs #85/#86 and two direct merges) and were folded into the same single category. This integration makes every one reachable from one organised NFL group on the root landing page (no link removed, nav proven a superset of both sides) but does not merge content — the consolidation suggestions (S04, SG-11) stay open for the owner.",
    "source_url": "https://github.com/sassnarep3-star/Own4",
    "clearing_action": "Owner picks one canonical NFL dashboard; others become cited archives."
   },
@@ -110,6 +110,15 @@
    "detail": "The canonical footer rendered by verification/build.py reads 'Own4 — NBA line-origination research' while the navigation now carries eleven NFL namespaces plus rental sections. Cosmetic mismatch only; wording left unchanged because it is the identity line of the canonical NBA dashboard's owners.",
    "source_url": "https://sassnarep3-star.github.io/Own4/",
    "clearing_action": "Owner rewords the footer, e.g. 'Own4 — NBA and NFL line-origination research'."
+  },
+  {
+   "id": "INT-13",
+   "severity": "defect found",
+   "status": "fixed by this integration",
+   "title": "main carried a duplicated NFL nav block (hand-merge artifact)",
+   "detail": "At merge time origin/main index.html listed the whole \"NFL audit\" block twice — the signature of conflicting hand edits to generated output. The consolidated generator-owned group replaced it; the regenerated page contains each href exactly once (verified: nfl-audit/index.html x1, single NFL research group header).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/index.html",
+   "clearing_action": "Already cleared: only the generator edits NAV from now on."
   }
  ]
 }

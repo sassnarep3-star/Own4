@@ -163,7 +163,7 @@ def build_index():
         ("%d" % exact, "team-stat values matched exactly", "ok"),
         ("%d" % drift, "expected drift values (Thursday game)", "warn"),
         ("%d" % len(flags["flags"]), "items flagged for review", "warn"),
-        ("11", "NFL namespaces now linked from the root", "brand"),
+        ("16", "workspaces linked in one NFL category", "brand"),
         ("0", "rewards — no strategy passes G7 (no price source)", ""),
     ]
     card_html = "".join(
@@ -190,15 +190,16 @@ def build_index():
             '<a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a>'])
 
     body = """<h1>NFL integration review — 2026-11-13</h1>
-<p class="lede">Final-integration pass over the repository's eleven NFL namespaces:
-every stored table re-checked against official NFL.com pages re-read today, every
-namespace verifier re-run, the root navigation repaired so all eleven are reachable,
-and every irregularity published instead of hidden. Session <code>arena/8e2de421-own4</code>.</p>
+<p class="lede">Final-integration pass over the repository's fifteen NFL namespaces (plus this
+review): every stored table re-checked against official NFL.com pages re-read today, every
+namespace verifier re-run — including four namespaces that merged while this session worked —
+the root navigation repaired so all sixteen are reachable from one category, and every
+irregularity published instead of hidden. Session <code>arena/8e2de421-own4</code>.</p>
 <div class="cards">%s</div>
 <div class="note good"><b>Headline:</b> the repository's NFL data holds up. Five standings
 files match the official page line for line (32/32 clubs each), 363 team-stat values match
 exactly with zero mismatches, the frozen Thursday injury report matches 100/100 fields, and
-ten namespace verifiers plus three repository CI suites pass. The only differences found
+fourteen namespace verifiers plus three repository CI suites pass. The only differences found
 belong to the one game played after the snapshots (WAS 24 - NYG 21) and to one older
 snapshot. Nothing was inferred; blanks stay blank.</div>
 <div class="note warn"><b>What was broken and is now fixed:</b> <code>nfl-intel/</code> had
@@ -226,11 +227,13 @@ links on every re-run (defects INT-01/INT-02). Both are repaired in
 <li><b>0 of 4+ strategies reward-eligible; 0 rewards.</b> Gate G7 (executable prices) cannot
 pass because no official source publishes betting prices — re-confirmed today
 (<a href="https://www.nfl.com/games">nfl.com/games</a>, odds control renders no values).</li>
-<li><b>Eleven overlapping NFL dashboards</b> remain unconsolidated (flag INT-10). This pass
+<li><b>Fifteen overlapping NFL dashboards</b> remain unconsolidated (flag INT-10). This pass
 links all of them from one category; it does not merge content — the owner decision S04 is
 still open.</li>
 <li><b>Stale PR #68</b> taken over and merged (flag INT-03); its namespace count says eight
-where the repository now holds eleven.</li>
+where the repository now holds fifteen. PRs #85/#86 and two direct merges added
+nfl-origination, nfl-own, nfl-command and nfl-arena mid-session — all four folded into the
+same generator-owned group, whose nav was proven a superset of both merged sides.</li>
 </ul>
 """ % (card_html, n_pass, len(flags["flags"]), table(
         ["Repository standings file", "Verdict", "Row matches", "Source"], st_rows))
@@ -390,7 +393,7 @@ def build_flagged():
     rows_html = "".join("".join(r) + "</tr>" for r in rows)
     body = """<h1>Flagged for review</h1>
 <div class="note warn"><b>These items do not block publication.</b> They are published so
-the owner can review them. Two are already fixed by this integration; the rest need an
+the owner can review them. Three are already fixed by this integration; the rest need an
 owner decision, a data purchase, or a namespace owner's edit — none of them was papered
 over.</div>
 <div class="tbl-wrap"><table><thead><tr><th>ID</th><th>Severity / status</th>
