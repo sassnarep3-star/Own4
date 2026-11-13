@@ -2067,3 +2067,84 @@ Merged **2026-11-13T21:34:24Z**, merge commit `95e7d6f056f845b7ace63dc4d235a3937
 Checks passed: PR `nfl-lines verify` run [43511669902](https://github.com/sassnarep3-star/Own4/actions/runs/43511669902); post-merge `nfl-lines verify` [43511889753](https://github.com/sassnarep3-star/Own4/actions/runs/43511889753); navigation audit [43511889702](https://github.com/sassnarep3-star/Own4/actions/runs/43511889702); and validation [43511889791](https://github.com/sassnarep3-star/Own4/actions/runs/43511889791). The post-merge NFL workflow had its documented non-blocking warning that the repo-wide audit page differs from its fresh whole-repository scan; row/link validation still passed.
 
 GitHub Pages deployment [43511888792](https://github.com/sassnarep3-star/Own4/actions/runs/43511888792) succeeded and Pages API returned `built`. The live overview, own-lines page, and Flagged for review page were fetched with a cache-busting query; the overview displays the stale-slate alert, the WAS @ NYG forecast is visibly marked `STALE - FINAL`, and IR-16 with its two official links is present.
+
+---
+
+## Session `arena/22679198-own4` — COMPLETION RECORD: NFL origination namespace (2026-11-13)
+
+Session ID: `arena/22679198-own4` · Branch: `arena/22679198-own4` (pinned; no other branch created or pushed) · Base at session start: `553c3f0`.
+
+**Status: complete and published.** PR **[#79](https://github.com/sassnarep3-star/Own4/pull/79)** merged into `main` at **2026-11-13T21:47:36Z**, merge commit `a601590873f897c037cdf8fabdb796334eafc042`.
+
+### Deliverable
+
+`nfl-origination/` — 16 interlinked pages, one stylesheet, no JavaScript needed to read anything.
+Live: https://sassnarep3-star.github.io/Own4/nfl-origination/pages/index.html
+
+| Page | Content |
+|---|---|
+| Dashboard | headline result, 9 stat cards, executive findings |
+| Executive summary | one-page brief + `EXECUTIVE_SUMMARY.md` |
+| Requirements | 41 → evidence → **32 met / 7 partial / 2 blocked** |
+| **Suggestions & decisions** | **22 items** (13 now / 7 later / 2 blocked) with options, evidence, cost, risk, recommendation and an **ordered path** |
+| **Questions & unknowns** | **20** (7 known / 4 partial / 9 unknown); **9 answers deliberately blank** |
+| Flagged for review | **20 flags** (18 open, 2 resolved) |
+| Own lines · Week 10 | 13 games, spread/total/win-prob + injury band |
+| Injuries & depth | 95 designations, 19 clubs, 8 named lineup changes |
+| Backtest & luck | walk-forward, clustered bootstrap, permutation null, placebos |
+| Validation gates | 10 pre-registered: **5 pass / 4 fail / 1 blocked** |
+| Correlations | 9 tests: 6 computed, 3 blank with reasons, 3 survive FDR |
+| Leaderboard | rewards and why **0 of 1,000 points are paid** |
+| Standings · Reconciliation · Repo review · Sources | audit trail, 24 sources (20 official) |
+
+### Headline result — honest negative, published as such
+
+- **160 / 160** official 2026 record cells recompute exactly; **10 / 10** integrity checks pass.
+- Model beats the naive baseline, **loses to the closing line**: margin MAE **10.913** vs **9.848** (naive 11.067), 2,126 out-of-sample games 2018–2025.
+- **0 of 7** strategies survive BH-FDR; **both pre-registered placebos fail**, which is the required result.
+- **0 of 1,000** reward points awarded. **G7 blocked**: the NFL publishes no odds, so every return figure rests on an **assumed −110**, stated everywhere it appears.
+
+### Three brief requirements that could not be sourced — and were not invented
+
+1. **2nd/3rd/4th-string depth labels** — `nfl.com/depth-charts/` is a genuine 404, re-checked 2026-11-13. Only the 8 lineup changes named in official reporting are published; everything else is **BLOCKED**.
+2. **A real betting edge** — no official price exists ⇒ G7 permanently blocked.
+3. **Historical injury effects** — no archived injury snapshots exist ⇒ no effect claimed, C9 blank.
+
+One measured signal *is* published: QB passing-yardage over vs his WR1's receiving-yardage over co-occur **1.45×** more often than independence (phi **0.346**, n=803, CI 0.284–0.406). Cross-game legs are genuinely independent (r = −0.007 over 473 week-slates), so they can be multiplied; same-game combos cannot be priced independently. This is a fact about dependence, not a claimed edge.
+
+### Verification
+
+`python3 nfl-origination/run_all.py` → 13 steps → `verify.py` **39 / 39 checks pass**. It hard-fails on: a broken local link or anchor, a data row without a source link, an empty cell with no blank marker, a missing responsible-gambling footer, guarantee language, an ROI quoted without its −110 assumption, or any published claim contradicting the computed evidence. `compare.py` additionally proves the pipeline is reproducible (identical text, every number to 1e-9 relative).
+
+### CI
+
+`.github/workflows/nfl-origination.yml` — 6 gates, all green on both PR head and post-merge `main`:
+pipeline rebuild · reproducibility (`compare.py`) · reconciliation 10/10 · **G7 stays the only blocked gate and awarded stays 0** · **placebos must not pass**.
+
+**Two fixes during CI bring-up, both recorded rather than hidden:**
+1. The first gate was a byte-identical `git diff`. It failed on the runner and passed locally on the same commit. A byte diff is the wrong test across environments — `statistics` changed its summation in Python 3.12 and libm differs — so it was replaced with `compare.py` (exact text, 1e-9 numeric tolerance). Verified with a negative control: perturbing one number and one word is caught.
+2. Flag **F-20** records an internal contradiction found by `verify.py` during the build (a stat card said "0 of 10 gates pass" while the same page's link text said 5/4/1). The card is now derived from `gates.json` and the harness asserts the two cannot diverge.
+
+### Integration rules observed
+
+- **Rebased onto `main` (`b6d89c3`) before merging.** `COORDINATION.md` conflicted; resolved **append-only** — the peer session's section kept verbatim, this session's section appended after it. No peer entry was edited or dropped.
+- Root navigation added **in the generator** (`verification/build.py`), not by hand, so the next root rebuild keeps it. Root `index.html` + `verified/*` regenerated; canonical `verification/verify_site.py` still passes (14 pages, 346 sourced rows).
+- **No peer namespace was edited.** `nfl/`, `nfl-audit/`, `nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-intel/`, `nfl-lab/`, `nfl-lines/`, `nfl-quant/`, `nfl-research/`, `nfl-decision/` are untouched. Flag **F-09** (a peer namespace reads the archive's line convention with the wrong sign) is **logged only**, as the board rules require — the owning session must re-check its own results.
+- Suggestion **S10** proposes consolidating the now-**twelve** NFL namespaces and needs a decision from whoever owns the repo direction.
+
+### Deployment confirmed
+
+`pages build and deployment` run on `main` **succeeded**. The live pages were fetched after deployment and read:
+- https://sassnarep3-star.github.io/Own4/nfl-origination/pages/index.html — all 9 KPI cards, the 7-row findings table and every tile render.
+- https://sassnarep3-star.github.io/Own4/nfl-origination/pages/flagged.html — F-01…F-20 render with their source links; F-08 (the sign bug this project made and fixed) reads as intended.
+
+**Final local state:** 16 pages, 645 internal links + 37 anchors, **0 broken**, 536 data rows, **536 rows carrying a source link**, 0 silently empty cells.
+
+### Open decisions handed over
+
+| Suggestion | What it needs |
+|---|---|
+| **S07** | Adopt a written skill definition before any reward is paid. The proposed rule rejects this project's own best result. |
+| **S02** | Legal position before publishing anything beyond research points. |
+| **S01** | Buy or license archived odds history — gates everything in the betting half, including G7. |
+| **S10** | Choose one canonical NFL dashboard from the twelve. |
