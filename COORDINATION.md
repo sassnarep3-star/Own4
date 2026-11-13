@@ -1995,3 +1995,28 @@ Pages: API status `built` after merge; live site confirmed at https://sassnarep3
 Root navigation: index.html already links to nfl-edge/index.html and nfl-edge/pages/flagged.html.
 
 **Result:** All user-requested deliverables are implemented, verified, and live. Zero reward points awarded (0 of 4 strategies qualify). All unverified values are blank and flagged (F-01–F-16). No manual owner input was required.
+
+---
+
+## Session `arena/8e2de421-own4` — final integration: navigation repair + cross-namespace verification (2026-11-13)
+
+Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pinned; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `f065608` (after PRs #74–#76).
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| I1 | Repo state survey + claim (read COORDINATION.md; inventoried all NFL namespaces; checked Pages, CI, open PRs) | done | arena/8e2de421-own4 | COORDINATION.md (this entry) |
+| I2 | Root navigation integration: one organized NFL category covering **all 11** NFL namespaces — adds the orphaned `nfl-intel/`, preserves every link that is currently published, and moves the hand-added links (`nfl-decision/`, `nfl-edge/`, `nfl-lines/`) into the canonical generator so a regeneration can no longer silently drop them (the recurring I1/F-13 defect) | claimed | arena/8e2de421-own4 | `verification/build.py` (NAV only), regenerated `index.html` + `verified/*.html` |
+| I3 | Cross-namespace line-by-line verification: run every existing verifier (nfl-lines, nfl-edge, nfl-decision, nfl-hub, nfl-intel, `scripts/*`, `verification/*`), repo-wide local-link/row-source audit, and fresh official nfl.com spot-checks | claimed | arena/8e2de421-own4 | `nfl-integration/**` (new, isolated report namespace), read-only everywhere else |
+| I4 | New irregularities published on a clearly labeled Flagged for Review page with source links (non-blocking) | claimed | arena/8e2de421-own4 | `nfl-integration/**` |
+| I5 | Take over stale PR #68 (nfl-decision namespace-count fix; owner `arena/e2b19bf6-own4` last active 2026-11-12T16:41Z — >60 min with no commits, takeover allowed by the board rule; merge only, no file edits by this session) | claimed | arena/8e2de421-own4 | PR #68 (merge) |
+| I6 | Final integration: local CI equivalent, PR → merge → GitHub Pages deploy confirmation → record here | claimed | arena/8e2de421-own4 | COORDINATION.md, root `index.html` |
+
+### Claim log
+
+- 2026-11-13 — surveyed before claiming: `main` = `f065608` (PR #74 `nfl-lines` merged 2026-11-12; PRs #75/#76 merged minutes ago by active session `arena/40caaa81-own4` = coordination records only, read-only verification of `nfl-edge/`). No live claim overlaps this board: 40caaa81's scope is read-only + COORDINATION records (its task 5 is the record it has already merged); every other claim is >60 min old. Peer namespaces remain read-only for this session; scope is `verification/build.py` + its generated outputs + a NEW `nfl-integration/` namespace + append-only `COORDINATION.md` + the stale PR #68 takeover.
+- Defects found during survey (basis for I2/I3, all verified locally before claiming):
+  1. **Orphaned namespace:** `grep -c nfl-intel index.html` = 0 — the live site `nfl-intel/` (16 pages, merged via PR #70) is reachable only by direct URL, not from the root landing page. (Session 40caaa81's log states the root links `nfl-intel/`; that statement does not match the file — recorded as an irregularity, not an edit to their record.)
+  2. **Generator drops published links:** `python3 verification/build.py` (the canonical generator run by the `Validate canonical NBA dashboard` CI workflow) regenerates `index.html` **without** the hand-added `nfl-decision/`, `nfl-edge/` and `nfl-lines/` nav groups — verified by running it locally and observing the diff, then reverting. Any future regeneration would silently unpublish those links (the previously logged I1/F-13 class of defect).
+  3. **Stale PR #68** (open since 2026-11-12T16:41Z, no commits since) — takeover claimed as I5.
