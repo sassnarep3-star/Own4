@@ -1,0 +1,250 @@
+{
+ "generated": "2026-11-13",
+ "session": "arena/8e2de421-own4",
+ "policy": "Every row is a check actually executed by this session on 2026-11-13. Commands are reproducible from the repository root. 'PASS' means the command exited clean; 'NOT RUN' means the check could not be executed here and is flagged instead of assumed.",
+ "checks": [
+  {
+   "id": "V-001",
+   "area": "root CI suite",
+   "check": "scripts/build.py, unittest discover (tests/), scripts/verify_data.py, scripts/check_site.py, git diff --exit-code -- docs",
+   "scope": "8 generated pages / 47 source-linked rows; 6 unit tests; 2025-26 data checks; 11 pages, 758 links, 438 table rows",
+   "result": "PASS",
+   "detail": "All five commands exit 0; docs/ byte-identical after rebuild.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/pages.yml"
+  },
+  {
+   "id": "V-002",
+   "area": "canonical data battery",
+   "check": "python3 verification/collect_2026-11-05.py; reconcile.py; analysis.py; git diff --exit-code -- verification/data",
+   "scope": "2026-11-05 NBA snapshot transcription and analysis",
+   "result": "PASS",
+   "detail": "Reconciliation: 10 pass, 0 fail, 3 documented notes; sample 85/121 games (70.2%); verification/data rebuilds byte-identically (pure literals).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/canonical-site.yml"
+  },
+  {
+   "id": "V-003",
+   "area": "canonical site verify",
+   "check": "python3 verification/verify_site.py",
+   "scope": "14 pages, 346 data rows",
+   "result": "PASS",
+   "detail": "Every data row carries an official/repository source link; every local link and anchor resolves; navigation and helpline footer present.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/"
+  },
+  {
+   "id": "V-004",
+   "area": "publication invariants",
+   "check": "python3 verification/assert_publication.py",
+   "scope": "reconciliation, analysis and 14 published pages",
+   "result": "PASS",
+   "detail": "85/121 games, 35 graded, gates 4-5-1, 0 qualified strategies, 0 rewards, 5 FDR survivors, no published price without a source.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/assert_publication.py"
+  },
+  {
+   "id": "V-005",
+   "area": "nfl-edge verifier",
+   "check": "python3 nfl-edge/scripts/verify_site.py",
+   "scope": "22 pages, 889 table rows, 628 local links, 1,093 external links",
+   "result": "PASS",
+   "detail": "0 errors; every row's last cell is an https source link.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/scripts/verify_site.py"
+  },
+  {
+   "id": "V-006",
+   "area": "nfl-hub verifier",
+   "check": "python3 nfl-hub/verify.py",
+   "scope": "15 pages, 354 rows, 767 links, 141 checks",
+   "result": "PASS",
+   "detail": "Byte-identical rebuild gate included.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/verify.py"
+  },
+  {
+   "id": "V-007",
+   "area": "nfl-lines verifier",
+   "check": "python3 nfl-lines/engine/verify_site.py",
+   "scope": "20 pages, 969 data rows (476 with official link in summary view), 43 blank unverified cells",
+   "result": "PASS",
+   "detail": "No broken links; every data row carries a link; blanks published as blanks.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/engine/verify_site.py"
+  },
+  {
+   "id": "V-008",
+   "area": "nfl-intel verifier",
+   "check": "python3 nfl-intel/engine/verify_site.py",
+   "scope": "16 pages, 224 data rows, 326 local links",
+   "result": "PASS",
+   "detail": "No broken links; every data row has a source link.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/engine/verify_site.py"
+  },
+  {
+   "id": "V-009",
+   "area": "nfl-decision verifier",
+   "check": "python3 nfl-decision/scripts/09_verify.py",
+   "scope": "14 pages, 736 data rows, 184 unique external links (151 on nfl.com)",
+   "result": "PASS",
+   "detail": "0 problems; no strategy may claim Gold while G7 is unpassable.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/scripts/09_verify.py"
+  },
+  {
+   "id": "V-010",
+   "area": "nfl-audit verifier",
+   "check": "python3 nfl-audit/scripts/verify.py",
+   "scope": "13 pages",
+   "result": "PASS",
+   "detail": "0 problems.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-audit/scripts/verify.py"
+  },
+  {
+   "id": "V-011",
+   "area": "nfl-decisions verifier",
+   "check": "python3 nfl-decisions/verify.py",
+   "scope": "8 pages, 50 source-linked data rows",
+   "result": "PASS",
+   "detail": "Links resolve; suggestions remain unapproved; missing metrics blank.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decisions/verify.py"
+  },
+  {
+   "id": "V-012",
+   "area": "nfl-lab verifiers",
+   "check": "python3 nfl-lab/scripts/verify_data.py; python3 nfl-lab/scripts/audit_site.py",
+   "scope": "14 data checks / 480 cells; 11 pages, 488 links, 297 rows, 15 flags",
+   "result": "PASS",
+   "detail": "0 failures; 0 problems.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/scripts/audit_site.py"
+  },
+  {
+   "id": "V-013",
+   "area": "nfl-research tests",
+   "check": "python3 nfl-research/test_site.py",
+   "scope": "2 tests (per-row https links, relative navigation, blank correlations/rankings)",
+   "result": "PASS",
+   "detail": "2/2 OK.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-research/test_site.py"
+  },
+  {
+   "id": "V-014",
+   "area": "bounded audit suite",
+   "check": "python3 verification-2026-11-05/build.py; unittest discover -s verification-2026-11-05",
+   "scope": "148 published pages, all local links",
+   "result": "PASS",
+   "detail": "6/6 tests OK; 0 broken local links; 45 pre-existing rows without source links reported (see INT-09). The audit counts 148 inherited pages and does not scan the nfl-* namespaces — those are covered by their own verifiers (V-005..V-013, V-024..V-027) plus this site's own verify.py (V-023).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/verification-2026-11-05.yml"
+  },
+  {
+   "id": "V-015",
+   "area": "nfl-quant verifier",
+   "check": "python3 nfl-quant/pipeline/07_verify_publish.py",
+   "scope": "nfl-quant numeric spot-checks",
+   "result": "NOT RUN",
+   "detail": "Requires pandas (absent here) and writes timestamped artifacts, so it is not read-only. Covered instead by V-014's link audit; numeric claims not re-verified. See INT-05.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/07_verify_publish.py"
+  },
+  {
+   "id": "V-016",
+   "area": "standings, line by line",
+   "check": "python3 nfl-integration/scripts/compare_standings.py",
+   "scope": "6 repository standings files x 32 clubs vs https://www.nfl.com/standings/ re-read 2026-11-13",
+   "result": "PASS",
+   "detail": "5 files match the official pre-Week-10 state 32/32 (nfl-audit, nfl-edge, nfl-hub, nfl-intel, nfl-lines); nfl-lab is an older Week-8 snapshot (INT-06); every file passes internal consistency (sum W = sum L, sum PF = sum PA). Live-vs-file shows exactly WAS/NYG drift — the Thursday game.",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "V-017",
+   "area": "team stats, line by line",
+   "check": "python3 nfl-integration/scripts/compare_team_stats.py",
+   "scope": "passing page (8 fields x 32 clubs) vs nfl-lines; scoring page rush_td/pass_td + pts vs standings PF (3 fields x 32) vs nfl-edge",
+   "result": "PASS",
+   "detail": "363 exact matches, 0 mismatches; 21 differing values all belong to WAS/NYG and reconcile exactly with WAS 24 - NYG 21 (NYG +2 rush TD, +1 pass TD, +21 pts; WAS +3 pass TD, +24 pts).",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all"
+  },
+  {
+   "id": "V-018",
+   "area": "official cross-check",
+   "check": "scoring-page pass TD vs passing-page pass TD",
+   "scope": "32 clubs",
+   "result": "PASS",
+   "detail": "32/32 agree — the two official pages are mutually consistent, so the column-order assumption used by V-017 is proven, not guessed.",
+   "source_url": "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all"
+  },
+  {
+   "id": "V-019",
+   "area": "injuries, frozen report",
+   "check": "Thursday-game tables on https://www.nfl.com/injuries/ vs nfl-edge/data/injuries_week10.json",
+   "scope": "WAS 9 rows + NYG 11 rows; fields: player, position, injury, practice status, game status",
+   "result": "PASS",
+   "detail": "100/100 field matches, no missing or extra rows. Sunday-game statuses were not re-judged (time-sensitive — INT-08).",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "V-020",
+   "area": "Week 10 results",
+   "check": "https://www.nfl.com/scores/2026/REG10",
+   "scope": "entire Week 10 slate",
+   "result": "PASS",
+   "detail": "Exactly one final: WAS 24 - NYG 21 (Thursday, November 12th). All other Week 10 games unplayed; 4 byes. This establishes the single expected drift used by V-016/V-017.",
+   "source_url": "https://www.nfl.com/scores/2026/REG10"
+  },
+  {
+   "id": "V-021",
+   "area": "live standings arithmetic",
+   "check": "internal consistency of the 2026-11-13 official transcription",
+   "scope": "32 clubs",
+   "result": "PASS",
+   "detail": "sum W 136 = sum L 136; sum PF 6,291 = sum PA 6,291; sum T 2 (one tie game); 136 decided + 1 tied = 137 games = 136 through Week 9 + the Thursday game.",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "V-022",
+   "area": "root navigation integration",
+   "check": "index.html contains every NFL workspace; generator regeneration is byte-identical; nav is a superset of both merged sides",
+   "scope": "verification/build.py NAV (56 entries in one NFL group), index.html, verified/*.html",
+   "result": "PASS",
+   "detail": "After the repair, re-running python3 verification/build.py produces no diff and the group \"NFL research · 16 workspaces (2026-11-13)\" links all 15 peer namespaces plus this review. Superset proof vs origin/main: all 92 hrefs present (96 total); superset vs the pre-merge branch: all 67 present. Hand-added-only links absorbed: nfl-own (8), nfl-command (9), nfl-arena (7); generator-owned nfl-origination (5) folded in; orphaned nfl-intel restored; duplicated NFL-audit block from main removed.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+  },
+  {
+   "id": "V-023",
+   "area": "this site",
+   "check": "python3 nfl-integration/verify.py",
+   "scope": "4 pages",
+   "result": "PASS",
+   "detail": "Every table row carries an https source link; all internal links and anchors resolve; no placeholder values; helpline footer present.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-integration/verify.py"
+  },
+  {
+   "id": "V-024",
+   "area": "nfl-origination verifier",
+   "check": "python3 nfl-origination/verify.py",
+   "scope": "dashboard, suggestions, questions, own lines, flagged",
+   "result": "PASS",
+   "detail": "Every data row source-linked, every local link resolves, disclaimer present, no claim contradicts evidence.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/verify.py"
+  },
+  {
+   "id": "V-025",
+   "area": "nfl-own verifier",
+   "check": "python3 nfl-own/engine/verify_site.py; unittest discover -s nfl-own/tests",
+   "scope": "nfl-own site + analysis tests",
+   "result": "PASS",
+   "detail": "VERIFY PASSED (0 problems); analysis tests OK.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-own/engine/verify_site.py"
+  },
+  {
+   "id": "V-026",
+   "area": "nfl-command verifier",
+   "check": "python3 nfl-command/engine/verify_site.py",
+   "scope": "17 pages, 762 table rows, all sourced",
+   "result": "PASS",
+   "detail": "Every table row carries an official source link or explicit unverified marker; no broken internal links.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/engine/verify_site.py"
+  },
+  {
+   "id": "V-027",
+   "area": "nfl-arena verifier",
+   "check": "python3 nfl-arena/scripts/check_links.py",
+   "scope": "169 local links, 155 table rows",
+   "result": "PASS",
+   "detail": "All local links resolve; every row carries an https source link.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/scripts/check_links.py"
+  }
+ ]
+}

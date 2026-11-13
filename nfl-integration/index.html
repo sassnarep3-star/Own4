@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · Own4 NFL integration review</title>
+<meta name="description" content="Line-by-line verification of the Own4 NFL namespaces against official NFL.com sources, 2026-11-13.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="index.html">Own4 · NFL integration</a>
+  <a href="index.html">Dashboard</a><a href="pages/verification.html">Verification ledger</a><a href="pages/comparisons.html">Line-by-line comparisons</a><a href="pages/flagged.html">Flagged for review</a><a href="pages/sources.html">Sources</a>
+</header>
+<main>
+<h1>NFL integration review — 2026-11-13</h1>
+<p class="lede">Final-integration pass over the repository's fifteen NFL namespaces (plus this
+review): every stored table re-checked against official NFL.com pages re-read today, every
+namespace verifier re-run — including four namespaces that merged while this session worked —
+the root navigation repaired so all sixteen are reachable from one category, and every
+irregularity published instead of hidden. Session <code>arena/8e2de421-own4</code>.</p>
+<div class="cards"><div class="card brand"><div class="n">27</div><div class="l">checks executed</div></div><div class="card ok"><div class="n">26/27</div><div class="l">passed</div></div><div class="card ok"><div class="n">5</div><div class="l">standings files match official 32/32</div></div><div class="card ok"><div class="n">363</div><div class="l">team-stat values matched exactly</div></div><div class="card warn"><div class="n">21</div><div class="l">expected drift values (Thursday game)</div></div><div class="card warn"><div class="n">13</div><div class="l">items flagged for review</div></div><div class="card brand"><div class="n">16</div><div class="l">workspaces linked in one NFL category</div></div><div class="card "><div class="n">0</div><div class="l">rewards — no strategy passes G7 (no price source)</div></div></div>
+<div class="note good"><b>Headline:</b> the repository's NFL data holds up. Five standings
+files match the official page line for line (32/32 clubs each), 363 team-stat values match
+exactly with zero mismatches, the frozen Thursday injury report matches 100/100 fields, and
+fourteen namespace verifiers plus three repository CI suites pass. The only differences found
+belong to the one game played after the snapshots (WAS 24 - NYG 21) and to one older
+snapshot. Nothing was inferred; blanks stay blank.</div>
+<div class="note warn"><b>What was broken and is now fixed:</b> <code>nfl-intel/</code> had
+no link anywhere on the root landing page, and the canonical generator silently dropped the
+hand-added <code>nfl-decision/</code>, <code>nfl-edge/</code> and <code>nfl-lines/</code>
+links on every re-run (defects INT-01/INT-02). Both are repaired in
+<code>verification/build.py</code>; regeneration is now byte-identical.</div>
+
+<h2>Where to start</h2>
+<ul class="tight">
+<li><a href="pages/verification.html">Verification ledger</a> — all 26 checks, commands, scopes and results.</li>
+<li><a href="pages/comparisons.html">Line-by-line comparisons</a> — standings, team stats and injury rows against official pages.</li>
+<li><a href="pages/flagged.html">Flagged for review</a> — 13 open items, each with evidence and a clearing action.</li>
+<li><a href="pages/sources.html">Sources</a> — the ten pages re-read on 2026-11-13.</li>
+</ul>
+
+<h2>Standings: every file vs the official page</h2>
+<p class="small">Official reference re-read 2026-11-13 from
+<a href="https://www.nfl.com/standings/">nfl.com/standings</a>; expected state for
+2026-11-12 captures is pre-Week-10 (WAS/NYG rolled back one Thursday game).</p>
+<div class="tbl-wrap"><table><thead><tr><th>Repository standings file</th><th>Verdict</th><th>Row matches</th><th>Source</th></tr></thead><tbody><tr><td>nfl-audit/data/standings_2026-11-12.csv</td><td><span class="pill p-ok">PASS (matches pre-Week-10 official exactly)</span></td><td>32/32 vs expected · 30/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr><tr><td>nfl-edge/data/official_standings.json</td><td><span class="pill p-ok">PASS (matches pre-Week-10 official exactly)</span></td><td>32/32 vs expected · 30/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr><tr><td>nfl-hub/data/official/standings_2026.json</td><td><span class="pill p-ok">PASS (matches pre-Week-10 official exactly)</span></td><td>32/32 vs expected · 30/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr><tr><td>nfl-intel/data/standings_2026-11-12.json</td><td><span class="pill p-ok">PASS (matches pre-Week-10 official exactly)</span></td><td>32/32 vs expected · 30/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr><tr><td>nfl-lines/data/official/standings_2026.json</td><td><span class="pill p-ok">PASS (matches pre-Week-10 official exactly)</span></td><td>32/32 vs expected · 30/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr><tr><td>nfl-lab/data/standings_2026.csv</td><td><span class="pill p-warn">OLDER SNAPSHOT (drift reported; not judged)</span></td><td>2/32 vs expected · 2/32 vs live</td><td><a class="src" href="https://www.nfl.com/standings/">nfl.com ↗</a></td></tr></tbody></table></div>
+
+<h2>Repository-wide results that did not change</h2>
+<ul class="tight">
+<li><b>0 of 4+ strategies reward-eligible; 0 rewards.</b> Gate G7 (executable prices) cannot
+pass because no official source publishes betting prices — re-confirmed today
+(<a href="https://www.nfl.com/games">nfl.com/games</a>, odds control renders no values).</li>
+<li><b>Fifteen overlapping NFL dashboards</b> remain unconsolidated (flag INT-10). This pass
+links all of them from one category; it does not merge content — the owner decision S04 is
+still open.</li>
+<li><b>Stale PR #68</b> taken over and merged (flag INT-03); its namespace count says eight
+where the repository now holds fifteen. PRs #85/#86 and two direct merges added
+nfl-origination, nfl-own, nfl-command and nfl-arena mid-session — all four folded into the
+same generator-owned group, whose nav was proven a superset of both merged sides.</li>
+</ul>
+
+</main>
+<footer>
+<p><strong>Own4 · NFL integration review</strong> — analytical research only, not wagering
+advice. Every row links to the official page it was checked against; anything that could
+not be confirmed is left blank and published on the
+<a href="pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</body>
+</html>
