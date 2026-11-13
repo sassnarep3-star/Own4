@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Injuries &amp; depth · Own4 NFL Own Lines</title>
+<meta name="description" content="Source-linked NFL line origination, strategy competition and decision support. Every row cites an official source.">
+<style>
+:root{
+  --bg:#0d1117;--panel:#161b22;--panel2:#1c2430;--line:#233043;--ink:#e6edf3;--dim:#93a1b1;
+  --acc:#4aa3ff;--good:#3fb950;--warn:#d29922;--bad:#f85149;--chip:#1f2b3a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+aside{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);
+  padding:18px 14px 40px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.brand span{display:block;font-size:11px;font-weight:500;color:var(--dim);letter-spacing:.08em;
+  text-transform:uppercase}
+.tag{font-size:11px;color:var(--dim);margin:6px 0 14px}
+nav .grp{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#6b7c8f;
+  margin:16px 0 5px}
+nav a{display:block;padding:5px 9px;border-radius:6px;color:#c6d2de;font-size:13.5px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--chip);color:#fff;font-weight:600}
+main{flex:1;min-width:0;padding:26px 34px 80px;max-width:1500px}
+h1{font-size:26px;margin:0 0 4px}
+h2{font-size:19px;margin:34px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15.5px;margin:22px 0 8px}
+.crumb{font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.1em}
+.lede{color:#c9d5e1;max-width:1000px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:23px;font-weight:700;display:block;line-height:1.2}
+.kpi .l{font-size:11.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.kpi .s{font-size:12px;color:var(--dim);margin-top:4px}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);
+  margin:12px 0 6px}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{padding:8px 11px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel2);font-size:11px;letter-spacing:.05em;text-transform:uppercase;
+  color:#a9b8c8;position:sticky;top:0}
+tbody tr:hover{background:#18202b}
+tbody tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.blank{color:#5b6b7c;font-style:italic}
+.pass{color:var(--good);font-weight:600}
+.fail{color:var(--bad);font-weight:600}
+.note-pill{color:var(--warn);font-weight:600}
+.chip{display:inline-block;padding:1px 8px;border-radius:99px;background:var(--chip);
+  font-size:11.5px;color:#c6d2de;margin-right:4px}
+.chip.g{background:#12341c;color:#7ee787}
+.chip.b{background:#3b1517;color:#ff9c96}
+.chip.w{background:#3a2c0b;color:#f0c05a}
+.note{font-size:12.5px;color:var(--dim);margin:6px 0 18px;max-width:1000px}
+.box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+  border-radius:8px;padding:13px 16px;margin:16px 0}
+.box.warn{border-left-color:var(--warn)}
+.box.bad{border-left-color:var(--bad)}
+.box.good{border-left-color:var(--good)}
+.box p{margin:4px 0}
+sup a{font-size:11px}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--dim);max-width:1000px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:16px}
+code{background:#0b1016;padding:1px 5px;border-radius:4px;font-size:12.5px}
+ul.tight{margin:6px 0 14px;padding-left:20px}
+ul.tight li{margin:3px 0}
+@media(max-width:900px){
+  aside{position:static;height:auto;width:100%;flex:none}
+  .layout{flex-direction:column}
+  main{padding:18px}
+}
+</style>
+</head><body>
+<div class="layout">
+<aside>
+  <a class="brand" href="../index.html">Own4 · NFL <span>Own lines · gates · competition</span></a>
+  <div class="tag">Snapshot 2026-11-13 · official NFL.com sources only</div>
+  <nav aria-label="Site sections"><div class="grp">Start</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><div class="grp">Official data · 2026-11-13</div><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/team-stats.html">Team stats</a><a class="nav" href="../pages/schedule.html">Schedule & results</a><a class="nav" href="../pages/players.html">Player leaders & logs</a><a class="nav" href="../pages/integrity.html">Integrity checks</a><div class="grp">Originated lines</div><a class="nav" href="../pages/own-lines.html">Week 11 own lines</a><a class="nav" href="../pages/props.html">Player props & combos</a><a class="nav" href="../pages/parlays.html">Parlays & dependence</a><div class="grp">Strategy competition</div><a class="nav" href="../pages/strategies.html">Strategy catalogue</a><a class="nav" href="../pages/validation.html">Validation gates</a><a class="nav" href="../pages/leaderboard.html">Leaderboard & rewards</a><a class="nav" href="../pages/correlations.html">Correlations</a><a class="nav" href="../pages/luck.html">Backtest & luck</a><div class="grp">Availability</div><a class="nav active" href="../pages/availability.html">Injuries & depth</a><div class="grp">Decisions</div><a class="nav" href="../pages/questions.html">Questions register</a><a class="nav" href="../pages/decisions.html">Decisions to make</a><a class="nav" href="../pages/suggestions.html">Suggestions board</a><div class="grp">Governance</div><a class="nav" href="../pages/sources.html">Source register</a><a class="nav" href="../pages/repo-review.html">Repo review</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a></nav>
+</aside>
+<main class="main" id="main">
+<p class="crumb">Availability / Injuries</p>
+<h1>Injuries and depth: what the league actually publishes</h1><p class="lede">The official injury report gives practice status and game status per player. It does <strong>not</strong> say who the backup is, and the league publishes no depth chart at all.</p><div class="box bad"><p><strong>The 2nd/3rd/4th-string question cannot be answered from official sources.</strong> The club depth-chart URL returns a 404 for every club tried (proof: <a href="https://www.nfl.com/teams/new-england-patriots/depthchart">New England depth chart → 404</a>), and the official roster page lists players, numbers, positions and roster status but no depth rank. So this site publishes unavailability by club and position, and never asserts that a named player is a backup. Suggestion S-02 is the only route to the real answer: licence a depth chart and snap counts.</p></div><h2>Week 10 official injury report (the games in progress)</h2><div class="tw"><table><thead><tr><th>Club</th><th>Player</th><th>Pos</th><th>Injury</th><th>Practice</th><th>Game status</th><th>Source</th></tr></thead><tbody><tr><td>WAS</td><td>Lucas Patrick</td><td>C</td><td>Concussion</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>Colson Yankoff</td><td>TE</td><td>Knee</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>Amik Robertson</td><td>CB</td><td><span class="blank">blank</span></td><td>Limited</td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>Treylon Burks</td><td>WR</td><td><span class="blank">blank</span></td><td>Did Not Participate</td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NYG</td><td>Malik Harrison</td><td>LB</td><td>Groin</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Ben Brown</td><td>C</td><td>Knee</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Carlton Davis III</td><td>CB</td><td>Knee</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>TreVeyon Henderson</td><td>RB</td><td>Illness</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>A.J. Brown</td><td>WR</td><td>Ankle, Knee</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Kevin Byard</td><td>S</td><td>Chest</td><td>Full</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Reggie Gilliam</td><td>FB</td><td>Knee</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Cameron Latu</td><td>TE</td><td>Back</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Walter Rouse</td><td>T</td><td>Concussion</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Brenden Schooler</td><td>S</td><td>Hamstring</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Rhamondre Stevenson</td><td>RB</td><td>Knee</td><td>Limited</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Greg Van Roten</td><td>G</td><td>Hamstring</td><td>Full</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Charles Woods</td><td>CB</td><td>Hamstring</td><td>Full</td><td>Questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>Hunter Henry</td><td>TE</td><td><span class="blank">blank</span></td><td>Limited</td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>Kerby Joseph</td><td>S</td><td>Knee</td><td>Full</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>Cade Mays</td><td>C</td><td>Ankle</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>D.J. Reed</td><td>CB</td><td>Hip</td><td>Did Not Participate</td><td>Out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>Amon-Ra St. Brown</td><td>WR</td><td><span class="blank">blank</span></td><td>Limited</td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>Sione Vaki</td><td>RB</td><td><span class="blank">blank</span></td><td>Did Not Participate</td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr></tbody></table></div><p class="note">Transcribed from the official report. A blank injury or game-status cell is how the official page renders it; it is not a clean bill of health. The full report covers 14 games; this sample shows the clubs already listed above. Source: <a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></p><h2>Unavailability by club and position, from the same report</h2><div class="tw"><table><thead><tr><th>Club</th><th>Position</th><th class="num">Players listed</th><th>Highest severity listed</th><th>Source</th></tr></thead><tbody><tr><td>NE</td><td>CB</td><td class="num">2</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>RB</td><td class="num">2</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>S</td><td class="num">2</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>TE</td><td class="num">2</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>C</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>CB</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>RB</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>S</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>DET</td><td>WR</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>C</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>FB</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>G</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>T</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NE</td><td>WR</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>NYG</td><td>LB</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>C</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>CB</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>TE</td><td class="num">1</td><td>out</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr><tr><td>WAS</td><td>WR</td><td class="num">1</td><td>limited/questionable</td><td><a href="https://www.nfl.com/injuries/">injury report</a></td></tr></tbody></table></div><p class="note"><strong>This is not a depth chart.</strong> It counts players the official report lists at each position with any restriction. It cannot tell you whether the listed player is a starter or a fourth-string backup.</p><h2>What a proper availability model would need</h2><div class="tw"><table><thead><tr><th>Input</th><th>Available officially?</th><th>Consequence</th></tr></thead><tbody><tr><td>Practice status per player</td><td><span class="chip g">yes</span></td><td>Published here, per club and position. Source: <a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></td></tr><tr><td>Game status (Out / Doubtful / Questionable)</td><td><span class="chip g">yes</span></td><td>Published here. Source: <a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></td></tr><tr><td>Depth rank (1st/2nd/3rd string)</td><td><span class="chip b">no</span></td><td>Cannot separate a starter loss from a backup loss (flag F-04). Source that does not publish it: <a href="https://www.nfl.com/teams/new-england-patriots/depthchart">404 proof</a></td></tr><tr><td>Snap counts</td><td><span class="chip b">no</span></td><td>Cannot weight a loss by how many snaps the player actually takes. Source: <a href="https://www.nfl.com/teams/new-england-patriots/roster">roster has no snap data</a></td></tr><tr><td>Injury history joined to results</td><td><span class="chip w">not in scope</span></td><td>Cannot measure the effect on spread or total (question Q09). Source: <a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></td></tr></tbody></table></div><p class="note">Source for the availability columns: <a href="https://www.nfl.com/injuries/">nfl.com/injuries/</a></p>
+<footer>
+<p><strong>Own4 · NFL Own Lines</strong> — analytical research, <strong>not wagering advice</strong>.
+Every data row links to the official NFL.com page it was read from on 2026-11-13 (UTC); every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="../pages/flagged.html">Flagged for review</a> page. No market price exists anywhere in this
+repository, so no edge, stake or return is claimed.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard · NFL Origination · Own4</title>
+<meta name="description" content="Verified NFL line-origination research dashboard, snapshot 2026-11-13.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html" class="on">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html" class="on">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Overview / Dashboard</div>
+
+<h1>NFL line origination — what we can verify, and what we cannot</h1>
+<p class="lede">Own lines for the 13 unplayed Week 10 games, ten pre-registered validation gates,
+measured correlations for singles, parlays and prop combos, injury and depth tracking, and an
+honest scoreboard. Snapshot <strong>2026-11-13</strong>: every number below was read from an official
+page on that date or computed from published code.</p>
+
+<div class="panel bad"><h3>Headline: nothing here is an edge</h3>
+<p>Our rating model beats a naive baseline and <strong>loses to the closing line</strong>
+(10.913 vs 9.848 margin MAE). No strategy survives Benjamini–Hochberg control, no strategy has a
+confidence interval above zero, and the pre-registered placebos behave exactly as they should —
+they lose. <strong>0 of 1,000 reward points are awarded.</strong> The NFL publishes no odds, so no
+price, stake, edge or return is claimed anywhere on this site.</p></div>
+
+<div class="cards"><div class="card pass"><b>160</b><span>official 2026 cells reconciled (of 160)</span></div><div class="card pass"><b>10</b><span>integrity checks passing (of 10)</span></div><div class="card "><b>13</b><span>Week 10 games with our own line</span></div><div class="card "><b>95</b><span>official injury designations transcribed</span></div><div class="card "><b>6</b><span>correlation tests computed (of 9)</span></div><div class="card bad"><b>0</b><span>strategies that qualify</span></div><div class="card bad"><b>0</b><span>reward points awarded (of 1,000)</span></div><div class="card warn"><b>5</b><span>of 10 gates pass (4 fail, 1 blocked)</span></div><div class="card flag"><b>20</b><span>items flagged for review</span></div></div>
+
+<h2>Where to start</h2>
+<div class="tiles">
+<a class="tile" href="suggestions.html"><b>Suggestions &amp; decisions</b><span>22 items, each with options, evidence, cost, risk and a recommendation — plus the order to take them in.</span><em>Choose a path →</em></a>
+<a class="tile" href="questions.html"><b>Questions &amp; unknowns</b><span>20 questions split into known, partial and unknown, each with what it blocks and what would unblock it.</span><em>Read the register →</em></a>
+<a class="tile" href="executive-summary.html"><b>Executive summary</b><span>One page: verified, unverifiable, the one real signal, and the binding decisions.</span><em>Open the summary →</em></a>
+<a class="tile" href="own-lines.html"><b>Own lines · Week 10</b><span>Our spread, total and win probability for all 13 unplayed games, with the injury sensitivity band beside each.</span><em>See the lines →</em></a>
+<a class="tile" href="injuries.html"><b>Injuries &amp; depth</b><span>95 official designations across 19 clubs and 8 confirmed lineup changes — and the reason no string labels exist.</span><em>Open the tracker →</em></a>
+<a class="tile" href="backtest.html"><b>Backtest &amp; luck removal</b><span>The walk-forward ledger, the bootstrap, the permutation null and the placebos.</span><em>Audit the method →</em></a>
+<a class="tile" href="gates.html"><b>Validation gates</b><span>Ten pre-registered gates with their evidence, scored 5 pass / 4 fail / 1 blocked.</span><em>Check the gates →</em></a>
+<a class="tile" href="flagged.html"><b>⚑ Flagged for review</b><span>20 items: everything unverified, every irregularity, every value left blank, each with a link.</span><em>Review the flags →</em></a>
+</div>
+
+<h2>Executive findings</h2>
+<div class="tw"><table class=""><caption>Executive findings · every row source-linked</caption><thead><tr><th scope="col" class="">ID</th><th scope="col" class="">Finding</th><th scope="col" class="">Value type</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">F1</td><td class="">The NFL publishes no betting odds anywhere. Every ROI here is priced at an ASSUMED −110, so Gate G7 is blocked by construction.</td><td class=""><span class="pill p-warn">blocked</span></td><td class=""><span class="src"><a href="https://www.nfl.com/games" target="_blank" rel="noopener">↗ games</a></span></td></tr><tr><td class="">F2</td><td class="">Our own rating model beats the naive baseline but <strong>loses to the closing line</strong>: margin MAE 10.913 vs 9.848 (naive 11.067) over 2126 out-of-sample games.</td><td class=""><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">F3</td><td class="">0 of 7 registered strategies qualify and <strong>0 of 1,000 reward points</strong> are awarded. Both pre-registered placebos fail, which is the correct result.</td><td class=""><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="backtest.html">backtest.html</a></span></td></tr><tr><td class="">F4</td><td class="">Real dependence exists between a quarterback's passing yardage and his WR1's receiving yardage in the same game: phi = 0.346 (n=803, 95% CI 0.284–0.406), a 1.45× lift over independence.</td><td class=""><span class="pill p-good">known</span></td><td class=""><span class="src"><a href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">↗ github.com/nflverse/nfldata</a></span></td></tr><tr><td class="">F5</td><td class="">The NFL publishes <strong>no depth chart</strong> — nfl.com/depth-charts/ returns a 404 — so no 2nd/3rd/4th-string label can be sourced. Only the 8 lineup changes an official article names are published.</td><td class=""><span class="pill p-warn">blocked</span></td><td class=""><span class="src"><a href="https://www.nfl.com/depth-charts/" target="_blank" rel="noopener">↗ depth-charts/</a></span></td></tr><tr><td class="">F6</td><td class="">The 2026 archive plus the one official Thursday result reproduces the official standings <strong>exactly</strong>: 160 of 160 cells across all 32 clubs.</td><td class=""><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">↗ standings/league/2026/REG</a></span></td></tr><tr><td class="">F7</td><td class="">Twelve overlapping NFL namespaces now exist in this repository. Consolidation is suggestion S10 and it needs a decision.</td><td class=""><span class="pill p-warn">partial</span></td><td class=""><span class="src"><a href="https://sassnarep3-star.github.io/Own4/" target="_blank" rel="noopener">↗ sassnarep3-star.github.io/Own4/</a></span></td></tr></tbody></table><div class="tnote">Value type: <span class='pill p-good'>pass/known</span> verified, <span class='pill p-warn'>blocked</span> the required official input does not exist, <span class='pill p-bad'>fail</span> measured and negative.</div></div>
+
+<h2>What this release is, and is not</h2>
+<div class="panel ok"><h3>Verified against an official source</h3>
+<p>32 standings rows, the 14-game Week 10 slate with kick-off times, networks and byes, the one
+completed Week 10 result (WAS 24–21 NYG), 95 injury designations and 8 lineup changes named in
+official NFL.com reporting. All 160 recomputed 2026 record cells match nfl.com.</p></div>
+<div class="panel warn"><h3>Not verified — published as blank or blocked</h3>
+<p>Any betting price or return, any depth-chart string, any per-game player log, any historical
+injury archive, the archive's licence terms, and the date within the week at which the third-party
+line was captured. Each is listed on the <a href="flagged.html">Flagged for review</a> page with
+its source rather than filled in.</p></div>
+<div class="panel"><h3>Reproduce every number</h3>
+<p class="small"><code>python3 data/official/standings_2026-11-13.py</code> ·
+<code>python3 data/official/transcribe_slate.py</code> ·
+<code>python3 data/official/injuries_week10.py</code> ·
+<code>python3 engine/dataset.py</code> · <code>python3 engine/model.py</code> ·
+<code>python3 engine/correlations.py</code> · <code>python3 engine/originate.py</code> ·
+<code>python3 data/requirements.py</code> · <code>python3 data/questions.py</code> ·
+<code>python3 data/suggestions.py</code> · <code>python3 data/flags.py</code> ·
+<code>python3 build.py</code> · <code>python3 verify.py</code></p>
+<p class="small">Or just <code>python3 run_all.py</code>, which runs all of them in order and
+exits non-zero on the first failure.</p></div>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

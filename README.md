@@ -188,6 +188,36 @@ Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-8
 
 ---
 
+## NFL Own Lines · session `arena/1880ad1e-own4` (2026-11-13)
+
+Source-linked NFL line origination, a gated strategy competition, and decision support.
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-own/ · **Workspace:** `nfl-own/`
+· **Executive summary:** [`NFL_OWN_EXECUTIVE_SUMMARY.md`](NFL_OWN_EXECUTIVE_SUMMARY.md)
+· **Repo review:** [`nfl-own/REPO_REVIEW.md`](nfl-own/REPO_REVIEW.md)
+
+- **Headline:** 0 of 19 registered strategies qualify and 0 of 1,000 reward points are awarded.
+  Best holdout hit rate 56.1% against a 52.38% break-even, and it fails the split-half retest. The
+  own-line model is worse than the closing line it would have to beat (spread MAE 10.752 vs 9.850
+  over 2,519 holdout games).
+- **Re-read, not inherited:** the official snapshot was re-read from nfl.com on **2026-11-13**. One
+  more game is final than in the 2026-11-12 snapshot, so the league has played **137** games and
+  Washington is 3-5-1.
+- **Unblocked a peer error:** official **per-game player logs** exist and reconcile to season totals,
+  so player props are gradeable. Three earlier NFL sessions recorded them as blocked (flag F-01).
+- **Blocked, and said so:** 2nd/3rd/4th-string replacement (the league publishes **no depth chart** —
+  the club depth-chart URL returns 404) and any 2026 market price or edge.
+- **Site:** 22 pages, dashboard plus category subpages, a **Suggestions board** (16 proposals with
+  impact/effort/risk/prerequisites), a **Questions register** (15 items: known / unknown / answer /
+  what-would-unlock-it), 7 decisions, and 13 items on **Flagged for Review**. 672 data rows, 672 with
+  a source link, 218 unverified cells published blank.
+- **Reproduce:** `python3 nfl-own/data/official/transcribe_2026-11-13.py && python3 nfl-own/engine/analysis.py
+  && python3 nfl-own/engine/build_site.py && python3 nfl-own/engine/verify_site.py`. Standard library
+  only; CI gate in `.github/workflows/nfl-own.yml`; 17 tests in `nfl-own/tests/`.
+
+Analytical research only, not wagering advice. NCPG Helpline 1-800-MY-RESET (1-800-697-3738).
+
+---
+
 ## NFL Command · session `arena-934af359-own4` (2026-11-13)
 
 **Live:** https://sassnarep3-star.github.io/Own4/nfl-command/ — verified-2026-11-13 NFL dashboard:

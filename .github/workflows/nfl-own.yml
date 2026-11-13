@@ -1,0 +1,67 @@
+name: nfl-own verify
+
+# Gates the NFL own-lines workspace only. It rebuilds every derived number from the checked-in
+# official transcription, re-runs the site builder, and fails if:
+#   * an official integrity check fails;
+#   * the site has a broken local link, a table row without a source, or a placeholder value;
+#   * the committed derived data or pages drift from a fresh rebuild;
+#   * any test fails.
+
+on:
+  push:
+    paths:
+      - 'nfl-own/**'
+      - '.github/workflows/nfl-own.yml'
+  pull_request:
+    paths:
+      - 'nfl-own/**'
+      - '.github/workflows/nfl-own.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Re-transcribe the official snapshot
+        run: python3 nfl-own/data/official/transcribe_2026-11-13.py
+
+      - name: The official transcription must rebuild byte-identically
+        run: |
+          git diff --stat -- nfl-own/data/official
+          git diff --exit-code -- nfl-own/data/official
+
+      - name: Rebuild model, gates, competition and registers
+        run: python3 nfl-own/engine/analysis.py
+
+      - name: Rebuild the site
+        run: python3 nfl-own/engine/build_site.py
+
+      - name: Verify links, sources, blanks and claims
+        run: python3 nfl-own/engine/verify_site.py
+
+      - name: Determinism gate on derived data and pages
+        run: |
+          git diff --stat -- nfl-own/data/derived nfl-own/index.html nfl-own/pages
+          python3 - <<'EOF'
+          import subprocess
+          r = subprocess.run(["git", "diff", "--", "nfl-own/data/derived", "nfl-own/index.html",
+                              "nfl-own/pages"], capture_output=True, text=True)
+          if r.stdout.strip():
+              for line in r.stdout.splitlines()[:120]:
+                  print("::error::" + line.replace("%", "%25").replace("\r", "%0D"))
+              raise SystemExit("a rebuild does not reproduce the committed files")
+          print("determinism: clean")
+          EOF
+
+      - name: Tests
+        run: python3 -m unittest discover -s nfl-own/tests -v

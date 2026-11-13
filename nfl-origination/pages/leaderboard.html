@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leaderboard · NFL Origination · Own4</title>
+<meta name="description" content="Leaderboard">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Origination</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html" class="on">Leaderboard</a><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav>
+</div></header>
+<div class="layout">
+<aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚑ Flagged for review</a><h4>Evidence</h4><a href="own-lines.html">Own lines · Week 10</a><a href="injuries.html">Injuries &amp; depth</a><a href="backtest.html">Backtest &amp; luck</a><a href="gates.html">Validation gates</a><a href="correlations.html">Correlations</a><a href="leaderboard.html" class="on">Leaderboard</a><h4>Audit</h4><a href="standings.html">Official standings</a><a href="reconcile.html">Reconciliation</a><a href="repo-review.html">Repo review</a><a href="sources.html">Sources</a></nav></aside>
+<main id="main">
+<div class="crumb">Evidence / Leaderboard</div>
+
+<h1>Leaderboard &amp; rewards</h1>
+<p class="lede">The competition, its tier rules, and the honest result: nothing qualified, so nothing
+is paid.</p>
+<div class="panel bad"><h3>0 of 1,000 research points awarded</h3>
+<p>Every strategy fails at least one gate. Gate G7 (an executable, archived price) is
+<strong>blocked permanently</strong> because the NFL publishes no odds, so the Gold tier is
+unreachable by construction. The pool rolls over to the next snapshot rather than being awarded for
+a good-looking backtest.</p></div>
+<h2>Tier rules</h2>
+<div class="tw"><table class=""><caption>Tier rules</caption><thead><tr><th scope="col" class="">Tier</th><th scope="col" class="">Requirement</th><th scope="col" class="c">Qualifiers</th><th scope="col" class="c">Status</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">Gold</td><td class="">Every non-blocked gate passes, with a week-clustered CI above zero and no season supplying half the profit</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">Silver</td><td class="">All of the above except one gate</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">Bronze</td><td class="">Positive point estimate with an FDR pass</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="">Rejected</td><td class="">Everything else, including both placebos</td><td class="c">7</td><td class="c"><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr></tbody></table></div>
+<h2>Standings</h2>
+<p>Ordered by raw ROI, which is deliberately <em>not</em> the tier order. A high point estimate that
+fails FDR is worth nothing, and showing it at the top is the most useful thing the board can do: it
+makes the difference between "looks good" and "is skilful" visible.</p>
+<div class="tw"><table class=""><caption>Leaderboard · 7 strategies, ordered by raw ROI</caption><thead><tr><th scope="col" class="c">Rank</th><th scope="col" class="">ID</th><th scope="col" class="">Strategy</th><th scope="col" class="">Tier</th><th scope="col" class="num">ROI @ −110</th><th scope="col" class="num">Bets</th><th scope="col" class="c">Tier result</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="c">1</td><td class="">S1</td><td class="">Own rating vs closing spread, 2-point margin filter</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-3.20%</td><td class="num">1560</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">2</td><td class="">S5</td><td class="">Back the home side when it is the more rested team</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-4.55%</td><td class="num">404</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">3</td><td class="">S3</td><td class="">Own total vs closing total, 3-point filter</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-4.98%</td><td class="num">1103</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">4</td><td class="">P2</td><td class="">Placebo: over in even weeks</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-5.37%</td><td class="num">1041</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">5</td><td class="">S2</td><td class="">Always take the home side (benchmark, not a strategy)</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-9.30%</td><td class="num">2126</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">6</td><td class="">P1</td><td class="">Placebo: bet every third game in date order</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-10.33%</td><td class="num">709</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr><tr><td class="c">7</td><td class="">S4</td><td class="">Away-favoured games: take the home underdog</td><td class=""><span class="blank">did not qualify</span></td><td class="num">-12.35%</td><td class="num">1285</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination/data/derived/backtest.json" target="_blank" rel="noopener">↗ github.com/sassnarep3-star/Own4/blob/main/n…</a></span></td></tr></tbody></table><div class="tnote">Every strategy is in the Rejected tier. The ROI column is published to show how misleading a point estimate can be.</div></div>
+<h2>How points would be awarded</h2>
+<ul>
+<li>The pool is 1,000 research points per snapshot. They are research points, not money: no
+jurisdiction, licence or funding source has been established (questions Q02 and Q15).</li>
+<li>A strategy must clear every non-blocked gate. A blocked gate blocks the whole pool.</li>
+<li>Ties break on the widest lower confidence bound, not the highest point estimate — that is the
+conservative choice, and it is the one that resists luck.</li>
+<li>Provisional awards require a forward record: the strategy's next week of lines must be committed
+before kick-off and graded after. See suggestion S15.</li>
+</ul>
+
+</main>
+</div>
+<footer>
+<p><strong>NFL Origination · Own4</strong> — analytical research only. <strong>Not wagering advice.</strong>
+Snapshot <strong>2026-11-13</strong>. Every published value links to the official page it came from;
+anything that could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) · <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment ↗</a></p>
+</footer>
+<script src="../assets/table.js" defer></script>
+</body>
+</html>

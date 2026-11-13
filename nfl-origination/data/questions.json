@@ -1,0 +1,304 @@
+{
+ "id": "questions-2026-11-13",
+ "columns": [
+  "id",
+  "group",
+  "status",
+  "question",
+  "answer"
+ ],
+ "questions": [
+  {
+   "id": "Q01",
+   "group": "Market access",
+   "status": "unknown",
+   "question": "Where do we get a legally usable, archived price history for NFL markets?",
+   "answer": "",
+   "known": "The NFL publishes no betting prices anywhere on nfl.com; the game pages carry no odds values. The only line data in this repository is a third-party archive (nflverse/nfldata), used and labelled as third-party.",
+   "not_known": "Whether a licensed price archive can be obtained, at what cost, and on what terms it may be stored and republished.",
+   "blocks": "Every betting strategy. Without a price, Gate G7 can never pass.",
+   "unblocker": "S01",
+   "sources": [
+    "https://www.nfl.com/games",
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q02",
+   "group": "Market access",
+   "status": "unknown",
+   "question": "Which jurisdiction governs this project, and may derived lines be published?",
+   "answer": "",
+   "known": "Responsible-gambling help is published and cited site-wide as good practice.",
+   "not_known": "The operating jurisdiction, any licence status, and whether publishing derived probabilities is permitted there.",
+   "blocks": "Any reward described as anything more than research points.",
+   "unblocker": "S02",
+   "sources": [
+    "https://www.ncpgambling.org/help-treatment"
+   ]
+  },
+  {
+   "id": "Q03",
+   "group": "Injuries and depth",
+   "status": "known",
+   "question": "Does the NFL publish an official depth chart?",
+   "answer": "No. https://www.nfl.com/depth-charts/ returns a 404 'Flag on the Play' page, re-checked on 2026-11-13. There is therefore no official source for a 1st/2nd/3rd/4th-string label.",
+   "known": "The official injury report gives per-player practice status and game status for every club with a Week 10 game.",
+   "not_known": "",
+   "blocks": "Nothing further \u2014 this is answered. It does block depth-weighted rating (Q05).",
+   "unblocker": "S03",
+   "sources": [
+    "https://www.nfl.com/depth-charts/",
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "Q04",
+   "group": "Injuries and depth",
+   "status": "unknown",
+   "question": "Is there an official archive of past weeks' injury reports?",
+   "answer": "",
+   "known": "nfl.com/injuries/ serves only the current week. Live pages from earlier weeks are not addressable.",
+   "not_known": "Whether any official historical snapshot exists at any price.",
+   "blocks": "Every historical injury backtest, and therefore every injury-adjusted line claim.",
+   "unblocker": "S04",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "Q05",
+   "group": "Injuries and depth",
+   "status": "unknown",
+   "question": "How should a missing starter be converted into a points adjustment?",
+   "answer": "",
+   "known": "The published designation (OUT / DOUBTFUL / QUESTIONABLE) is available for 19 of 32 clubs this week. The league's own injury-report policy explains what those words mean.",
+   "not_known": "Any measured conversion from 'player out' to points. It needs snap counts and per-player value, neither of which is published.",
+   "blocks": "Any depth-weighted rating. This site publishes the sensitivity band instead of a point estimate.",
+   "unblocker": "S05",
+   "sources": [
+    "https://www.nfl.com/news/competition-committee-approves-revisions-to-injury-report-0ap3000000688693",
+    "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
+   ]
+  },
+  {
+   "id": "Q06",
+   "group": "Injuries and depth",
+   "status": "partial",
+   "question": "Which clubs have a confirmed change to who actually starts?",
+   "answer": "Eight, each named in official NFL.com reporting: SEA (Lock for Darnold), MIA (McCord for Willis), BAL (Brissett, with Jackson and Huntley on IR), MIN (Cousins for Murray), CLE (Watson for Sanders), AZ (Beck for Brissett), plus the Ravens' Week 9 third-string start by Fagnano and Milroe backing up Lock.",
+   "known": "Each change is transcribed with the article that states it.",
+   "not_known": "Whether any of these changes is already reflected in the third-party line.",
+   "blocks": "Nothing \u2014 this is answered as far as official sources allow.",
+   "unblocker": "",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11",
+    "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season"
+   ]
+  },
+  {
+   "id": "Q07",
+   "group": "Strategy and validation",
+   "status": "known",
+   "question": "Does a model built only from archived scores beat the closing line?",
+   "answer": "No. Out of sample over 2018-2025 (2,126 graded games) our own model has a margin MAE of 10.913 against the closing line's 9.848 and a naive baseline's 11.067. It beats the naive baseline and loses to the market.",
+   "known": "The full walk-forward ledger is published game by game.",
+   "not_known": "",
+   "blocks": "Nothing \u2014 this is answered, and the answer is negative.",
+   "unblocker": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q08",
+   "group": "Strategy and validation",
+   "status": "known",
+   "question": "What sample size is needed before a 55% hit rate is distinguishable from luck?",
+   "answer": "At -110 the break-even hit rate is 110/210 = 52.38%. Detecting 55% against that null needs roughly n = 1,700 bets for 80% power at alpha 0.05. Every strategy tested here falls short except the two benchmarks.",
+   "known": "The arithmetic is reproducible: z = (0.55-0.5238)/sqrt(0.5238*0.4762/n).",
+   "not_known": "",
+   "blocks": "Nothing \u2014 answered. It is the reason G2 exists.",
+   "unblocker": "",
+   "sources": [
+    "https://www.nfl.com/stats/"
+   ]
+  },
+  {
+   "id": "Q09",
+   "group": "Strategy and validation",
+   "status": "partial",
+   "question": "Are player-prop combos positively correlated enough to break independent pricing?",
+   "answer": "Yes on the dependence, unknown on the price. QB passing yards over and WR1 receiving yards over in the same team-game show phi = 0.346 (n=803, 95% CI 0.284-0.406), a 1.45x lift over independence. Whether that survives the book's own repricing is unmeasured.",
+   "known": "The dependence is measured and published with its CI.",
+   "not_known": "The repriced same-game-parlay price (correlation C8 is blank).",
+   "blocks": "Any prop-combo strategy on the leaderboard.",
+   "unblocker": "S06",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q10",
+   "group": "Strategy and validation",
+   "status": "known",
+   "question": "Can parlay legs from different games be multiplied as if independent?",
+   "answer": "Yes for cross-game legs. The home-cover rate in the first half of a week has r = -0.007 against the second half across 473 week-slates, and spread-vs-total within a game has r = -0.010 across 7,103 games.",
+   "known": "Both correlations are published with n and CI.",
+   "not_known": "",
+   "blocks": "Nothing \u2014 answered for cross-game legs. Within-game legs are C2/C5.",
+   "unblocker": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q11",
+   "group": "Strategy and validation",
+   "status": "unknown",
+   "question": "What definition of 'skill' cannot be faked by re-running the search?",
+   "answer": "",
+   "known": "This site's proposal: a strategy is skilful only if it survives FDR across every test run including placebos, has a week-clustered CI above zero, and earns less than 50% of its profit in any single season.",
+   "not_known": "Whether that definition is the one the owner wants to adopt, and whether it is strict enough to stop a determined search.",
+   "blocks": "The reward design. A loose definition would pay for luck.",
+   "unblocker": "S07",
+   "sources": []
+  },
+  {
+   "id": "Q12",
+   "group": "Data rights",
+   "status": "partial",
+   "question": "Do the 2026 numbers on this site match an official source?",
+   "answer": "Yes for 160 of 160 cells. All 32 clubs' W, L, T, PF and PA, recomputed from the archive plus the one official Thursday result, match the official standings exactly. The archive is 136 games; the 137th was played after it was cut.",
+   "known": "The reconciliation is published check by check (IC-01 to IC-10).",
+   "not_known": "Nothing about the 2026 totals.",
+   "blocks": "Nothing \u2014 answered.",
+   "unblocker": "",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG",
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+   ]
+  },
+  {
+   "id": "Q13",
+   "group": "Data rights",
+   "status": "unknown",
+   "question": "May third-party archives be redistributed on a public site?",
+   "answer": "",
+   "known": "The archive is a public GitHub repository. Its licence terms were not reviewed line by line in this session.",
+   "not_known": "Whether the terms permit redistribution of derived values, or of the raw file.",
+   "blocks": "Any use beyond research, and any redistribution of the raw archive.",
+   "unblocker": "S08",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q14",
+   "group": "Data rights",
+   "status": "unknown",
+   "question": "Can we obtain an official 2026 player-level box-score feed?",
+   "answer": "",
+   "known": "nfl.com/stats/ presents player statistics in a client-rendered interface. The NFL's published terms for automated download were not established in this session.",
+   "not_known": "Whether a licensed feed or an official download endpoint exists.",
+   "blocks": "Any 2026 player-prop model, and any prop strategy on the leaderboard.",
+   "unblocker": "S09",
+   "sources": [
+    "https://www.nfl.com/stats/"
+   ]
+  },
+  {
+   "id": "Q15",
+   "group": "Product",
+   "status": "unknown",
+   "question": "What exactly does a reward pay, and who funds it?",
+   "answer": "",
+   "known": "This site treats rewards as research points (pool of 1,000) precisely because no funding or legal basis exists to pay anything else.",
+   "not_known": "Whether a real reward is intended, its currency, and its funding source.",
+   "blocks": "The leaderboard's final design.",
+   "unblocker": "S07",
+   "sources": []
+  },
+  {
+   "id": "Q16",
+   "group": "Product",
+   "status": "unknown",
+   "question": "Which single NFL dashboard is canonical?",
+   "answer": "",
+   "known": "Eleven NFL namespaces existed when this session started; this one is the twelfth. They overlap heavily: four publish own Lines, five publish questions, six publish suggestions.",
+   "not_known": "Which one the owner wants to keep, and whether the rest should be archived.",
+   "blocks": "Any reader knowing where to look, and any future session knowing what is current.",
+   "unblocker": "S10",
+   "sources": []
+  },
+  {
+   "id": "Q17",
+   "group": "Product",
+   "status": "known",
+   "question": "Is the site actually live, and does it build without broken links?",
+   "answer": "Yes. GitHub Pages serves the repository root on main; this namespace is published under /nfl-origination/. The local build fails on any broken local link or any unsourced table row.",
+   "known": "The verification harness output is published on the audit page.",
+   "not_known": "",
+   "blocks": "Nothing \u2014 answered.",
+   "unblocker": "",
+   "sources": [
+    "https://sassnarep3-star.github.io/Own4/"
+   ]
+  },
+  {
+   "id": "Q18",
+   "group": "Method",
+   "status": "partial",
+   "question": "Is the archive's line column a price or an expectation?",
+   "answer": "An expectation: spread_line is the expected home margin, positive when the home team is favoured. Measured, not assumed: reading it that way gives MAE 9.83 and r = +0.43 against actual margin; the opposite reading gives MAE 14.31 and r = -0.43, which no real market line can produce.",
+   "known": "The check (IC-04) compares both readings explicitly and fails the build if the wrong one wins.",
+   "not_known": "Whether the archive's line is the CLOSE or a snapshot earlier in the week.",
+   "blocks": "Any precise claim about closing-line value.",
+   "unblocker": "S11",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  },
+  {
+   "id": "Q19",
+   "group": "Method",
+   "status": "known",
+   "question": "Does the injury adjustment change any originated line materially?",
+   "answer": "It moves five of thirteen games by more than one point under the central scenario, and it flips the side of zero in one game (HOU@CLE). It is published as a band, not as a point estimate, precisely because the input cannot support precision.",
+   "known": "The band is on the own-lines page next to every game.",
+   "not_known": "",
+   "blocks": "Nothing \u2014 answered, and the answer bounds the claim.",
+   "unblocker": "S05",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-injury-report-2026-season"
+   ]
+  },
+  {
+   "id": "Q20",
+   "group": "Method",
+   "status": "known",
+   "question": "Did the placeholder strategies pass, and what does that prove?",
+   "answer": "No. Both pre-registered placebos fail FDR. In an earlier version of this pipeline, the placebo PASSED \u2014 which exposed a sign-convention bug in the line column. That is exactly what a placebo is for, and it is recorded on the audit page rather than deleted.",
+   "known": "The placebo result is published with the same statistics as the real strategies.",
+   "not_known": "",
+   "blocks": "Nothing \u2014 answered.",
+   "unblocker": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ]
+  }
+ ],
+ "status_meaning": {
+  "known": "a verified answer exists and is stated",
+  "partial": "part of it is answered; a named gap remains",
+  "unknown": "no verified answer exists; the answer field is blank"
+ },
+ "summary": {
+  "total": 20,
+  "known": 7,
+  "partial": 4,
+  "unknown": 9,
+  "blank_answers": 9
+ }
+}
