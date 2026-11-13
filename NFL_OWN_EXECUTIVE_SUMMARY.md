@@ -9,7 +9,8 @@
 
 ## 1. The headline, stated without softening
 
-**0 of 19 registered strategies qualify. 0 of 1,000 reward points are awarded.**
+**0 of 19 registered strategies qualify. 0 reward points have been awarded.** A perfect
+   twelve-of-twelve entry earns 600 (twelve gates at 50 points each); nothing has come close.
 
 - The best holdout hit rate is **56.1%** (S8, 212 decisions) against a **52.38%** break-even — and it
   **fails the split-half retest**, which is the test that separates a rule from a lucky window.

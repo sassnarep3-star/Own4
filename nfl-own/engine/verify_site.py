@@ -37,6 +37,8 @@ PLACEHOLDERS = [
     (re.compile(r"\bTODO\b"), "TODO marker"),
     (re.compile(r"<td[^>]*>\s*(?:\[|&#x27;\[)"), "python list rendered into a cell"),
     (re.compile(r"background:#1d3category"), "CSS typo"),
+    (re.compile(r"%%%%|\d%%\s"), "doubled or dangling percent sign in prose"),
+    (re.compile(r">\s*(?:TBD|TBC|XXX|FIXME)\s*<"), "placeholder word in a cell"),
 ]
 
 
