@@ -1960,3 +1960,32 @@ https://sassnarep3-star.github.io/Own4/index.html .
 **Final local verification state:** 20 pages, 1,140 local links checked, **0 broken**,
 969 data rows, **969 rows carrying a source link**, 43 blank (unverified) cells published
 as blanks rather than filled in. Official score spot-check 45/45. IC-01…IC-07 all pass.
+
+---
+
+## Session `arena/40caaa81-own4` — NFL line-origination review and integration (2026-11-13)
+
+Session ID: `arena/40caaa81-own4` · Branch: `arena/40caaa81-own4` (pinned; no other branches created or pushed) · Base: `main` at `553c3f0` (identical at session start).
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| 1 | Repo review — line-by-line inventory of all NFL workspaces and their claims | done | arena/40caaa81-own4 | COORDINATION.md (this entry only) |
+| 2 | Official-source verification — re-read nfl.com standings, Week 10 schedule, team stats, injuries; confirm repo data matches | done | arena/40caaa81-own4 | nfl-edge/data/official_standings.json, nfl-edge/data/slate_week10.json, nfl-edge/data/injuries_week10.json (read-only verification; no edits) |
+| 3 | Site verification — run nfl-edge/scripts/verify_site.py; confirm 22 pages, 889 table rows all source-linked, 628 local + 1,093 external links, 0 errors | done | arena/40caaa81-own4 | nfl-edge/ (read-only; verification only) |
+| 4 | GitHub Pages — confirm Pages configured (legacy, main `/`, status `built`, https://sassnarep3-star.github.io/Own4/) and that root navigation links resolve to nfl-edge | done | arena/40caaa81-own4 | index.html (read-only; links already present) |
+| 5 | PR → merge → Pages deploy confirmation → record PR link + merge result | in progress | arena/40caaa81-own4 | COORDINATION.md (this entry) |
+
+### Log
+
+- 2026-11-13 — Session `arena/40caaa81-own4` started on `arena/40caaa81-own4` at `553c3f0` (identical to `main`). No other session's files were edited; this session's scope is read-only verification plus this COORDINATION.md entry. Read the full nfl-edge workspace (questions.json with Q1–Q22, suggestions.json S-01–S-16, gates.json G1–G10, results.json, correlations.json, own_lines_2026.json, team_stats_2026.json, team_stats_defense_2026.json, injuries_week10.json, availability.json, games_2026.json, integrity.json, flags.json, requirements.json, slate_week10.json, ratings_2026.json).
+- 2026-11-13 — Official-source verification: fetched https://www.nfl.com/standings/ (2 chunks, all 32 clubs), https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all, and https://www.nfl.com/schedules/2026/by-week/week-10 (3 chunks). Confirmed: BUF 7-1-0 PF256 PA187, NE 5-4-0 PF211 PA207, KC 6-2-0 PF202 PA143, NYG 5-2-1 pre-Week-10 (live page now shows 5-3-1 post-Week-10 loss — expected, repo captured 2026-11-12 pre-game), WAS 2-5-1 pre-game (live page now 3-5-1 post-win — expected), all other 29 clubs match exactly. Week 10 slate: 14 games, 4 byes (CHI, DEN, PHI, TB), all kickoff times, networks and game URLs match slate_week10.json. Commanders 24, Giants 21 FINAL on Nov 12 confirmed.
+- 2026-11-13 — Site verification: `python3 nfl-edge/scripts/verify_site.py` → PASS. 22 pages, 889 table rows (every row carries an https source link), 628 local links resolved, 1,093 external links (all https), 0 errors. `nfl-edge/data/integrity.json`: 15/15 checks pass, 0 fail. Every table row's last column is a source link; blank/unverified cells are published as blank and flagged (F-01 to F-16).
+- 2026-11-13 — GitHub Pages: API reports status `built`, source `main` path `/`, URL https://sassnarep3-star.github.io/Own4/. Root index.html already links to `nfl-edge/index.html` (NFL Edge — own lines, gates & decisions), `nfl-edge/pages/flagged.html`, `nfl-hub/`, `nfl-audit/`, `nfl-decision/`, `nfl-lines/`, `nfl/`, `nfl-research/`, `nfl-lab/`, `nfl-quant/`, `nfl-decisions/`, `nfl-intel/`.
+- 2026-11-13 — Irregularities/flags: All 16 flags (F-01 to F-16) are published on `nfl-edge/pages/flagged.html`. None block publication. Key flags: F-01 no official NFL betting lines (all 2026 market cells blank), F-02 no player-game logs/prop prices (prop combos blank), F-03 no depth chart/snap counts (starter/backup claims blocked), F-04 HFA is a model assumption (1.5 pts), F-05 model loses to closing line (spread MAE 10.502 vs 9.871).
+- 2026-11-13 — Findings: 0 of 4 registered strategies qualify (S1 -3.12% ROI, S2 -5.32%, S3 -8.45%, S4 -15.74%); 0 of 1,000 reward points awarded; leaderboard is a rejection machine. All gates pre-registered before backtest; no post-hoc changes. Executive summary at NFL_EXECUTIVE_SUMMARY.md and nfl-edge/pages/executive-summary.html.
+
+### Pull-request and deployment record
+
+*(to be recorded after PR merge)*
