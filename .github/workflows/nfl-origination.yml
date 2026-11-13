@@ -6,7 +6,7 @@ name: nfl-origination verify
 #   * any local link or anchor is broken;
 #   * any page is missing the responsible-gambling footer or the "not wagering advice" line;
 #   * any published claim contradicts the computed evidence (e.g. a gate silently turns green);
-#   * the rebuild is not byte-identical, i.e. a published number has drifted from its data.
+#   * the rebuild is not reproducible, i.e. a published number has drifted from its data.
 #
 # It does not deploy. GitHub Pages serves the repository root from main, so publishing happens
 # on merge, not here.
@@ -37,28 +37,22 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Snapshot the committed artefacts
+        # Taken BEFORE the rebuild, so the comparison has something to compare against.
+        run: |
+          mkdir -p "$RUNNER_TEMP/snapshot"
+          cp -r nfl-origination/data nfl-origination/pages "$RUNNER_TEMP/snapshot/"
+
       - name: Run the full pipeline
         run: python3 nfl-origination/run_all.py
 
-      - name: The rebuild must be byte-identical
-        # Every derived artefact is a pure function of the committed official transcriptions and
-        # the committed engine, so any diff here is a real defect, not floating-point drift:
-        # the pipeline uses no NumPy, no BLAS and a fixed seed.
-        run: |
-          git status --porcelain -- nfl-origination
-          git diff --stat -- nfl-origination/data nfl-origination/pages
-          git diff -- nfl-origination/data nfl-origination/pages > drift.txt || true
-          wc -l drift.txt
-          head -c 1500 drift.txt
-          git diff --exit-code -- nfl-origination/data nfl-origination/pages
-
-      - name: Upload drift
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: drift
-          path: drift.txt
-          if-no-files-found: warn
+      - name: The rebuild must be reproducible
+        # A byte-for-byte diff is the wrong test across environments: floating-point results can
+        # differ in the last digit between Python versions and C libraries, and `statistics`
+        # changed its summation in 3.12. compare.py instead requires every non-numeric byte to
+        # match exactly and every number to agree to 1e-9 relative -- far tighter than any real
+        # regression, and blind to libm noise.
+        run: python3 nfl-origination/compare.py "$RUNNER_TEMP/snapshot" nfl-origination
 
       - name: Reconciliation must pass
         run: |

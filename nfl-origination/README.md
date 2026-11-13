@@ -19,6 +19,7 @@ Analytical research only — **not wagering advice**. NCPG Helpline 1-800-MY-RES
 | `data/suggestions.py` | 22-suggestion decision board with an ordered recommended path. |
 | `data/flags.py` | 20 flags and the 24-source register. |
 | `build.py` | Writes the 16 pages into `pages/`. |
+| `compare.py` | Semantic reproducibility check: identical text, every number to 1e-9 relative. Used by CI. |
 | `verify.py` | The gate: 39 checks. Fails on a broken link, an unsourced row, a missing disclaimer, or a claim that contradicts the evidence. |
 | `run_all.py` | Runs all 13 steps in order. |
 
