@@ -1,0 +1,77 @@
+name: NFL Command Center
+
+# Rebuilds the NFL Command Center from checked-in data and enforces the
+# publication rules for that namespace:
+#   * the engine must rebuild the derived data and the pages;
+#   * every data-table row must carry a source link;
+#   * every local link must resolve;
+#   * no placeholder text may reach the published pages.
+# It does not deploy: GitHub Pages serves this repository from the main branch
+# through the existing legacy main//root configuration, so a merge to main is
+# the deployment.
+
+on:
+  push:
+    paths:
+      - 'nfl-command/**'
+      - '.github/workflows/nfl-command.yml'
+  pull_request:
+    paths:
+      - 'nfl-command/**'
+      - '.github/workflows/nfl-command.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-verify:
+    name: Rebuild and verify the NFL Command Center
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Rebuild the data
+        run: |
+          python3 nfl-command/engine/00_convention.py
+          python3 nfl-command/engine/00_price_audit.py
+          python3 nfl-command/engine/00_sweep_development.py
+          python3 nfl-command/engine/01_forecast.py
+          python3 nfl-command/engine/02_analyze.py
+          python3 nfl-command/engine/03_injuries.py
+          python3 nfl-command/engine/04_audit_repo.py
+          python3 nfl-command/engine/05_build_site.py
+
+      - name: Verify the site
+        run: python3 nfl-command/engine/06_verify_site.py
+
+      - name: The published pages must rebuild identically
+        run: |
+          git diff --stat -- nfl-command/pages nfl-command/assets
+          git diff --exit-code -- nfl-command/pages nfl-command/assets
+
+      - name: The look-ahead test must still pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          fc = json.load(open('nfl-command/data/derived/forecasts.json'))
+          changed = fc['look_ahead_test']['forecasts_changed']
+          print('forecasts made before the holdout that changed: %d' % changed)
+          sys.exit(1 if changed else 0)
+          PY
+
+      - name: No strategy may be reward eligible unless every gate passes
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('nfl-command/data/derived/strategies.json'))
+          bad = [r['id'] for r in s['results']
+                 if r.get('reward_eligible') and any(g['status'] != 'Pass' for g in r['gates'].values())]
+          print('strategies marked eligible with a failing gate: %s' % (bad or 'none'))
+          sys.exit(1 if bad else 0)
+          PY

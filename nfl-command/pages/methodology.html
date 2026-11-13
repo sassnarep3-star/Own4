@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html">Findings</a>
+  <a href="flagged-for-review.html">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html">Decisions</a>
+  <a href="suggestions.html">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html" class="on">Methodology</a>
+</div></nav>
+<main>
+
+<h2>Methodology</h2>
+<h3>The model</h3>
+<p>Each team carries an offensive rating (points scored above the league mean) and a defensive rating (points allowed below the league mean). Ratings are updated after every game with the residual from that game's forecast, re-identified each game by shifting the mean offensive rating into the defensive ratings, and reverted toward the league mean. The league mean and the residual standard deviation use expanding windows with the pre-registered priors. A game is forecast with the information available before it.</p>
+<p><strong>Home field advantage.</strong> 1.5 points, applied only when the designated home team hosted the game. The 2026 season has 7 neutral-site games, where no home-field advantage is applied.</p>
+<p><strong>Splits.</strong> Development 1999-2022 (model may be inspected; no threshold is tuned on the holdout). Validation 2023-2024. Holdout 2025-2026 (scored once; no parameter is changed after the holdout is read)</p>
+<p><strong>Look-ahead test.</strong> 0 forecasts made before the holdout changed when the outcome of all 422 holdout games was shifted by seven points, out of 6991 earlier forecasts.</p>
+<h3>Pre-registration</h3>
+<p>The gates and the model parameters were committed to git before the engine was first run. One dated amendment followed, recording a defect found on the development window, the fix, and the parameters selected on that window alone.</p>
+<table class=""><thead><tr>
+<th>Field</th>
+<th>Value</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>Amendment</td><td>parameter-amendment-1</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Defect</td><td>data/gates_preregistered.json registers the mean reversion as a share of a team's rating reverted toward the league mean after each game, with rho = 0.03. Because the ratings are re-identified to a zero mean after every game, the league mean is zero and a per-game share acts only as a multiplicative decay of the entire rating scale. A 3% decay applied after every game removes essentially the whole rating within a season: the end-of-season rating standard deviation was about 1.3 points, against the roughly 6 to 9 points that real team strength differences produce.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Selection window</td><td>1999-2022. The holdout was used in this selection: false</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Selected parameters</td><td>alpha 0.06, rho 0.03 applied per season, home field 2.0 points</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Reward board scope</td><td>The forecast reward board is decided among the corrected variants V7 and V8. The defective variants are shown for transparency and are not eligible for reward points.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h3>The price source</h3>
+<p>The NFL publishes no betting lines, so every price in this project comes from a named third-party archive with a recorded commit and checksum, and every such value is labelled third-party. Take the vig-removed moneyline probability of the home team from the archive, which is the only verified market probability in the archive. Convert it into a market expected margin using the pre-registered residual standard deviation prior of 13.5 points: mu_market = sigma x inverse_normal(P_home). Evaluate the market's own line against that margin: P(home covers) = normal_cdf(inverse_normal(P_home) - home_line / sigma), where home_line = -spread_line. Turn that fair probability into a decimal settlement price and charge the archive's median observed overround of 0.0247 against it, so the settlement price is what a bookmaker charging that margin would quote.</p>
+<table class=""><thead><tr>
+<th>Check</th>
+<th>Result</th>
+<th>Detail</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>Moneyline columns</td><td><span class="badge pass">usable</span></td><td>Sound. The vig-removed moneyline probability tracks the actual home-win rate closely, and the price sign carries the right direction.</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>Spread price columns</td><td><span class="badge fail">not usable</span></td><td>NOT USABLE. The vig-removed probability derived from these prices is anti-calibrated: the games the archive prices as most likely to cover are the ones that cover least. The sign of the home price agrees with the line only about as often as chance. The side assignment or the price itself is wrong in this archive.</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>Total price columns</td><td><span class="badge fail">not usable</span></td><td>NOT USABLE. The over price sign does not predict whether the game goes over the line, and almost every game is priced at exactly 0.50. There is also no moneyline for a total, so a total market probability cannot be reconstructed from verified quotes.</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>Spread line convention</td><td><span class="badge pass">resolved</span></td><td>The moneyline cross-check agrees with this reading in 99.39% of the 5432 games that carry both a spread and a moneyline. The home cover rate of 60.14% is coherent with the share of games in which the home team is the spread favourite (64.94%): a favourite covering a three-point line wins about six times in ten, so the two numbers must agree.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Reconstructed reference price</td><td><span class="badge pass">calibrated</span></td><td>The reconstructed probability is well calibrated against the actual home-cover rate, which is the test the archive's own spread price fails.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h3>Data sources</h3>
+<table class=""><thead><tr>
+<th>Source</th>
+<th>Publisher</th>
+<th>Official?</th>
+<th>Retrieved</th>
+<th>Link</th>
+</tr></thead><tbody>
+<tr><td>2026 NFL League Standings</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL Schedules: Games, Times, Matchups & Tickets (Week 10, 2026)</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/schedules/2026/REG10" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL Week 10 injury report: Player statuses for all 14 games</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL Week 10 injury report: Player statuses for all 14 games</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/news/nfl-week-10-injury-report-2026-season" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL news roundup: Ravens confirm Lamar Jackson expected to miss 6-10 weeks; Kenneth Walker questionable</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL news roundup: Browns to start QB Deshaun Watson vs. Texans; Cardinals' Carson Beck to start vs. Rams</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL Game Book PDF: Baltimore Ravens at Buffalo Bills, Sunday 11/1/2026</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://static.www.nfl.com/image/upload/v1793617588/gamecenter/aaf70dac-4feb-11f1-abca-2c54536568a9.pdf" rel="noopener">nfl.com</a></td></tr>
+<tr><td>NFL Game Book PDF: Jacksonville Jaguars at Baltimore Ravens, Thursday 11/5/2026</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://static.www.nfl.com/image/upload/v1793965716/gamecenter/ab380826-4feb-11f1-abca-2c54536568a9.pdf" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start</td><td>NFL.com (official league site)</td><td><span class="badge pass">official</span></td><td>2026-11-13T00:00:00Z</td><td class="src"><a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Games archive, commit a7eee2ca</td><td>nflverse/nfldata</td><td><span class="badge info">third party</span></td><td>2026-11-13</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>

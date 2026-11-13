@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html">Findings</a>
+  <a href="flagged-for-review.html" class="on">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html">Decisions</a>
+  <a href="suggestions.html">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html">Methodology</a>
+</div></nav>
+<main>
+
+<h2>Flagged for review</h2>
+<p>Nothing on this page blocks publication. Every item is published so that a reviewer can decide what to do with it. Each row links to the file and to the source that would settle it.</p>
+<div class="note warn"><strong>Scope.</strong> The eleven prior NFL namespaces are outside this session's claim in COORDINATION.md. The entries below are read-only findings about those files. No file outside <code>nfl-command/</code> was edited.</div>
+<h2>Open items in this site</h2>
+<table class=""><thead><tr>
+<th>Item</th>
+<th>Why it is open</th>
+<th>How to close it</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>Total market prices (strategies S3 and P3)</td><td>The archive's over and under prices failed the calibration test and a total has no moneyline to reconstruct a market probability from.</td><td>Bring in a second price source and test it the same way. Written up as suggestion S-08.</td><td class="src"><a href="https://github.com/nflverse/nfldata" rel="noopener">archive</a></td></tr>
+<tr><td>Player prop prices (strategies C1 and C2)</td><td>The NFL publishes no prop prices and no official player game log was found.</td><td>Capture an official player statistics feed and settle against a named third-party price. Written up as suggestion S-02.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Depth position of five of the seven replacement starters</td><td>The official articles name the replacement but not its depth position.</td><td>Fold in the official game book for each game once it is published. Written up as suggestion S-06.</td><td class="src"><a href="https://static.www.nfl.com/image/upload/v1793965716/gamecenter/ab380826-4feb-11f1-abca-2c54536568a9.pdf" rel="noopener">game book</a></td></tr>
+<tr><td>Miami's Week 10 starting quarterback</td><td>Only the headline of the official article was read and it says in line for a first start, which is not a confirmed start.</td><td>Read the article body and then the game book.</td><td class="src"><a href="https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start" rel="noopener">nfl.com</a></td></tr>
+<tr><td>The dollar value of the reward pool</td><td>The reward policy was pre-registered as non-monetary until the owner funds a pool.</td><td>Owner decision. Written up as suggestion S-05.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>Consolidation of the eleven prior workspaces</td><td>They overlap heavily and are outside this session's claim.</td><td>Owner decision after reading the audit. Written up as suggestion S-01.</td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+<h2>Files flagged by the repository audit</h2>
+<p>45 of 928 files were flagged. The full per-file list with a manual review link for each is on the <a href="audit.html">repository audit</a> page.</p>
+<table class=""><thead><tr>
+<th>File</th>
+<th>Flag</th>
+<th>Manual review</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-20.html">data/raw/nba/games_2026-10-20.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-20.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-21.html">data/raw/nba/games_2026-10-21.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-21.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-22.html">data/raw/nba/games_2026-10-22.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-22.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-23.html">data/raw/nba/games_2026-10-23.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-23.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-24.html">data/raw/nba/games_2026-10-24.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-24.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-25.html">data/raw/nba/games_2026-10-25.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-25.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-26.html">data/raw/nba/games_2026-10-26.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-26.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-27.html">data/raw/nba/games_2026-10-27.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-27.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-28.html">data/raw/nba/games_2026-10-28.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-28.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-29.html">data/raw/nba/games_2026-10-29.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-29.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-30.html">data/raw/nba/games_2026-10-30.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-30.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-31.html">data/raw/nba/games_2026-10-31.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-10-31.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-11-01.html">data/raw/nba/games_2026-11-01.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-11-01.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-11-02.html">data/raw/nba/games_2026-11-02.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/data/raw/nba/games_2026-11-02.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/docs/verification-log.md">docs/verification-log.md</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/docs/verification-log.md">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/lines-lab/assets/js/data-strat.js">lines-lab/assets/js/data-strat.js</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/lines-lab/assets/js/data-strat.js">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/lines-lab/docs/verification-log.md">lines-lab/docs/verification-log.md</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/lines-lab/docs/verification-log.md">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/scripts/09_verify.py">nfl-decision/scripts/09_verify.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision/scripts/09_verify.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/scripts/verify_site.py">nfl-edge/scripts/verify_site.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/scripts/verify_site.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/verify.py">nfl-hub/verify.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/verify.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/injuries.json">nfl-hub/data/injuries.json</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/injuries.json">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/pages/injuries.html">nfl-hub/pages/injuries.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/pages/injuries.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/official/injuries_week10_2026.json">nfl-lines/data/official/injuries_week10_2026.json</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/official/injuries_week10_2026.json">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/injuries.html">nfl-lines/pages/injuries.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/injuries.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/correlation.html">nfl/correlation.html</a></td><td>table rows without a source link</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/correlation.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/data/flags.csv">nfl/data/flags.csv</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/data/flags.csv">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/pages/flagged.html">nfl/pages/flagged.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl/pages/flagged.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/LEADERBOARD.md">own4-dashboard/LEADERBOARD.md</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/LEADERBOARD.md">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/STRATEGIES.md">own4-dashboard/STRATEGIES.md</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/STRATEGIES.md">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/index.html">own4-dashboard/index.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/index.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/leaderboard/rewards.json">own4-dashboard/data/leaderboard/rewards.json</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/leaderboard/rewards.json">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/strategies/gates.json">own4-dashboard/data/strategies/gates.json</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/strategies/gates.json">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/strategies/strategies.json">own4-dashboard/data/strategies/strategies.json</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/data/strategies/strategies.json">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/flagged.html">own4-dashboard/pages/flagged.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/flagged.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/leaderboard.html">own4-dashboard/pages/leaderboard.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/leaderboard.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/strategies.html">own4-dashboard/pages/strategies.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/strategies.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/validation.html">own4-dashboard/pages/validation.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/pages/validation.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/build_site.py">own4-dashboard/scripts/build_site.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/build_site.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/validate_strategies.py">own4-dashboard/scripts/validate_strategies.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/validate_strategies.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/verify.py">own4-dashboard/scripts/verify.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/own4-dashboard/scripts/verify.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-99ca004d-own4/index.html">rental-99ca004d-own4/index.html</a></td><td>no links at all</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-99ca004d-own4/index.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-99ca004d-own4/pages/corporations-vs-owners.html">rental-99ca004d-own4/pages/corporations-vs-owners.html</a></td><td>table rows without a source link; no links at all</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-99ca004d-own4/pages/corporations-vs-owners.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-f1dbaea0/laws.html">rental-f1dbaea0/laws.html</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-f1dbaea0/laws.html">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-f1dbaea0/verify_site.py">rental-f1dbaea0/verify_site.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/rental-f1dbaea0/verify_site.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+<tr><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/verify_site.py">verification/verify_site.py</a></td><td>placeholder text</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/verify_site.py">open</a></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr>
+</tbody></table>
+<h2>Unverified values published by this site</h2>
+<table class=""><thead><tr>
+<th>Value</th>
+<th>Where it appears</th>
+<th>Why it is blank</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>Market spread, market total and market moneyline on the own lines table</td><td>Own lines page</td><td>No official NFL source publishes a betting line. The market cells are left blank in the official tables; the third-party values appear only in the tables labelled third-party.</td><td class="src"><a href="https://www.nfl.com/schedules/2026/REG10" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Replacement starter for Baltimore's quarterback</td><td>Depth chart page</td><td>No official source read in this session names the Week 10 starting quarterback. The official game books show who started the previous two games.</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Depth position for the Arizona, Cleveland, Miami and Baltimore kicker replacements</td><td>Depth chart page</td><td>The official articles do not state a depth position and no official game book covers those games yet.</td><td class="src"><a href="https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11" rel="noopener">nfl.com</a></td></tr>
+<tr><td>Game status for 177 of the 326 captured injury rows</td><td>Injuries page</td><td>The official Week 10 report article publishes no designation for those players. The practice report is linked and the game-status cell is marked as unverified against the article.</td><td class="src"><a href="https://www.nfl.com/injuries/" rel="noopener">nfl.com</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>

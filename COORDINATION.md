@@ -2009,19 +2009,19 @@ several of them carry a *canonical* claim from earlier sessions. This session th
 
 | ID | Task | Status | Owner session | File scope |
 |----|------|--------|---------------|------------|
-| C1 | Repo review, line by line: all 11 NFL workspaces + root site, mechanical + official-source checks, irregularity register | in progress | arena/582300df-own4 | `nfl-command/data/repo_review.json`, `nfl-command/pages/repo-review.html` |
-| C2 | Official-source capture: 2026 standings, Week 10 slate/byes, official injury report, team stats, official results, rules | in progress | arena/582300df-own4 | `nfl-command/data/official/*.json` |
-| C3 | Own-line origination (walk-forward model, no market claim) | in progress | arena/582300df-own4 | `nfl-command/engine/*.py`, `nfl-command/data/derived/*.json` |
-| C4 | Strategy registry: singles, parlays, player-prop combos | in progress | arena/582300df-own4 | `nfl-command/data/derived/strategies.json` |
-| C5 | Pre-registered validation gates + luck-removal protocol + skill screens | in progress | arena/582300df-own4 | `nfl-command/data/derived/gates.json`, `nfl-command/data/derived/luck.json` |
-| C6 | Correlation register (game-level, parlay legs, prop combos) with CIs, p, BH-FDR | in progress | arena/582300df-own4 | `nfl-command/data/derived/correlations.json` |
-| C7 | Leaderboard competition + reward policy | in progress | arena/582300df-own4 | `nfl-command/data/derived/leaderboard.json` |
-| C8 | Injury tracker + 2nd/3rd/4th-string depth-deficiency watchlist | in progress | arena/582300df-own4 | `nfl-command/data/derived/injuries.json`, `nfl-command/data/derived/deficiency.json` |
-| C9 | Requirements traceability register (every requirement from the brief → status → evidence) | in progress | arena/582300df-own4 | `nfl-command/data/requirements.json` |
-| C10 | Decision register: question / information / answer / blocker / discovery suggestion | in progress | arena/582300df-own4 | `nfl-command/data/questions.json` |
-| C11 | Suggestions board with a review workflow (nothing auto-implemented) | in progress | arena/582300df-own4 | `nfl-command/data/suggestions.json` |
-| C12 | Site: landing + category subpages + Flagged for Review; row-level source links; verifier | in progress | arena/582300df-own4 | `nfl-command/**` |
-| C13 | Executive summary | in progress | arena/582300df-own4 | `nfl-command/EXECUTIVE_SUMMARY.md` |
+| C1 | Repo review, line by line: all 11 NFL workspaces + root site, mechanical + official-source checks, irregularity register | done | arena/582300df-own4 | `nfl-command/engine/04_audit_repo.py`, `nfl-command/data/derived/repo_audit.json`, `nfl-command/pages/audit.html` |
+| C2 | Official-source capture: 2026 standings, Week 10 slate/byes, official injury report, team stats, official results, rules | done | arena/582300df-own4 | `nfl-command/data/official/*.json` |
+| C3 | Own-line origination (walk-forward model, no market claim) | done | arena/582300df-own4 | `nfl-command/engine/01_forecast.py`, `nfl-command/data/derived/forecasts.json`, `nfl-command/data/derived/own_lines.json` |
+| C4 | Strategy registry: singles, parlays, player-prop combos | done | arena/582300df-own4 | `nfl-command/data/strategy_registry_preregistered.json`, `nfl-command/data/derived/strategies.json` |
+| C5 | Pre-registered validation gates + luck-removal protocol + skill screens | done | arena/582300df-own4 | `nfl-command/data/gates_preregistered.json`, `nfl-command/data/derived/luck.json` |
+| C6 | Correlation register (game-level, parlay legs, prop combos) with CIs, p, BH-FDR | done | arena/582300df-own4 | `nfl-command/data/derived/correlations.json` |
+| C7 | Leaderboard competition + reward policy | done | arena/582300df-own4 | `nfl-command/data/derived/leaderboard.json` |
+| C8 | Injury tracker + 2nd/3rd/4th-string depth-deficiency watchlist | done | arena/582300df-own4 | `nfl-command/engine/03_injuries.py`, `nfl-command/data/derived/injuries_week10_normalized.json`, `nfl-command/data/derived/depth_deficiency_week10.json` |
+| C9 | Requirements traceability register (every requirement from the brief → status → evidence) | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/traceability.html` |
+| C10 | Decision register: question / information / answer / blocker / discovery suggestion | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/decisions.html` |
+| C11 | Suggestions board with a review workflow (nothing auto-implemented) | done | arena/582300df-own4 | `nfl-command/data/registers.json`, `nfl-command/pages/suggestions.html` |
+| C12 | Site: landing + category subpages + Flagged for Review; row-level source links; verifier | done | arena/582300df-own4 | `nfl-command/pages/*.html`, `nfl-command/assets/command.css`, `nfl-command/engine/05_build_site.py`, `nfl-command/engine/06_verify_site.py` |
+| C13 | Executive summary | done | arena/582300df-own4 | `nfl-command/pages/executive-summary.html`, `nfl-command/README.md` |
 | C14 | Final integration: re-verify line by line, link check, PR → main → merge → Pages deploy confirmation | pending | arena/582300df-own4 | root `index.html` (one additive link), `COORDINATION.md`, `README.md` |
 
 ### Log
@@ -2033,3 +2033,20 @@ several of them carry a *canonical* claim from earlier sessions. This session th
   is **not** reachable from the shell. Official NFL pages are captured with the environment's page-fetch
   tool (which does reach `nfl.com`) and each capture is recorded with its URL and read timestamp. The
   third-party archive used for *prices* is fetched from `codeload.github.com` and pinned to a commit SHA.
+- 2026-11-13 — Scope note: the file paths in the C1–C13 scope column were updated to the paths actually
+  built. The claim, the session ID and the exclusive scope are unchanged.
+- 2026-11-13 — Two dated determinations were committed before any result was scored on them:
+  `data/spread_convention_determination.json` (the archive's `spread_line` is the away team's line, proved by
+  a moneyline cross check at 99.41% agreement and by a regression of the margin on the line) and
+  `data/price_determination.json` (the archive's spread and total price columns fail a calibration test, so the
+  reference price for the spread strategies is reconstructed from the market's moneyline and line, and the total
+  strategies are Blocked).
+- 2026-11-13 — `data/parameter_amendment_1.json` records a defect in the pre-registered model: a 3% per-game mean
+  reversion applied to a mean-zero rating is a decay of the whole scale, which left the rating standard deviation
+  at 1.3 points after a season. The defect was found and the correction selected on the 1999-2022 development
+  window only, and the amendment was committed before the corrected model was scored on the 2025-2026 holdout.
+- 2026-11-13 — The site is 15 pages under `nfl-command/pages/`, built deterministically by
+  `nfl-command/engine/05_build_site.py` and checked by `nfl-command/engine/06_verify_site.py`, which fails the
+  build if any table row lacks a source link, if any local link does not resolve, or if placeholder text reaches a
+  page. The root `index.html` gained one additive navigation block, marked as a local addition in the same way as
+  the earlier `nfl-lines` block, so a peer rebuild can re-add it.

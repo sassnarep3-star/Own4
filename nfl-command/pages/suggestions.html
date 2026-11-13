@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions - NFL Command Center</title>
+<meta name="description" content="Official-source NFL analysis, own lines, validated strategies and a repository audit.">
+<link rel="stylesheet" href="assets/command.css">
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <h1>NFL Command Center</h1>
+  <p>Week 10 of the 2026 season. Every standings, schedule and injury value on this site comes from an official NFL page and carries that page's link. Betting prices come from a named third-party archive, because the NFL publishes no betting lines, and are labelled as such everywhere they appear.</p>
+</div></header>
+<nav class="sitenav"><div class="wrap">
+  <a href="index.html">Overview</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="findings.html">Findings</a>
+  <a href="flagged-for-review.html">Flagged for review</a>
+  <a href="traceability.html">Traceability</a>
+  <a href="decisions.html">Decisions</a>
+  <a href="suggestions.html" class="on">Suggestions</a>
+  <a href="standings.html">Standings</a>
+  <a href="own-lines.html">Own lines</a>
+  <a href="strategies.html">Strategies</a>
+  <a href="correlations.html">Correlations</a>
+  <a href="injuries.html">Injuries</a>
+  <a href="depth-chart.html">Depth chart</a>
+  <a href="audit.html">Repository audit</a>
+  <a href="methodology.html">Methodology</a>
+</div></nav>
+<main>
+
+<h2>Suggestions</h2>
+<div class="note warn"><strong>None of these is approved.</strong> Each one is an option for the owner to weigh, with its evidence, its risk and what has to happen first. No suggestion in this register has been implemented, and no suggestion is scheduled.</div>
+<table class=""><thead><tr>
+<th>ID</th>
+<th>Option</th>
+<th>What it would do</th>
+<th>Evidence</th>
+<th>Risk</th>
+<th>Prerequisites</th>
+<th>Recommendation</th>
+<th>Approved</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>S-01</td><td>Consolidate the eleven prior NFL namespaces into one site</td><td>Choose one canonical NFL site and retire the other ten into an archive</td><td>The repository audit found 152 HTML pages across eleven namespaces with 7,001 official links and heavy overlap between nfl-lines, nfl-hub, nfl-decision, nfl-edge and nfl-intel.</td><td>High. Each namespace has its own verification record and its own provenance file. A merge that breaks a byte-identical rebuild gate would take the site down.</td><td>Owner approval. A written decision on which namespace is canonical. A link-redirect plan for every published page. A migration that preserves every source link.</td><td>Not recommended inside this change. The overlap is documented; the consolidation is a separate piece of work.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-02</td><td>Add an official player game log so the player prop strategies can be priced</td><td>Capture an official NFL.com player statistics feed for every week and rebuild the prop strategies against it</td><td>The prop strategies C1 and C2 are Blocked solely because no official player log and no verifiable prop price were found. The official player pages exist and are linked from the official injury report.</td><td>Medium. The log would supply the statistic but not the price. Without a price the strategies remain Blocked.</td><td>A confirmed official statistics endpoint. A decision on whether a third-party prop price is acceptable for settlement.</td><td>Worth doing for the log alone. It also improves the injury and depth tables.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-03</td><td>Replace the rating model with a regression model fitted by maximum likelihood</td><td>Fit a Poisson or negative binomial regression on points scored with team offence, team defence, home field and rest, then read the fitted coefficients as the ratings</td><td>The current model reaches a spread error of 10.31 points on the holdout against the market's 9.60. A regression with the same inputs usually beats a hand-built rating because it estimates the weights rather than fixing them.</td><td>Medium. More parameters means more ways to overfit. The chronological splits and the look-ahead test would have to be extended to cover the extra machinery.</td><td>A development-window fit with the parameters frozen. The same look-ahead perturbation test. The same ten gates.</td><td>Recommended as the next research step, under a new dated pre-registration, with the holdout untouched until the parameters are frozen.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-04</td><td>Publish the own lines earlier in the week with a wider uncertainty band</td><td>Publish the own line on the Tuesday before the game with an explicit band instead of a point estimate</td><td>The holdout own model's 95% band around a predicted margin is roughly plus or minus 13 points, which is wider than almost every published line. The site currently publishes a point and a probability.</td><td>Low. It changes presentation only.</td><td>A published definition of the band and the reference date of the information used.</td><td>Recommended. It makes the honest uncertainty visible next to the number.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-05</td><td>Fund the reward pool</td><td>Set a monetary value per reward point and publish the pool</td><td>The reward policy was pre-registered as non-monetary until the owner funds a pool. The forecast board currently pays 221 points across two eligible variants.</td><td>Low to the analysis. It creates an obligation to keep scoring the holdout honestly.</td><td>An owner decision on the pool size and on whether the points are paid weekly or at the end of the season.</td><td>Owner decision. No suggestion is auto-approved.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-06</td><td>Add the Week 10 game books to the depth chart table as they appear</td><td>Run the depth chart step weekly and fold each new official game book into the table</td><td>The official game books carry the authoritative depth-chart codes. One row is already verified from a game book; the rest are blank because the Week 10 books are not yet published.</td><td>Low. The step only adds rows that an official document supports.</td><td>A scheduled run and a check that the published PDF matches the game in question.</td><td>Recommended. It is the only way the depth column can ever be filled from an official source.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-07</td><td>Report the price audit as a standing upstream issue</td><td>Open an issue on github.com/nflverse/nfldata describing the spread and total price columns that fail the calibration test</td><td>The spread price columns are anti-calibrated over 5,432 games and the over price sign carries no information over 5,429 games. The failure is reproducible with python3 engine/00_price_audit.py.</td><td>Low.</td><td>None.</td><td>Recommended. It costs nothing and the archive is used widely.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+<tr><td>S-08</td><td>Add a second third-party price source and test it the same way</td><td>Bring in a second archive with a documented price pipeline and require it to pass the same calibration test before any strategy uses it</td><td>The calibration test in engine/00_price_audit.py is the method that caught the defect in the current archive. It would catch the same defect in any source.</td><td>Medium. A second source means a second reconciliation, and the prices must be reconciled with each other before they can be compared to a model.</td><td>A second source with a recorded commit and checksum. The same pre-registered audit method.</td><td>Worth doing before the total strategies are unblocked.</td><td><span class="badge blocked">no</span></td><td class="src"><a href="https://github.com/sassnarep3-star/Own4" rel="noopener">github.com</a></td></tr>
+</tbody></table>
+
+</main>
+<footer class="site"><div class="wrap">
+  <p><strong>Source policy.</strong> Official values link to nfl.com. Third-party values link to the named archive and say so in the column header. A value that no official source confirms is left blank and marked unverified.</p>
+  <p><strong>Responsible gambling.</strong> No strategy on this site is a recommendation to bet. No betting strategy passes the validation gates, so nothing here is activated. If gambling is a problem, contact the National Council on Problem Gambling helpline on 1-800-522-4700, or ncpgambling.org.</p>
+  <p class="small">Built 2026-11-13 by <code>nfl-command/engine/05_build_site.py</code> from checked-in data. Every table row carries a source link.</p>
+</div></footer>
+</body>
+</html>

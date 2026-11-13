@@ -91,6 +91,14 @@ def main():
 
     # ---- resolve placeholders against the official article ------------------
     for r in rows:
+        if r["practice_status"] not in PRACTICE_STATUSES:
+            # The official article publishes game designations, not practice
+            # reports. A practice status that could not be read is left blank.
+            r["practice_status_original"] = r["practice_status"]
+            r["practice_status"] = ""
+            r["practice_status_note"] = ("The captured practice status was not readable. The official Week 10 "
+                                         "report article publishes game designations only, so the cell is left "
+                                         "blank rather than guessed.")
         if r["game_status"] in GAME_STATUSES and r["practice_status"] in PRACTICE_STATUSES:
             continue
         key = (r["game_id"], r["team"], norm_name(r["player"]))
