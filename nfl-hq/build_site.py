@@ -1413,10 +1413,83 @@ def p_leaderboard():
                 "pages/leaderboard.html")
 
 
+SCAN_SKIP = {".git", "node_modules", "__pycache__", ".mypy_cache", ".pytest_cache",
+             ".ruff_cache", ".venv", ".cache"}
+
+
+def repo_scan():
+    """A real scan of the tree. Nothing here is typed in by hand."""
+    namespaces = {}
+    ext = {}
+    files = 0
+    lines = 0
+    for dirpath, dirnames, filenames in os.walk(REPO):
+        dirnames[:] = [d for d in dirnames if d not in SCAN_SKIP]
+        for f in filenames:
+            p = os.path.join(dirpath, f)
+            rel = os.path.relpath(p, REPO)
+            files += 1
+            e = os.path.splitext(f)[1].lower() or "(none)"
+            ext[e] = ext.get(e, 0) + 1
+            top = rel.split(os.sep)[0]
+            if os.sep not in rel:
+                top = "(repository root)"
+            ns = namespaces.setdefault(top, {"files": 0, "html": 0, "lines": 0})
+            ns["files"] += 1
+            if e == ".html":
+                ns["html"] += 1
+            if e in (".py", ".html", ".md", ".yml", ".yaml", ".json", ".css", ".js"):
+                try:
+                    with open(p, encoding="utf-8", errors="ignore") as fh:
+                        ns["lines"] += sum(1 for _ in fh)
+                        lines += 0
+                except OSError:
+                    pass
+    return {"files": files, "namespaces": namespaces, "extensions": ext}
+
+
 def p_repo_review():
     body = ['<p class="lede">The repository reviewed line by line: every published page, every local '
             'link, every data namespace, and every value that is asserted without a source. The '
             'review covers the whole tree, not only this site.</p>']
+    scan = repo_scan()
+    ns = scan["namespaces"]
+    html_pages = sum(v["html"] for v in ns.values())
+    nfl_ns = sorted(k for k in ns if k.startswith("nfl"))
+    top_ext = sorted(scan["extensions"].items(), key=lambda kv: -kv[1])[:8]
+    body.append(kpi_cards([
+        (str(scan["files"]), "files in the tree", ""),
+        (str(html_pages), "published HTML pages", ""),
+        (str(len(ns)), "top-level directories", ""),
+        (str(len(nfl_ns)), "NFL workspaces", "warn"),
+    ]))
+    rows = []
+    for name in sorted(ns, key=lambda k: -ns[k]["files"]):
+        v = ns[name]
+        rows.append([cell(name), cell(v["files"], cls="num"), cell(v["html"], cls="num"),
+                     cell(v["lines"], cls="num"),
+                     '<td>%s %s</td>' % (
+                         (src_link("@@ROOT@@%s/index.html" % name, "open")
+                          if os.path.exists(os.path.join(REPO, name, "index.html"))
+                          else '<span class="blank">not published</span>'),
+                         src_link(REPO_OWN4 if name == "(repository root)"
+                                  else "https://github.com/sassnarep3-star/Own4/tree/main/%s" % name,
+                                  "repo"))])
+    rows.append([cell("(total)"), cell(scan["files"], cls="num"),
+                 cell(sum(v["html"] for v in ns.values()), cls="num"),
+                 cell(sum(v["lines"] for v in ns.values()), cls="num"),
+                 '<td>%s</td>' % src_link(REPO_OWN4, "repository")])
+    body.append(table("Repository inventory &#183; %d top-level directories, %d files"
+                      % (len(ns), scan["files"]),
+                      [("Directory", ""), ("Files", "num"), ("HTML pages", "num"),
+                       ("Readable lines", "num"), ("Landing page", "")], rows, filt=True,
+                      note="Counts come from a scan of the working tree at build time, so they "
+                           "cannot drift from the repository. Directories in the ignore set "
+                           "(.git, node_modules, caches) are excluded."))
+    rows = [[cell(e), cell(c, cls="num"),
+             '<td>%s</td>' % src_link(REPO_OWN4, "repository")] for e, c in top_ext]
+    body.append(table("File types by count", [("Extension", ""), ("Files", "num"),
+                                              ("Source", "")], rows))
     body.append('<h2>What was checked</h2>')
     rows = []
     for cid, check, result in [
