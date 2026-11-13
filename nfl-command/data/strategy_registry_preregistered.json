@@ -1,0 +1,43 @@
+{
+  "id": "strategy-registry-preregistered",
+  "registered_utc": "2026-11-13T00:00:00Z",
+  "registered_before": "engine/02_analyze.py was executed for the first time",
+  "note": "The full family below is registered before any result is computed. It is the family that the Benjamini-Hochberg FDR control in gate G5 applies to. Thresholds are project-defined design choices, not official NFL or sportsbook policy.",
+  "price_source": {
+    "official": false,
+    "publisher": "nflverse / nfldata",
+    "url": "https://github.com/nflverse/nfldata",
+    "commit": "a7eee2ca013f19aa59db9fe170c41ef0ff1cfaaa",
+    "file": "data/games.csv",
+    "sha256": "0114259438549a7c0bf201f7c91944f8ec1c02dba7339673b07d3129a5ff81df",
+    "note": "THIRD-PARTY ARCHIVE. The NFL publishes no betting lines. Every price used in this project comes from this archive and is labelled third-party everywhere it appears. Official-only tables leave the price cells blank.",
+    "spread_convention": "Determined empirically over 7,413 archive rows: the archive's spread_line equals the expected home margin, so the HOME team's line is -spread_line and the home team covers when actual_margin > spread_line. The competing reading gives a 59.2% home cover rate over the same rows against 47.6% for the adopted reading, and the adopted reading is the only one consistent with the archive's own moneyline signs."
+  },
+  "betting_strategies": [
+    {"id":"S1","name":"ATS edge (1.5 pp)","market":"spread","rule":"Bet the side with the larger model-versus-vig-removed-market cover probability, only when the edge is at least 1.5 percentage points.","threshold":0.015,"legs":1},
+    {"id":"S2","name":"ATS edge (3.0 pp)","market":"spread","rule":"Same rule as S1 with a 3.0 percentage point edge floor.","threshold":0.030,"legs":1},
+    {"id":"S3","name":"Total edge (2.0 pp)","market":"total","rule":"Bet over or under the market total when the model over-probability differs from the vig-removed market over-probability by at least 2.0 percentage points.","threshold":0.020,"legs":1},
+    {"id":"S4","name":"Moneyline edge (2.0 pp)","market":"moneyline","rule":"Bet the moneyline when the model win probability differs from the vig-removed market win probability by at least 2.0 percentage points.","threshold":0.020,"legs":1},
+    {"id":"S5","name":"Favourite-only ATS","market":"spread","rule":"Bet the market favourite at the spread whenever the model also makes that side the favourite by at least 1 point.","threshold":1.0,"legs":1},
+    {"id":"S6","name":"Small-line ATS","market":"spread","rule":"Bet the market favourite at the spread whenever the market line is 3.0 points or smaller and the model agrees the favourite should cover.","threshold":3.0,"legs":1},
+    {"id":"P1","name":"2-leg ATS parlay","market":"parlay","rule":"Combine the two highest-edge S1 legs from two different games in the same week into a parlay priced at the product of the two decimal odds.","threshold":0.015,"legs":2},
+    {"id":"P2","name":"3-leg ATS parlay","market":"parlay","rule":"Combine the three highest-edge S1 legs from three different games in the same week.","threshold":0.015,"legs":3},
+    {"id":"P3","name":"ATS + total parlay","market":"parlay","rule":"Combine the highest-edge S1 leg with the highest-edge S3 leg from two different games in the same week.","threshold":0.015,"legs":2},
+    {"id":"C1","name":"Player prop combo (two players, different games)","market":"prop","rule":"No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.","threshold":null,"legs":2,"status":"blocked"},
+    {"id":"C2","name":"Same-game player prop pair","market":"prop","rule":"No rule can be evaluated: no official player game log and no verifiable player prop price were found in any official source.","threshold":null,"legs":2,"status":"blocked"}
+  ],
+  "forecast_variants": [
+    {"id":"V1","name":"Pre-registered model","alpha":0.12,"rho":0.03,"hfa":1.5,"use_rest":false,"use_hfa":true},
+    {"id":"V2","name":"Slower ratings (alpha 0.06)","alpha":0.06,"rho":0.03,"hfa":1.5,"use_rest":false,"use_hfa":true},
+    {"id":"V3","name":"Faster ratings (alpha 0.20)","alpha":0.20,"rho":0.03,"hfa":1.5,"use_rest":false,"use_hfa":true},
+    {"id":"V4","name":"No home-field advantage","alpha":0.12,"rho":0.03,"hfa":0.0,"use_rest":false,"use_hfa":false},
+    {"id":"V5","name":"No mean reversion","alpha":0.12,"rho":0.0,"hfa":1.5,"use_rest":false,"use_hfa":true},
+    {"id":"V6","name":"With rest differential","alpha":0.12,"rho":0.03,"hfa":1.5,"use_rest":true,"use_hfa":true}
+  ],
+  "reward_policy": {
+    "betting_board": "A strategy earns reward points only if gates G1 to G9 all pass. Points = round(100 x t-statistic of the holdout ROI against the no-edge null), capped at 1,000 and floored at 0.",
+    "forecast_board": "A forecast variant earns reward points only if G1, G6 and G9 pass. Points = round(50 x z), where z = (MAE of the naive baseline - MAE of the variant) divided by the standard error of the paired per-game difference, capped at 500 and floored at 0. This board needs no prices, so it can be paid even though the NFL publishes no betting lines.",
+    "currency": "Points are non-monetary until the owner funds a pool. No pool is funded in this project; this is recorded as an open item for the owner.",
+    "currency_source": null
+  }
+}
