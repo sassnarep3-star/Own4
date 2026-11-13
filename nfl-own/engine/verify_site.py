@@ -115,6 +115,16 @@ def main():
             if m:
                 problems.append("%s: %s near %r" % (rel, label, body[max(0, m.start() - 40):m.start() + 40]))
 
+    # 5b. a prop-combo row must cite the two players it actually pairs, not a convenient log
+    combos_payload = json.load(open(os.path.join(OWN, "data", "derived", "strategies.json"),
+                                    encoding="utf-8"))
+    props_html = open(os.path.join(OWN, "pages", "props.html"), encoding="utf-8").read()
+    for c in combos_payload.get("combos", []):
+        for url in (c.get("url_a"), c.get("url_b")):
+            if not url or url not in props_html:
+                problems.append("props.html: combo %s does not link its own source %r"
+                                % (c["id"], url))
+
     # 6. claims must not exceed the data
     board = json.load(open(os.path.join(OWN, "data", "derived", "leaderboard.json"),
                            encoding="utf-8"))
