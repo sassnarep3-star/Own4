@@ -333,8 +333,8 @@ def build():
             sum(r["w"] for r in standings["rows"]), sum(r["l"] for r in standings["rows"]),
             format(sum(r["pf"] for r in standings["rows"]), ","))),
         (str(len(board["rows"])), "strategies graded", "12 pre-registered gates each"),
-        ("0", "reward-eligible strategies", "zero points awarded, of %d available"
-         % (50 * 12 * len(board["rows"]))),
+        ("0", "reward-eligible strategies",
+         "600 points is the maximum any single entry can earn"),
         ("0", "market prices held", "no official line exists to source"),
         ("%d%%" % round(100 * best["hit_rate"], 1), "best holdout hit rate",
          "%s on %s decisions" % (best["id"], format(best["n"], ","))),
@@ -345,8 +345,9 @@ def build():
     body.append("</div>")
 
     body.append('<div class="box bad"><p><strong>Headline, stated without softening.</strong> '
-                '<strong>0 of %d registered strategies qualify and 0 of 1,000 reward points are '
-                'awarded.</strong> The best holdout hit rate is %s%% against a %s%% break-even, '
+                '<strong>0 of %d registered strategies qualify and 0 reward points have been '
+                'awarded</strong> (a perfect twelve-of-twelve entry would earn 600: twelve gates '
+                'at 50 points). The best holdout hit rate is %s%% against a %s%% break-even, '
                 'and it does not survive the split-half retest. The own-line model is worse than '
                 'the closing line it would have to beat on spread error (MAE %.3f vs %.3f, naive '
                 'home-field-only %.3f) on %s holdout games. That is the expected result for public '
@@ -425,8 +426,8 @@ def build():
     b.append(table(["ID", "Family", "Decisions", "Hit rate", "Break-even", "p", "q (FDR)",
                     "Gates", "Tier", "Source"], [r + [dual_src()] for r in rows],
                    numeric=(2, 3, 4, 5, 6),
-                   note="Break-even assumes −110 on every leg (51.35%% for a two-leg parlay, "
-                        "27.44%%, 14.37%% for three legs). p is one-sided against break-even; q is "
+                   note="Break-even assumes −110 on every leg (51.35% for a two-leg parlay, "
+                        "27.44%, 14.37% for three legs). p is one-sided against break-even; q is "
                         "Benjamini-Hochberg across every registered strategy. Sources: the gate "
                         "config is in <code>nfl-own/data/derived/strategies.json</code>, the archive "
                         "is " + link("https://github.com/nflverse/nfldata") + "."))
@@ -937,7 +938,8 @@ def build():
     for n, l, s in [
         (str(len(board["rows"])), "entries graded", "singles, parlays and props"),
         ("0", "reward-eligible", "no entry reached 12/12"),
-        ("0", "points awarded", "%d points were available" % (50 * 12 * len(board["rows"]))),
+        ("0", "points awarded", "%s points were on the table across %d entries"
+         % (format(50 * 12 * len(board["rows"]), ","), len(board["rows"]))),
         (pct(board["rows"][0]["hit_rate"]), "top hit rate", board["rows"][0]["id"]),
     ]:
         b.append('<div class="kpi"><span class="n">%s</span><span class="l">%s</span>'
@@ -977,7 +979,7 @@ def build():
     # ================================================================= correlations
     b = ["<h1>Correlation values</h1>"]
     b.append('<p class="lede">Every correlation below is computed here from stated data with its '
-             'sample size and 95%% Fisher interval. Values that could not be computed are blank.</p>')
+             'sample size and 95% Fisher interval. Values that could not be computed are blank.</p>')
     rows = []
     for c in corr["rows"]:
         rows.append([esc(c["id"]), esc(c["level"]), esc(c["label"]), num(c["r"], 4),
@@ -990,7 +992,7 @@ def build():
                         "over the holdout seasons. Player-level rows use the official per-game logs "
                         "read on %s." % CAPTURED))
     b.append('<div class="box warn"><p><strong>Intervals this wide are the point.</strong> A pair '
-             'correlation on 8 games has a 95%% interval spanning roughly −0.8 to +0.8. Publishing '
+             'correlation on 8 games has a 95% interval spanning roughly −0.8 to +0.8. Publishing '
              'the interval instead of the point estimate is what stops a small-sample number being '
              'mistaken for a dependency you can price.</p></div>')
     page("pages/correlations.html", "Correlations", "Competition / Correlations", "".join(b), "corr")

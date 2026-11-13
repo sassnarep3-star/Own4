@@ -195,7 +195,8 @@ Source-linked NFL line origination, a gated strategy competition, and decision s
 · **Executive summary:** [`NFL_OWN_EXECUTIVE_SUMMARY.md`](NFL_OWN_EXECUTIVE_SUMMARY.md)
 · **Repo review:** [`nfl-own/REPO_REVIEW.md`](nfl-own/REPO_REVIEW.md)
 
-- **Headline:** 0 of 19 registered strategies qualify and 0 of 1,000 reward points are awarded.
+- **Headline:** 0 of 19 registered strategies qualify and 0 reward points have been awarded
+  (a perfect twelve-of-twelve entry earns 600).
   Best holdout hit rate 56.1% against a 52.38% break-even, and it fails the split-half retest. The
   own-line model is worse than the closing line it would have to beat (spread MAE 10.752 vs 9.850
   over 2,519 holdout games).
