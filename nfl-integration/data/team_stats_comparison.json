@@ -1,0 +1,182 @@
+{
+ "expected_drift_clubs": [
+  "NYG",
+  "WAS"
+ ],
+ "fetched_utc": "2026-11-13",
+ "nfl_edge_scoring_and_pts": {
+  "exact_matches": 91,
+  "expected_drift": [
+   {
+    "abbr": "NYG",
+    "field": "rush_td",
+    "file": 6,
+    "official": 8
+   },
+   {
+    "abbr": "NYG",
+    "field": "pass_td",
+    "file": 12,
+    "official": 13
+   },
+   {
+    "abbr": "NYG",
+    "field": "pts",
+    "file": 182,
+    "official": 203
+   },
+   {
+    "abbr": "WAS",
+    "field": "pass_td",
+    "file": 12,
+    "official": 15
+   },
+   {
+    "abbr": "WAS",
+    "field": "pts",
+    "file": 172,
+    "official": 196
+   }
+  ],
+  "fields_compared": [
+   "rush_td",
+   "pass_td",
+   "pts"
+  ],
+  "file": "nfl-edge/data/team_stats_2026.json",
+  "mismatches": [],
+  "values_compared": 96,
+  "verdict": "PASS"
+ },
+ "nfl_lines_passing": {
+  "exact_matches": 240,
+  "expected_drift": [
+   {
+    "abbr": "NYG",
+    "field": "att",
+    "file": 268,
+    "official": 304
+   },
+   {
+    "abbr": "NYG",
+    "field": "cmp",
+    "file": 165,
+    "official": 188
+   },
+   {
+    "abbr": "NYG",
+    "field": "cmp_pct",
+    "file": 61.6,
+    "official": 61.8
+   },
+   {
+    "abbr": "NYG",
+    "field": "yds_per_att",
+    "file": 7.1,
+    "official": 7.2
+   },
+   {
+    "abbr": "NYG",
+    "field": "pass_yds",
+    "file": 1900,
+    "official": 2193
+   },
+   {
+    "abbr": "NYG",
+    "field": "pass_td",
+    "file": 12,
+    "official": 13
+   },
+   {
+    "abbr": "NYG",
+    "field": "int",
+    "file": 6,
+    "official": 7
+   },
+   {
+    "abbr": "NYG",
+    "field": "rating",
+    "file": 88.5,
+    "official": 88.3
+   },
+   {
+    "abbr": "WAS",
+    "field": "att",
+    "file": 266,
+    "official": 299
+   },
+   {
+    "abbr": "WAS",
+    "field": "cmp",
+    "file": 164,
+    "official": 187
+   },
+   {
+    "abbr": "WAS",
+    "field": "cmp_pct",
+    "file": 61.6,
+    "official": 62.5
+   },
+   {
+    "abbr": "WAS",
+    "field": "yds_per_att",
+    "file": 6.7,
+    "official": 6.8
+   },
+   {
+    "abbr": "WAS",
+    "field": "pass_yds",
+    "file": 1776,
+    "official": 2025
+   },
+   {
+    "abbr": "WAS",
+    "field": "pass_td",
+    "file": 12,
+    "official": 15
+   },
+   {
+    "abbr": "WAS",
+    "field": "int",
+    "file": 1,
+    "official": 3
+   },
+   {
+    "abbr": "WAS",
+    "field": "rating",
+    "file": 94.8,
+    "official": 95
+   }
+  ],
+  "fields_compared": [
+   "att",
+   "cmp",
+   "cmp_pct",
+   "yds_per_att",
+   "pass_yds",
+   "pass_td",
+   "int",
+   "rating"
+  ],
+  "file": "nfl-lines/data/official/team_stats_offense_passing_2026.json",
+  "mismatches": [],
+  "values_compared": 256,
+  "verdict": "PASS"
+ },
+ "official_cross_check_scoring_vs_passing_td": {
+  "compared": 32,
+  "mismatches": [],
+  "verdict": "PASS"
+ },
+ "sources": {
+  "passing": "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all",
+  "scores": "https://www.nfl.com/scores/2026/REG10",
+  "scoring": "https://www.nfl.com/stats/team-stats/offense/scoring/2026/reg/all"
+ },
+ "summary": {
+  "checks_failed": 0,
+  "failed_sections": [],
+  "note": "WAS/NYG differences are the documented Thursday-game drift (repo captured pre-game 2026-11-12).",
+  "verdict": "PASS"
+ }
+}

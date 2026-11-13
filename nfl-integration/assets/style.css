@@ -1,0 +1,43 @@
+/* Own4 — NFL integration review */
+:root{--bg:#0e1117;--panel:#161b24;--line:#262d3a;--text:#e6e9ef;--muted:#98a2b3;
+--brand:#4da3ff;--ok:#3fb950;--bad:#f85149;--warn:#d29922;--neu:#8b949e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--brand)}
+header.top{position:sticky;top:0;background:#0b0e13;border-bottom:1px solid var(--line);
+z-index:5;display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:center;padding:.65rem 1.1rem}
+header.top .brand{font-weight:700;text-decoration:none;color:var(--text);margin-right:.6rem}
+header.top a{color:var(--muted);text-decoration:none;padding:.25rem .5rem;border-radius:6px}
+header.top a:hover{background:var(--panel);color:var(--text)}
+main{max-width:1100px;margin:0 auto;padding:1.4rem 1.1rem 3rem}
+h1{font-size:1.5rem;margin:.2rem 0 .8rem}
+h2{font-size:1.15rem;margin:1.6rem 0 .6rem;border-top:1px solid var(--line);padding-top:1rem}
+h3{font-size:1rem;margin:1.1rem 0 .4rem}
+.lede{color:var(--muted);max-width:60rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.7rem;margin:1rem 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:.7rem .8rem}
+.card .n{font-size:1.45rem;font-weight:700}
+.card .l{color:var(--muted);font-size:.8rem}
+.card.ok .n{color:var(--ok)} .card.warn .n{color:var(--warn)} .card.brand .n{color:var(--brand)}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--brand);
+border-radius:8px;padding:.7rem .9rem;margin:.9rem 0;color:var(--muted)}
+.note.warn{border-left-color:var(--warn)}
+.note.good{border-left-color:var(--ok)}
+.tbl-wrap{overflow-x:auto;margin:.6rem 0 1rem;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.86rem;background:var(--panel)}
+th,td{border-bottom:1px solid var(--line);padding:.5rem .6rem;text-align:left;vertical-align:top}
+th{background:#10141b;color:var(--muted);font-weight:600;position:sticky;top:0}
+tr:last-child td{border-bottom:none}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+a.src{white-space:nowrap}
+.pill{display:inline-block;padding:.08rem .5rem;border-radius:999px;font-size:.74rem;font-weight:600}
+.p-ok{background:#12261a;color:var(--ok)} .p-bad{background:#2a1214;color:var(--bad)}
+.p-warn{background:#2b2110;color:var(--warn)} .p-neu{background:#1c2230;color:var(--neu)}
+.p-fixed{background:#12261a;color:var(--ok)}
+ul.tight{margin:.4rem 0;padding-left:1.2rem}
+ul.tight li{margin:.25rem 0}
+code{background:#10141b;padding:.1rem .35rem;border-radius:5px;font-size:.85em}
+.small{color:var(--muted);font-size:.84rem}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:.82rem;
+padding:1rem 1.1rem 2rem;max-width:1100px;margin:0 auto}

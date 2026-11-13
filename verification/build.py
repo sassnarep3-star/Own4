@@ -128,6 +128,43 @@ NAV = [
         ("verified/audit.html", "Repo audit", "audit"),
         ("verified/flagged.html", "⚑ Flagged for review", "flags"),
     ]),
+    # Consolidated 2026-11-13 by session arena/8e2de421-own4 (final integration, task I2):
+    # ONE organized NFL category covering all 11 NFL namespaces. This (a) replaces the
+    # scattered "NFL research · 2026-11-12" and "NFL audit · 2026-11-12" groups,
+    # (b) absorbs the links that previously existed ONLY as hand edits to index.html
+    # (nfl-decision/, nfl-edge/, nfl-lines/ — any regeneration silently dropped them,
+    # the recurring I1/F-13 defect), (c) adds the orphaned nfl-intel/ namespace, which
+    # had no root link anywhere, and (d) moves nfl-decisions/ out of "Retained
+    # workspaces". Every link previously published is preserved; nothing was removed.
+    ("NFL research · 11 namespaces", [
+        ("nfl/index.html", "NFL research (specification)", "legacy"),
+        ("nfl-research/index.html", "NFL research dashboard", "legacy"),
+        ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
+        ("nfl-quant/index.html", "NFL quant pipeline", "legacy"),
+        ("nfl-lines/index.html", "NFL Lines — dashboard", "legacy"),
+        ("nfl-lines/pages/executive-summary.html", "NFL executive summary", "legacy"),
+        ("nfl-lines/pages/decisions.html", "NFL decision register", "legacy"),
+        ("nfl-lines/pages/suggestions.html", "NFL suggestions", "legacy"),
+        ("nfl-lines/pages/own-lines.html", "NFL originated lines", "legacy"),
+        ("nfl-lines/pages/leaderboard.html", "NFL leaderboard", "legacy"),
+        ("nfl-lines/pages/flagged.html", "⚑ NFL — flagged for review", "legacy"),
+        ("nfl-edge/index.html", "NFL Edge — own lines, gates &amp; decisions", "legacy"),
+        ("nfl-edge/pages/flagged.html", "⚑ NFL Edge — flagged (16)", "legacy"),
+        ("nfl-decision/index.html", "NFL Decision Lab", "legacy"),
+        ("nfl-decisions/index.html", "NFL Decision Desk · questions &amp; suggestions", "legacy"),
+        ("nfl-hub/index.html", "NFL Line Genesis", "legacy"),
+        ("nfl-hub/pages/suggestions.html", "NFL suggestions &amp; decisions", "legacy"),
+        ("nfl-hub/pages/questions.html", "NFL open questions", "legacy"),
+        ("nfl-hub/pages/flagged.html", "⚑ NFL flagged for review", "legacy"),
+        ("nfl-audit/index.html", "NFL audit &amp; suggestions", "legacy"),
+        ("nfl-audit/pages/questions.html", "NFL questions register", "legacy"),
+        ("nfl-audit/pages/injuries.html", "NFL injury tracker", "legacy"),
+        ("nfl-audit/pages/flagged.html", "⚑ NFL audit flags", "legacy"),
+        ("nfl-intel/index.html", "NFL Intelligence", "legacy"),
+        ("nfl-intel/pages/flagged.html", "⚑ NFL Intelligence — flagged", "legacy"),
+        ("nfl-integration/index.html", "NFL integration review · 2026-11-13", "legacy"),
+        ("nfl-integration/pages/flagged.html", "⚑ Integration — flagged", "legacy"),
+    ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),
@@ -138,31 +175,12 @@ NAV = [
         ("verification-2026-11-05/flagged.html", "Independent audit · flags", "legacy"),
         ("status/index.html", "Status review", "legacy"),
         ("rental-sf/index.html", "SF rental increase review", "legacy"),
-        ("nfl-decisions/index.html", "NFL Decision Desk · questions &amp; suggestions", "legacy"),
     ]),
     # Restored 2026-11-12: this block previously existed only as a hand edit to index.html,
     # so a regen silently dropped another session's published link. Kept in the generator now.
     ("Rental research · 2026-11-06", [
         ("rental-f1dbaea0/index.html", "RentCheck SF · 94122", "legacy"),
         ("rental-f1dbaea0/flagged.html", "⚑ Rental — flagged", "legacy"),
-    ]),
-    ("NFL research · 2026-11-12", [
-        ("nfl-hub/index.html", "NFL Line Genesis", "legacy"),
-        ("nfl-hub/pages/suggestions.html", "NFL suggestions &amp; decisions", "legacy"),
-        ("nfl-hub/pages/questions.html", "NFL open questions", "legacy"),
-        ("nfl-hub/pages/flagged.html", "⚑ NFL flagged for review", "legacy"),
-    ]),
-    # Added 2026-11-12 by session arena/e2601583-own4: its own audit dashboard, plus the
-    # four earlier NFL workspaces, which were reachable only by direct URL otherwise.
-    ("NFL audit · 2026-11-12", [
-        ("nfl-audit/index.html", "NFL audit &amp; suggestions", "legacy"),
-        ("nfl-audit/pages/questions.html", "NFL questions register", "legacy"),
-        ("nfl-audit/pages/injuries.html", "NFL injury tracker", "legacy"),
-        ("nfl-audit/pages/flagged.html", "⚑ NFL audit flags", "legacy"),
-        ("nfl/index.html", "NFL research (specification)", "legacy"),
-        ("nfl-research/index.html", "NFL research dashboard", "legacy"),
-        ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
-        ("nfl-quant/index.html", "NFL quant pipeline", "legacy"),
     ]),
 ]
 

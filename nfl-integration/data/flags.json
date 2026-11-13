@@ -1,0 +1,115 @@
+{
+ "generated": "2026-11-13",
+ "session": "arena/8e2de421-own4",
+ "policy": "Flagged items do not block publication. Each carries the evidence that raised it and the action that would clear it.",
+ "flags": [
+  {
+   "id": "INT-01",
+   "severity": "irregularity",
+   "status": "fixed by this integration",
+   "title": "nfl-intel/ was orphaned from the root landing page",
+   "detail": "grep -c nfl-intel index.html returned 0 before this session's navigation repair: the 16-page nfl-intel site (merged via PR #70) was reachable only by direct URL, even though it is one of the eleven NFL namespaces. Fixed by adding it to the canonical generator's navigation.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/index.html",
+   "clearing_action": "Already cleared: verify the new root navigation contains nfl-intel/index.html."
+  },
+  {
+   "id": "INT-02",
+   "severity": "defect found",
+   "status": "fixed by this integration",
+   "title": "Canonical generator silently dropped hand-added navigation links",
+   "detail": "Running python3 verification/build.py (the generator behind the Validate canonical NBA dashboard workflow) regenerated index.html WITHOUT the hand-added nfl-decision/, nfl-edge/ and nfl-lines/ nav groups — verified locally by running it and observing the diff, then reverting. Any future regeneration would have unpublished those links (the recurring I1/F-13 defect class). Fixed by moving every hand-added link into the generator's NAV.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py",
+   "clearing_action": "Already cleared: re-running the generator must now be byte-identical."
+  },
+  {
+   "id": "INT-03",
+   "severity": "needs review",
+   "status": "open",
+   "title": "Stale PR #68 taken over; its namespace count is already outdated",
+   "detail": "PR #68 (nfl-decision namespace-count fix, five -> eight) had no commits for over 24 hours and was taken over per the board's stale-claim rule. At takeover time the repository holds ELEVEN NFL namespaces, so the merged text says eight. The count will keep drifting as sessions add namespaces; suggestion S04 in nfl-decision (adopt one canonical dashboard) is the durable fix.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/pull/68",
+   "clearing_action": "Owner decision on S04, or make the count non-numeric."
+  },
+  {
+   "id": "INT-04",
+   "severity": "irregularity",
+   "status": "open",
+   "title": "Coordination log statement did not match the file",
+   "detail": "Session arena/40caaa81-own4's log (COORDINATION.md, merged via PR #76) states the root index.html links nfl-intel/. The file at that commit contained zero matches for nfl-intel. Their record was not edited; the discrepancy is published here and the underlying gap is fixed by INT-01.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+   "clearing_action": "None required beyond this note; the link now exists."
+  },
+  {
+   "id": "INT-05",
+   "severity": "unverified",
+   "status": "open",
+   "title": "nfl-quant's publish-verification step was not run",
+   "detail": "nfl-quant/pipeline/07_verify_publish.py requires pandas (absent in this environment) and writes timestamped artifacts (fetched_utc = now), so it is not a read-only verifier — running it would dirty peer files. nfl-quant's published pages were instead covered by the repository-wide link/row audit and the bounded-audit test suite, both of which pass. nfl-quant's numeric spot-checks are therefore NOT re-verified by this session.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/07_verify_publish.py",
+   "clearing_action": "Run the nfl-quant pipeline in an environment with pandas, or make the script read-only."
+  },
+  {
+   "id": "INT-06",
+   "severity": "unverified",
+   "status": "open",
+   "title": "nfl-lab standings are an older snapshot (through Week 8)",
+   "detail": "nfl-lab/data/standings_2026.csv matches the live official page for only 2 of 32 clubs because it is an earlier snapshot (BUF 6-1-0 vs 7-1-0 live). Its own peers documented that this capture also omits CHI 34 - SEA 17 (their flag F-03). Internal consistency still holds (sum W = sum L, sum PF = sum PA). Not judged against live; the file's own capture governs.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/data/standings_2026.csv",
+   "clearing_action": "Refresh the snapshot or label the capture date on the page that renders it."
+  },
+  {
+   "id": "INT-07",
+   "severity": "irregularity",
+   "status": "open",
+   "title": "Arizona club abbreviation differs across files (ARI vs AZ)",
+   "detail": "nfl-hub stores Arizona as ARI (the official club code) while nfl-audit, nfl-intel, nfl-lines and nfl-lab store AZ (the logo-slug form used on nfl.com image URLs). All W/L/T/PF/PA values are identical; only the key differs. The comparison script normalises the two keys before judging.",
+   "source_url": "https://www.nfl.com/standings/",
+   "clearing_action": "Pick one convention when the namespaces are consolidated (S04)."
+  },
+  {
+   "id": "INT-08",
+   "severity": "scope note",
+   "status": "open",
+   "title": "Injury reports are time-sensitive; only the frozen Thursday report was judged",
+   "detail": "nfl.com/injuries/ serves the current week and practice/game statuses change Wednesday through Saturday. The Thursday-game tables (WAS, NYG — game played, report frozen) were compared field-by-field: 100/100 match. Sunday-game statuses captured on 2026-11-12 were NOT re-judged against the 2026-11-13 page because day-over-day drift is expected and cannot be separated from error without a dated archive.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "clearing_action": "Archive dated injury-report snapshots if day-level provenance is required."
+  },
+  {
+   "id": "INT-09",
+   "severity": "needs review",
+   "status": "open",
+   "title": "45 published table rows still carry no source link",
+   "detail": "The bounded audit (verification-2026-11-05) reports 148 pages with 0 broken local links but 45 rows without a source link — the pre-existing finding previously published as V-08, located in older NFL pages outside this session's scope. This session's own pages are 100% source-linked and its verifiers enforce that.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/verification-2026-11-05/coverage.html",
+   "clearing_action": "Owner assigns the 45 rows to the namespace that renders them."
+  },
+  {
+   "id": "INT-10",
+   "severity": "needs review",
+   "status": "open",
+   "title": "Eleven overlapping NFL namespaces remain unconsolidated",
+   "detail": "nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-lines/, nfl-edge/, nfl-decision/, nfl-decisions/, nfl-hub/, nfl-audit/ and nfl-intel/ all publish NFL research. This integration makes every one of them reachable from a single organised NFL category on the root landing page (no link removed), but it does not merge their content. The consolidation suggestion (S04 in nfl-decision, SG-11 in nfl-lines) stays open for the owner.",
+   "source_url": "https://github.com/sassnarep3-star/Own4",
+   "clearing_action": "Owner picks one canonical NFL dashboard; others become cited archives."
+  },
+  {
+   "id": "INT-11",
+   "severity": "blocked",
+   "status": "open",
+   "title": "No official source publishes betting prices — validation gate G7 cannot pass",
+   "detail": "Re-confirmed 2026-11-13: no official NFL source publishes spread/total/moneyline prices (the nfl.com odds control renders no values in server HTML — see nfl-decision F-12). Every repository-wide strategy leaderboard therefore remains at 0 reward-eligible strategies and 0 rewards, by design, not by omission.",
+   "source_url": "https://www.nfl.com/games",
+   "clearing_action": "Acquire a licensed, timestamped price archive (owner decision, budget required)."
+  },
+  {
+   "id": "INT-12",
+   "severity": "needs review",
+   "status": "open",
+   "title": "Root footer still describes the site as NBA-only",
+   "detail": "The canonical footer rendered by verification/build.py reads 'Own4 — NBA line-origination research' while the navigation now carries eleven NFL namespaces plus rental sections. Cosmetic mismatch only; wording left unchanged because it is the identity line of the canonical NBA dashboard's owners.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/",
+   "clearing_action": "Owner rewords the footer, e.g. 'Own4 — NBA and NFL line-origination research'."
+  }
+ ]
+}
