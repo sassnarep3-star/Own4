@@ -1,0 +1,127 @@
+name: nfl-hq verify
+
+# Scope: nfl-hq/**, index.html, nba-dashboard.html. Owned by session
+# arena/7f2d46fa-own4 (the final integration session).
+#
+# What this guarantees, in order:
+#   1. the committed official data is exactly what build_data.py produces from the
+#      captured official pages, so no published number can drift from its capture;
+#   2. every integrity check over that data passes (uniqueness, standings
+#      arithmetic, league points for equals points against, injury completeness,
+#      every injury row carrying an NFL.com player URL, deficiency coverage);
+#   3. the committed pages and root dashboard are exactly what the committed data
+#      produces (catches a page regenerated and not committed, or vice versa);
+#   4. no local link anywhere in nfl-hq/ or the two root pages is broken;
+#   5. every published data row carries a source link, and every unverifiable
+#      value is published blank rather than filled in.
+#
+# The rebuild is byte-identical, which is why steps 1 and 3 can be hard gates:
+# every value is derived from committed inputs and no timestamp is written into
+# any output.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'nfl-hq/**'
+      - 'index.html'
+      - 'nba-dashboard.html'
+      - '.github/workflows/nfl-hq.yml'
+  pull_request:
+    paths:
+      - 'nfl-hq/**'
+      - 'index.html'
+      - 'nba-dashboard.html'
+      - '.github/workflows/nfl-hq.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate this workflow parses
+        run: |
+          python3 - <<'PY'
+          import sys
+          try:
+              import yaml
+          except ImportError:
+              print("PyYAML is not installed; skipping the parse check.")
+              sys.exit(0)
+          with open(".github/workflows/nfl-hq.yml", encoding="utf-8") as fh:
+              doc = yaml.safe_load(fh)
+          assert doc and "jobs" in doc, "workflow did not parse into a job map"
+          print("workflow parses; jobs:", ", ".join(sorted(doc["jobs"])))
+          PY
+
+      - name: Rebuild the official data layer from the captured pages
+        run: python3 nfl-hq/build_data.py
+
+      - name: Gate - the committed data must be exactly what the capture produces
+        run: |
+          if ! git diff --quiet -- nfl-hq/data/official nfl-hq/data/derived nfl-hq/data/verification/verification_*.json; then
+            echo "::error::committed data is out of sync with the captured official pages"
+            git --no-pager diff --stat -- nfl-hq/data
+            echo "Run 'python3 nfl-hq/build_data.py' and commit the result."
+            exit 1
+          fi
+          echo "data layer reproducible"
+
+      - name: Gate - every integrity check over the official data must pass
+        run: |
+          python3 - <<'PY'
+          import glob
+          import json
+          import sys
+
+          paths = sorted(glob.glob("nfl-hq/data/verification/verification_*.json"))
+          if not paths:
+              print("::error::no verification receipt found")
+              sys.exit(1)
+          failed = []
+          total = 0
+          for p in paths:
+              doc = json.load(open(p, encoding="utf-8"))
+              checks = (doc.get("sections") or {}).get("integrity_checks") or []
+              for c in checks:
+                  total += 1
+                  tag = "%s %s" % (c.get("id"), c.get("check"))
+                  if c.get("passed"):
+                      print("  PASS   %s - %s" % (tag, c.get("detail")))
+                  else:
+                      print("  FAIL   %s - %s" % (tag, c.get("detail")))
+                      failed.append(tag)
+          print("%d integrity checks, %d failed" % (total, len(failed)))
+          if failed or total == 0:
+              print("::error::integrity checks failed:", failed)
+              sys.exit(1)
+          PY
+
+      - name: Rebuild the site and the root dashboard from the committed data
+        run: |
+          python3 nfl-hq/build_site.py
+          python3 nfl-hq/build_root.py
+
+      - name: Gate - the committed pages must be exactly what the data produces
+        run: |
+          if ! git diff --quiet -- nfl-hq/pages nfl-hq/index.html index.html nba-dashboard.html; then
+            echo "::error::committed pages are out of sync with the committed data"
+            git --no-pager diff --stat -- nfl-hq/pages nfl-hq/index.html index.html nba-dashboard.html
+            echo "Run 'python3 nfl-hq/build_site.py' and 'python3 nfl-hq/build_root.py'."
+            exit 1
+          fi
+          echo "pages reproducible"
+
+      - name: Gate - no broken local link, no data row without a source link
+        run: python3 nfl-hq/verify_site.py
