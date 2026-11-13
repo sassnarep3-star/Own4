@@ -45,7 +45,9 @@ jobs:
         # the committed engine, so any diff here is a real defect, not floating-point drift:
         # the pipeline uses no NumPy, no BLAS and a fixed seed.
         run: |
+          git status --porcelain -- nfl-origination
           git diff --stat -- nfl-origination/data nfl-origination/pages
+          git diff -- nfl-origination/data nfl-origination/pages | head -200
           git diff --exit-code -- nfl-origination/data nfl-origination/pages
 
       - name: Reconciliation must pass
