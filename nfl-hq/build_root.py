@@ -116,15 +116,18 @@ n_links = (site_ver.get("local_links_checked") or 0)
 
 
 # ------------------------------------------------------------------ page
-PEER_BLOCK_RE = re.compile(r"<!--\s*LOCAL ADDITION.*?(?=<!--|</nav>)", re.S | re.I)
+PEER_GROUP_LABEL = "Peer sessions &#183; preserved verbatim"
+NAV_BEGIN = "<!-- BEGIN nfl-hq generated nav (session arena/7f2d46fa-own4) -->"
+NAV_END = "<!-- END nfl-hq generated nav (session arena/7f2d46fa-own4) -->"
 
 
 def peer_nav_blocks():
-    """Peer sessions add their navigation to the root page inside a marked comment.
+    """Everything another session put in the root navigation, preserved verbatim.
 
-    Those blocks are preserved verbatim. The root navigation is shared output, so
-    this page is a union, never a replacement: whatever a peer session added is
-    carried forward unchanged on the next rebuild.
+    The root navigation is shared output, so this page is a union, never a
+    replacement. The block this generator owns is delimited by comment markers
+    and is stripped before the remainder is carried forward, which makes the
+    rebuild idempotent while guaranteeing that no peer link is ever dropped.
     """
     path = os.path.join(REPO, "index.html")
     if not os.path.exists(path):
@@ -133,12 +136,24 @@ def peer_nav_blocks():
         text = open(path, encoding="utf-8").read()
     except OSError:
         return []
-    blocks = []
-    for m in PEER_BLOCK_RE.finditer(text):
-        blk = m.group(0).strip()
-        if blk and blk not in blocks:
-            blocks.append(blk)
-    return blocks
+    if NAV_BEGIN in text and NAV_END in text:
+        text = text.split(NAV_BEGIN, 1)[0] + text.split(NAV_END, 1)[1]
+    m = re.search(r"<nav\b[^>]*>(.*?)</nav>", text, re.S)
+    if not m:
+        return []
+    inner = m.group(1)
+    items = re.findall(r"(<div class=\"grp\">.*?</div>|<a\b[^>]*>.*?</a>)", inner, re.S)
+    out, seen = [], set()
+    for i in items:
+        i = i.strip()
+        if not i or PEER_GROUP_LABEL in i:
+            continue
+        key = re.sub(r"\s+", " ", i)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(i)
+    return out
 
 
 def dashboards():
@@ -308,6 +323,7 @@ def main():
                 'network calls.</p></div>')
 
     nav = []
+    nav.append(NAV_BEGIN)
     nav.append('<div class="grp">NFL Command Center</div>')
     for label, href in [
         ("Dashboard", "nfl-hq/index.html"),
@@ -344,13 +360,15 @@ def main():
                 continue
             seen.add(slug)
             nav.append('<a class="nav" href="%s">%s</a>' % (href, E(slug)))
+    nav.append(NAV_END)
     peers = peer_nav_blocks()
     if peers:
         nav.append('<div class="grp">Peer sessions &#183; preserved verbatim</div>')
         nav.extend(peers)
-        body.append('<div class="panel"><h3>Peer sessions</h3><p>%d navigation blocks added by '
-                    'other sessions to this root page are preserved verbatim in the sidebar. '
-                    'Nothing a peer session published has been removed or rewritten.</p></div>'
+        body.append('<div class="panel"><h3>Peer sessions</h3><p>%d navigation entries added by '
+                    'other sessions to this root page are preserved verbatim in the sidebar '
+                    'under <em>Peer sessions &#183; preserved verbatim</em>. Nothing a peer '
+                    'session published has been removed or rewritten.</p></div>'
                     % len(peers))
 
     html = """<!doctype html>
