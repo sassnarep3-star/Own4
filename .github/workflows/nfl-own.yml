@@ -52,7 +52,16 @@ jobs:
       - name: Determinism gate on derived data and pages
         run: |
           git diff --stat -- nfl-own/data/derived nfl-own/index.html nfl-own/pages
-          git diff --exit-code -- nfl-own/data/derived nfl-own/index.html nfl-own/pages
+          python3 - <<'EOF'
+          import subprocess
+          r = subprocess.run(["git", "diff", "--", "nfl-own/data/derived", "nfl-own/index.html",
+                              "nfl-own/pages"], capture_output=True, text=True)
+          if r.stdout.strip():
+              for line in r.stdout.splitlines()[:120]:
+                  print("::error::" + line.replace("%", "%25").replace("\r", "%0D"))
+              raise SystemExit("a rebuild does not reproduce the committed files")
+          print("determinism: clean")
+          EOF
 
       - name: Tests
         run: python3 -m unittest discover -s nfl-own/tests -v
