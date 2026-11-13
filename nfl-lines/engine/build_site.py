@@ -238,6 +238,7 @@ def build_index():
     ver = derived("verification.json")
     sp = ver["official_score_spotcheck"]
     fl = load("flags.json")
+    dec = load("decisions.json")
     cards = [
         (s["forecast_games"], "games forecast out of sample", "2011-2026, refit before every kick-off"),
         ("%d/%d" % (sp["matched"], sp["games_compared"]),
@@ -249,9 +250,16 @@ def build_index():
         ("%.3f" % br["mean_abs_own_total_error"], "own total error (pts)",
          "market benchmark %.3f" % br["mean_abs_market_total_error"]),
         ("%d" % len(fl["items"]), "items flagged for review", "published, not hidden"),
-        ("275", "injury-report rows", "all 14 Week 10 games, official source"),
+        ("275", "archived injury-report rows", "snapshot 2026-11-12 00:00 UTC; not live"),
     ]
-    body = ['<div class="cards">']
+    body = [
+        '<div class="crit"><strong>Stale-slate warning (checked 2026-11-13).</strong> '
+        'NFL.com now marks Washington–New York 24–21, Final, but this frozen snapshot still lists '
+        'the game as upcoming with a model spread of +0.99 and total of 45.47. Do not use that line. '
+        'Check <a href="pages/flagged.html#IR-16">IR-16</a> and '
+        '<a href="pages/suggestions.html#SG-13">SG-13</a>; current-week lines require an official-status refresh.</div>',
+        '<div class="cards">'
+    ]
     for k, l, s2 in cards:
         body.append('<div class="card"><div class="k">%s</div><div class="l">%s</div><div class="s">%s</div></div>'
                     % (esc(k), esc(l), esc(s2)))
@@ -266,11 +274,11 @@ def build_index():
 
     body.append("<h3>Where to start</h3><ul class='tight'>"
                 "<li><a href='pages/executive-summary.html'>Executive summary</a> - the whole picture in one page.</li>"
-                "<li><a href='pages/decisions.html'>Decision register</a> - 15 questions, what we know, what we do not, and how to close each gap.</li>"
-                "<li><a href='pages/suggestions.html'>Suggestions</a> - 12 ranked proposals awaiting your review. Nothing here is approved.</li>"
-                "<li><a href='pages/own-lines.html'>Own lines</a> - this week's originated spreads, totals and moneylines.</li>"
-                "<li><a href='pages/flagged.html'>Flagged for review</a> - 15 irregularities, published rather than fixed silently.</li>"
-                "</ul>")
+                "<li><a href='pages/decisions.html'>Decision register</a> - %d questions, what we know, what we do not, and how to close each gap.</li>"
+                "<li><a href='pages/suggestions.html'>Suggestions</a> - %d ranked proposals awaiting your review. Nothing here is approved.</li>"
+                "<li><a href='pages/own-lines.html'>Own lines</a> - frozen this-week spreads, totals and moneylines; check the as-of warning before use.</li>"
+                "<li><a href='pages/flagged.html'>Flagged for review</a> - %d irregularities, published rather than fixed silently.</li>"
+                "</ul>" % (len(dec["questions"]), len(dec["suggestions"]), len(fl["items"])))
 
     body.append("<h3>How a number gets onto this site</h3>"
                 "<ol class='tight'>"
@@ -310,7 +318,13 @@ def build_exec_summary():
     fl = load("flags.json")
     cr = {c["id"]: c for c in cor["correlations"]}
 
-    body = []
+    body = [
+        '<div class="crit"><strong>Freshness warning (checked 2026-11-13).</strong> '
+        'The official NFL Week 10 page marks Washington–New York 24–21, Final, but the frozen model output '
+        'still includes this game as upcoming. Its line is stale and must not be treated as actionable. '
+        'See <a href="flagged.html#IR-16">IR-16</a> and the proposed gate '
+        '<a href="suggestions.html#SG-13">SG-13</a>.</div>'
+    ]
     body.append('<div class="cards">')
     for k, l, s2 in [
         ("%d" % s["forecast_games"], "out-of-sample forecasts", "2011-2026, refit before each kick-off"),
@@ -331,8 +345,8 @@ def build_exec_summary():
 <p>An end-to-end line-origination and validation system for the NFL, run on 2026 Week 10 data. It originates its
 own spread, total, team totals, win probability and moneyline for every game; measures the disagreement against the
 market; turns that disagreement into bets across singles, parlays and a same-game combo; and then refuses to reward
-any of them until they pass eight pre-declared gates. Injuries and unit deficiency are tracked from the official
-NFL injury report for all 14 Week 10 games.</p>
+any of them until they pass eight pre-declared gates. The injury report is a frozen Week 10 snapshot, retrieved
+2026-11-12 00:00 UTC; it is not a live feed and must be refreshed before use.</p>
 
 <h3>What the evidence says</h3>
 <ul class="tight">
@@ -452,7 +466,12 @@ def build_suggestions():
 def build_own_lines():
     up = derived("own_lines_week10.json")
     w10 = sorted([x for x in up if x["week"] == 10], key=lambda z: (z["gameday"], z["game_id"]))
-    body = []
+    body = [
+        '<div class="crit"><strong>Do not use the Washington–New York line.</strong> '
+        'NFL.com marked the game 24–21, Final, on 2026-11-13; this frozen pre-game table still contains the old forecast. '
+        'The WAS @ NYG row is marked stale. See <a href="flagged.html#IR-16">IR-16</a> and '
+        '<a href="suggestions.html#SG-13">the proposed freshness gate</a>.</div>'
+    ]
     body.append("""<div class="note"><strong>What these are.</strong> Spreads, totals and moneylines produced by my
 own model, fitted only on games that finished before kick-off. A positive own spread means the model makes the home
 team that many points favourite. They are <em>forecasts</em>, not verified facts, and they carry no official source
@@ -464,17 +483,19 @@ official odds.</div>""")
         se_s = '<span class="%s">%s</span>' % ("pos" if se > 0 else "neg", "%+.2f" % se)
         te_s = '<span class="%s">%s</span>' % ("pos" if te > 0 else "neg", "%+.2f" % te)
         flag = " flagged" if (abs(se) >= 6.5 or abs(te) >= 6.5) else ""
+        stale = x["game_id"] == "2026_10_WAS_NYG"
+        status = " <span class='pill no'>STALE - FINAL</span>" if stale else ""
+        source_url = "https://www.nfl.com/scores/2026/REG10" if stale else game_url(x["away"], x["home"], 2026, x["week"])
         rows.append(
-            "<tr%s><td>%s</td><td>%s @ %s</td><td class='n'>%s</td><td class='n'>%s</td><td>%s</td>"
+            "<tr%s><td>%s</td><td>%s @ %s%s</td><td class='n'>%s</td><td class='n'>%s</td><td>%s</td>"
             "<td class='n'>%s</td><td class='n'>%s</td><td>%s</td><td class='n'>%s</td><td class='n'>%s</td>"
             "<td class='n'>%s</td><td class='n'>%s</td>"
             "<td><a href='%s'>official</a></td></tr>"
-            % (flag, esc(x["gameday"]), esc(x["away"]), esc(x["home"]),
+            % (flag, esc(x["gameday"]), esc(x["away"]), esc(x["home"]), status,
                esc(x["own_spread_line"]), esc(x["market_spread_line"]), se_s,
                esc(x["own_total_line"]), esc(x["market_total_line"]), te_s,
                esc(x["own_home_team_total"]), esc(x["own_away_team_total"]),
-               esc(x["own_home_moneyline"]), esc(x["market_home_moneyline"]),
-               esc(game_url(x["away"], x["home"], 2026, x["week"]))))
+               esc(x["own_home_moneyline"]), esc(x["market_home_moneyline"]), esc(source_url)))
     body.append(table(
         ["Date", "Matchup", "Own spread", "Market spread", "Spread edge",
          "Own total", "Market total", "Total edge", "Own home TT", "Own away TT",
@@ -485,21 +506,24 @@ of games disagree by more than 5 points, so these are within normal dispersion &
 two of them are explained by things the model cannot see: a bye week (PIT @ CIN, irregularity IR-08) and a
 quarterback change (MIA @ IND, IR-11).</p>""")
 
-    body.append("<h3>Every remaining 2026 game</h3><p class='small'>The model also originates a line for all %d "
-                "unplayed regular-season games. Those beyond Week 10 are projections against a market number that "
-                "does not yet exist for most of them; they are shown for completeness.</p>" % len(up))
+    body.append("<h3>Full frozen forecast horizon</h3><p class='small'>The snapshot contains %d forecasts from its 2026-11-12 as-of state. "
+                "It is not a live list of unplayed games: WAS @ NYG is already final and is marked stale. "
+                "The remaining forecasts still require a kickoff/status freshness check before any use. Future-week "
+                "market numbers do not yet exist for most games.</p>" % len(up))
     rows = []
     for x in sorted(up, key=lambda z: (z["week"], z["gameday"])):
-        rows.append("<tr><td class='n'>%s</td><td>%s</td><td>%s @ %s</td><td class='n'>%s</td>"
+        stale = x["game_id"] == "2026_10_WAS_NYG"
+        status = " <span class='pill no'>STALE - FINAL</span>" if stale else ""
+        status_url = "https://www.nfl.com/scores/2026/REG10" if stale else (OFF_SCHEDULE if x["week"] == 10 else "https://www.nfl.com/schedules/")
+        rows.append("<tr><td class='n'>%s</td><td>%s</td><td>%s @ %s%s</td><td class='n'>%s</td>"
                     "<td class='n'>%s</td><td class='n'>%s</td><td class='n'>%s</td>"
                     "<td><a href='%s'>official schedule</a> &middot; "
                     "<a href='%s' title='market lines are not published by the NFL'>third-party market</a> "
                     "&middot; <a href='../data/derived/own_lines_week10.json'>computed</a></td></tr>"
-                    % (esc(x["week"]), esc(x["gameday"]), esc(x["away"]), esc(x["home"]),
+                    % (esc(x["week"]), esc(x["gameday"]), esc(x["away"]), esc(x["home"]), status,
                        esc(x["own_spread_line"]), esc(x["own_total_line"]),
                        esc(x["market_spread_line"]), esc(x["market_total_line"]),
-                       esc(OFF_SCHEDULE if x["week"] == 10 else "https://www.nfl.com/schedules/"),
-                       NFLDATA))
+                       esc(status_url), NFLDATA))
     body.append(table(["Week", "Date", "Matchup", "Own spread", "Own total", "Market spread", "Market total",
                        "Source"], rows, numeric_from=3))
     return page("Own lines (Week 10)", "pages/own-lines.html", "".join(body),
@@ -1092,9 +1116,10 @@ def main():
         (os.path.join("pages", "data-results.html"), build_results),
         (os.path.join("pages", "data-standings.html"), build_standings),
         (os.path.join("pages", "data-team-stats.html"), build_team_stats),
-        (os.path.join("pages", "repo-review.html"), build_repo_review),
         (os.path.join("pages", "sources.html"), build_sources),
         (os.path.join("pages", "flagged.html"), build_flagged),
+        # Build the repo-wide audit last so its scan includes all generated pages above.
+        (os.path.join("pages", "repo-review.html"), build_repo_review),
     ]
     for rel, fn in builders:
         out = os.path.join(ROOT, rel)

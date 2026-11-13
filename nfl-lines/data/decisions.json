@@ -142,6 +142,15 @@
       "gap": "The reward itself. No prize, stake or payout has been defined or funded.",
       "decidable_now": "Partially - the ranking rule is settled; the reward is not.",
       "action": "Define the reward before the first eligible strategy appears, so the incentive cannot be retro-fitted to whoever happens to be winning."
+    },
+    {
+      "id": "Q16",
+      "question": "Can this dashboard tell whether a current-week line is already stale or past kickoff?",
+      "have": "The frozen snapshot says it was retrieved at 2026-11-12T00:00:00Z. On 2026-11-13, NFL.com marked Washington–New York 24–21, Final, while the own-lines output still included that matchup as an upcoming forecast.",
+      "have_source": "https://www.nfl.com/scores/2026/REG10 and https://www.nfl.com/standings/league/2026/REG",
+      "gap": "There is no live refresh, per-game status invalidation, or visible stale-snapshot warning in the data pipeline. The weekly snapshot can therefore continue displaying a line after kickoff or after a result is final.",
+      "decidable_now": "Yes - the observed stale-line case is verified; refresh and invalidation are proposed, not implemented.",
+      "action": "Before publishing or exposing any line as actionable, compare it with the current official schedule/scores, exclude games at or beyond kickoff and those marked final, display source-retrieval and model-as-of timestamps, and fail closed when the official game state cannot be verified."
     }
   ],
   "suggestions": [
@@ -263,6 +272,16 @@
       "why": "Choosing a prize after seeing who is winning invites gaming the metric.",
       "evidence": "data/derived/leaderboard.json (currently 0 eligible)",
       "success_test": "A written reward schedule exists and is committed before the first eligible strategy.",
+      "status": "proposed - not approved"
+    },
+    {
+      "id": "SG-13",
+      "priority": "P1",
+      "area": "Data freshness / safety gate",
+      "suggestion": "Add a hard freshness and kickoff gate before publishing current-week lines.",
+      "why": "NFL.com now marks Washington–New York final (24–21), but the dashboard still publishes that game as an upcoming line. A static snapshot needs an explicit as-of label and must never make a post-kickoff line look actionable.",
+      "evidence": "https://www.nfl.com/scores/2026/REG10 and https://www.nfl.com/standings/league/2026/REG",
+      "success_test": "The pipeline refreshes and records official-source retrieval times; every line is blocked once kickoff begins or the official score page says Final; stale or unverifiable game status fails closed; pages show their as-of timestamp and explicit stale warning.",
       "status": "proposed - not approved"
     }
   ]

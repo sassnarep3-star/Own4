@@ -187,6 +187,19 @@
         "https://www.nfl.com/schedules/2026/REG10",
         "https://www.nfl.com/injuries/"
       ]
+    },
+    {
+      "id": "IR-16",
+      "severity": "high",
+      "area": "Data freshness / active-week lines",
+      "title": "Week 10 slate still lists Washington–New York after the official game went final",
+      "detail": "The committed 2026 Week 10 snapshot was retrieved at 2026-11-12T00:00:00Z. On 2026-11-13, the official NFL Week 10 score page showed Washington 24–21 New York Giants, Final. Yet data/derived/own_lines_week10.json still includes game 2026_10_WAS_NYG as an upcoming line (model spread +0.99, total 45.47), and data/official/injuries_week10_2026.json retains the pre-game team records (WAS 2-5-1; NYG 5-2-1). The live official league standings showed 3-5-1 and 5-3-1, respectively.",
+      "impact": "The forecast for this already-completed game is not actionable. The frozen archive and report are internally time-stamped historical snapshots, but the public dashboard does not yet prevent an old line from appearing current. Do not use the WAS–NYG line; confirm the as-of time and game status for all active-week lines before use.",
+      "status": "needs review",
+      "sources": [
+        "https://www.nfl.com/scores/2026/REG10",
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
     }
   ]
 }

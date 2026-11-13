@@ -1,6 +1,6 @@
 {
   "id": "provenance",
-  "note": "Every source below was read directly during this session on 2026-11-12. Nothing is cited that was not fetched and read. Sources are split into OFFICIAL (published by the NFL) and THIRD-PARTY (not published by the NFL).",
+  "note": "Source verification times are recorded per row. Initial snapshot sources were read on 2026-11-12; the NFL freshness recheck was read on 2026-11-13. Sources are split into OFFICIAL (published by the NFL) and THIRD-PARTY (not published by the NFL).",
   "sources": [
     {
       "id": "SRC-01", "official": true,
@@ -101,6 +101,24 @@
       "used_for": "Final scores (verified 45/45 against SRC-05/06/07), schedule, rest days, venue, roof/surface, weather, starting quarterback names, and third-party closing market lines.",
       "caveat": "THIRD-PARTY. The NFL publishes no official odds, so the market spread, total, moneyline and prices in this file have no official counterpart and are labelled third-party everywhere they appear.",
       "verified_utc": "2026-11-12T00:00:00Z"
+    },
+    {
+      "id": "SRC-12", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/scores/2026/REG10",
+      "title": "NFL 2026 Week 10 Scores (freshness re-check)",
+      "method": "Page fetched and read directly on 2026-11-13. It showed Washington 24, New York Giants 21, status Final.",
+      "used_for": "Confirmed the Week 10 WAS-NYG game is complete while the frozen own-lines output still lists it as upcoming.",
+      "verified_utc": "2026-11-13"
+    },
+    {
+      "id": "SRC-13", "official": true,
+      "publisher": "NFL.com (official league site)",
+      "url": "https://www.nfl.com/standings/league/2026/REG",
+      "title": "2026 NFL League Standings (live re-check)",
+      "method": "Page fetched and read directly on 2026-11-13. Washington showed 3-5-1 and New York Giants 5-3-1, one win/loss beyond the archived pre-game records.",
+      "used_for": "Cross-check that the official current standings have advanced since the stored Week 10 pre-game snapshot.",
+      "verified_utc": "2026-11-13"
     }
   ],
   "derived_artefacts": [
