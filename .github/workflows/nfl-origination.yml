@@ -1,0 +1,86 @@
+name: nfl-origination verify
+
+# Gate for the nfl-origination namespace only. It rebuilds every derived number from the
+# committed official transcriptions and committed code, then fails if:
+#   * any data-table row carries no source link;
+#   * any local link or anchor is broken;
+#   * any page is missing the responsible-gambling footer or the "not wagering advice" line;
+#   * any published claim contradicts the computed evidence (e.g. a gate silently turns green);
+#   * the rebuild is not byte-identical, i.e. a published number has drifted from its data.
+#
+# It does not deploy. GitHub Pages serves the repository root from main, so publishing happens
+# on merge, not here.
+
+on:
+  push:
+    paths:
+      - 'nfl-origination/**'
+      - '.github/workflows/nfl-origination.yml'
+  pull_request:
+    paths:
+      - 'nfl-origination/**'
+      - '.github/workflows/nfl-origination.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Run the full pipeline
+        run: python3 nfl-origination/run_all.py
+
+      - name: The rebuild must be byte-identical
+        # Every derived artefact is a pure function of the committed official transcriptions and
+        # the committed engine, so any diff here is a real defect, not floating-point drift:
+        # the pipeline uses no NumPy, no BLAS and a fixed seed.
+        run: |
+          git diff --stat -- nfl-origination/data nfl-origination/pages
+          git diff --exit-code -- nfl-origination/data nfl-origination/pages
+
+      - name: Reconciliation must pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          r = json.load(open('nfl-origination/data/derived/reconcile.json'))
+          s = r['summary']
+          print("checks pass=%(pass)d fail=%(fail)d cells=%(cells_2026_ok)d/%(cells_2026)d" % s)
+          sys.exit(1 if s['fail'] else 0)
+          PY
+
+      - name: No gate may turn green without the evidence
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          g = json.load(open('nfl-origination/data/derived/gates.json'))
+          blocked = [x['id'] for x in g['gates'] if x['status'] == 'blocked']
+          awarded = g['scoreboard']['awarded']
+          print("blocked gates:", blocked, "awarded:", awarded)
+          # G7 (an executable archived price) cannot pass: the NFL publishes no odds.
+          if blocked != ['G7']:
+              print("FAIL: G7 must be the only blocked gate")
+              sys.exit(1)
+          if awarded != 0:
+              print("FAIL: a reward may not be paid while a gate is blocked")
+              sys.exit(1)
+          PY
+
+      - name: Placebos must not pass
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('nfl-origination/data/derived/strategies.json'))['strategies']
+          bad = [x['id'] for x in s if x.get('fdr_pass')]
+          print("strategies passing FDR:", bad or "none")
+          sys.exit(1 if bad else 0)
+          PY
