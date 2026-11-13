@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Leaderboard — NFL Command</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--ink:#e2e8f0;--mut:#94a3b8;--acc:#38bdf8;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--line:#334155}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:14px 22px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+header .brand{font-weight:700;font-size:17px}.brand span{color:var(--acc)}
+nav{display:flex;flex-wrap:wrap;gap:4px;margin-left:auto}
+nav a{padding:5px 9px;border-radius:7px;color:var(--mut);font-size:12.5px}
+nav a.active,nav a:hover{background:#0f172a;color:var(--ink);text-decoration:none}
+main{max-width:1180px;margin:0 auto;padding:26px 20px 70px}
+h1{font-size:25px;margin:6px 0 4px}h2{font-size:19px;margin:30px 0 10px;border-bottom:1px solid var(--line);padding-bottom:7px}
+h3{font-size:15.5px;margin:20px 0 8px}.sub{color:var(--mut);margin:0 0 18px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin:18px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 15px}
+.card .k{font-size:11.5px;letter-spacing:.4px;text-transform:uppercase;color:var(--mut)}
+.card .v{font-size:23px;font-weight:700;margin:5px 0 2px}.card .d{font-size:12px;color:var(--mut)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}.bad{color:var(--bad)}
+.badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600}
+.b-ok{background:#14351f;color:var(--ok)}.b-warn{background:#3a2e10;color:var(--warn)}.b-bad{background:#3b1519;color:var(--bad)}.b-mut{background:#1e293b;color:var(--mut);border:1px solid var(--line)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th{background:#16223a;text-align:left;padding:8px 10px;color:var(--mut);font-weight:600;white-space:nowrap}
+td{padding:7px 10px;border-top:1px solid var(--line);vertical-align:top}
+tr:nth-child(even) td{background:#17233b}
+.src a{font-size:11.5px}
+.note{background:var(--card);border-left:3px solid var(--acc);padding:11px 14px;border-radius:8px;margin:13px 0;font-size:13.5px;color:var(--ink)}
+.warnnote{border-left-color:var(--warn)}.badnote{border-left-color:var(--bad)}
+footer{border-top:1px solid var(--line);color:var(--mut);font-size:12px;padding:18px 22px;text-align:center}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:820px){.grid2{grid-template-columns:1fr}}
+ul.tight{margin:6px 0;padding-left:20px}ul.tight li{margin:3px 0}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:10px 14px;margin:9px 0}
+summary{cursor:pointer;font-weight:600}
+code{background:#16223a;padding:1px 6px;border-radius:5px;font-size:12.5px}
+</style></head><body>
+<header><div class="brand">NFL <span>Command</span> · line origination &amp; decision research</div>
+<nav><a href="../index.html" class="">Dashboard</a><a href="../pages/executive-summary.html" class="">Executive Summary</a><a href="../pages/requirements.html" class="">Requirements</a><a href="../pages/questions.html" class="">Questions & Decisions</a><a href="../pages/suggestions.html" class="">Suggestions</a><a href="../pages/data.html" class="">Official Data</a><a href="../pages/games.html" class="">Game Archive</a><a href="../pages/own-lines.html" class="">Own Lines</a><a href="../pages/strategies.html" class="">Strategies</a><a href="../pages/validation.html" class="">Validation Gates</a><a href="../pages/correlations.html" class="">Correlations</a><a href="../pages/leaderboard.html" class="active">Leaderboard</a><a href="../pages/injuries.html" class="">Injuries</a><a href="../pages/depth.html" class="">Depth & Deficiencies</a><a href="../pages/repo-review.html" class="">Repo Review</a><a href="../pages/flagged.html" class="">Flagged for Review</a><a href="../pages/sources.html" class="">Sources</a></nav></header>
+<main><h1>Leaderboard &amp; Rewards</h1><p class="sub">NFL Line-Origination Leaderboard (season 2026) — a leaderboard competition for strategy research.</p>
+<div class="note"><b>Scoring.</b> Each registered strategy earns 1,000 reward points only if it passes ALL 10 pre-registered gates on the frozen holdout. Partial credit: 0. Points are reputation/karma within this research project; no monetary prizes are funded (flag F-04).<br><b>Anti-luck rule.</b> A strategy cannot place on the leaderboard from in-sample performance, from fewer than 300 graded selections, or without beating the 95th percentile of 10,000 placebo runs. This is what removes luck from the ranking.</div>
+<div class="cards">
+<div class="card"><div class="k">Points available</div><div class="v">6,000</div><div class="d">1,000 per registered strategy</div></div>
+<div class="card"><div class="k">Points awarded</div><div class="v bad">0</div><div class="d">0 of 6,000 points awarded — no strategy passes all gates (2026-11-13 run).</div></div>
+<div class="card"><div class="k">Qualified strategies</div><div class="v bad">0</div><div class="d">gates are all-or-nothing</div></div>
+</div>
+<h2>Standings</h2>
+<div class="tablewrap"><table><thead><tr><th>ID</th><th>Strategy</th><th>Type</th><th>Gates</th><th>Tier</th><th>Reward</th><th>Source</th></tr></thead><tbody><tr><td>S1</td><td>Spread singles (divergence)</td><td>Single — point spread</td><td>6/10 pass · 1 blocked · 2 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr><tr><td>S2</td><td>Total singles (divergence)</td><td>Single — game total</td><td>5/10 pass · 1 blocked · 3 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr><tr><td>S3</td><td>Moneyline value singles</td><td>Single — moneyline</td><td>6/10 pass · 1 blocked · 2 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr><tr><td>S4</td><td>Cross-game 2-leg parlays</td><td>Parlay — 2 legs, different games</td><td>5/10 pass · 1 blocked · 3 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr><tr><td>S5</td><td>Player-prop combos (2-3 legs)</td><td>Parlay — player props</td><td>2/10 pass · 8 blocked · 0 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr><tr><td>S6</td><td>Same-game parlay (SGP)</td><td>SGP — correlated legs, one game</td><td>2/10 pass · 8 blocked · 0 failed</td><td><span class="badge b-bad">rejected</span></td><td>0 pts</td><td><span class="src"><a href="https://www.nfl.com/schedules/2026/">games</a></span></td></tr></tbody></table></div>
+<h2>Why nothing wins (honest reading)</h2>
+<ul class="tight">
+<li>The margin model's holdout improvement is <b>real-looking</b> (placebo p &lt; 0.01) but its week-clustered CI includes zero — on 30 games, luck cannot be excluded at the pre-registered standard.</li>
+<li>Sample size (G2) can only be met across multiple seasons — that is deliberate; it is what separates "selectively skill-based" from "lucky so far".</li>
+<li>Market gate G6 cannot even be evaluated without licensed prices; betting-market ROI claims are impossible in this repository today.</li>
+<li>Player-prop strategies have zero graded selections — the required official data does not exist in scope.</li>
+</ul></main>
+<footer>Analytical research only — not wagering advice. Data captured 2026-11-13 from official NFL sources (see <a href="../pages/sources.html">Sources</a>).
+National Problem Gambling Helpline 1-800-MY-RESET · <a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org</a><br>
+Session arena-934af359-own4 · every table row links an official source · unverified values are blank and listed on <a href="../pages/flagged.html">Flagged for Review</a>.</footer>
+</body></html>

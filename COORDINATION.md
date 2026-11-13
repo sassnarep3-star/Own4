@@ -1991,3 +1991,24 @@ session). **Base:** `553c3f053608fd74043192864908508bef60ebfd` (main).
 2026-11-12T17:31Z merge; all prior claims marked done).
 
 - 2026-11-13 — Claim written; pushing immediately. No conflicting claim found in the board.
+
+### 2026-11-13 — tasks A1–A8 complete (session arena-934af359-own4)
+
+| # | Task | Status | Sources / verification | Irregularities |
+|---|------|--------|------------------------|----------------|
+| A1 | Repo review | done | 4 peer standings snapshots reconciled vs live nfl.com/standings (only WAS/NYG differ — the TNF final, deltas exact); peer 136-game archive verified 0-mismatch + 3/3 official game-page spot checks (NE@SEA W1, PHI@CHI W3, TEN@CIN W8 OT); namespace inventory published | I-02 nfl-edge situational columns shifted (needs review); I-03 neutral flags; I-05 ARI/AZ mapping (explained); I-06 third-party nflverse data in repo |
+| A2 | Official data capture | done | nfl.com standings / schedules week-10 & week-11 / injuries / team-stats, all fetched 2026-11-13; identities pass 32/32 (standings), 32/32 (passer rating) | F-03 7 unlabeled team-stats columns omitted not guessed |
+| A3 | Own lines | done | Ridge-SRS + tendency totals; Week 11 13 games incl. Mexico City SNF (no HFA); model card published | F-05 fitted HFA +0.08 (near zero) |
+| A4 | Strategies/gates/correlations/luck/leaderboard | done | 6 strategies + 10 gates committed BEFORE backtest (commit 773cc28); walk-forward wk3–10; holdout wk8–10 frozen; 10,000 placebos; week-clustered bootstrap; 0/6 qualify, 0/6,000 points | F-01/F-02/F-10 blocked market/player/sample gates |
+| A5 | Injuries + depth deficiencies | done | 326 rows / 28 clubs verbatim from nfl.com/injuries; official-news starter changes (Jackson IR, Huntley out for season, Willis IR→McCord, Darnold out→Lock, Watson, Beck) | F-08 no official depth chart — string labels blank |
+| A6 | Decision layer | done | 16 requirements, 20 questions (known/unknown/answer/unlock), 16 suggestions (impact/effort/risk/status) | none |
+| A7 | Executive summary | done | nfl-command/EXECUTIVE_SUMMARY.md + page | none |
+| A8 | Site + verification | done | 17 pages; engine/verify_site.py: 762 table rows, 762 with https source links, 0 broken internal links; CI workflow .github/workflows/nfl-command.yml (recompute + rebuild + verify + determinism), YAML validated | none |
+| A9 | Integration (root nav, PR, merge, Pages) | in progress | root index.html additive nav block (comment-marked); README addendum | — |
+
+Verification performed this session, for the record: every published number is either (a) transcribed from a
+2026-11-13 fetch of an official nfl.com page, (b) recomputed from such rows and checked by an arithmetic
+identity, or (c) a model output whose inputs are (a)/(b) and whose formula is published on the site. Nothing
+is inferred; gaps are blank + flagged (16 flags on pages/flagged.html).
+
+- 2026-11-13 — PR/merge result to be recorded below after integration.
