@@ -297,12 +297,13 @@ Q = [
     {
         "id": "QM-13",
         "group": "Publishing",
-        "question": "Sixteen NFL workspaces now exist with overlapping content. Which is canonical?",
+        "question": "Nineteen NFL workspaces now exist with overlapping content. Which is canonical?",
         "known": (
-            "The root navigation lists sixteen NFL workspaces. Several publish the "
-            "same standings, several publish own lines for the same week with "
-            "different numbers, and at least three publish a questions register. "
-            "This namespace is the seventeenth."),
+            "The root navigation lists nineteen NFL workspaces as of 2026-11-14. "
+            "Several publish the same standings, several publish own lines for the "
+            "same week with different numbers, and at least three publish a questions "
+            "register. This namespace was the seventeenth when it was cut; two peers "
+            "with the same brief merged while it was in review."),
         "not_known": (
             "Which one the owner reads. Without that, every new workspace adds to "
             "the confusion the brief asks us to reduce."),
@@ -619,14 +620,14 @@ S = [
     },
     {
         "id": "SM-13",
-        "title": "Designate one canonical NFL workspace and make the other sixteen report to it",
+        "title": "Designate one canonical NFL workspace and make the other eighteen report to it",
         "problem": (
-            "Seventeen workspaces publish overlapping NFL material with different "
+            "Nineteen workspaces publish overlapping NFL material with different "
             "numbers for the same week. A reader cannot tell which is current, and "
             "each new session adds one more."),
-        "evidence": "The root navigation lists sixteen NFL workspaces; this page is "
-                    "the seventeenth. At least three publish own lines for week 10 "
-                    "with different values.",
+        "evidence": "The root navigation now lists nineteen NFL workspaces, including "
+                    "three built to the same brief in the same two days. At least "
+                    "three publish own lines for week 10 with different values.",
         "options": [
             "A: designate one canonical and convert the rest to frozen archives with "
             "a banner and a single link to the canonical",
@@ -714,11 +715,12 @@ D = [
             "B: nfl-lines (the largest prior analytical namespace)",
             "C: a new front page that reports to all of them and owns the navigation",
         ],
-        "evidence": "Seventeen workspaces; the root nav lists sixteen; overlapping "
-                    "own lines for the same week disagree.",
+        "evidence": "Nineteen workspaces; the count was eleven two days ago and "
+                    "seventeen when this one was cut. Overlapping own lines for the "
+                    "same week disagree.",
         "consequence_of_waiting": (
-            "Each session adds a workspace. The count went from eleven to seventeen "
-            "in two days."),
+            "Each session adds a workspace. The count went from eleven to nineteen "
+            "in two days, including three implementations of this brief."),
         "source": "https://sassnarep3-star.github.io/Own4/",
     },
     {
