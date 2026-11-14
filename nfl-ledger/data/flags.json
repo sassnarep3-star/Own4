@@ -1,0 +1,99 @@
+{
+  "title": "Flagged for Review — irregularities and unverified items",
+  "captured_utc": "2026-11-14",
+  "policy": "Flags never block publication. Unverified values are BLANK, never zero or inferred.",
+  "rows": [
+    {
+      "id": "F-L1",
+      "severity": "high",
+      "item": "No betting-line data exists in any official source checked",
+      "detail": "Price-snapshot store, market columns, closing-line gate G6 and all ROI/CLV figures are BLANK. Market lines are not published on the nfl.com pages checked (standings, schedules, injuries, game pages).",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11",
+        "https://www.nfl.com/standings/"
+      ],
+      "next_step": "SUG-L1 decision."
+    },
+    {
+      "id": "F-L2",
+      "severity": "high",
+      "item": "No official starter/backup depth chart found",
+      "detail": "Replacement depth rank, replacement player and depth tier are blank on every Week 10 row. The injury report shows practice and game status only.",
+      "sources": [
+        "https://www.nfl.com/injuries/"
+      ],
+      "next_step": "SUG-L3 discovery."
+    },
+    {
+      "id": "F-L3",
+      "severity": "high",
+      "item": "Model signal not proven; holdout too small",
+      "detail": "Holdout n=30; bootstrap 95% CI for MAE improvement [-2.47, 3.74] includes 0; 0 of 6 strategies pass all gates.",
+      "sources": [
+        "https://www.nfl.com/standings/"
+      ],
+      "next_step": "More prospective weeks (SUG-L5)."
+    },
+    {
+      "id": "F-L4",
+      "severity": "medium",
+      "item": "Root generator drops hand-added NFL links (peer-logged defect, still present)",
+      "detail": "verification/build.py regenerates index.html without hand-added NFL groups; nfl-ledger is NOT linked from the root page (request R-L1 logged to the integration session). Verified by grep: no hits for \"nfl-ledger\" in index.html.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ],
+      "next_step": "Integration session (R-L1)."
+    },
+    {
+      "id": "F-L5",
+      "severity": "medium",
+      "item": "\"Gates frozen before backtest\" cannot be confirmed from this clone",
+      "detail": "nfl-command/data/gates.json states it was frozen at 2026-11-13T21:50Z before the backtest. In this clone the file's git history shows only the merge commit 02a8bdf (2026-11-14T07:27:34+09:00), so the earlier commit timing is not independently checkable here. Not used as evidence.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json"
+      ],
+      "next_step": "Owner to confirm from the original branch history."
+    },
+    {
+      "id": "F-L6",
+      "severity": "low",
+      "item": "Week 10 injury page: Sunday Nov 15 games listed under \"Week 10\"",
+      "detail": "Checked against the official schedule convention: Week 10 TNF was Nov 12 and Week 11 starts Nov 19 (TNF). The Sunday Nov 15 games are Week 10, so the label is consistent. Recorded to show it was checked, not as an error.",
+      "sources": [
+        "https://www.nfl.com/injuries/",
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ],
+      "next_step": "None — informational."
+    },
+    {
+      "id": "F-L7",
+      "severity": "low",
+      "item": "Abbreviation mismatch: Arizona is \"AZ\" on nfl.com, \"ARI\" in common usage",
+      "detail": "The stored slate correctly uses AZ. A reviewer comparing with other feeds must map ARI→AZ. No value changed.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ],
+      "next_step": "None."
+    },
+    {
+      "id": "F-L9",
+      "severity": "high",
+      "item": "Two Week 10 injury rows differ from the live nfl.com report (2026-11-14)",
+      "detail": "Kerby Joseph (DET, S, knee): stored practice \"Full\" vs live \"Did Not Participate In Practice\" (game status Out in both). Mansoor Delane (KC, CB): stored injury and game status blank vs live \"Shoulder\" / \"Questionable\". Either the report was updated after the 2026-11-13 capture or the stored row is wrong. Not corrected here: the stored file is peer data and the live page is not a snapshot of a fixed time. Re-capture needed.",
+      "sources": [
+        "https://www.nfl.com/injuries/"
+      ],
+      "next_step": "Re-capture the official Week 10 report; owner of nfl-command to confirm."
+    },
+    {
+      "id": "F-L8",
+      "severity": "medium",
+      "item": "Fair moneyline values are model-derived, not market prices",
+      "detail": "American odds on the origination page are converted from the model probability. They are shown as a fair line only; the market column is blank.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/own_lines_week11.json"
+      ],
+      "next_step": "Labelled in the table header."
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "title": "Suggestions — choose a path before anything is implemented",
+  "captured_utc": "2026-11-14",
+  "how_to_read": "Nothing here has been implemented. Pick one path per row; implementation starts only after the choice.",
+  "rows": [
+    {
+      "id": "SUG-L1",
+      "title": "Licensed closing-line feed, with a labelled \"non-official\" status",
+      "problem": "Price-snapshot store is empty; every market-based gate (G6) and the demotion gate are unevaluable.",
+      "proposal": "Procure a rights-cleared archive of opening and closing spreads/totals/moneylines for 2026 weeks 1–18. Store with capture timestamps; show \"licensed, non-official\" status on every price cell.",
+      "impact": "high",
+      "effort": "medium (cost, licence)",
+      "risk": "Relaxes the official-only rule for price data only — a policy change.",
+      "prerequisites": "Owner approval of the policy change; licence check.",
+      "status": "AWAITING OWNER CHOICE"
+    },
+    {
+      "id": "SUG-L2",
+      "title": "Keep the price store empty and stay in research mode",
+      "problem": "Without prices, no ROI or CLV can be computed honestly.",
+      "proposal": "Publish the framework only; do not paper-trade; revisit at the start of the 2027 season.",
+      "impact": "low (no new information)",
+      "effort": "none",
+      "risk": "No validation of any strategy this season.",
+      "prerequisites": "Owner choice; this is the default if SUG-L1 is not chosen.",
+      "status": "AWAITING OWNER CHOICE"
+    },
+    {
+      "id": "SUG-L3",
+      "title": "Find an official depth-chart source for starter/backup status",
+      "problem": "Replacement depth cannot be tracked, so depth-based demotion (D5) and the injury model cannot run.",
+      "proposal": "Search nfl.com team pages and official NFL data pages for a published depth chart; if none exists, record the gap as permanent and use only official injury designations.",
+      "impact": "medium",
+      "effort": "low (discovery step)",
+      "risk": "If none exists, depth tracking stays impossible.",
+      "prerequisites": "Discovery task; no code change until a source is confirmed.",
+      "status": "AWAITING OWNER CHOICE"
+    },
+    {
+      "id": "SUG-L4",
+      "title": "Official per-game player logs for player-prop research",
+      "problem": "Player-prop combos (S5, S6) have no official data source.",
+      "proposal": "Identify an official player-statistics page with per-game logs; add capture only after verification.",
+      "impact": "medium",
+      "effort": "medium",
+      "risk": "Player-prop prices still needed for grading.",
+      "prerequisites": "Discovery task.",
+      "status": "AWAITING OWNER CHOICE"
+    },
+    {
+      "id": "SUG-L5",
+      "title": "Extend the walk-forward holdout before any promotion",
+      "problem": "Holdout n=30 cannot support a signal claim (Q-L4).",
+      "proposal": "Keep predicting prospectively through Week 18 and re-run the frozen gates on the enlarged holdout.",
+      "impact": "medium",
+      "effort": "low",
+      "risk": "Longer wait before any decision.",
+      "prerequisites": "None; can start immediately.",
+      "status": "AWAITING OWNER CHOICE"
+    },
+    {
+      "id": "SUG-L6",
+      "title": "Consolidate the 16 NFL namespaces into one generator",
+      "problem": "Parallel namespaces repeat content and drift (the root generator drops hand-added links; see F-L4).",
+      "proposal": "Merge into one source of truth in a dedicated integration task; leave old URLs as redirects.",
+      "impact": "medium",
+      "effort": "high (touches many files)",
+      "risk": "Risk of broken links during migration.",
+      "prerequisites": "Owner choice; should not be done in parallel with other sessions.",
+      "status": "AWAITING OWNER CHOICE"
+    }
+  ]
+}
