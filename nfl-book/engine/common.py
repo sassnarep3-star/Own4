@@ -21,8 +21,9 @@ def save(name, obj, base=DATA):
 
 
 def save_page(name, html):
-    os.makedirs(PAGES, exist_ok=True)
-    with open(os.path.join(PAGES, name), "w", encoding="utf-8") as f:
+    path = os.path.join(ROOT, name)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w", encoding="utf-8") as f:
         f.write(html)
 
 
