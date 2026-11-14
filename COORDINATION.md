@@ -2605,11 +2605,31 @@ Scope (new, isolated namespace; no peer namespace file is edited): `nfl-price-sn
 | N9 | Suggestions section + questions/infos/answers register + executive summary | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/{suggestions,questions,requirements}.json` |
 | N10 | GitHub Pages static site: landing + category subpages + Flagged for Review | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/build.py`, `pages/*.html`, `assets/*` |
 | N11 | Line-by-line verification + broken-link check | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/verify.py` |
-| N12 | PR → merge → GitHub Pages deploy confirmation → record here | unclaimed | arena/19ae73ae-own4 | COORDINATION.md, root `index.html` |
+| N12 | PR → merge → GitHub Pages deploy confirmation → record here | done | arena/19ae73ae-own4 | COORDINATION.md, root `index.html` |
+
+### Completion record · `arena/19ae73ae-own4` · 2026-11-14 (UTC)
+
+| # | Task | Status | Result |
+|---|------|--------|--------|
+| N1 | Repo review + claim this scope | done | `nfl-price-snapshot/` new isolated namespace; claim committed `1651787` |
+| N2 | Official data: standings, Week 10 schedule & scores, Week 10 injuries | done | 3 clubs standings, Week 10 schedule (1 TNF final + 13 unplayed), injuries chunks 0–2 (127 designations, partial) |
+| N3 | Price snapshot store + verified results feed | done | 39 market records opener/closer blank-flagged; 14 games, 1 completed, 13 blank unplayed |
+| N4 | Originate side → total → moneyline; fair/market/difference columns | done | 13 games originated, all three columns published |
+| N5 | Signal vs staking separation in leaderboard | done | 0 of 5 strategies qualify; 0/1000 reward points; signal and staking separate |
+| N6 | Injury replacement depth tracking (2nd/3rd/4th string) | done | Depth fields blank where no official depth-chart string; nothing inferred |
+| N7 | Correlations only from official numbers, n published | done | 5 tests computed (r, n, CI, p), 2 blocked (player-prop/SGP) |
+| N8 | Demotion gate (live → paper) | done | G11 demotion gate defined; 0 strategies live this snapshot |
+| N9 | Suggestions + questions/infos/answers register + executive summary | done | S01–S10 board, Q01–Q20 register, executive summary page |
+| N10 | GitHub Pages static site: landing + category subpages + Flagged | done | 15 pages built; verify-on-build enforced |
+| N11 | Line-by-line verification + broken-link check | done | verify.py OK: 15 pages, 0 broken links, 0 disallowed hosts, 0 unsourced rows |
+| N12 | PR → merge → Pages deploy → record here | done | PR #96 merged; Pages built; recorded below |
 
 ### Log
 
 - 2026-11-14 — session `arena/19ae73ae-own4` surveyed the repo: 15 existing NFL namespaces are peer-owned and read-only for this session. `nfl-origination/` already implements questions, suggestions, executive summary, correlations-with-n, and leaderboard, but does NOT implement a price snapshot store, a verified results feed, signal-vs-staking leaderboard separation, injury replacement depth, or a demotion gate — those are the gap this session fills under a new namespace rather than editing peer work. Confirmed `fetch_page` can read official nfl.com pages (standings, schedule, injuries). Session id `arena/19ae73ae-own4` was not previously present in COORDINATION.md; this entry is the claim. No peer file edited yet.
+- 2026-11-14 — `python3 build.py` runs clean: engines ran (model, originate, price_snapshots, results_feed, correlations, gates, backtest) and wrote 15 pages. `python3 verify.py` OK: 15 pages, 0 broken links, 0 disallowed hosts, 0 unsourced rows.
+- 2026-11-14 — PR **#96** https://github.com/sassnarep3-star/Own4/pull/96 — merged with a merge commit (`gh pr merge 96 --merge`) into `main` as `aaf92ccf` at 2026-11-14 UTC. Branch `arena/19ae73ae-own4` pushed; COORDINATION.md conflict with peer session `arena/6f0b80b2-own4` resolved superset-style (both entries kept, no work discarded).
+- 2026-11-14 — GitHub Pages: build status `built` for commit `aaf92ccf`; live-confirmed: https://sassnarep3-star.github.io/Own4/nfl-price-snapshot/pages/index.html renders the dashboard with suggestions, questions, executive summary, own-lines, injuries, gates, and flagged pages.
 
 ## Session `arena/6f0b80b2-own4` — NFL gap-closure namespace `nfl-ledger/` (claim, 2026-11-14 UTC)
 
