@@ -167,8 +167,8 @@ for r in snaps:
     wk = int(r["week"])
     if wk >= 10 and not r["open_price"] and "OPEN-UNVERIFIED" not in r["flag"]:
         prob.append(("missing open on originated market", r["market_id"]))
-    if r["close_price"] and not r["settlement"] and r["settlement_source"]:
-        prob.append(("close without settlement", r["market_id"]))
+    if r["close_price"] and not r["settlement"]:
+        prob.append(("close without settlement (pre-game quote must not sit in a close cell)", r["market_id"]))
     if r["settlement"] and not r["settlement_source"].startswith("https://www.nfl.com/games/"):
         prob.append(("settlement without official source", r["market_id"]))
     if not r["close_price"] and wk < 10:

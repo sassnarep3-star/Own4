@@ -7,6 +7,7 @@ confirmed from a source are left blank and carry a flag (never-infer policy).
 import csv
 import html
 import os
+import re
 
 CORE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(CORE, "data")
@@ -100,9 +101,18 @@ def esc(x):
 
 def link_cell(v):
     v = "" if v is None else str(v)
-    if v.startswith("https://"):
-        return '<a class="src" href="%s">%s</a>' % (esc(v), esc(v.replace("https://www.", "").replace("https://", "")[:44] + ("…" if len(v) > 52 else "")))
-    return esc(v)
+    # linkify every URL token; trailing notes stay plain text (a URL with
+    # appended text must never end up inside an href)
+    parts = re.split(r'(https?://\S+)', v)
+    out = []
+    for p in parts:
+        if p.startswith(("http://", "https://")):
+            label = p.replace("https://www.", "").replace("https://", "")
+            out.append('<a class="src" href="%s">%s%s</a>' % (
+                esc(p), esc(label[:44]), "…" if len(label) > 44 else ""))
+        else:
+            out.append(esc(p))
+    return "".join(out)
 
 
 def render_table(table_id, rows, cols, numeric=(), link_cols=(), badge_col=None, badge_map=None):
@@ -485,7 +495,7 @@ body.append('<p class="lede">Decision page for the owner. Four namespaces now im
             'All counts below were measured directly from the files on 2026-11-14 (session arena-a437d20c-own4, read-only).</p>')
 d1 = [
     {"requirement": "Price-snapshot store (open + close)",
-     "nfl-core": "816 market rows: 81 with OPEN + capture date, 489 with CLOSE, 411 settled (WAS@NYG shows open 2.5 -> close 1.5)",
+     "nfl-core": "816 market rows: 81 with OPEN + capture date, 411 with CLOSE — all settled markets; unsettled rows carry OPEN only (a pre-game quote is never a closing number). WAS@NYG shows open 2.5 -> close 1.5 with settlement",
      "nfl-market": "84 store rows (data/derived/store.json, integrity_all_pass=true)",
      "nfl-ledger": "0 rows — their own flag F-L1: no official price source",
      "nfl-price-snapshot": "39 snapshots (data/derived/price_snapshots.json)",
@@ -545,7 +555,7 @@ body.append('<h3>Options</h3><ul>'
             'highest review cost).</li></ul>')
 body.append('<div class="note"><strong>Recommendation (a suggestion — the owner decides):</strong> Option B, with '
             '<em>nfl-core</em> as the store-of-record: it is the only implementation whose price store actually holds '
-            'opening <em>and</em> closing numbers with settlement (81 open / 489 close vs 84, 0 and 39 rows elsewhere), the only '
+            'opening <em>and</em> closing numbers with settlement (81 open / 411 closes vs 84, 0 and 39 rows elsewhere), the only '
             'one whose results feed is re-verified against the official standings inside its own verifier, and it publishes the '
             'resolved spread convention that the other workspaces’ flags still list as open. Peer workspaces would remain '
             'published and linked — nothing discarded. If the owner prefers another workspace as canonical, the same matrix '

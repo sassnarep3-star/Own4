@@ -210,19 +210,20 @@ for r in games:
             "flag": "; ".join(fl),
         })
 
-    # 1 SIDE (spread, home-fav-by convention)
+    # 1 SIDE (spread, home-fav-by convention). Close cells are populated ONLY at
+    # settlement: a pre-game/current quote is never a closing number (A-09 class).
     if settled and sl is not None:
         adj = margin - sl
         s = "HOME COVERS" if adj > 0 else ("AWAY COVERS" if adj < 0 else "PUSH")
     else:
         s = ""
-    add(1, "SIDE (spread, home-fav-by)", fmt(o_sl), fmt(sl), s, mkt_open_src)
+    add(1, "SIDE (spread, home-fav-by)", fmt(o_sl), fmt(sl) if settled else "", s, mkt_open_src)
     # 2 TOTAL
     if settled and tl is not None:
         s = "OVER" if tot > tl else ("UNDER" if tot < tl else "PUSH")
     else:
         s = ""
-    add(2, "TOTAL (game points)", fmt(o_tl), fmt(tl), s, mkt_open_src)
+    add(2, "TOTAL (game points)", fmt(o_tl), fmt(tl) if settled else "", s, mkt_open_src)
     # 3 MONEYLINE (two sides kept in one market row: home / away)
     if settled and h_ml is not None and a_ml is not None:
         s = (("HOME " + home + " ML WINS") if margin > 0 else
@@ -231,7 +232,7 @@ for r in games:
         s = ""
     add(3, "MONEYLINE (home/away)",
         ("home %s / away %s" % (fmt(o_hml, 0), fmt(o_aml, 0))) if o_hml is not None else "",
-        ("home %s / away %s" % (fmt(h_ml, 0), fmt(a_ml, 0))) if h_ml is not None else "",
+        ("home %s / away %s" % (fmt(h_ml, 0), fmt(a_ml, 0))) if (settled and h_ml is not None) else "",
         s, mkt_open_src)
 
 with open(os.path.join(DATA, "price_snapshots_2026.csv"), "w", newline="") as f:

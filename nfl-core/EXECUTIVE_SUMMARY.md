@@ -24,7 +24,7 @@ competition is open and the gates are armed.
 
 | # | Requirement | Where | State |
 |---|-------------|-------|-------|
-| 1 | Price-snapshot store (open + close per market) | `data/price_snapshots_2026.csv`, `pages/prices.html` | 816 markets: 330 with OPEN (originated slate), 411+ with CLOSE + settlement. Weeks 1–9 opens blank + flagged (F-C02) |
+| 1 | Price-snapshot store (open + close per market) | `data/price_snapshots_2026.csv`, `pages/prices.html` | 816 markets: 81 with OPEN (weeks 10–11 captures), 411 with CLOSE + settlement (every settled market). Unsettled rows carry OPEN only; weeks 1–9 opens blank + flagged (F-C02) |
 | 2 | Verified results feed (backtests + ROI computable) | `data/results_feed_2026.csv`, `pages/results.html` | 272 games (137 final), every row on its official nfl.com game URL; 32/32 teams exact vs official standings |
 | 3 | Origination order: side → total → moneyline | `data/originations_2026.csv` | 136 games × 3 markets, `origination_seq` 1/2/3 enforced by verify.py |
 | 4 | Fair line / market line / difference as separate columns | same | three separate columns per market; difference = fair − market (ML in win-probability points) |
