@@ -2582,3 +2582,31 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+
+## Session `arena/19ae73ae-own4` — NFL price snapshot & line origination (2026-11-14)
+
+Session ID: `arena/19ae73ae-own4` · Branch: `arena/19ae73ae-own4` (platform-pinned; `session-<id>/<task>` branches are not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `02a8bdf` (PR #91 merged).
+
+Scope (new, isolated namespace; no peer namespace file is edited): `nfl-price-snapshot/`. One additive root change: a nav link to `nfl-price-snapshot/index.html` in the root `index.html` "NFL research" group.
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Repo review of NFL namespaces + claim this scope | in progress | arena/19ae73ae-own4 | COORDINATION.md (this entry) |
+| N2 | Official data collection: standings, Week 10 schedule & scores, Week 10 injuries from nfl.com | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/official/*.json` |
+| N3 | Price snapshot store (opener/closer per originated market) + verified results feed | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/price_snapshots.json`, `results_feed.json`, `engine/` |
+| N4 | Originate side → total → moneyline; publish fair line / market line / difference columns | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/originated_lines.json`, `engine/originate.py` |
+| N5 | Signal vs staking separation in the leaderboard | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/leaderboard.json` |
+| N6 | Injury replacement depth tracking (2nd/3rd/4th string) | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/injury_depth.json` |
+| N7 | Correlations only from officially sourced numbers, publish n with each value | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/correlations.json` |
+| N8 | Demotion gate (live → paper) | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/gates.json` |
+| N9 | Suggestions section + questions/infos/answers register + executive summary | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/{suggestions,questions,requirements}.json` |
+| N10 | GitHub Pages static site: landing + category subpages + Flagged for Review | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/build.py`, `pages/*.html`, `assets/*` |
+| N11 | Line-by-line verification + broken-link check | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/verify.py` |
+| N12 | PR → merge → GitHub Pages deploy confirmation → record here | unclaimed | arena/19ae73ae-own4 | COORDINATION.md, root `index.html` |
+
+### Log
+
+- 2026-11-14 — session `arena/19ae73ae-own4` surveyed the repo: 15 existing NFL namespaces are peer-owned and read-only for this session. `nfl-origination/` already implements questions, suggestions, executive summary, correlations-with-n, and leaderboard, but does NOT implement a price snapshot store, a verified results feed, signal-vs-staking leaderboard separation, injury replacement depth, or a demotion gate — those are the gap this session fills under a new namespace rather than editing peer work. Confirmed `fetch_page` can read official nfl.com pages (standings, schedule, injuries). Session id `arena/19ae73ae-own4` was not previously present in COORDINATION.md; this entry is the claim. No peer file edited yet.
