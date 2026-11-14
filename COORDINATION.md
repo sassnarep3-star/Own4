@@ -2632,3 +2632,61 @@ before writing it down):
    and not-active lists**. Prior log entries state "the NFL publishes no depth chart"
    (true for the `/depth-chart` route, re-confirmed 404 today); the Game Book is the
    official substitute and it was not previously used. Basis for M5.
+
+### Progress log — `arena/d507f753-own4`
+
+**2026-11-14 — data + engine layer complete, site layer complete, gate green.**
+
+Built (all inside `nfl-market/`, nothing outside it edited except the generator
+registry in `verification/build.py`):
+
+| Artefact | Result |
+| --- | --- |
+| `data/derived/store.json` | 84 rows = 14 games × 3 markets × 2 snapshots, coverage 100%, 4 integrity checks (IC-01…IC-04) all pass |
+| `data/derived/movement.json` | 37 of 42 series moved; moneyline moves in implied-probability points, not cents |
+| `data/derived/origination.json` | side → total → moneyline, in that order, with own line / open / close / difference-vs-each as five separate columns |
+| `data/derived/leaderboard.json` | 15 strategies; signal table and staking table kept apart: 0 pass signal gates, 5 profitable in sample, intersection 0 |
+| `data/derived/demotion.json` | gate DG-1 (D1–D5): 0 of 15 stay live, 15 demoted to paper, 0 actually live today |
+| `data/derived/correlations.json` | 4 rows: 2 computed official-on-both-sides with n = 32, 1 blank (n = 0), 1 cited not recomputed |
+| `data/derived/results_feed.json` | 1 week-10 final graded, 13 pending, 3 market rows graded, 0 third-party result rows |
+| `data/derived/flags.json` | MK-01…MK-05 |
+| `data/derived/register.json` | 15 questions, 16 suggestions, 5 decisions — every `answer` field deliberately blank |
+| `pages/` + `index.html` | 13 pages, 302 table rows, all source-linked |
+| `build.py`, `verify.py` | gate: every row https-sourced, every table number traceable to the JSON the build read, every link resolves, helpline footer, no placeholders, nav identical |
+
+Findings recorded this round (new; each has a live source link on the page):
+
+1. **No price is official.** The NFL publishes no odds anywhere, re-checked today.
+   Every price is one commercial book syndicated through a public endpoint. The
+   distinction is stated on every page, not only on the flag page (MK-01).
+2. **13 of 14 week-10 games have no close**, because they have not been played. The
+   second snapshot is the provider's current number (MK-02). Any ROI published
+   against "close" this week would be measuring a moving target.
+3. **A transcription defect was caught before publication**: four games were
+   attached to another game's prices by zipping two ordered lists. Fixed with an
+   explicit event-id map and now guarded by IC-01; published as MK-04 rather than
+   quietly repaired.
+4. **No player-prop prices are archived** even though the provider exposes them:
+   the response is ~730 items, paged, and repeats athlete/type pairs, so a
+   partial read of it would be misleading (MK-05).
+5. **Replacement depth is measurable from official documents after the game, never
+   before it.** Two consecutive Game Books for one club give one confirmed
+   replacement (C L.Patrick not active → N.Allegretti starts) and one rotation
+   change (WR V.Jefferson starts W9 → substitute W10). The Game Book is
+   post-game, so no pre-game depth state can be sourced (DP-02), and no rank is
+   published anywhere (DP-01).
+6. **A correction of this session's own work**: a first draft of the week-9
+   Washington injury block was written from expectation rather than re-read from
+   the page, and contained eight names that are not on it. The block was re-read
+   and replaced with the real eleven rows. Published as DP-05 with the incident
+   described, because a corrections log that only records other people's mistakes
+   is not a corrections log.
+
+Registry: `nfl-market/` added to the "NFL research" group in
+`verification/build.py` (13 links) as generator-owned rows, not a hand edit to
+`index.html` — every hand-edited root link in this repository has been dropped by
+the next regeneration. Group renamed "16 workspaces (2026-11-13)" →
+"17 workspaces (2026-11-14)".
+
+Still open for this session: PR, merge, Pages confirmation, and the summary
+artefact for M9.
