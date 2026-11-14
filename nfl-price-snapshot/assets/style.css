@@ -1,0 +1,114 @@
+/* NFL Price Snapshot &mdash; Own4 · clean dashboard styles */
+* { box-sizing: border-box; }
+html { line-height: 1.5; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: 0; color: #1a1a1a; background: #f7f8fa;
+}
+a { color: #0b5ed7; text-decoration: underline; }
+a:focus { outline: 2px solid #0b5ed7; outline-offset: 2px; }
+.skip { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px;
+        overflow: hidden; z-index: 9999; }
+.skip:focus { position: static; width: auto; height: auto; }
+.top { background: #101828; color: #fff; }
+.top .wrap { max-width: 1000px; margin: 0 auto; padding: 10px 16px; display: flex;
+             align-items: center; gap: 16px; }
+.top .brand { font-weight: 700; font-size: 1.15rem; margin-right: auto; }
+.top .brand span { color: #ffb81c; }
+.top nav a { color: #cbd5e0; text-decoration: none; margin-left: 18px; font-size: 0.9rem; }
+.top nav a:hover, .top nav a.on { color: #fff; }
+.layout { max-width: 1100px; margin: 0 auto; padding: 20px 16px; display: flex;
+          gap: 24px; }
+.side { width: 260px; flex-shrink: 0; }
+.side nav h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em;
+               color: #6b7280; margin: 14px 0 6px; }
+.side nav a { display: block; padding: 6px 8px; color: #334155; text-decoration: none;
+              border-radius: 6px; font-size: 0.9rem; }
+.side nav a:hover { background: #eef2f7; color: #0b5ed7; }
+.side nav a.on { background: #eef6ff; color: #0b5ed7; font-weight: 600; }
+main { flex: 1; }
+main h1 { font-size: 1.5rem; margin: 0 0 6px; }
+.crumb { color: #6b7280; font-size: 0.85rem; margin-bottom: 14px; }
+.lede { font-size: 0.95rem; color: #334155; margin: 0 0 18px; }
+h2 { font-size: 1.1rem; margin: 26px 0 10px; color: #101828; }
+h3 { font-size: 1rem; margin: 18px 0 8px; color: #334155; }
+p { margin: 0 0 10px; }
+ul { margin: 6px 0 12px 20px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+         gap: 10px; margin: 14px 0; }
+.card { background: #fff; border: 1px solid #d7dee7; border-radius: 8px; padding: 12px 14px;
+        display: flex; flex-direction: column; gap: 4px; }
+.card .small { font-size: 0.75rem; color: #6b7280; }
+.card b { font-size: 1.25rem; color: #101828; }
+.card span { font-size: 0.8rem; color: #6b7280; }
+.card.good b { color: #1e7a34; }
+.card.bad b { color: #b3261e; }
+.card.warn b { color: #b06a00; }
+.card.flag b { color: #7a3e00; }
+.tile { display: block; background: #fff; border: 1px solid #d7dee7; border-radius: 8px;
+        padding: 12px 14px; margin-bottom: 10px; text-decoration: none; color: inherit; }
+.tile:hover { border-color: #0b5ed7; }
+.tile b { display: block; font-size: 1rem; color: #101828; margin-bottom: 2px; }
+.tile span { font-size: 0.82rem; color: #4b5563; }
+.tile em { display: block; margin-top: 6px; font-size: 0.78rem; color: #0b5ed7;
+           font-style: normal; text-decoration: underline; }
+.tw { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; background: #fff; }
+caption { text-align: left; font-weight: 700; padding: 8px 10px; color: #101828; font-size: 0.9rem; }
+th { background: #eef2f7; color: #334155; text-align: left; padding: 7px 10px;
+    font-weight: 600; border-bottom: 2px solid #c9d4e0; font-size: 0.8rem; }
+th.num, th.c { text-align: center; }
+td.num, td.c { text-align: center; }
+td { padding: 6px 10px; border-bottom: 1px solid #e4e9f0; vertical-align: top; }
+tbody tr:last-child td { border-bottom: none; }
+.tnote { font-size: 0.8rem; color: #6b7280; margin-top: 6px; }
+.pill { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 2px 7px;
+        border-radius: 10px; color: #fff; margin-right: 4px; }
+.p-good { background: #1e7a34; }
+.p-bad { background: #b3261e; }
+.p-warn { background: #b06a00; }
+.p-neu { background: #6b7280; }
+.blank { color: #9ca3af; font-style: italic; }
+.src { font-size: 0.75rem; }
+.src a { color: #0b5ed7; text-decoration: none; }
+.src a:hover { text-decoration: underline; }
+.lbl { font-size: 0.7rem; font-weight: 700; color: #6b7280; }
+.panel { border: 1px solid #d7dee7; border-radius: 8px; padding: 12px 14px; margin: 14px 0;
+         background: #fff; }
+.panel h3 { margin-top: 0; }
+.panel.bad { border-left: 4px solid #b3261e; background: #fdf3f2; }
+.panel.ok { border-left: 4px solid #1e7a34; background: #f0f7f0; }
+.panel.warn { border-left: 4px solid #b06a00; background: #fdf8ef; }
+.panel.flag { border-left: 4px solid #7a3e00; background: #fdf6ec; }
+.sug { border: 1px solid #d7dee7; border-radius: 8px; padding: 12px 14px; margin: 10px 0;
+       background: #fff; }
+.sug.now { border-left: 4px solid #b3261e; }
+.sug.blocked { border-left: 4px solid #b06a00; }
+.sug.later { border-left: 4px solid #6b7280; }
+.sug .h { display: flex; gap: 8px; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; }
+.sug .id { font-weight: 700; color: #101828; }
+.sug .t { font-weight: 600; color: #334155; }
+.sug .b dl { display: grid; grid-template-columns: 140px 1fr; gap: 6px 14px; font-size: 0.85rem; }
+.sug .b dt { color: #6b7280; font-weight: 600; }
+.sug .b dd { margin: 0; color: #334155; }
+.sug .b dd ul { margin: 0; padding-left: 16px; }
+.path { list-style: none; padding: 0; margin: 10px 0; }
+.path li { margin-bottom: 8px; font-size: 0.9rem; }
+.path li b { color: #101828; }
+.path li span { color: #6b7280; font-size: 0.8rem; }
+.qa { border: 1px solid #d7dee7; border-radius: 8px; padding: 10px 14px; margin: 10px 0;
+      background: #fff; }
+.qa .q { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; font-size: 0.9rem; }
+.qa .id { font-weight: 700; color: #b3261e; }
+.qa .txt { font-weight: 600; color: #334155; }
+.qa .b dl { display: grid; grid-template-columns: 120px 1fr; gap: 6px 14px; font-size: 0.85rem; }
+.qa .b dt { color: #6b7280; font-weight: 600; }
+.qa .b dd { margin: 0; color: #334155; }
+footer { margin-top: 30px; padding: 18px 16px; color: #6b7280; font-size: 0.8rem;
+         border-top: 1px solid #d7dee7; }
+footer p { margin: 0 0 6px; }
+@media (max-width: 760px) {
+  .layout { flex-direction: column; padding: 12px 12px; }
+  .side { width: 100%; }
+  .side nav h4 { margin-top: 10px; }
+}

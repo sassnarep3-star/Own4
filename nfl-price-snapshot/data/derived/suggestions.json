@@ -1,0 +1,151 @@
+{
+  "id": "suggestions-2026-11-14",
+  "season": 2026,
+  "week": 10,
+  "snapshot": "2026-11-14",
+  "summary": {"total": 10, "decide_now": 4, "decide_later": 4, "blocked": 2},
+  "suggestions": [
+    {
+      "id": "S01", "group": "Market data", "timing": "DECIDE NOW",
+      "title": "Buy or license an archived NFL odds history (opening + closing prices)",
+      "context": "The price snapshot store (opener/closer per market) is an empty shell: the NFL publishes no odds, so every market_line is blank and Gate G7 can never pass. Without a price history nothing can be backtested as a bet, no ROI is computable, and no reward can be paid as anything but research points.",
+      "options": [
+        "Buy a licensed archived odds feed (e.g. the NFL's official sports-data distributors) and record opener + closer per market",
+        "Continue with assumed -110 only, clearly labelled as a forecast, not a bet",
+        "Do not operate a betting function at all; keep this as pure research"
+      ],
+      "evidence": "nfl.com/standings and nfl.com/games carry no odds values; price_snapshot_store is blank for opener/closer on every market.",
+      "cost": "High (licence fee) if a real feed; nil if research-only.",
+      "risk": "High: operating without a settled legal position (S02) could expose the project; paying for a feed before the legal question is settled is wasted spend.",
+      "prerequisites": ["S02"],
+      "recommendation": "Settle S02 first, then decide S01. Until a real price exists, keep every line labelled 'forecast, not a price'.",
+      "unblocks": ["Q01", "Q18", "G7"],
+      "sources": ["https://www.nfl.com/games", "https://www.nfl.com/standings/league/2026/REG"]
+    },
+    {
+      "id": "S02", "group": "Legal", "timing": "DECIDE NOW",
+      "title": "Establish the operating jurisdiction and whether derived lines may be published",
+      "context": "No jurisdiction, licence status, or permission to publish derived probabilities has been established. Rewards are research points only because no funding or legal basis exists to pay anything else.",
+      "options": [
+        "Engage counsel to confirm jurisdiction and publishing rights before any line is published as actionable",
+        "Publish only as analytical research with a prominent not-wagering-advice disclaimer (current state)"
+      ],
+      "evidence": "Responsible-gambling help cited site-wide (ncpgambling.org/help-treatment); no licence or jurisdiction on record.",
+      "cost": "Moderate (counsel).",
+      "risk": "High: publishing derived lines as if actionable without a legal position is the project's largest exposure.",
+      "prerequisites": [],
+      "recommendation": "Decide now: engage counsel before describing anything as a bet or paying rewards beyond research points.",
+      "unblocks": ["Q02", "Q15", "S01"],
+      "sources": ["https://www.ncpgambling.org/help-treatment"]
+    },
+    {
+      "id": "S03", "group": "Injuries & depth", "timing": "BLOCKED",
+      "title": "Obtain an official depth chart / snap-count feed so replacement depth can be tracked",
+      "context": "The brief asks for defensive/offensive deficiencies tracked as 2nd/3rd/4th-string backups replacing starters. The NFL publishes no depth chart (nfl.com/depth-charts/ is a 404) and no official snap-count feed. A string label produced today would be invented, so none is published.",
+      "options": ["Wait for the NFL to publish a depth chart", "Use a third-party depth chart and label it third-party", "Track only official game-status designations (current state)"],
+      "evidence": "nfl.com/depth-charts/ returns 404 (re-checked 2026-11-14); injury report gives game status only, not starter or snap count.",
+      "cost": "Nil if waiting; moderate if licensing third-party depth data.",
+      "risk": "Medium: labelling a player '3rd string' without an official source is invention.",
+      "prerequisites": [],
+      "recommendation": "Blocked until an official or clearly-labelled third-party depth source exists. Publish only game-status designations and lineup changes named in official reporting.",
+      "unblocks": ["Q03", "Q05"],
+      "sources": ["https://www.nfl.com/depth-charts/", "https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "S04", "group": "Injuries & depth", "timing": "DECIDE LATER",
+      "title": "Begin a weekly injury snapshot archive",
+      "context": "nfl.com/injuries/ serves the current week only, so no historical injury archive exists and no injury effect can be back-tested. A weekly snapshot (this project's own store) would build the archive over time.",
+      "options": ["Start a weekly snapshot store of the official injury report", "Remain current-week only", "Buy a historical injury archive if one exists"],
+      "evidence": "injuries_week10 capture is partial (3 of 8 nfl.com chunks); nfl.com/injuries/ is current-week only.",
+      "cost": "Low (automated weekly transcription).",
+      "risk": "Low.",
+      "prerequisites": [],
+      "recommendation": "Decide later: cheap and reversible, start the weekly snapshot when the legal position (S02) permits republication.",
+      "unblocks": ["Q04"],
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "S05", "group": "Injuries & depth", "timing": "DECIDE LATER",
+      "title": "Adopt a disclosed injury-to-points conversion (published as a band, not a point)",
+      "context": "No measured conversion exists from 'player out' to points; it needs snap counts and per-player value, neither published. This site publishes the injury sensitivity as a band, not a point estimate.",
+      "options": ["Adopt a disclosed multiplier band (current state: 0.25/0.50/1.00 pts per OUT/Doubtful/Questionable)", "Wait for official snap counts", "Buy a player-value model"],
+      "evidence": "Injury band published beside each originated line (F-02/F-05).",
+      "cost": "Low if adopting a disclosed assumption; high if buying a model.",
+      "risk": "Medium: presenting an assumed conversion as measured would misstate precision.",
+      "prerequisites": ["S03"],
+      "recommendation": "Decide later: keep the band and label it a disclosed assumption; never present it as official.",
+      "unblocks": ["Q05"],
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "S06", "group": "Strategy data", "timing": "DECIDE NOW",
+      "title": "Obtain an archived same-game-parlay (SGP) price for correlated prop combos",
+      "context": "QB passing yards and WR1 receiving yards co-occur more than independence predicts (measured dependence), but books reprice correlated legs. No archived SGP price exists here, so the dependence is a measured fact, not a claimed edge, and C8 is blank.",
+      "options": ["Buy archived SGP prices", "Keep prop combos off the leaderboard until a price exists", "Trade cross-game legs only (independence supported near-zero)"],
+      "evidence": "Correlation C5 (QB pass / WR1 rec) measured from available data; C8 (SGP price) blank.",
+      "cost": "High (licensed SGP archive).",
+      "risk": "High: pricing a prop combo as independent when legs are dependent misprices the combo.",
+      "prerequisites": ["S01"],
+      "recommendation": "Decide now: keep prop combos off the leaderboard until an archived SGP price exists; cross-game parlays may use independence (measured near-zero dependence).",
+      "unblocks": ["Q09", "C8"],
+      "sources": ["https://www.nfl.com/games"]
+    },
+    {
+      "id": "S07", "group": "Rewards", "timing": "DECIDE NOW",
+      "title": "Adopt a written skill definition before any reward is paid",
+      "context": "A loose definition pays for luck. The proposed definition: skilful only if it survives FDR across every test including placebos, has a week-clustered CI above zero, and earns less than 50% of profit in any single season. The owner must confirm this is strict enough.",
+      "options": ["Adopt the proposed skill definition", "Adopt a stricter or looser definition", "Pay no rewards (research points only)"],
+      "evidence": "0 strategies qualify this snapshot; both pre-registered placebos fail.",
+      "cost": "Nil.",
+      "risk": "High: a loose definition rewards luck, not skill.",
+      "prerequisites": ["S02"],
+      "recommendation": "Decide now: adopt the proposed definition and keep rewards as research points until S02 is settled.",
+      "unblocks": ["Q11", "Q15", "G8"],
+      "sources": []
+    },
+    {
+      "id": "S08", "group": "Data rights", "timing": "DECIDE LATER",
+      "title": "Review the third-party archive licence before redistributing derived values",
+      "context": "The archive is a public GitHub repo but its licence terms were not reviewed line by line. Whether redistribution of derived values or the raw file is permitted is unknown.",
+      "options": ["Review the archive licence (LICENSE file) and record terms", "Avoid redistributing raw archive data; publish only derived values with citation", "Stop using the archive"],
+      "evidence": "Archive used and labelled as third-party; licence not reviewed.",
+      "cost": "Low (counsel review).",
+      "risk": "Medium: redistribution could breach licence terms.",
+      "prerequisites": [],
+      "recommendation": "Decide later: review LICENSE, record terms on the source register, publish only cited derived values in the meantime.",
+      "unblocks": ["Q13"],
+      "sources": ["https://github.com/nflverse/nfldata"]
+    },
+    {
+      "id": "S09", "group": "Strategy data", "timing": "DECIDE LATER",
+      "title": "Establish whether an official 2026 player-level box-score feed exists",
+      "context": "nfl.com/stats/ presents player statistics client-side; no official per-game log or automated download endpoint was established. This blocks any 2026 player-prop model.",
+      "options": ["Contact NFL stats for a licensed feed", "Remain prop-free until a feed exists", "Use third-party player logs and label them third-party"],
+      "evidence": "nfl.com/stats/ is client-rendered; no official download feed established.",
+      "cost": "Unknown pending NFL terms.",
+      "risk": "Medium.",
+      "prerequisites": ["S02"],
+      "recommendation": "Decide later: keep prop strategies off the leaderboard until an official or clearly-labelled third-party player feed exists.",
+      "unblocks": ["Q14"],
+      "sources": ["https://www.nfl.com/stats/"]
+    },
+    {
+      "id": "S10", "group": "Product", "timing": "DECIDE LATER",
+      "title": "Choose one canonical NFL dashboard; consolidate or archive the rest",
+      "context": "Sixteen NFL namespaces exist in this repository with heavy overlap (four publish own lines, five publish questions, six publish suggestions). A reader cannot tell which is current.",
+      "options": ["Keep this namespace canonical and archive the others", "Merge into one canonical namespace", "Leave all sixteen published"],
+      "evidence": "COORDINATION.md namespaces; root index lists 16 NFL workspaces.",
+      "cost": "Low (editorial).",
+      "risk": "Low.",
+      "prerequisites": [],
+      "recommendation": "Decide later: designate one canonical dashboard and link the others as historical.",
+      "unblocks": ["Q16"],
+      "sources": ["https://sassnarep3-star.github.io/Own4/"]
+    }
+  ],
+  "recommended_path": [
+    ["Step 1 - Gate decisions", ["S02", "S07", "S01"]],
+    ["Step 2 - Data decisions", ["S06", "S09", "S08"]],
+    ["Step 3 - Depth decisions", ["S03", "S05", "S04"]],
+    ["Step 4 - Product decision", ["S10"]]]
+}

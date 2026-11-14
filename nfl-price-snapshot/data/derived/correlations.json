@@ -1,0 +1,108 @@
+{
+  "id": "correlations-2026-w10",
+  "season": 2026,
+  "week": 10,
+  "snapshot": "2026-11-14",
+  "source_url": "https://www.nfl.com/standings/league/2026/REG",
+  "n_teams": 32,
+  "tests_computed": 5,
+  "tests_blocked": 2,
+  "items": [
+    {
+      "id": "C1",
+      "name": "Wins vs Points For",
+      "var_a": "w",
+      "var_b": "pf",
+      "source": "official standings PF/PA/W/L (nfl.com/standings/league/2026/REG)",
+      "r": 0.6659,
+      "n": 32,
+      "ci95": [
+        0.4131,
+        0.8234
+      ],
+      "p_value": 0.0,
+      "note": "All inputs from official standings; n published with each value."
+    },
+    {
+      "id": "C2",
+      "name": "Wins vs Points Against",
+      "var_a": "w",
+      "var_b": "pa",
+      "source": "official standings PF/PA/W/L (nfl.com/standings/league/2026/REG)",
+      "r": -0.5871,
+      "n": 32,
+      "ci95": [
+        -0.7768,
+        -0.2998
+      ],
+      "p_value": 1e-06,
+      "note": "All inputs from official standings; n published with each value."
+    },
+    {
+      "id": "C3",
+      "name": "Point differential vs Wins",
+      "var_a": "net",
+      "var_b": "w",
+      "source": "official standings PF/PA/W/L (nfl.com/standings/league/2026/REG)",
+      "r": 0.8482,
+      "n": 32,
+      "ci95": [
+        0.7093,
+        0.9237
+      ],
+      "p_value": 0.0,
+      "note": "All inputs from official standings; n published with each value."
+    },
+    {
+      "id": "C4",
+      "name": "Points For vs Points Against",
+      "var_a": "pf",
+      "var_b": "pa",
+      "source": "official standings PF/PA/W/L (nfl.com/standings/league/2026/REG)",
+      "r": -0.0869,
+      "n": 32,
+      "ci95": [
+        -0.4228,
+        0.27
+      ],
+      "p_value": 0.631417,
+      "note": "All inputs from official standings; n published with each value."
+    },
+    {
+      "id": "C5",
+      "name": "Points For per game vs Wins",
+      "var_a": "pf_g",
+      "var_b": "w",
+      "source": "official standings PF/PA/W/L (nfl.com/standings/league/2026/REG)",
+      "r": 0.6734,
+      "n": 32,
+      "ci95": [
+        0.4244,
+        0.8278
+      ],
+      "p_value": 0.0,
+      "note": "All inputs from official standings; n published with each value."
+    },
+    {
+      "id": "C6",
+      "name": "QB passing yards vs WR1 receiving yards (same game)",
+      "blank_reason": "No official per-game player log exists; nfl.com/stats/ is client-rendered and no official download feed was established. Left blank (flagged).",
+      "r": null,
+      "n": null,
+      "ci95": null,
+      "p_value": null,
+      "source": "https://www.nfl.com/stats/"
+    },
+    {
+      "id": "C7",
+      "name": "Same-game-parlay repriced dependence (market price)",
+      "blank_reason": "No archived same-game-parlay price exists; the NFL publishes no odds. Left blank (flagged).",
+      "r": null,
+      "n": null,
+      "ci95": null,
+      "p_value": null,
+      "source": "https://www.nfl.com/games"
+    }
+  ],
+  "note": "Computed correlations use only officially sourced numbers (standings) and publish n. Blocked items name the missing input rather than inventing a value."
+}
