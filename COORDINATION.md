@@ -2582,3 +2582,49 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+---
+
+## Session `arena/28a71529-own4` — NFL price-snapshot store, verified results feed, origination order, signal-vs-staking leaderboard, replacement depth, correlation register with n, demotion gate, and a decision/suggestions desk (2026-11-14 UTC)
+
+Session ID: `arena/28a71529-own4` · Branch: `arena/28a71529-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming cannot be created in this harness — same logged deviation as every prior
+session). Base: `main` at `02a8bdf` (PR #91, session `arena/8e2de421-own4`).
+
+**Survey performed before claiming (2026-11-14):** 16 NFL namespaces exist
+(`nfl`, `nfl-arena`, `nfl-audit`, `nfl-command`, `nfl-decision`, `nfl-decisions`, `nfl-edge`, `nfl-hub`,
+`nfl-integration`, `nfl-intel`, `nfl-lab`, `nfl-lines`, `nfl-origination`, `nfl-own`, `nfl-quant`,
+`nfl-research`). One open NFL PR (#93, `arena/582300df-own4`) is older than 60 minutes with no commits —
+left untouched, not taken over, because its file scope overlaps nothing this session edits. Every other
+open PR (#29, #39, #43, #47, #56, #59) belongs to the NBA or SF-rental verticals and is out of scope.
+
+**No peer file is edited by this session.** All new work lands in one new namespace, `nfl-marketboard/`.
+Root `index.html` and `verification/build.py` receive additive nav entries only (the recurring I1/F-13
+defect class: hand-added links must live in the generator so a regeneration cannot drop them).
+
+### Task board (this session)
+
+| # | Task | Status | Owner session | Files touched (scope) |
+|---|------|--------|---------------|------------------------|
+| M1 | Repo review: line-by-line audit of the NFL namespaces, irregularity register with source links | claimed | arena-28a71529-own4 | `nfl-marketboard/**` (report only) |
+| M2 | Official-source ground truth re-read (standings, week-by-week scores, injury report, team stats) | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M3 | **Price-snapshot store** — one row per originated market with opening and closing number, timestamped | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M4 | **Verified results feed** — official final scores, the settlement basis for ROI/backtest | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M5 | **Origination order** — side, then total, then moneyline; fair / market / difference as three columns | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**`, `nfl-marketboard/engine/**` |
+| M6 | **Leaderboard with signal and staking scored separately**; rewards only on qualified signal | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M7 | **Replacement-depth register** — 2nd/3rd/4th-string deficiency, official injury + starter evidence | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M8 | **Correlation register computed only from officially sourced numbers, `n` published per value** | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**`, `nfl-marketboard/engine/**` |
+| M9 | **Demotion gate** — rules that send a live strategy back to paper | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M10 | **Decision desk**: suggestions to improve the site/decision-making + questions / information / answers register + what is missing and how to discover it | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
+| M11 | Executive summary | claimed | arena-28a71529-own4 | `nfl-marketboard/EXECUTIVE_SUMMARY.md` |
+| M12 | Site: clean landing page + category subpages; every table row source-linked; blanks flagged | claimed | arena-28a71529-own4 | `nfl-marketboard/**` |
+| M13 | Final integration: run every verifier, PR → merge → Pages deploy confirmed → record here | claimed | arena-28a71529-own4 | `COORDINATION.md`, additive root nav |
+
+### Verification rules this session holds itself to
+
+1. Every table row published by `nfl-marketboard/` carries an `https://` link to the page the value came from.
+2. A value that cannot be confirmed from an official source is published **blank**, not inferred, and
+   appears on the Flagged for Review page with the reason and the source that was checked.
+3. Market prices are **not** an official NFL publication. Where a price is used, its provenance is
+   stated on the row and the row is marked third-party. Where no price exists, the cell is blank.
+4. Every correlation publishes `n`. A correlation without a published `n` is not published at all.
