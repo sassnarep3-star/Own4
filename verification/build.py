@@ -138,7 +138,13 @@ NAV = [
     # (d) moves nfl-decisions/ out of "Retained workspaces". Merge 2026-11-13 with main
     # also folded in arena/22679198-own4's generator-owned "NFL origination" group.
     # Every link previously published is preserved; nothing was removed.
-    ("NFL research · 20 workspaces (2026-11-14)", [
+    # 2026-11-14: +2 workspaces by session arena/65c4a22e-own4 (nfl-markets, own namespace;
+    # and nfl-ledger per that session's logged request R-L1 — peer session arena/6f0b80b2-own4).
+    # Superset-only edit: every existing link preserved. Merged with main the same day:
+    # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
+    # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
+    # namespaces below — all retained; group retitled to the combined count.
+    ("NFL research · 21 workspaces (2026-11-14)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -289,6 +295,17 @@ NAV = [
         ("nfl-marketboard/review.html", "Market Board — repository review", "legacy"),
         ("nfl-marketboard/flagged.html", "⚑ Market Board — flagged (15)", "legacy"),
         ("nfl-marketboard/sources.html", "Market Board — sources", "legacy"),
+        # Added 2026-11-14 by session arena/65c4a22e-own4 (nfl-markets namespace):
+        ("nfl-markets/index.html", "NFL Markets — price snapshots, results feed, signal vs staking", "legacy"),
+        ("nfl-markets/pages/origination.html", "NFL Markets — origination order &amp; own lines", "legacy"),
+        ("nfl-markets/pages/results-feed.html", "NFL Markets — verified results feed", "legacy"),
+        ("nfl-markets/pages/leaderboard.html", "NFL Markets — leaderboard (signal vs staking)", "legacy"),
+        ("nfl-markets/pages/gates.html", "NFL Markets — gates &amp; demotion", "legacy"),
+        ("nfl-markets/pages/injuries.html", "NFL Markets — injuries &amp; replacement depth", "legacy"),
+        ("nfl-markets/pages/correlations.html", "NFL Markets — correlations (n published)", "legacy"),
+        ("nfl-markets/pages/suggestions.html", "NFL Markets — suggestions (review before implementing)", "legacy"),
+        ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
+        ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),

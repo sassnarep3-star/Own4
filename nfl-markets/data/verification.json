@@ -1,0 +1,82 @@
+{
+ "verified_utc": "2026-11-14",
+ "standings_reconciliation_vs_official_capture": {
+  "status": "OK",
+  "official_rows_matched": 32,
+  "mismatches": []
+ },
+ "live_nfl_com_spot_checks": [
+  {
+   "what": "official game page URL pattern used for every per-row link",
+   "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "result": "page exists; title 'Washington Commanders at New York Giants 2026 REG 10 - Game Center'; status Final",
+   "note": "scores render client-side and are not extractable via plain fetch; scores themselves verified via the 32/32 standings arithmetic reconciliation vs the official standings capture (peer-verified against nfl.com/standings)"
+  },
+  {
+   "what": "NFC East standings from the same official page's standings widget vs recomputation from this namespace's results feed",
+   "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "result": [
+    {
+     "team": "NYG",
+     "live_nfl_com": [
+      5,
+      3,
+      1
+     ],
+     "recomputed_from_feed": [
+      5,
+      3,
+      1
+     ],
+     "match": true
+    },
+    {
+     "team": "DAL",
+     "live_nfl_com": [
+      4,
+      5,
+      0
+     ],
+     "recomputed_from_feed": [
+      4,
+      5,
+      0
+     ],
+     "match": true
+    },
+    {
+     "team": "WAS",
+     "live_nfl_com": [
+      3,
+      5,
+      1
+     ],
+     "recomputed_from_feed": [
+      3,
+      5,
+      1
+     ],
+     "match": true
+    },
+    {
+     "team": "PHI",
+     "live_nfl_com": [
+      2,
+      7,
+      0
+     ],
+     "recomputed_from_feed": [
+      2,
+      7,
+      0
+     ],
+     "match": true
+    }
+   ]
+  }
+ ],
+ "sign_convention_tests": {
+  "spread_line_vs_result_mean_diff_per_season": "see data/snapshot_qc.json",
+  "summary": "games.csv spread_line = expected HOME margin (positive=home favored) confirmed by (a) 81.7%/77.2% outright win rates for 7+ point favorites (n=1608), (b) per-season mean(spread_line-result) within \u00b11.9 pts, (c) live check TB -9.5/10 close Sep 2021; closing_lines team lines convert with hm=-line (sd 0.41 vs spread_line, n=1967; settlement agreement 99.8% excl pushes); sc_lines/initial_lines per-team book lines convert with the same rule"
+ }
+}

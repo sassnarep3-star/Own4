@@ -1,0 +1,379 @@
+[
+ {
+  "id": "STRAT-SIDE-3",
+  "name": "Spread: take the side the model beats the line by >= 3.0 pts",
+  "family": "single",
+  "status": "PAPER",
+  "signal": {
+   "n_selections": 2092,
+   "mean_edge_vs_close_pts": 6.042,
+   "beat_close_rate": 0.418,
+   "beat_close_rate_ci95": [
+    0.3975,
+    0.4381
+   ],
+   "beat_close_rate_perm_p": 1.0,
+   "seasons_positive_edge": 0,
+   "seasons_total": 16
+  },
+  "staking": {
+   "entry_price_policy": "opening number where archived (2013-2021), else archived line",
+   "juice_assumption_flag": "standard -110 pricing ASSUMED for singles; parlay price 2.646x \u2014 no official odds archive exists",
+   "n_staked": 2054,
+   "wins": 840,
+   "pushes": 38,
+   "losses": 1214,
+   "roi_flat": -0.2193,
+   "units": -450.36,
+   "max_drawdown_units": 454.27,
+   "win_rate_excl_pushes": 0.409
+  },
+  "rewards": 0,
+  "official_source_url": "https://www.nfl.com/games/falcons-at-bears-2011-reg-1",
+  "signal_rank": 2,
+  "staking_rank": 2,
+  "gates": [
+   {
+    "id": "MG-1",
+    "pass": true,
+    "detail": "standings mismatches: 0"
+   },
+   {
+    "id": "MG-2",
+    "pass": true,
+    "detail": "signal n=2092, staking n=2054"
+   },
+   {
+    "id": "MG-3",
+    "pass": true,
+    "detail": "walk-forward by construction (model.py)"
+   },
+   {
+    "id": "MG-4",
+    "pass": null,
+    "detail": "evaluated on the frozen 2026 holdout separately"
+   },
+   {
+    "id": "MG-5",
+    "pass": false,
+    "detail": "CI95=[0.3975, 0.4381]"
+   },
+   {
+    "id": "MG-6",
+    "pass": true,
+    "detail": "mean edge vs close=6.042 (n=2092)"
+   },
+   {
+    "id": "MG-7",
+    "pass": false,
+    "detail": "perm p=1.0"
+   },
+   {
+    "id": "MG-8",
+    "pass": false,
+    "detail": "0/16 seasons positive"
+   },
+   {
+    "id": "MG-4-detail",
+    "pass": false,
+    "detail": "2026 W1-10 beat-close 31.5/64 = 49.2%"
+   }
+  ]
+ },
+ {
+  "id": "STRAT-TOTAL-3",
+  "name": "Total: over/under when the model beats the total by >= 3.0 pts",
+  "family": "single",
+  "status": "PAPER",
+  "signal": {
+   "n_selections": 2236,
+   "mean_edge_vs_close_pts": 6.278,
+   "beat_close_rate": 0.5031,
+   "beat_close_rate_ci95": [
+    0.4817,
+    0.5239
+   ],
+   "beat_close_rate_perm_p": 0.4483,
+   "seasons_positive_edge": 8,
+   "seasons_total": 16
+  },
+  "staking": {
+   "entry_price_policy": "opening number where archived (2021), else archived line",
+   "juice_assumption_flag": "standard -110 pricing ASSUMED for singles; parlay price 2.646x \u2014 no official odds archive exists",
+   "n_staked": 2216,
+   "wins": 1109,
+   "pushes": 20,
+   "losses": 1107,
+   "roi_flat": -0.0446,
+   "units": -98.82,
+   "max_drawdown_units": 106.18,
+   "win_rate_excl_pushes": 0.5005
+  },
+  "rewards": 0,
+  "official_source_url": "https://www.nfl.com/games/saints-at-packers-2011-reg-1",
+  "signal_rank": 1,
+  "staking_rank": 1,
+  "gates": [
+   {
+    "id": "MG-1",
+    "pass": true,
+    "detail": "standings mismatches: 0"
+   },
+   {
+    "id": "MG-2",
+    "pass": true,
+    "detail": "signal n=2236, staking n=2216"
+   },
+   {
+    "id": "MG-3",
+    "pass": true,
+    "detail": "walk-forward by construction (model.py)"
+   },
+   {
+    "id": "MG-4",
+    "pass": null,
+    "detail": "evaluated on the frozen 2026 holdout separately"
+   },
+   {
+    "id": "MG-5",
+    "pass": false,
+    "detail": "CI95=[0.4817, 0.5239]"
+   },
+   {
+    "id": "MG-6",
+    "pass": true,
+    "detail": "mean edge vs close=6.278 (n=2236)"
+   },
+   {
+    "id": "MG-7",
+    "pass": false,
+    "detail": "perm p=0.4483"
+   },
+   {
+    "id": "MG-8",
+    "pass": false,
+    "detail": "8/16 seasons positive"
+   },
+   {
+    "id": "MG-4-detail",
+    "pass": false,
+    "detail": "2026 W1-10 beat-close 33.0/74 = 44.6%"
+   }
+  ]
+ },
+ {
+  "id": "STRAT-ML-5",
+  "name": "Moneyline: fair prob beats close implied prob by >= 5pp (SIGNAL-ONLY)",
+  "family": "single",
+  "status": "PAPER",
+  "signal": {
+   "n_selections": 2941,
+   "mean_edge_vs_close_pts": null,
+   "beat_close_rate": 0.3677,
+   "beat_close_rate_ci95": [
+    0.3507,
+    0.3849
+   ],
+   "beat_close_rate_perm_p": 1.0,
+   "seasons_positive_edge": 0,
+   "seasons_total": 16
+  },
+  "staking": {
+   "entry_price_policy": "no staking: no opening ML archive exists anywhere (flagged)",
+   "n_staked": 0,
+   "note": "signal-only strategy \u2014 staking columns intentionally blank"
+  },
+  "rewards": 0,
+  "official_source_url": "https://www.nfl.com/games/saints-at-packers-2011-reg-1",
+  "signal_rank": 3,
+  "staking_rank": null,
+  "gates": [
+   {
+    "id": "MG-1",
+    "pass": true,
+    "detail": "standings mismatches: 0"
+   },
+   {
+    "id": "MG-2",
+    "pass": true,
+    "detail": "signal n=2941, staking n=0"
+   },
+   {
+    "id": "MG-3",
+    "pass": true,
+    "detail": "walk-forward by construction (model.py)"
+   },
+   {
+    "id": "MG-4",
+    "pass": null,
+    "detail": "evaluated on the frozen 2026 holdout separately"
+   },
+   {
+    "id": "MG-5",
+    "pass": false,
+    "detail": "CI95=[0.3507, 0.3849]"
+   },
+   {
+    "id": "MG-6",
+    "pass": null,
+    "detail": "mean edge vs close=None (n=2941)"
+   },
+   {
+    "id": "MG-7",
+    "pass": false,
+    "detail": "perm p=1.0"
+   },
+   {
+    "id": "MG-8",
+    "pass": false,
+    "detail": "0/16 seasons positive"
+   },
+   {
+    "id": "MG-4-detail",
+    "pass": null,
+    "detail": "n/a"
+   }
+  ]
+ },
+ {
+  "id": "STRAT-PARLAY-2X",
+  "name": "Cross-game 2-leg parlay: top-2 weekly edges (side+total)",
+  "family": "parlay",
+  "status": "PAPER",
+  "signal": {
+   "n_selections": 263,
+   "mean_edge_vs_close_pts": 10.911,
+   "beat_close_rate": 0.1597,
+   "beat_close_rate_ci95": [
+    0.1179,
+    0.2053
+   ],
+   "beat_close_rate_perm_p": 1.0,
+   "seasons_positive_edge": 0,
+   "seasons_total": 16
+  },
+  "staking": {
+   "entry_price_policy": "legs at the archived line; combined price 13/5 (13-to-5) documented",
+   "juice_assumption_flag": "standard -110 pricing ASSUMED for singles; parlay price 2.646x \u2014 no official odds archive exists",
+   "n_staked": 257,
+   "wins": 40,
+   "pushes": 6,
+   "losses": 217,
+   "roi_flat": -0.5882,
+   "units": -151.16,
+   "max_drawdown_units": 151.16,
+   "win_rate_excl_pushes": 0.1556
+  },
+  "rewards": 0,
+  "official_source_url": "https://www.nfl.com/games/colts-at-texans-2011-reg-1",
+  "signal_rank": 4,
+  "staking_rank": 3,
+  "gates": [
+   {
+    "id": "MG-1",
+    "pass": true,
+    "detail": "standings mismatches: 0"
+   },
+   {
+    "id": "MG-2",
+    "pass": false,
+    "detail": "signal n=263, staking n=257"
+   },
+   {
+    "id": "MG-3",
+    "pass": true,
+    "detail": "walk-forward by construction (model.py)"
+   },
+   {
+    "id": "MG-4",
+    "pass": null,
+    "detail": "evaluated on the frozen 2026 holdout separately"
+   },
+   {
+    "id": "MG-5",
+    "pass": false,
+    "detail": "CI95=[0.1179, 0.2053]"
+   },
+   {
+    "id": "MG-6",
+    "pass": true,
+    "detail": "mean edge vs close=10.911 (n=263)"
+   },
+   {
+    "id": "MG-7",
+    "pass": false,
+    "detail": "perm p=1.0"
+   },
+   {
+    "id": "MG-8",
+    "pass": false,
+    "detail": "0/16 seasons positive"
+   },
+   {
+    "id": "MG-4-detail",
+    "pass": null,
+    "detail": "n/a"
+   }
+  ]
+ },
+ {
+  "id": "STRAT-PROP-COMBO",
+  "name": "Player-prop combos (NOT IMPLEMENTED - no official results feed exists)",
+  "family": "prop-combo",
+  "status": "PAPER (blocked)",
+  "signal": {},
+  "staking": {},
+  "rewards": 0,
+  "note": "No official or verified player-prop results source exists; values left blank and flagged.",
+  "official_source_url": "",
+  "signal_rank": null,
+  "staking_rank": null,
+  "gates": [
+   {
+    "id": "MG-1",
+    "pass": true,
+    "detail": "standings mismatches: 0"
+   },
+   {
+    "id": "MG-2",
+    "pass": false,
+    "detail": "signal n=0, staking n=None"
+   },
+   {
+    "id": "MG-3",
+    "pass": true,
+    "detail": "walk-forward by construction (model.py)"
+   },
+   {
+    "id": "MG-4",
+    "pass": null,
+    "detail": "evaluated on the frozen 2026 holdout separately"
+   },
+   {
+    "id": "MG-5",
+    "pass": null,
+    "detail": "CI95=None"
+   },
+   {
+    "id": "MG-6",
+    "pass": null,
+    "detail": "mean edge vs close=None (n=0)"
+   },
+   {
+    "id": "MG-7",
+    "pass": null,
+    "detail": "perm p=None"
+   },
+   {
+    "id": "MG-8",
+    "pass": null,
+    "detail": "0/0 seasons positive"
+   },
+   {
+    "id": "MG-4-detail",
+    "pass": null,
+    "detail": "n/a"
+   }
+  ]
+ }
+]

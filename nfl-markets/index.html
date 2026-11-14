@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NFL markets dashboard · NFL Markets · Own4</title>
+<link rel="stylesheet" href="assets/style.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<div class="brand"><a href="index.html" style="color:inherit;text-decoration:none">NFL&nbsp;Markets</a>
+<span class="tagline">origination · price snapshots · verified results · signal vs staking</span></div>
+<nav class="mainnav"><a href="index.html" class=active>Dashboard</a><a href="pages/results-feed.html">Results feed</a><a href="pages/price-snapshots.html">Price snapshots</a><a href="pages/origination.html">Origination</a><a href="pages/leaderboard.html">Leaderboard</a><a href="pages/gates.html">Gates &amp; demotion</a><a href="pages/injuries.html">Injuries &amp; depth</a><a href="pages/correlations.html">Correlations</a><a href="pages/suggestions.html">Suggestions</a><a href="pages/decisions.html">Decisions &amp; unknowns</a><a href="pages/flagged.html">⚑ Flagged for review</a><a href="pages/methods.html">Methods</a><a href="pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap"><h1>NFL markets dashboard</h1><p class="subtitle">Price-snapshot store, verified results feed, signal-vs-staking leaderboard, replacement depth, correlations with n, gates and demotion — all row-sourced, blanks flagged, never inferred.</p>
+<div class="cards"><a class="card" href="pages/results-feed.html"><div class="kpi">4,056</div><div class="kpi-l">Verified results rows</div><div class="kpi-d">2011-2026 · 32/32 standings reconciliation</div></a><a class="card" href="pages/price-snapshots.html"><div class="kpi">12,573</div><div class="kpi-l">Price-snapshot rows</div><div class="kpi-d">side → total → moneyline, every originated market</div></a><a class="card" href="pages/origination.html"><div class="kpi">v1</div><div class="kpi-l">Origination model</div><div class="kpi-d">Elo+EWMA, walk-forward, calibrated 1999-2010</div></a><a class="card" href="pages/leaderboard.html"><div class="kpi">5</div><div class="kpi-l">Strategies graded</div><div class="kpi-d">signal separated from staking; rewards = 0</div></a><a class="card" href="pages/gates.html"><div class="kpi">0 strategies</div><div class="kpi-l">Gates passed</div><div class="kpi-d">nothing promoted; all PAPER</div></a><a class="card" href="pages/injuries.html"><div class="kpi">8/32 teams</div><div class="kpi-l">Replacement depth</div><div class="kpi-d">official report + flagged third-party depth</div></a><a class="card" href="pages/correlations.html"><div class="kpi">9</div><div class="kpi-l">Correlations with n</div><div class="kpi-d">official group + flagged third-party group</div></a><a class="card" href="pages/flagged.html"><div class="kpi">10</div><div class="kpi-l">Open flags</div><div class="kpi-d">published, non-blocking, with sources</div></a></div>
+<div class="callout warn"><strong>Headline (honest negative result):</strong> every implementable strategy matches or
+underperforms the closing market — best beat-close rate 50.31% (permutation p=0.45), all flat-stake ROI negative,
+zero rewards, nothing promoted. The leaderboard keeps <em>signal</em> and <em>staking</em> in separate columns so a
+lucky staking run cannot mask a bad signal. See <a href="pages/leaderboard.html" rel="noopener">Leaderboard</a> and
+<a href="pages/gates.html" rel="noopener">Gates</a>.</div>
+<div class="callout"><strong>What is new in this namespace:</strong>
+<ul>
+<li>A populated <a href="pages/price-snapshots.html" rel="noopener">price-snapshot store</a> — 12,573 rows: origination order
+side → total → moneyline; model fair line, market open, market close and both differences as separate columns;
+opening numbers blank + flagged where no archive exists (never inferred).</li>
+<li>A <a href="pages/results-feed.html" rel="noopener">verified results feed</a> — 4,056 played games 2011-2026, official
+source link on every row, 32/32 standings reconciliation vs the official capture, live NFL.com spot checks.</li>
+<li><a href="pages/injuries.html" rel="noopener">Replacement-depth tracking</a> — the depth (2nd/3rd/4th/none) of each replacement,
+not just the fact of one: 10 starter-out rows quantified; 24 teams blank + flagged (no chart source).</li>
+<li><a href="pages/correlations.html" rel="noopener">Correlations with n published</a> — official-input group vs flagged
+third-party group; cross-game parlay legs cover −1.19pp vs market-implied independence (n=27,129 pairs).</li>
+<li>A <a href="pages/suggestions.html" rel="noopener">suggestions review queue</a> and a
+<a href="pages/decisions.html" rel="noopener">decisions register</a> — what we know, what we do not know, and how to discover it —
+so nothing is decided on the information we do not have.</li>
+</ul></div>
+<div class="callout note"><strong>Current week:</strong> 2026 REG 10 — week in progress (Thursday final:
+WAS 24–21 NYG). Origination for every unplayed market is live on the <a href="pages/origination.html" rel="noopener">Origination page</a>.</div>
+
+</main>
+<footer class="wrap foot">Session <code>arena/65c4a22e-own4</code> · built 2026-11-14T22:13Z ·
+research framework only — not wagering advice · every value without an official source is blank and flagged.</footer>
+</body></html>

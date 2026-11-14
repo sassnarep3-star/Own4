@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methods &amp; verification · NFL Markets · Own4</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header class="top"><div class="wrap">
+<div class="brand"><a href="../index.html" style="color:inherit;text-decoration:none">NFL&nbsp;Markets</a>
+<span class="tagline">origination · price snapshots · verified results · signal vs staking</span></div>
+<nav class="mainnav"><a href="../index.html">Dashboard</a><a href="../pages/results-feed.html">Results feed</a><a href="../pages/price-snapshots.html">Price snapshots</a><a href="../pages/origination.html">Origination</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/gates.html">Gates &amp; demotion</a><a href="../pages/injuries.html">Injuries &amp; depth</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/decisions.html">Decisions &amp; unknowns</a><a href="../pages/flagged.html">⚑ Flagged for review</a><a href="../pages/methods.html">Methods</a><a href="../pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap"><h1>Methods &amp; verification</h1>
+
+<h2>Origination model (v1, frozen)</h2>
+<p>Elo with margin-of-victory multiplier for sides; EWMA OFF/DEF point ratings for totals; fair ML from the fair spread
+via a frozen normal CDF. Calibration (slope 0.03777, HFA 2.566 pts,
+σ 13.967) is fitted on 1999-2010 and frozen; origination is walk-forward from 2011 with a
+day-before-kickoff cutoff — no same-day or future information can enter any fair line, and every snapshot row records
+its state size (<code>state_games_used</code>). No market number enters the model anywhere.</p>
+<h2>Snapshot conventions</h2>
+<ul>
+<li>SPREAD SIGN: home-margin convention everywhere (positive = home favored) — verified empirically
+(<a href="sources.html" rel="noopener">sources page</a>).
+
+</li>
+<li>ORIGINATION ORDER: side → total → moneyline, enforced by <code>market_seq</code>.</li>
+<li>ORIGINATION TIME: gameday − 1 day, recorded per row (<code>model_captured_at</code>).</li>
+<li>Diff columns: <code>diff_open_line = fair − open</code>, <code>diff_close_line = fair − close</code> — separate
+columns, never merged.</li>
+<li>Moneyline diff: fair probability − vig-included implied probability of the archived close (conservative).</li>
+</ul>
+<h2>Settlement & staking assumptions (all flagged)</h2>
+<ul>
+<li>Settlement uses the <a href="results-feed.html" rel="noopener">verified results feed</a> only (32/32 reconciled).</li>
+<li>Singles priced at assumed standard −110 (no official odds archive exists); 2-leg parlays at 2.646×; pushes void.</li>
+<li>ML strategies are signal-only: no opening ML odds archive exists anywhere.</li>
+<li>Entry price = opening number where archived (2013-2021), else the archived market line (labelled).</li>
+</ul>
+<h2>Verification protocol</h2>
+<ul>
+<li>Every table row on this site carries a source link (official where it exists; labelled third-party otherwise).</li>
+<li>2026 standings recomputed from the feed match the official capture <strong>32/32, 0 mismatches</strong>.</li>
+<li>Live spot checks 2026-11-14: official game-page URL pattern resolves; NFC East records 4/4 match.</li>
+<li>Line conventions verified by outcome-based tests (7+ favorites' win rates; settlement agreement 99.8%).</li>
+<li>Build-time verifier: every row must keep its source link or the build fails (engine/verify.py).</li>
+</ul>
+<h2>What is deliberately absent</h2>
+<ul>
+<li>Same-game prop correlations: blank — no verifiable prop-results source (<a href="decisions.html" rel="noopener">DEC-M4</a>).</li>
+<li>Opening numbers 2022-2026: blank — no archive (<a href="flagged.html" rel="noopener">FLAG-M2</a>).</li>
+<li>Depth strings for 24 teams: blank — no captured chart (<a href="flagged.html" rel="noopener">FLAG-M5</a>).</li>
+<li>Any claim that a strategy beats the market: none exists; gates failed (<a href="gates.html" rel="noopener">Gates</a>).</li>
+</ul>
+<p class="small">Snapshot store: 12,573 rows · results feed: 4,056 rows ·
+manifest with SHA-256 of every data file: <code>data/manifest.json</code>.</p>
+
+</main>
+<footer class="wrap foot">Session <code>arena/65c4a22e-own4</code> · built 2026-11-14T22:13Z ·
+research framework only — not wagering advice · every value without an official source is blank and flagged.</footer>
+</body></html>

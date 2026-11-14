@@ -1,0 +1,88 @@
+{
+  "dataset": "flagged_for_review",
+  "session": "arena/65c4a22e-own4",
+  "captured_utc": "2026-11-14",
+  "policy": "Non-blocking. Every value that cannot be confirmed from an official source is blank in the data, labelled, and listed here with its evidence and source links. Nothing was inferred to fill a gap.",
+  "flags": [
+    {
+      "id": "FLAG-M1",
+      "summary": "No official betting-line source exists. Every market number in this namespace (spreads, totals, moneylines, opening/closing archives) is THIRD-PARTY (nflverse/nfldata community archive), labelled per row and per column.",
+      "evidence": "The NFL publishes schedules, scores and injury designations on nfl.com but not betting prices. Conventions of the third-party archive were verified empirically this session (see sources.html).",
+      "affected": "all *_line, *_odds columns",
+      "severity": "cross-cutting",
+      "sources": ["https://github.com/nflverse/nfldata", "https://www.nfl.com/schedules/"]
+    },
+    {
+      "id": "FLAG-M2",
+      "summary": "Opening numbers 2022-2026 are UNVERIFIED-BLANK: no archive publishes them. 2013-2020 opens come from sc_lines.csv whose capture time the source does not publish (behaves near-close: mean |Δ| to the archived line = 0.92 pts); 2021 opens are Westgate (WSGT) initial lines.",
+      "evidence": "nfl-markets/data/raw/{initial_lines.csv,sc_lines.csv}; snapshot store open_verification_status column: 9,986 UNVERIFIED-BLANK / 2,043 UNPUBLISHED-TIMING / 544 VERIFIED-ARCHIVE.",
+      "affected": "market_open_line (market_open_status)",
+      "severity": "high",
+      "sources": ["https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv", "https://github.com/nflverse/nfldata/blob/master/data/sc_lines.csv"]
+    },
+    {
+      "id": "FLAG-M3",
+      "summary": "Moneyline opening numbers: no archive exists anywhere in the repo. All 4,191 ML rows have a blank open cell by rule (never inferred). ML strategies are consequently SIGNAL-ONLY.",
+      "evidence": "price_snapshots.csv MONEYLINE rows: open fill = 0 of 4,191.",
+      "affected": "market_open_line (MONEYLINE)",
+      "severity": "medium",
+      "sources": []
+    },
+    {
+      "id": "FLAG-M4",
+      "summary": "Prices are settled at ASSUMED standard -110 for singles and 2.646x for 2-leg parlays. No official or archived opening odds exist, so staking ROI carries a price assumption flag on every row.",
+      "evidence": "engine/strategies.py JUICE_ASSUMPTION; leaderboard.json staking.juice_assumption_flag.",
+      "affected": "staking.roi_flat, staking.units",
+      "severity": "medium",
+      "sources": []
+    },
+    {
+      "id": "FLAG-M5",
+      "summary": "Replacement depth covers 8 of 32 teams (ESPN/RotoWire charts, THIRD-PARTY, flagged). 24 teams have official injury rows but depth fields stay BLANK (never inferred). The NFL does not publish machine-readable depth charts.",
+      "evidence": "replacement_depth.json meta.uncovered_teams_with_official_rows (24 teams); nfl-arena/data/raw/espn_depth_week10.json (source label).",
+      "affected": "replacement_depth.*, deficiency_index",
+      "severity": "high",
+      "sources": ["https://www.espn.com/nfl/depth", "https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "FLAG-M6",
+      "summary": "5 of 10 starter-out rows show a THIRD-PARTY 'O/IR' depth marker but NO final game-status designation on the official Week-10 report at capture time (players present with DNP practice status only). The rows are kept, both values shown, and flagged as a discrepancy — the third-party marker and the official report disagree about availability.",
+      "evidence": "replacement_depth.json rows with official_vs_depth_discrepancy (MIA Brewer, SEA Darnold, MIN Jennings, MIN Hockenson, GB Jacobs).",
+      "affected": "injuries page rows",
+      "severity": "review-recommended",
+      "sources": ["https://www.nfl.com/injuries/", "https://www.espn.com/nfl/depth"]
+    },
+    {
+      "id": "FLAG-M7",
+      "summary": "The deficiency-index weights (2nd=1.0, 3rd=1.5, 4th=2.0, none=2.5) are this repo's convention, not an official or empirically validated number. Published openly; validation proposed (DEC-M5).",
+      "evidence": "engine/injuries.py WEIGHTS; replacement_depth.json meta.weights_flag.",
+      "affected": "team deficiency_index",
+      "severity": "review-recommended",
+      "sources": []
+    },
+    {
+      "id": "FLAG-M8",
+      "summary": "The official injury-report input is a peer session's verbatim transcription of nfl.com/injuries (2026-11-13), stored in-repo (REPO source with provenance) — not re-fetched live in this session. Spot checks against live nfl.com (standings widget, 4/4 NFC East records) matched.",
+      "evidence": "nfl-arena/data/raw/nfl_injuries_week10_2026.md; nfl-markets/data/verification.json live checks.",
+      "affected": "injuries page",
+      "severity": "low",
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "FLAG-M9",
+      "summary": "Honest negative result published prominently: every implementable strategy underperforms or matches the closing market (best beat-close 50.31%, p=0.45); flat-stake ROI negative on all. Nothing qualifies for rewards; nothing is promoted; the site's leaderboard shows this rather than hiding it.",
+      "evidence": "leaderboard.json; gates_evaluation.json (MG-5/6/7/8 fail on all strategies).",
+      "affected": "leaderboard, gates",
+      "severity": "headline finding",
+      "sources": []
+    },
+    {
+      "id": "FLAG-M10",
+      "summary": "Snapshot-store coverage gaps: 81 SIDE rows in 2011-2018 lacked a closing-archive row and fell back to the games.csv line (labelled ARCHIVE-UNPUBLISHED-TIMING); 243 rows across future weeks have no line at all yet (PENDING-CLOSE/UNVERIFIED-BLANK).",
+      "evidence": "price_snapshots.csv close_verification_status distribution: 5,901 VERIFIED-ARCHIVE / 6,267 ARCHIVE-UNPUBLISHED-TIMING / 405 PENDING-CLOSE.",
+      "affected": "market_close_line",
+      "severity": "low",
+      "sources": ["https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"]
+    }
+  ]
+}
