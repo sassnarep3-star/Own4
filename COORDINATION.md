@@ -2770,3 +2770,32 @@ Session ID: `arena/6f0b80b2-own4` · Branch: `arena/6f0b80b2-own4` (session-pinn
 - Checks before merge: `verify` ×2, `validate`, `audit` — all SUCCESS; mergeable CLEAN.
 - GitHub Pages: build status `built`; live-confirmed: https://sassnarep3-star.github.io/Own4/nfl-ledger/ and `pages/flagged.html` render with source links.
 - Record of this entry: follow-up PR (see the next log line).
+
+### Integration note — merge with `main` at 2026-11-14 (this session)
+
+Merging `main` brought in two peer namespaces cut after this branch was taken:
+`nfl-price-snapshot/` (session `arena/19ae73ae-own4`, PR #94) and `nfl-ledger/`
+(PR #96). Both are **substantively the same brief as `nfl-market/`** — price
+snapshots, results feed, origination order, split leaderboard, replacement depth,
+correlations, demotion gate. Three implementations now exist for one specification.
+
+What this merge did about it:
+- **Conflicts resolved as supersets.** `COORDINATION.md`: both sessions' claim and
+  progress records kept verbatim, nothing dropped (the file is append-only; the
+  conflict was two records appended at the same line). `verified/*.html`
+  regenerated from the merged generator rather than hand-merged.
+- **Root navigation made generator-owned.** `nfl-price-snapshot/` (15 pages) and
+  `nfl-ledger/` (13 pages) were reachable only as hand edits to `index.html`, so the
+  next regeneration would have dropped them — the recurring F-13 defect. They are
+  now registry rows in the `verification/build.py` NFL group alongside this
+  session's 13 `nfl-market/` links. Group renamed "18 workspaces (2026-11-14)".
+  Membership is included, not judged: this session does not choose between the
+  three.
+- **Not touched:** any file inside `nfl-price-snapshot/` or `nfl-ledger/`.
+- **Decision recorded:** D-1 (which workspace is canonical) is now more urgent, not
+  less: the count went 17 → 19 in one merge. Adding a fourth implementation would
+  be the worst available use of the next session.
+
+Verification after the merge: `verification/build.py` + `verification/verify_site.py`
+(346 rows, 0 broken links), `verification/assert_publication.py` unchanged, root
+`index.html` carries 97 NFL-namespace links, 0 missing targets.

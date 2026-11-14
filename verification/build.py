@@ -138,7 +138,7 @@ NAV = [
     # (d) moves nfl-decisions/ out of "Retained workspaces". Merge 2026-11-13 with main
     # also folded in arena/22679198-own4's generator-owned "NFL origination" group.
     # Every link previously published is preserved; nothing was removed.
-    ("NFL research · 17 workspaces (2026-11-14)", [
+    ("NFL research · 18 workspaces (2026-11-14)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -216,6 +216,40 @@ NAV = [
         ("nfl-market/pages/flagged.html", "⚑ NFL market — flagged (12)", "legacy"),
         ("nfl-market/pages/sources.html", "NFL market — source register", "legacy"),
         ("nfl-market/pages/executive-summary.html", "NFL market — executive summary", "legacy"),
+        # Added 2026-11-14 during merge with main: the two peer namespaces that arrived
+        # after this branch was cut (arena/19ae73ae-own4 -> nfl-price-snapshot/,
+        # arena/1c0e...-own4 -> nfl-ledger/). Both were reachable only as hand edits to
+        # index.html, which the next regeneration would have dropped — the recurring
+        # F-13 defect this generator exists to prevent. Membership is included, not
+        # judged; see the integration note in COORDINATION.md.
+        ("nfl-price-snapshot/pages/index.html", "NFL price snapshot — dashboard", "legacy"),
+        ("nfl-price-snapshot/pages/price-snapshots.html", "NFL price snapshot — store", "legacy"),
+        ("nfl-price-snapshot/pages/results-feed.html", "NFL price snapshot — results feed", "legacy"),
+        ("nfl-price-snapshot/pages/own-lines.html", "NFL price snapshot — own lines", "legacy"),
+        ("nfl-price-snapshot/pages/leaderboard.html", "NFL price snapshot — leaderboard", "legacy"),
+        ("nfl-price-snapshot/pages/injuries.html", "NFL price snapshot — injuries", "legacy"),
+        ("nfl-price-snapshot/pages/correlations.html", "NFL price snapshot — correlations", "legacy"),
+        ("nfl-price-snapshot/pages/gates.html", "NFL price snapshot — gates", "legacy"),
+        ("nfl-price-snapshot/pages/questions.html", "NFL price snapshot — questions", "legacy"),
+        ("nfl-price-snapshot/pages/suggestions.html", "NFL price snapshot — suggestions", "legacy"),
+        ("nfl-price-snapshot/pages/flagged.html", "⚑ NFL price snapshot — flagged", "legacy"),
+        ("nfl-price-snapshot/pages/requirements.html", "NFL price snapshot — requirements", "legacy"),
+        ("nfl-price-snapshot/pages/repo-audit.html", "NFL price snapshot — repo audit", "legacy"),
+        ("nfl-price-snapshot/pages/sources.html", "NFL price snapshot — sources", "legacy"),
+        ("nfl-price-snapshot/pages/executive-summary.html", "NFL price snapshot — summary", "legacy"),
+        ("nfl-ledger/index.html", "NFL Ledger — dashboard", "legacy"),
+        ("nfl-ledger/pages/price-snapshots.html", "NFL Ledger — price snapshots", "legacy"),
+        ("nfl-ledger/pages/results-feed.html", "NFL Ledger — results feed", "legacy"),
+        ("nfl-ledger/pages/origination.html", "NFL Ledger — origination", "legacy"),
+        ("nfl-ledger/pages/leaderboard.html", "NFL Ledger — leaderboard", "legacy"),
+        ("nfl-ledger/pages/replacement-depth.html", "NFL Ledger — replacement depth", "legacy"),
+        ("nfl-ledger/pages/correlations.html", "NFL Ledger — correlations", "legacy"),
+        ("nfl-ledger/pages/demotion.html", "NFL Ledger — demotion gate", "legacy"),
+        ("nfl-ledger/pages/questions.html", "NFL Ledger — questions", "legacy"),
+        ("nfl-ledger/pages/suggestions.html", "NFL Ledger — suggestions", "legacy"),
+        ("nfl-ledger/pages/flagged.html", "⚑ NFL Ledger — flagged", "legacy"),
+        ("nfl-ledger/pages/sources.html", "NFL Ledger — sources", "legacy"),
+        ("nfl-ledger/pages/executive-summary.html", "NFL Ledger — executive summary", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
