@@ -2607,3 +2607,28 @@ Session ID: `arena/6f0b80b2-own4` · Branch: `arena/6f0b80b2-own4` (session-pinn
 
 ### Requests logged for other sessions (no peer file edited)
 - **R-L1** (integration session): add a link to `nfl-ledger/index.html` in the root NFL navigation group in `verification/build.py`.
+
+### Completion record · `arena/6f0b80b2-own4` · 2026-11-14 (UTC)
+
+| # | Task | Status | Result |
+|---|------|--------|--------|
+| L2 | Price-snapshot store | done | Schema + validation rules + **0 rows** (no official price source; F-L1). `nfl-ledger/data/price_snapshots*`. |
+| L3 | Results feed | done | 137 games (W1–W10) with nfl.com game-page links; standings reconciliation **32/32** exact against the live nfl.com standings. |
+| L4 | Origination order + fair/market/difference | done | Week 11: 13 games, order side → total → moneyline; market columns blank. Slate matches the official Week 11 schedule (13 games + 6 byes). |
+| L5 | Signal/staking split + demotion gate | done | Ranking uses signal only; D1–D6 demotion and P1–P5 promotion in `engine/demotion.py`, 13 unit tests (synthetic inputs). |
+| L6 | Replacement depth + correlations with n | done (fields blank) | 25 Week 10 Out/Questionable rows; depth fields blank (F-L2). Correlations copied with n = 105 each. |
+| L7 | Questions, suggestions, exec summary, flags | done | Q-L1…Q-L8; SUG-L1…L6 (nothing implemented); exec summary page; F-L1…F-L9. |
+| L8 | Site build + verifier | done | 13 pages; `verify.py` OK: 275/275 data rows with an https source link; 0 broken local links; 0 unsourced market values. Build is byte-identical on rerun. |
+
+**Sources (all fetched 2026-11-14 unless noted):** https://www.nfl.com/standings/ · https://www.nfl.com/schedules/2026/by-week/week-11 · https://www.nfl.com/injuries/ · https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 · peer data `nfl-command/data/` (captured 2026-11-13, read-only).
+
+**Verification performed:** 32-club standings recomputed from the 137-game archive (0 mismatches). Week 11 slate compared with the official schedule (13/13; "AZ" = Arizona on nfl.com). Week 10 injury spot check: 7 of 9 rows match; 2 differ (F-L9). W1 final re-read (NE 10 – SEA 13) matches the archive.
+
+**Irregularities (published on `nfl-ledger/pages/flagged.html`, non-blocking):** F-L1 no price data; F-L2 no official depth chart found; F-L3 model signal not proven (n=30); F-L4 root generator drops NFL links, and nfl-ledger is not linked from the root page; F-L5 "frozen before backtest" not checkable in this clone; F-L9 two injury rows differ from the live report.
+
+**Requests (not edited):** R-L1 — add `nfl-ledger/index.html` to the root NFL navigation in `verification/build.py` (integration session).
+
+**Deviations, stated plainly:** the requested `session-<id>/<task>` branch naming is not used; the branch is pinned to `arena/6f0b80b2-own4` by this session. The full brief (live odds, validated strategies, rewards, a complete depth-chart model) cannot be completed from official sources; those items are blank and flagged, not invented.
+
+### PR and merge record
+- PR and merge result: recorded below after execution.
