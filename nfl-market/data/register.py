@@ -344,7 +344,7 @@ Q = [
             "and this session found and corrected a fabricated injury block of its "
             "own before publishing it."),
         "not_known": (
-            "How many published values in the other sixteen workspaces are wrong. "
+            "How many published values in the other eighteen workspaces are wrong. "
             "Prior sessions report spot checks and full re-reads for some "
             "namespaces; none reports a complete cell-by-cell pass over the whole "
             "corpus, and the unlinked-row count suggests the coverage claim is "
