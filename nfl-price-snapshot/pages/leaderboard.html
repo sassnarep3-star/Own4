@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Leaderboard &middot; NFL Price Snapshot &middot; Own4</title>
+<meta name="description" content="Leaderboard: signal vs staking separated; zero qualifiers, zero rewards this snapshot."><link rel="stylesheet" href="assets/style.css"></head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="top"><div class="wrap">
+  <div class="brand"><a href="index.html">NFL <span>Price Snapshot</span></a></div>
+  <nav aria-label="Site sections"><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚡ Flagged for review</a><a href="own-lines.html">Own lines · side / total / moneyline</a><a href="price-snapshots.html">Price snapshot store</a><a href="results-feed.html">Verified results feed</a><a href="correlations.html">Correlations (official sources, n published)</a><a href="gates.html">Validation gates + demotion gate</a><a href="leaderboard.html" class="on">Leaderboard · signal vs staking</a><a href="injuries.html">Injuries &amp; replacement depth</a><a href="sources.html">Source register</a><a href="repo-audit.html">Repository audit</a></nav>
+</div></header>
+<div class="layout"><aside class="side"><nav aria-label="Section navigation"><h4>Start</h4><a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="requirements.html">Requirements</a><h4>Decide</h4><a href="suggestions.html">Suggestions &amp; decisions</a><a href="questions.html">Questions &amp; unknowns</a><a href="flagged.html">⚡ Flagged for review</a><h4>Markets</h4><a href="own-lines.html">Own lines · side / total / moneyline</a><a href="price-snapshots.html">Price snapshot store</a><a href="results-feed.html">Verified results feed</a><h4>Evidence</h4><a href="correlations.html">Correlations (official sources, n published)</a><a href="gates.html">Validation gates + demotion gate</a><a href="leaderboard.html" class="on">Leaderboard · signal vs staking</a><a href="injuries.html">Injuries &amp; replacement depth</a><h4>Audit</h4><a href="sources.html">Source register</a><a href="repo-audit.html">Repository audit</a></nav></aside>
+<main id="main"><div class="crumb">Evidence / Leaderboard</div>
+<h1>Leaderboard &amp; rewards</h1>
+<p class="lede">Signal and staking are kept <strong>separate</strong> so a lucky staking run cannot mask
+a bad signal. The signal ranking is by predictive quality; the staking ranking is by ROI/bankroll
+management at an assumed &ndash;110.</p>
+<div class="panel bad"><h3>0 of 1,000 research points awarded</h3>
+<p>No strategy qualifies: Gate G7 is blocked (no official price) and the sample is one completed game.
+The pool rolls over unpaid rather than being awarded for a good-looking backtest.</p></div>
+<h2>Tier rules</h2>
+<div class="tw"><table class=""><caption>Tier rules</caption><thead><tr><th scope="col" class="">Tier</th><th scope="col" class="">Requirement</th><th scope="col" class="c">Qualifiers</th><th scope="col" class="c">Status</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="">Gold</td><td class="">Every non-blocked gate passes, week-clustered CI above zero, &lt;50% of profit in one season</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="">Silver</td><td class="">All of the above except one gate</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="">Bronze</td><td class="">Positive point estimate with an FDR pass</td><td class="c">0</td><td class="c"><span class="pill p-bad">fail</span></td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="">Rejected</td><td class="">Everything else, including both placebos</td><td class="c">5</td><td class="c"><span class="pill p-good">pass</span></td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr></tbody></table></div>
+<h2>Signal vs staking &mdash; separate rankings</h2>
+<p>Each strategy appears in <em>both</em> rankings. A strategy that looks strong on staking (a lucky
+ROI) but weak on signal is exposed by the side-by-side rank; a strategy strong on signal but not yet
+staked is visible as signal-only.</p>
+<table class="tw">
+<thead><tr><th scope="col">Rank</th><th scope="col">ID</th><th scope="col">Strategy</th><th scope="col">Market</th>
+<th scope="col">Hit rate (staking)</th><th scope="col">Bets</th><th scope="col">Signal rank</th><th scope="col">Staking rank</th><th scope="col">Source</th></tr></thead>
+<tbody><div class="tw"><table class=""><caption>Leaderboard · signal vs staking, separate rankings</caption><thead><tr><th scope="col" class="c">Rank</th><th scope="col" class="">ID</th><th scope="col" class="">Strategy</th><th scope="col" class="">Market</th><th scope="col" class="num">Hit rate</th><th scope="col" class="num">Bets</th><th scope="col" class="c">Signal rank</th><th scope="col" class="c">Staking rank</th><th scope="col" class="">Source</th></tr></thead><tbody><tr><td class="c">1</td><td class="">S1</td><td class="">Own spread side (home margin)</td><td class="">side</td><td class="num">n/a</td><td class="num">0</td><td class="c">SIGNAL #1</td><td class="c">STAKING #1</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="c">2</td><td class="">S2</td><td class="">Own total</td><td class="">total</td><td class="num">n/a</td><td class="num">0</td><td class="c">SIGNAL #2</td><td class="c">STAKING #2</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="c">3</td><td class="">S3</td><td class="">Own moneyline (home)</td><td class="">moneyline</td><td class="num">n/a</td><td class="num">0</td><td class="c">SIGNAL #3</td><td class="c">STAKING #3</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="c">4</td><td class="">S4</td><td class="">Parlay: side + total (same game)</td><td class="">parlay</td><td class="num">n/a</td><td class="num">0</td><td class="c">SIGNAL #4</td><td class="c">STAKING #4</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr><tr><td class="c">5</td><td class="">S5</td><td class="">Prop combo: QB pass over + WR1 rec over</td><td class="">prop_combo</td><td class="num">n/a</td><td class="num">0</td><td class="c">SIGNAL #5</td><td class="c">STAKING #5</td><td class=""><span class="src"><a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">schedules/2026/by-week/week-10 &xrarr;</a></span></td></tr></tbody></table><div class="tnote">0 strategies qualify; 0 rewards awarded this snapshot.</div></div></tbody>
+</table>
+<div class="panel warn"><h3>How points would be awarded</h3>
+<ul>
+<li>The pool is 1,000 research points per snapshot &mdash; research points, not money: no jurisdiction,
+licence or funding source has been established (questions Q02, Q15).</li>
+<li>A strategy must clear every non-blocked gate. A blocked gate blocks the whole pool.</li>
+<li>Ties break on the widest lower confidence bound, not the highest point estimate &mdash; the
+conservative choice that resists luck.</li>
+<li>Provisional awards require a forward record: the strategy's next week of lines must be committed
+before kick-off and graded after (suggestion S15 / S01).</li>
+</ul></div>
+</main></div>
+<footer>
+<p><strong>NFL Price Snapshot &amp; Line Origination &mdash; Own4</strong> &mdash; analytical research only.
+<strong>Not wagering advice.</strong> Snapshot <strong>2026-11-14</strong>. Every published value links to the
+official page it came from; anything that could not be confirmed from an official source is blank and listed
+on the <a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no
+price, stake, edge or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong>
+(1-800-697-3738) &middot; <a href="https://www.ncpgambling.org/help-treatment" target="_blank"
+rel="noopener">ncpgambling.org/help-treatment &xrarr;</a></p>
+</footer><script src="assets/table.js" defer></script></body></html>

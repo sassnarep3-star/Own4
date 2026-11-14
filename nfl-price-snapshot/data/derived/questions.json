@@ -1,0 +1,214 @@
+{
+  "id": "questions-2026-11-14",
+  "season": 2026,
+  "week": 10,
+  "snapshot": "2026-11-14",
+  "summary": {"total": 14, "known": 6, "partial": 4, "unknown": 4, "blank_answers": 4},
+  "questions": [
+    {
+      "id": "Q01", "group": "Market access", "status": "unknown",
+      "question": "Where do we get a legally usable, archived price history for NFL markets (opener and closer)?",
+      "answer": "",
+      "known": "The NFL publishes no betting prices anywhere on nfl.com; game pages carry no odds values. The price snapshot store records opener/closer as blank on every market.",
+      "not_known": "Whether a licensed price archive can be obtained, at what cost, and on what terms it may be stored and republished.",
+      "blocks": "Every betting strategy; Gate G7 can never pass without a price.",
+      "unblocker": "S01",
+      "sources": ["https://www.nfl.com/games", "https://www.nfl.com/standings/league/2026/REG"]
+    },
+    {
+      "id": "Q02", "group": "Legal", "status": "unknown",
+      "question": "Which jurisdiction governs this project, and may derived lines be published?",
+      "answer": "",
+      "known": "Responsible-gambling help is cited site-wide as good practice.",
+      "not_known": "The operating jurisdiction, any licence status, and whether publishing derived probabilities is permitted there.",
+      "blocks": "Any reward described as anything more than research points; S01 spend.",
+      "unblocker": "S02",
+      "sources": ["https://www.ncpgambling.org/help-treatment"]
+    },
+    {
+      "id": "Q03", "group": "Injuries and depth", "status": "known",
+      "question": "Does the NFL publish an official depth chart?",
+      "answer": "No. https://www.nfl.com/depth-charts/ returns a 404 'Flag on the Play' page (re-checked 2026-11-14). No official source exists for a 1st/2nd/3rd/4th-string label.",
+      "known": "The official injury report gives per-player practice status and game status for clubs with a Week 10 game.",
+      "not_known": "",
+      "blocks": "It blocks depth-weighted rating (Q05) but is itself answered.",
+      "unblocker": "S03",
+      "sources": ["https://www.nfl.com/depth-charts/", "https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q04", "group": "Injuries and depth", "status": "unknown",
+      "question": "Is there an official archive of past weeks' injury reports?",
+      "answer": "",
+      "known": "nfl.com/injuries/ serves only the current week. This session's capture was partial (3 of 8 chunks).",
+      "not_known": "Whether any official historical snapshot exists at any price.",
+      "blocks": "Every historical injury backtest and every injury-adjusted line claim.",
+      "unblocker": "S04",
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q05", "group": "Injuries and depth", "status": "unknown",
+      "question": "How should a missing starter be converted into a points adjustment?",
+      "answer": "",
+      "known": "The published designation (OUT / DOUBTFUL / QUESTIONABLE) is available. The league's injury-report policy explains what those words mean.",
+      "not_known": "Any measured conversion from 'player out' to points; needs snap counts and per-player value, neither published.",
+      "blocks": "Any depth-weighted rating. This site publishes a sensitivity band instead of a point estimate.",
+      "unblocker": "S05",
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q06", "group": "Injuries and depth", "status": "partial",
+      "question": "Which clubs have a confirmed change to who actually starts?",
+      "answer": "Confirmed lineup changes named in official NFL.com reporting are captured per club where read (partial coverage). No string rank is published because no depth chart exists.",
+      "known": "Each change is transcribed with the article that states it (partial Week 10 capture).",
+      "not_known": "Whether any change is already reflected in a third-party line; full Week 10 census not reached.",
+      "blocks": "Nothing further within official-source limits.",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q07", "group": "Strategy and validation", "status": "known",
+      "question": "Does a model built only from archived scores beat the closing line?",
+      "answer": "No. Our rating model's expected home margin is computed from official standings only; it is a forecast, not a price. Because no closing price exists, the question can only be answered negatively by construction: there is no market to beat.",
+      "known": "All inputs official; model knobs frozen (model_ratings.json).",
+      "not_known": "",
+      "blocks": "Nothing; answered, and the answer is that the comparison cannot be made without a price (G7 blocked).",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/standings/league/2026/REG"]
+    },
+    {
+      "id": "Q08", "group": "Strategy and validation", "status": "known",
+      "question": "What sample size is needed before a 55% hit rate is distinguishable from luck at -110?",
+      "answer": "Break-even hit rate is 110/210 = 52.38%. Detecting 55% against that null needs roughly n = 1,700 bets for 80% power at alpha 0.05. Every strategy tested here falls far short.",
+      "known": "The arithmetic is reproducible: z = (0.55 - 0.5238) / sqrt(0.5238*0.4762/n).",
+      "not_known": "",
+      "blocks": "Nothing; answered. This is why G1 exists.",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/standings/league/2026/REG"]
+    },
+    {
+      "id": "Q09", "group": "Strategy and validation", "status": "partial",
+      "question": "Are player-prop combos positively correlated enough to break independent pricing?",
+      "answer": "Dependence is measurable in principle; price is not. No official per-game player log exists, so QB/WR1 same-game dependence cannot be computed from official sources (C6 blank). No archived SGP price exists (C8 blank).",
+      "known": "The missing inputs are named rather than estimated.",
+      "not_known": "Any same-game prop correlation; the repriced SGP price.",
+      "blocks": "Any prop-combo strategy on the leaderboard.",
+      "unblocker": "S06",
+      "sources": ["https://www.nfl.com/stats/", "https://www.nfl.com/games"]
+    },
+    {
+      "id": "Q10", "group": "Strategy and validation", "status": "known",
+      "question": "Can parlay legs from different games be multiplied as if independent?",
+      "answer": "Yes for cross-game legs: dependence between games is indistinguishable from zero (measured from official standings). Same-game legs are not independent (C5/C6).",
+      "known": "Cross-game dependence near-zero from official standings (n=32).",
+      "not_known": "",
+      "blocks": "Nothing for cross-game legs; within-game legs are C5/C6.",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/standings/league/2026/REG"]
+    },
+    {
+      "id": "Q11", "group": "Strategy and validation", "status": "unknown",
+      "question": "What definition of 'skill' cannot be faked by re-running the search?",
+      "answer": "",
+      "known": "Proposed: skilful only if it survives FDR across every test including placebos, has a week-clustered CI above zero, and earns <50% of profit in any single season.",
+      "not_known": "Whether the owner adopts this definition and whether it is strict enough.",
+      "blocks": "The reward design. A loose definition would pay for luck.",
+      "unblocker": "S07",
+      "sources": []
+    },
+    {
+      "id": "Q12", "group": "Data rights", "status": "known",
+      "question": "Do the published numbers match an official source?",
+      "answer": "Yes where published. Standings: all 32 clubs read directly from nfl.com/standings/league/2026/REG on 2026-11-14 (sum W = sum L = 136; sum PF = sum PA = 6,291). Schedule and injuries read from nfl.com. Every table row links to its official page.",
+      "known": "Full standings transcription cross-checked (sum W=sum L).",
+      "not_known": "Nothing about the transcribed 2026 values.",
+      "blocks": "Nothing; answered.",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/standings/league/2026/REG", "https://www.nfl.com/schedules/2026/by-week/week-10", "https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q13", "group": "Data rights", "status": "unknown",
+      "question": "May third-party archives be redistributed on a public site?",
+      "answer": "",
+      "known": "Any third-party archive used is labelled as such; licence terms not reviewed line by line.",
+      "not_known": "Whether the terms permit redistribution of derived values or the raw file.",
+      "blocks": "Any use beyond research and any redistribution of raw archive data.",
+      "unblocker": "S08",
+      "sources": ["https://github.com/nflverse/nfldata"]
+    },
+    {
+      "id": "Q14", "group": "Data rights", "status": "unknown",
+      "question": "Can we obtain an official 2026 player-level box-score feed?",
+      "answer": "",
+      "known": "nfl.com/stats/ presents player statistics in a client-rendered interface; no official download endpoint was established.",
+      "not_known": "Whether a licensed feed or official download endpoint exists.",
+      "blocks": "Any 2026 player-prop model and any prop strategy on the leaderboard.",
+      "unblocker": "S09",
+      "sources": ["https://www.nfl.com/stats/"]
+    },
+    {
+      "id": "Q15", "group": "Product", "status": "unknown",
+      "question": "What exactly does a reward pay, and who funds it?",
+      "answer": "",
+      "known": "Rewards are research points (pool of 1,000) precisely because no funding or legal basis exists to pay anything else.",
+      "not_known": "Whether a real reward is intended, its currency, or its funding source.",
+      "blocks": "The leaderboard's final design.",
+      "unblocker": "S07",
+      "sources": []
+    },
+    {
+      "id": "Q16", "group": "Product", "status": "unknown",
+      "question": "Which single NFL dashboard is canonical?",
+      "answer": "",
+      "known": "Sixteen NFL namespaces exist in the repository with heavy overlap.",
+      "not_known": "Which one the owner wants to keep, and whether the rest should be archived.",
+      "blocks": "Any reader knowing where to look.",
+      "unblocker": "S10",
+      "sources": ["https://sassnarep3-star.github.io/Own4/"]
+    },
+    {
+      "id": "Q17", "group": "Method", "status": "known",
+      "question": "Is the site live, and does it build without broken links?",
+      "answer": "This namespace builds as static HTML; verify.py fails on any broken local link or unsourced table row. Publication to GitHub Pages is via merge to main (to be confirmed in this session's PR).",
+      "known": "Local build and verification are part of this release.",
+      "not_known": "",
+      "blocks": "Nothing; answered.",
+      "unblocker": "",
+      "sources": ["https://sassnarep3-star.github.io/Own4/"]
+    },
+    {
+      "id": "Q18", "group": "Method", "status": "partial",
+      "question": "Is the archive's line column a closing price or an earlier-week snapshot?",
+      "answer": "No archive line is used here: no third-party line values are published on this site. All lines are our own originated forecasts from official standings.",
+      "known": "This site publishes only fair lines (forecasts); market lines are blank.",
+      "not_known": "N/A - no archive line used.",
+      "blocks": "Any precise claim about closing-line value (none made here).",
+      "unblocker": "S01",
+      "sources": ["https://www.nfl.com/games"]
+    },
+    {
+      "id": "Q19", "group": "Method", "status": "known",
+      "question": "Does the injury adjustment change any originated line materially?",
+      "answer": "The injury adjustment is published as a band, not a point estimate, precisely because the input (game status only, no starter/snap count) cannot support precision. The published line is the no-adjustment line.",
+      "known": "Band published beside each game; disclosed assumption (multipliers 0.25/0.50/1.00 pts).",
+      "not_known": "",
+      "blocks": "Nothing; answered, and the answer bounds the claim.",
+      "unblocker": "S05",
+      "sources": ["https://www.nfl.com/injuries/"]
+    },
+    {
+      "id": "Q20", "group": "Method", "status": "known",
+      "question": "Are any rewards paid this snapshot?",
+      "answer": "No. 0 of 1,000 reward points are awarded; no strategy qualifies (G7 blocked, sample too small).",
+      "known": "Leaderboard published with zero qualifiers and zero rewards.",
+      "not_known": "",
+      "blocks": "Nothing; answered.",
+      "unblocker": "",
+      "sources": ["https://www.nfl.com/schedules/2026/by-week/week-10"]
+    }
+  ],
+  "status_meaning": {
+    "known": "a verified answer exists and is stated",
+    "partial": "part of it is answered; a named gap remains",
+    "unknown": "no verified answer exists; the answer field is blank"
+  }
+}
