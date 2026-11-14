@@ -1,0 +1,15 @@
+{
+ "dataset": "nfl_book_demotion_gate_eval",
+ "gate": {
+  "id": "D1",
+  "name": "Live-to-paper demotion gate",
+  "rule": "Any strategy holding LIVE status is demoted back to PAPER status immediately when ANY of the following is true: (a) over any rolling window of 100 settled bets the upper bound of the 95% CI of ROI is below 0; (b) its G2 signal metric underperforms its declared baseline in 2 consecutive weekly evaluations; (c) a high-severity data-integrity flag is opened against an input it depends on; or (d) its G7 market-verification requirement becomes satisfiable and the strategy then fails fair-vs-market comparison. Demotion requires no human approval; re-promotion to LIVE requires passing G1-G6 and G8 afresh on data not used to design the strategy.",
+  "type": "risk control",
+  "status": "active policy",
+  "current_applications": "No strategy currently holds LIVE status (all PAPER or BLOCKED), so D1 has not fired. D1 is wired so that any future promotion is automatically reversible."
+ },
+ "built_utc": "2026-11-14",
+ "live_strategies": [],
+ "fired": [],
+ "result": "no strategy holds LIVE status; D1 is armed and would fire on any of its four conditions"
+}

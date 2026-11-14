@@ -79,5 +79,23 @@
     "pool_points": 1000,
     "rule": "Signal decides eligibility; staking confirms it. A strategy must pass signal gate G2 AND staking gate G5 to earn points. A lucky staking run on a strategy that fails G2 cannot score any points, and cannot outrank a G2-passing strategy. Points awarded = 0 until at least one strategy passes both.",
     "status": "policy only — no funds are held; rewards are research points, not money."
-  }
+  },
+  "amendments": [
+    {
+      "amendment_id": "A1",
+      "appended_utc": "2026-11-14T01:00Z",
+      "applies_to": "reward_policy.rule (eligibility)",
+      "change": "Eligibility additionally requires gate G7 (price basis verified against an official price source). Until an official price source exists, points stay at 0 even when G2/G4/G5 pass on the ASSUMED -110 price.",
+      "reason": "The assumed -110 on straight-up side picks is not an obtainable market price (favorites are priced with much heavier juice). Paying points on a return computed from an unobtainable price would misrepresent the result. This amendment was made after the first backtest run and is disclosed here verbatim rather than silently applied to the pre-registered rule.",
+      "effect": "leaderboard points remain 0 at publication"
+    },
+    {
+      "amendment_id": "A2",
+      "appended_utc": "2026-11-14T01:00Z",
+      "applies_to": "strategies.S1.baseline",
+      "change": "A POST-HOC diagnostic baseline (pick the team with the better record entering each game) is reported alongside the pre-registered baselines. It does not replace the pre-registered G2 baseline and does not change any gate outcome.",
+      "reason": "Transparency: the post-hoc baseline is the fair naive comparison a reviewer would ask for, and it must be shown even when it is unfavourable to the model.",
+      "effect": "reported in backtest metrics and on the leaderboard page"
+    }
+  ]
 }
