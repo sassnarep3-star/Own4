@@ -1,0 +1,299 @@
+{
+ "gate_id": "DG-1",
+ "defined_utc": "2026-11-14T00:00:00Z",
+ "why_backwards_is_safe": "A demotion gate can only remove candidates. Applying it to results that already exist cannot create a winner, so no lookahead is introduced. A promotion gate designed at the same moment would be a different matter and is not proposed here.",
+ "rows": [
+  {
+   "id": "S-ML-0.03",
+   "family": "single",
+   "name": "Moneyline: bet when model win prob exceeds devigged market prob by >= 0.03",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 3251,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-ML-0.05",
+   "family": "single",
+   "name": "Moneyline: bet when model win prob exceeds devigged market prob by >= 0.05",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 2757,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-SP-2.0",
+   "family": "single",
+   "name": "Spread: bet when |own line - market line| >= 2.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 2404,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-TT-2.0",
+   "family": "single",
+   "name": "Total: bet when |own total - market total| >= 2.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 2117,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-SP-3.0",
+   "family": "single",
+   "name": "Spread: bet when |own line - market line| >= 3.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": false,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "n": 1769,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-HOMEDOG",
+   "family": "single",
+   "name": "Back every home underdog (spread)",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 1480,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-TT-3.0",
+   "family": "single",
+   "name": "Total: bet when |own total - market total| >= 3.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 1385,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-SP-4.0",
+   "family": "single",
+   "name": "Spread: bet when |own line - market line| >= 4.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": false,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "n": 1290,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-REST-3",
+   "family": "single",
+   "name": "Rest: back the side with >= 3 extra days of rest",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": false,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "n": 874,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-TT-4.0",
+   "family": "single",
+   "name": "Total: bet when |own total - market total| >= 4.0 pts",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 837,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-WIND-UNDER",
+   "family": "single",
+   "name": "Unders in outdoor games with wind >= 15 mph",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 303,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "P-XG-2",
+   "family": "parlay",
+   "name": "2-leg cross-game parlay: top-2 spread edges of the week",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D3_bh_p_lt_0.10",
+   "n": 269,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "P-XG-3",
+   "family": "parlay",
+   "name": "3-leg cross-game parlay: top-3 spread edges of the week",
+   "checks": {
+    "D1_n_ge_200": true,
+    "D2_confirmation_sign": false,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D2_confirmation_sign, D3_bh_p_lt_0.10",
+   "n": 269,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "C-SGP-FAV-OVER",
+   "family": "combo",
+   "name": "Same-game combo: favourite covers AND game goes over",
+   "checks": {
+    "D1_n_ge_200": false,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D1_n_ge_200, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D1_n_ge_200, D3_bh_p_lt_0.10",
+   "n": 140,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  },
+  {
+   "id": "S-BIGDOG--9.5",
+   "family": "single",
+   "name": "Back home underdogs getting -9.5 points or more",
+   "checks": {
+    "D1_n_ge_200": false,
+    "D2_confirmation_sign": true,
+    "D3_bh_p_lt_0.10": false,
+    "D4_drawdown_le_15": true,
+    "D5_no_single_slice": true
+   },
+   "failed": "D1_n_ge_200, D3_bh_p_lt_0.10",
+   "status": "DEMOTED TO PAPER",
+   "reason": "fails D1_n_ge_200, D3_bh_p_lt_0.10",
+   "n": 119,
+   "current_state": "paper",
+   "source": "nfl-lines/data/derived/strategy_results.json (prior session, read-only)",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json"
+  }
+ ],
+ "summary": {
+  "strategies_tested": 15,
+  "would_stay_live": 0,
+  "would_be_demoted": 15,
+  "actually_live_today": 0,
+  "note": "No strategy in this repository has ever been live: all 15 are published as paper. The gate is therefore a specification with a known answer under current data, which is what makes it testable before it is trusted."
+ }
+}

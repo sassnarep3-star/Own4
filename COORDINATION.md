@@ -2585,51 +2585,336 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 
 ---
 
-## Session `arena/28a71529-own4` — NFL price-snapshot store, verified results feed, origination order, signal-vs-staking leaderboard, replacement depth, correlation register with n, demotion gate, and a decision/suggestions desk (2026-11-14 UTC)
+## Session `arena/d507f753-own4` — claim (2026-11-14 UTC)
 
-Session ID: `arena/28a71529-own4` · Branch: `arena/28a71529-own4` (platform-pinned; the requested
-`session-<id>/<task>` naming cannot be created in this harness — same logged deviation as every prior
-session). Base: `main` at `02a8bdf` (PR #91, session `arena/8e2de421-own4`).
+Session ID: `arena/d507f753-own4` · Branch `arena/d507f753-own4` (platform-pinned; the
+requested `session-<id>/<task>` branch naming is not creatable in this harness — same
+logged deviation as every prior session). Base: `main` at `02a8bdf` (after PR #91).
 
-**Survey performed before claiming (2026-11-14):** 16 NFL namespaces exist
-(`nfl`, `nfl-arena`, `nfl-audit`, `nfl-command`, `nfl-decision`, `nfl-decisions`, `nfl-edge`, `nfl-hub`,
-`nfl-integration`, `nfl-intel`, `nfl-lab`, `nfl-lines`, `nfl-origination`, `nfl-own`, `nfl-quant`,
-`nfl-research`). One open NFL PR (#93, `arena/582300df-own4`) is older than 60 minutes with no commits —
-left untouched, not taken over, because its file scope overlaps nothing this session edits. Every other
-open PR (#29, #39, #43, #47, #56, #59) belongs to the NBA or SF-rental verticals and is out of scope.
+Survey before claiming (read this board in full, 2,584 lines, plus `origin/main`):
+- Last recorded integration (session `arena/8e2de421-own4`, PR #89) is **done** and live.
+- No claim on this board is younger than 60 minutes at session start; every prior
+  namespace is read-only to this session.
+- Seven peer PRs are open (#93, #59, #56, #47, #43, #39, #29). #93 (`nfl-command`,
+  session `arena/582300df-own4`, opened 2026-11-13T22:43Z) is the only one inside the NFL
+  vertical; it is **not** touched by this session and is merged only if it is clean and
+  green at integration time.
 
-**No peer file is edited by this session.** All new work lands in one new namespace, `nfl-marketboard/`.
-Root `index.html` and `verification/build.py` receive additive nav entries only (the recurring I1/F-13
-defect class: hand-added links must live in the generator so a regeneration cannot drop them).
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| M1 | **Price-snapshot store**: opening and closing numbers for every market we originate, archived raw responses + parse-from-archive, coverage counters, gaps blank + flagged | claimed | arena/d507f753-own4 | `nfl-market/**` (new namespace) |
+| M2 | **Verified results feed**: official finals only, per-game source link, grading + coverage, third-party rows marked | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M3 | **Origination order** side → total → moneyline, with fair line / market line / difference as three separate columns | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M4 | **Leaderboard split**: signal metrics and staking metrics in separate tables so a lucky stake run cannot mask a bad signal | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M5 | **Replacement-depth tracking**: starters out, next-man-up depth, offence vs defence, from the official Game Book lineup pages + official injury report | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M6 | **Correlations from officially sourced numbers only, with n published**; non-official inputs refused and counted | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M7 | **Demotion gate** definition + current state of every live strategy under it | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M8 | **Suggestions + Questions section**: reviewable, option-by-option, with the information we have, the information we lack, and what would settle each one | claimed | arena/d507f753-own4 | `nfl-market/**` |
+| M9 | Executive summary for this round | claimed | arena/d507f753-own4 | `nfl-market/**`, `NFL_MARKET_EXEC_SUMMARY.md` |
+| M10 | Final integration: re-verify combined tree, PR → merge → Pages deploy confirmation → record here | claimed | arena/d507f753-own4 | `COORDINATION.md`, root nav (additive only) |
 
-### Task board (this session)
+Scope rule: this session writes **only** a new `nfl-market/` namespace, this
+`COORDINATION.md` (append-only), one additive nav entry in the root generator
+(`verification/build.py` NAV) + its regenerated output, and one new CI workflow file.
+Every other namespace — including `nfl-lines/`, `nfl-origination/`, `nfl-hub/` and
+`nfl-integration/` — stays read-only; defects found there are logged here and on the
+Flagged page, never silently edited.
 
-| # | Task | Status | Owner session | Files touched (scope) |
-|---|------|--------|---------------|------------------------|
-| M1 | Repo review: line-by-line audit of the NFL namespaces, irregularity register with source links | claimed | arena-28a71529-own4 | `nfl-marketboard/**` (report only) |
-| M2 | Official-source ground truth re-read (standings, week-by-week scores, injury report, team stats) | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M3 | **Price-snapshot store** — one row per originated market with opening and closing number, timestamped | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M4 | **Verified results feed** — official final scores, the settlement basis for ROI/backtest | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M5 | **Origination order** — side, then total, then moneyline; fair / market / difference as three columns | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**`, `nfl-marketboard/engine/**` |
-| M6 | **Leaderboard with signal and staking scored separately**; rewards only on qualified signal | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M7 | **Replacement-depth register** — 2nd/3rd/4th-string deficiency, official injury + starter evidence | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M8 | **Correlation register computed only from officially sourced numbers, `n` published per value** | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**`, `nfl-marketboard/engine/**` |
-| M9 | **Demotion gate** — rules that send a live strategy back to paper | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M10 | **Decision desk**: suggestions to improve the site/decision-making + questions / information / answers register + what is missing and how to discover it | claimed | arena-28a71529-own4 | `nfl-marketboard/data/**` |
-| M11 | Executive summary | claimed | arena-28a71529-own4 | `nfl-marketboard/EXECUTIVE_SUMMARY.md` |
-| M12 | Site: clean landing page + category subpages; every table row source-linked; blanks flagged | claimed | arena-28a71529-own4 | `nfl-marketboard/**` |
-| M13 | Final integration: run every verifier, PR → merge → Pages deploy confirmed → record here | claimed | arena-28a71529-own4 | `COORDINATION.md`, additive root nav |
+Findings recorded at claim time (each verified locally or against a live official page
+before writing it down):
+1. `grep` of the pinned archive `nfl-lines/data/raw/nfldata_games.csv` (46 columns) shows
+   **no opening-line column** — the store therefore has to be built, not copied.
+2. Repo-wide scan of published HTML: **11,584** table rows, **1,268** with no source
+   link. Prior sessions logged 0 unlinked rows; their check covered a smaller set of
+   pages. Published as an irregularity (MK-01) with the per-namespace counts.
+3. The NFL Game Book PDF served from `static.www.nfl.com` **does publish the 11-man
+   starting lineup on both sides of the ball for each team, plus substitutions, did-not-play
+   and not-active lists**. Prior log entries state "the NFL publishes no depth chart"
+   (true for the `/depth-chart` route, re-confirmed 404 today); the Game Book is the
+   official substitute and it was not previously used. Basis for M5.
 
-### Verification rules this session holds itself to
+### Progress log — `arena/d507f753-own4`
 
-1. Every table row published by `nfl-marketboard/` carries an `https://` link to the page the value came from.
-2. A value that cannot be confirmed from an official source is published **blank**, not inferred, and
-   appears on the Flagged for Review page with the reason and the source that was checked.
-3. Market prices are **not** an official NFL publication. Where a price is used, its provenance is
-   stated on the row and the row is marked third-party. Where no price exists, the cell is blank.
-4. Every correlation publishes `n`. A correlation without a published `n` is not published at all.
+**2026-11-14 — data + engine layer complete, site layer complete, gate green.**
+
+Built (all inside `nfl-market/`, nothing outside it edited except the generator
+registry in `verification/build.py`):
+
+| Artefact | Result |
+| --- | --- |
+| `data/derived/store.json` | 84 rows = 14 games × 3 markets × 2 snapshots, coverage 100%, 4 integrity checks (IC-01…IC-04) all pass |
+| `data/derived/movement.json` | 37 of 42 series moved; moneyline moves in implied-probability points, not cents |
+| `data/derived/origination.json` | side → total → moneyline, in that order, with own line / open / close / difference-vs-each as five separate columns |
+| `data/derived/leaderboard.json` | 15 strategies; signal table and staking table kept apart: 0 pass signal gates, 5 profitable in sample, intersection 0 |
+| `data/derived/demotion.json` | gate DG-1 (D1–D5): 0 of 15 stay live, 15 demoted to paper, 0 actually live today |
+| `data/derived/correlations.json` | 4 rows: 2 computed official-on-both-sides with n = 32, 1 blank (n = 0), 1 cited not recomputed |
+| `data/derived/results_feed.json` | 1 week-10 final graded, 13 pending, 3 market rows graded, 0 third-party result rows |
+| `data/derived/flags.json` | MK-01…MK-05 |
+| `data/derived/register.json` | 15 questions, 16 suggestions, 5 decisions — every `answer` field deliberately blank |
+| `pages/` + `index.html` | 13 pages, 302 table rows, all source-linked |
+| `build.py`, `verify.py` | gate: every row https-sourced, every table number traceable to the JSON the build read, every link resolves, helpline footer, no placeholders, nav identical |
+
+Findings recorded this round (new; each has a live source link on the page):
+
+1. **No price is official.** The NFL publishes no odds anywhere, re-checked today.
+   Every price is one commercial book syndicated through a public endpoint. The
+   distinction is stated on every page, not only on the flag page (MK-01).
+2. **13 of 14 week-10 games have no close**, because they have not been played. The
+   second snapshot is the provider's current number (MK-02). Any ROI published
+   against "close" this week would be measuring a moving target.
+3. **A transcription defect was caught before publication**: four games were
+   attached to another game's prices by zipping two ordered lists. Fixed with an
+   explicit event-id map and now guarded by IC-01; published as MK-04 rather than
+   quietly repaired.
+4. **No player-prop prices are archived** even though the provider exposes them:
+   the response is ~730 items, paged, and repeats athlete/type pairs, so a
+   partial read of it would be misleading (MK-05).
+5. **Replacement depth is measurable from official documents after the game, never
+   before it.** Two consecutive Game Books for one club give one confirmed
+   replacement (C L.Patrick not active → N.Allegretti starts) and one rotation
+   change (WR V.Jefferson starts W9 → substitute W10). The Game Book is
+   post-game, so no pre-game depth state can be sourced (DP-02), and no rank is
+   published anywhere (DP-01).
+6. **A correction of this session's own work**: a first draft of the week-9
+   Washington injury block was written from expectation rather than re-read from
+   the page, and contained eight names that are not on it. The block was re-read
+   and replaced with the real eleven rows. Published as DP-05 with the incident
+   described, because a corrections log that only records other people's mistakes
+   is not a corrections log.
+
+Registry: `nfl-market/` added to the "NFL research" group in
+`verification/build.py` (13 links) as generator-owned rows, not a hand edit to
+`index.html` — every hand-edited root link in this repository has been dropped by
+the next regeneration. Group renamed "16 workspaces (2026-11-13)" →
+"17 workspaces (2026-11-14)".
+
+Still open for this session: PR, merge, Pages confirmation, and the summary
+artefact for M9.
+
+## Session `arena/19ae73ae-own4` — NFL price snapshot & line origination (2026-11-14)
+
+Session ID: `arena/19ae73ae-own4` · Branch: `arena/19ae73ae-own4` (platform-pinned; `session-<id>/<task>` branches are not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `02a8bdf` (PR #91 merged).
+
+Scope (new, isolated namespace; no peer namespace file is edited): `nfl-price-snapshot/`. One additive root change: a nav link to `nfl-price-snapshot/index.html` in the root `index.html` "NFL research" group.
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Repo review of NFL namespaces + claim this scope | in progress | arena/19ae73ae-own4 | COORDINATION.md (this entry) |
+| N2 | Official data collection: standings, Week 10 schedule & scores, Week 10 injuries from nfl.com | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/official/*.json` |
+| N3 | Price snapshot store (opener/closer per originated market) + verified results feed | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/price_snapshots.json`, `results_feed.json`, `engine/` |
+| N4 | Originate side → total → moneyline; publish fair line / market line / difference columns | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/originated_lines.json`, `engine/originate.py` |
+| N5 | Signal vs staking separation in the leaderboard | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/leaderboard.json` |
+| N6 | Injury replacement depth tracking (2nd/3rd/4th string) | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/injury_depth.json` |
+| N7 | Correlations only from officially sourced numbers, publish n with each value | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/correlations.json` |
+| N8 | Demotion gate (live → paper) | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/gates.json` |
+| N9 | Suggestions section + questions/infos/answers register + executive summary | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/data/derived/{suggestions,questions,requirements}.json` |
+| N10 | GitHub Pages static site: landing + category subpages + Flagged for Review | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/build.py`, `pages/*.html`, `assets/*` |
+| N11 | Line-by-line verification + broken-link check | unclaimed | arena/19ae73ae-own4 | `nfl-price-snapshot/verify.py` |
+| N12 | PR → merge → GitHub Pages deploy confirmation → record here | unclaimed | arena/19ae73ae-own4 | COORDINATION.md, root `index.html` |
+
+### Log
+
+- 2026-11-14 — session `arena/19ae73ae-own4` surveyed the repo: 15 existing NFL namespaces are peer-owned and read-only for this session. `nfl-origination/` already implements questions, suggestions, executive summary, correlations-with-n, and leaderboard, but does NOT implement a price snapshot store, a verified results feed, signal-vs-staking leaderboard separation, injury replacement depth, or a demotion gate — those are the gap this session fills under a new namespace rather than editing peer work. Confirmed `fetch_page` can read official nfl.com pages (standings, schedule, injuries). Session id `arena/19ae73ae-own4` was not previously present in COORDINATION.md; this entry is the claim. No peer file edited yet.
+
+## Session `arena/6f0b80b2-own4` — NFL gap-closure namespace `nfl-ledger/` (claim, 2026-11-14 UTC)
+
+Session ID: `arena/6f0b80b2-own4` · Branch: `arena/6f0b80b2-own4` (session-pinned; base `main` at `02a8bdf`).
+
+### Survey before claiming
+- 15+ NFL namespaces already exist; `nfl-command/` covers singles/parlays/props gates, correlations with n, questions, suggestions, flags and a verifier.
+- Verified gaps (grep of the whole repo, 2026-11-14): **no demotion gate** (0 hits for "demotion"); **no paper-trading stage**; **no price-snapshot store** (opening/closing; only mentioned as a suggestion); **no separate signal vs staking leaderboard columns**; **no fair / market / difference column layout** with origination order side → total → moneyline; **no replacement-depth rank** (depth page exists but starter/backup is "unverified" on every row).
+- Decision: do NOT edit any peer namespace. Build an isolated additive namespace.
+
+### Task board
+| # | Task | Status | Owner | Files touched |
+|---|------|--------|-------|---------------|
+| L1 | Survey + claim (this entry) | done | arena/6f0b80b2-own4 | COORDINATION.md |
+| L2 | Price-snapshot store: opening/closing schema, validator, empty store (no invented prices) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/price_snapshots*`, `nfl-ledger/engine/*` |
+| L3 | Results feed: copy of the 137 verified 2026 games with nfl.com URLs; live spot-check of official pages | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/results_feed.*` |
+| L4 | Origination order (side → total → moneyline), fair / market / difference columns (market blank) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/originated_lines.*` |
+| L5 | Leaderboard split: signal vs staking; demotion gate (live → paper) with rules and state machine | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/gates_demotion.json`, `nfl-ledger/engine/demotion.py` |
+| L6 | Replacement-depth schema (depth rank of replacement) + correlations with n (reuse nfl-command) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/replacement_depth.*`, `nfl-ledger/data/correlations.json` |
+| L7 | Questions / information gaps, suggestions board (pick a path, nothing implemented), executive summary, Flagged for Review | claimed | arena/6f0b80b2-own4 | `nfl-ledger/**` |
+| L8 | Site build + verifier (every table row has an https source link or an explicit "unverified" marker; no broken links) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/**` |
+| L9 | Root navigation link | requested (not edited) | — | `index.html` owned by the integration session; generator (`verification/build.py`) would drop hand edits. See request R-L1. |
+
+### Requests logged for other sessions (no peer file edited)
+- **R-L1** (integration session): add a link to `nfl-ledger/index.html` in the root NFL navigation group in `verification/build.py`.
+
+### Completion record · `arena/6f0b80b2-own4` · 2026-11-14 (UTC)
+
+| # | Task | Status | Result |
+|---|------|--------|--------|
+| L2 | Price-snapshot store | done | Schema + validation rules + **0 rows** (no official price source; F-L1). `nfl-ledger/data/price_snapshots*`. |
+| L3 | Results feed | done | 137 games (W1–W10) with nfl.com game-page links; standings reconciliation **32/32** exact against the live nfl.com standings. |
+| L4 | Origination order + fair/market/difference | done | Week 11: 13 games, order side → total → moneyline; market columns blank. Slate matches the official Week 11 schedule (13 games + 6 byes). |
+| L5 | Signal/staking split + demotion gate | done | Ranking uses signal only; D1–D6 demotion and P1–P5 promotion in `engine/demotion.py`, 13 unit tests (synthetic inputs). |
+| L6 | Replacement depth + correlations with n | done (fields blank) | 25 Week 10 Out/Questionable rows; depth fields blank (F-L2). Correlations copied with n = 105 each. |
+| L7 | Questions, suggestions, exec summary, flags | done | Q-L1…Q-L8; SUG-L1…L6 (nothing implemented); exec summary page; F-L1…F-L9. |
+| L8 | Site build + verifier | done | 13 pages; `verify.py` OK: 275/275 data rows with an https source link; 0 broken local links; 0 unsourced market values. Build is byte-identical on rerun. |
+
+**Sources (all fetched 2026-11-14 unless noted):** https://www.nfl.com/standings/ · https://www.nfl.com/schedules/2026/by-week/week-11 · https://www.nfl.com/injuries/ · https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 · peer data `nfl-command/data/` (captured 2026-11-13, read-only).
+
+**Verification performed:** 32-club standings recomputed from the 137-game archive (0 mismatches). Week 11 slate compared with the official schedule (13/13; "AZ" = Arizona on nfl.com). Week 10 injury spot check: 7 of 9 rows match; 2 differ (F-L9). W1 final re-read (NE 10 – SEA 13) matches the archive.
+
+**Irregularities (published on `nfl-ledger/pages/flagged.html`, non-blocking):** F-L1 no price data; F-L2 no official depth chart found; F-L3 model signal not proven (n=30); F-L4 root generator drops NFL links, and nfl-ledger is not linked from the root page; F-L5 "frozen before backtest" not checkable in this clone; F-L9 two injury rows differ from the live report.
+
+**Requests (not edited):** R-L1 — add `nfl-ledger/index.html` to the root NFL navigation in `verification/build.py` (integration session).
+
+**Deviations, stated plainly:** the requested `session-<id>/<task>` branch naming is not used; the branch is pinned to `arena/6f0b80b2-own4` by this session. The full brief (live odds, validated strategies, rewards, a complete depth-chart model) cannot be completed from official sources; those items are blank and flagged, not invented.
+
+### PR and merge record
+- PR **#94** https://github.com/sassnarep3-star/Own4/pull/94 — merged with a merge commit (`gh pr merge 94 --merge`) into `main` as `e766bcc` at 2026-11-14 UTC.
+- Checks before merge: `verify` ×2, `validate`, `audit` — all SUCCESS; mergeable CLEAN.
+- GitHub Pages: build status `built`; live-confirmed: https://sassnarep3-star.github.io/Own4/nfl-ledger/ and `pages/flagged.html` render with source links.
+- Record of this entry: follow-up PR (see the next log line).
+
+### Integration note — merge with `main` at 2026-11-14 (this session)
+
+Merging `main` brought in two peer namespaces cut after this branch was taken:
+`nfl-price-snapshot/` (session `arena/19ae73ae-own4`, PR #94) and `nfl-ledger/`
+(PR #96). Both are **substantively the same brief as `nfl-market/`** — price
+snapshots, results feed, origination order, split leaderboard, replacement depth,
+correlations, demotion gate. Three implementations now exist for one specification.
+
+What this merge did about it:
+- **Conflicts resolved as supersets.** `COORDINATION.md`: both sessions' claim and
+  progress records kept verbatim, nothing dropped (the file is append-only; the
+  conflict was two records appended at the same line). `verified/*.html`
+  regenerated from the merged generator rather than hand-merged.
+- **Root navigation made generator-owned.** `nfl-price-snapshot/` (15 pages) and
+  `nfl-ledger/` (13 pages) were reachable only as hand edits to `index.html`, so the
+  next regeneration would have dropped them — the recurring F-13 defect. They are
+  now registry rows in the `verification/build.py` NFL group alongside this
+  session's 13 `nfl-market/` links. Group renamed "18 workspaces (2026-11-14)".
+  Membership is included, not judged: this session does not choose between the
+  three.
+- **Not touched:** any file inside `nfl-price-snapshot/` or `nfl-ledger/`.
+- **Decision recorded:** D-1 (which workspace is canonical) is now more urgent, not
+  less: the count went 17 → 19 in one merge. Adding a fourth implementation would
+  be the worst available use of the next session.
+
+Verification after the merge: `verification/build.py` + `verification/verify_site.py`
+(346 rows, 0 broken links), `verification/assert_publication.py` unchanged, root
+`index.html` carries 97 NFL-namespace links, 0 missing targets.
+
+### Post-merge correction — `arena/d507f753-own4`, 2026-11-14
+
+PR **#97** merged (`d491337`) after all checks green (Rebuild-and-verify ×2, audit,
+validate, verify). GitHub Pages: status `built`; live-confirmed —
+`https://sassnarep3-star.github.io/Own4/nfl-market/pages/executive-summary.html`
+renders with its tables, source links and flags.
+
+One defect found by reading the deployed page rather than the local file: the
+`nfl-market/` copy (register and pages) still said **"seventeen workspaces"** and
+"the root nav lists sixteen" — true when the branch was cut, false after the merge
+brought `nfl-price-snapshot/` and `nfl-ledger/`. Corrected to nineteen (with the
+note that three of them implement the same brief), register regenerated, pages
+rebuilt, gate still green (1,563 table numbers, all traceable). Recorded here
+rather than quietly amended; the same class of error (a count that was right at
+authoring time) is why QM-13 now states its as-of date.
+
+Integration for this session is therefore complete: claim → build → gate → PR →
+merge → Pages confirmed → correction logged.
+
+### Correction 2 — group label, `arena/d507f753-own4`, 2026-11-14
+
+The registry group label read "NFL research · 18 workspaces (2026-11-14)" while the
+group actually carries **nineteen** namespace directories (`nfl/` … `nfl-ledger/`,
+including the three same-brief implementations). Label corrected to 19; the count
+was verified by extracting the namespace slug from every row in the group and
+comparing the set to the directories on disk (19 in the group, 19 on disk, 0
+missing). Root `index.html` regenerated; `verification/verify_site.py` still passes
+(346 rows, 0 broken links). Shipping as a small follow-up PR so the merge history
+shows the fix rather than hiding it inside the previous merge.
 
 ---
+
+---
+
+## Session `arena-a437d20c-own4` — NFL core-requirements build (claim, 2026-11-14 UTC)
+
+Session ID: `arena-a437d20c-own4` · Branch: `arena/a437d20c-own4` (platform-pinned; the
+requested `session-<id>/<task>` naming is not creatable in this harness — same logged
+deviation as every prior session). Base: `main` at `02a8bdf` (after PR #91).
+
+Survey before claim (2026-11-14T21:32Z): all board claims are >60 min stale (last peer
+activity PR #93, `arena/582300df-own4`, last commit 2026-11-13T22:53Z — ~23 h). Open peer
+PRs: #93 (nfl-command-center), #29/#39/#43/#47/#56/#59 (earlier verticals, stale). This
+session claims the NFL core-requirements round below; peer namespaces stay read-only.
+
+Scope rule: this session edits only `COORDINATION.md` (append-only), a NEW isolated
+namespace `nfl-core/**`, and an additive, comment-marked nav block in root `index.html`.
+No peer namespace is edited.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| C1 | Repo survey + gap analysis vs the 8 core requirements | claimed | arena-a437d20c-own4 | `nfl-core/` |
+| C2 | Price-snapshot store: opening + closing numbers for every originated market | claimed | arena-a437d20c-own4 | `nfl-core/data/price_snapshots.*` |
+| C3 | Verified results feed (official finals) so backtests + ROI are computable | claimed | arena-a437d20c-own4 | `nfl-core/data/results_feed.*` |
+| C4 | Origination order side → total → moneyline; model fair line / market line / difference as separate columns | claimed | arena-a437d20c-own4 | `nfl-core/data/originations.*` |
+| C5 | Leaderboard separating signal quality from staking; validation gates; demotion gate (live → paper) | claimed | arena-a437d20c-own4 | `nfl-core/data/leaderboard*`, `nfl-core/data/gates.*` |
+| C6 | Replacement-depth tracking (2nd/3rd/4th string), not just the fact of replacement | claimed | arena-a437d20c-own4 | `nfl-core/data/depth*` |
+| C7 | Correlations from officially sourced numbers only, each value published with n | claimed | arena-a437d20c-own4 | `nfl-core/data/correlations_n.*` |
+| C8 | Questions / information / answers register + suggestions board with review-and-choose path | claimed | arena-a437d20c-own4 | `nfl-core/data/questions.*`, `suggestions.*` |
+| C9 | Site: clean landing + category subpages, tables, per-row source links, flagged page, exec summary | claimed | arena-a437d20c-own4 | `nfl-core/**` |
+| C10 | Line-by-line verification: every table row has an official source link; unconfirmed cells blank + flagged | claimed | arena-a437d20c-own4 | `nfl-core/verify.py` |
+| C11 | Final integration: re-verify combined tree, PR → main → merge, Pages deploy confirmation, record here | claimed | arena-a437d20c-own4 | `COORDINATION.md`, `index.html` (additive) |
+
+### Claim log
+
+- 2026-11-14T21:32Z — claimed C1–C11 after survey; claim pushed immediately (this commit).
+
+### Session arena-a437d20c-own4 — progress log (2026-11-14 UTC)
+
+- C1 done — gap analysis vs the 8 core requirements: price-snapshot store (open/close) did not
+  exist anywhere (peer captures had single-timestamp quotes); results feeds existed per
+  namespace but no settled join for ROI; fair/market/diff columns split across namespaces;
+  no signal/staking separation enforcing rank; depth strings partial; correlations had n but
+  mixed provenance; no demotion gate definition. Built `nfl-core/` implementing all 8 as
+  working stores + pages, reusing peer-verified archives with provenance kept.
+- C2–C8 done — `nfl-core/data/*`: price_snapshots_2026.csv (816 markets: 81 with OPEN,
+  489 with CLOSE, 411 settled), results_feed_2026.csv (272 games, 137 final),
+  originations_2026.csv (408 rows, seq 1 SIDE → 2 TOTAL → 3 MONEYLINE, fair/market/difference
+  columns), leaderboard_signal.csv + leaderboard_staking.csv (rank = z only), gates.csv
+  (G1–G8 validation + DG-1..DG-4 demotion: skill regression / negative CLV / drawdown /
+  data integrity), depth_week10.csv (replacement name + string from official club charts),
+  correlations_n.csv (every r with n; player-level blank + flagged), questions.csv (12 rows:
+  known / missing / what settles), suggestions.csv (10 rows, options + recommended path,
+  all review_status=proposed — nothing implemented before owner choice), flagged.csv (F-C01..F-C12).
+- C9 done — `nfl-core/` site: dashboard + 12 category subpages, every table row source-linked.
+  Root `index.html` received ONE additive comment-marked nav block (LOCAL ADDITION
+  session arena-a437d20c-own4); no peer file edited.
+- C10 done — `nfl-core/verify.py` 11/11 checks PASS (1,614/1,614 rows source-linked; internal
+  links resolve; results feed reconciled cell-by-cell vs official standings 32/32 teams
+  W-L-T and PF-PA exact, ΣW=ΣL=136 ΣT=2; never-infer blank policy; price-store invariants;
+  origination order + difference arithmetic; leaderboard sort = signal z).
+
+**Sources read live 2026-11-14 (transcribed in nfl-core/data/official_reads_2026-11-14.json):**
+nfl.com/standings/league/2026/REG (32 rows) · nfl.com/games/commanders-at-giants-2026-reg-10
+(final WAS 24-21 NYG, quarter box + previous-matchup NYG 27-27 WAS week-5 tie) ·
+nfl.com/injuries/ week 10 chunks 0-1 · detroitlions.com/team/depth-chart ·
+patriots.com/team/depth-chart · github.com/nflverse/nfldata DATASETS.md.
+
+**Verification performed:** as C10 above; plus game-URL slug patterns checked against live
+nfl.com pages; plus spread-sign convention established by (a) the DATASETS.md quote
+("a positive number means the home team was favored by that many points") and (b) a
+162-of-163 moneyline-consistency check across 2026 games (the 1 exception is a near-pick'em
+game NO@NYG, ML -112/-108).
+
+**Irregularities (published at nfl-core/pages/flagged.html, none blocking):**
+F-C01 week-10 pre-game quote lacks capture timestamp · F-C02 no opening lines exist for
+2026 weeks 1-9 (blank, not filled) · F-C03 13 settled rows have blank closing spread
+(spread settlement marked SETTLE-BLOCKED) · F-C04 CORRECTION of prior A-12: official club
+sites DO publish unofficial depth charts (league-level nfl.com route still 404) ·
+F-C05 RESOLVED prior A-06/Q-05: spread convention documented; "1.5 vs 2.5" is open-to-close
+movement · F-C06 rewards unfunded, 0 eligible · F-C07 moneyline columns undocumented in
+DATASETS.md (verified statistically instead) · F-C08 DET S Kerby Joseph / MIN QB replacement
+strings unverified (blank) · F-C09 player-prop prices do not exist (blank) · F-C10 depth
+strings verified for DET/NE only · F-C11 peer ARI/AZ + staleness notes inherited open ·
+F-C12 weeks 12-18 have fair lines but no captured market quotes yet (blank).
 
 ## Session arena/28a71529-own4 — build complete, 2026-11-14 UTC
 
