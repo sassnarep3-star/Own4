@@ -2582,3 +2582,30 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+---
+
+## Session `arena/65c4a22e-own4` — NFL markets: snapshot store, results feed, leaderboard separation, replacement depth, correlations, demotion gate (2026-11-14)
+
+Session ID: `arena/65c4a22e-own4` · Branch: `arena/65c4a22e-own4` (platform-pinned; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `02a8bdf` (after PR #91).
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| M1 | Board claim + repo survey (all 15 NFL namespaces inventoried; gaps vs this session's requirements identified) | in progress | arena/65c4a22e-own4 | COORDINATION.md (this entry) |
+| M2 | Fresh nflverse/nfldata fetch (games, closing lines, initial lines, standings, teams) with provenance sha + time; verified results feed (official-source link per row, verification status per row) | in progress | arena/65c4a22e-own4 | `nfl-markets/**` |
+| M3 | Price-snapshot store: one row per originated market per game — origination order (side→total→moneyline), model fair line, market open line, market close line, diff columns as separate columns, captured_at, source links, verification flags | in progress | arena/65c4a22e-own4 | `nfl-markets/**` |
+| M4 | Leaderboard separating SIGNAL (line-quality metrics) from STAKING (flat-stake ROI) with separate ranks, n, and luck controls; validation gates + demotion gate (live→paper) defined in config and evaluated | in progress | arena/65c4a22e-own4 | `nfl-markets/**` |
+| M5 | Injury/replacement-depth tracker: per absent starter, the DEPTH of the replacement (2nd/3rd/4th/none), team deficiency index by unit; official NFL.com injury report + third-party depth charts (flagged) | in progress | arena/65c4a22e-own4 | `nfl-markets/**` (read-only reuse of `nfl-arena/data/raw/*`) |
+| M6 | Correlations computed only from officially sourced numbers, n published with every value; third-party-line inputs kept in a separate flagged group | in progress | arena/65c4a22e-own4 | `nfl-markets/**` |
+| M7 | Suggestions review section + decisions register (questions, what we know / do not know, how to discover missing information) + executive summary + repo-review irregularities | in progress | arena/65c4a22e-own4 | `nfl-markets/**`, `EXECUTIVE_SUMMARY_NFL_MARKETS.md` |
+| M8 | Static site build (`nfl-markets/`), row-level source-link verification, broken-link check, tests | in progress | arena/65c4a22e-own4 | `nfl-markets/**` |
+| M9 | Root navigation integration: add `nfl-markets/` to `verification/build.py` NAV group and regenerate `index.html` + `verified/*.html` (superset-only; no peer link dropped) | in progress | arena/65c4a22e-own4 | `verification/build.py`, `index.html`, `verified/*.html` |
+| M10 | Final integration: PR from this branch to main, merge without waiting, confirm GitHub Pages build, record PR link + merge result here | unclaimed | arena/65c4a22e-own4 | COORDINATION.md |
+
+### Claim log
+
+- 2026-11-14 — Surveyed before claiming: `main` = `02a8bdf` (PR #91 merged). All prior NFL namespace claims on the board are done/merged or belong to closed sessions; no live overlapping claim found. Scope claimed above; peer namespaces are read-only for this session. Files: everything new lives in `nfl-markets/` (new namespace, no conflicts) + the one generator-owned nav edit (M9, additive) + append-only COORDINATION.md entries + one new root executive-summary file (M7).
+- Session constraints: single fixed branch (no per-task branches possible in this harness); all work committed to `arena/65c4a22e-own4` with small frequent commits; `git pull --rebase` before every push.
+
