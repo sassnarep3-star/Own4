@@ -3046,3 +3046,28 @@ P-15 16 overlapping NFL namespaces in one repository.
   are dropped by the next regeneration.
 * No peer session's files were edited. All new work is in the new `nfl-marketboard/` namespace.
 * GitHub Pages serves this repository from `main`; no deployment workflow was added or needed.
+
+### Merge record (requirement 20)
+
+* **PR:** <https://github.com/sassnarep3-star/Own4/pull/103>
+  (`arena/28a71529-own4` → `main`)
+* **Merged:** 2026-11-14T22:10:48Z, state MERGED, merge commit created without approval as
+  instructed.
+* **Conflicts met and resolved (two rounds, main moved twice):**
+  1. *Round 1* — 15 files conflicted: `index.html`, `COORDINATION.md`, 13 × `verified/*.html`.
+     Four peer sessions had landed on main while this branch built (nfl-core, nfl-market,
+     nfl-price-snapshot, nfl-ledger). `index.html` and `verified/*.html` are generator output,
+     and the merge of the generator (`verification/build.py`) itself was clean and carried every
+     session's nav group, so those 14 were resolved by **regenerating from the generator**. The
+     rebuilt `index.html` carries all five groups: nfl-marketboard 16 links, nfl-price-snapshot 15,
+     nfl-core 14, nfl-ledger 13, nfl-market 13. No peer link was dropped.
+  2. *COORDINATION.md* is an append-only log and was resolved by keeping main's entries in full
+     and appending this session's record after them. Done twice, once per round.
+* **Final integration checks after merge:** `engine/verify.py` → 16 pages, 1,750 tbody rows,
+  0 without an https source, 287 local refs, 0 broken, nav + footer on every page.
+  Full-repo link scan: 0 broken local links.
+* **GitHub Pages:** `https://sassnarep3-star.github.io/Own4/nfl-marketboard/index.html` —
+  deploy status `built`, page fetched and confirmed live. Root dashboard
+  `https://sassnarep3-star.github.io/Own4/` rebuilt with the new nav group.
+* **Flagged items did not block the merge.** All 15 (P-01 … P-15) are published on
+  <https://sassnarep3-star.github.io/Own4/nfl-marketboard/flagged.html> with source links.
