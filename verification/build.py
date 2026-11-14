@@ -138,7 +138,7 @@ NAV = [
     # (d) moves nfl-decisions/ out of "Retained workspaces". Merge 2026-11-13 with main
     # also folded in arena/22679198-own4's generator-owned "NFL origination" group.
     # Every link previously published is preserved; nothing was removed.
-    ("NFL research · 19 workspaces (2026-11-14)", [
+    ("NFL research · 20 workspaces (2026-11-14)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -250,6 +250,25 @@ NAV = [
         ("nfl-ledger/pages/flagged.html", "⚑ NFL Ledger — flagged", "legacy"),
         ("nfl-ledger/pages/sources.html", "NFL Ledger — sources", "legacy"),
         ("nfl-ledger/pages/executive-summary.html", "NFL Ledger — executive summary", "legacy"),
+        # Added 2026-11-14 by session arena-a437d20c-own4 (C11): the nfl-core
+        # namespace (price-snapshot store with open/close, verified results feed,
+        # origination order, signal/staking split, replacement depth, correlations
+        # with n, demotion gate, questions/suggestions/flagged). Generator-owned
+        # so a regeneration cannot drop these links (F-13 class).
+        ("nfl-core/index.html", "NFL Core — dashboard", "legacy"),
+        ("nfl-core/pages/executive-summary.html", "NFL Core — executive summary", "legacy"),
+        ("nfl-core/pages/origination.html", "NFL Core — origination (side→total→ML)", "legacy"),
+        ("nfl-core/pages/prices.html", "NFL Core — price snapshots (open/close)", "legacy"),
+        ("nfl-core/pages/results.html", "NFL Core — verified results feed", "legacy"),
+        ("nfl-core/pages/leaderboard.html", "NFL Core — leaderboard (signal vs staking)", "legacy"),
+        ("nfl-core/pages/gates.html", "NFL Core — validation & demotion gates", "legacy"),
+        ("nfl-core/pages/depth.html", "NFL Core — injuries & replacement depth", "legacy"),
+        ("nfl-core/pages/correlations.html", "NFL Core — correlations (with n)", "legacy"),
+        ("nfl-core/pages/questions.html", "NFL Core — questions & answers", "legacy"),
+        ("nfl-core/pages/suggestions.html", "NFL Core — suggestions board (decide first)", "legacy"),
+        ("nfl-core/pages/flagged.html", "⚑ NFL Core — flagged for review", "legacy"),
+        ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
+        ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),

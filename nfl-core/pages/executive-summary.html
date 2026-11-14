@@ -1,0 +1,33 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL Core Requirements</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body><header><h1><a href="../index.html">NFL Core Requirements · nfl-core</a></h1>
+<nav><a href="../index.html">Dashboard</a><a href="executive-summary.html" class="on">Executive summary</a><a href="origination.html">Origination (side→total→ML)</a><a href="prices.html">Price snapshots</a><a href="results.html">Results feed</a><a href="leaderboard.html">Leaderboard (signal vs staking)</a><a href="gates.html">Validation & demotion gates</a><a href="depth.html">Injuries & replacement depth</a><a href="correlations.html">Correlations (with n)</a><a href="questions.html">Questions & answers</a><a href="suggestions.html">Suggestions board</a><a href="d1-canonical-choice.html">D-1 canonical choice</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources & verification</a></nav></header><main><h2>Executive summary</h2><p class="lede">The state of the NFL origination system as of 2026-11-14, every claim source-linked. Companion markdown: <a href="../EXECUTIVE_SUMMARY.md">EXECUTIVE_SUMMARY.md</a>.</p><div class="note"><strong>Bottom line.</strong> The system now records, for every market it originates, an opening and a
+closing number with provenance and settlement, and a verified results feed that makes backtests and ROI computable at all.
+On the evidence available today, <strong>no strategy has yet cleared the luck barrier</strong> (best BH-adjusted p = 0.44),
+so the leaderboard currently ranks <em>skill signals</em> honestly and holds all rewards. One real signal worth continued
+paper tracking: unders in outdoor games with wind ≥ 15 mph (n=303, hit 55.4%, z=1.43) — not yet distinguishable from luck.
+Week 10 injury-driven deficiencies are concrete: Minnesota is down to backup quarterback (Kyler Murray Out, official report),
+Green Bay is without Josh Jacobs, Micah Parsons and center Sean Rhyan; Detroit is without center Cade Mays and corner D.J. Reed —
+each replacement's depth string is tracked on the depth page.</div><h3>What is solid (verified)</h3><ul><li>Results feed: 137 settled 2026 REG games, each row carrying its official nfl.com game URL; per-team W-L-T/PF/PA reconciled cell-by-cell against the official standings read 2026-11-14 (32/32 teams, ΣW=ΣL=136, ΣT=2).</li><li>Price-snapshot store: 816 market rows with OPEN/CLOSE columns; WAS@NYG shows the mechanism working (open NYG −2.5 → close NYG −1.5, settlement documented; resolves the older A-06 “1.5 vs 2.5” flag as open-vs-close movement).</li><li>Convention settled: spread_line positive = home favored (nflverse DATASETS.md, verified against 162/163 ML pairs).</li></ul><h3>What is deliberately blank (never inferred)</h3><ul><li>Opening lines for 2026 weeks 1–9: no capture exists anywhere in the repo (F-C02) — cells blank + flagged.</li><li>Player-prop prices: the NFL publishes none (A-13) — prop correlation rows blank + flagged.</li><li>Replacement depth strings where the club's own chart does not answer (e.g., DET S behind Kerby Joseph) — blank + flagged.</li></ul><h3>Decisions needed from the owner</h3><ul><li>Choose the demotion-gate thresholds (S-C04) — currently project-defined and armed.</li><li>Choose among the suggestions board paths before anything is implemented (suggestions.html).</li><li>Decide whether to license a closing-line feed (D2) to fill the opening/closing gap.</li></ul></main>
+<footer>Built 2026-11-14 by session arena-a437d20c-own4 · data rebuilt from nfl-core/build_data.py · site rebuilt from nfl-core/build_site.py<br>Every table row carries a source link. Unconfirmable values are blank and flagged — never inferred.</footer>
+<script>
+function wireFilter(inputId, tableId){
+  var q=document.getElementById(inputId), t=document.getElementById(tableId), c=document.getElementById(inputId+'-cnt');
+  if(!q||!t) return;
+  q.addEventListener('input',function(){
+    var s=q.value.toLowerCase(), rows=t.tBodies[0].rows, shown=0;
+    for (var i=0;i<rows.length;i++){
+      var hit=rows[i].innerText.toLowerCase().indexOf(s)>=0;
+      rows[i].style.display=hit?'':'none'; if(hit) shown++;
+    }
+    if(c) c.textContent=shown+' / '+rows.length+' rows';
+  });
+}
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('input[data-filter-table]').forEach(function(q){
+    wireFilter(q.id, q.getAttribute('data-filter-table'));
+  });
+});
+</script></body></html>
