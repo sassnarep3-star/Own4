@@ -101,3 +101,15 @@ items are published with official and repository links on `/verified/flagged.htm
 
 Research only — not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
 (https://www.ncpgambling.org/help-treatment).
+
+## NFL Book addendum (session arena/c8969a10-own4, 2026-11-14 UTC)
+
+**Price snapshots, verified results, gated origination.** `nfl-book/` publishes open/close snapshots for
+every originated Week-11 market (39 pairs, side→total→moneyline order enforced in code), a 137-game
+results feed with 32 games re-read line-by-line from official pages (160/160 standings cells match),
+and a signal-first leaderboard: S1 model-side accuracy 0.673 (n=104, CI 0.578–0.756, G2 pass,
+placebo p<0.002) with staking reported only under an assumed −110 price. Amendment A1 keeps rewards at
+0/1,000 while G7 (verified prices) is blocked — lucky staking cannot pay or mask signal. Correlations
+are official-only with n published; replacement depth is blank wherever official text does not state
+the string. Demotion gate D1 is armed. 13 suggestions await reviewer verdicts before implementation.
+Full detail: `nfl-book/EXECUTIVE_SUMMARY.md`; live after merge at /nfl-book/.

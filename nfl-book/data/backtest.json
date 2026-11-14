@@ -1,0 +1,4585 @@
+{
+ "dataset": "nfl_book_walkforward_backtest",
+ "title": "Walk-forward backtest, weeks 3-10 2026, official results only",
+ "built_utc": "2026-11-14",
+ "method": "For each week w in 3..10 the model is refitted on all games of weeks < w only; forecasts for week w are then scored. No future data enters any prediction (G3 leakage test below).",
+ "n_forecasts": 105,
+ "n_weeks": 8,
+ "price_note": "Staking uses the ASSUMED -110 price from data/strategies.json (flag FB-02); signal metrics use no prices at all.",
+ "leakage_test": {
+  "id": "G3",
+  "result": "pass",
+  "detail": "mutated 44 later results; 61 earlier forecasts unchanged=True",
+  "n_forecasts_compared": 61
+ },
+ "placebo": {
+  "S1": {
+   "placebo_p": 0.0,
+   "placebo_mean_roi": -0.0462,
+   "placebo_p95_roi": 0.1014,
+   "n_placebos": 500,
+   "g4_pass": true
+  },
+  "S2": {
+   "placebo_p": 0.792,
+   "placebo_mean_roi": -0.0462,
+   "placebo_p95_roi": 0.1014,
+   "n_placebos": 500,
+   "g4_pass": false
+  },
+  "S3": {
+   "placebo_p": 1.0,
+   "placebo_mean_roi": -0.0462,
+   "placebo_p95_roi": 0.1014,
+   "n_placebos": 500,
+   "g4_pass": false
+  }
+ },
+ "metrics": {
+  "S1": {
+   "n_bets": 105,
+   "n_decided": 104,
+   "wins": 70,
+   "signal_metric": "accuracy",
+   "accuracy": 0.6731,
+   "accuracy_ci95": [
+    0.5782,
+    0.7557
+   ],
+   "baseline": 0.5,
+   "baseline_name": "coin flip 0.500",
+   "g2_signal_pass": true,
+   "g2_direction": "above",
+   "staking": {
+    "price": "ASSUMED -110 (not a market price)",
+    "net_units": 32.6,
+    "staked_units": 114.4,
+    "roi": 0.285,
+    "roi_ci95": [
+     0.112,
+     0.4579
+    ],
+    "g5_pass": true,
+    "g4_placebo": {
+     "placebo_p": 0.0,
+     "placebo_mean_roi": -0.0462,
+     "placebo_p95_roi": 0.1014,
+     "n_placebos": 500,
+     "g4_pass": true
+    },
+    "g4_pass": true
+   },
+   "extra": {
+    "always_home_accuracy": 0.4808,
+    "posthoc_baseline_note": "POST-HOC diagnostic, not part of pre-registered G2",
+    "posthoc_better_record_accuracy": 0.6346,
+    "posthoc_n": 104
+   },
+   "g1_signal_n_pass": true,
+   "g1_staking_n_pass": true
+  },
+  "S2": {
+   "n_bets": 105,
+   "n_decided": 105,
+   "wins": 48,
+   "signal_metric": "accuracy",
+   "accuracy": 0.4571,
+   "accuracy_ci95": [
+    0.3651,
+    0.5523
+   ],
+   "baseline": 0.5,
+   "baseline_name": "calibration 0.500",
+   "g2_signal_pass": false,
+   "g2_direction": "not significant",
+   "staking": {
+    "price": "ASSUMED -110 (not a market price)",
+    "net_units": -14.7,
+    "staked_units": 115.5,
+    "roi": -0.1273,
+    "roi_ci95": [
+     -0.3101,
+     0.0555
+    ],
+    "g5_pass": false,
+    "g4_placebo": {
+     "placebo_p": 0.792,
+     "placebo_mean_roi": -0.0462,
+     "placebo_p95_roi": 0.1014,
+     "n_placebos": 500,
+     "g4_pass": false
+    },
+    "g4_pass": false
+   },
+   "extra": {
+    "total_mae_model": 21.631,
+    "total_mae_baseline": 11.122,
+    "over_rate": 0.4571
+   },
+   "g1_signal_n_pass": true,
+   "g1_staking_n_pass": true
+  },
+  "S3": {
+   "n_bets": 105,
+   "n_decided": 104,
+   "wins": 34,
+   "signal_metric": "accuracy",
+   "accuracy": 0.3269,
+   "accuracy_ci95": [
+    0.2443,
+    0.4218
+   ],
+   "baseline": 0.5,
+   "baseline_name": "0.500",
+   "g2_signal_pass": true,
+   "g2_direction": "below",
+   "staking": {
+    "price": "ASSUMED -110 (not a market price)",
+    "net_units": -43.0,
+    "staked_units": 114.4,
+    "roi": -0.3759,
+    "roi_ci95": [
+     -0.5488,
+     -0.2029
+    ],
+    "g5_pass": false,
+    "g4_placebo": {
+     "placebo_p": 1.0,
+     "placebo_mean_roi": -0.0462,
+     "placebo_p95_roi": 0.1014,
+     "n_placebos": 500,
+     "g4_pass": false
+    },
+    "g4_pass": false
+   },
+   "extra": {
+    "interpretation": "mirror of S1: the model underdog's win rate"
+   },
+   "g1_signal_n_pass": true,
+   "g1_staking_n_pass": true
+  },
+  "S4": {
+   "n_bets": 7,
+   "n_decided": 7,
+   "wins": 4,
+   "both_legs_rate": 0.5714,
+   "rate_ci95": [
+    0.2505,
+    0.8418
+   ],
+   "independence_product_note": "baseline = product of legs' empirical win rates (computed on the same weeks, reported in extra)",
+   "g1_staking_pass": false,
+   "staking": {
+    "price": "ASSUMED (10/11)^2 parlay (not a market price)",
+    "net_units": 7.579,
+    "staked_units": 7.0,
+    "roi": 1.0826,
+    "g5_pass": null
+   },
+   "g2_signal_pass": false,
+   "g2_direction": "n too small for G1",
+   "g1_signal_n_pass": false,
+   "g1_staking_n_pass": false
+  },
+  "S5": {
+   "status": "BLOCKED",
+   "signal": null,
+   "staking": null,
+   "blocked_reason": "no official player-prop prices (FB-05); cannot be validated or settled"
+  }
+ },
+ "forecasts": [
+  {
+   "game_id": "W03-ATL-GB",
+   "week": 3,
+   "date": "2026-09-24",
+   "away": "ATL",
+   "home": "GB",
+   "neutral": false,
+   "away_pts": 35,
+   "home_pts": 14,
+   "actual_margin": -21,
+   "actual_total": 49,
+   "p_home": 0.967354,
+   "pred_margin": 22.8275,
+   "fair_total": 46.3243,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-AZ-SF",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "AZ",
+   "home": "SF",
+   "neutral": false,
+   "away_pts": 30,
+   "home_pts": 36,
+   "actual_margin": 6,
+   "actual_total": 66,
+   "p_home": 0.631697,
+   "pred_margin": 4.1655,
+   "fair_total": -43.6735,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-BAL-DAL",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "BAL",
+   "home": "DAL",
+   "neutral": true,
+   "away_pts": 34,
+   "home_pts": 31,
+   "actual_margin": -3,
+   "actual_total": 65,
+   "p_home": 0.327381,
+   "pred_margin": -5.5378,
+   "fair_total": 5.1457,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-CAR-CLE",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "CAR",
+   "home": "CLE",
+   "neutral": false,
+   "away_pts": 18,
+   "home_pts": 21,
+   "actual_margin": 3,
+   "actual_total": 39,
+   "p_home": 0.024099,
+   "pred_margin": -24.4669,
+   "fair_total": 76.3652,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-CIN-PIT",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "CIN",
+   "home": "PIT",
+   "neutral": false,
+   "away_pts": 27,
+   "home_pts": 30,
+   "actual_margin": 3,
+   "actual_total": 57,
+   "p_home": 0.023787,
+   "pred_margin": -24.5355,
+   "fair_total": 80.3649,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-HOU-IND",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "HOU",
+   "home": "IND",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 19,
+   "actual_margin": 2,
+   "actual_total": 36,
+   "p_home": 0.489189,
+   "pred_margin": -0.3357,
+   "fair_total": 54.0,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-KC-MIA",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "KC",
+   "home": "MIA",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 10,
+   "actual_margin": -14,
+   "actual_total": 34,
+   "p_home": 2.4e-05,
+   "pred_margin": -50.3677,
+   "fair_total": 94.3091,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-LA-DEN",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LA",
+   "home": "DEN",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 30,
+   "actual_margin": 4,
+   "actual_total": 56,
+   "p_home": 0.000134,
+   "pred_margin": -45.1312,
+   "fair_total": -24.6335,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-LAC-BUF",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LAC",
+   "home": "BUF",
+   "neutral": false,
+   "away_pts": 16,
+   "home_pts": 24,
+   "actual_margin": 8,
+   "actual_total": 40,
+   "p_home": 0.972996,
+   "pred_margin": 23.8618,
+   "fair_total": 113.3643,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-LV-NO",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LV",
+   "home": "NO",
+   "neutral": false,
+   "away_pts": 35,
+   "home_pts": 27,
+   "actual_margin": -8,
+   "actual_total": 62,
+   "p_home": 0.84088,
+   "pred_margin": 12.3607,
+   "fair_total": 0.6909,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-MIN-TB",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "MIN",
+   "home": "TB",
+   "neutral": false,
+   "away_pts": 23,
+   "home_pts": 16,
+   "actual_margin": -7,
+   "actual_total": 39,
+   "p_home": 0.001299,
+   "pred_margin": -37.2967,
+   "fair_total": 22.3104,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-NE-JAX",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "NE",
+   "home": "JAX",
+   "neutral": false,
+   "away_pts": 6,
+   "home_pts": 35,
+   "actual_margin": 29,
+   "actual_total": 41,
+   "p_home": 0.238612,
+   "pred_margin": -8.8025,
+   "fair_total": -10.3647,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-NYJ-DET",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "NYJ",
+   "home": "DET",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 31,
+   "actual_margin": 7,
+   "actual_total": 55,
+   "p_home": 0.511915,
+   "pred_margin": 0.3699,
+   "fair_total": -10.6892,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-SEA-WAS",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "SEA",
+   "home": "WAS",
+   "neutral": false,
+   "away_pts": 31,
+   "home_pts": 33,
+   "actual_margin": 2,
+   "actual_total": 64,
+   "p_home": 0.008282,
+   "pred_margin": -29.6759,
+   "fair_total": 138.9983,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-TEN-NYG",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "TEN",
+   "home": "NYG",
+   "neutral": false,
+   "away_pts": 7,
+   "home_pts": 12,
+   "actual_margin": 5,
+   "actual_total": 19,
+   "p_home": 0.969296,
+   "pred_margin": 23.1655,
+   "fair_total": 139.3226,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W03-PHI-CHI",
+   "week": 3,
+   "date": "2026-09-28",
+   "away": "PHI",
+   "home": "CHI",
+   "neutral": false,
+   "away_pts": 7,
+   "home_pts": 27,
+   "actual_margin": 20,
+   "actual_total": 34,
+   "p_home": 0.968357,
+   "pred_margin": 23.0,
+   "fair_total": -0.9992,
+   "mean_total_train": 44.9375,
+   "n_train": 32
+  },
+  {
+   "game_id": "W04-PIT-CLE",
+   "week": 4,
+   "date": "2026-10-01",
+   "away": "PIT",
+   "home": "CLE",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 27,
+   "actual_margin": 3,
+   "actual_total": 51,
+   "p_home": 0.77532,
+   "pred_margin": 7.0145,
+   "fair_total": 32.904,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-AZ-NYG",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "AZ",
+   "home": "NYG",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 36,
+   "actual_margin": 12,
+   "actual_total": 60,
+   "p_home": 0.575752,
+   "pred_margin": 1.7714,
+   "fair_total": 12.0078,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-DAL-HOU",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DAL",
+   "home": "HOU",
+   "neutral": false,
+   "away_pts": 34,
+   "home_pts": 30,
+   "actual_margin": -4,
+   "actual_total": 64,
+   "p_home": 0.227918,
+   "pred_margin": -6.9147,
+   "fair_total": 62.1826,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-DEN-SF",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DEN",
+   "home": "SF",
+   "neutral": false,
+   "away_pts": 14,
+   "home_pts": 24,
+   "actual_margin": 10,
+   "actual_total": 38,
+   "p_home": 0.300285,
+   "pred_margin": -4.8549,
+   "fair_total": 47.0806,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-DET-CAR",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DET",
+   "home": "CAR",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 32,
+   "actual_margin": 6,
+   "actual_total": 58,
+   "p_home": 0.743648,
+   "pred_margin": 6.0701,
+   "fair_total": 101.7718,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-GB-TB",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "GB",
+   "home": "TB",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 14,
+   "actual_margin": -3,
+   "actual_total": 31,
+   "p_home": 0.935422,
+   "pred_margin": 14.0704,
+   "fair_total": 102.9695,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-IND-WAS",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "IND",
+   "home": "WAS",
+   "neutral": true,
+   "away_pts": 30,
+   "home_pts": 13,
+   "actual_margin": -17,
+   "actual_total": 43,
+   "p_home": 0.33514,
+   "pred_margin": -3.9479,
+   "fair_total": 50.9281,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-JAX-CIN",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "JAX",
+   "home": "CIN",
+   "neutral": false,
+   "away_pts": 22,
+   "home_pts": 17,
+   "actual_margin": -5,
+   "actual_total": 39,
+   "p_home": 0.016006,
+   "pred_margin": -19.8826,
+   "fair_total": 57.0812,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-KC-LV",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "KC",
+   "home": "LV",
+   "neutral": false,
+   "away_pts": 30,
+   "home_pts": 27,
+   "actual_margin": -3,
+   "actual_total": 57,
+   "p_home": 0.217225,
+   "pred_margin": -7.2474,
+   "fair_total": 79.7954,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-LA-PHI",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "LA",
+   "home": "PHI",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 20,
+   "actual_margin": -4,
+   "actual_total": 44,
+   "p_home": 0.012968,
+   "pred_margin": -20.6512,
+   "fair_total": 62.0035,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-LAC-SEA",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "LAC",
+   "home": "SEA",
+   "neutral": false,
+   "away_pts": 23,
+   "home_pts": 30,
+   "actual_margin": 7,
+   "actual_total": 53,
+   "p_home": 0.948264,
+   "pred_margin": 15.0979,
+   "fair_total": 37.7495,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-MIA-MIN",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "MIA",
+   "home": "MIN",
+   "neutral": false,
+   "away_pts": 10,
+   "home_pts": 15,
+   "actual_margin": 5,
+   "actual_total": 25,
+   "p_home": 0.956791,
+   "pred_margin": 15.8986,
+   "fair_total": -8.0604,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-NE-BUF",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "NE",
+   "home": "BUF",
+   "neutral": false,
+   "away_pts": 29,
+   "home_pts": 26,
+   "actual_margin": -3,
+   "actual_total": 55,
+   "p_home": 0.464482,
+   "pred_margin": -0.8266,
+   "fair_total": 25.104,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-NYJ-CHI",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "NYJ",
+   "home": "CHI",
+   "neutral": false,
+   "away_pts": 12,
+   "home_pts": 23,
+   "actual_margin": 11,
+   "actual_total": 35,
+   "p_home": 0.994519,
+   "pred_margin": 23.5881,
+   "fair_total": 23.9465,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-TEN-BAL",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "TEN",
+   "home": "BAL",
+   "neutral": false,
+   "away_pts": 18,
+   "home_pts": 24,
+   "actual_margin": 6,
+   "actual_total": 42,
+   "p_home": 0.982506,
+   "pred_margin": 19.5511,
+   "fair_total": 65.0231,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W04-ATL-NO",
+   "week": 4,
+   "date": "2026-10-05",
+   "away": "ATL",
+   "home": "NO",
+   "neutral": false,
+   "away_pts": 45,
+   "home_pts": 24,
+   "actual_margin": -21,
+   "actual_total": 69,
+   "p_home": 0.935965,
+   "pred_margin": 14.1104,
+   "fair_total": 3.7595,
+   "mean_total_train": 45.7083,
+   "n_train": 48
+  },
+  {
+   "game_id": "W05-TB-DAL",
+   "week": 5,
+   "date": "2026-10-08",
+   "away": "TB",
+   "home": "DAL",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 16,
+   "actual_margin": -8,
+   "actual_total": 40,
+   "p_home": 0.676177,
+   "pred_margin": 4.19,
+   "fair_total": 61.6595,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-BAL-ATL",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "BAL",
+   "home": "ATL",
+   "neutral": false,
+   "away_pts": 30,
+   "home_pts": 23,
+   "actual_margin": -7,
+   "actual_total": 53,
+   "p_home": 0.492882,
+   "pred_margin": -0.1636,
+   "fair_total": 35.1499,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-CHI-GB",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CHI",
+   "home": "GB",
+   "neutral": false,
+   "away_pts": 7,
+   "home_pts": 31,
+   "actual_margin": 24,
+   "actual_total": 38,
+   "p_home": 0.00941,
+   "pred_margin": -21.5357,
+   "fair_total": 52.7399,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-CIN-MIA",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CIN",
+   "home": "MIA",
+   "neutral": false,
+   "away_pts": 31,
+   "home_pts": 24,
+   "actual_margin": -7,
+   "actual_total": 55,
+   "p_home": 0.165209,
+   "pred_margin": -8.9227,
+   "fair_total": 36.4412,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-CLE-NYJ",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CLE",
+   "home": "NYJ",
+   "neutral": false,
+   "away_pts": 12,
+   "home_pts": 17,
+   "actual_margin": 5,
+   "actual_total": 29,
+   "p_home": 0.330083,
+   "pred_margin": -4.0309,
+   "fair_total": 31.7983,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-DEN-LAC",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "DEN",
+   "home": "LAC",
+   "neutral": false,
+   "away_pts": 23,
+   "home_pts": 17,
+   "actual_margin": -6,
+   "actual_total": 40,
+   "p_home": 0.047897,
+   "pred_margin": -15.2697,
+   "fair_total": 24.538,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-DET-AZ",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "DET",
+   "home": "AZ",
+   "neutral": false,
+   "away_pts": 45,
+   "home_pts": 21,
+   "actual_margin": -24,
+   "actual_total": 66,
+   "p_home": 0.348465,
+   "pred_margin": -3.5705,
+   "fair_total": 60.8993,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-HOU-TEN",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "HOU",
+   "home": "TEN",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 3,
+   "actual_margin": -23,
+   "actual_total": 29,
+   "p_home": 0.387217,
+   "pred_margin": -2.6273,
+   "fair_total": 32.3544,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-IND-PIT",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "IND",
+   "home": "PIT",
+   "neutral": false,
+   "away_pts": 22,
+   "home_pts": 34,
+   "actual_margin": 12,
+   "actual_total": 56,
+   "p_home": 0.675759,
+   "pred_margin": 4.1793,
+   "fair_total": 59.9788,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-LV-NE",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "LV",
+   "home": "NE",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 45,
+   "actual_margin": 28,
+   "actual_total": 62,
+   "p_home": 0.345649,
+   "pred_margin": -3.6405,
+   "fair_total": 34.6973,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-MIN-NO",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "MIN",
+   "home": "NO",
+   "neutral": false,
+   "away_pts": 23,
+   "home_pts": 13,
+   "actual_margin": -10,
+   "actual_total": 36,
+   "p_home": 0.072797,
+   "pred_margin": -13.3415,
+   "fair_total": 47.4616,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-NYG-WAS",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "NYG",
+   "home": "WAS",
+   "neutral": false,
+   "away_pts": 27,
+   "home_pts": 27,
+   "actual_margin": 0,
+   "actual_total": 54,
+   "p_home": 0.323837,
+   "pred_margin": -4.1896,
+   "fair_total": 38.6506,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-PHI-JAX",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "PHI",
+   "home": "JAX",
+   "neutral": true,
+   "away_pts": 17,
+   "home_pts": 19,
+   "actual_margin": 2,
+   "actual_total": 36,
+   "p_home": 0.979231,
+   "pred_margin": 18.6849,
+   "fair_total": 39.5569,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-SF-SEA",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "SF",
+   "home": "SEA",
+   "neutral": false,
+   "away_pts": 32,
+   "home_pts": 29,
+   "actual_margin": -3,
+   "actual_total": 61,
+   "p_home": 0.205488,
+   "pred_margin": -7.5375,
+   "fair_total": 56.6902,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W05-BUF-LA",
+   "week": 5,
+   "date": "2026-10-12",
+   "away": "BUF",
+   "home": "LA",
+   "neutral": false,
+   "away_pts": 37,
+   "home_pts": 34,
+   "actual_margin": -3,
+   "actual_total": 71,
+   "p_home": 0.793127,
+   "pred_margin": 7.493,
+   "fair_total": 75.4418,
+   "mean_total_train": 46.2188,
+   "n_train": 64
+  },
+  {
+   "game_id": "W06-SEA-DEN",
+   "week": 6,
+   "date": "2026-10-15",
+   "away": "SEA",
+   "home": "DEN",
+   "neutral": false,
+   "away_pts": 14,
+   "home_pts": 17,
+   "actual_margin": 3,
+   "actual_total": 31,
+   "p_home": 0.523638,
+   "pred_margin": 0.6124,
+   "fair_total": 41.6388,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-AZ-LA",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "AZ",
+   "home": "LA",
+   "neutral": false,
+   "away_pts": 18,
+   "home_pts": 16,
+   "actual_margin": -2,
+   "actual_total": 34,
+   "p_home": 0.933463,
+   "pred_margin": 15.515,
+   "fair_total": 59.5785,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-BAL-CLE",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "BAL",
+   "home": "CLE",
+   "neutral": false,
+   "away_pts": 10,
+   "home_pts": 13,
+   "actual_margin": 3,
+   "actual_total": 23,
+   "p_home": 0.591235,
+   "pred_margin": 2.3831,
+   "fair_total": 44.8329,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-BUF-LV",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "BUF",
+   "home": "LV",
+   "neutral": false,
+   "away_pts": 33,
+   "home_pts": 30,
+   "actual_margin": -3,
+   "actual_total": 63,
+   "p_home": 0.366514,
+   "pred_margin": -3.5232,
+   "fair_total": 74.1737,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-CAR-PHI",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "CAR",
+   "home": "PHI",
+   "neutral": false,
+   "away_pts": 25,
+   "home_pts": 14,
+   "actual_margin": -11,
+   "actual_total": 39,
+   "p_home": 0.121598,
+   "pred_margin": -12.0542,
+   "fair_total": 49.7097,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-CHI-ATL",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "CHI",
+   "home": "ATL",
+   "neutral": false,
+   "away_pts": 31,
+   "home_pts": 23,
+   "actual_margin": -8,
+   "actual_total": 54,
+   "p_home": 0.347032,
+   "pred_margin": -4.0629,
+   "fair_total": 44.4944,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-DAL-GB",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "DAL",
+   "home": "GB",
+   "neutral": false,
+   "away_pts": 13,
+   "home_pts": 23,
+   "actual_margin": 10,
+   "actual_total": 36,
+   "p_home": 0.698485,
+   "pred_margin": 5.3715,
+   "fair_total": 57.5427,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-HOU-JAX",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "HOU",
+   "home": "JAX",
+   "neutral": true,
+   "away_pts": 34,
+   "home_pts": 31,
+   "actual_margin": -3,
+   "actual_total": 65,
+   "p_home": 0.976491,
+   "pred_margin": 20.5148,
+   "fair_total": 30.9305,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-LAC-KC",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "LAC",
+   "home": "KC",
+   "neutral": false,
+   "away_pts": 6,
+   "home_pts": 22,
+   "actual_margin": 16,
+   "actual_total": 28,
+   "p_home": 0.962041,
+   "pred_margin": 18.3326,
+   "fair_total": 36.9411,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-NO-NYG",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "NO",
+   "home": "NYG",
+   "neutral": false,
+   "away_pts": 34,
+   "home_pts": 27,
+   "actual_margin": -7,
+   "actual_total": 61,
+   "p_home": 0.478965,
+   "pred_margin": -0.5449,
+   "fair_total": 43.1883,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-NYJ-NE",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "NYJ",
+   "home": "NE",
+   "neutral": false,
+   "away_pts": 19,
+   "home_pts": 26,
+   "actual_margin": 7,
+   "actual_total": 45,
+   "p_home": 0.859933,
+   "pred_margin": 11.1555,
+   "fair_total": 27.9266,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-PIT-TB",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "PIT",
+   "home": "TB",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 19,
+   "actual_margin": -7,
+   "actual_total": 45,
+   "p_home": 0.459864,
+   "pred_margin": -1.0409,
+   "fair_total": 37.9909,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-TEN-IND",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "TEN",
+   "home": "IND",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 20,
+   "actual_margin": -6,
+   "actual_total": 46,
+   "p_home": 0.812492,
+   "pred_margin": 9.163,
+   "fair_total": 51.0323,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W06-WAS-SF",
+   "week": 6,
+   "date": "2026-10-19",
+   "away": "WAS",
+   "home": "SF",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 23,
+   "actual_margin": 6,
+   "actual_total": 40,
+   "p_home": 0.932943,
+   "pred_margin": 15.4735,
+   "fair_total": 65.2176,
+   "mean_total_train": 46.6329,
+   "n_train": 79
+  },
+  {
+   "game_id": "W07-NE-CHI",
+   "week": 7,
+   "date": "2026-10-22",
+   "away": "NE",
+   "home": "CHI",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 30,
+   "actual_margin": 6,
+   "actual_total": 54,
+   "p_home": 0.472463,
+   "pred_margin": -0.6994,
+   "fair_total": 40.6808,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-CIN-BAL",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "CIN",
+   "home": "BAL",
+   "neutral": false,
+   "away_pts": 35,
+   "home_pts": 13,
+   "actual_margin": -22,
+   "actual_total": 48,
+   "p_home": 0.307993,
+   "pred_margin": -5.0777,
+   "fair_total": 49.0741,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-CLE-TEN",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "CLE",
+   "home": "TEN",
+   "neutral": false,
+   "away_pts": 27,
+   "home_pts": 24,
+   "actual_margin": -3,
+   "actual_total": 51,
+   "p_home": 0.106171,
+   "pred_margin": -12.6264,
+   "fair_total": 30.622,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-DEN-AZ",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "DEN",
+   "home": "AZ",
+   "neutral": false,
+   "away_pts": 30,
+   "home_pts": 16,
+   "actual_margin": -14,
+   "actual_total": 46,
+   "p_home": 0.148789,
+   "pred_margin": -10.5458,
+   "fair_total": 45.4887,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-GB-DET",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "GB",
+   "home": "DET",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 20,
+   "actual_margin": 3,
+   "actual_total": 37,
+   "p_home": 0.543262,
+   "pred_margin": 1.1001,
+   "fair_total": 53.6726,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-IND-MIN",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "IND",
+   "home": "MIN",
+   "neutral": false,
+   "away_pts": 10,
+   "home_pts": 16,
+   "actual_margin": 6,
+   "actual_total": 26,
+   "p_home": 0.964011,
+   "pred_margin": 18.216,
+   "fair_total": 46.0785,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-KC-SEA",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "KC",
+   "home": "SEA",
+   "neutral": false,
+   "away_pts": 3,
+   "home_pts": 20,
+   "actual_margin": 17,
+   "actual_total": 23,
+   "p_home": 0.377345,
+   "pred_margin": -3.1634,
+   "fair_total": 44.9309,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-LA-LV",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "LA",
+   "home": "LV",
+   "neutral": false,
+   "away_pts": 35,
+   "home_pts": 21,
+   "actual_margin": -14,
+   "actual_total": 56,
+   "p_home": 0.528409,
+   "pred_margin": 0.7216,
+   "fair_total": 54.2564,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-MIA-NYJ",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "MIA",
+   "home": "NYJ",
+   "neutral": false,
+   "away_pts": 28,
+   "home_pts": 25,
+   "actual_margin": -3,
+   "actual_total": 53,
+   "p_home": 0.781616,
+   "pred_margin": 7.8732,
+   "fair_total": 34.3632,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-NYG-HOU",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "NYG",
+   "home": "HOU",
+   "neutral": false,
+   "away_pts": 27,
+   "home_pts": 21,
+   "actual_margin": -6,
+   "actual_total": 48,
+   "p_home": 0.650312,
+   "pred_margin": 3.9096,
+   "fair_total": 36.0382,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-PIT-NO",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "PIT",
+   "home": "NO",
+   "neutral": true,
+   "away_pts": 16,
+   "home_pts": 10,
+   "actual_margin": -6,
+   "actual_total": 26,
+   "p_home": 0.274032,
+   "pred_margin": -6.0812,
+   "fair_total": 51.3385,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-SF-ATL",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "SF",
+   "home": "ATL",
+   "neutral": false,
+   "away_pts": 20,
+   "home_pts": 29,
+   "actual_margin": 9,
+   "actual_total": 49,
+   "p_home": 0.336919,
+   "pred_margin": -4.2611,
+   "fair_total": 52.3171,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-TB-CAR",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "TB",
+   "home": "CAR",
+   "neutral": false,
+   "away_pts": 43,
+   "home_pts": 13,
+   "actual_margin": -30,
+   "actual_total": 56,
+   "p_home": 0.751213,
+   "pred_margin": 6.8673,
+   "fair_total": 52.7951,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W07-DAL-PHI",
+   "week": 7,
+   "date": "2026-10-26",
+   "away": "DAL",
+   "home": "PHI",
+   "neutral": false,
+   "away_pts": 38,
+   "home_pts": 21,
+   "actual_margin": -17,
+   "actual_total": 59,
+   "p_home": 0.398555,
+   "pred_margin": -2.6028,
+   "fair_total": 44.4391,
+   "mean_total_train": 46.172,
+   "n_train": 93
+  },
+  {
+   "game_id": "W08-CAR-GB",
+   "week": 8,
+   "date": "2026-10-29",
+   "away": "CAR",
+   "home": "GB",
+   "neutral": false,
+   "away_pts": 19,
+   "home_pts": 27,
+   "actual_margin": 8,
+   "actual_total": 46,
+   "p_home": 0.618323,
+   "pred_margin": 3.1836,
+   "fair_total": 49.1006,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-ATL-TB",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "ATL",
+   "home": "TB",
+   "neutral": false,
+   "away_pts": 0,
+   "home_pts": 16,
+   "actual_margin": 16,
+   "actual_total": 16,
+   "p_home": 0.6362,
+   "pred_margin": 3.6831,
+   "fair_total": 46.9896,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-AZ-DAL",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "AZ",
+   "home": "DAL",
+   "neutral": false,
+   "away_pts": 33,
+   "home_pts": 30,
+   "actual_margin": -3,
+   "actual_total": 63,
+   "p_home": 0.80158,
+   "pred_margin": 8.9591,
+   "fair_total": 57.356,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-BAL-BUF",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "BAL",
+   "home": "BUF",
+   "neutral": false,
+   "away_pts": 10,
+   "home_pts": 36,
+   "actual_margin": 26,
+   "actual_total": 46,
+   "p_home": 0.708252,
+   "pred_margin": 5.7976,
+   "fair_total": 58.908,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-CLE-PIT",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "CLE",
+   "home": "PIT",
+   "neutral": false,
+   "away_pts": 6,
+   "home_pts": 27,
+   "actual_margin": 21,
+   "actual_total": 33,
+   "p_home": 0.659391,
+   "pred_margin": 4.3438,
+   "fair_total": 38.9176,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-IND-JAX",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "IND",
+   "home": "JAX",
+   "neutral": false,
+   "away_pts": 7,
+   "home_pts": 42,
+   "actual_margin": 35,
+   "actual_total": 49,
+   "p_home": 0.990231,
+   "pred_margin": 24.6916,
+   "fair_total": 50.0091,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-KC-DEN",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "KC",
+   "home": "DEN",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 28,
+   "actual_margin": 4,
+   "actual_total": 52,
+   "p_home": 0.45672,
+   "pred_margin": -1.1494,
+   "fair_total": 37.7298,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-LAC-LA",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "LAC",
+   "home": "LA",
+   "neutral": false,
+   "away_pts": 9,
+   "home_pts": 24,
+   "actual_margin": 15,
+   "actual_total": 33,
+   "p_home": 0.86699,
+   "pred_margin": 11.7612,
+   "fair_total": 37.4467,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-LV-NYJ",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "LV",
+   "home": "NYJ",
+   "neutral": false,
+   "away_pts": 38,
+   "home_pts": 33,
+   "actual_margin": -5,
+   "actual_total": 71,
+   "p_home": 0.531996,
+   "pred_margin": 0.849,
+   "fair_total": 50.0966,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-MIN-DET",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "MIN",
+   "home": "DET",
+   "neutral": false,
+   "away_pts": 15,
+   "home_pts": 19,
+   "actual_margin": 4,
+   "actual_total": 34,
+   "p_home": 0.280756,
+   "pred_margin": -6.1392,
+   "fair_total": 37.7284,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-NE-MIA",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "NE",
+   "home": "MIA",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 19,
+   "actual_margin": -5,
+   "actual_total": 43,
+   "p_home": 0.104657,
+   "pred_margin": -13.2752,
+   "fair_total": 39.2176,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-PHI-WAS",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "PHI",
+   "home": "WAS",
+   "neutral": false,
+   "away_pts": 10,
+   "home_pts": 27,
+   "actual_margin": 17,
+   "actual_total": 37,
+   "p_home": 0.640638,
+   "pred_margin": 3.8084,
+   "fair_total": 47.4825,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-TEN-CIN",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "TEN",
+   "home": "CIN",
+   "neutral": false,
+   "away_pts": 36,
+   "home_pts": 43,
+   "actual_margin": 7,
+   "actual_total": 79,
+   "p_home": 0.972152,
+   "pred_margin": 20.2323,
+   "fair_total": 44.3422,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W08-CHI-SEA",
+   "week": 8,
+   "date": "2026-11-02",
+   "away": "CHI",
+   "home": "SEA",
+   "neutral": false,
+   "away_pts": 34,
+   "home_pts": 17,
+   "actual_margin": -17,
+   "actual_total": 51,
+   "p_home": 0.457606,
+   "pred_margin": -1.1258,
+   "fair_total": 46.3447,
+   "mean_total_train": 46.0374,
+   "n_train": 107
+  },
+  {
+   "game_id": "W09-JAX-BAL",
+   "week": 9,
+   "date": "2026-11-05",
+   "away": "JAX",
+   "home": "BAL",
+   "neutral": false,
+   "away_pts": 33,
+   "home_pts": 10,
+   "actual_margin": -23,
+   "actual_total": 43,
+   "p_home": 0.013875,
+   "pred_margin": -23.545,
+   "fair_total": 33.553,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-AZ-SEA",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "AZ",
+   "home": "SEA",
+   "neutral": false,
+   "away_pts": 3,
+   "home_pts": 17,
+   "actual_margin": 14,
+   "actual_total": 20,
+   "p_home": 0.858624,
+   "pred_margin": 11.4918,
+   "fair_total": 48.4815,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-CIN-ATL",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "CIN",
+   "home": "ATL",
+   "neutral": true,
+   "away_pts": 34,
+   "home_pts": 17,
+   "actual_margin": -17,
+   "actual_total": 51,
+   "p_home": 0.228816,
+   "pred_margin": -7.9463,
+   "fair_total": 54.1145,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-CLE-NO",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "CLE",
+   "home": "NO",
+   "neutral": false,
+   "away_pts": 22,
+   "home_pts": 23,
+   "actual_margin": 1,
+   "actual_total": 45,
+   "p_home": 0.438139,
+   "pred_margin": -1.6656,
+   "fair_total": 51.8781,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-DAL-IND",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DAL",
+   "home": "IND",
+   "neutral": false,
+   "away_pts": 27,
+   "home_pts": 23,
+   "actual_margin": -4,
+   "actual_total": 50,
+   "p_home": 0.254601,
+   "pred_margin": -7.0618,
+   "fair_total": 63.5052,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-DEN-CAR",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DEN",
+   "home": "CAR",
+   "neutral": false,
+   "away_pts": 26,
+   "home_pts": 21,
+   "actual_margin": -5,
+   "actual_total": 47,
+   "p_home": 0.350223,
+   "pred_margin": -4.1159,
+   "fair_total": 53.0139,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-DET-MIA",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DET",
+   "home": "MIA",
+   "neutral": false,
+   "away_pts": 19,
+   "home_pts": 9,
+   "actual_margin": -10,
+   "actual_total": 28,
+   "p_home": 0.216242,
+   "pred_margin": -8.3977,
+   "fair_total": 48.4632,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-GB-NE",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "GB",
+   "home": "NE",
+   "neutral": false,
+   "away_pts": 45,
+   "home_pts": 27,
+   "actual_margin": -18,
+   "actual_total": 72,
+   "p_home": 0.655456,
+   "pred_margin": 4.2804,
+   "fair_total": 37.1399,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-HOU-LAC",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "HOU",
+   "home": "LAC",
+   "neutral": false,
+   "away_pts": 44,
+   "home_pts": 22,
+   "actual_margin": -22,
+   "actual_total": 66,
+   "p_home": 0.30834,
+   "pred_margin": -5.3552,
+   "fair_total": 28.5817,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-LA-WAS",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "LA",
+   "home": "WAS",
+   "neutral": false,
+   "away_pts": 20,
+   "home_pts": 13,
+   "actual_margin": -7,
+   "actual_total": 33,
+   "p_home": 0.258684,
+   "pred_margin": -6.9262,
+   "fair_total": 50.2023,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-LV-SF",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "LV",
+   "home": "SF",
+   "neutral": false,
+   "away_pts": 17,
+   "home_pts": 38,
+   "actual_margin": 21,
+   "actual_total": 55,
+   "p_home": 0.719706,
+   "pred_margin": 6.2261,
+   "fair_total": 60.4695,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-NYG-PHI",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "NYG",
+   "home": "PHI",
+   "neutral": false,
+   "away_pts": 19,
+   "home_pts": 11,
+   "actual_margin": -8,
+   "actual_total": 30,
+   "p_home": 0.276488,
+   "pred_margin": -6.3474,
+   "fair_total": 36.6756,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-NYJ-KC",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "NYJ",
+   "home": "KC",
+   "neutral": false,
+   "away_pts": 12,
+   "home_pts": 35,
+   "actual_margin": 23,
+   "actual_total": 47,
+   "p_home": 0.702338,
+   "pred_margin": 5.6823,
+   "fair_total": 41.3465,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-TB-CHI",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "TB",
+   "home": "CHI",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 27,
+   "actual_margin": 3,
+   "actual_total": 51,
+   "p_home": 0.597409,
+   "pred_margin": 2.6387,
+   "fair_total": 45.6586,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W09-BUF-MIN",
+   "week": 9,
+   "date": "2026-11-09",
+   "away": "BUF",
+   "home": "MIN",
+   "neutral": false,
+   "away_pts": 23,
+   "home_pts": 6,
+   "actual_margin": -17,
+   "actual_total": 29,
+   "p_home": 0.527713,
+   "pred_margin": 0.7438,
+   "fair_total": 45.7098,
+   "mean_total_train": 46.1074,
+   "n_train": 121
+  },
+  {
+   "game_id": "W10-WAS-NYG",
+   "week": 10,
+   "date": "2026-11-12",
+   "away": "WAS",
+   "home": "NYG",
+   "neutral": false,
+   "away_pts": 24,
+   "home_pts": 21,
+   "actual_margin": -3,
+   "actual_total": 45,
+   "p_home": 0.522366,
+   "pred_margin": 0.588,
+   "fair_total": 46.0668,
+   "mean_total_train": 45.9265,
+   "n_train": 136
+  }
+ ],
+ "bet_log": {
+  "S1": [
+   {
+    "game_id": "W03-ATL-GB",
+    "week": 3,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-AZ-SF",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-BAL-DAL",
+    "week": 3,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CAR-CLE",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CIN-PIT",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-HOU-IND",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-KC-MIA",
+    "week": 3,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LA-DEN",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LAC-BUF",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LV-NO",
+    "week": 3,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-MIN-TB",
+    "week": 3,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NE-JAX",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NYJ-DET",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-SEA-WAS",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-TEN-NYG",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-PHI-CHI",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-PIT-CLE",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-AZ-NYG",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DAL-HOU",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DEN-SF",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DET-CAR",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-GB-TB",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-IND-WAS",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-JAX-CIN",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-KC-LV",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LA-PHI",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LAC-SEA",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-MIA-MIN",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NE-BUF",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NYJ-CHI",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-TEN-BAL",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-ATL-NO",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-TB-DAL",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BAL-ATL",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CHI-GB",
+    "week": 5,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CIN-MIA",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CLE-NYJ",
+    "week": 5,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DEN-LAC",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DET-AZ",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-HOU-TEN",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-IND-PIT",
+    "week": 5,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-LV-NE",
+    "week": 5,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-MIN-NO",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-NYG-WAS",
+    "week": 5,
+    "pick": "push",
+    "win": null,
+    "net": 0.0,
+    "staked": 0.0
+   },
+   {
+    "game_id": "W05-PHI-JAX",
+    "week": 5,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-SF-SEA",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BUF-LA",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-SEA-DEN",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-AZ-LA",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BAL-CLE",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BUF-LV",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CAR-PHI",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CHI-ATL",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-DAL-GB",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-HOU-JAX",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-LAC-KC",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NO-NYG",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NYJ-NE",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-PIT-TB",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-TEN-IND",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-WAS-SF",
+    "week": 6,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NE-CHI",
+    "week": 7,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CIN-BAL",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CLE-TEN",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DEN-AZ",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-GB-DET",
+    "week": 7,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-IND-MIN",
+    "week": 7,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-KC-SEA",
+    "week": 7,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-LA-LV",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-MIA-NYJ",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NYG-HOU",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-PIT-NO",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-SF-ATL",
+    "week": 7,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-TB-CAR",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DAL-PHI",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CAR-GB",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-ATL-TB",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-AZ-DAL",
+    "week": 8,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-BAL-BUF",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CLE-PIT",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-IND-JAX",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-KC-DEN",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LAC-LA",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LV-NYJ",
+    "week": 8,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-MIN-DET",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-NE-MIA",
+    "week": 8,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-PHI-WAS",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-TEN-CIN",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CHI-SEA",
+    "week": 8,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-JAX-BAL",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-AZ-SEA",
+    "week": 9,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CIN-ATL",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CLE-NO",
+    "week": 9,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DAL-IND",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DEN-CAR",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DET-MIA",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-GB-NE",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-HOU-LAC",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LA-WAS",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LV-SF",
+    "week": 9,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYG-PHI",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYJ-KC",
+    "week": 9,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-TB-CHI",
+    "week": 9,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-BUF-MIN",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W10-WAS-NYG",
+    "week": 10,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   }
+  ],
+  "S2": [
+   {
+    "game_id": "W03-ATL-GB",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-AZ-SF",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-BAL-DAL",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CAR-CLE",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CIN-PIT",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-HOU-IND",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-KC-MIA",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LA-DEN",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LAC-BUF",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LV-NO",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-MIN-TB",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NE-JAX",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NYJ-DET",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-SEA-WAS",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-TEN-NYG",
+    "week": 3,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-PHI-CHI",
+    "week": 3,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-PIT-CLE",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-AZ-NYG",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DAL-HOU",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DEN-SF",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DET-CAR",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-GB-TB",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-IND-WAS",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-JAX-CIN",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-KC-LV",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LA-PHI",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LAC-SEA",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-MIA-MIN",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NE-BUF",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NYJ-CHI",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-TEN-BAL",
+    "week": 4,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-ATL-NO",
+    "week": 4,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-TB-DAL",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BAL-ATL",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CHI-GB",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CIN-MIA",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CLE-NYJ",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DEN-LAC",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DET-AZ",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-HOU-TEN",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-IND-PIT",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-LV-NE",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-MIN-NO",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-NYG-WAS",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-PHI-JAX",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-SF-SEA",
+    "week": 5,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BUF-LA",
+    "week": 5,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-SEA-DEN",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-AZ-LA",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BAL-CLE",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BUF-LV",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CAR-PHI",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CHI-ATL",
+    "week": 6,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-DAL-GB",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-HOU-JAX",
+    "week": 6,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-LAC-KC",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NO-NYG",
+    "week": 6,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NYJ-NE",
+    "week": 6,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-PIT-TB",
+    "week": 6,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-TEN-IND",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-WAS-SF",
+    "week": 6,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NE-CHI",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CIN-BAL",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CLE-TEN",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DEN-AZ",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-GB-DET",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-IND-MIN",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-KC-SEA",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-LA-LV",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-MIA-NYJ",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NYG-HOU",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-PIT-NO",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-SF-ATL",
+    "week": 7,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-TB-CAR",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DAL-PHI",
+    "week": 7,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CAR-GB",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-ATL-TB",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-AZ-DAL",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-BAL-BUF",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CLE-PIT",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-IND-JAX",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-KC-DEN",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LAC-LA",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LV-NYJ",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-MIN-DET",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-NE-MIA",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-PHI-WAS",
+    "week": 8,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-TEN-CIN",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CHI-SEA",
+    "week": 8,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-JAX-BAL",
+    "week": 9,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-AZ-SEA",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CIN-ATL",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CLE-NO",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DAL-IND",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DEN-CAR",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DET-MIA",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-GB-NE",
+    "week": 9,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-HOU-LAC",
+    "week": 9,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LA-WAS",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LV-SF",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYG-PHI",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYJ-KC",
+    "week": 9,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-TB-CHI",
+    "week": 9,
+    "pick": "over",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-BUF-MIN",
+    "week": 9,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W10-WAS-NYG",
+    "week": 10,
+    "pick": "under",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   }
+  ],
+  "S3": [
+   {
+    "game_id": "W03-ATL-GB",
+    "week": 3,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-AZ-SF",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-BAL-DAL",
+    "week": 3,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CAR-CLE",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-CIN-PIT",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-HOU-IND",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-KC-MIA",
+    "week": 3,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LA-DEN",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LAC-BUF",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-LV-NO",
+    "week": 3,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-MIN-TB",
+    "week": 3,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NE-JAX",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-NYJ-DET",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-SEA-WAS",
+    "week": 3,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-TEN-NYG",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W03-PHI-CHI",
+    "week": 3,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-PIT-CLE",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-AZ-NYG",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DAL-HOU",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DEN-SF",
+    "week": 4,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-DET-CAR",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-GB-TB",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-IND-WAS",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-JAX-CIN",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-KC-LV",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LA-PHI",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-LAC-SEA",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-MIA-MIN",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NE-BUF",
+    "week": 4,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-NYJ-CHI",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-TEN-BAL",
+    "week": 4,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W04-ATL-NO",
+    "week": 4,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-TB-DAL",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BAL-ATL",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CHI-GB",
+    "week": 5,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CIN-MIA",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-CLE-NYJ",
+    "week": 5,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DEN-LAC",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-DET-AZ",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-HOU-TEN",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-IND-PIT",
+    "week": 5,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-LV-NE",
+    "week": 5,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-MIN-NO",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-NYG-WAS",
+    "week": 5,
+    "pick": "push",
+    "win": null,
+    "net": 0.0,
+    "staked": 0.0
+   },
+   {
+    "game_id": "W05-PHI-JAX",
+    "week": 5,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-SF-SEA",
+    "week": 5,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W05-BUF-LA",
+    "week": 5,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-SEA-DEN",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-AZ-LA",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BAL-CLE",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-BUF-LV",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CAR-PHI",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-CHI-ATL",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-DAL-GB",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-HOU-JAX",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-LAC-KC",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NO-NYG",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-NYJ-NE",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-PIT-TB",
+    "week": 6,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-TEN-IND",
+    "week": 6,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W06-WAS-SF",
+    "week": 6,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NE-CHI",
+    "week": 7,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CIN-BAL",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-CLE-TEN",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DEN-AZ",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-GB-DET",
+    "week": 7,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-IND-MIN",
+    "week": 7,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-KC-SEA",
+    "week": 7,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-LA-LV",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-MIA-NYJ",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-NYG-HOU",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-PIT-NO",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-SF-ATL",
+    "week": 7,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-TB-CAR",
+    "week": 7,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W07-DAL-PHI",
+    "week": 7,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CAR-GB",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-ATL-TB",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-AZ-DAL",
+    "week": 8,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-BAL-BUF",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CLE-PIT",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-IND-JAX",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-KC-DEN",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LAC-LA",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-LV-NYJ",
+    "week": 8,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-MIN-DET",
+    "week": 8,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-NE-MIA",
+    "week": 8,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-PHI-WAS",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-TEN-CIN",
+    "week": 8,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W08-CHI-SEA",
+    "week": 8,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-JAX-BAL",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-AZ-SEA",
+    "week": 9,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CIN-ATL",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-CLE-NO",
+    "week": 9,
+    "pick": "home",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DAL-IND",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DEN-CAR",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-DET-MIA",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-GB-NE",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-HOU-LAC",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LA-WAS",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-LV-SF",
+    "week": 9,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYG-PHI",
+    "week": 9,
+    "pick": "home",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-NYJ-KC",
+    "week": 9,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-TB-CHI",
+    "week": 9,
+    "pick": "away",
+    "win": false,
+    "net": -1.1,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W09-BUF-MIN",
+    "week": 9,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   },
+   {
+    "game_id": "W10-WAS-NYG",
+    "week": 10,
+    "pick": "away",
+    "win": true,
+    "net": 1.0,
+    "staked": 1.1
+   }
+  ],
+  "S4": [
+   {
+    "week": 3,
+    "legs": [
+     "W03-KC-MIA",
+     "W03-LA-DEN"
+    ],
+    "win": false,
+    "net": -1.0,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 4,
+    "legs": [
+     "W04-NYJ-CHI",
+     "W04-LA-PHI"
+    ],
+    "win": true,
+    "net": 2.64462806446281,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 5,
+    "legs": [
+     "W05-CHI-GB",
+     "W05-PHI-JAX"
+    ],
+    "win": false,
+    "net": -1.0,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 6,
+    "legs": [
+     "W06-HOU-JAX",
+     "W06-LAC-KC"
+    ],
+    "win": false,
+    "net": -1.0,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 7,
+    "legs": [
+     "W07-IND-MIN",
+     "W07-CLE-TEN"
+    ],
+    "win": true,
+    "net": 2.64462806446281,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 8,
+    "legs": [
+     "W08-IND-JAX",
+     "W08-TEN-CIN"
+    ],
+    "win": true,
+    "net": 2.64462806446281,
+    "staked": 1.0,
+    "push": false
+   },
+   {
+    "week": 9,
+    "legs": [
+     "W09-JAX-BAL",
+     "W09-AZ-SEA"
+    ],
+    "win": true,
+    "net": 2.64462806446281,
+    "staked": 1.0,
+    "push": false
+   }
+  ]
+ }
+}

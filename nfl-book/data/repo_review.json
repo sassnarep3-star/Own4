@@ -1,0 +1,37 @@
+{
+  "dataset": "nfl_book_repo_review",
+  "title": "Line-by-line repo review of the NFL namespaces (2026-11-14)",
+  "built_utc": "2026-11-14",
+  "method": "Directory scan + root-navigation cross-check + conflict-marker grep + spot re-verification of the inherited feed this session (V-01..V-03). Structural checks only where stated; no claim that every peer number was re-fetched.",
+  "rows": [
+    {"id": "RR-01", "finding": "17 NFL namespaces now exist (nfl, nfl-arena, nfl-audit, nfl-book, nfl-command, nfl-decision, nfl-decisions, nfl-edge, nfl-hub, nfl-integration, nfl-intel, nfl-lab, nfl-lines, nfl-origination, nfl-own, nfl-quant, nfl-research)", "severity": "medium", "action": "Owner picks one canonical dashboard — suggestion SG-08 / Q10", "source_url": "https://github.com/sassnarep3-star/Own4"},
+    {"id": "RR-02", "finding": "6 namespaces ship no in-namespace verifier script (nfl, nfl-decision, nfl-lab, nfl-quant, nfl-research; nfl-book adds one this session)", "severity": "medium", "action": "Adopt nfl-book/engine/verify.py pattern repo-wide (SG-08 scope)", "source_url": "https://github.com/sassnarep3-star/Own4"},
+    {"id": "RR-03", "finding": "Root index.html has historically lost hand-added nav blocks when generators run (peer defects I1/F-13/R-01); this session therefore adds its link to verification/build.py NAV as well as index.html", "severity": "medium", "action": "done for nfl-book; other hand-added blocks still depend on their generators", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"},
+    {"id": "RR-04", "finding": "Inherited 137-game feed (nfl-command) used as this project's results base", "severity": "medium", "action": "Re-verified this session: 32 games line-by-line + 160/160 aggregate cells + league identities (V-01..V-03); remaining 105 rows aggregate-only (FB-03, SG-02)", "source_url": "https://www.nfl.com/standings/league/2026/REG"},
+    {"id": "RR-05", "finding": "No merge-conflict markers found in any tracked .md/.html file", "severity": "none", "action": "none", "source_url": "https://github.com/sassnarep3-star/Own4"},
+    {"id": "RR-06", "finding": "Open peer PR #93 (nfl-command-center) also edits COORDINATION.md and index.html", "severity": "low", "action": "union-style conflict resolution at integration (FB-15)", "source_url": "https://github.com/sassnarep3-star/Own4/pull/93"},
+    {"id": "RR-07", "finding": "Every existing NFL namespace is linked from the root navigation directory", "severity": "none", "action": "nfl-book link added the same way (additive + generator NAV)", "source_url": "https://sassnarep3-star.github.io/Own4/"},
+    {"id": "RR-08", "finding": "nfl-command-center (PR #93) contains data/raw/ bulk archives and engine outputs in its PR scope", "severity": "low", "action": "monitor repo size at integration; keep nfl-book free of raw bulk captures", "source_url": "https://github.com/sassnarep3-star/Own4/pull/93"},
+    {"id": "RR-09", "finding": "Peer irregularity carried forward for visibility: nfl-lines sign-convention and stale-line flags (IR-08/IR-16) remain open on their pages", "severity": "low", "action": "owned by nfl-lines; recorded here only", "source_url": "https://sassnarep3-star.github.io/Own4/nfl-lines/pages/flagged.html"},
+    {"id": "RR-10", "finding": "This namespace verified its own feed against official pages this session rather than trusting peer claims", "severity": "none", "action": "none — method documented in results_feed.json", "source_url": "https://www.nfl.com/standings/league/2026/REG"}
+  ],
+  "inventory": [
+    {"namespace": "nfl", "html_pages": 14, "verifier": false, "root_nav": true},
+    {"namespace": "nfl-arena", "html_pages": 11, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-audit", "html_pages": 13, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-book", "html_pages": 16, "verifier": true, "root_nav": "added this session"},
+    {"namespace": "nfl-command", "html_pages": 17, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-decision", "html_pages": 14, "verifier": false, "root_nav": true},
+    {"namespace": "nfl-decisions", "html_pages": 8, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-edge", "html_pages": 22, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-hub", "html_pages": 15, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-integration", "html_pages": 5, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-intel", "html_pages": 16, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-lab", "html_pages": 11, "verifier": false, "root_nav": true},
+    {"namespace": "nfl-lines", "html_pages": 20, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-origination", "html_pages": 16, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-own", "html_pages": 22, "verifier": true, "root_nav": true},
+    {"namespace": "nfl-quant", "html_pages": 13, "verifier": false, "root_nav": true},
+    {"namespace": "nfl-research", "html_pages": 6, "verifier": false, "root_nav": true}
+  ]
+}

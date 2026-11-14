@@ -1,0 +1,106 @@
+{
+ "dataset": "nfl_book_correlations",
+ "title": "Correlations computed only from officially sourced numbers",
+ "built_utc": "2026-11-14",
+ "method": "Pearson r on official final scores/dates; p = two-sided normal approximation of the t test (disclosed); CI = Fisher z. No market, price or third-party number is used anywhere.",
+ "n_computed": 5,
+ "n_blank": 4,
+ "computed": [
+  {
+   "id": "CR-01",
+   "name": "Home margin vs game total",
+   "inputs": "official final scores",
+   "n": 137,
+   "r": -0.1607,
+   "p": 0.0586,
+   "ci95": [
+    -0.3198,
+    0.0073
+   ],
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "note": "computed from results_feed.json (official nfl.com per-row sources)"
+  },
+  {
+   "id": "CR-02",
+   "name": "Team points scored, consecutive games",
+   "inputs": "official final scores",
+   "n": 242,
+   "r": 0.084,
+   "p": 0.1916,
+   "ci95": [
+    -0.0426,
+    0.2079
+   ],
+   "source_url": "https://www.nfl.com/scores/2026/week-1",
+   "note": "each ordered pair of consecutive games by one team"
+  },
+  {
+   "id": "CR-03",
+   "name": "Same-week consecutive games: home-win vs next home-win",
+   "inputs": "official final scores",
+   "n": 125,
+   "r": -0.0397,
+   "p": 0.6594,
+   "ci95": [
+    -0.2138,
+    0.1369
+   ],
+   "source_url": "https://www.nfl.com/scores/2026/week-9",
+   "note": "tests whether one game's outcome predicts the next game's in the same week (relevant to parlay-leg independence)"
+  },
+  {
+   "id": "CR-04",
+   "name": "Rest-day differential (home minus away) vs home margin",
+   "inputs": "official final scores + official schedule dates in the feed",
+   "n": 121,
+   "r": 0.4257,
+   "p": 0.0,
+   "ci95": [
+    0.2675,
+    0.5615
+   ],
+   "source_url": "https://www.nfl.com/scores/2026/week-10",
+   "note": "week-1 games excluded (no prior game); dates for weeks 2-8 are peer-transcribed from official week pages and were not all re-read this session (flag FB-03)"
+  },
+  {
+   "id": "CR-05",
+   "name": "Points allowed vs wins (team level, 2026 through W10 TNF)",
+   "inputs": "official final scores",
+   "n": 32,
+   "r": -0.5814,
+   "p": 0.0001,
+   "ci95": [
+    -0.7733,
+    -0.2918
+   ],
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "note": "n = 32 teams"
+  }
+ ],
+ "blank": [
+  {
+   "id": "CR-06",
+   "name": "Same-game parlay leg cover correlation",
+   "reason": "requires official point spreads per game; the NFL publishes no lines (FB-01). Left blank, not estimated.",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "CR-07",
+   "name": "Player prop co-occurrence (QB passing + WR receiving)",
+   "reason": "requires official player-prop lines; none exist in any official source read by this project (FB-05). Left blank.",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "CR-08",
+   "name": "Open-to-close line movement correlation",
+   "reason": "requires market open/close prices; no official price source (FB-01). The price-snapshot store records OUR lines only.",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "CR-09",
+   "name": "Injury-report status vs game outcome",
+   "reason": "requires archived official injury reports per week; only the current Week 10 report is retrievable (FB-06). Left blank.",
+   "source_url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}

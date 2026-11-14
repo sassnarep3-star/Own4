@@ -1,0 +1,54 @@
+{
+  "dataset": "nfl_replacement_depth_official_evidence",
+  "title": "Replacement-depth rows built only from official nfl.com text read on 2026-11-14",
+  "captured_utc": "2026-11-14",
+  "method": "A replacement row is published only when an official nfl.com article or the official injury report explicitly states (a) the starter will not play or is on IR, and (b) who replaces him. The depth column records HOW DEEP the replacement is (starter / 1st backup / 2nd backup / 3rd backup) ONLY when the official text states the depth; otherwise the depth cell is blank and flagged. No depth is inferred from rosters or third-party depth charts.",
+  "rows": [
+    {
+      "id": "RD-01",
+      "team": "SEA",
+      "unit": "offense",
+      "position": "QB",
+      "out_player": "Sam Darnold",
+      "out_status": "Ruled out for Week 10 (quad and rib injuries)",
+      "replacement_player": "Drew Lock",
+      "replacement_depth": "1st backup",
+      "depth_evidence": "Official article calls Lock 'The Seahawks backup' and says he 'is expected to start again' for a second straight week.",
+      "next_up_player": "Jalen Milroe",
+      "next_up_depth": "2nd backup (rookie)",
+      "next_up_evidence": "Official article: 'Rookie Jalen Milroe is slated to back up Lock for the second straight week.'",
+      "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
+    },
+    {
+      "id": "RD-02",
+      "team": "MIA",
+      "unit": "offense",
+      "position": "QB",
+      "out_player": "Malik Willis",
+      "out_status": "Placed on injured reserve (groin), out Weeks 10-13",
+      "replacement_player": "Kyle McCord",
+      "replacement_depth": "",
+      "depth_evidence": "Official article says McCord 'will fill in' and is 'poised to make his first NFL start', but does NOT state his string (2nd/3rd/4th). Depth left blank per policy.",
+      "next_up_player": "Brady Cook",
+      "next_up_depth": "",
+      "next_up_evidence": "Official article: Cook 'will likely be elevated to be the backup' — likely is not confirmed, depth blank per policy.",
+      "source_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+    },
+    {
+      "id": "RD-03",
+      "team": "MIN",
+      "unit": "offense",
+      "position": "QB",
+      "out_player": "Kyler Murray",
+      "out_status": "Official Week 10 report: Did Not Participate In Practice, game status Out",
+      "replacement_player": "",
+      "replacement_depth": "",
+      "depth_evidence": "No official article read this session names the Week 10 starter for Minnesota; Carson Wentz is listed Full Participation but the official report does not confirm him as the starter. Replacement left blank.",
+      "next_up_player": "",
+      "next_up_depth": "",
+      "next_up_evidence": "",
+      "source_url": "https://www.nfl.com/injuries/"
+    }
+  ],
+  "blank_policy_note": "Every blank cell above is deliberate: the official source read this session does not state the value. Blanks are flagged on the Flagged for Review page and are never filled by inference."
+}

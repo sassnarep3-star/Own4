@@ -246,3 +246,20 @@ injury tracker. Live at https://sassnarep3-star.github.io/Own4/nfl-arena/ after 
 Data pipeline: `python3 nfl-arena/scripts/build_data.py` then `python3 nfl-arena/scripts/build_site.py`,
 validated by `python3 nfl-arena/scripts/check_links.py` (every table row must carry a source link;
 unverifiable values are published blank and flagged).
+
+## NFL Book (`nfl-book/`, session arena/c8969a10-own4, 2026-11-14)
+
+Price-snapshot store and gated origination engine. Live at
+https://sassnarep3-star.github.io/Own4/nfl-book/ after merge.
+
+- **Price snapshots** — open + close for every market we originate (39 snapshots, side→total→moneyline order enforced); market columns null until an official price source exists
+- **Verified results feed** — 137 settled games with per-row official URLs; 32 re-read line-by-line this session; 160/160 standings cells recomputed (V-01…V-03)
+- **Signal/staking leaderboard** — ranking key is signal-first (Wilson CIs, coin-flip + post-hoc record baselines, placebo p); staking shown only under an ASSUMED −110 price; 0 of 1,000 points (amendment A1: points need verified prices)
+- **Gates G1–G8 + demotion gate D1** — live strategies auto-return to paper on 4 firing conditions; pre-registered before the first backtest (git f4465c0)
+- **Correlations** — 5 computed from official scores with n/r/p/CI; 4 unsourced ones published blank with reasons
+- **Replacement depth** — 1st/2nd/3rd/4th string depth published only where official text states it; everything else blank + flagged
+- **S13 suggestions / 15 questions** — reviewer picks a path before anything is implemented; 17 flagged items with source links
+
+Pipeline: `python3 nfl-book/engine/ingest.py` → `originate.py` → `backtest.py` → `correlations.py` →
+`build_site.py`, then `verify.py` (every data row must carry an https official link; blanks must be
+marked unverified). Source of truth: `nfl-book/` (see `nfl-book/EXECUTIVE_SUMMARY.md`).
