@@ -1,0 +1,35 @@
+{
+ "session": "arena-28a71529-own4",
+ "built_utc": "2026-11-14T00:00:00Z",
+ "pre_registered_constants": {
+  "PRIOR_GAMES": 6.0,
+  "HFA_PRIOR": 2.0,
+  "HFA_PRIOR_GAMES": 5.0,
+  "SIGMA_FLOOR": 10.0,
+  "FIRST_GRADED_WEEK": 3,
+  "MIN_N_QUALIFY": 300,
+  "BREAKEVEN_ALPHA": 0.05,
+  "LUCK_TEST_DRAWS": 20000,
+  "PARLAY_TOTAL_THRESHOLD": 46.0,
+  "PARLAY_MARGIN_THRESHOLD": 7.0,
+  "RNG_SEED": 20261114
+ },
+ "origination_order": [
+  "side (spread)",
+  "total",
+  "moneyline (derived from side and total)"
+ ],
+ "formulas": {
+  "E_home_pts": "L + off[home] + def[away] + HFA/2",
+  "E_away_pts": "L + off[away] + def[home] - HFA/2",
+  "fair_spread": "E_home_pts - E_away_pts   (positive = home favoured)",
+  "fair_total": "E_home_pts + E_away_pts",
+  "fair_p_home": "NormalCDF(fair_spread / sigma_eff), sigma_eff = sigma_resid * fair_total / (2L)"
+ },
+ "inputs": {
+  "results": "nfl.com official weekly schedule pages (transcribed, reconciled)",
+  "prior": "nfl.com official 2025 final standings",
+  "market_prices": "nflverse/nfldata archive (THIRD PARTY; the NFL publishes no odds)"
+ },
+ "leakage_control": "walk-forward: a number for week w uses only official games with week < w plus the pre-season 2025 prior."
+}

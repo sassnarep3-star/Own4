@@ -270,6 +270,26 @@ NAV = [
         ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
         ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
     ]),
+    # Added 2026-11-14: own-line origination engine with a verified results feed.
+    # Every table row on every page carries an https link to the official source.
+    ("NFL Market Board · 2026-11-14", [
+        ("nfl-marketboard/index.html", "Market Board — overview", "legacy"),
+        ("nfl-marketboard/executive-summary.html", "Market Board — executive summary", "legacy"),
+        ("nfl-marketboard/results.html", "Market Board — verified results feed", "legacy"),
+        ("nfl-marketboard/prices.html", "Market Board — price-snapshot store", "legacy"),
+        ("nfl-marketboard/lines.html", "Market Board — originated lines", "legacy"),
+        ("nfl-marketboard/leaderboard.html", "Market Board — leaderboard", "legacy"),
+        ("nfl-marketboard/strategies.html", "Market Board — strategies &amp; gates", "legacy"),
+        ("nfl-marketboard/governance.html", "Market Board — promotion &amp; demotion", "legacy"),
+        ("nfl-marketboard/correlations.html", "Market Board — correlations", "legacy"),
+        ("nfl-marketboard/line-skill.html", "Market Board — line-making skill", "legacy"),
+        ("nfl-marketboard/injuries.html", "Market Board — injuries &amp; depth", "legacy"),
+        ("nfl-marketboard/decisions.html", "Market Board — questions &amp; answers", "legacy"),
+        ("nfl-marketboard/suggestions.html", "Market Board — suggestions", "legacy"),
+        ("nfl-marketboard/review.html", "Market Board — repository review", "legacy"),
+        ("nfl-marketboard/flagged.html", "⚑ Market Board — flagged (15)", "legacy"),
+        ("nfl-marketboard/sources.html", "Market Board — sources", "legacy"),
+    ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),
