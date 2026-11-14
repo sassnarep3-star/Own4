@@ -1,0 +1,59 @@
+{
+ "rows": [
+  {
+   "id": "MC-01",
+   "label": "Points scored per game vs points allowed per game, all 32 clubs",
+   "variable_x": "points for per game",
+   "variable_y": "points against per game",
+   "n": 32,
+   "r": -0.2041,
+   "official_x": true,
+   "official_y": true,
+   "source_x": "https://www.nfl.com/standings/league/2026/REG",
+   "source_y": "https://www.nfl.com/standings/conference/2026/REG",
+   "note": "Both sides official and recomputed from the same 32 rows. The sign here is a fact about this 2026 sample, not about strategy: a negative value means high-scoring clubs have tended to concede less, a positive one the opposite. Neither is an edge."
+  },
+  {
+   "id": "MC-02",
+   "label": "Win differential vs point differential, all 32 clubs",
+   "variable_x": "wins minus losses",
+   "variable_y": "points for minus points against",
+   "n": 32,
+   "r": 0.8686,
+   "official_x": true,
+   "official_y": true,
+   "source_x": "https://www.nfl.com/standings/league/2026/REG",
+   "source_y": "https://www.nfl.com/standings/league/2026/REG",
+   "note": "Control row: this must be high, and it is. If it were not, the transcription would be wrong. It is a data-integrity check dressed as a correlation."
+  },
+  {
+   "id": "MC-03",
+   "label": "Own spread line vs actual home margin (this namespace's model)",
+   "variable_x": "own spread",
+   "variable_y": "actual home margin",
+   "n": 0,
+   "r": null,
+   "official_x": false,
+   "official_y": true,
+   "source_x": "https://www.nfl.com/standings/league/2026/REG",
+   "source_y": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "note": "NOT COMPUTED. The own model is available for all 14 week-10 games but only one of those games has been played, so n = 1 at best and a correlation is meaningless. Left blank on purpose; the number appears when the games finish.",
+   "status": "blank - insufficient n"
+  },
+  {
+   "id": "MC-04",
+   "label": "Same-game dependence: home covers AND game goes over",
+   "variable_x": "home covers spread",
+   "variable_y": "total goes over",
+   "n": 0,
+   "r": null,
+   "official_x": false,
+   "official_y": false,
+   "source_x": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json",
+   "source_y": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/correlations.json",
+   "note": "The prior session reports r = 0.0083 on n = 3,912 games from the third-party archive. That archive is third-party, so under this namespace's rule the value is NOT republished as ours: it is cited, with its n, as someone else's number resting on a source this namespace does not treat as official. Reproducing it needs official prices we do not have.",
+   "status": "cited, not recomputed"
+  }
+ ],
+ "rule": "Only values that both sides of the correlation can be sourced for are computed. Each row names which side is official and which is third-party. A row where either side is missing is printed blank with the reason, never filled in. n is published on every row, always."
+}

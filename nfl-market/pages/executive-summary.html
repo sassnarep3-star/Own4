@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL market lab</title>
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header class="top"><div class="inner">
+<h1>NFL market lab</h1>
+<span class="snap">official values read 2026-11-14 · analytical research, not wagering advice</span>
+</div></header>
+<nav><div class="inner"><a href="../index.html">Dashboard</a><a href="../pages/price-store.html">Price store</a><a href="../pages/results.html">Results feed</a><a href="../pages/origination.html">Origination</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/depth.html">Depth</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/demotion.html">Demotion gate</a><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">⚑ Flagged</a><a href="../pages/sources.html">Sources</a><a href="../pages/executive-summary.html" class="on">Summary</a></div></nav>
+<main>
+<h2>Executive summary</h2>
+<p class="lede">Seven requirements were given. All seven now have a working implementation, and three of the seven can only be answered partly because the league does not publish the data they need. That split is the headline.</p>
+<h3>What was built</h3>
+<div class="grid"><div class="kpi"><div class="k">price snapshots stored</div><div class="v">84</div><div class="n">14 games × 3 markets × 2 snapshots, 100% coverage</div></div><div class="kpi"><div class="k">market rows graded</div><div class="v">3</div><div class="n">against official finals only</div></div><div class="kpi"><div class="k">games originated</div><div class="v">14</div><div class="n">side, total, moneyline in that order</div></div><div class="kpi"><div class="k">irregularities published</div><div class="v">12</div><div class="n">including two of our own</div></div></div>
+<h3>The five findings that matter</h3>
+
+<div class="card"><h3>1. The store works; the prices in it are one book's, not a market</h3>
+<p>All 84 rows reconcile: the spread sign agrees with the provider's own details
+string, both two-way pairs de-vig to exactly 1.0, every total is plausible, and
+every row carries its URL. Two real transcription errors were caught by those
+checks before publication — four flipped spreads, and four games attached to
+another game's prices by relying on list order. But the whole store is
+DraftKings syndicated through one endpoint. The NFL publishes no odds.
+Dispersion across books, which is where any retail edge is claimed to live,
+cannot be seen at all.</p></div>
+
+<div class="card"><h3>2. The results feed is genuinely official, and it is the only part that is</h3>
+<p>Sixteen official finals are transcribed, each with the page it was read from.
+One week-9 game renders "Hidden Score" on its own game page and was recovered
+from the official Game Book PDF. That asymmetry — official scores, third-party
+prices — is the single most important structural fact about this site, and it is
+why the flag page exists.</p></div>
+
+<div class="card"><h3>3. The split leaderboard answers a question that a single table cannot</h3>
+<p>Fifteen strategies. Five were profitable over the full sample. Zero can be
+distinguished from luck after correcting for fifteen tests, and zero pass both
+tables. That combination is the most common way a betting system fools its
+author, and the two-table layout makes it visible in one screen instead of
+buried across two papers.</p></div>
+
+<div class="card"><h3>4. Replacement depth is measurable after the game and not before</h3>
+<p>Two official Game Books for one club produced one confirmed replacement and
+one rotation change, with the incoming player's starts and appearances in the
+window. The replacement had one start in the two graded games and took the job in
+the second, which is the depth evidence. No rank is claimed anywhere, because the NFL publishes no
+depth chart; the depth-chart route returns a 404, re-read this session. This is
+the requirement most affected by a league publication decision, and it cannot be
+engineered around.</p></div>
+
+<div class="card"><h3>5. The demotion gate is the safest thing on the site</h3>
+<p>Gate DG-1 is one-directional: it can only remove a strategy, so applying it
+today to results that already existed introduces no lookahead. Under it, zero of
+fifteen stay live. That the answer was known in advance is the point — it is a
+specification with a testable history, not a promise.</p></div>
+
+<h3>What is not done, and why</h3>
+<table class=""><thead><tr><th>Not done</th><th>Why not</th><th>What would unblock it</th><th>Source</th></tr></thead><tbody><tr><td>Player-prop prices</td><td>The provider exposes them, but the response is paged and repeats rows; archiving one page would be misleading.</td><td>Read the full prop resource for one game, or license a feed.</td><td><a href="https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds/100/propBets" rel="noopener">source</a></td></tr><tr><td>Pre-game depth state</td><td>No official depth chart exists.</td><td>Nothing available. Use the injury report and accept the error.</td><td><a href="https://www.nfl.com/depth-charts/" rel="noopener">source</a></td></tr><tr><td>Backtest of this model</td><td>It depends on the third-party archive, and the question of relying on that archive is unanswered (QM-01).</td><td>Decision D-2 and an answer on QM-01.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr><tr><td>Correlation of own line to outcome</td><td>Only one week-10 game has been played, so n = 1.</td><td>Wait for games to finish.</td><td><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" rel="noopener">source</a></td></tr><tr><td>Multi-book dispersion</td><td>One source archived.</td><td>Decision on QM-01.</td><td><a href="https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds" rel="noopener">source</a></td></tr></tbody></table>
+<h3>What the owner has to decide</h3>
+<table class=""><thead><tr><th>ID</th><th>Decision</th><th>Why it blocks</th><th>Source</th></tr></thead><tbody><tr><td>D-1</td><td>Which NFL workspace is canonical?</td><td>Any further site-building being useful rather than additive.</td><td><a href="https://sassnarep3-star.github.io/Own4/" rel="noopener">source</a></td></tr><tr><td>D-2</td><td>Which price snapshots count for grading?</td><td>Every ROI and every &#x27;beats the market&#x27; claim.</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr><tr><td>D-3</td><td>Is the reward real money, paper units, or points?</td><td>The demotion gate&#x27;s tolerances, drawdown limits, and whether the gambling-help framing is sufficient.</td><td><a href="https://www.ncpgambling.org/help-treatment" rel="noopener">source</a></td></tr><tr><td>D-4</td><td>What is the operational definition of &#x27;removing luck&#x27;?</td><td>The leaderboard&#x27;s definition.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/strategy_results.json" rel="noopener">source</a></td></tr><tr><td>D-5</td><td>What happens when the single price source disappears?</td><td>Any statement that the system is operational rather than an archive.</td><td><a href="https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds" rel="noopener">source</a></td></tr></tbody></table>
+<div class="note"><p>None of those five needs code. All five change what the next session should build. Until they are answered, another workspace is the most likely output, and the count is already at seventeen.</p></div>
+</main>
+<footer><div class="inner">
+<p><strong>NFL market lab</strong> — price-snapshot store, verified results feed, origination order,
+split leaderboard, replacement depth, official-only correlations, and a demotion gate.
+Analytical research only; no wagering advice; nothing here has ever been staked.</p>
+<p>If gambling is a problem: National Council on Problem Gambling,
+<a href="https://www.ncpgambling.org/help-treatment" rel="noopener">ncpgambling.org</a>,
+1-800-MY-RESET (1-800-697-3738).</p>
+<p><strong>No price on this site is an official league price.</strong> Scores,
+standings, injuries and game-day lineups come from the NFL; every spread, total and
+moneyline comes from one commercial book syndicated through a public endpoint.</p>
+<p>Every table row carries a source link. Values that could not be confirmed from an
+official source are blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+</div></footer>
+</body></html>
