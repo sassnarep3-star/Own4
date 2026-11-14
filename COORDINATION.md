@@ -2915,3 +2915,46 @@ DATASETS.md (verified statistically instead) · F-C08 DET S Kerby Joseph / MIN Q
 strings unverified (blank) · F-C09 player-prop prices do not exist (blank) · F-C10 depth
 strings verified for DET/NE only · F-C11 peer ARI/AZ + staleness notes inherited open ·
 F-C12 weeks 12-18 have fair lines but no captured market quotes yet (blank).
+
+### Session arena-a437d20c-own4 — COMPLETION RECORD (2026-11-14 UTC)
+
+**C11 final integration:**
+
+- **PR #100** https://github.com/sassnarep3-star/Own4/pull/100 — **merged** (merge commit
+  `275878c`) with all checks green (Rebuild and verify ×2, audit, validate, verify ×2).
+  Contains the full `nfl-core/` namespace (8 requirement stores + 14 pages), the D-1
+  canonical-workspace comparison page, and generator-owned registration of nfl-core in
+  `verification/build.py` (NFL group = 20 workspaces; regeneration cannot drop the links).
+- **PR #101** https://github.com/sassnarep3-star/Own4/pull/101 — **merged** (merge commit
+  `795547c`), checks green (audit, validate, verify). Honesty fixes found by reading the
+  live pages after #100 deployed: (1) close cells now populate ONLY at settlement —
+  pre-game quotes never masquerade as closes (A-09 class), verify.py V5 tightened to
+  `close ⇒ settlement`; (2) URL-with-trailing-note cells render clean hrefs; (3) prose
+  counts corrected (81 OPEN / 411 CLOSE / 816 markets).
+- **GitHub Pages:** `pages/builds/latest` status **built** for `795547c`. Live-confirmed
+  with cache-busting fetches: https://sassnarep3-star.github.io/Own4/nfl-core/ (dashboard),
+  `/pages/prices.html` (WAS@NYG open 2.5 → close 1.5 → AWAY COVERS live; unsettled rows
+  carry OPEN only), `/pages/d1-canonical-choice.html` (full D-1 matrix), root nav carries
+  the 20-workspace NFL group with 14 nfl-core links and 0 broken local hrefs.
+- **Rebase log:** `main` moved twice under this session (PRs #96–#99 from active peer
+  sessions arena/19ae73ae / arena/6f0b80b2 / arena/d507f753). Two rebases hit
+  COORDINATION.md/index.html/verified/* conflicts; every one resolved as a **superset**
+  (peer records and regenerated outputs kept; my claim/progress blocks appended). Nothing
+  of any session was discarded. Peer request R-L1 pattern followed: nfl-core registered in
+  the generator, not hand-edited into index.html.
+- **Peer PR #93** (`arena/582300df-own4`, nfl-command-center, stale >23 h, checks green)
+  was left **open** by this session: its 552k-line diff includes `index.html` +
+  `verification/build.py` + COORDINATION edits that have since diverged (its mergeable
+  state reads UNKNOWN after `main` moved). Merging it from here risks clobbering the
+  post-#97 generator-owned nav; it needs its own rebase by its owner or a future takeover
+  that resolves those shared files superset-style. Logged here rather than forced.
+- **D-1 left open on purpose:** four implementations of the brief now exist
+  (nfl-core / nfl-market / nfl-ledger / nfl-price-snapshot). This session published the
+  measured comparison and recommendation (S-C11) but **implemented no consolidation** —
+  the canonical choice is the owner's (options A/B/C on
+  https://sassnarep3-star.github.io/Own4/nfl-core/pages/d1-canonical-choice.html).
+
+**Final state of this session's scope:** C1–C11 all done. Deliverables live at
+https://sassnarep3-star.github.io/Own4/nfl-core/ . 12 irregularities published for review
+(F-C01..F-C12), 12 decision questions registered (Q-C01..Q-C12), 11 suggestions awaiting
+owner choice (S-C01..S-C11), nothing inferred anywhere, no peer namespace file edited.
