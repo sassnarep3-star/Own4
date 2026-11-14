@@ -1,0 +1,124 @@
+{
+  "title": "Demotion gate — sends a live strategy back to paper",
+  "captured_utc": "2026-11-14",
+  "spec": {
+    "version": "demotion-gate v1 (2026-11-14, pre-registered before any priced result)",
+    "stages": {
+      "registered": "Pre-registered; no priced selections yet.",
+      "paper": "Graded on recorded opening and closing snapshots; zero real stake.",
+      "live": "Real stake allowed. Only after every promotion rule passes."
+    },
+    "promotion_rules": [
+      {
+        "id": "P1",
+        "rule": "All 10 frozen gates G1–G10 pass on the frozen holdout (nfl-command gates.json)."
+      },
+      {
+        "id": "P2",
+        "rule": ">= 300 graded paper selections, each with an official-source game link and a recorded closing snapshot."
+      },
+      {
+        "id": "P3",
+        "rule": "Closing-line beat rate: Wilson 95% LOWER bound > 0.50 (signal)."
+      },
+      {
+        "id": "P4",
+        "rule": "Placebo test: observed signal above the 95th percentile of 10,000 label-shuffled runs."
+      },
+      {
+        "id": "P5",
+        "rule": "Two consecutive prospective review windows with no demotion trigger."
+      }
+    ],
+    "demotion_triggers": [
+      {
+        "id": "D1",
+        "type": "signal",
+        "rule": "Rolling 150 live selections: closing-line beat rate Wilson 95% UPPER bound < 0.50.",
+        "action": "demote to paper"
+      },
+      {
+        "id": "D2",
+        "type": "signal",
+        "rule": "Rolling 300 selections: placebo percentile < 95 (signal no longer beats luck).",
+        "action": "demote to paper"
+      },
+      {
+        "id": "D3",
+        "type": "staking",
+        "rule": "Bankroll drawdown >= 15% (gates.json G9). Can demote; can never promote.",
+        "action": "demote to paper"
+      },
+      {
+        "id": "D4",
+        "type": "data",
+        "rule": "More than 2% of live selections lack a recorded closing snapshot.",
+        "action": "demote to paper until repaired"
+      },
+      {
+        "id": "D5",
+        "type": "data",
+        "rule": "More than 25% of selections made in weeks with an Out starter lack a recorded replacement-depth rank.",
+        "action": "demote to paper until repaired"
+      },
+      {
+        "id": "D6",
+        "type": "governance",
+        "rule": "Two consecutive failed review windows.",
+        "action": "demote to paper"
+      }
+    ],
+    "missing_data_rule": "Any missing input for a live strategy = demote. Any missing input for promotion = stay paper.",
+    "current_status": "No strategy has priced selections. All strategies are registered; none may be live."
+  },
+  "current_state": [
+    {
+      "id": "S1",
+      "name": "Spread singles (divergence)",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S2",
+      "name": "Total singles (divergence)",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S3",
+      "name": "Moneyline value singles",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S4",
+      "name": "Cross-game 2-leg parlays",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S5",
+      "name": "Player-prop combos (2-3 legs)",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S6",
+      "name": "Same-game parlay (SGP)",
+      "stage": "registered",
+      "stage_reason": "no priced paper selections (no price archive, F-L1)",
+      "triggers_evaluable": "no",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    }
+  ]
+}
