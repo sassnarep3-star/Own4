@@ -2582,3 +2582,28 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+## Session `arena/6f0b80b2-own4` — NFL gap-closure namespace `nfl-ledger/` (claim, 2026-11-14 UTC)
+
+Session ID: `arena/6f0b80b2-own4` · Branch: `arena/6f0b80b2-own4` (session-pinned; base `main` at `02a8bdf`).
+
+### Survey before claiming
+- 15+ NFL namespaces already exist; `nfl-command/` covers singles/parlays/props gates, correlations with n, questions, suggestions, flags and a verifier.
+- Verified gaps (grep of the whole repo, 2026-11-14): **no demotion gate** (0 hits for "demotion"); **no paper-trading stage**; **no price-snapshot store** (opening/closing; only mentioned as a suggestion); **no separate signal vs staking leaderboard columns**; **no fair / market / difference column layout** with origination order side → total → moneyline; **no replacement-depth rank** (depth page exists but starter/backup is "unverified" on every row).
+- Decision: do NOT edit any peer namespace. Build an isolated additive namespace.
+
+### Task board
+| # | Task | Status | Owner | Files touched |
+|---|------|--------|-------|---------------|
+| L1 | Survey + claim (this entry) | done | arena/6f0b80b2-own4 | COORDINATION.md |
+| L2 | Price-snapshot store: opening/closing schema, validator, empty store (no invented prices) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/price_snapshots*`, `nfl-ledger/engine/*` |
+| L3 | Results feed: copy of the 137 verified 2026 games with nfl.com URLs; live spot-check of official pages | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/results_feed.*` |
+| L4 | Origination order (side → total → moneyline), fair / market / difference columns (market blank) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/originated_lines.*` |
+| L5 | Leaderboard split: signal vs staking; demotion gate (live → paper) with rules and state machine | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/gates_demotion.json`, `nfl-ledger/engine/demotion.py` |
+| L6 | Replacement-depth schema (depth rank of replacement) + correlations with n (reuse nfl-command) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/data/replacement_depth.*`, `nfl-ledger/data/correlations.json` |
+| L7 | Questions / information gaps, suggestions board (pick a path, nothing implemented), executive summary, Flagged for Review | claimed | arena/6f0b80b2-own4 | `nfl-ledger/**` |
+| L8 | Site build + verifier (every table row has an https source link or an explicit "unverified" marker; no broken links) | claimed | arena/6f0b80b2-own4 | `nfl-ledger/**` |
+| L9 | Root navigation link | requested (not edited) | — | `index.html` owned by the integration session; generator (`verification/build.py`) would drop hand edits. See request R-L1. |
+
+### Requests logged for other sessions (no peer file edited)
+- **R-L1** (integration session): add a link to `nfl-ledger/index.html` in the root NFL navigation group in `verification/build.py`.
