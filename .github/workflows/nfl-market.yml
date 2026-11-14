@@ -1,0 +1,53 @@
+name: Validate NFL market lab
+
+# Rebuilds nfl-market/ from its checked-in archive and enforces its publication rules:
+#   * every table row carries an https source link;
+#   * every number printed in a table traces back to the JSON the build read;
+#   * every local link and in-page anchor resolves;
+#   * every page keeps the navigation and the responsible-gambling footer;
+#   * no page leaks localhost, insecure http links or placeholder text;
+#   * the rebuild is byte-identical, so no published number can drift from its data.
+# It does not deploy: Pages serves this repository through the legacy main//root
+# configuration. This workflow is a gate, not a publisher.
+
+on:
+  push:
+    paths:
+      - 'nfl-market/**'
+      - '.github/workflows/nfl-market.yml'
+  pull_request:
+    paths:
+      - 'nfl-market/**'
+      - '.github/workflows/nfl-market.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Standard library only: no pip install, no network. The archive is the only
+      # input, so a value that was never read cannot appear on a page.
+      - name: Rebuild derived artefacts and pages from the archive
+        run: |
+          python3 nfl-market/engine/store.py
+          python3 nfl-market/data/register.py
+          python3 nfl-market/build.py
+
+      - name: Verify rows, provenance, links and footer
+        run: python3 nfl-market/verify.py
+
+      - name: Site must rebuild byte-identically
+        run: |
+          git diff --stat -- nfl-market/data/derived nfl-market/pages nfl-market/index.html
+          git diff --exit-code -- nfl-market/data/derived nfl-market/pages nfl-market/index.html

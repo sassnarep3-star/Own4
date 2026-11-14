@@ -1,0 +1,61 @@
+{
+ "generated_utc": "2026-11-14T00:00:00Z",
+ "items": [
+  {
+   "id": "MK-01",
+   "severity": "high",
+   "title": "The NFL publishes no prices at all, so every price here is third-party",
+   "detail": "https://www.nfl.com/schedules/2026/by-week/week-10 carries kickoff time and network and no number of any kind. There is no spread, total, moneyline or prop price anywhere on nfl.com. Every price in this namespace therefore comes from one commercial provider, DraftKings, syndicated through ESPN's public endpoint, and is labelled third-party on every row.",
+   "impact": "No price here can be called verified in the sense the brief means. It can only be called archived and traceable. Any strategy that depends on a price depends on a source the league does not publish, and that must be an explicit decision by the owner (question QM-01).",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds"
+   ],
+   "status": "needs review"
+  },
+  {
+   "id": "MK-02",
+   "severity": "high",
+   "title": "13 of 14 week-10 games have no closing line, because they have not played",
+   "detail": "A closing line exists only once a market closes. At read time one week-10 game had finished (WAS @ NYG, 2026-11-12) and thirteen had not. The store holds both snapshots for all fourteen, but for the thirteen unplayed games the 'close' is the provider's current number, which will keep moving until kickoff.",
+   "impact": "Any study described as 'against the closing line' is, for this slate, a study against a snapshot that is not a close. The column is filled because the provider fills it; the label says snapshot, not close, and this flag says the difference matters.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "status": "needs review"
+  },
+  {
+   "id": "MK-03",
+   "severity": "medium",
+   "title": "The store covers week 10 only; earlier weeks were not archived",
+   "detail": "Fifteen week-9 games are listed in this namespace with no archived prices. Their open/close data exists at the provider but was not read and transcribed this round, and the rule here is that a row is only published if its value was actually read. Writing 15 plausible payloads from expectation would repeat exactly the mistake DP-05 records.",
+   "impact": "Opening-to-closing movement can be shown for one slate, not as a sample. No movement rate is published as a statistic.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-9"
+   ],
+   "status": "needs review"
+  },
+  {
+   "id": "MK-04",
+   "severity": "high",
+   "title": "Caught: four games were attached to the wrong prices by ordering",
+   "detail": "The first build mapped the provider's fourteen odds payloads onto the nfl.com slate by position in the list. The provider returns a different order than nfl.com prints, so four games silently received another game's prices. None of them errored: every number looked plausible. The check that caught it was IC-01, which compares each stored home spread against the provider's own 'Team -X' details string.",
+   "impact": "Every price in the store is now keyed by an explicitly written event id and re-checked on each build. IC-01, IC-02, IC-03 and IC-04 all run in the pipeline and the build refuses to be described as clean unless all four pass. The near-miss is published because a raw payload that is internally consistent can still be the wrong payload.",
+   "sources": [
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds"
+   ],
+   "status": "needs review"
+  },
+  {
+   "id": "MK-05",
+   "severity": "medium",
+   "title": "No player-prop prices are stored, although the provider exposes them",
+   "detail": "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds/100/propBets reports a count of 730 items for the single game that has been played, paged 25 at a time. Reading one page showed the same athlete/type pair repeated with identical open and current targets. Archiving one page would have produced a table that looks like a prop market and is not one.",
+   "impact": "The brief asks for player-prop combinations. With zero archived prop prices, any prop combination ROI would be invented. The prop section of this site publishes the zero and the reason, and nothing else.",
+   "sources": [
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds/100/propBets"
+   ],
+   "status": "needs review"
+  }
+ ]
+}

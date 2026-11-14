@@ -140,8 +140,11 @@ NAV = [
     # Every link previously published is preserved; nothing was removed.
     # 2026-11-14: +2 workspaces by session arena/65c4a22e-own4 (nfl-markets, own namespace;
     # and nfl-ledger per that session's logged request R-L1 — peer session arena/6f0b80b2-own4).
-    # Superset-only edit: every existing link preserved.
-    ("NFL research · 18 workspaces (2026-11-14)", [
+    # Superset-only edit: every existing link preserved. Merged with main the same day:
+    # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
+    # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
+    # namespaces below — all retained; group retitled to the combined count.
+    ("NFL research · 21 workspaces (2026-11-14)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -201,8 +204,98 @@ NAV = [
         ("nfl-arena/pages/injuries.html", "Injuries &amp; depth deficiencies", "legacy"),
         ("nfl-arena/pages/verification.html", "Line-by-line verification", "legacy"),
         ("nfl-arena/pages/flagged.html", "⚑ Hub flagged (13)", "legacy"),
-        ("nfl-ledger/index.html", "NFL Ledger — snapshot store, gates, registers", "legacy"),
+        # Added 2026-11-14 by session arena/d507f753-own4: the nfl-market namespace
+        # (price-snapshot store, verified results feed, side-then-total-then-moneyline
+        # origination, split leaderboard, replacement depth, official-only correlations,
+        # demotion gate). Added here and not as a hand edit to index.html, because every
+        # hand-edited link in this repository has been dropped by the next regeneration.
+        ("nfl-market/index.html", "NFL market lab — dashboard", "legacy"),
+        ("nfl-market/pages/price-store.html", "NFL market — price store", "legacy"),
+        ("nfl-market/pages/results.html", "NFL market — verified results feed", "legacy"),
+        ("nfl-market/pages/origination.html", "NFL market — side, total, moneyline", "legacy"),
+        ("nfl-market/pages/leaderboard.html", "NFL market — split leaderboard", "legacy"),
+        ("nfl-market/pages/depth.html", "NFL market — replacement depth", "legacy"),
+        ("nfl-market/pages/correlations.html", "NFL market — correlations", "legacy"),
+        ("nfl-market/pages/demotion.html", "NFL market — demotion gate", "legacy"),
+        ("nfl-market/pages/questions.html", "NFL market — questions", "legacy"),
+        ("nfl-market/pages/suggestions.html", "NFL market — suggestions", "legacy"),
+        ("nfl-market/pages/flagged.html", "⚑ NFL market — flagged (12)", "legacy"),
+        ("nfl-market/pages/sources.html", "NFL market — source register", "legacy"),
+        ("nfl-market/pages/executive-summary.html", "NFL market — executive summary", "legacy"),
+        # Added 2026-11-14 during merge with main: the two peer namespaces that arrived
+        # after this branch was cut (arena/19ae73ae-own4 -> nfl-price-snapshot/,
+        # arena/1c0e...-own4 -> nfl-ledger/). Both were reachable only as hand edits to
+        # index.html, which the next regeneration would have dropped — the recurring
+        # F-13 defect this generator exists to prevent. Membership is included, not
+        # judged; see the integration note in COORDINATION.md.
+        ("nfl-price-snapshot/pages/index.html", "NFL price snapshot — dashboard", "legacy"),
+        ("nfl-price-snapshot/pages/price-snapshots.html", "NFL price snapshot — store", "legacy"),
+        ("nfl-price-snapshot/pages/results-feed.html", "NFL price snapshot — results feed", "legacy"),
+        ("nfl-price-snapshot/pages/own-lines.html", "NFL price snapshot — own lines", "legacy"),
+        ("nfl-price-snapshot/pages/leaderboard.html", "NFL price snapshot — leaderboard", "legacy"),
+        ("nfl-price-snapshot/pages/injuries.html", "NFL price snapshot — injuries", "legacy"),
+        ("nfl-price-snapshot/pages/correlations.html", "NFL price snapshot — correlations", "legacy"),
+        ("nfl-price-snapshot/pages/gates.html", "NFL price snapshot — gates", "legacy"),
+        ("nfl-price-snapshot/pages/questions.html", "NFL price snapshot — questions", "legacy"),
+        ("nfl-price-snapshot/pages/suggestions.html", "NFL price snapshot — suggestions", "legacy"),
+        ("nfl-price-snapshot/pages/flagged.html", "⚑ NFL price snapshot — flagged", "legacy"),
+        ("nfl-price-snapshot/pages/requirements.html", "NFL price snapshot — requirements", "legacy"),
+        ("nfl-price-snapshot/pages/repo-audit.html", "NFL price snapshot — repo audit", "legacy"),
+        ("nfl-price-snapshot/pages/sources.html", "NFL price snapshot — sources", "legacy"),
+        ("nfl-price-snapshot/pages/executive-summary.html", "NFL price snapshot — summary", "legacy"),
+        ("nfl-ledger/index.html", "NFL Ledger — dashboard", "legacy"),
+        ("nfl-ledger/pages/price-snapshots.html", "NFL Ledger — price snapshots", "legacy"),
+        ("nfl-ledger/pages/results-feed.html", "NFL Ledger — results feed", "legacy"),
+        ("nfl-ledger/pages/origination.html", "NFL Ledger — origination", "legacy"),
+        ("nfl-ledger/pages/leaderboard.html", "NFL Ledger — leaderboard", "legacy"),
+        ("nfl-ledger/pages/replacement-depth.html", "NFL Ledger — replacement depth", "legacy"),
+        ("nfl-ledger/pages/correlations.html", "NFL Ledger — correlations", "legacy"),
+        ("nfl-ledger/pages/demotion.html", "NFL Ledger — demotion gate", "legacy"),
+        ("nfl-ledger/pages/questions.html", "NFL Ledger — questions", "legacy"),
+        ("nfl-ledger/pages/suggestions.html", "NFL Ledger — suggestions", "legacy"),
         ("nfl-ledger/pages/flagged.html", "⚑ NFL Ledger — flagged", "legacy"),
+        ("nfl-ledger/pages/sources.html", "NFL Ledger — sources", "legacy"),
+        ("nfl-ledger/pages/executive-summary.html", "NFL Ledger — executive summary", "legacy"),
+        # Added 2026-11-14 by session arena-a437d20c-own4 (C11): the nfl-core
+        # namespace (price-snapshot store with open/close, verified results feed,
+        # origination order, signal/staking split, replacement depth, correlations
+        # with n, demotion gate, questions/suggestions/flagged). Generator-owned
+        # so a regeneration cannot drop these links (F-13 class).
+        ("nfl-core/index.html", "NFL Core — dashboard", "legacy"),
+        ("nfl-core/pages/executive-summary.html", "NFL Core — executive summary", "legacy"),
+        ("nfl-core/pages/origination.html", "NFL Core — origination (side→total→ML)", "legacy"),
+        ("nfl-core/pages/prices.html", "NFL Core — price snapshots (open/close)", "legacy"),
+        ("nfl-core/pages/results.html", "NFL Core — verified results feed", "legacy"),
+        ("nfl-core/pages/leaderboard.html", "NFL Core — leaderboard (signal vs staking)", "legacy"),
+        ("nfl-core/pages/gates.html", "NFL Core — validation & demotion gates", "legacy"),
+        ("nfl-core/pages/depth.html", "NFL Core — injuries & replacement depth", "legacy"),
+        ("nfl-core/pages/correlations.html", "NFL Core — correlations (with n)", "legacy"),
+        ("nfl-core/pages/questions.html", "NFL Core — questions & answers", "legacy"),
+        ("nfl-core/pages/suggestions.html", "NFL Core — suggestions board (decide first)", "legacy"),
+        ("nfl-core/pages/flagged.html", "⚑ NFL Core — flagged for review", "legacy"),
+        ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
+        ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
+    ]),
+    # Added 2026-11-14: own-line origination engine with a verified results feed.
+    # Every table row on every page carries an https link to the official source.
+    ("NFL Market Board · 2026-11-14", [
+        ("nfl-marketboard/index.html", "Market Board — overview", "legacy"),
+        ("nfl-marketboard/executive-summary.html", "Market Board — executive summary", "legacy"),
+        ("nfl-marketboard/results.html", "Market Board — verified results feed", "legacy"),
+        ("nfl-marketboard/prices.html", "Market Board — price-snapshot store", "legacy"),
+        ("nfl-marketboard/lines.html", "Market Board — originated lines", "legacy"),
+        ("nfl-marketboard/leaderboard.html", "Market Board — leaderboard", "legacy"),
+        ("nfl-marketboard/strategies.html", "Market Board — strategies &amp; gates", "legacy"),
+        ("nfl-marketboard/governance.html", "Market Board — promotion &amp; demotion", "legacy"),
+        ("nfl-marketboard/correlations.html", "Market Board — correlations", "legacy"),
+        ("nfl-marketboard/line-skill.html", "Market Board — line-making skill", "legacy"),
+        ("nfl-marketboard/injuries.html", "Market Board — injuries &amp; depth", "legacy"),
+        ("nfl-marketboard/decisions.html", "Market Board — questions &amp; answers", "legacy"),
+        ("nfl-marketboard/suggestions.html", "Market Board — suggestions", "legacy"),
+        ("nfl-marketboard/review.html", "Market Board — repository review", "legacy"),
+        ("nfl-marketboard/flagged.html", "⚑ Market Board — flagged (15)", "legacy"),
+        ("nfl-marketboard/sources.html", "Market Board — sources", "legacy"),
+        # Added 2026-11-14 by session arena/65c4a22e-own4 (nfl-markets namespace):
         ("nfl-markets/index.html", "NFL Markets — price snapshots, results feed, signal vs staking", "legacy"),
         ("nfl-markets/pages/origination.html", "NFL Markets — origination order &amp; own lines", "legacy"),
         ("nfl-markets/pages/results-feed.html", "NFL Markets — verified results feed", "legacy"),

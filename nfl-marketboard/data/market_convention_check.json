@@ -1,0 +1,50 @@
+{
+ "correlation_vs_official_margin": {
+  "n": 137,
+  "r": 0.4355968523021145,
+  "p_value": 1.0380914890296475e-07,
+  "ci_low": 0.28899422442940037,
+  "ci_high": 0.5622373387097467,
+  "note": "",
+  "t_stat": 5.622644879237842,
+  "df": 135,
+  "interpretation": "nflverse spread_line is documented as \"positive = home team favoured\". Correlating it against the official home margin tests that convention on this season. A strong positive r confirms positive = home favoured."
+ },
+ "sign_convention": {
+  "candidates": {
+   "home_covers_if_margin_gt_spread": {
+    "n": 137,
+    "home_cover_rate": 0.4088,
+    "pushes": 6,
+    "mean_net": -1.712
+   },
+   "home_covers_if_margin_gt_minus_spread": {
+    "n": 137,
+    "home_cover_rate": 0.5474,
+    "pushes": 2,
+    "mean_net": 1.668
+   }
+  },
+  "chosen": "home_covers_if_margin_gt_spread",
+  "reason": "It is the only reading consistent with the documented convention (positive = home favoured), it produces a plausible push count, and it reproduces a push on the Week 1 NE@SEA game (spread 3, home won by exactly 3). The 0.41 home cover rate it yields for 2026 is a real season effect, not a convention error: the market has been pricing home teams ~1.6 points richer than the official results justify.",
+  "mean_market_spread": 1.6898,
+  "mean_official_home_margin": -0.022,
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1-10",
+  "spread_vs_home_moneyline": {
+   "n": 137,
+   "r": -0.978,
+   "p_value": 0.0,
+   "reading": "A strong NEGATIVE r means a larger positive spread goes with a shorter (more negative) home price, i.e. positive spread = home favoured."
+  },
+  "decisive_single_game": {
+   "game": "2026 Week 1 NE @ SEA",
+   "official_score": "NE 10 - SEA 13",
+   "official_home_margin": 3,
+   "market_spread_line": 3.0,
+   "market_home_moneyline": -166.0,
+   "market_away_moneyline": 140.0,
+   "conclusion": "The home price is -166, so the home team is the favourite. The spread is +3 and the home team won by exactly 3. A 3-point favourite winning by exactly 3 is a push, which fixes the convention: the home side covers when the official home margin exceeds +3.",
+   "source_url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1"
+  }
+ }
+}

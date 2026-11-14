@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questions &amp; answers · NFL Market Board</title>
+<style>
+:root{--bg:#0f1216;--panel:#161b22;--panel2:#1c2230;--line:#2a3240;--tx:#e6edf3;
+--dim:#8b96a5;--acc:#4c9aff;--ok:#3fb950;--bad:#f85149;--warn:#d29922;--vis:#a371f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);color:var(--tx)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+nav{width:250px;flex:0 0 250px;background:var(--panel);border-right:1px solid var(--line);
+padding:18px 0;position:sticky;top:0;height:100vh;overflow:auto}
+nav .brand{padding:0 18px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+nav .brand b{font-size:17px;letter-spacing:.3px}
+nav .brand span{display:block;color:var(--dim);font-size:11.5px;margin-top:3px}
+nav a.nav{display:block;padding:8px 18px;color:var(--tx);font-size:13.5px;border-left:3px solid transparent}
+nav a.nav:hover{background:var(--panel2);text-decoration:none}
+nav a.nav.on{background:var(--panel2);border-left-color:var(--acc);font-weight:600}
+nav .grp{padding:14px 18px 5px;color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.7px}
+main{flex:1;padding:26px 30px 60px;max-width:1400px}
+h1{font-size:25px;margin:0 0 6px}
+h2{font-size:18px;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--tx)}
+.sub{color:var(--dim);font-size:13px;margin-bottom:18px;max-width:1000px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+.card .k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.card .v{font-size:23px;font-weight:650;margin-top:3px}
+.card .n{color:var(--dim);font-size:11.5px;margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;margin:10px 0 6px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-size:11px;text-transform:uppercase;
+letter-spacing:.4px;position:sticky;top:0;z-index:2}
+tbody tr:hover{background:#131922}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10.5px;font-weight:600;
+border:1px solid transparent;white-space:nowrap}
+.p-ok{background:rgba(63,185,80,.14);color:var(--ok);border-color:rgba(63,185,80,.35)}
+.p-bad{background:rgba(248,81,73,.14);color:var(--bad);border-color:rgba(248,81,73,.35)}
+.p-warn{background:rgba(210,153,34,.14);color:var(--warn);border-color:rgba(210,153,34,.35)}
+.p-dim{background:rgba(139,150,165,.12);color:var(--dim);border-color:rgba(139,150,165,.3)}
+.p-vis{background:rgba(163,113,247,.14);color:var(--vis);border-color:rgba(163,113,247,.35)}
+.blank{color:var(--warn);font-style:italic;font-size:11.5px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+border-radius:6px;padding:11px 14px;margin:12px 0;font-size:13px;color:#c9d4e0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.note.ok{border-left-color:var(--ok)}
+.src{font-size:11px}
+.tools{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.tools input{background:var(--panel);border:1px solid var(--line);color:var(--tx);
+border-radius:6px;padding:6px 10px;font-size:13px;min-width:230px}
+.tools .cnt{color:var(--dim);font-size:12px}
+.scroll{max-height:none}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+code{background:#1b2230;padding:1px 5px;border-radius:4px;font-size:12px}
+.legend{color:var(--dim);font-size:12px;margin:6px 0 0}
+.opt{border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:9px 0;background:#131922}
+.opt b{color:var(--acc)}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0;background:var(--panel)}
+.q .qq{font-weight:600;margin-bottom:6px}
+.q dl{margin:6px 0 0}
+.q dt{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-top:7px}
+.q dd{margin:1px 0 0;font-size:13px}
+@media(max-width:900px){nav{display:none}main{padding:16px}}
+</style></head><body><div class="wrap">
+<nav><div class="brand"><b>NFL Market Board</b><span>own-line origination · 2026 season · built 2026-11-14 UTC</span></div>
+<div class="grp">Overview</div>
+<a class="nav" href="index.html">Overview</a>
+<a class="nav" href="executive-summary.html">Executive summary</a>
+<div class="grp">Data stores</div>
+<a class="nav" href="results.html">Verified results feed</a>
+<a class="nav" href="prices.html">Price-snapshot store</a>
+<a class="nav" href="lines.html">Originated lines</a>
+<div class="grp">Competition</div>
+<a class="nav" href="leaderboard.html">Leaderboard</a>
+<a class="nav" href="strategies.html">Strategies &amp; gates</a>
+<a class="nav" href="governance.html">Promotion &amp; demotion</a>
+<div class="grp">Analysis</div>
+<a class="nav" href="correlations.html">Correlations</a>
+<a class="nav" href="line-skill.html">Line-making skill</a>
+<a class="nav" href="injuries.html">Injuries &amp; depth</a>
+<div class="grp">Decision desk</div>
+<a class="nav on" href="decisions.html">Questions &amp; answers</a>
+<a class="nav" href="suggestions.html">Suggestions</a>
+<a class="nav" href="review.html">Repository review</a>
+<a class="nav" href="flagged.html">Flagged for review</a>
+<a class="nav" href="sources.html">Sources</a>
+<div class="grp">Repository</div>
+<a class="nav" href="../index.html">Own4 root dashboard ↗</a>
+<a class="nav" href="https://github.com/sassnarep3-star/Own4">GitHub ↗</a></nav>
+<main><h1>Questions &amp; answers</h1>
+<div class="sub">Before any decision can reasonably be made: what we know, what we do not, and how to find out.</div>
+<div class="note"><b>What we know, what is missing, and what would settle it —
+18 questions.</b> The point of this register is to separate the things that are
+unknown because nobody has looked from the things that are unknown because no source exists. Those
+need different responses and it is expensive to confuse them.</div>
+<div class="q">
+<div class="qq">Q-01 · Where do the market numbers come from, and are they official? <span class="pill p-bad">open</span>
+<span class="src">Prices</span></div>
+<dl>
+<dt>What we know</dt><dd>The NFL publishes no odds on nfl.com. Every market number in this workspace comes from the nflverse/nfldata archive, which is a third-party CC BY 4.0 repository of historical closing lines. It is reconciled here against official scores (136/136 exact), so the results line up, but the prices themselves carry no official provenance.</dd>
+<dt>What is missing</dt><dd>An official or licensed price feed. Without one, no published edge, ROI or closing-line value can be described as verified.</dd>
+<dt>What would settle it</dt><dd>Licence a price feed (Sportradar or Genius are the NFL&#x27;s authorised distributors) or buy a commercial odds archive and re-run build.py against it. Nothing else changes.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-02 · Can we record opening numbers, or only closing numbers? <span class="pill p-bad">open</span>
+<span class="src">Prices</span></div>
+<dl>
+<dt>What we know</dt><dd>No opening number exists for any 2026 market in any source available to this repository. The nflverse archive files were enumerated directly: closing_lines.csv ends at 2018, sc_lines.csv ends at 2020, and initial_lines.csv covers 2021 only. That is 0 of 900 price rows with an opening number.</dd>
+<dt>What is missing</dt><dd>The entire opening side of the price-snapshot store for 2026.</dd>
+<dt>What would settle it</dt><dd>A feed that captures a timestamped price the moment a market is posted. Until then the opening column stays blank on every row and the store is half-built, which is exactly how it is published.</dd>
+<dt>Source</dt><dd><a class="src" href="https://api.github.com/repos/nflverse/nfldata/contents/data" target="_blank" rel="noopener">https://api.github.com/repos/nflverse/nfldata/contents/data</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-03 · Is the market number we compare against a closing number or something else? <span class="pill p-bad">open</span>
+<span class="src">Prices</span></div>
+<dl>
+<dt>What we know</dt><dd>The archive snapshot carries one price per market per game, captured at commit 6ea0be6 (2026-11-12). It is treated as the closing number. The capture time is not published by the archive, so &quot;closing&quot; is an assumption about the archive, not a verified timestamp.</dd>
+<dt>What is missing</dt><dd>A verified capture timestamp, and therefore any guarantee that the number was available before kickoff.</dd>
+<dt>What would settle it</dt><dd>Capture prices ourselves at a known time, or obtain a feed that publishes its capture time.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">https://github.com/nflverse/nfldata</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-04 · How do we know whether a replacement is a 2nd, 3rd or 4th string player? <span class="pill p-bad">open</span>
+<span class="src">Depth</span></div>
+<dl>
+<dt>What we know</dt><dd>The NFL publishes no depth chart. The team depth-chart route on nfl.com returns 404 (re-tested this session). The official injury report gives player, position, injury, practice status and game status — and nothing about depth order.</dd>
+<dt>What is missing</dt><dd>The depth ordinal the brief asks for. It is blank on every row.</dd>
+<dt>What would settle it</dt><dd>Two official routes exist and neither is used yet: (1) the official gamebook PDF for each game publishes that game&#x27;s starting lineups, so a player who started in week w-1 and is Out in week w has a replacement who can be named from the week-w gamebook; (2) official per-game participation gives an ordinal count of prior starts. Licensing a depth chart is the fast route and is suggestion S-03.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/teams/new-england-patriots/depth-chart" target="_blank" rel="noopener">https://www.nfl.com/teams/new-england-patriots/depth-chart</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-05 · Which players are actually starting for each team in Week 10? <span class="pill p-warn">partially answered</span>
+<span class="src">Depth</span></div>
+<dl>
+<dt>What we know</dt><dd>Four replacements are named in official NFL.com news reports this week: Drew Lock starts at QB for Seattle, Deshaun Watson for Cleveland, Carson Beck for Arizona, and Kyle McCord is in line for his first start at QB for Miami. Baltimore has lost two quarterbacks (Lamar Jackson, 6-10 weeks; Tyler Huntley, out for the season) and the official reports read this session do not name their replacement.</dd>
+<dt>What is missing</dt><dd>The named replacement for every other unavailable starter, and the depth ordinal for those that are named.</dd>
+<dt>What would settle it</dt><dd>Read the official gamebook for each Week 10 game after kickoff; the starting lineup is printed there. Doing this for all 14 games costs 14 fetches and would complete the register.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-06 · Do our originated numbers beat the market numbers? <span class="pill p-ok">answered</span>
+<span class="src">Model</span></div>
+<dl>
+<dt>What we know</dt><dd>No. On 105 walk-forward graded games our originated spread misses the official margin by 9.383 points on average against the market&#x27;s 8.814 (we are 0.569 worse, paired p = 0.138), and our total misses by 11.112 against the market&#x27;s 10.357 (we are 0.755 worse, paired p = 0.046). The total gap is statistically significant in the wrong direction.</dd>
+<dt>What is missing</dt><dd>A model that beats the market. There is not one in this workspace.</dd>
+<dt>What would settle it</dt><dd>This is settled as a negative result for the current model. The next step is the modelling work in suggestion S-05, not more data.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-07 · Is the model leaking future information? <span class="pill p-ok">answered</span>
+<span class="src">Model</span></div>
+<dl>
+<dt>What we know</dt><dd>Structurally no. A number originated for week w uses only official games with week &lt; w plus the official 2025 final standings, which were published before the 2026 season began. The pipeline has no path by which a later game can enter an earlier one.</dd>
+<dt>What is missing</dt><dd>An independent adversarial check of the walk-forward boundary.</dd>
+<dt>What would settle it</dt><dd>Re-run build.py with week w+1 deleted from the input and confirm the week-w numbers are byte-identical.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/standings/league/2025/REG" target="_blank" rel="noopener">https://www.nfl.com/standings/league/2025/REG</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-08 · Why do home teams cover only 40.9% of the time in 2026? <span class="pill p-bad">open</span>
+<span class="src">Market behaviour</span></div>
+<dl>
+<dt>What we know</dt><dd>Over 137 official results the mean market spread is +1.69 points to the home team while the mean official home margin is -0.02. Home sides therefore fail to cover far more often than half the time: 56 covers, 75 losses, 6 pushes, a 40.9% cover rate. The sign convention was verified three independent ways, so this is not a parsing error.</dd>
+<dt>What is missing</dt><dd>Whether this is a durable 2026 effect or one season of noise about a true 50% rate (z is about -2.1, so it is around the edge of conventional significance on its own).</dd>
+<dt>What would settle it</dt><dd>Compute the same figure for 2019-2025 from an archived line source. If the home-cover rate is stable near 41% across seasons it is an exploitable structural effect; if it wanders around 50% it is noise.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-09 · Can any strategy qualify for the leaderboard yet? <span class="pill p-ok">answered</span>
+<span class="src">Validation</span></div>
+<dl>
+<dt>What we know</dt><dd>No. The pre-registered sample floor is 300 graded bets and the season has produced 137 official results, so the largest bet count any strategy reaches is 77. Separately, after Benjamini-Hochberg correction across the eight-strategy family, the smallest q-value is 0.165 — nothing is close to the 0.05 threshold.</dd>
+<dt>What is missing</dt><dd>Sample. Nothing else is blocking qualification.</dd>
+<dt>What would settle it</dt><dd>Time, plus continuing to grade. Week 11 alone adds about 14 games.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-10 · How do we keep a lucky staking run from looking like a good signal? <span class="pill p-ok">answered</span>
+<span class="src">Validation</span></div>
+<dl>
+<dt>What we know</dt><dd>By scoring them separately and publishing both. The clearest example this week is S7, the two-leg cross-game parlay: 7 bets, a +56.1% flat ROI, and a staking score of 61.0 that is HIGHER than its signal score of 53.0. On ROI alone S7 is the best strategy in the house. With the two scores separated it is visibly a 7-bet sample.</dd>
+<dt>What is missing</dt><dd>Nothing. This is working as designed.</dd>
+<dt>What would settle it</dt><dd>n/a — the gate D3 (luck-test p above 0.20 sends a live strategy back to paper) already fires on S7 at p = 0.219.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-11 · Can player-prop combinations be originated at all? <span class="pill p-bad">open</span>
+<span class="src">Props</span></div>
+<dl>
+<dt>What we know</dt><dd>No. Player props need a posted prop price, and neither the NFL nor any other official source publishes one. The official player pages do publish per-game logs, so outcomes are knowable; prices are not.</dd>
+<dt>What is missing</dt><dd>Every prop price. The strategy registered for props, S8, has zero bets because no price exists to originate against.</dd>
+<dt>What would settle it</dt><dd>Licence a prop price feed. The outcome side is already covered by the official per-game logs.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/players/drake-maye/stats" target="_blank" rel="noopener">https://www.nfl.com/players/drake-maye/stats</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-12 · Can we build point-in-time team statistics from official sources? <span class="pill p-ok">answered</span>
+<span class="src">Data</span></div>
+<dl>
+<dt>What we know</dt><dd>Not from the team-stats pages. Those accept only the season-to-date selection; the weekly variant returns 404 (re-tested this session). A season-to-date table read today contains games that had not happened at the time of any earlier week, so using it in a backtest would be look-ahead bias.</dd>
+<dt>What is missing</dt><dd>Official weekly splits for team statistics.</dd>
+<dt>What would settle it</dt><dd>Two options: sum the official per-game box scores (point-in-time by construction, but one fetch per game), or reconstruct the splits from a licensed feed. This workspace avoids the problem by using only official final scores plus the prior-season standings as features.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/9" target="_blank" rel="noopener">https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/9</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-13 · Is the third-party archive complete and current? <span class="pill p-ok">answered</span>
+<span class="src">Data</span></div>
+<dl>
+<dt>What we know</dt><dd>Almost, but not quite. All 137 games played through Thursday 12 November have a market line in the archive, but the archive carries no score for the Week 10 WAS-NYG game — its snapshot predates that game. Official results and archive scores agree exactly on the other 136 games.</dd>
+<dt>What is missing</dt><dd>One game of settlement in the archive.</dd>
+<dt>What would settle it</dt><dd>Nothing to fix: this workspace takes results from nfl.com and prices from the archive, so the gap does not propagate. It is recorded so that nobody assumes the two files agree row for row.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">https://www.nfl.com/games/commanders-at-giants-2026-reg-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-14 · What sends a live strategy back to paper? <span class="pill p-ok">answered</span>
+<span class="src">Governance</span></div>
+<dl>
+<dt>What we know</dt><dd>Six pre-registered demotion triggers, D1 to D6, published on the Governance page. Five of the eight strategies currently trigger at least one; D3 (luck-test p above 0.20) fires on seven of them.</dd>
+<dt>What is missing</dt><dd>Nothing for the rules. All eight strategies are in PAPER status anyway because none has ever passed promotion.</dd>
+<dt>What would settle it</dt><dd>n/a — the rules are implemented and running.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-15 · How many parallel NFL workspaces exist, and does that hurt decision-making? <span class="pill p-bad">open</span>
+<span class="src">Repo</span></div>
+<dl>
+<dt>What we know</dt><dd>Sixteen directories in this repository carry NFL work, each produced by a different session: nfl, nfl-arena, nfl-audit, nfl-command, nfl-decision, nfl-decisions, nfl-edge, nfl-hub, nfl-integration, nfl-intel, nfl-lab, nfl-lines, nfl-origination, nfl-own, nfl-quant, nfl-research. They hold 387 published HTML pages. Numbers disagree between them because they were built on different days from different snapshots.</dd>
+<dt>What is missing</dt><dd>A single answer to &quot;what is our number for X&quot;.</dd>
+<dt>What would settle it</dt><dd>A consolidation decision by the owner, which is suggestion S-01.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-16 · Does every published table row carry a source link, as the brief requires? <span class="pill p-bad">open</span>
+<span class="src">Repo</span></div>
+<dl>
+<dt>What we know</dt><dd>Not everywhere. Scanning all 387 published pages this session: 11,584 tbody data rows, of which 534 (4.6%) contain no https link. They cluster in nfl-lines (228), nfl-origination (87), nfl-decision (55), nfl (45) and nfl-hub (35). Many of those rows are proposals rather than data, but the mix cannot be separated automatically.</dd>
+<dt>What is missing</dt><dd>A clean 100% row-source guarantee across the existing namespaces.</dd>
+<dt>What would settle it</dt><dd>A per-namespace triage: mark proposal rows explicitly, and attach a source to every row that states a fact. Suggestion S-02.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-17 · Are there broken links anywhere on the published site? <span class="pill p-ok">answered</span>
+<span class="src">Repo</span></div>
+<dl>
+<dt>What we know</dt><dd>No. Across 387 pages and 24,084 href/src references, 9,260 local references were resolved against the filesystem and all 9,260 resolve. This was checked this session, including the namespaces added by other sessions.</dd>
+<dt>What is missing</dt><dd>Nothing.</dd>
+<dt>What would settle it</dt><dd>n/a</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd>
+</dl></div>
+<div class="q">
+<div class="qq">Q-18 · How fresh is the injury information, and can it change before kickoff? <span class="pill p-bad">open</span>
+<span class="src">Operations</span></div>
+<dl>
+<dt>What we know</dt><dd>The report read this session is the official Week 10 report and its news module carries an item dated Saturday 14 November, so the page is live. Designations are revised up to kickoff, and the official report publishes blank cells that this workspace preserves as blanks rather than filling them in.</dd>
+<dt>What is missing</dt><dd>A guarantee that a designation captured now holds at kickoff.</dd>
+<dt>What would settle it</dt><dd>Re-read the report immediately before kickoff and store each read as a new dated snapshot. That is suggestion S-04.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></dd>
+</dl></div>
+<footer>NFL Market Board · session arena-28a71529-own4 · built 2026-11-14 UTC · research only, not wagering
+advice · National Problem Gambling Helpline 1-800-MY-RESET ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org ↗</a>
+</footer></main></div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ document.querySelectorAll('table[data-filter]').forEach(function(t){
+  var box=document.createElement('input');box.placeholder='Filter rows…';box.className='f';
+  var wrap=document.createElement('div');wrap.className='tools';
+  var cnt=document.createElement('span');cnt.className='cnt';
+  var w=document.createElement('input');w.type='hidden';
+  wrap.appendChild(box);wrap.appendChild(cnt);t.parentNode.insertBefore(wrap,t);
+  var rows=Array.prototype.slice.call(t.querySelectorAll('tbody tr'));
+  function go(){var q=box.value.toLowerCase(),s=0;
+   rows.forEach(function(r){var m=r.textContent.toLowerCase().indexOf(q)>-1;
+    r.style.display=m?'':'none';if(m)s++;});
+   cnt.textContent=s+' of '+rows.length+' rows';}
+  box.addEventListener('input',go);go();
+ });
+});
+</script></body></html>

@@ -1,0 +1,121 @@
+{
+  "id": "backtest-2026-w10",
+  "season": 2026,
+  "week": 10,
+  "snapshot": "2026-11-14",
+  "assumed_odds": -110,
+  "breakeven_hit_rate": 0.5238,
+  "n_completed_games": 1,
+  "n_games_slate": 13,
+  "strategies": [
+    {
+      "id": "S1",
+      "name": "Own spread side (home margin)",
+      "market": "side",
+      "signal": {
+        "description": "Expected home margin from the rating model",
+        "status": "measured",
+        "value": null
+      },
+      "staking": {
+        "description": "Flat stakes at assumed -110",
+        "roi": null,
+        "bets": 0,
+        "hit_rate": null,
+        "bets_detail": []
+      },
+      "qualified": false
+    },
+    {
+      "id": "S2",
+      "name": "Own total",
+      "market": "total",
+      "signal": {
+        "description": "Expected combined points from the rating model",
+        "status": "measured",
+        "value": null
+      },
+      "staking": {
+        "description": "Flat stakes at assumed -110",
+        "roi": null,
+        "bets": 0,
+        "hit_rate": null,
+        "bets_detail": []
+      },
+      "qualified": false
+    },
+    {
+      "id": "S3",
+      "name": "Own moneyline (home)",
+      "market": "moneyline",
+      "signal": {
+        "description": "Home win probability -> fair moneyline",
+        "status": "measured",
+        "value": null
+      },
+      "staking": {
+        "description": "Flat stakes at assumed -110",
+        "roi": null,
+        "bets": 0,
+        "hit_rate": null,
+        "bets_detail": []
+      },
+      "qualified": false
+    },
+    {
+      "id": "S4",
+      "name": "Parlay: side + total (same game)",
+      "market": "parlay",
+      "signal": {
+        "description": "Joint side & total, independence NOT assumed",
+        "status": "measured",
+        "value": null
+      },
+      "staking": {
+        "description": "Flat stakes at assumed -110",
+        "roi": null,
+        "bets": 0,
+        "hit_rate": null,
+        "bets_detail": []
+      },
+      "qualified": false
+    },
+    {
+      "id": "S5",
+      "name": "Prop combo: QB pass over + WR1 rec over",
+      "market": "prop_combo",
+      "signal": {
+        "description": "Same-game player-prop dependence (blank: no official logs)",
+        "status": "blocked",
+        "value": null
+      },
+      "staking": {
+        "description": "Flat stakes at assumed -110",
+        "roi": null,
+        "bets": 0,
+        "hit_rate": null,
+        "bets_detail": []
+      },
+      "qualified": false
+    }
+  ],
+  "n_strategies": 5,
+  "n_qualified": 0,
+  "reward_pool": 1000,
+  "reward_awarded": 0,
+  "signal_ranking": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "staking_ranking": [
+    "S1",
+    "S2",
+    "S3",
+    "S4",
+    "S5"
+  ],
+  "note": "ROI computed at an assumed -110 (no official price exists). One completed game means no meaningful sample: all ROI/hit-rate fields are blank or not meaningful. Signal and staking rankings are separate."
+}
