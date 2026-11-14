@@ -1,0 +1,39 @@
+{
+  "title": "Price-snapshot store — opening and closing numbers for every originated market",
+  "status": "EMPTY BY POLICY — 0 rows. No official source publishes betting lines (see F-L1).",
+  "markets_in_order": [
+    "spread (side)",
+    "total",
+    "moneyline"
+  ],
+  "snapshots": [
+    "open (first capture after the line is posted)",
+    "close (last capture before kickoff)"
+  ],
+  "fields": [
+    "snapshot_id",
+    "game_key",
+    "market",
+    "snapshot",
+    "book",
+    "captured_utc",
+    "line",
+    "price_american",
+    "source_url",
+    "source_is_official",
+    "status"
+  ],
+  "validation_rules": [
+    "snapshot_id unique; game_key must exist in results_feed.json",
+    "market in {spread, total, moneyline}; snapshot in {open, close}; close captured_utc < kickoff",
+    "source_url required; source_is_official must be true for any value shown on an official-only page",
+    "a missing open or close is stored as status=missing (never back-filled or estimated)",
+    "a row without a capture timestamp is rejected"
+  ],
+  "allowed_official_domains": [
+    "https://www.nfl.com/"
+  ],
+  "decision_needed": "A licensed odds archive is not an official source. Choose SUG-L1 (licensed feed with a labelled status) or keep the store empty. No value is entered until that decision is made.",
+  "rows_stored": 0,
+  "originated_markets_with_prices": 0
+}
