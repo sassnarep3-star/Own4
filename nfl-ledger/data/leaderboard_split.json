@@ -1,0 +1,126 @@
+{
+  "title": "Leaderboard — signal and staking are scored separately",
+  "captured_utc": "2026-11-14",
+  "rules": {
+    "rule_1": "Ranking uses signal columns ONLY. Staking columns are displayed but never change rank.",
+    "rule_2": "A strategy is reward-eligible only if signal gates pass AND n >= 300 graded selections (G2).",
+    "rule_3": "Staking results (ROI, bankroll path) cannot offset a failed signal gate; a strong staking run with a failed signal is labelled \"signal fail — staking ignored\".",
+    "rule_4": "Missing staking or price data is blank and makes the strategy paper-only, never live."
+  },
+  "rows": [
+    {
+      "id": "S1",
+      "name": "Spread singles (divergence)",
+      "bet_type": "Single — point spread",
+      "signal_gates_pass": 7,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S2",
+      "name": "Total singles (divergence)",
+      "bet_type": "Single — game total",
+      "signal_gates_pass": 6,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S3",
+      "name": "Moneyline value singles",
+      "bet_type": "Single — moneyline",
+      "signal_gates_pass": 7,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S4",
+      "name": "Cross-game 2-leg parlays",
+      "bet_type": "Parlay — 2 legs, different games",
+      "signal_gates_pass": 6,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S5",
+      "name": "Player-prop combos (2-3 legs)",
+      "bet_type": "Parlay — player props",
+      "signal_gates_pass": 2,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "S6",
+      "name": "Same-game parlay (SGP)",
+      "bet_type": "SGP — correlated legs, one game",
+      "signal_gates_pass": 2,
+      "signal_gates_total": 10,
+      "signal_status": "NOT PROMOTED — blocked: no market prices",
+      "signal_n_graded": 0,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    },
+    {
+      "id": "M1",
+      "name": "Own margin/total model (ridge-SRS, walk-forward) — margin vs naive baseline",
+      "bet_type": "Model signal (not a bet)",
+      "signal_gates_pass": null,
+      "signal_gates_total": null,
+      "signal_status": "NOT PROMOTED — holdout MAE bootstrap 95% CI [-2.4742, 3.7368] includes 0",
+      "signal_n_graded": 30,
+      "staking_roi": "",
+      "staking_drawdown": "",
+      "staking_n": 0,
+      "reward_eligible": false,
+      "signal_evidence": {
+        "holdout_accuracy": 0.7333,
+        "naive_accuracy": 0.5,
+        "placebo_p_accuracy": 0.0076,
+        "placebo_p_mae": 0.0004,
+        "mae_improvement_per_game": 2.3241,
+        "bootstrap_95ci_mae_improvement": [
+          -2.4742,
+          3.7368
+        ]
+      },
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/leaderboard.json"
+    }
+  ],
+  "reward_pool": {
+    "total_points_available": 6000,
+    "awarded": 0,
+    "note": "0 of 6,000 points awarded — no strategy passes all gates (2026-11-13 run)."
+  }
+}

@@ -1,0 +1,57 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Executive summary · NFL Ledger</title><style>
+:root{--ink:#1d2330;--mut:#5b6472;--line:#e3e7ee;--bg:#f7f8fb;--acc:#1f5fbf;--warn:#fff4d6;--bad:#fde2e1;--ok:#e3f5e9}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:14px 22px;position:sticky;top:0;z-index:2}
+header a.brand{font-weight:700;color:var(--ink);text-decoration:none;margin-right:18px}
+nav a{color:var(--acc);text-decoration:none;margin-right:12px;font-size:14px;white-space:nowrap}
+main{max-width:1200px;margin:0 auto;padding:22px}
+h1{font-size:24px;margin:6px 0 4px}h2{font-size:18px;margin:26px 0 8px}p.lead{color:var(--mut);margin-top:0}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:14px 0}
+.tile{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.tile b{display:block;font-size:22px}.tile span{color:var(--mut);font-size:13px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px}
+.card a{font-weight:600;color:var(--acc);text-decoration:none}.card p{margin:6px 0 0;color:var(--mut);font-size:14px}
+.banner{background:var(--warn);border:1px solid #f0d78a;border-radius:8px;padding:10px 14px;margin:12px 0}
+.banner.bad{background:var(--bad);border-color:#f2b8b5}.banner.ok{background:var(--ok);border-color:#b7e1c4}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid var(--line);font-size:13px;margin:8px 0 14px}
+th,td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#eef2f8;position:sticky;top:0;font-weight:600}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+td.blank{background:repeating-linear-gradient(45deg,#fff,#fff 6px,#fbf6e6 6px,#fbf6e6 12px)}
+td.fail{color:#9b1c1c}td.pass{color:#166534}
+.wrap{overflow-x:auto}
+.note{color:var(--mut);font-size:13px}
+footer{color:var(--mut);font-size:12px;border-top:1px solid var(--line);margin-top:28px;padding:14px 22px;text-align:center}
+code{background:#eef2f8;padding:1px 4px;border-radius:4px}
+</style></head><body><header><a class="brand" href="../index.html">NFL Ledger</a><nav><a href="../index.html">Dashboard</a><a href="../pages/executive-summary.html" aria-current="page">Executive summary</a><a href="../pages/results-feed.html">Results feed</a><a href="../pages/price-snapshots.html">Price snapshots</a><a href="../pages/origination.html">Origination</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/demotion.html">Demotion gate</a><a href="../pages/replacement-depth.html">Replacement depth</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for Review</a><a href="../pages/sources.html">Sources</a></nav></header><main><h1>Executive summary</h1><p class="lead">Plain-language summary of what is known and what is not.</p>
+<h2>Bottom line</h2>
+<ul>
+<li><b>The results feed is solid.</b> 137 games (weeks 1–10) reconcile 32 of 32 clubs exactly with the live nfl.com
+standings captured 2026-11-14. League points for equal points against (6291 = 6291).</li>
+<li><b>No strategy can be evaluated for profit.</b> Official sources do not publish betting lines. Opening and closing
+prices, ROI, closing-line beat rate and market correlations are therefore blank. Nothing here claims a profit.</li>
+<li><b>The model has not shown a proven signal.</b> On the holdout (weeks 8–10, n=30) accuracy was 0.733 against a
+0.500 naive baseline, but the bootstrap 95% interval for the MAE improvement, [-2.4742, 3.7368], includes 0. Gates require n ≥ 300.</li>
+<li><b>Zero strategies are live, and none may be.</b> The demotion gate is written and unit-tested, but it has no priced
+selections to act on.</li>
+<li><b>Week 11 is ready for origination.</b> Official 13-game slate matches the nfl.com Week 11 schedule (verified). Fair lines are in the table; market columns are blank.</li>
+</ul>
+<h2>What was built this session</h2>
+<ul>
+<li>Price-snapshot store: opening and closing schema, validation rules, empty store (no invented rows).</li>
+<li>Results feed: 137 games with official game-page links; standings reconciliation 32/32 against nfl.com.</li>
+<li>Origination order enforced in the table: <b>side → total → moneyline</b>, each with fair, market and difference columns.</li>
+<li>Leaderboard split: signal and staking in separate columns; ranking uses signal only.</li>
+<li>Demotion gate (D1–D6) with promotion rules P1–P5, implemented as pure functions and tested with synthetic inputs.</li>
+<li>Replacement-depth schema for Week 10 Out/Questionable players; depth fields blank because no official depth chart was found.</li>
+</ul>
+<h2>Decisions needed from you (no action is taken until you choose)</h2>
+<ol>
+<li><b>Price data (SUG-L1 vs SUG-L2):</b> allow a licensed, labelled, non-official odds archive, or stay in research mode.</li>
+<li><b>Depth data (SUG-L3):</b> approve a discovery step to find an official depth chart, or accept permanent blanks.</li>
+<li><b>Staking (Q-L6):</b> approve a bankroll rule for the staking column. Current draft: 2% per selection, −15% drawdown stop.</li>
+<li><b>Live status (Q-L8):</b> confirm the default of paper-only for this season.</li>
+</ol>
+<p class="note">Sources: see <a href="sources.html">Sources</a> and <a href="flagged.html">Flagged for Review</a>.</p>
+</main><footer>Analytical research only — not wagering advice. Unverified values are blank, never zero or inferred. Problem gambling help (US): 1-800-MY-RESET · <a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>.</footer></body></html>

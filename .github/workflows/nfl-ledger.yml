@@ -1,0 +1,36 @@
+name: NFL Ledger — rebuild and verify
+
+# Rebuilds nfl-ledger from checked-in code and the read-only peer data in nfl-command/data.
+# Fails on: any unsourced table row, any broken local link, any market value without an official source,
+# a non-32/32 standings reconciliation, or a rebuild that differs from the committed files (byte-identical gate).
+on:
+  push:
+    paths:
+      - 'nfl-ledger/**'
+      - 'nfl-command/data/**'
+      - '.github/workflows/nfl-ledger.yml'
+  pull_request:
+    paths:
+      - 'nfl-ledger/**'
+      - 'nfl-command/data/**'
+      - '.github/workflows/nfl-ledger.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Rebuild data and site
+        run: python3 nfl-ledger/engine/build.py
+      - name: Verify rows, links, market gates, reconciliation and demotion tests
+        run: python3 nfl-ledger/engine/verify.py
+      - name: Rebuild must be byte-identical to the committed output
+        run: git diff --exit-code -- nfl-ledger

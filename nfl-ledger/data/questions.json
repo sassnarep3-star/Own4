@@ -1,0 +1,78 @@
+{
+  "title": "Questions, information and answers",
+  "captured_utc": "2026-11-14",
+  "rows": [
+    {
+      "id": "Q-L1",
+      "topic": "Prices",
+      "question": "Where can opening and closing lines for every originated market be obtained, with capture timestamps?",
+      "known": "No nfl.com page checked (standings, schedules, injuries, game pages) publishes betting lines.",
+      "unknown": "Whether any rights-cleared archive exists, its cost, and whether it may be stored here.",
+      "status": "OPEN",
+      "unlock": "Decision on SUG-L1 (licensed feed with a labelled status)."
+    },
+    {
+      "id": "Q-L2",
+      "topic": "Results",
+      "question": "Is the 2026 results feed complete and correct through Week 10?",
+      "known": "All 137 games are read from nfl.com game-page URLs; W-L-T/PF/PA reconcile 32/32 with the live standings captured 2026-11-14.",
+      "unknown": "Week 10 Sunday and Monday results (Nov 15–16) are not yet played as of the capture date.",
+      "status": "ANSWERED (through W10 TNF)",
+      "unlock": "Re-run build after Nov 16 with a new capture."
+    },
+    {
+      "id": "Q-L3",
+      "topic": "Depth",
+      "question": "Which replacement is the depth chart rank of each Out/Questionable starter?",
+      "known": "Week 10 official injury rows (14 Out, 11 Questionable). Live spot check: 7 of 9 sample rows match; 2 differ (F-L9).",
+      "unknown": "Official starter/backup depth is not published on the pages checked; replacement rank is unknown.",
+      "status": "OPEN",
+      "unlock": "Discover an official depth-chart source (SUG-L3)."
+    },
+    {
+      "id": "Q-L4",
+      "topic": "Signal",
+      "question": "Does our model beat the naive baseline out of sample with enough certainty to earn a gate pass?",
+      "known": "Holdout (weeks 8–10, n=30): accuracy 0.733 vs 0.500; placebo p 0.0076 for accuracy.",
+      "unknown": "MAE-improvement bootstrap 95% CI [-2.47, 3.74] includes 0; holdout n=30 is far below G2 (300).",
+      "status": "OPEN — NOT PROVEN",
+      "unlock": "More prospective weeks; more graded selections."
+    },
+    {
+      "id": "Q-L5",
+      "topic": "Market",
+      "question": "What closing-line beat rate does any strategy achieve?",
+      "known": "Nothing is measurable: no closing numbers exist in the repository.",
+      "unknown": "Everything.",
+      "status": "UNANSWERABLE NOW",
+      "unlock": "Depends on Q-L1."
+    },
+    {
+      "id": "Q-L6",
+      "topic": "Staking",
+      "question": "What stake size and bankroll rule should the staking column use?",
+      "known": "nfl-command gates.json sets a 2% maximum per selection and a -15% drawdown stop.",
+      "unknown": "Whether the bankroll rule is acceptable to the owner; no bankroll is defined.",
+      "status": "OPEN (decision)",
+      "unlock": "Owner decision."
+    },
+    {
+      "id": "Q-L7",
+      "topic": "Correlation",
+      "question": "Are the correlations stable enough to use in pricing?",
+      "known": "Two model-internal phi values measured (n=105 each), with split-half values.",
+      "unknown": "Market correlations cannot be computed (Q-L1); player-prop correlations have no official data.",
+      "status": "PARTIAL",
+      "unlock": "Q-L1 and an official player-log source (SUG-L4)."
+    },
+    {
+      "id": "Q-L8",
+      "topic": "Governance",
+      "question": "Should any strategy be live at all this season?",
+      "known": "No strategy passes all gates (leaderboard.json: 0 of 6 registered).",
+      "unknown": "Requires Q-L1, Q-L4 answers first.",
+      "status": "OPEN (decision)",
+      "unlock": "Owner decision; the recommended default is paper-only."
+    }
+  ]
+}
