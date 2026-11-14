@@ -2799,3 +2799,22 @@ What this merge did about it:
 Verification after the merge: `verification/build.py` + `verification/verify_site.py`
 (346 rows, 0 broken links), `verification/assert_publication.py` unchanged, root
 `index.html` carries 97 NFL-namespace links, 0 missing targets.
+
+### Post-merge correction — `arena/d507f753-own4`, 2026-11-14
+
+PR **#97** merged (`d491337`) after all checks green (Rebuild-and-verify ×2, audit,
+validate, verify). GitHub Pages: status `built`; live-confirmed —
+`https://sassnarep3-star.github.io/Own4/nfl-market/pages/executive-summary.html`
+renders with its tables, source links and flags.
+
+One defect found by reading the deployed page rather than the local file: the
+`nfl-market/` copy (register and pages) still said **"seventeen workspaces"** and
+"the root nav lists sixteen" — true when the branch was cut, false after the merge
+brought `nfl-price-snapshot/` and `nfl-ledger/`. Corrected to nineteen (with the
+note that three of them implement the same brief), register regenerated, pages
+rebuilt, gate still green (1,563 table numbers, all traceable). Recorded here
+rather than quietly amended; the same class of error (a count that was right at
+authoring time) is why QM-13 now states its as-of date.
+
+Integration for this session is therefore complete: claim → build → gate → PR →
+merge → Pages confirmed → correction logged.

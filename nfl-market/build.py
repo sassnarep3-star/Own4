@@ -926,7 +926,8 @@ def build_flagged():
          ["nfl.com renders completed weeks as 'Hidden Score'",
           '<a href="https://sassnarep3-star.github.io/Own4/nfl-lines/pages/flagged.html">'
           'nfl-lines flags IR-01</a>', "open, reconfirmed this round"],
-         ["Seventeen NFL workspaces with overlapping content",
+         ["Nineteen NFL workspaces with overlapping content (three to the same "
+          "brief, merged within two days)",
           '<a href="https://sassnarep3-star.github.io/Own4/nfl-integration/pages/'
           'flagged.html">nfl-integration flags</a>', "open, decision D-1"]]))
 
@@ -1109,7 +1110,8 @@ specification with a testable history, not a promise.</p></div>
     body.append('<div class="note"><p>None of those five needs code. All five '
                 'change what the next session should build. Until they are '
                 'answered, another workspace is the most likely output, and the '
-                'count is already at seventeen.</p></div>')
+                'count is already at nineteen, three of them built to this same brief.'
+                '</p></div>')
     return page("pages/executive-summary.html", "Executive summary",
                 "\n".join(body), "pages/executive-summary.html")
 

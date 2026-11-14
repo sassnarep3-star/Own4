@@ -78,7 +78,8 @@ disappears. They are set out with options, evidence and cost-of-waiting at
 `/nfl-market/pages/questions.html`.
 
 Until they are answered, another workspace is the most likely output — and the
-repository already carries seventeen of them.
+repository carries nineteen of them — three to this same brief, merged
+within two days of each other.
 
 Analytical research only. No wagering advice; nothing here has ever been staked.
 Problem gambling: 1-800-MY-RESET · ncpgambling.org
