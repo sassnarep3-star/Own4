@@ -2582,3 +2582,50 @@ Session ID: `arena/8e2de421-own4` · Branch: `arena/8e2de421-own4` (platform-pin
 - **Review site (I4):** new `nfl-integration/` — dashboard + verification ledger (27 checks) + line-by-line comparisons + **Flagged for review (INT-01…INT-13)** + sources; `verify.py` enforces a source link on every table row (87/87) and resolvable links; `build.py` deterministic. Published at https://sassnarep3-star.github.io/Own4/nfl-integration/ .
 - **PR #68 takeover (I5):** merged 2026-11-13T22:07Z (merge commit `0c2da76`); its "eight namespaces" text now outdated (repository holds fifteen) — flagged INT-03, S04 remains the durable fix.
 - **Final integration (I6):** PR **#89** merged 2026-11-13T22:19:24Z (merge commit `d851723`) after all checks green on the final push (Rebuild-and-verify, audit, validate, verify ×2). GitHub Pages: status `built`; live-confirmed — root nav carries the 16-workspace NFL group (each href exactly once), `nfl-integration/` dashboard and Flagged page render with full data. Sources re-read 2026-11-13: `nfl.com/standings/`, `nfl.com/scores/2026/REG10`, `nfl.com/stats/team-stats/offense/{passing,scoring}/2026/reg/all`, `nfl.com/injuries/` (+ repository paths cited per row). No session's work was discarded; peer records from arena/3676fae4, arena/22679198, arena/1880ad1e, arena/934af359, arena/d6c72eb4, arena/107d5836 all preserved.
+
+---
+
+## Session `arena/5b4651ca-own4` — unified NFL origination book (2026-11-14)
+
+Session ID: `arena/5b4651ca-own4` · Branch: `arena/5b4651ca-own4` (platform-pinned; the
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as
+every prior session) · Base: `main` at `02a8bdf` (merge of PR #91).
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| B1 | Repo review, line by line: what exists, what is duplicated, what is missing, irregularities | claimed | arena/5b4651ca-own4 | `nfl-book/**`, `COORDINATION.md` |
+| B2 | Official-source harvest from nfl.com (standings, scores, team stats, injuries, schedule) re-read 2026-11-14 | claimed | arena/5b4651ca-own4 | `nfl-book/data/official/**` |
+| B3 | **Price-snapshot store**: opening + closing number for every market we originate (spread, total, moneyline) | claimed | arena/5b4651ca-own4 | `nfl-book/engine/store.py`, `nfl-book/data/price_snapshots.json` |
+| B4 | **Verified results feed**: official final scores + settlement so backtest/ROI are computable at all | claimed | arena/5b4651ca-own4 | `nfl-book/data/results.json`, `nfl-book/engine/results.py` |
+| B5 | **Origination order: side → total → moneyline** | claimed | arena/5b4651ca-own4 | `nfl-book/engine/originate.py` |
+| B6 | **Fair line / market line / difference as three separate columns** | claimed | arena/5b4651ca-own4 | `nfl-book/engine/originate.py`, `nfl-book/data/derived/own_lines.json` |
+| B7 | **Leaderboard separates signal from staking** (a lucky staking run may not mask a bad signal) | claimed | arena/5b4651ca-own4 | `nfl-book/engine/leaderboard.py`, `nfl-book/data/derived/leaderboard.json` |
+| B8 | **Depth of replacement tracked**, not just the fact of a replacement | claimed | arena/5b4651ca-own4 | `nfl-book/engine/depth.py`, `nfl-book/data/derived/depth.json` |
+| B9 | **Correlations only from officially sourced numbers, n published with every value** | claimed | arena/5b4651ca-own4 | `nfl-book/engine/correlation.py`, `nfl-book/data/derived/correlations.json` |
+| B10 | **Demotion gate**: a live strategy is sent back to paper | claimed | arena/5b4651ca-own4 | `nfl-book/engine/gates.py`, `nfl-book/data/derived/gates.json` |
+| B11 | Suggestions register (reviewable before any change) + questions/information/answers register | claimed | arena/5b4651ca-own4 | `nfl-book/data/suggestions.json`, `nfl-book/data/questions.json` |
+| B12 | Executive summary | claimed | arena/5b4651ca-own4 | `nfl-book/EXECUTIVE_SUMMARY.md`, `nfl-book/pages/executive-summary.html` |
+| B13 | Site: landing + subpages, every table row source-linked, blank+flagged when unverified | claimed | arena/5b4651ca-own4 | `nfl-book/pages/**`, `nfl-book/assets/**`, `nfl-book/build.py`, `nfl-book/verify.py` |
+| B14 | CI gate for the new namespace | claimed | arena/5b4651ca-own4 | `.github/workflows/nfl-book.yml` |
+| B15 | Final integration: root nav (generator-owned), re-verify, PR → merge → GitHub Pages deploy confirmation | claimed | arena/5b4651ca-own4 | `verification/build.py` (NAV only), `index.html`, `verified/*.html`, `COORDINATION.md` |
+
+### Claim log
+
+- 2026-11-14 — surveyed before claiming: `main` = `02a8bdf` (PR #91, session arena/8e2de421-own4).
+  Fifteen peer NFL namespaces exist (`nfl/`, `nfl-arena/`, `nfl-audit/`, `nfl-command/`,
+  `nfl-decision/`, `nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-intel/`, `nfl-lab/`,
+  `nfl-lines/`, `nfl-origination/`, `nfl-own/`, `nfl-quant/`, `nfl-research/`) plus
+  `nfl-integration/` (16th, added by PR #89). Open PRs at survey time: #93 (nfl-command,
+  owner arena/582300df), #59/#56/#47 (SF rental), #43 (NBA lab), #39 (data refresh),
+  #29 (coordination record). **No open PR or live claim touches `nfl-book/`** — this
+  namespace is new, so there is no overlap.
+- Scope discipline: this session creates ONLY `nfl-book/**` and `.github/workflows/nfl-book.yml`,
+  plus the shared files required for integration (`verification/build.py` NAV, regenerated
+  `index.html` + `verified/*.html`, append-only `COORDINATION.md`). No peer namespace file
+  is edited.
+- Platform deviation (logged, not a scope violation): the board asks for a branch named
+  `session-<id>/<task>`; this harness pins the branch to `arena/5b4651ca-own4` and forbids
+  creating other branches, so the work lands on the pinned branch. Same deviation as every
+  prior session recorded above.
