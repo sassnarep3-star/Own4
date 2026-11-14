@@ -3126,3 +3126,51 @@ Session ID: `arena/c8969a10-own4` · Branch: `arena/c8969a10-own4` (platform-pin
 | B12 | Final integration: re-verify, root nav (additive + generator NAV), PR → main → merge → Pages deploy confirmation, record here | claimed | arena/c8969a10-own4 | `index.html` (additive), `verification/build.py` (NAV additive), this file |
 
 **Scope rules:** no peer namespace is edited. Shared files are append-only (`COORDINATION.md`) or additive (`index.html`, `verification/build.py` NAV). Peer game logs may be READ and re-verified but never modified; all published values are re-checked against freshly fetched official nfl.com pages this session.
+
+---
+
+## Session `arena/c8969a10-own4` — completion record (2026-11-14 UTC)
+
+All B-tasks complete and merged. **PR #106 → merge commit `b025d60` (2026-11-14T22:20:25Z).**
+Post-merge CI on `main`: `Validate NBA research workspace`, `nfl-book verify`,
+`nfl-command verify`, `Verify bounded NBA audit`, `Validate canonical NBA dashboard`,
+and **`pages build and deployment` — all success**. Live and confirmed by fetch:
+**https://sassnarep3-star.github.io/Own4/nfl-book/** (16-page dashboard).
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| B1 | Price-snapshot store | complete | 39 open/close snapshots (13 games × side/total/ML); market open/close null by FB-01; schema published |
+| B2 | Verified results feed | complete | 137 rows + official URL each; V-01 32 line-by-line, V-02 160/160 cells, V-03 identities — all pass |
+| B3 | Origination order | complete | side → total → moneyline asserted in code + per-row audit + published order table |
+| B4 | Fair/market/difference columns | complete | three separate columns per market; market + difference blank + flagged |
+| B5 | Signal vs staking split | complete | three leaderboard tables: signal ranks, staking (assumed −110) never ranks alone; points 0/1,000 (amendment A1) |
+| B6 | Replacement depth | complete | RD-01 SEA QB 1st/2nd proven from official prose; RD-02/03 blank depth + FB-07 |
+| B7 | Correlations with n | complete | CR-01..05 computed (n/r/p/CI) from official scores; CR-06..09 blank with reasons |
+| B8 | Demotion gate | complete | D1 four auto-firing conditions published + current evaluation (no LIVE strategies) |
+| B9 | Suggestions + Questions | complete | SG-01..13 (options A/B/C, verdict blank pending reviewer), Q01..15 (answers blank per policy) |
+| B10 | Executive summary | complete | `nfl-book/EXECUTIVE_SUMMARY.md` + root EXECUTIVE_SUMMARY.md addendum + live exec page |
+| B11 | Final integration | complete | PR #106 merged; CI green; Pages live; root nav added via `verification/build.py` NAV (regenerated, additive) |
+| B12 | Repo review | complete | `nfl-book/data/repo_review.json` + repo-review page (RR-01..10 + 17-namespace inventory) |
+
+**Verification this session (beyond CI):** 12 official nfl.com pages fetched and read
+(standings ×2 chunks, scores wk1/wk9/wk10, WAS-NYG game page, week-11 schedule ×2,
+injuries ×2 chunks, two depth news articles); local site verifier PASS (16 pages,
+433 rows, 409 sourced + 24 meta-exempt, 202 marked blanks, 714 links, 0 broken,
+0 localhost); rebuild deterministic (no diff after rerun).
+
+**Conflicts encountered (2, both resolved without discarding anyone's work):**
+1. `COORDINATION.md` during rebase onto `origin/main` (PR #105 had landed session
+   `arena/d507f753-own4`'s M1–M10 claim) — resolved as a union: both claim blocks kept.
+2. Root nav line in `index.html` + 13 `verified/*.html` (nfl-book vs nfl-markets entries)
+   — resolved by regenerating from the merged `verification/build.py` NAV, which contains
+   both sessions' entries; no hand-edited nav line survived.
+
+**Defects fixed in my own code before merge:** `save_page` double-path bug; table cell
+wrapping (blank markers); CR-03 dead-code tie handling (n 127→125); leaderboard sort crash
+on S5 (`signal_metric` missing); post-hoc record baseline window corrected
+(0.7767 leaky → 0.6346 published per-week); `FD-05` id typo → `FB-05`.
+
+**Handover:** the 13 suggestions (SG-01..13) and 15 questions (Q01..15) are the open
+decision queue — a reviewer picks options before anything new is implemented. Suggested
+first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-line
+re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
