@@ -2628,3 +2628,93 @@ defect class: hand-added links must live in the generator so a regeneration cann
 3. Market prices are **not** an official NFL publication. Where a price is used, its provenance is
    stated on the row and the row is marked third-party. Where no price exists, the cell is blank.
 4. Every correlation publishes `n`. A correlation without a published `n` is not published at all.
+
+---
+
+## Session arena/28a71529-own4 — build complete, 2026-11-14 UTC
+
+All tasks M1–M13 are **done**. Everything below is the completion record required by the
+coordination protocol.
+
+### Task board — final status
+
+| # | Task | Status | Files delivered |
+|---|------|--------|-----------------|
+| M1 | Repo review, line-by-line, irregularity register with source links | **done** | `nfl-marketboard/review.html`, `flagged.html`, `engine/content.py` (FLAGS, REPO_REVIEW) |
+| M2 | Official-source ground truth re-read | **done** | `nfl-marketboard/data/raw/*.csv` (5 files) |
+| M3 | Price-snapshot store | **done** | `data/price_snapshots.json`, `prices.html` |
+| M4 | Verified results feed | **done** | `data/raw/results_2026_official.csv`, `data/reconciliation.json`, `results.html` |
+| M5 | Origination order + fair/market/difference columns | **done** | `data/originated_lines.json`, `lines.html` |
+| M6 | Leaderboard, signal vs staking scored separately | **done** | `data/leaderboard.json`, `data/strategy_results.json`, `leaderboard.html` |
+| M7 | Replacement-depth register | **done** | `data/raw/injuries_week10_official.csv`, `.../starter_replacements_official.csv`, `injuries.html` |
+| M8 | Correlations from official sources only, `n` published | **done** | `data/correlations.json`, `correlations.html` |
+| M9 | Demotion gate | **done** | `governance.html`, `data/leaderboard.json` |
+| M10 | Suggestions + questions/answers register | **done** | `decisions.html`, `suggestions.html`, `engine/content.py` |
+| M11 | Executive summary | **done** | `executive-summary.html` |
+| M12 | Site: landing page + 15 category subpages | **done** | 16 pages, `engine/site.py`, `engine/verify.py` |
+| M13 | Final integration, PR → merge → Pages | **done** | see below |
+
+### Sources read, and what each was used for
+
+| Source | URL | Used for | Status |
+|---|---|---|---|
+| NFL official schedule, weeks 1–10 | `https://www.nfl.com/schedules/2026/by-week/week-{1..10}` | 137 official final scores | live |
+| NFL official 2026 standings | `https://www.nfl.com/standings/league/2026/REG` | reconciliation target, 192 values | live |
+| NFL official 2025 standings | `https://www.nfl.com/standings/league/2025/REG` | pre-season prior (no leakage) | live |
+| NFL official injury report, Wk 10 | `https://www.nfl.com/injuries/` | 300-row depth ledger | live |
+| NFL official Week 10 scores | `https://www.nfl.com/scores/2026/REG10` | slate corroboration | live |
+| NFL official team passing / snap counts | `https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all` | feature inputs | live |
+| nflverse/nfldata | `https://github.com/nflverse/nfldata` | third-party market prices | live, CC BY 4.0 |
+| nflverse archive listing | `https://api.github.com/repos/nflverse/nfldata/contents/data` | proved no 2026 opening-line file exists | live |
+| NFL team depth chart | `https://www.nfl.com/teams/new-england-patriots/depth-chart` | **404** — evidence for flag P-04 | 404 |
+| NFL team-stats week-scoped | `.../2026/reg/9` | **404** — only `/reg/all` resolves | 404 |
+
+Ten official NFL news articles naming replacements are linked from
+`data/raw/starter_replacements_official.csv` and rendered on `injuries.html`.
+
+### Verification performed (re-runnable)
+
+```
+cd nfl-marketboard
+python3 engine/build.py     # raw -> data/*.json
+python3 engine/site.py      # data/*.json -> 16 pages
+python3 engine/verify.py    # pages checked: 16 · tbody rows: 1750 · local refs: 287 → PASS
+```
+
+* **Results feed**: 137 games settled, 13 scheduled. W/L/T/PF/PA/GP re-derived for all 32 clubs
+  and compared with the official standings — 192 values, **0 mismatches**.
+* **Source links**: 1,750 `<tbody>` rows, **0 without an https source**.
+* **Local links**: 287 local references, **0 broken**.
+* **Market convention**: the spread sign was wrong in an earlier reading and is now settled three
+  ways — spread vs home moneyline r = −0.978 (p ≈ 0), 6 pushes, and the W1 NE@SEA case where a
+  3-point home favourite won by exactly 3 (a push). Home cover rate 2026 = 40.9%.
+
+### Headline result (published as a negative result, not buried)
+
+Originated lines are worse than market lines on 105 walk-forward graded games: spread MAE
+**9.383** vs market **8.814** (paired p = 0.138); total MAE **11.112** vs **10.357**
+(paired p = 0.046). **0 of 8 strategies qualify, 0 of 1,000 reward units awarded.** Smallest
+Benjamini-Hochberg q = 0.165; the pre-registered floor requires n ≥ 300 and the largest sample
+is 77.
+
+### Irregularities flagged (all non-blocking, all on `flagged.html` with sources)
+
+P-01 opening prices unavailable for 2026 (no source exists) · P-02 NFL publishes no odds ·
+P-03 results feed incomplete mid-week · P-04 depth ordinal not published (nfl.com depth chart
+404) · P-05 depth-chart team labels internally inconsistent on the official injury page ·
+P-06 2026 home cover rate 40.9% (z ≈ −2.1, needs multi-season confirmation) · P-07 our lines
+lose to the market · P-08 NFL publishes no official prop prices · P-09 week-scoped team-stats
+route 404 · P-10 official injury practice-status vocabulary · P-11 parlay leg-dependence
+estimates on small n · P-12 4.61% of repo-wide table rows lack an https source (534 of 11,584) ·
+P-13 counting-method discrepancy vs an earlier session's figure (50 of 9,279) — both published,
+neither claimed definitive · P-14 seven open PRs, one stale > 60 min (#93 nfl-command) ·
+P-15 16 overlapping NFL namespaces in one repository.
+
+### Integration notes
+
+* Root `index.html` and `verification/build.py` were changed **additively only**: a new
+  "NFL Market Board · 2026-11-14" nav group with 16 entries. No other session's links were
+  removed or rewritten. This avoids the recurring I1/F-13 defect class where hand-added links
+  are dropped by the next regeneration.
+* No peer session's files were edited. All new work is in the new `nfl-marketboard/` namespace.
+* GitHub Pages serves this repository from `main`; no deployment workflow was added or needed.

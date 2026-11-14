@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overview · NFL Market Board</title>
+<style>
+:root{--bg:#0f1216;--panel:#161b22;--panel2:#1c2230;--line:#2a3240;--tx:#e6edf3;
+--dim:#8b96a5;--acc:#4c9aff;--ok:#3fb950;--bad:#f85149;--warn:#d29922;--vis:#a371f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);color:var(--tx)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+nav{width:250px;flex:0 0 250px;background:var(--panel);border-right:1px solid var(--line);
+padding:18px 0;position:sticky;top:0;height:100vh;overflow:auto}
+nav .brand{padding:0 18px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+nav .brand b{font-size:17px;letter-spacing:.3px}
+nav .brand span{display:block;color:var(--dim);font-size:11.5px;margin-top:3px}
+nav a.nav{display:block;padding:8px 18px;color:var(--tx);font-size:13.5px;border-left:3px solid transparent}
+nav a.nav:hover{background:var(--panel2);text-decoration:none}
+nav a.nav.on{background:var(--panel2);border-left-color:var(--acc);font-weight:600}
+nav .grp{padding:14px 18px 5px;color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.7px}
+main{flex:1;padding:26px 30px 60px;max-width:1400px}
+h1{font-size:25px;margin:0 0 6px}
+h2{font-size:18px;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--tx)}
+.sub{color:var(--dim);font-size:13px;margin-bottom:18px;max-width:1000px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+.card .k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.card .v{font-size:23px;font-weight:650;margin-top:3px}
+.card .n{color:var(--dim);font-size:11.5px;margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;margin:10px 0 6px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-size:11px;text-transform:uppercase;
+letter-spacing:.4px;position:sticky;top:0;z-index:2}
+tbody tr:hover{background:#131922}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10.5px;font-weight:600;
+border:1px solid transparent;white-space:nowrap}
+.p-ok{background:rgba(63,185,80,.14);color:var(--ok);border-color:rgba(63,185,80,.35)}
+.p-bad{background:rgba(248,81,73,.14);color:var(--bad);border-color:rgba(248,81,73,.35)}
+.p-warn{background:rgba(210,153,34,.14);color:var(--warn);border-color:rgba(210,153,34,.35)}
+.p-dim{background:rgba(139,150,165,.12);color:var(--dim);border-color:rgba(139,150,165,.3)}
+.p-vis{background:rgba(163,113,247,.14);color:var(--vis);border-color:rgba(163,113,247,.35)}
+.blank{color:var(--warn);font-style:italic;font-size:11.5px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+border-radius:6px;padding:11px 14px;margin:12px 0;font-size:13px;color:#c9d4e0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.note.ok{border-left-color:var(--ok)}
+.src{font-size:11px}
+.tools{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.tools input{background:var(--panel);border:1px solid var(--line);color:var(--tx);
+border-radius:6px;padding:6px 10px;font-size:13px;min-width:230px}
+.tools .cnt{color:var(--dim);font-size:12px}
+.scroll{max-height:none}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+code{background:#1b2230;padding:1px 5px;border-radius:4px;font-size:12px}
+.legend{color:var(--dim);font-size:12px;margin:6px 0 0}
+.opt{border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:9px 0;background:#131922}
+.opt b{color:var(--acc)}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0;background:var(--panel)}
+.q .qq{font-weight:600;margin-bottom:6px}
+.q dl{margin:6px 0 0}
+.q dt{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-top:7px}
+.q dd{margin:1px 0 0;font-size:13px}
+@media(max-width:900px){nav{display:none}main{padding:16px}}
+</style></head><body><div class="wrap">
+<nav><div class="brand"><b>NFL Market Board</b><span>own-line origination · 2026 season · built 2026-11-14 UTC</span></div>
+<div class="grp">Overview</div>
+<a class="nav on" href="index.html">Overview</a>
+<a class="nav" href="executive-summary.html">Executive summary</a>
+<div class="grp">Data stores</div>
+<a class="nav" href="results.html">Verified results feed</a>
+<a class="nav" href="prices.html">Price-snapshot store</a>
+<a class="nav" href="lines.html">Originated lines</a>
+<div class="grp">Competition</div>
+<a class="nav" href="leaderboard.html">Leaderboard</a>
+<a class="nav" href="strategies.html">Strategies &amp; gates</a>
+<a class="nav" href="governance.html">Promotion &amp; demotion</a>
+<div class="grp">Analysis</div>
+<a class="nav" href="correlations.html">Correlations</a>
+<a class="nav" href="line-skill.html">Line-making skill</a>
+<a class="nav" href="injuries.html">Injuries &amp; depth</a>
+<div class="grp">Decision desk</div>
+<a class="nav" href="decisions.html">Questions &amp; answers</a>
+<a class="nav" href="suggestions.html">Suggestions</a>
+<a class="nav" href="review.html">Repository review</a>
+<a class="nav" href="flagged.html">Flagged for review</a>
+<a class="nav" href="sources.html">Sources</a>
+<div class="grp">Repository</div>
+<a class="nav" href="../index.html">Own4 root dashboard ↗</a>
+<a class="nav" href="https://github.com/sassnarep3-star/Own4">GitHub ↗</a></nav>
+<main><h1>Overview</h1>
+<div class="sub">Own NFL line origination, graded against officially sourced results.</div>
+<div class="cards">
+<div class="card"><div class="k">Official results</div><div class="v">137</div><div class="n">games settled, weeks 1-10 · 0 reconciliation errors</div></div>
+<div class="card"><div class="k">Scheduled</div><div class="v">13</div><div class="n">Week 10 games not yet kicked off</div></div>
+<div class="card"><div class="k">Price rows</div><div class="v">900</div><div class="n">0 with an opening number</div></div>
+<div class="card"><div class="k">Originated markets</div><div class="v">411</div><div class="n">side + total + moneyline on every graded game</div></div>
+<div class="card"><div class="k">Strategies</div><div class="v">8</div><div class="n">0 qualified · 0 units awarded</div></div>
+<div class="card"><div class="k">Home cover rate 2026</div><div class="v">40.9%</div><div class="n">vs ~50% for a calibrated market</div></div>
+</div>
+<div class="note bad"><b>The headline is a negative result, and it is
+published as one.</b> Our originated numbers are worse than the market numbers: the spread misses
+the official margin by 9.383 points against the market's
+8.814 (paired p = 0.138475), and the total misses by
+11.112 against the market's 10.357
+(paired p = 0.046462). No strategy qualifies, no rewards are awarded.</div>
+<div class="note warn"><b>Read this before you read any number on this site.</b>
+The NFL publishes no odds. Every market price here comes from a third-party archive
+(<a class="" href="https://github.com/nflverse/nfldata" target="_blank" rel="noopener">nflverse/nfldata</a>, CC BY 4.0) and is labelled as
+such on every row. Every result comes from nfl.com and reconciles exactly: 32 clubs × (W, L, T,
+PF, PA, games played) = 192 values derived from the results feed and compared against
+the official standings, 0 mismatches.</div>
+<h2>What this workspace adds</h2>
+<table class=""><thead><tr><th class="">Requirement</th><th class="">What is published</th><th class=""></th></tr></thead><tbody><tr><td class=""><a href="prices.html"><b>Price-snapshot store</b></a></td><td class="">One row per originated market with an opening column and a closing column, each with its own capture time, source URL and source class. The store is real; the opening side is empty, and flag P-01 says so.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/prices.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="results.html"><b>Verified results feed</b></a></td><td class="">137 official final scores, each with the official game URL, reconciled cell-by-cell against the official standings. This is what makes ROI computable at all.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/results.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="lines.html"><b>Origination order</b></a></td><td class="">Side first, then total, then moneyline — and the moneyline is derived from the first two rather than estimated on its own.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/lines.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="lines.html"><b>Fair / market / difference</b></a></td><td class="">Three separate columns per market, so the gap is never embedded in a single number.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/lines.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="leaderboard.html"><b>Signal vs staking</b></a></td><td class="">Two scores per strategy on the leaderboard, computed from disjoint inputs, so a good week on sizing cannot flatter a bad prediction.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/leaderboard.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="injuries.html"><b>Replacement depth</b></a></td><td class="">The official injury report, the officially named replacements, and an honest blank where the NFL publishes nothing.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/injuries.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="correlations.html"><b>Correlations with n</b></a></td><td class="">13 registers, every one with its sample size, and one deliberately left blank because its inputs are not official.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/correlations.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="governance.html"><b>Demotion gate</b></a></td><td class="">Six triggers that send a live strategy back to paper, applied to every strategy on every build.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/governance.html" target="_blank" rel="noopener">open ↗</a></td></tr><tr><td class=""><a href="suggestions.html"><b>Suggestions</b></a></td><td class="">10 suggestions, each with two or three costed options and a recommendation, all awaiting your choice.</td><td class=""><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-marketboard/suggestions.html" target="_blank" rel="noopener">open ↗</a></td></tr></tbody></table>
+<h2>Where to start</h2>
+<div class="note"><b>If you read three pages:</b>
+<a href="executive-summary.html">Executive summary</a>, then
+<a href="decisions.html">Questions &amp; answers</a> for what we still do not know, then
+<a href="suggestions.html">Suggestions</a> to choose the next move. Everything else is evidence
+for those three.</div>
+<footer>NFL Market Board · session arena-28a71529-own4 · built 2026-11-14 UTC · research only, not wagering
+advice · National Problem Gambling Helpline 1-800-MY-RESET ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org ↗</a>
+</footer></main></div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ document.querySelectorAll('table[data-filter]').forEach(function(t){
+  var box=document.createElement('input');box.placeholder='Filter rows…';box.className='f';
+  var wrap=document.createElement('div');wrap.className='tools';
+  var cnt=document.createElement('span');cnt.className='cnt';
+  var w=document.createElement('input');w.type='hidden';
+  wrap.appendChild(box);wrap.appendChild(cnt);t.parentNode.insertBefore(wrap,t);
+  var rows=Array.prototype.slice.call(t.querySelectorAll('tbody tr'));
+  function go(){var q=box.value.toLowerCase(),s=0;
+   rows.forEach(function(r){var m=r.textContent.toLowerCase().indexOf(q)>-1;
+    r.style.display=m?'':'none';if(m)s++;});
+   cnt.textContent=s+' of '+rows.length+' rows';}
+  box.addEventListener('input',go);go();
+ });
+});
+</script></body></html>

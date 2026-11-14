@@ -1,0 +1,704 @@
+{
+ "rows": [
+  {
+   "id": "S7",
+   "name": "Cross-game 2-leg side parlay",
+   "family": "parlay",
+   "market": "SPREAD",
+   "rule": "the two largest |spread gap| games of the week, combined",
+   "status": "PAPER",
+   "n_bets": 7,
+   "n_graded": 7,
+   "n_won": 3,
+   "hit_rate": 0.4286,
+   "break_even_hit_rate": 0.2714,
+   "signal_score": 53.0,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": 0.1572,
+    "luck_p": 0.2194
+   },
+   "staking_score": 61.0,
+   "staking_parts": {
+    "flat_roi": 0.5609,
+    "kelly_roi": 0.0433,
+    "edge_prop_roi": null,
+    "staking_alpha": -0.5177,
+    "max_drawdown": -3.0
+   },
+   "flat_roi": 0.5609,
+   "kelly_roi": 0.0433,
+   "staking_alpha": -0.5177,
+   "max_drawdown": -3.0,
+   "luck_p": 0.2194,
+   "binomial_p": 0.2893,
+   "roi_ci_low": -0.5193,
+   "roi_ci_high": 2.0032,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 7,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.2194,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.5193,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.2893,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": null,
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.2893,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D3",
+     "observed": 0.2194,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S3",
+   "name": "Moneyline \u2014 5% fair-vs-market probability gap",
+   "family": "single",
+   "market": "MONEYLINE",
+   "rule": "bet the side when |fair_p - market_p| >= 0.05",
+   "status": "PAPER",
+   "n_bets": 78,
+   "n_graded": 77,
+   "n_won": 43,
+   "hit_rate": 0.5584,
+   "break_even_hit_rate": 0.4683,
+   "signal_score": 49.4,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": 0.0901,
+    "luck_p": 0.3118
+   },
+   "staking_score": 34.6,
+   "staking_parts": {
+    "flat_roi": 0.0581,
+    "kelly_roi": 0.0044,
+    "edge_prop_roi": 0.1043,
+    "staking_alpha": -0.0538,
+    "max_drawdown": -8.06
+   },
+   "flat_roi": 0.0581,
+   "kelly_roi": 0.0044,
+   "staking_alpha": -0.0538,
+   "max_drawdown": -8.06,
+   "luck_p": 0.3118,
+   "binomial_p": 0.0707,
+   "roi_ci_low": -0.1916,
+   "roi_ci_high": 0.3256,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 77,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.3118,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.1916,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.0707,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "0.2552 / -0.1339",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.164967,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D1",
+     "observed": -0.22,
+     "threshold": -0.1
+    },
+    {
+     "rule": "D3",
+     "observed": 0.3118,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S6",
+   "name": "Same-game side+total combination (2 legs)",
+   "family": "parlay",
+   "market": "SPREAD+TOTAL",
+   "rule": "both |spread gap| >= 2.0 and |total gap| >= 2.0 in the same game; legs are combined at the product of their official-model hit probabilities",
+   "status": "PAPER",
+   "n_bets": 40,
+   "n_graded": 37,
+   "n_won": 10,
+   "hit_rate": 0.2703,
+   "break_even_hit_rate": 0.2765,
+   "signal_score": 30.8,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": -0.0062,
+    "luck_p": 0.575
+   },
+   "staking_score": 28.5,
+   "staking_parts": {
+    "flat_roi": -0.0292,
+    "kelly_roi": -0.0073,
+    "edge_prop_roi": null,
+    "staking_alpha": 0.022,
+    "max_drawdown": -9.3514
+   },
+   "flat_roi": -0.0292,
+   "kelly_roi": -0.0073,
+   "staking_alpha": 0.022,
+   "max_drawdown": -9.3514,
+   "luck_p": 0.575,
+   "binomial_p": 0.5955,
+   "roi_ci_low": -0.5167,
+   "roi_ci_high": 0.4704,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 37,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.575,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.5167,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.5955,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "0.4039 / -0.4395",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.2893,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D3",
+     "observed": 0.575,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S4",
+   "name": "Side \u2014 2-point gap, winning-record filter",
+   "family": "single",
+   "market": "SPREAD",
+   "rule": "|gap| >= 2.0 AND the backed team is above .500 in the official standings at origination time",
+   "status": "PAPER",
+   "n_bets": 53,
+   "n_graded": 51,
+   "n_won": 26,
+   "hit_rate": 0.5098,
+   "break_even_hit_rate": 0.5261,
+   "signal_score": 30.1,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": -0.0163,
+    "luck_p": 0.5542
+   },
+   "staking_score": 29.4,
+   "staking_parts": {
+    "flat_roi": -0.0267,
+    "kelly_roi": -0.0088,
+    "edge_prop_roi": -0.0963,
+    "staking_alpha": 0.0179,
+    "max_drawdown": -8.5946
+   },
+   "flat_roi": -0.0267,
+   "kelly_roi": -0.0088,
+   "staking_alpha": 0.0179,
+   "max_drawdown": -8.5946,
+   "luck_p": 0.5542,
+   "binomial_p": 0.646,
+   "roi_ci_low": -0.2866,
+   "roi_ci_high": 0.2338,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 51,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.5542,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.2866,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.646,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "-0.0056 / -0.047",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.2893,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D2",
+     "observed": -0.0167,
+     "threshold": 0
+    },
+    {
+     "rule": "D3",
+     "observed": 0.5542,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S1",
+   "name": "Side \u2014 3-point fair-vs-market gap",
+   "family": "single",
+   "market": "SPREAD",
+   "rule": "bet the side when |fair_spread - market_spread| >= 3.0",
+   "status": "PAPER",
+   "n_bets": 57,
+   "n_graded": 54,
+   "n_won": 27,
+   "hit_rate": 0.5,
+   "break_even_hit_rate": 0.5249,
+   "signal_score": 27.8,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": -0.0249,
+    "luck_p": 0.6009
+   },
+   "staking_score": 29.2,
+   "staking_parts": {
+    "flat_roi": -0.0429,
+    "kelly_roi": -0.0082,
+    "edge_prop_roi": -0.0806,
+    "staking_alpha": 0.0347,
+    "max_drawdown": -11.4723
+   },
+   "flat_roi": -0.0429,
+   "kelly_roi": -0.0082,
+   "staking_alpha": 0.0347,
+   "max_drawdown": -11.4723,
+   "luck_p": 0.6009,
+   "binomial_p": 0.6929,
+   "roi_ci_low": -0.2927,
+   "roi_ci_high": 0.2041,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 54,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.6009,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.2927,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.6929,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "0.1306 / -0.2165",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.164967,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D1",
+     "observed": -0.1538,
+     "threshold": -0.1
+    },
+    {
+     "rule": "D2",
+     "observed": -0.0253,
+     "threshold": 0
+    },
+    {
+     "rule": "D3",
+     "observed": 0.6009,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S2",
+   "name": "Total \u2014 3-point fair-vs-market gap",
+   "family": "single",
+   "market": "TOTAL",
+   "rule": "bet Over when fair_total - market_total >= 3.0, Under when <= -3.0",
+   "status": "PAPER",
+   "n_bets": 49,
+   "n_graded": 49,
+   "n_won": 22,
+   "hit_rate": 0.449,
+   "break_even_hit_rate": 0.5234,
+   "signal_score": 15.0,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": -0.0744,
+    "luck_p": 0.8675
+   },
+   "staking_score": 31.3,
+   "staking_parts": {
+    "flat_roi": -0.1448,
+    "kelly_roi": -0.0117,
+    "edge_prop_roi": -0.1392,
+    "staking_alpha": 0.1331,
+    "max_drawdown": -9.5801
+   },
+   "flat_roi": -0.1448,
+   "kelly_roi": -0.0117,
+   "staking_alpha": 0.1331,
+   "max_drawdown": -9.5801,
+   "luck_p": 0.8675,
+   "binomial_p": 0.8821,
+   "roi_ci_low": -0.4146,
+   "roi_ci_high": 0.1262,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 49,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.8675,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.4146,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.8821,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "-0.131 / -0.1581",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.164967,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D1",
+     "observed": -0.1581,
+     "threshold": -0.1
+    },
+    {
+     "rule": "D3",
+     "observed": 0.8675,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S5",
+   "name": "Total \u2014 unders only, 2-point gap",
+   "family": "single",
+   "market": "TOTAL",
+   "rule": "bet Under only, when market_total - fair_total >= 2.0",
+   "status": "PAPER",
+   "n_bets": 21,
+   "n_graded": 21,
+   "n_won": 8,
+   "hit_rate": 0.381,
+   "break_even_hit_rate": 0.5258,
+   "signal_score": 10.0,
+   "signal_parts": {
+    "line_skill_spread": -0.569,
+    "line_skill_total": -0.755,
+    "accuracy_gap_vs_breakeven": -0.1448,
+    "luck_p": 0.9366
+   },
+   "staking_score": 36.8,
+   "staking_parts": {
+    "flat_roi": -0.2829,
+    "kelly_roi": -0.0184,
+    "edge_prop_roi": -0.3282,
+    "staking_alpha": 0.2645,
+    "max_drawdown": -7.7198
+   },
+   "flat_roi": -0.2829,
+   "kelly_roi": -0.0184,
+   "staking_alpha": 0.2645,
+   "max_drawdown": -7.7198,
+   "luck_p": 0.9366,
+   "binomial_p": 0.9396,
+   "roi_ci_low": -0.642,
+   "roi_ci_high": 0.1641,
+   "gates": {
+    "G1_min_sample": {
+     "threshold": 300,
+     "value": 21,
+     "pass": false
+    },
+    "G2_luck_test": {
+     "threshold": 0.05,
+     "value": 0.9366,
+     "pass": false
+    },
+    "G3_positive_roi_ci": {
+     "threshold": "95% CI lower bound > 0",
+     "value": -0.642,
+     "pass": false
+    },
+    "G4_beats_breakeven": {
+     "threshold": 0.05,
+     "value": 0.9396,
+     "pass": false
+    },
+    "G5_no_lookahead": {
+     "threshold": "structural",
+     "value": "walk-forward; features use only weeks < w",
+     "pass": true
+    },
+    "G6_half_stability": {
+     "threshold": "both halves ROI > 0",
+     "value": "-0.0589 / -0.4865",
+     "pass": false
+    },
+    "G7_survives_fdr": {
+     "threshold": "BH q <= 0.05 across the 8-strategy family",
+     "value": 0.2893,
+     "pass": false
+    }
+   },
+   "qualifies": false,
+   "demotions_triggered": [
+    {
+     "rule": "D3",
+     "observed": 0.9366,
+     "threshold": 0.2
+    }
+   ],
+   "reward_units": 0
+  },
+  {
+   "id": "S8",
+   "name": "Player-prop combination",
+   "family": "prop",
+   "market": "PLAYER PROP",
+   "rule": "REQUIRES official player-prop prices. None exist.",
+   "status": "PAPER",
+   "n_bets": 0,
+   "n_graded": 0,
+   "n_won": 0,
+   "hit_rate": null,
+   "break_even_hit_rate": null,
+   "signal_score": null,
+   "signal_parts": {},
+   "staking_score": null,
+   "staking_parts": {},
+   "flat_roi": null,
+   "kelly_roi": null,
+   "staking_alpha": null,
+   "max_drawdown": null,
+   "luck_p": null,
+   "binomial_p": null,
+   "roi_ci_low": null,
+   "roi_ci_high": null,
+   "gates": {},
+   "qualifies": false,
+   "demotions_triggered": [],
+   "reward_units": 0
+  }
+ ],
+ "rewards": {
+  "tiers": [
+   {
+    "tier": 1,
+    "condition": "signal_score >= 80 AND staking_score >= 60 AND all gates pass",
+    "reward": "100 units"
+   },
+   {
+    "tier": 2,
+    "condition": "signal_score >= 65 AND all gates pass",
+    "reward": "50 units"
+   },
+   {
+    "tier": 3,
+    "condition": "signal_score >= 50 AND all gates pass",
+    "reward": "20 units"
+   }
+  ],
+  "note": "Rewards are paid on the SIGNAL score. A strategy cannot earn a tier on the staking score alone: that is exactly the failure mode the signal/staking split exists to prevent.",
+  "qualified": 0,
+  "units_awarded": 0
+ },
+ "demotion_rules": [
+  {
+   "id": "D1",
+   "trigger": "Rolling 25 settled bets with flat ROI < -10%",
+   "action": "LIVE -> PAPER",
+   "window": "rolling 25"
+  },
+  {
+   "id": "D2",
+   "trigger": "Rolling 50 settled bets with mean realised edge <= 0",
+   "action": "LIVE -> PAPER",
+   "window": "rolling 50"
+  },
+  {
+   "id": "D3",
+   "trigger": "Luck-test p > 0.20 (result indistinguishable from a coin flip)",
+   "action": "LIVE -> PAPER",
+   "window": "last 100 settled bets"
+  },
+  {
+   "id": "D4",
+   "trigger": "Signal score in the bottom quartile of the leaderboard for two consecutive evaluation windows",
+   "action": "LIVE -> PAPER",
+   "window": "two consecutive windows"
+  },
+  {
+   "id": "D5",
+   "trigger": "Any look-ahead, data-integrity or provenance violation detected",
+   "action": "LIVE -> PAPER + QUARANTINE (all rows withdrawn from the leaderboard)",
+   "window": "immediate"
+  },
+  {
+   "id": "D6",
+   "trigger": "Maximum drawdown over the live window exceeds 20 units at 1u flat",
+   "action": "LIVE -> PAPER",
+   "window": "live window"
+  }
+ ],
+ "promotion_rules": [
+  {
+   "id": "P1",
+   "trigger": "All qualification gates G1-G6 pass on out-of-sample data",
+   "action": "PAPER -> LIVE"
+  },
+  {
+   "id": "P2",
+   "trigger": "G1 sample floor met AND G3 ROI confidence interval lower bound > 0",
+   "action": "PAPER -> LIVE (provisional, 25-bet probation)"
+  }
+ ]
+}

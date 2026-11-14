@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repository review · NFL Market Board</title>
+<style>
+:root{--bg:#0f1216;--panel:#161b22;--panel2:#1c2230;--line:#2a3240;--tx:#e6edf3;
+--dim:#8b96a5;--acc:#4c9aff;--ok:#3fb950;--bad:#f85149;--warn:#d29922;--vis:#a371f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);color:var(--tx)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+nav{width:250px;flex:0 0 250px;background:var(--panel);border-right:1px solid var(--line);
+padding:18px 0;position:sticky;top:0;height:100vh;overflow:auto}
+nav .brand{padding:0 18px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+nav .brand b{font-size:17px;letter-spacing:.3px}
+nav .brand span{display:block;color:var(--dim);font-size:11.5px;margin-top:3px}
+nav a.nav{display:block;padding:8px 18px;color:var(--tx);font-size:13.5px;border-left:3px solid transparent}
+nav a.nav:hover{background:var(--panel2);text-decoration:none}
+nav a.nav.on{background:var(--panel2);border-left-color:var(--acc);font-weight:600}
+nav .grp{padding:14px 18px 5px;color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.7px}
+main{flex:1;padding:26px 30px 60px;max-width:1400px}
+h1{font-size:25px;margin:0 0 6px}
+h2{font-size:18px;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--tx)}
+.sub{color:var(--dim);font-size:13px;margin-bottom:18px;max-width:1000px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+.card .k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.card .v{font-size:23px;font-weight:650;margin-top:3px}
+.card .n{color:var(--dim);font-size:11.5px;margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;margin:10px 0 6px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-size:11px;text-transform:uppercase;
+letter-spacing:.4px;position:sticky;top:0;z-index:2}
+tbody tr:hover{background:#131922}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10.5px;font-weight:600;
+border:1px solid transparent;white-space:nowrap}
+.p-ok{background:rgba(63,185,80,.14);color:var(--ok);border-color:rgba(63,185,80,.35)}
+.p-bad{background:rgba(248,81,73,.14);color:var(--bad);border-color:rgba(248,81,73,.35)}
+.p-warn{background:rgba(210,153,34,.14);color:var(--warn);border-color:rgba(210,153,34,.35)}
+.p-dim{background:rgba(139,150,165,.12);color:var(--dim);border-color:rgba(139,150,165,.3)}
+.p-vis{background:rgba(163,113,247,.14);color:var(--vis);border-color:rgba(163,113,247,.35)}
+.blank{color:var(--warn);font-style:italic;font-size:11.5px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+border-radius:6px;padding:11px 14px;margin:12px 0;font-size:13px;color:#c9d4e0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.note.ok{border-left-color:var(--ok)}
+.src{font-size:11px}
+.tools{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.tools input{background:var(--panel);border:1px solid var(--line);color:var(--tx);
+border-radius:6px;padding:6px 10px;font-size:13px;min-width:230px}
+.tools .cnt{color:var(--dim);font-size:12px}
+.scroll{max-height:none}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+code{background:#1b2230;padding:1px 5px;border-radius:4px;font-size:12px}
+.legend{color:var(--dim);font-size:12px;margin:6px 0 0}
+.opt{border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:9px 0;background:#131922}
+.opt b{color:var(--acc)}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0;background:var(--panel)}
+.q .qq{font-weight:600;margin-bottom:6px}
+.q dl{margin:6px 0 0}
+.q dt{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-top:7px}
+.q dd{margin:1px 0 0;font-size:13px}
+@media(max-width:900px){nav{display:none}main{padding:16px}}
+</style></head><body><div class="wrap">
+<nav><div class="brand"><b>NFL Market Board</b><span>own-line origination · 2026 season · built 2026-11-14 UTC</span></div>
+<div class="grp">Overview</div>
+<a class="nav" href="index.html">Overview</a>
+<a class="nav" href="executive-summary.html">Executive summary</a>
+<div class="grp">Data stores</div>
+<a class="nav" href="results.html">Verified results feed</a>
+<a class="nav" href="prices.html">Price-snapshot store</a>
+<a class="nav" href="lines.html">Originated lines</a>
+<div class="grp">Competition</div>
+<a class="nav" href="leaderboard.html">Leaderboard</a>
+<a class="nav" href="strategies.html">Strategies &amp; gates</a>
+<a class="nav" href="governance.html">Promotion &amp; demotion</a>
+<div class="grp">Analysis</div>
+<a class="nav" href="correlations.html">Correlations</a>
+<a class="nav" href="line-skill.html">Line-making skill</a>
+<a class="nav" href="injuries.html">Injuries &amp; depth</a>
+<div class="grp">Decision desk</div>
+<a class="nav" href="decisions.html">Questions &amp; answers</a>
+<a class="nav" href="suggestions.html">Suggestions</a>
+<a class="nav on" href="review.html">Repository review</a>
+<a class="nav" href="flagged.html">Flagged for review</a>
+<a class="nav" href="sources.html">Sources</a>
+<div class="grp">Repository</div>
+<a class="nav" href="../index.html">Own4 root dashboard ↗</a>
+<a class="nav" href="https://github.com/sassnarep3-star/Own4">GitHub ↗</a></nav>
+<main><h1>Repository review</h1>
+<div class="sub">Line-by-line audit of the repository as it stands today.</div>
+<div class="note"><b>Measured this session, not inherited.</b> Every figure below
+comes from a directory walk and HTML scan of the repository at commit 02a8bdf plus this session's
+additions, run 2026-11-14 UTC. Directory walk and HTML scan of the repository at commit 02a8bdf plus this session&#x27;s additions, run 2026-11-14 UTC. Raw provenance archives under data/raw/** are excluded from page counts because they are stored source documents, not published pages.</div>
+<h2>Scan results</h2>
+<table class=""><thead><tr><th class="">Measure</th><th class="n">Value</th><th class="">Note</th><th class="">Source</th></tr></thead><tbody><tr><td class="">Published HTML pages</td><td class="n">387</td><td class="">excluding data/raw provenance archives</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">href / src references</td><td class="n">24,084</td><td class="">all of them</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">Local references resolved</td><td class="n">9,260</td><td class="">checked against the filesystem</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">Broken local links</td><td class="n">0</td><td class=""><span class="pill p-ok">clean</span></td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">tbody data rows</td><td class="n">11,584</td><td class="">every &lt;tr&gt; containing a &lt;td&gt; inside a &lt;tbody&gt;</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">Rows with no https source link</td><td class="n">534</td><td class="">4.61% — flag P-12</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">NFL namespaces</td><td class="n">16</td><td class="">nfl, nfl-arena, nfl-audit, nfl-command, nfl-decision, nfl-decisions, nfl-edge, nfl-hub, nfl-integration, nfl-intel, nfl-lab, nfl-lines, nfl-origination, nfl-own, nfl-quant, nfl-research</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr></tbody></table>
+<h2>Unsourced rows by namespace</h2>
+<table class=""><thead><tr><th class="">Namespace</th><th class="n">Rows with no https link</th><th class="">Source</th></tr></thead><tbody><tr><td class="">nfl-lines</td><td class="n">228</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl-origination</td><td class="n">87</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl-decision</td><td class="n">55</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl</td><td class="n">45</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl-hub</td><td class="n">35</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">verification-2026-11-13</td><td class="n">22</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">rental-99ca004d-own4</td><td class="n">21</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">rental-own4</td><td class="n">18</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">rental-f1dbaea0</td><td class="n">15</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl-intel</td><td class="n">4</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">nfl-arena</td><td class="n">3</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr><tr><td class="">rental-sf</td><td class="n">1</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">repo ↗</a></td></tr></tbody></table>
+<div class="note warn"><b>A counting discrepancy is recorded rather than
+resolved.</b> An earlier session recorded 50 unsourced rows out of 9,279. This session counts 534 out of 11,584. The difference is method, not necessarily disagreement: this scan accepts single-quoted href attributes and counts every &lt;tr&gt; containing a &lt;td&gt; inside every &lt;tbody&gt;, including proposal and specification rows. Both counts are published so the owner can adjudicate; neither is presented as the definitive figure.</div>
+<h2>Open pull requests</h2>
+<table class=""><thead><tr><th class="">Pull request</th><th class="">Source</th></tr></thead><tbody><tr><td class="">#93 arena/582300df-own4 (NFL Command Center)</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/93" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#59 SF Outer Sunset rental dashboard</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/59" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#56 SF rental review site</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/56" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#47 SF rent increase dashboard</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/47" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#43 NBA line lab</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/43" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#39 NBA data refresh and settlement</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/39" target="_blank" rel="noopener">view ↗</a></td></tr><tr><td class="">#29 COORDINATION record</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/29" target="_blank" rel="noopener">view ↗</a></td></tr></tbody></table>
+<h2>Standings reconciliation</h2>
+<table class=""><thead><tr><th class="">Check</th><th class="n">Value</th><th class="">Note</th><th class="">Source</th></tr></thead><tbody><tr><td class="">Games settled</td><td class="n">137</td><td class="">weeks 1-10</td><td class=""><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr><tr><td class="">Values compared</td><td class="n">192</td><td class="">32 clubs × (W, L, T, PF, PA, games played)</td><td class=""><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr><tr><td class="">Mismatches</td><td class="n">0</td><td class=""><span class="pill p-ok">exact</span></td><td class=""><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr><tr><td class="">Sum of points for</td><td class="n">6,291</td><td class="">official total 6,291</td><td class=""><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr><tr><td class="">Sum of points against</td><td class="n">6,291</td><td class="">official total 6,291</td><td class=""><a class="src" href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">nfl.com ↗</a></td></tr></tbody></table>
+<footer>NFL Market Board · session arena-28a71529-own4 · built 2026-11-14 UTC · research only, not wagering
+advice · National Problem Gambling Helpline 1-800-MY-RESET ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org ↗</a>
+</footer></main></div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ document.querySelectorAll('table[data-filter]').forEach(function(t){
+  var box=document.createElement('input');box.placeholder='Filter rows…';box.className='f';
+  var wrap=document.createElement('div');wrap.className='tools';
+  var cnt=document.createElement('span');cnt.className='cnt';
+  var w=document.createElement('input');w.type='hidden';
+  wrap.appendChild(box);wrap.appendChild(cnt);t.parentNode.insertBefore(wrap,t);
+  var rows=Array.prototype.slice.call(t.querySelectorAll('tbody tr'));
+  function go(){var q=box.value.toLowerCase(),s=0;
+   rows.forEach(function(r){var m=r.textContent.toLowerCase().indexOf(q)>-1;
+    r.style.display=m?'':'none';if(m)s++;});
+   cnt.textContent=s+' of '+rows.length+' rows';}
+  box.addEventListener('input',go);go();
+ });
+});
+</script></body></html>

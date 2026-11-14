@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Suggestions · NFL Market Board</title>
+<style>
+:root{--bg:#0f1216;--panel:#161b22;--panel2:#1c2230;--line:#2a3240;--tx:#e6edf3;
+--dim:#8b96a5;--acc:#4c9aff;--ok:#3fb950;--bad:#f85149;--warn:#d29922;--vis:#a371f7}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+background:var(--bg);color:var(--tx)}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+nav{width:250px;flex:0 0 250px;background:var(--panel);border-right:1px solid var(--line);
+padding:18px 0;position:sticky;top:0;height:100vh;overflow:auto}
+nav .brand{padding:0 18px 14px;border-bottom:1px solid var(--line);margin-bottom:12px}
+nav .brand b{font-size:17px;letter-spacing:.3px}
+nav .brand span{display:block;color:var(--dim);font-size:11.5px;margin-top:3px}
+nav a.nav{display:block;padding:8px 18px;color:var(--tx);font-size:13.5px;border-left:3px solid transparent}
+nav a.nav:hover{background:var(--panel2);text-decoration:none}
+nav a.nav.on{background:var(--panel2);border-left-color:var(--acc);font-weight:600}
+nav .grp{padding:14px 18px 5px;color:var(--dim);font-size:10.5px;text-transform:uppercase;letter-spacing:.7px}
+main{flex:1;padding:26px 30px 60px;max-width:1400px}
+h1{font-size:25px;margin:0 0 6px}
+h2{font-size:18px;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px;color:var(--tx)}
+.sub{color:var(--dim);font-size:13px;margin-bottom:18px;max-width:1000px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin:16px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:13px 15px}
+.card .k{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.card .v{font-size:23px;font-weight:650;margin-top:3px}
+.card .n{color:var(--dim);font-size:11.5px;margin-top:3px}
+table{width:100%;border-collapse:collapse;font-size:12.8px;margin:10px 0 6px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--panel);color:var(--dim);font-size:11px;text-transform:uppercase;
+letter-spacing:.4px;position:sticky;top:0;z-index:2}
+tbody tr:hover{background:#131922}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:1px 7px;border-radius:9px;font-size:10.5px;font-weight:600;
+border:1px solid transparent;white-space:nowrap}
+.p-ok{background:rgba(63,185,80,.14);color:var(--ok);border-color:rgba(63,185,80,.35)}
+.p-bad{background:rgba(248,81,73,.14);color:var(--bad);border-color:rgba(248,81,73,.35)}
+.p-warn{background:rgba(210,153,34,.14);color:var(--warn);border-color:rgba(210,153,34,.35)}
+.p-dim{background:rgba(139,150,165,.12);color:var(--dim);border-color:rgba(139,150,165,.3)}
+.p-vis{background:rgba(163,113,247,.14);color:var(--vis);border-color:rgba(163,113,247,.35)}
+.blank{color:var(--warn);font-style:italic;font-size:11.5px}
+.note{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--acc);
+border-radius:6px;padding:11px 14px;margin:12px 0;font-size:13px;color:#c9d4e0}
+.note.warn{border-left-color:var(--warn)}
+.note.bad{border-left-color:var(--bad)}
+.note.ok{border-left-color:var(--ok)}
+.src{font-size:11px}
+.tools{display:flex;gap:8px;align-items:center;margin:10px 0;flex-wrap:wrap}
+.tools input{background:var(--panel);border:1px solid var(--line);color:var(--tx);
+border-radius:6px;padding:6px 10px;font-size:13px;min-width:230px}
+.tools .cnt{color:var(--dim);font-size:12px}
+.scroll{max-height:none}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+code{background:#1b2230;padding:1px 5px;border-radius:4px;font-size:12px}
+.legend{color:var(--dim);font-size:12px;margin:6px 0 0}
+.opt{border:1px solid var(--line);border-radius:8px;padding:11px 13px;margin:9px 0;background:#131922}
+.opt b{color:var(--acc)}
+.q{border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin:10px 0;background:var(--panel)}
+.q .qq{font-weight:600;margin-bottom:6px}
+.q dl{margin:6px 0 0}
+.q dt{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-top:7px}
+.q dd{margin:1px 0 0;font-size:13px}
+@media(max-width:900px){nav{display:none}main{padding:16px}}
+</style></head><body><div class="wrap">
+<nav><div class="brand"><b>NFL Market Board</b><span>own-line origination · 2026 season · built 2026-11-14 UTC</span></div>
+<div class="grp">Overview</div>
+<a class="nav" href="index.html">Overview</a>
+<a class="nav" href="executive-summary.html">Executive summary</a>
+<div class="grp">Data stores</div>
+<a class="nav" href="results.html">Verified results feed</a>
+<a class="nav" href="prices.html">Price-snapshot store</a>
+<a class="nav" href="lines.html">Originated lines</a>
+<div class="grp">Competition</div>
+<a class="nav" href="leaderboard.html">Leaderboard</a>
+<a class="nav" href="strategies.html">Strategies &amp; gates</a>
+<a class="nav" href="governance.html">Promotion &amp; demotion</a>
+<div class="grp">Analysis</div>
+<a class="nav" href="correlations.html">Correlations</a>
+<a class="nav" href="line-skill.html">Line-making skill</a>
+<a class="nav" href="injuries.html">Injuries &amp; depth</a>
+<div class="grp">Decision desk</div>
+<a class="nav" href="decisions.html">Questions &amp; answers</a>
+<a class="nav on" href="suggestions.html">Suggestions</a>
+<a class="nav" href="review.html">Repository review</a>
+<a class="nav" href="flagged.html">Flagged for review</a>
+<a class="nav" href="sources.html">Sources</a>
+<div class="grp">Repository</div>
+<a class="nav" href="../index.html">Own4 root dashboard ↗</a>
+<a class="nav" href="https://github.com/sassnarep3-star/Own4">GitHub ↗</a></nav>
+<main><h1>Suggestions</h1>
+<div class="sub">Choose a path before anything is implemented.</div>
+<div class="note"><b>10 suggestions, each with two or three options
+and a recommendation, none implemented.</b> This page exists so you can choose a path before
+anything changes. Nothing below has been started.</div>
+<h2>At a glance</h2>
+<table class=""><thead><tr><th class="">ID</th><th class="">Suggestion</th><th class="">Problem</th><th class="">Recommendation</th><th class="">Status</th><th class="">Effort</th><th class="">Source</th></tr></thead><tbody><tr><td class=""><b>S-01</b></td><td class="">Pick one canonical NFL workspace and freeze the rest</td><td class="">Sixteen NFL directories hold 387 pages built by different sessions on different days. They disagree with each other, and there is no way for a reader to tell which number is current. Every new session adds another.</td><td class="">Option (a) if you intend to keep using this repo; option (c) if you only want a stopgap. Option (b) alone is not enough.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">large / medium / small</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-02</b></td><td class="">Triage the 534 rows with no source link</td><td class="">The brief requires a source link on every row. 534 published rows do not have one. Some are proposals and legitimately have no external source; some state facts and should be sourced.</td><td class="">Option (a). It satisfies the rule honestly instead of cosmetically.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-03</b></td><td class="">Fill the replacement-depth column</td><td class="">The brief asks whether a replacement is a 2nd, 3rd or 4th string player. The NFL publishes no depth chart, so the column is blank on every row and the requirement is unmet.</td><td class="">Option (b) if you want it free and official; option (a) if you want it fast. Option (c) is what is published now, and it is labelled as such.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium (b) / small (a)</td><td class=""><a class="src" href="https://www.nfl.com/teams/new-england-patriots/depth-chart" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-04</b></td><td class="">Snapshot the injury report on a schedule, not once</td><td class="">One read per week cannot show when a designation changed, and designations change right up to kickoff. A single read also cannot be audited later.</td><td class="">Option (a). Knowing when a designation changed is the whole point of tracking injuries.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium</td><td class=""><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-05</b></td><td class="">Fix the model before adding more data</td><td class="">The current model is measurably worse than the market: 0.569 points worse on the spread and 0.755 worse on the total. Collecting more games will make the measurement more precise, not make the model better.</td><td class="">Option (a) first, then (b) once QB availability and depth are real columns rather than blanks.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">large</td><td class=""><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-06</b></td><td class="">Get opening prices, or stop promising them</td><td class="">Zero of 900 price rows have an opening number. Any metric that needs line movement — closing-line value, steam, open-to-close drift — is impossible until that changes.</td><td class="">Both (a) and (b): (b) gives you a movement prior this week, (a) gives you the real thing going forward.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium</td><td class=""><a class="src" href="https://api.github.com/repos/nflverse/nfldata/contents/data" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-07</b></td><td class="">Lower the 300-bet floor, or accept that nothing qualifies all season</td><td class="">The pre-registered floor of 300 graded bets cannot be met this season: a 17-week NFL season produces at most about 272 games, and a filtered strategy bets far fewer than that. As written, no single-season strategy can ever qualify.</td><td class="">Option (c) alongside (a). Prediction error is the better signal measure anyway, and it solves the sample problem without lowering any standard.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium</td><td class=""><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-08</b></td><td class="">Put a single front door on the site</td><td class="">The brief asks for suggestions, questions, injuries, depth, a leaderboard and an executive summary. All of that now exists in more than one namespace, in more than one copy, reached by different navigation paths.</td><td class="">Option (a), after S-01.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">small</td><td class=""><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-09</b></td><td class="">Automate the weekly loop end to end</td><td class="">Every number here was produced by a session that had to be asked. Scores, lines, injuries and grades should refresh themselves after each game without anyone prompting.</td><td class="">Option (a). The repository already has GitHub Actions workflows for other namespaces, so the pattern exists.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">medium</td><td class=""><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td class=""><b>S-10</b></td><td class="">Write down what would change your mind</td><td class="">Eight strategies are being scored against six gates, but nobody has recorded in advance what result would cause you to abandon a strategy rather than keep explaining it.</td><td class="">Option (a). It costs almost nothing and it is the difference between a research programme and a narrative.</td><td class=""><span class="pill p-warn">awaiting decision</span></td><td class="">small</td><td class=""><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">source ↗</a></td></tr></tbody></table>
+<h2>In full, with options</h2>
+<div class="q">
+<div class="qq">S-01 · Pick one canonical NFL workspace and freeze the rest
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: large / medium / small</span></div>
+<dl><dt>Problem</dt><dd>Sixteen NFL directories hold 387 pages built by different sessions on different days. They disagree with each other, and there is no way for a reader to tell which number is current. Every new session adds another.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Consolidate into one namespace, archive the other fifteen</b><br>
+<span class="src">For:</span> One answer per question; the site becomes usable; future sessions have one place to update.<br>
+<span class="src">Against:</span> A large one-off integration job; risks losing a peer session&#x27;s detail unless each page is migrated deliberately.</div><div class="opt"><b>b. Keep all sixteen, but publish an index that says which is authoritative for what</b><br>
+<span class="src">For:</span> Cheap; no content is lost.<br>
+<span class="src">Against:</span> Does not fix the underlying disagreement; the reader still has to cross-check sixteen sources.</div><div class="opt"><b>c. Freeze everything except one, and let new work land only there</b><br>
+<span class="src">For:</span> Stops the sprawl growing; no migration cost.<br>
+<span class="src">Against:</span> Leaves the existing contradictions in place.</div>
+<dl><dt>Recommendation</dt><dd>Option (a) if you intend to keep using this repo; option (c) if you only want a stopgap. Option (b) alone is not enough.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-02 · Triage the 534 rows with no source link
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium</span></div>
+<dl><dt>Problem</dt><dd>The brief requires a source link on every row. 534 published rows do not have one. Some are proposals and legitimately have no external source; some state facts and should be sourced.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Split every row into DATA or PROPOSAL and display the class</b><br>
+<span class="src">For:</span> Makes the distinction explicit; proposals stop looking unsourced and data rows without a source become obvious.<br>
+<span class="src">Against:</span> Needs a pass over each namespace.</div><div class="opt"><b>b. Attach a source to every row, including proposals</b><br>
+<span class="src">For:</span> Literal compliance.<br>
+<span class="src">Against:</span> Forces a link onto rows where no link is meaningful, which is its own kind of noise.</div><div class="opt"><b>c. Leave as is</b><br>
+<span class="src">For:</span> No work.<br>
+<span class="src">Against:</span> The verification rule stays unmet.</div>
+<dl><dt>Recommendation</dt><dd>Option (a). It satisfies the rule honestly instead of cosmetically.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-03 · Fill the replacement-depth column
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium (b) / small (a)</span></div>
+<dl><dt>Problem</dt><dd>The brief asks whether a replacement is a 2nd, 3rd or 4th string player. The NFL publishes no depth chart, so the column is blank on every row and the requirement is unmet.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Licence a depth-chart feed</b><br>
+<span class="src">For:</span> Directly answers the question; cheapest in engineering time.<br>
+<span class="src">Against:</span> Costs money; the provider becomes a dependency.</div><div class="opt"><b>b. Derive depth from official gamebooks: count a replacement&#x27;s prior starts this season</b><br>
+<span class="src">For:</span> Fully official, free, and it produces an ordinal that actually means something: a replacement with zero prior starts is deeper on the chart than one with eight.<br>
+<span class="src">Against:</span> One gamebook fetch per game per week — about 14 a week, or 270 a season. Needs automation.</div><div class="opt"><b>c. Track only the fact of replacement, not its depth</b><br>
+<span class="src">For:</span> Almost free; works today from the official injury report.<br>
+<span class="src">Against:</span> Explicitly does not meet the brief, which asks for depth.</div>
+<dl><dt>Recommendation</dt><dd>Option (b) if you want it free and official; option (a) if you want it fast. Option (c) is what is published now, and it is labelled as such.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/teams/new-england-patriots/depth-chart" target="_blank" rel="noopener">https://www.nfl.com/teams/new-england-patriots/depth-chart</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-04 · Snapshot the injury report on a schedule, not once
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium</span></div>
+<dl><dt>Problem</dt><dd>One read per week cannot show when a designation changed, and designations change right up to kickoff. A single read also cannot be audited later.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Store a dated snapshot on every read and graph the changes</b><br>
+<span class="src">For:</span> Turns a static table into a timeline; makes &quot;when did we know&quot; answerable, which matters for any claim about timing an edge.<br>
+<span class="src">Against:</span> Needs a scheduler and more storage.</div><div class="opt"><b>b. Keep one read per week but record the exact read time</b><br>
+<span class="src">For:</span> Minimal change; removes the ambiguity about freshness.<br>
+<span class="src">Against:</span> Still no change history.</div>
+<dl><dt>Recommendation</dt><dd>Option (a). Knowing when a designation changed is the whole point of tracking injuries.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">https://www.nfl.com/injuries/</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-05 · Fix the model before adding more data
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: large</span></div>
+<dl><dt>Problem</dt><dd>The current model is measurably worse than the market: 0.569 points worse on the spread and 0.755 worse on the total. Collecting more games will make the measurement more precise, not make the model better.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Add the features the model is missing: QB availability, replacement depth, rest, travel, and weather</b><br>
+<span class="src">For:</span> These are the obvious gaps and two of them (QB availability, replacement depth) are already partly sourced here.<br>
+<span class="src">Against:</span> Each feature needs its own official source and its own leakage control.</div><div class="opt"><b>b. Replace the hand-built model with a fitted one on the same walk-forward harness</b><br>
+<span class="src">For:</span> The harness already exists and enforces the time boundary; swapping the estimator is contained.<br>
+<span class="src">Against:</span> Risks overfitting at n=137; still needs the sample floor before any claim.</div><div class="opt"><b>c. Stop originating and buy a benchmark model instead</b><br>
+<span class="src">For:</span> Removes the whole modelling problem.<br>
+<span class="src">Against:</span> Then you are no longer originating your own lines, which was the point.</div>
+<dl><dt>Recommendation</dt><dd>Option (a) first, then (b) once QB availability and depth are real columns rather than blanks.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-06 · Get opening prices, or stop promising them
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium</span></div>
+<dl><dt>Problem</dt><dd>Zero of 900 price rows have an opening number. Any metric that needs line movement — closing-line value, steam, open-to-close drift — is impossible until that changes.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Licence a feed that captures the opening post</b><br>
+<span class="src">For:</span> Unlocks line-movement metrics, which are the most robust evidence of skill available in this domain.<br>
+<span class="src">Against:</span> Cost; and the historical backlog is still empty, so the metrics start from the licence date.</div><div class="opt"><b>b. Backfill 2021, where the archive does hold both ends</b><br>
+<span class="src">For:</span> Free and available today: the archive has Westgate opening lines and closing lines for the 2021 season, 272 games. That is enough to measure how far lines actually move.<br>
+<span class="src">Against:</span> It is one season, from one book, five years ago.</div><div class="opt"><b>c. Publish the column blank and revisit</b><br>
+<span class="src">For:</span> Honest; no cost.<br>
+<span class="src">Against:</span> Line movement stays unmeasurable, which caps how convincingly skill can ever be demonstrated.</div>
+<dl><dt>Recommendation</dt><dd>Both (a) and (b): (b) gives you a movement prior this week, (a) gives you the real thing going forward.</dd>
+<dt>Source</dt><dd><a class="src" href="https://api.github.com/repos/nflverse/nfldata/contents/data" target="_blank" rel="noopener">https://api.github.com/repos/nflverse/nfldata/contents/data</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-07 · Lower the 300-bet floor, or accept that nothing qualifies all season
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium</span></div>
+<dl><dt>Problem</dt><dd>The pre-registered floor of 300 graded bets cannot be met this season: a 17-week NFL season produces at most about 272 games, and a filtered strategy bets far fewer than that. As written, no single-season strategy can ever qualify.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Keep 300 and let qualification span multiple seasons</b><br>
+<span class="src">For:</span> Statistically defensible; 300 is a reasonable floor for a hit-rate claim.<br>
+<span class="src">Against:</span> Nothing can be awarded for roughly two years.</div><div class="opt"><b>b. Add a provisional tier at n&gt;=100 with a stricter p-value and a smaller reward</b><br>
+<span class="src">For:</span> Gives the competition something to actually compete for this season without weakening the standard.<br>
+<span class="src">Against:</span> Adds complexity; a provisional tier can be mistaken for a real one.</div><div class="opt"><b>c. Score on out-of-sample prediction error instead of bet count</b><br>
+<span class="src">For:</span> Uses every game rather than only the bets, so 137 results carry real weight; independent of staking entirely.<br>
+<span class="src">Against:</span> Needs a new scoring definition and its own calibration.</div>
+<dl><dt>Recommendation</dt><dd>Option (c) alongside (a). Prediction error is the better signal measure anyway, and it solves the sample problem without lowering any standard.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-08 · Put a single front door on the site
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: small</span></div>
+<dl><dt>Problem</dt><dd>The brief asks for suggestions, questions, injuries, depth, a leaderboard and an executive summary. All of that now exists in more than one namespace, in more than one copy, reached by different navigation paths.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. One landing page with one canonical link per category</b><br>
+<span class="src">For:</span> A reader can answer &quot;what do we know and what do we not know&quot; without visiting sixteen places.<br>
+<span class="src">Against:</span> Requires deciding what is canonical, which is S-01.</div><div class="opt"><b>b. A search box over all namespaces</b><br>
+<span class="src">For:</span> No canonical decision needed.<br>
+<span class="src">Against:</span> Search does not resolve contradictions; it surfaces more of them.</div>
+<dl><dt>Recommendation</dt><dd>Option (a), after S-01.</dd>
+<dt>Source</dt><dd><a class="src" href="https://github.com/sassnarep3-star/Own4" target="_blank" rel="noopener">https://github.com/sassnarep3-star/Own4</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-09 · Automate the weekly loop end to end
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: medium</span></div>
+<dl><dt>Problem</dt><dd>Every number here was produced by a session that had to be asked. Scores, lines, injuries and grades should refresh themselves after each game without anyone prompting.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. A scheduled job: fetch official scores and the injury report, re-originate, re-grade, rebuild, push</b><br>
+<span class="src">For:</span> The store stops going stale, which is currently its main weakness.<br>
+<span class="src">Against:</span> Needs a runner and a secret for the push; the sandbox forbids long running processes, so this has to be GitHub Actions.</div><div class="opt"><b>b. Keep it manual but document the exact command sequence</b><br>
+<span class="src">For:</span> No infrastructure.<br>
+<span class="src">Against:</span> Depends on someone remembering; gaps appear between runs.</div>
+<dl><dt>Recommendation</dt><dd>Option (a). The repository already has GitHub Actions workflows for other namespaces, so the pattern exists.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1</a></dd></dl></div>
+<div class="q">
+<div class="qq">S-10 · Write down what would change your mind
+<span class="pill p-warn">awaiting decision</span>
+<span class="src">effort: small</span></div>
+<dl><dt>Problem</dt><dd>Eight strategies are being scored against six gates, but nobody has recorded in advance what result would cause you to abandon a strategy rather than keep explaining it.</dd></dl>
+<h3>Options</h3><div class="opt"><b>a. Pre-register an abandonment rule per strategy, dated and frozen before the next grading window</b><br>
+<span class="src">For:</span> Removes the temptation to reinterpret a bad run as bad luck; this is the single cheapest anti-self-deception measure available.<br>
+<span class="src">Against:</span> Takes an hour of writing.</div><div class="opt"><b>b. Rely on the existing demotion gates</b><br>
+<span class="src">For:</span> Already implemented.<br>
+<span class="src">Against:</span> Gates act on results; they do not stop a human from re-framing the story around the results.</div>
+<dl><dt>Recommendation</dt><dd>Option (a). It costs almost nothing and it is the difference between a research programme and a narrative.</dd>
+<dt>Source</dt><dd><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1-10" target="_blank" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1-10</a></dd></dl></div>
+<footer>NFL Market Board · session arena-28a71529-own4 · built 2026-11-14 UTC · research only, not wagering
+advice · National Problem Gambling Helpline 1-800-MY-RESET ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org ↗</a>
+</footer></main></div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+ document.querySelectorAll('table[data-filter]').forEach(function(t){
+  var box=document.createElement('input');box.placeholder='Filter rows…';box.className='f';
+  var wrap=document.createElement('div');wrap.className='tools';
+  var cnt=document.createElement('span');cnt.className='cnt';
+  var w=document.createElement('input');w.type='hidden';
+  wrap.appendChild(box);wrap.appendChild(cnt);t.parentNode.insertBefore(wrap,t);
+  var rows=Array.prototype.slice.call(t.querySelectorAll('tbody tr'));
+  function go(){var q=box.value.toLowerCase(),s=0;
+   rows.forEach(function(r){var m=r.textContent.toLowerCase().indexOf(q)>-1;
+    r.style.display=m?'':'none';if(m)s++;});
+   cnt.textContent=s+' of '+rows.length+' rows';}
+  box.addEventListener('input',go);go();
+ });
+});
+</script></body></html>
