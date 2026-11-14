@@ -1,0 +1,326 @@
+{
+ "official_inputs": [
+  {
+   "id": "CO-1",
+   "label": "Home winning margin vs total points in the same game",
+   "method": "pearson",
+   "value": 0.0309,
+   "n": 4056,
+   "ci95": [
+    0.0001,
+    0.0616
+   ],
+   "inputs": "official final scores (results feed)",
+   "source_keys": [
+    "nfl_schedules",
+    "nfl_data_games"
+   ],
+   "verification": "OFFICIAL-inputs",
+   "reading": "Games decided by bigger margins also tend to produce higher totals (both directions of scoring)."
+  },
+  {
+   "id": "CO-1b",
+   "label": "Home margin vs total points, per season (official inputs)",
+   "method": "pearson",
+   "value": null,
+   "n": 4056,
+   "per_season": [
+    {
+     "season": 2011,
+     "value": 0.0889,
+     "n": 256
+    },
+    {
+     "season": 2012,
+     "value": 0.0149,
+     "n": 256
+    },
+    {
+     "season": 2013,
+     "value": 0.0859,
+     "n": 256
+    },
+    {
+     "season": 2014,
+     "value": 0.1039,
+     "n": 256
+    },
+    {
+     "season": 2015,
+     "value": 0.06,
+     "n": 256
+    },
+    {
+     "season": 2016,
+     "value": -0.0142,
+     "n": 256
+    },
+    {
+     "season": 2017,
+     "value": 0.1016,
+     "n": 256
+    },
+    {
+     "season": 2018,
+     "value": 0.0693,
+     "n": 256
+    },
+    {
+     "season": 2019,
+     "value": -0.0496,
+     "n": 256
+    },
+    {
+     "season": 2020,
+     "value": -0.0579,
+     "n": 256
+    },
+    {
+     "season": 2021,
+     "value": 0.0519,
+     "n": 272
+    },
+    {
+     "season": 2022,
+     "value": -0.0153,
+     "n": 271
+    },
+    {
+     "season": 2023,
+     "value": 0.0935,
+     "n": 272
+    },
+    {
+     "season": 2024,
+     "value": 0.0827,
+     "n": 272
+    },
+    {
+     "season": 2025,
+     "value": -0.0197,
+     "n": 272
+    },
+    {
+     "season": 2026,
+     "value": -0.1607,
+     "n": 137
+    }
+   ],
+   "inputs": "official final scores",
+   "source_keys": [
+    "nfl_schedules"
+   ],
+   "verification": "OFFICIAL-inputs",
+   "reading": "Year-to-year spread of the same relationship."
+  },
+  {
+   "id": "CO-2",
+   "label": "Rest differential (home rest \u2212 away rest, days) vs home margin",
+   "method": "pearson",
+   "value": 0.0297,
+   "n": 4056,
+   "ci95": [
+    -0.001,
+    0.0605
+   ],
+   "inputs": "official schedule metadata (rest days as published in the nflverse mirror of the official schedule)",
+   "source_keys": [
+    "nfl_schedules",
+    "nfl_data_games"
+   ],
+   "verification": "OFFICIAL-inputs",
+   "reading": "Near-zero: rest differential alone does not predict margin."
+  },
+  {
+   "id": "CO-3",
+   "label": "Divisional matchup (0/1) vs total points",
+   "method": "point-biserial",
+   "value": -0.0556,
+   "n": 4056,
+   "ci95": [
+    -0.0863,
+    -0.0249
+   ],
+   "inputs": "official schedule metadata + official scores",
+   "source_keys": [
+    "nfl_schedules",
+    "nfl_data_games"
+   ],
+   "verification": "OFFICIAL-inputs",
+   "reading": "Small negative tendency: divisional games score slightly lower totals."
+  }
+ ],
+ "third_party_inputs_flagged": [
+  {
+   "id": "CT-1",
+   "label": "Home covers the spread (vs archived line) vs total goes over (vs archived total)",
+   "method": "phi",
+   "value": 0.0068,
+   "n": 3898,
+   "ci95": [
+    -0.0246,
+    0.0382
+   ],
+   "inputs": "ARCHIVED MARKET LINES (third-party) + official final scores",
+   "source_keys": [
+    "nfl_data_games",
+    "nfl_data_closing",
+    "nfl_schedules"
+   ],
+   "verification": "THIRD-PARTY-inputs (lines) \u2014 flagged",
+   "reading": "The classic spread/total dependence used to price same-game combinations; n is published per season below."
+  },
+  {
+   "id": "CT-1b",
+   "label": "Cover vs over, per season (third-party lines)",
+   "method": "phi",
+   "value": null,
+   "n": 3942,
+   "per_season": [
+    {
+     "season": 2011,
+     "value": 0.0657,
+     "n": 245
+    },
+    {
+     "season": 2012,
+     "value": -0.0726,
+     "n": 250
+    },
+    {
+     "season": 2013,
+     "value": 0.1041,
+     "n": 248
+    },
+    {
+     "season": 2014,
+     "value": 0.0538,
+     "n": 252
+    },
+    {
+     "season": 2015,
+     "value": 0.1281,
+     "n": 246
+    },
+    {
+     "season": 2016,
+     "value": -0.122,
+     "n": 247
+    },
+    {
+     "season": 2017,
+     "value": 0.0286,
+     "n": 248
+    },
+    {
+     "season": 2018,
+     "value": 0.0787,
+     "n": 247
+    },
+    {
+     "season": 2019,
+     "value": 0.0423,
+     "n": 246
+    },
+    {
+     "season": 2020,
+     "value": 0.0276,
+     "n": 256
+    },
+    {
+     "season": 2021,
+     "value": 0.1294,
+     "n": 268
+    },
+    {
+     "season": 2022,
+     "value": 0.0449,
+     "n": 261
+    },
+    {
+     "season": 2023,
+     "value": 0.054,
+     "n": 258
+    },
+    {
+     "season": 2024,
+     "value": 0.0103,
+     "n": 268
+    },
+    {
+     "season": 2025,
+     "value": -0.0183,
+     "n": 271
+    },
+    {
+     "season": 2026,
+     "value": -0.1741,
+     "n": 131
+    }
+   ],
+   "inputs": "archived market lines + official scores",
+   "source_keys": [
+    "nfl_data_games"
+   ],
+   "verification": "THIRD-PARTY-inputs (lines) \u2014 flagged",
+   "reading": "Stability of the same dependence by season."
+  },
+  {
+   "id": "CT-2",
+   "label": "Same-week cross-game ATS leg dependence: observed vs market-implied expected joint covers",
+   "method": "observed joint both-cover rate vs sum of de-vig market cover probabilities over within-week unordered pairs",
+   "value": -0.01192,
+   "observed_rate": 0.238,
+   "expected_rate": 0.25,
+   "n": 27129,
+   "weeks": 269,
+   "se": 0.00259,
+   "inputs": "market-implied probabilities (third-party odds, multiplicative de-vig) + official scores",
+   "source_keys": [
+    "nfl_data_games",
+    "nfl_data_closing",
+    "nfl_schedules"
+   ],
+   "verification": "THIRD-PARTY-inputs (odds) \u2014 flagged",
+   "reading": "A negative gap means cross-game parlay legs both cover slightly LESS often than independence assumes; a positive gap means slightly more. This is the parlay leg-dependence adjustment this namespace prices with."
+  },
+  {
+   "id": "CT-3",
+   "label": "Opening spread (Westgate 2021) vs archived closing spread",
+   "method": "pearson",
+   "value": 0.7855,
+   "n": 272,
+   "ci95": [
+    0.7352,
+    0.8271
+   ],
+   "mean_abs_move_pts": 3.4,
+   "inputs": "third-party open (initial_lines.csv) + third-party archived line (games.csv)",
+   "source_keys": [
+    "nfl_data_initial",
+    "nfl_data_games"
+   ],
+   "verification": "THIRD-PARTY-inputs \u2014 flagged",
+   "reading": "Quantifies typical open-to-close movement."
+  },
+  {
+   "id": "CT-4",
+   "label": "This repo's fair spread vs the archived market spread",
+   "method": "pearson",
+   "value": 0.6734,
+   "n": 4082,
+   "ci95": [
+    0.6563,
+    0.6899
+   ],
+   "inputs": "repo model output + third-party archived lines + official scores (for the model's training)",
+   "source_keys": [
+    "repo_engine",
+    "nfl_data_games"
+   ],
+   "verification": "MIXED (model output vs third-party lines) \u2014 flagged",
+   "reading": "The model tracks the market loosely (r\u22480.73-0.75); its disagreements are what the leaderboard grades."
+  }
+ ],
+ "method_note": "Pearson r for continuous pairs; phi for binary pairs (numerically identical to Pearson on 0/1); 95% CI via Fisher z. n published with every value."
+}

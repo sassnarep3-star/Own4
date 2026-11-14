@@ -1,0 +1,217 @@
+{
+ "promotion_gates": [
+  {
+   "id": "MG-1",
+   "name": "Data integrity",
+   "rule": "Every input row carries a source link; 2026 standings reconciliation vs the official capture has 0 mismatches.",
+   "blocking": true
+  },
+  {
+   "id": "MG-2",
+   "name": "Sample size",
+   "rule": ">= 300 graded selections for signal claims AND >= 300 settled stakes for staking claims; below that the claim is 'insufficient n'.",
+   "blocking": true
+  },
+  {
+   "id": "MG-3",
+   "name": "Walk-forward only",
+   "rule": "Every model line uses only games strictly before the game day (day-before-kickoff origination); verified by state_games_used column.",
+   "blocking": true
+  },
+  {
+   "id": "MG-4",
+   "name": "Frozen holdout",
+   "rule": "Positive edge vs close on the frozen 2026 holdout (weeks 1-10).",
+   "blocking": true
+  },
+  {
+   "id": "MG-5",
+   "name": "Uncertainty",
+   "rule": "95% week-clustered bootstrap CI of the beat-close rate excludes 50%.",
+   "blocking": true
+  },
+  {
+   "id": "MG-6",
+   "name": "Line value",
+   "rule": "Mean edge vs close > 0 with n >= 100 (only meaningful where entry != close).",
+   "blocking": true
+  },
+  {
+   "id": "MG-7",
+   "name": "Luck removal (placebo)",
+   "rule": "Sign-flip permutation test p < 0.05 for beat-close rate > 50%.",
+   "blocking": true
+  },
+  {
+   "id": "MG-8",
+   "name": "Stability",
+   "rule": "Edge vs close positive in >= 60% of seasons.",
+   "blocking": true
+  }
+ ],
+ "holdout_2026": {
+  "STRAT-SIDE-3": {
+   "pass": false,
+   "detail": "2026 W1-10 beat-close 31.5/64 = 49.2%"
+  },
+  "STRAT-TOTAL-3": {
+   "pass": false,
+   "detail": "2026 W1-10 beat-close 33.0/74 = 44.6%"
+  }
+ },
+ "demotion": {
+  "rules": [
+   {
+    "id": "DM-1",
+    "trigger": "Rolling-50 settled-stake flat ROI < -8%",
+    "action": "LIVE -> PAPER immediately"
+   },
+   {
+    "id": "DM-2",
+    "trigger": "Rolling-50 beat-close rate < 47% (line quality collapsed)",
+    "action": "LIVE -> PAPER immediately"
+   },
+   {
+    "id": "DM-3",
+    "trigger": "Two consecutive evaluation windows with mean edge vs close <= 0",
+    "action": "LIVE -> PAPER at the next window boundary"
+   },
+   {
+    "id": "DM-4",
+    "trigger": "Results-feed integrity failure (feed stale > 7 days, or a verification status flips to UNVERIFIED on > 2% of new rows)",
+    "action": "LIVE -> PAPER for all strategies until the feed is re-verified"
+   },
+   {
+    "id": "DM-5",
+    "trigger": "Unpriced correlation exposure: realized leg-correlation of a parlay strategy exceeds its registered cap (measured with n from the official feed)",
+    "action": "LIVE -> PAPER for the parlay strategy until re-priced"
+   }
+  ],
+  "config": {
+   "window": 50,
+   "roi_floor": -0.08,
+   "beat_close_floor": 0.47,
+   "edge_windows_consecutive": 2,
+   "relock_windows": 4,
+   "cadence": "evaluated after every week of settled results (weekly)"
+  },
+  "simulations": {
+   "STRAT-SIDE-3": {
+    "counterfactual_force_live": true,
+    "n_settled": 2054,
+    "n_trigger_events": 47,
+    "events_first_10": [
+     {
+      "index": 51,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -16.0% < -8%"
+     },
+     {
+      "index": 92,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -19.8% < -8%"
+     },
+     {
+      "index": 201,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -8.4% < -8%"
+     },
+     {
+      "index": 246,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -35.1% < -8%"
+     },
+     {
+      "index": 294,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -38.9% < -8%"
+     },
+     {
+      "index": 335,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -23.6% < -8%"
+     },
+     {
+      "index": 372,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -35.1% < -8%"
+     },
+     {
+      "index": 416,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -35.1% < -8%"
+     },
+     {
+      "index": 438,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -16.0% < -8%"
+     },
+     {
+      "index": 469,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     }
+    ],
+    "final_state_live": false
+   },
+   "STRAT-TOTAL-3": {
+    "counterfactual_force_live": true,
+    "n_settled": 2216,
+    "n_trigger_events": 32,
+    "events_first_10": [
+     {
+      "index": 76,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -8.4% < -8%"
+     },
+     {
+      "index": 125,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 194,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 341,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 425,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 466,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -19.8% < -8%"
+     },
+     {
+      "index": 503,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 662,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     },
+     {
+      "index": 702,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -19.8% < -8%"
+     },
+     {
+      "index": 747,
+      "rule": "DM-1",
+      "detail": "rolling-50 ROI -12.2% < -8%"
+     }
+    ],
+    "final_state_live": false
+   }
+  }
+ }
+}

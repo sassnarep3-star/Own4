@@ -1,0 +1,104 @@
+{
+ "dataset": "suggestions_review_queue",
+ "session": "arena/65c4a22e-own4",
+ "captured_utc": "2026-11-14",
+ "policy": "Suggestions are PROPOSALS ONLY. Nothing here is implemented until a reviewer picks a path and records the choice on this page. Each suggestion names the missing information it would discover, because decisions below (data/decisions.json) are blocked on exactly those gaps.",
+ "suggestions": [
+  {
+   "id": "SUG-M1",
+   "title": "Adopt a weekly injury-report capture protocol (same transcription method every week, same cutoff)",
+   "rationale": "The replacement-depth tracker currently runs on one verbatim capture of the official report (2026-11-13). A fixed weekly protocol (capture Wednesday+Sunday, store verbatim, re-run the depth computation) turns this from a snapshot into a signal feed.",
+   "discovers": "Current-week availability for every team, every week \u2014 the input the origination model lacks (DEC-M1).",
+   "effort": "medium",
+   "priority": "high",
+   "status": "PROPOSED",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "SUG-M2",
+   "title": "Procure a verifiable player-prop results source BEFORE implementing any prop-combo strategy",
+   "rationale": "STRAT-PROP-COMBO exists only as a blocked registry row: no official or verified source of player-prop lines/results exists in this repo, so legs cannot be graded and correlations cannot be computed. Building the strategy first would guarantee un gradeable claims.",
+   "discovers": "Prop leg results (needed for DEC-M4 correlation caps and for grading prop combos at all).",
+   "effort": "high",
+   "priority": "high",
+   "status": "PROPOSED",
+   "sources": [
+    "https://www.nfl.com/stats/player-stats/"
+   ]
+  },
+  {
+   "id": "SUG-M3",
+   "title": "Make nfl-markets the price-snapshot store of record; nfl-ledger keeps the schema",
+   "rationale": "This session populated a snapshot store with 12,573 rows (fair/open/close/diff per market per game). nfl-ledger's store is schema-complete but intentionally empty (its F-L1). Choosing one store of record prevents divergence.",
+   "discovers": "A single canonical source for 'what did we originate and what did the market do' \u2014 prerequisite for any future promotion decision (DEC-M1).",
+   "effort": "low",
+   "priority": "medium",
+   "status": "PROPOSED",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/price_snapshots.csv"
+   ]
+  },
+  {
+   "id": "SUG-M4",
+   "title": "Capture opening numbers WITH timestamps every week going forward",
+   "rationale": "2022-2026 opening numbers are UNVERIFIED-BLANK because no archive publishes them with capture times. From the next slate onward, the origination snapshot (our fair line + the market's posted line + timestamp) can be captured at origination time, ending the blank-open problem permanently.",
+   "discovers": "True opening numbers with times \u2014 the missing half of the price-snapshot store (FLAG-M2).",
+   "effort": "medium",
+   "priority": "high",
+   "status": "PROPOSED",
+   "sources": [
+    "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv"
+   ]
+  },
+  {
+   "id": "SUG-M5",
+   "title": "Extend depth-chart coverage to all 32 teams (labelled THIRD-PARTY) or find an official depth source",
+   "rationale": "Replacement depth is computable for 8 of 32 teams only (ESPN/RotoWire captures). 24 teams stay blank and flagged. Either ingest the remaining charts under the same THIRD-PARTY label, or locate an official source if one exists.",
+   "discovers": "Replacement depth for 24 uncovered teams (DEC-M1 injury integration, FLAG-M6).",
+   "effort": "medium",
+   "priority": "medium",
+   "status": "PROPOSED",
+   "sources": [
+    "https://www.espn.com/nfl/depth"
+   ]
+  },
+  {
+   "id": "SUG-M6",
+   "title": "Weekly re-verification cadence: reconcile standings 32/32 and re-run the sign-convention tests after every week",
+   "rationale": "The results feed's verification rests on the 32/32 standings reconciliation plus live spot checks. Running both checks weekly catches any upstream drift in the mirror before it can corrupt the feed or the backtests.",
+   "discovers": "Continuous assurance that the feed still matches official numbers (DM-4 depends on it).",
+   "effort": "low",
+   "priority": "high",
+   "status": "PROPOSED",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ]
+  },
+  {
+   "id": "SUG-M7",
+   "title": "Pre-register the backup/deficiency signal before next week's slate (no post-hoc fitting)",
+   "rationale": "The depth tracker quantifies replacement depth (2nd/3rd/4th/none). nfl-arena's SIG-06 explicitly requires pre-registration before use. Registering the rule (e.g., 'fade teams whose QB1 is out and replacement depth >= 2') BEFORE results accumulate is what separates signal discovery from curve-fitting.",
+   "discovers": "Whether injury-adjusted origination adds line value vs the market (the question DEC-M1 needs answered).",
+   "effort": "low",
+   "priority": "high",
+   "status": "PROPOSED",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/strategy_register.json"
+   ]
+  },
+  {
+   "id": "SUG-M8",
+   "title": "Improve the site's decision ergonomics: one decision dashboard that merges gates, leaderboard and open questions",
+   "rationale": "The information needed for a decision is spread across leaderboard, gates, correlations and questions pages. A single dashboard page (status quo -> what would change it -> which suggestion unblocks it) reduces the chance a decision is made on a lucky staking run.",
+   "discovers": "Nothing new \u2014 it surfaces what exists; it exists to prevent decisions being made from the wrong page.",
+   "effort": "low",
+   "priority": "low",
+   "status": "PROPOSED",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/suggestions.json"
+   ]
+  }
+ ]
+}
