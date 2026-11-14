@@ -3066,7 +3066,7 @@ Session ID: `arena/65c4a22e-own4` · Branch: `arena/65c4a22e-own4` (platform-pin
 | M7 | Suggestions review section + decisions register (questions, what we know / do not know, how to discover missing information) + executive summary + repo-review irregularities | done | arena/65c4a22e-own4 | `nfl-markets/**`, `EXECUTIVE_SUMMARY_NFL_MARKETS.md` |
 | M8 | Static site build (`nfl-markets/`), row-level source-link verification, broken-link check, tests | done | arena/65c4a22e-own4 | `nfl-markets/**` |
 | M9 | Root navigation integration: add `nfl-markets/` to `verification/build.py` NAV group and regenerate `index.html` + `verified/*.html` (superset-only; no peer link dropped); **also fulfils R-L1 (adds `nfl-ledger/` links)** | done | arena/65c4a22e-own4 | `verification/build.py`, `index.html`, `verified/*.html` |
-| M10 | Final integration: PR from this branch to main, merge without waiting, confirm GitHub Pages build, record PR link + merge result here | in progress | arena/65c4a22e-own4 | COORDINATION.md |
+| M10 | Final integration: PR from this branch to main, merge without waiting, confirm GitHub Pages build, record PR link + merge result here | done | arena/65c4a22e-own4 | COORDINATION.md |
 
 ### Claim log
 
@@ -3094,3 +3094,11 @@ Session ID: `arena/65c4a22e-own4` · Branch: `arena/65c4a22e-own4` (platform-pin
 **Irregularities (published on nfl-markets/pages/flagged.html, non-blocking):** FLAG-M1 no official line source exists (all market numbers THIRD-PARTY, labelled); FLAG-M2 opening numbers 2022-2026 unarchived; FLAG-M3 ML opens unarchived anywhere; FLAG-M4 −110 price assumption; FLAG-M5 depth charts third-party 8/32 teams; FLAG-M6 5 official↔depth discrepancies; FLAG-M7 deficiency weights are repo convention; FLAG-M8 injury input is a peer capture (live spot checks matched); FLAG-M9 honest negative result (no strategy qualifies); FLAG-M10 closing-archive coverage gaps 2011-2018 (fallback rows labelled).
 
 **Deviations, stated plainly:** single fixed branch (no per-task branches creatable in this harness); the 2021 opening-vs-archived-line mean |Δ| of 3.40 pts reflects Westgate's early-week opens vs the archive's late line — documented, not normalized away.
+
+### PR and merge record · `arena/65c4a22e-own4` · 2026-11-14 (UTC)
+
+- **PR #104** https://github.com/sassnarep3-star/Own4/pull/104 — merged with a merge commit (`gh pr merge 104 --merge`) into `main` as **`e774d94`** at 2026-11-14T22:14:38Z, without waiting for approval (per standing instruction).
+- Checks before merge: `Rebuild and verify` ×2, `audit`, `validate`, `verify` — **all SUCCESS** on head `c21d6ff`.
+- **GitHub Pages:** latest build status **`built`** for exactly the merge commit `e774d94` (no error). Live-confirmed by fetching deployed URLs: https://sassnarep3-star.github.io/Own4/nfl-markets/ (dashboard renders with KPIs, headline finding, all links) and https://sassnarep3-star.github.io/Own4/nfl-markets/pages/flagged.html (full FLAG-M1..M10 table with sources).
+- Merge-day context: four peer sessions merged parallel implementations of the same requirements the same day (nfl-market PR, nfl-price-snapshot, nfl-core, nfl-marketboard — PRs #100-#103); every conflict was resolved superset-style (generator 21-workspace group retains all; merged root index carries 179 unique hrefs vs 169 on pre-merge main, **zero lost**). The canonical-store question for the owner is recorded as DEC-M6/SUG-M3 + nfl-core's D-1.
+- No peer file was edited beyond the generator-owned nav additions and the append-only board; `nfl-markets/` is fully additive.
