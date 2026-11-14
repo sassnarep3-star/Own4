@@ -2818,3 +2818,14 @@ authoring time) is why QM-13 now states its as-of date.
 
 Integration for this session is therefore complete: claim → build → gate → PR →
 merge → Pages confirmed → correction logged.
+
+### Correction 2 — group label, `arena/d507f753-own4`, 2026-11-14
+
+The registry group label read "NFL research · 18 workspaces (2026-11-14)" while the
+group actually carries **nineteen** namespace directories (`nfl/` … `nfl-ledger/`,
+including the three same-brief implementations). Label corrected to 19; the count
+was verified by extracting the namespace slug from every row in the group and
+comparing the set to the directories on disk (19 in the group, 19 on disk, 0
+missing). Root `index.html` regenerated; `verification/verify_site.py` still passes
+(346 rows, 0 broken links). Shipping as a small follow-up PR so the merge history
+shows the fix rather than hiding it inside the previous merge.
