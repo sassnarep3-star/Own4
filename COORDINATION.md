@@ -2631,4 +2631,7 @@ Session ID: `arena/6f0b80b2-own4` · Branch: `arena/6f0b80b2-own4` (session-pinn
 **Deviations, stated plainly:** the requested `session-<id>/<task>` branch naming is not used; the branch is pinned to `arena/6f0b80b2-own4` by this session. The full brief (live odds, validated strategies, rewards, a complete depth-chart model) cannot be completed from official sources; those items are blank and flagged, not invented.
 
 ### PR and merge record
-- PR and merge result: recorded below after execution.
+- PR **#94** https://github.com/sassnarep3-star/Own4/pull/94 — merged with a merge commit (`gh pr merge 94 --merge`) into `main` as `e766bcc` at 2026-11-14 UTC.
+- Checks before merge: `verify` ×2, `validate`, `audit` — all SUCCESS; mergeable CLEAN.
+- GitHub Pages: build status `built`; live-confirmed: https://sassnarep3-star.github.io/Own4/nfl-ledger/ and `pages/flagged.html` render with source links.
+- Record of this entry: follow-up PR (see the next log line).
