@@ -2829,3 +2829,40 @@ comparing the set to the directories on disk (19 in the group, 19 on disk, 0
 missing). Root `index.html` regenerated; `verification/verify_site.py` still passes
 (346 rows, 0 broken links). Shipping as a small follow-up PR so the merge history
 shows the fix rather than hiding it inside the previous merge.
+
+---
+
+---
+
+## Session `arena-a437d20c-own4` — NFL core-requirements build (claim, 2026-11-14 UTC)
+
+Session ID: `arena-a437d20c-own4` · Branch: `arena/a437d20c-own4` (platform-pinned; the
+requested `session-<id>/<task>` naming is not creatable in this harness — same logged
+deviation as every prior session). Base: `main` at `02a8bdf` (after PR #91).
+
+Survey before claim (2026-11-14T21:32Z): all board claims are >60 min stale (last peer
+activity PR #93, `arena/582300df-own4`, last commit 2026-11-13T22:53Z — ~23 h). Open peer
+PRs: #93 (nfl-command-center), #29/#39/#43/#47/#56/#59 (earlier verticals, stale). This
+session claims the NFL core-requirements round below; peer namespaces stay read-only.
+
+Scope rule: this session edits only `COORDINATION.md` (append-only), a NEW isolated
+namespace `nfl-core/**`, and an additive, comment-marked nav block in root `index.html`.
+No peer namespace is edited.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| C1 | Repo survey + gap analysis vs the 8 core requirements | claimed | arena-a437d20c-own4 | `nfl-core/` |
+| C2 | Price-snapshot store: opening + closing numbers for every originated market | claimed | arena-a437d20c-own4 | `nfl-core/data/price_snapshots.*` |
+| C3 | Verified results feed (official finals) so backtests + ROI are computable | claimed | arena-a437d20c-own4 | `nfl-core/data/results_feed.*` |
+| C4 | Origination order side → total → moneyline; model fair line / market line / difference as separate columns | claimed | arena-a437d20c-own4 | `nfl-core/data/originations.*` |
+| C5 | Leaderboard separating signal quality from staking; validation gates; demotion gate (live → paper) | claimed | arena-a437d20c-own4 | `nfl-core/data/leaderboard*`, `nfl-core/data/gates.*` |
+| C6 | Replacement-depth tracking (2nd/3rd/4th string), not just the fact of replacement | claimed | arena-a437d20c-own4 | `nfl-core/data/depth*` |
+| C7 | Correlations from officially sourced numbers only, each value published with n | claimed | arena-a437d20c-own4 | `nfl-core/data/correlations_n.*` |
+| C8 | Questions / information / answers register + suggestions board with review-and-choose path | claimed | arena-a437d20c-own4 | `nfl-core/data/questions.*`, `suggestions.*` |
+| C9 | Site: clean landing + category subpages, tables, per-row source links, flagged page, exec summary | claimed | arena-a437d20c-own4 | `nfl-core/**` |
+| C10 | Line-by-line verification: every table row has an official source link; unconfirmed cells blank + flagged | claimed | arena-a437d20c-own4 | `nfl-core/verify.py` |
+| C11 | Final integration: re-verify combined tree, PR → main → merge, Pages deploy confirmation, record here | claimed | arena-a437d20c-own4 | `COORDINATION.md`, `index.html` (additive) |
+
+### Claim log
+
+- 2026-11-14T21:32Z — claimed C1–C11 after survey; claim pushed immediately (this commit).
