@@ -86,6 +86,7 @@ NAV = [
     ("pages/correlations.html", "Correlations (with n)"),
     ("pages/questions.html", "Questions & answers"),
     ("pages/suggestions.html", "Suggestions board"),
+    ("pages/d1-canonical-choice.html", "D-1 canonical choice"),
     ("pages/flagged.html", "Flagged for review"),
     ("pages/sources.html", "Sources & verification"),
 ]
@@ -472,5 +473,85 @@ body.append('<div class="note"><strong>Verification method (this session, 2026-1
             '(4) Spread convention verified against 163 settled/in-lined 2026 games (162/163 ML-consistency) and quoted from DATASETS.md. '
             '(5) Every generated table row checked for a source link by verify.py; blanks allowed only with a flag.</div>')
 write("pages/sources.html", page("pages/sources.html", "Sources", "".join(body), "pages/sources.html"))
+
+print("site written: %d pages + index" % (len(NAV) - 1))
+
+# ------------------------------------------------------- D-1 canonical choice
+body = []
+body.append('<h2>D-1 — choose the canonical NFL requirements workspace</h2>')
+body.append('<p class="lede">Decision page for the owner. Four namespaces now implement the same core-requirements brief '
+            '(a peer session recorded this as decision <strong>D-1</strong> in COORDINATION.md after a third implementation '
+            'merged on 2026-11-14). Nothing here is a decision — it is the comparison the decision needs. '
+            'All counts below were measured directly from the files on 2026-11-14 (session arena-a437d20c-own4, read-only).</p>')
+d1 = [
+    {"requirement": "Price-snapshot store (open + close)",
+     "nfl-core": "816 market rows: 81 with OPEN + capture date, 489 with CLOSE, 411 settled (WAS@NYG shows open 2.5 -> close 1.5)",
+     "nfl-market": "84 store rows (data/derived/store.json, integrity_all_pass=true)",
+     "nfl-ledger": "0 rows — their own flag F-L1: no official price source",
+     "nfl-price-snapshot": "39 snapshots (data/derived/price_snapshots.json)",
+     "evidence": "https://github.com/sassnarep3-star/Own4/tree/main/nfl-core/data"},
+    {"requirement": "Verified results feed (ROI computable)",
+     "nfl-core": "272 games (137 final) + settlement columns; 32/32 teams exact vs official standings (verify.py V3)",
+     "nfl-market": "3 rows published in data/derived/results_feed.json (store covers the week-10 slate)",
+     "nfl-ledger": "137 games (W1-W10); standings reconciliation 32/32 (their claim, L3)",
+     "nfl-price-snapshot": "week-10 feed: 14 games, 1 completed at capture",
+     "evidence": "https://github.com/sassnarep3-star/Own4/tree/main/nfl-ledger/data"},
+    {"requirement": "Origination order side -> total -> ML + fair/market/diff columns",
+     "nfl-core": "408 rows (136 games x 3), seq 1/2/3 enforced (verify.py V6), difference arithmetic exact",
+     "nfl-market": "data/derived/origination.json (week-10 slate)",
+     "nfl-ledger": "week 11: 13 games, order documented; market columns blank (their L4)",
+     "nfl-price-snapshot": "data/derived/originated_lines.json",
+     "evidence": "https://github.com/sassnarep3-star/Own4/tree/main/nfl-core/data"},
+    {"requirement": "Signal separated from staking (rank cannot be masked)",
+     "nfl-core": "two tables + verify.py V7 enforces z-only sort; staking unplugged from rank",
+     "nfl-market": "data/derived/leaderboard.json",
+     "nfl-ledger": "data/leaderboard_split.json (rank on signal only)",
+     "nfl-price-snapshot": "data/derived/leaderboard.json",
+     "evidence": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/leaderboard_signal.csv"},
+    {"requirement": "Replacement depth (string of the replacement)",
+     "nfl-core": "official club depth charts read live (DET, NE) -> replacement + 2nd/3rd string; other clubs blank + flagged",
+     "nfl-market": "data/official/official_lineups.json",
+     "nfl-ledger": "depth fields blank — their flag F-L2 (no chart found)",
+     "nfl-price-snapshot": "injuries pages",
+     "evidence": "https://www.detroitlions.com/team/depth-chart"},
+    {"requirement": "Correlations with n, officially sourced inputs",
+     "nfl-core": "every r carries n; price-input rows labeled; player-level blank + flagged",
+     "nfl-market": "data/derived/correlations.json",
+     "nfl-ledger": "data/correlations.json (n = 105 per their record)",
+     "nfl-price-snapshot": "data/derived/correlations.json",
+     "evidence": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/correlations_n.csv"},
+    {"requirement": "Demotion gate (live -> paper)",
+     "nfl-core": "DG-1..DG-4 (skill regression, CLV, drawdown, data integrity) + G1-G8 validation gates",
+     "nfl-market": "data/derived/demotion.json",
+     "nfl-ledger": "D1-D6 demotion + P1-P5 promotion (13 unit tests)",
+     "nfl-price-snapshot": "data/derived/gates.json",
+     "evidence": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/gates.csv"},
+    {"requirement": "Spread-sign convention resolved (old A-06 / Q-05)",
+     "nfl-core": "RESOLVED + documented: positive = home favored (DATASETS.md quote + 162/163 ML check); A-06 explained as open->close movement",
+     "nfl-market": "data/spread_convention_determination.json (in nfl-command-center peer) / movement.json",
+     "nfl-ledger": "not published",
+     "nfl-price-snapshot": "not published",
+     "evidence": "https://github.com/nflverse/nfldata/blob/master/DATASETS.md"},
+]
+body.append(render_table("t-d1", d1,
+    ["requirement", "nfl-core", "nfl-market", "nfl-ledger", "nfl-price-snapshot", "evidence"],
+    link_cols=("evidence",)))
+body.append('<h3>Options</h3><ul>'
+            '<li><strong>A — one canonical workspace.</strong> Owner picks the strongest implementation from the matrix; '
+            'the others stay published as archived evidence (nothing is deleted; each keeps its namespace and PR history).</li>'
+            '<li><strong>B — canonical + satellites.</strong> One workspace owns the stores; the others link into it for '
+            'their specialized extras (e.g., nfl-ledger’s promotion/demotion unit tests, nfl-command-center’s repo audit).</li>'
+            '<li><strong>C — keep all four independent.</strong> No consolidation; reviewers read all four (status quo, '
+            'highest review cost).</li></ul>')
+body.append('<div class="note"><strong>Recommendation (a suggestion — the owner decides):</strong> Option B, with '
+            '<em>nfl-core</em> as the store-of-record: it is the only implementation whose price store actually holds '
+            'opening <em>and</em> closing numbers with settlement (81 open / 489 close vs 84, 0 and 39 rows elsewhere), the only '
+            'one whose results feed is re-verified against the official standings inside its own verifier, and it publishes the '
+            'resolved spread convention that the other workspaces’ flags still list as open. Peer workspaces would remain '
+            'published and linked — nothing discarded. If the owner prefers another workspace as canonical, the same matrix '
+            'supports that choice.</div>')
+body.append('<div class="note warn"><strong>Status: proposed.</strong> This page implements nothing. Until the owner marks '
+            'S-C11 “chosen” on the <a href="suggestions.html">suggestions board</a>, all four workspaces remain as published.</div>')
+write("pages/d1-canonical-choice.html", page("pages/d1-canonical-choice.html", "D-1 canonical choice", "".join(body), "pages/d1-canonical-choice.html"))
 
 print("site written: %d pages + index" % (len(NAV) - 1))

@@ -623,6 +623,12 @@ srows = [
   "A",
   "proposed", "NOT IMPLEMENTED — awaiting owner choice",
   "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/price_snapshots_2026.csv"),
+ ("S-C11", "D-1: choose the canonical NFL requirements workspace (four implementations now exist)",
+  "nfl-core, nfl-market, nfl-ledger and nfl-price-snapshot all implement the same brief; a reviewer cannot act on four parallel answers. The comparison matrix is published; the choice itself is the owner's.",
+  "(A) one canonical workspace, others archived as evidence (B) canonical store-of-record + peer workspaces as satellites (C) keep all four independent",
+  "B with nfl-core as store-of-record (only populated open+close store; verifier-reconciled results feed; documented spread convention) — owner decides",
+  "proposed", "NOT IMPLEMENTED — awaiting owner choice (see pages/d1-canonical-choice.html)",
+  "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/pages/d1-canonical-choice.html"),
 ]
 with open(os.path.join(DATA, "suggestions.csv"), "w", newline="") as f:
     w = csv.writer(f)

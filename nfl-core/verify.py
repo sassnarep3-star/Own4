@@ -219,7 +219,7 @@ missing = [f for f in need if not os.path.exists(os.path.join(DATA, f))]
 pages_needed = ["index.html"] + ["pages/" + p for p in
     ["executive-summary.html", "origination.html", "prices.html", "results.html", "leaderboard.html",
      "gates.html", "depth.html", "correlations.html", "questions.html", "suggestions.html",
-     "flagged.html", "sources.html"]]
+     "flagged.html", "sources.html", "d1-canonical-choice.html"]]
 missing += [p for p in pages_needed if not os.path.exists(os.path.join(CORE, p))]
 if not missing:
     ok("structural completeness: all %d data stores and %d pages present" % (len(need), len(pages_needed)))
