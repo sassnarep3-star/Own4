@@ -1,0 +1,83 @@
+{
+  "dataset": "nfl_book_strategy_registry",
+  "title": "Pre-registered strategy registry — singles, parlays, player-prop combos",
+  "registered_utc": "2026-11-14T00:00Z",
+  "pre_registration_note": "This file is committed BEFORE engine/backtest.py is first run. Strategies, thresholds, baselines and prices are fixed here; the backtest may not change them. Any later change must be appended as an amendment with its own timestamp and reason.",
+  "price_assumption": {
+    "label": "ASSUMED -110",
+    "note": "The NFL publishes no betting prices (see flags). Every staking figure assumes a flat -110 price (risk 1.10 to win 1.00) on singles and the product price (10/11)^k for k-leg parlays. This is an ASSUMPTION, not a market observation, and is flagged as such everywhere it appears. Signal metrics never use prices."
+  },
+  "families": [
+    {"id": "FAM-1", "name": "Singles", "market": "side / total / moneyline"},
+    {"id": "FAM-2", "name": "Cross-game parlays", "market": "2-leg"},
+    {"id": "FAM-3", "name": "Player-prop combos", "market": "player props"}
+  ],
+  "strategies": [
+    {
+      "id": "S1",
+      "family": "FAM-1",
+      "name": "Model side (every game)",
+      "type": "single",
+      "market": "side",
+      "rule": "For each settled walk-forward game, pick the side with the higher model win probability (home if p_home >= 0.5, else away). Flat 1 unit at the ASSUMED -110 price.",
+      "signal_metric": "pick accuracy vs 0.500 baseline and vs always-home baseline",
+      "staking_metric": "ROI at ASSUMED -110, flat 1u",
+      "threshold": "",
+      "baseline": "0.500 accuracy (coin flip) and home-win base rate"
+    },
+    {
+      "id": "S2",
+      "family": "FAM-1",
+      "name": "Total over own fair total",
+      "type": "single",
+      "market": "total",
+      "rule": "Bet Over the model's own fair total for each settled walk-forward game at the ASSUMED -110 price, flat 1u. Wins when the actual combined score exceeds the fair total.",
+      "signal_metric": "over-hit rate vs 0.500 (calibration) + total MAE vs baseline",
+      "staking_metric": "ROI at ASSUMED -110, flat 1u",
+      "threshold": "",
+      "baseline": "0.500 over-hit rate; league-mean total MAE baseline"
+    },
+    {
+      "id": "S3",
+      "family": "FAM-1",
+      "name": "Model underdog moneyline",
+      "type": "single",
+      "market": "moneyline",
+      "rule": "For each settled walk-forward game, pick the side the model rates as LESS likely to win (the model underdog). Flat 1 unit at the ASSUMED -110 price.",
+      "signal_metric": "upset-hit rate vs the base rate of the model-underdog winning",
+      "staking_metric": "ROI at ASSUMED -110, flat 1u",
+      "threshold": "",
+      "baseline": "model-underdog base win rate computed on the same sample (reported, not assumed)"
+    },
+    {
+      "id": "S4",
+      "family": "FAM-2",
+      "name": "Two-leg cross-game parlay",
+      "type": "parlay",
+      "market": "side x2, different games",
+      "rule": "Each week take the two highest model-confidence S1 picks from DIFFERENT games (confidence = |p - 0.5|). One parlay per week at the ASSUMED product price (10/11)^2. Same-game legs are forbidden (gate G6).",
+      "signal_metric": "both-legs-win rate vs product of individual rates",
+      "staking_metric": "ROI at ASSUMED parlay price, 1u",
+      "threshold": "",
+      "baseline": "independence product of the two legs' empirical win rates"
+    },
+    {
+      "id": "S5",
+      "family": "FAM-3",
+      "name": "Player prop combo (QB passing + WR receiving)",
+      "type": "prop_combo",
+      "market": "player props",
+      "rule": "Two-leg player-prop combo. BLOCKED: no official player-prop prices or official prop lines exist in any source read by this project.",
+      "signal_metric": "",
+      "staking_metric": "",
+      "threshold": "",
+      "baseline": "",
+      "blocked_reason": "No official prop prices (flag FB-05). Cannot be validated, cannot be staked, cannot score."
+    }
+  ],
+  "reward_policy": {
+    "pool_points": 1000,
+    "rule": "Signal decides eligibility; staking confirms it. A strategy must pass signal gate G2 AND staking gate G5 to earn points. A lucky staking run on a strategy that fails G2 cannot score any points, and cannot outrank a G2-passing strategy. Points awarded = 0 until at least one strategy passes both.",
+    "status": "policy only — no funds are held; rewards are research points, not money."
+  }
+}
