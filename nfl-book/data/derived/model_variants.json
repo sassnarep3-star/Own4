@@ -1,0 +1,31 @@
+{
+  "id": "model-variants-2026-11-14",
+  "method": "Each variant is refitted on every week using only the games played before that week, and is scored on the same out-of-sample predictions.",
+  "rows": [
+    {
+      "variant": "blended",
+      "label": "One shrunk points-for / points-against rate per club, home margin as the difference of the two net rates.",
+      "n": 89,
+      "mean_absolute_error_points": 9.244991650047835
+    },
+    {
+      "variant": "blended_plus_home_field",
+      "label": "The same, with the measured home-field advantage added on top.",
+      "n": 89,
+      "mean_absolute_error_points": 9.381480325349209
+    },
+    {
+      "variant": "split_home_away",
+      "label": "Rates split by home and away: the home club's home rate against the away club's away rate.",
+      "n": 89,
+      "mean_absolute_error_points": 9.632144798007468
+    },
+    {
+      "variant": "split_plus_home_field",
+      "label": "The split, with the measured home-field advantage added on top.",
+      "n": 89,
+      "mean_absolute_error_points": 9.821116819386589
+    }
+  ],
+  "chosen": "blended"
+}

@@ -1,0 +1,1533 @@
+{
+  "id": "gates-2026-11-14",
+  "validation_gates": [
+    [
+      "G1",
+      "Minimum sample",
+      100,
+      "n",
+      "At least 100 out-of-sample decisions."
+    ],
+    [
+      "G2",
+      "Beats break-even",
+      null,
+      "p_value",
+      "p < 0.05 against the break-even rate."
+    ],
+    [
+      "G3",
+      "Survives false-discovery control",
+      null,
+      "q_value",
+      "q <= 0.05 across every strategy tried."
+    ],
+    [
+      "G4",
+      "Bootstrap floor above break-even",
+      null,
+      "ci",
+      "The 95% bootstrap floor is above break-even."
+    ],
+    [
+      "G5",
+      "Placebo cannot pass",
+      null,
+      "placebo_p",
+      "Relabelling the same bets does not reach the observed hit rate."
+    ]
+  ],
+  "demotion_gates": [
+    [
+      "D1",
+      "Rolling signal decay",
+      "two consecutive 20-bet windows below break-even"
+    ],
+    [
+      "D2",
+      "Multiple-testing failure",
+      "q-value above 0.05"
+    ],
+    [
+      "D3",
+      "Sample floor",
+      "fewer than 100 out-of-sample decisions"
+    ],
+    [
+      "D4",
+      "Closing line value",
+      "cumulative closing line value below zero over the last 30 bets"
+    ],
+    [
+      "D5",
+      "Holdout split",
+      "either half of the out-of-sample sample below break-even"
+    ]
+  ],
+  "demotion_rule": "A strategy that is live is sent back to paper when any demotion gate triggers. A strategy may only be promoted to live when every validation gate passes and the sample floor is met.",
+  "rows": [
+    {
+      "id": "S1",
+      "name": "Model side when the spread gap is at least 2.0 points",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=54 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "pass",
+          "evidence": "exact binomial p = 0.0078 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.0623 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.1923 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 2,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 54 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.0623 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 54 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.4000, second half 0.2222, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S2",
+      "name": "Model side when the spread gap is at least 3.5 points",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=36 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.0576 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.1152 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.1765 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 36 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.1152 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 36 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.4375, second half 0.2222, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S3",
+      "name": "Model total when the total gap is at least 3.0 points",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=49 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "pass",
+          "evidence": "exact binomial p = 0.0293 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.0800 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.2083 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 2,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 49 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.0800 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 49 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.3333, second half 0.3333, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S4",
+      "name": "Model moneyline when the price gap is at least 20 American odds",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=76 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.6321 against the break-even rate at the observed price; these are third-party prices, not official league numbers"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.8428 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.5600 vs break-even 0.6334"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 76 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.8428 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 76 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": false,
+          "evidence": "first half 0.6486, second half 0.6842, break-even 0.6334"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S5",
+      "name": "Take the better side when the market makes a strong favourite",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=2 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 2 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 2 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 1.0000, second half 0.0000, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S6",
+      "name": "Under when the market total is at or below 41.0",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=18 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.4807 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.7691 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.3889 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 18 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.7691 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 18 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.7778, second half 0.4444, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S7",
+      "name": "Model total when the total gap is at least 2.0 points",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=63 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "pass",
+          "evidence": "exact binomial p = 0.0300 against a coin flip, because no price for this market exists in scope; the model's own fair line is a coin-flip line"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 0.0800 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.2419 vs break-even 0.5000"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 2,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 63 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 0.0800 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 63 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.3548, second half 0.3548, break-even 0.5000"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "S8",
+      "name": "Model moneyline when the win probability gap is at least 4 points",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=66 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.8989 against the break-even rate at the observed price; these are third-party prices, not official league numbers"
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 8 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.4923 vs break-even 0.6225"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "not evaluated"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 66 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 66 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "first half 0.6250, second half 0.6061, break-even 0.6225"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "P1",
+      "name": "Passing yards: model line against the official game log",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=38 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.3240 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.2432 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 38 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 38 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Drake_Maye",
+      "name": "Passing yards: Drake Maye",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=6 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.1667 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 6 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 6 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Jared_Goff",
+      "name": "Passing yards: Jared Goff",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=5 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.3750 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 5 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 5 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Jayden_Daniels",
+      "name": "Passing yards: Jayden Daniels",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=4 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 4 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 4 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Josh_Allen",
+      "name": "Passing yards: Josh Allen",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=5 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 0.1250 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 5 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 5 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Kyler_Murray",
+      "name": "Passing yards: Kyler Murray",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=3 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 3 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 3 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Matthew_Stafford",
+      "name": "Passing yards: Matthew Stafford",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=6 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.1667 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 6 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 6 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Patrick_Mahomes",
+      "name": "Passing yards: Patrick Mahomes",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=5 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 5 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 5 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PP_Sam_Darnold",
+      "name": "Passing yards: Sam Darnold",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=4 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = 1.0000 against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = 1.0000 across 9 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor 0.0000 vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "pass",
+          "evidence": "relabelling placebo p = 1.0000"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 4 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = 1.0000 (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 4 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "PC1",
+      "name": "Two-leg player-prop combination across different weeks",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "pass",
+          "evidence": "n=501 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = — against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = — across 1 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor — vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "fail",
+          "evidence": "relabelling placebo p = —"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 1,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 501 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = — (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": false,
+          "evidence": "n = 501 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    },
+    {
+      "id": "L1",
+      "name": "Two-leg game parlay: the model's side in the two games of a week with the biggest disagreement",
+      "gates": [
+        {
+          "id": "G1",
+          "name": "Minimum sample",
+          "status": "fail",
+          "evidence": "n=6 out-of-sample decisions (floor 100)"
+        },
+        {
+          "id": "G2",
+          "name": "Beats break-even",
+          "status": "fail",
+          "evidence": "exact binomial p = — against No price for this market exists in scope, so there is no break-even rate and no return. The test is against a coin flip."
+        },
+        {
+          "id": "G3",
+          "name": "Survives false-discovery control",
+          "status": "fail",
+          "evidence": "Benjamini-Hochberg q = — across 1 strategies"
+        },
+        {
+          "id": "G4",
+          "name": "Bootstrap floor above break-even",
+          "status": "fail",
+          "evidence": "95% bootstrap floor — vs break-even —"
+        },
+        {
+          "id": "G5",
+          "name": "Placebo cannot pass",
+          "status": "fail",
+          "evidence": "relabelling placebo p = —"
+        },
+        {
+          "id": "G6",
+          "name": "Beats the closing line",
+          "status": "fail",
+          "evidence": "no closing price exists for this market, so the strategy cannot be measured against one"
+        }
+      ],
+      "gates_passed": 0,
+      "demotions": [
+        {
+          "id": "D1",
+          "name": "Rolling signal decay",
+          "triggered": false,
+          "evidence": "rule: two consecutive 20-bet windows below break-even; the out-of-sample sample holds 6 bets, fewer than two full windows"
+        },
+        {
+          "id": "D2",
+          "name": "Multiple-testing failure",
+          "triggered": true,
+          "evidence": "q-value = — (rule: q > 0.05 demotes)"
+        },
+        {
+          "id": "D3",
+          "name": "Sample floor",
+          "triggered": true,
+          "evidence": "n = 6 (rule: fewer than 100 decisions demotes)"
+        },
+        {
+          "id": "D4",
+          "name": "Closing line value",
+          "triggered": false,
+          "evidence": "cumulative closing-line value over the last 30 bets is not measurable for this strategy: the price archive in scope holds closing prices only, so no opening price exists to compare against"
+        },
+        {
+          "id": "D5",
+          "name": "Holdout split",
+          "triggered": true,
+          "evidence": "not evaluated for this family: the sample is too small to split into two halves"
+        }
+      ],
+      "status": "paper",
+      "promotion_rule": "Live requires every validation gate to pass. No strategy is live, so no demotion event has been recorded; the rule is applied to every strategy so the transition stays inspectable."
+    }
+  ]
+}

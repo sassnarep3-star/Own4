@@ -1,0 +1,213 @@
+{
+  "id": "questions-2026-11-14",
+  "title": "Questions, what we know, what is missing, and what would answer it",
+  "intro": "A decision can only be made reasonably when the question behind it is written down, the information in hand is listed, the gap is named, and the evidence that would close the gap is named too. Every row below does exactly that. Rows marked answered are closed with the number and the source; rows marked open are waiting for evidence, not for opinions.",
+  "captured_utc": "2026-11-14",
+  "columns": [
+    "id",
+    "question",
+    "what_we_have",
+    "what_is_missing",
+    "what_would_answer_it",
+    "answer",
+    "status",
+    "blocks"
+  ],
+  "rows": [
+    {
+      "id": "Q1",
+      "question": "What price will a decision actually be made at?",
+      "what_we_have": "Closing moneyline prices for the 2026 games in the pinned third-party archive, with the upstream commit recorded.",
+      "what_is_missing": "An opening price. Nothing in scope records the price of a spread or a total at all, and no price source carries a timestamp for when it was published.",
+      "what_would_answer_it": "A price feed that records price and time for every market, spread, total and moneyline, at every publication.",
+      "answer": null,
+      "status": "open",
+      "blocks": [
+        "return on spread and total bets",
+        "closing line value",
+        "any live strategy"
+      ],
+      "source_url": "https://github.com/nflverse/nfldata"
+    },
+    {
+      "id": "Q2",
+      "question": "Who replaces an injured starter, and how deep is the replacement?",
+      "what_we_have": "The official weekly injury report: every listed player, position, injury, practice status and game status, for all 14 week 10 games.",
+      "what_is_missing": "Any official statement of depth. NFL Operations publishes no depth chart (https://www.nfl.com/depth-charts/ returns 404) and the roster pages carry no ordering within a position.",
+      "what_would_answer_it": "The official game book, which lists the players who took snaps, would establish depth empirically; a licensed depth-chart feed would establish it directly.",
+      "answer": "It cannot be answered from an official source today. Every depth cell is blank on the depth page and the gap is named on the flagged page.",
+      "status": "open (blocked by source)",
+      "blocks": [
+        "injury-adjusted lines",
+        "offence and defence deficiency scoring"
+      ],
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "Q3",
+      "question": "Does the model beat the closing line?",
+      "what_we_have": "89 out-of-sample predictions, each produced by a model fitted only on games played before that week.",
+      "what_is_missing": "Nothing for this question; it is measurable on the data in hand.",
+      "what_would_answer_it": "It is answered by the walk-forward test itself.",
+      "answer": "No. On 89 out-of-sample predictions the model's average spread error is 9.253 points against the closing line's 8.944. Four model variants were compared on the same predictions and the best of them (9.245) is still behind the closing line. Gate G6 fails for every strategy.",
+      "status": "answered",
+      "blocks": [
+        "promotion to live"
+      ],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "Q4",
+      "question": "Which strategies have skill once luck is removed?",
+      "what_we_have": "Eight pre-registered strategies, each evaluated out of sample with an exact binomial test, a Benjamini-Hochberg correction across all eight, a seeded bootstrap interval and a relabelling placebo.",
+      "what_is_missing": "Nothing for the question as asked; a larger sample would only sharpen the answer.",
+      "what_would_answer_it": "More decisions. The gate floor is 100 decisions and the largest strategy holds fewer.",
+      "answer": "None. No strategy clears break-even with a p-value below 0.05, none survives the false-discovery correction, and the placebo shows that a random relabelling reaches the observed hit rate. 0 of 8000 possible points are awarded.",
+      "status": "answered",
+      "blocks": [
+        "the reward board"
+      ],
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/strategies.json"
+    },
+    {
+      "id": "Q5",
+      "question": "Can a lucky staking run hide a bad signal?",
+      "what_we_have": "A signal board (skill only) and a staking board (money only), plus a masking check that compares the two rankings for every strategy.",
+      "what_is_missing": "Nothing; the check runs on every rebuild.",
+      "what_would_answer_it": "It is answered by the masking table.",
+      "answer": "The two boards are kept apart and a strategy may only be staked when every signal gate passes. The masking table lists, for each strategy, whether its staking rank is better than its signal rank while its signal gates fail; such a strategy is treated as noise and is not staked.",
+      "status": "answered",
+      "blocks": [],
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/leaderboard.json"
+    },
+    {
+      "id": "Q6",
+      "question": "Can the results feed be trusted to settle bets?",
+      "what_we_have": "137 games with a final score. 66 were read directly off an official nfl.com scores page; 71 come from the pinned archive because nfl.com renders 'Hidden Score' for the 2026 weeks 3 and 4.",
+      "what_is_missing": "A direct official read for 32 games.",
+      "what_would_answer_it": "Reading the 32 games from their official game pages, or a published official results export.",
+      "answer": "Yes for the totals and the records. The whole feed reproduces the official nfl.com standings cell for cell for all 32 clubs: 160 of 160 cells match on wins, losses, ties, points for and points against. A single wrong score would break at least one of those cells.",
+      "status": "answered, with one flagged gap",
+      "blocks": [],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "Q7",
+      "question": "Are the correlations computed only from numbers the league publishes?",
+      "what_we_have": "Seven correlations, each published with the sample size n it was computed on, every input taken from the official standings or from official final scores.",
+      "what_is_missing": "Nothing for these seven. Correlations that would need a market price or a weather reading are deliberately excluded, because their inputs are third-party.",
+      "what_would_answer_it": "It is answered by the correlation table and its policy note.",
+      "answer": "Yes. The correlation page states the policy in full and no correlation mixes an official number with a third-party one.",
+      "status": "answered",
+      "blocks": [],
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "id": "Q8",
+      "question": "What happens to a live strategy that stops working?",
+      "what_we_have": "Five demotion rules, applied to every strategy on every rebuild: rolling signal decay, false-discovery failure, sample floor, closing-line value and holdout split.",
+      "what_is_missing": "An opening price, without which the closing-line-value demotion cannot be evaluated against a real number.",
+      "what_would_answer_it": "The same price feed as Q1.",
+      "answer": "The gate is defined and applied. No strategy is live, so no demotion event has been recorded; the transition logic is exercised by unit tests so it is ready the moment something is promoted.",
+      "status": "answered",
+      "blocks": [],
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/gates.json"
+    },
+    {
+      "id": "Q9",
+      "question": "Can player props and parlays be originated?",
+      "what_we_have": "A competition with three families designed in, and a model that can price a game-level market.",
+      "what_is_missing": "Any player-prop price and any parlay price. nfl.com publishes no betting lines; no licensed prop feed exists in scope.",
+      "what_would_answer_it": "A licensed player-prop price history, plus a joint-distribution source for parlay pricing.",
+      "answer": "Not today. The spread, the total and the moneyline are originated; props and parlays are listed as blocked with the missing input named rather than faked with a model number.",
+      "status": "open (blocked by source)",
+      "blocks": [
+        "two of the three competition families"
+      ],
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "Q10",
+      "question": "How many points is an injury worth?",
+      "what_we_have": "An injury weight table published by a sibling namespace: 0.5 points for Out, 0.25 for Doubtful, 0.10 for Questionable, capped at 3 points per club.",
+      "what_is_missing": "Any official measure of the effect of an absence on a club's scoring.",
+      "what_would_answer_it": "Out-of-sample estimation: regress points scored on the official game results against the official designations, with the depth of the replacement as the missing regressor.",
+      "answer": "The weights are an analyst choice, not an official value, and are labelled as such wherever they are used. They are not used in this namespace's published lines.",
+      "status": "open",
+      "blocks": [
+        "injury-adjusted lines"
+      ],
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "Q11",
+      "question": "Which games have been postponed?",
+      "what_we_have": "The official weekly scores pages for the 2026 weeks that render scores, and the official standings that count every club's games.",
+      "what_is_missing": "Nothing; the game counts reconcile.",
+      "what_would_answer_it": "It is answered by the reconciliation: the 137 games in the feed produce exactly the records and the points the official standings publish.",
+      "answer": "None in 2026 through week 10. Weeks 1 to 4 carried 16 games each, weeks 5 to 10 carried between 13 and 15 because of byes, and every one of the 137 games in the feed is a played game.",
+      "status": "answered",
+      "blocks": [],
+      "source_url": "https://www.nfl.com/scores/2026/week-9"
+    },
+    {
+      "id": "Q12",
+      "question": "Is the next slate the one we think it is?",
+      "what_we_have": "The week 11 slate from the pinned archive: 13 games with dates, times and third-party market lines.",
+      "what_is_missing": "A direct official read of all 13 matchups.",
+      "what_would_answer_it": "The official week 11 scores page, which lists every game of the week before it is played.",
+      "answer": "Eight of the thirteen week 11 matchups were confirmed directly on the official week 11 scores page on 2026-11-14: Colts at Texans, Dolphins at Bills, Ravens at Panthers, Saints at Bears, Titans at Cowboys, Buccaneers at Lions, Cardinals at Chiefs and Steelers at Eagles. The remaining five come from the pinned archive and are marked as such on the own-lines page.",
+      "status": "partly answered",
+      "blocks": [],
+      "source_url": "https://www.nfl.com/scores/2026/week-11"
+    },
+    {
+      "id": "Q13",
+      "question": "What is a live strategy worth, and who decides?",
+      "what_we_have": "A reward policy of 1000 points to a strategy that passes every validation gate and 0 otherwise, with no partial credit.",
+      "what_is_missing": "An execution system, a bankroll and a definition of what a live strategy does in practice.",
+      "what_would_answer_it": "An operating decision by the owner, plus a recorded capital rule.",
+      "answer": "The reward policy is settled. No strategy is live, so the question is not yet live in practice.",
+      "status": "open",
+      "blocks": [
+        "live operation"
+      ],
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/leaderboard.json"
+    },
+    {
+      "id": "Q14",
+      "question": "May the third-party prices be republished on a public site?",
+      "what_we_have": "The upstream repository's own licence statement (CC-BY-4.0, with a request to confirm the terms) and a pinned commit.",
+      "what_is_missing": "A confirmation that this use is inside the licence.",
+      "what_would_answer_it": "Reading the upstream licence and the dataset terms.",
+      "answer": "Not yet confirmed. Every price on this site carries the upstream commit link and a third-party label so the attribution is in place, and the question is on the flagged page.",
+      "status": "open",
+      "blocks": [],
+      "source_url": "https://github.com/nflverse/nfldata"
+    },
+    {
+      "id": "Q15",
+      "question": "How many numbers does the whole site rest on?",
+      "what_we_have": "A repository scan that counts every file in every NFL namespace.",
+      "what_is_missing": "Nothing; the scan is mechanical.",
+      "what_would_answer_it": "It is answered by the repository review page.",
+      "answer": "Sixteen NFL namespaces are scanned on every run and their file counts are published on the repository review page, so a reader can see the size of the surface behind the site.",
+      "status": "answered",
+      "blocks": [],
+      "source_url": "https://github.com/sassnarep3-star/Own4"
+    },
+    {
+      "id": "Q16",
+      "question": "Which way round is a published spread line?",
+      "what_we_have": "The third-party archive's spread line, read against 136 official results: as an expected home margin it has a mean error of 9.485 points and agrees with the outcome's direction 69.1% of the time; read the other way it has a mean error of 13.206 points and agrees 31.6% of the time.",
+      "what_is_missing": "A written statement of the convention from the archive, and a written statement from each peer namespace that publishes its own spread line. Four of the six peer publications do not say which way round their line is written.",
+      "what_would_answer_it": "One line in each publication's own metadata, plus the upstream data dictionary.",
+      "answer": "It is resolved for the archive by the check above, and the model publishes its line in the same convention. The peer publications that do not state their convention are NOT settled: their spread rows are published with the result blank and the reason attached.",
+      "status": "answered, with a flagged gap",
+      "blocks": [
+        "settling peer-published spreads"
+      ],
+      "source_url": "https://github.com/nflverse/nfldata"
+    }
+  ]
+}

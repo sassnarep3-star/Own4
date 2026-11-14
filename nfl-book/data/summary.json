@@ -1,0 +1,101 @@
+{
+  "id": "summary-2026-11-14",
+  "title": "Executive summary",
+  "as_of": "2026-11-14",
+  "week": 11,
+  "one_line": "The feed is verified and the machinery is built; the model does not yet beat the closing line, so nothing is live and no reward is paid.",
+  "sections": [
+    {
+      "heading": "What is finished",
+      "body": "A results feed of 137 games that reproduces the official nfl.com standings cell for cell for all 32 clubs, with 66 of those games read directly off an official scores page. A price store that keeps an opening and a closing number for every originated market, and refuses a close without an open. An origination order that prices the side first, the total second and the moneyline last from the side it just originated, so the three can never disagree. Two leaderboards, one for skill and one for money, with a masking check between them. Seven correlations computed only from official numbers, each published with the sample size n. A five-rule demotion gate that sends a live strategy back to paper. A depth tracker for the official injury report, with the depth cells left blank and flagged because no official source publishes depth."
+    },
+    {
+      "heading": "What the numbers say",
+      "body": "On 89 out-of-sample predictions the model's average spread error is 9.253 points; the closing line's is 8.944. Four model variants were compared on the same predictions and the best of them is still behind the closing line. The model trails the do-nothing baseline, so gate G6 fails for every strategy. None of the eight pre-registered strategies beats break-even with a p-value below 0.05, none survives the false-discovery correction, and a relabelling placebo reaches the observed hit rate. The leaderboard is therefore empty and 0 of 8000 possible points are awarded. That is the correct output, not a failure of the page."
+    },
+    {
+      "heading": "What is not finished, and why",
+      "body": "nfl.com hides the scores of the 2026 weeks 3 and 4 behind 'Hidden Score' on its public scores pages, so 32 games are carried from a pinned third-party archive and marked as such; the standings reconciliation is the proof that the carried scores are the official record. NFL Operations publishes no depth chart, so no replacement tier can be filled from an official source. There is no opening-price archive in scope, so 146 of the 172 originated snapshots have no closing number and closing-line value cannot be computed for them. No prop or parlay price exists anywhere in scope, so two of the three competition families are blocked."
+    },
+    {
+      "heading": "What is recommended next",
+      "body": "Publish every market every time it changes, so the price store fills from the next slate onward; read the 32 hidden-score games from their official game pages; and decide on suggestion S4, which asks whether to license a price feed or to stop quoting market numbers entirely. The suggestions page holds fourteen proposals with their evidence, their cost and their risk, and none of them has been implemented without a decision."
+    },
+    {
+      "heading": "How to read this site",
+      "body": "Every row of every table carries the source it came from. A value that could not be confirmed against an official source is left blank and appears on the flagged page with the evidence that would fill it. Third-party numbers are labelled as third-party everywhere they appear. Nothing on this site is a betting recommendation."
+    }
+  ],
+  "headline_numbers": [
+    {
+      "label": "Games in the verified feed",
+      "value": "137",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "label": "Official standings cells reproduced exactly",
+      "value": "160 of 160",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "label": "Games read directly off an official page",
+      "value": "66",
+      "source_url": "https://www.nfl.com/scores/2026/week-9"
+    },
+    {
+      "label": "Out-of-sample predictions",
+      "value": "89",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG"
+    },
+    {
+      "label": "Model spread error vs closing line",
+      "value": "9.253 vs 8.944 points",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/strategies.json"
+    },
+    {
+      "label": "Strategies passing every gate",
+      "value": "0 of 8",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/gates.json"
+    },
+    {
+      "label": "Points awarded",
+      "value": "0 of 8000",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/leaderboard.json"
+    },
+    {
+      "label": "Price snapshots with an open and a close",
+      "value": "26 of 172",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/price_snapshot_coverage.json"
+    },
+    {
+      "label": "Official injury rows tracked",
+      "value": "105",
+      "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+      "label": "Flagged items open",
+      "value": "9 (8 open)",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/flags.json"
+    },
+    {
+      "label": "Model variants compared out of sample",
+      "value": "4",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/model_variants.json"
+    }
+  ],
+  "sources": [
+    "https://www.nfl.com/standings/league/2026/REG",
+    "https://www.nfl.com/scores/2026/week-1",
+    "https://www.nfl.com/scores/2026/week-2",
+    "https://www.nfl.com/scores/2026/week-3",
+    "https://www.nfl.com/scores/2026/week-4",
+    "https://www.nfl.com/scores/2026/week-5",
+    "https://www.nfl.com/scores/2026/week-8",
+    "https://www.nfl.com/scores/2026/week-9",
+    "https://www.nfl.com/scores/2026/week-11",
+    "https://www.nfl.com/schedules/2026/REG10/",
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/teams/houston-texans/roster/",
+    "https://www.nfl.com/depth-charts/"
+  ]
+}

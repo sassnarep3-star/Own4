@@ -1,0 +1,138 @@
+{
+  "id": "flags-2026-11-14",
+  "title": "Flagged for review",
+  "intro": "Everything on this page is a defect, a limitation or an irregularity found while building the NFL origination book. None of it blocks the site. Each row carries the source that proves it, so it can be checked by hand.",
+  "captured_utc": "2026-11-14",
+  "rows": [
+    {
+      "id": "F1",
+      "title": "nfl.com hides the scores of the 2026 weeks 3 and 4 on its public scores page",
+      "what": "The official weekly scores pages for weeks 1, 2, 5, 8 and 9 render the final score for every game. The pages for weeks 3 and 4 render the same games with the score cell replaced by 'Hidden Score'. The pages were fetched twice on 2026-11-14 and the result was identical both times.",
+      "why_it_matters": "32 of the 137 games in the results feed cannot be read directly off an official scores page.",
+      "how_it_was_handled": "The scores of those games are carried from the third-party archive and marked reconciled_to_official. The whole feed reproduces the official nfl.com standings cell for cell for all 32 clubs, which is the proof that the carried scores are the official record.",
+      "action_needed": "Read the 32 games from the official game pages (https://www.nfl.com/games/...) to raise them to official_read.",
+      "source_url": "https://www.nfl.com/scores/2026/week-3",
+      "status": "open"
+    },
+    {
+      "id": "F2",
+      "title": "NFL Operations publishes no depth chart",
+      "what": "https://www.nfl.com/depth-charts/ returns the 404 page. The official team roster pages list players by surname with position and roster status but no ordering within a position, and no 'string' (starter, second string, third string) is published anywhere on nfl.com.",
+      "why_it_matters": "The depth of a replacement cannot be confirmed from an official source, so every depth cell in the injury tracker is blank.",
+      "how_it_was_handled": "The tracker publishes what the official report does say (who is out, at what position, with what status) and leaves the depth blank with the exact evidence that would fill it.",
+      "action_needed": "Choose an evidence source for depth: the official game book participation table, or a licensed depth-chart feed.",
+      "source_url": "https://www.nfl.com/depth-charts/",
+      "status": "open"
+    },
+    {
+      "id": "F3",
+      "title": "There is no opening-price archive in scope, so most originated markets have no closing number",
+      "what": "Of 172 price snapshots this repository originated, 26 have both an opening and a closing number. 146 have an opening number only.",
+      "why_it_matters": "Closing-line value cannot be computed for a market that was published once. A model that cannot see its own closing number cannot tell whether it added information.",
+      "how_it_was_handled": "The gap is measured and published rather than hidden: the coverage table on the price-snapshot page names every market that is missing its closing number.",
+      "action_needed": "Publish every market every time it changes, starting now, so the store fills from the next slate onwards.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/price_snapshot_coverage.json",
+      "status": "open"
+    },
+    {
+      "id": "F4",
+      "title": "No spread or total price exists in scope, so only the moneyline can carry money",
+      "what": "The pinned archive holds closing lines for spreads and totals without a price, and holds moneyline prices. The archive's separate closing-price file covers 2006 to 2024 and holds no 2026 rows.",
+      "why_it_matters": "A spread or total bet can be settled (win, loss, push) but cannot be given a return, so a return on those markets would have to be invented.",
+      "how_it_was_handled": "Spread and total rows are settled without money. The return column is left blank on those rows and the reason is printed next to them.",
+      "action_needed": "Add a price feed that records the price of a spread and a total, not only the line.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/source/provenance.json",
+      "status": "open"
+    },
+    {
+      "id": "F5",
+      "title": "The model does not beat the closing line",
+      "what": "On 89 out-of-sample predictions the model's average spread error is 9.376 points against the closing line's 8.944 points.",
+      "why_it_matters": "Beating the do-nothing baseline is not skill. The closing line is the real opponent and the model currently loses to it.",
+      "how_it_was_handled": "Gate G6 fails for every strategy, no strategy is live, and no reward is paid.",
+      "action_needed": "Do not promote anything to live until the out-of-sample spread error is below the closing line's over a rolling window.",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG",
+      "status": "open"
+    },
+    {
+      "id": "F6",
+      "title": "Sixteen namespaces publish their own copy of the same official data",
+      "what": "Sixteen NFL directories exist in this repository. Each holds its own copy of the standings, the slate and the results, captured on a different date by a different session.",
+      "why_it_matters": "Two copies of an official table can disagree, and a reader cannot tell which one a page used. The nfl-lines CI workflow already carries a warning for exactly this class of problem on its own repository-audit page.",
+      "how_it_was_handled": "This namespace reads the official pages itself and records the capture date and the URL on every row. It does not edit any peer namespace.",
+      "action_needed": "Choose one results feed and one price store for the whole repository and point the other namespaces at them.",
+      "source_url": "https://github.com/sassnarep3-star/Own4",
+      "status": "open"
+    },
+    {
+      "id": "F7",
+      "title": "The leaderboard is empty on purpose",
+      "what": "No strategy passes the validation gates, so 0 of 8000 possible points are awarded.",
+      "why_it_matters": "An empty board can look like a broken page.",
+      "how_it_was_handled": "The board states the point policy, shows every strategy with the gates it failed, and shows the masking check that keeps a lucky staking run from promoting a bad signal.",
+      "action_needed": "None. An empty board is the correct output until a strategy passes.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/leaderboard.json",
+      "status": "closed"
+    },
+    {
+      "id": "F8",
+      "title": "Player props and parlays cannot be originated at all",
+      "what": "No official or licensed source in this repository publishes a player-prop price or a parlay price. nfl.com publishes no betting lines of any kind.",
+      "why_it_matters": "Two of the three families the competition asks for cannot be priced, so they cannot be backtested or staked.",
+      "how_it_was_handled": "The competition covers the spread, the total and the moneyline. Prop and parlay families are listed as blocked on the questions page with the missing input named.",
+      "action_needed": "Decide whether to license a prop-price feed before the prop and parlay families are opened.",
+      "source_url": "https://www.nfl.com/injuries/",
+      "status": "open"
+    },
+    {
+      "id": "F9",
+      "title": "Redistribution rights for the third-party price archive must be confirmed",
+      "what": "The pinned archive states CC-BY-4.0 in its own README and asks readers to confirm the terms before redistribution. This repository republishes its market prices on a public GitHub Pages site.",
+      "why_it_matters": "Publishing the prices on a public site is a use the upstream licence asks the reader to confirm.",
+      "how_it_was_handled": "Every market price on this site carries the upstream commit URL and the third-party label, so the attribution the licence requires is in place.",
+      "action_needed": "Read the upstream licence and record the answer before the site is promoted further.",
+      "source_url": "https://github.com/nflverse/nfldata",
+      "status": "open"
+    },
+    {
+      "id": "F10",
+      "title": "The 2026 season has produced one tie",
+      "what": "The Giants and Commanders finished 27-27 in week 5. The official standings show one tie for each club, which matches.",
+      "why_it_matters": "A tie pushes a spread or moneyline bet and must not be counted as a loss or a win.",
+      "how_it_was_handled": "The settlement engine returns push for a tie, the hit rate counts only decided bets, and the break-even rate uses only the priced bets.",
+      "action_needed": "None.",
+      "source_url": "https://www.nfl.com/scores/2026/week-5",
+      "status": "closed"
+    },
+    {
+      "id": "F11",
+      "title": "The third-party archive writes its spread line in the opposite sense to the usual betting notation",
+      "what": "In the pinned archive a POSITIVE spread_line means the home team is favoured, not that the home team is receiving points. Read as an expected home margin the archive's line has a mean error of 9.485 points over the 136 official results in scope and agrees with the outcome's direction 69.1% of the time; read the other way the error is 13.206 points and the agreement is 31.6%.",
+      "why_it_matters": "Getting this backwards flips every spread result in the book. It was caught by a settlement unit test, which failed on the away side of a spread, and it is the same kind of defect the peer namespaces flagged as A-06.",
+      "how_it_was_handled": "The convention was measured against 136 official results and is written into the model, the price store and the settlement code. The model publishes its line in the same convention, so the difference column is meaningful.",
+      "action_needed": "Ask the archive for a written statement of the convention and record it in the provenance file.",
+      "source_url": "https://github.com/nflverse/nfldata",
+      "status": "open"
+    },
+    {
+      "id": "F12",
+      "title": "Four of the six peer own-line publications do not state which way round their spread line is written",
+      "what": "nfl-lab writes the side in the string itself ('HOME +3.5') and nfl-origination names its field own_home_margin, so both are readable. nfl-own, nfl-command, nfl-edge and nfl-quant publish a spread number without saying whether a positive value favours the home team or the away team.",
+      "why_it_matters": "A spread settled with the wrong sign convention is a wrong number published as a fact, and the error is invisible without a check.",
+      "how_it_was_handled": "Those publications' spread snapshots are recorded with the convention 'unstated' and are NOT settled: the result stays blank and the row carries the reason. Their totals and moneylines are settled, because neither has a sign convention to get wrong.",
+      "action_needed": "Ask each namespace for one line of metadata, then settle those rows.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/tree/main/nfl-own",
+      "status": "open"
+    },
+    {
+      "id": "F13",
+      "title": "The model does not beat the closing line, and four variants were tried",
+      "what": "On 89 out-of-sample predictions the model's average spread error is 9.253 points and the closing line's is 8.944. The four model variants scored 9.245 (blended ratings), 9.381 (blended plus a home-field term), 9.632 (home and away split) and 9.821 (split plus a home-field term).",
+      "why_it_matters": "Beating the do-nothing baseline is not skill. The closing line is the real opponent and the model is behind it, so gate G6 fails for every strategy and nothing can be promoted to live.",
+      "how_it_was_handled": "Gate G6 fails for every strategy, no strategy is live, and the leaderboard awards no points. The variant comparison is published so the choice of model can be audited rather than asserted.",
+      "action_needed": "Do not promote anything to live until the out-of-sample spread error is below the closing line's over a rolling window.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/derived/model_variants.json",
+      "status": "open"
+    }
+  ]
+}
