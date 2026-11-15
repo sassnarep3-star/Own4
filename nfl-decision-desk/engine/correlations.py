@@ -28,10 +28,10 @@ def pearson(xs, ys):
     n = len(xs)
     if n < 3:
         return None, None, n
-    mx, my = sum(xs) / n, sum(ys) / n
-    cov = sum((a - mx) * (b - my) for a, b in zip(xs, ys))
-    vx = sum((a - mx) ** 2 for a in xs)
-    vy = sum((b - my) ** 2 for b in ys)
+    mx, my = math.fsum(xs) / n, math.fsum(ys) / n
+    cov = math.fsum((a - mx) * (b - my) for a, b in zip(xs, ys))
+    vx = math.fsum((a - mx) ** 2 for a in xs)
+    vy = math.fsum((b - my) ** 2 for b in ys)
     if vx <= 0 or vy <= 0:
         return None, None, n
     r = cov / math.sqrt(vx * vy)
@@ -113,7 +113,7 @@ def main():
                 for xv, yv in zip(xs, ys):
                     key = ("%+g" % xv) if abs(xv) <= 3 else ("<= -4" if xv < 0 else ">= +4")
                     buckets.setdefault(key, []).append(yv)
-                groups = [{"x_group": k, "n": len(v), "mean_y": round(sum(v) / len(v), 3)}
+                groups = [{"x_group": k, "n": len(v), "mean_y": round(math.fsum(v) / len(v), 3)}
                           for k, v in sorted(buckets.items())]
                 trim_note = ("x is a GROUP VARIABLE, not a continuous one: %.0f%% of the n=%d "
                              "observations share the single value %g. The Pearson r is dominated "

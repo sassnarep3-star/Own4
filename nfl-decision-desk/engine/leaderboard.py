@@ -121,14 +121,14 @@ def main():
         n = len(obs)
         if not n:
             continue
-        b = sum(brier(p, y) for p, y, _ in obs) / n
+        b = math.fsum(brier(p, y) for p, y, _ in obs) / n
         # base-rate Brier on the SAME sample = the honest no-skill reference
-        pr = sum(y for _, y, _ in obs) / n
-        b0 = sum(brier(pr, y) for _, y, _ in obs) / n
+        pr = math.fsum(y for _, y, _ in obs) / n
+        b0 = math.fsum(brier(pr, y) for _, y, _ in obs) / n
         skill = 1 - b / b0
         lo, hi, _ = cluster_boot([r for _, _, r in obs],
-                                 lambda s: 1 - (sum(brier(fn(x), x["home_win"]) for x in s) / len(s)) /
-                                 (sum(brier(sum(z["home_win"] for z in s) / len(s), z["home_win"]) for z in s) / len(s)))
+                                 lambda s: 1 - (math.fsum(brier(fn(x), x["home_win"]) for x in s) / len(s)) /
+                                 (math.fsum(brier(math.fsum(z["home_win"] for z in s) / len(s), z["home_win"]) for z in s) / len(s)))
         # permutation p: is skill different from what shuffling outcomes produces?
         rng = random.Random(SEED)
         ys = [y for _, y, _ in obs]
@@ -136,18 +136,22 @@ def main():
         for _ in range(2000):
             sh = ys[:]
             rng.shuffle(sh)
-            bb = sum(brier(p, y) for (p, _, _), y in zip(obs, sh)) / n
-            p0 = sum(sh) / n
-            b00 = sum(brier(p0, y) for y in sh) / n
+            bb = math.fsum(brier(p, y) for (p, _, _), y in zip(obs, sh)) / n
+            p0 = math.fsum(sh) / n
+            b00 = math.fsum(brier(p0, y) for y in sh) / n
             null.append(1 - bb / b00)
+        # A Monte-Carlo p-value must have a floor: the observed statistic is ONE of the
+        # (2000+1) equally likely labels, so the smallest honest p is 1/2001, never 0.
+        # (Previously this divided by len(null) only, which can print p=0 for a statistic
+        # that is merely at the edge of the null - an overclaim.)
         null.sort()
-        pval = sum(1 for v in null if v >= skill) / len(null)
+        pval = (1 + sum(1 for v in null if v >= skill)) / (1 + len(null))
         signal.append({
             "id": sid, "strategy": name, "kind": kind, "prereg": prereg,
             "n": n, "brier": round(b, 6), "brier_base_rate_same_sample": round(b0, 6),
             "brier_skill_vs_base": round(skill, 5),
             "skill_cluster_lower_95": round(lo, 5), "skill_cluster_upper_95": round(hi, 5),
-            "permutation_p_one_sided": round(max(pval, 1.0 / len(null)), 5),
+            "permutation_p_one_sided": round(pval, 5),
             "eligible": (kind == "model" and n >= MIN_N_SIGNAL and lo > 0),
             "blocked_by": ("n < %d (pre-registered floor)" % MIN_N_SIGNAL) if n < MIN_N_SIGNAL
                           else ("cluster lower bound <= 0" if lo <= 0 else None),
@@ -227,7 +231,7 @@ def main():
             continue
         k = sum(1 for r, ph in rows_s if (r["home_win"] == 1) == ph)
         n = len(rows_s)
-        exp = sum(r["p_home_win"] if ph else 1 - r["p_home_win"] for r, ph in rows_s)
+        exp = math.fsum(r["p_home_win"] if ph else 1 - r["p_home_win"] for r, ph in rows_s)
         rng = random.Random(SEED)
         null = []
         for _ in range(4000):
@@ -239,8 +243,8 @@ def main():
                     c += 1
             null.append(c)
         null.sort()
-        p_high = sum(1 for v in null if v >= k) / len(null)
-        p_low = sum(1 for v in null if v <= k) / len(null)
+        p_high = (1 + sum(1 for v in null if v >= k)) / (1 + len(null))
+        p_low = (1 + sum(1 for v in null if v <= k)) / (1 + len(null))
         luck.append({
             "id": s["id"], "strategy": s["strategy"], "n": n,
             "correct": k, "expected_by_luck": round(exp, 3),

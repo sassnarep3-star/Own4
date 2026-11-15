@@ -249,11 +249,11 @@ def evaluate(corpus, rows):
             "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
         })
     n_b = len(bench)
-    mb = sum(b["brier_model"] for b in bench) / n_b if n_b else None
-    mk = sum(b["brier_market"] for b in bench) / n_b if n_b else None
+    mb = math.fsum(b["brier_model"] for b in bench) / n_b if n_b else None
+    mk = math.fsum(b["brier_market"] for b in bench) / n_b if n_b else None
     # base rate benchmark (climatology) - the honest "no skill" reference
-    pbar = (sum(b["home_win"] for b in bench) / n_b) if n_b else None
-    bb = sum(brier(pbar, b["home_win"]) for b in bench) / n_b if n_b else None
+    pbar = (math.fsum(b["home_win"] for b in bench) / n_b) if n_b else None
+    bb = math.fsum(brier(pbar, b["home_win"]) for b in bench) / n_b if n_b else None
     # Brier Skill Score vs base rate; vs market
     bss_base = (1 - mb / bb) if (mb is not None and bb) else None
     bss_mkt = (1 - mb / mk) if (mb is not None and mk) else None
@@ -270,7 +270,7 @@ def evaluate(corpus, rows):
         sample = []
         for _ in wks:
             sample.extend(byweek[rng.choice(wks)])
-        d = sum(x["brier_market"] - x["brier_model"] for x in sample) / len(sample)
+        d = math.fsum(x["brier_market"] - x["brier_model"] for x in sample) / len(sample)
         diffs.append(d)
     diffs.sort()
     lo = diffs[int(0.025 * len(diffs))]
@@ -287,18 +287,18 @@ def evaluate(corpus, rows):
             t2_err.append(abs(r["fair_total_pr02"] - g["total_pts"]))
             t3_err.append(abs(r["fair_total_pr03"] - g["total_pts"]))
             mktt_err.append(abs(g["close_total"] - g["total_pts"]))
-    mae = lambda xs: (sum(xs) / len(xs)) if xs else None
+    mae = lambda xs: (math.fsum(xs) / len(xs)) if xs else None
 
     # paired test total PR-02 vs PR-03
     d23 = [abs(r["fair_total_pr02"] - games[r["game_id"]]["total_pts"])
            - abs(r["fair_total_pr03"] - games[r["game_id"]]["total_pts"]) for r in rows]
-    m23 = sum(d23) / len(d23) if d23 else None
-    sd = math.sqrt(sum((x - m23) ** 2 for x in d23) / (len(d23) - 1)) if len(d23) > 1 else None
+    m23 = math.fsum(d23) / len(d23) if d23 else None
+    sd = math.sqrt(math.fsum((x - m23) ** 2 for x in d23) / (len(d23) - 1)) if len(d23) > 1 else None
     t23 = (m23 / (sd / math.sqrt(len(d23)))) if (sd and len(d23) > 1) else None
 
     # squared error (proper score) is the ranking metric, not absolute error
-    sq_model = sum(brier(r["p_home_win"], r["home_win"]) for r in rows) / len(rows)
-    sq_base = sum(brier(pbar, r["home_win"]) for r in rows) / len(rows)
+    sq_model = math.fsum(brier(r["p_home_win"], r["home_win"]) for r in rows) / len(rows)
+    sq_base = math.fsum(brier(pbar, r["home_win"]) for r in rows) / len(rows)
 
     return {
         "_meta": {

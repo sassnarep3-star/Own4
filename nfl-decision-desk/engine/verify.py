@@ -98,11 +98,35 @@ def main() -> int:
             if not os.path.exists(target):
                 failures.append("V2 %s: broken local ref %s" % (rel, ref))
 
+    # V8  float summation must be version-stable.
+    #     Python 3.12 changed builtin sum() over floats to Neumaier-compensated summation,
+    #     so a plain sum() of floats can round differently on 3.11 vs 3.12 and break a
+    #     determinism gate in CI on a machine you cannot see. math.fsum is exactly rounded
+    #     on every version, so it is the only acceptable accumulator for published numbers.
+    engines = sorted(glob.glob(os.path.join(ROOT, "engine", "*.py")))
+    risky = []
+    for e in engines:
+        if os.path.basename(e) in ("verify.py",):
+            continue
+        for i, line in enumerate(open(e).read().split("\n"), 1):
+            code = line.split("#", 1)[0]
+            if "fsum" in code or "sum(1 for" in code or "sum(" not in code:
+                continue
+            # integer-only sums are fine; a sum over a float literal / division / float field is not
+            if any(t in code for t in ("brier", "/ len(", "/ n", "p_home_win", "brier_model",
+                                       "brier_market", "home_win", "/ len(s)", ".0", "mean",
+                                       "** 2 for", "d23", "d1", "sq_")):
+                risky.append("%s:%d %s" % (os.path.basename(e), i, code.strip()[:88]))
+    if risky:
+        for r in risky:
+            failures.append("V8 float sum() is not version-stable, use math.fsum: %s" % r)
+
     print("pages checked:      %d" % len(pages))
     print("tbody rows:         %d  (with https source: %d)" % (total_rows, rows_with_src))
     print("numeric cells:      %d" % numeric_cells)
     print("local references:   %d" % total_refs)
     print("unique titles:      %d of %d" % (len(titles), len(pages)))
+    print("float-sum check:    V8 (%d risky accumulators)" % len(risky))
 
     if failures:
         print("\nFAIL: %d problem(s)" % len(failures))
@@ -112,7 +136,8 @@ def main() -> int:
             print("  ... and %d more" % (len(failures) - 60))
         return 1
     print("\nPASS: every table row carries an https source, every local link resolves, "
-          "every required page exists, no localhost references, no duplicate titles.")
+          "every required page exists, no localhost references, no duplicate titles, "
+          "and no published number depends on the interpreter's float summation.")
     return 0
 
 
