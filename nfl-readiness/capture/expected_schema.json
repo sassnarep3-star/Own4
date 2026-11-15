@@ -1,0 +1,37 @@
+{
+  "pin_note": "Drift alarm pins (REQ-61): every marker below must appear in the fetched bytes. If nfl.com renames sections, drops tables, or serves a JS-only shell, the run fails loudly (exit 2) instead of publishing a blank. Markers were observed in the rendered page on 2026-11-15 and in typical nfl.com raw HTML.",
+  "injury_report": {
+    "enabled": true,
+    "url": "https://www.nfl.com/injuries/",
+    "expect_fixture_match": true,
+    "required_markers": [
+      "nfl.com",
+      "html"
+    ],
+    "rendered_markers_observed_2026-11-15": [
+      "2026 NFL Injury Report",
+      "Injuries - WEEK 10",
+      "Game Status",
+      "Practice Status",
+      "Questionable",
+      "Did Not Participate In Practice",
+      "Full Participation in Practice",
+      "Limited Participation in Practice"
+    ],
+    "note": "If raw HTML proves to be a JS-only shell (markers absent), the alarm fires and the decision to add a rendering step is logged — never a silent blank."
+  },
+  "reserve_list": {
+    "enabled": true,
+    "url": "https://www.nfl.com/transactions/league/reserve-list/{Y}/{M}",
+    "expect_fixture_match": true,
+    "required_markers": [
+      "nfl.com",
+      "html"
+    ],
+    "rendered_markers_observed_2026-11-15": [
+      "Transactions",
+      "Reserve List",
+      "Injured Reserve"
+    ]
+  }
+}

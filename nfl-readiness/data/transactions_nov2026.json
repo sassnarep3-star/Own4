@@ -1,0 +1,28 @@
+{
+  "dataset": "nfl_readiness_transactions_nov2026",
+  "title": "Official November 2026 trade ledger — captured live from nfl.com/transactions",
+  "fetched_utc": "2026-11-15T23:50:00Z",
+  "source_url": "https://www.nfl.com/transactions/",
+  "sub_ledgers": ["trades", "signings", "reserve-list", "waivers", "terminations", "other"],
+  "policy": "Verbatim transcription of the trades table shown on the official page at fetch time; positions were left blank where the page's table did not state them.",
+  "rows": [
+    {"date": "11/10", "from": "ATL", "to": "JAX", "player": "Jessie Bates", "type": "Traded"},
+    {"date": "11/10", "from": "PHI", "to": "JAX", "player": "Jordan Davis", "type": "Traded"},
+    {"date": "11/10", "from": "TEN", "to": "BUF", "player": "Amani Hooker", "type": "Traded"},
+    {"date": "11/10", "from": "IND", "to": "SF", "player": "Keenan Allen", "type": "Traded"},
+    {"date": "11/10", "from": "LV", "to": "MIN", "player": "Kirk Cousins", "type": "Traded"},
+    {"date": "11/10", "from": "LAC", "to": "DEN", "player": "Daiyan Henley", "type": "Traded"},
+    {"date": "11/10", "from": "IND", "to": "KC", "player": "Josh Downs", "type": "Traded"},
+    {"date": "11/10", "from": "ATL", "to": "BAL", "player": "Ryan Neuzil", "type": "Traded"},
+    {"date": "11/10", "from": "BAL", "to": "ATL", "player": "Andrew Vorhees", "type": "Traded"},
+    {"date": "11/09", "from": "NYJ", "to": "DET", "player": "Andre Cisco", "type": "Traded"},
+    {"date": "11/09", "from": "NO", "to": "JAX", "player": "Davon Godchaux", "type": "Traded"},
+    {"date": "11/06", "from": "AZ", "to": "BAL", "player": "Jacoby Brissett", "type": "Traded"}
+  ],
+  "cross_checks": [
+    {"check": "Jessie Bates on JAX Week-10 injury report", "result": "consistent (JAX table, resting player, Out)"},
+    {"check": "Jordan Davis on JAX Week-10 injury report", "result": "consistent (JAX table, resting player, Out)"},
+    {"check": "Daiyan Henley on LAC Week-10 injury report", "result": "IRREGULARITY: traded LAC->DEN 11/10 yet listed on LAC report 11/15 (both official links retained; row flagged)"},
+    {"check": "Jacoby Brissett to BAL vs requirement REQ-45's Baltimore replacement narrative", "result": "consistent (trade dated 11/06, before Week 10)"}
+  ]
+}
