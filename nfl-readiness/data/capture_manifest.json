@@ -1,0 +1,40 @@
+{
+ "capture_id": "WEEK10-AVAIL-2026-11-15",
+ "dataset": "nfl_2026_week10_official_availability_capture",
+ "source": {
+  "publisher": "NFL Enterprise (nfl.com)",
+  "page": "https://www.nfl.com/injuries/",
+  "page_title_as_published": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+  "week_control": "WEEK 10 in the page's own week control; season control 2026; the control listed WEEK 1 through WEEK 10 and 62 seasons",
+  "table_columns_as_published": ["Player", "Position", "Injuries", "Practice Status", "Game Status"]
+ },
+ "clock": {
+  "read_window_start_utc": "2026-11-15T23:23:14Z",
+  "read_window_end_utc": "2026-11-15T23:34:00Z",
+  "window_evidence": "start = the UTC timestamp of this session's claim commit (git); end = when this manifest was written. Individual page reads are ordered in official_reads.json because the fetch harness exposes no per-call clock, so no minute-level per-read timestamp is claimed.",
+  "report_day_context": "the report covers a Thursday 12 Nov fixture, twelve Sunday 15 Nov fixtures and one Monday 16 Nov fixture; at read time three Sunday games were in progress and two had not kicked off"
+ },
+ "method": {
+  "how": "all 8 chunks of the live page were read and transcribed row by row into data/availability_snapshot_2026-11-15.csv; the transcription is then machine-checked, not trusted",
+  "machine_checks": [
+   "engine/audit.py re-derives every count (rows, sections, designation coverage, vocabulary) from the CSV, so no number on the site is typed by hand",
+   "engine/drift.py pins the expected row count, the required fields and the allowed vocabulary, and fails the build on a missing field or an unexpected value",
+   "the row set is diffed against every stored capture of the same page in this repo (6 dated renders), and the diff is published, not hidden"
+  ],
+  "caught_by_these_checks": "5 rows were initially mis-parsed (an extra comma on blank-injury rows put practice text into the game-status column); the peer diff caught it and the correction is disclosed in flag RF-14",
+  "blanks": "an empty cell on the official table is stored as an empty string, never as 'None', 'Healthy', or a carried-forward value",
+  "fields_stored": ["team", "opp", "player", "pos", "injury", "practice_status", "game_status", "player_slug"],
+  "fields_not_stored": ["depth rank", "starter/backup flag", "snap count", "roster status", "salary", "jersey number"],
+  "fields_not_stored_reason": "the official report publishes none of them, and the brief forbids inferring them - see governance.json depth_rule"
+ },
+ "immutability_limitation": "the fetch path used here returns a rendered reading of the page, not the page's bytes, so the sha256 values written into data/derived/hashes.json at build time hash this session's stored transcription. They are a transcription fingerprint, not a proof about the original document. A byte-level capture pipeline is SUG-12 option C.",
+ "hashed_files": [
+  "data/availability_snapshot_2026-11-15.csv",
+  "data/fixtures_week10.csv",
+  "data/standings_2026-11-15.json",
+  "data/official_reads.json",
+  "data/evidence.json",
+  "prereg/PREREG-001-shadow-baseline.md"
+ ],
+ "club_coverage": "28 of 32 clubs publish a section; the 4 that do not (CHI, DEN, PHI, TB) are exactly the four clubs in the official schedule page's 'Teams on Bye' block - recomputed at build time in data/derived/capture_audit.json"
+}

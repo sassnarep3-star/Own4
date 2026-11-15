@@ -1,0 +1,38 @@
+{
+ "clubs": 32,
+ "sum_pf": 6664,
+ "sum_pa": 6664,
+ "pf_equals_pa": true,
+ "net_points_identity_holds": true,
+ "win_pct_mismatches": [],
+ "sum_games_played": 290,
+ "games_played_derived": 145,
+ "backtest_corpus": {
+  "method": "games credited in the live standings = sum(GP)/2; Week 10 games already credited = games final or in progress at read time; games through Week 9 = the difference",
+  "games_credited_to_date": 145,
+  "week10_games_credited_at_read": 12,
+  "week10_games_final_at_read": 9,
+  "games_through_week9": 133,
+  "week10_slate_size": 14,
+  "games_after_week10_completes": 147,
+  "reviewer_claim": "the brief asks for 'the 136-game log' to become the pre-registered corpus; no file at the base commit publishes 136 and the official arithmetic above gives a different number - see flag RF-01, which states both figures instead of quietly adopting either"
+ },
+ "games_played_is_even": true,
+ "teams_on_bye_derived": [
+  "CHI",
+  "DEN",
+  "PHI",
+  "TB"
+ ],
+ "week10_fixtures": 14,
+ "week10_final_at_read": 9,
+ "week10_in_progress_at_read": 3,
+ "week10_not_started_at_read": 2,
+ "report_record_vs_live_standings": {
+  "clubs_compared": 28,
+  "matching": 28,
+  "mismatching": [],
+  "reading": "the bracketed record on the injury-report page equals the LIVE standings record for 28 of 28 clubs at read time - including the four clubs whose Week 10 games were still in progress and the clubs playing the 8:20 PM and Monday games that had not kicked off. So the record field is a live join, not a pre-game attribute of the report; a snapshot must store the record it saw with the clock time, and the model must never read it off the report table.",
+  "report_format_note": "the report prints W-L and appends -T only when T>0 (NYG 5-3-1, WAS 3-5-1); the standings always print three numbers. Comparison is on the parsed triple."
+ }
+}

@@ -3220,3 +3220,88 @@ re-verified, and cited, never modified.
 this session, with the URL and fetch time, or (b) a repo-computed number with the file path and the script that
 computes it. Anything not confirmable is left blank and flagged on `pages/flagged.html`. No market price is
 invented; no depth rank is inferred from jersey order; no replacement is inferred from a depth chart.
+
+### Completion record — session `arena/d941f3c1-own4` (D1–D12), 2026-11-15T23:5xZ
+
+**Delivered.** All twelve claimed tasks are on the branch and published under
+`nfl-readiness/` (12 pages + 16 data artefacts + 8 engines + 1 pre-registration file + 1 CI workflow).
+Root navigation carries the namespace through `verification/build.py` (generator-owned, so the next
+regeneration cannot drop it — the F-13 class), and the shared canonical verifier passes with the new
+group present: `python3 verification/verify_site.py` → *pages checked: 14 · data rows with source links:
+346 · all checks passed*.
+
+**Files as delivered** (the claim table above names the intended paths; these are the actual ones,
+renamed only where a single file holds several of the promised artefacts):
+
+| claimed | shipped | note |
+|---|---|---|
+| D2 `data/raw/injuries_week10_2026-11-15.csv` | `data/availability_snapshot_2026-11-15.csv` | no `data/raw/` layer: the raw *rendering* is not retrievable offline, so the transcribed capture is the raw artefact and `data/capture_manifest.json` says so on its face |
+| D3 `data/capture_audit.json` | `data/derived/capture_audit.json` + `data/derived/capture_validation.json` | machine output of `engine/audit.py` / `engine/capture.py`; never hand-edited |
+| D4 `data/injury_delta.json` | `data/derived/capture_diffs.json` + `data/derived/designation_delta.json` | the ledger **and** the intra-week delta; a separate week-over-week file was not needed once the same-page diff proved more informative |
+| D5 `data/fixtures.json` | `data/fixtures_week10.csv` (13 columns) | rewritten once after the first build caught score text leaking into two columns (2/17 → 28/28 on the report-record join) |
+| D8 `data/gates.json` | `data/governance.json` + `data/prereg.json` + `prereg/PREREG-001-shadow-baseline.md` | |
+| D11 `EXECUTIVE_SUMMARY.md` | `pages/executive-summary.html` + `nfl-readiness/README.md` | one prose surface, generated with the rest, so the summary cannot disagree with the tables |
+
+**Numbers published (all engine-computed; the engines are the only source of a figure on the site):**
+
+* Week 10 official availability capture: **347 rows / 28 club sections / 14 fixtures**; game-status
+  vocabulary Questionable 90, Out 70, Doubtful 11, blank 176 → **171 designated rows = 49.3 %**
+  coverage; practice Full 180 / DNP 94 / Limited 73, zero blanks; 171 rows carry injury text;
+  **5 rows carry a non-injury reason** (JAX 2, LAC 1, HOU 1, LAR 1) and are excluded from injury counts.
+  `Probable` appears **zero** times in the live Week 10 report.
+* Cross-capture reconciliation against all five stored peer captures of the same page (326, 326, 107,
+  347, 276 rows): every peer is a **strict subset or an exact tie**, 0 peer-only players. Designated
+  rows: 25 / 25 / 55 / 162 / 6 here 171 — so a feature built on those captures drops most of the
+  Out/Doubtful/Questionable population.
+* Intra-week delta (2026-11-14 render → 2026-11-15 render, same 347 keys): **11 game-status changes**
+  (LAC 10, IND 1 — the two Monday-night clubs), 6 practice-status, 11 injury-label, **0 rows added or
+  removed**. Published as a delta, never as "the other capture was wrong".
+* Standings integrity: 32 clubs, `sum PF 6664 = sum PA 6664`, net-points identity holds for all 32,
+  0 win-pct recomputation mismatches, ΣGP/2 = **145 credited** (133 through Week 9, 147 when Week 10
+  completes). The brief's **136** matches none of these and exists in no file at the base commit → RF-01
+  publishes all four figures instead of adopting one.
+* Report-record join: the bracketed `W-L` on the report page equals the **live** standings record for
+  **28/28** clubs at read time → it is a live join, so it is stored with the read window
+  (`2026-11-15T23:23:14Z → 23:34:00Z`) and must never be read as a pre-game attribute.
+
+**Verification performed.**
+(a) All 8 chunks of `nfl.com/injuries/`, the Week 10 schedule page, the league standings page, the
+Patriots-at-Lions game centre and the Tuesday 10 Nov roundup were read in this session; each read is
+recorded in `data/official_reads.json` with URL, chunk coverage and use, and 33 dated official
+statements are in `data/evidence.json` with a provenance grade on every row (body-read vs headline+URL).
+(b) The transcription is machine-validated (`engine/capture.py`: field set, contiguous club blocks,
+fixture pairing both directions, blanks preserved, vocabulary closed, duplicate players) → **PASS**, and
+independently re-checked field-by-field against the marketboard render, which is how a column shift of
+mine was caught (5 rows had 9 fields; the "5 WAS changes" in an earlier diff were my bug, not movement —
+the correction and its disclosure are flag RF-14).
+(c) `engine/drift.py` pins rows/fields/vocabulary and fails the build on drift;
+`engine/verify_site.py` enforces row-level sourcing (630 data rows checked), link resolution, a closed
+register vocabulary over 72 rows, index/artefact agreement, and **a no-price rule** — a price-looking
+value in the HTML is a build failure, because no official price source exists.
+(d) CI (`.github/workflows/nfl-readiness.yml`) re-runs the whole chain, including the canonical
+`verification/build.py` + `verify_site.py`, and asserts `git diff --exit-code` on all rebuilt pages.
+
+**Irregularities flagged, not resolved (17; `pages/flagged.html`).** Four are decision-grade: RF-01 the
+brief's counts do not reproduce; RF-02 no official price source (blocks snapshot store, difference
+column, residual, CLV, vig decomposition, ROI, rewards); RF-04 no official depth-order source (per-club
+depth pages 404, so routes (a) and (b) are both unverified and no deficiency model was built);
+RF-16 the capture cadence the brief assumes does not exist — dated reads exist only because separate
+agent sessions happened to open the page on separate days. Two contradictions against the league's own
+pages are published as found: a traded player (Henley) still on his former club's report five days after
+the dated trade text, and a named-IR headline against an empty injury cell on the report.
+
+**Limitations stated on the site, not hidden.** Hashes are transcription fingerprints (no raw bytes
+from the fetch path); 1 of 14 game centres was opened, so 11 venues are blank by rule; the ablation
+spec is frozen but unrun (1 dated week of availability history vs the 4 the spec requires); every
+`verdict` in `data/suggestions.json` is blank because choosing between options is the reviewer's call;
+no model, price, leaderboard or reward is published, by gate (n ≥ 300 graded games vs the largest
+sample in this repo, 77).
+
+**Conflicts / rebase log.** None to date: `git pull --rebase origin main` before push returned no new
+commits on `main` beyond the base, so no shared-file conflict arose; `COORDINATION.md` was treated as
+append-only (my claim block is untouched above) and the shared NAV block was edited additively — every
+pre-existing link in `verification/build.py` is preserved, only a new group was inserted.
+
+**Next owner actions, in order:** answer DEC-P1 (SUG-01) → approve the scheduled collector (SUG-02 A)
+→ approve the game-book parser (SUG-03 A). D1–D12 need nothing further from this session; the PR link
+and merge result are recorded below once opened.

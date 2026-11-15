@@ -311,6 +311,27 @@ NAV = [
         ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
         ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
     ]),
+    # Added 2026-11-15 by session arena/d941f3c1-own4 (nfl-readiness namespace, scope D1-D12):
+    # the decision-readiness layer. One row per requirement of the brief with the gate that blocks
+    # it and the number that clears it, plus the Week 10 official availability capture (347 rows,
+    # 28 club sections) reconciled against every other capture of the same page in this repo, the
+    # intra-week designation delta, the frozen governance/gate set, and a pre-registration ledger
+    # whose registration is a git commit. Added here rather than as a hand edit to index.html for
+    # exactly the reason F-13 exists: hand-edited links do not survive a regeneration.
+    ("NFL Readiness · decision register (2026-11-15)", [
+        ("nfl-readiness/index.html", "NFL Readiness — decision-readiness register (72 rows)", "legacy"),
+        ("nfl-readiness/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
+        ("nfl-readiness/pages/availability.html", "NFL Readiness — Week 10 availability capture", "legacy"),
+        ("nfl-readiness/pages/snapshot-delta.html", "NFL Readiness — snapshot ledger &amp; delta", "legacy"),
+        ("nfl-readiness/pages/fixtures.html", "NFL Readiness — fixtures, venues &amp; standings", "legacy"),
+        ("nfl-readiness/pages/evidence.html", "NFL Readiness — official evidence log", "legacy"),
+        ("nfl-readiness/pages/questions.html", "NFL Readiness — questions &amp; answers (24)", "legacy"),
+        ("nfl-readiness/pages/suggestions.html", "NFL Readiness — suggestions board (decide first)", "legacy"),
+        ("nfl-readiness/pages/governance.html", "NFL Readiness — governance, gates &amp; pre-registration", "legacy"),
+        ("nfl-readiness/pages/repo-review.html", "NFL Readiness — repository review", "legacy"),
+        ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged for review (17)", "legacy"),
+        ("nfl-readiness/pages/sources.html", "NFL Readiness — source register", "legacy"),
+    ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),

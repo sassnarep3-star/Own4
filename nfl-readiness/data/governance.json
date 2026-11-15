@@ -1,0 +1,95 @@
+{
+ "dataset": "nfl_readiness_governance",
+ "title": "Rules this project is run by, written before any result exists",
+ "built_utc": "2026-11-15",
+ "preregistration": {
+  "rule": "a rule's registration is the git commit that freezes it; the hash is published with the rule, and no figure computed after the hash may change the rule",
+  "registered": [
+   {"id":"PREREG-001","file":"prereg/PREREG-001-shadow-baseline.md","scope":"singles-only shadow baseline for a team-strength model","status":"registered, not evaluated by this session"}
+  ]
+ },
+ "publication_contract": {
+  "every_table_row": ["value", "source_url", "read_utc or read_window", "verification_state in {verified-official, derived-here, peer-cited, blank-flagged}"],
+  "blank_rule": "a cell with no official value is printed blank with a flag id; it is never filled by inference, never filled by a third-party value labelled as official, and never filled by a prior week's number",
+  "model_output_row": ["p (probability)", "the input vector that produced it", "model_version", "as_of", "recorded_before_kickoff (bool)"],
+  "market_columns": "fair line / market line / difference are three separate columns; the market and difference columns stay null while DEC-P1 is open"
+ },
+ "leaderboard_rule": {
+  "signal_vs_staking": "signal metrics rank a strategy; staking metrics are displayed beside them and cannot promote it; ROI never appears as a ranking key",
+  "ranked_on": "benchmark-relative proper score (Brier skill) with a game-clustered lower bound and a multiplicity adjustment across trials",
+  "forbidden": ["season-long ROI as a ranking", "win rate as a ranking", "any backtest figure on a leaderboard page", "rewards paid on assumed prices"],
+  "reward_rule": "0 of 1,000 reward units are available until a strategy clears qualification AND verified prices exist for its graded bets"
+ },
+ "divisions": [
+  {"name":"singles","eligibility":"one market per game, forecast recorded pre-kickoff, graded on official result"},
+  {"name":"game parlay","eligibility":"blocked: joint probability not validated (see joint_evidence_gate)"},
+  {"name":"same-game parlay","eligibility":"blocked: joint probability not validated, legs share game-level dependence"},
+  {"name":"prop combo","eligibility":"blocked: no official prop prices, no operator void/push rules in the repo"}
+ ],
+ "joint_evidence_gate": {
+  "rule": "multiplying marginal probabilities is invalid under dependence; a combo may be ranked only when BOTH a directly validated joint probability and the operator's void/push rules are stored for its leg set",
+  "current_state": "0 of 4 combo divisions eligible; 0 joint estimates with n exist in the repo; 0 operator rule sets stored"
+ },
+ "control_baselines": {
+  "random_picks": "computable today: a uniform pick over the two sides of each market, graded on official results",
+  "favorites_only": "not computable today: 'favorite' is defined by a price, and no official price source exists",
+  "market_consensus": "not computable today: one third-party archive is a capture, not a consensus",
+  "rule": "every leaderboard run must show the random baseline beside it, and must state which baselines are unavailable and why"
+ },
+ "removal_of_luck_panel": {
+  "components_live": [
+   {"name":"opponent-strength adjustment","input":"official standings PF/PA over 145 credited games; identity check sum(PF)=sum(PA)=6664"},
+   {"name":"league base rates","input":"official W-L-T for 32 clubs; ties handled explicitly (NYG and WAS 1 tie each)"}
+  ],
+  "components_blocked": [
+   {"name":"closing line value","blocked_by":"DEC-P1 price policy"},
+   {"name":"realised ROI vs stake","blocked_by":"DEC-P1 price policy, and by the ban on ROI as a ranking"}
+  ],
+  "presentation": "the panel states '2 of 4 live' on its face; a blocked component is not replaced by a proxy without a written definition"
+ },
+ "demotion_gate": {
+  "rule": "any LIVE strategy returns to PAPER automatically on any of: (1) the 20-game rolling Brier-skill lower bound falls at or below 0; (2) a data-integrity failure in its inputs for 2 consecutive weeks; (3) its pre-registered refute condition fires; (4) its source page changes schema and the parser is not re-verified within 7 days",
+  "current_evaluation": "0 strategies are LIVE, so the gate has nothing to demote; it is published so that the first promotion cannot be its own exception",
+  "on_demotion": "the strategy keeps its history, loses its board rank, and its reward accrual stops at the moment of demotion, not at the moment of review"
+ },
+ "price_data_policy": {
+  "id":"DEC-P1","status":"OPEN - owner decision required","decision_needed":"what counts as a market price for the purpose of a residual, a CLV measure and a reward","options":["SUG-01 A","SUG-01 B","SUG-01 C"],
+  "interim_rule": "no backtest that quotes a market number may be published on this namespace's pages until the decision is recorded; a model-only residual (fair line vs official final margin) is allowed and is labelled as not a price residual"
+ },
+ "ablation_spec": {
+  "status":"frozen for a future run; not executed, because the input does not exist yet",
+  "arms":["A: team-strength model, availability features removed","B: identical model, availability features included"],
+  "data_join":"dated availability capture per club per week joined to official results; only weeks with >=2 dated captures count",
+  "eval":"chronological holdout by week; no shuffling across weeks; graded with a proper score",
+  "uncertainty":"game-cluster bootstrap over weeks, reported as an interval, never as a point",
+  "forbidden":"a fixed point penalty per missing starter, and any penalty weight chosen after seeing results",
+  "min_weeks":4,
+  "current_weeks_available":1
+ },
+ "depth_rule": {
+  "rule":"depth rank is never inferred from jersey number, seniority, salary, or an image read by eye; a rank may only be stored when a source publishes it as a dated, structured value",
+  "slot_rule":"a depth slot is a set of players, not a starter; multiple players sharing a rank, sharing one slot, or leaving a slot empty are all published as such",
+  "open_source_question":"Q-05 (no authorized structured rank source exists today)",
+  "note_on_this_session":"no player in this namespace is described as a starter, a backup, or a rank - the capture publishes designations only, because that is all the official report publishes"
+ },
+ "correlation_policy": {
+  "inputs":"officially sourced numbers only (scores, standings, report counts); third-party captures are excluded from every r published here",
+  "reporting":"n, r, and the derivation script path on the same row; an r without n is not published",
+  "lookahead":"a correlation between two variables measured from the same single week is labelled 'descriptive, n=1 week' and may not be used as a model input"
+ },
+ "capture_cadence": {
+  "target":"daily Wed -> kickoff per game week, one dated entry per read, with a hash of the stored transcription",
+  "actual":"1 dated capture by this session (2026-11-15); 5 peer captures exist at the base commit",
+  "limitation":"no scheduler runs; the cadence is manual until SUG-02 A is chosen",
+  "clock_convention":"reads are recorded with a window and an order index; the harness gives no per-call clock, so minute-level precision is not claimed"
+ },
+ "data_layer": {
+  "public":"derived analysis: counts, coverage, indices, gates, registers, and links to the official page",
+  "private_pending":"row-level captures at volume; today the one 347-row capture is published on the public page because the brief asks for all entries in table form - Q-16 keeps the terms question open and SUG-09 records what changes if the answer is no"
+ },
+ "splits": {
+  "ideal":"train / validation / final-holdout seasons",
+  "available":"one season of official results (2026) + 2025 standings as a pre-season prior",
+  "rule":"until a second full season is stored, every published comparison is chronological-by-week within one season, and no 'holdout season' claim may be made"
+ }
+}
