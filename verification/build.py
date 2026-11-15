@@ -279,6 +279,20 @@ NAV = [
         ("nfl-core/pages/flagged.html", "⚑ NFL Core — flagged for review", "legacy"),
         ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
         ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
+        # Added 2026-11-15 by session arena/507da9a4-own4: the nfl-consolidated
+        # namespace — the cross-namespace decision-readiness dashboard. The landing
+        # page carries the decision-readiness table (one row per requirement: the gate
+        # that blocks it + the number that would clear it), plus a consolidated
+        # questions/answers register and a suggestions queue. Generator-owned so a
+        # regeneration cannot drop these links (F-13 class).
+        ("nfl-consolidated/index.html", "NFL Consolidated — decision-readiness dashboard", "legacy"),
+        ("nfl-consolidated/pages/executive-summary.html", "Consolidated — executive summary", "legacy"),
+        ("nfl-consolidated/pages/requirements.html", "Consolidated — requirements register", "legacy"),
+        ("nfl-consolidated/pages/questions.html", "Consolidated — questions &amp; answers", "legacy"),
+        ("nfl-consolidated/pages/suggestions.html", "Consolidated — suggestions (review first)", "legacy"),
+        ("nfl-consolidated/pages/verification.html", "Consolidated — verification log", "legacy"),
+        ("nfl-consolidated/pages/sources.html", "Consolidated — source register", "legacy"),
+        ("nfl-consolidated/pages/flagged.html", "⚑ Consolidated — flagged for review", "legacy"),
     ]),
     # Added 2026-11-14: own-line origination engine with a verified results feed.
     # Every table row on every page carries an https link to the official source.
