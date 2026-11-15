@@ -27,6 +27,9 @@ jobs:
       - name: Correlations (official inputs only)
         working-directory: nfl-book/engine
         run: python3 correlations.py
+      - name: Gap-closure datasets (requirements, removal-of-luck, availability, PIT ledger, …)
+        working-directory: nfl-book/engine
+        run: python3 expand.py
       - name: Rebuild site
         working-directory: nfl-book/engine
         run: python3 build_site.py

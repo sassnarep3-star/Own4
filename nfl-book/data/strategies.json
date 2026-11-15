@@ -23,7 +23,11 @@
       "signal_metric": "pick accuracy vs 0.500 baseline and vs always-home baseline",
       "staking_metric": "ROI at ASSUMED -110, flat 1u",
       "threshold": "",
-      "baseline": "0.500 accuracy (coin flip) and home-win base rate"
+      "baseline": "0.500 accuracy (coin flip) and home-win base rate",
+      "what_would_change_mind": {
+        "would_confirm": "Accuracy holds above the 0.500 coin-flip floor with a non-overlapping 95% CI on a larger prospective sample (Weeks 11+) and the 500-draw placebo stays below the observed result.",
+        "would_refute": "Accuracy reverts to ~0.500 or below the point-in-time favorites baseline as the sample grows, or the placebo null reaches/exceeds the observed result (G4 fails) — demotion gate D1 fires."
+      }
     },
     {
       "id": "S2",
@@ -35,7 +39,11 @@
       "signal_metric": "over-hit rate vs 0.500 (calibration) + total MAE vs baseline",
       "staking_metric": "ROI at ASSUMED -110, flat 1u",
       "threshold": "",
-      "baseline": "0.500 over-hit rate; league-mean total MAE baseline"
+      "baseline": "0.500 over-hit rate; league-mean total MAE baseline",
+      "what_would_change_mind": {
+        "would_confirm": "Over-hit rate stays above 0.500 with a non-overlapping CI on a prospective sample and total MAE beats the league-mean baseline.",
+        "would_refute": "Over-hit rate reverts to ~0.500, MAE worsens vs the constant-mean baseline (FB-13 already flags underperformance), or the placebo null catches the result — D1 fires."
+      }
     },
     {
       "id": "S3",
@@ -47,7 +55,11 @@
       "signal_metric": "upset-hit rate vs the base rate of the model-underdog winning",
       "staking_metric": "ROI at ASSUMED -110, flat 1u",
       "threshold": "",
-      "baseline": "model-underdog base win rate computed on the same sample (reported, not assumed)"
+      "baseline": "model-underdog base win rate computed on the same sample (reported, not assumed)",
+      "what_would_change_mind": {
+        "would_confirm": "Upset-hit rate beats the model-underdog base rate with a non-overlapping 95% CI on a larger prospective sample.",
+        "would_refute": "Upset-hit rate falls to the underdog base rate or below as the sample grows, or the placebo null exceeds the result — D1 fires."
+      }
     },
     {
       "id": "S4",
@@ -59,7 +71,11 @@
       "signal_metric": "both-legs-win rate vs product of individual rates",
       "staking_metric": "ROI at ASSUMED parlay price, 1u",
       "threshold": "",
-      "baseline": "independence product of the two legs' empirical win rates"
+      "baseline": "independence product of the two legs' empirical win rates",
+      "what_would_change_mind": {
+        "would_confirm": "Both-legs-win rate exceeds the independence product of the individual leg rates on a larger sample (joint evidence validated) and n clears G1.",
+        "would_refute": "Both-legs rate reverts to the independence product (leg dependence), n stays below G1, or the operator void/push rules remain unverified — the combo stays behind the joint-evidence gate."
+      }
     },
     {
       "id": "S5",
@@ -72,7 +88,11 @@
       "staking_metric": "",
       "threshold": "",
       "baseline": "",
-      "blocked_reason": "No official prop prices (flag FB-05). Cannot be validated, cannot be staked, cannot score."
+      "blocked_reason": "No official prop prices (flag FB-05). Cannot be validated, cannot be staked, cannot score.",
+      "what_would_change_mind": {
+        "would_confirm": "An official player-prop price/line source appears and a directly validated joint probability plus the operator's void/push rules become available.",
+        "would_refute": "No official prop source emerges; the combo remains permanently blocked (FB-05) and is never ranked or staked."
+      }
     }
   ],
   "reward_policy": {

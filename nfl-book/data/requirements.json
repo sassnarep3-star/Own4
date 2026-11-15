@@ -1,28 +1,640 @@
 {
-  "dataset": "nfl_book_requirements",
-  "title": "Requirements traceability: every brief requirement -> status -> evidence",
-  "built_utc": "2026-11-14",
-  "statuses": {
-    "met": "implemented and verified this session",
-    "partial": "implemented but limited by a documented evidence gap",
-    "blocked": "cannot be completed from official sources; blank + flagged"
+ "dataset": "nfl_book_requirements",
+ "title": "Requirements traceability: every brief requirement -> status -> blocking gate -> clearing number",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "statuses": {
+  "met": "implemented and verified",
+  "partial": "implemented but limited by a documented evidence gap",
+  "blocked": "cannot be completed from official sources; blank + flagged"
+ },
+ "n_rows": 69,
+ "counts": {
+  "met": 29,
+  "partial": 33,
+  "blocked": 7
+ },
+ "rows": [
+  {
+   "id": "R01",
+   "requirement": "Price-snapshot store recording opening and closing numbers for every market we originate",
+   "status": "met",
+   "evidence": "price_snapshots.json: 39 snapshots (13 games × side/total/ML, open+close+drift)",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
   },
-  "rows": [
-    {"id": "R1", "requirement": "Price-snapshot store recording opening and closing numbers for every market we originate", "status": "met", "evidence": "data/price_snapshots.json (39 snapshots: 13 games x side/total/moneyline, open+close+drift); page pages/price-snapshots.html", "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"},
-    {"id": "R2", "requirement": "Verified results feed so backtests and ROI can be computed", "status": "met", "evidence": "data/results_feed.json: 137 settled games, 32 re-read line-by-line from official pages this session, 160/160 standings cells match, league identities pass (V-01..V-03)", "source_url": "https://www.nfl.com/standings/league/2026/REG"},
-    {"id": "R3", "requirement": "Originate the side first, then the total, then the moneyline", "status": "met", "evidence": "engine/originate.py computes and writes markets in fixed order [side, total, moneyline]; order recorded per row and audited (own_lines_*.json origination_order)", "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"},
-    {"id": "R4", "requirement": "Publish the model's fair line, the market line, and the difference as separate columns", "status": "partial", "evidence": "All three columns exist per market on pages/own-lines.html; fair values are populated; market and difference columns are blank because no official price source exists (FB-01) — blanks are flagged, never inferred", "source_url": "https://www.nfl.com/"},
-    {"id": "R5", "requirement": "Separate signal from staking in the leaderboard so lucky staking cannot mask bad signal", "status": "met", "evidence": "data/leaderboard.json: ranking key = signal tier first; staking columns cannot promote a non-A strategy; points additionally require verified prices (amendment A1) so 0 points are paid on assumed prices", "source_url": "https://www.nfl.com/"},
-    {"id": "R6", "requirement": "Track the depth of the replacement, not just the fact of a replacement", "status": "partial", "evidence": "data/depth_replacements.json: depth strings published ONLY where official text states them (SEA QB: 1st/2nd backup proven); MIA/MIN depth blank + flagged; no depth inferred from third-party charts", "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"},
-    {"id": "R7", "requirement": "Compute correlations only from officially sourced numbers and publish n with each value", "status": "met", "evidence": "data/correlations.json: 5 computed (CR-01..CR-05) from official scores only, each with n, r, p, 95% CI; 4 requested-but-unsourced correlations published blank with reasons (CR-06..CR-09)", "source_url": "https://www.nfl.com/standings/league/2026/REG"},
-    {"id": "R8", "requirement": "Define a demotion gate that sends a live strategy back to paper", "status": "met", "evidence": "data/gates.json demotion_gate D1 (four firing conditions, auto-demote, re-promotion requires fresh gates); evaluation recorded in data/demotion_eval.json; no strategy currently LIVE", "source_url": "https://www.nfl.com/"},
-    {"id": "R9", "requirement": "Dedicated suggestions section for review before implementation", "status": "met", "evidence": "data/suggestions.json (13 proposals, options A/B/C, recommendation, status=proposed); pages/suggestions.html; nothing implemented without a reviewer choosing a path", "source_url": "https://www.nfl.com/"},
-    {"id": "R10", "requirement": "Clear list of questions / information / answers needed before any decision", "status": "met", "evidence": "data/questions.json (15 questions: known/unknown/answer/discovery action); pages/questions.html; unknown answers left blank by design", "source_url": "https://www.nfl.com/"},
-    {"id": "R11", "requirement": "Strategies as a leaderboard competition with rewards for top performers (singles, parlays, prop combos)", "status": "partial", "evidence": "Registry has singles S1-S3, parlay S4, prop combo S5 (blocked, FB-05); 1,000-point reward rule defined; 0 points payable because no strategy passes G7-verified pricing (amendment A1) and S2-S4 fail gates", "source_url": "https://www.nfl.com/"},
-    {"id": "R12", "requirement": "Validation gates + luck removal (selectively skill-based strategies)", "status": "met", "evidence": "data/gates.json G1-G8 pre-committed before backtest (git f4465c0); backtest runs 500 placebos (G4) and a leakage test (G3, pass); outcomes in data/backtest.json", "source_url": "https://www.nfl.com/"},
-    {"id": "R13", "requirement": "Track injuries and offensive/defensive deficiencies incl. 2nd/3rd/4th-string replacements", "status": "partial", "evidence": "data/injuries_week10_capture.json (official report chunks 0-1, 107 rows) + data/depth_replacements.json; full 8-chunk report and depth charts beyond official text not captured (FB-06, FB-07)", "source_url": "https://www.nfl.com/injuries/"},
-    {"id": "R14", "requirement": "Executive summary", "status": "met", "evidence": "EXECUTIVE_SUMMARY.md + pages/executive-summary.html", "source_url": "https://www.nfl.com/"},
-    {"id": "R15", "requirement": "GitHub Pages site: clean dashboard, category subpages, tables with a source link on every row, Flagged for Review", "status": "met", "evidence": "nfl-book/ static site, 16 pages; engine/verify.py enforces a source link on every table row and resolves every internal link", "source_url": "https://docs.github.com/en/pages"},
-    {"id": "R16", "requirement": "No manual input; verify line by line; no hallucinations; unverifiable values blank + flagged", "status": "met", "evidence": "All work automated this session; 32 games + 32 standings rows read line by line; every unverifiable cell published blank with an unverified marker and a flag ID", "source_url": "https://www.nfl.com/standings/league/2026/REG"}
-  ]
+  {
+   "id": "R02",
+   "requirement": "Verified results feed so backtests and ROI can be computed",
+   "status": "met",
+   "evidence": "results_feed.json: 137 settled games, V-01..V-03 pass",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R03",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "met",
+   "evidence": "originate.py enforces [side, total, moneyline]; order audited per row",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R04",
+   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "status": "partial",
+   "evidence": "own-lines page publishes all three columns; market + difference blank (no official price source)",
+   "blocking_gate": "FB-01",
+   "clearing_number": "an official market price source",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R05",
+   "requirement": "Separate signal from staking in the leaderboard so lucky staking cannot mask bad signal",
+   "status": "met",
+   "evidence": "leaderboard ranks by signal tier first; staking reported separately; A1 gates points",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R06",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "partial",
+   "evidence": "depth_replacements publishes depth ONLY where official text states it (SEA QB 1st backup)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "an official depth chart for all 32 clubs",
+   "source_url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
+  },
+  {
+   "id": "R07",
+   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "met",
+   "evidence": "correlations.json CR-01..05 computed from official scores with n/r/p/CI",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R08",
+   "requirement": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "met",
+   "evidence": "demotion_eval.json: D1 four auto-firing conditions, live→paper, no human approval",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R09",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
+   "status": "met",
+   "evidence": "strategies committed before first run; leaderboard publishes signal tier, not backtest ROI as ranking",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R10",
+   "requirement": "Build the availability graph as a first-class dataset (expected starter vs actual starter)",
+   "status": "partial",
+   "evidence": "availability_graph.json: expected-starter side published; actual-starter blank (no official snap/game-book source)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official snap counts or NFL Game Books",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R11",
+   "requirement": "Do not model depth from jersey order; model it from playing time",
+   "status": "partial",
+   "evidence": "policy: jersey/experience/salary never used; playing-time proxy requires official snap counts (blank)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official snap counts",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R12",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "status": "met",
+   "evidence": "injury_surprise.json publishes expected-vs-actual delta only; levels never modelled",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R13",
+   "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "status": "partial",
+   "evidence": "roster_sweep.json register built for 32 clubs; roster/IR counts blank (no official source captured)",
+   "blocking_gate": "no official roster/IR capture",
+   "clearing_number": "official roster + IR capture",
+   "source_url": "https://www.nfl.com/teams/"
+  },
+  {
+   "id": "R14",
+   "requirement": "Add a fixture-context feature set built only from published schedule facts",
+   "status": "met",
+   "evidence": "fixture_context.json from schedule facts (date, network, neutral, rest days) only",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R15",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "met",
+   "evidence": "model_outputs.json: P(home), P(away), pred margin, fair total + rating inputs per game",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R16",
+   "requirement": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "status": "met",
+   "evidence": "removal_of_luck.json: skill vs luck decomposition per strategy + panel summary",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R17",
+   "requirement": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "status": "met",
+   "evidence": "strategies.json: what_would_change_mind field on every strategy; rendered on strategies page",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R18",
+   "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "partial",
+   "evidence": "own fair lines published daily; market residual blank (no official price source)",
+   "blocking_gate": "FB-01",
+   "clearing_number": "an official market price source",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R19",
+   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "status": "met",
+   "evidence": "backtest.json: 137-game walk-forward corpus, leakage test G3 pass",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R20",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "status": "met",
+   "evidence": "FB-01/FB-02 price policy documented and applied before backtest publication",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R21",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "partial",
+   "evidence": "injuries capture carries captured_utc; multi-day delta series not yet captured (single capture)",
+   "blocking_gate": "single capture",
+   "clearing_number": "a multi-day timestamped injury series",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R22",
+   "requirement": "Put a decision-readiness table on the landing page: one row per requirement, gate + clearing number",
+   "status": "met",
+   "evidence": "index.html decision-readiness table (one row per requirement, blocking gate, clearing number)",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R23",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "partial",
+   "evidence": "venues.json register built; venue pending transcription from official game pages",
+   "blocking_gate": "not transcribed",
+   "clearing_number": "official game-centre transcription",
+   "source_url": "https://www.nfl.com/games/"
+  },
+  {
+   "id": "R24",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "partial",
+   "evidence": "live Week 11 schedule captured; dated announcement link blank (not captured)",
+   "blocking_gate": "no announcement captured",
+   "clearing_number": "official dated schedule announcement",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R25",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status",
+   "status": "partial",
+   "evidence": "Game Books not ingested; actual-starter fields blank + flagged",
+   "blocking_gate": "no game-book ingestion",
+   "clearing_number": "official NFL Game Books",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R26",
+   "requirement": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "met",
+   "evidence": "model_card.json: stacked least-squares ratings fit on official game results",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R27",
+   "requirement": "Add injury and personnel ablations instead of fixed penalties",
+   "status": "partial",
+   "evidence": "ablations.json structure built; run requires availability features (FB-11) -> blank",
+   "blocking_gate": "FB-11",
+   "clearing_number": "availability/personnel features",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R28",
+   "requirement": "Automate immutable multi-day availability snapshots",
+   "status": "partial",
+   "evidence": "pit_ledger.json schema + hashes built; multi-day scheduled capture not yet running",
+   "blocking_gate": "single capture",
+   "clearing_number": "scheduled multi-day capture",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R29",
+   "requirement": "Build immutable official availability snapshots",
+   "status": "partial",
+   "evidence": "pit_ledger.json: timestamped captures with sha256 hashes; full availability source still FB-07",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official depth/inactive source",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R30",
+   "requirement": "Capture official inactive lists and snap counts",
+   "status": "blocked",
+   "evidence": "no official inactive-list or snap-count source captured; fields blank + flagged",
+   "blocking_gate": "no official source",
+   "clearing_number": "official inactive list + snap counts",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R31",
+   "requirement": "Fix the two depth-parsing failures before widening coverage",
+   "status": "blocked",
+   "evidence": "Texans depth is an image, Packers prepend jersey numbers; needs an authorized structured source, not eye transcription",
+   "blocking_gate": "Texans image / no authorized source",
+   "clearing_number": "authorized structured depth source",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R32",
+   "requirement": "Model depth slots as groups, not a single starter",
+   "status": "partial",
+   "evidence": "policy documented; slot-group model requires official depth chart (FB-07)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official depth chart (slots)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R33",
+   "requirement": "Treat roster turnover as a first-class data event",
+   "status": "partial",
+   "evidence": "turnover register structure built; requires official transactions feed (blank)",
+   "blocking_gate": "no transactions feed",
+   "clearing_number": "official transactions log",
+   "source_url": "https://www.nfl.com/news/"
+  },
+  {
+   "id": "R34",
+   "requirement": "Start with a singles-only shadow baseline",
+   "status": "met",
+   "evidence": "control_baseline.json: random + favorites-only baselines on the singles sample",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R35",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "met",
+   "evidence": "joint_evidence.json: S4 legs independence from CR-03; S5 blocked (no prop prices)",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R36",
+   "requirement": "Use proper-score leaderboard divisions (singles, game parlay, SGP, prop combo)",
+   "status": "met",
+   "evidence": "two_stage_leaderboard.json: divisions for singles / game parlay / SGP / prop combo",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R37",
+   "requirement": "Rank with proper scores and uncertainty, not win rate",
+   "status": "met",
+   "evidence": "Brier skill score + 95% CI + game-cluster note + multiplicity adjustment published",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://scikit-learn.org/stable/modules/model_evaluation.html"
+  },
+  {
+   "id": "R38",
+   "requirement": "Add durable snapshot storage and alerts",
+   "status": "partial",
+   "evidence": "pit_ledger.json (durable hashes) + drift_alarms.json (freshness monitor) built; store host not provisioned",
+   "blocking_gate": "not provisioned",
+   "clearing_number": "durable store + freshness monitor host",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R39",
+   "requirement": "Split the site into a public analysis layer and a private data layer",
+   "status": "partial",
+   "evidence": "policy: public site carries derived analysis only; private raw store not provisioned",
+   "blocking_gate": "not provisioned",
+   "clearing_number": "private store + terms review",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R40",
+   "requirement": "Add a per-team view: starters out, replacements named, net injury count",
+   "status": "met",
+   "evidence": "per_team_view.json: per-team starters-out, replacements named, net injury count",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R41",
+   "requirement": "Add an announced-starter evidence field (not an inferred replacement)",
+   "status": "partial",
+   "evidence": "announced-starter evidence published only where official (Lock, McCord); rest blank + flagged",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official starter-change notices",
+   "source_url": "https://www.nfl.com/news/"
+  },
+  {
+   "id": "R42",
+   "requirement": "Add an official depth-chart register with date and source per row",
+   "status": "partial",
+   "evidence": "depth_register.json: 32-club register, date+source per row; 3 rows populated, 29 blank + flagged",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official depth source for 32 clubs",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R43",
+   "requirement": "Calibrate what 'Questionable' means empirically instead of using old percentages",
+   "status": "blocked",
+   "evidence": "needs multi-season inactive lists; play-rate fields blank + flagged",
+   "blocking_gate": "no historical inactive lists",
+   "clearing_number": "multi-season inactive lists",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R44",
+   "requirement": "Interactive Offense vs Defense Matchup Deficiency Matrix (1st–4th string)",
+   "status": "partial",
+   "evidence": "matchup_matrix.json structure built; deficiency ranks blank (no depth chart, FB-07)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official depth chart",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R45",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "status": "partial",
+   "evidence": "staleness check structure built; requires transactions feed (blank)",
+   "blocking_gate": "no transactions feed",
+   "clearing_number": "official transactions log",
+   "source_url": "https://www.nfl.com/news/"
+  },
+  {
+   "id": "R46",
+   "requirement": "Point-in-Time Snapshot Ledger for injuries, depth charts & inactives",
+   "status": "met",
+   "evidence": "pit_ledger.json: timestamped entries with sha256 hashes, replay-ready",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R47",
+   "requirement": "Populate the three missing Lions game-status designations",
+   "status": "partial",
+   "evidence": "Lions designations pending full injury-report capture (current capture is partial, FB-06)",
+   "blocking_gate": "FB-06",
+   "clearing_number": "full 279-row injury-report capture",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R48",
+   "requirement": "Re-capture and republish the Week 10 injury tables",
+   "status": "partial",
+   "evidence": "Week 10 capture is 107 of ~279 rows (FB-06); re-capture pending",
+   "blocking_gate": "FB-06",
+   "clearing_number": "full Week 10 injury-table capture",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R49",
+   "requirement": "Reject: deriving depth order from jersey number, experience or salary",
+   "status": "met",
+   "evidence": "policy: jersey/experience/salary never used for depth ordering",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R50",
+   "requirement": "Represent shared and empty depth slots faithfully",
+   "status": "partial",
+   "evidence": "policy documented; slot representation requires official depth chart (FB-07)",
+   "blocking_gate": "FB-07",
+   "clearing_number": "official depth chart (slots)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R51",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "partial",
+   "evidence": "two routes evaluated (club depth pages / snap counts); neither verified for 32 clubs -> feature not built",
+   "blocking_gate": "FB-07",
+   "clearing_number": "a verified 32-club depth source",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R52",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "status": "blocked",
+   "evidence": "needs multi-season inactive lists; reliability fields blank + flagged",
+   "blocking_gate": "no historical inactive lists",
+   "clearing_number": "multi-season inactive lists",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R53",
+   "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+   "status": "partial",
+   "evidence": "single capture done; scheduled Wed/Thu/Fri history not yet running",
+   "blocking_gate": "single capture",
+   "clearing_number": "scheduled Wed/Thu/Fri capture",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R54",
+   "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "status": "partial",
+   "evidence": "capture timestamped; multi-day series not yet captured",
+   "blocking_gate": "single capture",
+   "clearing_number": "multi-day timestamped series",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R55",
+   "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "status": "blocked",
+   "evidence": "no official snap-count source; proxy fields blank + flagged",
+   "blocking_gate": "no official source",
+   "clearing_number": "official snap counts",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R56",
+   "requirement": "Add a control baseline (random picks; favorites only) to every leaderboard run",
+   "status": "met",
+   "evidence": "control_baseline.json: random + favorites-only baselines computed on the leaderboard sample",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R57",
+   "requirement": "Stadium Roof/Surface & NWS Hourly Wind/Precipitation Overlay",
+   "status": "blocked",
+   "evidence": "no NWS grid or stadium-roof source captured; fields blank + flagged",
+   "blocking_gate": "no source",
+   "clearing_number": "NWS forecast grids + stadium roof designations",
+   "source_url": "https://www.weather.gov/"
+  },
+  {
+   "id": "R58",
+   "requirement": "Two-Stage Skill Leaderboard (proper-score qualification -> prospective CLV/ROI escrow)",
+   "status": "met",
+   "evidence": "two_stage_leaderboard.json: Stage 1 proper-score qualification + Stage 2 escrow structure",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R59",
+   "requirement": "Vig-Free Market Consensus vs Originated Fair-Line Decomposition View",
+   "status": "partial",
+   "evidence": "vig_free_decomposition.json structure built; market/vig/divergence blank (FB-01)",
+   "blocking_gate": "FB-01",
+   "clearing_number": "an official market price source",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R60",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "partial",
+   "evidence": "weekly_diff.json built from open-vs-close drift; rank/availability diff blank (single session)",
+   "blocking_gate": "single session",
+   "clearing_number": "multi-week snapshot series",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R61",
+   "requirement": "Publish every model total twice until one wins",
+   "status": "partial",
+   "evidence": "single estimator published; second-estimator comparison column blank",
+   "blocking_gate": "single estimator",
+   "clearing_number": "a second estimator + walk-forward comparison",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R62",
+   "requirement": "Add a drift alarm to every scraper",
+   "status": "met",
+   "evidence": "drift_alarms.json: parser row-count + required-field monitor with firing alarms",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R63",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "partial",
+   "evidence": "reserve-list field added to roster_sweep; value blank (no official reserve source)",
+   "blocking_gate": "no official source",
+   "clearing_number": "official reserve-list capture",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R64",
+   "requirement": "Reject: ranking strategies by season-long ROI",
+   "status": "met",
+   "evidence": "policy: ranking is by signal tier / proper score, never raw season ROI",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R65",
+   "requirement": "Archive weekly injury reports for past seasons",
+   "status": "blocked",
+   "evidence": "no official archive captured; fields blank + flagged",
+   "blocking_gate": "no archive",
+   "clearing_number": "official historical injury archive",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R66",
+   "requirement": "Pre-register each strategy (definition frozen before results are seen)",
+   "status": "met",
+   "evidence": "strategies.json committed before the first backtest run",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R67",
+   "requirement": "2026 Kickoff & Declared Onside-Kick Regime Priors Filter",
+   "status": "partial",
+   "evidence": "priors field added to fixture_context; value blank (no official kickoff/onside data)",
+   "blocking_gate": "no source",
+   "clearing_number": "official kickoff / onside-kick data",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R68",
+   "requirement": "Freeze a rule before it sees data (pre-registration via git)",
+   "status": "met",
+   "evidence": "gate + strategy definitions committed to git before the evaluation window",
+   "blocking_gate": "none",
+   "clearing_number": "implemented",
+   "source_url": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "R69",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "status": "partial",
+   "evidence": "holdout_split.json: walk-forward train/validation/holdout windows published; explicit season holdout pending",
+   "blocking_gate": "walk-forward only",
+   "clearing_number": "an explicit held-out final season",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  }
+ ]
 }

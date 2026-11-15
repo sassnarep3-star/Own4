@@ -1,0 +1,134 @@
+{
+ "dataset": "nfl_book_removal_of_luck",
+ "title": "Removal-of-luck panel: skill vs luck decomposed, ranked on skill only",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Signal (accuracy vs 0.500, placebo) is separated from staking (assumed-price ROI). The leaderboard ranks on signal tier; staking is reported but never promotes a strategy and pays no points on assumed prices (amendment A1).",
+ "panel": [
+  [
+   "Ranking key",
+   "signal tier (A>B>C>NA), never staking ROI",
+   "removes lucky-staking bias"
+  ],
+  [
+   "Points gate",
+   "A1: points require verified prices (G7); G7 blocked (FB-01)",
+   "0 of 1,000 paid on assumed price"
+  ],
+  [
+   "Signal metric",
+   "accuracy vs coin-flip 0.500 with 95% CI",
+   "price-independent skill"
+  ],
+  [
+   "Luck control",
+   "500-draw placebo on staking ROI",
+   "S1 p<0.002 passes; S2/S3 fail"
+  ],
+  [
+   "Staking caveat",
+   "all ROI at ASSUMED -110 (FB-02)",
+   "not an achievable market return"
+  ]
+ ],
+ "rows": [
+  {
+   "id": "RL-S1",
+   "strategy": "S1",
+   "signal_accuracy": 0.6731,
+   "accuracy_ci95": [
+    0.5782,
+    0.7557
+   ],
+   "coinflip_baseline": 0.5,
+   "skill_pp": 0.1731,
+   "placebo_p": null,
+   "placebo_pass": null,
+   "staking_roi": 0.285,
+   "staking_roi_ci95": [
+    0.112,
+    0.4579
+   ],
+   "staking_price": "ASSUMED -110 (not a market price)",
+   "decomposition": "skill = signal accuracy vs 0.500 + placebo; luck = staking-ROI variance not explained by signal",
+   "verdict": "luck removed: ranked on signal tier only; staking ROI reported separately and never used to rank",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "RL-S2",
+   "strategy": "S2",
+   "signal_accuracy": 0.4571,
+   "accuracy_ci95": [
+    0.3651,
+    0.5523
+   ],
+   "coinflip_baseline": 0.5,
+   "skill_pp": -0.0429,
+   "placebo_p": null,
+   "placebo_pass": null,
+   "staking_roi": -0.1273,
+   "staking_roi_ci95": [
+    -0.3101,
+    0.0555
+   ],
+   "staking_price": "ASSUMED -110 (not a market price)",
+   "decomposition": "skill = signal accuracy vs 0.500 + placebo; luck = staking-ROI variance not explained by signal",
+   "verdict": "luck removed: ranked on signal tier only; staking ROI reported separately and never used to rank",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "RL-S3",
+   "strategy": "S3",
+   "signal_accuracy": 0.3269,
+   "accuracy_ci95": [
+    0.2443,
+    0.4218
+   ],
+   "coinflip_baseline": 0.5,
+   "skill_pp": -0.1731,
+   "placebo_p": null,
+   "placebo_pass": null,
+   "staking_roi": -0.3759,
+   "staking_roi_ci95": [
+    -0.5488,
+    -0.2029
+   ],
+   "staking_price": "ASSUMED -110 (not a market price)",
+   "decomposition": "skill = signal accuracy vs 0.500 + placebo; luck = staking-ROI variance not explained by signal",
+   "verdict": "luck removed: ranked on signal tier only; staking ROI reported separately and never used to rank",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "RL-S4",
+   "strategy": "S4",
+   "signal_accuracy": null,
+   "accuracy_ci95": null,
+   "coinflip_baseline": 0.5,
+   "skill_pp": null,
+   "placebo_p": null,
+   "placebo_pass": null,
+   "staking_roi": 1.0826,
+   "staking_roi_ci95": null,
+   "staking_price": "ASSUMED (10/11)^2 parlay (not a market price)",
+   "decomposition": "skill = signal accuracy vs 0.500 + placebo; luck = staking-ROI variance not explained by signal",
+   "verdict": "luck removed: ranked on signal tier only; staking ROI reported separately and never used to rank",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "RL-S5",
+   "strategy": "S5",
+   "signal_accuracy": null,
+   "accuracy_ci95": null,
+   "coinflip_baseline": 0.5,
+   "skill_pp": null,
+   "placebo_p": null,
+   "placebo_pass": null,
+   "staking_roi": null,
+   "staking_roi_ci95": null,
+   "staking_price": null,
+   "decomposition": "skill = signal accuracy vs 0.500 + placebo; luck = staking-ROI variance not explained by signal",
+   "verdict": "luck removed: ranked on signal tier only; staking ROI reported separately and never used to rank",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

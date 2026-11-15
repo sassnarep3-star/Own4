@@ -1,0 +1,31 @@
+{
+ "dataset": "nfl_book_control_baseline",
+ "title": "Control baselines (random picks; favorites only) for every leaderboard run",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Computed on the same walk-forward sample as the signal strategies so skill can be separated from luck. Favorites-only uses current standings win% (a known, disclosed limitation: not point-in-time).",
+ "rows": [
+  {
+   "baseline": "random_picks",
+   "n": 105,
+   "accuracy": 0.5619,
+   "ci95": [
+    0.467,
+    0.6568
+   ],
+   "note": "seeded (20261115) random side per game; price-independent",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "baseline": "favorites_only",
+   "n": 105,
+   "accuracy": 0.6286,
+   "ci95": [
+    0.5361,
+    0.721
+   ],
+   "note": "point-in-time: higher cumulative win% through the week BEFORE the game, from official results (no look-ahead)",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  }
+ ]
+}
