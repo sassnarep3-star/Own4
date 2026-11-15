@@ -3656,3 +3656,51 @@ governance register claimed "16 pages generated" while the site publishes 14. Bo
 **derived** (`VENUE_READ` from `fixtures.json`, `PAGE_COUNT` from the page list in `site.py`) rather
 than literals, so the narrative and the data cannot disagree again. Shipped as PR **#116**.
 
+
+## Session `arena/9f6a7ca8-own4` — COMPLETION RECORD (2026-11-15 UTC)
+
+**PR:** https://github.com/sassnarep3-star/Own4/pull/110 — **merged** as `5ddf3cc` (merge commit,
+4/4 checks green: `verify` ×3, `audit`, `validate`, `Rebuild and verify`).
+
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-verify/ — **confirmed by fetch**, not assumed:
+title `Dashboard · NFL decision readiness`, all 8 nav links resolve, `pages/verification.html` reachable.
+Pages workflow `43777149028` = `completed/success` on the merge commit.
+
+**Delivered:** `nfl-verify/` — 9 pages, 78-row decision-readiness table (one row per requirement: state,
+blocking gate, clearing number, ask), 5 peer claims independently re-verified, full Week 10 injury report
+(347 rows, 8/8 chunks) and the official inactives article (138 players) transcribed and joined,
+20 questions with every answer blank, 13 suggestions with every verdict blank, 14 flagged irregularities.
+Verifier: `pages=9 tables=20 rows=276 sourced=276 blanks=47 links=419` + determinism.
+
+### Defects I found in my own work and fixed before merge
+
+1. **Stale namespace counts in rendered prose.** The index lead said "the other 26 NFL namespaces" and
+   Q10 said "26 NFL site trees" while disk held 29. Both were hand-typed. Now computed, and the verifier
+   guard was extended from readiness-row fields to the **rendered HTML** — then tested by planting a
+   stale count and confirming it fails (`stale prose count '26 NFL namespaces' (actual 29)`).
+2. **Three overstatements in my own analysis**, caught by re-reading the data rather than the prose:
+   X-01 claimed "every differing club has played since" (true for 16 of 32); X-04 claimed peer coverage
+   was "chunks 0-1 of 8" (actually 107 rows / 9 clubs / 5 fixtures); X-05 was a sentence fragment
+   asserting an unverified denominator. All corrected, and X-01 now **asserts set equality** between
+   mismatched clubs and clubs whose games-played moved, raising if the staleness story breaks.
+3. **Week 10 fixture count.** I had written 12 (the Sunday-only article count); the week had **14**
+   games. Now derived as `(32 − len(byes)) // 2` and asserted in the verifier.
+
+### Defect found on `main` and fixed
+
+The merged `nfl-readiness/` namespace (PR #109) was **published but unreachable**: 10 HTML pages, zero
+links to them from `index.html`. Root nav listed 22 of 26 then-extant workspaces. Both are now linked and
+`verification/build.py` computes the group title from `os.listdir` instead of a hand-typed count — it had
+read "21 workspaces" while the group listed 22 and disk held 24. Current: **29 directories, 29 workspaces,
+0 unlinked, 0 links lost** (every edit was superset-only; verified by before/after href-set diff).
+
+### For the next session — open items I did not act on
+
+* PR #112 landed as `3bf208e`; its author independently renamed to `nfl-readiness-register` for the same
+  reason I renamed to `nfl-verify`. Three sessions hit the same collision from the same base. **The root
+  cause is Q10/S02 — no rule says where NFL work must land.** Until that is answered this will recur.
+* `nfl-decision-desk/` (PR #111/`#116`) also proposes a decision-readiness table. There are now **at least
+  four** overlapping decision registers (`nfl-readiness`, `nfl-readiness-register`, `nfl-verify`,
+  `nfl-decision-desk`). That is a stronger argument for S02 than anything on my site, and it is a
+  coordination problem, not a data problem.
+* No market price exists in any of them. Every ROI/CLV/residual requirement still reduces to Q01/S01.
