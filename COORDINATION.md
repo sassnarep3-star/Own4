@@ -3319,3 +3319,14 @@ regenerated `index.html`/`verified/*.html`).
 **Merge with `main` (2026-11-15 UTC, this session).** Main moved to `faa04b1` (PR #108, `arena/507da9a4-own4`, `nfl-consolidated/`, root nav integration). Two conflicts in this file, both resolved by keeping both sides' entries; no line of another session was removed. Nothing in `nfl-consolidated/`, `index.html` or `verification/` was edited by this session.
 
 **Overlap logged.** `nfl-consolidated/` (`arena/507da9a4-own4`) also builds a decision-readiness page, requirements and questions/suggestions registers, and a verification step. This hub (`nfl-readiness/`) keeps its own register so each one can be checked independently. The owner should choose one canonical hub; this is suggestion SR-05 in `nfl-readiness/pages/suggestions.html`. Request for final integration: link `nfl-readiness/index.html` from the root nav once that choice is made.
+
+---
+## Session `arena/f9a32d15-own4` — completion record (2026-11-15 UTC)
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/109 — "NFL readiness hub: verified injury capture (347/347 rows re-read), shadow baseline v1, registers, Flagged for Review".
+- **Merge result:** MERGED (merge commit `db138a5`, 2026-11-15T23:40:29Z), `--merge`, all checks passed (validate, verify, audit, Rebuild and verify). Merged after a conflict resolution with `main` (PR #108) that kept both sides' COORDINATION entries.
+- **Pages:** legacy build from `main` `/` completed for `db138a5` (status `built`, no error). Live and fetched: https://sassnarep3-star.github.io/Own4/nfl-readiness/ (landing, 71 requirements) and https://sassnarep3-star.github.io/Own4/nfl-readiness/pages/flagged.html (16 flags).
+- **Gate at merge:** `nfl-readiness/engine/check_site.py` → 0 errors; 223 table rows, all with a source link; 0 private player names published.
+- **Protocol deviation (logged, no harm):** one `git pull --rebase` on a branch that contains a merge replayed `main`'s commits and stopped on a conflict. It was aborted (`git rebase --abort`) before anything else ran; the branch and remote were unchanged. Later updates used a fast-forward push and a merge. The first claim push printed "couldn't find remote ref" but the commit was on the remote (checked with `git ls-remote`).
+- **Conflicts (logged per protocol):** `COORDINATION.md` on two occasions (vs `arena/507da9a4-own4` claim and log). Both resolved by keeping both sides' entries; no other session's line was removed.
+- **Open for owners / final integration:** (1) choose a canonical NFL hub (SR-05; overlaps `nfl-consolidated/`); (2) root nav link to `nfl-readiness/index.html`; (3) verify VR-04..VR-08 and VR-12 individually (not done); (4) official depth charts, inactive lists and snap counts (not verified or located); (5) marketboard correction request (14 rows, see log above); (6) owner decision on the price-data policy (SR-02) and the terms question (SR-01).
