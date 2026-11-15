@@ -58,7 +58,10 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          # 3.11, not 3.12: this job rebuilds the canonical shared site too, and that output is
+          # committed from a 3.11 interpreter (see nfl-book's same pin). Float formatting is the only
+          # thing that differs, but the determinism gate compares bytes, so the interpreter is pinned.
+          python-version: '3.11'
 
       - name: Validate the transcribed availability capture
         working-directory: nfl-availability-desk
