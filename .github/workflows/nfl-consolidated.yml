@@ -1,0 +1,25 @@
+name: nfl-consolidated verify
+on:
+  push:
+    paths: ['nfl-consolidated/**', '.github/workflows/nfl-consolidated.yml']
+  pull_request:
+    paths: ['nfl-consolidated/**', '.github/workflows/nfl-consolidated.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild dashboard (data + pages)
+        working-directory: nfl-consolidated/engine
+        run: python3 build_site.py
+      - name: Verify every row source-linked, blanks marked, links resolve
+        working-directory: nfl-consolidated/engine
+        run: python3 verify.py
+      - name: Determinism gate (rebuild must not change committed pages)
+        run: git diff --exit-code -- nfl-consolidated/pages nfl-consolidated/index.html nfl-consolidated/data

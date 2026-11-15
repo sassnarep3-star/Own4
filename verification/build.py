@@ -144,7 +144,7 @@ NAV = [
     # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
     # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
     # namespaces below — all retained; group retitled to the combined count.
-    ("NFL research · 22 workspaces (2026-11-15)", [
+    ("NFL research · 23 workspaces (2026-11-15)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -293,6 +293,20 @@ NAV = [
         ("nfl-readiness-register/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
         ("nfl-readiness-register/pages/sources.html", "NFL Readiness — sources", "legacy"),
         ("nfl-readiness-register/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
+        # Added 2026-11-15 by session arena/507da9a4-own4: the nfl-consolidated
+        # namespace — the cross-namespace decision-readiness dashboard. The landing
+        # page carries the decision-readiness table (one row per requirement: the gate
+        # that blocks it + the number that would clear it), plus a consolidated
+        # questions/answers register and a suggestions queue. Generator-owned so a
+        # regeneration cannot drop these links (F-13 class).
+        ("nfl-consolidated/index.html", "NFL Consolidated — decision-readiness dashboard", "legacy"),
+        ("nfl-consolidated/pages/executive-summary.html", "Consolidated — executive summary", "legacy"),
+        ("nfl-consolidated/pages/requirements.html", "Consolidated — requirements register", "legacy"),
+        ("nfl-consolidated/pages/questions.html", "Consolidated — questions &amp; answers", "legacy"),
+        ("nfl-consolidated/pages/suggestions.html", "Consolidated — suggestions (review first)", "legacy"),
+        ("nfl-consolidated/pages/verification.html", "Consolidated — verification log", "legacy"),
+        ("nfl-consolidated/pages/sources.html", "Consolidated — source register", "legacy"),
+        ("nfl-consolidated/pages/flagged.html", "⚑ Consolidated — flagged for review", "legacy"),
     ]),
     # Added 2026-11-14: own-line origination engine with a verified results feed.
     # Every table row on every page carries an https link to the official source.
