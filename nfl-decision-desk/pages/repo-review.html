@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repo review · NFL Decision Desk</title>
+<style>
+:root{--ink:#10151c;--ink2:#3b4654;--ink3:#67717f;--bg:#f6f7f9;--panel:#fff;--line:#e2e6eb;
+--brand:#0b5cd5;--ok:#0f7b4f;--okbg:#e7f6ee;--warn:#a3560a;--warnbg:#fdf1e2;
+--bad:#a3182a;--badbg:#fdecee;--info:#0b5cd5;--infobg:#eaf1fd;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.88em;background:#eef1f5;padding:.1em .35em;border-radius:4px}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+.side{width:248px;flex:0 0 248px;background:#0f1621;color:#cfd7e3;padding:20px 14px 40px;
+position:sticky;top:0;max-height:100vh;overflow-y:auto}
+.side .brand{color:#fff;font-weight:700;font-size:16px;display:block}
+.side .brand span{color:#8fa2bb;font-weight:500;font-size:11.5px;display:block;margin-top:3px}
+.side .grp{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#7c8ba1;margin:18px 8px 6px}
+.side a.nav{display:block;padding:6px 9px;border-radius:7px;color:#cfd7e3;font-size:13px;line-height:1.35}
+.side a.nav:hover{background:#1a2331;color:#fff;text-decoration:none}
+.side a.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.side .foot{margin-top:24px;font-size:11px;color:#7c8ba1;border-top:1px solid #1e2836;padding-top:12px}
+.main{flex:1 1 auto;min-width:0;padding:26px 30px 60px;max-width:1400px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:4px}
+h1{font-size:26px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.2px}
+h2{font-size:18px;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15.5px;color:var(--ink);max-width:80ch}
+.muted{color:var(--ink3);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0 18px;background:var(--panel)}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);
+background:#f2f4f7;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#fafbfc}
+.num{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px}
+.scroll table{margin:0;border-radius:0}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+padding:1px 6px;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-warn{background:var(--warnbg);color:var(--warn)}
+.b-bad{background:var(--badbg);color:var(--bad)}.b-info{background:var(--infobg);color:var(--info)}
+.b-n{background:#eef1f5;color:var(--ink3)}
+.blank{color:#9aa4b1;font-style:italic;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin:14px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 13px}
+.card .k{font-size:22px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
+.card .l{font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.35}
+.card.good .k{color:var(--ok)}.card.warn .k{color:var(--warn)}.card.bad .k{color:var(--bad)}
+.note{border-left:3px solid var(--brand);background:var(--infobg);padding:10px 13px;
+border-radius:0 7px 7px 0;margin:14px 0;font-size:13px;color:#1c3a63}
+.note.warn{border-color:var(--warn);background:var(--warnbg);color:#5d3308}
+.note.bad{border-color:var(--bad);background:var(--badbg);color:#6d101d}
+.note.ok{border-color:var(--ok);background:var(--okbg);color:#0a4d33}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);
+font-size:12px;color:var(--ink3);max-width:95ch}
+.src{font-size:11.5px;white-space:nowrap}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink)}
+.kv{font-size:12.5px}.kv b{color:var(--ink)}
+@media(max-width:860px){.wrap{flex-direction:column}.side{width:100%;flex:none;position:static;
+max-height:none}.main{padding:18px 14px 50px}}
+</style></head><body><div class="wrap">
+<nav class="side">
+<span class="brand">NFL Decision Desk<span>own lines · gates · honest uncertainty</span></span>
+<div class="grp">Start here</div>
+<a class="nav" href="../index.html">Dashboard &amp; readiness</a>
+<a class="nav" href="../pages/executive-summary.html">Executive summary</a>
+<div class="grp">Data</div>
+<a class="nav" href="../pages/fixtures.html">Results &amp; fixture context</a>
+<a class="nav" href="../pages/availability.html">Availability (injuries)</a>
+<a class="nav" href="../pages/prices.html">Prices &amp; own lines</a>
+<div class="grp">Model &amp; scoring</div>
+<a class="nav" href="../pages/model.html">Model &amp; own probabilities</a>
+<a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; luck</a>
+<a class="nav" href="../pages/correlations.html">Correlations</a>
+<a class="nav" href="../pages/governance.html">Pre-registration &amp; gates</a>
+<div class="grp">Decide</div>
+<a class="nav" href="../pages/questions.html">Questions register</a>
+<a class="nav" href="../pages/suggestions.html">Suggestions</a>
+<a class="nav" class="nav active" href="../pages/repo-review.html">Repo review</a>
+<a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a>
+<div class="grp">Sources</div>
+<a class="nav" href="../pages/sources.html">Every source read</a>
+<div class="foot">Research notebook. No wagering is offered or implied.
+Session <code>arena/e0ed20d1-own4</code>.</div>
+</nav>
+<main>
+<div class="crumb">Decide</div><h1>Repo review</h1><p class="lede">What this repository already contained, what was contradictory, and what this workspace did about it. Irregularities are published, not quietly reconciled.</p><h2>What was already here</h2><div class="scroll"><table><thead><tr><th>Finding</th><th>Detail</th><th>Source</th></tr></thead><tbody><tr><td>21+ NFL namespaces</td><td>nfl, nfl-arena, nfl-audit, nfl-command, nfl-core, nfl-decision, nfl-decisions, nfl-edge, nfl-hub, nfl-integration, nfl-intel, nfl-lab, nfl-ledger, nfl-lines, nfl-market, nfl-marketboard, nfl-markets, nfl-origination, nfl-own, nfl-price-snapshot, nfl-quant — plus an open PR for nfl-command-center</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></td></tr><tr><td>Root site is generator-owned</td><td>index.html and verified/*.html are regenerated by verification/build.py, whose NAV list is the single source of navigation. Hand-edited links are dropped on regeneration, so this workspace registers itself in the generator.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py" rel="noopener">build.py</a></td></tr><tr><td>Peer results feeds disagree</td><td>nfl-core's results CSV says 137 FINAL (one week-10 game); the frozen archive says 136 (no week-10 game); nfl-marketboard says 150. All three are explainable as different capture times, and none of the three prints its capture time on the page.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official week 10</a></td></tr><tr><td>One stale open PR</td><td>#93 (nfl-command-center) has been open since 2026-11-13 and touches shared files whose mergeable state now reads UNKNOWN. It is left for its owner rather than force-merged.</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/pull/93" rel="noopener">PR #93</a></td></tr></tbody></table></div><h2>Irregularities found, and how each was handled</h2><div class="scroll"><table><thead><tr><th>#</th><th>Irregularity</th><th>Handling</th><th>Severity</th><th>Source</th></tr></thead><tbody><tr><td>I01</td><td>Scores in the corpus come from a third-party archive, not from official game pages.</td><td>Every corpus row is labelled unverified-against-official; the standings cross-check passes for 32/32 clubs after the week-10 addition.</td><td><span class="badge b-warn">MEDIUM</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>I02</td><td>Peer files disagree about how many 2026 games are settled: 136 in nfl-core, 137 in nfl-core&#x27;s own results feed, 150 in nfl-marketboard.</td><td>This session&#x27;s own count is 136 settled + 136 scheduled, and the official page shows 9 week-10 finals. All three peer figures are explainable as different capture times, but none of them says so on its page.</td><td><span class="badge b-warn">MEDIUM</span></td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td></tr><tr><td>I03</td><td>The brief&#x27;s &#x27;6 of 254 rows designated&#x27; does not reproduce (171 of 347 at this capture).</td><td>Published as observed; no attempt is made to force the old number.</td><td><span class="badge b-n">LOW</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>I04</td><td>Two 2026 games are international with the designated home club away from home; the model&#x27;s constant HFA is unsupported for them.</td><td>FX-01 published as a defect; the fix is pre-registered rather than applied silently.</td><td><span class="badge b-warn">MEDIUM</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">source</a></td></tr><tr><td>I05</td><td>The market spread convention had to be established empirically; a naive sign flip produces a materially worse fit.</td><td>Sign check published as its own artefact with r and both MAEs.</td><td><span class="badge b-n">LOW</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>I06</td><td>No official price exists for any NFL market, so every price on the site is third-party.</td><td>Stated on the prices page, on every row, and in DEC-1.</td><td><span class="badge b-warn">MEDIUM</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv" rel="noopener">source</a></td></tr><tr><td>I07</td><td>The repo contains 21+ NFL workspaces that publish overlapping and sometimes contradictory numbers.</td><td>This workspace publishes its own numbers and links the others rather than reconciling them silently.</td><td><span class="badge b-warn">MEDIUM</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>I08</td><td>Venue was read for only 3 of 272 fixtures.</td><td>269 rows carry a blank venue with an explicit status.</td><td><span class="badge b-n">LOW</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">source</a></td></tr><tr><td>I09</td><td>The base-rate control is computed on the scored sample, which is mildly optimistic.</td><td>Flagged in the leaderboard metadata and in Q17.</td><td><span class="badge b-n">LOW</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>I10</td><td>CR-04&#x27;s apparent rest effect collapses when treated as a group variable (14 of 120 games drive it).</td><td>Automatic robustness guard added; the correlation is marked NOT ROBUST with group means published.</td><td><span class="badge b-n">LOW</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr></tbody></table></div><h2>Build and verification</h2><p class="kv">The workspace is generated by six builders in order, then checked by a verifier that fails on: a table row without an https source, a dangling local link, a missing page, or a rebuild that changes a committed page. Run from <code>nfl-decision-desk/</code>:</p><pre style="font-family:var(--mono);font-size:12px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px;overflow-x:auto">python3 engine/build_corpus.py
+python3 engine/model.py
+python3 engine/leaderboard.py
+python3 engine/prices.py
+python3 engine/correlations.py
+python3 engine/availability.py
+python3 engine/fixtures.py
+python3 engine/governance.py
+python3 engine/site.py
+python3 engine/verify.py</pre><h2>Scope discipline</h2><p>No peer namespace was edited. <code>COORDINATION.md</code> is append-only, and the only shared file touched is the root navigation, additively, through the generator's NAV list. Peer files were read for verification and never rewritten.</p><footer><b>Research notebook, not advice.</b> No wagering is offered. Staking figures use an assumed −110 price and are labelled hypothetical everywhere. Numbers come from sources listed on each row; values that could not be sourced are left blank and are listed on the <a href="../pages/flagged.html">Flagged for review</a> page. Gambling help: <a href="https://www.ncpgambling.org/help-treatment/" rel="noopener">NCPG</a>. Built 2026-11-15T23:24:27Z UTC · <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></footer></main></div></body></html>
