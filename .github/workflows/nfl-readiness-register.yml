@@ -1,4 +1,4 @@
-name: nfl-readiness snapshot capture
+name: nfl-readiness-register snapshot capture
 
 # Immutable official availability snapshots (REQ-28/29/53): captures the
 # official NFL injury report and the league reserve-list ledger every
@@ -31,21 +31,21 @@ jobs:
 
       - name: Capture official pages (fail loudly on drift)
         run: |
-          python3 nfl-readiness/capture/snapshot_official_pages.py
+          python3 nfl-readiness-register/capture/snapshot_official_pages.py
 
       - name: Run site verifier (ledger integrity)
         run: |
-          python3 nfl-readiness/verify.py
+          python3 nfl-readiness-register/verify.py
 
       - name: Commit append-only snapshot ledger
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add nfl-readiness/snapshots/
+          git add nfl-readiness-register/snapshots/
           if git diff --cached --quiet; then
             echo "No new snapshot data to commit."
           else
-            git commit -m "nfl-readiness: scheduled availability snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git commit -m "nfl-readiness-register: scheduled availability snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
             git pull --rebase origin main || git pull --no-rebase origin main
             git push origin main
           fi

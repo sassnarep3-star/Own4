@@ -279,20 +279,20 @@ NAV = [
         ("nfl-core/pages/flagged.html", "⚑ NFL Core — flagged for review", "legacy"),
         ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
         ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
-        # Added 2026-11-15 by session arena/63ebae0e-own4: the nfl-readiness namespace
+        # Added 2026-11-15 by session arena/63ebae0e-own4: the nfl-readiness-register namespace
         # (full requirement register REQ-01..REQ-68 verbatim, decision-readiness table on
         # its landing page, snapshot ledger + Wed/Thu/Fri capture automation with drift
         # alarm, verified Week-10 live captures, suggestions/questions/repo-review/flags).
         # Generator-owned so a regeneration cannot drop these links (F-13 class).
-        ("nfl-readiness/index.html", "NFL Readiness — decision-readiness table", "legacy"),
-        ("nfl-readiness/pages/requirements.html", "NFL Readiness — full requirement register", "legacy"),
-        ("nfl-readiness/pages/snapshots.html", "NFL Readiness — snapshot ledger &amp; Week-10 capture", "legacy"),
-        ("nfl-readiness/pages/questions.html", "NFL Readiness — questions &amp; answers", "legacy"),
-        ("nfl-readiness/pages/suggestions.html", "NFL Readiness — suggestions (review first)", "legacy"),
-        ("nfl-readiness/pages/repo-review.html", "NFL Readiness — repo review", "legacy"),
-        ("nfl-readiness/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
-        ("nfl-readiness/pages/sources.html", "NFL Readiness — sources", "legacy"),
-        ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
+        ("nfl-readiness-register/index.html", "NFL Readiness — decision-readiness table", "legacy"),
+        ("nfl-readiness-register/pages/requirements.html", "NFL Readiness — full requirement register", "legacy"),
+        ("nfl-readiness-register/pages/snapshots.html", "NFL Readiness — snapshot ledger &amp; Week-10 capture", "legacy"),
+        ("nfl-readiness-register/pages/questions.html", "NFL Readiness — questions &amp; answers", "legacy"),
+        ("nfl-readiness-register/pages/suggestions.html", "NFL Readiness — suggestions (review first)", "legacy"),
+        ("nfl-readiness-register/pages/repo-review.html", "NFL Readiness — repo review", "legacy"),
+        ("nfl-readiness-register/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
+        ("nfl-readiness-register/pages/sources.html", "NFL Readiness — sources", "legacy"),
+        ("nfl-readiness-register/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
     ]),
     # Added 2026-11-14: own-line origination engine with a verified results feed.
     # Every table row on every page carries an https link to the official source.
