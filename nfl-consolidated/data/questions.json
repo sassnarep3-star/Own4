@@ -1,0 +1,97 @@
+{
+ "dataset": "nfl_consolidated_questions",
+ "title": "Questions, information and answers required before any decision",
+ "built_utc": "2026-11-15",
+ "session": "arena/507da9a4-own4",
+ "policy": "Answers not established from evidence are left BLANK. Nothing is inferred.",
+ "rows": [
+  {
+   "id": "Q01",
+   "group": "Prices",
+   "question": "Where will official market open/close prices come from?",
+   "known": "The NFL publishes no betting lines of any kind (re-confirmed live 2026-11-15: the Wk-11 schedule page carries kickoff time and network only). Every market cell is blank (FB-01).",
+   "unknown": "Whether any authorized source's terms permit redistribution of prices on a public site, and whether the owner accepts a third-party single-book price as the basis of any claim.",
+   "answer": "",
+   "settle": "A written owner verdict on acceptable price sources (SG-01) plus the provider's terms of use.",
+   "blocks": "Every market column, G7, real staking ROI, reward payments, the residual-vs-market view.",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "Q02",
+   "group": "Prices",
+   "question": "What price is actually obtainable for a straight-up side pick?",
+   "known": "Staking assumes a flat −110 on any pick (declared in strategies.json). Real favorite prices carry much heavier juice.",
+   "unknown": "The observable price for each pick, which depends on Q01.",
+   "answer": "",
+   "settle": "Q01 resolved; then recompute staking at observed prices.",
+   "blocks": "Interpretation of every staking number (FB-02).",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "Q03",
+   "group": "Data",
+   "question": "Are the 105 aggregate-verified games (weeks 2–8) correct?",
+   "known": "All 32 teams' aggregates match the official standings (160/160 cells); 32 games re-read line-by-line match; 105 rows are aggregate-verified only.",
+   "unknown": "Whether every individual row in weeks 2–8 matches its official game page.",
+   "answer": "",
+   "settle": "Re-read the 105 remaining official game pages one by one (SG-02).",
+   "blocks": "Trust in the full backtest and correlation sample.",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "Q04",
+   "group": "Depth",
+   "question": "What depth (2nd/3rd/4th string) do replacements actually sit at?",
+   "known": "Depth is published only where official prose states the string (SEA QB proven 1st/2nd backup). nfl.com team depth-chart pages return 404.",
+   "unknown": "A verified depth-order for all 32 clubs.",
+   "answer": "",
+   "settle": "Resolve the depth-order source (route a: per-club pages — 404; route b: snap counts — no official source) for all 32 clubs (SG-04).",
+   "blocks": "Replacement-depth completeness, the deficiency matrix, the backup-deficiency feature.",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q05",
+   "group": "Model",
+   "question": "Which strategies are genuinely skill-based rather than lucky?",
+   "known": "S1 beats a coin-flip baseline (0.673, CI 0.578–0.756, placebo p<0.002) and edges a contemporaneous better-record baseline (0.635), but the record comparison was post-hoc. S2/S3 fail their gates; S4 n=7.",
+   "unknown": "Whether S1's edge survives a pre-registered prospective test and multiplicity control.",
+   "answer": "",
+   "settle": "Pre-registered prospective Week 11+ evaluation (G8) + a pre-registered paired test vs the record baseline (SG-03/SG-05).",
+   "blocks": "Leaderboard points, promotion of any strategy to LIVE.",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "Q06",
+   "group": "Depth",
+   "question": "Is there an official snap-count source to use as a starter proxy?",
+   "known": "nfl.com publishes no per-game snap-count feed. Snap counts would give a measurable starter/backup split.",
+   "unknown": "Whether any authorized official source provides snap counts.",
+   "answer": "",
+   "settle": "Identify an official snap-count source, or accept that the starter proxy stays unavailable.",
+   "blocks": "Depth-from-playing-time (E03), the starter proxy (E06).",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q07",
+   "group": "Governance",
+   "question": "Which single dashboard should be canonical among the 17+ NFL namespaces?",
+   "known": "The repository holds 17+ overlapping NFL namespaces, each a partial slice of the same brief.",
+   "unknown": "The owner's preferred canonical dashboard.",
+   "answer": "",
+   "settle": "An owner decision to adopt one namespace as canonical and archive the rest (SG-08).",
+   "blocks": "None technically, but it multiplies maintenance and confuses review.",
+   "source": "https://github.com/sassnarep3-star/Own4"
+  },
+  {
+   "id": "Q08",
+   "group": "Data",
+   "question": "Can player-prop combinations be priced at all under the official-source rule?",
+   "known": "Official season averages exist; official per-game player logs do not. Prop variance and prop-pair correlation are therefore unavailable.",
+   "unknown": "Whether an authorized per-game player log exists.",
+   "answer": "",
+   "settle": "An official per-game player log source, or accept prop combos remain blocked (FB-05).",
+   "blocks": "Prop-combo division, prop-pair correlations.",
+   "source": "https://www.nfl.com/"
+  }
+ ]
+}
