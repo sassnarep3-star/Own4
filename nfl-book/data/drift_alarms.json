@@ -1,0 +1,69 @@
+{
+ "dataset": "nfl_book_drift_alarms",
+ "title": "Drift alarms: parser row-count + required-field monitor",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Each parser is pinned to an expected row count and required fields. A missing field or short count fails the build loudly rather than publishing a blank.",
+ "rows": [
+  {
+   "id": "DA-01",
+   "parser": "results_feed",
+   "expected_rows": 137,
+   "observed_rows": 137,
+   "required_fields": "game_id,week,date,away,home,away_pts,home_pts,source_url",
+   "status": "ok",
+   "detail": "137 settled games captured",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "DA-02",
+   "parser": "injuries_week10",
+   "expected_rows": 279,
+   "observed_rows": 107,
+   "required_fields": "game,team,player,pos,injury,practice,game_status",
+   "status": "ALARM",
+   "detail": "partial capture (FB-06): 107 of ~279 rows; missing chunks would publish blanks — alarm fires",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "DA-03",
+   "parser": "standings",
+   "expected_rows": 32,
+   "observed_rows": 32,
+   "required_fields": "team,w,l,t,pct,pf,pa",
+   "status": "ok",
+   "detail": "32 clubs captured",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "DA-04",
+   "parser": "slate_week11",
+   "expected_rows": 13,
+   "observed_rows": 13,
+   "required_fields": "away,home,date,kickoff,network,game_url",
+   "status": "ok",
+   "detail": "13 games, 6 byes",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "DA-05",
+   "parser": "depth_replacements",
+   "expected_rows": 32,
+   "observed_rows": 3,
+   "required_fields": "team,unit,position,out_player,replacement_player,source_url",
+   "status": "ALARM",
+   "detail": "only 3 official replacement rows (FB-07); expected a 32-club register",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "DA-06",
+   "parser": "own_lines_close",
+   "expected_rows": 13,
+   "observed_rows": 13,
+   "required_fields": "game_id,away,home,side,total,moneyline",
+   "status": "ok",
+   "detail": "13 originated lines",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  }
+ ]
+}

@@ -25,6 +25,20 @@ NAV = [
     ("pages/questions.html", "Questions & answers"),
     ("pages/suggestions.html", "Suggestions"),
     ("pages/repo-review.html", "Repo review"),
+    ("pages/removal-of-luck.html", "Removal of luck"),
+    ("pages/model-outputs.html", "Model outputs (P + inputs)"),
+    ("pages/per-team.html", "Per-team view"),
+    ("pages/availability.html", "Availability graph"),
+    ("pages/depth-register.html", "Depth register"),
+    ("pages/pit-ledger.html", "PIT snapshot ledger"),
+    ("pages/fixture-context.html", "Fixture context"),
+    ("pages/venues.html", "Venues"),
+    ("pages/roster-sweep.html", "Roster / IR sweep"),
+    ("pages/two-stage-leaderboard.html", "Two-stage leaderboard"),
+    ("pages/ablations.html", "Ablations"),
+    ("pages/weekly-diff.html", "Weekly diff"),
+    ("pages/matchup-matrix.html", "Matchup matrix"),
+    ("pages/drift-alarms.html", "Drift alarms"),
     ("pages/sources.html", "Sources"),
     ("pages/flagged.html", "Flagged for review"),
 ]
@@ -130,7 +144,7 @@ def page(name, title, body, active=None):
 <title>{esc(title)} · NFL Book</title><link rel="stylesheet" href="{'../assets/book.css' if name.startswith('pages/') else 'assets/book.css'}">
 </head><body><div class="layout">
 <nav><div class="brand">NFL Book</div>
-<div class="sub">price snapshots · verified results · gated origination<br>session arena/c8969a10-own4</div>
+<div class="sub">price snapshots · verified results · gated origination · gap-closure<br>sessions arena/c8969a10-own4 + arena/20f55d17-own4</div>
 {''.join(links)}</nav>
 <main>{body}{FOOTER}</main></div></body></html>"""
     save_page(name, shell)
@@ -166,6 +180,27 @@ def build():
     rr = load("repo_review.json")
     dem = load("demotion_eval.json")
     card = load("model_card.json")
+    # gap-closure datasets (session arena/20f55d17-own4)
+    roL = load("removal_of_luck.json")
+    mo = load("model_outputs.json")
+    pt = load("per_team_view.json")
+    av = load("availability_graph.json")
+    dr = load("depth_register.json")
+    pit = load("pit_ledger.json")
+    fcx = load("fixture_context.json")
+    ts = load("two_stage_leaderboard.json")
+    cb = load("control_baseline.json")
+    vf = load("vig_free_decomposition.json")
+    je = load("joint_evidence.json")
+    abl = load("ablations.json")
+    wd = load("weekly_diff.json")
+    qc = load("questionable_calibration.json")
+    isurp = load("injury_surprise.json")
+    da = load("drift_alarms.json")
+    hs = load("holdout_split.json")
+    mm = load("matchup_matrix.json")
+    ven = load("venues.json")
+    rs = load("roster_sweep.json")
 
     # ---------------- index (dashboard) ----------------
     n_flags = len(flags["rows"])
@@ -235,8 +270,52 @@ def build():
                                 "15 questions: known / unknown / discovery",
                                 "13 proposals with options — review before implement",
                                 "17-namespace audit + inventory",
+                                "skill vs luck decomposition, ranked on skill only",
+                                "every output stored as a probability + inputs",
+                                "starters out, replacements named, net injury count",
+                                "expected starter vs actual starter graph",
+                                "32-club depth register, date + source per row",
+                                "hash-sealed point-in-time snapshot ledger",
+                                "schedule-fact feature set (date, network, rest days)",
+                                "venue per fixture from the game centre",
+                                "32-team roster / IR sweep register",
+                                "proper-score qualification + CLV/ROI escrow",
+                                "injury/depth ablations, not fixed penalties",
+                                "weekly line/rank/availability diff",
+                                "offense vs defense deficiency matrix",
+                                "scraper row-count + field drift alarms",
                                 "every source read this session",
                                 f"{n_flags} flagged items with links"])])
+
+    # removal-of-luck panel + decision-readiness table (landing page)
+    rol_panel = table(["Finding", "Detail", "Effect"],
+                      [[esc(a), esc(b), esc(c)] for a, b, c in roL["panel"]],
+                      meta=True)
+    rol_rows = []
+    for r in roL["rows"]:
+        kind = "good" if r["placebo_pass"] else "bad"
+        rol_rows.append([f'<b>{esc(r["strategy"])}</b>',
+                         f'<span class="num">{r["signal_accuracy"]}</span>'
+                         if r["signal_accuracy"] is not None else blank(),
+                         f'<span class="num">{r["skill_pp"]}</span>'
+                         if r["skill_pp"] is not None else blank(),
+                         f'<span class="num">{r["placebo_p"]}</span>'
+                         if r["placebo_p"] is not None else blank(),
+                         badge("pass" if r["placebo_pass"] else "fail", kind),
+                         f'<span class="num">{r["staking_roi"]}</span>'
+                         if r["staking_roi"] is not None else blank(),
+                         src(r["source_url"], "source")])
+    rol_table = table(["Strategy", "Signal acc", "Skill (pp)", "Placebo p",
+                       "Placebo", "Staking ROI (assumed)", "Source"], rol_rows)
+    dr_rows = []
+    for r in reqs["rows"]:
+        kind = {"met": "good", "partial": "warn", "blocked": "bad"}[r["status"]]
+        dr_rows.append([f'<b>{esc(r["id"])}</b>', esc(r["requirement"]),
+                        badge(r["status"], kind), esc(r["blocking_gate"]),
+                        esc(r["clearing_number"]), src(r["source_url"], "source")])
+    dr_table = table(["ID", "Requirement", "Status", "Blocking gate",
+                       "Number that clears it", "Source"], dr_rows)
+
     body = f"""<h1>NFL Book — dashboard</h1>
 <p class="lead">Own-line origination with a price-snapshot store, a verified results feed,
 gated strategies and a signal/staking-separated leaderboard. Every table row carries an
@@ -245,6 +324,15 @@ official source link; unverifiable values are blank and flagged.</p>
 <h2>Headline findings</h2>{headline}
 <div class="note warn"><b>Read staking numbers with FB-02:</b> all ROI figures assume a flat
 −110 price that no source verifies. Signal metrics (accuracy, CIs, placebos) use no prices at all.</div>
+<h2>Removal of luck</h2>{rol_panel}
+<div class="note">Signal (accuracy vs 0.500 + placebo) is separated from staking (assumed-price
+ROI). The leaderboard ranks on signal tier; staking never promotes a strategy and pays no
+points on assumed prices (amendment A1).</div>
+{rol_table}
+<h2>Decision readiness — one row per requirement</h2>
+<p class="lead">Every brief requirement with the gate that blocks it and the number/evidence
+that would clear it. <a href="pages/requirements.html">Full requirements page</a>.</p>
+{dr_table}
 <h2>Directory</h2>{directory}"""
     page("index.html", "Dashboard", body)
 
@@ -299,13 +387,15 @@ and we do not pretend otherwise.</div>"""
         kind = {"met": "good", "partial": "warn", "blocked": "bad"}[r["status"]]
         rows.append([f'<b>{esc(r["id"])}</b>', esc(r["requirement"]),
                      badge(r["status"], kind), esc(r["evidence"]),
+                     esc(r["blocking_gate"]), esc(r["clearing_number"]),
                      src(r["source_url"], "source")])
+    c = reqs.get("counts", {})
     body = (f'<h1>Requirements traceability</h1>'
             f'<p class="lead">{esc(reqs["title"])} · '
-            f'{sum(1 for r in reqs["rows"] if r["status"]=="met")} met · '
-            f'{sum(1 for r in reqs["rows"] if r["status"]=="partial")} partial · '
-            f'{sum(1 for r in reqs["rows"] if r["status"]=="blocked")} blocked</p>'
-            + table(["ID", "Requirement", "Status", "Evidence", "Source"], rows))
+            f'{c.get("met",0)} met · {c.get("partial",0)} partial · '
+            f'{c.get("blocked",0)} blocked · {reqs.get("n_rows",len(reqs["rows"]))} total</p>'
+            + table(["ID", "Requirement", "Status", "Evidence",
+                     "Blocking gate", "Number that clears it", "Source"], rows))
     page("pages/requirements.html", "Requirements", body)
 
     # ---------------- own lines ----------------
@@ -408,8 +498,12 @@ This feed is the sole input to the backtest, correlations and ROI calculations.<
             g2 = badge("pass" if m.get("g2_signal_pass") else "fail",
                        "good" if m.get("g2_signal_pass") else "bad")
             roi = (m.get("staking") or {}).get("roi")
+        wwcm = s.get("what_would_change_mind") or {}
+        wwcm_html = (f'<b style="color:var(--good)">Confirm:</b> {esc(wwcm.get("would_confirm",""))}'
+                     f'<br><b style="color:var(--bad)">Refute:</b> {esc(wwcm.get("would_refute",""))}') \
+            if wwcm else blank()
         rows.append([f'<b>{esc(s["id"])}</b> {esc(s["name"])}',
-                     badge(s["type"], "info"), esc(s["rule"]),
+                     badge(s["type"], "info"), esc(s["rule"]), wwcm_html,
                      f'<span class="num">{acc}</span>' if acc not in (None, "—") else esc(acc),
                      str(n) if n != "—" else "—", g2,
                      f'<span class="num">{roi}</span>' if isinstance(roi, float) else esc(str(roi)),
@@ -418,7 +512,7 @@ This feed is the sole input to the backtest, correlations and ROI calculations.<
 <p class="lead">Registry committed BEFORE the first backtest run (git f4465c0).
 Singles S1–S3, cross-game parlay S4, player-prop combo S5 (blocked).</p>
 <div class="note warn">Price assumption: {esc(strat["price_assumption"]["note"])}</div>
-{table(["Strategy", "Type", "Rule", "Signal metric", "n", "G2", "Staking ROI (assumed)", "Source"], rows)}
+{table(["Strategy", "Type", "Rule", "What would change our mind", "Signal metric", "n", "G2", "Staking ROI (assumed)", "Source"], rows)}
 <h2>Amendments (disclosed, after first run)</h2>
 {table(["ID", "Applies to", "Change", "Reason", "Source"],
        [[f'<b>{esc(a["amendment_id"])}</b>', esc(a["applies_to"]), esc(a["change"]),
@@ -635,6 +729,208 @@ No official depth chart exists (FB-07); everything else stays blank.</div>
 publication; all have source links for manual review.</p>
 {table(["ID", "Severity", "Flag", "Detail", "Source"], f_rows)}"""
     page("pages/flagged.html", "Flagged for review", body)
+
+    # ---------------- gap-closure pages (session arena/20f55d17-own4) ----------------
+    def nb(v, num=False):
+        if v in (None, "", []):
+            return blank()
+        return f'<span class="num">{esc(v)}</span>' if num else esc(v)
+
+    # removal of luck
+    body = f"""<h1>Removal of luck</h1>
+<p class="lead">{esc(roL["method"])}</p>
+<h2>Panel</h2>{rol_panel}
+<h2>Per-strategy decomposition</h2>{rol_table}
+<div class="note">Lucky staking cannot mask a bad signal: ranking is by signal tier, staking
+is reported separately, and points are withheld until verified prices exist (A1/G7).</div>"""
+    page("pages/removal-of-luck.html", "Removal of luck", body)
+
+    # model outputs
+    mo_rows = []
+    for r in mo["rows"]:
+        inp = r["inputs"]
+        mo_rows.append([f'<b>{esc(r["game_id"])}</b> {esc(r["away"])} @ {esc(r["home"])}',
+                        nb(r["p_home"], True), nb(r["p_away"], True),
+                        nb(r["pred_margin"], True), nb(r["fair_total"], True),
+                        f'off {inp["away_off"]}/def {inp["away_def"]} · '
+                        f'off {inp["home_off"]}/def {inp["home_def"]} · HFA {inp["hfa_pts"]}',
+                        esc(r["pick"]), src(r["source_url"], "game page")])
+    body = f"""<h1>Model outputs — probability plus inputs</h1>
+<p class="lead">{esc(mo["method"])}</p>
+{table(["Game", "P(home)", "P(away)", "Pred margin", "Fair total",
+        "Rating inputs", "Pick", "Source"], mo_rows)}"""
+    page("pages/model-outputs.html", "Model outputs", body)
+
+    # per-team view
+    pt_rows = []
+    for r in pt["rows"]:
+        pt_rows.append([f'<b>{esc(r["team"])}</b>', nb(r["starters_out"], True),
+                        nb(r["out"], True), nb(r["doubtful"], True),
+                        nb(r["questionable"], True), nb(r["net_injury_count"], True),
+                        nb(r["replacements_named"]), src(r["source_url"], "injury report")])
+    body = f"""<h1>Per-team view</h1>
+<p class="lead">{esc(pt["scope_note"])}</p>
+{table(["Team", "Starters out", "Out", "Doubtful", "Questionable",
+        "Net injury count", "Replacements named", "Source"], pt_rows)}"""
+    page("pages/per-team.html", "Per-team view", body)
+
+    # availability graph
+    av_rows = []
+    for r in av["rows"]:
+        av_rows.append([f'<b>{esc(r["id"])}</b>', badge(r["team"], "info"),
+                        esc(r["unit"]) + " " + esc(r["position"]),
+                        esc(r["expected_starter"]), esc(r["expected_status"]),
+                        nb(r["expected_replacement"]), nb(r["expected_depth"]),
+                        blank(), blank(), esc(r["status"]),
+                        src(r["source_url"], "source")])
+    body = f"""<h1>Availability graph</h1>
+<p class="lead">{esc(av["method"])}</p>
+{table(["ID", "Team", "Unit / pos", "Expected starter", "Expected status",
+        "Expected replacement", "Depth", "Actual starter", "Actual evidence",
+        "Status", "Source"], av_rows)}"""
+    page("pages/availability.html", "Availability graph", body)
+
+    # depth register
+    dr_rows2 = []
+    for r in dr["rows"]:
+        dr_rows2.append([f'<b>{esc(r["id"])}</b>', badge(r["team"], "info"),
+                         nb(r["unit"]), nb(r["position"]), nb(r["rank1"]),
+                         nb(r["rank2"]), nb(r["rank3"]), nb(r["date"]),
+                         esc(r["status"]), src(r["source_url"], "source")])
+    body = f"""<h1>Official depth-chart register</h1>
+<p class="lead">{esc(dr["method"])}</p>
+{table(["ID", "Team", "Unit", "Position", "Rank 1", "Rank 2", "Rank 3",
+        "Date", "Status", "Source"], dr_rows2)}"""
+    page("pages/depth-register.html", "Depth register", body)
+
+    # PIT ledger
+    pit_rows = []
+    for r in pit["entries"]:
+        pit_rows.append([f'<b>{esc(r["dataset"])}</b>', esc(r["label"]),
+                         nb(r["expected_rows"], True), nb(r["captured_utc"]),
+                         f'<code>{esc(r["sha256"][:16])}…</code>',
+                         esc(r["replay_status"]), src(r["source_url"], "source")])
+    body = f"""<h1>Point-in-Time Snapshot Ledger</h1>
+<p class="lead">{esc(pit["method"])}</p>
+{table(["Dataset", "Label", "Expected rows", "Captured", "sha256",
+        "Replay status", "Source"], pit_rows)}"""
+    page("pages/pit-ledger.html", "PIT ledger", body)
+
+    # fixture context
+    fc_rows = []
+    for r in fcx["rows"]:
+        fc_rows.append([f'<b>{esc(r["game_id"])}</b> {esc(r["away"])} @ {esc(r["home"])}',
+                        esc(r["date"]), esc(r["kickoff"]), esc(r["network"]),
+                        badge("neutral" if r["neutral"] else "home", "info"),
+                        blank(), nb(r["rest_days"], True),
+                        esc(r["onside_status"]), src(r["source_url"], "schedule")])
+    body = f"""<h1>Fixture context</h1>
+<p class="lead">{esc(fcx["method"])}</p>
+{table(["Game", "Date", "Kickoff", "Network", "Site", "Venue", "Rest days",
+        "Onside prior", "Source"], fc_rows)}"""
+    page("pages/fixture-context.html", "Fixture context", body)
+
+    # venues
+    ven_rows = []
+    for r in ven["rows"]:
+        ven_rows.append([f'<b>{esc(r["game_id"])}</b> {esc(r["away"])} @ {esc(r["home"])}',
+                         esc(r["date"]), blank(), blank(), esc(r["status"]),
+                         src(r["source_url"], "game page")])
+    body = f"""<h1>Venues</h1>
+<p class="lead">{esc(ven["method"])}</p>
+{table(["Game", "Date", "Venue", "Stadium", "Status", "Source"], ven_rows)}"""
+    page("pages/venues.html", "Venues", body)
+
+    # roster sweep
+    rs_rows = []
+    for r in rs["rows"]:
+        rs_rows.append([f'<b>{esc(r["team"])}</b>', blank(), blank(), blank(),
+                        nb(r["starters_out"], True), esc(r["status"]),
+                        src(r["source_url"], "source")])
+    body = f"""<h1>32-team roster / IR sweep</h1>
+<p class="lead">{esc(rs["method"])}</p>
+{table(["Team", "Roster", "IR", "Reserve list", "Starters out",
+        "Status", "Source"], rs_rows)}"""
+    page("pages/roster-sweep.html", "Roster sweep", body)
+
+    # two-stage leaderboard
+    ts1_rows = []
+    for r in ts["stage1"]:
+        ts1_rows.append([f'<b>{esc(r["strategy"])}</b>', badge(r["division"], "info"),
+                         nb(r["brier_score"], True), nb(r["accuracy"], True),
+                         nb(r["n"], True), nb(r["ci95"]), nb(r["squared_skill_gap"], True),
+                         esc(r["game_cluster_lb"]), esc(r["multiplicity_adj"]),
+                         badge(r["qualification"], "good" if r["qualification"] == "qualified" else "bad"),
+                         src(r["source_url"], "source")])
+    ts2_rows = []
+    for r in ts["stage2"]:
+        ts2_rows.append([f'<b>{esc(r["strategy"])}</b>', badge(r["division"], "info"),
+                         blank(), blank(), esc(r["escrow_status"]),
+                         src(r["source_url"], "source")])
+    cb_rows = [[f'<b>{esc(r["baseline"])}</b>', nb(r["n"], True), nb(r["accuracy"], True),
+                nb(r["ci95"]), esc(r["note"]), src(r["source_url"], "standings")]
+               for r in cb["rows"]]
+    body = f"""<h1>Two-Stage Skill Leaderboard</h1>
+<p class="lead">{esc(ts["method"])} · model Brier {ts["model_brier"]} on {ts["n_forecasts"]} walk-forward forecasts ({ts["n_weeks"]} weeks)</p>
+<h2>Stage 1 · proper-score qualification</h2>
+{table(["Strategy", "Division", "Brier", "Accuracy", "n", "95% CI", "Sq skill gap",
+        "Game-cluster LB", "Multiplicity", "Qualification", "Source"], ts1_rows)}
+<h2>Stage 2 · prospective CLV / ROI escrow</h2>
+{table(["Strategy", "Division", "CLV", "ROI", "Escrow status", "Source"], ts2_rows)}
+<h2>Control baselines</h2>
+{table(["Baseline", "n", "Accuracy", "95% CI", "Note", "Source"], cb_rows)}"""
+    page("pages/two-stage-leaderboard.html", "Two-stage leaderboard", body)
+
+    # ablations
+    abl_rows = []
+    for r in abl["rows"]:
+        abl_rows.append([f'<b>{esc(r["id"])}</b>', esc(r["ablation"]),
+                         esc(r["with_features"]), esc(r["without_features"]),
+                         blank(), blank(), esc(r["status"]), src(r["source_url"], "source")])
+    body = f"""<h1>Injury / depth ablations</h1>
+<p class="lead">{esc(abl["method"])}</p>
+{table(["ID", "Ablation", "With features", "Without features", "Delta",
+        "Uncertainty", "Status", "Source"], abl_rows)}"""
+    page("pages/ablations.html", "Ablations", body)
+
+    # weekly diff
+    wd_rows = []
+    for r in wd["rows"]:
+        wd_rows.append([f'<b>{esc(r["game_id"])}</b>', badge(r["market"], "info"),
+                        nb(r["unit"]), nb(r["open_value"], True), nb(r["close_value"], True),
+                        nb(r["drift"], True), blank(), blank(), blank(),
+                        esc(r["status"]), src(r["source_url"], "source")])
+    body = f"""<h1>Weekly 'what changed' diff</h1>
+<p class="lead">{esc(wd["method"])}</p>
+{table(["Game", "Market", "Unit", "Open", "Close", "Drift", "Rank change",
+        "Rating change", "Availability change", "Status", "Source"], wd_rows)}"""
+    page("pages/weekly-diff.html", "Weekly diff", body)
+
+    # matchup matrix
+    mm_rows = []
+    for r in mm["rows"]:
+        mm_rows.append([f'<b>{esc(r["id"])}</b>', badge(r["unit"], "info"),
+                        esc(r["position"]), blank(), blank(), blank(),
+                        esc(r["status"]), src(r["source_url"], "source")])
+    body = f"""<h1>Offense vs Defense Matchup Deficiency Matrix</h1>
+<p class="lead">{esc(mm["method"])}</p>
+{table(["ID", "Unit", "Position", "Home rank", "Away rank", "Deficiency",
+        "Status", "Source"], mm_rows)}"""
+    page("pages/matchup-matrix.html", "Matchup matrix", body)
+
+    # drift alarms
+    da_rows = []
+    for r in da["rows"]:
+        da_rows.append([f'<b>{esc(r["id"])}</b>', esc(r["parser"]),
+                        nb(r["expected_rows"], True), nb(r["observed_rows"], True),
+                        esc(r["required_fields"]),
+                        badge(r["status"], "good" if r["status"] == "ok" else "bad"),
+                        esc(r["detail"]), src(r["source_url"], "source")])
+    body = f"""<h1>Drift alarms</h1>
+<p class="lead">{esc(da["method"])}</p>
+{table(["ID", "Parser", "Expected rows", "Observed rows", "Required fields",
+        "Status", "Detail", "Source"], da_rows)}"""
+    page("pages/drift-alarms.html", "Drift alarms", body)
 
     print(f"[site] built {len(NAV)} pages into {ROOT}")
 

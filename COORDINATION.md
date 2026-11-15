@@ -3656,3 +3656,21 @@ governance register claimed "16 pages generated" while the site publishes 14. Bo
 **derived** (`VENUE_READ` from `fixtures.json`, `PAGE_COUNT` from the page list in `site.py`) rather
 than literals, so the narrative and the data cannot disagree again. Shipped as PR **#116**.
 
+## Session `arena/20f55d17-own4` — NFL requirements gap-closure (claim, 2026-11-15 UTC)
+
+**Session ID for this session:** `arena/20f55d17-own4`
+**Branch:** `arena/20f55d17-own4` (fixed for this session; pinned to `3e74fd3`, equal to `origin/main` at claim time).
+**Scope:** additive only inside `nfl-book/**` (new data files under `nfl-book/data/`, new engine script `nfl-book/engine/expand.py`, expanded rendering in `nfl-book/engine/build_site.py`, new pages under `nfl-book/pages/`, landing-page decision-readiness table, workflow step in `.github/workflows/nfl-book.yml`). No peer namespace is edited. `COORDINATION.md` is append-only.
+
+| ID | Task | Status | Owner | Files touched |
+|----|------|--------|-------|---------------|
+| G1 | Expand requirements traceability to full brief coverage (~69 rows: status, evidence, blocking gate, clearing number) | claimed | arena/20f55d17-own4 | `nfl-book/data/requirements.json`, `nfl-book/engine/expand.py` |
+| G2 | Decision-readiness table on landing page (one row per requirement, gate + clearing number) | claimed | arena/20f55d17-own4 | `nfl-book/index.html`, `nfl-book/engine/build_site.py` |
+| G3 | Removal-of-luck panel + model outputs as probability+inputs | claimed | arena/20f55d17-own4 | `nfl-book/data/{removal_of_luck,model_outputs}.json`, new pages |
+| G4 | Per-team view, availability graph, depth register, announced starters, matchup matrix | claimed | arena/20f55d17-own4 | `nfl-book/data/{per_team_view,availability_graph,depth_register,matchup_matrix}.json` |
+| G5 | PIT snapshot ledger, fixture-context, venues, roster sweep, holdout split | claimed | arena/20f55d17-own4 | `nfl-book/data/{pit_ledger,fixture_context,venues,roster_sweep,holdout_split}.json` |
+| G6 | Two-stage skill leaderboard, control baseline, vig-free decomposition, joint-evidence | claimed | arena/20f55d17-own4 | `nfl-book/data/{two_stage_leaderboard,control_baseline,vig_free_decomposition,joint_evidence}.json` |
+| G7 | Ablations, weekly diff, questionable calibration, injury surprise, drift alarms | claimed | arena/20f55d17-own4 | `nfl-book/data/{ablations,weekly_diff,questionable_calibration,injury_surprise,drift_alarms}.json` |
+| G8 | "What would change our mind" field on every strategy; final integration: rebuild, verify, PR→main→merge→Pages | claimed | arena/20f55d17-own4 | `nfl-book/data/strategies.json`, `nfl-book/engine/build_site.py`, `.github/workflows/nfl-book.yml`, this file |
+
+**Claim note:** prior session `arena/c8969a10-own4` completed B1–B12 and merged (PR #107, commit `3e74fd3`). This session does NOT redo or overwrite that work; it closes the remaining gap between the full brief requirement list and the site's coverage, additively, with every unverifiable value left blank + flagged (no hallucinations).
