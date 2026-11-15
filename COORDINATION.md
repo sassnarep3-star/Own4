@@ -3176,6 +3176,28 @@ first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-li
 re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
 
 ---
+
+## Session `arena/63ebae0e-own4` — NFL Requirements Register & Decision-Readiness Dashboard (claim, 2026-11-15 UTC)
+
+Session ID: `63ebae0e` · Branch: `arena/63ebae0e-own4` (platform-pinned single branch; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
+
+**Survey at claim time (2026-11-15):** main carries 22+ published workspaces. The newest brief adds a substantially expanded requirement list (~66 lines) — availability-snapshot automation, depth-slot semantics, roster-turnout versioning, proper-score leaderboard divisions, price policy, pre-registration/holdout splits, per-team views, weather/roof overlay, onside-kick priors and several specific fixes (Week-10 recapture, Lions designations, stale Ravens depth rows, reserve-list capture). Grep confirms NONE of these titles exist in the repo yet (`Automate immutable multi-day availability`, `Model depth slots as groups`, `Onside-Kick Regime`, `Stadium Roof`, `joint-evidence gate`, `shadow baseline`, `Wed, Thu and Fri` — zero hits). Prior sessions tracked only the first 16 requirements (nfl-book R1–R16). No live session claims the decision-readiness register; open PR #93 (nfl-command-center, 2026-11-13) predates this claim by >24 h and touches only its own namespace + shared files — out of scope here.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Board claim + gap survey vs expanded requirement list | in progress | 63ebae0e | COORDINATION.md (this entry) |
+| N2 | Official-source verification via live fetches (injury report, schedule, game books, transactions, NWS, snap-count source) + first immutable snapshot capture | unclaimed | 63ebae0e | `nfl-readiness/data/**`, `nfl-readiness/snapshots/**` |
+| N3 | Full requirement register: every line of the brief transcribed verbatim → status, owning workspace, gate that blocks it, number that would clear it, official source | unclaimed | 63ebae0e | `nfl-readiness/data/requirements.json` |
+| N4 | Decision-readiness table on the landing page (one row per requirement: gate blocking + clearing number) | unclaimed | 63ebae0e | `nfl-readiness/index.html` |
+| N5 | Snapshot automation: capture script + drift alarm + scheduled workflow (Wed/Thu/Fri) | unclaimed | 63ebae0e | `nfl-readiness/capture/**`, `.github/workflows/nfl-readiness-snapshot.yml` |
+| N6 | Suggestions section (review-before-implement) + questions/information/answers register | unclaimed | 63ebae0e | `nfl-readiness/data/{suggestions,decisions}.json`, pages |
+| N7 | Executive summary + line-by-line repo review + Flagged for Review (all irregularities, sources) | unclaimed | 63ebae0e | `nfl-readiness/pages/**`, `NFL_READINESS_EXECUTIVE_SUMMARY.md` |
+| N8 | Verifier (row-level source links, blank+flag rule, link integrity) + site build + tests | unclaimed | 63ebae0e | `nfl-readiness/engine/**`, `nfl-readiness/verify.py` |
+| N9 | Root nav integration (additive, generator-owned) + COORDINATION completion record | unclaimed | 63ebae0e | `verification/build.py` NAV, `index.html`, `verified/*.html` |
+| N10 | PR → main → merge → Pages deploy confirmation, recorded here | unclaimed | 63ebae0e | COORDINATION.md |
+
+**Scope rules:** everything new lives in `nfl-readiness/` (new namespace, zero file overlap with peers). Shared files touched only as: append-only COORDINATION.md, additive NAV group in `verification/build.py`, regenerated `index.html`/`verified/*.html` from that generator, one new root executive-summary markdown. Peer namespaces are read-only.
+
 ## Session `arena/f9a32d15-own4` — NFL decision-readiness hub, official injury capture, pre-registered shadow baseline, suggestions & questions (claim, 2026-11-15 UTC)
 
 Session ID: `arena/f9a32d15-own4` · Branch: `arena/f9a32d15-own4` (platform-pinned; the requested `session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `3e74fd3` (PR #107).
