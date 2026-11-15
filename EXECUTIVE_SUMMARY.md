@@ -113,3 +113,102 @@ placebo p<0.002) with staking reported only under an assumed −110 price. Amend
 are official-only with n published; replacement depth is blank wherever official text does not state
 the string. Demotion gate D1 is armed. 13 suggestions await reviewer verdicts before implementation.
 Full detail: `nfl-book/EXECUTIVE_SUMMARY.md`; live after merge at /nfl-book/.
+
+---
+
+## Addendum · session `arena/9f6a7ca8-own4` · 2026-11-15 — NFL decision readiness
+
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-readiness/ ·
+**Source:** [`nfl-readiness/`](nfl-readiness/) ·
+**Capture clock:** `2026-11-15T23:27:10Z`
+
+This session asked a different question from the 26 NFL namespaces before it. They each answered
+*"what did we build?"*. This one answers **"what blocks each requirement, and what number would
+clear it?"** — 78 requirement rows, each with its blocking gate, its clearing number and the ask.
+
+### Headline numbers
+
+| | |
+|---|---|
+| Requirements traced | **78** |
+| Met and re-verified this session | 21 |
+| Partial, with a named evidence gap | 31 |
+| Blocked | 13 |
+| Never started | 13 |
+| Official Week 10 inactives transcribed | **138 players / 24 club sections** |
+| Week 10 injury-report rows transcribed | **347 / 28 club sections / 8 of 8 chunks** |
+| Questions, all answers blank | 20 |
+| Suggestions awaiting a verdict | 13 |
+| Irregularities flagged, none blocking | 14 |
+
+### Three findings that change what to do next
+
+**1. An official inactive list exists and the repository never ingested it.** nfl.com publishes a
+dated article naming every inactive player per club — 138 players across 24 club sections for
+Week 10 — and it carries the venue string for 12 games. Flag FB-06 treats the active list as
+unobtainable. It is not. The blocker moves from *"no source"* to *"no parser"*, which is the single
+largest change in what is possible this week.
+
+**2. The live injury page rolls its fixture headers forward a week before its player tables follow.**
+Two exact identities hold and they invert: the clubs in the Week 10 report that are absent from the
+Week 11 schedule are precisely the official Week 11 bye list, and the clubs on the Week 11 schedule
+that are absent from the report are precisely the Week 10 bye list. A scraper that keys players to
+the fixture header rather than to the club silently attributes last week's injuries to next week's
+games. Published as [R-14](nfl-readiness/pages/flagged.html#R-14), and asserted on every build.
+
+**3. Depth charts are club-by-club, and that decides the feature.** Two clubs probed. Green Bay
+publishes a structured table — 44 named players, jersey numbers prefixed to names, dated
+*"Unofficial, Nov. 10, 2026"*. Houston publishes a single image with no table and no date. So the
+per-club route works for some clubs and not others: **2 of 32 verified, 30 unprobed**. The brief's
+own instinct is confirmed twice over — depth cannot be derived from jersey numbers, and the Packers
+prepend them precisely so a naive parser mistakes a shirt for a rank.
+
+### What is still impossible
+
+**No market price exists anywhere in the repository.** The NFL published kickoff time, network and
+venue for all 13 Week 11 fixtures and no line of any kind. Nine traced requirements — every ROI,
+every CLV, every fair-versus-market residual, the entire rewards pool — reduce to one procurement
+decision recorded as Q01 and S01. Until it is made, the honest product is a proper-score skill
+competition, not a betting product.
+
+### Independent verification of peer work
+
+Because every namespace verified only itself, five peer-published claims were re-checked against
+freshly fetched official pages. Results: **1 pass, 1 partial, 3 fail** — and *none of the failures is
+fabrication*.
+
+| Check | Result | What was actually wrong |
+|---|---|---|
+| X-01 standings snapshot | fail | Stale, not invented. 16 of 32 clubs differ and in every case that club's games-played count moved too; the 16 clubs that have not played since are byte-identical. |
+| X-02 Week 11 slate | pass | 13 of 13 fixtures, date / kickoff / network / bye set all agree. |
+| X-03 "no active list" | fail | The source is published. Ingestion gap, not existence gap. |
+| X-04 injury capture | partial | 107 rows over 9 clubs: 30.8% of rows, 32.1% of clubs. Accurate where it read, short in breadth. |
+| X-05 "no depth chart" | fail | True for Houston, false for Green Bay. The route is club-specific. |
+
+### The five decisions that need the owner
+
+1. **Q01 / S01** — how market prices are obtained, or a formal retreat from the residual.
+2. **Q10 / S02** — which of the 24 `nfl*` trees is canonical.
+3. **Q13** — the legal position on republishing row-level official data and paying rewards.
+4. **Q03 / S07** — whether the backtest corpus is the frozen 136 games or the 137 now in the file.
+5. **Q06 / S04** — parse one Game Book PDF, which decides whether starter identity is obtainable at
+   all, and therefore whether the availability graph, the replacement-depth matrix and the personnel
+   ablations can ever ship.
+
+Everything else on the site is a build task with a measurable target, not an opinion.
+
+### Honest limitations of this session
+
+* Seven official source groups were re-read in full; prior work across the other 23 `nfl*` trees was
+  **not** re-read line by line and is labelled as inherited wherever it appears
+  ([R-12](nfl-readiness/pages/flagged.html#R-12)).
+* One week of designations joined to one week of inactives is **n = 1**. The join finds zero
+  contradictions, which is the first real evidence the game-status column is a usable filter — and
+  nowhere near enough to calibrate it.
+* 70 of 138 named inactives never appear in the weekly report, so a blank status still cannot be read
+  as "available". No active list is published.
+* Three Week 10 games were still in progress at capture and are excluded from every settled
+  comparison rather than guessed.
+
+Nothing on this site is wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET —
+<https://www.ncpgambling.org/help-treatment>.

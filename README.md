@@ -263,3 +263,31 @@ https://sassnarep3-star.github.io/Own4/nfl-book/ after merge.
 Pipeline: `python3 nfl-book/engine/ingest.py` → `originate.py` → `backtest.py` → `correlations.py` →
 `build_site.py`, then `verify.py` (every data row must carry an https official link; blanks must be
 marked unverified). Source of truth: `nfl-book/` (see `nfl-book/EXECUTIVE_SUMMARY.md`).
+
+---
+
+## NFL decision readiness · `arena/9f6a7ca8-own4` (2026-11-15)
+
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-readiness/ · **Source:** [`nfl-readiness/`](nfl-readiness/)
+
+The 26 NFL namespaces above each answer *"what did we build?"*. This one answers *"what blocks each
+requirement, and what number would clear it?"* — 78 requirement rows, each with its blocking gate, its
+clearing number and the ask; 20 questions with every answer blank; 13 suggestions with every verdict
+blank; 14 flagged irregularities, none blocking.
+
+Three findings worth the click:
+
+* **Official inactive lists exist and were never ingested.** nfl.com publishes a dated article naming
+  138 inactive players across 24 club sections for Week 10, plus the venue for 12 games. Flag FB-06
+  treats the active list as unobtainable; the real blocker is a parser.
+* **The injury page rolls its fixture headers forward a week before its player tables follow.** The
+  two bye lists invert exactly. A header-keyed scraper would attribute Week 10 injuries to Week 11
+  games. Published as R-14 and asserted on every build.
+* **Depth is club-specific.** Green Bay publishes a structured, dated table (44 players, jersey
+  numbers prefixed); Houston publishes an image. 2 of 32 clubs verified.
+
+Market prices still do not exist anywhere: the NFL published kickoff time, network and venue for all
+13 Week 11 fixtures and no line of any kind, which is why 9 requirements reduce to one procurement
+decision (Q01 / S01).
+
+Reproduce: `cd nfl-readiness/engine && python3 derive.py && python3 readiness.py && python3 build_site.py && python3 verify.py`
