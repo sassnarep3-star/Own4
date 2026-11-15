@@ -1,0 +1,176 @@
+{
+ "dataset": "nfl_readiness_flags",
+ "title": "Flagged for review - irregularities found while verifying, none of which block publication",
+ "built_utc": "2026-11-15",
+ "kind": {
+  "provenance": "a number quoted in the brief cannot be traced to a source",
+  "conflict": "two official pages disagree",
+  "method": "a limit of how this data was obtained",
+  "structure": "a design or process gap",
+  "self": "a defect in this session's own work, disclosed"
+ },
+ "rows": [
+  {
+   "id": "RF-01",
+   "kind": "provenance",
+   "severity": "high",
+   "finding": "Six figures the brief treats as fact are not reproducible from any file at the base commit: '254 rows' and '279 rows' for the Week 10 tables, '4 no-injury sections vs 2', '6 of 254 report rows carry a game designation', '149 club/unit/position slots with more than one rank-1 player', and 'the 136-game log'.",
+   "measured": "this session measured 347 rows, 28 published club sections, 0 sections without an injury label, 171 designated rows; the official standings give 145 games credited, 133 through Week 9",
+   "action": "attach the source that produced those counts, or retire them; until then no page in this namespace quotes them as fact",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-02",
+   "kind": "structure",
+   "severity": "high",
+   "finding": "No official source publishes a market price. Every requirement that depends on a price (opening/closing snapshots, the difference column, the residual, CLV, vig decomposition, ROI, rewards) is blocked by the same missing input, and 22 namespaces have each worked around it differently.",
+   "measured": "this namespace publishes 0 price values; peer namespaces label theirs THIRD-PARTY or blank",
+   "action": "record DEC-P1 (SUG-01) - the blockage is a decision, not an engineering task",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "RF-03",
+   "kind": "conflict",
+   "severity": "high",
+   "finding": "The W-L record printed in brackets beside each club on the injury report is a live join, not a pre-game attribute: it equalled the LIVE standings for 28 of 28 clubs at read time, including clubs whose games were still in progress and clubs that had not kicked off.",
+   "measured": "28/28 match; report format prints W-L and appends -T only when a tie exists",
+   "action": "store the record only with the read window, never as a property of the availability row; engine/audit.py already computes the check so the day it stops matching is visible",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "RF-04",
+   "kind": "provenance",
+   "severity": "high",
+   "finding": "The depth-requirement family (rank-1 groups, shared and empty slots, the Texans image, the Packers jersey-prefix, the 1st-4th string matrix) presumes a depth dataset that exists in neither this repo nor on nfl.com; peers recorded the nfl.com team depth-chart route as a 404.",
+   "measured": "0 of 32 clubs have an official structured depth source located this session",
+   "action": "either license one, or re-scope these rows to snap-share from game books (SUG-11 + SUG-03); do not let a session 'deliver' them by inventing ranks",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-05",
+   "kind": "provenance",
+   "severity": "medium",
+   "finding": "The brief cites dated starter changes for Lock, McCord and Brissett (VR-24, VR-25; VQ-05). Lock and McCord were located in official text this session; the Brissett item was not, and none of the VR/VQ identifiers exist in any file at the base commit.",
+   "measured": "2 of 3 named cases verified from official pages read here; 1 not found",
+   "action": "supply the Brissett article, or drop it from the requirement so the register does not carry an unverifiable example",
+   "source_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+  },
+  {
+   "id": "RF-06",
+   "kind": "provenance",
+   "severity": "low",
+   "finding": "'Publish the league's dated schedule announcement beside the live schedule page': no official nfl.com schedule-release article with a printed date was located this session; a web search returned only third-party reposts of the release video.",
+   "measured": "the nearest official artefacts are the by-week page's own flexible-scheduling notice and https://www.nfl.com/legal/flexible-scheduling-procedures (both published)",
+   "action": "owner names the announcement to mirror, or the requirement is satisfied by the legal notice",
+   "source_url": "https://www.nfl.com/legal/flexible-scheduling-procedures"
+  },
+  {
+   "id": "RF-07",
+   "kind": "conflict",
+   "severity": "medium",
+   "finding": "At read time three Week 10 games were still in progress on the schedule page (Q4, Q4, Q3) while the live standings already credited them; two others had not kicked off.",
+   "measured": "9 final, 3 in progress, 2 not started of 14",
+   "action": "a results feed must gate on state=Final, and must publish the state it saw; a 'backtest' run against a mid-round standings page silently grades unfinished games",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "RF-08",
+   "kind": "structure",
+   "severity": "medium",
+   "finding": "Four clubs have no section in the Week 10 report (CHI, DEN, PHI, TB). Reading an absent section as 'no injuries' is wrong: the schedule page's own 'Teams on Bye' block lists exactly those four.",
+   "measured": "28 sections + 4 byes = 32 clubs, reconciled in engine/audit.py",
+   "action": "keep the bye reconciliation as a build check so a genuinely missing club fails the build instead of publishing as injury-free",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "RF-09",
+   "kind": "conflict",
+   "severity": "high",
+   "finding": "A traded player still appears on his former club's official report: Daiyan Henley is listed on the Chargers' Week 10 report (LB, full participation) five days after the roundup records both clubs announcing the trade to Denver.",
+   "measured": "1 hard conflict found in one week of data",
+   "action": "implement SUG-05 (transactions as an invalidating event); until then any availability row must carry the date of the last roster event it was checked against",
+   "source_url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10"
+  },
+  {
+   "id": "RF-10",
+   "kind": "conflict",
+   "severity": "medium",
+   "finding": "The report's Injuries column is not a severity source: Puka Nacua's row leaves it blank while a dated official item says IR with turf toe and sprained MCL/PCL, and eight Giants players have injuries named in Tuesday's official practice text but blank injury cells in the report.",
+   "measured": "2 worked contradictions in one week; 176 of 347 rows have a blank injury cell",
+   "action": "keep the injury cell as descriptive text only; severity must come from the transaction record (IR/PUP/NFI), which is the missing list in R-64",
+   "source_url": "https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl"
+  },
+  {
+   "id": "RF-11",
+   "kind": "structure",
+   "severity": "medium",
+   "finding": "Non-injury reasons are published inside the Injuries column: 'Not injury related - resting player' (JAX x2, LAR x1) and 'Not injury related - personal matter' (HOU x1, LAC x1). Any feature counting injury labels counts a rest day as an injury.",
+   "measured": "5 rows in this capture - JAX 2, LAR 1, HOU 1, LAC 1, computed by engine/capture.py",
+   "action": "split the column into (injury | non-injury | blank) at ingest; the vocabulary census in data/derived/capture_audit.json is the starting list",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-12",
+   "kind": "provenance",
+   "severity": "low",
+   "finding": "Position labels on the official report are not verified against a roster source: one row reads 'Patrick O'Connell, LB' for Seattle, a player publicly known as a quarterback; it cannot be determined from the pages read whether this is a publication error or a reclassification.",
+   "measured": "1 suspicious label in 347 rows",
+   "action": "do not join on the pos column for anything load-bearing until it is checked against the club roster page; no positional feature in this namespace uses it",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-13",
+   "kind": "structure",
+   "severity": "high",
+   "finding": "Six dated captures of one official page sit in this repo with row counts 347, 347, 326, 326, 276 and 107. Five of the six are strict subsets of the fullest capture; two agree exactly.",
+   "measured": "see data/derived/capture_diffs.json - prefix, subset and per-club counts computed",
+   "action": "adopt SUG-09 (a coverage line under every table) and SUG-02 (a scheduled collector); coverage, not content, is this repo's dominant failure mode",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-14",
+   "kind": "self",
+   "severity": "medium",
+   "finding": "This session's own first parse put practice-status text into the game-status column for 5 rows (an extra comma on blank-injury rows). It was caught only by diffing against an independent peer capture of the same page, not by the parse itself.",
+   "measured": "5 rows corrected; designation coverage moved from a wrong 176 to 171",
+   "action": "record it: a single-capture parse is not self-checking, which is the strongest available argument for two independent captures plus the pinned counts in engine/drift.py",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-15",
+   "kind": "method",
+   "severity": "medium",
+   "finding": "Capture is a transcription of a rendered page, not of page bytes: hashes in data/capture_manifest.json cover the transcription, and the fetch window is bracketed between two known clock readings because the harness exposes no per-call time.",
+   "measured": "1 window (2026-11-15T23:23:14Z-23:34:00Z), 5 reads ordered, 0 exact per-call stamps",
+   "action": "if byte-level immutability is required, approve SUG-12 C; this namespace labels the limitation instead of implying precision it does not have",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-16",
+   "kind": "structure",
+   "severity": "medium",
+   "finding": "The report page is rolling: the week control offers WEEK 1..WEEK 10 for 2026, so past weeks may be reachable - but this session did not test whether selecting an earlier week returns that week's report or the current one.",
+   "measured": "0 archived weeks stored; 1 untested retrieval path",
+   "action": "two fetches settle it (select week 9, then week 1); until then R-66's archive claim must not be written as feasible-by-URL",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-17",
+   "kind": "structure",
+   "severity": "low",
+   "finding": "22 NFL namespaces are live in one repository, several publishing near-identical requirement registers with different ids (R1..R10, RR-, P-, FLAG-M, VR-, VQ-, D-).",
+   "measured": "counted at base commit by engine/repo_review.py",
+   "action": "owner picks a canonical namespace (SUG-08); cross-references in this register use ids, not prose, so a merge cannot silently duplicate them",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "RF-18",
+   "kind": "structure",
+   "severity": "high",
+   "finding": "Namespace collision discovered at merge: session arena/e0ed20d1-own4 published its own nfl-readiness/ hub on main (pre-registration freeze 64a20e8, 2026-11-15T23:28:36Z) while this session was building a decision-readiness layer at the same path. The COORDINATION board's claim for this work was pushed later (f164fab), so this tree moved to nfl-availability-desk/ and nothing of theirs was edited.",
+   "measured": "2 namespaces, 1 brief, same day, same page: their index reports 347 rows / 28 clubs / 171 injury entries and 'the brief's figure of 279 rows is not reproduced', which this namespace measured independently as 347 rows / 28 sections / 171 designated rows. Two opposite policies also coexist: they hold the 347 rows OUT of git citing nfl.com terms 1.3 (their flag F-R09, their R68), this session publishes the rows in git because the owner's brief instructs every entry to be published as a table with a source.",
+   "action": "the reviewer picks one policy for row-level official data and one canonical decision register; until then both are published, cross-linked, and neither is treated as the single source of truth. A repo with two namespaces per requirement set cannot have one leaderboard (see nfl-core's D-1 note and SUG-08).",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/index.html"
+  }
+ ]
+}

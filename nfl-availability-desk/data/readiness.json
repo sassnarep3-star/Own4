@@ -1,0 +1,749 @@
+{
+ "dataset": "nfl_readiness_decision_readiness",
+ "title": "Decision-readiness register - one row per requirement, with the gate that blocks it and the number that would clear it",
+ "built_utc": "2026-11-15",
+ "session": "arena-d941f3c1-own4",
+ "how_to_read": {
+  "status": {
+   "delivered": "the requirement is met by an artefact that a reviewer can open right now",
+   "delivered-partially": "the structure exists and is published, but a stated part of it cannot be filled from an official source yet",
+   "blocked": "nothing can be published honestly until a named source or dataset exists",
+   "rejected": "the brief itself rejects this; recorded so nobody re-proposes it as new work",
+   "delivered-elsewhere": "the artefact exists in a sibling namespace of this repository; this session located it and links it, but did not re-verify its numbers line by line"
+  },
+  "gate": "the single thing that stands between today and the requirement being done",
+  "clearing_number": "the count that proves the gate is cleared, in the unit the reviewer can check",
+  "evidence": "repo artefact built this session, or an official URL read this session; 'peer:' means another session's namespace holds it and this session only located it, it was not re-verified"
+ },
+ "status_totals": {
+  "blocked": 21,
+  "delivered-partially": 16,
+  "delivered-elsewhere": 10,
+  "delivered": 23,
+  "rejected": 2
+ },
+ "rows": [
+  {
+   "id": "R-01",
+   "group": "Markets & pricing",
+   "requirement": "Price-snapshot store recording opening and closing numbers for every market we originate",
+   "status": "blocked",
+   "gate": "no official price source exists to snapshot; a store of blanks records nothing",
+   "clearing_number": ">=1 game x 3 markets with BOTH an open and a close captured from a licensed feed",
+   "evidence": "peer: nfl-book/data/price_snapshots.json, nfl-price-snapshot/, nfl-ledger/ all publish the SCHEMA with open/close null; this session adds no price row because none is officially obtainable",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-02",
+   "group": "Markets & pricing",
+   "requirement": "Verified results feed so backtests and ROI can be computed at all",
+   "status": "delivered-partially",
+   "gate": "a results row is only 'verified' once the fixture is Final; at read time 3 Week 10 games were in progress and 2 not started",
+   "clearing_number": "14 of 14 Week 10 fixtures state=Final with a game-centre URL each (9 were Final at read)",
+   "evidence": "data/fixtures_week10.csv + engine/audit.py standings_check (sum PF 6664 = sum PA 6664, 32/32 clubs) - the arithmetic identity is what makes the feed checkable",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-03",
+   "group": "Markets & pricing",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "delivered-elsewhere",
+   "gate": "nothing blocks it; it is an order rule inside the origination code",
+   "clearing_number": "3 of 3 markets written in the fixed order with an audit row per game",
+   "evidence": "peer: nfl-book B3 asserts the order in engine/originate.py with a per-row audit; not re-run this session",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R-04",
+   "group": "Markets & pricing",
+   "requirement": "Publish the model fair line, the market line and the difference as three separate columns",
+   "status": "blocked",
+   "gate": "the market column has no official source, so the difference column is undefined (a difference from nothing is nothing)",
+   "clearing_number": "a market-line column non-null for >=30 games before any residual is published",
+   "evidence": "this session prices nothing; see R-18 and flag RF-02. Column layout is specified in data/governance.json 'publication_contract'",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-05",
+   "group": "Leaderboard",
+   "requirement": "Separate signal from staking so a lucky staking run cannot mask a bad signal",
+   "status": "delivered-elsewhere",
+   "gate": "nothing; enforce it in the ranking key",
+   "clearing_number": "2 tables (signal rank, staking table) with staking never feeding the rank",
+   "evidence": "peer: nfl-book B5 publishes three leaderboard tables with staking unable to promote; nfl-core publishes leaderboard_signal.csv + leaderboard_staking.csv",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-06",
+   "group": "Availability",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "blocked",
+   "gate": "the league publishes no depth rank, and the brief forbids inferring one from jersey order or a chart read by eye",
+   "clearing_number": "a rank-1/rank-2 pair per slot for 32 of 32 clubs from a structured source, or snap-share pairs for 32 of 32",
+   "evidence": "this session publishes the strongest official statement available instead: named replacements from dated text (data/evidence.json EV-05, EV-06, EV-12, EV-14) with depth left blank",
+   "source": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10"
+  },
+  {
+   "id": "R-07",
+   "group": "Measurement",
+   "requirement": "Correlations only from officially sourced numbers, n published with each value",
+   "status": "delivered-partially",
+   "gate": "the only official numbers currently joined to a person are scores and report rows; player-level correlation needs snap/play data",
+   "clearing_number": "every published r carries n>=30 and a source path; today 0 rows qualify for player-level values",
+   "evidence": "engine/audit.py emits only counts with n; peer: nfl-book B7 computed CR-01..05 with n/r/p/CI from official scores, CR-06..09 blank with reasons",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-08",
+   "group": "Governance",
+   "requirement": "A demotion gate that sends a live strategy back to paper",
+   "status": "delivered-elsewhere",
+   "gate": "cannot fire yet: no strategy has live status, because none cleared qualification",
+   "clearing_number": "1 live strategy + a written trigger; today the trigger list is defined and its population is 0",
+   "evidence": "data/governance.json 'demotion_gate' restates the rule and the honest current evaluation; peer: nfl-book D1 four auto-firing conditions",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-09",
+   "group": "Governance",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
+   "status": "delivered",
+   "gate": "nothing; the register is the control",
+   "clearing_number": "1 registered rule text with a commit hash, 0 backtest figures on any leaderboard page",
+   "evidence": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md (this session's rule, frozen before any evaluation) + data/governance.json preregistration",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-10",
+   "group": "Availability",
+   "requirement": "Availability graph as a first-class dataset: who was expected to start, who actually did",
+   "status": "delivered-partially",
+   "gate": "'who actually did' requires the game-book participation list; only 1 of 14 game centres was opened this session",
+   "clearing_number": "28 of 28 clubs with an expected-starter set and an acted set from the game book (today: 0 of 28 both-sided; 28 of 28 designated-person sets)",
+   "evidence": "data/availability_snapshot_2026-11-15.csv (the left half, 347 rows) + data/fixtures_week10.csv game_centre_url (the right half's retrieval recipe) + the game-book PDF link verified to exist for fixture 2",
+   "source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  },
+  {
+   "id": "R-11",
+   "group": "Depth",
+   "requirement": "Model depth from playing time, not jersey order",
+   "status": "blocked",
+   "gate": "no official snap-count dataset was found on nfl.com in any read this session; the only snap figure in official text was prose ('played two snaps')",
+   "clearing_number": "an official source publishing snaps per player per game for >=1 season",
+   "evidence": "data/evidence.json EV-29 records the single prose mention and that it is not a dataset",
+   "source": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10"
+  },
+  {
+   "id": "R-12",
+   "group": "Availability",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "status": "delivered",
+   "gate": "nothing; this is now measurable because two dated renders of the same report exist",
+   "clearing_number": ">=2 dated captures per week; today the delta is 11 game-status rows, 6 practice rows, 11 injury-label rows, 0 row additions",
+   "evidence": "data/derived/designation_delta.json - LAC 10 + IND 1 of 11 designation changes, all inside one Monday-night pairing plus one clearance",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-13",
+   "group": "Availability",
+   "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "status": "delivered-partially",
+   "gate": "the report covers only clubs with a game that week; a sweep needs the IR/reserve list per club, which the report does not carry",
+   "clearing_number": "32 of 32 clubs with a roster+IR capture; today 28 of 32 have a report section and 4 (CHI, DEN, PHI, TB) have none because they are on bye",
+   "evidence": "data/derived/capture_audit.json: 347 rows, 28 sections, clubs_with_no_section = CHI, DEN, PHI, TB - matched against the schedule page's own 'Teams on Bye' block",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R-14",
+   "group": "Fixtures",
+   "requirement": "Fixture-context feature set built only from published schedule facts",
+   "status": "delivered-partially",
+   "gate": "rest-days and travel distance need prior-week dates per club (Week 9 page not opened this session)",
+   "clearing_number": "14 of 14 fixtures with day, slot, broadcast, venue, bye-flag, international-flag and rest-days (today 6 of 8, rest-days missing)",
+   "evidence": "data/fixtures_week10.csv columns day/slot_et/broadcast/venue_published + the flexible-scheduling notice text; rest-days deliberately left blank rather than inferred",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R-15",
+   "group": "Modelling",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "delivered-elsewhere",
+   "gate": "nothing; keep the contract in the output schema",
+   "clearing_number": "1 of 1 stored rows carrying p, input vector, model version, and a timestamp",
+   "evidence": "data/governance.json 'publication_contract' specifies the row contract this namespace requires; peer namespaces store p + inputs (nfl-markets originated_upcoming.csv)",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-16",
+   "group": "Leaderboard",
+   "requirement": "Compute and publish the removal-of-luck panel on the site dashboard",
+   "status": "delivered-partially",
+   "gate": "luck controls need a price-free benchmark per bet; with no prices the panel can only control for strength-of-schedule and league base rates",
+   "clearing_number": "panel with >=4 components each showing n (league home-win rate, rest, opponent-adjusted rating, control baselines)",
+   "evidence": "data/governance.json 'removal_of_luck_panel' names the four components and the two that are uncomputable today; the live numbers a reviewer can check now are the 32-club standings block (PF/PA/net) in data/derived/standings_check.json",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-17",
+   "group": "Governance",
+   "requirement": "Two-sided 'what would change our mind' field on every strategy entry",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "1 of 1 registered rules carrying both a confirm and a refute condition (PREREG-001 carries both)",
+   "evidence": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md sections 'what would confirm it' / 'what would refute it'",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-18",
+   "group": "Markets & pricing",
+   "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "blocked",
+   "gate": "the residual needs a market line; the league publishes none, so the honest day-one publication is the residual's absence, not a proxy",
+   "clearing_number": "a licensed or officially archived closing line for >=100 games",
+   "evidence": "flag RF-02 states the gap; peer: nfl-marketboard proved the third-party archive has no 2026 opening file, and nfl-markets labels every market number THIRD-PARTY",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-19",
+   "group": "Measurement",
+   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "status": "delivered-partially",
+   "gate": "the corpus size must come from the official standings arithmetic, and 136 is not reproducible from anything in the repo or on nfl.com",
+   "clearing_number": "a stated game count that satisfies sum(GP)/2; today 145 credited, 133 through Week 9, 147 when Week 10 finishes",
+   "evidence": "data/derived/standings_check.json 'backtest_corpus' - publishes the arithmetic and names the discrepancy instead of adopting either number (flag RF-01)",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-20",
+   "group": "Governance",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "status": "delivered",
+   "gate": "the decision belongs to the owner; this session publishes the decision record with three costed options and no default",
+   "clearing_number": "1 recorded verdict (DEC-P1) with an option letter",
+   "evidence": "data/governance.json 'price_data_policy' + data/suggestions.json SG-01",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-21",
+   "group": "Availability",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "delivered",
+   "gate": "nothing for one week; the panel becomes continuous once the cadence runs",
+   "clearing_number": "every stored read with a UTC window + 1 delta panel per week (today 1 panel: 11/6/11 rows changed)",
+   "evidence": "data/capture_manifest.json (read window 2026-11-15T23:23:14Z-23:34:00Z with per-read order and stated imprecision) + data/derived/designation_delta.json",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-22",
+   "group": "Site",
+   "requirement": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "72 of 72 requirement rows on the landing page with gate + clearing number + source each",
+   "evidence": "data/readiness.json (this file) rendered as the first table on nfl-availability-desk/index.html",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-23",
+   "group": "Fixtures",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "delivered-partially",
+   "gate": "one game centre per fixture has to be opened; 1 of 14 was opened this session",
+   "clearing_number": "14 of 14 fixtures with a venue string + URL (today 3: Munich from the game centre, Paycor Stadium and M&T Bank Stadium from the schedule page's own locators)",
+   "evidence": "data/fixtures_week10.csv venue_published/venue_evidence columns; 11 rows left blank, not guessed",
+   "source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  },
+  {
+   "id": "R-24",
+   "group": "Fixtures",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "delivered-partially",
+   "gate": "the announcement page's own date is not printed in the text this session read, and a search surfaced only third-party reposts of the schedule-release video",
+   "clearing_number": "1 official nfl.com schedule-release article with a publication date shown on the page",
+   "evidence": "the by-week page's own dated flexible-scheduling notice + https://www.nfl.com/legal/flexible-scheduling-procedures are published as the nearest official artefact; flag RF-06 keeps the gap visible",
+   "source": "https://www.nfl.com/legal/flexible-scheduling-procedures"
+  },
+  {
+   "id": "R-25",
+   "group": "Availability",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "status": "delivered-partially",
+   "gate": "the game-book PDF exists per fixture (verified for 1 of 14) but no parser is pinned to its layout, and 13 more links have not been collected",
+   "clearing_number": "14 of 14 fixtures with a recorded game-book PDF URL, then a parsed participation list for 28 of 28 clubs",
+   "evidence": "the exact link read on the game centre is recorded in data/official_reads.json read 5 (static.www.nfl.com/.../gamecenter/ab582c2f-...pdf)",
+   "source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  },
+  {
+   "id": "R-26",
+   "group": "Modelling",
+   "requirement": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "delivered-elsewhere",
+   "gate": "needs the full per-game score list with an official URL per row",
+   "clearing_number": "every game row x per-team W/L/T/PF/PA reconciliation against the official standings = 0 mismatches",
+   "evidence": "peer: nfl-book B3 reports 137 rows with 160/160 standings cells matching; this session independently re-derived the league identity (sum PF = sum PA = 6664) from the live standings",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-27",
+   "group": "Modelling",
+   "requirement": "Injury/personnel ablations instead of fixed penalties (same model with and without the personnel features, difference reported with uncertainty)",
+   "status": "blocked",
+   "gate": "an ablation needs >=2 dated availability weeks joined to results; the repo holds single-week captures only",
+   "clearing_number": ">=4 archived report weeks x 32 clubs before the first ablation number is publishable",
+   "evidence": "data/derived/capture_diffs.json shows what single-capture work looks like (three different row counts for the same page on three dates); data/governance.json 'ablation_spec' freezes the method so it is not invented later",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-28",
+   "group": "Modelling",
+   "requirement": "Compare identical models with and without verified availability features using chronological holdouts",
+   "status": "blocked",
+   "gate": "same as R-27; plus a frozen feature list so the with/without arms differ only in availability inputs",
+   "clearing_number": "2 arms x >=100 games on a chronological holdout, difference with a game-clustered interval",
+   "evidence": "data/governance.json 'ablation_spec' (arms, holdout, uncertainty, and the rule that no fixed point penalty may be used)",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-29",
+   "group": "Data ops",
+   "requirement": "Automate immutable multi-day availability snapshots, capturing the official report and club depth pages at least daily with retained hashes",
+   "status": "blocked",
+   "gate": "there is no durable store to write to: the site is static and no object storage is configured in this repo; and club depth pages are not an nfl.com property",
+   "clearing_number": "a workflow that commits a dated capture daily for 7 consecutive days with a hash chain (today: 0 scheduled captures, 1 manual)",
+   "evidence": ".github/workflows/nfl-availability-desk.yml runs a build+verify gate only - it deliberately does not pretend to be a collector; engine/drift.py is the alarm that a real collector needs",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-30",
+   "group": "Data ops",
+   "requirement": "Build immutable official availability snapshots with raw hashes, timestamps and conflict flags",
+   "status": "delivered-partially",
+   "gate": "hashes cover the transcribed capture, not the page bytes - the fetch path used here does not expose raw bytes, so byte-hash immutability cannot be claimed",
+   "clearing_number": "sha256 of stored bytes + page bytes for every capture (today: sha256 of the transcription only, stated as such)",
+   "evidence": "data/capture_manifest.json 'immutability_limitation' + engine/build_site.py writing the actual hashes at build time",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-31",
+   "group": "Availability",
+   "requirement": "Capture official inactive lists and snap counts",
+   "status": "blocked",
+   "gate": "neither is published on the pages read; the closest official artefacts are a dated 'Week 9 inactives' news article and the per-game game book",
+   "clearing_number": "inactive lists for 28 of 28 clubs from one source, or snaps for 100% of a week's players",
+   "evidence": "data/evidence.json EV-24 (inactives article exists, URL) and EV-29 (the only snap figure is prose)",
+   "source": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "R-32",
+   "group": "Depth",
+   "requirement": "Fix the two depth-parsing failures before widening coverage (Texans publish depth as an image; Packers prepend jersey numbers)",
+   "status": "blocked",
+   "gate": "neither club page was readable as structured text from this environment, and transcribing an image by eye is what the brief forbids",
+   "clearing_number": "2 of 2 clubs parsed to rows with the raw string retained, or 1 authorized structured source for the image",
+   "evidence": "flag RF-04: the requirement's provenance is a club-site reading no file in this repo reproduces; nfl.com itself returns no depth-chart page",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-33",
+   "group": "Depth",
+   "requirement": "Model depth slots as groups, not a single starter (149 slots list more than one rank-1 player)",
+   "status": "blocked",
+   "gate": "the 149-slot figure belongs to a depth dataset this repo does not contain and nfl.com does not publish; and the brief itself rejects inventing a rank-1",
+   "clearing_number": "the source that produced those 149 slots must be named and stored before any slot is modelled",
+   "evidence": "flag RF-04 - stated as an unreproducible figure, not adopted; policy recorded in data/governance.json 'depth_rule'",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-34",
+   "group": "Availability",
+   "requirement": "Treat roster turnover as a first-class data event (the Colts article documents two starting-receiver trades beside its depth chart)",
+   "status": "delivered",
+   "gate": "nothing; it is now an implemented join plus a caught conflict",
+   "clearing_number": "1 dated event per affected club; today 26 club-level events transcribed and 1 hard conflict caught (Henley on LAC's report after an announced trade)",
+   "evidence": "data/evidence.json EV-01..EV-04 (Colts Downs + Allen trades, replacement signed off the practice squad) and EV-02 (the conflict)",
+   "source": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10"
+  },
+  {
+   "id": "R-35",
+   "group": "Leaderboard",
+   "requirement": "Start with a singles-only shadow baseline",
+   "status": "delivered",
+   "gate": "nothing for registration; qualification needs the sample the season has not produced yet",
+   "clearing_number": "1 registered rule (done) then n>=300 single-game forecasts recorded pre-kickoff (today 0 recorded by this session)",
+   "evidence": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "R-36",
+   "group": "Leaderboard",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "delivered-elsewhere",
+   "gate": "no direct joint probability has been validated, and operator void/push rules are not stored anywhere in the repo",
+   "clearing_number": "1 validated joint estimate with n + the operator rule text per market type before a combo is ranked",
+   "evidence": "peer: nfl-markets/nfl-book both keep combos unranked; this session records the gate in data/governance.json 'joint_evidence_gate'",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-37",
+   "group": "Leaderboard",
+   "requirement": "Proper-score leaderboard divisions (singles, game parlay, SGP, prop combo)",
+   "status": "delivered-elsewhere",
+   "gate": "nothing structural; the divisions exist as a schema, and are empty because no division is qualified",
+   "clearing_number": "4 divisions defined; today 0 strategies enter any of them",
+   "evidence": "peer: nfl-book B5/nfl-markets M4; data/governance.json 'divisions' restates the rule that 0 of 1,000 reward units are awarded",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-38",
+   "group": "Leaderboard",
+   "requirement": "Rank by benchmark-relative proper score with a game-cluster lower bound and multiplicity control, not win rate",
+   "status": "delivered-elsewhere",
+   "gate": "the benchmark for a bet needs a price; with prices absent the only honest benchmark is the league base rate",
+   "clearing_number": "every published ranking row showing BSS + clustered lower bound + adjusted q (today 0 ranked rows)",
+   "evidence": "peer: nfl-book reports smallest Benjamini-Hochberg q = 0.165 against a floor requiring n>=300; recorded here as the current state, not re-derived",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-39",
+   "group": "Data ops",
+   "requirement": "Durable snapshot storage outside the static site, freshness monitoring, source/schema alerts",
+   "status": "blocked",
+   "gate": "no external store is configured; the repo has one manual capture and no schedule",
+   "clearing_number": "1 external store target + 1 scheduled job + 1 fired alert (today: 0/0/0; the alert code exists but has no scheduler)",
+   "evidence": "engine/drift.py is the alarm (fails the build on row-count or field drift); data/drift_expectations.json pins this week's numbers",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-40",
+   "group": "Data ops",
+   "requirement": "Split the site into a public analysis layer and a private data layer until the terms are read",
+   "status": "delivered-partially",
+   "gate": "no terms-of-service reading is recorded anywhere in the repo, and the raw row-level capture this session made is published on the public page by this brief's own instruction to publish all entries",
+   "clearing_number": "1 written terms verdict per source in use, stored in data/sources.json; today 0 of 2 sources carry one (nfl.com pages read here, and any price source if DEC-P1 opens that route)",
+   "evidence": "data/governance.json 'data_layer' records the conflict openly rather than silently keeping rows public; the row-level injury report here is transcribed from a page the league publishes for public consumption, and it is cited, not scraped at volume",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-41",
+   "group": "Site",
+   "requirement": "Per-team view: starters out, replacements named, net injury count",
+   "status": "delivered",
+   "gate": "nothing for the two columns the official data supports; 'starters out' stays blank where the report names no position role",
+   "clearing_number": "32 of 32 clubs with a row (28 with report rows, 4 flagged as on-bye)",
+   "evidence": "data/derived/capture_audit.json per_team (rows/out/questionable/doubtful/dnp/lp/fp/injury-labelled), rendered per club on pages/availability.html",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-42",
+   "group": "Availability",
+   "requirement": "Add an announced-starter evidence field, not an inferred replacement",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "3 of 3 named cases in the brief resolved to dated official text (Lock yes, McCord yes, Brissett not found this session)",
+   "evidence": "data/evidence.json EV-12/EV-13 (Lock), EV-06 (McCord), EV-14 (Watson, Beck); Brissett is recorded as NOT located rather than approximated - see flag RF-05",
+   "source": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders"
+  },
+  {
+   "id": "R-43",
+   "group": "Depth",
+   "requirement": "Official depth-chart register with a date and source per row",
+   "status": "blocked",
+   "gate": "nfl.com publishes no team depth-chart page; peer sessions recorded a 404 on the route",
+   "clearing_number": "a URL that returns a dated depth chart for 32 of 32 clubs (today 0 of 32)",
+   "evidence": "flag RF-04; the register's schema is ready in data/governance.json 'depth_rule' and stays empty by design",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-44",
+   "group": "Measurement",
+   "requirement": "Calibrate what Questionable means empirically instead of old percentages",
+   "status": "delivered-partially",
+   "gate": "the calibration joins designations to inactives/snaps across seasons; this session can only report this week's official designation census",
+   "clearing_number": ">=3 seasons x both designation types joined to play results; today 1 week, 90 Questionable rows, 0 play outcomes joined",
+   "evidence": "data/derived/capture_audit.json game_status_vocabulary (Out 70, Questionable 90, Doubtful 11, blank 176) - the denominator a future calibration needs, published with its clock time",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-45",
+   "group": "Site",
+   "requirement": "Interactive Offense vs Defense matchup deficiency matrix (1st-4th string)",
+   "status": "blocked",
+   "gate": "the matrix needs a rank per player (1st/2nd/3rd/4th string); no official rank exists (R-43, R-06), so every cell would be invented",
+   "clearing_number": "32 of 32 clubs with positional rank groups before one cell is drawn",
+   "evidence": "data/governance.json 'depth_rule' is the gate; the UI is not built because it would render blanks in 128 of 128 cells",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-46",
+   "group": "Availability",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "status": "delivered",
+   "gate": "nothing; the flag now has a worked example",
+   "clearing_number": "1 conflict detector + 1 caught conflict (today: 1 caught - Henley on LAC's report 5 days after the trade was announced)",
+   "evidence": "data/evidence.json EV-01 + EV-02; the official registers to key off are named in EV-33 (transactions hub + trade tracker)",
+   "source": "https://www.nfl.com/transactions/"
+  },
+  {
+   "id": "R-47",
+   "group": "Data ops",
+   "requirement": "Point-in-time snapshot ledger for injuries, depth charts and inactives",
+   "status": "delivered-partially",
+   "gate": "one dated entry per week is a ledger of one; depth and inactives have no source to enter",
+   "clearing_number": ">=3 dated entries per week (Wed/Thu/Fri) x 2 of 3 object types; today 1 entry for 1 object type",
+   "evidence": "engine/audit.py computes every cross-capture diff from the ledger entries present; data/derived/capture_diffs.json is the ledger's first reconciliation report",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-48",
+   "group": "Availability",
+   "requirement": "Populate the three missing Lions game-status designations (Joseph, Mays, Reed blank)",
+   "status": "delivered",
+   "gate": "nothing - the official page now carries them",
+   "clearing_number": "3 of 3 Lions rows showing a designation (today 3 of 3 = Out, Knee/Ankle/Hip, all DNP)",
+   "evidence": "availability_snapshot rows DET/Kerby Joseph, DET/Cade Mays, DET/D.J. Reed; nfl-book's 2026-11-14 partial capture already showed Out, so the fix predates this session - see flag RF-01 on provenance of the original claim",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-49",
+   "group": "Availability",
+   "requirement": "Re-capture and republish the Week 10 injury tables (stale counts: 254 rows vs 279 live; SEA and CIN shown injury-free)",
+   "status": "delivered",
+   "gate": "nothing for the re-capture; the cited 254/279 numbers cannot be reconciled because no file in the repo publishes them",
+   "clearing_number": "a full capture: 347 rows, 28 sections, 4 clubs absent by bye, SEA 15 rows, CIN 9 rows, designation coverage 49.3%",
+   "evidence": "data/availability_snapshot_2026-11-15.csv + data/derived/capture_audit.json; the irreconcilable figures are published side by side in flag RF-01",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-50",
+   "group": "Depth",
+   "requirement": "REJECT deriving depth order from jersey number, experience or salary",
+   "status": "rejected",
+   "gate": "n/a - recorded so the shortcut is not re-proposed as new work",
+   "clearing_number": "the rejection stands until a source publishes an ordered rank (0 such sources today)",
+   "evidence": "data/governance.json 'depth_rule'; this session inferred no rank for any player",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-51",
+   "group": "Depth",
+   "requirement": "Represent shared and empty depth slots faithfully (Seattle two players in one slot; Washington an empty slot)",
+   "status": "blocked",
+   "gate": "the same obstacle as R-33: those slot statements belong to a depth dataset that is not in this repo and not on nfl.com",
+   "clearing_number": "2 named slot rows (SEA shared slot, WAS empty slot) each with a source URL and a date; today 0 of 2 exist anywhere official",
+   "evidence": "flag RF-04",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-52",
+   "group": "Depth",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "delivered",
+   "gate": "the evaluation itself is the deliverable and it is now executed: route (a) fails on nfl.com, route (b) has no official snap dataset",
+   "clearing_number": "1 route verified for 32 of 32 clubs (today 0 of 2 routes, 0 of 32 clubs)",
+   "evidence": "data/governance.json 'depth_route_evaluation' records both routes and why each fails today, so the feature stays unbuilt by evidence, not by laziness",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-53",
+   "group": "Measurement",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "status": "blocked",
+   "gate": "needs several seasons of designations joined to inactives; the repo has one week of designations",
+   "clearing_number": ">=3 seasons; today 1 week (347 rows) with 0 play-outcome joins",
+   "evidence": "data/derived/capture_audit.json is the first cell of that table; R-31 names the missing right-hand side",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-54",
+   "group": "Availability",
+   "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+   "status": "delivered-partially",
+   "gate": "cadence is not scheduled; this session proves the capture is reproducible and that the week's content moves between days",
+   "clearing_number": "3 captures x 1 week = 3 dated entries (today 1 by this session, 3 more from peers = 4 in the ledger)",
+   "evidence": "data/derived/capture_diffs.json compares 6 dated renders, three of them this week's",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-55",
+   "group": "Availability",
+   "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "status": "delivered",
+   "gate": "nothing; the series is the storage convention now",
+   "clearing_number": "every row keyed by (captured_at, club, player); today 347 rows carry capture 2026-11-15 and are joined to 5 other captures by that key",
+   "evidence": "engine/audit.py joins on (club, player) with the capture date as the second key; capture_manifest.json defines the clock convention",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-56",
+   "group": "Depth",
+   "requirement": "Use snap counts as the starter proxy where the depth chart is unavailable",
+   "status": "blocked",
+   "gate": "same as R-11: no official snap-count source located this session",
+   "clearing_number": "1 official per-player snap source covering 32 of 32 clubs",
+   "evidence": "data/evidence.json EV-29 and flag RF-04; the game book is the candidate (R-25) and has not been parsed",
+   "source": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+  },
+  {
+   "id": "R-57",
+   "group": "Leaderboard",
+   "requirement": "Control baselines (random picks, favorites only) on every leaderboard run",
+   "status": "delivered-elsewhere",
+   "gate": "a 'favorite' is defined by a price; with no price the favourites-only baseline is undefined, while the random baseline is computable",
+   "clearing_number": "2 baselines per run; today 1 definable (random), 1 blocked (favourite)",
+   "evidence": "data/governance.json 'control_baselines' states which is computable today and why the other is not",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-58",
+   "group": "Fixtures",
+   "requirement": "Stadium roof/surface plus NWS hourly wind/precipitation overlay",
+   "status": "blocked",
+   "gate": "two halves are missing: a per-stadium roof/surface register (the schedule card prints only a weather string) and an NWS grid join, which is outside the sources read this session",
+   "clearing_number": "30 stadiums with roof type + surface, and 14 of 14 fixtures with a forecast timestamp",
+   "evidence": "data/fixtures_week10.csv records the one weather string the official page published ('Weather Clearnight' for the Monday game) and leaves roof/surface blank",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R-59",
+   "group": "Leaderboard",
+   "requirement": "Two-stage skill leaderboard: proper-score qualification, then prospective CLV/ROI escrow",
+   "status": "blocked",
+   "gate": "stage two measures CLV, which needs entry and closing prices; neither is officially obtainable",
+   "clearing_number": "stage 1 for n>=300 (today the largest corpus in the repo is 145 games of results with 0 recorded forecasts from this session), stage 2 needs >=6 weeks prospective",
+   "evidence": "data/governance.json 'two_stage' with both stages' entry conditions",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-60",
+   "group": "Markets & pricing",
+   "requirement": "Vig-free market consensus vs originated fair-line decomposition",
+   "status": "blocked",
+   "gate": "a consensus needs multiple price sources; the repo holds one third-party archive and no vig data",
+   "clearing_number": ">=2 independent price sources per market before any vig decomposition",
+   "evidence": "flag RF-02; no decomposition is published because the vig column would be a guess",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-61",
+   "group": "Site",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "delivered",
+   "gate": "nothing for one week",
+   "clearing_number": "1 diff with rank/rating/availability columns (today: availability 11/6/11 rows, rank and rating blank because no weekly rating history is produced here)",
+   "evidence": "pages/snapshot-delta.html renders the availability diff; the rating-diff column is specified and empty by rule, not by omission",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-62",
+   "group": "Modelling",
+   "requirement": "Publish every model total twice until one wins",
+   "status": "delivered-elsewhere",
+   "gate": "collapse requires a walk-forward comparison over enough games; the repo's own published comparison says our lines lose today",
+   "clearing_number": "1 comparison with >=300 games before collapsing to one estimator",
+   "evidence": "peer: nfl-marketboard published spread MAE 9.383 vs market 8.814 and total 11.112 vs 10.357 on 105 walk-forward games, as a negative result",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-63",
+   "group": "Data ops",
+   "requirement": "Drift alarm on every scraper: pinned row counts and required fields, fail the build loudly",
+   "status": "delivered",
+   "gate": "nothing for the alarm; it fires against a stored expectation, and cadence is still manual",
+   "clearing_number": "1 expectation file + 1 CI step + 0 silent blanks (today 347 rows, 8 required fields pinned; a blank slug or a missing practice value fails)",
+   "evidence": "engine/drift.py + data/drift_expectations.json, wired into .github/workflows/nfl-availability-desk.yml",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-64",
+   "group": "Availability",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "delivered",
+   "gate": "the IR list itself still needs a per-club source (the report proves absences but does not enumerate IR); this session documents two named absences and their cause",
+   "clearing_number": "32 of 32 clubs with an IR list; today 2 named players verified as IR-absent-from-report (Willis, Henderson) + 1 verified as not-listed-because-healthy (McCord)",
+   "evidence": "data/evidence.json EV-06, EV-07, EV-11, EV-15; the four on-bye clubs are separately identified in capture_audit.json so an empty club is never read as an empty injury list",
+   "source": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+  },
+  {
+   "id": "R-65",
+   "group": "Leaderboard",
+   "requirement": "REJECT ranking strategies by season-long ROI",
+   "status": "rejected",
+   "gate": "n/a - recorded so a plausible-looking shortcut is not re-proposed",
+   "clearing_number": "0 ROI figures on any leaderboard page - the build check counts them, and a single non-zero count is the violation",
+   "evidence": "data/governance.json 'leaderboard_rule'; no ROI figure is published anywhere on this site",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-66",
+   "group": "Data ops",
+   "requirement": "Archive weekly injury reports for past seasons",
+   "status": "delivered-partially",
+   "gate": "the live page offers a week selector for seasons back to 1965 and a per-week dated report article exists (EV-25); no archive is stored, so nothing multi-season is computable",
+   "clearing_number": ">=3 seasons x 18 weeks stored = 54 dated report entries before the designation-reliability test can start",
+   "evidence": "the selector range (2026 down to 1965) was read off the page and is recorded in data/official_reads.json read 1",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-67",
+   "group": "Governance",
+   "requirement": "Pre-register each strategy: definition frozen before results are seen",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "1 registered rule with a hash, 0 unregistered entries on any board",
+   "evidence": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md committed before any evaluation was run, and its hash recorded in data/prereg.json",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-68",
+   "group": "Governance",
+   "requirement": "Freeze a rule before it sees data; the commit hash is the registration",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "1 commit hash per rule, verifiable by anyone with git",
+   "evidence": "data/prereg.json - the hash is re-checked against the git history by engine/verify_site.py",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-69",
+   "group": "Governance",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "status": "blocked",
+   "gate": "one season of official results is available in this repo; a holdout season cannot be carved out of nothing",
+   "clearing_number": ">=3 seasons for 3-way split (today 1 usable: 2026, plus 2025 standings as a prior only)",
+   "evidence": "peer: nfl-book used the 2025 standings as a no-leakage prior; data/governance.json 'splits' records why a 3-way split is impossible today",
+   "evidence_note": "recorded as a gate, not as a defect in the repo",
+   "source": "https://www.nfl.com/standings/league/2025/REG"
+  },
+  {
+   "id": "R-70",
+   "group": "Owner decisions",
+   "requirement": "A suggestions section a reviewer can work through before anything is implemented",
+   "status": "delivered",
+   "gate": "the reviewer's verdict; nothing in this namespace is implemented on the strength of a suggestion",
+   "clearing_number": "1 verdict per suggestion (today 0 of 12)",
+   "evidence": "data/suggestions.json - each row carries options, cost, what it unblocks, and a blank verdict",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-71",
+   "group": "Owner decisions",
+   "requirement": "A clear list of questions, information and answers that must be settled before a decision, including how to find what is missing",
+   "status": "delivered",
+   "gate": "each question has a discovery route recorded; the answers stay blank until the route is walked",
+   "clearing_number": "1 answer per blocking question (today 3 of 24 answered from official reads this session)",
+   "evidence": "data/questions.json",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-72",
+   "group": "Owner decisions",
+   "requirement": "Executive summary of the important details, with no manual input from the owner",
+   "status": "delivered",
+   "gate": "nothing",
+   "clearing_number": "1 summary naming the four numbers a decision rests on",
+   "evidence": "EXECUTIVE_SUMMARY.md and pages/executive-summary.html",
+   "source": "https://www.nfl.com/injuries/"
+  }
+ ],
+ "status_totals_note": "recomputed and printed by engine/build_site.py at every build; if these two disagree the register was edited without rebuilding"
+}

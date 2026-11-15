@@ -311,26 +311,31 @@ NAV = [
         ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
         ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
     ]),
-    # Added 2026-11-15 by session arena/d941f3c1-own4 (nfl-readiness namespace, scope D1-D12):
+    # Added 2026-11-15 by session arena/d941f3c1-own4 (scope D1-D12). Namespace name note: this tree was
+# claimed and built as nfl-readiness/, then renamed to nfl-availability-desk/ at merge time because
+# session arena/e0ed20d1-own4 had already published nfl-readiness/ on main (its freeze commit 64a20e8
+# predates this session's claim commit). Nothing of theirs is overwritten; the two trees are siblings
+# and their index independently measured the same Week 10 report at 347 rows / 28 clubs / 171 injury
+# entries. See nfl-availability-desk/data/flags.json RF-18 and the COORDINATION.md completion record.
     # the decision-readiness layer. One row per requirement of the brief with the gate that blocks
     # it and the number that clears it, plus the Week 10 official availability capture (347 rows,
     # 28 club sections) reconciled against every other capture of the same page in this repo, the
     # intra-week designation delta, the frozen governance/gate set, and a pre-registration ledger
     # whose registration is a git commit. Added here rather than as a hand edit to index.html for
     # exactly the reason F-13 exists: hand-edited links do not survive a regeneration.
-    ("NFL Readiness · decision register (2026-11-15)", [
-        ("nfl-readiness/index.html", "NFL Readiness — decision-readiness register (72 rows)", "legacy"),
-        ("nfl-readiness/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
-        ("nfl-readiness/pages/availability.html", "NFL Readiness — Week 10 availability capture", "legacy"),
-        ("nfl-readiness/pages/snapshot-delta.html", "NFL Readiness — snapshot ledger &amp; delta", "legacy"),
-        ("nfl-readiness/pages/fixtures.html", "NFL Readiness — fixtures, venues &amp; standings", "legacy"),
-        ("nfl-readiness/pages/evidence.html", "NFL Readiness — official evidence log", "legacy"),
-        ("nfl-readiness/pages/questions.html", "NFL Readiness — questions &amp; answers (24)", "legacy"),
-        ("nfl-readiness/pages/suggestions.html", "NFL Readiness — suggestions board (decide first)", "legacy"),
-        ("nfl-readiness/pages/governance.html", "NFL Readiness — governance, gates &amp; pre-registration", "legacy"),
-        ("nfl-readiness/pages/repo-review.html", "NFL Readiness — repository review", "legacy"),
-        ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged for review (17)", "legacy"),
-        ("nfl-readiness/pages/sources.html", "NFL Readiness — source register", "legacy"),
+    ("NFL Availability Desk · decision register (2026-11-15)", [
+        ("nfl-availability-desk/index.html", "NFL Desk — decision-readiness register (72 rows)", "legacy"),
+        ("nfl-availability-desk/pages/executive-summary.html", "NFL Desk — executive summary", "legacy"),
+        ("nfl-availability-desk/pages/availability.html", "NFL Desk — Week 10 availability capture", "legacy"),
+        ("nfl-availability-desk/pages/snapshot-delta.html", "NFL Desk — snapshot ledger &amp; delta", "legacy"),
+        ("nfl-availability-desk/pages/fixtures.html", "NFL Desk — fixtures, venues &amp; standings", "legacy"),
+        ("nfl-availability-desk/pages/evidence.html", "NFL Desk — official evidence log", "legacy"),
+        ("nfl-availability-desk/pages/questions.html", "NFL Desk — questions &amp; answers (24)", "legacy"),
+        ("nfl-availability-desk/pages/suggestions.html", "NFL Desk — suggestions board (decide first)", "legacy"),
+        ("nfl-availability-desk/pages/governance.html", "NFL Desk — governance, gates &amp; pre-registration", "legacy"),
+        ("nfl-availability-desk/pages/repo-review.html", "NFL Desk — repository review", "legacy"),
+        ("nfl-availability-desk/pages/flagged.html", "⚑ NFL Desk — flagged for review (18)", "legacy"),
+        ("nfl-availability-desk/pages/sources.html", "NFL Desk — source register", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
