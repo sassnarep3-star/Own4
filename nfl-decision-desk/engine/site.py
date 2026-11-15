@@ -73,7 +73,7 @@ def shell(page_key, title, crumb, body, up=""):
     global SHELL
     up = UP or up
     if SHELL is None:
-        SHELL = open(os.path.join(ROOT, "assets", "_shell_head.html")).read()
+        SHELL = open(os.path.join(ROOT, "engine", "templates", "shell_head.tpl")).read()
     keys = ["ACT", "EXEC", "FX", "AV", "PR", "MD", "LD", "CR", "GV", "QU", "SG", "RV", "FL", "SR"]
     nav = dict((k, ' class="nav"' if k == page_key else ' class="nav"') for k in keys)
     tpl = SHELL.replace("{ACT}", "").replace("{EXEC}", "").replace("{FX}", "").replace("{AV}", "")
@@ -90,8 +90,9 @@ def shell(page_key, title, crumb, body, up=""):
         "SG": 'href="%spages/suggestions.html"' % up, "RV": 'href="%spages/repo-review.html"' % up,
         "FL": 'href="%spages/flagged.html"' % up, "SR": 'href="%spages/sources.html"' % up,
     }
-    tpl = tpl.replace(page_key and marker.get(page_key, "href=\"__nope__\""),
-                      'class="nav active" ' + marker[page_key]) if page_key else tpl
+    if page_key and page_key in marker:
+        tpl = tpl.replace('<a class="nav" ' + marker[page_key],
+                          '<a class="nav active" ' + marker[page_key])
     tpl = tpl.replace("<title>Dashboard · NFL Decision Desk</title>",
                       "<title>%s · NFL Decision Desk</title>" % esc(title))
     foot = ('<footer><b>Research notebook, not advice.</b> No wagering is offered. Staking '
