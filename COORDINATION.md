@@ -3174,3 +3174,50 @@ on S5 (`signal_metric` missing); post-hoc record baseline window corrected
 decision queue — a reviewer picks options before anything new is implemented. Suggested
 first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-line
 re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
+
+---
+
+## Session `arena/34b18dff-own4` — NFL Console: canonical integration layer + gap closure (claim, 2026-11-15 UTC)
+
+Session ID: `arena/34b18dff-own4` · Branch: `arena/34b18dff-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior
+session) · Base: `3e74fd3` (main, after PR #107).
+
+**Claim status:** claimed and pushed before implementation, per board protocol.
+
+**Survey at claim time:** 21 NFL namespaces are already merged and linked from the root nav
+(`nfl/`, `nfl-arena/`, `nfl-audit/`, `nfl-book/`, `nfl-command/`, `nfl-core/`, `nfl-decision/`,
+`nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-integration/`, `nfl-intel/`, `nfl-lab/`, `nfl-ledger/`,
+`nfl-lines/`, `nfl-market/`, `nfl-marketboard/`, `nfl-markets/`, `nfl-origination/`, `nfl-own/`,
+`nfl-price-snapshot/`, `nfl-quant/`, `nfl-research/`). Existing irregularity P-15 ("16 overlapping NFL
+namespaces in one repository") and open decisions SG-08 / D-1 ("pick one canonical workspace") are
+therefore NOT resolved. This session does not fork a twentieth research namespace: it builds the
+**canonical integration layer** the board says only a final integration session may own — one landing
+page, category subpages, a decision-readiness table with one row per requirement (gate + the number
+that would clear it), and the requirement→evidence cross-walk over the namespaces that already exist.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| C1 | Board claim + repo survey of all NFL namespaces and the requirement list | claimed | arena/34b18dff-own4 | `COORDINATION.md` (this entry) |
+| C2 | Fresh official captures (nfl.com standings, official Week 10/11 schedule, official game-centre pages) + immutable point-in-time ledger with raw hashes | claimed | arena/34b18dff-own4 | `nfl-console/data/raw/**`, `nfl-console/data/ledger.json` |
+| C3 | Decision-readiness table: one row per requirement, with the blocking gate and the number that would clear it | claimed | arena/34b18dff-own4 | `nfl-console/data/readiness.json` |
+| C4 | Requirement→workspace→evidence cross-walk (no silent duplication, no orphan requirement) | claimed | arena/34b18dff-own4 | `nfl-console/data/crosswalk.json` |
+| C5 | Control baselines (random picks, favourites-only) + proper-score skill panel with n and CI | claimed | arena/34b18dff-own4 | `nfl-console/data/baselines.json` |
+| C6 | Availability graph + depth-chart register + announced-starter evidence (official sources only; blank where unverified) | claimed | arena/34b18dff-own4 | `nfl-console/data/availability.json`, `.../depth_register.json` |
+| C7 | Weekly "what changed" diff (rank / rating / availability) between two dated official captures | claimed | arena/34b18dff-own4 | `nfl-console/data/weekly_diff.json` |
+| C8 | Price-data policy decision sheet (options, default, who decides) — published for the owner, not silently chosen | claimed | arena/34b18dff-own4 | `nfl-console/data/price_policy.json` |
+| C9 | Canonical static site: landing page + category subpages + Flagged for Review; every row source-linked | claimed | arena/34b18dff-own4 | `nfl-console/**` |
+| C10 | Line-by-line verifier (row source coverage, link integrity, blank-not-inferred policy, deterministic rebuild) + unit tests + CI gate | claimed | arena/34b18dff-own4 | `nfl-console/engine/**`, `nfl-console/tests/**`, `.github/workflows/nfl-console.yml` |
+| C11 | Executive summary | claimed | arena/34b18dff-own4 | `nfl-console/EXECUTIVE_SUMMARY.md` |
+| C12 | Final integration: re-verify combined data line by line, root nav (generator-owned, additive), PR → main → merge → Pages deploy confirmation | claimed | arena/34b18dff-own4 | `verification/build.py` (NAV, additive), `index.html`, `verified/**`, `COORDINATION.md` |
+
+**Scope rules:** peer namespaces are read and re-verified, never edited. Shared outputs are touched
+additively by the generator-owned NAV (`verification/build.py`) and by the append-only board. Every
+published value carries an official source link; anything that cannot be confirmed from an official
+source stays blank and is published on the Flagged for Review page.
+
+### Claim log
+
+- 2026-11-15 — Surveyed before claiming: no other session has an active claim on `main` (the seven open
+  PRs #29/#39/#43/#47/#56/#59/#93 are from closed sessions dated 2026-11-02..13 and are stale). Scope
+  claimed above; peer namespaces are read-only for this session.
