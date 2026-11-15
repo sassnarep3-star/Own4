@@ -1,0 +1,194 @@
+{
+ "dataset": "nfl_readiness_questions",
+ "title": "Questions, information and answers required before any decision can reasonably be made",
+ "built_utc": "2026-11-15T23:27:10Z",
+ "policy": "An answer is written only when the evidence for it was read this session and is cited. Everything else is §blank§ — published as a blank cell, never as a guess. 'discovery' names the concrete artefact or action that would produce the missing answer.",
+ "legend": {
+  "known": "What the evidence in hand actually establishes.",
+  "unknown": "What is still missing, stated so it can be tested.",
+  "answer": "Blank unless established. §blank§ renders as an unverified cell.",
+  "discovery": "The specific acquisition or measurement that would answer it."
+ },
+ "rows": [
+  {
+   "id": "Q01", "priority": "P0", "blocks": "A01, A02, A03, A05, C06, F09",
+   "question": "Where will market open and close prices come from?",
+   "known": "The NFL publishes kickoff time, network and venue on the Week 11 schedule page and publishes no line anywhere on the pages read this session.",
+   "unknown": "Whether the owner will license a sportsbook or data-vendor feed, and whether that licence permits republication of the numbers.",
+   "answer": "§blank§",
+   "discovery": "Name one licensed price vendor and confirm its republication terms in writing. Fallback if none: rename the product to 'fair-line only' and publish a non-market baseline instead.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "Q02", "priority": "P0", "blocks": "A01, C05, C06, G07",
+   "question": "What price is actually obtainable for a straight-up side pick at the moment we would stake it?",
+   "known": "All staking figures in the repository assume -110 (flag FB-02). That is an assumption, not an observation.",
+   "unknown": "The real price at the moment of stake, and whether it is still available after the forecast is published.",
+   "answer": "§blank§",
+   "discovery": "Log a timestamped price from the licensed source at the same instant as each forecast. Until then no ROI may be published as if it were real.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/flags.json"
+  },
+  {
+   "id": "Q03", "priority": "P1", "blocks": "B02",
+   "question": "Is the backtest corpus exactly the frozen 136 games, or the 137 now in the file?",
+   "known": "Pre-registration names 136 games; results_feed.json holds 137. The extra game is real and official (Week 10 settled after registration).",
+   "unknown": "Whether the owner wants the corpus re-frozen at every settlement (a moving registration) or pinned once (a fixed registration with a trivially stale tail).",
+   "answer": "§blank§",
+   "discovery": "Re-freeze with a dated commit hash and publish the hash on the strategy page, or state the corpus rule as 'all settled games as of capture'.",
+   "source_url": "https://www.nfl.com/scores/2026/week-10"
+  },
+  {
+   "id": "Q04", "priority": "P1", "blocks": "A02, A03",
+   "question": "What is the model's fair line versus the market line, fixture by fixture?",
+   "known": "Fair lines exist for 13 of 13 Week 11 fixtures in three separate market columns.",
+   "unknown": "The market term. With no price source the difference cannot exist, so the column is blank by policy, not by omission.",
+   "answer": "§blank§",
+   "discovery": "Blocked on Q01. Do not substitute a proxy line: a proxy would silently become the market.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "Q05", "priority": "P1", "blocks": "C05, C07, G07",
+   "question": "Which strategies are genuinely skill-based rather than lucky?",
+   "known": "0 of 5 registered strategies clears every applicable gate. Permutation p is reported as 0/500 on n=105 forecasts, which is a resolution floor rather than evidence.",
+   "unknown": "Whether any strategy survives a second independent season and a multiplicity adjustment over all trials.",
+   "answer": "§blank§",
+   "discovery": "Report p as '< 0.002' and add a second season of official results before answering this at all.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/backtest.json"
+  },
+  {
+   "id": "Q06", "priority": "P0", "blocks": "E11, E12, E14, E16, E21, E22",
+   "question": "At what depth do replacements actually sit (2nd, 3rd, 4th string)?",
+   "known": "2 of 32 clubs probed this session. Green Bay publishes a structured, dated table (44 named players, jersey numbers prefixed, 'Unofficial, Nov. 10, 2026'). Houston publishes an image with no table and no date.",
+   "unknown": "The other 30 clubs. No league-wide depth endpoint was found on nfl.com.",
+   "answer": "§blank§",
+   "discovery": "Probe the remaining 30 club depth pages with the same two-part test (is there a table in page text? is there a date?). Publish the per-club result before any depth feature.",
+   "source_url": "https://www.packers.com/team/depth-chart/"
+  },
+  {
+   "id": "Q07", "priority": "P2", "blocks": "E06, E18",
+   "question": "How much do officially reported injuries actually move the line?",
+   "known": "Week 10 has 70 players designated Out league-wide across 28 club sections, and 138 named inactives.",
+   "unknown": "The price response. Measuring it needs both the designation and the price, and the price does not exist yet.",
+   "answer": "§blank§",
+   "discovery": "Blocked on Q01. The designations are ready to join the moment prices exist.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q08", "priority": "P0", "blocks": "C05",
+   "question": "Should rewards be paid at all before prices are verified?",
+   "known": "The leaderboard already awards 0 of a 1,000-point pool while the price gate is blocked.",
+   "unknown": "Whether the owner accepts a skill-only (proper-score) competition with no monetary stake as the launch product.",
+   "answer": "§blank§",
+   "discovery": "Owner decision. A skill-only launch is publishable today; any funded version is not.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json"
+  },
+  {
+   "id": "Q09", "priority": "P2", "blocks": "C05, C07",
+   "question": "Is an assumed -110 price correct for cross-game parlays?",
+   "known": "It is assumed. Standard parlay pricing multiplies marginal prices and applies an operator margin, so -110 on each leg is not the same as -110 on the parlay.",
+   "unknown": "The operator's actual parlay price, void rules and push rules.",
+   "answer": "§blank§",
+   "discovery": "Obtain the operator's published rules document. Until then parlay staking numbers must not be shown.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/flags.json"
+  },
+  {
+   "id": "Q10", "priority": "P0", "blocks": "G03, every future session",
+   "question": "Which single NFL dashboard is canonical?",
+   "known": "19 NFL-focused site trees exist on main. Each new session adds one, because there is no rule saying where new work must land.",
+   "unknown": "Which one the owner will open on a Sunday.",
+   "answer": "§blank§",
+   "discovery": "Owner picks one, or picks the decision-readiness page as the front door and everything else as archive.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+  },
+  {
+   "id": "Q11", "priority": "P2", "blocks": "B04, G07",
+   "question": "Is home-field advantage still real in 2026?",
+   "known": "The fitted value in the current model is +0.15 points, far below the historical norm, and the repository flags this itself (FB-12).",
+   "unknown": "Whether that is a real 2026 effect, a small-sample artefact, or a model-specification problem. n=137 games cannot separate these.",
+   "answer": "§blank§",
+   "discovery": "Fit on multiple seasons with a season-varying HFA term, then compare. Single-season HFA is not identifiable at this n.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/model_card.json"
+  },
+  {
+   "id": "Q12", "priority": "P1", "blocks": "G08, C07",
+   "question": "Do player props exist anywhere with official prices and official player logs?",
+   "known": "No. Flag FB-05 permanently blocks the prop strategy for this reason.",
+   "unknown": "Whether a licensed source carries player-level prices, and whether the official player logs are downloadable for personal research.",
+   "answer": "§blank§",
+   "discovery": "Same vendor decision as Q01, plus a terms-of-use read on player statistics.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/flags.json"
+  },
+  {
+   "id": "Q13", "priority": "P0", "blocks": "C05, D08",
+   "question": "What is the legal position on publishing originated lines and paying rewards?",
+   "known": "Nothing in the repository is legal advice, and no terms-of-use read on the official data sources has been recorded.",
+   "unknown": "Whether republishing row-level official data is permitted, and whether a rewards pool triggers a licensing requirement in the owner's jurisdiction.",
+   "answer": "§blank§",
+   "discovery": "A written review. Until it exists, keep row-level data behind the public analysis layer split (D08).",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "Q14", "priority": "P1", "blocks": "F01, F02",
+   "question": "Are Week 11 kickoff times and venues still as scheduled?",
+   "known": "The league published a dated Week 11 change on Nov. 9, 2026 moving JAX@NYG to 4:25 p.m. ET and PIT@PHI to 1:00 p.m. ET. The live schedule page agrees with the announcement on all 13 fixtures.",
+   "unknown": "Whether more changes land before Nov 19. The venue field is also unreliable: MIN@SF is listed on the schedule page with a SoFi Stadium hotel link but its game centre says Mexico City / Estadio Banorte.",
+   "answer": "§blank§",
+   "discovery": "Re-read the schedule page and its announcements page every Monday until kickoff, and prefer the game centre over the schedule page for venue.",
+   "source_url": "https://www.nfl.com/news/week-11-schedule-change"
+  },
+  {
+   "id": "Q15", "priority": "P1", "blocks": "C04, G07",
+   "question": "Does the model beat a naive record-based picker out of sample?",
+   "known": "A favorites-by-record baseline was evaluated post hoc at 0.6346 per-week accuracy (flag FB-14 records that it was not pre-registered).",
+   "unknown": "Whether that margin survives pre-registration, more weeks, and a proper-score metric rather than accuracy.",
+   "answer": "§blank§",
+   "discovery": "Pre-register the baseline rule with a commit hash, then rerun. A post-hoc baseline cannot settle it.",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/backtest.json"
+  },
+  {
+   "id": "Q16", "priority": "P0", "blocks": "E03, E07, E08, E17",
+   "question": "Does an official inactive list exist for every game, and can it be captured on a schedule?",
+   "known": "Yes for the Sunday slate: nfl.com published one dated article naming 138 inactive players across 24 club sections for Week 10, and it states the venue for 12 games. Two club lists (PIT, CIN) were still empty at capture because Sunday Night Football inactives publish about 90 minutes before kickoff.",
+   "unknown": "Whether the same article stream covers Thursday and Monday games with the same reliability, and whether it is retrievable after the fact.",
+   "answer": "§blank§",
+   "discovery": "Capture the equivalent article for a Thursday and a Monday game and check that all four clubs are named.",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "Q17", "priority": "P1", "blocks": "E01, E02, E17",
+   "question": "Do the official Game Books name the actual starters?",
+   "known": "Every game centre links a 'Download Game Book (PDF)' on a static.www.nfl.com URL. One link was observed on the WAS@NYG Week 10 page.",
+   "unknown": "Whether the PDF is machine-readable, whether it names starters on both sides, and whether past weeks remain available.",
+   "answer": "§blank§",
+   "discovery": "Fetch and parse one Game Book PDF. That single test decides whether the availability graph can ever be completed.",
+   "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+  },
+  {
+   "id": "Q18", "priority": "P2", "blocks": "E08",
+   "question": "Do blank game-status cells mean 'available'?",
+   "known": "No, and this session measured it rather than assuming. Of 138 named inactives, 68 also appear in the Week 10 report. Of those, 47 are Out, 4 Doubtful, 15 Questionable and 2 carry a blank status. The other 70 named inactives do not appear in the weekly report at all.",
+   "unknown": "The denominator: how many blank-status players were active. That requires the active list, which no source read this session publishes.",
+   "answer": "§blank§",
+   "discovery": "Join Game Book participation or an official snap count to the report. Without the active counterpart a blank status must stay 'unknown', never 'available'.",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "Q19", "priority": "P2", "blocks": "F03, F04",
+   "question": "Does the NFL publish a roof or surface designation per stadium?",
+   "known": "Not on the pages read this session. Game centres publish a stadium NAME only, and only for fixtures that render a Game Info block.",
+   "unknown": "Whether an official club or league page publishes roof type and surface.",
+   "answer": "§blank§",
+   "discovery": "Probe the 32 club stadium pages for roof and surface fields before designing any weather feature.",
+   "source_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+  },
+  {
+   "id": "Q20", "priority": "P2", "blocks": "E23, E22",
+   "question": "How should a replacement's depth be valued when the club publishes no depth chart at all?",
+   "known": "20 of 32 clubs are unprobed, 1 of 2 probed is image-only, and the brief forbids valuing depth from jersey number, experience or salary.",
+   "unknown": "Whether snap counts have an official source; the brief offers this as the alternative route.",
+   "answer": "§blank§",
+   "discovery": "Search for an official snap-count publication. If none exists, the depth feature must stay unbuilt rather than approximated.",
+   "source_url": "https://www.houstontexans.com/team/depth-chart"
+  }
+ ]
+}

@@ -1,0 +1,120 @@
+{
+ "dataset": "nfl_readiness_flags",
+ "title": "Flagged for Review — irregularities and unverified items found this session (none block publication)",
+ "built_utc": "2026-11-15T23:27:10Z",
+ "policy": "Every row names what is wrong, what the official source actually says, and why it is not blocking. Nothing here is inferred: a flag is either a sourced contradiction or a stated absence of a published value.",
+ "rows": [
+  {
+   "id": "R-01",
+   "severity": "medium",
+   "title": "Peer standings snapshot is stale on all 32 clubs",
+   "detail": "nfl-book/data/standings_2026-11-14.json holds a 2026-11-14 pre-kickoff capture. The official table read 2026-11-15T23:27Z includes nine additional Week 10 results. Every one of the 32 clubs differs on at least one of W/L/T/PF/PA. The peer values were correct when captured; they are now superseded. Nothing was invented — this is staleness, not fabrication.",
+   "why_not_blocking": "The task board already flags the snapshot as dated. The fix is a re-capture job, not a data repair.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R-02",
+   "severity": "high",
+   "title": "The 'no inactive list exists' premise is wrong — the source is published and was never ingested",
+   "detail": "nfl.com publishes a dated inactives article naming every inactive player per club. For Week 10 it carries 24 club sections and 138 named players, plus the venue string for 12 games. The repository treats the active list as unobtainable (flag FB-06). The gap is ingestion, not availability, and that changes the fix from 'impossible' to 'a parser'.",
+   "why_not_blocking": "It is additive. No published number depends on it.",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "R-03",
+   "severity": "medium",
+   "title": "Venue is not available from the game centre for every fixture, and two sources disagree",
+   "detail": "Of five Week 11 game centres probed, three publish a Location + Stadium block and two render none at all. Separately, MIN@SF is listed on the schedule page with a SoFi Stadium hotel link while its game centre says MEXICO CITY / ESTADIO BANORTE. The game centre governs; the schedule page's string is a ticketing artefact, not a venue.",
+   "why_not_blocking": "Where the venue is published it is published unambiguously. The two missing blocks are an absence to flag, not a value to guess.",
+   "source_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+  },
+  {
+   "id": "R-04",
+   "severity": "medium",
+   "title": "The injury-report row count in the brief does not reproduce, and neither does the second one",
+   "detail": "The brief quotes 254 rows and 4 no-injury sections, then 279 rows and 2 sections, as successive live reads. Read in full today (8 of 8 chunks) the page has 28 club sections — exactly the 28 clubs that played Week 10 — and 347 player rows, with no empty section at all. A live page cannot be quoted as a frozen count; only a dated capture can.",
+   "why_not_blocking": "Every figure on this site carries its capture clock. The underlying requirement is the capture archive, which is tracked separately.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-05",
+   "severity": "medium",
+   "title": "A blank game status does not mean available, and this is now measured rather than assumed",
+   "detail": "138 named inactives were joined to the Week 10 report by club and normalised name. 68 join; of those 47 are Out, 4 Doubtful, 15 Questionable and 2 carry a blank status. The other 70 named inactives do not appear in the weekly report at all. The converse question — how many blank-status players were active — cannot be answered from either source, because no active list is published.",
+   "why_not_blocking": "No model feature consumes the label yet (flag FB-11), so nothing is poisoned.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R-06",
+   "severity": "low",
+   "title": "Depth-chart availability is club-specific, not league-wide, and one of two probes is unusable",
+   "detail": "Houston's depth chart renders as a single image: the page text contains 'Unofficial Depth Chart', one static image and no player table and no date. Green Bay's renders as a full structured table (44 named players) with jersey numbers prefixed to every name and a trailing 'Unofficial, Nov. 10, 2026'. So flag FB-07 ('no official depth chart') is half right: the route works for some clubs and not others, and 30 clubs remain unprobed.",
+   "why_not_blocking": "No depth feature ships on 1 of 32 clubs. The probe result is the deliverable.",
+   "source_url": "https://www.houstontexans.com/team/depth-chart"
+  },
+  {
+   "id": "R-07",
+   "severity": "low",
+   "title": "A name-join defect was found in this session's own code and fixed before publication",
+   "detail": "The first draft of the inactives-to-report join stripped generational suffixes and then took the last token, which mapped 'Deebo Samuel Sr.' to 'sr' and produced a false match against a different 49er. The published join removes the suffix from the token list before selecting the surname and additionally requires a first-name match when two players in one club share a surname. The corrected join moves the joinable count from 65 to 68 and the outlier cells from 3 to 2.",
+   "why_not_blocking": "It was caught by inspection during this session and the corrected numbers are the ones published.",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "R-08",
+   "severity": "low",
+   "title": "Two club inactive lists were empty at capture, and that is a timing artefact",
+   "detail": "The Week 10 inactives article names players for 24 of 26 club sections. Pittsburgh and Cincinnati are recorded with empty lists because Sunday Night Football inactives publish roughly 90 minutes before an 8:20 p.m. ET kickoff, after this capture. The rows are recorded as empty, never as 'zero inactives'.",
+   "why_not_blocking": "An empty row is honest. A zero would be a fabrication.",
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "R-09",
+   "severity": "low",
+   "title": "Three Week 10 games were still in progress at capture and are excluded from every settled comparison",
+   "detail": "LA@AZ (34-6, Q4 14:55), SEA@LV (21-10, Q4 10:41) and SF@DAL (24-19, Q3 08:36) were live at 2026-11-15T23:27Z. They are recorded with their in-progress state and excluded from the 9 settled finals used for the results check. Any later read will show different finals and that is expected, not a contradiction.",
+   "why_not_blocking": "The exclusion is explicit and the in-progress scores are labelled as such.",
+   "source_url": "https://www.nfl.com/scores/2026/week-10"
+  },
+  {
+   "id": "R-10",
+   "severity": "medium",
+   "title": "The backtest corpus has drifted from its own pre-registration by one game",
+   "detail": "The pre-registration names 136 games; results_feed.json now holds 137 because a Week 10 game settled after registration. The registration and the artefact no longer match, which is the specific failure pre-registration is meant to prevent. The extra game is real and official; the defect is procedural.",
+   "why_not_blocking": "No published metric is computed from the drift; the open snapshot records train_through_week=9 explicitly.",
+   "source_url": "https://www.nfl.com/scores/2026/week-10"
+  },
+  {
+   "id": "R-11",
+   "severity": "low",
+   "title": "Roof and surface designations were not found on any page read this session",
+   "detail": "Game centres publish a stadium NAME only, and only for fixtures that render a Game Info block. No roof type and no playing-surface field appeared on the schedule page, the injury page, the scores page, the inactives article or any of the five game centres probed. The stadium/weather feature set is therefore blocked on an unlocated source, not on engineering.",
+   "why_not_blocking": "Nothing is published that depends on it.",
+   "source_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+  },
+  {
+   "id": "R-12",
+   "severity": "low",
+   "title": "This session re-reads 5 official source groups, not the whole archive",
+   "detail": "The prior 26 namespaces publish thousands of rows that this session did not re-read line by line. The independent checks here cover standings, the Week 11 slate, the Week 10 injury report in full, the Week 10 inactives in full, the Week 10 scoreboard, five game centres and two club depth pages. Any number outside that set is inherited, not re-verified, and is labelled as such where it appears.",
+   "why_not_blocking": "Scope is stated explicitly on the verification page so no reader over-reads the coverage.",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "R-13",
+   "severity": "low",
+   "title": "One announced starter is the entire starter-identity dataset",
+   "detail": "Drew Lock is the only player this session can call a named starter with a dated official source (a Nov. 2026 article stating he has no injury designation and will start). Sam Darnold is Out in the same game with rib and quadricep injuries. That is one confirmed replacement out of the roughly 70 Out players in Week 10.",
+   "why_not_blocking": "Replacement depth is published only where an official article names it, and 1 row is the honest count.",
+   "source_url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders"
+  },
+  {
+   "id": "R-14",
+   "severity": "high",
+   "title": "The live injury page rolls to the next week's fixture list while still showing the previous week's report",
+   "detail": "At capture the page heading read 'Injuries - WEEK 10' and the player tables were Week 10 content, but the fixture headers around them were already the Week 11 matchups. Two exact identities hold, and they invert: the six clubs in the report that are NOT on the Week 11 schedule (ATL, CLE, GB, LA, NE, SEA) are precisely the official Week 11 bye list, and the four clubs on the Week 11 schedule that are absent from the report (CHI, DEN, PHI, TB) are precisely the official Week 10 bye list. A scraper that keys players to the fixture header instead of to the club would silently attribute Week 10 injuries to Week 11 matchups.",
+   "why_not_blocking": "This session's transcription keys every row to the CLUB, never to the fixture header, and the verifier asserts both bye-list identities on every build.",
+   "source_url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}
