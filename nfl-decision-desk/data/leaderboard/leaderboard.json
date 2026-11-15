@@ -1,0 +1,196 @@
+{
+ "_meta": {
+  "built_utc": "2026-11-15T23:24:27Z",
+  "n_games_scored": 104,
+  "weeks_scored": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9
+  ],
+  "signal_floor": 300,
+  "policy": [
+   "backtest numbers never appear on the live leaderboard - this file IS the backtest table and is labelled as such everywhere it is rendered",
+   "rank is by benchmark-relative Brier skill with a weekly-cluster lower bound and a Benjamini-Hochberg adjustment across all trials in this workspace",
+   "win rate and ROI are published but never used to rank",
+   "control baselines run on every build so skill can be separated from luck"
+  ],
+  "scored_sample_warning": "n=104 out-of-sample games; the pre-registered floor for any qualification is 300, so ZERO strategies can qualify at this sample regardless of their scores"
+ },
+ "signal_leaderboard": [
+  {
+   "id": "B1",
+   "strategy": "benchmark: vig-free closing market",
+   "kind": "benchmark",
+   "prereg": null,
+   "n": 104,
+   "brier": 0.214673,
+   "brier_base_rate_same_sample": 0.24963,
+   "brier_skill_vs_base": 0.14003,
+   "skill_cluster_lower_95": 0.00863,
+   "skill_cluster_upper_95": 0.27986,
+   "permutation_p_one_sided": 0.0005,
+   "eligible": false,
+   "blocked_by": "n < 300 (pre-registered floor)",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "bh_q": 0.0025,
+   "significant_after_bh": true,
+   "signal_rank": 1
+  },
+  {
+   "id": "C3",
+   "strategy": "control: climatology base rate",
+   "kind": "control",
+   "prereg": null,
+   "n": 104,
+   "brier": 0.24963,
+   "brier_base_rate_same_sample": 0.24963,
+   "brier_skill_vs_base": -0.0,
+   "skill_cluster_lower_95": -0.06125,
+   "skill_cluster_upper_95": -0.0,
+   "permutation_p_one_sided": 1.0,
+   "eligible": false,
+   "blocked_by": "n < 300 (pre-registered floor)",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "bh_q": 1.0,
+   "significant_after_bh": false,
+   "signal_rank": 2
+  },
+  {
+   "id": "C1",
+   "strategy": "control: coin flip",
+   "kind": "control",
+   "prereg": null,
+   "n": 104,
+   "brier": 0.25,
+   "brier_base_rate_same_sample": 0.24963,
+   "brier_skill_vs_base": -0.00148,
+   "skill_cluster_lower_95": -0.0708,
+   "skill_cluster_upper_95": 0.0,
+   "permutation_p_one_sided": 1.0,
+   "eligible": false,
+   "blocked_by": "n < 300 (pre-registered floor)",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "bh_q": 1.0,
+   "significant_after_bh": false,
+   "signal_rank": 3
+  },
+  {
+   "id": "S1",
+   "strategy": "PR-01 team-strength shadow baseline (side)",
+   "kind": "model",
+   "prereg": "PR-01",
+   "n": 104,
+   "brier": 0.252523,
+   "brier_base_rate_same_sample": 0.24963,
+   "brier_skill_vs_base": -0.01159,
+   "skill_cluster_lower_95": -0.11608,
+   "skill_cluster_upper_95": 0.02501,
+   "permutation_p_one_sided": 0.16392,
+   "eligible": false,
+   "blocked_by": "n < 300 (pre-registered floor)",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "bh_q": 0.4098,
+   "significant_after_bh": false,
+   "signal_rank": 4
+  },
+  {
+   "id": "C2",
+   "strategy": "control: always home",
+   "kind": "control",
+   "prereg": null,
+   "n": 104,
+   "brier": 0.254423,
+   "brier_base_rate_same_sample": 0.24963,
+   "brier_skill_vs_base": -0.0192,
+   "skill_cluster_lower_95": -0.13067,
+   "skill_cluster_upper_95": -0.00012,
+   "permutation_p_one_sided": 1.0,
+   "eligible": false,
+   "blocked_by": "n < 300 (pre-registered floor)",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "bh_q": 1.0,
+   "significant_after_bh": false,
+   "signal_rank": 5
+  }
+ ],
+ "staking_table": [
+  {
+   "id": "S1",
+   "strategy": "PR-01 team-strength shadow baseline (side)",
+   "n_bets": 104,
+   "wins": 54,
+   "win_rate": 0.5192,
+   "win_rate_wilson_lo": 0.4242,
+   "win_rate_wilson_hi": 0.6128,
+   "assumed_price": "-110 (assumption, not an observed price)",
+   "roi_hypothetical": -0.0088,
+   "ranks_alone": false,
+   "why_not_ranked": "a staking run at an assumed price cannot distinguish skill from a lucky streak, and no verified price exists to compute CLV or real ROI. This table is published to show the number, not to rank it.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  }
+ ],
+ "luck_panel": [
+  {
+   "id": "S1",
+   "strategy": "PR-01 team-strength shadow baseline (side)",
+   "n": 104,
+   "correct": 54,
+   "expected_by_luck": 58.488,
+   "observed_minus_luck": -4.488,
+   "luck_pct_of_observed": 108.31,
+   "p_luck_at_least_this_good": 0.8413,
+   "p_luck_at_least_this_bad": 0.2122,
+   "reading": "the model's hit count is INSIDE the range that its own probabilities produce by chance; not evidence of skill",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  }
+ ],
+ "demotion_gate": {
+  "_meta": {
+   "rule": "a strategy returns from LIVE to PAPER automatically when ANY condition below fires; no human discretion, no averaging of conditions",
+   "evaluated_at_rows": 104,
+   "current_live_strategies": 0,
+   "note": "nothing is LIVE, so the gate is evaluated on zero strategies. The gate is still published and machine-checked so it cannot be waived later."
+  },
+  "conditions": [
+   {
+    "code": "D1",
+    "condition": "rolling-20-game cluster lower bound of Brier skill <= 0",
+    "action": "LIVE -> PAPER",
+    "fired_now": null,
+    "why": "a live strategy that stops beating climatology is a demoted strategy"
+   },
+   {
+    "code": "D2",
+    "condition": "calibration slope outside [0.8, 1.25] on >= 100 games",
+    "action": "LIVE -> PAPER",
+    "fired_now": null,
+    "why": "miscalibration destroys stake sizing before it destroys the average"
+   },
+   {
+    "code": "D3",
+    "condition": "any input feed stale beyond 24h at kickoff",
+    "action": "LIVE -> PAPER",
+    "fired_now": null,
+    "why": "a correct model on stale availability is a wrong model"
+   },
+   {
+    "code": "D4",
+    "condition": "realised ROI below the lower edge of the pre-registered interval",
+    "action": "LIVE -> PAPER",
+    "fired_now": null,
+    "why": "published so a bad staking run cannot be called variance forever"
+   }
+  ],
+  "fired_today": [],
+  "evaluation_available": false,
+  "why_not_evaluable": "no strategy holds LIVE status, and no verified price exists for D4"
+ },
+ "qualified_count": 0,
+ "reward_units_available": 1000,
+ "reward_units_awarded": 0,
+ "reward_policy": "reward units are escrowed until a strategy clears G1-G4 AND holds LIVE status. 0 of 1000 awarded."
+}

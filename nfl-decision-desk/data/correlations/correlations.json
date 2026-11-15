@@ -1,0 +1,217 @@
+{
+ "_meta": {
+  "built_utc": "2026-11-15T23:24:27Z",
+  "policy": [
+   "every value carries n",
+   "every value carries its source",
+   "values that cannot be computed are blank with a named blocker",
+   "no correlation is quoted from memory"
+  ],
+  "computed": 5,
+  "blank_with_reason": 3
+ },
+ "correlations": [
+  {
+   "id": "CR-01",
+   "question": "Does the closing spread predict the final home margin?",
+   "n": 136,
+   "r": 0.436,
+   "r_ci95": [
+    0.289,
+    0.563
+   ],
+   "p_two_sided": 0.0,
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "inputs": "officially sourced / labelled third-party archive; see source column",
+   "note": "the market's own coherence check; r near 0 would mean the archive's sign is wrong",
+   "r_trimmed_5pct": 0.3922,
+   "x_mode_share": 0.11,
+   "x_groups": null,
+   "n_trimmed": 122,
+   "robust": true,
+   "robustness_note": null,
+   "caveat": "single season; 136 games",
+   "verified": true
+  },
+  {
+   "id": "CR-02",
+   "question": "Does the closing total predict the actual combined score?",
+   "n": 136,
+   "r": 0.3773,
+   "r_ci95": [
+    0.223,
+    0.513
+   ],
+   "p_two_sided": 1e-05,
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "inputs": "officially sourced / labelled third-party archive; see source column",
+   "note": "136 games; the total is harder to price than the side and this quantifies that",
+   "r_trimmed_5pct": 0.3121,
+   "x_mode_share": 0.096,
+   "x_groups": null,
+   "n_trimmed": 122,
+   "robust": true,
+   "robustness_note": null,
+   "caveat": "a low r here is expected and is not an error",
+   "verified": true
+  },
+  {
+   "id": "CR-03",
+   "question": "Is our fair spread a repackaging of the market number?",
+   "n": 104,
+   "r": 0.2533,
+   "r_ci95": [
+    0.064,
+    0.425
+   ],
+   "p_two_sided": 0.00949,
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "inputs": "officially sourced / labelled third-party archive; see source column",
+   "note": "the single most important anti-fraud check on this site: if r were ~1.0 our 'own' line would be a copy, not an origination",
+   "r_trimmed_5pct": 0.2482,
+   "x_mode_share": 0.135,
+   "x_groups": null,
+   "n_trimmed": 94,
+   "robust": true,
+   "robustness_note": null,
+   "caveat": "computed after the walk-forward model saw only prior weeks",
+   "verified": true
+  },
+  {
+   "id": "CR-04",
+   "question": "Does rest differential correlate with home margin?",
+   "n": 120,
+   "r": -0.4257,
+   "r_ci95": [
+    -0.562,
+    -0.267
+   ],
+   "p_two_sided": 0.0,
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "inputs": "officially sourced / labelled third-party archive; see source column",
+   "note": "rest is derived arithmetically from the archived official gamedates, so both inputs are traceable",
+   "r_trimmed_5pct": -0.3343,
+   "x_mode_share": 0.617,
+   "x_groups": [
+    {
+     "x_group": "+0",
+     "n": 74,
+     "mean_y": -1.622
+    },
+    {
+     "x_group": "+1",
+     "n": 11,
+     "mean_y": 1.545
+    },
+    {
+     "x_group": "+3",
+     "n": 8,
+     "mean_y": -7.875
+    },
+    {
+     "x_group": "-1",
+     "n": 3,
+     "mean_y": 3.333
+    },
+    {
+     "x_group": "-3",
+     "n": 8,
+     "mean_y": 9.5
+    },
+    {
+     "x_group": "<= -4",
+     "n": 9,
+     "mean_y": 15.778
+    },
+    {
+     "x_group": ">= +4",
+     "n": 7,
+     "mean_y": -10.714
+    }
+   ],
+   "n_trimmed": 108,
+   "robust": false,
+   "robustness_note": "x is a GROUP VARIABLE, not a continuous one: 62% of the n=120 observations share the single value 0. The Pearson r is dominated by the small tail groups listed alongside it. Read the group means and their n, not the r.",
+   "caveat": "n is smaller than 136 because week-1 clubs have no prior game",
+   "verified": true
+  },
+  {
+   "id": "CR-05",
+   "question": "Across clubs, are points scored and points conceded correlated?",
+   "n": 32,
+   "r": -0.2061,
+   "r_ci95": [
+    -0.518,
+    0.154
+   ],
+   "p_two_sided": 0.25781,
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "inputs": "officially sourced / labelled third-party archive; see source column",
+   "note": "32 clubs; a near-zero r supports modelling offence and defence separately, a strong negative r would support a single strength axis",
+   "r_trimmed_5pct": -0.1381,
+   "x_mode_share": 0.062,
+   "x_groups": null,
+   "n_trimmed": 28,
+   "robust": true,
+   "robustness_note": null,
+   "caveat": "club-level n=32, so the interval is wide by construction",
+   "verified": true
+  },
+  {
+   "id": "CR-06",
+   "question": "Does injury designation predict snap share?",
+   "n": 0,
+   "r": null,
+   "r_ci95": [
+    null,
+    null
+   ],
+   "p_two_sided": null,
+   "source_url": "https://www.nfl.com/injuries/",
+   "inputs": "NOT AVAILABLE",
+   "note": "requires a per-player snap-count feed joined to designations. The official injury page read this session carries no snap counts and the repository holds no snap-count archive.",
+   "caveat": null,
+   "verified": false,
+   "blocked_by": "no official snap-count archive"
+  },
+  {
+   "id": "CR-07",
+   "question": "Does a backup replacing a starter cost points?",
+   "n": 0,
+   "r": null,
+   "r_ci95": [
+    null,
+    null
+   ],
+   "p_two_sided": null,
+   "source_url": "https://www.nfl.com/injuries/",
+   "inputs": "NOT AVAILABLE",
+   "note": "requires (a) a confirmed inactive list and (b) a depth rank per club. The official injury table has no depth column and 6 of its rows carry a game designation.",
+   "caveat": null,
+   "verified": false,
+   "blocked_by": "no inactive list + no depth rank"
+  },
+  {
+   "id": "CR-08",
+   "question": "Are same-game parlay legs dependent?",
+   "n": 0,
+   "r": null,
+   "r_ci95": [
+    null,
+    null
+   ],
+   "p_two_sided": null,
+   "source_url": "https://github.com/nflverse/nfldata",
+   "inputs": "NOT AVAILABLE",
+   "note": "player-level outcomes are not in the vendored archive, and no price source exists for legs. Publishing a dependence estimate here would be fabrication.",
+   "caveat": null,
+   "verified": false,
+   "blocked_by": "no player-level official feed, no leg prices"
+  }
+ ],
+ "warnings": [
+  "n=136 is one season. A correlation that survives one season has not been shown to survive another.",
+  "CR-03 is a fraud check, not a performance claim.",
+  "Multiple comparisons: 5 computed values at alpha=0.05 implies ~0.25 false positives by chance. Treat any single p as descriptive."
+ ]
+}

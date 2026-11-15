@@ -104,6 +104,26 @@ NAV = [
         ("index.html", "Dashboard", "dash"),
         ("verified/executive-summary.html", "Executive summary", "summary"),
     ]),
+    # Added 2026-11-15 by session arena/e0ed20d1-own4 (additive; superset-only edit).
+    # The NFL Decision Desk is the workspace that publishes a decision-readiness table for
+    # every requirement line, so it is surfaced ahead of the 21 older NFL namespaces. The
+    # older group below is untouched: this adds a group, it does not remove or reorder one.
+    ("NFL Decision Desk · 2026-11-15", [
+        ("nfl-decision-desk/index.html", "Readiness dashboard (start here)", "legacy"),
+        ("nfl-decision-desk/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-desk/pages/fixtures.html", "Results corpus &amp; fixture context", "legacy"),
+        ("nfl-decision-desk/pages/availability.html", "Availability &amp; injuries", "legacy"),
+        ("nfl-decision-desk/pages/prices.html", "Prices, own lines &amp; residual", "legacy"),
+        ("nfl-decision-desk/pages/model.html", "Model: probability + inputs", "legacy"),
+        ("nfl-decision-desk/pages/leaderboard.html", "Leaderboard, gates &amp; luck panel", "legacy"),
+        ("nfl-decision-desk/pages/correlations.html", "Correlations with n", "legacy"),
+        ("nfl-decision-desk/pages/governance.html", "Pre-registration &amp; six gates", "legacy"),
+        ("nfl-decision-desk/pages/questions.html", "Questions register (22)", "legacy"),
+        ("nfl-decision-desk/pages/suggestions.html", "Suggestions (18, unverified verdicts)", "legacy"),
+        ("nfl-decision-desk/pages/repo-review.html", "Repo review &amp; irregularities", "legacy"),
+        ("nfl-decision-desk/pages/flagged.html", "⚑ NFL Decision Desk — flagged for review", "legacy"),
+        ("nfl-decision-desk/pages/sources.html", "Sources read this session", "legacy"),
+    ]),
     ("Official data · 2026-11-05", [
         ("verified/standings.html", "Standings", "stand"),
         ("verified/team-stats.html", "Team stats", "stats"),

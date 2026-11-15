@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sources · NFL Decision Desk</title>
+<style>
+:root{--ink:#10151c;--ink2:#3b4654;--ink3:#67717f;--bg:#f6f7f9;--panel:#fff;--line:#e2e6eb;
+--brand:#0b5cd5;--ok:#0f7b4f;--okbg:#e7f6ee;--warn:#a3560a;--warnbg:#fdf1e2;
+--bad:#a3182a;--badbg:#fdecee;--info:#0b5cd5;--infobg:#eaf1fd;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.88em;background:#eef1f5;padding:.1em .35em;border-radius:4px}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+.side{width:248px;flex:0 0 248px;background:#0f1621;color:#cfd7e3;padding:20px 14px 40px;
+position:sticky;top:0;max-height:100vh;overflow-y:auto}
+.side .brand{color:#fff;font-weight:700;font-size:16px;display:block}
+.side .brand span{color:#8fa2bb;font-weight:500;font-size:11.5px;display:block;margin-top:3px}
+.side .grp{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#7c8ba1;margin:18px 8px 6px}
+.side a.nav{display:block;padding:6px 9px;border-radius:7px;color:#cfd7e3;font-size:13px;line-height:1.35}
+.side a.nav:hover{background:#1a2331;color:#fff;text-decoration:none}
+.side a.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.side .foot{margin-top:24px;font-size:11px;color:#7c8ba1;border-top:1px solid #1e2836;padding-top:12px}
+.main{flex:1 1 auto;min-width:0;padding:26px 30px 60px;max-width:1400px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:4px}
+h1{font-size:26px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.2px}
+h2{font-size:18px;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15.5px;color:var(--ink);max-width:80ch}
+.muted{color:var(--ink3);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0 18px;background:var(--panel)}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);
+background:#f2f4f7;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#fafbfc}
+.num{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px}
+.scroll table{margin:0;border-radius:0}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+padding:1px 6px;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-warn{background:var(--warnbg);color:var(--warn)}
+.b-bad{background:var(--badbg);color:var(--bad)}.b-info{background:var(--infobg);color:var(--info)}
+.b-n{background:#eef1f5;color:var(--ink3)}
+.blank{color:#9aa4b1;font-style:italic;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin:14px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 13px}
+.card .k{font-size:22px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
+.card .l{font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.35}
+.card.good .k{color:var(--ok)}.card.warn .k{color:var(--warn)}.card.bad .k{color:var(--bad)}
+.note{border-left:3px solid var(--brand);background:var(--infobg);padding:10px 13px;
+border-radius:0 7px 7px 0;margin:14px 0;font-size:13px;color:#1c3a63}
+.note.warn{border-color:var(--warn);background:var(--warnbg);color:#5d3308}
+.note.bad{border-color:var(--bad);background:var(--badbg);color:#6d101d}
+.note.ok{border-color:var(--ok);background:var(--okbg);color:#0a4d33}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);
+font-size:12px;color:var(--ink3);max-width:95ch}
+.src{font-size:11.5px;white-space:nowrap}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink)}
+.kv{font-size:12.5px}.kv b{color:var(--ink)}
+@media(max-width:860px){.wrap{flex-direction:column}.side{width:100%;flex:none;position:static;
+max-height:none}.main{padding:18px 14px 50px}}
+</style></head><body><div class="wrap">
+<nav class="side">
+<span class="brand">NFL Decision Desk<span>own lines · gates · honest uncertainty</span></span>
+<div class="grp">Start here</div>
+<a class="nav" href="../index.html">Dashboard &amp; readiness</a>
+<a class="nav" href="../pages/executive-summary.html">Executive summary</a>
+<div class="grp">Data</div>
+<a class="nav" href="../pages/fixtures.html">Results &amp; fixture context</a>
+<a class="nav" href="../pages/availability.html">Availability (injuries)</a>
+<a class="nav" href="../pages/prices.html">Prices &amp; own lines</a>
+<div class="grp">Model &amp; scoring</div>
+<a class="nav" href="../pages/model.html">Model &amp; own probabilities</a>
+<a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; luck</a>
+<a class="nav" href="../pages/correlations.html">Correlations</a>
+<a class="nav" href="../pages/governance.html">Pre-registration &amp; gates</a>
+<div class="grp">Decide</div>
+<a class="nav" href="../pages/questions.html">Questions register</a>
+<a class="nav" href="../pages/suggestions.html">Suggestions</a>
+<a class="nav" href="../pages/repo-review.html">Repo review</a>
+<a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a>
+<div class="grp">Sources</div>
+<a class="nav active" href="../pages/sources.html">Every source read</a>
+<div class="foot">Research notebook. No wagering is offered or implied.
+Session <code>arena/e0ed20d1-own4</code>.</div>
+</nav>
+<main>
+<div class="crumb">Sources</div><h1>Sources</h1><p class="lede">Every page actually read this session, what it was used for, and whether it is official. Nothing on this site cites a source that was not opened.</p><div class="scroll"><table><thead><tr><th>Kind</th><th>Source</th><th>What it is</th><th>How it was used</th><th>Depth</th></tr></thead><tbody><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">https://www.nfl.com/standings/league/2026/REG</a></td><td>2026 league standings, all 32 clubs</td><td>reconciliation target for W-L-T and PF/PA</td><td>read (2 chunks)</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-10</a></td><td>week-10 scoreboard, byes, flexible-scheduling rules</td><td>9 finals, 3 in-progress, 2 scheduled, 4 byes</td><td>read (2 chunks)</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">https://www.nfl.com/schedules/2026/by-week/week-1</a></td><td>week-1 scoreboard</td><td>corpus spot-check; international-game label</td><td>read (2 chunks)</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">https://www.nfl.com/injuries/</a></td><td>Week-10 injury report, 28 clubs</td><td>347 verbatim rows; practice and game status</td><td>read (7 of 8 chunks)</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1" rel="noopener">https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1</a></td><td>game centre</td><td>Location, Stadium, Game Book URL</td><td>read</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/games/49ers-at-rams-2026-reg-1" rel="noopener">https://www.nfl.com/games/49ers-at-rams-2026-reg-1</a></td><td>game centre</td><td>Melbourne Cricket Ground; neutral-site finding FX-01</td><td>read</td></tr><tr><td>Official</td><td><a class="src" href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10" rel="noopener">https://www.nfl.com/games/patriots-at-lions-2026-reg-10</a></td><td>game centre</td><td>FC Bayern Munich Stadium; neutral-site finding FX-01</td><td>read</td></tr><tr><td>Third-party</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">https://github.com/nflverse/nfldata/blob/master/data/games.csv</a></td><td>archived results and prices 1999–2026</td><td>the frozen 136-game corpus and closing prices</td><td>vendored in repo; structure verified</td></tr><tr><td>Third-party</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv" rel="noopener">https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv</a></td><td>closing prices</td><td>market benchmark, de-vig</td><td>vendored in repo</td></tr><tr><td>Third-party</td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv" rel="noopener">https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv</a></td><td>opening prices</td><td>DEC-1: openings exist for 2021 only</td><td>vendored in repo</td></tr><tr><td>Repo (peer, read-only)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/injuries_week10.json" rel="noopener">https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/injuries_week10.json</a></td><td>2026-11-14 injury capture</td><td>the delta baseline for the availability page</td><td>read, not modified</td></tr><tr><td>Repo (peer, read-only)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/results_feed_2026.csv" rel="noopener">https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/results_feed_2026.csv</a></td><td>peer results feed</td><td>the 136-vs-137-vs-150 discrepancy</td><td>read, not modified</td></tr><tr><td>Repo (peer, read-only)</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-marketboard/data/raw/results_2026_official.csv" rel="noopener">https://github.com/sassnarep3-star/Own4/blob/main/nfl-marketboard/data/raw/results_2026_official.csv</a></td><td>peer results feed</td><td>independent confirmation of the 137 count</td><td>read, not modified</td></tr></tbody></table></div><h2>What was NOT read, and is therefore not claimed</h2><p>The 136 official game pages, the 136 Game Book PDFs, club depth-chart pages, inactive lists, snap counts, and the NFL rulebook section on the declared onside kick were all <b>not</b> read this session. No value on this site depends on them. Where one of those would be needed, the row is blank and the feed is named.</p><h2>Environment note</h2><p class="kv">Direct outbound HTTP from this sandbox is restricted to a small allowlist (github.com, codeload, api.github.com, npm, PyPI). Official nfl.com pages were reached through the session's page-reading tool, and each one listed above was actually returned and read. <code>raw.githubusercontent.com</code> was not reachable, so no archive was re-downloaded; the vendored copies already in the repository were used and their structure was verified.</p><footer><b>Research notebook, not advice.</b> No wagering is offered. Staking figures use an assumed −110 price and are labelled hypothetical everywhere. Numbers come from sources listed on each row; values that could not be sourced are left blank and are listed on the <a href="../pages/flagged.html">Flagged for review</a> page. Gambling help: <a href="https://www.ncpgambling.org/help-treatment/" rel="noopener">NCPG</a>. Built 2026-11-15T23:24:27Z UTC · <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></footer></main></div></body></html>
