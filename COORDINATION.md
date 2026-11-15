@@ -3521,3 +3521,47 @@ namespace was modified. Shared files were touched only additively.
 - **Fixed penalties.** No fixed point penalty for a missing starter exists anywhere in the code.
 
 *Session complete. No claimed task was left in progress; no peer file was written.*
+
+### Merge record — PR #111 → `main` (2026-11-15T23:47:49Z)
+
+| Field | Value |
+|-------|-------|
+| PR | **#111** — https://github.com/sassnarep3-star/Own4/pull/111 |
+| Merge commit | `e0abbf4b831e48e5ae4fea9f5cdc6d9572b74660` |
+| Method | `--merge`, no approval requested, per the brief |
+| Checks at merge | 5/5 pass (`nfl-decision-desk verify`, `verify` ×2, `audit`, `validate`) |
+| Pages deploy | **confirmed live** — `nfl-decision-desk/` and the `flagged`, `executive-summary` subpages return rendered content with row-level source links intact |
+| Broken links at merge | **0 repo-wide** (30 pre-existing `nfl-price-snapshot` asset refs were fixed; that fix was still absent on `main` at merge time) |
+
+**One CI failure was hit and fixed properly rather than retried.** The determinism gate failed on
+CI while passing locally. Root cause: **Python 3.12 changed builtin `sum()` over floats to
+Neumaier-compensated summation**, so a published number could round differently on the runner's
+3.12 than on this sandbox's 3.11 — a latent portability bug, not a runner flake. All 24 float
+accumulators now use `math.fsum` (exactly rounded on every version), and `engine/verify.py` gained
+**gate V8**, which fails the build if a non-integer `sum()` over floats is reintroduced. V8
+immediately caught two accumulators that the manual sweep had missed.
+
+The same investigation surfaced a real statistical defect: the permutation p-value divided by
+`len(null)` and could print `p = 0` for a statistic merely at the edge of the null. It is now
+`(1 + count) / (1 + n)`, the standard floor, so the smallest honest p is 1/2001. Three control
+strategies moved from q = 0.9305 to q = 1.0 and S1 from q = 0.40875 to 0.4098. **No skill or Brier
+value changed**, which is the evidence that `fsum` did not alter any published result.
+
+**Deviations logged for this step**
+
+- The branch had to be force-pushed twice with `--force-with-lease` after rebasing onto a `main`
+  that had advanced. Before each force-push the previous remote tip was verified to be a **strict
+  subset** of the new one (`comm -23` on the file lists, and a line-diff of `COORDINATION.md`),
+  so no commit content from any session was discarded.
+- `COORDINATION.md` conflicted twice. Resolved both times by **keeping both sessions' records**,
+  theirs first, mine after — never by dropping a peer's entry.
+- Generated HTML (`index.html`, `verified/*`) conflicted during rebase; resolved by taking `main`'s
+  copy and **regenerating** from `verification/build.py`, never by hand-merging generated files.
+
+### Follow-up in the same session (post-merge)
+
+Reading the live site exposed two narrative numbers that had drifted from their own data files:
+the flagged page said "3 of 272 fixtures" after a fourth game centre had been read, and the
+governance register claimed "16 pages generated" while the site publishes 14. Both are now
+**derived** (`VENUE_READ` from `fixtures.json`, `PAGE_COUNT` from the page list in `site.py`) rather
+than literals, so the narrative and the data cannot disagree again. Shipped as PR **#116**.
