@@ -1,0 +1,51 @@
+name: nfl-readiness-register snapshot capture
+
+# Immutable official availability snapshots (REQ-28/29/53): captures the
+# official NFL injury report and the league reserve-list ledger every
+# Wed/Thu/Fri, stores raw bytes + sha256 in an append-only manifest, and
+# fails loudly on schema drift (REQ-61 drift alarm). Cadence decision
+# (Wed/Thu/Fri vs Wed-to-kickoff) is queued as DEC-R5 on the site.
+
+on:
+  schedule:
+    - cron: "0 18 * * 3,4,5"   # 18:00 UTC Wed(3), Thu(4), Fri(5)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Capture official pages (fail loudly on drift)
+        run: |
+          python3 nfl-readiness-register/capture/snapshot_official_pages.py
+
+      - name: Run site verifier (ledger integrity)
+        run: |
+          python3 nfl-readiness-register/verify.py
+
+      - name: Commit append-only snapshot ledger
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add nfl-readiness-register/snapshots/
+          if git diff --cached --quiet; then
+            echo "No new snapshot data to commit."
+          else
+            git commit -m "nfl-readiness-register: scheduled availability snapshot $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            git pull --rebase origin main || git pull --no-rebase origin main
+            git push origin main
+          fi
