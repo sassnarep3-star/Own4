@@ -3174,3 +3174,46 @@ on S5 (`signal_metric` missing); post-hoc record baseline window corrected
 decision queue — a reviewer picks options before anything new is implemented. Suggested
 first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-line
 re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
+
+---
+
+## Session `arena/507da9a4-own4` — NFL consolidated decision-readiness & requirements integration (claim, 2026-11-15 UTC)
+
+Session ID: `arena/507da9a4-own4` · Branch: `arena/507da9a4-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior
+session). Base: `main` at `3e74fd3` (after PR #107, the `arena/c8969a10-own4` NFL Book merge).
+
+**Survey at claim time:** 17 NFL namespaces already merged on `main`
+(`nfl/`, `nfl-arena/`, `nfl-audit/`, `nfl-book/`, `nfl-command/`, `nfl-core/`, `nfl-decision/`,
+`nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-integration/`, `nfl-intel/`, `nfl-lab/`, `nfl-ledger/`,
+`nfl-lines/`, `nfl-market/`, `nfl-markets/`, `nfl-origination/`, `nfl-own/`, `nfl-price-snapshot/`,
+`nfl-quant/`, `nfl-research/`). Every prior session delivered a partial slice of the same master
+requirement list. No live overlapping claim found on the board (all prior entries are `done`/`needs
+review`/merged or belong to closed sessions). Scope claimed below is additive and non-overlapping.
+
+**Differentiated scope:** this session does NOT re-implement any single requirement. It builds the
+**cross-namespace consolidated decision-readiness layer** the brief explicitly asks for but that no
+namespace yet owns end-to-end: one authoritative register that maps the FULL master requirement list
+to (status, implementing namespace(s), the gate that blocks it, the number that would clear it, and
+an official source link), plus a consolidated questions/answers register, a consolidated suggestions
+queue, a line-by-line verification log, and a clean dashboard with the decision-readiness table on
+the landing page. All values are grounded in the repository's existing verified data and re-checked
+against live official nfl.com sources this session; unverifiable cells are blank and flagged.
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|----------------------------------|
+| C1 | Board claim + repo survey (17 NFL namespaces inventoried; master requirement list enumerated; gaps vs the brief identified) | claimed | arena/507da9a4-own4 | `COORDINATION.md` (this entry only) |
+| C2 | Live official-source verification (nfl.com standings, schedule, injuries, scores re-read 2026-11-15) — confirms repo data still matches | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/official_reads_2026-11-15.json` |
+| C3 | Master requirement register: every requirement in the brief → status / implementing namespaces / blocking gate / clearing number / official source link | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/requirements.json` |
+| C4 | Consolidated questions/answers register (what we know / do not know / what would settle it / what it blocks) + consolidated suggestions queue (options + verdicts) | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/{questions,suggestions}.json` |
+| C5 | Decision-readiness table on the landing page (one row per requirement: gate that blocks it + number that would clear it) | claimed | arena/507da9a4-own4 | `nfl-consolidated/index.html` |
+| C6 | Static site build (landing + category subpages), row-level source-link verifier, no broken links | claimed | arena/507da9a4-own4 | `nfl-consolidated/**`, `nfl-consolidated/engine/*` |
+| C7 | Executive summary + flagged-for-review + sources + line-by-line verification pages | claimed | arena/507da9a4-own4 | `nfl-consolidated/**` |
+| C8 | Root navigation integration (additive NAV entry via `verification/build.py`; regenerate `index.html` + `verified/*.html` superset-only) | claimed | arena/507da9a4-own4 | `verification/build.py`, `index.html`, `verified/*.html` |
+| C9 | Final integration: re-verify, PR → main → merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | claimed | arena/507da9a4-own4 | `COORDINATION.md` (this entry) |
+
+**Scope rules:** no peer namespace is edited. Shared files are append-only (`COORDINATION.md`) or
+additive (`verification/build.py` NAV, regenerated `index.html`/`verified/*.html`). Peer data may be
+READ and re-verified but never modified. All new work lives in the new `nfl-consolidated/` namespace.
