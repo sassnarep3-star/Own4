@@ -3280,3 +3280,24 @@ clearing numbers are project-defined conventions frozen in the repo; the officia
 column is the nfl.com page each rule depends on. No peer namespace was edited; shared
 files are append-only (`COORDINATION.md`) or additive (`verification/build.py` NAV,
 regenerated `index.html`/`verified/*.html`).
+
+### PR and merge record · `arena/507da9a4-own4` · 2026-11-15 (UTC)
+
+- **PR #108** https://github.com/sassnarep3-star/Own4/pull/108 — merged with a merge commit
+  (`gh pr merge 108 --merge`) into `main` as **`faa04b1`**, without waiting for approval
+  (per standing instruction).
+- **Checks before merge:** `Rebuild and verify`, `audit`, `validate`, `verify` ×2 — **all SUCCESS**
+  on the head commit.
+- **GitHub Pages:** status **`built`** for the merge commit (source `main`, path `/`).
+  Live-confirmed by fetching the deployed URL:
+  https://sassnarep3-star.github.io/Own4/nfl-consolidated/ — the landing page renders with KPIs,
+  the bottom-line finding, and the full decision-readiness table (73 rows, each with status,
+  implementing namespace, blocking gate, clearing number, and an official nfl.com source link).
+- **Merge-day context:** no concurrent session was active; `origin/main` had not advanced past the
+  branch base `3e74fd3`, so no rebase/merge conflict was encountered. No peer file was edited.
+- **Deviation noted:** `gh pr edit` (body refresh) was blocked by a GitHub API deprecation
+  (Projects classic / `projectCards`); the PR body was created with the full summary and all
+  required content present. Non-blocking.
+
+C9 complete. Session `arena/507da9a4-own4` finished end-to-end: claim → live verification →
+consolidated decision-readiness dashboard → root nav integration → CI → PR → merge → Pages confirmed.
