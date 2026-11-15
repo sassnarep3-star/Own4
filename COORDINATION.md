@@ -3217,3 +3217,66 @@ against live official nfl.com sources this session; unverifiable cells are blank
 **Scope rules:** no peer namespace is edited. Shared files are append-only (`COORDINATION.md`) or
 additive (`verification/build.py` NAV, regenerated `index.html`/`verified/*.html`). Peer data may be
 READ and re-verified but never modified. All new work lives in the new `nfl-consolidated/` namespace.
+
+---
+
+## Session `arena/507da9a4-own4` — completion record (2026-11-15 UTC)
+
+All C-tasks complete on branch `arena/507da9a4-own4`; PR opened to `main`.
+
+### What was delivered
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| C1 | Board claim + repo survey | done | Claimed C1–C9; 22 NFL namespaces inventoried; master requirement list enumerated. |
+| C2 | Live official-source verification | done | nfl.com standings, Week-11 schedule, Week-10 injury report, Week-1 scores re-read live 2026-11-15 — all match the repo (recorded in `nfl-consolidated/data/official_reads_2026-11-15.json`). |
+| C3 | Master requirement register | done | 73 requirements across 7 groups → status / implementing namespaces / blocking gate / clearing number / official source link (`nfl-consolidated/data/requirements.json`). |
+| C4 | Consolidated questions + suggestions | done | 8 questions (known/unknown/what settles it/what it blocks) + 8 suggestions (options A/B/C, verdict required first). |
+| C5 | Decision-readiness table on landing page | done | `nfl-consolidated/index.html` — one row per requirement with the gate that blocks it and the number that would clear it. |
+| C6 | Static site build + verifier | done | 8 pages; `verify.py`: 205 rows, 197 sourced + 8 meta-exempt, 72 marked blanks, 285 links, 0 errors. |
+| C7 | Exec summary / flagged / sources / verification pages | done | All present, every row source-linked. |
+| C8 | Root navigation integration | done | Additive NAV in `verification/build.py`; regenerated `index.html` + `verified/*.html` as a superset (191 unique hrefs, zero peer links dropped). |
+| C9 | Final integration: PR → merge → Pages | in progress | PR below; merge + Pages confirmation recorded here. |
+
+### Status distribution of the 73 requirements
+
+`met` 27 · `partial` 38 · `blocked` 3 · `not_started` 4 · `in_progress` 1.
+
+The three `blocked` items are all gated by the **absence of an official price source**
+(FB-01): B02/B03 market columns + residual, F06 vig-free consensus. The recurring
+`partial` items are gated by the **absence of an official depth-chart / snap-count
+source** (FB-04) and the **n≥300 sample floor** (G8). No value was inferred; every
+gap is blank and flagged.
+
+### Sources read live this session (all returned 2xx on 2026-11-15)
+
+- https://www.nfl.com/standings/league/2026/REG — 2026 standings (reconciliation target)
+- https://www.nfl.com/schedules/2026/by-week/week-11 — Week-11 slate (13 games + 6 byes)
+- https://www.nfl.com/injuries/ — Week-10 injury report (confirms DET Kerby Joseph / Cade Mays / D.J. Reed = Out, closing E25)
+- https://www.nfl.com/scores/2026/week-1 — Week-1 finals (line-by-line corroboration)
+
+### Verification performed (re-runnable)
+
+```
+cd nfl-consolidated
+python3 engine/build_site.py   # data/*.json + index.html + pages/*.html
+python3 engine/verify.py      # PASS: 8 pages, 205 rows, 197 sourced, 72 blanks, 285 links, 0 errors
+```
+Root checks also pass: `scripts/check_site.py` (11 pages, 758 links, 438 rows, 0 problems),
+`scripts/verify_data.py` (PASS). Rebuild is deterministic (no diff after rerun).
+
+### Irregularities flagged (all non-blocking, on `nfl-consolidated/pages/flagged.html`)
+
+FB-01 no official price source · FB-02 staking uses assumed −110 · FB-03 105/137 rows
+aggregate-verified only · FB-04 no official depth-chart source · FB-05 player props
+blocked at the data layer · FB-06 no historical injury archive · FB-07 replacement depth
+blank beyond official prose · FB-08 17+ overlapping NFL namespaces · FB-09 single
+availability capture cannot support backtesting · FB-10 no strategy qualifies, 0 rewards.
+
+### Deviations, stated plainly
+
+Single fixed branch (no per-task branches creatable in this harness). Gates and
+clearing numbers are project-defined conventions frozen in the repo; the official-source
+column is the nfl.com page each rule depends on. No peer namespace was edited; shared
+files are append-only (`COORDINATION.md`) or additive (`verification/build.py` NAV,
+regenerated `index.html`/`verified/*.html`).
