@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL decision readiness</title>
+<meta name="description" content="Proposals with options and a blank verdict awaiting review.">
+<link rel="stylesheet" href="../assets/readiness.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">NFL decision readiness</div>
+  <div class="sub">Own4 · what is blocked, by how much,<br>and what would clear it</div>
+  <a class="" href="../index.html">Dashboard</a><a class="" href="../pages/decision-readiness.html">Decision readiness</a><a class="" href="../pages/verification.html">Independent verification</a><a class="" href="../pages/availability.html">Availability evidence</a><a class="" href="../pages/questions.html">Questions</a><a class="active" href="../pages/suggestions.html">Suggestions</a><a class="" href="../pages/flagged.html">Flagged for review</a><a class="" href="../pages/sources.html">Sources</a><a class="" href="../pages/executive-summary.html">Executive summary</a>
+</nav>
+<main>
+
+<h1>Suggestions for review</h1>
+<p class="lead">13 proposals to make the site better at decision making. Every one starts with a
+blank verdict: <strong>nothing is implemented until a reviewer names exactly one option</strong>.
+The workflow is written into the register, not into a convention.</p>
+
+<div class="note">
+<strong>Why a verdict column and not a to-do list.</strong> The repository already contains 26
+namespaces built by sessions that each picked the obvious path. Nearly every one rediscovered the
+same missing price source. A blank verdict forces that choice to be made once, visibly, with its
+options and its risk on the same screen.
+</div>
+
+<h2>Workflow</h2>
+<ol>
+<li>Read the proposal, its three options and the risk attached to each.</li>
+<li>Write one option into the verdict. Not &ldquo;yes&rdquo; — an option ID.</li>
+<li>Only then is code written, against that option, with the verdict quoted in the commit.</li>
+<li>If a later observation contradicts the verdict, reopen the row rather than silently changing the build.</li>
+</ol>
+
+<h2>The 13 proposals</h2>
+
+<details id="S01">
+<summary><span class="badge b-P0">P0</span> &nbsp;Choose the price source, or formally give up on the residual &nbsp;<span class="tag">S01</span></summary>
+<h3>Problem</h3><p>Three requirements (price snapshots, fair/market/difference, CLV) and every ROI number share one missing input: a market price. Today 39 of 39 snapshot rows have a fair value and 0 have a market value. Every staking figure uses an assumed -110.</p>
+<h3>Options</h3><ul><li><strong>A — License a sportsbook or data-vendor feed.</strong> Closes G7 and unblocks A01-A03, C06, F09. Costs money and needs republication terms in writing. <em>Risk: Terms may forbid republishing the numbers, which would leave the site unable to show its own residuals.</em></li><li><strong>B — Stay price-free and rename the product.</strong> Zero legal exposure. The site publishes fair lines and skill scores only, and the market and difference columns are removed rather than left permanently blank. <em>Risk: No CLV, no ROI, no rewards. The competition becomes a proper-score contest, which Q08 may actually prefer.</em></li><li><strong>C — Publish a clearly-labelled non-market baseline.</strong> Publish &#x27;#our fair line vs a fixed reference&#x27; instead of vs the market, e.g. vs the previous week&#x27;s published fair line. Honest, immediately computable, and it measures model stability rather than market edge. <em>Risk: Someone will read it as an edge. The label has to be loud.</em></li></ul>
+<h3>Evidence</h3><p>Week 11 schedule page publishes kickoff, network and venue for 13 fixtures and no line at all. Flags FB-01/FB-02 record the consequence.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: procurement + legal. B: a page edit. C: one day.<br><strong>Risk:</strong> A is the only path to the requirements as written. B and C are honest retreats.<br>
+<strong>Recommended path:</strong> A if the budget exists; otherwise C, because C keeps a daily publishing habit alive and is the only option that produces a number every week.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/schedules/2026/by-week/week-11">official source for this suggestion</a></p>
+</details>
+<details id="S02">
+<summary><span class="badge b-P0">P0</span> &nbsp;Make the decision-readiness table the site&#x27;s front door &nbsp;<span class="tag">S02</span></summary>
+<h3>Problem</h3><p>Nineteen NFL site trees exist and a twentieth is added by every new session. The owner has no single place that says what is blocked and by how much.</p>
+<h3>Options</h3><ul><li><strong>A — Decision-readiness page becomes the canonical landing page.</strong> One front door. Every other namespace becomes archive, linked but not authoritative. <em>Risk: Feels like throwing away peer work; it is not, the work stays reachable.</em></li><li><strong>B — Keep the current landing page and link the table from it.</strong> Lower risk to existing navigation. The table becomes one more link among 179. <em>Risk: The problem recurs on the next session; links are what already failed.</em></li><li><strong>C — Freeze new namespaces until the table has no unclaimed P0 row.</strong> Stops the sprawl at the cause instead of the symptom. <em>Risk: Slows parallel work, which is this repository&#x27;s actual working style.</em></li></ul>
+<h3>Evidence</h3><p>26 namespaces on main; the root nav generator already carries a comment about links being silently dropped by regeneration.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: hours. B: minutes. C: governance only.<br><strong>Risk:</strong> A and C together are the only combination that holds.<br>
+<strong>Recommended path:</strong> A now, then C as a standing rule.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py">official source for this suggestion</a></p>
+</details>
+<details id="S03">
+<summary><span class="badge b-P0">P0</span> &nbsp;Ingest the official inactives article — it closes the biggest perceived dead end &nbsp;<span class="tag">S03</span></summary>
+<h3>Problem</h3><p>The repository treats the active list as unobtainable. It is obtainable. nfl.com publishes a dated article naming every inactive player per club, and it also carries the venue string for each game.</p>
+<h3>Options</h3><ul><li><strong>A — Capture it weekly, starting now.</strong> One page per week yields ~138 named inactives, 24 club sections and 12 venue strings. It is the cheapest evidence win available. <em>Risk: Sunday Night Football lists publish ~90 minutes before kickoff, so a single capture will always be incomplete for the last game.</em></li><li><strong>B — Capture it twice: once mid-afternoon, once after the SNF list publishes.</strong> Complete coverage for all 12-16 Sunday clubs plus the primetime clubs. <em>Risk: Doubles the job count for one source.</em></li><li><strong>C — Wait until the Game Book pipeline exists.</strong> Fewer moving parts. <em>Risk: Freezes 20 of the 78 readiness rows on an unproven PDF pipeline.</em></li></ul>
+<h3>Evidence</h3><p>Week 10 article read in full this session: 24 sections, 138 named players, 12 venue strings, 2 empty lists priced by timing rather than absence.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: one parser, a few hours. B: the same parser, two cron entries.<br><strong>Risk:</strong> Low. The article is the most structured availability source found so far.<br>
+<strong>Recommended path:</strong> B. Take the capture twice and store the clock time; that also turns the report into the timestamped series E05 requires.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season">official source for this suggestion</a></p>
+</details>
+<details id="S04">
+<summary><span class="badge b-P0">P0</span> &nbsp;Test one Game Book PDF before promising the availability graph &nbsp;<span class="tag">S04</span></summary>
+<h3>Problem</h3><p>The requirements for &#x27;who was expected to start, who actually did&#x27;, a replacement-depth matrix and starter-level ablations all rest on knowing starters. The only official source for that is the Game Book.</p>
+<h3>Options</h3><ul><li><strong>A — Parse one Game Book now and publish the result either way.</strong> A one-day experiment that either unlocks four requirements or rules them out. <em>Risk: PDF tables are often positional rather than tagged, so a parse may need per-page coordinates.</em></li><li><strong>B — Infer starters from the depth charts.</strong> No PDF work. <em>Risk: Forbidden by the brief, and only 1 of 32 clubs has a verified structured chart anyway.</em></li><li><strong>C — Infer starters from snap counts.</strong> Avoids PDFs. <em>Risk: No official snap-count source was located, and the brief explicitly rejects inference here.</em></li></ul>
+<h3>Evidence</h3><p>Game centre for WAS@NYG Week 10 links &#x27;Download Game Book (PDF)&#x27; at static.www.nfl.com. One link observed, zero parsed.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: one day. B and C: unbounded, and disallowed.<br><strong>Risk:</strong> A&#x27;s downside is a day. B and C&#x27;s downside is fabricated starters.<br>
+<strong>Recommended path:</strong> A, and publish the negative result if it fails. A known dead end is worth as much as a win here.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">official source for this suggestion</a></p>
+</details>
+<details id="S05">
+<summary><span class="badge b-P1">P1</span> &nbsp;Stop publishing counts that a live page can move &nbsp;<span class="tag">S05</span></summary>
+<h3>Problem</h3><p>The brief itself quotes 254 rows and 4 no-injury sections, then 279 rows and 2 sections. Read today the page has 28 sections and 347 rows and no injury-free section at all. Three different numbers, all &#x27;verified&#x27; on the day they were written.</p>
+<h3>Options</h3><ul><li><strong>A — Publish every count with its capture clock and never as a bare fact.</strong> The number becomes falsifiable rather than stale. <em>Risk: Verbose cells.</em></li><li><strong>B — Publish only diffs against the previous capture.</strong> Impossible to quote a stale absolute. <em>Risk: Needs two captures, so it must wait for the archive.</em></li><li><strong>C — Pin the count in CI so the build fails when it moves.</strong> Turns a silent drift into a red build, which is what D07 asks for. <em>Risk: A live page will break the build on a normal Tuesday, so the pin has to be an expected-range, not an equality.</em></li></ul>
+<h3>Evidence</h3><p>This session&#x27;s full 8-of-8-chunk read: 28 sections, 347 rows, 0 empty sections.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: a template change. C: half a day.<br><strong>Risk:</strong> Low; the failure mode of doing nothing is already visible in the brief&#x27;s own numbers.<br>
+<strong>Recommended path:</strong> A now and C with a tolerance band. Skip B until the archive exists.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/injuries/">official source for this suggestion</a></p>
+</details>
+<details id="S06">
+<summary><span class="badge b-P1">P1</span> &nbsp;Render &#x27;not listed&#x27; as unknown, not available &nbsp;<span class="tag">S06</span></summary>
+<h3>Problem</h3><p>70 of 138 named inactives do not appear in the weekly injury report at all. A player absent from the report is invisible, and an invisible player currently reads as healthy.</p>
+<h3>Options</h3><ul><li><strong>A — Three-state availability: available / unavailable / unknown.</strong> The report can only ever produce &#x27;unavailable&#x27; and &#x27;unknown&#x27;; only an active list produces &#x27;available&#x27;. <em>Risk: Most of the league becomes &#x27;unknown&#x27; and the page looks empty.</em></li><li><strong>B — Add the reserve list and treat report-absence as available only for players confirmed on an active roster.</strong> Resolves most of the unknowns. <em>Risk: Needs an official roster and reserve feed, which is not in hand.</em></li><li><strong>C — Leave the binary rendering and add a footnote.</strong> No work. <em>Risk: A footnote is exactly what a model will not read. This is the defect the brief keeps flagging.</em></li></ul>
+<h3>Evidence</h3><p>68 inactives join to the report; 70 do not. Malik Willis (MIA) appears in no Week 10 section, which is what an injured-reserve player looks like in this source.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: half a day. B: depends on the roster feed.<br><strong>Risk:</strong> An empty-looking page is a correct page.<br>
+<strong>Recommended path:</strong> A now, B when the roster feed lands.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/injuries/">official source for this suggestion</a></p>
+</details>
+<details id="S07">
+<summary><span class="badge b-P1">P1</span> &nbsp;Re-freeze the backtest corpus with a published hash &nbsp;<span class="tag">S07</span></summary>
+<h3>Problem</h3><p>Pre-registration says 136 games; the file now has 137. The registration and the artefact have drifted, which is the exact failure pre-registration exists to prevent.</p>
+<h3>Options</h3><ul><li><strong>A — Re-freeze at today&#x27;s 137 with a commit hash on the strategy page.</strong> Registration and artefact agree again from today. <em>Risk: Re-freezing after seeing results is a soft form of peeking; the reason must be recorded.</em></li><li><strong>B — Pin to the original 136 and exclude later games from the registered evaluation.</strong> The registration stays honest and the extra game is used only for the live shadow. <em>Risk: The corpus slowly becomes historical while the site claims it is live.</em></li><li><strong>C — Re-define the corpus as &#x27;all settled games as of the capture clock&#x27;.</strong> No drift is possible, because the definition is the rule. <em>Risk: Comparisons across weeks need the capture clock to be carried everywhere.</em></li></ul>
+<h3>Evidence</h3><p>results_feed.json n_games=137; own_lines_open.json n_train_games=136 and train_through_week=9.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> Hours either way.<br><strong>Risk:</strong> A is the only option that quietly permits result-chasing. Say so in the log if it is chosen.<br>
+<strong>Recommended path:</strong> C for the live shadow, B for the one published backtest.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/results_feed.json">official source for this suggestion</a></p>
+</details>
+<details id="S08">
+<summary><span class="badge b-P1">P1</span> &nbsp;Report a p-value of exactly zero as a resolution floor &nbsp;<span class="tag">S08</span></summary>
+<h3>Problem</h3><p>0 of 500 permutation draws is published as p=0. On n=105 forecasts that is arithmetically impossible as a true probability, and it reads as certainty.</p>
+<h3>Options</h3><ul><li><strong>A — Publish &#x27;&lt; 0.002 (0/500)&#x27; and raise the draw count to 10,000 in the same run.</strong> Honest and cheap. 10,000 draws bounds p at &lt; 0.0001. <em>Risk: Runtime, which is trivial at this n.</em></li><li><strong>B — Add a second, independent season before publishing any p.</strong> Solves the real problem, which is sample size, not formatting. <em>Risk: Needs Q03&#x27;s prior-season data.</em></li><li><strong>C — Leave it; the flag already notes it.</strong> No work. <em>Risk: A reader sees p=0 and stops reading the flag.</em></li></ul>
+<h3>Evidence</h3><p>backtest.json placebo reports 0/500; flag FB-16 says the same thing but the page shows the number.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: an hour.<br><strong>Risk:</strong> Low.<br>
+<strong>Recommended path:</strong> A immediately, B as the substantive fix.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/backtest.json">official source for this suggestion</a></p>
+</details>
+<details id="S09">
+<summary><span class="badge b-P1">P1</span> &nbsp;Make the verifier fail on a stale snapshot, not just a broken link &nbsp;<span class="tag">S09</span></summary>
+<h3>Problem</h3><p>Both existing verifiers check links and sources. Neither notices that a standings snapshot has been overtaken by nine games.</p>
+<h3>Options</h3><ul><li><strong>A — Add an age field and fail the build past a threshold.</strong> A stale table cannot ship silently. <em>Risk: Threshold choice is arbitrary and needs an owner decision.</em></li><li><strong>B — Add a re-read check that compares three randomly chosen rows against the live page.</strong> Catches drift in content, not just in date. <em>Risk: Makes CI depend on the live network, which is flaky.</em></li><li><strong>C — Publish the capture clock prominently and let the reader judge.</strong> Zero engineering. <em>Risk: This is what already exists and it did not work.</em></li></ul>
+<h3>Evidence</h3><p>This session found the peer standings snapshot stale on all 32 clubs; flag FB-03/FB-04 already knew rows were partial.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: an hour. B: a day plus flakiness.<br><strong>Risk:</strong> B&#x27;s flakiness is a real cost; a red build for a network blip trains people to ignore red.<br>
+<strong>Recommended path:</strong> A now. B only as a scheduled job, never as a PR gate.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/standings/league/2026/REG">official source for this suggestion</a></p>
+</details>
+<details id="S10">
+<summary><span class="badge b-P2">P2</span> &nbsp;Give every strategy a falsifier, not just a threshold &nbsp;<span class="tag">S10</span></summary>
+<h3>Problem</h3><p>A strategy currently has a rule and a threshold. Neither says what observation would retire it, so nothing can be demoted on evidence.</p>
+<h3>Options</h3><ul><li><strong>A — Two mandatory columns: promote-if and retire-if, each with a number.</strong> The demotion gate gets something to fire on. <em>Risk: Two more blanks per row until the data exists.</em></li><li><strong>B — Derive the falsifier from the demotion gate automatically.</strong> No authoring burden. <em>Risk: The gate is generic, so the falsifier is generic and useless for a specific strategy.</em></li><li><strong>C — Skip it; the demotion gate covers demotion.</strong> No work. <em>Risk: The gate covers 4 mechanical conditions and cannot express &#x27;the thesis was wrong&#x27;.</em></li></ul>
+<h3>Evidence</h3><p>5 strategies carry rule + threshold; 0 carry an explicit two-sided falsifier.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: an afternoon.<br><strong>Risk:</strong> Low.<br>
+<strong>Recommended path:</strong> A.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json">official source for this suggestion</a></p>
+</details>
+<details id="S11">
+<summary><span class="badge b-P2">P2</span> &nbsp;Show the model&#x27;s own uncertainty on every originated line &nbsp;<span class="tag">S11</span></summary>
+<h3>Problem</h3><p>A fair line is published as a number. A reader cannot tell a 1-point estimate from a 6-point one.</p>
+<h3>Options</h3><ul><li><strong>A — Publish the fair line with a stated interval and the sd used.</strong> The reader can see whether a difference is even resolvable. <em>Risk: An interval invites false precision if the model is misspecified.</em></li><li><strong>B — Publish only the interval width as a separate confidence column.</strong> Cheaper, less pretentious. <em>Risk: Harder to use.</em></li><li><strong>C — Leave it; the model card carries the sd.</strong> No work. <em>Risk: The model card is a different page, and nobody joins pages by hand.</em></li></ul>
+<h3>Evidence</h3><p>model_card.json publishes sd_margin=10.454 and mu=22.959; own_lines pages publish point estimates only.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: an afternoon.<br><strong>Risk:</strong> Low.<br>
+<strong>Recommended path:</strong> A.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/model_card.json">official source for this suggestion</a></p>
+</details>
+<details id="S12">
+<summary><span class="badge b-P2">P2</span> &nbsp;Split schedule-derived features from stadium features instead of blocking both &nbsp;<span class="tag">S12</span></summary>
+<h3>Problem</h3><p>The fixture-context requirement bundles buildable facts (rest days, travel, short week) with unbuildable ones (roof, surface, NWS weather) and therefore delivers nothing.</p>
+<h3>Options</h3><ul><li><strong>A — Ship the schedule half now, mark the stadium half blocked.</strong> 13 of 13 Week 11 fixtures get rest-day and travel features from the schedule page alone. <em>Risk: Half a feature set can look like a whole one.</em></li><li><strong>B — Wait for the stadium source.</strong> No risk of a partial feature being misread. <em>Risk: Delivers nothing, possibly for a long time.</em></li><li><strong>C — Substitute a third-party roof/surface table.</strong> Unblocks immediately. <em>Risk: It would not be an official source, which the brief forbids.</em></li></ul>
+<h3>Evidence</h3><p>Schedule page gives date, kickoff and network for 13 fixtures; no roof or surface appears on any page read this session.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: one day.<br><strong>Risk:</strong> Low if the labelling is explicit.<br>
+<strong>Recommended path:</strong> A.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://www.nfl.com/schedules/2026/by-week/week-11">official source for this suggestion</a></p>
+</details>
+<details id="S13">
+<summary><span class="badge b-P3">P3</span> &nbsp;Publish the questions register as the change-control document &nbsp;<span class="tag">S13</span></summary>
+<h3>Problem</h3><p>Decisions get made in prose inside 26 namespaces. When a requirement changes, nothing records which question it answered.</p>
+<h3>Options</h3><ul><li><strong>A — Every closed question must name the commit that closed it.</strong> A decision trail that survives sessions. <em>Risk: Bookkeeping overhead on every task.</em></li><li><strong>B — Leave it informal.</strong> No overhead. <em>Risk: The same questions get re-asked, which is already visible across the peer namespaces.</em></li><li><strong>C — Fold the register into the readiness table.</strong> One document instead of two. <em>Risk: The table gets long.</em></li></ul>
+<h3>Evidence</h3><p>This repository has 6 executive summaries and 26 namespaces; the same price-source question appears in at least 5 of them.</p>
+<h3>Cost · risk · recommendation</h3>
+<p><strong>Cost:</strong> A: minutes per task.<br><strong>Risk:</strong> Low.<br>
+<strong>Recommended path:</strong> A.</p>
+<h3>Verdict</h3><p><span class="blank" title="unverified: no reviewer has recorded a verdict — nothing is implemented by default">&mdash; blank</span></p>
+<p><a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md">official source for this suggestion</a></p>
+</details>
+
+<footer>
+<p><strong>Analytical research only — not wagering advice.</strong> Every published number is
+either computed from data/observations.json (transcribed from the official page named in the row)
+or shown as a blank. No value is inferred, interpolated or carried over from an unverified source.</p>
+<p>National Problem Gambling Helpline: 1-800-MY-RESET —
+<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>.
+Capture clock for this release: <code>2026-11-15T23:27:10Z</code>. Rebuild with the four commands in
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/README.md">README.md</a>
+or read the site's own <a href="../pages/sources.html">source register</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

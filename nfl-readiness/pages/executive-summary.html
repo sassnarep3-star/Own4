@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL decision readiness</title>
+<meta name="description" content="Executive summary of the decision-readiness review.">
+<link rel="stylesheet" href="../assets/readiness.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">NFL decision readiness</div>
+  <div class="sub">Own4 · what is blocked, by how much,<br>and what would clear it</div>
+  <a class="" href="../index.html">Dashboard</a><a class="" href="../pages/decision-readiness.html">Decision readiness</a><a class="" href="../pages/verification.html">Independent verification</a><a class="" href="../pages/availability.html">Availability evidence</a><a class="" href="../pages/questions.html">Questions</a><a class="" href="../pages/suggestions.html">Suggestions</a><a class="" href="../pages/flagged.html">Flagged for review</a><a class="" href="../pages/sources.html">Sources</a><a class="active" href="../pages/executive-summary.html">Executive summary</a>
+</nav>
+<main>
+
+<h1>Executive summary</h1>
+<p class="lead">What is true about this project at <code>2026-11-15T23:27:10Z</code>, in the order that matters.</p>
+
+<h2>1. The project is not blocked on engineering</h2>
+<p>78 requirements are traced. 21 are met and re-verified. 31 are implemented and
+limited by a named evidence gap. 13 are blocked and 13 were never started. The
+distribution is not a capacity problem: most blocked rows are blocked by <strong>one missing input
+that five separate requirements share</strong>.</p>
+
+<h2>2. That input is a market price, and it does not exist</h2>
+<p>The NFL publishes kickoff time, network and venue for all 13 Week 11 fixtures and no line of any
+kind. Every ROI, every closing-line value, every fair-versus-market residual and the entire rewards
+pool depend on it. Nine traced requirements reduce to one procurement decision (Q01 / S01). Until it
+is made, the honest product is a proper-score skill competition, not a betting product.</p>
+
+<h2>3. The biggest under-utilisation is an availability source the repository already had access to</h2>
+<p>The repository treats official inactive lists as unobtainable and accordingly never ingests them.
+They are published. A single dated nfl.com article names <strong>138 inactive players across
+24 club sections</strong> for Week 10 and also carries the venue for 12 games. That
+reframes the largest listed data gap from &ldquo;impossible&rdquo; to &ldquo;a parser and a cron
+entry&rdquo;.</p>
+
+<h2>4. The inactive list answers the calibration question partially, and the partial answer is useful</h2>
+<p>68 players appear in both the official report and the official inactive list. All of
+them carry an explicit Out, Doubtful or Questionable — not one named inactive has a blank status. So
+the designation column is a usable filter. But 70 named inactives never appear in the
+report, so a blank status still cannot mean &ldquo;available&rdquo;. Any model that treats absence
+from the report as health is wrong today.</p>
+
+<h2>5. The depth feature is real but not yet buildable, and the blocker is measurable</h2>
+<p>Two club depth pages were probed. Green Bay publishes a structured table with 44 named players and
+its own date. Houston publishes an image with no table and no date. So the per-club route works for
+some clubs: <strong>2 of 32 verified, 30 unprobed</strong>. The brief's instinct was right — this
+cannot be derived from jersey numbers, and the Packers prepend jersey numbers to their names
+precisely so a naive parser will mistake a shirt for a rank.</p>
+
+<h2>6. Nothing published here is a pick</h2>
+<p>No forecasts are made on this site. It publishes what is known about the project, not what will
+happen on Sunday. The one strategy leaderboard in the repository awards 0 of 1,000 points because
+0 of 5 strategies clears its own gates, and that zero is the correct output.</p>
+
+<h2>The five decisions</h2>
+<div class="wrap"><table><thead><tr><th>Ref</th><th>Decision needed</th><th>Why it is first-order</th><th>Options</th><th>Source</th></tr></thead><tbody><tr><td><span class="id">Q01 / S01</span></td><td><a href="../pages/questions.html">How are market prices obtained, or do we formally give up on the residual?</a></td><td>Blocks 9 traced requirements including every ROI figure. The NFL publishes no line.</td><td><a href="../pages/suggestions.html#S01">S01</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q10 / S02</span></td><td><a href="../pages/questions.html">Which of the 26 NFL site trees is canonical?</a></td><td>Every new session adds a namespace because no rule says where work must land.</td><td><a href="../pages/suggestions.html#S02">S02</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q13</span></td><td><a href="../pages/questions.html">What is the legal position on republishing official row-level data and paying rewards?</a></td><td>Blocks the public/private split and the entire rewards pool.</td><td><span class="blank" title="unverified: decision only — no suggestion drafted">&mdash; blank</span></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q03 / S07</span></td><td><a href="../pages/questions.html">Is the backtest corpus 136 games or 137?</a></td><td>The pre-registration and the artefact have drifted by one real, official game.</td><td><a href="../pages/suggestions.html#S07">S07</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q06 / S04</span></td><td><a href="../pages/questions.html">Which official source establishes who actually started?</a></td><td>The Game Book PDF is linked from every game centre and has never been parsed.</td><td><a href="../pages/suggestions.html#S04">S04</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr></tbody></table></div>
+
+<h2>What to do first</h2>
+<ol>
+<li><strong>Decide Q01</strong> (price source, or formal retreat). Nothing downstream publishes a
+real number until this is answered.</li>
+<li><strong>Decide Q10</strong> (one canonical dashboard). Every week without it produces another
+namespace.</li>
+<li><strong>Ingest the inactives article</strong> (S03). Cheapest real evidence gain available, and
+it closes five readiness rows.</li>
+<li><strong>Parse one Game Book PDF</strong> (S04). One day, and it either unlocks the availability
+graph or proves it impossible — both outcomes are worth the day.</li>
+<li><strong>Re-freeze the corpus</strong> (S07). The registration currently disagrees with its own
+artefact by one game.</li>
+</ol>
+
+<footer>
+<p><strong>Analytical research only — not wagering advice.</strong> Every published number is
+either computed from data/observations.json (transcribed from the official page named in the row)
+or shown as a blank. No value is inferred, interpolated or carried over from an unverified source.</p>
+<p>National Problem Gambling Helpline: 1-800-MY-RESET —
+<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>.
+Capture clock for this release: <code>2026-11-15T23:27:10Z</code>. Rebuild with the four commands in
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/README.md">README.md</a>
+or read the site's own <a href="../pages/sources.html">source register</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard · NFL decision readiness</title>
+<meta name="description" content="NFL decision readiness: what blocks each requirement and what number would clear it.">
+<link rel="stylesheet" href="assets/readiness.css">
+</head>
+<body>
+<div class="layout">
+<nav class="side">
+  <div class="brand">NFL decision readiness</div>
+  <div class="sub">Own4 · what is blocked, by how much,<br>and what would clear it</div>
+  <a class="active" href="index.html">Dashboard</a><a class="" href="pages/decision-readiness.html">Decision readiness</a><a class="" href="pages/verification.html">Independent verification</a><a class="" href="pages/availability.html">Availability evidence</a><a class="" href="pages/questions.html">Questions</a><a class="" href="pages/suggestions.html">Suggestions</a><a class="" href="pages/flagged.html">Flagged for review</a><a class="" href="pages/sources.html">Sources</a><a class="" href="pages/executive-summary.html">Executive summary</a>
+</nav>
+<main>
+
+<h1>NFL decision readiness</h1>
+<p class="lead">One page per question. This site answers a single question the other
+26 NFL namespaces in this repository do not: <strong>for each requirement, what blocks it,
+and what number would clear it?</strong> Every figure below was computed this session from
+official nfl.com pages fetched at <code>2026-11-15T23:27:10Z</code>. Anything that could not be confirmed is
+shown as a blank and listed on <a href="pages/flagged.html">Flagged for review</a>.</p>
+
+<div class="cards"><div class="card"><div class="k">78</div><div class="l">requirements traced, each with its blocking gate</div></div><div class="card"><div class="k">21</div><div class="l">met and re-verified this session</div></div><div class="card"><div class="k">31</div><div class="l">partial — implemented, evidence-limited</div></div><div class="card"><div class="k">13+13</div><div class="l">blocked or not started</div></div><div class="card"><div class="k">138</div><div class="l">official Week 10 inactives named — source the repo never ingested</div></div><div class="card"><div class="k">347</div><div class="l">report rows read, all 28 club sections, 8/8 chunks</div></div><div class="card"><div class="k">20</div><div class="l">questions, answers blank until established</div></div><div class="card"><div class="k">14</div><div class="l">irregularities flagged, none blocking</div></div></div>
+
+<h2>The five decisions that need an owner</h2>
+<p>Out of 78 traced requirements, 5 are waiting on a human decision rather than on
+engineering. Everything else on this site is a build task with a measurable target.</p>
+<div class="wrap"><table><thead><tr><th>Ref</th><th>Decision needed</th><th>Why it is first-order</th><th>Options</th><th>Source</th></tr></thead><tbody><tr><td><span class="id">Q01 / S01</span></td><td><a href="pages/questions.html">How are market prices obtained, or do we formally give up on the residual?</a></td><td>Blocks 9 traced requirements including every ROI figure. The NFL publishes no line.</td><td><a href="pages/suggestions.html#S01">S01</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q10 / S02</span></td><td><a href="pages/questions.html">Which of the 26 NFL site trees is canonical?</a></td><td>Every new session adds a namespace because no rule says where work must land.</td><td><a href="pages/suggestions.html#S02">S02</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q13</span></td><td><a href="pages/questions.html">What is the legal position on republishing official row-level data and paying rewards?</a></td><td>Blocks the public/private split and the entire rewards pool.</td><td><span class="blank" title="unverified: decision only — no suggestion drafted">&mdash; blank</span></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q03 / S07</span></td><td><a href="pages/questions.html">Is the backtest corpus 136 games or 137?</a></td><td>The pre-registration and the artefact have drifted by one real, official game.</td><td><a href="pages/suggestions.html#S07">S07</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr><tr><td><span class="id">Q06 / S04</span></td><td><a href="pages/questions.html">Which official source establishes who actually started?</a></td><td>The Game Book PDF is linked from every game centre and has never been parsed.</td><td><a href="pages/suggestions.html#S04">S04</a></td><td><a href="https://www.nfl.com/">nfl.com</a></td></tr></tbody></table></div>
+
+<h2>What this session changed</h2>
+<div class="note good">
+<strong>The single largest finding:</strong> the repository treats official inactive lists as
+unobtainable. They are published. nfl.com carries a dated inactives article naming
+<strong>138 players across 24 club sections</strong> for Week 10, and the same article
+publishes the venue string for 12 games. That converts one of the biggest listed blockers from
+&ldquo;the source does not exist&rdquo; into &ldquo;a parser has not been written&rdquo;.
+<a href="pages/availability.html">See the availability evidence</a>.
+</div>
+<div class="note warn">
+<strong>The single largest non-finding:</strong> market prices still do not exist. The NFL
+published kickoff time, network and venue for all 13 Week 11 fixtures and no line of any kind.
+9 of the traced requirements ultimately depend on that one missing input, which is why
+it is question Q01 and suggestion S01, not a build ticket.
+</div>
+
+<h2>How to read the state column</h2>
+<div class="wrap"><table class="meta"><thead><tr><th>State</th><th>Meaning</th></tr></thead><tbody><tr><td><span class="badge b-met">met</span></td><td>Implemented and re-verified against an official source this session.</td></tr><tr><td><span class="badge b-partial">partial</span></td><td>Implemented, but limited by a documented evidence gap. The gap is named in its row.</td></tr><tr><td><span class="badge b-blocked">blocked</span></td><td>Cannot be completed from the sources currently held. The missing artefact is named.</td></tr><tr><td><span class="badge b-not_started">not started</span></td><td>No implementation found anywhere in the repository.</td></tr></tbody></table></div>
+
+<h2>Where to go next</h2>
+<ul>
+<li><a href="pages/decision-readiness.html">Decision readiness</a> — all 78 requirements, filterable by state and group.</li>
+<li><a href="pages/verification.html">Independent verification</a> — five peer claims re-checked against freshly fetched official pages, plus the four internal-consistency tests.</li>
+<li><a href="pages/availability.html">Availability evidence</a> — the Week 10 report and inactives transcribed in full, with the join between them.</li>
+<li><a href="pages/questions.html">Questions</a> — what is known, what is unknown, and the artefact that would resolve each one.</li>
+<li><a href="pages/suggestions.html">Suggestions</a> — 13 proposals, each with three options and a blank verdict awaiting review.</li>
+<li><a href="pages/flagged.html">Flagged for review</a> — 14 irregularities, each with its official source.</li>
+</ul>
+
+<footer>
+<p><strong>Analytical research only — not wagering advice.</strong> Every published number is
+either computed from data/observations.json (transcribed from the official page named in the row)
+or shown as a blank. No value is inferred, interpolated or carried over from an unverified source.</p>
+<p>National Problem Gambling Helpline: 1-800-MY-RESET —
+<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>.
+Capture clock for this release: <code>2026-11-15T23:27:10Z</code>. Rebuild with the four commands in
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/README.md">README.md</a>
+or read the site's own <a href="pages/sources.html">source register</a>.</p>
+</footer>
+</main>
+</div>
+</body>
+</html>
