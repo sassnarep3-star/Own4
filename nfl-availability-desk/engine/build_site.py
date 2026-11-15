@@ -569,7 +569,7 @@ def render_value(v) -> str:
     return esc(v)
 
 
-def page_governance(g, valid, st) -> str:
+def page_governance(g, valid, st, reg, prereg_state) -> str:
     def kv_rows(d):
         return [[f"<b>{esc(k)}</b>", render_value(v)] for k, v in d.items()]
 
@@ -605,6 +605,16 @@ def page_governance(g, valid, st) -> str:
                   "<ul class='tight'>" + "".join(
                       f"<li><b>{esc(r['id'])}</b> — <code>{esc(r['file'])}</code> — {esc(r['scope'])} — "
                       f"status: {esc(r['status'])}</li>" for r in g["preregistration"]["registered"]) + "</ul>"
+                  + table(["id", "rule file", "sha256 frozen", "registered commit", "window state at freeze", "check"],
+                          [[f"<b>{esc(e['id'])}</b>", f"<code>{esc(e['file'])}</code>",
+                            f"<code>{esc(e['sha256_at_freeze'][:16])}…</code>",
+                            (f"<a href='https://github.com/sassnarep3-star/Own4/commit/{esc(reg['entries'][0]['registered_commit'])}' "
+                             f"target='_blank' rel='noopener noreferrer'><code>{esc(e['registered_commit'][:9])}</code></a>"
+                             if e.get("registered_commit") else "<span class='bad'>pending</span>"),
+                            esc(e["evaluation_window_state_at_freeze"]),
+                            f"<code>engine/preregister.py --check</code> &rarr; {esc(prereg_state)}"] for e in reg["entries"]],
+                          scroll=False)
+                  + "<div class='note' style='margin-top:12px'>" + esc(reg.get("registration_note", "")) + "</div>"
                   + "<div class='note' style='margin-top:12px'>" + esc(g["preregistration"]["rule"])
                   + " The hash itself is recorded in <code>data/prereg.json</code> and re-checked against git "
                     "history by <code>engine/preregister.py --check</code>, which fails the build when a frozen "
@@ -817,6 +827,7 @@ def main() -> int:
     g = jload("governance.json")
     fl = jload("flags.json")
     review = jload("repo_review.json", DER)
+    reg = jload("prereg.json")
     sources = jload("sources.json")
 
     write("index.html", page_index(readiness, audit, valid, st, fl))
@@ -826,7 +837,11 @@ def main() -> int:
     write(os.path.join("pages", "evidence.html"), page_evidence(ev, reads, man))
     write(os.path.join("pages", "questions.html"), page_questions(q))
     write(os.path.join("pages", "suggestions.html"), page_suggestions(s))
-    write(os.path.join("pages", "governance.html"), page_governance(g, valid, st))
+    # derived from the ledger alone - the build must stay a pure function of the checked-in files,
+    # so git is not consulted here; engine/preregister.py --check is what actually runs git, in CI.
+    state = ("commit recorded in the ledger" if all(e.get("registered_commit") for e in reg["entries"])
+             else "PENDING - a registration without a commit is not a registration")
+    write(os.path.join("pages", "governance.html"), page_governance(g, valid, st, reg, state))
     write(os.path.join("pages", "repo-review.html"), page_repo_review(review, audit, valid, st, ev, diffs))
     write(os.path.join("pages", "flagged.html"), page_flagged(fl))
     write(os.path.join("pages", "executive-summary.html"),

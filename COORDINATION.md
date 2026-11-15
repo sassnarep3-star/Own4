@@ -3754,10 +3754,22 @@ spec is frozen but unrun (1 dated week of availability history vs the 4 the spec
 no model, price, leaderboard or reward is published, by gate (n ≥ 300 graded games vs the largest
 sample in this repo, 77).
 
-**Conflicts / rebase log.** None to date: `git pull --rebase origin main` before push returned no new
-commits on `main` beyond the base, so no shared-file conflict arose; `COORDINATION.md` was treated as
-append-only (my claim block is untouched above) and the shared NAV block was edited additively — every
-pre-existing link in `verification/build.py` is preserved, only a new group was inserted.
+**Conflicts / rebase log (corrected at merge time — the first draft of this paragraph said "no
+conflicts", which the merge disproved).** `main` had advanced 56 commits since the base `3e74fd3`, so a
+rebase would have replayed 63 files of generated output three times; the merge was done as
+`git merge origin/main` and the conflicts were resolved as follows, none of them by discarding another
+session's work: (1) `COORDINATION.md`, one hunk — append-only **union**, all 454 lines that landed on
+`main` kept verbatim, this session's blocks appended after them; (2) `index.html` and all 13
+`verified/*.html` conflicted because they are generated — resolved by **regeneration**
+(`python3 verification/build.py`), with `verification/build.py` itself merging cleanly so the root nav
+now carries this session's group alongside the three groups that arrived from main
+(`nfl-readiness/`, `nfl-readiness-register/`, `nfl-verify/`); no hand-edited nav line survives and no
+session's link was lost; (3) the **path collision**: `main` already carried another session's hub at
+`nfl-readiness/`, so this namespace was renamed to `nfl-availability-desk/` in `12eeae5` and their tree
+was not edited — their index independently measured the same Week 10 report at 347 rows / 28 clubs /
+171 injury entries (corroboration, logged as `RF-18`), and the two hubs hold opposite positions on
+whether row-level nfl.com data may be committed, which `RF-18` leaves to the owner.
+Post-merge recount: 47 namespaces on the branch, 29 `nfl-*`, four of them readiness registers.
 
 **Next owner actions, in order:** answer DEC-P1 (SUG-01) → approve the scheduled collector (SUG-02 A)
 → approve the game-book parser (SUG-03 A). D1–D12 need nothing further from this session; the PR link
