@@ -3174,3 +3174,49 @@ on S5 (`signal_metric` missing); post-hoc record baseline window corrected
 decision queue — a reviewer picks options before anything new is implemented. Suggested
 first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-line
 re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
+
+---
+
+## Session `arena/d941f3c1-own4` — Decision-Readiness Desk + full 32-team official availability capture (CLAIM, 2026-11-15T23:3xZ)
+
+Session ID `arena-d941f3c1-own4` · Branch `arena/d941f3c1-own4` (platform-pinned; the requested
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every
+prior session) · Base: `3e74fd3` (= `main` after PR #107, nfl-book merged).
+
+**Gap that justifies this session (surveyed before claiming, not assumed):**
+
+* No session has ever read the *complete* official Week 10 injury report. `nfl-book/data/injuries_week10_capture.json`
+  states on its face: "first 2 of 8 page chunks read on 2026-11-14 … The remaining 6 chunks were not read".
+  The owner's list asks for a 32-team sweep, a re-capture of the Week 10 tables (254 vs 279 rows, 4 vs 2
+  no-injury sections), the game-designation count (6 of 254 claimed) and the reserve list. Those numbers are
+  not checkable against anything in the repo, because the full capture does not exist. This session produces it.
+* No namespace carries the **decision-readiness table** the owner now asks for on the landing page (one row per
+  requirement with the gate that blocks it and the number that would clear it). `nfl-book` has a requirements
+  traceability table (R1–R10, met/partial/blocked) — useful, but it is not gated by a clearing number and does
+  not cover the ~78-item expanded list. This session builds it and cross-links nfl-book's rows rather than
+  restating them.
+
+**Namespace:** `nfl-readiness/` (new; no peer owns this path). Shared files: `COORDINATION.md` (append-only),
+`verification/build.py` NAV + regenerated `index.html`/`verified/*.html` (additive, union-resolved), one new
+workflow `.github/workflows/nfl-readiness.yml`. No peer namespace file is edited — peer captures are READ,
+re-verified, and cited, never modified.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| D1 | Repo review of the expanded requirement list vs the 21 merged NFL namespaces; inventory of what each already delivers | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/repo_review.json`, `nfl-readiness/pages/repo-review.html` |
+| D2 | Full official Week 10 availability capture: all 8 chunks of nfl.com/injuries, every club, blank cells preserved verbatim, fetch clock time + per-chunk hashes | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/raw/injuries_week10_2026-11-15.csv`, `nfl-readiness/data/capture_manifest.json` |
+| D3 | Count/verify the owner's cited numbers against the capture: report rows, no-injury sections, game-designation count, SEA/CIN injury-free claim, the three blank Lions designations, IR-absent players | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/capture_audit.json`, `nfl-readiness/pages/availability.html` |
+| D4 | Point-in-time delta panel: this capture vs every stored Week-10 capture in the repo (delta published, level never quoted alone) | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/injury_delta.json` |
+| D5 | Fixture-context register: every Week 10 fixture + the live slate, venue and date-time transcribed from official schedule pages | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/fixtures.json`, `nfl-readiness/pages/fixtures.html` |
+| D6 | Decision-readiness table: one row per requirement, gate that blocks it, the number that would clear it, official source per row | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/readiness.json`, `nfl-readiness/index.html` |
+| D7 | Questions / information / answers register + suggestions-for-review section (verdicts left blank for the reviewer) | claimed | arena/d941f3c1-own4 | `nfl-readiness/data/{questions,suggestions}.json`, matching pages |
+| D8 | Governance: pre-registration register (rule text + commit hash as the registration), validation gates, demotion gate, price-data policy decision, ablations-not-fixed-penalties spec | claimed | arena/d941f3c1-own4 | `nfl-readiness/prereg/**`, `nfl-readiness/data/gates.json`, `nfl-readiness/pages/governance.html` |
+| D9 | Drift alarm: parser pinned to expected row counts/required fields, fails loudly on missing fields | claimed | arena/d941f3c1-own4 | `nfl-readiness/engine/drift.py`, `nfl-readiness/data/drift_expectations.json` |
+| D10 | Site (landing + category subpages + Flagged for Review), per-row source verifier, broken-link check, CI workflow, tests | claimed | arena/d941f3c1-own4 | `nfl-readiness/**`, `.github/workflows/nfl-readiness.yml` |
+| D11 | Executive summary | claimed | arena/d941f3c1-own4 | `nfl-readiness/EXECUTIVE_SUMMARY.md`, `nfl-readiness/pages/executive-summary.html` |
+| D12 | Final integration: additive root nav, rebuild, PR → main → merge → Pages deploy confirmation, completion record here | claimed | arena/d941f3c1-own4 | `verification/build.py`, `index.html`, `verified/*.html`, `COORDINATION.md` |
+
+**Verification rule for this session:** every published row is either (a) transcribed from a page fetched in
+this session, with the URL and fetch time, or (b) a repo-computed number with the file path and the script that
+computes it. Anything not confirmable is left blank and flagged on `pages/flagged.html`. No market price is
+invented; no depth rank is inferred from jersey order; no replacement is inferred from a depth chart.
