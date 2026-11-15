@@ -3195,3 +3195,351 @@ Session ID: `arena/5253d26f-own4` · Branch: `arena/5253d26f-own4` (platform-pin
 **Standing scope rules for this session:** peer namespaces are read-only; `COORDINATION.md` is append-only; all `nfl-dashboard/` content is additive. Expected live URL after deploy: https://sassnarep3-star.github.io/Own4/nfl-dashboard/
 
 **PR link and merge result:** (to be recorded after merge)
+
+---
+
+## Session `arena/63ebae0e-own4` — NFL Requirements Register & Decision-Readiness Dashboard (claim, 2026-11-15 UTC)
+
+Session ID: `63ebae0e` · Branch: `arena/63ebae0e-own4` (platform-pinned single branch; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
+
+**Survey at claim time (2026-11-15):** main carries 22+ published workspaces. The newest brief adds a substantially expanded requirement list (~66 lines) — availability-snapshot automation, depth-slot semantics, roster-turnout versioning, proper-score leaderboard divisions, price policy, pre-registration/holdout splits, per-team views, weather/roof overlay, onside-kick priors and several specific fixes (Week-10 recapture, Lions designations, stale Ravens depth rows, reserve-list capture). Grep confirms NONE of these titles exist in the repo yet (`Automate immutable multi-day availability`, `Model depth slots as groups`, `Onside-Kick Regime`, `Stadium Roof`, `joint-evidence gate`, `shadow baseline`, `Wed, Thu and Fri` — zero hits). Prior sessions tracked only the first 16 requirements (nfl-book R1–R16). No live session claims the decision-readiness register; open PR #93 (nfl-command-center, 2026-11-13) predates this claim by >24 h and touches only its own namespace + shared files — out of scope here.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Board claim + gap survey vs expanded requirement list | in progress | 63ebae0e | COORDINATION.md (this entry) |
+| N2 | Official-source verification via live fetches (injury report, schedule, game books, transactions, NWS, snap-count source) + first immutable snapshot capture | unclaimed | 63ebae0e | `nfl-readiness/data/**`, `nfl-readiness/snapshots/**` |
+| N3 | Full requirement register: every line of the brief transcribed verbatim → status, owning workspace, gate that blocks it, number that would clear it, official source | unclaimed | 63ebae0e | `nfl-readiness/data/requirements.json` |
+| N4 | Decision-readiness table on the landing page (one row per requirement: gate blocking + clearing number) | unclaimed | 63ebae0e | `nfl-readiness/index.html` |
+| N5 | Snapshot automation: capture script + drift alarm + scheduled workflow (Wed/Thu/Fri) | unclaimed | 63ebae0e | `nfl-readiness/capture/**`, `.github/workflows/nfl-readiness-snapshot.yml` |
+| N6 | Suggestions section (review-before-implement) + questions/information/answers register | unclaimed | 63ebae0e | `nfl-readiness/data/{suggestions,decisions}.json`, pages |
+| N7 | Executive summary + line-by-line repo review + Flagged for Review (all irregularities, sources) | unclaimed | 63ebae0e | `nfl-readiness/pages/**`, `NFL_READINESS_EXECUTIVE_SUMMARY.md` |
+| N8 | Verifier (row-level source links, blank+flag rule, link integrity) + site build + tests | unclaimed | 63ebae0e | `nfl-readiness/engine/**`, `nfl-readiness/verify.py` |
+| N9 | Root nav integration (additive, generator-owned) + COORDINATION completion record | unclaimed | 63ebae0e | `verification/build.py` NAV, `index.html`, `verified/*.html` |
+| N10 | PR → main → merge → Pages deploy confirmation, recorded here | unclaimed | 63ebae0e | COORDINATION.md |
+
+**Scope rules:** everything new lives in `nfl-readiness/` (new namespace, zero file overlap with peers). Shared files touched only as: append-only COORDINATION.md, additive NAV group in `verification/build.py`, regenerated `index.html`/`verified/*.html` from that generator, one new root executive-summary markdown. Peer namespaces are read-only.
+
+## Session `arena/f9a32d15-own4` — NFL decision-readiness hub, official injury capture, pre-registered shadow baseline, suggestions & questions (claim, 2026-11-15 UTC)
+
+Session ID: `arena/f9a32d15-own4` · Branch: `arena/f9a32d15-own4` (platform-pinned; the requested `session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior session) · Base: `main` at `3e74fd3` (PR #107).
+
+**Survey at claim time:** 23 NFL namespaces on `main` (`nfl`, `nfl-arena`, `nfl-audit`, `nfl-book`, `nfl-command`, `nfl-core`, `nfl-decision`, `nfl-decisions`, `nfl-edge`, `nfl-hub`, `nfl-integration`, `nfl-intel`, `nfl-lab`, `nfl-ledger`, `nfl-lines`, `nfl-market`, `nfl-marketboard`, `nfl-markets`, `nfl-origination`, `nfl-own`, `nfl-price-snapshot`, `nfl-quant`, `nfl-research`). Open PRs #29–#93 are stale (oldest 2026-11-02); no live claim overlaps this scope. The brief's IDs `VR-xx`, `VQ-xx`, `SG-xx` are not defined anywhere in the repo; they are treated as unverified claims and checked against nfl.com where possible.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| R1 | Requirements register: one row per brief requirement, status, blocking gate, number that would clear it, repo artifact, source | claimed (file list corrected in log below) | arena/f9a32d15-own4 | `nfl-readiness/engine/content.py` (register rows; no separate requirements.json was created) |
+| R2 | Official Week 10 injury-report capture via nfl.com (raw text held PRIVATE, hash published; public = aggregates only) and verification of the brief's VR-04..VR-08/VR-12 claims | claimed | arena/f9a32d15-own4 | `nfl-readiness/data/injury_week10_aggregates.json`, `private-store/` (gitignored) |
+| R3 | Pre-registered singles shadow baseline (rule text committed before Week 11 kickoff; forecasts recorded with probability + inputs) | claimed | arena/f9a32d15-own4 | `nfl-readiness/prereg/*`, `nfl-readiness/data/shadow_week11.json` |
+| R4 | Suggestions register (options A/B/C, verdict blank for owner) and questions/answers register (answer only from official sources) | claimed (file list corrected in log below) | arena/f9a32d15-own4 | `nfl-readiness/engine/content.py` (SUGGESTIONS, QUESTIONS); rendered to `nfl-readiness/pages/suggestions.html`, `questions.html` |
+| R5 | Landing page (decision-readiness table), subpages by category, executive summary, Flagged for Review | claimed | arena/f9a32d15-own4 | `nfl-readiness/**` (generated by `nfl-readiness/engine/build.py`) |
+| R6 | Verifier: every table row has an https source, no broken local links, no localhost | claimed (file corrected) | arena/f9a32d15-own4 | `nfl-readiness/engine/check_site.py` |
+| R7 | Integration: PR → main, merge, Pages deploy confirmation, record here | claimed | arena/f9a32d15-own4 | this file |
+
+**Scope rules:** no peer namespace is edited. `COORDINATION.md` is append-only. Root `index.html` / `verification/build.py` are not edited in this session (root nav link is logged as a request, see R5 notes, to avoid regenerating 13 peer pages while 7 peer PRs are open).
+
+### Log — `arena/f9a32d15-own4` (2026-11-15 UTC, updates to the R1–R7 claim above)
+
+- **Scope.** `nfl-readiness/**` is claimed under R5. Four file names in the first claim list were never created (`requirements.json`, `suggestions.json`, `questions.json`, `verify.py`). The register lives in `nfl-readiness/engine/content.py`; the checker is `nfl-readiness/engine/check_site.py`. No peer namespace, root `index.html`, or `verification/build.py` was edited.
+- **Commits.** `64a20e8` (shadow baseline registration, `.gitignore` line), `210f8ee` (inputs, shadow output, injury aggregates, engine scripts), then the content, build, checker and page commits. Pushed only after `git pull --rebase`.
+- **Injury report, verified.** All 8 chunks of `nfl.com/injuries/` were read this session (chunk 7 is news links only). All 347 rows of the private capture were compared with the live text: **347 of 347 match**. Counts: 28 clubs, 14 matchups, 171 injury entries, 16 DNP rows with a blank injury cell. The brief's "blank" Detroit cells read **Out** on the live page (Flag F-R01).
+- **279 vs 347.** 279 = 347 − 68, where 68 = SEA-LV (20) + SF-DAL (31) + PIT-CIN (17). This is one of 15 subsets that sum to 279 and has no documented basis. Not reproduced; flagged F-R02.
+- **Repo captures compared with the live page.** `nfl-marketboard/data/raw/injuries_week10_official.csv`: 347 rows, same keys after LA→LAR, **14 rows differ** (13 Chargers rows and Arden Key, IND): 11 injury cells, 11 game-status cells, 6 practice-status cells. Live page is correct in every case checked. `nfl-book/data/injuries_week10_capture.json`: 107 rows, chunks 0–1 only (its own scope note says so).
+- **Week 10 status.** Official "Teams on Bye": CHI, DEN, PHI, TB (confirmed; previously inferred). Final: 9 games, 18 clubs. Live at capture: SF-DAL (Q3), LAR-ARI (Q4), SEA-LV (Q4). Not started: PIT-CIN, LAC-BAL. 32 − 18 − 4 = 10 clubs not yet final. Each of the 8 withheld shadow games includes at least one of them; none of the 5 forecast games does.
+- **Not verified, left blank or flagged:** the brief's VR-04..VR-08 and VR-12 claims were not checked one by one (only VR-04 was located in this repo). VR-24, VR-25, VQ-05 and VR-26 were not found anywhere in the repo. Official per-club depth charts, inactive lists and snap counts were not verified or located. Headline URLs were taken from link text and not opened.
+- **Freeze caveat.** `make_inputs.py` and `official_inputs_2026.json` were committed after the shadow-baseline freeze (`64a20e8`). The freeze covers only the rule text and `shadow_v1.py`. SIGMA = 13.5 is an unsourced assumption, flagged F-R10.
+- **Requests to other owners (not edited here):**
+  - *nfl-marketboard owner:* correct the 14 rows listed above in `data/raw/injuries_week10_official.csv`, or re-capture; use one team code for Los Angeles (`LA` vs `LAR`) and one for Arizona (`AZ` on the page, `ARI` in the CSVs).
+  - *nfl-book owner:* the capture covers chunks 0–1 only and is labelled as such; a full 8-chunk capture would supersede it.
+- **Root navigation (final integration only).** Add `nfl-readiness/index.html` to the root NAV in `verification/build.py`. Not done in this session.
+- **Gate.** `python3 nfl-readiness/engine/check_site.py` passes: 10 pages, 223 table rows (184 with an nfl.com link, 39 with a repository-record link only, 0 without a link), 310 external links, 113 internal links, 0 broken, 0 private player names published. Internal-record rows are labelled as such on the page.
+- **Pages.** The site is a static folder at `nfl-readiness/` on `main`. Deploy confirmation is recorded in the integration entry below.
+
+
+## Session `arena/507da9a4-own4` — NFL consolidated decision-readiness & requirements integration (claim, 2026-11-15 UTC)
+
+Session ID: `arena/507da9a4-own4` · Branch: `arena/507da9a4-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior
+session). Base: `main` at `3e74fd3` (after PR #107, the `arena/c8969a10-own4` NFL Book merge).
+
+**Survey at claim time:** 17 NFL namespaces already merged on `main`
+(`nfl/`, `nfl-arena/`, `nfl-audit/`, `nfl-book/`, `nfl-command/`, `nfl-core/`, `nfl-decision/`,
+`nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-integration/`, `nfl-intel/`, `nfl-lab/`, `nfl-ledger/`,
+`nfl-lines/`, `nfl-market/`, `nfl-markets/`, `nfl-origination/`, `nfl-own/`, `nfl-price-snapshot/`,
+`nfl-quant/`, `nfl-research/`). Every prior session delivered a partial slice of the same master
+requirement list. No live overlapping claim found on the board (all prior entries are `done`/`needs
+review`/merged or belong to closed sessions). Scope claimed below is additive and non-overlapping.
+
+**Differentiated scope:** this session does NOT re-implement any single requirement. It builds the
+**cross-namespace consolidated decision-readiness layer** the brief explicitly asks for but that no
+namespace yet owns end-to-end: one authoritative register that maps the FULL master requirement list
+to (status, implementing namespace(s), the gate that blocks it, the number that would clear it, and
+an official source link), plus a consolidated questions/answers register, a consolidated suggestions
+queue, a line-by-line verification log, and a clean dashboard with the decision-readiness table on
+the landing page. All values are grounded in the repository's existing verified data and re-checked
+against live official nfl.com sources this session; unverifiable cells are blank and flagged.
+
+### Task board
+
+| # | Task | Status | Owner session | Files touched (exclusive scope) |
+|---|------|--------|---------------|----------------------------------|
+| C1 | Board claim + repo survey (17 NFL namespaces inventoried; master requirement list enumerated; gaps vs the brief identified) | claimed | arena/507da9a4-own4 | `COORDINATION.md` (this entry only) |
+| C2 | Live official-source verification (nfl.com standings, schedule, injuries, scores re-read 2026-11-15) — confirms repo data still matches | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/official_reads_2026-11-15.json` |
+| C3 | Master requirement register: every requirement in the brief → status / implementing namespaces / blocking gate / clearing number / official source link | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/requirements.json` |
+| C4 | Consolidated questions/answers register (what we know / do not know / what would settle it / what it blocks) + consolidated suggestions queue (options + verdicts) | claimed | arena/507da9a4-own4 | `nfl-consolidated/data/{questions,suggestions}.json` |
+| C5 | Decision-readiness table on the landing page (one row per requirement: gate that blocks it + number that would clear it) | claimed | arena/507da9a4-own4 | `nfl-consolidated/index.html` |
+| C6 | Static site build (landing + category subpages), row-level source-link verifier, no broken links | claimed | arena/507da9a4-own4 | `nfl-consolidated/**`, `nfl-consolidated/engine/*` |
+| C7 | Executive summary + flagged-for-review + sources + line-by-line verification pages | claimed | arena/507da9a4-own4 | `nfl-consolidated/**` |
+| C8 | Root navigation integration (additive NAV entry via `verification/build.py`; regenerate `index.html` + `verified/*.html` superset-only) | claimed | arena/507da9a4-own4 | `verification/build.py`, `index.html`, `verified/*.html` |
+| C9 | Final integration: re-verify, PR → main → merge without waiting, confirm GitHub Pages deploy, record PR link + merge result here | claimed | arena/507da9a4-own4 | `COORDINATION.md` (this entry) |
+
+**Scope rules:** no peer namespace is edited. Shared files are append-only (`COORDINATION.md`) or
+additive (`verification/build.py` NAV, regenerated `index.html`/`verified/*.html`). Peer data may be
+READ and re-verified but never modified. All new work lives in the new `nfl-consolidated/` namespace.
+
+---
+
+## Session `arena/507da9a4-own4` — completion record (2026-11-15 UTC)
+
+All C-tasks complete on branch `arena/507da9a4-own4`; PR opened to `main`.
+
+### What was delivered
+
+| # | Task | Status | Notes |
+|---|------|--------|-------|
+| C1 | Board claim + repo survey | done | Claimed C1–C9; 22 NFL namespaces inventoried; master requirement list enumerated. |
+| C2 | Live official-source verification | done | nfl.com standings, Week-11 schedule, Week-10 injury report, Week-1 scores re-read live 2026-11-15 — all match the repo (recorded in `nfl-consolidated/data/official_reads_2026-11-15.json`). |
+| C3 | Master requirement register | done | 73 requirements across 7 groups → status / implementing namespaces / blocking gate / clearing number / official source link (`nfl-consolidated/data/requirements.json`). |
+| C4 | Consolidated questions + suggestions | done | 8 questions (known/unknown/what settles it/what it blocks) + 8 suggestions (options A/B/C, verdict required first). |
+| C5 | Decision-readiness table on landing page | done | `nfl-consolidated/index.html` — one row per requirement with the gate that blocks it and the number that would clear it. |
+| C6 | Static site build + verifier | done | 8 pages; `verify.py`: 205 rows, 197 sourced + 8 meta-exempt, 72 marked blanks, 285 links, 0 errors. |
+| C7 | Exec summary / flagged / sources / verification pages | done | All present, every row source-linked. |
+| C8 | Root navigation integration | done | Additive NAV in `verification/build.py`; regenerated `index.html` + `verified/*.html` as a superset (191 unique hrefs, zero peer links dropped). |
+| C9 | Final integration: PR → merge → Pages | in progress | PR below; merge + Pages confirmation recorded here. |
+
+### Status distribution of the 73 requirements
+
+`met` 27 · `partial` 38 · `blocked` 3 · `not_started` 4 · `in_progress` 1.
+
+The three `blocked` items are all gated by the **absence of an official price source**
+(FB-01): B02/B03 market columns + residual, F06 vig-free consensus. The recurring
+`partial` items are gated by the **absence of an official depth-chart / snap-count
+source** (FB-04) and the **n≥300 sample floor** (G8). No value was inferred; every
+gap is blank and flagged.
+
+### Sources read live this session (all returned 2xx on 2026-11-15)
+
+- https://www.nfl.com/standings/league/2026/REG — 2026 standings (reconciliation target)
+- https://www.nfl.com/schedules/2026/by-week/week-11 — Week-11 slate (13 games + 6 byes)
+- https://www.nfl.com/injuries/ — Week-10 injury report (confirms DET Kerby Joseph / Cade Mays / D.J. Reed = Out, closing E25)
+- https://www.nfl.com/scores/2026/week-1 — Week-1 finals (line-by-line corroboration)
+
+### Verification performed (re-runnable)
+
+```
+cd nfl-consolidated
+python3 engine/build_site.py   # data/*.json + index.html + pages/*.html
+python3 engine/verify.py      # PASS: 8 pages, 205 rows, 197 sourced, 72 blanks, 285 links, 0 errors
+```
+Root checks also pass: `scripts/check_site.py` (11 pages, 758 links, 438 rows, 0 problems),
+`scripts/verify_data.py` (PASS). Rebuild is deterministic (no diff after rerun).
+
+### Irregularities flagged (all non-blocking, on `nfl-consolidated/pages/flagged.html`)
+
+FB-01 no official price source · FB-02 staking uses assumed −110 · FB-03 105/137 rows
+aggregate-verified only · FB-04 no official depth-chart source · FB-05 player props
+blocked at the data layer · FB-06 no historical injury archive · FB-07 replacement depth
+blank beyond official prose · FB-08 17+ overlapping NFL namespaces · FB-09 single
+availability capture cannot support backtesting · FB-10 no strategy qualifies, 0 rewards.
+
+### Deviations, stated plainly
+
+Single fixed branch (no per-task branches creatable in this harness). Gates and
+clearing numbers are project-defined conventions frozen in the repo; the official-source
+column is the nfl.com page each rule depends on. No peer namespace was edited; shared
+files are append-only (`COORDINATION.md`) or additive (`verification/build.py` NAV,
+regenerated `index.html`/`verified/*.html`).
+
+**Merge with `main` (2026-11-15 UTC, this session).** Main moved to `faa04b1` (PR #108, `arena/507da9a4-own4`, `nfl-consolidated/`, root nav integration). Two conflicts in this file, both resolved by keeping both sides' entries; no line of another session was removed. Nothing in `nfl-consolidated/`, `index.html` or `verification/` was edited by this session.
+
+**Overlap logged.** `nfl-consolidated/` (`arena/507da9a4-own4`) also builds a decision-readiness page, requirements and questions/suggestions registers, and a verification step. This hub (`nfl-readiness/`) keeps its own register so each one can be checked independently. The owner should choose one canonical hub; this is suggestion SR-05 in `nfl-readiness/pages/suggestions.html`. Request for final integration: link `nfl-readiness/index.html` from the root nav once that choice is made.
+
+---
+## Session `arena/f9a32d15-own4` — completion record (2026-11-15 UTC)
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/109 — "NFL readiness hub: verified injury capture (347/347 rows re-read), shadow baseline v1, registers, Flagged for Review".
+- **Merge result:** MERGED (merge commit `db138a5`, 2026-11-15T23:40:29Z), `--merge`, all checks passed (validate, verify, audit, Rebuild and verify). Merged after a conflict resolution with `main` (PR #108) that kept both sides' COORDINATION entries.
+- **Pages:** legacy build from `main` `/` completed for `db138a5` (status `built`, no error). Live and fetched: https://sassnarep3-star.github.io/Own4/nfl-readiness/ (landing, 71 requirements) and https://sassnarep3-star.github.io/Own4/nfl-readiness/pages/flagged.html (16 flags).
+- **Gate at merge:** `nfl-readiness/engine/check_site.py` → 0 errors; 223 table rows, all with a source link; 0 private player names published.
+- **Protocol deviation (logged, no harm):** one `git pull --rebase` on a branch that contains a merge replayed `main`'s commits and stopped on a conflict. It was aborted (`git rebase --abort`) before anything else ran; the branch and remote were unchanged. Later updates used a fast-forward push and a merge. The first claim push printed "couldn't find remote ref" but the commit was on the remote (checked with `git ls-remote`).
+- **Conflicts (logged per protocol):** `COORDINATION.md` on two occasions (vs `arena/507da9a4-own4` claim and log). Both resolved by keeping both sides' entries; no other session's line was removed.
+- **Open for owners / final integration:** (1) choose a canonical NFL hub (SR-05; overlaps `nfl-consolidated/`); (2) root nav link to `nfl-readiness/index.html`; (3) verify VR-04..VR-08 and VR-12 individually (not done); (4) official depth charts, inactive lists and snap counts (not verified or located); (5) marketboard correction request (14 rows, see log above); (6) owner decision on the price-data policy (SR-02) and the terms question (SR-01).
+
+---
+
+## Session `arena/63ebae0e-own4` — completion record (2026-11-15 UTC)
+
+**NFL Readiness register: full requirement register (REQ-01…REQ-68 verbatim + 5 process rows), decision-readiness table on the landing page, snapshot automation with drift alarm, verified Week-10 live captures.**
+
+### PR and merge record
+
+- **PR #112** https://github.com/sassnarep3-star/Own4/pull/112 — **merged** with a merge commit (`gh pr merge 112 --merge`) into `main` as **`3bf208e`** at 2026-11-15T23:43:01Z, without waiting for approval (per standing instruction).
+- Checks before merge (head `8b764a7`): `Rebuild and verify`, `audit`, `validate`, `verify` ×2 — **all SUCCESS**.
+- **GitHub Pages:** `pages build and deployment` run 43776307792 completed SUCCESS; Pages API reports **`built`** for exactly the merge commit `3bf208e` (no error). Live-confirmed by fetch: https://sassnarep3-star.github.io/Own4/nfl-readiness-register/ renders the decision-readiness table (73 rows) with per-row gates, clearing numbers and official source links.
+
+### Namespace rename (logged for the board)
+
+- This session claimed and built the namespace `nfl-readiness/`. While the PR was open, peer session `arena/f9a32d15-own4` (PR #109) merged a DIFFERENT namespace under the same directory name `nfl-readiness/` to main. To avoid clobbering their live paths, this session renamed its namespace to **`nfl-readiness-register/`** (git mv, zero content change; all internal refs, workflow paths and NAV entries updated; verifier re-run green). Peer `nfl-readiness/` untouched. Workflow: `.github/workflows/nfl-readiness-register.yml` (no collision — peer added no workflow).
+- Merge with origin/main (PRs #108/#109) resolved superset-style: NAV union in `verification/build.py` (nfl-consolidated + nfl-readiness-register, group retitled "NFL research · 23 workspaces (2026-11-15)"), COORDINATION.md union. Proof: index.html unique hrefs 191 (main) → 200 (merged), **zero links lost on either side**. One dangerous `git pull --rebase` was stopped mid-run (it tried to replay peer commits); the rebase was aborted, the merge commit kept, and remote/local verified identical (`8b764a7`).
+
+### Verification performed (beyond CI)
+
+- `nfl-readiness-register/verify.py`: **226/226 data rows carry an https source link**, 480 internal links resolve, manifest sha256 matches stored bytes (tamper-evidence), register arithmetic consistent (Σ per-team injury rows 28 tables = 347), all JSON parses. Drift alarm demonstrated: parser self-test PASS on fixture, FAILS LOUDLY (exit 1) on a drift fixture.
+- Official sources fetched and read live 2026-11-15 UTC: nfl.com/injuries (8 chunks, rendered), nfl.com/schedules (2 chunks), nfl.com/transactions, support.nfl.com Game Books article, operations.nfl.com rules + Next Gen Stats, nfl.com/legal/flexible-scheduling-procedures.
+- Findings verified live: Lions designations (Joseph/Mays/Reed) now published **Out at source** (REQ-47 resolved upstream — no patch made); Week-10 report re-captured (28 tables / **347 rows** / 67 Out / 0 empty sections; SEA 15, CIN 9 — REQ-48); **9/14 finals verified** (DET 35–10 NE in Munich, MIN 30–10 GB, BUF 31–12 NYJ, JAX 40–23 TEN, IND 24–22 MIA, NO 17–20 CAR, CLE 27–24 HOU, KC 35–13 ATL, WAS 24–21 NYG), 3 live + 2 scheduled recorded as such; November trade ledger (12 dated rows); dated 2026 TBD-games announcement captured (REQ-24).
+- Local CI sequence before push: docs/ unchanged after scripts/build.py; unittest OK; verify_data PASS; check_site 0 problems; verification/verify_site 14 pages / 346 rows green.
+
+### Sources
+
+https://www.nfl.com/injuries/ · https://www.nfl.com/schedules/ · https://www.nfl.com/transactions/ · https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books · https://operations.nfl.com/the-rules/ · https://operations.nfl.com/gameday/technology/nfl-next-gen-stats · https://www.nfl.com/legal/flexible-scheduling-procedures · https://github.com/nflverse/nfldata (TRUSTED-NOT-OFFICIAL, flagged)
+
+### Irregularities (all non-blocking, published on nfl-readiness-register/pages/flagged.html)
+
+F-R1 VR-/VQ- citations unresolvable in-repo (DEC-R7) · F-R2 injury counts are point-in-time (ledger fixes) · F-R3 Henley listed by LAC 11/15 after 11/10 trade to DEN (live cross-check) · F-R4 Henderson on report while on IR · F-R5 venues mostly blank (game centre not read) · F-R6 no official price source (standing, blocks DR-G1) · F-R7 PR #93 stale >24h, untouched · F-R8 254→279→347 supersession (timestamped, not contradictory) · F-R9 roof-designation publication surface unverified · F-R10 nflverse labelling · F-R11 week-label clarification (REG 10 = current week; no peer mislabeling found) · F-R12 raw-HTML capture unverified until first scheduled run (Wed 2026-11-18 18:00 UTC).
+
+## Session `arena/e0ed20d1-own4` — NFL Decision Desk v2: claim (2026-11-15 UTC)
+
+Session ID: `arena/e0ed20d1-own4` · Branch: `arena/e0ed20d1-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every
+prior session). Base: `main` at `3e74fd3` (after PR #107).
+
+**Claim status:** in progress, pushed before implementation, per board protocol.
+
+**Survey at claim time.** 21 NFL namespaces already merged (nfl, nfl-arena, nfl-audit, nfl-command,
+nfl-core, nfl-decision, nfl-decisions, nfl-edge, nfl-hub, nfl-integration, nfl-intel, nfl-lab,
+nfl-ledger, nfl-lines, nfl-market, nfl-marketboard, nfl-markets, nfl-origination, nfl-own,
+nfl-price-snapshot, nfl-quant) + open PR #93 (`arena/582300df-own4`, namespace nfl-command-center,
+out of scope here). Root site is regenerated by `verification/build.py` (NAV list) — shared file,
+touched additively only.
+
+**Two facts established before writing any code:**
+
+1. **Hard network constraint in this sandbox.** Direct outbound HTTP is allowlisted to
+   github.com / codeload / api.github.com / registry.npmjs.org / pypi.org only. `curl` to
+   nfl.com, pro-football-reference.com and `raw.githubusercontent.com` returns 000. Official
+   nfl.com pages are nevertheless reachable **through the page-fetch tool** (verified this
+   session: `https://www.nfl.com/standings/league/2026/REG` returned the full 2026 standings
+   table). Consequence: every official number published this session is transcribed from a page
+   actually fetched and read *this session*, with the URL and fetch time stored per row; no
+   number is inherited on trust from an earlier session's file.
+2. **A real, pre-existing data conflict.** `nfl-core/data/results_feed_2026.csv` marks **137**
+   FINAL games (weeks 1–9 plus **one** week-10 game); `nfl-marketboard/data/raw/
+   results_2026_official.csv` marks **150** FINAL (weeks 1–10 complete). The brief says
+   "136-game log". At least one of these is wrong; this session re-derives the count from the
+   official schedule pages rather than adopting either. (Previewed: the official week-10
+   schedule page read this session returns 14 final scores, i.e. 150 is closer, and 136 appears
+   nowhere.)
+
+| # | Task | Status | Owner session | Files touched (scope) |
+|---|------|--------|---------------|------------------------|
+| N1 | Repo review line-by-line vs the 60+ requirement lines in the brief; irregularity register with source links | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/repo_review.json` |
+| N2 | Official results corpus re-derived from nfl.com schedule pages; reconciliation vs standings (32 clubs) and vs peer feeds; the 136/137/150 question settled | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/*`, `nfl-decision-desk/raw/**` |
+| N3 | Availability/roster layer: injuries, depth, inactives, snap counts — captured with source + clock time, level never published without its delta | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/availability*` |
+| N4 | Price layer: origination order side→total→ML, fair/market/difference columns, snapshot store with immutable captures | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/prices*` |
+| N5 | Model: probability + inputs, pre-registration, train/val/holdout, walk-forward, ablations (personnel on/off) with uncertainty | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/model/**` |
+| N6 | Leaderboard: proper scores, benchmark-relative skill, cluster lower bound, multiplicity adjustment, signal vs staking split, luck panel | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/leaderboard*` |
+| N7 | Governance: pre-registration register, demotion gate, parlay joint-evidence gate, "what would change our mind" per strategy | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/governance*` |
+| N8 | Questions/information/answers register + suggestions section (review-before-implement) | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/data/questions*`, `suggestions*` |
+| N9 | Decision-readiness table (one row per requirement, blocking gate, clearing number) on the landing page | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/index.html` (generated) |
+| N10 | Site: landing + category subpages + Flagged for Review; row-source verifier; CI workflow | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/**`, `.github/workflows/nfl-decision-desk.yml` |
+| N11 | Executive summary | claimed | arena/e0ed20d1-own4 | `nfl-decision-desk/EXECUTIVE_SUMMARY.md` |
+| N12 | Final integration: re-verify, additive root nav, PR → main → merge → Pages confirmation, record here | claimed | arena/e0ed20d1-own4 | `index.html` (additive), `verification/build.py` (NAV additive), this file |
+
+**Scope rules:** no peer namespace is edited. Shared files are append-only (`COORDINATION.md`) or
+additive (`index.html`, `verification/build.py` NAV). Peer files may be READ and re-verified but
+never modified. Peer figures are never republished on trust: they are re-derived from an official
+page fetched this session, or they are labelled as peer-sourced and left unverified.
+
+---
+
+## N1–N12 completion record — session `arena/e0ed20d1-own4` — 2026-11-15
+
+**Status: COMPLETE.** All twelve claimed tasks delivered in `nfl-decision-desk/`. No peer
+namespace was modified. Shared files were touched only additively.
+
+### What was built (and the command that rebuilds it)
+
+| # | Artefact | Rebuild | Result |
+|---|----------|---------|--------|
+| N1 | `data/governance/governance.json` | `python3 engine/governance.py` | 80 requirement lines: **39 DONE / 16 PARTIAL / 25 BLOCKED**; every row carries an https source (builder asserts field width, so a malformed row fails the build) |
+| N2 | `data/corpus/corpus_2026.json` | `python3 engine/build_corpus.py` | 136 settled games (weeks 1–9) + 272 fixture rows; **32/32 clubs reconciled to official standings, 0 unexplained** (14 exact, 18 explained by one official week-10 final each) |
+| N3 | `data/availability/availability.json` | `python3 engine/availability.py` | 2026-11-15T23:24:27Z, **28/28 clubs, 347 rows**; **171 designated (49.3%)**; 176 blanks kept blank |
+| N4 | `data/prices/origination.json` | `python3 engine/prices.py` | 104 originations, **312 snapshots**, order side→total→ML enforced; every open `null` **with a written reason**; residuals vs close: side +0.995/4.553, total +0.686/3.277, ML +91.854/233.970 |
+| N5 | `data/model/*.json` | `python3 engine/model.py` | walk-forward, weeks 3–9 (weeks 1–2 skipped, never imputed). Brier 0.2525 model vs 0.2147 market vs 0.2496 base; paired interval [−0.0753, −0.0066] excludes 0 |
+| N6 | `data/leaderboard/leaderboard.json` | `python3 engine/leaderboard.py` | proper scores only, week-cluster lower bound, BH multiplicity, luck panel (54 actual vs 58.49 expected), demotion gate armed; **0 qualified of 104 vs floor 300**; ROI computed and **never ranked** |
+| N7 | `data/preregistration.json` + `demotion_gate.json` | in N5/N7 engines | PR-01…PR-06 with commit registration, two-sided "what would change our mind", G1–G6 gates all failing |
+| N8 | registers | `engine/governance.py` | 22 questions (answer `null` + `answer_status`), 18 suggestions (verdict `null`), 10 irregularities |
+| N9 | `index.html` | `python3 engine/site.py` | decision-readiness table first: one row per requirement with **blocking gate + the number that would clear it** |
+| N10 | 14 pages + verifier + CI | `engine/site.py`, `engine/verify.py`, `.github/workflows/nfl-decision-desk.yml` | **616 table rows, 616 with an https source, 226 local refs, 0 broken, 0 localhost, 14 unique titles → PASS** |
+| N11 | `EXECUTIVE_SUMMARY.md` | static | 10/10 headline figures machine-checked against their JSON |
+| N12 | root nav + PR | `verification/build.py` | new NAV group added additively; `index.html` regenerated, never hand-edited |
+
+### Sources used (all read this session, clock recorded on the page)
+
+- https://www.nfl.com/standings/league/2026/REG
+- https://www.nfl.com/schedules/2026/by-week/week-1 · `week-10`
+- https://www.nfl.com/injuries/ (chunks 0–6, 2026-11-15T23:24:27Z)
+- Game centres: `patriots-at-seahawks-2026-reg-1`, `49ers-at-rams-2026-reg-1`,
+  `patriots-at-lions-2026-reg-10`, `commanders-at-giants-2026-reg-10`
+- Third-party archive (clearly labelled as such on every row): `nflverse/nfldata`
+
+### Verification performed
+
+1. **Row-level sourcing** — `engine/verify.py` fails the build if any `<tbody>` row lacks an
+   https link. It currently passes at 616/616. The gate fired 9 times during construction and
+   each firing was fixed, not suppressed.
+2. **Link integrity** — 226 local refs resolve; a repo-wide scan shows **0 broken local refs**
+   inside `nfl-decision-desk/` (the shell template was renamed to `.tpl` so it is not mistaken
+   for a page).
+3. **Determinism** — a full nine-engine rebuild produces `git diff` **empty**.
+4. **Number provenance** — the executive summary's figures were checked by script against
+   `model_evaluation.json`, `leaderboard.json`, `availability.json`, `corpus_2026.json`.
+5. **Official cross-check** — WAS@NYG week 10 re-read from the official game centre: 24–21 to
+   WAS, matching the archive exactly. Recorded in `data/raw/official_scores_confirmed.json`.
+   This is **one** official confirmation and the page says so; it is not extrapolated to 136.
+
+### Irregularities raised (10 in total; full list on `pages/flagged.html`)
+
+| ID | Finding |
+|----|---------|
+| I01 | Game scores come from a third-party archive, not an official feed. Labelled per row; standings reconciliation published as the compensating control. |
+| I02 | Peer feeds disagree on settled-game counts (136 / 137 / 150). All three are explainable by capture time; **none of them states its clock**, which is the actual defect. |
+| I03 | The brief's injury counts ("6 of 254 designated") do not reproduce: the official page carried **347 rows, 171 designated**, across 28 clubs (not 32 — four were on bye). |
+| I04 | **FX-01**: SF@LA (Melbourne Cricket Ground) and NE@DET (FC Bayern Munich Stadium) are designated home games played on another continent. A constant home-field term is unsupported for both. Published as a defect; the fix is pre-registered and **not applied**. |
+| I05 | The brief asks for a 136-game corpus; weeks 1–9 of the archive are exactly 136, while capturing the same day gives 150 (weeks 1–10). The corpus therefore **states its window** instead of claiming a number. |
+| I06 | `nfl.com/injuries` exposes no depth column and no inactive list, so three brief items (depth rank, replacement naming, snap share) are **uncomputable from the cited source**. |
+| I07 | CR-04 (rest vs home margin) looked like a signal at r = −0.426 but 14 of 120 games drive it. Automatic mode-share guard now forces `robust = false`. |
+| I08 | The NFL publishes no prices. Every ROI/CLV figure in this workspace is explicitly **hypothetical at an assumed −110** and is never ranked. |
+| I09 | `Own4/official/` is the **NBA** namespace. An NFL session that wrote there would corrupt another product's data. Recorded so it is not repeated. |
+| I10 | The brief's "SEA 15 / CIN 4" injury counts differ from capture (SEA 15 confirmed; CIN **9**). Timestamps make the difference auditable rather than arguable. |
+
+### Blocked, with the exact number that would clear each
+
+| Item | Gate | Clearing number |
+|------|------|-----------------|
+| Any strategy going live | G1 coverage | **n ≥ 300** out-of-sample games (currently 104) |
+| Personnel/injury ablations | G5 ablation | paired interval excluding 0, needing an archived **Wed→kickoff daily series** (currently 1 capture) |
+| Backup-depth deficiency | depth source | a verified depth rank or snap counts for **32 of 32** clubs (currently 0) |
+| Parlays / SGP / prop combos | G6 joint evidence | validated joint probability, or dependence at **n ≥ 100** legs (currently 0 leg prices) |
+| CLV staking scores | G2 + price feed | any citable closing price source (currently none) |
+| Official score rows | results sweep | **136 game-centre reads** (1 done, 135 remaining) |
+
+### Deviations logged
+
+- **Branch.** The brief asks for `session-<id>/<task>`; the harness pins one branch per session,
+  so all work is on **`arena/e0ed20d1-own4`**. Logged here as required.
+- **Root nav.** `index.html` was regenerated by `verification/build.py` after an additive NAV
+  entry. It was not hand-edited — hand edits to that file are the recurring F-13 defect.
+- **Fixed penalties.** No fixed point penalty for a missing starter exists anywhere in the code.
+
+*Session complete. No claimed task was left in progress; no peer file was written.*
+

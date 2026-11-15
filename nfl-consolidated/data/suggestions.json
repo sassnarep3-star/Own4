@@ -1,0 +1,205 @@
+{
+ "dataset": "nfl_consolidated_suggestions",
+ "title": "Suggestions for review — pick a path before implementing",
+ "built_utc": "2026-11-15",
+ "session": "arena/507da9a4-own4",
+ "workflow": "Reviewer picks option A/B/C (or rejects); the verdict is logged and only then implemented. Nothing here is implemented while status is 'proposed'.",
+ "rows": [
+  {
+   "id": "SG-01",
+   "priority": "P1",
+   "title": "Decide how market prices will be obtained (or accept permanent blanks)",
+   "context": "Every market column, G7, real ROI and rewards are blocked by the absence of an official price source (Q01, FB-01).",
+   "options": [
+    {
+     "id": "A",
+     "text": "License a historical + live odds archive (cost: money; unblocks G7, B02/B03, real staking)"
+    },
+    {
+     "id": "B",
+     "text": "Keep market columns permanently blank and run the project price-independent only (free; honest; rewards stay 0)"
+    },
+    {
+     "id": "C",
+     "text": "Record manual third-party screenshots as 'observed non-official' prices, labelled everywhere (free; weaker evidence)"
+    }
+   ],
+   "evidence": "nfl.com publishes no lines (re-confirmed live 2026-11-15).",
+   "cost": "A: paid / B: free / C: free",
+   "risk": "A: cost + licence terms; B: no edge measurement ever; C: evidence-quality disputes",
+   "recommendation": "B now (keeps every published number verifiable), revisit A if the project is funded",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "SG-02",
+   "priority": "P1",
+   "title": "Re-read the remaining 105 official game pages line by line",
+   "context": "105 of 137 feed rows are aggregate-verified only (Q03, FB-03).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Fetch all 105 remaining official game pages and compare row by row (free, ~1–2 hours of fetches)"
+    },
+    {
+     "id": "B",
+     "text": "Accept aggregate verification + 32-game sample as sufficient (free; disclose forever)"
+    }
+   ],
+   "evidence": "V-01..V-03 current verification state.",
+   "cost": "A: one session / B: zero",
+   "risk": "A: none (read-only) / B: a transcription error in weeks 2–8 would survive",
+   "recommendation": "A",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "SG-03",
+   "priority": "P1",
+   "title": "Pre-register a paired test vs the better-record baseline",
+   "context": "Model 0.673 vs record baseline 0.635 on the same sample; the comparison was post-hoc (Q05).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Pre-register McNemar vs better-record now; evaluate only on Week 11+ games"
+    },
+    {
+     "id": "B",
+     "text": "Leave as a disclosed post-hoc diagnostic"
+    }
+   ],
+   "evidence": "backtest.json metrics (prior namespace).",
+   "cost": "A: minutes",
+   "risk": "A: none if evaluated only forward",
+   "recommendation": "A",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "SG-04",
+   "priority": "P1",
+   "title": "Resolve the depth-order source for all 32 clubs",
+   "context": "Both candidate routes are unverified for all 32 clubs (Q04, E13).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Per-club official depth-chart pages, verified club by club — currently 404 on nfl.com"
+    },
+    {
+     "id": "B",
+     "text": "Derive depth from snap counts if an official snap-count source exists"
+    },
+    {
+     "id": "C",
+     "text": "Do not build the backup-deficiency feature until one route is verified for all 32 clubs"
+    }
+   ],
+   "evidence": "nfl.com team depth-chart 404; no official snap-count feed.",
+   "cost": "A/B: investigation / C: zero (defer)",
+   "risk": "A/B: may not exist; C: feature stays unbuilt",
+   "recommendation": "C now (do not build on unverified depth), pursue A/B in parallel",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "SG-05",
+   "priority": "P2",
+   "title": "Add a control baseline to every leaderboard run",
+   "context": "Separates skill from luck (C05).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Coin-flip + favorites-only + better-record baselines on every run"
+    },
+    {
+     "id": "B",
+     "text": "Coin-flip only"
+    }
+   ],
+   "evidence": "Current backtest already includes coin-flip + record baselines.",
+   "cost": "A: minutes",
+   "risk": "A: none",
+   "recommendation": "A (already partly done — formalize)",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "SG-06",
+   "priority": "P2",
+   "title": "Schedule the immutable multi-day availability snapshots",
+   "context": "Only a single availability capture exists today; it cannot support backtesting (E11/E24).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Schedule Wed/Thu/Fri captures of the injury report + depth + inactives with retained hashes"
+    },
+    {
+     "id": "B",
+     "text": "Keep the single capture and disclose the limitation"
+    }
+   ],
+   "evidence": "Ledger schema frozen; no capture history retained.",
+   "cost": "A: one automation session / B: zero",
+   "risk": "A: source-schema drift needs the drift alarm (F05)",
+   "recommendation": "A",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "SG-07",
+   "priority": "P2",
+   "title": "Archive weekly injury reports for past seasons",
+   "context": "The only way to test whether designations change outcomes (E14/E16/E21).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Build a multi-season injury archive and compute designation play-rates with CIs"
+    },
+    {
+     "id": "B",
+     "text": "Accept that 'Questionable' cannot be calibrated empirically this season"
+    }
+   ],
+   "evidence": "No historical injury archive in the repo.",
+   "cost": "A: a multi-season ingest / B: zero",
+   "risk": "A: historical availability of official reports",
+   "recommendation": "B this season; plan A for the next",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "SG-08",
+   "priority": "P2",
+   "title": "Pick one canonical dashboard among the 17+ NFL namespaces",
+   "context": "Overlapping namespaces multiply maintenance and confuse review (Q07).",
+   "options": [
+    {
+     "id": "A",
+     "text": "Adopt this consolidated dashboard as canonical and link the rest as archives"
+    },
+    {
+     "id": "B",
+     "text": "Adopt nfl-book as canonical (most complete single slice)"
+    },
+    {
+     "id": "C",
+     "text": "Keep all namespaces and add a clear canonical index"
+    }
+   ],
+   "evidence": "17+ namespaces on the board; this session's dashboard is the cross-namespace view.",
+   "cost": "A/B/C: owner decision",
+   "risk": "A/B: archived namespaces stop being maintained",
+   "recommendation": "A (this dashboard is the decision-readiness view the brief asked for)",
+   "status": "proposed",
+   "verdict": "",
+   "source": "https://github.com/sassnarep3-star/Own4"
+  }
+ ]
+}

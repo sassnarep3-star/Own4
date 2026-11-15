@@ -1,0 +1,93 @@
+{
+  "_meta": {
+    "purpose": "The pre-registration register. Every strategy rule in this workspace is written here BEFORE it is evaluated. The registration is the text plus the window plus the gates; the git commit that adds a row is the binding record.",
+    "policy": [
+      "A rule may not be edited after its evaluation window opens. Corrections are new rows with a new ID and an explicit supersedes link.",
+      "Backtest numbers may never be published on the leaderboard. The leaderboard is prospective only. Backtest results live on the backtest page and are labelled as such.",
+      "Every entry carries a two-sided 'what would change our mind' field: the evidence that would promote AND the evidence that would demote.",
+      "The registration commit hash is recorded for each row. If the hash is missing, the row is not pre-registered and cannot qualify."
+    ],
+    "created_utc": "2026-11-15T23:24:27Z",
+    "session": "arena/e0ed20d1-own4"
+  },
+  "registrations": [
+    {
+      "id": "PR-01",
+      "name": "Team-strength shadow baseline (singles only)",
+      "status": "PRE-REGISTERED",
+      "registered_utc": "2026-11-15T23:24:27Z",
+      "registered_before_any_evaluation": true,
+      "markets": ["side"],
+      "rule": "For every scheduled game, generate a fair home margin from a ridge-regularised least-squares rating of points-for and points-against, fitted on all settled games in the corpus with a recency half-life of 8 weeks. Publish the fair margin, and the fair spread = -fair_home_margin rounded to the nearest 0.5. Stake nothing. This strategy exists only to produce a probability record before kickoff.",
+      "inputs": ["settled game scores in the corpus", "home field indicator"],
+      "excludes": ["prices", "injuries", "depth", "weather", "travel"],
+      "sample_window": "2026 weeks 1-10 settled games (136 in the frozen corpus, 145 after the official week-10 re-read)",
+      "evaluation": "walk-forward: for week w, fit only on weeks < w",
+      "gates": ["G1 coverage", "G2 proper score vs benchmark", "G3 uncertainty", "G4 multiplicity"],
+      "what_would_change_our_mind_up": "Benchmark-relative Brier skill with a game-cluster lower bound above 0 on an out-of-sample sample of at least 300 games, holding after multiplicity adjustment.",
+      "what_would_change_our_mind_down": "A game-cluster lower bound below 0 at any pre-registered checkpoint, or a calibration slope outside [0.8, 1.25] on at least 100 out-of-sample games.",
+      "commit_sha": "PENDING - filled by engine/preregister.py at build time"
+    },
+    {
+      "id": "PR-02",
+      "name": "Total: same ratings, independent total estimator",
+      "status": "PRE-REGISTERED",
+      "markets": ["total"],
+      "rule": "Estimate each club's scoring rate and conceding rate; fair total = away_rate + home_rate, shrunk toward the league mean by 0.25. Published as a second, independent total estimator and kept visible ALONGSIDE PR-03 (never collapsed) until a walk-forward comparison separates them.",
+      "sample_window": "same as PR-01",
+      "gates": ["G1", "G2", "G3", "G4"],
+      "what_would_change_our_mind_up": "Lower out-of-sample total MAE than PR-03 on a paired test with p < 0.05 on at least 150 games.",
+      "what_would_change_our_mind_down": "Paired test favours PR-03, or either estimator's residual shows a season-long bias larger than 1 point.",
+      "commit_sha": "PENDING"
+    },
+    {
+      "id": "PR-03",
+      "name": "Total: league-mean-plus-ratings blend (the competing estimator)",
+      "status": "PRE-REGISTERED",
+      "markets": ["total"],
+      "rule": "Fair total = league mean total + (home offence - league) + (home defence conceded - league) + (away offence - league) + (away defence conceded - league). This is deliberately a different functional form from PR-02 so the walk-forward comparison is a real test and not two names for one number.",
+      "sample_window": "same as PR-01",
+      "gates": ["G1", "G2", "G3", "G4"],
+      "what_would_change_our_mind_up": "Lower out-of-sample total MAE than PR-02 on a paired test with p < 0.05 on at least 150 games.",
+      "what_would_change_our_mind_down": "Paired test favours PR-02. In either case BOTH stay published until the sample clears the gate.",
+      "commit_sha": "PENDING"
+    },
+    {
+      "id": "PR-04",
+      "name": "Moneyline: ordinal-only logistic on the same strength signal",
+      "status": "PRE-REGISTERED",
+      "markets": ["moneyline"],
+      "rule": "Convert the PR-01 fair margin to a win probability with a logistic link whose scale is fitted on walk-forward history only. Origination order is enforced: side first, then total, then moneyline. The moneyline is never originated from a price.",
+      "sample_window": "same as PR-01",
+      "gates": ["G1", "G2", "G3", "G4"],
+      "what_would_change_our_mind_up": "Brier skill above the base-rate benchmark with a cluster lower bound above 0 on 300+ out-of-sample games.",
+      "what_would_change_our_mind_down": "Calibration intercept significantly non-zero, meaning the link scale is wrong.",
+      "commit_sha": "PENDING"
+    },
+    {
+      "id": "PR-05",
+      "name": "Personnel ablation (injury/depth on vs off)",
+      "status": "PRE-REGISTERED",
+      "markets": ["side", "total"],
+      "rule": "Fit the IDENTICAL model twice: once with availability features, once without. Report the difference in out-of-sample error with a paired bootstrap interval. No fixed point penalty for a missing starter is ever applied.",
+      "sample_window": "the window where a verified availability feed exists",
+      "gates": ["G5 ablation"],
+      "blocked_because": "no verified, archived availability feed with enough coverage exists in this repo; see the availability page. Registered NOW so that when the feed exists the test cannot be chosen after seeing it.",
+      "what_would_change_our_mind_up": "A paired difference interval that excludes zero, in the direction that availability features improve out-of-sample error.",
+      "what_would_change_our_mind_down": "An interval containing zero, which would mean availability is priced in or too noisy to use, and the feature set should be dropped rather than tuned.",
+      "commit_sha": "PENDING"
+    },
+    {
+      "id": "PR-06",
+      "name": "Parlay / prop-combo joint-evidence gate",
+      "status": "PRE-REGISTERED",
+      "markets": ["parlay", "prop combo"],
+      "rule": "A multi-leg ticket may ONLY be ranked when (a) a directly validated joint probability exists for that specific combination, or (b) per-leg dependence is estimated from officially sourced numbers with n published, and (c) the operator's void/push rules are recorded. Multiplying marginal probabilities is prohibited. Until then every parlay row is published as BLOCKED, not as a low-ranked pick.",
+      "gates": ["G6 joint evidence"],
+      "blocked_because": "no official price source exists for legs, and no dependence estimate reaches the n floor",
+      "what_would_change_our_mind_up": "A dependence estimate with n >= 100 on officially sourced legs whose interval excludes independence, plus recorded void/push rules.",
+      "what_would_change_our_mind_down": "An interval that includes independence, in which case the product of marginals is still not published, because including zero is not evidence of zero.",
+      "commit_sha": "PENDING"
+    }
+  ]
+}

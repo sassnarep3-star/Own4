@@ -1,0 +1,23 @@
+{
+ "_meta": {
+  "requirement": "Add injury/depth ablations, not fixed penalties: compare identical models with and without verified availability features on chronological holdouts.",
+  "status": "CANNOT BE MEASURED",
+  "why": "no verified availability feed covers the backtest window. The official injury report is a snapshot with no archive, 254-352 rows of text with 6 designated game statuses, and no inactive list or snap-count source in this repo. Fitting an ablation on that would measure noise and call it a personnel effect.",
+  "what_is_published_instead": "the empty result, with the exact evidence needed to fill it, so the test cannot be redefined later"
+ },
+ "test_definition": {
+  "model_a": "PR-01 features only (points for / points against, recency weighted)",
+  "model_b": "PR-01 features + verified availability features",
+  "estimand": "out-of-sample paired difference in Brier score, with a week-cluster interval",
+  "minimum_n": 300,
+  "current_n_with_availability": 0,
+  "fixed_point_penalty_used": false,
+  "reason_no_fixed_penalty": "a fixed number of points per missing starter substitutes an assumption for a measurement, and the brief explicitly forbids it"
+ },
+ "evidence_needed": [
+  "official inactive lists per game (nfl.com publishes them ~90 min before kickoff)",
+  "official snap counts per player per game",
+  "an archived injury report series with a capture clock time"
+ ],
+ "result": null
+}

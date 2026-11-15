@@ -1,0 +1,68 @@
+name: nfl-decision-desk verify
+
+on:
+  push:
+    paths: ['nfl-decision-desk/**', '.github/workflows/nfl-decision-desk.yml']
+  pull_request:
+    paths: ['nfl-decision-desk/**', '.github/workflows/nfl-decision-desk.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild the corpus from committed inputs
+        working-directory: nfl-decision-desk
+        run: python3 engine/build_corpus.py
+
+      - name: Refit the pre-registered model (walk-forward)
+        working-directory: nfl-decision-desk
+        run: python3 engine/model.py
+
+      - name: Rebuild the leaderboard, luck panel and demotion gate
+        working-directory: nfl-decision-desk
+        run: python3 engine/leaderboard.py
+
+      - name: Rebuild prices, snapshots, residuals
+        working-directory: nfl-decision-desk
+        run: python3 engine/prices.py
+
+      - name: Rebuild correlations
+        working-directory: nfl-decision-desk
+        run: python3 engine/correlations.py
+
+      - name: Rebuild availability
+        working-directory: nfl-decision-desk
+        run: python3 engine/availability.py
+
+      - name: Rebuild fixture context
+        working-directory: nfl-decision-desk
+        run: python3 engine/fixtures.py
+
+      - name: Rebuild governance registers
+        working-directory: nfl-decision-desk
+        run: python3 engine/governance.py
+
+      - name: Rebuild the site
+        working-directory: nfl-decision-desk
+        run: python3 engine/site.py
+
+      - name: Verify every row is sourced, every link resolves, no localhost
+        working-directory: nfl-decision-desk
+        run: python3 engine/verify.py
+
+      - name: Determinism gate (a rebuild must not change committed output)
+        run: |
+          git diff --stat
+          echo "--- python ---"; python3 --version
+          echo "--- first 80 lines of any diff ---"
+          git diff -- nfl-decision-desk/pages nfl-decision-desk/index.html nfl-decision-desk/data | head -80
+          git diff --exit-code -- nfl-decision-desk/pages nfl-decision-desk/index.html nfl-decision-desk/data
