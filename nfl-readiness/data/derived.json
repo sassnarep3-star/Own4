@@ -1,0 +1,1678 @@
+{
+ "dataset": "nfl_readiness_derived",
+ "built_utc": "2026-11-15T23:27:10Z",
+ "method": "Every figure is computed by derive.py from data/observations.json, which holds only values transcribed from official nfl.com pages fetched on 2026-11-15. Re-running derive.py is the verification: a number that cannot be recomputed is a defect.",
+ "injury_report": {
+  "n_sections": 28,
+  "n_rows": 347,
+  "n_teams_captured": 28,
+  "teams_captured": [
+   "WAS",
+   "NYG",
+   "NE",
+   "DET",
+   "KC",
+   "ATL",
+   "MIN",
+   "GB",
+   "JAX",
+   "TEN",
+   "BUF",
+   "NYJ",
+   "MIA",
+   "IND",
+   "CAR",
+   "NO",
+   "HOU",
+   "CLE",
+   "LA",
+   "AZ",
+   "SEA",
+   "LV",
+   "SF",
+   "DAL",
+   "PIT",
+   "CIN",
+   "LAC",
+   "BAL"
+  ],
+  "n_rows_with_game_status": 171,
+  "n_rows_blank_game_status": 176,
+  "pct_rows_with_game_status": 49.28,
+  "by_status": {
+   "(blank game status)": 176,
+   "Out": 70,
+   "Questionable": 90,
+   "Doubtful": 11
+  },
+  "per_team": [
+   {
+    "section": 1,
+    "team": "WAS",
+    "n_rows": 9,
+    "n_out": 2,
+    "n_doubtful": 0,
+    "n_questionable": 0,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 2,
+    "team": "NYG",
+    "n_rows": 11,
+    "n_out": 0,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 10,
+    "n_blank_injury": 10
+   },
+   {
+    "section": 3,
+    "team": "NE",
+    "n_rows": 15,
+    "n_out": 3,
+    "n_doubtful": 0,
+    "n_questionable": 9,
+    "n_blank_status": 3,
+    "n_blank_injury": 3
+   },
+   {
+    "section": 4,
+    "team": "DET",
+    "n_rows": 9,
+    "n_out": 3,
+    "n_doubtful": 0,
+    "n_questionable": 2,
+    "n_blank_status": 4,
+    "n_blank_injury": 4
+   },
+   {
+    "section": 5,
+    "team": "KC",
+    "n_rows": 13,
+    "n_out": 3,
+    "n_doubtful": 0,
+    "n_questionable": 3,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 6,
+    "team": "ATL",
+    "n_rows": 11,
+    "n_out": 1,
+    "n_doubtful": 1,
+    "n_questionable": 3,
+    "n_blank_status": 6,
+    "n_blank_injury": 6
+   },
+   {
+    "section": 7,
+    "team": "MIN",
+    "n_rows": 13,
+    "n_out": 5,
+    "n_doubtful": 0,
+    "n_questionable": 3,
+    "n_blank_status": 5,
+    "n_blank_injury": 5
+   },
+   {
+    "section": 8,
+    "team": "GB",
+    "n_rows": 17,
+    "n_out": 4,
+    "n_doubtful": 1,
+    "n_questionable": 7,
+    "n_blank_status": 5,
+    "n_blank_injury": 5
+   },
+   {
+    "section": 9,
+    "team": "JAX",
+    "n_rows": 11,
+    "n_out": 3,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 10,
+    "team": "TEN",
+    "n_rows": 12,
+    "n_out": 5,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 6,
+    "n_blank_injury": 6
+   },
+   {
+    "section": 11,
+    "team": "BUF",
+    "n_rows": 14,
+    "n_out": 0,
+    "n_doubtful": 1,
+    "n_questionable": 4,
+    "n_blank_status": 9,
+    "n_blank_injury": 9
+   },
+   {
+    "section": 12,
+    "team": "NYJ",
+    "n_rows": 9,
+    "n_out": 1,
+    "n_doubtful": 0,
+    "n_questionable": 8,
+    "n_blank_status": 0,
+    "n_blank_injury": 0
+   },
+   {
+    "section": 13,
+    "team": "MIA",
+    "n_rows": 11,
+    "n_out": 2,
+    "n_doubtful": 1,
+    "n_questionable": 1,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 14,
+    "team": "IND",
+    "n_rows": 14,
+    "n_out": 6,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 15,
+    "team": "CAR",
+    "n_rows": 12,
+    "n_out": 1,
+    "n_doubtful": 2,
+    "n_questionable": 4,
+    "n_blank_status": 5,
+    "n_blank_injury": 5
+   },
+   {
+    "section": 16,
+    "team": "NO",
+    "n_rows": 12,
+    "n_out": 4,
+    "n_doubtful": 0,
+    "n_questionable": 2,
+    "n_blank_status": 6,
+    "n_blank_injury": 6
+   },
+   {
+    "section": 17,
+    "team": "HOU",
+    "n_rows": 16,
+    "n_out": 5,
+    "n_doubtful": 0,
+    "n_questionable": 6,
+    "n_blank_status": 5,
+    "n_blank_injury": 5
+   },
+   {
+    "section": 18,
+    "team": "CLE",
+    "n_rows": 12,
+    "n_out": 2,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 9,
+    "n_blank_injury": 9
+   },
+   {
+    "section": 19,
+    "team": "LA",
+    "n_rows": 14,
+    "n_out": 2,
+    "n_doubtful": 0,
+    "n_questionable": 5,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 20,
+    "team": "AZ",
+    "n_rows": 15,
+    "n_out": 3,
+    "n_doubtful": 0,
+    "n_questionable": 6,
+    "n_blank_status": 6,
+    "n_blank_injury": 6
+   },
+   {
+    "section": 21,
+    "team": "SEA",
+    "n_rows": 15,
+    "n_out": 4,
+    "n_doubtful": 0,
+    "n_questionable": 0,
+    "n_blank_status": 11,
+    "n_blank_injury": 11
+   },
+   {
+    "section": 22,
+    "team": "LV",
+    "n_rows": 5,
+    "n_out": 0,
+    "n_doubtful": 0,
+    "n_questionable": 2,
+    "n_blank_status": 3,
+    "n_blank_injury": 3
+   },
+   {
+    "section": 23,
+    "team": "SF",
+    "n_rows": 12,
+    "n_out": 1,
+    "n_doubtful": 0,
+    "n_questionable": 7,
+    "n_blank_status": 4,
+    "n_blank_injury": 4
+   },
+   {
+    "section": 24,
+    "team": "DAL",
+    "n_rows": 19,
+    "n_out": 5,
+    "n_doubtful": 1,
+    "n_questionable": 5,
+    "n_blank_status": 8,
+    "n_blank_injury": 8
+   },
+   {
+    "section": 25,
+    "team": "PIT",
+    "n_rows": 8,
+    "n_out": 0,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 7,
+    "n_blank_injury": 7
+   },
+   {
+    "section": 26,
+    "team": "CIN",
+    "n_rows": 9,
+    "n_out": 1,
+    "n_doubtful": 3,
+    "n_questionable": 0,
+    "n_blank_status": 5,
+    "n_blank_injury": 5
+   },
+   {
+    "section": 27,
+    "team": "LAC",
+    "n_rows": 19,
+    "n_out": 3,
+    "n_doubtful": 1,
+    "n_questionable": 6,
+    "n_blank_status": 9,
+    "n_blank_injury": 9
+   },
+   {
+    "section": 28,
+    "team": "BAL",
+    "n_rows": 10,
+    "n_out": 1,
+    "n_doubtful": 0,
+    "n_questionable": 1,
+    "n_blank_status": 8,
+    "n_blank_injury": 8
+   }
+  ],
+  "n_teams_with_zero_rows": 0,
+  "rows_min": 5,
+  "rows_max": 19,
+  "n_teams_all_blank_status": 0
+ },
+ "inactives": {
+  "n_sections": 24,
+  "n_teams": 24,
+  "n_named_players": 138,
+  "min_per_team": 0,
+  "max_per_team": 7,
+  "teams_with_empty_list": [
+   "PIT",
+   "CIN"
+  ],
+  "n_published_venues": 12
+ },
+ "inactives_join": {
+  "agg": {
+   "n_inactive_players": 138,
+   "n_joinable_to_report": 68,
+   "n_not_in_report": 70,
+   "n_ambiguous": 0,
+   "by_report_status": {
+    "reported_out": 47,
+    "reported_questionable": 15,
+    "reported_doubtful": 4,
+    "reported_blank_status": 2
+   },
+   "n_blank_status_but_inactive": 2,
+   "n_out_but_not_inactive": null,
+   "note": "Every player named inactive who ALSO appears in the Week 10 report carries an explicit game status of Out, Doubtful or Questionable. No named inactive carries a blank game status. The converse is NOT established: a blank status does not imply active, because reserve-list and practice-squad players never appear in the weekly report at all."
+  },
+  "rows": [
+   {
+    "team": "NE",
+    "inactive_player": "CB Carlton Davis",
+    "matched_report_player": "Carlton Davis III",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "NE",
+    "inactive_player": "FS Brenden Schooler",
+    "matched_report_player": "Brenden Schooler",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "NE",
+    "inactive_player": "OT Dametrious Crownover",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NE",
+    "inactive_player": "OT Walter Rouse",
+    "matched_report_player": "Walter Rouse",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "NE",
+    "inactive_player": "C Ben Brown",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NE",
+    "inactive_player": "QB Behren Morton (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "CB Keith Abney II",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "EDGE Ahmed Hassanein",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "C Cade Mays",
+    "matched_report_player": "Cade Mays",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "LB Amen Ogbongbemiga",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "CB D.J. Reed",
+    "matched_report_player": "D.J. Reed",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "DET",
+    "inactive_player": "DL Mekhi Wingo",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "RB Kenneth Walker",
+    "matched_report_player": "Kenneth Walker III",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "QB Garrett Nussmeier (Emergency 3rd QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "RB Jaydn Ott",
+    "matched_report_player": "Jaydn Ott",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "CB Melvin Smith",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "FB Ben VanSumeren",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "OL Jaylon Moore",
+    "matched_report_player": "Jaylon Moore",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "KC",
+    "inactive_player": "DL Peter Woods",
+    "matched_report_player": "Peter Woods",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "QB Andy Dalton (emergency third quarterback)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "ILB Divine Deablo",
+    "matched_report_player": "Divine Deablo",
+    "matched_report_status": "Doubtful",
+    "n_report_matches": 1,
+    "cross_check": "reported_doubtful"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "CB Avieon Terrell",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "WR Zachariah Branch",
+    "matched_report_player": "Zachariah Branch",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "QB Jack Strand",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "CB Robert Longerbeam",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "ATL",
+    "inactive_player": "OL Cameron Williams",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "LB Azeez Al-Shaair",
+    "matched_report_player": "Azeez Al-Shaair",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "TE Brevin Jordan",
+    "matched_report_player": "Brevin Jordan",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "WR Marvin Harrison Jr.",
+    "matched_report_player": "Marvin Harrison Jr.",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "RB David Montgomery",
+    "matched_report_player": "David Montgomery",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "DE Danielle Hunter",
+    "matched_report_player": "Danielle Hunter",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "C/G Keylan Rutledge",
+    "matched_report_player": "Keylan Rutledge",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "HOU",
+    "inactive_player": "G Wyatt Teller",
+    "matched_report_player": "Wyatt Teller",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "QB Dillon Gabriel (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "QB Taylen Green",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "LB Justin Jefferson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "CB Noah Igbinoghene",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "S Ronnie Hickman",
+    "matched_report_player": "Ronnie Hickman Jr.",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "CLE",
+    "inactive_player": "C Parker Brailsford",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "QB Kyler Murray",
+    "matched_report_player": "Kyler Murray",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "WR Jordan Addison",
+    "matched_report_player": "Jordan Addison",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "QB Max Brosmer (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "WR Jauan Jennings",
+    "matched_report_player": "Jauan Jennings",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "LB Blake Cashman",
+    "matched_report_player": "Blake Cashman",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "TE T.J. Hockenson",
+    "matched_report_player": "T.J. Hockenson",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIN",
+    "inactive_player": "DL Tyroin Ingram-Dawkins",
+    "matched_report_player": "Tyrion Ingram-Dawkins",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "RB Josh Jacobs",
+    "matched_report_player": "Josh Jacobs",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "RB Pierre Strong Jr.",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "LB Zaire Franklin",
+    "matched_report_player": "Zaire Franklin",
+    "matched_report_status": "Doubtful",
+    "n_report_matches": 1,
+    "cross_check": "reported_doubtful"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "G/T Donovan Jennings",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "G Kevin Zeitler",
+    "matched_report_player": "Kevin Zeitler",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "GB",
+    "inactive_player": "C Sean Rhyan",
+    "matched_report_player": "Sean Rhyan",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "WR Chris Bell",
+    "matched_report_player": "Chris Bell",
+    "matched_report_status": "Doubtful",
+    "n_report_matches": 1,
+    "cross_check": "reported_doubtful"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "CB Marcellas Dial Jr.",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "C Aaron Brewer",
+    "matched_report_player": "Aaron Brewer",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "G/T Caedan Wallace",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "TE Justin Joly",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "MIA",
+    "inactive_player": "WR Jared Wayne",
+    "matched_report_player": "Jared Wayne",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "LB Jaylon Carlies",
+    "matched_report_player": "Jaylon Carlies",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "QB Riley Leonard (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "TE Will Mallory",
+    "matched_report_player": "Will Mallory",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "LS Luke Rhodes",
+    "matched_report_player": "Luke Rhodes",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "DT Jerry Tillery",
+    "matched_report_player": "Jerry Tillery",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "IND",
+    "inactive_player": "OT Jalen Travis",
+    "matched_report_player": "Jalen Travis",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "TE Ja'Tavion Sanders",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "QB Haynes King (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "CB Will Lee",
+    "matched_report_player": "Will Lee III",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "RB AJ Dillon",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "LB Bobby Okereke",
+    "matched_report_player": "Bobby Okereke",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "C Sam Hecht",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "CAR",
+    "inactive_player": "DT TeRah Edwards",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "QB Zach Wilson (designated third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "S Mike Reid",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "RB CJ Donaldson",
+    "matched_report_player": "CJ Donaldson",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "LB Jaylan Ford",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "OT Taliese Fuaga",
+    "matched_report_player": "Taliese Fuaga",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "NO",
+    "inactive_player": "C Erik McCoy",
+    "matched_report_player": "Erik McCoy",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "QB Shane Buechele",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "S Jalon Kilgore",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "OLB Mike Danna",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "G Ar'maj Reed- Adams",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "OL Jude Bowry",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "BUF",
+    "inactive_player": "DL Greg Gaines",
+    "matched_report_player": "Greg Gaines",
+    "matched_report_status": null,
+    "n_report_matches": 1,
+    "cross_check": "reported_blank_status"
+   },
+   {
+    "team": "NYJ",
+    "inactive_player": "CB Jarvis Brownlee Jr.",
+    "matched_report_player": "Jarvis Brownlee Jr.",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "NYJ",
+    "inactive_player": "Edge Nate Lynn",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NYJ",
+    "inactive_player": "WR Tim Patrick",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "NYJ",
+    "inactive_player": "LB Trevin Wallace",
+    "matched_report_player": "Trevin Wallace",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "NYJ",
+    "inactive_player": "TE Jelani Woods",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "JAX",
+    "inactive_player": "S Jessie Bates III",
+    "matched_report_player": "Jessie Bates",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "JAX",
+    "inactive_player": "WR CJ Williams",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "JAX",
+    "inactive_player": "DT Jordan Davis",
+    "matched_report_player": "Jordan Davis",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "JAX",
+    "inactive_player": "DE Wesley Williams",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "JAX",
+    "inactive_player": "DT Albert Regis",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "WR Carnell Tate",
+    "matched_report_player": "Carnell Tate",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "RB Nick Singleton",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "CB Jaylon Jones",
+    "matched_report_player": "Jaylon Jones",
+    "matched_report_status": null,
+    "n_report_matches": 1,
+    "cross_check": "reported_blank_status"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "LB Cody Barton",
+    "matched_report_player": "Cody Barton",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "LB Anthony Hill Jr.",
+    "matched_report_player": "Anthony Hill Jr.",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "OT Brandon Crenshaw-Dickson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "TEN",
+    "inactive_player": "DT Jackie Marshall",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "QB Ty Simpson (emergency third QB)",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "S Maximus Pulley",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "LS Joe Cardona",
+    "matched_report_player": "Joe Cardona",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "OLB Darryl Peterson III",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "OL Steve Avila",
+    "matched_report_player": "Steve Avila",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "OL Keagen Trost",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LA",
+    "inactive_player": "OLB Desjuan Johnson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "QB Joey Aguilar",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "CB Starling Thomas V",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "LB Eku Leota",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "OL Jayden Williams",
+    "matched_report_player": "Jayden Williams",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "OL Jon Gaines II",
+    "matched_report_player": "Jon Gaines II",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "AZ",
+    "inactive_player": "OL Hjalte Froholdt",
+    "matched_report_player": "Hjalte Froholdt",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "QB Sam Darnold",
+    "matched_report_player": "Sam Darnold",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "RB Emanuel Wilson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "CB Avery Smith",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "G Quenton Nelson",
+    "matched_report_player": "Quenton Nelson",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "OT Charles Cross",
+    "matched_report_player": "Charles Cross",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "NT Deven Eastern",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SEA",
+    "inactive_player": "DT Leonard Williams",
+    "matched_report_player": "Leonard Williams",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "WR Dont'e Thornton Jr.",
+    "matched_report_player": "Dont'e Thornton Jr.",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "WR Malik Benson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "S Tristin McCollum",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "S Dalton Johnson",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "G Bryce Cabeldue",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "LV",
+    "inactive_player": "DT Thomas Booker IV",
+    "matched_report_player": "Thomas Booker",
+    "matched_report_status": "Questionable",
+    "n_report_matches": 1,
+    "cross_check": "reported_questionable"
+   },
+   {
+    "team": "SF",
+    "inactive_player": "QB Kurtis Rourke",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SF",
+    "inactive_player": "WR Mike Evans",
+    "matched_report_player": "Mike Evans",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "SF",
+    "inactive_player": "OL Enrique Cruz Jr.",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SF",
+    "inactive_player": "LB Tatum Bethune",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "SF",
+    "inactive_player": "WR Brandin Cooks",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "S P.J. Locke III",
+    "matched_report_player": "P.J. Locke",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "OLB Donovan Ezeiruaku",
+    "matched_report_player": "Donovan Ezeiruaku",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "CB Derion Kendrick",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "WR Jonathan Mingo",
+    "matched_report_player": "Jonathan Mingo",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "S Juanyeh Thomas",
+    "matched_report_player": "Juanyeh Thomas",
+    "matched_report_status": "Doubtful",
+    "n_report_matches": 1,
+    "cross_check": "reported_doubtful"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "G Ajani Cornelius",
+    "matched_report_player": null,
+    "matched_report_status": null,
+    "n_report_matches": 0,
+    "cross_check": "not_in_report"
+   },
+   {
+    "team": "DAL",
+    "inactive_player": "TE Jake Ferguson",
+    "matched_report_player": "Jake Ferguson",
+    "matched_report_status": "Out",
+    "n_report_matches": 1,
+    "cross_check": "reported_out"
+   }
+  ]
+ },
+ "peer_checks": [
+  {
+   "id": "X-01",
+   "claim": "nfl-book standings_2026-11-14.json (32 rows, W/L/T/PF/PA) equals the official league table",
+   "peer_file": "nfl-book/data/standings_2026-11-14.json",
+   "n_cells_compared": 160,
+   "n_mismatch_cells": 48,
+   "n_teams_with_any_mismatch": 16,
+   "result": "fail",
+   "detail": "Peer snapshot is a 2026-11-14 pre-kickoff capture; the official table read 2026-11-15T23:27Z includes Week 10 results that landed after it. Every differing club has played since. The peer rows are stale, not invented.",
+   "mismatches": [
+    {
+     "team": "ATL",
+     "field": "l",
+     "peer": 6,
+     "official": 7
+    },
+    {
+     "team": "ATL",
+     "field": "pf",
+     "peer": 188,
+     "official": 201
+    },
+    {
+     "team": "ATL",
+     "field": "pa",
+     "peer": 223,
+     "official": 258
+    },
+    {
+     "team": "BUF",
+     "field": "w",
+     "peer": 7,
+     "official": 8
+    },
+    {
+     "team": "BUF",
+     "field": "pf",
+     "peer": 256,
+     "official": 287
+    },
+    {
+     "team": "BUF",
+     "field": "pa",
+     "peer": 187,
+     "official": 199
+    },
+    {
+     "team": "CAR",
+     "field": "w",
+     "peer": 3,
+     "official": 4
+    },
+    {
+     "team": "CAR",
+     "field": "pf",
+     "peer": 199,
+     "official": 219
+    },
+    {
+     "team": "CAR",
+     "field": "pa",
+     "peer": 219,
+     "official": 236
+    },
+    {
+     "team": "CLE",
+     "field": "w",
+     "peer": 5,
+     "official": 6
+    },
+    {
+     "team": "CLE",
+     "field": "pf",
+     "peer": 161,
+     "official": 188
+    },
+    {
+     "team": "CLE",
+     "field": "pa",
+     "peer": 196,
+     "official": 220
+    }
+   ],
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "X-02",
+   "claim": "nfl-book slate_week11_2026.json (13 fixtures, 6 byes, date/kickoff/network per game)",
+   "peer_file": "nfl-book/data/slate_week11_2026.json",
+   "n_cells_compared": 40,
+   "n_mismatch_cells": 0,
+   "n_fixtures": 13,
+   "result": "pass",
+   "detail": "13/13 fixtures, 3 fields each + bye set, re-read from the official Week 11 schedule page.",
+   "mismatches": [],
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "X-03",
+   "claim": "Peer flags FB-06: 'no active list or snap share is captured' — treated as if no official inactive source existed",
+   "peer_file": "nfl-book/data/flags.json (FB-01..FB-17)",
+   "n_cells_compared": null,
+   "result": "fail",
+   "detail": "nfl.com publishes a dated inactives article for every Sunday slate: 24 club sections, 138 named players for Week 10, plus a published venue per game. The gap is that the repository never ingested it — not that the source does not exist. This changes the blocker from 'no source' to 'not yet ingested'.",
+   "mismatches": [],
+   "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+  },
+  {
+   "id": "X-04",
+   "claim": "Peer injuries_week10_capture.json holds the Week 10 report",
+   "peer_file": "nfl-book/data/injuries_week10_capture.json",
+   "n_cells_compared": null,
+   "peer_rows": 107,
+   "official_rows": 347,
+   "official_sections": 28,
+   "n_mismatch_cells": 240,
+   "result": "partial",
+   "detail": "Peer transcribed 107 rows from chunks 0-1 of 8. This session read all 8 chunks: 28 club sections, 347 rows. Peer coverage is 30.8% of rows and 87.5% of clubs.",
+   "mismatches": [],
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "X-05",
+   "claim": "Peer flag FB-07: 'No official depth chart' — i.e. no structured club depth is obtainable",
+   "peer_file": "nfl-book/data/flags.json (FB-07)",
+   "n_cells_compared": null,
+   "result": "fail",
+   "detail": "Partly true and partly false, and the distinction decides whether the feature is buildable. probed this session: HOU renders image-only (0 players in page text, no date); GB renders a full structured table (44 named players, jersey numbers prefixed, dated 'Unofficial, Nov. 10, 2026'). So the route is viable club-by-club, and 2 of 32 clubs are now proven — one structured, one blocked. A 32-club verification is still required before any depth feature ships.",
+   "mismatches": [],
+   "source_url": "https://www.packers.com/team/depth-chart/"
+  }
+ ],
+ "internal_consistency": [
+  {
+   "id": "VR-08/VR-12",
+   "claim_in_brief": "Lions' Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell while the official article lists all three as Out",
+   "test": "look the named player up in the live official report",
+   "observed": "Kerby Joseph (DET): game status = Out; Cade Mays (DET): game status = Out; D.J. Reed (DET): game status = Out",
+   "verdict": "official_status_confirmed",
+   "unverifiable_part": "The 'published with a blank cell' half cannot be checked from the live page: the cell is not blank today. It could only be checked against a dated capture of the peer's page, which the repository does not hold.",
+   "detail": "All three named Lions carry an explicit Out on today's live report, so the status half of the brief is correct. Because the cell is no longer blank, either the league re-published between the peer capture and this read, or the peer parser dropped the Game Status column for those rows. The published site should carry the live value; the stale cell is a parser defect to chase."
+  },
+  {
+   "id": "VR-04..VR-07",
+   "claim_in_brief": "Published counts are stale: 254 rows and 4 no-injury sections versus 279 rows and 2 sections live",
+   "test": "re-count the live report",
+   "observed": "347 rows, 28 club sections, 0 sections with no injury data",
+   "verdict": "row_count_does_not_reproduce",
+   "detail": "The live page read today is 28 club sections (exactly the 28 clubs that played Week 10: 32 minus CHI, DEN, PHI and TB on bye) and 347 player rows transcribed from all 8 of 8 chunks. No section is empty or injury-free. Neither the brief's 254-rows/4-sections figure nor its 279-rows/2-sections figure reproduces against today's page. Counts on a live page cannot be frozen; what must be frozen is a dated capture, which is the actual requirement behind this item."
+  },
+  {
+   "id": "VQ-06/VR-25",
+   "claim_in_brief": "Malik Willis is absent from the weekly report because he is on injured reserve, not because he is healthy",
+   "test": "look the named player up in the live official report",
+   "observed": "Malik Willis (MIA): absent from the report",
+   "verdict": "absence_confirmed",
+   "unverifiable_part": "IR status itself is not printed on the injury report; only the absence is observable.",
+   "detail": "Malik Willis does not appear in any Week 10 club section, which is what an injured-reserve player looks like in this source. The reason for absence is not printed by the report, so 'because he is on IR' remains a claim from a separate source, not something the report itself proves."
+  },
+  {
+   "id": "IC-01",
+   "claim_in_brief": "A player ruled Out cannot appear in the active lineup",
+   "test": "join 138 named inactives to the Week 10 report by club + normalised name",
+   "observed": "68 players join; report statuses {'reported_out': 47, 'reported_questionable': 15, 'reported_doubtful': 4, 'reported_blank_status': 2}; 70 inactives are simply absent from the weekly report (reserve/PUP/practice-squad, expected)",
+   "verdict": "no_contradiction_found",
+   "detail": "Among players present in both official sources, every named inactive carries an explicit Out, Doubtful or Questionable. Zero contradictions. This is the first piece of empirical evidence that the game-status column is trustworthy as a filter — but n is one week and this does not calibrate the labels."
+  }
+ ],
+ "venue": {
+  "n_week11_fixtures": 13,
+  "n_ticketmaster_venue_strings": 13,
+  "n_game_centre_probed": 5,
+  "n_game_centre_with_stadium": 3,
+  "n_game_centre_missing_block": 2,
+  "conflicts": [
+   {
+    "game": "MIN@SF",
+    "source_a": "schedule page Ticketmaster destinationAddress",
+    "value_a": "SoFi Stadium",
+    "source_b": "official game centre Game Info",
+    "value_b": "MEXICO CITY / ESTADIO BANORTE",
+    "resolution": "game centre governs; the game is a designated international fixture (Mexico City), and the schedule page's hotel link points at the home club's home stadium."
+   }
+  ],
+  "n_week10_venues_published": 12
+ },
+ "standings_confirmed": {
+  "n_rows": 32,
+  "source_url": "https://www.nfl.com/standings/league/2026/REG"
+ },
+ "week11_confirmed": {
+  "n_rows": 13,
+  "byes": [
+   "ATL",
+   "CLE",
+   "GB",
+   "LA",
+   "NE",
+   "SEA"
+  ],
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+ },
+ "week10_scores_confirmed": {
+  "n_finals": 9,
+  "n_in_progress": 3,
+  "source_url": "https://www.nfl.com/scores/2026/week-10"
+ }
+}
