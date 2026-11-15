@@ -1475,8 +1475,9 @@
    "n_cells_compared": 160,
    "n_mismatch_cells": 48,
    "n_teams_with_any_mismatch": 16,
+   "n_teams_whose_games_played_moved": 16,
    "result": "fail",
-   "detail": "Peer snapshot is a 2026-11-14 pre-kickoff capture; the official table read 2026-11-15T23:27Z includes Week 10 results that landed after it. Every differing club has played since. The peer rows are stale, not invented.",
+   "detail": "Peer snapshot is a 2026-11-14 pre-kickoff capture; the official table read 2026-11-15T23:27Z includes Week 10 results that landed after it. 16 of 32 clubs differ and in every case the club's games-played count also moved (16 clubs). Clubs that have not played since are byte-identical, which is what a stale capture looks like and what an invented one would not. The peer rows are stale, not fabricated.",
    "mismatches": [
     {
      "team": "ATL",
@@ -1581,11 +1582,13 @@
    "peer_file": "nfl-book/data/injuries_week10_capture.json",
    "n_cells_compared": null,
    "peer_rows": 107,
+   "peer_clubs": 9,
+   "peer_games": 5,
    "official_rows": 347,
    "official_sections": 28,
    "n_mismatch_cells": 240,
    "result": "partial",
-   "detail": "Peer transcribed 107 rows from chunks 0-1 of 8. This session read all 8 chunks: 28 club sections, 347 rows. Peer coverage is 30.8% of rows and 87.5% of clubs.",
+   "detail": "Peer capture holds 107 rows covering 9 clubs across 5 of the 14 Week 10 fixtures. This session read all 8 chunks: 28 club sections over all 14 fixtures, 347 rows. Peer coverage is 30.8% of rows and 32.1% of the clubs that appear in the report. The peer's shortfall is in breadth of fixtures, not in accuracy of what it did read.",
    "mismatches": [],
    "source_url": "https://www.nfl.com/injuries/"
   },
@@ -1595,7 +1598,7 @@
    "peer_file": "nfl-book/data/flags.json (FB-07)",
    "n_cells_compared": null,
    "result": "fail",
-   "detail": "Partly true and partly false, and the distinction decides whether the feature is buildable. probed this session: HOU renders image-only (0 players in page text, no date); GB renders a full structured table (44 named players, jersey numbers prefixed, dated 'Unofficial, Nov. 10, 2026'). So the route is viable club-by-club, and 2 of 32 clubs are now proven — one structured, one blocked. A 32-club verification is still required before any depth feature ships.",
+   "detail": "Partly true and partly false, and the distinction decides whether the feature is buildable. Two clubs were probed this session: Houston renders image-only (0 players in page text, no date); Green Bay renders a full structured table (44 named players, jersey numbers prefixed, dated 'Unofficial, Nov. 10, 2026'). So a per-club route exists for at least one club, while 30 remain unprobed and 1 of 2 is blocked. The peer flag is wrong as a universal claim and right as a warning. A 32-club verification is still required before any depth feature ships.",
    "mismatches": [],
    "source_url": "https://www.packers.com/team/depth-chart/"
   }

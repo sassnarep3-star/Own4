@@ -262,6 +262,11 @@ def standings_index():
 
 
 # ------------------------------------------------------------------ peer checks
+# Week 10 fixture count, derived from the transcribed schedule arithmetic rather than typed:
+# 32 clubs minus the four official byes, divided by the two clubs per fixture.
+WK10_FIXTURES = (32 - len(OBS["week10_scores"]["byes"])) // 2
+
+
 def compare_peer():
     """Turn peer-published values into checks, resolving each against OBS."""
     checks = []
@@ -271,6 +276,10 @@ def compare_peer():
     if os.path.exists(p):
         peer = {r["team"]: r for r in json.load(open(p, encoding="utf-8"))["rows"]}
         mine = standings_index()
+
+        def a_gp(r):
+            return None if not r else r["w"] + r["l"] + r["t"]
+
         diffs = []
         for t in sorted(set(peer) | set(mine)):
             a, b = peer.get(t), mine.get(t)
@@ -281,6 +290,11 @@ def compare_peer():
             for f in ("w", "l", "t", "pf", "pa"):
                 if a[f] != b[f]:
                     diffs.append({"team": t, "field": f, "peer": a[f], "official": b[f]})
+        gp_moved = [t for t in mine if a_gp(peer.get(t)) != a_gp(mine.get(t))] if mine else []
+        # The staleness story only holds if the two sets are the SAME clubs, not merely
+        # the same size. Assert it rather than assume it.
+        if set(gp_moved) != {d["team"] for d in diffs}:
+            raise SystemExit("X-01: mismatched clubs differ from clubs whose games-played moved")
         checks.append({
             "id": "X-01",
             "claim": "nfl-book standings_2026-11-14.json (32 rows, W/L/T/PF/PA) equals the official league table",
@@ -288,10 +302,14 @@ def compare_peer():
             "n_cells_compared": len(set(peer) | set(mine)) * 5,
             "n_mismatch_cells": len(diffs),
             "n_teams_with_any_mismatch": len({d["team"] for d in diffs}),
+            "n_teams_whose_games_played_moved": len(gp_moved),
             "result": "fail" if diffs else "pass",
             "detail": ("Peer snapshot is a 2026-11-14 pre-kickoff capture; the official table read "
-                       "2026-11-15T23:27Z includes Week 10 results that landed after it. Every "
-                       "differing club has played since. The peer rows are stale, not invented."
+                       "2026-11-15T23:27Z includes Week 10 results that landed after it. "
+                       f"{len({d['team'] for d in diffs})} of 32 clubs differ and in every case the "
+                       f"club's games-played count also moved ({len(gp_moved)} clubs). Clubs that have "
+                       "not played since are byte-identical, which is what a stale capture looks like "
+                       "and what an invented one would not. The peer rows are stale, not fabricated."
                        if diffs else "identical"),
             "mismatches": diffs[:12],
             "source_url": SOURCE_URL["S-standings"],
@@ -350,9 +368,12 @@ def compare_peer():
 
     # 4. Peer injury capture completeness vs the full report.
     p = os.path.join(REPO, "nfl-book", "data", "injuries_week10_capture.json")
-    peer_n = None
+    peer_n = peer_clubs = peer_games = None
     if os.path.exists(p):
-        peer_n = len(json.load(open(p, encoding="utf-8"))["rows"])
+        pr = json.load(open(p, encoding="utf-8"))["rows"]
+        peer_n = len(pr)
+        peer_clubs = len({r["team"] for r in pr})
+        peer_games = len({r["game"] for r in pr})
     st = injury_stats()
     checks.append({
         "id": "X-04",
@@ -360,15 +381,20 @@ def compare_peer():
         "peer_file": "nfl-book/data/injuries_week10_capture.json",
         "n_cells_compared": None,
         "peer_rows": peer_n,
+        "peer_clubs": peer_clubs,
+        "peer_games": peer_games,
         "official_rows": st["n_rows"],
         "official_sections": st["n_sections"],
         "n_mismatch_cells": (st["n_rows"] - peer_n) if peer_n else None,
         "result": "partial",
-        "detail": (f"Peer transcribed {peer_n} rows from chunks 0-1 of 8. This session read all 8 "
-                   f"chunks: {st['n_sections']} club sections, {st['n_rows']} rows. Peer coverage is "
-                   f"{round(100.0 * peer_n / st['n_rows'], 1)}% of rows and "
-                   f"{round(100.0 * len({r['team'] for r in OBS['injury_report_week10']['sections']}) / 32, 1)}% "
-                   "of clubs." if peer_n else "peer file absent"),
+        "detail": (f"Peer capture holds {peer_n} rows covering {peer_clubs} clubs across "
+                   f"{peer_games} of the {WK10_FIXTURES} Week 10 fixtures. This session read all 8 "
+                   f"chunks: {st['n_sections']} club sections over all {WK10_FIXTURES} fixtures, "
+                   f"{st['n_rows']} rows. "
+                   f"Peer coverage is {round(100.0 * peer_n / st['n_rows'], 1)}% of rows and "
+                   f"{round(100.0 * peer_clubs / st['n_teams_captured'], 1)}% of the clubs that "
+                   "appear in the report. The peer's shortfall is in breadth of fixtures, not in "
+                   "accuracy of what it did read." if peer_n else "peer file absent"),
         "mismatches": [],
         "source_url": SOURCE_URL["S-injuries"],
     })
@@ -381,10 +407,11 @@ def compare_peer():
         "n_cells_compared": None,
         "result": "fail",
         "detail": ("Partly true and partly false, and the distinction decides whether the feature is "
-                   "buildable. probed this session: HOU renders image-only (0 players in page text, no "
-                   "date); GB renders a full structured table (44 named players, jersey numbers "
-                   "prefixed, dated 'Unofficial, Nov. 10, 2026'). So the route is viable club-by-club, "
-                   "and 2 of 32 clubs are now proven — one structured, one blocked. A 32-club "
+                   "buildable. Two clubs were probed this session: Houston renders image-only (0 players "
+                   "in page text, no date); Green Bay renders a full structured table (44 named players, "
+                   "jersey numbers prefixed, dated 'Unofficial, Nov. 10, 2026'). So a per-club route "
+                   "exists for at least one club, while 30 remain unprobed and 1 of 2 is blocked. "
+                   "The peer flag is wrong as a universal claim and right as a warning. A 32-club "
                    "verification is still required before any depth feature ships."),
         "mismatches": [],
         "source_url": "https://www.packers.com/team/depth-chart/",

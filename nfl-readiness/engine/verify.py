@@ -224,6 +224,19 @@ def check_data():
         errors.append(f"inactives: {len(ina_teams)} clubs across {len(per_game)} games "
                       "is not 2 clubs per game")
 
+    # --- Week 10 arithmetic is closed ---------------------------------------
+    # A wrong fixture count ("12" for a Sunday-only article vs 14 games in the week)
+    # is the kind of error a reader would not catch. Assert the arithmetic.
+    wk10_byes = set(obs["week10_scores"]["byes"])
+    expected_fixtures = (32 - len(wk10_byes)) // 2
+    if expected_fixtures != 14:
+        errors.append(f"Week 10 arithmetic: {expected_fixtures} fixtures from {len(wk10_byes)} byes, "
+                      "expected 14")
+    sunday_games = len({r["game"] for r in obs["inactives_week10"]["rows"]})
+    if not (2 <= sunday_games <= expected_fixtures):
+        errors.append(f"inactives: {sunday_games} fixtures cannot exceed the {expected_fixtures} "
+                      "played that week")
+
     # --- derived agrees with observations ----------------------------------
     if der["injury_report"]["n_rows"] != n_rows:
         errors.append("derived: injury n_rows disagrees with observations")
