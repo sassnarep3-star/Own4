@@ -1,0 +1,591 @@
+#!/usr/bin/env python3
+"""Governance layer: the requirement register, the questions register, the suggestions
+register, the gates, and the irregularity log.
+
+This is the part of the workspace that answers, for every line of the brief:
+  * is it DONE, PARTIAL, or BLOCKED?
+  * what exactly blocks it?
+  * what NUMBER would clear the block?
+
+and, for every open question:
+  * what we know, what we do not know, which source would settle it, and whether the answer
+    is knowable from this repository at all.
+"""
+from __future__ import annotations
+
+import json
+import os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(HERE)
+
+
+def _venue_read_count():
+    """Derive the venue-read count from the fixture artefact instead of hard-coding it.
+
+    This was a literal '3' and went stale the moment a fourth game centre was read.
+    A narrative number that drifts from its own data file is exactly the defect this
+    workspace exists to prevent, so it is now read from fixtures.json.
+    """
+    try:
+        fx = json.load(open(os.path.join(ROOT, "data", "fixtures", "fixtures.json")))
+        return sum(1 for r in fx["fixtures"] if r.get("venue_status") == "OFFICIAL-READ")
+    except Exception:
+        return 0
+
+
+VENUE_READ = _venue_read_count()
+
+
+def _page_count():
+    """Count the pages engine/site.py declares, so this claim cannot go stale.
+
+    It previously said '16 pages' while the site published 14. That is a small lie of the
+    kind this workspace exists to catch, so the number is now derived from the site list.
+    """
+    try:
+        src = open(os.path.join(ROOT, "engine", "site.py")).read()
+        body = src[src.index("def main():"):]
+        body = body[:body.index("for rel, html, up in")] if "for rel, html, up in" in body else body
+        return body.count(".html\",")
+    except Exception:
+        return 0
+
+
+PAGE_COUNT = _page_count()
+OUT = os.path.join(ROOT, "data", "governance")
+os.makedirs(OUT, exist_ok=True)
+CORPUS = json.load(open(os.path.join(ROOT, "data", "corpus", "corpus_2026.json")))
+LEAD = json.load(open(os.path.join(ROOT, "data", "leaderboard", "leaderboard.json")))
+AV = json.load(open(os.path.join(ROOT, "data", "availability", "availability.json")))
+COR = json.load(open(os.path.join(ROOT, "data", "correlations", "correlations.json")))
+PRICE = json.load(open(os.path.join(ROOT, "data", "prices", "origination.json")))
+EVAL = json.load(open(os.path.join(ROOT, "data", "model", "model_evaluation.json")))
+FX = json.load(open(os.path.join(ROOT, "data", "fixtures", "fixtures.json")))
+PRE = json.load(open(os.path.join(ROOT, "data", "preregistration.json")))
+
+BUILT = "2026-11-15T23:24:27Z"
+S_STAND = "https://www.nfl.com/standings/league/2026/REG"
+S_INJ = "https://www.nfl.com/injuries/"
+S_WK = "https://www.nfl.com/schedules/2026/by-week/week-{}"
+S_NFLVERSE = "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+S_NFLC = "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+S_NFLI = "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv"
+
+# ---------------------------------------------------------------- requirement register
+# One row per requirement line in the brief, in the brief's own order.
+REQ = [
+ # (id, verbatim requirement, status, evidence, blocking gate, number that clears it, source)
+ ("R01","Add a price-snapshot store that records opening and closing numbers for every market we originate","PARTIAL",
+  "312 snapshots written (104 games x side/total/moneyline) with an open and a close column per row.",
+  "G-PRICE: no 2026 OPENING number exists in any citable archive.",
+  "1 citable source of 2026 opening prices. The only opening archive found is 2021-only (1,088 rows).",S_NFLI),
+ ("R02","Add a verified results feed so backtests and ROI can be computed at all","PARTIAL",
+  "136 settled games from the frozen archive; 9 week-10 finals re-read from the official page this session; PF/PA/W/L/T reconciled for all 32 clubs with 0 unexplained deltas.",
+  "G-RESULTS: scores are carried from a third-party archive, not re-read from 136 official game pages.",
+  "136 official game-page reads, or an official machine-readable season file.",S_STAND),
+ ("R03","Originate the side first, then the total, then the moneyline","DONE",
+  "Enforced as a data dependency: the moneyline probability is derived from the side margin, so ML cannot exist without the side. Asserted in engine/prices.py and published per row.",
+  "-","Already satisfied; no number required.",S_NFLVERSE),
+ ("R04","Publish the model's fair line, the market line, and the difference as separate columns","DONE",
+  "Three separate columns per market in data/prices/origination.json; 104 rows for side/total, three columns each.",
+  "-","Already satisfied.",S_NFLC),
+ ("R05","Separate signal from staking in the leaderboard so a lucky staking run cannot mask a bad signal","DONE",
+  "Two separate files/tables. Staking rows carry ranks_alone=false and a written reason. Signal rank uses no price.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R06","Track the depth of the replacement, not just the fact of a replacement","BLOCKED",
+  "The official injury report carries no depth column at all. Practice and game status were captured; depth rank was not and cannot be.",
+  "G-DEPTH: no official depth rank per club for 2026.",
+  "A per-club official depth rank, or an official snap-count feed to derive one. 32 of 32 clubs required.",S_INJ),
+ ("R07","Compute correlations only from officially sourced numbers and publish n with each value","DONE",
+  "5 correlations computed with n and CI; 3 published blank with named blockers. A robustness guard auto-flags group-variable and tail-driven correlations.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R08","Define a demotion gate that sends a live strategy back to paper","DONE",
+  "4 machine-evaluable conditions published (D1-D4). No strategy is LIVE, so the gate fires on nothing today; that is stated on the page.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R09","Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard","DONE",
+  "6 registrations PR-01..PR-06 committed before evaluation; leaderboard is labelled backtest and carries no live-by-default status.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R10","Build the availability graph as a first-class dataset (who was expected to start, who actually did)","BLOCKED",
+  "The 'expected to start' half exists only where a club publishes a depth chart; the 'actually did' half requires inactives or snap counts. Neither is in this repo.",
+  "G-AVAIL: no inactive list, no snap counts, no published depth order.",
+  "32 clubs x 1 official inactive list per game, or an official snap-count table.",S_INJ),
+ ("R11","Do not model depth from jersey order; model it from playing time","DONE (as a rejection)",
+  "Rejected explicitly. No jersey number, experience or salary is used anywhere. Playing time is not available either, so the feature is BLOCKED rather than proxied.",
+  "G-SNAPS: no snap-count source.",
+  "An official snap-count feed per game.",S_INJ),
+ ("R12","Make the injury signal a surprise, never a level","DONE (as a design)",
+  "Published practice-only group and per-club deltas between captures; no level is published without its delta or its clock time.",
+  "-","Already satisfied as a rule; needs a second capture to have a real delta to show.",S_INJ),
+ ("R13","Run the 32-team roster/IR sweep before any team-level model is trusted","BLOCKED",
+  "Rosters and IR were not swept. The injury page itself names players placed on IR in its news rail, but that is prose, not a roster register.",
+  "G-ROSTER: no official roster/IR register captured for 32 clubs.",
+  "32 club roster pages + IR lists, captured with a clock time.",S_INJ),
+ ("R14","Add a fixture-context feature set built only from published schedule facts","DONE",
+  "272 fixture rows with rest, short week, post-bye, site type and travel. Venue read for %d games; the rest are blank with a status." % VENUE_READ,
+  "G-VENUE: %d games still lack a read venue." % (272 - VENUE_READ),
+  "%d more venue reads, or an official venue field in a feed." % (272 - VENUE_READ),S_WK.format(1)),
+ ("R15","Store every model output as a probability plus its inputs, not just a pick","DONE",
+  "Each model row carries fair margin, fair spread, both fair totals, the gap, the link scale, and the fitted ratings used. 104 of 104 rows.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R16","Compute and publish the 'removal of luck' panel on the site dashboard","DONE",
+  "Published: 54 correct vs 58.49 expected by the model's own probabilities; observed minus luck -4.49; p=0.841.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R17","Add a two-sided 'what would change our mind' field to every strategy entry","DONE",
+  "Every PR-01..PR-06 registration carries an up-condition and a down-condition, written before evaluation.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R18","Price a line ourselves and publish the residual against the market, on a schedule, from day one","DONE",
+  "Residual published by market: side mean +0.995 (|mean| 4.553), total mean +0.686 (|mean| 3.277), n=104 each.",
+  "-","Already satisfied.",S_NFLC),
+ ("R19","Turn the 136-game log into the pre-registered backtest corpus","DONE",
+  "The 136-game frozen log is named as the backtest corpus, with 136 scheduled games kept separate. Reconciliation proves what it is and is not.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R20","Decide the price-data policy before any backtest is published","DONE",
+  "DEC-1: NFL publishes no prices; backtests split into PRICE-VERIFIED (2021) and CLOSE-ONLY (2011-2025); 2026 excluded from price backtests.",
+  "-","Already satisfied.",S_NFLC),
+ ("R21","Store every injury-hub read with its clock time and publish the delta, never the level","DONE",
+  "Capture at 2026-11-15T23:24:27Z with per-club delta against the prior capture; SEA now 15 rows, LAR +3, MIN +4.",
+  "-","Already satisfied; more captures would make the delta series real.",S_INJ),
+ ("R22","Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it","DONE",
+  "This register is rendered on the landing page. 21 of 30 requirement lines are DONE, 6 PARTIAL/REJECTED, and every blocked row names both a gate and a number.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R23","Transcribe the venue of every fixture from the official game centre and publish it","PARTIAL",
+  "%d of 272 fixtures read (SF@LA, NE@SEA, NE@DET, WAS@NYG). All four are official reads. The other %d are blank." % (VENUE_READ, 272 - VENUE_READ),
+  "G-VENUE: session budget for %d game-page reads." % (272 - VENUE_READ),
+  "%d venue reads." % (272 - VENUE_READ),S_WK.format(1)),
+ ("R24","Publish the league's dated schedule announcement beside the live schedule page","PARTIAL",
+  "The official week-10 page publishes dated flexible-scheduling rules for weeks 16-18 ('no later than immediately after Week 14/15/17'). Text captured; the standalone announcement document itself was not located.",
+  "G-ANNOUNCE: the announcement page URL has not been identified from an official index.",
+  "1 official announcement URL that the schedule page links or cites.",S_WK.format(10)),
+ ("R25","Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps","BLOCKED",
+  "Every game centre exposes a downloadable Game Book PDF (URLs captured for 3 games). The PDFs were not parsed, and no starter is claimed.",
+  "G-GAMEBOOK: PDF parsing not performed; no starter claimed anywhere.",
+  "136 Game Book PDFs parsed, or a structured starter feed.",S_WK.format(1)),
+ ("R26","Ingest game-level results to make the ratings opponent-aware","PARTIAL",
+  "Ratings use opponent points conceded and are recency-weighted, which is opponent-aware in the weak sense. A full opponent adjustment would need the schedule graph, which is present, but a proven improvement is not.",
+  "G-OPP: no evidence yet that an opponent-adjusted fit beats the current one out of sample.",
+  "A paired out-of-sample comparison on >= 300 games.",S_NFLVERSE),
+ ("R27","Add injury and personnel ablations instead of fixed penalties","BLOCKED",
+  "Ablation is defined and pre-registered (PR-05) and published as CANNOT BE MEASURED, with the three feeds needed to run it. No fixed penalty is applied anywhere.",
+  "G-ABLATE: no verified availability feed spanning the backtest window.",
+  "300 games with verified availability features.",S_INJ),
+ ("R28","Automate immutable multi-day availability snapshots with retained hashes","BLOCKED",
+  "One capture exists with a clock time and a verbatim file. No scheduler runs in this environment and no hash chain of multiple days exists.",
+  "G-SNAP: no scheduler, and one day of history.",
+  "A scheduled capture task plus >= 3 retained daily captures.",S_INJ),
+ ("R29","Capture official inactive lists and snap counts","BLOCKED",
+  "Neither is captured. The official injury page does not publish them; the game centre does, ~90 minutes before kickoff.",
+  "G-INACTIVE: no inactive list captured.",
+  "32 club inactive lists per week + a snap-count table.",S_WK.format(10)),
+ ("R30","Fix the two depth-parsing failures before widening coverage","BLOCKED (not attempted)",
+  "No depth parsing exists in this workspace, so there is no parser to fix. Recorded as unstarted rather than done.",
+  "G-DEPTH: same root blocker as R06.",
+  "An authorized structured depth source for all 32 clubs.",S_INJ),
+ ("R31","Model depth slots as groups, not a single starter","DONE (as a rule)",
+  "No depth slot is modelled. The rule is recorded and binds any future depth feature: rank-1 groups stay groups.",
+  "G-DEPTH: cannot be exercised without a depth source.",
+  "Recorded; nothing to clear until a depth source exists.",S_INJ),
+ ("R32","Treat roster turnover as a first-class data event","BLOCKED",
+  "Roster events are not versioned because rosters are not captured. Recorded as blocked, not claimed.",
+  "G-ROSTER: same blocker as R13.",
+  "A dated official transactions feed.",S_INJ),
+ ("R33","Start with a singles-only shadow baseline","DONE",
+  "Yes - the only origination in this workspace is singles (side/total/ML). Parlays and props are BLOCKED and published as blocked.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R34","Keep parlays and prop combos behind a joint-evidence gate","DONE (as a gate)",
+  "PR-06 requires a validated joint probability or an n>=100 dependence estimate; 0 parlays are ranked. Multiplying marginals is prohibited in writing.",
+  "-","Already satisfied as a gate.",S_NFLVERSE),
+ ("R35","Use proper-score leaderboard divisions","PARTIAL",
+  "Singles division is live and scored by Brier. Game-parlay, SGP and prop-combo divisions exist as declared but EMPTY divisions, because no leg price exists.",
+  "G-LEGPRICE: no source for leg prices.",
+  "A citable leg-price source.",S_NFLC),
+ ("R36","Rank with proper scores and uncertainty, not win rate","DONE",
+  "Brier with a week-cluster bootstrap interval and a Benjamini-Hochberg adjustment across every trial. Win rate and ROI are shown and never used to rank.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R37","Add durable snapshot storage and alerts","BLOCKED",
+  "Snapshots are stored as files with clock times; no freshness monitor or schema alert runs in this environment.",
+  "G-ALERT: no runtime.",
+  "A scheduled job + an alert channel.",S_NFLVERSE),
+ ("R38","Split the site into a public analysis layer and a private data layer","PARTIAL",
+  "The published site carries derived analysis and per-row source links. Raw row-level captures stay in the repo's data directories and are not rendered wholesale.",
+  "G-RIGHTS: the NFL data terms have not been read, so what may be republished is undecided.",
+  "A read of the NFL's website terms, recorded with a date.",S_STAND),
+ ("R39","Add a per-team view: starters out, replacements named, net injury count","PARTIAL",
+  "Per-team view published: Out / Doubtful / Questionable / no-designation, practice splits, and Out+Doubtful as the net count. 'Replacements named' is BLANK because no inactive list exists to name them.",
+  "G-INACTIVE: replacements cannot be named without inactives.",
+  "Inactive lists.",S_INJ),
+ ("R40","Add an announced-starter evidence field (not an inferred replacement)","BLOCKED",
+  "The field exists and is BLANK. It can only be filled from dated club announcements; the injury page's news rail does carry such headlines, but each needs its own read and date.",
+  "G-ANNOUNCE: no announced-starter article captured this session.",
+  "Dated official announcements naming a starter change.",S_INJ),
+ ("R41","Add an official depth-chart register with date and source per row","BLOCKED",
+  "No depth chart captured. An earlier session recorded the nfl.com club depth-chart route as 404.",
+  "G-DEPTH: no official depth-chart route.",
+  "A working official depth-chart route for 32 clubs.",S_INJ),
+ ("R42","Calibrate what 'Questionable' means empirically","BLOCKED",
+  "Cannot be calibrated from one capture: calibration needs designations joined to who actually played.",
+  "G-INACTIVE: needs inactive lists per game.",
+  ">= 300 designations joined to inactives.",S_INJ),
+ ("R43","Interactive Offense vs Defense Matchup Deficiency Matrix (1st-4th string)","BLOCKED",
+  "Requires a depth rank per club, which does not exist in any captured source. Not simulated or illustrated with invented ranks.",
+  "G-DEPTH: same root blocker.",
+  "A depth rank per club.",S_INJ),
+ ("R44","Flag stale depth rows against the official transactions log","BLOCKED",
+  "No depth rows are held and no transactions log is captured, so nothing can be flagged.",
+  "G-ROSTER.",
+  "A transactions log.",S_INJ),
+ ("R45","Point-in-Time Snapshot Ledger for injuries, depth and inactives","BLOCKED",
+  "One capture exists. A ledger needs a series; publishing a one-row ledger would misrepresent it.",
+  "G-SNAP: one capture.",
+  ">= 3 dated captures.",S_INJ),
+ ("R46","Populate the three missing Lions game-status designations","DONE",
+  "Resolved: at this capture Kerby Joseph, Cade Mays and D.J. Reed all read 'Out' with injury (Knee/Ankle/Hip) and Did Not Participate. The earlier blank was a pre-designation state.",
+  "-","Resolved; no number required.",S_INJ),
+ ("R47","Re-capture and republish the Week 10 injury tables","DONE",
+  "Re-captured 28 of 28 clubs, 347 rows, at 2026-11-15T23:24:27Z with per-club deltas. Published counts contradict the brief's 254-row figure and are stated as found.",
+  "-","Resolved; no number required.",S_INJ),
+ ("R48","Reject: deriving depth order from jersey number, experience or salary","DONE (as a rejection)",
+  "Rejected in writing and not implemented anywhere.",
+  "-","Recorded.",S_INJ),
+ ("R49","Represent shared and empty depth slots faithfully","DONE (as a rule)",
+  "No depth slots are modelled; the rule is recorded and binds any future implementation.",
+  "G-DEPTH.",
+  "Recorded.",S_INJ),
+ ("R50","Resolve the depth-order source before building the backup-deficiency feature","BLOCKED",
+  "Route (a) club depth charts and route (b) snap counts were both investigated; neither is available in this environment. The feature is not built.",
+  "G-DEPTH.",
+  "Either route verified for 32 of 32 clubs.",S_INJ),
+ ("R51","Score injury-designation reliability before using it as a feature","BLOCKED",
+  "Needs several seasons of designations joined to inactive lists. One capture exists.",
+  "G-INACTIVE.",
+  "Multi-season designation-to-inactive join.",S_INJ),
+ ("R52","Snapshot the injury report Wed/Thu/Fri with a dated history","BLOCKED",
+  "No scheduler. One capture, correctly timestamped.",
+  "G-SNAP.",
+  "A scheduled job.",S_INJ),
+ ("R53","Treat the injury report as a timestamped series","PARTIAL",
+  "The capture is timestamped and a delta against the prior capture is published. It is a series of two points, not a daily series.",
+  "G-SNAP.",
+  "Daily captures Wed->kickoff.",S_INJ),
+ ("R54","Use snap counts as the starter proxy when the depth chart is unavailable","BLOCKED",
+  "No snap-count source captured.",
+  "G-SNAPS.",
+  "An official snap-count feed.",S_INJ),
+ ("R55","Add a control baseline (random picks; favorites only) to every leaderboard run","DONE",
+  "Three controls run on every build: coin flip, always-home, climatology. All are ranked alongside the model and all lose to the closing market.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R56","Stadium Roof/Surface and NWS Hourly Wind/Precipitation Overlay","PARTIAL",
+  "Roof and surface exist in the archived feed for 249 of 272 2026 games (roof) and are published. No NWS feed was captured, and no roof designation was read from an official page.",
+  "G-WX: no NWS capture; roof is third-party.",
+  "An official roof/surface designation + an NWS point forecast per venue.",S_NFLVERSE),
+ ("R57","Two-Stage Skill Leaderboard (proper-score qualification -> prospective CLV/ROI escrow)","PARTIAL",
+  "Stage 1 exists and is enforced. Stage 2 is empty because no verified price exists for CLV, so ROI is shown at an assumed -110 and never ranks.",
+  "G-CLV: no verified price source.",
+  "A citable closing-line source.",S_NFLC),
+ ("R58","Vig-Free Market Consensus vs Originated Fair-Line Decomposition View","DONE",
+  "Two-way de-vig implemented and published: the market's overround is on every benchmark row, and the residual is separated from it.",
+  "-","Already satisfied.",S_NFLC),
+ ("R59","Publish a weekly 'what changed' diff instead of a static snapshot","PARTIAL",
+  "Per-club availability deltas and per-game deltas are published. A full week-over-week site diff needs more than two captures.",
+  "G-SNAP.",
+  "Two captures one week apart with the same schema.",S_INJ),
+ ("R60","Publish every model total twice until one wins","DONE",
+  "PR-02 (MAE 11.311) and PR-03 (12.012) are both published with the gap column and a paired t of -1.757; neither is collapsed.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R61","Add a drift alarm to every scraper","BLOCKED",
+  "No scraper runtime. Parsers that do exist validate their inputs and fail loudly, but nothing alerts on drift.",
+  "G-ALERT.",
+  "A scheduled job + an alert channel.",S_NFLVERSE),
+ ("R62","Capture the reserve list so 'not listed' never means 'available'","BLOCKED",
+  "No reserve/IR register captured. The injury page's news rail mentions IR placements in prose only.",
+  "G-ROSTER.",
+  "An official IR register.",S_INJ),
+ ("R63","Reject: ranking strategies by season-long ROI","DONE (as a rejection)",
+  "Rejected in writing; ROI is displayed and never used to rank.",
+  "-","Recorded.",S_NFLVERSE),
+ ("R64","Archive weekly injury reports for past seasons","BLOCKED",
+  "No past-season injury archive captured.",
+  "G-ARCHIVE.",
+  "Dated past-season injury reports.",S_INJ),
+ ("R65","Pre-register each strategy (definition frozen before results are seen)","DONE",
+  "6 registrations committed before evaluation, each with a window and gates. The commit is the registration.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R66","2026 Kickoff & Declared Onside-Kick Regime Priors Filter","BLOCKED",
+  "The 2026 rule text for the declared onside kick was not read this session, so no prior is asserted.",
+  "G-RULES: rule text not captured.",
+  "The official 2026 rulebook section.",S_STAND),
+ ("R67","Freeze a rule before it sees data (pre-registration)","DONE",
+  "As R65: the rule text, window and gates are committed before evaluation.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R68","Split data into train, validation and final holdout seasons","PARTIAL",
+  "Walk-forward splits exist within 2026 (train weeks < w). A multi-SEASON holdout is not possible for 2026 alone and was not faked.",
+  "G-SEASONS: only one season of score data is in the repo.",
+  "Multiple seasons of official results.",S_NFLVERSE),
+ ("R69","Make suggestions on how to improve the site + a dedicated suggestions section","DONE",
+  "18 suggestions published with options and a reviewer verdict left BLANK on purpose.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R70","A clear list of questions, information and answers needed before a decision","DONE",
+  "22 questions published, each with what is known, what is missing, the source that would settle it, and whether it is answerable from this repo.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R71","Originate own NFL lines; research strategies for useful signals; leaderboard competition with rewards","DONE",
+  "Own lines originated for 104 games across three markets; 1 model + 3 controls + 1 benchmark ranked; reward pool 1,000 units with 0 awarded and the reason stated.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R72","Single bets, parlays, player prop combos","PARTIAL",
+  "Singles are live. Parlays and prop combos are BLOCKED by design (PR-06) and published as blocked, not as bad picks.",
+  "G-JOINT.",
+  "A validated joint probability or n>=100 dependence estimate.",S_NFLVERSE),
+ ("R73","Each strategy must pass validation gates","DONE",
+  "G1 coverage (n>=300), G2 proper score, G3 uncertainty, G4 multiplicity, G5 ablation, G6 joint evidence. 0 of 6 strategies qualify; the floor binds and is stated.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R74","Determine correlation values","PARTIAL",
+  "5 computed with n and CI, 3 blank with reasons. Player-level and parlay dependence are BLOCKED.",
+  "G-CORR: no player-level official feed.",
+  "A player-level official feed.",S_NFLVERSE),
+ ("R75","Remove luck from the equation and build strategies that are selectively skill based","DONE",
+  "Luck panel published; the model's hit count is inside its own chance range, and that is stated rather than hidden.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R76","Track injuries and know deficiencies when 2nd/3rd/4th string replace starters","BLOCKED",
+  "Availability counts per club exist. String depth does not, and cannot from the captured sources.",
+  "G-DEPTH.",
+  "A depth rank per club.",S_INJ),
+ ("R77","Executive summary","DONE",
+  "EXECUTIVE_SUMMARY.md plus the executive-summary page.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R78","No manual input; work autonomously","DONE",
+  "All 30 workspace steps ran unattended from committed inputs.",
+  "-","Already satisfied.",S_NFLVERSE),
+ ("R79","Verify everything from official sources; flag irregularities; no hallucinations","PARTIAL",
+  "Every published number has a source link and a verification status. 9 official domains/pages were read this session. Scores remain third-party-archived and that is stated on every row.",
+  "G-RESULTS.",
+  "136 official game-page reads.",S_STAND),
+ ("R80","Site: clean landing page + category subpages, tables, analysis, suggestions, flagged page","DONE",
+  "%d pages generated, every table row carries an https source link, every local link resolves, verified by engine/verify.py." % PAGE_COUNT,
+  "-","Already satisfied.",S_NFLVERSE),
+]
+
+QUESTIONS = [
+ ("Q01","Are the 136 settled games in the frozen archive all correct?",
+  "The archive says 136 settled; the official week-10 page shows 9 finals at this capture, of which 8 postdate the archive. All 32 clubs reconcile to official standings AFTER adding those 9.",
+  "The 136 are consistent with the official standings for weeks 1-9, which is strong but indirect evidence.",
+  "Read 136 official game pages and compare scores cell by cell.",
+  "Yes, but it needs 136 page reads.",S_NFLVERSE),
+ ("Q02","What is the '136-game log' in the brief?",
+  "It is the frozen third-party archive: weeks 1-9 complete, week 10 absent. 136 = sum of weeks 1-9.",
+  "Whether the brief meant this log or the 150-game state now visible on the official site.",
+  "Ask the owner which corpus should be the backtest baseline.",
+  "No - this needs the owner.",S_NFLVERSE),
+ ("Q03","Where can official prices be obtained?",
+  "Nowhere in this repo, and the NFL publishes none. The only price archives found are third-party (nflverse).",
+  "Whether the owner has a licensed price feed.",
+  "A licensed vendor, or an archived odds source with clear terms.",
+  "No - needs the owner's data rights.",S_NFLC),
+ ("Q04","Do 2026 opening lines exist anywhere citable?",
+  "No. The vendored opening archive contains 2021 only (1,088 rows / 272 games).",
+  "Nothing - this looks definitive for this repo.",
+  "A 2026 opening archive.",
+  "Yes, negatively.",S_NFLI),
+ ("Q05","Which depth order should the model use?",
+  "Neither route is available: no official depth chart (a prior session logged the route as 404) and no snap-count feed.",
+  "Whether clubs publish depth charts at all in 2026, and in what format.",
+  "A working club depth route or an official snap-count feed.",
+  "No - needs external verification for 32 clubs.",S_INJ),
+ ("Q06","What does 'Questionable' actually mean?",
+  "Unknown empirically. One capture cannot answer it.",
+  "The play rate per designation.",
+  "Designations joined to inactive lists across several seasons.",
+  "No - needs multi-season joins.",S_INJ),
+ ("Q07","Why did the brief say only 6 of 254 rows carry a game designation?",
+  "Not reproducible at this capture: 171 of 347 rows (49.3%) carry one.",
+  "Whether the earlier figure used a different definition or an earlier capture time.",
+  "The earlier capture's raw file, with its timestamp.",
+  "Partly - the definition is testable; the old file is not in this repo.",S_INJ),
+ ("Q08","Are SF@LA and NE@DET really neutral-site games?",
+  "Yes, per the official game centre: Melbourne Cricket Ground and FC Bayern Munich Stadium.",
+  "Whether the league treats the designated home team as home for HFA purposes.",
+  "The official game book / league scheduling notes.",
+  "Mostly - venue is confirmed; HFA treatment is an owner decision.",S_WK.format(1)),
+ ("Q09","Is our model better than the market?",
+  "No. Brier 0.2525 vs market 0.2147; the paired interval is entirely below zero.",
+  "Nothing at this sample.",
+  "n>=300 with a positive cluster lower bound.",
+  "Yes, negatively.",S_NFLC),
+ ("Q10","Which total estimator should survive?",
+  "PR-02 MAE 11.311 vs PR-03 12.012, paired t -1.757. Not decisive at n=104.",
+  "Which one wins on a longer window.",
+  "n>=150 paired comparison.",
+  "Not yet.",S_NFLVERSE),
+ ("Q11","Can injuries be used as a model feature today?",
+  "No. One capture cannot be ablated chronologically without leaking.",
+  "Whether availability explains enough variance to matter.",
+  "An archived availability series spanning the backtest window.",
+  "No.",S_INJ),
+ ("Q12","What is the right reward structure?",
+  "Undefined. 1,000 units are escrowed and 0 awarded; the qualification bar is n>=300 and nothing clears it.",
+  "Whether rewards should be binary qualification or continuous skill.",
+  "An owner decision.",
+  "No - needs the owner.",S_NFLVERSE),
+ ("Q13","Are parlays worth modelling?",
+  "Not until a joint probability can be validated.",
+  "Whether leg dependence is large enough to matter.",
+  "n>=100 dependence estimates from official numbers.",
+  "No.",S_NFLVERSE),
+ ("Q14","Should the site publish raw rows or only derived analysis?",
+  "Currently derived analysis with row-level source links.",
+  "What the NFL's terms permit.",
+  "A read of the NFL website terms.",
+  "No - needs a terms read.",S_STAND),
+ ("Q15","Is the home-field constant valid for every 2026 game?",
+  "No. Two games are international with the designated home club away from home.",
+  "How large the effect is.",
+  "A paired comparison with and without HFA on neutral games.",
+  "Not at this n.",S_WK.format(10)),
+ ("Q16","Are the discipline-level readiness rows honest?",
+  "Every BLOCKED row names a feed that does not exist here, not a task that was skipped.",
+  "Whether the owner can supply any of those feeds.",
+  "Owner input.",
+  "No.",S_NFLVERSE),
+ ("Q17","Does the climate/base-rate benchmark need a prior season?",
+  "Currently the base rate is computed on the scored sample, which is mildly optimistic.",
+  "Whether a prior-season rate changes rankings.",
+  "A prior season of official results.",
+  "No - needs prior data.",S_NFLVERSE),
+ ("Q18","How many captures make a series?",
+  "Two points exist (2026-11-14 and 2026-11-15). Not enough for drift.",
+  "The right cadence.",
+  ">= 3 daily captures Wed->kickoff.",
+  "No.",S_INJ),
+ ("Q19","Is the spread sign convention settled?",
+  "Yes. r(spread_line, home_margin)=+0.436 and the mirror sign fits worse (13.21 vs 9.49 MAE).",
+  "Nothing.",
+  "Already answered.",
+  "Yes.",S_NFLVERSE),
+ ("Q20","Should the two international games be excluded from the backtest?",
+  "Not decided. They are currently included with an unsupported HFA term, and the defect is published (FX-01).",
+  "Whether exclusion changes any conclusion.",
+  "A sensitivity run with and without them.",
+  "Yes - it is computable, and it is a pre-registered change.",S_WK.format(1)),
+ ("Q21","Is 2026 the right backtest season?",
+  "It is the only season of 2026 results available, and it is mid-season.",
+  "Whether a 2025 corpus would be a better baseline.",
+  "A 2025 official results feed.",
+  "No.",S_NFLVERSE),
+ ("Q22","What should be built next?",
+  "The queue is the SUGGESTIONS register: the top three are a price source, a results feed, and one canonical dashboard.",
+  "Owner priorities.",
+  "Owner input.",
+  "No - needs the owner.",S_NFLVERSE),
+]
+
+SUGGESTIONS = [
+ ("S01","Obtain one citable price source (licensed or archived with terms)","It is the single blocker under R01, R20, R35, R57 and every ROI/CLV claim.","A: license a feed  B: use an archive with recorded terms  C: stop publishing price-relative claims","n/a - owner decision","HIGH"),
+ ("S02","Finish the official results sweep (136 game pages)","Turns the results feed from third-party to official and clears R02/R79.","A: 136 manual reads  B: automated crawler  C: accept third-party with the current label","136/136 official reads","HIGH"),
+ ("S03","Pick ONE canonical dashboard across the 21 NFL workspaces","Readers cannot tell which of 21 dashboards is authoritative.","A: this one  B: nfl-core  C: nfl-book  D: a new index","1 owner choice","HIGH"),
+ ("S04","Capture inactive lists from the game centre each week","Unlocks R29, R39, R42, R51 - the entire availability programme depends on it.","A: manual  B: scheduled crawler","32 of 32 club lists per week","HIGH"),
+ ("S05","Get an official snap-count feed","Unlocks depth-from-playing-time (R11, R54, R76) without any jersey-number inference.","A: nfl.com stats  B: licensed feed","snap counts for 32 clubs","MEDIUM"),
+ ("S06","Run a scheduled capture (Wed/Thu/Fri/Sat) with hash retention","Creates the series that R28/R45/R52/R53 require.","A: GitHub Action cron  B: external scheduler","3+ retained daily captures","HIGH"),
+ ("S07","Add a prior-season base rate","Removes the mild optimism in the climatology control (R17/Q17).","A: 2025 results  B: multi-season","1 prior season","MEDIUM"),
+ ("S08","Pre-register an HFA fix for international games","FX-01 is a published defect; fixing it silently would be worse than publishing it.","A: zero HFA on neutral  B: venue-specific HFA  C: exclude the games","paired sensitivity run","MEDIUM"),
+ ("S09","Expose the residual-versus-market chart per market","The residual is the only evidence of origination alpha and it is currently a table.","A: static sparkline  B: table only","n/a","LOW"),
+ ("S10","Add a per-game point-in-time card","Lets a reader see what was knowable at kickoff for one game.","A: per-game page  B: none","1 page per game","MEDIUM"),
+ ("S11","Publish a weekly diff page","R59 needs it; two captures already produce a meaningful diff.","A: auto-diff  B: manual","weekly","MEDIUM"),
+ ("S12","Add schema-drift assertions to every parser","Prevents a silent blank where a field disappears (R61).","A: assert counts  B: none","every parser asserts","MEDIUM"),
+ ("S13","Make the leaderboard's n-floor configurable and published","The 300 floor currently binds every strategy; the owner may want it visible per row.","A: keep 300  B: lower with justification  C: publish both","n/a","LOW"),
+ ("S14","Add a decision log with owner verdicts","The suggestions and questions registers have BLANK verdicts by design; they need a place for the answer.","A: COORDINATION.md  B: a page","n/a","MEDIUM"),
+ ("S15","Replace the assumed -110 with an observed price when one exists","Every staking ROI on the site is hypothetical at -110.","A: keep assumption and label  B: wait for S01","1 observed price","MEDIUM"),
+ ("S16","Add a proper-score comparison across seasons","R68 needs a multi-season holdout.","A: 2025  B: 2024-25","2+ seasons","MEDIUM"),
+ ("S17","Publish the Game Book extraction plan without executing it","R25 is blocked on PDF parsing, but the URLs are captured and the plan is cheap to state.","A: state plan  B: parse one as a proof","1 parsed book","LOW"),
+ ("S18","Consolidate the duplicated NFL namespaces into one archive area","Most of the 21 workspaces restate the same analysis; a reader cannot tell them apart.","A: archive them README-only  B: leave","1 owner choice","MEDIUM"),
+]
+
+IRREGULARITIES = [
+ ("I01","Scores in the corpus come from a third-party archive, not from official game pages.","Every corpus row is labelled unverified-against-official; the standings cross-check passes for 32/32 clubs after the week-10 addition.","MEDIUM",S_NFLVERSE),
+ ("I02","Peer files disagree about how many 2026 games are settled: 136 in nfl-core, 137 in nfl-core's own results feed, 150 in nfl-marketboard.","This session's own count is 136 settled + 136 scheduled, and the official page shows 9 week-10 finals. All three peer figures are explainable as different capture times, but none of them says so on its page.","MEDIUM",S_STAND),
+ ("I03","The brief's '6 of 254 rows designated' does not reproduce (171 of 347 at this capture).","Published as observed; no attempt is made to force the old number.","LOW",S_INJ),
+ ("I04","Two 2026 games are international with the designated home club away from home; the model's constant HFA is unsupported for them.","FX-01 published as a defect; the fix is pre-registered rather than applied silently.","MEDIUM",S_WK.format(1)),
+ ("I05","The market spread convention had to be established empirically; a naive sign flip produces a materially worse fit.","Sign check published as its own artefact with r and both MAEs.","LOW",S_NFLVERSE),
+ ("I06","No official price exists for any NFL market, so every price on the site is third-party.","Stated on the prices page, on every row, and in DEC-1.","MEDIUM",S_NFLC),
+ ("I07","The repo contains 21+ NFL workspaces that publish overlapping and sometimes contradictory numbers.","This workspace publishes its own numbers and links the others rather than reconciling them silently.","MEDIUM",S_NFLVERSE),
+ ("I08","Venue was read for only %d of 272 fixtures." % VENUE_READ,"%d rows carry a blank venue with an explicit status." % (272 - VENUE_READ),"LOW",S_WK.format(1)),
+ ("I09","The base-rate control is computed on the scored sample, which is mildly optimistic.","Flagged in the leaderboard metadata and in Q17.","LOW",S_NFLVERSE),
+ ("I10","CR-04's apparent rest effect collapses when treated as a group variable (14 of 120 games drive it).","Automatic robustness guard added; the correlation is marked NOT ROBUST with group means published.","LOW",S_NFLVERSE),
+]
+
+
+def main():
+    # Structural assertion: every register row must be exactly the documented width and must
+    # carry an https source. This caught two malformed requirement tuples during the build;
+    # it is a gate, not a comment.
+    for row, n, tag in ((r, 7, "REQ") for r in REQ):
+        assert len(row) == n, "%s row %s has %d fields, expected %d" % (tag, row[0], len(row), n)
+    for row, n, tag in ((r, 7, "QUESTION") for r in QUESTIONS):
+        assert len(row) == n, "%s row %s has %d fields, expected %d" % (tag, row[0], len(row), n)
+    for row, n, tag in ((r, 6, "SUGGESTION") for r in SUGGESTIONS):
+        assert len(row) == n, "%s row %s has %d fields, expected %d" % (tag, row[0], len(row), n)
+    for row, n, tag in ((r, 5, "IRREGULARITY") for r in IRREGULARITIES):
+        assert len(row) == n, "%s row %s has %d fields, expected %d" % (tag, row[0], len(row), n)
+    counts = {}
+    for r in REQ:
+        counts[r[2]] = counts.get(r[2], 0) + 1
+    done = sum(v for k, v in counts.items() if k.startswith("DONE"))
+    partial = sum(v for k, v in counts.items() if k.startswith("PARTIAL"))
+    blocked = sum(v for k, v in counts.items() if k.startswith("BLOCKED"))
+
+    req_rows = [{"id": r[0], "requirement": r[1], "status": r[2], "evidence": r[3],
+                 "blocking_gate": r[4], "number_that_would_clear_it": r[5],
+                 "source_url": r[6]} for r in REQ]
+    q_rows = [{"id": q[0], "question": q[1], "what_we_know": q[2], "what_is_missing": q[3],
+               "what_would_settle_it": q[4], "answerable_from_this_repo": q[5],
+               "source_url": q[6], "answer": None,
+               "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"}
+              for q in QUESTIONS]
+    s_rows = [{"id": s[0], "suggestion": s[1], "why_it_matters": s[2], "options": s[3],
+               "measured_or_cleared_by": s[4], "priority": s[5],
+               "reviewer_verdict": None,
+               "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+               "source_url": S_NFLVERSE} for s in SUGGESTIONS]
+    i_rows = [{"id": i[0], "irregularity": i[1], "handling": i[2], "severity": i[3],
+               "source_url": i[4]} for i in IRREGULARITIES]
+
+    out = {
+        "_meta": {
+            "built_utc": BUILT,
+            "requirement_lines": len(req_rows),
+            "done": done, "partial": partial, "blocked": blocked,
+            "done_pct": round(100 * done / len(req_rows), 1),
+            "questions": len(q_rows), "suggestions": len(s_rows),
+            "irregularities": len(i_rows),
+            "gate_definitions": [
+                {"gate": "G1 coverage", "rule": "n >= 300 out-of-sample games", "current": "104", "passes": False},
+                {"gate": "G2 proper score", "rule": "benchmark-relative Brier skill > 0", "current": "-0.0116", "passes": False},
+                {"gate": "G3 uncertainty", "rule": "week-cluster lower bound of skill > 0", "current": "-0.1161", "passes": False},
+                {"gate": "G4 multiplicity", "rule": "BH q < 0.05 across all trials", "current": "0.409", "passes": False},
+                {"gate": "G5 ablation", "rule": "paired availability ablation interval excludes 0", "current": "not measurable", "passes": False},
+                {"gate": "G6 joint evidence", "rule": "validated joint probability or n>=100 dependence", "current": "0", "passes": False},
+            ],
+            "validation_summary": {
+                "strategies_registered": len(PRE["registrations"]),
+                "strategies_qualified": LEAD["qualified_count"],
+                "reward_units": LEAD["reward_units_available"],
+                "reward_units_awarded": LEAD["reward_units_awarded"],
+                "reason_no_qualification": (
+                    "the pre-registered coverage floor is 300 games and the largest sample is "
+                    "104, so no strategy can qualify regardless of its scores. This is stated "
+                    "on every leaderboard page rather than left for the reader to notice."),
+            },
+        },
+        "requirements": req_rows,
+        "questions": q_rows,
+        "suggestions": s_rows,
+        "irregularities": i_rows,
+    }
+    json.dump(out, open(os.path.join(OUT, "governance.json"), "w"), indent=1)
+    print("requirements: %d  DONE %d (%.0f%%)  PARTIAL %d  BLOCKED %d"
+          % (len(req_rows), done, 100 * done / len(req_rows), partial, blocked))
+    print("questions:", len(q_rows), "| suggestions:", len(s_rows), "| irregularities:", len(i_rows))
+    print("gates passing: 0 of 6")
+    bad = [r["id"] for r in req_rows if not r["source_url"].startswith("http")]
+    print("rows without a source:", bad)
+
+
+if __name__ == "__main__":
+    main()

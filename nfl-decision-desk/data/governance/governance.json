@@ -1,0 +1,1296 @@
+{
+ "_meta": {
+  "built_utc": "2026-11-15T23:24:27Z",
+  "requirement_lines": 80,
+  "done": 39,
+  "partial": 16,
+  "blocked": 25,
+  "done_pct": 48.8,
+  "questions": 22,
+  "suggestions": 18,
+  "irregularities": 10,
+  "gate_definitions": [
+   {
+    "gate": "G1 coverage",
+    "rule": "n >= 300 out-of-sample games",
+    "current": "104",
+    "passes": false
+   },
+   {
+    "gate": "G2 proper score",
+    "rule": "benchmark-relative Brier skill > 0",
+    "current": "-0.0116",
+    "passes": false
+   },
+   {
+    "gate": "G3 uncertainty",
+    "rule": "week-cluster lower bound of skill > 0",
+    "current": "-0.1161",
+    "passes": false
+   },
+   {
+    "gate": "G4 multiplicity",
+    "rule": "BH q < 0.05 across all trials",
+    "current": "0.409",
+    "passes": false
+   },
+   {
+    "gate": "G5 ablation",
+    "rule": "paired availability ablation interval excludes 0",
+    "current": "not measurable",
+    "passes": false
+   },
+   {
+    "gate": "G6 joint evidence",
+    "rule": "validated joint probability or n>=100 dependence",
+    "current": "0",
+    "passes": false
+   }
+  ],
+  "validation_summary": {
+   "strategies_registered": 6,
+   "strategies_qualified": 0,
+   "reward_units": 1000,
+   "reward_units_awarded": 0,
+   "reason_no_qualification": "the pre-registered coverage floor is 300 games and the largest sample is 104, so no strategy can qualify regardless of its scores. This is stated on every leaderboard page rather than left for the reader to notice."
+  }
+ },
+ "requirements": [
+  {
+   "id": "R01",
+   "requirement": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+   "status": "PARTIAL",
+   "evidence": "312 snapshots written (104 games x side/total/moneyline) with an open and a close column per row.",
+   "blocking_gate": "G-PRICE: no 2026 OPENING number exists in any citable archive.",
+   "number_that_would_clear_it": "1 citable source of 2026 opening prices. The only opening archive found is 2021-only (1,088 rows).",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv"
+  },
+  {
+   "id": "R02",
+   "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
+   "status": "PARTIAL",
+   "evidence": "136 settled games from the frozen archive; 9 week-10 finals re-read from the official page this session; PF/PA/W/L/T reconciled for all 32 clubs with 0 unexplained deltas.",
+   "blocking_gate": "G-RESULTS: scores are carried from a third-party archive, not re-read from 136 official game pages.",
+   "number_that_would_clear_it": "136 official game-page reads, or an official machine-readable season file.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R03",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "DONE",
+   "evidence": "Enforced as a data dependency: the moneyline probability is derived from the side margin, so ML cannot exist without the side. Asserted in engine/prices.py and published per row.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied; no number required.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R04",
+   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "status": "DONE",
+   "evidence": "Three separate columns per market in data/prices/origination.json; 104 rows for side/total, three columns each.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R05",
+   "requirement": "Separate signal from staking in the leaderboard so a lucky staking run cannot mask a bad signal",
+   "status": "DONE",
+   "evidence": "Two separate files/tables. Staking rows carry ranks_alone=false and a written reason. Signal rank uses no price.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R06",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "BLOCKED",
+   "evidence": "The official injury report carries no depth column at all. Practice and game status were captured; depth rank was not and cannot be.",
+   "blocking_gate": "G-DEPTH: no official depth rank per club for 2026.",
+   "number_that_would_clear_it": "A per-club official depth rank, or an official snap-count feed to derive one. 32 of 32 clubs required.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R07",
+   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "DONE",
+   "evidence": "5 correlations computed with n and CI; 3 published blank with named blockers. A robustness guard auto-flags group-variable and tail-driven correlations.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R08",
+   "requirement": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "DONE",
+   "evidence": "4 machine-evaluable conditions published (D1-D4). No strategy is LIVE, so the gate fires on nothing today; that is stated on the page.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R09",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "status": "DONE",
+   "evidence": "6 registrations PR-01..PR-06 committed before evaluation; leaderboard is labelled backtest and carries no live-by-default status.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R10",
+   "requirement": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+   "status": "BLOCKED",
+   "evidence": "The 'expected to start' half exists only where a club publishes a depth chart; the 'actually did' half requires inactives or snap counts. Neither is in this repo.",
+   "blocking_gate": "G-AVAIL: no inactive list, no snap counts, no published depth order.",
+   "number_that_would_clear_it": "32 clubs x 1 official inactive list per game, or an official snap-count table.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R11",
+   "requirement": "Do not model depth from jersey order; model it from playing time",
+   "status": "DONE (as a rejection)",
+   "evidence": "Rejected explicitly. No jersey number, experience or salary is used anywhere. Playing time is not available either, so the feature is BLOCKED rather than proxied.",
+   "blocking_gate": "G-SNAPS: no snap-count source.",
+   "number_that_would_clear_it": "An official snap-count feed per game.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R12",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "status": "DONE (as a design)",
+   "evidence": "Published practice-only group and per-club deltas between captures; no level is published without its delta or its clock time.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied as a rule; needs a second capture to have a real delta to show.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R13",
+   "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "status": "BLOCKED",
+   "evidence": "Rosters and IR were not swept. The injury page itself names players placed on IR in its news rail, but that is prose, not a roster register.",
+   "blocking_gate": "G-ROSTER: no official roster/IR register captured for 32 clubs.",
+   "number_that_would_clear_it": "32 club roster pages + IR lists, captured with a clock time.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R14",
+   "requirement": "Add a fixture-context feature set built only from published schedule facts",
+   "status": "DONE",
+   "evidence": "272 fixture rows with rest, short week, post-bye, site type and travel. Venue read for 4 games; the rest are blank with a status.",
+   "blocking_gate": "G-VENUE: 268 games still lack a read venue.",
+   "number_that_would_clear_it": "268 more venue reads, or an official venue field in a feed.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "id": "R15",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "DONE",
+   "evidence": "Each model row carries fair margin, fair spread, both fair totals, the gap, the link scale, and the fitted ratings used. 104 of 104 rows.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R16",
+   "requirement": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "status": "DONE",
+   "evidence": "Published: 54 correct vs 58.49 expected by the model's own probabilities; observed minus luck -4.49; p=0.841.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R17",
+   "requirement": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "status": "DONE",
+   "evidence": "Every PR-01..PR-06 registration carries an up-condition and a down-condition, written before evaluation.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R18",
+   "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "DONE",
+   "evidence": "Residual published by market: side mean +0.995 (|mean| 4.553), total mean +0.686 (|mean| 3.277), n=104 each.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R19",
+   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "status": "DONE",
+   "evidence": "The 136-game frozen log is named as the backtest corpus, with 136 scheduled games kept separate. Reconciliation proves what it is and is not.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R20",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "status": "DONE",
+   "evidence": "DEC-1: NFL publishes no prices; backtests split into PRICE-VERIFIED (2021) and CLOSE-ONLY (2011-2025); 2026 excluded from price backtests.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R21",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "DONE",
+   "evidence": "Capture at 2026-11-15T23:24:27Z with per-club delta against the prior capture; SEA now 15 rows, LAR +3, MIN +4.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied; more captures would make the delta series real.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R22",
+   "requirement": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+   "status": "DONE",
+   "evidence": "This register is rendered on the landing page. 21 of 30 requirement lines are DONE, 6 PARTIAL/REJECTED, and every blocked row names both a gate and a number.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R23",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "PARTIAL",
+   "evidence": "4 of 272 fixtures read (SF@LA, NE@SEA, NE@DET, WAS@NYG). All four are official reads. The other 268 are blank.",
+   "blocking_gate": "G-VENUE: session budget for 268 game-page reads.",
+   "number_that_would_clear_it": "268 venue reads.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "id": "R24",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "PARTIAL",
+   "evidence": "The official week-10 page publishes dated flexible-scheduling rules for weeks 16-18 ('no later than immediately after Week 14/15/17'). Text captured; the standalone announcement document itself was not located.",
+   "blocking_gate": "G-ANNOUNCE: the announcement page URL has not been identified from an official index.",
+   "number_that_would_clear_it": "1 official announcement URL that the schedule page links or cites.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R25",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "status": "BLOCKED",
+   "evidence": "Every game centre exposes a downloadable Game Book PDF (URLs captured for 3 games). The PDFs were not parsed, and no starter is claimed.",
+   "blocking_gate": "G-GAMEBOOK: PDF parsing not performed; no starter claimed anywhere.",
+   "number_that_would_clear_it": "136 Game Book PDFs parsed, or a structured starter feed.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "id": "R26",
+   "requirement": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "PARTIAL",
+   "evidence": "Ratings use opponent points conceded and are recency-weighted, which is opponent-aware in the weak sense. A full opponent adjustment would need the schedule graph, which is present, but a proven improvement is not.",
+   "blocking_gate": "G-OPP: no evidence yet that an opponent-adjusted fit beats the current one out of sample.",
+   "number_that_would_clear_it": "A paired out-of-sample comparison on >= 300 games.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R27",
+   "requirement": "Add injury and personnel ablations instead of fixed penalties",
+   "status": "BLOCKED",
+   "evidence": "Ablation is defined and pre-registered (PR-05) and published as CANNOT BE MEASURED, with the three feeds needed to run it. No fixed penalty is applied anywhere.",
+   "blocking_gate": "G-ABLATE: no verified availability feed spanning the backtest window.",
+   "number_that_would_clear_it": "300 games with verified availability features.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R28",
+   "requirement": "Automate immutable multi-day availability snapshots with retained hashes",
+   "status": "BLOCKED",
+   "evidence": "One capture exists with a clock time and a verbatim file. No scheduler runs in this environment and no hash chain of multiple days exists.",
+   "blocking_gate": "G-SNAP: no scheduler, and one day of history.",
+   "number_that_would_clear_it": "A scheduled capture task plus >= 3 retained daily captures.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R29",
+   "requirement": "Capture official inactive lists and snap counts",
+   "status": "BLOCKED",
+   "evidence": "Neither is captured. The official injury page does not publish them; the game centre does, ~90 minutes before kickoff.",
+   "blocking_gate": "G-INACTIVE: no inactive list captured.",
+   "number_that_would_clear_it": "32 club inactive lists per week + a snap-count table.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "R30",
+   "requirement": "Fix the two depth-parsing failures before widening coverage",
+   "status": "BLOCKED (not attempted)",
+   "evidence": "No depth parsing exists in this workspace, so there is no parser to fix. Recorded as unstarted rather than done.",
+   "blocking_gate": "G-DEPTH: same root blocker as R06.",
+   "number_that_would_clear_it": "An authorized structured depth source for all 32 clubs.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R31",
+   "requirement": "Model depth slots as groups, not a single starter",
+   "status": "DONE (as a rule)",
+   "evidence": "No depth slot is modelled. The rule is recorded and binds any future depth feature: rank-1 groups stay groups.",
+   "blocking_gate": "G-DEPTH: cannot be exercised without a depth source.",
+   "number_that_would_clear_it": "Recorded; nothing to clear until a depth source exists.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R32",
+   "requirement": "Treat roster turnover as a first-class data event",
+   "status": "BLOCKED",
+   "evidence": "Roster events are not versioned because rosters are not captured. Recorded as blocked, not claimed.",
+   "blocking_gate": "G-ROSTER: same blocker as R13.",
+   "number_that_would_clear_it": "A dated official transactions feed.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R33",
+   "requirement": "Start with a singles-only shadow baseline",
+   "status": "DONE",
+   "evidence": "Yes - the only origination in this workspace is singles (side/total/ML). Parlays and props are BLOCKED and published as blocked.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R34",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "DONE (as a gate)",
+   "evidence": "PR-06 requires a validated joint probability or an n>=100 dependence estimate; 0 parlays are ranked. Multiplying marginals is prohibited in writing.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied as a gate.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R35",
+   "requirement": "Use proper-score leaderboard divisions",
+   "status": "PARTIAL",
+   "evidence": "Singles division is live and scored by Brier. Game-parlay, SGP and prop-combo divisions exist as declared but EMPTY divisions, because no leg price exists.",
+   "blocking_gate": "G-LEGPRICE: no source for leg prices.",
+   "number_that_would_clear_it": "A citable leg-price source.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R36",
+   "requirement": "Rank with proper scores and uncertainty, not win rate",
+   "status": "DONE",
+   "evidence": "Brier with a week-cluster bootstrap interval and a Benjamini-Hochberg adjustment across every trial. Win rate and ROI are shown and never used to rank.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R37",
+   "requirement": "Add durable snapshot storage and alerts",
+   "status": "BLOCKED",
+   "evidence": "Snapshots are stored as files with clock times; no freshness monitor or schema alert runs in this environment.",
+   "blocking_gate": "G-ALERT: no runtime.",
+   "number_that_would_clear_it": "A scheduled job + an alert channel.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R38",
+   "requirement": "Split the site into a public analysis layer and a private data layer",
+   "status": "PARTIAL",
+   "evidence": "The published site carries derived analysis and per-row source links. Raw row-level captures stay in the repo's data directories and are not rendered wholesale.",
+   "blocking_gate": "G-RIGHTS: the NFL data terms have not been read, so what may be republished is undecided.",
+   "number_that_would_clear_it": "A read of the NFL's website terms, recorded with a date.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R39",
+   "requirement": "Add a per-team view: starters out, replacements named, net injury count",
+   "status": "PARTIAL",
+   "evidence": "Per-team view published: Out / Doubtful / Questionable / no-designation, practice splits, and Out+Doubtful as the net count. 'Replacements named' is BLANK because no inactive list exists to name them.",
+   "blocking_gate": "G-INACTIVE: replacements cannot be named without inactives.",
+   "number_that_would_clear_it": "Inactive lists.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R40",
+   "requirement": "Add an announced-starter evidence field (not an inferred replacement)",
+   "status": "BLOCKED",
+   "evidence": "The field exists and is BLANK. It can only be filled from dated club announcements; the injury page's news rail does carry such headlines, but each needs its own read and date.",
+   "blocking_gate": "G-ANNOUNCE: no announced-starter article captured this session.",
+   "number_that_would_clear_it": "Dated official announcements naming a starter change.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R41",
+   "requirement": "Add an official depth-chart register with date and source per row",
+   "status": "BLOCKED",
+   "evidence": "No depth chart captured. An earlier session recorded the nfl.com club depth-chart route as 404.",
+   "blocking_gate": "G-DEPTH: no official depth-chart route.",
+   "number_that_would_clear_it": "A working official depth-chart route for 32 clubs.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R42",
+   "requirement": "Calibrate what 'Questionable' means empirically",
+   "status": "BLOCKED",
+   "evidence": "Cannot be calibrated from one capture: calibration needs designations joined to who actually played.",
+   "blocking_gate": "G-INACTIVE: needs inactive lists per game.",
+   "number_that_would_clear_it": ">= 300 designations joined to inactives.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R43",
+   "requirement": "Interactive Offense vs Defense Matchup Deficiency Matrix (1st-4th string)",
+   "status": "BLOCKED",
+   "evidence": "Requires a depth rank per club, which does not exist in any captured source. Not simulated or illustrated with invented ranks.",
+   "blocking_gate": "G-DEPTH: same root blocker.",
+   "number_that_would_clear_it": "A depth rank per club.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R44",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "status": "BLOCKED",
+   "evidence": "No depth rows are held and no transactions log is captured, so nothing can be flagged.",
+   "blocking_gate": "G-ROSTER.",
+   "number_that_would_clear_it": "A transactions log.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R45",
+   "requirement": "Point-in-Time Snapshot Ledger for injuries, depth and inactives",
+   "status": "BLOCKED",
+   "evidence": "One capture exists. A ledger needs a series; publishing a one-row ledger would misrepresent it.",
+   "blocking_gate": "G-SNAP: one capture.",
+   "number_that_would_clear_it": ">= 3 dated captures.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R46",
+   "requirement": "Populate the three missing Lions game-status designations",
+   "status": "DONE",
+   "evidence": "Resolved: at this capture Kerby Joseph, Cade Mays and D.J. Reed all read 'Out' with injury (Knee/Ankle/Hip) and Did Not Participate. The earlier blank was a pre-designation state.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Resolved; no number required.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R47",
+   "requirement": "Re-capture and republish the Week 10 injury tables",
+   "status": "DONE",
+   "evidence": "Re-captured 28 of 28 clubs, 347 rows, at 2026-11-15T23:24:27Z with per-club deltas. Published counts contradict the brief's 254-row figure and are stated as found.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Resolved; no number required.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R48",
+   "requirement": "Reject: deriving depth order from jersey number, experience or salary",
+   "status": "DONE (as a rejection)",
+   "evidence": "Rejected in writing and not implemented anywhere.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Recorded.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R49",
+   "requirement": "Represent shared and empty depth slots faithfully",
+   "status": "DONE (as a rule)",
+   "evidence": "No depth slots are modelled; the rule is recorded and binds any future implementation.",
+   "blocking_gate": "G-DEPTH.",
+   "number_that_would_clear_it": "Recorded.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R50",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "BLOCKED",
+   "evidence": "Route (a) club depth charts and route (b) snap counts were both investigated; neither is available in this environment. The feature is not built.",
+   "blocking_gate": "G-DEPTH.",
+   "number_that_would_clear_it": "Either route verified for 32 of 32 clubs.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R51",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "status": "BLOCKED",
+   "evidence": "Needs several seasons of designations joined to inactive lists. One capture exists.",
+   "blocking_gate": "G-INACTIVE.",
+   "number_that_would_clear_it": "Multi-season designation-to-inactive join.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R52",
+   "requirement": "Snapshot the injury report Wed/Thu/Fri with a dated history",
+   "status": "BLOCKED",
+   "evidence": "No scheduler. One capture, correctly timestamped.",
+   "blocking_gate": "G-SNAP.",
+   "number_that_would_clear_it": "A scheduled job.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R53",
+   "requirement": "Treat the injury report as a timestamped series",
+   "status": "PARTIAL",
+   "evidence": "The capture is timestamped and a delta against the prior capture is published. It is a series of two points, not a daily series.",
+   "blocking_gate": "G-SNAP.",
+   "number_that_would_clear_it": "Daily captures Wed->kickoff.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R54",
+   "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "status": "BLOCKED",
+   "evidence": "No snap-count source captured.",
+   "blocking_gate": "G-SNAPS.",
+   "number_that_would_clear_it": "An official snap-count feed.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R55",
+   "requirement": "Add a control baseline (random picks; favorites only) to every leaderboard run",
+   "status": "DONE",
+   "evidence": "Three controls run on every build: coin flip, always-home, climatology. All are ranked alongside the model and all lose to the closing market.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R56",
+   "requirement": "Stadium Roof/Surface and NWS Hourly Wind/Precipitation Overlay",
+   "status": "PARTIAL",
+   "evidence": "Roof and surface exist in the archived feed for 249 of 272 2026 games (roof) and are published. No NWS feed was captured, and no roof designation was read from an official page.",
+   "blocking_gate": "G-WX: no NWS capture; roof is third-party.",
+   "number_that_would_clear_it": "An official roof/surface designation + an NWS point forecast per venue.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R57",
+   "requirement": "Two-Stage Skill Leaderboard (proper-score qualification -> prospective CLV/ROI escrow)",
+   "status": "PARTIAL",
+   "evidence": "Stage 1 exists and is enforced. Stage 2 is empty because no verified price exists for CLV, so ROI is shown at an assumed -110 and never ranks.",
+   "blocking_gate": "G-CLV: no verified price source.",
+   "number_that_would_clear_it": "A citable closing-line source.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R58",
+   "requirement": "Vig-Free Market Consensus vs Originated Fair-Line Decomposition View",
+   "status": "DONE",
+   "evidence": "Two-way de-vig implemented and published: the market's overround is on every benchmark row, and the residual is separated from it.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "R59",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "PARTIAL",
+   "evidence": "Per-club availability deltas and per-game deltas are published. A full week-over-week site diff needs more than two captures.",
+   "blocking_gate": "G-SNAP.",
+   "number_that_would_clear_it": "Two captures one week apart with the same schema.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R60",
+   "requirement": "Publish every model total twice until one wins",
+   "status": "DONE",
+   "evidence": "PR-02 (MAE 11.311) and PR-03 (12.012) are both published with the gap column and a paired t of -1.757; neither is collapsed.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R61",
+   "requirement": "Add a drift alarm to every scraper",
+   "status": "BLOCKED",
+   "evidence": "No scraper runtime. Parsers that do exist validate their inputs and fail loudly, but nothing alerts on drift.",
+   "blocking_gate": "G-ALERT.",
+   "number_that_would_clear_it": "A scheduled job + an alert channel.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R62",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "BLOCKED",
+   "evidence": "No reserve/IR register captured. The injury page's news rail mentions IR placements in prose only.",
+   "blocking_gate": "G-ROSTER.",
+   "number_that_would_clear_it": "An official IR register.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R63",
+   "requirement": "Reject: ranking strategies by season-long ROI",
+   "status": "DONE (as a rejection)",
+   "evidence": "Rejected in writing; ROI is displayed and never used to rank.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Recorded.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R64",
+   "requirement": "Archive weekly injury reports for past seasons",
+   "status": "BLOCKED",
+   "evidence": "No past-season injury archive captured.",
+   "blocking_gate": "G-ARCHIVE.",
+   "number_that_would_clear_it": "Dated past-season injury reports.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R65",
+   "requirement": "Pre-register each strategy (definition frozen before results are seen)",
+   "status": "DONE",
+   "evidence": "6 registrations committed before evaluation, each with a window and gates. The commit is the registration.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R66",
+   "requirement": "2026 Kickoff & Declared Onside-Kick Regime Priors Filter",
+   "status": "BLOCKED",
+   "evidence": "The 2026 rule text for the declared onside kick was not read this session, so no prior is asserted.",
+   "blocking_gate": "G-RULES: rule text not captured.",
+   "number_that_would_clear_it": "The official 2026 rulebook section.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R67",
+   "requirement": "Freeze a rule before it sees data (pre-registration)",
+   "status": "DONE",
+   "evidence": "As R65: the rule text, window and gates are committed before evaluation.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R68",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "status": "PARTIAL",
+   "evidence": "Walk-forward splits exist within 2026 (train weeks < w). A multi-SEASON holdout is not possible for 2026 alone and was not faked.",
+   "blocking_gate": "G-SEASONS: only one season of score data is in the repo.",
+   "number_that_would_clear_it": "Multiple seasons of official results.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R69",
+   "requirement": "Make suggestions on how to improve the site + a dedicated suggestions section",
+   "status": "DONE",
+   "evidence": "18 suggestions published with options and a reviewer verdict left BLANK on purpose.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R70",
+   "requirement": "A clear list of questions, information and answers needed before a decision",
+   "status": "DONE",
+   "evidence": "22 questions published, each with what is known, what is missing, the source that would settle it, and whether it is answerable from this repo.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R71",
+   "requirement": "Originate own NFL lines; research strategies for useful signals; leaderboard competition with rewards",
+   "status": "DONE",
+   "evidence": "Own lines originated for 104 games across three markets; 1 model + 3 controls + 1 benchmark ranked; reward pool 1,000 units with 0 awarded and the reason stated.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R72",
+   "requirement": "Single bets, parlays, player prop combos",
+   "status": "PARTIAL",
+   "evidence": "Singles are live. Parlays and prop combos are BLOCKED by design (PR-06) and published as blocked, not as bad picks.",
+   "blocking_gate": "G-JOINT.",
+   "number_that_would_clear_it": "A validated joint probability or n>=100 dependence estimate.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R73",
+   "requirement": "Each strategy must pass validation gates",
+   "status": "DONE",
+   "evidence": "G1 coverage (n>=300), G2 proper score, G3 uncertainty, G4 multiplicity, G5 ablation, G6 joint evidence. 0 of 6 strategies qualify; the floor binds and is stated.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R74",
+   "requirement": "Determine correlation values",
+   "status": "PARTIAL",
+   "evidence": "5 computed with n and CI, 3 blank with reasons. Player-level and parlay dependence are BLOCKED.",
+   "blocking_gate": "G-CORR: no player-level official feed.",
+   "number_that_would_clear_it": "A player-level official feed.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R75",
+   "requirement": "Remove luck from the equation and build strategies that are selectively skill based",
+   "status": "DONE",
+   "evidence": "Luck panel published; the model's hit count is inside its own chance range, and that is stated rather than hidden.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R76",
+   "requirement": "Track injuries and know deficiencies when 2nd/3rd/4th string replace starters",
+   "status": "BLOCKED",
+   "evidence": "Availability counts per club exist. String depth does not, and cannot from the captured sources.",
+   "blocking_gate": "G-DEPTH.",
+   "number_that_would_clear_it": "A depth rank per club.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "R77",
+   "requirement": "Executive summary",
+   "status": "DONE",
+   "evidence": "EXECUTIVE_SUMMARY.md plus the executive-summary page.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R78",
+   "requirement": "No manual input; work autonomously",
+   "status": "DONE",
+   "evidence": "All 30 workspace steps ran unattended from committed inputs.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "R79",
+   "requirement": "Verify everything from official sources; flag irregularities; no hallucinations",
+   "status": "PARTIAL",
+   "evidence": "Every published number has a source link and a verification status. 9 official domains/pages were read this session. Scores remain third-party-archived and that is stated on every row.",
+   "blocking_gate": "G-RESULTS.",
+   "number_that_would_clear_it": "136 official game-page reads.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "R80",
+   "requirement": "Site: clean landing page + category subpages, tables, analysis, suggestions, flagged page",
+   "status": "DONE",
+   "evidence": "14 pages generated, every table row carries an https source link, every local link resolves, verified by engine/verify.py.",
+   "blocking_gate": "-",
+   "number_that_would_clear_it": "Already satisfied.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  }
+ ],
+ "questions": [
+  {
+   "id": "Q01",
+   "question": "Are the 136 settled games in the frozen archive all correct?",
+   "what_we_know": "The archive says 136 settled; the official week-10 page shows 9 finals at this capture, of which 8 postdate the archive. All 32 clubs reconcile to official standings AFTER adding those 9.",
+   "what_is_missing": "The 136 are consistent with the official standings for weeks 1-9, which is strong but indirect evidence.",
+   "what_would_settle_it": "Read 136 official game pages and compare scores cell by cell.",
+   "answerable_from_this_repo": "Yes, but it needs 136 page reads.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q02",
+   "question": "What is the '136-game log' in the brief?",
+   "what_we_know": "It is the frozen third-party archive: weeks 1-9 complete, week 10 absent. 136 = sum of weeks 1-9.",
+   "what_is_missing": "Whether the brief meant this log or the 150-game state now visible on the official site.",
+   "what_would_settle_it": "Ask the owner which corpus should be the backtest baseline.",
+   "answerable_from_this_repo": "No - this needs the owner.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q03",
+   "question": "Where can official prices be obtained?",
+   "what_we_know": "Nowhere in this repo, and the NFL publishes none. The only price archives found are third-party (nflverse).",
+   "what_is_missing": "Whether the owner has a licensed price feed.",
+   "what_would_settle_it": "A licensed vendor, or an archived odds source with clear terms.",
+   "answerable_from_this_repo": "No - needs the owner's data rights.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q04",
+   "question": "Do 2026 opening lines exist anywhere citable?",
+   "what_we_know": "No. The vendored opening archive contains 2021 only (1,088 rows / 272 games).",
+   "what_is_missing": "Nothing - this looks definitive for this repo.",
+   "what_would_settle_it": "A 2026 opening archive.",
+   "answerable_from_this_repo": "Yes, negatively.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q05",
+   "question": "Which depth order should the model use?",
+   "what_we_know": "Neither route is available: no official depth chart (a prior session logged the route as 404) and no snap-count feed.",
+   "what_is_missing": "Whether clubs publish depth charts at all in 2026, and in what format.",
+   "what_would_settle_it": "A working club depth route or an official snap-count feed.",
+   "answerable_from_this_repo": "No - needs external verification for 32 clubs.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q06",
+   "question": "What does 'Questionable' actually mean?",
+   "what_we_know": "Unknown empirically. One capture cannot answer it.",
+   "what_is_missing": "The play rate per designation.",
+   "what_would_settle_it": "Designations joined to inactive lists across several seasons.",
+   "answerable_from_this_repo": "No - needs multi-season joins.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q07",
+   "question": "Why did the brief say only 6 of 254 rows carry a game designation?",
+   "what_we_know": "Not reproducible at this capture: 171 of 347 rows (49.3%) carry one.",
+   "what_is_missing": "Whether the earlier figure used a different definition or an earlier capture time.",
+   "what_would_settle_it": "The earlier capture's raw file, with its timestamp.",
+   "answerable_from_this_repo": "Partly - the definition is testable; the old file is not in this repo.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q08",
+   "question": "Are SF@LA and NE@DET really neutral-site games?",
+   "what_we_know": "Yes, per the official game centre: Melbourne Cricket Ground and FC Bayern Munich Stadium.",
+   "what_is_missing": "Whether the league treats the designated home team as home for HFA purposes.",
+   "what_would_settle_it": "The official game book / league scheduling notes.",
+   "answerable_from_this_repo": "Mostly - venue is confirmed; HFA treatment is an owner decision.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q09",
+   "question": "Is our model better than the market?",
+   "what_we_know": "No. Brier 0.2525 vs market 0.2147; the paired interval is entirely below zero.",
+   "what_is_missing": "Nothing at this sample.",
+   "what_would_settle_it": "n>=300 with a positive cluster lower bound.",
+   "answerable_from_this_repo": "Yes, negatively.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q10",
+   "question": "Which total estimator should survive?",
+   "what_we_know": "PR-02 MAE 11.311 vs PR-03 12.012, paired t -1.757. Not decisive at n=104.",
+   "what_is_missing": "Which one wins on a longer window.",
+   "what_would_settle_it": "n>=150 paired comparison.",
+   "answerable_from_this_repo": "Not yet.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q11",
+   "question": "Can injuries be used as a model feature today?",
+   "what_we_know": "No. One capture cannot be ablated chronologically without leaking.",
+   "what_is_missing": "Whether availability explains enough variance to matter.",
+   "what_would_settle_it": "An archived availability series spanning the backtest window.",
+   "answerable_from_this_repo": "No.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q12",
+   "question": "What is the right reward structure?",
+   "what_we_know": "Undefined. 1,000 units are escrowed and 0 awarded; the qualification bar is n>=300 and nothing clears it.",
+   "what_is_missing": "Whether rewards should be binary qualification or continuous skill.",
+   "what_would_settle_it": "An owner decision.",
+   "answerable_from_this_repo": "No - needs the owner.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q13",
+   "question": "Are parlays worth modelling?",
+   "what_we_know": "Not until a joint probability can be validated.",
+   "what_is_missing": "Whether leg dependence is large enough to matter.",
+   "what_would_settle_it": "n>=100 dependence estimates from official numbers.",
+   "answerable_from_this_repo": "No.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q14",
+   "question": "Should the site publish raw rows or only derived analysis?",
+   "what_we_know": "Currently derived analysis with row-level source links.",
+   "what_is_missing": "What the NFL's terms permit.",
+   "what_would_settle_it": "A read of the NFL website terms.",
+   "answerable_from_this_repo": "No - needs a terms read.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q15",
+   "question": "Is the home-field constant valid for every 2026 game?",
+   "what_we_know": "No. Two games are international with the designated home club away from home.",
+   "what_is_missing": "How large the effect is.",
+   "what_would_settle_it": "A paired comparison with and without HFA on neutral games.",
+   "answerable_from_this_repo": "Not at this n.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q16",
+   "question": "Are the discipline-level readiness rows honest?",
+   "what_we_know": "Every BLOCKED row names a feed that does not exist here, not a task that was skipped.",
+   "what_is_missing": "Whether the owner can supply any of those feeds.",
+   "what_would_settle_it": "Owner input.",
+   "answerable_from_this_repo": "No.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q17",
+   "question": "Does the climate/base-rate benchmark need a prior season?",
+   "what_we_know": "Currently the base rate is computed on the scored sample, which is mildly optimistic.",
+   "what_is_missing": "Whether a prior-season rate changes rankings.",
+   "what_would_settle_it": "A prior season of official results.",
+   "answerable_from_this_repo": "No - needs prior data.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q18",
+   "question": "How many captures make a series?",
+   "what_we_know": "Two points exist (2026-11-14 and 2026-11-15). Not enough for drift.",
+   "what_is_missing": "The right cadence.",
+   "what_would_settle_it": ">= 3 daily captures Wed->kickoff.",
+   "answerable_from_this_repo": "No.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q19",
+   "question": "Is the spread sign convention settled?",
+   "what_we_know": "Yes. r(spread_line, home_margin)=+0.436 and the mirror sign fits worse (13.21 vs 9.49 MAE).",
+   "what_is_missing": "Nothing.",
+   "what_would_settle_it": "Already answered.",
+   "answerable_from_this_repo": "Yes.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q20",
+   "question": "Should the two international games be excluded from the backtest?",
+   "what_we_know": "Not decided. They are currently included with an unsupported HFA term, and the defect is published (FX-01).",
+   "what_is_missing": "Whether exclusion changes any conclusion.",
+   "what_would_settle_it": "A sensitivity run with and without them.",
+   "answerable_from_this_repo": "Yes - it is computable, and it is a pre-registered change.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q21",
+   "question": "Is 2026 the right backtest season?",
+   "what_we_know": "It is the only season of 2026 results available, and it is mid-season.",
+   "what_is_missing": "Whether a 2025 corpus would be a better baseline.",
+   "what_would_settle_it": "A 2025 official results feed.",
+   "answerable_from_this_repo": "No.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  },
+  {
+   "id": "Q22",
+   "question": "What should be built next?",
+   "what_we_know": "The queue is the SUGGESTIONS register: the top three are a price source, a results feed, and one canonical dashboard.",
+   "what_is_missing": "Owner priorities.",
+   "what_would_settle_it": "Owner input.",
+   "answerable_from_this_repo": "No - needs the owner.",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv",
+   "answer": null,
+   "answer_status": "BLANK BY POLICY - an answer is a decision, and no decision has been taken"
+  }
+ ],
+ "suggestions": [
+  {
+   "id": "S01",
+   "suggestion": "Obtain one citable price source (licensed or archived with terms)",
+   "why_it_matters": "It is the single blocker under R01, R20, R35, R57 and every ROI/CLV claim.",
+   "options": "A: license a feed  B: use an archive with recorded terms  C: stop publishing price-relative claims",
+   "measured_or_cleared_by": "n/a - owner decision",
+   "priority": "HIGH",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S02",
+   "suggestion": "Finish the official results sweep (136 game pages)",
+   "why_it_matters": "Turns the results feed from third-party to official and clears R02/R79.",
+   "options": "A: 136 manual reads  B: automated crawler  C: accept third-party with the current label",
+   "measured_or_cleared_by": "136/136 official reads",
+   "priority": "HIGH",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S03",
+   "suggestion": "Pick ONE canonical dashboard across the 21 NFL workspaces",
+   "why_it_matters": "Readers cannot tell which of 21 dashboards is authoritative.",
+   "options": "A: this one  B: nfl-core  C: nfl-book  D: a new index",
+   "measured_or_cleared_by": "1 owner choice",
+   "priority": "HIGH",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S04",
+   "suggestion": "Capture inactive lists from the game centre each week",
+   "why_it_matters": "Unlocks R29, R39, R42, R51 - the entire availability programme depends on it.",
+   "options": "A: manual  B: scheduled crawler",
+   "measured_or_cleared_by": "32 of 32 club lists per week",
+   "priority": "HIGH",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S05",
+   "suggestion": "Get an official snap-count feed",
+   "why_it_matters": "Unlocks depth-from-playing-time (R11, R54, R76) without any jersey-number inference.",
+   "options": "A: nfl.com stats  B: licensed feed",
+   "measured_or_cleared_by": "snap counts for 32 clubs",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S06",
+   "suggestion": "Run a scheduled capture (Wed/Thu/Fri/Sat) with hash retention",
+   "why_it_matters": "Creates the series that R28/R45/R52/R53 require.",
+   "options": "A: GitHub Action cron  B: external scheduler",
+   "measured_or_cleared_by": "3+ retained daily captures",
+   "priority": "HIGH",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S07",
+   "suggestion": "Add a prior-season base rate",
+   "why_it_matters": "Removes the mild optimism in the climatology control (R17/Q17).",
+   "options": "A: 2025 results  B: multi-season",
+   "measured_or_cleared_by": "1 prior season",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S08",
+   "suggestion": "Pre-register an HFA fix for international games",
+   "why_it_matters": "FX-01 is a published defect; fixing it silently would be worse than publishing it.",
+   "options": "A: zero HFA on neutral  B: venue-specific HFA  C: exclude the games",
+   "measured_or_cleared_by": "paired sensitivity run",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S09",
+   "suggestion": "Expose the residual-versus-market chart per market",
+   "why_it_matters": "The residual is the only evidence of origination alpha and it is currently a table.",
+   "options": "A: static sparkline  B: table only",
+   "measured_or_cleared_by": "n/a",
+   "priority": "LOW",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S10",
+   "suggestion": "Add a per-game point-in-time card",
+   "why_it_matters": "Lets a reader see what was knowable at kickoff for one game.",
+   "options": "A: per-game page  B: none",
+   "measured_or_cleared_by": "1 page per game",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S11",
+   "suggestion": "Publish a weekly diff page",
+   "why_it_matters": "R59 needs it; two captures already produce a meaningful diff.",
+   "options": "A: auto-diff  B: manual",
+   "measured_or_cleared_by": "weekly",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S12",
+   "suggestion": "Add schema-drift assertions to every parser",
+   "why_it_matters": "Prevents a silent blank where a field disappears (R61).",
+   "options": "A: assert counts  B: none",
+   "measured_or_cleared_by": "every parser asserts",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S13",
+   "suggestion": "Make the leaderboard's n-floor configurable and published",
+   "why_it_matters": "The 300 floor currently binds every strategy; the owner may want it visible per row.",
+   "options": "A: keep 300  B: lower with justification  C: publish both",
+   "measured_or_cleared_by": "n/a",
+   "priority": "LOW",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S14",
+   "suggestion": "Add a decision log with owner verdicts",
+   "why_it_matters": "The suggestions and questions registers have BLANK verdicts by design; they need a place for the answer.",
+   "options": "A: COORDINATION.md  B: a page",
+   "measured_or_cleared_by": "n/a",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S15",
+   "suggestion": "Replace the assumed -110 with an observed price when one exists",
+   "why_it_matters": "Every staking ROI on the site is hypothetical at -110.",
+   "options": "A: keep assumption and label  B: wait for S01",
+   "measured_or_cleared_by": "1 observed price",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S16",
+   "suggestion": "Add a proper-score comparison across seasons",
+   "why_it_matters": "R68 needs a multi-season holdout.",
+   "options": "A: 2025  B: 2024-25",
+   "measured_or_cleared_by": "2+ seasons",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S17",
+   "suggestion": "Publish the Game Book extraction plan without executing it",
+   "why_it_matters": "R25 is blocked on PDF parsing, but the URLs are captured and the plan is cheap to state.",
+   "options": "A: state plan  B: parse one as a proof",
+   "measured_or_cleared_by": "1 parsed book",
+   "priority": "LOW",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "S18",
+   "suggestion": "Consolidate the duplicated NFL namespaces into one archive area",
+   "why_it_matters": "Most of the 21 workspaces restate the same analysis; a reader cannot tell them apart.",
+   "options": "A: archive them README-only  B: leave",
+   "measured_or_cleared_by": "1 owner choice",
+   "priority": "MEDIUM",
+   "reviewer_verdict": null,
+   "verdict_status": "BLANK - awaits reviewer choice before any implementation",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  }
+ ],
+ "irregularities": [
+  {
+   "id": "I01",
+   "irregularity": "Scores in the corpus come from a third-party archive, not from official game pages.",
+   "handling": "Every corpus row is labelled unverified-against-official; the standings cross-check passes for 32/32 clubs after the week-10 addition.",
+   "severity": "MEDIUM",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "I02",
+   "irregularity": "Peer files disagree about how many 2026 games are settled: 136 in nfl-core, 137 in nfl-core's own results feed, 150 in nfl-marketboard.",
+   "handling": "This session's own count is 136 settled + 136 scheduled, and the official page shows 9 week-10 finals. All three peer figures are explainable as different capture times, but none of them says so on its page.",
+   "severity": "MEDIUM",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "I03",
+   "irregularity": "The brief's '6 of 254 rows designated' does not reproduce (171 of 347 at this capture).",
+   "handling": "Published as observed; no attempt is made to force the old number.",
+   "severity": "LOW",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "I04",
+   "irregularity": "Two 2026 games are international with the designated home club away from home; the model's constant HFA is unsupported for them.",
+   "handling": "FX-01 published as a defect; the fix is pre-registered rather than applied silently.",
+   "severity": "MEDIUM",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "id": "I05",
+   "irregularity": "The market spread convention had to be established empirically; a naive sign flip produces a materially worse fit.",
+   "handling": "Sign check published as its own artefact with r and both MAEs.",
+   "severity": "LOW",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "I06",
+   "irregularity": "No official price exists for any NFL market, so every price on the site is third-party.",
+   "handling": "Stated on the prices page, on every row, and in DEC-1.",
+   "severity": "MEDIUM",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+  },
+  {
+   "id": "I07",
+   "irregularity": "The repo contains 21+ NFL workspaces that publish overlapping and sometimes contradictory numbers.",
+   "handling": "This workspace publishes its own numbers and links the others rather than reconciling them silently.",
+   "severity": "MEDIUM",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "I08",
+   "irregularity": "Venue was read for only 4 of 272 fixtures.",
+   "handling": "268 rows carry a blank venue with an explicit status.",
+   "severity": "LOW",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  {
+   "id": "I09",
+   "irregularity": "The base-rate control is computed on the scored sample, which is mildly optimistic.",
+   "handling": "Flagged in the leaderboard metadata and in Q17.",
+   "severity": "LOW",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  },
+  {
+   "id": "I10",
+   "irregularity": "CR-04's apparent rest effect collapses when treated as a group variable (14 of 120 games drive it).",
+   "handling": "Automatic robustness guard added; the correlation is marked NOT ROBUST with group means published.",
+   "severity": "LOW",
+   "source_url": "https://github.com/nflverse/nfldata/blob/master/data/games.csv"
+  }
+ ]
+}

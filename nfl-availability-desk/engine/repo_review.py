@@ -114,6 +114,9 @@ def main() -> int:
                                    for k in sorted({e["family"] for e in entries})),
         f'namespaces with a page but no checked-in data file (numbers not reproducible from the tree): '
         f'{[e["path"] for e in entries if e["html_pages"] and not e["data_files"]]}',
+        f'namespaces publishing a decision-readiness or requirements register (matched on their own '
+        f'title): {[e["path"] for e in entries if "eadiness" in (e["index_h1"] + e["index_title"]).lower() or "equirement" in (e["index_h1"] + e["index_title"]).lower()]} - '
+        f'the same brief answered in parallel, which is what SUG-08 exists to stop; '
         f'pages published across all namespaces: {sum(e["html_pages"] for e in entries)}; '
         f'python files: {sum(e["python"] for e in entries)}; table rows counted on index pages: '
         f'{sum(e["rows_on_index"] for e in entries)}',

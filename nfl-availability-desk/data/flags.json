@@ -158,10 +158,10 @@
    "id": "RF-17",
    "kind": "structure",
    "severity": "low",
-   "finding": "22 NFL namespaces are live in one repository, several publishing near-identical requirement registers with different ids (R1..R10, RR-, P-, FLAG-M, VR-, VQ-, D-).",
-   "measured": "counted at base commit by engine/repo_review.py",
-   "action": "owner picks a canonical namespace (SUG-08); cross-references in this register use ids, not prose, so a merge cannot silently duplicate them",
-   "source_url": "https://www.nfl.com/injuries/"
+   "finding": "Several namespaces in one repository answer the same brief in parallel, and at least four of them publish a decision-readiness or requirements register with different row counts and different verdicts for the same requirement.",
+   "measured": "recounted after the 2026-11-15 merge with main: 47 top-level namespaces on the branch, 29 of them nfl-*, and four separate readiness registers (nfl-readiness/, nfl-readiness-register/, nfl-verify/, and this namespace). The count is computed by engine/repo_review.py at every build, so it moves as peers land; the claim that matters is that the four registers disagree.",
+   "action": "pick one canonical register and one canonical dashboard (SUG-08, and nfl-core's D-1 note); until then every page in this namespace says which namespace it is talking about, and no peer number is restated as this namespace's own finding",
+   "source_url": "https://github.com/sassnarep3-star/Own4/tree/main"
   },
   {
    "id": "RF-18",

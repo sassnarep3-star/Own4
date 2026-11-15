@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Questions · NFL Decision Desk</title>
+<style>
+:root{--ink:#10151c;--ink2:#3b4654;--ink3:#67717f;--bg:#f6f7f9;--panel:#fff;--line:#e2e6eb;
+--brand:#0b5cd5;--ok:#0f7b4f;--okbg:#e7f6ee;--warn:#a3560a;--warnbg:#fdf1e2;
+--bad:#a3182a;--badbg:#fdecee;--info:#0b5cd5;--infobg:#eaf1fd;
+--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--brand);text-decoration:none}a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.88em;background:#eef1f5;padding:.1em .35em;border-radius:4px}
+.wrap{display:flex;min-height:100vh;align-items:flex-start}
+.side{width:248px;flex:0 0 248px;background:#0f1621;color:#cfd7e3;padding:20px 14px 40px;
+position:sticky;top:0;max-height:100vh;overflow-y:auto}
+.side .brand{color:#fff;font-weight:700;font-size:16px;display:block}
+.side .brand span{color:#8fa2bb;font-weight:500;font-size:11.5px;display:block;margin-top:3px}
+.side .grp{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:#7c8ba1;margin:18px 8px 6px}
+.side a.nav{display:block;padding:6px 9px;border-radius:7px;color:#cfd7e3;font-size:13px;line-height:1.35}
+.side a.nav:hover{background:#1a2331;color:#fff;text-decoration:none}
+.side a.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.side .foot{margin-top:24px;font-size:11px;color:#7c8ba1;border-top:1px solid #1e2836;padding-top:12px}
+.main{flex:1 1 auto;min-width:0;padding:26px 30px 60px;max-width:1400px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3);margin-bottom:4px}
+h1{font-size:26px;line-height:1.25;margin:2px 0 10px;letter-spacing:-.2px}
+h2{font-size:18px;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:15px;margin:20px 0 8px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15.5px;color:var(--ink);max-width:80ch}
+.muted{color:var(--ink3);font-size:13px}
+table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0 18px;background:var(--panel)}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);
+background:#f2f4f7;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:bottom}
+td{padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:hover td{background:#fafbfc}
+.num{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px}
+.scroll table{margin:0;border-radius:0}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.04em;
+padding:1px 6px;border-radius:5px;text-transform:uppercase;white-space:nowrap}
+.b-ok{background:var(--okbg);color:var(--ok)}.b-warn{background:var(--warnbg);color:var(--warn)}
+.b-bad{background:var(--badbg);color:var(--bad)}.b-info{background:var(--infobg);color:var(--info)}
+.b-n{background:#eef1f5;color:var(--ink3)}
+.blank{color:#9aa4b1;font-style:italic;font-size:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:10px;margin:14px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 13px}
+.card .k{font-size:22px;font-weight:700;letter-spacing:-.4px;line-height:1.15}
+.card .l{font-size:11.5px;color:var(--ink3);margin-top:3px;line-height:1.35}
+.card.good .k{color:var(--ok)}.card.warn .k{color:var(--warn)}.card.bad .k{color:var(--bad)}
+.note{border-left:3px solid var(--brand);background:var(--infobg);padding:10px 13px;
+border-radius:0 7px 7px 0;margin:14px 0;font-size:13px;color:#1c3a63}
+.note.warn{border-color:var(--warn);background:var(--warnbg);color:#5d3308}
+.note.bad{border-color:var(--bad);background:var(--badbg);color:#6d101d}
+.note.ok{border-color:var(--ok);background:var(--okbg);color:#0a4d33}
+footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);
+font-size:12px;color:var(--ink3);max-width:95ch}
+.src{font-size:11.5px;white-space:nowrap}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink)}
+.kv{font-size:12.5px}.kv b{color:var(--ink)}
+@media(max-width:860px){.wrap{flex-direction:column}.side{width:100%;flex:none;position:static;
+max-height:none}.main{padding:18px 14px 50px}}
+</style></head><body><div class="wrap">
+<nav class="side">
+<span class="brand">NFL Decision Desk<span>own lines · gates · honest uncertainty</span></span>
+<div class="grp">Start here</div>
+<a class="nav" href="../index.html">Dashboard &amp; readiness</a>
+<a class="nav" href="../pages/executive-summary.html">Executive summary</a>
+<div class="grp">Data</div>
+<a class="nav" href="../pages/fixtures.html">Results &amp; fixture context</a>
+<a class="nav" href="../pages/availability.html">Availability (injuries)</a>
+<a class="nav" href="../pages/prices.html">Prices &amp; own lines</a>
+<div class="grp">Model &amp; scoring</div>
+<a class="nav" href="../pages/model.html">Model &amp; own probabilities</a>
+<a class="nav" href="../pages/leaderboard.html">Leaderboard &amp; luck</a>
+<a class="nav" href="../pages/correlations.html">Correlations</a>
+<a class="nav" href="../pages/governance.html">Pre-registration &amp; gates</a>
+<div class="grp">Decide</div>
+<a class="nav active" href="../pages/questions.html">Questions register</a>
+<a class="nav" href="../pages/suggestions.html">Suggestions</a>
+<a class="nav" href="../pages/repo-review.html">Repo review</a>
+<a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a>
+<div class="grp">Sources</div>
+<a class="nav" href="../pages/sources.html">Every source read</a>
+<div class="foot">Research notebook. No wagering is offered or implied.
+Session <code>arena/e0ed20d1-own4</code>.</div>
+</nav>
+<main>
+<div class="crumb">Decide</div><h1>Questions register</h1><p class="lede">Every question that must be answered before a decision can reasonably be made, with what we know, what is missing, and what would settle it. The answer field is <b>blank by design</b>: an answer here would be a decision, and decisions are yours.</p><div class="scroll"><table><thead><tr><th>#</th><th>Question</th><th>What we know</th><th>What is missing</th><th>What would settle it</th><th>Answerable from this repo?</th><th>Answer</th><th>Source</th></tr></thead><tbody><tr><td>Q01</td><td>Are the 136 settled games in the frozen archive all correct?</td><td>The archive says 136 settled; the official week-10 page shows 9 finals at this capture, of which 8 postdate the archive. All 32 clubs reconcile to official standings AFTER adding those 9.</td><td>The 136 are consistent with the official standings for weeks 1-9, which is strong but indirect evidence.</td><td>Read 136 official game pages and compare scores cell by cell.</td><td>Yes, but it needs 136 page reads.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q02</td><td>What is the &#x27;136-game log&#x27; in the brief?</td><td>It is the frozen third-party archive: weeks 1-9 complete, week 10 absent. 136 = sum of weeks 1-9.</td><td>Whether the brief meant this log or the 150-game state now visible on the official site.</td><td>Ask the owner which corpus should be the backtest baseline.</td><td>No - this needs the owner.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q03</td><td>Where can official prices be obtained?</td><td>Nowhere in this repo, and the NFL publishes none. The only price archives found are third-party (nflverse).</td><td>Whether the owner has a licensed price feed.</td><td>A licensed vendor, or an archived odds source with clear terms.</td><td>No - needs the owner&#x27;s data rights.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv" rel="noopener">source</a></td></tr><tr><td>Q04</td><td>Do 2026 opening lines exist anywhere citable?</td><td>No. The vendored opening archive contains 2021 only (1,088 rows / 272 games).</td><td>Nothing - this looks definitive for this repo.</td><td>A 2026 opening archive.</td><td>Yes, negatively.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv" rel="noopener">source</a></td></tr><tr><td>Q05</td><td>Which depth order should the model use?</td><td>Neither route is available: no official depth chart (a prior session logged the route as 404) and no snap-count feed.</td><td>Whether clubs publish depth charts at all in 2026, and in what format.</td><td>A working club depth route or an official snap-count feed.</td><td>No - needs external verification for 32 clubs.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>Q06</td><td>What does &#x27;Questionable&#x27; actually mean?</td><td>Unknown empirically. One capture cannot answer it.</td><td>The play rate per designation.</td><td>Designations joined to inactive lists across several seasons.</td><td>No - needs multi-season joins.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>Q07</td><td>Why did the brief say only 6 of 254 rows carry a game designation?</td><td>Not reproducible at this capture: 171 of 347 rows (49.3%) carry one.</td><td>Whether the earlier figure used a different definition or an earlier capture time.</td><td>The earlier capture&#x27;s raw file, with its timestamp.</td><td>Partly - the definition is testable; the old file is not in this repo.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>Q08</td><td>Are SF@LA and NE@DET really neutral-site games?</td><td>Yes, per the official game centre: Melbourne Cricket Ground and FC Bayern Munich Stadium.</td><td>Whether the league treats the designated home team as home for HFA purposes.</td><td>The official game book / league scheduling notes.</td><td>Mostly - venue is confirmed; HFA treatment is an owner decision.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">source</a></td></tr><tr><td>Q09</td><td>Is our model better than the market?</td><td>No. Brier 0.2525 vs market 0.2147; the paired interval is entirely below zero.</td><td>Nothing at this sample.</td><td>n&gt;=300 with a positive cluster lower bound.</td><td>Yes, negatively.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv" rel="noopener">source</a></td></tr><tr><td>Q10</td><td>Which total estimator should survive?</td><td>PR-02 MAE 11.311 vs PR-03 12.012, paired t -1.757. Not decisive at n=104.</td><td>Which one wins on a longer window.</td><td>n&gt;=150 paired comparison.</td><td>Not yet.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q11</td><td>Can injuries be used as a model feature today?</td><td>No. One capture cannot be ablated chronologically without leaking.</td><td>Whether availability explains enough variance to matter.</td><td>An archived availability series spanning the backtest window.</td><td>No.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>Q12</td><td>What is the right reward structure?</td><td>Undefined. 1,000 units are escrowed and 0 awarded; the qualification bar is n&gt;=300 and nothing clears it.</td><td>Whether rewards should be binary qualification or continuous skill.</td><td>An owner decision.</td><td>No - needs the owner.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q13</td><td>Are parlays worth modelling?</td><td>Not until a joint probability can be validated.</td><td>Whether leg dependence is large enough to matter.</td><td>n&gt;=100 dependence estimates from official numbers.</td><td>No.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q14</td><td>Should the site publish raw rows or only derived analysis?</td><td>Currently derived analysis with row-level source links.</td><td>What the NFL&#x27;s terms permit.</td><td>A read of the NFL website terms.</td><td>No - needs a terms read.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td></tr><tr><td>Q15</td><td>Is the home-field constant valid for every 2026 game?</td><td>No. Two games are international with the designated home club away from home.</td><td>How large the effect is.</td><td>A paired comparison with and without HFA on neutral games.</td><td>Not at this n.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr><tr><td>Q16</td><td>Are the discipline-level readiness rows honest?</td><td>Every BLOCKED row names a feed that does not exist here, not a task that was skipped.</td><td>Whether the owner can supply any of those feeds.</td><td>Owner input.</td><td>No.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q17</td><td>Does the climate/base-rate benchmark need a prior season?</td><td>Currently the base rate is computed on the scored sample, which is mildly optimistic.</td><td>Whether a prior-season rate changes rankings.</td><td>A prior season of official results.</td><td>No - needs prior data.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q18</td><td>How many captures make a series?</td><td>Two points exist (2026-11-14 and 2026-11-15). Not enough for drift.</td><td>The right cadence.</td><td>&gt;= 3 daily captures Wed-&gt;kickoff.</td><td>No.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr><tr><td>Q19</td><td>Is the spread sign convention settled?</td><td>Yes. r(spread_line, home_margin)=+0.436 and the mirror sign fits worse (13.21 vs 9.49 MAE).</td><td>Nothing.</td><td>Already answered.</td><td>Yes.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q20</td><td>Should the two international games be excluded from the backtest?</td><td>Not decided. They are currently included with an unsupported HFA term, and the defect is published (FX-01).</td><td>Whether exclusion changes any conclusion.</td><td>A sensitivity run with and without them.</td><td>Yes - it is computable, and it is a pre-registered change.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">source</a></td></tr><tr><td>Q21</td><td>Is 2026 the right backtest season?</td><td>It is the only season of 2026 results available, and it is mid-season.</td><td>Whether a 2025 corpus would be a better baseline.</td><td>A 2025 official results feed.</td><td>No.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr><tr><td>Q22</td><td>What should be built next?</td><td>The queue is the SUGGESTIONS register: the top three are a price source, a results feed, and one canonical dashboard.</td><td>Owner priorities.</td><td>Owner input.</td><td>No - needs the owner.</td><td><span class="blank">awaiting owner decision</span></td><td><a class="src" href="https://github.com/nflverse/nfldata/blob/master/data/games.csv" rel="noopener">source</a></td></tr></tbody></table></div><h2>How to use this register</h2><p>Rows marked <b>“No”</b> in the answerable column cannot be closed by any amount of work in this repository — they need an external feed or a decision from you. Rows marked <b>“Yes”</b> are computable today and are queued in the suggestions register with an effort estimate.</p><footer><b>Research notebook, not advice.</b> No wagering is offered. Staking figures use an assumed −110 price and are labelled hypothetical everywhere. Numbers come from sources listed on each row; values that could not be sourced are left blank and are listed on the <a href="../pages/flagged.html">Flagged for review</a> page. Gambling help: <a href="https://www.ncpgambling.org/help-treatment/" rel="noopener">NCPG</a>. Built 2026-11-15T23:24:27Z UTC · <a href="https://github.com/sassnarep3-star/Own4" rel="noopener">repository</a></footer></main></div></body></html>

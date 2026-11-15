@@ -104,6 +104,26 @@ NAV = [
         ("index.html", "Dashboard", "dash"),
         ("verified/executive-summary.html", "Executive summary", "summary"),
     ]),
+    # Added 2026-11-15 by session arena/e0ed20d1-own4 (additive; superset-only edit).
+    # The NFL Decision Desk is the workspace that publishes a decision-readiness table for
+    # every requirement line, so it is surfaced ahead of the 21 older NFL namespaces. The
+    # older group below is untouched: this adds a group, it does not remove or reorder one.
+    ("NFL Decision Desk · 2026-11-15", [
+        ("nfl-decision-desk/index.html", "Readiness dashboard (start here)", "legacy"),
+        ("nfl-decision-desk/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-desk/pages/fixtures.html", "Results corpus &amp; fixture context", "legacy"),
+        ("nfl-decision-desk/pages/availability.html", "Availability &amp; injuries", "legacy"),
+        ("nfl-decision-desk/pages/prices.html", "Prices, own lines &amp; residual", "legacy"),
+        ("nfl-decision-desk/pages/model.html", "Model: probability + inputs", "legacy"),
+        ("nfl-decision-desk/pages/leaderboard.html", "Leaderboard, gates &amp; luck panel", "legacy"),
+        ("nfl-decision-desk/pages/correlations.html", "Correlations with n", "legacy"),
+        ("nfl-decision-desk/pages/governance.html", "Pre-registration &amp; six gates", "legacy"),
+        ("nfl-decision-desk/pages/questions.html", "Questions register (22)", "legacy"),
+        ("nfl-decision-desk/pages/suggestions.html", "Suggestions (18, unverified verdicts)", "legacy"),
+        ("nfl-decision-desk/pages/repo-review.html", "Repo review &amp; irregularities", "legacy"),
+        ("nfl-decision-desk/pages/flagged.html", "⚑ NFL Decision Desk — flagged for review", "legacy"),
+        ("nfl-decision-desk/pages/sources.html", "Sources read this session", "legacy"),
+    ]),
     ("Official data · 2026-11-05", [
         ("verified/standings.html", "Standings", "stand"),
         ("verified/team-stats.html", "Team stats", "stats"),
@@ -144,7 +164,7 @@ NAV = [
     # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
     # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
     # namespaces below — all retained; group retitled to the combined count.
-    ("NFL research · 21 workspaces (2026-11-14)", [
+    ("NFL research · 0 workspaces (2026-11-15)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -279,6 +299,34 @@ NAV = [
         ("nfl-core/pages/flagged.html", "⚑ NFL Core — flagged for review", "legacy"),
         ("nfl-core/pages/sources.html", "NFL Core — sources & verification", "legacy"),
         ("nfl-core/pages/d1-canonical-choice.html", "D-1 — choose the canonical workspace", "legacy"),
+        # Added 2026-11-15 by session arena/63ebae0e-own4: the nfl-readiness-register namespace
+        # (full requirement register REQ-01..REQ-68 verbatim, decision-readiness table on
+        # its landing page, snapshot ledger + Wed/Thu/Fri capture automation with drift
+        # alarm, verified Week-10 live captures, suggestions/questions/repo-review/flags).
+        # Generator-owned so a regeneration cannot drop these links (F-13 class).
+        ("nfl-readiness-register/index.html", "NFL Readiness — decision-readiness table", "legacy"),
+        ("nfl-readiness-register/pages/requirements.html", "NFL Readiness — full requirement register", "legacy"),
+        ("nfl-readiness-register/pages/snapshots.html", "NFL Readiness — snapshot ledger &amp; Week-10 capture", "legacy"),
+        ("nfl-readiness-register/pages/questions.html", "NFL Readiness — questions &amp; answers", "legacy"),
+        ("nfl-readiness-register/pages/suggestions.html", "NFL Readiness — suggestions (review first)", "legacy"),
+        ("nfl-readiness-register/pages/repo-review.html", "NFL Readiness — repo review", "legacy"),
+        ("nfl-readiness-register/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
+        ("nfl-readiness-register/pages/sources.html", "NFL Readiness — sources", "legacy"),
+        ("nfl-readiness-register/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
+        # Added 2026-11-15 by session arena/507da9a4-own4: the nfl-consolidated
+        # namespace — the cross-namespace decision-readiness dashboard. The landing
+        # page carries the decision-readiness table (one row per requirement: the gate
+        # that blocks it + the number that would clear it), plus a consolidated
+        # questions/answers register and a suggestions queue. Generator-owned so a
+        # regeneration cannot drop these links (F-13 class).
+        ("nfl-consolidated/index.html", "NFL Consolidated — decision-readiness dashboard", "legacy"),
+        ("nfl-consolidated/pages/executive-summary.html", "Consolidated — executive summary", "legacy"),
+        ("nfl-consolidated/pages/requirements.html", "Consolidated — requirements register", "legacy"),
+        ("nfl-consolidated/pages/questions.html", "Consolidated — questions &amp; answers", "legacy"),
+        ("nfl-consolidated/pages/suggestions.html", "Consolidated — suggestions (review first)", "legacy"),
+        ("nfl-consolidated/pages/verification.html", "Consolidated — verification log", "legacy"),
+        ("nfl-consolidated/pages/sources.html", "Consolidated — source register", "legacy"),
+        ("nfl-consolidated/pages/flagged.html", "⚑ Consolidated — flagged for review", "legacy"),
     ]),
     # Added 2026-11-14: own-line origination engine with a verified results feed.
     # Every table row on every page carries an https link to the official source.
@@ -310,6 +358,29 @@ NAV = [
         ("nfl-markets/pages/suggestions.html", "NFL Markets — suggestions (review before implementing)", "legacy"),
         ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
         ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
+        # Added 2026-11-15 by session arena/9f6a7ca8-own4: its own `nfl-verify` namespace
+        # (independent re-verification of peer-published values), and the already-merged
+        # `nfl-readiness` namespace which landed via PR #109 with no nav entry at all and was
+        # therefore published-but-unreachable. Both are additive; no existing link is altered.
+        ("nfl-verify/index.html", "NFL Verify — decision verification dashboard", "legacy"),
+        ("nfl-verify/pages/decision-readiness.html", "NFL Verify — decision readiness (78 rows)", "legacy"),
+        ("nfl-verify/pages/verification.html", "NFL Verify — independent verification of peer values", "legacy"),
+        ("nfl-verify/pages/availability.html", "NFL Verify — official availability evidence", "legacy"),
+        ("nfl-verify/pages/questions.html", "NFL Verify — questions", "legacy"),
+        ("nfl-verify/pages/suggestions.html", "NFL Verify — suggestions (review first)", "legacy"),
+        ("nfl-verify/pages/sources.html", "NFL Verify — source register", "legacy"),
+        ("nfl-verify/pages/executive-summary.html", "NFL Verify — executive summary", "legacy"),
+        ("nfl-verify/pages/flagged.html", "⚑ NFL Verify — flagged for review", "legacy"),
+        ("nfl-readiness/index.html", "NFL Readiness — decision-readiness hub", "legacy"),
+        ("nfl-readiness/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
+        ("nfl-readiness/pages/injuries.html", "NFL Readiness — injuries", "legacy"),
+        ("nfl-readiness/pages/shadow-baseline.html", "NFL Readiness — pre-registered shadow baseline", "legacy"),
+        ("nfl-readiness/pages/schedule-results.html", "NFL Readiness — schedule &amp; results", "legacy"),
+        ("nfl-readiness/pages/governance.html", "NFL Readiness — governance", "legacy"),
+        ("nfl-readiness/pages/questions.html", "NFL Readiness — questions", "legacy"),
+        ("nfl-readiness/pages/suggestions.html", "NFL Readiness — suggestions", "legacy"),
+        ("nfl-readiness/pages/sources.html", "NFL Readiness — sources", "legacy"),
+        ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
     ]),
     # Added 2026-11-15 by session arena/d941f3c1-own4 (scope D1-D12). Namespace name note: this tree was
 # claimed and built as nfl-readiness/, then renamed to nfl-availability-desk/ at merge time because
@@ -360,6 +431,25 @@ NAV = [
         ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
     ]),
 ]
+
+# The NFL research group title used to be a hand-typed count and drifted twice: it read
+# "21 workspaces" while the group listed 22, and the directories on disk had run ahead of it
+# again. Compute the count from the group's own links so a stale value cannot exist.
+def _refresh_nfl_research_title(nav):
+    import os as _os
+    root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    n_dirs = sum(1 for d in _os.listdir(root)
+                 if d.startswith("nfl") and _os.path.isdir(_os.path.join(root, d)))
+    out = []
+    for title, links in nav:
+        if title.startswith("NFL research · "):
+            title = "NFL research · %d workspaces (2026-11-15)" % n_dirs
+        out.append((title, links))
+    return out
+
+
+NAV = _refresh_nfl_research_title(NAV)
+
 
 FOOTER = """<footer>
 <p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
