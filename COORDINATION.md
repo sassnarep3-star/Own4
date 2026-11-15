@@ -3174,3 +3174,27 @@ on S5 (`signal_metric` missing); post-hoc record baseline window corrected
 decision queue — a reviewer picks options before anything new is implemented. Suggested
 first moves: SG-01 (official price source), SG-02 (finish the 105-row line-by-line
 re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
+
+---
+
+## Session `arena/9f6a7ca8-own4` — Decision-readiness & independent re-verification (claim, 2026-11-15 UTC)
+
+Session ID: `arena/9f6a7ca8-own4` · Branch: `arena/9f6a7ca8-own4` (platform-pinned; the requested `session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
+
+**Survey at claim time (before any edit):** `main` already carries **26 NFL namespaces** (`nfl/`, `nfl-arena/`, `nfl-audit/`, `nfl-book/`, `nfl-command/`, `nfl-core/`, `nfl-decision/`, `nfl-decisions/`, `nfl-edge/`, `nfl-hub/`, `nfl-integration/`, `nfl-intel/`, `nfl-lab/`, `nfl-ledger/`, `nfl-lines/`, `nfl-market/`, `nfl-marketboard/`, `nfl-markets/`, `nfl-origination/`, `nfl-own/`, `nfl-price-snapshot/`, `nfl-quant/`, `nfl-research/`) plus root `verification/`, `verified/`, `docs/`, `lab/`, `lines-lab/`. Peer verifiers pass on a clean checkout (`verification/verify_site.py`: 14 pages / 346 sourced rows; `nfl-book/engine/verify.py`: 16 pages / 433 rows / 409 sourced / 202 marked blanks / 714 links, 0 broken).
+
+**What is genuinely missing after 26 namespaces** (this is the gap this session fills, and it is deliberately narrow): there is no single page that answers *"what number would clear this requirement, and what is blocking it right now?"*, and no **independent** second opinion on the numbers the peer namespaces already publish. Every peer session verified its own work; nothing re-checks peer-published values against freshly fetched official pages from a clean namespace.
+
+| # | Task | Status | Owner session | Files touched (scope) |
+|---|------|--------|---------------|-----------------------|
+| DR-1 | Decision-readiness table: one row per brief requirement, each with the blocking gate and the number that would clear it | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/data/requirements.json`, `nfl-readiness/pages/decision-readiness.html` |
+| DR-2 | Independent line-by-line re-verification of peer-published values against freshly fetched official nfl.com pages (no reuse of peer JSON as evidence) | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/data/verification.json`, `nfl-readiness/pages/verification.html` |
+| DR-3 | Availability evidence re-read for today: official Week 10 injury report sections, game-day designations, venue from the official game centre | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/data/availability.json`, `nfl-readiness/pages/availability.html` |
+| DR-4 | Questions / information / answers register focused on *missing* information + how to discover it | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/data/questions.json`, `nfl-readiness/pages/questions.html` |
+| DR-5 | Site-improvement suggestions section (review-before-implement, options + verdict blank) | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/data/suggestions.json`, `nfl-readiness/pages/suggestions.html` |
+| DR-6 | Static site (landing + category subpages + Flagged for Review), row-source verifier, CI workflow | claimed | arena/9f6a7ca8-own4 | `nfl-readiness/**`, `.github/workflows/nfl-readiness.yml` |
+| DR-7 | Root nav entry (generator-owned `verification/build.py` NAV, additive only), PR → main → merge → Pages confirmation, record here | claimed | arena/9f6a7ca8-own4 | `verification/build.py` (NAV list, additive), `index.html` (regenerated), this file |
+
+**Scope rules honoured:** no peer namespace is edited. `COORDINATION.md` is append-only. `index.html` and `verified/*.html` are regenerated from the generator, never hand-edited, and the NAV entry added is additive (every prior href preserved). Peer datasets are read only as *claims to check*, never as evidence; every published value below is taken from an official nfl.com page fetched this session, with its URL and capture clock time.
+
+**No conflicts at claim time:** open PR #93 (`arena/582300df-own4`) touches `COORDINATION.md` and `index.html`; its namespace (`nfl-command-center/`, not yet on main) is out of scope here, and any board/nav collision will be resolved union-style at integration, preserving both.
