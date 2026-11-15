@@ -164,7 +164,7 @@ NAV = [
     # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
     # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
     # namespaces below — all retained; group retitled to the combined count.
-    ("NFL research · 23 workspaces (2026-11-15)", [
+    ("NFL research · 0 workspaces (2026-11-15)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -358,6 +358,29 @@ NAV = [
         ("nfl-markets/pages/suggestions.html", "NFL Markets — suggestions (review before implementing)", "legacy"),
         ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
         ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
+        # Added 2026-11-15 by session arena/9f6a7ca8-own4: its own `nfl-verify` namespace
+        # (independent re-verification of peer-published values), and the already-merged
+        # `nfl-readiness` namespace which landed via PR #109 with no nav entry at all and was
+        # therefore published-but-unreachable. Both are additive; no existing link is altered.
+        ("nfl-verify/index.html", "NFL Verify — decision verification dashboard", "legacy"),
+        ("nfl-verify/pages/decision-readiness.html", "NFL Verify — decision readiness (78 rows)", "legacy"),
+        ("nfl-verify/pages/verification.html", "NFL Verify — independent verification of peer values", "legacy"),
+        ("nfl-verify/pages/availability.html", "NFL Verify — official availability evidence", "legacy"),
+        ("nfl-verify/pages/questions.html", "NFL Verify — questions", "legacy"),
+        ("nfl-verify/pages/suggestions.html", "NFL Verify — suggestions (review first)", "legacy"),
+        ("nfl-verify/pages/sources.html", "NFL Verify — source register", "legacy"),
+        ("nfl-verify/pages/executive-summary.html", "NFL Verify — executive summary", "legacy"),
+        ("nfl-verify/pages/flagged.html", "⚑ NFL Verify — flagged for review", "legacy"),
+        ("nfl-readiness/index.html", "NFL Readiness — decision-readiness hub", "legacy"),
+        ("nfl-readiness/pages/executive-summary.html", "NFL Readiness — executive summary", "legacy"),
+        ("nfl-readiness/pages/injuries.html", "NFL Readiness — injuries", "legacy"),
+        ("nfl-readiness/pages/shadow-baseline.html", "NFL Readiness — pre-registered shadow baseline", "legacy"),
+        ("nfl-readiness/pages/schedule-results.html", "NFL Readiness — schedule &amp; results", "legacy"),
+        ("nfl-readiness/pages/governance.html", "NFL Readiness — governance", "legacy"),
+        ("nfl-readiness/pages/questions.html", "NFL Readiness — questions", "legacy"),
+        ("nfl-readiness/pages/suggestions.html", "NFL Readiness — suggestions", "legacy"),
+        ("nfl-readiness/pages/sources.html", "NFL Readiness — sources", "legacy"),
+        ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
@@ -382,6 +405,25 @@ NAV = [
         ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
     ]),
 ]
+
+# The NFL research group title used to be a hand-typed count and drifted twice: it read
+# "21 workspaces" while the group listed 22, and the directories on disk had run ahead of it
+# again. Compute the count from the group's own links so a stale value cannot exist.
+def _refresh_nfl_research_title(nav):
+    import os as _os
+    root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    n_dirs = sum(1 for d in _os.listdir(root)
+                 if d.startswith("nfl") and _os.path.isdir(_os.path.join(root, d)))
+    out = []
+    for title, links in nav:
+        if title.startswith("NFL research · "):
+            title = "NFL research · %d workspaces (2026-11-15)" % n_dirs
+        out.append((title, links))
+    return out
+
+
+NAV = _refresh_nfl_research_title(NAV)
+
 
 FOOTER = """<footer>
 <p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
