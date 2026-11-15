@@ -60,4 +60,9 @@ jobs:
         run: python3 engine/verify.py
 
       - name: Determinism gate (a rebuild must not change committed output)
-        run: git diff --exit-code -- nfl-decision-desk/pages nfl-decision-desk/index.html nfl-decision-desk/data
+        run: |
+          git diff --stat
+          echo "--- python ---"; python3 --version
+          echo "--- first 80 lines of any diff ---"
+          git diff -- nfl-decision-desk/pages nfl-decision-desk/index.html nfl-decision-desk/data | head -80
+          git diff --exit-code -- nfl-decision-desk/pages nfl-decision-desk/index.html nfl-decision-desk/data
