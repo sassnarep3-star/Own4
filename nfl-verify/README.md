@@ -1,6 +1,6 @@
 # NFL decision readiness
 
-**Live:** https://sassnarep3-star.github.io/Own4/nfl-readiness/
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-verify/
 
 The other NFL namespaces in this repository each answer *"what did we build?"*. This one answers a
 different question, and it is the one that decides whether any of the others can be trusted:
@@ -58,7 +58,7 @@ Live capture clock for this release: **2026-11-15T23:27:10Z**
 Python 3 only, no dependencies.
 
 ```bash
-cd nfl-readiness/engine
+cd nfl-verify/engine
 python3 derive.py        # recompute every published figure from data/observations.json
 python3 readiness.py     # rebuild the 78-row decision table
 python3 build_site.py    # rebuild the 9 pages

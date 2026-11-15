@@ -1,9 +1,9 @@
-name: nfl-readiness verify
+name: nfl-verify verify
 on:
   push:
-    paths: ['nfl-readiness/**', '.github/workflows/nfl-readiness.yml']
+    paths: ['nfl-verify/**', '.github/workflows/nfl-verify.yml']
   pull_request:
-    paths: ['nfl-readiness/**', '.github/workflows/nfl-readiness.yml']
+    paths: ['nfl-verify/**', '.github/workflows/nfl-verify.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -16,16 +16,16 @@ jobs:
         with:
           python-version: '3.12'
       - name: Recompute every published figure from the official observations
-        working-directory: nfl-readiness/engine
+        working-directory: nfl-verify/engine
         run: python3 derive.py
       - name: Rebuild the decision-readiness table
-        working-directory: nfl-readiness/engine
+        working-directory: nfl-verify/engine
         run: python3 readiness.py
       - name: Rebuild the site
-        working-directory: nfl-readiness/engine
+        working-directory: nfl-verify/engine
         run: python3 build_site.py
       - name: Verify sources, blanks, links, data invariants and determinism
-        working-directory: nfl-readiness/engine
+        working-directory: nfl-verify/engine
         run: python3 verify.py
       - name: Determinism gate (a rebuild must not change committed output)
-        run: git diff --exit-code -- nfl-readiness
+        run: git diff --exit-code -- nfl-verify

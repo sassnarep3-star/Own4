@@ -100,7 +100,7 @@ or shown as a blank. No value is inferred, interpolated or carried over from an 
 <p>National Problem Gambling Helpline: 1-800-MY-RESET —
 <a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>.
 Capture clock for this release: <code>%(cap)s</code>. Rebuild with the four commands in
-<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/README.md">README.md</a>
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify/README.md">README.md</a>
 or read the site's own <a href="%(p)spages/sources.html">source register</a>.</p>
 </footer>"""
 
@@ -805,7 +805,7 @@ durable.</li>
 
 <h2>Reproduce</h2>
 <p>Four commands, no dependencies beyond Python 3:</p>
-<pre><code>cd nfl-readiness/engine
+<pre><code>cd nfl-verify/engine
 python3 derive.py
 python3 readiness.py
 python3 build_site.py

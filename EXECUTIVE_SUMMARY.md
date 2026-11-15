@@ -118,8 +118,8 @@ Full detail: `nfl-book/EXECUTIVE_SUMMARY.md`; live after merge at /nfl-book/.
 
 ## Addendum · session `arena/9f6a7ca8-own4` · 2026-11-15 — NFL decision readiness
 
-**Live:** https://sassnarep3-star.github.io/Own4/nfl-readiness/ ·
-**Source:** [`nfl-readiness/`](nfl-readiness/) ·
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-verify/ ·
+**Source:** [`nfl-verify/`](nfl-verify/) ·
 **Capture clock:** `2026-11-15T23:27:10Z`
 
 This session asked a different question from the 26 NFL namespaces before it. They each answered
@@ -154,7 +154,7 @@ Two exact identities hold and they invert: the clubs in the Week 10 report that 
 Week 11 schedule are precisely the official Week 11 bye list, and the clubs on the Week 11 schedule
 that are absent from the report are precisely the Week 10 bye list. A scraper that keys players to
 the fixture header rather than to the club silently attributes last week's injuries to next week's
-games. Published as [R-14](nfl-readiness/pages/flagged.html#R-14), and asserted on every build.
+games. Published as [R-14](nfl-verify/pages/flagged.html#R-14), and asserted on every build.
 
 **3. Depth charts are club-by-club, and that decides the feature.** Two clubs probed. Green Bay
 publishes a structured table — 44 named players, jersey numbers prefixed to names, dated
@@ -201,7 +201,7 @@ Everything else on the site is a build task with a measurable target, not an opi
 
 * Seven official source groups were re-read in full; prior work across the other 23 `nfl*` trees was
   **not** re-read line by line and is labelled as inherited wherever it appears
-  ([R-12](nfl-readiness/pages/flagged.html#R-12)).
+  ([R-12](nfl-verify/pages/flagged.html#R-12)).
 * One week of designations joined to one week of inactives is **n = 1**. The join finds zero
   contradictions, which is the first real evidence the game-status column is a usable filter — and
   nowhere near enough to calibrate it.

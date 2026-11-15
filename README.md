@@ -268,7 +268,7 @@ marked unverified). Source of truth: `nfl-book/` (see `nfl-book/EXECUTIVE_SUMMAR
 
 ## NFL decision readiness · `arena/9f6a7ca8-own4` (2026-11-15)
 
-**Live:** https://sassnarep3-star.github.io/Own4/nfl-readiness/ · **Source:** [`nfl-readiness/`](nfl-readiness/)
+**Live:** https://sassnarep3-star.github.io/Own4/nfl-verify/ · **Source:** [`nfl-verify/`](nfl-verify/)
 
 The 26 NFL namespaces above each answer *"what did we build?"*. This one answers *"what blocks each
 requirement, and what number would clear it?"* — 78 requirement rows, each with its blocking gate, its
@@ -290,4 +290,4 @@ Market prices still do not exist anywhere: the NFL published kickoff time, netwo
 13 Week 11 fixtures and no line of any kind, which is why 9 requirements reduce to one procurement
 decision (Q01 / S01).
 
-Reproduce: `cd nfl-readiness/engine && python3 derive.py && python3 readiness.py && python3 build_site.py && python3 verify.py`
+Reproduce: `cd nfl-verify/engine && python3 derive.py && python3 readiness.py && python3 build_site.py && python3 verify.py`

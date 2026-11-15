@@ -1,4 +1,4 @@
-"""Verifier for the nfl-readiness site and datasets. Non-zero exit on any failure.
+"""Verifier for the nfl-verify site and datasets. Non-zero exit on any failure.
 
 Hard checks
   1. Every <tbody> data row carries at least one https:// source link.

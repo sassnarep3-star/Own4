@@ -144,7 +144,7 @@ NAV = [
     # peer sessions arena/d507f753 (nfl-market), arena/19ae73ae (nfl-price-snapshot),
     # arena-a437d20c (nfl-core) and arena/28a71529 (nfl-marketboard) each added their
     # namespaces below — all retained; group retitled to the combined count.
-    ("NFL research · 22 workspaces (2026-11-15)", [
+    ("NFL research · 21 workspaces (2026-11-14)", [
         ("nfl/index.html", "NFL research (specification)", "legacy"),
         ("nfl-research/index.html", "NFL research dashboard", "legacy"),
         ("nfl-lab/index.html", "NFL Quant Lab", "legacy"),
@@ -310,19 +310,6 @@ NAV = [
         ("nfl-markets/pages/suggestions.html", "NFL Markets — suggestions (review before implementing)", "legacy"),
         ("nfl-markets/pages/decisions.html", "NFL Markets — decisions &amp; unknowns", "legacy"),
         ("nfl-markets/pages/flagged.html", "⚑ NFL Markets — flagged for review", "legacy"),
-        # Added 2026-11-15 by session arena/9f6a7ca8-own4 (nfl-readiness namespace):
-        # the decision-readiness front door — one row per requirement with the gate that
-        # blocks it and the number that would clear it. Purely additive: every href that
-        # existed above is preserved unchanged.
-        ("nfl-readiness/index.html", "NFL decision readiness — what blocks what, and the clearing number", "legacy"),
-        ("nfl-readiness/pages/decision-readiness.html", "Decision readiness — all 78 requirements", "legacy"),
-        ("nfl-readiness/pages/verification.html", "Independent verification of peer-published values", "legacy"),
-        ("nfl-readiness/pages/availability.html", "Availability evidence — Week 10 report + official inactives", "legacy"),
-        ("nfl-readiness/pages/questions.html", "Questions, information and answers", "legacy"),
-        ("nfl-readiness/pages/suggestions.html", "Suggestions — review before implementing", "legacy"),
-        ("nfl-readiness/pages/executive-summary.html", "NFL readiness — executive summary", "legacy"),
-        ("nfl-readiness/pages/sources.html", "NFL readiness — sources", "legacy"),
-        ("nfl-readiness/pages/flagged.html", "⚑ NFL readiness — flagged for review", "legacy"),
     ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
