@@ -3352,3 +3352,35 @@ regenerated `index.html`/`verified/*.html`).
 - **Protocol deviation (logged, no harm):** one `git pull --rebase` on a branch that contains a merge replayed `main`'s commits and stopped on a conflict. It was aborted (`git rebase --abort`) before anything else ran; the branch and remote were unchanged. Later updates used a fast-forward push and a merge. The first claim push printed "couldn't find remote ref" but the commit was on the remote (checked with `git ls-remote`).
 - **Conflicts (logged per protocol):** `COORDINATION.md` on two occasions (vs `arena/507da9a4-own4` claim and log). Both resolved by keeping both sides' entries; no other session's line was removed.
 - **Open for owners / final integration:** (1) choose a canonical NFL hub (SR-05; overlaps `nfl-consolidated/`); (2) root nav link to `nfl-readiness/index.html`; (3) verify VR-04..VR-08 and VR-12 individually (not done); (4) official depth charts, inactive lists and snap counts (not verified or located); (5) marketboard correction request (14 rows, see log above); (6) owner decision on the price-data policy (SR-02) and the terms question (SR-01).
+
+---
+
+## Session `arena/63ebae0e-own4` — completion record (2026-11-15 UTC)
+
+**NFL Readiness register: full requirement register (REQ-01…REQ-68 verbatim + 5 process rows), decision-readiness table on the landing page, snapshot automation with drift alarm, verified Week-10 live captures.**
+
+### PR and merge record
+
+- **PR #112** https://github.com/sassnarep3-star/Own4/pull/112 — **merged** with a merge commit (`gh pr merge 112 --merge`) into `main` as **`3bf208e`** at 2026-11-15T23:43:01Z, without waiting for approval (per standing instruction).
+- Checks before merge (head `8b764a7`): `Rebuild and verify`, `audit`, `validate`, `verify` ×2 — **all SUCCESS**.
+- **GitHub Pages:** `pages build and deployment` run 43776307792 completed SUCCESS; Pages API reports **`built`** for exactly the merge commit `3bf208e` (no error). Live-confirmed by fetch: https://sassnarep3-star.github.io/Own4/nfl-readiness-register/ renders the decision-readiness table (73 rows) with per-row gates, clearing numbers and official source links.
+
+### Namespace rename (logged for the board)
+
+- This session claimed and built the namespace `nfl-readiness/`. While the PR was open, peer session `arena/f9a32d15-own4` (PR #109) merged a DIFFERENT namespace under the same directory name `nfl-readiness/` to main. To avoid clobbering their live paths, this session renamed its namespace to **`nfl-readiness-register/`** (git mv, zero content change; all internal refs, workflow paths and NAV entries updated; verifier re-run green). Peer `nfl-readiness/` untouched. Workflow: `.github/workflows/nfl-readiness-register.yml` (no collision — peer added no workflow).
+- Merge with origin/main (PRs #108/#109) resolved superset-style: NAV union in `verification/build.py` (nfl-consolidated + nfl-readiness-register, group retitled "NFL research · 23 workspaces (2026-11-15)"), COORDINATION.md union. Proof: index.html unique hrefs 191 (main) → 200 (merged), **zero links lost on either side**. One dangerous `git pull --rebase` was stopped mid-run (it tried to replay peer commits); the rebase was aborted, the merge commit kept, and remote/local verified identical (`8b764a7`).
+
+### Verification performed (beyond CI)
+
+- `nfl-readiness-register/verify.py`: **226/226 data rows carry an https source link**, 480 internal links resolve, manifest sha256 matches stored bytes (tamper-evidence), register arithmetic consistent (Σ per-team injury rows 28 tables = 347), all JSON parses. Drift alarm demonstrated: parser self-test PASS on fixture, FAILS LOUDLY (exit 1) on a drift fixture.
+- Official sources fetched and read live 2026-11-15 UTC: nfl.com/injuries (8 chunks, rendered), nfl.com/schedules (2 chunks), nfl.com/transactions, support.nfl.com Game Books article, operations.nfl.com rules + Next Gen Stats, nfl.com/legal/flexible-scheduling-procedures.
+- Findings verified live: Lions designations (Joseph/Mays/Reed) now published **Out at source** (REQ-47 resolved upstream — no patch made); Week-10 report re-captured (28 tables / **347 rows** / 67 Out / 0 empty sections; SEA 15, CIN 9 — REQ-48); **9/14 finals verified** (DET 35–10 NE in Munich, MIN 30–10 GB, BUF 31–12 NYJ, JAX 40–23 TEN, IND 24–22 MIA, NO 17–20 CAR, CLE 27–24 HOU, KC 35–13 ATL, WAS 24–21 NYG), 3 live + 2 scheduled recorded as such; November trade ledger (12 dated rows); dated 2026 TBD-games announcement captured (REQ-24).
+- Local CI sequence before push: docs/ unchanged after scripts/build.py; unittest OK; verify_data PASS; check_site 0 problems; verification/verify_site 14 pages / 346 rows green.
+
+### Sources
+
+https://www.nfl.com/injuries/ · https://www.nfl.com/schedules/ · https://www.nfl.com/transactions/ · https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books · https://operations.nfl.com/the-rules/ · https://operations.nfl.com/gameday/technology/nfl-next-gen-stats · https://www.nfl.com/legal/flexible-scheduling-procedures · https://github.com/nflverse/nfldata (TRUSTED-NOT-OFFICIAL, flagged)
+
+### Irregularities (all non-blocking, published on nfl-readiness-register/pages/flagged.html)
+
+F-R1 VR-/VQ- citations unresolvable in-repo (DEC-R7) · F-R2 injury counts are point-in-time (ledger fixes) · F-R3 Henley listed by LAC 11/15 after 11/10 trade to DEN (live cross-check) · F-R4 Henderson on report while on IR · F-R5 venues mostly blank (game centre not read) · F-R6 no official price source (standing, blocks DR-G1) · F-R7 PR #93 stale >24h, untouched · F-R8 254→279→347 supersession (timestamped, not contradictory) · F-R9 roof-designation publication surface unverified · F-R10 nflverse labelling · F-R11 week-label clarification (REG 10 = current week; no peer mislabeling found) · F-R12 raw-HTML capture unverified until first scheduled run (Wed 2026-11-18 18:00 UTC).
