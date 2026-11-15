@@ -1,0 +1,26 @@
+{
+  "generated_utc": "2026-11-15T00:00:00Z",
+  "purpose": "Validation gates every strategy must pass before leaderboard eligibility, plus the demotion gate that returns a live strategy to paper. All gate text, sample windows and thresholds were frozen before first exposure to data.",
+  "validation_gates": [
+    {"id":"G1","name":"Minimum out-of-sample sample","rule":"At least 300 graded out-of-sample games before a strategy can qualify.","status":"blocked","evidence":"Week 10-11 sample is 14-13 games; the 136-game pre-registered backtest corpus lives in sibling namespaces (nfl-core/nfl-marketboard) and is not re-hosted here.","number_to_clear":"300 graded games"},
+    {"id":"G2","name":"Probabilistic calibration","rule":"Model Brier score must beat the 0.2500 constant baseline with a paired-bootstrap 95% CI that excludes 0.","status":"not run","evidence":"No graded forecasts exist yet in this namespace.","number_to_clear":"Brier < 0.2500, CI excludes 0"},
+    {"id":"G3","name":"Discrimination vs home-team baseline","rule":"Win probability must beat the home-team baseline with one-sided p < 0.05.","status":"not run","evidence":"No graded forecasts exist yet.","number_to_clear":"accuracy edge over home baseline, p < 0.05"},
+    {"id":"G4","name":"Totals skill","rule":"Originated total MAE must beat the naive baseline by a permutation-tested margin (p < 0.05).","status":"not run","evidence":"Fair total is v1 league-average baseline; not yet graded.","number_to_clear":"MAE improvement, p < 0.05"},
+    {"id":"G5","name":"Temporal stability","rule":"Skill must be stable across chronological blocks (no single block driving the result).","status":"not run","evidence":"No multi-block sample yet.","number_to_clear":"stable block-by-block skill"},
+    {"id":"G6","name":"Dependence control for combinations","rule":"Every combination leg reports measured dependence (n and CI); no leg priced under independence.","status":"pass (structural)","evidence":"Same-game parlays and prop combos are blocked before any independence assumption is made. Cross-game leg dependence r = -0.007 (peer-verified, n week-slates) is reported, not assumed zero.","number_to_clear":"dependence reported for every leg"},
+    {"id":"G7","name":"Executable price","rule":"ROI/CLV may only be computed at an executable (official or licensed) price.","status":"blocked","evidence":"The NFL publishes no odds anywhere (re-checked 2026-11-15). No official or licensed price exists in this repo.","number_to_clear":"a licensed/official price feed"},
+    {"id":"G8","name":"Multiple-testing control","rule":"Strategy-level p-values pass Benjamini-Hochberg at q = 0.05 across all trials run.","status":"not run","evidence":"No strategy has a p-value yet.","number_to_clear":"BH-q < 0.05"},
+    {"id":"G9","name":"Source and usage compliance","rule":"Every published row links to its official page; the NBA/NFL Stats download restrictions are acknowledged.","status":"pass","evidence":"This site: every table row carries a source link; unverified values are blank and flagged.","number_to_clear":"100% of table rows source-linked"},
+    {"id":"G10","name":"Deterministic reproduction","rule":"Rebuild reproduces every page and number byte-for-byte (modulo timestamps).","status":"pass","evidence":"build.py is deterministic; verify.py checks row source-links and local links.","number_to_clear":"rebuild == committed output"}
+  ],
+  "demotion_gate": {
+    "id":"DG-1","name":"Live-to-paper demotion gate","rule":"A strategy marked LIVE is demoted to PAPER when any auto-firing condition triggers, evaluated weekly after results settle.","conditions": [
+      "DG-1a: Brier skill vs baseline turns negative over the rolling 4-week window",
+      "DG-1b: realized CLV at executable price is negative for 4 consecutive weeks",
+      "DG-1c: maximum drawdown exceeds the pre-registered limit (flagged: no limit set yet)",
+      "DG-1d: any input source fails the drift alarm (missing field / row-count breach) for 2 consecutive captures"
+    ],
+    "current_state": "No strategy is LIVE. All 7 strategies are PRE-REGISTERED or BLOCKED. Demotion gate evaluated: 0 triggers, 0 live strategies demoted, 0 actually live today.",
+    "number_to_clear":"a strategy must first pass G1-G10 before it can be LIVE; only then does DG-1 apply"
+  }
+}

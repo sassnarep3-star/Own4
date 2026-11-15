@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Originated lines</title>
+<style>
+  :root{--ink:#1a1a1a;--muted:#555;--line:#ddd;--bg:#fff;--card:#f7f7f7;--flag:#7a1f1f;--ok:#1e6b3a;--warn:#8a6d00;}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:1.25rem;font-weight:700;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--muted);font-weight:400;font-size:0.85rem}
+  nav a{text-decoration:none;color:#0056b3;margin-right:14px;font-size:0.9rem}
+  nav a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:0.85rem;margin-top:4px}
+  h1{font-size:1.5rem;margin:24px 0 6px}
+  h2{font-size:1.15rem;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  h3{font-size:1rem;margin:20px 0 6px}
+  p{margin:8px 0}
+  .panel{border:1px solid var(--line);background:var(--card);padding:12px 16px;margin:14px 0;border-radius:8px}
+  .panel.warn{border-left:4px solid var(--warn);background:#fdf6e3}
+  .panel.ok{border-left:4px solid var(--ok);background:#eef7f0}
+  .panel.bad{border-left:4px solid var(--flag);background:#fbf3f3}
+  .badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.78rem;font-weight:700;margin-right:6px}
+  .b-ok{background:#dff0e4;color:var(--ok)}.b-blocked{background:#f4cccc;color:#7a1f1f}
+  .b-warn{background:#fde9d9;color:var(--warn)}.b-done{background:#cfe2f3;color:#1a4e8c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.88rem}
+  caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:6px;font-size:0.95rem}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  tr:nth-child(even)td{background:#fafafa}
+  .blank{color:#999}
+  ul{margin:6px 0 6px 18px}
+  li{margin:3px 0}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .kpi .card{border:1px solid var(--line);background:var(--card);padding:12px 14px;border-radius:8px;min-width:150px}
+  .kpi .big{font-size:1.5rem;font-weight:800}
+  .kpi .small{color:var(--muted);font-size:0.85rem}
+  .src{font-size:0.8rem;color:#0056b3}
+  .two-col{display:flex;gap:16px;flex-wrap:wrap}
+  .two-col > div{flex:1;min-width:260px}
+  footer{margin-top:30px;padding-bottom:30px;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem}
+  .toc a{display:block;padding:4px 0;text-decoration:none;color:#0056b3}
+  .toc a:hover{text-decoration:underline}
+</style></head><body><div class="wrap"><header><div class="brand">Own4 <span>&#8212; NFL line-origination research</span></div><nav>
+  <a href="../index.html">Landing</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="standings.html">Official data &#8212; standings</a>
+  <a href="results-feed.html">Verified results feed</a>
+  <a href="price-snapshots.html">Price-snapshot store</a>
+  <a href="origination.html">Originated lines (side&#8594;total&#8594;ML)</a>
+  <a href="strategies.html">Strategies (pre-registered)</a>
+  <a href="leaderboard.html">Leaderboard: signal vs staking</a>
+  <a href="gates.html">Validation &amp; demotion gates</a>
+  <a href="correlations.html">Correlations (with n)</a>
+  <a href="injuries-depth.html">Injuries &amp; replacement depth</a>
+  <a href="questions.html">Questions / answers register</a>
+  <a href="suggestions.html">Suggestions review board</a>
+  <a href="flagged.html">&#9873; Flagged for review</a>
+  <a href="sources.html">Source register</a>
+  <a href="../index.html">Root dashboard &#8254;</a>
+</nav><div class="meta">Snapshot 2026-11-15 &#183; official sources only &#183; unverified values are blank and flagged</div></header>
+<h1>Originated lines &#8212; Week 11, 2026</h1>
+<p class="meta">Origination order enforced: <strong>side &#8594; total &#8594; moneyline</strong> for every game, with the model fair line, the market line and the difference published as separate columns.
+Every line here is an <strong>originated model output (v1 baseline)</strong> &#8212; not an official price, not a bet recommendation. Market columns are blank because the NFL publishes no odds (F-01).</p>
+<div class="panel warn"><strong>Assumptions (all flagged):</strong> home field = +2.0 pts to the home team (DG-A, no official source); win probability = logistic(home expected margin / 13.5) (DG-B, uncalibrated);
+fair total = league-average combined points per game (DG-C, v1 limitation). Team strength = (PF &#8722; PA) / games played from official standings.</div>
+<table><caption>Originated fair lines vs market (market blank &amp;#8212; no official price source)</caption><thead><tr><th scope="col">Game</th><th scope="col">Date</th><th scope="col">Time</th><th scope="col">Network</th><th scope="col">Seq</th><th scope="col">Model fair line (side)</th><th scope="col">Market line (side)</th><th scope="col">Diff (side)</th><th scope="col">Seq</th><th scope="col">Model fair line (total)</th><th scope="col">Market line (total)</th><th scope="col">Diff (total)</th><th scope="col">Seq</th><th scope="col">Model fair moneyline (home)</th><th scope="col">Market moneyline (home)</th><th scope="col">Diff (moneyline)</th><th scope="col">Sources</th><th scope="col">Basis</th></tr></thead><tbody><tr><td>IND at HOU</td><td>2026-11-19</td><td>8:15 PM</td><td>PRIME</td><td>1</td><td>&#8212;</td><td>-9.86</td><td>&#8212;</td><td>-9.86</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-208</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>MIA at BUF</td><td>2026-11-22</td><td>1:00 PM</td><td>CBS</td><td>1</td><td>&#8212;</td><td>-20.22</td><td>&#8212;</td><td>-20.22</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-447</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>BAL at CAR</td><td>2026-11-22</td><td>1:00 PM</td><td>FOX</td><td>1</td><td>&#8212;</td><td>-5.33</td><td>&#8212;</td><td>-5.33</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-148</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>NO at CHI</td><td>2026-11-22</td><td>1:00 PM</td><td>FOX</td><td>1</td><td>&#8212;</td><td>-12.11</td><td>&#8212;</td><td>-12.11</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-245</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>TEN at DAL</td><td>2026-11-22</td><td>1:00 PM</td><td>FOX</td><td>1</td><td>&#8212;</td><td>-11.11</td><td>&#8212;</td><td>-11.11</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-228</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>TB at DET</td><td>2026-11-22</td><td>1:00 PM</td><td>FOX</td><td>1</td><td>&#8212;</td><td>-5.78</td><td>&#8212;</td><td>-5.78</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-153</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>ARZ at KC</td><td>2026-11-22</td><td>1:00 PM</td><td>CBS</td><td>1</td><td>&#8212;</td><td>-19.56</td><td>&#8212;</td><td>-19.56</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-426</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>PIT at PHI</td><td>2026-11-22</td><td>1:00 PM</td><td>CBS</td><td>1</td><td>&#8212;</td><td>10.61</td><td>&#8212;</td><td>10.61</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>+219</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>NYJ at LAC</td><td>2026-11-22</td><td>4:05 PM</td><td>FOX</td><td>1</td><td>&#8212;</td><td>4.25</td><td>&#8212;</td><td>4.25</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>+137</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>JAX at NYG</td><td>2026-11-22</td><td>4:25 PM</td><td>CBS</td><td>1</td><td>&#8212;</td><td>11.11</td><td>&#8212;</td><td>11.11</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>+228</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>LV at DEN</td><td>2026-11-22</td><td>4:25 PM</td><td>CBS</td><td>1</td><td>&#8212;</td><td>-6.67</td><td>&#8212;</td><td>-6.67</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-164</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>MIN at SF</td><td>2026-11-22</td><td>8:20 PM</td><td>NBC</td><td>1</td><td>&#8212;</td><td>-6.32</td><td>&#8212;</td><td>-6.32</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>-160</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr><tr><td>CIN at WAS</td><td>2026-11-23</td><td>8:15 PM</td><td>ESPN</td><td>1</td><td>&#8212;</td><td>9.12</td><td>&#8212;</td><td>9.12</td><td>2</td><td>45.96</td><td>&#8212;</td><td>0.00</td><td>3</td><td>+197</td><td>&#8212;</td><td>&#8212;</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">official standings (PF/PA/W-L)&#8203;</a> <a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">NFL Week 11 Schedule 2026 (nfl.com)&#8203;</a></td><td>model v1</td></tr></tbody></table>
+<p class="small">Columns per market: sequence (1 side, 2 total, 3 moneyline), model fair line, market line (blank), difference vs market (blank). Fair moneyline shown for the home team; negative = favorite. No market prices exist, so no difference can be computed yet.</p>
+<footer><strong>Own4 &#8212; NFL line-origination research</strong>. Analytical research only, not wagering advice. Snapshot 2026-11-15;
+every data row links to the page it was read from, and every value that could not be confirmed from an official source is blank and
+listed on the <a href="flagged.html">Flagged for review</a> page.<br>
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &#183;
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8254;</a></footer></div></body></html>
