@@ -159,7 +159,7 @@
    "kind": "structure",
    "severity": "low",
    "finding": "Several namespaces in one repository answer the same brief in parallel, and at least four of them publish a decision-readiness or requirements register with different row counts and different verdicts for the same requirement.",
-   "measured": "recounted after the 2026-11-15 merge with main: 47 top-level namespaces on the branch, 29 of them nfl-*, and four separate readiness registers (nfl-readiness/, nfl-readiness-register/, nfl-verify/, and this namespace). The count is computed by engine/repo_review.py at every build, so it moves as peers land; the claim that matters is that the four registers disagree.",
+   "measured": "recounted at every build by engine/repo_review.py - the current count and the list of registers are printed on the repository-review page, so this row cannot go stale the way a typed count would. As at the 2026-11-15 merges the tree carried 48 top-level namespaces, 29 of them nfl-*, and four separate readiness registers (nfl-readiness/, nfl-readiness-register/, nfl-verify/, this namespace). What makes it a defect rather than a curiosity: the four registers disagree about the status of the same requirements.",
    "action": "pick one canonical register and one canonical dashboard (SUG-08, and nfl-core's D-1 note); until then every page in this namespace says which namespace it is talking about, and no peer number is restated as this namespace's own finding",
    "source_url": "https://github.com/sassnarep3-star/Own4/tree/main"
   },

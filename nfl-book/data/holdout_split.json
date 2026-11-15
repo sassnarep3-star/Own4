@@ -1,0 +1,41 @@
+{
+ "dataset": "nfl_book_holdout_split",
+ "title": "Train / validation / final holdout split",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Data is split into train, validation and a final holdout window to protect out-of-sample testing. Week 11 is held out prospectively.",
+ "rows": [
+  {
+   "split": "train",
+   "window": "Weeks 1–9 (136 games)",
+   "games": 136,
+   "purpose": "fit team ratings and strategy rules",
+   "status": "used",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "split": "validation",
+   "window": "Week 10 TNF (1 game, 137th)",
+   "games": 1,
+   "purpose": "walk-forward validation before Week 11 publication",
+   "status": "used",
+   "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+  },
+  {
+   "split": "holdout",
+   "window": "Week 11 (13 games)",
+   "games": 13,
+   "purpose": "final prospective holdout — lines published, results pending",
+   "status": "prospective",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "split": "note",
+   "window": "walk-forward evaluation",
+   "games": 105,
+   "purpose": "in-sample-free walk-forward backtest (leakage G3 pass)",
+   "status": "used",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

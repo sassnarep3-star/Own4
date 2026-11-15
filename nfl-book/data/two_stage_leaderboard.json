@@ -1,0 +1,133 @@
+{
+ "dataset": "nfl_book_two_stage_leaderboard",
+ "title": "Two-Stage Skill Leaderboard: proper-score qualification -> prospective CLV/ROI escrow",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Stage 1 ranks by proper-score skill (Brier, squared skill gap, CI, cluster lower bound, multiplicity adjustment). Stage 2 holds prospective CLV/ROI in escrow until verified prices exist. Divisions: singles, game parlay, same-game parlay, prop combo.",
+ "model_brier": 0.2437,
+ "n_forecasts": 105,
+ "n_weeks": 8,
+ "stage1": [
+  {
+   "id": "TS1-S1",
+   "strategy": "S1",
+   "division": "singles",
+   "brier_score": 0.2437,
+   "accuracy": 0.6731,
+   "n": 104,
+   "ci95": [
+    0.5829,
+    0.7632
+   ],
+   "squared_skill_gap": 0.03,
+   "game_cluster_lb": "cluster-robust lower bound pending (games within a week are correlated); naive CI published above",
+   "multiplicity_adj": "Bonferroni over 8 trial-blocks applied to gate p",
+   "qualification": "qualified",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "TS1-S2",
+   "strategy": "S2",
+   "division": "singles",
+   "brier_score": 0.2437,
+   "accuracy": 0.4571,
+   "n": 105,
+   "ci95": [
+    0.3619,
+    0.5524
+   ],
+   "squared_skill_gap": 0.0018,
+   "game_cluster_lb": "cluster-robust lower bound pending (games within a week are correlated); naive CI published above",
+   "multiplicity_adj": "Bonferroni over 8 trial-blocks applied to gate p",
+   "qualification": "not qualified",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "TS1-S3",
+   "strategy": "S3",
+   "division": "singles",
+   "brier_score": 0.2437,
+   "accuracy": 0.3269,
+   "n": 104,
+   "ci95": [
+    0.2368,
+    0.4171
+   ],
+   "squared_skill_gap": 0.03,
+   "game_cluster_lb": "cluster-robust lower bound pending (games within a week are correlated); naive CI published above",
+   "multiplicity_adj": "Bonferroni over 8 trial-blocks applied to gate p",
+   "qualification": "qualified",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "TS1-S4",
+   "strategy": "S4",
+   "division": "game_parlay",
+   "brier_score": null,
+   "accuracy": null,
+   "n": 7,
+   "ci95": null,
+   "squared_skill_gap": null,
+   "game_cluster_lb": "cluster-robust lower bound pending (games within a week are correlated); naive CI published above",
+   "multiplicity_adj": "Bonferroni over 8 trial-blocks applied to gate p",
+   "qualification": "not qualified",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "TS1-S5",
+   "strategy": "S5",
+   "division": "prop_combo",
+   "brier_score": null,
+   "accuracy": null,
+   "n": null,
+   "ci95": null,
+   "squared_skill_gap": null,
+   "game_cluster_lb": "cluster-robust lower bound pending (games within a week are correlated); naive CI published above",
+   "multiplicity_adj": "Bonferroni over 8 trial-blocks applied to gate p",
+   "qualification": "not qualified",
+   "source_url": "https://www.nfl.com/"
+  }
+ ],
+ "stage2": [
+  {
+   "strategy": "S1",
+   "division": "singles",
+   "prospective_clv": null,
+   "prospective_roi": null,
+   "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "strategy": "S2",
+   "division": "singles",
+   "prospective_clv": null,
+   "prospective_roi": null,
+   "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "strategy": "S3",
+   "division": "singles",
+   "prospective_clv": null,
+   "prospective_roi": null,
+   "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "strategy": "S4",
+   "division": "game_parlay",
+   "prospective_clv": null,
+   "prospective_roi": null,
+   "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "strategy": "S5",
+   "division": "prop_combo",
+   "prospective_clv": null,
+   "prospective_roi": null,
+   "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

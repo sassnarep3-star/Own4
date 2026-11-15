@@ -1,0 +1,15 @@
+{
+  "generated_utc": "2026-11-15T00:00:00Z",
+  "purpose": "Price-snapshot store: opening and closing numbers for every market we originate (side, total, moneyline), one row per market per game, open snapshot at origination and close snapshot at settlement.",
+  "schema": ["game_id","market","sequence","snapshot_kind","captured_at","model_fair_line","market_open","market_close","diff_vs_open","diff_vs_close","source","verified"],
+  "sequence_rule": "Origination order per market: (1) side/spread, (2) total, (3) moneyline. Each market is priced in that order before the next is opened.",
+  "coverage": "Week 11: 13 games x 3 markets = 39 snapshot rows planned. Week 10: 14 games x 3 markets = 42 planned, 1 settled (WAS@NYG), remainder live/upcoming at snapshot time.",
+  "official_price_source": "none",
+  "finding": "The NFL publishes no betting lines, odds or prices anywhere on nfl.com or operations.nfl.com (re-checked 2026-11-15). Every market_open / market_close cell is therefore blank and flagged, never invented. model_fair_line and diff columns are originated model outputs, labeled as such, and are not prices you can bet at.",
+  "rows": [],
+  "flags": [
+    "MK-01 No official price source exists: all market open/close cells blank by policy.",
+    "MK-02 13 of 14 Week 10 games had no closing number at snapshot time because they had not been played; close is populated only at settlement.",
+    "MK-03 Market lines are third-party where shown elsewhere in this repo; this namespace publishes no third-party prices at all."
+  ]
+}

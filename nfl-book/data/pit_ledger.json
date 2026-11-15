@@ -1,0 +1,81 @@
+{
+ "dataset": "nfl_book_pit_ledger",
+ "title": "Point-in-Time Snapshot Ledger: timestamped, hash-sealed captures",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Each captured dataset is sealed with its sha256 and a capture timestamp so backtests can replay data exactly as it was known. Prevents lookahead leakage in originated lines.",
+ "entries": [
+  {
+   "dataset": "results_feed.json",
+   "label": "verified results feed",
+   "expected_rows": 137,
+   "captured_utc": "2026-11-15",
+   "sha256": "c00838cc68a195171f553f7fd157a1e59ba0cbdeb2c67d10ea704b10f7d482ce",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "standings_2026-11-14.json",
+   "label": "official standings",
+   "expected_rows": 32,
+   "captured_utc": "2026-11-15",
+   "sha256": "96c8579ba730ddd23872b12c907b73afdf07d40c2a35004c782ca0cd3e57f31f",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "slate_week11_2026.json",
+   "label": "Week 11 schedule",
+   "expected_rows": 13,
+   "captured_utc": "2026-11-15",
+   "sha256": "5aba52d535abfb1f9c0c07f749e0e7cc413203947775a54c6d60c5adc0b254cc",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "injuries_week10_capture.json",
+   "label": "Week 10 injury report",
+   "expected_rows": 107,
+   "captured_utc": "2026-11-15",
+   "sha256": "b2bedbf9febe571f38bf540d3d9cc3f6f78a48ed00a366d12737d8529ebd8be9",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "depth_replacements.json",
+   "label": "replacement depth",
+   "expected_rows": 3,
+   "captured_utc": "2026-11-15",
+   "sha256": "23f579db45f5fb390b56af45b7bd1e7ddce68bc9ea30a13669b58e9b376c55c6",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "own_lines_close.json",
+   "label": "originated lines (close)",
+   "expected_rows": 13,
+   "captured_utc": "2026-11-15",
+   "sha256": "eb9c3b15278653da5156fdc54b4128646c4c6de7faebd4674718a7c6dd6ea719",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "price_snapshots.json",
+   "label": "price snapshots",
+   "expected_rows": 39,
+   "captured_utc": "2026-11-15",
+   "sha256": "d7285bc7e4f90b4d660b628eab60cd5d851cc8b848e98e27af09d7fd9ace79aa",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "dataset": "model_card.json",
+   "label": "team ratings",
+   "expected_rows": 32,
+   "captured_utc": "2026-11-15",
+   "sha256": "e4cbbafbbda19c4de1d95ba8661b890121034cc8852b2a801385887770b2c0e7",
+   "replay_status": "replay-ready (immutable hash retained)",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

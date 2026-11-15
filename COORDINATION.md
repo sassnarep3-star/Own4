@@ -3177,6 +3177,29 @@ re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
 
 ---
 
+## Session `arena/5253d26f-own4` — NFL line-origination namespace `nfl-dashboard/` (claim, 2026-11-15 UTC)
+
+Session ID: `arena/5253d26f-own4` · Branch: `arena/5253d26f-own4` (platform-pinned) · Base: `3e74fd34` (main, after PR #107).
+
+**Claimed scope:** `nfl-dashboard/**` (unchallenged — no prior session uses this namespace) + append-only `COORDINATION.md`. No peer files edited; `nfl-dashboard/` is fully additive.
+
+**Survey at claim time:** 17+ NFL namespaces already exist on `main`; none is `nfl-dashboard/`. This build is the Week 10/Week 11 2026 snapshot: official nfl.com standings (32 teams, ΣPF=ΣPA=6,664 identity verified by build), Week 10 results (9 finals, 2 live Q3, 1 halftime, 2 upcoming), Week 11 schedule (13 games, 6 byes), Week 10 injury report with team-attribution misflags per row, originated Week 11 fair lines (side→total→moneyline, model outputs labeled), 7 pre-registered strategies (0 qualify, 0 reward points), gates G1–G10 + DG-1 (0 live, 0 demoted), correlations CR-01..03 with n from official inputs (CR-04 reported, CR-05/06 blank n=0), depth blank by policy (no official depth source), 15 questions, 10 suggestions (all pending), 10 flags, 6 official sources. Headline finding: the NFL publishes no betting lines/odds/prices — all market price cells blank by policy; leaderboard is a rejection machine by design.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Official-source data capture (nfl.com standings, schedules, injuries; 14 data files) | done | arena/5253d26f-own4 | `nfl-dashboard/data/*.json` |
+| N2 | Deterministic static site generator `build.py` (stdlib only; 15 pages; idempotent rebuild) | done | arena/5253d26f-own4 | `nfl-dashboard/build.py`, `nfl-dashboard/pages/*.html` |
+| N3 | Row-source verifier `verify.py` (every data row https source-linked, links resolve, ΣPF=ΣPA identity, no placeholders) | done | arena/5253d26f-own4 | `nfl-dashboard/verify.py` — PASS, 0 errors, 15 pages |
+| N4 | PR to main → merge → GitHub Pages deploy confirmation → record here | done | arena/5253d26f-own4 | `COORDINATION.md` (this section), PR #117 |
+
+**Standing scope rules for this session:** peer namespaces are read-only; `COORDINATION.md` is append-only; all `nfl-dashboard/` content is additive. Live URL: https://sassnarep3-star.github.io/Own4/nfl-dashboard/
+
+**PR link and merge result:** PR #117 — https://github.com/sassnarep3-star/Own4/pull/117 → merge commit `3df3dae9f40703f022effbd95536824fcd3398ff` on `main`. Method: `--merge`, no approval requested, per standing instruction. Pre-merge CI: 8/8 pass (`validate` ×2, `Rebuild and verify`, `audit`, `verify` ×4 — all SUCCESS on head `b00c3a2`). GitHub Pages: status `built` for merge commit `3df3dae`; live-confirmed by fetch — https://sassnarep3-star.github.io/Own4/nfl-dashboard/ renders the landing page, all category subpages, row-level source links, and ΣPF = ΣPA = 6,664 identity; relative links resolve across root and pages/ locations.
+
+---
+
+---
+
 ## Session `arena/9f6a7ca8-own4` — Decision-readiness & independent re-verification (claim, 2026-11-15 UTC)
 
 Session ID: `arena/9f6a7ca8-own4` · Branch: `arena/9f6a7ca8-own4` (platform-pinned; the requested `session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
@@ -3198,6 +3221,7 @@ Session ID: `arena/9f6a7ca8-own4` · Branch: `arena/9f6a7ca8-own4` (platform-pin
 **Scope rules honoured:** no peer namespace is edited. `COORDINATION.md` is append-only. `index.html` and `verified/*.html` are regenerated from the generator, never hand-edited, and the NAV entry added is additive (every prior href preserved). Peer datasets are read only as *claims to check*, never as evidence; every published value below is taken from an official nfl.com page fetched this session, with its URL and capture clock time.
 
 **No conflicts at claim time:** open PR #93 (`arena/582300df-own4`) touches `COORDINATION.md` and `index.html`; its namespace (`nfl-command-center/`, not yet on main) is out of scope here, and any board/nav collision will be resolved union-style at integration, preserving both.
+
 ## Session `arena/63ebae0e-own4` — NFL Requirements Register & Decision-Readiness Dashboard (claim, 2026-11-15 UTC)
 
 Session ID: `63ebae0e` · Branch: `arena/63ebae0e-own4` (platform-pinned single branch; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
@@ -3632,6 +3656,27 @@ governance register claimed "16 pages generated" while the site publishes 14. Bo
 **derived** (`VENUE_READ` from `fixtures.json`, `PAGE_COUNT` from the page list in `site.py`) rather
 than literals, so the narrative and the data cannot disagree again. Shipped as PR **#116**.
 
+## Session `arena/20f55d17-own4` — NFL requirements gap-closure (claim, 2026-11-15 UTC)
+
+**Session ID for this session:** `arena/20f55d17-own4`
+**Branch:** `arena/20f55d17-own4` (fixed for this session; pinned to `3e74fd3`, equal to `origin/main` at claim time).
+**Scope:** additive only inside `nfl-book/**` (new data files under `nfl-book/data/`, new engine script `nfl-book/engine/expand.py`, expanded rendering in `nfl-book/engine/build_site.py`, new pages under `nfl-book/pages/`, landing-page decision-readiness table, workflow step in `.github/workflows/nfl-book.yml`). No peer namespace is edited. `COORDINATION.md` is append-only.
+
+| ID | Task | Status | Owner | Files touched |
+|----|------|--------|-------|---------------|
+| G1 | Expand requirements traceability to full brief coverage (~69 rows: status, evidence, blocking gate, clearing number) | claimed | arena/20f55d17-own4 | `nfl-book/data/requirements.json`, `nfl-book/engine/expand.py` |
+| G2 | Decision-readiness table on landing page (one row per requirement, gate + clearing number) | claimed | arena/20f55d17-own4 | `nfl-book/index.html`, `nfl-book/engine/build_site.py` |
+| G3 | Removal-of-luck panel + model outputs as probability+inputs | claimed | arena/20f55d17-own4 | `nfl-book/data/{removal_of_luck,model_outputs}.json`, new pages |
+| G4 | Per-team view, availability graph, depth register, announced starters, matchup matrix | claimed | arena/20f55d17-own4 | `nfl-book/data/{per_team_view,availability_graph,depth_register,matchup_matrix}.json` |
+| G5 | PIT snapshot ledger, fixture-context, venues, roster sweep, holdout split | claimed | arena/20f55d17-own4 | `nfl-book/data/{pit_ledger,fixture_context,venues,roster_sweep,holdout_split}.json` |
+| G6 | Two-stage skill leaderboard, control baseline, vig-free decomposition, joint-evidence | claimed | arena/20f55d17-own4 | `nfl-book/data/{two_stage_leaderboard,control_baseline,vig_free_decomposition,joint_evidence}.json` |
+| G7 | Ablations, weekly diff, questionable calibration, injury surprise, drift alarms | claimed | arena/20f55d17-own4 | `nfl-book/data/{ablations,weekly_diff,questionable_calibration,injury_surprise,drift_alarms}.json` |
+| G8 | "What would change our mind" field on every strategy; final integration: rebuild, verify, PR→main→merge→Pages | claimed | arena/20f55d17-own4 | `nfl-book/data/strategies.json`, `nfl-book/engine/build_site.py`, `.github/workflows/nfl-book.yml`, this file |
+
+**Claim note:** prior session `arena/c8969a10-own4` completed B1–B12 and merged (PR #107, commit `3e74fd3`). This session does NOT redo or overwrite that work; it closes the remaining gap between the full brief requirement list and the site's coverage, additively, with every unverifiable value left blank + flagged (no hallucinations).
+
+---
+
 ---
 
 ## Session `arena/d941f3c1-own4` — Decision-Readiness Desk + full 32-team official availability capture (CLAIM, 2026-11-15T23:3xZ)
@@ -3774,3 +3819,23 @@ Post-merge recount: 47 namespaces on the branch, 29 `nfl-*`, four of them readin
 **Next owner actions, in order:** answer DEC-P1 (SUG-01) → approve the scheduled collector (SUG-02 A)
 → approve the game-book parser (SUG-03 A). D1–D12 need nothing further from this session; the PR link
 and merge result are recorded below once opened.
+
+**Second merge with `main`, and a CI failure this session had to fix (logged as required).** After PR
+#120 opened, `main` advanced 10 more commits (PRs #114, #118, #117: `nfl-book` gap-closure rebuild, a new
+`nfl-dashboard` namespace, a Python-version pin in `nfl-book`'s workflow). Two checks on the PR then failed,
+both at their final step, `Determinism gate (rebuild must not change committed output)`:
+mine (`nfl-availability-desk verify`) and `nfl-verify verify`. Root cause, stated precisely because the
+symptom looks like a code bug and is not: GitHub builds a PR from an **auto-merge** of the branch into the
+current `main`, so the shared NAV gained another session's entries while my committed `index.html` /
+`verified/*.html` were generated before those entries existed — a rebuild in CI therefore differed from what
+I had committed. Both workflows were failing for the same reason; neither tree was wrong.
+
+Fix, in order: `git merge origin/main` (one conflict, `COORDINATION.md`, resolved as an append-only union —
+`arena/20f55d17-own4`'s new 18-line claim block kept verbatim, this session's 142 lines placed after it);
+`verification/build.py` merged cleanly, so no session's navigation entry was lost; then **regenerated**
+`index.html` + `verified/*.html` from the merged generator and re-ran this namespace's engines, which
+recounted the tree (now 48 namespaces, 29 `nfl-*`) and rebuilt the 12 pages; then re-ran both verifiers
+(`nfl-availability-desk/engine/verify_site.py` → PASS, `verification/verify_site.py` → all checks passed) and
+the local determinism gate (`git diff --exit-code` after a rebuild → clean) before pushing.
+`RF-17` was rewritten so the namespace count is *computed at build time* rather than typed into a flag, which
+is the general lesson: a count in prose goes stale the moment another namespace merges.

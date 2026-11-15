@@ -1,0 +1,39 @@
+{
+ "dataset": "nfl_book_ablations",
+ "title": "Injury/depth ablations instead of fixed penalties",
+ "built_utc": "2026-11-15",
+ "session": "arena/20f55d17-own4",
+ "method": "Identical models are compared with and without the personnel features, reporting the difference with uncertainty. No fixed point penalty is subtracted. Runs require the availability features, which are not yet sourced (FB-11/FB-07), so deltas are blank + flagged.",
+ "rows": [
+  {
+   "id": "AB-01",
+   "ablation": "team-strength model with vs without availability features",
+   "with_features": "ratings + injury/depth availability features",
+   "without_features": "ratings only (current model)",
+   "delta": null,
+   "uncertainty": null,
+   "status": "not run — availability/personnel features unavailable (FB-11); delta and CI left blank, never estimated",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "AB-02",
+   "ablation": "injury-designation ablation (Out vs full availability)",
+   "with_features": "game-status designations as features",
+   "without_features": "designations withheld",
+   "delta": null,
+   "uncertainty": null,
+   "status": "not run — designation reliability not yet scored (R52); blank",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "AB-03",
+   "ablation": "depth-replacement ablation (starter vs backup at slot)",
+   "with_features": "replacement-depth indicators",
+   "without_features": "depth withheld",
+   "delta": null,
+   "uncertainty": null,
+   "status": "not run — no official depth source (FB-07); blank",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

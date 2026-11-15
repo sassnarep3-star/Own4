@@ -1,0 +1,72 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations</title>
+<style>
+  :root{--ink:#1a1a1a;--muted:#555;--line:#ddd;--bg:#fff;--card:#f7f7f7;--flag:#7a1f1f;--ok:#1e6b3a;--warn:#8a6d00;}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:1.25rem;font-weight:700;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--muted);font-weight:400;font-size:0.85rem}
+  nav a{text-decoration:none;color:#0056b3;margin-right:14px;font-size:0.9rem}
+  nav a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:0.85rem;margin-top:4px}
+  h1{font-size:1.5rem;margin:24px 0 6px}
+  h2{font-size:1.15rem;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  h3{font-size:1rem;margin:20px 0 6px}
+  p{margin:8px 0}
+  .panel{border:1px solid var(--line);background:var(--card);padding:12px 16px;margin:14px 0;border-radius:8px}
+  .panel.warn{border-left:4px solid var(--warn);background:#fdf6e3}
+  .panel.ok{border-left:4px solid var(--ok);background:#eef7f0}
+  .panel.bad{border-left:4px solid var(--flag);background:#fbf3f3}
+  .badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.78rem;font-weight:700;margin-right:6px}
+  .b-ok{background:#dff0e4;color:var(--ok)}.b-blocked{background:#f4cccc;color:#7a1f1f}
+  .b-warn{background:#fde9d9;color:var(--warn)}.b-done{background:#cfe2f3;color:#1a4e8c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.88rem}
+  caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:6px;font-size:0.95rem}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  tr:nth-child(even)td{background:#fafafa}
+  .blank{color:#999}
+  ul{margin:6px 0 6px 18px}
+  li{margin:3px 0}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .kpi .card{border:1px solid var(--line);background:var(--card);padding:12px 14px;border-radius:8px;min-width:150px}
+  .kpi .big{font-size:1.5rem;font-weight:800}
+  .kpi .small{color:var(--muted);font-size:0.85rem}
+  .src{font-size:0.8rem;color:#0056b3}
+  .two-col{display:flex;gap:16px;flex-wrap:wrap}
+  .two-col > div{flex:1;min-width:260px}
+  footer{margin-top:30px;padding-bottom:30px;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem}
+  .toc a{display:block;padding:4px 0;text-decoration:none;color:#0056b3}
+  .toc a:hover{text-decoration:underline}
+</style></head><body><div class="wrap"><header><div class="brand">Own4 <span>&#8212; NFL line-origination research</span></div><nav>
+  <a href="../index.html">Landing</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="standings.html">Official data &#8212; standings</a>
+  <a href="results-feed.html">Verified results feed</a>
+  <a href="price-snapshots.html">Price-snapshot store</a>
+  <a href="origination.html">Originated lines (side&#8594;total&#8594;ML)</a>
+  <a href="strategies.html">Strategies (pre-registered)</a>
+  <a href="leaderboard.html">Leaderboard: signal vs staking</a>
+  <a href="gates.html">Validation &amp; demotion gates</a>
+  <a href="correlations.html">Correlations (with n)</a>
+  <a href="injuries-depth.html">Injuries &amp; replacement depth</a>
+  <a href="questions.html">Questions / answers register</a>
+  <a href="suggestions.html">Suggestions review board</a>
+  <a href="flagged.html">&#9873; Flagged for review</a>
+  <a href="sources.html">Source register</a>
+  <a href="../index.html">Root dashboard &#8254;</a>
+</nav><div class="meta">Snapshot 2026-11-15 &#183; official sources only &#183; unverified values are blank and flagged</div></header>
+<h1>Correlations &#8212; official inputs only, n published</h1>
+<p class="meta">Correlations are computed only from officially sourced numbers, and every value is published with its n. No third-party line, price or player-prop input is used.
+Descriptive statistics of the historical record &#8212; not a betting edge. p-values use a Fisher-z normal approximation and are labeled as such.</p>
+<table><caption>Correlation register</caption><thead><tr><th scope="col">ID</th><th scope="col">Pair</th><th scope="col">r</th><th scope="col">95% CI</th><th scope="col">p (approx.)</th><th scope="col">n</th><th scope="col">Method</th><th scope="col">Inputs (official)</th><th scope="col">Status</th></tr></thead><tbody><tr><td>CR-01</td><td>Point differential vs win percentage, all 32 teams</td><td>0.88</td><td>0.768 to 0.941</td><td>0.0000</td><td>32</td><td>Pearson r on official (PF-PA) vs W/(W+L+T)</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings&#8203;</a></td><td>computed by build.py</td></tr><tr><td>CR-02</td><td>Home win percentage vs season win percentage, all 32 teams</td><td>0.89</td><td>0.776 to 0.943</td><td>0.0000</td><td>32</td><td>Pearson r on official home win% vs season win%</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings&#8203;</a></td><td>computed by build.py</td></tr><tr><td>CR-03</td><td>Home win rate, Week 10 decided games</td><td>0.33</td><td>n=9 small sample</td><td>not computed (n=9)</td><td>9</td><td>share of home wins among Week 10 finals</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/week11.json" target="_blank" rel="noopener">week11.json (S2)&#8203;</a></td><td>computed by build.py</td></tr><tr><td>CR-04</td><td>Cross-game leg dependence (moneyline sides, different games)</td><td>-0.007</td><td>reported, not recomputed</td><td>&#8212;</td><td>week-slates</td><td>reported from peer-verified data; prices are third-party</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json (MK-01)&#8203;</a></td><td>reported, not recomputed</td></tr><tr><td>CR-05</td><td>Same-game prop-pair dependence</td><td>&#8212;</td><td>&#8212;</td><td>&#8212;</td><td>0</td><td>refused: no official prop prices or per-game prop outcomes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json (blank by rule)&#8203;</a></td><td>blank by rule (n=0)</td></tr><tr><td>CR-06</td><td>Injury designation vs play rate</td><td>&#8212;</td><td>&#8212;</td><td>&#8212;</td><td>0</td><td>refused: needs multiple seasons of designations joined to official inactives</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json (blank by rule)&#8203;</a></td><td>blank by rule (n=0)</td></tr></tbody></table>
+<p class="small">Derived totals from the official standings: &Sigma;PF = 6664, &Sigma;PA = 6664 (identity holds), 145 games played through Week 10, league-average combined points per game = 45.96 (per team per game = 22.98).</p>
+<div class="panel ok"><strong>Rule honored:</strong> every correlation row above lists n; CR-04 is reported rather than recomputed because its underlying prices are third-party (flagged MK-01); CR-05 and CR-06 are blank because the required official inputs do not exist (n=0).</div>
+<footer><strong>Own4 &#8212; NFL line-origination research</strong>. Analytical research only, not wagering advice. Snapshot 2026-11-15;
+every data row links to the page it was read from, and every value that could not be confirmed from an official source is blank and
+listed on the <a href="flagged.html">Flagged for review</a> page.<br>
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &#183;
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8254;</a></footer></div></body></html>

@@ -1,0 +1,14 @@
+{
+  "generated_utc": "2026-11-15T00:00:00Z",
+  "rule": "Correlations are computed only from officially sourced numbers, and every value is published with its n. No third-party line, price, or player-prop input is used. Correlations describe the historical record; they are not a betting edge.",
+  "columns": ["id","pair","r","r_ci_95","p_value","n","method","inputs_official","status"],
+  "rows": [
+    {"id":"CR-01","pair":"point differential vs win percentage, all 32 teams","r":null,"r_ci_95":null,"p_value":null,"n":32,"method":"Pearson r on official standings (PF-PA) vs W/(W+L+T)","inputs_official":"https://www.nfl.com/standings/ (read 2026-11-15)","status":"computed by build.py"},
+    {"id":"CR-02","pair":"home win rate vs season win percentage, all 32 teams","r":null,"r_ci_95":null,"p_value":null,"n":32,"method":"Pearson r on official home win% (HOME) vs season win% (PCT)","inputs_official":"https://www.nfl.com/standings/ (read 2026-11-15)","status":"computed by build.py"},
+    {"id":"CR-03","pair":"home win rate, Week 10 decided games","r":null,"r_ci_95":null,"p_value":null,"n":9,"method":"Share of home wins among Week 10 games with a final score","inputs_official":"https://www.nfl.com/schedules/2026/by-week/week-10 (read 2026-11-15)","status":"computed by build.py"},
+    {"id":"CR-04","pair":"cross-game leg dependence (moneyline sides, different games)","r":-0.007,"r_ci_95":"not recomputed here","p_value":null,"n":"week-slates","method":"reported from peer-verified data (nfl-command/nfl-lines), not recomputed in this namespace","inputs_official":"derivation only; underlying prices are third-party","status":"reported, not recomputed — see Flagged MK-01"},
+    {"id":"CR-05","pair":"same-game prop-pair dependence","r":null,"r_ci_95":null,"p_value":null,"n":0,"method":"refused: no official prop prices or per-game prop outcomes exist","inputs_official":"none — the NFL publishes no prop prices","status":"blank by rule (n=0)"},
+    {"id":"CR-06","pair":"injury designation vs play rate","r":null,"r_ci_95":null,"p_value":null,"n":0,"method":"refused: requires multiple seasons of designations joined to official inactive lists; no archived injury snapshots exist","inputs_official":"none","status":"blank by rule (n=0)"}
+  ],
+  "note": "CR-01, CR-02 and CR-03 are computed by build.py from the official standings and Week 10 schedule; their r, CI and p appear on the Correlations page with n. All other rows are blank by rule because the required official inputs do not exist."
+}
