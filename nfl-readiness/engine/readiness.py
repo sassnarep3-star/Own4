@@ -12,6 +12,18 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(os.path.dirname(HERE), "data")
+REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
+
+
+def count_nfl_namespaces():
+    """Count nfl-* directories at the repository root.
+
+    Computed, never typed: an earlier draft hardcoded 19 here and it was already
+    wrong by the time the page rendered, which is precisely the staleness defect
+    this site flags in other people's work.
+    """
+    return sum(1 for d in os.listdir(REPO_ROOT)
+               if d.startswith("nfl") and os.path.isdir(os.path.join(REPO_ROOT, d)))
 OB = "https://github.com/sassnarep3-star/Own4/blob/main/"
 NFL = "https://www.nfl.com/"
 
@@ -25,6 +37,7 @@ CHK = {c["id"]: c for c in D["peer_checks"]}
 IC = {c["id"]: c for c in D["internal_consistency"]}
 
 M = {
+    "n_nfl_namespaces": count_nfl_namespaces(),
     "n_week10_report_rows": INJ["n_rows"],
     "n_week10_report_sections": INJ["n_sections"],
     "n_week10_report_clubs": INJ["n_teams_captured"],
@@ -232,7 +245,7 @@ row("D07", "Add a drift alarm to every scraper (pin row counts and required fiel
 
 row("D08", "Split the site into a public analysis layer and a private data layer",
     "not_started", "Needs a terms-of-use read on the official sources before any row-level republication",
-    "0 pages currently separate derived analysis from row-level official data; all 26 namespaces republish row-level values",
+    f"0 pages currently separate derived analysis from row-level official data; all {M['n_nfl_namespaces']} nfl* trees republish row-level values",
     "Owner decision on what may be republished. This is a legal question, not an engineering one.",
     "This site's own availability page publishes 347 row-level official rows", NFL + "injuries/", "D. Gates and governance")
 
@@ -319,7 +332,7 @@ row("E09", "Capture the reserve list so 'not listed' never means 'available'",
 
 row("E10", "Run the 32-team roster/IR sweep before any team-level model is trusted",
     "blocked", "No official roster/IR endpoint ingested for all 32 clubs",
-    "32/32 clubs needed; 0 swept. This session confirms 28 of 32 clubs appear in the Week 10 report (the other 4 were on bye)",
+    f"32/32 clubs needed; 0 swept. This session confirms {M['n_week10_report_clubs']} of 32 clubs appear in the Week 10 report (the other 4 were on bye)",
     "One pass over 32 club roster pages plus the league transactions feed, dated and hashed.",
     "Week 10 report covers 28 clubs and Week 11 byes are 6, so coverage arithmetic alone proves a sweep is needed",
     NFL + "injuries/", "E. Availability, injury and depth")
@@ -477,7 +490,7 @@ row("F11", "Start with a singles-only shadow baseline (pre-register, freeze, rec
 # ---- G. site and process --------------------------------------------------
 row("G01", "Create a GitHub Pages live site with a clean landing page and subpages organised by category",
     "met", "None — the gate is that the build passes in CI and Pages deploys",
-    "26 NFL namespaces plus 5 other site trees already deploy from main; this session adds decision-readiness pages",
+    f"{M['n_nfl_namespaces']} nfl* site trees deploy from main once this branch merges; this one adds the decision-readiness pages",
     "Nothing. The open question is which namespace is canonical (G03).",
     "Root dashboard and docs/ are live", "https://sassnarep3-star.github.io/Own4/", "G. Site and process")
 
@@ -489,20 +502,22 @@ row("G02", "Every table row must have a source link to an official site; if a va
 
 row("G03", "Pick one canonical NFL dashboard among the namespaces",
     "not_started", "This is purely a decision; nothing technical blocks it",
-    "19 NFL-focused site trees on main; 1 canonical target required",
-    "Answer Q10. Until then every new session adds a 20th namespace, which is the actual cost.",
+    f"{M['n_nfl_namespaces']} nfl* site trees on main, including this one; 1 canonical target required",
+    f"Answer Q10. Until then every new session adds a {M['n_nfl_namespaces'] + 1}th namespace, which is the actual cost.",
     "Counted this session from the filesystem",
     OB + "verification/build.py", "G. Site and process")
 
 row("G04", "Add a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
     "met", "None — this session's deliverable",
-    f"{len(R)} requirement rows, each with state, blocking gate, clearing number and the asks",
+    "PLACEHOLDER_ROW_COUNT",  # filled in main() once every row exists
     "Review the 5 decision rows marked 'ask'. Those are the only ones that need the owner.",
     "nfl-readiness/pages/decision-readiness.html", OB + "nfl-readiness/", "G. Site and process")
 
 row("G05", "Run the 32-team roster sweep / drift alarms / review repo line by line and flag irregularities",
     "partial", "No sweep; independent re-verification done for the highest-value surfaces",
-    f"{M['n_peer_checks_passed']} peer claims pass, {M['n_peer_checks_partial']} partial, {M['n_peer_checks_failed']} fail under independent re-read",
+    "%d peer claim%s passed, %d came back partial, %d failed under independent re-read"
+    % (M["n_peer_checks_passed"], "" if M["n_peer_checks_passed"] == 1 else "s",
+       M["n_peer_checks_partial"], M["n_peer_checks_failed"]),
     "See the verification page for each check and its official source.",
     "nfl-readiness/data/derived.json peer_checks", OB + "nfl-readiness/", "G. Site and process")
 
@@ -538,7 +553,7 @@ row("G10", "Create an executive summary outlining important details",
 
 row("G11", "No manual input; verify everything from official sources, no hallucinations",
     "partial", "Verification is complete only for the surfaces re-read this session",
-    "5 official page groups re-read line by line this session; 26 namespaces of prior work remain un-reread by this session",
+    f"7 official page groups re-read in full this session; prior work across {M['n_nfl_namespaces'] - 1} peer nfl* trees remains un-reread by this session",
     "Scope note, not a defect. Every number this session publishes traces to a page it fetched.",
     "data/observations.json sources[]", OB + "nfl-readiness/data/observations.json", "G. Site and process")
 
@@ -575,6 +590,12 @@ def main():
     order = ["met", "partial", "blocked", "not_started"]
     counts = {k: sum(1 for r in R if r["state"] == k) for k in order}
     assert sum(counts.values()) == len(R), "every row must have a state"
+
+    # resolve the self-referential row now that every row exists
+    for r in R:
+        if r["clearing_number"] == "PLACEHOLDER_ROW_COUNT":
+            r["clearing_number"] = (f"{len(R)} requirement rows (this row included), each with state, "
+                                    "blocking gate, clearing number and the ask")
 
     for r in R:
         assert r["source_url"].startswith("https://"), r["id"]

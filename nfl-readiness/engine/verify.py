@@ -258,6 +258,22 @@ def check_data():
         if r["state"] not in ("met", "partial", "blocked", "not_started"):
             errors.append(f"readiness {r['id']}: bad state {r['state']}")
 
+    # --- no hand-typed repo counts -----------------------------------------
+    # The namespace count appears in several readiness rows. It must match reality,
+    # which is exactly the staleness defect this site flags in peer work.
+    repo = os.path.dirname(os.path.dirname(HERE))
+    actual_ns = sum(1 for d in os.listdir(repo)
+                    if d.startswith("nfl") and os.path.isdir(os.path.join(repo, d)))
+    declared = ready["measurements_used"]["n_nfl_namespaces"]
+    if declared != actual_ns:
+        errors.append(f"readiness: declares {declared} nfl* trees, repository has {actual_ns}")
+    for r in rows:
+        for field in ("clearing_number", "ask", "blocking_gate"):
+            m = re.search(r"\b(\d+) nfl\* ", r[field])
+            if m and int(m.group(1)) not in (actual_ns, actual_ns + 1):
+                errors.append(f"readiness {r['id']}: stale namespace count {m.group(1)} "
+                              f"in {field} (actual {actual_ns})")
+
     # --- registers ---------------------------------------------------------
     if any(not r["answer"].startswith("§blank§") for r in q["rows"]):
         errors.append("questions: an answer is filled without evidence; only blanks are permitted")
