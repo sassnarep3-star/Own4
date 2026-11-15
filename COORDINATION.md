@@ -3190,11 +3190,11 @@ Session ID: `arena/5253d26f-own4` · Branch: `arena/5253d26f-own4` (platform-pin
 | N1 | Official-source data capture (nfl.com standings, schedules, injuries; 14 data files) | done | arena/5253d26f-own4 | `nfl-dashboard/data/*.json` |
 | N2 | Deterministic static site generator `build.py` (stdlib only; 15 pages; idempotent rebuild) | done | arena/5253d26f-own4 | `nfl-dashboard/build.py`, `nfl-dashboard/pages/*.html` |
 | N3 | Row-source verifier `verify.py` (every data row https source-linked, links resolve, ΣPF=ΣPA identity, no placeholders) | done | arena/5253d26f-own4 | `nfl-dashboard/verify.py` — PASS, 0 errors, 15 pages |
-| N4 | PR to main → merge → GitHub Pages deploy confirmation → record here | in progress | arena/5253d26f-own4 | `COORDINATION.md` (this section), PR record below |
+| N4 | PR to main → merge → GitHub Pages deploy confirmation → record here | done | arena/5253d26f-own4 | `COORDINATION.md` (this section), PR #117 |
 
-**Standing scope rules for this session:** peer namespaces are read-only; `COORDINATION.md` is append-only; all `nfl-dashboard/` content is additive. Expected live URL after deploy: https://sassnarep3-star.github.io/Own4/nfl-dashboard/
+**Standing scope rules for this session:** peer namespaces are read-only; `COORDINATION.md` is append-only; all `nfl-dashboard/` content is additive. Live URL: https://sassnarep3-star.github.io/Own4/nfl-dashboard/
 
-**PR link and merge result:** (to be recorded after merge)
+**PR link and merge result:** PR #117 — https://github.com/sassnarep3-star/Own4/pull/117 → merge commit `3df3dae9f40703f022effbd95536824fcd3398ff` on `main`. Method: `--merge`, no approval requested, per standing instruction. Pre-merge CI: 8/8 pass (`validate` ×2, `Rebuild and verify`, `audit`, `verify` ×4 — all SUCCESS on head `b00c3a2`). GitHub Pages: status `built` for merge commit `3df3dae`; live-confirmed by fetch — https://sassnarep3-star.github.io/Own4/nfl-dashboard/ renders the landing page, all category subpages, row-level source links, and ΣPF = ΣPA = 6,664 identity; relative links resolve across root and pages/ locations.
 
 ---
 
