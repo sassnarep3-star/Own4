@@ -1,0 +1,71 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Strategies</title>
+<style>
+  :root{--ink:#1a1a1a;--muted:#555;--line:#ddd;--bg:#fff;--card:#f7f7f7;--flag:#7a1f1f;--ok:#1e6b3a;--warn:#8a6d00;}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:1.25rem;font-weight:700;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--muted);font-weight:400;font-size:0.85rem}
+  nav a{text-decoration:none;color:#0056b3;margin-right:14px;font-size:0.9rem}
+  nav a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:0.85rem;margin-top:4px}
+  h1{font-size:1.5rem;margin:24px 0 6px}
+  h2{font-size:1.15rem;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  h3{font-size:1rem;margin:20px 0 6px}
+  p{margin:8px 0}
+  .panel{border:1px solid var(--line);background:var(--card);padding:12px 16px;margin:14px 0;border-radius:8px}
+  .panel.warn{border-left:4px solid var(--warn);background:#fdf6e3}
+  .panel.ok{border-left:4px solid var(--ok);background:#eef7f0}
+  .panel.bad{border-left:4px solid var(--flag);background:#fbf3f3}
+  .badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.78rem;font-weight:700;margin-right:6px}
+  .b-ok{background:#dff0e4;color:var(--ok)}.b-blocked{background:#f4cccc;color:#7a1f1f}
+  .b-warn{background:#fde9d9;color:var(--warn)}.b-done{background:#cfe2f3;color:#1a4e8c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.88rem}
+  caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:6px;font-size:0.95rem}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  tr:nth-child(even)td{background:#fafafa}
+  .blank{color:#999}
+  ul{margin:6px 0 6px 18px}
+  li{margin:3px 0}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .kpi .card{border:1px solid var(--line);background:var(--card);padding:12px 14px;border-radius:8px;min-width:150px}
+  .kpi .big{font-size:1.5rem;font-weight:800}
+  .kpi .small{color:var(--muted);font-size:0.85rem}
+  .src{font-size:0.8rem;color:#0056b3}
+  .two-col{display:flex;gap:16px;flex-wrap:wrap}
+  .two-col > div{flex:1;min-width:260px}
+  footer{margin-top:30px;padding-bottom:30px;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem}
+  .toc a{display:block;padding:4px 0;text-decoration:none;color:#0056b3}
+  .toc a:hover{text-decoration:underline}
+</style></head><body><div class="wrap"><header><div class="brand">Own4 <span>&#8212; NFL line-origination research</span></div><nav>
+  <a href="../index.html">Landing</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="standings.html">Official data &#8212; standings</a>
+  <a href="results-feed.html">Verified results feed</a>
+  <a href="price-snapshots.html">Price-snapshot store</a>
+  <a href="origination.html">Originated lines (side&#8594;total&#8594;ML)</a>
+  <a href="strategies.html">Strategies (pre-registered)</a>
+  <a href="leaderboard.html">Leaderboard: signal vs staking</a>
+  <a href="gates.html">Validation &amp; demotion gates</a>
+  <a href="correlations.html">Correlations (with n)</a>
+  <a href="injuries-depth.html">Injuries &amp; replacement depth</a>
+  <a href="questions.html">Questions / answers register</a>
+  <a href="suggestions.html">Suggestions review board</a>
+  <a href="flagged.html">&#9873; Flagged for review</a>
+  <a href="sources.html">Source register</a>
+  <a href="../index.html">Root dashboard &#8254;</a>
+</nav><div class="meta">Snapshot 2026-11-15 &#183; official sources only &#183; unverified values are blank and flagged</div></header>
+<h1>Strategy catalog &#8212; pre-registered</h1>
+<p class="meta">Pre-registration rule: each strategy's definition, sample window and gates were frozen before any result was seen (the git commit hash is the registration).
+No strategy definition was changed after first exposure to data. 0 strategies qualify and 0 reward points are awarded &#8212; by design.</p>
+<table><caption>Registered strategies (singles, parlays, prop combos)</caption><thead><tr><th scope="col">ID</th><th scope="col">Kind</th><th scope="col">Frozen definition</th><th scope="col">Markets</th><th scope="col">Status</th><th scope="col">Signal metric</th><th scope="col">Staking metric</th><th scope="col">Gates passed</th><th scope="col">Gates total</th><th scope="col">Reward points</th><th scope="col">Notes</th></tr></thead><tbody><tr><td>S1</td><td>single</td><td>Strength-model moneyline singles: bet the side whose fair moneyline differs from the fair line by the largest edge; flat 1 unit; Week 11 slate only at registration</td><td>moneyline</td><td>pre-registered — not yet graded</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>No market prices exist, so staking ROI is not computable (G7 blocked). <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>S2</td><td>single</td><td>Strength-model total singles: over/under vs fair total; flat 1 unit; Week 11 slate only</td><td>total</td><td>pre-registered — not yet graded</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>Fair total is v1 baseline (league-average only); flagged as limitation DG-C. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>S3</td><td>single</td><td>Divisional underdog moneyline singles: divisional road dogs only; flat 1 unit</td><td>moneyline</td><td>pre-registered — not yet graded</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>No market prices exist (G7 blocked). <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>P1</td><td>parlay</td><td>Two-leg cross-game parlay: two moneyline sides from different games; joint probability computed from measured cross-game leg dependence (not independence)</td><td>moneyline x moneyline (cross-game)</td><td>pre-registered — blocked</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>Cross-game legs are approximately independent (r = -0.007 over week-slates in peer-verified data), but no executable price exists to grade (G7 blocked). <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>P2</td><td>parlay</td><td>Three-leg cross-game parlay; same dependence rule as P1</td><td>moneyline x moneyline x moneyline (cross-game)</td><td>pre-registered — blocked</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>Same as P1: no executable price (G7 blocked). <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>X1</td><td>same-game-parlay</td><td>Same-game prop + side combo</td><td>same-game</td><td>blocked — joint-evidence gate</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>Multiplying marginal probabilities is invalid under dependence. A same-game combo may be ranked only when a directly validated joint probability and the operator's void/push rules both exist. Neither exists here. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr><tr><td>Q1</td><td>prop-combo</td><td>Player-prop combination (player A over + player B over)</td><td>player props</td><td>blocked — data layer</td><td>—</td><td>—</td><td>0</td><td>8</td><td>0</td><td>Official per-game player logs exist on nfl.com, but the NFL publishes no prop prices and no prop variance; a prop combo cannot be priced or graded. Blank by policy. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">registration artifact&#8203;</a></td></tr></tbody></table>
+<p class="small">7 strategies registered: 3 singles, 2 cross-game parlays, 1 same-game parlay (blocked), 1 prop combo (blocked). 0 qualify, 0 reward points awarded. The leaderboard is a rejection machine by design.</p>
+<footer><strong>Own4 &#8212; NFL line-origination research</strong>. Analytical research only, not wagering advice. Snapshot 2026-11-15;
+every data row links to the page it was read from, and every value that could not be confirmed from an official source is blank and
+listed on the <a href="flagged.html">Flagged for review</a> page.<br>
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &#183;
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8254;</a></footer></div></body></html>

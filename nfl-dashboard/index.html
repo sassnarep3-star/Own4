@@ -1,0 +1,117 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Own4 &#8212; NFL landing page</title>
+<style>
+  :root{--ink:#1a1a1a;--muted:#555;--line:#ddd;--bg:#fff;--card:#f7f7f7;--flag:#7a1f1f;--ok:#1e6b3a;--warn:#8a6d00;}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:1.25rem;font-weight:700;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--muted);font-weight:400;font-size:0.85rem}
+  nav a{text-decoration:none;color:#0056b3;margin-right:14px;font-size:0.9rem}
+  nav a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:0.85rem;margin-top:4px}
+  h1{font-size:1.5rem;margin:24px 0 6px}
+  h2{font-size:1.15rem;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  h3{font-size:1rem;margin:20px 0 6px}
+  p{margin:8px 0}
+  .panel{border:1px solid var(--line);background:var(--card);padding:12px 16px;margin:14px 0;border-radius:8px}
+  .panel.warn{border-left:4px solid var(--warn);background:#fdf6e3}
+  .panel.ok{border-left:4px solid var(--ok);background:#eef7f0}
+  .panel.bad{border-left:4px solid var(--flag);background:#fbf3f3}
+  .badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.78rem;font-weight:700;margin-right:6px}
+  .b-ok{background:#dff0e4;color:var(--ok)}.b-blocked{background:#f4cccc;color:#7a1f1f}
+  .b-warn{background:#fde9d9;color:var(--warn)}.b-done{background:#cfe2f3;color:#1a4e8c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.88rem}
+  caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:6px;font-size:0.95rem}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  tr:nth-child(even)td{background:#fafafa}
+  .blank{color:#999}
+  ul{margin:6px 0 6px 18px}
+  li{margin:3px 0}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .kpi .card{border:1px solid var(--line);background:var(--card);padding:12px 14px;border-radius:8px;min-width:150px}
+  .kpi .big{font-size:1.5rem;font-weight:800}
+  .kpi .small{color:var(--muted);font-size:0.85rem}
+  .src{font-size:0.8rem;color:#0056b3}
+  .two-col{display:flex;gap:16px;flex-wrap:wrap}
+  .two-col > div{flex:1;min-width:260px}
+  footer{margin-top:30px;padding-bottom:30px;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem}
+  .toc a{display:block;padding:4px 0;text-decoration:none;color:#0056b3}
+  .toc a:hover{text-decoration:underline}
+</style></head><body><div class="wrap"><header><div class="brand">Own4 <span>&#8212; NFL line-origination research</span></div><nav>
+  <a href="index.html">Landing</a>
+  <a href="pages/executive-summary.html">Executive summary</a>
+  <a href="pages/standings.html">Official data &#8212; standings</a>
+  <a href="pages/results-feed.html">Verified results feed</a>
+  <a href="pages/price-snapshots.html">Price-snapshot store</a>
+  <a href="pages/origination.html">Originated lines (side&#8594;total&#8594;ML)</a>
+  <a href="pages/strategies.html">Strategies (pre-registered)</a>
+  <a href="pages/leaderboard.html">Leaderboard: signal vs staking</a>
+  <a href="pages/gates.html">Validation &amp; demotion gates</a>
+  <a href="pages/correlations.html">Correlations (with n)</a>
+  <a href="pages/injuries-depth.html">Injuries &amp; replacement depth</a>
+  <a href="pages/questions.html">Questions / answers register</a>
+  <a href="pages/suggestions.html">Suggestions review board</a>
+  <a href="pages/flagged.html">&#9873; Flagged for review</a>
+  <a href="pages/sources.html">Source register</a>
+  <a href="index.html">Root dashboard &#8254;</a>
+</nav><div class="meta">Snapshot 2026-11-15 &#183; official sources only &#183; unverified values are blank and flagged</div></header>
+<h1>NFL line-origination research &#8212; landing page</h1>
+<p class="meta">Clean dashboard: one landing page, category subpages, every entry in a source-linked table. Nothing is inferred; blank cells are flagged.</p>
+
+<div class="kpi"><div class="card"><div class="big">32</div><div class="small">official teams in the standings (read 2026-11-15) <span class="src">[S1]</span></div></div><div class="card"><div class="big">9 final / 3 live / 2 upcoming</div><div class="small">Week 10 games at snapshot time <span class="src">[S2]</span></div></div><div class="card"><div class="big">4</div><div class="small">teams on bye in Week 10 <span class="src">[S2]</span></div></div><div class="card"><div class="big">0</div><div class="small">strategies qualify for rewards <span class="src">[strategies.json]</span></div></div><div class="card"><div class="big">0</div><div class="small">reward points awarded <span class="src">[strategies.json]</span></div></div><div class="card"><div class="big">9</div><div class="small">items flagged for review <span class="src">[flags.json]</span></div></div></div>
+
+<h2>Start here</h2>
+<div class="two-col">
+<div><ul>
+<li><a href="pages/executive-summary.html">Executive summary</a> &#8212; what is known, unknown and decided.</li>
+<li><a href="pages/origination.html">Originated lines</a> &#8212; side &#8594; total &#8594; moneyline, fair line / market line / difference columns.</li>
+<li><a href="pages/leaderboard.html">Leaderboard</a> &#8212; signal and staking ranked separately.</li>
+<li><a href="pages/flagged.html">&#9873; Flagged for review</a> &#8212; every irregularity and blank value.</li>
+<li><a href="pages/suggestions.html">Suggestions review board</a> &#8212; review a path before anything is implemented.</li>
+<li><a href="pages/questions.html">Questions / answers register</a> &#8212; what must be settled before decisions.</li>
+</ul></div>
+<div><ul>
+<li><a href="pages/standings.html">Official standings</a> (32 teams, source-linked)</li>
+<li><a href="pages/results-feed.html">Verified results feed</a> (Week 10 official scores)</li>
+<li><a href="pages/price-snapshots.html">Price-snapshot store</a> (schema + finding)</li>
+<li><a href="pages/gates.html">Validation &amp; demotion gates</a></li>
+<li><a href="pages/correlations.html">Correlations with n</a></li>
+<li><a href="pages/injuries-depth.html">Injuries &amp; replacement depth</a></li>
+<li><a href="pages/sources.html">Source register</a></li>
+</ul></div>
+</div>
+
+<h2>Decision-readiness table &#8212; one row per requirement</h2>
+<p class="meta">Each row states the requirement, the gate that blocks it, the number that would clear it, and its status. Blocked/partial items are linked to the Flagged page.</p>
+<table><caption>Decision-readiness table</caption><thead><tr><th scope="col">Requirement</th><th scope="col">Status</th><th scope="col">Gate that blocks it</th><th scope="col">Number that would clear it</th><th scope="col">Flags</th><th scope="col">Disposition</th></tr></thead><tbody><tr><td>Price-snapshot store: opening and closing numbers for every market we originate</td><td><span class="badge b-blocked">blocked</span></td><td>G7 / MK-01</td><td>licensed or official odds feed</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>market open/close blank by policy; no NFL price source exists</td></tr><tr><td>Verified results feed so backtests and ROI can be computed</td><td><span class="badge b-done">done</span></td><td>&amp;#8212;</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>Week 10 official results published with per-game source links</td></tr><tr><td>Origination order: side, then total, then moneyline</td><td><span class="badge b-done">done</span></td><td>G10</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>enforced in code and published as a sequence column</td></tr><tr><td>Fair line / market line / difference as separate columns</td><td><span class="badge b-warn">partial</span></td><td>G7</td><td>market price source</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>fair line published; market line and difference blank (no official price)</td></tr><tr><td>Signal separated from staking in the leaderboard</td><td><span class="badge b-done">done</span></td><td>G9 / G10</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>two tables: signal metrics, staking metrics; never mixed</td></tr><tr><td>Correlations computed only from officially sourced numbers, n published</td><td><span class="badge b-done">done</span></td><td>G6</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>CR-01/CR-02/CR-03 computed with n; all other correlations blank by rule</td></tr><tr><td>Demotion gate that sends a live strategy back to paper</td><td><span class="badge b-warn">partial</span></td><td>DG-1c</td><td>pre-registered drawdown limit</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>gate defined (DG-1a…d); drawdown limit not yet registered</td></tr><tr><td>Pre-register every strategy; no backtest numbers on the leaderboard</td><td><span class="badge b-done">done</span></td><td>G10</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>7 strategies pre-registered before results; 0 qualified; 0 backtest numbers on the board</td></tr><tr><td>Availability graph: expected vs actual starters</td><td><span class="badge b-blocked">blocked</span></td><td>F-03 / F-04</td><td>official depth chart or verified snap counts for all 32 clubs</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>no depth source; Game Book lineups are post-game only</td></tr><tr><td>Injury signal as a surprise (delta), never a level</td><td><span class="badge b-warn">decided, not implemented</span></td><td>Q14</td><td>code implementing designation deltas</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>policy recorded; pipeline change pending (S-09)</td></tr><tr><td>32-team roster/IR sweep before trusting any team model</td><td><span class="badge b-warn">not run</span></td><td>Q13</td><td>official IR/transactions capture for all 32 clubs</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>&amp;#8212;</td></tr><tr><td>Model output = probability plus its inputs</td><td><span class="badge b-done">done</span></td><td>&amp;#8212;</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>originated lines page shows fair line, inputs and assumptions per game</td></tr><tr><td>"Removal of luck" panel on the dashboard</td><td><span class="badge b-warn">not run</span></td><td>G2 / G8</td><td>graded out-of-sample forecasts</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>no graded forecasts exist yet</td></tr><tr><td>Two-sided "what would change our mind" field per strategy</td><td><span class="badge b-warn">per-strategy</span></td><td>Q01</td><td>graded results vs frozen definition</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>blank until results exist (by design)</td></tr><tr><td>Price our own line and publish residual vs market, on a schedule</td><td><span class="badge b-warn">partial</span></td><td>F-01</td><td>market price source</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>fair line published; residual blank (no market price)</td></tr><tr><td>Pre-registered backtest corpus (136-game log)</td><td><span class="badge b-blocked">blocked</span></td><td>G1</td><td>300 graded out-of-sample games</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>corpus referenced in sibling namespaces; not re-hosted here</td></tr><tr><td>Decision-readiness table: one row per requirement, gate, number to clear</td><td><span class="badge b-done">done</span></td><td>&amp;#8212;</td><td>&amp;#8212;</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">flags.json&#8203;</a></td><td>this table</td></tr></tbody></table>
+
+<h2>Headline result</h2>
+<div class="panel bad"><strong>No edge is claimed.</strong> No strategy clears the pre-registered gates; zero reward points are awarded. The model is a v1 research baseline
+with flagged assumptions (home field +2.0 pts, uncalibrated logistic scale, league-average total). Because the NFL publishes no odds, no ROI or CLV is computable anywhere on this site.
+The value of this release is the verified data, the public gates and the honest scoreboard &#8212; not a pick.</div>
+
+<h2>Published categories</h2>
+<table><caption>Category &#8594; page &#8594; what it contains</caption>
+<thead><tr><th scope="col">Category</th><th scope="col">Page</th><th scope="col">Contents</th></tr></thead>
+<tbody>
+<tr><td>Official data</td><td><a href="pages/standings.html">Standings</a></td><td>32 teams, every cell source-linked to nfl.com/standings; league identity &Sigma;PF = &Sigma;PA = 6,664 verified <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/standings.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Verified results feed</td><td><a href="pages/results-feed.html">Week 10 results</a></td><td>14 games + 4 byes; final/live/upcoming status; per-game official URLs <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/week10.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Price-snapshot store</td><td><a href="pages/price-snapshots.html">Store</a></td><td>schema (open/close per market), origination order, finding: no official price source <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/price_snapshots.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Originated lines</td><td><a href="pages/origination.html">Week 11 lines</a></td><td>side &#8594; total &#8594; moneyline; fair line / market line / difference columns; model outputs labeled <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/originated_lines.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Strategies</td><td><a href="pages/strategies.html">Catalog</a></td><td>7 pre-registered strategies: 3 singles, 2 cross-game parlays, 1 same-game parlay (blocked), 1 prop combo (blocked) <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Leaderboard</td><td><a href="pages/leaderboard.html">Signal vs staking</a></td><td>two separate tables; 0 qualify; 0 reward points <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Gates</td><td><a href="pages/gates.html">Validation &amp; demotion</a></td><td>G1-G10 plus demotion gate DG-1; 0 live strategies; 0 demotions <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/gates.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Correlations</td><td><a href="pages/correlations.html">With n</a></td><td>official-input correlations only; every value published with n <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/correlations.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Injuries &amp; depth</td><td><a href="pages/injuries-depth.html">Tracker</a></td><td>official Week 10 designations; replacement depth blank by policy (no depth source) <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/injuries_week10.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Decisions</td><td><a href="pages/questions.html">Questions register</a> / <a href="pages/suggestions.html">Suggestions board</a></td><td>what must be settled before decisions; review-before-implement paths <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/questions.json" target="_blank" rel="noopener">source</a></td></tr>
+<tr><td>Review</td><td><a href="pages/flagged.html">Flagged</a> / <a href="pages/sources.html">Sources</a></td><td>10 irregularities; 6 official sources <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/flags.json" target="_blank" rel="noopener">source</a></td></tr>
+</tbody></table>
+<footer><strong>Own4 &#8212; NFL line-origination research</strong>. Analytical research only, not wagering advice. Snapshot 2026-11-15;
+every data row links to the page it was read from, and every value that could not be confirmed from an official source is blank and
+listed on the <a href="pages/flagged.html">Flagged for review</a> page.<br>
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &#183;
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8254;</a></footer></div></body></html>
