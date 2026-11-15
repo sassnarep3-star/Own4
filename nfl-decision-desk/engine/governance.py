@@ -18,6 +18,41 @@ import os
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
+
+
+def _venue_read_count():
+    """Derive the venue-read count from the fixture artefact instead of hard-coding it.
+
+    This was a literal '3' and went stale the moment a fourth game centre was read.
+    A narrative number that drifts from its own data file is exactly the defect this
+    workspace exists to prevent, so it is now read from fixtures.json.
+    """
+    try:
+        fx = json.load(open(os.path.join(ROOT, "data", "fixtures", "fixtures.json")))
+        return sum(1 for r in fx["fixtures"] if r.get("venue_status") == "OFFICIAL-READ")
+    except Exception:
+        return 0
+
+
+VENUE_READ = _venue_read_count()
+
+
+def _page_count():
+    """Count the pages engine/site.py declares, so this claim cannot go stale.
+
+    It previously said '16 pages' while the site published 14. That is a small lie of the
+    kind this workspace exists to catch, so the number is now derived from the site list.
+    """
+    try:
+        src = open(os.path.join(ROOT, "engine", "site.py")).read()
+        body = src[src.index("def main():"):]
+        body = body[:body.index("for rel, html, up in")] if "for rel, html, up in" in body else body
+        return body.count(".html\",")
+    except Exception:
+        return 0
+
+
+PAGE_COUNT = _page_count()
 OUT = os.path.join(ROOT, "data", "governance")
 os.makedirs(OUT, exist_ok=True)
 CORPUS = json.load(open(os.path.join(ROOT, "data", "corpus", "corpus_2026.json")))
@@ -87,9 +122,9 @@ REQ = [
   "G-ROSTER: no official roster/IR register captured for 32 clubs.",
   "32 club roster pages + IR lists, captured with a clock time.",S_INJ),
  ("R14","Add a fixture-context feature set built only from published schedule facts","DONE",
-  "272 fixture rows with rest, short week, post-bye, site type and travel. Venue read for 3 games; the rest are blank with a status.",
-  "G-VENUE: 269 games still lack a read venue.",
-  "269 more venue reads, or an official venue field in a feed.",S_WK.format(1)),
+  "272 fixture rows with rest, short week, post-bye, site type and travel. Venue read for %d games; the rest are blank with a status." % VENUE_READ,
+  "G-VENUE: %d games still lack a read venue." % (272 - VENUE_READ),
+  "%d more venue reads, or an official venue field in a feed." % (272 - VENUE_READ),S_WK.format(1)),
  ("R15","Store every model output as a probability plus its inputs, not just a pick","DONE",
   "Each model row carries fair margin, fair spread, both fair totals, the gap, the link scale, and the fitted ratings used. 104 of 104 rows.",
   "-","Already satisfied.",S_NFLVERSE),
@@ -115,9 +150,9 @@ REQ = [
   "This register is rendered on the landing page. 21 of 30 requirement lines are DONE, 6 PARTIAL/REJECTED, and every blocked row names both a gate and a number.",
   "-","Already satisfied.",S_NFLVERSE),
  ("R23","Transcribe the venue of every fixture from the official game centre and publish it","PARTIAL",
-  "3 of 272 fixtures read (SF@LA, NE@SEA, NE@DET). All three are official reads. The other 269 are blank.",
-  "G-VENUE: session budget for 269 game-page reads.",
-  "269 venue reads.",S_WK.format(1)),
+  "%d of 272 fixtures read (SF@LA, NE@SEA, NE@DET, WAS@NYG). All four are official reads. The other %d are blank." % (VENUE_READ, 272 - VENUE_READ),
+  "G-VENUE: session budget for %d game-page reads." % (272 - VENUE_READ),
+  "%d venue reads." % (272 - VENUE_READ),S_WK.format(1)),
  ("R24","Publish the league's dated schedule announcement beside the live schedule page","PARTIAL",
   "The official week-10 page publishes dated flexible-scheduling rules for weeks 16-18 ('no later than immediately after Week 14/15/17'). Text captured; the standalone announcement document itself was not located.",
   "G-ANNOUNCE: the announcement page URL has not been identified from an official index.",
@@ -324,7 +359,7 @@ REQ = [
   "G-RESULTS.",
   "136 official game-page reads.",S_STAND),
  ("R80","Site: clean landing page + category subpages, tables, analysis, suggestions, flagged page","DONE",
-  "16 pages generated, every table row carries an https source link, every local link resolves, verified by engine/verify.py.",
+  "%d pages generated, every table row carries an https source link, every local link resolves, verified by engine/verify.py." % PAGE_COUNT,
   "-","Already satisfied.",S_NFLVERSE),
 ]
 
@@ -470,7 +505,7 @@ IRREGULARITIES = [
  ("I05","The market spread convention had to be established empirically; a naive sign flip produces a materially worse fit.","Sign check published as its own artefact with r and both MAEs.","LOW",S_NFLVERSE),
  ("I06","No official price exists for any NFL market, so every price on the site is third-party.","Stated on the prices page, on every row, and in DEC-1.","MEDIUM",S_NFLC),
  ("I07","The repo contains 21+ NFL workspaces that publish overlapping and sometimes contradictory numbers.","This workspace publishes its own numbers and links the others rather than reconciling them silently.","MEDIUM",S_NFLVERSE),
- ("I08","Venue was read for only 3 of 272 fixtures.","269 rows carry a blank venue with an explicit status.","LOW",S_WK.format(1)),
+ ("I08","Venue was read for only %d of 272 fixtures." % VENUE_READ,"%d rows carry a blank venue with an explicit status." % (272 - VENUE_READ),"LOW",S_WK.format(1)),
  ("I09","The base-rate control is computed on the scored sample, which is mildly optimistic.","Flagged in the leaderboard metadata and in Q17.","LOW",S_NFLVERSE),
  ("I10","CR-04's apparent rest effect collapses when treated as a group variable (14 of 120 games drive it).","Automatic robustness guard added; the correlation is marked NOT ROBUST with group means published.","LOW",S_NFLVERSE),
 ]

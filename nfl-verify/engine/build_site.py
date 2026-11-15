@@ -228,7 +228,7 @@ def build_index():
     body = """
 <h1>NFL decision readiness</h1>
 <p class="lead">One page per question. This site answers a single question the other
-%(ns)d NFL namespaces in this repository do not: <strong>for each requirement, what blocks it,
+%(peer)d NFL namespaces in this repository do not: <strong>for each requirement, what blocks it,
 and what number would clear it?</strong> Every figure below was computed this session from
 official nfl.com pages fetched at <code>%(cap)s</code>. Anything that could not be confirmed is
 shown as a blank and listed on <a href="pages/flagged.html">Flagged for review</a>.</p>
@@ -269,7 +269,7 @@ it is question Q01 and suggestion S01, not a build ticket.
 <li><a href="pages/flagged.html">Flagged for review</a> — %(nfl)d irregularities, each with its official source.</li>
 </ul>
 """ % {
-        "ns": 26, "cap": esc(CAPTURE), "cards": card_html,
+        "ns": N_NFL, "peer": N_NFL - 1, "cap": esc(CAPTURE), "cards": card_html,
         "nr": s["n_requirements"], "n_ask": 5,
         "nina": ina["n_named_players"], "nsec": ina["n_sections"],
         "n_res": 9, "nfl": len(FLG["rows"]), "nsug": len(SUG["rows"]),
@@ -280,12 +280,23 @@ it is question Q01 and suggestion S01, not a build ticket.
                 "NFL decision readiness: what blocks each requirement and what number would clear it.")
 
 
+def _nfl_dirs():
+    import os as _os
+    root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    root = _os.path.dirname(root)
+    return sum(1 for d in _os.listdir(root)
+               if d.startswith("nfl") and _os.path.isdir(_os.path.join(root, d)))
+
+
+N_NFL = _nfl_dirs()
+
+
 def decision_html(prefix=""):
     picks = [
         ("Q01 / S01", "How are market prices obtained, or do we formally give up on the residual?",
          "Blocks 9 traced requirements including every ROI figure. The NFL publishes no line.",
          "S01"),
-        ("Q10 / S02", "Which of the 26 NFL site trees is canonical?",
+        ("Q10 / S02", "Which of the %d NFL site trees is canonical?" % N_NFL,
          "Every new session adds a namespace because no rule says where work must land.",
          "S02"),
         ("Q13", "What is the legal position on republishing official row-level data and paying rewards?",

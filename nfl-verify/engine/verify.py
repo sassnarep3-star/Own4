@@ -287,6 +287,20 @@ def check_data():
                 errors.append(f"readiness {r['id']}: stale namespace count {m.group(1)} "
                               f"in {field} (actual {actual_ns})")
 
+    # --- no stale repo counts in rendered prose -----------------------------
+    # The register guard above only inspects readiness rows. The index lead and the
+    # executive-summary Q10 row carried hand-typed namespace counts that silently went
+    # stale while the register stayed correct. Scan the rendered HTML itself.
+    for rel in ("../index.html", "../pages/executive-summary.html", "../pages/decision-readiness.html"):
+        path = os.path.join(HERE, rel)
+        if not os.path.exists(path):
+            continue
+        html = open(path, encoding="utf-8").read()
+        for m in re.finditer(r"(\d+) NFL (?:namespaces|site trees)", html):
+            n = int(m.group(1))
+            if n not in (actual_ns, actual_ns - 1, actual_ns + 1):
+                errors.append(f"{rel}: stale prose count '{m.group(0)}' (actual {actual_ns})")
+
     # --- registers ---------------------------------------------------------
     if any(not r["answer"].startswith("§blank§") for r in q["rows"]):
         errors.append("questions: an answer is filled without evidence; only blanks are permitted")

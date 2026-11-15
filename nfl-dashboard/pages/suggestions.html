@@ -1,0 +1,71 @@
+
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions</title>
+<style>
+  :root{--ink:#1a1a1a;--muted:#555;--line:#ddd;--bg:#fff;--card:#f7f7f7;--flag:#7a1f1f;--ok:#1e6b3a;--warn:#8a6d00;}
+  *{box-sizing:border-box}body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);margin:0;line-height:1.5}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  header{border-bottom:1px solid var(--line);padding:18px 0;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .brand{font-size:1.25rem;font-weight:700;text-decoration:none;color:var(--ink)}
+  .brand span{color:var(--muted);font-weight:400;font-size:0.85rem}
+  nav a{text-decoration:none;color:#0056b3;margin-right:14px;font-size:0.9rem}
+  nav a:hover{text-decoration:underline}
+  .meta{color:var(--muted);font-size:0.85rem;margin-top:4px}
+  h1{font-size:1.5rem;margin:24px 0 6px}
+  h2{font-size:1.15rem;margin:26px 0 10px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  h3{font-size:1rem;margin:20px 0 6px}
+  p{margin:8px 0}
+  .panel{border:1px solid var(--line);background:var(--card);padding:12px 16px;margin:14px 0;border-radius:8px}
+  .panel.warn{border-left:4px solid var(--warn);background:#fdf6e3}
+  .panel.ok{border-left:4px solid var(--ok);background:#eef7f0}
+  .panel.bad{border-left:4px solid var(--flag);background:#fbf3f3}
+  .badge{display:inline-block;padding:1px 7px;border-radius:10px;font-size:0.78rem;font-weight:700;margin-right:6px}
+  .b-ok{background:#dff0e4;color:var(--ok)}.b-blocked{background:#f4cccc;color:#7a1f1f}
+  .b-warn{background:#fde9d9;color:var(--warn)}.b-done{background:#cfe2f3;color:#1a4e8c}
+  table{border-collapse:collapse;width:100%;margin:10px 0;font-size:0.88rem}
+  caption{caption-side:top;text-align:left;font-weight:700;margin-bottom:6px;font-size:0.95rem}
+  th,td{border:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+  th{background:#f0f0f0}
+  tr:nth-child(even)td{background:#fafafa}
+  .blank{color:#999}
+  ul{margin:6px 0 6px 18px}
+  li{margin:3px 0}
+  .kpi{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+  .kpi .card{border:1px solid var(--line);background:var(--card);padding:12px 14px;border-radius:8px;min-width:150px}
+  .kpi .big{font-size:1.5rem;font-weight:800}
+  .kpi .small{color:var(--muted);font-size:0.85rem}
+  .src{font-size:0.8rem;color:#0056b3}
+  .two-col{display:flex;gap:16px;flex-wrap:wrap}
+  .two-col > div{flex:1;min-width:260px}
+  footer{margin-top:30px;padding-bottom:30px;border-top:1px solid var(--line);color:var(--muted);font-size:0.85rem}
+  .toc a{display:block;padding:4px 0;text-decoration:none;color:#0056b3}
+  .toc a:hover{text-decoration:underline}
+</style></head><body><div class="wrap"><header><div class="brand">Own4 <span>&#8212; NFL line-origination research</span></div><nav>
+  <a href="../index.html">Landing</a>
+  <a href="executive-summary.html">Executive summary</a>
+  <a href="standings.html">Official data &#8212; standings</a>
+  <a href="results-feed.html">Verified results feed</a>
+  <a href="price-snapshots.html">Price-snapshot store</a>
+  <a href="origination.html">Originated lines (side&#8594;total&#8594;ML)</a>
+  <a href="strategies.html">Strategies (pre-registered)</a>
+  <a href="leaderboard.html">Leaderboard: signal vs staking</a>
+  <a href="gates.html">Validation &amp; demotion gates</a>
+  <a href="correlations.html">Correlations (with n)</a>
+  <a href="injuries-depth.html">Injuries &amp; replacement depth</a>
+  <a href="questions.html">Questions / answers register</a>
+  <a href="suggestions.html">Suggestions review board</a>
+  <a href="flagged.html">&#9873; Flagged for review</a>
+  <a href="sources.html">Source register</a>
+  <a href="../index.html">Root dashboard &#8254;</a>
+</nav><div class="meta">Snapshot 2026-11-15 &#183; official sources only &#183; unverified values are blank and flagged</div></header>
+<h1>Suggestions review board</h1>
+<p class="meta">Every improvement suggestion lists the options (A/B/C), a recommended path, cost and risk. <strong>Nothing here is implemented before the owner chooses a path.</strong>
+review_status = pending means a reviewer must decide first.</p>
+<table><caption>Suggestions awaiting owner decision</caption><thead><tr><th scope="col">ID</th><th scope="col">Title</th><th scope="col">Description</th><th scope="col">Option A</th><th scope="col">Option B</th><th scope="col">Option C</th><th scope="col">Recommended path</th><th scope="col">Cost</th><th scope="col">Risk</th><th scope="col">Review status</th></tr></thead><tbody><tr><td>S-01</td><td>Unblock G7 with an executable price</td><td>G7 (executable price) is blocked because the NFL publishes no odds. Without a price, ROI/CLV cannot be graded and no strategy can qualify.</td><td>Buy/license an official odds feed and store opening+closing snapshots per market.</td><td>Use third-party archive lines, explicitly labeled third-party, never presented as official.</td><td>Keep market cells blank and flagged; leaderboard stays a rejection machine until a price exists.</td><td>C — no price is invented anywhere on this site; revisit when the owner funds a feed. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>high (A) / medium (B) / zero (C)</td><td>A: licensing and data-rights review needed; B: third-party data cannot be verified as official; C: no strategy can ever qualify under current rules</td><td>pending</td></tr><tr><td>S-02</td><td>Timestamped injury snapshots Wed/Thu/Fri</td><td>The brief requires the injury report as a timestamped series (Wednesday to kickoff) with retained hashes, so practice designations can be replayed as known. Today only one capture exists.</td><td>Automate daily captures Wed-Fri with raw HTML hashes, fetch timestamps and conflict flags.</td><td>Capture once per week only (status quo).</td><td>Do not capture; rely on the single live page.</td><td>A — required for Q03/Q15 and for any backtest that replays pre-kickoff knowledge. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>medium</td><td>source/schema changes need a drift alarm; storage cost trivial</td><td>pending</td></tr><tr><td>S-03</td><td>Depth source to unblock replacement-depth (Q05)</td><td>Replacement depth (2nd/3rd/4th string) is blank because no depth source exists.</td><td>License official snap counts as starter proxy (verified route per club).</td><td>Use club depth pages where available, verified club-by-club.</td><td>Leave depth blank and flagged; track designations only.</td><td>A or B, but only after one route is verified for all 32 clubs (do not build the feature until verified). <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>medium-high</td><td>deriving depth from jersey number/salary/experience is explicitly rejected</td><td>pending</td></tr><tr><td>S-04</td><td>Consolidate the overlapping NFL namespaces</td><td>Fifteen NFL namespaces exist in this repo (nfl/, nfl-core/, nfl-market/, nfl-markets/, nfl-lines/, nfl-lab/, nfl-quant/, nfl-origination/, nfl-own/, nfl-book/, nfl-price-snapshot/, nfl-ledger/, nfl-command/, nfl-arena/, nfl-edge/, plus more), each re-implementing the same brief.</td><td>Choose one canonical dashboard and retire the rest.</td><td>Keep all namespaces as independent research workspaces, cross-linked.</td><td>Merge into this nfl-dashboard/ namespace.</td><td>A — the owner picks one canonical workspace (compare page D-1 exists in nfl-core); do not add a sixteenth implementation. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>low (decision) / high (migration)</td><td>fragmented navigation confuses reviewers; duplicate numbers can diverge</td><td>pending</td></tr><tr><td>S-05</td><td>Upgrade the fair-line model from v1 to v2</td><td>The v1 model uses team strength from PF/PA, a +2.0 pt home-field assumption, an uncalibrated logistic, and a league-average total. All are flagged limitations.</td><td>v2: team-strength-adjusted totals, calibrated win-probability, measured home-field advantage.</td><td>Keep v1 as the published baseline and do not present it as an edge.</td><td>Retire the model; publish only fair-line methodology without numbers.</td><td>B — publish v1 honestly as a baseline, flagged; build v2 only after a price feed exists to calibrate against. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>medium</td><td>v2 without an executable price is still ungradeable (G7)</td><td>pending</td></tr><tr><td>S-06</td><td>Pre-register the demotion drawdown limit (DG-1c)</td><td>DG-1c needs a pre-registered maximum drawdown before any strategy can go live.</td><td>Set a fixed drawdown limit (e.g. -10% of bankroll) now.</td><td>Set a volatility-scaled limit.</td><td>Do not set a limit; keep all strategies pre-registered/paper.</td><td>C — no strategy is live, so no limit is needed yet; register one before the first LIVE promotion. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>zero</td><td>setting a limit without data is arbitrary</td><td>pending</td></tr><tr><td>S-07</td><td>Fund and govern the reward pool before paying points</td><td>0 of 1,000 reward points are paid because no strategy qualifies. Terms do not yet exist.</td><td>Owner funds a pool and writes payout governance (skill-based, prospective, escrowed CLV/ROI).</td><td>No rewards; leaderboard is reputational only.</td><td>Token/points rewards with no monetary value.</td><td>B or C until the owner decides; no reward is paid without written terms. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>depends on A</td><td>paying rewards for unvalidated results pays for luck, not skill</td><td>pending</td></tr><tr><td>S-08</td><td>Run the 32-team roster/IR sweep</td><td>Before any team-level model is trusted, verify IR/reserve-list status for every club so 'not listed' never means 'available'.</td><td>Capture official transactions/IR pages for all 32 teams.</td><td>Skip; team models remain flagged.</td><td>Use third-party roster data labeled as such.</td><td>A — required by Q13 before team-level outputs are trusted. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>medium</td><td>IR capture must be official; third-party rosters are not evidence</td><td>pending</td></tr><tr><td>S-09</td><td>Model injury as a surprise (delta), never a level</td><td>Policy decision recorded: designations enter the model as changes (Questionable→Out, DNP→LP→FP), never as a static level. Not yet implemented in code.</td><td>Implement designation-delta features with unit tests.</td><td>Keep the policy as documentation only.</td><td>Do not use injury features at all.</td><td>A — implement and test; do not ship a level-based injury feature. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>medium</td><td>delta features need the timestamped injury snapshots from S-02</td><td>pending</td></tr><tr><td>S-10</td><td>Archive historical weekly injury reports (for Q06)</td><td>Q06 (do designations change outcomes?) requires multiple seasons of designations joined to inactives.</td><td>Build an archive of past-season weekly injury reports.</td><td>Leave Q06 open.</td><td>Use a single season as a pilot.</td><td>C — pilot one season to test measurability before committing to a multi-season archive. <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/suggestions.json" target="_blank" rel="noopener">suggestions register&#8203;</a></td><td>low (pilot) / high (archive)</td><td>official injury reports for past seasons may not be retrievable</td><td>pending</td></tr></tbody></table>
+<p class="small">10 suggestions, all review_status = pending. None is implemented. The owner reviews and picks a path before anything new is built.</p>
+<footer><strong>Own4 &#8212; NFL line-origination research</strong>. Analytical research only, not wagering advice. Snapshot 2026-11-15;
+every data row links to the page it was read from, and every value that could not be confirmed from an official source is blank and
+listed on the <a href="flagged.html">Flagged for review</a> page.<br>
+Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) &#183;
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8254;</a></footer></div></body></html>

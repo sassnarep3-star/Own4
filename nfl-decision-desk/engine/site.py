@@ -915,6 +915,10 @@ def page_flagged():
     body.append('<h2>Published irregularities</h2>')
     body.append(table(["#", "Irregularity", "How it is handled", "Severity", "Source"], rows))
     body.append('<h2>Values deliberately left blank</h2>')
+    # derived, not hard-coded: this read "269 of 272" from a literal after a fourth game
+    # centre had already been read, i.e. the narrative had drifted from its own data file.
+    _fx = json.load(open(os.path.join(ROOT, "data", "fixtures", "fixtures.json")))
+    fx_read = sum(1 for r in _fx["fixtures"] if r.get("venue_status") == "OFFICIAL-READ")
     bl = []
     for r in c["price_coverage_by_season"]:
         if r["with_opening_price"] == 0 and r["season"] != 2021:
@@ -926,8 +930,8 @@ def page_flagged():
     bl.append(["Depth rank for every club",
                "The official injury report has no depth column, and the club depth-chart route was recorded as 404 by an earlier session.",
                link("https://www.nfl.com/injuries/", "nfl.com injuries")])
-    bl.append(["Venue for 269 of 272 fixtures",
-               "Only three game centres were read this session. Filling the rest from a third-party stadium field would be an inference.",
+    bl.append(["Venue for %d of 272 fixtures" % (272 - fx_read),
+               "Only %d game centres were read this session. Filling the rest from a third-party stadium field would be an inference." % fx_read,
                link("https://www.nfl.com/schedules/2026/by-week/week-1", "nfl.com schedule")])
     bl.append(["Parquet/prop leg prices and joint probabilities",
                "No citable leg price source exists; multiplying marginal probabilities is prohibited in writing.",

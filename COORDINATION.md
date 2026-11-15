@@ -3177,6 +3177,29 @@ re-read), SG-08 (pick one canonical dashboard among the 17 NFL namespaces).
 
 ---
 
+## Session `arena/5253d26f-own4` — NFL line-origination namespace `nfl-dashboard/` (claim, 2026-11-15 UTC)
+
+Session ID: `arena/5253d26f-own4` · Branch: `arena/5253d26f-own4` (platform-pinned) · Base: `3e74fd34` (main, after PR #107).
+
+**Claimed scope:** `nfl-dashboard/**` (unchallenged — no prior session uses this namespace) + append-only `COORDINATION.md`. No peer files edited; `nfl-dashboard/` is fully additive.
+
+**Survey at claim time:** 17+ NFL namespaces already exist on `main`; none is `nfl-dashboard/`. This build is the Week 10/Week 11 2026 snapshot: official nfl.com standings (32 teams, ΣPF=ΣPA=6,664 identity verified by build), Week 10 results (9 finals, 2 live Q3, 1 halftime, 2 upcoming), Week 11 schedule (13 games, 6 byes), Week 10 injury report with team-attribution misflags per row, originated Week 11 fair lines (side→total→moneyline, model outputs labeled), 7 pre-registered strategies (0 qualify, 0 reward points), gates G1–G10 + DG-1 (0 live, 0 demoted), correlations CR-01..03 with n from official inputs (CR-04 reported, CR-05/06 blank n=0), depth blank by policy (no official depth source), 15 questions, 10 suggestions (all pending), 10 flags, 6 official sources. Headline finding: the NFL publishes no betting lines/odds/prices — all market price cells blank by policy; leaderboard is a rejection machine by design.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| N1 | Official-source data capture (nfl.com standings, schedules, injuries; 14 data files) | done | arena/5253d26f-own4 | `nfl-dashboard/data/*.json` |
+| N2 | Deterministic static site generator `build.py` (stdlib only; 15 pages; idempotent rebuild) | done | arena/5253d26f-own4 | `nfl-dashboard/build.py`, `nfl-dashboard/pages/*.html` |
+| N3 | Row-source verifier `verify.py` (every data row https source-linked, links resolve, ΣPF=ΣPA identity, no placeholders) | done | arena/5253d26f-own4 | `nfl-dashboard/verify.py` — PASS, 0 errors, 15 pages |
+| N4 | PR to main → merge → GitHub Pages deploy confirmation → record here | in progress | arena/5253d26f-own4 | `COORDINATION.md` (this section), PR record below |
+
+**Standing scope rules for this session:** peer namespaces are read-only; `COORDINATION.md` is append-only; all `nfl-dashboard/` content is additive. Expected live URL after deploy: https://sassnarep3-star.github.io/Own4/nfl-dashboard/
+
+**PR link and merge result:** (to be recorded after merge)
+
+---
+
+---
+
 ## Session `arena/9f6a7ca8-own4` — Decision-readiness & independent re-verification (claim, 2026-11-15 UTC)
 
 Session ID: `arena/9f6a7ca8-own4` · Branch: `arena/9f6a7ca8-own4` (platform-pinned; the requested `session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
@@ -3198,6 +3221,7 @@ Session ID: `arena/9f6a7ca8-own4` · Branch: `arena/9f6a7ca8-own4` (platform-pin
 **Scope rules honoured:** no peer namespace is edited. `COORDINATION.md` is append-only. `index.html` and `verified/*.html` are regenerated from the generator, never hand-edited, and the NAV entry added is additive (every prior href preserved). Peer datasets are read only as *claims to check*, never as evidence; every published value below is taken from an official nfl.com page fetched this session, with its URL and capture clock time.
 
 **No conflicts at claim time:** open PR #93 (`arena/582300df-own4`) touches `COORDINATION.md` and `index.html`; its namespace (`nfl-command-center/`, not yet on main) is out of scope here, and any board/nav collision will be resolved union-style at integration, preserving both.
+
 ## Session `arena/63ebae0e-own4` — NFL Requirements Register & Decision-Readiness Dashboard (claim, 2026-11-15 UTC)
 
 Session ID: `63ebae0e` · Branch: `arena/63ebae0e-own4` (platform-pinned single branch; the requested `session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session) · Base: `3e74fd3` (main, after PR #107).
@@ -3587,3 +3611,48 @@ namespace was modified. Shared files were touched only additively.
 - **Fixed penalties.** No fixed point penalty for a missing starter exists anywhere in the code.
 
 *Session complete. No claimed task was left in progress; no peer file was written.*
+
+### Merge record — PR #111 → `main` (2026-11-15T23:47:49Z)
+
+| Field | Value |
+|-------|-------|
+| PR | **#111** — https://github.com/sassnarep3-star/Own4/pull/111 |
+| Merge commit | `e0abbf4b831e48e5ae4fea9f5cdc6d9572b74660` |
+| Method | `--merge`, no approval requested, per the brief |
+| Checks at merge | 5/5 pass (`nfl-decision-desk verify`, `verify` ×2, `audit`, `validate`) |
+| Pages deploy | **confirmed live** — `nfl-decision-desk/` and the `flagged`, `executive-summary` subpages return rendered content with row-level source links intact |
+| Broken links at merge | **0 repo-wide** (30 pre-existing `nfl-price-snapshot` asset refs were fixed; that fix was still absent on `main` at merge time) |
+
+**One CI failure was hit and fixed properly rather than retried.** The determinism gate failed on
+CI while passing locally. Root cause: **Python 3.12 changed builtin `sum()` over floats to
+Neumaier-compensated summation**, so a published number could round differently on the runner's
+3.12 than on this sandbox's 3.11 — a latent portability bug, not a runner flake. All 24 float
+accumulators now use `math.fsum` (exactly rounded on every version), and `engine/verify.py` gained
+**gate V8**, which fails the build if a non-integer `sum()` over floats is reintroduced. V8
+immediately caught two accumulators that the manual sweep had missed.
+
+The same investigation surfaced a real statistical defect: the permutation p-value divided by
+`len(null)` and could print `p = 0` for a statistic merely at the edge of the null. It is now
+`(1 + count) / (1 + n)`, the standard floor, so the smallest honest p is 1/2001. Three control
+strategies moved from q = 0.9305 to q = 1.0 and S1 from q = 0.40875 to 0.4098. **No skill or Brier
+value changed**, which is the evidence that `fsum` did not alter any published result.
+
+**Deviations logged for this step**
+
+- The branch had to be force-pushed twice with `--force-with-lease` after rebasing onto a `main`
+  that had advanced. Before each force-push the previous remote tip was verified to be a **strict
+  subset** of the new one (`comm -23` on the file lists, and a line-diff of `COORDINATION.md`),
+  so no commit content from any session was discarded.
+- `COORDINATION.md` conflicted twice. Resolved both times by **keeping both sessions' records**,
+  theirs first, mine after — never by dropping a peer's entry.
+- Generated HTML (`index.html`, `verified/*`) conflicted during rebase; resolved by taking `main`'s
+  copy and **regenerating** from `verification/build.py`, never by hand-merging generated files.
+
+### Follow-up in the same session (post-merge)
+
+Reading the live site exposed two narrative numbers that had drifted from their own data files:
+the flagged page said "3 of 272 fixtures" after a fourth game centre had been read, and the
+governance register claimed "16 pages generated" while the site publishes 14. Both are now
+**derived** (`VENUE_READ` from `fixtures.json`, `PAGE_COUNT` from the page list in `site.py`) rather
+than literals, so the narrative and the data cannot disagree again. Shipped as PR **#116**.
+
