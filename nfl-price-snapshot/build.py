@@ -140,7 +140,7 @@ def page(path, title, crumb, body, desc=""):
     doc = """<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>%(title)s &middot; NFL Price Snapshot &middot; Own4</title>
-<meta name="description" content="%(desc)s"><link rel="stylesheet" href="assets/style.css"></head>
+<meta name="description" content="%(desc)s"><link rel="stylesheet" href="../assets/style.css"></head>
 <body><a class="skip" href="#main">Skip to content</a>
 <header class="top"><div class="wrap">
   <div class="brand"><a href="index.html">NFL <span>Price Snapshot</span></a></div>
@@ -148,7 +148,7 @@ def page(path, title, crumb, body, desc=""):
 </div></header>
 <div class="layout"><aside class="side"><nav aria-label="Section navigation">%(nav)s</nav></aside>
 <main id="main"><div class="crumb">%(crumb)s</div>%(body)s</main></div>
-%(footer)s<script src="assets/table.js" defer></script></body></html>""" % {
+%(footer)s<script src="../assets/table.js" defer></script></body></html>""" % {
         "title": e(title), "desc": e(desc or title), "top": "".join(top),
         "nav": "".join(nav), "crumb": e(crumb), "body": body,
         "footer": FOOTER % {"snap": SNAP, "p": ""}}
