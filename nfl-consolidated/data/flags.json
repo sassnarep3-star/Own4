@@ -1,0 +1,76 @@
+{
+ "dataset": "nfl_consolidated_flags",
+ "built_utc": "2026-11-15",
+ "rows": [
+  {
+   "id": "FB-01",
+   "flag": "No official price source exists",
+   "detail": "The NFL publishes no betting lines (re-confirmed live 2026-11-15). All market columns, residuals and ROI are blank, never inferred.",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "blocking": false
+  },
+  {
+   "id": "FB-02",
+   "flag": "Staking figures use an assumed −110 price",
+   "detail": "Staking ROI assumes a flat −110 on every pick; real favorite prices are heavier. Staking numbers are mechanical, not achievable market returns.",
+   "source": "https://www.nfl.com/",
+   "blocking": false
+  },
+  {
+   "id": "FB-03",
+   "flag": "105 of 137 results rows are aggregate-verified only",
+   "detail": "32 games re-read line-by-line; the remaining 105 are aggregate-verified against the standings, not re-read game-by-game.",
+   "source": "https://www.nfl.com/standings/league/2026/REG",
+   "blocking": false
+  },
+  {
+   "id": "FB-04",
+   "flag": "No official depth-chart source",
+   "detail": "nfl.com team depth-chart pages return 404. Replacement-depth strings beyond official prose are blank; third-party charts are flagged THIRD-PARTY.",
+   "source": "https://www.nfl.com/injuries/",
+   "blocking": false
+  },
+  {
+   "id": "FB-05",
+   "flag": "Player props blocked at the data layer",
+   "detail": "Official per-game player logs do not exist under the official-source rule, so prop variance and prop-pair correlations are blank.",
+   "source": "https://www.nfl.com/",
+   "blocking": false
+  },
+  {
+   "id": "FB-06",
+   "flag": "Historical injury effects not measured",
+   "detail": "No multi-season injury archive exists, so designation reliability and 'Questionable' calibration cannot be measured empirically.",
+   "source": "https://www.nfl.com/injuries/",
+   "blocking": false
+  },
+  {
+   "id": "FB-07",
+   "flag": "Replacement depth blank beyond official prose",
+   "detail": "Depth is published only where official text states the string; all other depth cells are blank + flagged.",
+   "source": "https://www.nfl.com/injuries/",
+   "blocking": false
+  },
+  {
+   "id": "FB-08",
+   "flag": "17+ overlapping NFL namespaces",
+   "detail": "The repository carries many partial, overlapping implementations of the same brief. This dashboard consolidates them; canonical choice is SG-08.",
+   "source": "https://github.com/sassnarep3-star/Own4",
+   "blocking": false
+  },
+  {
+   "id": "FB-09",
+   "flag": "Single availability capture cannot support backtesting",
+   "detail": "Only one availability/injury capture exists today; multi-day immutable snapshots are not yet retained (SG-06).",
+   "source": "https://www.nfl.com/injuries/",
+   "blocking": false
+  },
+  {
+   "id": "FB-10",
+   "flag": "No strategy qualifies; zero rewards paid",
+   "detail": "0 of 1,000 points awarded by design: G7 (verified prices) is blocked and the largest skill sample is 77 games (floor n≥300).",
+   "source": "https://www.nfl.com/standings/league/2026/REG",
+   "blocking": false
+  }
+ ]
+}
