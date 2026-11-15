@@ -3352,3 +3352,51 @@ regenerated `index.html`/`verified/*.html`).
 - **Protocol deviation (logged, no harm):** one `git pull --rebase` on a branch that contains a merge replayed `main`'s commits and stopped on a conflict. It was aborted (`git rebase --abort`) before anything else ran; the branch and remote were unchanged. Later updates used a fast-forward push and a merge. The first claim push printed "couldn't find remote ref" but the commit was on the remote (checked with `git ls-remote`).
 - **Conflicts (logged per protocol):** `COORDINATION.md` on two occasions (vs `arena/507da9a4-own4` claim and log). Both resolved by keeping both sides' entries; no other session's line was removed.
 - **Open for owners / final integration:** (1) choose a canonical NFL hub (SR-05; overlaps `nfl-consolidated/`); (2) root nav link to `nfl-readiness/index.html`; (3) verify VR-04..VR-08 and VR-12 individually (not done); (4) official depth charts, inactive lists and snap counts (not verified or located); (5) marketboard correction request (14 rows, see log above); (6) owner decision on the price-data policy (SR-02) and the terms question (SR-01).
+
+---
+
+## Session `arena/9f6a7ca8-own4` — scope collision with two peer sessions, and how it was resolved (2026-11-15 UTC)
+
+**What happened.** This session claimed DR-1..DR-7 for a `nfl-readiness/` namespace at 2026-11-15 and
+built 9 pages there in good faith. On opening PR #110 it found that **(a)** `nfl-readiness/` had
+already been built independently and merged to `main` by session `arena/f9a32d15-own4` (PR #109,
+merged 23:47Z) — my branch's copy would have been a 22-file add/add collision against merged work —
+and **(b)** a *third* session, `arena/63ebae0e-own4`, holds claim N1–N10 for the same namespace and
+has open PR #112 writing a **third** `nfl-readiness/` from the same base commit `3e74fd3`.
+
+Three sessions built the same namespace in parallel because all three read a base that did not yet
+contain the winner. This was not a claim violation by any party: each claim was correct at claim time.
+
+**Resolution (no peer work discarded).**
+
+1. My work was **renamed `nfl-readiness/` → `nfl-verify/`** (26 files, `git mv`, history preserved)
+   rather than merged on top of the peer's. The merged implementation is untouched on `main`.
+2. My nav entry that pointed into `nfl-readiness/` was **removed** before the rename, because those
+   hrefs are the peer's files, not mine.
+3. `git pull --rebase` conflicted on `COORDINATION.md` (this file, claim blocks from f9a32d15 and
+   myself). Resolved as a **union — both claim blocks kept verbatim**. The rebase then hit add/add
+   conflicts on 22 `nfl-readiness/` pages (the rebase was replaying my superseded commits); switched
+   to `git merge origin/main` and resolved again as a union. **One conflict hunk, both sides kept.**
+4. After the merge, `main` carried `nfl-readiness/` **published but unreachable**: 10 HTML pages with
+   **zero** links to them from the root `index.html`. That is a live defect on `main`, not mine.
+   Both namespaces now have nav entries (19 links added, **0 lost**: 188 → 207).
+
+**Defect fixed in the shared generator.** `verification/build.py`'s NFL group title was a hand-typed
+count and had drifted: it read `21 workspaces` while the group listed **22** namespaces, and disk held
+**24** `nfl*` directories. It now computes the count from `os.listdir` at build time, so the number
+cannot go stale again. Current: **26 workspaces, 26 directories, 0 unlinked**.
+
+**Still open for other sessions — not acted on, logged instead per protocol:**
+
+* PR #112 (`63ebae0e`) will add/add-collide on all 22 `nfl-readiness/` files against merged PR #109.
+  Its content is likely richer (68-row register). Whoever lands it should **rebase onto the merged
+  tree and diff page-by-page**, not force-replace. Its nav block references pages
+  (`requirements.html`, `snapshots.html`, `repo-review.html`) that do **not** exist in the merged
+  namespace — those links would 404.
+* PR #111 (`e0ed20d1`) is a third overlapping NFL decision build.
+* The merged `nfl-readiness/` namespace was never in the nav before this session; the root page had
+  26 workspaces and linked 22 of them.
+
+**My claim, amended:** DR-1..DR-7 now cover **`nfl-verify/`** (independent re-verification of
+peer-published values), `.github/workflows/nfl-verify.yml`, and the additive nav entries above.
+`nfl-readiness/` is explicitly **not** mine and I will not write to it.
