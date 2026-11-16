@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Questions that must be answered — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html" class="here">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Questions that must be answered</h1><p class="lede">12 items, each blocking a decision, each with a named owner and a named unblock.</p>
+<p>These are not open research questions — each one blocks a decision, and each names who can answer it and
+what it unblocks. Six need a person (an owner, an operator, a club's communications department); the rest need
+a data source that is not published on nfl.com.</p>
+<table><thead><tr>
+<th>ID</th>
+<th>Question</th>
+<th>Why it matters</th>
+<th>Who can answer</th>
+<th>Unblocks</th>
+<th>Premise</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>Q01</td><td>Which price source, if any, will be authorised?</td><td>Nothing market-related can be published without it. The site&#x27;s residual, ROI and CLV columns are all blank or labelled hypothetical until this is answered.</td><td>Owner</td><td>blocks R01, R04, R18, R57</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q02</td><td>Is a licensed feed acceptable, or must every number come from a free public page?</td><td>Changes the entire collection design, and the answer decides whether the depth/snap items are reachable at all.</td><td>Owner</td><td>blocks R06, R49, R53, R68</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q03</td><td>What counts as a &#x27;reward&#x27; in the competition?</td><td>No reward has been awarded and none will be until the owner defines one.</td><td>Owner</td><td>blocks R67</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q04</td><td>Should this site replace the root dashboard, or live beside it?</td><td>There are now more than 30 NFL namespaces. One entry point is a product decision.</td><td>Owner</td><td>affects navigation only</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q05</td><td>Should the leaderboard&#x27;s official sample be frozen at the 136-game log (weeks 1-9) or extended each week?</td><td>The arithmetic now matches the brief exactly (weeks 1-9 = 136 final games). What is still the owner&#x27;s call is whether the graded sample may grow past 136 as week 10+ results arrive, or whether a frozen 136-game sample is the permanent reference.</td><td>Owner</td><td>affects R19, R65, G1</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q06</td><td>Will the owner permit a scheduled collector to run in this repository?</td><td>Without it there is no multi-day history, so no surprise-based injury feature and no honest ablation.</td><td>Owner</td><td>blocks R21, R27, R28, R51, R52</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q07</td><td>How much compute and wall-clock time per week is acceptable?</td><td>The bootstrap and placebo tests are cheap now (under two seconds); a per-club interval plus a leave-one-game-out stability check multiplies that, still seconds.</td><td>Owner</td><td>not blocking</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q08</td><td>Is the club abbreviation set in this namespace the one the owner wants displayed?</td><td>nfl.com prints AZ and LA rather than ARI and LAR; this site keeps what the official page prints.</td><td>Owner</td><td>cosmetic</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q09</td><td>Should a tie be scored as half a win in any accuracy figure?</td><td>The official standings count ties as half a win, but an accuracy metric counting a tie as &#x27;correct&#x27; would be a modelling claim, not a fact. This namespace excludes them and publishes the count.</td><td>Owner</td><td>affects R35</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q10</td><td>Does the owner want the excluded/incomplete games shown prominently?</td><td>Two Week 10 fixtures are absent from every metric. They are listed on the results page and in the data; prominence is a design choice.</td><td>Owner</td><td>cosmetic</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q11</td><td>What is the minimum evidence the owner will accept as &#x27;skill&#x27;?</td><td>The registered gate is a week-cluster lower bound on Brier skill. If a different bar is intended (e.g. a full season of prospective forecasts), it should be registered before the season ends.</td><td>Owner</td><td>affects G2</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+<tr><td>Q12</td><td>Are the peer namespaces&#x27; availability numbers to be treated as verified?</td><td>This namespace found 348 player rows where peers publish 347 and 279. One of those is wrong, or the page changed; the owner should pick one canonical capture.</td><td>Owner + peer sessions</td><td>affects R45/R46</td><td><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/questions.json</span></td></tr>
+</tbody></table>
+<h2>How to find the missing information</h2>
+<ul>
+<li><strong>For prices and closing lines (Q01, Q08):</strong> the only route is a licensed feed with a written
+right to redistribute. Ask the operator for a historical archive with timestamps, not a live screen; the
+residual columns on <a href="week11.html">Week 11</a> fill in the day that archive arrives.</li>
+<li><strong>For depth, snap counts and inactives (Q03, Q09):</strong> NFL publishes snap counts on the game
+book PDFs, which are the official object the brief already names. The register needs one dated read per club
+per week, not a scrape of a depth chart.</li>
+<li><strong>For injury status history (Q06, Q12):</strong> a Wednesday/Thursday/Friday capture with a hash per
+capture. The first one is cheap; the value is in the second and third, because a level cannot be scored and a
+delta can.</li>
+<li><strong>For stadium roof and surface (Q10):</strong> the venue's own published stadium guide is the
+authority; the NFL game centre does not print it, so a fourth-party aggregation would be a citation we cannot
+defend.</li>
+<li><strong>For anything a peer namespace already holds (Q04, Q11):</strong> read it from that namespace rather
+than re-deriving it, and cite the namespace as the source.</li>
+</ul></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

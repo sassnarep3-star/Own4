@@ -382,6 +382,25 @@ NAV = [
         ("nfl-readiness/pages/sources.html", "NFL Readiness — sources", "legacy"),
         ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena/f7545de2-own4: the nfl-sources namespace. Every number on it is a
+    # transcription of an official nfl.com page (raw/*.txt, hashed), a walk-forward backtest registered in
+    # PREREGISTRATION.md before it was computed, and a 38-check gate (nfl-sources/engine/verify.py).
+    # Additive only: no existing link is altered or removed.
+    ("NFL Source Audit · registration + verified backtest (2026-11-16)", [
+        ("nfl-sources/pages/index.html", "NFL Source Audit — decision readiness (70 requirements)", "legacy"),
+        ("nfl-sources/pages/findings.html", "NFL Source Audit — findings", "legacy"),
+        ("nfl-sources/pages/backtest.html", "NFL Source Audit — backtest &amp; removal of luck", "legacy"),
+        ("nfl-sources/pages/week11.html", "NFL Source Audit — Week 11 own lines &amp; venues", "legacy"),
+        ("nfl-sources/pages/ratings.html", "NFL Source Audit — club ratings", "legacy"),
+        ("nfl-sources/pages/correlations.html", "NFL Source Audit — correlations (n published)", "legacy"),
+        ("nfl-sources/pages/strategies.html", "NFL Source Audit — strategies &amp; change tests", "legacy"),
+        ("nfl-sources/pages/leaderboard.html", "NFL Source Audit — two-stage leaderboard", "legacy"),
+        ("nfl-sources/pages/requirements.html", "NFL Source Audit — all 70 requirements", "legacy"),
+        ("nfl-sources/pages/suggestions.html", "NFL Source Audit — suggestions (18, none implemented)", "legacy"),
+        ("nfl-sources/pages/questions.html", "NFL Source Audit — questions that block decisions", "legacy"),
+        ("nfl-sources/pages/flagged.html", "⚑ NFL Source Audit — flagged for review", "legacy"),
+        ("nfl-sources/pages/sources.html", "NFL Source Audit — sources &amp; provenance (hashed)", "legacy"),
+    ]),
     # Added 2026-11-15 by session arena/d941f3c1-own4 (scope D1-D12). Namespace name note: this tree was
 # claimed and built as nfl-readiness/, then renamed to nfl-availability-desk/ at merge time because
 # session arena/e0ed20d1-own4 had already published nfl-readiness/ on main (its freeze commit 64a20e8

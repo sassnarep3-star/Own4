@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Strategies and change tests — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html" class="here">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Strategies and change tests</h1><p class="lede">Six registered rows: two candidates, three controls, one blocked family. Each with the evidence that would promote it and the evidence that would kill it.</p>
+<div class="note"><strong>No reward is payable, and the policy says why.</strong> No strategy passes G1 (n &gt;= 300) or G2 (Brier-skill lower bound above 0), so no reward can be earned. A reward paid on accuracy or on an assumed-price ROI would reward luck.. A reward becomes
+payable only if a strategy clears G1 and G2 and survives G7 for four consecutive weeks.</div>
+<h2>Register</h2><table><thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>Family</th>
+<th>Status</th>
+<th class="num">n</th>
+<th class="num">Accuracy</th>
+<th>Promote / demote</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>S1</td><td>Model favourite (singles, shadow)</td><td>singles</td><td><span class="chip met">paper (shadow)</span></td><td class="num">115</td><td class="num">67.8%</td><td>↑ n reaches 300 graded games (G1) and the week-cluster lower bound on Brier skill stays above 0<br>↑ the paired difference against the record-only control excludes 0 on a larger sample<br>↓ the Brier-skill lower bound is at or below 0 for 4 consecutive weeks (G7)<br>↓ the paired difference against S3 falls below 0 on a larger sample</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>S2</td><td>Model favourite, high confidence (singles, shadow)</td><td>singles</td><td><span class="chip met">paper (shadow)</span></td><td class="num">61</td><td class="num">70.5%</td><td>↑ n reaches 300 and the lower bound stays above 0 after the multiplicity adjustment for 2 registered singles strategies<br>↓ G7 as S1; or the confidence bucket&#x27;s calibration bin stays inverted (no higher hit rate than the 0.50-0.60 bin) as n grows</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>S3</td><td>Better-record rule (CONTROL, not a candidate)</td><td>singles (control)</td><td><span class="chip na">control</span></td><td class="num">115</td><td class="num">65.2%</td><td>↑ never — a control cannot be promoted; it exists to make the model prove itself<br>↓ n/a</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>S4</td><td>Fade of S1 (registered falsification test)</td><td>singles (control)</td><td><span class="chip na">control</span></td><td class="num">115</td><td class="num">32.2%</td><td>↑ never — a fade scoring well is evidence the original score is noise<br>↓ n/a</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>C1</td><td>Coin flip (control baseline)</td><td>singles (control)</td><td><span class="chip na">control</span></td><td class="num">115</td><td class="num">50.0%</td><td>↑ never<br>↓ n/a</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>P1</td><td>Parlays, same-game parlays, prop combos</td><td>parlays / SGP / props</td><td><span class="chip na">not registered — blocked</span></td><td class="num">0</td><td class="num">—</td><td>↑ a validated joint distribution for the exact leg set, and the operator&#x27;s void/push rules published on the row<br>↓ n/a (nothing live)</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+</tbody></table>
+<h2>Each strategy, in both directions</h2>
+<p>A one-sided change test is a marketing device: it lists only the evidence that would confirm its author.
+Every row above carries a promote line and a demote line, and the four controls are marked as controls so they
+can never be mistaken for candidates.</p>
+<details><summary>S1 Model favourite (singles, shadow) — what would change our mind</summary>
+<p><strong>Definition.</strong> Bet the club the rating model makes the favourite. Decision uses the model&#x27;s own probability only; no price input.</p><p><strong>Registered:</strong> PREREGISTRATION.md §7</p>
+<p><strong>Change test.</strong> Right now: a lower bound of -0.0148 on Brier skill means the model has NOT been shown to beat a coin flip with confidence, while a model-free rule scores within 2.6 points of it. If 184 more graded games keep the lower bound below 0, this strategy is dead and should be withdrawn rather than tuned.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details><details><summary>S2 Model favourite, high confidence (singles, shadow) — what would change our mind</summary>
+<p><strong>Definition.</strong> S1 restricted to fixtures where the model&#x27;s own probability is at least 0.65.</p><p><strong>Registered:</strong> PREREGISTRATION.md §7 (threshold 0.65 frozen)</p>
+<p><strong>Change test.</strong> The 0.60-0.70 bin currently observes 41.7% home wins against 64.4% predicted — one bin, 12 games. If that inversion survives 50 more games, the 0.65 threshold is selecting the model&#x27;s worst probabilities, not its best, and S2 must be withdrawn.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details><details><summary>S3 Better-record rule (CONTROL, not a candidate) — what would change our mind</summary>
+<p><strong>Definition.</strong> Pick the club with the better wins-minus-losses record computed from games before the cutoff. Zero model content.</p><p><strong>Registered:</strong> PREREGISTRATION.md §7</p>
+<p><strong>Change test.</strong> This control is the reason the model&#x27;s headline accuracy is not treated as evidence: they differ by 2.6 points with an interval of [-3.7, +8.5]. If this control ever beats the model on a larger sample, the ratings are not earning their complexity.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details><details><summary>S4 Fade of S1 (registered falsification test) — what would change our mind</summary>
+<p><strong>Definition.</strong> Bet the opposite of S1. If the model were noise, this would score about the same.</p><p><strong>Registered:</strong> PREREGISTRATION.md §6.5</p>
+<p><strong>Change test.</strong> 32.2% accuracy when inverted, against 67.8% for the original, is the shape you want: the original is not symmetric noise.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details><details><summary>C1 Coin flip (control baseline) — what would change our mind</summary>
+<p><strong>Definition.</strong> A fair coin per fixture, 2 000 repeated runs.</p><p><strong>Registered:</strong> PREREGISTRATION.md §7</p>
+<p><strong>Change test.</strong> Nothing: it is the null the whole page is measured against.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details><details><summary>P1 Parlays, same-game parlays, prop combos — what would change our mind</summary>
+<p><strong>Definition.</strong> Not defined on purpose: a combination cannot be ranked without a validated joint probability and the operator&#x27;s void/push rules.</p><p><strong>Registered:</strong> blocked by G6</p>
+<p><strong>Change test.</strong> CR-03 shows a same-game scoring dependence of r = 0.053 (n = 296, interval includes 0) — too weak to justify independence and too imprecise to justify dependence. Multiplying marginal probabilities stays forbidden until a joint number exists.</p><p class="tiny">Source: <a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">official results</a></p></details>
+<h2>Reward policy</h2><table><thead><tr>
+<th>Item</th>
+<th>Setting</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>Currency</td><td>none</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>Awarded</td><td>0</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>Would pay if</td><td>a strategy clears G1 and G2 and survives G7 for four consecutive weeks</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>Controls</td><td>S3, S4, C1 are controls and are never eligible for a reward</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+<tr><td>Registered singles strategies</td><td>2</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/strategies.json</span></td></tr>
+</tbody></table>
+<h2>Why parlays, same-game parlays and prop combinations are listed but not defined</h2>
+<p>A combination has no respectable probability without a joint distribution over the exact legs, and the
+operator's void and push rules. Gate G6 requires both before a combination may be scored; CR-03 gives a
+scoring dependence that is neither distinguishable from zero nor usable, so the gate cannot open. Defining
+these strategies anyway would mean publishing a number with no derivation, which is the one thing this
+namespace refuses to do.</p></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

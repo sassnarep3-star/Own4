@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Flagged for review — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html" class="here">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Flagged for review</h1><p class="lede">Irregularities found while reading official pages, published instead of quietly corrected.</p>
+<div class="note">Nothing on this page blocks publication, and nothing on it was smoothed over. Items are
+listed because they are irregularities, disagreements with a peer namespace, or deliberate blanks where a
+value does not exist. Each one says what was observed, what was <em>not</em> done about it, and what would
+settle it.</div>
+<table><thead><tr>
+<th>ID</th>
+<th>Item</th>
+<th>What was observed</th>
+<th>Official source</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td>FL-01</td><td>The inherited results feed is 73% unverified</td><td>nfl-book/data/results_feed.json marks 105 of 137 rows aggregate_only, i.e. not re-read page by page. This namespace re-read all 148 and found every shared row correct, so the feed is right but was not certified. Reconciliation now exists.</td><td><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-book/" rel="noopener">source</a></td><td>resolved by this read (reconciliation published)</td></tr>
+<tr><td>FL-02</td><td>The brief&#x27;s 136-game log is exactly weeks 1-9; the site&#x27;s corpus is 148 because week 10 is also final</td><td>Resolved in the source&#x27;s favour: 16+16+16+16+15+14+14+14+15 = 136 FINAL games across weeks 1-9, and 12 more final games in week 10 (PIT at CIN and LAC at BAL were still live/unplayed at the read). Peer pages that describe a 136-game archive are therefore describing weeks 1-9, and are consistent with this read; a page that says 137 is off by one.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-9" rel="noopener">source</a></td><td>resolved (arithmetic on official counts)</td></tr>
+<tr><td>FL-03</td><td>Arrowhead Stadium is printed as &#x27;ARROWHEAD STADIUM&#x27; on the Week 11 game centre</td><td>The game centre prints &#x27;StadiumSTADIUMARROWHEAD STADIUM&#x27; for the Cardinals at Chiefs fixture, while the ticket link on the same page names &#x27;GEHA Field at Arrowhead Stadium&#x27;. Transcribed exactly as the Game Info block prints it; the discrepancy is recorded, not corrected.</td><td><a class="src" href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11" rel="noopener">source</a></td><td>flagged: naming discrepancy</td></tr>
+<tr><td>FL-04</td><td>Peer availability captures disagree with each other: 347 rows vs 279 rows, 107 rows for one</td><td>Two peer namespaces publish different totals for the same Week 10 report. nfl-availability-desk/data/availability_snapshot_2026-11-15.csv holds 347 player rows across 28 clubs with 171 game-status cells filled; the oldest capture in nfl-book holds 107 rows and states on its face that 6 of 8 page chunks were never read. The owner&#x27;s brief cites 279 rows / 2 no-injury sections as a later state of the same page, and 254 as an earlier one. A page regenerated through the week produces different counts at different clocks, so the counts are not necessarily wrong — but nothing in the repository shows which clock produced which number. Needs one owner-ordered re-capture with a timestamp, not a fourth number.</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td><td>flagged: peer counts disagree (SUG-08, Q12)</td></tr>
+<tr><td>FL-05</td><td>The model&#x27;s Brier skill interval includes zero</td><td>The walk-forward Brier skill vs the coin-flip baseline is 0.1198 with a week-cluster 95% interval of [-0.0148, 0.2635]. The accuracy-vs-0.500 interval clears, but as the page shows, a model-free better-record rule also clears it. By the registered gate the model is NOT skilful yet.</td><td><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html" rel="noopener">source</a></td><td>flagged: gate not cleared</td></tr>
+<tr><td>FL-06</td><td>The record-only control is not separable from the model</td><td>S3 (pick the better win-loss record) beats the model on 25 games and the model beats it on 25; the paired accuracy difference is +0.026 with an interval of [-0.037, +0.085]. Any claim that the ratings add value is unsupported on this sample.</td><td><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html" rel="noopener">source</a></td><td>flagged: no separation</td></tr>
+<tr><td>FL-07</td><td>An ARROWHEAD-style naming issue on WA/Washington: game centre prints &#x27;NORTHWEST STADIUM&#x27;</td><td>The Commanders&#x27; Week 11 game centre prints &#x27;StadiumSTADIUMNORTHWEST STADIUM&#x27;, a former name, while the ticket link on the same page uses the current sponsorship name. Transcribed as printed.</td><td><a class="src" href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11" rel="noopener">source</a></td><td>flagged: naming discrepancy</td></tr>
+<tr><td>FL-08</td><td>RELIANT STADIUM is printed for a 2026 Texans home game</td><td>The Week 11 Colts at Texans game centre prints &#x27;StadiumSTADIUMRELIANT STADIUM&#x27;. That is the stadium&#x27;s former name; the page&#x27;s own ticket link names NRG Stadium. Transcribed as printed and flagged, not silently corrected.</td><td><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">source</a></td><td>flagged: naming discrepancy</td></tr>
+<tr><td>FL-09</td><td>The NFL publishes no &#x27;neutral site&#x27; designation</td><td>International fixtures are printed inside an &#x27;International Game&#x27; section on the week page and the game centre prints a foreign city. This namespace uses that printed section as its only source for the 0-home-field flag and says so on every row; it never claims the league calls a game neutral.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">source</a></td><td>flagged: sourced, but a derivation</td></tr>
+<tr><td>FL-10</td><td>Rest is the strongest signal found and it is not in the baseline model</td><td>CR-04: rest-day differential vs home margin, r = 0.3727, n = 132, 95% CI [0.216, 0.511]. 63% of games have zero rest differential, so the correlation is carried by 49 games; leave-one-week-out ranges from 0.329 to 0.426, and the sign split is monotone (+7.48 mean margin with a home rest edge, -4.65 against). Registered as SUG-05, NOT slipped into the baseline.</td><td><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-sources/pages/correlations.html" rel="noopener">source</a></td><td>flagged: candidate, untested</td></tr>
+<tr><td>FL-11</td><td>Two Week 10 games are unfinished, so the corpus is 148 not 150</td><td>PIT at CIN was printed &#x27;Q1 ... Live&#x27; and LAC at BAL was printed as unplayed when read. Both are excluded from every metric with no score recorded. A later reader will see a different corpus size for the same code; this is expected and is why the read timestamp is on every page.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td><td>informational (time-dependent)</td></tr>
+<tr><td>FL-12</td><td>The assumed -110 price overstates any real return</td><td>The staking figures are computed at a flat -110 for consistency with the inherited workspaces. A winner-picking strategy is settled at a moneyline, and the mean fair price of S1&#x27;s own picks is about -273, so the &#x27;ROI&#x27; at -110 is not a claim about money. It is not ranked anywhere.</td><td><a class="src" href="https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html" rel="noopener">source</a></td><td>flagged: label on every row</td></tr>
+<tr><td>FL-13</td><td>The Week 11 bye list could not be confirmed from the page read</td><td>The Week 11 page&#x27;s &#x27;Teams on Bye&#x27; block was not rendered in the read window, so no bye list is asserted for Week 11 even though the fixture list implies six idle clubs. Asserted nowhere; flagged.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">source</a></td><td>flagged: unread</td></tr>
+<tr><td>FL-14</td><td>The tie rule for accuracy is a choice, not a fact</td><td>nfl.com counts a tie as half a win in standings; this site excludes ties from accuracy and publishes the count (2 tie games in the corpus). Different choices would move accuracy by up to one game.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td>flagged: policy (Q09)</td></tr>
+<tr><td>FL-15</td><td>CR-05 prints group means with n = 8 and no r</td><td>Eight international games is too few for a correlation. The group means are shown because they are arithmetic on official scores; no coefficient is printed because it would be noise with a decimal point. This is a deliberate blank.</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td><td>informational</td></tr>
+</tbody></table></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

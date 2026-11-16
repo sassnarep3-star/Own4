@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Week 11: our own line, originated side → total → moneyline — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html" class="here">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Week 11: our own line, originated side → total → moneyline</h1><p class="lede">13 fixtures. Side first, then total, then moneyline, in that order, twice — before and after week 10. The market columns are blank because no official page carries one.</p>
+<p>Six columns per fixture are blank on purpose: no official NFL page publishes a market price, so the market
+line, the market total, the market moneyline and the three residuals do not exist. Instead of importing a
+number from a site we cannot cite, we publish <em>our own</em> line twice and the movement between the two.</p>
+<div class="note"><strong>Why two snapshots.</strong> <code>open</code> is the model fitted through week 9 —
+the line we would have posted before week 10 was played. <code>update</code> is the model fitted through week
+10. The difference between the columns is the effect of one week of official results on our own opinion,
+before any opponent has published theirs. When a price source exists, the residual columns fill in and the
+same table becomes a market comparison without changing shape.</div>
+<h2>Our line, week 11</h2><table><thead><tr>
+<th>ID</th>
+<th>Fixture</th>
+<th class="num">Open line</th>
+<th class="num">Update line</th>
+<th class="num">Open total</th>
+<th class="num">Update total</th>
+<th class="num">ML (fair)</th>
+<th class="num">P(home)</th>
+<th>Market</th>
+<th>Source</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>W11-IND-HOU</td><td>IND @ HOU<br><span class="tiny">8:15 PM · Nov 19</span></td><td class="num">-6.2</td><td class="num">-5.0</td><td class="num">50.1</td><td class="num">49.9</td><td class="num">-346</td><td class="num">0.7759</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-MIA-BUF</td><td>MIA @ BUF<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">-10.6</td><td class="num">-11.1</td><td class="num">48.4</td><td class="num">48.0</td><td class="num">-917</td><td class="num">0.9017</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-BAL-CAR</td><td>BAL @ CAR<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">-2.4</td><td class="num">-2.1</td><td class="num">50.6</td><td class="num">49.0</td><td class="num">-160</td><td class="num">0.6155</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-NO-CHI</td><td>NO @ CHI<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">-7.5</td><td class="num">-6.8</td><td class="num">51.8</td><td class="num">50.8</td><td class="num">-460</td><td class="num">0.8214</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/saints-at-bears-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-TEN-DAL</td><td>TEN @ DAL<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">-5.5</td><td class="num">-5.2</td><td class="num">49.4</td><td class="num">53.2</td><td class="num">-301</td><td class="num">0.7505</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-TB-DET</td><td>TB @ DET<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">+0.3</td><td class="num">-1.1</td><td class="num">46.9</td><td class="num">46.7</td><td class="num">+106</td><td class="num">0.4861</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-AZ-KC</td><td>AZ @ KC<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">-9.1</td><td class="num">-11.1</td><td class="num">46.5</td><td class="num">46.6</td><td class="num">-649</td><td class="num">0.8665</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-PIT-PHI</td><td>PIT @ PHI<br><span class="tiny">1:00 PM · Nov 22</span></td><td class="num">+8.0</td><td class="num">+8.1</td><td class="num">38.4</td><td class="num">38.1</td><td class="num">+508</td><td class="num">0.1645</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-NYJ-LAC</td><td>NYJ @ LAC<br><span class="tiny">4:05 PM · Nov 22</span></td><td class="num">+3.9</td><td class="num">+3.4</td><td class="num">42.3</td><td class="num">41.8</td><td class="num">+216</td><td class="num">0.3165</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-JAX-NYG</td><td>JAX @ NYG<br><span class="tiny">4:25 PM · Nov 22</span></td><td class="num">+9.1</td><td class="num">+9.9</td><td class="num">43.0</td><td class="num">44.3</td><td class="num">+644</td><td class="num">0.1344</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-LV-DEN</td><td>LV @ DEN<br><span class="tiny">4:25 PM · Nov 22</span></td><td class="num">-4.4</td><td class="num">-4.3</td><td class="num">51.0</td><td class="num">49.9</td><td class="num">-240</td><td class="num">0.7056</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-MIN-SF</td><td>MIN @ SF<br><span class="tiny">8:20 PM · Nov 22</span></td><td class="num">-3.0</td><td class="num">-1.1</td><td class="num">38.5</td><td class="num">41.5</td><td class="num">-178</td><td class="num">0.6407</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+<tr><td>W11-CIN-WAS</td><td>CIN @ WAS<br><span class="tiny">8:15 PM · Nov 23</span></td><td class="num">+8.3</td><td class="num">+7.9</td><td class="num">52.0</td><td class="num">51.5</td><td class="num">+539</td><td class="num">0.1564</td><td><span class="blank">not published</span></td><td><a class="src" href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11" rel="noopener">box score</a></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">week 11 schedule</a><br><span class="tiny">data/lines.json</span></td></tr>
+</tbody></table>
+<p class="tiny">Sign convention: the home line is the handicap from the home club's side, so −6.2 means the
+home club is favoured by 6.2 points. Moneyline is the fair American price implied by the model's own
+probability; it is not an offer and it is not beatable by construction.</p>
+<h2>Movement between the two snapshots</h2><table><thead><tr>
+<th>Fixture</th>
+<th class="num">Δ side</th>
+<th class="num">Δ total</th>
+<th class="num">Δ P(home)</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>W11-IND-HOU</td><td class="num">+1.2</td><td class="num">-0.2</td><td class="num">-0.0456</td><td class="num"><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-MIA-BUF</td><td class="num">-0.5</td><td class="num">-0.4</td><td class="num">+0.0095</td><td class="num"><a class="src" href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-BAL-CAR</td><td class="num">+0.3</td><td class="num">-1.6</td><td class="num">-0.0159</td><td class="num"><a class="src" href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-NO-CHI</td><td class="num">+0.7</td><td class="num">-1.0</td><td class="num">-0.0237</td><td class="num"><a class="src" href="https://www.nfl.com/games/saints-at-bears-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-TEN-DAL</td><td class="num">+0.3</td><td class="num">+3.8</td><td class="num">-0.0150</td><td class="num"><a class="src" href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-TB-DET</td><td class="num">-1.4</td><td class="num">-0.2</td><td class="num">+0.0649</td><td class="num"><a class="src" href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-AZ-KC</td><td class="num">-2.0</td><td class="num">+0.1</td><td class="num">+0.0461</td><td class="num"><a class="src" href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-PIT-PHI</td><td class="num">+0.1</td><td class="num">-0.3</td><td class="num">-0.0021</td><td class="num"><a class="src" href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-NYJ-LAC</td><td class="num">-0.5</td><td class="num">-0.5</td><td class="num">+0.0211</td><td class="num"><a class="src" href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-JAX-NYG</td><td class="num">+0.8</td><td class="num">+1.3</td><td class="num">-0.0208</td><td class="num"><a class="src" href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-LV-DEN</td><td class="num">+0.1</td><td class="num">-1.1</td><td class="num">-0.0043</td><td class="num"><a class="src" href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-MIN-SF</td><td class="num">+1.9</td><td class="num">+3.0</td><td class="num">-0.0881</td><td class="num"><a class="src" href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-CIN-WAS</td><td class="num">-0.4</td><td class="num">-0.5</td><td class="num">+0.0099</td><td class="num"><a class="src" href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11">box score</a><br><span class="tiny">lines.json</span></td></tr>
+</tbody></table>
+<h2>Venue of every fixture</h2><table><thead><tr>
+<th>Fixture</th>
+<th>City</th>
+<th>Stadium</th>
+<th>Intl</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr><td>AZ @ KC</td><td>KANSAS CITY, MO</td><td>ARROWHEAD STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>BAL @ CAR</td><td>CHARLOTTE, NC</td><td>BANK OF AMERICA STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>CIN @ WAS</td><td>LANDOVER, MD</td><td>NORTHWEST STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>IND @ HOU</td><td>HOUSTON, TX</td><td>RELIANT STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>JAX @ NYG</td><td>EAST RUTHERFORD, NJ</td><td>METLIFE STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>LV @ DEN</td><td>DENVER, CO</td><td>EMPOWER FIELD AT MILE HIGH</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>MIA @ BUF</td><td>ORCHARD PARK, NY</td><td>HIGHMARK STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>MIN @ SF</td><td>MEXICO CITY</td><td>ESTADIO BANORTE</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/vikings-at-49ers-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>NO @ CHI</td><td>CHICAGO, IL</td><td>SOLDIER FIELD</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/saints-at-bears-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>NYJ @ LAC</td><td>INGLEWOOD, CA</td><td>SOFI STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>PIT @ PHI</td><td>PHILADELPHIA, PA</td><td>LINCOLN FINANCIAL FIELD</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>TB @ DET</td><td>DETROIT, MI</td><td>FORD FIELD</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11" rel="noopener">game centre</a></td></tr>
+<tr><td>TEN @ DAL</td><td>ARLINGTON, TX</td><td>AT&amp;T STADIUM</td><td>—</td><td><a class="src" href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11" rel="noopener">game centre</a></td></tr>
+</tbody></table>
+<p class="tiny">Venue is transcribed from the Game Info block of each official game-centre page, one read per
+fixture, and is the only source for stadium names on this site. Roof and surface, which the brief also asks
+for, are not printed on that block and are therefore absent rather than guessed.</p>
+<h2>Schedule facts as printed</h2><table><thead><tr>
+<th>Fixture</th>
+<th>Kickoff (as printed)</th>
+<th>Network (as printed)</th>
+<th>Section on the page</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>W11-IND-HOU</td><td>8:15 PM</td><td>PRIME</td><td>Thursday Night Football, November 19th</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-MIA-BUF</td><td>1:00 PM</td><td>CBS</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-BAL-CAR</td><td>1:00 PM</td><td>FOX</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-NO-CHI</td><td>1:00 PM</td><td>FOX</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-TEN-DAL</td><td>1:00 PM</td><td>FOX</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-TB-DET</td><td>1:00 PM</td><td>FOX</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-AZ-KC</td><td>1:00 PM</td><td>CBS</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-PIT-PHI</td><td>1:00 PM</td><td>CBS</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-NYJ-LAC</td><td>4:05 PM</td><td>FOX</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-JAX-NYG</td><td>4:25 PM</td><td>CBS</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-LV-DEN</td><td>4:25 PM</td><td>CBS</td><td>Sunday, November 22nd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-MIN-SF</td><td>8:20 PM</td><td>NBC</td><td>Sunday Night Football, November 22nd (International Game, Mexico City)</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+<tr><td>W11-CIN-WAS</td><td>8:15 PM</td><td>ESPN</td><td>Monday Night Football, November 23rd</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11">schedule page</a><br><span class="tiny">lines.json</span></td></tr>
+</tbody></table>
+</main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

@@ -1,0 +1,207 @@
+{
+ "dataset": "nfl_sources_suggestions",
+ "title": "Suggestions for the owner to review and choose between before anything is implemented",
+ "built_utc": "2026-11-16",
+ "workflow": "A suggestion is a decision, not an action. Each row names the options, what the option buys, what it costs and the number that would clear the underlying block. The verdict column is BLANK by rule: choosing is the reviewer's job, and a session that fills it in is making the owner's decision for them.",
+ "verdict_rule": "verdict is empty on every row until the owner chooses",
+ "rows": [
+  {
+   "id": "SUG-01",
+   "suggestion": "Adopt a licensed price archive, or state formally that no price column will ever be published",
+   "requirements": "R01/R04/R18/R57",
+   "options": "A: buy a licensed archive. B: state the policy and delete the column. C: keep the column blank and flagged (current).",
+   "why": "Every residual, every ROI and every CLV number in the repository is currently unfalsifiable.",
+   "cost": "A: cost of a licence + legal review. B: no cost, loses the residual. C: no cost, the site keeps a permanently blank column.",
+   "clearing_number": "one citable price source",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "SUG-02",
+   "suggestion": "Add a prior season to create a real final holdout",
+   "requirements": "R65",
+   "options": "A: read 2025 week pages the same way (17 weeks of pages). B: refit the model to and hold out the second half of 2026 only.",
+   "why": "The current half-sample persistence test is weaker than a season-level holdout.",
+   "cost": "A: ~18 more page reads, one session. B: no cost, weaker evidence.",
+   "clearing_number": "one archived prior season",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9"
+  },
+  {
+   "id": "SUG-03",
+   "suggestion": "Publish a walk-forward multi-season rating with uncertainty bands per club",
+   "requirements": "R26",
+   "options": "A: bootstrap the ratings by resampling games. B: report a fitted-rating interval analytically.",
+   "why": "The ratings page shows point estimates only; a two-point gap between clubs is not yet distinguishable.",
+   "cost": "A: one engine function + 2 000 resamples (~1 s). B: closed form, no bootstrap.",
+   "clearing_number": "a published per-club interval",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-04",
+   "suggestion": "Extend the walk-forward register to Weeks 11-18 as the season is played",
+   "requirements": "R32/R35",
+   "options": "A: append each week after it is final. B: one end-of-season rebuild.",
+   "why": "Prospective samples are the only ones that cannot be overfit; the current 116 forecasts are in-sample for the season but out-of-sample per week.",
+   "cost": "A: one page read per week. B: 18 page reads at the end.",
+   "clearing_number": "n >= 300 graded games",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "SUG-05",
+   "suggestion": "Register and test a rest-day-aware model as a separate, pre-registered strategy",
+   "requirements": "R14/R35",
+   "options": "A: add rest differential as a term in a NEW registered model. B: leave the baseline alone.",
+   "why": "CR-04 is the strongest signal found (r = 0.373, n = 132) and the baseline ignores it.",
+   "cost": "A: one model variant + the same gates. B: zero.",
+   "clearing_number": "a registered variant that clears G2",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-06",
+   "suggestion": "Decide what a 'reward' is before any strategy can earn one",
+   "requirements": "R67",
+   "options": "A: none (research only). B: non-monetary recognition. C: a defined scoring currency.",
+   "why": "A reward policy that cannot be exercised is untested policy.",
+   "cost": "A: zero. B/C: a policy decision that is the owner's, not this session's.",
+   "clearing_number": "an owner decision",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-07",
+   "suggestion": "Consolidate the 30+ NFL namespaces into one navigable site",
+   "requirements": "R22/R69",
+   "options": "A: keep the root dashboard as the only entry point and deprecate the rest. B: merge data files. C: leave as is.",
+   "why": "A reader currently has to choose between namespaces that disagree about the same facts (see FL-10).",
+   "cost": "A: a navigation decision. B: a merge conflict risk across sessions. C: zero.",
+   "clearing_number": "an integration decision",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-08",
+   "suggestion": "Reconcile the two Week 10 injury row counts and publish one dated number",
+   "requirements": "R45/R46",
+   "options": "A: one owner re-reads the page and publishes the count with a timestamp. B: publish both counts with both timestamps.",
+   "why": "This namespace observed 348 player rows while peers publish 347 and 279; see FL-04.",
+   "cost": "A: one page read. B: zero (both are already timestamped).",
+   "clearing_number": "a dated, single-owner re-capture",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "SUG-09",
+   "suggestion": "Publish the season-to-date record for every club from the corpus, with the official page beside it",
+   "requirements": "R02",
+   "options": "A: add a standings page generated from the corpus. B: link to nfl.com only.",
+   "why": "The corpus already passes an exact 160-field check against the official standings, so a generated table costs nothing and makes the check visible.",
+   "cost": "A: one engine function. B: zero.",
+   "clearing_number": "already met",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "SUG-10",
+   "suggestion": "Add the 2025 season to the correlation set to test whether CR-04 replicates",
+   "requirements": "R07",
+   "options": "A: read 2025 week pages. B: wait for 2026 to finish.",
+   "why": "One season's r = 0.373 with n = 132 is suggestive, not established.",
+   "cost": "A: ~18 page reads. B: 8 more weeks.",
+   "clearing_number": "a replicated CR-04",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9"
+  },
+  {
+   "id": "SUG-11",
+   "suggestion": "Replace the normal-approximation p-values with exact t quantiles",
+   "requirements": "R07",
+   "options": "A: implement the incomplete beta function (stdlib). B: keep the approximation and disclose it.",
+   "why": "The p column is disclosed as approximate; at n = 8 that matters.",
+   "cost": "A: ~40 lines of careful maths + tests. B: zero.",
+   "clearing_number": "not blocking",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-12",
+   "suggestion": "Publish the model's own calibration with intervals, not just bins",
+   "requirements": "R16",
+   "options": "A: add a week-cluster bootstrap to each reliability bin. B: keep the table as a diagnostic.",
+   "why": "Two of the five bins are visibly off the diagonal and it is not yet possible to say whether that is noise.",
+   "cost": "A: one function, reuses the bootstrap. B: zero.",
+   "clearing_number": "a binned interval",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-13",
+   "suggestion": "Make the international-game flag a sourced column rather than a derivation",
+   "requirements": "R14",
+   "options": "A: quote the official section heading on every row (done) and stop calling it neutral (done). B: also record whether the printed home club is the designated host.",
+   "why": "The NFL does not print 'neutral'; a derivation that silently becomes a fact is exactly the failure mode this repository keeps finding.",
+   "cost": "A: done. B: needs one more read per fixture.",
+   "clearing_number": "already met (A)",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-14",
+   "suggestion": "Add a per-club model page with the inputs and the interval",
+   "requirements": "R15",
+   "options": "A: one page per club generated from model.json. B: one table on the ratings page.",
+   "why": "A scout-style reader wants one club, not 32 rows.",
+   "cost": "A: 32 pages. B: one table (cheaper).",
+   "clearing_number": "an owner preference",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "SUG-15",
+   "suggestion": "Test the model against the closing line once a price archive exists",
+   "requirements": "R01",
+   "options": "A: recompute residuals against closing prices. B: do nothing until a source exists.",
+   "why": "Until then, the residual column is blank and any claimed edge is unfalsifiable.",
+   "cost": "A: depends on SUG-01. B: zero.",
+   "clearing_number": "a price archive",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "SUG-16",
+   "suggestion": "Publish the excluded games as a first-class table, not a footnote",
+   "requirements": "R02",
+   "options": "A: one table of games not yet final with the time read. B: a footnote (current).",
+   "why": "Two Week 10 games are deliberately absent from every metric; a reader deserves to see which.",
+   "cost": "A: already in results.json, needs a render. B: done.",
+   "clearing_number": "already available",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "SUG-17",
+   "suggestion": "Add a stability check: how much do the Week 11 lines move when one game is removed?",
+   "requirements": "R26/R59",
+   "options": "A: leave-one-game-out on the Week 11 lines. B: leave-one-week-out on the ratings.",
+   "why": "A line that moves 2 points when one Week 10 game is deleted is not a line, it is noise.",
+   "cost": "A: 148 refits (~1 s). B: 10 refits.",
+   "clearing_number": "a published stability number",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "SUG-18",
+   "suggestion": "Reconcile the corpus size phrasing across the repository: 136 IS weeks 1-9",
+   "requirements": "R19",
+   "options": "A: describe the archive as '136 games, weeks 1-9' everywhere. B: keep an unqualified number and footnote the window.",
+   "why": "The brief's 136 is exactly right for weeks 1-9; only an unqualified '148' or '137' would be wrong. Naming the window costs one clause and removes a recurring confusion.",
+   "cost": "A: a text edit in each peer namespace (not owned here). B: zero.",
+   "clearing_number": "one number with its window, one owner",
+   "verdict": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9"
+  }
+ ]
+}

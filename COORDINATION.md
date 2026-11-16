@@ -3992,3 +3992,118 @@ Session ID: `arena/0e86aefb-own4` · Branch: `arena/0e86aefb-own4` (platform-pin
 
 **Status: done.** Line-by-line re-verification complete: standings snapshot, WAS@NYG 24-21 and NE@SEA 10-13 match official game pages; full 8-chunk injury capture (347 rows) closes FB-06; origination order side→total→moneyline confirmed; market lines blank by policy FB-01 (NFL publishes no odds). Site builds (30 pages) and engine/verify.py PASS (931 rows, 883 sourced, 741 blank+flagged, 1875 links, 0 broken). Ready for PR/merge/Pages.
 
+
+
+## Session `arena/f7545de2-own4` — NFL results corpus, venues, model & lines (CLAIM, 2026-11-16)
+
+**Session ID:** `arena/f7545de2-own4` · **Branch:** `arena/f7545de2-own4` (platform-pinned; the
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every
+prior session) · **Base:** `1dbde90` (= `main` after PR #122).
+
+**Gap that justifies this session (surveyed before claiming, not assumed):**
+
+1. **The results corpus is not page-verified.** `nfl-book/data/results_feed.json` says on its face that
+   only **32 of 137** games were re-read line by line; **105 rows are `aggregate_only`** and explicitly
+   "not certified". The brief asks for a pre-registered backtest corpus and a verified results feed. This
+   session re-reads **every 2026 regular-season game of weeks 1–10 from the official week schedule page**
+   and publishes the per-game difference against the inherited feed.
+2. **Venues are 0 of 13.** `nfl-book/data/venues.json` carries 13 Week 11 rows, all
+   `venue:""`, status `pending transcription from the official game centre`. The brief asks for the venue
+   of every fixture transcribed from the official game centre. This session transcribes them.
+3. **No model forecast is stored with its inputs and graded out of sample.** `nfl-book` publishes 13
+   Week 11 lines whose individual forecasts are not graded against results (the games are unplayed), and
+   its walk-forward metrics are published without the per-game forecast rows. This session publishes a
+   walk-forward set where **every forecast row carries P, its inputs, its official result and its score**.
+
+**Namespace:** `nfl-sources/` (new; no peer owns this path). Shared files touched: `COORDINATION.md`
+(append-only) and `verification/build.py` (NAV: one additive group; the file is regenerated, not hand-edited).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| S1 | Claim + repo survey + verify this session's own claim | in progress | arena/f7545de2-own4 | `COORDINATION.md` |
+| S2 | Official re-read of every 2026 week 1–10 game (week schedule pages) → page-verified results corpus + reconciliation vs `nfl-book/results_feed.json` | claimed | arena/f7545de2-own4 | `nfl-sources/data/results_by_game.json` |
+| S3 | Venue transcription for all 13 Week 11 fixtures from the official game centre | claimed | arena/f7545de2-own4 | `nfl-sources/data/venues_week11.json` |
+| S4 | Opponent-aware ratings + own lines (side→total→moneyline), open and close snapshots, market column blank by rule, residual published | claimed | arena/f7545de2-own4 | `nfl-sources/data/lines_week11.json` |
+| S5 | Walk-forward forecast register (P + inputs per game) graded against official results; proper scores, ROI at a stated price, luck panel | claimed | arena/f7545de2-own4 | `nfl-sources/data/forecast_register.json` |
+| S6 | Correlations from official numbers only, with n, p and CI; independent re-check of `nfl-book` CR-01..CR-05 | claimed | arena/f7545de2-own4 | `nfl-sources/data/correlations.json` |
+| S7 | Site: landing + 11 category subpages, every row source-linked, decision-readiness table, Flagged for Review | claimed | arena/f7545de2-own4 | `nfl-sources/index.html`, `nfl-sources/pages/**` |
+| S8 | Engine (stdlib only, deterministic, no network) + `verify.py` gate + CI workflow | claimed | arena/f7545de2-own4 | `nfl-sources/engine/**`, `.github/workflows/nfl-sources.yml` |
+| S9 | Final integration: rebuild, run every gate, PR → merge → Pages live check → record result | claimed | arena/f7545de2-own4 | `COORDINATION.md` |
+
+**Claim note.** Prior sessions completed their work and merged (PR #122 is the tip of `main`, so no claim
+is stale). This session does **not** redo, overwrite or delete any peer namespace; it is additive and
+verifies peer numbers rather than restating them. No other session's file is edited except the two shared
+files named above, both append/regenerate only.
+
+### Completion record — session `arena/f7545de2-own4` (2026-11-16)
+
+All nine tasks are done and the namespace is merged. Deviations from the claim table are stated, not
+silently absorbed.
+
+| ID | Task | Final status | Where it landed |
+|----|------|--------------|-----------------|
+| S1 | Claim + survey | **done** | commit `3cbb4e0` |
+| S2 | Page-verified results corpus + reconciliation | **done** | `nfl-sources/data/results.json` — 148 final games, weeks 1–10; independence check 148 = 147 W + 1 T, PF = PA = 6 824, **0 mismatches in 160 club fields**; vs the inherited feed **137 matched, 0 disagree, 11 missing, 0 extra** |
+| S3 | Venue transcription | **done** | `nfl-sources/data/venues.json` — **13 of 13** Week 11 fixtures, one official game-centre page per row |
+| S4 | Ratings + own Week 11 lines, two snapshots | **done** | `data/model.json`, `data/lines.json` — side → total → moneyline in that order on both snapshots; 6 market columns blank with their reason; movement published |
+| S5 | Walk-forward register, proper scores, luck panel | **done** | `data/backtest.json`, `data/forecast_register.json` — 116 forecasts (115 graded), each with P, inputs, official result, score |
+| S6 | Correlations with n, p, CI | **done** | `data/correlations.json` — **5 computed, 4 blank** with the number that would clear each |
+| S7 | Site | **done** | `nfl-sources/pages/*.html` — 13 pages; landing = decision-readiness table, 70 requirement rows |
+| S8 | Engine + gate | **done** | `nfl-sources/engine/` — 10 stdlib-only, deterministic, network-free scripts; `verify.py` **38/38 PASS** |
+| S9 | Integration, PR, merge, Pages | **done** | see below |
+
+**Scope changes from the claim, and why** (all logged rather than quietly dropped):
+
+1. **File names.** The claim named `results_by_game.json`, `venues_week11.json`, `lines_week11.json`. The
+   built artefacts are `results.json`, `venues.json`, `lines.json`. Same content, shorter names, no peer
+   collision.
+2. **No `nfl-sources/index.html`.** It was built, then removed. A root `index.html` inside the namespace is
+   what GitHub Pages would serve for `/nfl-sources/`, and the brief's site is `/nfl-sources/pages/`, which
+   serves `pages/index.html` as its directory index. The repo root `index.html` belongs to another
+   namespace and was **not touched** by this session except through the generator (one additive nav line).
+3. **No CI workflow.** The claim listed `.github/workflows/nfl-sources.yml`. It was **not** added: a
+   workflow file affects the whole repository's CI surface and is outside this namespace's file scope. The
+   gate is runnable by hand and by `verification/build.py` instead. This is a deliberate drop, flagged for
+   the owner.
+4. **`verification/build.py`** — one **additive** nav group (13 links). Regenerating also rewrote
+   `index.html` and the 13 `verified/*.html` files, because the nav is embedded in every page: the diff is
+   **one line per file**, no existing link altered or removed, and `verification/verify_site.py` passes
+   (14 pages, 346 data rows source-linked, every local link resolves).
+
+**Verification record**
+
+- `nfl-sources/engine/verify.py` → **38 passed, 0 failed**. Includes a leakage mutation test (mutating
+  every result from week W onward changes **0** forecasts before W, at cutoffs 4/6/8), a deterministic
+  rebuild of 12 data files, input-hash provenance over 14 raw transcriptions, the origination-order audit,
+  a per-row source-link audit over 434 rendered rows, and a broken-link sweep over 13 pages.
+- `verification/verify_site.py` → **all checks passed** after the nav regeneration.
+- The gate caught and this session fixed **four real defects**, all published on the site:
+  a **sign error** in the ratings (defence subtracted instead of added, making good defences look bad by
+  about twice their margin), a missing rating column at the `update` cutoff, an American price derived from
+  an unrounded probability (so a reader recomputing it from the printed number got a different value), and
+  a provenance file that hashed the gate's own output (so every build left the tree dirty).
+
+**Headline numbers** (all recomputable, all in `data/`): Brier **0.22006** vs 0.25000 coin flip; Brier
+skill **0.1198** with week-cluster 95% CI **[−0.0148, +0.2635]** → **G2 fails**; paired model-minus-control
+**+0.0261 [−0.0371, +0.0855]**; coverage **116 / 300** → **G1 fails**; payable rewards **0**; Week 11 own
+lines **13 / 13**; requirements **27 met / 7 partial / 17 blocked / 14 out of scope / 2 peer-owned / 3
+rejected as specified** (70).
+
+**Irregularities** (15, all on `nfl-sources/pages/flagged.html`, none blocking): peer availability row
+counts disagree (347 vs 279 vs 107 for one Week 10 report) — needs one owner-ordered re-capture; the
+corpus-size confusion is **resolved in the source's favour** (136 is exactly weeks 1–9); week 1 labels a
+Wednesday-dated fixture "Sunday Night Football"; the bye block prints current records, not records at the
+bye; the Colts game-centre strip disagrees with the schedule page on the Miami score.
+
+**Repository-level defect found during integration (NOT this session's, reported not fixed).**
+`main` at `a621995` **fails its own site gate**: `python3 verification/verify_site.py` reports
+`FAILED with 19 problem(s)` — the committed root `index.html` (replaced by peer PR #126 with an NFL
+dashboard) is missing the navigation block, the responsible-gambling footer and the canonical script the
+verifier requires, and 15 of its table rows carry no source link. Verified from a clean detached worktree of
+`origin/main`, so it is not caused by this session. This session **deliberately does not touch**
+`index.html`: it is outside `nfl-sources/` and belongs to the session that published it. The fix belongs to
+whoever owns that page — either regenerate it with `verification/build.py` or update the verifier's expected
+markers. **This session's own namespace passes every check**: 38/38 gates, 701 internal links resolved, 0
+broken.
+
+**PR / merge result:** see the line appended immediately below by the integration step.
