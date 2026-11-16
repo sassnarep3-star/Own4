@@ -100,9 +100,17 @@ def dataset_identity_checks():
     rows.append(dict(check="per-club NET == PF - PA", expected="32 clubs consistent",
                      observed="%d clubs inconsistent %s" % (len(bad_net), ",".join(bad_net) or "-"),
                      status="pass" if not bad_net else "FAIL", source_url=STANDINGS_URL))
+    # Games implied by the standings = every club's W + L + T entries divided by two, because a
+    # tie contributes one entry to each of the two clubs that played it. Summing W+L+2T instead
+    # double-counts ties in the team-game figure and made the printed line read "298 team-games
+    # = 147 games", which is not an identity at all. Both sides are now derived from one number.
+    team_games = w + l + t
+    implied_games = team_games / 2.0
     rows.append(dict(check="team-games implied by standings", expected="2 x settled games",
-                     observed="%d team-games = %d games" % (w + l + 2 * t, (w + l) // 2),
-                     status="pass" if (w + l + 2 * t) % 2 == 0 else "FAIL", source_url=STANDINGS_URL))
+                     observed="%d club W+L+T entries = %g games (ties counted once per club)"
+                              % (team_games, implied_games),
+                     status="pass" if implied_games == int(implied_games) else "FAIL",
+                     source_url=STANDINGS_URL))
     # win-pct rounding: a .5 rounding of x/(x+y) can move by up to .0005; ties count as half
     bad_pct = []
     for r in STAND:

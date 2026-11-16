@@ -337,6 +337,38 @@ def correlation_p_invariants():
             errors.append("correlations: %s has no p-value" % key)
 
 
+def identity_check_invariants():
+    """An identity check must actually balance, and must agree with the reconciled game count.
+
+    The build published '298 team-games = 147 games' marked pass -- a check whose two sides
+    disagree is not a check. Rules enforced here:
+      * every identity row is pass or FAIL, and the build fails if any row is FAIL;
+      * a row of the form 'A == B' has equal sides;
+      * the games implied by the standings equal the reconciled game count.
+    """
+    ident = json.load(open(os.path.join(DATA, "identity_checks.json")))
+    rec = json.load(open(os.path.join(DATA, "results_reconciliation.json")))
+    for r in ident["rows"]:
+        if r["status"] != "pass":
+            errors.append("identity check failed: %s (%s)" % (r["check"], r["observed"]))
+        obs = r["observed"]
+        m = re.match(r"^\s*([\d.,-]+)\s*==\s*([\d.,-]+)", obs)
+        if m:
+            left = m.group(1).replace(",", "")
+            right = m.group(2).replace(",", "")
+            try:
+                if float(left) != float(right):
+                    errors.append("identity row %r prints unequal sides: %s"
+                                  % (r["check"], obs))
+            except ValueError:
+                errors.append("identity row %r has unparseable sides: %s" % (r["check"], obs))
+        m2 = re.search(r"=\s*([\d.]+)\s+games", obs)
+        if m2 and "team-games" in r["check"]:
+            if float(m2.group(1)) != rec["n_games"]:
+                errors.append("standings imply %s games but reconciliation reports %d"
+                              % (m2.group(1), rec["n_games"]))
+
+
 def cross_reference_invariants():
     """Every FB-xx cited anywhere in a dataset must exist in the flag register.
 
@@ -373,6 +405,7 @@ def main():
     check_data_invariants()
     correlation_p_invariants()
     cross_reference_invariants()
+    identity_check_invariants()
     for name, point, iv, ok in numeric_invariants():
         print("  interval check: %-20s point %+.4f inside %s -- %s"
               % (name, point, iv, "ok" if ok else "VIOLATED"))
