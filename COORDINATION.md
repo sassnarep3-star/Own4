@@ -4303,3 +4303,85 @@ root-nav group that points at it. No other session's namespace directory, data f
 * Nothing tree-wide (namespace counts, sibling row counts) is written as a literal into rendered
   prose; those are computed at build time (the failure mode documented by `arena/20f55d17-own4`).
 * `git pull --rebase` before every push; conflicts resolved as unions, never by discarding a peer's work.
+
+---
+
+## Session `arena/448c248f-own4` — completion record (2026-11-16 UTC)
+
+**Scope:** new namespace `nfl-decision-gaps/` (the decision-support layer), its generator and
+verifier, its CI workflow, the executive summary inside that namespace, and one **append-only**
+group added to the shared `NAV` list in `verification/build.py`. No other session's namespace,
+data file or page was edited.
+
+| ID | Task | Status | Notes |
+|----|------|--------|-------|
+| X1 | Claim scope, read board | done | claimed in the block above at `a8e662f`, pushed immediately |
+| X2 | Line-by-line repo review | done | `data/repo_inventory.json` — 31 nfl-* namespaces, 428 HTML, 448 data files, 197 Python, pinned to a commit |
+| X3 | Open-questions register | done | 20 questions (Q01–Q20): have + source + missing + the number that would clear it + the suggestion that would produce it + status |
+| X4 | Have / don't-have matrix | done | 16 data domains; 10 have a confirmed value, 6 have nothing confirmed |
+| X5 | Suggestions review board | done | 15 suggestions (SG-A…SG-O), 2–3 options each with effort/risk/trade-off, **verdict left blank** |
+| X6 | Official-source capture | done | 10 sources: injuries, club page, 404 depth-chart path, inactives + venues, game centre, schedule, scores, committed capture, transactions hub, reserve list |
+| X7 | Static site | done | 9 pages, 468 table rows, 925 links, 757 external https, 0 broken internal links |
+| X8 | Verifier + CI | done | `.github/workflows/nfl-decision-gaps.yml` |
+| X9 | Additive root-nav group | done | appended at the end of `NAV`; no existing entry reordered, relabelled or removed; `index.html` + `verified/*.html` regenerated |
+| X10 | PR → main → merge → Pages | in progress | PR link recorded below once opened |
+
+### What was verified against official sources, and what it produced
+
+* **Injury report** — `https://www.nfl.com/injuries/` read live 2026-11-16 (chunks 0–6 of 8).
+  The capture already committed in this repo (`nfl-arena/data/raw/nfl_injuries_week10_2026.md`,
+  2026-11-13) parses to **326 rows / 28 clubs / 14 fixtures**; designation counts 301 blank,
+  14 Out, 11 Questionable, 0 Doubtful.
+* **Official inactives** — `https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season`
+  gives 147 entries across 24 clubs plus the venue of each game.
+* **The join** — for the 8 clubs where every live row was read (CIN, DAL, DET, LV, NE, PIT, SEA,
+  SF): **26 of 46 inactive players (56.5%) never appear on the injury report**; 24 of 44 (54.5%)
+  excluding emergency third quarterbacks. Designation rates with n: Out 14/17, Doubtful 1/4,
+  Questionable 4/26, no designation 1/45.
+* **Reserve list** — `https://www.nfl.com/transactions/league/reserve-list/2026/11` publishes **25
+  dated Reserve/Injured moves for November 2026**, including Malik Willis (MIA, 11/10), the case
+  the brief names. It explains 2 of the 3 Out players missing from the inactive list
+  (Henderson NE 11/14, Goodson DAL 11/14) → **16 of 17 Out players (94.1%) explained**. Kerby
+  Joseph (DET) remains unexplained and is flagged (F3).
+* **Transactions** — `https://www.nfl.com/transactions/` publishes Trades, Signings, Reserve List,
+  Waivers, Terminations and Other by year and month; 12 trades in November 2026.
+* **Depth charts** — `https://www.nfl.com/teams/baltimore-ravens/depth-chart` returns the official
+  404 page; club page sections are Info / Roster / Stats (S2, S3). No snap counts and no starters
+  list found on any official page read.
+* **Prices** — no spread, total or moneyline on the game centre, schedule, scores or club pages.
+* **Results** — 12 of 14 Week 10 finals confirmed on two independent official pages.
+  PIT/CIN is **blank**: both `/schedules` and `/scores` rendered it LIVE (Q1 08:56, 0–3) when read
+  on 2026-11-16, a Monday. Not inferred (F1).
+
+### Conflicts encountered (2, both resolved as unions; no peer work discarded)
+
+1. `COORDINATION.md` during `git pull --rebase origin main` — main had advanced by 3 commits
+   (PRs #129, #130, #131). Resolved as an append-only union: main's 205 new lines kept verbatim,
+   this session's 35-line claim block placed after them.
+2. `index.html` (generated) during the same rebase — a concurrent session had added a namespace
+   (`nfl-sources`) and its own nav entries. `verification/build.py` itself merged cleanly, so the
+   resolution was to **regenerate** `index.html` and `verified/*.html` from the merged generator.
+   No session's navigation entry was lost.
+3. After the rebase the pinned repository inventory was stale, so it was refreshed once
+   (`REFRESH_INVENTORY=1`) and recommitted. Note for the next session: the inventory is pinned
+   precisely so that a peer merge cannot silently change a number this workspace states; refresh
+   it deliberately, not automatically.
+
+### Determinism
+
+`python3 nfl-decision-gaps/engine/build.py` followed by `git diff --exit-code -- nfl-decision-gaps`
+is clean, and the same is true for `index.html` + `verified/` after regenerating from
+`verification/build.py`. Both gates were re-run after the rebase and after the inventory refresh.
+
+`nfl-decision-gaps/engine/verify.py` reports: 9 pages, 468 table rows, 925 links, 757 external
+https, **0 broken internal links, 0 localhost references, 0 table rows without an official source
+link**. `verification/verify_site.py` reports: 14 pages, 346 sourced data rows, all local links
+resolve.
+
+### Handover
+
+The open decision queue for the owner, in order: **SG-A** (scheduled hashed capture) → **SG-E**
+(ingest the official reserve list — one page, one parser, immediate payoff) → **SG-B** (price-data
+policy, before any backtest is published) → **SG-C** (depth-order source, or keep the deficiency
+feature unbuilt) → **SG-H** (one canonical count, computed at build time). Verdicts on the
+suggestions board are deliberately blank; choosing between paths is the reviewer's call.
