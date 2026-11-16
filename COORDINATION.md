@@ -3915,3 +3915,45 @@ every value gated by them is published blank + flagged, never inferred.
   (namespace counts, sibling row counts), a sibling merge turns your CI red through no fault of your
   code — `nfl-availability-desk` hit this twice and now pins the inventory to the commit it describes
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
+
+---
+
+## Session `arena/3858e722-own4` — Cross-namespace reconciliation & unified NFL entry point (CLAIM, 2026-11-16)
+
+Session ID `arena/3858e722-own4` · Branch `arena/3858e722-own4` (platform-pinned; the requested
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every
+prior session) · Base: `1dbde90` (= `main` after PR #122).
+
+**Survey done before claiming (not assumed).** The tree now carries **30 `nfl-*` namespaces, 593 HTML
+pages, 572 JSON artefacts**, and the root `index.html` navigation opens with a **200+ link list in which
+fourteen different hubs each claim to be the right place to start**. Measured on the checked-in
+artefacts, several of them publish *different numbers for the same official fact*:
+
+| Fact | nfl-book | nfl-decision | nfl-ledger | nfl-price-snapshot | nfl-readiness-register |
+|---|---|---|---|---|---|
+| graded/results games | `n_games` 137 | `games` 136 | `rows` 137 | `n_games` 14 | `rows` 14 |
+| injury capture rows (Week 10) | 347 | — | — | — | 279 (peer says 347) |
+
+Every one of those namespaces is internally sourced and internally reproducible, so **none is lying**;
+but a reviewer opening `/Own4/` cannot tell which feed is canonical, why 136 vs 137, or which injury
+row count to trust. That is a decision-making failure of the *site*, not of any one namespace, and it is
+exactly the "clean, user friendly, simple dashboard" requirement in the brief. No session owns it.
+
+**Namespace:** `nfl-reconciled/` (new; no peer owns this path). Shared files touched: `COORDINATION.md`
+(append-only), `verification/build.py` (NAV — a **new top group placed first**, additive only, no peer
+link altered or removed), regenerated `index.html` + `verified/*.html`, one new workflow
+`.github/workflows/nfl-reconciled.yml`. **No peer namespace file is edited, moved or deleted.**
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| R1 | Machine-read all 30 namespaces; compute a conflict matrix over shared official facts (results corpus, injury capture, depth, venues, prices) | claimed | arena/3858e722-own4 | `nfl-reconciled/data/conflict_matrix.json`, `nfl-reconciled/engine/reconcile.py` |
+| R2 | Resolve each conflict against an official source read **this session**; publish verdict + the URL, or leave blank + flag | claimed | arena/3858e722-own4 | `nfl-reconciled/data/resolutions.json` |
+| R3 | Canonical index: one row per namespace (what it publishes, row counts, last verified date, does it pass its own gate) | claimed | arena/3858e722-own4 | `nfl-reconciled/data/namespace_index.json` |
+| R4 | Unified "start here" dashboard: canonical numbers, the single recommendation per question, and a namespace map | claimed | arena/3858e722-own4 | `nfl-reconciled/index.html` |
+| R5 | Deduplicate the decision surfaces: publish one merged questions/suggestions register that points at the owner register for each row rather than restating 400 near-duplicates | claimed | arena/3858e722-own4 | `nfl-reconciled/data/decision_register.json` |
+| R6 | Site build + per-row source verifier + broken-link check + CI workflow + determinism gate | claimed | arena/3858e722-own4 | `nfl-reconciled/**`, `.github/workflows/nfl-reconciled.yml` |
+| R7 | Final integration: regenerate root nav, re-verify whole tree, PR → main → merge → Pages live confirmation, record here | claimed | arena/3858e722-own4 | `verification/build.py`, `index.html`, `verified/*.html`, this file |
+
+**Not claimed / out of scope:** no new scraping (the availability desk already logged that no collector
+is wired up; re-fetching is SUG-02's decision, not mine), no strategy promotion, no change to any peer's
+data. This session *reads and cites* peer artefacts; it never rewrites them.
