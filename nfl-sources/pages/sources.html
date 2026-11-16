@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sources and provenance — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html" class="here">Sources</a></nav></div></header><main><h1>Sources and provenance</h1><p class="lede">Every input, hashed, with the official page behind it — plus the sources that exist and were refused.</p>
+<p>Every input is a transcription of an official page, hashed. Every output is hashed too. Re-running
+<code>nfl-sources/engine/verify.py</code> recomputes each input hash, so a transcription edited by hand after
+this page was built fails the build rather than silently changing a number.</p>
+<h2>Inputs</h2><table><thead><tr>
+<th>Input file</th>
+<th class="num">Data lines</th>
+<th>SHA-256</th>
+<th>Official page</th>
+</tr></thead><tbody>
+<tr><td>raw/week1.txt</td><td class="num">16</td><td>4c12df38691b6698…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-1" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week2.txt</td><td class="num">16</td><td>996794570b4f2e87…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-2" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week3.txt</td><td class="num">16</td><td>5944732f14214cbd…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-3" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week4.txt</td><td class="num">16</td><td>c15aee0e0fbb8a6a…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-4" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week5.txt</td><td class="num">15</td><td>c58c14413ecab3fe…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-5" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week6.txt</td><td class="num">14</td><td>785167e9f438d249…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-6" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week7.txt</td><td class="num">14</td><td>e3e694a39ffb67dc…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-7" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week8.txt</td><td class="num">14</td><td>7f4fddba209180c3…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-8" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week9.txt</td><td class="num">15</td><td>2be9564d3362fd16…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-9" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week10.txt</td><td class="num">12</td><td>def47c1dfbaa03f4…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">the page</a></td></tr>
+<tr><td>raw/week11.txt</td><td class="num">13</td><td>6903033ac52643dd…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">the page</a></td></tr>
+<tr><td>raw/standings.txt</td><td class="num">32</td><td>c784cbea5c4a1c8b…</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">the page</a></td></tr>
+<tr><td>raw/byes.txt</td><td class="num">21</td><td>01c7dc3870cb346f…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-5 (and the week pages for 6-10)" rel="noopener">the page</a></td></tr>
+<tr><td>raw/venues11.txt</td><td class="num">13</td><td>76d4e56984b31eb9…</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">13 game-centre pages</a></td></tr>
+</tbody></table>
+<h2>Outputs</h2><table><thead><tr>
+<th>Output file</th>
+<th>Bytes</th>
+<th>SHA-256</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>data/_model_state.json</td><td>8124</td><td>0a9c99a0147d712d…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/backtest.json</td><td>32945</td><td>140d2ea14dfeaa1b…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/correlations.json</td><td>4550</td><td>f085894a46245af4…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/flags.json</td><td>8430</td><td>70015f4cf628cc96…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/forecast_register.json</td><td>171375</td><td>29a8b87eadd3a57d…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/lines.json</td><td>33237</td><td>10944cf74fe75141…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/model.json</td><td>9791</td><td>08dcf4faa80ae140…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/questions.json</td><td>4494</td><td>4eab519291c041a8…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/requirements.json</td><td>33591</td><td>ea84bca889e25f30…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/results.json</td><td>89578</td><td>8e875cefff94fc3f…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/strategies.json</td><td>7160</td><td>632cbaded89cc601…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/suggestions.json</td><td>9698</td><td>1e1b89ecf60847e2…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/venues.json</td><td>3417</td><td>9441b26b3abdd472…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+<tr><td>data/verification.json</td><td>1478</td><td>44d7e1a60e87f8dd…</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">recompute via verify.py</a></td></tr>
+</tbody></table>
+<h2>Sources that exist and were deliberately not used</h2>
+<table><thead><tr>
+<th>Source</th>
+<th>Status</th>
+<th>Why not used</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>Any betting operator's screen</td><td><span class="chip blocked">excluded</span></td><td>no right to redistribute; not citable as authoritative; would put a return column on a leaderboard that cannot support one</td><td class="num"><span class="tiny">decision, not a fact: these rows record a refusal, so no source is cited</span></td></tr>
+<tr><td>Any odds aggregator or news site</td><td><span class="chip blocked">excluded</span></td><td>third-hand numbers with no provenance chain to an official page</td><td class="num"><span class="tiny">decision, not a fact: these rows record a refusal, so no source is cited</span></td></tr>
+<tr><td>Depth charts from a news outlet</td><td><span class="chip blocked">excluded</span></td><td>the brief itself rejects jersey order, experience and salary as evidence of depth</td><td class="num"><span class="tiny">decision, not a fact: these rows record a refusal, so no source is cited</span></td></tr>
+<tr><td>Injury status from a fantasy site</td><td><span class="chip blocked">excluded</span></td><td>nfl.com publishes the report; a second-hand copy cannot be checked against it</td><td class="num"><span class="tiny">decision, not a fact: these rows record a refusal, so no source is cited</span></td></tr>
+<tr><td>Venue roof and surface from an aggregator</td><td><span class="chip partial">pending</span></td><td>the venue's own stadium guide is the authority; not read this session</td><td class="num"><span class="tiny">decision, not a fact: these rows record a refusal, so no source is cited</span></td></tr>
+</tbody></table>
+<h2>Method for every transcription</h2>
+<p>Read the official page, copy the printed values in the printed order, one file per week, and hash the file.
+Where a page prints something internally inconsistent, the inconsistency is copied and flagged rather than
+repaired: see <a href="flagged.html">Flagged</a> for the three cases — the bye-week records printed as current
+records, week 1's Wednesday-dated "Sunday Night Football" section, and the Colts game-centre strip showing a
+Miami score that does not match the schedule page.</p></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

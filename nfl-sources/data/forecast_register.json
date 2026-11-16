@@ -1,0 +1,6517 @@
+{
+ "dataset": "nfl_sources_forecast_register",
+ "title": "Every forecast with its probability, every input, the official result and the scores",
+ "built_utc": "2026-11-16",
+ "n_rows": 116,
+ "rule": "A row without an official result is stored with y_home_win null and contributes to no metric. No forecast uses data from its own week or later.",
+ "rows": [
+  {
+   "game_id": "W03-ATL-GB",
+   "week": 3,
+   "date": "2026-09-24",
+   "away": "ATL",
+   "home": "GB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/falcons-at-packers-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 0.626621,
+    "def_away": -1.329925,
+    "off_away": -5.221355,
+    "def_home": -1.907891,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.755413,
+   "fair_american": -309,
+   "fair_home_line": -5.83,
+   "fair_total": 43.6,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 35,
+    "home_pts": 14,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.570649,
+    "log_loss": 1.408185,
+    "abs_margin_error": 26.833,
+    "abs_total_error": 5.402
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "GB",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "GB",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "GB",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-AZ-SF",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "AZ",
+   "home": "SF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cardinals-at-49ers-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 2.832608,
+    "def_away": -0.357371,
+    "off_away": -1.538173,
+    "def_home": 3.522702,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.852008,
+   "fair_american": -576,
+   "fair_home_line": -8.81,
+   "fair_total": 43.08,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 36,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.021902,
+    "log_loss": 0.16016,
+    "abs_margin_error": 2.814,
+    "abs_total_error": 22.916
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-BAL-DAL",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "BAL",
+   "home": "DAL",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/ravens-at-cowboys-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 1.547379,
+    "def_away": 0.076815,
+    "off_away": 1.519465,
+    "def_home": -0.867101,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.456753,
+   "fair_american": -119,
+   "fair_home_line": 0.92,
+   "fair_total": 48.25,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 31,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.208623,
+    "log_loss": 0.610192,
+    "abs_margin_error": 2.084,
+    "abs_total_error": 16.75
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DAL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-CAR-CLE",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "CAR",
+   "home": "CLE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/panthers-at-browns-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -1.932243,
+    "def_away": -3.217982,
+    "off_away": 4.215158,
+    "def_home": -1.159165,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.33794,
+   "fair_american": -196,
+   "fair_home_line": 3.53,
+   "fair_total": 51.62,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 18,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.438323,
+    "log_loss": 1.084886,
+    "abs_margin_error": 6.526,
+    "abs_total_error": 12.615
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CAR",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "CAR",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-CIN-PIT",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "CIN",
+   "home": "PIT",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bengals-at-steelers-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -3.14979,
+    "def_away": 1.776494,
+    "off_away": 0.831988,
+    "def_home": 0.844936,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.302966,
+   "fair_american": -230,
+   "fair_home_line": 4.35,
+   "fair_total": 40.02,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 27,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.485856,
+    "log_loss": 1.194133,
+    "abs_margin_error": 7.351,
+    "abs_total_error": 16.984
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CIN",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "CIN",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "CIN",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-HOU-IND",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "HOU",
+   "home": "IND",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/texans-at-colts-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 1.45825,
+    "def_away": -1.028796,
+    "off_away": -1.573158,
+    "def_home": -4.173001,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.521272,
+   "fair_american": -109,
+   "fair_home_line": -0.45,
+   "fair_total": 50.04,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 19,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.229181,
+    "log_loss": 0.651483,
+    "abs_margin_error": 1.55,
+    "abs_total_error": 14.042
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "IND",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "IND",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-KC-MIA",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "KC",
+   "home": "MIA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chiefs-at-dolphins-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -2.110706,
+    "def_away": 0.62777,
+    "off_away": 2.487448,
+    "def_home": -2.150064,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.209574,
+   "fair_american": -377,
+   "fair_home_line": 6.81,
+   "fair_total": 46.85,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 10,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.043921,
+    "log_loss": 0.235183,
+    "abs_margin_error": 7.187,
+    "abs_total_error": 12.854
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-LA-DEN",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LA",
+   "home": "DEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/rams-at-broncos-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -2.08403,
+    "def_away": 2.100796,
+    "off_away": -1.145481,
+    "def_home": 0.615455,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.412664,
+   "fair_american": -142,
+   "fair_home_line": 1.86,
+   "fair_total": 39.01,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.344963,
+    "log_loss": 0.885121,
+    "abs_margin_error": 5.861,
+    "abs_total_error": 16.991
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "DEN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-LAC-BUF",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LAC",
+   "home": "BUF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chargers-at-bills-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 4.602839,
+    "def_away": -1.399422,
+    "off_away": -2.611613,
+    "def_home": -2.697676,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.77883,
+   "fair_american": -352,
+   "fair_home_line": -6.48,
+   "fair_total": 51.04,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 16,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.048916,
+    "log_loss": 0.249963,
+    "abs_margin_error": 1.521,
+    "abs_total_error": 11.043
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-LV-NO",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "LV",
+   "home": "NO",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/raiders-at-saints-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 1.047555,
+    "def_away": 2.205461,
+    "off_away": 0.749238,
+    "def_home": 0.244875,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.448131,
+   "fair_american": -123,
+   "fair_home_line": 1.1,
+   "fair_total": 44.3,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 35,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.200821,
+    "log_loss": 0.594444,
+    "abs_margin_error": 6.9,
+    "abs_total_error": 17.698
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LV",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "LV",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-MIN-TB",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "MIN",
+   "home": "TB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/vikings-at-buccaneers-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 0.277041,
+    "def_away": 3.923348,
+    "off_away": 0.285497,
+    "def_home": -2.024195,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.261241,
+   "fair_american": -283,
+   "fair_home_line": 5.39,
+   "fair_total": 43.62,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 23,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.068247,
+    "log_loss": 0.302784,
+    "abs_margin_error": 1.607,
+    "abs_total_error": 4.618
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-NE-JAX",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "NE",
+   "home": "JAX",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/patriots-at-jaguars-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 0.250201,
+    "def_away": 4.386266,
+    "off_away": -1.664114,
+    "def_home": 1.823135,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.495926,
+   "fair_american": -102,
+   "fair_home_line": 0.09,
+   "fair_total": 37.33,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 6,
+    "home_pts": 35,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.254091,
+    "log_loss": 0.701329,
+    "abs_margin_error": 29.086,
+    "abs_total_error": 3.668
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NE",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-NYJ-DET",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "NYJ",
+   "home": "DET",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jets-at-lions-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 2.432019,
+    "def_away": 2.228778,
+    "off_away": -1.250613,
+    "def_home": -3.399087,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.43489,
+   "fair_american": -130,
+   "fair_home_line": 1.38,
+   "fair_total": 47.31,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 31,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.31935,
+    "log_loss": 0.832663,
+    "abs_margin_error": 8.383,
+    "abs_total_error": 7.693
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYJ",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "DET",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-SEA-WAS",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "SEA",
+   "home": "WAS",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/seahawks-at-commanders-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -0.537456,
+    "def_away": 4.125466,
+    "off_away": 0.512302,
+    "def_home": -2.32014,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.205522,
+   "fair_american": -387,
+   "fair_home_line": 6.93,
+   "fair_total": 43.12,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 31,
+    "home_pts": 33,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.631195,
+    "log_loss": 1.582201,
+    "abs_margin_error": 8.933,
+    "abs_total_error": 20.875
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SEA",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "SEA",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "SEA",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-TEN-NYG",
+   "week": 3,
+   "date": "2026-09-27",
+   "away": "TEN",
+   "home": "NYG",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/titans-at-giants-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": -1.620231,
+    "def_away": -0.6407,
+    "off_away": -2.209037,
+    "def_home": -0.440503,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.563669,
+   "fair_american": -129,
+   "fair_home_line": -1.35,
+   "fair_total": 42.21,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 7,
+    "home_pts": 12,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.190384,
+    "log_loss": 0.573287,
+    "abs_margin_error": 3.648,
+    "abs_total_error": 23.207
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W03-PHI-CHI",
+   "week": 3,
+   "date": "2026-09-28",
+   "away": "PHI",
+   "home": "CHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/eagles-at-bears-2026-reg-3",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-3",
+   "train_cutoff_week": 2,
+   "n_train_games": 32,
+   "inputs": {
+    "mu": 22.1962,
+    "hfa": 0.562683,
+    "sigma": 8.433332,
+    "off_home": 2.95838,
+    "def_away": 0.034765,
+    "off_away": 0.014013,
+    "def_home": 0.575956,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.684397,
+   "fair_american": -217,
+   "fair_home_line": -4.05,
+   "fair_total": 47.32,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 7,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-3"
+   },
+   "scores": {
+    "brier": 0.099606,
+    "log_loss": 0.379218,
+    "abs_margin_error": 15.952,
+    "abs_total_error": 13.317
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PHI",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-PIT-CLE",
+   "week": 4,
+   "date": "2026-10-01",
+   "away": "PIT",
+   "home": "CLE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/steelers-at-browns-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -2.047092,
+    "def_away": 0.384125,
+    "off_away": -1.851279,
+    "def_home": 0.514776,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.545581,
+   "fair_american": -120,
+   "fair_home_line": -0.95,
+   "fair_total": 40.95,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.206497,
+    "log_loss": 0.605904,
+    "abs_margin_error": 2.05,
+    "abs_total_error": 10.047
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CLE",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-AZ-NYG",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "AZ",
+   "home": "NYG",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cardinals-at-giants-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -3.434483,
+    "def_away": -1.606582,
+    "off_away": -0.171594,
+    "def_home": 1.556218,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.543912,
+   "fair_american": -119,
+   "fair_home_line": -0.92,
+   "fair_total": 42.19,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 36,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.208016,
+    "log_loss": 0.608968,
+    "abs_margin_error": 11.085,
+    "abs_total_error": 17.805
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-DAL-HOU",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DAL",
+   "home": "HOU",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cowboys-at-texans-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -2.842841,
+    "def_away": -1.955534,
+    "off_away": 2.513116,
+    "def_home": -0.108677,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.381877,
+   "fair_american": -162,
+   "fair_home_line": 2.49,
+   "fair_total": 47.49,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.14583,
+    "log_loss": 0.481068,
+    "abs_margin_error": 1.506,
+    "abs_total_error": 16.515
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DAL",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-DEN-SF",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DEN",
+   "home": "SF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/broncos-at-49ers-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 3.828216,
+    "def_away": 0.301693,
+    "off_away": -0.373456,
+    "def_home": 1.797151,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.790733,
+   "fair_american": -378,
+   "fair_home_line": -6.71,
+   "fair_total": 47.11,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 14,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.043793,
+    "log_loss": 0.234795,
+    "abs_margin_error": 3.288,
+    "abs_total_error": 9.107
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-DET-CAR",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "DET",
+   "home": "CAR",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/lions-at-panthers-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 3.430991,
+    "def_away": -3.27984,
+    "off_away": 3.143542,
+    "def_home": -2.293354,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.608684,
+   "fair_american": -156,
+   "fair_home_line": -2.29,
+   "fair_total": 57.9,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 32,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.153129,
+    "log_loss": 0.496457,
+    "abs_margin_error": 3.711,
+    "abs_total_error": 0.102
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CAR",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DET",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-GB-TB",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "GB",
+   "home": "TB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/packers-at-buccaneers-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -0.310522,
+    "def_away": -3.81656,
+    "off_away": -0.959445,
+    "def_home": -1.636366,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.678432,
+   "fair_american": -211,
+   "fair_home_line": -3.84,
+   "fair_total": 49.93,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 14,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.46027,
+    "log_loss": 1.134545,
+    "abs_margin_error": 6.844,
+    "abs_total_error": 18.934
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "TB",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "TB",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "GB",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-IND-WAS",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "IND",
+   "home": "WAS",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/colts-at-commanders-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 1.038083,
+    "def_away": -2.99947,
+    "off_away": 0.58013,
+    "def_home": -3.08234,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.518028,
+   "fair_american": -107,
+   "fair_home_line": -0.38,
+   "fair_total": 52.44,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.268353,
+    "log_loss": 0.729869,
+    "abs_margin_error": 17.375,
+    "abs_total_error": 9.435
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "WAS",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "WAS",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-JAX-CIN",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "JAX",
+   "home": "CIN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jaguars-at-bengals-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 1.502965,
+    "def_away": 3.718401,
+    "off_away": 2.349384,
+    "def_home": 0.161277,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.341508,
+   "fair_american": -193,
+   "fair_home_line": 3.39,
+   "fair_total": 45.72,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 22,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.116628,
+    "log_loss": 0.417803,
+    "abs_margin_error": 1.612,
+    "abs_total_error": 6.723
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CIN",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-KC-LV",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "KC",
+   "home": "LV",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chiefs-at-raiders-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 2.524423,
+    "def_away": 2.066905,
+    "off_away": 2.13889,
+    "def_home": 1.257622,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.528415,
+   "fair_american": -112,
+   "fair_home_line": -0.59,
+   "fair_total": 47.09,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.279223,
+    "log_loss": 0.751657,
+    "abs_margin_error": 3.592,
+    "abs_total_error": 9.911
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LV",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "LV",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-LA-PHI",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "LA",
+   "home": "PHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/rams-at-eagles-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -1.931012,
+    "def_away": 0.734086,
+    "off_away": -0.494752,
+    "def_home": 0.007426,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.444996,
+   "fair_american": -125,
+   "fair_home_line": 1.15,
+   "fair_total": 42.58,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 20,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.198021,
+    "log_loss": 0.58878,
+    "abs_margin_error": 2.852,
+    "abs_total_error": 1.417
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PHI",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-LAC-SEA",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "LAC",
+   "home": "SEA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chargers-at-seahawks-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 0.707937,
+    "def_away": -0.213,
+    "off_away": -3.915808,
+    "def_home": 2.333014,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.838043,
+   "fair_american": -517,
+   "fair_home_line": -8.19,
+   "fair_total": 40.42,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 23,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.02623,
+    "log_loss": 0.176686,
+    "abs_margin_error": 1.185,
+    "abs_total_error": 12.577
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SEA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-MIA-MIN",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "MIA",
+   "home": "MIN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/dolphins-at-vikings-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": -0.02876,
+    "def_away": -1.196413,
+    "off_away": -3.856664,
+    "def_home": 4.28387,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.893281,
+   "fair_american": -837,
+   "fair_home_line": -10.32,
+   "fair_total": 38.78,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 15,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.011389,
+    "log_loss": 0.112855,
+    "abs_margin_error": 5.323,
+    "abs_total_error": 13.778
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-NE-BUF",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "NE",
+   "home": "BUF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/patriots-at-bills-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 4.037843,
+    "def_away": 2.762803,
+    "off_away": -3.668969,
+    "def_home": -1.928112,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.686456,
+   "fair_american": -219,
+   "fair_home_line": -4.03,
+   "fair_total": 45.28,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 29,
+    "home_pts": 26,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.471221,
+    "log_loss": 1.159814,
+    "abs_margin_error": 7.031,
+    "abs_total_error": 9.715
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BUF",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "BUF",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-NYJ-CHI",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "NYJ",
+   "home": "CHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jets-at-bears-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 3.12348,
+    "def_away": 0.867788,
+    "off_away": -1.557297,
+    "def_home": 2.369935,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.80717,
+   "fair_american": -419,
+   "fair_home_line": -7.2,
+   "fair_total": 44.08,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 12,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.037184,
+    "log_loss": 0.214221,
+    "abs_margin_error": 3.802,
+    "abs_total_error": 9.079
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-TEN-BAL",
+   "week": 4,
+   "date": "2026-10-04",
+   "away": "TEN",
+   "home": "BAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/titans-at-ravens-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 2.589338,
+    "def_away": 0.313648,
+    "off_away": -4.243164,
+    "def_home": -0.763741,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.792737,
+   "fair_american": -382,
+   "fair_home_line": -6.77,
+   "fair_total": 44.55,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 18,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.042958,
+    "log_loss": 0.232264,
+    "abs_margin_error": 0.77,
+    "abs_total_error": 2.547
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BAL",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "BAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BAL",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W04-ATL-NO",
+   "week": 4,
+   "date": "2026-10-05",
+   "away": "ATL",
+   "home": "NO",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/falcons-at-saints-2026-reg-4",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-4",
+   "train_cutoff_week": 3,
+   "n_train_games": 48,
+   "inputs": {
+    "mu": 22.36769,
+    "hfa": 1.015255,
+    "sigma": 8.297486,
+    "off_home": 1.442245,
+    "def_away": 0.25055,
+    "off_away": -3.263445,
+    "def_home": -0.801302,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.713184,
+   "fair_american": -249,
+   "fair_home_line": -4.67,
+   "fair_total": 44.48,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 45,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-4"
+   },
+   "scores": {
+    "brier": 0.508632,
+    "log_loss": 1.248916,
+    "abs_margin_error": 25.669,
+    "abs_total_error": 24.52
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NO",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "NO",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NO",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-TB-DAL",
+   "week": 5,
+   "date": "2026-10-08",
+   "away": "TB",
+   "home": "DAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/buccaneers-at-cowboys-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": 3.355756,
+    "def_away": -0.862885,
+    "off_away": -1.77862,
+    "def_home": -2.76032,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.687071,
+   "fair_american": -220,
+   "fair_home_line": -3.87,
+   "fair_total": 51.45,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.472067,
+    "log_loss": 1.16178,
+    "abs_margin_error": 11.871,
+    "abs_total_error": 11.449
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DAL",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "DAL",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "DAL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": -4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-BAL-ATL",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "BAL",
+   "home": "ATL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/ravens-at-falcons-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -0.368308,
+    "def_away": -0.409271,
+    "off_away": 2.077758,
+    "def_home": 0.331408,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.446361,
+   "fair_american": -124,
+   "fair_home_line": 1.07,
+   "fair_total": 48.04,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.199239,
+    "log_loss": 0.591243,
+    "abs_margin_error": 5.929,
+    "abs_total_error": 4.964
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BAL",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-CHI-GB",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CHI",
+   "home": "GB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bears-at-packers-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -1.730299,
+    "def_away": 3.180812,
+    "off_away": 2.801069,
+    "def_home": -2.124888,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.123239,
+   "fair_american": -711,
+   "fair_home_line": 9.2,
+   "fair_total": 46.26,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 7,
+    "home_pts": 31,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.768709,
+    "log_loss": 2.093626,
+    "abs_margin_error": 33.203,
+    "abs_total_error": 8.263
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "CHI",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-CIN-MIA",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CIN",
+   "home": "MIA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bengals-at-dolphins-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -4.555523,
+    "def_away": 0.532939,
+    "off_away": 0.908384,
+    "def_home": 0.064396,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.25232,
+   "fair_american": -296,
+   "fair_home_line": 5.3,
+   "fair_total": 42.0,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 31,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.063666,
+    "log_loss": 0.290781,
+    "abs_margin_error": 1.702,
+    "abs_total_error": 12.996
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-CLE-NYJ",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "CLE",
+   "home": "NYJ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/browns-at-jets-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -2.203767,
+    "def_away": -0.034681,
+    "off_away": -1.163666,
+    "def_home": 1.022327,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.532693,
+   "fair_american": -114,
+   "fair_home_line": -0.65,
+   "fair_total": 41.89,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 12,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.218375,
+    "log_loss": 0.629809,
+    "abs_margin_error": 4.349,
+    "abs_total_error": 12.893
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYJ",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-DEN-LAC",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "DEN",
+   "home": "LAC",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/broncos-at-chargers-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -3.645116,
+    "def_away": 0.853993,
+    "off_away": -1.100095,
+    "def_home": -0.764697,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.328357,
+   "fair_american": -205,
+   "fair_home_line": 3.53,
+   "fair_total": 41.41,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 23,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.107818,
+    "log_loss": 0.398028,
+    "abs_margin_error": 2.471,
+    "abs_total_error": 1.414
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DEN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "DEN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DEN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-DET-AZ",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "DET",
+   "home": "AZ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/lions-at-cardinals-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -0.003285,
+    "def_away": -3.506401,
+    "off_away": 2.459902,
+    "def_home": -3.121513,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.427861,
+   "fair_american": -134,
+   "fair_home_line": 1.44,
+   "fair_total": 55.33,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 45,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.183065,
+    "log_loss": 0.558373,
+    "abs_margin_error": 22.556,
+    "abs_total_error": 10.667
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DET",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DET",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-HOU-TEN",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "HOU",
+   "home": "TEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/texans-at-titans-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -4.483584,
+    "def_away": -1.020353,
+    "off_away": -1.899771,
+    "def_home": 0.682788,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.487636,
+   "fair_american": -105,
+   "fair_home_line": 0.25,
+   "fair_total": 40.2,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 3,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.237789,
+    "log_loss": 0.66872,
+    "abs_margin_error": 22.754,
+    "abs_total_error": 11.203
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "HOU",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "TEN",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": -4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-IND-PIT",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "IND",
+   "home": "PIT",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/colts-at-steelers-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -1.497702,
+    "def_away": -1.196652,
+    "off_away": 0.802752,
+    "def_home": 0.244386,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.488703,
+   "fair_american": -105,
+   "fair_home_line": 0.22,
+   "fair_total": 46.51,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 22,
+    "home_pts": 34,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.261424,
+    "log_loss": 0.715999,
+    "abs_margin_error": 12.225,
+    "abs_total_error": 9.494
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "IND",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "PIT",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-LV-NE",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "LV",
+   "home": "NE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/raiders-at-patriots-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -2.918314,
+    "def_away": 0.58894,
+    "off_away": 2.479551,
+    "def_home": 2.685703,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.368503,
+   "fair_american": -171,
+   "fair_home_line": 2.67,
+   "fair_total": 42.54,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 45,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.398788,
+    "log_loss": 0.998306,
+    "abs_margin_error": 30.667,
+    "abs_total_error": 19.465
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LV",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "LV",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-MIN-NO",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "MIN",
+   "home": "NO",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/vikings-at-saints-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": 1.188461,
+    "def_away": 4.529202,
+    "off_away": -0.779944,
+    "def_home": -3.606764,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.242959,
+   "fair_american": -312,
+   "fair_home_line": 5.53,
+   "fair_total": 45.73,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 23,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.059029,
+    "log_loss": 0.278338,
+    "abs_margin_error": 4.467,
+    "abs_total_error": 9.735
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-NYG-WAS",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "NYG",
+   "home": "WAS",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/giants-at-commanders-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -0.840359,
+    "def_away": 1.429955,
+    "off_away": -1.917173,
+    "def_home": -3.291834,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.352297,
+   "fair_american": -184,
+   "fair_home_line": 3.01,
+   "fair_total": 45.35,
+   "y_home_win": null,
+   "result": {
+    "away_pts": 27,
+    "home_pts": 27,
+    "tie": true,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": null,
+    "log_loss": null,
+    "abs_margin_error": 3.01,
+    "abs_total_error": 8.647
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": null
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": null,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-PHI-JAX",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "PHI",
+   "home": "JAX",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/eagles-at-jaguars-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": 1.942621,
+    "def_away": -0.414697,
+    "off_away": -1.991504,
+    "def_home": 4.402912,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.864807,
+   "fair_american": -640,
+   "fair_home_line": -8.75,
+   "fair_total": 41.58,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 19,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.018277,
+    "log_loss": 0.145249,
+    "abs_margin_error": 6.752,
+    "abs_total_error": 5.577
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-SF-SEA",
+   "week": 5,
+   "date": "2026-10-11",
+   "away": "SF",
+   "home": "SEA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/49ers-at-seahawks-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": 1.001334,
+    "def_away": 2.659663,
+    "off_away": 3.457317,
+    "def_home": 1.511239,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.354196,
+   "fair_american": -182,
+   "fair_home_line": 2.97,
+   "fair_total": 46.54,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 32,
+    "home_pts": 29,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.125455,
+    "log_loss": 0.437259,
+    "abs_margin_error": 0.03,
+    "abs_total_error": 14.464
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W05-BUF-LA",
+   "week": 5,
+   "date": "2026-10-12",
+   "away": "BUF",
+   "home": "LA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bills-at-rams-2026-reg-5",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-5",
+   "train_cutoff_week": 4,
+   "n_train_games": 64,
+   "inputs": {
+    "mu": 22.806975,
+    "hfa": 0.634544,
+    "sigma": 7.940438,
+    "off_home": -0.291691,
+    "def_away": -2.642607,
+    "off_away": 3.90784,
+    "def_home": 0.993192,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.503558,
+   "fair_american": -101,
+   "fair_home_line": -0.07,
+   "fair_total": 51.51,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 37,
+    "home_pts": 34,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-5"
+   },
+   "scores": {
+    "brier": 0.25357,
+    "log_loss": 0.700288,
+    "abs_margin_error": 3.071,
+    "abs_total_error": 19.486
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-SEA-DEN",
+   "week": 6,
+   "date": "2026-10-15",
+   "away": "SEA",
+   "home": "DEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/seahawks-at-broncos-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -1.311299,
+    "def_away": 0.952559,
+    "off_away": 1.473521,
+    "def_home": 1.09262,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.416365,
+   "fair_american": -140,
+   "fair_home_line": 1.69,
+   "fair_total": 44.87,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 14,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.34063,
+    "log_loss": 0.876193,
+    "abs_margin_error": 4.69,
+    "abs_total_error": 13.873
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SEA",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "DEN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-AZ-LA",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "AZ",
+   "home": "LA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cardinals-at-rams-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 0.362631,
+    "def_away": -4.665098,
+    "off_away": -0.936807,
+    "def_home": -0.043078,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.804917,
+   "fair_american": -413,
+   "fair_home_line": -6.88,
+   "fair_total": 50.89,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 18,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.647892,
+    "log_loss": 1.634333,
+    "abs_margin_error": 8.876,
+    "abs_total_error": 16.89
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "LA",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "LA",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-BAL-CLE",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "BAL",
+   "home": "CLE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/ravens-at-browns-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -1.870957,
+    "def_away": -0.678516,
+    "off_away": 2.453326,
+    "def_home": 0.61951,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.397865,
+   "fair_american": -151,
+   "fair_home_line": 2.07,
+   "fair_total": 47.4,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.362566,
+    "log_loss": 0.921642,
+    "abs_margin_error": 5.072,
+    "abs_total_error": 24.397
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BAL",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "BAL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-BUF-LV",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "BUF",
+   "home": "LV",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bills-at-raiders-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 1.844406,
+    "def_away": -2.979574,
+    "off_away": 5.295101,
+    "def_home": -2.049837,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.422411,
+   "fair_american": -137,
+   "fair_home_line": 1.57,
+   "fair_total": 58.92,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 33,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.178431,
+    "log_loss": 0.548892,
+    "abs_margin_error": 1.434,
+    "abs_total_error": 4.075
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-CAR-PHI",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "CAR",
+   "home": "PHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/panthers-at-eagles-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -2.36652,
+    "def_away": -1.571052,
+    "off_away": 3.413824,
+    "def_home": 0.019937,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.343022,
+   "fair_american": -192,
+   "fair_home_line": 3.23,
+   "fair_total": 49.35,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 25,
+    "home_pts": 14,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.117664,
+    "log_loss": 0.420105,
+    "abs_margin_error": 7.765,
+    "abs_total_error": 10.354
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CAR",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CAR",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CAR",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-CHI-ATL",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "CHI",
+   "home": "ATL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bears-at-falcons-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -0.19396,
+    "def_away": 1.961973,
+    "off_away": 0.836187,
+    "def_home": 0.064306,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.402619,
+   "fair_american": -148,
+   "fair_home_line": 1.97,
+   "fair_total": 45.37,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 31,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.162102,
+    "log_loss": 0.5152,
+    "abs_margin_error": 6.027,
+    "abs_total_error": 8.628
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-DAL-GB",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "DAL",
+   "home": "GB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cowboys-at-packers-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -0.270839,
+    "def_away": -2.545713,
+    "off_away": 2.154596,
+    "def_home": 0.106904,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.558712,
+   "fair_american": -127,
+   "fair_home_line": -1.18,
+   "fair_total": 51.08,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 13,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.194735,
+    "log_loss": 0.582121,
+    "abs_margin_error": 8.818,
+    "abs_total_error": 15.079
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "GB",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "GB",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-HOU-JAX",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "HOU",
+   "home": "JAX",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/texans-at-jaguars-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 1.352282,
+    "def_away": 0.926142,
+    "off_away": -1.632549,
+    "def_home": 4.70239,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.800925,
+   "fair_american": -402,
+   "fair_home_line": -6.76,
+   "fair_total": 39.89,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 31,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.641482,
+    "log_loss": 1.614076,
+    "abs_margin_error": 9.761,
+    "abs_total_error": 25.108
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-LAC-KC",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "LAC",
+   "home": "KC",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chargers-at-chiefs-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 2.600928,
+    "def_away": -0.691375,
+    "off_away": -4.557419,
+    "def_home": 1.678434,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.90491,
+   "fair_american": -952,
+   "fair_home_line": -10.48,
+   "fair_total": 43.81,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 6,
+    "home_pts": 22,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.009042,
+    "log_loss": 0.09992,
+    "abs_margin_error": 5.517,
+    "abs_total_error": 15.812
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 4,
+      "away_W_L": -5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-NO-NYG",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "NO",
+   "home": "NYG",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/saints-at-giants-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -2.125399,
+    "def_away": -3.029373,
+    "off_away": 0.05451,
+    "def_home": 0.57875,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.617071,
+   "fair_american": -161,
+   "fair_home_line": -2.38,
+   "fair_total": 47.14,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.380777,
+    "log_loss": 0.959906,
+    "abs_margin_error": 9.383,
+    "abs_total_error": 13.864
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-NYJ-NE",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "NYJ",
+   "home": "NE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jets-at-patriots-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -0.549785,
+    "def_away": 1.992122,
+    "off_away": -2.602319,
+    "def_home": 3.654805,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.720257,
+   "fair_american": -257,
+   "fair_home_line": -4.67,
+   "fair_total": 37.96,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 19,
+    "home_pts": 26,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.078256,
+    "log_loss": 0.328148,
+    "abs_margin_error": 2.33,
+    "abs_total_error": 7.043
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NE",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "NE",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-PIT-TB",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "PIT",
+   "home": "TB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/steelers-at-buccaneers-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": -1.516128,
+    "def_away": 0.839098,
+    "off_away": -0.439513,
+    "def_home": 0.611531,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.482584,
+   "fair_american": -107,
+   "fair_home_line": 0.35,
+   "fair_total": 43.35,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 19,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.232887,
+    "log_loss": 0.658908,
+    "abs_margin_error": 6.651,
+    "abs_total_error": 1.65
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "PIT",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PIT",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-TEN-IND",
+   "week": 6,
+   "date": "2026-10-18",
+   "away": "TEN",
+   "home": "IND",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/titans-at-colts-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 0.746513,
+    "def_away": 0.126582,
+    "off_away": -6.281001,
+    "def_home": -2.123164,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.763125,
+   "fair_american": -322,
+   "fair_home_line": -5.73,
+   "fair_total": 43.22,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 20,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.58236,
+    "log_loss": 1.440223,
+    "abs_margin_error": 11.733,
+    "abs_total_error": 2.782
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "IND",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "IND",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "IND",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W06-WAS-SF",
+   "week": 6,
+   "date": "2026-10-19",
+   "away": "WAS",
+   "home": "SF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/commanders-at-49ers-2026-reg-6",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-6",
+   "train_cutoff_week": 5,
+   "n_train_games": 79,
+   "inputs": {
+    "mu": 22.900643,
+    "hfa": 0.954743,
+    "sigma": 8.001927,
+    "off_home": 3.707714,
+    "def_away": -3.633843,
+    "off_away": -0.50337,
+    "def_home": 1.964644,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.910722,
+   "fair_american": -1020,
+   "fair_home_line": -10.76,
+   "fair_total": 51.63,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-6"
+   },
+   "scores": {
+    "brier": 0.007971,
+    "log_loss": 0.093517,
+    "abs_margin_error": 4.764,
+    "abs_total_error": 11.63
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 5,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-NE-CHI",
+   "week": 7,
+   "date": "2026-10-22",
+   "away": "NE",
+   "home": "CHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/patriots-at-bears-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 1.807075,
+    "def_away": 3.47568,
+    "off_away": -0.208782,
+    "def_home": 1.675469,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.531545,
+   "fair_american": -113,
+   "fair_home_line": -0.62,
+   "fair_total": 42.67,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.21945,
+    "log_loss": 0.631967,
+    "abs_margin_error": 5.376,
+    "abs_total_error": 11.332
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-CIN-BAL",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "CIN",
+   "home": "BAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bengals-at-ravens-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 1.089011,
+    "def_away": 0.428162,
+    "off_away": 1.719841,
+    "def_home": 0.13541,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.473949,
+   "fair_american": -111,
+   "fair_home_line": 0.52,
+   "fair_total": 48.47,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 35,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.224628,
+    "log_loss": 0.642357,
+    "abs_margin_error": 21.485,
+    "abs_total_error": 0.466
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BAL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-CLE-TEN",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "CLE",
+   "home": "TEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/browns-at-titans-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": -5.660912,
+    "def_away": 2.035116,
+    "off_away": -2.829708,
+    "def_home": 0.477323,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.306813,
+   "fair_american": -226,
+   "fair_home_line": 3.98,
+   "fair_total": 35.22,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 27,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.094134,
+    "log_loss": 0.366456,
+    "abs_margin_error": 0.981,
+    "abs_total_error": 15.782
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CLE",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CLE",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-DEN-AZ",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "DEN",
+   "home": "AZ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/broncos-at-cardinals-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": -1.310934,
+    "def_away": 1.630944,
+    "off_away": -1.6393,
+    "def_home": -3.797578,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.275886,
+   "fair_american": -262,
+   "fair_home_line": 4.69,
+   "fair_total": 45.44,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.076113,
+    "log_loss": 0.322806,
+    "abs_margin_error": 9.308,
+    "abs_total_error": 0.562
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DEN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "DEN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DEN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-GB-DET",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "GB",
+   "home": "DET",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/packers-at-lions-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 4.322206,
+    "def_away": 1.268274,
+    "off_away": -0.640029,
+    "def_home": -2.807906,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.565209,
+   "fair_american": -130,
+   "fair_home_line": -1.29,
+   "fair_total": 51.44,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 20,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.189043,
+    "log_loss": 0.57056,
+    "abs_margin_error": 1.706,
+    "abs_total_error": 14.443
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DET",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "GB",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-IND-MIN",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "IND",
+   "home": "MIN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/colts-at-vikings-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": -0.864951,
+    "def_away": -2.897432,
+    "off_away": 0.641381,
+    "def_home": 5.418352,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.820041,
+   "fair_american": -456,
+   "fair_home_line": -7.22,
+   "fair_total": 43.48,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.032385,
+    "log_loss": 0.198401,
+    "abs_margin_error": 1.218,
+    "abs_total_error": 17.477
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 5,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-KC-SEA",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "KC",
+   "home": "SEA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chiefs-at-seahawks-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 0.89819,
+    "def_away": 2.678366,
+    "off_away": 2.141102,
+    "def_home": 1.061426,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.377921,
+   "fair_american": -165,
+   "fair_home_line": 2.45,
+   "fair_total": 45.52,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 3,
+    "home_pts": 20,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.386982,
+    "log_loss": 0.97307,
+    "abs_margin_error": 19.451,
+    "abs_total_error": 22.521
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-LA-LV",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "LA",
+   "home": "LV",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/rams-at-raiders-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 2.15922,
+    "def_away": 0.156748,
+    "off_away": -0.770245,
+    "def_home": -2.395402,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.539693,
+   "fair_american": -117,
+   "fair_home_line": -0.79,
+   "fair_total": 49.85,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 35,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.291269,
+    "log_loss": 0.775862,
+    "abs_margin_error": 14.786,
+    "abs_total_error": 6.151
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LV",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "LV",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-MIA-NYJ",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "MIA",
+   "home": "NYJ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/dolphins-at-jets-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": -2.013112,
+    "def_away": -0.866451,
+    "off_away": -4.135715,
+    "def_home": 1.386172,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.727995,
+   "fair_american": -268,
+   "fair_home_line": -4.78,
+   "fair_total": 39.55,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 28,
+    "home_pts": 25,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.529976,
+    "log_loss": 1.301934,
+    "abs_margin_error": 7.784,
+    "abs_total_error": 13.447
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYJ",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "NYJ",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NYJ",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": -5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-NYG-HOU",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "NYG",
+   "home": "HOU",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/giants-at-texans-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 0.061199,
+    "def_away": -0.817666,
+    "off_away": -1.518446,
+    "def_home": 0.096139,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.643591,
+   "fair_american": -181,
+   "fair_home_line": -2.9,
+   "fair_total": 45.49,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 27,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.414209,
+    "log_loss": 1.031675,
+    "abs_margin_error": 8.902,
+    "abs_total_error": 2.515
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "HOU",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-PIT-NO",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "PIT",
+   "home": "NO",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/steelers-at-saints-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 1.213178,
+    "def_away": 0.906844,
+    "off_away": 0.051045,
+    "def_home": -3.383082,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.345782,
+   "fair_american": -189,
+   "fair_home_line": 3.13,
+   "fair_total": 49.55,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 16,
+    "home_pts": 10,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.119565,
+    "log_loss": 0.424315,
+    "abs_margin_error": 2.872,
+    "abs_total_error": 23.553
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "PIT",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "PIT",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PIT",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-SF-ATL",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "SF",
+   "home": "ATL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/49ers-at-falcons-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 0.318667,
+    "def_away": 1.997783,
+    "off_away": 3.289642,
+    "def_home": -0.737534,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.250795,
+   "fair_american": -299,
+   "fair_home_line": 5.3,
+   "fair_total": 48.57,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 20,
+    "home_pts": 29,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.561308,
+    "log_loss": 1.38312,
+    "abs_margin_error": 14.298,
+    "abs_total_error": 0.431
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-TB-CAR",
+   "week": 7,
+   "date": "2026-10-25",
+   "away": "TB",
+   "home": "CAR",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/buccaneers-at-panthers-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": 3.440909,
+    "def_away": -0.13007,
+    "off_away": -1.236433,
+    "def_home": -0.752771,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.714336,
+   "fair_american": -250,
+   "fair_home_line": -4.46,
+   "fair_total": 49.31,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 43,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.510276,
+    "log_loss": 1.252939,
+    "abs_margin_error": 34.463,
+    "abs_total_error": 6.692
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CAR",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "CAR",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "CAR",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W07-DAL-PHI",
+   "week": 7,
+   "date": "2026-10-26",
+   "away": "DAL",
+   "home": "PHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cowboys-at-eagles-2026-reg-7",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-7",
+   "train_cutoff_week": 6,
+   "n_train_games": 93,
+   "inputs": {
+    "mu": 22.906381,
+    "hfa": 0.408396,
+    "sigma": 7.883882,
+    "off_home": -3.15027,
+    "def_away": -2.349207,
+    "off_away": 1.008021,
+    "def_home": 0.151733,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.437063,
+   "fair_american": -129,
+   "fair_home_line": 1.25,
+   "fair_total": 46.28,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 38,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-7"
+   },
+   "scores": {
+    "brier": 0.191024,
+    "log_loss": 0.574588,
+    "abs_margin_error": 15.751,
+    "abs_total_error": 12.724
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PHI",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-CAR-GB",
+   "week": 8,
+   "date": "2026-10-29",
+   "away": "CAR",
+   "home": "GB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/panthers-at-packers-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -1.202951,
+    "def_away": -2.559949,
+    "off_away": 2.033121,
+    "def_home": 2.086007,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.569084,
+   "fair_american": -132,
+   "fair_home_line": -1.4,
+   "fair_total": 47.39,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 19,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.185689,
+    "log_loss": 0.563728,
+    "abs_margin_error": 6.604,
+    "abs_total_error": 1.392
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "GB",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "GB",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-ATL-TB",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "ATL",
+   "home": "TB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/falcons-at-buccaneers-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 0.863777,
+    "def_away": -0.538315,
+    "off_away": 1.014673,
+    "def_home": 1.080604,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.571929,
+   "fair_american": -134,
+   "fair_home_line": -1.45,
+   "fair_total": 47.42,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 0,
+    "home_pts": 16,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.183245,
+    "log_loss": 0.55874,
+    "abs_margin_error": 14.545,
+    "abs_total_error": 31.424
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "TB",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "ATL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-AZ-DAL",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "AZ",
+   "home": "DAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cardinals-at-cowboys-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 2.313275,
+    "def_away": -4.258479,
+    "off_away": -1.46574,
+    "def_home": -2.183938,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.766661,
+   "fair_american": -329,
+   "fair_home_line": -5.84,
+   "fair_total": 53.38,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 33,
+    "home_pts": 30,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.587769,
+    "log_loss": 1.455263,
+    "abs_margin_error": 8.84,
+    "abs_total_error": 9.622
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DAL",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "DAL",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "DAL",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-BAL-BUF",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "BAL",
+   "home": "BUF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/ravens-at-bills-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 5.509978,
+    "def_away": -0.60247,
+    "off_away": 0.213571,
+    "def_home": -3.244317,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.628989,
+   "fair_american": -170,
+   "fair_home_line": -2.64,
+   "fair_total": 55.66,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 36,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.137649,
+    "log_loss": 0.463642,
+    "abs_margin_error": 23.359,
+    "abs_total_error": 9.658
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 4,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-CLE-PIT",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "CLE",
+   "home": "PIT",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/browns-at-steelers-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -0.68606,
+    "def_away": 1.167144,
+    "off_away": -2.245953,
+    "def_home": 2.382904,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.634678,
+   "fair_american": -174,
+   "fair_home_line": -2.76,
+   "fair_total": 39.61,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 6,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.13346,
+    "log_loss": 0.454637,
+    "abs_margin_error": 18.238,
+    "abs_total_error": 6.606
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "PIT",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PIT",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-IND-JAX",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "IND",
+   "home": "JAX",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/colts-at-jaguars-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 2.164442,
+    "def_away": -2.407263,
+    "off_away": -0.003236,
+    "def_home": 3.062001,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.828988,
+   "fair_american": -485,
+   "fair_home_line": -7.62,
+   "fair_total": 47.59,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 7,
+    "home_pts": 42,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.029245,
+    "log_loss": 0.18755,
+    "abs_margin_error": 27.377,
+    "abs_total_error": 1.406
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-KC-DEN",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "KC",
+   "home": "DEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chiefs-at-broncos-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -1.042522,
+    "def_away": 2.83864,
+    "off_away": 0.128571,
+    "def_home": 1.76606,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.389228,
+   "fair_american": -157,
+   "fair_home_line": 2.26,
+   "fair_total": 40.57,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 28,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.373043,
+    "log_loss": 0.943591,
+    "abs_margin_error": 6.257,
+    "abs_total_error": 11.431
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-LAC-LA",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "LAC",
+   "home": "LA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chargers-at-rams-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -0.026656,
+    "def_away": -0.717248,
+    "off_away": -5.179549,
+    "def_home": 0.503597,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.786032,
+   "fair_american": -367,
+   "fair_home_line": -6.36,
+   "fair_total": 41.1,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 9,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.045782,
+    "log_loss": 0.240757,
+    "abs_margin_error": 8.64,
+    "abs_total_error": 8.095
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "LA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": -6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-LV-NYJ",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "LV",
+   "home": "NYJ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/raiders-at-jets-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -1.943777,
+    "def_away": -3.452038,
+    "off_away": 1.774249,
+    "def_home": 0.525369,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.512223,
+   "fair_american": -105,
+   "fair_home_line": -0.25,
+   "fair_total": 48.84,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 38,
+    "home_pts": 33,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.262373,
+    "log_loss": 0.717898,
+    "abs_margin_error": 5.246,
+    "abs_total_error": 22.155
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYJ",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "LV",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": -1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-MIN-DET",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "MIN",
+   "home": "DET",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/vikings-at-lions-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 3.562071,
+    "def_away": 6.33968,
+    "off_away": -1.54068,
+    "def_home": -2.362089,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.326261,
+   "fair_american": -207,
+   "fair_home_line": 3.61,
+   "fair_total": 44.13,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 15,
+    "home_pts": 19,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.453924,
+    "log_loss": 1.120057,
+    "abs_margin_error": 7.613,
+    "abs_total_error": 10.132
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "MIN",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-NE-MIA",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "NE",
+   "home": "MIA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/patriots-at-dolphins-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -3.085527,
+    "def_away": 2.559565,
+    "off_away": 0.181648,
+    "def_home": -1.458443,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.18149,
+   "fair_american": -451,
+   "fair_home_line": 7.3,
+   "fair_total": 42.08,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 19,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.032939,
+    "log_loss": 0.20027,
+    "abs_margin_error": 2.299,
+    "abs_total_error": 0.917
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NE",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "NE",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-PHI-WAS",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "PHI",
+   "home": "WAS",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/eagles-at-commanders-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": -0.784053,
+    "def_away": -0.973006,
+    "off_away": -3.433658,
+    "def_home": -3.231737,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.518757,
+   "fair_american": -108,
+   "fair_home_line": -0.38,
+   "fair_total": 46.07,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.231595,
+    "log_loss": 0.65632,
+    "abs_margin_error": 16.623,
+    "abs_total_error": 9.075
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "WAS",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "PHI",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-TEN-CIN",
+   "week": 8,
+   "date": "2026-11-01",
+   "away": "TEN",
+   "home": "CIN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/titans-at-bengals-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 2.901908,
+    "def_away": -0.279958,
+    "off_away": -5.106961,
+    "def_home": 1.570176,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.890113,
+   "fair_american": -810,
+   "fair_home_line": -9.85,
+   "fair_total": 42.59,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 36,
+    "home_pts": 43,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.012075,
+    "log_loss": 0.116407,
+    "abs_margin_error": 2.845,
+    "abs_total_error": 36.407
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": -5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W08-CHI-SEA",
+   "week": 8,
+   "date": "2026-11-02",
+   "away": "CHI",
+   "home": "SEA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bears-at-seahawks-2026-reg-8",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-8",
+   "train_cutoff_week": 7,
+   "n_train_games": 107,
+   "inputs": {
+    "mu": 23.050647,
+    "hfa": -0.013514,
+    "sigma": 8.023195,
+    "off_home": 0.659644,
+    "def_away": 1.220215,
+    "off_away": 2.376262,
+    "def_home": 2.817983,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.493419,
+   "fair_american": -103,
+   "fair_home_line": 0.13,
+   "fair_total": 45.09,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-8"
+   },
+   "scores": {
+    "brier": 0.243462,
+    "log_loss": 0.68007,
+    "abs_margin_error": 16.868,
+    "abs_total_error": 5.915
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-JAX-BAL",
+   "week": 9,
+   "date": "2026-11-05",
+   "away": "JAX",
+   "home": "BAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jaguars-at-ravens-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -1.480659,
+    "def_away": 4.104088,
+    "off_away": 3.214627,
+    "def_home": -1.111244,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.128522,
+   "fair_american": -678,
+   "fair_home_line": 9.23,
+   "fair_total": 44.95,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 33,
+    "home_pts": 10,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.016518,
+    "log_loss": 0.137565,
+    "abs_margin_error": 13.768,
+    "abs_total_error": 1.952
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-AZ-SEA",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "AZ",
+   "home": "SEA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cardinals-at-seahawks-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 0.171229,
+    "def_away": -4.230076,
+    "off_away": -0.654755,
+    "def_home": 2.004909,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.828972,
+   "fair_american": -485,
+   "fair_home_line": -7.74,
+   "fair_total": 47.95,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 3,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.02925,
+    "log_loss": 0.187568,
+    "abs_margin_error": 6.261,
+    "abs_total_error": 27.953
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SEA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 0,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-CIN-ATL",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "CIN",
+   "home": "ATL",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/bengals-at-falcons-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -0.809685,
+    "def_away": -0.191282,
+    "off_away": 4.61822,
+    "def_home": 0.124004,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.265116,
+   "fair_american": -277,
+   "fair_home_line": 5.11,
+   "fair_total": 49.41,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.070287,
+    "log_loss": 0.308043,
+    "abs_margin_error": 11.887,
+    "abs_total_error": 1.591
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "CIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-CLE-NO",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "CLE",
+   "home": "NO",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/browns-at-saints-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 0.316597,
+    "def_away": 0.861523,
+    "off_away": -3.202401,
+    "def_home": -2.918512,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.520427,
+   "fair_american": -109,
+   "fair_home_line": -0.42,
+   "fair_total": 45.38,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 22,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.22999,
+    "log_loss": 0.653105,
+    "abs_margin_error": 0.583,
+    "abs_total_error": 0.383
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NO",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-DAL-IND",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DAL",
+   "home": "IND",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/cowboys-at-colts-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -1.056742,
+    "def_away": -3.162755,
+    "off_away": 2.605269,
+    "def_home": -3.553354,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.339347,
+   "fair_american": -195,
+   "fair_home_line": 3.37,
+   "fair_total": 54.48,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 27,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.115156,
+    "log_loss": 0.414526,
+    "abs_margin_error": 0.626,
+    "abs_total_error": 4.476
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DAL",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "DAL",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DAL",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-DEN-CAR",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DEN",
+   "home": "CAR",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/broncos-at-panthers-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 1.990479,
+    "def_away": 1.662778,
+    "off_away": -0.363955,
+    "def_home": -3.076798,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.417013,
+   "fair_american": -140,
+   "fair_home_line": 1.71,
+   "fair_total": 49.25,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 26,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.1739,
+    "log_loss": 0.539591,
+    "abs_margin_error": 3.293,
+    "abs_total_error": 2.252
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DEN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DEN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-DET-MIA",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "DET",
+   "home": "MIA",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/lions-at-dolphins-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -3.288498,
+    "def_away": -1.372854,
+    "off_away": 3.377763,
+    "def_home": -1.035672,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.24393,
+   "fair_american": -310,
+   "fair_home_line": 5.65,
+   "fair_total": 48.71,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 19,
+    "home_pts": 9,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.059502,
+    "log_loss": 0.279621,
+    "abs_margin_error": 4.349,
+    "abs_total_error": 20.709
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DET",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "DET",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DET",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -5,
+      "away_W_L": 3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-GB-NE",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "GB",
+   "home": "NE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/packers-at-patriots-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 0.261038,
+    "def_away": 2.305082,
+    "off_away": -0.909353,
+    "def_home": 2.86531,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.616283,
+   "fair_american": -161,
+   "fair_home_line": -2.41,
+   "fair_total": 40.39,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 45,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.379804,
+    "log_loss": 0.957849,
+    "abs_margin_error": 20.409,
+    "abs_total_error": 31.607
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NE",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NE",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 2,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-HOU-LAC",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "HOU",
+   "home": "LAC",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/texans-at-chargers-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -5.953034,
+    "def_away": 0.122102,
+    "off_away": -0.349437,
+    "def_home": -0.396571,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.251962,
+   "fair_american": -297,
+   "fair_home_line": 5.44,
+   "fair_total": 40.18,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 44,
+    "home_pts": 22,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.063485,
+    "log_loss": 0.290302,
+    "abs_margin_error": 16.556,
+    "abs_total_error": 25.817
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "HOU",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "HOU",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "HOU",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -7,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-LA-WAS",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "LA",
+   "home": "WAS",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/rams-at-commanders-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -0.714563,
+    "def_away": 1.311672,
+    "off_away": 0.042158,
+    "def_home": -2.364702,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.322415,
+   "fair_american": -210,
+   "fair_home_line": 3.75,
+   "fair_total": 46.59,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 20,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.103951,
+    "log_loss": 0.38922,
+    "abs_margin_error": 3.245,
+    "abs_total_error": 13.592
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "LA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-LV-SF",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "LV",
+   "home": "SF",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/raiders-at-49ers-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 2.944915,
+    "def_away": -4.05876,
+    "off_away": 2.985425,
+    "def_home": 1.464016,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.775266,
+   "fair_american": -345,
+   "fair_home_line": -6.16,
+   "fair_total": 54.74,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 17,
+    "home_pts": 38,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.050505,
+    "log_loss": 0.254549,
+    "abs_margin_error": 14.839,
+    "abs_total_error": 0.264
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 5,
+      "away_W_L": 0
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-NYG-PHI",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "NYG",
+   "home": "PHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/giants-at-eagles-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -4.484001,
+    "def_away": -0.20119,
+    "off_away": -1.108936,
+    "def_home": -1.005638,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.333661,
+   "fair_american": -200,
+   "fair_home_line": 3.5,
+   "fair_total": 41.83,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 19,
+    "home_pts": 11,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.11133,
+    "log_loss": 0.405957,
+    "abs_margin_error": 4.499,
+    "abs_total_error": 11.825
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "NYG",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -4,
+      "away_W_L": 2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-NYJ-KC",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "NYJ",
+   "home": "KC",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jets-at-chiefs-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 0.171415,
+    "def_away": -0.382398,
+    "off_away": -1.307515,
+    "def_home": 2.109939,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.715934,
+   "fair_american": -252,
+   "fair_home_line": -4.65,
+   "fair_total": 43.35,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 12,
+    "home_pts": 35,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.080693,
+    "log_loss": 0.334167,
+    "abs_margin_error": 18.35,
+    "abs_total_error": 3.652
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": -4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-TB-CHI",
+   "week": 9,
+   "date": "2026-11-08",
+   "away": "TB",
+   "home": "CHI",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/buccaneers-at-bears-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": 3.200779,
+    "def_away": 2.915958,
+    "off_away": -0.096729,
+    "def_home": 1.467735,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.621833,
+   "fair_american": -164,
+   "fair_home_line": -2.53,
+   "fair_total": 44.93,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.14301,
+    "log_loss": 0.475083,
+    "abs_margin_error": 0.472,
+    "abs_total_error": 6.068
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CHI",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "CHI",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 4,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W09-BUF-MIN",
+   "week": 9,
+   "date": "2026-11-09",
+   "away": "BUF",
+   "home": "MIN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bills-at-vikings-2026-reg-9",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "train_cutoff_week": 8,
+   "n_train_games": 121,
+   "inputs": {
+    "mu": 22.766518,
+    "hfa": 0.678306,
+    "sigma": 8.145644,
+    "off_home": -2.144742,
+    "def_away": -1.883291,
+    "off_away": 6.207346,
+    "def_home": 6.420243,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.530812,
+   "fair_american": -113,
+   "fair_home_line": -0.63,
+   "fair_total": 45.74,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 23,
+    "home_pts": 6,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-9"
+   },
+   "scores": {
+    "brier": 0.281762,
+    "log_loss": 0.756752,
+    "abs_margin_error": 17.63,
+    "abs_total_error": 16.737
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 5,
+      "away_W_L": 5
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-WAS-NYG",
+   "week": 10,
+   "date": "2026-11-12",
+   "away": "WAS",
+   "home": "NYG",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -1.22753,
+    "def_away": -2.07532,
+    "off_away": -1.040258,
+    "def_home": 0.399271,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.622246,
+   "fair_american": -165,
+   "fair_home_line": -2.55,
+   "fair_total": 45.36,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 21,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.38719,
+    "log_loss": 0.973513,
+    "abs_margin_error": 5.551,
+    "abs_total_error": 0.363
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "NYG",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "NYG",
+     "correct": false,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": -3
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-BUF-NYJ",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "BUF",
+   "home": "NYJ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/bills-at-jets-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -1.986563,
+    "def_away": -0.508447,
+    "off_away": 5.968546,
+    "def_home": -1.245761,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.151782,
+   "fair_american": -559,
+   "fair_home_line": 8.43,
+   "fair_total": 51.69,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 31,
+    "home_pts": 12,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.023038,
+    "log_loss": 0.164617,
+    "abs_margin_error": 10.571,
+    "abs_total_error": 8.691
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "BUF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "BUF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -5,
+      "away_W_L": 6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-CAR-NO",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "CAR",
+   "home": "NO",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/panthers-at-saints-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": 0.373979,
+    "def_away": -3.118021,
+    "off_away": 1.777969,
+    "def_home": -3.23287,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.43912,
+   "fair_american": -128,
+   "fair_home_line": 1.26,
+   "fair_total": 54.46,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 20,
+    "home_pts": 17,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.192826,
+    "log_loss": 0.578248,
+    "abs_margin_error": 1.745,
+    "abs_total_error": 17.458
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "CAR",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "NO",
+     "correct": false,
+     "inputs": {
+      "home_W_L": -2,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-HOU-CLE",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "HOU",
+   "home": "CLE",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/texans-at-browns-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -3.289803,
+    "def_away": -0.211906,
+    "off_away": 1.646542,
+    "def_home": 0.64554,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.32072,
+   "fair_american": -212,
+   "fair_home_line": 3.82,
+   "fair_total": 43.88,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 24,
+    "home_pts": 27,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.461421,
+    "log_loss": 1.137187,
+    "abs_margin_error": 6.815,
+    "abs_total_error": 7.122
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "HOU",
+     "correct": false
+    },
+    "S2_high_confidence": {
+     "pick": "HOU",
+     "correct": false
+    },
+    "S3_record_baseline": {
+     "pick": "CLE",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 1,
+      "away_W_L": -2
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-JAX-TEN",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "JAX",
+   "home": "TEN",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/jaguars-at-titans-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -3.82436,
+    "def_away": 4.930617,
+    "off_away": 3.56404,
+    "def_home": -1.884408,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.044424,
+   "fair_american": -2151,
+   "fair_home_line": 13.94,
+   "fair_total": 42.65,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 40,
+    "home_pts": 23,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.001974,
+    "log_loss": 0.045441,
+    "abs_margin_error": 3.06,
+    "abs_total_error": 20.351
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "JAX",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "JAX",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -6,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-KC-ATL",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "KC",
+   "home": "ATL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -1.258228,
+    "def_away": 2.469924,
+    "off_away": 1.11724,
+    "def_home": -0.23178,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.278421,
+   "fair_american": -259,
+   "fair_home_line": 4.81,
+   "fair_total": 43.58,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 35,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.077518,
+    "log_loss": 0.326314,
+    "abs_margin_error": 17.187,
+    "abs_total_error": 4.424
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "KC",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "KC",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-LA-AZ",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "LA",
+   "home": "AZ",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/rams-at-cardinals-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -1.660559,
+    "def_away": 1.837696,
+    "off_away": -0.196604,
+    "def_home": -3.583536,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.20948,
+   "fair_american": -377,
+   "fair_home_line": 6.62,
+   "fair_total": 45.84,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 34,
+    "home_pts": 6,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.043882,
+    "log_loss": 0.235064,
+    "abs_margin_error": 21.379,
+    "abs_total_error": 5.844
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "LA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "LA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -3,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-MIA-IND",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "MIA",
+   "home": "IND",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/dolphins-at-colts-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": -1.121486,
+    "def_away": -0.436699,
+    "off_away": -4.419747,
+    "def_home": -3.393196,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.529458,
+   "fair_american": -113,
+   "fair_home_line": -0.61,
+   "fair_total": 44.24,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 22,
+    "home_pts": 24,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.22141,
+    "log_loss": 0.635901,
+    "abs_margin_error": 1.395,
+    "abs_total_error": 1.756
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "IND",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "IND",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -5,
+      "away_W_L": -6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-MIN-GB",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "MIN",
+   "home": "GB",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/vikings-at-packers-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": 0.911454,
+    "def_away": 6.318509,
+    "off_away": -3.39351,
+    "def_home": 1.596082,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.492514,
+   "fair_american": -103,
+   "fair_home_line": 0.15,
+   "fair_total": 35.56,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 30,
+    "home_pts": 10,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.24257,
+    "log_loss": 0.678287,
+    "abs_margin_error": 19.846,
+    "abs_total_error": 4.441
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "MIN",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "MIN",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 3,
+      "away_W_L": 4
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-NE-DET",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "NE",
+   "home": "DET",
+   "international_game": true,
+   "source_url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": 2.830696,
+    "def_away": 0.650002,
+    "off_away": 0.891877,
+    "def_home": -0.63396,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.531855,
+   "fair_american": -114,
+   "fair_home_line": -0.65,
+   "fair_total": 49.4,
+   "y_home_win": 1,
+   "result": {
+    "away_pts": 10,
+    "home_pts": 35,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.21916,
+    "log_loss": 0.631385,
+    "abs_margin_error": 24.345,
+    "abs_total_error": 4.398
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "DET",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "DET",
+     "correct": true,
+     "inputs": {
+      "home_W_L": 4,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-SEA-LV",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "SEA",
+   "home": "LV",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": 2.333339,
+    "def_away": 3.388587,
+    "off_away": -0.681137,
+    "def_home": -4.660154,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.280182,
+   "fair_american": -257,
+   "fair_home_line": 4.77,
+   "fair_total": 48.88,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 21,
+    "home_pts": 13,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.078502,
+    "log_loss": 0.328757,
+    "abs_margin_error": 3.229,
+    "abs_total_error": 14.879
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SEA",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SEA",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 1
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  },
+  {
+   "game_id": "W10-SF-DAL",
+   "week": 10,
+   "date": "2026-11-15",
+   "away": "SF",
+   "home": "DAL",
+   "international_game": false,
+   "source_url": "https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10",
+   "week_page_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "train_cutoff_week": 9,
+   "n_train_games": 136,
+   "inputs": {
+    "mu": 22.845749,
+    "hfa": 0.26373,
+    "sigma": 8.192569,
+    "off_home": 2.498689,
+    "def_away": 1.69236,
+    "off_away": 3.921227,
+    "def_home": -2.931314,
+    "formula": "pred_home = mu + (hfa if not international) + off_home - def_away ; pred_away = mu + off_away - def_home ; p_home = Phi(margin / sigma)"
+   },
+   "p_home": 0.24015,
+   "fair_american": -316,
+   "fair_home_line": 5.78,
+   "fair_total": 53.61,
+   "y_home_win": 0,
+   "result": {
+    "away_pts": 46,
+    "home_pts": 40,
+    "tie": false,
+    "verified": "page-verified against https://www.nfl.com/schedules/2026/by-week/week-10"
+   },
+   "scores": {
+    "brier": 0.057672,
+    "log_loss": 0.274634,
+    "abs_margin_error": 0.218,
+    "abs_total_error": 32.386
+   },
+   "strategies": {
+    "S1_model_favourite": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S2_high_confidence": {
+     "pick": "SF",
+     "correct": true
+    },
+    "S3_record_baseline": {
+     "pick": "SF",
+     "correct": true,
+     "inputs": {
+      "home_W_L": -1,
+      "away_W_L": 6
+     },
+     "note": "control, not a candidate: uses only wins-minus-losses from weeks < w"
+    }
+   }
+  }
+ ]
+}
