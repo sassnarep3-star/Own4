@@ -3915,3 +3915,31 @@ every value gated by them is published blank + flagged, never inferred.
   (namespace counts, sibling row counts), a sibling merge turns your CI red through no fault of your
   code — `nfl-availability-desk` hit this twice and now pins the inventory to the commit it describes
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
+
+---
+
+## Session `arena/bc603c5b-own4` — claim (2026-11-16 UTC)
+
+**Session ID:** `arena-bc603c5b-own4` · **Branch:** `arena/bc603c5b-own4` (fixed) · **Base:** `1dbde90`
+
+### Claimed file scope (exclusive — no other session should edit these)
+- `nfl-origin-board/**` (new namespace: canonical NFL decision board + repo audit) — ALL files
+- `COORDINATION.md` — append-only (union resolution only)
+- `index.html` — one append-only nav block insert (new group `NFL Origin Board · 2026-11-16`); no existing nav entry removed or edited
+
+### Tasks
+| # | Task | Status | Files |
+|---|------|--------|-------|
+| B1 | Repo-wide line-by-line audit: scan all HTML/JSON rows for unsourced values, broken links, localhost refs, cross-namespace contradictions | in progress | `nfl-origin-board/audit/`, `nfl-origin-board/data/audit_findings.json` |
+| B2 | Live official capture: NFL.com Week 11 injury report, Week 10 results, schedule, standings, venues | in progress | `nfl-origin-board/data/*.json` |
+| B3 | Decision-readiness table: one row per brief requirement + blocking gate + clearing number | pending | `nfl-origin-board/data/requirements.json` |
+| B4 | Questions / information / answers register (what must be known before a decision) | pending | `nfl-origin-board/data/questions.json` |
+| B5 | Suggestions board (review-first, choose-a-path flow, verdicts left blank) | pending | `nfl-origin-board/data/suggestions.json` |
+| B6 | Strategies, gates, leaderboard, correlations (all with n; blanks where unverifiable) | pending | `nfl-origin-board/data/*.json` |
+| B7 | Site build: landing + category subpages + Flagged for Review | pending | `nfl-origin-board/build.py`, `nfl-origin-board/*.html` |
+| B8 | Final integration, PR to main, merge, Pages confirmation | pending | — |
+
+### Rules self-imposed this session
+- Every published row carries an official source URL fetched this session, or the value is blank and flagged.
+- No inferred/filled values. No backtest numbers on any leaderboard (pre-registration gate).
+- Determinism: `build.py` is stdlib-only, no network, no tree-wide counts baked into prose.
