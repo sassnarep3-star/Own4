@@ -4106,4 +4106,19 @@ whoever owns that page — either regenerate it with `verification/build.py` or 
 markers. **This session's own namespace passes every check**: 38/38 gates, 701 internal links resolved, 0
 broken.
 
-**PR / merge result:** see the line appended immediately below by the integration step.
+**PR / merge result**
+
+- **PR #129** — merged (no review requested, as instructed) as **`05178f1`** at 2026-11-16T01:52:16Z.
+  Pages built and the site went live at
+  `https://sassnarep3-star.github.io/Own4/nfl-sources/pages/` — **confirmed by fetching the deployed
+  landing page and the backtest page**, not by assuming the build was good.
+- **PR #130** — merged as **`4a2b530`** at 2026-11-16T01:54:19Z. Reading the *deployed* pages found four
+  defects the structural gates could not see: drifted positional format arguments on the backtest page
+  (rendering "mean fair American price of 25.0" and "disagreed on 300 of -272 fixtures"), three empty gate
+  cells, raw JSON keys in the break-even table, and two double periods. Fixed, plus a new gate **C10b**
+  that checks the rendered text of all 13 pages; C10b was itself mutation-tested (injecting a defect makes
+  `verify.py` exit 1, restoring the page makes it pass). **39 / 39 checks now pass.**
+  Re-fetched the deployed page to confirm the fix is live.
+- **Repair, not re-assertion:** the first merge was green in the gate but wrong on the screen. The lesson is
+  recorded here because the same failure mode — a page that passes every structural check and still shows a
+  wrong number — is what the C10b gate now exists to catch.
