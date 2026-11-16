@@ -293,7 +293,7 @@ def build_removal_of_luck():
         skill_pp = round(acc - 0.5, 4) if isinstance(acc, float) else None
         staking = m.get("staking") or {}
         roi = staking.get("roi")
-        placebo = m.get("g4_placebo") or {}
+        placebo = (staking.get("g4_placebo") or {}) or {}
         # Decomposition: skill is price-independent (accuracy vs coin flip + placebo);
         # luck is the residual variance in staking ROI that signal does not explain.
         verdict = ("luck removed: ranked on signal tier only; staking ROI reported "
