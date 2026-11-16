@@ -28,7 +28,9 @@ def main():
                        "official_source": src}
     outputs = {}
     for p in sorted(glob.glob(os.path.join(DATA, "*.json"))):
-        if os.path.basename(p) == "provenance.json":
+        # provenance.json cannot hash itself, and verification.json is the GATE'S OWN OUTPUT: it is
+        # written after this file every run, so hashing it would make every build dirty by one run.
+        if os.path.basename(p) in ("provenance.json", "verification.json"):
             continue
         outputs["data/" + os.path.basename(p)] = {
             "sha256": sha256_file(p), "bytes": os.path.getsize(p)}
@@ -37,6 +39,7 @@ def main():
         "title": "Every input and output, hashed, with the official page behind each input",
         "built_utc": REGISTERED_UTC,
         "registration_commit": "a4f26f5",
+        "excluded_from_outputs": ["verification.json (the gate's own record, written after this file)"],
         "how_to_recheck": ("python3 nfl-sources/engine/verify.py  -> check C3 recomputes every input hash. "
                            "A transcription edited by hand after this file was written fails the build."),
         "inputs": inputs, "outputs": outputs,
