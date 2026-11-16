@@ -1,0 +1,76 @@
+name: nfl-decision-console verify
+
+# Gate for the nfl-decision-console namespace (session arena-170de4f2-own4, scope K1-K7).
+# It re-derives every published number from the committed artefacts and enforces the publication
+# contract, so a reviewer can see the site is a function of its data and not of somebody's typing:
+#   * engine/derive.py     - standings identities + corpus arithmetic, the availability label join,
+#                            and the cross-namespace register census;
+#   * engine/build_site.py - regenerates index.html and the 11 subpages from committed data only;
+#   * engine/verify_site.py- row-level sourcing, register vocabulary, link resolution, index/artefact
+#                            agreement and a no-price rule (no official price source exists, so a
+#                            price-shaped value is a build failure);
+#   * the determinism step - a rebuild must not change any committed page.
+# The determinism gate is deliberately limited to THIS namespace and to data that is already
+# committed inside it. The tree-wide inventory that the census page renders is captured by
+# engine/inventory.py at an explicit commit and is re-run only in the informational step AFTER the
+# gate, because a walk over the repository grows whenever a sibling namespace merges - see the
+# standing warning at the end of COORDINATION.md.
+#
+# It does not fetch nfl.com: no collector is wired up yet, and a workflow that re-fetched a live page
+# would fail for reasons unrelated to the code (that gap is what suggestion CD-04 exists to close).
+
+on:
+  push:
+    paths:
+      - 'nfl-decision-console/**'
+      - '.github/workflows/nfl-decision-console.yml'
+  pull_request:
+    paths:
+      - 'nfl-decision-console/**'
+      - '.github/workflows/nfl-decision-console.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Derive every published number from the committed artefacts
+        run: python3 nfl-decision-console/engine/derive.py
+
+      - name: Rebuild the pages
+        run: python3 nfl-decision-console/engine/build_site.py
+
+      - name: Enforce the publication contract
+        run: python3 nfl-decision-console/engine/verify_site.py
+
+      - name: Determinism gate (rebuild must not change committed output)
+        run: |
+          git diff --stat -- nfl-decision-console
+          git diff --exit-code -- nfl-decision-console
+
+      - name: Syntax check the engines
+        run: |
+          for f in nfl-decision-console/engine/*.py; do python3 -m py_compile "$f"; done
+
+      - name: Inventory drift report (informational, never gates)
+        continue-on-error: true
+        run: |
+          python3 nfl-decision-console/engine/inventory.py
+          python3 - <<'PY'
+          import json
+          committed = json.load(open('nfl-decision-console/data/namespace_inventory.json'))
+          print("committed inventory: commit %s, %d registers, %d namespaces" % (
+              committed["captured_at_commit"], len(committed["registers"]), committed["namespace_count"]))
+          print("If the numbers above differ, refresh the inventory in its OWN commit and say why there;")
+          print("the census page is pinned to the commit it describes on purpose.")
+          PY

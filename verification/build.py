@@ -124,6 +124,27 @@ NAV = [
         ("nfl-decision-desk/pages/flagged.html", "⚑ NFL Decision Desk — flagged for review", "legacy"),
         ("nfl-decision-desk/pages/sources.html", "Sources read this session", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena-170de4f2-own4 (K7, additive; superset-only edit).
+    # The Decision Console is the review surface for the owner's decisions: a consolidated suggestion
+    # register with a verdict column, a graded question/answer register, the information gaps with the
+    # route that closes each, three decision paths, the site-improvement findings, a census of the
+    # duplication across every other namespace, and the corpus arithmetic the gates have to be consistent
+    # with. It links into the namespaces below rather than replacing them; nothing here removes or
+    # reorders an existing link.
+    ("NFL Decision Console · review surface (2026-11-16)", [
+        ("nfl-decision-console/index.html", "Decision console (start here)", "legacy"),
+        ("nfl-decision-console/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-console/pages/suggestions.html", "Suggestions — review, then choose", "legacy"),
+        ("nfl-decision-console/pages/questions.html", "Questions, information and answers", "legacy"),
+        ("nfl-decision-console/pages/gaps.html", "Missing information & discovery plan", "legacy"),
+        ("nfl-decision-console/pages/paths.html", "Decision paths & gates", "legacy"),
+        ("nfl-decision-console/pages/site-improvements.html", "Site improvements for decision-making", "legacy"),
+        ("nfl-decision-console/pages/consolidation.html", "Register census (duplication counted)", "legacy"),
+        ("nfl-decision-console/pages/corpus.html", "Corpus arithmetic & label join", "legacy"),
+        ("nfl-decision-console/pages/evidence.html", "Official reads this session", "legacy"),
+        ("nfl-decision-console/pages/sources.html", "Source register", "legacy"),
+        ("nfl-decision-console/pages/flagged.html", "⚑ Decision Console — flagged for review", "legacy"),
+    ]),
     ("Official data · 2026-11-05", [
         ("verified/standings.html", "Standings", "stand"),
         ("verified/team-stats.html", "Team stats", "stats"),

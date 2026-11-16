@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision console · NFL Decision Console · NFL Decision Console</title>
+<meta name="description" content="What this is, and the three decisions in front of you">
+<link rel="stylesheet" href="assets/console.css">
+</head><body>
+<header class="top"><div class="wrap">
+<a class="home" href="index.html">NFL Decision Console</a>
+<span class="asof">data as of <b>2026-11-16 · reads 01:36 · inventory at commit e247d1d</b> · rendered by <code>engine/build_site.py</code></span>
+</div></header>
+<nav class="wrap tabs"><a class="cur" href="index.html">Decision console</a><a class="" href="pages/suggestions.html">Suggestions</a><a class="" href="pages/questions.html">Questions &amp; answers</a><a class="" href="pages/gaps.html">Missing information</a><a class="" href="pages/paths.html">Decision paths</a><a class="" href="pages/site-improvements.html">Site improvements</a><a class="" href="pages/consolidation.html">Register census</a><a class="" href="pages/corpus.html">Corpus arithmetic</a><a class="" href="pages/evidence.html">Official reads</a><a class="" href="pages/executive-summary.html">Executive summary</a><a class="" href="pages/sources.html">Sources</a><a class="" href="pages/flagged.html">⚑ Flagged for review</a></nav>
+<main class="wrap">
+<p class="crumb"><a href="index.html">console home</a> · console home</p>
+
+<h1>NFL Decision Console</h1>
+<p class="lede">One place to decide. The repository already holds
+856 register rows about the same
+decisions — this console consolidates them, adds what a fresh read of the league's own pages settled
+today, and leaves a verdict box on every proposal. Nothing here is implemented; that is the point.</p>
+<div class="cards">
+<div class="card"><h3>Decision in front of you #1</h3><p><b>Price policy.</b> The league publishes no
+odds — probed twice this session. Buy a feed, decline prices forever, or keep a labelled third-party
+archive. Nine requirement families wait on this one sentence. → <a href="pages/suggestions.html">CD-02</a></p></div>
+<div class="card"><h3>Decision #2</h3><p><b>The gate versus the calendar.</b> A validation gate of
+n ≥ 300 graded fixtures cannot be met in a 272-fixture season. Lower it, switch the unit,
+or accept that no strategy is promotable until 2027. → <a href="pages/corpus.html">corpus arithmetic</a></p></div>
+<div class="card"><h3>Decision #3</h3><p><b>One canonical surface.</b> 69 registers, 31
+namespaces, no place a verdict is authoritative. Pick one, mark the rest appendices. → <a href="pages/site-improvements.html">site findings</a></p></div>
+</div>
+<h2>Numbers a decision has to be consistent with</h2>
+<div class="tw"><table class="keys"><thead><tr><th scope="col">Figure</th><th scope="col">Value</th><th scope="col">Why it is trustworthy</th><th scope="col">Source</th></tr></thead><tbody><tr><td>Gradeable fixtures today</td><td><b>148</b></td><td>Σ(W+L+T)/2 from the league's own standings, read 2026-11-16T01:33Z (inside session window 01:31Z-01:36:08Z)</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/standings_2026-11-16.json" target="_blank" rel="noopener">transcription ↗</a></td></tr><tr><td>Points identity</td><td>ΣPF 6824 = ΣPA 6824</td><td>the arithmetic every published number on this site has to pass</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/derive.py" target="_blank" rel="noopener">engine/derive.py ↗</a></td></tr><tr><td>Gate cited by peers</td><td>n ≥ 300 fixtures</td><td>a season holds 272 fixtures, so one season cannot satisfy it — this is decision CD-06</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/derived/corpus.json" target="_blank" rel="noopener">corpus.json ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/governance.json" target="_blank" rel="noopener">peer gate ↗</a></td></tr><tr><td>Official price source</td><td><span class="b b-bad">none on the paths probed</span></td><td>nfl.com/odds/ and nfl.com/betting/ both serve the league's own 404 page (read this session)</td><td><a href="https://www.nfl.com/odds/" target="_blank" rel="noopener">odds probe ↗</a> · <a href="https://www.nfl.com/betting/" target="_blank" rel="noopener">betting probe ↗</a></td></tr><tr><td>Official lineups / inactives</td><td><span class="b b-ok">exist, per fixture, post-game</span></td><td>the Game Summary prints both clubs' lineups and Not Active lists — see pages/evidence.html</td><td><a href="https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener">the PDF ↗</a></td></tr><tr><td>Suggestion rows in the repo</td><td><b>138</b> across 19 registers in 18 namespaces</td><td>and only 24 of those rows carry a non-blank verdict-shaped field at all (an upper bound — see the caveat on the census page); rows whose field is literally named 'verdict' and filled: 0 in git</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/namespace_inventory.json" target="_blank" rel="noopener">inventory ↗</a> · <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/pages/consolidation.html" target="_blank" rel="noopener">census ↗</a></td></tr><tr><td>Verdicts written on this console</td><td>0 of 15</td><td>the queue closes only when a verdict is written into data/suggestions.json; the counter is generated</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/suggestions.json" target="_blank" rel="noopener">suggestions.json ↗</a></td></tr></tbody></table></div><p class="note">Every value here is produced by <code>engine/derive.py</code> from a committed transcription, or is an official page read in this session. Nothing is typed twice.</p>
+<h2>What this session changed about what we know</h2>
+<ul><li><b>Answered:</b> the Game Book the requirements name as the source for actual starters and game-day status exists, is dated, is linked from the game centre, and prints both clubs' lineups, Not Active lists, game-day weather and roof/surface. <span class="b b-ok">verified this session</span></li><li><b>Answered:</b> it is a <i>post-game</i> document — it contains final statistics — so it is a label source, never a pre-kickoff feature. <span class="b b-warn">look-ahead gate</span></li><li><b>New risk found:</b> the document prints a use restriction (media coverage only; any other use needs written league permission). No register in this repository recorded it, and two namespaces publish tables transcribed from it. → CD-03</li><li><b>Resolved upstream:</b> the three Lions rows this project flagged as blank (Joseph, Mays, Reed) now each read <i>Out</i> on the live report. Closed as 'source corrected between captures', not 'we fixed it'.</li><li><b>Still nothing:</b> no official depth-order source (1 of 32 club paths probed, 404) and no per-player snap table found in the game-book chunks read — so the 2nd/3rd/4th-string index remains unbuilt on purpose.</li><li><b>Settled by arithmetic:</b> 148 fixtures are gradeable now; 136 is exactly half a season, the only figure derivable from official numbers that reproduces the brief's '136-game log'.</li></ul>
+<h2>Where to go</h2>
+<div class="grid2">
+<p><a href="pages/suggestions.html"><b>Suggestions (15)</b></a> — the review section: options, costs,
+what each one locks, and a blank verdict column.</p>
+<p><a href="pages/questions.html"><b>Questions &amp; answers (17)</b></a> — known, unknown, and what
+would fill the gap, each graded by the kind of evidence behind it.</p>
+<p><a href="pages/gaps.html"><b>Missing information (13)</b></a> — the discovery plan: route, owner, cost.</p>
+<p><a href="pages/paths.html"><b>Decision paths (3)</b></a> — pick one; each lists its first step, its
+gate, and the number that clears it.</p>
+<p><a href="pages/evidence.html"><b>Official reads</b></a> — every page opened, with chunk coverage and
+what the page could not prove.</p>
+<p><a href="pages/flagged.html"><b>⚑ Flagged for review (10)</b></a> — irregularities, including the
+ones this session resolved and the ones it could not.</p>
+</div>
+
+</main>
+<footer class="wrap"><p><b>Provenance rule.</b> Every row on this page is either transcribed from a
+league page read in this session (link in the Source column) or computed by an engine in this namespace
+from a committed artefact. Values that could not be confirmed are blank and flagged on
+<a href="pages/flagged.html">⚑ Flagged for review</a>. No price, line or payout appears anywhere on
+this site because no official price source exists. This is analytical research, not wagering advice.</p>
+<p><a href="https://github.com/sassnarep3-star/Own4">repository ↗</a> ·
+<a href="index.html">root dashboard ↗</a></p></footer>
+</body></html>

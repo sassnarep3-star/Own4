@@ -1,0 +1,190 @@
+{
+ "dataset": "decision_console_flags",
+ "title": "\u2691 Flagged for review \u2014 irregularities found while verifying, resolved or not",
+ "built_utc": "2026-11-16",
+ "rule": "a flag is published with the source links that expose it. Severity: high = a decision or a claim changes; medium = a number on the site can be wrong; low = hygiene. 'blocks' names what cannot be trusted until the flag is closed.",
+ "rows": [
+  {
+   "id": "DC-01",
+   "severity": "high",
+   "title": "138 suggestion rows, 0 reviewer verdicts in git",
+   "found": "Counting every suggestion register in the repository at the base commit returns 138 rows across 19 files in 18 namespaces; no file anywhere records a verdict for the open queue (the field exists and is empty by design).",
+   "why_it_matters": "the brief's process \u2014 review, choose a path, then implement \u2014 cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
+   "action": "one verdict per row of CD-01\u2026CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
+   "blocks": "any claim that the project has a decision process",
+   "sources": [
+    {
+     "label": "inventory",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/namespace_inventory.json"
+    },
+    {
+     "label": "this register's verdict column",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/suggestions.json"
+    }
+   ]
+  },
+  {
+   "id": "DC-02",
+   "severity": "high",
+   "title": "Third-party accounts of the inactive-list rule contradict each other",
+   "found": "Sources returned by search this session state 5, up to 7, and up to 8 inactives, and disagree on whether practice reports are due Mon\u2013Wed or Wed\u2013Fri. The only official artefact read prints 6 'Not Active' names per club for one fixture and states no rule.",
+   "why_it_matters": "a rule adopted from a non-official source would leak into capture schedules, denominators for 'who replaced whom', and any 'automatic inactive' assumption.",
+   "action": "reject all three numbers; measure the distribution of Not Active size across fixtures instead",
+   "blocks": "any per-club 'mandatory inactive count' claim",
+   "sources": [
+    {
+     "label": "the official document that shows 6 and 6",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  },
+  {
+   "id": "DC-03",
+   "severity": "medium",
+   "title": "One fixture, two official venue names",
+   "found": "The game centre prints 'Location MUNICH / Stadium FC BAYERN MUNICH STADIUM'; the game book for the same fixture prints 'at Allianz Arena, Munich, Germany'.",
+   "why_it_matters": "a fixture-context join on venue name fails on international and neutral-site games, which are precisely the games where surface and conditions matter for a total.",
+   "action": "key venues by a stable id; store both printed labels as evidence (CD-13)",
+   "blocks": "any roof/surface table keyed by stadium name",
+   "sources": [
+    {
+     "label": "game centre",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    },
+    {
+     "label": "game book",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "DC-04",
+   "severity": "high",
+   "title": "The game book carries a use restriction that no register records",
+   "found": "Its first page prints: media coverage only; 'any other use of this material is prohibited without the written permission of the National Football League'. Two peer namespaces transcribe from this document and one publishes lineup tables derived from it; a grep for the restriction's wording finds no register mentioning it.",
+   "why_it_matters": "the single best official source for starters, inactives, weather and venue comes with a condition printed on it, and the site's publication posture has never accounted for it.",
+   "action": "CD-03 (recommended: derived facts + a link, never a mirror); record the posture in the publication contract",
+   "blocks": "publishing transcribed game-book tables as such",
+   "sources": [
+    {
+     "label": "the document",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "peer register publishing derived lineups",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/official_lineups.json"
+    }
+   ]
+  },
+  {
+   "id": "DC-05",
+   "severity": "medium",
+   "title": "Two 'Out' players match no availability block, and two rows are ambiguous by surname",
+   "found": "engine/derive.py joins 24 report rows to the game book's four availability blocks for one fixture: 10 start, 5 come off the bench, 5 are Not Active, 2 match nothing (NE TreVeyon Henderson and DET Kerby Joseph, both 'Out' on the report) while the 'Did Not Play' block printed no names at all, and 2 rows are ambiguous because 'Brown' matches both 'A.Brown' in the lineups and 'B.Brown' in Not Active.",
+   "why_it_matters": "either the game book classifies an Out player in a way the site has not modelled, or the chunked renderer dropped the block - and no rendered read can tell those apart. Separately, the ambiguity shows the join cannot be keyed until an official name-to-number map exists, so 'who replaced whom' inherits that ceiling.",
+   "action": "CD-05: re-read the PDF's own text layer from bytes; if the block is genuinely empty, publish the classification gap as a fact about the artefact",
+   "blocks": "any 'every Out player is a Not Active' assumption and any play-rate denominator",
+   "sources": [
+    {
+     "label": "the report rows transcribed for this fixture",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/gamebook_evidence.json"
+    },
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  },
+  {
+   "id": "DC-06",
+   "severity": "low",
+   "title": "Game-day roster names in one game book sum to 54 per club",
+   "found": "For the fixture read, lineups (22 slots) plus substitutions (26) plus Not Active (6) enumerate 54 distinct names for each club, which exceeds a 53-man roster; the document does not state why (practice-squad elevations are a plausible route and are not printed here).",
+   "why_it_matters": "any model that assumes an active-count or roster-size constant will mis-handle exactly the games where elevations happen.",
+   "action": "do not adopt a constant; compare the count against the transactions hub for the same day before using it as a feature",
+   "blocks": "'actives = roster \u2212 inactives' arithmetic",
+   "sources": [
+    {
+     "label": "transcribed blocks",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/gamebook_evidence.json"
+    },
+    {
+     "label": "transactions hub named by a peer register",
+     "url": "https://www.nfl.com/transactions/"
+    }
+   ]
+  },
+  {
+   "id": "DC-07",
+   "severity": "medium",
+   "title": "Every clock time in this repository is a client-side approximation",
+   "found": "The read path used by agent sessions returns rendered text only \u2014 no headers, no server Date, no bytes \u2014 so this namespace states its reads as an ordered window (01:31Z\u201301:36:08Z) rather than fake precision.",
+   "why_it_matters": "'store every read with its clock time' and 'publish the delta' both promise a time series; what exists today is a set of agent notes with day-granularity.",
+   "action": "CD-04/G-04; until then, no page should print a timestamp finer than the window it was read in",
+   "blocks": "any claim about how fast a designation changed",
+   "sources": [
+    {
+     "label": "the reads file with its timestamp rule",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/official_reads.json"
+    }
+   ]
+  },
+  {
+   "id": "DC-08",
+   "severity": "medium",
+   "title": "Root navigation mixes a live count with a hard-coded date",
+   "found": "Committed index.html renders 'NFL research \u00b7 30 workspaces (2026-11-15)': the count is computed from the tree at build time, the date is a literal in the generator, so the pair drifts apart after the next merge.",
+   "why_it_matters": "a reader uses the date to decide how much to trust the number.",
+   "action": "SF-03",
+   "blocks": "nothing, but it undermines the site's own convention that a number is meaningless without its as-of",
+   "sources": [
+    {
+     "label": "generator",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+    }
+   ]
+  },
+  {
+   "id": "DC-09",
+   "severity": "medium",
+   "title": "The brief's corpus and count figures do not reproduce, and this session does not pretend to settle it",
+   "found": "Brief: a 136-game log; 254 rows / 4 no-injury sections published versus 279 / 2 live. Repo: 148 fixtures credited by the standings identity at this session's clock (145 at a peer's earlier clock); peers measured 347 report rows and 28 club sections.",
+   "why_it_matters": "three of the brief's inputs are stale or unverifiable, and a plan built on a number nobody can reproduce will be re-litigated every session.",
+   "action": "define both corpora as engine output with a clock (CD-06); stop quoting the brief's counts on pages",
+   "blocks": "any 'we are behind by X rows' framing",
+   "sources": [
+    {
+     "label": "this session's standings transcription",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/standings_2026-11-16.json"
+    },
+    {
+     "label": "peer capture of the report",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/capture_manifest.json"
+    }
+   ]
+  },
+  {
+   "id": "DC-10",
+   "severity": "low",
+   "title": "This namespace read 1 of 8 chunks of the live report",
+   "found": "The report page is served in 8 chunks; only the first was read here, so this namespace publishes no row census and no vocabulary census for the whole page.",
+   "why_it_matters": "a reader who assumes the console re-counted the report is wrong; it re-checked specific rows and the page's structure, and says so.",
+   "action": "the collector (CD-04) is the only fix; a full chunk sweep by an agent session is expensive and not reproducible",
+   "blocks": "any census claim on this site other than the peer capture's own",
+   "sources": [
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "peer full-page capture",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/availability_snapshot_2026-11-15.csv"
+    }
+   ]
+  }
+ ]
+}
