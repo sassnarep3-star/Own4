@@ -5,10 +5,10 @@
  "session": "arena/3858e722-own4",
  "rule": "Collected by reading each workspace's own flags artefact. Nothing is closed, merged or re-judged here: each row links back to the page that raised it and to the source that page cited. An item with no theme match is grouped as unclassified rather than forced into one.",
  "totals": {
-  "items": 241,
+  "items": 242,
   "files": 18,
   "workspaces": 18,
-  "with_source_link": 212
+  "with_source_link": 213
  },
  "by_theme": [
   {
@@ -17,7 +17,7 @@
   },
   {
    "theme": "Fixtures, schedule & venues",
-   "n": 38
+   "n": 39
   },
   {
    "theme": "Site, navigation & repository hygiene",
@@ -25,7 +25,7 @@
   },
   {
    "theme": "Depth, starters & replacements",
-   "n": 23
+   "n": 24
   },
   {
    "theme": "Prices & market lines",
@@ -52,12 +52,12 @@
    "n": 6
   },
   {
-   "theme": "Capture, hashing & provenance",
+   "theme": "Data rights & storage",
    "n": 4
   },
   {
-   "theme": "Data rights & storage",
-   "n": 4
+   "theme": "Capture, hashing & provenance",
+   "n": 3
   }
  ],
  "by_workspace": [
@@ -66,12 +66,12 @@
    "n": 18
   },
   {
-   "workspace": "nfl-hub",
+   "workspace": "nfl-book",
    "n": 18
   },
   {
-   "workspace": "nfl-book",
-   "n": 17
+   "workspace": "nfl-hub",
+   "n": 18
   },
   {
    "workspace": "nfl-command",
@@ -145,7 +145,7 @@
   },
   {
    "path": "nfl-book/data/flags.json",
-   "n": 17
+   "n": 18
   },
   {
    "path": "nfl-command/data/flags.json",
@@ -690,9 +690,9 @@
    "file": "nfl-book/data/flags.json",
    "id": "FB-06",
    "severity": "medium",
-   "theme": "Capture, hashing & provenance",
-   "title": "Injury capture is 2 of 8 official-report chunks",
-   "detail": "107 player rows across WAS/NYG/NE/DET/KC/ATL/MIN/GB/JAX captured this session; 6 chunks and the rest of the JAX game were not read. Teams not captured are simply absent, not guessed.",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 injury capture now covers all 8 of 8 official chunks (resolved 2026-11-16)",
+   "detail": "All 8 chunks of nfl.com/injuries/ (Week 10, 2026) were transcribed line by line: 347 player rows across 14 game sections and 28 clubs, every row with fetch clock and chunk attribution, blank cells preserved; closes the prior 2-of-8 gap. Raw transcript pinned with sha256 in injuries_week10_capture.json. Remaining gap: one report date only, no daily archive (CR-09). CAVEAT (FB-18): the official page mislabels players under wrong team headers, so team assignments are transcribed exactly as published and are not corrected or inferred.",
    "sources": [
     "https://www.nfl.com/injuries/"
    ],
@@ -838,6 +838,19 @@
    "detail": "Disclosed in correlations.json method; exact t-distribution p-values are not computed (stdlib only).",
    "sources": [
     "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-18",
+   "severity": "medium",
+   "theme": "Depth, starters & replacements",
+   "title": "Official injury page team labels are inconsistent",
+   "detail": "nfl.com/injuries/ prints several players under the wrong club header (e.g., J.J. McCarthy under NYG, Micah Parsons and Zaire Franklin under GB, Mike Evans under SF, Kyler Murray under MIN, Myles Garrett under LAR). Rows in injuries_week10_capture.json are transcribed exactly as published under the team header shown; no team assignment is corrected or inferred, so no depth/injury deficiency may be derived from team labels alone.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
    ],
    "page": "nfl-book/pages/flagged.html"
   },

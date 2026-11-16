@@ -35,7 +35,7 @@ consistent with every point the league credits.** That is a stronger statement t
 
 ## What was settled, and what was not
 
-**16 conflicts registered: 11 settled by an official number, 1 shown to be a label-only difference, 4 left to you.**
+**17 conflicts registered: 12 settled by an official number, 1 shown to be a label-only difference, 4 left to you.**
 
 The four that are yours, because the league publishes nothing that decides them:
 
@@ -60,6 +60,13 @@ current state:
 * *"Only 6 of 254 report rows carry a game designation"* → **171 of 347 (49.3%) do**: Questionable 90, Out 70, Doubtful 11, blank 176.
 * *"Four clubs have no section in the report"* → **those four (CHI, DEN, PHI, TB) are on bye in Week 10**, which is why the report has 28 sections, not 32.
 
+## Independent corroboration of the 347-row figure
+
+A second workspace completed a **full 8-of-8-chunk reading** of the same official page on 2026-11-16 and
+arrived at **exactly 347 rows, 14 games and 28 clubs**, publishing its raw transcript with a sha256 beside
+it (`nfl-book/data/injuries_week10_capture.json`). The figure therefore now rests on a complete read, not on
+my sample plus inference. See `RC-17`.
+
 ## An irregularity worth your attention
 
 Recomputing the availability capture's own published sha256 fingerprints at build time: **4 of 6 match.**
@@ -70,8 +77,8 @@ supposed to vouch for is that namespace's act, or yours. See `RC-16`.
 
 ## Your open review queue, in one place
 
-**241 open flagged items from 18 workspaces**, grouped into 12 themes, each linking back to the page that
-raised it and the source that page cited. 212 of 241 carry a source link; the other 29 are printed as
+**242 open flagged items from 18 workspaces**, grouped into 12 themes, each linking back to the page that
+raised it and the source that page cited. 213 of 242 carry a source link; the other 29 are printed as
 **UNVERIFIED — no source cited** rather than as a bare "none".
 
 ## Honest limits of this session
@@ -104,13 +111,14 @@ of this session's own (16 Week-10 fixtures, where the arithmetic forces 14).
 
 | Page | Why |
 |---|---|
+| `pages/executive-summary.html` | This summary, rendered from the same data |
 | `index.html` | The canonical numbers and the single answer per question |
-| `pages/conflicts.html` | All 16 conflicts in full, with the basis for each verdict |
+| `pages/conflicts.html` | All 17 conflicts in full, with the basis for each verdict |
 | `pages/results.html` | Every corpus scored against the league; the closure table |
 | `pages/availability.html` | Every capture scored; the fingerprint check |
 | `pages/decisions.html` | The 4 decisions + RR-01, each with its clearing action |
 | `pages/workspaces.html` | All 31 workspaces, whether each has a gate |
-| `pages/review.html` | All 241 flagged items |
+| `pages/review.html` | All 242 flagged items |
 | `pages/method.html` | Pipeline, sources, arithmetic guards, and what was not read |
 | `pages/flagged.html` | This workspace's own 7 flags |
 

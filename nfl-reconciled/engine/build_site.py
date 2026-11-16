@@ -48,16 +48,18 @@ V_BADGE = {
 }
 
 # ------------------------------------------------------------------ navigation
+# Counts in the navigation are computed from the artefacts, never typed. A hand-typed count went stale
+# twice in this repository's history; see verification/build.py's own note on the same defect.
 PAGES = [
     ("index.html", "Start here · canonical numbers"),
     ("pages/executive-summary.html", "Executive summary"),
-    ("pages/conflicts.html", "Conflict register (16)"),
+    ("pages/conflicts.html", "Conflict register (%d)" % RES["counts"]["rows"]),
     ("pages/results.html", "Results corpus vs the league"),
     ("pages/availability.html", "Availability captures vs the live page"),
-    ("pages/workspaces.html", "Workspace index (31)"),
-    ("pages/review.html", "⚑ All flagged items (241)"),
-    ("pages/decisions.html", "What is still undecided (4)"),
-    ("pages/method.html", "Method, sources & limits"),
+    ("pages/workspaces.html", "Workspace index (%d)" % NS["n_namespaces"]),
+    ("pages/review.html", "⚑ All flagged items (%d)" % REV["totals"]["items"]),
+    ("pages/decisions.html", "What is still undecided (%d)" % RES["counts"]["review"]),
+    ("pages/method.html", "Method, sources &amp; limits"),
     ("pages/flagged.html", "⚑ This workspace's flags"),
 ]
 
@@ -111,7 +113,7 @@ def page(path, title, crumb, body, desc):
   <a class="brand" href="%(prefix)sindex.html">Own4 <span>NFL reconciled · one entry point</span></a>
   <div class="tag">Built %(built)s · 31 workspaces, one set of numbers</div>
   <nav aria-label="Site sections">%(nav)s</nav>
-  <a class="flag" href="%(siteprefix)spages/flagged.html">⚑ 4 items need a decision · 241 open flags</a>
+  <a class="flag" href="%(siteprefix)spages/flagged.html">⚑ %(nrev)d decisions open · %(nitems)d flags</a>
 </aside>
 <main class="main" id="main">
 <div class="crumb">%(crumb)s</div>
@@ -125,7 +127,8 @@ def page(path, title, crumb, body, desc):
 """ % {"title": esc(title), "desc": esc(desc), "crumb": crumb, "body": body,
        "nav": nav(path, site_prefix, repo_prefix), "prefix": repo_prefix,
        "siteprefix": site_prefix, "css": css, "built": BUILT,
-       "footer": FOOTER % {"p": repo_prefix}}
+       "footer": FOOTER % {"p": repo_prefix},
+       "nrev": RES["counts"]["review"], "nitems": REV["totals"]["items"]}
     full = os.path.join(HERE, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     with open(full, "w", encoding="utf-8") as fh:
@@ -754,7 +757,9 @@ def build_review():
     b = []
     b.append('<p class="lead" style="max-width:80ch">Every open flagged item in every workspace, in one '
              'list. Nothing here is closed or re-judged: each row links to the workspace page that raised '
-             'it, and to the source that page cited. %d of %d items carry a source link.</p>'
+             'it, and to the source that page cited. %d of %d items carry a source link. This list grows '
+             'whenever a peer namespace adds a flag, so it is recounted on every build rather than '
+             'quoted as a fixed number.</p>'
              % (REV["totals"]["with_source_link"], REV["totals"]["items"]))
     b.append(cards([("bad", str(REV["totals"]["items"]), "open items"),
                     ("", str(REV["totals"]["files"]), "files"),

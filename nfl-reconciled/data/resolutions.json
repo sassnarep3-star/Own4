@@ -256,11 +256,27 @@
    ],
    "affects": "The immutability claim of the availability capture: while the seal is stale, a reviewer cannot use it to detect a later edit of either file.",
    "clearing_action": "Regenerate data/derived/hashes.json in a session that owns that namespace. This session does not edit it: re-sealing a capture from the file it is supposed to vouch for is the owner's or that namespace's act, not a peer's."
+  },
+  {
+   "id": "RC-17",
+   "fact": "Does the full 8-chunk reading corroborate the 347-row figure?",
+   "conflict": "A workspace that had read only 2 of 8 page chunks held 107 rows; the complete reading is the question at issue in RC-05.",
+   "verdict": "SETTLED",
+   "answer": "Yes. A second workspace completed an independent reading of all 8 chunks on 2026-11-16 and arrived at exactly 347 rows, 14 games and 28 clubs, with a byte-level raw transcript committed beside it. That is a full-coverage reading of the same page agreeing with the two partial-but-every-club captures this session hand-checked, so the 347 figure now rests on a complete read rather than on inference from a sample.",
+   "official_number": 347,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "The complete capture states its own scope (all 8 of 8 chunks), its own parse-checked counts, and publishes the raw transcript with a sha256. This session did not re-read the chunks; it records that the figure is now corroborated by a complete read.",
+   "repo_evidence": [
+    "nfl-book/data/injuries_week10_capture.json",
+    "nfl-book/data/raw/nfl_week10_injury_report_transcript.txt"
+   ],
+   "affects": "The confidence behind the 347-row figure, and the flag that said the complete capture did not exist.",
+   "clearing_action": "None. Note that this does not close the same page's other open question (RC-16's stale seal), which is a different file."
   }
  ],
  "counts": {
-  "rows": 16,
-  "settled": 11,
+  "rows": 17,
+  "settled": 12,
   "no_conflict": 1,
   "review": 4
  }
