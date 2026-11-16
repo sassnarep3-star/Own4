@@ -3840,6 +3840,55 @@ the local determinism gate (`git diff --exit-code` after a rebuild → clean) be
 `RF-17` was rewritten so the namespace count is *computed at build time* rather than typed into a flag, which
 is the general lesson: a count in prose goes stale the moment another namespace merges.
 
+## Session `arena/20f55d17-own4` — completion record (2026-11-15 UTC)
+
+All G-tasks complete and merged. **PR #114 → merge commit `9425f1c`; bug-fix PR #121 → merge commit `4702255`.**
+Post-merge CI on `main`: **`nfl-book verify` success** (determinism gate green),
+**`pages build and deployment` success**. Live and confirmed by fetch:
+**https://sassnarep3-star.github.io/Own4/nfl-book/** (30-page dashboard).
+
+| ID | Task | Status | Notes |
+|----|------|--------|-------|
+| G1 | Full-brief requirements traceability | complete | `requirements.json` expanded 16 → **69 rows** (met 29 / partial 33 / blocked 7), each with blocking gate + clearing number |
+| G2 | Decision-readiness table on landing | complete | `index.html` carries the table: one row per requirement, gate + clearing number |
+| G3 | Removal-of-luck panel + model outputs | complete | `removal_of_luck.json` (skill vs luck decomposition) + `model_outputs.json` (P + inputs per game) |
+| G4 | Per-team / availability / depth register / matchup matrix | complete | `per_team_view`, `availability_graph`, `depth_register` (32-club), `matchup_matrix` |
+| G5 | PIT ledger / fixture-context / venues / roster sweep / holdout | complete | `pit_ledger` (sha256-sealed), `fixture_context`, `venues`, `roster_sweep`, `holdout_split` |
+| G6 | Two-stage leaderboard / control baseline / vig-free / joint-evidence | complete | `two_stage_leaderboard` (Brier + divisions), `control_baseline` (random + point-in-time favorites), `vig_free_decomposition`, `joint_evidence` |
+| G7 | Ablations / weekly diff / questionable calibration / injury surprise / drift alarms | complete | all five datasets built; unsourced values blank + flagged |
+| G8 | "What would change our mind" + final integration | complete | field on all 5 strategies; PR → main → merge → Pages confirmed |
+
+**Engine:** `nfl-book/engine/expand.py` (stdlib-only, deterministic, no network) generates
+21 structural datasets from official-derived inputs. Added to the `nfl-book.yml` CI step
+before `build_site.py`.
+
+**Verification this session:** full pipeline re-run end-to-end (ingest → originate →
+backtest → correlations → expand → build → verify) PASS; `verify.py`: **30 pages, 815 rows,
+767 sourced, 747 marked blanks, 1759 links, 0 broken, 0 localhost**; determinism gate
+(`git diff --exit-code`) clean on a fresh clone. Live pages fetched and read: landing
+(decision-readiness + removal-of-luck), removal-of-luck, requirements.
+
+**Defect found & fixed before/after merge:** removal-of-luck panel read `g4_placebo` from
+the wrong path (metric top level instead of `staking` sub-object), rendering S1's
+placebo gate as "fail" (it passed at p<0.002). Fixed in PR #121; live page now shows
+S1 p=0.0/pass, S2 0.792/fail, S3 1.0/fail.
+
+**CI pin:** workflow pinned to Python 3.11 — the committed data + pages are deterministic
+on 3.11 (fresh-clone rerun produces no diff); the prior engine scripts are version-stable,
+and 3.11 matches the committed output so the determinism gate compares like-for-like.
+
+**Conflicts encountered (2, both resolved as unions, no work discarded):**
+1. `COORDINATION.md` on rebase onto `origin/main` (concurrent PRs #108/#109) — kept both
+   the concurrent sessions' entries and this session's entry.
+2. `COORDINATION.md` again on rebase before merge (main advanced) — union resolved.
+
+**Handover / open decision queue:** the inherited 13 suggestions (SG-01..13) and 15
+questions (Q01..15) remain the open review queue. The recurring blockers are
+FB-01 (no official price source) and FB-07 (no official depth chart / snap counts);
+every value gated by them is published blank + flagged, never inferred.
+
+---
+
 **PR / merge result (as required by the brief).**
 
 * **PR #120** — `https://github.com/sassnarep3-star/Own4/pull/120` — opened from `arena/d941f3c1-own4`
