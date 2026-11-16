@@ -137,7 +137,12 @@ Gambling involves risk — beaware: this is a research dashboard, not betting ad
 """
 
 
-def section(title: str, body: str, sub: str = "", cls: str = "") -> str:
+def section(title: str, sub: str = "", body: str = "", cls: str = "") -> str:
+    """A panel: title in the header, a one-line qualification beside it, the content below.
+
+    Argument order is (title, sub, body) because every call site states the qualification first;
+    keeping that order in the signature is what stops a subtitle rendering as the panel body.
+    """
     head = f'<div class="h"><h2>{esc(title)}</h2>' + (f'<div class="s">{sub}</div>' if sub else "") + "</div>"
     return f'<section class="{cls}">{head}<div class="b">{body}</div></section>'
 
@@ -594,7 +599,10 @@ def page_governance(g, valid, st, reg, prereg_state) -> str:
                     "— needs dated availability history that does not exist yet; the alternative is a fixed points "
                     "penalty, which the brief forbids. Freezing the protocol now is what stops it being designed "
                     "around a result.</div>")
-        + section("Removal-of-luck panel", "2 of 4 components computable from official data today",
+        + section("Removal-of-luck panel",
+                  f"{len(g['removal_of_luck_panel']['components_live'])} of "
+                  f"{len(g['removal_of_luck_panel']['components_live']) + len(g['removal_of_luck_panel']['components_blocked'])} "
+                  f"components computable from official data today",
                   "<b>Live</b><ul class='tight'>" + "".join(
                       f"<li><b>{esc(c['name'])}</b> — {esc(c['input'])}</li>" for c in
                       g["removal_of_luck_panel"]["components_live"]) + "</ul>"
@@ -634,7 +642,8 @@ def page_repo_review(review, audit, valid, st, ev, diffs) -> str:
                      str(e["html_pages"]), str(e["data_files"]), str(e["python"]), str(e["rows_on_index"]),
                      chip("README" if e["has_readme"] else "no README"),
                      chip("exec summary" if e["has_exec_summary"] else "—"),
-                     src_cell("", "in this repository", f"{ROOT}/{e['path']}")])
+                     link("https://github.com/sassnarep3-star/Own4/tree/main/" + e["path"],
+                          "directory in this repository")])
     body = (
         f'<div class="note"><b>How to read this table.</b> Counts are from a filesystem walk '
         f'(<code>engine/repo_review.py</code>); the title column is the namespace\'s own <code>&lt;h1&gt;</code>. '
@@ -643,7 +652,8 @@ def page_repo_review(review, audit, valid, st, ev, diffs) -> str:
         f'file, so a reviewer can open it. The repo-level finding is the shape of the last column group: '
         f'{review["namespaces"]} namespaces, one brief.</div>'
         + section(f"Namespace inventory ({review['namespaces']} directories)",
-                  "generated from the checked-out tree at build time",
+                  f"walked at commit <code>{esc((review.get('describes_commit') or '?')[:9])}</code>"
+                  + (" (uncommitted changes present)" if review.get("tree_had_uncommitted_changes_at_generation") else ""),
                   table(["path", "family", "index h1 / title", "html pages", "data files", "python files",
                          "rows on index", "docs", "summary", "where"], rows))
         + section("What the walk shows", "computed, not asserted",

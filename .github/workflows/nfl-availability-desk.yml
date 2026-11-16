@@ -11,7 +11,10 @@ name: nfl-availability-desk verify
 #                          identities and the intra-week designation delta into data/derived/*;
 #   * engine/drift.py    - the row-count / required-field / vocabulary alarm the brief asks for,
 #                          plus the transcription hashes published on the evidence page;
-#   * engine/repo_review.py - the namespace inventory on the repository-review page;
+#   * engine/repo_review.py - the namespace inventory on the repository-review page; it runs AFTER the
+#                          determinism gate (see the informational step) because the tree it walks grows
+#                          whenever a sibling namespace merges, and the committed artefact states the
+#                          commit it describes;
 #   * engine/originate.py --probe - proves the origination-order guard (side -> total -> moneyline)
 #                          and the three-column contract actually fire, so the guard is live and
 #                          not decorative;
@@ -75,10 +78,6 @@ jobs:
         working-directory: nfl-availability-desk
         run: python3 engine/drift.py
 
-      - name: Namespace inventory
-        working-directory: nfl-availability-desk
-        run: python3 engine/repo_review.py
-
       - name: Origination-order guard must fire (probe)
         working-directory: nfl-availability-desk
         run: python3 engine/originate.py --probe
@@ -102,3 +101,15 @@ jobs:
 
       - name: Determinism gate (rebuild must not change committed files)
         run: git diff --exit-code -- nfl-availability-desk/index.html nfl-availability-desk/pages nfl-availability-desk/assets index.html verified
+
+      # Deliberately AFTER the gate, and deliberately non-blocking. The repository inventory is a walk of
+      # the checked-out tree, and the tree grows every time a sibling namespace merges - so a rebuild here
+      # can legitimately disagree with the committed inventory without anything being wrong. The artefact
+      # records which commit it describes; refreshing it is an explicit act, not a build side effect.
+      - name: Repository inventory freshness (informational)
+        if: always()
+        continue-on-error: true
+        run: |
+          python3 nfl-availability-desk/engine/repo_review.py
+          git diff --stat -- nfl-availability-desk/data/derived/repo_review.json
+          git checkout -- nfl-availability-desk/data/derived/repo_review.json

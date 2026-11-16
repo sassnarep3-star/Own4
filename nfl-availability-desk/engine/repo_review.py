@@ -11,6 +11,7 @@ import html
 import json
 import os
 import re
+import subprocess
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NS = os.path.dirname(HERE)
@@ -121,11 +122,21 @@ def main() -> int:
         f'python files: {sum(e["python"] for e in entries)}; table rows counted on index pages: '
         f'{sum(e["rows_on_index"] for e in entries)}',
     ]
+    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True, text=True)
+    tree_commit = (head.stdout or "").strip() or "not-a-git-tree"
+    dirty = subprocess.run(["git", "status", "--porcelain", "--", "."], cwd=ROOT,
+                           capture_output=True, text=True).stdout.strip() != ""
     out = os.path.join(NS, "data", "derived", "repo_review.json")
     os.makedirs(os.path.dirname(out), exist_ok=True)
     with open(out, "w", encoding="utf-8") as fh:
         json.dump({"built_from": "filesystem walk in engine/repo_review.py at the checked-out tree; "
                                    "a namespace is a directory holding an html page or a data/ dir",
+                   "describes_commit": tree_commit,
+                   "tree_had_uncommitted_changes_at_generation": dirty,
+                   "refresh_is_manual": "CI does not re-run this walk inside the determinism gate: the tree "
+                                       "grows every time a sibling namespace merges, so a rebuild at a "
+                                       "different commit would legitimately disagree with the committed "
+                                       "inventory. The artefact states which commit it describes instead.",
                    "namespaces": len(entries), "nfl_namespaces": len(nfl),
                    "observations": obs, "entries": entries}, fh, indent=1)
         fh.write("\n")
