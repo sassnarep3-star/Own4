@@ -1,0 +1,70 @@
+{
+ "dataset": "strategy_registry",
+ "built_utc": "2026-11-16T02:05Z",
+ "amendment_rule": "Any change to a strategy's definition, sample window, constants or grading rule creates a NEW version with a new registration commit and resets its out-of-sample count to zero. The list below is empty at registration and records errata that do NOT change a forecast: a documentation sign note and a duplicate-game merge are errata, not amendments.",
+ "amendments": [
+  {
+   "id": "E1",
+   "date": "2026-11-16",
+   "kind": "documentation erratum",
+   "text": "The registration's parenthetical '(negative = home favoured)' contradicted the formula beside it. The engine has always used E_home - E_away (positive = home favoured); the note is corrected in the appended erratum section and no constant, rule or forecast changed.",
+   "affects_forecasts": "no"
+  },
+  {
+   "id": "E2",
+   "date": "2026-11-16",
+   "kind": "data-merge erratum",
+   "text": "The constant sample merged the verified corpus with the Week 10 transcription and double-counted the Thursday game present in both (149 vs 148 reconciled games). The merge is keyed on date/away/home, the overlap is reported on the page, and the build asserts the constant sample equals the reconciliation count. HFA and sigma were re-estimated at n=148 before any Week 11 game existed; no Week 11 forecast was graded or changed.",
+   "affects_forecasts": "no -- Week 11 had not kicked off (first game 2026-11-19)"
+  }
+ ],
+ "forbidden": [
+  "publishing a backtest number as a leaderboard rank",
+  "ranking by realised return alone",
+  "multiplying marginal probabilities to price a combo",
+  "a fixed points penalty for an absent starter",
+  "deriving depth order from jersey number, experience or salary"
+ ],
+ "entries": [
+  {
+   "id": "S1",
+   "registered": "2026-11-16",
+   "commit": "0f4a5182c7cd02fbe91ff8802569815c689b2d81",
+   "definition_file": "PREREGISTRATION.md",
+   "live": false,
+   "paper": true
+  },
+  {
+   "id": "S2",
+   "registered": "2026-11-16",
+   "commit": "0f4a5182c7cd02fbe91ff8802569815c689b2d81",
+   "definition_file": "PREREGISTRATION.md",
+   "live": false,
+   "paper": true
+  },
+  {
+   "id": "S3",
+   "registered": "2026-11-16",
+   "commit": "0f4a5182c7cd02fbe91ff8802569815c689b2d81",
+   "definition_file": "PREREGISTRATION.md",
+   "live": false,
+   "paper": true
+  },
+  {
+   "id": "S4",
+   "registered": "2026-11-16",
+   "commit": "0f4a5182c7cd02fbe91ff8802569815c689b2d81",
+   "definition_file": "PREREGISTRATION.md",
+   "live": false,
+   "paper": false
+  },
+  {
+   "id": "S5",
+   "registered": "",
+   "commit": "",
+   "definition_file": "",
+   "live": false,
+   "paper": false
+  }
+ ]
+}

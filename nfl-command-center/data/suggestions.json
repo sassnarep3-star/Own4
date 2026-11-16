@@ -1,0 +1,63 @@
+{
+ "dataset": "suggestions",
+ "built_utc": "2026-11-16T02:05Z",
+ "workflow": "No suggestion is implemented in this session. Each carries the gate it would clear and the risk; the verdict column is left for the owner.",
+ "n_rows": 5,
+ "rows": [
+  {
+   "id": "SUG01",
+   "title": "Decide the price policy before anything else",
+   "change": "Answer Q01. If a permitted source exists, capture open and close for every market originated.",
+   "cost": "low",
+   "unblocks": "G5, all ROI and CLV columns, the reward pool",
+   "risk": "none to the analysis layer",
+   "recommendation": "do first",
+   "status": "open",
+   "source_url": ""
+  },
+  {
+   "id": "SUG02",
+   "title": "Capture all 32 club depth charts in one dated pass",
+   "change": "One capture per club, linked from its nfl.com roster page, stored with a timestamp and hash.",
+   "cost": "medium",
+   "unblocks": "G8, the matchup matrix, the replacement column",
+   "risk": "some clubs publish an image or a PDF; those must be flagged, not transcribed by eye",
+   "recommendation": "do second",
+   "status": "open",
+   "source_url": "https://www.detroitlions.com/team/depth-chart"
+  },
+  {
+   "id": "SUG03",
+   "title": "Read the remaining nine Week 10 game books",
+   "change": "Close Q11 so that every Week 10 result is double-sourced.",
+   "cost": "low",
+   "unblocks": "a fully verified results feed",
+   "risk": "none",
+   "recommendation": "do with SUG02",
+   "status": "open",
+   "source_url": "https://www.nfl.com/schedules/2026/reg10/"
+  },
+  {
+   "id": "SUG04",
+   "title": "Stop publishing 30 landing pages",
+   "change": "Keep this dashboard as the only entry point; demote the other NFL namespaces to a linked appendix.",
+   "cost": "low",
+   "unblocks": "owner time, not a gate",
+   "risk": "loses nothing if every page stays reachable",
+   "recommendation": "owner call",
+   "status": "open",
+   "source_url": ""
+  },
+  {
+   "id": "SUG05",
+   "title": "Replace the 'no official depth' blocker with a coverage statement",
+   "change": "This site's flag FB-02 says only 1 of 32 depth charts is captured; the peer workspace flag RF-04 (nfl-availability-desk) goes further and says no depth dataset exists at all, because peers recorded the nfl.com depth route as a 404. One does exist, for one club, on the club's own domain. Restate both as coverage, not existence.",
+   "cost": "low",
+   "unblocks": "honest gates",
+   "risk": "none",
+   "recommendation": "do now",
+   "status": "open",
+   "source_url": "https://www.detroitlions.com/team/depth-chart"
+  }
+ ]
+}

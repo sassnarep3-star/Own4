@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suggestions · NFL Command Center · Own4</title>
+<meta name="description" content="Suggestions — NFL line origination, verified against official NFL sources, captured 2026-11-16.">
+<style>
+:root{--bg:#0f141b;--panel:#151c25;--panel2:#1a2431;--line:#243040;--ink:#e8eef6;--ink2:#b9c6d6;
+--ink3:#8194a9;--acc:#5aa9ff;--ok:#3fbf7f;--bad:#e8604c;--warn:#e0a63a;--mid:#8a93a3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+.side{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-weight:700;color:#fff;font-size:15px;margin:2px 6px 2px;letter-spacing:-.2px}
+.brand span{display:block;font-weight:400;color:var(--ink3);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.tag{margin:10px 6px 14px;font-size:11px;color:var(--ink3);border-left:2px solid var(--acc);padding-left:8px}
+.grp{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin:14px 6px 4px}
+.nav{display:block;padding:6px 9px;border-radius:7px;color:var(--ink2);font-size:13px}
+.nav:hover{background:var(--panel2);color:#fff;text-decoration:none}
+.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.main{flex:1;min-width:0;padding:26px 30px 64px;max-width:1500px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
+h1{font-size:25px;margin:4px 0 8px;letter-spacing:-.3px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:14px;margin:18px 0 6px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15px;color:var(--ink);max-width:88ch}
+.small{font-size:12px;color:var(--ink3)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+caption{caption-side:top;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);border-bottom:1px solid var(--line)}
+th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);background:var(--panel2);padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:bottom;white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid #1d2734;vertical-align:top;color:var(--ink2)}
+tr:hover td{background:#172130}
+.num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;color:var(--ink)}
+.blank{color:#6b7a8d;font-style:italic;font-size:11.5px}
+.nosrc{color:#6b7a8d;font-size:11.5px}
+.badge{display:inline-block;padding:1px 7px;border-radius:99px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.badge.ok{background:rgba(63,191,127,.14);color:#67d99b;border:1px solid rgba(63,191,127,.35)}
+.badge.bad{background:rgba(232,96,76,.14);color:#ff8f7d;border:1px solid rgba(232,96,76,.35)}
+.badge.warn{background:rgba(224,166,58,.14);color:#f0c169;border:1px solid rgba(224,166,58,.35)}
+.badge.mid{background:#20293a;color:#a9b8cb;border:1px solid #2c3a4e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3)}
+.card .n{font-size:23px;font-weight:700;color:#fff;margin-top:2px;letter-spacing:-.5px}
+.card .s{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.panel{border:1px solid var(--line);border-left:3px solid var(--acc);background:var(--panel);border-radius:8px;padding:11px 14px;margin:12px 0}
+.panel.bad{border-left-color:var(--bad)}.panel.ok{border-left-color:var(--ok)}.panel.warn{border-left-color:var(--warn)}
+.panel h3{margin-top:0}
+.kv{display:grid;grid-template-columns:200px 1fr;gap:4px 14px;font-size:12.5px}
+.kv dt{color:var(--ink3)}.kv dd{margin:0;color:var(--ink2)}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3)}
+code{background:#1b2431;padding:1px 5px;border-radius:4px;font-size:12px;color:#cfe0f2}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Command Center <span>Own4</span></a>
+  <div class="tag">Every value traced to an official NFL page. Blank means unverified, never inferred.</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="executive-summary.html">Executive summary</a><a class="nav" href="readiness.html">Decision readiness (74 rows)</a><div class="grp">Data</div><a class="nav" href="results.html">Results feed &amp; identities</a><a class="nav" href="fixtures.html">Week 10 settled &amp; Week 11 slate</a><a class="nav" href="availability.html">Availability (Week 10)</a><a class="nav" href="depth.html">Depth, roster &amp; replacements</a><div class="grp">Markets</div><a class="nav" href="own-lines.html">Week 11 own lines</a><a class="nav" href="model.html">Model, inputs &amp; pre-registration</a><a class="nav" href="backtest.html">Backtest &amp; luck removal</a><div class="grp">Competition</div><a class="nav" href="leaderboard.html">Leaderboard, gates &amp; demotion</a><a class="nav" href="correlations.html">Correlations with n</a><div class="grp">Decisions</div><a class="nav" href="questions.html">Questions to answer (12)</a><a class="nav active" href="suggestions.html">Suggestions (5)</a><a class="nav" href="flagged.html">⚑ Flagged for review (10)</a></nav>
+  <div class="grp">Capture clock</div>
+  <div class="tag">Data read 2026-11-15 / 11-16 UTC. Model v1-FROZEN-2026-11-16, registered at commit <code>0f4a518</code>.</div>
+</aside>
+<main class="main">
+<div class="crumb">Decisions · suggestions</div>
+<h1>Suggestions</h1><p class="lede">Five proposals, each with what it changes, what it costs, the gate it would clear and the risk of doing it. None has been implemented: the point of this page is that you choose before anything changes.</p><p>No suggestion is implemented in this session. Each carries the gate it would clear and the risk; the verdict column is left for the owner.</p><div class="tw"><table><caption>Suggestions — decide first, implement after</caption><thead><tr><th scope="col">ID</th><th scope="col">Suggestion</th><th scope="col">What changes</th><th scope="col">Cost</th><th scope="col">Gate it unblocks</th><th scope="col">Risk</th><th scope="col">Recommendation</th><th scope="col">State</th><th scope="col">Source</th></tr></thead><tbody><tr><td>SUG01</td><td>Decide the price policy before anything else</td><td>Answer Q01. If a permitted source exists, capture open and close for every market originated.</td><td>low</td><td>G5, all ROI and CLV columns, the reward pool</td><td>none to the analysis layer</td><td>do first</td><td><span class="badge warn">open</span></td><td><span class="nosrc">no official source</span></td></tr><tr><td>SUG02</td><td>Capture all 32 club depth charts in one dated pass</td><td>One capture per club, linked from its nfl.com roster page, stored with a timestamp and hash.</td><td>medium</td><td>G8, the matchup matrix, the replacement column</td><td>some clubs publish an image or a PDF; those must be flagged, not transcribed by eye</td><td>do second</td><td><span class="badge warn">open</span></td><td><a href="https://www.detroitlions.com/team/depth-chart" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>SUG03</td><td>Read the remaining nine Week 10 game books</td><td>Close Q11 so that every Week 10 result is double-sourced.</td><td>low</td><td>a fully verified results feed</td><td>none</td><td>do with SUG02</td><td><span class="badge warn">open</span></td><td><a href="https://www.nfl.com/schedules/2026/reg10/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>SUG04</td><td>Stop publishing 30 landing pages</td><td>Keep this dashboard as the only entry point; demote the other NFL namespaces to a linked appendix.</td><td>low</td><td>owner time, not a gate</td><td>loses nothing if every page stays reachable</td><td>owner call</td><td><span class="badge warn">open</span></td><td><span class="nosrc">no official source</span></td></tr><tr><td>SUG05</td><td>Replace the &#x27;no official depth&#x27; blocker with a coverage statement</td><td>This site&#x27;s flag FB-02 says only 1 of 32 depth charts is captured; the peer workspace flag RF-04 (nfl-availability-desk) goes further and says no depth dataset exists at all, because peers recorded the nfl.com depth route as a 404. One does exist, for one club, on the club&#x27;s own domain. Restate both as coverage, not existence.</td><td>low</td><td>honest gates</td><td>none</td><td>do now</td><td><span class="badge warn">open</span></td><td><a href="https://www.detroitlions.com/team/depth-chart" target="_blank" rel="noopener">source ↗</a></td></tr></tbody></table></div><div class="panel ok"><h3>The recommendation, in one line</h3><p>Decide the price policy first. It is the only item that unblocks a whole class of results at once; every other proposal can run in parallel while it is being decided.</p></div>
+<footer>
+<p><strong>Own4 · NFL Command Center</strong> — analytical research, not wagering advice. Captured 2026-11-16.
+Every data row links to the official page it was read from or to the repository file that holds it; every value that
+could not be confirmed from an official source is published blank and listed on the
+<a href="flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

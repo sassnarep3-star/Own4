@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged for review · NFL Command Center · Own4</title>
+<meta name="description" content="Flagged for review — NFL line origination, verified against official NFL sources, captured 2026-11-16.">
+<style>
+:root{--bg:#0f141b;--panel:#151c25;--panel2:#1a2431;--line:#243040;--ink:#e8eef6;--ink2:#b9c6d6;
+--ink3:#8194a9;--acc:#5aa9ff;--ok:#3fbf7f;--bad:#e8604c;--warn:#e0a63a;--mid:#8a93a3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+.side{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-weight:700;color:#fff;font-size:15px;margin:2px 6px 2px;letter-spacing:-.2px}
+.brand span{display:block;font-weight:400;color:var(--ink3);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.tag{margin:10px 6px 14px;font-size:11px;color:var(--ink3);border-left:2px solid var(--acc);padding-left:8px}
+.grp{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin:14px 6px 4px}
+.nav{display:block;padding:6px 9px;border-radius:7px;color:var(--ink2);font-size:13px}
+.nav:hover{background:var(--panel2);color:#fff;text-decoration:none}
+.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.main{flex:1;min-width:0;padding:26px 30px 64px;max-width:1500px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
+h1{font-size:25px;margin:4px 0 8px;letter-spacing:-.3px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:14px;margin:18px 0 6px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15px;color:var(--ink);max-width:88ch}
+.small{font-size:12px;color:var(--ink3)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+caption{caption-side:top;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);border-bottom:1px solid var(--line)}
+th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);background:var(--panel2);padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:bottom;white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid #1d2734;vertical-align:top;color:var(--ink2)}
+tr:hover td{background:#172130}
+.num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;color:var(--ink)}
+.blank{color:#6b7a8d;font-style:italic;font-size:11.5px}
+.nosrc{color:#6b7a8d;font-size:11.5px}
+.badge{display:inline-block;padding:1px 7px;border-radius:99px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.badge.ok{background:rgba(63,191,127,.14);color:#67d99b;border:1px solid rgba(63,191,127,.35)}
+.badge.bad{background:rgba(232,96,76,.14);color:#ff8f7d;border:1px solid rgba(232,96,76,.35)}
+.badge.warn{background:rgba(224,166,58,.14);color:#f0c169;border:1px solid rgba(224,166,58,.35)}
+.badge.mid{background:#20293a;color:#a9b8cb;border:1px solid #2c3a4e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3)}
+.card .n{font-size:23px;font-weight:700;color:#fff;margin-top:2px;letter-spacing:-.5px}
+.card .s{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.panel{border:1px solid var(--line);border-left:3px solid var(--acc);background:var(--panel);border-radius:8px;padding:11px 14px;margin:12px 0}
+.panel.bad{border-left-color:var(--bad)}.panel.ok{border-left-color:var(--ok)}.panel.warn{border-left-color:var(--warn)}
+.panel h3{margin-top:0}
+.kv{display:grid;grid-template-columns:200px 1fr;gap:4px 14px;font-size:12.5px}
+.kv dt{color:var(--ink3)}.kv dd{margin:0;color:var(--ink2)}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3)}
+code{background:#1b2431;padding:1px 5px;border-radius:4px;font-size:12px;color:#cfe0f2}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Command Center <span>Own4</span></a>
+  <div class="tag">Every value traced to an official NFL page. Blank means unverified, never inferred.</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="executive-summary.html">Executive summary</a><a class="nav" href="readiness.html">Decision readiness (74 rows)</a><div class="grp">Data</div><a class="nav" href="results.html">Results feed &amp; identities</a><a class="nav" href="fixtures.html">Week 10 settled &amp; Week 11 slate</a><a class="nav" href="availability.html">Availability (Week 10)</a><a class="nav" href="depth.html">Depth, roster &amp; replacements</a><div class="grp">Markets</div><a class="nav" href="own-lines.html">Week 11 own lines</a><a class="nav" href="model.html">Model, inputs &amp; pre-registration</a><a class="nav" href="backtest.html">Backtest &amp; luck removal</a><div class="grp">Competition</div><a class="nav" href="leaderboard.html">Leaderboard, gates &amp; demotion</a><a class="nav" href="correlations.html">Correlations with n</a><div class="grp">Decisions</div><a class="nav" href="questions.html">Questions to answer (12)</a><a class="nav" href="suggestions.html">Suggestions (5)</a><a class="nav active" href="flagged.html">⚑ Flagged for review (10)</a></nav>
+  <div class="grp">Capture clock</div>
+  <div class="tag">Data read 2026-11-15 / 11-16 UTC. Model v1-FROZEN-2026-11-16, registered at commit <code>0f4a518</code>.</div>
+</aside>
+<main class="main">
+<div class="crumb">Decisions · flagged</div>
+<h1>Flagged for review</h1><p class="lede">Every irregularity found while transcribing official pages, published with its source. Nothing here blocks the site: a flag is a statement about what the official page says, not a reason to withhold the rest of it.</p><p>A flag is published, never hidden, and never blocks publishing the rest of the site.</p><div class="tw"><table><caption>10 flags. Severity blocking = an entire class of results cannot exist without it</caption><thead><tr><th scope="col">ID</th><th scope="col">Severity</th><th scope="col">Item</th><th scope="col">Detail</th><th scope="col">Gate</th><th scope="col">Source</th></tr></thead><tbody><tr><td>FB-01</td><td><span class="badge mid">blocking</span></td><td>No official NFL price source exists in this repository</td><td>Every market, residual, ROI and CLV cell is blank because of it. Nothing was estimated to fill the gap.</td><td>G5</td><td><span class="nosrc">no official source</span></td></tr><tr><td>FB-02</td><td><span class="badge mid">high</span></td><td>Only 1 of 32 club depth charts is captured</td><td>Detroit&#x27;s chart is structured and readable, and the club labels it &#x27;Unofficial&#x27;. The other 31 are unknown, so the replacement-depth feature cannot be built.</td><td>G8</td><td><a href="https://www.detroitlions.com/team/depth-chart" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-03</td><td><span class="badge mid">high</span></td><td>A rank-1 depth player was Out and also listed first-string</td><td>D.J. Reed: rank 1 CB on the club chart, Out on the report, listed at CB in the Game Book lineup and on the Not Active list. The Game Book lineup block and the Not Active block disagree for this player; both are reproduced.</td><td>G8</td><td><a href="https://www.detroitlions.com/team/depth-chart | https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-04</td><td><span class="badge mid">medium</span></td><td>One Week 10 game is not settled in any capture</td><td>LAC at BAL (2026-11-16 20:15 ET) is after the capture clock; PIT at CIN shows Q1 0-3 on every read made this session. Neither is scored.</td><td>G9</td><td><a href="https://www.nfl.com/schedules/2026/reg10/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-05</td><td><span class="badge mid">medium</span></td><td>The Week 10 report omits TB while listing every other Week 11 bye club</td><td>ATL, CLE, LA, NE and SEA all have sections; TB does not. Recorded as observed.</td><td>G7</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-06</td><td><span class="badge mid">medium</span></td><td>NYG and WAS division records do not sum to games played</td><td>NYG shows a 3-2-1 division record over 9 games; WAS shows 2-2-1 over 9. Reproduced exactly, not corrected.</td><td>G9</td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-07</td><td><span class="badge mid">low</span></td><td>The Week 10 injury report is a single undated snapshot</td><td>The page states the week, not the fetch time of each club&#x27;s update. One capture cannot support a delta, so no trend is published.</td><td>G7</td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-08</td><td><span class="badge mid">low</span></td><td>Game Book &#x27;3QB&#x27; notation</td><td>The Patriots&#x27; Not Active line reads &#x27;3QB 15 B.Morton&#x27;, an emergency-third-QB tag that is not in any legend. Kept verbatim rather than parsed.</td><td>—</td><td><a href="https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-09</td><td><span class="badge mid">low</span></td><td>KC report players look inconsistent with a 2026 Chiefs roster</td><td>The report lists Justin Fields (QB) and Rashee Rice (WR) among Kansas City players. The Chiefs&#x27; own roster page should be captured on the same date before any roster join; until then this is flagged, not used.</td><td>—</td><td><a href="https://www.nfl.com/teams/kansas-city-chiefs/roster" target="_blank" rel="noopener">source ↗</a></td></tr><tr><td>FB-10</td><td><span class="badge mid">low</span></td><td>Week 11 venue is blank for MIN at SF</td><td>The official Week 11 page carries no venue block for that game, so the venue column is blank rather than assumed.</td><td>—</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-11" target="_blank" rel="noopener">source ↗</a></td></tr></tbody></table></div><div class="panel bad"><h3>What to read first</h3><p class="small">Severity spread across 10 flags: 1 blocking · 2 high · 3 medium · 4 low. The three highest are listed first because they change what the rest of the site can say.</p><ul><li><strong>FB-01</strong> (blocking) — No official NFL price source exists in this repository. <span class="nosrc">no official source</span></li><li><strong>FB-02</strong> (high) — Only 1 of 32 club depth charts is captured. <a href="https://www.detroitlions.com/team/depth-chart" target="_blank" rel="noopener">source ↗</a></li><li><strong>FB-03</strong> (high) — A rank-1 depth player was Out and also listed first-string. <a href="https://www.detroitlions.com/team/depth-chart | https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf" target="_blank" rel="noopener">source ↗</a></li></ul></div>
+<footer>
+<p><strong>Own4 · NFL Command Center</strong> — analytical research, not wagering advice. Captured 2026-11-16.
+Every data row links to the official page it was read from or to the repository file that holds it; every value that
+could not be confirmed from an official source is published blank and listed on the
+<a href="flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

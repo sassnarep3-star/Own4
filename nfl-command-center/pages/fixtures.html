@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixtures · NFL Command Center · Own4</title>
+<meta name="description" content="Fixtures — NFL line origination, verified against official NFL sources, captured 2026-11-16.">
+<style>
+:root{--bg:#0f141b;--panel:#151c25;--panel2:#1a2431;--line:#243040;--ink:#e8eef6;--ink2:#b9c6d6;
+--ink3:#8194a9;--acc:#5aa9ff;--ok:#3fbf7f;--bad:#e8604c;--warn:#e0a63a;--mid:#8a93a3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{display:flex;min-height:100vh}
+.side{width:268px;flex:0 0 268px;background:var(--panel);border-right:1px solid var(--line);padding:16px 12px;position:sticky;top:0;height:100vh;overflow:auto}
+.brand{display:block;font-weight:700;color:#fff;font-size:15px;margin:2px 6px 2px;letter-spacing:-.2px}
+.brand span{display:block;font-weight:400;color:var(--ink3);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.tag{margin:10px 6px 14px;font-size:11px;color:var(--ink3);border-left:2px solid var(--acc);padding-left:8px}
+.grp{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--ink3);margin:14px 6px 4px}
+.nav{display:block;padding:6px 9px;border-radius:7px;color:var(--ink2);font-size:13px}
+.nav:hover{background:var(--panel2);color:#fff;text-decoration:none}
+.nav.active{background:#1d2c42;color:#fff;font-weight:600}
+.main{flex:1;min-width:0;padding:26px 30px 64px;max-width:1500px}
+.crumb{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink3)}
+h1{font-size:25px;margin:4px 0 8px;letter-spacing:-.3px}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+h3{font-size:14px;margin:18px 0 6px}
+p{margin:0 0 12px;color:var(--ink2)}
+p.lede{font-size:15px;color:var(--ink);max-width:88ch}
+.small{font-size:12px;color:var(--ink3)}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0 18px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+caption{caption-side:top;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink3);border-bottom:1px solid var(--line)}
+th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink3);background:var(--panel2);padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:bottom;white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid #1d2734;vertical-align:top;color:var(--ink2)}
+tr:hover td{background:#172130}
+.num{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;white-space:nowrap;color:var(--ink)}
+.blank{color:#6b7a8d;font-style:italic;font-size:11.5px}
+.nosrc{color:#6b7a8d;font-size:11.5px}
+.badge{display:inline-block;padding:1px 7px;border-radius:99px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.badge.ok{background:rgba(63,191,127,.14);color:#67d99b;border:1px solid rgba(63,191,127,.35)}
+.badge.bad{background:rgba(232,96,76,.14);color:#ff8f7d;border:1px solid rgba(232,96,76,.35)}
+.badge.warn{background:rgba(224,166,58,.14);color:#f0c169;border:1px solid rgba(224,166,58,.35)}
+.badge.mid{background:#20293a;color:#a9b8cb;border:1px solid #2c3a4e}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:14px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.card .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3)}
+.card .n{font-size:23px;font-weight:700;color:#fff;margin-top:2px;letter-spacing:-.5px}
+.card .s{font-size:11.5px;color:var(--ink3);margin-top:2px}
+.panel{border:1px solid var(--line);border-left:3px solid var(--acc);background:var(--panel);border-radius:8px;padding:11px 14px;margin:12px 0}
+.panel.bad{border-left-color:var(--bad)}.panel.ok{border-left-color:var(--ok)}.panel.warn{border-left-color:var(--warn)}
+.panel h3{margin-top:0}
+.kv{display:grid;grid-template-columns:200px 1fr;gap:4px 14px;font-size:12.5px}
+.kv dt{color:var(--ink3)}.kv dd{margin:0;color:var(--ink2)}
+footer{margin-top:40px;padding-top:14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink3)}
+code{background:#1b2431;padding:1px 5px;border-radius:4px;font-size:12px;color:#cfe0f2}
+</style>
+</head>
+<body>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">NFL Command Center <span>Own4</span></a>
+  <div class="tag">Every value traced to an official NFL page. Blank means unverified, never inferred.</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="executive-summary.html">Executive summary</a><a class="nav" href="readiness.html">Decision readiness (74 rows)</a><div class="grp">Data</div><a class="nav" href="results.html">Results feed &amp; identities</a><a class="nav active" href="fixtures.html">Week 10 settled &amp; Week 11 slate</a><a class="nav" href="availability.html">Availability (Week 10)</a><a class="nav" href="depth.html">Depth, roster &amp; replacements</a><div class="grp">Markets</div><a class="nav" href="own-lines.html">Week 11 own lines</a><a class="nav" href="model.html">Model, inputs &amp; pre-registration</a><a class="nav" href="backtest.html">Backtest &amp; luck removal</a><div class="grp">Competition</div><a class="nav" href="leaderboard.html">Leaderboard, gates &amp; demotion</a><a class="nav" href="correlations.html">Correlations with n</a><div class="grp">Decisions</div><a class="nav" href="questions.html">Questions to answer (12)</a><a class="nav" href="suggestions.html">Suggestions (5)</a><a class="nav" href="flagged.html">⚑ Flagged for review (10)</a></nav>
+  <div class="grp">Capture clock</div>
+  <div class="tag">Data read 2026-11-15 / 11-16 UTC. Model v1-FROZEN-2026-11-16, registered at commit <code>0f4a518</code>.</div>
+</aside>
+<main class="main">
+<div class="crumb">Data · fixtures</div>
+<h1>Fixtures</h1><p class="lede">Week 10 as it settled, and Week 11 as the league publishes it. Fixture-context features are taken only from these two official pages: gameday, published clock time, network, and venue where the page states one.</p><div class="tw"><table><caption>Week 10 2026 · settled state at capture 2026-11-16T01:40Z</caption><thead><tr><th scope="col">Gameday</th><th scope="col">Away</th><th scope="col">Home</th><th scope="col">State</th><th scope="col">Venue (only where published)</th><th scope="col">Source</th></tr></thead><tbody><tr><td>2026-11-12</td><td>WAS 24</td><td>NYG 21</td><td><span class="badge ok">final</span></td><td>MetLife Stadium</td><td><a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>NE 10</td><td>DET 35</td><td><span class="badge ok">final</span></td><td>Allianz Arena</td><td><a href="https://www.nfl.com/games/patriots-at-lions-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>KC 35</td><td>ATL 13</td><td><span class="badge ok">final</span></td><td>Mercedes-Benz Stadium</td><td><a href="https://www.nfl.com/games/chiefs-at-falcons-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>HOU 24</td><td>CLE 27</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/texans-at-browns-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>MIN 30</td><td>GB 10</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/vikings-at-packers-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>MIA 22</td><td>IND 24</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/dolphins-at-colts-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>CAR 20</td><td>NO 17</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/panthers-at-saints-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>BUF 31</td><td>NYJ 12</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/bills-at-jets-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>JAX 40</td><td>TEN 23</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/jaguars-at-titans-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>LA 34</td><td>AZ 6</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/rams-at-cardinals-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>SEA 21</td><td>LV 13</td><td><span class="badge ok">final</span></td><td>Allegiant Stadium</td><td><a href="https://www.nfl.com/games/seahawks-at-raiders-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>SF 46</td><td>DAL 40</td><td><span class="badge ok">final</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/49ers-at-cowboys-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-15</td><td>PIT </td><td>CIN </td><td><span class="badge mid">in_progress_at_capture</span></td><td>Paycor Stadium</td><td><a href="https://www.nfl.com/games/steelers-at-bengals-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-16</td><td>LAC </td><td>BAL </td><td><span class="badge mid">scheduled</span></td><td><span class="blank">blank</span></td><td><a href="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10" target="_blank" rel="noopener">game centre ↗</a></td></tr></tbody></table></div><p class="small">PIT at CIN is reported exactly as the page showed it (Q1, 0-3) and LAC at BAL had not kicked off. Neither is counted as a settled game anywhere in the build.</p><h2>Week 11 2026 · the slate the model originates</h2><div class="tw"><table><caption>13 games, 6 clubs on bye (ATL, CLE, GB, LA, NE, SEA)</caption><thead><tr><th scope="col">Gameday</th><th scope="col">Game</th><th scope="col">Published kickoff (ET)</th><th scope="col">Network</th><th scope="col">Venue (only where published)</th><th scope="col">Source</th></tr></thead><tbody><tr><td>2026-11-19</td><td>IND at HOU</td><td>8:15 PM</td><td>PRIME</td><td>NRG Stadium</td><td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>MIA at BUF</td><td>1:00 PM</td><td>CBS</td><td>Highmark Stadium</td><td><a href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>BAL at CAR</td><td>1:00 PM</td><td>FOX</td><td>Bank of America Stadium</td><td><a href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>NO at CHI</td><td>1:00 PM</td><td>FOX</td><td>Soldier Field</td><td><a href="https://www.nfl.com/games/saints-at-bears-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>TEN at DAL</td><td>1:00 PM</td><td>FOX</td><td>AT&amp;T Stadium</td><td><a href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>TB at DET</td><td>1:00 PM</td><td>FOX</td><td>Ford Field</td><td><a href="https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>AZ at KC</td><td>1:00 PM</td><td>CBS</td><td>GEHA Field at Arrowhead Stadium</td><td><a href="https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>PIT at PHI</td><td>1:00 PM</td><td>CBS</td><td>Lincoln Financial Field</td><td><a href="https://www.nfl.com/games/steelers-at-eagles-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>NYJ at LAC</td><td>4:05 PM</td><td>FOX</td><td>SoFi Stadium</td><td><a href="https://www.nfl.com/games/jets-at-chargers-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>JAX at NYG</td><td>4:25 PM</td><td>CBS</td><td>MetLife Stadium</td><td><a href="https://www.nfl.com/games/jaguars-at-giants-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>LV at DEN</td><td>4:25 PM</td><td>CBS</td><td>Empower Field at Mile High</td><td><a href="https://www.nfl.com/games/raiders-at-broncos-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr><tr><td>2026-11-22</td><td>MIN at SF</td><td>8:20 PM</td><td>NBC</td><td><span class="blank">blank</span></td><td><span class="nosrc">no official source</span></td></tr><tr><td>2026-11-23</td><td>CIN at WAS</td><td>8:15 PM</td><td>ESPN</td><td>FedEx Field</td><td><a href="https://www.nfl.com/games/bengals-at-commanders-2026-reg-11" target="_blank" rel="noopener">game centre ↗</a></td></tr></tbody></table></div><p class="small">Kickoff times are the published ET clock values. The model does not convert them, because a converted time is a derived value and every derived value on this site is computed in the build, not in prose.</p>
+<footer>
+<p><strong>Own4 · NFL Command Center</strong> — analytical research, not wagering advice. Captured 2026-11-16.
+Every data row links to the official page it was read from or to the repository file that holds it; every value that
+could not be confirmed from an official source is published blank and listed on the
+<a href="flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG ↗</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>

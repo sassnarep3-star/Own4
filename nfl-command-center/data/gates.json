@@ -1,0 +1,103 @@
+{
+ "dataset": "gates",
+ "built_utc": "2026-11-16T02:05Z",
+ "registered_utc": "2026-11-16T01:30Z",
+ "registration_commit": "0f4a5182c7cd02fbe91ff8802569815c689b2d81",
+ "demotion_gate": "A strategy returns to paper when, over four consecutive graded weeks, its benchmark-relative Brier skill is <= 0 on the game-cluster lower bound, or when it grades fewer than 75% of the games it forecast.",
+ "promotion_rule": "every gate passes; a majority is not a pass",
+ "n_pass": 3,
+ "n_fail": 4,
+ "n_blocked": 3,
+ "rows": [
+  {
+   "id": "G1",
+   "name": "Sample floor",
+   "requirement": "300 graded out-of-sample games",
+   "observed": "116 graded",
+   "status": "fail",
+   "clearing_number": "300 graded games in this frozen version",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "G2",
+   "name": "Probabilistic calibration vs benchmark",
+   "requirement": "Brier skill interval above zero, measured on both the ratio and the difference",
+   "observed": "ratio 0.5796, 95% CI [0.4917, 0.6465]; difference +0.3148, 95% CI [0.2264, 0.4059]",
+   "status": "fail",
+   "clearing_number": "ratio lower bound > 0 AND difference lower bound > 0 AND n>=300 (observed: both lower bounds are above 0, but n=116, so the gate stays shut)",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "G3",
+   "name": "Total skill vs naive",
+   "requirement": "MAE improvement interval above zero",
+   "observed": "+12.082 pts, 95% CI [9.5037, 14.6838]",
+   "status": "pass",
+   "clearing_number": "CI lower bound > 0 at n>=300",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "G4",
+   "name": "Multiplicity",
+   "requirement": "adjust for the number of strategies tested",
+   "observed": "5 strategies registered, 2 scorable; a nominal 0.05 is not applied",
+   "status": "fail",
+   "clearing_number": "a pre-declared family and an adjusted threshold",
+   "source_url": ""
+  },
+  {
+   "id": "G5",
+   "name": "Official price availability",
+   "requirement": "an official or permitted price to score ROI/CLV",
+   "observed": "no official NFL price source exists",
+   "status": "blocked",
+   "clearing_number": "a permitted price feed, or read the price policy decision",
+   "source_url": ""
+  },
+  {
+   "id": "G6",
+   "name": "Joint evidence for any combo",
+   "requirement": "validated joint probability + operator void rules",
+   "observed": "neither exists",
+   "status": "blocked",
+   "clearing_number": "a graded same-game joint sample",
+   "source_url": ""
+  },
+  {
+   "id": "G7",
+   "name": "Availability ablation",
+   "requirement": "A/B with and without verified personnel features",
+   "observed": "1 dated week of availability; ablation needs the pre-registered multi-week window",
+   "status": "blocked",
+   "clearing_number": "the number of dated weekly captures the spec names",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "G8",
+   "name": "Depth coverage",
+   "requirement": "official depth order for all 32 clubs",
+   "observed": "1 of 32 clubs captured (DET) and that club labels its chart 'Unofficial'",
+   "status": "fail",
+   "clearing_number": "32 of 32 clubs captured, or snap counts from an official source",
+   "source_url": "https://www.detroitlions.com/team/depth-chart"
+  },
+  {
+   "id": "G9",
+   "name": "Outcome feed reconciliation",
+   "requirement": "settled games reconcile to official standings",
+   "observed": "32/32 clubs agree on W-L-T, PF, PA over 148 games",
+   "status": "pass",
+   "clearing_number": "already met; must stay met as games are added",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "G10",
+   "name": "Deterministic rebuild",
+   "requirement": "a rebuild changes nothing",
+   "observed": "engine is stdlib-only, no network, no clock in any value",
+   "status": "pass",
+   "clearing_number": "CI runs the rebuild and diffs the output",
+   "source_url": ""
+  }
+ ]
+}

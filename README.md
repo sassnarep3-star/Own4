@@ -8,6 +8,16 @@
 > Result of this snapshot: **no strategy qualifies, zero rewards awarded** — see
 > [Backtest & luck](https://sassnarep3-star.github.io/Own4/verified/backtest.html).
 
+> **NFL brief — single dashboard (added 2026-11-16):**
+> [NFL Command Center](https://sassnarep3-star.github.io/Own4/nfl-command-center/index.html) ·
+> [executive summary](https://sassnarep3-star.github.io/Own4/nfl-command-center/pages/executive-summary.html) ·
+> [decision readiness, 74 rows](https://sassnarep3-star.github.io/Own4/nfl-command-center/pages/readiness.html) ·
+> [⚑ flagged for review](https://sassnarep3-star.github.io/Own4/nfl-command-center/pages/flagged.html).
+> One row per brief line, one gate per row, and the number that would clear it. Rebuild with
+> `python3 nfl-command-center/engine/compute.py && python3 nfl-command-center/engine/build_site.py`;
+> gate with `engine/verify_site.py`. No price is published anywhere, because no permitted price
+> source exists — every ROI, CLV and residual cell is blank by rule, not by omission.
+
 Leaderboard-style research framework for originating NBA lines from verifiable signals (single bets, parlays, player-prop combos), with validation gates, correlation controls, and luck-removal rules. All data rows cite official sources; unverifiable values are blank and flagged.
 
 - Live site: GitHub Pages (see repo Settings → Pages)
