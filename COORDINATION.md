@@ -3974,3 +3974,21 @@ Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
 
 **Unverified rows carried over, not re-read this session:** the depth-replacement rows RD-01..RD-03 on the injuries page quote official articles that were not re-fetched in this session; they stay as published by the prior session and are flagged for re-verification.
 
+---
+
+## Session `arena/0e86aefb-own4` — final integration & verification (2026-11-16 UTC)
+
+Session ID: `arena/0e86aefb-own4` · Branch: `arena/0e86aefb-own4` (platform-pinned; `session-<id>/<task>` naming not creatable — logged deviation, same as every prior session) · Base: `main` at `1dbde90` (== branch HEAD at claim time).
+
+**Survey at claim time:** main already carries 29 NFL namespaces; the canonical implementation is `nfl-book/` (session arena/c8969a10-own4, PR #107, merged; gap-closure PR #114 / bug fix PR #121; later PRs #117–#122). `nfl-book/` implements the full brief: price-snapshot store (open/close per originated market), verified 137-game results feed, side→total→moneyline origination, fair/market/difference columns (market blank by FB-01 — NFL publishes no odds), signal-vs-staking leaderboard, depth register, correlations with n (official scores only), demotion gate D1, pre-registered strategies (backtest numbers barred from leaderboard), availability graph, fixture context, model outputs (probability + inputs), removal-of-luck panel, two-sided "what would change our mind" fields, venues, weekly diff, vig-free decomposition, joint-evidence gate, ablations, roster sweep holdout, drift alarms, questions/suggestions registers, and a decision-readiness table (R01–R20) on the landing page. Site builds (30 pages) and GitHub Pages reports `status: built` from `main` `/`.
+
+**Differentiated scope (additive + verification only):** no peer namespace is rewritten. This session (a) re-verifies `nfl-book/` line by line against official nfl.com pages fetched THIS session (standings, schedule, game scores, Game Book links, injury report), (b) closes the incomplete injury capture (FB-06: only 2 of 8 `nfl.com/injuries/` chunks captured) by capturing all 8 chunks with fetch-clock timestamps, (c) confirms the live site has no broken links, (d) records the PR/merge/Pages result here. Unverifiable values (market prices, depth strings, snap counts) stay blank + flagged per the blank+flag rule — nothing is inferred.
+
+**Merge resolution:** `main` had advanced with peer session `arena/2d9349a2-own4` (PR #123, same 347-row Week 10 injury capture, CI-passed) and `arena-6531ea53-own4` (NFL root site). Conflicts resolved union-style: all three COORDINATION entries retained; `injuries_week10_capture.json` keeps the peer's complete 347-row capture (equivalent dataset, raw transcript pinned); `flags.json` merges FB-06 wording and adds FB-18 (official page team-label inconsistencies, 19 examples, transcribed as published, none corrected); regenerated HTML from settled data. No peer work discarded.
+
+**Files touched:** `COORDINATION.md` (this claim + result), `nfl-book/data/flags.json` (FB-06 merged, FB-18 added), `nfl-book/data/verification_2026-11-16.json` (new, this session's line-by-line checks), `nfl-book/engine/build_injury_capture.py` (new, deterministic capture script), regenerated `nfl-book/{index.html,pages/flagged.html,pages/injuries.html}`.
+
+**Official sources fetched this session:** https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/schedules/2026/by-week/week-10 · https://www.nfl.com/games/commanders-at-giants-2026-reg-10 · https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 · https://www.nfl.com/injuries/ (8 chunks)
+
+**Status: done.** Line-by-line re-verification complete: standings snapshot, WAS@NYG 24-21 and NE@SEA 10-13 match official game pages; full 8-chunk injury capture (347 rows) closes FB-06; origination order side→total→moneyline confirmed; market lines blank by policy FB-01 (NFL publishes no odds). Site builds (30 pages) and engine/verify.py PASS (931 rows, 883 sourced, 741 blank+flagged, 1875 links, 0 broken). Ready for PR/merge/Pages.
+
