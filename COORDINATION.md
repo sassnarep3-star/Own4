@@ -3957,3 +3957,72 @@ link altered or removed), regenerated `index.html` + `verified/*.html`, one new 
 **Not claimed / out of scope:** no new scraping (the availability desk already logged that no collector
 is wired up; re-fetching is SUG-02's decision, not mine), no strategy promotion, no change to any peer's
 data. This session *reads and cites* peer artefacts; it never rewrites them.
+
+### Completion record — session `arena/3858e722-own4` (R1–R7), 2026-11-16
+
+**Status: COMPLETE.** All seven claimed tasks delivered in `nfl-reconciled/` (10 pages, 7 data
+artefacts, 5 engines, 21 tests, 1 CI workflow). No peer namespace file was edited.
+
+**What the task was, and why it existed.** The tree held **31 `nfl-*` workspaces publishing 429 pages**,
+and at least fourteen presented themselves as the place to start. Measured on the checked-in artefacts,
+five results feeds published 136 or 137 games and eight availability captures published between 98 and
+347 rows for the same official week. Every one was internally sourced and reproducible, so none was
+lying — but a reviewer could not tell which figure to believe. `nfl-integration` had already logged the
+consolidation as owner decision INT-10 / S04 and left it open; no session had ever done it.
+
+**Numbers published** (every one engine-computed from `data/official_facts.json`, transcribed by hand
+from the official page this session — nothing is typed into a template):
+
+| Fact | Workspaces said | Published | Official basis |
+|---|---|---|---|
+| Games played | 136 / 137 | **148** | sum of 32 clubs' W+L+T = 296 club-games ÷ 2 |
+| Week-10 fixtures | 13 / 14 / 16 | **14** | 32 clubs − 4 on bye ÷ 2 |
+| Week-10 injury rows | 254 / 279 / 347 / 352 | **347 over 28 clubs** | two independent captures reproduce 8/8 club counts and 18/18 cells |
+| Points in the season corpus | not stated | **6,246 + 578 = 6,824** | equals the official PF total, which equals official PA |
+
+**The 6,824 closure is the strongest result in this contribution**: no feed is complete, but the weeks
+1–9 corpus plus the 12 official Week-10 finals equals the league's own points total exactly, so the
+stored scores are provably consistent with every point the league credits. That check had never been run.
+
+**Conflict register: 16 rows — 11 SETTLED by an official number, 1 label-only, 4 left to the owner**
+(RC-11 prices, RC-12 depth rank, RC-13 props, RC-14 rule priors), each with the action that would clear
+it. Plus **RR-01** (31 workspaces exist because no rule said where work must land — name a canonical
+namespace). **241 open flags from 18 workspaces** rolled into one index; 212 carry a source link and the
+other 29 are published as `UNVERIFIED — no source cited`.
+
+**Irregularity found and NOT fixed (deliberate).** Recomputing the availability capture's own published
+sha256 values at build time: **4 of 6 match**. The two stale seals are
+`nfl-availability-desk/data/availability_snapshot_2026-11-15.csv` (recorded `d9d8e08f…`/28,345 B vs actual
+`15fc9245…`/27,997 B) and `data/fixtures_week10.csv`. Both files are unchanged since merge commit
+`1dbde90`, so the seal is stale, not the data — the capture's counts are independently reproduced. This
+session did **not** re-seal another namespace's capture: re-sealing a file from the file it is meant to
+vouch for is that namespace's act or the owner's. Published as **RC-16** with the check recomputed live on
+every build.
+
+**Gates run before opening the PR** (all from the working tree, in this order):
+
+* `nfl-reconciled`: reconcile → build_review → build_site → verify_site → **PASS** (10 pages, every row
+  sourced, every link resolved, no price printed) → 21 tests **OK** → determinism gate **clean**.
+* `verification/` canonical site: collect → reconcile → analysis → build → verify_site **PASS**;
+  `git diff --exit-code verification/data` **clean**.
+* Peer gates re-run because this session changes tree-wide counts the peers render:
+  `nfl-availability-desk` capture/audit/drift/probe/prereg/build/verify **PASS** + determinism **clean**;
+  `nfl-book` full 7-step pipeline **PASS** + determinism **clean**; `nfl-verify` derive/readiness/build/
+  verify **PASS** + **clean**; `nfl-command`, `nfl-ledger`, `nfl-consolidated`, `nfl-decisions` all
+  **PASS**. Two peers had **stale committed output on `main` before this session touched anything**:
+  `nfl-verify` expected 28 namespaces where 30 existed (its own `verify.py` said so), and its namespace
+  count fed a readiness row; both were regenerated and now pass. Those regenerations are in this PR and
+  are the reason `nfl-verify`, `nfl-availability-desk` and `root index.html`/`verified/*` appear in the diff.
+
+**Deliberate limits, published on `pages/method.html` and `pages/flagged.html`:** chunks 2–7 of the
+injury report were not read (the 347 verdict rests on the capture's own data plus a hand count of 8 clubs
+and 18 cells); no price, no depth rank and no 2026 rule prior is asserted; peer contents were read as data,
+not re-verified claim by claim.
+
+**Coordination:** no other session held an active claim when this one started (surveyed the board and the
+open PR list). Work was done on the single platform-pinned branch, `arena/3858e722-own4`, per the logged
+deviation every prior session recorded. Shared files: `verification/build.py` (NAV — a new group placed
+first, additive only), regenerated `index.html`/`verified/*.html`, this file. No peer namespace file,
+data file or page was edited; peers that were *regenerated* were regenerated by their own engines.
+
+PR / merge result: recorded below after the merge.
