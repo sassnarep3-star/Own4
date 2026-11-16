@@ -61,8 +61,7 @@ code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
 <p>Protocol: for each week 3–10 the ratings are refitted on games from weeks before that week only, then the
 forecast is made and the game is graded from the official score. The protocol was frozen in
 <code>PREREGISTRATION.md</code> at commit <code>a4f26f5</code> before any of these numbers existed.
-Source for every result: the official week pages, week by week —
-<a href="https://www.nfl.com/schedules/2026/by-week/week-3">week 3</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-4">week 4</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-5">week 5</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-6">week 6</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-7">week 7</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-8">week 8</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-9">week 9</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-10">week 10</a>.</p>
+Source for every result: the official week pages, week by week — <a href="https://www.nfl.com/schedules/2026/by-week/week-3">week 3</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-4">week 4</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-5">week 5</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-6">week 6</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-7">week 7</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-8">week 8</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-9">week 9</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-10">week 10</a>.</p>
 <h2 id="scores">Proper scores</h2><table><thead><tr>
 <th>Metric</th>
 <th class="num">Value</th>
@@ -77,8 +76,8 @@ Source for every result: the official week pages, week by week —
 <tr><td>Mean absolute error, total</td><td class="num">11.45 pts</td><td>n = 116</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 </tbody></table>
 <h2 id="paired">Model against control, paired on the same fixtures</h2>
-<p>If this interval contains 0, the model has not been shown to beat a trivial picking-the-better-record rule on this sample, whatever its absolute accuracy.. Paired difference <strong>+0.0261</strong>, interval [-0.0371, +0.0855], on 115 fixtures where the two
-strategies disagreed 25 times.</p>
+<p>If this interval contains 0, the model has not been shown to beat a trivial picking-the-better-record rule on this sample, whatever its absolute accuracy. Paired difference <strong>+0.0261</strong>, interval [-0.0371, +0.0855], on 115
+fixtures where the two strategies disagreed 25 times.</p>
 <h2 id="strategies">Strategies at a glance</h2><table><thead><tr>
 <th>Strategy</th>
 <th class="num">n</th>
@@ -115,17 +114,18 @@ threshold is not treated as a filter until the sample grows.</p>
 <h2 id="luck">Removal of luck</h2>
 <div class="warnbox"><strong>The panel the brief asks for, built out of what actually exists.</strong>
 <ul>
-<li><strong>Control baselines on the same run:</strong> coin flip 0.2500 Brier, home-rate prior 0.2609, record-only
-rule 0.6522 accuracy. A strategy is only interesting relative to these, never in absolute terms.</li>
+<li><strong>Control baselines on the same run:</strong> coin flip 0.2500 Brier, home-rate prior 0.2609,
+record-only rule 0.6522 accuracy. A strategy is only interesting relative to these, never in absolute terms.</li>
 <li><strong>Fade test:</strong> inverting S1 scores 0.3217; inverting S2 scores 0.2951. A symmetric-noise strategy
 would score near 50% both ways.</li>
 <li><strong>Placebo label shuffle:</strong> p = 0.0005 (S1) and p = 0.0010 (S3).</li>
-<li><strong>Week-cluster intervals, not fixture-level ones:</strong> the fixture-level interval would be roughly
+<li><strong>Week-cluster intervals, not fixture-level ones:</strong> a fixture-level interval would be roughly
 half as wide and would wrongly exclude zero.</li>
-<li><strong>Break-even price:</strong> S1's own picks have a mean fair American price of -272.6, which implies
-a break-even hit rate of 73.2%; it delivered 67.8%.</li>
-<li><strong>What is still luck:</strong> 116 games. Fifty-five more winners would start to separate the model
-from the control; the current gap is four.</li>
+<li><strong>Break-even price:</strong> S1's own picks have a mean fair American price of -272.6, which
+implies a break-even hit rate of 73.2%; it delivered 67.8%.</li>
+<li><strong>What is still luck:</strong> across 115 fixtures the model finished 3 games ahead
+of the rule that ignores it — 25 fixtures decided the whole comparison. Gate G1 wants 300 graded games
+before a gap that small is allowed to count, so the verdict is "not separable", not "slightly better".</li>
 </ul></div>
 <h2 id="gates">Validation gates</h2><table><thead><tr>
 <th>Gate</th>
@@ -135,8 +135,8 @@ from the control; the current gap is four.</li>
 </tr></thead><tbody>
 <tr><td>G1 coverage</td><td class="num"><span class="chip blocked">fail</span></td><td>needs 300 graded fixtures, has 116</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 <tr><td>G2 signal</td><td class="num"><span class="chip blocked">fail</span></td><td>Condition (a) is nearly free on this sample: the historical home-favourite base rate is high, so picking favourites beats 0.500 without any skill. Condition (b) is the real test and it does NOT clear.</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
-<tr><td>G2b naive accuracy trap</td><td class="num"><span class="chip na">not yet</span></td><td></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
-<tr><td>G4 placebo</td><td class="num"><span class="chip na">not yet</span></td><td></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G2b naive accuracy trap</td><td class="num"><span class="chip na">not yet</span></td><td>A model-free rule (pick the club with the better win-loss record) scores within a few points of the model. Accuracy against 0.500 cannot separate them; only the paired difference can, and its interval is published.</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G4 placebo</td><td class="num"><span class="chip met">pass</span></td><td>S1 p = 0.0005; S2 p = 0.0020; S3 p = 0.0010 — every registered strategy clears the label-shuffle test</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 <tr><td>G5 staking</td><td class="num"><span class="chip blocked">fail</span></td><td>no citable price source: every ROI is at an assumed price</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 <tr><td>G6 joint evidence</td><td class="num"><span class="chip blocked">fail</span></td><td>no validated joint probability and no operator void/push rules</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 <tr><td>G7 demotion</td><td class="num"><span class="chip na">not yet</span></td><td>nothing is live: G1 and G5 both block promotion</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
@@ -148,8 +148,8 @@ from the control; the current gap is four.</li>
 <th class="num">Observed hit rate</th>
 <th class="num">Provenance</th>
 </tr></thead><tbody>
-<tr><td>S1_model_favourite</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">67.8%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
-<tr><td>S2_high_confidence</td><td class="num">-397.6</td><td class="num">79.9%</td><td class="num">70.5%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
-<tr><td>S3_record_baseline</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">65.2%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S1 model favourite</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">67.8%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S2 high confidence (p ≥ 0.65)</td><td class="num">-397.6</td><td class="num">79.9%</td><td class="num">70.5%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S3 better-record CONTROL</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">65.2%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
 </tbody></table>
 </main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

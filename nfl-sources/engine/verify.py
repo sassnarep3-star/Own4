@@ -283,6 +283,25 @@ def c10_no_third_party():
     check("C10 no third-party data source referenced", not hits, ", ".join(hits))
 
 
+def c10b_rendered_text():
+    """A page can be structurally perfect and still render a defect: drift arguments, raw format keys,
+    double periods, or the string 'None' where a number should be."""
+    import html as _html
+    pages = sorted(glob.glob(os.path.join(ROOT, "pages", "*.html")))
+    bad = []
+    for p in pages:
+        s = re.sub(r"<style.*?</style>", "", read_text(p), flags=re.S)
+        text = _html.unescape(re.sub(r"<[^>]+>", " ", s))
+        text = re.sub(r"[ \t]{2,}", " ", text)
+        for pat, label in [(r"\.\.(?!\.)", "double period"), (r"\{\w+\}", "unformatted placeholder"),
+                           (r"%\(\w+\)", "raw format key"), (r"\bnan\b", "nan"),
+                           (r"\bNone\b(?! of)", "None rendered")]:
+            for m in re.finditer(pat, text):
+                bad.append("%s: %s near %r" % (os.path.basename(p), label,
+                                               text[max(0, m.start() - 40):m.start() + 20].replace("\n", " ")))
+    check("C10b rendered text has no template or formatting defects", not bad, "; ".join(bad[:3]))
+
+
 def c11_site():
     pages = sorted(glob.glob(os.path.join(ROOT, "pages", "*.html")))
     bad = []
@@ -318,6 +337,7 @@ def main():
     c8_publication()
     c9_drift()
     c10_no_third_party()
+    c10b_rendered_text()
     c11_site()
     write_json(os.path.join(DATA, "verification.json"), {
         "dataset": "nfl_sources_verification",
