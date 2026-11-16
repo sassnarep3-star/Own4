@@ -7,8 +7,8 @@
   {
    "id": "DC-01",
    "severity": "high",
-   "title": "138 suggestion rows, 0 reviewer verdicts in git",
-   "found": "Counting every suggestion register in the repository (commit 3559164) returns 138 rows across 19 files in 18 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too).",
+   "title": "156 suggestion rows, 0 reviewer verdicts in git",
+   "found": "Counting every suggestion register in the repository (commit b340a49) returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too).",
    "why_it_matters": "the brief's process \u2014 review, choose a path, then implement \u2014 cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
    "action": "one verdict per row of CD-01\u2026CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
    "blocks": "any claim that the project has a decision process",
@@ -183,6 +183,25 @@
     {
      "label": "peer full-page capture",
      "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/availability_snapshot_2026-11-15.csv"
+    }
+   ]
+  },
+  {
+   "id": "DC-11",
+   "severity": "medium",
+   "title": "Two sibling CI gates are already red on main, and this namespace did not move them",
+   "found": "At origin/main the jobs `nfl-availability-desk verify` and `Verify bounded NBA audit and published navigation` fail on commits merged before this PR (#125, #126, #129). Reproduced on a clean checkout of origin/main with nothing from this session applied: re-running that namespace's own engine (capture -> audit -> drift -> build_site) rewrites five committed files (data/derived/capture_diffs.json, data/derived/hashes.json, pages/executive-summary.html, pages/repo-review.html, pages/snapshot-delta.html), so its `git diff --exit-code` determinism gate fails on its own tree; the committed artefacts still describe a 107-row capture and '4 proper subsets' that the current tree no longer reproduces. nfl-audit's rebuild is clean (no diff), so its navigation step is the one that depends on the root index. A sibling session recorded the same class of failure against the root verifier and left it to its owner.",
+   "why_it_matters": "every open pull request inherits two red checks that nothing in it caused, so 'CI is green' stops being usable as a merge signal; and the availability desk's cross-capture reconciliation numbers are now describing a tree that no longer exists",
+   "action": "owner of nfl-availability-desk: re-run the pipeline and commit the result, or pin the capture set to files under its own data/ directory so a sibling merge cannot move it. This namespace edited no file in either sibling namespace and did not commit their regenerated output",
+   "blocks": "nothing this site publishes; it blocks a green board for the next session",
+   "sources": [
+    {
+     "label": "the coordination entry recording the root-gate failure",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+    },
+    {
+     "label": "the gate that compares the rebuild with the committed tree",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-availability-desk.yml"
     }
    ]
   }

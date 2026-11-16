@@ -4,9 +4,7 @@ Session `arena-170de4f2-own4` · built 2026-11-16 · base commit `1dbde90`.
 
 The brief asks for two things this repository did not have: a section dedicated to **suggestions a
 reviewer can act on**, and a register of the **questions, information and answers** that must be settled
-before a decision is reasonable. Registers like that exist — 19 suggestion files, 17 question files,
-22 flag files and 11 requirement files spread over 30 `nfl*` namespaces — but no two agree, none of
-them is a place a verdict can be written, and none has been reconciled against the others.
+before a decision is reasonable. Registers like that exist — at the commit this namespace's census is pinned to (`b340a49`), 21 suggestion files, 19 question files, 24 flag files and 12 requirement files across 32 `nfl*` namespaces, every one of them counted by `engine/inventory.py` and rendered on `pages/consolidation.html` — but no two agree, none of them is a place a verdict can be written, and none has been reconciled against the others.
 
 This namespace is that reconciliation. It adds:
 
