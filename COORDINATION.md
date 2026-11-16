@@ -4630,11 +4630,11 @@ game-book parser (SUG-03 A)").
 
 | # | Task | Status | Files touched (scope — no other session's files edited) |
 |---|------|--------|----------------------------------------------------------|
-| C-01 | SUG-02 **A**: scheduled availability collector (hash chain, deltas, drift alarm, CI cron) | in progress | `nfl-collector/**` (new namespace), `.github/workflows/nfl-collector.yml` |
-| C-02 | Record the P1 owner decisions under the standing no-manual-input instruction (DEC-P1/SUG-01, SUG-02, SUG-03, SUG-04, SUG-12; nfl-book SG-03) — flagged for post-hoc owner review | in progress | `nfl-collector/data/decisions.json`, `nfl-collector/pages/decisions.html` |
-| C-03 | Pre-register the McNemar paired test (model S1 vs better-record baseline), evaluation window Week 11+ only | in progress | `nfl-collector/prereg/**`, `nfl-collector/engine/eval_mcnemar.py` |
-| C-04 | Game-book participation spike (SUG-03 B): locate the official game-book link, build the parser, attempt one fixture | in progress | `nfl-collector/**` |
-| C-05 | Final integration for this branch: root nav entry via `verification/build.py`, regenerate `index.html`/`verified/*.html`, PR → main → merge → Pages confirmation | in progress | `verification/build.py`, generated `index.html`, `verified/*.html`, COORDINATION.md |
+| C-01 | SUG-02 **A**: scheduled availability collector (hash chain, deltas, drift alarm, CI cron) | done | `nfl-collector/**` (new namespace), `.github/workflows/nfl-collector.yml` |
+| C-02 | Record the P1 owner decisions under the standing no-manual-input instruction (DEC-P1/SUG-01, SUG-02, SUG-03, SUG-04, SUG-12; nfl-book SG-03) — flagged for post-hoc owner review | done (DEC-1..DEC-10; DEC-10 deferred to owner) | `nfl-collector/data/decisions.json`, `nfl-collector/pages/decisions.html` |
+| C-03 | Pre-register the McNemar paired test (model S1 vs better-record baseline), evaluation window Week 11+ only | done (PREREG-002 registered; calibration reproduces the published backtest exactly; PENDING) | `nfl-collector/prereg/**`, `nfl-collector/engine/eval_mcnemar.py` |
+| C-04 | Game-book participation spike (SUG-03 B): locate the official game-book link, build the parser, attempt one fixture | done (route verified via game centre; WAS@NYG parsed: 109 rows, 0 join collisions) | `nfl-collector/**` |
+| C-05 | Final integration for this branch: root nav entry via `verification/build.py`, regenerate `index.html`/`verified/*.html`, PR → main → merge → Pages confirmation | done (PR link recorded below after merge) | `verification/build.py`, generated `index.html`, `verified/*.html`, COORDINATION.md |
 
 Rules held: official sources only; unverifiable values blank + flagged; no raw nfl.com HTML committed
 (structured rows + sha256 + timestamps only — RF-18 stays open for the owner); every data row carries a

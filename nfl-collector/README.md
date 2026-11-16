@@ -11,7 +11,7 @@ designations can be replayed as they were known", wired as CI.
 
 | artefact | what it is |
 |---|---|
-| `data/captures/2026-11-16/` | the first session captures: the complete Week 10 league report (347 rows / 28 clubs / 14 sections, all 8 chunks), November trades (12 rows), November reserve list (25 rows), Packers depth chart (87 slot cells) — each a transcript + structured capture sealed by sha256 |
+| `data/captures/2026-11-16/` | the first session captures: the complete Week 10 league report (347 rows / 28 clubs / 14 sections, all 8 chunks), November trades (12 rows), November reserve list (25 rows), Packers depth chart (87 slot cells), and the official WAS@NYG Game Book participation block (109 rows: starters/substitutions/did-not-play/not-active) — each a transcript + structured capture sealed by sha256 |
 | `data/captures/ledger.json` | append-only ledger with a sha256 hash chain (`prev_entry_sha256` → `entry_sha256` → chain head); re-verified on every CI run; identical re-transcription is a no-op |
 | `data/drift_expectations.json` | the pins written BEFORE capture (row counts, per-club counts, required fields, closed vocabulary, coverage floor) + the cross-capture reconciliation contract |
 | `data/sources.json` | the source registry: a URL is activated only after being fetched and read in-session; candidates stay blank |
@@ -55,6 +55,13 @@ python3 engine/verify_site.py       # links, sourced rows, coverage lines, no pr
 6. **PREREG-002 is registered and PENDING** — its calibration re-grades weeks 3–10 and reproduces
    the published backtest exactly (n=104, 0.6731, 0.6346) before it may evaluate anything; the
    evaluation sample (weeks ≥ 11) is empty today, so the honest status is PENDING.
+7. **The Game Book route is verified and one fixture is parsed (DEC-3 = B spike)** — the game
+   centre page publishes "Download Game Book (PDF)" per fixture; the WAS@NYG participation block
+   (44 starters / 48 subs / 4 DNP / 13 not-active) joins the weekly report with 0 collisions, and
+   both Out designations were Not Active in the official game book — the first empirical points
+   for the designation-reliability requirement. The remaining 13 Week 10 fixtures parse in CI.
+8. **Manual `workflow_dispatch` is not permitted to this session's token (HTTP 403)** — the
+   scheduled cron does the live collecting after merge; the owner can also dispatch from the UI.
 
 ## Rules this namespace holds itself to
 
