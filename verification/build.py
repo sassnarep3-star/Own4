@@ -448,6 +448,21 @@ NAV = [
         ("nfl-availability-desk/pages/flagged.html", "⚑ NFL Desk — flagged for review (18)", "legacy"),
         ("nfl-availability-desk/pages/sources.html", "NFL Desk — source register", "legacy"),
     ]),
+    # NFL Collector (session arena/013190b4-own4, 2026-11-16): the scheduled availability
+    # collector (decision DEC-2 = A). Hash-chain capture ledger, drift alarm with pre-pinned
+    # expectations, read-series deltas + trades/IR conflict joins, PREREG-002 (exact McNemar,
+    # weeks >= 11, registered before any Week 11 result), and the decision ledger DEC-1..DEC-10
+    # (P1 queue answered under the standing no-manual-input instruction, flagged RC-08).
+    ("NFL Collector · scheduled availability capture (2026-11-16)", [
+        ("nfl-collector/index.html", "NFL Collector — overview &amp; state", "legacy"),
+        ("nfl-collector/pages/captures.html", "NFL Collector — capture ledger (hash chain)", "legacy"),
+        ("nfl-collector/pages/deltas.html", "NFL Collector — deltas &amp; conflicts", "legacy"),
+        ("nfl-collector/pages/drift.html", "NFL Collector — drift alarm", "legacy"),
+        ("nfl-collector/pages/evaluation.html", "NFL Collector — pre-registered test (PREREG-002)", "legacy"),
+        ("nfl-collector/pages/decisions.html", "NFL Collector — decision ledger (DEC-1..10)", "legacy"),
+        ("nfl-collector/pages/flagged.html", "⚑ NFL Collector — flagged for review (10)", "legacy"),
+        ("nfl-collector/pages/sources.html", "NFL Collector — source registry", "legacy"),
+    ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),
