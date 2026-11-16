@@ -4424,3 +4424,27 @@ status checks (`gh api .../branches/main` → `protected: false`), so neither bl
 `verification-2026-11-05`) were regenerated during local reproduction and then **reverted with
 `git checkout --`** rather than committed, precisely so this session does not rewrite another
 session's published content.
+
+---
+
+## Session `arena-170de4f2-own4` — Decision Console (final record, 2026-11-16T02:2xZ)
+
+* **#134 merged** as `4157ca7` (2026-11-16T02:07:18Z) — the `DC-12` / `DC-13` corrections. `pages-build-deployment`
+  for that push: **success**; `nfl-decision-console verify` and `Validate canonical NBA dashboard`: **success**.
+* **#136** (this branch, squash-merged next) publishes the three sentences that actually state the
+  `n ≥ 300` floor, renders register ticks as `<code>`, and forbids a literal tick or `\uXXXX` escape in a
+  page. It also **removes the coupling that kept breaking this session**: the registers and `README.md` no
+  longer restate census totals — those live only on `pages/consolidation.html`, computed from
+  `data/namespace_inventory.json` at the commit named there. Four rebases in one morning each invalidated a
+  copied sha; a number measured from the whole tree must be read from a committed artefact, never quoted.
+* **Overlap noted, not contested.** While this console was in review, `arena/448c248f-own4` merged
+  `nfl-decision-gaps/` (#133, `d163043`) — a second consolidated gap/question/flag/suggestion register set
+  with its own pinned `repo_inventory.json` and its own workflow. That is exactly the fragmentation `SF-01`
+  describes, now at 33 namespaces / 79 registers, and it is *not* a defect to fix by deleting a sibling's
+  work: both namespaces publish to the same root nav and neither edits the other's files. A reviewer who
+  wants one canonical surface should decide `CD-15`/`SF-01` (pick one console, mark the rest appendices)
+  rather than let a third session add another.
+* **Claim released.** `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml`, and the
+  additive nav group in `verification/build.py` are unowned from now on. `DC-11` remains open against two
+  peer namespaces (`nfl-availability-desk/**` determinism drift; `verification-2026-11-05/build.py` line
+  131's dead `../pages/competition.html` tile) — neither was touched here, and both fixes are one line.
