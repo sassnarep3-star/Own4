@@ -30,6 +30,7 @@ NAV = [
     ("pages/evaluation.html", "Pre-registered test"),
     ("pages/decisions.html", "Decisions"),
     ("pages/flagged.html", "Flagged for review"),
+    ("pages/gamebook.html", "Game-book spike"),
     ("pages/sources.html", "Sources"),
 ]
 
@@ -354,6 +355,62 @@ standing instruction, flagged for post-hoc owner review, reversible by a later o
 {coverage(len(decisions['rows']), '9 of 10 adopted (DEC-1, DEC-3, DEC-10 change or defer prior behavior; the rest implement the recommended path)')}
 </section>"""
     written.append(("pages/decisions.html", page("Decisions", body)))
+
+    # ------------------------------------------------------------- game book
+    gb = load("data/captures/2026-11-16/gamebook_was_nyg_reg10.json")
+    inj = load("data/captures/2026-11-16/league_injury_report_week10.json")
+    j = gb["join_to_report"]
+    cal_rows = [
+        f'<tr><td>{e(r["club"])}</td><td>{e(r["player"])}</td><td>{e(r["pos"])}</td>'
+        f'<td>{e(r["injury"])}</td><td>{e(r["game_status"])}</td><td><strong>{e(r["game_book_status"])}</strong></td>'
+        f'<td><a href="{gb["source"]["pdf_url"]}">official game book</a> · <a href="{REPORT_URL if False else "https://www.nfl.com/injuries/league/2026/reg10"}">official report</a></td></tr>'
+        for r in j["calibration_rows"]]
+    q_rows = [
+        f'<tr><td>{e(r["club"])}</td><td>{e(r["player"])}</td><td>{e(r["game_status"])}</td>'
+        f'<td><strong>{e(r["game_book_status"])}</strong></td>'
+        f'<td><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></td></tr>'
+        for r in j["rows"] if r["game_status"] == "Questionable"]
+    hdr = gb["source"]["header_as_printed"]
+    body = f"""
+<section class="panel">
+<h2>Official Game Book — the 'who actually started' source (spike, 1 of 14 Week 10 fixtures)</h2>
+<p>The brief: <em>"Use official NFL Game Books for actual starters and game-day status; do not
+infer depth rank or snaps."</em> Route verified this session: the game centre page publishes
+"Download Game Book (PDF)" per fixture — <a href="{e(gb['source']['game_centre_url'])}">WAS at NYG game centre</a>
+links to <a href="{e(gb['source']['pdf_url'])}">the league's own PDF</a>. Decision DEC-3 = B
+(one fixture as a spike) is therefore executed: the participation block (PDF page 1) is parsed
+and joined to the weekly report for the same two clubs. A full-week parse (option A) is the
+next step once the CI collector runs its scheduled discovery.</p>
+<ul>
+<li><strong>{gb['counts']['by_role'].get('starters', 0)} starters</strong> (Lineups, both clubs, offense and defense)</li>
+<li><strong>{gb['counts']['by_role'].get('substitutions', 0)} substitutions</strong></li>
+<li><strong>{gb['counts']['by_role'].get('did_not_play', 0)} did not play</strong></li>
+<li><strong>{gb['counts']['by_role'].get('not_active', 0)} not active</strong> (including the emergency 3QB designation, printed as such)</li>
+</ul>
+{coverage(gb['counts']['rows_total'], 'one participation cell per row; fixture 1 of 14 (DEC-3 = B spike); PDF header as printed: ' + e(str(hdr.get('matchup_as_printed', ''))) + ', ' + e(str(hdr.get('date_as_printed', ''))))}
+</section>
+<section class="panel">
+<h2>Join: weekly report rows of WAS/NYG vs actual game-day status</h2>
+<p>Of the {len(j['rows'])} report rows for the two clubs, the pinned initial+surname rule matched
+{len(j['rows']) - j['counts'].get('not_found_in_game_book', 0)} to a game-book participation cell with
+{len(j['collisions'])} collisions.</p>
+<h3>Calibration rows — every Out/Doubtful designation vs what actually happened</h3>
+{table(["club", "player", "pos", "injury", "report game status", "game-book status", "sources"], cal_rows)}
+{coverage(len(cal_rows), 'both Out designations were Not Active in the official game book — first empirical points for the designation-reliability requirement')}
+<h3>Questionable rows</h3>
+{table(["club", "player", "report game status", "game-book status", "source"], q_rows)}
+{coverage(len(q_rows), 'the Questionable row for these two clubs did not play (Not Active) — one more calibration point; n is tiny by design of a spike')}
+</section>
+<section class="panel">
+<h2>Official game-day context (same page of the game book, as printed)</h2>
+<ul>
+<li>Weather: {e(str(hdr.get('weather_as_printed', '')))} — Temp: {e(str(hdr.get('temp_as_printed', '')))}</li>
+<li>Attendance: {e(str(hdr.get('attendance_as_printed', '')))} · Time: {e(str(hdr.get('time_as_printed', '')))}</li>
+</ul>
+<p class="note">This is the official game-day weather the brief's stadium/roof/wind overlay
+requirement needs — captured from the league's own game book rather than inferred.</p>
+</section>"""
+    written.append(("pages/gamebook.html", page("Game-book spike", body)))
 
     # ------------------------------------------------------------- flagged
     flag_rows = [
