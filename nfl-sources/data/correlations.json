@@ -1,0 +1,139 @@
+{
+ "dataset": "nfl_sources_correlations",
+ "title": "Registered correlations, official numbers only, each with n",
+ "built_utc": "2026-11-16",
+ "rule": "Computed only from numbers printed on an official nfl.com page that this workspace read. Each value carries n, a two-sided p (normal approximation of the t test, disclosed) and a Fisher-z 95% interval. No market, price, prop or third-party number is used.",
+ "n_computed": 5,
+ "n_blank": 4,
+ "computed": [
+  {
+   "id": "CR-01",
+   "name": "Home margin vs game total",
+   "inputs": "official final scores only",
+   "n": 148,
+   "r": -0.1493,
+   "p": 0.068,
+   "ci95": [
+    -0.3034,
+    0.0123
+   ],
+   "reading": "Home margin and total are nearly orthogonal on this sample.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "note": "computed from nfl-sources/data/results.json, whose rows each cite their official week page"
+  },
+  {
+   "id": "CR-02",
+   "name": "A club's points scored, consecutive games",
+   "inputs": "official final scores only",
+   "n": 264,
+   "r": 0.1081,
+   "p": 0.0784,
+   "ci95": [
+    -0.0128,
+    0.2259
+   ],
+   "reading": "A small positive autocorrelation: last week's scoring barely predicts this week's. n counts ordered pairs of games, not games.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "CR-03",
+   "name": "Points scored vs points allowed, same game (club-game level)",
+   "inputs": "official final scores only",
+   "n": 296,
+   "r": 0.0531,
+   "p": 0.3621,
+   "ci95": [
+    -0.0613,
+    0.1661
+   ],
+   "reading": "A negative value means a game's two scores are not independent draws — the obvious reading is pace. This is the number that makes 'just multiply the probabilities' wrong for prop combos in the same game.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "note": "n counts club-games (two per game), because the observation is a club's scoring and conceding"
+  },
+  {
+   "id": "CR-04",
+   "name": "Rest-day differential (home minus away) vs home margin",
+   "inputs": "official final scores + the dates printed on the official week pages (no schedule date is taken from anywhere else)",
+   "n": 132,
+   "r": 0.3727,
+   "p": 0.0,
+   "ci95": [
+    0.2155,
+    0.511
+   ],
+   "mean_rest_home": 0.09090909090909091,
+   "robustness": {
+    "n_zero_rest_difference": 83,
+    "nonzero_only_r": 0.5686,
+    "n_nonzero": 49,
+    "leave_one_week_out_r": {
+     "1": 0.3727,
+     "2": 0.3475,
+     "3": 0.3859,
+     "4": 0.3759,
+     "5": 0.3942,
+     "6": 0.3747,
+     "7": 0.3608,
+     "8": 0.3288,
+     "9": 0.3558,
+     "10": 0.4257
+    },
+    "loo_range": [
+     0.3288,
+     0.4257
+    ],
+    "mean_home_margin_by_rest_edge": {
+     "home_rest_advantage": 7.48,
+     "equal_rest": -1.93,
+     "away_rest_advantage": -4.65
+    },
+    "n_by_rest_edge": {
+     "home_rest_advantage": 23,
+     "equal_rest": 83,
+     "away_rest_advantage": 26
+    }
+   },
+   "reading": "Week-1 games are excluded because neither club has a previous game in the corpus. Rest is derived from printed dates, so a rescheduled game would show up here as a rest anomaly rather than being smoothed away.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "CR-05",
+   "name": "International game (printed section) vs home margin",
+   "inputs": "official final scores + the section heading printed on the official week page",
+   "n_international": 8,
+   "n_domestic": 140,
+   "mean_home_margin_international": -4.88,
+   "mean_home_margin_domestic": -0.41,
+   "difference_in_means": -4.47,
+   "r": null,
+   "reading": "n = 8 international games is far too small to estimate a home-field effect, so no correlation is printed: a point-biserial r on this split would be noise dressed as a number. The group means are shown with their n and nothing is concluded from them.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  }
+ ],
+ "blank": [
+  {
+   "id": "CR-06",
+   "name": "Same-game parlay leg cover correlation",
+   "reason": "needs a point spread per game. The NFL publishes no lines, so the official source cannot supply it; a sportsbook would be third-party.",
+   "clearing_number": "any citable official or licensed price archive covering the games in question"
+  },
+  {
+   "id": "CR-07",
+   "name": "Player prop correlation (e.g. QB passing vs WR receiving)",
+   "reason": "needs per-player prop lines and targets; neither is on an official nfl.com page read here.",
+   "clearing_number": "an official or licensed play-by-play + prop-line archive"
+  },
+  {
+   "id": "CR-08",
+   "name": "Availability (starters out) vs margin",
+   "reason": "depends on a verified per-club depth rank or snap counts, which this repository does not have for any club (peer namespaces record the same gap).",
+   "clearing_number": "a verified depth rank or snap count for 32 of 32 clubs, archived point-in-time"
+  },
+  {
+   "id": "CR-09",
+   "name": "Injury-designation reliability (play rate by designation)",
+   "reason": "needs several seasons of designations joined to official inactive lists.",
+   "clearing_number": "3+ seasons of archived weekly reports plus inactive lists"
+  }
+ ]
+}

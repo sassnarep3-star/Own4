@@ -1,0 +1,90 @@
+{
+ "artefact": "data/standings_2026-11-16.json",
+ "brief_claims_checked": [
+  {
+   "arithmetic_note": "272 / 2 = 136, so half a season is the only figure reproducible from official numbers that equals 136; no file at the base commit publishes it",
+   "claim": "the 136-game log",
+   "matches_any_observed_count": false,
+   "observed": 148
+  }
+ ],
+ "clubs": 32,
+ "decisive_fixtures": 147,
+ "fixtures_credited": 148,
+ "gate_check": {
+  "as_written_by_peers": [
+   {
+    "file": "nfl-command/data/gates.json",
+    "text": "Strategy-level ROI claims require >= 300 graded selections; below that the strategy is graded 'insufficient sample' and earns no rewards."
+   },
+   {
+    "file": "nfl-arena/data/strategy_register.json",
+    "text": "n >= 300 graded bets in the confirmatory window before any reward consideration."
+   },
+   {
+    "file": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+    "text": "G1 sample | n >= 300 graded games | below this the strategy is displayed as provisional, unranked"
+   }
+  ],
+  "fixtures_at_season_end": 272,
+  "fixtures_available_today": 148,
+  "gate_cited_by_peers": 300,
+  "mis_citation_corrected": "an earlier draft of this page attributed the floor to nfl-availability-desk/data/governance.json, which contains no such number; the three sources above are the ones that do (flag DC-13)",
+  "one_season_can_satisfy_the_gate": false,
+  "reading": "the peer floor is n >= 300 graded games *per strategy*; read as a fixture-level corpus floor it cannot be met inside one 272-fixture season at all, so either the unit, the gate or the multi-season corpus has to change before any promotion or demotion can be defined (club-games = 296 today)",
+  "seasons_needed_at_this_rate": 2,
+  "unit_in_the_peer_wording": "graded games or settled bets per strategy, not fixtures per corpus"
+ },
+ "half_season": 136,
+ "identities": [
+  {
+   "holds": true,
+   "left": 147,
+   "name": "sum(W) == sum(L)",
+   "right": 147
+  },
+  {
+   "holds": true,
+   "left": 6824,
+   "name": "sum(PF) == sum(PA)",
+   "right": 6824
+  },
+  {
+   "holds": true,
+   "left": 296,
+   "name": "sum(W+L+T) is even (every fixture credited twice)",
+   "right": 0
+  },
+  {
+   "holds": true,
+   "left": 32,
+   "name": "win pct recomputes for all 32 clubs (3 dp)",
+   "right": 32
+  }
+ ],
+ "observations_not_identities": [
+  {
+   "clubs": [
+    {
+     "abbr": "CLE",
+     "net": -32,
+     "pct": 0.6
+    }
+   ],
+   "count": 1,
+   "name": "clubs above .500 with a NEGATIVE point differential (record and net points disagree)",
+   "reading": "not a failure of the data: a win can come in a one-possession game. It is published because a rating built on net points and a rating built on wins will disagree about these clubs today, which is the ablation the requirements ask for."
+  }
+ ],
+ "pct_recompute_mismatches": [],
+ "read_utc": "2026-11-16T01:33Z (inside session window 01:31Z-01:36:08Z)",
+ "season_fixture_count": 272,
+ "source_url": "https://www.nfl.com/standings/",
+ "sum_games_played": 296,
+ "sum_losses": 147,
+ "sum_points_against": 6824,
+ "sum_points_for": 6824,
+ "sum_ties": 2,
+ "sum_wins": 147,
+ "tied_fixtures": 1
+}

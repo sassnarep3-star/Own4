@@ -1,0 +1,759 @@
+{
+ "dataset": "decision_console_suggestions",
+ "title": "The suggestions section — read a row, write a verdict, and only then does anyone build it",
+ "built_utc": "2026-11-16",
+ "review_protocol": [
+  "1. each row states the decision a reviewer must make, the options with what each one costs and locks, and the evidence that narrows them",
+  "2. `verdict` is blank on every row by design; the only thing that turns a suggestion into work is a verdict written into this file (option letter, or 'reject' + reason)",
+  "3. a session may implement a row only when its verdict is non-blank and its commit records the verdict; nothing in this namespace is implemented",
+  "4. `basis` names the kind of evidence behind the recommendation (official read / repo computation / gate arithmetic) so a reviewer can see when the recommendation is only a judgement"
+ ],
+ "scope_note": "This register consolidates the decision surface across the repository rather than repeating it. The census on pages/consolidation.html is counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` (2026-11-16T01:57:09Z); if the pin is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out. Peer registers hold 20 suggestion files / 156 rows, 18 question files / 184 rows, 23 flag files / 176 rows and 12 requirement files / 456 rows; the duplication reading uses the sentence-text columns, not the id-inflated ones (flag `DC-12`). Rows below that echo a peer proposal say so in `evidence`; the new material is this session's official reads and the arithmetic they force.",
+ "rows": [
+  {
+   "id": "CD-01",
+   "priority": "P1",
+   "title": "Name one canonical review surface, and mark the other 18 appendices",
+   "decision": "Which single page does a reviewer open to decide anything?",
+   "options": [
+    {
+     "id": "A",
+     "text": "designate one namespace as the review surface; every other namespace's index gets a one-line banner pointing to it, written by its own owner session or by the integration session",
+     "cost": "one edit per namespace index, no data moves",
+     "locks": "nothing — reversible"
+    },
+    {
+     "id": "B",
+     "text": "keep every namespace as-is and add a cross-namespace index with per-register row counts",
+     "cost": "one generated page; counts go stale unless an engine recomputes them",
+     "locks": "nothing"
+    },
+    {
+     "id": "C",
+     "text": "archive all but one namespace (move files)",
+     "cost": "high; touches other sessions' scopes and the shared nav",
+     "locks": "history of where each number came from"
+    }
+   ],
+   "evidence": [
+    "repo computation: 138 suggestion rows across 19 registers in 18 namespaces, and 386 requirement rows across 9 registers — the same decision is currently asked 9 to 19 times in slightly different words",
+    "peer register: nfl-availability-desk Q-03 already asks 'which namespace is the canonical dashboard' and leaves the answer blank"
+   ],
+   "unblocks": [
+    "'create a section dedicated for suggestions so someone can review suggestions and choose the best path'",
+    "every later suggestion: a verdict is meaningless if it is written in one of 18 files"
+   ],
+   "recommended": "A",
+   "basis": "gate arithmetic: a review loop needs one place where a verdict is authoritative; B leaves the ambiguity it is meant to remove",
+   "risk_if_deferred": "each new session adds a 20th register instead of answering the 19 that exist; the owner's review cost grows linearly with session count",
+   "effort": "small",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-availability-desk Q-03",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/questions.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-02",
+   "priority": "P1",
+   "title": "Settle the price-data policy: the league publishes no price, and now that is verified twice",
+   "decision": "Buy a price feed, run price-free forever, or keep third-party captures under a strict label?",
+   "options": [
+    {
+     "id": "A",
+     "text": "license a live + historical odds feed and make price capture the first ingestion duty",
+     "cost": "money, a collector, and a terms review",
+     "locks": "residual, CLV, vig decomposition, ROI and rewards all become payable/definable"
+    },
+    {
+     "id": "B",
+     "text": "decline prices permanently: publish fair lines and availability indices only, with no residual column anywhere",
+     "cost": "nothing",
+     "locks": "no CLV-based promotion or demotion gate, ever; leaderboard becomes skill-only (proper scores vs a model benchmark)"
+    },
+    {
+     "id": "C",
+     "text": "keep third-party archive captures, labelled THIRD-PARTY on the same row, and forbid the word 'market' from any title",
+     "cost": "labelling discipline only",
+     "locks": "every downstream number inherits an unlicensed provenance and must be re-verified if the policy changes"
+    }
+   ],
+   "evidence": [
+    "official read 2026-11-16: https://www.nfl.com/betting/ and https://www.nfl.com/odds/ both serve the league's own 404 page; the Game Summary PDF read in full sections carries no price either",
+    "peer registers: nfl-availability-desk SUG-01 and flag RF-02 reached the same conclusion by absence of evidence; this session adds two named probes with a clock",
+    "repo rule: 'Compute correlations only from officially sourced numbers' + 'verify everything from official verified trusted sources'"
+   ],
+   "unblocks": [
+    "price-snapshot store of opening and closing numbers",
+    "fair line / market line / difference as separate columns",
+    "residual published on a schedule from day one",
+    "two-stage leaderboard with CLV escrow",
+    "rewards"
+   ],
+   "recommended": "B for the site, C for the research store — i.e. publish no residual column on a public page while keeping a clearly-labelled third-party archive for internal model grading",
+   "basis": "official read + repo rule: a residual against an unlicensed number is not a verifiable claim, but it is still the best available training signal for a model",
+   "risk_if_deferred": "every session keeps producing blank price columns (correct, but not a plan) and the reward mechanism has no measurable definition",
+   "effort": "policy only",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl.com/betting/ (404)",
+     "url": "https://www.nfl.com/betting/"
+    },
+    {
+     "label": "nfl.com/odds/ (404)",
+     "url": "https://www.nfl.com/odds/"
+    }
+   ]
+  },
+  {
+   "id": "CD-03",
+   "priority": "P1",
+   "title": "Read the game-book use restriction before building anything on game books",
+   "decision": "May the site derive facts from a document whose own header restricts use to media coverage?",
+   "options": [
+    {
+     "id": "A",
+     "text": "use the PDFs as an internal label/verification source only: publish derived facts (who started, who was not active, roof state, weather) plus a link to the official PDF, and never mirror the file or its raw tables",
+     "cost": "nothing; needs a written terms note in the register",
+     "locks": "the site stays a commentary on the official artefact rather than a redistribution of it"
+    },
+    {
+     "id": "B",
+     "text": "ask the league for written permission, then publish tables",
+     "cost": "time; no guarantee",
+     "locks": "a dependency on an answer that may never arrive"
+    },
+    {
+     "id": "C",
+     "text": "ignore the restriction and publish transcribed tables",
+     "cost": "none now",
+     "locks": "an unquantified terms risk on the whole availability programme"
+    }
+   ],
+   "evidence": [
+    "official read 2026-11-16: the first page of the Game Summary prints 'NFL Copyright © 2026 by The National Football League… this summary and play-by-play is for the express purpose of assisting media in their coverage of the game; any other use of this material is prohibited without the written permission of the National Football League.'",
+    "repo grep this session: no register in any namespace records this restriction, although two peer namespaces already transcribe game-book lineups (nfl-hub/data/gamebooks.json, nfl-market/data/official_lineups.json)"
+   ],
+   "unblocks": [
+    "'use official NFL Game Books for actual starters and game-day status'",
+    "the verified results feed and the availability graph, both of which peer registers mark blocked on exactly this source"
+   ],
+   "recommended": "A",
+   "basis": "official read: the restriction is printed on the artefact itself; A uses the fact without publishing the document",
+   "risk_if_deferred": "the programme's main unblocked source becomes the programme's main legal exposure, discovered after the tables are public",
+   "effort": "small (one terms note + a labelling rule)",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "the PDF that carries the restriction",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "nfl-hub game-book register",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/gamebooks.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-04",
+   "priority": "P1",
+   "title": "Replace 'an agent happened to open the page' with a collector that owns the clock",
+   "decision": "Who runs the capture, and what does it store?",
+   "options": [
+    {
+     "id": "A",
+     "text": "scheduled collector in Actions: fetch the injury report, transactions hub and each club's pages daily from Wednesday to kickoff, commit raw bytes + sha256 + a client clock stamp, then run a drift alarm",
+     "cost": "one workflow + storage location decision",
+     "locks": "deltas become the primary published object and levels become derived"
+    },
+    {
+     "id": "B",
+     "text": "keep manual capture but gate publication on the drift alarm",
+     "cost": "small",
+     "locks": "nothing; still no multi-day history"
+    },
+    {
+     "id": "C",
+     "text": "accept single-capture weeks as the ceiling",
+     "cost": "none",
+     "locks": "no availability-surprise feature, no practice-trend feature, no point-in-time ledger"
+    }
+   ],
+   "evidence": [
+    "this session's own limitation, published rather than hidden: the read path returns rendered text only — no response headers, no server Date — so every 'clock time' in this repo is a client-side approximation (see READ-01…READ-08 timestamps)",
+    "peer flag RF-16: dated reads exist only because separate sessions opened the page on separate days",
+    "peer registers state their hashes are transcription fingerprints, not raw-byte hashes"
+   ],
+   "unblocks": [
+    "'store every injury-hub read with its clock time and publish the delta, never the level'",
+    "'snapshot Wed/Thu/Fri and keep a dated history'",
+    "'point-in-time snapshot ledger'",
+    "'automate immutable multi-day availability snapshots'"
+   ],
+   "recommended": "A",
+   "basis": "gate arithmetic: the availability-surprise feature needs ≥2 dated reads per game week; with manual capture the observed rate is ~1 per week across the whole repo",
+   "risk_if_deferred": "the delta thesis stays unfalsifiable and every 'we publish the surprise, not the level' claim on the site stays aspirational",
+   "effort": "medium",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "live injury report page read this session",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "nfl-availability-desk flags",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/flags.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-05",
+   "priority": "P2",
+   "title": "Store raw bytes, because 'absent from the source' and 'lost in the render' are otherwise indistinguishable",
+   "decision": "Does the project keep the fetched payload, or only what a renderer showed an agent?",
+   "options": [
+    {
+     "id": "A",
+     "text": "store the raw payload (PDF/HTML bytes) alongside every derived table and hash that payload",
+     "cost": "storage",
+     "locks": "parser regressions become detectable and claims of 'the source does not contain X' become checkable"
+    },
+    {
+     "id": "B",
+     "text": "keep transcriptions only",
+     "cost": "none",
+     "locks": "the class of error below stays open forever"
+    }
+   ],
+   "evidence": [
+    "concrete case from this session: the Game Summary prints a 'Did Not Play' heading with no names extracted, while Kerby Joseph — 'Out' on the official report for that same fixture — appears in neither the Lineups, the Substitutions nor the Not Active list. Either the source really leaves him in a third category, or the chunked renderer lost the block. Raw bytes decide; a rendered read cannot.",
+    "peer precedent: the Texans publish depth as an image, so a renderer's silence is not a fact"
+   ],
+   "unblocks": [
+    "'add a drift alarm to every scraper — pin expected row counts and required fields; fail loudly when a field goes missing rather than publishing a blank'",
+    "immutable snapshot ledger"
+   ],
+   "recommended": "A",
+   "basis": "official read + a specific unresolved case (flag DC-05)",
+   "risk_if_deferred": "the site publishes 'the official document does not say' when the truth is 'our reader did not show it'",
+   "effort": "small-to-medium",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "the game centre whose PDF is in question",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    }
+   ]
+  },
+  {
+   "id": "CD-06",
+   "priority": "P1",
+   "title": "Fix the corpus size question with arithmetic, then let it set the gates",
+   "decision": "What is the pre-registered backtest corpus, and what n does a strategy need before it can hold a leaderboard slot?",
+   "options": [
+    {
+     "id": "A",
+     "text": "define the corpus as 'every fixture whose official result is graded', publish the running count from the standings identity, and gate on a lower bound of skill with uncertainty rather than a fixed 300",
+     "cost": "one engine",
+     "locks": "the leaderboard can publish a 'provisional' division the same season"
+    },
+    {
+     "id": "B",
+     "text": "keep n ≥ 300 graded games as a hard gate, which forces a multi-season corpus (≥2 seasons) before any promotion",
+     "cost": "patience: through Week 10 of 2026 the count is 148",
+     "locks": "no live strategy exists until 2027, so demotion gates are untestable this year"
+    },
+    {
+     "id": "C",
+     "text": "grade club-game rows (2 per fixture) instead of fixtures, so n = 296 today and 544 at season end",
+     "cost": "a documented unit change",
+     "locks": "correlation and cluster bounds must be computed by fixture, never by row, or the uncertainty will be understated"
+    }
+   ],
+   "evidence": [
+    "repo computation from the official standings read this session: ΣW = ΣL = 147, ΣPF = ΣPA = 6824, ΣGP/2 = 148 games credited, of which 2 are ties — see pages/corpus.html",
+    "the brief's '136-game log' matches none of the observed counts, but 272/2 = 136 exactly: half a season is the only arithmetic from official numbers that reproduces it",
+    "peers measured 145 credited before the Sunday games and flagged the 136 (RF-01); this session re-ran the identity at a later clock and it moves by 3 as expected"
+   ],
+   "unblocks": [
+    "'turn the 136-game log into the pre-registered backtest corpus'",
+    "'pre-register every strategy'",
+    "the demotion gate",
+    "rewards"
+   ],
+   "recommended": "A with the unit stated as in C and cluster bounds as in B",
+   "basis": "gate arithmetic, with the unit made explicit: the peer floor is n ≥ 300 graded games *per strategy*, and a season holds 272 fixtures, so a one-bet-per-fixture strategy cannot reach it in 2026 — while the floor is reachable for a strategy that settles several graded bets per fixture. The gate is therefore ambiguous until the unit is frozen, which is the cheapest part of this decision",
+   "risk_if_deferred": "every leaderboard claim stays ungradeable while the number of 'almost-validated' strategies keeps growing across namespaces",
+   "effort": "small",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "official standings read",
+     "url": "https://www.nfl.com/standings/"
+    },
+    {
+     "label": "nfl-book requirement register (69 rows)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/requirements.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-07",
+   "priority": "P2",
+   "title": "Calibrate designations from the join, not from folklore percentages",
+   "decision": "Does 'Questionable' become a feature, a weight, or nothing?",
+   "options": [
+    {
+     "id": "A",
+     "text": "build the join (report designation → game-book status) for every fixture with both artefacts, publish play rate with a Wilson interval and n, and only then decide whether the label enters the model",
+     "cost": "depends on CD-03/CD-05",
+     "locks": "a measured, official-only calibration"
+    },
+    {
+     "id": "B",
+     "text": "use published legacy percentages",
+     "cost": "none",
+     "locks": "a number the official text never states, which the brief forbids"
+    },
+    {
+     "id": "C",
+     "text": "ignore designations",
+     "cost": "none",
+     "locks": "loses the only pre-kickoff signal clubs are obliged to publish"
+    }
+   ],
+   "evidence": [
+    "official text gives no percentages: the live report vocabulary read this session is exactly 'Full/Limited/Did Not Participate in Practice' and 'Out' / 'Questionable' / blank - no numeric meaning is attached to any label",
+    "method demonstrated on one fixture (n = 1, published as a demonstration, not a rate): of the 6 report rows across both clubs marked 'Out', 4 appear in that fixture's 'Not Active' block; 7 of the 9 Patriots rows marked 'Questionable' appear in the Lineups or Substitutions lists, 5 of them as a starter",
+    "method demonstrated on one fixture (n = 1, published as a demonstration of the join, never as a rate): of the 11 report rows marked 'Questionable', 8 join to the game book's Lineups or Substitutions lists (5 of them as a starter) and 2 join to Not Active; of the 6 rows marked 'Out', 3 join to Not Active, 2 match no availability block at all, and 1 is left ambiguous because the surname collides with another player. Every figure is computed by engine/derive.py, not typed"
+   ],
+   "unblocks": [
+    "'calibrate what Questionable means empirically instead of using old percentages'",
+    "'score injury-designation reliability before using it as a feature'"
+   ],
+   "recommended": "A",
+   "basis": "official read for the vocabulary and the join; the play-rate number deliberately stays n=1 until the corpus exists",
+   "risk_if_deferred": "a fixed-points penalty for a missing starter — the exact shortcut the brief rejects — stays the default",
+   "effort": "medium",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "live injury report",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "official Game Summary with Not Active + Lineups",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "CD-08",
+   "priority": "P2",
+   "title": "Publish starter facts, not depth ranks: the second/third/fourth-string claim has no official source",
+   "decision": "What does the 'deficiency' feature actually assert?",
+   "options": [
+    {
+     "id": "A",
+     "text": "publish per-slot facts only: who started, who was not active, who replaced whom against last week's same slot — and label the deficiency an index of *absence of the named starter*, not of quality",
+     "cost": "needs the game-book pipeline",
+     "locks": "no claim about '2nd string' quality without a value source"
+    },
+    {
+     "id": "B",
+     "text": "buy an official-ish depth source (licensed data vendor) and keep it visibly third-party",
+     "cost": "money",
+     "locks": "provenance problem of CD-02/C"
+    },
+    {
+     "id": "C",
+     "text": "derive depth order from jersey number, experience or salary",
+     "cost": "none",
+     "locks": "the shortcut the brief explicitly rejects — this register recommends rejecting it again"
+    },
+    {
+     "id": "D",
+     "text": "use snap counts as the starter proxy",
+     "cost": "blocked: no per-player snap table was found in the four chunks of the official Game Summary read, and no official snap source was read this session",
+     "locks": "route (b) of the peer 'resolve the depth-order source' item stays unverified"
+    }
+   ],
+   "evidence": [
+    "official probe: https://www.nfl.com/teams/detroit-lions/depth-chart/ returns the league's 404 page — 1 of 32 clubs sampled, so a club-by-club register is still owed (gap G-02)",
+    "peer state: 149 club/unit/position slots carry more than one rank-1 player, so 'the starter' is often not a fact the club named",
+    "peer register nfl-book lists 'official snap counts or NFL Game Books' as the clearing number for this requirement; the Game Book half is now demonstrated for 2 of 2 sampled fixtures, the snap-count half is not"
+   ],
+   "unblocks": [
+    "'model depth from playing time, not jersey order'",
+    "'interactive matchup deficiency matrix'",
+    "'per-team view: starters out, replacements named'"
+   ],
+   "recommended": "A now; revisit D only if an official snap source is verified",
+   "basis": "official read (404 on the sampled depth path; no snap table in the chunks read) + peer evidence on shared rank-1 slots",
+   "risk_if_deferred": "the matrix the owner asked for gets built on an inferred ranking and inherits every error of the shortcut it was meant to avoid",
+   "effort": "medium",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "sampled club depth path (404)",
+     "url": "https://www.nfl.com/teams/detroit-lions/depth-chart/"
+    },
+    {
+     "label": "nfl-availability-desk suggestions",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/suggestions.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-09",
+   "priority": "P2",
+   "title": "Keep parlays and prop combos behind the joint-evidence gate, and put the operator's rules in git",
+   "decision": "Which source is authoritative for void/push/rewrite rules, and how is it versioned?",
+   "options": [
+    {
+     "id": "A",
+     "text": "no combo is ranked until (i) a directly validated joint probability exists for that leg pair and (ii) the operator rule text it would be settled against is archived with a hash and a date",
+     "cost": "slow, honest",
+     "locks": "combos stay in a 'specification' division"
+    },
+    {
+     "id": "B",
+     "text": "rank combos by multiplying marginals and note the assumption",
+     "cost": "none",
+     "locks": "publishes a known-incorrect probability under dependence"
+    },
+    {
+     "id": "C",
+     "text": "rank combos only against a same-book parlay price if CD-02 becomes A",
+     "cost": "money",
+     "locks": "combo ranking on third-party prices"
+    }
+   ],
+   "evidence": [
+    "brief text: 'Multiplying marginal probabilities is invalid under dependence'",
+    "repo state: correlation cells in peer registers are blank with n published, so condition (i) is unmet for every pair today",
+    "no official NFL page states any operator's void/push rule (none was found in any read recorded in this repo)"
+   ],
+   "unblocks": [
+    "'use proper-score leaderboard divisions'",
+    "'keep parlays and prop combos behind a joint-evidence gate'"
+   ],
+   "recommended": "A",
+   "basis": "repo state: condition (i) is unmet, so any other option publishes an invalid number",
+   "risk_if_deferred": "a parlay division appears on the leaderboard with a win rate and no joint model — the luck-masking the brief wants removed",
+   "effort": "small (governance)",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-book joint-evidence dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data"
+    }
+   ]
+  },
+  {
+   "id": "CD-10",
+   "priority": "P2",
+   "title": "Separate signal from staking in the same commit that names the reward currency",
+   "decision": "What does a top-ranked strategy actually win, and on what evidence?",
+   "options": [
+    {
+     "id": "A",
+     "text": "two published columns: signal (benchmark-relative Brier skill with a game-cluster lower bound and a multiplicity adjustment) and staking (units, realised return), with rewards held in escrow against the prospective window, not the backtest",
+     "cost": "needs the corpus gate from CD-06",
+     "locks": "no reward can be paid from a backtest"
+    },
+    {
+     "id": "B",
+     "text": "rank by season-long ROI",
+     "cost": "none",
+     "locks": "explicitly rejected in the brief and by peer registers"
+    },
+    {
+     "id": "C",
+     "text": "pay in site reputation only (badges, no cash)",
+     "cost": "none",
+     "locks": "no gambling-adjacent payout obligation while prices are unavailable"
+    }
+   ],
+   "evidence": [
+    "brief text: 'Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard' and 'Separate signal from staking so a lucky staking run cannot mask a bad signal'",
+    "repo arithmetic: with 148 graded fixtures (this session's standings identity) the prospective window for a two-stage gate cannot close this season, so escrow terms must be written now and executed in 2027"
+   ],
+   "unblocks": [
+    "'two-stage skill leaderboard (proper-score qualification → prospective CLV/ROI escrow)'",
+    "'define a demotion gate'"
+   ],
+   "recommended": "A + C together",
+   "basis": "gate arithmetic + CD-02: CLV is undefined without a price source, so the escrow must be denominated in something measurable today (skill) or deferred",
+   "risk_if_deferred": "the first leaderboard that opens is the one that pays for variance",
+   "effort": "small",
+   "needs_owner": true,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-book two-stage leaderboard dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data"
+    }
+   ]
+  },
+  {
+   "id": "CD-11",
+   "priority": "P2",
+   "title": "Give every strategy a two-sided 'what would change our mind' field and make it a required column",
+   "decision": "Is a falsifier mandatory for registration?",
+   "options": [
+    {
+     "id": "A",
+     "text": "mandatory, both sides: the observation that would promote and the observation that would kill it; a strategy without either cannot be registered",
+     "cost": "schema change in the register every namespace writes",
+     "locks": "pre-registration files must carry both fields"
+    },
+    {
+     "id": "B",
+     "text": "recommended, not required",
+     "cost": "none",
+     "locks": "nothing"
+    }
+   ],
+   "evidence": [
+    "brief text: 'Add a two-sided what would change our mind field to every strategy entry'",
+    "repo state: peer registers carry the field for 5 strategies (nfl-book G8) and no register enforces it — a schema that is not enforced by a verifier decays to blank"
+   ],
+   "unblocks": [
+    "'define a demotion gate that sends a live strategy back to paper'"
+   ],
+   "recommended": "A, enforced by the shared verifier rather than by prose",
+   "basis": "repo computation: enforcement exists only where a verifier checks it; this namespace's own verifier is proof of the mechanism (engine/verify_site.py fails the build on a missing source link)",
+   "risk_if_deferred": "strategies accumulate without a kill condition, which is how a research repo turns into a list of opinions",
+   "effort": "small",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-book suggestions register",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/suggestions.json"
+    }
+   ]
+  },
+  {
+   "id": "CD-12",
+   "priority": "P3",
+   "title": "Store probabilities with their inputs, and make the input hash the primary key",
+   "decision": "What is the atomic record of a model run?",
+   "options": [
+    {
+     "id": "A",
+     "text": "one row per (fixture, market, model version) carrying probability, the input vector, an input hash, the artefact hashes it was computed from, and no pick column",
+     "cost": "storage; a recompute path must exist",
+     "locks": "a pick can be regenerated but never edited independently of its inputs"
+    },
+    {
+     "id": "B",
+     "text": "store picks only",
+     "cost": "none",
+     "locks": "unauditable results"
+    }
+   ],
+   "evidence": [
+    "brief text: 'Store every model output as a probability plus its inputs, not just a pick'",
+    "repo state: peer model output files exist but none publishes an input hash, so a re-run cannot be shown to be the same computation"
+   ],
+   "unblocks": [
+    "removal-of-luck panel",
+    "ablations instead of fixed penalties (the same vector with features removed)"
+   ],
+   "recommended": "A",
+   "basis": "repo computation: an ablation is only defensible when the two runs share an input hash and differ in one declared feature set",
+   "risk_if_deferred": "'we tested with and without the personnel features' becomes unauditable prose",
+   "effort": "medium",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-book model outputs dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data"
+    }
+   ]
+  },
+  {
+   "id": "CD-13",
+   "priority": "P3",
+   "title": "Publish fixture context from schedule facts only, and key venues by a stable id",
+   "decision": "How is a venue identified when two official pages call the same ground by two names?",
+   "options": [
+    {
+     "id": "A",
+     "text": "store venue as {club, ground-name-as-printed-on-game-centre, name-as-printed-in-game-book, city}, and treat the pair as evidence of a naming difference, not a data error",
+     "cost": "one column",
+     "locks": "no silent mismatch when an international fixture's sponsor name differs"
+    },
+    {
+     "id": "B",
+     "text": "normalise to one name by hand",
+     "cost": "manual — the brief forbids manual input",
+     "locks": "a lost discrepancy"
+    }
+   ],
+   "evidence": [
+    "official reads this session, same fixture: the game centre prints 'Location MUNICH / Stadium FC BAYERN MUNICH STADIUM' while its own game book prints 'at Allianz Arena, Munich, Germany'",
+    "second sampled fixture prints 'Location MADRID / Stadium BERNABEU' in the game centre, so international venues are a recurring shape, not a one-off"
+   ],
+   "unblocks": [
+    "'transcribe the venue of every fixture from the official game centre'",
+    "'stadium roof/surface overlay'"
+   ],
+   "recommended": "A",
+   "basis": "official read of two pages for one fixture",
+   "risk_if_deferred": "a surface/roof join silently fails on exactly the games (international, neutral-site) where it matters most",
+   "effort": "small",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "game centre page",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    },
+    {
+     "label": "game book for the same fixture",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "CD-14",
+   "priority": "P3",
+   "title": "Publish the removal-of-luck panel as a distribution, with the panel's own n computed from the standings identity",
+   "decision": "What does 'luck removed' mean on a page a reviewer can falsify?",
+   "options": [
+    {
+     "id": "A",
+     "text": "publish three numbers per strategy: benchmark-relative skill, the game-cluster bootstrap lower bound, and the number of trials the adjustment covers — plus a placebo run that shuffles outcomes within fixture",
+     "cost": "needs CD-06's unit definition",
+     "locks": "a strategy cannot look skilled by hiding the trial count"
+    },
+    {
+     "id": "B",
+     "text": "publish win rate with a streak column",
+     "cost": "none",
+     "locks": "rejected by the brief and by peer registers"
+    }
+   ],
+   "evidence": [
+    "brief text: 'Compute and publish the removal-of-luck panel' and 'Rank with proper scores and uncertainty, not win rate'",
+    "repo arithmetic: 148 fixtures with 2 ties (this session) is the denominator any such panel must state today; a panel that omits n cannot be checked against it"
+   ],
+   "unblocks": [
+    "'add a control baseline (random picks; favorites only)'",
+    "'use proper-score leaderboard divisions'"
+   ],
+   "recommended": "A",
+   "basis": "gate arithmetic",
+   "risk_if_deferred": "the leaderboard's purpose — separating skill from variance — is the one thing it stops demonstrating",
+   "effort": "medium",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "nfl-book removal-of-luck dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data"
+    }
+   ]
+  },
+  {
+   "id": "CD-15",
+   "priority": "P1",
+   "title": "Print 'suggestions pending a verdict' on the landing page until the queue is cleared",
+   "decision": "How does the owner's non-attention become visible?",
+   "options": [
+    {
+     "id": "A",
+     "text": "landing-page counter: N rows proposed, M verdicts written, oldest row unaddressed for D days — computed by an engine from the register and the git history of the verdict field",
+     "cost": "small",
+     "locks": "the review queue becomes a measured object"
+    },
+    {
+     "id": "B",
+     "text": "rely on the reviewer finding the suggestions page",
+     "cost": "none",
+     "locks": "nothing"
+    }
+   ],
+   "evidence": [
+    "repo computation: 138 suggestion rows exist and this session found no file in the repository that records a reviewer verdict for the open queue; a queue with no visible age never closes",
+    "brief text: 'create a section dedicated for suggestions so someone can review suggestions and choose the best path before implementing any changes'"
+   ],
+   "unblocks": [
+    "the whole review workflow"
+   ],
+   "recommended": "A",
+   "basis": "repo computation",
+   "risk_if_deferred": "each session re-derives the same blockers and the count in CD-01 keeps rising",
+   "effort": "small",
+   "needs_owner": false,
+   "verdict": "",
+   "decided_by": "",
+   "decided_utc": "",
+   "status": "proposed-for-review",
+   "sources": [
+    {
+     "label": "this register's own inventory artefact",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/namespace_inventory.json"
+    }
+   ]
+  }
+ ]
+}

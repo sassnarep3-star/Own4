@@ -1,0 +1,353 @@
+{
+ "dataset": "decision_console_questions",
+ "title": "Questions, information and answers — what must be settled before any decision here is reasonable",
+ "built_utc": "2026-11-16",
+ "rule": "an answer is written only when a specific page was read in this session or a number was computed from a file in this repository by an engine named on the row. `answer_grade` says which kind. A row with no answer says what would fill it and who could fill it.",
+ "grades": {
+  "answered-repo": "a number or fact computed from a file in this repository by an engine named on the row",
+  "answered-official": "an official page was read in this session and it settles the question",
+  "answered-computed": "computed by engine/derive.py from a committed transcription of an official page",
+  "partly-answered": "one sample read settles the shape of the question but not the census",
+  "owner-decision-only": "no data can answer it; it needs a verdict, and the verdict is the deliverable",
+  "open-needs-new-source": "cannot be answered with any source in the repository or on the official site today"
+ },
+ "rows": [
+  {
+   "id": "QA-01",
+   "blocks": "blocking",
+   "question": "Does the league publish a price anywhere an agent can read?",
+   "know": "Two candidate paths were probed this session and both return the league's own 404 page; the official Game Summary for a completed fixture contains no price field in any section read.",
+   "dont_know": "Whether the owner will licence a feed, accept third-party captures, or run price-free.",
+   "answer": "No official price source exists on the paths probed. The question is therefore no longer 'can we verify one' but 'what are we willing to publish unverified' — which is CD-02.",
+   "answer_grade": "answered-official",
+   "discovery": "closed; needs a verdict not a read",
+   "asked_by": "CD-02, and every requirement naming residual, CLV, vig or ROI",
+   "sources": [
+    {
+     "label": "nfl.com/odds/",
+     "url": "https://www.nfl.com/odds/"
+    },
+    {
+     "label": "nfl.com/betting/",
+     "url": "https://www.nfl.com/betting/"
+    }
+   ]
+  },
+  {
+   "id": "QA-02",
+   "blocks": "blocking",
+   "question": "Is there an official depth chart, and if not, what is the best official substitute?",
+   "know": "The sampled club depth-chart path on nfl.com 404s. The official Game Summary prints a per-slot starting lineup and a Not Active list for each club. No per-player snap table was found in the four chunks of that PDF read.",
+   "dont_know": "Whether the other 31 clubs expose a depth path; whether Next Gen Stats publishes snaps somewhere a collector can read; whether the unread chunks of the game book contain a participation table.",
+   "answer": "Depth ORDER has no official source found; depth FACTS (who started, who did not dress) do — in a dated, per-fixture document. That is enough for an absence-of-starter index and not enough for a '2nd-string quality' index.",
+   "answer_grade": "partly-answered",
+   "discovery": "probe 32 club depth paths (one scripted sweep); read all chunks of 3 game books; probe the NGS player-stats pages for a snaps column",
+   "asked_by": "CD-08, gap G-02, gap G-03",
+   "sources": [
+    {
+     "label": "sampled depth path",
+     "url": "https://www.nfl.com/teams/detroit-lions/depth-chart/"
+    },
+    {
+     "label": "official Game Summary",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "QA-03",
+   "blocks": "shaping",
+   "question": "What exactly is in the official Game Book, and what is it good for?",
+   "know": "Sections transcribed this session are listed on pages/evidence.html for one fixture, and two peers (nfl-hub, nfl-market) independently transcribed the Lineups / Substitutions / Did Not Play / Not Active blocks earlier in November.",
+   "dont_know": "Whether any per-player participation table exists in the unread chunks.",
+   "answer": "It is a post-game document: header (date, venue, weather, roof/surface, officials), lineups, substitutions, Did Not Play, Not Active, full statistics, drives, play-by-play with in-game injury updates, and longest-plays tables. Correct use = label and verification source; wrong use = pre-kickoff feature.",
+   "answer_grade": "answered-official",
+   "discovery": "closed for the sections read; raw-bytes storage (CD-05) closes the rest",
+   "asked_by": "CD-03, CD-05, CD-07, CD-08",
+   "sources": [
+    {
+     "label": "the PDF",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "nfl-hub's independent read",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-hub/data/gamebooks.json"
+    }
+   ]
+  },
+  {
+   "id": "QA-04",
+   "blocks": "shaping",
+   "question": "Is a game book available for every fixture, and for past seasons?",
+   "know": "Two sampled completed fixtures in two different weeks (Week 9 and Week 10 of 2026) each link their own dated PDF on a static.www.nfl.com path. A guessed 2025 fixture slug returned 404, which tests the slug guess, not the archive.",
+   "dont_know": "Coverage for the other 270 fixtures of 2026 and for any earlier season.",
+   "answer": "",
+   "answer_grade": "open-needs-new-source",
+   "discovery": "sweep: for each 2026 fixture slug, check the game centre for a game-book link and record the URL; then repeat on 2025 slugs read from the official 2025 schedule page rather than guessed",
+   "asked_by": "gap G-06, CD-06 (backfill size)",
+   "sources": [
+    {
+     "label": "Week 9 game centre",
+     "url": "https://www.nfl.com/games/bengals-at-falcons-2026-reg-9"
+    },
+    {
+     "label": "Week 10 game centre",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    }
+   ]
+  },
+  {
+   "id": "QA-05",
+   "blocks": "blocking",
+   "question": "May the site publish what the game book says?",
+   "know": "The document prints its own use restriction on its first page: media coverage only, any other use prohibited without written permission from the league. No register in this repository records that sentence, although two namespaces transcribe from it and one publishes transcribed lineup tables.",
+   "dont_know": "Whether the owner considers internal model grading 'use' in the sense intended, and whether written permission is obtainable.",
+   "answer": "Publishing the raw tables is a terms question, not a data question. The recommended posture (CD-03 option A) is: derive facts, publish the fact plus a link, do not mirror the document.",
+   "answer_grade": "answered-official",
+   "discovery": "a written note in the publication contract, then proceed",
+   "asked_by": "CD-03",
+   "sources": [
+    {
+     "label": "the restriction is printed on this document",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "a peer register that publishes transcribed lineups",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/official_lineups.json"
+    }
+   ]
+  },
+  {
+   "id": "QA-06",
+   "blocks": "shaping",
+   "question": "How many players are inactive, and when is the list due?",
+   "know": "The official artefact read this session lists 6 names per club under 'Not Active' for one fixture, with an empty 'Did Not Play' block; 5 of the 24 report rows join to those Not Active names. Third-party explainers searched this session say 5, say up to 7, and say up to 8 - and none is official.",
+   "dont_know": "The rule itself, as a dated official document.",
+   "answer": "Not published. Per this project's own rule, the count is a transcribed observation per fixture, not a constant, and no third-party number is adopted.",
+   "answer_grade": "partly-answered",
+   "discovery": "collect the Not Active block for all fixtures and publish the distribution of its size — that is a measurement, not a rule",
+   "asked_by": "CD-07, flag DC-02",
+   "sources": [
+    {
+     "label": "official Game Summary",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "QA-07",
+   "blocks": "blocking",
+   "question": "What is the real cadence of the official availability report?",
+   "know": "The live page read this session is organised under game-date headings ('THURSDAY, NOVEMBER 12TH', 'SUNDAY, NOVEMBER 15TH') with columns Player | Position | Injuries | Practice Status | Game Status, and prints no per-row submission timestamp. Third-party accounts of the policy conflict about which days and which deadline apply.",
+   "dont_know": "When a given club's row last changed — the page does not say.",
+   "answer": "Cadence must be learned from dated captures, not hard-coded from a policy document the project has not read. A Wed/Thu/Fri assumption written into a collector would encode an unverified claim into the pipeline, which is the failure mode the brief's drift-alarm item exists to prevent.",
+   "answer_grade": "answered-official",
+   "discovery": "closed by CD-04 once ≥3 weeks of daily captures exist; then publish the observed first-change-day distribution",
+   "asked_by": "CD-04, gap G-09",
+   "sources": [
+    {
+     "label": "live report read this session",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  },
+  {
+   "id": "QA-08",
+   "blocks": "shaping",
+   "question": "Does 'Questionable' mean anything measurable in this league's own data?",
+   "know": "The official report attaches no probability to any label. Joining one fixture's report rows to that fixture's game book (engine/derive.py) gives, out of 24 rows: 10 started, 5 played off the bench, 5 were not active, 2 match no block at all (one per club, both marked 'Out'), and 2 rows are ambiguous because the report prints no jersey number and the surname is shared. Every 'Out' row that could be matched confidently is a Not Active name; no 'Out' player appears in a lineup.",
+   "dont_know": "Everything about rates: n = 1 fixture, the two unaccounted rows are unresolved pending raw bytes (DC-05), and the ambiguity is a property of the source's naming, not of the transcription - a name-to-number map per club-week would remove it (gap G-13).",
+   "answer": "The join is possible with official sources only, which is the substance of the requirement. The rate is not estimable yet and legacy percentages must not be imported.",
+   "answer_grade": "partly-answered",
+   "discovery": "build the join for every fixture with both artefacts (needs QA-04 coverage + CD-05), then publish play rate per designation with Wilson intervals and n",
+   "asked_by": "CD-07",
+   "sources": [
+    {
+     "label": "report row vocabulary",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "game-book availability blocks",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "QA-09",
+   "blocks": "shaping",
+   "question": "Is the W–L record printed on the injury report a live join or a pre-game attribute?",
+   "know": "For all 6 clubs visible in the chunk read, the bracketed record equals the standings page read minutes later — including the two ties, and including records that had just changed after the Sunday games.",
+   "dont_know": "Nothing material for this read; the point is that a capture must store its window.",
+   "answer": "It is a live join. Stored as such with its read window; it must never be used as a pre-game feature, because for a game already played it leaks the result.",
+   "answer_grade": "answered-official",
+   "discovery": "closed",
+   "asked_by": "point-in-time ledger requirement; CD-04",
+   "sources": [
+    {
+     "label": "report",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "standings",
+     "url": "https://www.nfl.com/standings/"
+    }
+   ]
+  },
+  {
+   "id": "QA-10",
+   "blocks": "blocking",
+   "question": "How large is the graded-results corpus today, and does the brief's '136-game log' correspond to anything?",
+   "know": "From the official standings transcribed this session: ΣW = ΣL = 147, ΣPF = ΣPA = 6824, ΣGP/2 = 148 fixtures credited, including 2 ties. A 2026 season is 272 fixtures, and 272/2 = 136.",
+   "dont_know": "What file the brief's 136 refers to; no such file exists at the base commit of this session (peers checked the same thing and published 145 at an earlier clock).",
+   "answer": "Publish the corpus as the count the identity produces at a stated clock, and treat 136 as half a season — the only arithmetic from official numbers that reproduces it. A corpus is a definition plus a snapshot, not a number handed to the project.",
+   "answer_grade": "answered-computed",
+   "discovery": "closed for the number; the definition is CD-06",
+   "asked_by": "CD-06, flag DC-09",
+   "sources": [
+    {
+     "label": "standings identity computed by engine/derive.py",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/standings_2026-11-16.json"
+    },
+    {
+     "label": "league page",
+     "url": "https://www.nfl.com/standings/"
+    }
+   ]
+  },
+  {
+   "id": "QA-11",
+   "blocks": "blocking",
+   "question": "Can a strategy be validated inside one season under the gates already written?",
+   "know": "Three peer registers state a floor of n ≥ 300, and all three state it per strategy in units of graded games, graded bets or settled selections — not as a fixture-level corpus floor: nfl-command requires '≥ 300 graded selections' for an ROI claim, nfl-arena 'n >= 300 graded bets in the confirmatory window', and PREREG-001 'G1 sample | n ≥ 300 graded games'. A full season holds 272 fixtures and 148 are credited at this clock.",
+   "dont_know": "Whether the owner fixes the unit before the gate (one graded bet per fixture makes 300 unreachable in 2026; several graded bets per fixture does not), and whether they prefer a lowered gate with an uncertainty bound, a two-season corpus, or the club-game unit (n = 296 today).",
+   "answer": "Not for a one-bet-per-fixture strategy: 272 fixtures exist in a season, so 300 graded games cannot accumulate inside 2026 — a strategy that settles several bets per fixture could, which is exactly why the unit has to be fixed before the gate is enforced. As written the gate is ambiguous rather than impossible, and no leaderboard can open until the ambiguity is resolved. That is a decision, not a data gap, and it is the cheapest one on this board.",
+   "answer_grade": "answered-computed",
+   "discovery": "closed; needs a verdict (CD-06)",
+   "asked_by": "CD-06, CD-10, CD-14",
+   "sources": [
+    {
+     "label": "nfl-command gate text (≥ 300 graded selections)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json"
+    },
+    {
+     "label": "nfl-arena strategy register (n >= 300 graded bets)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/strategy_register.json"
+    },
+    {
+     "label": "PREREG-001 shadow baseline, G1 sample row",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
+    }
+   ]
+  },
+  {
+   "id": "QA-12",
+   "blocks": "blocking",
+   "question": "Which namespace is the canonical surface a reviewer reads?",
+   "know": "30 nfl* directories at the base commit; 19 suggestion registers, 17 question registers, 22 flag registers and 11 requirement registers; the root nav lists all of them under one group whose title counts the directories by walking the tree at build time.",
+   "dont_know": "The owner's choice.",
+   "answer": "",
+   "answer_grade": "owner-decision-only",
+   "discovery": "one sentence from the owner; CD-01 option A records it",
+   "asked_by": "CD-01, CD-15",
+   "sources": [
+    {
+     "label": "root nav group",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+    }
+   ]
+  },
+  {
+   "id": "QA-13",
+   "blocks": "shaping",
+   "question": "Are the three Lions blank game-status cells still blank?",
+   "know": "The live report read this session prints 'Out' for Kerby Joseph (S, Knee, DNP), Cade Mays (C, Ankle, DNP) and D.J. Reed (CB, Hip, DNP).",
+   "dont_know": "When the source changed, since the page carries no submission timestamp — the same limitation as QA-07.",
+   "answer": "Resolved upstream. The site item 'populate the three missing Lions designations' should be closed as 'source corrected between captures', not as 'we fixed it', and the closure should cite the clock it was observed at.",
+   "answer_grade": "answered-official",
+   "discovery": "closed",
+   "asked_by": "the brief's VR-08 / VR-12 line",
+   "sources": [
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  },
+  {
+   "id": "QA-14",
+   "blocks": "shaping",
+   "question": "Can roof/surface and weather be an official feature input pre-kickoff?",
+   "know": "For one completed fixture the game book header prints 'Open Stadium on Natural Grass' and a game-day weather line with temperature, humidity and wind — after the fact. The game centre's own Game Info block prints city and stadium, no weather.",
+   "dont_know": "Whether any official page states the roof designation before kickoff.",
+   "answer": "As read today: official weather/roof is a LABEL, usable to grade a totals model and to build a fixture-context dataset for backtests, not to price a game that has not been played. A pre-game source would have to be licensed or accepted as third-party.",
+   "answer_grade": "partly-answered",
+   "discovery": "probe each club's official stadium page for a roof field, and time-stamp when a game-day forecast first appears on any official page",
+   "asked_by": "CD-13, gap G-10",
+   "sources": [
+    {
+     "label": "game-book header",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    },
+    {
+     "label": "game centre Game Info",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    }
+   ]
+  },
+  {
+   "id": "QA-15",
+   "blocks": "shaping",
+   "question": "Should the 'injury report rows' figures the brief quotes be re-adjudicated now?",
+   "know": "Peer captures of the same page report 347 rows across 28 club sections; the brief quotes 254 rows and 4 no-injury sections versus 279 live. This session read 1 of 8 chunks and therefore re-adjudicates nothing.",
+   "dont_know": "The true current census — a chunk-level read cannot count rows.",
+   "answer": "No. Row-count disputes are a symptom of manual capture. The fix is CD-04 plus its drift alarm: an automated capture whose expectations are pinned, so the number is produced by a pipeline and its provenance is a file hash rather than an agent's transcript.",
+   "answer_grade": "open-needs-new-source",
+   "discovery": "run the collector for one week; then the two figures become comparable",
+   "asked_by": "flag DC-09",
+   "sources": [
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "label": "peer capture of the same page",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/availability_snapshot_2026-11-15.csv"
+    }
+   ]
+  },
+  {
+   "id": "QA-16",
+   "blocks": "shaping",
+   "question": "What happens to a live strategy when the demotion gate fires, and can it fire at all this season?",
+   "know": "A demotion rule needs a prospective window to fail in; the two-stage design requires both a proper-score qualification and a prospective CLV/ROI escrow window. CLV needs a price (CD-02) and the escrow needs graded fixtures (QA-11).",
+   "dont_know": "Whether the owner wants demotion defined on skill alone this season, with CLV added if a feed is licensed.",
+   "answer": "Definable today on skill alone: fire the gate on the lower bound of benchmark-relative skill crossing zero over a rolling window of ≥ K fixtures with the multiplicity adjustment published. The CLV half of the gate must be marked 'not yet computable', not quietly dropped.",
+   "answer_grade": "answered-computed",
+   "discovery": "choose K; write the rule into a pre-registration file whose commit hash is the registration",
+   "asked_by": "CD-10, CD-11",
+   "sources": [
+    {
+     "label": "peer pre-registration convention",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
+    }
+   ]
+  },
+  {
+   "id": "QA-17",
+   "blocks": "shaping",
+   "question": "Why do this session's own reads lack exact clock times?",
+   "know": "The read path available here returns rendered text: no HTTP headers, no server Date, no bytes. Timestamps in this namespace's registers are therefore window-level with an ordering, and that limitation is printed rather than hidden.",
+   "dont_know": "Whether a collector run in CI can obtain and store response headers for every source (it can fetch; whether the property survives a proxy is untested here).",
+   "answer": "Because the point-in-time ledger requirement ('store every read with its clock time') can only be satisfied by code that owns the fetch. That is an argument for CD-04 over CD-04/B, and it is why this namespace does not claim sub-minute precision it does not have.",
+   "answer_grade": "answered-repo",
+   "discovery": "closed; the collector's first artefact should prove the header capture",
+   "asked_by": "CD-04, CD-05, gap G-08",
+   "sources": [
+    {
+     "label": "this register's own reads file",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/official_reads.json"
+    }
+   ]
+  }
+ ]
+}

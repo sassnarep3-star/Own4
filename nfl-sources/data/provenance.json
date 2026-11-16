@@ -1,0 +1,150 @@
+{
+ "dataset": "nfl_sources_provenance",
+ "title": "Every input and output, hashed, with the official page behind each input",
+ "built_utc": "2026-11-16",
+ "registration_commit": "a4f26f5",
+ "excluded_from_outputs": [
+  "verification.json (the gate's own record, written after this file)"
+ ],
+ "how_to_recheck": "python3 nfl-sources/engine/verify.py  -> check C3 recomputes every input hash. A transcription edited by hand after this file was written fails the build.",
+ "inputs": {
+  "raw/week1.txt": {
+   "sha256": "4c12df38691b6698bde95454809fad464300f9e5ee80cac2351e5b21b2e0206b",
+   "bytes": 1845,
+   "data_lines": 16,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-1"
+  },
+  "raw/week2.txt": {
+   "sha256": "996794570b4f2e871e860ca907956fecd4f2a21b6d55e00d881c28e6a4bce564",
+   "bytes": 1814,
+   "data_lines": 16,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-2"
+  },
+  "raw/week3.txt": {
+   "sha256": "5944732f14214cbd07fa8bfc0f1d2b92419de9925ef464fbef9217feccf2ff55",
+   "bytes": 1847,
+   "data_lines": 16,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-3"
+  },
+  "raw/week4.txt": {
+   "sha256": "c15aee0e0fbb8a6add3e603824dd4a4be18b1ada1585d2c764659900a923517a",
+   "bytes": 1778,
+   "data_lines": 16,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-4"
+  },
+  "raw/week5.txt": {
+   "sha256": "c58c14413ecab3fe052f2e9a8c50317ed7a65ba3e41a8179c9f8ef48f65d76ea",
+   "bytes": 1743,
+   "data_lines": 15,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5"
+  },
+  "raw/week6.txt": {
+   "sha256": "785167e9f438d249ab25f625e3aff6f51be77d8960c4501c5e78c7a8a4a861fb",
+   "bytes": 1657,
+   "data_lines": 14,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-6"
+  },
+  "raw/week7.txt": {
+   "sha256": "e3e694a39ffb67dc74e3dd4b1f2bae1ca352286f5dffbe91d49b25880a737d5e",
+   "bytes": 1659,
+   "data_lines": 14,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-7"
+  },
+  "raw/week8.txt": {
+   "sha256": "7f4fddba209180c3fc438ac550fc9e085672c195080c5bf3706a2e0faa266e3a",
+   "bytes": 1624,
+   "data_lines": 14,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-8"
+  },
+  "raw/week9.txt": {
+   "sha256": "2be9564d3362fd16de17e246f3ac726d44781f5a44eba446964040fd9262be9d",
+   "bytes": 1729,
+   "data_lines": 15,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-9"
+  },
+  "raw/week10.txt": {
+   "sha256": "def47c1dfbaa03f41b483062f70449ccfb071772452ed211ee2bccb820b89ea4",
+   "bytes": 1806,
+   "data_lines": 12,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  "raw/week11.txt": {
+   "sha256": "6903033ac52643ddbeefa3d33e7f33362f2f3bea0f19fc983d63130352749c5c",
+   "bytes": 1938,
+   "data_lines": 13,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  "raw/standings.txt": {
+   "sha256": "c784cbea5c4a1c8bdcb1b33a11bd38080c0196264a04c6fec915561536dee28e",
+   "bytes": 1084,
+   "data_lines": 32,
+   "official_source": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  "raw/byes.txt": {
+   "sha256": "01c7dc3870cb346f7d63aaf307f4251add8bace92ec0f4218908f8aacc6593a5",
+   "bytes": 818,
+   "data_lines": 21,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-5 (and the week pages for 6-10)"
+  },
+  "raw/venues11.txt": {
+   "sha256": "76d4e56984b31eb97955999a645d57f65107841f1e7df8b6deb481dacc01487e",
+   "bytes": 1556,
+   "data_lines": 13,
+   "official_source": "13 official Week 11 game-centre pages (Game Info block); one URL per row"
+  }
+ },
+ "outputs": {
+  "data/_model_state.json": {
+   "sha256": "0a9c99a0147d712dd8c8181bf2b95555467446bcb35ad030c11b26e20f3b6fc8",
+   "bytes": 8124
+  },
+  "data/backtest.json": {
+   "sha256": "140d2ea14dfeaa1b9e04abce93f73fbc4720fe033896cb53ec527e8cd4b9d2ce",
+   "bytes": 32945
+  },
+  "data/correlations.json": {
+   "sha256": "afaf00587cd1f52e97111ecd2cfb5ca5670c2b996913d0596e01159b0d3aacb0",
+   "bytes": 5184
+  },
+  "data/flags.json": {
+   "sha256": "03e775f5fdd4f6f3f04dbeb15847eb3c48ad25add7bea60fda66eb14bd8caf0e",
+   "bytes": 8445
+  },
+  "data/forecast_register.json": {
+   "sha256": "29a8b87eadd3a57db8bdf824e0daf47468e654352c47d7a392bd236eaff21374",
+   "bytes": 171375
+  },
+  "data/lines.json": {
+   "sha256": "10944cf74fe751415c5f9e29db14d8ba1e41d8086eea770b430fc3d0ed637ffa",
+   "bytes": 33237
+  },
+  "data/model.json": {
+   "sha256": "08dcf4faa80ae1401972c9250e03cb502cec99b6d9ce21bdbf90eff26eccf894",
+   "bytes": 9791
+  },
+  "data/questions.json": {
+   "sha256": "77b43474b5abc3a3e48f70672fca7067bd486f50a495bc7f49818445e71c9d83",
+   "bytes": 5293
+  },
+  "data/requirements.json": {
+   "sha256": "ea84bca889e25f3045f82d391ef81ed59ccb40d201565e69880f01fdb64b7334",
+   "bytes": 33591
+  },
+  "data/results.json": {
+   "sha256": "8e875cefff94fc3fc8cfcb0ccc7b3df4e31ba95316218ca0a7d711e130da4a46",
+   "bytes": 89578
+  },
+  "data/strategies.json": {
+   "sha256": "632cbaded89cc601a517e069927a48b869fc9c81505d1c001742d7934224687e",
+   "bytes": 7160
+  },
+  "data/suggestions.json": {
+   "sha256": "514a5ea5fae188a82778ccdabd151e886d296ae509acc32d797f92051dee0cf3",
+   "bytes": 10942
+  },
+  "data/venues.json": {
+   "sha256": "9441b26b3abdd4721047d67add79742b62d49542da7894d2b06a001313b01422",
+   "bytes": 3417
+  }
+ }
+}

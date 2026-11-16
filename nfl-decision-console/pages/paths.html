@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision paths · NFL Decision Console · NFL Decision Console</title>
+<meta name="description" content="Three coherent ways forward, gates first">
+<link rel="stylesheet" href="../assets/console.css">
+</head><body>
+<header class="top"><div class="wrap">
+<a class="home" href="../index.html">NFL Decision Console</a>
+<span class="asof">data as of <b>2026-11-16 · reads 01:36 · inventory at commit e9396b3</b> · rendered by <code>engine/build_site.py</code></span>
+</div></header>
+<nav class="wrap tabs"><a class="" href="../index.html">Decision console</a><a class="" href="../pages/suggestions.html">Suggestions</a><a class="" href="../pages/questions.html">Questions &amp; answers</a><a class="" href="../pages/gaps.html">Missing information</a><a class="cur" href="../pages/paths.html">Decision paths</a><a class="" href="../pages/site-improvements.html">Site improvements</a><a class="" href="../pages/consolidation.html">Register census</a><a class="" href="../pages/corpus.html">Corpus arithmetic</a><a class="" href="../pages/evidence.html">Official reads</a><a class="" href="../pages/executive-summary.html">Executive summary</a><a class="" href="../pages/sources.html">Sources</a><a class="" href="../pages/flagged.html">⚑ Flagged for review</a></nav>
+<main class="wrap">
+<p class="crumb"><a href="../index.html">console home</a> · Decision Console · Decision paths</p>
+
+<h1>Decision paths</h1>
+<p class="lede">pick ONE path (paths differ on provenance and money, not on quality of code), then work its steps in order. A step may not start until its gate is cleared by its number. Nothing here is implemented by this namespace.</p>
+<div class="paths">
+<div class="pathcard">
+<h3>PATH-A — Official-only, price-free (no licence, no third-party numbers)</h3>
+<p class="dim">Publish model probabilities, availability indices and a skill-only leaderboard computed from league pages and from game books used as internal labels. No residual column, no CLV, no ROI, no paid rewards.</p>
+<dl>
+<dt>First step</dt><dd>Stand up the collector (CD-04 A) so availability becomes a dated series.</dd>
+<dt>Gate that blocks it</dt><dd>Two or more dated captures per game week exist for 4 consecutive weeks.</dd>
+<dt>Number that clears it</dt><dd><b>≥ 8 captures in a 4-week window, each with a hash, 0 missing required fields, drift alarm silent</b></dd>
+<dt>Then, in order</dt><dd><ol><li>CD-03 A terms note → game-book label table for every fixture reachable</li><li>CD-06 unit + gate definition → corpus page rebuilt from the standings identity</li><li>CD-07 join → designation play rate with Wilson intervals and n</li><li>CD-10/CD-14 skill division of the leaderboard, provisional flag until the window closes</li></ol></dd>
+<dt>It forbids</dt><dd>any &#x27;market&#x27; word in a title; any correlation value computed from a non-official number; any payout</dd>
+<dt>Cost</dt><dd>engineering only</dd>
+<dt>Earliest leaderboard</dt><dd>a provisional skill division as soon as 148 fixtures are graded — i.e. today&#x27;s corpus already exceeds a 100-fixture floor if the owner lowers the gate</dd>
+<dt>Risk</dt><dd>the site can never answer &#x27;is our line better than the market&#x27;s&#x27;, which is the question the origination programme exists to answer</dd>
+</dl>
+<p class="src"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">standings read</a> · <a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">live report</a></p>
+</div>
+<div class="pathcard">
+<h3>PATH-B — Official + licensed prices (the full programme)</h3>
+<p class="dim">Everything in PATH-A plus the price-snapshot store, fair/market/difference columns, residual published on a schedule, CLV escrow, two-stage leaderboard and rewards.</p>
+<dl>
+<dt>First step</dt><dd>Answer CD-02 with option A and name the vendor; store its terms in git with a hash.</dd>
+<dt>Gate that blocks it</dt><dd>A licence exists and the vendor&#x27;s history is downloadable at the granularity the snapshot store needs (open + close per market per game).</dd>
+<dt>Number that clears it</dt><dd><b>≥ 1 season of closing lines downloadable before the first residual is published, and the ingest must reproduce the archive&#x27;s own row count within 0 variance</b></dd>
+<dt>Then, in order</dt><dd><ol><li>snapshot store with opening/closing numbers per market</li><li>residual column appears on the origination page</li><li>two-stage leaderboard: proper-score qualification then prospective CLV escrow</li><li>rewards denominated in the escrow, never in the backtest</li></ol></dd>
+<dt>It forbids</dt><dd>paying on any window shorter than the registered prospective window; mixing vendor and scraped prices in one column</dd>
+<dt>Cost</dt><dd>money + a collector + a terms review</dd>
+<dt>Earliest leaderboard</dt><dd>the season after the archive starts, because CLV must be prospective</dd>
+<dt>Risk</dt><dd>a dependency that can be killed by a budget line; every downstream claim inherits the vendor&#x27;s provenance</dd>
+</dl>
+<p class="src"><a href="https://www.nfl.com/odds/" target="_blank" rel="noopener">price-source probes, both 404</a></p>
+</div>
+<div class="pathcard">
+<h3>PATH-C — Official + third-party archive, labelled on every row (no money)</h3>
+<p class="dim">PATH-A, plus research-grade residuals computed from a third-party price archive that is visibly not official, kept out of the public tables&#x27; titles.</p>
+<dl>
+<dt>First step</dt><dd>Answer CD-02 with option C and write the labelling rule into the publication contract: every row carrying a third-party number carries the label in the same row.</dd>
+<dt>Gate that blocks it</dt><dd>The verifier enforces the label: a price-bearing row without a provenance label fails the build.</dd>
+<dt>Number that clears it</dt><dd><b>100 % of rows with a non-official number carry a provenance field; a CI test that fails on 0 rows missing it</b></dd>
+<dt>Then, in order</dt><dd><ol><li>same sequence as PATH-A, with residuals added as an internal grade only</li><li>promote a residual to the public site only if the owner later relaxes the rule</li></ol></dd>
+<dt>It forbids</dt><dd>the word &#x27;market&#x27; in a public title; a reward paid on third-party numbers; silence about provenance</dd>
+<dt>Cost</dt><dd>labelling discipline only</dd>
+<dt>Earliest leaderboard</dt><dd>as PATH-A, plus an internal residual track</dd>
+<dt>Risk</dt><dd>a reader cannot tell which numbers the league published and which it did not — the label is the only defence, so the enforcement has to be a build failure, not a note</dd>
+</dl>
+<p class="src"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/verify_site.py" target="_blank" rel="noopener">this namespace&#x27;s own verifier, which is the enforcement mechanism proposed</a></p>
+</div></div>
+
+</main>
+<footer class="wrap"><p><b>Provenance rule.</b> Every row on this page is either transcribed from a
+league page read in this session (link in the Source column) or computed by an engine in this namespace
+from a committed artefact. Values that could not be confirmed are blank and flagged on
+<a href="../pages/flagged.html">⚑ Flagged for review</a>. No price, line or payout appears anywhere on
+this site because no official price source exists. This is analytical research, not wagering advice.</p>
+<p><a href="https://github.com/sassnarep3-star/Own4">repository ↗</a> ·
+<a href="../index.html">root dashboard ↗</a></p></footer>
+</body></html>

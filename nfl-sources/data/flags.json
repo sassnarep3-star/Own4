@@ -1,0 +1,114 @@
+{
+ "dataset": "nfl_sources_flags",
+ "title": "Flagged for review: irregularities, discrepancies and deliberate blanks",
+ "built_utc": "2026-11-16",
+ "rule": "Nothing on this list blocks publication. Each item says what was observed, what was not done about it, and where to look. Items marked 'naming discrepancy' are transcribed as printed and not corrected: a site that silently fixes the source cannot be audited.",
+ "n_rows": 15,
+ "rows": [
+  {
+   "id": "FL-01",
+   "title": "The inherited results feed is 73% unverified",
+   "detail": "nfl-book/data/results_feed.json marks 105 of 137 rows aggregate_only, i.e. not re-read page by page. This namespace re-read all 148 and found every shared row correct, so the feed is right but was not certified. Reconciliation now exists.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-book/",
+   "status": "resolved by this read (reconciliation published)"
+  },
+  {
+   "id": "FL-02",
+   "title": "The brief's 136-game log is exactly weeks 1-9; the site's corpus is 148 because week 10 is also final",
+   "detail": "Resolved in the source's favour: 16+16+16+16+15+14+14+14+15 = 136 FINAL games across weeks 1-9, and 12 more final games in week 10 (PIT at CIN and LAC at BAL were still live/unplayed at the read). Peer pages that describe a 136-game archive are therefore describing weeks 1-9, and are consistent with this read; a page that says 137 is off by one.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "status": "resolved (arithmetic on official counts)"
+  },
+  {
+   "id": "FL-03",
+   "title": "Arrowhead Stadium is printed as 'ARROWHEAD STADIUM' on the Week 11 game centre",
+   "detail": "The game centre prints 'StadiumSTADIUMARROWHEAD STADIUM' for the Cardinals at Chiefs fixture, while the ticket link on the same page names 'GEHA Field at Arrowhead Stadium'. Transcribed exactly as the Game Info block prints it; the discrepancy is recorded, not corrected.",
+   "source_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "status": "flagged: naming discrepancy"
+  },
+  {
+   "id": "FL-04",
+   "title": "Peer availability captures disagree with each other: 347 rows vs 279 rows, 107 rows for one",
+   "detail": "Two peer namespaces publish different totals for the same Week 10 report. nfl-availability-desk/data/availability_snapshot_2026-11-15.csv holds 347 player rows across 28 clubs with 171 game-status cells filled; the oldest capture in nfl-book holds 107 rows and states on its face that 6 of 8 page chunks were never read. The owner's brief cites 279 rows / 2 no-injury sections as a later state of the same page, and 254 as an earlier one. A page regenerated through the week produces different counts at different clocks, so the counts are not necessarily wrong — but nothing in the repository shows which clock produced which number. Needs one owner-ordered re-capture with a timestamp, not a fourth number.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "status": "flagged: peer counts disagree (SUG-08, Q12)"
+  },
+  {
+   "id": "FL-05",
+   "title": "The model's Brier skill interval includes zero",
+   "detail": "The walk-forward Brier skill vs the coin-flip baseline is 0.1198 with a week-cluster 95% interval of [-0.0148, 0.2635]. The accuracy-vs-0.500 interval clears, but as the page shows, a model-free better-record rule also clears it. By the registered gate the model is NOT skilful yet.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html",
+   "status": "flagged: gate not cleared"
+  },
+  {
+   "id": "FL-06",
+   "title": "The record-only control is not separable from the model",
+   "detail": "S3 (pick the better win-loss record) beats the model on 25 games and the model beats it on 25; the paired accuracy difference is +0.026 with an interval of [-0.037, +0.085]. Any claim that the ratings add value is unsupported on this sample.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html",
+   "status": "flagged: no separation"
+  },
+  {
+   "id": "FL-07",
+   "title": "An ARROWHEAD-style naming issue on WA/Washington: game centre prints 'NORTHWEST STADIUM'",
+   "detail": "The Commanders' Week 11 game centre prints 'StadiumSTADIUMNORTHWEST STADIUM', a former name, while the ticket link on the same page uses the current sponsorship name. Transcribed as printed.",
+   "source_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+   "status": "flagged: naming discrepancy"
+  },
+  {
+   "id": "FL-08",
+   "title": "RELIANT STADIUM is printed for a 2026 Texans home game",
+   "detail": "The Week 11 Colts at Texans game centre prints 'StadiumSTADIUMRELIANT STADIUM'. That is the stadium's former name; the page's own ticket link names NRG Stadium. Transcribed as printed and flagged, not silently corrected.",
+   "source_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "status": "flagged: naming discrepancy"
+  },
+  {
+   "id": "FL-09",
+   "title": "The NFL publishes no 'neutral site' designation",
+   "detail": "International fixtures are printed inside an 'International Game' section on the week page and the game centre prints a foreign city. This namespace uses that printed section as its only source for the 0-home-field flag and says so on every row; it never claims the league calls a game neutral.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "flagged: sourced, but a derivation"
+  },
+  {
+   "id": "FL-10",
+   "title": "Rest is the strongest signal found and it is not in the baseline model",
+   "detail": "CR-04: rest-day differential vs home margin, r = 0.3727, n = 132, 95% CI [0.216, 0.511]. 63% of games have zero rest differential, so the correlation is carried by 49 games; leave-one-week-out ranges from 0.329 to 0.426, and the sign split is monotone (+7.48 mean margin with a home rest edge, -4.65 against). Registered as SUG-05, NOT slipped into the baseline.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-sources/pages/correlations.html",
+   "status": "flagged: candidate, untested"
+  },
+  {
+   "id": "FL-11",
+   "title": "Two Week 10 games are unfinished, so the corpus is 148 not 150",
+   "detail": "PIT at CIN was printed as a live first-quarter game and LAC at BAL was printed as unplayed when read. Both are excluded from every metric with no score recorded. A later reader will see a different corpus size for the same code; this is expected and is why the read timestamp is on every page.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "status": "informational (time-dependent)"
+  },
+  {
+   "id": "FL-12",
+   "title": "The assumed -110 price overstates any real return",
+   "detail": "The staking figures are computed at a flat -110 for consistency with the inherited workspaces. A winner-picking strategy is settled at a moneyline, and the mean fair price of S1's own picks is about -273, so the 'ROI' at -110 is not a claim about money. It is not ranked anywhere.",
+   "source_url": "https://sassnarep3-star.github.io/Own4/nfl-sources/pages/backtest.html",
+   "status": "flagged: label on every row"
+  },
+  {
+   "id": "FL-13",
+   "title": "The Week 11 bye list could not be confirmed from the page read",
+   "detail": "The Week 11 page's 'Teams on Bye' block was not rendered in the read window, so no bye list is asserted for Week 11 even though the fixture list implies six idle clubs. Asserted nowhere; flagged.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "flagged: unread"
+  },
+  {
+   "id": "FL-14",
+   "title": "The tie rule for accuracy is a choice, not a fact",
+   "detail": "nfl.com counts a tie as half a win in standings; this site excludes ties from accuracy and publishes the count (2 tie games in the corpus). Different choices would move accuracy by up to one game.",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "status": "flagged: policy (Q09)"
+  },
+  {
+   "id": "FL-15",
+   "title": "CR-05 prints group means with n = 8 and no r",
+   "detail": "Eight international games is too few for a correlation. The group means are shown because they are arithmetic on official scores; no coefficient is printed because it would be noise with a decimal point. This is a deliberate blank.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "status": "informational"
+  }
+ ]
+}

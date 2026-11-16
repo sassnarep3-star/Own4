@@ -1,0 +1,233 @@
+{
+ "dataset": "decision_console_gaps",
+ "title": "Information we do not have — each gap names the route that would close it and who can close it",
+ "built_utc": "2026-11-16",
+ "rule": "a gap is 'official-blocked' when no league page read in this repository carries the item, and 'owner-blocked' when the answer is a decision rather than a fact. Suggestions are made here to discover missing information; none of the routes below is implemented by this namespace.",
+ "rows": [
+  {
+   "id": "G-01",
+   "item": "Opening and closing prices for every market we originate",
+   "why_needed": "without it there is no residual, no CLV, no vig decomposition, no ROI, and no reward payout",
+   "official_source": "none found: nfl.com/odds/ and nfl.com/betting/ both serve the league 404 page (read 2026-11-16)",
+   "route": "owner picks CD-02 A (licence), B (decline) or C (labelled archive); if C, store the archive with its own hash and never title it 'market'",
+   "owner": "budget + terms review",
+   "cost": "licence: money; C: one storage decision",
+   "status": "owner-blocked",
+   "unblocks": "CD-02, CLV escrow, price-snapshot store",
+   "sources": [
+    {
+     "label": "probe",
+     "url": "https://www.nfl.com/odds/"
+    }
+   ]
+  },
+  {
+   "id": "G-02",
+   "item": "A verified, club-by-club depth-chart register",
+   "why_needed": "the '2nd/3rd/4th string' deficiency model needs an official ranking, and 1 of 32 club paths probed so far 404s",
+   "official_source": "unverified beyond one club",
+   "route": "scripted sweep of all 32 club paths, recording HTTP status and the printed 'as of' date per club; publish the table even when it says 32 × absent",
+   "owner": "any session with a collector",
+   "cost": "one script run + a page",
+   "status": "official-blocked until swept",
+   "unblocks": "CD-08, the matchup matrix",
+   "sources": [
+    {
+     "label": "the single club sampled",
+     "url": "https://www.nfl.com/teams/detroit-lions/depth-chart/"
+    }
+   ]
+  },
+  {
+   "id": "G-03",
+   "item": "An official per-player snap count source",
+   "why_needed": "'model depth from playing time, not jersey order' is unimplementable without it",
+   "official_source": "not found in the four chunks of the official Game Summary read; defensive tables carry TKL/AST/SK/TFL/QH/IN/PD but no snaps",
+   "route": "read all chunks of ≥3 game books from raw bytes; probe Next Gen Stats player tables; if both fail, publish that the playing-time route is officially closed and switch the model to starter/no-starter facts",
+   "owner": "collector session",
+   "cost": "one afternoon of reads",
+   "status": "open-needs-new-source",
+   "unblocks": "CD-07, CD-08",
+   "sources": [
+    {
+     "label": "the game book read",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "G-04",
+   "item": "Raw response bytes with a server-side timestamp for every capture",
+   "why_needed": "every 'clock time' in this repository is a client-side approximation, and an empty cell cannot be distinguished from a rendering loss",
+   "official_source": "not available through the read path used by agent sessions (no headers returned)",
+   "route": "CD-04 option A + CD-05: the collector stores payload + sha256 + its own UTC stamp and, where a server Date header exists, that too",
+   "owner": "infra decision",
+   "cost": "storage location + retention policy",
+   "status": "owner-blocked",
+   "unblocks": "point-in-time ledger, drift alarms, delta-not-level claims",
+   "sources": [
+    {
+     "label": "this namespace's read log and its stated limitation",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/official_reads.json"
+    }
+   ]
+  },
+  {
+   "id": "G-05",
+   "item": "Terms on which the game-book-derived tables may be published",
+   "why_needed": "the document restricts itself to media coverage; two peer namespaces already publish transcribed tables",
+   "official_source": "printed on the artefact itself",
+   "route": "write the permission posture into the publication contract (CD-03 A), or ask the league (B)",
+   "owner": "owner/legal",
+   "cost": "a paragraph, or a letter",
+   "status": "owner-blocked",
+   "unblocks": "everything built on game books",
+   "sources": [
+    {
+     "label": "the artefact carrying the restriction",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "G-06",
+   "item": "Game-book coverage for past seasons (the backfill question)",
+   "why_needed": "a multi-season corpus is the only way to give a one-bet-per-fixture strategy 300 graded games under the peer floor, and the label source is the game book",
+   "official_source": "untested — a guessed 2025 slug 404s, which proves nothing either way",
+   "route": "take 5 real 2025 fixture slugs from the official 2025 schedule page, check each game centre for a game-book link, record static URL + fetch time",
+   "owner": "collector session",
+   "cost": "5 reads",
+   "status": "open-needs-new-source",
+   "unblocks": "CD-06 option B",
+   "sources": [
+    {
+     "label": "league schedule index",
+     "url": "https://www.nfl.com/schedules/"
+    }
+   ]
+  },
+  {
+   "id": "G-07",
+   "item": "Operator rules for void/push/rewrite of parlays and props",
+   "why_needed": "a combo cannot be settled without them, and the joint-evidence gate requires them in writing",
+   "official_source": "none — no league page states an operator's settlement rule",
+   "route": "name one operator whose terms the register will use, archive the terms text with a hash and a date, and re-archive on change",
+   "owner": "owner picks the operator",
+   "cost": "one archive",
+   "status": "owner-blocked",
+   "unblocks": "CD-09",
+   "sources": [
+    {
+     "label": "peer register recording the same absence",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/flags.json"
+    }
+   ]
+  },
+  {
+   "id": "G-08",
+   "item": "Precise capture instants (seconds, not minutes)",
+   "why_needed": "'publish the delta, never the level' and 'store every read with its clock time' both depend on knowing WHEN",
+   "official_source": "not exposed to an agent session",
+   "route": "same as G-04; until then, publish an ordering + window and say so",
+   "owner": "infra",
+   "cost": "none beyond the collector",
+   "status": "open-needs-new-source",
+   "unblocks": "QA-07, CD-04",
+   "sources": [
+    {
+     "label": "this namespace's timestamp rule",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/official_reads.json"
+    }
+   ]
+  },
+  {
+   "id": "G-09",
+   "item": "The league's own injury-reporting policy document, dated",
+   "why_needed": "the capture schedule should not be guessed from third-party explainers that disagree",
+   "official_source": "not found on the paths read; searches this session returned only third-party accounts with conflicting deadlines",
+   "route": "ask for the policy PDF reference from the transactions/operations hub the peer registers cite, and store whatever the collector finds with a hash; otherwise define cadence empirically from captures",
+   "owner": "collector session",
+   "cost": "one sweep",
+   "status": "open-needs-new-source",
+   "unblocks": "QA-07",
+   "sources": [
+    {
+     "label": "live report",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  },
+  {
+   "id": "G-10",
+   "item": "A pre-kickoff roof/surface designation",
+   "why_needed": "totals and passing models want it before the game, and the game book only tells us after",
+   "official_source": "game-book header only (post-game) for the fixture read",
+   "route": "probe each club's official stadium page for a roof field and check whether the game centre exposes it before kickoff on an upcoming fixture",
+   "owner": "collector session",
+   "cost": "32 probes + 1 upcoming game centre",
+   "status": "open-needs-new-source",
+   "unblocks": "CD-13, the roof/weather overlay",
+   "sources": [
+    {
+     "label": "post-game header read this session",
+     "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+    }
+   ]
+  },
+  {
+   "id": "G-11",
+   "item": "A multi-season archive of designations joined to inactives",
+   "why_needed": "the calibration of Out/Questionable/Doubtful needs thousands of rows, not one fixture",
+   "official_source": "game books + reports for past weeks, subject to G-06 and G-05",
+   "route": "if 2025 game books are reachable, build the join table once and publish play rate per designation with intervals and n",
+   "owner": "collector session",
+   "cost": "the largest single job on this board",
+   "status": "open-needs-new-source",
+   "unblocks": "CD-07",
+   "sources": [
+    {
+     "label": "the join demonstrated on one fixture",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/gamebook_evidence.json"
+    }
+   ]
+  },
+  {
+   "id": "G-12",
+   "item": "Reviewer verdicts, written in git",
+   "why_needed": "the brief's whole workflow — review suggestions, choose a path, then implement — requires a place a verdict exists as a fact",
+   "official_source": "not a league matter",
+   "route": "adopt decisions.json in this namespace (or in the canonical namespace CD-01 chooses): one row per suggestion id, verdict, decided_by, decided_utc, commit hash; the landing-page counter reads it",
+   "owner": "owner",
+   "cost": "one file, one commit per decision",
+   "status": "owner-blocked",
+   "unblocks": "CD-01, CD-15, every implementation gate",
+   "sources": [
+    {
+     "label": "this register, whose verdict column is empty by design",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/suggestions.json"
+    }
+   ]
+  },
+  {
+   "id": "G-13",
+   "item": "An official name-to-jersey-number map per club per week",
+   "why_needed": "the availability report prints names without numbers and the game book prints '<initial>.<surname> <number>', so the two documents can only be joined on surname; on one club that makes 'A.Brown' (lineups) and 'B.Brown' (Not Active) the same key",
+   "official_source": "the per-club roster page carries numbers; it was not read this session and its historical availability is untested",
+   "route": "capture the club roster page with the same collector run as the report, keyed by club and date, and join on (number) rather than (surname); publish the join failure rate alongside every availability table",
+   "owner": "collector session",
+   "cost": "one extra page per club per capture",
+   "status": "open-needs-new-source",
+   "unblocks": "CD-07's join becomes keyed; the 'who replaced whom' claim stops being name-matched",
+   "sources": [
+    {
+     "label": "the join its absence forces (computed)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/derived/label_join.json"
+    },
+    {
+     "label": "the report that prints no numbers",
+     "url": "https://www.nfl.com/injuries/"
+    }
+   ]
+  }
+ ]
+}

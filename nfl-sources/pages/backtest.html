@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Backtest: 116 forecasts, refitted week by week — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html" class="here">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Backtest: 116 forecasts, refitted week by week</h1><p class="lede">The model never sees a game it is predicting. Every number here is recomputable from the official week pages linked in the protocol paragraph.</p>
+<div class="cards">
+<div class="card"><div class="k">Forecasts</div><div class="v">116</div><div class="s">weeks 3–10, refit weekly</div></div>
+<div class="card"><div class="k">Brier</div><div class="v">0.2201</div><div class="s">coin flip 0.2500</div></div>
+<div class="card"><div class="k">Skill (CI)</div><div class="v">0.120</div><div class="s">[-0.015, 0.263]</div></div>
+<div class="card"><div class="k">Graded</div><div class="v">116</div><div class="s">G1 needs 300</div></div>
+</div>
+<p>Protocol: for each week 3–10 the ratings are refitted on games from weeks before that week only, then the
+forecast is made and the game is graded from the official score. The protocol was frozen in
+<code>PREREGISTRATION.md</code> at commit <code>a4f26f5</code> before any of these numbers existed.
+Source for every result: the official week pages, week by week — <a href="https://www.nfl.com/schedules/2026/by-week/week-3">week 3</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-4">week 4</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-5">week 5</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-6">week 6</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-7">week 7</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-8">week 8</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-9">week 9</a>, <a href="https://www.nfl.com/schedules/2026/by-week/week-10">week 10</a>.</p>
+<h2 id="scores">Proper scores</h2><table><thead><tr>
+<th>Metric</th>
+<th class="num">Value</th>
+<th>Reading</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>Brier (lower is better)</td><td class="num">0.2201</td><td>coin flip 0.2500, home-rate prior 0.2609</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Brier skill vs coin flip</td><td class="num">0.1198</td><td>week-cluster 95% CI [-0.0148, 0.2635]</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Brier skill vs the home-team prior</td><td class="num">0.1566</td><td>the prior a lazy model would use</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Log loss</td><td class="num">0.6279</td><td>same ordering as Brier here</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Mean absolute error, margin</td><td class="num">9.20 pts</td><td>RMSE 12.24</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Mean absolute error, total</td><td class="num">11.45 pts</td><td>n = 116</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<h2 id="paired">Model against control, paired on the same fixtures</h2>
+<p>If this interval contains 0, the model has not been shown to beat a trivial picking-the-better-record rule on this sample, whatever its absolute accuracy. Paired difference <strong>+0.0261</strong>, interval [-0.0371, +0.0855], on 115
+fixtures where the two strategies disagreed 25 times.</p>
+<h2 id="strategies">Strategies at a glance</h2><table><thead><tr>
+<th>Strategy</th>
+<th class="num">n</th>
+<th class="num">Accuracy</th>
+<th class="num">95% CI (weeks)</th>
+<th class="num">Brier</th>
+<th class="num">Placebo p</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>S1 model favourite</td><td class="num">115</td><td class="num">67.8%</td><td class="num">[0.608, 0.755]</td><td class="num">0.2201</td><td class="num">0.0005</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S2 high confidence (p ≥ 0.65)</td><td class="num">61</td><td class="num">70.5%</td><td class="num">[0.600, 0.823]</td><td class="num">0.2005</td><td class="num">0.0020</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S3 better-record CONTROL</td><td class="num">115</td><td class="num">65.2%</td><td class="num">[0.570, 0.730]</td><td class="num">0.2201</td><td class="num">0.0010</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<p class="tiny">Placebo p-values come from shuffling the outcome labels within the sample; a small p means the
+score is unlikely to arise from a strategy that carries no information. S3 is a control and can never be
+promoted.</p>
+<h2 id="calibration">Calibration</h2><table><thead><tr>
+<th>Probability bin</th>
+<th class="num">n</th>
+<th class="num">Mean predicted</th>
+<th class="num">Observed</th>
+<th class="num">Gap</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>0.00-0.40</td><td class="num">37</td><td class="num">27.9%</td><td class="num">29.7%</td><td class="num">+0.019</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>0.40-0.50</td><td class="num">20</td><td class="num">45.1%</td><td class="num">25.0%</td><td class="num">-0.201</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>0.50-0.60</td><td class="num">20</td><td class="num">53.7%</td><td class="num">70.0%</td><td class="num">+0.163</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>0.60-0.70</td><td class="num">12</td><td class="num">64.4%</td><td class="num">41.7%</td><td class="num">-0.227</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>0.70-1.01</td><td class="num">26</td><td class="num">80.2%</td><td class="num">69.2%</td><td class="num">-0.109</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<p class="tiny">The 0.50–0.60 and 0.60–0.70 bins are where the model is least well behaved, in opposite
+directions. With 20 and 12 fixtures those are not conclusions, but they are the reason a 0.65 confidence
+threshold is not treated as a filter until the sample grows.</p>
+<h2 id="luck">Removal of luck</h2>
+<div class="warnbox"><strong>The panel the brief asks for, built out of what actually exists.</strong>
+<ul>
+<li><strong>Control baselines on the same run:</strong> coin flip 0.2500 Brier, home-rate prior 0.2609,
+record-only rule 0.6522 accuracy. A strategy is only interesting relative to these, never in absolute terms.</li>
+<li><strong>Fade test:</strong> inverting S1 scores 0.3217; inverting S2 scores 0.2951. A symmetric-noise strategy
+would score near 50% both ways.</li>
+<li><strong>Placebo label shuffle:</strong> p = 0.0005 (S1) and p = 0.0010 (S3).</li>
+<li><strong>Week-cluster intervals, not fixture-level ones:</strong> a fixture-level interval would be roughly
+half as wide and would wrongly exclude zero.</li>
+<li><strong>Break-even price:</strong> S1's own picks have a mean fair American price of -272.6, which
+implies a break-even hit rate of 73.2%; it delivered 67.8%.</li>
+<li><strong>What is still luck:</strong> across 115 fixtures the model finished 3 games ahead
+of the rule that ignores it — 25 fixtures decided the whole comparison. Gate G1 wants 300 graded games
+before a gap that small is allowed to count, so the verdict is "not separable", not "slightly better".</li>
+</ul></div>
+<h2 id="gates">Validation gates</h2><table><thead><tr>
+<th>Gate</th>
+<th class="num">Result</th>
+<th>Detail</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>G1 coverage</td><td class="num"><span class="chip blocked">fail</span></td><td>needs 300 graded fixtures, has 116</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G2 signal</td><td class="num"><span class="chip blocked">fail</span></td><td>Condition (a) is nearly free on this sample: the historical home-favourite base rate is high, so picking favourites beats 0.500 without any skill. Condition (b) is the real test and it does NOT clear.</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G2b naive accuracy trap</td><td class="num"><span class="chip na">not yet</span></td><td>A model-free rule (pick the club with the better win-loss record) scores within a few points of the model. Accuracy against 0.500 cannot separate them; only the paired difference can, and its interval is published.</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G4 placebo</td><td class="num"><span class="chip met">pass</span></td><td>S1 p = 0.0005; S2 p = 0.0020; S3 p = 0.0010 — every registered strategy clears the label-shuffle test</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G5 staking</td><td class="num"><span class="chip blocked">fail</span></td><td>no citable price source: every ROI is at an assumed price</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G6 joint evidence</td><td class="num"><span class="chip blocked">fail</span></td><td>no validated joint probability and no operator void/push rules</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>G7 demotion</td><td class="num"><span class="chip na">not yet</span></td><td>nothing is live: G1 and G5 both block promotion</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<h2 id="breakeven">Break-even arithmetic (no market price exists, so this is our own fair price)</h2><table><thead><tr>
+<th>Strategy</th>
+<th class="num">Mean fair American price of own picks</th>
+<th class="num">Break-even hit rate at that price</th>
+<th class="num">Observed hit rate</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>S1 model favourite</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">67.8%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S2 high confidence (p ≥ 0.65)</td><td class="num">-397.6</td><td class="num">79.9%</td><td class="num">70.5%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S3 better-record CONTROL</td><td class="num">-272.6</td><td class="num">73.2%</td><td class="num">65.2%</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+</main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

@@ -1,0 +1,1251 @@
+{
+ "dataset": "nfl_sources_week11_lines",
+ "title": "Our own Week 11 lines, originated side -> total -> moneyline, two dated snapshots",
+ "built_utc": "2026-11-16",
+ "preregistration": "nfl-sources/PREREGISTRATION.md (registration commit a4f26f5)",
+ "source": {
+  "schedule_page": "https://www.nfl.com/schedules/2026/by-week/week-11",
+  "venue_source": "the Game Info block of each fixture's official game-centre page",
+  "read_utc": "2026-11-16"
+ },
+ "snapshot_policy": "'open' is the model trained through week 9 (i.e. the line we would have posted before Week 10 was played); 'update' is trained through week 10. Both are published, and the movement between them is published, so a later reader can see what the Week 10 results changed.",
+ "n_fixtures": 13,
+ "n_market_columns_blank": 6,
+ "rows": [
+  {
+   "game_id": "W11-IND-HOU",
+   "week": 11,
+   "date": "Nov 19",
+   "kickoff_as_printed": "8:15 PM",
+   "network_as_printed": "PRIME",
+   "away": "IND",
+   "home": "HOU",
+   "international_game": false,
+   "section_as_printed": "Thursday Night Football, November 19th",
+   "venue": "RELIANT STADIUM",
+   "city": "HOUSTON, TX",
+   "venue_source_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -6.2,
+     "pred_home_pts": 28.15,
+     "pred_away_pts": 21.94
+    },
+    "total": {
+     "fair_total": 50.1
+    },
+    "moneyline": {
+     "fair_p_home": 0.7759,
+     "fair_home_american": -346,
+     "fair_away_american": 346
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 1.647,
+     "def_away": -3.393,
+     "off_away": -1.121,
+     "def_home": -0.212
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -5.0,
+     "pred_home_pts": 27.48,
+     "pred_away_pts": 22.44
+    },
+    "total": {
+     "fair_total": 49.9
+    },
+    "moneyline": {
+     "fair_p_home": 0.7303,
+     "fair_home_american": -271,
+     "fair_away_american": 271
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 1.459,
+     "def_away": -3.064,
+     "off_away": -1.172,
+     "def_home": -0.501
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 1.2,
+    "total_moved_by": -0.2,
+    "p_home_moved_by": -0.0456
+   }
+  },
+  {
+   "game_id": "W11-MIA-BUF",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "CBS",
+   "away": "MIA",
+   "home": "BUF",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "HIGHMARK STADIUM",
+   "city": "ORCHARD PARK, NY",
+   "venue_source_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -10.6,
+     "pred_home_pts": 29.51,
+     "pred_away_pts": 18.93
+    },
+    "total": {
+     "fair_total": 48.4
+    },
+    "moneyline": {
+     "fair_p_home": 0.9017,
+     "fair_home_american": -917,
+     "fair_away_american": 917
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 5.969,
+     "def_away": -0.437,
+     "off_away": -4.42,
+     "def_home": -0.508
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -11.1,
+     "pred_home_pts": 29.54,
+     "pred_away_pts": 18.48
+    },
+    "total": {
+     "fair_total": 48.0
+    },
+    "moneyline": {
+     "fair_p_home": 0.9112,
+     "fair_home_american": -1026,
+     "fair_away_american": 1026
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 6.135,
+     "def_away": -0.447,
+     "off_away": -4.411,
+     "def_home": 0.228
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": -0.5,
+    "total_moved_by": -0.4,
+    "p_home_moved_by": 0.0095
+   }
+  },
+  {
+   "game_id": "W11-BAL-CAR",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "FOX",
+   "away": "BAL",
+   "home": "CAR",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "BANK OF AMERICA STADIUM",
+   "city": "CHARLOTTE, NC",
+   "venue_source_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -2.4,
+     "pred_home_pts": 26.52,
+     "pred_away_pts": 24.11
+    },
+    "total": {
+     "fair_total": 50.6
+    },
+    "moneyline": {
+     "fair_p_home": 0.6155,
+     "fair_home_american": -160,
+     "fair_away_american": 160
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 1.778,
+     "def_away": -1.631,
+     "off_away": -1.852,
+     "def_home": -3.118
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -2.1,
+     "pred_home_pts": 25.56,
+     "pred_away_pts": 23.49
+    },
+    "total": {
+     "fair_total": 49.0
+    },
+    "moneyline": {
+     "fair_p_home": 0.5996,
+     "fair_home_american": -150,
+     "fair_away_american": 150
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 1.138,
+     "def_away": -1.466,
+     "off_away": -2.047,
+     "def_home": -2.421
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.3,
+    "total_moved_by": -1.6,
+    "p_home_moved_by": -0.0159
+   }
+  },
+  {
+   "game_id": "W11-NO-CHI",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "FOX",
+   "away": "NO",
+   "home": "CHI",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "SOLDIER FIELD",
+   "city": "CHICAGO, IL",
+   "venue_source_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -7.5,
+     "pred_home_pts": 29.67,
+     "pred_away_pts": 22.12
+    },
+    "total": {
+     "fair_total": 51.8
+    },
+    "moneyline": {
+     "fair_p_home": 0.8214,
+     "fair_home_american": -460,
+     "fair_away_american": 460
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 3.324,
+     "def_away": -3.233,
+     "off_away": 0.374,
+     "def_home": 1.095
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -6.8,
+     "pred_home_pts": 28.8,
+     "pred_away_pts": 21.97
+    },
+    "total": {
+     "fair_total": 50.8
+    },
+    "moneyline": {
+     "fair_p_home": 0.7977,
+     "fair_home_american": -394,
+     "fair_away_american": 394
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 3.296,
+     "def_away": -2.552,
+     "off_away": -0.255,
+     "def_home": 0.893
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.7,
+    "total_moved_by": -1.0,
+    "p_home_moved_by": -0.0237
+   }
+  },
+  {
+   "game_id": "W11-TEN-DAL",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "FOX",
+   "away": "TEN",
+   "home": "DAL",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "AT&T STADIUM",
+   "city": "ARLINGTON, TX",
+   "venue_source_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -5.5,
+     "pred_home_pts": 27.49,
+     "pred_away_pts": 21.95
+    },
+    "total": {
+     "fair_total": 49.4
+    },
+    "moneyline": {
+     "fair_p_home": 0.7505,
+     "fair_home_american": -301,
+     "fair_away_american": 301
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 2.499,
+     "def_away": -1.884,
+     "off_away": -3.824,
+     "def_home": -2.931
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -5.2,
+     "pred_home_pts": 29.2,
+     "pred_away_pts": 24.04
+    },
+    "total": {
+     "fair_total": 53.2
+    },
+    "moneyline": {
+     "fair_p_home": 0.7355,
+     "fair_home_american": -278,
+     "fair_away_american": 278
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 3.467,
+     "def_away": -2.779,
+     "off_away": -3.209,
+     "def_home": -4.131
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.3,
+    "total_moved_by": 3.8,
+    "p_home_moved_by": -0.015
+   }
+  },
+  {
+   "game_id": "W11-TB-DET",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "FOX",
+   "away": "TB",
+   "home": "DET",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "FORD FIELD",
+   "city": "DETROIT, MI",
+   "venue_source_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 0.3,
+     "pred_home_pts": 23.33,
+     "pred_away_pts": 23.61
+    },
+    "total": {
+     "fair_total": 46.9
+    },
+    "moneyline": {
+     "fair_p_home": 0.4861,
+     "fair_home_american": 106,
+     "fair_away_american": -106
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 2.831,
+     "def_away": 2.613,
+     "off_away": 0.134,
+     "def_home": -0.634
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -1.1,
+     "pred_home_pts": 23.87,
+     "pred_away_pts": 22.82
+    },
+    "total": {
+     "fair_total": 46.7
+    },
+    "moneyline": {
+     "fair_p_home": 0.551,
+     "fair_home_american": -123,
+     "fair_away_american": 123
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 3.602,
+     "def_away": 2.682,
+     "off_away": -0.03,
+     "def_home": 0.263
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": -1.4,
+    "total_moved_by": -0.2,
+    "p_home_moved_by": 0.0649
+   }
+  },
+  {
+   "game_id": "W11-AZ-KC",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "CBS",
+   "away": "AZ",
+   "home": "KC",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "ARROWHEAD STADIUM",
+   "city": "KANSAS CITY, MO",
+   "venue_source_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -9.1,
+     "pred_home_pts": 27.81,
+     "pred_away_pts": 18.72
+    },
+    "total": {
+     "fair_total": 46.5
+    },
+    "moneyline": {
+     "fair_p_home": 0.8665,
+     "fair_home_american": -649,
+     "fair_away_american": 649
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 1.117,
+     "def_away": -3.584,
+     "off_away": -1.661,
+     "def_home": 2.47
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -11.1,
+     "pred_home_pts": 28.86,
+     "pred_away_pts": 17.72
+    },
+    "total": {
+     "fair_total": 46.6
+    },
+    "moneyline": {
+     "fair_p_home": 0.9126,
+     "fair_home_american": -1044,
+     "fair_away_american": 1044
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 1.975,
+     "def_away": -3.926,
+     "off_away": -2.582,
+     "def_home": 2.811
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": -2.0,
+    "total_moved_by": 0.1,
+    "p_home_moved_by": 0.0461
+   }
+  },
+  {
+   "game_id": "W11-PIT-PHI",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "1:00 PM",
+   "network_as_printed": "CBS",
+   "away": "PIT",
+   "home": "PHI",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "LINCOLN FINANCIAL FIELD",
+   "city": "PHILADELPHIA, PA",
+   "venue_source_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 8.0,
+     "pred_home_pts": 15.18,
+     "pred_away_pts": 23.18
+    },
+    "total": {
+     "fair_total": 38.4
+    },
+    "moneyline": {
+     "fair_p_home": 0.1645,
+     "fair_home_american": 508,
+     "fair_away_american": -508
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": -4.827,
+     "def_away": 3.102,
+     "off_away": -0.494,
+     "def_home": -0.828
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 8.1,
+     "pred_home_pts": 15.04,
+     "pred_away_pts": 23.11
+    },
+    "total": {
+     "fair_total": 38.1
+    },
+    "moneyline": {
+     "fair_p_home": 0.1624,
+     "fair_home_american": 516,
+     "fair_away_american": -516
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": -4.9,
+     "def_away": 3.02,
+     "off_away": -0.577,
+     "def_home": -0.575
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.1,
+    "total_moved_by": -0.3,
+    "p_home_moved_by": -0.0021
+   }
+  },
+  {
+   "game_id": "W11-NYJ-LAC",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "4:05 PM",
+   "network_as_printed": "FOX",
+   "away": "NYJ",
+   "home": "LAC",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "SOFI STADIUM",
+   "city": "INGLEWOOD, CA",
+   "venue_source_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 3.9,
+     "pred_home_pts": 19.17,
+     "pred_away_pts": 23.09
+    },
+    "total": {
+     "fair_total": 42.3
+    },
+    "moneyline": {
+     "fair_p_home": 0.3165,
+     "fair_home_american": 216,
+     "fair_away_american": -216
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": -5.182,
+     "def_away": -1.246,
+     "off_away": -1.987,
+     "def_home": -2.226
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 3.4,
+     "pred_home_pts": 19.19,
+     "pred_away_pts": 22.63
+    },
+    "total": {
+     "fair_total": 41.8
+    },
+    "moneyline": {
+     "fair_p_home": 0.3376,
+     "fair_home_american": 196,
+     "fair_away_american": -196
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": -4.997,
+     "def_away": -1.231,
+     "off_away": -2.737,
+     "def_home": -2.248
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": -0.5,
+    "total_moved_by": -0.5,
+    "p_home_moved_by": 0.0211
+   }
+  },
+  {
+   "game_id": "W11-JAX-NYG",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "4:25 PM",
+   "network_as_printed": "CBS",
+   "away": "JAX",
+   "home": "NYG",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "METLIFE STADIUM",
+   "city": "EAST RUTHERFORD, NJ",
+   "venue_source_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 9.1,
+     "pred_home_pts": 16.95,
+     "pred_away_pts": 26.01
+    },
+    "total": {
+     "fair_total": 43.0
+    },
+    "moneyline": {
+     "fair_p_home": 0.1344,
+     "fair_home_american": 644,
+     "fair_away_american": -644
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": -1.228,
+     "def_away": 4.931,
+     "off_away": 3.564,
+     "def_home": 0.399
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 9.9,
+     "pred_home_pts": 17.21,
+     "pred_away_pts": 27.12
+    },
+    "total": {
+     "fair_total": 44.3
+    },
+    "moneyline": {
+     "fair_p_home": 0.1136,
+     "fair_home_american": 780,
+     "fair_away_american": -780
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": -1.483,
+     "def_away": 4.26,
+     "off_away": 4.298,
+     "def_home": 0.295
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.8,
+    "total_moved_by": 1.3,
+    "p_home_moved_by": -0.0208
+   }
+  },
+  {
+   "game_id": "W11-LV-DEN",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "4:25 PM",
+   "network_as_printed": "CBS",
+   "away": "LV",
+   "home": "DEN",
+   "international_game": false,
+   "section_as_printed": "Sunday, November 22nd",
+   "venue": "EMPOWER FIELD AT MILE HIGH",
+   "city": "DENVER, CO",
+   "venue_source_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -4.4,
+     "pred_home_pts": 27.71,
+     "pred_away_pts": 23.28
+    },
+    "total": {
+     "fair_total": 51.0
+    },
+    "moneyline": {
+     "fair_p_home": 0.7056,
+     "fair_home_american": -240,
+     "fair_away_american": 240
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": -0.062,
+     "def_away": -4.66,
+     "off_away": 2.333,
+     "def_home": 1.901
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -4.3,
+     "pred_home_pts": 27.09,
+     "pred_away_pts": 22.76
+    },
+    "total": {
+     "fair_total": 49.9
+    },
+    "moneyline": {
+     "fair_p_home": 0.7013,
+     "fair_home_american": -235,
+     "fair_away_american": 235
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": -0.064,
+     "def_away": -4.202,
+     "off_away": 1.743,
+     "def_home": 2.1
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 0.1,
+    "total_moved_by": -1.1,
+    "p_home_moved_by": -0.0043
+   }
+  },
+  {
+   "game_id": "W11-MIN-SF",
+   "week": 11,
+   "date": "Nov 22",
+   "kickoff_as_printed": "8:20 PM",
+   "network_as_printed": "NBC",
+   "away": "MIN",
+   "home": "SF",
+   "international_game": false,
+   "section_as_printed": "Sunday Night Football, November 22nd (International Game, Mexico City)",
+   "venue": "ESTADIO BANORTE",
+   "city": "MEXICO CITY",
+   "venue_source_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -3.0,
+     "pred_home_pts": 20.71,
+     "pred_away_pts": 17.76
+    },
+    "total": {
+     "fair_total": 38.5
+    },
+    "moneyline": {
+     "fair_p_home": 0.6407,
+     "fair_home_american": -178,
+     "fair_away_american": 178
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": 3.921,
+     "def_away": 6.319,
+     "off_away": -3.394,
+     "def_home": 1.692
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": -1.1,
+     "pred_home_pts": 21.29,
+     "pred_away_pts": 20.2
+    },
+    "total": {
+     "fair_total": 41.5
+    },
+    "moneyline": {
+     "fair_p_home": 0.5526,
+     "fair_home_american": -124,
+     "fair_away_american": 124
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": 5.179,
+     "def_away": 6.848,
+     "off_away": -2.445,
+     "def_home": 0.469
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": 1.9,
+    "total_moved_by": 3.0,
+    "p_home_moved_by": -0.0881
+   }
+  },
+  {
+   "game_id": "W11-CIN-WAS",
+   "week": 11,
+   "date": "Nov 23",
+   "kickoff_as_printed": "8:15 PM",
+   "network_as_printed": "ESPN",
+   "away": "CIN",
+   "home": "WAS",
+   "international_game": false,
+   "section_as_printed": "Monday Night Football, November 23rd",
+   "venue": "NORTHWEST STADIUM",
+   "city": "LANDOVER, MD",
+   "venue_source_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+   "schedule_source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "game_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+   "open": {
+    "snapshot": "open",
+    "trained_through_week": 9,
+    "n_train_games": 136,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 8.3,
+     "pred_home_pts": 21.88,
+     "pred_away_pts": 30.15
+    },
+    "total": {
+     "fair_total": 52.0
+    },
+    "moneyline": {
+     "fair_p_home": 0.1564,
+     "fair_home_american": 539,
+     "fair_away_american": -539
+    },
+    "inputs": {
+     "mu": 22.8457,
+     "hfa_applied": 0.2637,
+     "sigma": 8.1926,
+     "off_home": -1.04,
+     "def_away": 0.193,
+     "off_away": 5.224,
+     "def_home": -2.075
+    }
+   },
+   "update": {
+    "snapshot": "update",
+    "trained_through_week": 10,
+    "n_train_games": 148,
+    "order": [
+     "side",
+     "total",
+     "moneyline"
+    ],
+    "side": {
+     "fair_home_line": 7.9,
+     "pred_home_pts": 21.79,
+     "pred_away_pts": 29.74
+    },
+    "total": {
+     "fair_total": 51.5
+    },
+    "moneyline": {
+     "fair_p_home": 0.1663,
+     "fair_home_american": 501,
+     "fair_away_american": -501
+    },
+    "inputs": {
+     "mu": 23.1152,
+     "hfa_applied": -0.1606,
+     "sigma": 8.2032,
+     "off_home": -0.913,
+     "def_away": 0.249,
+     "off_away": 4.947,
+     "def_home": -1.679
+    }
+   },
+   "market": {
+    "market_home_line": null,
+    "market_total": null,
+    "market_home_american": null,
+    "residual_home_line": null,
+    "residual_total": null,
+    "residual_moneyline": null,
+    "status": "pending an official market source",
+    "why": "The NFL publishes no point spreads, totals or moneylines. A market number from a sportsbook or an aggregator would be third-party, not official, so the column is blank and flagged rather than filled. The residual cannot be computed against a market that has no citable official value."
+   },
+   "move_open_to_update": {
+    "home_line_moved_by": -0.4,
+    "total_moved_by": -0.5,
+    "p_home_moved_by": 0.0099
+   }
+  }
+ ]
+}

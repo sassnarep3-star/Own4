@@ -1,0 +1,377 @@
+[
+ {
+  "id": "SG-A",
+  "title": "Run a scheduled, hashed official capture (Wed / Thu / Fri / kickoff)",
+  "why": "The whole availability feature depends on being able to replay what was known before kickoff. Today there are two time points this season and no Wednesday or Thursday.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Collect nfl.com pages only (injuries, inactives article, schedule, scores, transactions, game centres). Four captures a week, sha256 per capture, drift alarm on row counts and required fields.",
+    "effort": "Low",
+    "risk": "Low - official domain, no terms question",
+    "tradeoff": "Cheapest and safest, but leaves the depth question (Q06/Q07) unanswered."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus the 32 official club sites for depth charts and transactions.",
+    "effort": "High",
+    "risk": "Medium - 32 parsers, one of which (the Texans) publishes an image",
+    "tradeoff": "Closes the depth gap if the pages are parseable; high maintenance."
+   },
+   {
+    "label": "C",
+    "text": "Option A plus a licensed data feed that carries depth, snaps and prices under a read licence.",
+    "effort": "Low once licensed",
+    "risk": "Medium - the price-data policy (SG-B) must be decided first",
+    "tradeoff": "Fastest route to a full feature set; costs money and imposes terms."
+   }
+  ],
+  "dependency": "None to start option A.",
+  "recommended": "A now, and do not start B or C until the sample from A has been read.",
+  "src": "S1, S8",
+  "verdict": ""
+ },
+ {
+  "id": "SG-B",
+  "title": "Decide the price-data policy before any backtest is published",
+  "why": "No official page publishes a spread, total or moneyline. Every residual, CLV and ROI number in this repository is therefore undefined until a source and its terms are chosen.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Publish no price at all. Ship the model's fair line as a probability with its inputs and no market comparison.",
+    "effort": "None",
+    "risk": "None",
+    "tradeoff": "Honest and immediate, but the brief's 'residual against the market' and CLV leaderboard cannot exist."
+   },
+   {
+    "label": "B",
+    "text": "Ingest one licensed odds source, terms read and recorded, with open and close captured on a schedule.",
+    "effort": "Medium",
+    "risk": "Medium - single-vendor dependence and a retention obligation",
+    "tradeoff": "Unblocks residuals and CLV; every derived number inherits one vendor's definition of 'close'."
+   },
+   {
+    "label": "C",
+    "text": "Ingest several sources and publish a vig-free consensus with the operator margin decomposed out.",
+    "effort": "High",
+    "risk": "Medium - consensus construction must be pre-registered",
+    "tradeoff": "Best separation of origination alpha from vig; slowest to stand up."
+   }
+  ],
+  "dependency": "Blocks Q10 and Q16, and every leaderboard column that uses a market price.",
+  "recommended": "A as the default today, with B or C chosen by the owner before any CLV claim.",
+  "src": "S3, S5, S6, S7",
+  "verdict": ""
+ },
+ {
+  "id": "SG-C",
+  "title": "Resolve the depth-order source before building the deficiency feature",
+  "why": "The brief asks for 2nd/3rd/4th-string replacements. nfl.com publishes no depth chart (404) and no snap counts were found, so the feature currently has no input.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Per-club official depth pages, verified club by club, with a parser that records shared and empty slots faithfully.",
+    "effort": "High",
+    "risk": "Medium - the Texans publish an image; jersey numbers must be stripped",
+    "tradeoff": "Direct answer if all 32 cooperate; dead ends if some publish images."
+   },
+   {
+    "label": "B",
+    "text": "Derive depth from snap counts using the official gamebook, once one has actually been retrieved and parsed.",
+    "effort": "Medium",
+    "risk": "Medium - availability lag, and snaps measure the past",
+    "tradeoff": "Measurable starter/backup split; cannot name a replacement before kickoff."
+   },
+   {
+    "label": "C",
+    "text": "Build nothing until one route is verified for all 32 clubs.",
+    "effort": "None",
+    "risk": "None",
+    "tradeoff": "Avoids fabricating a starter the club never named; leaves the feature absent."
+   }
+  ],
+  "dependency": "Q06, Q07, Q08.",
+  "recommended": "C is the safe default; B is the better bet if a gamebook can be retrieved.",
+  "src": "S2, S3",
+  "verdict": ""
+ },
+ {
+  "id": "SG-D",
+  "title": "Transcribe the full live injury report into the repository",
+  "why": "This session read the whole live page but only transcribed 8 of 28 clubs. The inactive-coverage finding (Q01) rests on 46 inactives; it should rest on all of them.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Transcribe all 28 clubs for Week 10 and recompute the join.",
+    "effort": "Medium",
+    "risk": "Low",
+    "tradeoff": "Triples the sample for one week; still one week."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus an automated fetch-and-parse step so future weeks need no transcription.",
+    "effort": "High",
+    "risk": "Medium - needs the drift alarm from SG-A",
+    "tradeoff": "The only route to a multi-season sample."
+   }
+  ],
+  "dependency": "None.",
+  "recommended": "B, but only inside the SG-A collector.",
+  "src": "S1, S4",
+  "verdict": ""
+ },
+ {
+  "id": "SG-E",
+  "title": "Ingest the official reserve list and the six transaction categories",
+  "why": "The reserve list exists and is dated (25 moves in November 2026), and it explains two of the three Out players who were missing from the inactive list - including the Malik Willis case the brief names. Nothing in this repository captures it, so 'not listed' still reads as 'available'.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Capture the reserve list alone, daily, hashed, and join it to the weekly injury and inactive captures. One page, one parser.",
+    "effort": "Low",
+    "risk": "Low",
+    "tradeoff": "Closes the highest-value half of the gap immediately; leaves trades and signings out."
+   },
+   {
+    "label": "B",
+    "text": "Capture all six categories (Trades, Signings, Reserve List, Waivers, Terminations, Other), and stamp every depth and availability row with the last roster event affecting it.",
+    "effort": "Medium",
+    "risk": "Low",
+    "tradeoff": "Makes roster turnover a first-class dated event, which the brief asks for; six parsers instead of one."
+   }
+  ],
+  "dependency": "SG-A.",
+  "recommended": "A this week, B as soon as the collector exists.",
+  "src": "S10, S1, S4",
+  "verdict": ""
+ },
+ {
+  "id": "SG-F",
+  "title": "Complete the venue register to 14 of 14",
+  "why": "Thirteen venues are captured from official pages; the Thursday game is missing because the inactives article covers Sunday games only.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Read the Commanders-Giants game centre and record its Location and Stadium fields.",
+    "effort": "Trivial",
+    "risk": "None",
+    "tradeoff": "Completes Week 10; does not generalise."
+   },
+   {
+    "label": "B",
+    "text": "Make the venue a required field of the fixture capture, so every future fixture is captured with one.",
+    "effort": "Low",
+    "risk": "Low",
+    "tradeoff": "Prevents the gap from recurring."
+   }
+  ],
+  "dependency": "None.",
+  "recommended": "Both - A is one read, B is a drift-alarm field.",
+  "src": "S4, S5",
+  "verdict": ""
+ },
+ {
+  "id": "SG-G",
+  "title": "Add a freshness guard and re-read the Steelers-Bengals result",
+  "why": "Both /schedules and /scores rendered that fixture as LIVE in the first quarter on 2026-11-16. Publishing a score from that state would be an inference.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Refuse to publish any score whose state is not Final, and record the fixture as blank plus flagged.",
+    "effort": "Low",
+    "risk": "None",
+    "tradeoff": "Correct, and leaves a hole until the page settles."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus a re-read job that clears the flag once the page reports Final, recording both the fetch time and the page state.",
+    "effort": "Medium",
+    "risk": "Low",
+    "tradeoff": "Self-healing, and leaves an audit trail of when the result became known."
+   }
+  ],
+  "dependency": "None.",
+  "recommended": "B.",
+  "src": "S6, S7",
+  "verdict": ""
+ },
+ {
+  "id": "SG-H",
+  "title": "One canonical count, computed at build time, never typed into prose",
+  "why": "Three sessions published 254, 279 and 347 rows for the same page, and a fourth published 326. Counts written by hand go stale the moment a sibling merges.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Pin one capture file, compute every count from it, and fail the build if a page contains a count that is not produced by the parser.",
+    "effort": "Medium",
+    "risk": "Low",
+    "tradeoff": "Settles the discrepancy; requires touching pages that already type a number."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus a single shared register page that every namespace links to instead of repeating the number.",
+    "effort": "Medium-high",
+    "risk": "Low",
+    "tradeoff": "Removes the duplication that created the divergence."
+   }
+  ],
+  "dependency": "The integration session, because it changes shared outputs.",
+  "recommended": "A now, B at the next integration.",
+  "src": "S8, S1",
+  "verdict": ""
+ },
+ {
+  "id": "SG-I",
+  "title": "Consolidate the 30 nfl-* namespaces into one canonical set",
+  "why": "Thirty namespaces each publish their own questions, suggestions and review pages. Contradictory numbers are inevitable and are already present.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Freeze new namespaces and mark one canonical namespace per domain.",
+    "effort": "Low",
+    "risk": "Low",
+    "tradeoff": "Stops the bleeding without deleting anyone's work."
+   },
+   {
+    "label": "B",
+    "text": "Merge the canonical namespaces and keep the rest as archived research records, linked but not navigated.",
+    "effort": "High",
+    "risk": "Medium - touches shared navigation",
+    "tradeoff": "A site a reviewer can actually use; needs an integration session."
+   }
+  ],
+  "dependency": "The integration session.",
+  "recommended": "A immediately, B at the next integration.",
+  "src": "repo",
+  "verdict": ""
+ },
+ {
+  "id": "SG-J",
+  "title": "Capture roof, surface and weather per venue from published sources",
+  "why": "Totals and passing props misprice when a dome is assumed outdoors or a windy open stadium is assumed calm. The official pages read this session publish neither.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Record the stadium and city from the Game Center for every fixture, and mark roof and surface blank until a source is found.",
+    "effort": "Low",
+    "risk": "Low",
+    "tradeoff": "Honest, and builds the venue spine the overlay would hang on."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus an NWS grid capture per venue and an official roof/surface field where the league publishes one.",
+    "effort": "High",
+    "risk": "Medium - mixes two domains and two timestamps",
+    "tradeoff": "Enables the overlay; needs the timestamp discipline of SG-A."
+   }
+  ],
+  "dependency": "SG-A.",
+  "recommended": "A now; B only if the roof designation is actually published somewhere.",
+  "src": "S5, S6",
+  "verdict": ""
+ },
+ {
+  "id": "SG-K",
+  "title": "Put a control baseline on every leaderboard run",
+  "why": "Without a random-pick and a favourites-only column, a good week is indistinguishable from a good model.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Publish random and favourites-only baselines beside every strategy, with the same n and the same proper score.",
+    "effort": "Low",
+    "risk": "None",
+    "tradeoff": "Needs a favourites definition; with no official price, 'favourite' must be defined from the model, not the market."
+   }
+  ],
+  "dependency": "A defined benchmark (see SG-B option A).",
+  "recommended": "A.",
+  "src": "repo",
+  "verdict": ""
+ },
+ {
+  "id": "SG-L",
+  "title": "Pre-register each strategy: rule text, window and gates, committed first",
+  "why": "The commit hash is the registration. Without it, any leaderboard result can be accused - correctly - of being chosen after the fact.",
+  "options": [
+   {
+    "label": "A",
+    "text": "A registration file per strategy: frozen rule text, sample window, gates, and the commit hash, created before the window opens.",
+    "effort": "Low",
+    "risk": "None",
+    "tradeoff": "Requires discipline; no cost otherwise."
+   },
+   {
+    "label": "B",
+    "text": "Option A plus a gate that refuses to rank any strategy whose registration commit predates its first graded result.",
+    "effort": "Medium",
+    "risk": "Low",
+    "tradeoff": "Makes the rule enforceable rather than aspirational."
+   }
+  ],
+  "dependency": "None.",
+  "recommended": "B.",
+  "src": "repo",
+  "verdict": ""
+ },
+ {
+  "id": "SG-M",
+  "title": "Split train, validation and final holdout by season",
+  "why": "Out-of-sample testing is the only thing that separates a model from a curve fit.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Fix the split by season, publish which seasons are in which fold, and forbid touching the final holdout until the model is frozen.",
+    "effort": "Low",
+    "risk": "None",
+    "tradeoff": "Costs sample size in the short run."
+   }
+  ],
+  "dependency": "A results corpus (SG-G plus the past-season archive).",
+  "recommended": "A.",
+  "src": "repo",
+  "verdict": ""
+ },
+ {
+  "id": "SG-N",
+  "title": "Keep parlays and prop combos behind a joint-evidence gate",
+  "why": "Multiplying marginal probabilities is invalid under dependence. Until a joint probability is validated on official results, a combination must not be ranked.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Rank singles only, and publish the combination gate as unmet.",
+    "effort": "None",
+    "risk": "None",
+    "tradeoff": "Removes a whole product category until the evidence exists."
+   },
+   {
+    "label": "B",
+    "text": "Estimate a dependence structure on official results and publish the joint probability with its uncertainty before ranking anything.",
+    "effort": "High",
+    "risk": "High - dependence estimates need a large sample",
+    "tradeoff": "The only route to ranking combinations honestly."
+   }
+  ],
+  "dependency": "Q10, Q18 and a multi-season results corpus.",
+  "recommended": "A until the corpus exists.",
+  "src": "repo",
+  "verdict": ""
+ },
+ {
+  "id": "SG-O",
+  "title": "Publish n beside every correlation and every rate",
+  "why": "A correlation without its n is not a number. The designation rates on this site are published with n = 26 and n = 4 precisely so they cannot be mistaken for settled facts.",
+  "options": [
+   {
+    "label": "A",
+    "text": "Make n a required column on every correlation and rate table, and fail the build when it is missing.",
+    "effort": "Low",
+    "risk": "None",
+    "tradeoff": "None."
+   }
+  ],
+  "dependency": "None.",
+  "recommended": "A.",
+  "src": "S1, S4",
+  "verdict": ""
+ }
+]

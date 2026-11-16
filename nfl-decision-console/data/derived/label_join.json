@@ -1,0 +1,533 @@
+{
+ "by_status": [
+  {
+   "active_either_way": 0,
+   "ambiguous": 1,
+   "did not play": 0,
+   "game_status": "Out",
+   "joined_confidently": 3,
+   "not active": 3,
+   "played off the bench": 0,
+   "report_rows": 6,
+   "started": 0,
+   "unaccounted": 2
+  },
+  {
+   "active_either_way": 8,
+   "ambiguous": 1,
+   "did not play": 0,
+   "game_status": "Questionable",
+   "joined_confidently": 10,
+   "not active": 2,
+   "played off the bench": 3,
+   "report_rows": 11,
+   "started": 5,
+   "unaccounted": 0
+  },
+  {
+   "active_either_way": 7,
+   "ambiguous": 0,
+   "did not play": 0,
+   "game_status": "(blank)",
+   "joined_confidently": 7,
+   "not active": 0,
+   "played off the bench": 2,
+   "report_rows": 7,
+   "started": 5,
+   "unaccounted": 0
+  }
+ ],
+ "caveat": "n = 1 fixture. This is the join demonstrated on official sources only - not a play rate, not a calibration, and not quotable as one.",
+ "counts": {
+  "clubs": [
+   "DET",
+   "NE"
+  ],
+  "distinct_names_per_club": {
+   "DET": 54,
+   "NE": 54
+  },
+  "join_states": {
+   "ambiguous": 2,
+   "did not play": 0,
+   "not active": 5,
+   "played off the bench": 5,
+   "started": 10,
+   "unaccounted": 2
+  },
+  "names_per_block": {
+   "DET": {
+    "did_not_play": 0,
+    "lineups": 22,
+    "not_active": 6,
+    "substitutions": 26
+   },
+   "NE": {
+    "did_not_play": 0,
+    "lineups": 22,
+    "not_active": 6,
+    "substitutions": 26
+   }
+  },
+  "report_rows": 24,
+  "surnames_that_collide": [
+   "A.J. Brown",
+   "Ben Brown"
+  ],
+  "total_names_per_club": {
+   "DET": 54,
+   "NE": 54
+  }
+ },
+ "fixture": "New England Patriots at Detroit Lions",
+ "join_key_note": "the report prints no jersey number, so the join key is the surname. Two same-surname players on one club (NE 'A.Brown' and 'B.Brown', 'Dr.Jones' and 'Da.Jones') collapse to one key, and the engine marks those rows ambiguous instead of guessing. A keyed join needs an official name-to-number map per club per week: gap G-13.",
+ "method": "each report row is matched against the game book's Lineups / Substitutions / Not Active / Did Not Play blocks for the same fixture; a row that matches nothing is published as unaccounted, never as 'played' or 'inactive'",
+ "read": "2026-11-16T01:34Z-01:35Z (session window 01:31Z-01:36:08Z)",
+ "rows": [
+  {
+   "club": "NE",
+   "game_status": "Out",
+   "injury": "Knee",
+   "join_reason": "surname matches 3 different printed names: A.Brown, B.Brown, M.Brown",
+   "join_state": "ambiguous",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "1",
+     "pos": "WR",
+     "printed": "A.Brown"
+    },
+    {
+     "block": "substitutions",
+     "number": "33",
+     "pos": "S",
+     "printed": "M.Brown"
+    },
+    {
+     "block": "not_active",
+     "number": "77",
+     "pos": "C",
+     "printed": "B.Brown"
+    }
+   ],
+   "player": "Ben Brown",
+   "pos": "C",
+   "practice": "DNP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Ankle, Knee",
+   "join_reason": "surname matches 3 different printed names: A.Brown, B.Brown, M.Brown",
+   "join_state": "ambiguous",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "1",
+     "pos": "WR",
+     "printed": "A.Brown"
+    },
+    {
+     "block": "substitutions",
+     "number": "33",
+     "pos": "S",
+     "printed": "M.Brown"
+    },
+    {
+     "block": "not_active",
+     "number": "77",
+     "pos": "C",
+     "printed": "B.Brown"
+    }
+   ],
+   "player": "A.J. Brown",
+   "pos": "WR",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Chest",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "31",
+     "pos": "S",
+     "printed": "K.Byard"
+    }
+   ],
+   "player": "Kevin Byard",
+   "pos": "S",
+   "practice": "FP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Out",
+   "injury": "Knee",
+   "join_reason": "single surname match, single block",
+   "join_state": "not active",
+   "matches": [
+    {
+     "block": "not_active",
+     "number": "7",
+     "pos": "CB",
+     "printed": "C.Davis"
+    }
+   ],
+   "player": "Carlton Davis III",
+   "pos": "CB",
+   "practice": "DNP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Knee",
+   "join_reason": "single surname match, single block",
+   "join_state": "played off the bench",
+   "matches": [
+    {
+     "block": "substitutions",
+     "number": "44",
+     "pos": "FB",
+     "printed": "R.Gilliam"
+    }
+   ],
+   "player": "Reggie Gilliam",
+   "pos": "FB",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Out",
+   "injury": "Illness",
+   "join_reason": "no surname match in any availability block",
+   "join_state": "unaccounted",
+   "matches": [],
+   "player": "TreVeyon Henderson",
+   "pos": "RB",
+   "practice": "DNP"
+  },
+  {
+   "club": "NE",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "85",
+     "pos": "TE",
+     "printed": "H.Henry"
+    }
+   ],
+   "player": "Hunter Henry",
+   "pos": "TE",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Back",
+   "join_reason": "single surname match, single block",
+   "join_state": "played off the bench",
+   "matches": [
+    {
+     "block": "substitutions",
+     "number": "36",
+     "pos": "TE",
+     "printed": "C.Latu"
+    }
+   ],
+   "player": "Cameron Latu",
+   "pos": "TE",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "10",
+     "pos": "QB",
+     "printed": "D.Maye"
+    }
+   ],
+   "player": "Drake Maye",
+   "pos": "QB",
+   "practice": "FP"
+  },
+  {
+   "club": "NE",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "76",
+     "pos": "RT",
+     "printed": "M.Moses"
+    }
+   ],
+   "player": "Morgan Moses",
+   "pos": "T",
+   "practice": "FP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Concussion",
+   "join_reason": "single surname match, single block",
+   "join_state": "not active",
+   "matches": [
+    {
+     "block": "not_active",
+     "number": "72",
+     "pos": "OL",
+     "printed": "W.Rouse"
+    }
+   ],
+   "player": "Walter Rouse",
+   "pos": "T",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Hamstring",
+   "join_reason": "single surname match, single block",
+   "join_state": "not active",
+   "matches": [
+    {
+     "block": "not_active",
+     "number": "41",
+     "pos": "S",
+     "printed": "B.Schooler"
+    }
+   ],
+   "player": "Brenden Schooler",
+   "pos": "S",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Knee",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "38",
+     "pos": "RB",
+     "printed": "R.Stevenson"
+    }
+   ],
+   "player": "Rhamondre Stevenson",
+   "pos": "RB",
+   "practice": "LP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Hamstring",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "70",
+     "pos": "LG",
+     "printed": "G.Van Roten"
+    }
+   ],
+   "player": "Greg Van Roten",
+   "pos": "G",
+   "practice": "FP"
+  },
+  {
+   "club": "NE",
+   "game_status": "Questionable",
+   "injury": "Hamstring",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "22",
+     "pos": "CB",
+     "printed": "C.Woods"
+    }
+   ],
+   "player": "Charles Woods",
+   "pos": "CB",
+   "practice": "FP"
+  },
+  {
+   "club": "DET",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "32",
+     "pos": "DB",
+     "printed": "B.Branch"
+    }
+   ],
+   "player": "Brian Branch",
+   "pos": "S",
+   "practice": "FP"
+  },
+  {
+   "club": "DET",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "16",
+     "pos": "QB",
+     "printed": "J.Goff"
+    }
+   ],
+   "player": "Jared Goff",
+   "pos": "QB",
+   "practice": "FP"
+  },
+  {
+   "club": "DET",
+   "game_status": "Out",
+   "injury": "Knee",
+   "join_reason": "no surname match in any availability block",
+   "join_state": "unaccounted",
+   "matches": [],
+   "player": "Kerby Joseph",
+   "pos": "S",
+   "practice": "DNP"
+  },
+  {
+   "club": "DET",
+   "game_status": "Out",
+   "injury": "Ankle",
+   "join_reason": "single surname match, single block",
+   "join_state": "not active",
+   "matches": [
+    {
+     "block": "not_active",
+     "number": "64",
+     "pos": "C",
+     "printed": "C.Mays"
+    }
+   ],
+   "player": "Cade Mays",
+   "pos": "C",
+   "practice": "DNP"
+  },
+  {
+   "club": "DET",
+   "game_status": "Out",
+   "injury": "Hip",
+   "join_reason": "single surname match, single block",
+   "join_state": "not active",
+   "matches": [
+    {
+     "block": "not_active",
+     "number": "4",
+     "pos": "CB",
+     "printed": "D.Reed"
+    }
+   ],
+   "player": "D.J. Reed",
+   "pos": "CB",
+   "practice": "DNP"
+  },
+  {
+   "club": "DET",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "played off the bench",
+   "matches": [
+    {
+     "block": "substitutions",
+     "number": "25",
+     "pos": "RB",
+     "printed": "J.Saylors"
+    }
+   ],
+   "player": "Jacob Saylors",
+   "pos": "RB",
+   "practice": "FP"
+  },
+  {
+   "club": "DET",
+   "game_status": "Questionable",
+   "injury": "Rib",
+   "join_reason": "single surname match, single block",
+   "join_state": "started",
+   "matches": [
+    {
+     "block": "lineups",
+     "number": "14",
+     "pos": "WR",
+     "printed": "A.St. Brown"
+    }
+   ],
+   "player": "Amon-Ra St. Brown",
+   "pos": "WR",
+   "practice": "LP"
+  },
+  {
+   "club": "DET",
+   "game_status": "Questionable",
+   "injury": "Ankle",
+   "join_reason": "single surname match, single block",
+   "join_state": "played off the bench",
+   "matches": [
+    {
+     "block": "substitutions",
+     "number": "33",
+     "pos": "RB",
+     "printed": "S.Vaki"
+    }
+   ],
+   "player": "Sione Vaki",
+   "pos": "RB",
+   "practice": "LP"
+  },
+  {
+   "club": "DET",
+   "game_status": "",
+   "injury": "",
+   "join_reason": "single surname match, single block",
+   "join_state": "played off the bench",
+   "matches": [
+    {
+     "block": "substitutions",
+     "number": "98",
+     "pos": "DE",
+     "printed": "D.Wonnum"
+    }
+   ],
+   "player": "DJ Wonnum",
+   "pos": "DE",
+   "practice": "FP"
+  }
+ ],
+ "source_pdf": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf",
+ "source_report": "https://www.nfl.com/injuries/",
+ "week": 10
+}

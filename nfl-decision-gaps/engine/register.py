@@ -1,0 +1,1073 @@
+#!/usr/bin/env python3
+"""
+nfl-decision-gaps — curated register (data only, no rendering).
+
+Session: arena/448c248f-own4 · 2026-11-16.
+
+Rules this file obeys
+---------------------
+1. Every `have` string is something this session actually read on an official page
+   (source id in `sources`), or is a value computed by parsing a file already
+   committed in this repository (source id in `sources`, marked `repo`).
+2. Nothing is inferred. Where the official page did not state a thing, the field
+   is the literal string "" (blank) and the row appears on the Flagged page.
+3. Counts that describe the repository tree are computed at build time, never
+   typed here (see engine/build.py `repo_inventory()`), because another session
+   merging changes them.
+"""
+
+SESSION = "arena/448c248f-own4"
+DATE = "2026-11-16"
+WEEK = "Week 10, 2026 regular season"
+
+# --------------------------------------------------------------------------
+# Sources read or parsed this session.  `kind` is `live` (fetched 2026-11-16),
+# `repo` (a file already committed in this repository) or `absent` (the fetch
+# was attempted and the official server returned no such page).
+# --------------------------------------------------------------------------
+SOURCES = [
+    dict(id="S1", kind="live",
+         url="https://www.nfl.com/injuries/",
+         title="Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+         what="Club-by-club injury tables (Player | Position | Injuries | Practice Status | Game Status) for all 14 Week 10 fixtures, plus the page's own news links.",
+         read="Chunks 0-6 of 8 were read. Chunk 7 (tail of the page's news list) was not read.",
+         published="Week 10, 2026"),
+    dict(id="S2", kind="absent",
+         url="https://www.nfl.com/teams/baltimore-ravens/depth-chart",
+         title="404 - Flag on the Play.",
+         what="Attempted club depth-chart page. The official server returned the 404 page; nfl.com does not serve a depth chart at this path.",
+         read="HTTP 404 body read in full.",
+         published=""),
+    dict(id="S3", kind="live",
+         url="https://www.nfl.com/teams/baltimore-ravens/",
+         title="Baltimore Ravens News, Scores, Stats, Schedule | NFL.com",
+         what="Club page. Section tabs are Info / Roster / Stats only. Team Info block: Head Coach Jesse Minter, Stadium M&T Bank Stadium, Owners Steve Bisciotti, Established 1996. Official Website baltimoreravens.com.",
+         read="Read in full (1 chunk).",
+         published="2026-11-16"),
+    dict(id="S4", kind="live",
+         url="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+         title="NFL Week 10 inactives: Players ruled out for Sunday's 12 games",
+         what="Official inactive lists for all 12 Sunday/Munich Week 10 games, with the venue of each game and the pre-game club records.",
+         read="Read in full (2 of 2 chunks).",
+         published="Nov 15, 2026"),
+    dict(id="S5", kind="live",
+         url="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+         title="Los Angeles Chargers at Baltimore Ravens 2026 REG 10 - Game Center",
+         what="Game Center for the Monday-night fixture. Game Info block publishes Location (BALTIMORE, MD), Stadium (M&T BANK STADIUM) and Network (ESPN, ABC).",
+         read="Chunk 0 of 3 read.",
+         published="2026-11-16"),
+    dict(id="S6", kind="live",
+         url="https://www.nfl.com/schedules",
+         title="NFL Schedules: Games, Times, Matchups & Tickets",
+         what="Week 10 schedule with final scores, teams on bye (CHI, DEN, PHI, TB), and the 2026 TBD-games / flexible-scheduling note linking https://www.nfl.com/legal/flexible-scheduling-procedures.",
+         read="Read in full (2 of 2 chunks). Requested /schedules/2026/REG11/ which resolved to this page.",
+         published="2026-11-16"),
+    dict(id="S7", kind="live",
+         url="https://www.nfl.com/scores/",
+         title="NFL Scores and Highlights: Live Updates, Results & Recaps",
+         what="Independent scoreboard: LIVE / UPCOMING / COMPLETED sections for Week 10.",
+         read="Chunk 0 of 3 read (LIVE + UPCOMING + first completed games).",
+         published="2026-11-16"),
+    dict(id="S8", kind="repo",
+         url="https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/raw/nfl_injuries_week10_2026.md",
+         title="NFL.com Official Injury Report — Week 10, 2026 Season (verbatim capture)",
+         what="A verbatim transcription of S1 captured 2026-11-13 and already committed to this repository. Parsed this session into 326 structured rows.",
+         read="Parsed by nfl-decision-gaps/engine/parse_injury_capture.py; sha256 recorded in data/injury_week10_parsed.json.",
+         published="Captured 2026-11-13"),
+    dict(id="S9", kind="live",
+         url="https://www.nfl.com/transactions/league/trades/2026/11",
+         title="2026 NFL League Transactions - Trades Waivers, Signings & more.",
+         what="The league transactions hub, with dated categories: Trades, Signings, Reserve List, "
+              "Waivers, Terminations, Other, each selectable by year and month. The November 2026 "
+              "trades table lists 12 moves with From, To, Date, Name, Position and Transaction.",
+         read="Read in full (1 chunk) via https://www.nfl.com/transactions/ , which defaults to "
+              "Trades / November 2026.",
+         published="2026-11-16"),
+    dict(id="S10", kind="live",
+         url="https://www.nfl.com/transactions/league/reserve-list/2026/11",
+         title="2026 NFL reserve-list by month | NFL.com",
+         what="The official reserve list: 25 Reserve/Injured moves for November 2026, each with club, "
+              "date and player. This is the page that makes 'not listed' stop meaning 'available'.",
+         read="Read in full (2 of 2 chunks).",
+         published="2026-11-16"),
+]
+
+# --------------------------------------------------------------------------
+# Official November 2026 reserve list, transcribed from S10.
+# --------------------------------------------------------------------------
+RESERVE_LIST = [
+    ("2026-11-14", "NO", "Christen Miller", "Reserve/Injured"),
+    ("2026-11-14", "NE", "TreVeyon Henderson", "Reserve/Injured"),
+    ("2026-11-14", "CLE", "Michael Burton", "Reserve/Injured"),
+    ("2026-11-14", "IND", "Mo Alie-Cox", "Reserve/Injured"),
+    ("2026-11-14", "IND", "Akeem Davis-Gaither", "Reserve/Injured"),
+    ("2026-11-14", "TEN", "Peter Skoronski", "Reserve/Injured"),
+    ("2026-11-14", "TEN", "Tommy Townsend", "Reserve/Injured"),
+    ("2026-11-14", "DAL", "Tyler Goodson", "Reserve/Injured"),
+    ("2026-11-14", "GB", "Josh Whyle", "Reserve/Injured"),
+    ("2026-11-12", "LAR", "Puka Nacua", "Reserve/Injured"),
+    ("2026-11-10", "LAR", "Jordan Whittington", "Reserve/Injured"),
+    ("2026-11-10", "MIA", "Zach Sieler", "Reserve/Injured"),
+    ("2026-11-10", "MIA", "Malik Willis", "Reserve/Injured"),
+    ("2026-11-10", "SF", "Gracen Halton", "Reserve/Injured"),
+    ("2026-11-10", "AZ", "Gardner Minshew", "Reserve/Injured"),
+    ("2026-11-10", "AZ", "Michael Wilson", "Reserve/Injured"),
+    ("2026-11-09", "TEN", "James Williams", "Reserve/Injured"),
+    ("2026-11-09", "MIN", "Demond Claiborne", "Reserve/Injured"),
+    ("2026-11-09", "BUF", "Josh Palmer", "Reserve/Injured"),
+    ("2026-11-07", "ATL", "Brian Robinson", "Reserve/Injured"),
+    ("2026-11-07", "LAR", "Jaylen Watson", "Reserve/Injured"),
+    ("2026-11-07", "DEN", "Eyioma Uwazurike", "Reserve/Injured"),
+    ("2026-11-07", "DET", "Jack Campbell", "Reserve/Injured"),
+    ("2026-11-07", "DAL", "Malachi Lawrence", "Reserve/Injured"),
+    ("2026-11-07", "WAS", "Dyami Brown", "Reserve/Injured"),
+]
+
+# --------------------------------------------------------------------------
+# Official November 2026 trades, transcribed from S9.
+# --------------------------------------------------------------------------
+TRADES = [
+    ("2026-11-10", "ATL", "JAX", "Jessie Bates", "Traded"),
+    ("2026-11-10", "PHI", "JAX", "Jordan Davis", "Traded"),
+    ("2026-11-10", "TEN", "BUF", "Amani Hooker", "Traded"),
+    ("2026-11-10", "IND", "SF", "Keenan Allen", "Traded"),
+    ("2026-11-10", "LV", "MIN", "Kirk Cousins", "Traded"),
+    ("2026-11-10", "LAC", "DEN", "Daiyan Henley", "Traded"),
+    ("2026-11-10", "IND", "KC", "Josh Downs", "Traded"),
+    ("2026-11-10", "ATL", "BAL", "Ryan Neuzil", "Traded"),
+    ("2026-11-10", "BAL", "ATL", "Andrew Vorhees", "Traded"),
+    ("2026-11-09", "NYJ", "DET", "Andre Cisco", "Traded"),
+    ("2026-11-09", "NO", "JAX", "Davon Godchaux", "Traded"),
+    ("2026-11-06", "AZ", "BAL", "Jacoby Brissett", "Traded"),
+]
+
+# --------------------------------------------------------------------------
+# Verified Week 10 results feed.  Scores are copied from S6 and cross-checked
+# against S7.  Two fixtures carry no score - see flags F1 and F14.
+# --------------------------------------------------------------------------
+RESULTS = [
+    dict(game="WAS at NYG", day="Thu Nov 12", away="WAS", away_pts=24, home="NYG", home_pts=21,
+         status="Final", venue="", venue_src="", note="Venue not captured: S4 covers Sunday games only and this fixture's Game Center was not read."),
+    dict(game="NE vs DET (Munich)", day="Sun Nov 15", away="NE", away_pts=10, home="DET", home_pts=35,
+         status="Final", venue="FC Bayern Munich Stadium (Munich, Germany)", venue_src="S4", note=""),
+    dict(game="KC at ATL", day="Sun Nov 15", away="KC", away_pts=35, home="ATL", home_pts=13,
+         status="Final", venue="Mercedes-Benz Stadium (Atlanta)", venue_src="S4", note=""),
+    dict(game="HOU at CLE", day="Sun Nov 15", away="HOU", away_pts=24, home="CLE", home_pts=27,
+         status="Final", venue="Huntington Bank Field (Cleveland)", venue_src="S4", note=""),
+    dict(game="MIN at GB", day="Sun Nov 15", away="MIN", away_pts=30, home="GB", home_pts=10,
+         status="Final", venue="Lambeau Field (Green Bay, Wis.)", venue_src="S4", note=""),
+    dict(game="MIA at IND", day="Sun Nov 15", away="MIA", away_pts=22, home="IND", home_pts=24,
+         status="Final", venue="Lucas Oil Stadium (Indianapolis)", venue_src="S4", note=""),
+    dict(game="CAR at NO", day="Sun Nov 15", away="CAR", away_pts=20, home="NO", home_pts=17,
+         status="Final", venue="Caesars Superdome (New Orleans)", venue_src="S4", note=""),
+    dict(game="BUF at NYJ", day="Sun Nov 15", away="BUF", away_pts=31, home="NYJ", home_pts=12,
+         status="Final", venue="MetLife Stadium (East Rutherford, N.J.)", venue_src="S4", note=""),
+    dict(game="JAX at TEN", day="Sun Nov 15", away="JAX", away_pts=40, home="TEN", home_pts=23,
+         status="Final", venue="Nissan Stadium (Nashville, Tenn.)", venue_src="S4", note=""),
+    dict(game="LAR at AZ", day="Sun Nov 15", away="LAR", away_pts=34, home="AZ", home_pts=6,
+         status="Final", venue="State Farm Stadium (Glendale, Ariz.)", venue_src="S4", note=""),
+    dict(game="SEA at LV", day="Sun Nov 15", away="SEA", away_pts=21, home="LV", home_pts=13,
+         status="Final", venue="Allegiant Stadium (Las Vegas)", venue_src="S4", note=""),
+    dict(game="SF at DAL", day="Sun Nov 15", away="SF", away_pts=46, home="DAL", home_pts=40,
+         status="Final", venue="AT&T Stadium (Arlington, Texas)", venue_src="S4", note=""),
+    dict(game="PIT at CIN", day="Sun Nov 15", away="PIT", away_pts=None, home="CIN", home_pts=None,
+         status="Rendered LIVE, Q1 08:56, PIT 0 - CIN 3 (FIELD GOAL) on both S6 and S7 at fetch time 2026-11-16",
+         venue="Paycor Stadium (Cincinnati)", venue_src="S4",
+         note="Score left blank - not inferred. See flag F1."),
+    dict(game="LAC at BAL", day="Mon Nov 16", away="LAC", away_pts=None, home="BAL", home_pts=None,
+         status="Not started (8:15 PM EST, ESPN/ABC)",
+         venue="M&T BANK STADIUM (BALTIMORE, MD)", venue_src="S5", note=""),
+]
+
+# --------------------------------------------------------------------------
+# Official Week 10 inactive lists, transcribed from S4.
+# --------------------------------------------------------------------------
+INACTIVES = [
+    ("NE", "Patriots", ["CB Carlton Davis", "FS Brenden Schooler", "OT Dametrious Crownover",
+                        "OT Walter Rouse", "C Ben Brown", "QB Behren Morton (emergency third QB)"]),
+    ("DET", "Lions", ["CB Keith Abney II", "EDGE Ahmed Hassanein", "C Cade Mays",
+                      "LB Amen Ogbongbemiga", "CB D.J. Reed", "DL Mekhi Wingo"]),
+    ("KC", "Chiefs", ["RB Kenneth Walker", "QB Garrett Nussmeier (Emergency 3rd QB)", "RB Jaydn Ott",
+                      "CB Melvin Smith", "FB Ben VanSumeren", "OL Jaylon Moore", "DL Peter Woods"]),
+    ("ATL", "Falcons", ["QB Andy Dalton (emergency third quarterback)", "ILB Divine Deablo",
+                        "CB Avieon Terrell", "WR Zachariah Branch", "QB Jack Strand",
+                        "CB Robert Longerbeam", "OL Cameron Williams"]),
+    ("HOU", "Texans", ["LB Azeez Al-Shaair", "TE Brevin Jordan", "WR Marvin Harrison Jr.",
+                       "RB David Montgomery", "DE Danielle Hunter", "C/G Keylan Rutledge",
+                       "G Wyatt Teller"]),
+    ("CLE", "Browns", ["QB Dillon Gabriel (emergency third QB)", "QB Taylen Green",
+                       "LB Justin Jefferson", "CB Noah Igbinoghene", "S Ronnie Hickman",
+                       "C Parker Brailsford"]),
+    ("MIN", "Vikings", ["QB Kyler Murray", "WR Jordan Addison", "QB Max Brosmer (emergency third QB)",
+                        "WR Jauan Jennings", "LB Blake Cashman", "TE T.J. Hockenson",
+                        "DL Tyroin Ingram-Dawkins"]),
+    ("GB", "Packers", ["RB Josh Jacobs", "RB Pierre Strong Jr.", "LB Zaire Franklin",
+                       "G/T Donovan Jennings", "G Kevin Zeitler", "C Sean Rhyan"]),
+    ("MIA", "Dolphins", ["WR Chris Bell", "CB Marcellas Dial Jr.", "C Aaron Brewer",
+                         "G/T Caedan Wallace", "TE Justin Joly", "WR Jared Wayne"]),
+    ("IND", "Colts", ["LB Jaylon Carlies", "QB Riley Leonard (emergency third QB)", "TE Will Mallory",
+                      "LS Luke Rhodes", "DT Jerry Tillery", "OT Jalen Travis"]),
+    ("CAR", "Panthers", ["TE Ja'Tavion Sanders", "QB Haynes King (emergency third QB)", "CB Will Lee",
+                         "RB AJ Dillon", "LB Bobby Okereke", "C Sam Hecht", "DT TeRah Edwards"]),
+    ("NO", "Saints", ["QB Zach Wilson (designated third QB)", "S Mike Reid", "RB CJ Donaldson",
+                      "LB Jaylan Ford", "OT Taliese Fuaga", "C Erik McCoy"]),
+    ("BUF", "Bills", ["QB Shane Buechele", "S Jalon Kilgore", "OLB Mike Danna",
+                      "G Ar'maj Reed-Adams", "OL Jude Bowry", "DL Greg Gaines"]),
+    ("NYJ", "Jets", ["CB Jarvis Brownlee Jr.", "Edge Nate Lynn", "WR Tim Patrick",
+                     "LB Trevin Wallace", "TE Jelani Woods"]),
+    ("JAX", "Jaguars", ["S Jessie Bates III", "WR CJ Williams", "DT Jordan Davis",
+                        "DE Wesley Williams", "DT Albert Regis"]),
+    ("TEN", "Titans", ["WR Carnell Tate", "RB Nick Singleton", "CB Jaylon Jones", "LB Cody Barton",
+                       "LB Anthony Hill Jr.", "OT Brandon Crenshaw-Dickson", "DT Jackie Marshall"]),
+    ("LAR", "Rams", ["QB Ty Simpson (emergency third QB)", "S Maximus Pulley", "LS Joe Cardona",
+                     "OLB Darryl Peterson III", "OL Steve Avila", "OL Keagen Trost",
+                     "OLB Desjuan Johnson"]),
+    ("AZ", "Cardinals", ["QB Joey Aguilar", "CB Starling Thomas V", "LB Eku Leota",
+                         "OL Jayden Williams", "OL Jon Gaines II", "OL Hjalte Froholdt"]),
+    ("SEA", "Seahawks", ["QB Sam Darnold", "RB Emanuel Wilson", "CB Avery Smith", "G Quenton Nelson",
+                         "OT Charles Cross", "NT Deven Eastern", "DT Leonard Williams"]),
+    ("LV", "Raiders", ["WR Dont'e Thornton Jr.", "WR Malik Benson", "S Tristin McCollum",
+                       "S Dalton Johnson", "G Bryce Cabeldue", "DT Thomas Booker IV"]),
+    ("SF", "49ers", ["QB Kurtis Rourke", "WR Mike Evans", "OL Enrique Cruz Jr.", "LB Tatum Bethune",
+                     "WR Brandin Cooks"]),
+    ("DAL", "Cowboys", ["S P.J. Locke III", "OLB Donovan Ezeiruaku", "CB Derion Kendrick",
+                        "WR Jonathan Mingo", "S Juanyeh Thomas", "G Ajani Cornelius",
+                        "TE Jake Ferguson"]),
+    ("PIT", "Steelers", ["S DeShon Elliott", "QB Drew Allar", "QB Will Howard (emergency third QB)",
+                         "CB Sean Murphy-Bunting", "RB Eli Heidenreich"]),
+    ("CIN", "Bengals", ["S Kyle Dugger", "C Connor Lew", "OT Myles Hinton", "DT Landon Robinson"]),
+]
+
+# --------------------------------------------------------------------------
+# Injury report (S1, read live 2026-11-16) for the eight clubs where this
+# session read every row, joined to the official inactive list (S4).
+#
+# `designation` is the Game Status cell exactly as published.  `inactive` is
+# True when the player's name appears on that club's official inactive list.
+# This table is the whole evidence base for questions Q01-Q04.
+# --------------------------------------------------------------------------
+DESIGNATION_JOIN = [
+    # NE Patriots - live report 15 rows
+    ("NE", "Ben Brown", "C", "Out", True, ""),
+    ("NE", "A.J. Brown", "WR", "Questionable", False, ""),
+    ("NE", "Kevin Byard", "S", "Questionable", False, ""),
+    ("NE", "Carlton Davis III", "CB", "Out", True, ""),
+    ("NE", "Reggie Gilliam", "FB", "Questionable", False, ""),
+    ("NE", "TreVeyon Henderson", "RB", "Out", False, "Out on the report but absent from the inactive list; S1 news links report he was placed on injured reserve."),
+    ("NE", "Hunter Henry", "TE", "", False, ""),
+    ("NE", "Cameron Latu", "TE", "Questionable", False, ""),
+    ("NE", "Drake Maye", "QB", "", False, ""),
+    ("NE", "Morgan Moses", "T", "", False, ""),
+    ("NE", "Walter Rouse", "T", "Questionable", True, ""),
+    ("NE", "Brenden Schooler", "S", "Questionable", True, ""),
+    ("NE", "Rhamondre Stevenson", "RB", "Questionable", False, ""),
+    ("NE", "Greg Van Roten", "G", "Questionable", False, ""),
+    ("NE", "Charles Woods", "CB", "Questionable", False, ""),
+    # DET Lions - live report 9 rows
+    ("DET", "Brian Branch", "S", "", False, ""),
+    ("DET", "Jared Goff", "QB", "", False, ""),
+    ("DET", "Kerby Joseph", "S", "Out", False, "Out on the report but absent from the inactive list; no reserve status is published on either page."),
+    ("DET", "Cade Mays", "C", "Out", True, ""),
+    ("DET", "D.J. Reed", "CB", "Out", True, ""),
+    ("DET", "Jacob Saylors", "RB", "", False, ""),
+    ("DET", "Amon-Ra St. Brown", "WR", "Questionable", False, ""),
+    ("DET", "Sione Vaki", "RB", "Questionable", False, ""),
+    ("DET", "DJ Wonnum", "DE", "", False, ""),
+    # SEA Seahawks - live report 15 rows
+    ("SEA", "AJ Barner", "TE", "", False, ""),
+    ("SEA", "Anthony Bradford", "G", "", False, ""),
+    ("SEA", "Charles Cross", "T", "Out", True, ""),
+    ("SEA", "Sam Darnold", "QB", "Out", True, ""),
+    ("SEA", "Derick Hall", "LB", "", False, ""),
+    ("SEA", "Drew Lock", "QB", "", False, ""),
+    ("SEA", "Quenton Nelson", "G", "Out", True, ""),
+    ("SEA", "Uchenna Nwosu", "LB", "", False, ""),
+    ("SEA", "Patrick O'Connell", "LB", "", False, ""),
+    ("SEA", "Connor O'Toole", "LB", "", False, ""),
+    ("SEA", "Brandon Pili", "DT", "", False, ""),
+    ("SEA", "Jarran Reed", "DT", "", False, ""),
+    ("SEA", "Rashid Shaheed", "WR", "", False, ""),
+    ("SEA", "Jaxon Smith-Njigba", "WR", "", False, ""),
+    ("SEA", "Leonard Williams", "DT", "Out", True, ""),
+    # LV Raiders - live report 5 rows
+    ("LV", "Thomas Booker", "DT", "Questionable", True, "Listed on the inactive list as Thomas Booker IV."),
+    ("LV", "Foley Fatukasi", "DT", "", False, ""),
+    ("LV", "Ian Thomas", "TE", "", False, ""),
+    ("LV", "Dont'e Thornton Jr.", "WR", "Questionable", True, ""),
+    ("LV", "Trey Zuhn III", "C", "", False, ""),
+    # SF 49ers - live report 12 rows
+    ("SF", "Mike Evans", "WR", "Out", True, ""),
+    ("SF", "Renardo Green", "CB", "Questionable", False, ""),
+    ("SF", "Dre Greenlaw", "LB", "Questionable", False, ""),
+    ("SF", "Nate Hobbs", "CB", "Questionable", False, ""),
+    ("SF", "Deommodore Lenoir", "CB", "Questionable", False, ""),
+    ("SF", "Christian McCaffrey", "RB", "", False, ""),
+    ("SF", "Siran Neal", "S", "", False, ""),
+    ("SF", "Demarcus Robinson", "WR", "", False, ""),
+    ("SF", "Deebo Samuel Sr.", "WR", "", False, ""),
+    ("SF", "Upton Stout", "CB", "Questionable", False, ""),
+    ("SF", "C.J. West", "DT", "Questionable", False, ""),
+    ("SF", "Trent Williams", "T", "Questionable", False, ""),
+    # DAL Cowboys - live report 19 rows
+    ("DAL", "DaRon Bland", "CB", "Questionable", False, ""),
+    ("DAL", "Jonathan Bullard", "DT", "Questionable", False, ""),
+    ("DAL", "Alijah Clark", "S", "Questionable", False, ""),
+    ("DAL", "Donovan Ezeiruaku", "LB", "Out", True, ""),
+    ("DAL", "Jake Ferguson", "TE", "Out", True, ""),
+    ("DAL", "Tyler Goodson", "RB", "Out", False, "Out on the report but absent from the inactive list; no reserve status is published on either page."),
+    ("DAL", "Malik Hooker", "S", "", False, ""),
+    ("DAL", "Marist Liufau", "LB", "", False, ""),
+    ("DAL", "P.J. Locke", "S", "Out", True, ""),
+    ("DAL", "Von Miller", "LB", "", False, ""),
+    ("DAL", "Jonathan Mingo", "WR", "Out", True, ""),
+    ("DAL", "Devin Moore", "CB", "Questionable", False, ""),
+    ("DAL", "DeMarvion Overshown", "LB", "", False, ""),
+    ("DAL", "George Pickens", "WR", "", False, ""),
+    ("DAL", "Joey Porter Jr.", "CB", "Questionable", False, ""),
+    ("DAL", "Luke Schoonmaker", "TE", "", False, ""),
+    ("DAL", "Brevyn Spann-Ford", "TE", "", False, ""),
+    ("DAL", "Juanyeh Thomas", "S", "Doubtful", True, ""),
+    ("DAL", "KaVontae Turpin", "WR", "", False, ""),
+    # PIT Steelers - live report 8 rows
+    ("PIT", "Brandin Echols", "CB", "", False, ""),
+    ("PIT", "DeShon Elliott", "S", "", True, "No game-status designation on the report, yet inactive."),
+    ("PIT", "Derrick Harmon", "DT", "Questionable", False, ""),
+    ("PIT", "Cameron Heyward", "DT", "", False, ""),
+    ("PIT", "Ben Skowronek", "WR", "", False, ""),
+    ("PIT", "Doneiko Slaughter", "CB", "", False, ""),
+    ("PIT", "Darnell Washington", "TE", "", False, ""),
+    ("PIT", "T.J. Watt", "LB", "", False, ""),
+    # CIN Bengals - live report 9 rows
+    ("CIN", "Jonathan Allen", "DT", "", False, ""),
+    ("CIN", "Jalen Davis", "CB", "Doubtful", False, ""),
+    ("CIN", "Kyle Dugger", "S", "Out", True, ""),
+    ("CIN", "Dylan Fairchild", "G", "", False, ""),
+    ("CIN", "B.J. Hill", "DT", "", False, ""),
+    ("CIN", "Andrei Iosivas", "WR", "Doubtful", False, ""),
+    ("CIN", "Dexter Lawrence", "DT", "", False, ""),
+    ("CIN", "Brian Parker II", "G", "Doubtful", False, ""),
+    ("CIN", "DJ Turner II", "CB", "", False, ""),
+]
+
+# Inactive players who do not appear anywhere on the injury report, per club.
+INACTIVE_NOT_ON_REPORT = [
+    ("NE", ["Dametrious Crownover", "Behren Morton (emergency third QB)"]),
+    ("DET", ["Keith Abney II", "Ahmed Hassanein", "Amen Ogbongbemiga", "Mekhi Wingo"]),
+    ("SEA", ["Emanuel Wilson", "Avery Smith", "Deven Eastern"]),
+    ("LV", ["Malik Benson", "Tristin McCollum", "Dalton Johnson", "Bryce Cabeldue"]),
+    ("SF", ["Kurtis Rourke", "Enrique Cruz Jr.", "Tatum Bethune", "Brandin Cooks"]),
+    ("DAL", ["Derion Kendrick", "Ajani Cornelius"]),
+    ("PIT", ["Drew Allar", "Will Howard (emergency third QB)", "Sean Murphy-Bunting", "Eli Heidenreich"]),
+    ("CIN", ["Connor Lew", "Myles Hinton", "Landon Robinson"]),
+]
+
+# --------------------------------------------------------------------------
+# Live (2026-11-16) vs committed capture (2026-11-13) differences on S1.
+# --------------------------------------------------------------------------
+CAPTURE_DELTA = [
+    dict(team="DET", subject="Amon-Ra St. Brown (WR)", field="Injuries / Game Status",
+         captured="(blank) / (blank)", live="Rib / Questionable",
+         note="Practice status unchanged (Limited Participation in Practice)."),
+    dict(team="DET", subject="Sione Vaki (RB)", field="Injuries / Practice Status / Game Status",
+         captured="(blank) / Did Not Participate In Practice / (blank)",
+         live="Ankle / Limited Participation in Practice / Questionable",
+         note="A practice-status upgrade and a new game designation between the two reads."),
+    dict(team="BAL", subject="Calais Campbell (DT)", field="Row presence",
+         captured="Row absent", live="Row present: Did Not Participate In Practice, no game status",
+         note="A player appeared on the report after the 2026-11-13 capture."),
+    dict(team="BAL", subject="Ronnie Stanley (T)", field="Row presence",
+         captured="Row absent", live="Row present: Did Not Participate In Practice, no game status",
+         note="A player appeared on the report after the 2026-11-13 capture."),
+    dict(team="(league-wide)", subject="Doubtful designations", field="Game Status values present",
+         captured="0 rows with a Doubtful designation",
+         live="Doubtful present, e.g. ATL Divine Deablo, GB Zaire Franklin, BUF Spencer Brown, "
+              "MIA Chris Bell, CAR Jonathon Brooks, CAR Mike Jackson, DAL Juanyeh Thomas, "
+              "CIN Jalen Davis, CIN Andrei Iosivas, CIN Brian Parker II, LAC Brenen Thompson",
+         note="The 2026-11-13 capture predates the Friday/Saturday designations."),
+    dict(team="(league-wide)", subject="Club records in the fixture headers", field="Record cell",
+         captured="Pre-game records (e.g. NE 5-4, DET 6-2, KC 6-2)",
+         live="Post-game records (e.g. NE 5-5, DET 7-2, KC 7-2)",
+         note="The page keeps the Week 10 tables up after the games while it still says Week 10."),
+]
+
+# --------------------------------------------------------------------------
+# Information HAVE / DON'T-HAVE register.
+# --------------------------------------------------------------------------
+GAPS = [
+    dict(domain="Injury designations (all 32 clubs)",
+         have="326 rows across 28 clubs and 14 fixtures, with Player / Position / Injuries / "
+              "Practice Status / Game Status, captured 2026-11-13, sha256 recorded. "
+              "Counts: 301 blank game status, 14 Out, 11 Questionable, 0 Doubtful.",
+         src="S8",
+         missing="The 2026-11-16 live values are only transcribed for the 8 clubs listed on the "
+                 "designation-join page; the other 20 clubs were read but not transcribed.",
+         blocks="Q01, Q02, SG-D"),
+    dict(domain="Intra-week designation history (Wed/Thu/Fri)",
+         have="Two time points: 2026-11-13 (committed capture) and 2026-11-16 (live read).",
+         src="S8, S1",
+         missing="Wednesday and Thursday captures. The brief asks for Wed + Thu + Fri plus kickoff; "
+                 "two points is a delta, not a series.",
+         blocks="Q12, F12, SG-A"),
+    dict(domain="Official inactive lists",
+         have="147 entries across 24 clubs for the 12 Sunday/Munich Week 10 games.",
+         src="S4",
+         missing="Thursday (WAS/NYG) and Monday (LAC/BAL) inactive lists were not published by S4 "
+                 "and were not located elsewhere; no prior-season archive.",
+         blocks="Q01, Q02, SG-A"),
+    dict(domain="Reserve / injured-reserve list membership",
+         have="The league publishes a dated reserve list: 25 Reserve/Injured moves for November "
+              "2026 at https://www.nfl.com/transactions/league/reserve-list/2026/11, including "
+              "Malik Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson "
+              "(DAL, 11/14).",
+         src="S10",
+         missing="No capture of it. Nothing in this repository ingests this page, so an IR player "
+                 "still looks merely absent.",
+         blocks="Q05, F3, SG-E"),
+    dict(domain="League depth charts",
+         have="Confirmed absent: https://www.nfl.com/teams/baltimore-ravens/depth-chart returns 404 "
+              "and the club page's tabs are Info / Roster / Stats.",
+         src="S2, S3",
+         missing="nfl.com publishes no depth chart at any path found this session. Clubs publish on "
+                 "their own domains (e.g. baltimoreravens.com), which were not read.",
+         blocks="Q06, F5, SG-C"),
+    dict(domain="Snap counts",
+         have="", src="S3, S5, S6, S7",
+         missing="No snap-count table found on the club page, the Game Center, the schedule page or "
+                 "the scores page. A gamebook PDF route is reported on third-party forums; it was "
+                 "not retrieved, so nothing is asserted.",
+         blocks="Q07, F7, SG-C"),
+    dict(domain="Announced starters (first-snap offence/defence)",
+         have="", src="S5",
+         missing="The Game Center tabs read (INFO / OVERVIEW / STATS / STREAMS) publish no starters "
+                 "list and no game-day status beyond the injury cards.",
+         blocks="Q08, F7"),
+    dict(domain="Venue per fixture",
+         have="13 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from the "
+              "Game Center Game Info block.",
+         src="S4, S5",
+         missing="WAS/NYG (Thu Nov 12) venue not captured.",
+         blocks="Q13, F11, SG-F"),
+    dict(domain="Stadium roof / surface designation",
+         have="", src="S5, S6",
+         missing="The Game Center Game Info block publishes Location, Stadium and Network only - no "
+                 "roof designation, no surface, no 90-minute designation.",
+         blocks="Q09, F8"),
+    dict(domain="Weather (wind / precipitation)",
+         have="The schedule page carries a summary weather chip for the upcoming game "
+              "('Weather Clearnight').",
+         src="S6",
+         missing="No wind speed, no precipitation, no hourly grid on any official page read. The "
+                 "brief's NWS overlay is outside the official domain entirely.",
+         blocks="Q09, F8"),
+    dict(domain="Schedule / fixture context",
+         have="Week 10 dates, kickoff times, networks, teams on bye (CHI, DEN, PHI, TB), final "
+              "scores, and the 2026 TBD-games note linking the flexible-scheduling procedures page.",
+         src="S6, S7",
+         missing="The dated league schedule announcement itself; Week 11 not yet published at fetch time.",
+         blocks="Q15, F13"),
+    dict(domain="Verified results feed",
+         have="12 of 14 Week 10 finals, each cross-checked on two official pages.",
+         src="S6, S7",
+         missing="PIT/CIN (rendered live at fetch time) and LAC/BAL (not started). No prior-season "
+                 "results corpus was read this session.",
+         blocks="Q14, F1, SG-G"),
+    dict(domain="Market prices (open / close / moneyline)",
+         have="No official price found. The Game Center, schedule, scores and club pages publish no "
+              "spread, total or moneyline.",
+         src="S3, S5, S6, S7",
+         missing="An authorised price source. Without one, originated-line residuals, CLV and ROI "
+                 "are undefined and must stay blank.",
+         blocks="Q10, Q16, F6, SG-B"),
+    dict(domain="Player-prop markets",
+         have="", src="S3, S5, S6, S7",
+         missing="Nothing official. Same blocker as market prices.",
+         blocks="Q18, SG-N"),
+    dict(domain="Dated transactions / roster events",
+         have="The league transactions hub publishes Trades, Signings, Reserve List, Waivers, "
+              "Terminations and Other by year and month. November 2026: 12 trades and 25 "
+              "reserve-list moves, each dated.",
+         src="S9, S10",
+         missing="No capture. Depth and availability rows are not yet stamped with the last roster "
+                 "event that affects them.",
+         blocks="Q20, SG-E"),
+    dict(domain="Team and player statistics",
+         have="nfl.com publishes team and player stats; the Game Center carries a regular-season "
+              "glance (points per game, yards per game, time of possession, sacks, interceptions, "
+              "turnover differential) and club leaders.",
+         src="S3, S5",
+         missing="No opponent-adjusted rating was computed this session.",
+         blocks="SG-L, SG-M"),
+]
+
+# --------------------------------------------------------------------------
+# Open-questions register.
+# --------------------------------------------------------------------------
+QUESTIONS = [
+    dict(id="Q01", topic="Availability",
+         question="What fraction of officially inactive players appear on the NFL injury report at all?",
+         have="Measured on the 8 clubs where every live row was read and joined to the official "
+              "inactive list: 26 of 46 inactive players (56.5%) do not appear on the injury report "
+              "in any form. Excluding the two emergency third quarterbacks, 24 of 44 (54.5%).",
+         src="S1, S4",
+         missing="The other 16 clubs of Week 10, and every prior week.",
+         clears="The same join computed for all 32 clubs and at least one full season, with the "
+                "denominator published and the emergency-third-QB rows separated out.",
+         discovery="SG-D",
+         status="answered, bounded (n = 8 clubs, 46 inactives)"),
+    dict(id="Q02", topic="Availability",
+         question="What does 'Questionable' mean empirically?",
+         have="On the 8 joined clubs, 4 of 26 players carrying a Questionable designation were "
+              "inactive (15.4%).",
+         src="S1, S4",
+         missing="A usable sample. n = 26 in one week is far too small, and one club (LV) went 2 for 2.",
+         clears="Several seasons of designations joined to the official inactive lists, with a "
+                "confidence interval and a club-clustered standard error.",
+         discovery="SG-A",
+         status="open"),
+    dict(id="Q03", topic="Availability",
+         question="What does 'Doubtful' mean empirically?",
+         have="1 of 4 Doubtful players on the joined clubs was inactive (25%).",
+         src="S1, S4",
+         missing="n = 4. The brief asks for a calibrated probability with a confidence interval; "
+                 "this cannot support one.",
+         clears="n >= 200 Doubtful designations joined to inactive lists across seasons.",
+         discovery="SG-A",
+         status="open"),
+    dict(id="Q04", topic="Availability",
+         question="Does an 'Out' designation guarantee the player is inactive?",
+         have="No, and the official reserve list explains most of it. Of 17 Out players on the "
+              "joined clubs, 14 were inactive and 2 more were placed on the official reserve list "
+              "during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, DAL, 11/14). "
+              "16 of 17 (94.1%) are therefore explained by two official pages. Kerby Joseph (DET) "
+              "is the one case neither page explains.",
+         src="S1, S4, S10",
+         missing="An explanation for Kerby Joseph: Out on the injury report, absent from the Week 10 "
+                 "inactive list, and absent from the November 2026 reserve list.",
+         clears="The reserve list captured as a dated field of the weekly snapshot, so an Out player "
+                 "who went on IR is separated from an Out player who was expected to be inactive.",
+         discovery="SG-E",
+         status="answered for 16 of 17; one case flagged (F3)"),
+    dict(id="Q05", topic="Availability",
+         question="Which players are on a reserve list and therefore absent from the weekly report?",
+         have="The league publishes it. https://www.nfl.com/transactions/league/reserve-list/2026/11 "
+              "lists 25 Reserve/Injured moves for November 2026, each dated and club-indexed. It "
+              "includes Malik Willis (MIA, 11/10) - the exact case the project brief cites as the "
+              "reason a reserve list is needed - and it explains two of the three Out players who "
+              "were missing from the inactive list.",
+         src="S10",
+         missing="Nothing for this month. The gap is that the reserve list is not captured: nothing "
+                 "in this repository ingests it, so a player on IR still looks simply absent.",
+         clears="Add the reserve list to the scheduled capture as a dated field, and join it to the "
+                 "weekly injury and inactive captures.",
+         discovery="SG-E",
+         status="answered - the official page exists and was read"),
+    dict(id="Q06", topic="Depth",
+         question="Does the league publish depth charts?",
+         have="No. https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 "
+              "page, and the club page's only sections are Info, Roster and Stats.",
+         src="S2, S3",
+         missing="Nothing - this one is settled for nfl.com. The open part is whether the 32 club "
+                 "domains publish them in a parseable form.",
+         clears="A club-by-club read of all 32 official club sites, each with a URL, a date and a "
+                "parser that survives the 'published as an image' failure mode.",
+         discovery="SG-C",
+         status="answered for nfl.com; open for the 32 club sites"),
+    dict(id="Q07", topic="Depth",
+         question="Is there an official snap-count source?",
+         have="", src="S3, S5, S6, S7",
+         missing="Not found on any official page read this session (club page, Game Center, schedule, "
+                 "scores). A gamebook-PDF route is described on third-party forums; it was not "
+                 "retrieved, so no claim is made.",
+         clears="One official gamebook retrieved and parsed end-to-end, with the snap-count page "
+                "located and its URL published.",
+         discovery="SG-C",
+         status="open"),
+    dict(id="Q08", topic="Depth",
+         question="Does the Game Center publish announced starters and game-day status?",
+         have="", src="S5",
+         missing="The Game Center tabs read (INFO / OVERVIEW / STATS / STREAMS) publish no starters "
+                 "list, only team statistics, club leaders and injury cards.",
+         clears="A page or endpoint on the official domain that lists first-snap offence and defence.",
+         discovery="SG-C",
+         status="open"),
+    dict(id="Q09", topic="Environment",
+         question="Does the league publish a stadium roof designation and weather?",
+         have="Game Info publishes Location and Stadium only. The schedule page carries a summary "
+              "weather chip for the upcoming game ('Weather Clearnight').",
+         src="S5",
+         missing="Roof designation, surface, wind speed, precipitation. The brief's NWS grid is a "
+                 "different (non-NFL) domain and was not read.",
+         clears="A published roof/surface field per stadium plus an NWS grid URL per venue, both "
+                 "captured with a timestamp.",
+         discovery="SG-J",
+         status="open"),
+    dict(id="Q10", topic="Prices",
+         question="Where does an authorised price come from?",
+         have="No official price exists. The Game Center, schedule, scores and club pages publish no "
+              "spread, total or moneyline.",
+         src="S3, S5, S6, S7",
+         missing="Everything.",
+         clears="A written price-data policy: which source, under what terms, with what retention, "
+                 "signed off before any backtest is published.",
+         discovery="SG-B",
+         status="blocking - no residual, CLV or ROI can be computed until this is answered"),
+    dict(id="Q11", topic="Repository",
+         question="Why do three different row counts for the same injury page exist in this repo?",
+         have="Sessions have published 254, 279 and 347 rows for this page. This session's parse of "
+              "the committed 2026-11-13 capture gives 326 rows over 28 clubs; the live 2026-11-16 "
+              "page differs from that capture again.",
+         src="S8, S1",
+         missing="Which quantity each published number counts (report rows, injury entries, players, "
+                 "clubs, or rows in some other namespace's derived table).",
+         clears="One canonical capture file, one parser, and every count computed at build time from "
+                 "that file, with no count typed into prose.",
+         discovery="SG-H",
+         status="open - flagged"),
+    dict(id="Q12", topic="Availability",
+         question="How much does the report move inside a week?",
+         have="Proven to move: between 2026-11-13 and 2026-11-16 the Lions' St. Brown and Vaki rows "
+              "changed, two Ravens rows appeared, Doubtful designations appeared where there had "
+              "been none, and the club records in the headers were replaced with post-game records.",
+         src="S8, S1",
+         missing="Wednesday and Thursday reads, so the DNP to LP to FP path cannot be reconstructed.",
+         clears="Captures on Wednesday, Thursday, Friday and at kickoff, each hashed, so the "
+                 "designation path is replayable.",
+         discovery="SG-A",
+         status="answered in kind; the series is still too short"),
+    dict(id="Q13", topic="Fixtures",
+         question="Is the venue of every fixture transcribed from the official game centre?",
+         have="13 of 14 Week 10 venues from official pages: 12 from the inactives article, 1 from "
+              "the Game Center Game Info block.",
+         src="S4, S5",
+         missing="The WAS/NYG venue of 12 November.",
+         clears="One more official read.",
+         discovery="SG-F",
+         status="open - one fixture outstanding"),
+    dict(id="Q14", topic="Results",
+         question="Is the Week 10 results feed complete?",
+         have="12 of 14 finals, each seen on two official pages.",
+         src="S6, S7",
+         missing="PIT/CIN, which both /schedules and /scores rendered as LIVE (Q1 08:56, 0-3) at "
+                 "fetch time on 2026-11-16 - a Monday. LAC/BAL had not kicked off.",
+         clears="A re-read once the page settles, plus a freshness guard that refuses to publish a "
+                "score for a fixture whose state is not Final.",
+         discovery="SG-G",
+         status="open - flagged"),
+    dict(id="Q15", topic="Fixtures",
+         question="Is the league's dated schedule announcement published beside the live schedule?",
+         have="The schedule page carries a 2026 TBD-games note and links "
+              "https://www.nfl.com/legal/flexible-scheduling-procedures.",
+         src="S6",
+         missing="The dated announcement article itself, and Week 11, which was not published at "
+                 "fetch time.",
+         clears="Locate and cite the dated announcement, then keep it beside the live schedule page.",
+         discovery="SG-J",
+         status="open"),
+    dict(id="Q16", topic="Origination",
+         question="What is the correlation between the originated side, total and moneyline residuals?",
+         have="", src="S3, S5, S6, S7",
+         missing="A price. With no market line there is no residual, so there is nothing to correlate.",
+         clears="Q10 first, then at least a season of paired (own line, market line) observations "
+                "with n published next to every coefficient.",
+         discovery="SG-B",
+         status="blocked by Q10"),
+    dict(id="Q17", topic="Governance",
+         question="What minimum n makes a strategy reward-eligible?",
+         have="", src="repo",
+         missing="One owner decision. This repository currently carries competing gates, including "
+                 "'n >= 300 graded games' against a largest corpus of 77 games.",
+         clears="A single written gate with a number, committed before the evaluation window opens.",
+         discovery="SG-L",
+         status="open - owner decision"),
+    dict(id="Q18", topic="Governance",
+         question="Can a parlay or same-game-parlay combination ever be ranked?",
+         have="", src="repo",
+         missing="A directly validated joint probability and the operator's void/push rules. "
+                 "Multiplying marginals is invalid under dependence.",
+         clears="A joint-evidence gate backed by an estimated dependence structure on official "
+                 "results, or a standing refusal to rank combinations at all.",
+         discovery="SG-N",
+         status="blocked - refuse until a joint model exists"),
+    dict(id="Q19", topic="Governance",
+         question="Has any pre-registered strategy produced a prospective record?",
+         have="", src="repo",
+         missing="A strategy committed before its window opened, together with official results "
+                 "inside that window.",
+         clears="Registration commit hash + frozen rule text + a results feed that starts after it.",
+         discovery="SG-L",
+         status="open"),
+    dict(id="Q20", topic="Rosters",
+         question="Can roster turnover be versioned against the last official roster event?",
+         have="Yes, and the source is dated per move. The league transactions hub publishes Trades, "
+              "Signings, Reserve List, Waivers, Terminations and Other, selectable by year and "
+              "month. November 2026 carries 12 trades and 25 reserve-list moves, each with a date.",
+         src="repo",
+         missing="Nothing in this repository ingests it today, so depth and availability rows are "
+                 "not yet versioned against the last roster event.",
+         clears="Capture all six categories daily, hashed, and stamp every depth and availability "
+                "row with the last roster event that affects it.",
+         discovery="SG-E",
+         status="answered - the source exists; the capture does not"),
+]
+
+# --------------------------------------------------------------------------
+# Suggestions review board.  `verdict` is deliberately blank: choosing a path
+# is the reviewer's decision, not the model's.
+# --------------------------------------------------------------------------
+SUGGESTIONS = [
+    dict(id="SG-A", title="Run a scheduled, hashed official capture (Wed / Thu / Fri / kickoff)",
+         why="The whole availability feature depends on being able to replay what was known before "
+             "kickoff. Today there are two time points this season and no Wednesday or Thursday.",
+         options=[
+             dict(label="A", text="Collect nfl.com pages only (injuries, inactives article, schedule, "
+                                  "scores, transactions, game centres). Four captures a week, sha256 "
+                                  "per capture, drift alarm on row counts and required fields.",
+                  effort="Low", risk="Low - official domain, no terms question",
+                  tradeoff="Cheapest and safest, but leaves the depth question (Q06/Q07) unanswered."),
+             dict(label="B", text="Option A plus the 32 official club sites for depth charts and "
+                                  "transactions.",
+                  effort="High", risk="Medium - 32 parsers, one of which (the Texans) publishes an image",
+                  tradeoff="Closes the depth gap if the pages are parseable; high maintenance."),
+             dict(label="C", text="Option A plus a licensed data feed that carries depth, snaps and "
+                                  "prices under a read licence.",
+                  effort="Low once licensed", risk="Medium - the price-data policy (SG-B) must be decided first",
+                  tradeoff="Fastest route to a full feature set; costs money and imposes terms."),
+         ],
+         dependency="None to start option A.",
+         recommended="A now, and do not start B or C until the sample from A has been read.",
+         src="S1, S8",
+         verdict=""),
+    dict(id="SG-B", title="Decide the price-data policy before any backtest is published",
+         why="No official page publishes a spread, total or moneyline. Every residual, CLV and ROI "
+             "number in this repository is therefore undefined until a source and its terms are chosen.",
+         options=[
+             dict(label="A", text="Publish no price at all. Ship the model's fair line as a "
+                                  "probability with its inputs and no market comparison.",
+                  effort="None", risk="None",
+                  tradeoff="Honest and immediate, but the brief's 'residual against the market' and "
+                           "CLV leaderboard cannot exist."),
+             dict(label="B", text="Ingest one licensed odds source, terms read and recorded, with "
+                                  "open and close captured on a schedule.",
+                  effort="Medium", risk="Medium - single-vendor dependence and a retention obligation",
+                  tradeoff="Unblocks residuals and CLV; every derived number inherits one vendor's "
+                           "definition of 'close'."),
+             dict(label="C", text="Ingest several sources and publish a vig-free consensus with the "
+                                  "operator margin decomposed out.",
+                  effort="High", risk="Medium - consensus construction must be pre-registered",
+                  tradeoff="Best separation of origination alpha from vig; slowest to stand up."),
+         ],
+         dependency="Blocks Q10 and Q16, and every leaderboard column that uses a market price.",
+         recommended="A as the default today, with B or C chosen by the owner before any CLV claim.",
+         src="S3, S5, S6, S7",
+         verdict=""),
+    dict(id="SG-C", title="Resolve the depth-order source before building the deficiency feature",
+         why="The brief asks for 2nd/3rd/4th-string replacements. nfl.com publishes no depth chart "
+             "(404) and no snap counts were found, so the feature currently has no input.",
+         options=[
+             dict(label="A", text="Per-club official depth pages, verified club by club, with a "
+                                  "parser that records shared and empty slots faithfully.",
+                  effort="High", risk="Medium - the Texans publish an image; jersey numbers must be stripped",
+                  tradeoff="Direct answer if all 32 cooperate; dead ends if some publish images."),
+             dict(label="B", text="Derive depth from snap counts using the official gamebook, once "
+                                  "one has actually been retrieved and parsed.",
+                  effort="Medium", risk="Medium - availability lag, and snaps measure the past",
+                  tradeoff="Measurable starter/backup split; cannot name a replacement before kickoff."),
+             dict(label="C", text="Build nothing until one route is verified for all 32 clubs.",
+                  effort="None", risk="None",
+                  tradeoff="Avoids fabricating a starter the club never named; leaves the feature absent."),
+         ],
+         dependency="Q06, Q07, Q08.",
+         recommended="C is the safe default; B is the better bet if a gamebook can be retrieved.",
+         src="S2, S3",
+         verdict=""),
+    dict(id="SG-D", title="Transcribe the full live injury report into the repository",
+         why="This session read the whole live page but only transcribed 8 of 28 clubs. The "
+             "inactive-coverage finding (Q01) rests on 46 inactives; it should rest on all of them.",
+         options=[
+             dict(label="A", text="Transcribe all 28 clubs for Week 10 and recompute the join.",
+                  effort="Medium", risk="Low",
+                  tradeoff="Triples the sample for one week; still one week."),
+             dict(label="B", text="Option A plus an automated fetch-and-parse step so future weeks "
+                                  "need no transcription.",
+                  effort="High", risk="Medium - needs the drift alarm from SG-A",
+                  tradeoff="The only route to a multi-season sample."),
+         ],
+         dependency="None.",
+         recommended="B, but only inside the SG-A collector.",
+         src="S1, S4",
+         verdict=""),
+    dict(id="SG-E", title="Ingest the official reserve list and the six transaction categories",
+         why="The reserve list exists and is dated (25 moves in November 2026), and it explains two "
+             "of the three Out players who were missing from the inactive list - including the "
+             "Malik Willis case the brief names. Nothing in this repository captures it, so 'not "
+             "listed' still reads as 'available'.",
+         options=[
+             dict(label="A", text="Capture the reserve list alone, daily, hashed, and join it to the "
+                                  "weekly injury and inactive captures. One page, one parser.",
+                  effort="Low", risk="Low",
+                  tradeoff="Closes the highest-value half of the gap immediately; leaves trades and "
+                           "signings out."),
+             dict(label="B", text="Capture all six categories (Trades, Signings, Reserve List, "
+                                  "Waivers, Terminations, Other), and stamp every depth and "
+                                  "availability row with the last roster event affecting it.",
+                  effort="Medium", risk="Low",
+                  tradeoff="Makes roster turnover a first-class dated event, which the brief asks "
+                           "for; six parsers instead of one."),
+         ],
+         dependency="SG-A.",
+         recommended="A this week, B as soon as the collector exists.",
+         src="S10, S1, S4",
+         verdict=""),
+    dict(id="SG-F", title="Complete the venue register to 14 of 14",
+         why="Thirteen venues are captured from official pages; the Thursday game is missing because "
+             "the inactives article covers Sunday games only.",
+         options=[
+             dict(label="A", text="Read the Commanders-Giants game centre and record its Location "
+                                  "and Stadium fields.",
+                  effort="Trivial", risk="None",
+                  tradeoff="Completes Week 10; does not generalise."),
+             dict(label="B", text="Make the venue a required field of the fixture capture, so every "
+                                  "future fixture is captured with one.",
+                  effort="Low", risk="Low",
+                  tradeoff="Prevents the gap from recurring."),
+         ],
+         dependency="None.",
+         recommended="Both - A is one read, B is a drift-alarm field.",
+         src="S4, S5",
+         verdict=""),
+    dict(id="SG-G", title="Add a freshness guard and re-read the Steelers-Bengals result",
+         why="Both /schedules and /scores rendered that fixture as LIVE in the first quarter on "
+             "2026-11-16. Publishing a score from that state would be an inference.",
+         options=[
+             dict(label="A", text="Refuse to publish any score whose state is not Final, and record "
+                                  "the fixture as blank plus flagged.",
+                  effort="Low", risk="None",
+                  tradeoff="Correct, and leaves a hole until the page settles."),
+             dict(label="B", text="Option A plus a re-read job that clears the flag once the page "
+                                  "reports Final, recording both the fetch time and the page state.",
+                  effort="Medium", risk="Low",
+                  tradeoff="Self-healing, and leaves an audit trail of when the result became known."),
+         ],
+         dependency="None.",
+         recommended="B.",
+         src="S6, S7",
+         verdict=""),
+    dict(id="SG-H", title="One canonical count, computed at build time, never typed into prose",
+         why="Three sessions published 254, 279 and 347 rows for the same page, and a fourth "
+             "published 326. Counts written by hand go stale the moment a sibling merges.",
+         options=[
+             dict(label="A", text="Pin one capture file, compute every count from it, and fail the "
+                                  "build if a page contains a count that is not produced by the parser.",
+                  effort="Medium", risk="Low",
+                  tradeoff="Settles the discrepancy; requires touching pages that already type a number."),
+             dict(label="B", text="Option A plus a single shared register page that every namespace "
+                                  "links to instead of repeating the number.",
+                  effort="Medium-high", risk="Low",
+                  tradeoff="Removes the duplication that created the divergence."),
+         ],
+         dependency="The integration session, because it changes shared outputs.",
+         recommended="A now, B at the next integration.",
+         src="S8, S1",
+         verdict=""),
+    dict(id="SG-I", title="Consolidate the 30 nfl-* namespaces into one canonical set",
+         why="Thirty namespaces each publish their own questions, suggestions and review pages. "
+             "Contradictory numbers are inevitable and are already present.",
+         options=[
+             dict(label="A", text="Freeze new namespaces and mark one canonical namespace per domain.",
+                  effort="Low", risk="Low",
+                  tradeoff="Stops the bleeding without deleting anyone's work."),
+             dict(label="B", text="Merge the canonical namespaces and keep the rest as archived "
+                                  "research records, linked but not navigated.",
+                  effort="High", risk="Medium - touches shared navigation",
+                  tradeoff="A site a reviewer can actually use; needs an integration session."),
+         ],
+         dependency="The integration session.",
+         recommended="A immediately, B at the next integration.",
+         src="repo",
+         verdict=""),
+    dict(id="SG-J", title="Capture roof, surface and weather per venue from published sources",
+         why="Totals and passing props misprice when a dome is assumed outdoors or a windy open "
+             "stadium is assumed calm. The official pages read this session publish neither.",
+         options=[
+             dict(label="A", text="Record the stadium and city from the Game Center for every "
+                                  "fixture, and mark roof and surface blank until a source is found.",
+                  effort="Low", risk="Low",
+                  tradeoff="Honest, and builds the venue spine the overlay would hang on."),
+             dict(label="B", text="Option A plus an NWS grid capture per venue and an official "
+                                  "roof/surface field where the league publishes one.",
+                  effort="High", risk="Medium - mixes two domains and two timestamps",
+                  tradeoff="Enables the overlay; needs the timestamp discipline of SG-A."),
+         ],
+         dependency="SG-A.",
+         recommended="A now; B only if the roof designation is actually published somewhere.",
+         src="S5, S6",
+         verdict=""),
+    dict(id="SG-K", title="Put a control baseline on every leaderboard run",
+         why="Without a random-pick and a favourites-only column, a good week is indistinguishable "
+             "from a good model.",
+         options=[
+             dict(label="A", text="Publish random and favourites-only baselines beside every "
+                                  "strategy, with the same n and the same proper score.",
+                  effort="Low", risk="None",
+                  tradeoff="Needs a favourites definition; with no official price, 'favourite' must "
+                           "be defined from the model, not the market."),
+         ],
+         dependency="A defined benchmark (see SG-B option A).",
+         recommended="A.",
+         src="repo",
+         verdict=""),
+    dict(id="SG-L", title="Pre-register each strategy: rule text, window and gates, committed first",
+         why="The commit hash is the registration. Without it, any leaderboard result can be "
+             "accused - correctly - of being chosen after the fact.",
+         options=[
+             dict(label="A", text="A registration file per strategy: frozen rule text, sample window, "
+                                  "gates, and the commit hash, created before the window opens.",
+                  effort="Low", risk="None",
+                  tradeoff="Requires discipline; no cost otherwise."),
+             dict(label="B", text="Option A plus a gate that refuses to rank any strategy whose "
+                                  "registration commit predates its first graded result.",
+                  effort="Medium", risk="Low",
+                  tradeoff="Makes the rule enforceable rather than aspirational."),
+         ],
+         dependency="None.",
+         recommended="B.",
+         src="repo",
+         verdict=""),
+    dict(id="SG-M", title="Split train, validation and final holdout by season",
+         why="Out-of-sample testing is the only thing that separates a model from a curve fit.",
+         options=[
+             dict(label="A", text="Fix the split by season, publish which seasons are in which fold, "
+                                  "and forbid touching the final holdout until the model is frozen.",
+                  effort="Low", risk="None",
+                  tradeoff="Costs sample size in the short run."),
+         ],
+         dependency="A results corpus (SG-G plus the past-season archive).",
+         recommended="A.",
+         src="repo",
+         verdict=""),
+    dict(id="SG-N", title="Keep parlays and prop combos behind a joint-evidence gate",
+         why="Multiplying marginal probabilities is invalid under dependence. Until a joint "
+             "probability is validated on official results, a combination must not be ranked.",
+         options=[
+             dict(label="A", text="Rank singles only, and publish the combination gate as unmet.",
+                  effort="None", risk="None",
+                  tradeoff="Removes a whole product category until the evidence exists."),
+             dict(label="B", text="Estimate a dependence structure on official results and publish "
+                                  "the joint probability with its uncertainty before ranking anything.",
+                  effort="High", risk="High - dependence estimates need a large sample",
+                  tradeoff="The only route to ranking combinations honestly."),
+         ],
+         dependency="Q10, Q18 and a multi-season results corpus.",
+         recommended="A until the corpus exists.",
+         src="repo",
+         verdict=""),
+    dict(id="SG-O", title="Publish n beside every correlation and every rate",
+         why="A correlation without its n is not a number. The designation rates on this site are "
+             "published with n = 26 and n = 4 precisely so they cannot be mistaken for settled facts.",
+         options=[
+             dict(label="A", text="Make n a required column on every correlation and rate table, and "
+                                  "fail the build when it is missing.",
+                  effort="Low", risk="None",
+                  tradeoff="None."),
+         ],
+         dependency="None.",
+         recommended="A.",
+         src="S1, S4",
+         verdict=""),
+]
+
+# --------------------------------------------------------------------------
+# Flagged for review.
+# --------------------------------------------------------------------------
+FLAGS = [
+    dict(id="F1", sev="high", area="Results",
+         item="PIT at CIN, Week 10 - no final score published",
+         detail="Both https://www.nfl.com/schedules and https://www.nfl.com/scores/ rendered this "
+                "fixture as LIVE (Q1 08:56, PIT 0 - CIN 3, FIELD GOAL) when read on 2026-11-16, a "
+                "Monday, while the same pages render the other twelve Week 10 games as Final. The "
+                "score is left blank rather than inferred. Whether this is page caching or a genuine "
+                "suspension, the result is not verified.",
+         src="S6, S7"),
+    dict(id="F2", sev="high", area="Repository",
+         item="Three incompatible row counts published for the same injury page",
+         detail="Earlier sessions published 254, 279 and 347 rows for the Week 10 nfl.com injury "
+                "report. This session's parse of the committed 2026-11-13 capture returns 326 rows "
+                "over 28 clubs, and the live 2026-11-16 page differs from that capture again. Which "
+                "quantity each earlier number counts is not stated, so they cannot be reconciled.",
+         src="S8, S1"),
+    dict(id="F3", sev="medium", area="Availability",
+         item="One Out player neither the inactive list nor the reserve list explains",
+         detail="TreVeyon Henderson (NE) and Tyler Goodson (DAL) carried an Out designation while "
+                "absent from the Week 10 inactive list; the official reserve list now explains both "
+                "(Reserve/Injured, 11/14). Kerby Joseph (DET) remains unaccounted for: Out on the "
+                "injury report, absent from the inactive list, and absent from the November 2026 "
+                "reserve list. No official page read this session states why.",
+         src="S1, S4, S10"),
+    dict(id="F4", sev="high", area="Availability",
+         item="56.5% of inactive players are absent from the injury report",
+         detail="On the eight clubs where every live row was read and joined to the official "
+                "inactive list, 26 of 46 inactive players (24 of 44 excluding emergency third "
+                "quarterbacks) do not appear on the injury report in any form. The injury report "
+                "alone therefore cannot establish who is unavailable.",
+         src="S1, S4"),
+    dict(id="F5", sev="high", area="Depth",
+         item="nfl.com publishes no depth chart",
+         detail="https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 "
+                "page and the club page offers only Info, Roster and Stats. The brief's "
+                "'club depth pages' therefore cannot be satisfied from nfl.com; the 32 club domains "
+                "were not read this session.",
+         src="S2, S3"),
+    dict(id="F6", sev="high", area="Prices",
+         item="No official price source exists",
+         detail="No spread, total or moneyline was found on the Game Center, the schedule page, the "
+                "scores page or the club page. Every residual, CLV and ROI figure must stay blank "
+                "until the price-data policy is decided.",
+         src="S3, S5, S6, S7"),
+    dict(id="F7", sev="medium", area="Depth",
+         item="Snap counts and announced starters not found",
+         detail="Neither a snap-count table nor a starters list was found on any official page read "
+                "this session. A gamebook-PDF route is described on third-party forums; it was not "
+                "retrieved, so no claim is made about it.",
+         src="S3, S5"),
+    dict(id="F8", sev="medium", area="Environment",
+         item="No roof designation, surface or wind on the official pages",
+         detail="The Game Center Game Info block publishes Location, Stadium and Network only. The "
+                "schedule page carries a summary weather chip ('Weather Clearnight') and nothing "
+                "more. The NWS overlay the brief asks for is a separate domain, not read here.",
+         src="S5, S6"),
+    dict(id="F9", sev="medium", area="Availability",
+         item="Every number pinned to the 2026-11-13 capture is stale",
+         detail="The live page read on 2026-11-16 differs from the committed capture: two Lions rows "
+                "changed, two Ravens rows appeared, Doubtful designations appeared, and the club "
+                "records in the headers were replaced with post-game records.",
+         src="S8, S1"),
+    dict(id="F10", sev="medium", area="Repository",
+         item="30 nfl-* namespaces repeat the same page set",
+         detail="The repository carries 30 top-level nfl-* namespaces, most with their own "
+                "questions, suggestions and review pages. Contradictory published values (F2) are "
+                "the predictable result.",
+         src="repo"),
+    dict(id="F11", sev="low", area="Fixtures",
+         item="One Week 10 venue not captured",
+         detail="The WAS/NYG fixture of 12 November has no venue recorded: the inactives article "
+                "covers Sunday games only and that game centre was not read.",
+         src="S4"),
+    dict(id="F12", sev="medium", area="Availability",
+         item="The availability series has two time points, not four",
+         detail="The brief asks for Wednesday, Thursday and Friday captures plus kickoff. Only "
+                "2026-11-13 and 2026-11-16 exist, so the DNP to LP to FP path cannot be replayed.",
+         src="S8, S1"),
+    dict(id="F14", sev="medium", area="Availability",
+         item="The reserve list is published but not captured anywhere in this repository",
+         detail="https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated "
+                "Reserve/Injured moves for November 2026, including the Malik Willis case the "
+                "project brief cites. Nothing in the repository ingests it, so an injured-reserve "
+                "player still appears simply as 'not listed'.",
+         src="S10"),
+    dict(id="F13", sev="low", area="Fixtures",
+         item="Week 11 not yet published; dated announcement not located",
+         detail="The schedule page still showed Week 10 at fetch time on 2026-11-16. It carries a "
+                "2026 TBD-games note and links the flexible-scheduling procedures page, but the "
+                "dated announcement article itself was not located.",
+         src="S6"),
+]

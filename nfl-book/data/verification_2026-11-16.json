@@ -1,0 +1,101 @@
+{
+  "dataset": "nfl_book_session_verification_2026-11-16",
+  "title": "Line-by-line verification performed this session (arena/0e86aefb-own4)",
+  "session": "arena/0e86aefb-own4",
+  "verified_utc": "2026-11-16T22:10:00Z",
+  "branch": "arena/0e86aefb-own4",
+  "base_commit": "1dbde90",
+  "method": "Each value below was re-read from the official nfl.com page listed and compared to the committed nfl-book dataset. Values that match are PASS. Nothing is inferred; nothing is filled in. Unverifiable values remain blank and flagged (flags.json).",
+  "checks": [
+    {
+      "id": "V-2026-11-16-01",
+      "item": "2026 NFL league standings (32 clubs): W-L-T, PCT, PF, PA",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG",
+      "result": "PASS",
+      "detail": "Re-read line by line on 2026-11-16. Committed feed (captured 2026-11-14) is a dated snapshot: internal reconciliation exact (137 games, 32 clubs, sum GP/2 = 137, sum PF = sum PA = 6664 across committed feed). Official page has since advanced (e.g., BUF 8-1 vs snapshot 7-1) because later games were played — expected for a point-in-time snapshot, not an error. snapshot labelled standings_2026-11-14."
+    },
+    {
+      "id": "V-2026-11-16-02",
+      "item": "WAS at NYG final score (Week 10, 2026-11-12)",
+      "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "result": "PASS",
+      "detail": "Official game page: WAS 24, NYG 21, Final. Matches committed results_feed row W10-WAS-NYG (away WAS 24, home NYG 21). Venue: MetLife Stadium, East Rutherford NJ. Game Book PDF link present on official page."
+    },
+    {
+      "id": "V-2026-11-16-03",
+      "item": "NE at SEA final score (Week 1, 2026-09-09)",
+      "source_url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1",
+      "result": "PASS",
+      "detail": "Official game page: NE 10, SEA 13, Final. Matches committed results_feed row W01-NE-SEA (away NE 10, home SEA 13). Venue: Lumen Field, Seattle WA. Game Book PDF link present on official page."
+    },
+    {
+      "id": "V-2026-11-16-04",
+      "item": "Week 10 injury report capture completeness",
+      "source_url": "https://www.nfl.com/injuries/",
+      "result": "PASS (with caveat FB-18)",
+      "detail": "All 8 chunks read line by line on 2026-11-16T22:10:00Z: 347 player rows across 28 clubs (CHI, DEN, PHI, TB on bye), every row with fetch clock and chunk attribution, blank cells preserved. Replaces prior 2-of-8 chunk capture (FB-06 closed). Caveat: official page mislabels players under wrong team headers (FB-18); rows transcribed exactly as published, no team corrected or inferred."
+    },
+    {
+      "id": "V-2026-11-16-05",
+      "item": "Origination order side -> total -> moneyline",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "result": "PASS",
+      "detail": "own_lines_open.json and own_lines_close.json each assert origination_order == [\"side\", \"total\", \"moneyline\"]; every market row carries that order. Week 11: 13 games originated (6 byes), matching the official Week 11 schedule."
+    },
+    {
+      "id": "V-2026-11-16-06",
+      "item": "Market lines / fair-vs-market difference columns",
+      "source_url": "https://www.nfl.com/",
+      "result": "BLANK BY POLICY (FB-01)",
+      "detail": "The NFL publishes no betting lines, odds, or prices anywhere on nfl.com. All market_open_value / market_close_value / market_line / difference cells are null and explicitly labelled 'no official price source — blank by policy (FB-01)'. No price is inferred."
+    },
+    {
+      "id": "V-2026-11-16-07",
+      "item": "Pre-registration: strategies registered before results seen",
+      "source_url": "https://github.com/sassnarep3-star/Own4",
+      "result": "PASS",
+      "detail": "strategies.json carries registered_utc and a pre-registration note; gates.json carries registered_utc and a pre-registration note (commit hash is the registration). Leaderboard points_awarded = 0 while G7 (verified prices) is blocked (amendment A1)."
+    },
+    {
+      "id": "V-2026-11-16-08",
+      "item": "Signal vs staking separation",
+      "source_url": "https://www.nfl.com/",
+      "result": "PASS",
+      "detail": "Leaderboard ranks on signal tier only; staking shown under an ASSUMED -110 price (FB-02) and never promotes a strategy or pays points (amendment A1). 0 of 1,000 points paid."
+    },
+    {
+      "id": "V-2026-11-16-09",
+      "item": "Demotion gate D1 (live -> paper)",
+      "source_url": "https://www.nfl.com/",
+      "result": "PASS",
+      "detail": "D1 defined with 4 firing conditions, auto live->paper, no human approval, re-promotion requires re-passing G1-G6 and G8 on unseen data. No strategy holds LIVE status (all PAPER or BLOCKED), so D1 has not fired."
+    },
+    {
+      "id": "V-2026-11-16-10",
+      "item": "Correlations from official scores only, n published",
+      "source_url": "https://www.nfl.com/standings/league/2026/REG",
+      "result": "PASS",
+      "detail": "correlations.json: computed values use official scores only, each published with n; uncomputable/player-level values blank with reasons. CR-03 same-week legs r≈0 (independence not rejected, n=125)."
+    },
+    {
+      "id": "V-2026-11-16-11",
+      "item": "Decision-readiness table one row per requirement",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "result": "PASS",
+      "detail": "Landing page carries R01-R20, each with status, blocking gate, the number/evidence that would clear it, and an official source link."
+    },
+    {
+      "id": "V-2026-11-16-12",
+      "item": "Game Book availability for actual starters",
+      "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "result": "PASS (link only)",
+      "detail": "Official game pages expose a 'Download Game Book (PDF)' link (official starters/substitutes/inactives). Not parsed this session; listed as the official source for starter evidence (R10/R11 depend on it)."
+    }
+  ],
+  "irregularities_confirmed": [
+    {"id": "FB-18", "title": "Official injury page team labels are inconsistent", "detail": "19 documented examples of players printed under the wrong club header on nfl.com/injuries/; rows transcribed as published, none corrected."},
+    {"id": "FB-01", "title": "No official market price source exists", "detail": "Permanent; blocks fair-vs-market difference, residuals, CLV, vig decomposition, ROI, and rewards until an official price source exists."},
+    {"id": "FB-07", "title": "No official depth chart", "detail": "nfl.com depth-chart routes do not resolve; depth from playing time / snap counts not available from an official source."}
+  ],
+  "conclusion": "All re-readable committed values checked this session match their official sources. Remaining gaps (market prices, depth charts, snap counts, player-prop prices) are structural — the NFL does not publish them — and are published blank and flagged, never inferred."
+}

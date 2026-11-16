@@ -1,0 +1,171 @@
+{
+ "dataset": "nfl_sources_strategies",
+ "title": "Strategy register with two-sided change tests",
+ "built_utc": "2026-11-16",
+ "preregistration": "PREREGISTRATION.md (commit a4f26f5)",
+ "rule": "Every row carries promote_if and demote_if. A row with only one side is not publishable here. Parlays/SGP/props are listed with n = 0 and no definition because G6 blocks them.",
+ "reward_policy": {
+  "currency": "none",
+  "awarded": 0,
+  "why": "No strategy passes G1 (n >= 300) or G2 (Brier-skill lower bound above 0), so no reward can be earned. A reward paid on accuracy or on an assumed-price ROI would reward luck.",
+  "would_pay_if": "a strategy clears G1 and G2 and survives G7 for four consecutive weeks",
+  "control_exclusion": "S3, S4, C1 are controls and are never eligible for a reward"
+ },
+ "paired_vs_control": {
+  "comparison": "S1_model_favourite minus S3_record_baseline, same games",
+  "n": 115,
+  "accuracy_diff": 0.02608695652173913,
+  "accuracy_diff_ci95_week_cluster": [
+   -0.0370545073375262,
+   0.08547008547008547
+  ],
+  "n_disagree": 25,
+  "note": "If this interval contains 0, the model has not been shown to beat a trivial picking-the-better-record rule on this sample, whatever its absolute accuracy."
+ },
+ "multiplicity": {
+  "registered_singles_strategies": 2,
+  "note": "S1 and S2 are two looks at one model; a Bonferroni-style adjustment for m=2 is m=2, and the larger m that matters is the number of namespaces in this repository that have fitted a model to the same season."
+ },
+ "strategies": [
+  {
+   "id": "S1",
+   "name": "Model favourite (singles, shadow)",
+   "family": "singles",
+   "registered": "PREREGISTRATION.md §7",
+   "status": "paper (shadow)",
+   "definition": "Bet the club the rating model makes the favourite. Decision uses the model's own probability only; no price input.",
+   "n": 115,
+   "accuracy": 0.6783,
+   "accuracy_ci": [
+    0.6083,
+    0.7548
+   ],
+   "brier": 0.2201,
+   "placebo_p": 0.0004997501249375312,
+   "promote_if": [
+    "n reaches 300 graded games (G1) and the week-cluster lower bound on Brier skill stays above 0",
+    "the paired difference against the record-only control excludes 0 on a larger sample"
+   ],
+   "demote_if": [
+    "the Brier-skill lower bound is at or below 0 for 4 consecutive weeks (G7)",
+    "the paired difference against S3 falls below 0 on a larger sample"
+   ],
+   "what_would_change_our_mind": "Right now: a lower bound of -0.0148 on Brier skill means the model has NOT been shown to beat a coin flip with confidence, while a model-free rule scores within 2.6 points of it. If 184 more graded games keep the lower bound below 0, this strategy is dead and should be withdrawn rather than tuned.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "S2",
+   "name": "Model favourite, high confidence (singles, shadow)",
+   "family": "singles",
+   "registered": "PREREGISTRATION.md §7 (threshold 0.65 frozen)",
+   "status": "paper (shadow)",
+   "definition": "S1 restricted to fixtures where the model's own probability is at least 0.65.",
+   "n": 61,
+   "accuracy": 0.7049,
+   "accuracy_ci": [
+    0.6,
+    0.8226
+   ],
+   "brier": 0.2005,
+   "placebo_p": 0.001999000499750125,
+   "promote_if": [
+    "n reaches 300 and the lower bound stays above 0 after the multiplicity adjustment for 2 registered singles strategies"
+   ],
+   "demote_if": [
+    "G7 as S1; or the confidence bucket's calibration bin stays inverted (no higher hit rate than the 0.50-0.60 bin) as n grows"
+   ],
+   "what_would_change_our_mind": "The 0.60-0.70 bin currently observes 41.7% home wins against 64.4% predicted — one bin, 12 games. If that inversion survives 50 more games, the 0.65 threshold is selecting the model's worst probabilities, not its best, and S2 must be withdrawn.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "S3",
+   "name": "Better-record rule (CONTROL, not a candidate)",
+   "family": "singles (control)",
+   "registered": "PREREGISTRATION.md §7",
+   "status": "control",
+   "definition": "Pick the club with the better wins-minus-losses record computed from games before the cutoff. Zero model content.",
+   "n": 115,
+   "accuracy": 0.6522,
+   "accuracy_ci": [
+    0.5701,
+    0.7304
+   ],
+   "brier": 0.2201,
+   "placebo_p": 0.0009995002498750624,
+   "promote_if": [
+    "never — a control cannot be promoted; it exists to make the model prove itself"
+   ],
+   "demote_if": [
+    "n/a"
+   ],
+   "what_would_change_our_mind": "This control is the reason the model's headline accuracy is not treated as evidence: they differ by 2.6 points with an interval of [-3.7, +8.5]. If this control ever beats the model on a larger sample, the ratings are not earning their complexity.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "S4",
+   "name": "Fade of S1 (registered falsification test)",
+   "family": "singles (control)",
+   "registered": "PREREGISTRATION.md §6.5",
+   "status": "control",
+   "definition": "Bet the opposite of S1. If the model were noise, this would score about the same.",
+   "n": 115,
+   "accuracy": 0.3217,
+   "accuracy_ci": null,
+   "brier": null,
+   "placebo_p": null,
+   "promote_if": [
+    "never — a fade scoring well is evidence the original score is noise"
+   ],
+   "demote_if": [
+    "n/a"
+   ],
+   "what_would_change_our_mind": "32.2% accuracy when inverted, against 67.8% for the original, is the shape you want: the original is not symmetric noise.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "C1",
+   "name": "Coin flip (control baseline)",
+   "family": "singles (control)",
+   "registered": "PREREGISTRATION.md §7",
+   "status": "control",
+   "definition": "A fair coin per fixture, 2 000 repeated runs.",
+   "n": 115,
+   "accuracy": 0.5,
+   "accuracy_ci": [
+    0.4,
+    0.6
+   ],
+   "brier": 0.25,
+   "placebo_p": null,
+   "promote_if": [
+    "never"
+   ],
+   "demote_if": [
+    "n/a"
+   ],
+   "what_would_change_our_mind": "Nothing: it is the null the whole page is measured against.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "P1",
+   "name": "Parlays, same-game parlays, prop combos",
+   "family": "parlays / SGP / props",
+   "registered": "blocked by G6",
+   "status": "not registered — blocked",
+   "definition": "Not defined on purpose: a combination cannot be ranked without a validated joint probability and the operator's void/push rules.",
+   "n": 0,
+   "accuracy": null,
+   "accuracy_ci": null,
+   "brier": null,
+   "placebo_p": null,
+   "promote_if": [
+    "a validated joint distribution for the exact leg set, and the operator's void/push rules published on the row"
+   ],
+   "demote_if": [
+    "n/a (nothing live)"
+   ],
+   "what_would_change_our_mind": "CR-03 shows a same-game scoring dependence of r = 0.053 (n = 296, interval includes 0) — too weak to justify independence and too imprecise to justify dependence. Multiplying marginal probabilities stays forbidden until a joint number exists.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  }
+ ]
+}

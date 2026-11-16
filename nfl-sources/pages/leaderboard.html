@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Leaderboard — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html" class="here">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Leaderboard</h1><p class="lede">A wrong leaderboard is worse than none. Stage one ranks strategies by proper score only; stage two is disabled until a price exists.</p>
+<div class="warnbox"><strong>Two stages, and only stage one exists.</strong> Stage one is a proper-score
+qualification: a strategy must clear G1 (300 graded fixtures) and G2 (a week-cluster lower bound above zero on
+Brier skill) before it is looked at for money. Stage two is a prospective escrow of closing-line value and
+return, which needs a published price and therefore cannot run at all. A leaderboard that shows a return
+before stage one is complete is ranking luck.</div>
+<h2 id="stage1">Stage 1 — proper-score qualification</h2><table><thead><tr>
+<th>Strategy</th>
+<th>G1 (n≥300)</th>
+<th class="num">Accuracy</th>
+<th class="num">Brier</th>
+<th class="num">Placebo p</th>
+<th>Stage 2</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>S1 model favourite</td><td>fail</td><td class="num">67.8%</td><td class="num">0.2201</td><td class="num">0.0005</td><td><span class="blank">not qualified</span></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S2 high confidence</td><td>fail</td><td class="num">70.5%</td><td class="num">0.2005</td><td class="num">0.0020</td><td><span class="blank">not qualified</span></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>S3 better-record rule <span class="chip na">control</span></td><td>fail</td><td class="num">65.2%</td><td class="num">0.2201</td><td class="num">0.0010</td><td><span class="blank">not qualified</span></td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<p class="tiny">No return, no units, no bankroll on this table, by rule. The accuracy column is an accuracy —
+it is not a profit and is never converted into one.</p>
+<h2>Stage 2 — staking (empty)</h2><table><thead><tr>
+<th>Strategy</th>
+<th>Closing-line value</th>
+<th class="num">Return</th>
+<th>Why blank</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>all</td><td><span class="blank">no price source</span></td><td class="num"><span class="blank">not computed</span></td><td>no official page publishes a price; G5 cannot open</td><td class="num"><span class="blank">decision, not a fact &#8212; no official page exists</span><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<h2>Control baselines, present on every run</h2><table><thead><tr>
+<th>Baseline</th>
+<th class="num">Accuracy</th>
+<th class="num">Brier</th>
+<th>What it is</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>Coin flip (2 000 runs)</td><td class="num">50.0%</td><td class="num">0.2500</td><td>the null every row is measured against</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Home-team prior</td><td class="num">46.1%</td><td class="num">0.2609</td><td>what a model that only knows where the game is played scores</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Fade of S1</td><td class="num">32.2%</td><td class="num">—</td><td>inverting the model should destroy it; it does</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+<tr><td>Fade of S2</td><td class="num">29.5%</td><td class="num">—</td><td>same test on the high-confidence subset</td><td class="num"><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10">week pages 3-10</a><br><span class="tiny">data/backtest.json</span></td></tr>
+</tbody></table>
+<h2>Why there is no ROI column anywhere on this site</h2>
+<p>A return requires a price. No official NFL page publishes one, and this namespace will not take a price
+from a site it cannot cite as authoritative. The arithmetic that would matter is published instead: at −110 a
+strategy needs 52.4% to break even, at −120 it needs 54.5%, and our own fair price for S1's picks averages
+-272.6, which needs 73.2%. S1's observed accuracy is 67.8%. Those four numbers are the entire money question
+that can be answered honestly today, and they answer it: not yet.</p></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>

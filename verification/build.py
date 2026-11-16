@@ -124,6 +124,27 @@ NAV = [
         ("nfl-decision-desk/pages/flagged.html", "⚑ NFL Decision Desk — flagged for review", "legacy"),
         ("nfl-decision-desk/pages/sources.html", "Sources read this session", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena-170de4f2-own4 (K7, additive; superset-only edit).
+    # The Decision Console is the review surface for the owner's decisions: a consolidated suggestion
+    # register with a verdict column, a graded question/answer register, the information gaps with the
+    # route that closes each, three decision paths, the site-improvement findings, a census of the
+    # duplication across every other namespace, and the corpus arithmetic the gates have to be consistent
+    # with. It links into the namespaces below rather than replacing them; nothing here removes or
+    # reorders an existing link.
+    ("NFL Decision Console · review surface (2026-11-16)", [
+        ("nfl-decision-console/index.html", "Decision console (start here)", "legacy"),
+        ("nfl-decision-console/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-console/pages/suggestions.html", "Suggestions — review, then choose", "legacy"),
+        ("nfl-decision-console/pages/questions.html", "Questions, information and answers", "legacy"),
+        ("nfl-decision-console/pages/gaps.html", "Missing information & discovery plan", "legacy"),
+        ("nfl-decision-console/pages/paths.html", "Decision paths & gates", "legacy"),
+        ("nfl-decision-console/pages/site-improvements.html", "Site improvements for decision-making", "legacy"),
+        ("nfl-decision-console/pages/consolidation.html", "Register census (duplication counted)", "legacy"),
+        ("nfl-decision-console/pages/corpus.html", "Corpus arithmetic & label join", "legacy"),
+        ("nfl-decision-console/pages/evidence.html", "Official reads this session", "legacy"),
+        ("nfl-decision-console/pages/sources.html", "Source register", "legacy"),
+        ("nfl-decision-console/pages/flagged.html", "⚑ Decision Console — flagged for review", "legacy"),
+    ]),
     ("Official data · 2026-11-05", [
         ("verified/standings.html", "Standings", "stand"),
         ("verified/team-stats.html", "Team stats", "stats"),
@@ -382,6 +403,25 @@ NAV = [
         ("nfl-readiness/pages/sources.html", "NFL Readiness — sources", "legacy"),
         ("nfl-readiness/pages/flagged.html", "⚑ NFL Readiness — flagged", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena/f7545de2-own4: the nfl-sources namespace. Every number on it is a
+    # transcription of an official nfl.com page (raw/*.txt, hashed), a walk-forward backtest registered in
+    # PREREGISTRATION.md before it was computed, and a 38-check gate (nfl-sources/engine/verify.py).
+    # Additive only: no existing link is altered or removed.
+    ("NFL Source Audit · registration + verified backtest (2026-11-16)", [
+        ("nfl-sources/pages/index.html", "NFL Source Audit — decision readiness (70 requirements)", "legacy"),
+        ("nfl-sources/pages/findings.html", "NFL Source Audit — findings", "legacy"),
+        ("nfl-sources/pages/backtest.html", "NFL Source Audit — backtest &amp; removal of luck", "legacy"),
+        ("nfl-sources/pages/week11.html", "NFL Source Audit — Week 11 own lines &amp; venues", "legacy"),
+        ("nfl-sources/pages/ratings.html", "NFL Source Audit — club ratings", "legacy"),
+        ("nfl-sources/pages/correlations.html", "NFL Source Audit — correlations (n published)", "legacy"),
+        ("nfl-sources/pages/strategies.html", "NFL Source Audit — strategies &amp; change tests", "legacy"),
+        ("nfl-sources/pages/leaderboard.html", "NFL Source Audit — two-stage leaderboard", "legacy"),
+        ("nfl-sources/pages/requirements.html", "NFL Source Audit — all 70 requirements", "legacy"),
+        ("nfl-sources/pages/suggestions.html", "NFL Source Audit — suggestions (18, none implemented)", "legacy"),
+        ("nfl-sources/pages/questions.html", "NFL Source Audit — questions that block decisions", "legacy"),
+        ("nfl-sources/pages/flagged.html", "⚑ NFL Source Audit — flagged for review", "legacy"),
+        ("nfl-sources/pages/sources.html", "NFL Source Audit — sources &amp; provenance (hashed)", "legacy"),
+    ]),
     # Added 2026-11-15 by session arena/d941f3c1-own4 (scope D1-D12). Namespace name note: this tree was
 # claimed and built as nfl-readiness/, then renamed to nfl-availability-desk/ at merge time because
 # session arena/e0ed20d1-own4 had already published nfl-readiness/ on main (its freeze commit 64a20e8
@@ -429,6 +469,22 @@ NAV = [
     ("Independent verification · 2026-11-13", [
         ("verification-2026-11-13/index.html", "Verification report", "legacy"),
         ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
+    ]),
+    # Added 2026-11-16 by session arena/448c248f-own4: the nfl-decision-gaps namespace - the
+    # decision-support layer (open questions with the number that would clear each one, a
+    # have/don't-have matrix, a suggestions board with blank verdicts, and the official
+    # inactive / reserve-list evidence). Appended at the end of NAV; no existing entry is
+    # reordered, relabelled or removed.
+    ("NFL Decision Gaps · 2026-11-16", [
+        ("nfl-decision-gaps/index.html", "Decision gaps — start here", "legacy"),
+        ("nfl-decision-gaps/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-gaps/pages/open-questions.html", "Open questions (20)", "legacy"),
+        ("nfl-decision-gaps/pages/information-gaps.html", "Have / don't have", "legacy"),
+        ("nfl-decision-gaps/pages/availability-evidence.html", "Availability evidence &amp; reserve list", "legacy"),
+        ("nfl-decision-gaps/pages/suggestions.html", "Suggestions board (15, blank verdicts)", "legacy"),
+        ("nfl-decision-gaps/pages/repo-review.html", "Repo review &amp; irregularities", "legacy"),
+        ("nfl-decision-gaps/pages/sources.html", "Sources read this session", "legacy"),
+        ("nfl-decision-gaps/pages/flagged.html", "⚑ Decision Gaps — flagged for review", "legacy"),
     ]),
 ]
 

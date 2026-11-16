@@ -1,0 +1,142 @@
+{
+ "dataset": "decision_console_official_reads",
+ "title": "Every page read by this session, with what it proved and what it could not prove",
+ "built_utc": "2026-11-16",
+ "session_window_utc": "2026-11-16T01:31Z to 2026-11-16T01:36:08Z",
+ "timestamp_rule": "the read path used here returns rendered text only: no response headers, no server Date, no raw bytes. Each read is therefore recorded with the window it fell in and an ordering, not an exact instant. Closing this gap is gap G-08 (a collector that stores raw bytes + its own clock + a hash).",
+ "rows": [
+  {
+   "id": "READ-01",
+   "url": "https://www.nfl.com/injuries/",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 1,
+   "coverage": "chunk 1 of 8 read; chunks 2-8 not read, nothing claimed from them",
+   "proved": [
+    "page title states the week and season: 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com'",
+    "the report is organised by GAME DATE ('THURSDAY, NOVEMBER 12TH' 8:15 PM EST Prime Video; 'SUNDAY, NOVEMBER 15TH' 9:30 AM EST FOX), not by club-week, so a weekly snapshot of it is the wrong unit of capture",
+    "table columns are exactly Player | Position | Injuries | Practice Status | Game Status",
+    "practice vocabulary read: Full Participation in Practice / Limited Participation in Practice / Did Not Participate In Practice",
+    "game-status vocabulary read in chunk 1: Out, Questionable, and blank; 'Probable' and 'Doubtful' do not appear in the chunk read, so no claim is made about their absence from the page",
+    "the three Lions rows the brief calls blank (Kerby Joseph, Cade Mays, D.J. Reed) now each carry Game Status 'Out' - the item is resolved at the source",
+    "the bracketed W-L printed beside each club in the report matches the LIVE standings read 1-4 minutes later for 6 of 6 clubs in the chunk (WAS 3-5-1, NYG 5-3-1, NE 5-5, DET 7-2, KC 7-2, ATL 3-7), which re-confirms at a second clock time that the record on the report is a live join and not a pre-game attribute"
+   ],
+   "cannot_prove": [
+    "the full 32-club census (7 of 8 chunks unread)",
+    "when the club submitted the report (the page prints no submission timestamp per row)"
+   ]
+  },
+  {
+   "id": "READ-02",
+   "url": "https://www.nfl.com/standings/",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 2,
+   "coverage": "both chunks read (2 of 2); 32 club rows",
+   "proved": [
+    "W-L-T, win pct, PF and PA for all 32 clubs after the Sunday Week 10 games; transcribed into data/standings_2026-11-16.json",
+    "the league's own numbers carry two ties (NYG 5-3-1, WAS 3-5-1)",
+    "Monday-night Week 10 game not yet in the table at read time"
+   ],
+   "cannot_prove": ["the size of any price/slate archive; the page publishes no odds"]
+  },
+  {
+   "id": "READ-03",
+   "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 3,
+   "coverage": "chunk 1 of 2 read (recap tab)",
+   "proved": [
+    "final score NE 10, DET 35; 'Final'; Week 10; Nov 15",
+    "Game Info block: Location MUNICH, Stadium FC BAYERN MUNICH STADIUM",
+    "a per-fixture 'Download Game Book (PDF)' asset exists and its URL is on the page"
+   ],
+   "cannot_prove": ["inactives or lineups from this page alone - they are inside the PDF, not the game-centre HTML"]
+  },
+  {
+   "id": "READ-04",
+   "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf",
+   "publisher": "NFL Enterprise (National Football League Game Summary, copyright 2026)",
+   "grade": "official",
+   "order": 4,
+   "coverage": "chunks 1, 2, 4 and 7 of 7 read; chunks 3, 5 and 6 not read (they hold further play-by-play quarters)",
+   "proved": [
+    "the document publishes the official LINEUPS: 11 named offensive and 11 named defensive starters per club, with jersey number and position abbreviation",
+    "it publishes a per-club 'Not Active' block (6 names for NE, 6 for DET) and a 'Did Not Play' block whose printed value is empty in the text extracted",
+    "it publishes GAME DAY WEATHER as a league record: 'Game Weather: Cloudy', 'Temp: 52 F (11.1 C) Humidity: 51%, Wind: SE 3 mph'",
+    "it publishes the venue's roof/surface state in one phrase: 'Open Stadium on Natural Grass'",
+    "it publishes the officiating crew, paid attendance (70,225), game time (3:04), start time 3:33 PM CET, and the venue as 'Allianz Arena, Munich, Germany'",
+    "it publishes Final Team Statistics including 'Total Offensive Plays (inc. times thrown passing)' 55 / 68 and per-player defensive tables with TKL/AST/SK/TFL/QH/IN/PD/FF/FR but no per-player snap count",
+    "the play-by-play carries in-game injury events with a clock: 'DET-A.Hutchinson was injured during the play', '** Injury Update: NE-M.Moses has returned to the game'"
+   ],
+   "cannot_prove": [
+    "anything pre-kickoff: this artefact contains final statistics, so it is a label source, never a feature source (look-ahead gate)",
+    "that no per-player snap table exists anywhere in the document - three chunks unread; stated as 'not found in the four chunks read'",
+    "per-club inactive RULES (how many, when submitted) - the document lists names, not the rule"
+   ]
+  },
+  {
+   "id": "READ-05",
+   "url": "https://www.nfl.com/games/bengals-at-falcons-2026-reg-9",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 5,
+   "coverage": "chunk 1 of 2 read (recap tab)",
+   "proved": [
+    "a second fixture, one week earlier, also carries a dated 'Download Game Book (PDF)' asset (its own static.www.nfl.com URL)",
+    "final score CIN 34, ATL 17; Game Info: Location MADRID, Stadium BERNABEU",
+    "so game-book coverage is not a Week 10 artefact: 2 of 2 sampled completed fixtures across 2 different weeks publish one"
+   ],
+   "cannot_prove": ["coverage for the other 270 fixtures - not sampled"]
+  },
+  {
+   "id": "READ-06",
+   "url": "https://www.nfl.com/betting/",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 6,
+   "coverage": "whole response (single chunk)",
+   "proved": [
+    "HTTP-level result is the league's own 404 page ('404 - Flag on the Play.') - nfl.com publishes no betting hub at this path"
+   ],
+   "cannot_prove": ["that no odds exist on any other league property - see READ-07 and the probe register"]
+  },
+  {
+   "id": "READ-07",
+   "url": "https://www.nfl.com/odds/",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 7,
+   "coverage": "whole response (single chunk)",
+   "proved": ["league 404 page - no odds index at this path either"],
+   "cannot_prove": ["that the league publishes no price anywhere; two paths probed, both 404"]
+  },
+  {
+   "id": "READ-08",
+   "url": "https://www.nfl.com/teams/detroit-lions/depth-chart/",
+   "publisher": "NFL Enterprise",
+   "grade": "official",
+   "order": 8,
+   "coverage": "whole response (single chunk)",
+   "proved": [
+    "league 404 page - the per-club depth-chart path sampled does not exist, which is why depth ranking stays unbuilt"
+   ],
+   "cannot_prove": ["the state of the other 31 clubs; a club-by-club register is gap G-02"]
+  },
+  {
+   "id": "READ-09",
+   "url": "https://www.google.com/search (web_search tool, two queries)",
+   "publisher": "third party (search index)",
+   "grade": "third-party - not usable for a published value",
+   "order": 9,
+   "coverage": "2 queries: 'NFL inactive list 90 minutes rule' and 'NFL injury report submission deadlines'",
+   "proved": [
+    "every returned document was a third-party explainer (legionreport, rantsports, grokipedia, fantasyalarm, pro-football-reference, wfaa, bettingonline, sportsdaynow) and they contradict each other on how many players are inactive: 5, or 7, or up to 8",
+    "the practice-report cadence is described as Wed/Thu/Fri with a 4 pm ET deadline in three of them and as Mon/Tue/Wed before a Thursday game in another, i.e. no single account of the rule is shared by all sources",
+    "consequence for this project: the cadence and the inactive count are NOT published as numbers here; the site records what it observes in dated captures instead"
+   ],
+   "cannot_prove": ["any rule, count or deadline - the sources are not official and disagree"]
+  }
+ ]
+}

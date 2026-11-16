@@ -1,0 +1,104 @@
+{
+ "dataset": "nfl_sources_questions",
+ "title": "Questions, information needed and the answer that unblocks each decision",
+ "built_utc": "2026-11-16",
+ "rule": "A question appears here only if a decision actually depends on it. Each row names who can answer it and what it unblocks; none of them is answered by this session on the owner's behalf.",
+ "rows": [
+  {
+   "id": "Q01",
+   "question": "Which price source, if any, will be authorised?",
+   "why_it_matters": "Nothing market-related can be published without it. The site's residual, ROI and CLV columns are all blank or labelled hypothetical until this is answered.",
+   "who_can_answer": "Owner",
+   "unblocks": "blocks R01, R04, R18, R57",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "Q02",
+   "question": "Is a licensed feed acceptable, or must every number come from a free public page?",
+   "why_it_matters": "Changes the entire collection design, and the answer decides whether the depth/snap items are reachable at all.",
+   "who_can_answer": "Owner",
+   "unblocks": "blocks R06, R49, R53, R68",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "Q03",
+   "question": "What counts as a 'reward' in the competition?",
+   "why_it_matters": "No reward has been awarded and none will be until the owner defines one.",
+   "who_can_answer": "Owner",
+   "unblocks": "blocks R67",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "Q04",
+   "question": "Should this site replace the root dashboard, or live beside it?",
+   "why_it_matters": "There are now more than 30 NFL namespaces. One entry point is a product decision.",
+   "who_can_answer": "Owner",
+   "unblocks": "affects navigation only",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "Q05",
+   "question": "Should the leaderboard's official sample be frozen at the 136-game log (weeks 1-9) or extended each week?",
+   "why_it_matters": "The arithmetic now matches the brief exactly (weeks 1-9 = 136 final games). What is still the owner's call is whether the graded sample may grow past 136 as week 10+ results arrive, or whether a frozen 136-game sample is the permanent reference.",
+   "who_can_answer": "Owner",
+   "unblocks": "affects R19, R65, G1",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9"
+  },
+  {
+   "id": "Q06",
+   "question": "Will the owner permit a scheduled collector to run in this repository?",
+   "why_it_matters": "Without it there is no multi-day history, so no surprise-based injury feature and no honest ablation.",
+   "who_can_answer": "Owner",
+   "unblocks": "blocks R21, R27, R28, R51, R52",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q07",
+   "question": "How much compute and wall-clock time per week is acceptable?",
+   "why_it_matters": "The bootstrap and placebo tests are cheap now (under two seconds); a per-club interval plus a leave-one-game-out stability check multiplies that, still seconds.",
+   "who_can_answer": "Owner",
+   "unblocks": "not blocking",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "Q08",
+   "question": "Is the club abbreviation set in this namespace the one the owner wants displayed?",
+   "why_it_matters": "nfl.com prints AZ and LA rather than ARI and LAR; this site keeps what the official page prints.",
+   "who_can_answer": "Owner",
+   "unblocks": "cosmetic",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "Q09",
+   "question": "Should a tie be scored as half a win in any accuracy figure?",
+   "why_it_matters": "The official standings count ties as half a win, but an accuracy metric counting a tie as 'correct' would be a modelling claim, not a fact. This namespace excludes them and publishes the count.",
+   "who_can_answer": "Owner",
+   "unblocks": "affects R35",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "id": "Q10",
+   "question": "Does the owner want the excluded/incomplete games shown prominently?",
+   "why_it_matters": "Two Week 10 fixtures are absent from every metric. They are listed on the results page and in the data; prominence is a design choice.",
+   "who_can_answer": "Owner",
+   "unblocks": "cosmetic",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "Q11",
+   "question": "What is the minimum evidence the owner will accept as 'skill'?",
+   "why_it_matters": "The registered gate is a week-cluster lower bound on Brier skill. If a different bar is intended (e.g. a full season of prospective forecasts), it should be registered before the season ends.",
+   "who_can_answer": "Owner",
+   "unblocks": "affects G2",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10"
+  },
+  {
+   "id": "Q12",
+   "question": "Are the peer namespaces' availability numbers to be treated as verified?",
+   "why_it_matters": "This namespace found 348 player rows where peers publish 347 and 279. One of those is wrong, or the page changed; the owner should pick one canonical capture.",
+   "who_can_answer": "Owner + peer sessions",
+   "unblocks": "affects R45/R46",
+   "source_url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}

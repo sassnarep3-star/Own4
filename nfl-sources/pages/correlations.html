@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Correlations — NFL source audit</title><link rel="icon" href="data:,"><style>
+:root{--ink:#12161c;--mut:#5d6773;--line:#dfe4ea;--bg:#fbfcfd;--card:#fff;--accent:#0b5cad;
+--ok:#0b6b3a;--warn:#8a5a00;--bad:#a11b1b;--chip:#eef3f8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+color:var(--ink);background:var(--bg)}
+header{background:#0e1a2b;color:#eaf1f8;padding:14px 20px}
+header .wrap{max-width:1180px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px;align-items:baseline}
+header a{color:#eaf1f8;text-decoration:none}
+header .brand{font-weight:700;letter-spacing:.2px;margin-right:8px}
+header nav{display:flex;flex-wrap:wrap;gap:2px}
+header nav a{padding:3px 8px;border-radius:5px;font-size:13px;color:#c9d8e8}
+header nav a:hover{background:#1b2c45;color:#fff}
+header nav a.here{background:#eaf1f8;color:#0e1a2b;font-weight:600}
+main{max-width:1180px;margin:0 auto;padding:22px 20px 60px}
+h1{font-size:26px;margin:6px 0 4px;letter-spacing:-.2px}
+h2{font-size:18px;margin:30px 0 8px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:15px;margin:18px 0 6px}
+p.lede{color:var(--mut);margin:0 0 16px;max-width:78ch}
+p{margin:8px 0}
+.meta{color:var(--mut);font-size:12.5px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut)}
+.card .v{font-size:21px;font-weight:650;margin-top:2px}
+.card .s{font-size:12px;color:var(--mut)}
+table{width:100%;border-collapse:collapse;background:var(--card);font-size:13.2px;
+border:1px solid var(--line);border-radius:9px;overflow:hidden;margin:8px 0 4px}
+th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:#f1f5f9;font-size:11.6px;text-transform:uppercase;letter-spacing:.5px;color:#39434f;
+white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:nth-child(even){background:#fcfdfe}
+.chip{display:inline-block;padding:1px 7px;border-radius:99px;font-size:11.5px;font-weight:600;
+background:var(--chip);color:#2c3a48;white-space:nowrap}
+.met{background:#e6f4ec;color:var(--ok)}.partial{background:#fdf3dc;color:var(--warn)}
+.blocked{background:#fdeaea;color:var(--bad)}.ns{background:#f0eef7;color:#4a3d7a}
+.na{background:#eef0f2;color:#4a5561}.rej{background:#f7e9f5;color:#7a2b6a}
+.blank{color:var(--mut);font-style:italic}
+a{color:var(--accent)}
+.src{font-size:11.5px;white-space:nowrap}
+details{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 13px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.note{background:#f6f9fc;border-left:3px solid var(--accent);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+.warnbox{background:#fdf7ea;border-left:3px solid var(--warn);padding:9px 13px;margin:12px 0;
+border-radius:0 7px 7px 0}
+footer{max-width:1180px;margin:0 auto;padding:18px 20px 40px;color:var(--mut);font-size:12px;
+border-top:1px solid var(--line)}
+code{background:#eef2f6;padding:1px 4px;border-radius:4px;font-size:12.5px}
+.tiny{font-size:11.5px;color:var(--mut)}
+</style></head><body><header><div class="wrap"><a class="brand" href="index.html">NFL source audit</a><nav><a href="index.html">Readiness</a><a href="findings.html">Findings</a><a href="backtest.html">Backtest</a><a href="week11.html">Week 11 lines</a><a href="ratings.html">Ratings</a><a href="correlations.html" class="here">Correlations</a><a href="strategies.html">Strategies</a><a href="leaderboard.html">Leaderboard</a><a href="requirements.html">Requirements</a><a href="suggestions.html">Suggestions</a><a href="questions.html">Questions</a><a href="flagged.html">Flagged</a><a href="sources.html">Sources</a></nav></div></header><main><h1>Correlations</h1><p class="lede">Five computed from official numbers, each with n and an interval; four blank because the official input does not exist.</p><p>Only numbers printed on an official page are used, every correlation carries its sample size, and a coefficient is never reported without one. Four registered correlations have no usable official input and are listed as blanks with the number that would unblock them, rather than estimated from a source we cannot cite.</p><h2>Computed</h2><table><thead><tr>
+<th>ID</th>
+<th>Relationship</th>
+<th>Inputs (official)</th>
+<th class="num">n</th>
+<th class="num">r</th>
+<th class="num">p</th>
+<th class="num">95% CI</th>
+<th>Reading</th>
+<th>Source</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>CR-01</td><td>Home margin vs game total</td><td>official final scores only</td><td class="num">148</td><td class="num">-0.1493</td><td class="num">0.0680</td><td class="num">[-0.303, 0.012]</td><td>Home margin and total are nearly orthogonal on this sample.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-02</td><td>A club&#x27;s points scored, consecutive games</td><td>official final scores only</td><td class="num">264</td><td class="num">0.1081</td><td class="num">0.0784</td><td class="num">[-0.013, 0.226]</td><td>A small positive autocorrelation: last week&#x27;s scoring barely predicts this week&#x27;s. n counts ordered pairs of games, not games.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-03</td><td>Points scored vs points allowed, same game (club-game level)</td><td>official final scores only</td><td class="num">296</td><td class="num">0.0531</td><td class="num">0.3621</td><td class="num">[-0.061, 0.166]</td><td>A negative value means a game&#x27;s two scores are not independent draws — the obvious reading is pace. This is the number that makes &#x27;just multiply the probabilities&#x27; wrong for prop combos in the same game.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-04</td><td>Rest-day differential (home minus away) vs home margin</td><td>official final scores + the dates printed on the official week pages (no schedule date is taken from anywhere else)</td><td class="num">132</td><td class="num">0.3727</td><td class="num">0.0000</td><td class="num">[0.215, 0.511]</td><td>Week-1 games are excluded because neither club has a previous game in the corpus. Rest is derived from printed dates, so a rescheduled game would show up here as a rest anomaly rather than being smoothed away.</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-05</td><td>International game (printed section) vs home margin</td><td>official final scores + the section heading printed on the official week page</td><td class="num">8 intl / 140 domestic</td><td class="num"><span class="blank">not estimated</span></td><td class="num">—</td><td class="num">—</td><td>n = 8 international games is far too small to estimate a home-field effect, so no correlation is printed: a point-biserial r on this split would be noise dressed as a number. The group means are shown with their n and nothing is concluded from them. <em>means -4.88 vs -0.41 (difference -4.47)</em></td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">source</a></td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+</tbody></table><h2>Registered but blank</h2><table><thead><tr>
+<th>ID</th>
+<th>Relationship</th>
+<th>Why blank</th>
+<th>Number that would clear it</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>CR-06</td><td>Same-game parlay leg cover correlation</td><td>needs a point spread per game. The NFL publishes no lines, so the official source cannot supply it; a sportsbook would be third-party.</td><td>any citable official or licensed price archive covering the games in question</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-07</td><td>Player prop correlation (e.g. QB passing vs WR receiving)</td><td>needs per-player prop lines and targets; neither is on an official nfl.com page read here.</td><td>an official or licensed play-by-play + prop-line archive</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-08</td><td>Availability (starters out) vs margin</td><td>depends on a verified per-club depth rank or snap counts, which this repository does not have for any club (peer namespaces record the same gap).</td><td>a verified depth rank or snap count for 32 of 32 clubs, archived point-in-time</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>CR-09</td><td>Injury-designation reliability (play rate by designation)</td><td>needs several seasons of designations joined to official inactive lists.</td><td>3+ seasons of archived weekly reports plus inactive lists</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+</tbody></table><h2>How to read CR-04, the one that matters</h2><p>Rest difference correlates with home margin at r = 0.3727 over 132 fixtures, which is the strongest relationship in this set and the only one whose interval excludes zero. It is also fragile in a specific way: 83 of those fixtures have <em>zero</em> rest difference because both clubs played in the same week, so the coefficient is carried by the minority where the rest weeks actually differ. Among those the correlation rises to 0.5686 on 49 fixtures.</p><h2>CR-04 robustness, computed in the build</h2><table><thead><tr>
+<th>Cut</th>
+<th class="num">r or mean margin</th>
+<th class="num">n</th>
+<th class="num">Provenance</th>
+</tr></thead><tbody>
+<tr><td>All fixtures with a rest figure</td><td class="num">0.3727</td><td class="num">132</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>Fixtures with a non-zero rest difference</td><td class="num">0.5686</td><td class="num">49</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>Home club had more rest (mean home margin)</td><td class="num">7.4800</td><td class="num">23</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>Equal rest (mean home margin)</td><td class="num">-1.9300</td><td class="num">83</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+<tr><td>Away club had more rest (mean home margin)</td><td class="num">-4.6500</td><td class="num">26</td><td class="num"><a class="src" href="https://www.nfl.com/standings/league/2026/REG">official scores</a><br><span class="tiny">data/correlations.json</span></td></tr>
+</tbody></table><p class="tiny">Leave-one-week-out drops one week of fixtures and recomputes; the coefficient stays inside [0.329, 0.426], so no single week carries it. The split by rest edge is the honest caveat: read alone, the 'home club rested more' cut says rest is worth about seven and a half points, and the 'away club rested more' cut says it is worth about minus four and a half. Rest is therefore reported and not shipped as a rating parameter.</p><h2>What a correlation is not</h2><p>None of these are causal, and none are corrected for multiplicity: nine were registered and five could be computed, so a p-value of 0.068 read as a discovery would be reading noise. The rest result is the exception only because its interval excludes zero and it survives leave-one-week-out.</p></main><footer>Built 2026-11-16 from official nfl.com pages only. Every figure on this site is recomputable from <code>nfl-sources/raw/</code> by running <code>nfl-sources/engine/verify.py</code>. Values we could not read are blank and labelled, never estimated.</footer></body></html>
