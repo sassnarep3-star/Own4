@@ -72,6 +72,18 @@ for rel in PAGES:
             if 'href="https://' not in row:
                 unsourced_rows.append("%s table %d row %d" % (rel, tno + 1, rno + 1))
 
+    # 4b. no double-escaped entities (an escaped label that still held an entity)
+    for m in re.finditer(r"&amp;[a-zA-Z#0-9]+;", doc):
+        fail.append("%s has a double-escaped entity %s" % (rel, m.group(0)))
+
+    # 4c. no typed namespace count. A literal "<int> nfl-" in prose goes stale the
+    # moment a sibling session adds a namespace - the exact defect this workspace
+    # flags in peers (F2 / SG-H). Counts belong in the pinned inventory.
+    prose = re.sub(r"<table.*?</table>", " ", doc, flags=re.S)   # counts inside tables are data, not prose
+    text = re.sub(r"<[^>]+>", " ", prose)
+    for m in re.finditer(r"\b\d+\s+nfl-", text):
+        fail.append("%s types a namespace count into prose: %r" % (rel, m.group(0)))
+
 # 5. the namespace count must come from the pinned data file, never from prose
 inv_path = os.path.join(NS, "data", "repo_inventory.json")
 check(os.path.exists(inv_path), "data/repo_inventory.json is missing")

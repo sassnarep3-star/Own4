@@ -869,7 +869,7 @@ SUGGESTIONS = [
          recommended="A now, B at the next integration.",
          src="S8, S1",
          verdict=""),
-    dict(id="SG-I", title="Consolidate the 30 nfl-* namespaces into one canonical set",
+    dict(id="SG-I", title="Consolidate the duplicated nfl-* namespaces into one canonical set",
          why="Thirty namespaces each publish their own questions, suggestions and review pages. "
              "Contradictory numbers are inevitable and are already present.",
          options=[
@@ -1042,10 +1042,11 @@ FLAGS = [
                 "records in the headers were replaced with post-game records.",
          src="S8, S1"),
     dict(id="F10", sev="medium", area="Repository",
-         item="30 nfl-* namespaces repeat the same page set",
-         detail="The repository carries 30 top-level nfl-* namespaces, most with their own "
-                "questions, suggestions and review pages. Contradictory published values (F2) are "
-                "the predictable result.",
+         item="The nfl-* namespaces repeat the same page set",
+         detail="The repository carries one top-level nfl-* namespace per session, most with their "
+                "own questions, suggestions and review pages (the count is computed on the "
+                "repository-review page and pinned to a commit, so it is not repeated here). "
+                "Contradictory published values (F2) are the predictable result.",
          src="repo"),
     dict(id="F11", sev="low", area="Fixtures",
          item="One Week 10 venue not captured",
