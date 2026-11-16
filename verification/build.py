@@ -427,6 +427,27 @@ NAV = [
         ("nfl-availability-desk/pages/flagged.html", "⚑ NFL Desk — flagged for review (18)", "legacy"),
         ("nfl-availability-desk/pages/sources.html", "NFL Desk — source register", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena/e8b8fb98-own4. Superset-only edit: one new group, appended
+    # ahead of the retained workspaces, and no existing entry is altered or removed. The namespace
+    # is the single dashboard for the NFL brief (74-row decision-readiness table, dated official
+    # captures, walk-forward shadow baseline); the 30 older NFL workspaces stay linked below.
+    ("NFL Command Center · single dashboard (2026-11-16)", [
+        ("nfl-command-center/index.html", "NFL Command Center — dashboard", "legacy"),
+        ("nfl-command-center/pages/executive-summary.html", "Command Center — executive summary", "legacy"),
+        ("nfl-command-center/pages/readiness.html", "Command Center — decision readiness (74 rows)", "legacy"),
+        ("nfl-command-center/pages/results.html", "Command Center — verified results feed", "legacy"),
+        ("nfl-command-center/pages/fixtures.html", "Command Center — fixtures (W10 settled, W11 slate)", "legacy"),
+        ("nfl-command-center/pages/availability.html", "Command Center — availability (347 rows)", "legacy"),
+        ("nfl-command-center/pages/depth.html", "Command Center — depth, roster &amp; replacements", "legacy"),
+        ("nfl-command-center/pages/own-lines.html", "Command Center — Week 11 own lines", "legacy"),
+        ("nfl-command-center/pages/model.html", "Command Center — model &amp; pre-registration", "legacy"),
+        ("nfl-command-center/pages/backtest.html", "Command Center — backtest &amp; luck", "legacy"),
+        ("nfl-command-center/pages/leaderboard.html", "Command Center — leaderboard &amp; gates", "legacy"),
+        ("nfl-command-center/pages/correlations.html", "Command Center — correlations with n", "legacy"),
+        ("nfl-command-center/pages/questions.html", "Command Center — questions to answer", "legacy"),
+        ("nfl-command-center/pages/suggestions.html", "Command Center — suggestions", "legacy"),
+        ("nfl-command-center/pages/flagged.html", "⚑ Command Center — flagged for review", "legacy"),
+    ]),
     ("Retained workspaces", [
         ("legacy-root-dashboard.html", "Previous root dashboard", "legacy"),
         ("docs/index.html", "NBA Signal Lab", "legacy"),
