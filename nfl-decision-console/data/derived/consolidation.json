@@ -1,17 +1,53 @@
 {
  "all_registers": {
   "flags": {
+   "files": 25,
+   "namespaces": 24,
+   "rows": 203,
+   "rows_with_status": 49,
+   "rows_with_verdict": 0
+  },
+  "questions": {
+   "files": 20,
+   "namespaces": 19,
+   "rows": 221,
+   "rows_with_status": 105,
+   "rows_with_verdict": 0
+  },
+  "requirements": {
+   "files": 12,
+   "namespaces": 10,
+   "rows": 456,
+   "rows_with_status": 451,
+   "rows_with_verdict": 0
+  },
+  "suggestions": {
+   "files": 22,
+   "namespaces": 21,
+   "rows": 186,
+   "rows_with_status": 120,
+   "rows_with_verdict": 39
+  }
+ },
+ "artefact": "data/namespace_inventory.json",
+ "cluster_caveat": "3 of the 123 duplicated clusters (101 rows) are keyed on a row identifier rather than on sentence text, because two peer registers store only an id in the field the clusterer reads; those clusters are counted in the table, called out here, and excluded from the 'sentence' columns, so the duplication finding is read from the sentence numbers",
+ "cluster_rule": "token-set Jaccard >= 0.50 on the row's title/question/item text, with a stopword list; greedy single-pass assignment against the cluster's first member, so the result is reproducible and independent of iteration order",
+ "inventory_captured_at_commit": "a487211",
+ "inventory_captured_utc": "2026-11-16T02:11:22Z",
+ "namespace_count": 33,
+ "peer_registers": {
+  "flags": {
    "files": 24,
    "namespaces": 23,
-   "rows": 189,
+   "rows": 190,
    "rows_with_status": 49,
    "rows_with_verdict": 0
   },
   "questions": {
    "files": 19,
    "namespaces": 18,
-   "rows": 201,
-   "rows_with_status": 85,
+   "rows": 204,
+   "rows_with_status": 105,
    "rows_with_verdict": 0
   },
   "requirements": {
@@ -25,42 +61,6 @@
    "files": 21,
    "namespaces": 20,
    "rows": 171,
-   "rows_with_status": 120,
-   "rows_with_verdict": 39
-  }
- },
- "artefact": "data/namespace_inventory.json",
- "cluster_caveat": "3 of the 116 duplicated clusters (101 rows) are keyed on a row identifier rather than on sentence text, because two peer registers store only an id in the field the clusterer reads; those clusters are counted in the table, called out here, and excluded from the 'sentence' columns, so the duplication finding is read from the sentence numbers",
- "cluster_rule": "token-set Jaccard >= 0.50 on the row's title/question/item text, with a stopword list; greedy single-pass assignment against the cluster's first member, so the result is reproducible and independent of iteration order",
- "inventory_captured_at_commit": "e9396b3",
- "inventory_captured_utc": "2026-11-16T02:05:20Z",
- "namespace_count": 32,
- "peer_registers": {
-  "flags": {
-   "files": 23,
-   "namespaces": 22,
-   "rows": 176,
-   "rows_with_status": 49,
-   "rows_with_verdict": 0
-  },
-  "questions": {
-   "files": 18,
-   "namespaces": 17,
-   "rows": 184,
-   "rows_with_status": 85,
-   "rows_with_verdict": 0
-  },
-  "requirements": {
-   "files": 12,
-   "namespaces": 10,
-   "rows": 456,
-   "rows_with_status": 451,
-   "rows_with_verdict": 0
-  },
-  "suggestions": {
-   "files": 20,
-   "namespaces": 19,
-   "rows": 156,
    "rows_with_status": 105,
    "rows_with_verdict": 24
   }
@@ -68,20 +68,20 @@
  "per_kind": {
   "flags": {
    "clusters_with_duplicates": 4,
-   "distinct_clusters": 171,
-   "files": 23,
+   "distinct_clusters": 185,
+   "files": 24,
    "identifier_keyed_duplicate_clusters": 0,
    "largest_cluster": 3,
-   "namespaces": 22,
-   "registers": 23,
-   "rows": 176,
+   "namespaces": 23,
+   "registers": 24,
+   "rows": 190,
    "rows_inside_a_duplicate_cluster": 9,
    "rows_inside_identifier_keyed_clusters": 0,
-   "rows_with_sentence_text": 132,
+   "rows_with_sentence_text": 146,
    "rows_with_status": 49,
-   "rows_with_text": 176,
+   "rows_with_text": 190,
    "rows_with_verdict": 0,
-   "sentence_clusters": 127,
+   "sentence_clusters": 141,
    "sentence_duplicate_clusters": 4,
    "sentence_largest_cluster": 3,
    "sentence_rows_inside_a_duplicate_cluster": 9,
@@ -361,24 +361,24 @@
    ]
   },
   "questions": {
-   "clusters_with_duplicates": 21,
-   "distinct_clusters": 158,
-   "files": 18,
+   "clusters_with_duplicates": 26,
+   "distinct_clusters": 173,
+   "files": 19,
    "identifier_keyed_duplicate_clusters": 0,
    "largest_cluster": 3,
-   "namespaces": 17,
-   "registers": 18,
-   "rows": 184,
-   "rows_inside_a_duplicate_cluster": 47,
+   "namespaces": 18,
+   "registers": 19,
+   "rows": 204,
+   "rows_inside_a_duplicate_cluster": 57,
    "rows_inside_identifier_keyed_clusters": 0,
-   "rows_with_sentence_text": 184,
-   "rows_with_status": 85,
-   "rows_with_text": 184,
+   "rows_with_sentence_text": 204,
+   "rows_with_status": 105,
+   "rows_with_text": 204,
    "rows_with_verdict": 0,
-   "sentence_clusters": 158,
-   "sentence_duplicate_clusters": 21,
+   "sentence_clusters": 173,
+   "sentence_duplicate_clusters": 26,
    "sentence_largest_cluster": 3,
-   "sentence_rows_inside_a_duplicate_cluster": 47,
+   "sentence_rows_inside_a_duplicate_cluster": 57,
    "top_clusters": [
     {
      "id_keyed": false,
@@ -1714,24 +1714,24 @@
    ]
   },
   "suggestions": {
-   "clusters_with_duplicates": 8,
-   "distinct_clusters": 122,
-   "files": 20,
+   "clusters_with_duplicates": 10,
+   "distinct_clusters": 134,
+   "files": 21,
    "identifier_keyed_duplicate_clusters": 1,
    "largest_cluster": 28,
-   "namespaces": 19,
-   "registers": 20,
-   "rows": 156,
-   "rows_inside_a_duplicate_cluster": 42,
+   "namespaces": 20,
+   "registers": 21,
+   "rows": 171,
+   "rows_inside_a_duplicate_cluster": 47,
    "rows_inside_identifier_keyed_clusters": 28,
-   "rows_with_sentence_text": 100,
+   "rows_with_sentence_text": 115,
    "rows_with_status": 105,
-   "rows_with_text": 156,
+   "rows_with_text": 171,
    "rows_with_verdict": 24,
-   "sentence_clusters": 93,
-   "sentence_duplicate_clusters": 7,
-   "sentence_largest_cluster": 2,
-   "sentence_rows_inside_a_duplicate_cluster": 14,
+   "sentence_clusters": 105,
+   "sentence_duplicate_clusters": 9,
+   "sentence_largest_cluster": 3,
+   "sentence_rows_inside_a_duplicate_cluster": 19,
    "top_clusters": [
     {
      "id_keyed": true,
@@ -1883,14 +1883,35 @@
      "id_keyed": false,
      "members": [
       {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Consolidate the 16 NFL namespaces into one generator"
+      },
+      {
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Consolidate the 30 nfl-* namespaces into one canonical set"
+      },
+      {
        "namespace": "nfl-dashboard",
        "path": "nfl-dashboard/data/suggestions.json",
-       "text": "Archive historical weekly injury reports (for Q06)"
-      },
+       "text": "Consolidate the overlapping NFL namespaces"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
       {
        "namespace": "nfl-consolidated",
        "path": "nfl-consolidated/data/suggestions.json",
-       "text": "Archive weekly injury reports for past seasons"
+       "text": "Add a control baseline to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Put a control baseline on every leaderboard run"
       }
      ],
      "n": 2
@@ -1899,14 +1920,14 @@
      "id_keyed": false,
      "members": [
       {
-       "namespace": "nfl-ledger",
-       "path": "nfl-ledger/data/suggestions.json",
-       "text": "Consolidate the 16 NFL namespaces into one generator"
-      },
-      {
        "namespace": "nfl-dashboard",
        "path": "nfl-dashboard/data/suggestions.json",
-       "text": "Consolidate the overlapping NFL namespaces"
+       "text": "Archive historical weekly injury reports (for Q06)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Archive weekly injury reports for past seasons"
       }
      ],
      "n": 2
@@ -1995,23 +2016,17 @@
      "id_keyed": false,
      "members": [
       {
-       "namespace": "nfl-core",
-       "path": "nfl-core/data/suggestions.csv",
-       "text": "\"Closing/opening line feed with capture timestamps (answers Q-C01"
-      }
-     ],
-     "n": 1
-    },
-    {
-     "id_keyed": false,
-     "members": [
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Resolve the depth-order source before building the deficiency feature"
+      },
       {
-       "namespace": "nfl-hub",
-       "path": "nfl-hub/data/suggestions.json",
-       "text": "[\"Start with the three 'decision gates' D1-D3 below. Nothing else should be built until they are answered.\", 'For each suggestion, read the evidence links. A suggestion that depends on missing information is marked BLOCKED and points to the question that must be answered first.', 'Pick one option pe"
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Resolve the depth-order source for all 32 clubs"
       }
      ],
-     "n": 1
+     "n": 2
     }
    ],
    "top_sentence_clusters": [
@@ -2019,14 +2034,35 @@
      "id_keyed": false,
      "members": [
       {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Consolidate the 16 NFL namespaces into one generator"
+      },
+      {
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Consolidate the 30 nfl-* namespaces into one canonical set"
+      },
+      {
        "namespace": "nfl-dashboard",
        "path": "nfl-dashboard/data/suggestions.json",
-       "text": "Archive historical weekly injury reports (for Q06)"
-      },
+       "text": "Consolidate the overlapping NFL namespaces"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
       {
        "namespace": "nfl-consolidated",
        "path": "nfl-consolidated/data/suggestions.json",
-       "text": "Archive weekly injury reports for past seasons"
+       "text": "Add a control baseline to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Put a control baseline on every leaderboard run"
       }
      ],
      "n": 2
@@ -2035,14 +2071,14 @@
      "id_keyed": false,
      "members": [
       {
-       "namespace": "nfl-ledger",
-       "path": "nfl-ledger/data/suggestions.json",
-       "text": "Consolidate the 16 NFL namespaces into one generator"
-      },
-      {
        "namespace": "nfl-dashboard",
        "path": "nfl-dashboard/data/suggestions.json",
-       "text": "Consolidate the overlapping NFL namespaces"
+       "text": "Archive historical weekly injury reports (for Q06)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Archive weekly injury reports for past seasons"
       }
      ],
      "n": 2
@@ -2131,31 +2167,25 @@
      "id_keyed": false,
      "members": [
       {
+       "namespace": "nfl-decision-gaps",
+       "path": "nfl-decision-gaps/data/suggestions.json",
+       "text": "Resolve the depth-order source before building the deficiency feature"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Resolve the depth-order source for all 32 clubs"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
        "namespace": "nfl-core",
        "path": "nfl-core/data/suggestions.csv",
        "text": "\"Closing/opening line feed with capture timestamps (answers Q-C01"
-      }
-     ],
-     "n": 1
-    },
-    {
-     "id_keyed": false,
-     "members": [
-      {
-       "namespace": "nfl-hub",
-       "path": "nfl-hub/data/suggestions.json",
-       "text": "[\"Start with the three 'decision gates' D1-D3 below. Nothing else should be built until they are answered.\", 'For each suggestion, read the evidence links. A suggestion that depends on missing information is marked BLOCKED and points to the question that must be answered first.', 'Pick one option pe"
-      }
-     ],
-     "n": 1
-    },
-    {
-     "id_keyed": false,
-     "members": [
-      {
-       "namespace": "nfl-origination",
-       "path": "nfl-origination/data/suggestions.json",
-       "text": "['id', 'group', 'timing', 'suggestion', 'recommendation']"
       }
      ],
      "n": 1

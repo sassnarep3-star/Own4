@@ -19,13 +19,11 @@ This namespace is that reconciliation. It adds:
    number that clears it.
 5. **9 findings about the site itself** (`data/site_findings.json`) — the site-improvement section the
    brief asks for, phrased as change + how to verify the change worked.
-6. **A census of the duplication** (`pages/consolidation.html`), pinned in
-   `data/namespace_inventory.json` to the commit recorded there: of 383 requirement rows with sentence text, 336 sit inside a duplicated cluster
-   (largest 5); of 100 peer suggestion rows with sentence text, only 14 do (largest 2).
-   24 of 156 peer suggestion rows carry any non-blank verdict-shaped field, and the page states why
-   that is an upper bound. Two peer registers store a bare row id in the clustered field, so the raw
-   columns (largest 68 / 28) are published beside the sentence columns and flag `DC-12` explains
-   the difference.
+6. **A census of the duplication** (`pages/consolidation.html`), computed from every committed register in
+   the tree and frozen into `data/namespace_inventory.json` at the commit named there. The page carries
+   the totals — requirement rows duplicate heavily at the sentence level, peer suggestion rows barely do,
+   and the biggest raw clusters are identifier collisions, labelled as such (`DC-12`). Prose deliberately
+   does not restate the counts: a copy of a tree-measured number goes stale the moment a sibling merges.
 
 ## What this session verified from official sources (and what it did not)
 
