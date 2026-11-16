@@ -1,0 +1,72 @@
+name: nfl-command-center verify
+
+# Gate for the single NFL dashboard namespace (2026-11-16).
+#   * recompute every derived dataset from the dated raw transcriptions;
+#   * rebuild the 15 pages;
+#   * enforce the site rules (every data row source-linked or explicitly marked
+#     unverified, every local link resolves, no price published without a source);
+#   * enforce byte-identical rebuilds, so a published number cannot drift from its data.
+# It does not deploy: Pages serves this repository from main / root, so the committed
+# nfl-command-center/*.html files ship with the rest of the site.
+
+on:
+  push:
+    paths:
+      - 'nfl-command-center/**'
+      - 'verification/build.py'
+      - 'index.html'
+      - 'verified/**'
+      - '.github/workflows/nfl-command-center.yml'
+  pull_request:
+    paths:
+      - 'nfl-command-center/**'
+      - 'verification/build.py'
+      - 'index.html'
+      - 'verified/**'
+      - '.github/workflows/nfl-command-center.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Recompute, rebuild, verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Recompute the derived layer from the dated transcriptions
+        run: python3 engine/compute.py
+        working-directory: nfl-command-center
+
+      - name: Rebuild the 15 pages
+        run: python3 engine/build_site.py
+        working-directory: nfl-command-center
+
+      - name: Verify rows, links, vocabulary and the no-price rule
+        run: python3 engine/verify_site.py
+        working-directory: nfl-command-center
+
+      - name: Rebuild must be byte-identical
+        # compute.py is pure arithmetic over checked-in literals, so any diff here is a
+        # real defect rather than a libm rounding difference.
+        run: git diff --exit-code -- data index.html pages
+        working-directory: nfl-command-center
+
+      - name: Instrument panel build must be byte-identical
+        # Root dashboard nav now links this namespace; rebuild it to prove the gate in
+        # canonical-site.yml still holds with the added group.
+        run: |
+          python3 verification/build.py
+          git diff --exit-code -- index.html verified
+
+      - name: Root site gates still pass
+        run: |
+          python3 verification/verify_site.py
+          python3 verification/assert_publication.py
