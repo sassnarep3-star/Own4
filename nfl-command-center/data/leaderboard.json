@@ -29,7 +29,7 @@
    "clv": "",
    "reward_payable": "no",
    "blocking_gate": "G1 sample floor 300 graded games (have 116); G2 no official price for CLV",
-   "what_would_change_our_mind": "A game-cluster bootstrap lower bound above zero on total MAE improvement over 300+ graded games, and a positive Brier skill interval on the moneyline. If the total interval crosses zero again at n>=300, the model is retired rather than tuned.",
+   "what_would_change_our_mind": "A game-cluster bootstrap lower bound above zero on total MAE improvement over 300+ graded games, and a Brier skill interval above zero on both the ratio and the difference measure. If either interval crosses zero again at n>=300, the model is retired rather than tuned.",
    "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
   },
   {
@@ -48,7 +48,7 @@
    "roi": "",
    "clv": "",
    "reward_payable": "no",
-   "blocking_gate": "G1 sample floor; G2 Brier skill interval includes zero at this n",
+   "blocking_gate": "G1 sample floor 300 graded games (have 116); the Brier intervals exclude zero at this n, but a gate is a conjunction and G1 is not met",
    "what_would_change_our_mind": "A Brier-skill interval that excludes zero against the 'always home' baseline, with the multiplicity adjustment for the number of strategies tested. A point estimate alone is explicitly not enough.",
    "source_url": "https://www.nfl.com/standings/"
   },

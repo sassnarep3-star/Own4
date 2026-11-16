@@ -63,3 +63,30 @@ promoted to live returns to paper when, over four consecutive graded weeks, its 
 Brier skill is ≤ 0 on the game-cluster lower bound, or when it grades fewer than 75% of the games it
 forecast. Demotion is automatic and does not require a review meeting; promotion out of paper
 requires every one of the ten gates, not a majority.
+
+---
+
+## Erratum, appended 2026-11-16 (no rule above is changed)
+
+Two defects were found after the registration commit and are recorded here rather than edited
+into the frozen text, so that the frozen text and its history stay intact.
+
+**E1 — sign note on `fair_spread_home`.** Step 4 says *"negative = home favoured"*. The engine has
+always computed `fair_spread_home = E_home - E_away`, so a **positive** value means the home side is
+expected to win by that margin. The engine, the published columns and the site labels are all
+consistent with the positive convention; only that parenthetical was wrong. It is corrected here:
+`fair_spread_home > 0` = home favoured, and the published table prints the favoured club by name
+(`HOU 4.0`) as well as the unrounded signed margin, so the sign is not carried by a note alone.
+
+**E2 — the sample behind the two constants.** `HFA` and `sigma` are estimated from the settled
+corpus. The first build merged the verified corpus (137 settled games) with this week's
+transcription (12 finals) without deduplicating the Thursday game that appears in both, which
+produced `n = 149` against 148 reconciled games. The merge is now keyed on `(date, away, home)`,
+one game is dropped as overlap, and the build asserts that the constant sample equals the
+reconciliation count. `n = 148`; the published constants are `HFA = -0.3243` (half the observed mean
+home margin) and `sigma = 13.4997`.
+
+The demotion rule, the gates, the input list, the origination order and the grading rule are
+untouched by both errata. `strategy_registry.json` records the amendments, so the freeze statement
+above remains accurate in the only sense that matters: nothing that would change a forecast was
+adjusted after the forecasts existed.

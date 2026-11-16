@@ -21,10 +21,10 @@
   {
    "id": "G2",
    "name": "Probabilistic calibration vs benchmark",
-   "requirement": "Brier skill interval above zero",
-   "observed": "skill 0.5796, 95% CI [0.2264, 0.4059]",
+   "requirement": "Brier skill interval above zero, measured on both the ratio and the difference",
+   "observed": "ratio 0.5796, 95% CI [0.4917, 0.6465]; difference +0.3148, 95% CI [0.2264, 0.4059]",
    "status": "fail",
-   "clearing_number": "CI lower bound > 0 at n>=300",
+   "clearing_number": "ratio lower bound > 0 AND difference lower bound > 0 AND n>=300 (observed: both lower bounds are above 0, but n=116, so the gate stays shut)",
    "source_url": "https://www.nfl.com/standings/"
   },
   {

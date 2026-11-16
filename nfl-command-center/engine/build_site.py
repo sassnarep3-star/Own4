@@ -41,6 +41,17 @@ def badge(value):
             "warn" if s in ("partial", "paper", "open", "needs review", "unanswered") else "mid"))
     return '<span class="badge %s">%s</span>' % (cls, esc(value))
 
+def side_label(home, away, margin):
+    """Render the fair side the way a market prints it: the favoured club and its handicap."""
+    if margin == "" or margin is None:
+        return '<span class="blank">blank</span>'
+    if margin > 0:
+        return "%s %.1f" % (home, margin)
+    if margin < 0:
+        return "%s %.1f" % (away, -margin)
+    return "pick"
+
+
 def link(url, label="source"):
     if not url:
         return '<span class="nosrc">no official source</span>'
@@ -241,10 +252,11 @@ is information.</p></div>""" % BT["n_forecasts"]
     luck = ("<h2>Removal of luck</h2><p>Luck is removed by refusing to rank on anything a coin can produce. "
             "Three controls are published beside the model: always-home (Brier %.4f), the running league-average "
             "total (MAE %.2f) and a fair coin (Brier 0.2500). The model's totals beat the naive total by %.2f "
-            "points of MAE with a game-cluster 95%% interval of %s; its moneyline skill against always-home is "
-            "%s with an interval of %s. Both intervals are published even where they flatter nothing.</p>"
-            % (m["brier_home_baseline"], m["mae_naive"], m["mae_improvement"],
-               m["mae_improvement_ci"], m["brier_skill"], m["brier_skill_ci"]))
+            "points of MAE, game-cluster 95%% interval %s. Its moneyline Brier beats always-home by %.4f, "
+            "interval %s, which is a skill of %.4f (ratio interval %s). Both ratio and difference intervals "
+            "are published because they answer different questions, and neither is promoted at this n.</p>"
+            % (m["brier_home_baseline"], m["mae_naive"], m["mae_improvement"], m["mae_improvement_ci"],
+               m["brier_diff_improvement"], m["brier_diff_ci"], m["brier_skill"], m["brier_skill_ci"]))
     controls = table("Controls that any signal must beat", ["Control", "n", "Score", "Why it exists", "Source"],
                      [[esc(x["name"]), esc(x["n"]),
                        esc(("Brier %.4f" % x["brier"]) if x.get("brier") not in (None, "") else ("MAE %.2f" % x["mae"])),
@@ -254,16 +266,15 @@ is information.</p></div>""" % BT["n_forecasts"]
     own = table("Week 11 originated lines — side first, then total, then moneyline",
                 ["Game", "Kickoff (ET, as published)", "Fair home side", "Fair total", "P(home)", "Market", "Residual", "Source"],
                 [[("%s at %s" % (r["away"], r["home"])), esc(r["et"]),
-                  esc(("%+.1f" % r["fair_home_margin_rounded"]) if r["fair_home_margin_rounded"] < 0
-                      else ("+%.1f" % r["fair_home_margin_rounded"])),
+                  esc(side_label(r["home"], r["away"], r["fair_home_margin_rounded"])),
                   esc("%.1f" % r["fair_total_rounded"]), esc("%.3f" % r["p_home_win"]),
-                  v(r["market_total"]), v(r["residual_total"]), link(r["game_key"] and
-                  "https://www.nfl.com/schedules/2026/by-week/week-11", "schedule")]
+                  v(r["market_total"]), v(r["residual_total"]),
+                  link("https://www.nfl.com/schedules/2026/by-week/week-11", "schedule")]
                  for r in LINES["rows"]])
-    own_note = ('<p class="small">A negative fair home side means the home club is favoured by that many '
-                'points; the sign convention is stated because it is the one column that is misread most often. '
-                'Market and residual columns are blank on every row: the NFL publishes no price, and inventing '
-                'one would be the single failure this project is built to prevent.</p>')
+    own_note = ('<p class="small">The fair side is printed the way a market prints it: the favoured club and '
+                'the handicap it gives. The unrounded home margin is on the own-lines page so the sign is '
+                'never ambiguous. Market and residual columns are blank on every row: the NFL publishes no '
+                'price, and inventing one would be the single failure this project is built to prevent.</p>')
 
     findings = table("What the official pages actually show · %d computed findings" % DRILL["n_rows"],
                      ["ID", "Finding", "Evidence (computed)", "Status", "Source"],
@@ -309,9 +320,10 @@ Active list, and Drew Lock listed at quarterback with 17 passes in the same docu
 <h2>3. What the model says, and what it is worth</h2>
 <p>The pre-registered singles baseline publishes a fair side, a fair total and a moneyline probability for
 all 13 Week 11 games. Walk-forward over %d graded games, the total beats the naive league-average total by
-%.2f points of mean absolute error (game-cluster 95%% interval %s) and the moneyline's Brier skill against
-"always home" is %s (interval %s). Those intervals are the honest headline: the total's interval excludes
-zero, the moneyline's does not, and neither can be promoted at this sample.</p>
+%.2f points of mean absolute error, game-cluster 95%% interval %s. Its moneyline beats "always home" on the
+Brier score by %.4f, interval %s, a ratio skill of %s with ratio interval %s. Those intervals are the honest
+headline: every published interval here excludes zero at 116 games, which is not the same thing as a
+promotion, because the pre-registered sample floor is 300.</p>
 <h2>4. What is blocked, and by what</h2>
 <p>Of %d brief lines, %d are met, %d are partial and %d are blocked. The recurring blockers are not coding
 problems: there is no permitted price source, so every ROI, closing-line value and residual cell is blank;
@@ -325,7 +337,8 @@ every other open question can be answered in parallel while it is being decided.
 five proposals with their cost, the gate each would clear and the risk; the verdict column is deliberately
 left for you.</p>""" % (len(D), REC["n_games"], AV["counts"]["rows"], AV["counts"]["clubs"],
                         BT["n_forecasts"], m["mae_improvement"], m["mae_improvement_ci"],
-                        m["brier_skill"], m["brier_skill_ci"], REQ["n_rows"], c["met"], c["partial"],
+                        m["brier_diff_improvement"], m["brier_diff_ci"], m["brier_skill"],
+                        m["brier_skill_ci"], REQ["n_rows"], c["met"], c["partial"],
                         c["blocked"])
     rows = [[esc(r["id"]), esc(r["requirement"]), badge(r["status"]), esc(r["clearing_number"]),
              link(r["source_url"], "official") if r["source_url"] else
@@ -469,10 +482,13 @@ def page_depth():
                     ["Game", "Club", "Player", "Pos", "Report", "Not active", "Started", "Replaced by", "Evidence", "Sources"],
                     rp_rows)
             + "<h2>Club depth chart, %d rows, one club</h2>" % DEPTH["n_rows"]
-            + "<p>Rank 1 is the club's own first-listed player, not the starter. Three clubs' worth of "
-              "position groups carry more than one rank-1 player on this chart alone — two receivers and three "
-              "linebackers — which is why the register keeps the slot as a group and never collapses it to "
-              "a single starter.</p>"
+            + ("<p>Rank 1 is the club's own first-listed player, not the starter. On this single chart "
+               "%d of %d slot groups carry more than one rank-1 player (%s), and one player is rank 1 in "
+               "two different slots (Jack Fox at punter and holder). That is why the register keeps the "
+               "slot as a group and never collapses it to a single starter: a rule that picked "
+               "&quot;the rank-1 player&quot; would have to discard evidence the publisher printed.</p>"
+               % (DEPTH["n_rank1_groups"], DEPTH["n_rank1_slots"],
+                  "; ".join("%s ×%d" % (g["slot"], g["n"]) for g in DEPTH["rank1_groups"])))
             + table("Detroit depth chart as published 2026-11-16",
                     ["Unit", "Slot", "Rank", "Player", "Publication label", "Source"], d_rows)
             + "<h2>Roster status codes, one club</h2>"
@@ -488,7 +504,8 @@ def page_own_lines():
     for r in LINES["rows"]:
         rows.append([esc("%s at %s" % (r["away"], r["home"])), esc(r["gameday"]), esc(r["et"]),
                      esc("%.2f" % r["expected_away_pts"]), esc("%.2f" % r["expected_home_pts"]),
-                     esc(("%+.1f" % r["fair_home_margin_rounded"])),
+                     esc(side_label(r["home"], r["away"], r["fair_home_margin_rounded"])),
+                     esc("%+.2f" % r["fair_home_margin"]),
                      esc("%.1f" % r["fair_total_rounded"]), v(r["market_total"]),
                      v(r["residual_total"]), esc("%.4f" % r["p_home_win"]),
                      link("https://www.nfl.com/schedules/2026/by-week/week-11", "schedule")])
@@ -500,17 +517,25 @@ def page_own_lines():
             "<dl class=\"kv\">"
             "<dt>Model version</dt><dd><code>%s</code></dd>"
             "<dt>Registered at commit</dt><dd><code>%s</code></dd>"
-            "<dt>Home-field constant</dt><dd>%.3f points added to the home side (half the observed mean home margin over %d settled games)</dd>"
-            "<dt>Margin dispersion</dt><dd>%.3f points (sample sd of margin about its mean)</dd>"
+            "<dt>Home-field constant</dt><dd>%+.4f points added to the home side &mdash; half the observed mean "
+            "home margin over %d settled games. Positive means the home side is expected to score more; "
+            "negative would mean the away side is. The observed mean is negative here, which is only true "
+            "because the home clubs in this corpus have been out-scored so far; it is a measurement of the "
+            "sample, not a claim that home-field advantage has inverted.</dd>"
+            "<dt>Margin dispersion</dt><dd>%.4f points (sample sd of margin about its mean), the denominator "
+            "of the moneyline probability</dd>"
+            "<dt>Constant sample audit</dt><dd>%d games used (%d from the verified corpus, %d overlap dropped "
+            "when the Week 10 transcription was merged on date/away/home)</dd>"
             "<dt>Origination order audit</dt><dd>required <code>%s</code>, observed <code>%s</code> — %s</dd>"
             "<dt>Price transparency</dt><dd>market and residual columns are blank on every row</dd>"
             "</dl>"
             % (LINES["model_version"], LINES["registration_commit"][:7], k["hfa_half_points"],
-               k["n_games_used"], k["sigma_margin"], LINES["order_audit"]["required"],
+               k["n_games_used"], k["sigma_margin"], k["n_games_used"], k["n_from_verified_corpus"],
+               k["n_overlap_dropped"], LINES["order_audit"]["required"],
                LINES["order_audit"]["observed"], badge(LINES["order_audit"]["status"]))
-            + table("Originated lines, with inputs. A negative fair home side means the home club is favoured",
-                    ["Game", "Gameday", "ET", "E[away]", "E[home]", "Fair home side", "Fair total",
-                     "Market total", "Residual", "P(home)", "Source"], rows)
+            + table("Originated lines, with inputs, and the unrounded home margin so the sign is never ambiguous",
+                    ["Game", "Gameday", "ET", "E[away]", "E[home]", "Fair side (printed)", "Home margin",
+                     "Fair total", "Market total", "Residual", "P(home)", "Source"], rows)
             + """<div class="panel warn"><h3>What "own line" means here, and what it does not</h3>
 <p>An own line is a model estimate expressed as a market number. It is not a claim that the number is
 better than a market number — that claim needs a price, and there is none. The residual column exists so
@@ -567,7 +592,8 @@ def page_backtest():
             "such.</p>" % BT["n_forecasts"]
             + '<div class="grid">'
             + '<div class="card"><div class="k">Model Brier</div><div class="n">%.4f</div><div class="s">always-home %.4f</div></div>' % (m["brier"], m["brier_home_baseline"])
-            + '<div class="card"><div class="k">Brier skill vs home</div><div class="n">%s</div><div class="s">95%% cluster CI %s</div></div>' % (m["brier_skill"], m["brier_skill_ci"])
+            + '<div class="card"><div class="k">Brier skill vs home (ratio)</div><div class="n">%s</div><div class="s">95%% ratio CI %s</div></div>' % (m["brier_skill"], m["brier_skill_ci"])
+            + '<div class="card"><div class="k">Brier difference vs home</div><div class="n">%+.4f</div><div class="s">95%% difference CI %s</div></div>' % (m["brier_diff_improvement"], m["brier_diff_ci"])
             + '<div class="card"><div class="k">Total MAE</div><div class="n">%.2f</div><div class="s">naive %.2f</div></div>' % (m["mae_total"], m["mae_naive"])
             + '<div class="card"><div class="k">MAE improvement</div><div class="n">%+.2f</div><div class="s">95%% CI %s</div></div>' % (m["mae_improvement"], m["mae_improvement_ci"])
             + '</div>'
@@ -669,6 +695,37 @@ def page_suggestions():
     return shell("pages/suggestions.html", "Suggestions", "Decisions · suggestions", body)
 
 
+def flagged_lead(FLAG):
+    """The 'read these first' panel is generated from the severity column, not written by hand.
+
+    The hand-written version named FB-01, FB-03 and FB-09 while the register listed a different
+    set, so the panel and the table disagreed on the same page. Severity is data; the summary is
+    now derived from it.
+    """
+    order = ["blocking", "high", "medium", "low"]
+    top = []
+    for level in order:
+        for r in FLAG["rows"]:
+            if r["severity"] == level:
+                top.append(r)
+        if len(top) >= 3:
+            break
+    top = top[:3]
+    counts = {}
+    for r in FLAG["rows"]:
+        counts[r["severity"]] = counts.get(r["severity"], 0) + 1
+    bits = " · ".join("%d %s" % (counts[k], k) for k in order if k in counts)
+    items = "".join("<li><strong>%s</strong> (%s) — %s. %s</li>"
+                    % (esc(r["id"]), esc(r["severity"]), esc(r["item"]),
+                       link(r["source_url"], "source") if r["source_url"] else
+                       '<span class="nosrc">no official source</span>')
+                    for r in top)
+    return ('<div class="panel bad"><h3>What to read first</h3>'
+            '<p class="small">Severity spread across %d flags: %s. The three highest are listed first '
+            'because they change what the rest of the site can say.</p><ul>%s</ul></div>'
+            % (FLAG["n_rows"], esc(bits), items))
+
+
 def page_flagged():
     rows = [[esc(r["id"]), badge(r["severity"]), esc(r["item"]), esc(r["detail"]), esc(r["gate"] or "—"),
              link(r["source_url"], "source") if r["source_url"] else '<span class="nosrc">no official source</span>']
@@ -679,12 +736,7 @@ def page_flagged():
             "a reason to withhold the rest of it.</p>" + "<p>%s</p>" % esc(FLAGS["policy"])
             + table("%d flags. Severity blocking = an entire class of results cannot exist without it"
                     % FLAGS["n_rows"], ["ID", "Severity", "Item", "Detail", "Gate", "Source"], rows)
-            + """<div class="panel bad"><h3>Three flags worth reading first</h3>
-<p><strong>FB-01</strong> is the reason there is no ROI anywhere on this site. <strong>FB-03</strong> is a real
-contradiction inside one official document: a cornerback the club lists first on its depth chart, the report
-marks Out, and the game book lists both in the first-string lineup and on the Not Active list.
-<strong>FB-09</strong> is a caution, not a conclusion: the injury report attributes players to Kansas City whose
-club affiliation should be confirmed against the Chiefs' own roster page before any roster join is built on it.</p></div>""")
+            + flagged_lead(FLAGS))
     return shell("pages/flagged.html", "Flagged for review", "Decisions · flagged", body)
 
 

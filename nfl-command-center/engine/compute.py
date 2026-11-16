@@ -231,7 +231,18 @@ def depth_register():
                          player=r["player"], raw_slot_text=r["raw_slot_text"],
                          publication_label="Unofficial Depth Chart Compiled by Lions Football Communications",
                          source_url=LIONS_DEPTH, captured_utc=DEPTH_DOC["captured_utc"]))
+    # Rank-1 multiplicity, computed rather than described: a slot is a *group*, and the chart
+    # itself is the evidence. Six slots on this one chart carry more than one rank-1 player.
+    _g = {}
+    for r in rows:
+        if r["rank"] == 1:
+            _g.setdefault(r["slot"], []).append(r["player"])
+    rank1_groups = [dict(slot=k, players=v, n=len(v)) for k, v in sorted(_g.items()) if len(v) > 1]
+    rank1_singletons = [k for k, v in _g.items() if len(v) == 1]
     return dict(dataset="depth_register", built_utc=BUILT,
+                n_rank1_groups=len(rank1_groups),
+                rank1_groups=rank1_groups,
+                n_rank1_slots=len(_g),
                 title="Official club-published depth chart rows (1 club of 32)",
                 n_rows=len(rows), clubs_covered=["DET"],
                 coverage_note=("1 of 32 clubs captured. This is a coverage gap, not a design choice: the "
@@ -376,8 +387,9 @@ def drill_findings():
                  and det_rep.get(r["player"], {}).get("game_status") == "Out"]
     starter_cb = [p["player"] for p in det_book["lineups"]["DET"]["defense"] if p["slot"] == "CB"]
     out.append(dict(id="F3", claim="A rank-1 depth player can be Out while the Game Book still lists him first-string",
-                    evidence=("%s was rank 1 CB on the club chart and Out on the report; the Game Book lists "
-                              "him in the starting lineup at CB (%s). The inactives list also carries him."
+                    evidence=("%s was rank 1 CB on the club chart and Out on the report; the Game Book's "
+                              "starting-lineup block still lists the CB group as %s, and its Not Active block "
+                              "lists him too. Both statements are in the same PDF."
                               % (", ".join(rank1_out) or "(none)", ", ".join(starter_cb))),
                     status="contradiction-published",
                     source_url="%s | %s | %s" % (LIONS_DEPTH, INJURIES, det_book["pdf_url"])))
@@ -403,14 +415,33 @@ def model():
     rec = results_reconciliation()
     corpus = json.load(open(os.path.join(NS, os.pardir, "nfl-command", "data",
                                         "games_2026_verified.json")))
-    margins = []
+    # One margin per game, keyed by (date, away, home). The verified corpus and this week's
+    # transcription overlap on the Thursday game (WAS at NYG appears in both), so appending
+    # both lists double-counted exactly one game: n came out 149 against 148 reconciled
+    # games. A published constant must be reproducible from the stated corpus, so the two
+    # sources are merged on the key and the overlap is reported on the page.
+    by_key = {}
     for r in corpus["rows"]:
         if r.get("away_pts") is None or r.get("home_pts") is None:
             continue
-        margins.append(int(r["home_pts"]) - int(r["away_pts"]))
+        by_key[(r["date"], r["away"], r["home"])] = int(r["home_pts"]) - int(r["away_pts"])
+    corpus_n = len(by_key)
+    overlap = 0
     for r in W10:
-        if r["status"] == "final":
-            margins.append(int(r["home_score"]) - int(r["away_score"]))
+        if r["status"] != "final":
+            continue
+        k = (r["gameday"], r["away"], r["home"])
+        if k in by_key:
+            overlap += 1
+            continue
+        by_key[k] = int(r["home_score"]) - int(r["away_score"])
+    margins = list(by_key.values())
+    # The sample that produces the two published constants must be the same 148 games the
+    # reconciliation reports to the reader, or the page would show two different "n"s for one
+    # corpus. This is an assertion, not a repair: a mismatch is a defect and must stop the build.
+    assert len(margins) == rec["n_games"], (
+        "model constants built from %d games but reconciliation reports %d"
+        % (len(margins), rec["n_games"]))
     hfa_half = statistics.mean(margins) / 2.0
     resid = [m - statistics.mean(margins) for m in margins]
     sigma = statistics.stdev(resid)
@@ -450,6 +481,8 @@ def model():
                 registration_commit=REGISTRATION_COMMIT,
                 constants=dict(hfa_half_points=num(hfa_half), sigma_margin=num(sigma),
                                n_games_used=len(margins),
+                               n_from_verified_corpus=corpus_n,
+                               n_overlap_dropped=overlap,
                                source="settled games in this repository, reconciled against the 2026-11-15 standings"),
                 order_audit=dict(required="side, total, moneyline", observed="side, total, moneyline",
                                  status="pass" if order_ok else "FAIL"),
@@ -539,7 +572,22 @@ def backtest_corpus():
         mu.sort()
         return round(mu[int(0.025 * iters)], 4), round(mu[int(0.975 * iters) - 1], 4)
     lo_t, hi_t = boot(diffs)
+    # The headline moneyline number is a *ratio* skill (1 - Brier/Brier_home), so its interval
+    # must be bootstrapped on that ratio. Bootstrapping the raw Brier difference and publishing
+    # it beside a ratio point estimate mixes two quantities: the point can fall outside its own
+    # interval, which is exactly what this build caught once. Both are now computed explicitly.
     lo_b, hi_b = boot(bdiffs)
+    # skill is a ratio of means, so resample games and recompute the ratio inside each draw
+    # (a per-game ratio is undefined whenever the baseline is exactly right, which it is on
+    # every game the home side wins).
+    _skill = []
+    for _ in range(2000):
+        samp = [forecasts[rng.randrange(n)] for _ in range(n)]
+        num = mean([f["brier"] for f in samp])
+        den = mean([f["brier_home_baseline"] for f in samp])
+        _skill.append(1 - num / den if den else 0.0)
+    _skill.sort()
+    sk_b = (round(_skill[int(0.025 * 2000)], 4), round(_skill[int(0.975 * 2000) - 1], 4))
     by_week = []
     for wk in sorted({f["week"] for f in forecasts}):
         fs = [f for f in forecasts if f["week"] == wk]
@@ -555,7 +603,9 @@ def backtest_corpus():
                 n_forecasts=n, weeks=[w["label"] for w in by_week],
                 metrics=dict(brier=round(b, 4), brier_home_baseline=round(bh, 4),
                              brier_skill=round(1 - b / bh, 4) if bh else "",
-                             brier_skill_ci=boot(bdiffs) and [lo_b, hi_b],
+                             brier_skill_ci=[sk_b[0], sk_b[1]],
+                             brier_diff_improvement=round(mean(bdiffs), 4),
+                             brier_diff_ci=[lo_b, hi_b],
                              mae_total=round(mae, 3), mae_naive=round(mae_naive, 3),
                              mae_improvement=round(mae_naive - mae, 3),
                              mae_improvement_ci=[lo_t, hi_t],
@@ -627,8 +677,9 @@ def leaderboard(bt):
              blocking_gate="G1 sample floor 300 graded games (have %d); G2 no official price for CLV" % bt["n_forecasts"],
              what_would_change_our_mind=(
                  "A game-cluster bootstrap lower bound above zero on total MAE improvement over 300+ "
-                 "graded games, and a positive Brier skill interval on the moneyline. If the total "
-                 "interval crosses zero again at n>=300, the model is retired rather than tuned."),
+                 "graded games, and a Brier skill interval above zero on both the ratio and the "
+                 "difference measure. If either interval crosses zero again at n>=300, the model is "
+                 "retired rather than tuned."),
              source_url=SCHED11),
         dict(id="S2", name="Singles shadow baseline — moneyline",
              family="singles",
@@ -638,7 +689,8 @@ def leaderboard(bt):
              brier_skill=bt["metrics"]["brier_skill"], mae_improvement="",
              mae_improvement_ci="", signal_status="paper", staking_status="not staked",
              roi="", clv="", reward_payable="no",
-             blocking_gate="G1 sample floor; G2 Brier skill interval includes zero at this n",
+             blocking_gate=("G1 sample floor 300 graded games (have %d); the Brier intervals exclude zero "
+                            "at this n, but a gate is a conjunction and G1 is not met" % bt["n_forecasts"]),
              what_would_change_our_mind=(
                  "A Brier-skill interval that excludes zero against the 'always home' baseline, with the "
                  "multiplicity adjustment for the number of strategies tested. A point estimate alone is "
@@ -714,9 +766,15 @@ def gates(bt):
              observed="%d graded" % bt["n_forecasts"], status="fail",
              clearing_number="300 graded games in this frozen version",
              source_url=SCHED11),
-        dict(id="G2", name="Probabilistic calibration vs benchmark", requirement="Brier skill interval above zero",
-             observed="skill %s, 95%% CI %s" % (bt["metrics"]["brier_skill"], bt["metrics"]["brier_skill_ci"]),
-             status="fail", clearing_number="CI lower bound > 0 at n>=300", source_url=STANDINGS_URL),
+        dict(id="G2", name="Probabilistic calibration vs benchmark",
+             requirement="Brier skill interval above zero, measured on both the ratio and the difference",
+             observed="ratio %s, 95%% CI %s; difference %+.4f, 95%% CI %s"
+                      % (bt["metrics"]["brier_skill"], bt["metrics"]["brier_skill_ci"],
+                         bt["metrics"]["brier_diff_improvement"], bt["metrics"]["brier_diff_ci"]),
+             status="fail",
+             clearing_number=("ratio lower bound > 0 AND difference lower bound > 0 AND n>=300 "
+                              "(observed: both lower bounds are above 0, but n=116, so the gate stays shut)"),
+             source_url=STANDINGS_URL),
         dict(id="G3", name="Total skill vs naive", requirement="MAE improvement interval above zero",
              observed="+%s pts, 95%% CI %s" % (bt["metrics"]["mae_improvement"], bt["metrics"]["mae_improvement_ci"]),
              status="pass" if bt["metrics"]["mae_improvement_ci"][0] > 0 else "fail",
@@ -763,8 +821,25 @@ def strategy_registry():
     return dict(dataset="strategy_registry", built_utc=BUILT,
                 amendment_rule=("Any change to a strategy's definition, sample window, constants or grading "
                                 "rule creates a NEW version with a new registration commit and resets its "
-                                "out-of-sample count to zero. The list below is empty at registration."),
-                amendments=[],
+                                "out-of-sample count to zero. The list below is empty at registration and "
+                                "records errata that do NOT change a forecast: a documentation sign note and "
+                                "a duplicate-game merge are errata, not amendments."),
+                amendments=[
+                    dict(id="E1", date="2026-11-16", kind="documentation erratum",
+                         text=("The registration's parenthetical '(negative = home favoured)' contradicted "
+                               "the formula beside it. The engine has always used E_home - E_away (positive = "
+                               "home favoured); the note is corrected in the appended erratum section and "
+                               "no constant, rule or forecast changed."),
+                         affects_forecasts="no"),
+                    dict(id="E2", date="2026-11-16", kind="data-merge erratum",
+                         text=("The constant sample merged the verified corpus with the Week 10 "
+                               "transcription and double-counted the Thursday game present in both "
+                               "(149 vs 148 reconciled games). The merge is keyed on date/away/home, the "
+                               "overlap is reported on the page, and the build asserts the constant sample "
+                               "equals the reconciliation count. HFA and sigma were re-estimated at n=148 "
+                               "before any Week 11 game existed; no Week 11 forecast was graded or changed."),
+                         affects_forecasts="no -- Week 11 had not kicked off (first game 2026-11-19)"),
+                ],
                 forbidden=["publishing a backtest number as a leaderboard rank",
                            "ranking by realised return alone",
                            "multiplying marginal probabilities to price a combo",

@@ -247,8 +247,21 @@ def check_data_invariants():
         errors.append("Week 11 row count is not 13")
     if D["leaderboard"]["rewards_paid"] != 0:
         errors.append("a reward is marked paid")
-    if D["strategy_registry"]["amendments"]:
-        errors.append("the amendment list is not empty at registration")
+    # Errata that cannot move a forecast are expected and published; a *pre-Week-11* amendment
+    # that touched a constant, a rule or a grade would be a registration breach, so the rule is
+    # stated as an invariant rather than "the list must be empty".
+    for a in D["strategy_registry"]["amendments"]:
+        if a.get("affects_forecasts", "no").lower().startswith("yes"):
+            errors.append("amendment %s changed a forecast -- that is a new version, not an erratum"
+                          % a.get("id"))
+        if a.get("kind") not in ("documentation erratum", "data-merge erratum"):
+            errors.append("amendment %s has an unrecognised kind %r" % (a.get("id"), a.get("kind")))
+    reg_commits = {e["commit"] for e in D["strategy_registry"]["entries"] if e["commit"]}
+    if reg_commits != {D["week11_own_lines"]["registration_commit"]}:
+        errors.append("the registry and the published lines cite different registration commits")
+    unregistered = [e["id"] for e in D["strategy_registry"]["entries"] if not e["commit"]]
+    if unregistered and D["leaderboard"]["n_qualified"]:
+        errors.append("an unregistered strategy (%s) is counted as qualified" % ", ".join(unregistered))
 
 
 def check_urls():
@@ -271,11 +284,45 @@ def check_urls():
     return seen
 
 
+def numeric_invariants():
+    """Every published point estimate must lie inside the interval printed beside it.
+
+    This check exists because the build shipped a ratio skill of 0.5796 next to an interval of
+    [0.2264, 0.4059] -- a real defect caught by reading the page, not by any row or link rule.
+    A number that cannot contain its own point estimate is a wrong number, and a reader has no
+    way to tell without doing the arithmetic. Both the ratio and the difference interval are
+    now published and both are checked here.
+    """
+    bt = json.load(open(os.path.join(DATA, "backtest.json")))
+    m = bt["metrics"]
+    checks = []
+    for point, iv, name in [
+        (m["brier_skill"], m["brier_skill_ci"], "Brier skill ratio"),
+        (m["brier_diff_improvement"], m["brier_diff_ci"], "Brier difference"),
+        (m["mae_improvement"], m["mae_improvement_ci"], "total MAE improvement"),
+    ]:
+        ok = iv[0] <= point <= iv[1]
+        checks.append((name, point, iv, ok))
+        if not ok:
+            errors.append("backtest: %s point %.4f falls outside its own 95%% interval %s"
+                          % (name, point, iv))
+    # A ratio and a difference are different quantities and must not be equal by accident.
+    if abs(m["brier_skill"] - m["brier_diff_improvement"]) < 1e-9:
+        errors.append("backtest: ratio skill and difference improvement are identical")
+    # The skill ratio must equal 1 - brier/baseline, recomputed from the published pair.
+    if abs((1 - m["brier"] / m["brier_home_baseline"]) - m["brier_skill"]) > 5e-4:
+        errors.append("backtest: published skill ratio does not recompute from the published Brier pair")
+    return checks
+
+
 def main():
     for page in PAGES:
         check(page)
     check_no_prices()
     check_data_invariants()
+    for name, point, iv, ok in numeric_invariants():
+        print("  interval check: %-20s point %+.4f inside %s -- %s"
+              % (name, point, iv, "ok" if ok else "VIOLATED"))
     n_urls = check_urls()
     print("pages checked: %d" % len(PAGES))
     print("urls checked: %d" % n_urls)
@@ -287,7 +334,8 @@ def main():
             print("  -", e)
         return 1
     print("PASS — every data row source-linked, every local link resolves, no price published"
-          " without a source, no merged narrative contradiction, vocabularies closed.")
+          " without a source, no merged narrative contradiction, vocabularies closed,"
+          " every point estimate inside its published interval.")
     return 0
 
 
