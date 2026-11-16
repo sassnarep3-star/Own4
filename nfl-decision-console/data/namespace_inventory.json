@@ -1,19 +1,19 @@
 {
- "captured_at_commit": "e9396b3",
- "captured_utc": "2026-11-16T02:05:20Z",
+ "captured_at_commit": "9a3199f",
+ "captured_utc": "2026-11-16T02:15:24Z",
  "counts": {
   "flags": {
-   "files": 24,
-   "namespaces": 23,
-   "rows": 189,
+   "files": 25,
+   "namespaces": 24,
+   "rows": 204,
    "rows_with_status": 49,
    "rows_with_verdict": 0
   },
   "questions": {
-   "files": 19,
-   "namespaces": 18,
-   "rows": 201,
-   "rows_with_status": 85,
+   "files": 20,
+   "namespaces": 19,
+   "rows": 221,
+   "rows_with_status": 105,
    "rows_with_verdict": 0
   },
   "requirements": {
@@ -24,15 +24,15 @@
    "rows_with_verdict": 0
   },
   "suggestions": {
-   "files": 21,
-   "namespaces": 20,
-   "rows": 171,
+   "files": 22,
+   "namespaces": 21,
+   "rows": 186,
    "rows_with_status": 120,
    "rows_with_verdict": 39
   }
  },
  "dataset": "decision_console_inventory",
- "namespace_count": 32,
+ "namespace_count": 33,
  "namespaces": [
   "nfl",
   "nfl-arena",
@@ -46,6 +46,7 @@
   "nfl-decision",
   "nfl-decision-console",
   "nfl-decision-desk",
+  "nfl-decision-gaps",
   "nfl-decisions",
   "nfl-edge",
   "nfl-hub",
@@ -267,9 +268,42 @@
     "This namespace read 1 of 8 chunks of the live report",
     "Two sibling CI gates are already red on main, and this namespace did not move them",
     "The first census page read an id collision as near-total duplication",
-    "This console attributed the n \u2265 300 gate to a file that does not contain it"
+    "This console attributed the n \u2265 300 gate to a file that does not contain it",
+    "Two peer registers store a serialized list in the field the census clusters on"
    ],
-   "rows": 13,
+   "rows": 14,
+   "rows_with_status": 0,
+   "rows_with_verdict": 0,
+   "verdict_field_counts": {
+    "choice": 0,
+    "chosen": 0,
+    "decision": 0,
+    "owner_decision": 0,
+    "resolution": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "kind": "flags",
+   "namespace": "nfl-decision-gaps",
+   "path": "nfl-decision-gaps/data/flags.json",
+   "row_texts": [
+    "PIT at CIN, Week 10 - no final score published",
+    "Three incompatible row counts published for the same injury page",
+    "One Out player neither the inactive list nor the reserve list explains",
+    "56.5% of inactive players are absent from the injury report",
+    "nfl.com publishes no depth chart",
+    "No official price source exists",
+    "Snap counts and announced starters not found",
+    "No roof designation, surface or wind on the official pages",
+    "Every number pinned to the 2026-11-13 capture is stale",
+    "30 nfl-* namespaces repeat the same page set",
+    "One Week 10 venue not captured",
+    "The availability series has two time points, not four",
+    "The reserve list is published but not captured anywhere in this repository",
+    "Week 11 not yet published; dated announcement not located"
+   ],
+   "rows": 14,
    "rows_with_status": 0,
    "rows_with_verdict": 0,
    "verdict_field_counts": {
@@ -924,6 +958,44 @@
    ],
    "rows": 17,
    "rows_with_status": 0,
+   "rows_with_verdict": 0,
+   "verdict_field_counts": {
+    "choice": 0,
+    "chosen": 0,
+    "decision": 0,
+    "owner_decision": 0,
+    "resolution": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "kind": "questions",
+   "namespace": "nfl-decision-gaps",
+   "path": "nfl-decision-gaps/data/questions.json",
+   "row_texts": [
+    "What fraction of officially inactive players appear on the NFL injury report at all?",
+    "What does 'Questionable' mean empirically?",
+    "What does 'Doubtful' mean empirically?",
+    "Does an 'Out' designation guarantee the player is inactive?",
+    "Which players are on a reserve list and therefore absent from the weekly report?",
+    "Does the league publish depth charts?",
+    "Is there an official snap-count source?",
+    "Does the Game Center publish announced starters and game-day status?",
+    "Does the league publish a stadium roof designation and weather?",
+    "Where does an authorised price come from?",
+    "Why do three different row counts for the same injury page exist in this repo?",
+    "How much does the report move inside a week?",
+    "Is the venue of every fixture transcribed from the official game centre?",
+    "Is the Week 10 results feed complete?",
+    "Is the league's dated schedule announcement published beside the live schedule?",
+    "What is the correlation between the originated side, total and moneyline residuals?",
+    "What minimum n makes a strategy reward-eligible?",
+    "Can a parlay or same-game-parlay combination ever be ranked?",
+    "Has any pre-registered strategy produced a prospective record?",
+    "Can roster turnover be versioned against the last official roster event?"
+   ],
+   "rows": 20,
+   "rows_with_status": 20,
    "rows_with_verdict": 0,
    "verdict_field_counts": {
     "choice": 0,
@@ -2089,6 +2161,39 @@
     "choice": 0,
     "chosen": 0,
     "decision": 15,
+    "owner_decision": 0,
+    "resolution": 0,
+    "verdict": 0
+   }
+  },
+  {
+   "kind": "suggestions",
+   "namespace": "nfl-decision-gaps",
+   "path": "nfl-decision-gaps/data/suggestions.json",
+   "row_texts": [
+    "Run a scheduled, hashed official capture (Wed / Thu / Fri / kickoff)",
+    "Decide the price-data policy before any backtest is published",
+    "Resolve the depth-order source before building the deficiency feature",
+    "Transcribe the full live injury report into the repository",
+    "Ingest the official reserve list and the six transaction categories",
+    "Complete the venue register to 14 of 14",
+    "Add a freshness guard and re-read the Steelers-Bengals result",
+    "One canonical count, computed at build time, never typed into prose",
+    "Consolidate the 30 nfl-* namespaces into one canonical set",
+    "Capture roof, surface and weather per venue from published sources",
+    "Put a control baseline on every leaderboard run",
+    "Pre-register each strategy: rule text, window and gates, committed first",
+    "Split train, validation and final holdout by season",
+    "Keep parlays and prop combos behind a joint-evidence gate",
+    "Publish n beside every correlation and every rate"
+   ],
+   "rows": 15,
+   "rows_with_status": 0,
+   "rows_with_verdict": 0,
+   "verdict_field_counts": {
+    "choice": 0,
+    "chosen": 0,
+    "decision": 0,
     "owner_decision": 0,
     "resolution": 0,
     "verdict": 0

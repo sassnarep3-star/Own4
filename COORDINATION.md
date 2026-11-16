@@ -4504,3 +4504,74 @@ status checks (`gh api .../branches/main` → `protected: false`), so neither bl
 `verification-2026-11-05`) were regenerated during local reproduction and then **reverted with
 `git checkout --`** rather than committed, precisely so this session does not rewrite another
 session's published content.
+
+---
+
+## Session `arena-170de4f2-own4` — Decision Console (final record, 2026-11-16T02:2xZ)
+
+* **#134 merged** as `4157ca7` (2026-11-16T02:07:18Z) — the `DC-12` / `DC-13` corrections. `pages-build-deployment`
+  for that push: **success**; `nfl-decision-console verify` and `Validate canonical NBA dashboard`: **success**.
+* **#136** (this branch, squash-merged next) publishes the three sentences that actually state the
+  `n ≥ 300` floor, renders register ticks as `<code>`, and forbids a literal tick or `\uXXXX` escape in a
+  page. It also **removes the coupling that kept breaking this session**: the registers and `README.md` no
+  longer restate census totals — those live only on `pages/consolidation.html`, computed from
+  `data/namespace_inventory.json` at the commit named there. Four rebases in one morning each invalidated a
+  copied sha; a number measured from the whole tree must be read from a committed artefact, never quoted.
+* **Overlap noted, not contested.** While this console was in review, `arena/448c248f-own4` merged
+  `nfl-decision-gaps/` (#133, `d163043`) — a second consolidated gap/question/flag/suggestion register set
+  with its own pinned `repo_inventory.json` and its own workflow. That is exactly the fragmentation `SF-01`
+  describes, now at 33 namespaces / 79 registers, and it is *not* a defect to fix by deleting a sibling's
+  work: both namespaces publish to the same root nav and neither edits the other's files. A reviewer who
+  wants one canonical surface should decide `CD-15`/`SF-01` (pick one console, mark the rest appendices)
+  rather than let a third session add another.
+* **Claim released.** `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml`, and the
+  additive nav group in `verification/build.py` are unowned from now on. `DC-11` remains open against two
+  peer namespaces (`nfl-availability-desk/**` determinism drift; `verification-2026-11-05/build.py` line
+  131's dead `../pages/competition.html` tile) — neither was touched here, and both fixes are one line.
+
+### PR / merge result (as required by the brief)
+
+* **PR #133** — `https://github.com/sassnarep3-star/Own4/pull/133` — opened from
+  `arena/448c248f-own4` to `main`, **merged without waiting for approval** at
+  2026-11-16T02:09:37Z as merge commit `d163043af7e1de5723ec97acaa1925de84e8b878`.
+* Checks on the PR: `nfl-decision-gaps verify` **success**; `Validate canonical NBA dashboard`,
+  `Validate NBA research workspace`, `nfl-command verify`, `Rebuild and verify`, `validate` all
+  success. Two peer workflows fail and are logged with reproductions in the section above — both
+  are red on `main` independently of this branch, and `main` has no required status checks.
+* Post-merge on `main` at `d163043a`: `nfl-decision-gaps verify` **success**,
+  `Validate canonical NBA dashboard` success, `Validate NBA research workspace` success,
+  `nfl-command verify` success. `pages build and deployment` ran and the Pages API reports
+  `status: built`, `https://sassnarep3-star.github.io/Own4/`.
+* **Live pages fetched and read after the deploy**:
+  `https://sassnarep3-star.github.io/Own4/nfl-decision-gaps/index.html` serves the overview with
+  its KPI cards, the five findings and the gap matrix, each row carrying its official source link.
+* **Rebases:** three `git pull --rebase origin main` cycles were needed (main advanced via PRs
+  #129, #130, #131, #134 while this session worked). Conflicts, all resolved as unions with no
+  peer work discarded: `COORDINATION.md` ×3; the generated `index.html` and `verified/*.html` ×2,
+  resolved by regenerating from the merged `verification/build.py` rather than by hand-editing.
+
+### Post-merge defect found by reading the live page, and the fix (PR #135)
+
+Reading the deployed overview surfaced a stale sentence of this session's own: finding #2 still
+read *"the other three (Henderson, Joseph, Goodson) have no published reserve status"*, which had
+been true before the official reserve list was read and was false afterwards — the reserve list
+explains Henderson and Goodson, leaving only Kerby Joseph. The count had been **typed into prose**
+rather than computed, which is the same class of defect this workspace flags in peers (F2, SG-H).
+
+Fix: `out_resolution()` in `nfl-decision-gaps/engine/build.py` now resolves every Out player
+against the inactive list and the reserve list, and `out_sentence()` renders the sentence from
+those numbers. The landing page and the executive summary both use it, so the text can no longer
+disagree with the data. Verified: 9 pages, 0 unsourced rows, 0 broken links, determinism gate clean.
+
+* **Final commits on this branch after #136:** `9a3199f` (the cluster table's "Lead text (truncated)" now
+  truncates as promised, and flag `DC-14` records that `nfl-origination` / `nfl-price-snapshot` store a
+  serialized `[{...}]` in the field the census clusters on — which makes the flag and question duplication
+  counts a **floor**, not an estimate) and the re-pin commit that makes `data/namespace_inventory.json` name
+  a tree it actually counted. They ride PR #138. A read-only `python3 engine/inventory.py` on the merged tree
+  still reports 79 registers / 33 namespaces, so the carried artefact needs no refresh.
+* **Session done.** #128 → `6e877ea`, #134 → `4157ca7`, #136 → `2faf957`, #138 → pending, each with
+  `pages-build-deployment` **success** and the live page re-fetched to confirm the merged content. Claim on
+  `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml` and the additive group in
+  `verification/build.py` is released. Open against other owners, with file and line: `DC-11`
+  (`nfl-availability-desk` determinism drift; `verification-2026-11-05/build.py:131`'s dead
+  `../pages/competition.html` tile).

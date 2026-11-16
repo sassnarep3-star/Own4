@@ -17,6 +17,7 @@ Contract this builder is written to:
 import html
 import json
 import os
+import re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NS = os.path.dirname(HERE)
@@ -89,6 +90,18 @@ def ul(items):
     return "<ul>%s</ul>" % "".join("<li>%s</li>" % i for i in items)
 
 
+CODE_SPAN = re.compile(r"`([^`<>]+)`")
+
+
+def code(s):
+    """Turn the `inline code` ticks that register prose is authored with into a real <code> span.
+
+    Runs after esc(), on already-escaped strings, and only where the span contains no tag
+    characters, so it can never invent markup around existing HTML.
+    """
+    return CODE_SPAN.sub(r"<code>\1</code>", s) if isinstance(s, str) else s
+
+
 def render(path, title, crumb, body, desc):
     depth = path.count("/")
     pre = "" if depth == 0 else "../" * depth
@@ -97,6 +110,7 @@ def render(path, title, crumb, body, desc):
     if pre:
         body = body.replace('href="pages/', 'href="%spages/' % pre).replace('href="index.html"',
                                                                             'href="%sindex.html"' % pre)
+    body = code(body)
     nav = []
     for p, label, _ in PAGES:
         cur = " on" if p == path else ""
@@ -407,8 +421,10 @@ closes it; a sentence in <code>data/decisions.json</code> does.</p>
                 continue
             mem = " · ".join("<code>%s</code>" % esc(m["namespace"]) for m in g["members"][:6])
             more = "" if len(g["members"]) <= 6 else " <span class='dim'>(%d more)</span>" % (len(g["members"]) - 6)
-            cl_rows.append([esc(kind), "%s#%d" % (esc(kind[:3]), i + 1), "%d" % g["n"],
-                            esc(g["members"][0]["text"]),
+            lead = esc(g["members"][0]["text"])
+            if len(lead) > 140:                     # the header promises a truncated lead text
+                lead = lead[:140] + "<span class='dim'> …</span>"
+            cl_rows.append([esc(kind), "%s#%d" % (esc(kind[:3]), i + 1), "%d" % g["n"], lead,
                             ("<span class='dim'>identifier-keyed — a shared row id, not a shared "
                              "proposal</span>" if g.get("id_keyed") else "sentence text"),
                             mem + more,
@@ -475,6 +491,13 @@ an identity that either closes or does not. Computed from the league's standings
 %(ids)s
 <h2>The size, and what it does to the gates</h2>
 %(gate)s
+<h2>Where the floor is actually written, in the peers' own words</h2>
+<p>The number is quoted across this repository as a corpus size. It is not: every register that states it
+states it as a count of <b>graded games or settled bets for one strategy</b>. Those three sentences are
+transcribed from the files, and they are the only places the figure appears.</p>
+%(gateq)s
+<p class="note"><b>Attribution.</b> %(miscite)s — the three rows above are what the gate actually says,
+and flag <code>DC-13</code> keeps the correction on the record.</p>
 <h2>The 136 question</h2>
 %(brief)s
 <h2>An observation that is not an identity</h2>
@@ -489,6 +512,12 @@ an identity that either closes or does not. Computed from the league's standings
 """ % {
         "read": esc(cor["read_utc"]),
         "ids": table(["Identity", "Left", "Right", "Result", "Source"], ids, "keys"),
+        "miscite": esc(cor["gate_check"]["mis_citation_corrected"]),
+        "gateq": table(["Register that states the floor", "Its sentence, verbatim", "Source"],
+                       [[esc(q["file"]), "&ldquo;%s&rdquo;" % esc(q["text"]),
+                         ext("https://github.com/sassnarep3-star/Own4/blob/main/%s" % q["file"],
+                             "the file ↗")]
+                        for q in cor["gate_check"]["as_written_by_peers"]], "gateq"),
         "gate": table(["Measure", "Value", "Reading", "Source"], [
             ["Fixtures credited now", "<b>%d</b> (%d decisive, %d tied)" % (
                 cor["fixtures_credited"], cor["decisive_fixtures"], cor["tied_fixtures"]),

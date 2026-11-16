@@ -8,7 +8,7 @@
    "id": "DC-01",
    "severity": "high",
    "title": "156 suggestion rows, 0 reviewer verdicts in git",
-   "found": "Counting every suggestion register in the repository returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too). counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` (2026-11-16T01:57:09Z); if the pin is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out",
+   "found": "The census page counts every suggestion register in the repository and publishes the row, file and namespace totals from the pinned artefact; of those rows, only the number shown in the 'Rows w/ verdict' column carries a non-blank verdict-shaped field, and the page states why that is an upper bound. No file anywhere records a reviewer's verdict for the open queue — the field exists and is empty by design in every peer namespace too. If the pin is no longer reachable because the branch was rewritten, `python3 engine/inventory.py` reproduces the counts against whatever tree is checked out",
    "why_it_matters": "the brief's process — review, choose a path, then implement — cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
    "action": "one verdict per row of CD-01…CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
    "blocks": "any claim that the project has a decision process",
@@ -244,6 +244,25 @@
     {
      "label": "the pre-registration that does",
      "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
+    }
+   ]
+  },
+  {
+   "id": "DC-14",
+   "severity": "medium",
+   "title": "Two peer registers store a serialized list in the field the census clusters on",
+   "found": "The census clusters on each row's title/question/item text. In `nfl-origination` and `nfl-price-snapshot` that field holds a whole Python-style list of dicts (a `[{&quot;id&quot;: &quot;S-01&quot;, ...}]` blob) rather than one sentence, so the clusterer sees one long unique string per row: those rows can only ever cluster with a byte-identical twin, which is how two of them ended up as a 2-row 'flag' cluster on the census page. The same field shape is why `rows with comparable text` is an upper bound for the flags and question kinds, and why their duplication counts are read as a floor.",
+   "why_it_matters": "a reviewer who reads '4 duplicated flag clusters' as 'the flag registers agree' is wrong in the comforting direction — schema drift, not agreement, is what keeps those counts low. Any cross-namespace deduplication has to normalize the row shape first, which is the same finding SF-01 makes about registers not agreeing on a schema",
+   "action": "the shared-register normalisation in CD-15 (one schema, one validator) is the fix; a temporary mitigation is already in place — the census publishes both the raw and the sentence-text columns, and this flag names the case the sentence columns cannot separate",
+   "blocks": "any claim that flag or question duplication across the repository is small",
+   "sources": [
+    {
+     "label": "the census page, cluster table",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/pages/consolidation.html"
+    },
+    {
+     "label": "the clusterer and its stopword/field rules",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/derive.py"
     }
    ]
   }
