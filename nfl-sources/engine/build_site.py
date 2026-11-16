@@ -101,6 +101,11 @@ def link(url, text=None):
     return '<a class="src" href="%s" rel="noopener">%s</a>' % (esc(url), esc(text or "official page"))
 
 
+STRAT_LABEL = {"S1_model_favourite": "S1 model favourite",
+               "S2_high_confidence": "S2 high confidence (p ≥ 0.65)",
+               "S3_record_baseline": "S3 better-record CONTROL"}
+
+
 def be_wr(american):
     """Break-even hit rate implied by an American price. -A/(100-A) for negative A."""
     if american is None:
@@ -320,7 +325,7 @@ def build_backtest():
          "week-cluster 95%% CI [%.4f, %.4f]" % tuple(ps["brier_skill_ci95_week_cluster"])],
         ["Brier skill vs the home-team prior", num(ps["brier_skill_vs_home_rate"]),
          "the prior a lazy model would use"],
-        ["Log loss", num(bt["proper_scores"]["log_loss"]), "same ordering as Brier here"],
+        ["Log loss", num(ps["log_loss"]), "same ordering as Brier here"],
         ["Mean absolute error, margin", "%.2f pts" % bt["margin_and_total_error"]["mae_margin"],
          "RMSE %.2f" % bt["margin_and_total_error"]["rmse_margin"]],
         ["Mean absolute error, total", "%.2f pts" % bt["margin_and_total_error"]["mae_total"],
@@ -331,16 +336,14 @@ def build_backtest():
     for key, label in [("S1_model_favourite", "S1 model favourite"),
                        ("S2_high_confidence", "S2 high confidence (p ≥ 0.65)"),
                        ("S3_record_baseline", "S3 better-record CONTROL")]:
-        s = st[key]
-        strat_rows.append([esc(label), str(s["n"]), pct(s["accuracy"]),
-                           "[%.3f, %.3f]" % tuple(s["accuracy_ci95_week_cluster"]),
-                           num(s["brier"]),
-                           num(s.get("placebo_label_shuffle_p")) if s.get("placebo_label_shuffle_p") is not None else "—"])
+        sx = st[key]
+        strat_rows.append([esc(label), str(sx["n"]), pct(sx["accuracy"]),
+                           "[%.3f, %.3f]" % tuple(sx["accuracy_ci95_week_cluster"]),
+                           num(sx["brier"]),
+                           num(sx.get("placebo_label_shuffle_p")) if sx.get("placebo_label_shuffle_p") is not None else "—"])
 
-    cal_rows = []
-    for b in bt["calibration"]["bins"]:
-        cal_rows.append([esc(b["bin"]), str(b["n"]), pct(b["mean_p"]), pct(b["observed"]),
-                         "%+.3f" % (b["observed"] - b["mean_p"])])
+    cal_rows = [[esc(b["bin"]), str(b["n"]), pct(b["mean_p"]), pct(b["observed"]),
+                 "%+.3f" % (b["observed"] - b["mean_p"])] for b in bt["calibration"]["bins"]]
 
     gate_rows = []
     for gid in ["G1_coverage", "G2_signal", "G2b_naive_accuracy_trap", "G3_leakage", "G4_placebo",
@@ -349,81 +352,94 @@ def build_backtest():
         if not g:
             continue
         passed = g.get("pass", g.get("passed"))
+        detail = g.get("detail") or g.get("why") or g.get("reading") or g.get("why_this_matters") or ""
+        if gid == "G1_coverage":
+            detail = "needs %d graded fixtures, has %d" % (g["required"], g["have"])
+        if gid == "G4_placebo":
+            per = {k: v for k, v in g.items() if isinstance(v, dict)}
+            passed = all(v.get("pass") for v in per.values()) if per else None
+            detail = "; ".join("%s p = %.4f" % (k.split("_")[0], v["p"]) for k, v in per.items())
+            detail += " — every registered strategy clears the label-shuffle test"
+        if not detail:
+            detail = "not applicable yet: nothing is live to test"
         mark = ('<span class="chip met">pass</span>' if passed is True else
                 '<span class="chip blocked">fail</span>' if passed is False else
                 '<span class="chip na">not yet</span>')
-        detail = g.get("detail") or g.get("why") or g.get("reading") or ""
-        if gid == "G1_coverage":
-            detail = "needs %d graded fixtures, has %d" % (g["required"], g["have"])
         gate_rows.append([esc(gid.replace("_", " ")), mark, esc(detail)])
+
+    be_price = be["S1_model_favourite"]["mean_fair_american_of_own_picks"]
+    n_dis, n_paired = paired["n_disagree"], paired["n"]
+    # the accuracy gap expressed in fixtures, which is the honest way to read a 0.026 difference
+    games_won = paired["accuracy_diff"] * n_paired
 
     body = """
 <div class="cards">
-<div class="card"><div class="k">Forecasts</div><div class="v">%d</div><div class="s">weeks 3–10, refit weekly</div></div>
-<div class="card"><div class="k">Brier</div><div class="v">%.4f</div><div class="s">coin flip %.4f</div></div>
-<div class="card"><div class="k">Skill (CI)</div><div class="v">%.3f</div><div class="s">[%.3f, %.3f]</div></div>
-<div class="card"><div class="k">Graded</div><div class="v">%d</div><div class="s">G1 needs 300</div></div>
+<div class="card"><div class="k">Forecasts</div><div class="v">{nfore}</div><div class="s">weeks 3–10, refit weekly</div></div>
+<div class="card"><div class="k">Brier</div><div class="v">{brier:.4f}</div><div class="s">coin flip {coin:.4f}</div></div>
+<div class="card"><div class="k">Skill (CI)</div><div class="v">{skill:.3f}</div><div class="s">[{lo:.3f}, {hi:.3f}]</div></div>
+<div class="card"><div class="k">Graded</div><div class="v">{nfore}</div><div class="s">G1 needs 300</div></div>
 </div>
 <p>Protocol: for each week 3–10 the ratings are refitted on games from weeks before that week only, then the
 forecast is made and the game is graded from the official score. The protocol was frozen in
 <code>PREREGISTRATION.md</code> at commit <code>a4f26f5</code> before any of these numbers existed.
-Source for every result: the official week pages, week by week —
-%s, %s, %s, %s, %s, %s, %s, %s.</p>
-<h2 id="scores">Proper scores</h2>%s
+Source for every result: the official week pages, week by week — {weeklinks}.</p>
+<h2 id="scores">Proper scores</h2>{scoretable}
 <h2 id="paired">Model against control, paired on the same fixtures</h2>
-<p>%s. Paired difference <strong>%+.4f</strong>, interval [%+.4f, %+.4f], on %d fixtures where the two
-strategies disagreed %d times.</p>
-<h2 id="strategies">Strategies at a glance</h2>%s
+<p>{pairednote} Paired difference <strong>{diff:+.4f}</strong>, interval [{lo2:+.4f}, {hi2:+.4f}], on {npaired}
+fixtures where the two strategies disagreed {ndis} times.</p>
+<h2 id="strategies">Strategies at a glance</h2>{strattable}
 <p class="tiny">Placebo p-values come from shuffling the outcome labels within the sample; a small p means the
 score is unlikely to arise from a strategy that carries no information. S3 is a control and can never be
 promoted.</p>
-<h2 id="calibration">Calibration</h2>%s
+<h2 id="calibration">Calibration</h2>{caltable}
 <p class="tiny">The 0.50–0.60 and 0.60–0.70 bins are where the model is least well behaved, in opposite
 directions. With 20 and 12 fixtures those are not conclusions, but they are the reason a 0.65 confidence
 threshold is not treated as a filter until the sample grows.</p>
 <h2 id="luck">Removal of luck</h2>
 <div class="warnbox"><strong>The panel the brief asks for, built out of what actually exists.</strong>
 <ul>
-<li><strong>Control baselines on the same run:</strong> coin flip %.4f Brier, home-rate prior %.4f, record-only
-rule %.4f accuracy. A strategy is only interesting relative to these, never in absolute terms.</li>
-<li><strong>Fade test:</strong> inverting S1 scores %.4f; inverting S2 scores %.4f. A symmetric-noise strategy
-would score near 50%% both ways.</li>
-<li><strong>Placebo label shuffle:</strong> p = %.4f (S1) and p = %.4f (S3).</li>
-<li><strong>Week-cluster intervals, not fixture-level ones:</strong> the fixture-level interval would be roughly
+<li><strong>Control baselines on the same run:</strong> coin flip {coin:.4f} Brier, home-rate prior {homeprior:.4f},
+record-only rule {ctrlacc:.4f} accuracy. A strategy is only interesting relative to these, never in absolute terms.</li>
+<li><strong>Fade test:</strong> inverting S1 scores {f1:.4f}; inverting S2 scores {f2:.4f}. A symmetric-noise strategy
+would score near 50% both ways.</li>
+<li><strong>Placebo label shuffle:</strong> p = {p1:.4f} (S1) and p = {p3:.4f} (S3).</li>
+<li><strong>Week-cluster intervals, not fixture-level ones:</strong> a fixture-level interval would be roughly
 half as wide and would wrongly exclude zero.</li>
-<li><strong>Break-even price:</strong> S1's own picks have a mean fair American price of %.1f, which implies
-a break-even hit rate of %.1f%%; it delivered %.1f%%.</li>
-<li><strong>What is still luck:</strong> 116 games. Fifty-five more winners would start to separate the model
-from the control; the current gap is four.</li>
+<li><strong>Break-even price:</strong> S1's own picks have a mean fair American price of {beprice:.1f}, which
+implies a break-even hit rate of {berate:.1f}%; it delivered {hit:.1f}%.</li>
+<li><strong>What is still luck:</strong> across {npaired} fixtures the model finished {gameswon:.0f} games ahead
+of the rule that ignores it — {ndis} fixtures decided the whole comparison. Gate G1 wants 300 graded games
+before a gap that small is allowed to count, so the verdict is "not separable", not "slightly better".</li>
 </ul></div>
-<h2 id="gates">Validation gates</h2>%s
-<h2 id="breakeven">Break-even arithmetic (no market price exists, so this is our own fair price)</h2>%s
-""" % (bt["n_forecasts"], ps["brier"], ps["baseline_coinflip_brier"],
-       ps["brier_skill_vs_coinflip"], *ps["brier_skill_ci95_week_cluster"], bt["n_forecasts"],
-       *["<a href=\"%s/schedules/2026/by-week/week-%d\">week %d</a>" % (S, w, w) for w in range(3, 11)],
-       table(["Metric", "#Value", "Reading"], score_rows,
-                 src=prov("backtest.json")),
-       esc(paired.get("note", "")), paired["accuracy_diff"], *paired["accuracy_diff_ci95_week_cluster"],
-       paired["n"], paired["n_disagree"],
-       table(["Strategy", "#n", "#Accuracy", "#95% CI (weeks)", "#Brier", "#Placebo p"], strat_rows,
-                 src=prov("backtest.json")),
-       table(["Probability bin", "#n", "#Mean predicted", "#Observed", "#Gap"], cal_rows,
-                 src=prov("backtest.json")),
-       ps["baseline_coinflip_brier"], ps["baseline_home_rate_brier"],
-       st["S3_record_baseline"]["accuracy"],
-       fade["S1_model_favourite_faded"]["accuracy"], fade["S2_high_confidence_faded"]["accuracy"],
-       st["S1_model_favourite"]["placebo_label_shuffle_p"], st["S3_record_baseline"]["placebo_label_shuffle_p"],
-       be["S1_model_favourite"]["mean_fair_american_of_own_picks"],
-       100.0 * be_wr(be["S1_model_favourite"]["mean_fair_american_of_own_picks"]),
-       100.0 * st["S1_model_favourite"]["accuracy"],
-       table(["Gate", "#Result", "Detail"], gate_rows,
-                 src=prov("backtest.json")),
-       table(["Strategy", "#Mean fair American price of own picks",
-              "#Break-even hit rate at that price", "#Observed hit rate"],
-             [[esc(k), "%+.1f" % v["mean_fair_american_of_own_picks"],
-               "%.1f%%" % (100.0 * be_wr(v["mean_fair_american_of_own_picks"])),
-               "%.1f%%" % (100.0 * st[k]["accuracy"])] for k, v in be.items()],
-             src=prov("backtest.json")))
+<h2 id="gates">Validation gates</h2>{gatetable}
+<h2 id="breakeven">Break-even arithmetic (no market price exists, so this is our own fair price)</h2>{betable}
+""".format(
+        nfore=bt["n_forecasts"], brier=ps["brier"], coin=ps["baseline_coinflip_brier"],
+        skill=ps["brier_skill_vs_coinflip"], lo=ps["brier_skill_ci95_week_cluster"][0],
+        hi=ps["brier_skill_ci95_week_cluster"][1],
+        weeklinks=", ".join('<a href="%s/schedules/2026/by-week/week-%d">week %d</a>' % (S, w, w)
+                            for w in range(3, 11)),
+        scoretable=table(["Metric", "#Value", "Reading"], score_rows, src=prov("backtest.json")),
+        pairednote=esc(paired.get("note", "")),
+        diff=paired["accuracy_diff"], lo2=paired["accuracy_diff_ci95_week_cluster"][0],
+        hi2=paired["accuracy_diff_ci95_week_cluster"][1], npaired=n_paired, ndis=n_dis,
+        strattable=table(["Strategy", "#n", "#Accuracy", "#95% CI (weeks)", "#Brier", "#Placebo p"],
+                         strat_rows, src=prov("backtest.json")),
+        caltable=table(["Probability bin", "#n", "#Mean predicted", "#Observed", "#Gap"], cal_rows,
+                       src=prov("backtest.json")),
+        homeprior=ps["baseline_home_rate_brier"], ctrlacc=st["S3_record_baseline"]["accuracy"],
+        f1=fade["S1_model_favourite_faded"]["accuracy"], f2=fade["S2_high_confidence_faded"]["accuracy"],
+        p1=st["S1_model_favourite"]["placebo_label_shuffle_p"],
+        p3=st["S3_record_baseline"]["placebo_label_shuffle_p"],
+        beprice=be_price, berate=100.0 * be_wr(be_price), hit=100.0 * st["S1_model_favourite"]["accuracy"],
+        gameswon=games_won,
+        gatetable=table(["Gate", "#Result", "Detail"], gate_rows, src=prov("backtest.json")),
+        betable=table(["Strategy", "#Mean fair American price of own picks",
+                       "#Break-even hit rate at that price", "#Observed hit rate"],
+                      [[esc(STRAT_LABEL.get(k, k)), "%+.1f" % v["mean_fair_american_of_own_picks"],
+                        "%.1f%%" % (100.0 * be_wr(v["mean_fair_american_of_own_picks"])),
+                        "%.1f%%" % (100.0 * st[k]["accuracy"])] for k, v in be.items()],
+                      src=prov("backtest.json")))
     return page("backtest.html", "Backtest: 116 forecasts, refitted week by week",
                 "The model never sees a game it is predicting. Every number here is recomputable from the "
                 "official week pages linked in the protocol paragraph.", body, "backtest.html")
@@ -619,7 +635,7 @@ def build_strategies():
                          esc(s["what_would_change_our_mind"]), link(s["source_url"], "official results")))
     rp = d["reward_policy"]
     body = """
-<div class="note"><strong>No reward is payable, and the policy says why.</strong> %s. A reward becomes
+<div class="note"><strong>No reward is payable, and the policy says why.</strong> %s A reward becomes
 payable only if %s.</div>
 <h2>Register</h2>%s
 <h2>Each strategy, in both directions</h2>

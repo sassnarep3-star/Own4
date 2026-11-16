@@ -530,7 +530,8 @@ FLAGS = [
      "-4.65 against). Registered as SUG-05, NOT slipped into the baseline.",
      "https://sassnarep3-star.github.io/Own4/nfl-sources/pages/correlations.html", "flagged: candidate, untested"),
     ("FL-11", "Two Week 10 games are unfinished, so the corpus is 148 not 150",
-     "PIT at CIN was printed 'Q1 ... Live' and LAC at BAL was printed as unplayed when read. Both are "
+     "PIT at CIN was printed as a live first-quarter game and LAC at BAL was printed as unplayed when "
+     "read. Both are "
      "excluded from every metric with no score recorded. A later reader will see a different corpus size "
      "for the same code; this is expected and is why the read timestamp is on every page.",
      "https://www.nfl.com/schedules/2026/by-week/week-10", "informational (time-dependent)"),
