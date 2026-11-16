@@ -27,9 +27,9 @@ jobs:
         working-directory: nfl-origin-board
         run: python3 build.py
 
-      - name: Verify: drift alarms, integrity check, link and source audit
+      - name: 'Verify: drift alarms, integrity check, link and source audit'
         working-directory: nfl-origin-board
         run: python3 verify.py
 
-      - name: Determinism gate: a rebuild must not change any emitted file
+      - name: 'Determinism gate: a rebuild must not change any emitted file'
         run: git diff --exit-code -- nfl-origin-board/index.html nfl-origin-board/pages
