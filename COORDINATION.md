@@ -4385,3 +4385,42 @@ The open decision queue for the owner, in order: **SG-A** (scheduled hashed capt
 policy, before any backtest is published) → **SG-C** (depth-order source, or keep the deficiency
 feature unbuilt) → **SG-H** (one canonical count, computed at build time). Verdicts on the
 suggestions board are deliberately blank; choosing between paths is the reviewer's call.
+
+### Check status on PR #133 and two pre-existing peer failures (logged, not edited)
+
+PR #133 — `https://github.com/sassnarep3-star/Own4/pull/133`. This session's own workflow
+(`nfl-decision-gaps verify`) passes end to end. Two **peer** workflows run on the PR and fail.
+Both were verified to fail on `main` itself, before and independently of this branch:
+
+1. **`nfl-availability-desk verify` — "Determinism gate (rebuild must not change committed files)".**
+   Reproduced locally by running that namespace's own engines. Every step up to the gate passes;
+   the gate then fails because `nfl-availability-desk/engine/build_site.py` embeds two
+   **tree-wide** measures in rendered prose: the census of dated captures on
+   `pages/snapshot-delta.html` (`"row counts are 347, 347, 326, 326, 276, 107"` becomes
+   `"347, 347, 347, 326, 326, 276"` once another namespace's capture exists) and the namespace
+   inventory on `pages/repo-review.html`. Adding *any* namespace changes those numbers, so the gate
+   is red for every sibling merge — `gh run list --branch main` shows it failing at `6e877ea2` and
+   `05178f18`, i.e. on main with no involvement from this session.
+   **Not edited** (peer scope). The fix, for the owning session: either pin the census to the
+   capture files the page itself names, or move `build_site.py` behind the gate the way
+   `repo_review.py` already is.
+2. **`Verify bounded NBA audit and published navigation` — "Recompute HTML source-link and
+   navigation coverage".** Fails at its *first* step, before any of this session's files matter:
+   `verification-2026-11-05/index.html` links to `../pages/competition.html`, and
+   `pages/competition.html` does not exist in the repository. Confirmed by running
+   `python3 verification-2026-11-05/build.py` inside a clean worktree of `origin/main`: exit 1,
+   identical message. `gh run list --branch main` shows it failing at `4a2b5304`, `05178f18`,
+   `a6219957` and `425f7a4b`.
+   **Not edited** (peer scope; `pages/competition.html` lives in the shared `pages/` directory).
+   The fix, for the owning session: retarget that one href, or restore the page.
+
+`pages build and deployment` is green on main and green on this PR. Nothing in this session's
+merge changes either peer failure: they are already red on `main`, and `main` has no required
+status checks (`gh api .../branches/main` → `protected: false`), so neither blocks the merge.
+
+**Scope exception log:** none taken. No file outside `nfl-decision-gaps/**`,
+`.github/workflows/nfl-decision-gaps.yml`, `COORDINATION.md` and the append-only `NAV` block in
+`verification/build.py` was committed. Two peer namespaces (`nfl-availability-desk`,
+`verification-2026-11-05`) were regenerated during local reproduction and then **reverted with
+`git checkout --`** rather than committed, precisely so this session does not rewrite another
+session's published content.
