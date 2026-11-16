@@ -69,6 +69,10 @@ This namespace is that reconciliation. It adds:
 * Timestamps are window-level: the read path returns rendered text only, with no response headers. That
   limitation is printed on the evidence page instead of being smoothed over (flag `DC-07`).
 
+* **Register prose is authored with markdown ticks and rendered as `<code>` spans** — the builder
+  converts them after escaping, and `engine/verify_site.py` fails the build if a literal backtick or a
+  literal `\uXXXX` escape survives into a page, because both mean prose was written through a shell
+  heredoc and shipped to the site unrendered.
 ## Commands
 
 ```sh

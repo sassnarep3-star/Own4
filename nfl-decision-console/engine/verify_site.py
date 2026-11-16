@@ -167,6 +167,9 @@ def check_pages(counts):
         for m in re.findall(r"\\u[0-9a-fA-F]{4}", txt):
             fail("%s: publishes a literal escape sequence %s instead of the character" % (p, m))
             break
+        if "`" in txt:
+            fail("%s: publishes a literal backtick — register prose is authored with `ticks` and the "
+                 "builder turns them into <code>; a leftover means the span was malformed" % p)
     print("pages: %d checked · rows sourced · links resolved · no price-shaped value" % len(pages))
     # navigation completeness
     idx = html_cache.get("index.html", "")
