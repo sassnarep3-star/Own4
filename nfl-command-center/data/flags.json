@@ -1,0 +1,88 @@
+{
+ "dataset": "flags",
+ "built_utc": "2026-11-16T02:05Z",
+ "policy": "A flag is published, never hidden, and never blocks publishing the rest of the site.",
+ "n_rows": 10,
+ "rows": [
+  {
+   "id": "FB-01",
+   "severity": "blocking",
+   "item": "No official NFL price source exists in this repository",
+   "detail": "Every market, residual, ROI and CLV cell is blank because of it. Nothing was estimated to fill the gap.",
+   "gate": "G5",
+   "source_url": ""
+  },
+  {
+   "id": "FB-02",
+   "severity": "high",
+   "item": "Only 1 of 32 club depth charts is captured",
+   "detail": "Detroit's chart is structured and readable, and the club labels it 'Unofficial'. The other 31 are unknown, so the replacement-depth feature cannot be built.",
+   "gate": "G8",
+   "source_url": "https://www.detroitlions.com/team/depth-chart"
+  },
+  {
+   "id": "FB-03",
+   "severity": "high",
+   "item": "A rank-1 depth player was Out and also listed first-string",
+   "detail": "D.J. Reed: rank 1 CB on the club chart, Out on the report, listed at CB in the Game Book lineup and on the Not Active list. The Game Book lineup block and the Not Active block disagree for this player; both are reproduced.",
+   "gate": "G8",
+   "source_url": "https://www.detroitlions.com/team/depth-chart | https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+  },
+  {
+   "id": "FB-04",
+   "severity": "medium",
+   "item": "One Week 10 game is not settled in any capture",
+   "detail": "LAC at BAL (2026-11-16 20:15 ET) is after the capture clock; PIT at CIN shows Q1 0-3 on every read made this session. Neither is scored.",
+   "gate": "G9",
+   "source_url": "https://www.nfl.com/schedules/2026/reg10/"
+  },
+  {
+   "id": "FB-05",
+   "severity": "medium",
+   "item": "The Week 10 report omits TB while listing every other Week 11 bye club",
+   "detail": "ATL, CLE, LA, NE and SEA all have sections; TB does not. Recorded as observed.",
+   "gate": "G7",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "FB-06",
+   "severity": "medium",
+   "item": "NYG and WAS division records do not sum to games played",
+   "detail": "NYG shows a 3-2-1 division record over 9 games; WAS shows 2-2-1 over 9. Reproduced exactly, not corrected.",
+   "gate": "G9",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "id": "FB-07",
+   "severity": "low",
+   "item": "The Week 10 injury report is a single undated snapshot",
+   "detail": "The page states the week, not the fetch time of each club's update. One capture cannot support a delta, so no trend is published.",
+   "gate": "G7",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "FB-08",
+   "severity": "low",
+   "item": "Game Book '3QB' notation",
+   "detail": "The Patriots' Not Active line reads '3QB 15 B.Morton', an emergency-third-QB tag that is not in any legend. Kept verbatim rather than parsed.",
+   "gate": "",
+   "source_url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+  },
+  {
+   "id": "FB-09",
+   "severity": "low",
+   "item": "KC report players look inconsistent with a 2026 Chiefs roster",
+   "detail": "The report lists Justin Fields (QB) and Rashee Rice (WR) among Kansas City players. The Chiefs' own roster page should be captured on the same date before any roster join; until then this is flagged, not used.",
+   "gate": "",
+   "source_url": "https://www.nfl.com/teams/kansas-city-chiefs/roster"
+  },
+  {
+   "id": "FB-10",
+   "severity": "low",
+   "item": "Week 11 venue is blank for MIN at SF",
+   "detail": "The official Week 11 page carries no venue block for that game, so the venue column is blank rather than assumed.",
+   "gate": "",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  }
+ ]
+}

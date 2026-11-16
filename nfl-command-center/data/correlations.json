@@ -1,0 +1,39 @@
+{
+ "dataset": "correlations",
+ "built_utc": "2026-11-16T02:05Z",
+ "method": "Pearson r over 32 club-seasons from one dated standings capture. n is published on every row. No market number, no third-party number and no price is used, so every value here is computable from the official page alone.",
+ "n_rows": 3,
+ "note": "These are covariates of published season aggregates. They are NOT bet correlations: a bet correlation needs joint outcomes across markets, and that requires a graded sample this repository does not have.",
+ "rows": [
+  {
+   "a": "points_for",
+   "b": "points_against",
+   "r": -0.0785,
+   "n": 32,
+   "unit": "club-seasons",
+   "kind": "official season totals",
+   "interpretation": "scoring and conceding are uncorrelated across clubs",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "a": "wins",
+   "b": "points_for",
+   "r": 0.6696,
+   "n": 32,
+   "unit": "club-seasons",
+   "kind": "official season totals",
+   "interpretation": "winning tracks scoring",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "a": "points_for",
+   "b": "team_games",
+   "r": 0.2341,
+   "n": 32,
+   "unit": "club-seasons",
+   "kind": "official season totals",
+   "interpretation": "SCEPTICAL CHECK: a club that has played more games has more points; this correlation is a schedule artefact and is published to show the artefact, not as a signal",
+   "source_url": "https://www.nfl.com/standings/"
+  }
+ ]
+}

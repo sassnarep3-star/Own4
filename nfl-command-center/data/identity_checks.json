@@ -1,0 +1,49 @@
+{
+ "dataset": "identity_checks",
+ "built_utc": "2026-11-16T02:05Z",
+ "n_rows": 6,
+ "rows": [
+  {
+   "check": "league points identity",
+   "expected": "sum(PF) == sum(PA)",
+   "observed": "6824 == 6824",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "check": "league W/L identity",
+   "expected": "sum(W) == sum(L)",
+   "observed": "147 == 147 (ties 2)",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "check": "net points sum to zero",
+   "expected": "sum(NET) == 0",
+   "observed": "0",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "check": "per-club NET == PF - PA",
+   "expected": "32 clubs consistent",
+   "observed": "0 clubs inconsistent -",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "check": "team-games implied by standings",
+   "expected": "2 x settled games",
+   "observed": "298 team-games = 147 games",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  },
+  {
+   "check": "received PCT matches W-L-T",
+   "expected": "|pct - (W+.5T)/G| <= 0.0016",
+   "observed": "0 mismatches -",
+   "status": "pass",
+   "source_url": "https://www.nfl.com/standings/"
+  }
+ ]
+}
