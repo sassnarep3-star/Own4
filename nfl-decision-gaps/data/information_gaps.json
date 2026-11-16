@@ -1,0 +1,114 @@
+[
+ {
+  "domain": "Injury designations (all 32 clubs)",
+  "have": "326 rows across 28 clubs and 14 fixtures, with Player / Position / Injuries / Practice Status / Game Status, captured 2026-11-13, sha256 recorded. Counts: 301 blank game status, 14 Out, 11 Questionable, 0 Doubtful.",
+  "src": "S8",
+  "missing": "The 2026-11-16 live values are only transcribed for the 8 clubs listed on the designation-join page; the other 20 clubs were read but not transcribed.",
+  "blocks": "Q01, Q02, SG-D"
+ },
+ {
+  "domain": "Intra-week designation history (Wed/Thu/Fri)",
+  "have": "Two time points: 2026-11-13 (committed capture) and 2026-11-16 (live read).",
+  "src": "S8, S1",
+  "missing": "Wednesday and Thursday captures. The brief asks for Wed + Thu + Fri plus kickoff; two points is a delta, not a series.",
+  "blocks": "Q12, F12, SG-A"
+ },
+ {
+  "domain": "Official inactive lists",
+  "have": "147 entries across 24 clubs for the 12 Sunday/Munich Week 10 games.",
+  "src": "S4",
+  "missing": "Thursday (WAS/NYG) and Monday (LAC/BAL) inactive lists were not published by S4 and were not located elsewhere; no prior-season archive.",
+  "blocks": "Q01, Q02, SG-A"
+ },
+ {
+  "domain": "Reserve / injured-reserve list membership",
+  "have": "The league publishes a dated reserve list: 25 Reserve/Injured moves for November 2026 at https://www.nfl.com/transactions/league/reserve-list/2026/11, including Malik Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson (DAL, 11/14).",
+  "src": "S10",
+  "missing": "No capture of it. Nothing in this repository ingests this page, so an IR player still looks merely absent.",
+  "blocks": "Q05, F3, SG-E"
+ },
+ {
+  "domain": "League depth charts",
+  "have": "Confirmed absent: https://www.nfl.com/teams/baltimore-ravens/depth-chart returns 404 and the club page's tabs are Info / Roster / Stats.",
+  "src": "S2, S3",
+  "missing": "nfl.com publishes no depth chart at any path found this session. Clubs publish on their own domains (e.g. baltimoreravens.com), which were not read.",
+  "blocks": "Q06, F5, SG-C"
+ },
+ {
+  "domain": "Snap counts",
+  "have": "",
+  "src": "S3, S5, S6, S7",
+  "missing": "No snap-count table found on the club page, the Game Center, the schedule page or the scores page. A gamebook PDF route is reported on third-party forums; it was not retrieved, so nothing is asserted.",
+  "blocks": "Q07, F7, SG-C"
+ },
+ {
+  "domain": "Announced starters (first-snap offence/defence)",
+  "have": "",
+  "src": "S5",
+  "missing": "The Game Center tabs read (INFO / OVERVIEW / STATS / STREAMS) publish no starters list and no game-day status beyond the injury cards.",
+  "blocks": "Q08, F7"
+ },
+ {
+  "domain": "Venue per fixture",
+  "have": "13 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from the Game Center Game Info block.",
+  "src": "S4, S5",
+  "missing": "WAS/NYG (Thu Nov 12) venue not captured.",
+  "blocks": "Q13, F11, SG-F"
+ },
+ {
+  "domain": "Stadium roof / surface designation",
+  "have": "",
+  "src": "S5, S6",
+  "missing": "The Game Center Game Info block publishes Location, Stadium and Network only - no roof designation, no surface, no 90-minute designation.",
+  "blocks": "Q09, F8"
+ },
+ {
+  "domain": "Weather (wind / precipitation)",
+  "have": "The schedule page carries a summary weather chip for the upcoming game ('Weather Clearnight').",
+  "src": "S6",
+  "missing": "No wind speed, no precipitation, no hourly grid on any official page read. The brief's NWS overlay is outside the official domain entirely.",
+  "blocks": "Q09, F8"
+ },
+ {
+  "domain": "Schedule / fixture context",
+  "have": "Week 10 dates, kickoff times, networks, teams on bye (CHI, DEN, PHI, TB), final scores, and the 2026 TBD-games note linking the flexible-scheduling procedures page.",
+  "src": "S6, S7",
+  "missing": "The dated league schedule announcement itself; Week 11 not yet published at fetch time.",
+  "blocks": "Q15, F13"
+ },
+ {
+  "domain": "Verified results feed",
+  "have": "12 of 14 Week 10 finals, each cross-checked on two official pages.",
+  "src": "S6, S7",
+  "missing": "PIT/CIN (rendered live at fetch time) and LAC/BAL (not started). No prior-season results corpus was read this session.",
+  "blocks": "Q14, F1, SG-G"
+ },
+ {
+  "domain": "Market prices (open / close / moneyline)",
+  "have": "No official price found. The Game Center, schedule, scores and club pages publish no spread, total or moneyline.",
+  "src": "S3, S5, S6, S7",
+  "missing": "An authorised price source. Without one, originated-line residuals, CLV and ROI are undefined and must stay blank.",
+  "blocks": "Q10, Q16, F6, SG-B"
+ },
+ {
+  "domain": "Player-prop markets",
+  "have": "",
+  "src": "S3, S5, S6, S7",
+  "missing": "Nothing official. Same blocker as market prices.",
+  "blocks": "Q18, SG-N"
+ },
+ {
+  "domain": "Dated transactions / roster events",
+  "have": "The league transactions hub publishes Trades, Signings, Reserve List, Waivers, Terminations and Other by year and month. November 2026: 12 trades and 25 reserve-list moves, each dated.",
+  "src": "S9, S10",
+  "missing": "No capture. Depth and availability rows are not yet stamped with the last roster event that affects them.",
+  "blocks": "Q20, SG-E"
+ },
+ {
+  "domain": "Team and player statistics",
+  "have": "nfl.com publishes team and player stats; the Game Center carries a regular-season glance (points per game, yards per game, time of possession, sacks, interceptions, turnover differential) and club leaders.",
+  "src": "S3, S5",
+  "missing": "No opponent-adjusted rating was computed this session.",
+  "blocks": "SG-L, SG-M"
+ }
+]

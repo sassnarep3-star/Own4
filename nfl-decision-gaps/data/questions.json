@@ -1,0 +1,222 @@
+[
+ {
+  "id": "Q01",
+  "topic": "Availability",
+  "question": "What fraction of officially inactive players appear on the NFL injury report at all?",
+  "have": "Measured on the 8 clubs where every live row was read and joined to the official inactive list: 26 of 46 inactive players (56.5%) do not appear on the injury report in any form. Excluding the two emergency third quarterbacks, 24 of 44 (54.5%).",
+  "src": "S1, S4",
+  "missing": "The other 16 clubs of Week 10, and every prior week.",
+  "clears": "The same join computed for all 32 clubs and at least one full season, with the denominator published and the emergency-third-QB rows separated out.",
+  "discovery": "SG-D",
+  "status": "answered, bounded (n = 8 clubs, 46 inactives)"
+ },
+ {
+  "id": "Q02",
+  "topic": "Availability",
+  "question": "What does 'Questionable' mean empirically?",
+  "have": "On the 8 joined clubs, 4 of 26 players carrying a Questionable designation were inactive (15.4%).",
+  "src": "S1, S4",
+  "missing": "A usable sample. n = 26 in one week is far too small, and one club (LV) went 2 for 2.",
+  "clears": "Several seasons of designations joined to the official inactive lists, with a confidence interval and a club-clustered standard error.",
+  "discovery": "SG-A",
+  "status": "open"
+ },
+ {
+  "id": "Q03",
+  "topic": "Availability",
+  "question": "What does 'Doubtful' mean empirically?",
+  "have": "1 of 4 Doubtful players on the joined clubs was inactive (25%).",
+  "src": "S1, S4",
+  "missing": "n = 4. The brief asks for a calibrated probability with a confidence interval; this cannot support one.",
+  "clears": "n >= 200 Doubtful designations joined to inactive lists across seasons.",
+  "discovery": "SG-A",
+  "status": "open"
+ },
+ {
+  "id": "Q04",
+  "topic": "Availability",
+  "question": "Does an 'Out' designation guarantee the player is inactive?",
+  "have": "No, and the official reserve list explains most of it. Of 17 Out players on the joined clubs, 14 were inactive and 2 more were placed on the official reserve list during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, DAL, 11/14). 16 of 17 (94.1%) are therefore explained by two official pages. Kerby Joseph (DET) is the one case neither page explains.",
+  "src": "S1, S4, S10",
+  "missing": "An explanation for Kerby Joseph: Out on the injury report, absent from the Week 10 inactive list, and absent from the November 2026 reserve list.",
+  "clears": "The reserve list captured as a dated field of the weekly snapshot, so an Out player who went on IR is separated from an Out player who was expected to be inactive.",
+  "discovery": "SG-E",
+  "status": "answered for 16 of 17; one case flagged (F3)"
+ },
+ {
+  "id": "Q05",
+  "topic": "Availability",
+  "question": "Which players are on a reserve list and therefore absent from the weekly report?",
+  "have": "The league publishes it. https://www.nfl.com/transactions/league/reserve-list/2026/11 lists 25 Reserve/Injured moves for November 2026, each dated and club-indexed. It includes Malik Willis (MIA, 11/10) - the exact case the project brief cites as the reason a reserve list is needed - and it explains two of the three Out players who were missing from the inactive list.",
+  "src": "S10",
+  "missing": "Nothing for this month. The gap is that the reserve list is not captured: nothing in this repository ingests it, so a player on IR still looks simply absent.",
+  "clears": "Add the reserve list to the scheduled capture as a dated field, and join it to the weekly injury and inactive captures.",
+  "discovery": "SG-E",
+  "status": "answered - the official page exists and was read"
+ },
+ {
+  "id": "Q06",
+  "topic": "Depth",
+  "question": "Does the league publish depth charts?",
+  "have": "No. https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 page, and the club page's only sections are Info, Roster and Stats.",
+  "src": "S2, S3",
+  "missing": "Nothing - this one is settled for nfl.com. The open part is whether the 32 club domains publish them in a parseable form.",
+  "clears": "A club-by-club read of all 32 official club sites, each with a URL, a date and a parser that survives the 'published as an image' failure mode.",
+  "discovery": "SG-C",
+  "status": "answered for nfl.com; open for the 32 club sites"
+ },
+ {
+  "id": "Q07",
+  "topic": "Depth",
+  "question": "Is there an official snap-count source?",
+  "have": "",
+  "src": "S3, S5, S6, S7",
+  "missing": "Not found on any official page read this session (club page, Game Center, schedule, scores). A gamebook-PDF route is described on third-party forums; it was not retrieved, so no claim is made.",
+  "clears": "One official gamebook retrieved and parsed end-to-end, with the snap-count page located and its URL published.",
+  "discovery": "SG-C",
+  "status": "open"
+ },
+ {
+  "id": "Q08",
+  "topic": "Depth",
+  "question": "Does the Game Center publish announced starters and game-day status?",
+  "have": "",
+  "src": "S5",
+  "missing": "The Game Center tabs read (INFO / OVERVIEW / STATS / STREAMS) publish no starters list, only team statistics, club leaders and injury cards.",
+  "clears": "A page or endpoint on the official domain that lists first-snap offence and defence.",
+  "discovery": "SG-C",
+  "status": "open"
+ },
+ {
+  "id": "Q09",
+  "topic": "Environment",
+  "question": "Does the league publish a stadium roof designation and weather?",
+  "have": "Game Info publishes Location and Stadium only. The schedule page carries a summary weather chip for the upcoming game ('Weather Clearnight').",
+  "src": "S5",
+  "missing": "Roof designation, surface, wind speed, precipitation. The brief's NWS grid is a different (non-NFL) domain and was not read.",
+  "clears": "A published roof/surface field per stadium plus an NWS grid URL per venue, both captured with a timestamp.",
+  "discovery": "SG-J",
+  "status": "open"
+ },
+ {
+  "id": "Q10",
+  "topic": "Prices",
+  "question": "Where does an authorised price come from?",
+  "have": "No official price exists. The Game Center, schedule, scores and club pages publish no spread, total or moneyline.",
+  "src": "S3, S5, S6, S7",
+  "missing": "Everything.",
+  "clears": "A written price-data policy: which source, under what terms, with what retention, signed off before any backtest is published.",
+  "discovery": "SG-B",
+  "status": "blocking - no residual, CLV or ROI can be computed until this is answered"
+ },
+ {
+  "id": "Q11",
+  "topic": "Repository",
+  "question": "Why do three different row counts for the same injury page exist in this repo?",
+  "have": "Sessions have published 254, 279 and 347 rows for this page. This session's parse of the committed 2026-11-13 capture gives 326 rows over 28 clubs; the live 2026-11-16 page differs from that capture again.",
+  "src": "S8, S1",
+  "missing": "Which quantity each published number counts (report rows, injury entries, players, clubs, or rows in some other namespace's derived table).",
+  "clears": "One canonical capture file, one parser, and every count computed at build time from that file, with no count typed into prose.",
+  "discovery": "SG-H",
+  "status": "open - flagged"
+ },
+ {
+  "id": "Q12",
+  "topic": "Availability",
+  "question": "How much does the report move inside a week?",
+  "have": "Proven to move: between 2026-11-13 and 2026-11-16 the Lions' St. Brown and Vaki rows changed, two Ravens rows appeared, Doubtful designations appeared where there had been none, and the club records in the headers were replaced with post-game records.",
+  "src": "S8, S1",
+  "missing": "Wednesday and Thursday reads, so the DNP to LP to FP path cannot be reconstructed.",
+  "clears": "Captures on Wednesday, Thursday, Friday and at kickoff, each hashed, so the designation path is replayable.",
+  "discovery": "SG-A",
+  "status": "answered in kind; the series is still too short"
+ },
+ {
+  "id": "Q13",
+  "topic": "Fixtures",
+  "question": "Is the venue of every fixture transcribed from the official game centre?",
+  "have": "13 of 14 Week 10 venues from official pages: 12 from the inactives article, 1 from the Game Center Game Info block.",
+  "src": "S4, S5",
+  "missing": "The WAS/NYG venue of 12 November.",
+  "clears": "One more official read.",
+  "discovery": "SG-F",
+  "status": "open - one fixture outstanding"
+ },
+ {
+  "id": "Q14",
+  "topic": "Results",
+  "question": "Is the Week 10 results feed complete?",
+  "have": "12 of 14 finals, each seen on two official pages.",
+  "src": "S6, S7",
+  "missing": "PIT/CIN, which both /schedules and /scores rendered as LIVE (Q1 08:56, 0-3) at fetch time on 2026-11-16 - a Monday. LAC/BAL had not kicked off.",
+  "clears": "A re-read once the page settles, plus a freshness guard that refuses to publish a score for a fixture whose state is not Final.",
+  "discovery": "SG-G",
+  "status": "open - flagged"
+ },
+ {
+  "id": "Q15",
+  "topic": "Fixtures",
+  "question": "Is the league's dated schedule announcement published beside the live schedule?",
+  "have": "The schedule page carries a 2026 TBD-games note and links https://www.nfl.com/legal/flexible-scheduling-procedures.",
+  "src": "S6",
+  "missing": "The dated announcement article itself, and Week 11, which was not published at fetch time.",
+  "clears": "Locate and cite the dated announcement, then keep it beside the live schedule page.",
+  "discovery": "SG-J",
+  "status": "open"
+ },
+ {
+  "id": "Q16",
+  "topic": "Origination",
+  "question": "What is the correlation between the originated side, total and moneyline residuals?",
+  "have": "",
+  "src": "S3, S5, S6, S7",
+  "missing": "A price. With no market line there is no residual, so there is nothing to correlate.",
+  "clears": "Q10 first, then at least a season of paired (own line, market line) observations with n published next to every coefficient.",
+  "discovery": "SG-B",
+  "status": "blocked by Q10"
+ },
+ {
+  "id": "Q17",
+  "topic": "Governance",
+  "question": "What minimum n makes a strategy reward-eligible?",
+  "have": "",
+  "src": "repo",
+  "missing": "One owner decision. This repository currently carries competing gates, including 'n >= 300 graded games' against a largest corpus of 77 games.",
+  "clears": "A single written gate with a number, committed before the evaluation window opens.",
+  "discovery": "SG-L",
+  "status": "open - owner decision"
+ },
+ {
+  "id": "Q18",
+  "topic": "Governance",
+  "question": "Can a parlay or same-game-parlay combination ever be ranked?",
+  "have": "",
+  "src": "repo",
+  "missing": "A directly validated joint probability and the operator's void/push rules. Multiplying marginals is invalid under dependence.",
+  "clears": "A joint-evidence gate backed by an estimated dependence structure on official results, or a standing refusal to rank combinations at all.",
+  "discovery": "SG-N",
+  "status": "blocked - refuse until a joint model exists"
+ },
+ {
+  "id": "Q19",
+  "topic": "Governance",
+  "question": "Has any pre-registered strategy produced a prospective record?",
+  "have": "",
+  "src": "repo",
+  "missing": "A strategy committed before its window opened, together with official results inside that window.",
+  "clears": "Registration commit hash + frozen rule text + a results feed that starts after it.",
+  "discovery": "SG-L",
+  "status": "open"
+ },
+ {
+  "id": "Q20",
+  "topic": "Rosters",
+  "question": "Can roster turnover be versioned against the last official roster event?",
+  "have": "Yes, and the source is dated per move. The league transactions hub publishes Trades, Signings, Reserve List, Waivers, Terminations and Other, selectable by year and month. November 2026 carries 12 trades and 25 reserve-list moves, each with a date.",
+  "src": "repo",
+  "missing": "Nothing in this repository ingests it today, so depth and availability rows are not yet versioned against the last roster event.",
+  "clears": "Capture all six categories daily, hashed, and stamp every depth and availability row with the last roster event that affects it.",
+  "discovery": "SG-E",
+  "status": "answered - the source exists; the capture does not"
+ }
+]
