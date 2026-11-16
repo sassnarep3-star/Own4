@@ -35,27 +35,31 @@ def esc(x):
     return html.escape("" if x is None else str(x), quote=True)
 
 
-def ext(url, label=None):
+def ext(url, label=None, raw_label=False):
+    """External link. `label` is escaped unless `raw_label` is set, which is
+    used for labels this module builds itself and that therefore may contain
+    the &#8599; arrow entity."""
+    lab = label if label is not None else url
     return '<a href="%s" target="_blank" rel="noopener">%s</a>' % (
-        esc(url), esc(label or url))
+        esc(url), lab if raw_label else esc(lab))
 
 
 def src(sid):
     for s in R.SOURCES:
         if s["id"] == sid:
-            return ext(s["url"], "%s &#8599;" % sid)
+            return ext(s["url"], "%s &#8599;" % sid, raw_label=True)
     return ""
 
 
 def srcs(spec):
-    """Render a comma-separated list of source links from 'S1, S4'."""
+    """Render a space-separated list of source links from e.g. 'S1, S4'."""
     out = []
     for part in (spec or "").replace(";", ",").split(","):
         part = part.strip()
         if not part:
             continue
         if part == "repo":
-            out.append(ext(GH, "repo &#8599;"))
+            out.append(ext(GH, "repo &#8599;", raw_label=True))
         else:
             out.append(src(part))
     return " ".join(out) or '<span class="blank">no source</span>'
@@ -304,7 +308,7 @@ def build_index(parsed, inv):
                 '<li><a href="pages/flagged.html">Flagged for review</a> &mdash; everything this '
                 'session could not verify.</li>'
                 '</ul>') % len(R.SUGGESTIONS))
-    return page("index.html", "NFL decision gaps &middot; Own4", "nfl-decision-gaps &rsaquo; overview",
+    return page("index.html", "NFL decision gaps · Own4", "nfl-decision-gaps › overview",
                 "".join(body), "index.html",
                 "What the Own4 NFL project has, what it is missing, and what would close each gap.")
 
@@ -385,8 +389,8 @@ def build_exec_summary(parsed, inv):
           esc(s["dependency"]), srcs(s.get("src", "repo"))] for s in R.SUGGESTIONS[:6]]))
     body.append(p('All fifteen suggestions, with options and a blank verdict, are on the '
                   '<a href="suggestions.html">Suggestions board</a>.'))
-    return page("pages/executive-summary.html", "Executive summary &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; executive summary", "".join(body),
+    return page("pages/executive-summary.html", "Executive summary · Own4 decision gaps",
+                "nfl-decision-gaps › executive summary", "".join(body),
                 "pages/executive-summary.html",
                 "Executive summary of what the Own4 NFL project can and cannot establish today.")
 
@@ -419,12 +423,12 @@ def build_questions():
     for title, group in [("Answered (bounded)", answered),
                          ("Open", openq),
                          ("Blocked or unanswerable from the official pages", blocked)]:
-        body.append(h(3, "%s &mdash; %d" % (title, len(group))))
+        body.append(h(3, "%s — %d" % (title, len(group))))
         body.append("<ul class=\"bullets\">" + "".join(
             "<li><strong>%s</strong> %s</li>" % (esc(q["id"]), esc(q["question"])) for q in group
         ) + "</ul>")
-    return page("pages/open-questions.html", "Open questions &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; open questions", "".join(body),
+    return page("pages/open-questions.html", "Open questions · Own4 decision gaps",
+                "nfl-decision-gaps › open questions", "".join(body),
                 "pages/open-questions.html",
                 "Every open question, with the number that would clear it and how to get it.")
 
@@ -460,8 +464,8 @@ def build_gaps():
                   "unknown; it is a domain where no official page this session read states the "
                   "answer. That distinction matters: 'not published' and 'not yet collected' call "
                   "for different responses."))
-    return page("pages/information-gaps.html", "Have / don't have &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; have / don't have", "".join(body),
+    return page("pages/information-gaps.html", "Have / don't have · Own4 decision gaps",
+                "nfl-decision-gaps › have / don't have", "".join(body),
                 "pages/information-gaps.html",
                 "What the project has and does not have, domain by domain, each row sourced.")
 
@@ -573,8 +577,8 @@ def build_evidence(parsed):
                   "score: one was rendered as live when read, the other had not kicked off. Neither "
                   "score is inferred."))
     return page("pages/availability-evidence.html",
-                "Availability evidence &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; availability evidence", "".join(body),
+                "Availability evidence · Own4 decision gaps",
+                "nfl-decision-gaps › availability evidence", "".join(body),
                 "pages/availability-evidence.html",
                 "Official injury designations joined to official inactive lists, row by row.")
 
@@ -624,8 +628,8 @@ def build_suggestions():
           "The page rendered a first-quarter score on a Monday, well after the game was scheduled "
           "to finish. Publishing it would be an inference from a state the two official pages "
           "disagree about.", srcs("S6, S7")]]))
-    return page("pages/suggestions.html", "Suggestions board &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; suggestions", "".join(body),
+    return page("pages/suggestions.html", "Suggestions board · Own4 decision gaps",
+                "nfl-decision-gaps › suggestions", "".join(body),
                 "pages/suggestions.html",
                 "Suggestions for improving the site and its decisions, with options and blank verdicts.")
 
@@ -656,7 +660,7 @@ def build_repo_review(inv):
             esc(str(d["html"])), esc(str(d["data"])),
             esc(str(d["py"])),
             "yes" if d["has_index"] else "no",
-            ", ".join(d["pages"][:12]) + (" &hellip;" if len(d["pages"]) > 12 else ""),
+            ", ".join(d["pages"][:12]) + (" …" if len(d["pages"]) > 12 else ""),
         ])
     body.append(table(["Namespace (link to the committed tree)", "HTML", "Data", "Py", "Index",
                        "Pages"], rows, cls="wide"))
@@ -669,8 +673,8 @@ def build_repo_review(inv):
     for t, (c, n) in sorted(inv["page_title_counts"].items(), key=lambda kv: (-kv[1][0], kv[0])):
         first = n[0]
         rows.append([esc(t), esc(str(c)),
-                     esc(", ".join(n[:8]) + (" &hellip;" if len(n) > 8 else "")),
-                     ext(REPO_URL + first + "/", "repo &#8599;")])
+                     esc(", ".join(n[:8]) + (" …" if len(n) > 8 else "")),
+                     ext(REPO_URL + first + "/", "repo &#8599;", raw_label=True)])
     body.append(table(["Page file name", "Namespaces carrying it", "Examples", "Source"],
                       rows, cls="wide"))
 
@@ -685,8 +689,8 @@ def build_repo_review(inv):
                   "it did not read all %d files line by line, and does not claim to have done so. "
                   "Review depth is stated rather than implied."
                   % (inv["n_html"], inv["n_html"])))
-    return page("pages/repo-review.html", "Repo review &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; repo review", "".join(body),
+    return page("pages/repo-review.html", "Repo review · Own4 decision gaps",
+                "nfl-decision-gaps › repo review", "".join(body),
                 "pages/repo-review.html",
                 "Line-by-line inventory of the repository and the irregularities it contains.")
 
@@ -701,7 +705,7 @@ def build_sources():
                   "&mdash; which is itself a finding." % R.DATE))
     rows = []
     for s in R.SOURCES:
-        rows.append([esc(s["id"]), esc(s["kind"]), ext(s["url"], esc(s["title"])),
+        rows.append([esc(s["id"]), esc(s["kind"]), ext(s["url"], s["title"]),
                      esc(s["what"]), esc(s["read"]),
                      esc(s["published"]) if s["published"] else blank("not stated by the page")])
     body.append(table(["ID", "Kind", "Page", "What it publishes", "How much was read", "Published"],
@@ -736,8 +740,8 @@ def build_sources():
           "Found. https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated "
           "Reserve/Injured moves for November 2026. It is not captured anywhere in this repository.",
           srcs("S10")]]))
-    return page("pages/sources.html", "Sources &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; sources", "".join(body),
+    return page("pages/sources.html", "Sources · Own4 decision gaps",
+                "nfl-decision-gaps › sources", "".join(body),
                 "pages/sources.html",
                 "The official pages every value in this namespace was read from.")
 
@@ -756,8 +760,8 @@ def build_flagged():
     body.append(h(2, "By severity"))
     body.append(kpis([(esc(str(sum(1 for f in R.FLAGS if f["sev"] == s))), s)
                       for s in ["high", "medium", "low"]]))
-    return page("pages/flagged.html", "Flagged for review &middot; Own4 decision gaps",
-                "nfl-decision-gaps &rsaquo; flagged", "".join(body),
+    return page("pages/flagged.html", "Flagged for review · Own4 decision gaps",
+                "nfl-decision-gaps › flagged", "".join(body),
                 "pages/flagged.html",
                 "Items this session could not verify against an official source.")
 
