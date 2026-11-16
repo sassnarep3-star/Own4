@@ -1,0 +1,66 @@
+name: nfl-reconciled verify
+
+# Gate for the nfl-reconciled workspace (session arena/3858e722-own4, scope R1-R7).
+#
+# It rebuilds every published number from the checked-in artefacts and then enforces the publication
+# contract, so a reviewer can see that the site is a function of the data:
+#   * reconcile.py   - validates data/official_facts.json against identities the league's own numbers
+#                      force (32 clubs, wins == losses, PF == PA, fixtures + byes == clubs, 32-4 / 2),
+#                      then writes the four derived artefacts. FAIL exits non-zero.
+#   * build_review.py- collects every workspace's flags into one index.
+#   * build_site.py  - regenerates the nine pages from the artefacts.
+#   * verify_site.py - link resolution, per-row source-or-UNVERIFIED, the no-price rule (no official
+#                      price source exists, so a price on a page is a build failure), and index/data
+#                      agreement so prose cannot drift from a derived number.
+#   * the determinism gate compares committed HTML with a rebuild.
+#
+# It deliberately does NOT fetch nfl.com. A workflow that re-read a live page would fail for reasons
+# unrelated to the code (the injury report moves hourly), and the transcription in
+# data/official_facts.json already records what was read and when.
+
+on:
+  push:
+    paths:
+      - 'nfl-reconciled/**'
+      - '.github/workflows/nfl-reconciled.yml'
+  pull_request:
+    paths:
+      - 'nfl-reconciled/**'
+      - '.github/workflows/nfl-reconciled.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Reconcile official facts and repository artefacts
+        run: python3 nfl-reconciled/engine/reconcile.py
+
+      - name: Collect every workspace's flags
+        run: python3 nfl-reconciled/engine/build_review.py
+
+      - name: Rebuild the site
+        run: python3 nfl-reconciled/engine/build_site.py
+
+      - name: Verify every row, every link, and that no price is printed
+        run: python3 nfl-reconciled/engine/verify_site.py
+
+      - name: Tests
+        run: python3 -m unittest discover -s nfl-reconciled/tests -v
+
+      - name: Determinism gate (a rebuild must not change a committed page)
+        run: |
+          git diff --stat
+          git diff --exit-code -- nfl-reconciled/index.html nfl-reconciled/pages \
+                                   nfl-reconciled/data/derived nfl-reconciled/data/resolutions.json

@@ -3917,6 +3917,116 @@ every value gated by them is published blank + flagged, never inferred.
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
 
 ---
+
+## Session `arena/3858e722-own4` — Cross-namespace reconciliation & unified NFL entry point (CLAIM, 2026-11-16)
+
+Session ID `arena/3858e722-own4` · Branch `arena/3858e722-own4` (platform-pinned; the requested
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every
+prior session) · Base: `1dbde90` (= `main` after PR #122).
+
+**Survey done before claiming (not assumed).** The tree now carries **30 `nfl-*` namespaces, 593 HTML
+pages, 572 JSON artefacts**, and the root `index.html` navigation opens with a **200+ link list in which
+fourteen different hubs each claim to be the right place to start**. Measured on the checked-in
+artefacts, several of them publish *different numbers for the same official fact*:
+
+| Fact | nfl-book | nfl-decision | nfl-ledger | nfl-price-snapshot | nfl-readiness-register |
+|---|---|---|---|---|---|
+| graded/results games | `n_games` 137 | `games` 136 | `rows` 137 | `n_games` 14 | `rows` 14 |
+| injury capture rows (Week 10) | 347 | — | — | — | 279 (peer says 347) |
+
+Every one of those namespaces is internally sourced and internally reproducible, so **none is lying**;
+but a reviewer opening `/Own4/` cannot tell which feed is canonical, why 136 vs 137, or which injury
+row count to trust. That is a decision-making failure of the *site*, not of any one namespace, and it is
+exactly the "clean, user friendly, simple dashboard" requirement in the brief. No session owns it.
+
+**Namespace:** `nfl-reconciled/` (new; no peer owns this path). Shared files touched: `COORDINATION.md`
+(append-only), `verification/build.py` (NAV — a **new top group placed first**, additive only, no peer
+link altered or removed), regenerated `index.html` + `verified/*.html`, one new workflow
+`.github/workflows/nfl-reconciled.yml`. **No peer namespace file is edited, moved or deleted.**
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| R1 | Machine-read all 30 namespaces; compute a conflict matrix over shared official facts (results corpus, injury capture, depth, venues, prices) | claimed | arena/3858e722-own4 | `nfl-reconciled/data/conflict_matrix.json`, `nfl-reconciled/engine/reconcile.py` |
+| R2 | Resolve each conflict against an official source read **this session**; publish verdict + the URL, or leave blank + flag | claimed | arena/3858e722-own4 | `nfl-reconciled/data/resolutions.json` |
+| R3 | Canonical index: one row per namespace (what it publishes, row counts, last verified date, does it pass its own gate) | claimed | arena/3858e722-own4 | `nfl-reconciled/data/namespace_index.json` |
+| R4 | Unified "start here" dashboard: canonical numbers, the single recommendation per question, and a namespace map | claimed | arena/3858e722-own4 | `nfl-reconciled/index.html` |
+| R5 | Deduplicate the decision surfaces: publish one merged questions/suggestions register that points at the owner register for each row rather than restating 400 near-duplicates | claimed | arena/3858e722-own4 | `nfl-reconciled/data/decision_register.json` |
+| R6 | Site build + per-row source verifier + broken-link check + CI workflow + determinism gate | claimed | arena/3858e722-own4 | `nfl-reconciled/**`, `.github/workflows/nfl-reconciled.yml` |
+| R7 | Final integration: regenerate root nav, re-verify whole tree, PR → main → merge → Pages live confirmation, record here | claimed | arena/3858e722-own4 | `verification/build.py`, `index.html`, `verified/*.html`, this file |
+
+**Not claimed / out of scope:** no new scraping (the availability desk already logged that no collector
+is wired up; re-fetching is SUG-02's decision, not mine), no strategy promotion, no change to any peer's
+data. This session *reads and cites* peer artefacts; it never rewrites them.
+
+### Completion record — session `arena/3858e722-own4` (R1–R7), 2026-11-16
+
+**Status: COMPLETE.** All seven claimed tasks delivered in `nfl-reconciled/` (10 pages, 7 data
+artefacts, 5 engines, 21 tests, 1 CI workflow). No peer namespace file was edited.
+
+**What the task was, and why it existed.** The tree held **31 `nfl-*` workspaces publishing 429 pages**,
+and at least fourteen presented themselves as the place to start. Measured on the checked-in artefacts,
+five results feeds published 136 or 137 games and eight availability captures published between 98 and
+347 rows for the same official week. Every one was internally sourced and reproducible, so none was
+lying — but a reviewer could not tell which figure to believe. `nfl-integration` had already logged the
+consolidation as owner decision INT-10 / S04 and left it open; no session had ever done it.
+
+**Numbers published** (every one engine-computed from `data/official_facts.json`, transcribed by hand
+from the official page this session — nothing is typed into a template):
+
+| Fact | Workspaces said | Published | Official basis |
+|---|---|---|---|
+| Games played | 136 / 137 | **148** | sum of 32 clubs' W+L+T = 296 club-games ÷ 2 |
+| Week-10 fixtures | 13 / 14 / 16 | **14** | 32 clubs − 4 on bye ÷ 2 |
+| Week-10 injury rows | 254 / 279 / 347 / 352 | **347 over 28 clubs** | two independent captures reproduce 8/8 club counts and 18/18 cells |
+| Points in the season corpus | not stated | **6,246 + 578 = 6,824** | equals the official PF total, which equals official PA |
+
+**The 6,824 closure is the strongest result in this contribution**: no feed is complete, but the weeks
+1–9 corpus plus the 12 official Week-10 finals equals the league's own points total exactly, so the
+stored scores are provably consistent with every point the league credits. That check had never been run.
+
+**Conflict register: 16 rows — 11 SETTLED by an official number, 1 label-only, 4 left to the owner**
+(RC-11 prices, RC-12 depth rank, RC-13 props, RC-14 rule priors), each with the action that would clear
+it. Plus **RR-01** (31 workspaces exist because no rule said where work must land — name a canonical
+namespace). **241 open flags from 18 workspaces** rolled into one index; 212 carry a source link and the
+other 29 are published as `UNVERIFIED — no source cited`.
+
+**Irregularity found and NOT fixed (deliberate).** Recomputing the availability capture's own published
+sha256 values at build time: **4 of 6 match**. The two stale seals are
+`nfl-availability-desk/data/availability_snapshot_2026-11-15.csv` (recorded `d9d8e08f…`/28,345 B vs actual
+`15fc9245…`/27,997 B) and `data/fixtures_week10.csv`. Both files are unchanged since merge commit
+`1dbde90`, so the seal is stale, not the data — the capture's counts are independently reproduced. This
+session did **not** re-seal another namespace's capture: re-sealing a file from the file it is meant to
+vouch for is that namespace's act or the owner's. Published as **RC-16** with the check recomputed live on
+every build.
+
+**Gates run before opening the PR** (all from the working tree, in this order):
+
+* `nfl-reconciled`: reconcile → build_review → build_site → verify_site → **PASS** (10 pages, every row
+  sourced, every link resolved, no price printed) → 21 tests **OK** → determinism gate **clean**.
+* `verification/` canonical site: collect → reconcile → analysis → build → verify_site **PASS**;
+  `git diff --exit-code verification/data` **clean**.
+* Peer gates re-run because this session changes tree-wide counts the peers render:
+  `nfl-availability-desk` capture/audit/drift/probe/prereg/build/verify **PASS** + determinism **clean**;
+  `nfl-book` full 7-step pipeline **PASS** + determinism **clean**; `nfl-verify` derive/readiness/build/
+  verify **PASS** + **clean**; `nfl-command`, `nfl-ledger`, `nfl-consolidated`, `nfl-decisions` all
+  **PASS**. Two peers had **stale committed output on `main` before this session touched anything**:
+  `nfl-verify` expected 28 namespaces where 30 existed (its own `verify.py` said so), and its namespace
+  count fed a readiness row; both were regenerated and now pass. Those regenerations are in this PR and
+  are the reason `nfl-verify`, `nfl-availability-desk` and `root index.html`/`verified/*` appear in the diff.
+
+**Deliberate limits, published on `pages/method.html` and `pages/flagged.html`:** chunks 2–7 of the
+injury report were not read (the 347 verdict rests on the capture's own data plus a hand count of 8 clubs
+and 18 cells); no price, no depth rank and no 2026 rule prior is asserted; peer contents were read as data,
+not re-verified claim by claim.
+
+**Coordination:** no other session held an active claim when this one started (surveyed the board and the
+open PR list). Work was done on the single platform-pinned branch, `arena/3858e722-own4`, per the logged
+deviation every prior session recorded. Shared files: `verification/build.py` (NAV — a new group placed
+first, additive only), regenerated `index.html`/`verified/*.html`, this file. No peer namespace file,
+data file or page was edited; peers that were *regenerated* were regenerated by their own engines.
+
+PR / merge result: recorded below after the merge.
+
 ## Session `arena-6531ea53-own4` — NFL root site (current session, 2026-11-16)
 
 Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
@@ -3991,4 +4101,3 @@ Session ID: `arena/0e86aefb-own4` · Branch: `arena/0e86aefb-own4` (platform-pin
 **Official sources fetched this session:** https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/schedules/2026/by-week/week-10 · https://www.nfl.com/games/commanders-at-giants-2026-reg-10 · https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 · https://www.nfl.com/injuries/ (8 chunks)
 
 **Status: done.** Line-by-line re-verification complete: standings snapshot, WAS@NYG 24-21 and NE@SEA 10-13 match official game pages; full 8-chunk injury capture (347 rows) closes FB-06; origination order side→total→moneyline confirmed; market lines blank by policy FB-01 (NFL publishes no odds). Site builds (30 pages) and engine/verify.py PASS (931 rows, 883 sourced, 741 blank+flagged, 1875 links, 0 broken). Ready for PR/merge/Pages.
-

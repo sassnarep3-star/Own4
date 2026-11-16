@@ -1,0 +1,736 @@
+{
+ "dataset": "injury_capture_reconciliation",
+ "title": "Which Week-10 availability capture is checkable against the live official table?",
+ "built_utc": "2026-11-16",
+ "session": "arena/3858e722-own4",
+ "source_url": "https://www.nfl.com/injuries/",
+ "rule": "A capture is judged only on the cells this session actually read. Clubs and cells outside the sample are not judged, and no capture is called wrong for disagreeing outside it.",
+ "captures_found": [
+  {
+   "path": "nfl-book/data/injuries_week10_capture.json",
+   "sha256": "8509049635445a55b9fde766e8cc882d2f063a41485f3c0b9b3b07581028dd70",
+   "n_rows": 347,
+   "shape": "json:rows"
+  },
+  {
+   "path": "nfl-decision-desk/data/raw/injuries_week10_2026-11-15T2324Z.csv",
+   "sha256": "60bdbb97179a142abfb342d69290cd7c5f70e61abb1bdad42ab8037d649960eb",
+   "n_rows": 347,
+   "shape": "csv"
+  },
+  {
+   "path": "nfl-marketboard/data/raw/injuries_week10_official.csv",
+   "sha256": "6d97e99c903683394c5d6dc8173895fe2467c7198f39f0806913d23155b48d65",
+   "n_rows": 347,
+   "shape": "csv"
+  },
+  {
+   "path": "nfl-arena/data/injuries_week10.json",
+   "sha256": "3ce19f7c9049633952c6a23d411d29a531e123ff47c83c431b5c83882becd669",
+   "n_rows": 326,
+   "shape": "json:rows"
+  },
+  {
+   "path": "nfl-command/data/injuries_week10.json",
+   "sha256": "c480706e428ba0042bfd447fd6dc02f87a935d465f920d1f64ea2d300609eaa6",
+   "n_rows": 326,
+   "shape": "json:rows"
+  },
+  {
+   "path": "nfl-audit/data/injuries_week10.csv",
+   "sha256": "aa59cd2015acd1987a1461245d0705e15f85ad89f2a6ed343e67b0702c5a835e",
+   "n_rows": 276,
+   "shape": "csv"
+  },
+  {
+   "path": "nfl-price-snapshot/data/official/injuries_week10_2026.json",
+   "sha256": "b937a93beb218d21ab1a217e482289a73032018302d9e222aa7e8fef2361c3db",
+   "n_rows": 125,
+   "shape": "json:designations"
+  },
+  {
+   "path": "nfl-dashboard/data/injuries_week10.json",
+   "sha256": "9cc66073931cea0462b3c9a92473c3f92c2dbfb9df5c8f06b3d92a7a3dd3aad3",
+   "n_rows": 98,
+   "shape": "json:rows"
+  }
+ ],
+ "n_captures": 8,
+ "row_count_spread": {
+  "min": 98,
+  "max": 347,
+  "distinct_counts": [
+   98,
+   125,
+   276,
+   326,
+   347
+  ]
+ },
+ "live_checks": [
+  {
+   "path": "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv",
+   "n_rows": 347,
+   "clubs_in_capture": 28,
+   "clubs_in_official_sample": 8,
+   "club_row_counts": [
+    {
+     "club": "WAS",
+     "capture": 9,
+     "official_counted": 9,
+     "match": true
+    },
+    {
+     "club": "NYG",
+     "capture": 11,
+     "official_counted": 11,
+     "match": true
+    },
+    {
+     "club": "NE",
+     "capture": 15,
+     "official_counted": 15,
+     "match": true
+    },
+    {
+     "club": "DET",
+     "capture": 9,
+     "official_counted": 9,
+     "match": true
+    },
+    {
+     "club": "KC",
+     "capture": 13,
+     "official_counted": 13,
+     "match": true
+    },
+    {
+     "club": "ATL",
+     "capture": 11,
+     "official_counted": 11,
+     "match": true
+    },
+    {
+     "club": "MIN",
+     "capture": 13,
+     "official_counted": 13,
+     "match": true
+    },
+    {
+     "club": "GB",
+     "capture": 17,
+     "official_counted": 17,
+     "match": true
+    }
+   ],
+   "clubs_matching": 8,
+   "cell_checks": [
+    {
+     "club": "WAS",
+     "player": "Lucas Patrick",
+     "capture": [
+      "Concussion",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Concussion",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "WAS",
+     "player": "Colson Yankoff",
+     "capture": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NYG",
+     "player": "Malik Harrison",
+     "capture": [
+      "Groin",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Groin",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "A.J. Brown",
+     "capture": [
+      "Ankle, Knee",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Ankle, Knee",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "TreVeyon Henderson",
+     "capture": [
+      "Illness",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Illness",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "Kevin Byard",
+     "capture": [
+      "Chest",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Chest",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Kerby Joseph",
+     "capture": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Cade Mays",
+     "capture": [
+      "Ankle",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Ankle",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "D.J. Reed",
+     "capture": [
+      "Hip",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Hip",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Amon-Ra St. Brown",
+     "capture": [
+      "Rib",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Rib",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "KC",
+     "player": "Mansoor Delane",
+     "capture": [
+      "Shoulder",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Shoulder",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "KC",
+     "player": "Peter Woods",
+     "capture": [
+      "Neck",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Neck",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "ATL",
+     "player": "Divine Deablo",
+     "capture": [
+      "Forearm",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "official": [
+      "Forearm",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "MIN",
+     "player": "Kyler Murray",
+     "capture": [
+      "Hamstring",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Hamstring",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "MIN",
+     "player": "T.J. Hockenson",
+     "capture": [
+      "Wrist, Chest",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Wrist, Chest",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Micah Parsons",
+     "capture": [
+      "Knee, Illness",
+      "Limited Participation in Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee, Illness",
+      "Limited Participation in Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Zaire Franklin",
+     "capture": [
+      "Shin",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "official": [
+      "Shin",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Josh Jacobs",
+     "capture": [
+      "Finger",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Finger",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    }
+   ],
+   "cells_matching": 18,
+   "cells_checked": 18,
+   "verdict": "PASS"
+  },
+  {
+   "path": "nfl-marketboard/data/raw/injuries_week10_official.csv",
+   "n_rows": 347,
+   "clubs_in_capture": 28,
+   "clubs_in_official_sample": 8,
+   "club_row_counts": [
+    {
+     "club": "WAS",
+     "capture": 9,
+     "official_counted": 9,
+     "match": true
+    },
+    {
+     "club": "NYG",
+     "capture": 11,
+     "official_counted": 11,
+     "match": true
+    },
+    {
+     "club": "NE",
+     "capture": 15,
+     "official_counted": 15,
+     "match": true
+    },
+    {
+     "club": "DET",
+     "capture": 9,
+     "official_counted": 9,
+     "match": true
+    },
+    {
+     "club": "KC",
+     "capture": 13,
+     "official_counted": 13,
+     "match": true
+    },
+    {
+     "club": "ATL",
+     "capture": 11,
+     "official_counted": 11,
+     "match": true
+    },
+    {
+     "club": "MIN",
+     "capture": 13,
+     "official_counted": 13,
+     "match": true
+    },
+    {
+     "club": "GB",
+     "capture": 17,
+     "official_counted": 17,
+     "match": true
+    }
+   ],
+   "clubs_matching": 8,
+   "cell_checks": [
+    {
+     "club": "WAS",
+     "player": "Lucas Patrick",
+     "capture": [
+      "Concussion",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Concussion",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "WAS",
+     "player": "Colson Yankoff",
+     "capture": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NYG",
+     "player": "Malik Harrison",
+     "capture": [
+      "Groin",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Groin",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "A.J. Brown",
+     "capture": [
+      "Ankle, Knee",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Ankle, Knee",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "TreVeyon Henderson",
+     "capture": [
+      "Illness",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Illness",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "NE",
+     "player": "Kevin Byard",
+     "capture": [
+      "Chest",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Chest",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Kerby Joseph",
+     "capture": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Cade Mays",
+     "capture": [
+      "Ankle",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Ankle",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "D.J. Reed",
+     "capture": [
+      "Hip",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Hip",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "DET",
+     "player": "Amon-Ra St. Brown",
+     "capture": [
+      "Rib",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Rib",
+      "Limited Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "KC",
+     "player": "Mansoor Delane",
+     "capture": [
+      "Shoulder",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "official": [
+      "Shoulder",
+      "Full Participation in Practice",
+      "Questionable"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "KC",
+     "player": "Peter Woods",
+     "capture": [
+      "Neck",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Neck",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "ATL",
+     "player": "Divine Deablo",
+     "capture": [
+      "Forearm",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "official": [
+      "Forearm",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "MIN",
+     "player": "Kyler Murray",
+     "capture": [
+      "Hamstring",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Hamstring",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "MIN",
+     "player": "T.J. Hockenson",
+     "capture": [
+      "Wrist, Chest",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Wrist, Chest",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Micah Parsons",
+     "capture": [
+      "Knee, Illness",
+      "Limited Participation in Practice",
+      "Out"
+     ],
+     "official": [
+      "Knee, Illness",
+      "Limited Participation in Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Zaire Franklin",
+     "capture": [
+      "Shin",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "official": [
+      "Shin",
+      "Did Not Participate In Practice",
+      "Doubtful"
+     ],
+     "verdict": "match"
+    },
+    {
+     "club": "GB",
+     "player": "Josh Jacobs",
+     "capture": [
+      "Finger",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "official": [
+      "Finger",
+      "Did Not Participate In Practice",
+      "Out"
+     ],
+     "verdict": "match"
+    }
+   ],
+   "cells_matching": 18,
+   "cells_checked": 18,
+   "verdict": "PASS"
+  }
+ ]
+}

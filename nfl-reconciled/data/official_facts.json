@@ -1,0 +1,602 @@
+{
+ "dataset": "official_facts",
+ "title": "Official facts re-read by session arena/3858e722-own4 on 2026-11-16 for cross-namespace reconciliation",
+ "read_utc": "2026-11-16",
+ "rule": "Every value in this file was transcribed by hand from the page named in its own source_url. Nothing here is computed, inferred or copied from another namespace in this repository. The engine derives every published number from this file, so a wrong transcription here is the only way a published number can be wrong.",
+ "sources": [
+  {
+   "id": "S1",
+   "url": "https://www.nfl.com/standings/",
+   "title": "2026 NFL Division Standings (official)",
+   "what_was_read": "All 32 clubs, W / L / T / PCT / PF / PA columns, American and National Football Conference sections.",
+   "read_utc": "2026-11-16"
+  },
+  {
+   "id": "S2",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "title": "NFL Week 10 Schedule 2026 (official)",
+   "what_was_read": "The complete Week 10 slate: every fixture, its date, its state as published (FINAL with score / LIVE / scheduled), the two idle-club sections, and the published Week-16/17/18 scheduling note.",
+   "read_utc": "2026-11-16"
+  },
+  {
+   "id": "S3",
+   "url": "https://www.nfl.com/injuries/",
+   "title": "Official Latest NFL Injury Report for Players \u2014 Week 10 of the 2026 Season",
+   "what_was_read": "Table header (Player / Position / Injuries / Practice Status / Game Status) and the club tables for WAS, NYG, NE, DET, KC, ATL, MIN, GB and the start of JAX (chunks 0-1 of 8). Chunks 2-7 were NOT read this session; no club outside those is claimed here.",
+   "read_utc": "2026-11-16",
+   "coverage_note": "Partial by design. The reconciliation this file supports needs a sample, not the whole page; the complete 347-row capture already exists at nfl-availability-desk/data/availability_snapshot_2026-11-15.csv and is what the engine checks against this sample."
+  }
+ ],
+ "standings": {
+  "source_id": "S1",
+  "source_url": "https://www.nfl.com/standings/",
+  "columns": [
+   "club",
+   "w",
+   "l",
+   "t",
+   "pf",
+   "pa"
+  ],
+  "note": "PF and PA are the league's own Published Points For / Points Against. They are the independent check the repository has never run: the points a results feed contains must equal the points the league credits.",
+  "rows": [
+   [
+    "BUF",
+    8,
+    1,
+    0,
+    287,
+    199
+   ],
+   [
+    "NE",
+    5,
+    5,
+    0,
+    221,
+    242
+   ],
+   [
+    "NYJ",
+    2,
+    8,
+    0,
+    194,
+    254
+   ],
+   [
+    "MIA",
+    1,
+    8,
+    0,
+    148,
+    224
+   ],
+   [
+    "PIT",
+    6,
+    2,
+    0,
+    180,
+    144
+   ],
+   [
+    "CIN",
+    6,
+    2,
+    0,
+    240,
+    175
+   ],
+   [
+    "CLE",
+    6,
+    4,
+    0,
+    188,
+    220
+   ],
+   [
+    "BAL",
+    4,
+    5,
+    0,
+    189,
+    236
+   ],
+   [
+    "JAX",
+    7,
+    2,
+    0,
+    269,
+    144
+   ],
+   [
+    "HOU",
+    3,
+    6,
+    0,
+    233,
+    219
+   ],
+   [
+    "IND",
+    3,
+    7,
+    0,
+    208,
+    271
+   ],
+   [
+    "TEN",
+    1,
+    8,
+    0,
+    167,
+    239
+   ],
+   [
+    "KC",
+    7,
+    2,
+    0,
+    237,
+    156
+   ],
+   [
+    "DEN",
+    7,
+    2,
+    0,
+    198,
+    186
+   ],
+   [
+    "LV",
+    4,
+    6,
+    0,
+    251,
+    289
+   ],
+   [
+    "LAC",
+    0,
+    8,
+    0,
+    121,
+    219
+   ],
+   [
+    "NYG",
+    5,
+    3,
+    1,
+    203,
+    196
+   ],
+   [
+    "DAL",
+    4,
+    6,
+    0,
+    286,
+    282
+   ],
+   [
+    "WAS",
+    3,
+    5,
+    1,
+    196,
+    223
+   ],
+   [
+    "PHI",
+    2,
+    7,
+    0,
+    148,
+    221
+   ],
+   [
+    "DET",
+    7,
+    2,
+    0,
+    257,
+    199
+   ],
+   [
+    "MIN",
+    7,
+    2,
+    0,
+    176,
+    126
+   ],
+   [
+    "CHI",
+    7,
+    2,
+    0,
+    241,
+    184
+   ],
+   [
+    "GB",
+    6,
+    4,
+    0,
+    226,
+    221
+   ],
+   [
+    "CAR",
+    4,
+    5,
+    0,
+    219,
+    236
+   ],
+   [
+    "TB",
+    3,
+    6,
+    0,
+    202,
+    178
+   ],
+   [
+    "NO",
+    3,
+    6,
+    0,
+    202,
+    236
+   ],
+   [
+    "ATL",
+    3,
+    7,
+    0,
+    201,
+    258
+   ],
+   [
+    "SF",
+    8,
+    1,
+    0,
+    281,
+    196
+   ],
+   [
+    "SEA",
+    6,
+    4,
+    0,
+    223,
+    175
+   ],
+   [
+    "LA",
+    6,
+    4,
+    0,
+    248,
+    187
+   ],
+   [
+    "AZ",
+    3,
+    7,
+    0,
+    184,
+    289
+   ]
+  ]
+ },
+ "week10_fixtures": {
+  "source_id": "S2",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+  "note": "state is quoted as the page published it at read time. 'final' numbers are the score printed on the schedule page. 'in_progress'/'scheduled' rows carry NO score and are deliberately null, never zero. 14 is not typed in: it is forced by 32 clubs minus the 4 the page lists as on bye, divided by 2, and the engine fails the build if the itemised list disagrees.",
+  "n_fixtures": 14,
+  "bye_clubs": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "rows": [
+   {
+    "away": "WAS",
+    "home": "NYG",
+    "date": "2026-11-12",
+    "state": "final",
+    "away_pts": 24,
+    "home_pts": 21
+   },
+   {
+    "away": "NE",
+    "home": "DET",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 10,
+    "home_pts": 35,
+    "note": "International Game, Munich"
+   },
+   {
+    "away": "KC",
+    "home": "ATL",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 35,
+    "home_pts": 13
+   },
+   {
+    "away": "HOU",
+    "home": "CLE",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 24,
+    "home_pts": 27
+   },
+   {
+    "away": "MIN",
+    "home": "GB",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 30,
+    "home_pts": 10
+   },
+   {
+    "away": "MIA",
+    "home": "IND",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 22,
+    "home_pts": 24
+   },
+   {
+    "away": "CAR",
+    "home": "NO",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 20,
+    "home_pts": 17
+   },
+   {
+    "away": "BUF",
+    "home": "NYJ",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 31,
+    "home_pts": 12
+   },
+   {
+    "away": "JAX",
+    "home": "TEN",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 40,
+    "home_pts": 23
+   },
+   {
+    "away": "LA",
+    "home": "AZ",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 34,
+    "home_pts": 6
+   },
+   {
+    "away": "SEA",
+    "home": "LV",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 21,
+    "home_pts": 13
+   },
+   {
+    "away": "SF",
+    "home": "DAL",
+    "date": "2026-11-15",
+    "state": "final",
+    "away_pts": 46,
+    "home_pts": 40
+   },
+   {
+    "away": "PIT",
+    "home": "CIN",
+    "date": "2026-11-15",
+    "state": "in_progress",
+    "away_pts": null,
+    "home_pts": null,
+    "note": "published as Q1 at read time; no final score exists yet, so no value is recorded"
+   },
+   {
+    "away": "LAC",
+    "home": "BAL",
+    "date": "2026-11-16",
+    "state": "scheduled",
+    "away_pts": null,
+    "home_pts": null
+   }
+  ]
+ },
+ "injury_sample": {
+  "source_id": "S3",
+  "source_url": "https://www.nfl.com/injuries/",
+  "note": "Row counts and specific cells counted by hand from the returned table text. This is the reconciliation basis for every stored Week-10 capture in the repository.",
+  "club_row_counts": {
+   "WAS": 9,
+   "NYG": 11,
+   "NE": 15,
+   "DET": 9,
+   "KC": 13,
+   "ATL": 11,
+   "MIN": 13,
+   "GB": 17
+  },
+  "cells": [
+   {
+    "club": "WAS",
+    "player": "Lucas Patrick",
+    "pos": "C",
+    "injury": "Concussion",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "WAS",
+    "player": "Colson Yankoff",
+    "pos": "TE",
+    "injury": "Knee",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "NYG",
+    "player": "Malik Harrison",
+    "pos": "LB",
+    "injury": "Groin",
+    "practice_status": "Limited Participation in Practice",
+    "game_status": "Questionable"
+   },
+   {
+    "club": "NE",
+    "player": "A.J. Brown",
+    "pos": "WR",
+    "injury": "Ankle, Knee",
+    "practice_status": "Limited Participation in Practice",
+    "game_status": "Questionable"
+   },
+   {
+    "club": "NE",
+    "player": "TreVeyon Henderson",
+    "pos": "RB",
+    "injury": "Illness",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "NE",
+    "player": "Kevin Byard",
+    "pos": "S",
+    "injury": "Chest",
+    "practice_status": "Full Participation in Practice",
+    "game_status": "Questionable"
+   },
+   {
+    "club": "DET",
+    "player": "Kerby Joseph",
+    "pos": "S",
+    "injury": "Knee",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "DET",
+    "player": "Cade Mays",
+    "pos": "C",
+    "injury": "Ankle",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "DET",
+    "player": "D.J. Reed",
+    "pos": "CB",
+    "injury": "Hip",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "DET",
+    "player": "Amon-Ra St. Brown",
+    "pos": "WR",
+    "injury": "Rib",
+    "practice_status": "Limited Participation in Practice",
+    "game_status": "Questionable"
+   },
+   {
+    "club": "KC",
+    "player": "Mansoor Delane",
+    "pos": "CB",
+    "injury": "Shoulder",
+    "practice_status": "Full Participation in Practice",
+    "game_status": "Questionable"
+   },
+   {
+    "club": "KC",
+    "player": "Peter Woods",
+    "pos": "DT",
+    "injury": "Neck",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "ATL",
+    "player": "Divine Deablo",
+    "pos": "LB",
+    "injury": "Forearm",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Doubtful"
+   },
+   {
+    "club": "MIN",
+    "player": "Kyler Murray",
+    "pos": "QB",
+    "injury": "Hamstring",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "MIN",
+    "player": "T.J. Hockenson",
+    "pos": "TE",
+    "injury": "Wrist, Chest",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "GB",
+    "player": "Micah Parsons",
+    "pos": "LB",
+    "injury": "Knee, Illness",
+    "practice_status": "Limited Participation in Practice",
+    "game_status": "Out"
+   },
+   {
+    "club": "GB",
+    "player": "Zaire Franklin",
+    "pos": "LB",
+    "injury": "Shin",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Doubtful"
+   },
+   {
+    "club": "GB",
+    "player": "Josh Jacobs",
+    "pos": "RB",
+    "injury": "Finger",
+    "practice_status": "Did Not Participate In Practice",
+    "game_status": "Out"
+   }
+  ],
+  "non_injury_reason_seen": [
+   {
+    "club": "JAX",
+    "player": "Jessie Bates",
+    "text": "Not injury related - resting player"
+   },
+   {
+    "club": "JAX",
+    "player": "Jordan Davis",
+    "text": "Not injury related - resting player"
+   }
+  ]
+ }
+}

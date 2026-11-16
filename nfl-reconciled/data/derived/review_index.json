@@ -1,0 +1,3329 @@
+{
+ "dataset": "review_index",
+ "title": "Every open flagged item across every NFL workspace, in one place",
+ "built_utc": "2026-11-16",
+ "session": "arena/3858e722-own4",
+ "rule": "Collected by reading each workspace's own flags artefact. Nothing is closed, merged or re-judged here: each row links back to the page that raised it and to the source that page cited. An item with no theme match is grouped as unclassified rather than forced into one.",
+ "totals": {
+  "items": 242,
+  "files": 18,
+  "workspaces": 18,
+  "with_source_link": 213
+ },
+ "by_theme": [
+  {
+   "theme": "Unclassified \u2014 review on its own page",
+   "n": 58
+  },
+  {
+   "theme": "Fixtures, schedule & venues",
+   "n": 39
+  },
+  {
+   "theme": "Site, navigation & repository hygiene",
+   "n": 25
+  },
+  {
+   "theme": "Depth, starters & replacements",
+   "n": 24
+  },
+  {
+   "theme": "Prices & market lines",
+   "n": 23
+  },
+  {
+   "theme": "Gates, pre-registration & leaderboard",
+   "n": 20
+  },
+  {
+   "theme": "Availability & injuries",
+   "n": 18
+  },
+  {
+   "theme": "Model, ratings & probabilities",
+   "n": 13
+  },
+  {
+   "theme": "Standings & records",
+   "n": 9
+  },
+  {
+   "theme": "Stale or drifting values",
+   "n": 6
+  },
+  {
+   "theme": "Data rights & storage",
+   "n": 4
+  },
+  {
+   "theme": "Capture, hashing & provenance",
+   "n": 3
+  }
+ ],
+ "by_workspace": [
+  {
+   "workspace": "nfl-availability-desk",
+   "n": 18
+  },
+  {
+   "workspace": "nfl-book",
+   "n": 18
+  },
+  {
+   "workspace": "nfl-hub",
+   "n": 18
+  },
+  {
+   "workspace": "nfl-command",
+   "n": 16
+  },
+  {
+   "workspace": "nfl-edge",
+   "n": 16
+  },
+  {
+   "workspace": "nfl-intel",
+   "n": 16
+  },
+  {
+   "workspace": "nfl-lines",
+   "n": 16
+  },
+  {
+   "workspace": "nfl-quant",
+   "n": 16
+  },
+  {
+   "workspace": "nfl-verify",
+   "n": 14
+  },
+  {
+   "workspace": "nfl-arena",
+   "n": 13
+  },
+  {
+   "workspace": "nfl-integration",
+   "n": 13
+  },
+  {
+   "workspace": "nfl-own",
+   "n": 13
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "n": 12
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "n": 10
+  },
+  {
+   "workspace": "nfl-markets",
+   "n": 10
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "n": 9
+  },
+  {
+   "workspace": "nfl-ledger",
+   "n": 9
+  },
+  {
+   "workspace": "nfl-market",
+   "n": 5
+  }
+ ],
+ "files": [
+  {
+   "path": "nfl-arena/data/flagged.json",
+   "n": 13
+  },
+  {
+   "path": "nfl-availability-desk/data/flags.json",
+   "n": 18
+  },
+  {
+   "path": "nfl-book/data/flags.json",
+   "n": 18
+  },
+  {
+   "path": "nfl-command/data/flags.json",
+   "n": 16
+  },
+  {
+   "path": "nfl-consolidated/data/flags.json",
+   "n": 10
+  },
+  {
+   "path": "nfl-dashboard/data/flags.json",
+   "n": 9
+  },
+  {
+   "path": "nfl-edge/data/flags.json",
+   "n": 16
+  },
+  {
+   "path": "nfl-hub/data/flags.json",
+   "n": 18
+  },
+  {
+   "path": "nfl-integration/data/flags.json",
+   "n": 13
+  },
+  {
+   "path": "nfl-intel/data/flags.json",
+   "n": 16
+  },
+  {
+   "path": "nfl-ledger/data/flags.json",
+   "n": 9
+  },
+  {
+   "path": "nfl-lines/data/flags.json",
+   "n": 16
+  },
+  {
+   "path": "nfl-market/data/derived/flags.json",
+   "n": 5
+  },
+  {
+   "path": "nfl-markets/data/flags.json",
+   "n": 10
+  },
+  {
+   "path": "nfl-own/data/derived/flags.json",
+   "n": 13
+  },
+  {
+   "path": "nfl-quant/data/flags.json",
+   "n": 16
+  },
+  {
+   "path": "nfl-readiness-register/data/flags.json",
+   "n": 12
+  },
+  {
+   "path": "nfl-verify/data/flags.json",
+   "n": 14
+  }
+ ],
+ "rows": [
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-01",
+   "severity": "data-quality",
+   "theme": "Depth, starters & replacements",
+   "title": "ESPN status marker 'D' is not defined in ESPN's own glossary",
+   "detail": "The depth charts show the marker 'D' next to four players (MIA WR Chris Bell, SEA LT Charles Cross, SEA LG Quenton Nelson, GB LB Zaire Franklin). ESPN's published glossary on the same page lists only P, Q, O, PUP, SUS, IR. 'D' most likely means Doubtful, but that is an inference, so every 'D' cell is carried verbatim and labelled unverified.",
+   "sources": [
+    "https://www.espn.com/nfl/team/depth/_/name/mia/miami-dolphins",
+    "https://www.espn.com/nfl/team/depth/_/name/sea/seattle-seahawks"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-02",
+   "severity": "source-conflict",
+   "theme": "Depth, starters & replacements",
+   "title": "Arden Key (IND): official report says Questionable, ESPN depth chart says IR",
+   "detail": "The official NFL.com Week 10 report lists Arden Key (DE, hamstring) as Full Participation with Game Status Questionable. The ESPN Colts depth chart shows him in the 3rd-string LDE slot with an IR marker. Sources disagree; both are published as captured.",
+   "sources": [
+    "https://www.espn.com/nfl/team/depth/_/name/ind/indianapolis-colts",
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-03",
+   "severity": "timing",
+   "theme": "Availability & injuries",
+   "title": "Sam Darnold (SEA): Friday report carries no game status, NFL.com news and ESPN say Out",
+   "detail": "The official report row shows 'Did Not Participate In Practice' with a blank Game Status, while the NFL.com news item (same site) says 'Sam Darnold ruled out for Seahawks' Week 10 game vs. Raiders; Drew Lock expected to start again' and the ESPN chart marks him O. The designation apparently post-dates the report table.",
+   "sources": [
+    "https://www.espn.com/nfl/team/depth/_/name/sea/seattle-seahawks",
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-04",
+   "severity": "source-conflict",
+   "theme": "Availability & injuries",
+   "title": "Kyler Murray (MIN): report shows DNP with no designation, ESPN marks him O",
+   "detail": "Same pattern as A-03 but without an NFL.com news item naming the designation. Treated as unverified; the tracker shows the ESPN marker with its source and keeps the official game status blank.",
+   "sources": [
+    "https://www.espn.com/nfl/team/depth/_/name/min/minnesota-vikings",
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-05",
+   "severity": "data-quality",
+   "theme": "Availability & injuries",
+   "title": "nfl-lines injury capture predates Friday game-status designations",
+   "detail": "nfl-lines/data/derived/deficiency.json shows questionable=0 for every team because it was captured before Friday's Out/Questionable designations existed. My Friday capture shows, e.g., NE with 3 Out and 9 Questionable. Counted rows per team also differ slightly (Wednesday/Thursday additions). This is a staleness issue, not a transcription error.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/deficiency.json",
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-06",
+   "severity": "source-conflict",
+   "theme": "Model, ratings & probabilities",
+   "title": "WAS @ NYG Thursday spread differs between datasets (1.5 archive closing vs 2.5 nfl-lines capture)",
+   "detail": "The nflverse archive games.csv holds spread_line 1.5 for the settled Thursday game; the nfl-lines walk-forward file recorded market_spread_line 2.5 (an earlier market number). Totals agree at 40.5. Sign convention of spread_line in the archive is also not documented in the files (home-perspective assumed) \u2014 see Q-07.",
+   "sources": [
+    "https://github.com/nflverse/nfldata",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/own_lines_week10.json"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-07",
+   "severity": "process",
+   "theme": "Stale or drifting values",
+   "title": "Eleven overlapping NFL namespaces duplicate each other",
+   "detail": "nfl/, nfl-audit/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-lab/, nfl-lines/, nfl-quant/, nfl-research/ each publish NFL analysis. Facts can drift between them (this review already found A-05/A-06 drift). Peer sessions logged this as SG-11 / IR-09 without acting.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-08",
+   "severity": "process",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "COORDINATION.md header still titles the project 'NBA Line Origination Research'",
+   "detail": "The shared task board header predates the NFL work; the file now mostly documents NFL sessions. Cosmetic, but misleading for new sessions.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-09",
+   "severity": "data-quality",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 lines are pre-game, not closing lines",
+   "detail": "13 of 14 Week 10 games are unplayed as of 2026-11-13. Only the Thursday game has settled. Any model-vs-market gap computed on Week 10 is against an in-progress market number and will move.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-10",
+   "severity": "data-quality",
+   "theme": "Availability & injuries",
+   "title": "Official report shows blank 'Injuries' and 'Game Status' cells for many players",
+   "detail": "As published: players with no injury designation but limited/DNP practice appear with blank cells. These blanks are preserved as blanks. They are not zeros and not 'probable'.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-11",
+   "severity": "scope",
+   "theme": "Depth, starters & replacements",
+   "title": "Depth-string verification covers 8 of 32 teams this cycle",
+   "detail": "NE, BAL, MIA, SEA, DET, IND, MIN, GB were depth-verified from ESPN charts (the teams with confirmed starter absences). The other 24 teams have official injury rows but blank depth-string columns.",
+   "sources": [
+    "https://www.espn.com/nfl/depth"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-12",
+   "severity": "source-type",
+   "theme": "Depth, starters & replacements",
+   "title": "Depth charts are third-party (ESPN/RotoWire), not published by the NFL",
+   "detail": "The NFL does not publish official depth charts. Every string rank (Starter/2nd/3rd/4th) on this site comes from ESPN's chart (data powered by RotoWire) and is labelled THIRD-PARTY everywhere it appears.",
+   "sources": [
+    "https://www.espn.com/nfl/team/depth/_/name/ne/new-england-patriots"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-arena",
+   "file": "nfl-arena/data/flagged.json",
+   "id": "A-13",
+   "severity": "data-quality",
+   "theme": "Prices & market lines",
+   "title": "No verifiable player-prop PRICES exist; player game logs DO exist (this finding amends the original A-13)",
+   "detail": "Player game logs are published officially on nfl.com player pages (Summary/Logs/Career tabs) \u2014 verified 2026-11-13 on https://www.nfl.com/players/drake-maye/stats (Recent Games + Career tables). Peer session arena/1880ad1e-own4 first unblocked this. What remains unavailable everywhere: player-prop betting PRICES (the NFL publishes no odds at all) \u2014 so prop rows are gradeable but not price-verifiable, and every prop-price cell stays blank.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/pages/props.html",
+    "https://www.nfl.com/players/drake-maye/stats"
+   ],
+   "page": "nfl-arena/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-01",
+   "severity": "high",
+   "theme": "Availability & injuries",
+   "title": "Six figures the brief treats as fact are not reproducible from any file at the base commit: '254 rows' and '279 rows' for the Week 10 tables, '4 no-injury sections vs 2', '6 of 254 report rows carry a game designation', '149 club/unit/position slots with more than one rank-1 player', and 'the 136-game log'.",
+   "detail": "Six figures the brief treats as fact are not reproducible from any file at the base commit: '254 rows' and '279 rows' for the Week 10 tables, '4 no-injury sections vs 2', '6 of 254 report rows carry a game designation', '149 club/unit/position slots with more than one rank-1 player', and 'the 136-game log'.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-02",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "No official source publishes a market price. Every requirement that depends on a price (opening/closing snapshots, the difference column, the residual, CLV, vig decomposition, ROI, rewards) is blocked by the same missing input, and the sibling workspaces in this repository have each worked around it differently (see RF-17).",
+   "detail": "No official source publishes a market price. Every requirement that depends on a price (opening/closing snapshots, the difference column, the residual, CLV, vig decomposition, ROI, rewards) is blocked by the same missing input, and the sibling workspaces in this repository have each worked around it differently (see RF-17).",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-03",
+   "severity": "high",
+   "theme": "Standings & records",
+   "title": "The W-L record printed in brackets beside each club on the injury report is a live join, not a pre-game attribute: it equalled the LIVE standings for 28 of 28 clubs at read time, including clubs whose games were still in progress and clubs that had not kicked off.",
+   "detail": "The W-L record printed in brackets beside each club on the injury report is a live join, not a pre-game attribute: it equalled the LIVE standings for 28 of 28 clubs at read time, including clubs whose games were still in progress and clubs that had not kicked off.",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-04",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "The depth-requirement family (rank-1 groups, shared and empty slots, the Texans image, the Packers jersey-prefix, the 1st-4th string matrix) presumes a depth dataset that exists in neither this repo nor on nfl.com; peers recorded the nfl.com team depth-chart route as a 404.",
+   "detail": "The depth-requirement family (rank-1 groups, shared and empty slots, the Texans image, the Packers jersey-prefix, the 1st-4th string matrix) presumes a depth dataset that exists in neither this repo nor on nfl.com; peers recorded the nfl.com team depth-chart route as a 404.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-05",
+   "severity": "medium",
+   "theme": "Depth, starters & replacements",
+   "title": "The brief cites dated starter changes for Lock, McCord and Brissett (VR-24, VR-25; VQ-05). Lock and McCord were located in official text this session; the Brissett item was not, and none of the VR/VQ identifiers exist in any file at the base commit.",
+   "detail": "The brief cites dated starter changes for Lock, McCord and Brissett (VR-24, VR-25; VQ-05). Lock and McCord were located in official text this session; the Brissett item was not, and none of the VR/VQ identifiers exist in any file at the base commit.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-wednesday-nov-11"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-06",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "'Publish the league's dated schedule announcement beside the live schedule page': no official nfl.com schedule-release article with a printed date was located this session; a web search returned only third-party reposts of the release video.",
+   "detail": "'Publish the league's dated schedule announcement beside the live schedule page': no official nfl.com schedule-release article with a printed date was located this session; a web search returned only third-party reposts of the release video.",
+   "sources": [
+    "https://www.nfl.com/legal/flexible-scheduling-procedures"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-07",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "At read time three Week 10 games were still in progress on the schedule page (Q4, Q4, Q3) while the live standings already credited them; two others had not kicked off.",
+   "detail": "At read time three Week 10 games were still in progress on the schedule page (Q4, Q4, Q3) while the live standings already credited them; two others had not kicked off.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-08",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Four clubs have no section in the Week 10 report (CHI, DEN, PHI, TB). Reading an absent section as 'no injuries' is wrong: the schedule page's own 'Teams on Bye' block lists exactly those four.",
+   "detail": "Four clubs have no section in the Week 10 report (CHI, DEN, PHI, TB). Reading an absent section as 'no injuries' is wrong: the schedule page's own 'Teams on Bye' block lists exactly those four.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-09",
+   "severity": "high",
+   "theme": "Fixtures, schedule & venues",
+   "title": "A traded player still appears on his former club's official report: Daiyan Henley is listed on the Chargers' Week 10 report (LB, full participation) five days after the roundup records both clubs announcing the trade to Denver.",
+   "detail": "A traded player still appears on his former club's official report: Daiyan Henley is listed on the Chargers' Week 10 report (LB, full participation) five days after the roundup records both clubs announcing the trade to Denver.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-10",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "The report's Injuries column is not a severity source: Puka Nacua's row leaves it blank while a dated official item says IR with turf toe and sprained MCL/PCL, and eight Giants players have injuries named in Tuesday's official practice text but blank injury cells in the report.",
+   "detail": "The report's Injuries column is not a severity source: Puka Nacua's row leaves it blank while a dated official item says IR with turf toe and sprained MCL/PCL, and eight Giants players have injuries named in Tuesday's official practice text but blank injury cells in the report.",
+   "sources": [
+    "https://www.nfl.com/news/rams-wr-puka-nacua-likely-to-be-placed-on-injured-reserve-with-turf-toe-sprained-mcl-and-pcl"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-11",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Non-injury reasons are published inside the Injuries column: 'Not injury related - resting player' (JAX x2, LAR x1) and 'Not injury related - personal matter' (HOU x1, LAC x1). Any feature counting injury labels counts a rest day as an injury.",
+   "detail": "Non-injury reasons are published inside the Injuries column: 'Not injury related - resting player' (JAX x2, LAR x1) and 'Not injury related - personal matter' (HOU x1, LAC x1). Any feature counting injury labels counts a rest day as an injury.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-12",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Position labels on the official report are not verified against a roster source: one row reads 'Patrick O'Connell, LB' for Seattle, a player publicly known as a quarterback; it cannot be determined from the pages read whether this is a publication error or a reclassification.",
+   "detail": "Position labels on the official report are not verified against a roster source: one row reads 'Patrick O'Connell, LB' for Seattle, a player publicly known as a quarterback; it cannot be determined from the pages read whether this is a publication error or a reclassification.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-13",
+   "severity": "high",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Six dated captures of one official page sit in this repo with row counts 347, 347, 326, 326, 276 and 107. Five of the six are strict subsets of the fullest capture; two agree exactly.",
+   "detail": "Six dated captures of one official page sit in this repo with row counts 347, 347, 326, 326, 276 and 107. Five of the six are strict subsets of the fullest capture; two agree exactly.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-14",
+   "severity": "medium",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "This session's own first parse put practice-status text into the game-status column for 5 rows (an extra comma on blank-injury rows). It was caught only by diffing against an independent peer capture of the same page, not by the parse itself.",
+   "detail": "This session's own first parse put practice-status text into the game-status column for 5 rows (an extra comma on blank-injury rows). It was caught only by diffing against an independent peer capture of the same page, not by the parse itself.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-15",
+   "severity": "medium",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Capture is a transcription of a rendered page, not of page bytes: hashes in data/capture_manifest.json cover the transcription, and the fetch window is bracketed between two known clock readings because the harness exposes no per-call time.",
+   "detail": "Capture is a transcription of a rendered page, not of page bytes: hashes in data/capture_manifest.json cover the transcription, and the fetch window is bracketed between two known clock readings because the harness exposes no per-call time.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-16",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The report page is rolling: the week control offers WEEK 1..WEEK 10 for 2026, so past weeks may be reachable - but this session did not test whether selecting an earlier week returns that week's report or the current one.",
+   "detail": "The report page is rolling: the week control offers WEEK 1..WEEK 10 for 2026, so past weeks may be reachable - but this session did not test whether selecting an earlier week returns that week's report or the current one.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-17",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Several namespaces in one repository answer the same brief in parallel, and at least four of them publish a decision-readiness or requirements register with different row counts and different verdicts for the same requirement.",
+   "detail": "Several namespaces in one repository answer the same brief in parallel, and at least four of them publish a decision-readiness or requirements register with different row counts and different verdicts for the same requirement.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/tree/main"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-availability-desk",
+   "file": "nfl-availability-desk/data/flags.json",
+   "id": "RF-18",
+   "severity": "high",
+   "theme": "Availability & injuries",
+   "title": "Namespace collision discovered at merge: session arena/e0ed20d1-own4 published its own nfl-readiness/ hub on main (pre-registration freeze 64a20e8, 2026-11-15T23:28:36Z) while this session was building a decision-readiness layer at the same path. The COORDINATION board's claim for this work was pushed later (f164fab), so this tree moved to nfl-availability-desk/ and nothing of theirs was edited.",
+   "detail": "Namespace collision discovered at merge: session arena/e0ed20d1-own4 published its own nfl-readiness/ hub on main (pre-registration freeze 64a20e8, 2026-11-15T23:28:36Z) while this session was building a decision-readiness layer at the same path. The COORDINATION board's claim for this work was pushed later (f164fab), so this tree moved to nfl-availability-desk/ and nothing of theirs was edited.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness/index.html"
+   ],
+   "page": "nfl-availability-desk/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-01",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "No official market price source exists",
+   "detail": "Every market open/close, market line and difference cell in this project is blank because the NFL publishes no betting lines. Blanks are policy, not omissions.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-02",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "All staking numbers use an ASSUMED -110 price",
+   "detail": "Straight-up side picks are not obtainable at -110 in real markets (favorites carry heavier juice). Staking ROI figures are mechanical applications of the declared assumption and must not be read as achievable returns. Points are held at 0 by amendment A1 until prices are verified.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-03",
+   "severity": "medium",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "105 of 137 feed rows are aggregate-verified only",
+   "detail": "Weeks 2-8 games were not re-read page-by-page this session; their correctness rests on 160/160 aggregate matches plus a 32-game line-by-line sample. Proposed full re-read: SG-02.",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-04",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Dates for weeks 2-8 are peer-transcribed",
+   "detail": "CR-04 (rest) uses feed dates; only weeks 1, 9, 10 dates were re-read this session.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-05",
+   "severity": "high",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Player-prop strategy S5 permanently blocked",
+   "detail": "No official player-prop prices exist; S5 cannot be validated, settled or scored. Blank cells everywhere props would appear.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-06",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 injury capture now covers all 8 of 8 official chunks (resolved 2026-11-16)",
+   "detail": "All 8 chunks of nfl.com/injuries/ (Week 10, 2026) were transcribed line by line: 347 player rows across 14 game sections and 28 clubs, every row with fetch clock and chunk attribution, blank cells preserved; closes the prior 2-of-8 gap. Raw transcript pinned with sha256 in injuries_week10_capture.json. Remaining gap: one report date only, no daily archive (CR-09). CAVEAT (FB-18): the official page mislabels players under wrong team headers, so team assignments are transcribed exactly as published and are not corrected or inferred.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-07",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "No official depth chart",
+   "detail": "nfl.com depth-chart routes do not resolve; 2nd/3rd/4th-string depth is published only where official prose states it (RD-01). All other depth cells blank.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-08",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 scores page hides some finals",
+   "detail": "The WAS-NYG final rendered as 'Hidden Score' on the scores page; the score was read from the official game page instead (24-21).",
+   "sources": [
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-09",
+   "severity": "medium",
+   "theme": "Stale or drifting values",
+   "title": "Open and close snapshots taken in the same session",
+   "detail": "Open = model trained through Week 9; close = trained through Week 10 TNF (one extra game). Drift is small (e.g., IND@HOU side -8.0 -> -7.9). A true pre-kickoff close requires a re-run before 2026-11-19 (SG-11).",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-10",
+   "severity": "medium",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Gate thresholds are project policy, not official rules",
+   "detail": "G1-G8 and D1 thresholds (n>=100, CI rules, placebo p<0.05) are design choices declared in gates.json.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-11",
+   "severity": "medium",
+   "theme": "Depth, starters & replacements",
+   "title": "Model has no quarterback, injury or depth features",
+   "detail": "Origination uses only official score-derived ratings; confirmed QB changes (e.g., MIA, SEA) cannot move the line (Q06/Q07).",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-12",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "Fitted HFA (+0.15 pts) is far below the historical norm",
+   "detail": "137-game sample; could be genuine for 2026 so far or estimation noise (Q11).",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-13",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "S2 total model underperforms the constant-mean baseline",
+   "detail": "Total MAE 21.6 (model) vs 11.1 (train mean) in walk-forward \u2014 early-week small samples and noisy off/def sums. Published as-is; S2 fails its gates.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-14",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "Post-hoc baseline comparison not pre-registered",
+   "detail": "Model 0.673 vs better-record 0.635 is a post-hoc diagnostic (amendment A2); the pre-registered G2 baseline remains 0.500.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-15",
+   "severity": "low",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Parallel session PR #93 touches shared files",
+   "detail": "Open PR #93 (nfl-command-center) also edits COORDINATION.md and index.html; conflicts will be resolved union-style at integration, no work discarded.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/pull/93"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-16",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "Placebo p reported as 0/500 draws",
+   "detail": "S1's placebo p is '<0.002' (0 of 500 placebos reached its ROI), displayed as such rather than as an exact zero probability.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-17",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "CR-04 p-values use a normal approximation of the t test",
+   "detail": "Disclosed in correlations.json method; exact t-distribution p-values are not computed (stdlib only).",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-book",
+   "file": "nfl-book/data/flags.json",
+   "id": "FB-18",
+   "severity": "medium",
+   "theme": "Depth, starters & replacements",
+   "title": "Official injury page team labels are inconsistent",
+   "detail": "nfl.com/injuries/ prints several players under the wrong club header (e.g., J.J. McCarthy under NYG, Micah Parsons and Zaire Franklin under GB, Mike Evans under SF, Kyler Murray under MIN, Myles Garrett under LAR). Rows in injuries_week10_capture.json are transcribed exactly as published under the team header shown; no team assignment is corrected or inferred, so no depth/injury deficiency may be derived from team labels alone.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-book/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-01",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "No market price archive exists",
+   "detail": "The NFL publishes no betting lines; no licensed feed is in this repository. All market columns (market spread/total/ML) are blank; S1-S4 ROI claims are impossible; gate G6 is BLOCKED.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-02",
+   "severity": "high",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "No official per-game player logs or prop prices in scope",
+   "detail": "Player-prop combos S5/S6 and all player-level correlations are blank and ungraded. Never estimated from proxies.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-03",
+   "severity": "low",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "7 unlabeled columns on the official team-stats page",
+   "detail": "The fetched rendering of nfl.com/stats/team-stats shows 15 numeric columns; only the first 8 (Att, Cmp, Cmp%, Yds/Att, Yds, TD, INT, Rate) could be verified by arithmetic identities and are transcribed. The rest are omitted rather than guessed.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-04",
+   "severity": "low",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Rewards are reputation points only",
+   "detail": "The leaderboard awards points within this research project; no monetary prize is funded.",
+   "sources": [],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-05",
+   "severity": "medium",
+   "theme": "Model, ratings & probabilities",
+   "title": "Fitted 2026 home-field advantage is near zero (+0.08)",
+   "detail": "Historical NFL HFA is about 2.5 points. Our fit on 137 verified 2026 games gives +0.08. Could be noise, 2026 specifics, or the disputed neutral flags (F-06). Published as fitted; no manual adjustment.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-06",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Peer archive flags 6 games as neutral without official confirmation",
+   "detail": "nfl-edge/data/games_2026.json marks SF@LA(W1), BAL@DAL(W3), IND@WAS(W4), PHI@JAX(W5), HOU@JAX(W6), PIT@NO(W7) neutral. Only NE@DET (Munich, W10) and MIN@SF (Mexico City, W11) are confirmed neutral from official pages fetched this session.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10",
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-07",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Official-source inconsistency: Lamar Jackson timeline",
+   "detail": "nfl.com news states 6-9 weeks (Nov 5 article) and 6-10 weeks (Nov 13 roundup) for the same injury.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-friday-nov-13",
+    "https://www.nfl.com/news/ravens-lamar-jackson-right-thumb-out-6-9-weeks-expects-to-return-this-season"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-08",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "No official depth chart exists",
+   "detail": "The league publishes no depth-chart page. 'Starter / 2nd / 3rd / 4th string' is therefore UNVERIFIED on every injury and depth row and is never inferred. Deficiency tracking uses absences (Out/DNP/Questionable) and official news starter statements only.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-09",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Injury report is a moving snapshot",
+   "detail": "Rows reflect the Week 10 report as fetched 2026-11-13 21:35 UTC. Statuses change daily; this page is a snapshot, not live.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-10",
+   "severity": "medium",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "2026 alone can never pass gate G2",
+   "detail": "G2 requires >=300 graded selections; a season has 272 games. Multi-season accumulation is required by design (Q7).",
+   "sources": [],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-11",
+   "severity": "low",
+   "theme": "Standings & records",
+   "title": "Game scores verified by reconciliation + spot checks, not full refetch",
+   "detail": "137 game rows are verified by (a) 0-mismatch aggregate reconciliation against the official standings page read 2026-11-13, (b) three game-page spot checks (NE@SEA W1, PHI@CHI W3, TEN@CIN W8) all exact, (c) the W10 final read directly. Each row still carries its official game-page URL for manual review.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-12",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Peer injury counts differ from this session's",
+   "detail": "nfl-edge (fetched 2026-11-12) recorded 275 players/28 clubs for Week 10; this session's 2026-11-13 transcription has 326 rows across 28 teams. Different fetch times and inclusion rules can both be correct.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-13",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "12 overlapping NFL workspaces",
+   "detail": "nfl/, nfl-audit/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-lab/, nfl-lines/, nfl-quant/, nfl-research/ (+ nfl-command/) each publish partial answers. Risk of contradictory readings for a reviewer.",
+   "sources": [],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-14",
+   "severity": "medium",
+   "theme": "Data rights & storage",
+   "title": "NFL data-use terms not reviewed",
+   "detail": "This project transcribes public page values with source links for research. nfl.com terms of service were not examined in this session.",
+   "sources": [],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-15",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "Totals model slightly worse than naive on holdout",
+   "detail": "Total MAE 11.35 vs naive 11.25 on weeks 8-10. Published unchanged rather than tuned.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-command",
+   "file": "nfl-command/data/flags.json",
+   "id": "F-16",
+   "severity": "low",
+   "theme": "Standings & records",
+   "title": "Standings snapshot includes the same-day TNF final",
+   "detail": "Standings captured 2026-11-13 21:25 UTC include WAS 24-21 NYG (Nov 12). Peer 2026-11-12 snapshots predate it; their WAS/NYG rows differ from ours and both are internally consistent.",
+   "sources": [
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-command/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-01",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "The NFL publishes no betting lines (re-confirmed live 2026-11-15). All market columns, residuals and ROI are blank, never inferred.",
+   "detail": "The NFL publishes no betting lines (re-confirmed live 2026-11-15). All market columns, residuals and ROI are blank, never inferred.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-02",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Staking ROI assumes a flat \u2212110 on every pick; real favorite prices are heavier. Staking numbers are mechanical, not achievable market returns.",
+   "detail": "Staking ROI assumes a flat \u2212110 on every pick; real favorite prices are heavier. Staking numbers are mechanical, not achievable market returns.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-03",
+   "severity": "",
+   "theme": "Standings & records",
+   "title": "32 games re-read line-by-line; the remaining 105 are aggregate-verified against the standings, not re-read game-by-game.",
+   "detail": "32 games re-read line-by-line; the remaining 105 are aggregate-verified against the standings, not re-read game-by-game.",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-04",
+   "severity": "",
+   "theme": "Depth, starters & replacements",
+   "title": "nfl.com team depth-chart pages return 404. Replacement-depth strings beyond official prose are blank; third-party charts are flagged THIRD-PARTY.",
+   "detail": "nfl.com team depth-chart pages return 404. Replacement-depth strings beyond official prose are blank; third-party charts are flagged THIRD-PARTY.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-05",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Official per-game player logs do not exist under the official-source rule, so prop variance and prop-pair correlations are blank.",
+   "detail": "Official per-game player logs do not exist under the official-source rule, so prop variance and prop-pair correlations are blank.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-06",
+   "severity": "",
+   "theme": "Availability & injuries",
+   "title": "No multi-season injury archive exists, so designation reliability and 'Questionable' calibration cannot be measured empirically.",
+   "detail": "No multi-season injury archive exists, so designation reliability and 'Questionable' calibration cannot be measured empirically.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-07",
+   "severity": "",
+   "theme": "Depth, starters & replacements",
+   "title": "Depth is published only where official text states the string; all other depth cells are blank + flagged.",
+   "detail": "Depth is published only where official text states the string; all other depth cells are blank + flagged.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-08",
+   "severity": "",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "The repository carries many partial, overlapping implementations of the same brief. This dashboard consolidates them; canonical choice is SG-08.",
+   "detail": "The repository carries many partial, overlapping implementations of the same brief. This dashboard consolidates them; canonical choice is SG-08.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-09",
+   "severity": "",
+   "theme": "Availability & injuries",
+   "title": "Only one availability/injury capture exists today; multi-day immutable snapshots are not yet retained (SG-06).",
+   "detail": "Only one availability/injury capture exists today; multi-day immutable snapshots are not yet retained (SG-06).",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-consolidated",
+   "file": "nfl-consolidated/data/flags.json",
+   "id": "FB-10",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "0 of 1,000 points awarded by design: G7 (verified prices) is blocked and the largest skill sample is 77 games (floor n\u2265300).",
+   "detail": "0 of 1,000 points awarded by design: G7 (verified prices) is blocked and the largest skill sample is 77 games (floor n\u2265300).",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-consolidated/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-01",
+   "severity": "blocks G7 and all staking ROI",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://operations.nfl.com/rules-officiating/2026-nfl-rulebook",
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-02",
+   "severity": "data quality",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-03",
+   "severity": "blocks Q05 and replacement-depth features",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/teams/kansas-city-chiefs/depth-chart"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-04",
+   "severity": "blocks Q03, Q15 and surprise injury features",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-05",
+   "severity": "model limitation",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/originated_lines.json"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-06",
+   "severity": "timing",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-07",
+   "severity": "none \u2014 by design",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/strategies.json"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-08",
+   "severity": "data quality",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-dashboard",
+   "file": "nfl-dashboard/data/flags.json",
+   "id": "F-09",
+   "severity": "timing / model output",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-dashboard/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-01",
+   "severity": "BLOCKING (for any price claim)",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "No official NFL source publishes betting lines, and no 2026 closing or prop prices exist anywhere in this repository.",
+   "detail": "The league publishes results, stats and injury reports. Prices live with licensed operators. The only prices in the repo are a third-party 1999-2026 closing-line archive inside the peer nfl-quant workspace. Consequence: every 2026 market, divergence, edge and ROI cell on this site is blank.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-02",
+   "severity": "BLOCKING (for prop claims)",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "No authorised player-level game logs and no prop prices, so player-prop strategies and prop correlations cannot be graded.",
+   "detail": "nfl.com publishes season-to-date player leaderboards only. A peer workspace graded props against a rolling-mean proxy line and its own flags record that the gate fails by construction. Those numbers are not imported here; the corresponding cells are blank.",
+   "sources": [
+    "https://www.nfl.com/stats/player-stats/"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-03",
+   "severity": "BLOCKING (for starter/backup claims)",
+   "theme": "Depth, starters & replacements",
+   "title": "The starter/backup question cannot be answered from official sources: nfl.com has no depth chart and no snap counts.",
+   "detail": "https://www.nfl.com/teams/washington-commanders/depth-chart/ returns a 404 (checked 2026-11-12). Club roster pages give position, number, height, weight, experience and college only. The injury page gives practice and game status only. No row on this site asserts that a player is a 2nd/3rd/4th-string replacement.",
+   "sources": [
+    "https://www.nfl.com/teams/washington-commanders/depth-chart/",
+    "https://www.nfl.com/teams/washington-commanders/roster"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-04",
+   "severity": "CAVEAT (model assumption)",
+   "theme": "Model, ratings & probabilities",
+   "title": "The 1.5-point home-field value used for the 2026 originated lines is a model assumption, not an official value.",
+   "detail": "Home-field advantage is not published by the NFL. Our walk-forward historical estimate exists, but a 2026-only estimate cannot be separated from it with 9 games per club. The number is disclosed on the own-lines page next to every line it produced.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/own_lines_2026.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-05",
+   "severity": "CAVEAT (result direction)",
+   "theme": "Prices & market lines",
+   "title": "Our model is less accurate than the closing line: spread MAE 10.502 vs 9.871 points; total 10.830 vs 10.470.",
+   "detail": "This is a negative result and it is the headline. It also means gate G4 fails for every strategy, so no strategy can be Qualified in this release. Presenting any of the originated lines as an edge would contradict the repository's own numbers.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-06",
+   "severity": "CAVEAT (measurement)",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "The model's 90% interval covers 89.34% of holdout games (fine) but the mean residual is +0.651 points (fails the pre-registered 0.5 bar).",
+   "detail": "The interval width is right and the centre is skewed toward the away team by about two-thirds of a point. Gate G3 therefore fails on the bias test only.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-07",
+   "severity": "IRREGULARITY (peer data)",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The peer 2026 game archive in nfl-lab/data/games_2026.csv was missing 16 of 136 games (all of Week 9 plus the Week 8 Monday game).",
+   "detail": "The file held 120 rows. Using it as-is would have understated every club's games played by one or two and corrupted any rate statistic. The 16 missing games were read from the official week pages and added in nfl-edge/data/games_2026.json (peer file left untouched); the combined archive now reconciles to the official standings with 0 mismatches.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/integrity.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-08",
+   "severity": "IRREGULARITY (peer data)",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The peer archive nfl-quant/data/predictions.csv contains 272 rows tagged season 2026, but the 2026 season is only at Week 10 (136 games played).",
+   "detail": "Rows for unplayed games may be fixtures, placeholders or mislabelled seasons. This session used that file only for 1999-2025 completed games with a recorded result, so no 2026 row affected any result published here. The inconsistency itself is unverified and is left for its owning session.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/predictions.csv"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-09",
+   "severity": "CAVEAT (provenance)",
+   "theme": "Standings & records",
+   "title": "Two datasets are corroborated by aggregate identity rather than by re-reading every page.",
+   "detail": "120 of the 136 game scores come from a peer archive whose rows carry the official game-page URL; they are accepted because the aggregate W-L-T and PF-PA over all 136 games reproduces the official standings exactly for all 32 clubs. That is strong but not identical to reading every game page. The 16 restored games were read directly.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-10",
+   "severity": "CAVEAT (transcription)",
+   "theme": "Standings & records",
+   "title": "The official team-statistics pages are HTML tables with no stable machine-readable export; every value on this site was transcribed by hand into JSON.",
+   "detail": "Transcription was defended with six league-wide identities (offence equals defence across the league for pass yards, pass TDs, rush yards, rush TDs, points and points against: 63,556 / 411 / 30,580 / 257 / 6,246 / 6,246). A single transposed digit inside a team row would not be caught by that test.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-11",
+   "severity": "CAVEAT (policy)",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Gate thresholds (300 bets, 60% positive seasons, |bias| < 0.5, p < 0.05) are research design choices, not official NFL values.",
+   "detail": "They are labelled as design choices and frozen in a versioned file before the backtest ran. They should be reviewed by a statistician before any reward is paid against them.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/gates.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-12",
+   "severity": "IRREGULARITY (repo hygiene)",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "The repository carries 53 MB of raw archived HTML/JSON in data/raw/, four tracked .pyc files, and about twenty parallel workspaces including three competing SF rental sites.",
+   "detail": "Only the first two are objectively wrong: .pyc files are build artefacts and data/raw/ is a scrape dump. The workspace duplication is a discoverability problem with a correctness risk, because two dashboards can disagree while both claim to be verified.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-13",
+   "severity": "CAVEAT (root page)",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "The repository root index.html is generated by verification/build.py and running it deletes any hand-added navigation link.",
+   "detail": "This session confirmed it: regenerating the site in a scratch copy drops the 'LOCAL ADDITION' rental links and mine. That is why this session appended its link additively and did not run the root generator. The root page belongs to the NBA final-integration session.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-14",
+   "severity": "CAVEAT (time)",
+   "theme": "Availability & injuries",
+   "title": "The injury dataset is a single snapshot taken 2026-11-12; the official report moves daily and game status is final only 90 minutes before kickoff.",
+   "detail": "Every availability row is timestamped and should be re-read before being used for anything. No automated daily capture exists yet (suggestion S-09).",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-15",
+   "severity": "CAVEAT (interpretation)",
+   "theme": "Prices & market lines",
+   "title": "A negative holdout ROI does not prove the model is worthless, and a positive one would not prove skill.",
+   "detail": "The strategies here are simple, publicly computable rules tested against efficient closing lines. The expected outcome is approximately -vig, which is what was found. The leaderboard is a rejection machine, and it rejected everything; that is the design working, not a bug.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-edge/data/results.json"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-edge",
+   "file": "nfl-edge/data/flags.json",
+   "id": "F-16",
+   "severity": "CAVEAT (legal)",
+   "theme": "Data rights & storage",
+   "title": "No jurisdiction, licence or terms-of-use decision exists for this project.",
+   "detail": "Data here is transcribed from the league's public pages for research. Redistribution, commercial use and any real-money activity would need terms review and local legal advice; none has been obtained.",
+   "sources": [
+    "https://www.ncpgambling.org/help-treatment/"
+   ],
+   "page": "nfl-edge/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-01",
+   "severity": "Blocking for claims",
+   "theme": "Prices & market lines",
+   "title": "No 2026 market lines exist in scope",
+   "detail": "The archive contains zero closing lines for 2026 and no official NFL odds publication was found. Every 2026 market comparison and closing-line-value metric is blank, not imputed.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-02",
+   "severity": "Disclosure",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "All lines, ratings and correlations are DERIVED, not official",
+   "detail": "They are computed by this repository from a third-party archive. A source link on a derived row points to the data/code, not to an NFL publication.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-03",
+   "severity": "Blocking for props",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Player props cannot be priced",
+   "detail": "No authorized 2026 player-level feed and no archived prop prices. S6/S7 publish no values and no ROI.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-04",
+   "severity": "Verified absence",
+   "theme": "Depth, starters & replacements",
+   "title": "No official depth chart was found (tested NFL.com URL returns 404)",
+   "detail": "The NFL.com depth-chart URL tested returns 404 and no official depth publication was located. Starter/backup/2nd/3rd/4th-string status is therefore blank for every defensive player; only named quarterback changes from official news are published.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-05",
+   "severity": "Contradiction in official sources",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Ravens listed as 'No Injuries Reported' while Lamar Jackson is on IR",
+   "detail": "The Week 10 injury page says Baltimore has no injuries reported; an NFL.com roundup dated Nov 5 says Baltimore officially placed Jackson on injured reserve. Both are official. Unresolved; no Ravens line adjustment is made.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-06",
+   "severity": "Snapshot limit",
+   "theme": "Availability & injuries",
+   "title": "Only six players had a formal game designation at capture",
+   "detail": "Captured Thursday. Most players had practice status only; final designations appear later. The site must not be read as a kickoff-day inactive list.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-07",
+   "severity": "Data gap",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "The injury table's cause column is blank for most players",
+   "detail": "Practice status is published but the injury cause is often empty, so cause-specific analysis is not possible from the table alone.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-08",
+   "severity": "Repo duplication",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Five earlier NFL workspaces remain live alongside this hub",
+   "detail": "nfl/, nfl-lab/, nfl-quant/, nfl-research/ and nfl-decisions/ all present NFL material, with different scopes and different weeks. nfl-lab and nfl-quant still show Week 8/9 lines as current, and two decision registers now exist (nfl-decisions/ and this hub). No canonical marker.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-09",
+   "severity": "Dead citations",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Two NFL.com URLs cited by nfl/ return 404",
+   "detail": "https://www.nfl.com/news/nfl-injury-report-policy-2026 and https://www.nfl.com/news/nfl-2026-schedule-release both return '404 - Flag on the Play'. They must not be reused.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-2026-schedule-release",
+    "https://www.nfl.com/news/nfl-injury-report-policy-2026"
+   ],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-10",
+   "severity": "Stale output",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Own lines for Week 8 and Week 9 are still presented on older pages",
+   "detail": "nfl-lab publishes Week 8/9 lines and nfl-quant publishes Week 9 lines without a staleness banner. Week 10 is the current slate.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-11",
+   "severity": "Hygiene",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Repository ships 53 MB of raw dumps and four tracked .pyc files",
+   "detail": "Measured on 2026-11-12. This is unrelated to NFL accuracy but affects clone size and reviewability.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-12",
+   "severity": "Resolved trap",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Winning percentage with ties is not W/G",
+   "detail": "NFL.com uses (W + T/2)/G. Using W/G produces two false mismatches (NYG, WAS). Documented so a future reviewer does not 'fix' a correct value.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-13",
+   "severity": "Resolved mapping",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Team codes differ between sources",
+   "detail": "Archive uses LA and AZ; NFL.com uses LAR and ARI. Mapped explicitly; no rows dropped.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-14",
+   "severity": "Method limit",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Correlation confidence intervals ignore week clustering",
+   "detail": "Fisher-z intervals treat games as independent. They are indicative, not exact; the backtest intervals do cluster by week.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-15",
+   "severity": "Gate failure",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "No strategy passes the forward-replication gate",
+   "detail": "G8 requires a full prospective season. Nothing can be rated above provisional; the leaderboard awards zero points.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-16",
+   "severity": "Mismatch",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "A prior NFL page cites the NBA injury report as an NFL policy cross-reference",
+   "detail": "nfl/ links official.nba.com for an NFL injury-policy point. The leagues have different policies; the link does not support the claim.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-17",
+   "severity": "Assumption",
+   "theme": "Prices & market lines",
+   "title": "Parlay payouts are assumed, not archived",
+   "detail": "+164 for a two-team parlay is a standard-price assumption. G7 fails by construction; no parlay ROI may be read as a market result.",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-hub",
+   "file": "nfl-hub/data/flags.json",
+   "id": "F-18",
+   "severity": "Coverage",
+   "theme": "Depth, starters & replacements",
+   "title": "Replacement starters are proven only after the game",
+   "detail": "Official game books identify the player who actually started and, where printed, his depth code (for example 3QB). They are published after the game, so they support verification and back-testing, not a pre-kickoff line. Only two examples were transcribed; the league-wide ledger does not exist yet (suggestion S-16).",
+   "sources": [],
+   "page": "nfl-hub/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-01",
+   "severity": "irregularity",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "nfl-intel/ was orphaned from the root landing page",
+   "detail": "grep -c nfl-intel index.html returned 0 before this session's navigation repair: the 16-page nfl-intel site (merged via PR #70) was reachable only by direct URL, even though it was one of the NFL namespaces then in the repository. Fixed by adding it to the canonical generator's navigation.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-intel/index.html"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-02",
+   "severity": "defect found",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Canonical generator silently dropped hand-added navigation links",
+   "detail": "Running python3 verification/build.py (the generator behind the Validate canonical NBA dashboard workflow) regenerated index.html WITHOUT the hand-added nfl-decision/, nfl-edge/ and nfl-lines/ nav groups \u2014 verified locally by running it and observing the diff, then reverting. Any future regeneration would have unpublished those links (the recurring I1/F-13 defect class). Fixed by moving every hand-added link into the generator's NAV.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-03",
+   "severity": "needs review",
+   "theme": "Stale or drifting values",
+   "title": "Stale PR #68 taken over; its namespace count is already outdated",
+   "detail": "PR #68 (nfl-decision namespace-count fix, five -> eight) had no commits for over 24 hours and was taken over per the board stale-claim rule; merged 2026-11-13T22:07Z as merge commit 0c2da76. By merge time the repository held fifteen peer NFL namespaces, so the merged text says eight \u2014 the count keeps drifting as sessions add namespaces, and suggestion S04 in nfl-decision (adopt one canonical dashboard) remains the durable fix.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/pull/68"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-04",
+   "severity": "irregularity",
+   "theme": "Standings & records",
+   "title": "Coordination log statement did not match the file",
+   "detail": "Session arena/40caaa81-own4's log (COORDINATION.md, merged via PR #76) states the root index.html links nfl-intel/. The file at that commit contained zero matches for nfl-intel. Their record was not edited; the discrepancy is published here and the underlying gap is fixed by INT-01.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-05",
+   "severity": "unverified",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "nfl-quant's publish-verification step was not run",
+   "detail": "nfl-quant/pipeline/07_verify_publish.py requires pandas (absent in this environment) and writes timestamped artifacts (fetched_utc = now), so it is not a read-only verifier \u2014 running it would dirty peer files. nfl-quant's published pages were instead covered by the repository-wide link/row audit and the bounded-audit test suite, both of which pass. nfl-quant's numeric spot-checks are therefore NOT re-verified by this session.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/07_verify_publish.py"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-06",
+   "severity": "unverified",
+   "theme": "Fixtures, schedule & venues",
+   "title": "nfl-lab standings are an older snapshot (through Week 8)",
+   "detail": "nfl-lab/data/standings_2026.csv matches the live official page for only 2 of 32 clubs because it is an earlier snapshot (BUF 6-1-0 vs 7-1-0 live). Its own peers documented that this capture also omits CHI 34 - SEA 17 (their flag F-03). Internal consistency still holds (sum W = sum L, sum PF = sum PA). Not judged against live; the file's own capture governs.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lab/data/standings_2026.csv"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-07",
+   "severity": "irregularity",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Arizona club abbreviation differs across files (ARI vs AZ)",
+   "detail": "nfl-hub stores Arizona as ARI (the official club code) while nfl-audit, nfl-intel, nfl-lines and nfl-lab store AZ (the logo-slug form used on nfl.com image URLs). All W/L/T/PF/PA values are identical; only the key differs. The comparison script normalises the two keys before judging.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-08",
+   "severity": "scope note",
+   "theme": "Stale or drifting values",
+   "title": "Injury reports are time-sensitive; only the frozen Thursday report was judged",
+   "detail": "nfl.com/injuries/ serves the current week and practice/game statuses change Wednesday through Saturday. The Thursday-game tables (WAS, NYG \u2014 game played, report frozen) were compared field-by-field: 100/100 match. Sunday-game statuses captured on 2026-11-12 were NOT re-judged against the 2026-11-13 page because day-over-day drift is expected and cannot be separated from error without a dated archive.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-09",
+   "severity": "needs review",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "45 published table rows still carry no source link",
+   "detail": "The bounded audit (verification-2026-11-05) reports 148 pages with 0 broken local links but 45 rows without a source link \u2014 the pre-existing finding previously published as V-08, located in older NFL pages outside this session's scope. This session's own pages are 100% source-linked and its verifiers enforce that.",
+   "sources": [
+    "https://sassnarep3-star.github.io/Own4/verification-2026-11-05/coverage.html"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-10",
+   "severity": "needs review",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Fifteen overlapping NFL namespaces remain unconsolidated",
+   "detail": "nfl/, nfl-research/, nfl-lab/, nfl-quant/, nfl-lines/, nfl-edge/, nfl-decision/, nfl-decisions/, nfl-hub/, nfl-audit/, nfl-intel/, nfl-origination/, nfl-own/, nfl-command/ and nfl-arena/ all publish NFL research. Four of them (nfl-origination, nfl-own, nfl-command, nfl-arena) arrived while this session worked (PRs #85/#86 and two direct merges) and were folded into the same single category. This integration makes every one reachable from one organised NFL group on the root landing page (no link removed, nav proven a superset of both sides) but does not merge content \u2014 the consolidation suggest",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-11",
+   "severity": "blocked",
+   "theme": "Prices & market lines",
+   "title": "No official source publishes betting prices \u2014 validation gate G7 cannot pass",
+   "detail": "Re-confirmed 2026-11-13: no official NFL source publishes spread/total/moneyline prices (the nfl.com odds control renders no values in server HTML \u2014 see nfl-decision F-12). Every repository-wide strategy leaderboard therefore remains at 0 reward-eligible strategies and 0 rewards, by design, not by omission.",
+   "sources": [
+    "https://www.nfl.com/games"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-12",
+   "severity": "needs review",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Root footer still describes the site as NBA-only",
+   "detail": "The canonical footer rendered by verification/build.py reads 'Own4 \u2014 NBA line-origination research' while the navigation now carries eleven NFL namespaces plus rental sections. Cosmetic mismatch only; wording left unchanged because it is the identity line of the canonical NBA dashboard's owners.",
+   "sources": [
+    "https://sassnarep3-star.github.io/Own4/"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-integration",
+   "file": "nfl-integration/data/flags.json",
+   "id": "INT-13",
+   "severity": "defect found",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "main carried a duplicated NFL nav block (hand-merge artifact)",
+   "detail": "At merge time origin/main index.html listed the whole \"NFL audit\" block twice \u2014 the signature of conflicting hand edits to generated output. The consolidated generator-owned group replaced it; the regenerated page contains each href exactly once (verified: nfl-audit/index.html x1, single NFL research group header).",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/index.html"
+   ],
+   "page": "nfl-integration/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-01",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Pythagorean exponent 2.37",
+   "detail": "Literature constant used for Pythag metrics; NOT an official NFL value. Affects pythag/luck_delta columns only.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-02",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Margin sigma 13.45",
+   "detail": "Historical NFL margin standard deviation (literature); used for P(home) and fair moneylines. UNVERIFIED vs official source.",
+   "sources": [
+    "https://www.nfl.com/scores"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-03",
+   "severity": "",
+   "theme": "Model, ratings & probabilities",
+   "title": "Fair moneylines",
+   "detail": "Derived from model v1 via F-02; no market comparison possible (G7 blocked); informational only, NOT executable prices.",
+   "sources": [
+    "https://www.nfl.com/scores"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-04",
+   "severity": "",
+   "theme": "Fixtures, schedule & venues",
+   "title": "NE\u2013DET venue (Munich international)",
+   "detail": "Schedule page shows a 'Munich 2026' banner above the NE\u2013DET listing; venue not independently re-verified; line impact assumed neutral-site via model (no explicit HFA term).",
+   "sources": [
+    "https://www.nfl.com/games/patriots-at-lions-2026-reg-10"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-05",
+   "severity": "",
+   "theme": "Depth, starters & replacements",
+   "title": "Injury report lacks starter/backup mapping",
+   "detail": "Official report gives practice participation, not depth order. All 'replacement' and unit-deficiency implications in this dashboard are analytical proposals, not official fact.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-06",
+   "severity": "",
+   "theme": "Availability & injuries",
+   "title": "Game statuses largely unlisted",
+   "detail": "Only 6 of ~250 report rows carry a game_status (Out/Questionable). 'DNP' \u2260 Out. Do not treat any DNP row as ruled-out for Sunday.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-07",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Correlations are season-to-date, n=32, in-sample",
+   "detail": "r(net_ppg,pct)=+0.876 etc. describe this season only; not predictive validation; BH-FDR applied across the 6 tests.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-08",
+   "severity": "",
+   "theme": "Prices & market lines",
+   "title": "No official odds/line source \u2014 all lines unverifiable vs market",
+   "detail": "G7/G8 blocked; ROI, CLV, beat-market claims impossible; every originated line is model output, not advice.",
+   "sources": [
+    "https://www.nfl.com/scores"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-09",
+   "severity": "",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Sample size: 136 team-games played league-wide; zero strategy \u2265 300 graded games",
+   "detail": "G3 FAIL for every strategy; all rewards = 0; leaderboard publishes zeros by design.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-10",
+   "severity": "",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 includes Thursday (already played by some readers) \u2014 model committed before kickoff but results may leak into viewing",
+   "detail": "Pre-registration is by commit time; TNF W10-01 (WAS@NYG, 2026-11-12 8:15PM ET) may conclude before this page is read. Treat lines as research, not picks.",
+   "sources": [
+    "https://www.nfl.com/games/commanders-at-giants-2026-reg-10"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-11",
+   "severity": "",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Repo hygiene: 4 tracked .pyc files under own4-dashboard/scripts/__pycache__/",
+   "detail": "Despite .gitignore covering *.pyc, these were committed. Harmless content but irregular; also ~53MB of tracked raw HTML dumps under data/raw/ and no LICENSE file.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-12",
+   "severity": "",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Parallel duplicate dashboards in repo (nfl/, nfl-lab/, nfl-quant/, nfl-research/, nfl-intel/)",
+   "detail": "Multiple sessions produced overlapping NFL outputs; canonical entry point unresolved; root index.html rebuild locked by NBA canonical workflow.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-13",
+   "severity": "",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Standings cross-check between official pages",
+   "detail": "2026-11-12 standings and Week 10 scores page records agree for all 28 teams playing this week (spot-verified: WAS 2-5-1, NYG 5-2-1, CHI 7-2, DEN 7-2, PHI 2-7, TB 3-6). Drives/variance beyond team-game level not re-derived.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-14",
+   "severity": "",
+   "theme": "Standings & records",
+   "title": "nfl-lab peer data used for one audit check",
+   "detail": "nfl-lab/data/games_2026.csv (120 games) was re-checked for internal consistency only (0 mismatches vs its standings). Its provenance beyond file-stated nfl.com game URLs was NOT independently re-verified line-by-line.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-15",
+   "severity": "",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Bye 4th team and international venue details",
+   "detail": "Bye teams CHI, DEN, PHI are visible in the scores page's 'Teams on Bye' section; the 4th entry rendered as a truncated 'T\u2026' and was confirmed as TB (3-6) via the same page's later chunk. NE\u2013DET appears under a 'Munich 2026' international banner; venue not re-verified against an official announcement.",
+   "sources": [
+    "https://www.nfl.com/scores"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-intel",
+   "file": "nfl-intel/data/flags.json",
+   "id": "F-16",
+   "severity": "",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Rewards are virtual-only; no cash, no eligibility to claim prizes",
+   "detail": "Leaderboard pays nothing real; 'rewards' is a review/selection mechanism until Q-05/Q-06/Q-07/Q-11 are resolved with counsel and budget.",
+   "sources": [
+    "https://www.ncpgambling.org/help-treatment"
+   ],
+   "page": "nfl-intel/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L1",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "No betting-line data exists in any official source checked",
+   "detail": "Price-snapshot store, market columns, closing-line gate G6 and all ROI/CLV figures are BLANK. Market lines are not published on the nfl.com pages checked (standings, schedules, injuries, game pages).",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11",
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L2",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "No official starter/backup depth chart found",
+   "detail": "Replacement depth rank, replacement player and depth tier are blank on every Week 10 row. The injury report shows practice and game status only.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L3",
+   "severity": "high",
+   "theme": "Model, ratings & probabilities",
+   "title": "Model signal not proven; holdout too small",
+   "detail": "Holdout n=30; bootstrap 95% CI for MAE improvement [-2.47, 3.74] includes 0; 0 of 6 strategies pass all gates.",
+   "sources": [
+    "https://www.nfl.com/standings/"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L4",
+   "severity": "medium",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Root generator drops hand-added NFL links (peer-logged defect, still present)",
+   "detail": "verification/build.py regenerates index.html without hand-added NFL groups; nfl-ledger is NOT linked from the root page (request R-L1 logged to the integration session). Verified by grep: no hits for \"nfl-ledger\" in index.html.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L5",
+   "severity": "medium",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "\"Gates frozen before backtest\" cannot be confirmed from this clone",
+   "detail": "nfl-command/data/gates.json states it was frozen at 2026-11-13T21:50Z before the backtest. In this clone the file's git history shows only the merge commit 02a8bdf (2026-11-14T07:27:34+09:00), so the earlier commit timing is not independently checkable here. Not used as evidence.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L6",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 injury page: Sunday Nov 15 games listed under \"Week 10\"",
+   "detail": "Checked against the official schedule convention: Week 10 TNF was Nov 12 and Week 11 starts Nov 19 (TNF). The Sunday Nov 15 games are Week 10, so the label is consistent. Recorded to show it was checked, not as an error.",
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L7",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Abbreviation mismatch: Arizona is \"AZ\" on nfl.com, \"ARI\" in common usage",
+   "detail": "The stored slate correctly uses AZ. A reviewer comparing with other feeds must map ARI\u2192AZ. No value changed.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L9",
+   "severity": "high",
+   "theme": "Availability & injuries",
+   "title": "Two Week 10 injury rows differ from the live nfl.com report (2026-11-14)",
+   "detail": "Kerby Joseph (DET, S, knee): stored practice \"Full\" vs live \"Did Not Participate In Practice\" (game status Out in both). Mansoor Delane (KC, CB): stored injury and game status blank vs live \"Shoulder\" / \"Questionable\". Either the report was updated after the 2026-11-13 capture or the stored row is wrong. Not corrected here: the stored file is peer data and the live page is not a snapshot of a fixed time. Re-capture needed.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-ledger",
+   "file": "nfl-ledger/data/flags.json",
+   "id": "F-L8",
+   "severity": "medium",
+   "theme": "Prices & market lines",
+   "title": "Fair moneyline values are model-derived, not market prices",
+   "detail": "American odds on the origination page are converted from the model probability. They are shown as a fair line only; the market column is blank.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/own_lines_week11.json"
+   ],
+   "page": "nfl-ledger/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-01",
+   "severity": "high",
+   "theme": "Fixtures, schedule & venues",
+   "title": "NFL.com rendered Week 5 2026 scores as 'Hidden Score'",
+   "detail": "The official score page https://www.nfl.com/scores/2026/REG5 displayed every Week 5 2026 game with the literal text 'Hidden Score' and status 'Final'. No numeric value could be read, so no comparison against the archive was possible for that week.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/REG5"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-02",
+   "severity": "high",
+   "theme": "Capture, hashing & provenance",
+   "title": "No official NFL source publishes betting lines",
+   "detail": "The NFL does not publish spreads, totals, moneylines or prop lines. Every market number on this site comes from a third-party archive pinned to a commit and recorded in data/provenance.json.",
+   "sources": [
+    "https://github.com/nflverse/nfldata",
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-03",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "Depth-chart rank is not published in the official injury report",
+   "detail": "The official report gives Player / Position / Injury / Practice Status / Game Status. It never says whether a player is a starter, a 2nd, 3rd or 4th string replacement. Every depth-rank cell on this site is therefore blank.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-04",
+   "severity": "high",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "No verifiable player-prop data or prop prices were available",
+   "detail": "Prop combos are specified as an engine (correlation-aware joint pricing, gates, staking) but no official or verifiable source for player prop lines or player game logs was reachable in this session.",
+   "sources": [
+    "https://www.nfl.com/stats/"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-05",
+   "severity": "medium",
+   "theme": "Data rights & storage",
+   "title": "Archive licence not reviewed line by line",
+   "detail": "The third-party archive is pinned to commit 6ea0be6dd9bfc95c818c05568753bc70f1986ea2 with its download URL recorded. Its licence and data terms were not read in this session.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-06",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Weather fields are unverified",
+   "detail": "Wind, temperature, roof and surface come from the third-party archive and have not been matched to a meteorological or official primary source.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-07",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Only 45 of 4,055 evaluated games were re-read from the official source",
+   "detail": "Three complete 2026 weeks (1, 8 and 9) were re-read from NFL.com and matched 45 of 45. That is 1.1% of the evaluation window. No pre-2026 game was re-read.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/REG1",
+    "https://www.nfl.com/scores/2026/REG8",
+    "https://www.nfl.com/scores/2026/REG9"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-08",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Linear rest term produces a large bye-week effect",
+   "detail": "The fitted rest coefficient is 0.71 points of home margin per day of rest differential. For Week 10 PIT @ CIN, Pittsburgh's bye (14 days vs Cincinnati's 7) contributes 4.94 points, which is the main reason the model's line sits 7.06 points away from the market.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/REG10"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-09",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Eleven overlapping NFL namespaces exist in this repository",
+   "detail": "The repository now contains eleven directories whose names begin with nfl: nfl/, nfl-lab/, nfl-quant/, nfl-research/, nfl-decision/, nfl-decisions/, nfl-edge/, nfl-hub/, nfl-intel/, nfl-audit/ and this one, nfl-lines/. Three of them appeared while this session was running, from peer sessions. A reader cannot tell which NFL output is authoritative. Those directories belong to peer sessions and this session has not edited any of them.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-10",
+   "severity": "medium",
+   "theme": "Prices & market lines",
+   "title": "Week 10 market lines are current, not closing",
+   "detail": "For Week 10 the archive holds the latest available number as of 2026-11-12, several days before kick-off. It is not a closing line. The model's 'edge' for Week 10 is measured against a number that will move.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/REG10"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-11",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Model has no quarterback or injury information",
+   "detail": "The forecast uses final scores, rest, venue and date only. It does not know who is starting at quarterback. Week 10 MIA @ IND shows the cost: the market total is 38.5, the model's is 46.68, and the official page on the same day states Miami placed QB Malik Willis on injured reserve with Kyle McCord in line for his first start.",
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-12",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "LAC @ BAL Week 10 injury report lists 'No Injuries Reported' for both clubs",
+   "detail": "The official report shows zero listed players for both teams in the Monday night game, while the other 13 games list between 4 and 16 players each. This is transcribed exactly as published.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-13",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Some injury-report player/club pairings could not be independently verified",
+   "detail": "The official Week 10 report lists several players under clubs they are not commonly associated with in older references (for example Marvin Harrison Jr., David Montgomery and Wyatt Teller appear on the Houston entry). Rosters change every season and no official, machine-readable roster was fetched in this session, so the pairings are transcribed as published and not altered.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-14",
+   "severity": "low",
+   "theme": "Model, ratings & probabilities",
+   "title": "Fitted home-field advantage is 1.58 points, below the commonly cited range",
+   "detail": "The ridge fit returns 1.575 points of home-field advantage with a rest term fitted alongside it. Published estimates for the modern NFL usually sit higher.",
+   "sources": [],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-15",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Game-page URLs are pattern-derived, not individually fetched",
+   "detail": "Rows link to per-game pages of the form https://www.nfl.com/games/{away}-at-{home}-2026-reg-{week}. That pattern was observed on the official schedule and injury pages read during this session, but each individual game URL was not separately fetched.",
+   "sources": [
+    "https://www.nfl.com/games/{away}-at-{home}-2026-reg-{week}.",
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/schedules/2026/REG10"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-lines",
+   "file": "nfl-lines/data/flags.json",
+   "id": "IR-16",
+   "severity": "high",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 10 slate still lists Washington\u2013New York after the official game went final",
+   "detail": "The committed 2026 Week 10 snapshot was retrieved at 2026-11-12T00:00:00Z. On 2026-11-13, the official NFL Week 10 score page showed Washington 24\u201321 New York Giants, Final. Yet data/derived/own_lines_week10.json still includes game 2026_10_WAS_NYG as an upcoming line (model spread +0.99, total 45.47), and data/official/injuries_week10_2026.json retains the pre-game team records (WAS 2-5-1; NYG 5-2-1). The live official league standings showed 3-5-1 and 5-3-1, respectively.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/REG10",
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-lines/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-market",
+   "file": "nfl-market/data/derived/flags.json",
+   "id": "MK-01",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "The NFL publishes no prices at all, so every price here is third-party",
+   "detail": "https://www.nfl.com/schedules/2026/by-week/week-10 carries kickoff time and network and no number of any kind. There is no spread, total, moneyline or prop price anywhere on nfl.com. Every price in this namespace therefore comes from one commercial provider, DraftKings, syndicated through ESPN's public endpoint, and is labelled third-party on every row.",
+   "sources": [
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds",
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-market/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-market",
+   "file": "nfl-market/data/derived/flags.json",
+   "id": "MK-02",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "13 of 14 week-10 games have no closing line, because they have not played",
+   "detail": "A closing line exists only once a market closes. At read time one week-10 game had finished (WAS @ NYG, 2026-11-12) and thirteen had not. The store holds both snapshots for all fourteen, but for the thirteen unplayed games the 'close' is the provider's current number, which will keep moving until kickoff.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-10"
+   ],
+   "page": "nfl-market/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-market",
+   "file": "nfl-market/data/derived/flags.json",
+   "id": "MK-03",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The store covers week 10 only; earlier weeks were not archived",
+   "detail": "Fifteen week-9 games are listed in this namespace with no archived prices. Their open/close data exists at the provider but was not read and transcribed this round, and the rule here is that a row is only published if its value was actually read. Writing 15 plausible payloads from expectation would repeat exactly the mistake DP-05 records.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-9"
+   ],
+   "page": "nfl-market/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-market",
+   "file": "nfl-market/data/derived/flags.json",
+   "id": "MK-04",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "Caught: four games were attached to the wrong prices by ordering",
+   "detail": "The first build mapped the provider's fourteen odds payloads onto the nfl.com slate by position in the list. The provider returns a different order than nfl.com prints, so four games silently received another game's prices. None of them errored: every number looked plausible. The check that caught it was IC-01, which compares each stored home spread against the provider's own 'Team -X' details string.",
+   "sources": [
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds"
+   ],
+   "page": "nfl-market/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-market",
+   "file": "nfl-market/data/derived/flags.json",
+   "id": "MK-05",
+   "severity": "medium",
+   "theme": "Prices & market lines",
+   "title": "No player-prop prices are stored, although the provider exposes them",
+   "detail": "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds/100/propBets reports a count of 730 items for the single game that has been played, paged 25 at a time. Reading one page showed the same athlete/type pair repeated with identical open and current targets. Archiving one page would have produced a table that looks like a prop market and is not one.",
+   "sources": [
+    "https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/401873052/competitions/401873052/odds/100/propBets"
+   ],
+   "page": "nfl-market/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M1",
+   "severity": "cross-cutting",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata",
+    "https://www.nfl.com/schedules/"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M2",
+   "severity": "high",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata/blob/master/data/initial_lines.csv",
+    "https://github.com/nflverse/nfldata/blob/master/data/sc_lines.csv"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M3",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M4",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M5",
+   "severity": "high",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.espn.com/nfl/depth",
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M6",
+   "severity": "review-recommended",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.espn.com/nfl/depth",
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M7",
+   "severity": "review-recommended",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M8",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M9",
+   "severity": "headline finding",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-markets",
+   "file": "nfl-markets/data/flags.json",
+   "id": "FLAG-M10",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "",
+   "detail": "",
+   "sources": [
+    "https://github.com/nflverse/nfldata/blob/master/data/closing_lines.csv"
+   ],
+   "page": "nfl-markets/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-01",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "nfl.com/players/<slug>/stats/logs/ publishes per-game logs and they reconcile to season totals (IC-15, IC-16).",
+   "detail": "nfl.com/players/<slug>/stats/logs/ publishes per-game logs and they reconcile to season totals (IC-15, IC-16).",
+   "sources": [
+    "https://www.nfl.com/players/drake-maye/stats/logs/"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-02",
+   "severity": "",
+   "theme": "Standings & records",
+   "title": "The Thursday game finished 24-21 on 2026-11-12; live standings show WAS 3-5-1 / NYG 5-3-1 including it. The injury page was not refreshed after the game.",
+   "detail": "The Thursday game finished 24-21 on 2026-11-12; live standings show WAS 3-5-1 / NYG 5-3-1 including it. The injury page was not refreshed after the game.",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/REG10"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-03",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "JAX 8.6 vs 8.546, KC 7.8 vs 7.745, PIT 6.4 vs 6.452, SEA 7.2 vs 7.253 - both directions, so it is not a rounding rule. The published column is recorded but never used; the site publishes its own yds/att (IC-07).",
+   "detail": "JAX 8.6 vs 8.546, KC 7.8 vs 7.745, PIT 6.4 vs 6.452, SEA 7.2 vs 7.253 - both directions, so it is not a rounding rule. The published column is recorded but never used; the site publishes its own yds/att (IC-07).",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-04",
+   "severity": "",
+   "theme": "Depth, starters & replacements",
+   "title": "The club depth-chart URL returns 404; the roster page carries no depth rank. Availability is published by position, never as a starter/backup label.",
+   "detail": "The club depth-chart URL returns 404; the roster page carries no depth rank. Availability is published by position, never as a starter/backup label.",
+   "sources": [
+    "https://www.nfl.com/teams/new-england-patriots/depthchart"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-05",
+   "severity": "",
+   "theme": "Model, ratings & probabilities",
+   "title": "7,548 games with closing spread and total; used for research only.",
+   "detail": "7,548 games with closing spread and total; used for research only.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-06",
+   "severity": "",
+   "theme": "Prices & market lines",
+   "title": "The NFL publishes no lines; no licensed price archive is in scope.",
+   "detail": "The NFL publishes no lines; no licensed price archive is in scope.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/REG10"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-07",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Measured 2017-2025 home margin, then multiplied by 0.85 to shrink toward published ranges. The raw value and the used value are both published.",
+   "detail": "Measured 2017-2025 home margin, then multiplied by 0.85 to shrink toward published ranges. The raw value and the used value are both published.",
+   "sources": [],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-08",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Sample sizes are printed next to every r. Nothing is claimed beyond those samples.",
+   "detail": "Sample sizes are printed next to every r. Nothing is claimed beyond those samples.",
+   "sources": [
+    "https://www.nfl.com/players/jahmyr-gibbs/stats/logs/"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-09",
+   "severity": "",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "He is outside the top-25 leaderboard, so his season columns are blank and only his game log is published (IC-16).",
+   "detail": "He is outside the top-25 leaderboard, so his season columns are blank and only his game log is published (IC-16).",
+   "sources": [
+    "https://www.nfl.com/players/a-j-brown/stats/logs/"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-10",
+   "severity": "",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Columns 1-8 and 14-15 are proven by arithmetic; columns 9-13 (first downs, 20+, 40+, long) are omitted rather than guessed.",
+   "detail": "Columns 1-8 and 14-15 are proven by arithmetic; columns 9-13 (first downs, 20+, 40+, long) are omitted rather than guessed.",
+   "sources": [
+    "https://www.nfl.com/stats/team-stats/offense/passing/2026/reg/all"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-11",
+   "severity": "",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Reproduced 2026-11-13 on 553c3f0: 14 files lose the nfl-lines nav block.",
+   "detail": "Reproduced 2026-11-13 on 553c3f0: 14 files lose the nfl-lines nav block.",
+   "sources": [],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-12",
+   "severity": "",
+   "theme": "Prices & market lines",
+   "title": "51.35% for two-leg, 52.38%... every threshold here moves with the price.",
+   "detail": "51.35% for two-leg, 52.38%... every threshold here moves with the price.",
+   "sources": [
+    "https://www.ncpgambling.org/help-treatment/"
+   ],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-own",
+   "file": "nfl-own/data/derived/flags.json",
+   "id": "F-13",
+   "severity": "",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Backtest-only evidence cannot exclude luck; see luck.json L4.",
+   "detail": "Backtest-only evidence cannot exclude luck; see luck.json L4.",
+   "sources": [],
+   "page": "nfl-own/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-01",
+   "severity": "policy",
+   "theme": "Prices & market lines",
+   "title": "All betting lines (spread/total/moneyline) are THIRD-PARTY archive values",
+   "detail": "No official NFL source publishes betting lines. Values come from nflverse/nfldata (closing lines archive). Official-source column is blank + UNVERIFIED for every market value; archive link provided instead.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-02",
+   "severity": "policy",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "All correlations, backtest ROI, ratings and own lines are COMPUTED, not official",
+   "detail": "No official source publishes these coefficients. They are reproducible from the cited archives via nfl-quant/pipeline/. Labeled DERIVED/COMPUTED everywhere.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/tree/main/nfl-quant/pipeline"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-03",
+   "severity": "blocked",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "2026 player props: BLOCKED",
+   "detail": "No authorized 2026 player-level feed in scope. Player research uses 2021-2022 only. 2026 prop lines left blank.",
+   "sources": [
+    "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-04",
+   "severity": "research-only",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Prop singles use a PROXY market (rolling-mean line)",
+   "detail": "Gate G7 fails by construction. Results measure signal vs a naive proxy, NOT vs a sportsbook. RB1 +3.6% ROI vs proxy is not a betting edge.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/05_props.py"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-05",
+   "severity": "research-only",
+   "theme": "Prices & market lines",
+   "title": "Same-game parlay prices not archived",
+   "detail": "S5/S7 are fair-price monitors only. Books reprice SGPs for correlation; without archived SGP prices no edge can be claimed (G7 fails).",
+   "sources": [
+    "https://www.fanduel.com/sports-betting-guide/what-is-a-parlay-bet"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-06",
+   "severity": "repaired",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "README.md contained committed merge-conflict markers (lines 55/64/90)",
+   "detail": "From a prior session merge. Repaired at integration by keeping BOTH sides (no work discarded). COORDINATION.md was already clean on main.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/README.md"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-07",
+   "severity": "info",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "Repository root project is NBA; this session's brief is NFL",
+   "detail": "Prior parallel sessions built NBA dashboards. NFL work is namespaced: nfl/ (spec), nfl-research/ (PR #24, other session), nfl-quant/ (this session, measured). No NBA files modified.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-08",
+   "severity": "policy",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Validation-gate thresholds are project-defined",
+   "detail": "n>=300, 60% positive seasons, etc. are research design choices, not official NFL values. Pre-registered in gates.json before backtests ran.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-09",
+   "severity": "policy",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Leaderboard rewards are non-monetary and unfunded",
+   "detail": "1000 research points, split only among Gold-tier strategies. None passed: 0 awarded. No money or prizes exist.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-10",
+   "severity": "needs-review",
+   "theme": "Data rights & storage",
+   "title": "Data licensing must be resolved before production use",
+   "detail": "Archives are third-party mirrors of official results/stats. Review nflverse/nfldata and fantasydatapros terms; NFL stats distribution rights may apply.",
+   "sources": [
+    "https://github.com/nflverse/nfldata/blob/master/DATASETS.md"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-11",
+   "severity": "pending",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "Gate G8 (forward replication) not yet satisfiable",
+   "detail": "No strategy can reach final Gold until timestamped 2026 predictions are logged for a full season and re-tested. Week 9 own lines are the first prospective log entry.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/gates.json"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-12",
+   "severity": "info",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Week 9 market lines are a snapshot (2026-11-02 20:45 UTC)",
+   "detail": "Archive values for future games are current/opening lines, not final closing lines; they will move. Own lines are model outputs, not recommendations.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-13",
+   "severity": "info",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Rulebook PDF direct fetch limited to first 30 pages",
+   "detail": "Rule 11 (Scoring, p.42) text verified via search-indexed excerpt of the official NFL PDF; PDF identity/structure confirmed by direct fetch. Flagged for manual re-review of the full PDF.",
+   "sources": [
+    "https://static.www.nfl.com/image/upload/fl_attachment/league/tqivdkzt9mu6wdgsh1ku.pdf"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-14",
+   "severity": "info",
+   "theme": "Availability & injuries",
+   "title": "Player correlations limited to 2021-2022 (2 seasons)",
+   "detail": "WR1/WR2 designated ex-post per game for the correlation matrix (standard); leak-free rolling designation used for betting tests. QB1-WR2 r>QB1-WR1 partly reflects max-selection ceiling effects.",
+   "sources": [
+    "https://github.com/fantasydatapros/LearnPythonWithFantasyFootball"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-15",
+   "severity": "finding",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "No registered strategy passed the holdout gates",
+   "detail": "S1/S4 Bronze (ROI indistinguishable from luck), S2/S3/C1 Rejected (negative ROI). 0 reward points. The framework's job is to reject luck; at efficient closing lines it rejected everything. This is the honest result.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/strategy_results.json"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-quant",
+   "file": "nfl-quant/data/flags.json",
+   "id": "QF-16",
+   "severity": "info",
+   "theme": "Model, ratings & probabilities",
+   "title": "Total-model specification corrected post-publication (off/def identification)",
+   "detail": "Initial total model fit game totals only, leaving team offense/defense unidentical (ridge split them equally). Corrected to a stacked team-points specification; ratings now distinct. S2 validation threshold re-selected (2.0->3.0, n=789, ROI -5.45%, still Rejected). S1/S3/S4/C1 and all tier conclusions unchanged; holdout re-run was a bug correction, not re-tuning. Logged for transparency.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/02_ratings.py"
+   ],
+   "page": "nfl-quant/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R1",
+   "severity": "medium",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "Requirement bodies cite VR-04..VR-26 and VQ-05..VQ-08 (e.g. REQ-47 'VR-08, VR-12'). No file in this repository defines these IDs. They cannot be verified or resolved here.",
+   "detail": "Requirement bodies cite VR-04..VR-26 and VQ-05..VQ-08 (e.g. REQ-47 'VR-08, VR-12'). No file in this repository defines these IDs. They cannot be verified or resolved here.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R2",
+   "severity": "low",
+   "theme": "Site, navigation & repository hygiene",
+   "title": "This session counted 347 rows / 28 tables / 67 Out at 2026-11-15T~23:35Z. Earlier sessions saw 254 and 279. All were correct at their fetch times; the page evolves daily. Only the ledger makes them comparable.",
+   "detail": "This session counted 347 rows / 28 tables / 67 Out at 2026-11-15T~23:35Z. Earlier sessions saw 254 and 279. All were correct at their fetch times; the page evolves daily. Only the ledger makes them comparable.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R3",
+   "severity": "medium",
+   "theme": "Availability & injuries",
+   "title": "Official transactions show Henley traded LAC->DEN on 11/10; the official LAC Week-10 injury report on 11/15 still lists him (Full Participation, no designation). Both links retained; no correction invented.",
+   "detail": "Official transactions show Henley traded LAC->DEN on 11/10; the official LAC Week-10 injury report on 11/15 still lists him (Full Participation, no designation). Both links retained; no correction invented.",
+   "sources": [
+    "https://www.nfl.com/transactions/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R4",
+   "severity": "low",
+   "theme": "Availability & injuries",
+   "title": "Official roundup (Sat Nov 14) says the Patriots placed Henderson on IR; the official report still lists him (Out). 'On the report' and 'on the reserve list' are different facts that must be joined (REQ-13/62).",
+   "detail": "Official roundup (Sat Nov 14) says the Patriots placed Henderson on IR; the official report still lists him (Out). 'On the report' and 'on the reserve list' are different facts that must be joined (REQ-13/62).",
+   "sources": [
+    "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-saturday-nov-14"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R5",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Only Munich (NE@DET) was stated on the pages read this session. Every other Week-10 venue is left blank \u2014 the game-centre pages were not read and will not be guessed.",
+   "detail": "Only Munich (NE@DET) was stated on the pages read this session. Every other Week-10 venue is left blank \u2014 the game-centre pages were not read and will not be guessed.",
+   "sources": [
+    "https://www.nfl.com/schedules/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R6",
+   "severity": "high",
+   "theme": "Prices & market lines",
+   "title": "NFL publishes no odds; every market line in the repo is third-party or blank. This blocks REQ-04/18/58/59 at DR-G1.",
+   "detail": "NFL publishes no odds; every market line in the repo is third-party or blank. This blocks REQ-04/18/58/59 at DR-G1.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R7",
+   "severity": "medium",
+   "theme": "Stale or drifting values",
+   "title": "PR #93 (arena/582300df-own4, nfl-command-center) has been open since 2026-11-13 22:43 UTC with no merge; per the 60-minute stale-claim rule it is takeover-eligible, but this session does not need its scope and leaves it untouched.",
+   "detail": "PR #93 (arena/582300df-own4, nfl-command-center) has been open since 2026-11-13 22:43 UTC with no merge; per the 60-minute stale-claim rule it is takeover-eligible, but this session does not need its scope and leaves it untouched.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/pulls"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R8",
+   "severity": "low",
+   "theme": "Capture, hashing & provenance",
+   "title": "The brief's live-count figures (254/279) matched their capture times; this session's live count is 347 (SEA 15, CIN 9 \u2014 both now listing players, consistent with the fix's intent). Published numbers carry fetch timestamps so no capture is 'wrong'.",
+   "detail": "The brief's live-count figures (254/279) matched their capture times; this session's live count is 347 (SEA 15, CIN 9 \u2014 both now listing players, consistent with the fix's intent). Published numbers carry fetch timestamps so no capture is 'wrong'.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R9",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The 90-minute rule is verified from the rulebook (Rule 1 \u00a72 Art. 1(o)); whether the NFL publishes each game's roof decision as structured data was not verifiable this session. REQ-57's roof column stays blank until a publication surface is found.",
+   "detail": "The 90-minute rule is verified from the rulebook (Rule 1 \u00a72 Art. 1(o)); whether the NFL publishes each game's roof decision as structured data was not verifiable this session. REQ-57's roof column stays blank until a publication surface is found.",
+   "sources": [
+    "https://operations.nfl.com/the-rules/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R10",
+   "severity": "medium",
+   "theme": "Availability & injuries",
+   "title": "REQ-64's historical designation archive exists only in a community-maintained repository. Any ingest must label provenance and keep official links where possible.",
+   "detail": "REQ-64's historical designation archive exists only in a community-maintained repository. Any ingest must label provenance and keep official links where possible.",
+   "sources": [
+    "https://github.com/nflverse/nfldata"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R11",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The current slate (Nov 12-16) is REG 10 on nfl.com (pager WEEK 10, game slugs 2026-reg-10). Earlier sessions' 'Week 11' references pointed at the genuinely next week (Nov 19+, reg-11) \u2014 verified in nfl-book's slate. No defect found; recorded to prevent future week-labeling confusion.",
+   "detail": "The current slate (Nov 12-16) is REG 10 on nfl.com (pager WEEK 10, game slugs 2026-reg-10). Earlier sessions' 'Week 11' references pointed at the genuinely next week (Nov 19+, reg-11) \u2014 verified in nfl-book's slate. No defect found; recorded to prevent future week-labeling confusion.",
+   "sources": [
+    "https://www.nfl.com/schedules/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-readiness-register",
+   "file": "nfl-readiness-register/data/flags.json",
+   "id": "F-R12",
+   "severity": "medium",
+   "theme": "Capture, hashing & provenance",
+   "title": "nfl.com pages may be JS-rendered; the capture script detects missing report markup and fails loudly (REQ-61). Whether the raw HTML contains parseable tables is only provable on a runner; the first scheduled run will demonstrate it.",
+   "detail": "nfl.com pages may be JS-rendered; the capture script detects missing report markup and fails loudly (REQ-61). Whether the raw HTML contains parseable tables is only provable on a runner; the first scheduled run will demonstrate it.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-readiness-register/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-01",
+   "severity": "medium",
+   "theme": "Stale or drifting values",
+   "title": "Peer standings snapshot is stale on all 32 clubs",
+   "detail": "nfl-book/data/standings_2026-11-14.json holds a 2026-11-14 pre-kickoff capture. The official table read 2026-11-15T23:27Z includes nine additional Week 10 results. Every one of the 32 clubs differs on at least one of W/L/T/PF/PA. The peer values were correct when captured; they are now superseded. Nothing was invented \u2014 this is staleness, not fabrication.",
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-02",
+   "severity": "high",
+   "theme": "Depth, starters & replacements",
+   "title": "The 'no inactive list exists' premise is wrong \u2014 the source is published and was never ingested",
+   "detail": "nfl.com publishes a dated inactives article naming every inactive player per club. For Week 10 it carries 24 club sections and 138 named players, plus the venue string for 12 games. The repository treats the active list as unobtainable (flag FB-06). The gap is ingestion, not availability, and that changes the fix from 'impossible' to 'a parser'.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-03",
+   "severity": "medium",
+   "theme": "Depth, starters & replacements",
+   "title": "Venue is not available from the game centre for every fixture, and two sources disagree",
+   "detail": "Of five Week 11 game centres probed, three publish a Location + Stadium block and two render none at all. Separately, MIN@SF is listed on the schedule page with a SoFi Stadium hotel link while its game centre says MEXICO CITY / ESTADIO BANORTE. The game centre governs; the schedule page's string is a ticketing artefact, not a venue.",
+   "sources": [
+    "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-04",
+   "severity": "medium",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The injury-report row count in the brief does not reproduce, and neither does the second one",
+   "detail": "The brief quotes 254 rows and 4 no-injury sections, then 279 rows and 2 sections, as successive live reads. Read in full today (8 of 8 chunks) the page has 28 club sections \u2014 exactly the 28 clubs that played Week 10 \u2014 and 347 player rows, with no empty section at all. A live page cannot be quoted as a frozen count; only a dated capture can.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-05",
+   "severity": "medium",
+   "theme": "Availability & injuries",
+   "title": "A blank game status does not mean available, and this is now measured rather than assumed",
+   "detail": "138 named inactives were joined to the Week 10 report by club and normalised name. 68 join; of those 47 are Out, 4 Doubtful, 15 Questionable and 2 carry a blank status. The other 70 named inactives do not appear in the weekly report at all. The converse question \u2014 how many blank-status players were active \u2014 cannot be answered from either source, because no active list is published.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-06",
+   "severity": "low",
+   "theme": "Depth, starters & replacements",
+   "title": "Depth-chart availability is club-specific, not league-wide, and one of two probes is unusable",
+   "detail": "Houston's depth chart renders as a single image: the page text contains 'Unofficial Depth Chart', one static image and no player table and no date. Green Bay's renders as a full structured table (44 named players) with jersey numbers prefixed to every name and a trailing 'Unofficial, Nov. 10, 2026'. So flag FB-07 ('no official depth chart') is half right: the route works for some clubs and not others, and 30 clubs remain unprobed.",
+   "sources": [
+    "https://www.houstontexans.com/team/depth-chart"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-07",
+   "severity": "low",
+   "theme": "Unclassified \u2014 review on its own page",
+   "title": "A name-join defect was found in this session's own code and fixed before publication",
+   "detail": "The first draft of the inactives-to-report join stripped generational suffixes and then took the last token, which mapped 'Deebo Samuel Sr.' to 'sr' and produced a false match against a different 49er. The published join removes the suffix from the token list before selecting the surname and additionally requires a first-name match when two players in one club share a surname. The corrected join moves the joinable count from 65 to 68 and the outlier cells from 3 to 2.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-08",
+   "severity": "low",
+   "theme": "Availability & injuries",
+   "title": "Two club inactive lists were empty at capture, and that is a timing artefact",
+   "detail": "The Week 10 inactives article names players for 24 of 26 club sections. Pittsburgh and Cincinnati are recorded with empty lists because Sunday Night Football inactives publish roughly 90 minutes before an 8:20 p.m. ET kickoff, after this capture. The rows are recorded as empty, never as 'zero inactives'.",
+   "sources": [
+    "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-09",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Three Week 10 games were still in progress at capture and are excluded from every settled comparison",
+   "detail": "LA@AZ (34-6, Q4 14:55), SEA@LV (21-10, Q4 10:41) and SF@DAL (24-19, Q3 08:36) were live at 2026-11-15T23:27Z. They are recorded with their in-progress state and excluded from the 9 settled finals used for the results check. Any later read will show different finals and that is expected, not a contradiction.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/week-10"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-10",
+   "severity": "medium",
+   "theme": "Gates, pre-registration & leaderboard",
+   "title": "The backtest corpus has drifted from its own pre-registration by one game",
+   "detail": "The pre-registration names 136 games; results_feed.json now holds 137 because a Week 10 game settled after registration. The registration and the artefact no longer match, which is the specific failure pre-registration is meant to prevent. The extra game is real and official; the defect is procedural.",
+   "sources": [
+    "https://www.nfl.com/scores/2026/week-10"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-11",
+   "severity": "low",
+   "theme": "Fixtures, schedule & venues",
+   "title": "Roof and surface designations were not found on any page read this session",
+   "detail": "Game centres publish a stadium NAME only, and only for fixtures that render a Game Info block. No roof type and no playing-surface field appeared on the schedule page, the injury page, the scores page, the inactives article or any of the five game centres probed. The stadium/weather feature set is therefore blocked on an unlocated source, not on engineering.",
+   "sources": [
+    "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-12",
+   "severity": "low",
+   "theme": "Depth, starters & replacements",
+   "title": "This session re-reads 5 official source groups, not the whole archive",
+   "detail": "The prior 26 namespaces publish thousands of rows that this session did not re-read line by line. The independent checks here cover standings, the Week 11 slate, the Week 10 injury report in full, the Week 10 inactives in full, the Week 10 scoreboard, five game centres and two club depth pages. Any number outside that set is inherited, not re-verified, and is labelled as such where it appears.",
+   "sources": [
+    "https://www.nfl.com/"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-13",
+   "severity": "low",
+   "theme": "Depth, starters & replacements",
+   "title": "One announced starter is the entire starter-identity dataset",
+   "detail": "Drew Lock is the only player this session can call a named starter with a dated official source (a Nov. 2026 article stating he has no injury designation and will start). Sam Darnold is Out in the same game with rib and quadricep injuries. That is one confirmed replacement out of the roughly 70 Out players in Week 10.",
+   "sources": [
+    "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  },
+  {
+   "workspace": "nfl-verify",
+   "file": "nfl-verify/data/flags.json",
+   "id": "R-14",
+   "severity": "high",
+   "theme": "Fixtures, schedule & venues",
+   "title": "The live injury page rolls to the next week's fixture list while still showing the previous week's report",
+   "detail": "At capture the page heading read 'Injuries - WEEK 10' and the player tables were Week 10 content, but the fixture headers around them were already the Week 11 matchups. Two exact identities hold, and they invert: the six clubs in the report that are NOT on the Week 11 schedule (ATL, CLE, GB, LA, NE, SEA) are precisely the official Week 11 bye list, and the four clubs on the Week 11 schedule that are absent from the report (CHI, DEN, PHI, TB) are precisely the official Week 10 bye list. A scraper that keys players to the fixture header instead of to the club would silently attribute Week 10 inj",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "page": "nfl-verify/pages/flagged.html"
+  }
+ ]
+}
