@@ -4095,4 +4095,15 @@ corpus-size confusion is **resolved in the source's favour** (136 is exactly wee
 Wednesday-dated fixture "Sunday Night Football"; the bye block prints current records, not records at the
 bye; the Colts game-centre strip disagrees with the schedule page on the Miami score.
 
+**Repository-level defect found during integration (NOT this session's, reported not fixed).**
+`main` at `a621995` **fails its own site gate**: `python3 verification/verify_site.py` reports
+`FAILED with 19 problem(s)` — the committed root `index.html` (replaced by peer PR #126 with an NFL
+dashboard) is missing the navigation block, the responsible-gambling footer and the canonical script the
+verifier requires, and 15 of its table rows carry no source link. Verified from a clean detached worktree of
+`origin/main`, so it is not caused by this session. This session **deliberately does not touch**
+`index.html`: it is outside `nfl-sources/` and belongs to the session that published it. The fix belongs to
+whoever owns that page — either regenerate it with `verification/build.py` or update the verifier's expected
+markers. **This session's own namespace passes every check**: 38/38 gates, 701 internal links resolved, 0
+broken.
+
 **PR / merge result:** see the line appended immediately below by the integration step.
