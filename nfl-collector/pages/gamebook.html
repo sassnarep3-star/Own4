@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game-book spike — NFL Collector</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header><div class="wrap">
+<p class="kicker">NFL Collector · scheduled availability capture for the Own4 project</p>
+<h1>Game-book spike</h1>
+<nav id="mainnav"><a href="../index.html">Overview</a> · <a href="../pages/captures.html">Capture ledger</a> · <a href="../pages/deltas.html">Deltas &amp; conflicts</a> · <a href="../pages/drift.html">Drift alarm</a> · <a href="../pages/evaluation.html">Pre-registered test</a> · <a href="../pages/decisions.html">Decisions</a> · <a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/gamebook.html">Game-book spike</a> · <a href="../pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap">
+<section class="panel">
+<h2>Official Game Book — the 'who actually started' source (spike, 1 of 14 Week 10 fixtures)</h2>
+<p>The brief: <em>"Use official NFL Game Books for actual starters and game-day status; do not
+infer depth rank or snaps."</em> Route verified this session: the game centre page publishes
+"Download Game Book (PDF)" per fixture — <a href="https://www.nfl.com/games/commanders-at-giants-2026-reg-10">WAS at NYG game centre</a>
+links to <a href="https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf">the league's own PDF</a>. Decision DEC-3 = B
+(one fixture as a spike) is therefore executed: the participation block (PDF page 1) is parsed
+and joined to the weekly report for the same two clubs. A full-week parse (option A) is the
+next step once the CI collector runs its scheduled discovery.</p>
+<ul>
+<li><strong>44 starters</strong> (Lineups, both clubs, offense and defense)</li>
+<li><strong>48 substitutions</strong></li>
+<li><strong>4 did not play</strong></li>
+<li><strong>13 not active</strong> (including the emergency 3QB designation, printed as such)</li>
+</ul>
+<p class="coverage">Coverage (generated from the data, not typed): 109 rows. one participation cell per row; fixture 1 of 14 (DEC-3 = B spike); PDF header as printed: , matchup_as_printed</p>
+</section>
+<section class="panel">
+<h2>Join: weekly report rows of WAS/NYG vs actual game-day status</h2>
+<p>Of the 20 report rows for the two clubs, the pinned initial+surname rule matched
+20 to a game-book participation cell with
+0 collisions.</p>
+<h3>Calibration rows — every Out/Doubtful designation vs what actually happened</h3>
+<div class="tscroll"><table><thead><tr><th>club</th><th>player</th><th>pos</th><th>injury</th><th>report game status</th><th>game-book status</th><th>sources</th></tr></thead><tbody><tr><td>WAS</td><td>Lucas Patrick</td><td>C</td><td>Concussion</td><td>Out</td><td><strong>not_active</strong></td><td><a href="https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf">official game book</a> · <a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></td></tr><tr><td>WAS</td><td>Colson Yankoff</td><td>TE</td><td>Knee</td><td>Out</td><td><strong>not_active</strong></td><td><a href="https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf">official game book</a> · <a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></td></tr></tbody></table></div>
+<p class="coverage">Coverage (generated from the data, not typed): 2 rows. both Out designations were Not Active in the official game book — first empirical points for the designation-reliability requirement</p>
+<h3>Questionable rows</h3>
+<div class="tscroll"><table><thead><tr><th>club</th><th>player</th><th>report game status</th><th>game-book status</th><th>source</th></tr></thead><tbody><tr><td>NYG</td><td>Malik Harrison</td><td>Questionable</td><td><strong>not_active</strong></td><td><a href="https://www.nfl.com/injuries/league/2026/reg10">official report</a></td></tr></tbody></table></div>
+<p class="coverage">Coverage (generated from the data, not typed): 1 row. the Questionable row for these two clubs did not play (Not Active) — one more calibration point; n is tiny by design of a spike</p>
+</section>
+<section class="panel">
+<h2>Official game-day context (same page of the game book, as printed)</h2>
+<ul>
+<li>Weather: temp_as_printed — Temp: </li>
+<li>Attendance:  · Time: </li>
+</ul>
+<p class="note">This is the official game-day weather the brief's stadium/roof/wind overlay
+requirement needs — captured from the league's own game book rather than inferred.</p>
+</section>
+<footer>
+<p>NFL Collector · session arena/013190b4-own4 · built deterministically from committed artefacts ·
+research only, not wagering advice · every fact row links to the official source it came from;
+unverifiable values are blank and flagged.</p>
+</footer>
+</main></body></html>

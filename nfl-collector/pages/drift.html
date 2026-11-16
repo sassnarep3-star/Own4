@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drift alarm — NFL Collector</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header><div class="wrap">
+<p class="kicker">NFL Collector · scheduled availability capture for the Own4 project</p>
+<h1>Drift alarm</h1>
+<nav id="mainnav"><a href="../index.html">Overview</a> · <a href="../pages/captures.html">Capture ledger</a> · <a href="../pages/deltas.html">Deltas &amp; conflicts</a> · <a href="../pages/drift.html">Drift alarm</a> · <a href="../pages/evaluation.html">Pre-registered test</a> · <a href="../pages/decisions.html">Decisions</a> · <a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/gamebook.html">Game-book spike</a> · <a href="../pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap">
+<section class="panel">
+<h2>Drift alarm report</h2>
+<p>The brief: <em>"Add a drift alarm to every scraper — pin each parser to expected row counts and
+required fields; fail the build loudly when a field goes missing rather than publishing a blank."</em>
+The pins in <code>data/drift_expectations.json</code> were written BEFORE this capture was taken
+(the Week 10 structure was already double-verified by two peer sessions). The alarm runs on every
+CI run and exits non-zero on any violation.</p>
+<div class="verdict pass">PASS</div>
+<ul>
+<li>rows 347 (pin 347) · clubs
+28 (pin 28) · sections
+14 (pin 14)</li>
+<li>designated rows 171 = 49.3%
+(floor 35.0%)</li>
+<li>practice tally as captured: 94 DNP / 180 FP / 73 LP — matches the pre-pinned tally exactly</li>
+<li>vocabulary: closed sets enforced (game status and practice status)</li>
+<li>required fields: team, opp, player, pos, injury, practice_status, game_status, player_slug —
+non-blank enforced for team, opp, player, pos, practice_status, player_slug</li>
+</ul>
+</section>
+<section class="panel">
+<h2>Cross-capture reconciliation</h2>
+<table><thead><tr><th>peer capture</th><th>peer rows</th><th>this capture</th><th>keys compared</th><th>differences</th><th>resolution</th></tr></thead>
+<tbody>['<tr class="derived"><td>nfl-availability-desk/data/availability_snapshot_2026-11-15.csv</td><td>347</td><td>347</td><td>347</td><td>0</td><td>clean</td></tr>', '<tr class="derived"><td>nfl-book/data/injuries_week10_capture.json</td><td>347</td><td>347</td><td>347</td><td>0</td><td>clean</td></tr>']</tbody></table>
+<p class="coverage">Coverage (generated from the data, not typed): 2 rows. every (team, player) key reconciled field-by-field; the only published normalization is the AZ/ARI club-code alias, applied inside reconciliation only, never to stored rows</p>
+<p class="note">Anchors are enforced only on Week 10 captures; a future Week 11 capture validates
+structure (fields, vocabulary, coverage floor) and records counts without failing the Week 10 pins.</p>
+</section>
+<footer>
+<p>NFL Collector · session arena/013190b4-own4 · built deterministically from committed artefacts ·
+research only, not wagering advice · every fact row links to the official source it came from;
+unverifiable values are blank and flagged.</p>
+</footer>
+</main></body></html>

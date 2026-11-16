@@ -1,0 +1,78 @@
+{
+ "built_utc": "2026-11-16",
+ "dataset": "nfl_collector_flags",
+ "rows": [
+  {
+   "detail": "Every market, residual, CLV and reward path stays blank. Decision DEC-1 = B recorded; owner may reopen via SUG-01 A or C at any time.",
+   "id": "RC-01",
+   "severity": "structural",
+   "source": "https://www.nfl.com/ (verified absence across standings/scores/injuries pages by this and prior sessions)",
+   "title": "No official market price source exists"
+  },
+  {
+   "detail": "packers.com/team/depth-chart is live and parsed (87 rows), but the page self-labels 'Unofficial, Nov. 10, 2026' \u2014 depth from it is never published as official depth. The 31 other clubs are unverified; the Texans publish depth as an image and need an authorized structured source, not transcription.",
+   "id": "RC-02",
+   "severity": "coverage",
+   "source": "https://www.packers.com/team/depth-chart",
+   "title": "Club depth route verified for 1 of 32 clubs"
+  },
+  {
+   "detail": "On Monday 2026-11-16 the report page's week control ends at WEEK 10; the week-pinned pattern https://www.nfl.com/injuries/league/2026/reg11 is registered but cannot be verified until the page exists. The collector validates whatever week it finds and only enforces the Week 10 anchors on Week 10 captures.",
+   "id": "RC-03",
+   "severity": "coverage",
+   "source": "https://www.nfl.com/injuries/",
+   "title": "Week 11 report URL not verifiable yet"
+  },
+  {
+   "detail": "IR placements dated 11/05-11/06 (e.g. Lamar Jackson, whom the league's own news article records as placed on injured reserve) are not visible in the rendered November table. Recorded as printed; never filled from another source. The IR-join therefore covers 25 of the month's placements.",
+   "id": "RC-04",
+   "severity": "coverage",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "title": "Rendered November reserve list begins at 11/07"
+  },
+  {
+   "detail": "The session fetch path renders markdown, so the sha256 recorded on session captures seals the committed transcript, not the page bytes. Byte-level capture (real HTTP clocks + raw-body sha256, raw bytes retained only in workflow artifacts, never committed) begins with the first CI run per RF-18.",
+   "id": "RC-05",
+   "severity": "method",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Session captures seal transcript hashes, not raw HTML bytes"
+  },
+  {
+   "detail": "Reads on 2026-11-15 23:23-23:34Z (games in progress), 2026-11-16 (peer) and 2026-11-16 02:35-03:05Z show zero field differences across all 347 rows. The weekly report page is a weekly artifact, not a live level; meaningful deltas begin with the Week 11 practice cycle. The collector cadence (Wed/Thu/Fri) is calibrated to when the page actually changes.",
+   "id": "RC-06",
+   "severity": "finding",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Three dated reads of the Week 10 report are field-identical (0 deltas)"
+  },
+  {
+   "detail": "The game-centre 'Download Game Book (PDF)' route is verified and the WAS at NYG participation block is parsed (109 rows, 0 join collisions, both Out designations confirmed Not Active). The remaining 13 Week 10 fixtures and the ongoing weekly cadence run in CI via scheduled discovery \u2014 until then, coverage stays 1/14 and is published as such. Nothing about participation is published beyond what the parsed spike proves.",
+   "id": "RC-07",
+   "severity": "open work",
+   "source": "https://www.nfl.com/schedules/ (game centre pages are the discovery route for the official game-book link)",
+   "title": "Game-book spike executed: 1 of 14 Week 10 fixtures (DEC-3 = B)"
+  },
+  {
+   "detail": "DEC-1..DEC-9 adopt each peer's own written recommendation because the brief forbids waiting for review; DEC-10 (canonical namespace) is deferred because no written recommendation exists. All verdicts are reversible; the price-independent published record does not change under any of them. Owner review requested.",
+   "id": "RC-08",
+   "severity": "governance",
+   "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+   "title": "Decision ledger adopted under the standing no-manual-input instruction"
+  },
+  {
+   "detail": "Captures store structured rows, hashes, timestamps and conflict flags only. Whether even row-level nfl.com data may be committed long-term is the owner policy question the availability-desk session opened (their flag RF-18); this namespace stores hashes + structured facts and keeps the question open rather than choosing a side.",
+   "id": "RC-09",
+   "severity": "rights",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Raw nfl.com HTML is never committed (RF-18 held open)"
+  },
+  {
+   "detail": "Players appear under the club section the page prints (e.g. Kenneth Walker III under KC, Quenton Nelson under SEA on the Week 10 report). The collector preserves the printed attribution and cross-checks against the transactions feed; it never re-attributes players by its own knowledge. One printed-attribution conflict exists (Daiyan Henley, traded LAC->DEN 11/10, still printed on the LAC report).",
+   "id": "RC-10",
+   "severity": "data quirk",
+   "source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Club attribution on the weekly report is page-printed, not verified roster membership"
+  }
+ ],
+ "rule": "every flag carries the official source it concerns; flags are published, never silently fixed; a flag blocks nothing per the standing brief",
+ "title": "Flagged for review \u2014 irregularities and unverified items, none blocking publication"
+}

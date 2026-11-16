@@ -1,0 +1,42 @@
+{
+ "built_utc": "2026-11-16",
+ "dataset": "nfl_collector_series_deltas",
+ "deltas": [],
+ "rule": "deltas are computed between consecutive reads; a read never replaces a previous one and no read is published as a live level",
+ "series": [
+  {
+   "captured_by": "nfl-availability-desk (peer namespace)",
+   "context": "read live during the Week 10 Sunday window: three Sunday games in progress, two not kicked off",
+   "file": "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv",
+   "read_id": "R1",
+   "rows": 347,
+   "window_utc": "2026-11-15T23:23:14Z .. 2026-11-15T23:34:00Z"
+  },
+  {
+   "captured_by": "nfl-book (peer namespace)",
+   "context": "all 8 chunks, raw transcript sha256 sealed by that session's capture file",
+   "file": "nfl-book/data/injuries_week10_capture.json",
+   "read_id": "R2",
+   "rows": 347,
+   "window_utc": "2026-11-16 (window as recorded by that session; per-call clocks not exposed by its fetch path)"
+  },
+  {
+   "captured_by": "nfl-collector (this namespace)",
+   "context": "read after all Week 10 Thursday/Sunday games, before the Monday-night kickoff",
+   "file": "nfl-collector/data/captures/2026-11-16/league_injury_report_week10.json",
+   "read_id": "R3",
+   "rows": 347,
+   "window_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  }
+ ],
+ "summary": {
+  "by_kind": {},
+  "n_delta_rows": 0,
+  "n_reads": 3,
+  "reads_rows": [
+   347,
+   347,
+   347
+  ]
+ }
+}

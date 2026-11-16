@@ -1,0 +1,121 @@
+{
+ "active_sources": [
+  {
+   "also_live_at": "https://www.nfl.com/injuries/",
+   "cadence": "Wed/Thu/Fri 17:30 UTC + Sun 15:30 UTC + Mon 17:30 UTC (the Wed-Fri practice cycle is when the report changes; the three reads of Week 10 showed zero deltas across game days, so a game-day-only cadence would miss the real changes)",
+   "key": "league_injury_report_week_pinned",
+   "kind": "league_injury_report",
+   "publisher": "NFL Enterprise (nfl.com)",
+   "table_columns_as_published": [
+    "Player",
+    "Position",
+    "Injuries",
+    "Practice Status",
+    "Game Status"
+   ],
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "url_pattern": "https://www.nfl.com/injuries/league/{season}/reg{week}",
+   "verified_by": "session arena/013190b4-own4, 8 chunks read in one pass; structure pinned in data/drift_expectations.json",
+   "verified_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  },
+  {
+   "cadence": "daily 17:30 UTC (roster turnover invalidates availability rows per SUG-05 A)",
+   "hub_url": "https://www.nfl.com/transactions/",
+   "key": "league_transactions_trades",
+   "kind": "league_transactions",
+   "publisher": "NFL Enterprise (nfl.com)",
+   "table_columns_as_published": [
+    "From",
+    "To",
+    "Date",
+    "Name",
+    "Position",
+    "Transaction"
+   ],
+   "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "url_pattern": "https://www.nfl.com/transactions/league/trades/{year}/{month}",
+   "verified_by": "session arena/013190b4-own4, hub + trades view read; 12 November trade rows captured",
+   "verified_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  },
+  {
+   "cadence": "daily 17:30 UTC (this is the 'not listed never means available' source)",
+   "coverage_limitation": "the rendered November table begins at 11/07; earlier November IR placements are not visible in the rendered view",
+   "key": "league_transactions_reserve_list",
+   "kind": "league_transactions_reserve_list_month",
+   "publisher": "NFL Enterprise (nfl.com)",
+   "table_columns_as_published": [
+    "From",
+    "To",
+    "Date",
+    "Name",
+    "Position",
+    "Transaction"
+   ],
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "url_pattern": "https://www.nfl.com/transactions/league/reserve-list/{year}/{month}",
+   "verified_by": "session arena/013190b4-own4, 2 chunks read in order; 25 Reserve/Injured rows captured",
+   "verified_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  },
+  {
+   "cadence": "daily 17:30 UTC",
+   "key": "club_depth_gb",
+   "kind": "club_depth_chart",
+   "known_quirks": [
+    "jersey numbers printed inside player cells (stripped by rule, raw string preserved)",
+    "shared player across slots preserved as printed",
+    "empty slots preserved as empty",
+    "a player can occupy slot 3 with slots 1-2 empty"
+   ],
+   "publisher": "Green Bay Packers (packers.com \u2014 official club site)",
+   "route_status": "the availability-desk flag FB-07 asked for a verified club-by-club depth route: this is 1 of 32 clubs verified; the 32-club verification sweep is the open work item (RC-02)",
+   "table_columns_as_published": [
+    "Position",
+    "Player",
+    "Player",
+    "Player"
+   ],
+   "url": "https://www.packers.com/team/depth-chart",
+   "verified_by": "session arena/013190b4-own4, single page read in full; the page self-labels 'Unofficial, Nov. 10, 2026' \u2014 captured verbatim and never upgraded",
+   "verified_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  },
+  {
+   "cadence": "per fixture, after final (the CI collector re-discovers the PDF link per game-centre page)",
+   "discovery_route": "the game centre page https://www.nfl.com/games/commanders-at-giants-2026-reg-10 publishes 'Download Game Book (PDF)' per fixture; verified in-session 2026-11-16",
+   "key": "game_book_was_nyg_reg10",
+   "kind": "official_game_book_participation",
+   "publisher": "NFL Enterprise (nfl.com \u2014 league CDN)",
+   "route_status": "DEC-3 = B spike executed: 1 of 14 Week 10 fixtures; full-week parse (option A) registered as the next CI step",
+   "url": "https://static.www.nfl.com/image/upload/v1794570519/gamecenter/ab5828d9-4feb-11f1-abca-2c54536568a9.pdf",
+   "verified_by": "session arena/013190b4-own4 \u2014 PDF page-1 participation block parsed (109 rows) and joined to the weekly report with 0 collisions",
+   "verified_utc": "2026-11-16T02:35:00Z .. 2026-11-16T03:05:00Z"
+  }
+ ],
+ "built_utc": "2026-11-16",
+ "candidate_sources_not_yet_verified": [
+  {
+   "clubs_pending_verification": 31,
+   "clubs_verified": [
+    "GB"
+   ],
+   "note": "club depth-chart pages on official club sites; a per-club verification sweep must confirm URL, existence and HTML-table structure for each club before activation. The Texans publish depth as an image (no HTML table) and require an authorized structured source, not transcription by eye \u2014 that limitation is inherited from the brief.",
+   "pattern": "https://www.{club-site}/team/depth-chart"
+  },
+  {
+   "kind": "game_books",
+   "note": "route now VERIFIED via the game centre page (see active_sources game_book_was_nyg_reg10); the remaining 13 Week 10 fixtures parse in CI on the scheduled run"
+  }
+ ],
+ "dataset": "nfl_collector_source_registry",
+ "explicitly_absent": [
+  {
+   "kind": "official market prices",
+   "status": "no official price source exists; every prior session searched (FB-01/DEC-P1); decision recorded as DEC-1 = B (decline prices for now)"
+  },
+  {
+   "kind": "official snap counts",
+   "status": "no verified official snap-count source found by any session (FB-07); game-book participation is the declared route (SUG-03)"
+  }
+ ],
+ "title": "Registered official sources \u2014 every URL verified before registration, never assumed",
+ "verification_rule": "a source enters active_sources only after its URL was fetched and read in this session and its published table structure was confirmed; sources that exist but were not verified are listed as candidates with their status blank, never activated"
+}

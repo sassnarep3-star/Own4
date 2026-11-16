@@ -1,0 +1,130 @@
+name: nfl-collector verify
+
+# The scheduled availability collector (decision DEC-2 = A, availability-desk SUG-02 A).
+#
+# Two jobs:
+#
+#   verify    (push / PR) — no network needed: re-runs the drift alarm against the pinned
+#             expectations, re-verifies the ledger hash chain, re-checks the PREREG-002
+#             registration hashes, re-runs the (pending) McNemar evaluator, rebuilds the
+#             pages and enforces the publication contract + determinism gate. This is the
+#             gate that keeps the published site a pure function of the committed artefacts.
+#
+#   collect   (schedule / manual dispatch) — fetches every registered official source over
+#             real HTTP, seals each capture with sha256 + the runner clock, parses it to the
+#             pinned schema, and uploads the capture (and the raw-body hash) as an artifact.
+#             Raw HTML is never committed (RF-18 held open for the owner): artifacts only.
+#             On the main branch after merge, the scheduled runs ALSO commit the dated
+#             structured capture to the ledger — the cadence the brief asked for.
+#             Any source that no longer parses to the pinned schema fails the job loudly
+#             (the drift alarm): a schema change must alert, never silently publish blanks.
+#
+# Cadence note (finding RC-06): the three dated reads of the Week 10 report are field-identical —
+# the weekly report page does not change on game days. The crons therefore target the Wed/Thu/Fri
+# practice cycle (when designations actually move) plus a Sunday pre-kickoff and a Monday
+# week-close read, which is also what the brief's "every Wed, Thu and Fri" asks for.
+
+on:
+  schedule:
+    - cron: '30 17 * * 3,4,5'   # Wed, Thu, Fri 17:30 UTC (12:30 ET)
+    - cron: '30 15 * * 0'       # Sun 15:30 UTC (10:30 ET) — pre-kickoff window
+    - cron: '30 17 * * 1'       # Mon 17:30 UTC — week close
+  workflow_dispatch:
+  push:
+    paths:
+      - 'nfl-collector/**'
+      - '.github/workflows/nfl-collector.yml'
+  pull_request:
+    paths:
+      - 'nfl-collector/**'
+      - '.github/workflows/nfl-collector.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    if: github.event_name == 'push' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Parser self-test (synthetic fixture — mechanics only)
+        run: python3 nfl-collector/engine/selftest.py
+
+      - name: Drift alarm (pinned expectations must hold)
+        run: python3 nfl-collector/engine/drift.py
+
+      - name: Ledger hash chain must verify
+        run: python3 nfl-collector/engine/collect.py --verify
+
+      - name: Pre-registration ledger must be intact (PREREG-002)
+        run: python3 nfl-collector/engine/preregister.py --check
+
+      - name: PREREG-002 evaluator (calibration + pending evaluation)
+        run: python3 nfl-collector/engine/eval_mcnemar.py
+
+      - name: Rebuild pages from the artefacts
+        run: |
+          python3 nfl-collector/engine/delta.py
+          python3 nfl-collector/engine/build_site.py
+
+      - name: Publication contract
+        run: python3 nfl-collector/engine/verify_site.py
+
+      - name: Determinism gate (rebuild must not change committed output)
+        run: git diff --exit-code -- nfl-collector
+
+  collect:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Fetch + seal + parse every registered official source
+        id: collect
+        run: python3 nfl-collector/engine/collect.py --live
+
+      - name: Upload the dated capture (raw bytes stay in the artifact only — RF-18)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nfl-collector-captures-${{ github.run_id }}
+          path: |
+            nfl-collector/data/captures/ci/**
+            nfl-collector/data/derived/last_collect_run.json
+          if-no-files-found: warn
+
+      - name: Rebuild deltas + site and enforce the contract
+        if: success()
+        run: |
+          python3 nfl-collector/engine/delta.py
+          python3 nfl-collector/engine/build_site.py
+          python3 nfl-collector/engine/verify_site.py
+
+      - name: Commit the dated capture to the ledger (main branch only)
+        if: success() && github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "nfl-collector"
+          git config user.email "actions@users.noreply.github.com"
+          git add nfl-collector/data
+          if git diff --cached --quiet; then
+            echo "no new capture data to commit"
+          else
+            git commit -m "nfl-collector: scheduled capture $(date -u +%Y-%m-%dT%H:%MZ) — sealed, drift-checked"
+            git push
+          fi

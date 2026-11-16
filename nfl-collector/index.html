@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview — NFL Collector</title>
+<link rel="stylesheet" href="assets/style.css"></head>
+<body>
+<header><div class="wrap">
+<p class="kicker">NFL Collector · scheduled availability capture for the Own4 project</p>
+<h1>Overview</h1>
+<nav id="mainnav"><span class="active">Overview</span> · <a href="pages/captures.html">Capture ledger</a> · <a href="pages/deltas.html">Deltas &amp; conflicts</a> · <a href="pages/drift.html">Drift alarm</a> · <a href="pages/evaluation.html">Pre-registered test</a> · <a href="pages/decisions.html">Decisions</a> · <a href="pages/flagged.html">Flagged for review</a> · <a href="pages/gamebook.html">Game-book spike</a> · <a href="pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap">
+<section class="panel">
+<h2>What this namespace is</h2>
+<p>The scheduled availability collector the brief asked for: <em>"Automate immutable multi-day
+availability snapshots — capture the official report and club depth pages at least daily with
+retained hashes, so practice designations can be replayed as they were known."</em> It was adopted
+as decision <strong>DEC-2 = A</strong> (the handover queue's first engineering item) and built in
+this session. It holds:</p>
+<ul>
+<li><strong>A capture ledger with a sha256 hash chain</strong> — every capture sealed, appended-only,
+idempotent; the chain is re-verified on every CI run.</li>
+<li><strong>A drift alarm with pre-pinned expectations</strong> — row counts, required fields and
+vocabulary pinned BEFORE capture; a schema change fails the build loudly instead of publishing blanks.</li>
+<li><strong>The delta engine</strong> — "publish the delta, never the level": dated reads of the same
+official report are never overwritten; changes BETWEEN reads are the published series.</li>
+<li><strong>Cross-source conflict flags</strong> — transactions (trades, reserve list) joined to the
+weekly report; the traded-player conflict the brief predicted is now reproduced computationally.</li>
+<li><strong>A pre-registered paired test (PREREG-002)</strong> — frozen before any Week 11 result
+exists; its calibration reproduces the published backtest exactly; evaluation is PENDING by design.</li>
+<li><strong>The decision ledger</strong> — the stalled P1 queue answered under the standing
+no-manual-input instruction, each verdict adopting the peer session's own written recommendation,
+flagged for post-hoc owner review.</li>
+</ul>
+</section>
+<section class="panel">
+<h2>State at publication (all numbers generated from the artefacts)</h2>
+<div class="grid">
+<div class="card"><p class="big">5e5f5b2c2d43…</p><p>ledger chain head (sha256)</p></div>
+<div class="card"><p class="big">5</p><p>captures sealed (append-only)</p></div>
+<div class="card"><p class="big">580</p><p>structured rows under hash chain</p></div>
+<div class="card"><p class="big">3</p><p>dated reads of the Week 10 report</p></div>
+<div class="card"><p class="big">0</p><p>field deltas between reads (finding: RC-06)</p></div>
+<div class="card"><p class="big">1</p><p>traded-player conflicts (of 12 trades checked)</p></div>
+<div class="card"><p class="big">15</p><p>IR players absent from the report ("not listed ≠ available")</p></div>
+<div class="card"><p class="big">PENDING</p><p>PREREG-002 evaluation status</p></div>
+</div>
+<h3>Key findings, honestly stated</h3>
+<ol>
+<li><strong>The three dated reads of the Week 10 report are field-identical (0 deltas).</strong> The weekly
+report page is a weekly artifact, not a live level — so a game-day capture cadence would have missed
+nothing, and a Wed/Thu/Fri cadence (when the practice cycle actually changes the page) is what the
+collector schedules. <a href="pages/deltas.html">Series and deltas</a>.</li>
+<li><strong>The traded-player conflict is real and reproduced</strong>: Daiyan Henley, traded LAC→DEN on
+11/10 per the league's transactions page, is still printed on the LAC section of the Week 10 report.
+<a href="pages/deltas.html">Conflicts</a>.</li>
+<li><strong>15 of 25 November Reserve/Injured placements are absent from their club's report</strong> —
+the exact "not listed must never mean available" case the brief warned about.
+<a href="pages/deltas.html">IR join</a>.</li>
+<li><strong>One club's official depth page is verified and parsed (Packers), self-labelled
+"Unofficial" by the club itself</strong> — captured verbatim, never upgraded, never rank-inferred.
+31 clubs remain unverified. <a href="pages/sources.html">Source registry</a>.</li>
+<li><strong>The drift pins all hold</strong>: 347 rows / 28 clubs / 14 sections, practice tally 94/180/73,
+171 designated rows (49.3%), field-identical reconciliation against both peer captures.
+<a href="pages/drift.html">Drift report</a>.</li>
+</ol>
+</section>
+<section class="panel">
+<h2>Decision-readiness context</h2>
+<p>The project-wide decision-readiness table lives in the peer namespaces (nfl-book, nfl-availability-desk).
+What this namespace changes: the three P1 blockers named in the handover queue — DEC-P1 (price policy),
+the scheduled collector, the game-book parser — now have recorded verdicts and/or implementations, on the
+<a href="pages/decisions.html">Decisions</a> page, each carrying the written recommendation it adopted and
+the reversibility note. Every unverified value in this namespace is blank and listed on
+<a href="pages/flagged.html">Flagged for review</a>.</p>
+</section>
+<footer>
+<p>NFL Collector · session arena/013190b4-own4 · built deterministically from committed artefacts ·
+research only, not wagering advice · every fact row links to the official source it came from;
+unverifiable values are blank and flagged.</p>
+</footer>
+</main></body></html>
