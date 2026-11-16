@@ -3915,3 +3915,19 @@ every value gated by them is published blank + flagged, never inferred.
   (namespace counts, sibling row counts), a sibling merge turns your CI red through no fault of your
   code — `nfl-availability-desk` hit this twice and now pins the inventory to the commit it describes
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
+
+---
+
+## Session `arena/0e86aefb-own4` — final integration & verification (2026-11-16 UTC)
+
+Session ID: `arena/0e86aefb-own4` · Branch: `arena/0e86aefb-own4` (platform-pinned; `session-<id>/<task>` naming not creatable — logged deviation, same as every prior session) · Base: `main` at `1dbde90` (== branch HEAD at claim time).
+
+**Survey at claim time:** main already carries 29 NFL namespaces; the canonical implementation is `nfl-book/` (session arena/c8969a10-own4, PR #107, merged; gap-closure PR #114 / bug fix PR #121; later PRs #117–#122). `nfl-book/` implements the full brief: price-snapshot store (open/close per originated market), verified 137-game results feed, side→total→moneyline origination, fair/market/difference columns (market blank by FB-01 — NFL publishes no odds), signal-vs-staking leaderboard, depth register, correlations with n (official scores only), demotion gate D1, pre-registered strategies (backtest numbers barred from leaderboard), availability graph, fixture context, model outputs (probability + inputs), removal-of-luck panel, two-sided "what would change our mind" fields, venues, weekly diff, vig-free decomposition, joint-evidence gate, ablations, roster sweep holdout, drift alarms, questions/suggestions registers, and a decision-readiness table (R01–R20) on the landing page. Site builds (30 pages) and GitHub Pages reports `status: built` from `main` `/`.
+
+**Differentiated scope (additive + verification only):** no peer namespace is rewritten. This session (a) re-verifies `nfl-book/` line by line against official nfl.com pages fetched THIS session (standings, schedule, game scores, Game Book links, injury report), (b) closes the incomplete injury capture (FB-06: only 2 of 8 `nfl.com/injuries/` chunks captured) by capturing all 8 chunks with fetch-clock timestamps, (c) confirms the live site has no broken links, (d) records the PR/merge/Pages result here. Unverifiable values (market prices, depth strings, snap counts) stay blank + flagged per the blank+flag rule — nothing is inferred.
+
+**Files touched:** `COORDINATION.md` (this claim + result), `nfl-book/data/injuries_week10_capture.json` (full 8-chunk capture + clock), `nfl-book/data/verification_2026-11-16.json` (new, this session's line-by-line checks), `nfl-book/EXECUTIVE_SUMMARY.md` (verification addendum).
+
+**Official sources fetched this session:** https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/schedules/2026/by-week/week-10 · https://www.nfl.com/games/commanders-at-giants-2026-reg-10 · https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1 · https://www.nfl.com/injuries/ (8 chunks)
+
+**Status: done.** Line-by-line re-verification complete: standings snapshot, WAS@NYG 24-21 and NE@SEA 10-13 match official game pages; full 8-chunk injury capture (347 rows, clock 2026-11-16T22:10:00Z) closes FB-06 and adds FB-18 (official page team-label inconsistencies, transcribed as published, none corrected); origination order side→total→moneyline confirmed; market lines blank by policy FB-01 (NFL publishes no odds). Site builds (30 pages) and engine/verify.py PASS (931 rows, 883 sourced, 741 blank+flagged, 1875 links, 0 broken). Ready for PR/merge/Pages.
