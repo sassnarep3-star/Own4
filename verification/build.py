@@ -100,6 +100,23 @@ def table(headers, rows, caption="", numeric=(), cls="", note=""):
 
 
 NAV = [
+    # Added 2026-11-16 by session arena/3858e722-own4 (additive; superset-only edit).
+    # Thirty NFL workspaces had accumulated, fourteen of them presenting themselves as the place to
+    # start, and several publishing different numbers for the same official fact. This group is
+    # placed FIRST because it is the only one that reconciles them: it states the canonical value
+    # for every contested fact with the official page behind it, and leaves the four facts no
+    # official source can settle to the owner. It adds a group; it removes and reorders nothing.
+    ("NFL reconciled · one entry point (2026-11-16)", [
+        ("nfl-reconciled/index.html", "★ START HERE — canonical numbers", "legacy"),
+        ("nfl-reconciled/pages/conflicts.html", "Conflict register (15 facts)", "legacy"),
+        ("nfl-reconciled/pages/results.html", "Results corpus vs the league", "legacy"),
+        ("nfl-reconciled/pages/availability.html", "Availability captures vs live page", "legacy"),
+        ("nfl-reconciled/pages/decisions.html", "What is still undecided (4)", "legacy"),
+        ("nfl-reconciled/pages/workspaces.html", "Workspace index (31)", "legacy"),
+        ("nfl-reconciled/pages/review.html", "⚑ All flagged items (241)", "legacy"),
+        ("nfl-reconciled/pages/method.html", "Method, sources &amp; limits", "legacy"),
+        ("nfl-reconciled/pages/flagged.html", "⚑ Reconciled — flagged for review", "legacy"),
+    ]),
     ("Overview", [
         ("index.html", "Dashboard", "dash"),
         ("verified/executive-summary.html", "Executive summary", "summary"),

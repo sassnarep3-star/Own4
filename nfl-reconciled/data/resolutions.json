@@ -1,0 +1,251 @@
+{
+ "dataset": "resolutions",
+ "title": "Every cross-namespace conflict, its verdict, and the official number that settles it",
+ "built_utc": "2026-11-16",
+ "session": "arena/3858e722-own4",
+ "how_to_read": [
+  "Each row is one fact that two or more NFL workspaces in this repository publish differently.",
+  "VERDICT is one of: SETTLED (an official number decides it), NO CONFLICT (the apparent conflict is a labelling difference with no effect on any number), or REVIEW (no official source settles it; the decision is the owner's and the row says exactly what would settle it).",
+  "No row is filled in with a plausible value. Where the league publishes nothing, the cell is null and the row is on the Flagged for Review page.",
+  "Every SETTLED row cites the official page it was checked against, read on 2026-11-16."
+ ],
+ "rows": [
+  {
+   "id": "RC-01",
+   "fact": "Games in the results corpus",
+   "conflict": "Five workspaces publish a season corpus: nfl-book 137 rows, nfl-command 137, nfl-ledger 137, nfl-decision 136, nfl-edge 136. The brief calls it 'the 136-game log'.",
+   "verdict": "SETTLED",
+   "answer": "148 games have been played. Weeks 1-9 account for 136 of them and Week 10 for 12, and 136 + 12 = 148 is what the official standings force. '136' is therefore correct for weeks 1-9 only; '137' is the same corpus plus the Thursday Week-10 final; neither is the season. A feed whose file says 137 while its coverage note says 'through week 9' is mislabelled, not wrong.",
+   "official_number": 148,
+   "official_source": "https://www.nfl.com/standings/",
+   "official_basis": "Sum of every club's W+L+T = 296 club-games; 296 / 2 = 148 games played.",
+   "repo_evidence": [
+    "nfl-book/data/derived/results_corpus_reconciliation.json"
+   ],
+   "affects": "Every rating, backtest and leaderboard that says it used the full season.",
+   "clearing_action": "None needed for the label; the numbers must be recomputed if a 'full season' claim is made."
+  },
+  {
+   "id": "RC-02",
+   "fact": "Is the stored score data correct, not just incomplete?",
+   "conflict": "Five corpora hold 136-137 games and none states whether the games it does hold are right.",
+   "verdict": "SETTLED",
+   "answer": "The weeks 1-9 data is correct. The official Week-10 finals add exactly 578 points; the corpora contain 6,246 points; 6,246 + 578 = 6,824, which is the league's own published Points-For total, and Points-For equals Points-Against league-wide exactly. Zero points are unaccounted for, so no stored score is contradicted by the league's totals.",
+   "official_number": 6824,
+   "official_source": "https://www.nfl.com/standings/",
+   "official_basis": "Sum of the official PF column = 6,824 = sum of the official PA column.",
+   "repo_evidence": [
+    "nfl-book/data/derived/results_corpus_reconciliation.json"
+   ],
+   "affects": "Team-strength ratings, opponent adjustment, backtest corpus integrity.",
+   "clearing_action": "None."
+  },
+  {
+   "id": "RC-03",
+   "fact": "Which Week-10 games are final and what were the scores?",
+   "conflict": "None of the five corpora contains the Week-10 Sunday finals, so each workspace that quotes a Week-10 result quotes a different subset.",
+   "verdict": "SETTLED",
+   "answer": "12 of the 14 Week-10 fixtures were final when read: WAS 24-21 NYG, NE 10-35 DET, KC 35-13 ATL, HOU 24-27 CLE, MIN 30-10 GB, MIA 22-24 IND, CAR 20-17 NO, BUF 31-12 NYJ, JAX 40-23 TEN, LA 34-6 AZ, SEA 21-13 LV, SF 46-40 DAL. PIT at CIN was in progress (Q1) and LAC at BAL had not kicked off, so both carry no score.",
+   "official_number": 12,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "official_basis": "The 12 fixtures printed as FINAL with a score; the other two printed as LIVE / scheduled.",
+   "repo_evidence": [
+    "nfl-reconciled/data/official_facts.json"
+   ],
+   "affects": "Any per-game result table, results feed, or settlement of a Week-10 forecast.",
+   "clearing_action": "None; the two unfinished games settle when the league posts their finals."
+  },
+  {
+   "id": "RC-04",
+   "fact": "How many fixtures are in Week 10?",
+   "conflict": "Workspaces state 13, 14 and 16 Week-10 fixtures; two peer pages quote '13 games' for the slate.",
+   "verdict": "SETTLED",
+   "answer": "14. Forced twice over: the official schedule page itemises exactly 14 fixtures, and 32 clubs minus the 4 the page lists on bye (CHI, DEN, PHI, TB) divided by 2 is 14.",
+   "official_number": 14,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "official_basis": "The page's own fixture list plus its 'Teams on Bye' block of four clubs.",
+   "repo_evidence": [
+    "nfl-reconciled/data/official_facts.json"
+   ],
+   "affects": "Slate completeness claims, per-week coverage ratios.",
+   "clearing_action": "None."
+  },
+  {
+   "id": "RC-05",
+   "fact": "Rows in the Week-10 availability capture",
+   "conflict": "Stored captures range from 98 to 352 rows (10 artefacts, 6 distinct counts: 98, 107, 275, 326, 347, 352). The brief cites 254 and 279 as the published figures.",
+   "verdict": "SETTLED",
+   "answer": "347 rows over 28 club sections is the only figure that the live page supports for a complete reading. Two independent captures hold 347 rows over the same 28 clubs and both reproduce the official table exactly where this session counted it (8 of 8 club row counts, 18 of 18 cells). 352 is the same 347 rows with a five-line header block counted as data. 326, 275, 107 and 98 are partial captures, not errors. 254 and 279 are not reproducible from this tree.",
+   "official_number": 347,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "Club-by-club row counts counted by hand from the returned table for WAS 9, NYG 11, NE 15, DET 9, KC 13, ATL 11, MIN 13, GB 17, all reproduced exactly by both 347-row captures.",
+   "repo_evidence": [
+    "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv",
+    "nfl-marketboard/data/raw/injuries_week10_official.csv",
+    "nfl-reconciled/data/derived/injury_capture_reconciliation.json"
+   ],
+   "affects": "Every injury-derived count on every site, and the 254-vs-279 claim in the brief.",
+   "clearing_action": "None for the count; the 254/279 claim should be treated as stale."
+  },
+  {
+   "id": "RC-06",
+   "fact": "The three Lions game-status designations",
+   "conflict": "The brief states Kerby Joseph, Cade Mays and D.J. Reed are published with a blank game-status cell.",
+   "verdict": "SETTLED",
+   "answer": "They are not blank. All three are published as Out, with practice Did Not Participate, and both 347-row captures reproduce it. The brief's observation is stale: it described the page at an earlier capture, not the current one.",
+   "official_number": 3,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "DET table rows: Kerby Joseph (S, Knee) Out; Cade Mays (C, Ankle) Out; D.J. Reed (CB, Hip) Out.",
+   "repo_evidence": [
+    "nfl-reconciled/data/derived/injury_capture_reconciliation.json"
+   ],
+   "affects": "Any 'missing designation' flag still open in a workspace.",
+   "clearing_action": "Close the flag as superseded."
+  },
+  {
+   "id": "RC-07",
+   "fact": "Which clubs publish no injuries",
+   "conflict": "The brief states Seattle and Cincinnati are shown as injury-free while listing 15 and 4 players, and that the page shows 4 no-injury sections rather than 2.",
+   "verdict": "SETTLED",
+   "answer": "Neither club is injury-free and none of the 28 club sections in the report is empty. Seattle carries 15 rows and Cincinnati 9 in the verified capture. The 'no injury' text in the brief refers to the injury-description column being blank for a player who is still listed with a practice status, not to a club having no listed players. There are zero empty club sections in the live table.",
+   "official_number": 0,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "Every club section on the live page carries at least one player row; the capture's 28 sections are all non-empty (minimum 5 rows).",
+   "repo_evidence": [
+    "nfl-reconciled/data/derived/injury_capture_reconciliation.json"
+   ],
+   "affects": "The injury-free / no-injury-section counts quoted in the brief.",
+   "clearing_action": "None; the brief's figures should be retired."
+  },
+  {
+   "id": "RC-08",
+   "fact": "Share of report rows carrying a formal game designation",
+   "conflict": "The brief states only 6 of 254 rows carry a game designation. Workspaces publish 6, 125 and 171.",
+   "verdict": "SETTLED",
+   "answer": "171 of 347 rows (49.3%) carry a game designation. The vocabulary the league actually uses on the page is Questionable 90, Out 70, Doubtful 11; 176 rows are blank. 'Probable' does not appear. The '6' figure is the count of rows in a hand-picked explicit-status list in one workspace, not a count of the report.",
+   "official_number": 171,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "Game Status column counted across the verified 347-row capture; the three values above are the only non-blank entries.",
+   "repo_evidence": [
+    "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv"
+   ],
+   "affects": "Any calibration of what a designation means, and the '6 of 254' claim.",
+   "clearing_action": "None."
+  },
+  {
+   "id": "RC-09",
+   "fact": "Two clubs use two different codes",
+   "conflict": "One capture writes ARI and LA, another writes AZ and LAR, so a naive join finds 29 rows 'missing' on each side.",
+   "verdict": "NO CONFLICT",
+   "answer": "A labelling difference with no effect on any number. Normalised, the two 347-row captures hold the identical 347 (club, player) pairs and all 18 spot-checked cells agree.",
+   "official_number": 347,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "The official page prints the club name; both code conventions refer to the same 28 clubs.",
+   "repo_evidence": [
+    "nfl-reconciled/data/derived/injury_capture_reconciliation.json"
+   ],
+   "affects": "Any cross-workspace join on club code.",
+   "clearing_action": "A single code convention should be adopted; it changes no value."
+  },
+  {
+   "id": "RC-10",
+   "fact": "Which dashboard a reviewer should open",
+   "conflict": "31 nfl* workspaces publish 420 pages. At least 14 of them present themselves as the place to start, and 4 carry a decision-readiness register.",
+   "verdict": "SETTLED",
+   "answer": "The root navigation now opens with one entry point that states, for each fact, which workspace holds the canonical value and why. This page is that entry point. It does not delete or edit any workspace; it makes the choice explicit instead of leaving 14 competing 'start here' pages.",
+   "official_number": null,
+   "official_source": null,
+   "official_basis": "No official source decides this; it is a property of this repository, so the verdict is derived from the repository itself and published with the count.",
+   "repo_evidence": [
+    "nfl-reconciled/data/derived/namespace_index.json"
+   ],
+   "affects": "Reviewer time, and the risk of reading a stale page.",
+   "clearing_action": "None for reading; the owner may still choose to retire workspaces (see RR-01)."
+  },
+  {
+   "id": "RC-11",
+   "fact": "Market prices",
+   "conflict": "Every workspace publishes blank market columns and blames a missing official price source; three of them disagree on whether a third-party price may be shown at all.",
+   "verdict": "REVIEW",
+   "answer": null,
+   "official_number": null,
+   "official_source": null,
+   "official_basis": "The NFL publishes no betting price, so no official number exists to settle this. Whether a licensed or third-party price may be used is a rights decision, not a data decision.",
+   "repo_evidence": [
+    "nfl-availability-desk/data/questions.json",
+    "nfl-book/data/suggestions.json",
+    "nfl-verify/data/questions.json"
+   ],
+   "affects": "ROI, closing-line value, rewards, gate G7, every leaderboard tier.",
+   "clearing_action": "One written owner verdict on acceptable price sources plus the provider's terms. Until then every price cell stays blank."
+  },
+  {
+   "id": "RC-12",
+   "fact": "Ordered depth rank (1st/2nd/3rd/4th string)",
+   "conflict": "Workspaces publish a 32-club depth register, a per-team replacement view and a matchup matrix, while others state no official ordered depth exists to store.",
+   "verdict": "REVIEW",
+   "answer": null,
+   "official_number": null,
+   "official_source": null,
+   "official_basis": "The league publishes no league-wide ordered depth chart. Club pages exist but vary (one publishes an image, one prepends jersey numbers, some list several players in one slot), so no single official source settles a rank for all 32 clubs.",
+   "repo_evidence": [
+    "nfl-book/data/depth_register.json",
+    "nfl-book/data/matchup_matrix.json"
+   ],
+   "affects": "The backup-deficiency feature, the matchup matrix, and any 'replacement at depth d' claim.",
+   "clearing_action": "A club-by-club verification route, or an official snap-count feed, verified for all 32 clubs before any depth-dependent number is ranked."
+  },
+  {
+   "id": "RC-13",
+   "fact": "Player props and parlays",
+   "conflict": "Workspaces publish prop and same-game-parlay structures with no prices; others publish correlations with n=0.",
+   "verdict": "REVIEW",
+   "answer": null,
+   "official_number": null,
+   "official_source": null,
+   "official_basis": "No official price and no official per-game player log exist under the official-source rule, so neither a prop price nor a prop correlation can be computed from an official source.",
+   "repo_evidence": [
+    "nfl-book/data/correlations.json",
+    "nfl-book/data/joint_evidence.json"
+   ],
+   "affects": "Prop combos, same-game parlays, joint-evidence gate.",
+   "clearing_action": "Same verdict as RC-11, plus an official per-game player-stat source."
+  },
+  {
+   "id": "RC-14",
+   "fact": "The 2026 kickoff / onside-kick regime priors",
+   "conflict": "Two workspaces publish different 2026 rule priors as model inputs.",
+   "verdict": "REVIEW",
+   "answer": null,
+   "official_number": null,
+   "official_source": null,
+   "official_basis": "This session did not read the 2026 rulebook, so it does not assert what the 2026 kickoff or onside-kick rules are. Asserting either would be a guess.",
+   "repo_evidence": [
+    "nfl-book/data/model_outputs.json"
+   ],
+   "affects": "Kickoff-adjacent totals and 4th-quarter win-probability curves.",
+   "clearing_action": "Someone must read the official 2026 rulebook section and freeze the rule text with a commit hash before it is used as a prior."
+  },
+  {
+   "id": "RC-15",
+   "fact": "Four clubs have no section in the Week-10 injury report",
+   "conflict": "A workspace flags the absence of CHI, DEN, PHI and TB from the report as a possible capture defect or as 'no injuries'.",
+   "verdict": "SETTLED",
+   "answer": "It is neither a defect nor an injury-free state: those four clubs are the four on bye in Week 10, and a club that is not playing has no game-status column to publish. The official schedule page lists exactly those four clubs under 'Teams on Bye'.",
+   "official_number": 4,
+   "official_source": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "official_basis": "The page's 'Teams on Bye' block: CHI 7-2, DEN 7-2, PHI 2-7, TB 3-6.",
+   "repo_evidence": [
+    "nfl-reconciled/data/official_facts.json"
+   ],
+   "affects": "The 28-of-32 club coverage figure, and any count of 'clubs missing from the report'.",
+   "clearing_action": "Close the flag and record 28 playing clubs = 32 minus 4 on bye."
+  }
+ ],
+ "counts": {
+  "rows": 15,
+  "settled": 10,
+  "no_conflict": 1,
+  "review": 4
+ }
+}
