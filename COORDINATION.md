@@ -3992,3 +3992,45 @@ Session ID: `arena/0e86aefb-own4` · Branch: `arena/0e86aefb-own4` (platform-pin
 
 **Status: done.** Line-by-line re-verification complete: standings snapshot, WAS@NYG 24-21 and NE@SEA 10-13 match official game pages; full 8-chunk injury capture (347 rows) closes FB-06; origination order side→total→moneyline confirmed; market lines blank by policy FB-01 (NFL publishes no odds). Site builds (30 pages) and engine/verify.py PASS (931 rows, 883 sourced, 741 blank+flagged, 1875 links, 0 broken). Ready for PR/merge/Pages.
 
+
+
+## Session `arena/f7545de2-own4` — NFL results corpus, venues, model & lines (CLAIM, 2026-11-16)
+
+**Session ID:** `arena/f7545de2-own4` · **Branch:** `arena/f7545de2-own4` (platform-pinned; the
+`session-<id>/<task>` branch naming is not creatable in this harness — same logged deviation as every
+prior session) · **Base:** `1dbde90` (= `main` after PR #122).
+
+**Gap that justifies this session (surveyed before claiming, not assumed):**
+
+1. **The results corpus is not page-verified.** `nfl-book/data/results_feed.json` says on its face that
+   only **32 of 137** games were re-read line by line; **105 rows are `aggregate_only`** and explicitly
+   "not certified". The brief asks for a pre-registered backtest corpus and a verified results feed. This
+   session re-reads **every 2026 regular-season game of weeks 1–10 from the official week schedule page**
+   and publishes the per-game difference against the inherited feed.
+2. **Venues are 0 of 13.** `nfl-book/data/venues.json` carries 13 Week 11 rows, all
+   `venue:""`, status `pending transcription from the official game centre`. The brief asks for the venue
+   of every fixture transcribed from the official game centre. This session transcribes them.
+3. **No model forecast is stored with its inputs and graded out of sample.** `nfl-book` publishes 13
+   Week 11 lines whose individual forecasts are not graded against results (the games are unplayed), and
+   its walk-forward metrics are published without the per-game forecast rows. This session publishes a
+   walk-forward set where **every forecast row carries P, its inputs, its official result and its score**.
+
+**Namespace:** `nfl-sources/` (new; no peer owns this path). Shared files touched: `COORDINATION.md`
+(append-only) and `verification/build.py` (NAV: one additive group; the file is regenerated, not hand-edited).
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| S1 | Claim + repo survey + verify this session's own claim | in progress | arena/f7545de2-own4 | `COORDINATION.md` |
+| S2 | Official re-read of every 2026 week 1–10 game (week schedule pages) → page-verified results corpus + reconciliation vs `nfl-book/results_feed.json` | claimed | arena/f7545de2-own4 | `nfl-sources/data/results_by_game.json` |
+| S3 | Venue transcription for all 13 Week 11 fixtures from the official game centre | claimed | arena/f7545de2-own4 | `nfl-sources/data/venues_week11.json` |
+| S4 | Opponent-aware ratings + own lines (side→total→moneyline), open and close snapshots, market column blank by rule, residual published | claimed | arena/f7545de2-own4 | `nfl-sources/data/lines_week11.json` |
+| S5 | Walk-forward forecast register (P + inputs per game) graded against official results; proper scores, ROI at a stated price, luck panel | claimed | arena/f7545de2-own4 | `nfl-sources/data/forecast_register.json` |
+| S6 | Correlations from official numbers only, with n, p and CI; independent re-check of `nfl-book` CR-01..CR-05 | claimed | arena/f7545de2-own4 | `nfl-sources/data/correlations.json` |
+| S7 | Site: landing + 11 category subpages, every row source-linked, decision-readiness table, Flagged for Review | claimed | arena/f7545de2-own4 | `nfl-sources/index.html`, `nfl-sources/pages/**` |
+| S8 | Engine (stdlib only, deterministic, no network) + `verify.py` gate + CI workflow | claimed | arena/f7545de2-own4 | `nfl-sources/engine/**`, `.github/workflows/nfl-sources.yml` |
+| S9 | Final integration: rebuild, run every gate, PR → merge → Pages live check → record result | claimed | arena/f7545de2-own4 | `COORDINATION.md` |
+
+**Claim note.** Prior sessions completed their work and merged (PR #122 is the tip of `main`, so no claim
+is stale). This session does **not** redo, overwrite or delete any peer namespace; it is additive and
+verifies peer numbers rather than restating them. No other session's file is edited except the two shared
+files named above, both append/regenerate only.
