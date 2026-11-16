@@ -470,6 +470,22 @@ NAV = [
         ("verification-2026-11-13/index.html", "Verification report", "legacy"),
         ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
     ]),
+    # Added 2026-11-16 by session arena/448c248f-own4: the nfl-decision-gaps namespace - the
+    # decision-support layer (open questions with the number that would clear each one, a
+    # have/don't-have matrix, a suggestions board with blank verdicts, and the official
+    # inactive / reserve-list evidence). Appended at the end of NAV; no existing entry is
+    # reordered, relabelled or removed.
+    ("NFL Decision Gaps · 2026-11-16", [
+        ("nfl-decision-gaps/index.html", "Decision gaps — start here", "legacy"),
+        ("nfl-decision-gaps/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-decision-gaps/pages/open-questions.html", "Open questions (20)", "legacy"),
+        ("nfl-decision-gaps/pages/information-gaps.html", "Have / don't have", "legacy"),
+        ("nfl-decision-gaps/pages/availability-evidence.html", "Availability evidence &amp; reserve list", "legacy"),
+        ("nfl-decision-gaps/pages/suggestions.html", "Suggestions board (15, blank verdicts)", "legacy"),
+        ("nfl-decision-gaps/pages/repo-review.html", "Repo review &amp; irregularities", "legacy"),
+        ("nfl-decision-gaps/pages/sources.html", "Sources read this session", "legacy"),
+        ("nfl-decision-gaps/pages/flagged.html", "⚑ Decision Gaps — flagged for review", "legacy"),
+    ]),
 ]
 
 # The NFL research group title used to be a hand-typed count and drifted twice: it read

@@ -1,0 +1,114 @@
+[
+ {
+  "id": "F1",
+  "sev": "high",
+  "area": "Results",
+  "item": "PIT at CIN, Week 10 - no final score published",
+  "detail": "Both https://www.nfl.com/schedules and https://www.nfl.com/scores/ rendered this fixture as LIVE (Q1 08:56, PIT 0 - CIN 3, FIELD GOAL) when read on 2026-11-16, a Monday, while the same pages render the other twelve Week 10 games as Final. The score is left blank rather than inferred. Whether this is page caching or a genuine suspension, the result is not verified.",
+  "src": "S6, S7"
+ },
+ {
+  "id": "F2",
+  "sev": "high",
+  "area": "Repository",
+  "item": "Three incompatible row counts published for the same injury page",
+  "detail": "Earlier sessions published 254, 279 and 347 rows for the Week 10 nfl.com injury report. This session's parse of the committed 2026-11-13 capture returns 326 rows over 28 clubs, and the live 2026-11-16 page differs from that capture again. Which quantity each earlier number counts is not stated, so they cannot be reconciled.",
+  "src": "S8, S1"
+ },
+ {
+  "id": "F3",
+  "sev": "medium",
+  "area": "Availability",
+  "item": "One Out player neither the inactive list nor the reserve list explains",
+  "detail": "TreVeyon Henderson (NE) and Tyler Goodson (DAL) carried an Out designation while absent from the Week 10 inactive list; the official reserve list now explains both (Reserve/Injured, 11/14). Kerby Joseph (DET) remains unaccounted for: Out on the injury report, absent from the inactive list, and absent from the November 2026 reserve list. No official page read this session states why.",
+  "src": "S1, S4, S10"
+ },
+ {
+  "id": "F4",
+  "sev": "high",
+  "area": "Availability",
+  "item": "56.5% of inactive players are absent from the injury report",
+  "detail": "On the eight clubs where every live row was read and joined to the official inactive list, 26 of 46 inactive players (24 of 44 excluding emergency third quarterbacks) do not appear on the injury report in any form. The injury report alone therefore cannot establish who is unavailable.",
+  "src": "S1, S4"
+ },
+ {
+  "id": "F5",
+  "sev": "high",
+  "area": "Depth",
+  "item": "nfl.com publishes no depth chart",
+  "detail": "https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 page and the club page offers only Info, Roster and Stats. The brief's 'club depth pages' therefore cannot be satisfied from nfl.com; the 32 club domains were not read this session.",
+  "src": "S2, S3"
+ },
+ {
+  "id": "F6",
+  "sev": "high",
+  "area": "Prices",
+  "item": "No official price source exists",
+  "detail": "No spread, total or moneyline was found on the Game Center, the schedule page, the scores page or the club page. Every residual, CLV and ROI figure must stay blank until the price-data policy is decided.",
+  "src": "S3, S5, S6, S7"
+ },
+ {
+  "id": "F7",
+  "sev": "medium",
+  "area": "Depth",
+  "item": "Snap counts and announced starters not found",
+  "detail": "Neither a snap-count table nor a starters list was found on any official page read this session. A gamebook-PDF route is described on third-party forums; it was not retrieved, so no claim is made about it.",
+  "src": "S3, S5"
+ },
+ {
+  "id": "F8",
+  "sev": "medium",
+  "area": "Environment",
+  "item": "No roof designation, surface or wind on the official pages",
+  "detail": "The Game Center Game Info block publishes Location, Stadium and Network only. The schedule page carries a summary weather chip ('Weather Clearnight') and nothing more. The NWS overlay the brief asks for is a separate domain, not read here.",
+  "src": "S5, S6"
+ },
+ {
+  "id": "F9",
+  "sev": "medium",
+  "area": "Availability",
+  "item": "Every number pinned to the 2026-11-13 capture is stale",
+  "detail": "The live page read on 2026-11-16 differs from the committed capture: two Lions rows changed, two Ravens rows appeared, Doubtful designations appeared, and the club records in the headers were replaced with post-game records.",
+  "src": "S8, S1"
+ },
+ {
+  "id": "F10",
+  "sev": "medium",
+  "area": "Repository",
+  "item": "30 nfl-* namespaces repeat the same page set",
+  "detail": "The repository carries 30 top-level nfl-* namespaces, most with their own questions, suggestions and review pages. Contradictory published values (F2) are the predictable result.",
+  "src": "repo"
+ },
+ {
+  "id": "F11",
+  "sev": "low",
+  "area": "Fixtures",
+  "item": "One Week 10 venue not captured",
+  "detail": "The WAS/NYG fixture of 12 November has no venue recorded: the inactives article covers Sunday games only and that game centre was not read.",
+  "src": "S4"
+ },
+ {
+  "id": "F12",
+  "sev": "medium",
+  "area": "Availability",
+  "item": "The availability series has two time points, not four",
+  "detail": "The brief asks for Wednesday, Thursday and Friday captures plus kickoff. Only 2026-11-13 and 2026-11-16 exist, so the DNP to LP to FP path cannot be replayed.",
+  "src": "S8, S1"
+ },
+ {
+  "id": "F14",
+  "sev": "medium",
+  "area": "Availability",
+  "item": "The reserve list is published but not captured anywhere in this repository",
+  "detail": "https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated Reserve/Injured moves for November 2026, including the Malik Willis case the project brief cites. Nothing in the repository ingests it, so an injured-reserve player still appears simply as 'not listed'.",
+  "src": "S10"
+ },
+ {
+  "id": "F13",
+  "sev": "low",
+  "area": "Fixtures",
+  "item": "Week 11 not yet published; dated announcement not located",
+  "detail": "The schedule page still showed Week 10 at fetch time on 2026-11-16. It carries a 2026 TBD-games note and links the flexible-scheduling procedures page, but the dated announcement article itself was not located.",
+  "src": "S6"
+ }
+]
