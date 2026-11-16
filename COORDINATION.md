@@ -4266,3 +4266,40 @@ artefact and referenced by that artefact, never inlined into prose.
 **Claim state:** K1–K7 **done**. This session releases `nfl-decision-console/**`,
 `.github/workflows/nfl-decision-console.yml`, and its additive nav group in `verification/build.py`; the
 peer namespaces named in `DC-11`/`DC-13` remain theirs, and this session edited none of them.
+
+
+
+# Session `arena/448c248f-own4` — claim + task board (2026-11-16 UTC)
+
+**Branch (fixed for this session):** `arena/448c248f-own4`, branched from `1dbde903b3999d35db9153ee9067bd13822ef1cd`.
+**Session ID:** `arena/448c248f-own4` (a.k.a. `448c248f`).
+**Start state:** branch is at parity with `origin/main` (0 ahead / 0 behind at claim time). Open PRs present:
+#119, #93, #59, #56, #47, #43, #39, #29 — none of them claim the scope below.
+
+## Scope claimed (exclusive)
+
+New namespace **`nfl-decision-gaps/`** plus the generator, verifier, CI workflow and the additive
+root-nav group that points at it. No other session's namespace directory, data file or page is edited.
+
+| ID | Task | Status | Owner | Files touched (claimed scope) |
+|----|------|--------|-------|------------------------------|
+| X1 | Claim scope, read board, verify no peer claims this namespace | in progress | arena/448c248f-own4 | `COORDINATION.md` (append-only) |
+| X2 | Line-by-line repo review: inventory every namespace, page, data file; flag irregularities | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/data/repo_inventory.json` |
+| X3 | Consolidated OPEN QUESTIONS register (question · what we have + source · what we don't have · what would clear it · discovery suggestion) | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/data/questions.json` |
+| X4 | Information HAVE / DON'T-HAVE matrix by data domain, every cell sourced or blank | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/data/information_gaps.json` |
+| X5 | SUGGESTIONS REVIEW BOARD: per-suggestion options A/B/C with trade-offs, effort, risk, dependency, recommended path, verdict left blank for the reviewer | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/data/suggestions.json` |
+| X6 | Official-source re-verification of the live NFL pages (injury report, schedule, standings, transactions) — fetch, count, hash, cite | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/data/official_capture.json` |
+| X7 | Static site: landing + 7 subpages, one row per item, every row source-linked, blanks flagged | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/index.html`, `nfl-decision-gaps/pages/*.html`, `nfl-decision-gaps/engine/build.py` |
+| X8 | Verifier (0 broken links, 0 localhost, every row sourced) + CI workflow | unclaimed → claimed | arena/448c248f-own4 | `nfl-decision-gaps/engine/verify.py`, `.github/workflows/nfl-decision-gaps.yml` |
+| X9 | Additive root-nav group in `verification/build.py` (shared output — appended at the end of `NAV`, no existing entry edited) | unclaimed → claimed | arena/448c248f-own4 | `verification/build.py` (append-only NAV edit), regenerated `index.html` + `verified/*.html` |
+| X10 | PR → main → merge → Pages deploy confirmation | unclaimed → claimed | arena/448c248f-own4 | — |
+
+## Rules this session follows (from the board)
+
+* Append-only edits to `COORDINATION.md` and to `NAV` in `verification/build.py`.
+* No value is published unless it was read from an official source this session or is reproduced
+  verbatim from a file already committed in this repo (and then cited to that file).
+  Anything else is rendered **blank — unverified** and listed on the Flagged page.
+* Nothing tree-wide (namespace counts, sibling row counts) is written as a literal into rendered
+  prose; those are computed at build time (the failure mode documented by `arena/20f55d17-own4`).
+* `git pull --rebase` before every push; conflicts resolved as unions, never by discarding a peer's work.
