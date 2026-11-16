@@ -1,0 +1,108 @@
+{
+  "dataset": "nfl_collector_decisions",
+  "title": "Decision ledger — the P1 queue answered under the standing no-manual-input instruction",
+  "built_utc": "2026-11-16",
+  "provenance_rule": "The brief instructs every session: 'There should be no manual input on my part. Work on your own to finish all tasks in this session' and 'Do not stop to wait for my review.' Prior sessions therefore left suggestion verdicts blank for the owner. That queue stalled on three P1 items. This session adopts each item's RECOMMENDED option (the option each peer session itself recommended in writing), records the verdict and the rationale below, and FLAGS the whole ledger for post-hoc owner review (RC-08). Any verdict the owner disagrees with is reversible: nothing adopted here deletes prior work, and every price-dependent path stays blank.",
+  "rows": [
+    {
+      "id": "DEC-1",
+      "decision_point": "DEC-P1 / availability-desk SUG-01 + nfl-book SG-01 — what counts as a market price",
+      "verdict": "B",
+      "option_text": "Decline prices for now: publish fair lines and availability indices only; every market/residual/CLV column stays structurally present and blank; rewards stay 0.",
+      "recommendation_source": "nfl-book/data/suggestions.json SG-01 'recommendation': 'B now (keeps every published number verifiable), revisit A if the project is funded'",
+      "rationale": "The standing brief requires every published value to come from an official source and forbids filling unverified values. No official price source exists (verified independently by at least five sessions). Option A requires funding the owner has not provided; option C admits non-official prices, which the brief's own rule would print blank anyway. B is the only verdict that is both implementable without new money and fully brief-compliant. Reversible: a later A/C verdict reopens the columns; no blank is ever overwritten.",
+      "implemented_this_session": false,
+      "blocks_lifting": "G7/ROI/CLV/residual/vig stay blank + flagged until the owner licenses a source (A) or writes a labelled-non-official policy (C)"
+    },
+    {
+      "id": "DEC-2",
+      "decision_point": "availability-desk SUG-02 — scheduled collector with a hash chain",
+      "verdict": "A",
+      "option_text": "A GitHub Actions workflow on a Wed/Thu/Fri + daily-to-kickoff cron that commits a dated capture with sha256 and runs the drift alarm.",
+      "recommendation_source": "availability-desk Q-21 'discovery': 'a decision on SUG-02 (schedule the collector) — the code half is done, the schedule half is not'; handover queue named SUG-02 A explicitly",
+      "rationale": "The whole 'delta not level' series depends on cadence, not on lucky manual reads. The workflow, ledger hash chain, drift alarm and delta engine are built in this namespace and CI-verified; the scheduled job commits dated byte-level captures after merge.",
+      "implemented_this_session": true,
+      "artifact": ".github/workflows/nfl-collector.yml + nfl-collector/engine/collect.py"
+    },
+    {
+      "id": "DEC-3",
+      "decision_point": "availability-desk SUG-03 — the game-book parser",
+      "verdict": "B",
+      "option_text": "Parse one club one week as a spike, then decide (rather than committing to a full-week parse before the source format is proven).",
+      "recommendation_source": "handover queue named 'approve the game-book parser (SUG-03 A)'; this session downgrades its own commitment to B because the official PDF's URL-per-fixture was not yet located and verified in-session — a full-week parser built against an unverified URL would violate the no-hallucination rule",
+      "rationale": "The brief's own rule (never infer, verify everything) applies to URLs too. The spike route (B) verifies the source format on one fixture before the full-week commitment (A) is made. Status and the concrete discovery step are published as RC-07.",
+      "implemented_this_session": false,
+      "artifact": "data/sources.json candidate_sources_not_yet_verified.game_books"
+    },
+    {
+      "id": "DEC-4",
+      "decision_point": "nfl-book SG-03 — pre-register the paired test vs the better-record baseline",
+      "verdict": "A",
+      "option_text": "Pre-register the exact McNemar comparison now; evaluate only on Week 11+ games.",
+      "recommendation_source": "nfl-book/data/suggestions.json SG-03 'recommendation': 'A'",
+      "rationale": "The 0.6731 vs 0.6346 comparison was post-hoc and cannot support a claim. PREREG-002 freezes rule text, sample window (weeks >= 11), statistic, gates and refusal conditions BEFORE any Week 11 result exists; the evaluator's calibration reproduces the published weeks 3-10 backtest exactly and then refuses to grade anything pre-Week-11.",
+      "implemented_this_session": true,
+      "artifact": "nfl-collector/prereg/PREREG-002-mcnemar-s1-vs-better-record.md + engine/eval_mcnemar.py (status: PENDING, no Week 11 results yet)"
+    },
+    {
+      "id": "DEC-5",
+      "decision_point": "availability-desk SUG-07 / nfl-book SG-07 — start a dated official availability archive",
+      "verdict": "A",
+      "option_text": "Archive the official report every week going forward (snapshot + date + URL).",
+      "recommendation_source": "both peers' recommendation fields say A",
+      "rationale": "Without dated history, injury effects can never be measured. The collector's ledger is that archive; the Week 10 series now has three dated reads and the Week 11 cycle will accumulate its own.",
+      "implemented_this_session": true,
+      "artifact": "data/captures/ledger.json (hash chain)"
+    },
+    {
+      "id": "DEC-6",
+      "decision_point": "availability-desk SUG-05 — transactions as a first-class feed joined to availability rows",
+      "verdict": "A",
+      "option_text": "Daily transaction-hub capture, keyed to club+player, flagging any availability row older than the last roster event.",
+      "recommendation_source": "availability-desk SUG-05 recommendation A; the traded-player-still-listed conflict it predicted was reproduced computationally this session (Daiyan Henley, LAC report vs 11/10 trade to DEN)",
+      "rationale": "Implemented for the trades and reserve-list categories this session; the remaining categories (signings, waivers, terminations, other) follow the same registered pattern in CI.",
+      "implemented_this_session": true,
+      "artifact": "engine/delta.py build_conflicts() — 1 conflict of 12 trades; 15 IR-absent rows"
+    },
+    {
+      "id": "DEC-7",
+      "decision_point": "availability-desk SUG-12 — publish the read-window and the imprecision, always",
+      "verdict": "A",
+      "option_text": "Adopt 'read window + method + limitation' as the required capture header on every dataset.",
+      "recommendation_source": "availability-desk SUG-12 recommendation A",
+      "rationale": "Every capture in this namespace carries clock.window_evidence, method.how and method.limitation; no fake minute-level timestamps are claimed anywhere.",
+      "implemented_this_session": true,
+      "artifact": "data/capture_manifest.json + every capture's clock/method blocks"
+    },
+    {
+      "id": "DEC-8",
+      "decision_point": "availability-desk SUG-09 — add a coverage column to every dataset",
+      "verdict": "A",
+      "option_text": "Coverage line under every table, generated from the data, not typed.",
+      "recommendation_source": "availability-desk SUG-09 recommendation A",
+      "rationale": "Three captures of one official page once differed by 21, 71 and 0 rows; a generated coverage line is the cheapest protection against a reader not knowing what a table actually covers.",
+      "implemented_this_session": true,
+      "artifact": "engine/build_site.py emits a generated coverage line under every data table"
+    },
+    {
+      "id": "DEC-9",
+      "decision_point": "availability-desk SUG-04 — provisional-but-unranked rows on leaderboards",
+      "verdict": "A (where applicable)",
+      "option_text": "Show rows with an explicit 'not ranked' band rather than an empty board.",
+      "recommendation_source": "availability-desk SUG-04 recommendation A",
+      "rationale": "This namespace publishes no leaderboard of its own (peer namespaces own the boards); the evaluator page states the PENDING/provisional gate vocabulary from PREREG-002, which is the same principle applied to tests.",
+      "implemented_this_session": true,
+      "artifact": "pages/evaluation.html gate vocabulary"
+    },
+    {
+      "id": "DEC-10",
+      "decision_point": "availability-desk SUG-08 — collapse the NFL namespaces to one canonical site",
+      "verdict": "DEFERRED to owner (no verdict adopted)",
+      "option_text": "Option A requires a designation the peers themselves marked 'owner decision required'; option B (index-of-indexes) already exists in the root navigation directory.",
+      "recommendation_source": "availability-desk SUG-08 'cost' line: 'A: a rename + links' with owner sign-off implied; unlike the other P1s, no written recommendation exists for one canonical choice",
+      "rationale": "This is the one decision where the standing instruction and the peers' own 'owner decision required' label collide, and the downside of guessing wrong (freezing 20+ namespaces wrongly) outweighs the stall. The root directory already serves the reviewer; nothing is blocked by waiting.",
+      "implemented_this_session": false,
+      "artifact": "none (deferred)"
+    }
+  ]
+}

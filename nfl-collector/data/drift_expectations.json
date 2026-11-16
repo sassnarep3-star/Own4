@@ -1,0 +1,66 @@
+{
+  "dataset": "nfl_collector_drift_expectations",
+  "title": "What every capture must look like — pinned BEFORE the capture was taken",
+  "built_utc": "2026-11-16",
+  "pinned_from": "the Week 10 league report structure as published on nfl.com, cross-checked against the two peer captures already in this repository (nfl-availability-desk/data/drift_expectations.json and nfl-book/data/injuries_week10_capture.json) — no number here is invented",
+  "why": "The brief's alarm: 'Add a drift alarm to every scraper — pin each parser to expected row counts and required fields; fail the build loudly when a field goes missing rather than publishing a blank.' These pins are the collector's tripwires; engine/drift.py enforces them on every capture, session or CI.",
+  "applies_to": "engine/transcribe.py, engine/collect.py, engine/drift.py",
+  "league_injury_report": {
+    "week": 10,
+    "rows_total": 347,
+    "club_sections": 28,
+    "game_sections": 14,
+    "required_fields": ["team", "opp", "player", "pos", "injury", "practice_status", "game_status", "player_slug"],
+    "must_be_nonblank": ["team", "opp", "player", "pos", "practice_status", "player_slug"],
+    "allowed_game_status": ["Doubtful", "Out", "Questionable", "Probable"],
+    "allowed_practice_status": ["Did Not Participate In Practice", "Full Participation in Practice", "Limited Participation in Practice"],
+    "rows_by_club": {
+      "WAS": 9, "NYG": 11, "NE": 15, "DET": 9, "KC": 13, "ATL": 11, "MIN": 13, "GB": 17,
+      "JAX": 11, "TEN": 12, "BUF": 14, "NYJ": 9, "MIA": 11, "IND": 14, "CAR": 12, "NO": 12,
+      "HOU": 16, "CLE": 12, "LAR": 14, "AZ": 15, "SEA": 15, "LV": 5, "SF": 12, "DAL": 19,
+      "PIT": 8, "CIN": 9, "LAC": 19, "BAL": 10
+    },
+    "injury_labelled_rows": 171,
+    "designation_coverage_floor_pct": 35.0,
+    "note_on_anchors": "the exact row/club/section counts and the practice-status tally are pinned to the Week 10 report as published; a future capture of a DIFFERENT week legitimately differs, so a CI capture of another week validates structure (fields, vocabulary, floor) and records counts without failing on the Week 10 anchors — the anchors are enforced only for captures whose source URL or week control says Week 10"
+  },
+  "league_transactions": {
+    "required_fields": ["from", "to", "date_as_printed", "player", "transaction"],
+    "must_be_nonblank": ["from", "to", "date_as_printed", "player", "transaction"],
+    "position_blank_allowed": true,
+    "note": "the November 2026 trades view printed a blank Position cell on every row; blank is preserved, never filled"
+  },
+  "league_reserve_list": {
+    "required_fields": ["from", "to", "date_as_printed", "player", "transaction"],
+    "must_be_nonblank": ["from", "to", "date_as_printed", "player", "transaction"],
+    "position_blank_allowed": true,
+    "expected_rows_2026_11": 25,
+    "expected_transaction_value": "Reserve/Injured",
+    "coverage_note_pinned": "the rendered November table begins at 11/07; IR placements dated 11/05-11/06 are not visible in the rendered view and are never filled from another source"
+  },
+  "club_depth_gb": {
+    "club_self_label_required": "the page's own status line must be captured verbatim (as published it reads 'Unofficial, Nov. 10, 2026'); a capture missing that line fails",
+    "required_fields": ["club", "unit", "position", "slot", "raw_cell", "jersey_number", "player", "empty_slot"],
+    "jersey_strip_rule": "leading digits before the first space become jersey_number; the remainder is the name; raw_cell always keeps the printed string",
+    "no_rank_inference": "slot numbers are the printed column positions (1/2/3) of the club's own table; the collector adds no rank the page does not print and no starter/backup label of any kind"
+  },
+  "cross_capture_reconciliation": {
+    "peers": [
+      {
+        "path": "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv",
+        "read_window_utc": "2026-11-15T23:23:14Z .. 2026-11-15T23:34:00Z",
+        "fields": {"team": "team", "opp": "opp", "player": "player", "pos": "pos", "injury": "injury", "practice_status": "practice_status", "game_status": "game_status", "player_slug": "player_slug"}
+      },
+      {
+        "path": "nfl-book/data/injuries_week10_capture.json",
+        "read_window_utc": "2026-11-16 (window recorded by that session; per-call clocks not exposed by its fetch path)",
+        "fields": {"team": "team", "player": "player", "pos": "pos", "injury": "injury", "practice_status": "practice", "game_status": "game_status"}
+      }
+    ],
+    "rule": "every (team, player_slug) key must reconcile field-by-field against each peer capture; any difference is published on the captures page, never silently resolved",
+    "club_code_aliases": {
+      "ARI": "AZ",
+      "why": "the nfl-book peer capture normalizes the Cardinals code to ARI; the live page and the availability-desk peer print AZ. The alias is applied ONLY inside cross-capture reconciliation so the comparison can proceed; published rows always keep the code exactly as the page printed it"
+    }
+  }
+}

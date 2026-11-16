@@ -1,0 +1,37 @@
+/* nfl-collector — clean dashboard style, consistent with the project's namespaces */
+:root { --ink:#16202b; --mut:#5b6b7c; --line:#dfe6ee; --bg:#f5f7fa; --card:#ffffff;
+        --acc:#0b5cab; --good:#1a7f4e; --bad:#a13030; --pend:#8a6d1a; }
+* { box-sizing:border-box; }
+body { margin:0; font:15px/1.55 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+       color:var(--ink); background:var(--bg); }
+.wrap { max-width:1100px; margin:0 auto; padding:0 18px; }
+header { background:var(--card); border-bottom:1px solid var(--line); padding:18px 0 10px; }
+.kicker { color:var(--mut); font-size:12px; text-transform:uppercase; letter-spacing:.08em; margin:0 0 4px; }
+h1 { margin:0 0 10px; font-size:26px; }
+h2 { font-size:19px; margin:26px 0 10px; }
+h3 { font-size:16px; margin:18px 0 8px; }
+nav#mainnav { padding:6px 0 4px; font-size:13.5px; }
+nav#mainnav a, nav#mainnav span { margin-right:4px; color:var(--acc); text-decoration:none; padding:3px 8px; border-radius:4px; }
+nav#mainnav a:hover { background:#eef3f9; }
+nav#mainnav span.active { color:var(--card); background:var(--acc); }
+main { padding-bottom:40px; }
+.panel { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin:18px 0; }
+.panel p { margin:8px 0; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin:12px 0; }
+.card { background:var(--bg); border:1px solid var(--line); border-radius:6px; padding:10px 12px; }
+.card .big { font-size:22px; font-weight:700; margin:0; }
+.card p { margin:2px 0; color:var(--mut); font-size:12.5px; }
+.tscroll { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:13px; margin:10px 0; background:var(--card); }
+th, td { border:1px solid var(--line); padding:6px 8px; text-align:left; vertical-align:top; }
+th { background:#eef2f7; font-weight:600; white-space:nowrap; }
+tr:nth-child(even) td { background:#fbfcfe; }
+code { font:12.5px/1.4 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; background:#eef2f7; padding:1px 4px; border-radius:3px; }
+.coverage { color:var(--mut); font-size:12.5px; border-top:1px dashed var(--line); padding-top:6px; margin-top:8px; }
+.note { color:var(--mut); font-size:13px; }
+.verdict { display:inline-block; padding:6px 14px; border-radius:6px; font-weight:700; font-size:15px; margin:6px 0; }
+.verdict.pass { background:#e7f4ec; color:var(--good); border:1px solid #bfe3cd; }
+.verdict.fail { background:#fbeaea; color:var(--bad); border:1px solid #efc4c4; }
+.verdict.pending { background:#f7f1df; color:var(--pend); border:1px solid #e6d7ab; }
+a { color:var(--acc); }
+footer { color:var(--mut); font-size:12px; border-top:1px solid var(--line); margin-top:24px; padding-top:12px; }

@@ -1,0 +1,34 @@
+{
+  "dataset": "nfl_collector_capture_manifest",
+  "title": "How the first session captures were taken, sealed and machine-checked",
+  "built_utc": "2026-11-16",
+  "session": "arena/013190b4-own4",
+  "read_window_utc": {
+    "start": "2026-11-16T02:35:00Z",
+    "end": "2026-11-16T03:05:00Z",
+    "evidence": "start = the session's first page fetch of the registered sources; end = the last chunk fetch (the injury report was read in 8 chunks in one pass, then the transactions hub, reserve list and club depth page). The fetch tool exposes no per-call clock, so windows — not per-read timestamps — are recorded (SUG-12 A convention). The CI collector replaces this limitation with real HTTP clocks from its first run.",
+    "game_context": "Week 10 Thursday and Sunday games completed; the Monday Nov 16 LAC@BAL game had not kicked off at read time"
+  },
+  "captures": [
+    {"capture_id": "LEAGUE-INJURY-W10-REG10-2026-11-16", "source": "https://www.nfl.com/injuries/league/2026/reg10", "chunks": "8/8", "rows": 347, "transcript_files": ["transcript_week10_reg10_part1.md", "transcript_week10_reg10_part2.md", "transcript_week10_reg10_part3.md"]},
+    {"capture_id": "LEAGUE-TRANSACTIONS-TRADES-2026-11-2026-11-16", "source": "https://www.nfl.com/transactions/league/trades/2026/11", "chunks": "1/1", "rows": 12, "transcript_files": ["transcript_transactions_2026-11.md"]},
+    {"capture_id": "LEAGUE-TRANSACTIONS-RESERVE-2026-11-2026-11-16", "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11", "chunks": "2/2", "rows": 25, "transcript_files": ["transcript_reserve_list_2026-11.md"]},
+    {"capture_id": "CLUB-DEPTH-GB-2026-11-16", "source": "https://www.packers.com/team/depth-chart", "chunks": "1/1", "rows": 87, "transcript_files": ["transcript_club_depth_GB.md"]}
+  ],
+  "method": {
+    "how": "each page fetched with the page-fetch tool, rendered as markdown, and every printed table row transcribed in page order into the transcript files in data/captures/2026-11-16/; engine/transcribe.py parses the transcripts mechanically into the capture JSONs (never hand-edited); chunk-boundary rows were reconstructed from the two printed halves of the row and are marked in the transcript comments",
+    "what_is_hashed": "each capture records the sha256 of its transcript files (the evidence as fetched); raw HTML bytes are never committed (RF-18 held open for the owner)",
+    "rights_note": "the captures store structured facts + hashes + timestamps, not page copies; the public site renders only the derived analysis and links back to the official pages"
+  },
+  "machine_checks_run": [
+    "engine/transcribe.py: vocabulary + required-field checks on every row (fail on violation)",
+    "engine/drift.py: all pins from data/drift_expectations.json hold (347/28/14 rows-clubs-sections, per-club counts, practice tallies 94/180/73, 171 designated rows = 49.3% coverage)",
+    "engine/drift.py: field-by-field reconciliation vs BOTH peer captures of the same report (nfl-availability-desk 2026-11-15 CSV: 0 differences; nfl-book 2026-11-16 JSON: 0 differences beyond the documented AZ/ARI club-code alias)",
+    "engine/collect.py --verify: ledger hash chain recomputed from genesis, matches chain_head"
+  ],
+  "irregularities_found": [
+    "the live page's week control still lists WEEK 10 only on Monday 2026-11-16; the Week 11 URL (reg11) cannot be verified until the page exists (RC-03)",
+    "the three dated reads of the Week 10 report are field-identical (0 deltas) — the report is a weekly artifact; deltas begin with the Week 11 practice cycle (RC-06)",
+    "the rendered November reserve table begins at 11/07; IR placements dated 11/05–11/06 (e.g. Lamar Jackson, per the league's own news article) are not visible and are not filled from anywhere (RC-04)"
+  ]
+}

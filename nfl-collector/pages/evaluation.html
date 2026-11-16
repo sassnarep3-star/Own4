@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-registered test — NFL Collector</title>
+<link rel="stylesheet" href="../assets/style.css"></head>
+<body>
+<header><div class="wrap">
+<p class="kicker">NFL Collector · scheduled availability capture for the Own4 project</p>
+<h1>Pre-registered test</h1>
+<nav id="mainnav"><a href="../index.html">Overview</a> · <a href="../pages/captures.html">Capture ledger</a> · <a href="../pages/deltas.html">Deltas &amp; conflicts</a> · <a href="../pages/drift.html">Drift alarm</a> · <a href="../pages/evaluation.html">Pre-registered test</a> · <a href="../pages/decisions.html">Decisions</a> · <a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a></nav>
+</div></header>
+<main class="wrap">
+<section class="panel">
+<h2>PREREG-002 — exact McNemar: model side (S1) vs better-record baseline</h2>
+<p>Registered 2026-11-16 by arena/013190b4-own4. The rule file's sha256 is the
+registration: <code>6d63344a4d393f94…</code>. CI refuses to build if the rule file, the
+frozen peer engine files, or the evaluator are edited afterwards (refusal condition (b)).</p>
+<ul>
+<li><strong>Arms:</strong> M = nfl-book S1 walk-forward side pick (frozen implementation); B = better-record
+baseline (records from the forecast's own training window, differential tie → home, pushes excluded).</li>
+<li><strong>Sample window:</strong> 2026 regular season weeks ≥ 11 ONLY. At registration the results feed
+contained weeks 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 — no Week 11 result existed.</li>
+<li><strong>Gates (declared now):</strong> QUALIFYING = p &lt; 0.05 and (b+c) ≥ 30 · PROVISIONAL = p &lt; 0.05
+and (b+c) ≥ 10 · NOT EVALUABLE below that. One-sided exact p, integer arithmetic.</li>
+<li><strong>Multiplicity:</strong> family of 1; later registered tests join a BH-adjusted family.</li>
+</ul>
+</section>
+<section class="panel">
+<h2>Current evaluation state</h2>
+<div class="verdict pending">PENDING</div>
+<p>Calibration (refusal condition (c)): the evaluator re-graded weeks 3–10 and must reproduce the
+published backtest before it may evaluate anything.</p>
+<div class="tscroll"><table><thead><tr><th>check</th><th>published</th><th>recomputed</th><th>result</th></tr></thead><tbody><tr class="derived"><td>n decided</td><td>104</td><td>104</td><td>match</td></tr><tr class="derived"><td>model accuracy</td><td>0.6731</td><td>0.6731</td><td>match</td></tr><tr class="derived"><td>baseline accuracy</td><td>0.6346</td><td>0.6346</td><td>match</td></tr></tbody></table></div>
+<p class="coverage">Coverage (generated from the data, not typed): 3 rows. calibration rows; evaluation sample has 0 games so far (weeks ≥ 11)</p>
+<p>Status <strong>PENDING</strong> is the honest state: no Week 11 result exists yet. When results
+land, the scheduled collector re-runs the evaluator; the evaluation history is appended, never
+overwritten, and the gate is evaluated on the accumulated sample.</p>
+</section>
+<footer>
+<p>NFL Collector · session arena/013190b4-own4 · built deterministically from committed artefacts ·
+research only, not wagering advice · every fact row links to the official source it came from;
+unverifiable values are blank and flagged.</p>
+</footer>
+</main></body></html>
