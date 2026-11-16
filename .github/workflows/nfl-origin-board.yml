@@ -2,15 +2,13 @@ name: nfl-origin-board verify
 
 on:
   push:
-    branches: [main]
-    paths:
-      - 'nfl-origin-board/**'
-      - '.github/workflows/nfl-origin-board.yml'
+    paths: ['nfl-origin-board/**', '.github/workflows/nfl-origin-board.yml']
   pull_request:
-    paths:
-      - 'nfl-origin-board/**'
-      - '.github/workflows/nfl-origin-board.yml'
+    paths: ['nfl-origin-board/**', '.github/workflows/nfl-origin-board.yml']
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   verify:
@@ -20,6 +18,9 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
+          # Pinned to 3.11 to match the committed output: the generator is
+          # stdlib-only, but float formatting and dict ordering are pinned
+          # against the committed pages produced on 3.11.
           python-version: '3.11'
 
       - name: Rebuild the namespace from its data
@@ -31,5 +32,4 @@ jobs:
         run: python3 verify.py
 
       - name: Determinism gate: a rebuild must not change any emitted file
-        run: |
-          git diff --exit-code -- nfl-origin-board/index.html nfl-origin-board/pages
+        run: git diff --exit-code -- nfl-origin-board/index.html nfl-origin-board/pages
