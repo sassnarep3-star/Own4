@@ -3938,3 +3938,39 @@ Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
 - 2026-11-16 — Wrote root `EXECUTIVE_SUMMARY.md`. Landing page carries the 15-row decision-readiness table (requirement / blocking gate / clearing number / status / source).
 - Constraint honored: outbound internet limited to GitHub/npm/PyPI hosts, so no live NFL official sites were fetched; all values use repo-verified data (read 2026-11-14) and anything unconfirmable is blank + flagged, never inferred.
 - Next: commit, push `arena/6531ea53-own4`, open PR to main, merge, confirm GitHub Pages deploy, record PR link in COORDINATION.md.
+
+---
+
+## Session `arena/2d9349a2-own4` — Week 10 official injury capture (NFL Book) — 2026-11-16 UTC
+
+**Scope claimed:** `nfl-book/data/injuries_week10_capture.json`, `nfl-book/data/raw/nfl_week10_injury_report_transcript.txt` (new), `nfl-book/engine/expand.py` (pinned counts + wording only), `nfl-book/data/flags.json` (FB-06 only), and the regenerated `nfl-book/data/*` + `nfl-book/pages/*` + `nfl-book/index.html` they feed. No other namespace touched.
+
+**Branch note:** this session works on `arena/2d9349a2-own4` as the single assigned branch. The brief's `session-<id>/<task>` branch and worktree scheme is not used, per the session branch rule.
+
+**Why this task:** the published Week 10 capture held 107 rows from 2 of 8 official chunks (FB-06), which left R47 (Lions designations) and R48 (re-capture) partial and made the injury, per-team and roster-sweep pages undercounted.
+
+**Sources (all read with the fetch tool, 2026-11-16 UTC):**
+- Official NFL Week 10 injury report, all 8 chunks: https://www.nfl.com/injuries/league/2026/reg10
+- Secondary (news items cited on the page, not used for values): https://www.nfl.com/news/notable-injuries-news-sunday-week-10-games-2026 · https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start
+
+**Result:** 347 player rows · 14 game sections · 28 clubs (previously published: 107 rows, 2 of 8 chunks). Raw transcript sha256 `4cdfdb5b…` pinned in the capture file.
+
+**Verification performed:**
+- Each transcript line copied from one published table row, in page order; blank injury/status cells kept blank as printed.
+- Per-club counts were checked against the table lengths on the page; the parser counts 347 rows, 28 clubs and 14 sections, with no duplicate player within a club.
+- The 107 rows of the previous capture were compared field by field against the new transcript: 0 differences.
+- Lions R47: Kerby Joseph (S, Knee, DNP, Out), Cade Mays (C, Ankle, DNP, Out), D.J. Reed (CB, Hip, DNP, Out), as printed.
+- Engine pipeline re-run in CI order (ingest → originate → backtest → correlations → expand → build_site → verify): PASS, 931 rows, 883 sourced, 0 broken links. A second rebuild is byte-identical (determinism gate).
+
+**Irregularities (flagged, none blocks publication):**
+1. The brief's figures "254 rows / 4 no-injury sections (published)" and "279 rows / 2 sections (live)" do not match this capture: the live page printed 347 rows across 14 sections on 2026-11-16. The live page may have changed since the earlier reads; the difference is not explained and is flagged for review.
+2. The page is a live page with a single report date. This is not a daily series and no archive exists (CR-09, SG-07).
+3. The page's game header order is kept as printed ("first-listed club first"). Home/away is not asserted.
+4. The Week 10 page also lists late-week notes (e.g., Lamar Jackson on IR, Malik Willis on IR); these come from the news items and are not joined to any table.
+
+**Not done in this session (still open, see the nfl-book Questions and Flagged pages):** the Texans depth image, depth-group modelling, roster-turnover versioning, the full 32-club roster/IR sweep, snap counts, inactive lists, odds sources, and the other items in the brief. Each remains blank or flagged, not inferred.
+
+**PR / merge record:** PR #123 — https://github.com/sassnarep3-star/Own4/pull/123 — merged into `main` without waiting for approval at 2026-11-16T01:37:16Z, merge commit `9d7faa8634710f0ebffdb005f6e9886db20f585f`. Checks before merge: audit pass, validate pass, verify pass (x2). Post-merge `main` runs: `nfl-book verify` success, `Validate NBA research workspace` success, `nfl-command verify` success, `pages build and deployment` success. Live page confirmed by fetch: https://sassnarep3-star.github.io/Own4/nfl-book/pages/injuries.html shows the 347-row capture and the Joseph / Mays / Reed rows as Out.
+
+**Unverified rows carried over, not re-read this session:** the depth-replacement rows RD-01..RD-03 on the injuries page quote official articles that were not re-fetched in this session; they stay as published by the prior session and are flagged for re-verification.
+

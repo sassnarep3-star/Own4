@@ -187,11 +187,11 @@ REQUIREMENTS = [
   "met", "pit_ledger.json: timestamped entries with sha256 hashes, replay-ready",
   "none", "implemented", "https://github.com/sassnarep3-star/Own4"),
  ("R47", "Populate the three missing Lions game-status designations",
-  "partial", "Lions designations pending full injury-report capture (current capture is partial, FB-06)",
-  "FB-06", "full 279-row injury-report capture", "https://www.nfl.com/injuries/"),
+  "met", "Kerby Joseph (S, Knee), Cade Mays (C, Ankle), D.J. Reed (CB, Hip) all printed Out on the official Week 10 report (capture of 2026-11-16, 8 of 8 chunks)",
+  "none", "implemented", "https://www.nfl.com/injuries/league/2026/reg10"),
  ("R48", "Re-capture and republish the Week 10 injury tables",
-  "partial", "Week 10 capture is 107 of ~279 rows (FB-06); re-capture pending",
-  "FB-06", "full Week 10 injury-table capture", "https://www.nfl.com/injuries/"),
+  "met", "Week 10 re-captured from all 8 chunks of the official report: 347 rows, 14 game sections, 28 clubs; raw transcript and sha256 retained",
+  "none", "implemented", "https://www.nfl.com/injuries/league/2026/reg10"),
  ("R49", "Reject: deriving depth order from jersey number, experience or salary",
   "met", "policy: jersey/experience/salary never used for depth ordering",
   "none", "implemented", "https://github.com/sassnarep3-star/Own4"),
@@ -403,10 +403,10 @@ def build_per_team_view():
         "dataset": "nfl_book_per_team_view",
         "title": "Per-team decision view: starters out, replacements named, net injury count",
         "built_utc": BUILT, "session": "arena/20f55d17-own4",
-        "scope_note": "Counts derive from the captured Week 10 injury report, which is a "
-                      "partial capture (FB-06: 2 of 8 official chunks). Counts are lower "
-                      "bounds, not full rosters. Replacements named only where official "
-                      "evidence states them (FB-07).",
+        "scope_note": "Counts derive from the captured Week 10 injury report: all 8 of 8 "
+                      "official chunks, 347 rows, 28 clubs (captured 2026-11-16). They describe "
+                      "one report date only, not a daily series (CR-09). Replacements named only "
+                      "where official evidence states them (FB-07).",
         "n_rows": len(rows), "rows": rows})
 
 
@@ -486,7 +486,7 @@ def build_pit_ledger():
             ("results_feed.json", "verified results feed", 137),
             ("standings_2026-11-14.json", "official standings", 32),
             ("slate_week11_2026.json", "Week 11 schedule", 13),
-            ("injuries_week10_capture.json", "Week 10 injury report", 107),
+            ("injuries_week10_capture.json", "Week 10 injury report", 347),
             ("depth_replacements.json", "replacement depth", 3),
             ("own_lines_close.json", "originated lines (close)", 13),
             ("price_snapshots.json", "price snapshots", 39),
@@ -897,11 +897,12 @@ def build_drift_alarms():
              "game_id,week,date,away,home,away_pts,home_pts,source_url",
          "status": "ok" if feed["n_games"] == 137 else "ALARM",
          "detail": "137 settled games captured", "source_url": feed["sources"]["standings"]},
-        {"id": "DA-02", "parser": "injuries_week10", "expected_rows": 279,
+        {"id": "DA-02", "parser": "injuries_week10", "expected_rows": 347,
          "observed_rows": len(inj["rows"]), "required_fields":
              "game,team,player,pos,injury,practice,game_status",
-         "status": "ALARM", "detail": "partial capture (FB-06): 107 of ~279 rows; "
-         "missing chunks would publish blanks — alarm fires",
+         "status": "ok" if len(inj["rows"]) == 347 and len({r["team"] for r in inj["rows"]}) == 28 else "ALARM",
+         "detail": "347 rows / 28 clubs / 14 game sections pinned to the 8-of-8-chunk transcript; "
+         "any missing chunk or changed row count fails the build",
          "source_url": inj["source_url"]},
         {"id": "DA-03", "parser": "standings", "expected_rows": 32,
          "observed_rows": len(standings["rows"]), "required_fields":
@@ -1031,7 +1032,7 @@ def build_roster_sweep():
             "team": t, "roster_count": "", "ir_count": "",
             "reserve_list": "", "starters_out": out[t],
             "status": "roster/IR/reserve blank — no official roster/IR/reserve source "
-                      "captured; starters_out from partial injury capture (FB-06)",
+                      "captured; starters_out from the full Week 10 injury capture (347 rows)",
             "source_url": "https://www.nfl.com/teams/"})
     save("roster_sweep.json", {
         "dataset": "nfl_book_roster_sweep",
