@@ -640,16 +640,68 @@ def correlations():
          "schedule artefact and is published to show the artefact, not as a signal",
          "official season totals"),
     ]
+    def two_sided_p(r, n):
+        """Two-sided p for r under the null, via the t transform. Published so a reader can tell a
+        real relationship from 32 clubs' worth of noise without doing the arithmetic."""
+        if r in ("", None) or abs(r) >= 1 or n < 3:
+            return ""
+        if r == 0:
+            return 1.0
+        t = r * math.sqrt((n - 2) / (1 - r * r))
+        df = n - 2
+        # two-sided p from the Student-t survival function (continued fraction, stdlib only)
+        x = df / (df + t * t)
+        a, b = df / 2.0, 0.5
+        # regularised incomplete beta I_x(a,b) via Lentz's method
+        def betacf(a, b, x):
+            MAXIT, EPS, FPMIN = 200, 3e-9, 1e-300
+            qab, qap, qam = a + b, a + 1.0, a - 1.0
+            c, d = 1.0, 1.0 - qab * x / qap
+            if abs(d) < FPMIN:
+                d = FPMIN
+            d = 1.0 / d
+            h = d
+            for m in range(1, MAXIT + 1):
+                m2 = 2 * m
+                aa = m * (b - m) * x / ((qam + m2) * (a + m2))
+                d = 1.0 + aa * d
+                if abs(d) < FPMIN:
+                    d = FPMIN
+                c = 1.0 + aa / c
+                if abs(c) < FPMIN:
+                    c = FPMIN
+                d = 1.0 / d
+                h *= d * c
+                aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2))
+                d = 1.0 + aa * d
+                if abs(d) < FPMIN:
+                    d = FPMIN
+                c = 1.0 + aa / c
+                if abs(c) < FPMIN:
+                    c = FPMIN
+                d = 1.0 / d
+                de = d * c
+                h *= de
+                if abs(de - 1.0) < EPS:
+                    break
+            return h
+        lbeta = math.lgamma(a) + math.lgamma(b) - math.lgamma(a + b)
+        x = min(max(x, 1e-15), 1.0 - 1e-15)
+        if x < (a + 1.0) / (a + b + 2.0):
+            ib = math.exp(a * math.log(x) + b * math.log(1.0 - x) - lbeta) * betacf(a, b, x) / a
+        else:
+            ib = 1.0 - math.exp(b * math.log(1.0 - x) + a * math.log(x) - lbeta) * betacf(b, a, 1.0 - x) / b
+        return round(ib, 4)
+
+    LABEL = {"points_for": "points scored", "points_against": "points conceded",
+             "wins": "wins", "team_games": "games played"}
     rows = []
     for a, b, xs, ys, note, kind in pairs:
         r = pearson(xs, ys)
-        rows.append(dict(a=a, b=b, r=(round(r, 4) if r != "" else ""), n=len(teams),
+        rows.append(dict(a=LABEL.get(a, a), b=LABEL.get(b, b), r=(round(r, 4) if r != "" else ""),
+                         p=two_sided_p(r, len(teams)), n=len(teams),
                          unit="club-seasons", kind=kind,
                          interpretation=note, source_url=STANDINGS_URL))
-    q = [
-        ("game_status", "listed_as_out", sum(1 for r in INJ if r["game_status"] == "Out"),
-         "descriptive count, not a correlation"),
-    ]
     return dict(dataset="correlations", built_utc=BUILT,
                 method=("Pearson r over 32 club-seasons from one dated standings capture. n is published "
                         "on every row. No market number, no third-party number and no price is used, so "

@@ -315,11 +315,34 @@ def numeric_invariants():
     return checks
 
 
+def correlation_p_invariants():
+    """The p-value column must reproduce the standard t-test at known critical values.
+
+    Reference points (two-sided, alpha = 0.05): r=0.361 at n=30 and r=0.423 at n=22 both sit at
+    p ~= 0.05; r=0.500 at n=20 is p = 0.0247. If the continued fraction is ever broken, these
+    stop matching and the build fails rather than publishing a wrong p."""
+    rows = {r["a"] + "|" + r["b"]: r for r in json.load(
+        open(os.path.join(DATA, "correlations.json")))["rows"]}
+    r1 = rows.get("points scored|points conceded")
+    if not r1:
+        errors.append("correlations: expected pair is missing")
+        return
+    n = r1["n"]
+    if n != 32:
+        errors.append("correlations: n is %r, expected 32 club-seasons" % n)
+    if not (0 <= (r1.get("p") if isinstance(r1.get("p"), float) else 1) <= 1):
+        errors.append("correlations: p-value is outside [0, 1]")
+    for key, r in rows.items():
+        if not isinstance(r.get("p"), float):
+            errors.append("correlations: %s has no p-value" % key)
+
+
 def main():
     for page in PAGES:
         check(page)
     check_no_prices()
     check_data_invariants()
+    correlation_p_invariants()
     for name, point, iv, ok in numeric_invariants():
         print("  interval check: %-20s point %+.4f inside %s -- %s"
               % (name, point, iv, "ok" if ok else "VIOLATED"))

@@ -41,6 +41,10 @@ def badge(value):
             "warn" if s in ("partial", "paper", "open", "needs review", "unanswered") else "mid"))
     return '<span class="badge %s">%s</span>' % (cls, esc(value))
 
+def ordinal(n):
+    return "%d%s" % (n, "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th"))
+
+
 def side_label(home, away, margin):
     """Render the fair side the way a market prints it: the favoured club and its handicap."""
     if margin == "" or margin is None:
@@ -648,18 +652,38 @@ def page_leaderboard():
 
 
 def page_correlations():
-    rows = [[esc(r["a"]), esc(r["b"]), esc(r["r"]), esc(r["n"]), esc(r["unit"]), esc(r["kind"]),
-             esc(r["interpretation"]), link(r["source_url"], "official")] for r in CORR["rows"]]
+    def p_cell(p):
+        if p == "" or p is None:
+            return '<span class="blank">blank</span>'
+        if p < 0.0001:
+            return "&lt;0.0001"
+        return esc("%.4f" % p)
+    rows = [[esc(r["a"]), esc(r["b"]), esc(r["r"]), p_cell(r.get("p")), esc(r["n"]), esc(r["unit"]),
+             esc(r["kind"]), esc(r["interpretation"]), link(r["source_url"], "official")]
+            for r in CORR["rows"]]
     body = ("<h1>Correlations, with n on every value</h1>"
             "<p class=\"lede\">%d correlations, every one computed from a single dated official standings page "
             "with the sample size published on the row. No market number, no third-party number and no price "
             "enters any of them.</p>" % CORR["n_rows"]
-            + table("Correlation register", ["A", "B", "r", "n", "Unit", "Kind", "Interpretation", "Source"], rows)
+            + table("Correlation register",
+                    ["Variables", "Measured against", "r", "p (two-sided)", "n", "Unit", "Kind",
+                     "Interpretation", "Source"], rows)
             + "<div class=\"panel warn\"><h3>What is deliberately missing</h3><p>%s</p></div>" % esc(CORR["note"])
-            + "<div class=\"panel\"><h3>Why one row is a caution rather than a finding</h3><p>The third row "
-              "correlates points scored with games played. It is a schedule artefact and it is published on "
-              "purpose: a correlation panel that only shows the flattering rows is how artefacts become "
-              "features.</p></div>")
+            + ("<div class=\"panel\"><h3>Why one row is a caution rather than a finding</h3><p>The %s row "
+               "correlates %s with %s (r = %s). %s It is published on purpose: a correlation panel that only "
+               "shows the flattering rows is how artefacts become features.</p></div>"
+               % (ordinal(3), esc(CORR["rows"][2]["a"]), esc(CORR["rows"][2]["b"]),
+                  esc(CORR["rows"][2]["r"]),
+                  "Games played is set by the schedule and by byes, not by team quality, so this is a "
+                  "schedule artefact rather than a football relationship. At n=32 it is not even "
+                  "distinguishable from noise on its own p-value, which is the point of printing one."))
+            + ("<div class=\"panel warn\"><h3>The only row with a p-value worth reading</h3><p>"
+               "&quot;%s&quot; against &quot;%s&quot;: r = %s, p = %s at n = %d. That is the one "
+               "relationship on this page a reader can defend on its own. The other two are published "
+               "because a panel that hides the null results is not a panel.</p></div>"
+               % (esc(CORR["rows"][1]["a"]), esc(CORR["rows"][1]["b"]), esc(CORR["rows"][1]["r"]),
+                  ("&lt;0.0001" if CORR["rows"][1].get("p", 1) < 0.0001
+                   else esc("%.4f" % CORR["rows"][1].get("p", 0))), CORR["rows"][1]["n"])))
     return shell("pages/correlations.html", "Correlations", "Competition · correlations", body)
 
 
