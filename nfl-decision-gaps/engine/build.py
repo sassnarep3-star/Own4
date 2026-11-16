@@ -134,6 +134,36 @@ def inactive_coverage():
     return rows, tot_inactive, tot_missing, tot_e3
 
 
+
+def out_resolution():
+    """Resolve every 'Out' player on the joined clubs against the inactive list
+    and the official reserve list. Computed, never typed: a hardcoded count here
+    went stale the moment the reserve list was read."""
+    reserve = {(club, name) for _d, club, name, _k in R.RESERVE_LIST}
+    out_rows = [r for r in R.DESIGNATION_JOIN if r[3] == "Out"]
+    inactive = [r for r in out_rows if r[4]]
+    on_reserve = [r for r in out_rows if not r[4] and (r[0], r[1]) in reserve]
+    rest = [r for r in out_rows if not r[4] and (r[0], r[1]) not in reserve]
+    return out_rows, inactive, on_reserve, rest
+
+
+def out_sentence():
+    out_rows, inactive, on_reserve, rest = out_resolution()
+    txt = ("An Out designation does not guarantee inactive. %d of %d Out players were inactive; "
+           % (len(inactive), len(out_rows)))
+    if on_reserve:
+        txt += ("%d more %s placed on the official reserve list during the week (%s), so %d of %d "
+                "(%s) are explained by two official pages."
+                % (len(on_reserve), "was" if len(on_reserve) == 1 else "were",
+                   "; ".join("%s %s" % (r[1], r[0]) for r in on_reserve),
+                   len(inactive) + len(on_reserve), len(out_rows),
+                   "%.1f%%" % (100.0 * (len(inactive) + len(on_reserve)) / len(out_rows))))
+    if rest:
+        txt += (" %s the one case neither page explains." % (", ".join(
+            "%s (%s)" % (r[1], r[0]) for r in rest) + (" remain" if len(rest) > 1 else " is")))
+    return txt
+
+
 def inactive_total():
     return sum(len(lst) for _, _, lst in R.INACTIVES)
 
@@ -256,11 +286,9 @@ def build_index(parsed, inv):
                   % (tot_missing, tot_inactive, "%.1f%%" % (100.0 * tot_missing / tot_inactive)),
              "Official inactive lists joined to the live injury report, club by club.",
              srcs("S1, S4")],
-            ["2", "An Out designation does not guarantee inactive. 14 of 17 Out players were "
-                  "inactive; the other three (Henderson, Joseph, Goodson) have no published "
-                  "reserve status on either official page.",
-             "Designation-to-inactive join table.",
-             srcs("S1, S4")],
+            ["2", out_sentence(),
+             "Designation-to-inactive join table and the official reserve list.",
+             srcs("S1, S4, S10")],
             ["3", "The report moves inside the week, and the only committed capture is stale. Two "
                   "Lions rows changed, two Ravens rows appeared, and Doubtful designations appeared "
                   "where there had been none.",
@@ -323,6 +351,9 @@ def build_exec_summary(parsed, inv):
                   "page. Where the official page did not state a thing, the field is blank and the "
                   "item is flagged." % R.DATE))
 
+    b = join_stats()
+    _out_rows, _inactive_split, on_reserve, rest = out_resolution()
+    out_rows, inactive = _out_rows, _inactive_split
     body.append(h(2, "1. Availability is the strongest dataset in the repo and it is still not "
                      "sufficient"))
     body.append(p("The committed Week 10 capture gives <strong>%d rows across %d clubs and %d "
@@ -331,8 +362,8 @@ def build_exec_summary(parsed, inv):
                   "<strong>%d of %d inactive players &mdash; %s &mdash; never appear on the injury "
                   "report</strong>. Excluding the two emergency third quarterbacks, %d of %d (%s). "
                   "The injury report is a partial view of unavailability, not the view. The league "\
-                  "does publish a dated reserve list (%s, 25 moves in November 2026), and that page "\
-                  "explains two of the three Out players who were missing from the inactive list - "\
+                  "does publish a dated reserve list (%s, %d moves in November 2026), and that page "\
+                  "explains %d of the %d Out players who were missing from the inactive list - "\
                   "but nothing in this repository captures it, so an injured-reserve player still "\
                   "looks merely absent."
                   % (parsed["n_rows"], parsed["n_teams_listed"], parsed["n_matchups"],
@@ -340,7 +371,10 @@ def build_exec_summary(parsed, inv):
                      "%.1f%%" % (100.0 * tot_missing / tot_inactive),
                      tot_missing - tot_e3, tot_inactive - tot_e3,
                      "%.1f%%" % (100.0 * (tot_missing - tot_e3) / (tot_inactive - tot_e3)),
-                     src("S10"))))
+                     src("S10"), len(R.RESERVE_LIST), len(on_reserve),
+                     len(on_reserve) + len(rest))))
+
+    body.append(p("%s" % out_sentence()))
 
     body.append(h(2, "2. The designations mean something, but not yet enough to model"))
     b = join_stats()
