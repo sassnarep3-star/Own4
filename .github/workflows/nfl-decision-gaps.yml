@@ -1,0 +1,28 @@
+name: nfl-decision-gaps verify
+on:
+  push:
+    paths: ['nfl-decision-gaps/**', '.github/workflows/nfl-decision-gaps.yml']
+  pull_request:
+    paths: ['nfl-decision-gaps/**', '.github/workflows/nfl-decision-gaps.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Re-parse the committed official injury capture
+        working-directory: nfl-decision-gaps/engine
+        run: python3 parse_injury_capture.py
+      - name: Rebuild the pages from the register
+        working-directory: nfl-decision-gaps/engine
+        run: python3 build.py
+      - name: Verify sources, blanks, links and invariants
+        working-directory: nfl-decision-gaps/engine
+        run: python3 verify.py
+      - name: Determinism gate (a rebuild must not change committed output)
+        run: git diff --exit-code -- nfl-decision-gaps
