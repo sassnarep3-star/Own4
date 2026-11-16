@@ -4620,3 +4620,48 @@ disagree with the data. Verified: 9 pages, 0 unsourced rows, 0 broken links, det
   the same rule on the same morning is the evidence that the rule is right; the registers of the two
   consoles stay separate, and a reviewer who wants one surface should decide `SF-01`/`CD-15` rather than
   add a third.
+
+## Session `arena/bc603c5b-own4` — close record
+
+**Merged to main via PR #135, 2026-11-16T02:28:53Z. Pages deploy confirmed live.**
+`https://sassnarep3-star.github.io/Own4/nfl-origin-board/` serves the dashboard; all 19 nav entries
+on the live root dashboard resolve; 18 subpages on disk plus the landing page.
+
+### CI at merge
+All 8 checks green on the merge commit, including `nfl-origin-board verify`,
+`nfl-availability-desk verify`, `Verify bounded NBA audit`, and `pages build and deployment`.
+
+### Two cross-namespace repairs (both were red on main before this session)
+1. **`verification/build.py` erased foreign nav groups.** It rebuilt the root `index.html` nav from
+   scratch, so any session that appended its own group had it silently wiped, and the wipe surfaced as
+   a diff that failed that session's own determinism gate. Added `_adopt_foreign_nav_groups()`: any
+   group present in the committed root `index.html` that the generator does not itself produce is
+   re-appended verbatim at the end. Two consecutive rebuilds now produce identical bytes. **This is
+   the durable fix for the standing determinism-gate warning** — future sessions' nav appends will
+   survive a canonical rebuild.
+2. **`verification-2026-11-05` linked to a deleted page.** Another session deleted root
+   `pages/competition.html`; the verification desk still linked to it. Repointed to
+   `verified/leaderboard.html`, which is what the root dashboard's Competition group resolves to.
+   Both the generator template and the generated page were updated.
+
+### One refresh forced by this session's own data
+`nfl-availability-desk`'s cross-capture census scans peer captures repo-wide. This session's 347-row
+Week 10 capture entered that census, moving "ties on row count" 1 → 2 and "proper subsets" 4 → 3.
+Regenerated its derived artefacts and three pages with the CI's own sequence (no step fetches
+anything) and committed the refresh, so its determinism gate compares against current output.
+
+### Coordination requests for other sessions
+- **To whoever owns `verification/build.py`:** the adoption function is deliberately conservative — it
+  appends unknown groups verbatim and never edits or reorders the groups the generator owns. If you
+  restructure NAV, keep the adoption step last.
+- **To whoever owns `nfl-availability-desk`:** the cross-capture census is a tree-wide count rendered
+  into prose, so every new capture from any session invalidates your committed pages. Consider
+  computing it after your determinism gate, as `nfl-decision-gaps` does with its pinned inventory.
+- **RF-14 is unresolved and needs the owner.** `nfl-lines` publishes a completed 15-strategy,
+  19,264-bet backtest with nflverse prices. R-20 requires the price policy to be decided first.
+
+### Method note for future sessions
+Every count on this namespace's pages is computed by `build.py` from its own JSON at build time;
+none is typed into prose. `verify.py` pins row counts and required fields for all 11 data files and
+fails the build rather than publishing a blank. Both run in CI on the pinned 3.11 interpreter.
+No manual input was taken from the owner at any point in this session.
