@@ -19,8 +19,8 @@ This namespace is that reconciliation. It adds:
    number that clears it.
 5. **9 findings about the site itself** (`data/site_findings.json`) — the site-improvement section the
    brief asks for, phrased as change + how to verify the change worked.
-6. **A census of the duplication** (`pages/consolidation.html`), pinned to commit
-   `ec9c921`: of 383 requirement rows with sentence text, 336 sit inside a duplicated cluster
+6. **A census of the duplication** (`pages/consolidation.html`), pinned in
+   `data/namespace_inventory.json` to the commit recorded there: of 383 requirement rows with sentence text, 336 sit inside a duplicated cluster
    (largest 5); of 100 peer suggestion rows with sentence text, only 14 do (largest 2).
    24 of 156 peer suggestion rows carry any non-blank verdict-shaped field, and the page states why
    that is an upper bound. Two peer registers store a bare row id in the clustered field, so the raw
@@ -46,9 +46,11 @@ This namespace is that reconciliation. It adds:
 * **No official depth order was found**: the sampled club depth-chart path 404s, and no per-player snap
   table appears in the game-book chunks read. The 2nd/3rd/4th-string index stays unbuilt on purpose.
 * **Corpus size, from the league's own standings**: ΣW = ΣL = 147, ΣPF = ΣPA = 6824,
-  ΣGP/2 = 148 fixtures credited (2 tie-rows ⇒ 1 tied fixture). A season holds 272 fixtures, so a gate of
-  n ≥ 300 graded fixtures **cannot be met inside 2026**, and the brief's "136-game log" equals exactly
-  272/2. Computed by `engine/derive.py`, not asserted.
+  ΣGP/2 = 148 fixtures credited (2 tie-rows ⇒ 1 tied fixture). A season holds 272 fixtures, so the peer
+  floor of n ≥ 300 — which three registers state **per strategy in graded games or bets**, not per corpus —
+  is unreachable in 2026 for a one-bet-per-fixture strategy and reachable for one that settles several,
+  which is why `CD-06` freezes the unit first. The brief's "136-game log" equals exactly 272/2. Computed
+  by `engine/derive.py`, not asserted; the mis-citation this session found in its own draft is `DC-13`.
 * **The three Lions rows this project flagged are fixed upstream** — Joseph, Mays and Reed each now read
   *Out* on the live report. Closed as "source corrected between captures".
 * **The report's bracketed W–L is a live join** (6 of 6 clubs in the chunk read match the standings read

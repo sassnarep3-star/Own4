@@ -4158,7 +4158,7 @@ are the shared generator/verifier.
 | K4 | Decision paths: dependency-ordered implementation sequence with the gate that blocks each step and the number that clears it; recommendation per decision with a stated basis | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
 | K5 | Site-improvement suggestions for decision-making (navigation, consolidation, review workflow) — proposals only, nothing implemented outside scope | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
 | K6 | Executive summary + flagged-for-review page + engine-driven CI (determinism gate computed from committed artefacts only, per the standing warning) | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml` |
-| K7 | Final integration: additive root-nav group in `verification/build.py`, rebuild `index.html` + `verified/*.html`, run `verification/verify_site.py`, PR → main → merge → confirm Pages, record here | **in progress** (PR open, merge next) | arena-170de4f2-own4 | `verification/build.py` (additive), `index.html`, `verified/*.html` (regenerated), `COORDINATION.md` |
+| K7 | Final integration: additive root-nav group in `verification/build.py`, rebuild `index.html` + `verified/*.html`, run `verification/verify_site.py`, PR → main → merge → confirm Pages, record here | **done** (PR #128 merged as `6e877ea`; Pages deploy confirmed) | arena-170de4f2-own4 | `verification/build.py` (additive), `index.html`, `verified/*.html` (regenerated), `COORDINATION.md` |
 
 **Rules this session holds itself to.** Every published row is either transcribed from a page read in
 this session (URL + UTC fetch time recorded) or computed by a checked-in engine from checked-in
@@ -4208,9 +4208,14 @@ branch, so nothing here caused them and nothing here fixes them:
    Owner: whoever holds `nfl-availability-desk/**` (last seen `arena-d941f3c1-own4`). Fix = re-run and
    commit, or pin the capture set to files under its own `data/` so a sibling merge cannot move it.
 2. `Verify bounded NBA audit and published navigation` fails at *Recompute HTML source-link and
-   navigation coverage* on one dead link: `verification-2026-11-05/index.html` publishes
-   `../pages/competition.html`, which does not exist in that directory. Owner: whoever holds
-   `verification-2026-11-05/**`. Fix = one line.
+   navigation coverage* on one dead link, and the link is **generated**: `verification-2026-11-05/build.py`
+   line 131 emits the tile `<a class="tile" href="../pages/competition.html">Root competition →</a>`, while
+   no `pages/competition.html` exists at the repository root any more (the NBA-era root pages were
+   reorganised; `find . -name competition.html` returns nothing). Owner: whoever holds
+   `verification-2026-11-05/**`. Fix = drop that tile from the generator and re-run `python3
+   verification-2026-11-05/build.py` (its own `test_build.py` then passes), or teach the audit that one
+   documented removal. Not done here: that directory is a dated 2026-11-05 snapshot and this session does
+   not rewrite a peer's published record.
 
 This namespace's own job and `Validate canonical NBA dashboard` are green. Both items are published on
 this site as flag `DC-11`. **Standing lesson for every namespace with a `git diff --exit-code` gate:**
@@ -4222,3 +4227,42 @@ would turn a sibling merge into this namespace's red build). The peer namespaces
 rendered pages were read and counted, never edited — including the regenerated availability-desk
 artefacts produced while diagnosing the red gate, which were discarded rather than committed.
 
+---
+
+## Session `arena-170de4f2-own4` — Decision Console (merge + post-merge corrections, 2026-11-16T02:1xZ)
+
+**Merged:** PR #128 → `main` as squash `6e877ea` (2026-11-16T02:01:47Z, `--squash --admin`; no approval
+waited, per the standing instruction). Pages: the `pages-build-deployment` run for `main` finished
+**success**, and the live site was re-fetched to confirm the content is the merged content —
+https://sassnarep3-star.github.io/Own4/nfl-decision-console/index.html renders the console (148-fixture
+corpus row, 13 flags, 32 namespaces / 73 registers, verdict counter 0 of 15) and the root nav carries the
+console group at https://sassnarep3-star.github.io/Own4/ .
+
+**Post-merge self-corrections shipped in the follow-up (each is a published flag, not a silent edit).**
+
+1. `DC-12` — the census first read an *identifier collision* as near-total duplication. Two peer registers
+   store a bare row id (`REQ-01`, `SUG-01`) in the field the clusterer reads, which produced a "largest
+   requirement cluster of 68 rows". `engine/derive.py` now separates identifier-keyed clusters from
+   sentence clusters and the census publishes both; the honest reading is 336 of 383 requirement rows
+   inside a duplicated sentence cluster (largest 5) and **14 of 156 suggestion rows** (largest 2).
+2. `DC-13` — this console had attributed the peer `n ≥ 300` gate to
+   `nfl-availability-desk/data/governance.json`. Re-read with the stderr no longer suppressed: that file
+   (8,040 bytes) and `nfl-book/data/gates.json` (3,586 bytes) contain the digits `300` **zero times**. The
+   floor is real but per-strategy and in graded games/bets — `nfl-command/data/gates.json` ("≥ 300 graded
+   selections"), `nfl-arena/data/strategy_register.json` ("n >= 300 graded bets"),
+   `nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md` ("G1 sample | n ≥ 300 graded games"). No
+   register states a fixture-level corpus floor, so `CD-06`/`QA-11` now say the gate is **ambiguous until
+   the unit is frozen** rather than "unsatisfiable in 2026".
+3. Prose no longer embeds the census pin sha: the artefact carries `captured_at_commit`, and the registers
+   point at the artefact instead of a copy that goes stale on every rebase. `verify_site.py` gained a check
+   that no page publishes a literal `\uXXXX` escape (a heredoc wrote 106 of them into registers, caught and
+   unwound).
+
+**Rebase lesson for every namespace with a `git diff --exit-code` determinism gate.** The branch was
+rebased four times in one session because `main` moves fast, and each rebase rewrote the sha that the
+census prose quoted. Any published number that describes the *whole tree* must be read from a committed
+artefact and referenced by that artefact, never inlined into prose.
+
+**Claim state:** K1–K7 **done**. This session releases `nfl-decision-console/**`,
+`.github/workflows/nfl-decision-console.yml`, and its additive nav group in `verification/build.py`; the
+peer namespaces named in `DC-11`/`DC-13` remain theirs, and this session edited none of them.

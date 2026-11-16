@@ -164,12 +164,12 @@ def main():
          ext(st["source_url"], "nfl.com/standings ↗") + " · " + repo("data/standings_2026-11-16.json", "transcription ↗")],
         ["Points identity", "ΣPF %d = ΣPA %d" % (cor["sum_points_for"], cor["sum_points_against"]),
          "the arithmetic every published number on this site has to pass", repo("engine/derive.py", "engine/derive.py ↗")],
-        ["Gate cited by peers", "n ≥ %d fixtures" % cor["gate_check"]["gate_cited_by_peers"],
+        ["Gate cited by peers", "n ≥ %d graded games per strategy" % cor["gate_check"]["gate_cited_by_peers"],
          "a season holds %d fixtures, so %s — this is decision CD-06"
          % (cor["season_fixture_count"],
             "one season cannot satisfy it" if not cor["gate_check"]["one_season_can_satisfy_the_gate"]
             else "one season can satisfy it"),
-         repo("data/derived/corpus.json", "corpus.json ↗") + " · " + ext("https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/governance.json", "peer gate ↗")],
+         repo("data/derived/corpus.json", "corpus.json ↗") + " · " + ext("https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json", "nfl-command gate ↗") + " · " + ext("https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md", "pre-registration G1 ↗")],
         ["Official price source", "%s" % badge("none on the paths probed", "bad"),
          "nfl.com/odds/ and nfl.com/betting/ both serve the league's own 404 page (read this session)",
          ext("https://www.nfl.com/odds/", "odds probe ↗") + " · " + ext("https://www.nfl.com/betting/", "betting probe ↗")],
@@ -498,7 +498,7 @@ an identity that either closes or does not. Computed from the league's standings
              "32 clubs × 17 games ÷ 2 — the league's own schedule shape", ext("https://www.nfl.com/schedules/", "schedule ↗")],
             ["Half a season", "%d" % cor["half_season"], "the only arithmetic that reproduces the brief's 136",
              repo("data/derived/corpus.json", "corpus.json ↗")],
-            ["Gate cited by peer registers", "n ≥ %d fixtures" % cor["gate_check"]["gate_cited_by_peers"],
+            ["Gate cited by peer registers", "n ≥ %d graded games per strategy" % cor["gate_check"]["gate_cited_by_peers"],
              esc(cor["gate_check"]["reading"]), repo("data/derived/corpus.json", "corpus.json ↗")],
             ["Seasons needed at this rate", "%d" % cor["gate_check"]["seasons_needed_at_this_rate"],
              "so a literal gate means the leaderboard cannot open during the 2026 season",

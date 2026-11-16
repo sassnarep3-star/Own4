@@ -23,7 +23,9 @@ OUT = os.path.join(NS, "data", "derived")
 SELF = os.path.basename(NS)
 
 SEASON_FIXTURES = 272      # 32 clubs x 17 games / 2, the league's own schedule shape
-GATE_FIXTURES = 300        # the n cited by peer validation gates
+GATE_FIXTURES = 300        # n >= 300, stated by peer gates in units of GRADED GAMES OR BETS PER
+                         # STRATEGY (nfl-command/data/gates.json, nfl-arena/data/strategy_register.json,
+                         # nfl-availability-desk/prereg/PREREG-001); no register states a fixture-level floor
 
 
 def load(name):
@@ -90,13 +92,29 @@ def corpus():
         ],
         "gate_check": {
             "gate_cited_by_peers": GATE_FIXTURES,
+            "unit_in_the_peer_wording": "graded games or settled bets per strategy, not fixtures per "
+                                        "corpus",
+            "as_written_by_peers": [
+                {"file": "nfl-command/data/gates.json",
+                 "text": "Strategy-level ROI claims require >= 300 graded selections; below that the "
+                         "strategy is graded 'insufficient sample' and earns no rewards."},
+                {"file": "nfl-arena/data/strategy_register.json",
+                 "text": "n >= 300 graded bets in the confirmatory window before any reward consideration."},
+                {"file": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+                 "text": "G1 sample | n >= 300 graded games | below this the strategy is displayed as "
+                         "provisional, unranked"},
+            ],
+            "mis_citation_corrected": "an earlier draft of this page attributed the floor to "
+                                      "nfl-availability-desk/data/governance.json, which contains no such "
+                                      "number; the three sources above are the ones that do (flag DC-13)",
             "fixtures_available_today": fixtures,
             "fixtures_at_season_end": SEASON_FIXTURES,
             "one_season_can_satisfy_the_gate": SEASON_FIXTURES >= GATE_FIXTURES,
             "seasons_needed_at_this_rate": -(-GATE_FIXTURES // SEASON_FIXTURES),
-            "reading": "a gate of n >= %d graded fixtures cannot be met inside one %d-fixture season, "
-                       "so either the gate, the unit (club-games = %d today) or the multi-season corpus "
-                       "must change before any promotion or demotion is defined"
+            "reading": "the peer floor is n >= %d graded games *per strategy*; read as a fixture-level "
+                       "corpus floor it cannot be met inside one %d-fixture season at all, so either the "
+                       "unit, the gate or the multi-season corpus has to change before any promotion or "
+                       "demotion can be defined (club-games = %d today)"
                        % (GATE_FIXTURES, SEASON_FIXTURES, gp),
         },
         "brief_claims_checked": [

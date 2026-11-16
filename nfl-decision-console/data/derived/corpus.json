@@ -12,12 +12,28 @@
  "decisive_fixtures": 147,
  "fixtures_credited": 148,
  "gate_check": {
+  "as_written_by_peers": [
+   {
+    "file": "nfl-command/data/gates.json",
+    "text": "Strategy-level ROI claims require >= 300 graded selections; below that the strategy is graded 'insufficient sample' and earns no rewards."
+   },
+   {
+    "file": "nfl-arena/data/strategy_register.json",
+    "text": "n >= 300 graded bets in the confirmatory window before any reward consideration."
+   },
+   {
+    "file": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+    "text": "G1 sample | n >= 300 graded games | below this the strategy is displayed as provisional, unranked"
+   }
+  ],
   "fixtures_at_season_end": 272,
   "fixtures_available_today": 148,
   "gate_cited_by_peers": 300,
+  "mis_citation_corrected": "an earlier draft of this page attributed the floor to nfl-availability-desk/data/governance.json, which contains no such number; the three sources above are the ones that do (flag DC-13)",
   "one_season_can_satisfy_the_gate": false,
-  "reading": "a gate of n >= 300 graded fixtures cannot be met inside one 272-fixture season, so either the gate, the unit (club-games = 296 today) or the multi-season corpus must change before any promotion or demotion is defined",
-  "seasons_needed_at_this_rate": 2
+  "reading": "the peer floor is n >= 300 graded games *per strategy*; read as a fixture-level corpus floor it cannot be met inside one 272-fixture season at all, so either the unit, the gate or the multi-season corpus has to change before any promotion or demotion can be defined (club-games = 296 today)",
+  "seasons_needed_at_this_rate": 2,
+  "unit_in_the_peer_wording": "graded games or settled bets per strategy, not fixtures per corpus"
  },
  "half_season": 136,
  "identities": [

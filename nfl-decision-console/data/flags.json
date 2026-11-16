@@ -1,6 +1,6 @@
 {
  "dataset": "decision_console_flags",
- "title": "\u2691 Flagged for review \u2014 irregularities found while verifying, resolved or not",
+ "title": "⚑ Flagged for review — irregularities found while verifying, resolved or not",
  "built_utc": "2026-11-16",
  "rule": "a flag is published with the source links that expose it. Severity: high = a decision or a claim changes; medium = a number on the site can be wrong; low = hygiene. 'blocks' names what cannot be trusted until the flag is closed.",
  "rows": [
@@ -8,9 +8,9 @@
    "id": "DC-01",
    "severity": "high",
    "title": "156 suggestion rows, 0 reviewer verdicts in git",
-   "found": "Counting every suggestion register in the repository returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too). counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` to commit ec9c921 (2026-11-16T01:57:09Z); if that commit is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out",
-   "why_it_matters": "the brief's process \u2014 review, choose a path, then implement \u2014 cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
-   "action": "one verdict per row of CD-01\u2026CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
+   "found": "Counting every suggestion register in the repository returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too). counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` (2026-11-16T01:57:09Z); if the pin is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out",
+   "why_it_matters": "the brief's process — review, choose a path, then implement — cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
+   "action": "one verdict per row of CD-01…CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
    "blocks": "any claim that the project has a decision process",
    "sources": [
     {
@@ -27,7 +27,7 @@
    "id": "DC-02",
    "severity": "high",
    "title": "Third-party accounts of the inactive-list rule contradict each other",
-   "found": "Sources returned by search this session state 5, up to 7, and up to 8 inactives, and disagree on whether practice reports are due Mon\u2013Wed or Wed\u2013Fri. The only official artefact read prints 6 'Not Active' names per club for one fixture and states no rule.",
+   "found": "Sources returned by search this session state 5, up to 7, and up to 8 inactives, and disagree on whether practice reports are due Mon–Wed or Wed–Fri. The only official artefact read prints 6 'Not Active' names per club for one fixture and states no rule.",
    "why_it_matters": "a rule adopted from a non-official source would leak into capture schedules, denominators for 'who replaced whom', and any 'automatic inactive' assumption.",
    "action": "reject all three numbers; measure the distribution of Not Active size across fixtures instead",
    "blocks": "any per-club 'mandatory inactive count' claim",
@@ -106,7 +106,7 @@
    "found": "For the fixture read, lineups (22 slots) plus substitutions (26) plus Not Active (6) enumerate 54 distinct names for each club, which exceeds a 53-man roster; the document does not state why (practice-squad elevations are a plausible route and are not printed here).",
    "why_it_matters": "any model that assumes an active-count or roster-size constant will mis-handle exactly the games where elevations happen.",
    "action": "do not adopt a constant; compare the count against the transactions hub for the same day before using it as a feature",
-   "blocks": "'actives = roster \u2212 inactives' arithmetic",
+   "blocks": "'actives = roster − inactives' arithmetic",
    "sources": [
     {
      "label": "transcribed blocks",
@@ -122,7 +122,7 @@
    "id": "DC-07",
    "severity": "medium",
    "title": "Every clock time in this repository is a client-side approximation",
-   "found": "The read path used by agent sessions returns rendered text only \u2014 no headers, no server Date, no bytes \u2014 so this namespace states its reads as an ordered window (01:31Z\u201301:36:08Z) rather than fake precision.",
+   "found": "The read path used by agent sessions returns rendered text only — no headers, no server Date, no bytes — so this namespace states its reads as an ordered window (01:31Z–01:36:08Z) rather than fake precision.",
    "why_it_matters": "'store every read with its clock time' and 'publish the delta' both promise a time series; what exists today is a set of agent notes with day-granularity.",
    "action": "CD-04/G-04; until then, no page should print a timestamp finer than the window it was read in",
    "blocks": "any claim about how fast a designation changed",
@@ -137,7 +137,7 @@
    "id": "DC-08",
    "severity": "medium",
    "title": "Root navigation mixes a live count with a hard-coded date",
-   "found": "Committed index.html renders 'NFL research \u00b7 30 workspaces (2026-11-15)': the count is computed from the tree at build time, the date is a literal in the generator, so the pair drifts apart after the next merge.",
+   "found": "Committed index.html renders 'NFL research · 30 workspaces (2026-11-15)': the count is computed from the tree at build time, the date is a literal in the generator, so the pair drifts apart after the next merge.",
    "why_it_matters": "a reader uses the date to decide how much to trust the number.",
    "action": "SF-03",
    "blocks": "nothing, but it undermines the site's own convention that a number is meaningless without its as-of",
@@ -192,7 +192,7 @@
    "title": "Two sibling CI gates are already red on main, and this namespace did not move them",
    "found": "Reproduced on a clean checkout of `origin/main` on 2026-11-16 with nothing from this session applied, and byte-for-byte identical on this branch, so neither failure is caused by this PR. (1) `nfl-availability-desk verify` fails at its own 'Determinism gate (rebuild must not change committed files)': re-running that namespace's engine (capture -> audit -> drift -> build_site) rewrites five committed files (data/derived/capture_diffs.json, data/derived/hashes.json, pages/executive-summary.html, pages/repo-review.html, pages/snapshot-delta.html) because its cross-capture artefacts still describe a 107-row capture and '4 proper subsets' that the current tree no longer reproduces. (2) `Verify bounded NBA audit and published navigation` fails at 'Recompute HTML source-link and navigation coverage' because `verification-2026-11-05/index.html` publishes `../pages/competition.html`, which does not exist in that directory. This namespace's own job and the canonical-site job are both green.",
    "why_it_matters": "every open pull request inherits two red checks that nothing in it caused, so 'CI is green' stops being usable as a merge signal; and the availability desk's cross-capture reconciliation numbers are now describing a tree that no longer exists",
-   "action": "owner of `nfl-availability-desk`: re-run the pipeline and commit, or pin the capture set to files under its own data/ so a sibling merge cannot move it. owner of `verification-2026-11-05`: one line \u2014 drop or repoint the dead `../pages/competition.html` link. Both handed over in COORDINATION.md; this PR edited neither namespace",
+   "action": "owner of `nfl-availability-desk`: re-run the pipeline and commit the result, or pin the capture set to files under its own data/ so a sibling merge cannot move it. owner of `verification-2026-11-05`: the dead link is *generated* — line 131 of its `build.py` emits the tile `href=\"../pages/competition.html\"`, and no `pages/competition.html` exists at the root any more, so either drop that tile and regenerate the snapshot or let the audit tolerate one documented removal. Both handed over in COORDINATION.md with the file and line; this PR edited neither namespace",
    "blocks": "nothing this site publishes; it blocks a green board for the next session",
    "sources": [
     {
@@ -212,7 +212,7 @@
    "found": "The clustering key is the row's title/question/item text, and two peer registers store only a row id there (`REQ-01`, `SUG-01`), so their rows cluster on the label. That put 68 rows in one 'requirement' cluster and 28 in one 'suggestion' cluster, and this page published those as the duplication finding. The engine now tells an identifier-keyed cluster from a shared sentence: the corrected reading is 336 of 383 requirement rows inside a duplicated sentence cluster (largest 5) and 14 of 156 suggestion rows (largest 2).",
    "why_it_matters": "it inverts the finding. The open suggestion queue is barely duplicated ({sin} rows), so the consolidation problem is the shared requirement text and the real gap is that no register records a verdict. A reviewer who acted on the inflated number would have spent the next session de-duplicating a backlog that was not duplicated",
    "action": "closed in this commit: `engine/derive.py` flags identifier-keyed clusters, the census table carries both columns, the prose quotes the sentence numbers, and the raw figure stays visible and labelled",
-   "blocks": "nothing \u2014 the corrected numbers are the published ones",
+   "blocks": "nothing — the corrected numbers are the published ones",
    "sources": [
     {
      "label": "the census page, both columns",
@@ -221,6 +221,29 @@
     {
      "label": "the clusterer",
      "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/derive.py"
+    }
+   ]
+  },
+  {
+   "id": "DC-13",
+   "severity": "high",
+   "title": "This console attributed the n ≥ 300 gate to a file that does not contain it",
+   "found": "The landing page and QA-11 cited `nfl-availability-desk/data/governance.json` as the source of 'n ≥ 300 fixtures'. Re-read in full with the stderr no longer suppressed: that file is 8,040 bytes and contains the digits `300` zero times, and so does `nfl-book/data/gates.json` (3,586 bytes). The floor is real but is stated elsewhere and in a different unit — `nfl-command/data/gates.json` ('≥ 300 graded selections' for a strategy-level ROI claim), `nfl-arena/data/strategy_register.json` ('n >= 300 graded bets in the confirmatory window') and `nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md` ('G1 sample | n ≥ 300 graded games'). No register states a fixture-level corpus floor.",
+   "why_it_matters": "the unit changes the conclusion. 'n ≥ 300 fixtures' makes one season provably too small and the leaderboard permanently closed; 'n ≥ 300 graded bets per strategy' is reachable inside a season for any strategy that settles more than about 1.1 bets per fixture. A reviewer deciding CD-06 on the first reading would have 'fixed' a problem that is actually an undefined unit, and left the real problem — no frozen counting rule — in place. It is also the exact failure mode this project exists to prevent: a number quoted with a confident file path nobody opened.",
+   "action": "closed in this commit for this namespace: `data/derived/corpus.json` now carries `unit_in_the_peer_wording`, `as_written_by_peers` (the three quoted lines with their files) and `mis_citation_corrected`; the landing row and QA-11 cite the three real files and say 'graded games per strategy'. Owners of `nfl-availability-desk` and `nfl-book` should check their own pages for the same phrasing — `nfl-availability-desk/engine/build_site.py` publishes 'a sample floor of n ≥ 300' with no unit, which is where this session inherited it",
+   "blocks": "nothing published after this commit; it blocks any promotion rule written before it",
+   "sources": [
+    {
+     "label": "the file that does not contain the number",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/governance.json"
+    },
+    {
+     "label": "the gate that does",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json"
+    },
+    {
+     "label": "the pre-registration that does",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
     }
    ]
   }

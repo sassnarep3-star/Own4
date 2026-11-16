@@ -1,6 +1,6 @@
 {
  "dataset": "decision_console_questions",
- "title": "Questions, information and answers \u2014 what must be settled before any decision here is reasonable",
+ "title": "Questions, information and answers — what must be settled before any decision here is reasonable",
  "built_utc": "2026-11-16",
  "rule": "an answer is written only when a specific page was read in this session or a number was computed from a file in this repository by an engine named on the row. `answer_grade` says which kind. A row with no answer says what would fill it and who could fill it.",
  "grades": {
@@ -18,7 +18,7 @@
    "question": "Does the league publish a price anywhere an agent can read?",
    "know": "Two candidate paths were probed this session and both return the league's own 404 page; the official Game Summary for a completed fixture contains no price field in any section read.",
    "dont_know": "Whether the owner will licence a feed, accept third-party captures, or run price-free.",
-   "answer": "No official price source exists on the paths probed. The question is therefore no longer 'can we verify one' but 'what are we willing to publish unverified' \u2014 which is CD-02.",
+   "answer": "No official price source exists on the paths probed. The question is therefore no longer 'can we verify one' but 'what are we willing to publish unverified' — which is CD-02.",
    "answer_grade": "answered-official",
    "discovery": "closed; needs a verdict not a read",
    "asked_by": "CD-02, and every requirement naming residual, CLV, vig or ROI",
@@ -39,7 +39,7 @@
    "question": "Is there an official depth chart, and if not, what is the best official substitute?",
    "know": "The sampled club depth-chart path on nfl.com 404s. The official Game Summary prints a per-slot starting lineup and a Not Active list for each club. No per-player snap table was found in the four chunks of that PDF read.",
    "dont_know": "Whether the other 31 clubs expose a depth path; whether Next Gen Stats publishes snaps somewhere a collector can read; whether the unread chunks of the game book contain a participation table.",
-   "answer": "Depth ORDER has no official source found; depth FACTS (who started, who did not dress) do \u2014 in a dated, per-fixture document. That is enough for an absence-of-starter index and not enough for a '2nd-string quality' index.",
+   "answer": "Depth ORDER has no official source found; depth FACTS (who started, who did not dress) do — in a dated, per-fixture document. That is enough for an absence-of-starter index and not enough for a '2nd-string quality' index.",
    "answer_grade": "partly-answered",
    "discovery": "probe 32 club depth paths (one scripted sweep); read all chunks of 3 game books; probe the NGS player-stats pages for a snaps column",
    "asked_by": "CD-08, gap G-02, gap G-03",
@@ -125,7 +125,7 @@
    "dont_know": "The rule itself, as a dated official document.",
    "answer": "Not published. Per this project's own rule, the count is a transcribed observation per fixture, not a constant, and no third-party number is adopted.",
    "answer_grade": "partly-answered",
-   "discovery": "collect the Not Active block for all fixtures and publish the distribution of its size \u2014 that is a measurement, not a rule",
+   "discovery": "collect the Not Active block for all fixtures and publish the distribution of its size — that is a measurement, not a rule",
    "asked_by": "CD-07, flag DC-02",
    "sources": [
     {
@@ -139,10 +139,10 @@
    "blocks": "blocking",
    "question": "What is the real cadence of the official availability report?",
    "know": "The live page read this session is organised under game-date headings ('THURSDAY, NOVEMBER 12TH', 'SUNDAY, NOVEMBER 15TH') with columns Player | Position | Injuries | Practice Status | Game Status, and prints no per-row submission timestamp. Third-party accounts of the policy conflict about which days and which deadline apply.",
-   "dont_know": "When a given club's row last changed \u2014 the page does not say.",
+   "dont_know": "When a given club's row last changed — the page does not say.",
    "answer": "Cadence must be learned from dated captures, not hard-coded from a policy document the project has not read. A Wed/Thu/Fri assumption written into a collector would encode an unverified claim into the pipeline, which is the failure mode the brief's drift-alarm item exists to prevent.",
    "answer_grade": "answered-official",
-   "discovery": "closed by CD-04 once \u22653 weeks of daily captures exist; then publish the observed first-change-day distribution",
+   "discovery": "closed by CD-04 once ≥3 weeks of daily captures exist; then publish the observed first-change-day distribution",
    "asked_by": "CD-04, gap G-09",
    "sources": [
     {
@@ -175,8 +175,8 @@
   {
    "id": "QA-09",
    "blocks": "shaping",
-   "question": "Is the W\u2013L record printed on the injury report a live join or a pre-game attribute?",
-   "know": "For all 6 clubs visible in the chunk read, the bracketed record equals the standings page read minutes later \u2014 including the two ties, and including records that had just changed after the Sunday games.",
+   "question": "Is the W–L record printed on the injury report a live join or a pre-game attribute?",
+   "know": "For all 6 clubs visible in the chunk read, the bracketed record equals the standings page read minutes later — including the two ties, and including records that had just changed after the Sunday games.",
    "dont_know": "Nothing material for this read; the point is that a capture must store its window.",
    "answer": "It is a live join. Stored as such with its read window; it must never be used as a pre-game feature, because for a game already played it leaks the result.",
    "answer_grade": "answered-official",
@@ -197,9 +197,9 @@
    "id": "QA-10",
    "blocks": "blocking",
    "question": "How large is the graded-results corpus today, and does the brief's '136-game log' correspond to anything?",
-   "know": "From the official standings transcribed this session: \u03a3W = \u03a3L = 147, \u03a3PF = \u03a3PA = 6824, \u03a3GP/2 = 148 fixtures credited, including 2 ties. A 2026 season is 272 fixtures, and 272/2 = 136.",
+   "know": "From the official standings transcribed this session: ΣW = ΣL = 147, ΣPF = ΣPA = 6824, ΣGP/2 = 148 fixtures credited, including 2 ties. A 2026 season is 272 fixtures, and 272/2 = 136.",
    "dont_know": "What file the brief's 136 refers to; no such file exists at the base commit of this session (peers checked the same thing and published 145 at an earlier clock).",
-   "answer": "Publish the corpus as the count the identity produces at a stated clock, and treat 136 as half a season \u2014 the only arithmetic from official numbers that reproduces it. A corpus is a definition plus a snapshot, not a number handed to the project.",
+   "answer": "Publish the corpus as the count the identity produces at a stated clock, and treat 136 as half a season — the only arithmetic from official numbers that reproduces it. A corpus is a definition plus a snapshot, not a number handed to the project.",
    "answer_grade": "answered-computed",
    "discovery": "closed for the number; the definition is CD-06",
    "asked_by": "CD-06, flag DC-09",
@@ -218,16 +218,24 @@
    "id": "QA-11",
    "blocks": "blocking",
    "question": "Can a strategy be validated inside one season under the gates already written?",
-   "know": "Peer registers require n \u2265 300 graded games before a strategy holds a leaderboard slot; 272 fixtures exist in a full season; 148 are credited at this clock.",
-   "dont_know": "Whether the owner prefers a lowered gate with uncertainty, a two-season corpus, or a club-game unit (n = 296 today).",
-   "answer": "No \u2014 as written, the gate is unsatisfiable within 2026. Either the gate changes or the leaderboard cannot open until 2027. That is a decision, not a data gap, and it is the cheapest one on this board.",
+   "know": "Three peer registers state a floor of n ≥ 300, and all three state it per strategy in units of graded games, graded bets or settled selections — not as a fixture-level corpus floor: nfl-command requires '≥ 300 graded selections' for an ROI claim, nfl-arena 'n >= 300 graded bets in the confirmatory window', and PREREG-001 'G1 sample | n ≥ 300 graded games'. A full season holds 272 fixtures and 148 are credited at this clock.",
+   "dont_know": "Whether the owner fixes the unit before the gate (one graded bet per fixture makes 300 unreachable in 2026; several graded bets per fixture does not), and whether they prefer a lowered gate with an uncertainty bound, a two-season corpus, or the club-game unit (n = 296 today).",
+   "answer": "Not for a one-bet-per-fixture strategy: 272 fixtures exist in a season, so 300 graded games cannot accumulate inside 2026 — a strategy that settles several bets per fixture could, which is exactly why the unit has to be fixed before the gate is enforced. As written the gate is ambiguous rather than impossible, and no leaderboard can open until the ambiguity is resolved. That is a decision, not a data gap, and it is the cheapest one on this board.",
    "answer_grade": "answered-computed",
    "discovery": "closed; needs a verdict (CD-06)",
    "asked_by": "CD-06, CD-10, CD-14",
    "sources": [
     {
-     "label": "nfl-availability-desk gate text",
-     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/governance.json"
+     "label": "nfl-command gate text (≥ 300 graded selections)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/gates.json"
+    },
+    {
+     "label": "nfl-arena strategy register (n >= 300 graded bets)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/strategy_register.json"
+    },
+    {
+     "label": "PREREG-001 shadow baseline, G1 sample row",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
     }
    ]
   },
@@ -253,7 +261,7 @@
    "blocks": "shaping",
    "question": "Are the three Lions blank game-status cells still blank?",
    "know": "The live report read this session prints 'Out' for Kerby Joseph (S, Knee, DNP), Cade Mays (C, Ankle, DNP) and D.J. Reed (CB, Hip, DNP).",
-   "dont_know": "When the source changed, since the page carries no submission timestamp \u2014 the same limitation as QA-07.",
+   "dont_know": "When the source changed, since the page carries no submission timestamp — the same limitation as QA-07.",
    "answer": "Resolved upstream. The site item 'populate the three missing Lions designations' should be closed as 'source corrected between captures', not as 'we fixed it', and the closure should cite the clock it was observed at.",
    "answer_grade": "answered-official",
    "discovery": "closed",
@@ -269,7 +277,7 @@
    "id": "QA-14",
    "blocks": "shaping",
    "question": "Can roof/surface and weather be an official feature input pre-kickoff?",
-   "know": "For one completed fixture the game book header prints 'Open Stadium on Natural Grass' and a game-day weather line with temperature, humidity and wind \u2014 after the fact. The game centre's own Game Info block prints city and stadium, no weather.",
+   "know": "For one completed fixture the game book header prints 'Open Stadium on Natural Grass' and a game-day weather line with temperature, humidity and wind — after the fact. The game centre's own Game Info block prints city and stadium, no weather.",
    "dont_know": "Whether any official page states the roof designation before kickoff.",
    "answer": "As read today: official weather/roof is a LABEL, usable to grade a totals model and to build a fixture-context dataset for backtests, not to price a game that has not been played. A pre-game source would have to be licensed or accepted as third-party.",
    "answer_grade": "partly-answered",
@@ -291,7 +299,7 @@
    "blocks": "shaping",
    "question": "Should the 'injury report rows' figures the brief quotes be re-adjudicated now?",
    "know": "Peer captures of the same page report 347 rows across 28 club sections; the brief quotes 254 rows and 4 no-injury sections versus 279 live. This session read 1 of 8 chunks and therefore re-adjudicates nothing.",
-   "dont_know": "The true current census \u2014 a chunk-level read cannot count rows.",
+   "dont_know": "The true current census — a chunk-level read cannot count rows.",
    "answer": "No. Row-count disputes are a symptom of manual capture. The fix is CD-04 plus its drift alarm: an automated capture whose expectations are pinned, so the number is produced by a pipeline and its provenance is a file hash rather than an agent's transcript.",
    "answer_grade": "open-needs-new-source",
    "discovery": "run the collector for one week; then the two figures become comparable",
@@ -313,7 +321,7 @@
    "question": "What happens to a live strategy when the demotion gate fires, and can it fire at all this season?",
    "know": "A demotion rule needs a prospective window to fail in; the two-stage design requires both a proper-score qualification and a prospective CLV/ROI escrow window. CLV needs a price (CD-02) and the escrow needs graded fixtures (QA-11).",
    "dont_know": "Whether the owner wants demotion defined on skill alone this season, with CLV added if a feed is licensed.",
-   "answer": "Definable today on skill alone: fire the gate on the lower bound of benchmark-relative skill crossing zero over a rolling window of \u2265 K fixtures with the multiplicity adjustment published. The CLV half of the gate must be marked 'not yet computable', not quietly dropped.",
+   "answer": "Definable today on skill alone: fire the gate on the lower bound of benchmark-relative skill crossing zero over a rolling window of ≥ K fixtures with the multiplicity adjustment published. The CLV half of the gate must be marked 'not yet computable', not quietly dropped.",
    "answer_grade": "answered-computed",
    "discovery": "choose K; write the rule into a pre-registration file whose commit hash is the registration",
    "asked_by": "CD-10, CD-11",

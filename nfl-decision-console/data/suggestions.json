@@ -1,6 +1,6 @@
 {
  "dataset": "decision_console_suggestions",
- "title": "The suggestions section \u2014 read a row, write a verdict, and only then does anyone build it",
+ "title": "The suggestions section — read a row, write a verdict, and only then does anyone build it",
  "built_utc": "2026-11-16",
  "review_protocol": [
   "1. each row states the decision a reviewer must make, the options with what each one costs and locks, and the evidence that narrows them",
@@ -8,7 +8,7 @@
   "3. a session may implement a row only when its verdict is non-blank and its commit records the verdict; nothing in this namespace is implemented",
   "4. `basis` names the kind of evidence behind the recommendation (official read / repo computation / gate arithmetic) so a reviewer can see when the recommendation is only a judgement"
  ],
- "scope_note": "This register consolidates the decision surface across the repository rather than repeating it. The census on pages/consolidation.html is counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` to commit ec9c921 (2026-11-16T01:57:09Z); if that commit is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out. Peer registers hold 20 suggestion files / 156 rows, 18 question files / 184 rows, 23 flag files / 176 rows and 12 requirement files / 456 rows; the duplication reading uses the sentence-text columns, not the id-inflated ones (flag `DC-12`). Rows below that echo a peer proposal say so in `evidence`; the new material is this session's official reads and the arithmetic they force.",
+ "scope_note": "This register consolidates the decision surface across the repository rather than repeating it. The census on pages/consolidation.html is counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` (2026-11-16T01:57:09Z); if the pin is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out. Peer registers hold 20 suggestion files / 156 rows, 18 question files / 184 rows, 23 flag files / 176 rows and 12 requirement files / 456 rows; the duplication reading uses the sentence-text columns, not the id-inflated ones (flag `DC-12`). Rows below that echo a peer proposal say so in `evidence`; the new material is this session's official reads and the arithmetic they force.",
  "rows": [
   {
    "id": "CD-01",
@@ -20,7 +20,7 @@
      "id": "A",
      "text": "designate one namespace as the review surface; every other namespace's index gets a one-line banner pointing to it, written by its own owner session or by the integration session",
      "cost": "one edit per namespace index, no data moves",
-     "locks": "nothing \u2014 reversible"
+     "locks": "nothing — reversible"
     },
     {
      "id": "B",
@@ -36,7 +36,7 @@
     }
    ],
    "evidence": [
-    "repo computation: 138 suggestion rows across 19 registers in 18 namespaces, and 386 requirement rows across 9 registers \u2014 the same decision is currently asked 9 to 19 times in slightly different words",
+    "repo computation: 138 suggestion rows across 19 registers in 18 namespaces, and 386 requirement rows across 9 registers — the same decision is currently asked 9 to 19 times in slightly different words",
     "peer register: nfl-availability-desk Q-03 already asks 'which namespace is the canonical dashboard' and leaves the answer blank"
    ],
    "unblocks": [
@@ -96,7 +96,7 @@
     "two-stage leaderboard with CLV escrow",
     "rewards"
    ],
-   "recommended": "B for the site, C for the research store \u2014 i.e. publish no residual column on a public page while keeping a clearly-labelled third-party archive for internal model grading",
+   "recommended": "B for the site, C for the research store — i.e. publish no residual column on a public page while keeping a clearly-labelled third-party archive for internal model grading",
    "basis": "official read + repo rule: a residual against an unlicensed number is not a verifiable claim, but it is still the best available training signal for a model",
    "risk_if_deferred": "every session keeps producing blank price columns (correct, but not a plan) and the reward mechanism has no measurable definition",
    "effort": "policy only",
@@ -142,7 +142,7 @@
     }
    ],
    "evidence": [
-    "official read 2026-11-16: the first page of the Game Summary prints 'NFL Copyright \u00a9 2026 by The National Football League\u2026 this summary and play-by-play is for the express purpose of assisting media in their coverage of the game; any other use of this material is prohibited without the written permission of the National Football League.'",
+    "official read 2026-11-16: the first page of the Game Summary prints 'NFL Copyright © 2026 by The National Football League… this summary and play-by-play is for the express purpose of assisting media in their coverage of the game; any other use of this material is prohibited without the written permission of the National Football League.'",
     "repo grep this session: no register in any namespace records this restriction, although two peer namespaces already transcribe game-book lineups (nfl-hub/data/gamebooks.json, nfl-market/data/official_lineups.json)"
    ],
    "unblocks": [
@@ -195,7 +195,7 @@
     }
    ],
    "evidence": [
-    "this session's own limitation, published rather than hidden: the read path returns rendered text only \u2014 no response headers, no server Date \u2014 so every 'clock time' in this repo is a client-side approximation (see READ-01\u2026READ-08 timestamps)",
+    "this session's own limitation, published rather than hidden: the read path returns rendered text only — no response headers, no server Date — so every 'clock time' in this repo is a client-side approximation (see READ-01…READ-08 timestamps)",
     "peer flag RF-16: dated reads exist only because separate sessions opened the page on separate days",
     "peer registers state their hashes are transcription fingerprints, not raw-byte hashes"
    ],
@@ -206,7 +206,7 @@
     "'automate immutable multi-day availability snapshots'"
    ],
    "recommended": "A",
-   "basis": "gate arithmetic: the availability-surprise feature needs \u22652 dated reads per game week; with manual capture the observed rate is ~1 per week across the whole repo",
+   "basis": "gate arithmetic: the availability-surprise feature needs ≥2 dated reads per game week; with manual capture the observed rate is ~1 per week across the whole repo",
    "risk_if_deferred": "the delta thesis stays unfalsifiable and every 'we publish the surprise, not the level' claim on the site stays aspirational",
    "effort": "medium",
    "needs_owner": true,
@@ -245,11 +245,11 @@
     }
    ],
    "evidence": [
-    "concrete case from this session: the Game Summary prints a 'Did Not Play' heading with no names extracted, while Kerby Joseph \u2014 'Out' on the official report for that same fixture \u2014 appears in neither the Lineups, the Substitutions nor the Not Active list. Either the source really leaves him in a third category, or the chunked renderer lost the block. Raw bytes decide; a rendered read cannot.",
+    "concrete case from this session: the Game Summary prints a 'Did Not Play' heading with no names extracted, while Kerby Joseph — 'Out' on the official report for that same fixture — appears in neither the Lineups, the Substitutions nor the Not Active list. Either the source really leaves him in a third category, or the chunked renderer lost the block. Raw bytes decide; a rendered read cannot.",
     "peer precedent: the Texans publish depth as an image, so a renderer's silence is not a fact"
    ],
    "unblocks": [
-    "'add a drift alarm to every scraper \u2014 pin expected row counts and required fields; fail loudly when a field goes missing rather than publishing a blank'",
+    "'add a drift alarm to every scraper — pin expected row counts and required fields; fail loudly when a field goes missing rather than publishing a blank'",
     "immutable snapshot ledger"
    ],
    "recommended": "A",
@@ -282,7 +282,7 @@
     },
     {
      "id": "B",
-     "text": "keep n \u2265 300 graded games as a hard gate, which forces a multi-season corpus (\u22652 seasons) before any promotion",
+     "text": "keep n ≥ 300 graded games as a hard gate, which forces a multi-season corpus (≥2 seasons) before any promotion",
      "cost": "patience: through Week 10 of 2026 the count is 148",
      "locks": "no live strategy exists until 2027, so demotion gates are untestable this year"
     },
@@ -294,7 +294,7 @@
     }
    ],
    "evidence": [
-    "repo computation from the official standings read this session: \u03a3W = \u03a3L = 147, \u03a3PF = \u03a3PA = 6824, \u03a3GP/2 = 148 games credited, of which 2 are ties \u2014 see pages/corpus.html",
+    "repo computation from the official standings read this session: ΣW = ΣL = 147, ΣPF = ΣPA = 6824, ΣGP/2 = 148 games credited, of which 2 are ties — see pages/corpus.html",
     "the brief's '136-game log' matches none of the observed counts, but 272/2 = 136 exactly: half a season is the only arithmetic from official numbers that reproduces it",
     "peers measured 145 credited before the Sunday games and flagged the 136 (RF-01); this session re-ran the identity at a later clock and it moves by 3 as expected"
    ],
@@ -305,7 +305,7 @@
     "rewards"
    ],
    "recommended": "A with the unit stated as in C and cluster bounds as in B",
-   "basis": "gate arithmetic: one season cannot satisfy n \u2265 300 fixtures (272 exists), so a literal 300-gate silently guarantees an empty leaderboard",
+   "basis": "gate arithmetic, with the unit made explicit: the peer floor is n ≥ 300 graded games *per strategy*, and a season holds 272 fixtures, so a one-bet-per-fixture strategy cannot reach it in 2026 — while the floor is reachable for a strategy that settles several graded bets per fixture. The gate is therefore ambiguous until the unit is frozen, which is the cheapest part of this decision",
    "risk_if_deferred": "every leaderboard claim stays ungradeable while the number of 'almost-validated' strategies keeps growing across namespaces",
    "effort": "small",
    "needs_owner": true,
@@ -332,7 +332,7 @@
    "options": [
     {
      "id": "A",
-     "text": "build the join (report designation \u2192 game-book status) for every fixture with both artefacts, publish play rate with a Wilson interval and n, and only then decide whether the label enters the model",
+     "text": "build the join (report designation → game-book status) for every fixture with both artefacts, publish play rate with a Wilson interval and n, and only then decide whether the label enters the model",
      "cost": "depends on CD-03/CD-05",
      "locks": "a measured, official-only calibration"
     },
@@ -360,7 +360,7 @@
    ],
    "recommended": "A",
    "basis": "official read for the vocabulary and the join; the play-rate number deliberately stays n=1 until the corpus exists",
-   "risk_if_deferred": "a fixed-points penalty for a missing starter \u2014 the exact shortcut the brief rejects \u2014 stays the default",
+   "risk_if_deferred": "a fixed-points penalty for a missing starter — the exact shortcut the brief rejects — stays the default",
    "effort": "medium",
    "needs_owner": false,
    "verdict": "",
@@ -386,7 +386,7 @@
    "options": [
     {
      "id": "A",
-     "text": "publish per-slot facts only: who started, who was not active, who replaced whom against last week's same slot \u2014 and label the deficiency an index of *absence of the named starter*, not of quality",
+     "text": "publish per-slot facts only: who started, who was not active, who replaced whom against last week's same slot — and label the deficiency an index of *absence of the named starter*, not of quality",
      "cost": "needs the game-book pipeline",
      "locks": "no claim about '2nd string' quality without a value source"
     },
@@ -400,7 +400,7 @@
      "id": "C",
      "text": "derive depth order from jersey number, experience or salary",
      "cost": "none",
-     "locks": "the shortcut the brief explicitly rejects \u2014 this register recommends rejecting it again"
+     "locks": "the shortcut the brief explicitly rejects — this register recommends rejecting it again"
     },
     {
      "id": "D",
@@ -410,7 +410,7 @@
     }
    ],
    "evidence": [
-    "official probe: https://www.nfl.com/teams/detroit-lions/depth-chart/ returns the league's 404 page \u2014 1 of 32 clubs sampled, so a club-by-club register is still owed (gap G-02)",
+    "official probe: https://www.nfl.com/teams/detroit-lions/depth-chart/ returns the league's 404 page — 1 of 32 clubs sampled, so a club-by-club register is still owed (gap G-02)",
     "peer state: 149 club/unit/position slots carry more than one rank-1 player, so 'the starter' is often not a fact the club named",
     "peer register nfl-book lists 'official snap counts or NFL Game Books' as the clearing number for this requirement; the Game Book half is now demonstrated for 2 of 2 sampled fixtures, the snap-count half is not"
    ],
@@ -475,7 +475,7 @@
    ],
    "recommended": "A",
    "basis": "repo state: condition (i) is unmet, so any other option publishes an invalid number",
-   "risk_if_deferred": "a parlay division appears on the leaderboard with a win rate and no joint model \u2014 the luck-masking the brief wants removed",
+   "risk_if_deferred": "a parlay division appears on the leaderboard with a win rate and no joint model — the luck-masking the brief wants removed",
    "effort": "small (governance)",
    "needs_owner": false,
    "verdict": "",
@@ -519,7 +519,7 @@
     "repo arithmetic: with 148 graded fixtures (this session's standings identity) the prospective window for a two-stage gate cannot close this season, so escrow terms must be written now and executed in 2027"
    ],
    "unblocks": [
-    "'two-stage skill leaderboard (proper-score qualification \u2192 prospective CLV/ROI escrow)'",
+    "'two-stage skill leaderboard (proper-score qualification → prospective CLV/ROI escrow)'",
     "'define a demotion gate'"
    ],
    "recommended": "A + C together",
@@ -559,7 +559,7 @@
    ],
    "evidence": [
     "brief text: 'Add a two-sided what would change our mind field to every strategy entry'",
-    "repo state: peer registers carry the field for 5 strategies (nfl-book G8) and no register enforces it \u2014 a schema that is not enforced by a verifier decays to blank"
+    "repo state: peer registers carry the field for 5 strategies (nfl-book G8) and no register enforces it — a schema that is not enforced by a verifier decays to blank"
    ],
    "unblocks": [
     "'define a demotion gate that sends a live strategy back to paper'"
@@ -638,7 +638,7 @@
     {
      "id": "B",
      "text": "normalise to one name by hand",
-     "cost": "manual \u2014 the brief forbids manual input",
+     "cost": "manual — the brief forbids manual input",
      "locks": "a lost discrepancy"
     }
    ],
@@ -678,7 +678,7 @@
    "options": [
     {
      "id": "A",
-     "text": "publish three numbers per strategy: benchmark-relative skill, the game-cluster bootstrap lower bound, and the number of trials the adjustment covers \u2014 plus a placebo run that shuffles outcomes within fixture",
+     "text": "publish three numbers per strategy: benchmark-relative skill, the game-cluster bootstrap lower bound, and the number of trials the adjustment covers — plus a placebo run that shuffles outcomes within fixture",
      "cost": "needs CD-06's unit definition",
      "locks": "a strategy cannot look skilled by hiding the trial count"
     },
@@ -699,7 +699,7 @@
    ],
    "recommended": "A",
    "basis": "gate arithmetic",
-   "risk_if_deferred": "the leaderboard's purpose \u2014 separating skill from variance \u2014 is the one thing it stops demonstrating",
+   "risk_if_deferred": "the leaderboard's purpose — separating skill from variance — is the one thing it stops demonstrating",
    "effort": "medium",
    "needs_owner": false,
    "verdict": "",
@@ -721,7 +721,7 @@
    "options": [
     {
      "id": "A",
-     "text": "landing-page counter: N rows proposed, M verdicts written, oldest row unaddressed for D days \u2014 computed by an engine from the register and the git history of the verdict field",
+     "text": "landing-page counter: N rows proposed, M verdicts written, oldest row unaddressed for D days — computed by an engine from the register and the git history of the verdict field",
      "cost": "small",
      "locks": "the review queue becomes a measured object"
     },
