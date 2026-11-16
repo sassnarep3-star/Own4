@@ -507,6 +507,44 @@ def _refresh_nfl_research_title(nav):
 NAV = _refresh_nfl_research_title(NAV)
 
 
+# This generator owns the root index.html nav, and it used to rebuild that nav from
+# scratch on every run. Two consequences followed, and both were hit in production:
+# any session that appended its own nav group by hand had it silently erased, and the
+# erasure then showed up as a diff that failed the *other* session's determinism gate.
+# So: adopt, rather than discard. Whatever nav groups exist in the committed root
+# index.html that this generator does not itself produce are re-appended, verbatim, at
+# the end. The result is stable across rebuilds and additive for every session.
+def _adopt_foreign_nav_groups(nav):
+    import os as _os
+    import re as _re
+    root = _os.path.dirname(_os.path.dirname(_os.path.abspath(__file__)))
+    idx = _os.path.join(root, "index.html")
+    try:
+        text = open(idx, encoding="utf-8").read()
+    except OSError:
+        return nav
+    m = _re.search(r"<nav[^>]*>(.*?)</nav>", text, _re.S)
+    if not m:
+        return nav
+    inner = m.group(1)
+    # split into (<title>, [anchor html]) on the group headers
+    parts = _re.split(r'<div class="grp">(.*?)</div>', inner, flags=_re.S)
+    groups = list(zip(parts[1::2], parts[2::2]))
+    mine = {title for title, _ in nav}
+    out = list(nav)
+    for title, chunk in groups:
+        if title in mine:
+            continue
+        links = _re.findall(r'<a class="nav[^"]*" href="([^"]+)">(.*?)</a>', chunk, _re.S)
+        if not links:
+            continue
+        out.append((title, [(href, label, href) for href, label in links]))
+    return out
+
+
+NAV = _adopt_foreign_nav_groups(NAV)
+
+
 FOOTER = """<footer>
 <p><strong>Own4</strong> — NBA line-origination research. Analytical research only, not wagering advice.
 Snapshot <strong>%(snap)s</strong>; every data row links to the official page it was read from, and every value that

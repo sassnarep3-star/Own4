@@ -1,0 +1,35 @@
+name: nfl-origin-board verify
+
+on:
+  push:
+    paths: ['nfl-origin-board/**', '.github/workflows/nfl-origin-board.yml']
+  pull_request:
+    paths: ['nfl-origin-board/**', '.github/workflows/nfl-origin-board.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # Pinned to 3.11 to match the committed output: the generator is
+          # stdlib-only, but float formatting and dict ordering are pinned
+          # against the committed pages produced on 3.11.
+          python-version: '3.11'
+
+      - name: Rebuild the namespace from its data
+        working-directory: nfl-origin-board
+        run: python3 build.py
+
+      - name: 'Verify: drift alarms, integrity check, link and source audit'
+        working-directory: nfl-origin-board
+        run: python3 verify.py
+
+      - name: 'Determinism gate: a rebuild must not change any emitted file'
+        run: git diff --exit-code -- nfl-origin-board/index.html nfl-origin-board/pages

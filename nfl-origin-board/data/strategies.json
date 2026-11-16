@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "captured_utc": "2026-11-16",
+    "registration_rule": "A strategy is registered by committing its frozen definition before it sees the evaluation window. The commit hash of the registering commit IS the registration. Backtest numbers may never appear on the leaderboard.",
+    "registration_commit_placeholder": "Published after the merge commit exists; the governance page prints the hash emitted by verify.py at build time.",
+    "leaderboard_rule": "Ranking input = benchmark-relative Brier skill score with a game-cluster bootstrap lower bound and a Bonferroni multiplicity adjustment for the number of trials. Win rate and realised ROI are never ranking inputs (rejections R-38, R-65).",
+    "reward_rule": "Rewards are payable only from the prospective escrow sample, never from a backtest (R-09, R-59)."
+  },
+  "divisions": [
+    ["D1", "Singles", "One market per game: side, total or moneyline", "open for registration"],
+    ["D2", "Game parlays", "Multiple legs across different games", "closed until a validated joint probability exists (R-36)"],
+    ["D3", "Same-game parlays", "Multiple legs within one game; dependence is material", "closed until a validated joint probability and the operator's void/push rules exist (R-36)"],
+    ["D4", "Player prop combos", "Player markets and their combinations", "closed: no official player-prop source is connected"]
+  ],
+  "controls": [
+    ["C1", "Uniform random pick", "Required on every leaderboard run so skill can be separated from chance (R-57)"],
+    ["C2", "Point-in-time favourite only", "Back the side the official standings imply is stronger, using only data available before kickoff (R-57)"]
+  ],
+  "strategies": [
+    {
+      "id": "S1",
+      "name": "Singles-only moneyline shadow baseline",
+      "division": "D1",
+      "status": "pre-registered, not yet graded",
+      "purpose": "The R-35 shadow baseline. Simple, fully specified, and run before any richer model is trusted.",
+      "frozen_definition": "For each fixture, P(home win) = logistic(a + b * (home NPPG - away NPPG)), where NPPG is net points per game computed from the official standings page using only games completed before kickoff. a and b are fitted on the training weeks of the 2026 season only. No availability input. No market input.",
+      "inputs": ["home net points per game (official standings)", "away net points per game (official standings)", "home/away indicator"],
+      "output": "P(home win) plus the named input vector, stored per fixture (R-15)",
+      "what_would_confirm": "Benchmark-relative Brier skill > 0 with a game-cluster lower bound above zero over a prospective sample of at least 300 graded games.",
+      "what_would_refute": "Benchmark-relative Brier skill <= 0, or a game-cluster lower bound below zero, after 300 prospective graded games; or control C2 beats it on the same sample.",
+      "blocking_gates": ["G-SAMPLE"],
+      "clearing_number": "300 prospective graded games (currently 0)",
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "id": "S2",
+      "name": "Opponent-aware rating, chronological holdout",
+      "division": "D1",
+      "status": "pre-registered, not yet graded",
+      "purpose": "R-26: make the ratings opponent-aware by fitting on the actual game graph rather than raw averages.",
+      "frozen_definition": "Fit a least-squares rating vector over the ingested game graph (margin of victory, home advantage term) using only games before each fixture's kickoff; convert the rating difference to P(home win) with a single logistic link calibrated on the validation weeks. Chronological split only: no shuffled cross-validation.",
+      "inputs": ["game graph from the official schedule pages", "final scores", "home/away indicator"],
+      "output": "P(home win) plus the rating difference and the fitted home-advantage term",
+      "what_would_confirm": "Beats S1 on benchmark-relative Brier skill over the same prospective 300-game sample, with a non-overlapping cluster confidence interval.",
+      "what_would_refute": "Fails to beat S1 out of sample, or the rating fails a convergence check on the training weeks.",
+      "blocking_gates": ["G-SAMPLE", "G-CORPUS"],
+      "clearing_number": "3 completed seasons for a clean train/validation/holdout split (currently 1 partial season)",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-10"
+    },
+    {
+      "id": "S3",
+      "name": "Totals, two estimators published side by side",
+      "division": "D1",
+      "status": "pre-registered, not yet graded",
+      "purpose": "R-62: publish every model total twice with the gap column; collapse to one only after a walk-forward comparison.",
+      "frozen_definition": "Estimator A: expected total = home PPG + away PPG, each computed from games before kickoff. Estimator B: expected total from the opponent-aware rating difference plus a league baseline total. Publish both plus the gap. Do not collapse until one wins a walk-forward comparison on the validation weeks.",
+      "inputs": ["points for per game (official standings)", "points against per game (official standings)", "rating difference from S2", "league baseline total"],
+      "output": "Two expected totals and the gap, per fixture",
+      "what_would_confirm": "One estimator beats the other on mean absolute error over a walk-forward validation window of at least 4 weeks.",
+      "what_would_refute": "Neither estimator separates after 4 walk-forward weeks, in which case both stay published.",
+      "blocking_gates": ["G-SAMPLE"],
+      "clearing_number": "4 walk-forward validation weeks (currently 0)",
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "id": "S4",
+      "name": "Availability-adjusted team strength (deferred)",
+      "division": "D1",
+      "status": "pre-registered, not runnable",
+      "purpose": "The injury/depth model the brief asks for. Registered now so that, when the depth gate clears, it cannot be tuned on results it has already seen.",
+      "frozen_definition": "Identical to S2 with an added availability feature vector: count of Out designations by position group, and the depth rank of the named replacement where an official statement names one. NOT a fixed points penalty: the ablation is the measurement (R-27, R-28).",
+      "inputs": ["S2 rating difference", "Out designations by position group from the official injury report", "announced-starter evidence where an official statement exists"],
+      "output": "P(home win), published as an ablation delta against S2 with an uncertainty interval",
+      "what_would_confirm": "The with-availability model beats the without-availability model on benchmark-relative Brier skill across 3 chronological holdout seasons, with a non-overlapping cluster interval.",
+      "what_would_refute": "The ablation delta is indistinguishable from zero, in which case the availability feature stays out of the model and the result is published as a negative finding.",
+      "blocking_gates": ["G-DEPTH", "G-ABLATION", "G-CORPUS"],
+      "clearing_number": "4 dated weeks of availability history plus 3 holdout seasons (currently 1 week, 1 partial season)",
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "id": "S5",
+      "name": "Parlays, same-game parlays and prop combos (gated)",
+      "division": "D2 / D3 / D4",
+      "status": "pre-registered, gated closed",
+      "purpose": "R-36: multiplying marginal probabilities is invalid under dependence. A combo may only be ranked when a directly validated joint probability and the operator's void/push rules are both available.",
+      "frozen_definition": "No combination may be ranked until (a) a joint probability is validated directly on historical joint outcomes for that combination type, and (b) the operator's void/push rules are captured in writing. Until then the division holds zero rows and no parlay or prop number is published.",
+      "inputs": ["validated joint probability", "operator void/push rules", "S1-S4 marginals"],
+      "output": "None until the gate clears. No implied parlay price is published anywhere on this site.",
+      "what_would_confirm": "A directly validated joint probability for the combination type plus the operator rules in hand.",
+      "what_would_refute": "Any attempt to price a combination from multiplied marginals is refuted by construction and is not implemented.",
+      "blocking_gates": ["G-PRICE", "G-SAMPLE"],
+      "clearing_number": "1 validated joint model per combination type plus the operator rulebook (currently 0)",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    }
+  ]
+}

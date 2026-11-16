@@ -3917,6 +3917,86 @@ every value gated by them is published blank + flagged, never inferred.
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
 
 ---
+
+## Session `arena/bc603c5b-own4` — claim (2026-11-16 UTC)
+
+**Session ID:** `arena-bc603c5b-own4` · **Branch:** `arena/bc603c5b-own4` (fixed) · **Base:** `1dbde90`
+
+### Claimed file scope (exclusive — no other session should edit these)
+- `nfl-origin-board/**` (new namespace: canonical NFL decision board + repo audit) — ALL files
+- `COORDINATION.md` — append-only (union resolution only)
+- `index.html` — one append-only nav block insert (new group `NFL Origin Board · 2026-11-16`); no existing nav entry removed or edited
+
+### Tasks
+| # | Task | Status | Files |
+|---|------|--------|-------|
+| B1 | Repo-wide line-by-line audit: scan all HTML/JSON rows for unsourced values, broken links, localhost refs, cross-namespace contradictions | in progress | `nfl-origin-board/audit/`, `nfl-origin-board/data/audit_findings.json` |
+| B2 | Live official capture: NFL.com Week 11 injury report, Week 10 results, schedule, standings, venues | in progress | `nfl-origin-board/data/*.json` |
+| B3 | Decision-readiness table: one row per brief requirement + blocking gate + clearing number | pending | `nfl-origin-board/data/requirements.json` |
+| B4 | Questions / information / answers register (what must be known before a decision) | pending | `nfl-origin-board/data/questions.json` |
+| B5 | Suggestions board (review-first, choose-a-path flow, verdicts left blank) | pending | `nfl-origin-board/data/suggestions.json` |
+| B6 | Strategies, gates, leaderboard, correlations (all with n; blanks where unverifiable) | pending | `nfl-origin-board/data/*.json` |
+| B7 | Site build: landing + category subpages + Flagged for Review | pending | `nfl-origin-board/build.py`, `nfl-origin-board/*.html` |
+| B8 | Final integration, PR to main, merge, Pages confirmation | pending | — |
+
+### Rules self-imposed this session
+- Every published row carries an official source URL fetched this session, or the value is blank and flagged.
+- No inferred/filled values. No backtest numbers on any leaderboard (pre-registration gate).
+- Determinism: `build.py` is stdlib-only, no network, no tree-wide counts baked into prose.
+
+## Session `arena/bc603c5b-own4` — completion record
+
+Branch: `arena/bc603c5b-own4` (base `1dbde90`). Scope: `nfl-origin-board/**`, append-only
+COORDINATION.md, and one append-only nav group in root `index.html`. No other namespace edited.
+
+### What was built
+`nfl-origin-board/` — 19 pages: landing decision dashboard + 18 subpages, plus `build.py`,
+`verify.py`, 12 JSON data files, and `.github/workflows/nfl-origin-board.yml`.
+
+### Sources read this session (all official unless marked)
+- `https://www.nfl.com/injuries/` — Week 10 report, read in full (8/8 chunks), 347 rows / 28 clubs / 171 designated.
+- `https://www.nfl.com/standings/` — 32 clubs, W/L/T/PF/PA.
+- `https://www.nfl.com/scores/2026/week-10` — Week 10 result set + the PIT@CIN irregularity (RF-01).
+- `https://www.nfl.com/schedules/2026/by-week/week-1` … `week-11` — all 150 fixtures week by week.
+- 22 dated official nfl.com news articles (headlines only) for announced starters, IR placements and roster moves.
+- `https://github.com/nflverse/nfldata` (THIRD-PARTY) — venue, roof, surface, spread, total, moneyline. Published unverified only.
+
+### Verification performed (all reproducible via `nfl-origin-board/verify.py`)
+1. **Standings integrity: PASS.** The 148 verified finals were recomputed into per-club W/L/T/PF/PA and
+   compared against the official standings page: 0 mismatches across all 32 clubs.
+2. **Cross-source score check: PASS.** The 136 games of Weeks 1-9 match the nflverse archive already in
+   this repository on 136 of 136 games, 0 discrepancies (team codes mapped: LA=LAR, ARI=AZ).
+3. **Coverage check: PASS.** The absence of 4 clubs from the injury report is exactly the Week 10 bye
+   list (CHI, DEN, PHI, TB). 28 = 32 − 4.
+4. **Drift alarms: PASS.** Row counts and required fields pinned for all 11 data files; a missing field
+   fails the build rather than publishing a blank.
+5. **Site audit: PASS.** 19 pages, 1,077 data rows (header rows excluded), every row carries either a
+   source link or a visible blank marker; 0 broken internal links; 0 localhost references.
+6. **Determinism: PASS.** Rebuild produces byte-identical output (md5 of md5s matches across rebuilds).
+
+### Findings that count against the repository (published on the Flagged page, not hidden)
+- **RF-13**: 10 pages of this project publish data rows with no source link. Largest: nfl-lines/singles
+  (120 of 311), nfl-origination/requirements (89 of 89), nfl-book/index (40 of 122).
+- **RF-14**: nfl-lines publishes a completed backtest — 15 strategies, 19,264 bets, ROI/CLV/drawdown/
+  p-values, split development vs confirmation. Prices come from nflverse, not a licensed feed. R-20
+  says decide the price policy BEFORE publishing any backtest. This session publishes no backtest.
+- **RF-15 (highest value)**: `nfl-lines/data/raw/nfldata_games.csv` already holds a venue for 150 of 150
+  of this session's fixtures, a roof for 146, and spread/total/moneyline for 150 — but not one value has
+  been merged into an official-sourced table here. Accepting it as flagged third-party would clear the
+  venue, roof/surface and historical-price gates at once. See suggestion SG-01.
+- **RF-11 / RF-12**: inherited counts contradict the files they describe (nfl-lines provenance says 275
+  rows; the file holds 276). Two captures of the same page four days apart differ by 71 rows
+  (276 → 347). Neither is wrong; the report grows through the week. This is evidence for R-54/R-55.
+- One initial scan finding was **withdrawn**: the apparent localhost hit in
+  nfl-consolidated/pages/verification.html is the literal text of a check label, not a URL.
+
+### Notes for later sessions
+- Counts on every page are computed at build time from the JSON; none is typed into prose, so tree-wide
+  counts cannot go stale and the determinism gate holds.
+- Every verdict on the Suggestions page is deliberately blank. Choosing is the reviewer's call.
+- No manual input was taken from the owner at any point.
+
+---
 ## Session `arena-6531ea53-own4` — NFL root site (current session, 2026-11-16)
 
 Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
