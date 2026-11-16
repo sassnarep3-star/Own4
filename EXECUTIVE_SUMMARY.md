@@ -1,214 +1,76 @@
-# Executive Summary — Own4: NBA Line Origination & Signal Strategy Research
+# Own4 — NFL Line Origination · Executive Summary
+
+**Live site:** GitHub Pages at the repo root (this repository). One clean landing page plus category subpages,
+every data row source-linked, never-infer policy: blanks are flagged, never filled.
 
 ## What this is
+Own4 originates its own NFL lines from verifiable signals and treats strategy development as a leaderboard
+competition: single bets, parlays and player-prop combos, each passing pre-registered validation gates before any
+ranking or reward. Correlation values are computed only from officially sourced numbers and published with `n`. Luck
+is removed as far as the data allows — no strategy is presented as skill until it clears its gates.
 
-- A research framework for originating NBA lines — own projections for game totals, spreads, player props, parlays and prop combos — judged on a leaderboard where a strategy only earns credit if it survives 12 validation gates built to strip out luck. Date: 2026-11-02.
+## Data state (2026 REG season, read 2026-11-14)
 
-## Headline results (computed, historical, versus a proxy — not sportsbook prices)
+| Item | Value | Status | Source |
+|---|---|---|---|
+| 2026 REG games tracked | 272 (137 final, 135 scheduled) | feed reconciled vs official standings 32/32 | `nfl-core/data/results_feed_2026.csv` |
+| Markets in price snapshot store | 816 | 3 per game: SIDE / TOTAL / MONEYLINE — open + close + settlement | `nfl-core/data/price_snapshots_2026.csv` |
+| Originated markets | 408 | weeks 10–18, fixed order SIDE → TOTAL → MONEYLINE | `nfl-core/data/originations_2026.csv` |
+| Strategies on leaderboard | 15 | signal rank independent of staking; 0 reward-eligible | `nfl-core/data/leaderboard_signal.csv` |
+| Correlation values with `n` | 13 (with n) | player-level rows blank + flagged (no verified inputs) | `nfl-core/data/correlations_n.csv` |
+| Demotion gates armed | 4 | DG-1..DG-4 live → paper triggers | `nfl-core/data/gates.csv` |
+| Validation gates | G1–G8 | best BH-adjusted p = 0.44; no strategy clears the luck barrier | `nfl-core/data/gates.csv` |
 
-- 9 strategies × 3 edge thresholds = 27 registered single/prop trials, evaluated once on 4,144 frozen holdout games (2020-21 → 2023-24) after fitting on 10,327 dev games.
-- 1 trial(s) pass every gate (Provisional Gold), 13 are Silver (statistically significant after Holm correction but underpowered or direction-biased). Best by edge lower bound: P4 top 10% — 60.6% on 4,573 bets (Silver); P4 top 25% — 58.2% on 11,951 bets (Silver); P1 top 10% — 58.5% on 4,634 bets (Silver); P3 top 10% — 57.3% on 4,457 bets (Silver); M2 top 10% — 59.3% on 636 bets (Silver).
-- Parlays/combos: 5 of 11 constructions pass every gate; same-player prop combos are blocked because their legs are correlated (ρ≈0.15–0.19) and books reprice such combos.
-- Game totals from rest alone carry no signal; pace/league-drift gives a modest edge; point-spread rest effects are small but real; player-prop edges come mostly from minutes information the proxy ignores.
+## Headline finding
+**No strategy has yet demonstrated skill rather than luck.** The best BH-adjusted p-value across 15 strategies is
+0.44 (wind-unders, n = 303). Consequently the leaderboard awards **zero rewards** — paying a strategy that has not
+cleared its sample would be paying for luck. One signal remains under paper tracking: unders in outdoor games with
+wind ≥ 15 mph (hit 55.4%, z = 1.43, not yet distinguishable from luck).
 
-## How luck is removed
+## What is solid (verified)
+- **Results feed:** 137 settled 2026 REG games, each row carrying its official nfl.com game URL. Per-team W-L-T and
+  PF-PA reconciled cell-by-cell against the official standings — backtests and ROI are computable at all.
+- **Price-snapshot store:** opening and closing numbers per market with capture timestamps and provenance. WAS@NYG
+  demonstrates the mechanism (open NYG −2.5 → close NYG −1.5). Opening lines for 2026 weeks 1–9 are missing (F-C02)
+  and left blank.
+- **Origination order:** side first, then total, then moneyline; model fair line, market line and difference published
+  as separate columns for every originated market.
+- **Spread convention:** positive spread_line = home favored (nflverse DATASETS.md; 162/163 moneyline-consistency on
+  2026 games). The older “1.5 vs 2.5” flag is resolved as open→close movement.
+- **Signal/staking separation:** the signal leaderboard is ranked by z_vs_breakeven at flat stakes only; stake-level
+  ROI/drawdown live in a separate table that cannot alter rank.
 
-- Chronological dev/holdout design: all features use only earlier games (perturbation tests pass); models and thresholds are fitted on dev seasons and frozen before the holdout is evaluated.
-- Date-clustered standard errors, Holm correction over all 27 trials, season-by-season and alternating-week repeatability, threshold robustness, a directional-null test, and placebo strategies (0 of 2,700 random strategies passed the significance gate).
+## What is deliberately blank (never inferred)
+- Opening lines for 2026 weeks 1–9 — no capture exists anywhere in the repo (F-C02).
+- Player-prop prices — the NFL publishes none (A-13); prop rows and prop correlations blank + flagged.
+- Replacement depth strings for clubs whose official chart does not answer — blank + flagged (S-C03 proposes full
+  32-club coverage).
 
-## Correlation values (computed)
+## Decisions needed from the owner
+1. **Demotion-gate thresholds (S-C04):** DG-1..DG-4 are armed with project-defined numbers; owner sign-off is needed
+   for policy legitimacy.
+2. **Suggestions board path:** nothing is implemented until the owner marks a suggestion “chosen” (suggestions.html).
+3. **Closing-line feed (S-C02):** decide whether to license one or run dated snapshots to fill the opening/closing gap.
+4. **Canonical workspace (S-C11):** four namespaces implement the same brief; nfl-core is proposed as store-of-record.
 
-- Same player (holdout): points↔rebounds +0.25, points↔assists +0.14, rebounds↔assists +0.18. Teammate top-2 scorers +0.01; opposing top scorers +0.09; top scorer vs game total +0.24.
-- No official source publishes any of these coefficients, so the official-source column stays blank and the computed values are labeled unverified.
+## Site structure (GitHub Pages)
+- `/` — Landing dashboard: decision-readiness table (one row per requirement, with the gate that blocks it and the
+  number that would clear it), key metrics, category links.
+- `pages/prices.html` — Price-snapshot store (open + close + settlement per market).
+- `pages/results.html` — Verified results feed (reconciled to official standings).
+- `pages/origination.html` — Origination: side → total → ML, fair/market/difference columns.
+- `pages/leaderboard.html` — Leaderboard split into signal (rank) and staking (no influence on rank).
+- `pages/gates.html` — Validation gates G1–G8 and demotion gates DG-1–DG-4.
+- `pages/depth.html` — Injuries and replacement depth (which string replaces the absent player).
+- `pages/correlations.html` — Correlations with n, officially sourced inputs.
+- `pages/questions.html` — Questions register: known / missing / what settles each decision.
+- `pages/suggestions.html` — Suggestions board: review and choose before implementing.
+- `pages/flagged.html` — Flagged for review: irregularities and unverified values.
+- `pages/sources.html` — Sources and verification method.
 
-## Audit of the existing repo
-
-- 27 claims re-checked against official pages today: 13 verified, 5 corrected, 5 unverified (values blanked/flagged), 4 cited sources that did not support their use.
-- Notable: the helpline was listed as 1-800-GAMBLER but the official NCPG page lists 1-800-MY-RESET; Dončić 33.5 PPG, Jokić 12.9/10.7 and the team PPG list appear in no retrievable official page text; the gate thresholds had been cited to NBA articles that do not mention them.
-
-## What this does NOT show
-
-- No strategy beats a sportsbook: no betting lines were used (not official, not available). Edges are versus a transparent proxy that ignores minutes, injuries and matchups; a real market would erase much of the player-prop edge.
-- The holdout was viewed once before a redesign (flagged) and prospective replication (G12) has not been run — hence “Provisional”. Data ends 2023-24; the NBA is now in 2026-27.
-- Research data is a third-party mirror (⚠) checked against the official box score on 1 game only; NBA.com states its stats are not available for download, so licensing must be resolved before production use.
-- Parlay returns assume −110 per leg with no correlation repricing.
-
-## Next steps that need outside input
-
-- Licensed/official historical data through 2025-26 and archived sportsbook lines; then re-run `python research/run_all.py` and log live (timestamped) predictions for gate G12.
-
-## Responsible gambling
-
-- This is analysis, not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET — https://www.ncpgambling.org/help-treatment
-
-## NFL addendum (added at final integration, session arena/909635f5-own4, 2026-11-02 UTC)
-
-The repository now carries four independent NFL research sections, all linked from the root
-dashboard navigation. Each was produced by a separate session with its own pre-registration,
-verification and flags; none claims a validated betting edge:
-
-| Section | Content | Headline status |
-|---------|---------|-----------------|
-| `nfl/` (PRs #23/#25) | Specification pages: correlation, validation, sources, review | Structure-only; all measured values blank + flagged |
-| `nfl-quant/` (PRs #26–#28) | Historical NFL quant lab: ratings engine, backtests, props research, Week 9 lines, 13-page site | Measured outputs with its own gates/flags; see its executive summary |
-| `nfl-research/` (PR #24, integrated here) | Research specification + dashboard | Unvalidated specification; empirical modelling flagged as needs-review |
-| `nfl-lab/` (this session) | Verified 2026 data (120 games, 480/480 standings cells), 13 signals, 7 correlations, walk-forward Elo, 16 own lines, 8-gate leaderboard, 11-page site | **0 of 8 strategies reward-eligible**; holdout Brier 0.249 (n=56 < 300 gate) — NOT VALIDATED; all market cells blank (no official line source) |
-
-NFL findings detailed in `nfl-lab/EXECUTIVE_SUMMARY.md` and each section's own summary.
-Shared rule across sections: every table row links to an official source (nfl.com /
-operations.nfl.com), unconfirmable values stay blank and appear on a "Flagged for Review"
-page, and nothing merges without the full validation suite green (CI: `pages.yml`).
-
-Sources: https://www.nfl.com/standings/league/2026/REG · https://www.nfl.com/schedules/ ·
-https://operations.nfl.com/rules-officiating/2026-nfl-rulebook ·
-https://scikit-learn.org/stable/modules/cross_validation.html ·
-https://www.ncpgambling.org/
-
-
----
-
-# Addendum — verified snapshot 2026-11-05 (session `arena/6c423a51-own4`)
-
-The sections above describe the 2026-11-02 snapshot. On 2026-11-05 the official pages were re-read and the
-numbers moved: the league has played 121 games. This addendum supersedes the earlier figures wherever they
-conflict, and the full version is published as a page at
-https://sassnarep3-star.github.io/Own4/verified/executive-summary.html
-
-**Data.** 30 standings rows, 30 team-stat rows, 2 scheduled games and 29 final scores were re-read from nba.com
-on 2026-11-05. 56 further final scores inherited from 2026-11-02 were corroborated rather than re-fetched: every
-sampled date holds exactly the number of games the official calendar lists, and all 30 teams' records advance
-exactly by their results in the newly verified games. Coverage is 85 of 121 games (70.2%); 36 games on seven
-October dates were never captured and appear in no calculation.
-
-**Originated lines.** For 2026-11-05 the model originates ORL at PHX with a total of 225.9, published as a
-half-point line of 226.0 (PHX −1.5), and MIA at GSW with a total of 230.0 on the same line (GSW −3.0). Every price field is blank: no official NBA source publishes a
-price, and the official games page's odds toggle exposed no values. No expected value, stake or return is claimed.
-
-**Signal and luck.** Ten team-level correlations were measured with 95% confidence intervals and
-Benjamini-Hochberg control; five survive at q = 0.05 (point differential r = 0.921, points r = 0.540, FG% r = 0.506,
-3P% r = 0.448, turnovers r = −0.524). Same-game pace dependence between the two teams' points is small
-(r = 0.125 on 85 games). The strict walk-forward backtest grades 35 games: winner accuracy 0.5714 against a 0.6000
-always-pick-home baseline (one-sided p = 0.7003), bootstrap interval [0.4000, 0.7429]. The originated total beats
-its naive baseline by 0.7359 MAE (permutation p = 0.0261) but fails the 300-game floor and fails BH once both
-strategy tests are counted. A real 55% edge would need about 620 graded games to be detected at 80% power.
-
-**Gates and competition.** Ten pre-registered gates: 4 pass, 5 fail, 1 blocked (no official price). Zero of eight
-strategies qualify; zero rewards are awarded. Partial credit is how variance gets paid.
-
-**Flags.** Prices, player game logs, player availability and 36 games are missing; the published +/- column sums to
-−5.3 instead of 0 and is not used as a model input; the 56 inherited rows were not individually re-fetched. All 13
-items are published with official and repository links on `/verified/flagged.html`.
-
-Research only — not wagering advice. National Problem Gambling Helpline 1-800-MY-RESET
-(https://www.ncpgambling.org/help-treatment).
-
-## NFL Book addendum (session arena/c8969a10-own4, 2026-11-14 UTC)
-
-**Price snapshots, verified results, gated origination.** `nfl-book/` publishes open/close snapshots for
-every originated Week-11 market (39 pairs, side→total→moneyline order enforced in code), a 137-game
-results feed with 32 games re-read line-by-line from official pages (160/160 standings cells match),
-and a signal-first leaderboard: S1 model-side accuracy 0.673 (n=104, CI 0.578–0.756, G2 pass,
-placebo p<0.002) with staking reported only under an assumed −110 price. Amendment A1 keeps rewards at
-0/1,000 while G7 (verified prices) is blocked — lucky staking cannot pay or mask signal. Correlations
-are official-only with n published; replacement depth is blank wherever official text does not state
-the string. Demotion gate D1 is armed. 13 suggestions await reviewer verdicts before implementation.
-Full detail: `nfl-book/EXECUTIVE_SUMMARY.md`; live after merge at /nfl-book/.
-
----
-
-## Addendum · session `arena/9f6a7ca8-own4` · 2026-11-15 — NFL decision readiness
-
-**Live:** https://sassnarep3-star.github.io/Own4/nfl-verify/ ·
-**Source:** [`nfl-verify/`](nfl-verify/) ·
-**Capture clock:** `2026-11-15T23:27:10Z`
-
-This session asked a different question from the 26 NFL namespaces before it. They each answered
-*"what did we build?"*. This one answers **"what blocks each requirement, and what number would
-clear it?"** — 78 requirement rows, each with its blocking gate, its clearing number and the ask.
-
-### Headline numbers
-
-| | |
-|---|---|
-| Requirements traced | **78** |
-| Met and re-verified this session | 21 |
-| Partial, with a named evidence gap | 31 |
-| Blocked | 13 |
-| Never started | 13 |
-| Official Week 10 inactives transcribed | **138 players / 24 club sections** |
-| Week 10 injury-report rows transcribed | **347 / 28 club sections / 8 of 8 chunks** |
-| Questions, all answers blank | 20 |
-| Suggestions awaiting a verdict | 13 |
-| Irregularities flagged, none blocking | 14 |
-
-### Three findings that change what to do next
-
-**1. An official inactive list exists and the repository never ingested it.** nfl.com publishes a
-dated article naming every inactive player per club — 138 players across 24 club sections for
-Week 10 — and it carries the venue string for 12 games. Flag FB-06 treats the active list as
-unobtainable. It is not. The blocker moves from *"no source"* to *"no parser"*, which is the single
-largest change in what is possible this week.
-
-**2. The live injury page rolls its fixture headers forward a week before its player tables follow.**
-Two exact identities hold and they invert: the clubs in the Week 10 report that are absent from the
-Week 11 schedule are precisely the official Week 11 bye list, and the clubs on the Week 11 schedule
-that are absent from the report are precisely the Week 10 bye list. A scraper that keys players to
-the fixture header rather than to the club silently attributes last week's injuries to next week's
-games. Published as [R-14](nfl-verify/pages/flagged.html#R-14), and asserted on every build.
-
-**3. Depth charts are club-by-club, and that decides the feature.** Two clubs probed. Green Bay
-publishes a structured table — 44 named players, jersey numbers prefixed to names, dated
-*"Unofficial, Nov. 10, 2026"*. Houston publishes a single image with no table and no date. So the
-per-club route works for some clubs and not others: **2 of 32 verified, 30 unprobed**. The brief's
-own instinct is confirmed twice over — depth cannot be derived from jersey numbers, and the Packers
-prepend them precisely so a naive parser mistakes a shirt for a rank.
-
-### What is still impossible
-
-**No market price exists anywhere in the repository.** The NFL published kickoff time, network and
-venue for all 13 Week 11 fixtures and no line of any kind. Nine traced requirements — every ROI,
-every CLV, every fair-versus-market residual, the entire rewards pool — reduce to one procurement
-decision recorded as Q01 and S01. Until it is made, the honest product is a proper-score skill
-competition, not a betting product.
-
-### Independent verification of peer work
-
-Because every namespace verified only itself, five peer-published claims were re-checked against
-freshly fetched official pages. Results: **1 pass, 1 partial, 3 fail** — and *none of the failures is
-fabrication*.
-
-| Check | Result | What was actually wrong |
-|---|---|---|
-| X-01 standings snapshot | fail | Stale, not invented. 16 of 32 clubs differ and in every case that club's games-played count moved too; the 16 clubs that have not played since are byte-identical. |
-| X-02 Week 11 slate | pass | 13 of 13 fixtures, date / kickoff / network / bye set all agree. |
-| X-03 "no active list" | fail | The source is published. Ingestion gap, not existence gap. |
-| X-04 injury capture | partial | 107 rows over 9 clubs: 30.8% of rows, 32.1% of clubs. Accurate where it read, short in breadth. |
-| X-05 "no depth chart" | fail | True for Houston, false for Green Bay. The route is club-specific. |
-
-### The five decisions that need the owner
-
-1. **Q01 / S01** — how market prices are obtained, or a formal retreat from the residual.
-2. **Q10 / S02** — which of the 24 `nfl*` trees is canonical.
-3. **Q13** — the legal position on republishing row-level official data and paying rewards.
-4. **Q03 / S07** — whether the backtest corpus is the frozen 136 games or the 137 now in the file.
-5. **Q06 / S04** — parse one Game Book PDF, which decides whether starter identity is obtainable at
-   all, and therefore whether the availability graph, the replacement-depth matrix and the personnel
-   ablations can ever ship.
-
-Everything else on the site is a build task with a measurable target, not an opinion.
-
-### Honest limitations of this session
-
-* Seven official source groups were re-read in full; prior work across the other 23 `nfl*` trees was
-  **not** re-read line by line and is labelled as inherited wherever it appears
-  ([R-12](nfl-verify/pages/flagged.html#R-12)).
-* One week of designations joined to one week of inactives is **n = 1**. The join finds zero
-  contradictions, which is the first real evidence the game-status column is a usable filter — and
-  nowhere near enough to calibrate it.
-* 70 of 138 named inactives never appear in the weekly report, so a blank status still cannot be read
-  as "available". No active list is published.
-* Three Week 10 games were still in progress at capture and are excluded from every settled
-  comparison rather than guessed.
-
-Nothing on this site is wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET —
-<https://www.ncpgambling.org/help-treatment>.
+## Verification & limits
+- Every table row carries a source link; unverifiable values are blank and listed on the Flagged for Review page.
+- Market prices are third-party (the NFL publishes no odds); scores and standings are official-derived.
+- No automatic external data collection is claimed; sources are dynamic and require revalidation.
+- This is analytical research only, not wagering advice. National Problem Gambling Helpline: 1-800-MY-RESET
+  (https://www.ncpgambling.org/help-treatment).

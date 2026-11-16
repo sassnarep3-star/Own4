@@ -3917,6 +3917,29 @@ every value gated by them is published blank + flagged, never inferred.
   and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
 
 ---
+## Session `arena-6531ea53-own4` — NFL root site (current session, 2026-11-16)
+
+Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| 1 | Repo review + COORDINATION.md claim | done | arena-6531ea53-own4 | COORDINATION.md |
+| 2 | NFL root GitHub Pages site (landing + category subpages) | done | arena-6531ea53-own4 | index.html, pages/*.html, assets/nfl.css, build_nfl_site.py |
+| 3 | NFL executive summary | done | arena-6531ea53-own4 | EXECUTIVE_SUMMARY.md |
+| 4 | Decision-readiness table on landing (gate + clearing number per requirement) | done | arena-6531ea53-own4 | index.html (R-01..R-15) |
+| 5 | Suggestions board (review before implementing) | done | arena-6531ea53-own4 | pages/suggestions.html + nfl-core/data/suggestions.csv |
+| 6 | Verification (0 broken internal links; never-infer policy) | done | arena-6531ea53-own4 | all pages |
+| 7 | PR to main + merge + GitHub Pages deploy confirmation | in progress | arena-6531ea53-own4 | — |
+
+## Log
+
+- 2026-11-16 — Reviewed repo: root was an NBA dashboard; `nfl-core/` holds a complete verified NFL dataset (price snapshots 816 rows open/close/settlement, results feed 137 games reconciled 32/32 vs official standings, originations 408 markets side->total->ML with fair/market/difference columns, signal+staking-separated leaderboards, gates G1-G8 + DG-1..DG-4, correlations with n, questions Q-C01..Q-C12, suggestions S-C01..S-C11, flagged F-C01..F-C12).
+- 2026-11-16 — Built `build_nfl_site.py` (deterministic, stdlib-only) rendering root index.html + 11 NFL subpages from `nfl-core/data/*.csv`. Removed 21 superseded NBA pages from `pages/` (preserved in git history). Added `assets/nfl.css`. All internal links resolve (0 broken).
+- 2026-11-16 — Wrote root `EXECUTIVE_SUMMARY.md`. Landing page carries the 15-row decision-readiness table (requirement / blocking gate / clearing number / status / source).
+- Constraint honored: outbound internet limited to GitHub/npm/PyPI hosts, so no live NFL official sites were fetched; all values use repo-verified data (read 2026-11-14) and anything unconfirmable is blank + flagged, never inferred.
+- Next: commit, push `arena/6531ea53-own4`, open PR to main, merge, confirm GitHub Pages deploy, record PR link in COORDINATION.md.
+
+---
 
 ## Session `arena/2d9349a2-own4` — Week 10 official injury capture (NFL Book) — 2026-11-16 UTC
 
@@ -3950,3 +3973,4 @@ every value gated by them is published blank + flagged, never inferred.
 **PR / merge record:** PR #123 — https://github.com/sassnarep3-star/Own4/pull/123 — merged into `main` without waiting for approval at 2026-11-16T01:37:16Z, merge commit `9d7faa8634710f0ebffdb005f6e9886db20f585f`. Checks before merge: audit pass, validate pass, verify pass (x2). Post-merge `main` runs: `nfl-book verify` success, `Validate NBA research workspace` success, `nfl-command verify` success, `pages build and deployment` success. Live page confirmed by fetch: https://sassnarep3-star.github.io/Own4/nfl-book/pages/injuries.html shows the 347-row capture and the Joseph / Mays / Reed rows as Out.
 
 **Unverified rows carried over, not re-read this session:** the depth-replacement rows RD-01..RD-03 on the injuries page quote official articles that were not re-fetched in this session; they stay as published by the prior session and are flagged for re-verification.
+
