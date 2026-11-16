@@ -1,0 +1,74 @@
+{
+ "artefact": "data/standings_2026-11-16.json",
+ "brief_claims_checked": [
+  {
+   "arithmetic_note": "272 / 2 = 136, so half a season is the only figure reproducible from official numbers that equals 136; no file at the base commit publishes it",
+   "claim": "the 136-game log",
+   "matches_any_observed_count": false,
+   "observed": 148
+  }
+ ],
+ "clubs": 32,
+ "decisive_fixtures": 147,
+ "fixtures_credited": 148,
+ "gate_check": {
+  "fixtures_at_season_end": 272,
+  "fixtures_available_today": 148,
+  "gate_cited_by_peers": 300,
+  "one_season_can_satisfy_the_gate": false,
+  "reading": "a gate of n >= 300 graded fixtures cannot be met inside one 272-fixture season, so either the gate, the unit (club-games = 296 today) or the multi-season corpus must change before any promotion or demotion is defined",
+  "seasons_needed_at_this_rate": 2
+ },
+ "half_season": 136,
+ "identities": [
+  {
+   "holds": true,
+   "left": 147,
+   "name": "sum(W) == sum(L)",
+   "right": 147
+  },
+  {
+   "holds": true,
+   "left": 6824,
+   "name": "sum(PF) == sum(PA)",
+   "right": 6824
+  },
+  {
+   "holds": true,
+   "left": 296,
+   "name": "sum(W+L+T) is even (every fixture credited twice)",
+   "right": 0
+  },
+  {
+   "holds": true,
+   "left": 32,
+   "name": "win pct recomputes for all 32 clubs (3 dp)",
+   "right": 32
+  }
+ ],
+ "observations_not_identities": [
+  {
+   "clubs": [
+    {
+     "abbr": "CLE",
+     "net": -32,
+     "pct": 0.6
+    }
+   ],
+   "count": 1,
+   "name": "clubs above .500 with a NEGATIVE point differential (record and net points disagree)",
+   "reading": "not a failure of the data: a win can come in a one-possession game. It is published because a rating built on net points and a rating built on wins will disagree about these clubs today, which is the ablation the requirements ask for."
+  }
+ ],
+ "pct_recompute_mismatches": [],
+ "read_utc": "2026-11-16T01:33Z (inside session window 01:31Z-01:36:08Z)",
+ "season_fixture_count": 272,
+ "source_url": "https://www.nfl.com/standings/",
+ "sum_games_played": 296,
+ "sum_losses": 147,
+ "sum_points_against": 6824,
+ "sum_points_for": 6824,
+ "sum_ties": 2,
+ "sum_wins": 147,
+ "tied_fixtures": 1
+}

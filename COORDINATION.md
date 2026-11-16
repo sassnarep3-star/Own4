@@ -4122,3 +4122,103 @@ broken.
 - **Repair, not re-assertion:** the first merge was green in the gate but wrong on the screen. The lesson is
   recorded here because the same failure mode — a page that passes every structural check and still shows a
   wrong number — is what the C10b gate now exists to catch.
+
+---
+**PR / merge result:** see the line appended immediately below by the integration step.
+
+---
+---
+## Session `arena-170de4f2-own4` — Decision Console (claim, 2026-11-16T01:3xZ)
+
+Branch: `arena/170de4f2-own4` (fixed by this environment; per-task `session-<id>/<task>`
+branches are not permitted here, so tasks run sequentially on this one branch, one commit each).
+
+**What this session is for.** The owner's brief this time is a *decision* brief, not a data brief:
+a section dedicated to suggestions that a reviewer can use to choose a path before anything is
+implemented, plus a register of the questions / information / answers that must be settled before a
+decision is reasonable. The registers that answer this exist — but they are duplicated across ~29
+`nfl-*` namespaces, none of them reconciled with the others, and every `verdict` field is blank.
+So this session builds ONE consolidated decision register over all of them, resolves what live
+official sources can resolve, and leaves the rest with a discovery action attached.
+
+**Read before claiming.** `COORDINATION.md` in full (3,917 lines at base); the last six session
+blocks; `nfl-availability-desk/` (most recent completed namespace, merged as PR #120 → `9251067`)
+and `nfl-book/` (69-row requirement register). `verification/build.py` + `verification/verify_site.py`
+are the shared generator/verifier.
+
+**Open PRs at claim time (not touched by this session):** #119 `arena/9f6a7ca8-own4`
+(nfl-verify prose-count guard), #93 `arena/582300df-own4` (nfl-command), plus older NBA/SF-rental PRs
+#59 #56 #47 #43 #39 #29. No open PR claims `nfl-decision-console/`; that path does not exist at base.
+
+| ID | Task | Status | Owner session | File scope |
+|----|------|--------|---------------|------------|
+| K1 | Cross-namespace consolidation audit: inventory every suggestion/question/flag/requirement register in the repo, compute duplication, and publish the one canonical decision register | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
+| K2 | Live official re-read of the blocking unknowns (price/odds publication, depth-chart and snap-count availability, inactive lists, availability-report policy, rule-change primers) with URLs + fetch times; answers filled only where a page was read | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
+| K3 | Information-gap register + discovery plan (how to obtain each missing item, who owns it, cost, what it unblocks) | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
+| K4 | Decision paths: dependency-ordered implementation sequence with the gate that blocks each step and the number that clears it; recommendation per decision with a stated basis | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
+| K5 | Site-improvement suggestions for decision-making (navigation, consolidation, review workflow) — proposals only, nothing implemented outside scope | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**` |
+| K6 | Executive summary + flagged-for-review page + engine-driven CI (determinism gate computed from committed artefacts only, per the standing warning) | **done** (shipped in PR #128) | arena-170de4f2-own4 | `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml` |
+| K7 | Final integration: additive root-nav group in `verification/build.py`, rebuild `index.html` + `verified/*.html`, run `verification/verify_site.py`, PR → main → merge → confirm Pages, record here | **in progress** (PR open, merge next) | arena-170de4f2-own4 | `verification/build.py` (additive), `index.html`, `verified/*.html` (regenerated), `COORDINATION.md` |
+
+**Rules this session holds itself to.** Every published row is either transcribed from a page read in
+this session (URL + UTC fetch time recorded) or computed by a checked-in engine from checked-in
+artefacts. No price is invented (no official price source exists — see Q-01/RF-02); no depth order is
+inferred from jersey number, experience or salary; no replacement is inferred from a depth chart; an
+unconfirmable value is blank + flagged. Registers that belong to other namespaces are read, quoted and
+counted — never edited.
+
+---
+
+
+
+---
+## Session `arena-170de4f2-own4` — Decision Console (completion record, 2026-11-16T02:0xZ)
+
+**Shipped:** `nfl-decision-console/` — 12 pages, 11 registers, one engine (`inventory.py` →
+`derive.py` → `build_site.py` → `verify_site.py`), one gate
+(`.github/workflows/nfl-decision-console.yml`). PR **#128** → `main`.
+
+* K1 census: 32 namespaces / 21 suggestion files (171 rows), 19 question files (201), 24 flag files
+  (186), 12 requirement files (456) — pinned to `b340a49`, rendered on `pages/consolidation.html`.
+  Requirements are where the duplication is (456 rows → 130 text clusters, 409 rows inside a duplicated
+  cluster); open-suggestion duplication is modest. **0 rows anywhere carry a reviewer verdict**; the
+  39 verdict-shaped peer fields are not decisions (upper bound stated on the page).
+* K2 official reads: 9 dated reads (window 01:31–01:36Z). `nfl.com/odds/`, `nfl.com/betting/` and every
+  per-club `/depth-chart/` are the league's own 404 → **no official price source, no official depth order**.
+  The per-fixture **Game Book PDF** is the only official starter/inactive artefact (lineups, substitutions,
+  Not Active, did-not-play, weather/roof, officials, play-by-play) — 2 of 2 sampled completed fixtures —
+  but it is **post-game** and carries a media-coverage-only use restriction no register had recorded.
+* K3/K4: 13 gaps with the route that closes each; 3 dependency-ordered paths; 15 suggestions with a
+  blank verdict column.
+* K5/K6: 9 site findings, 11 flags, executive summary, corpus arithmetic (ΣW = ΣL = 147, ΣT = 2 →
+  148 fixtures credited vs the brief's 136 = 272/2; five identities hold), and a 1-fixture label join
+  (24 report rows → Out 6 / Questionable 11 / blank 7) published as a **demonstration, never a rate**.
+* Both verifiers pass: `nfl-decision-console/engine/verify_site.py` PASS; `verification/verify_site.py`
+  all checks passed after the additive nav group in `verification/build.py`.
+
+**Handoff to other owners (not fixed here, per the ownership rule).** Two gates are red on `main`
+independent of this PR, reproduced on a clean checkout of `origin/main` and byte-identical on this
+branch, so nothing here caused them and nothing here fixes them:
+
+1. `nfl-availability-desk verify` fails at its own *Determinism gate*: re-running its engine
+   (`capture → audit → drift → build_site`) rewrites five committed files
+   (`data/derived/capture_diffs.json`, `data/derived/hashes.json`, `pages/executive-summary.html`,
+   `pages/repo-review.html`, `pages/snapshot-delta.html`) because its cross-capture artefacts still
+   describe a 107-row capture and "4 proper subsets" the tree no longer reproduces.
+   Owner: whoever holds `nfl-availability-desk/**` (last seen `arena-d941f3c1-own4`). Fix = re-run and
+   commit, or pin the capture set to files under its own `data/` so a sibling merge cannot move it.
+2. `Verify bounded NBA audit and published navigation` fails at *Recompute HTML source-link and
+   navigation coverage* on one dead link: `verification-2026-11-05/index.html` publishes
+   `../pages/competition.html`, which does not exist in that directory. Owner: whoever holds
+   `verification-2026-11-05/**`. Fix = one line.
+
+This namespace's own job and `Validate canonical NBA dashboard` are green. Both items are published on
+this site as flag `DC-11`. **Standing lesson for every namespace with a `git diff --exit-code` gate:**
+any published number measured from the whole tree goes stale the moment a sibling merges — read it from a
+committed artefact (`engine/inventory.py` → `data/namespace_inventory.json`, manual `--write`) instead.
+
+**Deliberate non-actions.** `engine/inventory.py` stays manual (a CI re-run of a tree-measured census
+would turn a sibling merge into this namespace's red build). The peer namespaces' registers and
+rendered pages were read and counted, never edited — including the regenerated availability-desk
+artefacts produced while diagnosing the red gate, which were discarded rather than committed.
+

@@ -1,0 +1,161 @@
+{
+ "dataset": "decision_console_site_findings",
+ "title": "How to improve the site so a human can decide \u2014 findings about the site itself, not about football",
+ "built_utc": "2026-11-16",
+ "rule": "each finding names the observed defect, the change proposed, and the verification that would prove the change worked. No site file outside this namespace is edited by this session except the additive root-nav entry produced by the shared generator.",
+ "rows": [
+  {
+   "id": "SF-01",
+   "severity": "high",
+   "finding": "registers are duplicated across namespaces in the requirement wording, not in the open suggestions: 336 of 383 requirement rows sit in a shared text cluster, while only 14 of 156 suggestion rows do \u2014 so the consolidation problem is the shared brief, and the review problem is that nobody has written a verdict on any suggestion anywhere",
+   "observed": "at the census pin (ec9c921, 2026-11-16T01:57:09Z): 20 peer suggestion registers / 156 rows, 18 question registers / 184 rows, 23 flag registers / 176 rows, 12 requirement registers / 456 rows in 32 `nfl*` namespaces. Duplication is read from the sentence-text columns, because two peer registers put a row id in the text field and their rows otherwise cluster on the label: the requirement rows collapse to 81 sentence clusters with 336 of 383 rows inside a duplicated cluster (largest 5), while the peer suggestion rows \u2014 the open queue a reviewer actually reads \u2014 collapse to 7 clusters with only 14 rows inside a duplicate (largest 2). The raw columns still show the id-inflated numbers (largest 68 for requirements) beside the honest ones, and flag `DC-12` records that this page first published them as the finding",
+   "proposed_change": "one canonical review surface (CD-01 A) plus a generated cross-register index in it; per-namespace pages stay as appendices and each gains a one-line pointer",
+   "verify_by": "the landing page shows a single 'queue: N open / M decided' counter that a build failure enforces",
+   "cost": "one edit per index + one generator change",
+   "risk_if_skipped": "session count becomes inversely proportional to clarity",
+   "decision_required": "yes \u2014 CD-01",
+   "sources": [
+    {
+     "label": "this namespace's committed inventory",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/namespace_inventory.json"
+    }
+   ]
+  },
+  {
+   "id": "SF-02",
+   "severity": "high",
+   "finding": "Nothing on the site records that a decision was made, so every session re-litigates the same blockers",
+   "observed": "23 flag registers with 176 rows; the same class of item (no official price source; no official depth source; capture cadence) recurs across many of them with different ids and no cross-reference",
+   "proposed_change": "data/decisions.json, one row per suggestion id: verdict, decided_by, decided_utc, commit hash of the decision. The build refuses to publish 'recommended' text next to a decided row, so a decided item visibly leaves the queue",
+   "verify_by": "after one verdict is written, the counter moves and the row renders as decided",
+   "cost": "one file + ~15 lines of build logic",
+   "risk_if_skipped": "the suggestions section stays a reading list",
+   "decision_required": "yes \u2014 CD-15",
+   "sources": [
+    {
+     "label": "a peer register with the same empty-verdict design",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/suggestions.json"
+    }
+   ]
+  },
+  {
+   "id": "SF-03",
+   "severity": "medium",
+   "finding": "Live tree counts and hard-coded dates share one sentence on the root nav, so the date goes stale while the number does not",
+   "observed": "the committed root index.html renders 'NFL research \u00b7 30 workspaces (2026-11-15)' where the count comes from a directory walk at build time and the date is a string literal in the generator",
+   "proposed_change": "move any 'as of' value into a data file the engine reads, and never render a date next to a computed count unless the date describes the count's own source commit",
+   "verify_by": "a test that fails when a rendered date does not appear in a data file",
+   "cost": "generator change + one test",
+   "risk_if_skipped": "a reader trusts a stale date attached to a fresh number \u2014 exactly the class of defect this project flags elsewhere",
+   "decision_required": "no (mechanical)",
+   "sources": [
+    {
+     "label": "the generator line that computes the count",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+    }
+   ]
+  },
+  {
+   "id": "SF-04",
+   "severity": "medium",
+   "finding": "Flags are per-namespace, so an irregularity can be resolved in one place and still be open in another",
+   "observed": "23 flag registers with 176 rows; the same class of item (no official price source; no official depth source; capture cadence) recurs across many of them with different ids and no cross-reference",
+   "proposed_change": "a generated cross-namespace flag index that clusters rows by text and shows, per cluster, which namespaces still carry it open; a row is closed by its own namespace only",
+   "verify_by": "cluster count is smaller than row count, and each cluster lists its members",
+   "cost": "one engine here (already prototyped by the duplication clustering in pages/consolidation.html)",
+   "risk_if_skipped": "the reviewer spends effort re-approving what was approved once",
+   "decision_required": "no",
+   "sources": [
+    {
+     "label": "engine that clusters registers",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/derive.py"
+    }
+   ]
+  },
+  {
+   "id": "SF-05",
+   "severity": "medium",
+   "finding": "A 'decision-readiness table' exists many times with different row counts, so 'requirements met' means different things on different pages",
+   "observed": "11 requirement/readiness registers, 386 rows total, statuses counted per register: no shared id space, and ids such as R-01 collide across namespaces",
+   "proposed_change": "one requirement id authority (prefix by the register that defines it, or a single shared file the integration session owns) and one published readiness table built from it",
+   "verify_by": "a verifier check that no two registers define the same bare id with different text",
+   "cost": "schema discipline; the check is cheap to add",
+   "risk_if_skipped": "'29 of 69 met' and '44 of 73 met' both look like progress and cannot be compared",
+   "decision_required": "yes \u2014 folded into CD-01",
+   "sources": [
+    {
+     "label": "peer requirement register (69 rows)",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/requirements.json"
+    }
+   ]
+  },
+  {
+   "id": "SF-06",
+   "severity": "low",
+   "finding": "'Blank \u2014 unverified' is a good convention, but nothing states how a blank could be filled",
+   "observed": "blanks are widespread and correct; the site rarely pairs one with a named acquisition route, so a reviewer cannot tell a hard absence from an unexplored one",
+   "proposed_change": "every blank gains a one-line 'how this becomes non-blank' with an owner, adopting the answer_grade + discovery column pair used in this namespace's question register",
+   "verify_by": "a build check that any blank cell sits in a row whose register carries a non-empty discovery field",
+   "cost": "copy + one check",
+   "risk_if_skipped": "blanks look like laziness or like finality, and both are wrong",
+   "decision_required": "no",
+   "sources": [
+    {
+     "label": "the register whose rows pair an answer grade with a discovery action",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/questions.json"
+    }
+   ]
+  },
+  {
+   "id": "SF-07",
+   "severity": "medium",
+   "finding": "There is no 'what changed since the last session' view, though the brief asks for a weekly diff",
+   "observed": "registers change silently between merges; the only way to see it is to diff files by hand",
+   "proposed_change": "an engine step that diffs committed registers against their previous commit and renders added/removed/changed row ids per page, with the commit hash of the comparison pinned in the artefact",
+   "verify_by": "the diff page names both commits and its row count equals the changed ids",
+   "cost": "one small engine",
+   "risk_if_skipped": "the site's growth is invisible, so review effort concentrates on new pages instead of changed numbers",
+   "decision_required": "no",
+   "sources": [
+    {
+     "label": "peer register asking for the same feature",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/requirements.json"
+    }
+   ]
+  },
+  {
+   "id": "SF-08",
+   "severity": "high",
+   "finding": "A reader cannot tell which pages describe a label rather than a feature, which is how look-ahead leakage enters a site like this",
+   "observed": "the game book \u2014 the most cited 'official source' in peer registers \u2014 contains final statistics, so any table built from it is post-game; only one peer namespace states that property in its own text",
+   "proposed_change": "a two-value field on every dataset row: point_in_time \u2208 {pre-kickoff, post-game}, rendered as a column on the table itself and enforced by the verifier for any dataset a model would read",
+   "verify_by": "datasets with a missing point_in_time fail the build",
+   "cost": "schema + check",
+   "risk_if_skipped": "a backtest silently grades itself against information published after kickoff",
+   "decision_required": "no",
+   "sources": [
+    {
+     "label": "the artefact whose content proves the point",
+     "url": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf"
+    }
+   ]
+  },
+  {
+   "id": "SF-09",
+   "severity": "low",
+   "finding": "Every namespace claims a verification, but there is no page listing what was NOT verified",
+   "observed": "peer pages report 'all checks passed' without a companion list of checks that could not run (e.g. 11 of 14 game centres never opened)",
+   "proposed_change": "each verifier prints a 'skipped by design' block, and the site renders it beside the pass count",
+   "verify_by": "the block exists on every page and is non-empty when coverage is partial",
+   "cost": "one print + one column",
+   "risk_if_skipped": "'verified' acquires a meaning the data does not support",
+   "decision_required": "no",
+   "sources": [
+    {
+     "label": "this namespace's own partial-coverage statement",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/official_reads.json"
+    }
+   ]
+  }
+ ]
+}

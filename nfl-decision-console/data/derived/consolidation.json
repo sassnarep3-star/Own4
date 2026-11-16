@@ -1,0 +1,2174 @@
+{
+ "all_registers": {
+  "flags": {
+   "files": 24,
+   "namespaces": 23,
+   "rows": 187,
+   "rows_with_status": 49,
+   "rows_with_verdict": 0
+  },
+  "questions": {
+   "files": 19,
+   "namespaces": 18,
+   "rows": 201,
+   "rows_with_status": 85,
+   "rows_with_verdict": 0
+  },
+  "requirements": {
+   "files": 12,
+   "namespaces": 10,
+   "rows": 456,
+   "rows_with_status": 451,
+   "rows_with_verdict": 0
+  },
+  "suggestions": {
+   "files": 21,
+   "namespaces": 20,
+   "rows": 171,
+   "rows_with_status": 120,
+   "rows_with_verdict": 39
+  }
+ },
+ "artefact": "data/namespace_inventory.json",
+ "cluster_caveat": "3 of the 116 duplicated clusters (101 rows) are keyed on a row identifier rather than on sentence text, because two peer registers store only an id in the field the clusterer reads; those clusters are counted in the table, called out here, and excluded from the 'sentence' columns, so the duplication finding is read from the sentence numbers",
+ "cluster_rule": "token-set Jaccard >= 0.50 on the row's title/question/item text, with a stopword list; greedy single-pass assignment against the cluster's first member, so the result is reproducible and independent of iteration order",
+ "inventory_captured_at_commit": "ec9c921",
+ "inventory_captured_utc": "2026-11-16T01:57:09Z",
+ "namespace_count": 32,
+ "peer_registers": {
+  "flags": {
+   "files": 23,
+   "namespaces": 22,
+   "rows": 176,
+   "rows_with_status": 49,
+   "rows_with_verdict": 0
+  },
+  "questions": {
+   "files": 18,
+   "namespaces": 17,
+   "rows": 184,
+   "rows_with_status": 85,
+   "rows_with_verdict": 0
+  },
+  "requirements": {
+   "files": 12,
+   "namespaces": 10,
+   "rows": 456,
+   "rows_with_status": 451,
+   "rows_with_verdict": 0
+  },
+  "suggestions": {
+   "files": 20,
+   "namespaces": 19,
+   "rows": 156,
+   "rows_with_status": 105,
+   "rows_with_verdict": 24
+  }
+ },
+ "per_kind": {
+  "flags": {
+   "clusters_with_duplicates": 4,
+   "distinct_clusters": 171,
+   "files": 23,
+   "identifier_keyed_duplicate_clusters": 0,
+   "largest_cluster": 3,
+   "namespaces": 22,
+   "registers": 23,
+   "rows": 176,
+   "rows_inside_a_duplicate_cluster": 9,
+   "rows_inside_identifier_keyed_clusters": 0,
+   "rows_with_sentence_text": 132,
+   "rows_with_status": 49,
+   "rows_with_text": 176,
+   "rows_with_verdict": 0,
+   "sentence_clusters": 127,
+   "sentence_duplicate_clusters": 4,
+   "sentence_largest_cluster": 3,
+   "sentence_rows_inside_a_duplicate_cluster": 9,
+   "top_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "No official depth chart"
+      },
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "No official depth chart exists"
+      },
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/flags.json",
+       "text": "No official starter/backup depth chart found"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-origination",
+       "path": "nfl-origination/data/flags.json",
+       "text": "[{'id': 'S-01', 'publisher': 'NFL.com', 'what': '2026 league standings, all 32 clubs', 'url': 'https://www.nfl.com/standings/league/2026/REG', 'read': '2026-11-13', 'used_for': \"standings.html; reconciliation IC-06; the model's club list\"}, {'id': 'S-02', 'publisher': 'NFL.com', 'what': '2026 Week 1"
+      },
+      {
+       "namespace": "nfl-price-snapshot",
+       "path": "nfl-price-snapshot/data/derived/flags.json",
+       "text": "[{'id': 'SRC-01', 'publisher': 'NFL.com', 'what': 'Official 2026 league standings', 'url': 'https://www.nfl.com/standings/league/2026/REG', 'read': '2026-11-14', 'used_for': 'standings, model ratings, correlations'}, {'id': 'SRC-02', 'publisher': 'NFL.com', 'what': 'Official Week 10 schedule & resul"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-lines",
+       "path": "nfl-lines/data/flags.json",
+       "text": "Model has no quarterback or injury information"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "Model has no quarterback, injury or depth features"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "No market price archive exists"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "No official market price source exists"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/flags.json",
+       "text": "\"Gates frozen before backtest\" cannot be confirmed from this clone"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/flags.json",
+       "text": "'Publish the league's dated schedule announcement beside the live schedule page': no official nfl.com schedule-release article with a printed date was located this session; a web search returned only third-party reposts of the release video."
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "105 of 137 feed rows are aggregate-verified only"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "12 overlapping NFL workspaces"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-market",
+       "path": "nfl-market/data/derived/flags.json",
+       "text": "13 of 14 week-10 games have no closing line, because they have not played"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "2026 alone can never pass gate G2"
+      }
+     ],
+     "n": 1
+    }
+   ],
+   "top_sentence_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "No official depth chart"
+      },
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "No official depth chart exists"
+      },
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/flags.json",
+       "text": "No official starter/backup depth chart found"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-origination",
+       "path": "nfl-origination/data/flags.json",
+       "text": "[{'id': 'S-01', 'publisher': 'NFL.com', 'what': '2026 league standings, all 32 clubs', 'url': 'https://www.nfl.com/standings/league/2026/REG', 'read': '2026-11-13', 'used_for': \"standings.html; reconciliation IC-06; the model's club list\"}, {'id': 'S-02', 'publisher': 'NFL.com', 'what': '2026 Week 1"
+      },
+      {
+       "namespace": "nfl-price-snapshot",
+       "path": "nfl-price-snapshot/data/derived/flags.json",
+       "text": "[{'id': 'SRC-01', 'publisher': 'NFL.com', 'what': 'Official 2026 league standings', 'url': 'https://www.nfl.com/standings/league/2026/REG', 'read': '2026-11-14', 'used_for': 'standings, model ratings, correlations'}, {'id': 'SRC-02', 'publisher': 'NFL.com', 'what': 'Official Week 10 schedule & resul"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-lines",
+       "path": "nfl-lines/data/flags.json",
+       "text": "Model has no quarterback or injury information"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "Model has no quarterback, injury or depth features"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "No market price archive exists"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "No official market price source exists"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/flags.json",
+       "text": "\"Gates frozen before backtest\" cannot be confirmed from this clone"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/flags.json",
+       "text": "'Publish the league's dated schedule announcement beside the live schedule page': no official nfl.com schedule-release article with a printed date was located this session; a web search returned only third-party reposts of the release video."
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/flags.json",
+       "text": "105 of 137 feed rows are aggregate-verified only"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "12 overlapping NFL workspaces"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-market",
+       "path": "nfl-market/data/derived/flags.json",
+       "text": "13 of 14 week-10 games have no closing line, because they have not played"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-command",
+       "path": "nfl-command/data/flags.json",
+       "text": "2026 alone can never pass gate G2"
+      }
+     ],
+     "n": 1
+    }
+   ]
+  },
+  "questions": {
+   "clusters_with_duplicates": 21,
+   "distinct_clusters": 158,
+   "files": 18,
+   "identifier_keyed_duplicate_clusters": 0,
+   "largest_cluster": 3,
+   "namespaces": 17,
+   "registers": 18,
+   "rows": 184,
+   "rows_inside_a_duplicate_cluster": 47,
+   "rows_inside_identifier_keyed_clusters": 0,
+   "rows_with_sentence_text": 184,
+   "rows_with_status": 85,
+   "rows_with_text": 184,
+   "rows_with_verdict": 0,
+   "sentence_clusters": 158,
+   "sentence_duplicate_clusters": 21,
+   "sentence_largest_cluster": 3,
+   "sentence_rows_inside_a_duplicate_cluster": 47,
+   "top_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "At what depth do replacements actually sit (2nd, 3rd, 4th string)?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "What depth (2nd/3rd/4th string) do replacements actually sit at?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "What depth (2nd/3rd/4th string) do replacements sit at?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick at the moment we would stake it?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Where will market open and close prices come from?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Where will official market open/close prices come from?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Where will official market open/close prices come from?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Which single dashboard should be canonical among the 17+ NFL namespaces?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Which single NFL dashboard is canonical (17 namespaces now exist)?"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Which single NFL dashboard is canonical?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-price-snapshot",
+       "path": "nfl-price-snapshot/data/derived/questions.json",
+       "text": "[{'id': 'Q01', 'group': 'Market access', 'status': 'unknown', 'question': 'Where do we get a legally usable, archived price history for NFL markets (opener and closer)?', 'answer': '', 'known': 'The NFL publishes no betting prices anywhere on nfl.com; game pages carry no odds values. The price snaps"
+      },
+      {
+       "namespace": "nfl-origination",
+       "path": "nfl-origination/data/questions.json",
+       "text": "[{'id': 'Q01', 'group': 'Market access', 'status': 'unknown', 'question': 'Where do we get a legally usable, archived price history for NFL markets?', 'answer': '', 'known': 'The NFL publishes no betting prices anywhere on nfl.com; the game pages carry no odds values. The only line data in this repo"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/questions.csv",
+       "text": "Are correlations computed from officially sourced numbers?"
+      },
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/questions.json",
+       "text": "Are correlations computed only from officially sourced numbers, with n published?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Are the 105 aggregate-verified games (weeks 2\u20138) correct?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Are the 105 games of weeks 2-8 correct?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Are Week 11 kickoff times and venues still as scheduled?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Are Week 11 kickoff times still as scheduled?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Do player props exist anywhere with official prices and official player logs?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Do player props exist anywhere with official prices?"
+      }
+     ],
+     "n": 2
+    }
+   ],
+   "top_sentence_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "At what depth do replacements actually sit (2nd, 3rd, 4th string)?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "What depth (2nd/3rd/4th string) do replacements actually sit at?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "What depth (2nd/3rd/4th string) do replacements sit at?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick at the moment we would stake it?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "What price is actually obtainable for a straight-up side pick?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Where will market open and close prices come from?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Where will official market open/close prices come from?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Where will official market open/close prices come from?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Which single dashboard should be canonical among the 17+ NFL namespaces?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Which single NFL dashboard is canonical (17 namespaces now exist)?"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Which single NFL dashboard is canonical?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Which strategies are genuinely skill-based rather than lucky?"
+      }
+     ],
+     "n": 3
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-price-snapshot",
+       "path": "nfl-price-snapshot/data/derived/questions.json",
+       "text": "[{'id': 'Q01', 'group': 'Market access', 'status': 'unknown', 'question': 'Where do we get a legally usable, archived price history for NFL markets (opener and closer)?', 'answer': '', 'known': 'The NFL publishes no betting prices anywhere on nfl.com; game pages carry no odds values. The price snaps"
+      },
+      {
+       "namespace": "nfl-origination",
+       "path": "nfl-origination/data/questions.json",
+       "text": "[{'id': 'Q01', 'group': 'Market access', 'status': 'unknown', 'question': 'Where do we get a legally usable, archived price history for NFL markets?', 'answer': '', 'known': 'The NFL publishes no betting prices anywhere on nfl.com; the game pages carry no odds values. The only line data in this repo"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/questions.csv",
+       "text": "Are correlations computed from officially sourced numbers?"
+      },
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/questions.json",
+       "text": "Are correlations computed only from officially sourced numbers, with n published?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/questions.json",
+       "text": "Are the 105 aggregate-verified games (weeks 2\u20138) correct?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Are the 105 games of weeks 2-8 correct?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Are Week 11 kickoff times and venues still as scheduled?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Are Week 11 kickoff times still as scheduled?"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/questions.json",
+       "text": "Do player props exist anywhere with official prices and official player logs?"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/questions.json",
+       "text": "Do player props exist anywhere with official prices?"
+      }
+     ],
+     "n": 2
+    }
+   ]
+  },
+  "requirements": {
+   "clusters_with_duplicates": 83,
+   "distinct_clusters": 130,
+   "files": 12,
+   "identifier_keyed_duplicate_clusters": 2,
+   "largest_cluster": 68,
+   "namespaces": 10,
+   "registers": 12,
+   "rows": 456,
+   "rows_inside_a_duplicate_cluster": 409,
+   "rows_inside_identifier_keyed_clusters": 73,
+   "rows_with_sentence_text": 383,
+   "rows_with_status": 451,
+   "rows_with_text": 456,
+   "rows_with_verdict": 0,
+   "sentence_clusters": 128,
+   "sentence_duplicate_clusters": 81,
+   "sentence_largest_cluster": 5,
+   "sentence_rows_inside_a_duplicate_cluster": 336,
+   "top_clusters": [
+    {
+     "id_keyed": true,
+     "members": [
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-01"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-02"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-03"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-04"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-05"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-06"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-07"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-08"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-09"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-10"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-11"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-12"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-13"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-14"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-15"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-16"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-17"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-18"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-19"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-20"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-21"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-22"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-23"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-24"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-25"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-26"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-27"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-28"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-29"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-30"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-31"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-32"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-33"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-34"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-35"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-36"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-37"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-38"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-39"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-40"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-41"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-42"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-43"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-44"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-45"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-46"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-47"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-48"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-49"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-50"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-51"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-52"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-53"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-54"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-55"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-56"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-57"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-58"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-59"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-60"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-61"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-62"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-63"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-64"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-65"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-66"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-67"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/requirements.json",
+       "text": "REQ-68"
+      }
+     ],
+     "n": 68
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "A demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a control baseline (random picks; favourites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Control baselines (random picks, favorites only) on every leaderboard run"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, gate + clearing number"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Fixture-context feature set built only from published schedule facts"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Per-team view: starters out, replacements named, net injury count"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Price-snapshot store recording opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Price-snapshot store recording opening and closing numbers for every market we originate"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Two-sided 'what would change our mind' field on every strategy entry"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed at all"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed at all"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Verified results feed so backtests and ROI can be computed"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Verified results feed so backtests and ROI can be computed at all"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Add an announced-starter evidence field, not an inferred replacement"
+      }
+     ],
+     "n": 5
+    }
+   ],
+   "top_sentence_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "A demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Define a demotion gate that sends a live strategy back to paper"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a control baseline (random picks; favorites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a control baseline (random picks; favourites only) to every leaderboard run"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Control baselines (random picks, favorites only) on every leaderboard run"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Decision-readiness table on the landing page: one row per requirement, the gate that blocks it, the number that would clear it"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, gate + clearing number"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a fixture-context feature set built only from published schedule facts"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Fixture-context feature set built only from published schedule facts"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a per-team view: starters out, replacements named, net injury count"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Per-team view: starters out, replacements named, net injury count"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a price-snapshot store that records opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Price-snapshot store recording opening and closing numbers for every market we originate"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Price-snapshot store recording opening and closing numbers for every market we originate"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a two-sided 'what would change our mind' field to every strategy entry"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Two-sided 'what would change our mind' field on every strategy entry"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed at all"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add a verified results feed so backtests and ROI can be computed at all"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Verified results feed so backtests and ROI can be computed"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Verified results feed so backtests and ROI can be computed at all"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add an announced-starter evidence field (not an inferred replacement)"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Add an announced-starter evidence field, not an inferred replacement"
+      }
+     ],
+     "n": 5
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/requirements.json",
+       "text": "Add an official depth-chart register with date and source per row"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/requirements.json",
+       "text": "Add an official depth-chart register with date and source per row"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/requirements.json",
+       "text": "Add an official depth-chart register with date and source per row"
+      },
+      {
+       "namespace": "nfl-verify",
+       "path": "nfl-verify/data/readiness.json",
+       "text": "Add an official depth-chart register with date and source per row"
+      },
+      {
+       "namespace": "nfl-availability-desk",
+       "path": "nfl-availability-desk/data/readiness.json",
+       "text": "Official depth-chart register with a date and source per row"
+      }
+     ],
+     "n": 5
+    }
+   ]
+  },
+  "suggestions": {
+   "clusters_with_duplicates": 8,
+   "distinct_clusters": 122,
+   "files": 20,
+   "identifier_keyed_duplicate_clusters": 1,
+   "largest_cluster": 28,
+   "namespaces": 19,
+   "registers": 20,
+   "rows": 156,
+   "rows_inside_a_duplicate_cluster": 42,
+   "rows_inside_identifier_keyed_clusters": 28,
+   "rows_with_sentence_text": 100,
+   "rows_with_status": 105,
+   "rows_with_text": 156,
+   "rows_with_verdict": 24,
+   "sentence_clusters": 93,
+   "sentence_duplicate_clusters": 7,
+   "sentence_largest_cluster": 2,
+   "sentence_rows_inside_a_duplicate_cluster": 14,
+   "top_clusters": [
+    {
+     "id_keyed": true,
+     "members": [
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-01"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-02"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-03"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-04"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-05"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-06"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-07"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-08"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-09"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-10"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-11"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-12"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-13"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-14"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-15"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-16"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-17"
+      },
+      {
+       "namespace": "nfl-sources",
+       "path": "nfl-sources/data/suggestions.json",
+       "text": "SUG-18"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R1"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R10"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R2"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R3"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R4"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R5"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R6"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R7"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R8"
+      },
+      {
+       "namespace": "nfl-readiness-register",
+       "path": "nfl-readiness-register/data/suggestions.json",
+       "text": "SUG-R9"
+      }
+     ],
+     "n": 28
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/suggestions.json",
+       "text": "Archive historical weekly injury reports (for Q06)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Archive weekly injury reports for past seasons"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Consolidate the 16 NFL namespaces into one generator"
+      },
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/suggestions.json",
+       "text": "Consolidate the overlapping NFL namespaces"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Decide how market prices will be obtained (or accept permanent blanks)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Decide how market prices will be obtained (or accept permanent blanks)"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Official per-game player logs for player-prop research"
+      },
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/suggestions.csv",
+       "text": "Player-prop research track using official game logs"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Pick one canonical dashboard among the 17+ NFL namespaces"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Pick one canonical NFL dashboard among 17 namespaces"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Pre-register a paired test vs the better-record baseline"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Pre-register a paired test vs the better-record baseline"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Re-read the remaining 105 official game pages line by line"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Re-read the remaining 105 official game pages line by line"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/suggestions.csv",
+       "text": "\"Closing/opening line feed with capture timestamps (answers Q-C01"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-hub",
+       "path": "nfl-hub/data/suggestions.json",
+       "text": "[\"Start with the three 'decision gates' D1-D3 below. Nothing else should be built until they are answered.\", 'For each suggestion, read the evidence links. A suggestion that depends on missing information is marked BLOCKED and points to the question that must be answered first.', 'Pick one option pe"
+      }
+     ],
+     "n": 1
+    }
+   ],
+   "top_sentence_clusters": [
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/suggestions.json",
+       "text": "Archive historical weekly injury reports (for Q06)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Archive weekly injury reports for past seasons"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Consolidate the 16 NFL namespaces into one generator"
+      },
+      {
+       "namespace": "nfl-dashboard",
+       "path": "nfl-dashboard/data/suggestions.json",
+       "text": "Consolidate the overlapping NFL namespaces"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Decide how market prices will be obtained (or accept permanent blanks)"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Decide how market prices will be obtained (or accept permanent blanks)"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-ledger",
+       "path": "nfl-ledger/data/suggestions.json",
+       "text": "Official per-game player logs for player-prop research"
+      },
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/suggestions.csv",
+       "text": "Player-prop research track using official game logs"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Pick one canonical dashboard among the 17+ NFL namespaces"
+      },
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Pick one canonical NFL dashboard among 17 namespaces"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Pre-register a paired test vs the better-record baseline"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Pre-register a paired test vs the better-record baseline"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-book",
+       "path": "nfl-book/data/suggestions.json",
+       "text": "Re-read the remaining 105 official game pages line by line"
+      },
+      {
+       "namespace": "nfl-consolidated",
+       "path": "nfl-consolidated/data/suggestions.json",
+       "text": "Re-read the remaining 105 official game pages line by line"
+      }
+     ],
+     "n": 2
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-core",
+       "path": "nfl-core/data/suggestions.csv",
+       "text": "\"Closing/opening line feed with capture timestamps (answers Q-C01"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-hub",
+       "path": "nfl-hub/data/suggestions.json",
+       "text": "[\"Start with the three 'decision gates' D1-D3 below. Nothing else should be built until they are answered.\", 'For each suggestion, read the evidence links. A suggestion that depends on missing information is marked BLOCKED and points to the question that must be answered first.', 'Pick one option pe"
+      }
+     ],
+     "n": 1
+    },
+    {
+     "id_keyed": false,
+     "members": [
+      {
+       "namespace": "nfl-origination",
+       "path": "nfl-origination/data/suggestions.json",
+       "text": "['id', 'group', 'timing', 'suggestion', 'recommendation']"
+      }
+     ],
+     "n": 1
+    }
+   ]
+  }
+ },
+ "self_excluded": "nfl-decision-console",
+ "verdict_field_caveat": "a non-blank field named 'decision' is counted here even though in some registers that field holds the QUESTION a reviewer must answer rather than an answer to it; the count is therefore an upper bound on recorded verdicts, and 0 rows in any register carry a field named 'verdict' with a value",
+ "verdict_field_counts": {
+  "flags": {},
+  "questions": {},
+  "requirements": {},
+  "suggestions": {}
+ }
+}
