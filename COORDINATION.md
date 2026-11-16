@@ -3929,7 +3929,7 @@ Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
 | 4 | Decision-readiness table on landing (gate + clearing number per requirement) | done | arena-6531ea53-own4 | index.html (R-01..R-15) |
 | 5 | Suggestions board (review before implementing) | done | arena-6531ea53-own4 | pages/suggestions.html + nfl-core/data/suggestions.csv |
 | 6 | Verification (0 broken internal links; never-infer policy) | done | arena-6531ea53-own4 | all pages |
-| 7 | PR to main + merge + GitHub Pages deploy confirmation | in progress | arena-6531ea53-own4 | — |
+| 7 | PR to main + merge + GitHub Pages deploy confirmation | done | arena-6531ea53-own4 | — |
 
 ## Log
 
@@ -3937,7 +3937,7 @@ Branch: `arena/6531ea53-own4` (from `1dbde903` of main). Sole active session.
 - 2026-11-16 — Built `build_nfl_site.py` (deterministic, stdlib-only) rendering root index.html + 11 NFL subpages from `nfl-core/data/*.csv`. Removed 21 superseded NBA pages from `pages/` (preserved in git history). Added `assets/nfl.css`. All internal links resolve (0 broken).
 - 2026-11-16 — Wrote root `EXECUTIVE_SUMMARY.md`. Landing page carries the 15-row decision-readiness table (requirement / blocking gate / clearing number / status / source).
 - Constraint honored: outbound internet limited to GitHub/npm/PyPI hosts, so no live NFL official sites were fetched; all values use repo-verified data (read 2026-11-14) and anything unconfirmable is blank + flagged, never inferred.
-- Next: commit, push `arena/6531ea53-own4`, open PR to main, merge, confirm GitHub Pages deploy, record PR link in COORDINATION.md.
+- Done: committed (79c1493 + merge-resolution dac3fa0), pushed to `arena/6531ea53-own4`, opened PR #125 (https://github.com/sassnarep3-star/Own4/pull/125), merged into main without waiting for approval at 2026-11-16 as merge commit `425f7a4bafd556acc69d8603f15b0014ff4cfd7e`. GitHub Pages build #1373392583 built with no error; site live at https://sassnarep3-star.github.io/Own4/ (13 pages, 0 broken internal links). PR link and merge result recorded here.
 
 ---
 
