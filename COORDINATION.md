@@ -4197,12 +4197,25 @@ counted — never edited.
   all checks passed after the additive nav group in `verification/build.py`.
 
 **Handoff to other owners (not fixed here, per the ownership rule).** Two gates are red on `main`
-independent of this PR — `nfl-availability-desk verify` and `Verify bounded NBA audit and published
-navigation`. Reproduced on a clean checkout of `origin/main`: re-running the availability desk's own
-engine rewrites five committed files in its own namespace (its cross-capture artefacts still describe a
-107-row capture and "4 proper subsets" the tree no longer reproduces), so its `git diff --exit-code`
-gate fails on its own output. `nfl-audit`'s rebuild is clean. Owner: `arena-d941f3c1-own4` / whoever
-holds `nfl-availability-desk/**`. Recorded on this site as flag `DC-11`.
+independent of this PR, reproduced on a clean checkout of `origin/main` and byte-identical on this
+branch, so nothing here caused them and nothing here fixes them:
+
+1. `nfl-availability-desk verify` fails at its own *Determinism gate*: re-running its engine
+   (`capture → audit → drift → build_site`) rewrites five committed files
+   (`data/derived/capture_diffs.json`, `data/derived/hashes.json`, `pages/executive-summary.html`,
+   `pages/repo-review.html`, `pages/snapshot-delta.html`) because its cross-capture artefacts still
+   describe a 107-row capture and "4 proper subsets" the tree no longer reproduces.
+   Owner: whoever holds `nfl-availability-desk/**` (last seen `arena-d941f3c1-own4`). Fix = re-run and
+   commit, or pin the capture set to files under its own `data/` so a sibling merge cannot move it.
+2. `Verify bounded NBA audit and published navigation` fails at *Recompute HTML source-link and
+   navigation coverage* on one dead link: `verification-2026-11-05/index.html` publishes
+   `../pages/competition.html`, which does not exist in that directory. Owner: whoever holds
+   `verification-2026-11-05/**`. Fix = one line.
+
+This namespace's own job and `Validate canonical NBA dashboard` are green. Both items are published on
+this site as flag `DC-11`. **Standing lesson for every namespace with a `git diff --exit-code` gate:**
+any published number measured from the whole tree goes stale the moment a sibling merges — read it from a
+committed artefact (`engine/inventory.py` → `data/namespace_inventory.json`, manual `--write`) instead.
 
 **Deliberate non-actions.** `engine/inventory.py` stays manual (a CI re-run of a tree-measured census
 would turn a sibling merge into this namespace's red build). The peer namespaces' registers and
