@@ -428,6 +428,29 @@ def build_results():
                 "points totals and the exact Week-10 closure.")
 
 
+def fingerprint_check():
+    """Recompute the availability capture's own published fingerprints against the files."""
+    import hashlib
+    ns = os.path.join(ROOT, "nfl-availability-desk")
+    rec = json.load(open(os.path.join(ns, "data/derived/hashes.json"), encoding="utf-8"))["files"]
+    man = json.load(open(os.path.join(ns, "data/capture_manifest.json"), encoding="utf-8"))
+    out = []
+    for rel in man["hashed_files"]:
+        p = os.path.join(ns, rel)
+        if not os.path.exists(p):
+            continue
+        h = hashlib.sha256(open(p, "rb").read()).hexdigest()
+        size = os.path.getsize(p)
+        r = rec.get(rel, {})
+        out.append({"file": rel, "recorded_bytes": r.get("bytes"), "actual_bytes": size,
+                    "recorded_sha256": r.get("sha256"), "actual_sha256": h,
+                    "match": r.get("sha256") == h and r.get("bytes") == size})
+    return out
+
+
+FINGERPRINTS = fingerprint_check()
+
+
 def build_availability():
     b = []
     b.append('<p class="lead" style="max-width:80ch">The repository holds %d artefacts that claim to be a '
@@ -494,6 +517,33 @@ def build_availability():
              'typed here: <code>nfl-availability-desk/data/availability_snapshot_2026-11-15.csv</code>. '
              'They are quoted because three claims in the brief contradict them; see conflict register '
              'rows RC-05 to RC-08.</p>')
+
+    b.append("<h2>Do the capture's own fingerprints match its files?</h2>")
+    ok = [f for f in FINGERPRINTS if f["match"]]
+    b.append('<p class="small">The capture publishes a sha256 for each artefact it vouches for. A '
+             'fingerprint that does not match its file makes the immutability claim unverifiable, so it '
+             'is checked here rather than trusted: <strong>%d of %d match</strong>.</p>'
+             % (len(ok), len(FINGERPRINTS)))
+    rows = []
+    for f in FINGERPRINTS:
+        rows.append(["<code>%s</code>" % esc(f["file"]),
+                     str(f["recorded_bytes"]), str(f["actual_bytes"]),
+                     "<code>%s</code>" % esc((f["recorded_sha256"] or "")[:16] + "…"),
+                     "<code>%s</code>" % esc((f["actual_sha256"] or "")[:16] + "…"),
+                     '<span class="badge %s">%s</span>' % ("ok" if f["match"] else "bad",
+                                                           "match" if f["match"] else "MISMATCH"),
+                     blob("nfl-availability-desk/" + f["file"], "file ↗")])
+    b.append(table(["Artefact", "Recorded bytes", "Actual bytes", "Recorded sha256",
+                    "Actual sha256", "Verdict", "Source"], rows,
+                   caption="Recomputed at build time by engine/build_site.py; nothing here is typed."))
+    bad = [f for f in FINGERPRINTS if not f["match"]]
+    if bad:
+        b.append('<div class="panel bad"><p><strong>%d fingerprint(s) do not match.</strong> The file is '
+                 'unchanged since commit <code>1dbde90</code>, so the stale value is the seal, not the '
+                 'data: the row counts in it are independently reproduced above. This workspace does not '
+                 're-seal another workspace\u2019s capture \u2014 re-sealing a file from the file it is meant '
+                 'to vouch for is that namespace\u2019s act, or yours. See <a href="conflicts.html#RC-16">RC-16</a>.</p></div>'
+                 % len(bad))
 
     b.append("<h2>Claims in the brief that the live page contradicts</h2>")
     b.append(table(["Claim", "What the live page shows", "Verdict", "Source"], [

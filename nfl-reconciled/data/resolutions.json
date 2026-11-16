@@ -240,11 +240,27 @@
    ],
    "affects": "The 28-of-32 club coverage figure, and any count of 'clubs missing from the report'.",
    "clearing_action": "Close the flag and record 28 playing clubs = 32 minus 4 on bye."
+  },
+  {
+   "id": "RC-16",
+   "fact": "Do the stored transcription fingerprints match the files they fingerprint?",
+   "conflict": "nfl-availability-desk/data/derived/hashes.json publishes a sha256 fingerprint for each of the six artefacts its capture manifest lists. A fingerprint that does not match its file makes an immutability claim unverifiable, which is the one thing the capture is for.",
+   "verdict": "SETTLED",
+   "answer": "Four of the six match. Two do not: the 347-row availability capture (recorded d9d8e08f\u2026 at 28,345 bytes; actual 15fc9245\u2026 at 27,997 bytes) and its Week-10 fixture register (recorded fd69f127\u2026 at 2,768 bytes; actual 8d728153\u2026 at 2,753 bytes). Both files are unchanged since the merge commit 1dbde90, and this session's rebuild reproduces the same mismatch, so the stale value is the seal, not the data. The capture's own counts (347 rows, 28 sections, 171 designations) are independently reproduced by this session's hand count, so nothing published changes; what was stale is the seal.",
+   "official_number": 4,
+   "official_source": "https://www.nfl.com/injuries/",
+   "official_basis": "The committed capture's row counts and cells were re-counted against the live official injury table on 2026-11-16 and match (8 of 8 club counts, 18 of 18 cells), so the data is sound; the fingerprint comparison itself is a byte-level check of the repository against itself, which is why its number is 4 of 6 and not a figure the league publishes.",
+   "repo_evidence": [
+    "nfl-availability-desk/data/derived/hashes.json",
+    "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv"
+   ],
+   "affects": "The immutability claim of the availability capture: while the seal is stale, a reviewer cannot use it to detect a later edit of either file.",
+   "clearing_action": "Regenerate data/derived/hashes.json in a session that owns that namespace. This session does not edit it: re-sealing a capture from the file it is supposed to vouch for is the owner's or that namespace's act, not a peer's."
   }
  ],
  "counts": {
-  "rows": 15,
-  "settled": 10,
+  "rows": 16,
+  "settled": 11,
   "no_conflict": 1,
   "review": 4
  }
