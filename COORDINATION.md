@@ -3947,4 +3947,6 @@ every value gated by them is published blank + flagged, never inferred.
 
 **Not done in this session (still open, see the nfl-book Questions and Flagged pages):** the Texans depth image, depth-group modelling, roster-turnover versioning, the full 32-club roster/IR sweep, snap counts, inactive lists, odds sources, and the other items in the brief. Each remains blank or flagged, not inferred.
 
-**PR / merge record:** recorded below after the PR is opened and merged.
+**PR / merge record:** PR #123 — https://github.com/sassnarep3-star/Own4/pull/123 — merged into `main` without waiting for approval at 2026-11-16T01:37:16Z, merge commit `9d7faa8634710f0ebffdb005f6e9886db20f585f`. Checks before merge: audit pass, validate pass, verify pass (x2). Post-merge `main` runs: `nfl-book verify` success, `Validate NBA research workspace` success, `nfl-command verify` success, `pages build and deployment` success. Live page confirmed by fetch: https://sassnarep3-star.github.io/Own4/nfl-book/pages/injuries.html shows the 347-row capture and the Joseph / Mays / Reed rows as Out.
+
+**Unverified rows carried over, not re-read this session:** the depth-replacement rows RD-01..RD-03 on the injuries page quote official articles that were not re-fetched in this session; they stay as published by the prior session and are flagged for re-verification.
