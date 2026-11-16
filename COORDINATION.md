@@ -4482,3 +4482,16 @@ Fix: `out_resolution()` in `nfl-decision-gaps/engine/build.py` now resolves ever
 against the inactive list and the reserve list, and `out_sentence()` renders the sentence from
 those numbers. The landing page and the executive summary both use it, so the text can no longer
 disagree with the data. Verified: 9 pages, 0 unsourced rows, 0 broken links, determinism gate clean.
+
+* **Final commits on this branch after #136:** `9a3199f` (the cluster table's "Lead text (truncated)" now
+  truncates as promised, and flag `DC-14` records that `nfl-origination` / `nfl-price-snapshot` store a
+  serialized `[{...}]` in the field the census clusters on — which makes the flag and question duplication
+  counts a **floor**, not an estimate) and the re-pin commit that makes `data/namespace_inventory.json` name
+  a tree it actually counted. They ride PR #138. A read-only `python3 engine/inventory.py` on the merged tree
+  still reports 79 registers / 33 namespaces, so the carried artefact needs no refresh.
+* **Session done.** #128 → `6e877ea`, #134 → `4157ca7`, #136 → `2faf957`, #138 → pending, each with
+  `pages-build-deployment` **success** and the live page re-fetched to confirm the merged content. Claim on
+  `nfl-decision-console/**`, `.github/workflows/nfl-decision-console.yml` and the additive group in
+  `verification/build.py` is released. Open against other owners, with file and line: `DC-11`
+  (`nfl-availability-desk` determinism drift; `verification-2026-11-05/build.py:131`'s dead
+  `../pages/competition.html` tile).

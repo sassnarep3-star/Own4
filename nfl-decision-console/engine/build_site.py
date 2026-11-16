@@ -421,8 +421,10 @@ closes it; a sentence in <code>data/decisions.json</code> does.</p>
                 continue
             mem = " · ".join("<code>%s</code>" % esc(m["namespace"]) for m in g["members"][:6])
             more = "" if len(g["members"]) <= 6 else " <span class='dim'>(%d more)</span>" % (len(g["members"]) - 6)
-            cl_rows.append([esc(kind), "%s#%d" % (esc(kind[:3]), i + 1), "%d" % g["n"],
-                            esc(g["members"][0]["text"]),
+            lead = esc(g["members"][0]["text"])
+            if len(lead) > 140:                     # the header promises a truncated lead text
+                lead = lead[:140] + "<span class='dim'> …</span>"
+            cl_rows.append([esc(kind), "%s#%d" % (esc(kind[:3]), i + 1), "%d" % g["n"], lead,
                             ("<span class='dim'>identifier-keyed — a shared row id, not a shared "
                              "proposal</span>" if g.get("id_keyed") else "sentence text"),
                             mem + more,
