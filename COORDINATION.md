@@ -3886,3 +3886,32 @@ and 3.11 matches the committed output so the determinism gate compares like-for-
 questions (Q01..15) remain the open review queue. The recurring blockers are
 FB-01 (no official price source) and FB-07 (no official depth chart / snap counts);
 every value gated by them is published blank + flagged, never inferred.
+
+---
+
+**PR / merge result (as required by the brief).**
+
+* **PR #120** — `https://github.com/sassnarep3-star/Own4/pull/120` — opened from `arena/d941f3c1-own4`
+  to `main`, **merged without waiting for approval** at 2026-11-16T00:02:29Z as merge commit
+  `9251067665aa7eab22269cd999956c72b832062a`.
+* Checks before merge: 5 for 5 green, including both jobs that had been red earlier
+  (`nfl-availability-desk verify`, `nfl-verify verify`) — the fix for each is described above, and
+  neither was resolved by deleting a check.
+* Checks after merge on `main`: `nfl-availability-desk verify` success, `Validate canonical NBA
+  dashboard` success, `Verify bounded NBA audit and published navigation` success, `pages build and
+  deployment` success. `gh run list --branch main` for the last 25 runs returns **no failing run**, so
+  nothing in this session's merge left the shared site or a peer workflow red.
+* **Pages confirmed live** (not just deployed): `https://sassnarep3-star.github.io/Own4/nfl-availability-desk/index.html`
+  serves the 72-row register with its source column, and
+  `https://sassnarep3-star.github.io/Own4/nfl-availability-desk/pages/snapshot-delta.html` serves the
+  peer ledger and the 11/6/11-row intra-week delta. The root dashboard carries the namespace group
+  *NFL Availability Desk · decision register (2026-11-15)*.
+* Follow-up PR (this commit's): three rendered-sentence corrections found by reading the live pages —
+  the strict-subset counts double-counted the tie ("5 of 5 strict subsets and 1 ties it exactly"), the
+  peer-only figure counted *comparisons* instead of *rows*, and the count list was not ordered — plus
+  this merge record. No data or engine verdict changed; every number is still produced by the engines.
+* **Standing warning for the next session:** the determinism gates in this repository compare committed
+  HTML with a rebuild of the *whole tree*. If your pages embed anything measured from the tree itself
+  (namespace counts, sibling row counts), a sibling merge turns your CI red through no fault of your
+  code — `nfl-availability-desk` hit this twice and now pins the inventory to the commit it describes
+  and runs that walk *after* the gate. Either do the same, or keep tree-wide counts out of rendered prose.
