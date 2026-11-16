@@ -1,0 +1,105 @@
+{
+ "dataset": "nfl_readiness_drift_expectations",
+ "title": "What the next capture of the official availability report must look like, pinned before it is taken",
+ "built_utc": "2026-11-15",
+ "pinned_from": "nfl-availability-desk/data/availability_snapshot_2026-11-15.csv via engine/audit.py - no number here is typed",
+ "why": "The brief's alarm: 'give every scraper an expected row count and required fields so a source-schema change fails the build instead of quietly returning zeros.' A source change that halves the rows must fail loudly, and a passing build must mean the row count and the field set were checked, not assumed.",
+ "applies_to": "engine/drift.py",
+ "expected": {
+  "rows_total": 347,
+  "club_sections": 28,
+  "clubs_with_no_section_expected": [
+   "CHI",
+   "DEN",
+   "PHI",
+   "TB"
+  ],
+  "fixtures": 14,
+  "required_fields": [
+   "team",
+   "opp",
+   "player",
+   "pos",
+   "injury",
+   "practice_status",
+   "game_status",
+   "player_slug"
+  ],
+  "must_be_nonblank": [
+   "team",
+   "opp",
+   "player",
+   "pos",
+   "practice_status",
+   "player_slug"
+  ],
+  "allowed_game_status": [
+   "Doubtful",
+   "Out",
+   "Questionable",
+   "Probable"
+  ],
+  "allowed_practice_status": [
+   "Did Not Participate In Practice",
+   "Full Participation in Practice",
+   "Limited Participation in Practice"
+  ],
+  "designation_coverage_pct": {
+   "value": 49.3,
+   "floor_pct": 35.0,
+   "note": "floor is a tripwire, not a target: coverage legitimately varies by day of week, so a value below 35% means the capture lost its designation column, not that the league changed"
+  },
+  "injury_labelled_rows": 171,
+  "rows_by_club": {
+   "WAS": 9,
+   "NYG": 11,
+   "NE": 15,
+   "DET": 9,
+   "KC": 13,
+   "ATL": 11,
+   "MIN": 13,
+   "GB": 17,
+   "JAX": 11,
+   "TEN": 12,
+   "BUF": 14,
+   "NYJ": 9,
+   "MIA": 11,
+   "IND": 14,
+   "CAR": 12,
+   "NO": 12,
+   "HOU": 16,
+   "CLE": 12,
+   "LAR": 14,
+   "AZ": 15,
+   "SEA": 15,
+   "LV": 5,
+   "SF": 12,
+   "DAL": 19,
+   "PIT": 8,
+   "CIN": 9,
+   "LAC": 19,
+   "BAL": 10
+  },
+  "practice_counts": {
+   "Full Participation in Practice": 180,
+   "Did Not Participate In Practice": 94,
+   "Limited Participation in Practice": 73
+  },
+  "game_status_counts": {
+   "(blank)": 176,
+   "Out": 70,
+   "Questionable": 90,
+   "Doubtful": 11
+  }
+ },
+ "tolerance": {
+  "rows_total_delta_allowed": 0,
+  "rows_by_club_delta_allowed": "0 for a same-week re-read; +/-4 for a different week of the season (a bye week legitimately removes 4 sections)",
+  "vocab_additions": "an unlisted value is always a FAIL: the official table has printed exactly three practice statuses and three game labels since the capture began, so a fourth string means the source changed"
+ },
+ "known_gaps": [
+  "the 4 clubs on bye publish no section: a capture that shows 32 sections has been padded by someone",
+  "game_status is blank on about half of all rows in the official report by design; 'blank' must never be rewritten to 'Available' (see flag on the readiness register R-13)"
+ ],
+ "checked_by": "engine/drift.py, invoked by .github/workflows/nfl-availability-desk.yml and by engine/verify_site.py"
+}

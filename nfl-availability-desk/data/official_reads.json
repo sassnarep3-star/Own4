@@ -1,0 +1,57 @@
+{
+  "dataset": "nfl_readiness_official_reads",
+  "title": "Every official page read in this session, with its clock window and what it was used for",
+  "read_window_utc": {
+    "start": "2026-11-15T23:23:14Z",
+    "end": "2026-11-15T23:34:00Z",
+    "note": "start = the UTC timestamp of this session's claim commit (git log), end = the time this manifest was written. The fetch harness does not expose a per-call clock, so individual reads are ordered below (read_no) rather than given false per-call precision. Reads happened inside this window, in the order listed."
+  },
+  "fetch_method": "fetch_page (markdown rendering of the live page). No page bytes were stored; see capture_manifest.json 'immutability_limitation'.",
+  "reads": [
+    {
+      "read_no": 1,
+      "url": "https://www.nfl.com/injuries/",
+      "page_title_as_published": "Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
+      "h1_as_published": "2026 NFL Injury Report",
+      "week_control_as_published": "Injuries - WEEK 10 (selector offered WEEK 1 ... WEEK 10; season selector 2026 ... 1965)",
+      "chunks_read": "0,1,2,3,4,5,6,7 of 8 (complete page)",
+      "used_for": "the 347-row availability snapshot, the 28 published club sections, the four clubs with no section, game-designation census, non-injury label census, and the dated news-headline module (see evidence.json)",
+      "verification": "transcribed line by line; every blank cell preserved as blank; row count re-derived by engine/audit.py from the CSV, not typed by hand"
+    },
+    {
+      "read_no": 2,
+      "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+      "page_title_as_published": "NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets",
+      "chunks_read": "0 and 1 of 2 (complete page)",
+      "used_for": "the 14 Week 10 fixtures, their slots/broadcasters, the state of each game at read time (Final / Q4 / Q3 / not started), the Munich international marker, the two hotel-locator venue strings, the four clubs on bye, and the dated flexible-scheduling notice + https://www.nfl.com/legal/flexible-scheduling-procedures",
+      "verification": "scores and statuses transcribed from the rendered cards; the four clubs on bye were taken from the page's own 'Teams on Bye' block"
+    },
+    {
+      "read_no": 3,
+      "url": "https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10",
+      "page_title_as_published": "NFL news roundup: Bills acquire S Amani Hooker; Broncos trade for Chargers' Daiyan Henley | Latest NFL News, Analysis & Updates | NFL.com",
+      "chunks_read": "0 and 1 of 3 (the club-alphabetical block AZ..SF); chunk 2 (TB..WAS + footer) was NOT read and nothing is claimed from it",
+      "used_for": "dated transaction/IR evidence: 26 club entries transcribed into evidence.json; the official transactions hub link and the official trade-tracker link quoted in the article's own preamble",
+      "verification": "each evidence row carries the article URL; the article is dated 'Tuesday, Nov. 10' in its own headline slug and title"
+    },
+    {
+      "read_no": 4,
+      "url": "https://www.nfl.com/standings/league/2026/REG",
+      "page_title_as_published": "2026 NFL League Standings",
+      "chunks_read": "0 and 1 of 2 (complete table, 32 clubs)",
+      "used_for": "the standings snapshot used for (a) the injury-report record cross-check, (b) games-played derivation for the backtest corpus size, (c) the PF=PA integrity test",
+      "verification": "W/L/T/PCT/PF/PA/net/streak transcribed; every derived number is computed in engine/audit.py"
+    },
+    {
+      "read_no": 5,
+      "url": "https://www.nfl.com/games/patriots-at-lions-2026-reg-10",
+      "page_title_as_published": "New England Patriots at Detroit Lions 2026 REG 10 - Game Center",
+      "chunks_read": "0 of 2",
+      "used_for": "proof of what an official game centre publishes for one fixture: final score, quarter-by-quarter, scoring drives, the Game Info block (Location: MUNICH / Stadium: FC BAYERN MUNICH STADIUM), the standings block, the previous matchup, and the 'Download Game Book (PDF)' link",
+      "game_book_pdf": "https://static.www.nfl.com/image/upload/v1794764592/gamecenter/ab582c2f-4feb-11f1-abca-2c54536568a9.pdf",
+      "verification": "1 of 14 fixtures was opened this session; the other 13 are listed in fixtures_week10.csv with the venue cell left blank and flagged, per the no-inference rule"
+    }
+  ],
+  "third_party_reads": [],
+  "third_party_note": "No third-party page was read this session, and no third-party value is published as fact anywhere in nfl-availability-desk. Peer namespaces' third-party market captures are cited only as 'a repo capture exists', never as an official number."
+}

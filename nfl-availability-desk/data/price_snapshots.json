@@ -1,0 +1,28 @@
+{
+ "dataset": "price_snapshot_store",
+ "title": "Price-snapshot store: open and close for every originated market",
+ "built_utc": "2026-11-15",
+ "session": "arena-d941f3c1-own4",
+ "rows": [],
+ "row_count": 0,
+ "status": "EMPTY BY EVIDENCE, NOT BY NEGLECT",
+ "why_empty": "no official NFL price source exists to fill it. Every attempt in this repository to locate a league-published line, opening or closing, has returned nothing but blanks (see data/derived/capture_audit.json sibling flags and flag RF-02 in data/flags.json). The brief's rule is binding: a value that cannot be confirmed from an official source is left blank and flagged, never inferred. Filling this store with numbers from an unofficial aggregator would silently poison every backtest that reads it, so the store ships empty with its contract defined.",
+ "schema": {
+  "market": "string - 'side' | 'total' | 'moneyline' | 'team_total' | 'player_prop'; one of the five, never a free-text name",
+  "game_key": "string - 'away@home-YYYY-reg-WW' matching data/fixtures_week10.csv so a price row joins to exactly one fixture",
+  "line_or_odds": "number as published at the selected number, or NULL - never a rounded substitute",
+  "offering_side": "'open' | 'close' - one of the two, and a row is one observation, not a pair",
+  "capture_clock_utc": "ISO-8601 instant the price was read, to the second, with the source page's own timestamp if it prints one",
+  "source_url": "https URL of the page the number was read from; required, and a row without it is not stored",
+  "source_grade": "'official' only for anything that feeds a published residual; everything else is recorded as 'unofficial' and cannot clear a gate",
+  "pinned_evidence": "file + sha256 of the raw response the number was transcribed from",
+  "book_or_consensus": "the offering entity, or 'consensus' with the member list and n published",
+  "vig": "the computed vig-free midpoint decomposition for that snapshot, per data/governance.json price_data_policy (DEC-P1): the decomposition is undefined until the price policy is chosen, so this column is structurally present and always null today",
+  "superseded_by": "the row id that replaced this one when the same market was read again - a price row is never overwritten, only superseded"
+ },
+ "uniqueness": "(market, game_key, offering_side, capture_clock_utc) is unique; a second read at the same clock is a duplicate and is rejected, not averaged",
+ "origination_order_enforced": "side is opened before total, total before moneyline - the store refuses a moneyline row for a game_key with no side row (engine/originate.py checks it)",
+ "publication_contract": "every published difference is (model_fair - market_line) with both columns printed separately beside it, on the schedule fixed in data/governance.json price_data_policy.interim_rule (cadence to be set when DEC-P1 is answered); the residual is never the only number on a row",
+ "clears_when": "DEC-P1 is answered (owner decision, question in data/questions.json). Two admissible routes: (a) a named official source, or (b) an explicit written policy permitting a labelled unofficial source with its grade published on every row. Gate metric: >= 1 row with source_grade = 'official', or >= 1 row under an accepted policy (b) with grade 'unofficial' shown.",
+ "reviewer_note": "the empty array is the finding. If this file has rows after 2026-11-15, read their source_url before trusting anything downstream, and check whether the policy that allowed them was recorded in COORDINATION.md."
+}

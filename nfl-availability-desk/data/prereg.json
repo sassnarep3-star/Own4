@@ -1,0 +1,21 @@
+{
+ "dataset": "preregistration_ledger",
+ "title": "Every rule frozen to git before its evaluation window opened",
+ "rule": "the commit hash is the registration; a change to the rule text after registration requires a new id, never an edit",
+ "git_repo_root": ".",
+ "entries": [
+  {
+   "id": "PREREG-001",
+   "file": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+   "sha256_at_freeze": "e1b0d71c4a5107fcb29761677037057c478dbcef0d334d31c081bb473788f9ec",
+   "frozen_utc": "2026-11-15T23:55:06Z",
+   "registered_commit": "e8b47b1f06d7c3b1c12fe7af0c9246259c4fb555",
+   "commit_state": "registered",
+   "evaluation_window_state_at_freeze": "not opened: no evaluation has been run against any price data",
+   "check_command": "python3 nfl-availability-desk/engine/preregister.py --check"
+  }
+ ],
+ "updated_utc": "2026-11-15T23:55:06Z",
+ "registration_note": "PREREG-001's registration commit is the first commit in which the rule file exists in git (e8b47b1). The rule was authored earlier the same evening and its substance is unchanged since; the only edit between authoring and registration was the namespace path string (nfl-readiness -> nfl-availability-desk) during the collision fix, which changes no rule text, sample window or gate. Recorded here rather than hidden because 'frozen before results' is only meaningful if the delay between writing and committing is stated.",
+ "verification": "python3 nfl-availability-desk/engine/preregister.py --check fails when the file's sha256 no longer matches the blob at the registered commit; CI runs it on every push."
+}
