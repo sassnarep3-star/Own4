@@ -167,6 +167,10 @@ def check_pages(counts):
         for m in re.findall(r"\\u[0-9a-fA-F]{4}", txt):
             fail("%s: publishes a literal escape sequence %s instead of the character" % (p, m))
             break
+        leftover = re.findall(r"\{[a-z][a-z_]{2,}\}", re.sub(r"<[^>]+>", " ", txt))
+        if leftover:
+            fail("%s: publishes an unfilled template token %s — prose was written with a placeholder that "
+                 "no formatter filled" % (p, sorted(set(leftover))[0]))
         if "`" in txt:
             fail("%s: publishes a literal backtick — register prose is authored with `ticks` and the "
                  "builder turns them into <code>; a leftover means the span was malformed" % p)

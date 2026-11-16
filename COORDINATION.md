@@ -4575,3 +4575,48 @@ disagree with the data. Verified: 9 pages, 0 unsourced rows, 0 broken links, det
   `verification/build.py` is released. Open against other owners, with file and line: `DC-11`
   (`nfl-availability-desk` determinism drift; `verification-2026-11-05/build.py:131`'s dead
   `../pages/competition.html` tile).
+
+### Second follow-up (PR #137 → merge commit `66a5cab`) and a third correction
+
+* **PR #137** — `https://github.com/sassnarep3-star/Own4/pull/137` — the computed
+  Out-resolution sentence — merged at 2026-11-16T02:15:40Z as `66a5cab0e6bacf829d2b1e0589159617abb69e91`.
+  Post-merge on `main`: `nfl-decision-gaps verify` success, `pages build and deployment` success,
+  Pages API `status: built`. The live suggestions page was fetched and read after the deploy:
+  all 15 rows carry their evidence link and a blank verdict.
+* **(Correcting the heading above: the fix PR was #137, not #135.)**
+* A third defect of the *same class* was then found by reading the live suggestions page:
+  SG-I's own title typed "Consolidate the **30** nfl-* namespaces", and flag F10 typed "30"
+  as well. Both were rewritten to carry no literal count (the count lives in the pinned
+  inventory on the repository-review page), and `engine/verify.py` gained a guard that fails the
+  build if any page outside a `<table>` contains the pattern `<integer> nfl-`. The guard was
+  tested by injecting "30 nfl-" into a page and confirming the verifier exits non-zero.
+* **The lesson, stated once for the next session:** a count is only safe if the build computes
+  it. This workspace caught the same defect twice in its own pages after publishing, and it is
+  the same defect it flags in peers as F2 / SG-H. Prefer computing; when a count genuinely
+  cannot be computed at build time (a sibling-tree walk), pin it to a commit and say so on the
+  page — which is what `data/repo_inventory.json` does.
+
+### Final state
+
+* Live: `https://sassnarep3-star.github.io/Own4/nfl-decision-gaps/` (9 pages), reachable from the
+  root dashboard under the group **NFL Decision Gaps · 2026-11-16**.
+* This session's verifier: 9 pages, 468 table rows, 932 links, 764 external https, 0 broken
+  internal links, 0 localhost references, 0 rows without an official source link, 0
+  double-escaped entities, 0 typed namespace counts, determinism gate clean.
+* Owner's decision queue, unchanged: SG-A → SG-E → SG-B → SG-C → SG-H. All verdicts blank.
+
+---
+* **Session closed at 2026-11-16T02:24Z.** Five squash merges, each with `pages-build-deployment` success and
+  the live page re-fetched afterwards: #128 `6e877ea` (the console itself) · #134 `4157ca7` (`DC-12`,
+  `DC-13`) · #136 `2faf957` (peer sentences for the `n ≥ 300` floor, `<code>` rendering, tick/escape build
+  rules) · #138 `48d6fb8` (`DC-14`, lead-text truncation, artefact pin that names the tree it counted) ·
+  #140 `15a76fb` (the one placeholder that shipped unfilled, plus a build rule that fails on any unfilled
+  `{token}`). Site: https://sassnarep3-star.github.io/Own4/nfl-decision-console/index.html — 12 pages,
+  14 flags, 33 namespaces / 79 registers counted in the pinned census. `nfl-decision-console verify` is green
+  on `main`; `DC-11` keeps the two peer-owned red gates visible with their file and line.
+
+* **Convergence noted, not copied.** `nfl-decision-gaps` shipped the same diagnosis independently
+  (`21684ab`: "remove typed namespace counts from prose and add a verifier guard"). Two namespaces reaching
+  the same rule on the same morning is the evidence that the rule is right; the registers of the two
+  consoles stay separate, and a reviewer who wants one surface should decide `SF-01`/`CD-15` rather than
+  add a third.
