@@ -4639,3 +4639,17 @@ game-book parser (SUG-03 A)").
 Rules held: official sources only; unverifiable values blank + flagged; no raw nfl.com HTML committed
 (structured rows + sha256 + timestamps only — RF-18 stays open for the owner); every data row carries a
 source link; small frequent commits; `git pull --rebase` before every push.
+
+## 2026-11-16 — C-01..C-05 COMPLETE · session `arena/013190b4-own4` · PR #142 MERGED
+
+| item | result |
+|---|---|
+| PR | https://github.com/sassnarep3-star/Own4/pull/142 — **MERGED** at 2026-11-16T02:33:34Z, merge commit `df7c1d1eb3e20de9c02f4fd76d6b87e589366102` |
+| C-01 collector | `nfl-collector/` live: hash-chain ledger (5 sealed captures, 580 structured rows), drift alarm with pre-pinned expectations (all hold), 3 dated reads of the Week 10 report (0 field deltas — RC-06), trades/IR conflict joins (Henley conflict + 15 IR-absent rows), CI workflow (verify on push/PR; scheduled collect Wed/Thu/Fri 17:30 UTC + Sun/Mon; raw HTML never committed per RF-18) |
+| C-02 decisions | DEC-1..DEC-10 recorded in `nfl-collector/data/decisions.json` under the standing no-manual-input instruction; each adopts a peer session's written recommendation; DEC-1 = B (prices declined, columns stay blank), DEC-10 deferred to owner; flagged RC-08 for post-hoc owner review; all reversible |
+| C-03 prereg | PREREG-002 registered BEFORE any Week 11 result (rule-file sha256 = registration; frozen peer-engine hashes); calibration reproduces the published weeks 3–10 backtest exactly (n=104, 0.6731, 0.6346); evaluation PENDING (weeks ≥ 11 empty at registration) |
+| C-04 game book | route verified via game centre "Download Game Book (PDF)"; WAS@NYG participation parsed (44 starters / 48 subs / 4 DNP / 13 not active); report join 0 collisions; both Out designations → Not Active; official game-day weather captured; coverage 1/14 fixtures (RC-07) |
+| C-05 integration | root nav group added via `verification/build.py`; root verifier PASS (346 sourced rows); PR #142 merged; **Pages deployment confirmed: status "built", commit df7c1d1e, error none** → https://sassnarep3-star.github.io/Own4/nfl-collector/ |
+| CI on main | nfl-collector verify: success; pages build and deployment: success |
+| flagged (non-blocking) | RC-01..RC-10 published on nfl-collector/pages/flagged.html with official source links |
+| sources | nfl.com/injuries/league/2026/reg10 (8 chunks) · nfl.com/transactions (+ trades + reserve-list views) · packers.com/team/depth-chart · nfl.com game centre + official Game Book PDF — all verified in-session 2026-11-16, windows recorded |
