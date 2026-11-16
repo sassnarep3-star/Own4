@@ -30,31 +30,29 @@ UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
 
 # ---------------------------------------------------------------- HTML extraction
 class TableParser(HTMLParser):
-    """Tolerant table extractor. Produces a list of tables: {'header': [...], 'rows': [[cells]],
-    'context': text of headings immediately preceding the table}."""
+    """Tolerant table extractor. Produces ONE entry per <table>:
+    {'header': [...], 'rows': [[cells]], 'context': headings/text preceding the table}."""
 
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.tables = []
-        self._in_table = 0
+        self._stack = []          # one state dict per open <table>
         self._in_cell = False
         self._in_heading = 0
         self._heading_buf = []
         self._cell_buf = []
-        self._row = None
-        self._header_cells = None
         self._in_thead = False
-        self._text_buf = []
+        self._headings = []       # all heading texts, for table context
 
     def handle_starttag(self, tag, attrs):
         if tag == "table":
-            self._in_table += 1
-            self._header_cells = None
-        elif self._in_table and tag == "thead":
-            self._in_thead = True
-        elif self._in_table and tag == "tr":
-            self._row = []
-        elif self._in_table and tag in ("td", "th"):
+            self._stack.append({"header": None, "rows": [], "row": None,
+                                "in_thead": False})
+        elif self._stack and tag == "thead":
+            self._stack[-1]["in_thead"] = True
+        elif self._stack and tag == "tr":
+            self._stack[-1]["row"] = []
+        elif self._stack and tag in ("td", "th"):
             self._in_cell = True
             self._cell_buf = []
         elif tag in ("h1", "h2", "h3", "h4", "h5"):
@@ -62,25 +60,32 @@ class TableParser(HTMLParser):
             self._heading_buf = []
 
     def handle_endtag(self, tag):
-        if tag == "table" and self._in_table:
-            self._in_table -= 1
-        elif self._in_table and tag == "thead":
-            self._in_thead = False
-        elif self._in_table and tag == "tr" and self._row is not None:
-            if self._in_thead and self._header_cells is None:
-                self._header_cells = self._row
-            elif self._row:
-                self.tables.append({"header": self._header_cells or [],
-                                    "rows": [self._row], "context": " ".join(self._text_buf[-6:])})
-        elif self._in_table and tag in ("td", "th") and self._in_cell:
+        if tag == "table" and self._stack:
+            t = self._stack.pop()
+            self.tables.append({"header": t["header"] or [],
+                                "rows": t["rows"],
+                                "context": " ".join(self._headings[-6:])})
+        elif self._stack and tag == "thead":
+            self._stack[-1]["in_thead"] = False
+        elif self._stack and tag == "tr":
+            st = self._stack[-1]
+            row = st["row"]
+            if row is not None:
+                if st["in_thead"] and st["header"] is None:
+                    st["header"] = row
+                elif row:
+                    st["rows"].append(row)
+            st["row"] = None
+        elif self._stack and tag in ("td", "th") and self._in_cell:
             self._in_cell = False
-            if self._row is not None:
-                self._row.append(" ".join("".join(self._cell_buf).split()))
+            st = self._stack[-1]
+            if st["row"] is not None:
+                st["row"].append(" ".join("".join(self._cell_buf).split()))
         elif self._in_heading and tag in ("h1", "h2", "h3", "h4", "h5"):
             self._in_heading -= 1
             txt = " ".join("".join(self._heading_buf).split())
             if txt:
-                self._text_buf.append(txt)
+                self._headings.append(txt)
 
     def handle_data(self, data):
         if self._in_cell:

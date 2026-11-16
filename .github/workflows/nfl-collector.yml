@@ -56,6 +56,9 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Parser self-test (synthetic fixture — mechanics only)
+        run: python3 nfl-collector/engine/selftest.py
+
       - name: Drift alarm (pinned expectations must hold)
         run: python3 nfl-collector/engine/drift.py
 
