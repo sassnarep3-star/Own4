@@ -1,0 +1,322 @@
+{
+  "meta": {
+    "captured_utc": "2026-11-16",
+    "review_rule": "Nothing on this page is implemented. Every verdict is deliberately blank: choosing between options is the reviewer's call, not the builder's (R-71). The review flow is: read the problem and the evidence, compare the options, pick one, then log the verdict. Only after a verdict is recorded does the option become a task.",
+    "verdicts_are_blank_by_design": true,
+    "counts_are_computed": "Option and suggestion counts are emitted by build.py, not typed into prose."
+  },
+  "rows": [
+    {
+      "id": "SG-01", "category": "Price data",
+      "title": "Choose the price-data policy before anything else",
+      "problem": "Every market number in the brief is blocked by one missing decision. nfl.com publishes no betting prices, so no official source exists for the market line, the residual, CLV, vig or ROI.",
+      "evidence": "G-PRICE blocks R-01, R-04, R-18, R-59, R-60, R-62.",
+      "options": [
+        {"id": "A", "label": "Licence a commercial odds feed", "description": "Pay for an API that provides opening and closing prices per market.", "trade_off": "Cost, and a licence that must be read before anything is stored or republished."},
+        {"id": "B", "label": "Self-archive prices from a single operator", "description": "Capture prices on a schedule from one sportsbook you hold an account with.", "trade_off": "Cheapest, but one-book consensus, and the operator's terms still govern."},
+        {"id": "C", "label": "Publish no market numbers at all", "description": "Originate fair lines only and publish them with no residual column.", "trade_off": "Loses CLV and ROI entirely, but keeps the whole site inside official sources."}
+      ],
+      "unblocks": "R-01, R-04, R-18, R-59, R-60, R-62",
+      "discovers_information": false, "verdict": "", "decision": "D-01"
+    },
+    {
+      "id": "SG-02", "category": "Availability",
+      "title": "Resolve the depth-order source, club by club, before building any deficiency feature",
+      "problem": "R-52 says: evaluate per-club official depth pages first, then snap counts, and do not build the feature until one route is verified for all 32 clubs. Neither route is verified.",
+      "evidence": "G-DEPTH blocks R-06, R-32, R-33, R-43, R-45, R-46, R-51.",
+      "options": [
+        {"id": "A", "label": "Survey all 32 club depth pages by hand, one week, and record what each publishes", "description": "A one-off information survey: what exists, in what format, how often it updates, and which clubs publish an image rather than text.", "trade_off": "Slow but it is the discovery step that tells you whether the route is viable at all."},
+        {"id": "B", "label": "Go straight to snap counts as the starter proxy", "description": "Accept playing time as the definition of a starter (R-11, R-56) and build the deficiency feature from snap share.", "trade_off": "Cleaner and measurable, but needs an official snap-count source that has not been confirmed."},
+        {"id": "C", "label": "Build the deficiency feature later and ship injuries only now", "description": "Publish the injury layer, hold the deficiency matrix until a source is verified.", "trade_off": "Honest, but leaves the headline feature of the brief unbuilt."}
+      ],
+      "unblocks": "R-06, R-32, R-33, R-43, R-45, R-51",
+      "discovers_information": true, "verdict": "", "decision": "D-02"
+    },
+    {
+      "id": "SG-03", "category": "Operations",
+      "title": "Approve a scheduled collector for the injury report: Wednesday, Thursday and Friday",
+      "problem": "One capture exists. A single capture cannot support designation surprise, practice trend, point-in-time replay or the weekly diff.",
+      "evidence": "G-SNAPSHOT blocks R-12, R-21, R-29, R-30, R-47, R-54, R-55, R-61.",
+      "options": [
+        {"id": "A", "label": "GitHub Actions scheduled workflow with committed, hashed captures", "description": "Three cron runs a week, each writing a timestamped, sha256-sealed snapshot.", "trade_off": "Free and already in this repo's tooling, but the captures land in a public repository unless Q-13 is answered first."},
+        {"id": "B", "label": "External scheduler writing to a private store", "description": "Run the collector off GitHub and keep raw captures private; publish only derived deltas.", "trade_off": "Matches R-39 and R-40, but needs infrastructure and a budget."},
+        {"id": "C", "label": "Capture on demand only", "description": "Keep one capture per week and accept that surprise features stay blocked.", "trade_off": "Cheapest, and permanently closes the surprise and delta requirements."}
+      ],
+      "unblocks": "R-12, R-21, R-29, R-30, R-47, R-54, R-55, R-61",
+      "discovers_information": false, "verdict": "", "decision": "D-03"
+    },
+    {
+      "id": "SG-04", "category": "Availability",
+      "title": "Approve a game-book parser for actual starters and inactive lists",
+      "problem": "A backup replacing a starter cannot be confirmed, only suspected, without the official inactive list and actual starters.",
+      "evidence": "G-INACTIVE blocks R-10, R-25, R-31, R-56.",
+      "options": [
+        {"id": "A", "label": "Parse the official game centre per fixture for starters and inactives", "description": "One parser run per fixture, 150 times for the current season.", "trade_off": "Most authoritative, but highest fetch cost and needs a drift alarm per R-63."},
+        {"id": "B", "label": "Parse the weekly inactives article only", "description": "nfl.com publishes a weekly inactives article, for example the Week 9 edition linked from the injury page.", "trade_off": "Far cheaper and covers inactives, but does not give actual starters or snaps."},
+        {"id": "C", "label": "Skip inactives and treat the injury report as sufficient", "description": "Accept that availability is a designation, not a confirmed outcome.", "trade_off": "Cheapest, and it permanently blocks R-10, R-44 and R-53."}
+      ],
+      "unblocks": "R-10, R-25, R-31, R-56",
+      "discovers_information": true, "verdict": "", "decision": "D-04"
+    },
+    {
+      "id": "SG-05", "category": "Data rights",
+      "title": "Decide whether row-level official data may be committed to this public repository",
+      "problem": "This namespace commits a structured capture of the official NFL injury report. Prior sessions in this repository hold opposite positions on whether that is acceptable.",
+      "evidence": "Flag RF-05; blocks R-40.",
+      "options": [
+        {"id": "A", "label": "Keep raw captures out of git; publish derived analysis only", "description": "Move raw snapshots to a private store and keep the public site to indices, ratios and links to the official page.", "trade_off": "Matches R-40 exactly; needs somewhere private to put the raw data."},
+        {"id": "B", "label": "Keep committing raw captures", "description": "Treat the capture as factual data rather than copyrighted expression.", "trade_off": "Simplest and most reproducible, but it is the position the brief explicitly asks to be decided, not assumed."},
+        {"id": "C", "label": "Publish hashes only, no rows", "description": "Commit the sha256 and the row counts, and keep the rows themselves private.", "trade_off": "Good middle ground: the capture is provable and replayable without republishing it."}
+      ],
+      "unblocks": "R-40",
+      "discovers_information": false, "verdict": "", "decision": "D-05"
+    },
+    {
+      "id": "SG-06", "category": "Data",
+      "title": "Backfill three completed seasons of game-level results",
+      "problem": "The train/validation/holdout split needs three seasons. Only 2026 through Week 10 is ingested.",
+      "evidence": "G-CORPUS blocks R-28, R-70. The official schedule pages expose a season selector.",
+      "options": [
+        {"id": "A", "label": "Backfill 2023, 2024 and 2025 from the official by-week schedule pages", "description": "Same parser already validated on 2026, run over three more seasons.", "trade_off": "About 150 extra page fetches; low risk because the pattern is proven."},
+        {"id": "B", "label": "Backfill and validate on one season first", "description": "Prove the pipeline on 2025 before committing to three.", "trade_off": "Slower to a clean split, but catches parser drift early."},
+        {"id": "C", "label": "Accept 2026 alone and use chronological weeks as the split", "description": "Split the single season into train, validation and holdout blocks of weeks.", "trade_off": "Fastest, but a within-season split is much weaker evidence than a holdout season."}
+      ],
+      "unblocks": "R-28, R-70",
+      "discovers_information": false, "verdict": "", "decision": "D-06"
+    },
+    {
+      "id": "SG-07", "category": "Venue",
+      "title": "Transcribe the venue of every fixture from the official game centre",
+      "problem": "0 of 150 venues are transcribed. The Week 11 schedule page exposes stadium names only inside a hotel link parameter, which is not the game centre.",
+      "evidence": "G-VENUE blocks R-23; flag RF-04.",
+      "options": [
+        {"id": "A", "label": "Open all 150 game centres and read the venue field", "description": "One fetch per fixture, with the drift alarm from R-63 on the venue field.", "trade_off": "Authoritative; about 150 fetches."},
+        {"id": "B", "label": "Derive the venue from the home club's stadium and flag neutral sites separately", "description": "Read each club's home stadium once, then flag the 6 international fixtures for manual confirmation.", "trade_off": "30 fewer fetches, but it is a derivation, not a transcription, so R-23 is only partly met."},
+        {"id": "C", "label": "Publish the game-centre link per fixture and leave venue blank", "description": "What this session does today.", "trade_off": "Zero risk of error, but the requirement stays open."}
+      ],
+      "unblocks": "R-23, and the weather join",
+      "discovers_information": true, "verdict": "", "decision": "D-07"
+    },
+    {
+      "id": "SG-08", "category": "Weather",
+      "title": "Only build the roof and NWS overlay once venues exist",
+      "problem": "The overlay needs a venue, a roof designation and an NWS grid join. None of the three exists.",
+      "evidence": "G-STADIUM blocks R-58.",
+      "options": [
+        {"id": "A", "label": "Sequence it after SG-07", "description": "Venues first, then roof status, then the NWS grid join, validating on one week before rolling out.", "trade_off": "Correct order; the feature arrives later."},
+        {"id": "B", "label": "Prototype on the six outdoor cold-weather venues now", "description": "Show the value on the fixtures where weather matters most while the full venue set is being transcribed.", "trade_off": "Fast signal, risk of over-fitting the demo to a handful of venues."},
+        {"id": "C", "label": "Drop the overlay", "description": "Accept mispricing risk on outdoor totals.", "trade_off": "Cheapest; closes R-58 permanently."}
+      ],
+      "unblocks": "R-58",
+      "discovers_information": false, "verdict": "", "decision": "D-08"
+    },
+    {
+      "id": "SG-09", "category": "Repo",
+      "title": "Name one canonical workspace and stop adding namespaces",
+      "problem": "This repository holds roughly 50 overlapping NFL workspaces. Each new session adds another, so the review cost grows faster than the insight.",
+      "evidence": "Question Q-30.",
+      "options": [
+        {"id": "A", "label": "Pick one canonical namespace and archive the rest behind a single index", "description": "Move the rest under a retained-workspaces heading and mark them superseded.", "trade_off": "Cleanest outcome, but it is a large, sensitive refactor across other sessions' work."},
+        {"id": "B", "label": "Freeze new namespaces and let the current ones stand", "description": "No refactor; new work lands in the chosen namespace only.", "trade_off": "Cheap and safe; leaves the existing sprawl in place."},
+        {"id": "C", "label": "Do nothing", "description": "Accept the sprawl.", "trade_off": "Zero cost now, unbounded review cost later."}
+      ],
+      "unblocks": "Q-30 and all future review",
+      "discovers_information": false, "verdict": "", "decision": "D-09"
+    },
+    {
+      "id": "SG-10", "category": "Governance",
+      "title": "Write down the Brier benchmark before the first graded run",
+      "problem": "The ranking rule says benchmark-relative Brier skill, but it does not yet name the benchmark.",
+      "evidence": "Question Q-16; blocks R-38, R-59.",
+      "options": [
+        {"id": "A", "label": "Benchmark against the control baselines C1 and C2", "description": "Always publish skill relative to random and to point-in-time favourites, independent of any market.", "trade_off": "Works with no price feed, which matters while G-PRICE is open."},
+        {"id": "B", "label": "Benchmark against the market consensus once prices exist", "description": "The standard convention: skill relative to the closing market probability.", "trade_off": "More informative, but unusable until SG-01 is decided."},
+        {"id": "C", "label": "Publish both", "description": "Control-relative now, market-relative later.", "trade_off": "Two columns instead of one; no downside beyond width."}
+      ],
+      "unblocks": "R-38, R-59",
+      "discovers_information": false, "verdict": "", "decision": "D-10"
+    },
+    {
+      "id": "SG-11", "category": "Availability",
+      "title": "Capture the reserve list so absence never reads as health",
+      "problem": "A player missing from the weekly injury report may be on injured reserve, not fit. Without the reserve list a net-injury count is biased downward.",
+      "evidence": "R-64; question Q-12.",
+      "options": [
+        {"id": "A", "label": "Capture an official IR/reserve page per club on the same schedule as the injury report", "description": "Join it to the injury report so an absent player is labelled either healthy or reserved.", "trade_off": "Needs a source decision first; this is partly an information-discovery task."},
+        {"id": "B", "label": "Infer reserve status from the dated official news articles already being captured", "description": "This session already captures IR statements such as the Dolphins placing Malik Willis on injured reserve.", "trade_off": "Works today, but it is incomplete coverage: only players who make the news are caught."},
+        {"id": "C", "label": "Add a third label to the availability graph: unknown", "description": "Stop treating absence as health without claiming to know why.", "trade_off": "Honest and free; loses the count precision."}
+      ],
+      "unblocks": "R-64, and removes a bias in R-41",
+      "discovers_information": true, "verdict": "", "decision": "D-11"
+    },
+    {
+      "id": "SG-12", "category": "Availability",
+      "title": "Represent depth slots as groups before any single-starter logic is written",
+      "problem": "Several clubs list more than one player at rank 1 in a slot, and some leave a slot empty. Treating column 1 as the starter would fabricate a starter the club never named.",
+      "evidence": "R-33, R-51; both blocked by G-DEPTH.",
+      "options": [
+        {"id": "A", "label": "Model a slot as an ordered list of one or more players, with an explicit empty state", "description": "The data model the brief asks for.", "trade_off": "Slightly more complex schema, and it must exist before any parser is written."},
+        {"id": "B", "label": "Model only the rank-1 group and ignore ranks 2 to 4", "description": "Enough for a first deficiency signal.", "trade_off": "Cannot express 2nd versus 3rd string, which is the core of R-45."},
+        {"id": "C", "label": "Write the schema after the depth survey in SG-02", "description": "Let the survey tell you what shapes actually occur before fixing the model.", "trade_off": "Correct ordering; delays the schema."}
+      ],
+      "unblocks": "R-33, R-51, R-45",
+      "discovers_information": true, "verdict": "", "decision": "D-12"
+    },
+    {
+      "id": "SG-13", "category": "Availability",
+      "title": "Calibrate Questionable empirically before using it as a feature",
+      "problem": "The official text gives no percentages. This session's capture has 90 Questionable, 70 Out and 11 Doubtful rows, but no outcome is joined to any of them.",
+      "evidence": "R-44, R-53; question Q-08.",
+      "options": [
+        {"id": "A", "label": "Join several seasons of designations to official inactive lists and publish play rate with intervals", "description": "The measurement the brief asks for before the label becomes a feature.", "trade_off": "Needs Q-09 answered first; multi-season work."},
+        {"id": "B", "label": "Publish the raw designation counts now with n, and defer calibration", "description": "What this session does: 171 designated rows with the breakdown published, no play rate claimed.", "trade_off": "Honest, but the label cannot enter a model yet."},
+        {"id": "C", "label": "Use designations as a feature anyway and report the ablation", "description": "Let the ablation decide whether the label earns its place.", "trade_off": "Violates R-53's sequencing, but the ablation would still surface a useless label."}
+      ],
+      "unblocks": "R-44, R-53",
+      "discovers_information": true, "verdict": "", "decision": "D-13"
+    },
+    {
+      "id": "SG-14", "category": "Model",
+      "title": "Run the injury ablation as an ablation, not as a points penalty",
+      "problem": "Subtracting fixed points for a missing starter is unfalsifiable. The identical model must be run with and without the availability features and the difference reported with uncertainty.",
+      "evidence": "R-27, R-28; blocked by G-ABLATION with 1 of 4 required weeks.",
+      "options": [
+        {"id": "A", "label": "Wait for four dated weeks, then run the ablation across three chronological holdouts", "description": "The design as pre-registered in S4.", "trade_off": "Correct, but it cannot start until the SG-03 collector has run for a month."},
+        {"id": "B", "label": "Run a single-season ablation now to validate the harness", "description": "Prove the code path on 2026 while the weeks accumulate.", "trade_off": "Useful rehearsal; the result itself is not evidence and must not be published as one."},
+        {"id": "C", "label": "Ship the fixed penalty", "description": "Rejected in the brief.", "trade_off": "Fast, and unfalsifiable."}
+      ],
+      "unblocks": "R-27, R-28",
+      "discovers_information": false, "verdict": "", "decision": "D-14"
+    },
+    {
+      "id": "SG-15", "category": "Leaderboard",
+      "title": "Keep the leaderboard empty until a strategy has 300 prospective graded games",
+      "problem": "A leaderboard with three entries and no sample invites exactly the result-chasing that pre-registration exists to prevent.",
+      "evidence": "G-SAMPLE blocks R-05, R-07, R-08, R-16, R-74.",
+      "options": [
+        {"id": "A", "label": "Publish divisions and controls with zero rows until the threshold is met", "description": "What this session does.", "trade_off": "Looks empty for a while; that emptiness is the honest state."},
+        {"id": "B", "label": "Publish provisional rows clearly labelled as unranked", "description": "Show progress without ranking.", "trade_off": "Useful for morale, but any number on a leaderboard tends to be read as a rank."},
+        {"id": "C", "label": "Lower the threshold", "description": "Rank earlier on a smaller sample.", "trade_off": "Directly contradicts the anti-luck intent of the brief."}
+      ],
+      "unblocks": "R-05, R-74",
+      "discovers_information": false, "verdict": "", "decision": "D-15"
+    },
+    {
+      "id": "SG-16", "category": "Leaderboard",
+      "title": "Separate signal from staking as two published blocks",
+      "problem": "A lucky staking run can mask a bad signal, and vice versa.",
+      "evidence": "R-05.",
+      "options": [
+        {"id": "A", "label": "Two blocks on every row: signal score with uncertainty, then staking outcome", "description": "The split the brief asks for.", "trade_off": "Wider table; no real downside."},
+        {"id": "B", "label": "Rank on signal only and publish staking as a diagnostic", "description": "Stronger anti-luck stance: staking cannot influence rank at all.", "trade_off": "Hides whether the strategy is actually profitable to follow."},
+        {"id": "C", "label": "One blended score", "description": "Rejected by the brief.", "trade_off": "Simplest, and it re-merges exactly what R-05 separates."}
+      ],
+      "unblocks": "R-05",
+      "discovers_information": false, "verdict": "", "decision": "D-16"
+    },
+    {
+      "id": "SG-17", "category": "Model",
+      "title": "Keep parlays and prop combos closed until joint evidence exists",
+      "problem": "Multiplying marginal probabilities is invalid under dependence, and no operator void/push rules have been captured.",
+      "evidence": "R-36, R-37; division D2, D3 and D4 currently hold zero rows.",
+      "options": [
+        {"id": "A", "label": "Keep the gate closed and publish no parlay price anywhere", "description": "What this session does.", "trade_off": "No parlays until a joint model is validated."},
+        {"id": "B", "label": "Validate a joint model for same-game legs first", "description": "SGP is where dependence is strongest, so it is where the joint model matters most.", "trade_off": "Hardest case first; slowest."},
+        {"id": "C", "label": "Price parlays from marginals and disclose the assumption", "description": "Rejected by the brief.", "trade_off": "Fast, and mathematically wrong under dependence."}
+      ],
+      "unblocks": "R-36",
+      "discovers_information": false, "verdict": "", "decision": "D-17"
+    },
+    {
+      "id": "SG-18", "category": "Operations",
+      "title": "Move snapshots off the static site and add freshness alerts",
+      "problem": "Hashes are computed locally. There is no durable store and nothing alerts when a source goes stale or changes shape.",
+      "evidence": "R-39; question Q-20.",
+      "options": [
+        {"id": "A", "label": "Private object store plus a scheduled freshness check that alerts on staleness and schema change", "description": "What R-39 asks for.", "trade_off": "Needs infrastructure and an alert destination."},
+        {"id": "B", "label": "Keep captures in git and add a workflow that fails loudly on staleness", "description": "Uses existing CI as the alert channel.", "trade_off": "Free, but it only alerts when someone looks at the build."},
+        {"id": "C", "label": "No alerting", "description": "Accept silent staleness.", "trade_off": "Zero cost; a stale source then silently poisons every downstream number."}
+      ],
+      "unblocks": "R-39",
+      "discovers_information": false, "verdict": "", "decision": "D-18"
+    },
+    {
+      "id": "SG-19", "category": "Data",
+      "title": "Publish a weekly what-changed diff rather than another static snapshot",
+      "problem": "A snapshot tells you where things stand; a diff tells you what moved.",
+      "evidence": "R-61; needs two consecutive weekly captures, one exists.",
+      "options": [
+        {"id": "A", "label": "Diff on rank, rating and availability once the collector has run twice", "description": "The three columns the brief names.", "trade_off": "Trivial to build once SG-03 lands."},
+        {"id": "B", "label": "Diff only on availability", "description": "Availability moves fastest, so it carries most of the signal.", "trade_off": "Narrower, cheaper."},
+        {"id": "C", "label": "Keep static snapshots", "description": "Accept that trends have to be read across pages by eye.", "trade_off": "Zero build cost, higher reading cost."}
+      ],
+      "unblocks": "R-61",
+      "discovers_information": false, "verdict": "", "decision": "D-19"
+    },
+    {
+      "id": "SG-20", "category": "Rules",
+      "title": "Find and quote the official 2026 kickoff and onside-kick rule text before building the priors filter",
+      "problem": "The brief asks for a regime-priors filter. No official rule-change document was located and read this session, so any prior would be invented.",
+      "evidence": "R-68; flag RF-06; question Q-26.",
+      "options": [
+        {"id": "A", "label": "Locate the official rule-change text, quote it, then derive the prior", "description": "The only route that keeps the prior sourced.", "trade_off": "Slower; possible the text is not publicly posted in a quotable form."},
+        {"id": "B", "label": "Estimate the regime from 2026 game data and label it as an estimate", "description": "Measure rather than quote.", "trade_off": "Defensible if labelled, but it is an inference, and R-68 asks for a prior."},
+        {"id": "C", "label": "Drop the filter", "description": "Accept the bias in totals and comeback curves.", "trade_off": "Cheapest; leaves a known systematic bias uncorrected."}
+      ],
+      "unblocks": "R-68",
+      "discovers_information": true, "verdict": "", "decision": "D-20"
+    },
+    {
+      "id": "SG-21", "category": "Data",
+      "title": "Locate the league's dated schedule announcement and publish it beside the live schedule",
+      "problem": "R-24 asks for the dated announcement beside the live schedule page. The live page is linked; the dated announcement is not.",
+      "evidence": "Flag RF-07; question Q-27.",
+      "options": [
+        {"id": "A", "label": "Search nfl.com for the dated schedule-release article and publish it with its date", "description": "Pure information discovery, one fetch.", "trade_off": "Cheap; may not exist in a linkable form."},
+        {"id": "B", "label": "Publish the flexible-scheduling procedures page that the schedule itself links to", "description": "The schedule page links to nfl.com/legal/flexible-scheduling-procedures.", "trade_off": "Real and dated-adjacent, but it is not the announcement."},
+        {"id": "C", "label": "Close R-24 as not publicly available", "description": "Record the finding rather than keep it open.", "trade_off": "Honest, but it should only be closed after A has been tried."}
+      ],
+      "unblocks": "R-24",
+      "discovers_information": true, "verdict": "", "decision": "D-21"
+    },
+    {
+      "id": "SG-22", "category": "Availability",
+      "title": "Version depth and availability against the last official roster event",
+      "problem": "A club's depth page can document a trade in the same article that carries the depth chart. Depth trusted as durable goes stale.",
+      "evidence": "R-34, R-46; this session captured 5 dated roster/IR events from official news.",
+      "options": [
+        {"id": "A", "label": "Attach a last-roster-event timestamp and source to every depth and availability row", "description": "The versioning the brief asks for.", "trade_off": "Needs a transactions source; partly an information-discovery task."},
+        {"id": "B", "label": "Version from the dated official news articles already captured", "description": "Works today with the 5 events in hand.", "trade_off": "Incomplete: only news-covered moves are caught."},
+        {"id": "C", "label": "Re-fetch depth weekly and treat every fetch as fresh", "description": "Implicit versioning by capture date.", "trade_off": "Cheap, and it will silently miss a move made and reversed between captures."}
+      ],
+      "unblocks": "R-34, R-46",
+      "discovers_information": true, "verdict": "", "decision": "D-22"
+    },
+    {
+      "id": "SG-23", "category": "Site",
+      "title": "Add an explicit unverified marker to every blank value",
+      "problem": "A blank cell can be read either as 'zero' or as 'not known'. Those are very different.",
+      "evidence": "R-79.",
+      "options": [
+        {"id": "A", "label": "Render every blank as a visible flagged cell with the gate that blocks it", "description": "What this session does.", "trade_off": "Noisier tables; far safer reading."},
+        {"id": "B", "label": "Leave blanks empty and keep the flag on a separate page", "description": "Quieter tables.", "trade_off": "A reader has to leave the page to know whether a blank means zero."},
+        {"id": "C", "label": "Fill blanks with a dash and no flag", "description": "Rejected by the brief.", "trade_off": "Cleanest looking, and ambiguous."}
+      ],
+      "unblocks": "R-79",
+      "discovers_information": false, "verdict": "", "decision": "D-23"
+    },
+    {
+      "id": "SG-24", "category": "Site",
+      "title": "Make the suggestions page the entry point for the next session",
+      "problem": "Each new session rediscovers the same gates. A single review-first queue means the next session starts from a decision rather than from the top.",
+      "evidence": "R-71, R-72, R-73.",
+      "options": [
+        {"id": "A", "label": "Link the landing page to this page as 'decide these first'", "description": "What this session does.", "trade_off": "None identified."},
+        {"id": "B", "label": "Put the top three decisions on the landing page itself", "description": "Shorter path from landing to decision.", "trade_off": "The landing page stops being a decision-readiness table and becomes a to-do list."},
+        {"id": "C", "label": "Keep suggestions in COORDINATION.md only", "description": "Fewer pages.", "trade_off": "The reviewer then has to read git history to find the options."}
+      ],
+      "unblocks": "R-71",
+      "discovers_information": false, "verdict": "", "decision": "D-24"
+    }
+  ]
+}
