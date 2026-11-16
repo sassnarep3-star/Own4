@@ -996,7 +996,11 @@ def suggestions():
              cost="low", unblocks="owner time, not a gate", risk="loses nothing if every page stays reachable",
              recommendation="owner call", status="open", source_url=""),
         dict(id="SUG05", title="Replace the 'no official depth' blocker with a coverage statement",
-             change="FB-07/RF-04 say no official depth source exists. One does, for one club. Restate the blocker as coverage.",
+             change=("This site's flag FB-02 says only 1 of 32 depth charts is captured; the peer "
+                     "workspace flag RF-04 (nfl-availability-desk) goes further and says no depth dataset "
+                     "exists at all, because peers recorded the nfl.com depth route as a 404. One does "
+                     "exist, for one club, on the club's own domain. Restate both as coverage, not "
+                     "existence."),
              cost="low", unblocks="honest gates", risk="none",
              recommendation="do now", status="open", source_url=LIONS_DEPTH),
     ]

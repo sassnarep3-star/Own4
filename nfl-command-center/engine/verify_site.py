@@ -337,12 +337,42 @@ def correlation_p_invariants():
             errors.append("correlations: %s has no p-value" % key)
 
 
+def cross_reference_invariants():
+    """Every FB-xx cited anywhere in a dataset must exist in the flag register.
+
+    SUG05 cited FB-07 for the depth blocker; FB-07 is the undated-snapshot flag and the depth
+    flag is FB-02. The citation was wrong while both IDs existed, so this check catches both the
+    dangling case and makes the mapping explicit by requiring the cited flag to be the right one
+    for the claim -- the mapping half is a human judgement, recorded here so the next reader can
+    see what was checked.
+    """
+    flags = {r["id"]: r for r in json.load(open(os.path.join(DATA, "flags.json")))["rows"]}
+    pat = re.compile(r"\bFB-\d{2}\b")
+    dangling = set()
+    for name in ("suggestions", "questions", "requirements", "gates", "depth_register",
+                 "replacement_evidence", "drill_findings", "availability_week10"):
+        path = os.path.join(DATA, name + ".json")
+        if not os.path.exists(path):
+            continue
+        for rid in pat.findall(open(path).read()):
+            if rid not in flags:
+                dangling.add((name, rid))
+    for name, rid in sorted(dangling):
+        errors.append("%s cites %s, which is not in the flag register" % (name, rid))
+    # the depth-coverage claim must point at the depth-coverage flag
+    sug = {r["id"]: r for r in json.load(open(os.path.join(DATA, "suggestions.json")))["rows"]}
+    s5 = sug.get("SUG05", {}).get("change", "")
+    if "FB-02" not in s5:
+        errors.append("SUG05 does not cite FB-02 (depth-coverage flag) for the depth claim")
+
+
 def main():
     for page in PAGES:
         check(page)
     check_no_prices()
     check_data_invariants()
     correlation_p_invariants()
+    cross_reference_invariants()
     for name, point, iv, ok in numeric_invariants():
         print("  interval check: %-20s point %+.4f inside %s -- %s"
               % (name, point, iv, "ok" if ok else "VIOLATED"))
