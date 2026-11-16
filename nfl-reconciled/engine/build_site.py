@@ -50,7 +50,8 @@ V_BADGE = {
 # ------------------------------------------------------------------ navigation
 PAGES = [
     ("index.html", "Start here · canonical numbers"),
-    ("pages/conflicts.html", "Conflict register (15)"),
+    ("pages/executive-summary.html", "Executive summary"),
+    ("pages/conflicts.html", "Conflict register (16)"),
     ("pages/results.html", "Results corpus vs the league"),
     ("pages/availability.html", "Availability captures vs the live page"),
     ("pages/workspaces.html", "Workspace index (31)"),
@@ -288,6 +289,127 @@ def build_index():
     return page("index.html", "Start here — the canonical numbers", "NFL reconciled", "".join(b),
                 "One entry point for the repository's 31 NFL workspaces: which numbers are canonical, "
                 "which are still undecided, and the official source behind each.")
+
+
+def build_summary():
+    b = []
+    b.append('<p class="lead" style="max-width:80ch">One page for a reader who has five minutes. Every '
+             'number below is the same number the other pages publish, computed by the same engines; the '
+             'markdown twin is <code>EXECUTIVE_SUMMARY.md</code>.</p>')
+    b.append("<h2>The one thing to read</h2>")
+    b.append('<div class="panel bad"><p>This repository had <strong>%d NFL workspaces publishing %d pages</strong>, '
+             'at least fourteen of them presenting themselves as the place to start. They were each honest '
+             'and they did not agree with each other. Nothing said which figure to believe. This workspace '
+             'settles that: it states the canonical number for every contested fact, with the official page '
+             'behind it, and leaves the rest to you.</p>'
+             '<p class="small"><strong>No workspace was edited, moved or deleted.</strong> What was removed '
+             'is the ambiguity, not anybody\u2019s work.</p></div>'
+             % (NS["n_namespaces"], NS["totals"]["pages"]))
+    b.append("<h2>The three numbers the repository had wrong</h2>")
+    b.append(table(["", "Before", "Canonical", "Proof"], [
+        ["Games played", "\u201c136\u201d or \u201c137\u201d", "<strong>%g</strong>" % OFF["games_played_league_wide"],
+         "%d club-games (sum of every club\u2019s W+L+T) \u00f7 2 \u00b7 %s"
+         % (OFF["club_games_summed"], link(OFF["source_url"]))],
+        ["Week-10 fixtures", "13, 14 or 16", "<strong>%d</strong>" % len(
+            jload("official_facts.json")["week10_fixtures"]["rows"]),
+         "32 clubs \u2212 4 on bye \u00f7 2 \u00b7 "
+         + link("https://www.nfl.com/schedules/2026/by-week/week-10")],
+        ["Week-10 injury rows", "254, 279, 347 or 352", "<strong>%d over 28 clubs</strong>" % LIVE_OK[0]["n_rows"],
+         "%d of %d club counts and %d of %d cells reproduced by hand \u00b7 %s"
+         % (LIVE_OK[0]["clubs_matching"], LIVE_OK[0]["clubs_in_official_sample"],
+            LIVE_OK[0]["cells_matching"], LIVE_OK[0]["cells_checked"], link(INJ["source_url"]))],
+    ], caption="Each \u201cbefore\u201d value is the figure a workspace actually publishes."))
+
+    b.append("<h2>The gap closes to the point</h2>")
+    b.append('<div class="panel ok"><p><code>%s + %d = %s</code> \u2014 the weeks-1-to-9 corpus plus the 12 '
+             'official Week-10 finals equals the league\u2019s own Points-For total, which equals its '
+             'Points-Against total exactly. Zero points unaccounted for. The stored scores are therefore not '
+             'merely incomplete: they are consistent with every point the league credits.</p></div>'
+             % (format(CL["best_feed_weeks_1_to_9_points"], ","),
+                CL["week10_final_points_on_official_schedule"], format(CL["closure_check"], ",")))
+
+    b.append("<h2>Settled, and not</h2>")
+    b.append(cards([("ok", str(N_SETTLED), "settled by an official number"),
+                    ("", str(N_CONFLICT), "label-only difference"),
+                    ("warn", str(N_REVIEW), "yours to decide")]))
+    rows = [[esc(r["id"]), esc(r["fact"]),
+             '<a href="decisions.html#%s">what clears it \u2192</a>' % esc(r["id"]),
+             esc(r["affects"]),
+             '<span class="badge warn">no official source \u2014 owner decision</span>']
+            for r in RES["rows"] if r["verdict"] == "REVIEW"]
+    rows.append(["RR-01", "31 workspaces exist because no rule said where work must land",
+                 '<a href="decisions.html#RR-01">what clears it \u2192</a>',
+                 "Every future session, unless a canonical namespace is named",
+                 '<span class="badge warn">no official source \u2014 owner decision</span>'])
+    b.append(table(["#", "Decision", "Open", "What it blocks", "Status"], rows,
+                   caption="The status column states explicitly that no official source decides these, "
+                           "rather than leaving the row looking like a missing data point."))
+
+    b.append("<h2>Claims in the brief the live page contradicts</h2>")
+    b.append('<p class="small">These are stale observations, not errors of reasoning. The site now records '
+             'the current state, and the <a href="availability.html">availability page</a> shows the '
+             'row-by-row evidence.</p>')
+    b.append(table(["Claim in the brief", "What the live page shows today", "Row"], [
+        ["\u201c254 report rows and 4 no-injury sections\u201d",
+         "<strong>347 rows over 28 sections</strong>; zero empty sections",
+         '<a href="conflicts.html#RC-05">RC-05</a> ' + '<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official &#8599;</a>'],
+        ["\u201cSeattle and Cincinnati are injury-free\u201d", "<strong>Seattle 15 rows, Cincinnati 9</strong>",
+         '<a href="conflicts.html#RC-07">RC-07</a> ' + '<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official &#8599;</a>'],
+        ["\u201cthree Lions designations are blank\u201d",
+         "<strong>Kerby Joseph, Cade Mays and D.J. Reed are all published Out</strong>",
+         '<a href="conflicts.html#RC-06">RC-06</a> ' + '<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official &#8599;</a>'],
+        ["\u201conly 6 of 254 rows carry a game designation\u201d",
+         "<strong>171 of 347 (49.3%) carry one</strong>: Questionable 90, Out 70, Doubtful 11, blank 176",
+         '<a href="conflicts.html#RC-08">RC-08</a> ' + '<a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">official &#8599;</a>'],
+        ["\u201cfour clubs have no section in the report\u201d",
+         "<strong>Those four (CHI, DEN, PHI, TB) are on bye in Week 10</strong>",
+         '<a href="conflicts.html#RC-15">RC-15</a> ' + '<a href="https://www.nfl.com/schedules/2026/by-week/week-10" target="_blank" rel="noopener">official &#8599;</a>'],
+    ]))
+
+    b.append("<h2>An irregularity worth your attention</h2>")
+    badfp = [f for f in FINGERPRINTS if not f["match"]]
+    b.append('<div class="panel bad"><p>Recomputing the availability capture\u2019s own published sha256 '
+             'fingerprints at build time: <strong>%d of %d match.</strong> The %d that do not are the '
+             '347-row capture and its Week-10 fixture register. Both files are unchanged since the merge '
+             'commit <code>1dbde90</code>, so the stale value is the seal, not the data, and the counts are '
+             'independently reproduced above.</p>'
+             '<p class="small">This workspace does not re-seal it \u2014 re-sealing a file from the file it is '
+             'meant to vouch for is that namespace\u2019s act, or yours. '
+             '<a href="conflicts.html#RC-16">RC-16</a> \u00b7 '
+             '<a href="availability.html">the check, recomputed on every build</a></p></div>'
+             % (len(FINGERPRINTS) - len(badfp), len(FINGERPRINTS), len(badfp)))
+
+    b.append("<h2>Your review queue, in one place</h2>")
+    b.append('<p><strong>%d open flagged items from %d workspaces</strong>, grouped into %d themes, each '
+             'linking back to the page that raised it and the source that page cited. %d of %d carry a source '
+             'link; the remaining %d are printed as <em>UNVERIFIED \u2014 no source cited</em> rather than as a '
+             'bare \u201cnone\u201d.</p>'
+             % (REV["totals"]["items"], REV["totals"]["workspaces"], len(REV["by_theme"]),
+                REV["totals"]["with_source_link"], REV["totals"]["items"],
+                REV["totals"]["items"] - REV["totals"]["with_source_link"]))
+    b.append(tiles([("review.html", "Open the full list &rarr;",
+                     "%d items across %d themes, with sources." % (REV["totals"]["items"], len(REV["by_theme"]))),
+                    ("flagged.html", "This workspace\u2019s own flags &rarr;",
+                     "7 items, each with the check it was put through and what would clear it."),
+                    ("method.html", "Method and limits &rarr;",
+                     "How every number is produced, and what was not read.")]))
+
+    b.append("<h2>Honest limits of this session</h2>")
+    b.append('<div class="panel warn"><ul class="small">'
+             '<li><strong>Chunks 2\u20137 of the injury report were not read.</strong> The 347-row verdict '
+             'rests on the capture\u2019s own data plus a hand count of 8 clubs and 18 cells. The other 20 '
+             'clubs are neither confirmed nor denied here.</li>'
+             '<li><strong>No price is printed</strong>, because no official price source exists; a price on '
+             'these pages would fail the build.</li>'
+             '<li><strong>No depth rank is asserted</strong>, for the same reason.</li>'
+             '<li><strong>The 2026 rulebook was not read</strong>, so no rule prior is asserted.</li>'
+             '<li><strong>Other workspaces\u2019 contents were read as data</strong>, not re-verified claim '
+             'by claim; where a peer number is cited, the file is named.</li>'
+             '</ul></div>')
+    return page("pages/executive-summary.html", "Executive summary",
+                "NFL reconciled · summary", "".join(b),
+                "The canonical numbers, the four decisions that are still open, the stale claims the live "
+                "page contradicts, and the limits of this session.")
 
 
 def build_conflicts():
@@ -876,7 +998,7 @@ def build_flagged():
 
 def main():
     os.makedirs(os.path.join(HERE, "pages"), exist_ok=True)
-    made = [build_index(), build_conflicts(), build_results(), build_availability(),
+    made = [build_index(), build_summary(), build_conflicts(), build_results(), build_availability(),
             build_workspaces(), build_review(), build_decisions(), build_method(), build_flagged()]
     print("rendered %d pages" % len(made))
     for m in made:

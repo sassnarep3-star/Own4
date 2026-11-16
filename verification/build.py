@@ -108,7 +108,8 @@ NAV = [
     # official source can settle to the owner. It adds a group; it removes and reorders nothing.
     ("NFL reconciled · one entry point (2026-11-16)", [
         ("nfl-reconciled/index.html", "★ START HERE — canonical numbers", "legacy"),
-        ("nfl-reconciled/pages/conflicts.html", "Conflict register (15 facts)", "legacy"),
+        ("nfl-reconciled/pages/executive-summary.html", "Executive summary (5 min)", "legacy"),
+        ("nfl-reconciled/pages/conflicts.html", "Conflict register (16 facts)", "legacy"),
         ("nfl-reconciled/pages/results.html", "Results corpus vs the league", "legacy"),
         ("nfl-reconciled/pages/availability.html", "Availability captures vs live page", "legacy"),
         ("nfl-reconciled/pages/decisions.html", "What is still undecided (4)", "legacy"),

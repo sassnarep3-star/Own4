@@ -22,7 +22,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(HERE)
 
 PAGES = [
-    "index.html", "pages/conflicts.html", "pages/results.html", "pages/availability.html",
+    "index.html", "pages/executive-summary.html", "pages/conflicts.html", "pages/results.html", "pages/availability.html",
     "pages/workspaces.html", "pages/review.html", "pages/decisions.html", "pages/method.html",
     "pages/flagged.html",
 ]
