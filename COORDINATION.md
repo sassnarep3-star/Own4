@@ -4448,3 +4448,37 @@ session's published content.
   additive nav group in `verification/build.py` are unowned from now on. `DC-11` remains open against two
   peer namespaces (`nfl-availability-desk/**` determinism drift; `verification-2026-11-05/build.py` line
   131's dead `../pages/competition.html` tile) — neither was touched here, and both fixes are one line.
+
+### PR / merge result (as required by the brief)
+
+* **PR #133** — `https://github.com/sassnarep3-star/Own4/pull/133` — opened from
+  `arena/448c248f-own4` to `main`, **merged without waiting for approval** at
+  2026-11-16T02:09:37Z as merge commit `d163043af7e1de5723ec97acaa1925de84e8b878`.
+* Checks on the PR: `nfl-decision-gaps verify` **success**; `Validate canonical NBA dashboard`,
+  `Validate NBA research workspace`, `nfl-command verify`, `Rebuild and verify`, `validate` all
+  success. Two peer workflows fail and are logged with reproductions in the section above — both
+  are red on `main` independently of this branch, and `main` has no required status checks.
+* Post-merge on `main` at `d163043a`: `nfl-decision-gaps verify` **success**,
+  `Validate canonical NBA dashboard` success, `Validate NBA research workspace` success,
+  `nfl-command verify` success. `pages build and deployment` ran and the Pages API reports
+  `status: built`, `https://sassnarep3-star.github.io/Own4/`.
+* **Live pages fetched and read after the deploy**:
+  `https://sassnarep3-star.github.io/Own4/nfl-decision-gaps/index.html` serves the overview with
+  its KPI cards, the five findings and the gap matrix, each row carrying its official source link.
+* **Rebases:** three `git pull --rebase origin main` cycles were needed (main advanced via PRs
+  #129, #130, #131, #134 while this session worked). Conflicts, all resolved as unions with no
+  peer work discarded: `COORDINATION.md` ×3; the generated `index.html` and `verified/*.html` ×2,
+  resolved by regenerating from the merged `verification/build.py` rather than by hand-editing.
+
+### Post-merge defect found by reading the live page, and the fix (PR #135)
+
+Reading the deployed overview surfaced a stale sentence of this session's own: finding #2 still
+read *"the other three (Henderson, Joseph, Goodson) have no published reserve status"*, which had
+been true before the official reserve list was read and was false afterwards — the reserve list
+explains Henderson and Goodson, leaving only Kerby Joseph. The count had been **typed into prose**
+rather than computed, which is the same class of defect this workspace flags in peers (F2, SG-H).
+
+Fix: `out_resolution()` in `nfl-decision-gaps/engine/build.py` now resolves every Out player
+against the inactive list and the reserve list, and `out_sentence()` renders the sentence from
+those numbers. The landing page and the executive summary both use it, so the text can no longer
+disagree with the data. Verified: 9 pages, 0 unsourced rows, 0 broken links, determinism gate clean.
