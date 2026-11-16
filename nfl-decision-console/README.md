@@ -19,9 +19,13 @@ This namespace is that reconciliation. It adds:
    number that clears it.
 5. **9 findings about the site itself** (`data/site_findings.json`) — the site-improvement section the
    brief asks for, phrased as change + how to verify the change worked.
-6. **A census of the duplication** (`pages/consolidation.html`): 386 requirement rows collapse to 124
-   text clusters, 343 of them inside a duplicated cluster; only 24 of 138 suggestion rows carry any
-   non-blank verdict-shaped field.
+6. **A census of the duplication** (`pages/consolidation.html`), pinned to commit
+   `ec9c921`: of 383 requirement rows with sentence text, 336 sit inside a duplicated cluster
+   (largest 5); of 100 peer suggestion rows with sentence text, only 14 do (largest 2).
+   24 of 156 peer suggestion rows carry any non-blank verdict-shaped field, and the page states why
+   that is an upper bound. Two peer registers store a bare row id in the clustered field, so the raw
+   columns (largest 68 / 28) are published beside the sentence columns and flag `DC-12` explains
+   the difference.
 
 ## What this session verified from official sources (and what it did not)
 

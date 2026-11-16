@@ -395,6 +395,8 @@ closes it; a sentence in <code>data/decisions.json</code> does.</p>
             "%d" % a["files"], "%d" % a["rows"],
             "%d" % v["rows_with_text"], "%d" % v["distinct_clusters"], "%d" % v["clusters_with_duplicates"],
             "%d" % v["rows_inside_a_duplicate_cluster"], "%d" % v["largest_cluster"],
+            "%d" % v["rows_with_sentence_text"], "%d" % v["sentence_duplicate_clusters"],
+            "%d" % v["sentence_rows_inside_a_duplicate_cluster"], "%d" % v["sentence_largest_cluster"],
             "%d" % v["rows_with_verdict"], "%d" % v["rows_with_status"],
             repo("data/namespace_inventory.json", "inventory ↗"),
         ])
@@ -406,7 +408,10 @@ closes it; a sentence in <code>data/decisions.json</code> does.</p>
             mem = " · ".join("<code>%s</code>" % esc(m["namespace"]) for m in g["members"][:6])
             more = "" if len(g["members"]) <= 6 else " <span class='dim'>(%d more)</span>" % (len(g["members"]) - 6)
             cl_rows.append([esc(kind), "%s#%d" % (esc(kind[:3]), i + 1), "%d" % g["n"],
-                            esc(g["members"][0]["text"]), mem + more,
+                            esc(g["members"][0]["text"]),
+                            ("<span class='dim'>identifier-keyed — a shared row id, not a shared "
+                             "proposal</span>" if g.get("id_keyed") else "sentence text"),
+                            mem + more,
                             repo("data/namespace_inventory.json", "inventory ↗")])
     verdict_rows = []
     for kind in sorted(per):
@@ -425,9 +430,10 @@ closes it; a sentence in <code>data/decisions.json</code> does.</p>
 at commit <code>%(sha)s</code> (%(cap)s) and frozen into <code>data/namespace_inventory.json</code>; the build
 reads that file and never re-walks the tree, so a sibling merge cannot move a number on this page.</p>
 %(t)s
-<h2>What the peer suggestion rows collapse into</h2>
+<h2>What the peer rows collapse into</h2>
 <p>Text clustering rule: %(rule)s. 'Peer registers' excludes this console's own registers so the
-duplication finding is not self-referential; 'all registers' includes them.</p>
+duplication finding is not self-referential; 'all registers' includes them. Read the duplication from
+the <b>sentence</b> columns: %(ccaveat)s.</p>
 %(c)s
 <h2>The verdict question, precisely</h2>
 <p>%(caveat)s</p>
@@ -437,11 +443,16 @@ reviewer verdict for almost none. That gap is why SF-02 and CD-15 exist: a propo
 verdict is not governance, it is a backlog.</p>
 """ % {"sha": esc(cons["inventory_captured_at_commit"]), "cap": esc(cons["inventory_captured_utc"]),
        "rule": esc(cons["cluster_rule"]), "caveat": esc(cons["verdict_field_caveat"]), "vt": vt,
+       "ccaveat": esc(cons["cluster_caveat"]),
        "t": table(["Register kind", "Peer files", "Peer namespaces", "Peer rows", "All files", "All rows",
                    "Rows with comparable text", "Distinct clusters", "Clusters with >=2 rows",
-                   "Rows inside a duplicate cluster", "Largest cluster", "Rows w/ verdict", "Rows w/ status"],
-                  rows, "cons", numeric=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)),
-       "c": table(["Kind", "Cluster", "Rows", "Lead text (truncated)", "Namespaces carrying it", "Source"],
+                   "Rows inside a duplicate cluster", "Largest cluster",
+                   "Rows with sentence text", "Sentence duplicate clusters",
+                   "Rows inside a duplicate sentence cluster", "Largest sentence cluster",
+                   "Rows w/ verdict", "Rows w/ status", "Source"],
+                  rows, "cons", numeric=(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16)),
+       "c": table(["Kind", "Cluster", "Rows", "Lead text (truncated)", "Keyed on",
+                   "Namespaces carrying it", "Source"],
                   cl_rows, "clus", numeric=(2,))}
 
     # ----------------------------------------------------------------- corpus

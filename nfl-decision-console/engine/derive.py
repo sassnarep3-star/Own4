@@ -234,6 +234,19 @@ def jac(a, b):
     return len(a & b) / float(len(a | b))
 
 
+_IDISH = re.compile(r"^[A-Za-z]{1,6}[-_ ]?[A-Za-z]?[-_ ]?\d{1,4}$")
+
+
+def _idish(text):
+    """True when a row's 'text' field holds only an identifier (SUG-01, REQ-12, CD-07).
+
+    Two peer registers put the row id in the field the clusterer reads, so their rows cluster on
+    the label rather than on any sentence. Counting that as duplication would overstate the
+    finding, so those clusters are measured separately and published beside the honest number.
+    """
+    return bool(_IDISH.match((text or "").strip()))
+
+
 def consolidation(threshold=0.5):
     inv = load("namespace_inventory.json")
     reg_all = inv["registers"]
@@ -250,6 +263,7 @@ def consolidation(threshold=0.5):
             "rows_with_status": sum(r["rows_with_status"] or 0 for r in rs),
         }
     clusters_out = {}
+    tot = {"id_clusters": 0, "id_rows": 0, "dup_clusters": 0}
     for kind in kinds:
         items = []
         for r in sorted(reg_peers, key=lambda x: x["path"]):
@@ -275,8 +289,34 @@ def consolidation(threshold=0.5):
                                             "text": it["text"]}]})
         for g in groups:
             g.pop("lead_tok", None)
+            g["id_keyed"] = sum(1 for m in g["members"] if _idish(m["text"])) * 2 > g["n"]
         groups.sort(key=lambda g: (-g["n"], g["members"][0]["text"].lower()))
         dup = [g for g in groups if g["n"] > 1]
+        idish_dup = [g for g in dup if g["id_keyed"]]
+        sen = [it for it in items if not _idish(it["text"])]
+        sgroups = []
+        for it in sorted(sen, key=lambda x: (x["text"].lower(), x["path"])):
+            best, best_j = None, 0.0
+            for g in sgroups:
+                j = jac(it["tok"], g["lead_tok"])
+                if j > best_j:
+                    best, best_j = g, j
+            if best is not None and best_j >= threshold:
+                best["members"].append({"namespace": it["namespace"], "path": it["path"],
+                                         "text": it["text"]})
+                best["n"] += 1
+            else:
+                sgroups.append({"lead_tok": it["tok"], "n": 1,
+                                "members": [{"namespace": it["namespace"], "path": it["path"],
+                                             "text": it["text"]}]})
+        for g in sgroups:
+            g.pop("lead_tok", None)
+            g["id_keyed"] = False
+        sgroups.sort(key=lambda g: (-g["n"], g["members"][0]["text"].lower()))
+        sdup = [g for g in sgroups if g["n"] > 1]
+        tot["id_clusters"] += len(idish_dup)
+        tot["id_rows"] += sum(g["n"] for g in idish_dup)
+        tot["dup_clusters"] += len(dup)
         pk = peer_counts[kind]
         per_kind[kind] = {
             "files": pk["files"], "rows": pk["rows"], "rows_with_verdict": pk["rows_with_verdict"],
@@ -287,7 +327,15 @@ def consolidation(threshold=0.5):
             "clusters_with_duplicates": len(dup),
             "largest_cluster": groups[0]["n"] if groups else 0,
             "rows_inside_a_duplicate_cluster": sum(g["n"] for g in dup),
+            "identifier_keyed_duplicate_clusters": len(idish_dup),
+            "rows_inside_identifier_keyed_clusters": sum(g["n"] for g in idish_dup),
+            "rows_with_sentence_text": len(sen),
+            "sentence_clusters": len(sgroups),
+            "sentence_duplicate_clusters": len(sdup),
+            "sentence_rows_inside_a_duplicate_cluster": sum(g["n"] for g in sdup),
+            "sentence_largest_cluster": sgroups[0]["n"] if sgroups else 0,
             "top_clusters": groups[:10],
+            "top_sentence_clusters": sgroups[:10],
         }
         clusters_out[kind] = groups
     counts = inv["counts"]
@@ -307,6 +355,12 @@ def consolidation(threshold=0.5):
         "peer_registers": peer_counts,
         "all_registers": {k: counts[k] for k in kinds},
         "verdict_field_counts": field_counts,
+        "cluster_caveat": ("%d of the %d duplicated clusters (%d rows) are keyed on a row identifier "
+                           "rather than on sentence text, because two peer registers store only an id in "
+                           "the field the clusterer reads; those clusters are counted in the table, "
+                           "called out here, and excluded from the 'sentence' columns, so the duplication "
+                           "finding is read from the sentence numbers"
+                           % (tot["id_clusters"], tot["dup_clusters"], tot["id_rows"])),
         "verdict_field_caveat": "a non-blank field named 'decision' is counted here even though in some "
                                 "registers that field holds the QUESTION a reviewer must answer rather "
                                 "than an answer to it; the count is therefore an upper bound on "

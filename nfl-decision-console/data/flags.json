@@ -8,7 +8,7 @@
    "id": "DC-01",
    "severity": "high",
    "title": "156 suggestion rows, 0 reviewer verdicts in git",
-   "found": "Counting every suggestion register in the repository (commit b340a49) returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too).",
+   "found": "Counting every suggestion register in the repository returns 156 rows across 20 files in 19 namespaces; 24 rows carry a non-blank verdict-shaped field and the census page states why that is an upper bound; no file anywhere records a reviewer's verdict for the open queue (the field exists and is empty by design in every peer namespace too). counted by `engine/inventory.py` and pinned in `data/namespace_inventory.json` to commit ec9c921 (2026-11-16T01:57:09Z); if that commit is no longer reachable because the branch was rewritten, re-running `python3 engine/inventory.py` reproduces the numbers against whatever tree is checked out",
    "why_it_matters": "the brief's process \u2014 review, choose a path, then implement \u2014 cannot be shown to have happened for any of them, so each new session re-proposes the same blockers.",
    "action": "one verdict per row of CD-01\u2026CD-15 in data/decisions.json (G-12); SF-02 makes a decided row visibly leave the queue",
    "blocks": "any claim that the project has a decision process",
@@ -190,9 +190,9 @@
    "id": "DC-11",
    "severity": "medium",
    "title": "Two sibling CI gates are already red on main, and this namespace did not move them",
-   "found": "At origin/main the jobs `nfl-availability-desk verify` and `Verify bounded NBA audit and published navigation` fail on commits merged before this PR (#125, #126, #129). Reproduced on a clean checkout of origin/main with nothing from this session applied: re-running that namespace's own engine (capture -> audit -> drift -> build_site) rewrites five committed files (data/derived/capture_diffs.json, data/derived/hashes.json, pages/executive-summary.html, pages/repo-review.html, pages/snapshot-delta.html), so its `git diff --exit-code` determinism gate fails on its own tree; the committed artefacts still describe a 107-row capture and '4 proper subsets' that the current tree no longer reproduces. nfl-audit's rebuild is clean (no diff), so its navigation step is the one that depends on the root index. A sibling session recorded the same class of failure against the root verifier and left it to its owner.",
+   "found": "Reproduced on a clean checkout of `origin/main` on 2026-11-16, with nothing from this session applied: re-running `nfl-availability-desk`'s own engine (capture -> audit -> drift -> build_site) rewrites five committed files in that namespace (data/derived/capture_diffs.json, data/derived/hashes.json, pages/executive-summary.html, pages/repo-review.html, pages/snapshot-delta.html), so the workflow's `git diff --exit-code` determinism gate fails on its own output; the committed artefacts still describe a 107-row capture and '4 proper subsets' that the current tree no longer reproduces. `nfl-audit`'s rebuild is clean, but `Verify bounded NBA audit and published navigation` is red on main pushes as of #130 because the committed root `index.html` is stale against `verification/build.py`. Neither failure mentions this namespace.",
    "why_it_matters": "every open pull request inherits two red checks that nothing in it caused, so 'CI is green' stops being usable as a merge signal; and the availability desk's cross-capture reconciliation numbers are now describing a tree that no longer exists",
-   "action": "owner of nfl-availability-desk: re-run the pipeline and commit the result, or pin the capture set to files under its own data/ directory so a sibling merge cannot move it. This namespace edited no file in either sibling namespace and did not commit their regenerated output",
+   "action": "owner of `nfl-availability-desk`: re-run the pipeline and commit the result, or pin the capture set to files under its own data/ directory so a sibling merge cannot move it. Owner of the root generator: commit the regenerated `index.html` + `verified/*.html` \u2014 this PR carries a regenerated copy, which is why the job is green on some branches and red on main",
    "blocks": "nothing this site publishes; it blocks a green board for the next session",
    "sources": [
     {
@@ -202,6 +202,25 @@
     {
      "label": "the gate that compares the rebuild with the committed tree",
      "url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-availability-desk.yml"
+    }
+   ]
+  },
+  {
+   "id": "DC-12",
+   "severity": "medium",
+   "title": "The first census page read an id collision as near-total duplication",
+   "found": "The clustering key is the row's title/question/item text, and two peer registers store only a row id there (`REQ-01`, `SUG-01`), so their rows cluster on the label. That put 68 rows in one 'requirement' cluster and 28 in one 'suggestion' cluster, and this page published those as the duplication finding. The engine now tells an identifier-keyed cluster from a shared sentence: the corrected reading is 336 of 383 requirement rows inside a duplicated sentence cluster (largest 5) and 14 of 156 suggestion rows (largest 2).",
+   "why_it_matters": "it inverts the finding. The open suggestion queue is barely duplicated ({sin} rows), so the consolidation problem is the shared requirement text and the real gap is that no register records a verdict. A reviewer who acted on the inflated number would have spent the next session de-duplicating a backlog that was not duplicated",
+   "action": "closed in this commit: `engine/derive.py` flags identifier-keyed clusters, the census table carries both columns, the prose quotes the sentence numbers, and the raw figure stays visible and labelled",
+   "blocks": "nothing \u2014 the corrected numbers are the published ones",
+   "sources": [
+    {
+     "label": "the census page, both columns",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/pages/consolidation.html"
+    },
+    {
+     "label": "the clusterer",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/engine/derive.py"
     }
    ]
   }
