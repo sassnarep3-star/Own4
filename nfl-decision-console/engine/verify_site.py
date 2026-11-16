@@ -163,6 +163,10 @@ def check_pages(counts):
                 fail("%s: broken local link %s" % (p, href))
         if "localhost" in txt or "127.0.0.1" in txt:
             fail("%s: references a local server" % p)
+        # a register written by escaping in a shell heredoc can publish the escape itself
+        for m in re.findall(r"\\u[0-9a-fA-F]{4}", txt):
+            fail("%s: publishes a literal escape sequence %s instead of the character" % (p, m))
+            break
     print("pages: %d checked · rows sourced · links resolved · no price-shaped value" % len(pages))
     # navigation completeness
     idx = html_cache.get("index.html", "")
