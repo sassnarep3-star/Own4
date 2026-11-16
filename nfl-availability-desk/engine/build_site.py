@@ -86,6 +86,18 @@ footer{max-width:1280px;margin:0 auto;padding:6px 20px 34px;color:var(--mut);fon
 OPEN = '<a href="{u}" target="_blank" rel="noopener noreferrer">{t}</a>'
 
 
+def subset_counts(diffs):
+    """(proper subsets, exact ties) against this capture.
+
+    Computed here rather than read from the audit flag: audit marks a peer with 0 row delta as a
+    subset too, and '5 of 5 are strict subsets while 1 ties' is a contradiction a reader would spot.
+    """
+    ties = sum(1 for d in diffs if d["row_delta"] == 0)
+    subsets = sum(1 for d in diffs
+                  if d["peer_rows_are_a_strict_subset_of_this_capture"] and d["row_delta"] > 0)
+    return subsets, ties
+
+
 def esc(v) -> str:
     return html.escape("" if v is None else str(v))
 
@@ -328,13 +340,14 @@ def page_availability(audit, valid, snap) -> str:
 
 
 def page_delta(diffs, delta, valid) -> str:
-    n_subsets = sum(1 for d in diffs if d["peer_rows_are_a_strict_subset_of_this_capture"])
-    n_ties = sum(1 for d in diffs if d["row_delta"] == 0)
-    counts_txt = f"{valid['rows']}, " + ", ".join(str(d["peer_rows"]) for d in diffs)
+    n_subsets, n_ties = subset_counts(diffs)
+    counts_txt = ", ".join(str(n) for n in
+                           sorted([valid["rows"]] + [d["peer_rows"] for d in diffs], reverse=True))
     gaps = sorted({abs(d["row_delta"]) for d in diffs if d["row_delta"]})
     gap_txt = " and ".join(f"{g}-row" for g in gaps) if gaps else "no row"
     tie = next((d for d in diffs if d["row_delta"] == 0), None)
     tie_moved = (len(tie["players_in_this_capture_only"]) + len(tie["players_in_peer_only"])) if tie else None
+    _s, _t = subset_counts(diffs)
     by_club = delta.get("game_status_changes_by_club") or {}
     by_club_txt = ", ".join(f"{t} {n}" for t, n in sorted(by_club.items(), key=lambda kv: -kv[1])) or "none"
     drows = []
@@ -368,8 +381,8 @@ def page_delta(diffs, delta, valid) -> str:
         f'<div class="note blue"><b>Why this page exists.</b> The brief asks for the delta, never the level. '
         f'{len(diffs) + 1} dated captures of one official page sit in this repository, and their row counts '
         f'are {counts_txt}. The same page read on different days produces different datasets: '
-        f'{n_subsets} of the {len(diffs)} comparisons are strict subsets of the fullest and {n_ties} ties it '
-        f'exactly. Below is the arithmetic that makes that visible, and the one place where two complete '
+        f'{n_subsets} of the {len(diffs)} comparisons are proper subsets of the fullest and {n_ties} ties '
+        f'it exactly. Below is the arithmetic that makes that visible, and the one place where two complete '
         f'captures can be compared row by row.</div>'
         + section("Point-in-time ledger: this capture against every stored capture",
                   "computed by engine/audit.py · club codes normalised (ARI&rarr;AZ, LA&rarr;LAR) and no player data touched",
@@ -635,6 +648,7 @@ def page_governance(g, valid, st, reg, prereg_state) -> str:
 
 
 def page_repo_review(review, audit, valid, st, ev, diffs) -> str:
+    _s, _t = subset_counts(diffs)
     rows = []
     for e in review["entries"]:
         rows.append([f"<code>{esc(e['path'])}</code>", chip(e["family"]),
@@ -664,10 +678,9 @@ def page_repo_review(review, audit, valid, st, ev, diffs) -> str:
                   f"sections and {valid['designation_rows']} designations, machine-validated "
                   f"(<code>data/derived/capture_validation.json</code>, verdict {esc(valid_verdict(audit))}).</li>"
                   f"<li><b>Cross-capture reconciliation</b> of {len(diffs) + 1} dated renders of the same "
-                  f"official page: {sum(1 for d in diffs if d['row_delta'] == 0)} tie the row count exactly, "
-                  f"{sum(1 for d in diffs if d['peer_rows_are_a_strict_subset_of_this_capture'])} are strict "
-                  f"subsets, and {sum(1 for d in diffs if d['players_in_peer_only'])} rows exist in a peer but "
-                  f"not here (0 means this capture is a superset of all of them).</li>"
+                  f"official page: {_t} ties it on row count, {_s} are proper subsets of it, and "
+                  f"{sum(len(d['players_in_peer_only']) for d in diffs)} rows exist in a peer but not here "
+                  f"(0 means this capture is a superset of all of them).</li>"
                   f"<li><b>Standings identities</b>: sum PF = sum PA across {st['clubs']} clubs; "
                   f"{len(st['win_pct_mismatches'])} win-pct recomputation mismatches; the backtest corpus "
                   f"{st['backtest_corpus']['games_credited_to_date']} credited / "
@@ -725,7 +738,7 @@ def page_exec(readiness, valid, st, fl, audit, diffs, review) -> str:
              "rejected": "the brief itself rejects it; recorded so it is not re-proposed"}.get(k, ""))]
             for k, v in sorted(counts.items(), key=lambda kv: -kv[1])]
     bc = st["backtest_corpus"]
-    n_subsets = sum(1 for d in diffs if d["peer_rows_are_a_strict_subset_of_this_capture"])
+    n_subsets, _n_ties = subset_counts(diffs)
     n_block = sum(1 for r in readiness["rows"] if r["status"] == "blocked")
     n_partial = sum(1 for r in readiness["rows"] if r["status"] == "delivered-partially")
     n_elsewhere = sum(1 for r in readiness["rows"] if r["status"] == "delivered-elsewhere")
@@ -746,7 +759,7 @@ def page_exec(readiness, valid, st, fl, audit, diffs, review) -> str:
                   f"<li><b>The Week 10 report is {valid['rows']} rows across {valid['club_sections']} clubs, "
                   f"not the 254 or 279 the brief quotes.</b> {len(diffs) + 1} dated captures of the same official "
                   f"page sit in this repository and disagree ({', '.join(str(d['peer_rows']) for d in diffs)}, "
-                  f"plus this capture at {valid['rows']}). {n_subsets} are strict subsets: the failure mode here "
+                  f"plus this capture at {valid['rows']}). {n_subsets} are proper subsets: the failure mode here "
                   f"is coverage, not accuracy. "
                   f"Designation coverage is {valid['designation_rows']}/{valid['rows']} rows "
                   f"({valid['designation_coverage_pct']}%).</li>"
