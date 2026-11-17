@@ -5010,3 +5010,45 @@ No scores are inferred. The older 2026-11-16 `LIVE` rendering remains preserved 
 - Two push-event checks on the rebase head failed outside this task's file scope. Local reproduction showed `nfl-verify/engine/verify.py` passes after rebuilding, but the generated readiness files still say 35 `nfl*` trees while the current tree has 36 (the latest main merge added `nfl-live-board`). The repo-wide `nfl-live-board` audit also detects the intended `nfl-decision-gaps` refresh: its scan changes from 478 to 496 rows for this namespace and 17,562 to 17,580 total. Its `substance.py` gate requires the sibling audit artefact to be refreshed. Per the claimed E2/E3/E4 scope, no `nfl-verify/**` or `nfl-live-board/**` files were changed; both are recorded as peer-owned follow-ups rather than hidden or broadened here.
 - PR #151 rebase update (2026-11-17 UTC): main advanced again through PRs #152 and #153 to `8ba71d4`, making the open PR temporarily conflicting. Rebased all four session commits onto that current main; the sole conflict was the append-only coordination log and was resolved as a union. Re-ran the NFL Decision Gaps parse/build/verify, root source/link verifier and byte-identical build gate successfully (9 pages, 14 result rows, 496 table rows, 1,055 links / 887 external HTTPS; root 14 pages / 346 sourced rows). No peer namespace files were changed.
 - PR #151 CI follow-up after main merged PR #148 (`3b138d1`): the peer-owned `nfl-verify` registration-count pin now rebuilds and verifies with no generated diff, so no `nfl-verify/**` exception is needed. Re-running `nfl-live-board` exposed the precise remaining drift: this refresh changes the audited Decision Gaps tables from 478 to 496 rows, and the repository-wide audit's totals/source-link counts accordingly. To keep that peer audit truthful and satisfy its substantive-data gate, took a narrow, explicit scope exception: regenerated only `nfl-live-board/data/audit_repo.json` and its generated `pages/repo-review.html`; no peer engine or analysis logic changed. The generated audit records 35 namespaces, 18,030 table rows, 3,805 rows without an official NFL link, and 16,983 official external links for this tree. Re-run its full gate after committing these generated artefacts.
+---
+
+## Session `arena/2388d73a-own4` — claim (2026-11-17 UTC)
+
+**Session ID:** `arena/2388d73a-own4` · **Branch:** `arena/2388d73a-own4` (platform-pinned; the requested
+`session-<id>/<task>` naming is not creatable in this harness — same logged deviation as every prior session).
+**Base:** `ba30819` (= `main` after PR #142, the `nfl-collector` merge). Branch at parity with `origin/main`.
+
+**Gap that justifies this session (surveyed before claiming, not assumed):**
+The brief requires (a) "Resolve the depth-order source before building the backup-deficiency feature —
+evaluate route (a) per-club official depth chart pages, verified club by club", and (b) "Run the 32-team
+roster/IR sweep before any team-level model is trusted". Every prior session left the depth layer empty:
+`nfl-book/data/depth_register.json` holds 32 rows, **all cells blank**, status "unverified — no official
+depth source (FB-07)"; `nfl-availability-desk` flagged RF-04 ("no official depth-order source"); the
+decision consoles recorded no depth route verified for all 32 clubs. `nfl-collector` (PR #142) proved the
+route works for **one** club — `https://www.packers.com/team/depth-chart` returned a full, readable chart
+with jersey numbers. This session extends that single verified capture to a **32-club official depth-chart
+sweep**, resolves the two named parsing failures (Packers jersey-number prepend; Texans depth-as-image),
+and runs the 32-team roster/IR reconciliation against the official reserve list.
+
+**Namespace claimed (exclusive — no other session owns this path):** `nfl-depth-sweep/**` (new).
+Shared files touched only additively/append-only: `COORDINATION.md` (append-only), `verification/build.py`
+(NAV, additive), regenerated `index.html` + `verified/*.html`. No peer namespace file is edited.
+
+| ID | Task | Status | Owner | Files touched (scope) |
+|----|------|--------|-------|------------------------|
+| D1 | Claim scope, read board, verify no peer claims `nfl-depth-sweep/` | claimed | arena/2388d73a-own4 | `COORDINATION.md` |
+| D2 | 32-club official depth-chart capture: fetch every club's official `/team/depth-chart`, record fetch clock, per-page hash, raw transcript; strip jersey numbers AND store the raw string (Packers prepend fix) | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/data/raw/**`, `nfl-depth-sweep/data/captures/**` |
+| D3 | Depth-order register with date + source per row (position / rank1 / rank2 / rank3); flag the Texans image (not transcribed by eye) and any 404/unparseable club | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/data/depth_register.json` |
+| D4 | 32-team roster/IR sweep vs the official reserve list: per-club IR/reserve rows, cross-check starters on IR (stale-depth flags, e.g. Baltimore), replacement-depth confirmation | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/data/roster_ir_sweep.json` |
+| D5 | Decision-readiness table (one row per brief requirement: gate that blocks it + number that would clear it) + questions/answers + suggestions (verdict blank) | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/data/{readiness,questions,suggestions}.json` |
+| D6 | Static site: landing + category subpages + Flagged for Review; every row source-linked; blank+flag for unverifiable | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/**`, `nfl-depth-sweep/engine/**` |
+| D7 | Verifier (row-source gate, broken-link, no-localhost, determinism) + CI workflow | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/engine/verify.py`, `.github/workflows/nfl-depth-sweep.yml` |
+| D8 | Executive summary | claimed | arena/2388d73a-own4 | `nfl-depth-sweep/EXECUTIVE_SUMMARY.md`, `nfl-depth-sweep/pages/executive-summary.html` |
+| D9 | Final integration: additive root nav, rebuild, PR → main → merge → Pages deploy confirmation, record result here | claimed | arena/2388d73a-own4 | `verification/build.py`, `index.html`, `verified/*.html`, `COORDINATION.md` |
+
+**Rules this session holds itself to.** Every published row is either transcribed from a club page fetched
+in THIS session (URL + UTC fetch time recorded) or computed by a checked-in engine from checked-in artefacts.
+No depth order is inferred from jersey number, experience or salary. The Texans image is **not** transcribed
+by eye — it is flagged. An unconfirmable value is blank + flagged. No peer namespace file is edited.
+
+
