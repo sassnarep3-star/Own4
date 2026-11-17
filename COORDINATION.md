@@ -4714,3 +4714,10 @@ P-01 is to reconcile the stale readiness report against the current checked-in c
 - **Official-source limits and remaining review items:** no odds/price source is published by the NFL in the verified corpus, so market price/ROI fields stay blank and strategies do not qualify; owner policy decisions remain unanswered. Existing `nfl-verify/pages/flagged.html` retains the stale standings snapshot (X-01), the not-yet-ingested official inactives source (X-03), and incomplete all-32-club depth-source validation (X-05), with official links. The independent cross-file X-04 equality does not convert these unrelated gates into passes.
 - **Out-of-scope root verifier issue:** `python3 engine/verify.py` fails because it expects missing `pages/flagged-for-review.html`; the NFL-specific `verification/verify_site.py` passes. `engine/verify.py`, `pages/**`, root navigation and generated root pages are shared/outside P-01/P-02; they were not changed. This is recorded for integration review, not represented as fixed.
 - **Irregularity notes:** external live sources are point-in-time snapshots, not continually verified facts; no claims of an empirical betting edge, live price archive, or finished all-32 depth model are made. All unverified quantities remain blank or explicitly gated.
+
+### PR #145 merge and live verification — `arena/513780b4-own4`
+
+- PR: https://github.com/sassnarep3-star/Own4/pull/145 — merged with `--merge` at 2026-11-17T00:44:02Z; merge commit `ea67aee04476d02f9422482e3451e0425db6d25e`.
+- All four PR checks passed (`audit`, `validate`, `nfl-verify verify`, `nfl-command verify`).
+- GitHub Pages deployment run 43990002633 completed successfully for merge commit `ea67aee`; Pages API status `built`, source `main:/`, HTTPS enforced.
+- Post-deploy live read with a cache-busting URL confirmed `nfl-verify/pages/verification.html` shows X-04 as pass: 347 matched identities, 1,388 field cells, zero mismatches. The price-snapshot dashboard remains live at https://sassnarep3-star.github.io/Own4/nfl-price-snapshot/pages/index.html.
