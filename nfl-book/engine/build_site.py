@@ -103,8 +103,8 @@ def esc(x):
     return html.escape(str(x), quote=True)
 
 
-def blank():
-    return '<td class="blank" title="unverified — no official source">—</td>'
+def blank(reason="unverified — no official source"):
+    return f'<td class="blank" title="{esc(reason)}">—</td>'
 
 
 def src(url, label="source"):
@@ -212,7 +212,7 @@ def build():
         (str(len(closel["rows"])), "Week 11 lines originated (side→total→ML)"),
         (str(snaps["n_snapshots"]), "price snapshots (open + close)"),
         (str(bt["n_forecasts"]), "walk-forward forecasts (Wk 3–10)"),
-        ("Tier A / 0 pts", "S1 signal tier · points paid (A1: G7 blocked)"),
+        ("PAPER / 0 pts", "prospective leaderboard pending; rewards require G7"),
         (f'{len(flags["rows"])} flags', "flagged for review (non-blocking)"),
     ]
     c_html = "".join(f'<div class="card"><div class="k">{esc(k)}</div>'
@@ -232,16 +232,13 @@ def build():
              "for every market we originate",
              "open (train ≤Wk9) vs close (train ≤Wk10 TNF); market open/close null",
              badge("live", "good"), src(slate["source_url"], "nfl.com schedule")],
-            [f"<b>Signal vs staking separated</b> — S1 accuracy "
-             f'{bt["metrics"]["S1"]["accuracy"]} (CI {bt["metrics"]["S1"]["accuracy_ci95"]}) '
-             "beats coin-flip and record baselines; staking shown under ASSUMED price",
-             f'ROI {bt["metrics"]["S1"]["staking"]["roi"]} at assumed −110 · '
-             f'placebo p {bt["metrics"]["S1"]["staking"]["g4_placebo"]["placebo_p"]}/500',
-             badge("signal only", "info"), src("https://www.nfl.com/", "nfl.com")],
+            ["<b>Prospective-only leaderboard</b> — signal qualification awaits a frozen prospective sample; staking awaits verified market prices",
+             "Both leaderboard score datasets remain blank; historical evaluation is on research pages",
+             badge("pending", "warn"), src("https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json", "frozen registry")],
             [f"<b>0 of 1,000 points paid</b> — amendment A1: points require G7 "
-             "(verified prices); G7 permanently blocked without an official price source",
-             "lucky staking cannot pay or rank: signal tier ranks first",
-             badge("by design", "warn"), src("https://www.nfl.com/", "nfl.com")],
+             "(verified prices); no strategy is eligible on assumed prices",
+             "reward gate remains closed until prospective signal and verified price criteria clear",
+             badge("by design", "warn"), src("https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json", "reward policy")],
             [f"<b>Replacement depth</b> — {len(depth['rows'])} rows with depth published "
              "only where official text states the string (SEA QB proven 1st/2nd backup)",
              "other depths blank + flagged (no official depth chart)",
@@ -322,13 +319,11 @@ gated strategies and a signal/staking-separated leaderboard. Every table row car
 official source link; unverifiable values are blank and flagged.</p>
 <div class="cards">{c_html}</div>
 <h2>Headline findings</h2>{headline}
-<div class="note warn"><b>Read staking numbers with FB-02:</b> all ROI figures assume a flat
-−110 price that no source verifies. Signal metrics (accuracy, CIs, placebos) use no prices at all.</div>
-<h2>Removal of luck</h2>{rol_panel}
-<div class="note">Signal (accuracy vs 0.500 + placebo) is separated from staking (assumed-price
-ROI). The leaderboard ranks on signal tier; staking never promotes a strategy and pays no
-points on assumed prices (amendment A1).</div>
-{rol_table}
+<div class="note warn"><b>Leaderboard boundary:</b> both competition pages are prospective-only. Historical backtest scores, placebo results and control baselines remain on the
+<a href="pages/removal-of-luck.html">Removal of luck</a> and
+<a href="pages/strategies.html">Strategies</a> research pages, not on the leaderboard.</div>
+<h2>Historical evaluation</h2>
+<p class="lead">Review the research pages for the walk-forward results and removal-of-luck analysis; no retrospective metric is ranked in the prospective leaderboard.</p>
 <h2>Decision readiness — one row per requirement</h2>
 <p class="lead">Every brief requirement with the gate that blocks it and the number/evidence
 that would clear it. <a href="pages/requirements.html">Full requirements page</a>.</p>
@@ -385,10 +380,17 @@ and we do not pretend otherwise.</div>"""
     rows = []
     for r in reqs["rows"]:
         kind = {"met": "good", "partial": "warn", "blocked": "bad"}[r["status"]]
+        source_links = src(r["source_url"], "source")
+        source_links += "".join(
+            " · " + src(link["url"], link["label"])
+            for link in r.get("evidence_links", [])
+        )
+        if r.get("implementation_url"):
+            source_links += " · " + src(r["implementation_url"], "implementation / test")
         rows.append([f'<b>{esc(r["id"])}</b>', esc(r["requirement"]),
                      badge(r["status"], kind), esc(r["evidence"]),
                      esc(r["blocking_gate"]), esc(r["clearing_number"]),
-                     src(r["source_url"], "source")])
+                     source_links])
     c = reqs.get("counts", {})
     body = (f'<h1>Requirements traceability</h1>'
             f'<p class="lead">{esc(reqs["title"])} · '
@@ -507,9 +509,9 @@ This feed is the sole input to the backtest, correlations and ROI calculations.<
                      f'<span class="num">{acc}</span>' if acc not in (None, "—") else esc(acc),
                      str(n) if n != "—" else "—", g2,
                      f'<span class="num">{roi}</span>' if isinstance(roi, float) else esc(str(roi)),
-                     src("https://www.nfl.com/", "nfl.com")])
+                     src("https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json", "frozen registry")])
     body = f"""<h1>Strategies (pre-registered)</h1>
-<p class="lead">Registry committed BEFORE the first backtest run (git f4465c0).
+<p class="lead">Pre-registration evidence: registry commit <a href="https://github.com/sassnarep3-star/Own4/commit/cc353101f8cf1deab2712a2e85f34f9b8f7b93c0" rel="noopener">cc35310</a> is the parent of first backtest-data commit <a href="https://github.com/sassnarep3-star/Own4/commit/35b0db2e0ded6281fd617e3f7c54abc5a51cb19c" rel="noopener">35b0db2</a>.
 Singles S1–S3, cross-game parlay S4, player-prop combo S5 (blocked).</p>
 <div class="note warn">Price assumption: {esc(strat["price_assumption"]["note"])}</div>
 {table(["Strategy", "Type", "Rule", "What would change our mind", "Signal metric", "n", "G2", "Staking ROI (assumed)", "Source"], rows)}
@@ -520,58 +522,50 @@ Singles S1–S3, cross-game parlay S4, player-prop combo S5 (blocked).</p>
         for a in strat["amendments"]])}"""
     page("pages/strategies.html", "Strategies", body)
 
-    # ---------------- leaderboard (signal vs staking) ----------------
-    sig_rows, stk_rows, comb_rows = [], [], []
-    for i, r in enumerate(lb["rows"], 1):
-        if r["signal_tier"] == "NA" and r.get("reason"):
-            sig_rows.append([str(i), f'<b>{esc(r["strategy"])}</b>', badge("NA", "bad"),
-                             esc(r.get("reason") or ""), "—", "—",
-                             src("https://www.nfl.com/", "nfl.com")])
-            stk_rows.append([str(i), f'<b>{esc(r["strategy"])}</b>', "—", "—", "—", "—",
-                             badge("blocked", "bad"), "—",
-                             src("https://www.nfl.com/", "nfl.com")])
-            comb_rows.append([f'<b>{esc(r["strategy"])}</b>', badge("NA", "bad"), "—",
-                              badge("no", "bad"), "0",
-                              src("https://www.nfl.com/", "nfl.com")])
-            continue
-        tier_kind = {"A": "good", "B": "warn", "C": "bad"}.get(r["signal_tier"], "warn")
+    # ---------------- prospective-only leaderboard -------------------------
+    # Do not read bt["metrics"] here: retrospective results belong on research
+    # pages, never on either competition table.
+    sig_rows, stk_rows, eligibility_rows = [], [], []
+    for r in lb["rows"]:
+        source_links = (src(r["source_url"], "official results") + " · "
+                        + src(r["registration_url"], "frozen registry"))
+        signal_kind = "bad" if r["signal_status"].startswith("BLOCKED") else "warn"
+        staking_kind = "bad" if r["staking_status"].startswith("BLOCKED") else "warn"
         sig_rows.append([
-            str(i), f'<b>{esc(r["strategy"])}</b>', badge(f'tier {r["signal_tier"]}', tier_kind),
-            f'<span class="num">{r.get("signal_metric")}</span>',
-            f'<span class="num">{r.get("signal_ci95")}</span>',
-            f'vs {esc(str(bt["metrics"].get(r["strategy"], {}).get("baseline", "")))}'
-            + (f' · post-hoc record baseline {r["posthoc_better_record_accuracy"]}'
-               if r.get("posthoc_better_record_accuracy") else ""),
-            src("https://www.nfl.com/", "nfl.com")])
-        st = bt["metrics"].get(r["strategy"], {}).get("staking", {}) or {}
+            f'<b>{esc(r["strategy"])}</b> {esc(r["name"])}',
+            badge(r["division"], "info"),
+            badge(r["signal_status"], signal_kind),
+            blank("awaiting prospective evaluation"),
+            blank("awaiting prospective evaluation"), source_links,
+        ])
         stk_rows.append([
-            str(i), f'<b>{esc(r["strategy"])}</b>',
-            f'<span class="num">{r.get("staking_roi")}</span>',
-            f'<span class="num">{r.get("staking_roi_ci95")}</span>',
-            str(r.get("staking_n")),
-            f'{esc(r.get("staking_price"))}{" · placebo p " + str(r.get("g4_placebo_p")) if r.get("g4_placebo_p") is not None else ""}',
-            badge(str(r.get("staking_tier")), "good" if r.get("staking_tier") == "pass" else "warn"),
-            src("https://www.nfl.com/", "nfl.com")])
-        comb_rows.append([
-            f'<b>{esc(r["strategy"])}</b>', badge(f'signal {r["signal_tier"]}', tier_kind),
-            badge(f'staking {r.get("staking_tier")}',
-                  "good" if r.get("staking_tier") == "pass" else "warn"),
-            badge("yes" if r.get("eligible") else "no", "good" if r.get("eligible") else "bad"),
-            str(r.get("points", 0)),
-            src("https://www.nfl.com/", "nfl.com")])
-    body = f"""<h1>Leaderboard — signal and staking kept apart</h1>
+            f'<b>{esc(r["strategy"])}</b> {esc(r["name"])}',
+            badge(r["division"], "info"),
+            badge(r["staking_status"], staking_kind),
+            blank("awaiting verified market price source"),
+            blank("awaiting verified market price source"),
+            blank("awaiting verified market price source"), source_links,
+        ])
+        eligibility_rows.append([
+            f'<b>{esc(r["strategy"])}</b> {esc(r["name"])}',
+            badge("paper", "info"),
+            badge("not eligible", "bad"),
+            str(r["points"]), source_links,
+        ])
+    body = f"""<h1>Prospective leaderboard — backtest results excluded</h1>
 <p class="lead">{esc(lb["rule"])}</p>
-<h2>1 · Signal leaderboard (price-independent — decides ranking)</h2>
-{table(["Rank", "Strategy", "Tier", "Signal metric", "95% CI", "Baselines", "Source"], sig_rows)}
-<h2>2 · Staking leaderboard (ASSUMED price — reported, never ranks on its own)</h2>
-<div class="note warn">Every number below assumes −110 (FB-02). These are mechanical,
-not achievable market returns.</div>
-{table(["Rank", "Strategy", "ROI", "95% CI", "n", "Price basis", "Gate result", "Source"], stk_rows)}
-<h2>3 · Eligibility (both columns must pass — lucky staking cannot mask bad signal)</h2>
-{table(["Strategy", "Signal", "Staking", "Eligible", "Points", "Source"], comb_rows)}
-<div class="note">Points paid: <b>{lb["points_awarded"]} of {lb["points_total"]}</b>.
-Amendment A1 requires verified prices (G7) before any points — G7 is blocked (FB-01).</div>"""
-    page("pages/leaderboard.html", "Leaderboard", body)
+<div class="note warn">No retrospective backtest metric is ranked or displayed here. Historical evaluation stays on the
+<a href="removal-of-luck.html">Removal of luck</a> and <a href="strategies.html">Strategies</a> research pages.
+Unscored prospective fields are deliberately blank, not zero.</div>
+<h2>Signal qualification · prospective only</h2>
+{table(["Strategy", "Division", "Signal status", "Prospective score", "Prospective n", "Sources"], sig_rows)}
+<h2>Staking · separate and price-gated</h2>
+<div class="note warn">CLV and ROI remain blank until verified market prices are available. No assumed odds are used for leaderboard qualification.</div>
+{table(["Strategy", "Division", "Staking status", "Prospective CLV", "Prospective ROI", "Prospective n", "Sources"], stk_rows)}
+<h2>Eligibility and rewards</h2>
+{table(["Strategy", "Current mode", "Eligibility", "Points", "Sources"], eligibility_rows)}
+<div class="note">Points paid: <b>{lb["points_awarded"]} of {lb["points_total"]}</b>. All strategies remain in PAPER until prospective signal gates clear; staking cannot promote a strategy without a verified price basis.</div>"""
+    page("pages/leaderboard.html", "Prospective leaderboard", body)
 
     # ---------------- gates ----------------
     g_rows = []
@@ -731,18 +725,24 @@ publication; all have source links for manual review.</p>
     page("pages/flagged.html", "Flagged for review", body)
 
     # ---------------- gap-closure pages (session arena/20f55d17-own4) ----------------
-    def nb(v, num=False):
+    def nb(v, num=False, blank_reason="unverified — no official source"):
         if v in (None, "", []):
-            return blank()
+            return blank(blank_reason)
         return f'<span class="num">{esc(v)}</span>' if num else esc(v)
 
-    # removal of luck
-    body = f"""<h1>Removal of luck</h1>
+    # historical skill/luck research (kept separate from competition pages)
+    cb_rows = [[f'<b>{esc(r["baseline"])}</b>', nb(r["n"], True),
+                nb(r["accuracy"], True), nb(r["ci95"]), esc(r["note"]),
+                src(r["source_url"], "official results")]
+               for r in cb["rows"]]
+    body = f"""<h1>Removal of luck — historical research</h1>
 <p class="lead">{esc(roL["method"])}</p>
-<h2>Panel</h2>{rol_panel}
-<h2>Per-strategy decomposition</h2>{rol_table}
-<div class="note">Lucky staking cannot mask a bad signal: ranking is by signal tier, staking
-is reported separately, and points are withheld until verified prices exist (A1/G7).</div>"""
+<h2>Historical skill / luck panel</h2>{rol_panel}
+<h2>Historical per-strategy decomposition</h2>{rol_table}
+<h2>Historical control baselines</h2>
+<div class="note warn">These descriptive baselines use the retrospective walk-forward sample. They remain research evidence only and are not copied into either prospective leaderboard.</div>
+{table(["Baseline", "n", "Accuracy", "95% CI", "Note", "Source"], cb_rows)}
+<div class="note">Historical scores on this research page do not qualify a strategy. Prospective leaderboard qualification, sample size and reward gates are evaluated independently.</div>"""
     page("pages/removal-of-luck.html", "Removal of luck", body)
 
     # model outputs
@@ -853,33 +853,36 @@ is reported separately, and points are withheld until verified prices exist (A1/
         "Status", "Source"], rs_rows)}"""
     page("pages/roster-sweep.html", "Roster sweep", body)
 
-    # two-stage leaderboard
+    # two-stage prospective leaderboard
     ts1_rows = []
     for r in ts["stage1"]:
         ts1_rows.append([f'<b>{esc(r["strategy"])}</b>', badge(r["division"], "info"),
-                         nb(r["brier_score"], True), nb(r["accuracy"], True),
-                         nb(r["n"], True), nb(r["ci95"]), nb(r["squared_skill_gap"], True),
-                         esc(r["game_cluster_lb"]), esc(r["multiplicity_adj"]),
-                         badge(r["qualification"], "good" if r["qualification"] == "qualified" else "bad"),
-                         src(r["source_url"], "source")])
+                         badge(r["qualification"], "warn"),
+                         nb(r["prospective_brier_score"], True, "awaiting prospective evaluation"),
+                         nb(r["prospective_skill_score"], True, "awaiting prospective evaluation"),
+                         nb(r["prospective_n"], True, "awaiting prospective evaluation"),
+                         nb(r["prospective_ci95"], blank_reason="awaiting prospective evaluation"),
+                         esc(r["multiplicity_adjusted_status"]),
+                         src(r["source_url"], "official results") + " · " +
+                         src(r["registration_url"], "frozen registry")])
     ts2_rows = []
     for r in ts["stage2"]:
         ts2_rows.append([f'<b>{esc(r["strategy"])}</b>', badge(r["division"], "info"),
-                         blank(), blank(), esc(r["escrow_status"]),
-                         src(r["source_url"], "source")])
-    cb_rows = [[f'<b>{esc(r["baseline"])}</b>', nb(r["n"], True), nb(r["accuracy"], True),
-                nb(r["ci95"]), esc(r["note"]), src(r["source_url"], "standings")]
-               for r in cb["rows"]]
-    body = f"""<h1>Two-Stage Skill Leaderboard</h1>
-<p class="lead">{esc(ts["method"])} · model Brier {ts["model_brier"]} on {ts["n_forecasts"]} walk-forward forecasts ({ts["n_weeks"]} weeks)</p>
-<h2>Stage 1 · proper-score qualification</h2>
-{table(["Strategy", "Division", "Brier", "Accuracy", "n", "95% CI", "Sq skill gap",
-        "Game-cluster LB", "Multiplicity", "Qualification", "Source"], ts1_rows)}
+                         blank("awaiting verified market price source"),
+                         blank("awaiting verified market price source"),
+                         nb(r["prospective_n"], True, "awaiting prospective evaluation"),
+                         esc(r["escrow_status"]),
+                         src(r["source_url"], "official results") + " · " +
+                         src(r["registration_url"], "frozen registry")])
+    body = f"""<h1>Two-stage prospective skill leaderboard</h1>
+<p class="lead">{esc(ts["method"])}</p>
+<div class="note warn">Stage 1 and Stage 2 have no published prospective observations yet, so score, sample, CLV and ROI cells remain blank. Historical backtest values and historical control baselines are on the
+<a href="removal-of-luck.html">research page</a>, not on this leaderboard.</div>
+<h2>Stage 1 · prospective proper-score qualification</h2>
+{table(["Strategy", "Division", "Qualification", "Prospective Brier", "Prospective skill", "Prospective n", "95% CI", "Multiplicity status", "Sources"], ts1_rows)}
 <h2>Stage 2 · prospective CLV / ROI escrow</h2>
-{table(["Strategy", "Division", "CLV", "ROI", "Escrow status", "Source"], ts2_rows)}
-<h2>Control baselines</h2>
-{table(["Baseline", "n", "Accuracy", "95% CI", "Note", "Source"], cb_rows)}"""
-    page("pages/two-stage-leaderboard.html", "Two-stage leaderboard", body)
+{table(["Strategy", "Division", "CLV", "ROI", "Prospective n", "Escrow status", "Sources"], ts2_rows)}"""
+    page("pages/two-stage-leaderboard.html", "Two-stage prospective leaderboard", body)
 
     # ablations
     abl_rows = []
