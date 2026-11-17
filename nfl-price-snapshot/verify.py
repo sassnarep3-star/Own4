@@ -10,7 +10,7 @@ import html
 import pathlib
 import re
 import sys
-from urllib.parse import urlparse
+from urllib.parse import urlsplit
 
 ROOT = pathlib.Path(__file__).resolve().parent
 PAGES = ROOT / "pages"
@@ -19,31 +19,37 @@ ALLOWED_HOSTS = ("www.nfl.com", "nfl.com", "github.com", "sassnarep3-star.github
 errors = []
 
 
-def page_files():
-    return {p.name for p in PAGES.glob("*.html")}
-
-
-def scan(path, files):
+def scan(path):
     text = path.read_text(encoding="utf-8")
-    # local hrefs
+    # Resolve local links and assets relative to the document that contains them.
+    # This covers links from pages/*.html to ../assets/* as well as page-to-page
+    # navigation; checking only filenames in PAGES falsely rejects valid assets.
+    for m in re.finditer(r'(?:href|src)="([^"]+)"', text):
+        value = html.unescape(m.group(1))
+        parts = urlsplit(value)
+        if parts.scheme or parts.netloc or value.startswith(("#", "mailto:")):
+            continue
+        if not parts.path:
+            continue
+        target = (path.parent / parts.path).resolve()
+        root = ROOT.resolve()
+        if root not in target.parents and target != root:
+            errors.append("%s: local link escapes site root -> %s" % (path.name, value))
+            continue
+        if not target.exists() and not target.suffix:
+            target = target.with_suffix(".html")
+        if not target.exists():
+            errors.append("%s: broken local link -> %s" % (path.name, value))
+    # Every outgoing link (including protocol-relative and plain-http forms)
+    # must use HTTPS and an approved source host.
     for m in re.finditer(r'href="([^"]+)"', text):
-        href = m.group(1)
-        if href.startswith("http") or href.startswith("#") or href.startswith("mailto:"):
+        u = html.unescape(m.group(1))
+        parts = urlsplit(u)
+        if u.startswith(("#", "mailto:")) or not (parts.scheme or parts.netloc):
             continue
-        if href.startswith("assets/"):
-            if not (ROOT / href).exists():
-                errors.append("%s: missing asset %s" % (path.name, href))
-            continue
-        target = href
-        if not target.endswith(".html"):
-            target = target + ".html" if "#" not in target else target
-        target = target.split("#")[0]
-        if target not in files:
-            errors.append("%s: broken local link -> %s" % (path.name, href))
-    # outgoing links must be https and allowed
-    for m in re.finditer(r'href="(https://[^"]+)"', text):
-        u = m.group(1)
-        host = urlparse(u).hostname
+        host = parts.hostname
+        if parts.scheme != "https":
+            errors.append("%s: outgoing link is not https (%s)" % (path.name, u))
         if host not in ALLOWED_HOSTS:
             errors.append("%s: disallowed outgoing host %s (%s)" % (path.name, host, u))
     # table rows: each <tr> in a table with class tw must contain a source link (<a ... &xrarr; or src span)
@@ -59,15 +65,15 @@ def scan(path, files):
 
 
 def main():
-    files = page_files()
     for p in sorted(PAGES.glob("*.html")):
-        scan(p, files)
+        scan(p)
     if errors:
         print("VERIFY FAILED (%d errors):" % len(errors))
         for err in errors:
             print("  -", err)
         sys.exit(1)
-    print("verify OK: %d pages, 0 broken links, 0 disallowed hosts, 0 unsourced rows" % len(files))
+    print("verify OK: %d pages, 0 broken links, 0 disallowed hosts, 0 unsourced rows" %
+          len(list(PAGES.glob("*.html"))))
     return 0
 
 
