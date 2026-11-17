@@ -4776,15 +4776,20 @@ standing brief is "no manual input — work to finish all tasks in this session"
 
 ## Session `arena/9208e00a-own4` — final NFL site integration and audit (claim, 2026-11-17 UTC)
 
-Branch (fixed by Arena): `arena/9208e00a-own4`, based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`.
-The latest completed entry above is PR #142 (2026-11-16); no newer active claim appears in this board.
-This session is acting as the final integration session on the assigned branch; it will not create or
-switch branches, and will not edit another namespace's source/data without an explicit logged request.
+Branch (fixed by Arena): `arena/9208e00a-own4`, initially based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`.
+At claim time, the latest recorded integration was PR #142. During this session `main` advanced through PRs #144–#147;
+this branch has been rebased onto that current main state before the scope push, retaining the intervening logs and files.
+A prior `arena/1d297093-own4` entry also records a final-integration task; this branch is not switching to or editing that
+session's namespace. Root integration is pursued here under the active Arena-assigned branch and user acceptance criteria,
+with existing peer pages/data treated as read-only and navigation preserved rather than replaced.
 
 | # | Task | Status | File scope |
 |---|---|---|---|
-| I-01 | Re-audit the current public entry point and integrate a clear NFL-first landing/navigation using existing verified outputs; preserve archived NBA/rental material without presenting it as the NFL project | in progress | `COORDINATION.md`, `README.md`, `verification/build.py`, generated root `index.html` / `verified/*.html` only as needed |
-| I-02 | Re-run relevant current NFL source/data/site verifiers; report verifiable findings, source/provenance boundaries, and irregularities without inventing values | in progress | `COORDINATION.md`, `README.md` and verification commands only; peer namespace files are read-only |
-| I-03 | Final integration check (internal-link/source-row checks, deterministic build, CI/Pages deploy); open and merge a PR from this assigned branch only if checks and publishable state are sound | pending | `COORDINATION.md`, assigned root integration files |
+| I-01 | Re-audit the current public entry point and integrate a clear NFL-first landing/navigation using existing verified outputs; preserve archived NBA/rental material without presenting it as the NFL project | in progress | `COORDINATION.md`, `README.md`, `NFL_EXECUTIVE_SUMMARY.md`, `verification/build.py`, generated root `index.html`, `nfl-flagged.html`, and `verified/*.html` only as needed |
+| I-02 | Re-run relevant current NFL source/data/site verifiers; report verifiable findings, source/provenance boundaries, and irregularities without inventing values | in progress | `COORDINATION.md`, `README.md`, `NFL_EXECUTIVE_SUMMARY.md`, `nfl-flagged.html` and verification commands only; peer namespace source/data files are read-only |
+| I-03 | Final integration check (internal-link/source-row checks, deterministic build, CI/Pages deploy); open and merge a PR from this assigned branch only if checks and publishable state are sound | pending | `COORDINATION.md`, assigned root integration files, `NFL_EXECUTIVE_SUMMARY.md`, `nfl-flagged.html` |
+| I-04 | Fix the audited Decision Console verdict-count defect (use filled suggestions, not decisive fixtures) and add a generated-page semantic regression assertion | authorized by the task; in progress | `nfl-decision-console/engine/build_site.py`, `nfl-decision-console/engine/verify_site.py`, generated `nfl-decision-console/pages/executive-summary.html`; `suggestions.json` is read-only input |
+
+I-04 is an explicit task-scope expansion requested by the user’s acceptance criteria: the audit identified “147 of 15 verdicts written” despite 0 of 15 filled suggestion verdicts. The correction is limited to the builder, its verifier, and the generated summary; no Decision Console data or unrelated pages are in scope.
 
 No other session claim is being taken over. Findings that need owner/legal/data-provider decisions will remain visibly flagged; a clean build is not treated as evidence of source truth or betting edge.
