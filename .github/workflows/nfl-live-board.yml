@@ -47,7 +47,15 @@ jobs:
                 % (s['corpus_games'], s['official_games_played'], s['pass'], s['checks'], s['identity_holds']))
           sys.exit(0 if s['fail'] == 0 and s['identity_holds'] else 1)
           PY
-      - name: Deterministic rebuild (no drift between committed and regenerated output)
+      - name: Deterministic rebuild — substantive, not byte-for-byte
+        # Floats go through libm (math.erf) and a seeded RNG, so a different C library can move the
+        # last bit of a p-value. Asserting integer/string/list identity and a 1e-9 float tolerance
+        # is the honest test; a byte diff would fail for a reason that is not a defect. Any
+        # tolerated drift is printed so it stays visible.
         run: |
-          git diff --stat -- nfl-live-board/data nfl-live-board/pages nfl-live-board/index.html
-          git diff --exit-code -- nfl-live-board/data
+          git diff --stat -- nfl-live-board/data nfl-live-board/pages nfl-live-board/index.html || true
+          python3 nfl-live-board/engine/substance.py
+      - name: Pages must be reproducible output, not hand edits
+        run: |
+          python3 nfl-live-board/build.py
+          git diff --exit-code -- nfl-live-board/pages nfl-live-board/index.html
