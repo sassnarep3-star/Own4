@@ -1,0 +1,98 @@
+{
+  "dataset": "nfl_board_irregularities",
+  "title": "Line-by-line review findings: what was checked, what did not hold, and where",
+  "session": "arena-7fc936d1-own4",
+  "built_utc": "2026-11-17",
+  "severity_vocabulary": {
+    "high": "a published number or claim could be wrong or is unlicensed to be right",
+    "medium": "an inconsistency between two published artefacts, or a stated blocker that is not real",
+    "low": "a presentation or vocabulary defect that misleads without changing a number"
+  },
+  "rows": [
+    {"id": "IR-01", "sev": "high", "finding": "Every price in the repository is third-party, including the 39-row 'opening and closing numbers' store that RQ-01 asks for",
+     "evidence": "nfl-market/data/market_odds_raw.json declares \"provider\": \"DraftKings, syndicated through ESPN's public odds endpoint\", \"third_party\": true, \"official\": false. The same flag appears on every nfl-market sources page row.",
+     "checked": "This session read the schedule, scores, game-centre, injury and depth pages on nfl.com looking for a line. None carries one. Q01 is closed.", "effect": "The store answers RQ-01 structurally and cannot answer it substantively until Q02 is decided.",
+     "recommend": "SG-01, SG-05, SG-13", "source_url": "https://www.nfl.com/schedules/", "sources": ["S04", "S12"]},
+
+    {"id": "IR-02", "sev": "medium", "finding": "One namespace's page banner says 'official sources only' while the page's market columns are filled from a third-party endpoint",
+     "evidence": "nfl-market/pages/origination.html carries the banner text 'official values read 2026-11-14'; nfl-market/data/derived/origination.json sets market_source_open to sports.core.api.espn.com on all 84 price rows.",
+     "checked": "Traced one row end to end: the own line is ours, the market open/close is ESPN via DraftKings, and the row does label its class.", "effect": "A reader who reads only the banner will believe the market numbers are official. The rows are honest; the banner is not.",
+     "recommend": "SG-05, SG-13", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/market_odds_raw.json", "sources": ["S04"]},
+
+    {"id": "IR-03", "sev": "medium", "finding": "A 'verified' depth source can be a week stale on the day it is read, and one club's chart carries no date at all",
+     "evidence": "packers.com prints 'Unofficial, Nov. 10, 2026' beneath the chart that was read on 2026-11-17. baltimoreravens.com prints the chart with no date anywhere on the page.",
+     "checked": "Read both pages in full this session. Confirmed the GB date string and the absence of one on BAL.", "effect": "Any depth feature built from these pages needs the printed date, not the read date. A register row without a date is the lookahead leak RQ-42 is written to prevent.",
+     "recommend": "SG-02, SG-12", "source_url": "https://www.packers.com/team/depth-chart", "sources": ["S07", "S08"]},
+
+    {"id": "IR-04", "sev": "low", "finding": "A published correlation reports n=137 against a 136-game settled corpus",
+     "evidence": "nfl-book/data/correlations.json CR-01 n=137; nfl-decision-desk/data/corpus/corpus_2026.json _meta settled_games=136; nfl-book/data/results_feed.json n_games=137.",
+     "checked": "Counted the corpus rows and the feed rows. The difference is real: the feed includes the Thursday Week-10 game that the corpus build did not settle at its build time.", "effect": "n is right for the feed and wrong for the corpus. A reader comparing the two numbers cannot tell which population r was computed on.",
+     "recommend": "SG-09", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/correlations.json", "sources": ["S04"]},
+
+    {"id": "IR-05", "sev": "high", "finding": "Four of five catalogue strategies are not pre-registered, so their numbers are not admissible on a leaderboard",
+     "evidence": "nfl-book/data/strategies.json holds 5 strategies; nfl-collector/data/prereg.json holds 1 registration (PREREG-002).",
+     "checked": "Listed both files and matched registration keys to strategy ids. Only one strategy has a hash-pinned registration that predates its window.", "effect": "The leaderboard's own rule forbids backtest numbers without a registration, so four strategies could never qualify however well they score.",
+     "recommend": "SG-14", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/prereg.json", "sources": ["S04"]},
+
+    {"id": "IR-06", "sev": "medium", "finding": "Three peer datasets publish 'cannot be sourced' as the reason for a blank that two official sources fill",
+     "evidence": "nfl-book/data/availability_graph.json and injury_surprise.json both state the actual-availability side is blank because no official inactive list or Game Book exists. This session read the official inactives article (12 games, 24 clubs) and the Game Book PDF link on two game centres.",
+     "checked": "Confirmed both sources exist, are official, and are dated. The Game Book for WAS@NYG is already parsed elsewhere in the same repository with 0 join collisions.", "effect": "The stated blocker is no longer true, so three requirements look BLOCKED when they are ANSWERABLE. This is the single most consequential finding in this review.",
+     "recommend": "SG-10", "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season", "sources": ["S02", "S10", "S11"]},
+
+    {"id": "IR-07", "sev": "medium", "finding": "The plan says 'use snap counts'; no official snap count exists on the page tested",
+     "evidence": "https://www.nfl.com/players/josh-jacobs-x3315/stats exposes Summary, Career, Logs, Splits and Situational. Columns are carries, yards, average, targets. There is no snap field.",
+     "checked": "Read the full player stats page and both of its stat tables. The Game Book PDF publishes participation instead, which is official and already parsed once.", "effect": "RQ-11 and RQ-54 cannot be satisfied as written. They can be satisfied by substitution, which is a decision rather than a discovery.",
+     "recommend": "SG-03", "source_url": "https://www.nfl.com/players/josh-jacobs-x3315/stats", "sources": ["S13"]},
+
+    {"id": "IR-08", "sev": "high", "finding": "The 'pre-registered backtest corpus' is not registered and carries an unauthorised price source",
+     "evidence": "corpus_2026.json _meta purpose says 'The pre-registered backtest corpus'; price_coverage_by_season names nflverse/nfldata as the source of closing prices for every season including 2026 (163 of 272 games priced).",
+     "checked": "Counted the settled games (136), confirmed the price source string on all 16 season rows, and spot-checked one settled game against its official page: NE 10 at SEA 13 on 2026-09-09, exact match.", "effect": "The results half is sound. The word 'pre-registered' is not backed by a registration hash in the file, and the price half depends on Q02.",
+     "recommend": "SG-01, SG-05", "source_url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1", "sources": ["S04", "S10"]},
+
+    {"id": "IR-09", "sev": "medium", "finding": "The price policy was decided by an agent under a no-manual-input instruction",
+     "evidence": "nfl-collector/data/decisions.json records DEC-1 = option B (prices declined), alongside nine other decisions, explicitly flagged as RC-08 for post-hoc owner review.",
+     "checked": "Read the decision register. Each of the ten decisions adopts a written recommendation that already existed in a peer workspace; none invents a new policy.", "effect": "The handling is transparent and reversible, but a policy with external consequences should be confirmed by its owner rather than inferred from 'do it yourself'.",
+     "recommend": "SG-05", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/decisions.json", "sources": ["S01"]},
+
+    {"id": "IR-10", "sev": "high", "finding": "A point-in-time ledger with one time point cannot prevent lookahead",
+     "evidence": "nfl-collector/data/captures/ledger.json holds 5 sealed entries, all under captures/2026-11-16/. The cron for Wed/Thu/Fri/Sun/Mon is written and has produced one date.",
+     "checked": "Listed the captures directory and counted distinct dates: one. Re-verified the chain head and entry count.", "effect": "The delta machinery has nothing to compare, so RQ-21's 'publish the delta, never the level' cannot be satisfied yet. The site currently publishes a level.",
+     "recommend": "SG-12, SG-04", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/ledger.json", "sources": ["S01"]},
+
+    {"id": "IR-11", "sev": "medium", "finding": "Three different club depth-chart publication formats, one of which is an image",
+     "evidence": "GB: HTML table with a jersey prefix and a printed date. BAL: HTML table, no date. HOU: a single image node, no table at all.",
+     "checked": "Read all three pages this session. Confirmed HOU's page renders 'Unofficial Depth Chart' followed by an image and no rows.", "effect": "A single league-wide parser cannot cover the clubs, and transcribing the image by eye would produce numbers with no audit trail - which the brief explicitly forbids.",
+     "recommend": "SG-02", "source_url": "https://www.houstontexans.com/team/depth-chart", "sources": ["S07", "S08", "S09"]},
+
+    {"id": "IR-12", "sev": "low", "finding": "A depth 'slot' can name the same player twice, or name nobody",
+     "evidence": "GB lists Kitan Oladapo at rank 2 in BOTH safety rows, so a naive count gives him two backup slots. BAL's K row is entirely empty, and its RB row lists three names.",
+     "checked": "Read both charts row by row. Recorded the duplicated player and the empty slot as they are printed.", "effect": "Counting 'number of starters out' from a chart parsed this way double-counts one player and silently omits the kicker - the census the brief cites (149 multi-name slots) cannot be reproduced from data that does not exist yet.",
+     "recommend": "SG-02", "source_url": "https://www.packers.com/team/depth-chart", "sources": ["S07", "S08"]},
+
+    {"id": "IR-13", "sev": "high", "finding": "The public/private split is declared and not built, while 347 row-level injury records are published",
+     "evidence": ".gitignore names private-store/; no such directory exists; nfl-collector README holds RF-18 open for the owner; the injury capture sits in the public tree.",
+     "checked": "Searched for a private store, found none, and counted the published injury rows in the committed capture.", "effect": "The repository is publishing exactly the row-level data the split was meant to hold back. Only the owner can decide whether that is acceptable.",
+     "recommend": "SG-06", "source_url": "https://www.nfl.com/legal/terms", "sources": ["S01"]},
+
+    {"id": "IR-14", "sev": "medium", "finding": "A peer register has no date column that can be filled for every club, so its own completion condition is unreachable",
+     "evidence": "depth_register.json requires 'date and source per row'; BAL prints no date on its chart. GB does.",
+     "checked": "Read both charts specifically looking for a date line.", "effect": "The requirement as written cannot be met for clubs that do not date their charts. The fix is to record 'undated' explicitly rather than to leave the column blank, which would be indistinguishable from unread.",
+     "recommend": "SG-02", "source_url": "https://www.baltimoreravens.com/team/depth-chart", "sources": ["S08", "S07"]},
+
+    {"id": "IR-15", "sev": "low", "finding": "The committed capture's club-section count is lower than the number of clubs that appear in the live report",
+     "evidence": "The committed capture records club_sections=28 and game_sections=14; the live page read this session lists a table for both clubs in all 12 Sunday games plus Thursday and Monday.",
+     "checked": "Compared the capture's counts object against the structure of the live page read across chunks 0-6. The capture note states that all 8 chunks were read in one pass; this session read 7 of 8, so the difference may be a chunk-boundary artefact rather than a defect.",
+     "effect": "Cannot be settled without a re-capture of the full page. Recorded rather than 'fixed', because asserting the capture is wrong without reading its source would be the same defect in reverse.",
+     "recommend": "SG-04", "source_url": "https://www.nfl.com/injuries/", "sources": ["S01"]},
+
+    {"id": "IR-16", "sev": "low", "finding": "'Holdout seasons' is implemented as holdout weeks inside one season",
+     "evidence": "holdout_split.json holds 4 rows: train Weeks 1-9, validation and a final holdout of Week 11 held prospectively.",
+     "checked": "Read the split and compared it to the brief's wording. No second season of results exists in the tree.", "effect": "Weaker than asked: a week-level holdout shares season-level structure (rule changes, weather, roster churn) across the boundary. It is the only option in one season, and the page says so.",
+     "recommend": "—", "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json", "sources": ["S04"]},
+
+    {"id": "IR-17", "sev": "low", "finding": "An IR placement referenced by a peer flag is not in the November reserve-list capture",
+     "evidence": "The brief and peer flag VR-17 reference Lamar Jackson going on injured reserve; the November 2026 reserve list read this session (25 rows) does not contain him. The live injury report also does not list him.",
+     "checked": "Read both chunks of the November reserve list in full and searched the injury report for the name. Baltimore's current depth chart does not list him at QB either.", "effect": "His absence is consistent with an IR placement, but the placement itself is not evidenced by any page read this session. Left as a gap instead of being asserted.",
+     "recommend": "SG-09", "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11", "sources": ["S03", "S01", "S08"]}
+  ]
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decision readiness · NFL Decision Board</title>
+<meta name="description" content="NFL decision-readiness board: one row per requirement, its blocking gate and the number that clears it.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="index.html">NFL Decision Board</a>
+  <div class="tag">Verified against official pages · 2026-11-17</div>
+  <nav aria-label="Site sections"><div class="grp">Decision board</div><a class="nav active" href="index.html">Decision readiness (start here)</a><a class="nav" href="pages/executive-summary.html">Executive summary</a><a class="nav" href="pages/readiness.html">Readiness: every requirement line</a><a class="nav" href="pages/questions.html">Questions, information, answers</a><a class="nav" href="pages/suggestions.html">Suggestions — decide before building</a><a class="nav" href="pages/evidence.html">What was verified this session</a><a class="nav" href="pages/repo-review.html">Repo review &amp; irregularities</a><a class="nav" href="pages/flagged.html">&#9873; Flagged for review</a><a class="nav" href="pages/sources.html">Source register</a></nav>
+  <a class="flag" href="pages/flagged.html">&#9873; 17 findings for review</a>
+</aside>
+<main class="main" id="main">
+<div class="crumb"><a href="index.html">Decision board</a></div>
+
+<h1>The NFL decision board</h1>
+<p class="lede">Every instruction in the brief is a row. Each row carries three things a reviewer can act on:
+whether an artefact exists, <em>which gate</em> stops it, and <em>the number</em> that would clear it. Nothing
+on this site is a promise about a betting edge. The honest headline is that the results machinery is sound,
+the availability data is better than the site admits, and no price can be official because the league
+publishes none.</p>
+
+<div class="panel warn"><strong>The one finding that matters most.</strong>
+Two peer datasets state that the "who actually started" side of the availability graph cannot be sourced,
+and leave it blank. That is no longer true. This session read the official Week 10 inactives article
+(12 games, both clubs each) and the official Game Book link published on every game centre. Both are
+dated, both are official, and one Game Book is already parsed elsewhere in this repository with zero
+join collisions against the injury report. Three requirement lines move from blocked to answerable the
+moment that is acted on — see <a href="pages/suggestions.html">SG-10</a>.</div>
+
+<div class="cards"><div class="card "><b>70</b><span>requirement lines tracked</span><em>one row per instruction in the brief</em></div><div class="card pass"><b>22</b><span>met — artefact exists and was re-checked</span><em></em></div><div class="card warn"><b>35</b><span>partial — exists for a fraction of the corpus</span><em></em></div><div class="card fail"><b>8</b><span>blocked — the decisive number cannot exist yet</span><em></em></div><div class="card blank"><b>5</b><span>not started</span><em></em></div><div class="card "><b>28</b><span>questions with a discovery route</span><em></em></div><div class="card pass"><b>10</b><span>questions answered by an official read</span><em></em></div><div class="card fail"><b>7</b><span>questions only you can settle</span><em></em></div><div class="card warn"><b>15</b><span>suggestions awaiting a verdict</span><em>blank by rule</em></div><div class="card fail"><b>17</b><span>review findings</span><em></em></div><div class="card "><b>16</b><span>official pages read this session</span><em></em></div></div>
+
+<h2>Start here</h2>
+<div class="tiles"><a class="tile" href="pages/readiness.html"><b>Decision readiness</b><span>One row per requirement line: its state, the gate that blocks it, and the number that would clear it.</span><em>Open the table &#8594;</em></a><a class="tile" href="pages/questions.html"><b>Questions, information and answers</b><span>What must be settled before a decision, what we have, what we lack, and the route that discovers it.</span><em>Read the register &#8594;</em></a><a class="tile" href="pages/suggestions.html"><b>Suggestions — decide first</b><span>Every proposal with an evidence link and a blank verdict. Nothing is implemented until you choose.</span><em>Review the board &#8594;</em></a><a class="tile" href="pages/evidence.html"><b>What was verified today</b><span>The official pages read this session, what each one confirmed, and the three brief claims that are no longer true.</span><em>See the evidence &#8594;</em></a><a class="tile" href="pages/repo-review.html"><b>Repo review</b><span>Line-by-line findings with the file and the official page that settles each one.</span><em>Read the findings &#8594;</em></a><a class="tile" href="pages/flagged.html"><b>&#9873; Flagged for review</b><span>Everything that could not be confirmed from an official source, with the reason and the source that is missing.</span><em>Review the flags &#8594;</em></a></div>
+
+<h2>The gate that blocks the most lines</h2>
+<p>Of the 70 requirement lines, <strong>17</strong> are stopped by
+<code>G-NONE</code> — nothing blocks it. That is the highest-leverage thing to fix: it is not a data
+collection problem and not a modelling problem, it is a decision.</p>
+
+<div class="panel"><h3>What G-NONE means, and what would clear it</h3>
+<p>No official price source exists, because the NFL publishes no lines. Five requirement lines ask for a residual, a vig decomposition, a closing line value or a leaderboard stage that escrows one. None of them can be built from an official number, because there is no official number to build from. What would clear the group is a written policy that says which sources are permitted, on what usage basis, and which of the resulting numbers may be republished. A provisional policy already exists in the tree and is flagged for your review; until you accept or reverse it, every one of these lines stays blocked on a decision rather than on data.</p>
+<p class="small">Blocked lines: <code>RQ-18, RQ-20, RQ-27, RQ-28, RQ-35, RQ-39, RQ-42, RQ-58</code></p></div>
+
+<h2>Why this board exists</h2>
+<p>The repository holds dozens of NFL research workspaces built by earlier sessions. Several publish
+overlapping requirement, question and suggestion registers, and several state a blocker that has since
+stopped being true. This board does one job: it puts the requirement, the blocker and the clearing number
+on one line so a decision can be taken without reading every namespace. It links to the analysis
+namespaces instead of copying their tables — the fragmentation itself is a question for you (Q18, SG-11).</p>
+
+<div class="panel"><h3>How to read a row</h3>
+<p><strong>State</strong> is the least useful column. <strong>Gate</strong> tells you what kind of obstacle
+it is — a missing official source, a rights decision, a sample that is too small, or nothing at all.
+<strong>The number that would clear it</strong> is the only column that tells you when to come back.</p>
+<p><strong>Not started</strong> is 5 lines: RQ-11 (Do not model depth from jersey order; model it from playing time), RQ-54 (Use snap counts as the starter proxy when the depth chart is unavailable), RQ-56 (Stadium roof/surface and NWS hourly wind/precipitation overlay), RQ-64 (Archive weekly injury reports for past seasons), RQ-66 (2026 kickoff and declared onside-kick regime priors filter). None of them is blocked by research; they are
+blocked by nobody having started.</p></div>
+
+<footer>
+<p><strong>NFL Decision Board</strong> — analytical research, not wagering advice. Every row links to the
+official page it was read from or to the repository artefact it was counted from. Values that could not be
+confirmed from an official source are blank, and every one of them is on the
+<a href="pages/flagged.html">Flagged for review</a> page.</p>
+<p>Built 2026-11-17 by session <code>arena-7fc936d1-own4</code> from the registers in <code>nfl-board/data/</code>.
+Every count on this site is computed at build time. Responsible gambling:
+National Problem Gambling Helpline 1-800-MY-RESET (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">NCPG &#8599;</a></p>
+</footer>
+</main>
+</div>
+</body>
+</html>
