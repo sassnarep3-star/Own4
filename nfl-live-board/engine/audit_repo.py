@@ -108,8 +108,12 @@ def scan(ns):
         "pages": pages, "data_rows": rows, "rows_without_any_link": unsourced,
         "rows_without_an_official_nfl_link": no_official,
         "pages_referencing_localhost_or_preview_host": localhost_refs,
-        "external_hosts": dict(https_hosts.most_common(12)),
-        "non_official_external_hosts": dict(nonofficial_hosts.most_common(8)),
+        # top-N with alphabetical tie-break: Counter.most_common breaks ties by walk order,
+        # which differs across filesystems/CI checkouts (was failing the substance gate)
+        "external_hosts": dict(sorted(https_hosts.items(),
+                                      key=lambda kv: (-kv[1], kv[0]))[:12]),
+        "non_official_external_hosts": dict(sorted(nonofficial_hosts.items(),
+                                                   key=lambda kv: (-kv[1], kv[0]))[:8]),
         "n_non_official_external_hosts": sum(nonofficial_hosts.values()),
         "n_official_external_links": sum(v for h, v in https_hosts.items()
                                           if any((h[4:] if h.startswith('www.') else h) == x or
