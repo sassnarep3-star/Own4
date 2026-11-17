@@ -4955,3 +4955,22 @@ merge over it, and `nfl-verify verify` is green on `main`, so leaving it red wou
 merge to break it. The change is 30 lines, is confined to the namespace that owns the defect, and reverses
 the gate from "red for every sibling" to "red only when the data is actually stale". The owning session
 should review it; if they prefer another mechanism, the pin set is one constant.
+
+### Follow-up: the pin had to be tightened once more (and why this is logged, not hidden)
+
+The first version of the fix counted the base set *plus* any newer sibling. While that was in review,
+`nfl-live-board` merged (PR #149) and the published number moved 36 → 37 — the same defect one level down,
+because a count that includes "everything not in my base list" still changes when a sibling appears.
+
+Final behaviour in `nfl-verify/engine/readiness.py`:
+
+- `count_nfl_namespaces()` returns the **pinned registration set only** (35 named trees).
+- A new sibling namespace does not move a published number — verified by creating `nfl-zz-probe` and
+  confirming `readiness.json` was byte-identical.
+- A base namespace disappearing fails the gate — verified by moving `nfl-lines` away and reading
+  `readiness: the pinned base names 1 namespace(s) that no longer exist: nfl-lines`.
+- The published numbers therefore change once, to 35 (and 34 peer trees), which is the truth for the set
+  the site registers.
+
+The generated diff this produces is 7 lines in `nfl-verify/data/readiness.json` plus one page line, and it
+is committed rather than left for CI to discover.

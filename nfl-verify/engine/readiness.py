@@ -42,9 +42,11 @@ def count_nfl_namespaces():
     wrong by the time the page rendered, which is precisely the staleness defect
     this site flags in other people's work.
     """
-    return BASE_NFL_NAMESPACES + sum(1 for d in os.listdir(REPO_ROOT)
-                                     if d.startswith("nfl") and os.path.isdir(os.path.join(REPO_ROOT, d))
-                                     and d not in BASE_NAMESPACES)
+    # Count ONLY the registered base set. Counting later siblings too would still move a
+    # published number on every sibling merge (it moved from 36 to 37 once already while this
+    # fix was in review), which is the same defect one level down. A sibling being added is not
+    # news about these rows; a base namespace disappearing IS, and verify.py fails on that.
+    return BASE_NFL_NAMESPACES
 OB = "https://github.com/sassnarep3-star/Own4/blob/main/"
 NFL = "https://www.nfl.com/"
 

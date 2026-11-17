@@ -294,7 +294,7 @@ def check_data():
                       % (len(missing), ", ".join(missing)))
     declared = ready["measurements_used"]["n_nfl_namespaces"]
     if declared != actual_ns:
-        errors.append(f"readiness: declares {declared} nfl* trees, repository has {actual_ns}")
+        errors.append(f"readiness: declares {declared} nfl* trees, the pinned registration set is {actual_ns}")
     for r in rows:
         for field in ("clearing_number", "ask", "blocking_gate"):
             m = re.search(r"\b(\d+) nfl\* ", r[field])
