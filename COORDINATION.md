@@ -4852,3 +4852,16 @@ RF-06 official name-spelling variant · RF-07 stale standings file naming. None 
 None taken. Files committed: `nfl-req-review/**` (new namespace), `.github/workflows/nfl-req-review.yml`,
 the append-only NAV group in `verification/build.py`, the regenerated `index.html`/`verified/*.html`,
 and this append-only COORDINATION.md record. No other session's namespace, data file or page was edited.
+
+## 2026-11-17 — R-01..R-08 COMPLETE · session `arena/ca159db5-own4` · PR #152 MERGED
+
+| item | result |
+|---|---|
+| PR | https://github.com/sassnarep3-star/Own4/pull/152 — **MERGED** at 2026-11-17T01:01:38Z, merge commit `2c04f4bc5305188e81911caa755ac74510a0c62b` |
+| R-02 reads | 10 official pages read live 2026-11-17: standings, Week-11 schedule, Week-11 injury URL (→ Week-10, not yet published), Week-10 injury report ×8 chunks, Week-10 inactives, transactions, November reserve list, MIN@SF game centre, Ravens depth-chart 404, 2025 reg1 archive |
+| R-03 register | 73 rows re-verified; advanced E06 (blocked→partial), E14 + E21 (not_started→partial), E16 (not_started→partial); E25/E26 re-confirmed met. Counts: met 27, partial 42, blocked 2, not_started 1, in_progress 1 |
+| R-04..R-06 site | `nfl-req-review/` live: landing + decision-readiness table (one row per requirement: status, gate, clearing number, source), verification & reads, flagged (RF-01..RF-07), sources. Verifier PASS; CI workflow added |
+| R-07 integration | additive NAV group "NFL Requirement Review · 2026-11-17"; `index.html` + `verified/*.html` regenerated from the merged `verification/build.py`; root verifier PASS (14 pages, 346 sourced rows) |
+| R-08 deploy | GitHub Pages: status **built**, source branch `main`, path `/` → https://sassnarep3-star.github.io/Own4/nfl-req-review/ (landing + decision-readiness table fetched and read after deploy) |
+| rebases | two `git pull --rebase` cycles; conflicts on the append-only `COORDINATION.md` and the generated root pages, all resolved as unions (COORDINATION sections kept from both sides; root pages regenerated from the merged `verification/build.py`) — no peer work discarded |
+| flagged (non-blocking) | RF-01 six uncorroborated Out designations · RF-02 Week-11 report not yet published · RF-03 stale Friday capture · RF-04 roof/surface blank · RF-05 depth-chart 404 · RF-06 name-spelling variant · RF-07 stale standings naming — published on `nfl-req-review/pages/flagged.html` with official source links |
