@@ -1,7 +1,7 @@
 {
  "dataset": "nfl_book_requirements",
  "title": "Requirements traceability: every brief requirement -> status -> blocking gate -> clearing number",
- "built_utc": "2026-11-15",
+ "built_utc": "2026-11-17",
  "session": "arena/20f55d17-own4",
  "statuses": {
   "met": "implemented and verified",
@@ -10,8 +10,8 @@
  },
  "n_rows": 69,
  "counts": {
-  "met": 31,
-  "partial": 31,
+  "met": 30,
+  "partial": 32,
   "blocked": 7
  },
  "rows": [
@@ -55,10 +55,10 @@
    "id": "R05",
    "requirement": "Separate signal from staking in the leaderboard so lucky staking cannot mask bad signal",
    "status": "met",
-   "evidence": "leaderboard ranks by signal tier first; staking reported separately; A1 gates points",
+   "evidence": "prospective signal qualification and staking are separate; no historical score is ranked, staking cannot promote, and rewards remain gated by verified prices",
    "blocking_gate": "none",
    "clearing_number": "implemented",
-   "source_url": "https://www.nfl.com/"
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/leaderboard.html"
   },
   {
    "id": "R06",
@@ -91,10 +91,48 @@
    "id": "R09",
    "requirement": "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
    "status": "met",
-   "evidence": "strategies committed before first run; leaderboard publishes signal tier, not backtest ROI as ranking",
+   "evidence": "registry commit cc35310 is the parent of first backtest-data commit 35b0db2; verifier checks both leaderboard datasets and pages for prospective-only fields and historical-metric leakage; historical evaluation stays on research pages",
    "blocking_gate": "none",
-   "clearing_number": "implemented",
-   "source_url": "https://github.com/sassnarep3-star/Own4"
+   "clearing_number": "prospective score fields remain blank until a frozen prospective sample is graded",
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json",
+   "evidence_links": [
+    {
+     "label": "pre-registration commit",
+     "url": "https://github.com/sassnarep3-star/Own4/commit/cc353101f8cf1deab2712a2e85f34f9b8f7b93c0"
+    },
+    {
+     "label": "first backtest-data commit",
+     "url": "https://github.com/sassnarep3-star/Own4/commit/35b0db2e0ded6281fd617e3f7c54abc5a51cb19c"
+    },
+    {
+     "label": "primary generator",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/backtest.py"
+    },
+    {
+     "label": "primary dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json"
+    },
+    {
+     "label": "primary page",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/leaderboard.html"
+    },
+    {
+     "label": "two-stage generator",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/expand.py"
+    },
+    {
+     "label": "two-stage dataset",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
+    },
+    {
+     "label": "two-stage page",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/two-stage-leaderboard.html"
+    },
+    {
+     "label": "regression verifier",
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/verify.py"
+    }
+   ]
   },
   {
    "id": "R10",
@@ -342,10 +380,10 @@
   {
    "id": "R37",
    "requirement": "Rank with proper scores and uncertainty, not win rate",
-   "status": "met",
-   "evidence": "Brier skill score + 95% CI + game-cluster note + multiplicity adjustment published",
-   "blocking_gate": "none",
-   "clearing_number": "implemented",
+   "status": "partial",
+   "evidence": "prospective Brier/skill, uncertainty, game-cluster and multiplicity fields are defined; no prospective sample has been graded, so scores and qualification remain blank",
+   "blocking_gate": "no graded prospective holdout",
+   "clearing_number": "a frozen prospective sample with proper score, uncertainty, cluster and multiplicity reporting",
    "source_url": "https://scikit-learn.org/stable/modules/model_evaluation.html"
   },
   {
@@ -514,7 +552,7 @@
    "id": "R56",
    "requirement": "Add a control baseline (random picks; favorites only) to every leaderboard run",
    "status": "met",
-   "evidence": "control_baseline.json: random + favorites-only baselines computed on the leaderboard sample",
+   "evidence": "control_baseline.json: historical random + favorites-only baselines are published on the Removal of luck research page and excluded from prospective leaderboards",
    "blocking_gate": "none",
    "clearing_number": "implemented",
    "source_url": "https://www.nfl.com/standings/league/2026/REG"
@@ -532,10 +570,10 @@
    "id": "R58",
    "requirement": "Two-Stage Skill Leaderboard (proper-score qualification -> prospective CLV/ROI escrow)",
    "status": "met",
-   "evidence": "two_stage_leaderboard.json: Stage 1 proper-score qualification + Stage 2 escrow structure",
+   "evidence": "two_stage_leaderboard.json: prospective proper-score, uncertainty and multiplicity fields plus a price-gated CLV/ROI escrow are defined; scores remain pending until a prospective sample is graded",
    "blocking_gate": "none",
    "clearing_number": "implemented",
-   "source_url": "https://www.nfl.com/"
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
   },
   {
    "id": "R59",
@@ -586,10 +624,10 @@
    "id": "R64",
    "requirement": "Reject: ranking strategies by season-long ROI",
    "status": "met",
-   "evidence": "policy: ranking is by signal tier / proper score, never raw season ROI",
+   "evidence": "prospective rankings wait for pre-registered signal and proper-score gates; historical ROI stays on research pages and never determines rank",
    "blocking_gate": "none",
    "clearing_number": "implemented",
-   "source_url": "https://github.com/sassnarep3-star/Own4"
+   "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
   },
   {
    "id": "R65",

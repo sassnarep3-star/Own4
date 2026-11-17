@@ -61,8 +61,8 @@ REQUIREMENTS = [
   "partial", "own-lines page publishes all three columns; market + difference blank (no official price source)",
   "FB-01", "an official market price source", "https://www.nfl.com/"),
  ("R05", "Separate signal from staking in the leaderboard so lucky staking cannot mask bad signal",
-  "met", "leaderboard ranks by signal tier first; staking reported separately; A1 gates points",
-  "none", "implemented", "https://www.nfl.com/"),
+  "met", "prospective signal qualification and staking are separate; no historical score is ranked, staking cannot promote, and rewards remain gated by verified prices",
+  "none", "implemented", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/leaderboard.html"),
  ("R06", "Track the depth of the replacement, not just the fact of a replacement",
   "partial", "depth_replacements publishes depth ONLY where official text states it (SEA QB 1st backup)",
   "FB-07", "an official depth chart for all 32 clubs", "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again"),
@@ -73,8 +73,8 @@ REQUIREMENTS = [
   "met", "demotion_eval.json: D1 four auto-firing conditions, live→paper, no human approval",
   "none", "implemented", "https://www.nfl.com/"),
  ("R09", "Pre-register every strategy; forbid backtest numbers from appearing on the leaderboard",
-  "met", "strategies committed before first run; leaderboard publishes signal tier, not backtest ROI as ranking",
-  "none", "implemented", "https://github.com/sassnarep3-star/Own4"),
+  "met", "registry commit cc35310 is the parent of first backtest-data commit 35b0db2; verifier checks both leaderboard datasets and pages for prospective-only fields and historical-metric leakage; historical evaluation stays on research pages",
+  "none", "prospective score fields remain blank until a frozen prospective sample is graded", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"),
  ("R10", "Build the availability graph as a first-class dataset (expected starter vs actual starter)",
   "partial", "availability_graph.json: expected-starter side published; actual-starter blank (no official snap/game-book source)",
   "FB-07", "official snap counts or NFL Game Books", "https://www.nfl.com/injuries/"),
@@ -157,8 +157,8 @@ REQUIREMENTS = [
   "met", "two_stage_leaderboard.json: divisions for singles / game parlay / SGP / prop combo",
   "none", "implemented", "https://www.nfl.com/"),
  ("R37", "Rank with proper scores and uncertainty, not win rate",
-  "met", "Brier skill score + 95% CI + game-cluster note + multiplicity adjustment published",
-  "none", "implemented", "https://scikit-learn.org/stable/modules/model_evaluation.html"),
+  "partial", "prospective Brier/skill, uncertainty, game-cluster and multiplicity fields are defined; no prospective sample has been graded, so scores and qualification remain blank",
+  "no graded prospective holdout", "a frozen prospective sample with proper score, uncertainty, cluster and multiplicity reporting", "https://scikit-learn.org/stable/modules/model_evaluation.html"),
  ("R38", "Add durable snapshot storage and alerts",
   "partial", "pit_ledger.json (durable hashes) + drift_alarms.json (freshness monitor) built; store host not provisioned",
   "not provisioned", "durable store + freshness monitor host", "https://github.com/sassnarep3-star/Own4"),
@@ -214,14 +214,14 @@ REQUIREMENTS = [
   "blocked", "no official snap-count source; proxy fields blank + flagged",
   "no official source", "official snap counts", "https://www.nfl.com/"),
  ("R56", "Add a control baseline (random picks; favorites only) to every leaderboard run",
-  "met", "control_baseline.json: random + favorites-only baselines computed on the leaderboard sample",
+  "met", "control_baseline.json: historical random + favorites-only baselines are published on the Removal of luck research page and excluded from prospective leaderboards",
   "none", "implemented", "https://www.nfl.com/standings/league/2026/REG"),
  ("R57", "Stadium Roof/Surface & NWS Hourly Wind/Precipitation Overlay",
   "blocked", "no NWS grid or stadium-roof source captured; fields blank + flagged",
   "no source", "NWS forecast grids + stadium roof designations", "https://www.weather.gov/"),
  ("R58", "Two-Stage Skill Leaderboard (proper-score qualification -> prospective CLV/ROI escrow)",
-  "met", "two_stage_leaderboard.json: Stage 1 proper-score qualification + Stage 2 escrow structure",
-  "none", "implemented", "https://www.nfl.com/"),
+  "met", "two_stage_leaderboard.json: prospective proper-score, uncertainty and multiplicity fields plus a price-gated CLV/ROI escrow are defined; scores remain pending until a prospective sample is graded",
+  "none", "implemented", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"),
  ("R59", "Vig-Free Market Consensus vs Originated Fair-Line Decomposition View",
   "partial", "vig_free_decomposition.json structure built; market/vig/divergence blank (FB-01)",
   "FB-01", "an official market price source", "https://www.nfl.com/"),
@@ -238,8 +238,8 @@ REQUIREMENTS = [
   "partial", "reserve-list field added to roster_sweep; value blank (no official reserve source)",
   "no official source", "official reserve-list capture", "https://www.nfl.com/"),
  ("R64", "Reject: ranking strategies by season-long ROI",
-  "met", "policy: ranking is by signal tier / proper score, never raw season ROI",
-  "none", "implemented", "https://github.com/sassnarep3-star/Own4"),
+  "met", "prospective rankings wait for pre-registered signal and proper-score gates; historical ROI stays on research pages and never determines rank",
+  "none", "implemented", "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"),
  ("R65", "Archive weekly injury reports for past seasons",
   "blocked", "no official archive captured; fields blank + flagged",
   "no archive", "official historical injury archive", "https://www.nfl.com/injuries/"),
@@ -261,16 +261,38 @@ REQUIREMENTS = [
 def build_requirements():
     rows = []
     for rid, req, status, ev, gate, clear, url in REQUIREMENTS:
-        rows.append({"id": rid, "requirement": req, "status": status,
-                     "evidence": ev, "blocking_gate": gate,
-                     "clearing_number": clear, "source_url": url})
+        row = {"id": rid, "requirement": req, "status": status,
+               "evidence": ev, "blocking_gate": gate,
+               "clearing_number": clear, "source_url": url}
+        if rid == "R09":
+            row["evidence_links"] = [
+                {"label": "pre-registration commit", "url":
+                 "https://github.com/sassnarep3-star/Own4/commit/cc353101f8cf1deab2712a2e85f34f9b8f7b93c0"},
+                {"label": "first backtest-data commit", "url":
+                 "https://github.com/sassnarep3-star/Own4/commit/35b0db2e0ded6281fd617e3f7c54abc5a51cb19c"},
+                {"label": "primary generator", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/backtest.py"},
+                {"label": "primary dataset", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json"},
+                {"label": "primary page", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/leaderboard.html"},
+                {"label": "two-stage generator", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/expand.py"},
+                {"label": "two-stage dataset", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"},
+                {"label": "two-stage page", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/two-stage-leaderboard.html"},
+                {"label": "regression verifier", "url":
+                 "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/verify.py"},
+            ]
+        rows.append(row)
     counts = {"met": sum(1 for r in rows if r["status"] == "met"),
               "partial": sum(1 for r in rows if r["status"] == "partial"),
               "blocked": sum(1 for r in rows if r["status"] == "blocked")}
     save("requirements.json", {
         "dataset": "nfl_book_requirements",
         "title": "Requirements traceability: every brief requirement -> status -> blocking gate -> clearing number",
-        "built_utc": BUILT,
+        "built_utc": "2026-11-17",
         "session": "arena/20f55d17-own4",
         "statuses": {"met": "implemented and verified",
                      "partial": "implemented but limited by a documented evidence gap",
@@ -296,8 +318,9 @@ def build_removal_of_luck():
         placebo = (staking.get("g4_placebo") or {}) or {}
         # Decomposition: skill is price-independent (accuracy vs coin flip + placebo);
         # luck is the residual variance in staking ROI that signal does not explain.
-        verdict = ("luck removed: ranked on signal tier only; staking ROI reported "
-                   "separately and never used to rank")
+        verdict = ("historical diagnostic only: signal and staking results are separate; "
+                   "these retrospective values do not rank or qualify the current "
+                   "prospective leaderboard")
         rows.append({
             "id": "RL-" + strat, "strategy": strat,
             "signal_accuracy": acc, "accuracy_ci95": ci,
@@ -311,20 +334,21 @@ def build_removal_of_luck():
                              "luck = staking-ROI variance not explained by signal",
             "verdict": verdict, "source_url": NFL})
     panel = [
-        ["Ranking key", "signal tier (A>B>C>NA), never staking ROI", "removes lucky-staking bias"],
+        ["Historical comparison", "signal tier, not staking ROI, was used for the retrospective comparison", "research only; current prospective leaderboard is pending"],
         ["Points gate", "A1: points require verified prices (G7); G7 blocked (FB-01)", "0 of 1,000 paid on assumed price"],
-        ["Signal metric", "accuracy vs coin-flip 0.500 with 95% CI", "price-independent skill"],
-        ["Luck control", "500-draw placebo on staking ROI", "S1 p<0.002 passes; S2/S3 fail"],
+        ["Historical signal metric", "accuracy vs coin-flip 0.500 with 95% CI", "price-independent research result"],
+        ["Historical luck control", "500-draw placebo on staking ROI", "reported for research; not a prospective qualification"],
         ["Staking caveat", "all ROI at ASSUMED -110 (FB-02)", "not an achievable market return"],
     ]
     save("removal_of_luck.json", {
         "dataset": "nfl_book_removal_of_luck",
-        "title": "Removal-of-luck panel: skill vs luck decomposed, ranked on skill only",
+        "title": "Removal-of-luck panel: historical skill vs luck decomposition; no leaderboard ranking",
         "built_utc": BUILT, "session": "arena/20f55d17-own4",
-        "method": "Signal (accuracy vs 0.500, placebo) is separated from staking "
-                  "(assumed-price ROI). The leaderboard ranks on signal tier; staking "
-                  "is reported but never promotes a strategy and pays no points on "
-                  "assumed prices (amendment A1).",
+        "method": "Historical signal (accuracy vs 0.500, placebo) is separated from "
+                  "assumed-price staking ROI on this research page. These retrospective "
+                  "results are excluded from the prospective leaderboard; future ranking "
+                  "requires a frozen prospective proper-score sample and verified prices "
+                  "before any reward (amendment A1).",
         "panel": panel, "rows": rows})
 
 
@@ -551,15 +575,6 @@ def build_fixture_context():
 # ---------------------------------------------------------------------------
 # Two-stage skill leaderboard + control baseline
 # ---------------------------------------------------------------------------
-def _brier(forecasts):
-    """Mean squared error of P(home) vs home-win indicator (lower = better)."""
-    se = 0.0
-    for f in forecasts:
-        outcome = 1 if f["home_pts"] > f["away_pts"] else 0
-        se += (f["p_home"] - outcome) ** 2
-    return round(se / len(forecasts), 4)
-
-
 def _ci_binom(n, k, z=1.96):
     if n == 0:
         return None
@@ -569,56 +584,65 @@ def _ci_binom(n, k, z=1.96):
 
 
 def build_two_stage():
-    bt = load("backtest.json")
-    fc = bt["forecasts"]
-    br = _brier(fc)
-    weeks = sorted({f["week"] for f in fc})
-    n_games = len(fc)
-    n_weeks = len(weeks)
-    # per-strategy divisions
-    div_map = {"S1": "singles", "S2": "singles", "S3": "singles",
-               "S4": "game_parlay", "S5": "prop_combo"}
-    stage1 = []
-    for r in load("leaderboard.json")["rows"]:
-        strat = r["strategy"]
-        m = bt["metrics"].get(strat, {})
-        acc = m.get("accuracy")
-        n = m.get("n_decided")
-        if isinstance(acc, float):
-            k = int(round(acc * n))
-            ci = _ci_binom(n, k)
-            skill = round((acc - 0.5) ** 2, 4)  # squared skill gap
-        else:
-            k, ci, skill = None, None, None
+    """Build a prospective-only leaderboard schema.
+
+    This page is a competition surface, not a historical-results report. The
+    retrospective backtest remains in backtest.json and the research pages, but
+    its metrics are deliberately not loaded into this dataset.
+    """
+    strategies = load("strategies.json")["strategies"]
+    registration_url = (
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    )
+    div_map = {"single": "singles", "parlay": "game_parlay",
+               "same_game_parlay": "same_game_parlay", "prop_combo": "prop_combo"}
+    stage1, stage2 = [], []
+    for strategy in strategies:
+        sid = strategy["id"]
+        division = div_map.get(strategy.get("type"), "unclassified")
+        blocked = bool(strategy.get("blocked_reason"))
         stage1.append({
-            "id": "TS1-" + strat, "strategy": strat,
-            "division": div_map.get(strat, "unclassified"),
-            "brier_score": br if strat in ("S1", "S2", "S3") else None,
-            "accuracy": acc, "n": n, "ci95": ci,
-            "squared_skill_gap": skill,
-            "game_cluster_lb": "cluster-robust lower bound pending (games within a week "
-                               "are correlated); naive CI published above",
-            "multiplicity_adj": f"Bonferroni over {n_weeks} trial-blocks applied to gate p",
-            "qualification": ("qualified" if m.get("g2_signal_pass")
-                              else "not qualified"),
-            "source_url": NFL})
-    stage2 = []
-    for r in load("leaderboard.json")["rows"]:
+            "id": "TS1-" + sid,
+            "strategy": sid,
+            "division": division,
+            "prospective_brier_score": None,
+            "prospective_skill_score": None,
+            "prospective_n": None,
+            "prospective_ci95": None,
+            "game_cluster_lower_bound": None,
+            "multiplicity_adjusted_status": "not evaluated — prospective sample pending",
+            "qualification": ("blocked — prop inputs unavailable (FB-05)"
+                              if blocked else
+                              "pending — prospective proper-score evaluation required"),
+            "source_url": "https://www.nfl.com/standings/league/2026/REG",
+            "registration_url": registration_url,
+        })
         stage2.append({
-            "strategy": r["strategy"], "division": div_map.get(r["strategy"], "unclassified"),
-            "prospective_clv": None, "prospective_roi": None,
-            "escrow_status": "escrow open — no verified prices (FB-01); CLV/ROI withheld",
-            "source_url": NFL})
+            "strategy": sid,
+            "division": division,
+            "prospective_clv": None,
+            "prospective_roi": None,
+            "prospective_n": None,
+            "escrow_status": ("blocked — prop inputs unavailable (FB-05)"
+                              if blocked else
+                              "escrow open — no verified market-price source (FB-01)"),
+            "source_url": "https://www.nfl.com/standings/league/2026/REG",
+            "registration_url": registration_url,
+        })
     save("two_stage_leaderboard.json", {
-        "dataset": "nfl_book_two_stage_leaderboard",
-        "title": "Two-Stage Skill Leaderboard: proper-score qualification -> prospective CLV/ROI escrow",
-        "built_utc": BUILT, "session": "arena/20f55d17-own4",
-        "method": "Stage 1 ranks by proper-score skill (Brier, squared skill gap, CI, "
-                  "cluster lower bound, multiplicity adjustment). Stage 2 holds prospective "
-                  "CLV/ROI in escrow until verified prices exist. Divisions: singles, "
-                  "game parlay, same-game parlay, prop combo.",
-        "model_brier": br, "n_forecasts": n_games, "n_weeks": n_weeks,
-        "stage1": stage1, "stage2": stage2})
+        "dataset": "nfl_book_two_stage_prospective_leaderboard",
+        "title": "Two-stage prospective skill leaderboard; backtest metrics excluded",
+        "built_utc": "2026-11-17",
+        "prospective_status": "PENDING",
+        "retrospective_metrics_included": False,
+        "method": "Stage 1 may qualify a strategy only from a frozen prospective "
+                  "proper-score sample with uncertainty, game-cluster adjustment and "
+                  "multiplicity control. Stage 2 holds prospective CLV/ROI in escrow "
+                  "until verified prices exist. Retrospective backtest values are kept "
+                  "on research pages and never copied into this leaderboard dataset.",
+        "stage1": stage1,
+        "stage2": stage2,
+    })
 
 
 def build_control_baseline():

@@ -8,7 +8,7 @@ Signal metrics are price-independent. Staking metrics use the ASSUMED -110
 price declared in data/strategies.json and are labelled as assumed everywhere.
 """
 import json, math, random
-from common import load, save
+from common import load, save, OFFICIAL_STANDINGS_URL
 import model as M
 
 WILSON_Z = 1.96
@@ -367,70 +367,53 @@ def main():
     }
     save("backtest.json", out)
 
-    # ---------------- leaderboard: signal separated from staking -------------
+    # ---------------- prospective-only leaderboard --------------------------
+    # Historical results remain in backtest.json and the research pages. They
+    # must never be copied into leaderboard.json or ranked as prospective skill.
+    registry = load("strategies.json")
+    registration_url = (
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    )
+    division = {"single": "singles", "parlay": "game_parlay",
+                "same_game_parlay": "same_game_parlay", "prop_combo": "prop_combo"}
     rows = []
-    for sid in ("S1", "S2", "S3", "S4", "S5"):
-        m = metrics[sid]
-        if m.get("status") == "BLOCKED":
-            rows.append({"strategy": sid, "signal_tier": "NA", "staking_tier": "NA",
-                         "eligible": False, "points": 0,
-                         "reason": m["blocked_reason"]})
-            continue
-        sig_pass = m.get("g2_signal_pass", False)
-        n_sig_ok = m.get("g1_signal_n_pass", False)
-        if sig_pass and n_sig_ok:
-            tier = "A" if m["g2_direction"] == "above" else "C"
-        elif n_sig_ok:
-            tier = "B"  # enough data, not significant
-        else:
-            tier = "NA"
-        st = m.get("staking", {})
-        roi = st.get("roi")
-        g5 = st.get("g5_pass")
-        g4 = st.get("g4_pass")
-        g1s = m.get("g1_staking_n_pass", False)
-        staking_tier = ("pass" if (g5 and g4 and g1s) else
-                        ("fail" if (g5 is False or g4 is False) else "pending"))
-        # Amendment A1 (strategies.json): points also require G7 (verified price
-        # basis). G7 is permanently blocked, so eligible is False at publication.
-        g7_price_verified = False
-        eligible = bool(tier == "A" and staking_tier == "pass" and g7_price_verified)
+    for strategy in registry["strategies"]:
+        is_blocked = bool(strategy.get("blocked_reason"))
         rows.append({
-            "strategy": sid,
-            "signal_tier": tier,
-            "signal_metric": m.get("accuracy") if sid != "S4" else m.get("both_legs_rate"),
-            "signal_ci95": m.get("accuracy_ci95") if sid != "S4" else m.get("rate_ci95"),
-            "g2": sig_pass, "g1_signal": n_sig_ok,
-            "staking_roi": roi,
-            "staking_roi_ci95": st.get("roi_ci95"),
-            "staking_n": m.get("n_decided"),
-            "staking_price": st.get("price"),
-            "g4_placebo_p": (st.get("g4_placebo") or {}).get("placebo_p"),
-            "g5": g5, "g1_staking": g1s,
-            "g7_price_verified": g7_price_verified,
-            "posthoc_better_record_accuracy":
-                (m.get("extra") or {}).get("posthoc_better_record_accuracy"),
-            "staking_tier": staking_tier,
-            "eligible": eligible,
-            "points": 1000 if eligible else 0,
-            "note": "signal tier ranks first; staking can confirm but never promote a "
-                    "strategy whose signal tier is not A (lucky staking cannot mask "
-                    "a bad signal)",
+            "strategy": strategy["id"],
+            "name": strategy["name"],
+            "division": division.get(strategy.get("type"), "unclassified"),
+            "status": "PAPER",
+            "signal_status": ("BLOCKED — prop inputs unavailable (FB-05)"
+                              if is_blocked else
+                              "PENDING — prospective sample required"),
+            "prospective_signal_score": None,
+            "prospective_signal_n": None,
+            "staking_status": ("BLOCKED — prop inputs unavailable (FB-05)"
+                               if is_blocked else
+                               "WITHHELD — verified price source required (FB-01)"),
+            "prospective_clv": None,
+            "prospective_roi": None,
+            "prospective_staking_n": None,
+            "eligible": False,
+            "points": 0,
+            "source_url": OFFICIAL_STANDINGS_URL,
+            "registration_url": registration_url,
         })
-    order = {"A": 0, "B": 1, "C": 2, "NA": 3}
-    rows.sort(key=lambda r: (order[r["signal_tier"]], -(r.get("signal_metric") or 0)))
     save("leaderboard.json", {
-        "dataset": "nfl_book_leaderboard",
-        "title": "Leaderboard with signal and staking kept in separate columns",
-        "built_utc": "2026-11-14",
-        "rule": "Ranking key = signal tier (A>B>C>NA) then signal metric. Staking "
-                "columns are reported alongside but cannot lift a non-A strategy "
-                "above an A strategy, and points require signal tier A AND "
-                "staking gates G1+G4+G5 AND G7 (price basis verified). G7 is "
-                "blocked (no official price source), so points = 0 at "
-                "publication (amendment A1 in data/strategies.json).",
+        "dataset": "nfl_book_prospective_leaderboard",
+        "title": "Prospective-only leaderboard; retrospective backtests excluded",
+        "built_utc": "2026-11-17",
+        "evaluation_status": "PENDING",
+        "retrospective_metrics_included": False,
+        "rule": "Leaderboard scores are prospective only. Historical backtest metrics are "
+                "stored in backtest.json and the research pages, never in this dataset or "
+                "the leaderboard page. Signal and staking remain separate. Signal scores "
+                "require a pre-registered prospective evaluation; staking scores require "
+                "a verified price source. Until then score fields are blank, every strategy "
+                "remains PAPER, and no reward is eligible.",
         "points_total": 1000,
-        "points_awarded": sum(r["points"] for r in rows),
+        "points_awarded": 0,
         "rows": rows})
 
     # demotion-gate evaluation (D1): any LIVE strategy would be checked here
