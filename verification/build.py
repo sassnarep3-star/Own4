@@ -523,6 +523,19 @@ NAV = [
         ("nfl-decision-gaps/pages/sources.html", "Sources read this session", "legacy"),
         ("nfl-decision-gaps/pages/flagged.html", "⚑ Decision Gaps — flagged for review", "legacy"),
     ]),
+    # Added 2026-11-17 by session arena/ca159db5-own4 (additive; superset-only edit).
+    # The Requirement Re-Verification round re-read the official sources live and
+    # publishes the decision-readiness table (one row per requirement: status, the
+    # gate that blocks it, the number that would clear it), the verification reads,
+    # the flagged irregularities and the source register. Appended at the end of
+    # NAV; no existing entry is reordered, relabelled or removed.
+    ("NFL Requirement Review · 2026-11-17", [
+        ("nfl-req-review/index.html", "Requirement review — start here", "legacy"),
+        ("nfl-req-review/pages/requirements.html", "Decision-readiness table", "legacy"),
+        ("nfl-req-review/pages/verification.html", "Verification &amp; reads", "legacy"),
+        ("nfl-req-review/pages/flagged.html", "⚑ Requirement Review — flagged for review", "legacy"),
+        ("nfl-req-review/pages/sources.html", "Sources", "legacy"),
+    ]),
 ]
 
 # The NFL research group title used to be a hand-typed count and drifted twice: it read

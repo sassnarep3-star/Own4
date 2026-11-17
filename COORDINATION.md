@@ -4771,3 +4771,84 @@ standing brief is "no manual input — work to finish all tasks in this session"
 | conflicts absorbed | 5 concurrent merges of `main` during the session, all conflicts in `COORDINATION.md`, all resolved by keeping **both** sides. No peer file edited; `nfl-live-board/engine/sync_main.sh` records the procedure |
 | sources verified in-session 2026-11-17 | standings ×2 chunks · week-10 scores ×2 · week-9 scores · week-11 schedule ×3 · IND@HOU game centre · Week-10 injury report (chunks 0 and 3) · reserve list ×2 · `reg11` (serves reg10 — Week 11 not published) |
 | flagged (non-blocking) | F-01..F-14 on `nfl-live-board/pages/flagged.html`, each with an official source link |
+
+---
+
+## Session `arena/ca159db5-own4` — claim + task board (2026-11-17 UTC)
+
+**Branch (fixed for this session):** `arena/ca159db5-own4`, branched from `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`
+(current `main`). Session ID: `arena/ca159db5-own4` (a.k.a. `ca159db5`).
+**Start state:** clean tree, 0 ahead / 0 behind `origin/main` at claim time. No other session is active;
+the most recent completions on the board are `arena/013190b4-own4` (PR #142 merged) and
+`arena-170de4f2-own4`.
+
+**Scope claimed (exclusive):** a fresh line-by-line re-verification round of the 73-row consolidated
+requirement register (`nfl-consolidated/data/requirements.json`, built 2026-11-15 by
+`arena/507da9a4-own4`) against official sources read live in this session, published as a new
+namespace **`nfl-req-review/`** (decision-readiness table, official-read captures, flagged
+irregularities, source register), its generator/verifier/CI, and one **append-only** NAV group in the
+shared `verification/build.py`. No other session's namespace, data file or page is edited.
+
+| ID | Task | Status | Files touched (claimed scope) |
+|----|------|--------|------------------------------|
+| R-01 | Claim scope, read board, confirm no peer claims this namespace | done | `COORDINATION.md` (append-only) |
+| R-02 | Official-source re-reads, live 2026-11-17: standings, Week-11 schedule, Week-11 injury report, transactions/reserve list, inactives, game centre + game-book route, venue/roof; structured rows + sha256 + timestamps only (no raw HTML committed) | in progress | `nfl-req-review/data/official_reads_2026_11_17.json` |
+| R-03 | Line-by-line verdict update of the 73-row requirement register against this session's reads; advance E14/E21 where the official join now supports an empirical rate with n; leave E06/E13/F04/F06 blocked with gate + clearing number | in progress | `nfl-req-review/data/requirements_2026_11_17.json` |
+| R-04 | Decision-readiness table: one row per requirement — status, the gate that blocks it, the number that would clear it, source link | in progress | `nfl-req-review/pages/requirements.html` |
+| R-05 | Static site: landing + subpages (requirements, verification, flagged, sources), every row source-linked, unverifiable blank + flagged | in progress | `nfl-req-review/index.html`, `nfl-req-review/pages/*.html`, `nfl-req-review/engine/build.py` |
+| R-06 | Verifier (0 broken links, 0 localhost, every table row sourced, determinism) + CI workflow | in progress | `nfl-req-review/engine/verify.py`, `.github/workflows/nfl-req-review.yml` |
+| R-07 | Additive root-nav group in `verification/build.py` (append-only), regenerate `index.html` + `verified/*.html` | pending | `verification/build.py`, generated files |
+| R-08 | Final integration for this branch: PR → main → merge without waiting → GitHub Pages deploy confirmation → record PR link + merge result here | pending | — |
+
+**Rules this session holds:** official sources only; no value published unless read from an official
+source this session (or reproduced verbatim from a file already committed here, cited to that file);
+unverifiable values rendered blank + flagged; every data row carries a source link; small frequent
+commits; `git pull --rebase` before every push; conflicts resolved as unions, never by discarding a
+peer's work; no raw nfl.com HTML committed (RF-18 stays open for the owner); counts computed at build
+time, never typed into prose.
+
+## Session `arena/ca159db5-own4` — R-02..R-07 completion record (2026-11-17 UTC)
+
+| ID | Task | Status | Notes |
+|----|------|--------|-------|
+| R-01 | Claim scope | done | claimed at `79e834f`, pushed immediately |
+| R-02 | Official-source re-reads | done | 10 official pages read live 2026-11-17 (standings, Week-11 schedule, Week-11 injury URL → Week-10, Week-10 injury report ×8 chunks, Week-10 inactives, transactions, November reserve list, MIN@SF game centre, Ravens depth-chart 404, 2025 reg1 archive) |
+| R-03 | Register verdict update | done | 73 rows re-verified; advanced: E06 (blocked→partial), E14 (not_started→partial), E16 (not_started→partial), E21 (not_started→partial); re-confirmed met: E25, E26. Counts: met 27, partial 42, blocked 2, not_started 1, in_progress 1 |
+| R-04 | Decision-readiness table | done | `nfl-req-review/pages/requirements.html` — one row per requirement: status, gate that blocks it, number that clears it, source link |
+| R-05 | Static site | done | 5 pages (landing, requirements, verification, flagged, sources); every table row source-linked; blanks flagged |
+| R-06 | Verifier + CI | done | `nfl-req-review/engine/verify.py` PASS (links, source coverage, placeholders, typed-count guard, determinism); `.github/workflows/nfl-req-review.yml` |
+| R-07 | Additive root-nav group | done | appended at end of NAV in `verification/build.py`; `index.html` + `verified/*.html` regenerated; root verifier PASS (14 pages, 346 sourced rows) |
+
+### Verification performed (all against official sources read live 2026-11-17)
+
+- **Standings** — 32 teams through Week 10 re-read; the committed `nfl-arena` week10-named file
+  holds Week-9-era records (RF-07, flagged, non-blocking).
+- **Week-11 schedule** — 14 fixtures + 6 byes; all 14 venues transcribed from official pages
+  (13 from the schedule page's own stadium links, MIN@SF from the game centre Game Info:
+  Estadio Banorte, Mexico City). Roof/surface: no official field on the pages read → blank + RF-04.
+- **Week-10 injury report** — final designations re-read in full: 346 rows, 28 clubs, 14 fixtures;
+  70 Out / 90 Questionable / 11 Doubtful / 175 blank. The committed 2026-11-13 capture (326 / 14 /
+  11 / 0 / 301) is a Friday point-in-time snapshot; the delta is published (RF-03).
+- **Designation reliability (E14/E21)** — final report joined to the official Week-10 inactive list
+  (147 entries, 24 Sunday clubs): Out DNP 58/64 = 90.6% (Wilson 95% CI 81.0–95.6); Doubtful
+  4/10 = 40.0% (CI 16.8–68.7); Questionable 14/82 = 17.1% (CI 10.5–26.6). Six Out designations
+  uncorroborated by either list → RF-01. Name variant Tyrion/Tyroin Ingram-Dawkins matched via
+  surname+initial → RF-06.
+- **Transactions / reserve list** — 12 November trades, 25 Reserve/Injured moves (incl. Malik
+  Willis, MIA, 11/10) re-captured from the official hub.
+- **Depth-chart route (E13)** — `nfl.com/teams/baltimore-ravens/depth-chart` re-confirmed 404;
+  snap counts exist only inside the official Game Book PDF. E13 stays blocked.
+- **Past-season archive (E16)** — `nfl.com/injuries/league/2025/reg1` loads; archive available on
+  the official site, not yet built in-repo.
+
+### Irregularities (published on `nfl-req-review/pages/flagged.html` with source links)
+
+RF-01 six uncorroborated Out designations · RF-02 Week-11 report not yet published · RF-03 stale
+Friday capture of the Week-10 tables · RF-04 roof/surface blank · RF-05 depth-chart 404 ·
+RF-06 official name-spelling variant · RF-07 stale standings file naming. None block the merge.
+
+### Scope exception log
+
+None taken. Files committed: `nfl-req-review/**` (new namespace), `.github/workflows/nfl-req-review.yml`,
+the append-only NAV group in `verification/build.py`, the regenerated `index.html`/`verified/*.html`,
+and this append-only COORDINATION.md record. No other session's namespace, data file or page was edited.

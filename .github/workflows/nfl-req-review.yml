@@ -1,0 +1,28 @@
+name: nfl-req-review verify
+on:
+  push:
+    paths: ['nfl-req-review/**', '.github/workflows/nfl-req-review.yml']
+  pull_request:
+    paths: ['nfl-req-review/**', '.github/workflows/nfl-req-review.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild captures, register and pages
+        working-directory: nfl-req-review/engine
+        run: |
+          python3 build_data.py
+          python3 build_requirements.py
+          python3 build.py
+      - name: Verify links, source coverage, placeholders, determinism
+        working-directory: nfl-req-review/engine
+        run: python3 verify.py
+      - name: Determinism gate (rebuild must not change committed files)
+        run: git diff --exit-code -- nfl-req-review/pages nfl-req-review/index.html nfl-req-review/assets nfl-req-review/data
