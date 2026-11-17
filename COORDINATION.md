@@ -4685,3 +4685,14 @@ other session's files were edited.
 
 Rules held: official sources only; unverifiable values blank + flagged; no raw nfl.com HTML committed (structured
 rows + sha256 + timestamps only); every data row carries a source link; `git pull --rebase` before every push.
+## Session `arena/513780b4-own4` — integrated NFL publication preflight (claim, 2026-11-17 UTC)
+
+The current platform-pinned branch is `arena/513780b4-own4` at `ba30819` (the checked-out `main`/`origin/main` base); the requested per-task branch naming is not available in this harness, so all work remains on the supplied branch. Initial tree was clean. No live claim for these completed workspaces was found; this is a bounded post-merge audit/fix, not a replacement of their published research.
+
+| Task | Status | Owner | Exclusive file scope |
+|---|---|---|---|
+| P-01 | in progress | `arena/513780b4-own4` | `nfl-verify/data/derived.json`, `nfl-verify/data/readiness.json`, generated `nfl-verify/pages/decision-readiness.html`, `nfl-verify/pages/verification.html` |
+| P-02 | in progress | `arena/513780b4-own4` | `nfl-price-snapshot/verify.py` |
+| P-03 | in progress | `arena/513780b4-own4` | `COORDINATION.md` (append-only) |
+
+P-01 is to reconcile the stale readiness report against the current checked-in corpus and the repo's actual NFL namespace count, then pass its determinism gate. P-02 is to make the existing local-link check understand the stylesheet's valid page-relative `../assets/style.css` paths, preserving resolution checks rather than suppressing asset errors. No raw data, shared root navigation, or peer output outside the listed scope will be changed. Initial checks found the Decision Console clean; `nfl-price-snapshot/verify.py` reports 15 false broken-link errors on existing CSS assets; `nfl-verify` reports stale 28-vs-current namespace counts and a non-deterministic rebuild, which `derive.py`/`readiness.py`/`build_site.py` resolve into four generated files in the P-01 scope.
