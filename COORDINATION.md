@@ -4903,3 +4903,20 @@ instead of editing their file.
 | Club depth chart | https://www.packers.com/team/depth-chart | parsed table, dated "Unofficial, Nov. 10, 2026" |
 | nfl.com depth chart route | https://www.nfl.com/teams/baltimore-ravens/depth-chart | **404 — route does not exist** |
 | Week 10 schedule | https://www.nfl.com/schedules/ | finals for the Week 10 slate |
+
+### Rebase record (2026-11-17)
+
+`origin/main` advanced by 11 commits during this session (PR #145 `ea67aee`, PR #147 `4cb6f8d`, plus two
+peer coordination records). `git rebase origin/main` conflicted once, in `COORDINATION.md` only — an
+append-only collision at the two sessions' claim blocks.
+
+**Resolution: union, not a choice.** The peer block (67 lines, session `arena/1d297093-own4`) was kept
+verbatim first, then this session's block (33 lines). No peer line was dropped and no peer file was
+touched. After the rebase both generators were re-run and both verifiers re-passed:
+
+- `verification/build.py` + `verification/verify_site.py` — 14 pages, 346 sourced rows, all local links resolve
+- `nfl-board/engine/build.py` + `verify.py` — 9 pages, 70 requirement lines, every row source-linked,
+  no prefilled verdict, no typed count
+
+`git diff --exit-code -- index.html verified` is clean after the rebuild, so the root nav is deterministic
+with the peer's new `nfl-verify` pages present.
