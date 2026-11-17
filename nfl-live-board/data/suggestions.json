@@ -1,0 +1,88 @@
+{
+ "dataset": "nfl_live_board_suggestions",
+ "title": "Suggestions to review before anything is implemented",
+ "built_utc": "2026-11-17",
+ "policy": "Nothing on this page has been implemented. Each row names the decision it asks for and what it would cost. The verdict column is blank on purpose - it is the owner's.",
+ "rows": [
+  {
+   "id": "SG-01",
+   "title": "Buy or license one price source and store it hashed, before any ROI number is ever published",
+   "why": "Four of the six open requirements depend on it, and an assumed price has already produced a non-achievable +28.5% in a peer namespace.",
+   "asks": "A decision between a licensed feed, a personal-use archive, and no prices at all.",
+   "cost": "Licence fee, or permanent acceptance that ROI stays blank.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-02",
+   "title": "Make game books the participation source and parse all 14 Week-10 fixtures",
+   "why": "Starters, actives and participation are the one official record that answers 'who actually played'. One fixture is parsed today.",
+   "asks": "Approve the parsing cost. It is mechanical once the PDF route is fixed.",
+   "cost": "Roughly one parsing pass per fixture, then it runs unattended.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-03",
+   "title": "Adopt the dated reserve list as a required input to every availability view",
+   "why": "Without it, a player on IR looks healthy because he is absent from the injury report. Two such cases are already visible.",
+   "asks": "Approve adding it to the daily capture.",
+   "cost": "One extra page per day.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-04",
+   "title": "Publish the Week-11 lines as a dated forecast and score them in public after the games",
+   "why": "A forecast that is not recorded before kickoff cannot be scored honestly afterwards. The 13 rows exist; recording them costs nothing.",
+   "asks": "Confirm the pre-registration and the scoring rule are the ones you want.",
+   "cost": "None.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-05",
+   "title": "Keep ROI off the leaderboard until stage 2 can be scored",
+   "why": "Every ROI in this repository, in every namespace, is either blank or built on an assumed price. Ranking on it would reward the assumption.",
+   "asks": "Confirm that a blank stage-2 column is acceptable for now.",
+   "cost": "The leaderboard looks emptier. That is the honest state.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-06",
+   "title": "Consolidate the duplicate results feeds into one owner",
+   "why": "Two feeds agree today. They are edited by different sessions and will not necessarily agree next week.",
+   "asks": "Name the canonical feed.",
+   "cost": "One migration.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-07",
+   "title": "Move to per-session coordination files",
+   "why": "Every concurrent merge in this session conflicted in the one shared append-only file. Resolution works but costs a human read each time.",
+   "asks": "Approve a change to the coordination convention.",
+   "cost": "A convention change.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-08",
+   "title": "Treat 'Questionable' as unknown until the play rate is measured, and say so in the UI",
+   "why": "The league publishes the word without a probability. A UI that colours it red implies a meaning nobody has measured here.",
+   "asks": "Confirm that a blank is preferable to a plausible-looking number.",
+   "cost": "Less colour on the page.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-09",
+   "title": "Add a second independent model and publish both totals until one wins",
+   "why": "The brief asks for this. One estimator cannot be compared with itself, and two estimators turn a claim into a test.",
+   "asks": "Approve building a second estimator.",
+   "cost": "One more engine, same data.",
+   "verdict": ""
+  },
+  {
+   "id": "SG-10",
+   "title": "Record every published number with the exact page and read date in a machine-readable ledger",
+   "why": "The strongest claim this repository can make is that every number can be traced. It is currently true per page, not per number.",
+   "asks": "Approve a per-number provenance ledger.",
+   "cost": "Bookkeeping on every build.",
+   "verdict": ""
+  }
+ ]
+}

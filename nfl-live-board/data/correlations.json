@@ -1,0 +1,139 @@
+{
+ "dataset": "nfl_live_board_correlations",
+ "title": "Correlations computed from officially sourced numbers, with n published",
+ "built_utc": "2026-11-17",
+ "method": "Pearson r; 95% interval by Fisher z (stated as a floor on width because games inside a week are not fully independent); two-sided permutation p with 10000 shuffles and seed 20261117.",
+ "policy": "a blank r always carries its reason in the same row; no value is estimated",
+ "n_computed": 4,
+ "n_blank": 4,
+ "rows": [
+  {
+   "id": "C01",
+   "pair": "game margin ~ game total",
+   "definition": "(home - away) points versus (home + away) points, one pair per game",
+   "kind": "computed",
+   "n": 149,
+   "r": -0.1408,
+   "ci95_fisher": [
+    -0.2949,
+    0.0204
+   ],
+   "p_permutation": 0.0862,
+   "source": "https://www.nfl.com/standings/league/2026/REG",
+   "blank_reason": "",
+   "note": "the size of the relationship that makes a same-game parlay of side and total dependent. It is measured here so it never has to be assumed."
+  },
+  {
+   "id": "C02",
+   "pair": "model fair total ~ actual total",
+   "definition": "the pre-kickoff model total versus the total actually scored, walk-forward weeks only",
+   "kind": "computed",
+   "n": 116,
+   "r": 0.0501,
+   "ci95_fisher": [
+    -0.1334,
+    0.2303
+   ],
+   "p_permutation": 0.5919,
+   "source": "https://www.nfl.com/scores/2026/week-10",
+   "blank_reason": "",
+   "note": "a high value is necessary but not sufficient for a useful totals model; it is not a market test."
+  },
+  {
+   "id": "C03",
+   "pair": "model fair margin ~ actual margin",
+   "definition": "the pre-kickoff model margin (home perspective) versus the actual margin",
+   "kind": "computed",
+   "n": 116,
+   "r": 0.3522,
+   "ci95_fisher": [
+    0.1815,
+    0.5023
+   ],
+   "p_permutation": 0.0002,
+   "source": "https://www.nfl.com/scores/2026/week-10",
+   "blank_reason": "",
+   "note": "this is the side model's own skill, measured on outcomes it never saw."
+  },
+  {
+   "id": "C04",
+   "pair": "rest differential (home - away, days) ~ home margin",
+   "definition": "rest days computed from the official dates of consecutive fixtures (a schedule fact, not an estimate), versus the game margin",
+   "kind": "computed",
+   "n": 133,
+   "r": 0.3286,
+   "ci95_fisher": [
+    0.1677,
+    0.4724
+   ],
+   "p_permutation": 0.0003,
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "blank_reason": "",
+   "note": "rest is derived from published dates only. The first appearance of each club is dropped because its prior game is outside the corpus."
+  },
+  {
+   "id": "C05",
+   "pair": "neutral site ~ home margin",
+   "kind": "insufficient n",
+   "definition": "whether playing at a neutral site changes the home margin",
+   "n": 2,
+   "r": null,
+   "ci95_fisher": [
+    null,
+    null
+   ],
+   "p_permutation": null,
+   "source": "https://www.nfl.com/scores/2026/week-10",
+   "blank_reason": "only 2 corpus games are venue-verified as neutral from the official pages this session read (the Week-9 Madrid and Week-10 Munich fixtures). The inherited feed flags more, but a peer flag is not a verification, so those are carried separately in the corpus and are not used here. A correlation on n=2 is undefined, so the row is blank.",
+   "note": ""
+  },
+  {
+   "id": "C06",
+   "pair": "closing line move ~ result",
+   "kind": "blocked",
+   "definition": "closing line move ~ result",
+   "n": null,
+   "r": null,
+   "ci95_fisher": [
+    null,
+    null
+   ],
+   "p_permutation": null,
+   "source": "https://www.nfl.com/",
+   "blank_reason": "needs a closing price on both sides; no official price source exists (F-01)",
+   "note": ""
+  },
+  {
+   "id": "C07",
+   "pair": "market total ~ model total",
+   "kind": "blocked",
+   "definition": "market total ~ model total",
+   "n": null,
+   "r": null,
+   "ci95_fisher": [
+    null,
+    null
+   ],
+   "p_permutation": null,
+   "source": "https://www.nfl.com/",
+   "blank_reason": "needs a market total; no official price source exists (F-01)",
+   "note": ""
+  },
+  {
+   "id": "C08",
+   "pair": "injury designation ~ result",
+   "kind": "blocked",
+   "definition": "whether a Questionable or Doubtful designation predicts the game result",
+   "n": null,
+   "r": null,
+   "ci95_fisher": [
+    null,
+    null
+   ],
+   "p_permutation": null,
+   "source": "https://www.nfl.com/injuries/league/2026/reg10",
+   "blank_reason": "one dated availability snapshot this season; a correlation needs many weeks of designations joined to results (F-04)",
+   "note": ""
+  }
+ ]
+}

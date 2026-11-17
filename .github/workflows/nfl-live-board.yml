@@ -1,0 +1,61 @@
+name: nfl-live-board — rebuild and gate
+
+# Regenerates every artefact from checked-in code and fails on any rule this workspace claims:
+# a table row without an official source link, a broken internal link, a runtime reference to a
+# local/preview host, a corpus that stops reconciling to the official standings, a pre-registration
+# hash that changed after registration, a blank without a reason, or a deterministic rebuild that
+# is not byte-identical.
+on:
+  push:
+    paths: ['nfl-live-board/**', '.github/workflows/nfl-live-board.yml']
+  pull_request:
+    paths: ['nfl-live-board/**', '.github/workflows/nfl-live-board.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Rebuild every artefact and the site
+        run: |
+          python3 nfl-live-board/engine/reconcile.py
+          python3 nfl-live-board/engine/originate.py
+          python3 nfl-live-board/engine/leaderboard.py
+          python3 nfl-live-board/engine/correlations.py
+          python3 nfl-live-board/engine/availability.py
+          python3 nfl-live-board/engine/context.py
+          python3 nfl-live-board/engine/requirements.py
+          python3 nfl-live-board/engine/audit_repo.py
+          python3 nfl-live-board/build.py
+      - name: Gate
+        run: python3 nfl-live-board/verify.py
+      - name: Corpus must reconcile exactly
+        run: |
+          python3 - <<'PY'
+          import json, sys
+          s = json.load(open('nfl-live-board/data/corpus_2026.json'))['summary']
+          print("corpus=%d official=%d checks=%d/%d identity=%s"
+                % (s['corpus_games'], s['official_games_played'], s['pass'], s['checks'], s['identity_holds']))
+          sys.exit(0 if s['fail'] == 0 and s['identity_holds'] else 1)
+          PY
+      - name: Deterministic rebuild — substantive, not byte-for-byte
+        # Floats go through libm (math.erf) and a seeded RNG, so a different C library can move the
+        # last bit of a p-value. Asserting integer/string/list identity and a 1e-9 float tolerance
+        # is the honest test; a byte diff would fail for a reason that is not a defect. Any
+        # tolerated drift is printed so it stays visible.
+        run: |
+          git diff --stat -- nfl-live-board/data nfl-live-board/pages nfl-live-board/index.html || true
+          python3 nfl-live-board/engine/substance.py
+      - name: Pages must be reproducible output, not hand edits
+        run: |
+          python3 nfl-live-board/build.py
+          git diff --exit-code -- nfl-live-board/pages nfl-live-board/index.html

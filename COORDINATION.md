@@ -4721,3 +4721,53 @@ P-01 is to reconcile the stale readiness report against the current checked-in c
 - All four PR checks passed (`audit`, `validate`, `nfl-verify verify`, `nfl-command verify`).
 - GitHub Pages deployment run 43990002633 completed successfully for merge commit `ea67aee`; Pages API status `built`, source `main:/`, HTTPS enforced.
 - Post-deploy live read with a cache-busting URL confirmed `nfl-verify/pages/verification.html` shows X-04 as pass: 347 matched identities, 1,388 field cells, zero mismatches. The price-snapshot dashboard remains live at https://sassnarep3-star.github.io/Own4/nfl-price-snapshot/pages/index.html.
+---
+
+## Claim · session `arena/925796f5-own4` (2026-11-17 UTC)
+
+Branch (fixed): `arena/925796f5-own4`, base `ba30819` (current `main`, PR #142 merge).
+
+**Why a new namespace.** 36 NFL namespaces already exist and each holds a partial answer. This session's
+brief is the *whole* requirement list arriving at once (mark-origination of every market, price snapshots,
+verified results feed, proper-score competition, availability/depth evidence, decision-readiness table,
+suggestions, questions). Re-opening any one of those namespaces would collide with its owner's claim.
+So this session builds **one integration surface** and an **independent verification of the live state**,
+and links — never rewrites — the 36 existing namespaces.
+
+| # | Task | Status | Owner session | Files touched (scope) |
+|---|------|--------|---------------|------------------------|
+| L-01 | Claim board; survey the NFL namespaces; confirm no live claim overlaps | done | arena/925796f5-own4 | `COORDINATION.md` (this block only) |
+| L-02 | Independent official capture: Week 11 schedule + all Week 1–10 finals, with per-game official URL | done | arena/925796f5-own4 | `nfl-live-board/data/` |
+| L-03 | Recompute the results feed; cross-check `nfl-book` and `nfl-command` feeds game by game | done | arena/925796f5-own4 | `nfl-live-board/engine/` |
+| L-04 | Requirement register: every line of the brief → status, blocker gate, number that clears it | done | arena/925796f5-own4 | `nfl-live-board/data/requirements.json` |
+| L-05 | Origination: side, then total, then moneyline; fair vs market vs difference as separate columns | done | arena/925796f5-own4 | `nfl-live-board/data/origination_*.json` |
+| L-06 | Two-stage leaderboard (proper-score qualification → CLV escrow); luck-removal panel | done | arena/925796f5-own4 | `nfl-live-board/data/leaderboard.json` |
+| L-07 | Availability/depth evidence: 32-team view, replacement depth, surprise-not-level, correlations with n | done | arena/925796f5-own4 | `nfl-live-board/data/availability_*.json` |
+| L-08 | Repo-wide line-by-line audit; contradictions and stale claims | done | arena/925796f5-own4 | `nfl-live-board/data/audit_*.json` |
+| L-09 | Questions / information-gaps / suggestions board (owner reviews before any change) | done | arena/925796f5-own4 | `nfl-live-board/data/{questions,suggestions}.json` |
+| L-10 | Site: landing dashboard + category subpages + Flagged-for-Review; root nav entry | done | arena/925796f5-own4 | `nfl-live-board/**`, `verification/build.py` (NAV only) |
+| L-11 | Integration: PR → merge → Pages deploy confirmation | in progress | arena/925796f5-own4 | `COORDINATION.md` |
+
+Rules held: official sources only; every table row carries an official source link; unconfirmable values
+stay blank and are flagged; no peer namespace is edited; small frequent commits; `git pull --rebase` before
+every push. Tasks L-02..L-11 are claimed by this session in the same commit that creates them, because the
+standing brief is "no manual input — work to finish all tasks in this session".
+
+## 2026-11-17 — L-01..L-10 COMPLETE · session `arena/925796f5-own4` · `nfl-live-board`
+
+| item | result |
+|---|---|
+| namespace | `nfl-live-board/` — 16 pages (dashboard + 15 category pages), one stylesheet, no scripts, no external assets |
+| corpus | **149 games** verified: weeks 1-9 inherited (the brief's "136-game log") + 13 Week-10 finals transcribed live. **192/192** reconciliation checks against the official standings, and the games-played identity is exact (sum(W+L+T)/2 = 149 = corpus size) |
+| the brief's "136-game log" | it is weeks 1-9 exactly. The committed 137-row feed held **1 of the 13** Week-10 finals, so a backtest announced on that feed would have silently omitted Week 10 (F-02, A-05) |
+| origination | 13 Week-11 fixtures, side → total → moneyline, the ML **derived** from the side; every forecast stores p plus inputs. Market line and difference blank — no official price source (F-01) |
+| competition | 5 strategies pre-registered (`prereg/PREREG-LB.md`, sha256 pinned and re-checked by V5). **0 qualify, 0 of 1000 points.** S1 Brier skill +0.1253, week-cluster 90% CI [0.0143, 0.2384], unadjusted p 0.033 → **Holm-adjusted p 0.147 across 5 trials** |
+| luck | 5 channels closed, 1 open and named; control floor **computed** (0.035, from two luck-only strategies scored in the same run) |
+| availability | 96 rows / 8 clubs re-read live: **96 agree, 0 disagree**. Reserve list transcribed (27 IR moves). Surprise rows blank by construction (1 snapshot this season). Depth columns blank (no official depth chart, no snap-count table) |
+| requirements | **70 rows**: 33 met, 11 partial, 21 blocked, 2 rejected, 3 process — each with its gate and the number that clears it |
+| audit | 33 NFL namespaces, 463 pages, 17,562 table rows scanned; feeds agree 137/137; **0** runtime localhost/preview references. This session **corrected its own first answer** (2 false-positive localhost hits) and recorded it as F-12 |
+| gates | `nfl-live-board/verify.py` green: 16 pages, every row source-linked, every internal link resolves, corpus reconciled, prereg hash matches, no double-escaped entities. CI: `.github/workflows/nfl-live-board.yml` |
+| root nav | generator-owned group added to `verification/build.py`; root rebuild + `verification/verify_site.py` PASS (14 pages, 346 sourced rows) |
+| conflicts absorbed | 5 concurrent merges of `main` during the session, all conflicts in `COORDINATION.md`, all resolved by keeping **both** sides. No peer file edited; `nfl-live-board/engine/sync_main.sh` records the procedure |
+| sources verified in-session 2026-11-17 | standings ×2 chunks · week-10 scores ×2 · week-9 scores · week-11 schedule ×3 · IND@HOU game centre · Week-10 injury report (chunks 0 and 3) · reserve list ×2 · `reg11` (serves reg10 — Week 11 not published) |
+| flagged (non-blocking) | F-01..F-14 on `nfl-live-board/pages/flagged.html`, each with an official source link |

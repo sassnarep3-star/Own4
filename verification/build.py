@@ -407,6 +407,28 @@ NAV = [
     # transcription of an official nfl.com page (raw/*.txt, hashed), a walk-forward backtest registered in
     # PREREGISTRATION.md before it was computed, and a 38-check gate (nfl-sources/engine/verify.py).
     # Additive only: no existing link is altered or removed.
+    # Added 2026-11-17 by session arena/925796f5-own4 (nfl-live-board): originated lines in the
+    # side -> total -> moneyline order, a proper-score competition with the luck removed, an
+    # independently reconciled 149-game corpus, and a 70-row requirement register. Additive only;
+    # no existing link is altered or removed. Generator-owned so a regeneration cannot drop it.
+    ("NFL Live Board · originated lines + proper-score competition (2026-11-17)", [
+        ("nfl-live-board/index.html", "NFL Live Board — dashboard (decision readiness)", "legacy"),
+        ("nfl-live-board/pages/executive-summary.html", "Live Board — executive summary", "legacy"),
+        ("nfl-live-board/pages/requirements.html", "Live Board — requirements &amp; gates (70 rows)", "legacy"),
+        ("nfl-live-board/pages/results.html", "Live Board — verified results feed (149 games)", "legacy"),
+        ("nfl-live-board/pages/origination.html", "Live Board — origination (side → total → moneyline)", "legacy"),
+        ("nfl-live-board/pages/prices.html", "Live Board — price-snapshot store (open/close)", "legacy"),
+        ("nfl-live-board/pages/leaderboard.html", "Live Board — leaderboard (proper score → escrow)", "legacy"),
+        ("nfl-live-board/pages/luck.html", "Live Board — removal of luck", "legacy"),
+        ("nfl-live-board/pages/correlations.html", "Live Board — correlations (n published)", "legacy"),
+        ("nfl-live-board/pages/availability.html", "Live Board — availability &amp; replacement depth", "legacy"),
+        ("nfl-live-board/pages/context.html", "Live Board — fixture context", "legacy"),
+        ("nfl-live-board/pages/questions.html", "Live Board — questions &amp; information gaps", "legacy"),
+        ("nfl-live-board/pages/suggestions.html", "Live Board — suggestions (review before implementing)", "legacy"),
+        ("nfl-live-board/pages/repo-review.html", "Live Board — repository review (line by line)", "legacy"),
+        ("nfl-live-board/pages/sources.html", "Live Board — sources", "legacy"),
+        ("nfl-live-board/pages/flagged.html", "⚑ Live Board — flagged for review", "legacy"),
+    ]),
     ("NFL Source Audit · registration + verified backtest (2026-11-16)", [
         ("nfl-sources/pages/index.html", "NFL Source Audit — decision readiness (70 requirements)", "legacy"),
         ("nfl-sources/pages/findings.html", "NFL Source Audit — findings", "legacy"),
