@@ -588,6 +588,20 @@
    "n_non_official_external_hosts": 1,
    "n_official_external_links": 220
   },
+  "nfl-req-review": {
+   "pages": 5,
+   "data_rows": 212,
+   "rows_without_any_link": 0,
+   "rows_without_an_official_nfl_link": 17,
+   "pages_referencing_localhost_or_preview_host": [],
+   "external_hosts": {
+    "www.nfl.com": 208,
+    "github.com": 19
+   },
+   "non_official_external_hosts": {},
+   "n_non_official_external_hosts": 0,
+   "n_official_external_links": 208
+  },
   "nfl-sources": {
    "pages": 13,
    "data_rows": 404,
@@ -628,14 +642,14 @@
   }
  },
  "totals": {
-  "namespaces": 34,
-  "pages": 472,
-  "data_rows": 17800,
+  "namespaces": 35,
+  "pages": 477,
+  "data_rows": 18012,
   "rows_without_any_link": 189,
-  "rows_without_an_official_nfl_link": 3779,
+  "rows_without_an_official_nfl_link": 3796,
   "pages_with_localhost": 0,
   "non_official_external_links": 484,
-  "official_external_links": 16684
+  "official_external_links": 16892
  },
  "feed_crosscheck": {
   "nfl_book_rows": 137,
@@ -650,7 +664,7 @@
    "id": "A-01",
    "severity": "info",
    "area": "Repository-wide",
-   "finding": "34 NFL namespaces, 472 HTML pages and 17800 table rows were scanned.",
+   "finding": "35 NFL namespaces, 477 HTML pages and 18012 table rows were scanned.",
    "evidence": "engine/audit_repo.py",
    "status": "recorded"
   },
@@ -658,7 +672,7 @@
    "id": "A-02",
    "severity": "high",
    "area": "Repository-wide",
-   "finding": "189 of 17800 table rows carry no link of any kind in their own row, and 3779 carry no official nfl.com link.",
+   "finding": "189 of 18012 table rows carry no link of any kind in their own row, and 3796 carry no official nfl.com link.",
    "detail": "A row without a link cannot be re-verified by a reader. Legend, help and navigation tables are counted too, so some are benign; the per-namespace table below lets a reviewer find them, and this namespace's own count is 0.",
    "evidence": "engine/audit_repo.py",
    "status": "flagged"
