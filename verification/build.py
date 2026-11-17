@@ -507,6 +507,22 @@ NAV = [
         ("verification-2026-11-13/index.html", "Verification report", "legacy"),
         ("verification-2026-11-13/flagged.html", "⚑ Verification flags", "legacy"),
     ]),
+    # Added 2026-11-17 by session arena-7fc936d1-own4 (additive; superset-only edit): the
+    # nfl-board decision-readiness layer. One row per requirement line, the gate that blocks it
+    # and the number that would clear it, plus the question register, the suggestions board with
+    # blank verdicts, and the line-by-line review findings. It links into the namespaces below
+    # instead of restating them; nothing here removes, reorders or relabels an existing entry.
+    ("NFL decision board · 2026-11-17", [
+        ("nfl-board/index.html", "Decision readiness (start here)", "legacy"),
+        ("nfl-board/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-board/pages/readiness.html", "Every requirement line, gate &amp; clearing number", "legacy"),
+        ("nfl-board/pages/questions.html", "Questions, information, answers", "legacy"),
+        ("nfl-board/pages/suggestions.html", "Suggestions \u2014 decide before building", "legacy"),
+        ("nfl-board/pages/evidence.html", "What was verified this session", "legacy"),
+        ("nfl-board/pages/repo-review.html", "Repo review &amp; irregularities", "legacy"),
+        ("nfl-board/pages/flagged.html", "\u2691 Decisions board \u2014 flagged for review", "legacy"),
+        ("nfl-board/pages/sources.html", "Source register", "legacy"),
+    ]),
     # Added 2026-11-16 by session arena/448c248f-own4: the nfl-decision-gaps namespace - the
     # decision-support layer (open questions with the number that would clear each one, a
     # have/don't-have matrix, a suggestions board with blank verdicts, and the official
