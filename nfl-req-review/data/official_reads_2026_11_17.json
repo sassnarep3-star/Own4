@@ -1,0 +1,2886 @@
+{
+ "round": "2026-11-17",
+ "session": "arena/ca159db5-own4",
+ "generated_utc": "2026-11-17T00:00:00Z",
+ "rule": "structured rows + sha256 + timestamps only; no raw HTML committed (RF-18)",
+ "sources": [
+  {
+   "id": "R-STAND",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "title": "2026 NFL League Standings",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0-1 of 2",
+   "what": "32-team standings through Week 10"
+  },
+  {
+   "id": "R-SCHED",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "title": "NFL Week 11 Schedule 2026",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0-2 of 3",
+   "what": "14 fixtures, 6 byes; venues from the schedule page's own stadium links; weather line for CIN@WAS"
+  },
+  {
+   "id": "R-INJ11",
+   "url": "https://www.nfl.com/injuries/league/2026/reg11",
+   "title": "redirects to the Week-10 injury report",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0 of 1",
+   "what": "Week-11 report not yet published as of 2026-11-17; URL resolves to Week 10"
+  },
+  {
+   "id": "R-INJ10",
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "title": "Official NFL Injury Report — Week 10, 2026",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0-7 of 8",
+   "what": "final designations as read 2026-11-17; all 28 clubs, 14 fixtures"
+  },
+  {
+   "id": "R-INACT",
+   "url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+   "title": "NFL Week 10 inactives: Players ruled out for Sunday's 12 games",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0-1 of 2",
+   "what": "147 entries, 24 clubs; WHERE venue lines for all 12 games"
+  },
+  {
+   "id": "R-TRADES",
+   "url": "https://www.nfl.com/transactions/",
+   "title": "2026 NFL League Transactions",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0 of 1",
+   "what": "November 2026 trades: 12"
+  },
+  {
+   "id": "R-RESERVE",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "title": "2026 NFL reserve-list by month",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0-1 of 2",
+   "what": "November 2026 Reserve/Injured moves: 25"
+  },
+  {
+   "id": "R-GAME",
+   "url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+   "title": "Minnesota Vikings at San Francisco 49ers 2026 REG 11 - Game Center",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0 of 2",
+   "what": "Game Info: Location MEXICO CITY, Stadium ESTADIO BANORTE; injury-report tabs not yet available"
+  },
+  {
+   "id": "R-DEPTH",
+   "url": "https://www.nfl.com/teams/baltimore-ravens/depth-chart",
+   "title": "404 - Flag on the Play",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0 of 1",
+   "what": "club depth-chart route re-confirmed unavailable (E13 route (a))"
+  },
+  {
+   "id": "R-ARCH",
+   "url": "https://www.nfl.com/injuries/league/2025/reg1",
+   "title": "Official NFL Injury Report — 2025 Season, Week 1",
+   "read_utc": "2026-11-17T00:00:00Z",
+   "chunks_read": "0 of 6",
+   "what": "past-season weekly injury archive re-confirmed available on the official site (E16)"
+  }
+ ],
+ "findings": {
+  "week11_injury_report": "Not yet published as of 2026-11-17; the reg11 URL resolves to the Week-10 report. The latest official report is Week 10 (read live today).",
+  "week10_report_delta": "The committed 2026-11-13 capture (326 rows; 14 Out; 11 Questionable; 0 Doubtful) is a Friday point-in-time snapshot. The live report read 2026-11-17 carries the final designations: 346 rows; 70 Out; 90 Questionable; 11 Doubtful; 175 blank. Delta: +20 rows, +56 Out, +79 Questionable, +11 Doubtful.",
+  "depth_route": "nfl.com club depth-chart pages 404 (re-confirmed 2026-11-17). Snap counts exist only inside the official Game Book PDF (game centre route verified 2026-11-16 by session arena/013190b4-own4); no standalone official snap-count page found."
+ },
+ "week11_schedule": {
+  "fixtures": [
+   {
+    "day": "Thu 2026-11-19",
+    "time": "8:15 PM",
+    "network": "PRIME",
+    "away": "IND",
+    "home": "HOU",
+    "away_record": "3-7",
+    "home_record": "3-6",
+    "venue": "NRG Stadium (Houston)",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/ind-at-hou-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "CBS",
+    "away": "MIA",
+    "home": "BUF",
+    "away_record": "1-8",
+    "home_record": "8-1",
+    "venue": "Highmark Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/mia-at-buf-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "FOX",
+    "away": "BAL",
+    "home": "CAR",
+    "away_record": "4-5",
+    "home_record": "4-5",
+    "venue": "Bank of America Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/bal-at-car-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "FOX",
+    "away": "NO",
+    "home": "CHI",
+    "away_record": "3-6",
+    "home_record": "7-2",
+    "venue": "Soldier Field",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/no-at-chi-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "FOX",
+    "away": "TEN",
+    "home": "DAL",
+    "away_record": "1-8",
+    "home_record": "4-6",
+    "venue": "AT&T Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/ten-at-dal-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "FOX",
+    "away": "TB",
+    "home": "DET",
+    "away_record": "3-6",
+    "home_record": "7-2",
+    "venue": "Ford Field",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/tb-at-det-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "CBS",
+    "away": "ARI",
+    "home": "KC",
+    "away_record": "3-7",
+    "home_record": "7-2",
+    "venue": "GEHA Field at Arrowhead Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/ari-at-kc-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "1:00 PM",
+    "network": "CBS",
+    "away": "PIT",
+    "home": "PHI",
+    "away_record": "6-3",
+    "home_record": "2-7",
+    "venue": "Lincoln Financial Field",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/pit-at-phi-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "4:05 PM",
+    "network": "FOX",
+    "away": "NYJ",
+    "home": "LAC",
+    "away_record": "2-8",
+    "home_record": "0-8",
+    "venue": "SoFi Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/nyj-at-lac-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "4:25 PM",
+    "network": "CBS",
+    "away": "JAX",
+    "home": "NYG",
+    "away_record": "7-2",
+    "home_record": "5-3-1",
+    "venue": "MetLife Stadium",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/jax-at-nyg-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "4:25 PM",
+    "network": "CBS",
+    "away": "LV",
+    "home": "DEN",
+    "away_record": "4-6",
+    "home_record": "7-2",
+    "venue": "Empower Field at Mile High",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/lv-at-den-2026-reg-11"
+   },
+   {
+    "day": "Sun 2026-11-22",
+    "time": "8:20 PM",
+    "network": "NBC",
+    "away": "MIN",
+    "home": "SF",
+    "away_record": "7-2",
+    "home_record": "8-1",
+    "venue": "Estadio Banorte (Mexico City)",
+    "venue_evidence": "game centre Game Info",
+    "weather": "",
+    "game_url": "https://www.nfl.com/games/min-at-sf-2026-reg-11"
+   },
+   {
+    "day": "Mon 2026-11-23",
+    "time": "8:15 PM",
+    "network": "ESPN",
+    "away": "CIN",
+    "home": "WAS",
+    "away_record": "7-2",
+    "home_record": "3-5-1",
+    "venue": "FedEx Field",
+    "venue_evidence": "schedule page stadium link",
+    "weather": "Clear, night (schedule page)",
+    "game_url": "https://www.nfl.com/games/cin-at-was-2026-reg-11"
+   }
+  ],
+  "byes": [
+   "ATL",
+   "CLE",
+   "GB",
+   "LAR",
+   "NE",
+   "SEA"
+  ],
+  "count_fixtures": 13,
+  "count_byes": 6
+ },
+ "injury_report_week10": {
+  "rows": [
+   {
+    "club": "WAS",
+    "opponent": "NYG",
+    "date_label": "Thu 2026-11-12",
+    "players_listed": 9,
+    "out": [
+     "Lucas Patrick",
+     "Colson Yankoff"
+    ],
+    "doubtful": [],
+    "questionable": [],
+    "blank_designation": 7
+   },
+   {
+    "club": "NYG",
+    "opponent": "WAS",
+    "date_label": "Thu 2026-11-12",
+    "players_listed": 11,
+    "out": [],
+    "doubtful": [],
+    "questionable": [
+     "Malik Harrison"
+    ],
+    "blank_designation": 10
+   },
+   {
+    "club": "NE",
+    "opponent": "DET",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 15,
+    "out": [
+     "Ben Brown",
+     "Carlton Davis III",
+     "TreVeyon Henderson"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "A.J. Brown",
+     "Kevin Byard",
+     "Reggie Gilliam",
+     "Cameron Latu",
+     "Walter Rouse",
+     "Brenden Schooler",
+     "Rhamondre Stevenson",
+     "Greg Van Roten",
+     "Charles Woods"
+    ],
+    "blank_designation": 3
+   },
+   {
+    "club": "DET",
+    "opponent": "NE",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 9,
+    "out": [
+     "Kerby Joseph",
+     "Cade Mays",
+     "D.J. Reed"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Amon-Ra St. Brown",
+     "Sione Vaki"
+    ],
+    "blank_designation": 4
+   },
+   {
+    "club": "KC",
+    "opponent": "ATL",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "Jaylon Moore",
+     "Omarr Norman-Lott",
+     "Peter Woods"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Mansoor Delane",
+     "Jaydn Ott",
+     "Kenneth Walker III"
+    ],
+    "blank_designation": 6
+   },
+   {
+    "club": "ATL",
+    "opponent": "KC",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 11,
+    "out": [
+     "Zachariah Branch"
+    ],
+    "doubtful": [
+     "Divine Deablo"
+    ],
+    "questionable": [
+     "Gervon Dexter Sr.",
+     "James Pearce Jr.",
+     "Josh Woods"
+    ],
+    "blank_designation": 6
+   },
+   {
+    "club": "MIN",
+    "opponent": "GB",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 13,
+    "out": [
+     "Blake Cashman",
+     "T.J. Hockenson",
+     "Tyrion Ingram-Dawkins",
+     "Jauan Jennings",
+     "Kyler Murray"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Jordan Addison",
+     "Josh Metellus",
+     "Kyle Van Noy"
+    ],
+    "blank_designation": 5
+   },
+   {
+    "club": "GB",
+    "opponent": "MIN",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 17,
+    "out": [
+     "Josh Jacobs",
+     "Micah Parsons",
+     "Sean Rhyan",
+     "Josh Whyle"
+    ],
+    "doubtful": [
+     "Zaire Franklin"
+    ],
+    "questionable": [
+     "Chris Brooks",
+     "Javon Bullard",
+     "Travis Glover",
+     "Xavier McKinney",
+     "Skyy Moore",
+     "Lukas Van Ness",
+     "Kevin Zeitler"
+    ],
+    "blank_designation": 5
+   },
+   {
+    "club": "JAX",
+    "opponent": "TEN",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 11,
+    "out": [
+     "Jessie Bates",
+     "Jordan Davis",
+     "BJ Green II"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Robert Hainsey"
+    ],
+    "blank_designation": 7
+   },
+   {
+    "club": "TEN",
+    "opponent": "JAX",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "Cody Barton",
+     "Anthony Hill Jr.",
+     "Peter Skoronski",
+     "Carnell Tate",
+     "Tommy Townsend"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Tyjae Spears"
+    ],
+    "blank_designation": 6
+   },
+   {
+    "club": "BUF",
+    "opponent": "NYJ",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 14,
+    "out": [],
+    "doubtful": [
+     "Spencer Brown"
+    ],
+    "questionable": [
+     "Christian Benford",
+     "Sam Franklin Jr.",
+     "Jordan Hancock",
+     "Tyrell Shavers"
+    ],
+    "blank_designation": 9
+   },
+   {
+    "club": "NYJ",
+    "opponent": "BUF",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 9,
+    "out": [
+     "Trevin Wallace"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Jarvis Brownlee Jr.",
+     "Omar Cooper Jr.",
+     "Adonai Mitchell",
+     "Joseph Ossai",
+     "VJ Payne",
+     "Harrison Phillips",
+     "Garrett Wilson",
+     "Nahshon Wright"
+    ],
+    "blank_designation": 0
+   },
+   {
+    "club": "MIA",
+    "opponent": "IND",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 11,
+    "out": [
+     "Aaron Brewer",
+     "Jared Wayne"
+    ],
+    "doubtful": [
+     "Chris Bell"
+    ],
+    "questionable": [
+     "Darrell Baker Jr."
+    ],
+    "blank_designation": 7
+   },
+   {
+    "club": "IND",
+    "opponent": "MIA",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 14,
+    "out": [
+     "Mo Alie-Cox",
+     "Jaylon Carlies",
+     "Akeem Davis-Gaither",
+     "Luke Rhodes",
+     "Jerry Tillery",
+     "Jalen Travis"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Will Mallory"
+    ],
+    "blank_designation": 7
+   },
+   {
+    "club": "CAR",
+    "opponent": "NO",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "Bobby Okereke"
+    ],
+    "doubtful": [
+     "Jonathon Brooks",
+     "Mike Jackson"
+    ],
+    "questionable": [
+     "Brady Christensen",
+     "Will Lee III",
+     "Xavier Legette",
+     "Jaelan Phillips"
+    ],
+    "blank_designation": 5
+   },
+   {
+    "club": "NO",
+    "opponent": "CAR",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "CJ Donaldson",
+     "Taliese Fuaga",
+     "Erik McCoy",
+     "Christen Miller"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Martin Emerson",
+     "Travis Etienne"
+    ],
+    "blank_designation": 6
+   },
+   {
+    "club": "HOU",
+    "opponent": "CLE",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 16,
+    "out": [
+     "Azeez Al-Shaair",
+     "Marvin Harrison Jr.",
+     "Danielle Hunter",
+     "Brevin Jordan",
+     "Keylan Rutledge"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Will Anderson Jr.",
+     "Trent Brown",
+     "Jacob Hummel",
+     "David Montgomery",
+     "Jaylin Smith",
+     "Wyatt Teller"
+    ],
+    "blank_designation": 5
+   },
+   {
+    "club": "CLE",
+    "opponent": "HOU",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "Michael Burton",
+     "Ronnie Hickman Jr."
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Denzel Boston"
+    ],
+    "blank_designation": 9
+   },
+   {
+    "club": "LAR",
+    "opponent": "AZ",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 14,
+    "out": [
+     "Steve Avila",
+     "Terrance Ferguson"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Davis Allen",
+     "Joe Cardona",
+     "Kam Curl",
+     "Myles Garrett",
+     "Trent McDuffie"
+    ],
+    "blank_designation": 7
+   },
+   {
+    "club": "AZ",
+    "opponent": "LAR",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 15,
+    "out": [
+     "Zachary Carter",
+     "Hjalte Froholdt",
+     "Jon Gaines II"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Hunter Long",
+     "Roy Lopez",
+     "Max Melton",
+     "Darius Robinson",
+     "Jayden Williams",
+     "Andrew Wingard"
+    ],
+    "blank_designation": 6
+   },
+   {
+    "club": "SEA",
+    "opponent": "LV",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 15,
+    "out": [
+     "Charles Cross",
+     "Sam Darnold",
+     "Quenton Nelson",
+     "Leonard Williams"
+    ],
+    "doubtful": [],
+    "questionable": [],
+    "blank_designation": 11
+   },
+   {
+    "club": "LV",
+    "opponent": "SEA",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 5,
+    "out": [],
+    "doubtful": [],
+    "questionable": [
+     "Thomas Booker",
+     "Dont'e Thornton Jr."
+    ],
+    "blank_designation": 3
+   },
+   {
+    "club": "SF",
+    "opponent": "DAL",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 12,
+    "out": [
+     "Mike Evans"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Renardo Green",
+     "Dre Greenlaw",
+     "Nate Hobbs",
+     "Deommodore Lenoir",
+     "Upton Stout",
+     "C.J. West",
+     "Trent Williams"
+    ],
+    "blank_designation": 4
+   },
+   {
+    "club": "DAL",
+    "opponent": "SF",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 19,
+    "out": [
+     "Donovan Ezeiruaku",
+     "Jake Ferguson",
+     "Tyler Goodson",
+     "P.J. Locke",
+     "Jonathan Mingo"
+    ],
+    "doubtful": [
+     "Juanyeh Thomas"
+    ],
+    "questionable": [
+     "DaRon Bland",
+     "Jonathan Bullard",
+     "Alijah Clark",
+     "Devin Moore",
+     "Joey Porter Jr."
+    ],
+    "blank_designation": 8
+   },
+   {
+    "club": "PIT",
+    "opponent": "CIN",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 8,
+    "out": [],
+    "doubtful": [],
+    "questionable": [
+     "Derrick Harmon"
+    ],
+    "blank_designation": 7
+   },
+   {
+    "club": "CIN",
+    "opponent": "PIT",
+    "date_label": "Sun 2026-11-15",
+    "players_listed": 9,
+    "out": [
+     "Kyle Dugger"
+    ],
+    "doubtful": [
+     "Jalen Davis",
+     "Andrei Iosivas",
+     "Brian Parker II"
+    ],
+    "questionable": [],
+    "blank_designation": 5
+   },
+   {
+    "club": "LAC",
+    "opponent": "BAL",
+    "date_label": "Mon 2026-11-16",
+    "players_listed": 19,
+    "out": [
+     "Branson Taylor",
+     "Isas Waxter",
+     "Kendall Williamson"
+    ],
+    "doubtful": [
+     "Brenen Thompson"
+    ],
+    "questionable": [
+     "Kayode Awosika",
+     "Justin Eboigbe",
+     "Ladd McConkey",
+     "David Njoku",
+     "Denzel Perryman",
+     "Trey Pipkins"
+    ],
+    "blank_designation": 9
+   },
+   {
+    "club": "BAL",
+    "opponent": "LAC",
+    "date_label": "Mon 2026-11-16",
+    "players_listed": 10,
+    "out": [
+     "Jaylinn Hawkins"
+    ],
+    "doubtful": [],
+    "questionable": [
+     "Adam Randall"
+    ],
+    "blank_designation": 8
+   }
+  ],
+  "totals": {
+   "clubs": 28,
+   "players_listed": 346,
+   "out": 70,
+   "doubtful": 11,
+   "questionable": 90,
+   "blank": 175
+  }
+ },
+ "inactives_week10": {
+  "by_club": {
+   "NE": [
+    "Carlton Davis",
+    "Brenden Schooler",
+    "Dametrious Crownover",
+    "Walter Rouse",
+    "Ben Brown",
+    "Behren Morton"
+   ],
+   "DET": [
+    "Keith Abney II",
+    "Ahmed Hassanein",
+    "Cade Mays",
+    "Amen Ogbongbemiga",
+    "D.J. Reed",
+    "Mekhi Wingo"
+   ],
+   "KC": [
+    "Kenneth Walker",
+    "Garrett Nussmeier",
+    "Jaydn Ott",
+    "Melvin Smith",
+    "Ben VanSumeren",
+    "Jaylon Moore",
+    "Peter Woods"
+   ],
+   "ATL": [
+    "Andy Dalton",
+    "Divine Deablo",
+    "Avieon Terrell",
+    "Zachariah Branch",
+    "Jack Strand",
+    "Robert Longerbeam",
+    "Cameron Williams"
+   ],
+   "HOU": [
+    "Azeez Al-Shaair",
+    "Brevin Jordan",
+    "Marvin Harrison Jr.",
+    "David Montgomery",
+    "Danielle Hunter",
+    "Keylan Rutledge",
+    "Wyatt Teller"
+   ],
+   "CLE": [
+    "Dillon Gabriel",
+    "Taylen Green",
+    "Justin Jefferson",
+    "Noah Igbinoghene",
+    "Ronnie Hickman",
+    "Parker Brailsford"
+   ],
+   "MIN": [
+    "Kyler Murray",
+    "Jordan Addison",
+    "Max Brosmer",
+    "Jauan Jennings",
+    "Blake Cashman",
+    "T.J. Hockenson",
+    "Tyroin Ingram-Dawkins"
+   ],
+   "GB": [
+    "Josh Jacobs",
+    "Pierre Strong Jr.",
+    "Zaire Franklin",
+    "Donovan Jennings",
+    "Kevin Zeitler",
+    "Sean Rhyan"
+   ],
+   "MIA": [
+    "Chris Bell",
+    "Marcellas Dial Jr.",
+    "Aaron Brewer",
+    "Caedan Wallace",
+    "Justin Joly",
+    "Jared Wayne"
+   ],
+   "IND": [
+    "Jaylon Carlies",
+    "Riley Leonard",
+    "Will Mallory",
+    "Luke Rhodes",
+    "Jerry Tillery",
+    "Jalen Travis"
+   ],
+   "CAR": [
+    "Ja'Tavion Sanders",
+    "Haynes King",
+    "Will Lee",
+    "AJ Dillon",
+    "Bobby Okereke",
+    "Sam Hecht",
+    "TeRah Edwards"
+   ],
+   "NO": [
+    "Zach Wilson",
+    "Mike Reid",
+    "CJ Donaldson",
+    "Jaylan Ford",
+    "Taliese Fuaga",
+    "Erik McCoy"
+   ],
+   "BUF": [
+    "Shane Buechele",
+    "Jalon Kilgore",
+    "Mike Danna",
+    "Ar'maj Reed-Adams",
+    "Jude Bowry",
+    "Greg Gaines"
+   ],
+   "NYJ": [
+    "Jarvis Brownlee Jr.",
+    "Nate Lynn",
+    "Tim Patrick",
+    "Trevin Wallace",
+    "Jelani Woods"
+   ],
+   "JAX": [
+    "Jessie Bates III",
+    "CJ Williams",
+    "Jordan Davis",
+    "Wesley Williams",
+    "Albert Regis"
+   ],
+   "TEN": [
+    "Carnell Tate",
+    "Nick Singleton",
+    "Jaylon Jones",
+    "Cody Barton",
+    "Anthony Hill Jr.",
+    "Brandon Crenshaw-Dickson",
+    "Jackie Marshall"
+   ],
+   "LAR": [
+    "Ty Simpson",
+    "Maximus Pulley",
+    "Joe Cardona",
+    "Darryl Peterson III",
+    "Steve Avila",
+    "Keagen Trost",
+    "Desjuan Johnson"
+   ],
+   "AZ": [
+    "Joey Aguilar",
+    "Starling Thomas V",
+    "Eku Leota",
+    "Jayden Williams",
+    "Jon Gaines II",
+    "Hjalte Froholdt"
+   ],
+   "SEA": [
+    "Sam Darnold",
+    "Emanuel Wilson",
+    "Avery Smith",
+    "Quenton Nelson",
+    "Charles Cross",
+    "Deven Eastern",
+    "Leonard Williams"
+   ],
+   "LV": [
+    "Dont'e Thornton Jr.",
+    "Malik Benson",
+    "Tristin McCollum",
+    "Dalton Johnson",
+    "Bryce Cabeldue",
+    "Thomas Booker IV"
+   ],
+   "SF": [
+    "Kurtis Rourke",
+    "Mike Evans",
+    "Enrique Cruz Jr.",
+    "Tatum Bethune",
+    "Brandin Cooks"
+   ],
+   "DAL": [
+    "P.J. Locke III",
+    "Donovan Ezeiruaku",
+    "Derion Kendrick",
+    "Jonathan Mingo",
+    "Juanyeh Thomas",
+    "Ajani Cornelius",
+    "Jake Ferguson"
+   ],
+   "PIT": [
+    "DeShon Elliott",
+    "Drew Allar",
+    "Will Howard",
+    "Sean Murphy-Bunting",
+    "Eli Heidenreich"
+   ],
+   "CIN": [
+    "Kyle Dugger",
+    "Connor Lew",
+    "Myles Hinton",
+    "Landon Robinson"
+   ]
+  },
+  "venues": {
+   "NE@DET": "FC Bayern Munich Stadium (Munich, Germany)",
+   "KC@ATL": "Mercedes-Benz Stadium (Atlanta)",
+   "HOU@CLE": "Huntington Bank Field (Cleveland)",
+   "MIN@GB": "Lambeau Field (Green Bay, Wis.)",
+   "MIA@IND": "Lucas Oil Stadium (Indianapolis)",
+   "CAR@NO": "Caesars Superdome (New Orleans)",
+   "BUF@NYJ": "MetLife Stadium (East Rutherford, N.J.)",
+   "JAX@TEN": "Nissan Stadium (Nashville, Tenn.)",
+   "LAR@AZ": "State Farm Stadium (Glendale, Ariz.)",
+   "SEA@LV": "Allegiant Stadium (Las Vegas)",
+   "SF@DAL": "AT&T Stadium (Arlington, Texas)",
+   "PIT@CIN": "Paycor Stadium (Cincinnati)"
+  },
+  "total_entries": 147,
+  "clubs": 24
+ },
+ "transactions_november_2026": {
+  "trades": [
+   {
+    "from": "ATL",
+    "to": "JAX",
+    "date": "11/10",
+    "player": "Jessie Bates"
+   },
+   {
+    "from": "PHI",
+    "to": "JAX",
+    "date": "11/10",
+    "player": "Jordan Davis"
+   },
+   {
+    "from": "TEN",
+    "to": "BUF",
+    "date": "11/10",
+    "player": "Amani Hooker"
+   },
+   {
+    "from": "IND",
+    "to": "SF",
+    "date": "11/10",
+    "player": "Keenan Allen"
+   },
+   {
+    "from": "LV",
+    "to": "MIN",
+    "date": "11/10",
+    "player": "Kirk Cousins"
+   },
+   {
+    "from": "LAC",
+    "to": "DEN",
+    "date": "11/10",
+    "player": "Daiyan Henley"
+   },
+   {
+    "from": "IND",
+    "to": "KC",
+    "date": "11/10",
+    "player": "Josh Downs"
+   },
+   {
+    "from": "ATL",
+    "to": "BAL",
+    "date": "11/10",
+    "player": "Ryan Neuzil"
+   },
+   {
+    "from": "BAL",
+    "to": "ATL",
+    "date": "11/10",
+    "player": "Andrew Vorhees"
+   },
+   {
+    "from": "NYJ",
+    "to": "DET",
+    "date": "11/09",
+    "player": "Andre Cisco"
+   },
+   {
+    "from": "NO",
+    "to": "JAX",
+    "date": "11/09",
+    "player": "Davon Godchaux"
+   },
+   {
+    "from": "AZ",
+    "to": "BAL",
+    "date": "11/06",
+    "player": "Jacoby Brissett"
+   }
+  ],
+  "reserve_list": [
+   {
+    "club": "LAR",
+    "date": "11/16",
+    "player": "Dylan McMahon"
+   },
+   {
+    "club": "LAC",
+    "date": "11/16",
+    "player": "Branson Taylor"
+   },
+   {
+    "club": "NO",
+    "date": "11/14",
+    "player": "Christen Miller"
+   },
+   {
+    "club": "NE",
+    "date": "11/14",
+    "player": "TreVeyon Henderson"
+   },
+   {
+    "club": "CLE",
+    "date": "11/14",
+    "player": "Michael Burton"
+   },
+   {
+    "club": "IND",
+    "date": "11/14",
+    "player": "Mo Alie-Cox"
+   },
+   {
+    "club": "IND",
+    "date": "11/14",
+    "player": "Akeem Davis-Gaither"
+   },
+   {
+    "club": "TEN",
+    "date": "11/14",
+    "player": "Peter Skoronski"
+   },
+   {
+    "club": "TEN",
+    "date": "11/14",
+    "player": "Tommy Townsend"
+   },
+   {
+    "club": "DAL",
+    "date": "11/14",
+    "player": "Tyler Goodson"
+   },
+   {
+    "club": "GB",
+    "date": "11/14",
+    "player": "Josh Whyle"
+   },
+   {
+    "club": "LAR",
+    "date": "11/12",
+    "player": "Puka Nacua"
+   },
+   {
+    "club": "LAR",
+    "date": "11/10",
+    "player": "Jordan Whittington"
+   },
+   {
+    "club": "MIA",
+    "date": "11/10",
+    "player": "Zach Sieler"
+   },
+   {
+    "club": "MIA",
+    "date": "11/10",
+    "player": "Malik Willis"
+   },
+   {
+    "club": "SF",
+    "date": "11/10",
+    "player": "Gracen Halton"
+   },
+   {
+    "club": "AZ",
+    "date": "11/10",
+    "player": "Gardner Minshew"
+   },
+   {
+    "club": "AZ",
+    "date": "11/10",
+    "player": "Michael Wilson"
+   },
+   {
+    "club": "TEN",
+    "date": "11/09",
+    "player": "James Williams"
+   },
+   {
+    "club": "MIN",
+    "date": "11/09",
+    "player": "Demond Claiborne"
+   },
+   {
+    "club": "BUF",
+    "date": "11/09",
+    "player": "Josh Palmer"
+   },
+   {
+    "club": "ATL",
+    "date": "11/07",
+    "player": "Brian Robinson"
+   },
+   {
+    "club": "LAR",
+    "date": "11/07",
+    "player": "Jaylen Watson"
+   },
+   {
+    "club": "DEN",
+    "date": "11/07",
+    "player": "Eyioma Uwazurike"
+   },
+   {
+    "club": "DET",
+    "date": "11/07",
+    "player": "Jack Campbell"
+   }
+  ],
+  "count_trades": 12,
+  "count_reserve": 25
+ },
+ "standings_2026_week10": {
+  "rows": [
+   {
+    "abbr": "BUF",
+    "name": "Buffalo Bills",
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pct": 0.889,
+    "pf": 287,
+    "pa": 199,
+    "streak": "5W"
+   },
+   {
+    "abbr": "SF",
+    "name": "San Francisco 49ers",
+    "w": 8,
+    "l": 1,
+    "t": 0,
+    "pct": 0.889,
+    "pf": 281,
+    "pa": 196,
+    "streak": "2W"
+   },
+   {
+    "abbr": "CHI",
+    "name": "Chicago Bears",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 241,
+    "pa": 184,
+    "streak": "4W"
+   },
+   {
+    "abbr": "CIN",
+    "name": "Cincinnati Bengals",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 278,
+    "pa": 193,
+    "streak": "5W"
+   },
+   {
+    "abbr": "DEN",
+    "name": "Denver Broncos",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 198,
+    "pa": 186,
+    "streak": "5W"
+   },
+   {
+    "abbr": "DET",
+    "name": "Detroit Lions",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 257,
+    "pa": 199,
+    "streak": "5W"
+   },
+   {
+    "abbr": "JAX",
+    "name": "Jacksonville Jaguars",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 269,
+    "pa": 144,
+    "streak": "3W"
+   },
+   {
+    "abbr": "KC",
+    "name": "Kansas City Chiefs",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 237,
+    "pa": 156,
+    "streak": "2W"
+   },
+   {
+    "abbr": "MIN",
+    "name": "Minnesota Vikings",
+    "w": 7,
+    "l": 2,
+    "t": 0,
+    "pct": 0.778,
+    "pf": 176,
+    "pa": 126,
+    "streak": "1W"
+   },
+   {
+    "abbr": "PIT",
+    "name": "Pittsburgh Steelers",
+    "w": 6,
+    "l": 3,
+    "t": 0,
+    "pct": 0.667,
+    "pf": 198,
+    "pa": 182,
+    "streak": "1L"
+   },
+   {
+    "abbr": "NYG",
+    "name": "New York Giants",
+    "w": 5,
+    "l": 3,
+    "t": 1,
+    "pct": 0.611,
+    "pf": 203,
+    "pa": 196,
+    "streak": "1L"
+   },
+   {
+    "abbr": "CLE",
+    "name": "Cleveland Browns",
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": 0.6,
+    "pf": 188,
+    "pa": 220,
+    "streak": "1W"
+   },
+   {
+    "abbr": "GB",
+    "name": "Green Bay Packers",
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": 0.6,
+    "pf": 226,
+    "pa": 221,
+    "streak": "1L"
+   },
+   {
+    "abbr": "LAR",
+    "name": "Los Angeles Rams",
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": 0.6,
+    "pf": 248,
+    "pa": 187,
+    "streak": "4W"
+   },
+   {
+    "abbr": "SEA",
+    "name": "Seattle Seahawks",
+    "w": 6,
+    "l": 4,
+    "t": 0,
+    "pct": 0.6,
+    "pf": 223,
+    "pa": 175,
+    "streak": "2W"
+   },
+   {
+    "abbr": "NE",
+    "name": "New England Patriots",
+    "w": 5,
+    "l": 5,
+    "t": 0,
+    "pct": 0.5,
+    "pf": 221,
+    "pa": 242,
+    "streak": "2L"
+   },
+   {
+    "abbr": "BAL",
+    "name": "Baltimore Ravens",
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pct": 0.444,
+    "pf": 189,
+    "pa": 236,
+    "streak": "4L"
+   },
+   {
+    "abbr": "CAR",
+    "name": "Carolina Panthers",
+    "w": 4,
+    "l": 5,
+    "t": 0,
+    "pct": 0.444,
+    "pf": 219,
+    "pa": 236,
+    "streak": "1W"
+   },
+   {
+    "abbr": "DAL",
+    "name": "Dallas Cowboys",
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pct": 0.4,
+    "pf": 286,
+    "pa": 282,
+    "streak": "1L"
+   },
+   {
+    "abbr": "LV",
+    "name": "Las Vegas Raiders",
+    "w": 4,
+    "l": 6,
+    "t": 0,
+    "pct": 0.4,
+    "pf": 251,
+    "pa": 289,
+    "streak": "2L"
+   },
+   {
+    "abbr": "WAS",
+    "name": "Washington Commanders",
+    "w": 3,
+    "l": 5,
+    "t": 1,
+    "pct": 0.389,
+    "pf": 196,
+    "pa": 223,
+    "streak": "1W"
+   },
+   {
+    "abbr": "HOU",
+    "name": "Houston Texans",
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": 0.333,
+    "pf": 233,
+    "pa": 219,
+    "streak": "1L"
+   },
+   {
+    "abbr": "NO",
+    "name": "New Orleans Saints",
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": 0.333,
+    "pf": 202,
+    "pa": 236,
+    "streak": "1L"
+   },
+   {
+    "abbr": "TB",
+    "name": "Tampa Bay Buccaneers",
+    "w": 3,
+    "l": 6,
+    "t": 0,
+    "pct": 0.333,
+    "pf": 202,
+    "pa": 178,
+    "streak": "1L"
+   },
+   {
+    "abbr": "AZ",
+    "name": "Arizona Cardinals",
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": 0.3,
+    "pf": 184,
+    "pa": 289,
+    "streak": "2L"
+   },
+   {
+    "abbr": "ATL",
+    "name": "Atlanta Falcons",
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": 0.3,
+    "pf": 201,
+    "pa": 258,
+    "streak": "3L"
+   },
+   {
+    "abbr": "IND",
+    "name": "Indianapolis Colts",
+    "w": 3,
+    "l": 7,
+    "t": 0,
+    "pct": 0.3,
+    "pf": 208,
+    "pa": 271,
+    "streak": "1W"
+   },
+   {
+    "abbr": "PHI",
+    "name": "Philadelphia Eagles",
+    "w": 2,
+    "l": 7,
+    "t": 0,
+    "pct": 0.222,
+    "pf": 148,
+    "pa": 221,
+    "streak": "7L"
+   },
+   {
+    "abbr": "NYJ",
+    "name": "New York Jets",
+    "w": 2,
+    "l": 8,
+    "t": 0,
+    "pct": 0.2,
+    "pf": 194,
+    "pa": 254,
+    "streak": "5L"
+   },
+   {
+    "abbr": "MIA",
+    "name": "Miami Dolphins",
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pct": 0.111,
+    "pf": 148,
+    "pa": 224,
+    "streak": "3L"
+   },
+   {
+    "abbr": "TEN",
+    "name": "Tennessee Titans",
+    "w": 1,
+    "l": 8,
+    "t": 0,
+    "pct": 0.111,
+    "pf": 167,
+    "pa": 239,
+    "streak": "3L"
+   },
+   {
+    "abbr": "LAC",
+    "name": "Los Angeles Chargers",
+    "w": 0,
+    "l": 8,
+    "t": 0,
+    "pct": 0.0,
+    "pf": 121,
+    "pa": 219,
+    "streak": "8L"
+   }
+  ],
+  "count": 32
+ },
+ "designation_join": {
+  "scope": "24 clubs of Sunday's 12 Week-10 games; inactive list = official record of players who did not play",
+  "rows": [
+   {
+    "club": "NE",
+    "designation": "Out",
+    "player": "Ben Brown",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Out",
+    "player": "Carlton Davis III",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Out",
+    "player": "TreVeyon Henderson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "A.J. Brown",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Kevin Byard",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Reggie Gilliam",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Cameron Latu",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Walter Rouse",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Brenden Schooler",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Rhamondre Stevenson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Greg Van Roten",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NE",
+    "designation": "Questionable",
+    "player": "Charles Woods",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DET",
+    "designation": "Out",
+    "player": "Kerby Joseph",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DET",
+    "designation": "Out",
+    "player": "Cade Mays",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DET",
+    "designation": "Out",
+    "player": "D.J. Reed",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DET",
+    "designation": "Questionable",
+    "player": "Amon-Ra St. Brown",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DET",
+    "designation": "Questionable",
+    "player": "Sione Vaki",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Out",
+    "player": "Jaylon Moore",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Out",
+    "player": "Omarr Norman-Lott",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Out",
+    "player": "Peter Woods",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Questionable",
+    "player": "Mansoor Delane",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Questionable",
+    "player": "Jaydn Ott",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "KC",
+    "designation": "Questionable",
+    "player": "Kenneth Walker III",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "ATL",
+    "designation": "Out",
+    "player": "Zachariah Branch",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "ATL",
+    "designation": "Doubtful",
+    "player": "Divine Deablo",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "ATL",
+    "designation": "Questionable",
+    "player": "Gervon Dexter Sr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "ATL",
+    "designation": "Questionable",
+    "player": "James Pearce Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "ATL",
+    "designation": "Questionable",
+    "player": "Josh Woods",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Out",
+    "player": "Blake Cashman",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Out",
+    "player": "T.J. Hockenson",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Out",
+    "player": "Tyrion Ingram-Dawkins",
+    "match_tier": "surname+initial",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Out",
+    "player": "Jauan Jennings",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Out",
+    "player": "Kyler Murray",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Questionable",
+    "player": "Jordan Addison",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Questionable",
+    "player": "Josh Metellus",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIN",
+    "designation": "Questionable",
+    "player": "Kyle Van Noy",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Out",
+    "player": "Josh Jacobs",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Out",
+    "player": "Micah Parsons",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Out",
+    "player": "Sean Rhyan",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Out",
+    "player": "Josh Whyle",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "GB",
+    "designation": "Doubtful",
+    "player": "Zaire Franklin",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Chris Brooks",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Javon Bullard",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Travis Glover",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Xavier McKinney",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Skyy Moore",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Lukas Van Ness",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "GB",
+    "designation": "Questionable",
+    "player": "Kevin Zeitler",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "JAX",
+    "designation": "Out",
+    "player": "Jessie Bates",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "JAX",
+    "designation": "Out",
+    "player": "Jordan Davis",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "JAX",
+    "designation": "Out",
+    "player": "BJ Green II",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "JAX",
+    "designation": "Questionable",
+    "player": "Robert Hainsey",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "TEN",
+    "designation": "Out",
+    "player": "Cody Barton",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "TEN",
+    "designation": "Out",
+    "player": "Anthony Hill Jr.",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "TEN",
+    "designation": "Out",
+    "player": "Peter Skoronski",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "TEN",
+    "designation": "Out",
+    "player": "Carnell Tate",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "TEN",
+    "designation": "Out",
+    "player": "Tommy Townsend",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "TEN",
+    "designation": "Questionable",
+    "player": "Tyjae Spears",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "BUF",
+    "designation": "Doubtful",
+    "player": "Spencer Brown",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "BUF",
+    "designation": "Questionable",
+    "player": "Christian Benford",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "BUF",
+    "designation": "Questionable",
+    "player": "Sam Franklin Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "BUF",
+    "designation": "Questionable",
+    "player": "Jordan Hancock",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "BUF",
+    "designation": "Questionable",
+    "player": "Tyrell Shavers",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Out",
+    "player": "Trevin Wallace",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Jarvis Brownlee Jr.",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Omar Cooper Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Adonai Mitchell",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Joseph Ossai",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "VJ Payne",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Harrison Phillips",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Garrett Wilson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NYJ",
+    "designation": "Questionable",
+    "player": "Nahshon Wright",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIA",
+    "designation": "Out",
+    "player": "Aaron Brewer",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIA",
+    "designation": "Out",
+    "player": "Jared Wayne",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIA",
+    "designation": "Doubtful",
+    "player": "Chris Bell",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "MIA",
+    "designation": "Questionable",
+    "player": "Darrell Baker Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Mo Alie-Cox",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Jaylon Carlies",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Akeem Davis-Gaither",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Luke Rhodes",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Jerry Tillery",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "IND",
+    "designation": "Out",
+    "player": "Jalen Travis",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "IND",
+    "designation": "Questionable",
+    "player": "Will Mallory",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Out",
+    "player": "Bobby Okereke",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Doubtful",
+    "player": "Jonathon Brooks",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Doubtful",
+    "player": "Mike Jackson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Questionable",
+    "player": "Brady Christensen",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Questionable",
+    "player": "Will Lee III",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Questionable",
+    "player": "Xavier Legette",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CAR",
+    "designation": "Questionable",
+    "player": "Jaelan Phillips",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NO",
+    "designation": "Out",
+    "player": "CJ Donaldson",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NO",
+    "designation": "Out",
+    "player": "Taliese Fuaga",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NO",
+    "designation": "Out",
+    "player": "Erik McCoy",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NO",
+    "designation": "Out",
+    "player": "Christen Miller",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "NO",
+    "designation": "Questionable",
+    "player": "Martin Emerson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "NO",
+    "designation": "Questionable",
+    "player": "Travis Etienne",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Out",
+    "player": "Azeez Al-Shaair",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Out",
+    "player": "Marvin Harrison Jr.",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Out",
+    "player": "Danielle Hunter",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Out",
+    "player": "Brevin Jordan",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Out",
+    "player": "Keylan Rutledge",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "Will Anderson Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "Trent Brown",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "Jacob Hummel",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "David Montgomery",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "Jaylin Smith",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "HOU",
+    "designation": "Questionable",
+    "player": "Wyatt Teller",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CLE",
+    "designation": "Out",
+    "player": "Michael Burton",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "CLE",
+    "designation": "Out",
+    "player": "Ronnie Hickman Jr.",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CLE",
+    "designation": "Questionable",
+    "player": "Denzel Boston",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Out",
+    "player": "Steve Avila",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Out",
+    "player": "Terrance Ferguson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Questionable",
+    "player": "Davis Allen",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Questionable",
+    "player": "Joe Cardona",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Questionable",
+    "player": "Kam Curl",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Questionable",
+    "player": "Myles Garrett",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LAR",
+    "designation": "Questionable",
+    "player": "Trent McDuffie",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Out",
+    "player": "Zachary Carter",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Out",
+    "player": "Hjalte Froholdt",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Out",
+    "player": "Jon Gaines II",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Hunter Long",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Roy Lopez",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Max Melton",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Darius Robinson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Jayden Williams",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "AZ",
+    "designation": "Questionable",
+    "player": "Andrew Wingard",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SEA",
+    "designation": "Out",
+    "player": "Charles Cross",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SEA",
+    "designation": "Out",
+    "player": "Sam Darnold",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SEA",
+    "designation": "Out",
+    "player": "Quenton Nelson",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SEA",
+    "designation": "Out",
+    "player": "Leonard Williams",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LV",
+    "designation": "Questionable",
+    "player": "Thomas Booker",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "LV",
+    "designation": "Questionable",
+    "player": "Dont'e Thornton Jr.",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Out",
+    "player": "Mike Evans",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Renardo Green",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Dre Greenlaw",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Nate Hobbs",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Deommodore Lenoir",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Upton Stout",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "C.J. West",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "SF",
+    "designation": "Questionable",
+    "player": "Trent Williams",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Out",
+    "player": "Donovan Ezeiruaku",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Out",
+    "player": "Jake Ferguson",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Out",
+    "player": "Tyler Goodson",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": true
+   },
+   {
+    "club": "DAL",
+    "designation": "Out",
+    "player": "P.J. Locke",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Out",
+    "player": "Jonathan Mingo",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Doubtful",
+    "player": "Juanyeh Thomas",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Questionable",
+    "player": "DaRon Bland",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Questionable",
+    "player": "Jonathan Bullard",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Questionable",
+    "player": "Alijah Clark",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Questionable",
+    "player": "Devin Moore",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "DAL",
+    "designation": "Questionable",
+    "player": "Joey Porter Jr.",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "PIT",
+    "designation": "Questionable",
+    "player": "Derrick Harmon",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CIN",
+    "designation": "Out",
+    "player": "Kyle Dugger",
+    "match_tier": "exact",
+    "in_inactive_list": true,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CIN",
+    "designation": "Doubtful",
+    "player": "Jalen Davis",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CIN",
+    "designation": "Doubtful",
+    "player": "Andrei Iosivas",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   },
+   {
+    "club": "CIN",
+    "designation": "Doubtful",
+    "player": "Brian Parker II",
+    "match_tier": "no match",
+    "in_inactive_list": false,
+    "on_nov_reserve_list": false
+   }
+  ],
+  "stats": {
+   "Out": {
+    "n": 64,
+    "did_not_play_inactive_list": 49,
+    "did_not_play_reserve_list_only": 9,
+    "did_not_play_total": 58,
+    "did_not_play_rate": 0.90625,
+    "did_not_play_rate_lo": 0.8101690141672233,
+    "did_not_play_rate_hi": 0.9563223421687121,
+    "not_corroborated": 6
+   },
+   "Doubtful": {
+    "n": 10,
+    "did_not_play_inactive_list": 4,
+    "did_not_play_reserve_list_only": 0,
+    "did_not_play_total": 4,
+    "did_not_play_rate": 0.4,
+    "did_not_play_rate_lo": 0.16817758120350967,
+    "did_not_play_rate_hi": 0.6873304525498135,
+    "not_corroborated": 6
+   },
+   "Questionable": {
+    "n": 82,
+    "did_not_play_inactive_list": 14,
+    "did_not_play_reserve_list_only": 0,
+    "did_not_play_total": 14,
+    "did_not_play_rate": 0.17073170731707318,
+    "did_not_play_rate_lo": 0.10451499593969749,
+    "did_not_play_rate_hi": 0.26641937620620854,
+    "not_corroborated": 68
+   }
+  },
+  "unexplained_out_designations": [
+   {
+    "club": "DET",
+    "player": "Kerby Joseph"
+   },
+   {
+    "club": "KC",
+    "player": "Omarr Norman-Lott"
+   },
+   {
+    "club": "GB",
+    "player": "Micah Parsons"
+   },
+   {
+    "club": "JAX",
+    "player": "BJ Green II"
+   },
+   {
+    "club": "LAR",
+    "player": "Terrance Ferguson"
+   },
+   {
+    "club": "AZ",
+    "player": "Zachary Carter"
+   }
+  ],
+  "note": "Designation reliability measured empirically from the final Week-10 report joined to the official inactive list. Single-week sample; Wilson 95% intervals. Name matching: exact normalized form, with a surname+initial fallback for official spelling variants (one instance this round: Tyrion/Tyroin Ingram-Dawkins, MIN)."
+ },
+ "sha256": "2448e692df2dd5642783487798e7486486d2e8977d7fdeed6dafee4d77a8ce9c"
+}

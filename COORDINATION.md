@@ -4806,3 +4806,49 @@ unverifiable values rendered blank + flagged; every data row carries a source li
 commits; `git pull --rebase` before every push; conflicts resolved as unions, never by discarding a
 peer's work; no raw nfl.com HTML committed (RF-18 stays open for the owner); counts computed at build
 time, never typed into prose.
+
+## Session `arena/ca159db5-own4` — R-02..R-07 completion record (2026-11-17 UTC)
+
+| ID | Task | Status | Notes |
+|----|------|--------|-------|
+| R-01 | Claim scope | done | claimed at `79e834f`, pushed immediately |
+| R-02 | Official-source re-reads | done | 10 official pages read live 2026-11-17 (standings, Week-11 schedule, Week-11 injury URL → Week-10, Week-10 injury report ×8 chunks, Week-10 inactives, transactions, November reserve list, MIN@SF game centre, Ravens depth-chart 404, 2025 reg1 archive) |
+| R-03 | Register verdict update | done | 73 rows re-verified; advanced: E06 (blocked→partial), E14 (not_started→partial), E16 (not_started→partial), E21 (not_started→partial); re-confirmed met: E25, E26. Counts: met 27, partial 42, blocked 2, not_started 1, in_progress 1 |
+| R-04 | Decision-readiness table | done | `nfl-req-review/pages/requirements.html` — one row per requirement: status, gate that blocks it, number that clears it, source link |
+| R-05 | Static site | done | 5 pages (landing, requirements, verification, flagged, sources); every table row source-linked; blanks flagged |
+| R-06 | Verifier + CI | done | `nfl-req-review/engine/verify.py` PASS (links, source coverage, placeholders, typed-count guard, determinism); `.github/workflows/nfl-req-review.yml` |
+| R-07 | Additive root-nav group | done | appended at end of NAV in `verification/build.py`; `index.html` + `verified/*.html` regenerated; root verifier PASS (14 pages, 346 sourced rows) |
+
+### Verification performed (all against official sources read live 2026-11-17)
+
+- **Standings** — 32 teams through Week 10 re-read; the committed `nfl-arena` week10-named file
+  holds Week-9-era records (RF-07, flagged, non-blocking).
+- **Week-11 schedule** — 14 fixtures + 6 byes; all 14 venues transcribed from official pages
+  (13 from the schedule page's own stadium links, MIN@SF from the game centre Game Info:
+  Estadio Banorte, Mexico City). Roof/surface: no official field on the pages read → blank + RF-04.
+- **Week-10 injury report** — final designations re-read in full: 346 rows, 28 clubs, 14 fixtures;
+  70 Out / 90 Questionable / 11 Doubtful / 175 blank. The committed 2026-11-13 capture (326 / 14 /
+  11 / 0 / 301) is a Friday point-in-time snapshot; the delta is published (RF-03).
+- **Designation reliability (E14/E21)** — final report joined to the official Week-10 inactive list
+  (147 entries, 24 Sunday clubs): Out DNP 58/64 = 90.6% (Wilson 95% CI 81.0–95.6); Doubtful
+  4/10 = 40.0% (CI 16.8–68.7); Questionable 14/82 = 17.1% (CI 10.5–26.6). Six Out designations
+  uncorroborated by either list → RF-01. Name variant Tyrion/Tyroin Ingram-Dawkins matched via
+  surname+initial → RF-06.
+- **Transactions / reserve list** — 12 November trades, 25 Reserve/Injured moves (incl. Malik
+  Willis, MIA, 11/10) re-captured from the official hub.
+- **Depth-chart route (E13)** — `nfl.com/teams/baltimore-ravens/depth-chart` re-confirmed 404;
+  snap counts exist only inside the official Game Book PDF. E13 stays blocked.
+- **Past-season archive (E16)** — `nfl.com/injuries/league/2025/reg1` loads; archive available on
+  the official site, not yet built in-repo.
+
+### Irregularities (published on `nfl-req-review/pages/flagged.html` with source links)
+
+RF-01 six uncorroborated Out designations · RF-02 Week-11 report not yet published · RF-03 stale
+Friday capture of the Week-10 tables · RF-04 roof/surface blank · RF-05 depth-chart 404 ·
+RF-06 official name-spelling variant · RF-07 stale standings file naming. None block the merge.
+
+### Scope exception log
+
+None taken. Files committed: `nfl-req-review/**` (new namespace), `.github/workflows/nfl-req-review.yml`,
+the append-only NAV group in `verification/build.py`, the regenerated `index.html`/`verified/*.html`,
+and this append-only COORDINATION.md record. No other session's namespace, data file or page was edited.
