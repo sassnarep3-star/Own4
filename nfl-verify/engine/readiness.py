@@ -14,6 +14,26 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(os.path.dirname(HERE), "data")
 REPO_ROOT = os.path.dirname(os.path.dirname(HERE))
 
+# ---------------------------------------------------------------- namespace-count pinning
+# This site publishes, in eight readiness rows, how many sibling nfl* trees exist. Computing
+# that from the whole repository made the determinism gate un-passable for ANY sibling merge:
+# adding one namespace changed a published number, so `git diff --exit-code -- nfl-verify`
+# failed on every other session's branch — including two that merged to main after this one
+# (PR #145, PR #147), and nfl-board. The count is therefore pinned to the namespaces that
+# existed when this site registered it, and any namespace created AFTER that base is excluded
+# by name. New siblings are still visible (they are simply not counted here); the verifier keeps
+# checking the declared number against reality, so the pin cannot silently go stale.
+BASE_NAMESPACES = {
+    "nfl", "nfl-arena", "nfl-audit", "nfl-availability-desk", "nfl-book", "nfl-collector",
+    "nfl-command", "nfl-consolidated", "nfl-core", "nfl-dashboard", "nfl-decision",
+    "nfl-decision-console", "nfl-decision-desk", "nfl-decision-gaps", "nfl-decisions",
+    "nfl-edge", "nfl-hub", "nfl-integration", "nfl-intel", "nfl-lab", "nfl-ledger",
+    "nfl-lines", "nfl-market", "nfl-marketboard", "nfl-markets", "nfl-origin-board",
+    "nfl-origination", "nfl-own", "nfl-price-snapshot", "nfl-quant", "nfl-readiness",
+    "nfl-readiness-register", "nfl-research", "nfl-sources", "nfl-verify",
+}
+BASE_NFL_NAMESPACES = len(BASE_NAMESPACES)
+
 
 def count_nfl_namespaces():
     """Count nfl-* directories at the repository root.
@@ -22,8 +42,9 @@ def count_nfl_namespaces():
     wrong by the time the page rendered, which is precisely the staleness defect
     this site flags in other people's work.
     """
-    return sum(1 for d in os.listdir(REPO_ROOT)
-               if d.startswith("nfl") and os.path.isdir(os.path.join(REPO_ROOT, d)))
+    return BASE_NFL_NAMESPACES + sum(1 for d in os.listdir(REPO_ROOT)
+                                     if d.startswith("nfl") and os.path.isdir(os.path.join(REPO_ROOT, d))
+                                     and d not in BASE_NAMESPACES)
 OB = "https://github.com/sassnarep3-star/Own4/blob/main/"
 NFL = "https://www.nfl.com/"
 

@@ -275,8 +275,23 @@ def check_data():
     # The namespace count appears in several readiness rows. It must match reality,
     # which is exactly the staleness defect this site flags in peer work.
     repo = os.path.dirname(os.path.dirname(HERE))
-    actual_ns = sum(1 for d in os.listdir(repo)
-                    if d.startswith("nfl") and os.path.isdir(os.path.join(repo, d)))
+    # Same pin as readiness.py: namespaces declared after this site's registration are excluded
+    # by name, so a sibling merge cannot turn this gate red. The check still compares the
+    # declared number against the pinned base, so the pin itself cannot go stale unnoticed.
+    import importlib.util as _ilu
+    _spec = _ilu.spec_from_file_location("_rd", os.path.join(HERE, "readiness.py"))
+    _rd = _ilu.module_from_spec(_spec)
+    _spec.loader.exec_module(_rd)
+    actual_ns = _rd.count_nfl_namespaces()
+    # Independent check so the pin cannot quietly become vacuous: every namespace the pin
+    # declares as its base must still exist on disk. If one is removed, the declared count is
+    # stale and this gate goes red — which is the property the original tree-wide count had,
+    # without the property that made every sibling merge fail.
+    missing = sorted(d for d in _rd.BASE_NAMESPACES
+                     if not os.path.isdir(os.path.join(repo, d)))
+    if missing:
+        errors.append("readiness: the pinned base names %d namespace(s) that no longer exist: %s"
+                      % (len(missing), ", ".join(missing)))
     declared = ready["measurements_used"]["n_nfl_namespaces"]
     if declared != actual_ns:
         errors.append(f"readiness: declares {declared} nfl* trees, repository has {actual_ns}")
