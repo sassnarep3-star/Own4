@@ -74,9 +74,11 @@ def esc(x):
     return html.escape("" if x is None else str(x), quote=True)
 
 
-def blank(reason, label="blank"):
-    return '<span class="blank" title="%s">%s &mdash; %s</span>' % (
-        esc(reason), label, esc(reason[:120] + ("..." if len(reason) > 120 else "")))
+def blank(reason, label="blank", short=None):
+    """A visibly blank cell. The short form is shown; the full reason is the tooltip and is
+    also written out in the table's note, so the reason survives with scripts disabled."""
+    shown = short if short is not None else (reason[:70] + ("..." if len(reason) > 70 else ""))
+    return '<span class="blank" title="%s">%s &#151; %s</span>' % (esc(reason), esc(label), esc(shown))
 
 
 def num(x, nd=2):
@@ -492,7 +494,7 @@ def build_correlations():
                       num(r["r"], 4),
                       ("[%.4f, %.4f]" % tuple(r["ci95_fisher"])) if r["ci95_fisher"][0] is not None else '<span class="blank">—</span>',
                       num(r["p_permutation"], 4) if r["p_permutation"] is not None else '<span class="blank">—</span>',
-                      ('<span class="blank" title="%s">blank &mdash; %s</span>' % (esc(r["blank_reason"]), esc(r["blank_reason"][:90])))
+                      blank(r["blank_reason"], "blank")
                       if r["r"] is None else "<i>computed</i>",
                       ext(r["source"], "source")],
                      ["", "", "", "n", "n", "n", "n", "", ""]))
@@ -519,8 +521,8 @@ def build_availability():
                        str(r["out_week10"]) if r["out_week10"] is not None else '<span class="blank">—</span>',
                        str(r["doubtful_week10"]) if r["doubtful_week10"] is not None else '<span class="blank">—</span>',
                        str(r["questionable_week10"]) if r["questionable_week10"] is not None else '<span class="blank">—</span>',
-                       blank(r["blank_reason"], "depth rank"),
-                       blank(r["blank_reason"], "replacement"),
+                       blank(r["blank_reason"], "depth", "F-07"),
+                       blank(r["blank_reason"], "replacement", "F-07"),
                        ext(r["source_url"], "report")],
                       ["", "n", "n", "n", "", "", ""]))
     body = ('<div class="note"><b>Two different facts, kept apart.</b> How many players a club has ruled '
@@ -529,7 +531,11 @@ def build_availability():
             'columns are blank with F-07 in the cell. Naming a backup from a roster page would be exactly the '
             'inference the brief forbids.</div>')
     body += table(["Team", "Out (wk10)", "Doubtful", "Questionable", "1st/2nd/3rd/4th string", "Replacement named", "Source"],
-                  trows, caption="All 32 clubs — availability verified, replacement depth blocked")
+                  trows, caption="All 32 clubs — availability verified, replacement depth blocked",
+                  note="<b>F-07, stated once for the whole table:</b> no official depth chart is published by "
+                       "nfl.com (peer-verified 404) and no official snap-count table was located. Naming a "
+                       "replacement would be an inference, so both depth columns are blank for every club. "
+                       "The count columns to their left come from the official Week-10 report.")
     body += ('<h2>Row-level verification of the availability capture</h2>'
              '<p>%d rows across %d clubs were re-read from the live official page and compared field by field '
              'with the committed capture: <b>%d agree, %d disagree</b>.</p>'

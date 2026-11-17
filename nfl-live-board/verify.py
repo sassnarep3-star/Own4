@@ -14,6 +14,7 @@ Fails (exit 1) when any of the rules this namespace claims to hold is broken:
   V6 every correlation row with a value also carries a finite n, and every row without a value
      carries a non-empty blank reason;
   V7 the leaderboard's benchmark self-test holds (S3's Brier equals the benchmark Brier);
+  V11 no page contains a double-escaped HTML entity, which renders as literal text;
   V8 no page contains a hand-typed count of NFL namespaces (the defect class peer sessions hit
      twice): the pattern "<integer> nfl-" outside a <table> fails the build;
   V9 the price store is consistently empty - a filled slot without a timestamp, a source or a
@@ -82,6 +83,11 @@ for p in PAGES:
                r"""|\b(?:localhost|127\.0\.0\.1):\d+|https://\d+-[a-z0-9-]+\.e2b\.app""")
     if re.search(runtime, text, re.I):
         fail("V3", "%s references a local/preview host at runtime" % rel)
+
+    # V11: a double-escaped entity renders as literal text in a browser. Peer sessions shipped
+    # this defect twice; the check is cheap and the failure is embarrassing, so it is a gate.
+    if re.search(r"&(?:amp|lt|gt|quot|#\d+);(?:mdash|ndash|middot|amp|lt|gt|quot);", text):
+        fail("V11", "%s contains a double-escaped entity" % rel)
 
     # V8: no typed namespace counts in prose (the F2 / SG-H defect class)
     for m in re.finditer(r"<p[^>]*>(.*?)</p>", text, re.S):
