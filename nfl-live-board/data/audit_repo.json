@@ -271,19 +271,51 @@
   },
   "nfl-decision-gaps": {
    "pages": 9,
-   "data_rows": 496,
+   "data_rows": 478,
    "rows_without_any_link": 0,
-   "rows_without_an_official_nfl_link": 159,
+   "rows_without_an_official_nfl_link": 150,
    "pages_referencing_localhost_or_preview_host": [],
    "external_hosts": {
-    "www.nfl.com": 663,
-    "github.com": 208,
-    "www.ncpgambling.org": 9,
-    "media.nfl.com": 7
+    "www.nfl.com": 579,
+    "github.com": 176,
+    "www.ncpgambling.org": 9
    },
    "non_official_external_hosts": {},
    "n_non_official_external_hosts": 0,
-   "n_official_external_links": 670
+   "n_official_external_links": 579
+  },
+  "nfl-depth-sweep": {
+   "pages": 6,
+   "data_rows": 130,
+   "rows_without_any_link": 0,
+   "rows_without_an_official_nfl_link": 61,
+   "pages_referencing_localhost_or_preview_host": [],
+   "external_hosts": {
+    "www.nfl.com": 36,
+    "github.com": 6,
+    "www.azcardinals.com": 1,
+    "www.atlantafalcons.com": 1,
+    "www.panthers.com": 1,
+    "www.chicagobears.com": 1,
+    "www.dallascowboys.com": 1,
+    "www.detroitlions.com": 1,
+    "www.packers.com": 1,
+    "www.therams.com": 1,
+    "www.vikings.com": 1,
+    "www.neworleanssaints.com": 1
+   },
+   "non_official_external_hosts": {
+    "www.azcardinals.com": 1,
+    "www.atlantafalcons.com": 1,
+    "www.panthers.com": 1,
+    "www.chicagobears.com": 1,
+    "www.dallascowboys.com": 1,
+    "www.detroitlions.com": 1,
+    "www.packers.com": 1,
+    "www.therams.com": 1
+   },
+   "n_non_official_external_hosts": 32,
+   "n_official_external_links": 36
   },
   "nfl-edge": {
    "pages": 22,
@@ -643,14 +675,14 @@
   }
  },
  "totals": {
-  "namespaces": 35,
-  "pages": 477,
-  "data_rows": 18030,
+  "namespaces": 36,
+  "pages": 483,
+  "data_rows": 18142,
   "rows_without_any_link": 189,
-  "rows_without_an_official_nfl_link": 3805,
+  "rows_without_an_official_nfl_link": 3857,
   "pages_with_localhost": 0,
-  "non_official_external_links": 484,
-  "official_external_links": 16983
+  "non_official_external_links": 516,
+  "official_external_links": 16928
  },
  "feed_crosscheck": {
   "nfl_book_rows": 137,
@@ -665,7 +697,7 @@
    "id": "A-01",
    "severity": "info",
    "area": "Repository-wide",
-   "finding": "35 NFL namespaces, 477 HTML pages and 18030 table rows were scanned.",
+   "finding": "36 NFL namespaces, 483 HTML pages and 18142 table rows were scanned.",
    "evidence": "engine/audit_repo.py",
    "status": "recorded"
   },
@@ -673,7 +705,7 @@
    "id": "A-02",
    "severity": "high",
    "area": "Repository-wide",
-   "finding": "189 of 18030 table rows carry no link of any kind in their own row, and 3805 carry no official nfl.com link.",
+   "finding": "189 of 18142 table rows carry no link of any kind in their own row, and 3857 carry no official nfl.com link.",
    "detail": "A row without a link cannot be re-verified by a reader. Legend, help and navigation tables are counted too, so some are benign; the per-namespace table below lets a reviewer find them, and this namespace's own count is 0.",
    "evidence": "engine/audit_repo.py",
    "status": "flagged"
