@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Method · nfl-depth-sweep</title>
+<link rel="stylesheet" href="../assets/site.css"></head>
+<body>
+<header class="site"><a href="../index.html"><b>nfl-depth-sweep</b></a> — 32-club official depth-chart route sweep
+<br><nav><a href="../index.html">Dashboard</a> · <a href="../pages/sweep.html">32-club sweep</a> · <a href="../pages/findings.html">Findings</a> · <a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a> · <a href="../pages/method.html">Method</a></nav></header>
+<main>
+
+<h1>Method</h1>
+<p class="lead">How the sweep was run, what is transcribed, what is computed, and where it can be wrong.</p>
+<h2>Probe rules</h2>
+<ul class="tight">
+<li><b>Route L (league):</b> one fetch per <code>https://www.nfl.com/teams/&lt;slug&gt;/depth-chart/</code>
+for all 32 slugs from <a href="https://www.nfl.com/teams/">nfl.com/teams/</a>, plus the league-wide
+<code>/depth-charts/</code>. Result recorded from the rendered body: the league's
+“404 – Flag on the Play.” text is the 404 evidence (no HTTP status is exposed by the fetch tool — DS-13).</li>
+<li><b>Route C (club):</b> one fetch per <code>https://www.&lt;club-host&gt;/team/depth-chart</code>.
+Every club host is copied from the league's own “View Full Site” link — none is assumed.</li>
+<li>Window: all reads on 2026-11-17 UTC, one session pass. The fetch tool exposes no
+per-call clock, so the window is recorded rather than per-row timestamps (same convention as
+nfl-collector's SUG-12 A).</li>
+</ul>
+<h2>Transcribed vs computed</h2>
+<ul class="tight">
+<li><b>Transcribed per row:</b> result, structure, heading, printed as-of date, self-label, slot row
+counts, shared/empty rank-1 observations, notes. Each is a reading of the page named in that row's
+source link.</li>
+<li><b>Computed at build time:</b> every aggregate on the Dashboard and Findings pages (counts of
+404s, present, tables, dated, shared/empty slots, totals, chart ages). The generator derives them from
+the JSON; <code>engine/verify.py</code> recomputes and fails the build if any published aggregate
+disagrees with the data.</li>
+</ul>
+<h2>Limits (stated, not hidden)</h2>
+<ul class="tight">
+<li>No per-fetch clock (window only); no HTTP status codes (body evidence only).</li>
+<li>Slot counts are counts of the rendered table rows as read; a club that edits its page after
+2026-11-17 will differ — re-run the sweep to refresh.</li>
+<li>Houston's image chart is not transcribed: its row fields are blank by rule (DS-02).</li>
+<li>The sweep records what pages <i>print</i>. It does not verify that printed depth matches who
+actually played — that requires official Game Book participation, tracked in <code>nfl-collector</code>.</li>
+<li>No verdict is taken on SG-C (building the deficiency feature): that decision stays with the owner;
+this sweep is the evidence needed to make it.</li>
+</ul>
+<h2>Rebuild &amp; verify</h2>
+<p><code>python3 engine/build.py &amp;&amp; python3 engine/verify.py</code> — standard library only.
+Verify fails on: row counts ≠ 32, missing source links, aggregates disagreeing with data, broken
+internal links, or a non-deterministic rebuild.</p>
+
+</main>
+<footer>Research only — not wagering advice. Every row links to the official page it was read from;
+unconfirmable values are blank and flagged. Built 2026-11-17 by session arena-76537469-own4 ·
+<a href="https://github.com/sassnarep3-star/Own4">repo</a></footer>
+</body></html>

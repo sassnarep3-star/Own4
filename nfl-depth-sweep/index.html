@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard · nfl-depth-sweep</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header class="site"><a href="index.html"><b>nfl-depth-sweep</b></a> — 32-club official depth-chart route sweep
+<br><nav><a href="index.html">Dashboard</a> · <a href="pages/sweep.html">32-club sweep</a> · <a href="pages/findings.html">Findings</a> · <a href="pages/flagged.html">Flagged for review</a> · <a href="pages/sources.html">Sources</a> · <a href="pages/method.html">Method</a></nav></header>
+<main>
+
+<h1>32-club depth-chart route sweep</h1>
+<p class="lead">Answers decision-console gap <b>G-02</b> and collector flag <b>RC-02</b>: is there an
+official depth-chart route for all 32 clubs? Swept 2026-11-17 by session arena-76537469-own4.</p>
+
+<div class="cards">
+<div class="card bad"><div class="k">32/32</div><div class="l">league depth paths returning 404</div></div>
+<div class="card ok"><div class="k">32/32</div><div class="l">club depth pages present</div></div>
+<div class="card ok"><div class="k">31</div><div class="l">machine-readable HTML tables</div></div>
+<div class="card warn"><div class="k">1</div><div class="l">image-only chart (HOU)</div></div>
+<div class="card warn"><div class="k">5/32</div><div class="l">pages printing an as-of date</div></div>
+<div class="card bad"><div class="k">15</div><div class="l">rank-1 cells holding 2+ players</div></div>
+<div class="card bad"><div class="k">5</div><div class="l">rank-1 cells printed empty</div></div>
+<div class="card warn"><div class="k">12</div><div class="l">pages self-labelled unofficial</div></div>
+</div>
+
+<div class="note"><b>Answer, in two lines.</b> The league route is closed: all
+32 per-team depth paths on nfl.com — and the league-wide <code>/depth-charts/</code> —
+return the league's own 404 body. The club route is open: all 32 clubs publish a
+depth page at <code>/team/depth-chart</code>, 31 of them as machine-readable tables.
+Houston is the single exception (chart is an image).</div>
+<div class="note warn"><b>But the route is not yet a starter source.</b> 15 rank-1 cells
+across 9 clubs hold two or more players, and 5 cells across
+5 clubs are printed empty — column-1 would fabricate starters. Only
+5 of 32 pages print an as-of date; 27 print none, so freshness is
+unverifiable for those. 12 pages self-label unofficial, one explicitly says it
+reflects only its writers' opinions. <b>Depth must be modelled as groups, with capture timestamps —
+exactly as the brief requires — and the SG-C verdict on building the deficiency feature remains an
+owner decision this sweep does not take.</b></div>
+<h2>Pages</h2>
+<ul class="tight">
+<li><a href="pages/sweep.html">32-club sweep</a> — one row per club, both routes, every cell sourced</li>
+<li><a href="pages/findings.html">Findings</a> — what the sweep proves and what it does not</li>
+<li><a href="pages/flagged.html">Flagged for review</a> — irregularities, non-blocking</li>
+<li><a href="pages/sources.html">Sources</a> — every official page read, in session order</li>
+<li><a href="pages/method.html">Method</a> — probe rules, limits, and what is transcribed vs computed</li>
+</ul>
+
+</main>
+<footer>Research only — not wagering advice. Every row links to the official page it was read from;
+unconfirmable values are blank and flagged. Built 2026-11-17 by session arena-76537469-own4 ·
+<a href="https://github.com/sassnarep3-star/Own4">repo</a></footer>
+</body></html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Findings · nfl-depth-sweep</title>
+<link rel="stylesheet" href="../assets/site.css"></head>
+<body>
+<header class="site"><a href="../index.html"><b>nfl-depth-sweep</b></a> — 32-club official depth-chart route sweep
+<br><nav><a href="../index.html">Dashboard</a> · <a href="../pages/sweep.html">32-club sweep</a> · <a href="../pages/findings.html">Findings</a> · <a href="../pages/flagged.html">Flagged for review</a> · <a href="../pages/sources.html">Sources</a> · <a href="../pages/method.html">Method</a></nav></header>
+<main>
+
+<h1>Findings</h1>
+<p class="lead">Every number below is computed at build time from <code>data/route_l.json</code> and
+<code>data/route_c.json</code>; the page generator fails if the data and the prose disagree.</p>
+
+<h2>1 · The league route is closed (answers G-02's first half)</h2>
+<p>All 32 league per-team depth paths
+(<code>nfl.com/teams/&lt;slug&gt;/depth-chart/</code>) returned the league's own
+“404 – Flag on the Play.” body on 2026-11-17, and so did the league-wide
+<a href="https://www.nfl.com/depth-charts/"><code>nfl.com/depth-charts/</code></a>.
+There is no depth chart to parse on nfl.com itself. Source of every row:
+<a href="https://www.nfl.com/teams/">nfl.com/teams/</a> (the league's own club index).</p>
+
+<h2>2 · The club route is open for all 32 clubs (answers G-02's second half)</h2>
+<p>Every club publishes <code>/team/depth-chart</code> on the host the league itself links as its
+“View Full Site”. 32/32 present · 31 machine-readable HTML tables ·
+1 image-only (Houston — the known limitation, re-confirmed). Total transcribed slots
+across the 31 table clubs: <b>901</b> off/def/special-team rows.</p>
+
+<h2>3 · Freshness: only 5 of 32 pages print an as-of date</h2>
+<table><thead><tr><th>Club</th><th>Printed as-of</th><th>Age at build</th><th>Source</th></tr></thead>
+<tbody><tr><td>CHI</td><td>2026-10-31</td><td>17 days</td><td><a class='src' href='https://www.chicagobears.com/team/depth-chart'>club page</a></td></tr><tr><td>GB</td><td>2026-11-10</td><td>7 days</td><td><a class='src' href='https://www.packers.com/team/depth-chart'>club page</a></td></tr><tr><td>SF</td><td>2026-11-10</td><td>7 days</td><td><a class='src' href='https://www.49ers.com/team/depth-chart'>club page</a></td></tr><tr><td>LV</td><td>2026-11-10</td><td>7 days</td><td><a class='src' href='https://www.raiders.com/team/depth-chart'>club page</a></td></tr><tr><td>TEN</td><td>2026-11-10</td><td>7 days</td><td><a class='src' href='https://www.tennesseetitans.com/team/depth-chart'>club page</a></td></tr></tbody></table>
+<p>The other 27 pages print <span class="blank">no date at all</span> — freshness for
+those is <b>unverified</b> and must come from our own capture timestamps, not the page.</p>
+
+<h2>4 · Column-1 is not a starter: 15 shared rank-1 cells</h2>
+<table><thead><tr><th>Club</th><th>Slots</th><th>What the rank-1 cell prints</th><th>Source</th></tr></thead>
+<tbody><tr><td>ARI</td><td>1</td><td>OLB slot: Zaven Collins and Baron Browning in the rank-1 cell</td><td><a class='src' href='https://www.azcardinals.com/team/depth-chart'>source</a></td></tr><tr><td>DAL</td><td>3</td><td>TE (Ferguson + Spann-Ford); LB (Shemar James + Jaishawn Barham); S (P.J. Locke + Markquese Bell)</td><td><a class='src' href='https://www.dallascowboys.com/team/depth-chart'>source</a></td></tr><tr><td>LA</td><td>2</td><td>TE (Davis Allen + Tyler Higbee); CB (Emmanuel Forbes Jr. + Josh Wallace)</td><td><a class='src' href='https://www.therams.com/team/depth-chart'>source</a></td></tr><tr><td>MIN</td><td>1</td><td>RB (Aaron Jones Sr. + Jordan Mason)</td><td><a class='src' href='https://www.vikings.com/team/depth-chart'>source</a></td></tr><tr><td>NO</td><td>2</td><td>RB (Travis Etienne Jr. + Alvin Kamara); EDGE (Chase Young + Carl Granderson)</td><td><a class='src' href='https://www.neworleanssaints.com/team/depth-chart'>source</a></td></tr><tr><td>PHI</td><td>2</td><td>EDGE (Jalyx Hunt + Jonathan Greenard); EDGE (Nolan Smith Jr. + Jonathan Greenard)</td><td><a class='src' href='https://www.philadelphiaeagles.com/team/depth-chart'>source</a></td></tr><tr><td>SEA</td><td>1</td><td>WR (Cooper Kupp + Rashid Shaheed)</td><td><a class='src' href='https://www.seahawks.com/team/depth-chart/'>source</a></td></tr><tr><td>JAX</td><td>2</td><td>RB (Bhayshul Tuten + Chris Rodriguez Jr.); LB (Ventrell Miller + Branson Combs)</td><td><a class='src' href='https://www.jaguars.com/team/depth-chart'>source</a></td></tr><tr><td>PIT</td><td>1</td><td>TE (Pat Freiermuth + Darnell Washington)</td><td><a class='src' href='https://www.steelers.com/team/depth-chart/'>source</a></td></tr></tbody></table>
+
+<h2>5 · And 5 rank-1 cells are printed empty</h2>
+<table><thead><tr><th>Club</th><th>Slots</th><th>What the page prints</th><th>Source</th></tr></thead>
+<tbody><tr><td>GB</td><td>1</td><td>PR rank-1 player cell empty (Golden printed in rank-2 column)</td><td><a class='src' href='https://www.packers.com/team/depth-chart'>source</a></td></tr><tr><td>PHI</td><td>1</td><td>one DT slot prints an empty rank-1 cell (Ty Robinson in rank-2)</td><td><a class='src' href='https://www.philadelphiaeagles.com/team/depth-chart'>source</a></td></tr><tr><td>BAL</td><td>1</td><td>K row prints an entirely empty starter cell</td><td><a class='src' href='https://www.baltimoreravens.com/team/depth-chart'>source</a></td></tr><tr><td>MIA</td><td>1</td><td>K row prints an entirely empty starter cell</td><td><a class='src' href='https://www.miamidolphins.com/team/depth-chart'>source</a></td></tr><tr><td>NYJ</td><td>1</td><td>one DL slot prints an empty rank-1 cell (Jack Heflin in rank-2)</td><td><a class='src' href='https://www.newyorkjets.com/team/depth-chart'>source</a></td></tr></tbody></table>
+<p>Findings 4 and 5 together are the mechanical evidence for the brief's rule:
+<b>model depth slots as groups, never as “column 1 = the starter”</b>, and never derive depth from
+jersey number, experience or salary.</p>
+
+<h2>6 · Self-labels differ club by club</h2>
+<p>12 pages self-label <i>unofficial</i>; Indianapolis is labelled unofficial only
+in its dated release news; Seattle's page renders no heading at all; Arizona's heading says
+“Official Depth Chart” — the only club claiming official; New England states explicitly that the chart
+“reflects the opinions of the Patriots.com writers and don't necessarily reflect those of the
+organization”. <b>No club page is a league-official statement of depth.</b></p>
+
+<h2>7 · What this sweep does not decide</h2>
+<ul class="tight">
+<li>Whether the deficiency feature may be built (SG-C) — still an owner verdict, left blank.</li>
+<li>Whether any printed depth matches who actually played — that needs Game Book participation
+(covered elsewhere: <code>nfl-collector</code>, RC-07).</li>
+<li>Houston's rows — image-only, so blank here; needs an authorized structured source, not
+transcription by eye (the inherited limitation).</li>
+<li>Staleness of any specific row against the transactions log — only flagged where a page contradicts
+itself (see <a href="flagged.html">Flagged</a>), never asserted.</li>
+</ul>
+
+</main>
+<footer>Research only — not wagering advice. Every row links to the official page it was read from;
+unconfirmable values are blank and flagged. Built 2026-11-17 by session arena-76537469-own4 ·
+<a href="https://github.com/sassnarep3-star/Own4">repo</a></footer>
+</body></html>
