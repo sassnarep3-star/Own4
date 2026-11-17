@@ -22,10 +22,10 @@
  },
  {
   "domain": "Reserve / injured-reserve list membership",
-  "have": "The league publishes a dated reserve list: 25 Reserve/Injured moves for November 2026 at https://www.nfl.com/transactions/league/reserve-list/2026/11, including Malik Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson (DAL, 11/14).",
-  "src": "S10",
-  "missing": "No capture of it. Nothing in this repository ingests this page, so an IR player still looks merely absent.",
-  "blocks": "Q05, F3, SG-E"
+  "have": "The official November 2026 page lists 25 dated Reserve/Injured moves, including Malik Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson (DAL, 11/14). The nfl-collector namespace has a 25-row structured capture and ledger hash.",
+  "src": "S10, S17",
+  "missing": "This decision-gaps namespace still uses its static November transcription and does not consume the collector capture automatically; cross-week membership joins remain open.",
+  "blocks": "Q05, F3, F14, SG-E"
  },
  {
   "domain": "League depth charts",
@@ -50,10 +50,10 @@
  },
  {
   "domain": "Venue per fixture",
-  "have": "13 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from the Game Center Game Info block.",
-  "src": "S4, S5",
-  "missing": "WAS/NYG (Thu Nov 12) venue not captured.",
-  "blocks": "Q13, F11, SG-F"
+  "have": "14 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from its Game Center, and 1 (WAS/NYG) from its Game Center.",
+  "src": "S4, S5, S14",
+  "missing": "",
+  "blocks": "None for Week 10; retain fixture-level venue capture for future weeks."
  },
  {
   "domain": "Stadium roof / surface designation",
@@ -71,17 +71,17 @@
  },
  {
   "domain": "Schedule / fixture context",
-  "have": "Week 10 dates, kickoff times, networks, teams on bye (CHI, DEN, PHI, TB), final scores, and the 2026 TBD-games note linking the flexible-scheduling procedures page.",
-  "src": "S6, S7",
-  "missing": "The dated league schedule announcement itself; Week 11 not yet published at fetch time.",
-  "blocks": "Q15, F13"
+  "have": "Official Week 10 schedule, the current Week 11 listing (Colts at Texans, Nov 19), and the dated May 8 NFL announcement that the full 2026 schedule would be released May 14. The announcement and live weekly schedule are linked together on the results page.",
+  "src": "S11, S15, S16",
+  "missing": "",
+  "blocks": "None for Q15; keep live schedule reads dated and source-linked."
  },
  {
   "domain": "Verified results feed",
-  "have": "12 of 14 Week 10 finals, each cross-checked on two official pages.",
-  "src": "S6, S7",
-  "missing": "PIT/CIN (rendered live at fetch time) and LAC/BAL (not started). No prior-season results corpus was read this session.",
-  "blocks": "Q14, F1, SG-G"
+  "have": "13 of 14 Week 10 fixtures show Final with scores on the current official NFL schedule and scores pages; PIT-CIN is additionally confirmed by its Game Center (18-38).",
+  "src": "S11, S12, S13",
+  "missing": "LAC/BAL is still listed as Scheduled on the current official pages; no Final state or score is shown. No prior-season results corpus was read this session.",
+  "blocks": "Q14, F15, SG-G"
  },
  {
   "domain": "Market prices (open / close / moneyline)",
@@ -99,9 +99,9 @@
  },
  {
   "domain": "Dated transactions / roster events",
-  "have": "The league transactions hub publishes Trades, Signings, Reserve List, Waivers, Terminations and Other by year and month. November 2026: 12 trades and 25 reserve-list moves, each dated.",
-  "src": "S9, S10",
-  "missing": "No capture. Depth and availability rows are not yet stamped with the last roster event that affects them.",
+  "have": "The league transactions hub publishes Trades, Signings, Reserve List, Waivers, Terminations and Other by year and month. For November 2026, nfl-collector has structured, ledger-hashed captures of 12 trades and 25 reserve-list moves.",
+  "src": "S9, S10, S17, S18",
+  "missing": "The other four categories (Signings, Waivers, Terminations, Other) are not captured, and the existing captures are not yet joined to availability or depth rows. A multi-month roster-event history still needs validation.",
   "blocks": "Q20, SG-E"
  },
  {

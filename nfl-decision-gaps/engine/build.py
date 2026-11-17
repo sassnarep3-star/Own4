@@ -153,14 +153,17 @@ def out_sentence():
            % (len(inactive), len(out_rows)))
     if on_reserve:
         txt += ("%d more %s placed on the official reserve list during the week (%s), so %d of %d "
-                "(%s) are explained by two official pages."
+                "(%s) are explained across the injury report, inactive list and reserve-list record."
                 % (len(on_reserve), "was" if len(on_reserve) == 1 else "were",
                    "; ".join("%s %s" % (r[1], r[0]) for r in on_reserve),
                    len(inactive) + len(on_reserve), len(out_rows),
                    "%.1f%%" % (100.0 * (len(inactive) + len(on_reserve)) / len(out_rows))))
     if rest:
-        txt += (" %s the one case neither page explains." % (", ".join(
-            "%s (%s)" % (r[1], r[0]) for r in rest) + (" remain" if len(rest) > 1 else " is")))
+        unexplained = ", ".join("%s (%s)" % (r[1], r[0]) for r in rest)
+        case_word = "case" if len(rest) == 1 else "cases"
+        txt += (" The injury report lists %s as Out, but the inactive list and November "
+                "reserve-list record do not account for this %s. No official page read this "
+                "session states why." % (unexplained, case_word))
     return txt
 
 
@@ -270,7 +273,7 @@ def build_index(parsed, inv):
                   "missing, and what would it take to close the gap?</strong> It is a decision-support "
                   "layer over the whole repo. Nothing here is a bet, a price or a model output."))
     body.append(kpis([
-        (esc(str(len(R.QUESTIONS))), "open questions, each with the number that would clear it"),
+        (esc(str(len(R.QUESTIONS))), "registered questions, each with a clearing test and status"),
         (esc(str(len(R.SUGGESTIONS))), "suggestions, each with options and no verdict"),
         (esc(str(len(R.FLAGS))), "items flagged for review"),
         (pct(tot_missing, tot_inactive), "of inactive players absent from the injury report (n=%d)" % tot_inactive),
@@ -346,10 +349,10 @@ def build_exec_summary(parsed, inv):
     itot = inactive_total()
     body = []
     body.append(h(1, "Executive summary"))
-    body.append(p("Read on %s against official NFL pages only. Everything below was read on, or "
-                  "computed from, the pages listed on the <a href=\"sources.html\">Sources</a> "
-                  "page. Where the official page did not state a thing, the field is blank and the "
-                  "item is flagged." % R.DATE))
+    body.append(p("Updated on %s from official NFL page reads and committed repository captures. "
+                  "Read windows and coverage are recorded on the <a href=\"sources.html\">Sources</a> "
+                  "page. Where official sources do not establish a value, it stays blank and the "
+                  "uncertainty is flagged." % R.DATE))
 
     b = join_stats()
     _out_rows, _inactive_split, on_reserve, rest = out_resolution()
@@ -362,17 +365,18 @@ def build_exec_summary(parsed, inv):
                   "<strong>%d of %d inactive players &mdash; %s &mdash; never appear on the injury "
                   "report</strong>. Excluding the two emergency third quarterbacks, %d of %d (%s). "
                   "The injury report is a partial view of unavailability, not the view. The league "\
-                  "does publish a dated reserve list (%s, %d moves in November 2026), and that page "\
-                  "explains %d of the %d Out players who were missing from the inactive list - "\
-                  "but nothing in this repository captures it, so an injured-reserve player still "\
-                  "looks merely absent."
+                  "publishes a dated reserve list (%s, %d moves in November 2026), which explains "\
+                  "%d of the %d Out players who were missing from the inactive list. A 25-row "\
+                  "structured capture and ledger hash already exist in nfl-collector (%s); this "\
+                  "namespace has not wired that capture into its own weekly join, so cross-week "\
+                  "reserve membership remains open."
                   % (parsed["n_rows"], parsed["n_teams_listed"], parsed["n_matchups"],
                      parsed["source_file"], tot_missing, tot_inactive,
                      "%.1f%%" % (100.0 * tot_missing / tot_inactive),
                      tot_missing - tot_e3, tot_inactive - tot_e3,
                      "%.1f%%" % (100.0 * (tot_missing - tot_e3) / (tot_inactive - tot_e3)),
                      src("S10"), len(R.RESERVE_LIST), len(on_reserve),
-                     len(on_reserve) + len(rest))))
+                     len(on_reserve) + len(rest), src("S17"))))
 
     body.append(p("%s" % out_sentence()))
 
@@ -416,7 +420,19 @@ def build_exec_summary(parsed, inv):
                   "is one canonical capture file with every count computed from it at build time "
                   "(suggestion SG-H)." % parsed["n_rows"]))
 
-    body.append(h(2, "6. What to do, in order"))
+    finals = sum(1 for result in R.RESULTS if result["state"] == "final")
+    pit = next(result for result in R.RESULTS if result["game"] == "PIT at CIN")
+    lac = next(result for result in R.RESULTS if result["game"] == "LAC at BAL")
+    body.append(h(2, "6. Week 10 result-state refresh"))
+    body.append(p("%d of %d Week 10 fixtures currently show Final with two scores. PIT-CIN is "
+                  "verified at %d-%d by the current official schedule, scores page and Game Center "
+                  "(%s). The 2026-11-16 LIVE 0-3 observation is retained only as historical "
+                  "evidence in F1. LAC-BAL remains listed as Scheduled in the current official "
+                  "reads, with both score cells blank (%s); F15 stays open. No result is inferred." %
+                  (finals, len(R.RESULTS), pit["away_pts"], pit["home_pts"],
+                   srcs(pit["result_src"]), srcs(lac["result_src"]))))
+
+    body.append(h(2, "7. What to do, in order"))
     body.append(table(
         ["Order", "Action", "Why now", "Clears", "Evidence"],
         [[esc(s["id"]), esc(s["title"]), esc(s["why"][:220] + ("..." if len(s["why"]) > 220 else "")),
@@ -464,7 +480,7 @@ def build_questions():
     return page("pages/open-questions.html", "Open questions · Own4 decision gaps",
                 "nfl-decision-gaps › open questions", "".join(body),
                 "pages/open-questions.html",
-                "Every open question, with the number that would clear it and how to get it.")
+                "Every registered question, with its source, status and the evidence that would clear it.")
 
 
 def build_gaps():
@@ -507,10 +523,10 @@ def build_gaps():
 def build_evidence(parsed):
     body = []
     body.append(h(1, "Availability evidence"))
-    body.append(p("Three tables, all built from two official pages: the live Week 10 injury report "
-                  "(%s) and the official Week 10 inactive lists (%s). The join covers the eight "
-                  "clubs where this session read <em>every</em> row of the live report; the other "
-                  "clubs were read but not transcribed, and are not claimed."
+    body.append(p("The designation-to-inactive join is built from the live Week 10 injury report "
+                  "(%s) and the official Week 10 inactive lists (%s). It covers the eight clubs where "
+                  "every live-report row was read; other clubs were not transcribed into this join. "
+                  "The reserve-list, capture-delta and results sections below cite their own sources."
                   % (src("S1"), src("S4"))))
 
     body.append(h(2, "1. Designation to inactive join"))
@@ -597,19 +613,31 @@ def build_evidence(parsed):
                   % len(R.TRADES)))
 
     body.append(h(2, "8. Verified results feed, Week 10"))
+    body.append(p("Current official Week 10 schedule: %s; current official scores: %s. Dated 2026 "
+                  "schedule-release announcement (May 8): %s; current Week 11 schedule: %s. "
+                  "These links are paired here so the dated announcement can be compared with the "
+                  "live weekly schedule. Fetches in this refresh are dated 2026-11-17; the tool "
+                  "provides no exact clock time or response headers." %
+                  (src("S11"), src("S12"), src("S15"), src("S16"))))
     rows = []
     for r in R.RESULTS:
-        rows.append([esc(r["game"]), esc(r["day"]),
+        rows.append([esc(r["game"]), esc(r["day"]), esc(r["state"]), esc(r["status"]),
                      num_or_blank(r["away_pts"]), num_or_blank(r["home_pts"]),
-                     esc(r["status"]),
                      esc(r["venue"]) if r["venue"] else blank("not captured"),
-                     srcs(r["venue_src"]) if r["venue_src"] else srcs("S6, S7"),
+                     srcs(r["result_src"]),
+                     srcs(r["venue_src"]) if r["venue_src"] else blank("not confirmed"),
                      esc(r["note"]) if r["note"] else ""])
-    body.append(table(["Fixture", "Day", "Away", "Home", "State", "Venue", "Source", "Note"],
+    body.append(table(["Fixture", "Day", "Normalized state", "Source state / note", "Away points",
+                       "Home points", "Venue", "Result source", "Venue source", "Note"],
                       rows, cls="wide"))
-    body.append(p("Twelve finals confirmed on two independent official pages. Two fixtures carry no "
-                  "score: one was rendered as live when read, the other had not kicked off. Neither "
-                  "score is inferred."))
+    n_final = sum(1 for r in R.RESULTS if r["state"] == "final")
+    n_nonfinal = sum(1 for r in R.RESULTS if r["state"] != "final")
+    body.append(p("%d of %d fixtures currently have an official Final state and two numeric scores. "
+                  "%d fixture%s remain non-final in the current official reads. PIT-CIN is now "
+                  "verified Final, 18-38; the earlier 2026-11-16 LIVE 0-3 observation is retained "
+                  "only as historical evidence in F1. LAC-BAL remains listed as Scheduled with "
+                  "both scores blank and is flagged F15. No result is inferred."
+                  % (n_final, len(R.RESULTS), n_nonfinal, "" if n_nonfinal == 1 else "s")))
     return page("pages/availability-evidence.html",
                 "Availability evidence · Own4 decision gaps",
                 "nfl-decision-gaps › availability evidence", "".join(body),
@@ -621,10 +649,11 @@ def build_suggestions():
     body = []
     body.append(h(1, "Suggestions board"))
     body.append(p("Fifteen suggestions for improving the site and the decision-making it supports. "
-                  "Each one offers two or three paths with their effort, risk and trade-off, a "
-                  "dependency, and this session's recommendation. <strong>The verdict column is "
-                  "deliberately blank.</strong> Choosing between paths is the reviewer's call, not "
-                  "the model's. Nothing on this page has been implemented."))
+                  "Each one offers paths with their effort, risk and trade-off, a dependency, and this "
+                  "session's recommendation. Some evidence capture and build checks are already in "
+                  "place; the suggestions remain proposals for further work. <strong>The verdict "
+                  "column is deliberately blank.</strong> Choosing between paths is the reviewer's "
+                  "call, not the model's."))
     rows = []
     for s in R.SUGGESTIONS:
         rows.append(['<a href="#%s">%s</a>' % (esc(s["id"]), esc(s["id"])), esc(s["title"]),
@@ -658,10 +687,11 @@ def build_suggestions():
           "The brief rejects this. It would fabricate a starter the club never named, and the same "
           "page shows clubs listing several players at one rank and leaving slots empty.",
           srcs("S2, S8")],
-         ["Inferring the Steelers-Bengals score from the live page state.",
-          "The page rendered a first-quarter score on a Monday, well after the game was scheduled "
-          "to finish. Publishing it would be an inference from a state the two official pages "
-          "disagree about.", srcs("S6, S7")]]))
+         ["Inferring a final score from an intermediate LIVE state.",
+          "Both official pages were observed showing PIT-CIN LIVE at 0-3 on 2026-11-16. A later "
+          "official read reported Final 18-38, so the final was published only from Final-state "
+          "sources; the earlier rendering remains historical evidence in F1.",
+          srcs("S6, S7, S11, S12, S13")]]))
     return page("pages/suggestions.html", "Suggestions board · Own4 decision gaps",
                 "nfl-decision-gaps › suggestions", "".join(body),
                 "pages/suggestions.html",
@@ -701,8 +731,8 @@ def build_repo_review(inv):
 
     body.append(h(2, "Duplication"))
     body.append(p("The same page title is committed in many namespaces. This is the structural cause "
-                  "of the contradictory counts in flag F2: thirty independent copies of a "
-                  "'questions' page will not agree unless they are generated from one register."))
+                  "of the contradictory counts in flag F2: independent copies of a 'questions' page "
+                  "will not agree unless they are generated from one register."))
     rows = []
     for t, (c, n) in sorted(inv["page_title_counts"].items(), key=lambda kv: (-kv[1][0], kv[0])):
         first = n[0]
@@ -731,12 +761,13 @@ def build_repo_review(inv):
 
 def build_sources():
     body = []
-    body.append(h(1, "Sources read this session"))
-    body.append(p("Every row on every page in this namespace traces to one of these. "
-                  "<em>live</em> means the page was fetched on %s. <em>repo</em> means the value "
-                  "was computed from a file already committed to this repository. <em>absent</em> "
-                  "means the fetch was attempted and the official server returned no such page "
-                  "&mdash; which is itself a finding." % R.DATE))
+    body.append(h(1, "Sources and point-in-time observations"))
+    body.append(p("Every registered source ID on these pages resolves to a source record below; "
+                  "generic <em>repo</em> links point to the Own4 repository root. "
+                  "<em>live</em> means an official page was fetched at the point recorded in its "
+                  "read note; use that note rather than assuming all sources share one timestamp. "
+                  "<em>repo</em> means the value was computed from a committed repository file. "
+                  "<em>absent</em> means the attempted official route returned no such page."))
     rows = []
     for s in R.SOURCES:
         rows.append([esc(s["id"]), esc(s["kind"]), ext(s["url"], s["title"]),
@@ -752,7 +783,7 @@ def build_sources():
                   "and not twenty-eight. Any value not read directly is rendered blank, never "
                   "filled in."))
 
-    body.append(h(2, "Official pages the brief asks for that were not located"))
+    body.append(h(2, "Source requests from the brief: found and not found"))
     body.append(table(
         ["Wanted", "Result of the search this session", "Where it was looked for"],
         [["Club depth charts on nfl.com",
@@ -771,26 +802,33 @@ def build_sources():
           "Not found beyond the schedule page's summary weather chip. The Game Center publishes "
           "Location and Stadium only.", srcs("S5, S6")],
          ["Dated reserve / injured-reserve list",
-          "Found. https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated "
-          "Reserve/Injured moves for November 2026. It is not captured anywhere in this repository.",
-          srcs("S10")]]))
+          "Found. The official page publishes 25 dated November 2026 moves, and nfl-collector "
+          "commits a 25-row structured capture with a ledger hash. This namespace has not yet wired "
+          "that capture into its own weekly join.",
+          srcs("S10, S17")]]))
     return page("pages/sources.html", "Sources · Own4 decision gaps",
                 "nfl-decision-gaps › sources", "".join(body),
                 "pages/sources.html",
-                "The official pages every value in this namespace was read from.")
+                "Official NFL pages and committed repository records used by this namespace.")
 
 
 def build_flagged():
     body = []
     body.append(h(1, "Flagged for review"))
-    body.append(p("Everything this session could not confirm from an official page. None of these "
-                  "block publication of the analysis; each is published with the source link so it "
-                  "can be checked after the site is live. Nothing here has been filled in."))
+    body.append(p("This page separates open gaps from resolved observations retained for audit. "
+                  "Every unresolved value remains blank where required and links to the official "
+                  "source used for review; resolved items are labelled explicitly."))
     rows = []
     for f in R.FLAGS:
-        rows.append([esc(f["id"]), esc(f["sev"]), esc(f["area"]), esc(f["item"]), esc(f["detail"]),
+        rows.append([esc(f["id"]), esc(f["status"] if f.get("status") else "open"),
+                     esc(f["sev"]), esc(f["area"]), esc(f["item"]), esc(f["detail"]),
                      srcs(f["src"])])
-    body.append(table(["ID", "Severity", "Area", "Item", "Detail", "Source"], rows, cls="wide"))
+    body.append(table(["ID", "Status", "Severity", "Area", "Item", "Detail", "Source"],
+                      rows, cls="wide"))
+    body.append(h(2, "Status"))
+    n_resolved = sum(1 for f in R.FLAGS if f.get("status", "open").lower().startswith("resolved"))
+    body.append(kpis([(esc(str(len(R.FLAGS) - n_resolved)), "open items"),
+                      (esc(str(n_resolved)), "resolved items retained for audit")]))
     body.append(h(2, "By severity"))
     body.append(kpis([(esc(str(sum(1 for f in R.FLAGS if f["sev"] == s))), s)
                       for s in ["high", "medium", "low"]]))
@@ -882,10 +920,11 @@ def _compute_inventory():
              "Most of them commit their own questions.html, suggestions.html, flagged.html, "
              "sources.html and executive-summary.html. The most repeated page files: %s." % dup,
              "Structural cause of the divergence above. Suggestion SG-I.", "repo"),
-            ("A live fixture rendered as live after its date",
-             "PIT/CIN is rendered LIVE in the first quarter on both official pages read on "
-             "2026-11-16.",
-             "Recorded blank and flagged rather than inferred. Flag F1.", "S6, S7"),
+            ("Historical PIT-CIN result-state anomaly",
+             "On 2026-11-16 both official pages showed LIVE, Q1 08:56, PIT 0-CIN 3; the 2026-11-17 "
+             "schedule, scores and Game Center reads showed Final, 18-38.",
+             "Final score is verified and published; the older LIVE rendering remains in F1 as a "
+             "historical observation. No cause is inferred.", "S6, S7, S11, S12, S13"),
             ("Row-level official data committed to a public site",
              "The repository commits full transcriptions of nfl.com tables.",
              "The brief asks for a public analysis layer and a private data layer with the terms "
@@ -968,7 +1007,10 @@ def main():
 
     inv = repo_inventory()
     write_json("repo_inventory.json", inv)
-    write_json("results_week10.json", dict(week=R.WEEK, source_ids=["S6", "S7"], rows=R.RESULTS))
+    result_source_ids = sorted({sid.strip() for r in R.RESULTS
+                                for field in ("result_src", "venue_src")
+                                for sid in r[field].split(",") if sid.strip()})
+    write_json("results_week10.json", dict(week=R.WEEK, source_ids=result_source_ids, rows=R.RESULTS))
     write_json("inactives_week10.json",
                dict(week=R.WEEK, source_ids=["S4"],
                     clubs=[dict(club=a, name=b, inactive=lst) for a, b, lst in R.INACTIVES]))
