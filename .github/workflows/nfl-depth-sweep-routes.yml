@@ -19,3 +19,17 @@ jobs:
         run: python3 nfl-depth-sweep/engine/verify_routes.py
       - name: Rebuild must be committed byte-identical
         run: git diff --exit-code -- nfl-depth-sweep/index.html nfl-depth-sweep/pages/
+
+      # TEMPORARY diagnostic (removed after root-cause): surface the peer live-board
+      # substance diff, whose logs are unreachable from the authoring sandbox.
+      - name: Diagnose live-board substance (annotation only)
+        run: |
+          for s in reconcile originate leaderboard correlations availability context requirements audit_repo; do
+            python3 nfl-live-board/engine/$s.py >/dev/null 2>&1 || true
+          done
+          python3 nfl-live-board/build.py >/dev/null 2>&1 || true
+          python3 nfl-live-board/engine/substance.py > /tmp/sub.txt 2>&1 || true
+          head -c 3000 /tmp/sub.txt | while IFS= read -r line; do
+            echo "::warning title=live-board substance::${line}"
+          done
+          exit 0
