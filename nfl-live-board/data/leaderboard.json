@@ -1,0 +1,247 @@
+{
+ "dataset": "nfl_live_board_leaderboard",
+ "title": "Two-stage leaderboard: proper-score qualification, then prospective escrow",
+ "built_utc": "2026-11-17",
+ "points_total": 1000,
+ "points_awarded": 0,
+ "qualifiers": 0,
+ "ranking_rule": "stage 1 (proper score, benchmark-relative, week-cluster lower bound, Holm-adjusted) qualifies; stage 2 (prospective CLV) is the escrow and is blank until a price source exists. No raw win rate is used.",
+ "stage_2_blank_reason": "no official closing price (F-01)",
+ "rows": [
+  {
+   "id": "S1-ML-edge",
+   "title": "Moneyline: fair price when the rating edge is positive",
+   "rule_id": "PREREG-LB#S1",
+   "definition": "p(home) = Phi(fair margin / SD); a game is bet only when p != 0.5. Scored with Brier.",
+   "proper_score": {
+    "n": 116,
+    "brier": 0.22177,
+    "benchmark_brier": 0.25411,
+    "brier_skill_score": 0.1273,
+    "bss_ci90_week_cluster": [
+     0.0159,
+     0.2412
+    ],
+    "bootstrap_p_bss_le_0": 0.031,
+    "accuracy_raw_is_not_the_metric": 0.6466,
+    "units_of_independence": "week (n_weeks=8)"
+   },
+   "staking": {
+    "clv": null,
+    "roi": null,
+    "n_bets": null,
+    "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
+   },
+   "stage_1_qualifies": false,
+   "holm_adjusted_p": 0.1375,
+   "multiplicity": {
+    "strategies_scored": 5,
+    "method": "Holm-Bonferroni",
+    "declared_before_scoring": true
+   }
+  },
+  {
+   "id": "S2-ML-strong",
+   "title": "Moneyline: only games with a fair margin of 6 points or more",
+   "rule_id": "PREREG-LB#S2",
+   "definition": "Same forecast as S1, but the strategy passes on games below the 6-point edge. The Brier score below is computed on ALL games, so it is the forecast's skill, not the selection's - selection skill cannot be separated from variance at this n.",
+   "proper_score": {
+    "n": 116,
+    "brier": 0.22177,
+    "benchmark_brier": 0.25411,
+    "brier_skill_score": 0.1273,
+    "bss_ci90_week_cluster": [
+     0.0167,
+     0.2443
+    ],
+    "bootstrap_p_bss_le_0": 0.0275,
+    "accuracy_raw_is_not_the_metric": 0.6466,
+    "units_of_independence": "week (n_weeks=8)"
+   },
+   "staking": {
+    "clv": null,
+    "roi": null,
+    "n_bets": null,
+    "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
+   },
+   "stage_1_qualifies": false,
+   "holm_adjusted_p": 0.1375,
+   "multiplicity": {
+    "strategies_scored": 5,
+    "method": "Holm-Bonferroni",
+    "declared_before_scoring": true
+   }
+  },
+  {
+   "id": "S4-coin",
+   "title": "Control: a constant 0.5 forecast",
+   "rule_id": "PREREG-LB#S4",
+   "definition": "Random picks expressed as a probability. Removes luck by construction: whatever score this posts is the score variance alone can produce.",
+   "proper_score": {
+    "n": 116,
+    "brier": 0.25,
+    "benchmark_brier": 0.25411,
+    "brier_skill_score": 0.0162,
+    "bss_ci90_week_cluster": [
+     -0.0036,
+     0.0351
+    ],
+    "bootstrap_p_bss_le_0": 0.0875,
+    "accuracy_raw_is_not_the_metric": 0.5345,
+    "units_of_independence": "week (n_weeks=8)"
+   },
+   "staking": {
+    "clv": null,
+    "roi": null,
+    "n_bets": null,
+    "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
+   },
+   "stage_1_qualifies": false,
+   "holm_adjusted_p": 0.26249999999999996,
+   "multiplicity": {
+    "strategies_scored": 5,
+    "method": "Holm-Bonferroni",
+    "declared_before_scoring": true
+   }
+  },
+  {
+   "id": "S5-always-home",
+   "title": "Control: pick the home team, stated at 0.5+eps confidence",
+   "rule_id": "PREREG-LB#S5",
+   "definition": "The favourite-free baseline. If a strategy cannot beat this on a proper score, it has no signal worth staking.",
+   "proper_score": {
+    "n": 116,
+    "brier": 0.25079,
+    "benchmark_brier": 0.25411,
+    "brier_skill_score": 0.0131,
+    "bss_ci90_week_cluster": [
+     -0.0036,
+     0.031
+    ],
+    "bootstrap_p_bss_le_0": 0.1045,
+    "accuracy_raw_is_not_the_metric": 0.4655,
+    "units_of_independence": "week (n_weeks=8)"
+   },
+   "staking": {
+    "clv": null,
+    "roi": null,
+    "n_bets": null,
+    "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
+   },
+   "stage_1_qualifies": false,
+   "holm_adjusted_p": 0.26249999999999996,
+   "multiplicity": {
+    "strategies_scored": 5,
+    "method": "Holm-Bonferroni",
+    "declared_before_scoring": true
+   }
+  },
+  {
+   "id": "S3-home-prior",
+   "title": "Control: the training-window home win rate in every game",
+   "rule_id": "PREREG-LB#S3",
+   "definition": "The benchmark itself, scored as if it were a strategy. Its BSS must be exactly 0 because the benchmark term in every BSS is this same forecast; the script asserts it, so a nonzero value would mean the scoring arithmetic is broken.",
+   "proper_score": {
+    "n": 116,
+    "brier": 0.25411,
+    "benchmark_brier": 0.25411,
+    "brier_skill_score": 0.0,
+    "bss_ci90_week_cluster": [
+     0.0,
+     0.0
+    ],
+    "bootstrap_p_bss_le_0": 1.0,
+    "accuracy_raw_is_not_the_metric": 0.4569,
+    "units_of_independence": "week (n_weeks=8)"
+   },
+   "staking": {
+    "clv": null,
+    "roi": null,
+    "n_bets": null,
+    "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
+   },
+   "stage_1_qualifies": false,
+   "holm_adjusted_p": 1.0,
+   "multiplicity": {
+    "strategies_scored": 5,
+    "method": "Holm-Bonferroni",
+    "declared_before_scoring": true
+   }
+  }
+ ],
+ "removal_of_luck": {
+  "title": "Removal of luck",
+  "what_it_removes": [
+   {
+    "item": "price assumption",
+    "how": "no assumed price is used anywhere; stage 2 is blank",
+    "status": "removed"
+   },
+   {
+    "item": "raw win rate",
+    "how": "never reported as a metric; proper score instead",
+    "status": "removed"
+   },
+   {
+    "item": "independence inflation",
+    "how": "bootstrap resamples weeks, not games",
+    "status": "removed"
+   },
+   {
+    "item": "multiple testing",
+    "how": "Holm adjustment over 5 strategies",
+    "status": "removed"
+   },
+   {
+    "item": "survivorship / selection",
+    "how": "rules frozen in prereg before scoring",
+    "status": "removed"
+   },
+   {
+    "item": "unmodelled edge from availability",
+    "how": "requires point-in-time availability for past games; the repository holds one week of it, so the ablation cannot be run and is NOT claimed",
+    "status": "not removed - flagged F-04"
+   }
+  ],
+  "control_floor": {
+   "coin_bss": 0.0162,
+   "always_home_bss": 0.0131,
+   "coin_ci90": [
+    -0.0036,
+    0.0351
+   ],
+   "always_home_ci90": [
+    -0.0036,
+    0.031
+   ],
+   "floor_upper_computed": 0.0351,
+   "reading": "luck alone reached this upper bound on this n. A point estimate below the floor is indistinguishable from variance, whatever its p-value."
+  },
+  "headline": {
+   "s1_bss": 0.1273,
+   "s1_bss_cluster_ci90": [
+    0.0159,
+    0.2412
+   ],
+   "s1_holm_p": 0.1375,
+   "s1_qualifies": false,
+   "s1_clears_control_floor": true,
+   "s1_unadjusted_p": 0.031,
+   "why_the_adjustment_matters": "unadjusted p = 0.0310 would read as significant at 5%; Holm across 5 strategies gives 0.1375, which does not clear. This is the multiplicity the brief requires, stated with the number of trials beside it."
+  },
+  "n_weeks": 8,
+  "n_games": 116,
+  "verdict_computed": "no strategy qualifies: the point estimate is positive and clears the control floor but the Holm-adjusted p does not clear 0.05",
+  "what_would_change_the_verdict": "more independent weeks. The cluster bound scales roughly with sqrt(n_weeks); at the current spread it needs a substantially longer prospective sample, which is why stage 2 exists and why the escrow is empty today."
+ },
+ "sources": [
+  {
+   "what": "corpus",
+   "url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  {
+   "what": "walk-forward rows",
+   "url": "see data/origination_week11.json"
+  }
+ ]
+}
