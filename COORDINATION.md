@@ -4669,3 +4669,19 @@ Review performed (read-only; this sandbox has outbound access to GitHub hosts on
 - Headline result (NFL Decision Desk): model loses to the vig-free market on proper score at n=104 (Brier 0.2525 vs 0.2147; paired week-cluster interval entirely below zero); 0 of 6 gates passing; 0 of 1,000 reward units awarded. No strategy qualifies for a reward.
 
 Task 7 (PR → main → merge → GitHub Pages deploy confirmation → record PR link + merge result here): claimed by this session. In progress.
+
+## Integration session · arena-3117bd4d-own4 (2026-11-17 UTC)
+
+Branch (fixed): `arena/3117bd4d-own4`, base `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9` (current `main`).
+Claimed under the standing brief ("no manual input; work to finish all tasks"). All prior-session NFL research
+(nfl-book, nfl-verify, nfl-own, nfl-edge, nfl-command) and the NBA root dashboard were preserved unchanged; no
+other session's files were edited.
+
+| # | Task | Status | Files touched (scope — no other session's files edited) |
+|---|------|--------|----------------------------------------------------------|
+| C-01 | Re-verify the combined site builds with no broken links and every data row source-linked | done | `verification/` (verify_site.py), `nfl-book/engine/` (build_site.py, verify.py) |
+| C-02 | Confirm live GitHub Pages deployment (root + NFL Book dashboard reachable and rendering) | done | — |
+| C-03 | PR from `arena/3117bd4d-own4` to main → merge → GitHub Pages deploy confirmation | in progress | `COORDINATION.md` |
+
+Rules held: official sources only; unverifiable values blank + flagged; no raw nfl.com HTML committed (structured
+rows + sha256 + timestamps only); every data row carries a source link; `git pull --rebase` before every push.
