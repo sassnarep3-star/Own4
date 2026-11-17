@@ -366,36 +366,71 @@ def compare_peer():
         "source_url": SOURCE_URL["S-inact"],
     })
 
-    # 4. Peer injury capture completeness vs the full report.
+    # 4. Peer injury capture completeness and field-level agreement against the
+    #    official report read above. Counts alone are not a comparison: align by
+    #    club/player, canonicalise the published LA/LAR and AZ/ARI aliases, then
+    #    compare position, injury, practice and game-status cells.
     p = os.path.join(REPO, "nfl-book", "data", "injuries_week10_capture.json")
-    peer_n = peer_clubs = peer_games = None
+    peer_n = peer_clubs = peer_games = n_cells_compared = n_rows_compared = None
+    mismatches = []
     if os.path.exists(p):
         pr = json.load(open(p, encoding="utf-8"))["rows"]
         peer_n = len(pr)
         peer_clubs = len({r["team"] for r in pr})
         peer_games = len({r["game"] for r in pr})
+        aliases = {"ARI": "AZ", "LAR": "LA"}
+
+        def canonical_team(team):
+            return aliases.get(team, team)
+
+        def cell(value):
+            return " ".join(str(value or "").strip().casefold().split())
+
+        official = {
+            (canonical_team(section["team"]), cell(row["player"])): row
+            for section in OBS["injury_report_week10"]["sections"]
+            for row in section["rows"]
+        }
+        captured = {(canonical_team(row["team"]), cell(row["player"])): row for row in pr}
+        n_rows_compared = len(official.keys() & captured.keys())
+        n_cells_compared = 0
+        for key in sorted(official.keys() | captured.keys()):
+            left, right = official.get(key), captured.get(key)
+            if left is None or right is None:
+                mismatches.append({"team": key[0], "player_key": key[1],
+                                   "field": "row", "official": left is not None,
+                                   "capture": right is not None})
+                n_cells_compared += 1
+                continue
+            for official_field, captured_field in (("pos", "pos"), ("injury", "injury"),
+                                                    ("practice", "practice"), ("status", "game_status")):
+                n_cells_compared += 1
+                if cell(left.get(official_field)) != cell(right.get(captured_field)):
+                    mismatches.append({"team": key[0], "player_key": key[1],
+                                       "field": official_field,
+                                       "official": left.get(official_field),
+                                       "capture": right.get(captured_field)})
     st = injury_stats()
+    result = "pass" if peer_n == st["n_rows"] and not mismatches else "fail"
     checks.append({
         "id": "X-04",
-        "claim": "Peer injuries_week10_capture.json holds the Week 10 report",
+        "claim": "Peer injuries_week10_capture.json agrees with the Week 10 official report",
         "peer_file": "nfl-book/data/injuries_week10_capture.json",
-        "n_cells_compared": None,
+        "n_cells_compared": n_cells_compared,
+        "n_rows_compared": n_rows_compared,
         "peer_rows": peer_n,
         "peer_clubs": peer_clubs,
         "peer_games": peer_games,
         "official_rows": st["n_rows"],
         "official_sections": st["n_sections"],
-        "n_mismatch_cells": (st["n_rows"] - peer_n) if peer_n else None,
-        "result": "partial",
-        "detail": (f"Peer capture holds {peer_n} rows covering {peer_clubs} clubs across "
-                   f"{peer_games} of the {WK10_FIXTURES} Week 10 fixtures. This session read all 8 "
-                   f"chunks: {st['n_sections']} club sections over all {WK10_FIXTURES} fixtures, "
-                   f"{st['n_rows']} rows. "
-                   f"Peer coverage is {round(100.0 * peer_n / st['n_rows'], 1)}% of rows and "
-                   f"{round(100.0 * peer_clubs / st['n_teams_captured'], 1)}% of the clubs that "
-                   "appear in the report. The peer's shortfall is in breadth of fixtures, not in "
-                   "accuracy of what it did read." if peer_n else "peer file absent"),
-        "mismatches": [],
+        "n_mismatch_cells": len(mismatches) if peer_n is not None else None,
+        "result": result if peer_n is not None else "unverified",
+        "detail": (f"Matched {n_rows_compared} club/player identities and compared "
+                   f"{n_cells_compared} position, injury, practice and game-status cells across "
+                   f"{peer_n} capture rows and {st['n_rows']} official rows, after the published "
+                   f"LA/LAR and AZ/ARI aliases were canonicalised. Field mismatches: {len(mismatches)}."
+                   if peer_n is not None else "peer file absent; no comparison made"),
+        "mismatches": mismatches,
         "source_url": SOURCE_URL["S-injuries"],
     })
 
