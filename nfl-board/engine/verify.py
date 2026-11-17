@@ -163,6 +163,16 @@ for rel in PAGES:
                 err("%s: table %d row %d has no link at all" % (rel, i, j))
             elif not any(any(d in h for d in OFFICIAL) for h in hrefs):
                 err("%s: table %d row %d has no official/repo link (has %s)" % (rel, i, j, hrefs[:2]))
+            elif not any("nfl.com" in h for h in hrefs) and not rel.endswith("sources.html"):
+                # the brief's strictest reading: a row must point at a *league* official page.
+                # Exempt: sources.html, whose rows ARE the register of pages read — forcing an
+                # nfl.com link there would mean linking a different page from the one the row is
+                # about, which is worse than the gap it would close.
+                # Club sites (packers.com, baltimoreravens.com, houstontexans.com) are official
+                # publishers but they are not nfl.com, so a row that relies only on a club page
+                # must also carry the league corroboration (S06) or be flagged as missing one.
+                warnings.append("%s: table %d row %d cites no nfl.com page (club/repo only)"
+                                % (rel, i, j))
 
     # 3. local links resolve
     base = os.path.dirname(path)

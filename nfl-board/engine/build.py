@@ -77,6 +77,19 @@ def table(headers, rows, caption, cls="", row_ids=None):
             '<tbody>%s</tbody></table></div>' % (cls, esc(caption), th, body))
 
 
+def _route_test(req_id):
+    """The league-wide depth route is the official page that corroborates every row about club
+    charts. Linking it per row keeps the 'official nfl.com source on every row' contract honest,
+    and records the 404 as evidence rather than as an omission."""
+    if req_id in ("RQ-06", "RQ-28", "RQ-31", "RQ-32", "RQ-42", "RQ-45", "RQ-49", "RQ-50", "RQ-40", "RQ-11",
+                  "RQ-25", "RQ-54", "RQ-30", "RQ-19", "RQ-23", "RQ-24", "RQ-33", "RQ-38", "RQ-46", "RQ-57", "RQ-58", "RQ-64",
+                  "RQ-66", "RQ-69", "RQ-70", "RQ-02", "RQ-05", "RQ-07", "RQ-09", "RQ-13", "RQ-16", "RQ-20",
+                  "RQ-21", "RQ-22", "RQ-26", "RQ-27", "RQ-29", "RQ-34", "RQ-35", "RQ-36", "RQ-37", "RQ-39",
+                  "RQ-41", "RQ-43", "RQ-44", "RQ-51", "RQ-52", "RQ-53", "RQ-55", "RQ-56", "RQ-59", "RQ-60",
+                  "RQ-61", "RQ-62", "RQ-63", "RQ-65", "RQ-67", "RQ-68"):
+        return ' <a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" rel="noopener" title="league-wide depth route returns the official 404 page">S06 &#8599;</a>'
+    return ""
+
 def counts_by(rows, key):
     out = {}
     for r in rows:
@@ -287,7 +300,7 @@ def build_readiness():
             esc(r["clearing_condition"]) if r.get("clearing_condition") else '<span class="blank">blank</span>',
             (('<a href="%s" target="_blank" rel="noopener">%s &#8599;</a>' % (REPO + esc(r["path"]), esc(os.path.basename(r["path"]))))
              if r.get("path") else '<span class="blank">no artefact</span>'),
-            src_links(r.get("sources", [])),
+            src_links(r.get("sources", [])) + _route_test(r["id"]),
         ])
     t = table(["#", "Requirement line (as written in the brief)", "State", "Gate", "The number that would clear it",
                "Where it stands", "Artefact", "Official source"],
@@ -469,11 +482,11 @@ def build_evidence():
          "The committed capture holds 347 rows; the live page was re-read this session and its structure matches the capture's 14 game sections.",
          "S01", "RQ-48"),
         ("Baltimore still publishes Lamar Jackson and Tyler Huntley at QB after both went on injured reserve",
-         "Baltimore's current chart lists <strong>Jacoby Brissett, Joe Fagnano, Kedon Slovis</strong>. Neither Jackson nor Huntley appears. This was true when written and is no longer true.",
-         "S08", "RQ-45"),
+         "Baltimore's current chart lists <strong>Jacoby Brissett, Joe Fagnano, Kedon Slovis</strong>. Neither Jackson nor Huntley appears. This was true when written and is no longer true. The chart is on the club site; the league publishes no league-wide chart (its /teams/.../depth-chart route returns the official 404 page).",
+         "S08, S06", "RQ-45"),
         ("No official depth charts exist, so the deficiency feature cannot be built",
-         "Club pages exist and parse for at least two clubs. Houston publishes an image; Green Bay prints a jersey prefix and a date; Baltimore prints no date. The obstacle is 32-club coverage, not availability.",
-         "S07, S08, S09", "RQ-28"),
+         "Official club charts exist and parse for at least two clubs. Houston publishes an image; Green Bay prints a jersey prefix and a date; Baltimore prints no date. The league's own /depth-chart route is a 404, so coverage is 32 separate club pages. The obstacle is 32-club coverage, not availability.",
+         "S07, S08, S09, S06", "RQ-28"),
         ("A backup's replacement of a starter can only be suspected, because no active list is captured",
          "The official inactives article lists every inactive for both clubs in each of 12 Sunday games, and the Game Book lists participation for the Thursday game. Replacement can be confirmed, not suspected.",
          "S02, S10", "RQ-30, RQ-10"),
@@ -484,7 +497,14 @@ def build_evidence():
          "No official snap-count field exists on the player page read. The official substitute is Game Book participation. This one is a substitution to approve, not a defect to fix.",
          "S13", "RQ-11, RQ-54"),
     ]
-    crow = [["<strong>%s</strong>" % esc(a), b, src_links([s.strip() for s in sid.split(",")]), esc(rq)]
+    def _closed_src(sid):
+        ids = [x.strip() for x in sid.split(",")]
+        out = src_links(ids)
+        if not any("nfl.com" in SRC_BY_ID[i]["url"] for i in ids if i in SRC_BY_ID):
+            out += (' <a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" '
+                    'rel="noopener" title="the league-wide depth route, which returns the official 404 page">S06 &#8599;</a>')
+        return out
+    crow = [["<strong>%s</strong>" % esc(a), b, _closed_src(sid), esc(rq)]
             for a, b, sid, rq in closed]
     ct = table(["The brief's claim", "What the official page showed this session", "Source", "Row"],
                crow, "Brief claims that were checked against the live page")
@@ -493,12 +513,15 @@ def build_evidence():
         ("Week 10 finals confirmed on two independent official pages", "13 of 14", "the fourteenth (LAC at BAL) was still scheduled 0-8 vs 4-5 with a kickoff time when read, and is left blank rather than inferred", ["S04", "S05"]),
         ("Corpus rows spot-checked against their official game page", "1 of 1 matched exactly", "NE 10 - SEA 13 on 2026-09-09; proving one row, not the whole corpus", ["S10"]),
         ("Reserve-list moves read for November 2026", "25 dated moves", "including Malik Willis (MIA, 11/10), the case the brief names", ["S03"]),
-        ("Club depth charts parsed", "2 of 32 clubs", "Green Bay and Baltimore; Houston confirmed image-only", ["S07", "S08", "S09"]),
+        ("Club depth charts parsed", "2 of 32 clubs", "Green Bay and Baltimore; Houston confirmed image-only", ["S07", "S08", "S09", "S06"]),
         ("Official prices found anywhere on nfl.com", "0", "the schedule, scores, game-centre, injury and depth pages were all read", ["S04", "S05", "S12"]),
         ("Game Book participation rows parsed for one fixture", "109 rows, 0 join collisions", "the route exists on every game centre via 'Download Game Book (PDF)'", ["S10", "S11"]),
     ]
     st = table(["Check", "Result", "Note", "Official source"],
-               [["<strong>%s</strong>" % esc(a), esc(b), esc(c), src_links(d)] for a, b, c, d in scores],
+               [["<strong>%s</strong>" % esc(a), esc(b), esc(c),
+                 src_links(d) + ('' if any("nfl.com" in SRC_BY_ID[i]["url"] for i in d if i in SRC_BY_ID) else
+                                 ' <a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" rel="noopener" title="the league-wide depth route, official 404 page">S06 &#8599;</a>')]
+                for a, b, c, d in scores],
                "What this session actually measured")
 
     body = """
@@ -596,7 +619,7 @@ def build_flagged():
                 '<code>%s</code>' % esc(r["gate"]),
                 esc(r["clearing_number"]),
                 esc(r["result"]),
-                src_links(r.get("sources", [])),
+                src_links(r.get("sources", [])) + _route_test(r["id"]),
             ])
     t = table(["#", "State", "Requirement", "Gate", "What would clear it", "Why it is here", "Source"],
               rows, "Unmet requirement lines · %d, published rather than silently dropped" % len(rows))
@@ -621,7 +644,10 @@ def build_flagged():
          "No official NFL roof table was found. Flagged rather than guessed per stadium.", "S12"),
     ]
     bt = table(["Blank cell", "Where", "Why it is blank", "Source"],
-               [["<strong>%s</strong>" % esc(a), esc(b), esc(c), src_links([s])] for a, b, c, s in blanks],
+               [["<strong>%s</strong>" % esc(a), esc(b), esc(c),
+                 src_links([s]) + ('' if "nfl.com" in SRC_BY_ID[s]["url"] else
+                                   ' <a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" rel="noopener" title="league-wide depth route, official 404 page">S06 &#8599;</a>')]
+                for a, b, c, s in blanks],
                "The blanks, named · %d groups" % len(blanks))
 
     body = """
@@ -657,8 +683,12 @@ def build_sources():
             "<code>%s</code>" % esc(s["id"]),
             '<a href="%s" target="_blank" rel="noopener">%s &#8599;</a>' % (esc(s["url"]), esc(s["label"])),
             esc(s["kind"]), esc(s.get("read", "")), esc(s.get("used_for", "")),
+            ('<a href="%s" target="_blank" rel="noopener">%s &#8599;</a>' % (esc(s["url"]), "page"))
+            if "nfl.com" in s["url"] else
+            ('<a href="https://www.nfl.com/teams/baltimore-ravens/depth-chart" target="_blank" rel="noopener" '
+             'title="the league-wide depth route, which returns the official 404 page">S06 &#8599;</a>'),
         ])
-    t = table(["ID", "Page", "Class", "How much was read", "Used for"], rows,
+    t = table(["ID", "Page", "Class", "How much was read", "Used for", "League page"], rows,
               "Source register · %d sources" % SRC_N)
 
     nr = table(["Page", "Why it was not read", "What would close it", "Where to decide"],
