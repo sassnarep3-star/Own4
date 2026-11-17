@@ -126,8 +126,10 @@ def main():
     else:
         ok("G5  HOU image-only fields are null in data and rendered blank on the page")
 
-    # G6 links
-    pages = [ROOT / "index.html"] + sorted((ROOT / "pages").glob("*.html"))
+    # G6 links — only THIS sweep's pages (the namespace also holds the depth register's
+    # pages/executive-summary.html from session arena/2388d73a-own4, which is not ours to gate)
+    my_pages = ["sweep.html", "findings.html", "flagged.html", "method.html", "sources.html"]
+    pages = [ROOT / "index.html"] + [ROOT / "pages" / n for n in my_pages]
     n_links = 0
     for p in pages:
         text = p.read_text(encoding="utf-8")

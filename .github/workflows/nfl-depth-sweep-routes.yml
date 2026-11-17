@@ -1,4 +1,4 @@
-name: nfl-depth-sweep verify
+name: nfl-depth-sweep routes verify
 
 on:
   push:
@@ -16,6 +16,6 @@ jobs:
       - name: Build (deterministic)
         run: python3 nfl-depth-sweep/engine/build.py
       - name: Verify gates G1-G8
-        run: python3 nfl-depth-sweep/engine/verify.py
+        run: python3 nfl-depth-sweep/engine/verify_routes.py
       - name: Rebuild must be committed byte-identical
         run: git diff --exit-code -- nfl-depth-sweep/index.html nfl-depth-sweep/pages/

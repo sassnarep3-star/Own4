@@ -32,7 +32,7 @@ was read from. Unconfirmable values are blank and flagged (Flagged for Review, D
 
 ```bash
 python3 engine/build.py     # regenerates index.html + pages/*.html from data/*.json
-python3 engine/verify.py    # G1..G8 gates; non-zero exit on any disagreement
+python3 engine/verify_routes.py  # G1..G8 route gates; non-zero exit on any disagreement
 ```
 
 Verify fails on: row counts ≠ 32, abbr-set mismatch, missing source links, wrong route semantics,
@@ -45,7 +45,7 @@ missing flags, or a non-deterministic rebuild.
 - `data/route_l.json` — league per-team depth-path results (32×404 + league-wide probe)
 - `data/route_c.json` — club depth-page results (structure, heading, as-of, self-label, slot counts,
   shared/empty rank-1 observations, source, window)
-- `engine/build.py`, `engine/verify.py` — deterministic generator + gates
+- `engine/build.py`, `engine/verify_routes.py` — deterministic route-sweep generator + gates (the namespace also carries the depth register's `engine/verify.py`, session arena/2388d73a-own4)
 - `index.html`, `pages/*.html` — generated output (do not hand-edit)
 
 Session `arena-76537469-own4`, 2026-11-17 UTC. Research only — not wagering advice.
