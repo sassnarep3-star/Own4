@@ -86,7 +86,9 @@ def parse_transcript(path: Path):
     meta = {"source_url": None, "fetched_utc": None, "note": None}
     for ln in lines:
         if ln.startswith("# source_url:"):
-            meta["source_url"] = ln.split(":", 1)[1].strip()
+            # take the first http(s) URL only (header may carry parenthetical notes)
+            m = re.search(r"https?://[^\s)]+", ln)
+            meta["source_url"] = m.group(0) if m else None
         elif ln.startswith("# fetched_utc:"):
             meta["fetched_utc"] = ln.split(":", 1)[1].strip()
 
@@ -206,6 +208,9 @@ def main() -> int:
     if not raw_files:
         print("no raw transcripts found", file=sys.stderr)
         return 1
+    # league-level files (e.g. the reserve-list transcript) start with "_";
+    # they are not per-club transcripts
+    raw_files = [p for p in raw_files if not p.stem.startswith("_")]
 
     summary = []
     for path in raw_files:

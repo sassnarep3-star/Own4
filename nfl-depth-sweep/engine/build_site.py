@@ -59,8 +59,12 @@ def load(name):
 
 
 def page(title, body, path, sub=None):
+    # nav links must be relative to this page's directory (club pages live one
+    # level down in site/clubs/)
+    depth = Path(path).parent
+    prefix = "../" if depth.parts else ""
     nav = "".join(
-        f'<a href="{E(href)}">{E(label)}</a>'
+        f'<a href="{E(prefix + href)}">{E(label)}</a>'
         for href, label in NAV
     )
     sub_html = f'<div class="sub">{E(sub)}</div>' if sub else ""

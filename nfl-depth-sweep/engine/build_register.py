@@ -177,6 +177,9 @@ def main() -> int:
     clubs = []
     for path in sorted(PARSED.glob("*.json")):
         club = path.stem
+        if club not in teams:
+            print(f"skipping non-club parsed artefact: {path.name}", file=sys.stderr)
+            continue
         parsed = json.loads(path.read_text())
         clubs.append(build_club(club, parsed, teams))
 

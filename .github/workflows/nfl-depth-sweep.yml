@@ -1,0 +1,39 @@
+name: nfl-depth-sweep
+
+on:
+  push:
+    paths:
+      - "nfl-depth-sweep/**"
+      - ".github/workflows/nfl-depth-sweep.yml"
+  pull_request:
+    paths:
+      - "nfl-depth-sweep/**"
+      - ".github/workflows/nfl-depth-sweep.yml"
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Rebuild engines and verify
+        run: |
+          python3 nfl-depth-sweep/engine/parse_depth.py
+          python3 nfl-depth-sweep/engine/build_register.py
+          python3 nfl-depth-sweep/engine/roster_ir_sweep.py
+          python3 nfl-depth-sweep/engine/build_site.py
+          python3 nfl-depth-sweep/engine/verify.py
+
+      - name: Fail on any unstaged engine output
+        run: |
+          if [ -n "$(git status --porcelain nfl-depth-sweep/)" ]; then
+            echo "Engine output differs from checked-in artefacts:"
+            git status --porcelain nfl-depth-sweep/
+            exit 1
+          fi
