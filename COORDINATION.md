@@ -4974,3 +4974,23 @@ Final behaviour in `nfl-verify/engine/readiness.py`:
 
 The generated diff this produces is 7 lines in `nfl-verify/data/readiness.json` plus one page line, and it
 is committed rather than left for CI to discover.
+
+## Session `arena/e2e6ca5a-own4` — official Week 10 results refresh (claim, 2026-11-17 UTC)
+
+**Branch (fixed by Arena):** `arena/e2e6ca5a-own4`, based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9` (`main`).
+**Scope:** refresh the completed Week 10 result anomaly in the already-merged `nfl-decision-gaps/` evidence set; do not add another NFL namespace. The prior `arena/448c248f-own4` integration is merged and no active claim on these files is present in the current board.
+
+| ID | Task | Status | Files in scope |
+|---|---|---|---|
+| E1 | Read board, claim the released result-feed scope, and re-read official Week 10 schedule + scores | done | `COORDINATION.md` (append-only) |
+| E2 | Record the official PIT–CIN final and LAC–BAL still-scheduled state with source IDs and date-precision limits | in progress | `nfl-decision-gaps/engine/register.py`, generated `nfl-decision-gaps/data/**`, `nfl-decision-gaps/pages/**` |
+| E3 | Clear the stale live-score flag, update the answer/gap text and add a result-state/source consistency check | in progress | `nfl-decision-gaps/engine/register.py`, `nfl-decision-gaps/engine/build.py`, `nfl-decision-gaps/engine/verify.py` |
+| E4 | Rebuild, verify determinism and links, then PR → merge → confirm Pages | in progress | `nfl-decision-gaps/**`, `COORDINATION.md` (append-only) |
+
+**Official reads already performed (2026-11-17 UTC; tool exposes no response headers or time-of-day, so no exact clock time is claimed):**
+- NFL Week 10 schedule: https://www.nfl.com/schedules/2026/by-week/week-10 — chunks 0–1 show *Steelers 18, Bengals 38, FINAL*; Chargers–Ravens remains scheduled for Monday Nov 16, 8:15 PM ET.
+- NFL scores: https://www.nfl.com/scores/ — chunks 0–2 independently show Steelers 18, Bengals 38, Final; Chargers–Ravens remains upcoming.
+
+No scores are inferred. The older 2026-11-16 `LIVE` rendering remains preserved as the reason the PIT–CIN value was held blank until this fresh official read.
+
+**Rebase conflict log:** The required `git pull --rebase origin main` found `origin/main` had advanced to `need4fcb` (PR #143) and both sessions appended to this file. Resolved as an append-only union, retaining session `arena/1d297093-own4`’s integration claim and this session’s results-refresh claim verbatim; no peer work was discarded.
