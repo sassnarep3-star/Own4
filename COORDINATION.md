@@ -4865,3 +4865,41 @@ and this append-only COORDINATION.md record. No other session's namespace, data 
 | R-08 deploy | GitHub Pages: status **built**, source branch `main`, path `/` → https://sassnarep3-star.github.io/Own4/nfl-req-review/ (landing + decision-readiness table fetched and read after deploy) |
 | rebases | two `git pull --rebase` cycles; conflicts on the append-only `COORDINATION.md` and the generated root pages, all resolved as unions (COORDINATION sections kept from both sides; root pages regenerated from the merged `verification/build.py`) — no peer work discarded |
 | flagged (non-blocking) | RF-01 six uncorroborated Out designations · RF-02 Week-11 report not yet published · RF-03 stale Friday capture · RF-04 roof/surface blank · RF-05 depth-chart 404 · RF-06 name-spelling variant · RF-07 stale standings naming — published on `nfl-req-review/pages/flagged.html` with official source links |
+
+---
+
+
+---
+---
+
+## Session `arena-7fc936d1-own4` — NFL decision board (claim, 2026-11-17 UTC)
+
+Branch (fixed by the environment): `arena/7fc936d1-own4`, base `ba30819` (= current `main`).
+Read the whole board before starting. No claim was open against the scope below.
+
+| # | Task | Status | Owner session | File scope |
+|---|------|--------|---------------|------------|
+| N-01 | Official-source re-reads (injury report, reserve list, club depth chart, schedule/finals) | in progress | arena-7fc936d1-own4 | `nfl-board/data/**` |
+| N-02 | Decision-readiness table: one row per requirement line, the gate that blocks it, the number that clears it | unclaimed | — | `nfl-board/pages/readiness.html` |
+| N-03 | Questions / information / answers register + missing-information discovery routes | unclaimed | — | `nfl-board/pages/questions.html` |
+| N-04 | Suggestions board with blank verdicts (reviewer chooses before implementation) | unclaimed | — | `nfl-board/pages/suggestions.html` |
+| N-05 | Line-by-line repo review of the NFL tree, irregularities flagged with file:line | unclaimed | — | `nfl-board/pages/repo-review.html` |
+| N-06 | Executive summary | unclaimed | — | `nfl-board/pages/executive-summary.html` |
+| N-07 | Site build + verifier (every row source-linked, no broken links, deterministic) | unclaimed | — | `nfl-board/engine/**` |
+| N-08 | Root nav integration (additive group only) + regenerate `index.html`/`verified/*` | unclaimed | — | `verification/build.py`, generated `index.html`, `verified/*.html` |
+| N-09 | PR → main → merge → Pages confirmation, recorded here | unclaimed | — | `COORDINATION.md` |
+
+**Scope:** `nfl-board/**`, `.github/workflows/nfl-board.yml`, one additive group in
+`verification/build.py`, `COORDINATION.md`. No other session's namespace is edited. Where a peer
+page is wrong, I log the finding and the fix in `nfl-board/pages/repo-review.html` and in this file
+instead of editing their file.
+
+### Live official reads, this session (2026-11-17)
+
+| Source | URL | What was read |
+|---|---|---|
+| Week 10 injury report | https://www.nfl.com/injuries/ | live page, 8 chunks; Lions game statuses now populated |
+| Reserve list, Nov 2026 | https://www.nfl.com/transactions/league/reserve-list/2026/11 | 25 dated moves; Willis MIA 11/10 confirmed |
+| Club depth chart | https://www.packers.com/team/depth-chart | parsed table, dated "Unofficial, Nov. 10, 2026" |
+| nfl.com depth chart route | https://www.nfl.com/teams/baltimore-ravens/depth-chart | **404 — route does not exist** |
+| Week 10 schedule | https://www.nfl.com/schedules/ | finals for the Week 10 slate |
