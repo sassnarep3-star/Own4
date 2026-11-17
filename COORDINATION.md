@@ -4771,3 +4771,20 @@ standing brief is "no manual input — work to finish all tasks in this session"
 | conflicts absorbed | 5 concurrent merges of `main` during the session, all conflicts in `COORDINATION.md`, all resolved by keeping **both** sides. No peer file edited; `nfl-live-board/engine/sync_main.sh` records the procedure |
 | sources verified in-session 2026-11-17 | standings ×2 chunks · week-10 scores ×2 · week-9 scores · week-11 schedule ×3 · IND@HOU game centre · Week-10 injury report (chunks 0 and 3) · reserve list ×2 · `reg11` (serves reg10 — Week 11 not published) |
 | flagged (non-blocking) | F-01..F-14 on `nfl-live-board/pages/flagged.html`, each with an official source link |
+
+---
+
+## Session `arena/9208e00a-own4` — final NFL site integration and audit (claim, 2026-11-17 UTC)
+
+Branch (fixed by Arena): `arena/9208e00a-own4`, based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`.
+The latest completed entry above is PR #142 (2026-11-16); no newer active claim appears in this board.
+This session is acting as the final integration session on the assigned branch; it will not create or
+switch branches, and will not edit another namespace's source/data without an explicit logged request.
+
+| # | Task | Status | File scope |
+|---|---|---|---|
+| I-01 | Re-audit the current public entry point and integrate a clear NFL-first landing/navigation using existing verified outputs; preserve archived NBA/rental material without presenting it as the NFL project | in progress | `COORDINATION.md`, `README.md`, `verification/build.py`, generated root `index.html` / `verified/*.html` only as needed |
+| I-02 | Re-run relevant current NFL source/data/site verifiers; report verifiable findings, source/provenance boundaries, and irregularities without inventing values | in progress | `COORDINATION.md`, `README.md` and verification commands only; peer namespace files are read-only |
+| I-03 | Final integration check (internal-link/source-row checks, deterministic build, CI/Pages deploy); open and merge a PR from this assigned branch only if checks and publishable state are sound | pending | `COORDINATION.md`, assigned root integration files |
+
+No other session claim is being taken over. Findings that need owner/legal/data-provider decisions will remain visibly flagged; a clean build is not treated as evidence of source truth or betting edge.
