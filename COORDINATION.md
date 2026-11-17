@@ -13,7 +13,7 @@ Branch: `arena/689eb52e-own4` (fixed for this session)
 | 4 | Executive summary | done | arena-689eb52e-own4 | EXECUTIVE_SUMMARY.md |
 | 5 | GitHub Pages site (landing + category subpages + Flagged for Review) | done | arena-689eb52e-own4 | index.html, pages/*.html, assets/*, build_site.py |
 | 6 | Final integration: verify combined data line-by-line, build site, no broken links | done | arena-689eb52e-own4 | all |
-| 7 | PR to main + merge + GitHub Pages deploy confirmation | in progress | arena-689eb52e-own4 | — |
+| 7 | PR to main + merge + GitHub Pages deploy confirmation | in progress | arena/1d297093-own4 | — |
 
 ## Log
 
@@ -4653,3 +4653,19 @@ source link; small frequent commits; `git pull --rebase` before every push.
 | CI on main | nfl-collector verify: success; pages build and deployment: success |
 | flagged (non-blocking) | RC-01..RC-10 published on nfl-collector/pages/flagged.html with official source links |
 | sources | nfl.com/injuries/league/2026/reg10 (8 chunks) · nfl.com/transactions (+ trades + reserve-list views) · packers.com/team/depth-chart · nfl.com game centre + official Game Book PDF — all verified in-session 2026-11-16, windows recorded |
+
+
+## Session `arena/1d297093-own4` — final integration & site publication (2026-11-17 UTC)
+
+Branch: `arena/1d297093-own4` (base `ba30819`, byte-identical to `main` at claim time; no divergence).
+Scope: repository review, NFL Decision Desk publication gate, GitHub Pages integration, PR → main → merge, PR-link/merge-result record.
+
+Review performed (read-only; this sandbox has outbound access to GitHub hosts only, so NFL figures below are taken from the repo's own committed, source-linked captures — they are NOT re-verified live against nfl.com, and nothing is inferred or filled in):
+
+- Root landing page (`index.html`): dashboard with category subpages (Overview / NFL Decision Desk / NFL Decision Console / Official data / Originated lines / Strategy research / Competition / Governance / 35 NFL research workspaces). Executive findings table (F01–F10), gate scoreboard (G1–G10), verified-vs-blocked breakdown. Every published row carries an https source link or is blank+flagged.
+- NFL Decision Desk (`nfl-decision-desk/`): clean landing page + category subpages (executive summary, fixtures, availability, prices, model, leaderboard, correlations, governance, questions register (22), suggestions board (18), repo review & irregularities, flagged-for-review, sources). `python3 engine/verify.py` → PASS: 14 pages, 617 tbody rows (617 with https source), 2243 numeric cells, 226 local references, 0 broken, 0 localhost, 14 unique titles. `engine/site.py` regenerates byte-identically (deterministic rebuild).
+- GitHub Pages: status `built`, source branch `main` path `/`, https_enforced → https://sassnarep3-star.github.io/Own4/. NFL Decision Desk live at /nfl-decision-desk/index.html and loads (fetched and read in-session).
+- Irregularities (already flagged, never hidden): scores carried from a third-party archive (nflverse/nfldata) rather than 136 official game-page reads (R02 partial); no 2026 opening prices in any citable archive (R01 partial); no official depth rank / snap-count feed (R06 / R10 blocked); no verified closing prices (CLV/staking blocked); player per-game logs unavailable (prop combos blocked). Each blocked row names the feed and the clearing quantity; no value is estimated.
+- Headline result (NFL Decision Desk): model loses to the vig-free market on proper score at n=104 (Brier 0.2525 vs 0.2147; paired week-cluster interval entirely below zero); 0 of 6 gates passing; 0 of 1,000 reward units awarded. No strategy qualifies for a reward.
+
+Task 7 (PR → main → merge → GitHub Pages deploy confirmation → record PR link + merge result here): claimed by this session. In progress.
