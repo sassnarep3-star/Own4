@@ -225,6 +225,16 @@ dated, both are official, and one Game Book is already parsed elsewhere in this 
 join collisions against the injury report. Three requirement lines move from blocked to answerable the
 moment that is acted on — see <a href="pages/suggestions.html">SG-10</a>.</div>
 
+<div class="panel bad"><strong>The finding that could stop the project.</strong>
+No session had read the league's terms. This one did. Section 1.3 of nfl.com/legal/terms prohibits
+<em>"systematic retrieval of data or other content from the Services, whether to create or compile,
+directly or indirectly, a collection, compilation, database, or directory"</em> without express prior
+written consent, and section 1.1 assigns rights in data "generated from the Services" to the NFL. This
+repository publishes a compiled row-level injury table, a reserve list and a results corpus assembled by
+exactly that method. The brief's own public/private split is therefore not a later nicety — it is the
+compliance path. See <a href="pages/repo-review.html#ir-13">IR-13</a>,
+<a href="pages/questions.html#q12">Q12</a> and <a href="pages/suggestions.html#sg-06">SG-06</a>.</div>
+
 <div class="cards">%(cards)s</div>
 
 <h2>Start here</h2>
@@ -379,9 +389,9 @@ only rows where the honest recommendation may be to drop the requirement.</li>
 <h2>If you answer only three questions</h2>
 <div class="panel warn"><p><strong>Q02</strong> — may a third-party price be used, and under what terms? Six
 requirement lines depend on it and every future session re-litigates it until it is written down.</p>
-<p><strong>Q12</strong> — may row-level injury and depth data be republished? The site publishes a row-level
-injury table today and no session has read the league's terms. This is the only open item that is a legal
-question rather than a data question.</p>
+<p><strong>Q12 — answered, and it is bad news.</strong> The terms prohibit systematic retrieval that compiles
+a database. The site does exactly that. The next action is compliance, not discovery: move the row-level tables
+private, or obtain written consent.</p>
 <p><strong>Q06</strong> — is Game Book participation an acceptable substitute for snap counts? No official
 snap field exists on the page tested. The substitution is defensible; making it silently is not.</p></div>
 """ % (Q_N, qc, t)
@@ -467,6 +477,9 @@ def build_evidence():
         ("A backup's replacement of a starter can only be suspected, because no active list is captured",
          "The official inactives article lists every inactive for both clubs in each of 12 Sunday games, and the Game Book lists participation for the Thursday game. Replacement can be confirmed, not suspected.",
          "S02, S10", "RQ-30, RQ-10"),
+        ("The data-rights split can wait until the terms are read",
+         "Reading them settles it the other way: <em>&quot;systematic retrieval of data ... to create or compile ... a database ... is prohibited absent our express prior written consent&quot;</em> (section 1.3). No session had opened this page before.",
+         "S17", "RQ-39, Q12"),
         ("Snap counts are the starter proxy",
          "No official snap-count field exists on the player page read. The official substitute is Game Book participation. This one is a substitution to approve, not a defect to fix.",
          "S13", "RQ-11, RQ-54"),
@@ -590,6 +603,8 @@ def build_flagged():
 
     # blank values, named explicitly: these are the cells the site refuses to fill
     blanks = [
+        ("A private store for the row-level tables", "private-store/ (named in .gitignore, absent)",
+         "The terms prohibit compiling a database by systematic retrieval without written consent, so the store is the compliance path and it does not exist yet. Every row-level table is currently public.", "S17"),
         ("Market open / market close against an official source", "every market row in every workspace",
          "The NFL publishes no prices. Q01 is closed negatively; the store is filled from a third-party endpoint and labelled as such.", "S04"),
         ("Actual starter for every availability row", "nfl-book/data/availability_graph.json",
@@ -710,13 +725,17 @@ that stands in numbers, what the single most useful next action is, and which de
 <div class="card blank"><b>%(ns_n)d</b><span>not started</span><em>nothing stands in the way but the start</em></div>
 </div>
 
-<h2>Five sentences that carry the release</h2>
+<h2>Six sentences that carry the release</h2>
 <ol>
 <li><strong>The research machinery is sound and claims no edge.</strong> A walk-forward backtest over the
 available forecasts ranks nobody, the control baselines are published beside the strategies, one strategy is
 pre-registered with a hash that predates its evaluation window, and the demotion gate is armed and has
 correctly never fired.</li>
-<li><strong>No price can be official, and that is the largest single constraint.</strong> The league publishes
+<li><strong>The league's terms prohibit how this repository collects data, and nobody had read them.</strong>
+Section 1.3 of the terms forbids "systematic retrieval ... to create or compile ... a database" without written
+consent, and the site publishes a compiled row-level injury table, reserve list and results corpus. This is not a
+policy preference to decide later; it is the operative constraint on what may stay public (IR-13, Q12, SG-06).</li>
+<li><strong>No price can be official, and that is the largest single constraint on the betting half.</strong> The league publishes
 no lines. Every market number in the repository comes from a third-party endpoint and is labelled as such on
 the row — but one page banner still says "official sources only", which is the labelling defect that matters
 most (IR-02, SG-05).</li>
@@ -738,14 +757,15 @@ wrong.</li>
 are marked as needing only your decision. They collapse to four:</p>
 <table><thead><tr><th scope="col">Decision</th><th scope="col">What it unblocks</th><th scope="col">Why an agent cannot take it</th></tr></thead><tbody>
 <tr><td><strong>Q02 — price policy</strong> <a href="questions.html#q02">Q02 &#8599;</a></td><td>%(blocked_ids)s %(src_sched)s</td><td>It is a usage-rights choice with external consequences; a provisional answer is already recorded and flagged for you.</td></tr>
-<tr><td><strong>Q12 — public/private split</strong> <a href="questions.html#q12">Q12 &#8599;</a></td><td><code>RQ-39</code> %(src_inj)s</td><td>It is a legal question. The site publishes row-level injury data today and no session has read the league's terms.</td></tr>
+<tr><td><strong>Q12 — data rights (now answered)</strong> <a href="questions.html#q12">Q12 &#8599;</a></td><td><code>RQ-39</code> %(src_terms)s</td><td>The terms were read this session and they prohibit the collection method. What remains is a compliance action, not a question: move row-level tables private or obtain written consent.</td></tr>
 <tr><td><strong>Q06 — playing-time substitute</strong> <a href="questions.html#q06">Q06 &#8599;</a></td><td><code>RQ-11</code>, <code>RQ-54</code> %(src_stats)s</td><td>No official snap count exists; substituting Game Book participation is defensible but it is a substitution, and the brief asked for snaps.</td></tr>
 <tr><td><strong>Q21 — the qualification floor</strong> <a href="questions.html#q21">Q21 &#8599;</a></td><td>%(lb_ids)s %(src_sched)s</td><td>It sets whether any reward is payable before the 2028 season. That is a policy, not a measurement.</td></tr>
 </tbody></table>
 
 <h2>What this session changed</h2>
 <ul>
-<li>Read %(src_n)d official pages and recorded what each settled (evidence page, source register).</li>
+<li>Read %(src_n)d official pages and recorded what each settled (evidence page, source register) — including
+the league's terms of use, which no earlier session had opened.</li>
 <li>Turned the brief into %(req_n)d requirement lines, each with a gate and a clearing number.</li>
 <li>Graded %(q_n)d questions, %(q_ans)d of them answered from an official read this session, and gave every
 unanswered one a discovery route.</li>
@@ -771,7 +791,7 @@ files owned by other sessions. Both are proposed as SG-02 and SG-10 with the wor
         "req_n": REQ_N, "blocked_n": len(blocked),
         "blocked_ids": ", ".join("<code>%s</code>" % r["id"] for r in blocked),
         "decision_q": Q_COUNTS.get("NEEDS DECISION", 0),
-        "src_sched": src_links(["S04"]), "src_inj": src_links(["S01"]),
+        "src_sched": src_links(["S04"]), "src_terms": src_links(["S17"]), "src_inj": src_links(["S01"]),
         "src_stats": src_links(["S13"]),
         "lb_ids": ", ".join("<code>%s</code>" % r["id"] for r in REQ["rows"] if r["cat"] == "Leaderboard"),
         "src_n": SRC_N, "q_n": Q_N, "q_ans": Q_COUNTS.get("ANSWERED", 0),
