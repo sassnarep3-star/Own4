@@ -1,0 +1,34 @@
+{
+  "qa": "questions and answers recorded during the 32-club depth-chart sweep",
+  "generated_utc": "2026-11-17",
+  "items": [
+    {
+      "q": "Is there an official depth-order source for all 32 clubs?",
+      "a": "Yes at club level. Each club's official website publishes an unofficial depth chart at /team/depth-chart (route verified club by club on 2026-11-17). 31 clubs returned machine-readable text; HOU publishes depth as a static image only. Official domain surfaces vary per club (17 domain corrections recorded in data/teams.json and the manifest)."
+    },
+    {
+      "q": "Why is Houston not transcribed?",
+      "a": "houstontexans.com/team/depth-chart renders the chart as a static bitmap (static.clubs.nfl.com image) with no text table, no player links, and no table markup. Transcribing the image by eye would be visual inference, which this session forbids. HOU is flagged flagged_image_only with the page URL and image asset recorded; a future machine-readable official surface is required to clear it."
+    },
+    {
+      "q": "What is a shared rank slot and how is it stored?",
+      "a": "Several clubs list two players in one rank cell (e.g. SEA WR1 'Cooper Kupp [Rashid Shaheed]', MIN RB1 'Aaron Jones Sr. [Jordan Mason]'). The register keeps both names: primary is the first, alt the second. No depth order between the two is inferred. Evidence across 13 clubs: ARI, CIN, DAL, JAX, LAC, LAR, LV, MIN, NO, PHI, PIT, SEA, TEN."
+    },
+    {
+      "q": "How are stale-depth cases handled?",
+      "a": "Two detection paths: (1) the official league reserve list (November 2026) cross-checked against the depth charts — 5 flags where a reserve player still holds rank1 (LAR Puka Nacua WR1, LAR Jordan Whittington KR1, TEN Peter Skoronski LG1, TEN Tommy Townsend P1 and H1); (2) a club page's own transactions block — LAC lists Derwin James Jr. at S rank1 while its page logs him on IR. Flagged cells are not transcribed as authoritative; replacement depth is recorded."
+    },
+    {
+      "q": "Is the depth chart date-stamped?",
+      "a": "Every capture is a dated snapshot. Where the page states its own date it is recorded (CHI 'As of 10/31/2026', GB 'Nov. 10, 2026', LV 'November 10, 2026 | Week 10', SF 'Updated as of 11/10/26', TEN 'as of 11/10/26'); where unstated, the capture date 2026-11-17 is used and marked. IND publishes a new chart weekly; charts are point-in-time and should be re-captured per week."
+    },
+    {
+      "q": "Why did the Baltimore capture not show Lamar Jackson?",
+      "a": "The 2026-11-17 snapshot lists Jacoby Brissett as QB1. The brief's Baltimore/Lamar Jackson stale-depth case does not appear in this capture — the roster situation has moved on. This is recorded as a snapshot_note flag so the historical case is not conflated with the current capture."
+    },
+    {
+      "q": "How is the Patriots chart treated given its disclaimer?",
+      "a": "NE's page states the chart is published by Patriots.com writers and 'reflects the opinions of the Patriots.com writers' and not necessarily the organization. It is still the club's official website chart, so it is transcribed verbatim, but carries a writer_opinion flag so downstream consumers know it is writer-compiled."
+    }
+  ]
+}

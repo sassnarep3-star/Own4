@@ -1,0 +1,42 @@
+{
+  "readiness": "decision-readiness table — one row per brief requirement",
+  "generated_utc": "2026-11-17",
+  "sweep_evidence": "nfl-depth-sweep data/{raw,parsed,depth_register.json,roster_ir_sweep.json} (D2-D4)",
+  "rows": [
+    {
+      "requirement": "Resolve the depth-order source before building the backup-deficiency feature — evaluate route (a) per-club official depth chart pages, verified club by club",
+      "gate_that_blocks": "No official depth source (nfl-book depth_register.json all-blank, FB-07; nfl-availability-desk RF-04)",
+      "current_state": "Route (a) verified club by club: 31/32 clubs captured as verbatim text from official /team/depth-chart pages; 1 club (HOU) published depth as image only and is flagged, not transcribed",
+      "number_that_would_clear": "1 — a machine-readable official HOU depth surface (text table or official data feed) would clear the last unverified club",
+      "verdict": ""
+    },
+    {
+      "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+      "gate_that_blocks": "IR/reserve status unknown; starters on IR could silently occupy depth rank1 (stale-depth)",
+      "current_state": "Sweep run against the official league reserve list (November 2026): 25 Reserve/Injured entries across 17 clubs; 5 stale-depth flags where a reserve player still holds rank1 (LAR Puka Nacua WR1, LAR Jordan Whittington KR1, TEN Peter Skoronski LG1, TEN Tommy Townsend P1/H1); replacement depth recorded for each",
+      "number_that_would_clear": "5 — resolving the 5 stale-depth flags (or having team-level models consume replacement depth for flagged cells) clears the residual trust gate",
+      "verdict": ""
+    },
+    {
+      "requirement": "Official depth-chart register with date + source per row",
+      "gate_that_blocks": "Register blank — no date, no source, no depth order per club",
+      "current_state": "Register built: 32 club rows, 705 position rows (position/rank1/rank2/rank3), per-row source URL + fetch date + page-stated snapshot date where the page states one (CHI 2026-10-31, GB/LV/SF/TEN 2026-11-10)",
+      "number_that_would_clear": "0 — register complete; HOU row carries flagged_image_only status + source so it is source-linked without fabricated data",
+      "verdict": ""
+    },
+    {
+      "requirement": "Depth parsing robust to the named failure modes (Packers jersey-number prepend; Texans depth-as-image)",
+      "gate_that_blocks": "Two known parsing failures unresolved",
+      "current_state": "Both resolved by checked-in engine (parse_depth.py): GB jersey numbers stripped and preserved; HOU image-only handled as flag with no rows (never transcribed by eye). Shared rank slots, wrapped rows, and sparse cells handled with warnings",
+      "number_that_would_clear": "0 — both failure modes resolved and regression-tested on the captured set",
+      "verdict": ""
+    },
+    {
+      "requirement": "Backup-deficiency feature (target feature of the brief)",
+      "gate_that_blocks": "Depends on depth-order source + roster/IR sweep",
+      "current_state": "Depth source verified club by club (31/32 text-verified, 1 flagged); roster/IR sweep complete with stale-depth flags and replacement depth. Feature can be built on verified cells; flagged cells (LAC Derwin James Jr., LAR Nacua/Whittington, TEN Skoronski/Townsend) must consume replacement depth or be excluded",
+      "number_that_would_clear": "0 at source level — residual model-level gate is the 6 stale-depth cells (5 from reserve-list sweep + LAC from its own page transactions block)",
+      "verdict": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "suggestions": "suggestions from the 32-club depth-chart sweep (verdicts left blank)",
+  "generated_utc": "2026-11-17",
+  "items": [
+    {
+      "suggestion": "Treat the depth sweep as a weekly snapshot pipeline: re-capture all 32 clubs each week (IND already republishes weekly; LV/CHI/TEN/SF/GB state dated charts), storing one dated snapshot per club per week rather than a single moving register",
+      "rationale": "Depth charts are point-in-time; a single capture silently goes stale as rosters move (evidenced by the 5 reserve-list stale-depth flags found within days of capture)",
+      "verdict": ""
+    },
+    {
+      "suggestion": "For the backup-deficiency feature, consume replacement depth (recorded in roster_ir_sweep.json) for every stale-depth flagged cell instead of the flagged rank1 name, or exclude flagged cells from the feature's inputs",
+      "rationale": "6 stale-depth cells were found (LAC Derwin James Jr. S1; LAR Puka Nacua WR1; LAR Jordan Whittington KR1; TEN Peter Skoronski LG1; TEN Tommy Townsend P1/H1); using them unflagged would misstate the current depth order",
+      "verdict": ""
+    },
+    {
+      "suggestion": "Track HOU as an open action item: request or locate a machine-readable official Houston depth surface (text table, API, or official data feed) before trusting any Houston depth cell",
+      "rationale": "HOU is the only club whose official depth route publishes an image; every other club is text-verified, so HOU is the single remaining unverified row in the register",
+      "verdict": ""
+    },
+    {
+      "suggestion": "Add the 17 confirmed official domains (data/teams.json) as the canonical domain map for all future NFL club fetches — short-form domains are unreliable (bills.com is a finance site, eagles.com a shopify shop, falcons.com a shop, cardinals.com MLB, and ravens/cowboys/rams/titans/bears/lions/saints/jets/dolphins/browns .com variants 500 or wrong surface)",
+      "rationale": "Every failed route this session was a domain-surface problem, not a route problem; the corrected map removes the class of failure",
+      "verdict": ""
+    },
+    {
+      "suggestion": "Preserve shared-rank-slot cells as primary+alt in every downstream model rather than picking one name, and never infer an order between them",
+      "rationale": "13 clubs use shared slots; collapsing to a single name loses official information and forces an unsupported ordering",
+      "verdict": ""
+    },
+    {
+      "suggestion": "Keep the parsed artefacts (data/parsed/*.json) as the single source for team-level models, with the register as the human-readable projection (rank1-rank3)",
+      "rationale": "The register drops rank 4+ and special-teams detail; models that need full depth should read the parsed files to avoid silent truncation",
+      "verdict": ""
+    }
+  ]
+}
