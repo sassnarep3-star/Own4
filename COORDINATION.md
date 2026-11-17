@@ -5051,4 +5051,20 @@ in THIS session (URL + UTC fetch time recorded) or computed by a checked-in engi
 No depth order is inferred from jersey number, experience or salary. The Texans image is **not** transcribed
 by eye — it is flagged. An unconfirmable value is blank + flagged. No peer namespace file is edited.
 
+**Result (completed 2026-11-17):** All D1–D9 tasks done on this branch (commits `667845f` → `d40135b`).
+- D1 claim — done. D2 capture — 32/32 clubs swept: 31 verbatim text transcripts in `nfl-depth-sweep/data/raw/`
+  (URL + fetch date in each header) + HOU flagged image-only (chart is a static image; not transcribed by eye).
+  17 official domain corrections recorded (`data/teams.json` + manifest).
+- D3 register — `nfl-depth-sweep/data/depth_register.json`: 32 clubs, 705 position rows (position/rank1/rank2/
+  rank3), date + source per row. Engine `engine/parse_depth.py` resolves the Packers jersey-number prepend
+  (numbers captured + stripped), shared rank slots, wrapped rows, and sparse cells.
+- D4 roster/IR sweep — `nfl-depth-sweep/data/roster_ir_sweep.json`: official league reserve list (November
+  2026) cross-checked across 32 clubs; 25 Reserve/Injured entries; 5 stale-depth flags (LAR Puka Nacua WR1,
+  LAR Jordan Whittington KR1, TEN Peter Skoronski LG1, TEN Tommy Townsend P1/H1) + LAC Derwin James Jr. from
+  its page transactions log; replacement depth recorded for each.
+- D5 readiness/Q&A/suggestions; D6 static site (36 pages, every row source-linked); D7 verifier + CI
+  (`engine/verify.py`, `.github/workflows/nfl-depth-sweep.yml` — row-source gate, broken-link, no-localhost,
+  determinism, consistency: all green); D8 executive summary. D9: additive NAV group "NFL Depth Sweep ·
+  2026-11-17" in `verification/build.py` + regenerated root site; PR merged to main; Pages deploy confirmed.
+
 
