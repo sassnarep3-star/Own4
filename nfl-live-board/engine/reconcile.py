@@ -80,6 +80,12 @@ def game_id(week, away, home):
     return "W%02d-%s-%s" % (week, away, home)
 
 
+# Neutral-site fixtures this session VERIFIED from the official page it read.
+# Weeks 1-8 are read here only through the inherited feed, so their peer "neutral" flag is
+# carried as neutral_peer_flag and never as a verified fact.
+VERIFIED_NEUTRAL = {(9, "CIN", "ATL"), (10, "NE", "DET")}
+
+
 def build_corpus():
     peer = load(PEER_FEED)["rows"]
     inherited = [r for r in peer if r["week"] <= 9]
@@ -93,7 +99,10 @@ def build_corpus():
             "source_url": r.get("source_url", ""),
             "week_page_url": r.get("week_page_url", ""),
             "provenance": "inherited_per_game_url_feed (weeks 1-9)",
-            "neutral": r.get("neutral", False),
+            # the peer feed's own neutral-site claim. It is NOT verified by this session for
+            # weeks 1-8, and the pages read today only confirm the Week 9 Madrid fixture.
+            "neutral_peer_flag": bool(r.get("neutral", False)),
+            "neutral_verified": (r["week"], r["away"], r["home"]) in VERIFIED_NEUTRAL,
         })
     for away, home, a, h, date in WEEK10:
         rows.append({
@@ -102,7 +111,9 @@ def build_corpus():
             "source_url": "https://www.nfl.com/games/" + W10_SLUG[(away, home)],
             "week_page_url": W10_URL,
             "provenance": "transcribed 2026-11-17 from the official Week 10 scores page",
-            "neutral": (away, home) in {("NE", "DET")},   # Munich game, official page logo
+            "neutral_peer_flag": (away, home) in {("NE", "DET")},
+            # verified from the official Week 10 page: the Munich 2026 event logo sits on NE at DET
+            "neutral_verified": (10, away, home) in VERIFIED_NEUTRAL,
         })
     rows.sort(key=lambda r: (r["week"], r["away"], r["home"]))
     return rows

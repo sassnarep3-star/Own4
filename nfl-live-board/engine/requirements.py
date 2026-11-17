@@ -94,7 +94,7 @@ add(id="R14", group=G2, text="Add durable snapshot storage and alerts.",
     status="PARTIAL",
     gate="Peer namespaces run the scheduled capture with hashes and a drift alarm; this namespace consumes rather than duplicates it.",
     clearing_number="A hash-chained capture per scheduled run and a build that fails on schema drift - both already run in nfl-collector and nfl-readiness-register.",
-    evidence="..//nfl-collector/pages/captures.html", evidence_url="pages/audit.html")
+    evidence="../nfl-collector/pages/captures.html", evidence_url="pages/repo-review.html")
 add(id="R15", group=G2, text="Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard.",
     status="MET", gate="None.",
     clearing_number="Five strategies registered with rule text and model parameters before scoring; the rule file's SHA-256 is recorded and re-checked.",
@@ -185,7 +185,7 @@ add(id="R34", group=G3, text="Use official NFL Game Books for actual starters an
     status="BLOCKED",
     gate="Game books are reachable only through the game centre and only 1 fixture is parsed (peer finding RC-07).",
     clearing_number="14 of 14 Week-10 game books parsed with zero join collisions, then the full season.",
-    evidence="..//nfl-collector/pages/gamebook.html", evidence_url="pages/audit.html")
+    evidence="../nfl-collector/pages/gamebook.html", evidence_url="pages/repo-review.html")
 add(id="R35", group=G3, text="Add injury and personnel ablations instead of fixed penalties.",
     status="BLOCKED",
     gate="An ablation needs the same model run with and without availability features over many weeks; one snapshot cannot supply that (F-04).",
@@ -225,7 +225,7 @@ add(id="R42", group=G3, text="Snapshot the nfl.com injury report every Wed, Thu 
     status="PARTIAL",
     gate="Peer namespaces run the scheduled capture; this namespace has one read.",
     clearing_number="3 dated captures per week with hashes retained, which peer CI already schedules.",
-    evidence="..//nfl-collector/pages/captures.html", evidence_url="pages/audit.html")
+    evidence="../nfl-collector/pages/captures.html", evidence_url="pages/repo-review.html")
 add(id="R43", group=G3, text="Treat the injury report as a timestamped series, not a weekly snapshot.",
     status="BLOCKED",
     gate="One snapshot exists for this season in this namespace (F-08).",
@@ -258,7 +258,7 @@ add(id="R49", group=G3, text="Automate immutable multi-day availability snapshot
     status="PARTIAL",
     gate="Peer CI does this; this namespace reads rather than runs the capture.",
     clearing_number="A hash per capture per day with the raw bytes retained outside the site layer.",
-    evidence="..//nfl-collector/pages/captures.html", evidence_url="pages/audit.html")
+    evidence="../nfl-collector/pages/captures.html", evidence_url="pages/repo-review.html")
 
 G4 = "Evidence and the site"
 add(id="R50", group=G4, text="Compute correlations only from officially sourced numbers and publish n with each value.",
@@ -274,7 +274,7 @@ add(id="R51", group=G4, text="Publish a weekly 'what changed' diff instead of a 
 add(id="R52", group=G4, text="Add a drift alarm to every scraper.",
     status="MET", gate="None for the parsers this namespace owns; the verifier fails on a broken row or link.",
     clearing_number="engine/verify.py exits non-zero when any table row loses its source link, any link breaks, or any page loses its navigation.",
-    evidence="engine/verify.py", evidence_url="pages/audit.html")
+    evidence="verify.py", evidence_url="pages/repo-review.html")
 add(id="R53", group=G4, text="Publish the league's dated schedule announcement beside the live schedule page.",
     status="MET", gate="None.",
     clearing_number="The Week 11 page read is dated and its flexible-scheduling notice is transcribed beside the fixture table.",
@@ -282,12 +282,12 @@ add(id="R53", group=G4, text="Publish the league's dated schedule announcement b
 add(id="R54", group=G4, text="Put a decision-readiness table on the landing page: one row per requirement, the gate that blocks it, and the number that would clear it.",
     status="MET", gate="None.",
     clearing_number="All requirement rows carry those three fields; the landing page renders the table.",
-    evidence="index.html", evidence_url="index.html")
+    evidence="index.html", evidence_url="../index.html")
 add(id="R55", group=G4, text="Split the site into a public analysis layer and a private data layer.",
     status="PARTIAL",
     gate="The public layer is derived analysis only. Row-level raw data lives in this repository because no private store is configured.",
     clearing_number="A private store with access control before any row-level licensed data is ingested; until then no licensed data is ingested at all.",
-    evidence="index.html", evidence_url="pages/audit.html")
+    evidence="index.html", evidence_url="../index.html")
 add(id="R56", group=G4, text="Stadium roof/surface and NWS hourly wind/precipitation overlay.",
     status="BLOCKED",
     gate="Roof designation is not a field on the official page; NWS is outside the allowed hosts for this session.",
@@ -333,7 +333,7 @@ add(id="R65", group=G4, text="Coordinate with parallel sessions via COORDINATION
 add(id="R66", group=G4, text="Open a PR, merge without waiting, confirm GitHub Pages deploys.",
     status="PROCESS", gate="Recorded after the merge; see the coordination entry.",
     clearing_number="PR merged and the Pages run success confirmed on the live URL.",
-    evidence="../COORDINATION.md", evidence_url="pages/audit.html")
+    evidence="../COORDINATION.md", evidence_url="pages/repo-review.html")
 add(id="R67", group=G4, text="No manual input from the owner; finish all tasks in the session.",
     status="PROCESS", gate="Decisions that are legally the owner's (price-data policy) are recorded as open, not taken.",
     clearing_number="n/a - the one thing that cannot be automated is a licence decision.",
@@ -341,7 +341,7 @@ add(id="R67", group=G4, text="No manual input from the owner; finish all tasks i
 add(id="R68", group=G4, text="Do not merge a broken site.",
     status="PROCESS", gate="Enforced by engine/verify.py exiting non-zero.",
     clearing_number="Verifier run before every push; a failure stops the merge.",
-    evidence="engine/verify.py", evidence_url="pages/audit.html")
+    evidence="verify.py", evidence_url="pages/repo-review.html")
 add(id="R69", group=G4, text="Reject fixed-point injury penalties; test the same model with and without personnel features.",
     status="BLOCKED",
     gate="Same blocker as R35: needs many weeks of dated availability joined to results.",

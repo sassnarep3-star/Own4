@@ -256,8 +256,8 @@
    "status": "PARTIAL",
    "gate": "Peer namespaces run the scheduled capture with hashes and a drift alarm; this namespace consumes rather than duplicates it.",
    "clearing_number": "A hash-chained capture per scheduled run and a build that fails on schema drift - both already run in nfl-collector and nfl-readiness-register.",
-   "evidence": "..//nfl-collector/pages/captures.html",
-   "evidence_url": "pages/audit.html"
+   "evidence": "../nfl-collector/pages/captures.html",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R15",
@@ -456,8 +456,8 @@
    "status": "BLOCKED",
    "gate": "Game books are reachable only through the game centre and only 1 fixture is parsed (peer finding RC-07).",
    "clearing_number": "14 of 14 Week-10 game books parsed with zero join collisions, then the full season.",
-   "evidence": "..//nfl-collector/pages/gamebook.html",
-   "evidence_url": "pages/audit.html"
+   "evidence": "../nfl-collector/pages/gamebook.html",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R35",
@@ -536,8 +536,8 @@
    "status": "PARTIAL",
    "gate": "Peer namespaces run the scheduled capture; this namespace has one read.",
    "clearing_number": "3 dated captures per week with hashes retained, which peer CI already schedules.",
-   "evidence": "..//nfl-collector/pages/captures.html",
-   "evidence_url": "pages/audit.html"
+   "evidence": "../nfl-collector/pages/captures.html",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R43",
@@ -606,8 +606,8 @@
    "status": "PARTIAL",
    "gate": "Peer CI does this; this namespace reads rather than runs the capture.",
    "clearing_number": "A hash per capture per day with the raw bytes retained outside the site layer.",
-   "evidence": "..//nfl-collector/pages/captures.html",
-   "evidence_url": "pages/audit.html"
+   "evidence": "../nfl-collector/pages/captures.html",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R50",
@@ -636,8 +636,8 @@
    "status": "MET",
    "gate": "None for the parsers this namespace owns; the verifier fails on a broken row or link.",
    "clearing_number": "engine/verify.py exits non-zero when any table row loses its source link, any link breaks, or any page loses its navigation.",
-   "evidence": "engine/verify.py",
-   "evidence_url": "pages/audit.html"
+   "evidence": "verify.py",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R53",
@@ -657,7 +657,7 @@
    "gate": "None.",
    "clearing_number": "All requirement rows carry those three fields; the landing page renders the table.",
    "evidence": "index.html",
-   "evidence_url": "index.html"
+   "evidence_url": "../index.html"
   },
   {
    "id": "R55",
@@ -667,7 +667,7 @@
    "gate": "The public layer is derived analysis only. Row-level raw data lives in this repository because no private store is configured.",
    "clearing_number": "A private store with access control before any row-level licensed data is ingested; until then no licensed data is ingested at all.",
    "evidence": "index.html",
-   "evidence_url": "pages/audit.html"
+   "evidence_url": "../index.html"
   },
   {
    "id": "R56",
@@ -777,7 +777,7 @@
    "gate": "Recorded after the merge; see the coordination entry.",
    "clearing_number": "PR merged and the Pages run success confirmed on the live URL.",
    "evidence": "../COORDINATION.md",
-   "evidence_url": "pages/audit.html"
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R67",
@@ -796,8 +796,8 @@
    "status": "PROCESS",
    "gate": "Enforced by engine/verify.py exiting non-zero.",
    "clearing_number": "Verifier run before every push; a failure stops the merge.",
-   "evidence": "engine/verify.py",
-   "evidence_url": "pages/audit.html"
+   "evidence": "verify.py",
+   "evidence_url": "pages/repo-review.html"
   },
   {
    "id": "R69",

@@ -15,14 +15,14 @@
    "definition": "p(home) = Phi(fair margin / SD); a game is bet only when p != 0.5. Scored with Brier.",
    "proper_score": {
     "n": 116,
-    "brier": 0.22177,
+    "brier": 0.22227,
     "benchmark_brier": 0.25411,
-    "brier_skill_score": 0.1273,
+    "brier_skill_score": 0.1253,
     "bss_ci90_week_cluster": [
-     0.0159,
-     0.2412
+     0.0143,
+     0.2384
     ],
-    "bootstrap_p_bss_le_0": 0.031,
+    "bootstrap_p_bss_le_0": 0.0333,
     "accuracy_raw_is_not_the_metric": 0.6466,
     "units_of_independence": "week (n_weeks=8)"
    },
@@ -33,7 +33,7 @@
     "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
    },
    "stage_1_qualifies": false,
-   "holm_adjusted_p": 0.1375,
+   "holm_adjusted_p": 0.1465,
    "multiplicity": {
     "strategies_scored": 5,
     "method": "Holm-Bonferroni",
@@ -47,14 +47,14 @@
    "definition": "Same forecast as S1, but the strategy passes on games below the 6-point edge. The Brier score below is computed on ALL games, so it is the forecast's skill, not the selection's - selection skill cannot be separated from variance at this n.",
    "proper_score": {
     "n": 116,
-    "brier": 0.22177,
+    "brier": 0.22227,
     "benchmark_brier": 0.25411,
-    "brier_skill_score": 0.1273,
+    "brier_skill_score": 0.1253,
     "bss_ci90_week_cluster": [
-     0.0167,
-     0.2443
+     0.0156,
+     0.2426
     ],
-    "bootstrap_p_bss_le_0": 0.0275,
+    "bootstrap_p_bss_le_0": 0.0293,
     "accuracy_raw_is_not_the_metric": 0.6466,
     "units_of_independence": "week (n_weeks=8)"
    },
@@ -65,7 +65,7 @@
     "blank_reason": "stage 2 needs a closing market price; no official price source exists (F-01), so CLV and ROI are not computed. Assumed -110 is deliberately NOT used any more: an assumed price cannot produce decision-grade ROI."
    },
    "stage_1_qualifies": false,
-   "holm_adjusted_p": 0.1375,
+   "holm_adjusted_p": 0.1465,
    "multiplicity": {
     "strategies_scored": 5,
     "method": "Holm-Bonferroni",
@@ -218,16 +218,16 @@
    "reading": "luck alone reached this upper bound on this n. A point estimate below the floor is indistinguishable from variance, whatever its p-value."
   },
   "headline": {
-   "s1_bss": 0.1273,
+   "s1_bss": 0.1253,
    "s1_bss_cluster_ci90": [
-    0.0159,
-    0.2412
+    0.0143,
+    0.2384
    ],
-   "s1_holm_p": 0.1375,
+   "s1_holm_p": 0.1465,
    "s1_qualifies": false,
    "s1_clears_control_floor": true,
-   "s1_unadjusted_p": 0.031,
-   "why_the_adjustment_matters": "unadjusted p = 0.0310 would read as significant at 5%; Holm across 5 strategies gives 0.1375, which does not clear. This is the multiplicity the brief requires, stated with the number of trials beside it."
+   "s1_unadjusted_p": 0.0333,
+   "why_the_adjustment_matters": "unadjusted p = 0.0333 would read as significant at 5%; Holm across 5 strategies gives 0.1465, which does not clear. This is the multiplicity the brief requires, stated with the number of trials beside it."
   },
   "n_weeks": 8,
   "n_games": 116,

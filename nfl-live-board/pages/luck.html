@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Removal of luck · NFL Live Board</title>
+<link rel="stylesheet" href="../assets/site.css">
+</head><body><div class="layout">
+<nav aria-label="Site sections">
+<div class="brand">NFL Live Board</div>
+<div class="sub">originated lines · proper-score competition · verified availability<br>snapshot 2026-11-17 · session arena/925796f5-own4</div>
+<a href="../index.html">Dashboard</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Requirements &amp; gates</a><a href="../pages/results.html">Results feed</a><a href="../pages/origination.html">Origination</a><a href="../pages/prices.html">Price snapshots</a><a href="../pages/leaderboard.html">Leaderboard &amp; luck</a><a href="../pages/luck.html" class="active">Luck removal</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/availability.html">Availability &amp; depth</a><a href="../pages/context.html">Fixture context</a><a href="../pages/questions.html">Questions</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/sources.html">Sources</a><a href="../pages/flagged.html">Flagged for review</a>
+</nav>
+<main>
+<h1>Removal of luck</h1>
+<p class="lead">What was removed, what could not be, and the floor that luck alone produced at this sample size.</p>
+<div class="note"><b>The question this panel answers: how good does a strategy look on this sample if it has no skill at all?</b> Two luck-only strategies are scored in every run. The better of their upper bounds is the floor. A point estimate below it is indistinguishable from variance, whatever its p-value.</div><table><caption>Every channel through which luck enters a leaderboard</caption><thead><tr><th>Luck channel</th><th>How it is closed</th><th>Status</th><th>Source</th></tr></thead><tbody>
+<tr><td>price assumption</td><td>no assumed price is used anywhere; stage 2 is blank</td><td><span class="badge b-good">removed</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+<tr><td>raw win rate</td><td>never reported as a metric; proper score instead</td><td><span class="badge b-good">removed</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+<tr><td>independence inflation</td><td>bootstrap resamples weeks, not games</td><td><span class="badge b-good">removed</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+<tr><td>multiple testing</td><td>Holm adjustment over 5 strategies</td><td><span class="badge b-good">removed</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+<tr><td>survivorship / selection</td><td>rules frozen in prereg before scoring</td><td><span class="badge b-good">removed</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+<tr><td>unmodelled edge from availability</td><td>requires point-in-time availability for past games; the repository holds one week of it, so the ablation cannot be run and is NOT claimed</td><td><span class="badge b-bad">not removed - flagged F-04</span></td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">walk-forward data</a></td></tr>
+</tbody></table><table><caption>The control floor, computed rather than asserted</caption><thead><tr><th>Control</th><th>Brier skill</th><th>90% CI (weeks)</th><th>Reading</th><th>Source</th></tr></thead><tbody>
+<tr><td>coin (constant 0.5)</td><td class="n">0.0162</td><td class="n">[-0.0036, 0.0351]</td><td>variance alone, expressed as a probability</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td>always home</td><td class="n">0.0131</td><td class="n">[-0.0036, 0.0310]</td><td>the favourite-free baseline</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td><b>computed floor</b></td><td class="n"><b>0.0351</b></td><td>—</td><td><b>luck alone reached this upper bound on this n. A point estimate below the floor is indistinguishable from variance, whatever its p-value.</b></td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">standings</a></td></tr>
+</tbody></table><table><caption>The removal-of-luck headline</caption><thead><tr><th>Measure</th><th>Value</th><th>What it means</th><th>Source</th></tr></thead><tbody>
+<tr><td>S1 point estimate</td><td class="n">0.1253</td><td>above the floor: True</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td>S1 90% interval (weeks)</td><td class="n">[0.0143, 0.2384]</td><td>the lower bound is above zero before multiplicity</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td>S1 unadjusted p</td><td class="n">0.0333</td><td>would read as significant at 5%</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td>S1 Holm-adjusted p</td><td class="n">0.1465</td><td>across 5 strategies — does not clear 0.05</td><td><a href="https://www.nfl.com/scores/2026/week-10" target="_blank" rel="noopener">results</a></td></tr>
+<tr><td>Verdict</td><td>no strategy qualifies: the point estimate is positive and clears the control floor but the Holm-adjusted p does not clear 0.05</td><td></td><td><a href="https://www.nfl.com/standings/league/2026/REG" target="_blank" rel="noopener">standings</a></td></tr>
+</tbody></table><p><b>What is still lucky.</b> more independent weeks. The cluster bound scales roughly with sqrt(n_weeks); at the current spread it needs a substantially longer prospective sample, which is why stage 2 exists and why the escrow is empty today.</p>
+<footer>
+<p><b>Research only — no wagering is offered, and nothing here is betting advice.</b>
+Lines in this workspace are model output and are not market prices. If gambling is affecting you,
+the National Problem Gambling Helpline is 1-800-697-3738 · <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a>.</p>
+<p>Snapshot 2026-11-17 · built by <code>nfl-live-board/build.py</code> · every number on this site is reproduced by
+<code>engine/run_all.sh</code> and gated by <code>verify.py</code> ·
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board" target="_blank" rel="noopener">source</a> ·
+<a href="https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md" target="_blank" rel="noopener">coordination log</a></p>
+</footer>
+</main></div></body></html>

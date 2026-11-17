@@ -1,0 +1,87 @@
+/* Own4 · nfl-live-board — one stylesheet, no fonts, no scripts, no external requests. */
+:root{
+  --bg:#0d1220; --panel:#151c2c; --panel2:#1b2436; --text:#e9edf5; --muted:#93a1ba;
+  --accent:#5aa9ff; --good:#3ddc84; --bad:#ff6b6b; --warn:#ffc857; --line:#26314a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text)}
+body{font:14.5px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.layout{display:flex;min-height:100vh}
+
+/* side navigation */
+nav{width:236px;flex:0 0 236px;background:var(--panel);padding:20px 14px;
+  border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto}
+nav .brand{font-weight:700;font-size:16px;letter-spacing:.2px}
+nav .sub{color:var(--muted);font-size:11.5px;margin:6px 0 16px;line-height:1.45}
+nav a{display:block;padding:7px 10px;border-radius:8px;color:var(--text);font-size:13px}
+nav a:hover{background:var(--panel2);text-decoration:none}
+nav a.active{background:var(--panel2);color:var(--accent);font-weight:600}
+
+/* content */
+main{flex:1;min-width:0;padding:28px 34px 40px;max-width:1240px}
+h1{font-size:25px;line-height:1.25;margin:0 0 8px;font-weight:700}
+h2{font-size:17px;margin:30px 0 10px;padding-bottom:7px;border-bottom:1px solid var(--line);font-weight:650}
+h3{font-size:12px;margin:0 0 8px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.lead{color:var(--muted);margin:0 0 20px;font-size:15px;max-width:78ch}
+p{max-width:88ch}
+ul{max-width:88ch}
+li{margin:5px 0}
+
+/* cards */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px;margin:16px 0 8px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px}
+.card .k{font-size:22px;font-weight:700;line-height:1.15}
+.card .l{font-size:12px;color:var(--muted);margin-top:4px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.panel p{margin:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}
+
+/* tables */
+table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;overflow:hidden;font-size:12.8px;margin:12px 0 6px;display:table}
+caption{caption-side:top;text-align:left;color:var(--muted);font-size:12px;padding:0 2px 8px}
+th,td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--panel2);font-size:11.5px;color:var(--muted);font-weight:600;
+  text-transform:uppercase;letter-spacing:.04em;position:sticky;top:0;z-index:1}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:nth-child(even){background:rgba(255,255,255,.018)}
+tbody tr:hover{background:rgba(90,169,255,.05)}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+td code{font-size:11.5px}
+
+/* badges and blanks */
+.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:10.5px;
+  font-weight:650;letter-spacing:.03em;white-space:nowrap}
+.b-good{background:rgba(61,220,132,.16);color:var(--good)}
+.b-bad{background:rgba(255,107,107,.16);color:var(--bad)}
+.b-warn{background:rgba(255,200,87,.16);color:var(--warn)}
+.b-info{background:rgba(90,169,255,.16);color:var(--accent)}
+.b-mute{background:rgba(147,161,186,.16);color:var(--muted)}
+.blank{color:var(--muted);font-style:italic;font-size:11.5px}
+.blank[title]{cursor:help;border-bottom:1px dotted var(--muted)}
+
+/* notes */
+.note{background:var(--panel2);border-left:3px solid var(--accent);padding:12px 15px;
+  border-radius:0 9px 9px 0;margin:16px 0;color:#c7d2e4;font-size:13.2px;max-width:92ch}
+.note b{color:var(--text)}
+code{background:rgba(255,255,255,.06);padding:1px 5px;border-radius:4px;font-size:12px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* footer */
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+footer p{max-width:96ch}
+
+/* small screens: nav becomes a horizontal strip */
+@media(max-width:940px){
+  .layout{flex-direction:column}
+  nav{width:100%;flex:none;height:auto;position:static;border-right:none;
+    border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:2px;align-items:center}
+  nav .brand,nav .sub{width:100%}
+  nav a{display:inline-block;font-size:12px;padding:6px 9px}
+  main{padding:18px}
+  .grid2{grid-template-columns:1fr}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+}

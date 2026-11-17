@@ -1,0 +1,48 @@
+{
+ "dataset": "nfl_live_board_preregistration",
+ "title": "Registration record for PREREG-LB",
+ "registered_utc": "2026-11-17",
+ "registered_before": "any Week 11 game. The Week 11 slate begins 2026-11-19; no Week 11 result exists in the corpus at registration.",
+ "prereg_file": "prereg/PREREG-LB.md",
+ "prereg_sha256": "0c68af5819e7952802c3379df23de74bf0b480b05b422c3eb5719fad8889efa8",
+ "registrations": [
+  {
+   "id": "PREREG-LB#S1",
+   "strategy": "S1-ML-edge",
+   "market": "moneyline",
+   "division": "singles"
+  },
+  {
+   "id": "PREREG-LB#S2",
+   "strategy": "S2-ML-strong",
+   "market": "moneyline",
+   "division": "singles"
+  },
+  {
+   "id": "PREREG-LB#S3",
+   "strategy": "S3-home-prior",
+   "market": "control",
+   "division": "singles"
+  },
+  {
+   "id": "PREREG-LB#S4",
+   "strategy": "S4-coin",
+   "market": "control",
+   "division": "singles"
+  },
+  {
+   "id": "PREREG-LB#S5",
+   "strategy": "S5-always-home",
+   "market": "control",
+   "division": "singles"
+  }
+ ],
+ "divisions_declared_empty": [
+  "GAME PARLAYS",
+  "SAME-GAME PARLAYS",
+  "PROP COMBOS"
+ ],
+ "empty_division_reason": "no price feed to settle a parlay and no official player-prop market; declared empty rather than merged into singles",
+ "verification": "verify.py V5 recomputes this hash on every build; a post-hoc edit to the rule text fails the gate",
+ "independent_peer_registration": "nfl-collector/prereg/PREREG-002-mcnemar-s1-vs-better-record.md (registered 2026-11-16 by another session; not modified here)"
+}

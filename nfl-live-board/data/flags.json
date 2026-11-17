@@ -1,0 +1,148 @@
+{
+ "dataset": "nfl_live_board_flags",
+ "title": "Flagged for review - irregularities and unverified values",
+ "built_utc": "2026-11-17",
+ "policy": "Flagged items never block publication. Each carries what was seen, why it is flagged, and the official link a reviewer needs.",
+ "rows": [
+  {
+   "id": "F-01",
+   "severity": "high",
+   "area": "Price",
+   "item": "No market price exists anywhere in the repository or on the official pages",
+   "detail": "Every ROI, CLV and residual column is therefore blank. Earlier namespaces filled the same gap with an ASSUMED -110. That value is not a market price and is not used here.",
+   "evidence": "data/price_snapshots.json",
+   "source_url": "https://www.nfl.com/",
+   "status": "flagged"
+  },
+  {
+   "id": "F-02",
+   "severity": "high",
+   "area": "Corpus",
+   "item": "The committed 137-game feed was missing 12 of the 13 Week-10 finals",
+   "detail": "It held weeks 1-9 (136 games) plus one Week-10 game. The official Week-10 page shows 13 finals. The 13th, LAC at BAL, had not been played at read time.",
+   "evidence": "data/corpus_2026.json",
+   "source_url": "https://www.nfl.com/scores/2026/week-10",
+   "status": "flagged, then fixed in this corpus"
+  },
+  {
+   "id": "F-03",
+   "severity": "medium",
+   "area": "Corpus",
+   "item": "The brief's '136-game log' is a weeks-1-9 log, not a season log",
+   "detail": "At this point in the season 149 games have been played. A backtest announced as being on 'the 136-game log' would silently omit Week 10.",
+   "evidence": "data/corpus_2026.json",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG",
+   "status": "verified"
+  },
+  {
+   "id": "F-04",
+   "severity": "high",
+   "area": "Availability",
+   "item": "The availability ablation the brief asks for cannot be run on the data the repository holds",
+   "detail": "One dated availability snapshot exists for this season. An ablation needs the same model with and without the feature over many weeks.",
+   "evidence": "data/depth_status.json",
+   "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "status": "blocked, not estimated"
+  },
+  {
+   "id": "F-05",
+   "severity": "medium",
+   "area": "Availability",
+   "item": "Absence from the injury report does not mean available",
+   "detail": "The November reserve list holds 27 Reserve/Injured moves, including Malik Willis (MIA, 11/10) and TreVeyon Henderson (NE, 11/14), neither of whom appears on the weekly report.",
+   "evidence": "data/reserve_list_2026_11.json",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "status": "verified"
+  },
+  {
+   "id": "F-06",
+   "severity": "medium",
+   "area": "Verification",
+   "item": "Only 8 of the clubs on the Week-10 report were re-read this session",
+   "detail": "96 rows were compared field by field and all 96 agreed with the committed capture. The other clubs were not re-read and are not claimed as verified.",
+   "evidence": "data/availability_verification.json",
+   "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "status": "partial - stated, not hidden"
+  },
+  {
+   "id": "F-07",
+   "severity": "high",
+   "area": "Depth",
+   "item": "No official depth chart and no official snap-count table were found",
+   "detail": "Without either, the 2nd/3rd/4th-string requirement (R24, R38) and the matchup matrix (R38) cannot be produced without invention. Every depth column on this site is blank with this reason.",
+   "evidence": "data/depth_status.json",
+   "source_url": "https://www.nfl.com/teams/",
+   "status": "blocked"
+  },
+  {
+   "id": "F-08",
+   "severity": "high",
+   "area": "Availability",
+   "item": "One availability snapshot is a level, not a series",
+   "detail": "The brief asks for a surprise (observed minus expected). With one snapshot there is no expected. All 347 surprise values are blank.",
+   "evidence": "data/injury_surprise.json",
+   "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "status": "blocked"
+  },
+  {
+   "id": "F-09",
+   "severity": "medium",
+   "area": "Metadata",
+   "item": "The published Week-11 schedule page does not date itself, and the file does not claim it does",
+   "detail": "The committed slate file has no capture timestamp in its own header. The schedule is transcribed here with 2026-11-17 as the read date, which is when this session read it.",
+   "evidence": "data/fixtures_2026.json",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "flagged"
+  },
+  {
+   "id": "F-10",
+   "severity": "low",
+   "area": "Venue",
+   "item": "The official schedule page states stadiums only inside hotel deep-links",
+   "detail": "For example 'Highmark Stadium' appears in a Marriott URL parameter, not in a titled field. A URL parameter is not a statement, so those venues are left blank rather than scraped out of a link.",
+   "evidence": "data/fixtures_2026.json",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "blank by policy"
+  },
+  {
+   "id": "F-11",
+   "severity": "medium",
+   "area": "Repository",
+   "item": "Two namespaces publish the same 137-row results feed independently",
+   "detail": "They agree game for game today, which is why the corpus could be reconciled at all. Two owners of one fact is still a divergence risk.",
+   "evidence": "data/audit_repo.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4",
+   "status": "flagged"
+  },
+  {
+   "id": "F-12",
+   "severity": "low",
+   "area": "Repository",
+   "item": "A first version of this session's own audit reported 2 namespaces publishing localhost references",
+   "detail": "On inspection both were prose asserting that there are none. The detector now matches a runtime reference, and the false positive is recorded here rather than deleted.",
+   "evidence": "data/audit_repo.json",
+   "source_url": "https://github.com/sassnarep3-star/Own4",
+   "status": "corrected in this session"
+  },
+  {
+   "id": "F-13",
+   "severity": "medium",
+   "area": "Model",
+   "item": "The baseline's skill is measured against a home-rate benchmark, not against a market",
+   "detail": "A Brier Skill Score above a home-rate benchmark says the model beats a naive prior. It does not say the model beats a closing line, and with no price it cannot.",
+   "evidence": "data/leaderboard.json",
+   "source_url": "https://www.nfl.com/",
+   "status": "flagged"
+  },
+  {
+   "id": "F-14",
+   "severity": "low",
+   "area": "Context",
+   "item": "Rest days for BAL and LAC changed once the scheduled-but-unplayed Week-10 game was counted",
+   "detail": "BAL first computed as 17 days of rest because its unplayed Monday game is not in the corpus. Counting scheduled fixtures gives 6. The rule is now in the artefact.",
+   "evidence": "data/fixture_context.json",
+   "source_url": "https://www.nfl.com/scores/2026/week-10",
+   "status": "corrected in this session"
+  }
+ ]
+}
