@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary — NFL Depth-Chart Sweep</title>
+<style>
+body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;margin:0;background:#f6f7f9;color:#1c2430;line-height:1.55}
+header{background:#0f1c2e;color:#fff;padding:22px 28px}
+header h1{margin:0;font-size:1.4rem}header .sub{color:#9fb2c8;font-size:.85rem;margin-top:4px}
+main{max-width:1000px;margin:24px auto;padding:0 20px}
+h2{margin-top:28px;border-bottom:2px solid #d7dce4;padding-bottom:6px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:.9rem;margin:12px 0}
+th,td{border:1px solid #d7dce4;padding:7px 10px;text-align:left}
+th{background:#eef2f7}
+.badge{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.75rem;font-weight:600;background:#e2f5e6;color:#1c6b30}
+.flag{background:#fdecea;color:#a4262c}
+ul li{margin:6px 0}
+code{background:#eef2f7;padding:1px 5px;border-radius:4px;font-size:.85em}
+footer{color:#7a8694;font-size:.78rem;padding:24px 28px;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>Executive Summary — 32-Club Official Depth-Chart Sweep</h1>
+  <div class="sub">Session arena/2388d73a-own4 · captured 2026-11-17 UTC · namespace <code>nfl-depth-sweep</code></div>
+</header>
+<main>
+<h2>What was delivered</h2>
+<p>The NFL brief required a depth-order source resolved <b>club by club</b>, a <b>32-team roster/IR sweep</b> before
+any team-level model is trusted, and an <b>official depth-chart register with date + source per row</b>. The sweep
+completed all three:</p>
+<ul>
+  <li><b>Capture (D2):</b> official <code>/team/depth-chart</code> fetched for all 32 clubs — 31 machine-readable
+  transcripts (verbatim, URL + fetch time recorded), 1 club (HOU) flagged image-only, never transcribed by eye.</li>
+  <li><b>Register (D3):</b> 32 club rows, 705 position rows (position / rank1 / rank2 / rank3) with date + source
+  per row; both named parsing failures resolved (Packers jersey prepend; Texans depth-as-image).</li>
+  <li><b>Roster/IR sweep (D4):</b> official league reserve list (Nov 2026) cross-checked against the depth charts —
+  25 Reserve/Injured entries, 5 stale-depth flags with replacement depth recorded.</li>
+  <li><b>Readiness, site, verification (D5–D7):</b> decision-readiness table; 36-page source-linked static site;
+  verifier with row-source gate, broken-link, no-localhost, determinism, consistency — all gates green.</li>
+</ul>
+
+<h2>Headline results</h2>
+<table>
+<thead><tr><th>Metric</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td>Clubs swept</td><td><b>32 / 32</b></td></tr>
+<tr><td>Text-verified transcripts</td><td><b>31</b> (<code>data/raw/</code>)</td></tr>
+<tr><td>Flagged image-only</td><td><b>1</b> (HOU — blank + flagged, source recorded)</td></tr>
+<tr><td>Register rows</td><td><b>32 clubs · 705 position rows</b>, date + source per row</td></tr>
+<tr><td>Domain corrections</td><td><b>17</b> official domains confirmed</td></tr>
+<tr><td>Shared rank slots captured</td><td><b>13 clubs</b> (both names kept, no order inferred)</td></tr>
+<tr><td>Reserve/Injured entries (Nov 2026)</td><td><b>25</b> across 17 clubs</td></tr>
+<tr><td>Stale-depth flags</td><td><b>6</b> (5 reserve cross-check + LAC page log)</td></tr>
+<tr><td>Verification</td><td><span class="badge">all gates green</span></td></tr>
+</tbody>
+</table>
+
+<h2>Stale-depth flags — do not treat flagged rank1 as current depth</h2>
+<ul>
+  <li><b>LAC</b> — Derwin James Jr. listed S rank1; the page's own Latest Transactions log places him on IR.</li>
+  <li><b>LAR</b> — Puka Nacua (WR rank1, IR 11/12) and Jordan Whittington (KR rank1, IR 11/10).</li>
+  <li><b>TEN</b> — Peter Skoronski (LG rank1, IR 11/14) and Tommy Townsend (P rank1 / H rank1, IR 11/14).</li>
+</ul>
+<p>Replacement depth for each is recorded in <code>data/roster_ir_sweep.json</code>.</p>
+
+<h2>Key findings</h2>
+<ul>
+  <li><b>The official depth route is real, but not uniform in format.</b> Per-club charts vary: jersey-number
+  prepend (GB), player links elsewhere, shared rank slots, sparse cells, per-club position naming. The parser
+  handles every observed variant with warnings — never inference.</li>
+  <li><b>Domains are the trap.</b> Short-form domains are unreliable (bills.com is finance, eagles.com a shopify
+  shop, falcons.com a shop, cardinals.com MLB, and several club short forms 500 or serve the wrong surface). The
+  corrected map is <code>data/teams.json</code>.</li>
+  <li><b>Charts are dated snapshots.</b> Page-stated dates where published (CHI 10/31, GB/LV/SF/TEN 11/10),
+  capture date otherwise. IND republishes weekly. Depth goes stale as rosters move — the sweep's own IR
+  cross-check found five rank1 names on IR within days of capture.</li>
+  <li><b>One disclaimer:</b> NE's chart is explicitly writer-opinion, flagged for downstream consumers.</li>
+  <li><b>One snapshot caveat:</b> the 2026-11-17 BAL capture lists Jacoby Brissett at QB1; the brief's Lamar
+  Jackson stale-depth case does not appear in this capture.</li>
+</ul>
+
+<h2>Open item</h2>
+<p><b>HOU</b> is the single remaining unverified row: its official depth surface is an image. A machine-readable
+official Houston surface (text table, API, or official data feed) is the one input that would clear the depth
+layer to 32/32 verified.</p>
+</main>
+<footer>Generated 2026-11-17 · nfl-depth-sweep · every row source-linked; blank + flagged for unverifiable cells.</footer>
+</body>
+</html>

@@ -552,6 +552,17 @@ NAV = [
         ("nfl-req-review/pages/flagged.html", "⚑ Requirement Review — flagged for review", "legacy"),
         ("nfl-req-review/pages/sources.html", "Sources", "legacy"),
     ]),
+    # Added 2026-11-17 by session arena/2388d73a-own4 (additive; superset-only edit).
+    # The nfl-depth-sweep namespace: the 32-club official depth-chart sweep (31 text-verified
+    # transcripts, 1 image-only flag), the depth-order register with date + source per row, the
+    # 32-team roster/IR sweep vs the official reserve list, and the flagged-for-review queue.
+    # Appended at the end of NAV; no existing entry is reordered, relabelled or removed.
+    ("NFL Depth Sweep · 2026-11-17", [
+        ("nfl-depth-sweep/site/index.html", "Depth sweep — start here", "legacy"),
+        ("nfl-depth-sweep/site/register.html", "Depth register (32 clubs)", "legacy"),
+        ("nfl-depth-sweep/site/ir-sweep.html", "Roster / IR sweep", "legacy"),
+        ("nfl-depth-sweep/site/flagged.html", "⚑ Depth sweep — flagged for review", "legacy"),
+    ]),
 ]
 
 # The NFL research group title used to be a hand-typed count and drifted twice: it read
