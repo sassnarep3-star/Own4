@@ -1,0 +1,21 @@
+name: nfl-depth-sweep routes verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build (deterministic)
+        run: python3 nfl-depth-sweep/engine/build.py
+      - name: Verify gates G1-G8
+        run: python3 nfl-depth-sweep/engine/verify_routes.py
+      - name: Rebuild must be committed byte-identical
+        run: git diff --exit-code -- nfl-depth-sweep/index.html nfl-depth-sweep/pages/

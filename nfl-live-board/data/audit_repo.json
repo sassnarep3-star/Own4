@@ -20,16 +20,16 @@
     "www.nist.gov": 3,
     "official.nba.com": 2,
     "www.itl.nist.gov": 2,
-    "www.pro-football-reference.com": 1,
-    "www.nba.com": 1
+    "www.nba.com": 1,
+    "www.pro-football-reference.com": 1
    },
    "non_official_external_hosts": {
     "scikit-learn.org": 14,
     "www.nist.gov": 3,
     "official.nba.com": 2,
     "www.itl.nist.gov": 2,
-    "www.pro-football-reference.com": 1,
-    "www.nba.com": 1
+    "www.nba.com": 1,
+    "www.pro-football-reference.com": 1
    },
    "n_non_official_external_hosts": 23,
    "n_official_external_links": 69
@@ -61,8 +61,8 @@
     "www.nfl.com": 856,
     "github.com": 53,
     "www.ncpgambling.org": 14,
-    "operations.nfl.com": 1,
     "nextgenstats.nfl.com": 1,
+    "operations.nfl.com": 1,
     "www.nflgsis.com": 1
    },
    "non_official_external_hosts": {
@@ -118,15 +118,15 @@
     "github.com": 95,
     "www.ncpgambling.org": 31,
     "scikit-learn.org": 3,
-    "www.weather.gov": 2,
     "sassnarep3-star.github.io": 2,
-    "www.itl.nist.gov": 1,
-    "docs.github.com": 1
+    "www.weather.gov": 2,
+    "docs.github.com": 1,
+    "www.itl.nist.gov": 1
    },
    "non_official_external_hosts": {
     "scikit-learn.org": 3,
-    "www.weather.gov": 2,
     "sassnarep3-star.github.io": 2,
+    "www.weather.gov": 2,
     "www.itl.nist.gov": 1
    },
    "n_non_official_external_hosts": 8,
@@ -284,6 +284,39 @@
    "non_official_external_hosts": {},
    "n_non_official_external_hosts": 0,
    "n_official_external_links": 670
+  },
+  "nfl-depth-sweep": {
+   "pages": 43,
+   "data_rows": 904,
+   "rows_without_any_link": 26,
+   "rows_without_an_official_nfl_link": 830,
+   "pages_referencing_localhost_or_preview_host": [],
+   "external_hosts": {
+    "www.nfl.com": 42,
+    "www.baltimoreravens.com": 25,
+    "www.dallascowboys.com": 25,
+    "www.newyorkjets.com": 25,
+    "www.patriots.com": 25,
+    "www.steelers.com": 25,
+    "denverbroncos.com": 24,
+    "www.49ers.com": 24,
+    "www.atlantafalcons.com": 24,
+    "www.azcardinals.com": 24,
+    "www.buffalobills.com": 24,
+    "www.chargers.com": 24
+   },
+   "non_official_external_hosts": {
+    "www.baltimoreravens.com": 25,
+    "www.dallascowboys.com": 25,
+    "www.newyorkjets.com": 25,
+    "www.patriots.com": 25,
+    "www.steelers.com": 25,
+    "denverbroncos.com": 24,
+    "www.49ers.com": 24,
+    "www.atlantafalcons.com": 24
+   },
+   "n_non_official_external_hosts": 743,
+   "n_official_external_links": 42
   },
   "nfl-edge": {
    "pages": 22,
@@ -544,8 +577,8 @@
     "www.nfl.com": 16,
     "www.ncpgambling.org": 14,
     "www.fanduel.com": 8,
-    "operations.nfl.com": 4,
     "codeload.github.com": 4,
+    "operations.nfl.com": 4,
     "static.www.nfl.com": 2
    },
    "non_official_external_hosts": {
@@ -643,14 +676,14 @@
   }
  },
  "totals": {
-  "namespaces": 35,
-  "pages": 477,
-  "data_rows": 18030,
-  "rows_without_any_link": 189,
-  "rows_without_an_official_nfl_link": 3805,
+  "namespaces": 36,
+  "pages": 520,
+  "data_rows": 18934,
+  "rows_without_any_link": 215,
+  "rows_without_an_official_nfl_link": 4635,
   "pages_with_localhost": 0,
-  "non_official_external_links": 484,
-  "official_external_links": 16983
+  "non_official_external_links": 1227,
+  "official_external_links": 17025
  },
  "feed_crosscheck": {
   "nfl_book_rows": 137,
@@ -665,7 +698,7 @@
    "id": "A-01",
    "severity": "info",
    "area": "Repository-wide",
-   "finding": "35 NFL namespaces, 477 HTML pages and 18030 table rows were scanned.",
+   "finding": "36 NFL namespaces, 520 HTML pages and 18934 table rows were scanned.",
    "evidence": "engine/audit_repo.py",
    "status": "recorded"
   },
@@ -673,7 +706,7 @@
    "id": "A-02",
    "severity": "high",
    "area": "Repository-wide",
-   "finding": "189 of 18030 table rows carry no link of any kind in their own row, and 3805 carry no official nfl.com link.",
+   "finding": "215 of 18934 table rows carry no link of any kind in their own row, and 4635 carry no official nfl.com link.",
    "detail": "A row without a link cannot be re-verified by a reader. Legend, help and navigation tables are counted too, so some are benign; the per-namespace table below lets a reviewer find them, and this namespace's own count is 0.",
    "evidence": "engine/audit_repo.py",
    "status": "flagged"

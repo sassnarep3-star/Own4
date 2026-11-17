@@ -88,6 +88,9 @@ NAV = [
     ("register.html", "Depth Register"),
     ("flagged.html", "Flagged for Review"),
     ("ir-sweep.html", "Roster / IR Sweep"),
+    # additive cross-link (session arena/76537469-own4): the league-route 404 sweep,
+    # club-page structure/as-of/self-label evidence and DS-01..DS-13 flags
+    ("../index.html", "Route Evidence"),
 ]
 
 
