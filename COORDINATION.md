@@ -4764,7 +4764,7 @@ standing brief is "no manual input — work to finish all tasks in this session"
 | competition | 5 strategies pre-registered (`prereg/PREREG-LB.md`, sha256 pinned and re-checked by V5). **0 qualify, 0 of 1000 points.** S1 Brier skill +0.1253, week-cluster 90% CI [0.0143, 0.2384], unadjusted p 0.033 → **Holm-adjusted p 0.147 across 5 trials** |
 | luck | 5 channels closed, 1 open and named; control floor **computed** (0.035, from two luck-only strategies scored in the same run) |
 | availability | 96 rows / 8 clubs re-read live: **96 agree, 0 disagree**. Reserve list transcribed (27 IR moves). Surprise rows blank by construction (1 snapshot this season). Depth columns blank (no official depth chart, no snap-count table) |
-| requirements | **70 rows**: 34 met, 11 partial, 21 blocked, 2 rejected, 3 process — each with its gate and the number that clears it |
+| requirements | **70 rows**: 33 met, 11 partial, 21 blocked, 2 rejected, 3 process — each with its gate and the number that clears it |
 | audit | 33 NFL namespaces, 463 pages, 17,562 table rows scanned; feeds agree 137/137; **0** runtime localhost/preview references. This session **corrected its own first answer** (2 false-positive localhost hits) and recorded it as F-12 |
 | gates | `nfl-live-board/verify.py` green: 16 pages, every row source-linked, every internal link resolves, corpus reconciled, prereg hash matches, no double-escaped entities. CI: `.github/workflows/nfl-live-board.yml` |
 | root nav | generator-owned group added to `verification/build.py`; root rebuild + `verification/verify_site.py` PASS (14 pages, 346 sourced rows) |

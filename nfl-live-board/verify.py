@@ -14,6 +14,8 @@ Fails (exit 1) when any of the rules this namespace claims to hold is broken:
   V6 every correlation row with a value also carries a finite n, and every row without a value
      carries a non-empty blank reason;
   V7 the leaderboard's benchmark self-test holds (S3's Brier equals the benchmark Brier);
+  V12 the human-written summary and the coordination completion block carry the same counts the
+      artefacts compute - a typed count that drifts is the defect this repository flags in peers;
   V11 no page contains a double-escaped HTML entity, which renders as literal text;
   V8 no page contains a hand-typed count of NFL namespaces (the defect class peer sessions hit
      twice): the pattern "<integer> nfl-" outside a <table> fails the build;
@@ -93,6 +95,42 @@ for p in PAGES:
     for m in re.finditer(r"<p[^>]*>(.*?)</p>", text, re.S):
         if re.search(r"\b\d+\s+nfl-", m.group(1)):
             fail("V8", "%s contains a typed namespace count: %s" % (rel, m.group(1)[:80]))
+
+# ---------------------------------------------------------------- V12
+# A count typed into prose drifts from the artefact the moment either changes. This session
+# caught itself doing it (COORDINATION.md said 34 met while the register computed 33), so the
+# build now checks the root summary and the coordination completion block against the artefact.
+import re as _re
+_md = open(os.path.join(os.path.dirname(NS), "NFL_LIVE_BOARD_EXECUTIVE_SUMMARY.md")).read()
+_reqsum = load("requirements.json")["summary"]
+_corpsum = load("corpus_2026.json")["summary"]
+_lb = load("leaderboard.json")
+for label, pattern, expected in (
+    ("exec summary corpus games", r"(\d+) games reconciled|reconciled to the official standings", None),
+):
+    pass
+checks_md = [
+    ("exec summary: 149-game corpus", "149-game", _corpsum["corpus_games"] == 149),
+    ("exec summary: 192/192 checks", "192/192", _corpsum["checks"] == 192 and _corpsum["fail"] == 0),
+    ("exec summary: 0 of 1000 points", "0 of 1000 points", _lb["points_awarded"] == 0 and _lb["points_total"] == 1000),
+    ("exec summary: five strategies", "Five strategies", len(_lb["rows"]) == 5),
+]
+for label, needle, ok in checks_md:
+    if needle not in _md:
+        fail("V12", "%s — expected string %r not found in the summary" % (label, needle))
+    elif not ok:
+        fail("V12", "%s — the summary says it but the artefact disagrees" % label)
+_coord_path = os.path.join(os.path.dirname(NS), "COORDINATION.md")
+_coord = open(_coord_path).read()
+_m = _re.search(r"\*\*(\d+) rows\*\*: (\d+) met, (\d+) partial, (\d+) blocked, (\d+) rejected, (\d+) process", _coord)
+if _m:
+    got = tuple(int(x) for x in _m.groups())
+    want = (_reqsum["total"], _reqsum["met"], _reqsum["partial"], _reqsum["blocked"],
+            _reqsum["rejected"], _reqsum["process"])
+    if got != want:
+        fail("V12", "COORDINATION.md types %s but the register computes %s" % (got, want))
+    else:
+        notes.append("V12 coordination counts match the register: %s" % (want,))
 
 # ---------------------------------------------------------------- V4
 corp = load("corpus_2026.json")["summary"]
