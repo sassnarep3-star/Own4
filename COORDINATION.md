@@ -4777,11 +4777,12 @@ standing brief is "no manual input — work to finish all tasks in this session"
 ## Session `arena/9208e00a-own4` — final NFL site integration and audit (claim, 2026-11-17 UTC)
 
 Branch (fixed by Arena): `arena/9208e00a-own4`, initially based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`.
-At claim time, the latest recorded integration was PR #142. During this session `main` advanced through PRs #144–#147;
-this branch has been rebased onto that current main state before the scope push, retaining the intervening logs and files.
-A prior `arena/1d297093-own4` entry also records a final-integration task; this branch is not switching to or editing that
-session's namespace. Root integration is pursued here under the active Arena-assigned branch and user acceptance criteria,
-with existing peer pages/data treated as read-only and navigation preserved rather than replaced.
+At claim time, the latest recorded integration was PR #142. During this session `main` advanced through PRs #144–#149;
+this branch has been rebased onto the current main state, retaining intervening work. PR #149 adds `nfl-live-board/` and
+records its own leaderboard/root-navigation work. That namespace remains read-only here under the no-overlap rule; its
+leaderboard's historical scores are flagged for review. This branch adds a separate prospective-only root competition
+surface and fixes the Source Audit leaderboard under the explicit user acceptance criteria. Existing peer pages/data are
+otherwise read-only, and all committed root navigation groups are preserved.
 
 | # | Task | Status | File scope |
 |---|---|---|---|
@@ -4790,9 +4791,12 @@ with existing peer pages/data treated as read-only and navigation preserved rath
 | I-03 | Final integration check (internal-link/source-row checks, deterministic build, CI/Pages deploy); open and merge a PR from this assigned branch only if checks and publishable state are sound | pending | `COORDINATION.md`, assigned root integration files, `NFL_EXECUTIVE_SUMMARY.md`, `nfl-flagged.html` |
 | I-04 | Fix the audited Decision Console verdict-count defect (use filled suggestions, not decisive fixtures) and add a generated-page semantic regression assertion | done | `nfl-decision-console/engine/build_site.py`, `nfl-decision-console/engine/verify_site.py`, generated `nfl-decision-console/pages/executive-summary.html`; `suggestions.json` is read-only input |
 | I-05 | Keep backtest scores off the competition leaderboard; make the Source Audit board prospective-only and add a verifier regression check | authorized by the task; in progress | `nfl-sources/engine/build_site.py`, `nfl-sources/engine/verify.py`, generated `nfl-sources/pages/leaderboard.html`; `backtest.json` and strategy inputs are read-only |
+| I-06 | Add a root-owned prospective competition page that keeps historical backtest scores off the live leaderboard and separates skill eligibility from price-dependent staking | authorized by the task; in progress | `verification/build.py`, `verification/verify_site.py`, generated `nfl-leaderboard.html`, root navigation; `nfl-sources/data/strategies.json` and `PREREGISTRATION.md` are read-only inputs |
 
 I-04 is an explicit task-scope expansion requested by the user’s acceptance criteria: the audit identified “147 of 15 verdicts written” despite 0 of 15 filled suggestion verdicts. The correction is limited to the builder, its verifier, and the generated summary; no Decision Console data or unrelated pages are in scope. The verifier was regression-probed with an injected “147 of 15” string and rejected it, then passed on the corrected 0-of-15 page.
 
-I-05 is an explicit task-scope expansion requested by the user’s acceptance criterion “Do not put backtest results on the leaderboard.” Historical scores remain on the Backtest page; this edit is limited to the Source Audit competition page and its verifier, with score artefacts read-only.
+I-05 is an explicit task-scope expansion requested by the user’s acceptance criterion “Do not put backtest results on the leaderboard.” Historical scores remain on the Backtest page; this edit is limited to the Source Audit competition page and its verifier, with score artefacts read-only. The separate `nfl-live-board/pages/leaderboard.html` still publishes backtest scores, but PR #149 records that namespace's own claimed L-06/leaderboard work; it is not edited here and remains an explicit integration flag until its owner moves those scores or releases scope.
+
+I-06 is limited to a new root-owned prospective board, separate from peer workspace outputs. Its table uses registration metadata only; backtest metrics remain on the Backtest page, and market/ROI fields stay blank until an authorized price policy/source exists.
 
 No other session claim is being taken over. Findings that need owner/legal/data-provider decisions will remain visibly flagged; a clean build is not treated as evidence of source truth or betting edge.
