@@ -36,7 +36,7 @@
   "id": "Q04",
   "topic": "Availability",
   "question": "Does an 'Out' designation guarantee the player is inactive?",
-  "have": "No, and the official reserve list explains most of it. Of 17 Out players on the joined clubs, 14 were inactive and 2 more were placed on the official reserve list during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, DAL, 11/14). 16 of 17 (94.1%) are therefore explained by two official pages. Kerby Joseph (DET) is the one case neither page explains.",
+  "have": "No. Of 17 Out players on the joined clubs, 14 were inactive and 2 more were placed on the official reserve list during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, DAL, 11/14). Three official records (injury report, inactive lists, reserve list) explain 16 of 17 (94.1%); Kerby Joseph (DET) remains unexplained.",
   "src": "S1, S4, S10",
   "missing": "An explanation for Kerby Joseph: Out on the injury report, absent from the Week 10 inactive list, and absent from the November 2026 reserve list.",
   "clears": "The reserve list captured as a dated field of the weekly snapshot, so an Out player who went on IR is separated from an Out player who was expected to be inactive.",
@@ -47,12 +47,12 @@
   "id": "Q05",
   "topic": "Availability",
   "question": "Which players are on a reserve list and therefore absent from the weekly report?",
-  "have": "The league publishes it. https://www.nfl.com/transactions/league/reserve-list/2026/11 lists 25 Reserve/Injured moves for November 2026, each dated and club-indexed. It includes Malik Willis (MIA, 11/10) - the exact case the project brief cites as the reason a reserve list is needed - and it explains two of the three Out players who were missing from the inactive list.",
-  "src": "S10",
-  "missing": "Nothing for this month. The gap is that the reserve list is not captured: nothing in this repository ingests it, so a player on IR still looks simply absent.",
-  "clears": "Add the reserve list to the scheduled capture as a dated field, and join it to the weekly injury and inactive captures.",
+  "have": "The official November 2026 page lists 25 dated Reserve/Injured moves, including Malik Willis (MIA, 11/10); the nfl-collector capture contains the same month's 25 structured rows and a ledger hash.",
+  "src": "S10, S17",
+  "missing": "The decision-gaps build does not yet consume the collector capture automatically, and the capture does not establish membership across other months or seasons.",
+  "clears": "Integrate the existing 25-row hashed capture into this namespace's weekly join, then validate reserve/inactive/designation joins across the registered time window.",
   "discovery": "SG-E",
-  "status": "answered - the official page exists and was read"
+  "status": "answered for November capture; cross-namespace and longitudinal join open"
  },
  {
   "id": "Q06",
@@ -135,34 +135,34 @@
   "id": "Q13",
   "topic": "Fixtures",
   "question": "Is the venue of every fixture transcribed from the official game centre?",
-  "have": "13 of 14 Week 10 venues from official pages: 12 from the inactives article, 1 from the Game Center Game Info block.",
-  "src": "S4, S5",
-  "missing": "The WAS/NYG venue of 12 November.",
-  "clears": "One more official read.",
+  "have": "14 of 14 Week 10 venues are recorded from official pages: 12 from the inactives article, LAC/BAL from its Game Center, and WAS/NYG from its Game Center.",
+  "src": "S4, S5, S14",
+  "missing": "",
+  "clears": "Cleared for Week 10: 14/14 official venue records.",
   "discovery": "SG-F",
-  "status": "open - one fixture outstanding"
+  "status": "answered for Week 10"
  },
  {
   "id": "Q14",
   "topic": "Results",
   "question": "Is the Week 10 results feed complete?",
-  "have": "12 of 14 finals, each seen on two official pages.",
-  "src": "S6, S7",
-  "missing": "PIT/CIN, which both /schedules and /scores rendered as LIVE (Q1 08:56, 0-3) at fetch time on 2026-11-16 - a Monday. LAC/BAL had not kicked off.",
-  "clears": "A re-read once the page settles, plus a freshness guard that refuses to publish a score for a fixture whose state is not Final.",
+  "have": "13 of 14 fixtures show Final with scores on the current official schedule and scores pages. PIT/CIN is confirmed at 18-38 by its Game Center; LAC/BAL is still listed as Scheduled in the current reads, with no score shown.",
+  "src": "S11, S12, S13",
+  "missing": "LAC/BAL Final state and score. The current official schedule and scores pages list Monday, Nov 16 at 8:15 PM ET but show no Final state or score.",
+  "clears": "A current official NFL result page must report Final and both numeric scores; then the consistency verifier must pass for all 14 fixtures.",
   "discovery": "SG-G",
-  "status": "open - flagged"
+  "status": "open - 13/14 final; 1 still listed as scheduled"
  },
  {
   "id": "Q15",
   "topic": "Fixtures",
   "question": "Is the league's dated schedule announcement published beside the live schedule?",
-  "have": "The schedule page carries a 2026 TBD-games note and links https://www.nfl.com/legal/flexible-scheduling-procedures.",
-  "src": "S6",
-  "missing": "The dated announcement article itself, and Week 11, which was not published at fetch time.",
-  "clears": "Locate and cite the dated announcement, then keep it beside the live schedule page.",
+  "have": "Yes. The official May 8 announcement states the full 2026 schedule release date (May 14); the live Week 10 and Week 11 schedule pages are now cited alongside it.",
+  "src": "S11, S15, S16",
+  "missing": "",
+  "clears": "Cleared: one dated announcement plus the current Week 10 and Week 11 schedule pages.",
   "discovery": "SG-J",
-  "status": "open"
+  "status": "answered"
  },
  {
   "id": "Q16",
@@ -212,11 +212,11 @@
   "id": "Q20",
   "topic": "Rosters",
   "question": "Can roster turnover be versioned against the last official roster event?",
-  "have": "Yes, and the source is dated per move. The league transactions hub publishes Trades, Signings, Reserve List, Waivers, Terminations and Other, selectable by year and month. November 2026 carries 12 trades and 25 reserve-list moves, each with a date.",
-  "src": "repo",
-  "missing": "Nothing in this repository ingests it today, so depth and availability rows are not yet versioned against the last roster event.",
-  "clears": "Capture all six categories daily, hashed, and stamp every depth and availability row with the last roster event that affects it.",
+  "have": "Partly. The league hub publishes six monthly categories; nfl-collector has dated, ledger-hashed November captures for 12 trades and 25 reserve-list moves.",
+  "src": "S9, S10, S17, S18",
+  "missing": "Signings, Waivers, Terminations and Other are not yet captured, and neither existing category is joined to each availability/depth row as its last affecting roster event. The longitudinal event-to-player join also needs validation.",
+  "clears": "Capture the remaining four categories, retain the hashed trades and reserve records, then integrate all six categories into a tested event-to-player adapter that stamps the latest relevant roster event on each affected record.",
   "discovery": "SG-E",
-  "status": "answered - the source exists; the capture does not"
+  "status": "open - two categories captured; four and event-to-row integration remain"
  }
 ]

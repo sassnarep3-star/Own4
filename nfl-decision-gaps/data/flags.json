@@ -1,11 +1,12 @@
 [
  {
   "id": "F1",
-  "sev": "high",
+  "sev": "low",
   "area": "Results",
-  "item": "PIT at CIN, Week 10 - no final score published",
-  "detail": "Both https://www.nfl.com/schedules and https://www.nfl.com/scores/ rendered this fixture as LIVE (Q1 08:56, PIT 0 - CIN 3, FIELD GOAL) when read on 2026-11-16, a Monday, while the same pages render the other twelve Week 10 games as Final. The score is left blank rather than inferred. Whether this is page caching or a genuine suspension, the result is not verified.",
-  "src": "S6, S7"
+  "item": "Resolved: PIT at CIN final verified; prior LIVE rendering retained as a historical anomaly",
+  "detail": "The 2026-11-17 official Week 10 schedule and scores pages, plus the PIT-CIN Game Center, show Steelers 18, Bengals 38, Final. On 2026-11-16 the official schedule and scores reads had rendered LIVE, Q1 08:56, PIT 0-CIN 3. That earlier state is retained as historical evidence only; the published final is sourced to the later Final reads. No explanation for the earlier state is inferred.",
+  "status": "resolved \u2014 historical anomaly retained",
+  "src": "S6, S7, S11, S12, S13"
  },
  {
   "id": "F2",
@@ -83,9 +84,10 @@
   "id": "F11",
   "sev": "low",
   "area": "Fixtures",
-  "item": "One Week 10 venue not captured",
-  "detail": "The WAS/NYG fixture of 12 November has no venue recorded: the inactives article covers Sunday games only and that game centre was not read.",
-  "src": "S4"
+  "item": "Resolved: WAS at NYG venue recorded from the official Game Center",
+  "detail": "The official Commanders-Giants Game Center reports Location EAST RUTHERFORD, NJ and Stadium METLIFE STADIUM. The Week 10 venue register is now complete at 14/14.",
+  "status": "resolved \u2014 venue captured",
+  "src": "S14"
  },
  {
   "id": "F12",
@@ -99,16 +101,26 @@
   "id": "F14",
   "sev": "medium",
   "area": "Availability",
-  "item": "The reserve list is published but not captured anywhere in this repository",
-  "detail": "https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated Reserve/Injured moves for November 2026, including the Malik Willis case the project brief cites. Nothing in the repository ingests it, so an injured-reserve player still appears simply as 'not listed'.",
-  "src": "S10"
+  "item": "Reserve-list capture exists in nfl-collector; this namespace's join is not integrated",
+  "detail": "The official November reserve-list page publishes 25 dated moves, and nfl-collector commits a 25-row structured capture with a ledger hash (2026-11-16). The remaining gap is local: nfl-decision-gaps still uses a static list and does not consume the collector feed automatically or validate reserve membership across weeks.",
+  "src": "S10, S17"
  },
  {
   "id": "F13",
   "sev": "low",
   "area": "Fixtures",
-  "item": "Week 11 not yet published; dated announcement not located",
-  "detail": "The schedule page still showed Week 10 at fetch time on 2026-11-16. It carries a 2026 TBD-games note and links the flexible-scheduling procedures page, but the dated announcement article itself was not located.",
-  "src": "S6"
+  "item": "Resolved: dated 2026 schedule announcement and Week 11 listing recorded",
+  "detail": "The dated May 8, 2026 NFL announcement says the full schedule would be released May 14; the current Week 11 page lists Colts at Texans on Nov 19. Both are now linked beside the current Week 10 schedule. This resolves the source-pairing gap, not future schedule changes.",
+  "status": "resolved \u2014 sources paired",
+  "src": "S11, S15, S16"
+ },
+ {
+  "id": "F15",
+  "sev": "medium",
+  "area": "Results",
+  "item": "LAC at BAL is still listed as scheduled; no final score is shown",
+  "detail": "The current official NFL Week 10 schedule and scores reads (2026-11-17) list Chargers at Ravens for Monday, Nov 16 at 8:15 PM ET and show no Final state or score. This record therefore keeps both score fields blank and records the source-reported Scheduled state; no outcome is inferred.",
+  "status": "open \u2014 final state/score not confirmed",
+  "src": "S11, S12"
  }
 ]

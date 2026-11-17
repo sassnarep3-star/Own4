@@ -2,7 +2,7 @@
 """
 nfl-decision-gaps — curated register (data only, no rendering).
 
-Session: arena/448c248f-own4 · 2026-11-16.
+Session: arena/e2e6ca5a-own4 · 2026-11-17.
 
 Rules this file obeys
 ---------------------
@@ -16,63 +16,63 @@ Rules this file obeys
    merging changes them.
 """
 
-SESSION = "arena/448c248f-own4"
-DATE = "2026-11-16"
+SESSION = "arena/e2e6ca5a-own4"
+DATE = "2026-11-17"
 WEEK = "Week 10, 2026 regular season"
 
 # --------------------------------------------------------------------------
-# Sources read or parsed this session.  `kind` is `live` (fetched 2026-11-16),
-# `repo` (a file already committed in this repository) or `absent` (the fetch
-# was attempted and the official server returned no such page).
+# Sources used in this register. `kind` is `live` (a point-in-time official
+# page read; see `read` for date and coverage), `repo` (a committed repository
+# file) or `absent` (an official route returned no such page).
 # --------------------------------------------------------------------------
 SOURCES = [
     dict(id="S1", kind="live",
          url="https://www.nfl.com/injuries/",
          title="Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season | NFL.com",
          what="Club-by-club injury tables (Player | Position | Injuries | Practice Status | Game Status) for all 14 Week 10 fixtures, plus the page's own news links.",
-         read="Chunks 0-6 of 8 were read. Chunk 7 (tail of the page's news list) was not read.",
+         read="Chunks 0-6 of 8 were read on 2026-11-16. Chunk 7 (tail of the page's news list) was not read.",
          published="Week 10, 2026"),
     dict(id="S2", kind="absent",
          url="https://www.nfl.com/teams/baltimore-ravens/depth-chart",
          title="404 - Flag on the Play.",
          what="Attempted club depth-chart page. The official server returned the 404 page; nfl.com does not serve a depth chart at this path.",
-         read="HTTP 404 body read in full.",
+         read="HTTP 404 body read in full on 2026-11-16.",
          published=""),
     dict(id="S3", kind="live",
          url="https://www.nfl.com/teams/baltimore-ravens/",
          title="Baltimore Ravens News, Scores, Stats, Schedule | NFL.com",
          what="Club page. Section tabs are Info / Roster / Stats only. Team Info block: Head Coach Jesse Minter, Stadium M&T Bank Stadium, Owners Steve Bisciotti, Established 1996. Official Website baltimoreravens.com.",
-         read="Read in full (1 chunk).",
+         read="Read in full (1 chunk) on 2026-11-16.",
          published="2026-11-16"),
     dict(id="S4", kind="live",
          url="https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
          title="NFL Week 10 inactives: Players ruled out for Sunday's 12 games",
          what="Official inactive lists for all 12 Sunday/Munich Week 10 games, with the venue of each game and the pre-game club records.",
-         read="Read in full (2 of 2 chunks).",
+         read="Read in full (2 of 2 chunks) on 2026-11-16.",
          published="Nov 15, 2026"),
     dict(id="S5", kind="live",
          url="https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
          title="Los Angeles Chargers at Baltimore Ravens 2026 REG 10 - Game Center",
          what="Game Center for the Monday-night fixture. Game Info block publishes Location (BALTIMORE, MD), Stadium (M&T BANK STADIUM) and Network (ESPN, ABC).",
-         read="Chunk 0 of 3 read.",
+         read="Chunk 0 of 3 read on 2026-11-16.",
          published="2026-11-16"),
     dict(id="S6", kind="live",
          url="https://www.nfl.com/schedules",
          title="NFL Schedules: Games, Times, Matchups & Tickets",
-         what="Week 10 schedule with final scores, teams on bye (CHI, DEN, PHI, TB), and the 2026 TBD-games / flexible-scheduling note linking https://www.nfl.com/legal/flexible-scheduling-procedures.",
-         read="Read in full (2 of 2 chunks). Requested /schedules/2026/REG11/ which resolved to this page.",
+         what="Historical Week 10 schedule read on 2026-11-16. PIT-CIN was rendered LIVE (Q1 08:56, PIT 0-CIN 3); preserve this as an observed page state, not as a final score. Current re-read is S11.",
+         read="Read in full (2 of 2 chunks) on 2026-11-16. Requested /schedules/2026/REG11/ which resolved to this page.",
          published="2026-11-16"),
     dict(id="S7", kind="live",
          url="https://www.nfl.com/scores/",
          title="NFL Scores and Highlights: Live Updates, Results & Recaps",
-         what="Independent scoreboard: LIVE / UPCOMING / COMPLETED sections for Week 10.",
-         read="Chunk 0 of 3 read (LIVE + UPCOMING + first completed games).",
+         what="Historical Week 10 scoreboard read on 2026-11-16. PIT-CIN was rendered LIVE (Q1 08:56, PIT 0-CIN 3); preserve this as an observed page state, not as a final score. Current re-read is S12.",
+         read="Chunk 0 of 3 read (LIVE + UPCOMING + first completed games) on 2026-11-16.",
          published="2026-11-16"),
     dict(id="S8", kind="repo",
          url="https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/raw/nfl_injuries_week10_2026.md",
          title="NFL.com Official Injury Report — Week 10, 2026 Season (verbatim capture)",
          what="A verbatim transcription of S1 captured 2026-11-13 and already committed to this repository. Parsed this session into 326 structured rows.",
-         read="Parsed by nfl-decision-gaps/engine/parse_injury_capture.py; sha256 recorded in data/injury_week10_parsed.json.",
+         read="Parsed on 2026-11-16 by nfl-decision-gaps/engine/parse_injury_capture.py; sha256 recorded in data/injury_week10_parsed.json.",
          published="Captured 2026-11-13"),
     dict(id="S9", kind="live",
          url="https://www.nfl.com/transactions/league/trades/2026/11",
@@ -80,7 +80,7 @@ SOURCES = [
          what="The league transactions hub, with dated categories: Trades, Signings, Reserve List, "
               "Waivers, Terminations, Other, each selectable by year and month. The November 2026 "
               "trades table lists 12 moves with From, To, Date, Name, Position and Transaction.",
-         read="Read in full (1 chunk) via https://www.nfl.com/transactions/ , which defaults to "
+         read="Read in full (1 chunk) on 2026-11-16 via https://www.nfl.com/transactions/ , which defaults to "
               "Trades / November 2026.",
          published="2026-11-16"),
     dict(id="S10", kind="live",
@@ -88,8 +88,56 @@ SOURCES = [
          title="2026 NFL reserve-list by month | NFL.com",
          what="The official reserve list: 25 Reserve/Injured moves for November 2026, each with club, "
               "date and player. This is the page that makes 'not listed' stop meaning 'available'.",
-         read="Read in full (2 of 2 chunks).",
+         read="Read in full (2 of 2 chunks) on 2026-11-16.",
          published="2026-11-16"),
+    dict(id="S11", kind="live",
+         url="https://www.nfl.com/schedules/2026/by-week/week-10",
+         title="NFL Week 10 Schedule 2026: Games, Times, Matchups & Tickets",
+         what="Current official Week 10 schedule read on 2026-11-17: 13 fixtures are shown Final with scores, including PIT 18-CIN 38; LAC-BAL is still listed as scheduled for Nov 16, 8:15 PM ET, without a final score.",
+         read="Both chunks read in order. Fetch tool exposes the date but not an exact clock time or response headers.",
+         published="Week 10, 2026"),
+    dict(id="S12", kind="live",
+         url="https://www.nfl.com/scores/",
+         title="NFL Scores and Highlights: Live Updates, Results & Recaps",
+         what="Current official scores page read on 2026-11-17: PIT 18-CIN 38 Final; the 12 other completed Week 10 fixtures also show Final, while LAC-BAL remains a scheduled listing without a score.",
+         read="Chunks 0-2 read in order. Fetch tool exposes the date but not an exact clock time or response headers.",
+         published="2026 season; Week 10"),
+    dict(id="S13", kind="live",
+         url="https://www.nfl.com/games/steelers-at-bengals-2026-reg-10",
+         title="Pittsburgh Steelers at Cincinnati Bengals 2026 REG 10 - Game Center",
+         what="Game Center shows Pittsburgh 18, Cincinnati 38, Final for Week 10, Nov 15; the Game Book PDF link is present.",
+         read="Chunk 0 of 2 read on 2026-11-17; fetch tool exposes the date but not an exact clock time or response headers.",
+         published="Nov 15, 2026"),
+    dict(id="S14", kind="live",
+         url="https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+         title="Washington Commanders at New York Giants 2026 REG 10 - Game Center",
+         what="Game Center shows Washington 24, New York 21, Final (Week 10, Nov 12), and Game Info Location EAST RUTHERFORD, NJ / Stadium METLIFE STADIUM.",
+         read="Chunk 0 of 2 read on 2026-11-17; fetch tool exposes the date but not an exact clock time or response headers.",
+         published="Nov 12, 2026"),
+    dict(id="S15", kind="live",
+         url="https://media.nfl.com/news-and-releases/2026-nfl-schedule-powered-by-aws-to-be-released-thursday--may-14",
+         title="2026 NFL Schedule Powered by AWS to be Released Thursday, May 14",
+         what="Dated NFL announcement: published May 8, 2026, stating that the full 2026 schedule would be released May 14 at 8 p.m. ET; NFL.com and the NFL app would carry team and weekly schedules.",
+         read="Read in full (1 chunk) on 2026-11-17.",
+         published="May 08, 2026"),
+    dict(id="S16", kind="live",
+         url="https://www.nfl.com/schedules/2026/by-week/week-11",
+         title="NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+         what="Current official Week 11 schedule read on 2026-11-17; the opening fixture is Colts at Texans, Thursday, Nov 19 at 8:15 PM ET.",
+         read="Chunk 0 of 3 read. Fetch tool exposes the date but not an exact clock time or response headers.",
+         published="Week 11, 2026"),
+    dict(id="S17", kind="repo",
+         url="https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/2026-11-16/league_reserve_list_2026-11.json",
+         title="Official reserve-list capture record — November 2026",
+         what="The committed collector capture contains 25 structured Reserve/Injured rows; data/captures/ledger.json records the capture ID, 2026-11-16 read window and row hash.",
+         read="Local capture JSON and ledger entry checked on 2026-11-17.",
+         published="Captured 2026-11-16"),
+    dict(id="S18", kind="repo",
+         url="https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/2026-11-16/league_transactions_trades_2026-11.json",
+         title="Official trades capture record — November 2026",
+         what="The committed collector capture contains 12 dated NFL trades; data/captures/ledger.json records the capture ID, 2026-11-16 read window and row hash.",
+         read="Local capture JSON and ledger entry checked on 2026-11-17.",
+         published="Captured 2026-11-16")
 ]
 
 # --------------------------------------------------------------------------
@@ -142,41 +190,57 @@ TRADES = [
 ]
 
 # --------------------------------------------------------------------------
-# Verified Week 10 results feed.  Scores are copied from S6 and cross-checked
-# against S7.  Two fixtures carry no score - see flags F1 and F14.
+# Verified Week 10 result states. Current scores/states cite the official NFL
+# Week 10 schedule and scores pages; venue citations remain per fixture. The
+# 2026-11-16 LIVE PIT-CIN observation is retained in S6/S7 and F1 as history.
 # --------------------------------------------------------------------------
 RESULTS = [
     dict(game="WAS at NYG", day="Thu Nov 12", away="WAS", away_pts=24, home="NYG", home_pts=21,
-         status="Final", venue="", venue_src="", note="Venue not captured: S4 covers Sunday games only and this fixture's Game Center was not read."),
+         state="final", status="Final", result_src="S11, S12",
+         venue="MetLife Stadium (East Rutherford, N.J.)", venue_src="S14", note=""),
     dict(game="NE vs DET (Munich)", day="Sun Nov 15", away="NE", away_pts=10, home="DET", home_pts=35,
-         status="Final", venue="FC Bayern Munich Stadium (Munich, Germany)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="FC Bayern Munich Stadium (Munich, Germany)", venue_src="S4", note=""),
     dict(game="KC at ATL", day="Sun Nov 15", away="KC", away_pts=35, home="ATL", home_pts=13,
-         status="Final", venue="Mercedes-Benz Stadium (Atlanta)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Mercedes-Benz Stadium (Atlanta)", venue_src="S4", note=""),
     dict(game="HOU at CLE", day="Sun Nov 15", away="HOU", away_pts=24, home="CLE", home_pts=27,
-         status="Final", venue="Huntington Bank Field (Cleveland)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Huntington Bank Field (Cleveland)", venue_src="S4", note=""),
     dict(game="MIN at GB", day="Sun Nov 15", away="MIN", away_pts=30, home="GB", home_pts=10,
-         status="Final", venue="Lambeau Field (Green Bay, Wis.)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Lambeau Field (Green Bay, Wis.)", venue_src="S4", note=""),
     dict(game="MIA at IND", day="Sun Nov 15", away="MIA", away_pts=22, home="IND", home_pts=24,
-         status="Final", venue="Lucas Oil Stadium (Indianapolis)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Lucas Oil Stadium (Indianapolis)", venue_src="S4", note=""),
     dict(game="CAR at NO", day="Sun Nov 15", away="CAR", away_pts=20, home="NO", home_pts=17,
-         status="Final", venue="Caesars Superdome (New Orleans)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Caesars Superdome (New Orleans)", venue_src="S4", note=""),
     dict(game="BUF at NYJ", day="Sun Nov 15", away="BUF", away_pts=31, home="NYJ", home_pts=12,
-         status="Final", venue="MetLife Stadium (East Rutherford, N.J.)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="MetLife Stadium (East Rutherford, N.J.)", venue_src="S4", note=""),
     dict(game="JAX at TEN", day="Sun Nov 15", away="JAX", away_pts=40, home="TEN", home_pts=23,
-         status="Final", venue="Nissan Stadium (Nashville, Tenn.)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Nissan Stadium (Nashville, Tenn.)", venue_src="S4", note=""),
     dict(game="LAR at AZ", day="Sun Nov 15", away="LAR", away_pts=34, home="AZ", home_pts=6,
-         status="Final", venue="State Farm Stadium (Glendale, Ariz.)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="State Farm Stadium (Glendale, Ariz.)", venue_src="S4", note=""),
     dict(game="SEA at LV", day="Sun Nov 15", away="SEA", away_pts=21, home="LV", home_pts=13,
-         status="Final", venue="Allegiant Stadium (Las Vegas)", venue_src="S4", note=""),
+         state="final", status="Final", result_src="S11, S12",
+         venue="Allegiant Stadium (Las Vegas)", venue_src="S4", note=""),
     dict(game="SF at DAL", day="Sun Nov 15", away="SF", away_pts=46, home="DAL", home_pts=40,
-         status="Final", venue="AT&T Stadium (Arlington, Texas)", venue_src="S4", note=""),
-    dict(game="PIT at CIN", day="Sun Nov 15", away="PIT", away_pts=None, home="CIN", home_pts=None,
-         status="Rendered LIVE, Q1 08:56, PIT 0 - CIN 3 (FIELD GOAL) on both S6 and S7 at fetch time 2026-11-16",
+         state="final", status="Final", result_src="S11, S12",
+         venue="AT&T Stadium (Arlington, Texas)", venue_src="S4", note=""),
+    dict(game="PIT at CIN", day="Sun Nov 15", away="PIT", away_pts=18, home="CIN", home_pts=38,
+         state="final", status="Final", result_src="S11, S12, S13",
          venue="Paycor Stadium (Cincinnati)", venue_src="S4",
-         note="Score left blank - not inferred. See flag F1."),
+         note="The 2026-11-16 LIVE 0-3 observation is retained as historical evidence in F1."),
     dict(game="LAC at BAL", day="Mon Nov 16", away="LAC", away_pts=None, home="BAL", home_pts=None,
-         status="Not started (8:15 PM EST, ESPN/ABC)",
-         venue="M&T BANK STADIUM (BALTIMORE, MD)", venue_src="S5", note=""),
+         state="scheduled",
+         status="Scheduled (current official pages list Mon Nov 16, 8:15 PM ET; no final shown)",
+         result_src="S11, S12",
+         venue="M&T BANK STADIUM (BALTIMORE, MD)", venue_src="S5",
+         note="Score remains blank; current official pages do not show a Final state. See F15."),
 ]
 
 # --------------------------------------------------------------------------
@@ -415,14 +479,13 @@ GAPS = [
                  "and were not located elsewhere; no prior-season archive.",
          blocks="Q01, Q02, SG-A"),
     dict(domain="Reserve / injured-reserve list membership",
-         have="The league publishes a dated reserve list: 25 Reserve/Injured moves for November "
-              "2026 at https://www.nfl.com/transactions/league/reserve-list/2026/11, including "
-              "Malik Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson "
-              "(DAL, 11/14).",
-         src="S10",
-         missing="No capture of it. Nothing in this repository ingests this page, so an IR player "
-                 "still looks merely absent.",
-         blocks="Q05, F3, SG-E"),
+         have="The official November 2026 page lists 25 dated Reserve/Injured moves, including Malik "
+              "Willis (MIA, 11/10), TreVeyon Henderson (NE, 11/14) and Tyler Goodson (DAL, 11/14). "
+              "The nfl-collector namespace has a 25-row structured capture and ledger hash.",
+         src="S10, S17",
+         missing="This decision-gaps namespace still uses its static November transcription and does "
+                 "not consume the collector capture automatically; cross-week membership joins remain open.",
+         blocks="Q05, F3, F14, SG-E"),
     dict(domain="League depth charts",
          have="Confirmed absent: https://www.nfl.com/teams/baltimore-ravens/depth-chart returns 404 "
               "and the club page's tabs are Info / Roster / Stats.",
@@ -442,11 +505,11 @@ GAPS = [
                  "list and no game-day status beyond the injury cards.",
          blocks="Q08, F7"),
     dict(domain="Venue per fixture",
-         have="13 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from the "
-              "Game Center Game Info block.",
-         src="S4, S5",
-         missing="WAS/NYG (Thu Nov 12) venue not captured.",
-         blocks="Q13, F11, SG-F"),
+         have="14 of 14 Week 10 venues: 12 from the official inactives article, 1 (LAC/BAL) from "
+              "its Game Center, and 1 (WAS/NYG) from its Game Center.",
+         src="S4, S5, S14",
+         missing="",
+         blocks="None for Week 10; retain fixture-level venue capture for future weeks."),
     dict(domain="Stadium roof / surface designation",
          have="", src="S5, S6",
          missing="The Game Center Game Info block publishes Location, Stadium and Network only - no "
@@ -460,17 +523,19 @@ GAPS = [
                  "brief's NWS overlay is outside the official domain entirely.",
          blocks="Q09, F8"),
     dict(domain="Schedule / fixture context",
-         have="Week 10 dates, kickoff times, networks, teams on bye (CHI, DEN, PHI, TB), final "
-              "scores, and the 2026 TBD-games note linking the flexible-scheduling procedures page.",
-         src="S6, S7",
-         missing="The dated league schedule announcement itself; Week 11 not yet published at fetch time.",
-         blocks="Q15, F13"),
+         have="Official Week 10 schedule, the current Week 11 listing (Colts at Texans, Nov 19), "
+              "and the dated May 8 NFL announcement that the full 2026 schedule would be released "
+              "May 14. The announcement and live weekly schedule are linked together on the results page.",
+         src="S11, S15, S16",
+         missing="",
+         blocks="None for Q15; keep live schedule reads dated and source-linked."),
     dict(domain="Verified results feed",
-         have="12 of 14 Week 10 finals, each cross-checked on two official pages.",
-         src="S6, S7",
-         missing="PIT/CIN (rendered live at fetch time) and LAC/BAL (not started). No prior-season "
-                 "results corpus was read this session.",
-         blocks="Q14, F1, SG-G"),
+         have="13 of 14 Week 10 fixtures show Final with scores on the current official NFL schedule "
+              "and scores pages; PIT-CIN is additionally confirmed by its Game Center (18-38).",
+         src="S11, S12, S13",
+         missing="LAC/BAL is still listed as Scheduled on the current official pages; no Final state "
+                 "or score is shown. No prior-season results corpus was read this session.",
+         blocks="Q14, F15, SG-G"),
     dict(domain="Market prices (open / close / moneyline)",
          have="No official price found. The Game Center, schedule, scores and club pages publish no "
               "spread, total or moneyline.",
@@ -484,11 +549,12 @@ GAPS = [
          blocks="Q18, SG-N"),
     dict(domain="Dated transactions / roster events",
          have="The league transactions hub publishes Trades, Signings, Reserve List, Waivers, "
-              "Terminations and Other by year and month. November 2026: 12 trades and 25 "
-              "reserve-list moves, each dated.",
-         src="S9, S10",
-         missing="No capture. Depth and availability rows are not yet stamped with the last roster "
-                 "event that affects them.",
+              "Terminations and Other by year and month. For November 2026, nfl-collector has "
+              "structured, ledger-hashed captures of 12 trades and 25 reserve-list moves.",
+         src="S9, S10, S17, S18",
+         missing="The other four categories (Signings, Waivers, Terminations, Other) are not captured, "
+                 "and the existing captures are not yet joined to availability or depth rows. A "
+                 "multi-month roster-event history still needs validation.",
          blocks="Q20, SG-E"),
     dict(domain="Team and player statistics",
          have="nfl.com publishes team and player stats; the Game Center carries a regular-season "
@@ -535,11 +601,10 @@ QUESTIONS = [
          status="open"),
     dict(id="Q04", topic="Availability",
          question="Does an 'Out' designation guarantee the player is inactive?",
-         have="No, and the official reserve list explains most of it. Of 17 Out players on the "
-              "joined clubs, 14 were inactive and 2 more were placed on the official reserve list "
-              "during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, DAL, 11/14). "
-              "16 of 17 (94.1%) are therefore explained by two official pages. Kerby Joseph (DET) "
-              "is the one case neither page explains.",
+         have="No. Of 17 Out players on the joined clubs, 14 were inactive and 2 more were placed on "
+              "the official reserve list during the week (TreVeyon Henderson, NE, 11/14; Tyler Goodson, "
+              "DAL, 11/14). Three official records (injury report, inactive lists, reserve list) explain "
+              "16 of 17 (94.1%); Kerby Joseph (DET) remains unexplained.",
          src="S1, S4, S10",
          missing="An explanation for Kerby Joseph: Out on the injury report, absent from the Week 10 "
                  "inactive list, and absent from the November 2026 reserve list.",
@@ -549,18 +614,16 @@ QUESTIONS = [
          status="answered for 16 of 17; one case flagged (F3)"),
     dict(id="Q05", topic="Availability",
          question="Which players are on a reserve list and therefore absent from the weekly report?",
-         have="The league publishes it. https://www.nfl.com/transactions/league/reserve-list/2026/11 "
-              "lists 25 Reserve/Injured moves for November 2026, each dated and club-indexed. It "
-              "includes Malik Willis (MIA, 11/10) - the exact case the project brief cites as the "
-              "reason a reserve list is needed - and it explains two of the three Out players who "
-              "were missing from the inactive list.",
-         src="S10",
-         missing="Nothing for this month. The gap is that the reserve list is not captured: nothing "
-                 "in this repository ingests it, so a player on IR still looks simply absent.",
-         clears="Add the reserve list to the scheduled capture as a dated field, and join it to the "
-                 "weekly injury and inactive captures.",
+         have="The official November 2026 page lists 25 dated Reserve/Injured moves, including Malik "
+              "Willis (MIA, 11/10); the nfl-collector capture contains the same month's 25 structured "
+              "rows and a ledger hash.",
+         src="S10, S17",
+         missing="The decision-gaps build does not yet consume the collector capture automatically, "
+                 "and the capture does not establish membership across other months or seasons.",
+         clears="Integrate the existing 25-row hashed capture into this namespace's weekly join, then "
+                "validate reserve/inactive/designation joins across the registered time window.",
          discovery="SG-E",
-         status="answered - the official page exists and was read"),
+         status="answered for November capture; cross-namespace and longitudinal join open"),
     dict(id="Q06", topic="Depth",
          question="Does the league publish depth charts?",
          have="No. https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 "
@@ -636,33 +699,34 @@ QUESTIONS = [
          status="answered in kind; the series is still too short"),
     dict(id="Q13", topic="Fixtures",
          question="Is the venue of every fixture transcribed from the official game centre?",
-         have="13 of 14 Week 10 venues from official pages: 12 from the inactives article, 1 from "
-              "the Game Center Game Info block.",
-         src="S4, S5",
-         missing="The WAS/NYG venue of 12 November.",
-         clears="One more official read.",
+         have="14 of 14 Week 10 venues are recorded from official pages: 12 from the inactives article, "
+              "LAC/BAL from its Game Center, and WAS/NYG from its Game Center.",
+         src="S4, S5, S14",
+         missing="",
+         clears="Cleared for Week 10: 14/14 official venue records.",
          discovery="SG-F",
-         status="open - one fixture outstanding"),
+         status="answered for Week 10"),
     dict(id="Q14", topic="Results",
          question="Is the Week 10 results feed complete?",
-         have="12 of 14 finals, each seen on two official pages.",
-         src="S6, S7",
-         missing="PIT/CIN, which both /schedules and /scores rendered as LIVE (Q1 08:56, 0-3) at "
-                 "fetch time on 2026-11-16 - a Monday. LAC/BAL had not kicked off.",
-         clears="A re-read once the page settles, plus a freshness guard that refuses to publish a "
-                "score for a fixture whose state is not Final.",
+         have="13 of 14 fixtures show Final with scores on the current official schedule and scores "
+              "pages. PIT/CIN is confirmed at 18-38 by its Game Center; LAC/BAL is still listed as "
+              "Scheduled in the current reads, with no score shown.",
+         src="S11, S12, S13",
+         missing="LAC/BAL Final state and score. The current official schedule and scores pages list "
+                 "Monday, Nov 16 at 8:15 PM ET but show no Final state or score.",
+         clears="A current official NFL result page must report Final and both numeric scores; then "
+                "the consistency verifier must pass for all 14 fixtures.",
          discovery="SG-G",
-         status="open - flagged"),
+         status="open - 13/14 final; 1 still listed as scheduled"),
     dict(id="Q15", topic="Fixtures",
          question="Is the league's dated schedule announcement published beside the live schedule?",
-         have="The schedule page carries a 2026 TBD-games note and links "
-              "https://www.nfl.com/legal/flexible-scheduling-procedures.",
-         src="S6",
-         missing="The dated announcement article itself, and Week 11, which was not published at "
-                 "fetch time.",
-         clears="Locate and cite the dated announcement, then keep it beside the live schedule page.",
+         have="Yes. The official May 8 announcement states the full 2026 schedule release date (May 14); "
+              "the live Week 10 and Week 11 schedule pages are now cited alongside it.",
+         src="S11, S15, S16",
+         missing="",
+         clears="Cleared: one dated announcement plus the current Week 10 and Week 11 schedule pages.",
          discovery="SG-J",
-         status="open"),
+         status="answered"),
     dict(id="Q16", topic="Origination",
          question="What is the correlation between the originated side, total and moneyline residuals?",
          have="", src="S3, S5, S6, S7",
@@ -698,16 +762,17 @@ QUESTIONS = [
          status="open"),
     dict(id="Q20", topic="Rosters",
          question="Can roster turnover be versioned against the last official roster event?",
-         have="Yes, and the source is dated per move. The league transactions hub publishes Trades, "
-              "Signings, Reserve List, Waivers, Terminations and Other, selectable by year and "
-              "month. November 2026 carries 12 trades and 25 reserve-list moves, each with a date.",
-         src="repo",
-         missing="Nothing in this repository ingests it today, so depth and availability rows are "
-                 "not yet versioned against the last roster event.",
-         clears="Capture all six categories daily, hashed, and stamp every depth and availability "
-                "row with the last roster event that affects it.",
+         have="Partly. The league hub publishes six monthly categories; nfl-collector has dated, "
+              "ledger-hashed November captures for 12 trades and 25 reserve-list moves.",
+         src="S9, S10, S17, S18",
+         missing="Signings, Waivers, Terminations and Other are not yet captured, and neither existing "
+                 "category is joined to each availability/depth row as its last affecting roster event. "
+                 "The longitudinal event-to-player join also needs validation.",
+         clears="Capture the remaining four categories, retain the hashed trades and reserve records, "
+                "then integrate all six categories into a tested event-to-player adapter that stamps "
+                "the latest relevant roster event on each affected record.",
          discovery="SG-E",
-         status="answered - the source exists; the capture does not"),
+         status="open - two categories captured; four and event-to-row integration remain"),
 ]
 
 # --------------------------------------------------------------------------
@@ -796,61 +861,67 @@ SUGGESTIONS = [
          recommended="B, but only inside the SG-A collector.",
          src="S1, S4",
          verdict=""),
-    dict(id="SG-E", title="Ingest the official reserve list and the six transaction categories",
-         why="The reserve list exists and is dated (25 moves in November 2026), and it explains two "
-             "of the three Out players who were missing from the inactive list - including the "
-             "Malik Willis case the brief names. Nothing in this repository captures it, so 'not "
-             "listed' still reads as 'available'.",
+    dict(id="SG-E", title="Join the existing reserve/trades captures and expand transaction coverage",
+         why="The official November reserve list and trades already have dated, hashed captures in "
+             "nfl-collector. This namespace still does not consume those records; the remaining "
+             "transaction categories (signings, waivers, terminations, other) are not yet joined into "
+             "a shared roster-event graph.",
          options=[
-             dict(label="A", text="Capture the reserve list alone, daily, hashed, and join it to the "
-                                  "weekly injury and inactive captures. One page, one parser.",
+             dict(label="A", text="Wire the existing reserve-list and trades captures into this "
+                                  "namespace's availability join, preserving the collector's capture "
+                                  "time, source URL and hashes; do not duplicate the parser.",
                   effort="Low", risk="Low",
-                  tradeoff="Closes the highest-value half of the gap immediately; leaves trades and "
-                           "signings out."),
-             dict(label="B", text="Capture all six categories (Trades, Signings, Reserve List, "
-                                  "Waivers, Terminations, Other), and stamp every depth and "
-                                  "availability row with the last roster event affecting it.",
+                  tradeoff="Closes the local integration gap with two already-captured categories; "
+                           "does not add the other four."),
+             dict(label="B", text="Option A plus daily captures for Signings, Waivers, Terminations "
+                                  "and Other, with the last roster event stamped onto every affected "
+                                  "availability/depth record.",
                   effort="Medium", risk="Low",
-                  tradeoff="Makes roster turnover a first-class dated event, which the brief asks "
-                           "for; six parsers instead of one."),
+                  tradeoff="Completes the six-category event graph; expands collector coverage and "
+                           "requires more drift expectations."),
          ],
-         dependency="SG-A.",
-         recommended="A this week, B as soon as the collector exists.",
-         src="S10, S1, S4",
+         dependency="The nfl-collector capture ledger and a tested adapter between namespaces.",
+         recommended="A for this namespace; B only after the shared event schema is reviewed.",
+         src="S9, S10, S17, S18, S1, S4",
          verdict=""),
-    dict(id="SG-F", title="Complete the venue register to 14 of 14",
-         why="Thirteen venues are captured from official pages; the Thursday game is missing because "
-             "the inactives article covers Sunday games only.",
+    dict(id="SG-F", title="Keep the venue register complete for every fixture",
+         why="The Week 10 register is now complete at 14/14, including WAS/NYG from its official "
+             "Game Center. That closes this week's gap but does not enforce venue coverage for "
+             "future slates.",
          options=[
-             dict(label="A", text="Read the Commanders-Giants game centre and record its Location "
-                                  "and Stadium fields.",
+             dict(label="A", text="For each refresh, record Location and Stadium from an official "
+                                  "Game Center for any fixture not covered by a league inactives page.",
                   effort="Trivial", risk="None",
-                  tradeoff="Completes Week 10; does not generalise."),
-             dict(label="B", text="Make the venue a required field of the fixture capture, so every "
-                                  "future fixture is captured with one.",
+                  tradeoff="Preserves completeness by manual review; does not enforce it."),
+             dict(label="B", text="Make venue a required field of every fixture record and fail the "
+                                  "build when a venue or official source is missing.",
                   effort="Low", risk="Low",
                   tradeoff="Prevents the gap from recurring."),
          ],
          dependency="None.",
-         recommended="Both - A is one read, B is a drift-alarm field.",
-         src="S4, S5",
+         recommended="A completed for Week 10; B is the durable safeguard.",
+         src="S4, S5, S14",
          verdict=""),
-    dict(id="SG-G", title="Add a freshness guard and re-read the Steelers-Bengals result",
-         why="Both /schedules and /scores rendered that fixture as LIVE in the first quarter on "
-             "2026-11-16. Publishing a score from that state would be an inference.",
+    dict(id="SG-G", title="Automate a freshness re-read for scheduled fixtures",
+         why="The 2026-11-16 PIT-CIN pages showed an intermediate LIVE state; the 2026-11-17 official "
+             "schedule, scores and Game Center reads later showed Final, 18-38. This session adds a "
+             "deterministic build-time check that rejects scores inconsistent with result state/source. "
+             "Automated re-reads and an immutable fetch ledger remain unimplemented here.",
          options=[
-             dict(label="A", text="Refuse to publish any score whose state is not Final, and record "
-                                  "the fixture as blank plus flagged.",
+             dict(label="A", text="Keep the build-time gate: Final requires both numeric scores and "
+                                  "official result-source IDs; non-Final states must have blank scores. "
+                                  "Manually re-read unresolved fixtures before publishing.",
                   effort="Low", risk="None",
-                  tradeoff="Correct, and leaves a hole until the page settles."),
-             dict(label="B", text="Option A plus a re-read job that clears the flag once the page "
-                                  "reports Final, recording both the fetch time and the page state.",
+                  tradeoff="The invariant is now enforced, but a scheduled fixture still needs a fresh read."),
+             dict(label="B", text="Option A plus a scheduled re-read of unresolved official fixtures, "
+                                  "recording a timestamped state transition and clearing a flag only "
+                                  "when an official source reports Final.",
                   effort="Medium", risk="Low",
-                  tradeoff="Self-healing, and leaves an audit trail of when the result became known."),
+                  tradeoff="Self-healing and auditable; requires a collector job and immutable snapshots."),
          ],
-         dependency="None.",
+         dependency="The build-time state/source consistency check is implemented; scheduled capture is not.",
          recommended="B.",
-         src="S6, S7",
+         src="S6, S7, S11, S12, S13",
          verdict=""),
     dict(id="SG-H", title="One canonical count, computed at build time, never typed into prose",
          why="Three sessions published 254, 279 and 347 rows for the same page, and a fourth "
@@ -870,8 +941,8 @@ SUGGESTIONS = [
          src="S8, S1",
          verdict=""),
     dict(id="SG-I", title="Consolidate the duplicated nfl-* namespaces into one canonical set",
-         why="Thirty namespaces each publish their own questions, suggestions and review pages. "
-             "Contradictory numbers are inevitable and are already present.",
+         why="Many namespaces independently publish questions, suggestions and review pages. "
+             "Contradictory numbers are already present; a canonical path would reduce repeated drift.",
          options=[
              dict(label="A", text="Freeze new namespaces and mark one canonical namespace per domain.",
                   effort="Low", risk="Low",
@@ -980,14 +1051,15 @@ SUGGESTIONS = [
 # Flagged for review.
 # --------------------------------------------------------------------------
 FLAGS = [
-    dict(id="F1", sev="high", area="Results",
-         item="PIT at CIN, Week 10 - no final score published",
-         detail="Both https://www.nfl.com/schedules and https://www.nfl.com/scores/ rendered this "
-                "fixture as LIVE (Q1 08:56, PIT 0 - CIN 3, FIELD GOAL) when read on 2026-11-16, a "
-                "Monday, while the same pages render the other twelve Week 10 games as Final. The "
-                "score is left blank rather than inferred. Whether this is page caching or a genuine "
-                "suspension, the result is not verified.",
-         src="S6, S7"),
+    dict(id="F1", sev="low", area="Results",
+         item="Resolved: PIT at CIN final verified; prior LIVE rendering retained as a historical anomaly",
+         detail="The 2026-11-17 official Week 10 schedule and scores pages, plus the PIT-CIN Game Center, "
+                "show Steelers 18, Bengals 38, Final. On 2026-11-16 the official schedule and scores "
+                "reads had rendered LIVE, Q1 08:56, PIT 0-CIN 3. That earlier state is retained as "
+                "historical evidence only; the published final is sourced to the later Final reads. "
+                "No explanation for the earlier state is inferred.",
+         status="resolved — historical anomaly retained",
+         src="S6, S7, S11, S12, S13"),
     dict(id="F2", sev="high", area="Repository",
          item="Three incompatible row counts published for the same injury page",
          detail="Earlier sessions published 254, 279 and 347 rows for the Week 10 nfl.com injury "
@@ -1049,26 +1121,36 @@ FLAGS = [
                 "Contradictory published values (F2) are the predictable result.",
          src="repo"),
     dict(id="F11", sev="low", area="Fixtures",
-         item="One Week 10 venue not captured",
-         detail="The WAS/NYG fixture of 12 November has no venue recorded: the inactives article "
-                "covers Sunday games only and that game centre was not read.",
-         src="S4"),
+         item="Resolved: WAS at NYG venue recorded from the official Game Center",
+         detail="The official Commanders-Giants Game Center reports Location EAST RUTHERFORD, NJ and "
+                "Stadium METLIFE STADIUM. The Week 10 venue register is now complete at 14/14.",
+         status="resolved — venue captured",
+         src="S14"),
     dict(id="F12", sev="medium", area="Availability",
          item="The availability series has two time points, not four",
          detail="The brief asks for Wednesday, Thursday and Friday captures plus kickoff. Only "
                 "2026-11-13 and 2026-11-16 exist, so the DNP to LP to FP path cannot be replayed.",
          src="S8, S1"),
     dict(id="F14", sev="medium", area="Availability",
-         item="The reserve list is published but not captured anywhere in this repository",
-         detail="https://www.nfl.com/transactions/league/reserve-list/2026/11 publishes 25 dated "
-                "Reserve/Injured moves for November 2026, including the Malik Willis case the "
-                "project brief cites. Nothing in the repository ingests it, so an injured-reserve "
-                "player still appears simply as 'not listed'.",
-         src="S10"),
+         item="Reserve-list capture exists in nfl-collector; this namespace's join is not integrated",
+         detail="The official November reserve-list page publishes 25 dated moves, and nfl-collector "
+                "commits a 25-row structured capture with a ledger hash (2026-11-16). The remaining "
+                "gap is local: nfl-decision-gaps still uses a static list and does not consume the "
+                "collector feed automatically or validate reserve membership across weeks.",
+         src="S10, S17"),
     dict(id="F13", sev="low", area="Fixtures",
-         item="Week 11 not yet published; dated announcement not located",
-         detail="The schedule page still showed Week 10 at fetch time on 2026-11-16. It carries a "
-                "2026 TBD-games note and links the flexible-scheduling procedures page, but the "
-                "dated announcement article itself was not located.",
-         src="S6"),
+         item="Resolved: dated 2026 schedule announcement and Week 11 listing recorded",
+         detail="The dated May 8, 2026 NFL announcement says the full schedule would be released May 14; "
+                "the current Week 11 page lists Colts at Texans on Nov 19. Both are now linked beside "
+                "the current Week 10 schedule. This resolves the source-pairing gap, not future schedule changes.",
+         status="resolved — sources paired",
+         src="S11, S15, S16"),
+    dict(id="F15", sev="medium", area="Results",
+         item="LAC at BAL is still listed as scheduled; no final score is shown",
+         detail="The current official NFL Week 10 schedule and scores reads (2026-11-17) list Chargers at "
+                "Ravens for Monday, Nov 16 at 8:15 PM ET and show no Final state or score. This record "
+                "therefore keeps both score fields blank and records the source-reported Scheduled state; "
+                "no outcome is inferred.",
+         status="open — final state/score not confirmed",
+         src="S11, S12"),
 ]

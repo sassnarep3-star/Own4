@@ -122,77 +122,77 @@
  },
  {
   "id": "SG-E",
-  "title": "Ingest the official reserve list and the six transaction categories",
-  "why": "The reserve list exists and is dated (25 moves in November 2026), and it explains two of the three Out players who were missing from the inactive list - including the Malik Willis case the brief names. Nothing in this repository captures it, so 'not listed' still reads as 'available'.",
+  "title": "Join the existing reserve/trades captures and expand transaction coverage",
+  "why": "The official November reserve list and trades already have dated, hashed captures in nfl-collector. This namespace still does not consume those records; the remaining transaction categories (signings, waivers, terminations, other) are not yet joined into a shared roster-event graph.",
   "options": [
    {
     "label": "A",
-    "text": "Capture the reserve list alone, daily, hashed, and join it to the weekly injury and inactive captures. One page, one parser.",
+    "text": "Wire the existing reserve-list and trades captures into this namespace's availability join, preserving the collector's capture time, source URL and hashes; do not duplicate the parser.",
     "effort": "Low",
     "risk": "Low",
-    "tradeoff": "Closes the highest-value half of the gap immediately; leaves trades and signings out."
+    "tradeoff": "Closes the local integration gap with two already-captured categories; does not add the other four."
    },
    {
     "label": "B",
-    "text": "Capture all six categories (Trades, Signings, Reserve List, Waivers, Terminations, Other), and stamp every depth and availability row with the last roster event affecting it.",
+    "text": "Option A plus daily captures for Signings, Waivers, Terminations and Other, with the last roster event stamped onto every affected availability/depth record.",
     "effort": "Medium",
     "risk": "Low",
-    "tradeoff": "Makes roster turnover a first-class dated event, which the brief asks for; six parsers instead of one."
+    "tradeoff": "Completes the six-category event graph; expands collector coverage and requires more drift expectations."
    }
   ],
-  "dependency": "SG-A.",
-  "recommended": "A this week, B as soon as the collector exists.",
-  "src": "S10, S1, S4",
+  "dependency": "The nfl-collector capture ledger and a tested adapter between namespaces.",
+  "recommended": "A for this namespace; B only after the shared event schema is reviewed.",
+  "src": "S9, S10, S17, S18, S1, S4",
   "verdict": ""
  },
  {
   "id": "SG-F",
-  "title": "Complete the venue register to 14 of 14",
-  "why": "Thirteen venues are captured from official pages; the Thursday game is missing because the inactives article covers Sunday games only.",
+  "title": "Keep the venue register complete for every fixture",
+  "why": "The Week 10 register is now complete at 14/14, including WAS/NYG from its official Game Center. That closes this week's gap but does not enforce venue coverage for future slates.",
   "options": [
    {
     "label": "A",
-    "text": "Read the Commanders-Giants game centre and record its Location and Stadium fields.",
+    "text": "For each refresh, record Location and Stadium from an official Game Center for any fixture not covered by a league inactives page.",
     "effort": "Trivial",
     "risk": "None",
-    "tradeoff": "Completes Week 10; does not generalise."
+    "tradeoff": "Preserves completeness by manual review; does not enforce it."
    },
    {
     "label": "B",
-    "text": "Make the venue a required field of the fixture capture, so every future fixture is captured with one.",
+    "text": "Make venue a required field of every fixture record and fail the build when a venue or official source is missing.",
     "effort": "Low",
     "risk": "Low",
     "tradeoff": "Prevents the gap from recurring."
    }
   ],
   "dependency": "None.",
-  "recommended": "Both - A is one read, B is a drift-alarm field.",
-  "src": "S4, S5",
+  "recommended": "A completed for Week 10; B is the durable safeguard.",
+  "src": "S4, S5, S14",
   "verdict": ""
  },
  {
   "id": "SG-G",
-  "title": "Add a freshness guard and re-read the Steelers-Bengals result",
-  "why": "Both /schedules and /scores rendered that fixture as LIVE in the first quarter on 2026-11-16. Publishing a score from that state would be an inference.",
+  "title": "Automate a freshness re-read for scheduled fixtures",
+  "why": "The 2026-11-16 PIT-CIN pages showed an intermediate LIVE state; the 2026-11-17 official schedule, scores and Game Center reads later showed Final, 18-38. This session adds a deterministic build-time check that rejects scores inconsistent with result state/source. Automated re-reads and an immutable fetch ledger remain unimplemented here.",
   "options": [
    {
     "label": "A",
-    "text": "Refuse to publish any score whose state is not Final, and record the fixture as blank plus flagged.",
+    "text": "Keep the build-time gate: Final requires both numeric scores and official result-source IDs; non-Final states must have blank scores. Manually re-read unresolved fixtures before publishing.",
     "effort": "Low",
     "risk": "None",
-    "tradeoff": "Correct, and leaves a hole until the page settles."
+    "tradeoff": "The invariant is now enforced, but a scheduled fixture still needs a fresh read."
    },
    {
     "label": "B",
-    "text": "Option A plus a re-read job that clears the flag once the page reports Final, recording both the fetch time and the page state.",
+    "text": "Option A plus a scheduled re-read of unresolved official fixtures, recording a timestamped state transition and clearing a flag only when an official source reports Final.",
     "effort": "Medium",
     "risk": "Low",
-    "tradeoff": "Self-healing, and leaves an audit trail of when the result became known."
+    "tradeoff": "Self-healing and auditable; requires a collector job and immutable snapshots."
    }
   ],
-  "dependency": "None.",
+  "dependency": "The build-time state/source consistency check is implemented; scheduled capture is not.",
   "recommended": "B.",
-  "src": "S6, S7",
+  "src": "S6, S7, S11, S12, S13",
   "verdict": ""
  },
  {
@@ -223,7 +223,7 @@
  {
   "id": "SG-I",
   "title": "Consolidate the duplicated nfl-* namespaces into one canonical set",
-  "why": "Thirty namespaces each publish their own questions, suggestions and review pages. Contradictory numbers are inevitable and are already present.",
+  "why": "Many namespaces independently publish questions, suggestions and review pages. Contradictory numbers are already present; a canonical path would reduce repeated drift.",
   "options": [
    {
     "label": "A",

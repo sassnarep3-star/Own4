@@ -13,9 +13,11 @@ Checks every generated page:
 
 Exits non-zero on any failure.
 """
+import json
 import os
 import re
 import sys
+from urllib.parse import urlparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NS = os.path.dirname(HERE)
@@ -94,7 +96,79 @@ if os.path.exists(inv_path):
           "repo_inventory.json has no pinned commit")
     check("n_namespaces" in inv, "repo_inventory.json has no namespace count")
 
+# 6. result-state/source consistency. A terminal score is publishable only
+# with an explicitly Final state and two integer scores. Non-final states must
+# not carry scores, and every result/venue source ID must resolve to an official
+# NFL URL in the generated source register.
+results_path = os.path.join(NS, "data", "results_week10.json")
+sources_path = os.path.join(NS, "data", "sources.json")
+result_rows = []
+source_map = {}
+try:
+    result_data = json.load(open(results_path, encoding="utf-8"))
+    result_rows = result_data.get("rows", [])
+except Exception as exc:
+    fail.append("cannot read data/results_week10.json: %s" % exc)
+try:
+    source_data = json.load(open(sources_path, encoding="utf-8"))
+    for source in source_data:
+        sid = source.get("id")
+        if sid in source_map:
+            fail.append("duplicate source id in sources.json: %s" % sid)
+        source_map[sid] = source
+except Exception as exc:
+    fail.append("cannot read data/sources.json: %s" % exc)
+
+check(len(result_rows) == 14,
+      "Week 10 result feed must contain 14 fixture rows; found %d" % len(result_rows))
+result_ids = set()
+source_ids_top = set(result_data.get("source_ids", [])) if "result_data" in locals() else set()
+for rno, row in enumerate(result_rows, 1):
+    game = row.get("game", "row %d" % rno)
+    check(game not in result_ids, "duplicate Week 10 fixture row: %s" % game)
+    result_ids.add(game)
+    state = row.get("state")
+    status = row.get("status", "")
+    away_pts = row.get("away_pts")
+    home_pts = row.get("home_pts")
+    if state == "final":
+        check(type(away_pts) is int and type(home_pts) is int,
+              "%s: Final state requires two integer scores" % game)
+        check(status == "Final", "%s: normalized final state conflicts with source status %r" % (game, status))
+    elif state == "scheduled":
+        check(away_pts is None and home_pts is None,
+              "%s: scheduled/non-final state must have blank scores" % game)
+        check(status.startswith("Scheduled"),
+              "%s: scheduled state conflicts with source status %r" % (game, status))
+    else:
+        fail.append("%s: unsupported or missing result state %r" % (game, state))
+
+    row_sources = []
+    for field in ("result_src", "venue_src"):
+        value = row.get(field, "")
+        ids = [part.strip() for part in value.split(",") if part.strip()]
+        if field == "result_src":
+            check(bool(ids), "%s: result state/score has no source IDs" % game)
+        if field == "venue_src" and row.get("venue"):
+            check(bool(ids), "%s: published venue has no source ID" % game)
+        row_sources.extend(ids)
+        for sid in ids:
+            source = source_map.get(sid)
+            check(source is not None, "%s: unknown source ID %s" % (game, sid))
+            if source is not None:
+                host = (urlparse(source.get("url", "")).hostname or "").lower()
+                check(host == "nfl.com" or host.endswith(".nfl.com"),
+                      "%s: result/venue source %s is not an official NFL URL" % (game, sid))
+                check(sid in source_ids_top,
+                      "%s: source %s is absent from results_week10.json source_ids" % (game, sid))
+    if state in ("final", "scheduled"):
+        check(any((urlparse(source_map[sid]["url"]).hostname or "").lower().endswith("nfl.com")
+                  and any(part in source_map[sid]["url"] for part in ("/schedules/", "/scores", "/games/"))
+                  for sid in [x for x in row_sources if x in source_map]),
+              "%s: no official NFL schedule, scores or Game Center source for the reported state" % game)
+
 print("pages checked      : %d" % len(PAGES))
+print("result rows checked: %d" % len(result_rows))
 print("table rows checked : %d" % n_rows)
 print("links checked      : %d (%d external https)" % (n_links, n_ext))
 print("flagged items      : %d" % len(unsourced_rows))
