@@ -1,0 +1,382 @@
+{
+  "dataset": "nfl_board_questions",
+  "title": "Question register: what must be settled before a decision, and how to discover what is missing",
+  "session": "arena-7fc936d1-own4",
+  "built_utc": "2026-11-17",
+  "grade_vocabulary": {
+    "ANSWERED": "the answer is published on an official page and was read this session",
+    "ANSWERABLE NOW": "the evidence exists and the work is a join or a parse, not a new source",
+    "NEEDS DECISION": "no amount of reading settles it; it is a policy or rights choice with an owner",
+    "NEEDS A SOURCE": "the answer would settle it, but no official source for that field has been found"
+  },
+  "rows": [
+    {
+      "id": "Q01",
+      "grade": "ANSWERED",
+      "question": "Does the NFL publish betting lines anywhere on its own site?",
+      "why": "Every price-dependent requirement (RQ-01, 04, 18, 20, 57, 58) turns on this.",
+      "have": "This session read the schedule, scores, game-centre, injury and depth pages. None carries a spread, total or moneyline. The repo's own archives declare \"official\": false.",
+      "dont_have": "Nothing. The question is closed negatively.",
+      "route": "Re-check on any newly published league page before reopening.",
+      "sources": [
+        "S04",
+        "S05",
+        "S12"
+      ]
+    },
+    {
+      "id": "Q02",
+      "grade": "NEEDS DECISION",
+      "question": "If no official price exists, may a third-party price be used, and under what terms?",
+      "why": "This is RQ-20. Until it is answered, no residual, no CLV, no ROI and no vig decomposition may be published.",
+      "have": "A provisional policy (DEC-1 = option B: prices declined, columns blank) recorded by an agent under a no-manual-input instruction and flagged RC-08 for your review. A third-party archive exists (DraftKings via ESPN) already labelled third-party on every row.",
+      "dont_have": "A ruling from you. The usage terms of the third-party endpoint were not read by any session in the tree.",
+      "route": "Decide one of three: (a) official-only, prices stay blank forever; (b) third-party permitted with a per-row class label and a stated usage basis; (c) third-party permitted for internal evaluation but never republished. Then record it where the build can enforce it.",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "Q03",
+      "grade": "ANSWERED",
+      "question": "Does nfl.com host league-wide depth charts?",
+      "why": "RQ-42's register needs one route or 32 club routes.",
+      "have": "https://www.nfl.com/teams/baltimore-ravens/depth-chart returns the official 404 page. Club pages expose Info / Roster / Stats only.",
+      "dont_have": "Nothing. The league-wide route does not exist.",
+      "route": "Closed. Follow Q04 and Q05.",
+      "sources": [
+        "S06"
+      ]
+    },
+    {
+      "id": "Q04",
+      "grade": "ANSWERABLE NOW",
+      "question": "Do the 32 club sites publish a machine-readable depth chart, and is it dated?",
+      "why": "This decides whether the backup-deficiency feature (RQ-06, 27, 28, 44) can be built from official pages at all.",
+      "have": "2 clubs verified this session: Green Bay parses cleanly with a jersey-number prefix and is dated 'Unofficial, Nov. 10, 2026'. Baltimore parses cleanly and prints NO date. Houston publishes its chart as an image with no rows. 29 clubs remain unread.",
+      "dont_have": "A club-by-club verification table. Without a date per row, any depth feature leaks lookahead.",
+      "route": "Read the 32 club sites' /team/depth-chart paths, record for each: parseable yes/no, dated yes/no, and the printed date. Publish the table with its unread rows blank. Two days of work; no new source needed.",
+      "sources": [
+        "S07",
+        "S08",
+        "S09"
+      ]
+    },
+    {
+      "id": "Q05",
+      "grade": "ANSWERED",
+      "question": "Do the two named depth-parsing failures have a cause and a fix?",
+      "why": "RQ-31 is a precondition for widening depth coverage.",
+      "have": "GB: jersey numbers are a printed prefix ('9 Christian Watson'), strippable, raw string retained. HOU: the chart is a single image node - there is nothing to parse.",
+      "dont_have": "An authorised structured source for Houston.",
+      "route": "GB: keep number stripping. HOU: ask the club or use a licensed provider; do NOT transcribe by eye, which would make the numbers unauditable.",
+      "sources": [
+        "S07",
+        "S09"
+      ]
+    },
+    {
+      "id": "Q06",
+      "grade": "NEEDS A SOURCE",
+      "question": "Do official snap counts exist for NFL players?",
+      "why": "RQ-11 and RQ-54 both instruct the model to use playing time rather than jersey order.",
+      "have": "A player stats page read in full (Josh Jacobs): tabs are Summary, Career, Logs, Splits, Situational; columns are carries, yards, average, targets. No snap column. Headline text on the Week-10 line is absent because the game had just finished.",
+      "dont_have": "Any official snap-count field. The nearest official artefact is the Game Book PDF, which publishes participation (starter / substitute / did-not-play / not-active) rather than a snap share.",
+      "route": "Treat Game Book participation as the official playing-time proxy and say so; do not import a third-party snap provider without a decision under Q02's terms. This is the substitution to approve or reject.",
+      "sources": [
+        "S13",
+        "S10",
+        "S11"
+      ]
+    },
+    {
+      "id": "Q07",
+      "grade": "ANSWERABLE NOW",
+      "question": "Where can an actual starter be evidenced officially?",
+      "why": "RQ-10 and RQ-12 both need the actual side, not just the expected side.",
+      "have": "Two official sources, both confirmed this session: the Week-10 inactives article (12 games, both clubs, including 'emergency third QB' tags) and the Game Book PDF linked from every game centre ('Download Game Book (PDF)'). One fixture is already parsed: 109 participation rows, 0 join collisions.",
+      "dont_have": "Coverage. Inactive lists exist for 24 clubs of the Week-10 slate only; Game Books for 1 of 136 settled fixtures.",
+      "route": "Walk every settled game centre, take the Game Book URL, parse participation with the existing parser. The route is proven; the cost is one read per fixture.",
+      "sources": [
+        "S02",
+        "S10",
+        "S11"
+      ]
+    },
+    {
+      "id": "Q08",
+      "grade": "ANSWERED",
+      "question": "Is an absence from the weekly injury report evidence of health?",
+      "why": "RQ-62. If not, every availability feature built on the report is biased.",
+      "have": "No. The reserve list publishes 25 dated Reserve/Injured moves for November 2026, including Malik Willis (MIA, 11/10). A player on IR simply does not appear in the weekly report.",
+      "dont_have": "A complete reserve list for the whole season: the page is month-scoped.",
+      "route": "Read every month of the 2026 season's reserve list into one table, and join it to the report before any absence is read as availability.",
+      "sources": [
+        "S03",
+        "S01"
+      ]
+    },
+    {
+      "id": "Q09",
+      "grade": "ANSWERED",
+      "question": "Were the three Lions designations and the stale Week-10 counts real defects, and are they fixed?",
+      "why": "RQ-47 and RQ-48 are the brief's two explicit data-quality instructions.",
+      "have": "Both fixed at source. The live report now prints Kerby Joseph Out (Knee), Cade Mays Out (Ankle), D.J. Reed Out (Hip). The committed capture holds 347 rows, not 254.",
+      "dont_have": "Nothing for these two items.",
+      "route": "Closed. Note the general lesson: a page can change under a published number, which is what Q10 is for.",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "Q10",
+      "grade": "NEEDS DECISION",
+      "question": "How often must the report be captured for a backtest to be honest, and who pays for the storage?",
+      "why": "RQ-21, 29, 46, 52, 53, 59 all reduce to this one question.",
+      "have": "A hash-chained ledger (5 sealed entries, 1 dated capture) and a cron for Wed/Thu/Fri/Sun/Mon. Raw page content is deliberately NOT committed (RF-18).",
+      "dont_have": "A retention ruling: where immutables live, how long, and whether raw content may be kept at all. One time point is not a series.",
+      "route": "Decide retention (external store vs CI artifact vs repository) and the cadence you will actually fund, then make the ledger record a capture count per date so the first honest delta can be computed.",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "Q11",
+      "grade": "ANSWERABLE NOW",
+      "question": "What does 'Questionable' actually mean in 2026?",
+      "why": "RQ-43 and RQ-51: if the label does not move the play rate, it must not be a model feature.",
+      "have": "One week of designations (Out 70, Questionable 90, Doubtful 11 among 347 rows) and the corresponding official inactive lists for 24 clubs. The join is possible today.",
+      "dont_have": "Multiple seasons. The report page serves past seasons from a year selector, so they are reachable but not archived.",
+      "route": "Two steps: (1) join Week 10 now and publish the play rate per designation with a 95% CI; (2) capture 2-3 past seasons from the selector before treating the label as a feature.",
+      "sources": [
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "id": "Q12",
+      "grade": "ANSWERED",
+      "question": "Do the league's terms permit republishing row-level data collected by systematic retrieval?",
+      "why": "RQ-39. This is now the binding constraint on the whole repository, not a background question: the site publishes exactly the kind of compiled dataset the terms prohibit.",
+      "have": "No. Read this session, verbatim: \"You may use the Services solely for your own individual non-commercial and informational purposes only. Any other use, including for any commercial purposes, is strictly prohibited without our express prior written consent. Systematic retrieval of data or other content from the Services, whether to create or compile, directly or indirectly, a collection, compilation, database, or directory, is prohibited absent our express prior written consent.\" The terms also assign all rights in \"data, analytics, algorithms ... generated from the Services\" to the NFL.",
+      "dont_have": "The owner's ruling on how to comply. No session had read these terms until now, and the published tree already holds a 347-row injury table, 25 reserve-list rows and 136 results rows collected by systematic retrieval.",
+      "route": "Stop treating the public/private split as a design preference. Three compliant paths: (a) request written consent; (b) publish derived analysis only - indices, ratios, model output, links to the official page - and hold every row-level table privately; (c) reduce collection to manual, one-page-at-a-time review that is not a compiled database. Path (b) is the one the brief already describes, and it is now the operative constraint rather than a suggestion.",
+      "sources": [
+        "S17",
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "id": "Q13",
+      "grade": "NEEDS DECISION",
+      "question": "Is the 136-game corpus allowed to carry third-party prices at all?",
+      "why": "RQ-19. The corpus is called pre-registered but 163 of its 272 games carry nflverse closing prices.",
+      "have": "A corpus that is honest in structure (settled vs scheduled explicit, an alias table for ARI/AZ, a per-season price coverage table that states third-party-only).",
+      "dont_have": "A decision that separates 'results corpus' from 'priced corpus'. Today one file is both.",
+      "route": "Split it: a results corpus that needs no price and can be published, and a priced corpus that exists only after Q02 is answered. This can be done without losing a row.",
+      "sources": [
+        "S04",
+        "S05"
+      ]
+    },
+    {
+      "id": "Q14",
+      "grade": "ANSWERED",
+      "question": "Is a pre-registration that predates its window actually in the tree?",
+      "why": "RQ-34 and RQ-67 are the honesty backbone of the leaderboard.",
+      "have": "PREREG-002: rule-file sha256 as the registration, frozen peer-engine hashes, evaluation window Week 11+ empty at registration, calibration reproduces the published weeks 3-10 backtest exactly. This meets the standard.",
+      "dont_have": "Four more registrations: the catalogue holds 5 strategies and 1 registration.",
+      "route": "Freeze the other four before their windows open, or remove them from the leaderboard's eligible set. Do not retro-register.",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "Q15",
+      "grade": "ANSWERABLE NOW",
+      "question": "How many of the 136 settled games can be confirmed line-by-line on an official page?",
+      "why": "RQ-02. The feed claims 32 line-by-line and 105 aggregate-only.",
+      "have": "This session independently confirmed 13 of 14 Week-10 finals on two official pages each, and spot-checked a corpus row (NE 10 - SEA 13, 2026-09-09) against its game page exactly.",
+      "dont_have": "A line-by-line pass over the 136. The aggregate 105 rest on an archive, not on a page read.",
+      "route": "One pass: for each settled game, fetch the game centre, compare the final to the stored row, record match/mismatch. Publish the mismatch list even if empty.",
+      "sources": [
+        "S04",
+        "S05",
+        "S10",
+        "S11"
+      ]
+    },
+    {
+      "id": "Q16",
+      "grade": "ANSWERED",
+      "question": "Is LAC at BAL settled?",
+      "why": "It was the one unsettled fixture when the repo was last built, and a blank under a results feed is a defect if it can be closed.",
+      "have": "No - and this is the correct state. Both the schedule and the scores pages rendered it as a scheduled 8:15 PM game with records 0-8 and 4-5 when read; no final appears on either.",
+      "dont_have": "A final. It cannot exist yet.",
+      "route": "Re-read after the game. Do not infer a score from the standings, and do not let a later session 'fill in' this row from a bracket.",
+      "sources": [
+        "S04",
+        "S05",
+        "S12"
+      ]
+    },
+    {
+      "id": "Q17",
+      "grade": "ANSWERABLE NOW",
+      "question": "Do the injured-reserve and trade events explain the absences that the report cannot?",
+      "why": "RQ-13 and RQ-33. One unresolved Out player was left open by a peer session (Kerby Joseph, DET).",
+      "have": "The November reserve list (25 moves) and the trades capture. In this session's read, Kerby Joseph appears on the live report as Out (Knee) but is NOT on the November reserve list - so he was inactive, not on IR, which is consistent with the inactives article.",
+      "dont_have": "A mechanical join over the whole season rather than a one-month list.",
+      "route": "Join every Out designation to (a) the inactive list and (b) the reserve list, and publish the residual. A residual that is empty is a strong result; a non-empty one is a finding.",
+      "sources": [
+        "S01",
+        "S02",
+        "S03"
+      ]
+    },
+    {
+      "id": "Q18",
+      "grade": "NEEDS DECISION",
+      "question": "Which of the 35 NFL workspaces is the canonical surface?",
+      "why": "Duplication is now costing verification effort: several workspaces publish overlapping requirement registers, and this one adds another unless you rule otherwise.",
+      "have": "A count and a cross-reference maintained by a peer console (nfl-decision-console). Peer sessions have logged the fragmentation as SF-01 / CD-15 and asked for a ruling instead of adding a fourth console.",
+      "dont_have": "Your ruling. This board is a decision surface, not a replacement for the analysis namespaces; it links to them rather than copying their tables.",
+      "route": "Pick one decision surface and mark the rest appendices. Until then, every new namespace should link to the existing registers instead of restating them - which is what this one does.",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "Q19",
+      "grade": "ANSWERED",
+      "question": "Does the schedule page itself carry the dated flexible-scheduling rules?",
+      "why": "RQ-24. A live schedule that changes needs the announcement beside it.",
+      "have": "Yes: the Week-10 schedule page publishes the Week 16/17/18 TBD rules and links the league's flexible-scheduling procedures page. Read this session.",
+      "dont_have": "A dated archive of the announcement, so a later change is invisible as a diff.",
+      "route": "Capture the schedule page on the same cadence as the injury report and diff it. The page already contains the policy text to diff against.",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "Q20",
+      "grade": "NEEDS A SOURCE",
+      "question": "Where does an official stadium roof type and surface come from?",
+      "why": "RQ-56. Totals and passing props cannot be weather-adjusted without a roof.",
+      "have": "The game centre publishes Location and Stadium ('BALTIMORE, MD', 'M&T BANK STADIUM') and, on the schedule card, a one-line weather string ('Weather Clear/night').",
+      "dont_have": "A roof/surface table. The one-line weather string is not a forecast and not a roof designation.",
+      "route": "No official NFL roof table was found. Either build the table from a non-NFL authoritative source (flagged as such) or leave the feature unbuilt - do not guess a roof.",
+      "sources": [
+        "S12",
+        "S04"
+      ]
+    },
+    {
+      "id": "Q21",
+      "grade": "NEEDS DECISION",
+      "question": "What sample is enough before a strategy may be called skilled?",
+      "why": "Every leaderboard requirement (RQ-05, 36, 37) is governed by it, and the tree contains two different numbers: a 300-forecast floor and 105 available forecasts.",
+      "have": "A written floor of n >= 300 in the verification gates, a 105-forecast walk-forward sample, and a paired-bootstrap method that already reports an interval including zero.",
+      "dont_have": "A ruling on whether 300 forecasts at ~105/season means three seasons before any reward can be paid. That is the consequence and it should be stated as such.",
+      "route": "Confirm 300 (or set another), then publish the earliest date at which any strategy could qualify. If that date is 2028, the leaderboard should say so on its face.",
+      "sources": [
+        "S04",
+        "S16"
+      ]
+    },
+    {
+      "id": "Q22",
+      "grade": "ANSWERABLE NOW",
+      "question": "Is the availability graph's blank 'actual' side a data impossibility or a sourcing gap?",
+      "why": "A peer dataset says the actual side cannot be filled without a source that does not exist. If that is wrong, three requirements unblock at once.",
+      "have": "It is a sourcing gap. Both official sources for the actual side exist and were read this session: the inactives article and the Game Book PDF.",
+      "dont_have": "The one-fixture coverage that would prove it. One Game Book is already parsed with 0 collisions.",
+      "route": "Extend the existing parser to all settled fixtures, then refill RQ-10, RQ-12 and RQ-40 from it. The peer's blank should then be updated by its owner.",
+      "sources": [
+        "S02",
+        "S10",
+        "S11"
+      ]
+    },
+    {
+      "id": "Q23",
+      "grade": "ANSWERED",
+      "question": "Is the Baltimore quarterback irregularity still present?",
+      "why": "The brief names it as a live defect (Lamar Jackson and Tyler Huntley at QB after both went to IR).",
+      "have": "Fixed at source. Baltimore's current chart lists Jacoby Brissett, Joe Fagnano and Kedon Slovis at QB. Neither Lamar Jackson nor Tyler Huntley appears on it. Jackson's own IR placement is NOT in the November reserve list read this session, so the dated article for it still needs locating (flagged IR-17).",
+      "dont_have": "The dated article that announced Jackson's IR move. It is referenced by a peer flag (VR-17) but was not re-read here.",
+      "route": "Locate the dated NFL article for Jackson's IR move and store it beside the depth row, so the depth row's staleness has an evidenced cause.",
+      "sources": [
+        "S08",
+        "S03"
+      ]
+    },
+    {
+      "id": "Q24",
+      "grade": "ANSWERABLE NOW",
+      "question": "Do announced starter changes appear in a structured field anywhere?",
+      "why": "RQ-41 asks for announced-starter evidence that is not an inferred replacement.",
+      "have": "Two confirmed examples, published as dated news articles linked from the injury report: Drew Lock will start for Seattle; Kyle McCord is in line for a first start after Malik Willis went to IR.",
+      "dont_have": "A structured field. The announcement is prose in an article headline.",
+      "route": "Capture the injury page's News list with its timestamps and URLs, then treat an announced starter as a linked row against the player. That is a small parser over a list that already exists on the page.",
+      "sources": [
+        "S14",
+        "S15",
+        "S01"
+      ]
+    },
+    {
+      "id": "Q25",
+      "grade": "ANSWERED",
+      "question": "Does a shared or empty depth slot actually occur, and how?",
+      "why": "RQ-32 and RQ-50 warn that treating column 1 as 'the starter' fabricates a name the club never gave.",
+      "have": "Two live examples from clubs the brief did not name: Baltimore's K row is entirely empty (no kicker named), and its RB row lists Derrick Henry, Justice Hill and Rasheen Ali. Green Bay's two safety rows both list Kitan Oladapo at rank 2, so a naive rank-2 read double-counts one player.",
+      "dont_have": "The 149-slot census the brief cites; the register it would be computed from is blank.",
+      "route": "Once the 32-club parse exists (Q04), compute the census from data rather than quoting a number. That is the same rule this board follows for its own counts.",
+      "sources": [
+        "S07",
+        "S08"
+      ]
+    },
+    {
+      "id": "Q26",
+      "grade": "NEEDS DECISION",
+      "question": "Is a week-internal holdout acceptable in place of holdout seasons?",
+      "why": "RQ-68 asks for train/validation/final holdout seasons. A single season cannot supply them.",
+      "have": "A 4-row split with Week 11 held out prospectively and explicitly.",
+      "dont_have": "A second season. Prior seasons are reachable (the schedule and report pages go back decades) but no results corpus for them is in the tree.",
+      "route": "Either ingest 2-3 prior seasons' results (reachable from the same official pages) or accept week-level holdout and state the limitation on the leaderboard page.",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "Q27",
+      "grade": "ANSWERABLE NOW",
+      "question": "Can the 'removal of luck' panel be computed without prices?",
+      "why": "RQ-16. If it needs prices, it is blocked by Q02 for reasons that are not obvious.",
+      "have": "Yes: the control baselines (random picks 0.5619 on n=105, favourites-only) need only results. The panel exists and shows a strategy must beat home advantage, not a coin.",
+      "dont_have": "A luck panel expressed in return terms; that needs a price and is therefore blocked.",
+      "route": "Publish the panel in probability terms (Brier skill vs baselines) and state plainly that the money-denominated version waits on Q02.",
+      "sources": [
+        "S04",
+        "S16"
+      ]
+    },
+    {
+      "id": "Q28",
+      "grade": "NEEDS A SOURCE",
+      "question": "Does any official page publish a pre-kickoff inactive list for prime-time and Thursday games?",
+      "why": "The inactives article this session read covers Sunday's 12 games only. WAS@NYG (Thursday) and LAC@BAL (Monday) are outside it.",
+      "have": "Sunday coverage for 24 clubs, and the Game Book for the Thursday game, which lists who was not active.",
+      "dont_have": "A Thursday/Monday inactive article read this session. The Game Book is post-hoc and therefore unusable for a pre-kickoff feature without the point-in-time store.",
+      "route": "Check whether the league publishes separate prime-time inactives; if it does not, the Game Book is the only route and it is retro-only. Record which it is.",
+      "sources": [
+        "S02",
+        "S10",
+        "S11"
+      ]
+    }
+  ]
+}

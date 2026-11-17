@@ -1,0 +1,155 @@
+{
+  "dataset": "nfl_board_sources",
+  "note": "Every URL below was fetched and read in this session on 2026-11-17 UTC with the page-fetch tool. Direct curl/python-urllib from the sandbox cannot reach nfl.com (TLS handshake closed); that limitation is recorded rather than worked around, so every read is attributable to the page-fetch tool and the window below.",
+  "session": "arena-7fc936d1-own4",
+  "read_window_utc": [
+    "2026-11-17T00:40:00Z",
+    "2026-11-17T02:15:00Z"
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "label": "NFL injury report, Week 10 2026",
+      "url": "https://www.nfl.com/injuries/",
+      "kind": "official",
+      "read": "chunks 0-6 of 8 (chunk 7 not read)",
+      "used_for": "live designations; Lions game statuses; practice statuses"
+    },
+    {
+      "id": "S02",
+      "label": "NFL Week 10 inactives article",
+      "url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+      "kind": "official",
+      "read": "chunks 0-1 of 2 (complete)",
+      "used_for": "official inactive lists + venue lines for the 12 Sunday games"
+    },
+    {
+      "id": "S03",
+      "label": "NFL reserve list, November 2026",
+      "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+      "kind": "official",
+      "read": "chunks 0-1 of 2 (complete)",
+      "used_for": "Reserve/Injured moves that explain absences from the inactive list"
+    },
+    {
+      "id": "S04",
+      "label": "NFL schedule, Week 10 2026",
+      "url": "https://www.nfl.com/schedules/",
+      "kind": "official",
+      "read": "chunks 0-1 of 2 (complete)",
+      "used_for": "finals, kickoff times, byes"
+    },
+    {
+      "id": "S05",
+      "label": "NFL scores, Week 10 2026",
+      "url": "https://www.nfl.com/scores/",
+      "kind": "official",
+      "read": "chunk 0 of 3",
+      "used_for": "second independent confirmation of finals"
+    },
+    {
+      "id": "S06",
+      "label": "nfl.com club depth-chart route (tested)",
+      "url": "https://www.nfl.com/teams/baltimore-ravens/depth-chart",
+      "kind": "official",
+      "read": "complete",
+      "used_for": "route test only - returns the official 404 page"
+    },
+    {
+      "id": "S07",
+      "label": "Green Bay Packers depth chart",
+      "url": "https://www.packers.com/team/depth-chart",
+      "kind": "official-club",
+      "read": "complete",
+      "used_for": "depth rows, jersey-number prefix, dated 'Unofficial, Nov. 10, 2026'"
+    },
+    {
+      "id": "S08",
+      "label": "Baltimore Ravens depth chart",
+      "url": "https://www.baltimoreravens.com/team/depth-chart",
+      "kind": "official-club",
+      "read": "complete",
+      "used_for": "QB order after IR moves; empty K slot"
+    },
+    {
+      "id": "S09",
+      "label": "Houston Texans depth chart",
+      "url": "https://www.houstontexans.com/team/depth-chart",
+      "kind": "official-club",
+      "read": "complete",
+      "used_for": "shows the chart is published as an image, not rows"
+    },
+    {
+      "id": "S10",
+      "label": "Game centre, Patriots at Seahawks 2026 REG 1",
+      "url": "https://www.nfl.com/games/patriots-at-seahawks-2026-reg-1",
+      "kind": "official",
+      "read": "complete",
+      "used_for": "corpus spot-check (NE 10 SEA 13), Game Book link, venue Lumen Field"
+    },
+    {
+      "id": "S11",
+      "label": "Game centre, Commanders at Giants 2026 REG 10",
+      "url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "kind": "official",
+      "read": "complete",
+      "used_for": "finals, venue MetLife Stadium, Game Book link"
+    },
+    {
+      "id": "S12",
+      "label": "Game centre, Chargers at Ravens 2026 REG 10",
+      "url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+      "kind": "official",
+      "read": "chunk 0 of 3",
+      "used_for": "not-yet-final state; venue M&T Bank Stadium; injury widget"
+    },
+    {
+      "id": "S13",
+      "label": "Player stats page, Josh Jacobs",
+      "url": "https://www.nfl.com/players/josh-jacobs-x3315/stats",
+      "kind": "official",
+      "read": "complete",
+      "used_for": "test for an official snap-count field (none published); Week 10 stat line absent"
+    },
+    {
+      "id": "S14",
+      "label": "NFL news: Drew Lock will start for Seahawks",
+      "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+      "kind": "official",
+      "read": "headline published on the injury report page (S01, chunk 6)",
+      "used_for": "an officially announced starter change"
+    },
+    {
+      "id": "S15",
+      "label": "NFL news: Dolphins place Malik Willis on IR; Kyle McCord in line for first start",
+      "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+      "kind": "official",
+      "read": "headline published on the injury report page (S01, chunk 6)",
+      "used_for": "an officially announced starter change + IR confirmation"
+    },
+    {
+      "id": "S16",
+      "label": "NFL standings",
+      "url": "https://www.nfl.com/standings/",
+      "kind": "official",
+      "read": "NOT read this session",
+      "used_for": "cited by repo artefacts; not re-read here - listed so the gap is visible"
+    },
+    {
+      "id": "S17",
+      "label": "NFL.com Terms and Conditions",
+      "url": "https://www.nfl.com/legal/terms",
+      "kind": "official-terms",
+      "read": "chunk 0 of 9 (Sections 1.1-1.3, the intellectual-property and permitted-use clauses)",
+      "used_for": "the data-rights question (Q12, RQ-39). Quoted verbatim below; not paraphrased."
+    }
+  ],
+  "deliberately_not_read": [
+    {
+      "what": "any betting price on an nfl.com page",
+      "why": "the NFL publishes no prices; the repo has verified this repeatedly and this session found none on the schedule, scores, game-centre, injury or depth pages it read",
+      "closes": "Q02 — the price-policy decision",
+      "closes_suggestion": "SG-05"
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "dataset": "nfl_board_suggestions",
+  "title": "Suggestions board: a reviewer chooses the path before anything is implemented",
+  "session": "arena-7fc936d1-own4",
+  "built_utc": "2026-11-17",
+  "rule": "No verdict is pre-filled. The verdict and rationale columns are yours. The verifier fails the build if a verdict string is non-empty, so this board cannot be quietly decided by an agent.",
+  "verdict_vocabulary_for_the_reviewer": [
+    "adopt",
+    "adopt with changes",
+    "defer",
+    "reject"
+  ],
+  "rows": [
+    {
+      "id": "SG-01",
+      "title": "Split the corpus into a results corpus and a priced corpus",
+      "addresses": "RQ-19, Q13",
+      "cost": "low",
+      "reversible": "yes",
+      "what": "Move the third-party closing prices out of corpus_2026.json into a separate priced_corpus file that is only readable once Q02 is answered. The results corpus then contains no price field at all and can be published without a rights question.",
+      "why": "Today one file is both a pre-registered results set and a third-party priced set. Splitting it means the results half is unimpeachable while the price question is open.",
+      "risk_if_skipped": "Every backtest that touches the corpus is implicitly relying on a price source nobody has approved.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-desk/data/corpus/corpus_2026.json",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "SG-02",
+      "title": "Verify all 32 club depth pages and publish the parse/date table, unread rows blank",
+      "addresses": "RQ-28, RQ-42, Q04",
+      "cost": "medium (one read per club)",
+      "reversible": "yes",
+      "what": "For each club: does /team/depth-chart exist, does it parse to rows, does it print a date. Publish three columns and leave the 29 unread rows blank rather than guessing.",
+      "why": "Two clubs were verified this session and one is image-only. The route is real; the coverage is the obstacle, and coverage is a work item, not a research question.",
+      "risk_if_skipped": "The backup-deficiency feature stays unbuilt and every depth-dependent requirement stays BLOCKED.",
+      "source_url": "https://www.packers.com/team/depth-chart",
+      "sources": [
+        "S07",
+        "S08",
+        "S09"
+      ]
+    },
+    {
+      "id": "SG-03",
+      "title": "Make the Game Book the official playing-time source and drop the snap-count requirement",
+      "addresses": "RQ-11, RQ-25, RQ-54, Q06",
+      "cost": "medium (one parse per fixture)",
+      "reversible": "yes",
+      "what": "Replace 'snap counts' in the plan with Game Book participation rows (starter / substitute / did-not-play / not-active), which are official, dated and already parsed for one fixture with zero collisions.",
+      "why": "No official snap-count field exists on the page tested. Substituting a proxy that IS official is better than importing an unofficial one, but the substitution should be your decision, not an agent's.",
+      "risk_if_skipped": "The model keeps no playing-time feature, and 'do not model depth from jersey order' stays unfulfilled because there is nothing better to use.",
+      "source_url": "https://www.nfl.com/games/commanders-at-giants-2026-reg-10",
+      "sources": [
+        "S10",
+        "S11",
+        "S13"
+      ]
+    },
+    {
+      "id": "SG-04",
+      "title": "Publish a one-week designation calibration now, and start archiving past seasons in the same pass",
+      "addresses": "RQ-43, RQ-51, RQ-64, Q11",
+      "cost": "low for one week, medium for past seasons",
+      "reversible": "yes",
+      "what": "Join Week 10's designations to the inactive lists and publish the play rate per designation with a 95% CI, n on every row. Then capture 2-3 prior seasons from the report page's year selector.",
+      "why": "Both halves of the join already exist in hand for Week 10, and the page serves past seasons from a selector, so the multi-season archive is reachable without a new data source.",
+      "risk_if_skipped": "'Questionable' stays an old percentage with no 2026 evidence behind it, and the model carries an unvalidated label.",
+      "source_url": "https://www.nfl.com/injuries/",
+      "sources": [
+        "S01",
+        "S02"
+      ]
+    },
+    {
+      "id": "SG-05",
+      "title": "Answer the price policy explicitly and make the build enforce it",
+      "addresses": "RQ-20, RQ-58, RQ-57, Q02",
+      "cost": "low to decide, medium to enforce",
+      "reversible": "no (a published policy is hard to walk back)",
+      "what": "Choose: official-only, or third-party with a per-row class label and a stated usage basis, or third-party internal-only. Then add a verifier rule that fails if a price appears without its class label.",
+      "why": "An agent already recorded option B under your no-manual-input instruction and flagged it for review. That is the right handling, but the answer is provisional until you accept or reverse it.",
+      "risk_if_skipped": "Six requirements stay BLOCKED and every future session re-litigates the same question.",
+      "source_url": "https://www.nfl.com/schedules/",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "SG-06",
+      "title": "Move row-level tables private and publish derived analysis only, or obtain written consent",
+      "addresses": "RQ-39, Q12",
+      "cost": "medium (a rebuild of the public surface, not a rewrite of the analysis)",
+      "reversible": "yes",
+      "what": "Either request written consent from NFL Enterprises, or rebuild the published surface as derived analysis: indices, ratios, model output and links to the official page, with the row-level injury, reserve-list and results tables held in a private store. .gitignore already names that store; nothing is in it.",
+      "why": "The terms (section 1.3) prohibit systematic retrieval that compiles a database without express prior written consent, and section 1.1 assigns rights in data \"generated from the Services\" to the NFL. The repository publishes exactly that kind of compiled table today.",
+      "risk_if_skipped": "The site keeps publishing a compiled row-level dataset that the terms prohibit, and every new namespace adds to it. This is the one item where doing nothing is itself a choice.",
+      "source_url": "https://www.nfl.com/legal/terms",
+      "sources": [
+        "S17",
+        "S01"
+      ]
+    },
+    {
+      "id": "SG-07",
+      "title": "Promote the drift alarm from one namespace to every parser",
+      "addresses": "RQ-61",
+      "cost": "low",
+      "reversible": "yes",
+      "what": "Copy nfl-collector's pinned-expectation drift gate into every namespace that parses an official page.",
+      "why": "It is already built and proven in one place. The failure mode it prevents - a field silently vanishing and a blank being published - is the exact defect the brief is written against.",
+      "risk_if_skipped": "A page redesign turns a verified number into a blank with a green build.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-collector.yml",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "SG-08",
+      "title": "Make the leaderboard say when the first reward could possibly be paid",
+      "addresses": "RQ-36, RQ-37, Q21",
+      "cost": "low",
+      "reversible": "yes",
+      "what": "Given the n >= 300 floor and the current 105-forecast rate per season, print the earliest qualifying date on the leaderboard face, not in a footnote.",
+      "why": "A leaderboard that shows zero qualifiers without saying 'and none can qualify before season three' invites someone to lower the bar quietly. A date makes that harder.",
+      "risk_if_skipped": "The pressure to pay a lucky run grows every week the board is empty.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json",
+      "sources": [
+        "S04"
+      ]
+    },
+    {
+      "id": "SG-09",
+      "title": "Commission a 136-game line-by-line results audit and publish the mismatch list",
+      "addresses": "RQ-02, Q15",
+      "cost": "high (one read per fixture)",
+      "reversible": "yes",
+      "what": "For each settled game, read the game centre and compare the final to the stored row; publish matches and mismatches together.",
+      "why": "The feed admits 105 of 137 rows are aggregate-only. This session spot-checked one row and it matched exactly, which is encouraging and proves nothing about the other 104.",
+      "risk_if_skipped": "Every rating, correlation and backtest inherits an archive that has never been checked against an official page.",
+      "source_url": "https://www.nfl.com/scores/",
+      "sources": [
+        "S04",
+        "S05",
+        "S10",
+        "S11"
+      ]
+    },
+    {
+      "id": "SG-10",
+      "title": "Refill the availability graph's actual side and retire the claim that it cannot be sourced",
+      "addresses": "RQ-10, RQ-12, RQ-22, Q22",
+      "cost": "medium",
+      "reversible": "yes",
+      "what": "The actual-starter side is available from two official sources confirmed this session. Extend the existing Game Book parser and populate it, then update the peer flag FB-07 that says otherwise.",
+      "why": "Three requirements unblock at once, and one of them is the brief's 'who actually did' clause. The blocker was a belief about sourcing, not a missing source.",
+      "risk_if_skipped": "The availability graph stays half a graph and the injury signal stays a level in practice even though its schema says surprise.",
+      "source_url": "https://www.nfl.com/news/nfl-week-10-inactives-players-ruled-out-sunday-2026-season",
+      "sources": [
+        "S02",
+        "S10"
+      ]
+    },
+    {
+      "id": "SG-11",
+      "title": "Consolidate the decision surfaces: keep one readiness table and mark the rest appendices",
+      "addresses": "Q18, RQ-22, RQ-69, RQ-70",
+      "cost": "low",
+      "reversible": "yes",
+      "what": "Several workspaces now publish overlapping requirement, question and suggestion registers. Pick one as canonical and mark the rest appendices with a link, instead of adding a thirteenth.",
+      "why": "Peer sessions have already logged the fragmentation and asked for this ruling rather than resolved it themselves, which is correct. This board deliberately links to the existing analysis namespaces instead of copying their tables.",
+      "risk_if_skipped": "Verification effort is spent reconciling registers instead of checking data against official pages.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "SG-12",
+      "title": "Add a 'what changed since last read' column to every official-source table",
+      "addresses": "RQ-21, RQ-59, RQ-53, Q10",
+      "cost": "low once a second capture exists",
+      "reversible": "yes",
+      "what": "Each table row stores its last value and its last read time, and the page renders the delta. A row that has never changed shows 'unchanged since <date>' rather than a bare value.",
+      "why": "A level tells you the state; a delta tells you the news. The injury report, the depth charts and the schedule all change, and today the site cannot show that any of them did.",
+      "risk_if_skipped": "A stale number looks identical to a fresh one, which is how the Week-10 counts went stale in the first place.",
+      "source_url": "https://www.nfl.com/injuries/",
+      "sources": [
+        "S01"
+      ]
+    },
+    {
+      "id": "SG-13",
+      "title": "Treat 'no official price' as a published result, not a blank to be filled",
+      "addresses": "RQ-01, RQ-04, RQ-18",
+      "cost": "low",
+      "reversible": "yes",
+      "what": "Where a market line is blank, render the reason inline ('the NFL publishes no prices - see Q02') instead of an empty cell, and count those blanks on the dashboard as a finding.",
+      "why": "An empty cell reads as missing work. A labelled blank reads as a closed question. The repo already knows the difference; the presentation should too.",
+      "risk_if_skipped": "Every reader assumes the price columns are unfinished rather than unavailable.",
+      "source_url": "https://www.nfl.com/schedules/",
+      "sources": [
+        "S04",
+        "S12"
+      ]
+    },
+    {
+      "id": "SG-14",
+      "title": "Set the strategy-qualification floor once and publish the consequence",
+      "addresses": "Q21, RQ-05, RQ-37",
+      "cost": "low",
+      "reversible": "no",
+      "what": "Confirm n >= 300 proper-score forecasts, then state on the leaderboard that at the current rate no strategy can qualify before the 2028 season.",
+      "why": "Two different sample standards are alive in the tree. One number, stated once, with its consequence, ends the ambiguity.",
+      "risk_if_skipped": "The floor gets re-interpreted per strategy until one passes.",
+      "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/data/gates.json",
+      "sources": [
+        "S16"
+      ]
+    },
+    {
+      "id": "SG-15",
+      "title": "Add the NWS weather overlay only after a roof/surface table exists, or not at all",
+      "addresses": "RQ-56, Q20",
+      "cost": "medium",
+      "reversible": "yes",
+      "what": "The weather half is feasible (NWS is point-in-time by nature); the roof half has no official NFL table. Either build the roof table from a flagged non-NFL source and say so per row, or leave the whole feature unbuilt.",
+      "why": "A wind number without a roof indicator is actively misleading in an indoor stadium, so a half-built overlay is worse than none.",
+      "risk_if_skipped": "Totals stay unadjusted for conditions, which is a known and acceptable limitation as long as it is stated.",
+      "source_url": "https://www.nfl.com/games/chargers-at-ravens-2026-reg-10",
+      "sources": [
+        "S12",
+        "S04"
+      ]
+    }
+  ]
+}
