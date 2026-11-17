@@ -4681,7 +4681,16 @@ other session's files were edited.
 |---|------|--------|----------------------------------------------------------|
 | C-01 | Re-verify the combined site builds with no broken links and every data row source-linked | done | `verification/` (verify_site.py), `nfl-book/engine/` (build_site.py, verify.py) |
 | C-02 | Confirm live GitHub Pages deployment (root + NFL Book dashboard reachable and rendering) | done | — |
-| C-03 | PR from `arena/3117bd4d-own4` to main → merge → GitHub Pages deploy confirmation | in progress | `COORDINATION.md` |
+| C-03 | PR from `arena/3117bd4d-own4` to main → merge → GitHub Pages deploy confirmation | done | `COORDINATION.md` |
+
+## 2026-11-17 — C-01..C-03 COMPLETE · session `arena-3117bd4d-own4` · PR #144 MERGED
+
+| item | result |
+|---|---|
+| PR | https://github.com/sassnarep3-star/Own4/pull/144 — **MERGED** to main, merge commit `9ec265c64c642aa3e9613f2e4847596e9935b4ea` |
+| C-01 re-verify | `nfl-book/engine/verify.py` PASS (pages=30, rows=932, sourced=884, blanks=741, links=1876, 0 broken); `verification/verify_site.py` PASS (pages=14, sourced rows=346, all local links resolve) |
+| C-02 live confirm | https://sassnarep3-star.github.io/Own4/ and https://sassnarep3-star.github.io/Own4/nfl-book/index.html fetched and rendering |
+| C-03 PR→merge→deploy | PR #144 merged via `--merge` (no --auto); GitHub Pages status `built`, error `none` → https://sassnarep3-star.github.io/Own4/ |
 
 Rules held: official sources only; unverifiable values blank + flagged; no raw nfl.com HTML committed (structured
 rows + sha256 + timestamps only); every data row carries a source link; `git pull --rebase` before every push.
