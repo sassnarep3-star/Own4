@@ -4721,3 +4721,37 @@ P-01 is to reconcile the stale readiness report against the current checked-in c
 - All four PR checks passed (`audit`, `validate`, `nfl-verify verify`, `nfl-command verify`).
 - GitHub Pages deployment run 43990002633 completed successfully for merge commit `ea67aee`; Pages API status `built`, source `main:/`, HTTPS enforced.
 - Post-deploy live read with a cache-busting URL confirmed `nfl-verify/pages/verification.html` shows X-04 as pass: 347 matched identities, 1,388 field cells, zero mismatches. The price-snapshot dashboard remains live at https://sassnarep3-star.github.io/Own4/nfl-price-snapshot/pages/index.html.
+---
+
+## Claim · session `arena/925796f5-own4` (2026-11-17 UTC)
+
+Branch (fixed): `arena/925796f5-own4`, base `ba30819` (current `main`, PR #142 merge).
+
+**Why a new namespace.** 36 NFL namespaces already exist and each holds a partial answer. This session's
+brief is the *whole* requirement list arriving at once (mark-origination of every market, price snapshots,
+verified results feed, proper-score competition, availability/depth evidence, decision-readiness table,
+suggestions, questions). Re-opening any one of those namespaces would collide with its owner's claim.
+So this session builds **one integration surface** and an **independent verification of the live state**,
+and links — never rewrites — the 36 existing namespaces.
+
+| # | Task | Status | Owner session | Files touched (scope) |
+|---|------|--------|---------------|------------------------|
+| L-01 | Claim board; survey all 36 NFL namespaces; confirm no live claim overlaps | in progress | arena/925796f5-own4 | `COORDINATION.md` (this block only) |
+| L-02 | Independent official capture: Week 11 schedule + all Week 1–10 finals, with per-game official URL | unclaimed | — | `nfl-live-board/data/` |
+| L-03 | Independent recomputation of results feed; cross-check against `nfl-book/data/results_feed.json` (137 rows) | unclaimed | — | `nfl-live-board/engine/` |
+| L-04 | Requirement register: every line of the 2026-11-17 brief → status, blocker gate, number that clears it | unclaimed | — | `nfl-live-board/data/requirements.json` |
+| L-05 | Origination: side, then total, then moneyline; fair line vs market line vs difference as separate columns | unclaimed | — | `nfl-live-board/data/origination_*.json` |
+| L-06 | Two-stage leaderboard (proper-score qualification → prospective CLV escrow); luck-removal panel | unclaimed | — | `nfl-live-board/data/leaderboard.json` |
+| L-07 | Availability/depth evidence: 32-team sweep, replacement depth, surprise-not-level, correlations with n | unclaimed | — | `nfl-live-board/data/availability_*.json` |
+| L-08 | Repo-wide line-by-line audit of the 36 namespaces; contradictions and stale claims | unclaimed | — | `nfl-live-board/data/audit_*.json` |
+| L-09 | Questions / information-gaps / suggestions board (owner reviews before any change) | unclaimed | — | `nfl-live-board/data/{questions,suggestions}.json` |
+| L-10 | Site: landing dashboard + category subpages + Flagged-for-Review; root nav entry | unclaimed | — | `nfl-live-board/**`, `verification/build.py` (NAV only) |
+| L-11 | Integration: PR → merge → Pages deploy confirmation | unclaimed | — | `COORDINATION.md` |
+
+Rules held: official sources only; every table row carries an official source link; unconfirmable values
+stay blank and are flagged; no peer namespace is edited; small frequent commits; `git pull --rebase` before
+every push. Tasks L-02..L-11 are claimed by this session in the same commit that creates them, because the
+standing brief is "no manual input — work to finish all tasks in this session".
+
+
+
