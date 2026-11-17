@@ -13,7 +13,7 @@ Branch: `arena/689eb52e-own4` (fixed for this session)
 | 4 | Executive summary | done | arena-689eb52e-own4 | EXECUTIVE_SUMMARY.md |
 | 5 | GitHub Pages site (landing + category subpages + Flagged for Review) | done | arena-689eb52e-own4 | index.html, pages/*.html, assets/*, build_site.py |
 | 6 | Final integration: verify combined data line-by-line, build site, no broken links | done | arena-689eb52e-own4 | all |
-| 7 | PR to main + merge + GitHub Pages deploy confirmation | in progress | arena/1d297093-own4 | — |
+| 7 | PR to main + merge + GitHub Pages deploy confirmation | done | arena/1d297093-own4 | PR #143, merged as eed4fcb; Pages status built, no error → https://sassnarep3-star.github.io/Own4/ |
 
 ## Log
 
@@ -4668,4 +4668,11 @@ Review performed (read-only; this sandbox has outbound access to GitHub hosts on
 - Irregularities (already flagged, never hidden): scores carried from a third-party archive (nflverse/nfldata) rather than 136 official game-page reads (R02 partial); no 2026 opening prices in any citable archive (R01 partial); no official depth rank / snap-count feed (R06 / R10 blocked); no verified closing prices (CLV/staking blocked); player per-game logs unavailable (prop combos blocked). Each blocked row names the feed and the clearing quantity; no value is estimated.
 - Headline result (NFL Decision Desk): model loses to the vig-free market on proper score at n=104 (Brier 0.2525 vs 0.2147; paired week-cluster interval entirely below zero); 0 of 6 gates passing; 0 of 1,000 reward units awarded. No strategy qualifies for a reward.
 
-Task 7 (PR → main → merge → GitHub Pages deploy confirmation → record PR link + merge result here): claimed by this session. In progress.
+Task 7 (PR → main → merge → GitHub Pages deploy confirmation → record PR link + merge result here): **DONE**.
+- PR: https://github.com/sassnarep3-star/Own4/pull/143 — **MERGED** at 2026-11-17T00:38:53Z, merge commit `eed4fcb17256877092beca3eb764a310d866ffb3`
+- Merge result: `git pr merge 143 --merge` exit 0; PR state MERGED; `origin/main` advanced `ba30819` → `eed4fcb`
+- GitHub Pages: status `built`, error none, build_type `legacy`, source branch `main` path `/` → https://sassnarep3-star.github.io/Own4/ ; NFL Decision Desk live at /nfl-decision-desk/index.html (loaded and read in-session)
+- Verification re-confirmed after merge: `nfl-decision-desk/engine/verify.py` PASS (14 pages, 617 source-linked rows, 0 broken links); deterministic rebuild via `engine/site.py`; no diff
+- Site decision-readiness (landing page): 80 requirement lines — 39 done, 16 partial, 25 blocked; each blocked row names the blocking gate and the clearing quantity; no value estimated
+- Headline result: model loses to vig-free market on proper score at n=104 (Brier 0.2525 vs 0.2147; paired interval below zero); 0 of 6 gates; 0 of 1,000 rewards; no strategy qualifies
+- Irregularities flagged (not hidden): third-party archive for scores (R02 partial), no 2026 opening prices (R01 partial), no official depth rank/snap-count feed (R06/R10 blocked), no verified closing prices (CLV/staking blocked), no player per-game logs (prop combos blocked)
