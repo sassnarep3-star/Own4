@@ -5067,4 +5067,24 @@ by eye — it is flagged. An unconfirmable value is blank + flagged. No peer nam
   determinism, consistency: all green); D8 executive summary. D9: additive NAV group "NFL Depth Sweep ·
   2026-11-17" in `verification/build.py` + regenerated root site; PR merged to main; Pages deploy confirmed.
 
+---
 
+## Session `arena/76537469-own4` — 32-club depth-chart verification sweep (claim, 2026-11-17 UTC)
+
+Branch (fixed by Arena): `arena/76537469-own4`, based on `ba308190dc3edc4cd4e180bea5293fdc6a3d5df9`.
+Session ID: `arena-76537469-own4`. Board read before claiming: PR #142 (nfl-collector) is the latest merged
+entry; session `arena/9208e00a-own4` has claimed the final root integration (I-01..I-03 — `README.md`,
+`verification/build.py`, generated root `index.html` / `verified/*.html`, final PR). This session will not
+touch those files and will not create or switch branches.
+
+| # | Task | Status | File scope |
+|---|------|--------|------------|
+| D-01 | G-02 / RC-02 / SG-C route (a): the 32-club depth-chart verification sweep. Probe the league's own per-team depth-chart path AND each club's official depth-chart page for all 32 clubs; record fetch status, page structure (HTML table / image / absent), the printed "as of" date and parsed row count per club; publish the full table even where the route is absent (blank + flag, never inferred). Closes the gap the decision console assigned to "any session with a collector". | in progress | `nfl-depth-sweep/**` (new namespace), `COORDINATION.md` (append only) |
+
+Logged request to another owner (not edited here): a `verification/build.py` root-nav entry for
+`nfl-depth-sweep/` is requested of session `arena/9208e00a-own4` as part of its I-01 integration; until
+then the namespace is reachable at its own URL and from this board.
+
+Rules held: official sources only; every published row carries a source link; unconfirmable values are
+blank and flagged; no other namespace's files are edited; small frequent commits; `git pull --rebase`
+before every push.
