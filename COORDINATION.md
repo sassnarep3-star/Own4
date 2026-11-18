@@ -5125,3 +5125,43 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 - **Pages:** latest build = `ee452ff`, status **built**, `pages-build-deployment` **success** (01:51:27Z). Entry points: root dashboard `https://sassnarep3-star.github.io/Own4/` → "Depth sweep — start here" → register / IR sweep / flagged / **Route Evidence** (this branch's league-404 + club-page structure sweep, DS-01..DS-13).
 - **What shipped:** the complementary route-evidence layer inside the merged `nfl-depth-sweep` namespace (`data/{teams_base,route_l,route_c}.json`, `index.html` + 5 pages + assets, `engine/{build,verify_routes}.py`, routes CI workflow), the additive "Route Evidence" nav, the deterministic `audit_repo.py` top-N fix (un-reds the live-board gate for every branch), regenerated live-board audit, and the collision record above. **Nothing from PR #155's D1–D9 was discarded.**
 - **Post-merge state:** this session's scope is complete; remaining owner/integration items unchanged: SG-C verdict still blank (evidence now on both sides), HOU machine-readable surface still open, root I-01 nav work still with `arena/9208e00a-own4`.
+
+---
+## Session `arena/54ea269e-own4` — repo review, verification pass and honest scope record (2026-11-18 UTC)
+
+**Claim / scope:** this session edits only `COORDINATION.md`. It does not create or switch branches, does not edit any namespace owned by another session, and does not merge to `main`. Base: `eb6d8de` (PR #156).
+
+**Why no new NFL namespace was built.** The brief lists roughly 70 requirements, and the register already tracks them (`nfl-req-review/data/requirements_2026_11_17.json`: 73 rows, 27 met, 42 partial, 2 blocked, 1 in progress, 1 not started). A new namespace would add a 41st overlapping copy rather than close any gap. The remaining gaps need owner decisions or data access this sandbox does not have (see below).
+
+**Verification run on `eb6d8de` (read-only, this session):**
+
+| check | result |
+|---|---|
+| `python3 verification/verify_site.py` (root) | PASS: 14 pages, 346 source-linked rows, all local links resolve |
+| `python3 nfl-depth-sweep/engine/verify.py` | PASS: all gates green |
+| `python3 nfl-depth-sweep/engine/verify_routes.py` | PASS: G5–G8 shown; G1–G4 present in full output |
+| Live root `https://sassnarep3-star.github.io/Own4/` | serves; Pages API `built`; latest build `eb6d8de`, run success 2026-11-17T01:53Z |
+| Live `…/nfl-depth-sweep/index.html` | serves (32/32 league 404, 32/32 club pages, 31 HTML tables, 1 image) |
+
+**Sources:** the live pages above; `gh` PR and Pages API reads (PRs #150, #132, #127, #119 listed as OPEN). No new official NFL values were captured in this session.
+
+**Irregularities for review (non-blocking, published here, not fixed here):**
+
+- **I-A — Landing page is NBA, not NFL.** The root `index.html` is the NBA dashboard (snapshot 2026-11-05). The NFL work sits in subfolders and in the root nav group "NFL Decision Desk". The brief is NFL-only, so the root landing page does not match the project.
+- **I-B — Open PRs with failing checks.** PR #150 (`arena/451ab856-own4`, R09) has failing "nfl-live-board — rebuild and gate" and "nfl-verify verify" checks as of 2026-11-17T00:59Z. PR #132 (`arena/e8b8fb98-own4`) has failing checks and no commits since 2026-11-16. Neither has been merged. Both are owned by other sessions.
+- **I-C — Verifiers check structure, not values.** `verify_site.py` confirms every data row has a source link and every local link resolves. It does not re-read the cited official page to confirm the value. Row-level "verified" wording elsewhere therefore overstates what the verifier tests.
+- **I-D — Sandbox cannot reach nfl.com by shell.** The allowed hosts are github.com, codeload, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org. Official NFL pages can only be read through the fetch tool, which gives no raw bytes and no retained hash. Scheduled, hash-retained snapshots (daily injury report, depth pages, inactives) therefore cannot be produced from this sandbox as specified. This is the main blocker for the "immutable snapshot" and "timestamped series" requirements.
+- **I-E — Board size and duplication.** COORDINATION.md is about 5,100 lines. About 40 NFL namespaces overlap (e.g. `nfl-readiness`, `nfl-readiness-register`, `nfl-req-review`, `nfl-decision-desk`, `nfl-decision-console`, `nfl-decisions`, `nfl-decision`, `nfl-command`, `nfl-hub`, `nfl-board`, `nfl-live-board`). Several claim the same requirement. A single integration owner should pick one canonical register.
+- **I-F — Branch model.** The brief asks for `session-<id>/<task>` branches. The session harness pins each session to one `arena/<id>-own4` branch, so the parallel-branch rule cannot be followed as written. Logged here as a deviation.
+
+**Decisions that need the owner (not made here):**
+
+1. **Price-data policy** — the brief requires a policy decision before any backtest is published. No source in the repo states the terms for odds or closing lines.
+2. **Authorized Texans depth source** — the HOU chart is an image (already logged as DS-02). Needs a structured source the owner is authorized to use.
+3. **Injury-report capture cadence and storage** — needs a scheduler and a durable store outside the static site. The site is a static GitHub Pages build.
+4. **SG-C verdict** (build the backup-deficiency feature or not) — still blank; depends on the route sweep evidence above.
+5. **Whether to replace the NBA landing page with an NFL one** (I-A).
+
+**Work not done in this session (honest list):** the 32-team injury capture, Game Books / snap counts, the immutable snapshot ledger, the prospective shadow baseline, the NFL leaderboard split by division, the matchup matrix, and the executive summary rewrite. These either need data access (I-D) or owner decisions (above), or they already exist in a namespace (see I-E). Nothing here is marked verified.
+
+**Status:** this session's review task = **done** (verification run and irregularities logged). The broader omnibus = **not complete**; the tasks above stay unclaimed for owner direction. No PR opened, no merge performed. Session ends here.
