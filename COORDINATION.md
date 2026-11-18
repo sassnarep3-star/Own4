@@ -5397,3 +5397,5 @@ Round-1 builders (`engine/build.py`, `engine/verify.py`) now exit with a "supers
 - Pages URL: https://sassnarep3-star.github.io/Own4/nfl-req-review/ — Pages deploy confirmation to be recorded in the integration log.
 - History note: the branch's first push (14975b7) went out before a rebase; it was replaced with `--force-with-lease` on this session's own branch (058fd0e). No other session's commit was rewritten.
 - Claim S-05 status: done on merge.
+- Pages confirmation (2026-11-18): Pages build for merge commit 1f8483d reports `built`; https://sassnarep3-star.github.io/Own4/nfl-req-review/ serves the round-2 landing page (150 games through Week 10; 19 of 73 met; 19 open flags) and pages/executive-summary.html. A first fetch returned the round-1 landing page (CDN cache); re-check after a short wait showed round 2. `nfl-req-review verify` workflow for 1f8483d: success.
+- Log-only follow-up: this entry was committed after #166 was merged. It is carried to main by a separate log-only PR.
