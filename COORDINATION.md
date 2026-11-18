@@ -5125,3 +5125,27 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 - **Pages:** latest build = `ee452ff`, status **built**, `pages-build-deployment` **success** (01:51:27Z). Entry points: root dashboard `https://sassnarep3-star.github.io/Own4/` → "Depth sweep — start here" → register / IR sweep / flagged / **Route Evidence** (this branch's league-404 + club-page structure sweep, DS-01..DS-13).
 - **What shipped:** the complementary route-evidence layer inside the merged `nfl-depth-sweep` namespace (`data/{teams_base,route_l,route_c}.json`, `index.html` + 5 pages + assets, `engine/{build,verify_routes}.py`, routes CI workflow), the additive "Route Evidence" nav, the deterministic `audit_repo.py` top-N fix (un-reds the live-board gate for every branch), regenerated live-board audit, and the collision record above. **Nothing from PR #155's D1–D9 was discarded.**
 - **Post-merge state:** this session's scope is complete; remaining owner/integration items unchanged: SG-C verdict still blank (evidence now on both sides), HOU machine-readable surface still open, root I-01 nav work still with `arena/9208e00a-own4`.
+
+---
+
+## Session `arena/8440efda-own4` — claim: brief-to-artifact traceability + repo review (2026-11-18 UTC)
+
+**Session ID:** `arena/8440efda-own4` · **Branch (fixed by Arena):** `arena/8440efda-own4`, based on `eb6d8de` (= `origin/main`, PR #156). The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch will be created or pushed.
+
+**Surveyed before claiming (not assumed):**
+- `main` = `eb6d8de`; 36 `nfl-*` namespaces + root `verification/`; latest claims are PR #154–#156.
+- Verifiers run green on this tree: `nfl-readiness-register/verify.py` (226 rows / 480 links), `nfl-depth-sweep/engine/verify.py` (141 checks), `verification/verify_site.py` (346 rows sourced), `nfl-req-review/engine/verify.py`.
+- The 73-row register `nfl-readiness-register/data/requirements.json` is **stale against the repo**: rows REQ-13, 16, 17, 21, 26, 27, 30, 31, 32, 42, 52, 57, 59, 66 are marked `open`/`partial`, yet artifacts for the same items exist in `nfl-book/data/` and `nfl-markets/data/` (e.g. `matchup_matrix.json`, `removal_of_luck.json`, `two_stage_leaderboard.json`, `vig_free_decomposition.json`, `weekly_diff.json`, `drift_alarms.json`, `pit_ledger.json`, `holdout_split.json`).
+- 11 evidence/clearing references in the register point at paths that do not resolve (namespace-relative, or missing, e.g. `data/price_policy.json` for REQ-20).
+
+**Namespace claimed (exclusive):** `nfl-brief-trace/**` (new). Read-only use of every other namespace. No root nav, `verification/**`, `index.html`, `verified/**`, or peer `data/**` edits — root nav is an integration item for the final integration session (logged request below).
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| T1 | Enumerate the current brief into `nfl-brief-trace/data/brief_items.json` (verbatim item text, one row each) | claimed | arena/8440efda-own4 | `nfl-brief-trace/data/brief_items.json` |
+| T2 | Map each item to the artifact(s) that implement it; engine checks every path exists and is non-empty; status = artifact-present / schema-only / missing / gap — no status is typed by hand | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/trace.py`, `data/trace.json` |
+| T3 | Spot-check official source URLs used by the register (fetch timestamp recorded) | claimed | arena/8440efda-own4 | `nfl-brief-trace/data/official_checks.json` |
+| T4 | Static pages: landing (counts, decision-ready list), full item table, gaps, irregularities / Flagged for Review; every row source-linked or blank+flagged | claimed | arena/8440efda-own4 | `nfl-brief-trace/index.html`, `nfl-brief-trace/pages/*.html`, `nfl-brief-trace/engine/build.py` |
+| T5 | Verifier (row-source, local links, no localhost, deterministic) | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/verify.py` |
+| T6 | Executive summary + suggestions for the owner to choose from (not implemented) | claimed | arena/8440efda-own4 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `nfl-brief-trace/README.md` |
+| T7 | Completion record + root-nav request logged here | claimed | arena/8440efda-own4 | `COORDINATION.md` (append-only) |
