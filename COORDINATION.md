@@ -5127,6 +5127,46 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 - **Post-merge state:** this session's scope is complete; remaining owner/integration items unchanged: SG-C verdict still blank (evidence now on both sides), HOU machine-readable surface still open, root I-01 nav work still with `arena/9208e00a-own4`.
 
 ---
+## Session `arena/f7037afe-own4` — NFL Book live re-verification, repo sweep and corrections (claim, 2026-11-18 UTC)
+
+**Scope claimed (this session only):** `nfl-book/data/verification_2026-11-18.json` (new), `nfl-book/data/verifier_sweep_2026-11-18.json` (new), `nfl-book/data/flags.json` (append-only: corrections + new flags), `nfl-book/engine/build_site.py` (render the two new datasets on the existing repo-review and flagged pages), regenerated `nfl-book/pages/**` + `nfl-book/index.html`, and this COORDINATION.md block. No other namespace is edited.
+
+**Why this scope:** the consolidated NFL hub is `nfl-book/` (linked from the root dashboard). The brief's ~100 items are mostly already represented there (69 traced requirements, questions, suggestions, flagged). The gap this session can close honestly is verification: live re-reads of official nfl.com pages, a repo-wide verifier sweep, and correction of an existing flag that the official source refutes.
+
+**Task board (this session):**
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| T1 Live official re-reads (Week 11 schedule, Week 10 injury rows, Week 11 injury-URL state, J.J. McCarthy player page) | in progress | arena/f7037afe-own4 | nfl-book/data/verification_2026-11-18.json |
+| T2 Repo-wide verifier sweep (every NFL namespace with a verifier, run as its CI runs it) | in progress | arena/f7037afe-own4 | nfl-book/data/verifier_sweep_2026-11-18.json |
+| T3 Flags: correct FB-18 (refuted example) + add new irregularities | in progress | arena/f7037afe-own4 | nfl-book/data/flags.json |
+| T4 Render T1–T3 on repo-review + flagged pages; rebuild; verify; PR; merge; Pages check | in progress | arena/f7037afe-own4 | nfl-book/engine/build_site.py, nfl-book/pages/**, COORDINATION.md |
+
+**Overlap check:** no other claim in this board is dated after 2026-11-17 01:51Z; open PRs #150, #132, #127, #119 are stale (last update 2026-11-15 to 2026-11-17) and touch other namespaces. Claim pushed before any file in scope is changed.
+
+### 2026-11-18 — T1–T4 COMPLETE · session `arena/f7037afe-own4` · `nfl-book/`
+
+| Task | Status | Result |
+|---|---|---|
+| T1 live official re-reads | done | `nfl-book/data/verification_2026-11-18.json` — V18-01 PASS (Week 11 schedule: 13 games, 6 byes, matchups and kickoffs match the committed slate row for row) · V18-02 PASS (Lions Joseph / Mays / Reed all *Out*) · V18-03 PASS (4 sampled WAS/NYG rows) · V18-04 FLAG (347 rows internally consistent; live recount not performed) · V18-05 PENDING (Week 11 injury URL still serves Week 10) · V18-06 REFUTED (FB-18 McCarthy example) |
+| T2 repo verifier sweep | done | `nfl-book/data/verifier_sweep_2026-11-18.json` — **34 of 34 pass** when run as each namespace's CI runs them (`nfl-command` from the repo root). The sweep changed no tracked file. |
+| T3 flags | done | `nfl-book/data/flags.json` — append-only (one-line diff per existing row unchanged except `built_utc`). New: FB-19 correction of FB-18 · FB-20 Week 11 injury report pending · FB-21 Week 10 row count not live-recounted; brief's 279/254 not reproduced · FB-22 five stale open PRs · FB-23 Week 11 SNF "Mexico City" header, venue unverified · FB-24 48 definitional `class="meta"` rows carry no link (exempt in `verify.py`) |
+| T4 render + verify | done | repo-review page renders T1 + T2; flagged page renders FB-19..FB-24; executive summary has a dated update section. `engine/verify.py` PASS (978 rows; 930 sourced; the 48 unsourced are the FB-24 meta rows). CI order `ingest → originate → backtest → correlations → expand → build_site → verify` run end-to-end. |
+
+**Sources read this session (all read 2026-11-18 UTC via the fetch tool):**
+- https://www.nfl.com/schedules/2026/by-week/week-11 (chunks 0–1 of 2)
+- https://www.nfl.com/injuries/league/2026/reg10 (chunk 0 of 8)
+- https://www.nfl.com/injuries/league/2026/reg11 (chunk 0 — returned Week 10 body)
+- https://www.nfl.com/players/j-j-mccarthy/ (chunk 0 of 4; team = New York Giants; news link on the same page: the Giants "shipped a fifth-round pick to Minnesota")
+
+**Verification performed:** every value in V18-01 and V18-02/03 compared with the committed JSON/transcript; the transcript's sha256 re-checked against the capture (match); transcript field count checked (347 data rows, all 7 fields); verifier sweep executed (34 runs, exit codes recorded); `nfl-book/engine/*.py` CI sequence re-run.
+
+**Irregularities (published on the Flagged for review page, non-blocking):** FB-18 example refuted (FB-19) · Week 11 injury report not yet published (FB-20) · 279/254 vs 347 row-count conflict unresolved against the live page (FB-21) · stale open PRs #150, #132, #127, #119, #93 (FB-22) · Week 11 SNF venue unverified (FB-23) · 48 meta rows without links (FB-24).
+
+**Not done this session (honest scope limits):** the brief's ~100 items were not all newly built. Most are already represented in `nfl-book/` with their blocking gates (see Requirements page). Items that need sources this sandbox cannot reach or that do not exist yet — a scheduled Wed/Thu/Fri injury capture, the NFL Game Book, official per-club depth charts for HOU and all 32 clubs, official snap counts, a line-by-line live recount of the Week 10 report, venue transcription for every fixture from game centres — remain blocked and are unchanged. No value was inferred or filled in.
+
+**PR:** https://github.com/sassnarep3-star/Own4/pull/159 — `arena/f7037afe-own4` → `main` (opened 2026-11-18 UTC). Merge result recorded in the PR itself (`gh pr view 159`); this record is the pre-merge state.
+
 
 ## Session `arena/66ec82ab-own4` — source-authority transparency audit (claim, 2026-11-18 UTC)
 
@@ -5146,6 +5186,35 @@ This is a focused correction to source transparency; it does not upgrade any thi
 - Verification: ran the complete NFL Decision Desk CI rebuild chain (corpus, model, leaderboard, prices, correlations, availability, fixtures, governance, site) and verifier. **PASS**: 14 pages, 617/617 tbody rows with an HTTPS citation, all source classes match the URL host and visible label, 226 local refs, no broken links, no localhost, 14 unique titles, 0 float-sum risks. Root `python3 verification/verify_site.py` also **PASS** (14 pages, 346 sourced rows); `git diff --check` clean.
 - Official-source links listed on the Decision Desk sources page include NFL standings, schedule, injuries, and game centres. No external page was fetched during this narrow code audit; the source classes classify URL authority, not the correctness of the underlying source contents.
 - Irregularity retained and surfaced, not silently fixed: the 136-game results corpus and market prices still cite the third-party nflverse archive; they are explicitly not official NFL data. 268 of 272 fixture venues remain blank in the existing register, and 0/6 strategies qualify in the current backtest. The audit changes labels and checks only; it does not alter model/data values or treat source classification as independent verification.
+## Session `arena-30739647-own4` — NFL entry-point and reviewable suggestions (claim, 2026-11-18 UTC)
+
+**Branch (fixed by Arena):** `arena/30739647-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458` (`main`).
+
+**Repo survey:** the requested NFL research, requirement register, executive summary, suggestions, and Flagged for Review material already exists across `nfl-book/`, `nfl-decision-console/`, `nfl-req-review/`, `nfl-depth-sweep/`, and `nfl-decision-gaps/`. Their main verifiers pass on this checkout. I will not duplicate their datasets, change official-source claims, or edit root/generated navigation. The narrow gap is that the older `nfl/index.html` is dated 2026-11-02 and points only at the earlier research module, so it is not a current entry point to the later evidence and review pages.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| P1 | Replace stale NFL module entry with a compact portal pointing at current source-of-truth pages, clearly separating verified evidence, proposals, and blocked decisions | in progress | arena-30739647-own4 | `nfl/index.html` |
+| P2 | Publish a concise suggestions-for-review page with recommendations, alternatives, gates, and source links; do not represent a recommendation as a user decision or implementation | in progress | arena-30739647-own4 | `nfl/pages/suggestions.html` |
+| P3 | Re-check local navigation, page claims against linked repository registers, source links, and peer verifiers; record results here | in progress | arena-30739647-own4 | `COORDINATION.md` (append-only) |
+
+No task-board claim for this exact `nfl/index.html`/new suggestions page file scope was visible at claim time. Shared root navigation and all peer datasets are out of scope.
+
+### Session `arena-30739647-own4` — completion (2026-11-18 UTC)
+
+- **P1/P2 complete:** `nfl/index.html` is now a compact entry portal to the current NFL evidence/review workspaces rather than the stale 2026-11-02 module summary. Added `nfl/pages/suggestions.html` with six ordered recommendations, alternatives, decision gates, questions/information needed, and links to the owning registers. Root navigation and peer datasets were not changed. The `verification-2026-11-05` audit's generated coverage/flagged/report artifacts were mechanically regenerated as required by its CI freshness gate; its source code/tests were not changed.
+- **Evidence boundary:** this work presents no new game, market, injury, player or model measurements and makes no claim that external official pages were freshly fetched. It cites the established official NFL/NWS pages relevant to each decision and links to the repository's dated source registers. Recommendations remain proposals; no purchase, owner verdict, strategy promotion or deployment is implied.
+- **Verification:** custom link and table-source scan: both edited pages pass, all local links/anchors resolve, each data-table row carries an HTTPS link on an NFL/NWS/NCPG official domain, no localhost refs. `git diff --check` passes. Existing checks re-run successfully: `nfl-book/engine/verify.py` (30 pages, 932 rows, 0 errors); `nfl-decision-gaps/engine/verify.py` (9 pages, 496 table rows, 1,055 links, 0 flagged build errors); `nfl-req-review/engine/verify.py`; `verification/verify_site.py` (14 pages, 346 sourced rows). After the bounded audit initially caught two directory-style `../` links, they were changed to `../index.html`; then `verification-2026-11-05/build.py` + its six unittest checks passed and its generated static audit was refreshed. That audit still flags 44 inherited NFL table rows without HTTPS links; they are preserved as review findings, not falsely certified. Depth sweep and route verifiers also passed earlier in this session (G1–G8; 32-club consistency).
+- **Irregularities left open:** price data authorization/provider, actual starter/snap participation joins, Houston's image-only depth source, chart freshness/slot semantics, historical injury availability and joint-probability/settlement evidence remain blocked or flagged in their owning pages. No value was inferred to close these gaps.
+- **Coordination:** scope limited to `nfl/index.html`, `nfl/pages/suggestions.html`, and this append-only record. No overlap found at claim time. Claim commit was first pushed as `a4d1c4c` and was replayed as `9fb5dde` after main advanced; implementation and completion remain on `arena/30739647-own4`.
+
+| ID | Status |
+|---|---|
+| P1 | done |
+| P2 | done |
+| P3 | done |
+
+**Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
 
 ---
 
