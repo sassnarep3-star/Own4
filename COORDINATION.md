@@ -5265,3 +5265,58 @@ A1–A3 are complete. This was a cross-namespace reconciliation against the alre
 **Second base advance — 2026-11-18:** before merge, `origin/main` advanced again to `16d4a5c` (PR #158 NFL portal and PR #159 NFL Book refresh). Rebased onto that latest main; the only conflict was the shared append-only `COORDINATION.md`. Resolved by unioning the complete peer claims/completion records for sessions `arena/f7037afe-own4` and `arena/30739647-own4` with this session's records. No peer implementation files overlapped or were changed. Re-ran all scoped build/verifier gates and root link verification after resolving.
 
 **Third base advance / merge conflict — 2026-11-18:** after the checks on PR #161 passed, `origin/main` advanced to `947c2e6` (PR #160 publication record for the source-authority audit). The first merge attempt correctly failed because the PR base had moved. `git pull --rebase origin main` rebased this branch onto the new main and conflicted only in `COORDINATION.md`; resolved by retaining the peer's PR #160 deployment/publication record and all of this session's append-only records. No data or code from another namespace was changed. A fresh push/check run is required before merge.
+
+---
+
+## Session `arena/8440efda-own4` — claim: brief-to-artifact traceability + repo review (2026-11-18 UTC)
+
+**Session ID:** `arena/8440efda-own4` · **Branch (fixed by Arena):** `arena/8440efda-own4`, based on `eb6d8de` (= `origin/main`, PR #156). The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch will be created or pushed.
+
+**Surveyed before claiming (not assumed):**
+- `main` = `eb6d8de`; 36 `nfl-*` namespaces + root `verification/`; latest claims are PR #154–#156.
+- Verifiers run green on this tree: `nfl-readiness-register/verify.py` (226 rows / 480 links), `nfl-depth-sweep/engine/verify.py` (141 checks), `verification/verify_site.py` (346 rows sourced), `nfl-req-review/engine/verify.py`.
+- The 73-row register `nfl-readiness-register/data/requirements.json` is **stale against the repo**: rows REQ-13, 16, 17, 21, 26, 27, 30, 31, 32, 42, 52, 57, 59, 66 are marked `open`/`partial`, yet artifacts for the same items exist in `nfl-book/data/` and `nfl-markets/data/` (e.g. `matchup_matrix.json`, `removal_of_luck.json`, `two_stage_leaderboard.json`, `vig_free_decomposition.json`, `weekly_diff.json`, `drift_alarms.json`, `pit_ledger.json`, `holdout_split.json`).
+- 11 evidence/clearing references in the register point at paths that do not resolve (namespace-relative, or missing, e.g. `data/price_policy.json` for REQ-20).
+
+**Namespace claimed (exclusive):** `nfl-brief-trace/**` (new). Read-only use of every other namespace. No root nav, `verification/**`, `index.html`, `verified/**`, or peer `data/**` edits — root nav is an integration item for the final integration session (logged request below).
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| T1 | Enumerate the current brief into `nfl-brief-trace/data/brief_items.json` (verbatim item text, one row each) | claimed | arena/8440efda-own4 | `nfl-brief-trace/data/brief_items.json` |
+| T2 | Map each item to the artifact(s) that implement it; engine checks every path exists and is non-empty; status = artifact-present / schema-only / missing / gap — no status is typed by hand | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/trace.py`, `data/trace.json` |
+| T3 | Spot-check official source URLs used by the register (fetch timestamp recorded) | claimed | arena/8440efda-own4 | `nfl-brief-trace/data/official_checks.json` |
+| T4 | Static pages: landing (counts, decision-ready list), full item table, gaps, irregularities / Flagged for Review; every row source-linked or blank+flagged | claimed | arena/8440efda-own4 | `nfl-brief-trace/index.html`, `nfl-brief-trace/pages/*.html`, `nfl-brief-trace/engine/build.py` |
+| T5 | Verifier (row-source, local links, no localhost, deterministic) | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/verify.py` |
+| T6 | Executive summary + suggestions for the owner to choose from (not implemented) | claimed | arena/8440efda-own4 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `nfl-brief-trace/README.md` |
+| T7 | Completion record + root-nav request logged here | claimed | arena/8440efda-own4 | `COORDINATION.md` (append-only) |
+
+### Completion record — `arena/8440efda-own4` (2026-11-18 UTC)
+
+| ID | Result | Evidence |
+|---|---|---|
+| T1 | done — 80 brief lines enumerated, verbatim headline text, mapped to repo artifacts | `nfl-brief-trace/engine/items.py` |
+| T2 | done — statuses computed from files: 75 artifact-present, 1 third-party-only, 3 gap, 1 process, 0 broken | `nfl-brief-trace/engine/trace.py` → `data/trace.json` |
+| T3 | done — 6 official URLs fetched; 5 usable; `operations.nfl.com/the-rules` returned an empty body and is marked NOT usable | `nfl-brief-trace/data/official_checks.json` |
+| T4 | done — landing, all 80 lines, gaps, Flagged for Review (F01–F15), sources; every row has an official link or BLANK + UNVERIFIED flag | `nfl-brief-trace/index.html`, `pages/*.html` |
+| T5 | done — verifier PASS (80 rows; no non-official host; no empty-body URL relied on; all local links resolve; no localhost; two builds byte-identical) | `nfl-brief-trace/engine/verify.py` |
+| T6 | done — executive summary, README, suggestions S1–S7 (not implemented), owner decisions 1–5 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `README.md` |
+| T7 | this record | — |
+
+**Scope disclosure.** This session traced and checked the brief. It did not build the features. Most of the 80 lines are still unbuilt, thin, or unverified, and the trace says so per row. No model, strategy, price, depth or injury capture was created or changed.
+
+**Irregularities found (all non-blocking, on the Flagged page):**
+- The readiness register (`nfl-readiness-register/data/requirements.json`) is stale: 50 of 80 lines have artifacts while the register says open or partial.
+- 8 register references do not resolve to the stated path, including `data/price_policy.json` (REQ-20).
+- The register cites `operations.nfl.com/the-rules` (REQ-57, REQ-66); the fetch returned an empty body, so those citations are unverified.
+- `nfl-markets/data/correlations.json` publishes a third-party correlation group beside the official group; the brief asks for officially sourced numbers only.
+- Week 10 counts disagree: brief states 279 rows live vs 254 published; the register holds 28 tables / 347 rows. Not reconciled this session.
+- The root `README.md` describes the NBA project; NFL material is spread over many `nfl-*` namespaces.
+- `nfl-markets/data/raw/games.csv` has roof/surface/wind columns from a third-party archive only. No official roof register or NWS overlay exists.
+
+**Verified against official source this session (fetched 2026-11-18):** nfl.com/injuries (Lions Joseph, Mays, Reed = Out), nfl.com/schedules (Nov 19 Colts at Texans), nfl.com reserve-list Nov 2026, the Game Books support article, and the nfl.com Drew Lock announcement.
+
+**Root navigation request (not edited here, per the rules above).** The final integration session that owns root navigation (`arena/9208e00a-own4`, I-01) is asked to add one nav entry linking `nfl-brief-trace/index.html` labelled "NFL brief trace — 80-line status". Until then the namespace is reachable at its own URL and from this record.
+
+**Branch.** All work is on `arena/8440efda-own4`. No other branch was created. Pull request and merge status are recorded in the next entry, after the PR is opened.
+
+**Board incident (2026-11-18, `arena/8440efda-own4`) — logged, resolved before any PR.** A rebase onto `main` at `89d0d3b` (PR #157) and a remote-branch merge briefly produced a commit (`c377c3a`) that contained unresolved conflict markers in this file, and it was pushed. The next commit `e02eebb` rebuilt this file from `origin/main` plus this session's claim and completion records (each once). No other session's text was dropped: main's `arena/66ec82ab-own4` section is retained. The bad commit remains in history; the tree at the branch tip contains no markers.
