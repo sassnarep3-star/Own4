@@ -5219,3 +5219,24 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 **Publication record:** PR [#157](https://github.com/sassnarep3-star/Own4/pull/157) merged successfully to `main` at `2026-11-18T03:14:15Z` (squash commit [`89d0d3b`](https://github.com/sassnarep3-star/Own4/commit/89d0d3bbd4a16aa871061e1420dc10836ba44076)). Required checks passed, including `nfl-decision-desk verify`; GitHub Pages deployment run [44228979824](https://github.com/sassnarep3-star/Own4/actions/runs/44228979824) completed successfully. Published landing page: https://sassnarep3-star.github.io/Own4/nfl-decision-desk/ .
 
 **Coordination-file conflict resolution (2026-11-18 UTC):** after PRs #158 and #159 updated this append-only board, the documentation-only PR #160 conflicted at end-of-file. Rebased the fixed session branch onto current `main` and resolved by preserving the complete peer session block and appending only this publication record. No peer changes were discarded; the source-authority implementation remains in merged PR #157.
+
+---
+
+---
+
+
+---
+
+## Session `arena-4f506399-own4` — refresh stale depth-readiness claims (claim, 2026-11-18 UTC)
+
+**Branch (fixed by Arena):** `arena/4f506399-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458`.
+**Board review:** existing `nfl-origin-board/` is complete and linked from the root; no active claim on its files is listed after the prior completion. The merged `nfl-depth-sweep/` now contains a 32-club official club-page sweep that post-dates the Origin Board's Nov 16 requirement register. This follow-up reconciles only the stale depth-related readiness rows and publishes the exact remaining caveats. No other namespace or root navigation is in scope.
+
+| ID | Task | Status | Files |
+|---|---|---|---|
+| A1 | Reconcile R-06/R-43/R-45/R-51/R-52/R-75 and G-DEPTH against the committed 32-club sweep; do not overstate depth as verified starter order | claimed | `nfl-origin-board/data/requirements.json` |
+| A2 | Add a dated, sourced review flag explaining the old 0/32 claim vs newer 32/32 route coverage, with HOU image-only and page freshness/self-label caveats | claimed | `nfl-origin-board/data/flags.json`, `data/sources.json` |
+| A3 | Rebuild Origin Board pages and run its verifier plus relevant peer verifiers; confirm links and deterministic output | claimed | `nfl-origin-board/pages/**`, `nfl-origin-board/build.py` (only if needed) |
+| A4 | Record official-source basis, verification, irregularities and PR/Pages outcome | claimed | `COORDINATION.md` (append-only) |
+
+**Evidence boundary:** this is a repository evidence reconciliation, not a new live NFL read. Official source URLs are those recorded with the Nov 17 sweep: `https://www.nfl.com/teams/`, `https://www.nfl.com/depth-charts/`, and the club depth-chart URLs linked from the league teams page. HOU's image is not transcribed by eye; undated charts remain undated; no snap counts, actual starters, or replacement playing time are inferred. The two existing namespaces remain distinct; this task updates only the Origin Board's stale claim and flags the limitation.
