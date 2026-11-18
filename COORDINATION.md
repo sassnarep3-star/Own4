@@ -5444,7 +5444,7 @@ Scope status: the brief's **80 lines are traced, not built.** 75 have a repo art
 | NFL-P1 | Read COORDINATION, inspect the current `/nfl/` entrypoint and check active-scope collisions | done | `arena/4db26a53-own4` | `COORDINATION.md` |
 | NFL-P2 | Preserve the merged NFL portal and add a route to the newer stored Live Board without duplicating data | done | `arena/4db26a53-own4` | `nfl/index.html` |
 | NFL-P3 | Re-verify the combined portal, source links, table rows and internal destinations after the concurrent merge | done | `arena/4db26a53-own4` | `nfl/index.html` |
-| NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | pending | `arena/4db26a53-own4` | `COORDINATION.md` |
+| NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | in progress | `arena/4db26a53-own4` | `COORDINATION.md` |
 
 **Collision check:** no current open PR lists an `nfl/` file; historical `nfl/**` entries in this board are completed. No source-of-truth data, root index, generator, or shared navigation is in this task's scope.
 
@@ -5468,7 +5468,7 @@ During the required rebase, main advanced to `16d4a5c` (PRs #159 and #158). PR #
 
 ### Rebase union note — `arena/4db26a53-own4` (2026-11-18 UTC)
 
-This second conflict hunk contained the complete main-side depth-readiness and brief-trace session records plus this session's claim. Kept the full peer records and the full claim; no source, finding, or task line was dropped. The subsequent rebase commits will make the portal change additive to the already-merged NFL Decision Hub.
+This second conflict hunk contained the complete main-side depth-readiness and brief-trace session records plus this session's claim. Kept the full peer records and the full claim; no source, finding, or task line was dropped. The rebase then completed successfully: the portal retained the already-merged NFL Decision Hub and this branch's only page changes are the two additive Live Board links.
 
 
 ### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC, after PR #166)
