@@ -5444,7 +5444,7 @@ Scope status: the brief's **80 lines are traced, not built.** 75 have a repo art
 | NFL-P1 | Read COORDINATION, inspect the current `/nfl/` entrypoint and check active-scope collisions | done | `arena/4db26a53-own4` | `COORDINATION.md` |
 | NFL-P2 | Preserve the merged NFL portal and add a route to the newer stored Live Board without duplicating data | done | `arena/4db26a53-own4` | `nfl/index.html` |
 | NFL-P3 | Re-verify the combined portal, source links, table rows and internal destinations after the concurrent merge | done | `arena/4db26a53-own4` | `nfl/index.html` |
-| NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | in progress | `arena/4db26a53-own4` | `COORDINATION.md` |
+| NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | done | `arena/4db26a53-own4` | `COORDINATION.md` |
 
 **Collision check:** no current open PR lists an `nfl/` file; historical `nfl/**` entries in this board are completed. No source-of-truth data, root index, generator, or shared navigation is in this task's scope.
 
@@ -5458,7 +5458,7 @@ The required `git pull --rebase origin main` advanced to `89d0d3b` (PR #157) and
 - **P3 complete:** a standard-library audit of `nfl/index.html` and `nfl/pages/suggestions.html` checked 91 hrefs: 68 internal targets/fragments resolve, 23 external links use HTTPS, and all 10 body data rows across their tables carry an NFL-domain citation. Both pages have no localhost/127.0.0.1 references. The Live Board snapshot label is checked against its destination page; the source register is linked for the recorded official-source URLs and read dates.
 - **Source boundary:** the two additions point to existing repository pages. No external NFL page was fetched in this session, so the date shown by Live Board is not represented as a read performed today. Existing peer source claims and the peer verifier's findings remain the responsibility of their owning registers.
 - **Non-blocking follow-up:** root `index.html` remains the shared generated dashboard and still labels `nfl/index.html` as “NFL research (specification)”. That shared navigation was deliberately not edited under this scope; update its label only in a later integration change. Existing unrelated open PRs and their namespaces were not touched.
-- **P4:** in progress — PR #169 is open; local verification and all reported CI checks pass. Merge and Pages deployment confirmation remain.
+- **P4 complete:** PR #169 merged as `0f0f2bf`; all four PR checks passed, and the GitHub Pages deployment for that commit completed successfully.
 
 ### Entry-point scope collision — `arena/4db26a53-own4` and `arena-30739647-own4` (2026-11-18 UTC)
 
@@ -5491,7 +5491,13 @@ Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordinatio
 - **Local verification after rebasing onto `561dfeb`:** `nfl-book/engine/verify.py`, `nfl-req-review/engine/verify_r2.py`, `nfl-depth-sweep/engine/verify.py`, `nfl-depth-sweep/engine/verify_routes.py`, `nfl-live-board/verify.py`, `nfl-consolidated/engine/verify.py`, `nfl-decision-console/engine/verify_site.py`, `nfl-origin-board/verify.py`, `verification/verify_site.py`, `scripts/check_site.py`, and `scripts/verify_data.py` all completed successfully. Round-1 `nfl-req-review/engine/verify.py` is intentionally superseded and exits with a notice; the round-2 verifier is the applicable gate.
 - **Portal audit:** 91 hrefs; 68 internal targets/fragments resolve and 23 external links are HTTPS; all 10 body data rows have NFL-domain citations; the two Live Board routes and `2026-11-17` stored-snapshot label match; no localhost references. `git diff --check` and the conflict-marker scan passed.
 - **Remaining unrelated data warning:** `scripts/verify_data.py` flags the existing, unresolved DAL (0.33) and ATL (0.19) PTS/game differences. This link-only PR changes neither value.
-- **PR checks:** a successful check set was observed on the implementation head; checks are being re-evaluated for this appended verification record. Merge and Pages confirmation are pending and will be logged after completion.
+- **PR checks:** all four checks reported for head `14295d828c15bd153bd1cc6a61adf5442e55f122` passed: Audit (`44230737564`), Validate (`44230737526`), depth-sweep routes (`44230737538`), and NFL command (`44230737570`). PR mergeability was CLEAN before merge.
 - No official NFL page was fetched in this task. `2026-11-17` remains the date of the stored snapshot, not a fresh read.
+
+### PR #169 merge and Pages confirmation (2026-11-18 UTC)
+
+- **Merge:** PR [#169](https://github.com/sassnarep3-star/Own4/pull/169) merged with `--merge` at `2026-11-18T03:29:42Z`; merge commit [`0f0f2bf408655c47a6e4934b6c37f7165c25dedb`](https://github.com/sassnarep3-star/Own4/commit/0f0f2bf408655c47a6e4934b6c37f7165c25dedb). It contains only the two portal links and this coordination record relative to its base.
+- **Pages deployment:** workflow run [44230808510](https://github.com/sassnarep3-star/Own4/actions/runs/44230808510) completed successfully. GitHub Pages API reports build commit `0f0f2bf408655c47a6e4934b6c37f7165c25dedb`, status `built` (updated `2026-11-18T03:30:25Z`). Published site: https://sassnarep3-star.github.io/Own4/ . Confirmation is from the GitHub Actions and Pages build APIs; no public-site HTML fetch or fresh NFL-source read was made.
+- **NFL-P4:** done. The portal change is additive; the peer suggestions page and shared root dashboard were not edited.
 
 
