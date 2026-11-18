@@ -158,8 +158,8 @@ def flags():
       "therefore cannot be officially verified; they must stay labelled as unofficial.",
       REPO_BLOB + "nfl-book/data/sources.json", "repo"),
      ("F11", "Root README describes the NBA project",
-      "The repository root README opens as the NBA line-origination project. The NFL work sits in 36 nfl-* namespaces "
-      ". A reader of the root may not find the NFL material.",
+      "The repository root README opens as the NBA line-origination project. The NFL work is spread over many nfl-* namespaces, "
+      "so a reader of the root may not find the NFL material.",
       REPO_BLOB + "README.md", "repo"),
      ("F12", "Duplicated pages across namespaces",
       f"The NFL work repeats the same page types in many folders: {len(ns_exec)} EXECUTIVE_SUMMARY.md files, "
