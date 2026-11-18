@@ -1,0 +1,20 @@
+{
+  "dataset": "official_checks",
+  "title": "Spot-check of official NFL URLs used by this workspace",
+  "checked_on": "2026-11-18",
+  "method": "fetch_page tool, chunk 0 of each URL, read by the session agent. Only the observed text quoted below is relied on. A URL that returns an empty body is recorded as NOT usable as evidence.",
+  "rows": [
+    {"key": "INJ", "url": "https://www.nfl.com/injuries/", "fetch_status": "success", "usable": true,
+     "observed": "Page titled 'Official Latest NFL Injury Report for Players - Week 10 of the 2026 Season'. Lions rows show Kerby Joseph (S, Knee, Did Not Participate, Game Status Out), Cade Mays (C, Ankle, Out) and D.J. Reed (CB, Hip, Out). Page has 8 chunks; this check read chunk 0 only."},
+    {"key": "SCHED", "url": "https://www.nfl.com/schedules/", "fetch_status": "success", "usable": true,
+     "observed": "2026 schedule, 'By Week' and 'Team Schedule' tabs. Lists Thursday Night Football Colts at Texans, Nov 19, 8:15 PM, PRIME, with game link nfl.com/games/colts-at-texans-2026-reg-11. Sunday Nov 22 games listed at 1:00 PM. Read chunk 0 only."},
+    {"key": "RES", "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11", "fetch_status": "success", "usable": true,
+     "observed": "'2026 NFL reserve-list by month', November 2026 table with From/To/Date/Name/Position/Transaction. First rows dated 11/17 and 11/16 and 11/14 are 'Reserve/Injured' (e.g. Peter Skoronski and Tommy Townsend, TEN, 11/14). Read chunk 0 only."},
+    {"key": "GB", "url": "https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books", "fetch_status": "success", "usable": true,
+     "observed": "'Game Books – NFL' support article: fans can view PDFs of National Football League Game Summaries ('Game Books') in the NFL.com Game Centers, via Scores or the Game button, and a 'Download Game Book PDF' link sits at the bottom of the recap. The article does not itself contain game data."},
+    {"key": "DREW", "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders", "fetch_status": "success", "usable": true,
+     "observed": "NFL.com news item: Drew Lock 'has no injury designation and will start Sunday' for Seattle at Las Vegas (Week 10), per coach Mike Macdonald on Friday. Lock was limited in practice with elbow and oblique injuries. Dated item (Week 10 practice week)."},
+    {"key": "RULES", "url": "https://operations.nfl.com/the-rules/", "fetch_status": "success-empty-body", "usable": false,
+     "observed": "Fetch returned only the page title and 'Skip to main content'. No rule text was retrieved, so this URL is not used as verification evidence. The nfl-readiness-register cites it on 2 rows (REQ-57 and REQ-66); those rows need a re-check."}
+  ]
+}

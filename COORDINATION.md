@@ -5168,3 +5168,32 @@ This is a focused correction to source transparency; it does not upgrade any thi
 | T5 | Verifier (row-source, local links, no localhost, deterministic) | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/verify.py` |
 | T6 | Executive summary + suggestions for the owner to choose from (not implemented) | claimed | arena/8440efda-own4 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `nfl-brief-trace/README.md` |
 | T7 | Completion record + root-nav request logged here | claimed | arena/8440efda-own4 | `COORDINATION.md` (append-only) |
+
+### Completion record — `arena/8440efda-own4` (2026-11-18 UTC)
+
+| ID | Result | Evidence |
+|---|---|---|
+| T1 | done — 80 brief lines enumerated, verbatim headline text, mapped to repo artifacts | `nfl-brief-trace/engine/items.py` |
+| T2 | done — statuses computed from files: 75 artifact-present, 1 third-party-only, 3 gap, 1 process, 0 broken | `nfl-brief-trace/engine/trace.py` → `data/trace.json` |
+| T3 | done — 6 official URLs fetched; 5 usable; `operations.nfl.com/the-rules` returned an empty body and is marked NOT usable | `nfl-brief-trace/data/official_checks.json` |
+| T4 | done — landing, all 80 lines, gaps, Flagged for Review (F01–F15), sources; every row has an official link or BLANK + UNVERIFIED flag | `nfl-brief-trace/index.html`, `pages/*.html` |
+| T5 | done — verifier PASS (80 rows; no non-official host; no empty-body URL relied on; all local links resolve; no localhost; two builds byte-identical) | `nfl-brief-trace/engine/verify.py` |
+| T6 | done — executive summary, README, suggestions S1–S7 (not implemented), owner decisions 1–5 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `README.md` |
+| T7 | this record | — |
+
+**Scope disclosure.** This session traced and checked the brief. It did not build the features. Most of the 80 lines are still unbuilt, thin, or unverified, and the trace says so per row. No model, strategy, price, depth or injury capture was created or changed.
+
+**Irregularities found (all non-blocking, on the Flagged page):**
+- The readiness register (`nfl-readiness-register/data/requirements.json`) is stale: 50 of 80 lines have artifacts while the register says open or partial.
+- 8 register references do not resolve to the stated path, including `data/price_policy.json` (REQ-20).
+- The register cites `operations.nfl.com/the-rules` (REQ-57, REQ-66); the fetch returned an empty body, so those citations are unverified.
+- `nfl-markets/data/correlations.json` publishes a third-party correlation group beside the official group; the brief asks for officially sourced numbers only.
+- Week 10 counts disagree: brief states 279 rows live vs 254 published; the register holds 28 tables / 347 rows. Not reconciled this session.
+- The root `README.md` describes the NBA project; NFL material is spread over many `nfl-*` namespaces.
+- `nfl-markets/data/raw/games.csv` has roof/surface/wind columns from a third-party archive only. No official roof register or NWS overlay exists.
+
+**Verified against official source this session (fetched 2026-11-18):** nfl.com/injuries (Lions Joseph, Mays, Reed = Out), nfl.com/schedules (Nov 19 Colts at Texans), nfl.com reserve-list Nov 2026, the Game Books support article, and the nfl.com Drew Lock announcement.
+
+**Root navigation request (not edited here, per the rules above).** The final integration session that owns root navigation (`arena/9208e00a-own4`, I-01) is asked to add one nav entry linking `nfl-brief-trace/index.html` labelled "NFL brief trace — 80-line status". Until then the namespace is reachable at its own URL and from this record.
+
+**Branch.** All work is on `arena/8440efda-own4`. No other branch was created. Pull request and merge status are recorded in the next entry, after the PR is opened.

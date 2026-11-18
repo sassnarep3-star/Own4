@@ -1,0 +1,2818 @@
+{
+ "dataset": "brief_trace",
+ "title": "2026-11-18 brief: item-by-item trace to repository artifacts",
+ "checked_on": "2026-11-18",
+ "method": "engine/trace.py; items.py mapping; status derived from files; official links only where fetched or register-cited; see flags.",
+ "n_items": 80,
+ "status_counts": {
+  "artifact-present": 75,
+  "gap": 3,
+  "process": 1,
+  "third-party-only": 1
+ },
+ "register_rows": 73,
+ "register_status_counts": {
+  "implemented": 14,
+  "open": 21,
+  "partial": 30,
+  "process": 5,
+  "rejected": 2,
+  "resolved-at-source": 1
+ },
+ "register_stale_candidates": 50,
+ "register_unresolved_refs": [
+  {
+   "req": "REQ-08",
+   "field": "evidence",
+   "ref": "gates.json"
+  },
+  {
+   "req": "REQ-15",
+   "field": "evidence",
+   "ref": "model_card.json"
+  },
+  {
+   "req": "REQ-19",
+   "field": "evidence",
+   "ref": "own_lines_open.json"
+  },
+  {
+   "req": "REQ-20",
+   "field": "clearing_number",
+   "ref": "data/price_policy.json"
+  },
+  {
+   "req": "REQ-39",
+   "field": "clearing_number",
+   "ref": "data/decisions.json"
+  },
+  {
+   "req": "REQ-51",
+   "field": "clearing_number",
+   "ref": "data/decisions.json"
+  },
+  {
+   "req": "REQ-65",
+   "field": "evidence",
+   "ref": "gates.json"
+  },
+  {
+   "req": "PROC-01",
+   "field": "evidence",
+   "ref": "pages/repo-review.html"
+  }
+ ],
+ "register_rows_citing_operations_the_rules": [
+  "REQ-57",
+  "REQ-66"
+ ],
+ "items": [
+  {
+   "id": "B01",
+   "theme": "Market data",
+   "brief": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/price_snapshots.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 39,
+     "bytes": 19093,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/price_snapshots.json"
+    },
+    {
+     "path": "nfl-markets/data/price_snapshots.csv",
+     "exists": true,
+     "kind": "csv",
+     "n_rows": 12573,
+     "bytes": 4657518,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/price_snapshots.csv"
+    }
+   ],
+   "reqs": [
+    "REQ-01"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Store exists; open/close coverage is 39 snapshots (nfl-book) and 12,573 rows (nfl-markets). No official odds source (FB-01)."
+  },
+  {
+   "id": "B02",
+   "theme": "Results & backtesting",
+   "brief": "Add a verified results feed so backtests and ROI can be computed at all",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/results_feed.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 137,
+     "bytes": 52160,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/results_feed.json"
+    },
+    {
+     "path": "nfl-markets/data/results_feed.csv",
+     "exists": true,
+     "kind": "csv",
+     "n_rows": 4056,
+     "bytes": 849839,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/results_feed.csv"
+    }
+   ],
+   "reqs": [
+    "REQ-02"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/scores/2026/week-10",
+    "fetched_this_session": false
+   },
+   "official_flag": null,
+   "note": "Feed exists; nfl-book marks 32 of 137 games line-by-line, 105 aggregate-only."
+  },
+  {
+   "id": "B03",
+   "theme": "Origination",
+   "brief": "Originate the side first, then the total, then the moneyline",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/engine/originate.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 8025,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/engine/originate.py"
+    },
+    {
+     "path": "nfl-book/data/own_lines_open.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 18204,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/own_lines_open.json"
+    }
+   ],
+   "reqs": [
+    "REQ-03"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Order encoded in originate.py; checked by order_audit in own_lines_open.json."
+  },
+  {
+   "id": "B04",
+   "theme": "Origination",
+   "brief": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/pages/own-lines.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 13418,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/own-lines.html"
+    },
+    {
+     "path": "nfl-markets/data/price_snapshots.csv",
+     "exists": true,
+     "kind": "csv",
+     "n_rows": 12573,
+     "bytes": 4657518,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/price_snapshots.csv"
+    }
+   ],
+   "reqs": [
+    "REQ-04"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Columns exist; market line is third-party/unofficial, so the market column cannot be officially verified."
+  },
+  {
+   "id": "B05",
+   "theme": "Strategy & leaderboard",
+   "brief": "Separate 'signal' from 'staking' in the leaderboard so a lucky staking run cannot mask a bad signal",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 3494,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json"
+    },
+    {
+     "path": "nfl-markets/data/leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 8262,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/leaderboard.json"
+    }
+   ],
+   "reqs": [
+    "REQ-05"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Two separate ranks in both namespaces."
+  },
+  {
+   "id": "B06",
+   "theme": "Availability & injury data",
+   "brief": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/depth_replacements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 3160,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_replacements.json"
+    },
+    {
+     "path": "nfl-markets/data/replacement_depth.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 236,
+     "bytes": 171139,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/replacement_depth.json"
+    }
+   ],
+   "reqs": [
+    "REQ-06"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "nfl-book has 3 rows; most club depth cells are blank by policy (no verified order for all 32 clubs)."
+  },
+  {
+   "id": "B07",
+   "theme": "Strategy & leaderboard",
+   "brief": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/correlations.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 3297,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/correlations.json"
+    },
+    {
+     "path": "nfl-markets/data/correlations.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 7167,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/correlations.json"
+    }
+   ],
+   "reqs": [
+    "REQ-07"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "nfl-markets publishes a THIRD-PARTY correlation group (covers/leg dependence) beside the official group: irregular against the brief."
+  },
+  {
+   "id": "B08",
+   "theme": "Strategy & leaderboard",
+   "brief": "Define a demotion gate that sends a live strategy back to paper",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/gates.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 3588,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/gates.json"
+    },
+    {
+     "path": "nfl-book/data/demotion_eval.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 0,
+     "bytes": 1181,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/demotion_eval.json"
+    },
+    {
+     "path": "nfl-markets/data/gates_evaluation.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 5282,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/gates_evaluation.json"
+    }
+   ],
+   "reqs": [
+    "REQ-08"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Gate defined; 0 live strategies, so it has never fired on a live strategy."
+  },
+  {
+   "id": "B09",
+   "theme": "Strategy & leaderboard",
+   "brief": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/strategies.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 7867,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    },
+    {
+     "path": "nfl-book/data/gates.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 3588,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/gates.json"
+    }
+   ],
+   "reqs": [
+    "REQ-09",
+    "REQ-67"
+   ],
+   "register_status": [
+    "implemented",
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Registered_utc present. The 'no backtest numbers on leaderboard' rule is text-only; enforcement is missing (register REQ-09)."
+  },
+  {
+   "id": "B10",
+   "theme": "Availability & injury data",
+   "brief": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/availability_graph.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 1988,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/availability_graph.json"
+    }
+   ],
+   "reqs": [
+    "REQ-10"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Dataset exists with 3 rows; expected-starter join not populated."
+  },
+  {
+   "id": "B11",
+   "theme": "Availability & injury data",
+   "brief": "Do not model depth from jersey order; model it from playing time",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-11",
+    "REQ-49"
+   ],
+   "register_status": [
+    "open",
+    "rejected"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Rule recorded (REQ-49 rejected for jersey order). No playing-time depth model exists; snap source not captured."
+  },
+  {
+   "id": "B12",
+   "theme": "Availability & injury data",
+   "brief": "Make the injury signal a surprise, never a level",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/injury_surprise.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 171,
+     "bytes": 66570,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/injury_surprise.json"
+    },
+    {
+     "path": "nfl-availability-desk/data/derived/designation_delta.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 11,
+     "bytes": 4682,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/derived/designation_delta.json"
+    }
+   ],
+   "reqs": [
+    "REQ-12"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "injury_surprise.json has 171 rows; surprise definition must be checked by the owner."
+  },
+  {
+   "id": "B13",
+   "theme": "Availability & injury data",
+   "brief": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/data/roster_ir_sweep.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 19596,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/roster_ir_sweep.json"
+    },
+    {
+     "path": "nfl-book/data/roster_sweep.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 10420,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/roster_sweep.json"
+    }
+   ],
+   "reqs": [
+    "REQ-13"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Both sweeps have 32 rows; the depth-sweep verifier passes."
+  },
+  {
+   "id": "B14",
+   "theme": "Results & backtesting",
+   "brief": "Add a fixture-context feature set built only from published schedule facts",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/fixture_context.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 6188,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/fixture_context.json"
+    }
+   ],
+   "reqs": [
+    "REQ-14",
+    "REQ-57"
+   ],
+   "register_status": [
+    "open",
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/schedules/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "13 rows; schedule facts only where the official schedule supports them."
+  },
+  {
+   "id": "B15",
+   "theme": "Origination",
+   "brief": "Store every model output as a probability plus its inputs, not just a pick",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/model_outputs.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 7629,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/model_outputs.json"
+    },
+    {
+     "path": "nfl-book/data/model_card.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 2286,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/model_card.json"
+    }
+   ],
+   "reqs": [
+    "REQ-15"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "13 output rows; input-hash column still missing (register gate)."
+  },
+  {
+   "id": "B16",
+   "theme": "Strategy & leaderboard",
+   "brief": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/removal_of_luck.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 4071,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/removal_of_luck.json"
+    },
+    {
+     "path": "nfl-book/pages/removal-of-luck.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5561,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/removal-of-luck.html"
+    }
+   ],
+   "reqs": [
+    "REQ-16"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Panel has 5 rows; placement on the root dashboard was not checked this session."
+  },
+  {
+   "id": "B17",
+   "theme": "Strategy & leaderboard",
+   "brief": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/strategies.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 7867,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    }
+   ],
+   "reqs": [
+    "REQ-17"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Field name found in strategies.json; two-sided completeness per strategy not checked."
+  },
+  {
+   "id": "B18",
+   "theme": "Market data",
+   "brief": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/own_lines_open.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 18204,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/own_lines_open.json"
+    },
+    {
+     "path": "nfl-book/data/own_lines_close.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 18228,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/own_lines_close.json"
+    },
+    {
+     "path": "nfl-markets/data/price_snapshots.csv",
+     "exists": true,
+     "kind": "csv",
+     "n_rows": 12573,
+     "bytes": 4657518,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/price_snapshots.csv"
+    }
+   ],
+   "reqs": [
+    "REQ-18"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Residuals exist; no official market source, and no scheduled cadence confirmed in workflows."
+  },
+  {
+   "id": "B19",
+   "theme": "Results & backtesting",
+   "brief": "Turn the 136-game log into the pre-registered backtest corpus",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/backtest.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 105,
+     "bytes": 81929,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/backtest.json"
+    },
+    {
+     "path": "nfl-book/data/own_lines_open.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 18204,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/own_lines_open.json"
+    },
+    {
+     "path": "nfl-decision-console/data/derived/corpus.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 4,
+     "bytes": 3130,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/derived/corpus.json"
+    }
+   ],
+   "reqs": [
+    "REQ-19"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Training window is 136 games; the corpus freeze (row list + split + price policy) has not been committed."
+  },
+  {
+   "id": "B20",
+   "theme": "Market data",
+   "brief": "Decide the price-data policy before any backtest is published",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/sources.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 15,
+     "bytes": 3663,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/sources.json"
+    },
+    {
+     "path": "nfl-book/data/flags.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 18,
+     "bytes": 6366,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/flags.json"
+    }
+   ],
+   "reqs": [
+    "REQ-20"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Policy fragments only (FB-01). The register cites data/price_policy.json, which does not exist."
+  },
+  {
+   "id": "B21",
+   "theme": "Availability & injury data",
+   "brief": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/injuries_week10_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 347,
+     "bytes": 67936,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/injuries_week10_capture.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/injury_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 18,
+     "bytes": 9601,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/injury_capture.json"
+    }
+   ],
+   "reqs": [
+    "REQ-21",
+    "REQ-46"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Capture exists with fetch time and hash. Deltas exist only between pairs of captures."
+  },
+  {
+   "id": "B22",
+   "theme": "Governance & site",
+   "brief": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/index.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 46663,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/index.html"
+    },
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-22"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Landing table exists in the readiness workspace."
+  },
+  {
+   "id": "B23",
+   "theme": "Results & backtesting",
+   "brief": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/venues.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 3948,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/venues.json"
+    }
+   ],
+   "reqs": [
+    "REQ-23"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/schedules/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Venues present for 13 fixtures in nfl-book; not every fixture. The nfl-markets venues file cited earlier does not exist and was removed from this mapping."
+  },
+  {
+   "id": "B24",
+   "theme": "Results & backtesting",
+   "brief": "Publish the league's dated schedule announcement beside the live schedule page",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/sources.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 10,
+     "bytes": 2310,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/sources.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-24"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/schedules/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Recorded as implemented; the announcement artifact itself is not separately listed."
+  },
+  {
+   "id": "B25",
+   "theme": "Availability & injury data",
+   "brief": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-collector/engine/gamebook.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 7751,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/engine/gamebook.py"
+    },
+    {
+     "path": "nfl-collector/data/captures/2026-11-16/transcript_gamebook_WAS_NYG_reg10.md",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 6905,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/2026-11-16/transcript_gamebook_WAS_NYG_reg10.md"
+    }
+   ],
+   "reqs": [
+    "REQ-25"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "One game book captured (WAS-NYG Week 10). Starters from game books not yet joined to the register."
+  },
+  {
+   "id": "B26",
+   "theme": "Results & backtesting",
+   "brief": "Ingest game-level results to make the ratings opponent-aware",
+   "status": "gap",
+   "n_artifacts_present": 0,
+   "artifacts": [],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "GAP: no opponent-adjusted rating artifact found in nfl-book or nfl-markets data files."
+  },
+  {
+   "id": "B27",
+   "theme": "Origination & model",
+   "brief": "Add injury and personnel ablations instead of fixed penalties",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/ablations.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 1616,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/ablations.json"
+    },
+    {
+     "path": "nfl-decision-desk/data/model/ablation.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 1427,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-desk/data/model/ablation.json"
+    }
+   ],
+   "reqs": [
+    "REQ-26",
+    "REQ-27"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "ablations.json has 3 rows; ablation with/without personnel features is not run at scale."
+  },
+  {
+   "id": "B28",
+   "theme": "Origination & model",
+   "brief": "Add injury/depth ablations, not fixed penalties (duplicate of B27 in the brief)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/ablations.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 1616,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/ablations.json"
+    }
+   ],
+   "reqs": [
+    "REQ-26",
+    "REQ-27"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Duplicate line of the brief; mapped to the same artifact."
+  },
+  {
+   "id": "B29",
+   "theme": "Availability & injury data",
+   "brief": "Automate immutable multi-day availability snapshots",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/snapshots/manifest.jsonl",
+     "exists": true,
+     "kind": "jsonl",
+     "n_rows": 3,
+     "bytes": 1565,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl"
+    },
+    {
+     "path": "nfl-readiness-register/capture/snapshot_official_pages.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5072,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/capture/snapshot_official_pages.py"
+    },
+    {
+     "path": ".github/workflows/nfl-readiness-register.yml",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 1707,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-readiness-register.yml"
+    }
+   ],
+   "reqs": [
+    "REQ-28",
+    "REQ-53"
+   ],
+   "register_status": [
+    "implemented",
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Workflow + manifest exist. Manifest holds one dated capture (2026-11-15) so far."
+  },
+  {
+   "id": "B30",
+   "theme": "Availability & injury data",
+   "brief": "Build immutable official availability snapshots (injury reports, club depth pages, inactive evidence; raw hashes, timestamps, conflict flags)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/snapshots/manifest.jsonl",
+     "exists": true,
+     "kind": "jsonl",
+     "n_rows": 3,
+     "bytes": 1565,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl"
+    },
+    {
+     "path": "nfl-collector/data/captures/ledger.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 3293,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/ledger.json"
+    }
+   ],
+   "reqs": [
+    "REQ-29",
+    "REQ-46"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Raw hashes and timestamps exist; conflict flags and inactive evidence are not complete."
+  },
+  {
+   "id": "B31",
+   "theme": "Availability & injury data",
+   "brief": "Capture official inactive lists and snap counts",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-decision-gaps/data/inactives_week10.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 24,
+     "bytes": 5535,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-gaps/data/inactives_week10.json"
+    }
+   ],
+   "reqs": [
+    "REQ-30",
+    "REQ-55"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Inactives for one week only; no official snap-count capture found."
+  },
+  {
+   "id": "B32",
+   "theme": "Availability & injury data",
+   "brief": "Fix the two depth-parsing failures before widening coverage (Texans image; Packers jersey prefix)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/engine/parse_depth.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 9534,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/engine/parse_depth.py"
+    },
+    {
+     "path": "nfl-depth-sweep/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 174527,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"
+    }
+   ],
+   "reqs": [
+    "REQ-31"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Packers prefix handled in parse_depth.py; Texans is flagged image-only and not transcribed."
+  },
+  {
+   "id": "B33",
+   "theme": "Availability & injury data",
+   "brief": "Model depth slots as groups, not a single starter",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 174527,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"
+    },
+    {
+     "path": "nfl-book/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 8793,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_register.json"
+    }
+   ],
+   "reqs": [
+    "REQ-32",
+    "REQ-50"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Slot rows exist with multi-member fields; group logic not used by any model."
+  },
+  {
+   "id": "B34",
+   "theme": "Availability & injury data",
+   "brief": "Treat roster turnover as a first-class data event",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/transactions_nov2026.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 12,
+     "bytes": 2259,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/transactions_nov2026.json"
+    },
+    {
+     "path": "nfl-collector/data/captures/2026-11-16/league_transactions_trades_2026-11.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 12,
+     "bytes": 3481,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/2026-11-16/league_transactions_trades_2026-11.json"
+    }
+   ],
+   "reqs": [
+    "REQ-33"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Official November transactions captured; the join to depth rows is not built."
+  },
+  {
+   "id": "B35",
+   "theme": "Strategy & leaderboard",
+   "brief": "Start with a singles-only shadow baseline",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5032,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/prereg/PREREG-001-shadow-baseline.md"
+    },
+    {
+     "path": "nfl-book/data/two_stage_leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 4116,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
+    }
+   ],
+   "reqs": [
+    "REQ-34"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Pre-registration document exists; forecasts run on 105 games in nfl-book."
+  },
+  {
+   "id": "B36",
+   "theme": "Strategy & leaderboard",
+   "brief": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/joint_evidence.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 1446,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/joint_evidence.json"
+    }
+   ],
+   "reqs": [
+    "REQ-35"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Gate file has 3 rows; no validated joint probability exists."
+  },
+  {
+   "id": "B37",
+   "theme": "Strategy & leaderboard",
+   "brief": "Use proper-score leaderboard divisions (singles, game parlays, same-game parlays, prop combos)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/two_stage_leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 4116,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
+    }
+   ],
+   "reqs": [
+    "REQ-36"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Division-by-market-type not built (register REQ-36)."
+  },
+  {
+   "id": "B38",
+   "theme": "Strategy & leaderboard",
+   "brief": "Rank with proper scores and uncertainty, not win rate",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/two_stage_leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 4116,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
+    },
+    {
+     "path": "nfl-book/data/backtest.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 105,
+     "bytes": 81929,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/backtest.json"
+    }
+   ],
+   "reqs": [
+    "REQ-37"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Brier score present with CIs in nfl-book; game-cluster lower bound and multiplicity adjustment not built."
+  },
+  {
+   "id": "B39",
+   "theme": "Governance & site",
+   "brief": "Add durable snapshot storage and alerts",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/drift_alarms.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 6,
+     "bytes": 2280,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/drift_alarms.json"
+    },
+    {
+     "path": "nfl-readiness-register/snapshots/manifest.jsonl",
+     "exists": true,
+     "kind": "jsonl",
+     "n_rows": 3,
+     "bytes": 1565,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl"
+    }
+   ],
+   "reqs": [
+    "REQ-38",
+    "REQ-61"
+   ],
+   "register_status": [
+    "implemented",
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Drift alarms (6 rows) exist; alerts not wired to a notification channel."
+  },
+  {
+   "id": "B40",
+   "theme": "Governance & site",
+   "brief": "Split the site into a public analysis layer and a private data layer",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/snapshots",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 60,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots"
+    }
+   ],
+   "reqs": [
+    "REQ-39"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Raw captures sit in-repo, i.e. public. The private store is not built (owner decision)."
+  },
+  {
+   "id": "B41",
+   "theme": "Availability & injury data",
+   "brief": "Add a per-team view: starters out, replacements named, net injury count",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/per_team_view.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 7649,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/per_team_view.json"
+    }
+   ],
+   "reqs": [
+    "REQ-40"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "32 rows; replacements-named column is blank pending REQ-51."
+  },
+  {
+   "id": "B42",
+   "theme": "Availability & injury data",
+   "brief": "Add an announced-starter evidence field (not an inferred replacement)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/depth_replacements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 3160,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_replacements.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/injury_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 18,
+     "bytes": 9601,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/injury_capture.json"
+    }
+   ],
+   "reqs": [
+    "REQ-41"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Official announcement page (Drew Lock, Week 10) fetched 2026-11-18; no announced_starter field in the data yet."
+  },
+  {
+   "id": "B43",
+   "theme": "Availability & injury data",
+   "brief": "Add an official depth-chart register with date and source per row",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 174527,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"
+    },
+    {
+     "path": "nfl-book/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 8793,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_register.json"
+    }
+   ],
+   "reqs": [
+    "REQ-42"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Peer depth-sweep register has 705 rows with source; nfl-book register has 32 blank rows."
+  },
+  {
+   "id": "B44",
+   "theme": "Availability & injury data",
+   "brief": "Calibrate what 'Questionable' means empirically instead of using old percentages",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/questionable_calibration.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 4,
+     "bytes": 1454,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/questionable_calibration.json"
+    }
+   ],
+   "reqs": [
+    "REQ-43"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "4 rows. Official text gives no percentages, so the calibration needs outcome data not yet archived."
+  },
+  {
+   "id": "B45",
+   "theme": "Availability & injury data",
+   "brief": "Interactive offense vs. defense matchup deficiency matrix (1st–4th string)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/matchup_matrix.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 20,
+     "bytes": 6805,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/matchup_matrix.json"
+    },
+    {
+     "path": "nfl-book/pages/matchup-matrix.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 12932,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/pages/matchup-matrix.html"
+    }
+   ],
+   "reqs": [
+    "REQ-44"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "20 rows; depends on verified depth order (not available for all 32 clubs)."
+  },
+  {
+   "id": "B46",
+   "theme": "Availability & injury data",
+   "brief": "Flag stale depth rows against the official transactions log",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/data/roster_ir_sweep.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 19596,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/roster_ir_sweep.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/transactions_nov2026.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 12,
+     "bytes": 2259,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/transactions_nov2026.json"
+    }
+   ],
+   "reqs": [
+    "REQ-45"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Stale-depth flags exist in the roster/IR sweep (5 flags per its log)."
+  },
+  {
+   "id": "B47",
+   "theme": "Availability & injury data",
+   "brief": "Point-in-time snapshot ledger for injuries, depth charts and inactives",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/pit_ledger.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 2963,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/pit_ledger.json"
+    },
+    {
+     "path": "nfl-collector/data/captures/ledger.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 3293,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/ledger.json"
+    }
+   ],
+   "reqs": [
+    "REQ-46"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "pit_ledger has 8 entries; not yet covering depth or inactives."
+  },
+  {
+   "id": "B48",
+   "theme": "Availability & injury data",
+   "brief": "Populate the three missing Lions game-status designations (Joseph, Mays, Reed)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/injuries_week10_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 347,
+     "bytes": 67936,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/injuries_week10_capture.json"
+    }
+   ],
+   "reqs": [
+    "REQ-47"
+   ],
+   "register_status": [
+    "resolved-at-source"
+   ],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Re-read live 2026-11-18: nfl.com/injuries lists Kerby Joseph, Cade Mays and D.J. Reed as Out (game status). Resolved at source."
+  },
+  {
+   "id": "B49",
+   "theme": "Availability & injury data",
+   "brief": "Re-capture and republish the Week 10 injury tables",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/injury_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 18,
+     "bytes": 9601,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/injury_capture.json"
+    },
+    {
+     "path": "nfl-book/data/injuries_week10_capture.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 347,
+     "bytes": 67936,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/injuries_week10_capture.json"
+    }
+   ],
+   "reqs": [
+    "REQ-48"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Register captures 28 tables / 347 rows. The brief states 279 rows live vs 254 published; this session did not recount, so the discrepancy is unreconciled (see Flagged)."
+  },
+  {
+   "id": "B50",
+   "theme": "Availability & injury data",
+   "brief": "Reject: deriving depth order from jersey number, experience or salary",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-49"
+   ],
+   "register_status": [
+    "rejected"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Rejected rule recorded."
+  },
+  {
+   "id": "B51",
+   "theme": "Availability & injury data",
+   "brief": "Represent shared and empty depth slots faithfully",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/engine/parse_depth.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 9534,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/engine/parse_depth.py"
+    },
+    {
+     "path": "nfl-depth-sweep/data/depth_register.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 174527,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"
+    }
+   ],
+   "reqs": [
+    "REQ-50"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Shared/empty rank slots handled by parse_depth.py."
+  },
+  {
+   "id": "B52",
+   "theme": "Availability & injury data",
+   "brief": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-depth-sweep/data/route_c.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 21845,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/route_c.json"
+    },
+    {
+     "path": "nfl-depth-sweep/data/route_l.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 14391,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/route_l.json"
+    }
+   ],
+   "reqs": [
+    "REQ-51"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Route C (club pages) probed for 32 clubs: 31 HTML tables, 1 image. Not verified for all 32 clubs, so the feature stays unbuilt."
+  },
+  {
+   "id": "B53",
+   "theme": "Availability & injury data",
+   "brief": "Score injury-designation reliability before using it as a feature (play rate per designation with CIs)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-decision-gaps/data/designation_join.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 92,
+     "bytes": 12986,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-gaps/data/designation_join.json"
+    }
+   ],
+   "reqs": [
+    "REQ-52"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "One-week designation join only; several seasons needed (not archived)."
+  },
+  {
+   "id": "B54",
+   "theme": "Availability & injury data",
+   "brief": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": ".github/workflows/nfl-readiness-register.yml",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 1707,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-readiness-register.yml"
+    },
+    {
+     "path": "nfl-readiness-register/capture/snapshot_official_pages.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5072,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/capture/snapshot_official_pages.py"
+    }
+   ],
+   "reqs": [
+    "REQ-53",
+    "REQ-54"
+   ],
+   "register_status": [
+    "implemented",
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Workflow runs Wed/Thu/Fri 18:00 UTC. Scheduled runs not yet verified from the Actions log."
+  },
+  {
+   "id": "B55",
+   "theme": "Availability & injury data",
+   "brief": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-availability-desk/data/derived/designation_delta.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 11,
+     "bytes": 4682,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/derived/designation_delta.json"
+    },
+    {
+     "path": "nfl-book/data/injury_surprise.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 171,
+     "bytes": 66570,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/injury_surprise.json"
+    }
+   ],
+   "reqs": [
+    "REQ-54"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Only paired captures exist; no daily series yet."
+  },
+  {
+   "id": "B56",
+   "theme": "Availability & injury data",
+   "brief": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "status": "gap",
+   "n_artifacts_present": 0,
+   "artifacts": [],
+   "reqs": [
+    "REQ-55"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "GAP: no official snap-count source captured in nfl-book or nfl-markets (text mentions only)."
+  },
+  {
+   "id": "B57",
+   "theme": "Strategy & leaderboard",
+   "brief": "Add a control baseline (random picks; favorites only) to every leaderboard run",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/control_baseline.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 2,
+     "bytes": 983,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/control_baseline.json"
+    }
+   ],
+   "reqs": [
+    "REQ-56"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "2 rows; not attached to every leaderboard run."
+  },
+  {
+   "id": "B58",
+   "theme": "Origination & model",
+   "brief": "Stadium roof/surface & NWS hourly wind/precipitation overlay",
+   "status": "third-party-only",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-markets/data/raw/games.csv",
+     "exists": true,
+     "kind": "csv",
+     "n_rows": 7548,
+     "bytes": 2190038,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/raw/games.csv"
+    }
+   ],
+   "reqs": [
+    "REQ-57"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Roof/surface/temp/wind columns exist ONLY in the third-party nflverse games.csv. No official 90-minute roof designation and no NWS forecast overlay."
+  },
+  {
+   "id": "B59",
+   "theme": "Strategy & leaderboard",
+   "brief": "Two-stage skill leaderboard (proper-score qualification → prospective CLV/ROI escrow)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/two_stage_leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 4116,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/two_stage_leaderboard.json"
+    }
+   ],
+   "reqs": [
+    "REQ-58"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Stage 1 present; stage 2 (CLV escrow) needs DR-G1 price source."
+  },
+  {
+   "id": "B60",
+   "theme": "Market data",
+   "brief": "Vig-free market consensus vs. originated fair-line decomposition view",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/vig_free_decomposition.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 39,
+     "bytes": 11827,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/vig_free_decomposition.json"
+    }
+   ],
+   "reqs": [
+    "REQ-59"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "39 rows; consensus is unofficial (no official line source)."
+  },
+  {
+   "id": "B61",
+   "theme": "Origination & model",
+   "brief": "Publish every model total twice (both estimators, gap column) until one wins",
+   "status": "gap",
+   "n_artifacts_present": 0,
+   "artifacts": [],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "GAP: no second total-estimator artifact found in nfl-book or nfl-markets data files."
+  },
+  {
+   "id": "B62",
+   "theme": "Governance & site",
+   "brief": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/weekly_diff.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 39,
+     "bytes": 16962,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/weekly_diff.json"
+    }
+   ],
+   "reqs": [
+    "REQ-60"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "39 rows; diff by week needs a second weekly snapshot to be meaningful."
+  },
+  {
+   "id": "B63",
+   "theme": "Governance & site",
+   "brief": "Add a drift alarm to every scraper (pin row counts and fields; fail loudly)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/capture/snapshot_official_pages.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5072,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/capture/snapshot_official_pages.py"
+    },
+    {
+     "path": "nfl-book/data/drift_alarms.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 6,
+     "bytes": 2280,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/drift_alarms.json"
+    }
+   ],
+   "reqs": [
+    "REQ-61"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Schema pins exist in the readiness capture; not confirmed for every scraper."
+  },
+  {
+   "id": "B64",
+   "theme": "Availability & injury data",
+   "brief": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-collector/data/captures/2026-11-16/league_reserve_list_2026-11.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 25,
+     "bytes": 6294,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/2026-11-16/league_reserve_list_2026-11.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/transactions_nov2026.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 12,
+     "bytes": 2259,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/transactions_nov2026.json"
+    }
+   ],
+   "reqs": [
+    "REQ-62"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Official reserve list (Nov 2026) captured and fetched 2026-11-18."
+  },
+  {
+   "id": "B65",
+   "theme": "Strategy & leaderboard",
+   "brief": "Reject: ranking strategies by season-long ROI",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-63"
+   ],
+   "register_status": [
+    "rejected"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Rejected rule recorded."
+  },
+  {
+   "id": "B66",
+   "theme": "Availability & injury data",
+   "brief": "Archive weekly injury reports for past seasons (for the designation question)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-markets/data/raw/provenance.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 6,
+     "bytes": 859,
+     "third_party": true,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/raw/provenance.json"
+    },
+    {
+     "path": "nfl-readiness-register/data/requirements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 73,
+     "bytes": 54129,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json"
+    }
+   ],
+   "reqs": [
+    "REQ-64"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Archive identified (nflverse/nfldata, third-party); not official; ingestion not verified."
+  },
+  {
+   "id": "B67",
+   "theme": "Strategy & leaderboard",
+   "brief": "Pre-register each strategy (definition frozen before results are seen)",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/strategies.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 7867,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    },
+    {
+     "path": "nfl-book/data/gates.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 3588,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/gates.json"
+    }
+   ],
+   "reqs": [
+    "REQ-65",
+    "REQ-67"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "registered_utc present in both files."
+  },
+  {
+   "id": "B68",
+   "theme": "Origination & model",
+   "brief": "2026 kickoff & declared onside-kick regime priors filter",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/fixture_context.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 6188,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/fixture_context.json"
+    }
+   ],
+   "reqs": [
+    "REQ-66"
+   ],
+   "register_status": [
+    "open"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Onside mentioned in fixture_context; no regime-prior filter artifact found."
+  },
+  {
+   "id": "B69",
+   "theme": "Strategy & leaderboard",
+   "brief": "Freeze a rule before it sees data (commit rule text, sample window and gates; the commit hash is the registration)",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/gates.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 8,
+     "bytes": 3588,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/gates.json"
+    }
+   ],
+   "reqs": [
+    "REQ-65"
+   ],
+   "register_status": [
+    "implemented"
+   ],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Git commit history is the registration mechanism; the freeze commit is not referenced by hash in the file."
+  },
+  {
+   "id": "B70",
+   "theme": "Results & backtesting",
+   "brief": "Split data into train, validation and final holdout seasons",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/holdout_split.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 4,
+     "bytes": 1286,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json"
+    }
+   ],
+   "reqs": [
+    "REQ-68"
+   ],
+   "register_status": [
+    "partial"
+   ],
+   "register_stale_candidate": true,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "4 rows; no separate validation season identified."
+  },
+  {
+   "id": "B71",
+   "theme": "Governance & site",
+   "brief": "Suggestions section to review before implementing any change",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/suggestions.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 10,
+     "bytes": 5689,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/suggestions.json"
+    },
+    {
+     "path": "nfl-readiness-register/pages/suggestions.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 7405,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/pages/suggestions.html"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Suggestions page exists in the readiness workspace."
+  },
+  {
+   "id": "B72",
+   "theme": "Governance & site",
+   "brief": "Clear list of questions, information and answers needed before decisions",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/questions.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 15,
+     "bytes": 6662,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/questions.json"
+    },
+    {
+     "path": "nfl-readiness-register/pages/questions.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 7563,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/pages/questions.html"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Questions page exists; answers are blank by policy."
+  },
+  {
+   "id": "B73",
+   "theme": "Strategy & leaderboard",
+   "brief": "Originate own NFL lines; research strategies; leaderboard competition (single bets, parlays, prop combos); validation gates; correlations; remove luck",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/own_lines_open.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 13,
+     "bytes": 18204,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/own_lines_open.json"
+    },
+    {
+     "path": "nfl-book/data/strategies.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 7867,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/strategies.json"
+    },
+    {
+     "path": "nfl-book/data/leaderboard.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 5,
+     "bytes": 3494,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Full pipeline exists; no strategy has passed the gates."
+  },
+  {
+   "id": "B74",
+   "theme": "Availability & injury data",
+   "brief": "Track injuries and deficiencies: 2nd/3rd/4th-string backups replacing starters on offense and defense",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-book/data/depth_replacements.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 3,
+     "bytes": 3160,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_replacements.json"
+    },
+    {
+     "path": "nfl-depth-sweep/data/roster_ir_sweep.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 32,
+     "bytes": 19596,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/roster_ir_sweep.json"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": {
+    "url": "https://www.nfl.com/injuries/",
+    "fetched_this_session": true
+   },
+   "official_flag": null,
+   "note": "Blocked by B52 (depth-order source not verified for all 32 clubs)."
+  },
+  {
+   "id": "B75",
+   "theme": "Governance & site",
+   "brief": "Executive summary",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/EXECUTIVE_SUMMARY.md",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 2798,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/EXECUTIVE_SUMMARY.md"
+    },
+    {
+     "path": "nfl-book/EXECUTIVE_SUMMARY.md",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5296,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/EXECUTIVE_SUMMARY.md"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Two executive summaries exist; they disagree in places (see Flagged for review)."
+  },
+  {
+   "id": "B76",
+   "theme": "Governance & site",
+   "brief": "Repo review line by line, with links; flag irregularities",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/data/repo_review.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 12,
+     "bytes": 5259,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/repo_review.json"
+    },
+    {
+     "path": "nfl-book/data/repo_review.json",
+     "exists": true,
+     "kind": "json",
+     "n_rows": 10,
+     "bytes": 5083,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/repo_review.json"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Repo review present in two namespaces; this session's review is on the Flagged page."
+  },
+  {
+   "id": "B77",
+   "theme": "Governance & site",
+   "brief": "GitHub Pages live site: clean landing page, category subpages, every entry and finding in tables",
+   "status": "artifact-present",
+   "n_artifacts_present": 2,
+   "artifacts": [
+    {
+     "path": "index.html",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 106911,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/index.html"
+    },
+    {
+     "path": "verification/build.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 106868,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/build.py"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Root site builds from verification/build.py (served from main)."
+  },
+  {
+   "id": "B78",
+   "theme": "Governance & site",
+   "brief": "Verification: every table row has an official source link; blank + flag if unverifiable",
+   "status": "artifact-present",
+   "n_artifacts_present": 3,
+   "artifacts": [
+    {
+     "path": "nfl-readiness-register/verify.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 4831,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/verify.py"
+    },
+    {
+     "path": "nfl-depth-sweep/engine/verify.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 5770,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/engine/verify.py"
+    },
+    {
+     "path": "verification/verify_site.py",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 9008,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/verification/verify_site.py"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Verifiers exist and passed on eb6d8de."
+  },
+  {
+   "id": "B79",
+   "theme": "Governance & site",
+   "brief": "Parallel sessions: COORDINATION.md claims, scopes and logs",
+   "status": "artifact-present",
+   "n_artifacts_present": 1,
+   "artifacts": [
+    {
+     "path": "COORDINATION.md",
+     "exists": true,
+     "kind": "text",
+     "n_rows": null,
+     "bytes": 570347,
+     "third_party": false,
+     "url": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+    }
+   ],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Board exists (567 KB log). Claims per session are recorded."
+  },
+  {
+   "id": "B80",
+   "theme": "Governance & site",
+   "brief": "Pull request, merge and Pages-deploy confirmation without waiting for review",
+   "status": "process",
+   "n_artifacts_present": 0,
+   "artifacts": [],
+   "reqs": [],
+   "register_status": [],
+   "register_stale_candidate": false,
+   "official": null,
+   "official_flag": "No official source mapped - blank by policy",
+   "note": "Process item. Not a repo artifact; recorded per session in COORDINATION.md."
+  }
+ ]
+}
