@@ -13,6 +13,10 @@ Checks, run on the built site:
 Exit code 0 = pass, 1 = fail. Pure standard library.
 """
 
+raise SystemExit("superseded: round 2 (2026-11-18) is built by engine/round2.py, round2_register.py and build_r2.py; "
+                 "this round-1 script would overwrite the round-2 pages, so it refuses to run.")
+
+
 import os
 import re
 import subprocess

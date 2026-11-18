@@ -1,0 +1,134 @@
+{
+  "dataset": "nfl_req_review_flags_round2",
+  "round": "2026-11-18",
+  "session": "arena/9242c387-own4",
+  "rule": "Published, non-blocking, with source links. Corrections and peer-owned issues are logged here and not edited in peer namespaces.",
+  "flags": [
+    {
+      "id": "RF-08",
+      "severity": "correction",
+      "owner": "nfl-req-review (round 1, corrected here)",
+      "title": "Week 11 has 13 fixtures, not 14",
+      "detail": "Round 1 stated 14 Week-11 fixtures in the venue row (A03) and '137 games' in its clearing text. The official Week-11 schedule shows 13 fixtures and six clubs on bye (ATL, CLE, GB, LAR, NE, SEA). The venue row is corrected.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ]
+    },
+    {
+      "id": "RF-09",
+      "severity": "irregularity",
+      "owner": "nfl-book (peer namespace; logged, not edited)",
+      "title": "The verified results feed omits 13 official Week-10 games",
+      "detail": "nfl-book/data/results_feed.json holds 136 games for Weeks 1-9, which reconcile to official standings for 32 of 32 clubs, and one Week-10 game (W10-WAS-NYG). The other 13 Week-10 finals read today are missing. Downstream: model_outputs n_train_games = 137, correlations n = 137, and the holdout window names 137 games.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/results_feed.json"
+      ]
+    },
+    {
+      "id": "RF-10",
+      "severity": "irregularity",
+      "owner": "nfl-availability-desk (peer namespace; logged, not edited)",
+      "title": "A standings check reports 133 games through Week 9; the official arithmetic gives 136",
+      "detail": "nfl-availability-desk/data/derived/standings_check.json reports 145 games credited and 12 Week-10 games credited, so 133 through Week 9. Its own 'week10_final_at_read' is 9, so the credited games through Week 9 are 145 - 9 = 136. Today's official standings give 150 completed games and the Week-10 page shows 14 finals, so 150 - 14 = 136. Its reviewer claim that no file publishes 136 is contradicted by the standings arithmetic here.",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/derived/standings_check.json"
+      ]
+    },
+    {
+      "id": "RF-11",
+      "severity": "irregularity",
+      "owner": "nfl-book (peer namespace; logged, not edited)",
+      "title": "The holdout split leaves 13 completed Week-10 games in no split",
+      "detail": "nfl-book/data/holdout_split.json: train = Weeks 1-9 (136 games); validation = 'Week 10 TNF (1 game, 137th)'. The other 13 official Week-10 finals are not assigned to any split.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json"
+      ]
+    },
+    {
+      "id": "RF-12",
+      "severity": "stale source",
+      "owner": "nfl-req-review (round 1; superseded)",
+      "title": "Round-1 standings capture is one game stale for two clubs",
+      "detail": "The round-1 capture (official_reads_2026_11_17.json) shows BAL 4-5 (189 PF, 236 PA) and LAC 0-8 (121 PF, 219 PA). Today's standings show BAL 4-6 (209, 259) and LAC 1-8 (144, 239), after Monday's Chargers 23, Ravens 20 game. The round-1 read predates that game.",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://www.nfl.com/schedules/2026/by-week/week-10"
+      ]
+    },
+    {
+      "id": "RF-13",
+      "severity": "irregularity",
+      "owner": "nfl-req-review (round 1; superseded)",
+      "title": "Round-1 injury totals in the findings text do not match the capture's own totals",
+      "detail": "Round-1 text: '326 rows; 14 Out; 11 Questionable; 0 Doubtful'. The round-1 capture's totals: 346 players listed over 28 clubs, 70 Out, 90 Questionable, 11 Doubtful. The text was typed by hand; the totals are computed. The capture is kept; the text is superseded.",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "RF-14",
+      "severity": "unresolved",
+      "owner": "nfl-req-review (round 2)",
+      "title": "Cincinnati's Week-10 listed count: 9 in the capture, 4 in the brief",
+      "detail": "The brief states Cincinnati lists 4 players on the Week-10 report. The capture lists 9. The Cincinnati section falls in chunks 2-7, which were not re-read this round. Not resolved; not inferred.",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "RF-15",
+      "severity": "stale source",
+      "owner": "nfl-req-review (continues RF-02)",
+      "title": "The Week-11 injury report is not yet published",
+      "detail": "At the 2026-11-18 read, nfl.com/injuries/league/2026/reg11 still displays the Week-10 report, and the hub shows Week 10. No Week-11 designations are recorded here.",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg11",
+        "https://www.nfl.com/injuries/"
+      ]
+    },
+    {
+      "id": "RF-16",
+      "severity": "irregularity",
+      "owner": "nfl-book (peer namespace; logged, not edited)",
+      "title": "The favorites-only control is not point-in-time",
+      "detail": "control_baseline.json states the favorites-only baseline uses current standings win%. Standings after a game use that game's result, so the control uses information it could not have had. The file discloses this; it still needs replacing.",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "RF-17",
+      "severity": "clarification",
+      "owner": "nfl-book (peer namespace; logged, not edited)",
+      "title": "The 'closing' values in the price store are model runs, not market closes",
+      "detail": "price_snapshots.json defines close = 'final run at publication (train through Week 10 TNF)', and all market_* fields are null (FB-01). The store is therefore a log of the model's own numbers at two times, not a price history.",
+      "sources": [
+        "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+      ]
+    },
+    {
+      "id": "RF-18",
+      "severity": "limitation",
+      "owner": "repository (all sessions)",
+      "title": "This sandbox clone is shallow; pre-registration commits cannot be checked here",
+      "detail": "`git rev-parse --is-shallow-repository` returns true in this checkout. 'The commit hash is the registration' cannot be verified from this clone; the check needs full history.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "RF-19",
+      "severity": "scope",
+      "owner": "repository (all sessions)",
+      "title": "Several NFL pull requests were open at the read time, touching overlapping NFL content",
+      "detail": "At the read time, 15 pull requests were open, of which four (#158 to #161) were opened in the 03:13-03:16 UTC window on 2026-11-18 by other sessions and touch NFL content. This round does not edit them.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/pulls"
+      ]
+    }
+  ]
+}
