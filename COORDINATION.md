@@ -5125,3 +5125,16 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 - **Pages:** latest build = `ee452ff`, status **built**, `pages-build-deployment` **success** (01:51:27Z). Entry points: root dashboard `https://sassnarep3-star.github.io/Own4/` → "Depth sweep — start here" → register / IR sweep / flagged / **Route Evidence** (this branch's league-404 + club-page structure sweep, DS-01..DS-13).
 - **What shipped:** the complementary route-evidence layer inside the merged `nfl-depth-sweep` namespace (`data/{teams_base,route_l,route_c}.json`, `index.html` + 5 pages + assets, `engine/{build,verify_routes}.py`, routes CI workflow), the additive "Route Evidence" nav, the deterministic `audit_repo.py` top-N fix (un-reds the live-board gate for every branch), regenerated live-board audit, and the collision record above. **Nothing from PR #155's D1–D9 was discarded.**
 - **Post-merge state:** this session's scope is complete; remaining owner/integration items unchanged: SG-C verdict still blank (evidence now on both sides), HOU machine-readable surface still open, root I-01 nav work still with `arena/9208e00a-own4`.
+
+---
+
+## Session `arena/66ec82ab-own4` — source-authority transparency audit (claim, 2026-11-18 UTC)
+
+Branch (fixed by Arena): `arena/66ec82ab-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458`.
+Read the coordination board before claiming. No active task owns the NFL Decision Desk source-labeling scope.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Make source authority visible at each NFL Decision Desk table citation; distinguish official NFL sources from third-party/archive, repository, and other links; extend the publication gate to report and validate source classes without representing third-party inputs as officially verified | in progress | arena/66ec82ab-own4 | `nfl-decision-desk/engine/site.py`, `nfl-decision-desk/engine/templates/shell_head.tpl`, `nfl-decision-desk/engine/verify.py`, generated `nfl-decision-desk/{index.html,pages/*.html}`, `COORDINATION.md` |
+
+This is a focused correction to source transparency; it does not upgrade any third-party data to official evidence, change model results, or claim unverified inputs are verified.
