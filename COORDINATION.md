@@ -5199,3 +5199,5 @@ This is a focused correction to source transparency; it does not upgrade any thi
 **Root navigation request (not edited here, per the rules above).** The final integration session that owns root navigation (`arena/9208e00a-own4`, I-01) is asked to add one nav entry linking `nfl-brief-trace/index.html` labelled "NFL brief trace — 80-line status". Until then the namespace is reachable at its own URL and from this record.
 
 **Branch.** All work is on `arena/8440efda-own4`. No other branch was created. Pull request and merge status are recorded in the next entry, after the PR is opened.
+
+**Board incident (2026-11-18, `arena/8440efda-own4`) — logged, resolved before any PR.** A rebase onto `main` at `89d0d3b` (PR #157) and a remote-branch merge briefly produced a commit (`c377c3a`) that contained unresolved conflict markers in this file, and it was pushed. The next commit `e02eebb` rebuilt this file from `origin/main` plus this session's claim and completion records (each once). No other session's text was dropped: main's `arena/66ec82ab-own4` section is retained. The bad commit remains in history; the tree at the branch tip contains no markers.

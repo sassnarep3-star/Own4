@@ -91,6 +91,8 @@ def snapshot():
     h = hashlib.sha256()
     for p in pages: h.update(open(p, "rb").read())
     return h.hexdigest()
+# Pages quote live counts (e.g. COORDINATION.md line count), so rebuild once from the current trace first.
+subprocess.run([sys.executable, os.path.join(BASE, "engine", "build.py")], check=True, capture_output=True)
 first = snapshot()
 subprocess.run([sys.executable, os.path.join(BASE, "engine", "build.py")], check=True, capture_output=True)
 second = snapshot()
