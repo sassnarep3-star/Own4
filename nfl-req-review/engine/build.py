@@ -12,6 +12,10 @@ Run:  python3 engine/build_data.py
       python3 engine/build.py
 """
 
+raise SystemExit("superseded: round 2 (2026-11-18) is built by engine/round2.py, round2_register.py and build_r2.py; "
+                 "this round-1 script would overwrite the round-2 pages, so it refuses to run.")
+
+
 import html
 import json
 import os

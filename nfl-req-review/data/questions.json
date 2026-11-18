@@ -1,0 +1,147 @@
+{
+  "dataset": "nfl_req_review_questions",
+  "round": "2026-11-18",
+  "rows": [
+    {
+      "id": "Q01",
+      "question": "Is there an official source for betting lines (opening and closing prices)?",
+      "known_answer": "Not found. None of the official pages read this round shows a betting line, and every market_* field in the price store is null (RF-17).",
+      "gap": "An official or owner-approved price source (decision SG-01). Options are in suggestion S-02.",
+      "how_to_discover": "Owner decision. Search nfl.com terms and data-licence pages for any price feed before choosing.",
+      "sources": [
+        "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+      ]
+    },
+    {
+      "id": "Q02",
+      "question": "How many completed 2026 regular-season games are there?",
+      "known_answer": "150 through Week 10 (RC-02). 136 through Week 9 (RC-07).",
+      "gap": "Week 11 onward, as they complete.",
+      "how_to_discover": "Re-read the standings each week and recompute sum(W+L+T)/2 (engine/round2.py).",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "Q03",
+      "question": "Does the verified results feed contain every completed game?",
+      "known_answer": "All 136 Weeks 1-9 games reconcile to official standings for 32 of 32 clubs. 1 of 14 Week-10 finals is present (RC-11, RC-12).",
+      "gap": "13 Week-10 finals. 105 rows are aggregate-only.",
+      "how_to_discover": "Add the 13 finals (already transcribed with URLs on the Games page); re-read the aggregate-only rows game by game.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10"
+      ]
+    },
+    {
+      "id": "Q04",
+      "question": "Which Week-11 games are scheduled, and where are they played?",
+      "known_answer": "13 fixtures and six byes (RC-08, RC-09). Kickoff times and networks are as printed on the schedule page. Venues were not re-read in round 2.",
+      "gap": "Venue for each of the 13 games from its official game page; roof and surface are not on the pages read.",
+      "how_to_discover": "Open each game page; record the venue as printed, or leave blank.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11",
+        "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+      ]
+    },
+    {
+      "id": "Q05",
+      "question": "Has the Week-11 injury report been published?",
+      "known_answer": "Not at the 2026-11-18 read. The Week-11 URL shows the Week-10 report (RF-15).",
+      "gap": "The Week-11 designations and their timestamps.",
+      "how_to_discover": "Daily capture from Wednesday to kickoff, with fetch time and hash (suggestion S-05).",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg11"
+      ]
+    },
+    {
+      "id": "Q06",
+      "question": "Are the six 'Out' designations on the final Week-10 report corroborated by an official list?",
+      "known_answer": "Round 1 found six 'Out' rows that are on neither the official Week-10 inactive list nor the November reserve list (RF-01).",
+      "gap": "An official inactive list for each of those games, or the reason they are absent.",
+      "how_to_discover": "Compare the Week-11 inactive list when it is published, and retain the Week-10 comparison as it stands.",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "Q07",
+      "question": "Does a 'Questionable' designation predict that a player plays?",
+      "known_answer": "Not measured. Round 1 joined one Sunday's report to the inactive list (n and Wilson intervals on the Verification page). That is one week, not a rate.",
+      "gap": "Play rate per designation across several seasons, with confidence intervals (E14, E21).",
+      "how_to_discover": "Retrieve prior seasons' injury reports from the official archive, then join them to inactive lists. Archive availability is unconfirmed here.",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    },
+    {
+      "id": "Q08",
+      "question": "Is there an official depth-chart source for all 32 clubs?",
+      "known_answer": "Not established. The league route is closed (404). Per the depth-sweep namespace (not re-read here), 31 club pages are text and Houston publishes an image.",
+      "gap": "A machine-readable Houston depth surface, or an authorised structured source (E13).",
+      "how_to_discover": "Owner decision on an authorised source. Transcribing an image by eye is not allowed by the brief.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-11"
+      ]
+    },
+    {
+      "id": "Q09",
+      "question": "Do official NFL Game Books contain snap counts, so that starters can be measured?",
+      "known_answer": "Not verified. Round 1 recorded that the Game Book route is reachable; the contents were not checked against snap counts.",
+      "gap": "Confirmation that a Game Book lists snaps per player, and coverage for all 32 clubs (E06, A05).",
+      "how_to_discover": "Open one official Game Book PDF for a completed game and read it line by line.",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10"
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Is the control baseline point-in-time?",
+      "known_answer": "No. The favorites-only baseline uses end-of-period standings (RF-16).",
+      "gap": "Standings as of each game's pre-kickoff date.",
+      "how_to_discover": "Capture a weekly standings snapshot from now on (its hash and time), then recompute the baseline.",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Can the pre-registration commits be verified?",
+      "known_answer": "Not from this clone. It is shallow (RF-18).",
+      "gap": "Full git history, and the commit hash for each registered rule.",
+      "how_to_discover": "Run the registration check in an environment with full history (or CI with fetch-depth 0).",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "How large a sample do the leaderboard gates need?",
+      "known_answer": "The register states n >= 300 graded games per strategy (C02). This season has 150 completed games.",
+      "gap": "At least two more full seasons, or the owner's changed threshold.",
+      "how_to_discover": "Owner decision on the threshold and on the number of seasons to collect.",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG"
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "Which page is the public entry point for the NFL work?",
+      "known_answer": "The root site is the NBA dashboard. NFL work is in 39 separate namespaces (repo review RR-01).",
+      "gap": "Owner decision on one entry point, and the root navigation change.",
+      "how_to_discover": "Suggestion S-01 and S-08.",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "How many players does Cincinnati list on the Week-10 report?",
+      "known_answer": "9 in the round-1 capture. The brief says 4. The rest of the report was not re-read (RF-14).",
+      "gap": "The Cincinnati section, read in full.",
+      "how_to_discover": "Full re-read of Week-10 chunks 2-7 (suggestion S-10).",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    }
+  ]
+}

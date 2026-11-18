@@ -1,0 +1,166 @@
+{
+  "dataset": "nfl_req_review_suggestions",
+  "round": "2026-11-18",
+  "rule": "Suggestions only. Choose a path before any implementation. The decision field is left blank for the owner.",
+  "rows": [
+    {
+      "id": "S-01",
+      "title": "One NFL entry point; freeze the other namespaces",
+      "why": "39 NFL namespaces publish contradictory numbers (RR-01, RR-02).",
+      "options": [
+        "(a) Keep all namespaces as they are",
+        "(b) Freeze peers, make this namespace the entry point, and link each peer from a sitemap",
+        "(c) Delete peers"
+      ],
+      "recommended": "(b)",
+      "decision_owner": "Owner decision. No peer file is changed in this round.",
+      "decision": "",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/tree/main",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/repo_review.json"
+      ]
+    },
+    {
+      "id": "S-02",
+      "title": "Price-data policy (decision SG-01)",
+      "why": "No official price source found. Market columns are blank (Q01).",
+      "options": [
+        "(a) License an official or authorised price feed",
+        "(b) Accept blank market columns; publish own lines only",
+        "(c) Manual screenshots of third-party prices"
+      ],
+      "recommended": "(b) now; revisit if (a) is found",
+      "decision_owner": "Owner decision. Option (c) has no verifiable provenance and conflicts with the brief's official-source rule.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/",
+        "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+      ]
+    },
+    {
+      "id": "S-03",
+      "title": "Add the 13 missing Week-10 finals to the results feed",
+      "why": "The feed reconciles for Weeks 1-9 and omits 13 Week-10 finals (RF-09).",
+      "options": [
+        "(a) Add the 13 finals transcribed here, with their URLs",
+        "(b) Wait for the next scheduled refresh"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Owner of nfl-book to apply; the transcription and URLs are in data/official_reads_2026_11_18.json.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/results_feed.json"
+      ]
+    },
+    {
+      "id": "S-04",
+      "title": "Make the split table cover every completed game",
+      "why": "13 completed games are in no split (RF-11).",
+      "options": [
+        "(a) Freeze at 136 and name Week 10 as the first prospective window",
+        "(b) Extend the train set to all 150 games and re-run the walk-forward test"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Owner decision. Option (b) changes a pre-registered corpus and needs a new registration.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/schedules/2026/by-week/week-10",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json"
+      ]
+    },
+    {
+      "id": "S-05",
+      "title": "Capture the injury report from Wednesday to kickoff, with hashes",
+      "why": "No daily series exists; Week 11 is not yet published (RF-15).",
+      "options": [
+        "(a) Scheduled CI job (Wed-Sat) that fetches nfl.com and commits a hashed capture",
+        "(b) Manual capture by the owner",
+        "(c) Do not capture"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Owner approval for a scheduled job. The sandbox cannot reach nfl.com with curl; CI runners are a separate network path, to be confirmed.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg11",
+        "https://www.nfl.com/injuries/"
+      ]
+    },
+    {
+      "id": "S-06",
+      "title": "Replace the favorites-only control with a point-in-time one",
+      "why": "The current control uses future information (RF-16).",
+      "options": [
+        "(a) Compute favorites from standings as of each pre-kickoff date",
+        "(b) Remove the favorites control"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Needs weekly standings captures, which S-05 style capture would supply.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/standings/league/2026/REG",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/control_baseline.json"
+      ]
+    },
+    {
+      "id": "S-07",
+      "title": "Make 'met' impossible without an artifact and an official source",
+      "why": "Round 2 downgraded 8 'met' rows that did not meet this test.",
+      "options": [
+        "(a) Keep the round-2 rule in this namespace only",
+        "(b) Apply the same verifier across all namespaces"
+      ],
+      "recommended": "(b)",
+      "decision_owner": "Owner decision. The verifier here is engine/verify_r2.py.",
+      "decision": "",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/engine/verify_r2.py"
+      ]
+    },
+    {
+      "id": "S-08",
+      "title": "Link this namespace from the root landing page",
+      "why": "The root page does not link the NFL work.",
+      "options": [
+        "(a) Add a root navigation entry (integration session)",
+        "(b) Leave it unlinked"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Logged in COORDINATION.md for the root-nav owner. Not edited here.",
+      "decision": "",
+      "sources": [
+        "https://sassnarep3-star.github.io/Own4/"
+      ]
+    },
+    {
+      "id": "S-09",
+      "title": "Split COORDINATION.md into an archive and an active board",
+      "why": "COORDINATION.md is 569,341 bytes; claims and logs from many sessions sit in one file (RR-10).",
+      "options": [
+        "(a) Move completed logs to COORDINATION-ARCHIVE.md",
+        "(b) Keep as is"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Owner decision. Changing the file is a separate task.",
+      "decision": "",
+      "sources": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md"
+      ]
+    },
+    {
+      "id": "S-10",
+      "title": "Re-read the whole Week-10 injury report and publish per-club counts",
+      "why": "Round 1 totals disagree with its own text, and Cincinnati is unresolved (RF-13, RF-14).",
+      "options": [
+        "(a) Re-read all eight chunks and publish per-club counts with the capture hash",
+        "(b) Keep the round-1 capture unchanged"
+      ],
+      "recommended": "(a)",
+      "decision_owner": "Next round. It does not block the merge.",
+      "decision": "",
+      "sources": [
+        "https://www.nfl.com/injuries/league/2026/reg10"
+      ]
+    }
+  ]
+}

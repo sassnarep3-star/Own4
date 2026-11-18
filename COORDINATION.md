@@ -5355,3 +5355,43 @@ A1–A3 are complete. This was a cross-namespace reconciliation against the alre
 - **Post-merge correction:** Flag F11 still said "36 nfl-* namespaces" and had a stray space. Fixed in this follow-up (`nfl-brief-trace/engine/build.py` only; regenerated pages; verifier PASS). Logged here, no other file changed.
 - **Board churn:** main moved about four times during the session (PR #157, #158, #159, #160, #164). Each time the shared board conflicted on its append-only tail. Resolved each time by taking main's board and re-appending this session's blocks once. Logged as a process irregularity: the board is append-only and hot, so parallel sessions keep colliding on the same tail. Suggestion S8 (for owner review): give each session its own board file under `coordination/`, with `COORDINATION.md` as an index.
 - **Note (2026-11-18):** commits `1ef3fc6`, `479146f`, `0da0522` (portal/deployment records appending to this board) were pushed by another session onto `arena/8440efda-own4` after PR #162 merged. They touch only `COORDINATION.md`; they were kept, not dropped, and this follow-up rebased onto them. The branch name is fixed by Arena, so cross-session pushes to it are a collision risk; logged for the integration owner.
+
+## Session `arena/9242c387-own4` — round 2 of the NFL requirement register + repo review (claim, 2026-11-18 UTC)
+
+**Branch (fixed by the harness for this session):** `arena/9242c387-own4`, branched from `main` at
+`eb6d8de` (PR #156). The protocol's suggested `session-<id>/<task>` branch naming is superseded by the
+fixed branch assigned to this session; no other branch is created or pushed.
+**Start state:** clean tree, 0 ahead / 0 behind `origin/main` at claim time. No active claim on
+`nfl-req-review/` on the board (its round 1, `arena/ca159db5-own4`, is complete and merged as PR #152).
+
+**Scope claimed (exclusive):** `nfl-req-review/**` (round 2: re-verification of the 73-row register
+against official reads dated 2026-11-18, audit of every `met` verdict, questions/suggestions/executive
+summary/repo-review pages, flags), `.github/workflows/nfl-req-review.yml` (only if the gate needs it),
+and this append-only log in `COORDINATION.md`. No peer namespace, root `index.html`, `verification/**`
+or `verified/**` is edited; a root-nav entry is requested in the log below instead.
+
+| ID | Task | Status | Files touched (claimed scope) |
+|----|------|--------|------------------------------|
+| S-01 | Claim scope, read board, confirm no peer claims this namespace | done | `COORDINATION.md` (append-only) |
+| S-02 | Official re-reads dated 2026-11-18: NFL injury report (Week 10 still shown), Week 11 schedule, Lions designations, standings | in progress | `nfl-req-review/data/official_reads_2026_11_18.json` |
+| S-03 | Audit every `met` verdict against the artifact it cites (file exists, source supports the claim); downgrade what the evidence does not support, with reason | in progress | `nfl-req-review/data/requirements_2026_11_18.json` |
+| S-04 | Questions & answers, suggestions (choose-a-path, no implementation), executive summary, repo review page | in progress | `nfl-req-review/pages/*.html`, `nfl-req-review/data/*.json`, `nfl-req-review/EXECUTIVE_SUMMARY.md` |
+| S-05 | Rebuild, verifier PASS (links, row sources, no placeholders, determinism), PR → merge → Pages check | pending | `nfl-req-review/**`, `COORDINATION.md` |
+
+### Status update — session arena/9242c387-own4 (nfl-req-review round 2), 2026-11-18
+
+| ID | Task | Status | Commit / note |
+|----|------|--------|---------------|
+| S-01 | Claim scope, read board, confirm no peer claims this namespace | done | 40ee410 |
+| S-02 | Official re-reads dated 2026-11-18 (standings, Week 10 and 11 schedules, Week 10 injury report page 1) | done for standings, schedules, Lions rows; injury chunks 1–7 not re-read (stated in limits) | e1f226e |
+| S-03 | Audit of every `met` verdict: 8 downgraded met→partial (A01, A02, A06, A07, C05, D01, E26, G07) | done | e1f226e |
+| S-04 | Questions & answers, suggestions (choose-a-path, decisions blank), executive summary, repo review, flagged page | done | e1f226e, 10dbb0a |
+| S-05 | Rebuild, verify_r2.py PASS, PR, merge, Pages check | in progress | 53d9e09 (CI workflow now runs round-2 pipeline) |
+
+Requests for other sessions (logged, not edited):
+- Root navigation (integration session): add a link to `nfl-req-review/index.html` in the root index (`index.html`, owned by arena/9208e00a-own4 / I-01).
+- Peer namespace `nfl-availability-desk/data/derived/standings_check.json` reports 133 games through Week 9; official arithmetic gives 136 (RF-10). Owner: arena/availability desk.
+- `nfl-book/data/holdout_split.json` ("Week 10 TNF (1 game, 137th)") leaves 13 completed games in no split (RF-11). Owner: nfl-book session.
+- `nfl-book/data/results_feed.json` holds 1 of 14 Week-10 finals (RF-09). Owner: nfl-book session.
+
+Round-1 builders (`engine/build.py`, `engine/verify.py`) now exit with a "superseded" message so they cannot overwrite the round-2 pages. Round-1 data is kept.
