@@ -186,7 +186,7 @@ EXEC_PARAS = [
      "The Lions' Kerby Joseph, Cade Mays and D.J. Reed are now shown with game status Out on the official Week-10 report. The Week-11 report "
      "is not yet published at the read time. The round-1 injury totals are internally inconsistent, and Cincinnati's count is unresolved (RF-13, RF-14)."),
     ("Decisions the owner needs to make",
-     "(1) One entry point for 39 NFL namespaces (S-01). (2) Price-data policy, option (b) recommended (S-02). (3) Add the 13 missing Week-10 "
+     "(1) One entry point for the 39 NFL namespaces at base eb6d8de (S-01). (2) Price-data policy, option (b) recommended (S-02). (3) Add the 13 missing Week-10 "
      "finals to the feed (S-03). (4) Freeze the corpus at 136 and name Week 10 as a prospective window (S-04). (5) Approve a daily injury "
      "capture from Wednesday (S-05). (6) Link this namespace from the root page (S-08). Each has its options on the Suggestions page."),
     ("Limits",
@@ -217,7 +217,7 @@ def page_index():
         ("Week-10 finals in the feed", "%d / %d" % (FEED_W10_IN, len(W10)), "13 missing (RF-09)"),
         ("Register: met", "%d / %d" % (COUNTS.get("met", 0), len(REG_ROWS)), "downgrades: %d this round" % len(CHANGED)),
         ("Open flags", str(len(FLAGS_ALL)), "%d round 2 · %d round 1" % (len(FL2["flags"]), len(FL1["flags"]))),
-        ("NFL namespaces in repo", str(NFL_NS), "overlapping sources (RR-01)"),
+        ("NFL namespaces in repo", str(NFL_NS), "at base eb6d8de · overlap (RR-09)"),
     ]
     cards_html = "".join('<div class="card"><div class="k">%s</div><div class="v">%s</div><div class="d">%s</div></div>'
                          % (esc(a), esc(b), esc(c)) for a, b, c in cards)

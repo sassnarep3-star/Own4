@@ -24,7 +24,7 @@ The Lions' Kerby Joseph, Cade Mays and D.J. Reed are now shown with game status 
 
 ## Decisions the owner needs to make
 
-(1) One entry point for 39 NFL namespaces (S-01). (2) Price-data policy, option (b) recommended (S-02). (3) Add the 13 missing Week-10 finals to the feed (S-03). (4) Freeze the corpus at 136 and name Week 10 as a prospective window (S-04). (5) Approve a daily injury capture from Wednesday (S-05). (6) Link this namespace from the root page (S-08). Each has its options on the Suggestions page.
+(1) One entry point for the 39 NFL namespaces at base eb6d8de (S-01). (2) Price-data policy, option (b) recommended (S-02). (3) Add the 13 missing Week-10 finals to the feed (S-03). (4) Freeze the corpus at 136 and name Week 10 as a prospective window (S-04). (5) Approve a daily injury capture from Wednesday (S-05). (6) Link this namespace from the root page (S-08). Each has its options on the Suggestions page.
 
 ## Limits
 

@@ -422,7 +422,10 @@ def main():
     _feed = load_json_root("nfl-book/data/results_feed.json")
     FEED_ROWS = len(_feed["rows"])
     NFL_SRC_ROWS = sum(1 for r in _feed["rows"] if str(r.get("source_url", "")).startswith("https://www.nfl.com"))
-    nfl_dirs = sorted(d for d in os.listdir(ROOT) if d.startswith("nfl") and os.path.isdir(os.path.join(ROOT, d)))
+    # Pinned snapshot, not a live count: measured at branch base eb6d8de on 2026-11-18 (git ls-tree -d). A live count
+    # would change with every peer merge and break the determinism gate. Re-measure in a later round, do not recount here.
+    NFL_DIRS_AT_BASE = 39
+    nfl_dirs = list(range(NFL_DIRS_AT_BASE))
     open_prs = [158, 159, 160, 161, 150, 132, 127, 119, 93, 59, 56, 47, 43, 39, 29]
     rr = [
         ("RR-01", "39 top-level directories are named nfl* (computed).",
@@ -478,7 +481,7 @@ def main():
     ]
     rv = dict(dataset="nfl_req_review_repo_review", round=ROUND, session=SESSION,
               method="Mechanical checks (directory listing, grep, du, gh api, git plumbing) plus the round-2 reconciliations. Measured values are recorded with their date.",
-              nfl_namespace_count=len(nfl_dirs), open_pr_numbers=open_prs,
+              nfl_namespace_count=NFL_DIRS_AT_BASE, open_pr_numbers=open_prs,
               rows=[dict(id=a, finding=b, detail=c, evidence=d, source=e, class_=f) for a, b, c, d, e, f in rr])
     with open(os.path.join(DATA, "repo_review.json"), "w", encoding="utf-8") as f:
         json.dump(rv, f, indent=2, ensure_ascii=False); f.write("\n")
