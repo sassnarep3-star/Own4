@@ -5320,3 +5320,20 @@ A1–A3 are complete. This was a cross-namespace reconciliation against the alre
 **Branch.** All work is on `arena/8440efda-own4`. No other branch was created. Pull request and merge status are recorded in the next entry, after the PR is opened.
 
 **Board incident (2026-11-18, `arena/8440efda-own4`) — logged, resolved before any PR.** A rebase onto `main` at `89d0d3b` (PR #157) and a remote-branch merge briefly produced a commit (`c377c3a`) that contained unresolved conflict markers in this file, and it was pushed. The next commit `e02eebb` rebuilt this file from `origin/main` plus this session's claim and completion records (each once). No other session's text was dropped: main's `arena/66ec82ab-own4` section is retained. The bad commit remains in history; the tree at the branch tip contains no markers.
+
+---
+
+### Session `arena-4f506399-own4` — completion / publication record (2026-11-18 UTC)
+
+| Task | Status | Result |
+|---|---|---|
+| A1 depth readiness reconciliation | done | Updated R-06/R-32/R-33/R-43/R-45/R-51/R-52/R-75 and G-DEPTH against dated route evidence. |
+| A2 sources and review flag | done | Added source S-36 and RF-17; listed 32 direct club page URLs and source dates on the Depth & deficiency and Sources pages. |
+| A3 rebuild and verification | done | 19 pages, 1,144 linked table rows; Origin Board, depth-sweep register, route and root verifiers pass; generated artifacts rebuild byte-identically. |
+| A4 PR, merge and Pages | done | PR [#161](https://github.com/sassnarep3-star/Own4/pull/161) merged at `2026-11-18T03:19:19Z` as merge commit [`0fed13d`](https://github.com/sassnarep3-star/Own4/commit/0fed13da71675298065fc5d39454d2a34438e900). All PR checks passed. Pages deployment run [44229589419](https://github.com/sassnarep3-star/Own4/actions/runs/44229589419) succeeded. |
+
+**Published page:** https://sassnarep3-star.github.io/Own4/nfl-origin-board/pages/depth.html — includes 32 individually sourced official club-page rows and the outstanding limitations. Dashboard: https://sassnarep3-star.github.io/Own4/nfl-origin-board/ .
+
+**Still blocked / flagged:** HOU is image-only and not transcribed; 27 charts do not print their own as-of date; chart self-labels vary; actual starters, inactives and snap counts are not joined, so no replacement playing-time tier or deficiency signal is claimed. RF-17 is on the site's Flagged for Review page. No new live source fetch was made for this reconciliation; the latest evidence remains the dated 2026-11-17 sweep.
+
+**Post-merge ledger update coordination — 2026-11-18:** PR #165 carries this completion record after PR #161 had already merged. While preparing the record-only update, main advanced via PR #162; rebasing produced an append-only conflict with session `arena/8440efda-own4`. Resolved by keeping its full brief-trace completion/incident record and this session's publication record. No files other than `COORDINATION.md` changed in this follow-up.
