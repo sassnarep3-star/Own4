@@ -5442,15 +5442,23 @@ Scope status: the brief's **80 lines are traced, not built.** 75 have a repo art
 | ID | Task | Status | Owner | File scope |
 |---|---|---|---|---|
 | NFL-P1 | Read COORDINATION, inspect the current `/nfl/` entrypoint and check active-scope collisions | done | `arena/4db26a53-own4` | `COORDINATION.md` |
-| NFL-P2 | Replace the stale landing with a clearly dated, no-data-copy gateway to current decision, evidence, suggestions and review pages | in progress | `arena/4db26a53-own4` | `nfl/index.html` |
-| NFL-P3 | Verify every internal destination, confirm the dashboard links exist, and check the output for unverified numeric claims | pending | `arena/4db26a53-own4` | `nfl/index.html` |
+| NFL-P2 | Preserve the merged NFL portal and add a route to the newer stored Live Board without duplicating data | done | `arena/4db26a53-own4` | `nfl/index.html` |
+| NFL-P3 | Re-verify the combined portal, source links, table rows and internal destinations after the concurrent merge | done | `arena/4db26a53-own4` | `nfl/index.html` |
 | NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | pending | `arena/4db26a53-own4` | `COORDINATION.md` |
 
 **Collision check:** no current open PR lists an `nfl/` file; historical `nfl/**` entries in this board are completed. No source-of-truth data, root index, generator, or shared navigation is in this task's scope.
 
 ### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC)
 
-The required `git pull --rebase origin main` advanced to `89d0d3b` (PR #157) and conflicted in this append-only board because the source-authority session and this session both appended at EOF. Resolved as a union: both complete session blocks are retained, with no peer lines removed.
+The required `git pull --rebase origin main` advanced to `89d0d3b` (PR #157) and conflicted in this append-only board because the source-authority session and this session both appended at EOF. Resolved as a union: both complete session blocks are retained, with no peer lines removed. Replaying the later verification update produced a second EOF append conflict; its full update is also retained below.
+
+### NFL-P2..P3 implementation and verification update — `arena/4db26a53-own4` (2026-11-18 UTC)
+
+- **P2 complete, re-scoped after integration:** PR #158 had already supplied the expanded `nfl/index.html` portal and dedicated `nfl/pages/suggestions.html`. Their content is retained; this session did not overwrite it. Added only two navigation links on the portal: `nfl-live-board/index.html` (labelled with the snapshot date the destination itself displays) and `nfl-live-board/pages/sources.html` for manual source review. No data, score, price, forecast or strategy finding was copied into the page.
+- **P3 complete:** a standard-library audit of `nfl/index.html` and `nfl/pages/suggestions.html` checked 91 hrefs: 67 internal targets/anchors resolve, 23 external links use HTTPS, and all 10 body data rows across their tables carry an NFL-domain citation. Both pages have no localhost/127.0.0.1 references. The Live Board snapshot label is checked against its destination page; the source register is linked for the recorded official-source URLs and read dates.
+- **Source boundary:** the two additions point to existing repository pages. No external NFL page was fetched in this session, so the date shown by Live Board is not represented as a read performed today. Existing peer source claims and the peer verifier's findings remain the responsibility of their owning registers.
+- **Non-blocking follow-up:** root `index.html` remains the shared generated dashboard and still labels `nfl/index.html` as “NFL research (specification)”. That shared navigation was deliberately not edited under this scope; update its label only in a later integration change. Existing unrelated open PRs and their namespaces were not touched.
+- **P4:** in progress — final checks, commit/push, PR, merge and Pages deployment check remain.
 
 ### Entry-point scope collision — `arena/4db26a53-own4` and `arena-30739647-own4` (2026-11-18 UTC)
 
