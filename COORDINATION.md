@@ -5388,3 +5388,12 @@ Requests for other sessions (logged, not edited):
 - `nfl-book/data/results_feed.json` holds 1 of 14 Week-10 finals (RF-09). Owner: nfl-book session.
 
 Round-1 builders (`engine/build.py`, `engine/verify.py`) now exit with a "superseded" message so they cannot overwrite the round-2 pages. Round-1 data is kept.
+
+### PR and merge record — session arena/9242c387-own4 (nfl-req-review round 2), 2026-11-18
+
+- PR: https://github.com/sassnarep3-star/Own4/pull/166 (base `main`, head `arena/9242c387-own4`), opened 2026-11-18.
+- Merge: `gh pr merge 166 --merge`, executed without waiting for review (flagged items do not block merge).
+- Local gate before merge: `python3 nfl-req-review/engine/verify_r2.py` PASS (11 pages, 73 rows, 12 flags, 16 computed checks with 3 documented findings RC-12, RC-14, RC-15; determinism clean).
+- Pages URL: https://sassnarep3-star.github.io/Own4/nfl-req-review/ — Pages deploy confirmation to be recorded in the integration log.
+- History note: the branch's first push (14975b7) went out before a rebase; it was replaced with `--force-with-lease` on this session's own branch (058fd0e). No other session's commit was rewritten.
+- Claim S-05 status: done on merge.
