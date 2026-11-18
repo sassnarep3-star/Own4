@@ -5186,3 +5186,32 @@ This is a focused correction to source transparency; it does not upgrade any thi
 - Verification: ran the complete NFL Decision Desk CI rebuild chain (corpus, model, leaderboard, prices, correlations, availability, fixtures, governance, site) and verifier. **PASS**: 14 pages, 617/617 tbody rows with an HTTPS citation, all source classes match the URL host and visible label, 226 local refs, no broken links, no localhost, 14 unique titles, 0 float-sum risks. Root `python3 verification/verify_site.py` also **PASS** (14 pages, 346 sourced rows); `git diff --check` clean.
 - Official-source links listed on the Decision Desk sources page include NFL standings, schedule, injuries, and game centres. No external page was fetched during this narrow code audit; the source classes classify URL authority, not the correctness of the underlying source contents.
 - Irregularity retained and surfaced, not silently fixed: the 136-game results corpus and market prices still cite the third-party nflverse archive; they are explicitly not official NFL data. 268 of 272 fixture venues remain blank in the existing register, and 0/6 strategies qualify in the current backtest. The audit changes labels and checks only; it does not alter model/data values or treat source classification as independent verification.
+## Session `arena-30739647-own4` — NFL entry-point and reviewable suggestions (claim, 2026-11-18 UTC)
+
+**Branch (fixed by Arena):** `arena/30739647-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458` (`main`).
+
+**Repo survey:** the requested NFL research, requirement register, executive summary, suggestions, and Flagged for Review material already exists across `nfl-book/`, `nfl-decision-console/`, `nfl-req-review/`, `nfl-depth-sweep/`, and `nfl-decision-gaps/`. Their main verifiers pass on this checkout. I will not duplicate their datasets, change official-source claims, or edit root/generated navigation. The narrow gap is that the older `nfl/index.html` is dated 2026-11-02 and points only at the earlier research module, so it is not a current entry point to the later evidence and review pages.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| P1 | Replace stale NFL module entry with a compact portal pointing at current source-of-truth pages, clearly separating verified evidence, proposals, and blocked decisions | in progress | arena-30739647-own4 | `nfl/index.html` |
+| P2 | Publish a concise suggestions-for-review page with recommendations, alternatives, gates, and source links; do not represent a recommendation as a user decision or implementation | in progress | arena-30739647-own4 | `nfl/pages/suggestions.html` |
+| P3 | Re-check local navigation, page claims against linked repository registers, source links, and peer verifiers; record results here | in progress | arena-30739647-own4 | `COORDINATION.md` (append-only) |
+
+No task-board claim for this exact `nfl/index.html`/new suggestions page file scope was visible at claim time. Shared root navigation and all peer datasets are out of scope.
+
+### Session `arena-30739647-own4` — completion (2026-11-18 UTC)
+
+- **P1/P2 complete:** `nfl/index.html` is now a compact entry portal to the current NFL evidence/review workspaces rather than the stale 2026-11-02 module summary. Added `nfl/pages/suggestions.html` with six ordered recommendations, alternatives, decision gates, questions/information needed, and links to the owning registers. Root navigation and peer datasets were not changed. The `verification-2026-11-05` audit's generated coverage/flagged/report artifacts were mechanically regenerated as required by its CI freshness gate; its source code/tests were not changed.
+- **Evidence boundary:** this work presents no new game, market, injury, player or model measurements and makes no claim that external official pages were freshly fetched. It cites the established official NFL/NWS pages relevant to each decision and links to the repository's dated source registers. Recommendations remain proposals; no purchase, owner verdict, strategy promotion or deployment is implied.
+- **Verification:** custom link and table-source scan: both edited pages pass, all local links/anchors resolve, each data-table row carries an HTTPS link on an NFL/NWS/NCPG official domain, no localhost refs. `git diff --check` passes. Existing checks re-run successfully: `nfl-book/engine/verify.py` (30 pages, 932 rows, 0 errors); `nfl-decision-gaps/engine/verify.py` (9 pages, 496 table rows, 1,055 links, 0 flagged build errors); `nfl-req-review/engine/verify.py`; `verification/verify_site.py` (14 pages, 346 sourced rows). After the bounded audit initially caught two directory-style `../` links, they were changed to `../index.html`; then `verification-2026-11-05/build.py` + its six unittest checks passed and its generated static audit was refreshed. That audit still flags 44 inherited NFL table rows without HTTPS links; they are preserved as review findings, not falsely certified. Depth sweep and route verifiers also passed earlier in this session (G1–G8; 32-club consistency).
+- **Irregularities left open:** price data authorization/provider, actual starter/snap participation joins, Houston's image-only depth source, chart freshness/slot semantics, historical injury availability and joint-probability/settlement evidence remain blocked or flagged in their owning pages. No value was inferred to close these gaps.
+- **Coordination:** scope limited to `nfl/index.html`, `nfl/pages/suggestions.html`, and this append-only record. No overlap found at claim time. Claim commit was first pushed as `a4d1c4c` and was replayed as `9fb5dde` after main advanced; implementation and completion remain on `arena/30739647-own4`.
+
+| ID | Status |
+|---|---|
+| P1 | done |
+| P2 | done |
+| P3 | done |
+
+**Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
