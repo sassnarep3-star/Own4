@@ -1,0 +1,170 @@
+{
+  "dataset": "nfl_req_review_repo_review",
+  "round": "2026-11-18",
+  "session": "arena/9242c387-own4",
+  "method": "Mechanical checks (directory listing, grep, du, gh api, git plumbing) plus the round-2 reconciliations. Measured values are recorded with their date.",
+  "nfl_namespace_count": 39,
+  "open_pr_numbers": [
+    158,
+    159,
+    160,
+    161,
+    150,
+    132,
+    127,
+    119,
+    93,
+    59,
+    56,
+    47,
+    43,
+    39,
+    29
+  ],
+  "rows": [
+    {
+      "id": "RR-01",
+      "finding": "39 top-level directories are named nfl* (computed).",
+      "detail": "Overlapping namespaces publish different figures for the same questions.",
+      "evidence": "Directory listing at the repository root.",
+      "source": "https://github.com/sassnarep3-star/Own4/tree/main",
+      "class_": "irregular"
+    },
+    {
+      "id": "RR-02",
+      "finding": "Four different game counts appear for the same 2026 season: 133, 136, 137 and 150.",
+      "detail": "150 completed through Week 10 is the official value; 136 is Weeks 1-9; 137 is the feed's Weeks 1-9 plus one Week-10 game; 133 is an arithmetic error (RF-10).",
+      "evidence": "RC-02, RC-07, RC-11, RC-12.",
+      "source": "https://www.nfl.com/standings/league/2026/REG",
+      "class_": "irregular"
+    },
+    {
+      "id": "RR-03",
+      "finding": "The holdout split names 137 games and leaves 13 in no split.",
+      "detail": "See RF-11.",
+      "evidence": "nfl-book/data/holdout_split.json",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json",
+      "class_": "irregular"
+    },
+    {
+      "id": "RR-04",
+      "finding": "Round-1 Week-11 venue row says 14 fixtures; the official schedule shows 13.",
+      "detail": "See RF-08. Corrected in round 2.",
+      "evidence": "RC-08, RC-09.",
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "class_": "corrected"
+    },
+    {
+      "id": "RR-05",
+      "finding": "Round-1 standings capture is one game stale for BAL and LAC.",
+      "detail": "See RF-12. Superseded by the round-2 read.",
+      "evidence": "RC-15.",
+      "source": "https://www.nfl.com/standings/league/2026/REG",
+      "class_": "stale source"
+    },
+    {
+      "id": "RR-06",
+      "finding": "Round-1 injury totals in the text disagree with the capture's own totals.",
+      "detail": "See RF-13.",
+      "evidence": "RC-13.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "class_": "irregular"
+    },
+    {
+      "id": "RR-07",
+      "finding": "Cincinnati's listed count differs between the brief (4) and the capture (9).",
+      "detail": "See RF-14. Unresolved.",
+      "evidence": "RC-14.",
+      "source": "https://www.nfl.com/injuries/league/2026/reg10",
+      "class_": "unresolved"
+    },
+    {
+      "id": "RR-08",
+      "finding": "The sandbox clone is shallow.",
+      "detail": "Pre-registration commit history cannot be verified here (RF-18).",
+      "evidence": "`git rev-parse --is-shallow-repository` returns true.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "class_": "limitation"
+    },
+    {
+      "id": "RR-09",
+      "finding": "Open pull requests at read time: 15.",
+      "detail": "Four were opened in the 03:13-03:16 UTC window on 2026-11-18 and touch NFL content (RF-19).",
+      "evidence": "gh pr list --state open (read 2026-11-18). PR numbers: #158, #159, #160, #161, #150, #132, #127, #119, #93, #59, #56, #47, #43, #39, #29.",
+      "source": "https://github.com/sassnarep3-star/Own4/pulls",
+      "class_": "scope"
+    },
+    {
+      "id": "RR-10",
+      "finding": "COORDINATION.md is 569,341 bytes.",
+      "detail": "A single file carries claims and logs from many sessions. Hard to audit (S-09).",
+      "evidence": "Measured 2026-11-18 on the claim branch before this round's log entries.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "class_": "maintenance"
+    },
+    {
+      "id": "RR-11",
+      "finding": "No credential values in the repository.",
+      "detail": "A scan for ghp_, github_pat_, AKIA and PEM private-key headers matched one file: repo_review/REVIEW-2026-11-06.md, which names the patterns without a value.",
+      "evidence": "grep over all text files, excluding .git (2026-11-18).",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/repo_review/REVIEW-2026-11-06.md",
+      "class_": "clean"
+    },
+    {
+      "id": "RR-12",
+      "finding": "Large raw captures sit in the repository.",
+      "detail": "data/raw holds 53 MB of earlier-session captures (ESPN and NBA). This namespace uses none of them.",
+      "evidence": "du -sh on the paths, 2026-11-18.",
+      "source": "https://github.com/sassnarep3-star/Own4/tree/main/data/raw",
+      "class_": "size"
+    },
+    {
+      "id": "RR-13",
+      "finding": "Pages is built from the legacy configuration, branch main, path /.",
+      "detail": "Read via the GitHub API at the read time: status built.",
+      "evidence": "gh api repos/sassnarep3-star/Own4/pages (2026-11-18).",
+      "source": "https://sassnarep3-star.github.io/Own4/",
+      "class_": "verified"
+    },
+    {
+      "id": "RR-14",
+      "finding": "Round-1 verifier still passes on its own pages.",
+      "detail": "Ran the round-1 verify.py on the committed tree before this round: PASS.",
+      "evidence": "python3 nfl-req-review/engine/verify.py (2026-11-18, before round 2 files).",
+      "source": "https://sassnarep3-star.github.io/Own4/nfl-req-review/",
+      "class_": "verified"
+    },
+    {
+      "id": "RR-15",
+      "finding": "The results feed cites an official nfl.com URL for each row.",
+      "detail": "Every row has a source_url field; 32 rows are marked line_by_line and 105 aggregate-only (feed provenance note). 137 of 137 rows carry an nfl.com source_url.",
+      "evidence": "nfl-book/data/results_feed.json.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/results_feed.json",
+      "class_": "partly verified"
+    },
+    {
+      "id": "RR-16",
+      "finding": "Round-1 'met' verdicts were not all supported by their own artifacts.",
+      "detail": "Round 2 downgraded 8 rows (see requirements page, 'changed this round').",
+      "evidence": "Requirements page; each downgrade has its reason.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "class_": "corrected"
+    },
+    {
+      "id": "RR-18",
+      "finding": "The build sandbox cannot reach nfl.com directly.",
+      "detail": "Reads on 2026-11-18 used the page-fetch tool. A direct request returned no response, while github.com answered. CI runners are a separate network path and are not tested here.",
+      "evidence": "curl -sS --max-time 10 https://www.nfl.com/injuries/ returned HTTP 000 on 2026-11-18; the same call to https://github.com returned 200.",
+      "source": "https://www.nfl.com/injuries/",
+      "class_": "limitation"
+    },
+    {
+      "id": "RR-17",
+      "finding": "Scope of this review.",
+      "detail": "Reviewed: 32 club standings, 14 Week-10 finals, 13 Week-11 fixtures, the Week-10 Lions rows, the round-1 capture, the results feed, the holdout split, the control baseline, the price store, model outputs, removal-of-luck and demotion files. Not reviewed: Week-10 injury chunks 1-7, every other namespace line by line, and non-NFL content.",
+      "evidence": "This page and data/repo_review.json.",
+      "source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+      "class_": "scope"
+    }
+  ]
+}
