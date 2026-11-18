@@ -3,7 +3,7 @@
   "title": "Repo-wide verifier sweep of the NFL namespaces (run 2026-11-18 UTC)",
   "session": "arena/f7037afe-own4",
   "run_utc": "2026-11-18",
-  "method": "Every NFL namespace verifier in the repo was executed unchanged from the working tree of branch arena/f7037afe-own4 (based on main commit eb6d8de), with the invocation shown per row. Exit code 0 = PASS. A passing verifier proves only what that verifier checks (structure, links, source presence, determinism where it has a gate); it does not re-verify the underlying official numbers. The sweep changed no tracked file (git status clean before and after).",
+  "method": "Every NFL namespace verifier in the repo was executed unchanged from the working tree at commit ea/base eb6d8de + this branch, with the invocation shown per row. Exit code 0 = PASS. A passing verifier proves only what that verifier checks (structure, links, source presence, determinism where it has a gate); it does not re-verify the underlying official numbers. The sweep changed no tracked file (git status clean before and after).",
   "n_verifiers": 34,
   "n_pass": 34,
   "n_fail": 0,
@@ -127,7 +127,7 @@
       "command": "python3 engine/verify.py  (cwd=nfl-decision-desk)",
       "exit_code": 0,
       "status": "PASS",
-      "last_output_line": "PASS: every table row carries an https source, every local link resolves, every required page exists, no localhost references, no duplicate titles, and no published number depends on the interpreter's",
+      "last_output_line": "PASS: every table row carries a source with a checked and visible authority class; official NFL rows are distinguished from third-party/archive rows; every local link resolves, every required page exi",
       "source_url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-desk/engine/verify.py"
     },
     {
