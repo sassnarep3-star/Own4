@@ -5125,3 +5125,21 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 - **Pages:** latest build = `ee452ff`, status **built**, `pages-build-deployment` **success** (01:51:27Z). Entry points: root dashboard `https://sassnarep3-star.github.io/Own4/` → "Depth sweep — start here" → register / IR sweep / flagged / **Route Evidence** (this branch's league-404 + club-page structure sweep, DS-01..DS-13).
 - **What shipped:** the complementary route-evidence layer inside the merged `nfl-depth-sweep` namespace (`data/{teams_base,route_l,route_c}.json`, `index.html` + 5 pages + assets, `engine/{build,verify_routes}.py`, routes CI workflow), the additive "Route Evidence" nav, the deterministic `audit_repo.py` top-N fix (un-reds the live-board gate for every branch), regenerated live-board audit, and the collision record above. **Nothing from PR #155's D1–D9 was discarded.**
 - **Post-merge state:** this session's scope is complete; remaining owner/integration items unchanged: SG-C verdict still blank (evidence now on both sides), HOU machine-readable surface still open, root I-01 nav work still with `arena/9208e00a-own4`.
+
+---
+## Session `arena/f7037afe-own4` — NFL Book live re-verification, repo sweep and corrections (claim, 2026-11-18 UTC)
+
+**Scope claimed (this session only):** `nfl-book/data/verification_2026-11-18.json` (new), `nfl-book/data/verifier_sweep_2026-11-18.json` (new), `nfl-book/data/flags.json` (append-only: corrections + new flags), `nfl-book/engine/build_site.py` (render the two new datasets on the existing repo-review and flagged pages), regenerated `nfl-book/pages/**` + `nfl-book/index.html`, and this COORDINATION.md block. No other namespace is edited.
+
+**Why this scope:** the consolidated NFL hub is `nfl-book/` (linked from the root dashboard). The brief's ~100 items are mostly already represented there (69 traced requirements, questions, suggestions, flagged). The gap this session can close honestly is verification: live re-reads of official nfl.com pages, a repo-wide verifier sweep, and correction of an existing flag that the official source refutes.
+
+**Task board (this session):**
+
+| Task | Status | Owner | Files |
+|---|---|---|---|
+| T1 Live official re-reads (Week 11 schedule, Week 10 injury rows, Week 11 injury-URL state, J.J. McCarthy player page) | in progress | arena/f7037afe-own4 | nfl-book/data/verification_2026-11-18.json |
+| T2 Repo-wide verifier sweep (every NFL namespace with a verifier, run as its CI runs it) | in progress | arena/f7037afe-own4 | nfl-book/data/verifier_sweep_2026-11-18.json |
+| T3 Flags: correct FB-18 (refuted example) + add new irregularities | in progress | arena/f7037afe-own4 | nfl-book/data/flags.json |
+| T4 Render T1–T3 on repo-review + flagged pages; rebuild; verify; PR; merge; Pages check | in progress | arena/f7037afe-own4 | nfl-book/engine/build_site.py, nfl-book/pages/**, COORDINATION.md |
+
+**Overlap check:** no other claim in this board is dated after 2026-11-17 01:51Z; open PRs #150, #132, #127, #119 are stale (last update 2026-11-15 to 2026-11-17) and touch other namespaces. Claim pushed before any file in scope is changed.
