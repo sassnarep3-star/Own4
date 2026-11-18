@@ -5166,3 +5166,23 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 **Not done this session (honest scope limits):** the brief's ~100 items were not all newly built. Most are already represented in `nfl-book/` with their blocking gates (see Requirements page). Items that need sources this sandbox cannot reach or that do not exist yet — a scheduled Wed/Thu/Fri injury capture, the NFL Game Book, official per-club depth charts for HOU and all 32 clubs, official snap counts, a line-by-line live recount of the Week 10 report, venue transcription for every fixture from game centres — remain blocked and are unchanged. No value was inferred or filled in.
 
 **PR:** https://github.com/sassnarep3-star/Own4/pull/159 — `arena/f7037afe-own4` → `main` (opened 2026-11-18 UTC). Merge result recorded in the PR itself (`gh pr view 159`); this record is the pre-merge state.
+
+
+## Session `arena/66ec82ab-own4` — source-authority transparency audit (claim, 2026-11-18 UTC)
+
+Branch (fixed by Arena): `arena/66ec82ab-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458`.
+Read the coordination board before claiming. No active task owns the NFL Decision Desk source-labeling scope.
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| Make source authority visible at each NFL Decision Desk table citation; distinguish official NFL sources from third-party/archive, repository, and other links; extend the publication gate to report and validate source classes without representing third-party inputs as officially verified | in progress | arena/66ec82ab-own4 | `nfl-decision-desk/engine/site.py`, `nfl-decision-desk/engine/templates/shell_head.tpl`, `nfl-decision-desk/engine/verify.py`, generated `nfl-decision-desk/{index.html,pages/*.html}`, `COORDINATION.md` |
+
+This is a focused correction to source transparency; it does not upgrade any third-party data to official evidence, change model results, or claim unverified inputs are verified.
+
+### Source-authority transparency audit — completed 2026-11-18 UTC · `arena/66ec82ab-own4`
+
+- Updated `nfl-decision-desk/engine/site.py` so each table citation carries an authority badge based on its URL host: `OFFICIAL NFL`, `THIRD-PARTY · NOT OFFICIAL` (nflverse), `REPOSITORY RECORD · NOT OFFICIAL`, or `EXTERNAL · AUTHORITY UNVERIFIED`. Added a visible legend to the sources page and ensured the pre-registration / ablation repository citations use the same helper.
+- Extended `nfl-decision-desk/engine/verify.py` (V9) to compare each link's declared source class to its parsed URL host and require the visible class label. Reported source-class row counts: 321 official NFL, 277 third-party/not official, 48 repository records, 11 other/unverified; categories overlap when a row has links in multiple classes. Updated the executive summary's stale site count (616 → 617 rows) and documented the overlapping counts.
+- Verification: ran the complete NFL Decision Desk CI rebuild chain (corpus, model, leaderboard, prices, correlations, availability, fixtures, governance, site) and verifier. **PASS**: 14 pages, 617/617 tbody rows with an HTTPS citation, all source classes match the URL host and visible label, 226 local refs, no broken links, no localhost, 14 unique titles, 0 float-sum risks. Root `python3 verification/verify_site.py` also **PASS** (14 pages, 346 sourced rows); `git diff --check` clean.
+- Official-source links listed on the Decision Desk sources page include NFL standings, schedule, injuries, and game centres. No external page was fetched during this narrow code audit; the source classes classify URL authority, not the correctness of the underlying source contents.
+- Irregularity retained and surfaced, not silently fixed: the 136-game results corpus and market prices still cite the third-party nflverse archive; they are explicitly not official NFL data. 268 of 272 fixture venues remain blank in the existing register, and 0/6 strategies qualify in the current backtest. The audit changes labels and checks only; it does not alter model/data values or treat source classification as independent verification.

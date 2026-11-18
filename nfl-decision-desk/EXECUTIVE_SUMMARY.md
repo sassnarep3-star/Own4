@@ -88,9 +88,14 @@ python3 engine/build_corpus.py && python3 engine/model.py && python3 engine/lead
  && python3 engine/verify.py
 ```
 
-Current gate output: **14 pages · 616 table rows · 616 with an https source · 226 local refs ·
-0 broken · 0 localhost · 14 unique titles → PASS**. CI runs the same sequence and then fails on
-any diff between the rebuild and the committed pages.
+Current gate output: **14 pages · 617 table rows, all with a classified HTTPS source · 226 local refs ·
+0 broken · 0 localhost · 14 unique titles → PASS**. The source-authority audit separately reports
+321 rows citing an official NFL host, 277 citing third-party/archive sources, 48 citing repository
+records, and 11 citing other external domains; these categories overlap when a row has multiple
+citations. Third-party, repository, and other external sources are visibly labeled as not official
+or authority-unverified, and the verifier checks each label against the URL host. An HTTPS link is
+not treated as proof of official provenance. CI runs the same sequence and fails on any diff
+between the rebuild and the committed pages.
 
 ---
 
