@@ -5146,3 +5146,16 @@ This is a focused correction to source transparency; it does not upgrade any thi
 - Verification: ran the complete NFL Decision Desk CI rebuild chain (corpus, model, leaderboard, prices, correlations, availability, fixtures, governance, site) and verifier. **PASS**: 14 pages, 617/617 tbody rows with an HTTPS citation, all source classes match the URL host and visible label, 226 local refs, no broken links, no localhost, 14 unique titles, 0 float-sum risks. Root `python3 verification/verify_site.py` also **PASS** (14 pages, 346 sourced rows); `git diff --check` clean.
 - Official-source links listed on the Decision Desk sources page include NFL standings, schedule, injuries, and game centres. No external page was fetched during this narrow code audit; the source classes classify URL authority, not the correctness of the underlying source contents.
 - Irregularity retained and surfaced, not silently fixed: the 136-game results corpus and market prices still cite the third-party nflverse archive; they are explicitly not official NFL data. 268 of 272 fixture venues remain blank in the existing register, and 0/6 strategies qualify in the current backtest. The audit changes labels and checks only; it does not alter model/data values or treat source classification as independent verification.
+## Session `arena-30739647-own4` — NFL entry-point and reviewable suggestions (claim, 2026-11-18 UTC)
+
+**Branch (fixed by Arena):** `arena/30739647-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458` (`main`).
+
+**Repo survey:** the requested NFL research, requirement register, executive summary, suggestions, and Flagged for Review material already exists across `nfl-book/`, `nfl-decision-console/`, `nfl-req-review/`, `nfl-depth-sweep/`, and `nfl-decision-gaps/`. Their main verifiers pass on this checkout. I will not duplicate their datasets, change official-source claims, or edit root/generated navigation. The narrow gap is that the older `nfl/index.html` is dated 2026-11-02 and points only at the earlier research module, so it is not a current entry point to the later evidence and review pages.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| P1 | Replace stale NFL module entry with a compact portal pointing at current source-of-truth pages, clearly separating verified evidence, proposals, and blocked decisions | in progress | arena-30739647-own4 | `nfl/index.html` |
+| P2 | Publish a concise suggestions-for-review page with recommendations, alternatives, gates, and source links; do not represent a recommendation as a user decision or implementation | in progress | arena-30739647-own4 | `nfl/pages/suggestions.html` |
+| P3 | Re-check local navigation, page claims against linked repository registers, source links, and peer verifiers; record results here | in progress | arena-30739647-own4 | `COORDINATION.md` (append-only) |
+
+No task-board claim for this exact `nfl/index.html`/new suggestions page file scope was visible at claim time. Shared root navigation and all peer datasets are out of scope.
