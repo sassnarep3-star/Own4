@@ -23,6 +23,12 @@ SUG = D("suggestions.json")
 SRC = D("sources.json")
 FLAGS = D("flags.json")
 TP = D("third_party_candidate.json")
+# Dated official club-site route sweep captured 2026-11-17; consumed read-only.
+DEPTH_SWEEP = json.load(open(os.path.join(ROOT, "..", "nfl-depth-sweep", "data", "route_c.json"), encoding="utf-8"))
+DEPTH_CLUBS = DEPTH_SWEEP["rows"]
+DEPTH_TEXT = [r for r in DEPTH_CLUBS if r["structure"] == "html-table"]
+DEPTH_IMAGES = [r for r in DEPTH_CLUBS if r["structure"] != "html-table"]
+DEPTH_DATED = [r for r in DEPTH_CLUBS if r.get("as_of")]
 
 INJ_URL = "https://www.nfl.com/injuries/"
 SCHED_URL = "https://www.nfl.com/schedules/2026/by-week/week-10"
@@ -412,7 +418,11 @@ body = (
     '<li><b>Twenty-two announced-starter and roster events</b> are recorded from dated official '
     'nfl.com articles, including Drew Lock, Kyle McCord and the Lamar Jackson injured-reserve '
     'sequence. No replacement is inferred anywhere: where the league has not named a starter, the '
-    'column is blank.</li></ul>'
+    'column is blank.</li>'
+    '<li><b>Depth evidence is now bounded rather than misreported.</b> The Nov. 17 sweep found club pages '
+    'for 32/32 teams (31 HTML tables; Houston image-only), but only 5/32 charts print an as-of date. '
+    'This establishes page-route coverage only, not actual starters or playing time; those fields stay blank '
+    'until official Game Books and snap counts are joined.</li></ul>'
     % (len(G), len(FINALS), len(MISMATCH), len(WEEKS_1_9), len(WEEKS_1_9), len(WEEKS_1_9),
        CAPTURE, len(IROWS), len(ICLUBS), len(IDES), ICOUNT.get("Out", 0),
        ICOUNT.get("Questionable", 0), ICOUNT.get("Doubtful", 0))
@@ -437,8 +447,9 @@ body = (
     '<li>No market line, no residual, no closing line value, no ROI. No licensed or official price '
     'feed is connected, and the brief requires the price policy to be decided before any backtest is '
     'published.</li>'
-    '<li>No depth rank, no replacement depth, no deficiency matrix. No official depth source is '
-    'verified for all 32 clubs and no official snap-count source is connected.</li>'
+    '<li>The 2026-11-17 sweep found club depth pages for 32/32 teams (31 HTML tables; HOU image-only), '
+    'but only 5/32 charts print an as-of date. These are not verified game-day starters or snap shares; '
+    'no official snap-count join is connected, so no replacement-deficiency value is published.</li>'
     '<li>No leaderboard rows. Ranking needs 300 prospective graded games; the site has zero, and an '
     'empty leaderboard is the honest state.</li>'
     '<li>No parlay or same-game-parlay price anywhere on the site. Multiplying marginals is invalid '
@@ -454,7 +465,7 @@ print("landing + executive summary written; mismatches:", len(MISMATCH))
 
 GATE_SRC = {
     "G-PRICE": "https://www.nfl.com/",
-    "G-DEPTH": INJ_URL, "G-SNAPSHOT": INJ_URL, "G-INACTIVE": SCHED_URL,
+    "G-DEPTH": "https://www.nfl.com/teams/", "G-SNAPSHOT": INJ_URL, "G-INACTIVE": SCHED_URL,
     "G-SAMPLE": STAND["meta"]["source"], "G-CORPUS": SCHED_URL,
     "G-VENUE": "https://www.nfl.com/schedules/2026/by-week/week-11",
     "G-STADIUM": "https://www.nfl.com/schedules/2026/by-week/week-11",
@@ -748,15 +759,15 @@ for c in sorted(team_tally, key=lambda x: -team_tally[x]["out"]):
                   '<span class="blank">&mdash;</span> <span class="small">gate G-DEPTH</span>',
                   src_link("https://www.nfl.com/injuries/")])
 body = ('<p class="lead">The team-level decision view asked for in R-41: starters out, replacements named, '
-        'net injury count. Counts come from the official report captured on %s. The replacement column is '
-        'populated <i>only</i> where a dated official nfl.com article names someone &mdash; it is never '
-        'inferred from a depth chart, because no official depth source is verified for all 32 clubs.</p>'
+        'net injury count. Counts come from the official report captured on %s. Dated official-news statements '
+        'are shown only where published. Club depth-page route coverage was captured separately on 2026-11-17 '
+        '(32/32 pages; 31 HTML, HOU image-only), but charts are not game-day starter or playing-time evidence.</p>'
         % CAPTURE
         + '<div class="note"><b>Two columns are deliberately blank, and that is the finding.</b> '
           '"Replacements named" is empty for the %d clubs where the league has published no starter '
-          'statement. "Backup depth rank replacing" is empty for every club, because a rank needs a '
-          'verified depth register and none exists (G-DEPTH). Filling either column by judgement would '
-          'invent a starter the club never named.</div>'
+          'statement. "Backup depth rank replacing" is empty for every club: the chart sweep does not '
+          'establish actual game-day starters or the player who took the snaps. Filling either column by '
+          'judgement would invent a starter the club never named.</div>'
           % (len(team_tally) - len([c for c in team_tally if named.get(c)]))
         + table([("Club", ""), ("", ""), ("Listed", "n"), ("Out", "n"), ("Quest.", "n"),
                  ("Doubtful", "n"), ("DNP", "n"), ("Limited", "n"), ("Full", "n"),
@@ -777,12 +788,20 @@ open(os.path.join(OUT, "per-team.html"), "w", encoding="utf-8").write(
 
 # ----------------------------------------------------------------------- 13. depth
 drows = [
-    ["Depth rank of the replacement", '<span class="badge b-block">blocked</span>', esc("G-DEPTH"),
-     "0 of 32 clubs have a dated, sourced depth register",
-     "32 of 32 clubs with a dated depth row and a source link per row", src_link(INJ_URL)],
-    ["Deficiency matrix, offence vs defence, 1st to 4th string",
+    ["Club depth-page route coverage", '<span class="badge b-part">partial</span>', esc("G-DEPTH"),
+     "%d/32 present; %d HTML tables; %d image-only; %d charts print an as-of date" %
+     (len(DEPTH_CLUBS), len(DEPTH_TEXT), len(DEPTH_IMAGES), len(DEPTH_DATED)),
+     "32/32 dated capture records, authorized structured chart source for HOU, and chart freshness recorded per capture",
+     src_link("https://www.nfl.com/teams/")],
+    ["Depth rank of an actual game-day replacement", '<span class="badge b-block">blocked</span>', esc("G-DEPTH"),
+     "0/32 clubs with a verified starter / participation join",
+     "Official Game Book starters and official snap counts joined to availability for 32/32 clubs",
+     src_link("https://www.nfl.com/games/")],
+    ["Deficiency matrix, offense vs defense, 1st to 4th string",
      '<span class="badge b-block">blocked</span>', esc("G-DEPTH"),
-     "0 of 32 clubs", "32 of 32 clubs with verified depth slots", src_link(INJ_URL)],
+     "0/32 clubs with a verified game-day participation/depth join",
+     "32/32 structured source coverage plus official game-day starters and snap counts",
+     src_link("https://www.nfl.com/teams/")],
     ["Snap share as the starter proxy", '<span class="badge b-block">blocked</span>', esc("G-INACTIVE"),
      "0 of %d fixtures" % len(G), "official snap counts for %d of %d fixtures" % (len(G), len(G)),
      src_link(SCHED_URL)],
@@ -797,38 +816,34 @@ drows = [
      "3 seasons of designations joined to inactives", src_link(INJ_URL)],
     ["Stale-depth flag against a transactions log", '<span class="badge b-block">blocked</span>',
      esc("G-DEPTH"), "0 clubs diffed", "a connected transactions feed diffed against the register",
-     src_link("https://www.nfl.com/news/nfl-news-roundup-latest-league-updates-from-tuesday-nov-10")],
+     src_link("https://www.nfl.com/transactions/league")],
 ]
-body = ('<p class="lead">This is the part of the brief that tracks 2nd, 3rd and 4th string players '
-        'replacing starters on both sides of the ball. It is also the part that is most completely '
-        'blocked, and the reason is a single missing source rather than missing effort.</p>'
-        + '<div class="note warn"><b>Why nothing here is filled in.</b> The injury report tells you who '
-          'is on it. It does not tell you who replaces them, or whether that replacement is a 2nd or a '
-          '4th string player. That needs a depth chart or a snap count. The brief rejects jersey order, '
-          'experience and salary as proxies (R-50), and R-52 requires the depth-order source to be '
-          'resolved for all 32 clubs <i>before</i> the feature is built. Neither route has been verified, '
-          'so every depth value on this site is blank.</div>'
+club_depth_rows = [[esc(r["team"]), esc(r["abbr"]), esc(r["structure"]),
+                    esc(r.get("as_of") or "not stated"), esc(r.get("unofficial") or "not recorded"),
+                    src_link(r["source_url"], "official club page")] for r in DEPTH_CLUBS]
+body = ('<p class="lead">A 32-club official club-site route sweep was captured on 2026-11-17. It closes '
+        'the previous 0/32 <i>route-coverage</i> claim, not the game-day replacement question: 31 pages '
+        'were HTML tables and Houston was image-only; only %d charts printed an as-of date. Club charts '
+        'can be labeled unofficial and do not establish who actually started or played.</p>' % len(DEPTH_DATED)
+        + '<div class="note warn"><b>Do not promote a chart rank to a confirmed starter.</b> No official '
+          'Game Book starter / snap-count join is present. The HOU image was not transcribed by eye. '
+          'Shared and empty slots stay as groups or blanks, and jersey number, experience and salary are '
+          'not used to infer depth.</div>'
         + table([("Feature", ""), ("Status", ""), ("Gate", ""), ("Where it stands now", ""),
-                 ("Number that would clear it", ""), ("Source for the blocked value", "")], drows)
+                 ("Number that would clear it", ""), ("Source", "")], drows)
+        + '<h2>Club-by-club route evidence</h2><p class="small">Direct official club-page links and printed chart dates, if any. A capture date is not the same as a chart publication date.</p>'
+        + table([("Club", ""), ("Abbr.", ""), ("Observed structure", ""), ("Chart date printed", ""), ("Self-label", ""), ("Source", "")], club_depth_rows)
+        + '<p class="small">Full fetch/read log, including the 32 league-route 404 bodies and direct club-page URLs: '
+          '<a href="../../nfl-depth-sweep/pages/sources.html">32-club official source log</a>. That record is dated 2026-11-17; it is not a live refresh.</p>'
         + '<h2>What is not being done, by rule</h2><ul>'
         + "".join("<li><b>%s.</b> %s</li>" % (esc(a), esc(b)) for a, b in [
             ("R-50", "Rejected: deriving depth order from jersey number, experience or salary."),
             ("R-11", "Depth must be modelled from playing time, not from jersey order."),
-            ("R-33", "Depth slots are groups, not a single starter. Several clubs list more than one "
-                     "player at rank 1 in a slot; treating column 1 as the starter would fabricate a "
-                     "starter the club never named."),
+            ("R-33", "Depth slots are groups, not a single starter. Shared and empty slots stay explicit."),
             ("R-51", "Shared and empty slots must be represented faithfully, not flattened to a ranked list."),
-            ("R-52", "Resolve the depth-order source before building the backup-deficiency feature. "
-                     "Route (a) is per-club official depth pages, checked club by club; route (b) is "
-                     "snap counts. Neither is verified."),
+            ("R-52", "The 32-club page route exists; structured HOU evidence, chart freshness, and a verified game-day playing-time source remain open."),
             ("R-53", "Score injury-designation reliability before using the designation as a feature."),
-        ]) + "</ul>"
-        + '<h2>What you can see today instead</h2>'
-        + '<p>The <a href="per-team.html">per-team view</a> publishes the official count of Out, '
-          'Questionable and Doubtful players per club, and names replacements only where a dated '
-          'official nfl.com article does. That is %d clubs with counts and %d clubs with a named '
-          'starter statement. It is not a deficiency matrix, and it is not presented as one.</p>'
-          % (len(team_tally), len([c for c in team_tally if named.get(c)])))
+        ]) + "</ul>")
 open(os.path.join(OUT, "depth.html"), "w", encoding="utf-8").write(
     page("Depth & deficiency", body, "pages/depth.html",
          "The 2nd/3rd/4th-string deficiency layer, and exactly why its columns are empty."))
@@ -1034,13 +1049,18 @@ for sid, kind, url, title, method, used in SRC["rows"]:
     badge = "b-off" if kind == "official" else "b-tp"
     srows.append([esc(sid), '<span class="badge %s">%s</span>' % (badge, esc(kind)),
                   esc(title), src_link(url), esc(method), esc(used)])
-body = ('<p class="lead">Every source behind every row on this site. %d official sources published by '
-        'the NFL, and %d third-party source that is used only on the page that flags it as such. '
-        'Captured %s.</p>'
+body = ('<p class="lead">Every source behind every row on this site. %d official source-register entries '
+        'and %d third-party source-register entry, which is used only on the page that flags it as such. '
+        'The injury / results capture is dated %s; the club depth-page route sweep is dated 2026-11-17.</p>'
         % (sum(1 for r in SRC["rows"] if r[1] == "official"),
            sum(1 for r in SRC["rows"] if r[1] != "official"), CAPTURE)
         + table([("ID", ""), ("Kind", ""), ("Title", ""), ("URL", ""),
-                 ("How it was read", ""), ("Used for", "")], srows))
+                 ("How it was read", ""), ("Used for", "")], srows)
+        + '<h2>Official club depth pages (captured 2026-11-17)</h2>'
+        + '<p class="small">These direct club-site links are the sources for the route audit. Page presence is not proof of an actual starter or snap share.</p>'
+        + table([("Club", ""), ("Observed structure", ""), ("Printed chart date", ""), ("Source", "")],
+                [[esc(r["team"]), esc(r["structure"]), esc(r.get("as_of") or "not stated"),
+                  src_link(r["source_url"])] for r in DEPTH_CLUBS]))
 open(os.path.join(OUT, "sources.html"), "w", encoding="utf-8").write(
     page("Sources", body, "pages/sources.html", "Every source behind every row, and how it was read."))
 

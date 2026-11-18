@@ -5216,9 +5216,55 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 
 **Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
 
+### PR / merge / deploy record — session `arena/f7037afe-own4` (2026-11-18 UTC)
+
+- **PR #159** — `arena/f7037afe-own4` → `main`: https://github.com/sassnarep3-star/Own4/pull/159 — **MERGED** 2026-11-18T03:16:23Z, merge commit **`65fb31e`** (merge commit, `--merge`, not squashed). Checks at merge: `audit`, `validate`, and three `verify` jobs all SUCCESS; merge state CLEAN.
+- **Conflict during merge:** `origin/main` advanced with PR #157 (`89d0d3b`) while #159 was open; the only conflict was this append-only COORDINATION.md — resolved by keeping both sides (no entry discarded). The sweep was then re-run on the merged tree: the `nfl-decision-desk` verifier output changed with PR #157 and is recorded as such in `verifier_sweep_2026-11-18.json` (still 34/34 PASS). Method text re-corrected after the re-run.
+- **Pages:** build for `65fb31e` ran; by the time it finished, PR #158 (`16d4a5c`, another session) had landed on top. Latest Pages build: commit **`16d4a5c`**, status **built**, `error: null` (2026-11-18T03:17:28Z). Live check: https://sassnarep3-star.github.io/Own4/nfl-book/pages/flagged.html shows FB-19 … FB-24 with source links.
+- **Still open after this session (not changed):** PRs #150, #132, #127, #119, #93 (FB-22); Week 11 injury report not yet published (FB-20); Week 10 row count not recounted live (FB-21).
+
 **Publication record:** PR [#157](https://github.com/sassnarep3-star/Own4/pull/157) merged successfully to `main` at `2026-11-18T03:14:15Z` (squash commit [`89d0d3b`](https://github.com/sassnarep3-star/Own4/commit/89d0d3bbd4a16aa871061e1420dc10836ba44076)). Required checks passed, including `nfl-decision-desk verify`; GitHub Pages deployment run [44228979824](https://github.com/sassnarep3-star/Own4/actions/runs/44228979824) completed successfully. Published landing page: https://sassnarep3-star.github.io/Own4/nfl-decision-desk/ .
 
 **Coordination-file conflict resolution (2026-11-18 UTC):** after PRs #158 and #159 updated this append-only board, the documentation-only PR #160 conflicted at end-of-file. Rebased the fixed session branch onto current `main` and resolved by preserving the complete peer session block and appending only this publication record. No peer changes were discarded; the source-authority implementation remains in merged PR #157.
+
+---
+
+---
+
+
+---
+
+## Session `arena-4f506399-own4` — refresh stale depth-readiness claims (claim, 2026-11-18 UTC)
+
+**Branch (fixed by Arena):** `arena/4f506399-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458`.
+**Board review:** existing `nfl-origin-board/` is complete and linked from the root; no active claim on its files is listed after the prior completion. The merged `nfl-depth-sweep/` now contains a 32-club official club-page sweep that post-dates the Origin Board's Nov 16 requirement register. This follow-up reconciles only the stale depth-related readiness rows and publishes the exact remaining caveats. No other namespace or root navigation is in scope.
+
+| ID | Task | Status | Files |
+|---|---|---|---|
+| A1 | Reconcile R-06/R-43/R-45/R-51/R-52/R-75 and G-DEPTH against the committed 32-club sweep; do not overstate depth as verified starter order | claimed | `nfl-origin-board/data/requirements.json` |
+| A2 | Add a dated, sourced review flag explaining the old 0/32 claim vs newer 32/32 route coverage, with HOU image-only and page freshness/self-label caveats | claimed | `nfl-origin-board/data/flags.json`, `data/sources.json` |
+| A3 | Rebuild Origin Board pages and run its verifier plus relevant peer verifiers; confirm links and deterministic output | claimed | `nfl-origin-board/pages/**`, `nfl-origin-board/build.py` (only if needed) |
+| A4 | Record official-source basis, verification, irregularities and PR/Pages outcome | claimed | `COORDINATION.md` (append-only) |
+
+**Evidence boundary:** this is a repository evidence reconciliation, not a new live NFL read. Official source URLs are those recorded with the Nov 17 sweep: `https://www.nfl.com/teams/`, `https://www.nfl.com/depth-charts/`, and the club depth-chart URLs linked from the league teams page. HOU's image is not transcribed by eye; undated charts remain undated; no snap counts, actual starters, or replacement playing time are inferred. The two existing namespaces remain distinct; this task updates only the Origin Board's stale claim and flags the limitation.
+
+### Session `arena-4f506399-own4` — progress / verification record (2026-11-18 UTC)
+
+A1–A3 are complete. This was a cross-namespace reconciliation against the already-committed `nfl-depth-sweep` evidence, not a new live read. The 2026-11-17 route capture is recorded in `nfl-depth-sweep/data/route_c.json` and its per-URL read log at `nfl-depth-sweep/pages/sources.html`; the `nfl.com/teams/` index is the documented origin of each club host. Every updated readiness row links to the NFL team index, and the new Depth & deficiency table lists each direct club chart URL.
+
+- Reconciled R-06/R-32/R-33/R-43/R-45/R-51/R-52/R-75 and G-DEPTH. Route coverage is 32/32; 31 pages were HTML tables, HOU image-only and left blank; only 5/32 charts print an as-of date. Route/page coverage is not treated as game-day starter or participation evidence. R-45 remains blocked pending structured HOU evidence and an official Game Book / snap-count join.
+- Added RF-17 to Flagged for Review describing the stale 0/32 route claim and remaining caveats; added source S-36; generated updated dashboard, executive summary, per-team/depth, requirements, sources and flagged pages. No player-level values were inferred and no peer namespace was edited.
+- Verification: `python3 nfl-origin-board/build.py`; `python3 nfl-origin-board/verify.py` (19 pages, 1,144 source-linked table rows; 32 unique depth routes, 31 HTML + HOU image, zero broken internal links, all checks pass); `python3 nfl-depth-sweep/engine/verify.py`; `python3 nfl-depth-sweep/engine/verify_routes.py` (G1–G8 pass); `python3 verification/verify_site.py` (14 pages / 346 sourced rows); `git diff --check` pass. Source timestamps remain those of the committed 2026-11-17 sweep; no claim of a Nov 18 source refresh is made.
+- Irregularities retained for review: HOU's image was not transcribed; 27 club pages do not print an as-of date; chart self-labels vary (several unofficial); no official starter / snap share join is available here. These do not block publishing this evidence correction.
+- A4 (PR, merge and Pages confirmation) remains in progress pending publication.
+
+**Rebase / conflict log — 2026-11-18:** while PR #161 was being prepared, `origin/main` advanced to `89d0d3b` (PR #157, source-authority transparency). Rebasing this branch conflicted in `COORDINATION.md` only because both sessions append to the shared board. Resolved by retaining the complete peer `arena/66ec82ab-own4` source-authority claim/completion block and this session's claim block; no peer text or file changes were discarded. Re-ran the Origin Board, depth-sweep, route-evidence and root verifiers after the rebase; all pass. PR mergeability/checks are being re-evaluated against the rebased head.
+
+**Push-lineage note — 2026-11-18:** after the successful rebase onto `origin/main`, a required `git pull --rebase origin arena/4f506399-own4` attempted to reapply the newly rebased `main` commit onto the branch's older pre-rebase remote tip and conflicted in the append-only board. Aborted that redundant rebase without losing changes; the already successful rebase onto current `origin/main` is intact. The branch update will use `--force-with-lease` so the remote tip is replaced only if it still equals the observed pre-rebase tip.
+
+**Second base advance — 2026-11-18:** before merge, `origin/main` advanced again to `16d4a5c` (PR #158 NFL portal and PR #159 NFL Book refresh). Rebased onto that latest main; the only conflict was the shared append-only `COORDINATION.md`. Resolved by unioning the complete peer claims/completion records for sessions `arena/f7037afe-own4` and `arena/30739647-own4` with this session's records. No peer implementation files overlapped or were changed. Re-ran all scoped build/verifier gates and root link verification after resolving.
+
+**Third base advance / merge conflict — 2026-11-18:** after the checks on PR #161 passed, `origin/main` advanced to `947c2e6` (PR #160 publication record for the source-authority audit). The first merge attempt correctly failed because the PR base had moved. `git pull --rebase origin main` rebased this branch onto the new main and conflicted only in `COORDINATION.md`; resolved by retaining the peer's PR #160 deployment/publication record and all of this session's append-only records. No data or code from another namespace was changed. A fresh push/check run is required before merge.
 
 ---
 

@@ -29,8 +29,8 @@ expected = {
     "questions.json": {"rows": 30},
     "suggestions.json": {"rows": 24},
     "official_evidence.json": {"rows": 22},
-    "flags.json": {"rows": 16},
-    "sources.json": {"rows": 35},
+    "flags.json": {"rows": 17},
+    "sources.json": {"rows": 36},
     "week11_schedule.json": {"games": 13},
     "third_party_candidate.json": {"rows": 150},
 }
@@ -39,6 +39,23 @@ for fn, exp in expected.items():
     for k, v in exp.items():
         got = len(d[k]) if isinstance(d[k], list) else d[k]
         check("drift alarm: %s %s == %d" % (fn, k, v), got == v, "got %s" % got)
+
+# Cross-namespace freshness guard: the previous 0/32 route statement was superseded
+# by the dated official club-page sweep. Check the evidence rather than trusting prose.
+depth_path = os.path.join(ROOT, "..", "nfl-depth-sweep", "data", "route_c.json")
+depth = json.load(open(depth_path, encoding="utf-8"))["rows"]
+check("official depth route sweep covers 32 unique clubs",
+      len(depth) == 32 and len({r["abbr"] for r in depth}) == 32)
+check("official depth route sweep: 31 HTML tables, one image-only page",
+      sum(r["structure"] == "html-table" for r in depth) == 31 and
+      sum(r["structure"] != "html-table" for r in depth) == 1)
+check("Houston remains image-only, never parsed from the image",
+      next((r["structure"] for r in depth if r["abbr"] == "HOU"), None) == "image (no HTML table)")
+req_rows = json.load(open(os.path.join(ROOT, "data", "requirements.json"), encoding="utf-8"))["rows"]
+req_by_id = {r[0]: r for r in req_rows}
+check("depth readiness rows distinguish route coverage from participation",
+      all(req_by_id[rid][3] != "blocked" for rid in ("R-06", "R-32", "R-33", "R-43", "R-51", "R-52")) and
+      req_by_id["R-45"][3] == "blocked" and "0/32" in req_by_id["R-45"][5])
 
 # required fields per row type
 inj = json.load(open(os.path.join(ROOT, "data", "injuries_week10.json"), encoding="utf-8"))["rows"]
