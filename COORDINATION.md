@@ -5215,3 +5215,10 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 | P3 | done |
 
 **Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
+
+### PR / merge / deploy record — session `arena/f7037afe-own4` (2026-11-18 UTC)
+
+- **PR #159** — `arena/f7037afe-own4` → `main`: https://github.com/sassnarep3-star/Own4/pull/159 — **MERGED** 2026-11-18T03:16:23Z, merge commit **`65fb31e`** (merge commit, `--merge`, not squashed). Checks at merge: `audit`, `validate`, and three `verify` jobs all SUCCESS; merge state CLEAN.
+- **Conflict during merge:** `origin/main` advanced with PR #157 (`89d0d3b`) while #159 was open; the only conflict was this append-only COORDINATION.md — resolved by keeping both sides (no entry discarded). The sweep was then re-run on the merged tree: the `nfl-decision-desk` verifier output changed with PR #157 and is recorded as such in `verifier_sweep_2026-11-18.json` (still 34/34 PASS). Method text re-corrected after the re-run.
+- **Pages:** build for `65fb31e` ran; by the time it finished, PR #158 (`16d4a5c`, another session) had landed on top. Latest Pages build: commit **`16d4a5c`**, status **built**, `error: null` (2026-11-18T03:17:28Z). Live check: https://sassnarep3-star.github.io/Own4/nfl-book/pages/flagged.html shows FB-19 … FB-24 with source links.
+- **Still open after this session (not changed):** PRs #150, #132, #127, #119, #93 (FB-22); Week 11 injury report not yet published (FB-20); Week 10 row count not recounted live (FB-21).
