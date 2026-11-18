@@ -56,7 +56,11 @@ border-radius:0 7px 7px 0;margin:14px 0;font-size:13px;color:#1c3a63}
 .note.ok{border-color:var(--ok);background:var(--okbg);color:#0a4d33}
 footer{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);
 font-size:12px;color:var(--ink3);max-width:95ch}
-.src{font-size:11.5px;white-space:nowrap}
+.src{font-size:11.5px;white-space:normal}
+.source-tag{display:inline-block;margin-left:4px;padding:1px 4px;border-radius:4px;font-size:9px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
+.source-official-nfl{background:var(--okbg);color:var(--ok)}
+.source-third-party,.source-external{background:var(--warnbg);color:var(--warn)}
+.source-repository{background:#eef1f5;color:var(--ink3)}
 details{margin:8px 0}summary{cursor:pointer;font-weight:600;font-size:13.5px;color:var(--ink)}
 .kv{font-size:12.5px}.kv b{color:var(--ink)}
 @media(max-width:860px){.wrap{flex-direction:column}.side{width:100%;flex:none;position:static;
