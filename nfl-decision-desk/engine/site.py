@@ -11,6 +11,7 @@ from __future__ import annotations
 import html
 import json
 import os
+from urllib.parse import urlparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)                      # nfl-decision-desk/
@@ -27,10 +28,27 @@ def esc(x):
     return html.escape("" if x is None else str(x), quote=True)
 
 
+def source_class(url):
+    """Classify source authority without treating HTTPS as proof of official status."""
+    parsed = urlparse(url or "")
+    host = (parsed.hostname or "").lower().rstrip(".")
+    path = parsed.path.lower()
+    if host == "nfl.com" or host.endswith(".nfl.com"):
+        return "official-nfl", "OFFICIAL NFL"
+    if host == "github.com" and path.startswith("/nflverse/nfldata/"):
+        return "third-party", "THIRD-PARTY · NOT OFFICIAL"
+    if host == "github.com" and path.startswith("/sassnarep3-star/own4"):
+        return "repository", "REPOSITORY RECORD · NOT OFFICIAL"
+    return "external", "EXTERNAL · AUTHORITY UNVERIFIED"
+
+
 def link(url, text=None):
     if not url:
         return '<span class="blank">no source</span>'
-    return '<a class="src" href="%s" rel="noopener">%s</a>' % (esc(url), esc(text or url))
+    kind, label = source_class(url)
+    return ('<a class="src" data-source-class="%s" href="%s" rel="noopener">%s '
+            '<span class="source-tag source-%s">%s</span></a>') % (
+                esc(kind), esc(url), esc(text or url), esc(kind), esc(label))
 
 
 def blank(reason="not sourced"):
@@ -564,10 +582,10 @@ def page_prices():
     return shell("PR", "Prices", "Data", "".join(body))
 
 
-REGSRC = ('<a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/'
-          'nfl-decision-desk/data/preregistration.json" rel="noopener">preregistration.json</a>')
-ABL = ('<a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/'
-       'nfl-decision-desk/data/model/ablation.json" rel="noopener">ablation.json</a>')
+REGSRC = link("https://github.com/sassnarep3-star/Own4/blob/main/"
+              "nfl-decision-desk/data/preregistration.json", "preregistration.json")
+ABL = link("https://github.com/sassnarep3-star/Own4/blob/main/"
+           "nfl-decision-desk/data/model/ablation.json", "ablation.json")
 
 
 def page_model():
@@ -954,6 +972,12 @@ def page_sources():
     body = ['<h1>Sources</h1>']
     body.append('<p class="lede">Every page actually read this session, what it was used for, and whether '
                 'it is official. Nothing on this site cites a source that was not opened.</p>')
+    body.append('<div class="note warn"><b>Authority labels are explicit throughout the tables.</b> '
+                '<span class="source-tag source-official-nfl">OFFICIAL NFL</span> identifies an NFL-hosted source. '
+                '<span class="source-tag source-third-party">THIRD-PARTY · NOT OFFICIAL</span> identifies the '
+                'nflverse archive; it is not an official NFL results or price feed. Repository links are records '
+                'in this project, not independent confirmation. Other domains are marked authority unverified. '
+                'The publication gate checks that these labels match each URL host.</div>')
     rows = [
         ["Official", "https://www.nfl.com/standings/league/2026/REG", "2026 league standings, all 32 clubs",
          "reconciliation target for W-L-T and PF/PA", "read (2 chunks)"],
