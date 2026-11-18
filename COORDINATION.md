@@ -5337,3 +5337,26 @@ A1–A3 are complete. This was a cross-namespace reconciliation against the alre
 **Still blocked / flagged:** HOU is image-only and not transcribed; 27 charts do not print their own as-of date; chart self-labels vary; actual starters, inactives and snap counts are not joined, so no replacement playing-time tier or deficiency signal is claimed. RF-17 is on the site's Flagged for Review page. No new live source fetch was made for this reconciliation; the latest evidence remains the dated 2026-11-17 sweep.
 
 **Post-merge ledger update coordination — 2026-11-18:** PR #165 carries this completion record after PR #161 had already merged. While preparing the record-only update, main advanced via PR #162; rebasing produced an append-only conflict with session `arena/8440efda-own4`. Resolved by keeping its full brief-trace completion/incident record and this session's publication record. No files other than `COORDINATION.md` changed in this follow-up.
+
+
+## Session `arena/9242c387-own4` — round 2 of the NFL requirement register + repo review (claim, 2026-11-18 UTC)
+
+**Branch (fixed by the harness for this session):** `arena/9242c387-own4`, branched from `main` at
+`eb6d8de` (PR #156). The protocol's suggested `session-<id>/<task>` branch naming is superseded by the
+fixed branch assigned to this session; no other branch is created or pushed.
+**Start state:** clean tree, 0 ahead / 0 behind `origin/main` at claim time. No active claim on
+`nfl-req-review/` on the board (its round 1, `arena/ca159db5-own4`, is complete and merged as PR #152).
+
+**Scope claimed (exclusive):** `nfl-req-review/**` (round 2: re-verification of the 73-row register
+against official reads dated 2026-11-18, audit of every `met` verdict, questions/suggestions/executive
+summary/repo-review pages, flags), `.github/workflows/nfl-req-review.yml` (only if the gate needs it),
+and this append-only log in `COORDINATION.md`. No peer namespace, root `index.html`, `verification/**`
+or `verified/**` is edited; a root-nav entry is requested in the log below instead.
+
+| ID | Task | Status | Files touched (claimed scope) |
+|----|------|--------|------------------------------|
+| S-01 | Claim scope, read board, confirm no peer claims this namespace | done | `COORDINATION.md` (append-only) |
+| S-02 | Official re-reads dated 2026-11-18: NFL injury report (Week 10 still shown), Week 11 schedule, Lions designations, standings | in progress | `nfl-req-review/data/official_reads_2026_11_18.json` |
+| S-03 | Audit every `met` verdict against the artifact it cites (file exists, source supports the claim); downgrade what the evidence does not support, with reason | in progress | `nfl-req-review/data/requirements_2026_11_18.json` |
+| S-04 | Questions & answers, suggestions (choose-a-path, no implementation), executive summary, repo review page | in progress | `nfl-req-review/pages/*.html`, `nfl-req-review/data/*.json`, `nfl-req-review/EXECUTIVE_SUMMARY.md` |
+| S-05 | Rebuild, verifier PASS (links, row sources, no placeholders, determinism), PR → merge → Pages check | pending | `nfl-req-review/**`, `COORDINATION.md` |
