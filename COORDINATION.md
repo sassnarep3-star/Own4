@@ -5239,6 +5239,14 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 
 ---
 
+
+
+### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC, follow-up)
+
+Before this push, `git pull --rebase origin main` advanced the base from `16d4a5c` to `d7e02b4` while PRs #160–#165 were integrated. It conflicted only in this append-only coordination board as the main-side publication/completion blocks and this session's claim both occupied EOF. Resolved by retaining the full main-side blocks and this session's full claim; no peer implementation or evidence was discarded. The subsequent gateway update will be replayed additively against the merged portal.
+
+---
+
 ---
 
 
@@ -5417,3 +5425,73 @@ Round-1 builders (`engine/build.py`, `engine/verify.py`) now exit with a "supers
 Live pages fetched after the deploy (2026-11-18): `https://sassnarep3-star.github.io/Own4/nfl-brief-trace/` and `…/nfl-brief-trace/pages/flagged.html` (F11 wording and the current 17 / 29 / 33 counts visible on the live page after a cache-busting re-fetch).
 
 Scope status: the brief's **80 lines are traced, not built.** 75 have a repo artifact, 1 is third-party only, 3 are gaps, 1 is a process item, 0 are broken. Official-source checks covered 6 URLs (5 usable). Open items are the owner decisions and suggestions S1–S8 in `nfl-brief-trace/EXECUTIVE_SUMMARY.md`. A merge conflict on this board occurred on each merge (appended-tail collisions); resolved with append-only unions, no entries dropped.
+
+---
+
+---
+
+---
+
+---
+
+## Session `arena/4db26a53-own4` — NFL entrypoint freshness and routing (claim, 2026-11-18 UTC)
+
+**Branch (platform-pinned):** `arena/4db26a53-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458` (`main`). The requested task-specific branch naming convention was unavailable in this environment; this harness-assigned branch was used, with no alternate branch created.
+**Scope:** `nfl/index.html` and this append-only coordination record only. The legacy `/nfl/` landing is stamped 2026-11-02 while the repository contains newer NFL analysis pages. This task will make `/nfl/` a small, explicit gateway to the latest *stored* NFL workspaces and their existing evidence pages; it will not copy or reconcile data, edit another namespace, change the shared root dashboard/navigation, or claim a fresh official read. The current live-board page itself labels its snapshot 2026-11-17. Existing open PRs do not include `nfl/` files; PR #150's `nfl-live-board` scope is left untouched.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| NFL-P1 | Read COORDINATION, inspect the current `/nfl/` entrypoint and check active-scope collisions | done | `arena/4db26a53-own4` | `COORDINATION.md` |
+| NFL-P2 | Preserve the merged NFL portal and add a route to the newer stored Live Board without duplicating data | done | `arena/4db26a53-own4` | `nfl/index.html` |
+| NFL-P3 | Re-verify the combined portal, source links, table rows and internal destinations after the concurrent merge | done | `arena/4db26a53-own4` | `nfl/index.html` |
+| NFL-P4 | Record verification and any limitations here; commit/push, open PR, and confirm CI/Pages if the PR can be merged without breaking the site | in progress | `arena/4db26a53-own4` | `COORDINATION.md` |
+
+**Collision check:** no current open PR lists an `nfl/` file; historical `nfl/**` entries in this board are completed. No source-of-truth data, root index, generator, or shared navigation is in this task's scope.
+
+### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC)
+
+The required `git pull --rebase origin main` advanced to `89d0d3b` (PR #157) and conflicted in this append-only board because the source-authority session and this session both appended at EOF. Resolved as a union: both complete session blocks are retained, with no peer lines removed. Replaying the later verification update produced a second EOF append conflict; its full update is also retained below.
+
+### NFL-P2..P3 implementation and verification update — `arena/4db26a53-own4` (2026-11-18 UTC)
+
+- **P2 complete, re-scoped after integration:** PR #158 had already supplied the expanded `nfl/index.html` portal and dedicated `nfl/pages/suggestions.html`. Their content is retained; this session did not overwrite it. Added only two navigation links on the portal: `nfl-live-board/index.html` (labelled with the snapshot date the destination itself displays) and `nfl-live-board/pages/sources.html` for manual source review. No data, score, price, forecast or strategy finding was copied into the page.
+- **P3 complete:** a standard-library audit of `nfl/index.html` and `nfl/pages/suggestions.html` checked 91 hrefs: 68 internal targets/fragments resolve, 23 external links use HTTPS, and all 10 body data rows across their tables carry an NFL-domain citation. Both pages have no localhost/127.0.0.1 references. The Live Board snapshot label is checked against its destination page; the source register is linked for the recorded official-source URLs and read dates.
+- **Source boundary:** the two additions point to existing repository pages. No external NFL page was fetched in this session, so the date shown by Live Board is not represented as a read performed today. Existing peer source claims and the peer verifier's findings remain the responsibility of their owning registers.
+- **Non-blocking follow-up:** root `index.html` remains the shared generated dashboard and still labels `nfl/index.html` as “NFL research (specification)”. That shared navigation was deliberately not edited under this scope; update its label only in a later integration change. Existing unrelated open PRs and their namespaces were not touched.
+- **P4:** in progress — PR #169 is open; local verification and all reported CI checks pass. Merge and Pages deployment confirmation remain.
+
+### Entry-point scope collision — `arena/4db26a53-own4` and `arena-30739647-own4` (2026-11-18 UTC)
+
+During the required rebase, main advanced to `16d4a5c` (PRs #159 and #158). PR #158 had already merged the peer's expanded `nfl/index.html` portal and `nfl/pages/suggestions.html` from the same starting commit; this was a genuine visibility race because both claims existed only on separate branches before integration. Resolution: retain the peer's expanded portal and suggestion page; no peer section or data is removed. This session adds two navigation links only. Narrow this session's remaining implementation to two additive links from that portal to the `nfl-live-board` snapshot and its source register, then re-verify the combined page and log the supersession. No other peer files will be changed. Replaying the final one-line coordination cleanup also conflicted at EOF; resolved by retaining this single P4/collision record and the complete peer block.
+
+
+
+### Rebase union note — `arena/4db26a53-own4` (2026-11-18 UTC)
+
+This second conflict hunk contained the complete main-side depth-readiness and brief-trace session records plus this session's claim. Kept the full peer records and the full claim; no source, finding, or task line was dropped. The rebase then completed successfully: the portal retained the already-merged NFL Decision Hub and this branch's only page changes are the two additive Live Board links.
+
+
+### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC, after PR #166)
+
+Rebasing onto `1f8483d` (PR #166) conflicted only in this append-only board with the `arena/9242c387-own4` round-2 requirements-review entry. Kept that complete peer block and this session's claim; no peer text or evidence was removed.
+
+
+### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC, after PRs #167–#168)
+
+The required rebase advanced from `1f8483d` to `561dfeb` as PRs #167 and #168 merged. The conflict was limited to this append-only board, where the new PR #166 publication record met this session's claim. Both complete blocks are retained; no peer page, source, or implementation was changed.
+
+
+### Rebase conflict record — `arena/4db26a53-own4` (2026-11-18 UTC, after PR #170)
+
+Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordination board. Preserved the main-side completion/deployment record and this session's full NFL portal claim and verification notes; no peer or task record was dropped.
+
+### PR #169 — pre-merge verification record (2026-11-18 UTC)
+
+- **PR:** [#169](https://github.com/sassnarep3-star/Own4/pull/169), `arena/4db26a53-own4` → `main`, “Add dated Live Board links to NFL portal.” Its only site-page changes are the two in-scope links in `nfl/index.html`; it leaves `nfl/pages/suggestions.html` and `index.html` unchanged.
+- **Local verification after rebasing onto `561dfeb`:** `nfl-book/engine/verify.py`, `nfl-req-review/engine/verify_r2.py`, `nfl-depth-sweep/engine/verify.py`, `nfl-depth-sweep/engine/verify_routes.py`, `nfl-live-board/verify.py`, `nfl-consolidated/engine/verify.py`, `nfl-decision-console/engine/verify_site.py`, `nfl-origin-board/verify.py`, `verification/verify_site.py`, `scripts/check_site.py`, and `scripts/verify_data.py` all completed successfully. Round-1 `nfl-req-review/engine/verify.py` is intentionally superseded and exits with a notice; the round-2 verifier is the applicable gate.
+- **Portal audit:** 91 hrefs; 68 internal targets/fragments resolve and 23 external links are HTTPS; all 10 body data rows have NFL-domain citations; the two Live Board routes and `2026-11-17` stored-snapshot label match; no localhost references. `git diff --check` and the conflict-marker scan passed.
+- **Remaining unrelated data warning:** `scripts/verify_data.py` flags the existing, unresolved DAL (0.33) and ATL (0.19) PTS/game differences. This link-only PR changes neither value.
+- **PR checks:** a successful check set was observed on the implementation head; checks are being re-evaluated for this appended verification record. Merge and Pages confirmation are pending and will be logged after completion.
+- No official NFL page was fetched in this task. `2026-11-17` remains the date of the stored snapshot, not a fresh read.
+
+
