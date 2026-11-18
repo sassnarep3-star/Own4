@@ -1,5 +1,20 @@
 # NFL Book — Executive Summary
 
+## Update · 2026-11-18 UTC (session `arena/f7037afe-own4`)
+
+- **Week 11 schedule re-read live from nfl.com:** 13 games, 6 byes, matchups and kickoff times identical to the committed slate (`data/verification_2026-11-18.json` V18-01, PASS).
+- **Week 10 Lions game-status cells** (Joseph, Mays, Reed) re-read: all three *Out* on the official report (V18-02, PASS). Old blank-cell irregularity resolved for these rows.
+- **Week 11 injury report:** not yet published at read time; Week 11 availability stays blank (V18-05, PENDING, FB-20).
+- **Week 10 row count:** the committed transcript holds 347 rows and is internally consistent, but the live page was not recounted; the brief's 279/254 figures are not reproduced (V18-04, FLAG, FB-21).
+- **Correction:** flag FB-18's J.J. McCarthy example is refuted by his nfl.com player page (listed with the Giants). Kept for the record as FB-19.
+- **Repo sweep:** 34 of 34 NFL namespace verifiers pass when run as their CI runs them (`data/verifier_sweep_2026-11-18.json`). A verifier pass checks structure and links, not the underlying numbers.
+- **Open items for an owner decision:** five stale open PRs (FB-22); definitional rows without links (FB-24).
+
+Nothing in this update changes a number in the rest of this document.
+
+---
+
+
 **Session:** `arena/c8969a10-own4` · **Date:** 2026-11-14 UTC · **Namespace:** `nfl-book/`
 
 ## What was built

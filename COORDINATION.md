@@ -5216,6 +5216,10 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 
 **Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
 
+**Publication record:** PR [#157](https://github.com/sassnarep3-star/Own4/pull/157) merged successfully to `main` at `2026-11-18T03:14:15Z` (squash commit [`89d0d3b`](https://github.com/sassnarep3-star/Own4/commit/89d0d3bbd4a16aa871061e1420dc10836ba44076)). Required checks passed, including `nfl-decision-desk verify`; GitHub Pages deployment run [44228979824](https://github.com/sassnarep3-star/Own4/actions/runs/44228979824) completed successfully. Published landing page: https://sassnarep3-star.github.io/Own4/nfl-decision-desk/ .
+
+**Coordination-file conflict resolution (2026-11-18 UTC):** after PRs #158 and #159 updated this append-only board, the documentation-only PR #160 conflicted at end-of-file. Rebased the fixed session branch onto current `main` and resolved by preserving the complete peer session block and appending only this publication record. No peer changes were discarded; the source-authority implementation remains in merged PR #157.
+
 ---
 
 ## Session `arena/8440efda-own4` — claim: brief-to-artifact traceability + repo review (2026-11-18 UTC)

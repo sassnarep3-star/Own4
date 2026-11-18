@@ -178,6 +178,8 @@ def build():
     flags = load("flags.json")
     sources = load("sources.json")
     rr = load("repo_review.json")
+    v18 = load("verification_2026-11-18.json")
+    vsw = load("verifier_sweep_2026-11-18.json")
     dem = load("demotion_eval.json")
     card = load("model_card.json")
     # gap-closure datasets (session arena/20f55d17-own4)
@@ -703,11 +705,25 @@ No official depth chart exists (FB-07); everything else stays blank.</div>
                  badge("yes", "good") if i["verifier"] else badge("no", "warn"),
                  esc(str(i["root_nav"])), src("https://github.com/sassnarep3-star/Own4", "repo")]
                 for i in rr["inventory"]]
+    v18_badge = {"PASS": "good", "REFUTED": "warn", "FLAG": "warn", "PENDING": "info"}
+    v18_rows = [[f'<b>{esc(c["id"])}</b>', badge(c["result"], v18_badge.get(c["result"], "info")),
+                 esc(c["item"]), esc(c["detail"]), src(c["source_url"], "official source")]
+                for c in v18["checks"]]
+    vs_rows = [[f'<b>{esc(r["id"])}</b>', badge(r["status"], "good" if r["status"] == "PASS" else "bad"),
+                esc(r["namespace"]), f'<code>{esc(r["command"])}</code>', esc(r["last_output_line"]),
+                src(r["source_url"], "verifier file")]
+               for r in vsw["rows"]]
     body = f"""<h1>Repo review</h1>
 <p class="lead">{esc(rr["method"])}</p>
 {table(["ID", "Severity", "Finding", "Action", "Source"], r_rows)}
 <h2>Namespace inventory</h2>
-{table(["Namespace", "HTML pages", "Verifier", "Root nav", "Source"], inv_rows)}"""
+{table(["Namespace", "HTML pages", "Verifier", "Root nav", "Source"], inv_rows)}
+<h2>Live official re-reads · {esc(v18["verified_utc"])}</h2>
+<p class="lead">{esc(v18["method"])}</p>
+{table(["ID", "Result", "Check", "Detail", "Source"], v18_rows)}
+<h2>Verifier sweep · {esc(vsw["run_utc"])} · {vsw["n_pass"]} of {vsw["n_verifiers"]} pass, {vsw["n_fail"]} fail</h2>
+<p class="lead">{esc(vsw["method"])} {esc(vsw["note"])}</p>
+{table(["ID", "Status", "Namespace", "Command", "Last output line", "Source"], vs_rows)}"""
     page("pages/repo-review.html", "Repo review", body)
 
     # ---------------- sources ----------------
