@@ -5159,3 +5159,17 @@ This is a focused correction to source transparency; it does not upgrade any thi
 | P3 | Re-check local navigation, page claims against linked repository registers, source links, and peer verifiers; record results here | in progress | arena-30739647-own4 | `COORDINATION.md` (append-only) |
 
 No task-board claim for this exact `nfl/index.html`/new suggestions page file scope was visible at claim time. Shared root navigation and all peer datasets are out of scope.
+
+### Session `arena-30739647-own4` — completion (2026-11-18 UTC)
+
+- **P1/P2 complete:** `nfl/index.html` is now a compact entry portal to the current NFL evidence/review workspaces rather than the stale 2026-11-02 module summary. Added `nfl/pages/suggestions.html` with six ordered recommendations, alternatives, decision gates, questions/information needed, and links to the owning registers. No peer data, root navigation, or generated artifacts were changed.
+- **Evidence boundary:** this work presents no new game, market, injury, player or model measurements and makes no claim that external official pages were freshly fetched. It cites the established official NFL/NWS pages relevant to each decision and links to the repository's dated source registers. Recommendations remain proposals; no purchase, owner verdict, strategy promotion or deployment is implied.
+- **Verification:** custom link and table-source scan: both edited pages pass, all local links/anchors resolve, each data-table row carries an HTTPS link on an NFL/NWS/NCPG official domain, no localhost refs. `git diff --check` passes. Existing checks re-run successfully: `nfl-book/engine/verify.py` (30 pages, 932 rows, 0 errors); `nfl-decision-gaps/engine/verify.py` (9 pages, 496 table rows, 1,055 links, 0 flagged build errors); `nfl-req-review/engine/verify.py`; `verification/verify_site.py` (14 pages, 346 sourced rows). Depth sweep and route verifiers also passed earlier in this session (G1–G8; 32-club consistency).
+- **Irregularities left open:** price data authorization/provider, actual starter/snap participation joins, Houston's image-only depth source, chart freshness/slot semantics, historical injury availability and joint-probability/settlement evidence remain blocked or flagged in their owning pages. No value was inferred to close these gaps.
+- **Coordination:** scope limited to `nfl/index.html`, `nfl/pages/suggestions.html`, and this append-only record. No overlap found at claim time. Claim commit `a4d1c4c` was pushed to the fixed session branch after `git pull --rebase origin main`; implementation and completion remain on `arena/30739647-own4`.
+
+| ID | Status |
+|---|---|
+| P1 | done |
+| P2 | done |
+| P3 | done |
