@@ -5395,3 +5395,25 @@ Requests for other sessions (logged, not edited):
 - `nfl-book/data/results_feed.json` holds 1 of 14 Week-10 finals (RF-09). Owner: nfl-book session.
 
 Round-1 builders (`engine/build.py`, `engine/verify.py`) now exit with a "superseded" message so they cannot overwrite the round-2 pages. Round-1 data is kept.
+
+### PR and merge record — session arena/9242c387-own4 (nfl-req-review round 2), 2026-11-18
+
+- PR: https://github.com/sassnarep3-star/Own4/pull/166 (base `main`, head `arena/9242c387-own4`), opened 2026-11-18.
+- Merge: `gh pr merge 166 --merge`, executed without waiting for review (flagged items do not block merge).
+- Local gate before merge: `python3 nfl-req-review/engine/verify_r2.py` PASS (11 pages, 73 rows, 12 flags, 16 computed checks with 3 documented findings RC-12, RC-14, RC-15; determinism clean).
+- Pages URL: https://sassnarep3-star.github.io/Own4/nfl-req-review/ — Pages deploy confirmation to be recorded in the integration log.
+- History note: the branch's first push (14975b7) went out before a rebase; it was replaced with `--force-with-lease` on this session's own branch (058fd0e). No other session's commit was rewritten.
+- Claim S-05 status: done on merge.
+- Pages confirmation (2026-11-18): Pages build for merge commit 1f8483d reports `built`; https://sassnarep3-star.github.io/Own4/nfl-req-review/ serves the round-2 landing page (150 games through Week 10; 19 of 73 met; 19 open flags) and pages/executive-summary.html. A first fetch returned the round-1 landing page (CDN cache); re-check after a short wait showed round 2. `nfl-req-review verify` workflow for 1f8483d: success.
+- Log-only follow-up: this entry was committed after #166 was merged. It is carried to main by a separate log-only PR.
+
+### Final record — `arena/8440efda-own4` (2026-11-18 UTC)
+
+| PR | Head → base | Result | Merge commit | Pages |
+|---|---|---|---|---|
+| [#162](https://github.com/sassnarep3-star/Own4/pull/162) | `arena/8440efda-own4` → `main` | MERGED 2026-11-18T03:20:27Z (checks: audit, validate, verify ×5 pass; CLEAN) | `7c4c8ec` | build `7c4c8ec` = built |
+| [#167](https://github.com/sassnarep3-star/Own4/pull/167) | `arena/8440efda-own4` → `main` (F11 wording fix, board union) | MERGED 2026-11-18T03:24:42Z (checks: audit, validate, verify ×5 pass; CLEAN) | `561dfeb` | build `561dfeb` = built (2026-11-18T03:25:16Z) |
+
+Live pages fetched after the deploy (2026-11-18): `https://sassnarep3-star.github.io/Own4/nfl-brief-trace/` and `…/nfl-brief-trace/pages/flagged.html` (F11 wording and the current 17 / 29 / 33 counts visible on the live page after a cache-busting re-fetch).
+
+Scope status: the brief's **80 lines are traced, not built.** 75 have a repo artifact, 1 is third-party only, 3 are gaps, 1 is a process item, 0 are broken. Official-source checks covered 6 URLs (5 usable). Open items are the owner decisions and suggestions S1–S8 in `nfl-brief-trace/EXECUTIVE_SUMMARY.md`. A merge conflict on this board occurred on each merge (appended-tail collisions); resolved with append-only unions, no entries dropped.
