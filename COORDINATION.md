@@ -5214,6 +5214,16 @@ No task-board claim for this exact `nfl/index.html`/new suggestions page file sc
 | P2 | done |
 | P3 | done |
 
+
+### PR #158 merge + GitHub Pages confirmation — session `arena-30739647-own4`
+
+- **PR:** https://github.com/sassnarep3-star/Own4/pull/158 — merged to `main` at **2026-11-18T03:16:59Z**, merge commit **`16d4a5c5d9485d27f8b0fb6082b9d4c63e9e27dd`**.
+- **Checks:** all required PR checks passed on head `fc57fe9`: NBA workspace validation, bounded publication audit, nfl-command, nfl-decision-desk and depth-sweep routes. An earlier audit run caught a directory-only `../` link and stale checked-in coverage; both were corrected and the final audit/freshness gate passed.
+- **Pages:** deployment run [44229309418](https://github.com/sassnarep3-star/Own4/actions/runs/44229309418) completed successfully and the Pages API reported `built`. Live entry points: [NFL Decision Hub](https://sassnarep3-star.github.io/Own4/nfl/) and [Suggestions for Review](https://sassnarep3-star.github.io/Own4/nfl/pages/suggestions.html).
+- **Remaining flags:** market/data rights, actual participation joins, Houston's image-only chart, depth freshness/slot ambiguity, injury history and joint evidence remain open in their owning registers.
+
+**Follow-up PR #164 coordination rebase log (2026-11-18 UTC):** the documentation-only follow-up encountered append-only COORDINATION conflicts after main advanced with PRs #160, #161 and #163. Resolutions retained all complete peer publication/completion blocks and this session's PR #158 record. No peer implementation or evidence was changed.
+
 **Rebase/conflict note (2026-11-18 UTC):** Before the implementation push, `git pull --rebase origin main` fetched `89d0d3b` (PR #157) while this branch had three local commits. Rebase conflicted only in this append-only file because session `arena-66ec82ab-own4` had added its source-authority claim/completion at the same end-of-file location. Resolved as a union, retaining the peer's full block and this session's claim/completion; no peer code or findings were changed. Replayed commits are `9fb5dde`, `c4a6646`, and `26696ff`; the original claim push remains recorded above. Re-ran affected verification gates after the merge-resolution; all pass.
 
 ### PR / merge / deploy record — session `arena/f7037afe-own4` (2026-11-18 UTC)
