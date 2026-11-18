@@ -5128,6 +5128,7 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 
 ---
 
+<<<<<<< HEAD
 ## Session `arena/66ec82ab-own4` — source-authority transparency audit (claim, 2026-11-18 UTC)
 
 Branch (fixed by Arena): `arena/66ec82ab-own4`, based on `eb6d8de33a7d4a792d53da80c36ed2f6cb36a458`.
@@ -5147,6 +5148,8 @@ This is a focused correction to source transparency; it does not upgrade any thi
 - Official-source links listed on the Decision Desk sources page include NFL standings, schedule, injuries, and game centres. No external page was fetched during this narrow code audit; the source classes classify URL authority, not the correctness of the underlying source contents.
 - Irregularity retained and surfaced, not silently fixed: the 136-game results corpus and market prices still cite the third-party nflverse archive; they are explicitly not official NFL data. 268 of 272 fixture venues remain blank in the existing register, and 0/6 strategies qualify in the current backtest. The audit changes labels and checks only; it does not alter model/data values or treat source classification as independent verification.
 
+=======
+>>>>>>> origin/arena/8440efda-own4
 ## Session `arena/8440efda-own4` — claim: brief-to-artifact traceability + repo review (2026-11-18 UTC)
 
 **Session ID:** `arena/8440efda-own4` · **Branch (fixed by Arena):** `arena/8440efda-own4`, based on `eb6d8de` (= `origin/main`, PR #156). The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch will be created or pushed.
@@ -5168,6 +5171,7 @@ This is a focused correction to source transparency; it does not upgrade any thi
 | T5 | Verifier (row-source, local links, no localhost, deterministic) | claimed | arena/8440efda-own4 | `nfl-brief-trace/engine/verify.py` |
 | T6 | Executive summary + suggestions for the owner to choose from (not implemented) | claimed | arena/8440efda-own4 | `nfl-brief-trace/EXECUTIVE_SUMMARY.md`, `nfl-brief-trace/README.md` |
 | T7 | Completion record + root-nav request logged here | claimed | arena/8440efda-own4 | `COORDINATION.md` (append-only) |
+<<<<<<< HEAD
 
 ### Completion record — `arena/8440efda-own4` (2026-11-18 UTC)
 
@@ -5197,3 +5201,5 @@ This is a focused correction to source transparency; it does not upgrade any thi
 **Root navigation request (not edited here, per the rules above).** The final integration session that owns root navigation (`arena/9208e00a-own4`, I-01) is asked to add one nav entry linking `nfl-brief-trace/index.html` labelled "NFL brief trace — 80-line status". Until then the namespace is reachable at its own URL and from this record.
 
 **Branch.** All work is on `arena/8440efda-own4`. No other branch was created. Pull request and merge status are recorded in the next entry, after the PR is opened.
+=======
+>>>>>>> origin/arena/8440efda-own4
