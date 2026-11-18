@@ -5348,6 +5348,13 @@ A1–A3 are complete. This was a cross-namespace reconciliation against the alre
 
 **Post-merge ledger update coordination — 2026-11-18:** PR #165 carries this completion record after PR #161 had already merged. While preparing the record-only update, main advanced via PR #162; rebasing produced an append-only conflict with session `arena/8440efda-own4`. Resolved by keeping its full brief-trace completion/incident record and this session's publication record. No files other than `COORDINATION.md` changed in this follow-up.
 
+### Follow-up — `arena/8440efda-own4` (2026-11-18 UTC): PR #162 merged, Pages built, one wording fix
+
+- **PR #162** (`arena/8440efda-own4` → `main`) merged as merge commit `7c4c8ec` (2026-11-18T03:20:27Z). Checks on the final head `fc302d4`: audit, validate, verify ×5 all pass; mergeStateStatus was CLEAN before merge.
+- **Pages:** latest build commit `7c4c8ec`, status `built` (2026-11-18T03:21:00Z). Live pages fetched and confirmed: `https://sassnarep3-star.github.io/Own4/nfl-brief-trace/` (summary tiles 80 / 75 / 1 / 3 / 0 / 50) and `…/nfl-brief-trace/pages/flagged.html` (F01–F15 with source links).
+- **Post-merge correction:** Flag F11 still said "36 nfl-* namespaces" and had a stray space. Fixed in this follow-up (`nfl-brief-trace/engine/build.py` only; regenerated pages; verifier PASS). Logged here, no other file changed.
+- **Board churn:** main moved about four times during the session (PR #157, #158, #159, #160, #164). Each time the shared board conflicted on its append-only tail. Resolved each time by taking main's board and re-appending this session's blocks once. Logged as a process irregularity: the board is append-only and hot, so parallel sessions keep colliding on the same tail. Suggestion S8 (for owner review): give each session its own board file under `coordination/`, with `COORDINATION.md` as an index.
+- **Note (2026-11-18):** commits `1ef3fc6`, `479146f`, `0da0522` (portal/deployment records appending to this board) were pushed by another session onto `arena/8440efda-own4` after PR #162 merged. They touch only `COORDINATION.md`; they were kept, not dropped, and this follow-up rebased onto them. The branch name is fixed by Arena, so cross-session pushes to it are a collision risk; logged for the integration owner.
 
 ## Session `arena/9242c387-own4` — round 2 of the NFL requirement register + repo review (claim, 2026-11-18 UTC)
 
