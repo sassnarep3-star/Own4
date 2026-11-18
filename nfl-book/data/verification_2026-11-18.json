@@ -1,0 +1,57 @@
+{
+  "dataset": "nfl_book_session_verification_2026-11-18",
+  "title": "Live official re-reads performed 2026-11-18 UTC (arena/f7037afe-own4)",
+  "session": "arena/f7037afe-own4",
+  "verified_utc": "2026-11-18",
+  "method": "Each official page below was read with the fetch tool on 2026-11-18 UTC and compared with the committed nfl-book dataset. PASS = every compared value matches. FLAG = a difference or an unresolved conflict; the committed value is kept and the item is listed on the Flagged for review page. PENDING = the official value is not yet published, so nothing is entered. Nothing is inferred or filled in. Limits: the fetch tool returns page text only (no HTTP status or response headers), and the sandbox cannot reach nfl.com directly, so counts over the full 8-chunk injury report were not re-derived line by line this session.",
+  "checks": [
+    {
+      "id": "V18-01",
+      "item": "2026 Week 11 schedule: 13 games (matchup, kickoff, network) and 6 bye teams",
+      "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+      "compared_with": "nfl-book/data/slate_week11_2026.json (rows + byes)",
+      "result": "PASS",
+      "detail": "Read chunks 0 and 1 of 2. Official page lists 13 games: IND at HOU (Thu 19 Nov 8:15 PM ET, Prime Video); MIA at BUF, BAL at CAR, NO at CHI, TEN at DAL, TB at DET, ARI at KC, PIT at PHI (Sun 22 Nov 1:00 PM ET); NYJ at LAC, JAX at NYG (4:05 / 4:25 PM ET); LV at DEN (4:25 PM ET); MIN at SF (Sun 8:20 PM ET); CIN at WAS (Mon 23 Nov 8:15 PM ET). Teams on bye: ATL, CLE, GB, LA, NE, SEA. All 13 matchups, kickoff times and the 6 byes match the committed slate row for row. Note: the page header above Sunday Night Football shows a 'Mexico City 2026' logo; the listed SNF game is MIN at SF and no Mexico City venue is printed for it, so no venue is inferred here."
+    },
+    {
+      "id": "V18-02",
+      "item": "Week 10 injury report: Detroit Lions game-status cells (Kerby Joseph, Cade Mays, D.J. Reed)",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "compared_with": "nfl-book/data/injuries_week10_capture.json rows 'NE at DET'",
+      "result": "PASS",
+      "detail": "Read chunk 0 of 8. Official Lions table: Kerby Joseph (S, Knee, Did Not Participate In Practice, Out); Cade Mays (C, Ankle, Did Not Participate In Practice, Out); D.J. Reed (CB, Hip, Did Not Participate In Practice, Out). Committed capture has the same three rows with game_status 'Out'. Resolves the old blank-cell irregularity for these three players on this report."
+    },
+    {
+      "id": "V18-03",
+      "item": "Week 10 injury report: sample rows for Washington and the Giants (WAS at NYG)",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "compared_with": "nfl-book/data/raw/nfl_week10_injury_report_transcript.txt (lines for WAS at NYG)",
+      "result": "PASS",
+      "detail": "Read chunk 0 of 8. Official Commanders rows John Bates (TE, blank, Full Participation), Lucas Patrick (C, Concussion, DNP, Out), Colson Yankoff (TE, Knee, DNP, Out); Giants row Malik Harrison (LB, Groin, Limited, Questionable). Transcript carries identical values. Sample only: 4 of 347 rows."
+    },
+    {
+      "id": "V18-04",
+      "item": "Week 10 injury report: total row count (347 in committed capture; 279 and 254 in other namespaces and the brief)",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg10",
+      "compared_with": "nfl-book/data/injuries_week10_capture.json (row_count 347) and nfl-book/data/raw/nfl_week10_injury_report_transcript.txt",
+      "result": "FLAG",
+      "detail": "The committed transcript contains 347 data rows (non-comment lines, every row 7 fields, sha256 4cdfdb5b… matches the capture's raw_transcript_sha256). The live page has no printed row total and the sandbox cannot reach nfl.com from bash, so the 347 count was NOT re-derived from the live page this session. The figure 279 (and 254) cited in the brief is not reproduced by the committed transcript. Status: 347 = internal consistency only; live recount pending a machine-readable copy of the report."
+    },
+    {
+      "id": "V18-05",
+      "item": "Week 11 injury report availability on the official Week 11 URL",
+      "source_url": "https://www.nfl.com/injuries/league/2026/reg11",
+      "compared_with": "Week 11 injury capture (none committed yet)",
+      "result": "PENDING",
+      "detail": "On 2026-11-18 the official Week 11 URL returned the Week 10 report body ('Injuries - WEEK 10', Thursday 12 Nov first). No Week 11 table was published at read time, so no Week 11 designation is recorded. Any Week 11 availability value must be captured after the official Week 11 report is live and carries a capture timestamp."
+    },
+    {
+      "id": "V18-06",
+      "item": "Correction test for flag FB-18: is J.J. McCarthy printed under the wrong club header?",
+      "source_url": "https://www.nfl.com/players/j-j-mccarthy/",
+      "compared_with": "nfl-book/data/flags.json FB-18 (example: 'J.J. McCarthy under NYG')",
+      "result": "REFUTED",
+      "detail": "The official player page lists McCarthy's club as New York Giants (status active). A nfl.com news item on the same page states: 'The Giants shipped a fifth-round pick to Minnesota for J.J. McCarthy earlier this season.' So the NYG header on the Week 10 report is correct for this player. FB-18's example is wrong; its other examples (Parsons, Franklin, Evans, Murray, Garrett) were not re-tested this session. See correction FB-19."
+    }
+  ]
+}
