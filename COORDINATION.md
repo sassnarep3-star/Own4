@@ -5462,7 +5462,8 @@ The required `git pull --rebase origin main` advanced to `89d0d3b` (PR #157) and
 
 ### Entry-point scope collision — `arena/4db26a53-own4` and `arena-30739647-own4` (2026-11-18 UTC)
 
-During the required rebase, main advanced to `16d4a5c` (PRs #159 and #158). PR #158 had already merged the peer's expanded `nfl/index.html` portal and `nfl/pages/suggestions.html` from the same starting commit; this was a genuine visibility race because both claims existed only on separate branches before integration. Resolution: keep the peer's portal and suggestion page verbatim; do not overwrite or remove either. Narrow this session's remaining implementation to a small additive link from that portal to the `nfl-live-board` snapshot, then re-verify the combined page and log the supersession. No other peer files will be changed.
+During the required rebase, main advanced to `16d4a5c` (PRs #159 and #158). PR #158 had already merged the peer's expanded `nfl/index.html` portal and `nfl/pages/suggestions.html` from the same starting commit; this was a genuine visibility race because both claims existed only on separate branches before integration. Resolution: retain the peer's expanded portal and suggestion page; no peer section or data is removed. This session adds two navigation links only. Narrow this session's remaining implementation to two additive links from that portal to the `nfl-live-board` snapshot and its source register, then re-verify the combined page and log the supersession. No other peer files will be changed. Replaying the final one-line coordination cleanup also conflicted at EOF; resolved by retaining this single P4/collision record and the complete peer block.
+
 
 
 ### Rebase union note — `arena/4db26a53-own4` (2026-11-18 UTC)
