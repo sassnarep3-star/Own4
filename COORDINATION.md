@@ -5165,4 +5165,4 @@ Both verifiers (`engine/verify.py` 141 checks, `engine/verify_routes.py` G1–G8
 
 **Not done this session (honest scope limits):** the brief's ~100 items were not all newly built. Most are already represented in `nfl-book/` with their blocking gates (see Requirements page). Items that need sources this sandbox cannot reach or that do not exist yet — a scheduled Wed/Thu/Fri injury capture, the NFL Game Book, official per-club depth charts for HOU and all 32 clubs, official snap counts, a line-by-line live recount of the Week 10 report, venue transcription for every fixture from game centres — remain blocked and are unchanged. No value was inferred or filled in.
 
-**PR:** pending (recorded below when opened).
+**PR:** https://github.com/sassnarep3-star/Own4/pull/159 — `arena/f7037afe-own4` → `main` (opened 2026-11-18 UTC). Merge result recorded in the PR itself (`gh pr view 159`); this record is the pre-merge state.
