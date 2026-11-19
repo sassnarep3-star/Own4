@@ -1,12 +1,19 @@
 name: NFL origination lab — rebuild and verify
+
 on:
   push:
-    paths: ['nfl-origination-lab/**', '.github/workflows/nfl-origination-lab.yml']
+    paths:
+      - 'nfl-origination-lab/**'
+      - '.github/workflows/nfl-origination-lab.yml'
   pull_request:
-    paths: ['nfl-origination-lab/**', '.github/workflows/nfl-origination-lab.yml']
+    paths:
+      - 'nfl-origination-lab/**'
+      - '.github/workflows/nfl-origination-lab.yml'
   workflow_dispatch:
+
 permissions:
   contents: read
+
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -17,7 +24,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      # rebuild the whole chain from the stored captures, in dependency order
+
+      # Rebuild the whole chain from the stored captures, in dependency order.
       - run: python3 nfl-origination-lab/engine/parse_availability.py
       - run: python3 nfl-origination-lab/engine/corpus.py
       - run: python3 nfl-origination-lab/engine/evaluate.py
@@ -26,29 +34,12 @@ jobs:
       - run: python3 nfl-origination-lab/engine/governance.py
       - run: python3 nfl-origination-lab/engine/registers.py
       - run: python3 nfl-origination-lab/engine/build.py
-      # the publication gate: sourcing, links, counts, no-lookahead, prereg hash, determinism
+
+      # The publication gate: sourcing, links, counts, no-lookahead, prereg hash, determinism.
       - run: python3 nfl-origination-lab/engine/verify.py
-      # the data must be reproducible: a rebuild may not change a committed byte.
-      # Print the diff first so a failure names the file and value instead of just refused.
+
+      # The data must be reproducible: a rebuild may not change a committed byte.
+      # The helper prints the offending lines into the job log and, on failure, into a
+      # status annotation, so an unstable value can be identified without the raw log.
       - name: Rebuild must be byte-identical
-        run: |
-          git diff --stat -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html || true
-          git diff -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html > /tmp/repro.diff || true
-          head -80 /tmp/repro.diff
-          if [ -s /tmp/repro.diff ]; then
-            DESC=$(python3 - <<'PYEOF'
-import re
-lines = [l for l in open('/tmp/repro.diff') if l[:1] in '+-' and not l.startswith(('+++','---'))]
-print(' | '.join(re.sub(r'\\s+',' ',l)[:70] for l in lines[:10])[:900] or 'diff present but only context')
-PYEOF
-)
-            echo "::error title=reproducibility::${DESC}"
-            exit 1
-          fi
-      # upload the diff either way, so the exact unstable values are recoverable
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: reproducibility-diff
-          path: /tmp/repro.diff
-          if-no-files-found: ignore
+        run: python3 nfl-origination-lab/engine/repro_diff.py
