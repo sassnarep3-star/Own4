@@ -6037,7 +6037,6 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 `nfl-daily-desk/**` and this board was modified.
 
 ---
-
 ## NFL Origination Lab 2026-11-19 · session `arena/7ccaa4f3-own4` (2026-11-19 UTC)
 
 | Task | Status | Owner | File scope |
@@ -6045,3 +6044,13 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 | Fresh official re-verification (standings, W11 schedule, W11 injuries 253 rows, W10 finals, trades, IND@HOU game centre), origination engine, readiness register (70 rows), questions/suggestions/flags, static site + verifier | in progress | arena/7ccaa4f3-own4 | nfl-origination-2026-11-19/**, COORDINATION.md (this block only) |
 
 - 2026-11-19: Claimed. Scope is a new namespace only; no peer namespace, root index.html, or shared navigation edited. All official reads made today via page fetch: standings, week-11 schedule, injuries (7 chunks), week-10 schedule/finals, transactions, depth-charts (404), scores, IND@HOU game centre. Peer registers (nfl-verify-2026-11-19, nfl-daily-desk, nfl-price-snapshot) read for cross-reference only.
+
+## Integration claim · `arena-875f601f-own4` (2026-11-19 UTC)
+
+**Status: done.** This branch is the sole current integration scope; prior desk work is already on `main` and its owner explicitly requested a final-integration navigation link. Task: surface the latest dated NFL game-day decision desk from the NFL portal and root dashboard, without modifying peer data or research. Scope: `COORDINATION.md`, `nfl/index.html`, `verification/build.py`, and generated root navigation outputs from that builder only. Read-only elsewhere. No other active claims appear in the latest task records; the previous `nfl-daily-desk` work is complete and its verification passes.
+
+**Completion record (2026-11-19 UTC).** Added the latest game-day desk as an explicit, dated entry in the generated root navigation (`verification/build.py` → `index.html`) and in the NFL portal top navigation/hero (`nfl/index.html`). The integrated `nfl-desk` remains labeled as the project front door; the daily desk is clearly described as a dated capture, not a live feed. Sources associated with the destination are listed at `nfl-daily-desk/sources.html`, including official NFL injury report https://www.nfl.com/injuries/, reserve list https://www.nfl.com/transactions/league/reserve-list/2026/11, standings https://www.nfl.com/standings/league/2026/REG, and schedule https://www.nfl.com/schedules/2026/by-week/week-11. These links were checked as existing source references in the published source register; this navigation-only change does not independently re-verify live NFL page contents.
+
+**Verification performed.** Rebuilt generated root pages with `python3 verification/build.py`; `python3 verification/verify_site.py` passed (14 pages, 346 source-linked data rows, all local links resolve). `python3 nfl-desk/engine/verify.py` passed (11 pages, 355 rows, expected counts and hashes). `python3 nfl-daily-desk/engine/build.py && python3 nfl-daily-desk/engine/verify.py` passed (14 pages, 728 data rows, approved source links, independent count/hash checks and byte-identical rebuild). No new factual claims or model values were added. Existing desk flags and data limitations remain published for review; no irregularity was introduced by the integration.
+
+**Rebase/conflict log.** PR #191 (`arena/7ccaa4f3-own4`, NFL Origination Lab) merged into `main` while this PR was open, so the first merge attempt reported a conflict. Rebased onto its merge commit; only this append-only `COORDINATION.md` claim block conflicted. Resolved as a union, retaining the Origination Lab session's full task record and this integration claim/completion record. No peer data, navigation content, or generated model artifacts were discarded. Re-ran local verification after the rebase.

@@ -104,6 +104,12 @@ NAV = [
         ("index.html", "Dashboard", "dash"),
         ("verified/executive-summary.html", "Executive summary", "summary"),
     ]),
+    # Added 2026-11-19 by session arena-875f601f-own4 (additive; superset-only edit).
+    # The dated daily desk links the latest captured game-day evidence; the integrated desk
+    # below remains the single front door for requirements, questions, suggestions and review.
+    ("NFL Daily Decision Desk · 2026-11-19 capture", [
+        ("nfl-daily-desk/index.html", "Latest game-day evidence &amp; decision desk", "legacy"),
+    ]),
     # Added 2026-11-19 by session arena/1e2776fd-own4 (additive; superset-only edit).
     # nfl-desk is the single front door over the NFL workspaces: one readiness register with
     # every peer register's answer shown, the questions/missing-information register, the
