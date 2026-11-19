@@ -1,0 +1,25 @@
+name: nfl-verify-2026-11-19 verify
+on:
+  push:
+    paths: ['nfl-verify-2026-11-19/**', '.github/workflows/nfl-verify-2026-11-19.yml']
+  pull_request:
+    paths: ['nfl-verify-2026-11-19/**', '.github/workflows/nfl-verify-2026-11-19.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild data, reconciliation and pages
+        run: |
+          python3 nfl-verify-2026-11-19/engine/seed_data.py
+          python3 nfl-verify-2026-11-19/engine/build.py
+      - name: Verify links, sourcing, no-localhost, placeholders, determinism
+        run: python3 nfl-verify-2026-11-19/engine/verify.py
+      - name: Determinism gate (rebuild must not change committed files)
+        run: git diff --exit-code -- nfl-verify-2026-11-19/pages nfl-verify-2026-11-19/index.html nfl-verify-2026-11-19/assets nfl-verify-2026-11-19/data
