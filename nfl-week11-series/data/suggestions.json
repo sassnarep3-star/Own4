@@ -1,0 +1,36 @@
+{
+ "dataset": "nfl-week11-series/suggestions",
+ "title": "Suggestions (proposed - awaiting owner; nothing implemented without a decision)",
+ "session": "arena-23197e9d-own4",
+ "policy": "Ranked by decision value per unit of work; every suggestion leaves the owner decision column blank.",
+ "rows": [
+  {
+   "id": "S-WS-1",
+   "suggestion": "Add a 'series' page to the root dashboard that renders the newest capture delta (a->b->c) instead of any single injury level",
+   "why": "REQ-21 says publish the delta, never the level; the root landing page currently links level-style pages",
+   "effort": "small (nav + one generated page)",
+   "owner_decision": ""
+  },
+  {
+   "id": "S-WS-2",
+   "suggestion": "Pin the reg-week pages (reg1..reg18) in the snapshotter, not just /injuries/ (current week)",
+   "why": "REQ-48-style recounts need immutable week pages; today's recount shows the page mutates after the week",
+   "effort": "small (extend capture URL list + drift pins)",
+   "owner_decision": ""
+  },
+  {
+   "id": "S-WS-3",
+   "suggestion": "Join the reserve ledger to every capture automatically and publish the contradiction count per read",
+   "why": "F-WS-04 shows table/ledger divergence is per-club and time-varying",
+   "effort": "medium (join keyed on player URL slug)",
+   "owner_decision": ""
+  },
+  {
+   "id": "S-WS-4",
+   "suggestion": "Treat player URL slugs as identity keys in every parser (display names collide/mismatch)",
+   "why": "F-WS-08 (Dee Alford / deaundre-ford) and peer identity defects",
+   "effort": "small (parser convention + audit)",
+   "owner_decision": ""
+  }
+ ]
+}

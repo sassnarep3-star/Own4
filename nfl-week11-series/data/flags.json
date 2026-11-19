@@ -1,0 +1,121 @@
+{
+ "dataset": "nfl-week11-series/flags",
+ "title": "Flagged for review (non-blocking; each blocks a claim, not the merge)",
+ "session": "arena-23197e9d-own4",
+ "policy": "No value is inferred; every flag carries the source links needed to re-check it by hand.",
+ "rows": [
+  {
+   "id": "F-WS-01",
+   "severity": "high",
+   "flag": "Willis IR move missing from both November transaction ledgers",
+   "detail": "The official news article states Malik Willis (MIA QB) was placed on injured reserve Tuesday (resolves to 2026-11-10 from the article frame). No Willis row exists in the official November Reserve List ledger (25 rows), the November Other ledger (5 rows), or the October Reserve List ledger (25 rows) - all read 2026-11-19.",
+   "sources": [
+    "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "https://www.nfl.com/transactions/league/other/2026/11"
+   ],
+   "clears_when": "the league publishes the move in a ledger, or the owner confirms the news/ledger surfaces are allowed to diverge"
+  },
+  {
+   "id": "F-WS-02",
+   "severity": "low",
+   "flag": "reg10 page renders a Week-11 title over Week-10 content",
+   "detail": "https://www.nfl.com/injuries/league/2026/reg10 prints page title '...Week 11 of the 2026 Season' while the section label reads 'Injuries - WEEK 10' and the tables are Week 10 fixtures.",
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/reg10"
+   ],
+   "clears_when": "the source title matches the section label"
+  },
+  {
+   "id": "F-WS-03",
+   "severity": "medium",
+   "flag": "Week 10 tables are a living document: 254 (repo) vs 279 (live at brief time) vs 347 (live 2026-11-19)",
+   "detail": "Dated recount published; the brief's counts are both superseded. Any pipeline that treats one capture as the Week 10 corpus is mis-specified unless the capture is timestamped (REQ-19/54).",
+   "sources": [
+    "https://www.nfl.com/injuries/league/2026/reg10"
+   ],
+   "clears_when": "a frozen, dated Week 10 corpus is pre-registered (REQ-19) and this recount becomes one point in it"
+  },
+  {
+   "id": "F-WS-04",
+   "severity": "high",
+   "flag": "Practice tables lag the reserve ledger; Thursday-game rows lag by 2 days",
+   "detail": "At capture_c (2026-11-19T11:25Z), Jaylon Carlies (Reserve/Injured 2026-11-17) still appears in the Colts Thursday practice table and Azeez Al-Shaair (Reserve/Injured 2026-11-17) still appears in the Texans table, while McCormick/Wiley/Hutchinson/Richter (Reserve/Injured 2026-11-18) dropped out between capture_b and capture_c. Table membership must be reconciled against the ledger per read, not trusted as availability.",
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+   ],
+   "clears_when": "an inactive-list feed (REQ-30) confirms game-day status for each fixture"
+  },
+  {
+   "id": "F-WS-05",
+   "severity": "medium",
+   "flag": "Texans depth chart is a single image",
+   "detail": "houstontexans.com/team/depth-chart publishes one image under 'Unofficial Depth Chart'; no structured rows exist. REQ-31 forbids transcription by eye; an authorized structured source is required before the HOU backup-deficiency feature exists.",
+   "sources": [
+    "https://www.houstontexans.com/team/depth-chart"
+   ],
+   "clears_when": "an authorized structured depth source covers HOU (REQ-51 route verification)"
+  },
+  {
+   "id": "F-WS-06",
+   "severity": "medium",
+   "flag": "Packers depth rows: jersey numbers, empty first slot, shared slot player, orphan continuation row",
+   "detail": "Live read shows numbers prepended to every player cell (recoverable by strip+raw), PR rank-1 EMPTY with the player at rank 2, Kitan Oladapo published in both S slots, and a 4th RB on a continuation row with a blank position cell.",
+   "sources": [
+    "https://www.packers.com/team/depth-chart"
+   ],
+   "clears_when": "nfl-depth-sweep re-parses its stored transcripts under a slot-as-group schema with explicit empty state"
+  },
+  {
+   "id": "F-WS-07",
+   "severity": "low",
+   "flag": "Venue label disagreement recurs on the club site",
+   "detail": "houstontexans.com gameday promo: 'at Reliant Stadium on November 19'; league schedule label is NRG Stadium (peer F-DSK-16). Venue transcription must name its source per row (REQ-23).",
+   "sources": [
+    "https://www.houstontexans.com/team/depth-chart"
+   ],
+   "clears_when": "the game centre label is transcribed and the two labels are reconciled by the owner"
+  },
+  {
+   "id": "F-WS-08",
+   "severity": "low",
+   "flag": "Display-name / slug mismatch: 'Dee Alford' -> /players/deaundre-ford/",
+   "detail": "Bills table row prints 'Dee Alford' while the profile slug is deaundre-ford. Identity keys must be the URL (or an ID), never the display name.",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "clears_when": "the league corrects one of the two labels"
+  },
+  {
+   "id": "F-WS-09",
+   "severity": "low",
+   "flag": "Snapshotter cannot be triggered manually by this integration",
+   "detail": "gh workflow run nfl-readiness-register.yml returns HTTP 403 (Resource not accessible by integration). The scheduled Wed/Thu/Fri 18:00Z cron remains the automation path; today's scheduled run is expected at 18:00Z.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/actions/workflows/419575938"
+   ],
+   "clears_when": "the workflow token gains dispatch rights or the owner triggers it manually"
+  },
+  {
+   "id": "F-WS-10",
+   "severity": "low",
+   "flag": "Brief tracker IDs VR-xx/VQ-xx remain unresolvable",
+   "detail": "The brief's VR-04..VR-26 / VQ-05..VQ-08 citations have no in-repo definitions (peer F-R1). Where possible this session published official substitutes (Lions trio status, Lock/McCord/Brissett starter evidence) rather than treating the IDs as sources.",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ],
+   "clears_when": "the owner supplies the tracker export (peer DEC-R7)"
+  },
+  {
+   "id": "F-WS-11",
+   "severity": "medium",
+   "flag": "Game designations exist for one fixture only",
+   "detail": "In capture_c all 16 non-blank Game Status cells belong to Thursday's IND@HOU tables; all Sunday/Monday cells are blank. Blank is not 'available'. One game of designation coverage again this week (matches peer finding).",
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ],
+   "clears_when": "Friday/Saturday designation releases are captured and joined (REQ-53 cadence)"
+  }
+ ]
+}

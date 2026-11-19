@@ -1,0 +1,91 @@
+{
+ "dataset": "nfl-week11-series/sources",
+ "title": "Official reads performed by this session (2026-11-19)",
+ "session": "arena-23197e9d-own4",
+ "policy": "Every page read via the platform page-read tool (fetch_page); raw-bytes automation is the peer snapshotter (scheduled Wed/Thu/Fri 18:00Z cron; workflow_dispatch is 403-blocked for this integration).",
+ "reads": [
+  {
+   "url": "https://www.nfl.com/injuries/",
+   "what": "Week 11 injury report (capture_c)",
+   "window_utc": "11:05-11:28Z",
+   "chunks": "7/7"
+  },
+  {
+   "url": "https://www.nfl.com/injuries/league/2026/reg10",
+   "what": "Week 10 injury report (recount)",
+   "window_utc": "11:12-11:20Z",
+   "chunks": "8/8"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "what": "Reserve List ledger November 2026",
+   "window_utc": "11:12-11:13Z",
+   "chunks": "2/2"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/10",
+   "what": "Reserve List ledger October 2026",
+   "window_utc": "11:13-11:15Z",
+   "chunks": "2/2"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "what": "Trades ledger November 2026",
+   "window_utc": "11:09Z",
+   "chunks": "1/1"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/other/2026/11",
+   "what": "Other ledger November 2026",
+   "window_utc": "11:30Z",
+   "chunks": "1/1"
+  },
+  {
+   "url": "https://www.packers.com/team/depth-chart",
+   "what": "Packers official depth chart",
+   "window_utc": "11:11Z",
+   "chunks": "1/1"
+  },
+  {
+   "url": "https://www.houstontexans.com/team/depth-chart",
+   "what": "Texans official depth chart",
+   "window_utc": "11:12Z",
+   "chunks": "1/1"
+  },
+  {
+   "url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+   "what": "Willis IR / McCord starter article",
+   "window_utc": "11:14Z",
+   "chunks": "1/1"
+  },
+  {
+   "url": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+   "what": "Lock starter article (headline read from news rail of reg10)",
+   "window_utc": "11:20Z",
+   "chunks": "headline only"
+  },
+  {
+   "url": "https://www.nfl.com/news/sam-darnold-ruled-out-for-seahawks-week-10-game-vs-raiders-drew-lock-expected-to-start-again",
+   "what": "Lock starter article 2 (headline read from news rail of reg10)",
+   "window_utc": "11:20Z",
+   "chunks": "headline only"
+  }
+ ],
+ "peer_captures_used_read_only": [
+  {
+   "path": "nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html",
+   "sha256": "e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b",
+   "verified": true
+  },
+  {
+   "path": "nfl-daily-desk/captures/2026-11-19/injury-report-week11.md",
+   "sha256": "d2ec7ac360f4f56064554d5af0a6352091a3f8ef81d4001539fddbf865c23676",
+   "verified": true
+  },
+  {
+   "path": "nfl-daily-desk/data/availability_delta.json",
+   "used_for": "capture_b published summary + peer a->b delta",
+   "verified": "values compared against own re-parses"
+  }
+ ]
+}

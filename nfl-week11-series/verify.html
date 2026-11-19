@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification and method · NFL Week 11 Series · Own4</title>
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><h1>Verification and method</h1>
+<p>NFL Week 11 Series Desk — timestamped official reads, 2026-11-19 · session arena-23197e9d-own4 · every table row links its official source; unverified values stay blank and flagged</p></header>
+<nav><a class="" href="index.html">Start here</a><a class="" href="series.html">Availability series</a><a class="" href="week10.html">Week 10 recount</a><a class="" href="reserve.html">Reserve list check</a><a class="" href="depth.html">Depth checks</a><a class="" href="starters.html">Starter evidence</a><a class="" href="questions.html">Questions</a><a class="" href="suggestions.html">Suggestions</a><a class="" href="flagged.html">Flagged for review</a><a class="" href="sources.html">Sources read</a><a class="" href="executive-summary.html">Executive summary</a><a class="here" href="verify.html">Verification</a></nav>
+<main>
+
+<div class="card"><p><b>Method.</b> (1) Each official page was read in full via the platform page-read tool; every data table was transcribed verbatim to CSV in <span class="mono">evidence/</span> (cells as published; documented abbreviations only). (2) <span class="mono">engine/compute.py</span> re-parses the evidence — and the two peer capture files, hash-checked first — with code that shares nothing with the transcription, and writes <span class="mono">data/*.json</span>. (3) <span class="mono">engine/build.py</span> renders this site from those JSONs. (4) <span class="mono">engine/verify.py</span> gates the publication.</p></div>
+<h2>Publication gates</h2>
+<table><thead><tr><th>Gate</th><th>Rule</th><th>State</th><th>Source</th></tr></thead><tbody><tr><td>Row sourcing</td><td>every table row on every page carries an https link on an approved host (nfl.com, packers.com, houstontexans.com, static.clubs.nfl.com, github.com)</td><td><span class="pill ok">enforced by verify.py</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-week11-series/engine/verify.py">nfl-week11-series/engine/verify.py</a></td></tr><tr><td>Link integrity</td><td>every local href and anchor resolves</td><td><span class="pill ok">enforced</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-week11-series/engine/verify.py">nfl-week11-series/engine/verify.py</a></td></tr><tr><td>Count integrity</td><td>printed counts re-derived from evidence by the engine; drift pins fail the build if evidence changes without a pin update</td><td><span class="pill ok">enforced</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-week11-series/engine/compute.py">nfl-week11-series/engine/compute.py</a></td></tr><tr><td>Hash integrity</td><td>capture_a and capture_b sha256 must equal recorded values before any parse</td><td><span class="pill ok">enforced</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html">nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html</a></td></tr><tr><td>Determinism</td><td>build.py twice → byte-identical output</td><td><span class="pill ok">enforced</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-week11-series/engine/build.py">nfl-week11-series/engine/build.py</a></td></tr><tr><td>Banned claims</td><td>no price/edge/ROI/CLV/win-rate/ranking claim anywhere outside a rejection sentence</td><td><span class="pill ok">enforced</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-week11-series/engine/verify.py">nfl-week11-series/engine/verify.py</a></td></tr></tbody></table>
+<h2>Transcription conventions</h2>
+<ul class="tight">
+<li>Practice status: <span class="mono">DNP</span> = “Did Not Participate In Practice”, <span class="mono">LP</span> = “Limited Participation in Practice”, <span class="mono">FP</span> = “Full Participation in Practice” (the three strings the page publishes).</li>
+<li>Game status: the cell exactly as published (<span class="mono">Out</span>, <span class="mono">Questionable</span>, <span class="mono">Doubtful</span>) or empty — empty is the page's blank and is never read as “available”.</li>
+<li>Player URLs are kept per row so identity is the slug, not the display name (F-WS-08).</li>
+<li>Capture_a's raw-HTML parse unescapes HTML entities before joining; display-name variants across reads are classified as identity pairs, not roster moves.</li>
+</ul>
+</main>
+<footer>
+<p>Rows are transcribed from official pages read on 2026-11-19 via the platform page-read tool; counts are machine-derived from the evidence files by an engine that shares no code with the transcription. No price, edge, ROI, win-rate or ranking is claimed anywhere on this site (repository publication policy). Blank cells are blanks as published, never inferred values. Flagged items do not block publishing; they block claims.</p>
+<p><a href="https://github.com/sassnarep3-star/Own4">Repository</a> · <a href="https://www.nfl.com/">NFL.com (official)</a> · <a href="flagged.html">Flagged for Review</a></p>
+</footer>
+</body></html>

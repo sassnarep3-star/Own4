@@ -6407,3 +6407,43 @@ self-verified and additive.
 **Requests to owners (logged, not applied):**
 - Session `arena/875f601f-own4` (PR #190, shared nav): please add one additive nav link from the root dashboard to `nfl-week11-series/index.html` when integrating; this session will not edit `index.html`/`nfl/index.html`/`verification/build.py` while that claim is warm.
 - `nfl-depth-sweep`: re-parse stored GB transcript with number-stripping + raw-string retention (slot-as-group schema with explicit empty state per S-09).
+
+### Completion record — `arena-23197e9d-own4` (2026-11-19 UTC)
+
+| ID | Result | Evidence |
+|---|--------|----------|
+| S1 | done — claim committed and pushed (`bf2f06b`) before any implementation | this file |
+| S2 | done — 9 official URLs read 2026-11-19 11:05–11:30Z via the platform page-read tool (Week 11 injuries 7/7 chunks; Week 10 reg10 8/8; Reserve Nov 2/2; Reserve Oct 2/2; Trades Nov 1/1; Other Nov 1/1; packers.com depth 1/1; houstontexans.com depth 1/1; Willis article body 1/1). Two starter-article headlines read from the reg10 news rail. Transcriptions in `nfl-week11-series/evidence/`; read log `nfl-week11-series/data/sources.json` | `nfl-week11-series/data/sources.json` |
+| S3 | done — three-point timestamped series with row-level deltas: capture_a raw bytes (re-parsed independently; 242 rows / 3 empty sections — matches the peer's published summary exactly), capture_b peer markdown (253 / 2 — matches peer summary), capture_c this session (253 / 2). a→c: 11 Chargers rows appeared, 5 Eagles practice moves, 0 designation changes; b→c: 6 practice moves (incl. Will Lee III LP→FP), 1 display-name identity variant (De'Alford, Dee ↔ Dee Alford, same player URL); designation levels (9 Out / 7 Questionable, 16 cells) identical across 11.6 h. Peer a→b narrative arithmetic note published (241+11=252 vs their 253-row summary) — peer namespace untouched | `nfl-week11-series/data/series.json`, `nfl-week11-series/series.html` |
+| S4 | done — dated Week 10 recount: 347 rows / 28 club sections / 0 no-injury sections (machine-counted). The brief's 254-row/4-section repo publish and 279-row/2-section live count are both superseded — the page mutates after the week (living-document finding; supports REQ-19/54). reg10 renders a Week-11 title over Week-10 content (F-WS-02) | `nfl-week11-series/data/week10_recount.json` |
+| S5 | done — Reserve/Other/Trades ledgers read (25/5/12 Nov rows; 25 Oct rows). The six table-vs-ledger contradictions re-checked across three reads: at capture_c only Carlies (IR 11/17) and Al-Shaair (IR 11/17) still sit in Thursday practice tables; the four 11/18 moves dropped out between 07:05Z and 11:25Z. Willis case closed at source (article body read): "placed on injured reserve Tuesday" (resolves 2026-11-10 from the article frame) — **no Willis row in any of three ledgers** (F-WS-01), and absence from both weeks' tables demonstrates 'not listed ≠ available' | `nfl-week11-series/data/reserve_check.json` |
+| S6 | done — live depth checks: GB page (as-of "Unofficial, Nov. 10, 2026") confirms jersey numbers prepended to every player cell (strip rule recovers names; raw strings kept), PR slot empty at rank 1, Kitan Oladapo shared across both S slots, orphan continuation row with blank position (REQ-50 traps). HOU page publishes one image — no structured rows; transcription by eye rejected (F-WS-05). Texans promo again says "Reliant Stadium" vs the schedule label (F-WS-07) | `nfl-week11-series/data/depth_check.json` |
+| S7 | done — 12-page static site + verifier + executive summary; PR merged and Pages confirmed (see merge record below) | `nfl-week11-series/index.html` |
+
+**Verification performed (this namespace):** `python3 nfl-week11-series/engine/verify.py` — all rules pass:
+capture_a/capture_b sha256 match recorded values; 9 drift pins hold (week10 347, week11 253, sections 26,
+reserve 25/25, trades 12, other 5, starters 5, depth 10); 192/192 table rows carry an approved-host https
+source link; 190 local links resolve; rebuild byte-identical (13 files); banned-claim scan clean (no
+price/edge/ROI/CLV/win-rate assertions outside rejection sentences); owner-decision columns undecided.
+Repo-wide gates re-run green after the change: `scripts/check_site.py` 0 problems (758 links, 438 rows);
+`verification/verify_site.py` all checks passed (346 rows); `nfl-desk/engine/verify.py` PASS (355 rows);
+`nfl-daily-desk/engine/verify.py` all rules pass (728 rows).
+
+**Flagged (11 items, published on `nfl-week11-series/pages`→`flagged.html`; none blocks the merge):**
+F-WS-01 Willis IR move absent from all three ledgers (high) · F-WS-02 reg10 title/week mismatch (low) ·
+F-WS-03 Week-10 living-document counts 254/279/347 (medium) · F-WS-04 practice tables lag the reserve
+ledger; two IR'd players still in Thursday tables (high) · F-WS-05 HOU depth image-only (medium) ·
+F-WS-06 GB depth schema traps (medium) · F-WS-07 Reliant/NRG venue label disagreement recurs (low) ·
+F-WS-08 display-name vs slug mismatch (Dee Alford / deaundre-ford) (low) · F-WS-09 snapshotter
+workflow_dispatch 403-blocked for this integration; scheduled Wed/Thu/Fri 18:00Z cron is the automation
+path (low) · F-WS-10 brief VR-xx/VQ-xx IDs unresolvable; official substitutes published (low) ·
+F-WS-11 game designations cover one fixture only (medium).
+
+**Starter evidence (REQ-41) published at source:** Lock (2 dated articles), McCord (Willis article body:
+"Kyle McCord will fill in, beginning Sunday on the road against the Indianapolis Colts"), Brissett
+(trades ledger row 11/06 AZ→BAL), Willis (article body). All in `nfl-week11-series/data/starter_evidence.json`.
+
+**Scope discipline:** only `nfl-week11-series/**` and this board were modified. Peer files read-only;
+the two peer capture files used for the series were hash-verified before parsing and are not touched.
+Shared navigation (`index.html`, `nfl/index.html`, `verification/build.py`, `verified/**`) is owned by
+warm claim PR #190 (`arena/875f601f-own4`) and was not edited; the nav-link request above stands.
