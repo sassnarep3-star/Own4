@@ -6149,4 +6149,15 @@ value — there is no licensed or official price source, and no graded games. Th
 reason.
 
 ### PR, merge and Pages confirmation
-(to be recorded after merge)
+- PR: https://github.com/sassnarep3-star/Own4/pull/195 (arena/3c2c0922-own4 → main).
+- Merged: 2026-11-19T11:23:13Z, merge commit `b7c94e16106ba29d7897398a6ef08fdf7e57f147`.
+- GitHub Pages: the post-merge build (started 2026-11-19T11:23:15Z) completed with status `built`;
+  `pages` API reports `built`. Live reads confirmed after propagation:
+  https://sassnarep3-star.github.io/Own4/nfl-standings-reverify/ (landing),
+  https://sassnarep3-star.github.io/Own4/nfl-standings-reverify/pages/standings.html (32-row table),
+  and the root https://sassnarep3-star.github.io/Own4/ now carries the additive nav link.
+- Rebase conflict record: `git pull --rebase origin main` conflicted on `index.html` and the append-only
+  `COORDINATION.md` after PR #193 (Origination Lab) merged. Resolved as a union: the peer's longer
+  navigation and all peer append-only board blocks were retained in full, and this session's additive
+  nav link and SR-01 block were re-applied. No peer work was discarded. `engine/verify.py` re-run
+  after the rebase passes; the existing `nfl-desk` and `nfl-daily-desk` suites also still pass.
