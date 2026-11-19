@@ -5501,3 +5501,38 @@ Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordinatio
 - **NFL-P4:** done. The portal change is additive; the peer suggestions page and shared root dashboard were not edited.
 
 
+
+---
+
+## Session `arena/6c8bbde6-own4` — claim (2026-11-19 UTC)
+
+Session ID: `arena/6c8bbde6-own4`. Branch (fixed by the platform): `arena/6c8bbde6-own4`,
+based on `e322a32` (= `origin/main`, latest commit "nfl-readiness-register: scheduled availability
+snapshot 2026-11-18T23:49:19Z"). Board read before claiming. No active claim on the scope below; the
+most recent completed entries are dated 2026-11-18.
+
+**Gap that justifies this session.** Every committed NFL workspace is a snapshot dated 2026-11-15..18.
+A fresh, date-stamped official re-verification of the *current* NFL state (standings, Week 11 schedule,
+injury report, reserve list, transactions, results, fixture venues) against nfl.com **read today
+(2026-11-19)** — with line-by-line reconciliation against the repo's committed snapshots and a
+decision-readiness / questions / suggestions board — has not been done for 2026-11-19. This session
+adds that round as a new, self-contained, fully source-linked namespace.
+
+**Namespace claimed (exclusive):** `nfl-verify-2026-11-19/**` (new). Shared files touched only
+additively/append-only: `COORDINATION.md` (append-only), `verification/build.py` (NAV, additive),
+regenerated `index.html` + `verified/*.html`. No peer namespace file is edited.
+
+| ID | Task | Status | Owner | Files touched (scope) |
+|----|------|--------|-------|------------------------|
+| V1 | Claim scope, read board, confirm no peer claims this namespace | claimed | arena/6c8bbde6-own4 | `COORDINATION.md` |
+| V2 | Fresh official reads dated 2026-11-19 (standings, Week 11 schedule, injury report, reserve list, transactions, scores, game centres for venues) — structured rows + source URL + fetch timestamp only | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/data/official_reads_2026_11_19.json` |
+| V3 | Line-by-line reconciliation of the fresh reads against the repo's committed snapshots (standings arithmetic, results feed, Week 10/11 counts); record deltas as flags | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/data/reconciliation_2026_11_19.json` |
+| V4 | Decision-readiness table (one row per brief requirement: status, gate that blocks it, number that clears it, source), questions/answers, suggestions (verdict blank) | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/data/{requirements,questions,suggestions}.json` |
+| V5 | Static site: landing + category subpages + Flagged for Review; every row source-linked; unverifiable blank + flagged | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/**` |
+| V6 | Verifier (row-source, local links, no localhost, determinism) + CI workflow | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/engine/verify.py`, `.github/workflows/nfl-verify-2026-11-19.yml` |
+| V7 | Executive summary + repo review | claimed | arena/6c8bbde6-own4 | `nfl-verify-2026-11-19/EXECUTIVE_SUMMARY.md`, `nfl-verify-2026-11-19/pages/repo-review.html` |
+| V8 | Final integration: additive root nav, rebuild, PR → main → merge → Pages deploy confirmation, record result here | claimed | arena/6c8bbde6-own4 | `verification/build.py`, `index.html`, `verified/*.html`, `COORDINATION.md` |
+
+**Rules this session holds.** Official sources only (read today via the fetch tool); every published
+row carries a source link; unconfirmable values blank + flagged; no peer namespace file is edited;
+small frequent commits; `git pull --rebase` before every push; conflicts resolved as unions.
