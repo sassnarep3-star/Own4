@@ -1,0 +1,976 @@
+{
+ "dataset": "nfl_origination_lab_requirements",
+ "title": "Decision-readiness register: one row per requirement in the brief",
+ "built": "2026-11-19",
+ "status_vocabulary": {
+  "done": "the artefact exists and its number is published",
+  "partial": "some of it exists; the missing part is named",
+  "blocked": "a named gate stops it; the clearing number is stated",
+  "closed as designed": "the requirement is met by refusing to open something",
+  "gate still closed": "the requirement is itself a gate that has not passed",
+  "adopted as a rejection": "the requirement is a prohibition, and it is kept"
+ },
+ "counts": {
+  "partial": 21,
+  "done": 27,
+  "blocked": 16,
+  "closed as designed": 1,
+  "adopted as a rejection": 2,
+  "gate still closed": 1
+ },
+ "n": 68,
+ "rows": [
+  {
+   "id": "R01",
+   "requirement": "Price-snapshot store with opening and closing numbers for every market",
+   "status": "partial",
+   "gate": "an opening number attributable to an official publisher",
+   "clearing_number": "1 claimable opening row (policy C1-C4)",
+   "current_value": "0 opening rows, 6,345 official closings with unpublished timing",
+   "evidence": "census of 12,573 store rows",
+   "source": {
+    "href": "data/price_policy.json",
+    "label": "repo"
+   },
+   "page": "pages/prices.html"
+  },
+  {
+   "id": "R02",
+   "requirement": "Verified results feed so backtests and ROI can be computed",
+   "status": "partial",
+   "gate": "an officially sourced, time-stamped price",
+   "clearing_number": "1 claimable closing price",
+   "current_value": "150 graded 2026 games; 0 claimable prices",
+   "evidence": "corpus integrity assertions and standings arithmetic",
+   "source": {
+    "href": "data/corpus.json",
+    "label": "repo"
+   },
+   "page": "pages/prices.html"
+  },
+  {
+   "id": "R03",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "status": "done",
+   "gate": "no gate; publication order is specified",
+   "clearing_number": "n/a",
+   "current_value": "SIDE, TOTAL, MONEYLINE published in that order",
+   "evidence": "three market columns on every forecast row",
+   "source": {
+    "href": "data/forecasts.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R04",
+   "requirement": "Fair line, market line and difference as separate columns",
+   "status": "done",
+   "gate": "an official posted line per market",
+   "clearing_number": "1 official line per (game, market)",
+   "current_value": "450 of 450 residual rows carry a model line, market line and residual",
+   "evidence": "residual table",
+   "source": {
+    "href": "data/residuals.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R05",
+   "requirement": "Separate signal from staking so a lucky staking run cannot mask bad signal",
+   "status": "done",
+   "gate": "no gate; two divisions are published separately",
+   "clearing_number": "n/a",
+   "current_value": "signal division ranked; staking division published empty with its reason",
+   "evidence": "leaderboard divisions",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R06",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "status": "done",
+   "gate": "a chart rank for both the out player and the replacement",
+   "clearing_number": "both ranks present",
+   "current_value": "10 replacements with a rank difference",
+   "evidence": "replacement depth table",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R07",
+   "requirement": "Correlations only from officially sourced numbers, with n published",
+   "status": "partial",
+   "gate": "an official price for any price-based correlation",
+   "clearing_number": "1 official time-stamped price",
+   "current_value": "8 corpus correlations published, n on every row; 0 price correlations",
+   "evidence": "correlation table",
+   "source": {
+    "href": "data/correlations.json",
+    "label": "repo"
+   },
+   "page": "pages/correlations.html"
+  },
+  {
+   "id": "R08",
+   "requirement": "A demotion gate that sends a live strategy back to paper",
+   "status": "done",
+   "gate": "a live strategy",
+   "clearing_number": "1 strategy in live status",
+   "current_value": "0 live strategies; 0 demotions; gate text and triggers published",
+   "evidence": "demotion gate table",
+   "source": {
+    "href": "data/demotion.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R09",
+   "requirement": "Pre-register every strategy; backtest numbers never on the leaderboard",
+   "status": "done",
+   "gate": "a commit that freezes the rule before its numbers exist",
+   "clearing_number": "commit hash preceding the score",
+   "current_value": "PREREG-LAB-1 frozen at commit 0956256 before evaluate.py ran",
+   "evidence": "pre-registration file and hash",
+   "source": {
+    "href": "prereg/PREREG-LAB-1.json",
+    "label": "repo"
+   },
+   "page": "pages/prereg.html"
+  },
+  {
+   "id": "R10",
+   "requirement": "Availability graph as a first-class dataset",
+   "status": "blocked",
+   "gate": "inactive lists and snap counts per game",
+   "clearing_number": "1 inactive list per game",
+   "current_value": "0 inactive lists, 0 snap-count series in the repository",
+   "evidence": "gap G1 and G2",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R11",
+   "requirement": "Model depth from playing time, not jersey order",
+   "status": "blocked",
+   "gate": "an official snap-count source",
+   "clearing_number": "1 official snap-count publication",
+   "current_value": "0 snap-count rows available to this session",
+   "evidence": "gap G1",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R12",
+   "requirement": "Injury signal is a surprise, never a level",
+   "status": "partial",
+   "gate": "two dated reads of the same report week",
+   "clearing_number": "2 dated captures",
+   "current_value": "241 players with two reads; 1 change between them",
+   "evidence": "delta table",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R13",
+   "requirement": "32-team roster/IR sweep before any team-level model is trusted",
+   "status": "partial",
+   "gate": "a rule that gates team models on the sweep",
+   "clearing_number": "declared pass/fail rule",
+   "current_value": "sweep present (32 clubs, 25 reserve entries); no model in this lab depends on it",
+   "evidence": "sweep reference",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R14",
+   "requirement": "Fixture-context features built only from published schedule facts",
+   "status": "partial",
+   "gate": "a published schedule fact for every 2026 fixture",
+   "clearing_number": "rest days for both clubs on every game",
+   "current_value": "rest days computable for 150 of 150 2026 games",
+   "evidence": "rest fields on every corpus row",
+   "source": {
+    "href": "data/corpus.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R15",
+   "requirement": "Store every model output as a probability plus its inputs",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "900 forecast rows, each with probability, fair line, sigma and inputs",
+   "evidence": "forecast store",
+   "source": {
+    "href": "data/forecasts.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R16",
+   "requirement": "Removal-of-luck panel on the dashboard",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "4 luck questions answered with numbers; permutation 90th percentile -0.0153",
+   "evidence": "luck panel",
+   "source": {
+    "href": "data/luck.json",
+    "label": "repo"
+   },
+   "page": "index.html"
+  },
+  {
+   "id": "R17",
+   "requirement": "A two-sided 'what would change our mind' field on every strategy",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "5 strategies, each with a promote trigger and a retire trigger",
+   "evidence": "mind table",
+   "source": {
+    "href": "data/mind.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R18",
+   "requirement": "Price a line ourselves and publish the residual on a schedule, from day one",
+   "status": "done",
+   "gate": "an official posted line",
+   "clearing_number": "1 official line per market",
+   "current_value": "450 residual rows, 450 with an official line, weeks 1-10",
+   "evidence": "residual table",
+   "source": {
+    "href": "data/residuals.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R19",
+   "requirement": "Turn the stored game log into the pre-registered backtest corpus",
+   "status": "done",
+   "gate": "corpus arithmetic consistent with official standings",
+   "clearing_number": "games implied by standings == corpus games",
+   "current_value": "150 2026 games == standings-implied 150.0; points 6923 == PF 6923",
+   "evidence": "corpus integrity block",
+   "source": {
+    "href": "data/corpus.json",
+    "label": "repo"
+   },
+   "page": "pages/corpus.html"
+  },
+  {
+   "id": "R20",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "policy decided: 0 claimable rows of 12,573; staking division closed",
+   "evidence": "policy decision block",
+   "source": {
+    "href": "data/price_policy.json",
+    "label": "repo"
+   },
+   "page": "pages/prices.html"
+  },
+  {
+   "id": "R21",
+   "requirement": "Store every injury-hub read with its clock time; publish the delta, never the level",
+   "status": "partial",
+   "gate": "a captured clock time on every read",
+   "clearing_number": "2 reads with clock times, both retained",
+   "current_value": "2 reads, 2 clock times, 1 row-level changes published",
+   "evidence": "delta table",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R22",
+   "requirement": "Decision-readiness table on the landing page",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "68 requirement rows, each with its gate and clearing number",
+   "evidence": "this register",
+   "source": {
+    "href": "data/requirements.json",
+    "label": "repo"
+   },
+   "page": "index.html"
+  },
+  {
+   "id": "R23",
+   "requirement": "Venue of every fixture transcribed from the official game centre",
+   "status": "blocked",
+   "gate": "an official game-centre read of each fixture",
+   "clearing_number": "1 venue per fixture from the game centre",
+   "current_value": "0 venues transcribed this session (no egress); a peer read 12 of 13 from the schedule page and found the two pages disagree on the Thursday venue",
+   "evidence": "gap, flagged",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R24",
+   "requirement": "League's dated schedule announcement beside the live schedule page",
+   "status": "partial",
+   "gate": "a dated announcement captured from an official page",
+   "clearing_number": "1 dated official announcement",
+   "current_value": "one stored quote of the published flexible-scheduling text, with its source URL; the announcement itself was not re-read this session",
+   "evidence": "quoted note",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/corpus.html"
+  },
+  {
+   "id": "R25",
+   "requirement": "Official Game Books for actual starters; do not infer depth or snaps",
+   "status": "blocked",
+   "gate": "a game-book capture for the graded games",
+   "clearing_number": "1 official game book per game",
+   "current_value": "0 game books in the repository",
+   "evidence": "gap",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R26",
+   "requirement": "Ingest game-level results to make ratings opponent-aware",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "opponent-aware rating fitted on 150 prior games before each forecast",
+   "evidence": "model definition",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R27",
+   "requirement": "Injury and personnel ablations instead of fixed penalties",
+   "status": "blocked",
+   "gate": "a verified availability feature to ablate",
+   "clearing_number": "1 availability feature verified for all 32 clubs",
+   "current_value": "0: the depth-order gate is closed (Houston publishes an image)",
+   "evidence": "gate",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R28",
+   "requirement": "Immutable multi-day availability snapshots with hashes",
+   "status": "partial",
+   "gate": "at least 3 dated captures of the same page",
+   "clearing_number": "3 dated captures with hashes",
+   "current_value": "2 dated captures, both hashed; the earlier one is raw bytes",
+   "evidence": "capture provenance",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R29",
+   "requirement": "Capture official inactive lists and snap counts",
+   "status": "blocked",
+   "gate": "an official capture for either",
+   "clearing_number": "1 capture",
+   "current_value": "0 inactive lists, 0 snap counts",
+   "evidence": "gaps G1, G2",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R30",
+   "requirement": "Fix the two depth-parsing failures before widening coverage",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "jersey-prefixed entries counted (48, all Green Bay); image-only club counted (1)",
+   "evidence": "slot-shape block",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R31",
+   "requirement": "Model depth slots as groups, not a single starter",
+   "status": "partial",
+   "gate": "a group-shaped slot schema in the source register",
+   "clearing_number": "0 shared rank-1 slots read as a single starter",
+   "current_value": "22 shared slots and 2 empty rank-1 slots published as such",
+   "evidence": "slot-shape block",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R32",
+   "requirement": "Treat roster turnover as a first-class data event",
+   "status": "blocked",
+   "gate": "a dated roster-event log joined to each chart capture",
+   "clearing_number": "1 roster event per chart change",
+   "current_value": "0 roster events joined to charts; the charts carry one capture each",
+   "evidence": "gap G4",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R33",
+   "requirement": "Singles-only shadow baseline, pre-registered before kickoff",
+   "status": "done",
+   "gate": "a forecast recorded before the game it predicts",
+   "clearing_number": "0 forecasts registered after kickoff",
+   "current_value": "150 forecasts, each fitted only on strictly earlier weeks (asserted in verify.py)",
+   "evidence": "walk-forward record",
+   "source": {
+    "href": "data/forecasts.json",
+    "label": "repo"
+   },
+   "page": "pages/prereg.html"
+  },
+  {
+   "id": "R34",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "status": "closed as designed",
+   "gate": "a directly validated joint probability plus the operator's void/push rules",
+   "clearing_number": "1 joint price from an official or licensed source",
+   "current_value": "0 joint prices; all three combo divisions are closed with their reason",
+   "evidence": "leaderboard divisions",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R35",
+   "requirement": "Proper-score leaderboard divisions",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "4 divisions declared; 1 open, 3 closed with reasons",
+   "evidence": "division table",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R36",
+   "requirement": "Rank with proper scores and uncertainty, not win rate",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "Brier skill with a week-cluster 90 percent bound and a Holm adjustment over 18 tests",
+   "evidence": "leaderboard methods",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R37",
+   "requirement": "Durable snapshot storage and alerts",
+   "status": "partial",
+   "gate": "an alert channel and a freshness monitor",
+   "clearing_number": "1 scheduled monitor with an owner",
+   "current_value": "drift alarms implemented in code; no alert channel exists",
+   "evidence": "drift alarm",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/sources.html"
+  },
+  {
+   "id": "R38",
+   "requirement": "Split public analysis layer from private raw data layer",
+   "status": "partial",
+   "gate": "a rights decision on the raw rows",
+   "clearing_number": "1 recorded rights decision",
+   "current_value": "raw rows live in this public repository; no rights decision is recorded",
+   "evidence": "flagged F-01",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R39",
+   "requirement": "Per-team view: starters out, replacements named, net injury count",
+   "status": "partial",
+   "gate": "a confirmed replacement for each out player",
+   "clearing_number": "1 confirmed replacement per out player",
+   "current_value": "10 documented replacements of 25 reserve entries",
+   "evidence": "replacement table",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R40",
+   "requirement": "Announced-starter evidence field, not an inferred replacement",
+   "status": "blocked",
+   "gate": "an official dated starter announcement",
+   "clearing_number": "1 dated announcement per club",
+   "current_value": "0 announcements captured as evidence this session (headlines exist on a peer capture, undated against the claim)",
+   "evidence": "flagged",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R41",
+   "requirement": "Official depth-chart register with date and source per row",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "705 slots across 31 transcribed clubs, source URL per club",
+   "evidence": "register reference",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R42",
+   "requirement": "Calibrate what 'Questionable' means empirically, not from old percentages",
+   "status": "blocked",
+   "gate": "several seasons of designations joined to inactive lists",
+   "clearing_number": ">= 2 seasons of joined designation->play data",
+   "current_value": "0 seasons joined; this week has 7 Questionable rows on one fixture",
+   "evidence": "gap",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R43",
+   "requirement": "Interactive offense vs defense deficiency matrix, 1st-4th string",
+   "status": "blocked",
+   "gate": "the closed depth-order gate",
+   "clearing_number": "32 clubs with a structured chart",
+   "current_value": "31 of 32 clubs; Houston image-only",
+   "evidence": "gate",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R44",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "2 clubs flagged with a named player and IR date",
+   "evidence": "stale-chart table",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R45",
+   "requirement": "Point-in-time snapshot ledger for injuries, charts and inactives",
+   "status": "partial",
+   "gate": "one capture per source per day",
+   "clearing_number": "daily capture coverage",
+   "current_value": "2 dated injury captures, 1 chart capture, 0 inactive captures",
+   "evidence": "capture provenance",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R46",
+   "requirement": "Populate the missing Detroit game-status designations",
+   "status": "blocked",
+   "gate": "an official read naming the three players' status",
+   "clearing_number": "1 official designation per player",
+   "current_value": "0 read this session (no egress); the peer capture shows blank cells",
+   "evidence": "flagged",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R47",
+   "requirement": "Re-capture and republish the Week 10 injury tables",
+   "status": "blocked",
+   "gate": "an official re-read of the Week 10 tables",
+   "clearing_number": "1 dated re-read",
+   "current_value": "0 this session; the stored Week 11 captures are the only dated pair",
+   "evidence": "flagged",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R48",
+   "requirement": "Reject deriving depth from jersey number, experience or salary",
+   "status": "adopted as a rejection",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "0 depth ranks derived from anything but the club's own chart",
+   "evidence": "policy statement",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R49",
+   "requirement": "Represent shared and empty depth slots faithfully",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "22 shared slots and 2 empty rank-1 slots published as such",
+   "evidence": "slot-shape block",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R50",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "status": "gate still closed",
+   "gate": "route (a) verified club by club, or route (b) an official snap source",
+   "clearing_number": "32 of 32 clubs on one route",
+   "current_value": "31 of 32 on route (a); route (b) has no source",
+   "evidence": "gate",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R51",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "status": "blocked",
+   "gate": "several seasons of designations joined to inactive lists",
+   "clearing_number": ">= 2 seasons",
+   "current_value": "0 seasons; no designation is used as a model feature anywhere in this lab",
+   "evidence": "gap",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R52",
+   "requirement": "Snapshot the injury report Wed/Thu/Fri with a dated history",
+   "status": "partial",
+   "gate": "a scheduled capture job with retained hashes",
+   "clearing_number": "3 captures in one week",
+   "current_value": "2 captures in one week (18th, 19th), both hashed",
+   "evidence": "capture provenance",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R53",
+   "requirement": "Treat the injury report as a timestamped series",
+   "status": "partial",
+   "gate": "a capture per day Wed->kickoff",
+   "clearing_number": "4+ captures in one week",
+   "current_value": "2 captures, 7.3 hours apart, same report week",
+   "evidence": "delta table",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R54",
+   "requirement": "Use snap counts as the starter proxy",
+   "status": "blocked",
+   "gate": "an official snap-count source",
+   "clearing_number": "1 source",
+   "current_value": "0 sources",
+   "evidence": "gap G1",
+   "source": {
+    "href": "data/depth.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R55",
+   "requirement": "A control baseline (random, favourites only) on every leaderboard run",
+   "status": "partial",
+   "gate": "a price for the favourites-only control",
+   "clearing_number": "1 official price",
+   "current_value": "random and climatology controls published; favourites-only is not computable",
+   "evidence": "controls block",
+   "source": {
+    "href": "data/luck.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R56",
+   "requirement": "Stadium roof/surface and NWS wind/precipitation overlay",
+   "status": "blocked",
+   "gate": "official roof designations and an official forecast source",
+   "clearing_number": "1 official roof designation per venue",
+   "current_value": "0 roof designations, 0 forecast rows",
+   "evidence": "flagged",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/flagged.html"
+  },
+  {
+   "id": "R57",
+   "requirement": "Two-stage skill leaderboard (proper-score qualification, then CLV escrow)",
+   "status": "partial",
+   "gate": "a time-stamped official price",
+   "clearing_number": "1 claimable price",
+   "current_value": "stage 1 published with 0 qualifiers; stage 2 empty",
+   "evidence": "leaderboard",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R58",
+   "requirement": "Vig-free market consensus vs originated fair-line decomposition",
+   "status": "partial",
+   "gate": "a vig-free consensus, which needs several independent prices",
+   "clearing_number": ">= 3 independently sourced prices per market",
+   "current_value": "1 official posted line per market; no consensus possible",
+   "evidence": "residual table",
+   "source": {
+    "href": "data/residuals.json",
+    "label": "repo"
+   },
+   "page": "pages/origination.html"
+  },
+  {
+   "id": "R59",
+   "requirement": "Publish a weekly 'what changed' diff, not a static snapshot",
+   "status": "partial",
+   "gate": "two weekly captures of the same page",
+   "clearing_number": "2 weekly captures",
+   "current_value": "2 captures within one week: a delta exists but not a week-over-week diff",
+   "evidence": "delta table",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R60",
+   "requirement": "Publish every model total twice until one wins",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "two total estimators (CRPS and threshold Brier) published side by side with a gap column; neither wins on the holdout",
+   "evidence": "leaderboard",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R61",
+   "requirement": "A drift alarm on every scraper",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "row floor, club count and vocabulary alarms declared before parsing; status PASS",
+   "evidence": "drift alarm block",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/sources.html"
+  },
+  {
+   "id": "R62",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "status": "partial",
+   "gate": "a dated reserve-list capture",
+   "clearing_number": "1 capture with a clock time",
+   "current_value": "1 stored capture (2026-11-18T23:49:18Z); not re-read this session",
+   "evidence": "capture provenance",
+   "source": {
+    "href": "data/availability_parse.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R63",
+   "requirement": "Reject ranking strategies by season-long ROI",
+   "status": "adopted as a rejection",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "0 strategies ranked by ROI; ROI is not computed at all",
+   "evidence": "policy",
+   "source": {
+    "href": "data/leaderboard.json",
+    "label": "repo"
+   },
+   "page": "pages/leaderboard.html"
+  },
+  {
+   "id": "R64",
+   "requirement": "Archive weekly injury reports for past seasons",
+   "status": "blocked",
+   "gate": "past-season captures",
+   "clearing_number": ">= 1 archived past season",
+   "current_value": "0 archived past seasons",
+   "evidence": "gap",
+   "source": {
+    "href": "data/flagged.json",
+    "label": "repo"
+   },
+   "page": "pages/availability.html"
+  },
+  {
+   "id": "R65",
+   "requirement": "Freeze a rule before it sees data; the commit hash is the registration",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "PREREG-LAB-1 frozen at 0956256 before any score existed",
+   "evidence": "pre-registration file",
+   "source": {
+    "href": "prereg/PREREG-LAB-1.json",
+    "label": "repo"
+   },
+   "page": "pages/prereg.html"
+  },
+  {
+   "id": "R66",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "2025 w1-9 train (135), 2025 w10-18 validation (137), 2026 w1-10 holdout (150)",
+   "evidence": "block table",
+   "source": {
+    "href": "data/validation_scores.json",
+    "label": "repo"
+   },
+   "page": "pages/prereg.html"
+  },
+  {
+   "id": "R67",
+   "requirement": "A suggestions section someone can review and choose from before implementing",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "14 suggestions, every decision field left blank for the owner",
+   "evidence": "suggestions page",
+   "source": {
+    "href": "data/suggestions.json",
+    "label": "repo"
+   },
+   "page": "pages/suggestions.html"
+  },
+  {
+   "id": "R68",
+   "requirement": "A clear list of questions, information and answers before any decision",
+   "status": "done",
+   "gate": "no gate",
+   "clearing_number": "n/a",
+   "current_value": "17 questions, each with what we have, what we lack and what would settle it",
+   "evidence": "questions page",
+   "source": {
+    "href": "data/questions.json",
+    "label": "repo"
+   },
+   "page": "pages/questions.html"
+  }
+ ]
+}

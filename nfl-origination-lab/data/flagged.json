@@ -1,0 +1,140 @@
+{
+ "dataset": "nfl_origination_lab_flags",
+ "title": "Flagged for review: every irregularity found this session",
+ "built": "2026-11-19",
+ "policy": "a flag is published with the source that shows it. None of these blocks publishing the site; each one blocks a claim.",
+ "counts": {
+  "blocking": 4,
+  "material": 5,
+  "minor": 3,
+  "disclosure": 2
+ },
+ "rows": [
+  {
+   "id": "F-01",
+   "what": "No officially published price with a known capture time exists in the repository",
+   "severity": "blocking",
+   "detail": "6,345 official-source rows have unpublished timing; 5,901 timestamped rows are non-official. Intersection empty.",
+   "source_url": "https://www.nfl.com/games/",
+   "evidence": "data/price_policy.json",
+   "effect": "ROI cannot be published"
+  },
+  {
+   "id": "F-02",
+   "what": "The results feed is missing 9 of the 13 week-10 2026 games",
+   "severity": "material",
+   "detail": "A feed-only build scores 137 games instead of 150; the union fixes it.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "evidence": "data/corpus.json",
+   "effect": "corrected by the union; recorded"
+  },
+  {
+   "id": "F-03",
+   "what": "Club code spelled two ways: 'AZ' in one corpus and 'ARI' in the feed",
+   "severity": "material",
+   "detail": "A naive join drops or duplicates nine 2026 games.",
+   "source_url": "https://www.azcardinals.com/",
+   "evidence": "data/corpus.json",
+   "effect": "corrected by an alias table"
+  },
+  {
+   "id": "F-04",
+   "what": "16 of 149 pre-registered 2026 corpus rows cite the week schedule page, not the game centre",
+   "severity": "minor",
+   "detail": "The official source is correct but coarser; per-game provenance is weaker on those rows.",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-9",
+   "evidence": "data/corpus.json",
+   "effect": "recorded per row as url_kind"
+  },
+  {
+   "id": "F-05",
+   "what": "Houston publishes its depth chart only as an image",
+   "severity": "blocking",
+   "detail": "No depth-order source is verified for all 32 clubs, so the brief's own gate keeps the backup-deficiency feature closed.",
+   "source_url": "https://www.houstontexans.com/team/depth-chart",
+   "evidence": "data/depth.json",
+   "effect": "gate stays closed"
+  },
+  {
+   "id": "F-06",
+   "what": "Only 16 of 253 Week 11 injury rows carry a game designation",
+   "severity": "material",
+   "detail": "A model feature on designations has one fixture of coverage this week.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "evidence": "data/availability_parse.json",
+   "effect": "no designation feature built"
+  },
+  {
+   "id": "F-07",
+   "what": "The 2026 price store's week-11 'close' is the latest posted line, not a close",
+   "severity": "material",
+   "detail": "78 rows carry the store's own label 'game not played yet - number is the latest POSTED line, not a close'.",
+   "source_url": "https://www.nfl.com/games/",
+   "evidence": "data/price_policy.json",
+   "effect": "no close is claimed"
+  },
+  {
+   "id": "F-08",
+   "what": "One job description file in the repo stores a raw capture whose bytes are 371,313 while a peer's summary table says 3,713",
+   "severity": "minor",
+   "detail": "A reader comparing documents sees two byte counts for one file; the file's true size is 371,313 and its sha256 matches the peer's hash.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "evidence": "data/availability_parse.json",
+   "effect": "disclosed; the hash is the identity that matters"
+  },
+  {
+   "id": "F-09",
+   "what": "This session could not read any official page live",
+   "severity": "disclosure",
+   "detail": "The sandbox has no HTTPS egress to nfl.com. Every number here is a stored capture or a computation over one.",
+   "source_url": "https://www.nfl.com/",
+   "evidence": "COORDINATION.md",
+   "effect": "disclosed on the landing page"
+  },
+  {
+   "id": "F-10",
+   "what": "The repository holds no snap counts, no inactive lists and no game books",
+   "severity": "blocking",
+   "detail": "Three requirements (R10, R11, R29, R43) cannot be met at all; no substitute is used.",
+   "source_url": "https://www.nfl.com/",
+   "evidence": "data/depth.json",
+   "effect": "gates stay closed"
+  },
+  {
+   "id": "F-11",
+   "what": "Two clubs' depth charts still list players who are on the reserve list",
+   "severity": "material",
+   "detail": "TEN lists Peter Skoronski and Tommy Townsend at rank 1 after their 11/14 reserve move.",
+   "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "evidence": "data/depth.json",
+   "effect": "flagged per player"
+  },
+  {
+   "id": "F-12",
+   "what": "A player's name is rendered two ways across two reads of the same page",
+   "severity": "minor",
+   "detail": "'Dee Alford' and 'De'Alford, Dee' on the Buffalo table; not merged on a guess.",
+   "source_url": "https://www.nfl.com/injuries/",
+   "evidence": "data/availability_parse.json",
+   "effect": "left as two keys"
+  },
+  {
+   "id": "F-13",
+   "what": "No recorded rights decision covers the raw rows republished in this public repository",
+   "severity": "blocking",
+   "detail": "Requirement R38 asks for a public/private split; none exists.",
+   "source_url": "https://www.nfl.com/legal/",
+   "evidence": "pages/flagged.html",
+   "effect": "needs an owner decision"
+  },
+  {
+   "id": "F-14",
+   "what": "The 2025 validation block and the 2026 holdout come from one publisher",
+   "severity": "disclosure",
+   "detail": "Corroboration between stored captures is not independence from the publisher.",
+   "source_url": "https://www.nfl.com/",
+   "evidence": "data/corpus.json",
+   "effect": "stated on every page"
+  }
+ ]
+}

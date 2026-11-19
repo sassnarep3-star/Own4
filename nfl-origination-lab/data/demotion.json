@@ -1,0 +1,67 @@
+{
+ "dataset": "nfl_origination_lab_demotion",
+ "title": "The demotion gate: how a live strategy goes back to paper",
+ "built": "2026-11-19",
+ "triggers": [
+  {
+   "id": "D1",
+   "trigger": "week-cluster 90% lower bound on benchmark-relative Brier skill below 0 over any rolling 4-week window"
+  },
+  {
+   "id": "D2",
+   "trigger": "pre-registered sample floor breached (n < 100 graded games)"
+  },
+  {
+   "id": "D3",
+   "trigger": "input drift alarm fails on two consecutive runs"
+  },
+  {
+   "id": "D4",
+   "trigger": "a price claim is later found not to meet policy C1-C4"
+  }
+ ],
+ "effect": "status moves live -> paper; the history is kept; the event is dated and reasoned; promotion back to live requires the promote trigger in mind.json",
+ "state": {
+  "strategies_in_live_status": 0,
+  "demotions_recorded": 0,
+  "reason_none_can_yet_be_live": "no strategy has a claimable price, so none can be staked; the gate is published before it is needed rather than added after a loss"
+ },
+ "rows": [
+  {
+   "strategy": "M0",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M1",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M2",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M3",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M4",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M5",
+   "status": "paper",
+   "next_review": "after 4 further graded weeks",
+   "source": "data/leaderboard.json"
+  }
+ ]
+}

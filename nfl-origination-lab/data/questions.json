@@ -1,0 +1,184 @@
+{
+ "dataset": "nfl_origination_lab_questions",
+ "title": "Questions that must be answered before a decision is reasonable",
+ "built": "2026-11-19",
+ "reading": "each row states what would answer the question, what we already have, what we do not have, and the action that would obtain it. No row contains a guess at the answer.",
+ "counts": {
+  "blocking": 5,
+  "open": 6,
+  "partial": 3,
+  "settled": 3
+ },
+ "rows": [
+  {
+   "id": "Q01",
+   "question": "Can a price we are allowed to use be obtained at all?",
+   "information_needed": "The price policy decision: a publisher plus a capture time.",
+   "we_have": "12,573 stored price rows, 6,345 of them carrying an official nfl.com source key.",
+   "we_do_not_have": "Any officially published number with a known capture time. None exists in the store.",
+   "how_to_obtain": "One licensed feed or one operator price history with timestamps.",
+   "evidence": "data/price_policy.json",
+   "status": "blocking"
+  },
+  {
+   "id": "Q02",
+   "question": "How large is the 2026 graded sample, exactly?",
+   "information_needed": "Arithmetic between the results corpus and official standings.",
+   "we_have": "150 games, weeks 1-10; standings imply 150.0; points 6923 equal sum(PF) 6923.",
+   "we_do_not_have": "Nothing for weeks 1-10; weeks 11+ are unplayed.",
+   "how_to_obtain": "The season to finish, then a re-read of every week page.",
+   "evidence": "data/corpus.json",
+   "status": "settled"
+  },
+  {
+   "id": "Q03",
+   "question": "Is the moneyline skill real or is it one hot week?",
+   "information_needed": "A week-cluster interval, a permutation null, and leave-one-week-out folds.",
+   "we_have": "M2: skill +0.1509, 90% bound [+0.0795, +0.2143], Holm p 0.0085; dropping the best week leaves +0.1109; 0 of 2000 label shuffles match or beat it.",
+   "we_do_not_have": "Out-of-season confirmation. Ten weeks of one season is a short claim.",
+   "how_to_obtain": "A full 18-week 2026 block, and a second season.",
+   "evidence": "data/luck.json",
+   "status": "open"
+  },
+  {
+   "id": "Q04",
+   "question": "Why does the side (margin) market show no skill while the moneyline does?",
+   "information_needed": "Two proper scores on the same forecasts: CRPS on margin, Brier on the win.",
+   "we_have": "Margin CRPS skill is near zero for every model; the win Brier skill is positive. A rating that ranks teams but mis-estimates the spread size would do this.",
+   "we_do_not_have": "A model whose sigma is fitted, not inherited from in-sample residuals.",
+   "how_to_obtain": "Fit the dispersion on the validation block and re-score the margin market.",
+   "evidence": "data/leaderboard.json",
+   "status": "open"
+  },
+  {
+   "id": "Q05",
+   "question": "Why does the total show no skill?",
+   "information_needed": "The same interval machinery applied to the total market.",
+   "we_have": "Benchmark-relative total skill +0.0320, Holm-adjusted p 1.0000 for every model. Club total persistence between consecutive games is 0.0718 with n 268.",
+   "we_do_not_have": "A total model with information beyond past club totals.",
+   "how_to_obtain": "A published pace/plays/efficiency input read from an official source.",
+   "evidence": "data/correlations.json",
+   "status": "open"
+  },
+  {
+   "id": "Q06",
+   "question": "Does availability change outcomes at all, and by how much?",
+   "information_needed": "An ablation: identical models with and without verified availability features.",
+   "we_have": "Nothing usable: 0 snap counts, 0 inactive lists, 1 image-only club chart.",
+   "we_do_not_have": "Snap counts and inactive lists for the graded games.",
+   "how_to_obtain": "Capture both, then run the ablation with chronological holdouts.",
+   "evidence": "data/depth.json",
+   "status": "blocking"
+  },
+  {
+   "id": "Q07",
+   "question": "How deep is the replacement when a starter is out?",
+   "information_needed": "Chart rank of the out player and of his replacement.",
+   "we_have": "10 documented replacements, all 10 with a rank difference.",
+   "we_do_not_have": "A rank for every replacement, and a chart capture at the time of the game.",
+   "how_to_obtain": "Daily chart captures joined to roster events.",
+   "evidence": "data/depth.json",
+   "status": "partial"
+  },
+  {
+   "id": "Q08",
+   "question": "Are the depth charts current?",
+   "information_needed": "A join against the official November 2026 reserve list.",
+   "we_have": "2 clubs flagged: TEN (3); LAR (2).",
+   "we_do_not_have": "A re-capture of the flagged clubs after their roster moves.",
+   "how_to_obtain": "One capture per club per day with a retained hash.",
+   "evidence": "data/depth.json",
+   "status": "partial"
+  },
+  {
+   "id": "Q09",
+   "question": "Which club's chart cannot be read at all?",
+   "information_needed": "The register's own status field.",
+   "we_have": "1 of 32 clubs are image-only; 705 slots transcribed from the other 31.",
+   "we_do_not_have": "A structured Houston chart, or an official snap-count source for all 32.",
+   "how_to_obtain": "The club's own structured feed, or the snap-count route.",
+   "evidence": "data/depth.json",
+   "status": "blocking"
+  },
+  {
+   "id": "Q10",
+   "question": "What does a blank game status mean?",
+   "information_needed": "The official page's own vocabulary across two dated reads.",
+   "we_have": "Of 253 rows, 16 carry a designation (6.32%). Blank is published as blank.",
+   "we_do_not_have": "Inactive lists to join against the blanks.",
+   "how_to_obtain": "Capture the inactive list at kickoff for each game.",
+   "evidence": "data/availability_parse.json",
+   "status": "open"
+  },
+  {
+   "id": "Q11",
+   "question": "Is the injury signal a surprise or a level?",
+   "information_needed": "Two dated reads of the same report week, joined player by player.",
+   "we_have": "241 players appear in both reads; 1 differs.",
+   "we_do_not_have": "More than one week of two-read pairs.",
+   "how_to_obtain": "Daily captures from Wednesday to kickoff, every week.",
+   "evidence": "data/availability_parse.json",
+   "status": "partial"
+  },
+  {
+   "id": "Q12",
+   "question": "Do two sessions reading the same official page agree?",
+   "information_needed": "A join on (club, player) between two independently written parsers.",
+   "we_have": "241 of 241 joined rows identical on position and game status; practice agrees on 240.",
+   "we_do_not_have": "Nothing: this is the strongest corroboration available without a second publisher.",
+   "how_to_obtain": "Nothing further; the limit is stated.",
+   "evidence": "data/availability_parse.json",
+   "status": "settled"
+  },
+  {
+   "id": "Q13",
+   "question": "Is our own line close to the official posted line?",
+   "information_needed": "Residual = model fair line minus the official posted line, per market.",
+   "we_have": "450 residual rows, 450 with an official line.",
+   "we_do_not_have": "A capture time on the posted line, so the residual can be dated against kickoff.",
+   "how_to_obtain": "A timestamped price source.",
+   "evidence": "data/residuals.json",
+   "status": "open"
+  },
+  {
+   "id": "Q14",
+   "question": "Can a parlay or prop combo be ranked yet?",
+   "information_needed": "A directly validated joint probability plus the operator's void/push rules.",
+   "we_have": "All three combo divisions are closed; 0 joint prices exist.",
+   "we_do_not_have": "One joint price from an official or licensed source.",
+   "how_to_obtain": "A licensed joint-price feed.",
+   "evidence": "data/leaderboard.json",
+   "status": "blocking"
+  },
+  {
+   "id": "Q15",
+   "question": "Which of the three markets should be published first?",
+   "information_needed": "The registered order and whether the ranking supports it.",
+   "we_have": "Registered order: side, total, moneyline. Measured: only the moneyline clears a Holm-adjusted threshold; the side and total do not.",
+   "we_do_not_have": "Whether a side-skill model exists at all.",
+   "how_to_obtain": "Diagnose the margin dispersion (Q04) before reordering.",
+   "evidence": "prereg/PREREG-LAB-1.json",
+   "status": "open"
+  },
+  {
+   "id": "Q16",
+   "question": "Is the repository's own data layer lawful to republish?",
+   "information_needed": "A rights decision for the raw rows and for any third-party archive.",
+   "we_have": "None recorded. Raw rows sit in a public repository.",
+   "we_do_not_have": "A recorded decision, or a move of raw rows to a private store.",
+   "how_to_obtain": "Read the terms of every source before publishing row-level data.",
+   "evidence": "pages/flagged.html",
+   "status": "blocking"
+  },
+  {
+   "id": "Q17",
+   "question": "Has any number here been read live from an official page today?",
+   "information_needed": "An egress test before the build.",
+   "we_have": "No: the sandbox has no HTTPS route to nfl.com. Every number is a stored capture with its own date, or a computation over one.",
+   "we_do_not_have": "Nothing; this is a disclosure, not a defect.",
+   "how_to_obtain": "A session with egress re-reads the sources and diffs them.",
+   "evidence": "COORDINATION.md",
+   "status": "settled"
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "dataset": "nfl_origination_lab_mind",
+ "title": "Two-sided decision fields: what would promote each strategy and what would retire it",
+ "built": "2026-11-19",
+ "rule": "every entry is numeric on both sides; an entry that cannot be made numeric is not published as a strategy",
+ "rows": [
+  {
+   "strategy": "M1",
+   "current": "Brier skill +0.1064, 90% bound [+0.0261, +0.1845], Holm p 0.1800",
+   "promote_if": "a closing price with an official source appears AND the benchmark-relative skill's 90% lower bound stays above +0.0261 over 8 further weeks",
+   "retire_if": "the week-cluster 90%% upper bound on its Brier skill falls below 0, or 4 consecutive weeks of negative skill, or its inputs fail the drift alarm twice",
+   "evidence_path": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M2",
+   "current": "Brier skill +0.1509, 90% bound [+0.0795, +0.2143], Holm p 0.0085",
+   "promote_if": "a closing price with an official source appears AND the benchmark-relative skill's 90% lower bound stays above +0.0795 over 8 further weeks",
+   "retire_if": "the week-cluster 90%% upper bound on its Brier skill falls below 0, or 4 consecutive weeks of negative skill, or its inputs fail the drift alarm twice",
+   "evidence_path": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M3",
+   "current": "Brier skill +0.1434, 90% bound [+0.0674, +0.2181], Holm p 0.0054",
+   "promote_if": "a closing price with an official source appears AND the benchmark-relative skill's 90% lower bound stays above +0.0674 over 8 further weeks",
+   "retire_if": "the week-cluster 90%% upper bound on its Brier skill falls below 0, or 4 consecutive weeks of negative skill, or its inputs fail the drift alarm twice",
+   "evidence_path": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M4",
+   "current": "Brier skill +0.1276, 90% bound [+0.0311, +0.2240], Holm p 0.1800",
+   "promote_if": "a closing price with an official source appears AND the benchmark-relative skill's 90% lower bound stays above +0.0311 over 8 further weeks",
+   "retire_if": "the week-cluster 90%% upper bound on its Brier skill falls below 0, or 4 consecutive weeks of negative skill, or its inputs fail the drift alarm twice",
+   "evidence_path": "data/leaderboard.json"
+  },
+  {
+   "strategy": "M5",
+   "current": "Brier skill +0.1370, 90% bound [+0.0533, +0.2172], Holm p 0.0528",
+   "promote_if": "a closing price with an official source appears AND the benchmark-relative skill's 90% lower bound stays above +0.0533 over 8 further weeks",
+   "retire_if": "the week-cluster 90%% upper bound on its Brier skill falls below 0, or 4 consecutive weeks of negative skill, or its inputs fail the drift alarm twice",
+   "evidence_path": "data/leaderboard.json"
+  }
+ ]
+}

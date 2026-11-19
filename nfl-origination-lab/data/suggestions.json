@@ -1,0 +1,148 @@
+{
+ "dataset": "nfl_origination_lab_suggestions",
+ "title": "Suggestions for review, none implemented pending the owner's choice",
+ "built": "2026-11-19",
+ "decision_fields_blank_by_design": "every row carries decision = null so the owner chooses before anything is built",
+ "rows": [
+  {
+   "id": "S01",
+   "suggestion": "Put the decision-readiness table on the landing page, with the gate and the clearing number",
+   "why": "the landing page is the one page a reviewer reads",
+   "expected_effect": "one row per requirement; a reviewer can see in one screen what is blocked and what would unblock it",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/requirements.html"
+  },
+  {
+   "id": "S02",
+   "suggestion": "Publish the staking division empty, with its reason, instead of hiding it",
+   "why": "an empty division is a finding; a hidden one is an omission",
+   "expected_effect": "a reader cannot mistake a proper-score result for a profitable one",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/leaderboard.html"
+  },
+  {
+   "id": "S03",
+   "suggestion": "Show the residual distribution, not only the mean residual",
+   "why": "a mean hides a fat tail that would decide staking if it were allowed",
+   "expected_effect": "per-market residual quantiles on the origination page",
+   "priority": "medium",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/origination.html"
+  },
+  {
+   "id": "S04",
+   "suggestion": "Give every requirement row a machine-readable clearing number",
+   "why": "prose gates cannot be checked; numbers can",
+   "expected_effect": "a verifier can assert that a row claiming 'blocked' carries a clearing number",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "data/requirements.json"
+  },
+  {
+   "id": "S05",
+   "suggestion": "Keep the league table and the skill table apart",
+   "why": "standings measure teams, the leaderboard measures forecasts",
+   "expected_effect": "no reader can confuse a 8-1 record with a calibrated model",
+   "priority": "medium",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/corpus.html"
+  },
+  {
+   "id": "S06",
+   "suggestion": "Publish the pre-registration hash on the leaderboard itself",
+   "why": "a score without its registration is a number without a warrant",
+   "expected_effect": "each leaderboard row links to the commit that froze its rule",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/prereg.html"
+  },
+  {
+   "id": "S07",
+   "suggestion": "Treat 'blank' as a first-class value in every table",
+   "why": "the brief's own rule: never infer a value",
+   "expected_effect": "a reviewer can count blanks; the verifier already counts them per page",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/flagged.html"
+  },
+  {
+   "id": "S08",
+   "suggestion": "Add a per-team view of out players and named replacements",
+   "why": "the brief asks for a quick team-level decision view",
+   "expected_effect": "a reader can see one club's availability without reading 253 rows",
+   "priority": "medium",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/availability.html"
+  },
+  {
+   "id": "S09",
+   "suggestion": "Publish the availability delta as a series, not a single pair",
+   "why": "one delta cannot show a trend; two can start one",
+   "expected_effect": "each week's pair joins the series and the trend becomes visible",
+   "priority": "medium",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/availability.html"
+  },
+  {
+   "id": "S10",
+   "suggestion": "Let the suggestions page carry a decision column and a date",
+   "why": "a suggestion with no decision path is a wish",
+   "expected_effect": "the owner can mark accept/decline with a date, and the page keeps the history",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/suggestions.html"
+  },
+  {
+   "id": "S11",
+   "suggestion": "Show the two total estimators side by side with the gap",
+   "why": "the brief asks for both until one wins",
+   "expected_effect": "the gap column makes the disagreement visible instead of hidden in a choice",
+   "priority": "medium",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "pages/leaderboard.html"
+  },
+  {
+   "id": "S12",
+   "suggestion": "Add a control row to every future leaderboard run, forever",
+   "why": "a leaderboard without a control is a leaderboard of one",
+   "expected_effect": "the climatology control already runs; make it a hard precondition",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "data/leaderboard.json"
+  },
+  {
+   "id": "S13",
+   "suggestion": "Publish this lab's own numbers with their capture dates, never as 'live'",
+   "why": "a stale number presented as live is the defect this repo repeats",
+   "expected_effect": "every table header states the date of the data behind it",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "index.html"
+  },
+  {
+   "id": "S14",
+   "suggestion": "Put the egress limitation on the landing page, not only in the flags",
+   "why": "a reader must know that today's build read no page live",
+   "expected_effect": "no reader can mistake a stored capture for a fresh read",
+   "priority": "high",
+   "decision": null,
+   "decided_on": null,
+   "would_touch": "index.html"
+  }
+ ]
+}
