@@ -6037,7 +6037,6 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 `nfl-daily-desk/**` and this board was modified.
 
 ---
-
 ## NFL Origination Lab 2026-11-19 · session `arena/7ccaa4f3-own4` (2026-11-19 UTC)
 
 | Task | Status | Owner | File scope |
@@ -6045,3 +6044,7 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 | Fresh official re-verification (standings, W11 schedule, W11 injuries 253 rows, W10 finals, trades, IND@HOU game centre), origination engine, readiness register (70 rows), questions/suggestions/flags, static site + verifier | in progress | arena/7ccaa4f3-own4 | nfl-origination-2026-11-19/**, COORDINATION.md (this block only) |
 
 - 2026-11-19: Claimed. Scope is a new namespace only; no peer namespace, root index.html, or shared navigation edited. All official reads made today via page fetch: standings, week-11 schedule, injuries (7 chunks), week-10 schedule/finals, transactions, depth-charts (404), scores, IND@HOU game centre. Peer registers (nfl-verify-2026-11-19, nfl-daily-desk, nfl-price-snapshot) read for cross-reference only.
+
+## Integration claim · `arena-875f601f-own4` (2026-11-19 UTC)
+
+**Status: in progress.** This branch is the sole current integration scope; prior desk work is already on `main` and its owner explicitly requested a final-integration navigation link. Task: surface the latest dated NFL game-day decision desk from the NFL portal and root dashboard, without modifying peer data or research. Scope: `COORDINATION.md`, `nfl/index.html`, `verification/build.py`, and generated root navigation outputs from that builder only. Read-only elsewhere. No other active claims appear in the latest task records; the previous `nfl-daily-desk` work is complete and its verification passes.
