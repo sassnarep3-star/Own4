@@ -5520,3 +5520,31 @@ Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordinatio
 | INV-04 | Publish inventory + Flagged for Review page; own verifier; PR → merge → Pages check | pending | `nfl-repo-inventory/**`, `COORDINATION.md` |
 
 **Limits (stated up front):** the sandbox cannot fetch nfl.com through bash; official NFL reads go through the fetch tool only. This inventory does not re-verify NFL data values. A PASS from a verifier means the namespace is internally consistent and its links resolve, not that its official-source values are correct.
+
+### arena/4f78a318-own4 — completion record (2026-11-19 UTC)
+
+| ID | Task | Status | Commit / note |
+|----|------|--------|---------------|
+| INV-01 | Claim scope and push claim | done | a4bae88 |
+| INV-02 | Machine inventory of 40 `nfl*` namespaces (files, entry page, verifier, root links) | done | 2381ac5, `nfl-repo-inventory/data/inventory.json` |
+| INV-03 | Each verifier run on a clean `git archive` export; exit codes recorded | done | `nfl-repo-inventory/data/verifier_runs.json`: 36 runs, 34 exit 0, 1 intentional refusal (nfl-req-review round-1), 1 external-input failure (nfl-quant) |
+| INV-04 | Publish inventory, verifier runs and Flagged for Review; own verifier; PR → merge → Pages check | done on merge | `nfl-repo-inventory/**` |
+
+**Sources used (all read 2026-11-19 UTC):**
+- https://www.nfl.com/injuries/ — page title "Week 11 of the 2026 Season"; Thursday 19 Nov IND at HOU 8:15 PM EST Prime Video; Sunday 22 Nov PIT at PHI 1:00 PM EST CBS. Chunk 0 of 7 only.
+- Repository evidence (every row links to the file itself): `nfl-readiness-register/snapshots/manifest.jsonl` and `snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html` (sha256 re-computed, matches manifest); `nfl-req-review/data/flags_2026_11_18.json`; `nfl-req-review/engine/verify.py` and `verify_r2.py`; `nfl-quant/pipeline/07_verify_publish.py`.
+
+**Verification performed:**
+- Ran all 36 namespace verifiers on a clean `git archive` export of e322a32. The repository was not written to. nfl-quant ran in a venv with pandas (PyPI).
+- Rebuilt the four inventory pages; `nfl-repo-inventory/engine/verify.py` PASS: deterministic build, every local link resolves, every inventory row and flag has a GitHub source link, overview tile counts equal counts recomputed from the data, no localhost references.
+- Re-checked each flag's claim against the file it cites before publishing. Two claims were corrected during the session: F08/F09 originally said the Week 11 capture did not exist; the stored capture does exist and is titled Week 11.
+
+**Irregularities (published on `nfl-repo-inventory/pages/flagged.html`, status needs review, none blocks merge):**
+F01 namespace sprawl (40 namespaces) · F02 six NFL executive summaries with different dates · F03 four namespaces without a verifier · F04 two namespaces not linked from root (`nfl-brief-trace`, `nfl-dashboard`) · F05 round-1 verifier intentionally refuses · F06 nfl-quant verifier needs `/home/user/nfl_raw/games.csv` (outside git) · F07 verifiers check consistency and links, not official values · F08 the round-2 register's "Week 11 not yet published" flag is contradicted by the repo's own 2026-11-18T23:49Z capture of the Week 11 page · F09 that Week 11 raw capture is stored but not parsed into any table · F10 COORDINATION.md is append-only and collides on every merge.
+
+**Requests for other sessions / integration (logged, not edited):**
+- Root navigation (integration session, owner of root `index.html`): add a link to `nfl-repo-inventory/index.html`; and add links to `nfl-brief-trace/` and `nfl-dashboard/` (flag F04).
+- `nfl-readiness-register` / `nfl-req-review` owners: re-date or correct the "Week 11 not yet published" flag (F08); decide whether the stored Week 11 capture is parsed (F09).
+- `nfl-quant` owner: commit or document `/home/user/nfl_raw/games.csv` and the pandas dependency (F06).
+
+**Scope not done (honest):** this session did not work through the wider request list (decision-readiness table, per-team starter view, depth-group model, roster-turnover versioning, parlay gate, backtests, etc.). Those are already covered in part by `nfl-req-review` (73-row register, round 2) and `nfl-readiness-register`; this session did not re-verify their rows. No betting value, model output or strategy result was produced or changed.
