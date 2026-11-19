@@ -18,6 +18,7 @@ import json
 import os
 import re
 import sys
+from html.parser import HTMLParser
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 NS = os.path.dirname(HERE)
@@ -66,6 +67,81 @@ SRC = load(os.path.join(DATA, "sources.json"))
 
 def err(msg):
     errors.append(msg)
+
+
+class TableStructure(HTMLParser):
+    """Collect table header/body cells and catch text outside cells in table rows."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.tables = []
+        self.table = None
+        self.section = None
+        self.row = None
+        self.cell = None
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == "table":
+            self.table = {"headers": [], "rows": []}
+            self.tables.append(self.table)
+        elif tag in ("thead", "tbody") and self.table is not None:
+            self.section = tag
+        elif tag == "tr" and self.table is not None:
+            self.row = {"cells": [], "outside_text": False}
+        elif tag in ("th", "td") and self.row is not None:
+            self.cell = {"tag": tag, "scope": attrs.get("scope")}
+            self.row["cells"].append(self.cell)
+        elif tag in ("a", "link") and self.row is not None and attrs.get("href"):
+            self.row.setdefault("hrefs", []).append(attrs["href"])
+
+    def handle_endtag(self, tag):
+        if tag in ("th", "td"):
+            self.cell = None
+        elif tag == "tr" and self.row is not None:
+            if self.table is not None:
+                target = "headers" if self.section == "thead" else "rows"
+                self.table[target].append(self.row)
+            self.row = None
+        elif tag in ("thead", "tbody"):
+            self.section = None
+        elif tag == "table":
+            self.table = None
+            self.section = None
+
+    def handle_data(self, data):
+        if self.row is not None and self.cell is None and data.strip():
+            self.row["outside_text"] = True
+
+
+def check_table_structure(text, rel):
+    audit = TableStructure()
+    audit.feed(text)
+    for table_n, table in enumerate(audit.tables, 1):
+        if not table["headers"]:
+            err("%s: table %d has no header row" % (rel, table_n))
+            continue
+        widths = {len(row["cells"]) for row in table["headers"]}
+        if len(widths) != 1:
+            err("%s: table %d has inconsistent header widths %s" % (rel, table_n, sorted(widths)))
+            continue
+        width = next(iter(widths))
+        if not width:
+            err("%s: table %d has an empty header row" % (rel, table_n))
+        for header_row in table["headers"]:
+            if any(cell["tag"] != "th" or cell["scope"] != "col" for cell in header_row["cells"]):
+                err("%s: table %d column headers must be <th scope=col>" % (rel, table_n))
+        for row_n, row in enumerate(table["rows"], 1):
+            if len(row["cells"]) != width:
+                err("%s: table %d body row %d has %d cells; expected %d" %
+                    (rel, table_n, row_n, len(row["cells"]), width))
+            if row.get("outside_text"):
+                err("%s: table %d body row %d contains text outside a cell" % (rel, table_n, row_n))
+            if row["cells"]:
+                if row["cells"][0]["tag"] != "th" or row["cells"][0]["scope"] != "row":
+                    err("%s: table %d body row %d needs a <th scope=row> first cell" % (rel, table_n, row_n))
+                if any(cell["tag"] != "td" for cell in row["cells"][1:]):
+                    err("%s: table %d body row %d has a non-data cell after its row header" %
+                        (rel, table_n, row_n))
 
 
 # ---------------------------------------------------------------- 7. register integrity
@@ -146,18 +222,19 @@ for rel in PAGES:
         continue
     text = open(path, encoding="utf-8").read()
 
-    # 1. structure
+    # 1. structure: balanced tags plus semantic row/header cell shape.
     if text.count("<table") != text.count("</table>"):
         err("%s: unbalanced <table>" % rel)
     if text.count("<tbody>") != text.count("</tbody>"):
         err("%s: unbalanced <tbody>" % rel)
+    check_table_structure(text, rel)
     for rx, why in PLACEHOLDERS:
         if rx.search(text):
             err("%s: %s" % (rel, why))
 
     # 2. every data row has a source link
     for i, tbody in enumerate(re.findall(r"<tbody>(.*?)</tbody>", text, re.S)):
-        for j, row in enumerate(re.findall(r"<tr>(.*?)</tr>", tbody, re.S)):
+        for j, row in enumerate(re.findall(r"<tr\b[^>]*>(.*?)</tr>", tbody, re.S)):
             hrefs = re.findall(r'href="([^"]+)"', row)
             if not hrefs:
                 err("%s: table %d row %d has no link at all" % (rel, i, j))

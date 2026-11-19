@@ -67,14 +67,27 @@ def badge(text, cls):
 
 
 def table(headers, rows, caption, cls="", row_ids=None):
-    th = "".join('<th scope="col">%s</th>' % h for h in headers)
-    if row_ids:
-        body = "".join('<tr id="%s">%s</tr>' % (esc(rid).lower(), "".join(r))
-                       for rid, r in zip(row_ids, rows))
-    else:
-        body = "".join("<tr>%s</tr>" % "".join(r) for r in rows)
+    """Render a semantic table: column headers in the head and one cell per body column.
+
+    The row payloads are trusted, already-escaped HTML fragments built by this module. The
+    first payload is promoted to a row header; all remaining payloads become ordinary data
+    cells. Validate dimensions here so a future added column cannot silently shift data.
+    """
+    if any(len(row) != len(headers) for row in rows):
+        raise ValueError("table %r: row width differs from %d headers" % (caption, len(headers)))
+    if row_ids is not None and len(row_ids) != len(rows):
+        raise ValueError("table %r: %d row ids for %d rows" % (caption, len(row_ids), len(rows)))
+
+    thead = "".join('<th scope="col">%s</th>' % h for h in headers)
+    rendered = []
+    for index, row in enumerate(rows):
+        row_header = '<th scope="row">%s</th>' % row[0]
+        cells = row_header + "".join("<td>%s</td>" % value for value in row[1:])
+        attr = ' id="%s"' % esc(row_ids[index]).lower() if row_ids is not None else ""
+        rendered.append("<tr%s>%s</tr>" % (attr, cells))
+    body = "".join(rendered)
     return ('<div class="tw"><table class="%s"><caption>%s</caption><thead><tr>%s</tr></thead>'
-            '<tbody>%s</tbody></table></div>' % (cls, esc(caption), th, body))
+            '<tbody>%s</tbody></table></div>' % (cls, esc(caption), thead, body))
 
 
 def _route_test(req_id):
@@ -786,10 +799,10 @@ wrong.</li>
 <p>Of %(req_n)d lines, <strong>%(blocked_n)d</strong> are blocked and <strong>%(decision_q)d</strong> questions
 are marked as needing only your decision. They collapse to four:</p>
 <table><thead><tr><th scope="col">Decision</th><th scope="col">What it unblocks</th><th scope="col">Why an agent cannot take it</th></tr></thead><tbody>
-<tr><td><strong>Q02 — price policy</strong> <a href="questions.html#q02">Q02 &#8599;</a></td><td>%(blocked_ids)s %(src_sched)s</td><td>It is a usage-rights choice with external consequences; a provisional answer is already recorded and flagged for you.</td></tr>
-<tr><td><strong>Q12 — data rights (now answered)</strong> <a href="questions.html#q12">Q12 &#8599;</a></td><td><code>RQ-39</code> %(src_terms)s</td><td>The terms were read this session and they prohibit the collection method. What remains is a compliance action, not a question: move row-level tables private or obtain written consent.</td></tr>
-<tr><td><strong>Q06 — playing-time substitute</strong> <a href="questions.html#q06">Q06 &#8599;</a></td><td><code>RQ-11</code>, <code>RQ-54</code> %(src_stats)s</td><td>No official snap count exists; substituting Game Book participation is defensible but it is a substitution, and the brief asked for snaps.</td></tr>
-<tr><td><strong>Q21 — the qualification floor</strong> <a href="questions.html#q21">Q21 &#8599;</a></td><td>%(lb_ids)s %(src_sched)s</td><td>It sets whether any reward is payable before the 2028 season. That is a policy, not a measurement.</td></tr>
+<tr><th scope="row"><strong>Q02 — price policy</strong> <a href="questions.html#q02">Q02 &#8599;</a></th><td>%(blocked_ids)s %(src_sched)s</td><td>It is a usage-rights choice with external consequences; a provisional answer is already recorded and flagged for you.</td></tr>
+<tr><th scope="row"><strong>Q12 — data rights (now answered)</strong> <a href="questions.html#q12">Q12 &#8599;</a></th><td><code>RQ-39</code> %(src_terms)s</td><td>The terms were read this session and they prohibit the collection method. What remains is a compliance action, not a question: move row-level tables private or obtain written consent.</td></tr>
+<tr><th scope="row"><strong>Q06 — playing-time substitute</strong> <a href="questions.html#q06">Q06 &#8599;</a></th><td><code>RQ-11</code>, <code>RQ-54</code> %(src_stats)s</td><td>No official snap count exists; substituting Game Book participation is defensible but it is a substitution, and the brief asked for snaps.</td></tr>
+<tr><th scope="row"><strong>Q21 — the qualification floor</strong> <a href="questions.html#q21">Q21 &#8599;</a></th><td>%(lb_ids)s %(src_sched)s</td><td>It sets whether any reward is payable before the 2028 season. That is a policy, not a measurement.</td></tr>
 </tbody></table>
 
 <h2>What this session changed</h2>
