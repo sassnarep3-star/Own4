@@ -61,7 +61,7 @@ Two counts were **measured, not typed**:
 
 | Deliverable | Why it matters |
 |---|---|
-| `engine/census.py` | 40 workspaces, duplication counts and 62 register disagreements, all measured |
+| `engine/census.py` | every NFL workspace, duplication counts and the pairwise register disagreements, all measured |
 | `engine/parse_standings.py` | the official standings as data, from the saved read |
 | `engine/parse_injuries.py` | injury counts from a hashed capture, refusing to publish if the hash moves |
 | `engine/register.py` | the 73 lines with every register's answer and every evidence path resolved |
@@ -74,8 +74,8 @@ Two counts were **measured, not typed**:
   the only one of the three with a testable condition.)
 - **D-2** Buy or licence a price series, or publish model-only lines and label them as such?
 - **D-3** May raw captures be served publicly, or do they move to a private store?
-- **D-4** Which of the 40 workspaces are live, and which are history?
-- **D-5** Replace 40 verifiers with one repo-level gate?
+- **D-4** Which workspaces are live, and which are history?
+- **D-5** Replace the per-namespace verifiers with one repo-level gate?
 
 None of these has been taken. They are recorded on the suggestions page with a blank
 decision column so the choice stays visible.
