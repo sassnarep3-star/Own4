@@ -28,5 +28,10 @@ jobs:
       - run: python3 nfl-origination-lab/engine/build.py
       # the publication gate: sourcing, links, counts, no-lookahead, prereg hash, determinism
       - run: python3 nfl-origination-lab/engine/verify.py
-      # the data must be reproducible: a rebuild may not change a committed byte
-      - run: git diff --exit-code -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
+      # the data must be reproducible: a rebuild may not change a committed byte.
+      # Print the diff first so a failure names the file and value instead of just refused.
+      - name: Rebuild must be byte-identical
+        run: |
+          git diff --stat -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
+          git diff -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html | head -60
+          git diff --exit-code -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
