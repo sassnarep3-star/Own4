@@ -5557,10 +5557,53 @@ F01 namespace sprawl (40 namespaces) · F02 six NFL executive summaries with dif
 | ID | Task | Status | Owner | File scope |
 |----|------|--------|-------|------------|
 | W1 | Claim + survey (this block) | done | `arena/893d26c1-own4` | `COORDINATION.md` |
-| W2 | Transcribe the 2026-11-19 official read (all 13 Week-11 games) with the read clock recorded | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/data/official_read_2026-11-19_w11.md` |
-| W3 | Parse the stored raw 2026-11-18 HTML (sha256-checked against the manifest) and compute the delta (added / removed / changed rows, per-club state) | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/engine/**`, `nfl-w11-delta/data/delta.json` |
-| W4 | Static site: landing, delta page, per-club page, sources, Flagged for Review; every row source-linked to nfl.com/injuries | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/index.html`, `nfl-w11-delta/pages/**` |
-| W5 | Verifier (stdlib): sha256 check, row-count checks, link checks, no localhost, every table row has an official link | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/engine/verify.py` |
+| W2 | Transcribe the 2026-11-19 official read (all 13 Week-11 games) with the read clock recorded | done | `arena/893d26c1-own4` | `nfl-w11-delta/data/official_read_2026-11-19_w11.md` |
+| W3 | Parse the stored raw 2026-11-18 HTML (sha256-checked against the manifest) and compute the delta (added / removed / changed rows, per-club state) | done | `arena/893d26c1-own4` | `nfl-w11-delta/engine/**`, `nfl-w11-delta/data/delta.json` |
+| W4 | Static site: landing, delta page, per-club page, sources, Flagged for Review; every row source-linked to nfl.com/injuries | done | `arena/893d26c1-own4` | `nfl-w11-delta/index.html`, `nfl-w11-delta/pages/**` |
+| W5 | Verifier (stdlib): sha256 check, row-count checks, link checks, no localhost, every table row has an official link | done | `arena/893d26c1-own4` | `nfl-w11-delta/engine/verify.py` |
 | W6 | Log results, PR to `main`, merge, Pages check | not started | `arena/893d26c1-own4` | `COORDINATION.md` |
 
 **Shared files:** none edited. The root dashboard, `nfl/`, `nfl-brief-trace/` and the readiness register are read-only inputs for this session.
+
+### Completion record — `arena/893d26c1-own4` (2026-11-19 UTC)
+
+**Result.** Two dated official reads of the Week 11 injury report were compared and the delta published (deltas only, no level).
+Earlier read: stored raw HTML, captured 2026-11-18T23:49:17Z, sha256 `e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b`
+(matches `nfl-readiness-register/snapshots/manifest.jsonl`). Later read: official page via `fetch_page`, after 06:48:48 UTC on 2026-11-19.
+
+- 242 rows in both reads: 0 changed (injury, practice, game status, position).
+- 11 rows added, all in the Chargers block: the earlier capture printed “No Injuries Reported” for the Chargers (also Bengals, Commanders).
+- 0 removed. Six clubs (ATL, CLE, GB, LAR, NE, SEA) are in neither read; bye status not verified (F5).
+
+**Sources (official):** https://www.nfl.com/injuries/ (both reads) · https://www.nfl.com/schedules/ (context, not re-read) ·
+headline links shown on the injury page: https://www.nfl.com/news/buccaneers-qb-baker-mayfield-injury-week-11 and
+https://www.nfl.com/news/notable-injuries-news-sunday-week-10-games-2026 (headlines only; articles not fetched).
+
+**Verification performed.** `nfl-w11-delta/engine/verify.py`: 36/36 PASS — raw hash vs manifest; transcription hash vs `delta.json`;
+row and table counts re-derived by an independent parser (242 raw / 253 later / 23 / 24 tables); closed vocabularies (no unknown
+position, practice or game status); delta arithmetic; every table row on all five pages carries an nfl.com link; no localhost;
+local links resolve; delta page lists exactly the 11 changed rows; rebuild is byte-identical. Transcription check: the 242 overlapping
+rows agree with the raw HTML on every compared field (a transcription error would appear as a change).
+
+**Irregularities (published on `nfl-w11-delta/pages/flagged.html`, F1–F9, all non-blocking):**
+- F1 Chargers empty block at 23:49Z, 11 rows at 06:48Z+ (cause not stated by the page).
+- F2 Buccaneers QB Baker Mayfield: injury cell blank in both reads; official headline says lower-leg injury.
+- F3 Jets QB Geno Smith: injury cell blank in Week 11; official Week 10 headline says ankle injury.
+- F4 Name/link mismatches: Dee Alford (BUF) → `/players/deaundre-ford/`; Jacob Hummel (HOU) → `/players/jake-hummel/`.
+- F5 Six clubs absent from both reads; bye status unverified.
+- F6 Later read is a transcription, not raw bytes (sandbox egress blocks nfl.com).
+- F7 Page prints no update time; read clock is the session's.
+- F8 Row-level transcription is in the public repo; the brief's private-store term is an owner decision.
+- F9 Game-status blanks left blank; Friday's report not read.
+
+**Repo irregularities noticed while surveying (not edited here; for the owning sessions):**
+- The S4 row in the `arena/f7545de2-own4` claim table still reads “claimed”, while that session's completion record says all nine tasks are done. Board row is stale.
+- `nfl-brief-trace` reports B26 (opponent-aware ratings) as a gap because it searched only `nfl-book` and `nfl-markets`. The `nfl-sources` namespace was not searched; not verified here.
+- Running `nfl-brief-trace/engine/verify.py` regenerates `nfl-brief-trace/pages/flagged.html` with a one-byte change (a missing trailing newline). This session reverted it; the verifier is not write-clean.
+- RF-02 in the readiness register (“Week-11 report not yet published”) is out of date as of 2026-11-19 06:48Z; the official Week 11 report is published.
+
+**Scope limits (stated plainly).** This session did one brief item (a dated official-read delta with flags). It did not build the other
+brief items, did not add a private store, did not read Friday's report, and did not edit the root dashboard or any peer namespace.
+The sandbox cannot reach nfl.com directly; the later read comes from the `fetch_page` tool.
+
+**Branch note.** The brief's `session-<id>/<task>` branch naming is not creatable in this harness (same logged deviation as prior sessions); all work is on `arena/893d26c1-own4`.
