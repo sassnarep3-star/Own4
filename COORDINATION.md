@@ -5823,3 +5823,32 @@ python3 build_site.py (root): pages: 10, PROBLEMS: none, exit 0. The regenerated
 ### Claims on this session
 PR link, merge result and Pages status: to be recorded in task INT-6 after the PR merges.
 
+
+## arena/6c8bbde6-own4 — V8 integration + merge + Pages (2026-11-19)
+
+**V8 DONE.** Final integration, PR, merge and Pages confirmation complete for the
+`nfl-verify-2026-11-19` namespace.
+
+- **Integration scope:** root `index.html`, `verification/build.py`, `verified/*.html` are owned by the
+  integration session `arena/9208e00a-own4`; per the coordination rules they were **not** edited here.
+  The additive root-nav link request for this namespace is logged here for that session. The namespace
+  is fully self-contained with its own `index.html` + 11 subpages + assets, so it deploys and is
+  navigable at its own path without a root-nav change.
+- **Conflict resolved as union:** merging `origin/main` into this branch conflicted only on the
+  append-only `COORDINATION.md`. Resolved as a union — both this session's claim + progress log and
+  `main`'s peer appends (`arena/4f78a318-own4`) are kept verbatim. Merge commit `79a8f27` pushed to
+  `origin/arena/6c8bbde6-own4`. No peer work discarded.
+- **PR:** #182 — "nfl-verify-2026-11-19: fresh official re-verification round (V1-V7)"
+  https://github.com/sassnarep3-star/Own4/pull/182
+- **Merge result:** **MERGED** (squash), merge commit `9bea5281e3f2a41dbb553b6ee05f106da1405aba`,
+  mergedAt `2026-11-19T07:10:05Z`. Merged without waiting for review, per instructions.
+- **Pages deploy: confirmed.** GitHub Pages (source: `main` at `/`) rebuilt successfully
+  (status `built`). Live namespace: https://sassnarep3-star.github.io/Own4/nfl-verify-2026-11-19/ —
+  verified rendering the KPIs, decision-readiness table, 10 reconciliation checks, and flagged
+  irregularities, all with source links. Subpages resolve (e.g. `pages/requirements.html`).
+- **Files on main confirmed** via the GitHub contents API: `nfl-verify-2026-11-19/{index.html,
+  pages/*.html, data/*.json, engine/*.py, assets/style.css, EXECUTIVE_SUMMARY.md}` and the CI workflow.
+- **Verification:** all 7 gates PASS on the committed namespace (G1 pages, G2 row-source, G3 internal
+  links, G4 no-localhost, G5 placeholders, G6 external allowlist, G7 determinism).
+
+**All tasks V1-V8 for this session are complete.**
