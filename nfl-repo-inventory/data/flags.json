@@ -1,0 +1,111 @@
+{
+  "note": "Irregularities found during the inventory. Status 'needs review' means published here and does not block anything. Each item links to the file or official page it is based on.",
+  "flags": [
+    {
+      "id": "F01",
+      "title": "Namespace sprawl: 40 nfl* namespaces with overlapping scope",
+      "detail": "The repository holds 40 nfl* directories, 1,550 tracked files, 563 HTML pages, 58 summary-named files and 71 flagged-named files. Several namespaces cover the same requirements. A reader cannot tell which page is current without this inventory.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/tree/main",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-repo-inventory/data/inventory.json"
+      ],
+      "owner_decision": "Choose one canonical namespace per topic, or archive the rest. Options are listed on the suggestions page of nfl-readiness-register."
+    },
+    {
+      "id": "F02",
+      "title": "Six NFL executive summaries at the repository root, plus per-namespace summaries",
+      "detail": "Root-level NFL summaries: EXECUTIVE_SUMMARY_NFL_MARKETS.md (2026-11-14), NFL_EXECUTIVE_SUMMARY.md (2026-11-12), NFL_LIVE_BOARD_EXECUTIVE_SUMMARY.md (snapshot 2026-11-17), NFL_MARKET_EXEC_SUMMARY.md (2026-11-14) and NFL_OWN_EXECUTIVE_SUMMARY.md (snapshot 2026-11-13), plus EXECUTIVE_SUMMARY.md (shared, undated). Each points to a different live page. None is marked as the current one.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/NFL_OWN_EXECUTIVE_SUMMARY.md",
+        "https://github.com/sassnarep3-star/Own4/blob/main/NFL_EXECUTIVE_SUMMARY.md",
+        "https://github.com/sassnarep3-star/Own4/blob/main/NFL_LIVE_BOARD_EXECUTIVE_SUMMARY.md"
+      ],
+      "owner_decision": "Name one current executive summary and mark the others as superseded."
+    },
+    {
+      "id": "F03",
+      "title": "Four namespaces have no verifier",
+      "detail": "nfl, nfl-arena, nfl-readiness and nfl-research contain pages but no verify script, so their links, source rows and numbers are not checked by any gate.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl",
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl-arena",
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl-readiness",
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl-research"
+      ],
+      "owner_decision": "Add a verifier or mark the namespace as unverified on the root navigation."
+    },
+    {
+      "id": "F04",
+      "title": "Two namespaces are not linked from the root index",
+      "detail": "nfl-brief-trace and nfl-dashboard have a verifier and an index page but are not referenced from the root index.html. They are reachable only by URL.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/index.html",
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl-brief-trace",
+        "https://github.com/sassnarep3-star/Own4/tree/main/nfl-dashboard"
+      ],
+      "owner_decision": "Add navigation links in the integration session. This session did not edit root index.html."
+    },
+    {
+      "id": "F05",
+      "title": "Round-1 verifier intentionally refuses to run (superseded)",
+      "detail": "nfl-req-review/engine/verify.py exits with code 1 and the message 'superseded: round 2 is built by engine/round2.py'. It is kept so it cannot overwrite the round-2 pages. The round-2 verifier (verify_r2.py) passes. Anyone running every verifier will see one failure.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/engine/verify.py",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/engine/verify_r2.py"
+      ],
+      "owner_decision": "Delete the round-1 verifier, or rename it to show it is retired."
+    },
+    {
+      "id": "F06",
+      "title": "nfl-quant verifier depends on a file outside the repository",
+      "detail": "pipeline/07_verify_publish.py reads /home/user/nfl_raw/games.csv. That path is not in git, so the verifier cannot be reproduced from a clone. It imports pandas, and no requirements file in the namespace lists it (checked .txt, .toml and .cfg).",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/pipeline/07_verify_publish.py"
+      ],
+      "owner_decision": "Commit the input file with its source link and hash, or document the dependency and the source it came from."
+    },
+    {
+      "id": "F07",
+      "title": "Verifiers check consistency and links, not the truth of official values",
+      "detail": "Verifier PASS means a namespace's links resolve, its rows carry a source link, and its numbers agree with its own files. It does not re-read the official pages. For example, nfl-req-review's verify_r2 passes while its official reads are dated 2026-11-18 and describe Week 10.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/engine/verify_r2.py",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/official_reads_2026_11_18.json"
+      ],
+      "owner_decision": "Decide how often official pages are re-read, and which date a PASS applies to."
+    },
+    {
+      "id": "F08",
+      "title": "The repo already holds a Week 11 official capture; the round-2 register still says Week 11 is unpublished",
+      "detail": "Facts, each checked: (1) nfl-readiness-register/snapshots/manifest.jsonl records injury_report-2026-11-18T234917Z, captured 2026-11-18T23:49:17Z from https://www.nfl.com/injuries/, status OK, schema_ok true, 23 game-status markers, 371,313 bytes. (2) The stored file's sha256 matches the manifest, and its page title is 'Official Latest NFL Injury Report for Players - Week 11 of the 2026 Season'. (3) On 2026-11-19 the live page fetched the same title and shows Thursday 19 November IND at HOU (8:15 PM EST, Prime Video). (4) The round-2 register flag 'The Week-11 injury report is not yet published' (nfl-req-review/data/flags_2026_11_18.json) therefore does not match the repo's own capture from 23:49 UTC on 2026-11-18. The register's read time is not stated in that flag, so it may pre-date the capture; either way it is stale.",
+      "evidence": [
+        "https://www.nfl.com/injuries/",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/flags_2026_11_18.json"
+      ],
+      "owner_decision": "Re-run the register's Week 11 read against the stored capture, and correct or date the 'not yet published' flag."
+    },
+    {
+      "id": "F09",
+      "title": "The Week 11 raw capture is stored but not parsed into any table",
+      "detail": "No Week 11 row appears in any published table: the register's official reads are dated 2026-11-18 and describe Week 10. This session read only chunk 0 of 7 of the live Week 11 page and did not transcribe rows by hand, because hand transcription of a full report invites errors. A parser for the stored raw capture needs its own verification pass against the official page, with the drift alarm described in nfl-readiness-register.",
+      "evidence": [
+        "https://www.nfl.com/injuries/",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl",
+        "https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-readiness-register.yml"
+      ],
+      "owner_decision": "Approve a parser for the Week 11 raw capture, with row-count and field pins, before any Week 11 value is published."
+    },
+    {
+      "id": "F10",
+      "title": "Coordination board is 5,500+ lines of append-only log and collides on every merge",
+      "detail": "COORDINATION.md records repeated conflicts at its tail when several sessions append at once. Its own log says the protocol's session-branch naming was superseded by a harness-fixed branch, so the branch names in the board do not match the protocol.",
+      "evidence": [
+        "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+        "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/pages/suggestions.html"
+      ],
+      "owner_decision": "Split the board into one file per session, with COORDINATION.md as an index (suggestion S8 in the board)."
+    }
+  ]
+}

@@ -1,0 +1,168 @@
+{
+ "dataset": "nfl_command_deck_questions",
+ "built_utc": "2026-11-19",
+ "session": "arena/1153eb96-own4",
+ "rule": "A question is only listed if a decision downstream actually depends on it. 'Known' is what the repository can answer today, 'unknown' is what it cannot, and 'how to find out' names the official source that would settle it. No answer is guessed.",
+ "rows": [
+  {
+   "id": "Q-01",
+   "area": "Price data",
+   "question": "Is there any official source for an NFL opening and closing line?",
+   "known": "No. Every market_open_value and market_close_value in the repository's price stores is null by policy, and the NFL does not publish a line. The three official pages read for this question (game centre, week schedule, injuries hub) carry no price field.",
+   "unknown": "Whether a licensed or operator feed is acceptable to the owner, and what its terms permit.",
+   "blocks": "Every ROI, CLV, staking, parlay and prop-combo result. Without a price there is no settlement.",
+   "how_to_find_out": "Read the NFL data terms and any operator API terms the owner holds; then record the decision in S-01. Nothing can be backtested for money until this is answered.",
+   "sources": ["https://www.nfl.com/games/colts-at-texans-2026-reg-11"]
+  },
+  {
+   "id": "Q-02",
+   "area": "Results",
+   "question": "Which archive is the canonical results corpus: 137 games or 149 games?",
+   "known": "Two archives exist. nfl-book/data/results_feed.json (2026-11-14) holds 137; nfl-live-board/data/corpus_2026.json (2026-11-17) holds 149. The 12-game difference is the Week-10 finals completed between the two captures. This session reconciles 139 common fixtures and finds no score contradiction, and evaluates on 149.",
+   "unknown": "Which one the owner will treat as canonical, and whether a third capture will be taken before Week 12.",
+   "blocks": "Any leaderboard that must be comparable across time. A 137-game and a 149-game leaderboard cannot be ranked against each other.",
+   "how_to_find_out": "Take one fresh official capture of the scores pages and adopt it; log the adoption date. Recomputation here takes under a second, so this is a policy choice, not an engineering problem.",
+   "sources": ["https://www.nfl.com/scores/2026/week-10"]
+  },
+  {
+   "id": "Q-03",
+   "area": "Depth",
+   "question": "Can depth be modelled from playing time instead of from the published chart?",
+   "known": "Not from anything held here. A full-tree scan finds no snap-count dataset. One official inactive list exists (nfl-decision-gaps/data/inactives_week10.json, 24 rows) — a single week.",
+   "unknown": "Whether an official snap-count source with usable terms exists at all.",
+   "blocks": "The brief's explicit rejection of depth-from-jersey-order can only be honoured by playing time; without it the chart remains the only official ordering and it must be labelled as such.",
+   "how_to_find_out": "Check the official player-stats pages for a per-game snap share and its terms of use. If none is available, record the fallback as a decision rather than letting a proxy slip in.",
+   "sources": ["https://www.nfl.com/stats/player-stats/"]
+  },
+  {
+   "id": "Q-04",
+   "area": "Availability",
+   "question": "Does a game designation predict participation, and by how much?",
+   "known": "Not answerable yet. The single Week-11 capture has a game designation on 16 of 242 rows (9 Out, 7 Questionable). A reliability estimate needs a join of designations to official inactive lists over many weeks.",
+   "unknown": "The play rate per designation with a confidence interval, and whether the label deserves to be a feature.",
+   "blocks": "Any injury adjustment that subtracts points. Until the reliability is measured, an injury term would be a prior, not evidence.",
+   "how_to_find_out": "Capture the report daily Wednesday→kickoff and the inactive list on game day for a full season; then join. The capture workflow already exists (nfl-readiness-register/capture); it has run twice.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "Q-05",
+   "area": "Availability",
+   "question": "When a rank-1 player is Out, who actually played his snaps?",
+   "known": "The club names the next man on its own depth chart for all three Out players this session could join. Who took the field is unknown: no inactive list and no snap count are held for Week 11.",
+   "unknown": "Actual participation, and whether the chart's order matched it.",
+   "blocks": "The deficiency signal the brief asks for (2nd/3rd/4th string replacing a starter). Without participation, every such claim would be an inference from the chart, which the brief forbids.",
+   "how_to_find_out": "Capture the official inactive list at 90 minutes pre-kickoff and the official snap counts after the game, then join on club and player.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "Q-06",
+   "area": "Model",
+   "question": "Is the measured forecast skill real, or an artefact of one favourable stretch?",
+   "known": "This session measures it. CD-1 (opponent-aware rating) scores BSS +0.136 against climatology over weeks 4–10, +0.240 on the untouched holdout weeks 8–10, and the week-cluster 95% lower bound is +0.053. On 200 schedules with team identity permuted away, the null 95th percentile is +0.031 and the observed value exceeds every one of the 200.",
+   "unknown": "Whether it survives a season. 100 scored forecasts over 7 weeks is enough to separate from controls, not enough to fund a reward.",
+   "blocks": "Stage-1 qualification for rewards. Not the publication of the number.",
+   "how_to_find_out": "Let the frozen rule run forward on weeks 11–18 without touching it, and score it prospectively. The registration is hashed, so this is enforceable.",
+   "sources": ["https://www.nfl.com/standings/league/2026/REG"]
+  },
+  {
+   "id": "Q-07",
+   "area": "Model",
+   "question": "Does the rating know about injuries, or only about results?",
+   "known": "Only about results. The rating is fitted on final scores; no availability feature is in it. An ablation is impossible because there is one week of availability and no historical availability at all.",
+   "unknown": "The size of the injury effect, with uncertainty.",
+   "blocks": "The brief's 'ablation, not fixed penalty'. A fixed number of points deducted for a missing starter cannot be justified from held data.",
+   "how_to_find_out": "Accumulate point-in-time availability first (Q-04), then run identical models with and without the features on the same chronological holds.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "Q-08",
+   "area": "Models",
+   "question": "Two total models were promised 'until one wins' — is the comparison decisive?",
+   "known": "No. Total MAE is 10.776 against a 10.790 training-mean benchmark, a difference of 0.014 points with a week-cluster 95% interval of [-0.114, +0.089] that straddles zero. The comparison is a tie and is published as one.",
+   "unknown": "Whether either estimator is better once availability and weather features exist.",
+   "blocks": "Collapsing to one total estimator. A coin-flip comparison cannot retire a model.",
+   "how_to_find_out": "Keep both, add the features, and re-run the same pre-declared comparison on a longer window.",
+   "sources": ["https://www.nfl.com/schedules/2026/by-week/week-10"]
+  },
+  {
+   "id": "Q-09",
+   "area": "Correlations",
+   "question": "What are the real correlations between legs of a same-game parlay?",
+   "known": "Unknown and not estimated. Computing them needs joint official outcomes for the specific legs (for example a spread and a total on the same game), which requires prices. Score-only correlations would be a different quantity, so they are not substituted.",
+   "unknown": "Every joint probability needed to price a combo.",
+   "blocks": "The joint-evidence gate for parlays and prop combos. Multiplying marginal probabilities under dependence is invalid and is never done here.",
+   "how_to_find_out": "Settle Q-01 first; then joint outcomes become computable from official results plus the agreed price source.",
+   "sources": ["https://www.nfl.com/scores/2026/week-10"]
+  },
+  {
+   "id": "Q-10",
+   "area": "Weather",
+   "question": "Can stadium roof, surface and hourly wind be attached to each fixture?",
+   "known": "No. The repository holds no weather dataset and no official roof designation. Thirteen Week-11 fixtures carry a venue string, twelve of them complete.",
+   "unknown": "Whether an official or government source can be joined to the fixture list on a schedule.",
+   "blocks": "The totals and passing-prop overlay the brief asks for. Without it, wind and roof are an unmodelled residual.",
+   "how_to_find_out": "Read the official stadium pages for roof designations and the National Weather Service hourly forecast API for the venue coordinates; store both with timestamps.",
+   "sources": ["https://www.nfl.com/schedules/2026/by-week/week-11"]
+  },
+  {
+   "id": "Q-11",
+   "area": "Structure",
+   "question": "Which of the 41 NFL workspaces is the one a reader should open?",
+   "known": "There is no answer in the repository today. The root navigation carries 958 NFL links; eleven namespaces still show dates from before 2026-11-16; 601 anchors and 52 file links are broken.",
+   "unknown": "Whether the owner wants one entry point with the rest frozen, or a merged single source.",
+   "blocks": "Any human review. A reader cannot tell which of 41 pages is current, so nothing on them can be acted on.",
+   "how_to_find_out": "Owner decision. This session publishes one candidate entry point and links the rest; suggestion S-02 lays out the options.",
+   "sources": ["https://github.com/sassnarep3-star/Own4"]
+  },
+  {
+   "id": "Q-12",
+   "area": "Process",
+   "question": "What counts as a 'verified' number when the official site cannot be reached?",
+   "known": "In this environment, only a committed capture with a re-checkable SHA-256. This session re-hashes all five committed captures successfully and re-parses two of them independently.",
+   "unknown": "Whether the owner accepts capture-based verification as sufficient, or requires a live re-read before anything is published.",
+   "blocks": "The meaning of every 'verified' label on the site.",
+   "how_to_find_out": "Owner decision on S-03. The label used here is explicit: 'captured 2026-11-18T23:49:17Z, sha256 verified', never 'verified today'.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "Q-13",
+   "area": "Availability",
+   "question": "How should 'Questionable' be priced?",
+   "known": "Not at all, yet. The league publishes no percentage and the single capture holds 7 Questionable rows. Any percentage applied now would be imported folklore.",
+   "unknown": "The empirical play rate, by position and by practice participation, with intervals.",
+   "blocks": "Making the designation a model feature.",
+   "how_to_find_out": "Q-04's join over several seasons; the label becomes a feature only if the interval excludes the base rate.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "Q-14",
+   "area": "Roster",
+   "question": "Does 'not on the injury report' mean available?",
+   "known": "No, and the repository has the counter-example material: a player on injured reserve does not appear in the weekly report. One November reserve-list capture is held (25 dated rows) but it is a single month.",
+   "unknown": "Each club's complete reserve list at each past kickoff.",
+   "blocks": "Any availability feature that treats absence as health.",
+   "how_to_find_out": "Capture the reserve list on the same schedule as the injury report and join on club.",
+   "sources": ["https://www.nfl.com/transactions/league/reserve-list/2026/11"]
+  },
+  {
+   "id": "Q-15",
+   "area": "Rewards",
+   "question": "Is a reward justified at all on one season of a single model?",
+   "known": "No number in this repository supports paying one. 100 scored forecasts, 7 weeks of independence, one model that clears its gates and three that do not. Points awarded: 0.",
+   "unknown": "The sample size the owner wants before any reward is paid.",
+   "blocks": "The competition itself.",
+   "how_to_find_out": "Pre-declare the reward tier and the sample it requires now, before the prospective window closes. Suggestion S-05 proposes a tier structure with no payout until season end.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/leaderboard.json"]
+  },
+  {
+   "id": "Q-16",
+   "area": "Data rights",
+   "question": "May row-level official data be republished, or only derived analysis?",
+   "known": "Not established. The repository currently publishes both: 149 result rows, 705 depth slots and 242 injury rows are in the public tree, not behind a private layer.",
+   "unknown": "What the NFL's terms permit for a public GitHub Pages site.",
+   "blocks": "Whether the public layer must be reduced to derived indices with links to the official page.",
+   "how_to_find_out": "Read the official terms of use before the next publication, and record the decision here.",
+   "sources": ["https://www.nfl.com/"]
+  }
+ ]
+}

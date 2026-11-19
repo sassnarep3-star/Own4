@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sources and capture hashes · NFL Command Deck</title>
+<link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body>
+<aside class="side">
+  <a class="brand" href="../index.html">NFL <span>Command Deck</span></a>
+  <div class="tag">Evidence surface · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Command deck</div><a class="nav" href="../index.html">Start here — decision readiness</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/model.html">Model &amp; luck panel</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><div class="grp">Evidence &amp; control</div><a class="nav" href="../pages/requirements.html">Requirement audit (73 rows)</a><a class="nav" href="../pages/repo-audit.html">Repository audit</a><a class="nav" href="../pages/questions.html">Questions before any decision</a><a class="nav" href="../pages/suggestions.html">Suggestions — choose a path</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a><a class="nav active" href="../pages/sources.html">Sources &amp; capture hashes</a></nav>
+  <div class="side-note">
+    <strong>No live official read.</strong> nfl.com cannot be reached from this build
+    environment. Every figure comes from a committed official capture whose SHA-256 is
+    re-checked at build time. See <a href="../pages/flagged.html">RF-01</a>.
+  </div>
+  <a class="flag" href="../pages/flagged.html">⚑ 15 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<header class="head">
+  <h1>Sources and capture hashes</h1>
+  <p class="sub">Every figure traces here. The hashes are re-checked at build time.</p>
+</header>
+
+<section class="lede">
+  <p>13 sources. Five are committed official captures whose bytes this build re-hashes; the
+  hash is printed so anyone can verify it with <code>sha256sum</code>. Four are official URLs
+  cited inside those captures. Four are repository artifacts produced by named scripts.</p>
+  <p><strong>No row cites a page read live in this session, because none could be read.</strong>
+  See <a href="flagged.html">RF-01</a>.</p>
+</section>
+<div class="scroll"><table class="grid"><thead><tr><th>ID</th><th>Class</th><th>Source</th><th>URL</th><th>Captured (UTC)</th><th>SHA-256</th><th>Re-checked</th><th>Used for</th></tr></thead><tbody><tr><td>S1</td><td><span class="pill ok">CAPTURED</span></td><td>Official NFL injury report — Week 11</td><td><a href="https://www.nfl.com/injuries/">https://www.nfl.com/injuries/</a></td><td>2026-11-18T23:49:17Z</td><td><code class='small'>e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b</code></td><td>yes</td><td>26 club tables, 242 player rows, 16 game designations (9 Out, 7 Questionable), practice status for every row</td></tr><tr><td>S2</td><td><span class="pill ok">CAPTURED</span></td><td>Official NFL reserve list — November 2026</td><td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11">https://www.nfl.com/transactions/league/reserve-list/2026/11</a></td><td>2026-11-18T23:49:18Z</td><td><code class='small'>afb62a8311e810419a8e6e2cf0bfc907df80b9c131cbac9a448af987d77ed1f5</code></td><td>yes</td><td>25 dated reserve-list transactions (11/10–11/18) with club and transaction type</td></tr><tr><td>S3</td><td><span class="pill ok">CAPTURED</span></td><td>Official injury report, Week 10 — rendered summary</td><td><a href="https://www.nfl.com/injuries/">https://www.nfl.com/injuries/</a></td><td>2026-11-15T23:35:00Z</td><td><code class='small'>e72df148da0fb65bfd27d58a1aa998d6ecf7a1ccd621ad7a57b501bc0cc00cd0</code></td><td>yes</td><td>context only — 347 rows / 67 Out on the Week-10 report; not used for any Week-11 join</td></tr><tr><td>S4</td><td><span class="pill ok">CAPTURED</span></td><td>Official schedule, Week 10 — rendered summary</td><td><a href="https://www.nfl.com/schedules/">https://www.nfl.com/schedules/</a></td><td>2026-11-15T23:40:00Z</td><td><code class='small'>6e7cdf6ed79d406c53a23e71fa9d5c04705df9d341c47afbddd33793ca233610</code></td><td>yes</td><td>context only</td></tr><tr><td>S5</td><td><span class="pill ok">CAPTURED</span></td><td>Official transactions, November 2026 — rendered summary</td><td><a href="https://www.nfl.com/transactions/">https://www.nfl.com/transactions/</a></td><td>2026-11-15T23:50:00Z</td><td><code class='small'>b73b44d9523ef0e602df1b2f7619770db0e902ea965421a3e6517b2ad18a438e</code></td><td>yes</td><td>context only</td></tr><tr><td>S6</td><td><span class="pill mute">OFFICIAL-URL</span></td><td>NFL schedule by week (fixtures, venues, kickoff times)</td><td><a href="https://www.nfl.com/schedules/2026/by-week/week-11">https://www.nfl.com/schedules/2026/by-week/week-11</a></td><td>2026-11-16 (peer capture, nfl-origin-board/data/week11_schedule.json)</td><td>—</td><td>n/a</td><td>13 Week-11 fixtures; 12 with a venue (RF-07)</td></tr><tr><td>S7</td><td><span class="pill mute">OFFICIAL-URL</span></td><td>NFL scores by week</td><td><a href="https://www.nfl.com/scores/2026/week-10">https://www.nfl.com/scores/2026/week-10</a></td><td>2026-11-17 (peer transcription into the 149-game corpus)</td><td>—</td><td>n/a</td><td>the 13 Week-10 finals</td></tr><tr><td>S8</td><td><span class="pill mute">OFFICIAL-URL</span></td><td>NFL league standings 2026 regular season</td><td><a href="https://www.nfl.com/standings/league/2026/REG">https://www.nfl.com/standings/league/2026/REG</a></td><td>2026-11-17 (peer capture)</td><td>—</td><td>n/a</td><td>games-played arithmetic used by the corpus reconciliation</td></tr><tr><td>S9</td><td><span class="pill mute">OFFICIAL-URL</span></td><td>NFL game centre (per-game pages)</td><td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11">https://www.nfl.com/games/colts-at-texans-2026-reg-11</a></td><td>2026-11-17 (peer capture of the Week-11 slate)</td><td>—</td><td>n/a</td><td>133 per-game URLs inside the results corpus</td></tr><tr><td>S10</td><td><span class="pill ok">CAPTURED</span></td><td>Club depth charts, 32 clubs, captured 2026-11-17</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json">https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json</a></td><td>2026-11-17</td><td>—</td><td>n/a</td><td>705 depth slots; 31 clubs verified text, HOU flagged image-only; 15 shared rank-1 slots, 2 empty</td></tr><tr><td>S11</td><td><span class="pill ok">DERIVED</span></td><td>2026 results corpus, 149 completed games, weeks 1–10</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json">https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json</a></td><td>2026-11-17</td><td>—</td><td>n/a</td><td>every forecast score in eval.json and every null-schedule replicate</td></tr><tr><td>S12</td><td><span class="pill ok">DERIVED</span></td><td>Second independent results archive, 150 fixtures with per-game URLs</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origin-board/data/games_2026.json">https://github.com/sassnarep3-star/Own4/blob/main/nfl-origin-board/data/games_2026.json</a></td><td>2026-11-16</td><td>—</td><td>n/a</td><td>cross-check of 139 common fixtures; corroboration of the 16 week-page-only rows</td></tr><tr><td>S13</td><td><span class="pill ok">DERIVED</span></td><td>Peer requirement register, 73 rows</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json">https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json</a></td><td>2026-11-18</td><td>—</td><td>n/a</td><td>the 73-row register audited on the Requirements page; read-only</td></tr></tbody></table></div>
+<h2>Re-verify the hashes yourself</h2>
+<pre>cd nfl-readiness-register/snapshots/2026-11-18
+sha256sum injury_report-2026-11-18T234917Z.html reserve_list-2026-11-18T234918Z.html</pre>
+<p>Expected: <code>e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b</code> and
+<code>afb62a8311e810419a8e6e2cf0bfc907df80b9c131cbac9a448af987d77ed1f5</code>.</p>
+
+<footer class="foot">
+  <p><strong>Research only — not wagering advice.</strong> No price, ROI or staking result is
+  published anywhere on this site because no official price source exists.</p>
+  <p>If gambling is a problem for you or someone you know, call the National Problem Gambling
+  Helpline at <a href="https://www.ncpgambling.org/help-treatment">1-800-MY-RESET</a>.</p>
+  <p>Every table cell is CAPTURED (committed official capture, hash re-checked) or DERIVED
+  (computed by a named script in this workspace) or blank with a stated reason. Nothing is
+  inferred.</p>
+</footer>
+</main>
+</body>
+</html>

@@ -565,6 +565,22 @@ NAV = [
     ]),
 ]
 
+# Session arena/1153eb96-own4 (2026-11-19): one additive group so the NFL Command Deck is
+# reachable from the root dashboard. Appended, not inserted, and no existing entry is
+# reordered, relabelled or removed. The deck's own verifier owns its internal links.
+NAV.append(("NFL Command Deck · pre-registered evaluation (2026-11-19)", [
+    ("nfl-command-deck/index.html", "Command deck — decision readiness", "legacy"),
+    ("nfl-command-deck/pages/executive-summary.html", "Executive summary (skill, gates, luck panel)", "legacy"),
+    ("nfl-command-deck/pages/model.html", "Model, gates &amp; per-week trail", "legacy"),
+    ("nfl-command-deck/pages/availability.html", "Availability, replacements &amp; depth", "legacy"),
+    ("nfl-command-deck/pages/requirements.html", "Requirement audit (73 rows)", "legacy"),
+    ("nfl-command-deck/pages/repo-audit.html", "Repository audit (links, hashes, reconciliation)", "legacy"),
+    ("nfl-command-deck/pages/questions.html", "Questions before any decision", "legacy"),
+    ("nfl-command-deck/pages/suggestions.html", "Suggestions — choose a path", "legacy"),
+    ("nfl-command-deck/pages/flagged.html", "⚑ Command Deck — flagged for review", "legacy"),
+    ("nfl-command-deck/pages/sources.html", "Sources &amp; capture hashes", "legacy"),
+]))
+
 # The NFL research group title used to be a hand-typed count and drifted twice: it read
 # "21 workspaces" while the group listed 22, and the directories on disk had run ahead of it
 # again. Compute the count from the group's own links so a stale value cannot exist.
