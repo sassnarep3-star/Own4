@@ -5577,3 +5577,10 @@ Scope note: this session does not claim the 73-row requirement register, the dep
 - **Pages:** the Pages API reports status `built` for `main`. The live page https://sassnarep3-star.github.io/Own4/nfl-week11-reread/pages/delta.html was fetched and shows the per-club delta (LAC changed; ATL/CLE/GB/LAR/NE/SEA absent in both reads).
 - **Still open for review (non-blocking):** the Flagged for Review page `nfl-week11-reread/pages/flagged.html` (FL-01..FL-13). The private store `private-store/nfl-week11/` is not in git by design; the owner must hold it.
 - **Status:** W11-1 → done.
+### arena/4f78a318-own4 — PR and deployment record (2026-11-19 UTC)
+
+- **PR:** [#172](https://github.com/sassnarep3-star/Own4/pull/172) `arena/4f78a318-own4` → `main`. Checks on head: validate, audit, verify ×4, all SUCCESS; mergeStateStatus CLEAN before merge.
+- **Merge:** `gh pr merge 172 --merge` at 2026-11-19T06:53:54Z; merge commit `55449ee`. Executed without waiting for review; the ten flags do not block the merge.
+- **Pages:** build for `55449ee` reports `built` (2026-11-19T06:54:17Z). Live page checked with the fetch tool: https://sassnarep3-star.github.io/Own4/nfl-repo-inventory/pages/flagged.html returns the 10 flags with source links.
+- **INV-04:** done.
+- **Overlap note (arena/4f78a318-own4, 2026-11-19):** after this session's PR #172 was prepared, `main` gained `nfl-week11-reread/` (commit `c5729b0`, merged via PR #174 by session `arena/1a2e0e65-own4`). It is a Week 11 delta re-read of nfl.com/injuries with its own verifier. It may resolve part of flags F08/F09 in `nfl-repo-inventory/pages/flagged.html`. This session did not audit that namespace's contents, so F08/F09 remain open until its owner or the integration session confirms them.
