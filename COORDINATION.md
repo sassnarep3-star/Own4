@@ -6095,3 +6095,10 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 
 - PR opened: https://github.com/sassnarep3-star/Own4/pull/193 (arena/a2547367-own4 → main). Merge attempted next in this session; result recorded when confirmed.
 **Publication result.** PR [#190](https://github.com/sassnarep3-star/Own4/pull/190) was merged with merge strategy at 2026-11-19T11:06:30Z; merge commit [`f58d81e`](https://github.com/sassnarep3-star/Own4/commit/f58d81e87ce532283ffee5856c0f089b7c93e727). GitHub Pages build-and-deployment run [44511791022](https://github.com/sassnarep3-star/Own4/actions/runs/44511791022) completed successfully, including the `Deploy to GitHub Pages` job. Post-deploy reads confirmed the NFL portal and latest desk load at https://sassnarep3-star.github.io/Own4/nfl/ and https://sassnarep3-star.github.io/Own4/nfl-daily-desk/; the repository root loads at https://sassnarep3-star.github.io/Own4/.
+
+## nfl-own4 · merge record (arena/a2547367-own4)
+
+- PR: https://github.com/sassnarep3-star/Own4/pull/193 — **MERGED** 2026-11-19T11:08:46Z, merge commit `318030f11f7f9d100bd238dd1642f962528f6e17` (merge, not squash). Checks before merge: nfl-own4 verify success; validate/audit success.
+- Pages: `pages and deployment` and `NFL own4 canonical build` (verify + deploy) completed success on main. Live pages confirmed with fetch tool: https://sassnarep3-star.github.io/Own4/nfl-own4/ and https://sassnarep3-star.github.io/Own4/nfl-own4/pages/flagged.html.
+- Source spot-check after merge: non-TNF game-centre links on the Week-11 schedule page confirmed (e.g. cardinals-at-chiefs, steelers-at-eagles, jets-at-chargers, jaguars-at-giants, raiders-at-broncos, vikings-at-49ers, bengals-at-commanders); remaining links follow the same official pattern and are listed as unverified-per-game-centre under VF-08.
+- Known gap: this record is committed on the session branch after the merge; it reaches `main` with the next integration merge.
