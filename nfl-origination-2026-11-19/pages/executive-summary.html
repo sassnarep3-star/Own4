@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary · NFL Origination Lab 2026-11-19</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f6f7f9;color:#1a1d21}
+header{background:#0b2a4a;color:#fff;padding:14px 20px}
+header a{color:#bcd7f5;text-decoration:none;margin-right:14px;font-size:14px}
+header a:hover{text-decoration:underline}
+main{max-width:1100px;margin:0 auto;padding:20px}
+h1{font-size:26px;margin:6px 0}h2{font-size:20px;margin:26px 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13px;margin:10px 0}
+th,td{border:1px solid #d8dde3;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#0b2a4a;color:#fff}
+tr:nth-child(even){background:#f0f3f7}
+a{color:#0b5cad}
+.note{background:#fff8e1;border:1px solid #e6d48a;padding:10px 14px;border-radius:6px;font-size:14px}
+.flag{background:#fdecea;border:1px solid #e5a09a;padding:10px 14px;border-radius:6px;font-size:14px}
+footer{max-width:1100px;margin:0 auto;padding:20px;font-size:13px;color:#555}
+.blank{color:#888;font-style:italic}
+.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+.kpi div{background:#fff;border:1px solid #d8dde3;border-radius:8px;padding:12px 16px;min-width:150px}
+.kpi b{font-size:22px;display:block}</style></head><body>
+<header><b>NFL Origination Lab</b> · 2026-11-19 · <a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="readiness.html">Decision readiness</a><a href="origination.html">Originated lines</a><a href="price-snapshots.html">Price snapshots</a><a href="results.html">Results feed</a><a href="leaderboard.html">Leaderboard</a><a href="availability.html">Availability & depth</a><a href="injuries.html">Injuries</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule & venues</a><a href="transactions.html">Transactions</a><a href="correlations.html">Correlations</a><a href="gates.html">Gates</a><a href="strategies.html">Strategies</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="repo-review.html">Repo review</a></header>
+<main><h1>Executive summary — NFL line origination (2026-11-19)</h1>
+<h2>What was verified today (official nfl.com reads)</h2>
+<table><thead><tr><th>Claim</th><th>Result</th><th>Source</th></tr></thead><tbody><tr>Standings 32/32sum W = sum L = 149; 2 ties; 150 games implied; sum PF = sum PA = 6923<a href="https://www.nfl.com/standings/league/2026/REG">source</a></tr><tr>Week 11 schedule13 fixtures + 6 byes (ATL, CLE, GB, LA, NE, SEA)<a href="https://www.nfl.com/schedules/2026/by-week/week-11">source</a></tr><tr>Week 11 injuries253 rows, 30 clubs; CIN + WAS No Injuries Reported; 16 designations (Thursday only)<a href="https://www.nfl.com/injuries/">source</a></tr><tr>Week 10 finals14/14 finals transcribed<a href="https://www.nfl.com/schedules/2026/by-week/week-10">source</a></tr><tr>November trades12 trades (11/10 cluster of 9)<a href="https://www.nfl.com/transactions/">source</a></tr><tr>IND@HOU game centreRELIANT STADIUM, HOUSTON, TX; 12 team-stat rows<a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11">source</a></tr><tr>Depth chartsnfl.com/depth-charts/ = 404 (no official depth order)<a href="https://www.nfl.com/depth-charts/">source</a></tr></tbody></table>
+<h2>What the lab originates</h2>
+<p>For each of the 13 Week 11 fixtures: side first (fair line + P(home win)), then total
+(two estimators with gap), then moneyline — each stored as probability plus inputs.
+Market line and difference are blank for every market (no official price source).
+See <a href="origination.html">Originated lines</a> and <a href="price-snapshots.html">Price snapshots</a>.</p>
+<h2>Competition result</h2>
+<p>6 pre-registered strategies across 4 divisions (singles, game parlays, same-game parlays,
+prop combos). Parlays/props are behind the joint-evidence gate (ineligible). Singles have 0 graded
+games. <b>0 qualify, 0 rewards.</b> Signal and staking are separate columns; staking is blank.</p>
+<h2>Decisions needed (owner)</h2>
+<p>Price-data policy, validation floor, depth-order route, venue-authority rule, public/private
+split, reward structure. See <a href="questions.html">Questions</a> and
+<a href="suggestions.html">Suggestions</a>.</p>
+<div class="flag">Flagged irregularities (15): venue disagreement (F-01), Lions
+designation disagreement (F-02), no price source (F-03), depth 404 (F-04), 16/253 designations
+(F-05). Full list on the <a href="flagged.html">Flagged for review</a> page.</div></main>
+<footer>Analytical research only, not wagering advice. National Problem Gambling Helpline
+1-800-MY-RESET (1-800-697-3738) — <a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org</a>.
+Every table row carries an official source link; unverifiable values are blank and flagged.
+Session arena/7ccaa4f3-own4 · namespace nfl-origination-2026-11-19.</footer>
+</body></html>

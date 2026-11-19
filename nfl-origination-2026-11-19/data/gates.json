@@ -1,0 +1,14 @@
+{
+  "frozen_date": "2026-11-19",
+  "note": "Validation gates. A strategy must pass every gate to qualify. Demotion gate sends a live strategy back to paper.",
+  "gates": [
+    {"id": "G1", "name": "Pre-registration", "rule": "Definition frozen in git before the evaluation window opens; commit hash is the registration.", "status": "pass"},
+    {"id": "G2", "name": "Out-of-sample floor", "rule": "n >= 300 graded games (owner to confirm, S-02).", "status": "fail — 0 graded games"},
+    {"id": "G3", "name": "Proper-score skill", "rule": "Benchmark-relative Brier skill with game-cluster lower bound > 0.", "status": "fail — 0 graded games"},
+    {"id": "G4", "name": "Multiplicity", "rule": "Adjustment for number of trials (Benjamini-Hochberg q=0.05).", "status": "fail — 0 graded games"},
+    {"id": "G5", "name": "Control baseline", "rule": "Must beat random-picks and favorites-only controls.", "status": "fail — 0 graded games"},
+    {"id": "G6", "name": "Joint-evidence (parlays/props)", "rule": "Directly validated joint probability + void/push rules required.", "status": "fail — no joint probabilities"},
+    {"id": "G7", "name": "Price evidence", "rule": "Authorized market price required for residual/CLV/ROI claims.", "status": "fail — no official price source"},
+    {"id": "G8", "name": "Demotion gate", "rule": "Live strategy returns to paper if rolling Brier-skill lower bound < 0.", "status": "defined — no live strategy to demote"}
+  ]
+}

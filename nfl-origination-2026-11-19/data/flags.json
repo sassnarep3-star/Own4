@@ -1,0 +1,21 @@
+{
+  "read_date": "2026-11-19",
+  "note": "Flagged for Review. Every irregularity and every blank/unverified value, each with an official source link. Flagged items are non-blocking for publication; all of them block a claim.",
+  "flags": [
+    {"id": "F-01", "item": "Venue disagreement IND@HOU: schedule page hotel link reads NRG Stadium; official game centre Game Info reads RELIANT STADIUM.", "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11", "status": "open — game centre treated as authoritative; both names published"},
+    {"id": "F-02", "item": "Lions game-status disagreement: today's fresh read shows blank for Kerby Joseph (FP), Cade Mays (DNP), D.J. Reed (LP); peer read reported Out. No clock time on either read to sequence them.", "source": "https://www.nfl.com/injuries/", "status": "open — blank published, not Out"},
+    {"id": "F-03", "item": "No official price source exists: every market_line, opener, closer, residual, and ROI cell is blank by policy.", "source": "https://www.nfl.com/games", "status": "open — blocks R-01/R-18/R-20/R-58"},
+    {"id": "F-04", "item": "League depth-chart URL returns 404; no official depth order exists in the verified corpus.", "source": "https://www.nfl.com/depth-charts/", "status": "open — blocks R-06/R-42/R-44"},
+    {"id": "F-05", "item": "Only 16 of 253 injury rows carry a game designation (all Thursday IND/HOU); all Sunday/Monday game-status cells are blank. Blank is not available.", "source": "https://www.nfl.com/injuries/", "status": "open — blocks availability features for 12 of 13 fixtures"},
+    {"id": "F-06", "item": "Marvin Harrison Jr. appears in the Texans injury table (WR, Hamstring, DNP, Out) on today's read. Transcribed as published; not explained.", "source": "https://www.nfl.com/injuries/", "status": "open — transcribed as-is"},
+    {"id": "F-07", "item": "Jacob Hummel is listed at LB with player URL /players/jake-hummel/. Transcribed as published.", "source": "https://www.nfl.com/injuries/", "status": "open — transcribed as-is"},
+    {"id": "F-08", "item": "12 of 13 Week 11 venues are schedule-page hotel links only; game-centre venues not yet read.", "source": "https://www.nfl.com/schedules/2026/by-week/week-11", "status": "open — blocks R-23 completion"},
+    {"id": "F-09", "item": "Reserve/Injured ledger (25 rows) is carried from the peer 2026-11-19 read, not re-read fresh today.", "source": "https://www.nfl.com/transactions/", "status": "open — blocks R-13/R-62 completion"},
+    {"id": "F-10", "item": "Weeks 1-9 finals are carried from peer namespaces, not re-read fresh today; corpus count (150) is standings-implied.", "source": "https://www.nfl.com/standings/league/2026/REG", "status": "open — blocks R-02/R-19 completion"},
+    {"id": "F-11", "item": "Today's injury read carries a date but no clock time (fetch tool exposes none); no raw file, so no sha256.", "source": "https://www.nfl.com/injuries/", "status": "open — blocks R-21/R-29 completion"},
+    {"id": "F-12", "item": "No official snap-count, inactive-list, or Game Book source in the verified corpus; actual starters unknown.", "source": "https://www.nfl.com/injuries/", "status": "open — blocks R-10/R-25/R-30/R-54"},
+    {"id": "F-13", "item": "0 graded games: Week 11 is unplayed. All Brier/skill/leaderboard values are structural, not empirical.", "source": "https://www.nfl.com/schedules/2026/by-week/week-11", "status": "open — blocks R-16/R-37 empirical values"},
+    {"id": "F-14", "item": "MIN@SF international game stadium not named on the schedule page read; blank, not asserted.", "source": "https://www.nfl.com/schedules/2026/by-week/week-11", "status": "open"},
+    {"id": "F-15", "item": "Injury text is blank for every Sunday/Monday row on today's read; transcribed as blank. Practice status is the only signal for those rows.", "source": "https://www.nfl.com/injuries/", "status": "open — limits surprise measurement"}
+  ]
+}
