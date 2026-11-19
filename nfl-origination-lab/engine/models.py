@@ -240,15 +240,22 @@ def fit(model_id, games, lam=4.0):
 def forecast(params, g):
     """One frozen model output: the probability, its inputs, and the three markets."""
     mu_m, mu_t = params["predict"](g)
-    s_m = params["sigma_margin"] or 1.0
-    s_t = params["sigma_total"] or 1.0
+    # Round the published quantities here, at the source, not only at write time: the last
+    # bits of a float differ between CPython builds for identical arithmetic, and this lab's
+    # CI asserts a byte-identical rebuild. Six decimals is far beyond what a point spread or
+    # a probability is measured to; nothing downstream depends on the discarded bits except
+    # reproducibility.
+    mu_m = round(mu_m, 8)
+    mu_t = round(mu_t, 8)
+    s_m = round(params["sigma_margin"] or 1.0, 8)
+    s_t = round(params["sigma_total"] or 1.0, 8)
     p_home = norm_cdf(mu_m / s_m)
     p_over = 1.0 - norm_cdf((THRESHOLD_TAU - mu_t) / s_t)
     return {
         "game_id": g["game_id"], "season": g["season"], "week": g["week"],
         "gameday": g["gameday"], "away": g["away"], "home": g["home"],
-        "p_home_win": p_home,
-        "p_total_over_tau": p_over,
+        "p_home_win": round(p_home, 10),
+        "p_total_over_tau": round(p_over, 10),
         "fair_margin": mu_m,
         "fair_total": mu_t,
         "sigma_margin": s_m,

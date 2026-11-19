@@ -105,6 +105,14 @@ def score_block(preds, model_id, lam, block):
               if (p["p_home_win"] > 0.5) == (p["actual"]["home_win"] == 1)
               and p["actual"]["margin"] != 0) / max(1, sum(1 for p in preds if p["actual"]["margin"] != 0))
     return {"model": model_id, "lambda": lam, "block": block, "n": n,
+            # rounded at source for the same reason as models.forecast: CI asserts a
+            # byte-identical rebuild across CPython builds
+            "brier_home_win": round(bs_home, 10),
+            "brier_total_over_tau": round(bs_total, 10),
+            "crps_total": round(crps, 10),
+            "crps_margin": round(crps_m, 10),
+            "brier_margin_point": round(brier_margin, 8),
+            "accuracy_raw_not_a_ranking_metric": acc,
             "per_week": per_week_losses(preds),
             "brier_home_win": bs_home, "brier_total_over_tau": bs_total,
             "crps_total": crps, "crps_margin": crps_m,
@@ -244,9 +252,9 @@ def main():
                "bench_brier_total_over_tau": sum(x for _w, x in bench_tot) / n,
                "crps_total": sum(x for _w, x in loss_crps) / n,
                "bench_crps_total": sum(x for _w, x in bench_crps) / n}
-        row["bss_home_win"] = bss(row["brier_home_win"], row["bench_brier_home_win"])
-        row["bss_total_over_tau"] = bss(row["brier_total_over_tau"], row["bench_brier_total_over_tau"])
-        row["skill_crps"] = 1.0 - row["crps_total"] / row["bench_crps_total"]
+        row["bss_home_win"] = round(bss(row["brier_home_win"], row["bench_brier_home_win"]), 10)
+        row["bss_total_over_tau"] = round(bss(row["brier_total_over_tau"], row["bench_brier_total_over_tau"]), 10)
+        row["skill_crps"] = round(1.0 - row["crps_total"] / row["bench_crps_total"], 10)
         row["ci90_home_win"] = list(week_cluster_bootstrap(loss_home, bench_home)[:2])
         row["p_home_win"] = week_cluster_bootstrap(loss_home, bench_home)[2]
         row["ci90_total_over_tau"] = list(week_cluster_bootstrap(loss_tot, bench_tot)[:2])
