@@ -5629,6 +5629,57 @@ figure was invented; unknown values remain blank and flagged on the per-workspac
 **Collision check:** no open PR lists `verification-integration/**`, `legacy-root-dashboard.html`,
 `verification-2026-11-13/index.html`, or `nfl/index.html` as its scope. `nfl/index.html` was last
 merged in PR #169 and is now extended additively (a new section + marker), not replaced.
+## Session `arena/1153eb96-own4` — NFL Command Deck (claim, 2026-11-19 UTC)
+
+**Branch (platform-pinned):** `arena/1153eb96-own4`, based on `e322a32` (`main`).
+**Session ID:** `arena/1153eb96-own4`. No other session has an active claim (all other claims in this file are dated 2026-11-02…2026-11-18 and their PRs are merged or stale; 11 older PRs remain open — listed as RF-01 for owner review, not touched).
+
+**Why this session exists.** The repository carries ~39 overlapping NFL namespaces whose numbers disagree, a root navigation of ~400 links, and a requirement register whose verdicts have never been machine-checked against the artifacts they cite. This session adds one additive, self-verifying surface and an independent recomputation — it does not re-publish peer numbers as new analysis.
+
+**File scope (non-overlapping):** `nfl-command-deck/**` (new), one additive NAV group in `verification/build.py`, the regenerated root `index.html` + `verified/*` produced by that generator, and this append-only board. Every other namespace is read-only; requests against them are logged here, not edited.
+
+| ID | Task | Status | Files |
+|----|------|--------|-------|
+| D-01 | Claim scope, read board, confirm no live peer claim | done | `COORDINATION.md` |
+| D-02 | Repo-wide audit: link integrity (files + anchors), generator idempotency, dataset conflicts, stale dates, egress capability | in progress | `nfl-command-deck/engine/audit_repo.py`, `nfl-command-deck/data/audit.json` |
+| D-03 | Independent recomputation from the committed official corpus: benchmark-relative Brier skill, chronological holdouts, game-cluster bootstrap CI, placebo/luck panel | in progress | `nfl-command-deck/engine/model_eval.py`, `nfl-command-deck/data/eval.json` |
+| D-04 | Requirement register audit: re-check each cited artifact/status claim mechanically | in progress | `nfl-command-deck/data/requirements.json` |
+| D-05 | Site: landing decision-readiness table + category subpages + questions + suggestions + flagged + sources | pending | `nfl-command-deck/pages/*.html`, `index.html` |
+| D-06 | Root entry point: one additive nav group so the deck is reachable from `/Own4/` | pending | `verification/build.py` |
+| D-07 | Verify (links, row sources, determinism), PR, merge, Pages confirmation | pending | all above |
+
+**Egress limitation (declared up front, affects every "verified today" claim).** This sandbox is allowlisted to `github.com`, `codeload.github.com`, `api.github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`. Requests to `www.nfl.com` fail at TLS (`SSL_ERROR_SYSCALL` / `Could not resolve host` for `static.nfl.com`); `curl` and `urllib` both fail. **No official NFL page can be read in this session.** Therefore nothing here is re-verified against live nfl.com; every row states which committed capture it derives from, and the Flagged page carries this as RF-02. A claim is labelled `captured` (present in a committed official capture with a hash) or `unverifiable-this-session` (needs a fresh official read).
+
+### Progress — `arena/1153eb96-own4` (2026-11-19 UTC)
+
+| ID | Task | Status | Artifact / note |
+|----|------|--------|-----------------|
+| D-01 | Claim scope, read board, confirm no live peer claim | done | `COORDINATION.md` (this block) |
+| D-02 | Repo-wide audit: links/anchors, generator idempotency, cross-namespace reconciliation, capture hashes, reachability | done | `nfl-command-deck/engine/audit_repo.py` → `data/audit.json`, `data/link_defects.json` (653 defects enumerated) |
+| D-03 | Independent recomputation: pre-registered walk-forward, chronological holdout, week-cluster bootstrap, Holm, permutation null | done | `engine/model_eval.py`, `engine/null_test.py` → `data/eval.json`, `data/null.json`; `prereg/PREREG-CD.md` hash-locked **before** computation |
+| D-04 | Requirement register audit (73 rows, 14 machine assertions) | done | `engine/requirements.py` → `data/requirements.json`: 12 pass, 2 contradicted (A03, E03), 59 not machine-checkable |
+| D-05 | Site: readiness landing + 9 category pages | done | `index.html`, `pages/*.html`, `assets/deck.css` |
+| D-06 | One additive root nav group | done | `verification/build.py` (+APPEND only), regenerated `index.html` + `verified/*` |
+| D-07 | Verify, PR, merge, Pages confirmation | in progress | see the record appended after merge |
+
+**Gate before push:** `python3 nfl-command-deck/engine/verify.py` → PASS (10 pages; determinism,
+internal links and anchors, no localhost, every table row source-linked, no placeholders,
+prose↔data agreement, content sources, pre-registration hash, edit scope). Canonical root gate
+`python3 verification/verify_site.py` → PASS (14 pages, 346 source-linked rows).
+`python3 verification/build.py` is idempotent with the appended nav group.
+
+**Rebase conflict record.** The required `git pull --rebase origin main` advanced main past this
+claim and conflicted only in this append-only board, where `arena/4f78a318-own4`'s claim block met
+this session's claim. Resolved as a union: the peer block is retained verbatim and this session's
+claim follows it. No peer file, finding or task line was dropped. Peer work observed in main and
+left untouched: `nfl-week11-reread` (F08/F09), `nfl-repo-inventory`.
+
+**Declared limitation (applies to every claim above).** `www.nfl.com` is unreachable from this
+sandbox (TLS closed mid-handshake; `static.nfl.com` does not resolve) — recorded mechanically as
+audit check H and published as RF-01. Nothing on the site is a live official read. Every figure
+traces to a committed official capture whose SHA-256 this session re-hashed, or to a script in
+this workspace. Nothing is inferred and no unconfirmed value is filled in.
+
 
 ### PR merge and Pages confirmation — `arena/048562c8-own4` (2026-11-19 UTC)
 

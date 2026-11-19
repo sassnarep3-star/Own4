@@ -1,0 +1,318 @@
+{
+ "benchmarks": {
+  "bench_brier_climatology": 0.255958
+ },
+ "built_utc": "2026-11-19",
+ "correlations": {
+  "computed": [],
+  "n_published_with_each_value": true,
+  "peer_reference": "nfl-book/data/correlations.json (5 computed with n, 4 blank with reason)",
+  "why_empty": "The brief asks for correlations from officially sourced numbers with n. The only official numbers held are final scores; the correlations computable from them (margin vs total, home points vs away points) are already published with n=137 in nfl-book/data/correlations.json, and re-deriving them here would duplicate a peer number rather than add evidence. Parlay and prop-combo correlations require prices and player-level official lines, which do not exist in this repository. Nothing is estimated; the section is empty by rule."
+ },
+ "dataset": "nfl_command_deck_eval",
+ "gates": {
+  "CD-1": {
+   "clearing_numbers": {
+    "bss_to_clear_G1": "> 0",
+    "gap_to_G1": 0.0,
+    "holdout_gap_to_G2": 0.0,
+    "lower_bound_shortfall_G3": 0.0
+   },
+   "gates": {
+    "G1 skill (BSS>0, weeks 4-10)": true,
+    "G2 holdout (BSS>0, weeks 8-10)": true,
+    "G3 lower bound (week-cluster 95%>0)": true,
+    "G4 multiplicity (Holm p<0.10)": true,
+    "G5 sample (n>=90)": true,
+    "G6 controls (Brier < coin and < always-home)": true
+   },
+   "holm_adjusted_p": 0.0,
+   "qualifies": true
+  },
+  "CD-2": {
+   "clearing_numbers": {
+    "bss_to_clear_G1": "> 0",
+    "gap_to_G1": 0.0,
+    "holdout_gap_to_G2": 0.0,
+    "lower_bound_shortfall_G3": 0.0018
+   },
+   "gates": {
+    "G1 skill (BSS>0, weeks 4-10)": true,
+    "G2 holdout (BSS>0, weeks 8-10)": true,
+    "G3 lower bound (week-cluster 95%>0)": false,
+    "G4 multiplicity (Holm p<0.10)": true,
+    "G5 sample (n>=90)": true,
+    "G6 controls (Brier < coin and < always-home)": false
+   },
+   "holm_adjusted_p": 0.036,
+   "qualifies": false
+  }
+ },
+ "inputs": {
+  "corpus": "nfl-live-board/data/corpus_2026.json",
+  "corpus_games": 149,
+  "corpus_weeks": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "external_verification_this_session": "none \u2014 www.nfl.com is unreachable from this sandbox (RF-02); results are conditional on the committed corpus",
+  "source_url_field": "every corpus row carries source_url (nfl.com/games/...)"
+ },
+ "leaderboard_policy": {
+  "never_reported": [
+   "raw win rate",
+   "accuracy as success",
+   "ROI on an assumed price"
+  ],
+  "points_awarded": 0,
+  "points_total": 1000,
+  "qualifiers": 1,
+  "why_zero": "CD-1 clears all six stage-1 gates, but stage 2 (the CLV/ROI escrow) cannot be computed because no closing price exists, and 100 forecasts over 7 independent weeks is a skill result, not a basis for payment. Points stay at 0 until a price source is adopted and the frozen rule has run prospectively."
+ },
+ "multiplicity": {
+  "adjusted": {
+   "CD-1": 0.0,
+   "CD-2": 0.036
+  },
+  "declared_in": "PREREG-CD \u00a74",
+  "family": [
+   "CD-1",
+   "CD-2"
+  ],
+  "method": "Holm-Bonferroni"
+ },
+ "per_week": [
+  {
+   "brier_C-3": 0.25694,
+   "brier_CD-1": 0.21937,
+   "holdout": false,
+   "home_win_rate": 0.5,
+   "n": 16,
+   "week": 4
+  },
+  {
+   "brier_C-3": 0.27176,
+   "brier_CD-1": 0.23646,
+   "holdout": false,
+   "home_win_rate": 0.3571,
+   "n": 14,
+   "week": 5
+  },
+  {
+   "brier_C-3": 0.25307,
+   "brier_CD-1": 0.25368,
+   "holdout": false,
+   "home_win_rate": 0.4286,
+   "n": 14,
+   "week": 6
+  },
+  {
+   "brier_C-3": 0.25157,
+   "brier_CD-1": 0.2545,
+   "holdout": false,
+   "home_win_rate": 0.3571,
+   "n": 14,
+   "week": 7
+  },
+  {
+   "brier_C-3": 0.2562,
+   "brier_CD-1": 0.22762,
+   "holdout": true,
+   "home_win_rate": 0.7143,
+   "n": 14,
+   "week": 8
+  },
+  {
+   "brier_C-3": 0.25429,
+   "brier_CD-1": 0.17217,
+   "holdout": true,
+   "home_win_rate": 0.3333,
+   "n": 15,
+   "week": 9
+  },
+  {
+   "brier_C-3": 0.24723,
+   "brier_CD-1": 0.18494,
+   "holdout": true,
+   "home_win_rate": 0.3077,
+   "n": 13,
+   "week": 10
+  }
+ ],
+ "prereg_sha256": "77de26eda552edb923cdbae8d090e57bdabfd56adbe8d5b8809b489d2aa0b4e2",
+ "protocol": {
+  "bootstrap": "week-cluster, 2000 reps, seed 20261119, deterministic LCG",
+  "holdout_weeks": [
+   8,
+   9,
+   10
+  ],
+  "lambda_selection_mae": {
+   "margin_lambda_1": 9.3939,
+   "margin_lambda_10": 8.6246,
+   "margin_lambda_100": 8.9801,
+   "margin_lambda_3": 8.6812,
+   "margin_lambda_30": 8.8382
+  },
+  "ridge_grid": [
+   1.0,
+   3.0,
+   10.0,
+   30.0,
+   100.0
+  ],
+  "score_weeks": [
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "select_weeks": [
+   4,
+   5,
+   6,
+   7
+  ],
+  "selected_margin_lambda": 10.0,
+  "selected_total_lambda": 100.0,
+  "sigma_rule": "residual SD on the training window only",
+  "ties_excluded": 1,
+  "total_lambda_selection_mae": {
+   "total_lambda_1": 12.8489,
+   "total_lambda_10": 11.0139,
+   "total_lambda_100": 10.808,
+   "total_lambda_3": 11.8093,
+   "total_lambda_30": 10.8348
+  }
+ },
+ "scored": {
+  "holdout_weeks_8_10": {
+   "C-1": {
+    "brier": 0.25,
+    "bss": 0.0233,
+    "ci95_week_cluster": [
+     0.0233,
+     0.0233
+    ],
+    "n": 42,
+    "n_weeks": 3,
+    "p_bss_le_0": 0.0
+   },
+   "C-2": {
+    "brier": 0.547619,
+    "bss": -1.1395,
+    "ci95_week_cluster": [
+     -1.7048,
+     -0.1163
+    ],
+    "n": 42,
+    "n_weeks": 3,
+    "p_bss_le_0": 1.0
+   },
+   "C-3": {
+    "brier": 0.255958,
+    "bss": 0.0,
+    "n": 42,
+    "reference": true
+   },
+   "CD-1": {
+    "brier": 0.194606,
+    "bss": 0.2397,
+    "ci95_week_cluster": [
+     0.1107,
+     0.3274
+    ],
+    "n": 42,
+    "n_weeks": 3,
+    "p_bss_le_0": 0.0
+   },
+   "CD-2": {
+    "brier": 0.255184,
+    "bss": 0.003,
+    "ci95_week_cluster": [
+     -0.008,
+     0.0233
+    ],
+    "n": 42,
+    "n_weeks": 3,
+    "p_bss_le_0": 0.2975
+   }
+  },
+  "weeks_4_10": {
+   "C-1": {
+    "brier": 0.25,
+    "bss": 0.0233,
+    "ci95_week_cluster": [
+     0.0233,
+     0.0233
+    ],
+    "n": 100,
+    "n_weeks": 7,
+    "p_bss_le_0": 0.0
+   },
+   "C-2": {
+    "brier": 0.57,
+    "bss": -1.2269,
+    "ci95_week_cluster": [
+     -1.5498,
+     -0.8125
+    ],
+    "n": 100,
+    "n_weeks": 7,
+    "p_bss_le_0": 1.0
+   },
+   "C-3": {
+    "brier": 0.255958,
+    "bss": 0.0,
+    "n": 100,
+    "reference": true
+   },
+   "CD-1": {
+    "brier": 0.221084,
+    "bss": 0.1362,
+    "ci95_week_cluster": [
+     0.0532,
+     0.227
+    ],
+    "n": 100,
+    "n_weeks": 7,
+    "p_bss_le_0": 0.0
+   },
+   "CD-2": {
+    "brier": 0.253862,
+    "bss": 0.0082,
+    "ci95_week_cluster": [
+     -0.0018,
+     0.0168
+    ],
+    "n": 100,
+    "n_weeks": 7,
+    "p_bss_le_0": 0.036
+   }
+  }
+ },
+ "session": "arena/1153eb96-own4",
+ "title": "Frozen walk-forward evaluation of CD-1/CD-2/CD-3 against controls (PREREG-CD)",
+ "totals": {
+  "beats_benchmark": true,
+  "diff_ci95_week_cluster": [
+   -0.1144,
+   0.0891
+  ],
+  "mae": 10.776,
+  "mae_benchmark": 10.79,
+  "mae_improvement": 0.014,
+  "proper_score_note": "MAE on totals is a point metric, not a proper scoring rule. No totals market exists here, so no Brier/log score is possible."
+ }
+}

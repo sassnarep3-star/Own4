@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Model, gates and the luck panel · NFL Command Deck</title>
+<link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body>
+<aside class="side">
+  <a class="brand" href="../index.html">NFL <span>Command Deck</span></a>
+  <div class="tag">Evidence surface · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Command deck</div><a class="nav" href="../index.html">Start here — decision readiness</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav active" href="../pages/model.html">Model &amp; luck panel</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><div class="grp">Evidence &amp; control</div><a class="nav" href="../pages/requirements.html">Requirement audit (73 rows)</a><a class="nav" href="../pages/repo-audit.html">Repository audit</a><a class="nav" href="../pages/questions.html">Questions before any decision</a><a class="nav" href="../pages/suggestions.html">Suggestions — choose a path</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a><a class="nav" href="../pages/sources.html">Sources &amp; capture hashes</a></nav>
+  <div class="side-note">
+    <strong>No live official read.</strong> nfl.com cannot be reached from this build
+    environment. Every figure comes from a committed official capture whose SHA-256 is
+    re-checked at build time. See <a href="../pages/flagged.html">RF-01</a>.
+  </div>
+  <a class="flag" href="../pages/flagged.html">⚑ 15 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<header class="head">
+  <h1>Model, gates and the luck panel</h1>
+  <p class="sub">The frozen protocol, the per-week trail, and the controls that separate a signal from a lucky stretch.</p>
+</header>
+
+<section class="lede">
+  <p>This page is the audit trail for every number in the executive summary. Each row can be
+  recomputed by running <code>python3 engine/model_eval.py</code> on the committed corpus.</p>
+</section>
+
+<h2>Protocol, as frozen</h2>
+<div class="scroll"><table class="grid"><thead><tr><th>Setting</th><th>Frozen value</th><th>Source</th></tr></thead><tbody><tr><td>Scoring window</td><td>weeks [4, 5, 6, 7, 8, 9, 10]</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §3</a></td></tr><tr><td>Hyper-parameter selection window</td><td>weeks [4, 5, 6, 7]</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §3</a></td></tr><tr><td>Final holdout</td><td>weeks [8, 9, 10]</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §3</a></td></tr><tr><td>Ridge grid (declared)</td><td>[1.0, 3.0, 10.0, 30.0, 100.0]</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §3</a></td></tr><tr><td>Selected λ, margin</td><td>10</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>Selected λ, total</td><td>100</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>σ rule</td><td>residual SD on the training window only</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §2</a></td></tr><tr><td>Bootstrap</td><td>week-cluster, 2000 reps, seed 20261119, deterministic LCG</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §4</a></td></tr><tr><td>Ties excluded from scoring</td><td>1</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>Input</td><td>nfl-live-board/data/corpus_2026.json (149 games)</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>Pre-registration hash</td><td><code>77de26eda552edb923cdbae8d090e57bdabfd56adbe8d5b8809b489d2aa0b4e2</code></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/prereg_lock.json">prereg_lock.json</a></td></tr></tbody></table></div>
+
+<h2>Per-week trail</h2>
+<p>Positive delta means the model beat climatology that week. Note week 6 and week 7, where it
+did not — publishing only the aggregate would hide that.</p>
+<div class="scroll"><table class="grid"><thead><tr><th>Week</th><th>n</th><th>Brier CD-1</th><th>Brier climatology</th><th>Delta</th><th>Home win rate</th><th>Holdout</th><th>Source</th></tr></thead><tbody><tr><td>4</td><td>16</td><td>0.21937</td><td>0.25694</td><td>+0.03757</td><td>0.5000</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>5</td><td>14</td><td>0.23646</td><td>0.27176</td><td>+0.03530</td><td>0.3571</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>6</td><td>14</td><td>0.25368</td><td>0.25307</td><td>-0.00061</td><td>0.4286</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>7</td><td>14</td><td>0.25450</td><td>0.25157</td><td>-0.00293</td><td>0.3571</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>8</td><td>14</td><td>0.22762</td><td>0.25620</td><td>+0.02858</td><td>0.7143</td><td>yes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>9</td><td>15</td><td>0.17217</td><td>0.25429</td><td>+0.08212</td><td>0.3333</td><td>yes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>10</td><td>13</td><td>0.18494</td><td>0.24723</td><td>+0.06229</td><td>0.3077</td><td>yes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr></tbody></table></div>
+
+<h2>Why the holdout matters here</h2>
+<p>The holdout skill (<strong>+0.2397</strong>) is <em>higher</em> than the full-window skill (<strong>+0.1362</strong>), which is
+the opposite of what leakage or overfitting would produce, and is consistent with the model
+being a real, if modest, signal. It is also only 42 forecasts: the interval
+[+0.1107, +0.3274] is the honest statement, not the point estimate.</p>
+
+<h2>Totals</h2>
+<div class="scroll"><table class="grid"><thead><tr><th>Metric</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Total MAE, model</td><td>10.7760</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>Total MAE, training-window mean</td><td>10.7900</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>Improvement</td><td>0.0140</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>95% week-cluster CI on the difference</td><td>[-0.1144, +0.0891]</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>Verdict</td><td>tie — the interval straddles zero</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>Caveat</td><td>MAE on totals is a point metric, not a proper scoring rule. No totals market exists here, so no Brier/log score is possible.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §4</a></td></tr></tbody></table></div>
+
+<h2>Leaderboard policy, and why the reward is zero</h2>
+<div class="scroll"><table class="grid"><thead><tr><th>Field</th><th>Value</th><th>Source</th></tr></thead><tbody><tr><td>Points pool</td><td>1000</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>Points awarded</td><td>0</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>Qualifiers</td><td>1</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a></td></tr><tr><td>Why zero</td><td>CD-1 clears all six stage-1 gates, but stage 2 (the CLV/ROI escrow) cannot be computed because no closing price exists, and 100 forecasts over 7 independent weeks is a skill result, not a basis for payment. Points stay at 0 until a price source is adopted and the frozen rule has run prospectively.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json">eval.json</a> <a href="flagged.html">RF-14</a></td></tr><tr><td>Never reported</td><td>raw win rate, accuracy as success, ROI on an assumed price</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/prereg/PREREG-CD.md">PREREG-CD §6</a></td></tr></tbody></table></div>
+
+<h2>Correlations</h2>
+<p>The brief asks for correlations from officially sourced numbers with n. The only official numbers held are final scores; the correlations computable from them (margin vs total, home points vs away points) are already published with n=137 in nfl-book/data/correlations.json, and re-deriving them here would duplicate a peer number rather than add evidence. Parlay and prop-combo correlations require prices and player-level official lines, which do not exist in this repository. Nothing is estimated; the section is empty by rule.</p>
+<p class="note">Peer reference, unmodified: nfl-book/data/correlations.json (5 computed with n, 4 blank with reason).</p>
+
+<footer class="foot">
+  <p><strong>Research only — not wagering advice.</strong> No price, ROI or staking result is
+  published anywhere on this site because no official price source exists.</p>
+  <p>If gambling is a problem for you or someone you know, call the National Problem Gambling
+  Helpline at <a href="https://www.ncpgambling.org/help-treatment">1-800-MY-RESET</a>.</p>
+  <p>Every table cell is CAPTURED (committed official capture, hash re-checked) or DERIVED
+  (computed by a named script in this workspace) or blank with a stated reason. Nothing is
+  inferred.</p>
+</footer>
+</main>
+</body>
+</html>

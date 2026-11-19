@@ -1,0 +1,139 @@
+{
+ "dataset": "nfl_command_deck_sources",
+ "built_utc": "2026-11-19",
+ "session": "arena/1153eb96-own4",
+ "rule": "Every figure on this site traces to one of these. S1–S5 are committed official captures whose bytes this session re-hashed. S6–S9 are official URLs cited inside those captures. S10–S13 are repository artifacts produced by named scripts. No row cites a page this session read live, because none could be read (RF-01).",
+ "sources": [
+  {
+   "id": "S1",
+   "class": "CAPTURED",
+   "name": "Official NFL injury report — Week 11",
+   "url": "https://www.nfl.com/injuries/",
+   "captured_utc": "2026-11-18T23:49:17Z",
+   "path": "nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html",
+   "sha256": "e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b",
+   "sha256_rechecked": true,
+   "used_for": "26 club tables, 242 player rows, 16 game designations (9 Out, 7 Questionable), practice status for every row"
+  },
+  {
+   "id": "S2",
+   "class": "CAPTURED",
+   "name": "Official NFL reserve list — November 2026",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "captured_utc": "2026-11-18T23:49:18Z",
+   "path": "nfl-readiness-register/snapshots/2026-11-18/reserve_list-2026-11-18T234918Z.html",
+   "sha256": "afb62a8311e810419a8e6e2cf0bfc907df80b9c131cbac9a448af987d77ed1f5",
+   "sha256_rechecked": true,
+   "used_for": "25 dated reserve-list transactions (11/10–11/18) with club and transaction type"
+  },
+  {
+   "id": "S3",
+   "class": "CAPTURED",
+   "name": "Official injury report, Week 10 — rendered summary",
+   "url": "https://www.nfl.com/injuries/",
+   "captured_utc": "2026-11-15T23:35:00Z",
+   "path": "nfl-readiness-register/snapshots/2026-11-15/injury-report-week10-summary.json",
+   "sha256": "e72df148da0fb65bfd27d58a1aa998d6ecf7a1ccd621ad7a57b501bc0cc00cd0",
+   "sha256_rechecked": true,
+   "used_for": "context only — 347 rows / 67 Out on the Week-10 report; not used for any Week-11 join"
+  },
+  {
+   "id": "S4",
+   "class": "CAPTURED",
+   "name": "Official schedule, Week 10 — rendered summary",
+   "url": "https://www.nfl.com/schedules/",
+   "captured_utc": "2026-11-15T23:40:00Z",
+   "path": "nfl-readiness-register/snapshots/2026-11-15/schedule-week10-summary.json",
+   "sha256": "6e7cdf6ed79d406c53a23e71fa9d5c04705df9d341c47afbddd33793ca233610",
+   "sha256_rechecked": true,
+   "used_for": "context only"
+  },
+  {
+   "id": "S5",
+   "class": "CAPTURED",
+   "name": "Official transactions, November 2026 — rendered summary",
+   "url": "https://www.nfl.com/transactions/",
+   "captured_utc": "2026-11-15T23:50:00Z",
+   "path": "nfl-readiness-register/snapshots/2026-11-15/transactions-nov2026-summary.json",
+   "sha256": "b73b44d9523ef0e602df1b2f7619770db0e902ea965421a3e6517b2ad18a438e",
+   "sha256_rechecked": true,
+   "used_for": "context only"
+  },
+  {
+   "id": "S6",
+   "class": "OFFICIAL-URL",
+   "name": "NFL schedule by week (fixtures, venues, kickoff times)",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "captured_utc": "2026-11-16 (peer capture, nfl-origin-board/data/week11_schedule.json)",
+   "sha256_rechecked": null,
+   "used_for": "13 Week-11 fixtures; 12 with a venue (RF-07)"
+  },
+  {
+   "id": "S7",
+   "class": "OFFICIAL-URL",
+   "name": "NFL scores by week",
+   "url": "https://www.nfl.com/scores/2026/week-10",
+   "captured_utc": "2026-11-17 (peer transcription into the 149-game corpus)",
+   "sha256_rechecked": null,
+   "used_for": "the 13 Week-10 finals"
+  },
+  {
+   "id": "S8",
+   "class": "OFFICIAL-URL",
+   "name": "NFL league standings 2026 regular season",
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "captured_utc": "2026-11-17 (peer capture)",
+   "sha256_rechecked": null,
+   "used_for": "games-played arithmetic used by the corpus reconciliation"
+  },
+  {
+   "id": "S9",
+   "class": "OFFICIAL-URL",
+   "name": "NFL game centre (per-game pages)",
+   "url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "captured_utc": "2026-11-17 (peer capture of the Week-11 slate)",
+   "sha256_rechecked": null,
+   "used_for": "133 per-game URLs inside the results corpus"
+  },
+  {
+   "id": "S10",
+   "class": "CAPTURED",
+   "name": "Club depth charts, 32 clubs, captured 2026-11-17",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json",
+   "captured_utc": "2026-11-17",
+   "path": "nfl-depth-sweep/data/depth_register.json",
+   "sha256_rechecked": null,
+   "used_for": "705 depth slots; 31 clubs verified text, HOU flagged image-only; 15 shared rank-1 slots, 2 empty"
+  },
+  {
+   "id": "S11",
+   "class": "DERIVED",
+   "name": "2026 results corpus, 149 completed games, weeks 1–10",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json",
+   "captured_utc": "2026-11-17",
+   "path": "nfl-live-board/data/corpus_2026.json",
+   "sha256_rechecked": null,
+   "used_for": "every forecast score in eval.json and every null-schedule replicate"
+  },
+  {
+   "id": "S12",
+   "class": "DERIVED",
+   "name": "Second independent results archive, 150 fixtures with per-game URLs",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-origin-board/data/games_2026.json",
+   "captured_utc": "2026-11-16",
+   "path": "nfl-origin-board/data/games_2026.json",
+   "sha256_rechecked": null,
+   "used_for": "cross-check of 139 common fixtures; corroboration of the 16 week-page-only rows"
+  },
+  {
+   "id": "S13",
+   "class": "DERIVED",
+   "name": "Peer requirement register, 73 rows",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+   "captured_utc": "2026-11-18",
+   "path": "nfl-req-review/data/requirements_2026_11_18.json",
+   "sha256_rechecked": null,
+   "used_for": "the 73-row register audited on the Requirements page; read-only"
+  }
+ ]
+}
