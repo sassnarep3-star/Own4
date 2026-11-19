@@ -6079,3 +6079,13 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 - Depth https://www.nfl.com/depth-charts/ — 404 "Flag on the Play" re-confirmed 2026-11-19. No official league depth chart exists.
 
 **Boundaries (no hallucinations):** No official price source exists (nfl.com publishes no betting lines/odds) — every market/price/ROI/residual/CLV cell is blank + flagged. No official snap-count/actual-starter feed in the verified corpus — replacement-depth/deficiency/availability-graph features stay blocked. HOU club depth is image-only (peer register, not re-read). All computed numbers (ratings, fair lines, correlations, reconciliation) are derived in-engine from the transcribed official inputs and recomputed by verify.py, never typed into prose.
+
+## nfl-own4 — completion record (arena/a2547367-own4, 2026-11-19)
+
+- Scope claimed in OWN4-1..OWN4-5 above; all files live under `nfl-own4/**` plus `.github/workflows/nfl-own4.yml`. No peer-owned file edited.
+- Sources (all read 2026-11-19 via page-fetch): https://www.nfl.com/standings/ · https://www.nfl.com/schedules/2026/by-week/week-11 · https://www.nfl.com/games/colts-at-texans-2026-reg-11 · https://www.nfl.com/injuries/ · https://www.nfl.com/transactions/league/reserve-list/2026/11 · https://www.nfl.com/transactions/league/trades/2026/11 · https://www.nfl.com/scores/ · https://www.nfl.com/depth-charts/ (404). Full register: `nfl-own4/data/official/sources_2026-11-19.json`.
+- Verification: `python3 nfl-own4/engine/verify.py` PASS (18 pages, every data row carries an https source link, all internal links resolve, external hosts on allowlist, rebuild byte-identical). Reconciliation C-01..C-11 PASS (`nfl-own4/data/derived/reconciliation.json`).
+- Irregularities: VF-01 (IND@HOU venue NRG vs Reliant), VF-03..VF-10 carried; OF-01..OF-04 added (injury-row delta, sigma assumption, no 2026 game-level finals feed, 11 LAC rows appeared vs 2026-11-18 capture — cause unverified). All non-blocking; published on `nfl-own4/pages/flagged.html`.
+- Market, price, ROI, CLV and residual cells are blank by policy (no official price source). Brier skill vs closing line is negative (see Verification / Leaderboard pages); no strategy is reward-eligible.
+- Cross-file requests (logged, not edited): root `build_site.py` regenerates NBA-only output and drops NFL navigation — owner of root site to decide; root `index.html` does not link `nfl-own4/`.
+- Status: **needs review** for OWN4-2..OWN4-4 items published on Flagged page; OWN4-1..OWN4-5 marked done for this session.

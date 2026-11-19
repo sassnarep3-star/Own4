@@ -1,0 +1,566 @@
+{
+ "note": "Decision-readiness table: one row per brief requirement. status = met/partial/blocked/rejected/process. gate_blocking = the gate that blocks it; clearing_number = the number/fact that would clear it. Register carried forward from nfl-verify-2026-11-19 (same read date) and re-verified against this session's fresh 2026-11-19 reads.",
+ "read_date": "2026-11-19",
+ "requirements": [
+  {
+   "clearing_number": "A licensed or authorized market price feed (open + close) for every originated market",
+   "gate_blocking": "No official NFL source publishes betting lines/odds/closing prices",
+   "id": "R-01",
+   "requirement": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Every settled game joined to an official game-centre/score source",
+   "gate_blocking": "Results feed exists but uses a third-party archive for some rows; not every Week-10 final is joined",
+   "id": "R-02",
+   "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
+   "source": "https://www.nfl.com/scores/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Authorized market line to compare against",
+   "gate_blocking": "Origination engine exists in peer namespaces; ML derived from side, but market line blank (no price source)",
+   "id": "R-03",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Authorized market line",
+   "gate_blocking": "Fair line computable; market line column blank by policy (no official price source)",
+   "id": "R-04",
+   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Verified closing prices to compute CLV/staking",
+   "gate_blocking": "Two-stage leaderboard exists; staking/CLV blocked by no closing prices",
+   "id": "R-05",
+   "requirement": "Separate 'signal' from 'staking' in the leaderboard",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Official Game Book / snap-count join or official starter designation",
+   "gate_blocking": "No official snap-count feed or game-day starter designation; depth from club charts only",
+   "id": "R-06",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Official price history to compute market correlations",
+   "gate_blocking": "Correlation engine exists; official inputs limited to scores/standings; market correlations blank",
+   "id": "R-07",
+   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "source": "https://www.nfl.com/scores/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Pre-registered demotion threshold",
+   "gate_blocking": "none (process gate defined)",
+   "id": "R-08",
+   "requirement": "Define a demotion gate that sends a live strategy back to paper",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Committed pre-registration text + hash",
+   "gate_blocking": "none (process gate enforced)",
+   "id": "R-09",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Official Game Book actual-starter join",
+   "gate_blocking": "No official actual-starter feed; only expected availability captured",
+   "id": "R-10",
+   "requirement": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Official snap-count source",
+   "gate_blocking": "No official snap-count/playing-time feed",
+   "id": "R-11",
+   "requirement": "Do not model depth from jersey order; model it from playing time",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Multiple dated availability snapshots to compute surprise vs expectation",
+   "gate_blocking": "Surprise requires a prior expectation + actual; only a single snapshot exists this season",
+   "id": "R-12",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Machine-readable depth for all 32 clubs + snap join",
+   "gate_blocking": "Reserve list captured (25 moves, verified 2026-11-19); depth sweep exists but HOU image-only",
+   "id": "R-13",
+   "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "None (schedule facts sufficient); market context still blocked",
+   "gate_blocking": "Week-11 schedule + venues captured; rest-day/venue features computable from schedule only",
+   "id": "R-14",
+   "requirement": "Add a fixture-context feature set built only from published schedule facts",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Probability + inputs schema enforced",
+   "gate_blocking": "none",
+   "id": "R-15",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "n >= 300 out-of-sample trials",
+   "gate_blocking": "Panel exists in peer namespace; control baseline present but short-sample",
+   "id": "R-16",
+   "requirement": "Compute and publish the 'removal of luck' panel on the site dashboard",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Field present on every strategy",
+   "gate_blocking": "none (process field)",
+   "id": "R-17",
+   "requirement": "Add a two-sided 'what would change our mind' field to every strategy entry",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Authorized market price feed",
+   "gate_blocking": "No authorized market price to compute a residual",
+   "id": "R-18",
+   "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Complete official results join through current week",
+   "gate_blocking": "Weeks 1-9 = 136-game log identified; Week-10 finals join still partial",
+   "id": "R-19",
+   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "source": "https://www.nfl.com/scores/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Owner decision on price-data policy",
+   "gate_blocking": "Owner decision required (no authorized price source exists)",
+   "id": "R-20",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Timestamped capture pipeline (peer nfl-collector) + this dated read",
+   "gate_blocking": "Fresh Week-11 read dated 2026-11-19 captured (253 rows); clock-time precision requires the peer timestamped collector (no clock time exposed by the fetch tool)",
+   "id": "R-21",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "This workspace: nfl-own4/pages/requirements.html (70 rows, gate + clearing number per row)",
+   "gate_blocking": "none",
+   "id": "R-22",
+   "requirement": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+   "source": "https://www.nfl.com/standings/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Game-centre read for all 13 Week-11 fixtures",
+   "gate_blocking": "TNF venue verified from game centre; other 12 venues from schedule-page links, not yet game-centre-verified",
+   "id": "R-23",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Official schedule-release announcement URL",
+   "gate_blocking": "Live Week-11 schedule captured; a dated schedule-announcement artifact not located",
+   "id": "R-24",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Game Book parser run for all fixtures",
+   "gate_blocking": "Game Book route verified for one fixture by a peer; not joined for all fixtures",
+   "id": "R-25",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Complete official results join",
+   "gate_blocking": "Results feed partial (third-party archive for some rows)",
+   "id": "R-26",
+   "requirement": "Ingest game-level results to make the ratings opponent-aware",
+   "source": "https://www.nfl.com/scores/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Verified availability feature set + chronological holdout",
+   "gate_blocking": "Ablation method specified; requires verified availability features",
+   "id": "R-27",
+   "requirement": "Add injury and personnel ablations instead of fixed penalties",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Running scheduled capture with retained hashes",
+   "gate_blocking": "Peer nfl-collector implements scheduled capture; this session adds a dated read",
+   "id": "R-28",
+   "requirement": "Automate immutable multi-day availability snapshots",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Scheduled pipeline with conflict join (peer nfl-collector)",
+   "gate_blocking": "Hashes/timestamps captured by peer; conflict flags defined",
+   "id": "R-29",
+   "requirement": "Build immutable official availability snapshots (raw hashes, timestamps, conflict flags)",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Official snap-count source",
+   "gate_blocking": "No official snap-count feed; inactive lists captured by peers for game days",
+   "id": "R-30",
+   "requirement": "Capture official inactive lists and snap counts",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Authorized structured HOU depth source",
+   "gate_blocking": "Packers jersey-number prepend handled by peer parser; HOU remains image-only (not transcribed by eye)",
+   "id": "R-31",
+   "requirement": "Fix the two depth-parsing failures before widening coverage (Texans image, Packers jersey prepend)",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Actual-starter join",
+   "gate_blocking": "Group-slot semantics implemented by peer; not joined to actual starters",
+   "id": "R-32",
+   "requirement": "Model depth slots as groups, not a single starter",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "November trades (12) + reserve moves (25) captured and dated 2026-11-19",
+   "gate_blocking": "none",
+   "id": "R-33",
+   "requirement": "Treat roster turnover as a first-class data event",
+   "source": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "status": "met"
+  },
+  {
+   "clearing_number": "n >= 300 out-of-sample",
+   "gate_blocking": "Baseline defined; not yet evaluated to n >= 300",
+   "id": "R-34",
+   "requirement": "Start with a singles-only shadow baseline",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Directly validated joint probability + operator void/push rules",
+   "gate_blocking": "Joint-evidence gate defined; joint probabilities require validated dependence",
+   "id": "R-35",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Benchmark-relative skill with game-cluster CI + multiplicity adjustment",
+   "gate_blocking": "Divisions defined; ranking blocked by no prices/n",
+   "id": "R-36",
+   "requirement": "Use proper-score leaderboard divisions (singles, parlays, SGP, prop combos)",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "n >= 300 + game-cluster lower bound",
+   "gate_blocking": "Method specified; requires out-of-sample n",
+   "id": "R-37",
+   "requirement": "Rank with proper scores and uncertainty, not win rate",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Running scheduled capture + alerting",
+   "gate_blocking": "Peer nfl-collector implements ledger + drift alarm",
+   "id": "R-38",
+   "requirement": "Add durable snapshot storage and alerts",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Owner decision on data-layer separation",
+   "gate_blocking": "Architecture decision for owner",
+   "id": "R-39",
+   "requirement": "Split the site into a public analysis layer and a private data layer",
+   "source": "https://www.nfl.com/",
+   "status": "process"
+  },
+  {
+   "clearing_number": "Official starter + replacement join",
+   "gate_blocking": "Injury rows captured; replacement naming blocked by no starter/snap join",
+   "id": "R-40",
+   "requirement": "Add a per-team view: starters out, replacements named, net injury count",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Systematic capture of dated starter-change announcements",
+   "gate_blocking": "Announced starter changes exist on official pages; not systematically captured",
+   "id": "R-41",
+   "requirement": "Add an announced-starter evidence field (not an inferred replacement)",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Dated, machine-readable depth for all 32 clubs",
+   "gate_blocking": "Peer 32-club sweep exists; 27/32 pages undated, HOU image-only",
+   "id": "R-42",
+   "requirement": "Add an official depth-chart register with date and source per row",
+   "source": "https://www.nfl.com/teams/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Multi-season designation-to-inactive join with CIs",
+   "gate_blocking": "Peer measured designation play-rates with CIs; requires multi-season join",
+   "id": "R-43",
+   "requirement": "Calibrate what 'Questionable' means empirically instead of using old percentages",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Verified depth + starter join for all teams",
+   "gate_blocking": "Requires verified depth + actual-starter join",
+   "id": "R-44",
+   "requirement": "Interactive Offense vs. Defense Matchup Deficiency Matrix (1st-4th String)",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Running depth-vs-transactions conflict join",
+   "gate_blocking": "Reserve/trades captured 2026-11-19; depth-staleness join defined",
+   "id": "R-45",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "source": "https://www.nfl.com/transactions/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Running PIT ledger with hashes",
+   "gate_blocking": "Peer ledger exists; this session adds a dated read",
+   "id": "R-46",
+   "requirement": "Point-in-Time Snapshot Ledger for Injuries, Depth Charts & Inactives",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Verified 2026-11-19: Kerby Joseph (Full), Cade Mays (DNP), D.J. Reed (Limited) \u2014 all practicing with blank game-status in the Week-11 read",
+   "gate_blocking": "none",
+   "id": "R-47",
+   "requirement": "Populate the three missing Lions game-status designations (Kerby Joseph, Cade Mays, D.J. Reed)",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "n/a",
+   "gate_blocking": "none (explicit reject)",
+   "id": "R-48",
+   "requirement": "Reject: deriving depth order from jersey number, experience or salary",
+   "source": "https://www.nfl.com/",
+   "status": "rejected"
+  },
+  {
+   "clearing_number": "Faithful render of shared/empty slots",
+   "gate_blocking": "Group-slot semantics implemented by peer",
+   "id": "R-49",
+   "requirement": "Represent shared and empty depth slots faithfully",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Owner verdict on SG-C (build feature or not)",
+   "gate_blocking": "Route (a) club pages verified 32/32 by peer; HOU image-only; no snap route",
+   "id": "R-50",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "source": "https://www.nfl.com/teams/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Multi-season reliability with CIs",
+   "gate_blocking": "Peer measured Out/Doubtful/Questionable play-rates with CIs",
+   "id": "R-51",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Running scheduled capture with dated history",
+   "gate_blocking": "Peer nfl-collector schedules Wed/Thu/Fri capture",
+   "id": "R-52",
+   "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Running daily timestamped capture",
+   "gate_blocking": "Peer pipeline captures daily with timestamps",
+   "id": "R-53",
+   "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Official snap-count source",
+   "gate_blocking": "No official snap-count source",
+   "id": "R-54",
+   "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "n >= 300",
+   "gate_blocking": "Control baseline defined; short-sample",
+   "id": "R-55",
+   "requirement": "Add a control baseline (random picks; favorites only) to every leaderboard run",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Official roof designations + NWS forecast grids",
+   "gate_blocking": "No official roof register or NWS overlay in verified corpus",
+   "id": "R-56",
+   "requirement": "Stadium Roof/Surface & NWS Hourly Wind/Precipitation Overlay",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Verified closing prices",
+   "gate_blocking": "Two-stage defined; CLV/ROI escrow blocked by no closing prices",
+   "id": "R-57",
+   "requirement": "Two-Stage Skill Leaderboard (Proper-Score Qualification -> Prospective CLV/ROI Escrow)",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Authorized market consensus feed",
+   "gate_blocking": "No vig-free market consensus source",
+   "id": "R-58",
+   "requirement": "Vig-Free Market Consensus vs. Originated Fair-Line Decomposition View",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Running weekly snapshot series",
+   "gate_blocking": "Diff method defined; requires weekly snapshot series",
+   "id": "R-59",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Walk-forward comparison to collapse to one",
+   "gate_blocking": "Two-estimator approach defined; requires walk-forward comparison",
+   "id": "R-60",
+   "requirement": "Publish every model total twice until one wins",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Drift alarm on every parser",
+   "gate_blocking": "Peer drift alarm implemented; not applied to every namespace",
+   "id": "R-61",
+   "requirement": "Add a drift alarm to every scraper",
+   "source": "https://www.nfl.com/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Reserve list captured (25 moves, verified 2026-11-19)",
+   "gate_blocking": "none",
+   "id": "R-62",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "status": "met"
+  },
+  {
+   "clearing_number": "n/a",
+   "gate_blocking": "none (explicit reject)",
+   "id": "R-63",
+   "requirement": "Reject: ranking strategies by season-long ROI",
+   "source": "https://www.nfl.com/",
+   "status": "rejected"
+  },
+  {
+   "clearing_number": "In-repo archive of past-season reports",
+   "gate_blocking": "Past-season archive exists on nfl.com; not built in-repo",
+   "id": "R-64",
+   "requirement": "Archive weekly injury reports for past seasons",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "Committed pre-registration + hash",
+   "gate_blocking": "none",
+   "id": "R-65",
+   "requirement": "Pre-register each strategy (definition frozen before results are seen)",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Official onside-kick regime data",
+   "gate_blocking": "No official onside-kick regime data in verified corpus",
+   "id": "R-66",
+   "requirement": "2026 Kickoff & Declared Onside-Kick Regime Priors Filter",
+   "source": "https://www.nfl.com/",
+   "status": "blocked"
+  },
+  {
+   "clearing_number": "Commit hash is the registration",
+   "gate_blocking": "none",
+   "id": "R-67",
+   "requirement": "Freeze a rule before it sees data (pre-registration)",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "Complete official results for clean splits",
+   "gate_blocking": "Splits defined; holdout coverage partial",
+   "id": "R-68",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "source": "https://www.nfl.com/scores/",
+   "status": "partial"
+  },
+  {
+   "clearing_number": "This workspace: nfl-own4/pages/suggestions.html (verdict blank for owner)",
+   "gate_blocking": "none",
+   "id": "R-69",
+   "requirement": "Make suggestions on how to improve the site; dedicated suggestions section for review",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  },
+  {
+   "clearing_number": "This workspace: nfl-own4/pages/questions.html (known / missing / blocks / unblocker, answer blank where unknown)",
+   "gate_blocking": "none",
+   "id": "R-70",
+   "requirement": "Provide a clear list of questions, information and answers to address before any decision",
+   "source": "https://www.nfl.com/",
+   "status": "met"
+  }
+ ]
+}

@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Depth register</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Official depth-chart register — date and source per row</h2><p class="note">One row per club from the peer 32-club sweep (2026-11-17, nfl-depth-sweep). The NFL publishes no league depth chart (https://www.nfl.com/depth-charts/ is a 404, re-confirmed 2026-11-19). Houston is image-only (VF-05); Packers prepend jersey numbers (peer parser strips numbers, stores raw string). Depth slots are modelled as groups, not a single starter (R-32); shared/empty slots are represented faithfully (R-49). The backup-deficiency feature and the 1st–4th-string matchup matrix stay blocked until an actual-starter/snap join exists (R-44, VF-10). Deriving depth from jersey number, experience or salary is rejected (R-48).</p></div><table><thead><tr>
+<th>Club</th>
+<th>Source (official club page)</th>
+<th>Snapshot date</th>
+<th>Status</th>
+<th>Positions</th>
+<th>Note</th>
+</tr></thead><tbody>
+<tr>
+<td>ARI</td>
+<td><a href="https://www.azcardinals.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.azcardinals.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>ATL</td>
+<td><a href="https://www.atlantafalcons.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.atlantafalcons.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td><a href="https://www.baltimoreravens.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.baltimoreravens.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td><a href="https://www.buffalobills.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.buffalobills.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td><a href="https://www.panthers.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.panthers.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td><a href="https://www.chicagobears.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.chicagobears.com/team/depth-chart</a></td>
+<td>2026-10-31</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>CIN</td>
+<td><a href="https://www.bengals.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.bengals.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>CLE</td>
+<td><a href="https://www.clevelandbrowns.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.clevelandbrowns.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td><a href="https://www.dallascowboys.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.dallascowboys.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>24</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td><a href="https://denverbroncos.com/team/depth-chart/" class="src" rel="noopener" target="_blank">https://denverbroncos.com/team/depth-chart/</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>24</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>DET</td>
+<td><a href="https://www.detroitlions.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.detroitlions.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>GB</td>
+<td><a href="https://www.packers.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.packers.com/team/depth-chart</a></td>
+<td>2026-11-10</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td>Packers chart prepends jersey numbers; peer parser strips numbers and stores the raw string.</td>
+</tr>
+<tr>
+<td>HOU</td>
+<td><a href="https://www.houstontexans.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.houstontexans.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill partial">flagged_image_only</span></td>
+<td>0</td>
+<td>Houston depth is a static image; not transcribed by eye (VF-05).</td>
+</tr>
+<tr>
+<td>IND</td>
+<td><a href="https://www.colts.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.colts.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td><a href="https://www.jaguars.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.jaguars.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>KC</td>
+<td><a href="https://www.chiefs.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.chiefs.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td><a href="https://www.chargers.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.chargers.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>LAR</td>
+<td><a href="https://www.therams.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.therams.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>LV</td>
+<td><a href="https://www.raiders.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.raiders.com/team/depth-chart</a></td>
+<td>2026-11-10</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td><a href="https://www.miamidolphins.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.miamidolphins.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td><a href="https://www.vikings.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.vikings.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>NE</td>
+<td><a href="https://www.patriots.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.patriots.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>NO</td>
+<td><a href="https://www.neworleanssaints.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.neworleanssaints.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td><a href="https://www.giants.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.giants.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td><a href="https://www.newyorkjets.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.newyorkjets.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>24</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td><a href="https://www.philadelphiaeagles.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.philadelphiaeagles.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td><a href="https://www.steelers.com/team/depth-chart/" class="src" rel="noopener" target="_blank">https://www.steelers.com/team/depth-chart/</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>24</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>SEA</td>
+<td><a href="https://www.seahawks.com/team/depth-chart/" class="src" rel="noopener" target="_blank">https://www.seahawks.com/team/depth-chart/</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>SF</td>
+<td><a href="https://www.49ers.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.49ers.com/team/depth-chart</a></td>
+<td>2026-11-10</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>TB</td>
+<td><a href="https://www.buccaneers.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.buccaneers.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>22</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td><a href="https://www.tennesseetitans.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.tennesseetitans.com/team/depth-chart</a></td>
+<td>2026-11-10</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+<tr>
+<td>WAS</td>
+<td><a href="https://www.commanders.com/team/depth-chart" class="src" rel="noopener" target="_blank">https://www.commanders.com/team/depth-chart</a></td>
+<td>2026-11-17</td>
+<td><span class="pill met">verified_text</span></td>
+<td>23</td>
+<td><span class="blank">—</span></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

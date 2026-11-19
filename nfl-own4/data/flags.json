@@ -1,0 +1,118 @@
+{
+ "flags": [
+  {
+   "action": "Game centre treated as authoritative per the brief; discrepancy flagged for owner review.",
+   "area": "venue",
+   "finding": "IND@HOU venue discrepancy between two official NFL surfaces: the Week-11 schedule page's stadium/hotel link reads 'NRG Stadium', while the official game centre Game Info reads 'Reliant Stadium' (HOUSTON, TX).",
+   "id": "VF-01",
+   "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "status": "needs review"
+  },
+  {
+   "action": "Scope limit disclosed; full recount recommended via the peer scheduled collector.",
+   "area": "injuries",
+   "finding": "The full 32-club Week-11 injury report was not recounted live this session; 10 clubs (IND, HOU, PIT, PHI, AZ, KC, BAL, CAR, TB, DET) were transcribed in full (111 rows). Row counts for the other 22 clubs are not asserted.",
+   "id": "VF-02",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "action": "Recorded as a dated read; clock-time precision requires the peer timestamped collector.",
+   "area": "injuries",
+   "finding": "The fetch tool exposes no exact clock time; the injury read is dated 2026-11-19 but no precise timestamp is claimed.",
+   "id": "VF-03",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "action": "Market/price columns intentionally blank; blocks residual/CLV/ROI.",
+   "area": "prices",
+   "finding": "No official NFL source publishes betting lines, odds or closing prices; all market/price fields remain blank by policy.",
+   "id": "VF-04",
+   "source": "https://www.nfl.com/",
+   "status": "open"
+  },
+  {
+   "action": "HOU depth rows left blank; needs an authorized structured source.",
+   "area": "depth",
+   "finding": "Houston's official depth chart is published as a static image (not machine-readable); it is not transcribed by eye.",
+   "id": "VF-05",
+   "source": "https://www.nfl.com/teams/houston-texans/",
+   "status": "open"
+  },
+  {
+   "action": "Designation change recorded; confirms designations are a timestamped series, not a static level.",
+   "area": "injuries",
+   "finding": "Lions Kerby Joseph, Cade Mays and D.J. Reed were 'Out' in the Week-10 report but appear practicing (full/limited) with blank game-status in the Week-11 report read 2026-11-19.",
+   "id": "VF-06",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "action": "Recorded in the reserve-list table; no value inferred.",
+   "area": "transactions",
+   "finding": "Aidan Hutchinson (DET) placed on Reserve/Injured on 11/18/2026 \u2014 a significant defensive player, relevant to DET availability.",
+   "id": "VF-07",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "status": "recorded"
+  },
+  {
+   "action": "TNF venue verified from game centre; remaining 12 flagged for game-centre reads.",
+   "area": "venue",
+   "finding": "Venue for 12 of 13 Week-11 fixtures was transcribed from the schedule page's own stadium links, not yet from each official game centre.",
+   "id": "VF-08",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "status": "needs review"
+  },
+  {
+   "action": "Arithmetic reconciles (149 W = 149 L, 150 games); no per-team normalization applied.",
+   "area": "standings",
+   "finding": "Standings reflect records through Week 10 with byes; games-played vary by team (9 or 10 games), so per-team game counts are not uniform.",
+   "id": "VF-09",
+   "source": "https://www.nfl.com/standings/",
+   "status": "recorded"
+  },
+  {
+   "action": "Features stay blocked until an authorized Game Book / snap-count join is available.",
+   "area": "depth",
+   "finding": "No official snap-count or actual-starter feed exists in the verified corpus; this blocks replacement-depth, deficiency and availability-graph features.",
+   "id": "VF-10",
+   "source": "https://www.nfl.com/",
+   "status": "open"
+  },
+  {
+   "action": "Full read published on the Injuries page; delta vs the 2026-11-18 capture stated with both hashes.",
+   "area": "injuries",
+   "finding": "This session's full 26-club Week-11 read (253 rows) supersedes the 10-club 111-row scope of nfl-verify-2026-11-19 and the 23-table 242-row 2026-11-18 capture in nfl-desk. The 11-row difference vs the 2026-11-18 capture is published as a delta, not silently absorbed.",
+   "id": "OF-01",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "needs review"
+  },
+  {
+   "action": "Assumption disclosed on the Own Lines page; no win probability is presented as official.",
+   "area": "model",
+   "finding": "Week-11 fair lines use a disclosed normal-CDF sigma (13.5) to convert fair margin to win probability. Sigma is a modelling assumption, not an official value; it is published beside every probability.",
+   "id": "OF-02",
+   "source": "https://www.nfl.com/",
+   "status": "open"
+  },
+  {
+   "action": "No game-level final is published from an unread source; ratings use standings aggregates only.",
+   "area": "results",
+   "finding": "No official game-by-game 2026 finals feed was read this session (scores page shows Week 11 upcoming). The 150-game corpus is implied by standings arithmetic only; game-level finals remain a third-party archive join (stale at 136 games as of 2026-11-13).",
+   "id": "OF-03",
+   "source": "https://www.nfl.com/scores/",
+   "status": "open"
+  },
+  {
+   "action": "Published as an appeared-row delta; not interpreted.",
+   "area": "injuries",
+   "finding": "11 LAC rows appear in the 2026-11-19 read but are absent from the 2026-11-18 capture. The cause (capture gap vs. report addition) is not verified from an official source.",
+   "id": "OF-04",
+   "source": "https://www.nfl.com/injuries/",
+   "status": "open"
+  }
+ ],
+ "note": "Irregularities found during the 2026-11-19 fresh verification round. All non-blocking; published on the Flagged for Review page with source links. VF-* carried forward from nfl-verify-2026-11-19; OF-* are this session's additions.",
+ "read_date": "2026-11-19"
+}

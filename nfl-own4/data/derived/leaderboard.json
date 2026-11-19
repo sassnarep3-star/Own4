@@ -1,0 +1,167 @@
+{
+ "brier_skill": {
+  "brier_market": 0.2104255685737759,
+  "brier_model": 0.241655898010686,
+  "brier_naive": 0.24905926622765756,
+  "favorites_hit_rate": 0.6641580432737535,
+  "favorites_n": 2126,
+  "n": 2126,
+  "n_weeks": 141,
+  "provenance": "nfl-origination walk-forward backtest (2018-2025 holdout, third-party archive reconciled to official standings 160/160). Win probabilities use the disclosed sigma (OF-02). Not a fresh official read.",
+  "skill_ci95": [
+   -0.18162166851679773,
+   -0.11610028507192438
+  ],
+  "skill_vs_market": -0.1484150887583826,
+  "skill_vs_naive": 0.029725327345196506
+ },
+ "demotion_gate": "Pre-registered: a live strategy is demoted to paper if, after 300 prospective trials, the 95% week-cluster CI on Brier skill includes 0 or the CLV CI includes 0.",
+ "divisions": [
+  {
+   "division": "Singles",
+   "status": "evaluated (archive backtest); 0 qualify"
+  },
+  {
+   "division": "Game parlays",
+   "status": "blocked (no archived parlay prices; joint-evidence gate)"
+  },
+  {
+   "division": "Same-game parlays",
+   "status": "blocked (no SGP prices; C8 blank)"
+  },
+  {
+   "division": "Player-prop combos",
+   "status": "blocked (no official per-game logs or prop prices)"
+  }
+ ],
+ "holding": "1 unit per bet, priced at an ASSUMED -110 unless stated (no official price exists; Gate G7 blocked)",
+ "id": "leaderboard-2026-11-19",
+ "preregistration": "Model knobs frozen in nfl-origination/data/model_params.json (frozen_utc 2026-11-13T00:00:00Z); backtest numbers never appear on the leaderboard as live results.",
+ "provenance": "Signal rows are the nfl-origination walk-forward backtest (2018-2025, third-party archive). Brier skill is computed here from its forecasts. No live strategy is reward-eligible.",
+ "read_date": "2026-11-19",
+ "signal": [
+  {
+   "ci95": [
+    -0.08058375634517852,
+    0.014579759862778702
+   ],
+   "fdr_pass": false,
+   "footnote": "Line is the third-party closing line; NFL publishes none.",
+   "hit_rate": 0.507051282051282,
+   "id": "S1",
+   "market": "spread",
+   "n_bets": 1560,
+   "name": "Own rating vs closing spread, 2-point margin filter",
+   "p_value": 0.2888555722138931,
+   "placebo": false,
+   "roi_assumed": -0.031993006993007465,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind toward skill; a prospective upper bound below 0 would confirm no skill."
+  },
+  {
+   "ci95": [
+    -0.11888111888111984,
+    -0.0680657011358369
+   ],
+   "fdr_pass": false,
+   "footnote": "Benchmark only: measures how hard the home side is to beat.",
+   "hit_rate": 0.47507055503292567,
+   "id": "S2",
+   "market": "spread",
+   "n_bets": 2126,
+   "name": "Always take the home side (benchmark, not a strategy)",
+   "p_value": 0.9905047476261869,
+   "placebo": false,
+   "roi_assumed": -0.09304712220987023,
+   "what_would_change_our_mind": "S2 is a benchmark, not a strategy; no evidence changes its role."
+  },
+  {
+   "ci95": [
+    -0.10560398505604035,
+    0.007380073800738055
+   ],
+   "fdr_pass": false,
+   "footnote": "Line is the third-party closing total.",
+   "hit_rate": 0.49773345421577514,
+   "id": "S3",
+   "market": "total",
+   "n_bets": 1103,
+   "name": "Own total vs closing total, 3-point filter",
+   "p_value": 0.5712143928035982,
+   "placebo": false,
+   "roi_assumed": -0.04978158740624778,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind; otherwise it stays rejected."
+  },
+  {
+   "ci95": [
+    -0.1670761670761678,
+    -0.08638451900320282
+   ],
+   "fdr_pass": false,
+   "footnote": "",
+   "hit_rate": 0.4591439688715953,
+   "id": "S4",
+   "market": "spread",
+   "n_bets": 1285,
+   "name": "Away-favoured games: take the home underdog",
+   "p_value": 0.9975012493753124,
+   "placebo": false,
+   "roi_assumed": -0.12345242306331901,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind; otherwise it stays rejected."
+  },
+  {
+   "ci95": [
+    -0.12612035851472508,
+    0.037859895715257136
+   ],
+   "fdr_pass": false,
+   "footnote": "Rest differential comes from the third-party archive schedule fields.",
+   "hit_rate": 0.5,
+   "id": "S5",
+   "market": "spread",
+   "n_bets": 404,
+   "name": "Back the home side when it is the more rested team",
+   "p_value": 0.5167416291854073,
+   "placebo": false,
+   "roi_assumed": -0.04545454545454557,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind; otherwise it stays rejected."
+  },
+  {
+   "ci95": [
+    -0.17007956175818512,
+    -0.03193407159412814
+   ],
+   "fdr_pass": false,
+   "footnote": "Pre-registered placebo.",
+   "hit_rate": 0.4696755994358251,
+   "id": "P1",
+   "market": "spread",
+   "n_bets": 709,
+   "name": "Placebo: bet every third game in date order",
+   "p_value": 0.9450274862568716,
+   "placebo": true,
+   "roi_assumed": -0.1033465828952439,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind."
+  },
+  {
+   "ci95": [
+    -0.10389610389610457,
+    -0.007905138339921002
+   ],
+   "fdr_pass": false,
+   "footnote": "Pre-registered placebo.",
+   "hit_rate": 0.4956772334293948,
+   "id": "P2",
+   "market": "total",
+   "n_bets": 1041,
+   "name": "Placebo: over in even weeks",
+   "p_value": 0.6211894052973513,
+   "placebo": true,
+   "roi_assumed": -0.05370709981661083,
+   "what_would_change_our_mind": "A prospective Brier-skill lower bound above 0 over n>=300 would change our mind."
+  }
+ ],
+ "staking": {
+  "note": "Staking/CLV/ROI cannot be computed: no official or licensed closing-price source exists. This table is intentionally blank; a lucky staking run cannot mask a bad signal because rank is by signal (Brier skill) only.",
+  "rows": []
+ }
+}

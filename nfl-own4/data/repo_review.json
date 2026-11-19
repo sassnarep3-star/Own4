@@ -1,0 +1,94 @@
+{
+ "note": "Line-by-line review of the repository's committed NFL snapshots against the 2026-11-19 official read. Each row states what the committed snapshot claims, what the 2026-11-19 read confirms or flags, and the official source link for manual review. Values that cannot be confirmed from an official source are blank and flagged. RR-01..RR-10 carried forward from nfl-verify-2026-11-19.",
+ "read_date": "2026-11-19",
+ "review": [
+  {
+   "committed_claim": "32-team 2026 standings through Week 10",
+   "flag": "none",
+   "id": "RR-01",
+   "item": "Standings snapshot (nfl-decision-desk / nfl-availability-desk)",
+   "source": "https://www.nfl.com/standings/",
+   "verified_2026_11_19": "Confirmed: 32 teams, 149 W = 149 L, 150 games, ties NYG 5-3-1 and WAS 3-5-1."
+  },
+  {
+   "committed_claim": "Week-11 fixtures and byes",
+   "flag": "VF-08 (12 of 13 venues from schedule links, not game centres)",
+   "id": "RR-02",
+   "item": "Week-11 schedule snapshot",
+   "source": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "verified_2026_11_19": "Confirmed: 13 fixtures + 6 byes (ATL, CLE, GB, LAR, NE, SEA); TNF IND@HOU, MNF CIN@WAS, MIN@SF in Mexico City."
+  },
+  {
+   "committed_claim": "Week-10/11 injury designations",
+   "flag": "VF-02 (22 clubs not recounted), VF-03 (no clock time)",
+   "id": "RR-03",
+   "item": "Injury report snapshots (2026-11-15..18)",
+   "source": "https://www.nfl.com/injuries/",
+   "verified_2026_11_19": "Partially re-verified: 10 clubs transcribed in full (111 rows). Designations are a timestamped series (Lions K. Joseph/C. Mays/D.J. Reed now practicing)."
+  },
+  {
+   "committed_claim": "Reserve/Injured moves tracked so 'not listed' never means 'available'",
+   "flag": "none",
+   "id": "RR-04",
+   "item": "Reserve-list capture (nfl-availability-desk)",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "verified_2026_11_19": "Confirmed: 25 November Reserve/Injured moves captured from the official reserve-list page."
+  },
+  {
+   "committed_claim": "Roster turnover as a first-class data event",
+   "flag": "none",
+   "id": "RR-05",
+   "item": "Trade / roster-turnover capture",
+   "source": "https://www.nfl.com/transactions/league/trades/2026/11",
+   "verified_2026_11_19": "Confirmed: 12 November trades captured from the official trades page."
+  },
+  {
+   "committed_claim": "Venue of every fixture transcribed from the official game centre",
+   "flag": "VF-01 (venue discrepancy), VF-08 (12 venues not yet from game centre)",
+   "id": "RR-06",
+   "item": "Venue transcription (schedule page)",
+   "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "verified_2026_11_19": "TNF venue verified from game centre (Reliant Stadium). Schedule page hotel link disagrees (NRG Stadium)."
+  },
+  {
+   "committed_claim": "Official depth-chart register, date + source per row, 32/32 verified",
+   "flag": "VF-05 (HOU image-only)",
+   "id": "RR-07",
+   "item": "Depth-chart register (nfl-depth-sweep)",
+   "source": "https://www.nfl.com/teams/",
+   "verified_2026_11_19": "Not re-read live this session; peer verified 32/32. Houston depth is image-only."
+  },
+  {
+   "committed_claim": "Opening/closing numbers per market; verified results feed",
+   "flag": "VF-04 (no official price source), inherited partial Week-10 results feed",
+   "id": "RR-08",
+   "item": "Price-snapshot store / results feed (nfl-book)",
+   "source": "https://www.nfl.com/",
+   "verified_2026_11_19": "Cannot be confirmed: no official NFL source publishes betting lines or closing prices. Market/price cells blank by policy."
+  },
+  {
+   "committed_claim": "Snap counts as starter proxy; Game Books for actual starters",
+   "flag": "VF-10 (blocks deficiency + availability features)",
+   "id": "RR-09",
+   "item": "Snap-count / actual-starter join",
+   "source": "https://www.nfl.com/",
+   "verified_2026_11_19": "Cannot be confirmed: no official snap-count or Game-Book-join feed exists in the verified corpus."
+  },
+  {
+   "committed_claim": "Strategies with signal/staking split, Brier skill, removal-of-luck",
+   "flag": "honest-result caveat; not overstated",
+   "id": "RR-10",
+   "item": "Strategy / leaderboard claims across namespaces",
+   "source": "https://www.nfl.com/scores/",
+   "verified_2026_11_19": "Not re-verified line by line this round. On the current verified evidence no strategy qualifies for rewards; the model loses to the vig-free market on proper score."
+  },
+  {
+   "committed_claim": "Canonical decision surface: 70-requirement readiness, Week-11 origination, signal/staking leaderboard, correlations with n.",
+   "flag": "OF-01/OF-02/OF-03 (see Flagged page)",
+   "id": "RR-11",
+   "item": "This workspace (nfl-own4)",
+   "source": "https://www.nfl.com/standings/",
+   "verified_2026_11_19": "Fresh official reads this session (standings 32/32, schedule 13+6, injuries 253, reserve 25, trades 12, TNF venue, depth 404). All computed numbers re-derived by engine/model.py and checked by engine/verify.py."
+  }
+ ]
+}
