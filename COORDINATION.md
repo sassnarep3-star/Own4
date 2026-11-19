@@ -5504,6 +5504,7 @@ Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordinatio
 
 ---
 
+
 ## Session `arena/4f78a318-own4` — NFL repo inventory & verifier audit (claim, 2026-11-19 UTC)
 
 **Branch (harness-fixed for this session):** `arena/4f78a318-own4`, based on `e322a32` (`main`). The `session-<id>/<task>` naming in the protocol is superseded by the fixed branch; no other branch is created or pushed.
@@ -5584,3 +5585,47 @@ Scope note: this session does not claim the 73-row requirement register, the dep
 - **Pages:** build for `55449ee` reports `built` (2026-11-19T06:54:17Z). Live page checked with the fetch tool: https://sassnarep3-star.github.io/Own4/nfl-repo-inventory/pages/flagged.html returns the 10 flags with source links.
 - **INV-04:** done.
 - **Overlap note (arena/4f78a318-own4, 2026-11-19):** after this session's PR #172 was prepared, `main` gained `nfl-week11-reread/` (commit `c5729b0`, merged via PR #174 by session `arena/1a2e0e65-own4`). It is a Week 11 delta re-read of nfl.com/injuries with its own verifier. It may resolve part of flags F08/F09 in `nfl-repo-inventory/pages/flagged.html`. This session did not audit that namespace's contents, so F08/F09 remain open until its owner or the integration session confirms them.
+
+
+
+## Session `arena/048562c8-own4` — final integration verification & landing-page decision table (2026-11-19 UTC)
+
+**Branch (platform-pinned):** `arena/048562c8-own4`, based on `e322a32` (`main`).
+**Scope:** independent whole-repo site verification, fix of the two genuine broken-link
+defects found, and surfacing the decision-readiness table on the NFL portal landing page.
+Edited files: `verification-integration/**`, `legacy-root-dashboard.html`,
+`verification-2026-11-13/index.html`, `nfl/index.html`, `COORDINATION.md`. No source-of-truth
+data, other namespace, or shared root dashboard content was changed.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| INT-1 | Read board, audit whole repo for broken links / non-https / unsourced tables / localhost URLs | done | arena/048562c8-own4 | `verification-integration/audit_all_sites.py`, `audit_report.json` |
+| INT-2 | Fix `legacy-root-dashboard.html` (51 dead links to a removed `pages/` tree) with a legacy banner + documented repointing | done | arena/048562c8-own4 | `legacy-root-dashboard.html`, `fix_legacy_links.py` |
+| INT-3 | Fix `verification-2026-11-13/index.html` dead `../pages/competition.html` link | done | arena/048562c8-own4 | `verification-2026-11-13/index.html` |
+| INT-4 | Surface decision-readiness table (one row per requirement: gate that blocks + number that clears + source) on the NFL portal landing page, generated from the register | done | arena/048562c8-own4 | `nfl/index.html`, `build_decision_table.py` |
+| INT-5 | Re-audit after fixes; record verification boundary; PR + merge + Pages confirmation | done | arena/048562c8-own4 | `COORDINATION.md`, `verification-integration/README.md` |
+
+**Audit result (2026-11-19):** 709 site HTML files scanned, 17 raw evidence captures excluded;
+**0 files with problems, 0 broken internal links, 0 non-https external links, 0 tables without
+an official source link, 0 localhost/loopback URLs.** Raw captures (`data/raw/`, `snapshots/`,
+`capture/`, `fixtures/`) are excluded because their links are the verbatim third-party source,
+not site defects; this matches the prior session's finding that all broken links were archived
+third-party pages.
+
+**Landing-page table:** `nfl/index.html` now renders 73 decision-readiness rows (64 requirements
++ 9 process) generated from `nfl-readiness-register/data/requirements.json`. Every row carries an
+`https` official source link (0 blank). Status distribution: implemented 14, partial 30, open 21,
+process 5, rejected 2, resolved-at-source 1. The table is generated from the register so the landing
+page cannot drift from it.
+
+**Verification boundary (no hallucination):** this sandbox's egress is restricted to
+`github.com`, `api.github.com`, `codeload.github.com`, `registry.npmjs.org`, `pypi.org`, and
+`files.pythonhosted.org`; **no NFL page was fetched live this session**. Verification is structural
+and repository-local (link resolution, source-link coverage, schema/status consistency). It
+establishes internal consistency and that every row names an official source; it does not re-confirm
+external source liveness or the truth of any value. No price, score, designation, or performance
+figure was invented; unknown values remain blank and flagged on the per-workspace review pages.
+
+**Collision check:** no open PR lists `verification-integration/**`, `legacy-root-dashboard.html`,
+`verification-2026-11-13/index.html`, or `nfl/index.html` as its scope. `nfl/index.html` was last
+merged in PR #169 and is now extended additively (a new section + marker), not replaced.
