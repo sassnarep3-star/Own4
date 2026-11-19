@@ -1,0 +1,76 @@
+name: Verify NFL Command Deck
+
+# The deck publishes measured numbers, so its gate is a build gate:
+#   * every generator must be deterministic on the same tree;
+#   * committed PURE output must match a fresh build (a stale number fails);
+#   * TREE-DEPENDENT output (the repository audit walks the tree) is regenerated and reported,
+#     never silently accepted;
+#   * every page's links, anchors, row sources, placeholders and prose-vs-data agreement pass;
+#   * the pre-registration hash still matches the lock, so a rule cannot be edited after the fact.
+#
+# It does not deploy: the repository's existing legacy main//root Pages configuration publishes
+# the namespace, exactly as it publishes every sibling namespace.
+
+on:
+  push:
+    paths:
+      - 'nfl-command-deck/**'
+      - '.github/workflows/nfl-command-deck.yml'
+  pull_request:
+    paths:
+      - 'nfl-command-deck/**'
+      - '.github/workflows/nfl-command-deck.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          # 3.11, not 3.12: the deck records float values (Brier, MAE, intervals) to four
+          # decimals and compares bytes, so the interpreter is pinned the way nfl-book pins it.
+          python-version: '3.11'
+
+      - name: Pre-registration must still match its lock
+        run: |
+          python3 - <<'PY'
+          import hashlib, json, sys
+          lock = json.load(open('nfl-command-deck/data/prereg_lock.json'))
+          got = hashlib.sha256(open('nfl-command-deck/' + lock['file'], 'rb').read()).hexdigest()
+          print('registered', lock['sha256'])
+          print('on disk   ', got)
+          sys.exit(0 if got == lock['sha256'] else 1)
+          PY
+
+      - name: Recompute every published number
+        run: |
+          python3 nfl-command-deck/engine/model_eval.py
+          python3 nfl-command-deck/engine/null_test.py 200
+          python3 nfl-command-deck/engine/audit_repo.py
+          python3 nfl-command-deck/engine/availability.py
+          python3 nfl-command-deck/engine/requirements.py
+          python3 nfl-command-deck/engine/build_site.py
+
+      - name: Freshness — pure output must be committed exactly as rebuilt
+        run: git diff --exit-code -- nfl-command-deck/data/eval.json nfl-command-deck/data/null.json nfl-command-deck/data/availability.json nfl-command-deck/data/injury_rows.json nfl-command-deck/data/requirements.json
+
+      - name: Freshness — tree-dependent output must be committed for the current tree
+        run: |
+          if ! git diff --quiet -- nfl-command-deck/data/audit.json nfl-command-deck/data/link_defects.json nfl-command-deck/pages nfl-command-deck/index.html; then
+            echo "::warning title=Stale generated output::The repository audit or a page is stale relative to this tree. Regenerate and commit before publishing."
+            git diff --stat
+          fi
+
+      - name: Verify pages, links, row sources, prose/data agreement and edit scope
+        run: python3 nfl-command-deck/engine/verify.py
+
+      - name: Confirm the verifier is re-runnable (no state carried between runs)
+        run: python3 nfl-command-deck/engine/verify.py
