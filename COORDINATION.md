@@ -4880,12 +4880,12 @@ Read the whole board before starting. No claim was open against the scope below.
 | # | Task | Status | Owner session | File scope |
 |---|------|--------|---------------|------------|
 | N-01 | Official-source re-reads (injury report, reserve list, club depth chart, schedule/finals) | in progress | arena-7fc936d1-own4 | `nfl-board/data/**` |
-| N-02 | Decision-readiness table: one row per requirement line, the gate that blocks it, the number that clears it | unclaimed | — | `nfl-board/pages/readiness.html` |
-| N-03 | Questions / information / answers register + missing-information discovery routes | unclaimed | — | `nfl-board/pages/questions.html` |
-| N-04 | Suggestions board with blank verdicts (reviewer chooses before implementation) | unclaimed | — | `nfl-board/pages/suggestions.html` |
-| N-05 | Line-by-line repo review of the NFL tree, irregularities flagged with file:line | unclaimed | — | `nfl-board/pages/repo-review.html` |
-| N-06 | Executive summary | unclaimed | — | `nfl-board/pages/executive-summary.html` |
-| N-07 | Site build + verifier (every row source-linked, no broken links, deterministic) | unclaimed | — | `nfl-board/engine/**` |
+| N-02 | Decision-readiness table: one row per requirement line, the gate that blocks it, the number that clears it | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/readiness.html` (generated) |
+| N-03 | Questions / information / answers register + missing-information discovery routes | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/questions.html` (generated) |
+| N-04 | Suggestions board with blank verdicts (reviewer chooses before implementation) | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/suggestions.html` (generated) |
+| N-05 | Line-by-line repo review of the NFL tree, irregularities flagged with file:line | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/repo-review.html` (generated) |
+| N-06 | Executive summary | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/executive-summary.html` (generated) |
+| N-07 | Site build + verifier (every row source-linked, no broken links, deterministic) | in progress | arena/ec4e3f48-own4 | `nfl-board/engine/**`, generated `nfl-board/pages/**` |
 | N-08 | Root nav integration (additive group only) + regenerate `index.html`/`verified/*` | unclaimed | — | `verification/build.py`, generated `index.html`, `verified/*.html` |
 | N-09 | PR → main → merge → Pages confirmation, recorded here | unclaimed | — | `COORDINATION.md` |
 
@@ -6045,3 +6045,9 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 | Fresh official re-verification (standings, W11 schedule, W11 injuries 253 rows, W10 finals, trades, IND@HOU game centre), origination engine, readiness register (70 rows), questions/suggestions/flags, static site + verifier | in progress | arena/7ccaa4f3-own4 | nfl-origination-2026-11-19/**, COORDINATION.md (this block only) |
 
 - 2026-11-19: Claimed. Scope is a new namespace only; no peer namespace, root index.html, or shared navigation edited. All official reads made today via page fetch: standings, week-11 schedule, injuries (7 chunks), week-10 schedule/finals, transactions, depth-charts (404), scores, IND@HOU game centre. Peer registers (nfl-verify-2026-11-19, nfl-daily-desk, nfl-price-snapshot) read for cross-reference only.
+
+### Session `arena/ec4e3f48-own4` — NFL Decision Board semantic-table QA (2026-11-19 UTC)
+
+- Claim: N-02 through N-07 in the `arena-7fc936d1-own4` board. Exclusive scope: `nfl-board/engine/**` and generated `nfl-board/pages/**`; N-01 data and N-08 shared root navigation are untouched.
+- Baseline: `python3 nfl-board/engine/verify.py` passes but emits three source-class warnings. Independent inspection found generated `<tr>` elements contain raw concatenated text/links without `<td>` cells, while the verifier only checks link presence in each `<tr>` and therefore misses invalid table structure.
+- Planned work: make table generation semantic and accessible (`<th scope=row>` for row labels where suitable, `<td>` for data), extend verification to check header/body shape and cell counts, regenerate and test affected pages. Preserve all evidence and do not alter claim statuses or source data.
