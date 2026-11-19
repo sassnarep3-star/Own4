@@ -5629,3 +5629,20 @@ figure was invented; unknown values remain blank and flagged on the per-workspac
 **Collision check:** no open PR lists `verification-integration/**`, `legacy-root-dashboard.html`,
 `verification-2026-11-13/index.html`, or `nfl/index.html` as its scope. `nfl/index.html` was last
 merged in PR #169 and is now extended additively (a new section + marker), not replaced.
+
+### PR merge and Pages confirmation — `arena/048562c8-own4` (2026-11-19 UTC)
+
+- **PR:** [#179](https://github.com/sassnarep3-star/Own4/pull/179), `arena/048562c8-own4` → `main`,
+  merged with `--merge` at `2026-11-19T07:00:29Z`; merge commit
+  [`df9aa2f84248455b5d7412225883c249fbd56d39`](https://github.com/sassnarep3-star/Own4/commit/df9aa2f84248455b5d7412225883c249fbd56d39).
+- Two rebase cycles onto advancing `main` (`b8544a6`, then `c620b52`); both resolved the append-only
+  `COORDINATION.md` collision as a union (no peer or own session block dropped). Commits replayed:
+  `c6a3426` (integration work) and `830e0ea` (refreshed audit report).
+- **Pages:** GitHub Pages API reports status `built` for `main` (source branch `main`, path `/`) after the
+  merge. PR checks passed (`Validate NBA research workspace`, run `44476312204`, and the PR-head run
+  `44476301385`). Published site: https://sassnarep3-star.github.io/Own4/ .
+- **Post-merge audit:** the whole-repo audit was re-run on the merged `main` state — 716 site pages,
+  0 broken internal links, 0 non-https external links, 0 tables without an official source link,
+  0 localhost/loopback URLs. Flagged irregularities (no live external fetch this session; status values
+  taken from owning registers; legacy values are the archived snapshot) are published on this board and
+  on the per-workspace "Flagged for Review" pages. Non-blocking; merged.
