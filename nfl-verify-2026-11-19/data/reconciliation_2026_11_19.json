@@ -1,0 +1,85 @@
+{
+  "checks": [
+    {
+      "check": "Standings team count == 32",
+      "computed": 32,
+      "expect": 32,
+      "id": "C-01",
+      "pass": true,
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "check": "Sum of wins == sum of losses (each game yields one W and one L)",
+      "computed": "149 W / 149 L",
+      "expect": "equal",
+      "id": "C-02",
+      "pass": true,
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "check": "Total games played (W+L+T)/2 is an integer",
+      "computed": 150.0,
+      "expect": "integer",
+      "id": "C-03",
+      "pass": true,
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "check": "Net points == points for - points against for every team",
+      "computed": true,
+      "expect": "all true",
+      "id": "C-04",
+      "pass": true,
+      "source": "https://www.nfl.com/standings/"
+    },
+    {
+      "check": "Week-11 fixtures + bye teams partition the 32-team league",
+      "computed": "13 fixtures + 6 byes = 26 teams playing, 6 on bye",
+      "expect": "19 playing + 6 bye = 32",
+      "id": "C-05",
+      "pass": true,
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    },
+    {
+      "check": "Reserve-list entries counted (November 2026)",
+      "computed": 25,
+      "expect": 25,
+      "id": "C-06",
+      "pass": true,
+      "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+    },
+    {
+      "check": "Trade entries counted (November 2026)",
+      "computed": 12,
+      "expect": 12,
+      "id": "C-07",
+      "pass": true,
+      "source": "https://www.nfl.com/transactions/league/trades/2026/11"
+    },
+    {
+      "check": "Injury rows transcribed this session",
+      "computed": 111,
+      "expect": 111,
+      "id": "C-08",
+      "pass": true,
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "check": "Every injury row carries an official player-page link",
+      "computed": true,
+      "expect": "all true",
+      "id": "C-09",
+      "pass": true,
+      "source": "https://www.nfl.com/injuries/"
+    },
+    {
+      "check": "Venue discrepancy detected (schedule vs game centre) for IND@HOU",
+      "computed": "schedule='NRG Stadium' vs game centre='Reliant Stadium'",
+      "expect": "flagged",
+      "id": "C-10",
+      "pass": true,
+      "source": "https://www.nfl.com/schedules/2026/by-week/week-11"
+    }
+  ],
+  "read_date": "2026-11-19"
+}

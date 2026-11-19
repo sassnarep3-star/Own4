@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Suggestions</title><style>/* nfl-verify-2026-11-19 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.process{background:rgba(78,161,255,.16);color:var(--acc)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+</style></head><body><div class="wrap"><header class="top"><h1>NFL Verify - 2026-11-19</h1><div class="sub">Fresh official re-verification round; all values read from nfl.com on 2026-11-19; every table row carries a source link; unverifiable values blank + flagged</div></header><div class="layout"><nav class="side"><div class="grp">nfl-verify-2026-11-19</div><a href="../index.html">Overview</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/verification.html">Verification</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injury report</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a></nav><main><div class="panel"><h2>Suggestions for review</h2><p class="note">Suggestions to discover missing information and improve decision-making. Verdicts are deliberately blank: the owner reviews and chooses the path before any change is implemented. Each suggestion lists alternatives, the gate it must clear, and the information it needs.</p><table><thead><tr>
+<th>ID</th>
+<th>Suggestion</th>
+<th>Problem</th>
+<th>Alternatives</th>
+<th>Gate</th>
+<th>Information needed</th>
+<th>Verdict</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>S-01</td>
+<td>Adopt a single canonical NFL decision surface and mark the 40+ nfl-* namespaces as appendices</td>
+<td>The brief&#x27;s requirements are split across many namespaces, making the decision-readiness view fragmented.</td>
+<td>Consolidate into one register with links; Keep namespaces but add a unified readiness index</td>
+<td>Owner picks one canonical surface (SF-01 / CD-15)</td>
+<td>Owner decision on consolidation scope</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-02</td>
+<td>Run the scheduled Wed/Thu/Fri availability collector as the standing freshness gate</td>
+<td>Availability is point-in-time; surprise and delta require a dated series.</td>
+<td>Scheduled collector (peer nfl-collector); Manual dated reads</td>
+<td>Scheduled capture with retained hashes + drift alarm</td>
+<td>Confirm cron cadence and alert owners</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-03</td>
+<td>Ingest the official reserve list into the availability join as a first-class event stream</td>
+<td>&#x27;Not listed&#x27; can mean injured-reserve rather than available; reserve moves explain missing players.</td>
+<td>Reserve-list parser (one page, one parser); Full transactions parser</td>
+<td>Reserve moves joined to availability with dates</td>
+<td>None (reserve list is public); schedule the parser</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-04</td>
+<td>Decide the price-data policy before publishing any backtest</td>
+<td>Without an authorized price source, no residual/CLV/ROI can be computed; backtests would be vs a proxy.</td>
+<td>License a market feed; Publish fair-line-only backtests with an explicit no-market caveat</td>
+<td>Owner decision + authorized source</td>
+<td>Owner decision on data rights/budget</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-05</td>
+<td>Resolve the depth-order source (route a vs route b) before building the deficiency feature</td>
+<td>Depth is the core of the deficiency signal but has no verified actual-starter/snap join.</td>
+<td>Per-club official depth pages (verified 32/32; HOU image-only); Snap counts if an official source is authorized</td>
+<td>One route verified for all 32 clubs + actual-starter join</td>
+<td>Authorized structured HOU source; owner verdict on SG-C</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/teams/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-06</td>
+<td>Add a control baseline (random; favorites-only) to every leaderboard run and publish the luck-removal panel</td>
+<td>Raw win rate and short-run ROI cannot separate skill from variance.</td>
+<td>Computed control floor from luck-only strategies; Closed-form variance bound</td>
+<td>n &gt;= 300 out-of-sample + game-cluster CI</td>
+<td>Complete official results corpus</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-07</td>
+<td>Treat venue as game-centre-authoritative and reconcile schedule-vs-centre discrepancies automatically</td>
+<td>IND@HOU shows &#x27;NRG Stadium&#x27; on the schedule page but &#x27;Reliant Stadium&#x27; on the game centre.</td>
+<td>Game centre is authoritative (per brief); Flag and hold blank until reconciled</td>
+<td>Every fixture venue read from the official game centre</td>
+<td>Game-centre reads for all 13 Week-11 fixtures</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-08</td>
+<td>Give each session its own coordination file under coordination/ with COORDINATION.md as an index</td>
+<td>The single append-only board is hot; parallel sessions collide on the same tail.</td>
+<td>Per-session board files + index; Keep single board with section headers</td>
+<td>No lost entries on concurrent appends</td>
+<td>Owner decision on coordination structure</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-09</td>
+<td>Pre-register and freeze the McNemar paired test for model-vs-baseline before the evaluation window opens</td>
+<td>Model-vs-baseline claims need a pre-registered paired test to avoid post-hoc tuning.</td>
+<td>Paired McNemar on win/loss; Brier skill with game-cluster CI</td>
+<td>Rule file committed (hash = registration) before data</td>
+<td>None (process); freeze the window</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S-10</td>
+<td>Publish every model total twice (two estimators) with a gap column until a walk-forward comparison collapses to one</td>
+<td>A single estimator hides model-selection uncertainty.</td>
+<td>Dual estimators + gap column; Ensemble with disclosed weights</td>
+<td>Walk-forward comparison with a pre-registered collapse rule</td>
+<td>Complete results corpus</td>
+<td><span class="blank"></span></td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table></div></main></div><footer>Sources are official NFL pages read 2026-11-19. Derived figures are computed from the cited data, not official publications. No betting lines, odds or closing prices exist in any official source; market fields are blank by policy.</footer></div></body></html>
