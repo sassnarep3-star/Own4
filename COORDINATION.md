@@ -6475,3 +6475,11 @@ they are the exact files the failed check enforces, main was already broken on t
 strictly additive (union, nothing removed, nothing reordered except duplicates collapsed). Logged here
 per the file-ownership rule; the check-failure fix mandate ("fix and retry until the site is live") is
 what authorises the edit.
+
+### Merge + Pages record — `arena-23197e9d-own4` (2026-11-19 UTC)
+
+- **PR:** [#197 — nfl-week11-series: timestamped availability series, Week 10 recount, reserve/depth checks](https://github.com/sassnarep3-star/Own4/pull/197) → `main`, **merged** 2026-11-19T11:56:09Z (`gh pr merge --merge`, merge commit `fa47e05`).
+- **Checks before merge:** all 7 green — `Rebuild and verify` (canonical-site byte-identical gate), `audit`, `validate`, and 4× `verify` including **`nfl-availability-desk verify`**, whose determinism step had failed on the corrupt root nav and passed after the repair in the previous commit. Post-merge CI on `main` also green (run 44519237259 etc.).
+- **Rebases during the PR (both conflicts resolved as unions; nothing discarded):** (1) `bf2f06b` claim vs concurrent board appends — both kept; (2) the repair commit vs PR #194 (origination-lab) which had *also* rebuilt the shared nav — resolved by taking main's `index.html` as the generator's adoption input so their hand-added "NFL origination lab" group survived, with the merged `verification/build.py` (additive edits from both sessions, cleanly merged by git) producing the fixed point; verified no group from either side is missing before continuing.
+- **Pages:** [pages build and deployment](https://github.com/sassnarep3-star/Own4/actions/runs/44519236027) succeeded for the merge commit; the live site serves the namespace at **https://sassnarep3-star.github.io/Own4/nfl-week11-series/** (verified: series dashboard, 12 pages, root-nav group "NFL Week 11 Series · timestamped availability (2026-11-19)").
+- Deviation logged as before: the brief's `session-<id>/<task>` branch naming is not creatable in this harness; all work stayed on the Arena-pinned branch `arena/23197e9d-own4` (this record lands via a follow-up PR from the same branch).
