@@ -1,0 +1,242 @@
+{
+ "dataset": "nfl_origination_lab_leaderboard",
+ "title": "Proper-score leaderboard on the untouched 2026 holdout; staking division empty",
+ "built": "2026-11-19",
+ "rule": "rank by benchmark-relative proper score with a week-cluster lower bound and a Holm adjustment over the whole declared family. Raw win rate and ROI are not ranking metrics and are not shown as if they were.",
+ "benchmark": "M0 climatology (training-window base rates, no team information)",
+ "block": "2026 weeks 1-10 (the final holdout; never used for selection)",
+ "n_games": 150,
+ "families_scored": 18,
+ "qualifiers": [],
+ "shadows_only_reason": "no model cleared the registered gate",
+ "rows": [
+  {
+   "model": "M0",
+   "eligible_for_ranking": false,
+   "proper_score": {
+    "bss_moneyline": 0.0,
+    "ci90_moneyline": [
+     0.0,
+     0.0
+    ],
+    "bss_total": 0.0,
+    "ci90_total": [
+     0.0,
+     0.0
+    ],
+    "skill_crps_side": 0.0,
+    "ci90_side": [
+     0.0,
+     0.0
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 1.0,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  },
+  {
+   "model": "M1",
+   "eligible_for_ranking": true,
+   "proper_score": {
+    "bss_moneyline": 0.1063951529,
+    "ci90_moneyline": [
+     0.02611780515,
+     0.184531063917
+    ],
+    "bss_total": 0.0320324502,
+    "ci90_total": [
+     -0.040485238643,
+     0.101206144287
+    ],
+    "skill_crps_side": 0.0187020556,
+    "ci90_side": [
+     -0.025180586798,
+     0.063599140874
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 0.18,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  },
+  {
+   "model": "M2",
+   "eligible_for_ranking": true,
+   "proper_score": {
+    "bss_moneyline": 0.1509068105,
+    "ci90_moneyline": [
+     0.079544569921,
+     0.214259730831
+    ],
+    "bss_total": 0.0320324263,
+    "ci90_total": [
+     -0.040485245079,
+     0.101206140795
+    ],
+    "skill_crps_side": 0.0187020787,
+    "ci90_side": [
+     -0.025180512678,
+     0.063599165546
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 0.0085,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  },
+  {
+   "model": "M3",
+   "eligible_for_ranking": true,
+   "proper_score": {
+    "bss_moneyline": 0.1434079229,
+    "ci90_moneyline": [
+     0.067436807203,
+     0.218066966666
+    ],
+    "bss_total": 0.0251745973,
+    "ci90_total": [
+     -0.035239138255,
+     0.086565801689
+    ],
+    "skill_crps_side": 0.0166407234,
+    "ci90_side": [
+     -0.019554836118,
+     0.057497825573
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 0.0054,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  },
+  {
+   "model": "M4",
+   "eligible_for_ranking": true,
+   "proper_score": {
+    "bss_moneyline": 0.1275620338,
+    "ci90_moneyline": [
+     0.031148293361,
+     0.22399407299
+    ],
+    "bss_total": 0.025359623,
+    "ci90_total": [
+     -0.059151844015,
+     0.106668378195
+    ],
+    "skill_crps_side": 0.0110420234,
+    "ci90_side": [
+     -0.040768297374,
+     0.063860079199
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 0.18,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  },
+  {
+   "model": "M5",
+   "eligible_for_ranking": true,
+   "proper_score": {
+    "bss_moneyline": 0.1369799356,
+    "ci90_moneyline": [
+     0.053336132592,
+     0.217153428243
+    ],
+    "bss_total": 0.0279352555,
+    "ci90_total": [
+     -0.049513253792,
+     0.103227748213
+    ],
+    "skill_crps_side": 0.0148844324,
+    "ci90_side": [
+     -0.031859139157,
+     0.064434844804
+    ],
+    "n": 150,
+    "weeks": 10,
+    "holm_p_moneyline": 0.0528,
+    "holm_p_total": 1.0,
+    "holm_p_side": 1.0
+   },
+   "staking_division": {
+    "roi": null,
+    "clv": null,
+    "n_bets": null,
+    "blank_reason": "no officially sourced closing price exists in this repository for any 2026 market (data/price_policy.json)"
+   },
+   "stage_1_qualified": false,
+   "what_would_promote": "a 2026 closing price with an official, timestamped source would open the staking division; sustained CLV above 0 over >= 8 weeks would promote to live",
+   "what_would_retire": "a negative 90% lower bound on benchmark-relative Brier skill over any rolling 4-week window, or a drift-alarm failure on the inputs twice in a row"
+  }
+ ],
+ "divisions": {
+  "singles": {
+   "status": "open",
+   "note": "one straight bet per game, one market"
+  },
+  "game_parlays": {
+   "status": "closed",
+   "reason": "leg dependence must be measured on officially sourced joint prices, which do not exist here"
+  },
+  "same_game_parlays": {
+   "status": "closed",
+   "reason": "same as game parlays"
+  },
+  "prop_combos": {
+   "status": "closed",
+   "reason": "no official player-level price or per-game log in the repository; marginal probabilities cannot be multiplied under dependence"
+  }
+ }
+}

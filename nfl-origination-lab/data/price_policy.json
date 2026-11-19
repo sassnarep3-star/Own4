@@ -1,0 +1,215 @@
+{
+ "dataset": "nfl_origination_lab_price_policy",
+ "title": "Price-data policy, decided before any staking number is published",
+ "built": "2026-11-19",
+ "decision": {
+  "rule": "a price row may carry an ROI only if its publisher is official AND its capture time is known",
+  "claimable_open_rows": 0,
+  "claimable_close_rows": 0,
+  "verdict": "the intersection is empty. No officially published number in the store has a known capture time, and no number with a known capture time is officially published.",
+  "therefore": [
+   "no ROI, CLV, units or bankroll is published in this namespace",
+   "no -110, no assumed vig, no assumed push or void rule",
+   "proper scores (Brier, CRPS) are unaffected and are published",
+   "an ORIGINATION residual against the official posted line is published and labelled 'market divergence', never 'CLV'"
+  ],
+  "what_would_unblock_staking": [
+   "a licensed feed or an operator's own price history with capture timestamps",
+   "or an official league/club page that publishes a dated closing number",
+   "and, separately, the operator's own void/push rules for combos"
+  ]
+ },
+ "classification_rule": {
+  "C1": "a line is present for the named market",
+  "C2": "a source key is recorded for that line",
+  "C3": "the source key appears in source_register",
+  "C4": "the register records the key as an official nfl.com publication, and records a known capture time for it",
+  "claimable_requires": "C1 and C2 and C3 and C4"
+ },
+ "source_register": {
+  "nfl_data_games": {
+   "publisher": "nfl.com game centre",
+   "official": true,
+   "timing_known": false,
+   "timing_evidence": "every SIDE/TOTAL/MONEYLINE row with this key carries close_verification_status = ARCHIVE-UNPUBLISHED-TIMING"
+  },
+  "nfl_data_closing": {
+   "publisher": "third-party closing archive, not nfl.com",
+   "official": false,
+   "timing_known": true,
+   "timing_evidence": "carries close_verification_status = VERIFIED-ARCHIVE"
+  },
+  "nfl_data_sc": {
+   "publisher": "third-party line archive, not nfl.com",
+   "official": false,
+   "timing_known": false,
+   "timing_evidence": "open_verification_status = UNPUBLISHED-TIMING"
+  },
+  "nfl_data_initial": {
+   "publisher": "third-party initial-line archive, not nfl.com",
+   "official": false,
+   "timing_known": true,
+   "timing_evidence": "open_verification_status = VERIFIED-ARCHIVE"
+  },
+  "repo_engine": {
+   "publisher": "this repository's own model output",
+   "official": false,
+   "timing_known": false,
+   "timing_evidence": "a model output is never a market price"
+  },
+  "": {
+   "publisher": "no source recorded",
+   "official": false,
+   "timing_known": false,
+   "timing_evidence": "blank source key"
+  }
+ },
+ "census": {
+  "rows_total": 12573,
+  "seasons": [
+   "2011",
+   "2012",
+   "2013",
+   "2014",
+   "2015",
+   "2016",
+   "2017",
+   "2018",
+   "2019",
+   "2020",
+   "2021",
+   "2022",
+   "2023",
+   "2024",
+   "2025",
+   "2026"
+  ],
+  "open": {
+   "no_line": 9986,
+   "not_official_publisher": 2587
+  },
+  "close": {
+   "not_official_publisher": 5901,
+   "official_but_no_timing": 6345,
+   "no_line": 327
+  },
+  "by_season": {
+   "2011": {
+    "close_not_official_publisher": 762,
+    "close_official_but_no_timing": 6,
+    "open_no_line": 768
+   },
+   "2012": {
+    "close_not_official_publisher": 765,
+    "close_official_but_no_timing": 3,
+    "open_no_line": 768
+   },
+   "2013": {
+    "close_not_official_publisher": 762,
+    "close_official_but_no_timing": 6,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2014": {
+    "close_not_official_publisher": 756,
+    "close_official_but_no_timing": 12,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2015": {
+    "close_not_official_publisher": 756,
+    "close_official_but_no_timing": 12,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2016": {
+    "close_not_official_publisher": 711,
+    "close_official_but_no_timing": 57,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2017": {
+    "close_not_official_publisher": 717,
+    "close_official_but_no_timing": 51,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2018": {
+    "close_not_official_publisher": 672,
+    "close_official_but_no_timing": 96,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2019": {
+    "close_official_but_no_timing": 768,
+    "open_no_line": 512,
+    "open_not_official_publisher": 256
+   },
+   "2020": {
+    "close_official_but_no_timing": 768,
+    "open_no_line": 517,
+    "open_not_official_publisher": 251
+   },
+   "2021": {
+    "close_official_but_no_timing": 816,
+    "open_no_line": 272,
+    "open_not_official_publisher": 544
+   },
+   "2022": {
+    "close_official_but_no_timing": 813,
+    "open_no_line": 813
+   },
+   "2023": {
+    "close_official_but_no_timing": 816,
+    "open_no_line": 816
+   },
+   "2024": {
+    "close_official_but_no_timing": 816,
+    "open_no_line": 816
+   },
+   "2025": {
+    "close_official_but_no_timing": 816,
+    "open_no_line": 816
+   },
+   "2026": {
+    "close_no_line": 327,
+    "close_official_but_no_timing": 489,
+    "open_no_line": 816
+   }
+  }
+ },
+ "graded_games_available": {
+  "games_in_feed": 4056,
+  "games_2026_graded": 150,
+  "games_with_official_posted_line": 150,
+  "weeks_with_a_priced_game": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10
+  ],
+  "weeks_with_none": [],
+  "note": "a game can be graded without a price (proper scores need none); a bankroll cannot, and one is not simulated here."
+ },
+ "sources": [
+  {
+   "path": "nfl-markets/data/price_snapshots.csv",
+   "title": "inherited price-snapshot store, 12,573 rows, 2011-2026"
+  },
+  {
+   "path": "nfl-markets/data/results_feed.csv",
+   "title": "verified results feed, 4,056 graded games"
+  },
+  {
+   "path": "nfl-origination-lab/data/corpus.json",
+   "title": "this lab's reconciled corpus, 150 2026 games"
+  }
+ ]
+}
+

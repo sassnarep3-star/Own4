@@ -1,0 +1,93 @@
+{
+  "register": "nfl_origination_lab_prereg",
+  "version": "PREREG-LAB-1",
+  "rule": "Each block below is committed to git BEFORE the code that scores it produces a number. The commit hash of this file is the registration. Changing a block after a result exists requires a new version string, and the old block is kept.",
+  "written_utc": "2026-11-19T00:00:00Z",
+  "amended_utc": "2026-11-19 (corrections block; no result had been computed)",
+  "written_by": "session arena/9a2f55f4-own4",
+
+  "data_ladder": {
+    "train": "2025 regular season, weeks 1-9 (games strictly before the validation window)",
+    "validation": "2025 regular season, weeks 10-18, walked forward week by week",
+    "final_holdout": "2026 regular season, weeks 1-10, walked forward week by week; no 2026 result informs any earlier prediction",
+    "excluded": "postseason, the 2026 pre-season, and any game not present in the verified results feed with an official game-centre URL",
+    "why_this_ladder": "one full season of training, one validation block, and a final block that is never touched during selection. The 2026 block is small (150 games), so it is reported with a week-cluster interval and never as a point estimate alone."
+  },
+
+  "markets": {
+    "order_of_publication": ["SIDE", "TOTAL", "MONEYLINE"],
+    "why_that_order": "the side is the market with the most informative structure in this corpus (margin), the total is second, and the moneyline is a monotone transform of the same margin distribution. Publishing in that order keeps each later number anchored to an already-published one.",
+    "SIDE": "fair home margin in points; the win probability implied by the model's own margin distribution",
+    "TOTAL": "fair combined points",
+    "MONEYLINE": "the same win probability expressed as a fair American price at zero margin"
+  },
+
+  "strategies": [
+    {"id": "M0", "name": "Climatology control",
+     "definition": "the training-window base rate of home wins for the side/moneyline, and the training-window mean and SD of total points for the total. No team information at all.",
+     "role": "benchmark",
+     "frozen_parameters": ["base rate", "mean total", "SD of total", "SD of margin"]},
+
+    {"id": "M1", "name": "Symmetric ridge team strength",
+     "definition": "points = mu + offense_team - defense_opponent +/- H, with one global home advantage H. offense and defense are ridge-shrunk to zero (lambda chosen from the validation block only, from the fixed grid below).",
+     "role": "candidate",
+     "frozen_parameters": ["lambda grid [0.5, 1, 2, 4, 8, 16]", "8 alternating-least-squares passes"]},
+
+    {"id": "M2", "name": "Team strength + club-specific home advantage",
+     "definition": "M1 with a separate home advantage per home club, shrunk toward the global H by the same ridge penalty. 32 coefficients.",
+     "role": "candidate",
+     "frozen_parameters": ["lambda grid [0.5, 1, 2, 4, 8, 16]", "8 passes"]},
+
+    {"id": "M3", "name": "Team strength + recency weighting",
+     "definition": "M1 where each game's weight decays with the number of that club's own subsequent games, half-life 6 club-games.",
+     "role": "candidate",
+     "frozen_parameters": ["half-life 6", "lambda grid [0.5, 1, 2, 4, 8, 16]"]},
+
+    {"id": "M4", "name": "Team strength + rest differential",
+     "definition": "M1 plus a coefficient on (rest days home - rest days away), rest measured from the published gameday dates only. Coefficient shrunk to zero.",
+     "role": "candidate",
+     "frozen_parameters": ["lambda grid [0.5, 1, 2, 4, 8, 16]"]},
+
+    {"id": "M5", "name": "Equal-weight ensemble",
+     "definition": "the arithmetic mean of the M1-M4 predictive distributions. Weights fixed equal; no fitting on outcomes.",
+     "role": "candidate",
+     "frozen_parameters": ["weights 0.25 each", "sigma from pooled M1-M4 residuals"]}
+  ],
+
+  "selection_rule": {
+    "criterion": "mean proper score on the 2025 validation block only",
+    "side": "Brier score on home-win probability; lower is better",
+    "total": "CRPS on the total-points distribution; lower is better",
+    "tie_break": "fewer parameters, then lower id string",
+    "what_is_forbidden": "the 2026 final block may not be used to choose a model, a lambda, a half-life, or a market to publish. It is read once, after the choice is frozen."
+  },
+
+  "scoring": {
+    "side_and_moneyline": "Brier score on P(home win), benchmark-relative (Brier Skill Score = 1 - BS/BS_bench)",
+    "total": "CRPS of a Normal predictive distribution, and a Brier score at a pre-registered threshold tau = 44.0 total points (see corrections: the first draft of this line called 44.0 'the rounded 2025 median', which is false. The 2025 median is 45.0; 44 is the modal 2025 total, 12 of 272 games. The threshold is kept at 44.0, and the reason is corrected before any score was computed)",
+    "uncertainty": "paired week-cluster bootstrap, 10,000 resamples over weeks, seed 20261119, 90% interval, one-sided p = share of resamples with skill <= 0",
+    "multiplicity": "Holm-Bonferroni across every (model, market) pair scored in the final block, family declared before scoring",
+    "pass_gate": "Holm-adjusted p < 0.10 AND the 90% week-cluster lower bound on benchmark-relative skill > 0 AND n >= 100 games"
+  },
+
+  "staking": {
+    "rule": "No stake is simulated and no ROI is published unless the price for that exact market is present in the price store with an official source URL and a timestamped capture. No assumed -110, no assumed push handling.",
+    "consequence": "with zero officially verified prices in the repository (see data/price_policy.json), the staking division of the leaderboard opens empty and this is published as the result, not as a gap to be filled with an assumption."
+  },
+
+  "demotion": {
+    "gate": "a live strategy returns to paper if, over any rolling 4-week window, its benchmark-relative skill is negative at the 90% lower bound, OR if its pre-registered sample floor is breached, OR if its inputs fail the drift alarm twice in a row",
+    "effect": "demotion is recorded as an event with a date and a reason; the strategy keeps its history and is not deleted"
+  },
+
+  "changing_our_mind": {
+    "rule": "every strategy entry carries a two-sided field: what evidence would promote it, and what evidence would retire it. Both sides must be numeric and pre-registered."
+  },
+
+  "corrections": [{"at_utc": "2026-11-19 (before any evaluation run)", "field": "scoring.total", "was": "tau=44.0 described as the rounded 2025 median total", "is": "tau=44.0 retained; description corrected to the modal 2025 total (12 of 272 games); the 2025 median is 45.0", "why_recorded": "a registration is evidence; a wrong justification is corrected in place with the wrong version kept, never silently rewritten"}],
+
+  "no_lookahead": {
+    "rule": "a prediction for a game may use only games whose final score was published before that game's scheduled kickoff. In this corpus all inputs are prior-week final scores, so the constraint reduces to 'strictly earlier week', which is enforced in code and asserted by the verifier.",
+    "known_leak_risk": "the gameday field is the published scheduled date; a rescheduled game is detected only if its date differs between two captures of the same page, which this session cannot read."
+  }
+}

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Origination Lab</title>
+<meta name="description" content="Executive summary of the NFL origination lab: measured skill, the empty staking division, and the availability gaps.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NFL origination lab</span></a>
+  <div class="tag">Pre-registered competition · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav active" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Decision readiness (68)</a><a class="nav" href="../pages/questions.html">Questions (17)</a><a class="nav" href="../pages/suggestions.html">Suggestions (14, undecided)</a><a class="nav" href="../pages/flagged.html">Flagged for review (14)</a><div class="grp">Origination</div><a class="nav" href="../pages/origination.html">Own line vs official line</a><a class="nav" href="../pages/leaderboard.html">Proper-score leaderboard</a><a class="nav" href="../pages/luck.html">Removal of luck</a><a class="nav" href="../pages/prereg.html">Pre-registration &amp; data ladder</a><div class="grp">Evidence</div><a class="nav" href="../pages/corpus.html">Results corpus (150 games)</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><a class="nav" href="../pages/prices.html">Price-data policy</a><a class="nav" href="../pages/correlations.html">Correlations with n</a><a class="nav" href="../pages/sources.html">Sources</a><a class="nav" href="../pages/verify.html">Verification</a></nav>
+  <div class="tag egress">No live official read this session: the sandbox has no HTTPS
+  route to nfl.com. Every number is a stored capture with its own date, or a
+  computation over one. <a href="../pages/flagged.html">Details</a>.</div>
+</aside>
+<main id="main">
+<div class="crumb">Overview · executive summary</div>
+<h1>Executive summary</h1>
+
+
+<div class="panel"><h2>The short version</h2>
+<p><strong>Skill exists in one market, not three.</strong> On 150 graded 2026 games, a
+recency-weighted team-strength model beats a no-information climatology benchmark on the
+moneyline with a Brier skill of +0.1509 (90% week-cluster interval [+0.0795, +0.2143], Holm-adjusted
+p 0.0085). The same forecasts show no total-market skill that survives the multiplicity
+adjustment, and no margin-market skill at all. That is the honest result, and it is the
+opposite of a green light.</p>
+<p><strong>Nothing can be staked, and no substitute is used.</strong> The repository's
+price store has 12,573 rows. Every row with a known capture time carries a non-official
+source; every row with an official source has no capture time. The intersection is empty,
+so the staking division is published empty rather than filled with an assumed -110.</p>
+<p><strong>Availability is the biggest missing input.</strong> There are no snap counts, no
+inactive lists and no game books anywhere in the repository, and one club publishes its
+depth chart only as an image. The brief's own precondition for a backup-deficiency feature
+is therefore unmet, and no fixed points penalty was substituted for it.</p>
+</div>
+<h2>1 · What was measured</h2><div class="tw"><table class=""><caption>One model, three markets, one holdout. The verdict column is the registered gate, not an opinion.</caption><thead><tr><th scope='col'>Market</th><th scope='col'>Proper score used</th><th scope='col'>Best model</th><th scope='col'>Benchmark-relative skill</th><th scope='col'>90% week-cluster bound</th><th scope='col'>Holm p</th><th scope='col'>Verdict</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Moneyline</td><td>Brier on P(home win)</td><td>M2</td><td>+0.1509</td><td>[+0.0795, +0.2143]</td><td>0.0085</td><td><span class="badge ok">survives</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/leaderboard.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Total</td><td>Brier at a fixed threshold</td><td>M2</td><td>+0.0320</td><td>[-0.0405, +0.1012]</td><td>1.0000</td><td><span class="badge bad">does not survive</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/leaderboard.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Side</td><td>CRPS on the margin</td><td>M2</td><td>+0.0187</td><td>[-0.0252, +0.0636]</td><td>1.0000</td><td><span class="badge bad">does not survive</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/leaderboard.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div><h2>2 · Why the price question is the binding constraint</h2><p>Two attributes are required for a price to carry a claim: an official publisher, and a known capture time. The store splits cleanly and the intersection is empty.</p><div class="tw"><table class=""><caption>Price census, classified before the result was seen</caption><thead><tr><th scope='col'>Attribute</th><th scope='col'>Rows</th><th scope='col'>Consequence</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Official publisher, no capture time</td><td>6345</td><td>cannot be shown to precede kickoff; not claimable</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/price_policy.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Non-official publisher, capture time known</td><td>5901</td><td>wrong publisher under the brief's rule; not claimable</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/price_policy.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Claimable rows</td><td>0</td><td>the staking division stays closed</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/price_policy.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div><h2>3 · What the numbers do not cover</h2><div class="tw"><table class=""><caption>Each gap is a gate on the requirements page, not an excuse</caption><thead><tr><th scope='col'>Gap</th><th scope='col'>Why it changes the decision</th><th scope='col'>What would close it</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>No snap counts or inactive lists</td><td>replacement of a starter cannot be confirmed, only suspected</td><td>official snap counts and inactive lists, captured per game</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/depth.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>One image-only depth chart</td><td>32-club depth coverage is a precondition for the deficiency feature</td><td>a structured Houston chart, or an official snap source</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/depth.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Two injury captures, one week</td><td>a surprise signal needs a series; one delta is a single observation</td><td>daily captures Wednesday to kickoff</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/availability_parse.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>No recorded rights decision</td><td>raw rows sit in a public repository without a recorded decision</td><td>a recorded rights decision, or a private store</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/flagged.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div><h2>4 · Irregularities found in the repository</h2><p class='small'>14 flags; 4 blocking, 2 disclosure, 5 material, 3 minor. All are published on <a href='flagged.html'>the flagged page</a> with their sources. None blocks publishing; each one blocks a claim.</p><h2>5 · What to decide next</h2><div class="tw"><table class=""><caption>The suggestion board carries the full list, every row undecided</caption><thead><tr><th scope='col'>Decision</th><th scope='col'>What it unlocks</th><th scope='col'>Blocking question</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>Obtain a licensed or operator price history</td><td>ROI, CLV and the whole staking division</td><td>Q01 — can a claimable price be obtained at all?</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/questions.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Capture snap counts and inactive lists</td><td>the availability ablation the brief asks for</td><td>Q06 — does availability change outcomes at all?</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/questions.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Record a rights decision</td><td>a lawful public/private data split</td><td>Q16 — is the data lawful to republish?</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/flagged.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>Extend the holdout to a full season</td><td>a claim that survives more than ten weeks</td><td>Q03 — is the moneyline skill real or one hot week?</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/luck.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div>
+<footer>
+  <p><strong>Own4 · NFL Origination Lab.</strong> Research workspace. Nothing here is a
+  betting recommendation, and no ROI is published because no officially sourced,
+  time-stamped price exists in this repository.</p>
+  <p>If gambling is causing harm: 1-800-MY-RESET ·
+  <a href="https://www.ncpgambling.org/help-treatment/chat/" target="_blank" rel="noopener">ncpgambling.org</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

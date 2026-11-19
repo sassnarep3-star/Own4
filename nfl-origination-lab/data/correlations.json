@@ -1,0 +1,118 @@
+{
+ "dataset": "nfl_origination_lab_correlations",
+ "title": "Measured correlations from the verified corpus, n on every value",
+ "built": "2026-11-19",
+ "policy": "only officially sourced numbers are used; no correlation involving a price is published because no official price exists. Every row states n.",
+ "not_published": [
+  {
+   "item": "same-game parlay leg correlation",
+   "why": "requires joint prices from an official or licensed source; F-01"
+  },
+  {
+   "item": "player prop pair correlation",
+   "why": "requires official player-level prices or per-game logs; neither exists here"
+  },
+  {
+   "item": "closing-line correlation",
+   "why": "requires a closing price; the store has none for 2026"
+  }
+ ],
+ "rows": [
+  {
+   "season": 2025,
+   "pair": "margin ~ total",
+   "r": -0.0197,
+   "n": 272,
+   "ci95": [
+    -0.1383,
+    0.0995
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2025,
+   "pair": "abs_margin ~ total",
+   "r": -0.0174,
+   "n": 272,
+   "ci95": [
+    -0.1361,
+    0.1017
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2025,
+   "pair": "rest_diff ~ margin",
+   "r": 0.1093,
+   "n": 256,
+   "ci95": [
+    -0.0135,
+    0.2288
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2025,
+   "pair": "club_total_game_k ~ club_total_game_k+1",
+   "r": 0.0216,
+   "n": 512,
+   "ci95": [
+    -0.0652,
+    0.108
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2026,
+   "pair": "margin ~ total",
+   "r": -0.1405,
+   "n": 150,
+   "ci95": [
+    -0.2941,
+    0.0202
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2026,
+   "pair": "abs_margin ~ total",
+   "r": -0.0188,
+   "n": 150,
+   "ci95": [
+    -0.1785,
+    0.1419
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2026,
+   "pair": "rest_diff ~ margin",
+   "r": 0.3038,
+   "n": 150,
+   "ci95": [
+    0.1508,
+    0.4425
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  },
+  {
+   "season": 2026,
+   "pair": "club_total_game_k ~ club_total_game_k+1",
+   "r": 0.0718,
+   "n": 268,
+   "ci95": [
+    -0.0485,
+    0.19
+   ],
+   "source": "computed from data/corpus.json; each row's games carry their own official URL",
+   "uses_price": false
+  }
+ ]
+}

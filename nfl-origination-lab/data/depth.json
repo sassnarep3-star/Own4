@@ -1,0 +1,525 @@
+{
+ "dataset": "nfl_origination_lab_depth",
+ "title": "Depth and availability: what the stored official pages support, measured",
+ "built": "2026-11-19",
+ "sources": [
+  {
+   "path": "nfl-depth-sweep/data/depth_register.json",
+   "title": "official club depth-chart register, 32 clubs, captured 2026-11-17"
+  },
+  {
+   "path": "nfl-depth-sweep/data/roster_ir_sweep.json",
+   "title": "32-club Reserve/Injured sweep against those charts"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "title": "official November 2026 reserve list"
+  },
+  {
+   "url": "https://www.nfl.com/injuries/",
+   "title": "official Week 11 injury report (two dated captures)"
+  }
+ ],
+ "slot_shape": {
+  "definition": "how a single club/position/rank cell is populated on the stored chart. 'shared' means the club named more than one player at that rank, and no starter is chosen here.",
+  "clubs_transcribed": 31,
+  "clubs_not_transcribed": 1,
+  "slots": 705,
+  "player_entries": 1503,
+  "shape_counts": {
+   "single": 1433,
+   "shared": 22,
+   "jersey_prefixed": 48
+  },
+  "shared_slots": 22,
+  "empty_rank1_slots": 2,
+  "jersey_prefixed_entries": {
+   "GB": 48
+  },
+  "shared_examples": [
+   {
+    "club": "ARI",
+    "position": "OLB",
+    "rank": "rank1",
+    "names": [
+     "Zaven Collins",
+     "Baron Browning"
+    ],
+    "source_url": "https://www.azcardinals.com/team/depth-chart"
+   },
+   {
+    "club": "CIN",
+    "position": "TE",
+    "rank": "rank3",
+    "names": [
+     "Jack Endries",
+     "Cam Grandy"
+    ],
+    "source_url": "https://www.bengals.com/team/depth-chart"
+   },
+   {
+    "club": "CIN",
+    "position": "DT",
+    "rank": "rank3",
+    "names": [
+     "Kris Jenkins Jr.",
+     "Landon Robinson"
+    ],
+    "source_url": "https://www.bengals.com/team/depth-chart"
+   },
+   {
+    "club": "DAL",
+    "position": "TE",
+    "rank": "rank1",
+    "names": [
+     "Jake Ferguson",
+     "Brevyn Spann-Ford"
+    ],
+    "source_url": "https://www.dallascowboys.com/team/depth-chart"
+   },
+   {
+    "club": "DAL",
+    "position": "LB",
+    "rank": "rank1",
+    "names": [
+     "Shemar James",
+     "Jaishawn Barham"
+    ],
+    "source_url": "https://www.dallascowboys.com/team/depth-chart"
+   },
+   {
+    "club": "DAL",
+    "position": "S",
+    "rank": "rank1",
+    "names": [
+     "P.J. Locke",
+     "Markquese Bell"
+    ],
+    "source_url": "https://www.dallascowboys.com/team/depth-chart"
+   },
+   {
+    "club": "JAX",
+    "position": "RB",
+    "rank": "rank1",
+    "names": [
+     "Bhayshul Tuten",
+     "Chris Rodriguez Jr."
+    ],
+    "source_url": "https://www.jaguars.com/team/depth-chart"
+   },
+   {
+    "club": "JAX",
+    "position": "LB",
+    "rank": "rank1",
+    "names": [
+     "Ventrell Miller",
+     "Branson Combs"
+    ],
+    "source_url": "https://www.jaguars.com/team/depth-chart"
+   },
+   {
+    "club": "LAC",
+    "position": "WR",
+    "rank": "rank3",
+    "names": [
+     "Derius Davis",
+     "Theo Wease Jr."
+    ],
+    "source_url": "https://www.chargers.com/team/depth-chart"
+   },
+   {
+    "club": "LAR",
+    "position": "TE",
+    "rank": "rank1",
+    "names": [
+     "Davis Allen",
+     "Tyler Higbee"
+    ],
+    "source_url": "https://www.therams.com/team/depth-chart"
+   },
+   {
+    "club": "LAR",
+    "position": "CB",
+    "rank": "rank1",
+    "names": [
+     "Emmanuel Forbes Jr.",
+     "Josh Wallace"
+    ],
+    "source_url": "https://www.therams.com/team/depth-chart"
+   },
+   {
+    "club": "LV",
+    "position": "WR",
+    "rank": "rank3",
+    "names": [
+     "Dareke Young",
+     "Cody White"
+    ],
+    "source_url": "https://www.raiders.com/team/depth-chart"
+   },
+   {
+    "club": "MIN",
+    "position": "RB",
+    "rank": "rank1",
+    "names": [
+     "Aaron Jones Sr.",
+     "Jordan Mason"
+    ],
+    "source_url": "https://www.vikings.com/team/depth-chart"
+   },
+   {
+    "club": "NO",
+    "position": "RB",
+    "rank": "rank1",
+    "names": [
+     "Travis Etienne Jr.",
+     "Alvin Kamara"
+    ],
+    "source_url": "https://www.neworleanssaints.com/team/depth-chart"
+   },
+   {
+    "club": "NO",
+    "position": "EDGE",
+    "rank": "rank1",
+    "names": [
+     "Chase Young",
+     "Carl Granderson"
+    ],
+    "source_url": "https://www.neworleanssaints.com/team/depth-chart"
+   },
+   {
+    "club": "PHI",
+    "position": "EDGE",
+    "rank": "rank1",
+    "names": [
+     "Jalyx Hunt",
+     "Jonathan Greenard"
+    ],
+    "source_url": "https://www.philadelphiaeagles.com/team/depth-chart"
+   },
+   {
+    "club": "PHI",
+    "position": "EDGE",
+    "rank": "rank1",
+    "names": [
+     "Nolan Smith Jr.",
+     "Jonathan Greenard"
+    ],
+    "source_url": "https://www.philadelphiaeagles.com/team/depth-chart"
+   },
+   {
+    "club": "PIT",
+    "position": "TE",
+    "rank": "rank1",
+    "names": [
+     "Pat Freiermuth",
+     "Darnell Washington"
+    ],
+    "source_url": "https://www.steelers.com/team/depth-chart/"
+   },
+   {
+    "club": "SEA",
+    "position": "WR",
+    "rank": "rank1",
+    "names": [
+     "Cooper Kupp",
+     "Rashid Shaheed"
+    ],
+    "source_url": "https://www.seahawks.com/team/depth-chart/"
+   },
+   {
+    "club": "TEN",
+    "position": "TE",
+    "rank": "rank3",
+    "names": [
+     "David Martin-Robinson",
+     "Kylen Granson"
+    ],
+    "source_url": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "TEN",
+    "position": "RB",
+    "rank": "rank2",
+    "names": [
+     "Tyjae Spears",
+     "Nick Singleton"
+    ],
+    "source_url": "https://www.tennesseetitans.com/team/depth-chart"
+   },
+   {
+    "club": "TEN",
+    "position": "RB",
+    "rank": "rank3",
+    "names": [
+     "Julius Chestnut",
+     "Michael Carter"
+    ],
+    "source_url": "https://www.tennesseetitans.com/team/depth-chart"
+   }
+  ],
+  "empty_examples": [
+   {
+    "club": "NYJ",
+    "position": "DL"
+   },
+   {
+    "club": "PHI",
+    "position": "DT"
+   }
+  ],
+  "not_transcribed": [
+   {
+    "club": "HOU",
+    "status": "flagged_image_only",
+    "source_url": "https://www.houstontexans.com/team/depth-chart",
+    "why_blank": "the club publishes its chart in a format that was not transcribable as text; no values are inferred from an image"
+   }
+  ],
+  "finding": "a depth cell is a group, not a starter. Any feature that reads column 1 as 'the starter' fabricates a starter on 22 slots here."
+ },
+ "replacement_depth": {
+  "n_replacements_documented": 10,
+  "rows": [
+   {
+    "club": "NE",
+    "out": "TreVeyon Henderson",
+    "position": "RB",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Corey Kiner",
+    "replacement_at_rank": 3,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "CLE",
+    "out": "Michael Burton",
+    "position": "RB",
+    "out_was_listed_at_rank": 3,
+    "replacement": "Jaleel McLaughlin",
+    "replacement_at_rank": 4,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "TEN",
+    "out": "Tommy Townsend",
+    "position": "P",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Joey Slye",
+    "replacement_at_rank": 2,
+    "depth_of_replacement": 0,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "TEN",
+    "out": "Tommy Townsend",
+    "position": "H",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Mitchell Trubisky",
+    "replacement_at_rank": 2,
+    "depth_of_replacement": 0,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "DEN",
+    "out": "Eyioma Uwazurike",
+    "position": "DE",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Tyler Onyedim",
+    "replacement_at_rank": 3,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "DAL",
+    "out": "Tyler Goodson",
+    "position": "KR",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Jonathan Mingo",
+    "replacement_at_rank": 3,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "MIN",
+    "out": "Demond Claiborne",
+    "position": "RB",
+    "out_was_listed_at_rank": 2,
+    "replacement": "DeeJay Dallas",
+    "replacement_at_rank": 3,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "SF",
+    "out": "Gracen Halton",
+    "position": "LDT",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Sebastian Valdez",
+    "replacement_at_rank": 3,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "LAR",
+    "out": "Puka Nacua",
+    "position": "WR",
+    "out_was_listed_at_rank": 1,
+    "replacement": "CJ Daniels",
+    "replacement_at_rank": 2,
+    "depth_of_replacement": 1,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   },
+   {
+    "club": "LAR",
+    "out": "Jordan Whittington",
+    "position": "KR",
+    "out_was_listed_at_rank": 2,
+    "replacement": "Ronnie Rivers",
+    "replacement_at_rank": 2,
+    "depth_of_replacement": 0,
+    "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+    "reading": "depth_of_replacement counts how many ranks the club moved down the same position to fill the slot; blank where the chart did not list the player"
+   }
+  ],
+  "finding": "the sweep documents 10 replacements and 10 of them have a rank for the replacement. Depth of replacement is computed where both ranks exist and left blank otherwise."
+ },
+ "stale_chart_flags": {
+  "n_clubs_flagged": 2,
+  "rows": [
+   {
+    "club": "TEN",
+    "flags": [
+     {
+      "player": "Peter Skoronski",
+      "position": "LG",
+      "section": "offense",
+      "date_on_ir": "11/14",
+      "evidence": "Peter Skoronski placed Reserve/Injured 11/14 yet listed rank1 LG on TEN depth chart (captured 2026-11-17)"
+     },
+     {
+      "player": "Tommy Townsend",
+      "position": "P",
+      "section": "special_teams",
+      "date_on_ir": "11/14",
+      "evidence": "Tommy Townsend placed Reserve/Injured 11/14 yet listed rank1 P on TEN depth chart (captured 2026-11-17)"
+     },
+     {
+      "player": "Tommy Townsend",
+      "position": "H",
+      "section": "special_teams",
+      "date_on_ir": "11/14",
+      "evidence": "Tommy Townsend placed Reserve/Injured 11/14 yet listed rank1 H on TEN depth chart (captured 2026-11-17)"
+     }
+    ]
+   },
+   {
+    "club": "LAR",
+    "flags": [
+     {
+      "player": "Puka Nacua",
+      "position": "WR",
+      "section": "offense",
+      "date_on_ir": "11/12",
+      "evidence": "Puka Nacua placed Reserve/Injured 11/12 yet listed rank1 WR on LAR depth chart (captured 2026-11-17)"
+     },
+     {
+      "player": "Jordan Whittington",
+      "position": "KR",
+      "section": "special_teams",
+      "date_on_ir": "11/10",
+      "evidence": "Jordan Whittington placed Reserve/Injured 11/10 yet listed rank1 KR on LAR depth chart (captured 2026-11-17)"
+     }
+    ]
+   }
+  ]
+ },
+ "injury_report": {
+  "rows_later_read": 253,
+  "rows_earlier_read": 242,
+  "rows_with_a_game_designation": 16,
+  "pct_with_a_game_designation": 6.32,
+  "clubs_with_rows": 24,
+  "practice_vocabulary": {
+   "Did Not Participate In Practice": 83,
+   "Full Participation in Practice": 82,
+   "Limited Participation in Practice": 88
+  },
+  "transcription_control": {
+   "joined": 241,
+   "fields_equal": {
+    "pos": 241,
+    "injury": 241,
+    "practice": 240,
+    "game_status": 241
+   },
+   "differences": 1,
+   "detail": [
+    {
+     "club": "CAR",
+     "player": "Will Lee III",
+     "field": "practice",
+     "A_2026-11-18": "Full Participation in Practice",
+     "B_2026-11-19": "Limited Participation in Practice"
+    }
+   ]
+  },
+  "between_read_deltas": [
+   {
+    "club": "CAR",
+    "player": "Will Lee III",
+    "field": "practice",
+    "earlier_2026-11-18": "(blank)",
+    "later_2026-11-19": "(blank)",
+    "delta_note": "the earlier read is 7.3 hours earlier on the same report week; blank is not 'available'"
+   }
+  ],
+  "no_designation_note": "on this report week only the Thursday fixture carries game designations; a Sunday club's blank cell is blank, not 'available'. A feature built on designations has one game of coverage this week."
+ },
+ "gaps": [
+  {
+   "id": "G1",
+   "missing": "snap counts",
+   "why_it_matters": "the brief asks for depth modelled from playing time, not jersey order. No snap-count series exists in this repository and this session could not read an official one.",
+   "what_would_fill_it": "an official NFL snap-count publication, captured per week with a timestamp",
+   "then_what": "re-fit the depth feature on snaps and report the difference against the chart-based version, with uncertainty"
+  },
+  {
+   "id": "G2",
+   "missing": "inactive lists",
+   "why_it_matters": "a backup replacing a starter cannot be confirmed from a chart; the inactive list is the evidence",
+   "what_would_fill_it": "the official inactive list per game, captured at kickoff",
+   "then_what": "join it to the chart to convert 'suspected replacement' into 'confirmed replacement'"
+  },
+  {
+   "id": "G3",
+   "missing": "a depth-order source verified for all 32 clubs",
+   "why_it_matters": "the brief's own precondition for building the backup-deficiency feature",
+   "what_would_fill_it": "a structured Houston chart (currently image-only), or an official snap-count source covering all clubs",
+   "then_what": "the feature may be built; until then it must not be"
+  },
+  {
+   "id": "G4",
+   "missing": "a dated depth-chart series",
+   "why_it_matters": "one capture per club cannot show turnover, and the brief calls roster turnover a first-class event",
+   "what_would_fill_it": "daily captures of the 32 club charts with retained hashes",
+   "then_what": "diff consecutive captures and version each row against the last official roster event"
+  }
+ ],
+ "gate": {
+  "name": "backup-deficiency feature",
+  "status": "CLOSED",
+  "why": "G3 is unmet: one club's chart is image-only, so no depth-order source is verified for all 32 clubs. No deficiency feature is built, and no fixed points penalty is substituted for one."
+ }
+}
+

@@ -1,0 +1,155 @@
+{
+ "dataset": "nfl_origination_lab_luck",
+ "title": "Removal of luck: four separate questions, four separate numbers",
+ "built": "2026-11-19",
+ "model": "M3",
+ "n_games": 150,
+ "n_weeks": 10,
+ "observed_skill_moneyline": 0.143407922863,
+ "null_interval_90": [
+  -0.187511617922,
+  -0.015318610681
+ ],
+ "panel": [
+  {
+   "id": "L1",
+   "question": "Could a coin have produced this skill?",
+   "method": "2,000 permutations of the outcome labels",
+   "value": 0.0,
+   "display": "p < 0.0005",
+   "reading": "fraction of label shuffles that beat the observed skill"
+  },
+  {
+   "id": "L2",
+   "question": "Is one week carrying the result?",
+   "method": "leave-one-week-out re-scoring",
+   "value": 0.110889502338,
+   "display": "worst fold +0.1109 (drop week 9)",
+   "reading": "the skill that survives dropping the single most valuable week"
+  },
+  {
+   "id": "L3",
+   "question": "Is the model choice stable or fluky?",
+   "method": "re-run the registered selection with each validation week removed",
+   "value": 1.0,
+   "display": "stable: M3 in 9 of 9 folds",
+   "reading": "the fraction of validation folds that would still choose the selected model; a choice that flips when one week is removed is a choice made of luck"
+  },
+  {
+   "id": "L4",
+   "question": "How much skill is even available at this n?",
+   "method": "null interval on benchmark-relative skill",
+   "value": -0.015318610681,
+   "display": "shuffled-label 90th pct -0.0153",
+   "reading": "a skill below this line is inside what shuffling buys for free"
+  }
+ ],
+ "leave_one_week_out": [
+  {
+   "week_removed": 1,
+   "skill": 0.157809084101,
+   "n": 134
+  },
+  {
+   "week_removed": 2,
+   "skill": 0.151850920968,
+   "n": 134
+  },
+  {
+   "week_removed": 3,
+   "skill": 0.15929922607,
+   "n": 134
+  },
+  {
+   "week_removed": 4,
+   "skill": 0.127862733872,
+   "n": 134
+  },
+  {
+   "week_removed": 5,
+   "skill": 0.134681029272,
+   "n": 135
+  },
+  {
+   "week_removed": 6,
+   "skill": 0.166655004809,
+   "n": 136
+  },
+  {
+   "week_removed": 7,
+   "skill": 0.150942225611,
+   "n": 136
+  },
+  {
+   "week_removed": 8,
+   "skill": 0.142726008297,
+   "n": 136
+  },
+  {
+   "week_removed": 9,
+   "skill": 0.110889502338,
+   "n": 135
+  },
+  {
+   "week_removed": 10,
+   "skill": 0.130952741025,
+   "n": 136
+  }
+ ],
+ "selection_stability": {
+  "folds": [
+   {
+    "week_removed": 10,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 11,
+    "would_choose": "M3",
+    "lambda": 2.0
+   },
+   {
+    "week_removed": 12,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 13,
+    "would_choose": "M3",
+    "lambda": 2.0
+   },
+   {
+    "week_removed": 14,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 15,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 16,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 17,
+    "would_choose": "M3",
+    "lambda": 4.0
+   },
+   {
+    "week_removed": 18,
+    "would_choose": "M3",
+    "lambda": 4.0
+   }
+  ],
+  "stable": true,
+  "display": "stable: M3 in 9 of 9 folds"
+ },
+ "controls": {
+  "coin_flip": "Brier 0.25 on every game; skill 0 by construction",
+  "always_home": "the home-won label base rate in the block",
+  "always_favourite": "not computable: requires a price"
+ }
+}
