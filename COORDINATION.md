@@ -5825,4 +5825,55 @@ python3 build_site.py (root): pages: 10, PROBLEMS: none, exit 0. The regenerated
 - Merge result: merged without waiting for approval; CI checks (validate, audit, nfl-command verify ×4) all succeeded.
 - Pages: GitHub Pages API status `built` for commit `0312f75`; published site https://sassnarep3-star.github.io/Own4/ live.
 - INT-3/INT-4/INT-5/INT-6: done.
+PR link, merge result and Pages status: to be recorded in task INT-6 after the PR merges.
 
+## Session `arena/1e2776fd-own4` — final integration: single front door + reconciled readiness register (2026-11-19 UTC)
+
+**Session ID:** `arena/1e2776fd-own4` · **Branch (pinned by Arena):** `arena/1e2776fd-own4`, based on `e322a32` (= `origin/main` tip at start). The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch is created or pushed. All work is committed to this one branch.
+
+**Surveyed before claiming (not assumed):**
+- `main` = `e322a32`; 40 `nfl-*` namespaces plus `nfl/`; the repo has one commit, so all namespaces arrived together.
+- `git branch -a` shows only `main` + this branch. 11 PRs are open, all opened 2026-11-02…2026-11-17 by sessions that are no longer active; none touches `nfl-desk/**`.
+- Baseline verifiers run green on this tree (re-run in this session before any edit; see completion record).
+- Known integrity problems carried in from earlier sessions: the 73-row readiness register marks rows open/partial where artifacts exist (`nfl-brief-trace` found 50 stale candidates); 8 register references do not resolve; `nfl-markets/data/correlations.json` publishes a third-party correlation group; the root `README.md` still describes the NBA project.
+
+**Namespace claimed (exclusive):** `nfl-desk/**` (new) — the integrated single front door: landing, executive summary, requirements/gates, questions→information→answers, suggestions review surface, namespace census/repo review, official reads, Flagged for Review, verification. Plus these integration-owned shared outputs: one nav block in `nfl/index.html`, one nav entry in `verification/build.py` (nav only) with `index.html` regenerated, and `.github/workflows/nfl-desk.yml`. **Read-only** use of every other namespace; no peer `data/**`, no `verified/**` page content, no deletions. Nothing is merged or closed from earlier sessions.
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| D1 | Board bootstrap + baseline verifier run + claim push | done | arena/1e2776fd-own4 | `COORDINATION.md` |
+| D2 | Namespace census: inventory all `nfl-*` registers, count duplication, compute cross-register disagreements from files (not typed) | in progress | arena/1e2776fd-own4 | `nfl-desk/engine/census.py`, `nfl-desk/data/census.json` |
+| D3 | Dated official reads (nfl.com injuries/schedules/standings/transactions) with fetch timestamps and rendered-evidence capture | in progress | arena/1e2776fd-own4 | `nfl-desk/data/official_reads_2026-11-19.json` |
+| D4 | Decision-readiness register: one row per brief line, status derived from file existence, blocking gate + clearing number + official source carried from the 73-row register, staleness recomputed | in progress | arena/1e2776fd-own4 | `nfl-desk/engine/register.py`, `nfl-desk/data/requirements.json` |
+| D5 | Questions→information→answers register and suggestions review surface (owner decision column, deliberately undecided) | in progress | arena/1e2776fd-own4 | `nfl-desk/data/questions.json`, `nfl-desk/data/suggestions.json` |
+| D6 | Static site (10 pages) + verifier gate + workflow | in progress | arena/1e2776fd-own4 | `nfl-desk/index.html`, `nfl-desk/pages/*.html`, `nfl-desk/engine/build.py`, `nfl-desk/engine/verify.py`, `.github/workflows/nfl-desk.yml` |
+| D7 | Executive summary + README | in progress | arena/1e2776fd-own4 | `nfl-desk/EXECUTIVE_SUMMARY.md`, `nfl-desk/README.md` |
+| D8 | Root/portal navigation integration (additive only) | in progress | arena/1e2776fd-own4 | `nfl/index.html`, `verification/build.py`, `index.html` |
+| D9 | PR to `main`, merge without waiting, Pages deploy confirmation, completion record | unclaimed | — | `COORDINATION.md` |
+
+**Collision rule applied:** the 11 open PRs are older than 2026-11-18 with no commits in that window; per the stale-claim rule none blocks this work. Their namespaces are read-only to this session; where this session disagrees with a peer number, the disagreement is published on the Flagged page and in the census rather than edited into the peer file.
+
+
+### Completion record — `arena/1e2776fd-own4` (2026-11-19 UTC)
+
+| ID | Result | Evidence |
+|---|--------|----------|
+| D1 | done — board claim committed and pushed before any implementation (`db79ab2`); baseline verifiers re-run green on the unmodified tree | this file |
+| D2 | done — 40 NFL workspaces inventoried; duplication counted (40 flagged pages, 40 source pages, 33 suggestions pages, 27 questions pages, 18 executive summaries); 62 pairwise register disagreements on text-matched rows (21 agree, 29 disagree, 23 unmatched); four corpus row-counts and the standings cross-check | `nfl-desk/engine/census.py` → `nfl-desk/data/census.json` |
+| D3 | done — 4 official pages read on 2026-11-19 (injuries, standings, week-11 schedule, Colts-at-Texans game centre); 2 recorded as not read (operations.nfl.com returned no body; reserve-list capture cited as an artifact only) | `nfl-desk/data/official_reads_2026-11-19.json`, `nfl-desk/evidence/reads/standings_2026-11-19.txt` |
+| D4 | done — 73 rows, all three peer statuses printed, evidence paths resolved (3 exact, 8 found elsewhere, 2 unresolved), gate + clearing number + official source carried | `nfl-desk/engine/register.py` → `nfl-desk/data/requirements.json` |
+| D5 | done — 18 questions (status: 4 answerable-now, 9 blocked-on-missing, 3 owner-decision, plus 2 mixed) and 10 suggestions; every decision column left blank | `nfl-desk/data/questions.json`, `nfl-desk/data/suggestions.json` |
+| D6 | done — 11 pages, 349 table rows all source-linked, verifier runs 10 gates, workflow added | `nfl-desk/index.html`, `nfl-desk/pages/*.html`, `nfl-desk/engine/verify.py`, `.github/workflows/nfl-desk.yml` |
+| D7 | done | `nfl-desk/EXECUTIVE_SUMMARY.md`, `nfl-desk/README.md` |
+| D8 | done — additive only: one nav entry in `nfl/index.html`, one nav group in `verification/build.py`; `index.html` + `verified/*.html` regenerated with the new nav block and nothing else (verified by diff: one line per file) | `nfl/index.html`, `verification/build.py`, `index.html` |
+| D9 | in progress — PR #178 opened; see the merge record appended below after it merges | `COORDINATION.md` |
+
+**Verification performed (all green, this tree):** `nfl-desk/engine/verify.py --rebuild` (11 pages, 349 rows, every local link and anchor resolves, page counts match the data, both stored captures still match their sha256, rebuild byte-identical); `verification/verify_site.py` (346 rows, 0 broken links); `verification/assert_publication.py`; `nfl-brief-trace/engine/verify.py`; `nfl-readiness-register/verify.py`; `nfl-consolidated/engine/verify.py`; `nfl-decision-console/engine/verify_site.py`; `nfl-depth-sweep/engine/verify.py`; `nfl-book/engine/verify.py`; `nfl-req-review/engine/verify_r2.py`; `scripts/verify_data.py`; `scripts/check_site.py`; `git diff --check`.
+
+**Data provenance, stated narrowly.** Counts are transcribed by parsers from stored artifacts, not typed: the 32 standings rows and 300 team-games from the saved rendered read of nfl.com/standings (sha256 checked on every verify), and 242 injury rows / 16 designations / 226 blanks from the peer-captured 2026-11-18T23:49:17Z HTML, whose hash is compared with the capturing workflow's manifest before the counts are used. The sandbox has no direct HTTPS egress to nfl.com; the page-read-tool route is disclosed on the site.
+
+**Irregularities published (non-blocking, `nfl-desk/pages/flagged.html`):** F01 three registers / 62 disagreements; F02 four settled-game counts (136/137/150/≤150) and the identification of the 136-row file as the originated-line schedule; F03 every market price null by policy; F04 third-party correlation group published beside the official one; F05 the brief's "6 of 254" designation claim not reconcilable to any stored copy (dated recount instead: 16 of 242); F06 Houston depth chart is an image; F07 27 club pages print no as-of date; F08 two availability captures and no inactive lists; F09 40 namespaces with 40 flagged pages; F10 23 rows unmatched across registers; F11 two rows citing an empty official page; F12 root README still describes the NBA project; F13 zero reward-eligible strategies with 1,148–1,290 bets needed at 80% power; F14 no recorded row-level publication policy against nfl.com/terms; F15 roof/weather only from a third-party archive.
+
+**Scope discipline.** No peer workspace data, page or verifier was edited, deleted or merged; no earlier PR was merged, closed or commented on. The only files outside `nfl-desk/**` touched are the two additive navigation entries and the regenerated root/`verified/` pages those entries flow into. The suggested consolidations (S01, S02, S08) are published as owner decisions, not performed.
+
+**Branch.** All work is on `arena/1e2776fd-own4`; no other branch was created or pushed.

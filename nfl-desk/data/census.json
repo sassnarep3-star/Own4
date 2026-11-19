@@ -1,0 +1,1982 @@
+{
+ "dataset": "nfl_desk_census",
+ "title": "Repository census — namespaces, registers, duplication, corpus arithmetic",
+ "built_utc": "2026-11-19",
+ "method": "engine/census.py walks the tree; every count below is measured, not typed. Disagreements are recorded with both files and both values.",
+ "namespaces_count": 44,
+ "namespaces_with_verifier": 42,
+ "namespaces_without_verifier": [
+  "nfl",
+  "nfl-research"
+ ],
+ "namespaces": [
+  {
+   "namespace": "nfl",
+   "pages_html": 15,
+   "data_json": 3,
+   "data_csv": 2,
+   "verifiers": [],
+   "readme": "",
+   "landing": "nfl/index.html"
+  },
+  {
+   "namespace": "nfl-arena",
+   "pages_html": 11,
+   "data_json": 14,
+   "data_csv": 6,
+   "verifiers": [
+    "nfl-arena/scripts/check_links.py"
+   ],
+   "readme": "",
+   "landing": "nfl-arena/index.html"
+  },
+  {
+   "namespace": "nfl-audit",
+   "pages_html": 13,
+   "data_json": 1,
+   "data_csv": 4,
+   "verifiers": [
+    "nfl-audit/scripts/verify.py"
+   ],
+   "readme": "nfl-audit/README.md",
+   "landing": "nfl-audit/index.html"
+  },
+  {
+   "namespace": "nfl-availability-desk",
+   "pages_html": 12,
+   "data_json": 21,
+   "data_csv": 2,
+   "verifiers": [
+    "nfl-availability-desk/engine/verify_site.py"
+   ],
+   "readme": "nfl-availability-desk/README.md",
+   "landing": "nfl-availability-desk/index.html"
+  },
+  {
+   "namespace": "nfl-board",
+   "pages_html": 9,
+   "data_json": 5,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-board/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-board/index.html"
+  },
+  {
+   "namespace": "nfl-book",
+   "pages_html": 30,
+   "data_json": 44,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-book/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-book/index.html"
+  },
+  {
+   "namespace": "nfl-brief-trace",
+   "pages_html": 5,
+   "data_json": 2,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-brief-trace/engine/verify.py"
+   ],
+   "readme": "nfl-brief-trace/README.md",
+   "landing": "nfl-brief-trace/index.html"
+  },
+  {
+   "namespace": "nfl-collector",
+   "pages_html": 9,
+   "data_json": 17,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-collector/engine/verify_site.py"
+   ],
+   "readme": "nfl-collector/README.md",
+   "landing": "nfl-collector/index.html"
+  },
+  {
+   "namespace": "nfl-command",
+   "pages_html": 17,
+   "data_json": 20,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-command/engine/verify_site.py"
+   ],
+   "readme": "nfl-command/README.md",
+   "landing": "nfl-command/index.html"
+  },
+  {
+   "namespace": "nfl-command-deck",
+   "pages_html": 10,
+   "data_json": 12,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-command-deck/engine/verify.py"
+   ],
+   "readme": "nfl-command-deck/README.md",
+   "landing": "nfl-command-deck/index.html"
+  },
+  {
+   "namespace": "nfl-consolidated",
+   "pages_html": 8,
+   "data_json": 7,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-consolidated/engine/verify.py"
+   ],
+   "readme": "nfl-consolidated/README.md",
+   "landing": "nfl-consolidated/index.html"
+  },
+  {
+   "namespace": "nfl-core",
+   "pages_html": 14,
+   "data_json": 1,
+   "data_csv": 11,
+   "verifiers": [
+    "nfl-core/verify.py"
+   ],
+   "readme": "nfl-core/README.md",
+   "landing": "nfl-core/index.html"
+  },
+  {
+   "namespace": "nfl-dashboard",
+   "pages_html": 15,
+   "data_json": 14,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-dashboard/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-dashboard/index.html"
+  },
+  {
+   "namespace": "nfl-decision",
+   "pages_html": 14,
+   "data_json": 10,
+   "data_csv": 1,
+   "verifiers": [
+    "nfl-decision/scripts/09_verify.py"
+   ],
+   "readme": "nfl-decision/README.md",
+   "landing": "nfl-decision/index.html"
+  },
+  {
+   "namespace": "nfl-decision-console",
+   "pages_html": 12,
+   "data_json": 15,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-decision-console/engine/verify_site.py"
+   ],
+   "readme": "nfl-decision-console/README.md",
+   "landing": "nfl-decision-console/index.html"
+  },
+  {
+   "namespace": "nfl-decision-desk",
+   "pages_html": 14,
+   "data_json": 15,
+   "data_csv": 1,
+   "verifiers": [
+    "nfl-decision-desk/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-decision-desk/index.html"
+  },
+  {
+   "namespace": "nfl-decision-gaps",
+   "pages_html": 9,
+   "data_json": 11,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-decision-gaps/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-decision-gaps/index.html"
+  },
+  {
+   "namespace": "nfl-decisions",
+   "pages_html": 8,
+   "data_json": 1,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-decisions/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-decisions/index.html"
+  },
+  {
+   "namespace": "nfl-depth-sweep",
+   "pages_html": 43,
+   "data_json": 41,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-depth-sweep/engine/verify.py",
+    "nfl-depth-sweep/engine/verify_routes.py"
+   ],
+   "readme": "nfl-depth-sweep/README.md",
+   "landing": "nfl-depth-sweep/index.html"
+  },
+  {
+   "namespace": "nfl-edge",
+   "pages_html": 22,
+   "data_json": 17,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-edge/scripts/verify_site.py"
+   ],
+   "readme": "",
+   "landing": "nfl-edge/index.html"
+  },
+  {
+   "namespace": "nfl-hub",
+   "pages_html": 15,
+   "data_json": 20,
+   "data_csv": 2,
+   "verifiers": [
+    "nfl-hub/verify.py"
+   ],
+   "readme": "nfl-hub/README.md",
+   "landing": "nfl-hub/index.html"
+  },
+  {
+   "namespace": "nfl-integration",
+   "pages_html": 5,
+   "data_json": 5,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-integration/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-integration/index.html"
+  },
+  {
+   "namespace": "nfl-intel",
+   "pages_html": 16,
+   "data_json": 13,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-intel/engine/verify_site.py"
+   ],
+   "readme": "nfl-intel/README.md",
+   "landing": "nfl-intel/index.html"
+  },
+  {
+   "namespace": "nfl-lab",
+   "pages_html": 11,
+   "data_json": 7,
+   "data_csv": 5,
+   "verifiers": [
+    "nfl-lab/scripts/verify_data.py"
+   ],
+   "readme": "",
+   "landing": "nfl-lab/index.html"
+  },
+  {
+   "namespace": "nfl-ledger",
+   "pages_html": 13,
+   "data_json": 12,
+   "data_csv": 4,
+   "verifiers": [
+    "nfl-ledger/engine/verify.py"
+   ],
+   "readme": "nfl-ledger/README.md",
+   "landing": "nfl-ledger/index.html"
+  },
+  {
+   "namespace": "nfl-lines",
+   "pages_html": 20,
+   "data_json": 16,
+   "data_csv": 1,
+   "verifiers": [
+    "nfl-lines/engine/ci_check.py",
+    "nfl-lines/engine/verify_site.py"
+   ],
+   "readme": "nfl-lines/README.md",
+   "landing": "nfl-lines/index.html"
+  },
+  {
+   "namespace": "nfl-live-board",
+   "pages_html": 16,
+   "data_json": 19,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-live-board/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-live-board/index.html"
+  },
+  {
+   "namespace": "nfl-market",
+   "pages_html": 13,
+   "data_json": 14,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-market/verify.py"
+   ],
+   "readme": "nfl-market/README.md",
+   "landing": "nfl-market/index.html"
+  },
+  {
+   "namespace": "nfl-marketboard",
+   "pages_html": 16,
+   "data_json": 10,
+   "data_csv": 5,
+   "verifiers": [
+    "nfl-marketboard/engine/verify.py"
+   ],
+   "readme": "nfl-marketboard/README.md",
+   "landing": "nfl-marketboard/index.html"
+  },
+  {
+   "namespace": "nfl-markets",
+   "pages_html": 13,
+   "data_json": 12,
+   "data_csv": 10,
+   "verifiers": [
+    "nfl-markets/engine/verify.py"
+   ],
+   "readme": "nfl-markets/README.md",
+   "landing": "nfl-markets/index.html"
+  },
+  {
+   "namespace": "nfl-origin-board",
+   "pages_html": 19,
+   "data_json": 14,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-origin-board/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-origin-board/index.html"
+  },
+  {
+   "namespace": "nfl-origination",
+   "pages_html": 16,
+   "data_json": 15,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-origination/verify.py"
+   ],
+   "readme": "nfl-origination/README.md",
+   "landing": ""
+  },
+  {
+   "namespace": "nfl-own",
+   "pages_html": 22,
+   "data_json": 20,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-own/engine/verify_site.py"
+   ],
+   "readme": "",
+   "landing": "nfl-own/index.html"
+  },
+  {
+   "namespace": "nfl-price-snapshot",
+   "pages_html": 15,
+   "data_json": 16,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-price-snapshot/verify.py"
+   ],
+   "readme": "",
+   "landing": ""
+  },
+  {
+   "namespace": "nfl-quant",
+   "pages_html": 13,
+   "data_json": 16,
+   "data_csv": 14,
+   "verifiers": [
+    "nfl-quant/pipeline/07_verify_publish.py"
+   ],
+   "readme": "",
+   "landing": "nfl-quant/index.html"
+  },
+  {
+   "namespace": "nfl-readiness",
+   "pages_html": 10,
+   "data_json": 3,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-readiness/engine/check_site.py"
+   ],
+   "readme": "",
+   "landing": "nfl-readiness/index.html"
+  },
+  {
+   "namespace": "nfl-readiness-register",
+   "pages_html": 12,
+   "data_json": 13,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-readiness-register/verify.py"
+   ],
+   "readme": "nfl-readiness-register/README.md",
+   "landing": "nfl-readiness-register/index.html"
+  },
+  {
+   "namespace": "nfl-repo-inventory",
+   "pages_html": 4,
+   "data_json": 4,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-repo-inventory/engine/verify.py"
+   ],
+   "readme": "nfl-repo-inventory/README.md",
+   "landing": "nfl-repo-inventory/index.html"
+  },
+  {
+   "namespace": "nfl-req-review",
+   "pages_html": 10,
+   "data_json": 10,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-req-review/engine/verify.py",
+    "nfl-req-review/engine/verify_r2.py"
+   ],
+   "readme": "nfl-req-review/README.md",
+   "landing": "nfl-req-review/index.html"
+  },
+  {
+   "namespace": "nfl-research",
+   "pages_html": 6,
+   "data_json": 0,
+   "data_csv": 0,
+   "verifiers": [],
+   "readme": "",
+   "landing": "nfl-research/index.html"
+  },
+  {
+   "namespace": "nfl-sources",
+   "pages_html": 13,
+   "data_json": 15,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-sources/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": ""
+  },
+  {
+   "namespace": "nfl-verify",
+   "pages_html": 9,
+   "data_json": 7,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-verify/engine/verify.py"
+   ],
+   "readme": "nfl-verify/README.md",
+   "landing": "nfl-verify/index.html"
+  },
+  {
+   "namespace": "nfl-verify-2026-11-19",
+   "pages_html": 12,
+   "data_json": 12,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-verify-2026-11-19/engine/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-verify-2026-11-19/index.html"
+  },
+  {
+   "namespace": "nfl-week11-reread",
+   "pages_html": 3,
+   "data_json": 1,
+   "data_csv": 0,
+   "verifiers": [
+    "nfl-week11-reread/verify.py"
+   ],
+   "readme": "",
+   "landing": "nfl-week11-reread/index.html"
+  }
+ ],
+ "duplication": {
+  "executive_summaries": {
+   "count": 21,
+   "paths": [
+    "nfl-audit/EXECUTIVE_SUMMARY.md",
+    "nfl-book/EXECUTIVE_SUMMARY.md",
+    "nfl-brief-trace/EXECUTIVE_SUMMARY.md",
+    "nfl-command-deck/EXECUTIVE_SUMMARY.md",
+    "nfl-command/EXECUTIVE_SUMMARY.md",
+    "nfl-core/EXECUTIVE_SUMMARY.md",
+    "nfl-decision-desk/EXECUTIVE_SUMMARY.md",
+    "nfl-decision-gaps/EXECUTIVE_SUMMARY.md",
+    "nfl-decision/EXECUTIVE_SUMMARY.md",
+    "nfl-decisions/EXECUTIVE_SUMMARY.md",
+    "nfl-depth-sweep/EXECUTIVE_SUMMARY.md",
+    "nfl-desk/EXECUTIVE_SUMMARY.md",
+    "nfl-hub/EXECUTIVE_SUMMARY.md",
+    "nfl-intel/EXECUTIVE_SUMMARY.md",
+    "nfl-lab/EXECUTIVE_SUMMARY.md",
+    "nfl-origination/EXECUTIVE_SUMMARY.md",
+    "nfl-quant/EXECUTIVE_SUMMARY.md",
+    "nfl-readiness-register/EXECUTIVE_SUMMARY.md",
+    "nfl-req-review/EXECUTIVE_SUMMARY.md",
+    "nfl-sources/EXECUTIVE_SUMMARY.md",
+    "nfl-verify-2026-11-19/EXECUTIVE_SUMMARY.md"
+   ]
+  },
+  "suggestions_pages": {
+   "count": 36,
+   "paths": [
+    "nfl-arena/pages/suggestions.html",
+    "nfl-audit/pages/suggestions.html",
+    "nfl-availability-desk/pages/suggestions.html",
+    "nfl-board/pages/suggestions.html",
+    "nfl-book/pages/suggestions.html",
+    "nfl-command-deck/pages/suggestions.html",
+    "nfl-command/pages/suggestions.html",
+    "nfl-consolidated/pages/suggestions.html",
+    "nfl-core/pages/suggestions.html",
+    "nfl-dashboard/pages/suggestions.html",
+    "nfl-decision-console/pages/suggestions.html",
+    "nfl-decision-desk/pages/suggestions.html",
+    "nfl-decision-gaps/pages/suggestions.html",
+    "nfl-decision/suggestions.html",
+    "nfl-decisions/suggestions.html",
+    "nfl-desk/pages/suggestions.html",
+    "nfl-edge/pages/suggestions.html",
+    "nfl-hub/pages/suggestions.html",
+    "nfl-intel/pages/suggestions.html",
+    "nfl-ledger/pages/suggestions.html",
+    "nfl-lines/pages/suggestions.html",
+    "nfl-live-board/pages/suggestions.html",
+    "nfl-market/pages/suggestions.html",
+    "nfl-marketboard/suggestions.html",
+    "nfl-markets/pages/suggestions.html",
+    "nfl-origin-board/pages/suggestions.html",
+    "nfl-origination/pages/suggestions.html",
+    "nfl-own/pages/suggestions.html",
+    "nfl-price-snapshot/pages/suggestions.html",
+    "nfl-readiness-register/pages/suggestions.html",
+    "nfl-readiness/pages/suggestions.html",
+    "nfl-req-review/pages/suggestions.html",
+    "nfl-sources/pages/suggestions.html",
+    "nfl-verify-2026-11-19/pages/suggestions.html",
+    "nfl-verify/pages/suggestions.html",
+    "nfl/pages/suggestions.html"
+   ]
+  },
+  "flagged_pages": {
+   "count": 45,
+   "paths": [
+    "nfl-arena/pages/flagged.html",
+    "nfl-audit/pages/flagged.html",
+    "nfl-availability-desk/pages/flagged.html",
+    "nfl-board/pages/flagged.html",
+    "nfl-book/pages/flagged.html",
+    "nfl-brief-trace/pages/flagged.html",
+    "nfl-collector/pages/flagged.html",
+    "nfl-command-deck/pages/flagged.html",
+    "nfl-command/pages/flagged.html",
+    "nfl-consolidated/pages/flagged.html",
+    "nfl-core/pages/flagged.html",
+    "nfl-dashboard/pages/flagged.html",
+    "nfl-decision-console/pages/flagged.html",
+    "nfl-decision-desk/pages/flagged.html",
+    "nfl-decision-gaps/pages/flagged.html",
+    "nfl-decision/flagged.html",
+    "nfl-decisions/flagged.html",
+    "nfl-depth-sweep/pages/flagged.html",
+    "nfl-depth-sweep/site/flagged.html",
+    "nfl-desk/pages/flagged.html",
+    "nfl-edge/pages/flagged.html",
+    "nfl-hub/pages/flagged.html",
+    "nfl-integration/pages/flagged.html",
+    "nfl-intel/pages/flagged.html",
+    "nfl-lab/flagged.html",
+    "nfl-ledger/pages/flagged.html",
+    "nfl-lines/pages/flagged.html",
+    "nfl-live-board/pages/flagged.html",
+    "nfl-market/pages/flagged.html",
+    "nfl-marketboard/flagged.html",
+    "nfl-markets/pages/flagged.html",
+    "nfl-origin-board/pages/flagged.html",
+    "nfl-origination/pages/flagged.html",
+    "nfl-own/pages/flagged.html",
+    "nfl-price-snapshot/pages/flagged.html",
+    "nfl-quant/pages/flagged.html",
+    "nfl-readiness-register/pages/flagged.html",
+    "nfl-readiness/pages/flagged.html",
+    "nfl-repo-inventory/pages/flagged.html",
+    "nfl-req-review/pages/flagged.html",
+    "nfl-sources/pages/flagged.html",
+    "nfl-verify-2026-11-19/pages/flagged.html",
+    "nfl-verify/pages/flagged.html",
+    "nfl-week11-reread/pages/flagged.html",
+    "nfl/pages/flagged.html"
+   ]
+  },
+  "questions_pages": {
+   "count": 30,
+   "paths": [
+    "nfl-arena/pages/questions.html",
+    "nfl-audit/pages/questions.html",
+    "nfl-availability-desk/pages/questions.html",
+    "nfl-board/pages/questions.html",
+    "nfl-book/pages/questions.html",
+    "nfl-command-deck/pages/questions.html",
+    "nfl-command/pages/questions.html",
+    "nfl-consolidated/pages/questions.html",
+    "nfl-core/pages/questions.html",
+    "nfl-dashboard/pages/questions.html",
+    "nfl-decision-console/pages/questions.html",
+    "nfl-decision-desk/pages/questions.html",
+    "nfl-decision/questions.html",
+    "nfl-decisions/questions.html",
+    "nfl-desk/pages/questions.html",
+    "nfl-hub/pages/questions.html",
+    "nfl-intel/pages/questions.html",
+    "nfl-ledger/pages/questions.html",
+    "nfl-live-board/pages/questions.html",
+    "nfl-market/pages/questions.html",
+    "nfl-origin-board/pages/questions.html",
+    "nfl-origination/pages/questions.html",
+    "nfl-own/pages/questions.html",
+    "nfl-price-snapshot/pages/questions.html",
+    "nfl-readiness-register/pages/questions.html",
+    "nfl-readiness/pages/questions.html",
+    "nfl-req-review/pages/questions.html",
+    "nfl-sources/pages/questions.html",
+    "nfl-verify-2026-11-19/pages/questions.html",
+    "nfl-verify/pages/questions.html"
+   ]
+  },
+  "sources_pages": {
+   "count": 43,
+   "paths": [
+    "nfl-arena/pages/sources.html",
+    "nfl-audit/pages/sources.html",
+    "nfl-availability-desk/pages/sources.html",
+    "nfl-board/pages/sources.html",
+    "nfl-book/pages/sources.html",
+    "nfl-brief-trace/pages/sources.html",
+    "nfl-collector/pages/sources.html",
+    "nfl-command-deck/pages/sources.html",
+    "nfl-command/pages/sources.html",
+    "nfl-consolidated/pages/sources.html",
+    "nfl-core/pages/sources.html",
+    "nfl-dashboard/pages/sources.html",
+    "nfl-decision-console/pages/sources.html",
+    "nfl-decision-desk/pages/sources.html",
+    "nfl-decision-gaps/pages/sources.html",
+    "nfl-decision/sources.html",
+    "nfl-decisions/sources.html",
+    "nfl-depth-sweep/pages/sources.html",
+    "nfl-desk/pages/sources.html",
+    "nfl-edge/pages/sources.html",
+    "nfl-hub/pages/sources.html",
+    "nfl-integration/pages/sources.html",
+    "nfl-intel/pages/sources.html",
+    "nfl-lab/sources.html",
+    "nfl-ledger/pages/sources.html",
+    "nfl-lines/pages/sources.html",
+    "nfl-live-board/pages/sources.html",
+    "nfl-market/pages/sources.html",
+    "nfl-marketboard/sources.html",
+    "nfl-markets/pages/sources.html",
+    "nfl-origin-board/pages/sources.html",
+    "nfl-origination/pages/sources.html",
+    "nfl-own/pages/sources.html",
+    "nfl-price-snapshot/pages/sources.html",
+    "nfl-quant/pages/sources.html",
+    "nfl-readiness-register/pages/sources.html",
+    "nfl-readiness/pages/sources.html",
+    "nfl-req-review/pages/sources.html",
+    "nfl-sources/pages/sources.html",
+    "nfl-verify-2026-11-19/pages/sources.html",
+    "nfl-verify/pages/sources.html",
+    "nfl/pages/sources.html",
+    "nfl/sources.html"
+   ]
+  }
+ },
+ "requirement_registers": {
+  "readiness_register": {
+   "path": "nfl-readiness-register/data/requirements.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+   "rows": 73,
+   "status_counts": {
+    "implemented": 14,
+    "open": 21,
+    "partial": 30,
+    "process": 5,
+    "rejected": 2,
+    "resolved-at-source": 1
+   },
+   "ids": [
+    "REQ-01",
+    "REQ-02",
+    "REQ-03",
+    "REQ-04",
+    "REQ-05",
+    "REQ-06",
+    "REQ-07",
+    "REQ-08",
+    "REQ-09",
+    "REQ-10",
+    "REQ-11",
+    "REQ-12",
+    "REQ-13",
+    "REQ-14",
+    "REQ-15",
+    "REQ-16",
+    "REQ-17",
+    "REQ-18",
+    "REQ-19",
+    "REQ-20",
+    "REQ-21",
+    "REQ-22",
+    "REQ-23",
+    "REQ-24",
+    "REQ-25",
+    "REQ-26",
+    "REQ-27",
+    "REQ-28",
+    "REQ-29",
+    "REQ-30",
+    "REQ-31",
+    "REQ-32",
+    "REQ-33",
+    "REQ-34",
+    "REQ-35",
+    "REQ-36",
+    "REQ-37",
+    "REQ-38",
+    "REQ-39",
+    "REQ-40",
+    "REQ-41",
+    "REQ-42",
+    "REQ-43",
+    "REQ-44",
+    "REQ-45",
+    "REQ-46",
+    "REQ-47",
+    "REQ-48",
+    "REQ-49",
+    "REQ-50",
+    "REQ-51",
+    "REQ-52",
+    "REQ-53",
+    "REQ-54",
+    "REQ-55",
+    "REQ-56",
+    "REQ-57",
+    "REQ-58",
+    "REQ-59",
+    "REQ-60",
+    "REQ-61",
+    "REQ-62",
+    "REQ-63",
+    "REQ-64",
+    "REQ-65",
+    "REQ-66",
+    "REQ-67",
+    "REQ-68",
+    "PROC-01",
+    "PROC-02",
+    "PROC-03",
+    "PROC-04",
+    "PROC-05"
+   ]
+  },
+  "req_review_r2": {
+   "path": "nfl-req-review/data/requirements_2026_11_18.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+   "rows": 73,
+   "status_counts": {
+    "blocked": 2,
+    "in_progress": 1,
+    "met": 19,
+    "not_started": 1,
+    "partial": 50
+   },
+   "ids": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "D01",
+    "D02",
+    "D03",
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08",
+    "E09",
+    "E10",
+    "E11",
+    "E12",
+    "E13",
+    "E14",
+    "E15",
+    "E16",
+    "E17",
+    "E18",
+    "E19",
+    "E20",
+    "E21",
+    "E22",
+    "E23",
+    "E24",
+    "E25",
+    "E26",
+    "E27",
+    "E28",
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12"
+   ]
+  },
+  "consolidated": {
+   "path": "nfl-consolidated/data/requirements.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json",
+   "rows": 73,
+   "status_counts": {
+    "blocked": 3,
+    "in_progress": 1,
+    "met": 27,
+    "not_started": 4,
+    "partial": 38
+   },
+   "ids": [
+    "A01",
+    "A02",
+    "A03",
+    "A04",
+    "A05",
+    "A06",
+    "A07",
+    "A08",
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "D01",
+    "D02",
+    "D03",
+    "E01",
+    "E02",
+    "E03",
+    "E04",
+    "E05",
+    "E06",
+    "E07",
+    "E08",
+    "E09",
+    "E10",
+    "E11",
+    "E12",
+    "E13",
+    "E14",
+    "E15",
+    "E16",
+    "E17",
+    "E18",
+    "E19",
+    "E20",
+    "E21",
+    "E22",
+    "E23",
+    "E24",
+    "E25",
+    "E26",
+    "E27",
+    "E28",
+    "F01",
+    "F02",
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "F07",
+    "G01",
+    "G02",
+    "G03",
+    "G04",
+    "G05",
+    "G06",
+    "G07",
+    "G08",
+    "G09",
+    "G10",
+    "G11",
+    "G12"
+   ]
+  },
+  "command": {
+   "path": "nfl-command/data/requirements.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/requirements.json",
+   "rows": 16,
+   "status_counts": {
+    "done": 14,
+    "partial": 2
+   },
+   "ids": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16"
+   ]
+  }
+ },
+ "register_disagreements": [
+  {
+   "text": "add a per team view starters out replacements named net injury count",
+   "readiness_register_id": "REQ-40",
+   "readiness_register_status": "partial",
+   "round2_review_id": "E18",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "add a price snapshot store that records opening and closing numbers for every market we originate",
+   "readiness_register_id": "REQ-01",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "A01",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "add a verified results feed so backtests and roi can be computed at all",
+   "readiness_register_id": "REQ-02",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "A02",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "add an official depth chart register with date and source per row",
+   "readiness_register_id": "REQ-42",
+   "readiness_register_status": "open",
+   "round2_review_id": "E20",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "build the availability graph as a first class dataset who was expected to start who actually did",
+   "readiness_register_id": "REQ-10",
+   "readiness_register_status": "open",
+   "round2_review_id": "E02",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "calibrate what questionable means empirically instead of using old percentages",
+   "readiness_register_id": "REQ-43",
+   "readiness_register_status": "open",
+   "round2_review_id": "E21",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "capture official inactive lists and snap counts",
+   "readiness_register_id": "REQ-30",
+   "readiness_register_status": "open",
+   "round2_review_id": "E06",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "capture the reserve list so not listed never means available",
+   "readiness_register_id": "REQ-62",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "E17",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "compute and publish the removal of luck panel on the site dashboard",
+   "readiness_register_id": "REQ-16",
+   "readiness_register_status": "partial",
+   "round2_review_id": "F01",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "compute correlations only from officially sourced numbers and publish n with each value",
+   "readiness_register_id": "REQ-07",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "D01",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "do not model depth from jersey order model it from playing time",
+   "readiness_register_id": "REQ-11",
+   "readiness_register_status": "open",
+   "round2_review_id": "E03",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "interactive offense vs defense matchup deficiency matrix 1st 4th string",
+   "readiness_register_id": "REQ-44",
+   "readiness_register_status": "open",
+   "round2_review_id": "E22",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "make the injury signal a surprise never a level",
+   "readiness_register_id": "REQ-12",
+   "readiness_register_status": "open",
+   "round2_review_id": "E04",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "model depth slots as groups not a single starter",
+   "readiness_register_id": "REQ-32",
+   "readiness_register_status": "open",
+   "round2_review_id": "E08",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "pre register every strategy forbid backtest numbers from ever appearing on the leaderboard",
+   "readiness_register_id": "REQ-09",
+   "readiness_register_status": "partial",
+   "round2_review_id": "C07",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "publish the league s dated schedule announcement beside the live schedule page",
+   "readiness_register_id": "REQ-24",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "A04",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "re capture and republish the week 10 injury tables",
+   "readiness_register_id": "REQ-48",
+   "readiness_register_status": "implemented",
+   "round2_review_id": "E26",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "reject deriving depth order from jersey number experience or salary",
+   "readiness_register_id": "REQ-49",
+   "readiness_register_status": "rejected",
+   "round2_review_id": "E27",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "reject ranking strategies by season long roi",
+   "readiness_register_id": "REQ-63",
+   "readiness_register_status": "rejected",
+   "round2_review_id": "C08",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "represent shared and empty depth slots faithfully",
+   "readiness_register_id": "REQ-50",
+   "readiness_register_status": "open",
+   "round2_review_id": "E28",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "resolve the depth order source before building the backup deficiency feature",
+   "readiness_register_id": "REQ-51",
+   "readiness_register_status": "open",
+   "round2_review_id": "E13",
+   "round2_review_status": "blocked",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "run the 32 team roster ir sweep before any team level model is trusted",
+   "readiness_register_id": "REQ-13",
+   "readiness_register_status": "open",
+   "round2_review_id": "E05",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "score injury designation reliability before using it as a feature",
+   "readiness_register_id": "REQ-52",
+   "readiness_register_status": "open",
+   "round2_review_id": "E14",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "stadium roof surface nws hourly wind precipitation overlay",
+   "readiness_register_id": "REQ-57",
+   "readiness_register_status": "open",
+   "round2_review_id": "F03",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "store every model output as a probability plus its inputs not just a pick",
+   "readiness_register_id": "REQ-15",
+   "readiness_register_status": "partial",
+   "round2_review_id": "B04",
+   "round2_review_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "use official nfl game books for actual starters and game day status do not infer depth rank or snaps",
+   "readiness_register_id": "REQ-25",
+   "readiness_register_status": "open",
+   "round2_review_id": "A05",
+   "round2_review_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "vig free market consensus vs originated fair line decomposition view",
+   "readiness_register_id": "REQ-59",
+   "readiness_register_status": "open",
+   "round2_review_id": "F06",
+   "round2_review_status": "blocked",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "text": "add a control baseline random picks favorites only to every leaderboard run",
+   "readiness_register_id": "REQ-56",
+   "readiness_register_status": "partial",
+   "consolidated_id": "C05",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "add a per team view starters out replacements named net injury count",
+   "readiness_register_id": "REQ-40",
+   "readiness_register_status": "partial",
+   "consolidated_id": "E18",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "add an official depth chart register with date and source per row",
+   "readiness_register_id": "REQ-42",
+   "readiness_register_status": "open",
+   "consolidated_id": "E20",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "build the availability graph as a first class dataset who was expected to start who actually did",
+   "readiness_register_id": "REQ-10",
+   "readiness_register_status": "open",
+   "consolidated_id": "E02",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "capture official inactive lists and snap counts",
+   "readiness_register_id": "REQ-30",
+   "readiness_register_status": "open",
+   "consolidated_id": "E06",
+   "consolidated_status": "blocked",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "capture the reserve list so not listed never means available",
+   "readiness_register_id": "REQ-62",
+   "readiness_register_status": "implemented",
+   "consolidated_id": "E17",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "compute and publish the removal of luck panel on the site dashboard",
+   "readiness_register_id": "REQ-16",
+   "readiness_register_status": "partial",
+   "consolidated_id": "F01",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "do not model depth from jersey order model it from playing time",
+   "readiness_register_id": "REQ-11",
+   "readiness_register_status": "open",
+   "consolidated_id": "E03",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "interactive offense vs defense matchup deficiency matrix 1st 4th string",
+   "readiness_register_id": "REQ-44",
+   "readiness_register_status": "open",
+   "consolidated_id": "E22",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "make the injury signal a surprise never a level",
+   "readiness_register_id": "REQ-12",
+   "readiness_register_status": "open",
+   "consolidated_id": "E04",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "model depth slots as groups not a single starter",
+   "readiness_register_id": "REQ-32",
+   "readiness_register_status": "open",
+   "consolidated_id": "E08",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "pre register every strategy forbid backtest numbers from ever appearing on the leaderboard",
+   "readiness_register_id": "REQ-09",
+   "readiness_register_status": "partial",
+   "consolidated_id": "C07",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "publish the league s dated schedule announcement beside the live schedule page",
+   "readiness_register_id": "REQ-24",
+   "readiness_register_status": "implemented",
+   "consolidated_id": "A04",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "reject deriving depth order from jersey number experience or salary",
+   "readiness_register_id": "REQ-49",
+   "readiness_register_status": "rejected",
+   "consolidated_id": "E27",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "reject ranking strategies by season long roi",
+   "readiness_register_id": "REQ-63",
+   "readiness_register_status": "rejected",
+   "consolidated_id": "C08",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "represent shared and empty depth slots faithfully",
+   "readiness_register_id": "REQ-50",
+   "readiness_register_status": "open",
+   "consolidated_id": "E28",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "resolve the depth order source before building the backup deficiency feature",
+   "readiness_register_id": "REQ-51",
+   "readiness_register_status": "open",
+   "consolidated_id": "E13",
+   "consolidated_status": "blocked",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "run the 32 team roster ir sweep before any team level model is trusted",
+   "readiness_register_id": "REQ-13",
+   "readiness_register_status": "open",
+   "consolidated_id": "E05",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "stadium roof surface nws hourly wind precipitation overlay",
+   "readiness_register_id": "REQ-57",
+   "readiness_register_status": "open",
+   "consolidated_id": "F03",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "store every model output as a probability plus its inputs not just a pick",
+   "readiness_register_id": "REQ-15",
+   "readiness_register_status": "partial",
+   "consolidated_id": "B04",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "turn the 136 game log into the pre registered backtest corpus",
+   "readiness_register_id": "REQ-19",
+   "readiness_register_status": "partial",
+   "consolidated_id": "A07",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "use official nfl game books for actual starters and game day status do not infer depth rank or snaps",
+   "readiness_register_id": "REQ-25",
+   "readiness_register_status": "open",
+   "consolidated_id": "A05",
+   "consolidated_status": "partial",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "vig free market consensus vs originated fair line decomposition view",
+   "readiness_register_id": "REQ-59",
+   "readiness_register_status": "open",
+   "consolidated_id": "F06",
+   "consolidated_status": "blocked",
+   "files": [
+    "nfl-readiness-register/data/requirements.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "add a control baseline random picks favorites only to every leaderboard run",
+   "round2_review_id": "C05",
+   "round2_review_status": "partial",
+   "consolidated_id": "C05",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "add a price snapshot store that records opening and closing numbers for every market we originate",
+   "round2_review_id": "A01",
+   "round2_review_status": "partial",
+   "consolidated_id": "A01",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "add a verified results feed so backtests and roi can be computed at all",
+   "round2_review_id": "A02",
+   "round2_review_status": "partial",
+   "consolidated_id": "A02",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "archive weekly injury reports for past seasons for designation reliability",
+   "round2_review_id": "E16",
+   "round2_review_status": "partial",
+   "consolidated_id": "E16",
+   "consolidated_status": "not_started",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "calibrate what questionable means empirically instead of using old percentages",
+   "round2_review_id": "E21",
+   "round2_review_status": "partial",
+   "consolidated_id": "E21",
+   "consolidated_status": "not_started",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "capture official inactive lists and snap counts",
+   "round2_review_id": "E06",
+   "round2_review_status": "partial",
+   "consolidated_id": "E06",
+   "consolidated_status": "blocked",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "compute correlations only from officially sourced numbers and publish n with each value",
+   "round2_review_id": "D01",
+   "round2_review_status": "partial",
+   "consolidated_id": "D01",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "ingest game level results to make the ratings opponent aware",
+   "round2_review_id": "A06",
+   "round2_review_status": "partial",
+   "consolidated_id": "A06",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "re capture and republish the week 10 injury tables",
+   "round2_review_id": "E26",
+   "round2_review_status": "partial",
+   "consolidated_id": "E26",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "review the repo line by line verify against official sources provide links flag irregularities",
+   "round2_review_id": "G07",
+   "round2_review_status": "partial",
+   "consolidated_id": "G07",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "score injury designation reliability before using it as a feature",
+   "round2_review_id": "E14",
+   "round2_review_status": "partial",
+   "consolidated_id": "E14",
+   "consolidated_status": "not_started",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "text": "turn the 136 game log into the pre registered backtest corpus",
+   "round2_review_id": "A07",
+   "round2_review_status": "partial",
+   "consolidated_id": "A07",
+   "consolidated_status": "met",
+   "files": [
+    "nfl-req-review/data/requirements_2026_11_18.json",
+    "nfl-consolidated/data/requirements.json"
+   ]
+  }
+ ],
+ "register_text_matched_rows": {
+  "readiness_register_vs_round2_review": 50,
+  "readiness_register_vs_consolidated": 50,
+  "round2_review_vs_consolidated": 73
+ },
+ "register_disagreement_count": 62,
+ "corpus_feeds": [
+  {
+   "path": "nfl-core/data/results_feed_2026.csv",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/results_feed_2026.csv",
+   "rows": 272,
+   "status_counts": {
+    "FINAL": 137,
+    "SCHEDULED": 135
+   },
+   "finals": 137,
+   "scheduled": 135,
+   "rows_with_scores": 137
+  },
+  {
+   "path": "nfl-ledger/data/results_feed.csv",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-ledger/data/results_feed.csv",
+   "rows": 137
+  },
+  {
+   "path": "nfl-marketboard/data/raw/results_2026_official.csv",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-marketboard/data/raw/results_2026_official.csv",
+   "rows": 150
+  },
+  {
+   "path": "nfl-markets/data/results_feed.csv",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/results_feed.csv",
+   "rows": 4056,
+   "rows_2026": 137,
+   "rows_all_seasons": 4056,
+   "columns_present": [
+    "away_score",
+    "away_team",
+    "flags",
+    "game_id",
+    "gameday",
+    "gametime",
+    "home_margin",
+    "home_score",
+    "home_team",
+    "mirror_source_key",
+    "official_source_url",
+    "official_week_url",
+    "overtime",
+    "season"
+   ],
+   "has_official_url_column": true
+  }
+ ],
+ "originated_lines": {
+  "path": "nfl-lines/data/derived/own_lines_week10.json",
+  "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/own_lines_week10.json",
+  "rows": 136,
+  "weeks": [
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18
+  ],
+  "games_with_market_spread": 27,
+  "games_with_market_total": 27,
+  "games_with_own_spread": 136,
+  "games_without_market": 109,
+  "market_columns": [
+   "market_spread_line",
+   "market_total_line",
+   "market_home_moneyline",
+   "market_away_moneyline"
+  ],
+  "own_columns": [
+   "own_spread_line",
+   "own_total_line",
+   "own_home_team_total",
+   "own_away_team_total",
+   "own_home_win_prob",
+   "own_home_moneyline",
+   "own_away_moneyline"
+  ],
+  "note": "This is the only file in the repository with exactly 136 rows, which is where the brief's '136-game log' most plausibly comes from. It is a full-season schedule with a fair line for every fixture and a market value only where a third-party archive had one."
+ },
+ "standings_cross_check": {
+  "teams": 32,
+  "team_games_played": 300,
+  "implied_league_games_complete": 150,
+  "odd_remainder": 0,
+  "source_url": "https://www.nfl.com/standings/",
+  "standings_file": "nfl-desk/data/standings_2026-11-19.json",
+  "caution": "An odd team-game total means at least one game is counted for only one club (a postponed/cancelled game). The implied count is an upper bound: it assumes every counted game was a normal two-club game."
+ },
+ "thin_artifacts": [
+  {
+   "path": "nfl-availability-desk/data/prereg.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-availability-desk/data/prereg.json",
+   "rows": 1
+  },
+  {
+   "path": "nfl-arena/data/base_rates.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/base_rates.json",
+   "rows": 2
+  },
+  {
+   "path": "nfl-book/data/control_baseline.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/control_baseline.json",
+   "rows": 2
+  },
+  {
+   "path": "nfl-ledger/data/correlations.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-ledger/data/correlations.json",
+   "rows": 2
+  },
+  {
+   "path": "nfl-market/data/official_scores.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/official_scores.json",
+   "rows": 2
+  },
+  {
+   "path": "nfl-book/data/ablations.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/ablations.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-book/data/availability_graph.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/availability_graph.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-book/data/depth_replacements.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/depth_replacements.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-book/data/joint_evidence.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/joint_evidence.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-decision-console/data/paths.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-console/data/paths.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-market/data/derived/results_feed.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/derived/results_feed.json",
+   "rows": 3
+  },
+  {
+   "path": "nfl-book/data/holdout_split.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/holdout_split.json",
+   "rows": 4
+  },
+  {
+   "path": "nfl-book/data/questionable_calibration.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/questionable_calibration.json",
+   "rows": 4
+  },
+  {
+   "path": "nfl-consolidated/data/official_reads.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/official_reads.json",
+   "rows": 4
+  },
+  {
+   "path": "nfl-market/data/derived/correlations.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/derived/correlations.json",
+   "rows": 4
+  },
+  {
+   "path": "nfl-repo-inventory/data/official_reads.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-repo-inventory/data/official_reads.json",
+   "rows": 4
+  },
+  {
+   "path": "nfl-book/data/leaderboard.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/leaderboard.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-book/data/removal_of_luck.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/removal_of_luck.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-collector/data/captures/ledger.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-collector/data/captures/ledger.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-command/data/_repo_check_raw.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command/data/_repo_check_raw.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-depth-sweep/data/readiness.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/readiness.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-live-board/data/leaderboard.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/leaderboard.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-market/data/derived/flags.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/derived/flags.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-market/data/official_lineups.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-market/data/official_lineups.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-markets/data/leaderboard.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/leaderboard.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-quant/data/leaderboard.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-quant/data/leaderboard.json",
+   "rows": 5
+  },
+  {
+   "path": "nfl-book/data/drift_alarms.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/drift_alarms.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-brief-trace/data/official_checks.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-brief-trace/data/official_checks.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-dashboard/data/correlations.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/correlations.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-dashboard/data/sources.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-dashboard/data/sources.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-decision-gaps/data/capture_delta.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-decision-gaps/data/capture_delta.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-depth-sweep/data/suggestions.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/suggestions.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-ledger/data/sources.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-ledger/data/sources.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-ledger/data/suggestions.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-ledger/data/suggestions.json",
+   "rows": 6
+  },
+  {
+   "path": "nfl-own/data/derived/luck.json",
+   "url": "https://github.com/sassnarep3-star/Own4/blob/main/nfl-own/data/derived/luck.json",
+   "rows": 6
+  }
+ ],
+ "third_party_citation_files": [
+  "nfl-arena/data/base_rates.json",
+  "nfl-arena/data/sources.json",
+  "nfl-arena/data/verification.json",
+  "nfl-availability-desk/data/questions.json",
+  "nfl-brief-trace/EXECUTIVE_SUMMARY.md",
+  "nfl-command/data/repo_review.json",
+  "nfl-command/data/sources.json",
+  "nfl-core/EXECUTIVE_SUMMARY.md",
+  "nfl-core/README.md",
+  "nfl-core/data/flagged.csv",
+  "nfl-core/data/gates.csv",
+  "nfl-core/data/leaderboard_signal.csv",
+  "nfl-core/data/price_snapshots_2026.csv",
+  "nfl-core/data/questions.csv",
+  "nfl-core/data/results_feed_2026.csv",
+  "nfl-decision-desk/EXECUTIVE_SUMMARY.md",
+  "nfl-decision-desk/data/corpus/corpus_2026.json",
+  "nfl-decision-desk/data/correlations/correlations.json",
+  "nfl-decision-desk/data/governance/governance.json",
+  "nfl-decision-desk/data/leaderboard/leaderboard.json",
+  "nfl-decision-desk/data/model/model_evaluation.json",
+  "nfl-decision-desk/data/model/spread_convention_check.json",
+  "nfl-decision-desk/data/prices/origination.json",
+  "nfl-edge/data/results.json",
+  "nfl-hub/README.md",
+  "nfl-hub/data/correlations.json",
+  "nfl-hub/data/reconciliation.json",
+  "nfl-hub/data/source/provenance.json",
+  "nfl-hub/data/sources.json",
+  "nfl-lines/README.md"
+ ]
+}

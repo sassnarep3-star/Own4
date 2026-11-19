@@ -1,0 +1,170 @@
+{
+ "dataset": "nfl_desk_suggestions",
+ "title": "Suggestions — review first, choose a path, then implement",
+ "built_utc": "2026-11-19",
+ "session": "arena/1e2766fd-own4",
+ "rule": [
+  "Nothing in this file has been implemented by this session. These are options.",
+  "Each suggestion names what it costs, what it risks and what would have to be true for it to be right.",
+  "The decision column is deliberately blank. It is the owner's answer, and until it is written the row stays 'undecided'."
+ ],
+ "owner_decisions": [
+  "D-1 Which register is authoritative when the three disagree (see Q02).",
+  "D-2 Whether to buy or licence a price series, and under which terms (Q03/Q13).",
+  "D-3 Whether raw captures may be served publicly, or must move to a private store (Q14).",
+  "D-4 Which namespaces are live and which are history (Q18).",
+  "D-5 Whether one repo-level verifier replaces the 40 per-namespace verifiers (Q17)."
+ ],
+ "rows": [
+  {
+   "id": "S01",
+   "suggestion": "Make this workspace the single front door and mark every other NFL namespace as either live or history, in one column.",
+   "fixes": "Q18 — 40 landing pages with no way to tell which is current.",
+   "cost": "One column in nfl-desk/data/census.json plus one nav edit; no data changes.",
+   "risk": "Demoting a namespace another session still considers live. Mitigation: nothing is deleted, only unlinked from the front door.",
+   "decide_when": "After the census table has been read once by the owner.",
+   "depends_on": [],
+   "would_change_our_mind": "A namespace that is both verifier-green and read by a live page, yet unlinked, would argue for keeping it on the front door.",
+   "owner_decision": "",
+   "sources": [
+    "nfl-desk/pages/census.html"
+   ]
+  },
+  {
+   "id": "S02",
+   "suggestion": "Adopt the round-2 rule ('met requires an artifact path that exists and an official source that supports the claim') as the only status rule, and retire the other two status columns to history.",
+   "fixes": "Q02 — 62 status disagreements across three registers.",
+   "cost": "One script change plus a verifier check that fails on an unresolvable evidence path.",
+   "risk": "Several rows currently marked implemented would drop to partial. That is the point, but it will look like regression.",
+   "decide_when": "As soon as the owner accepts that a lower honest number beats a higher unverifiable one.",
+   "depends_on": [],
+   "would_change_our_mind": "Evidence that the round-2 downgrades were themselves wrong (e.g. a null market price that turns out to be populated elsewhere).",
+   "owner_decision": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json"
+   ]
+  },
+  {
+   "id": "S03",
+   "suggestion": "Settle the corpus before any further modelling: reconcile nfl-core's 272 rows to the official week pages, publish one settled-game list, and retire the 137/136/150 ambiguity.",
+   "fixes": "Q01 — three counts for the same season, and a brief that says 136.",
+   "cost": "One reconciliation pass over 18 week pages, machine-checkable afterwards.",
+   "risk": "The reconciled total will differ from every existing dashboard, which will break eight pages' captions at once.",
+   "decide_when": "Before any new ROI, Brier or gate number is published.",
+   "depends_on": [],
+   "would_change_our_mind": "If the official week pages themselves disagree with the standings arithmetic, the ambiguity is upstream and must be reported, not resolved.",
+   "owner_decision": "",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11",
+    "https://www.nfl.com/standings/",
+    "nfl-desk/pages/corpus.html"
+   ]
+  },
+  {
+   "id": "S04",
+   "suggestion": "Make the availability capture the load-bearing dataset: daily Wednesday-to-kickoff pulls, raw HTML plus hash, an inactive-list capture 90 minutes before every kickoff, and a per-week row that says how many rows carried a designation.",
+   "fixes": "Q04, Q05, Q06, Q08 — no replayable injury series and no inactive evidence.",
+   "cost": "A scheduled job that already exists in skeleton form, plus storage; ~370 KB per capture today.",
+   "risk": "Storage growth and schema drift on the league's page. Mitigation: the existing manifest already records bytes and schema_ok per capture.",
+   "decide_when": "Before any injury or personnel feature is added to a model.",
+   "depends_on": [
+    "D-3"
+   ],
+   "would_change_our_mind": "A published official inactive-list feed in machine-readable form would remove the scraping part of this.",
+   "owner_decision": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl",
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "S05",
+   "suggestion": "Do not build any depth-based deficiency feature until one of three routes covers 32/32 clubs: club pages (31 today), Game Books, or an official snap-count source.",
+   "fixes": "Q07, Q08 — a matchup matrix would be built on 31 clubs and one image.",
+   "cost": "No build cost; it is a refusal. The cost is the feature that does not ship.",
+   "risk": "The most attractive feature on the brief stays unbuilt for another season.",
+   "decide_when": "Now — the brief itself already says not to build it before a route is verified.",
+   "depends_on": [],
+   "would_change_our_mind": "A structured Houston depth feed, or snap counts for the current season.",
+   "owner_decision": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/route_c.json"
+   ]
+  },
+  {
+   "id": "S06",
+   "suggestion": "Split every published correlation and every price column into an official block and a third-party block, each labelled, each carrying n and an interval, and keep them on separate pages.",
+   "fixes": "Q12, Q13 — third-party numbers sitting beside official ones.",
+   "cost": "One page split per namespace that publishes correlations; no recomputation.",
+   "risk": "Pages get longer and some currently 'complete' tables lose rows.",
+   "decide_when": "Before any strategy is ranked using a correlation.",
+   "depends_on": [],
+   "would_change_our_mind": "A licence that makes the third-party series officially usable would let the blocks merge.",
+   "owner_decision": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/correlations.json"
+   ]
+  },
+  {
+   "id": "S07",
+   "suggestion": "Run the leaderboard as a season-long shadow competition with posted rules, a pre-registration hash per strategy, and rewards defined in advance but not paid until a strategy clears its own required n.",
+   "fixes": "Q10 — 15 strategies, none reward-eligible, and no visible path to eligibility.",
+   "cost": "A weekly job that records forecasts before kickoff and a fixed scoring script.",
+   "risk": "An empty leaderboard for a season. That is also the honest outcome if nothing has skill.",
+   "decide_when": "Before the next week's fixtures, so the sample is prospective.",
+   "depends_on": [
+    "D-2"
+   ],
+   "would_change_our_mind": "A strategy that reaches its pre-registered n and still cannot beat the control baseline would justify ending the competition rather than extending it.",
+   "owner_decision": "",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json"
+   ]
+  },
+  {
+   "id": "S08",
+   "suggestion": "Replace the 40 per-namespace verifiers with one repo-level verifier that runs every existing one, then adds the cross-namespace checks (status disagreement, corpus count, duplicate page count).",
+   "fixes": "Q17 — no gate fails when two files disagree.",
+   "cost": "One workflow file; every existing verifier already exits non-zero on failure.",
+   "risk": "A flaky peer verifier would block all unrelated work. Mitigation: run them per-namespace but aggregate the result into one required check.",
+   "decide_when": "After D-4 settles which namespaces are live.",
+   "depends_on": [
+    "D-4"
+   ],
+   "would_change_our_mind": "Evidence that a peer verifier is itself wrong would mean fixing it first, not aggregating over it.",
+   "owner_decision": "",
+   "sources": [
+    "nfl-desk/pages/verify.html"
+   ]
+  },
+  {
+   "id": "S09",
+   "suggestion": "Publish the venue of every Week 11 fixture from the official game centre (city and stadium), and leave roof, surface and weather blank until an official designation is captured.",
+   "fixes": "Q16 — venue facts exist officially but are not published as data.",
+   "cost": "13 game-centre reads per week; each prints Location and Stadium.",
+   "risk": "A venue name is a fact of the fixture, not a model input; publishing it must not be read as a conditions claim.",
+   "decide_when": "Before any totals strategy references conditions.",
+   "depends_on": [],
+   "would_change_our_mind": "An official roof designation for all 32 stadiums would let the conditions columns be filled at the same time.",
+   "owner_decision": "",
+   "sources": [
+    "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+   ]
+  },
+  {
+   "id": "S10",
+   "suggestion": "Keep the roster/turnover event stream (transactions, reserve list) as a first-class dataset and stamp every depth and availability row with the last roster event it has been checked against.",
+   "fixes": "Q09 — depth charts that still name players on reserve.",
+   "cost": "One join per capture; the transactions and reserve-list captures already exist.",
+   "risk": "Stamping requires a re-read of club pages, which is the expensive part.",
+   "decide_when": "Before a per-team 'starters out, replacements named' view is trusted.",
+   "depends_on": [],
+   "would_change_our_mind": "If clubs published machine-readable depth charts with an as-of date, the stamp becomes a field copy instead of a re-read.",
+   "owner_decision": "",
+   "sources": [
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+   ]
+  }
+ ]
+}
