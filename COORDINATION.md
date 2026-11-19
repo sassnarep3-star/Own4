@@ -5548,3 +5548,10 @@ F01 namespace sprawl (40 namespaces) · F02 six NFL executive summaries with dif
 - `nfl-quant` owner: commit or document `/home/user/nfl_raw/games.csv` and the pandas dependency (F06).
 
 **Scope not done (honest):** this session did not work through the wider request list (decision-readiness table, per-team starter view, depth-group model, roster-turnover versioning, parlay gate, backtests, etc.). Those are already covered in part by `nfl-req-review` (73-row register, round 2) and `nfl-readiness-register`; this session did not re-verify their rows. No betting value, model output or strategy result was produced or changed.
+## Session arena/1a2e0e65-own4 · official Week 11 injury-report re-read (claim, 2026-11-19 UTC)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| W11-1 | Claim: full row-level read of the official NFL.com 2026 Week 11 injury report (fetched 2026-11-19), with per-row source link, team-level counts and a drift check (row count and required fields). Limitation: sandbox cannot reach nfl.com directly, so no raw-byte hash is possible; the fetched text is recorded instead. | in progress | arena/1a2e0e65-own4 | `nfl-week11-reread/**`, `COORDINATION.md` (append-only) |
+
+Scope note: this session does not claim the 73-row requirement register, the depth sweep, the snapshot workflow or the shared root site. Those are owned by earlier sessions listed above and are not edited here.
