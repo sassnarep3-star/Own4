@@ -5709,10 +5709,10 @@ this workspace. Nothing is inferred and no unconfirmed value is filled in.
 |---|---|---|---|---|
 | INT-1 | Re-verify combined root build (python3 build_site.py) and confirm no broken links or unsourced rows | done | arena/5f46c098-own4 | build_site.py, data/*.json, pages/*.html, index.html, assets/canonical.css |
 | INT-2 | Confirm the NFL implementation surface (nfl-core + nfl-decision-desk) against the brief | done | arena/5f46c098-own4 | nfl-core/data/*.csv, nfl-decision-desk/data/*.json |
-| INT-3 | Add this session claim and findings to COORDINATION.md; commit and push | in progress | arena/5f46c098-own4 | COORDINATION.md |
-| INT-4 | Open PR arena/5f46c098-own4 -> main; merge without waiting for approval | unclaimed | arena/5f46c098-own4 | — |
-| INT-5 | Confirm GitHub Pages deploys successfully for the merge commit | unclaimed | arena/5f46c098-own4 | — |
-| INT-6 | Record PR link and merge result plus Pages status in COORDINATION.md; mark tasks done | unclaimed | arena/5f46c098-own4 | COORDINATION.md |
+| INT-3 | Add this session claim and findings to COORDINATION.md; commit and push | done | arena/5f46c098-own4 | COORDINATION.md |
+| INT-4 | Open PR arena/5f46c098-own4 -> main; merge without waiting for approval | done — PR #173 merged via --merge, merge commit 0312f75 | arena/5f46c098-own4 | — |
+| INT-5 | Confirm GitHub Pages deploys successfully for the merge commit | done — Pages API status built for commit 0312f75 | arena/5f46c098-own4 | — |
+| INT-6 | Record PR link and merge result plus Pages status in COORDINATION.md; mark tasks done | done — recorded below | arena/5f46c098-own4 | COORDINATION.md |
 
 ### Findings (repo review where data exists)
 
@@ -5749,6 +5749,9 @@ No official NFL page was re-fetched in this session (sandbox outbound access is 
 python3 build_site.py (root): pages: 10, PROBLEMS: none, exit 0. The regenerated output is an NBA-only dashboard that would drop the committed NFL-oriented navigation including the nfl-decision-desk links; it was not committed, to avoid regressing peer work. The deployed site (main) is the committed dashboard, already live and category-organized with the NFL Decision Desk linked as the readiness dashboard.
 
 ### Claims on this session
-PR link, merge result and Pages status: to be recorded in task INT-6 after the PR merges.
+- PR: [#173](https://github.com/sassnarep3-star/Own4/pull/173), `arena/5f46c098-own4` → `main`, merged via `--merge`; merge commit `0312f75ec0f81ae2d7673e9b9f727f77f554819b`.
+- Merge result: merged without waiting for approval; CI checks (validate, audit, nfl-command verify ×4) all succeeded.
+- Pages: GitHub Pages API status `built` for commit `0312f75`; published site https://sassnarep3-star.github.io/Own4/ live.
+- INT-3/INT-4/INT-5/INT-6: done.
 
 
