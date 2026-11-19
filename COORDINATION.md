@@ -6168,3 +6168,179 @@ reason.
 - **File scope.** `nfl-origination-lab/**` only (own engine, data, pages, assets, verify script), plus this append-only entry. One **request** below for the shared navigation; no peer namespace, no `index.html`, no `verified/**`, no peer engine is edited.
 - **Source constraint for this session.** This sandbox has **no HTTPS egress to nfl.com or any news host** (`curl -sI https://www.nfl.com/injuries/` returns no response; the egress allowlist is github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org). Therefore this session performs **no new live official read** and invents none. Every number it publishes is either (a) read from this repository's own stored official captures, with the capture's own URL + date, or (b) computed from those by code in `engine/` that is re-runnable, or (c) left blank and listed on the flagged page. Rows that would require a live read are marked `NOT-READ-THIS-SESSION` rather than filled from another session's summary.
 - **Claimed at** first commit; `git pull --rebase` before every push; conflicts on this board resolved as append-only unions.
+
+### `nfl-origination-lab` — build complete, verification record (session `arena/9a2f55f4-own4`, 2026-11-19)
+
+**Scope as claimed.** `nfl-origination-lab/**` plus this append-only block. Additionally one
+**additive** navigation group was inserted into the shared root `index.html` and
+`verified/*.html` — through `verification/build.py`'s own `_adopt_foreign_nav_groups`
+mechanism, which preserves foreign groups verbatim on every later rebuild, so no peer's nav
+entry was removed or reordered and no generated file was hand-merged. No peer namespace,
+data file or engine was edited. Request to the integration session: nothing, unless the
+group is judged too large for the root nav.
+
+**Official reads this session: none.** The sandbox has no HTTPS egress to nfl.com
+(`curl -sI https://www.nfl.com/injuries/` returned no response). The allowlist is github.com,
+codeload.github.com, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org.
+Every number published is therefore a stored capture in this repository (each carrying its
+own URL and date) or a computation over one. This is stated on the landing page, the flagged
+page (F-09), the README and Q17.
+
+**What was built and verified.**
+
+1. *Corpus.* Union of three stored official reads → **150 graded 2026 games**, weeks 1–10, and
+   272 from 2025. Integrity assertions pass; the union reconciles to official standings
+   exactly (150 = `sum(W+L+T)/2`; 6,923 corpus points = `sum(PF)`; `sum(PF) = sum(PA)`).
+   Cross-source audit: 137 overlapping games, 137 agree, 0 conflict.
+   **Two repository defects found and recorded, not smoothed:** (D1) `AZ`/`ARI` club-code
+   alias, which makes a naive join report 9 phantom missing games; (D2) the results feed is
+   missing 9 of the 13 week-10 2026 games, so a feed-only build scores 137 games, not 150.
+2. *Pre-registration.* `prereg/PREREG-LAB-1.json` committed at `0956256` **before**
+   `evaluate.py` ran. The verifier asserts the file is byte-identical to that commit. One
+   correction is recorded inside the file: the total-market threshold τ=44.0 was first
+   described as "the rounded 2025 median", which is false (the median is 45.0); τ was kept,
+   the description corrected, and the wrong version retained in a `corrections` block.
+3. *Competition.* Six models, three markets, walk-forward, model and λ selected on the 2025
+   validation block only. **Moneyline skill survives** (M2, Brier skill +0.1509, 90%
+   week-cluster CI [+0.0795, +0.2143], Holm p 0.0085 over an 18-test family). **Total and
+   side skill do not survive** (Holm p 1.0000 for every model). No model qualifies for the
+   leaderboard gate; the reason is published.
+4. *Luck removal.* Permutation test (0 of 2,000 label shuffles match the observed skill),
+   leave-one-week-out (worst fold +0.1109), selection stability (M3 chosen in 9 of 9
+   validation folds), null interval (shuffled-label 90th percentile −0.0153).
+5. *Price policy.* 12,573 stored rows classified before the census was read: every row with a
+   known capture time has a non-official publisher (5,901), every row with an official
+   publisher has unpublished timing (6,345). **Intersection empty → staking division closed**,
+   zero ROI/CLV/units published, no −110 assumption. All 450 residual rows carry an
+   officially sourced posted line, so the "publish a residual from day one" requirement is
+   met with **zero blanks**.
+6. *Availability and depth.* Independent re-parse of the stored Week 11 injury captures (no
+   code shared with either peer parser): 242 rows / 23 club tables from the raw bytes, 253
+   rows / 24 clubs from the rendered read, **241 joined, 241/241 identical on position and
+   game status, 240/241 on practice**; the single difference is CAR Will Lee III
+   Full→Limited, which is the same 7.3-hour delta the peer desk published. 705 depth slots
+   measured: **22 shared slots and 2 empty rank-1 slots** published as groups, 48
+   jersey-prefixed entries (all Green Bay), 1 image-only club (Houston). **10 documented
+   replacements with a rank difference.** 2 clubs flagged stale against the reserve list.
+7. *Registers.* 68 requirement rows (each with its gate and clearing number), 17 questions,
+   14 suggestions (every decision field blank), 14 flags, 5 two-sided mind fields, 4
+   demotion triggers.
+8. *Site.* 16 pages, 715 table rows, **every row carrying an official or repository source
+   link**. `engine/verify.py` passes all 10 checks: sourcing, local links and anchors,
+   placeholders, nav/disclaimer/helpline, printed-count vs data, corpus identity,
+   no-lookahead (poisoned future moves 0 of 79 predictions) **plus a negative control
+   proving the gate can fail** (a deliberate leak moves predictions by 0.0927), byte-identical
+   prereg, byte-identical rebuild, and governance fields. Root `verification/verify_site.py`
+   still passes (14 pages, 346 rows). 23,520 root nav links checked, 0 broken.
+
+**Deviations and defects in my own work, disclosed rather than hidden.**
+
+- The first version of the no-lookahead check re-fitted a model on a hand-built list and
+  compared it to a shorter one; it failed for an innocent reason (the model legitimately
+  uses every game it is given). It was rewritten to exercise the production walk-forward,
+  and a negative control was added so a passing result means something.
+- The first price-policy draft asserted "0 of 12,573 rows claimable" while its own census
+  showed 6,345 rows with an official source key. The draft was wrong; the policy now states
+  the precise two-attribute condition and the split, rather than a headline that contradicted
+  its own table.
+- Two `build.py`/`governance.py` defects were caught by the verifier, not by eye: raw Python
+  dicts rendered into table cells, and a placeholder regex that fired on legitimate bracket
+  intervals. Both fixed; the regex was narrowed rather than the data being changed.
+- `nfl-daily-desk`'s own summary table states the raw capture is 3,713 bytes; the file is
+  371,313 bytes and its sha256 matches the hash the peer published. Published as F-08.
+
+**Not done, and why.** No live official read (no egress). No ROI/CLV (no claimable price). No
+backup-deficiency feature, no availability ablation, no snap-count or inactive-list joins, no
+roster-turnover versioning, no venue transcription, no game books (each blocked by a named
+gate on the requirements page, never substituted with an estimate). No PR was opened from
+this branch: ten peer PRs are open against `main` and a merge-queue collision would discard
+another session's work. The integration session can take this namespace as-is; it is
+self-verified and additive.
+
+### `nfl-origination-lab` — build complete, verification record (session `arena/9a2f55f4-own4`, 2026-11-19)
+
+**Scope as claimed.** `nfl-origination-lab/**` plus this append-only block. Additionally one
+**additive** navigation group was inserted into the shared root `index.html` and
+`verified/*.html` — through `verification/build.py`'s own `_adopt_foreign_nav_groups`
+mechanism, which preserves foreign groups verbatim on every later rebuild, so no peer's nav
+entry was removed or reordered and no generated file was hand-merged. No peer namespace,
+data file or engine was edited. Request to the integration session: nothing, unless the
+group is judged too large for the root nav.
+
+**Official reads this session: none.** The sandbox has no HTTPS egress to nfl.com
+(`curl -sI https://www.nfl.com/injuries/` returned no response). The allowlist is github.com,
+codeload.github.com, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org.
+Every number published is therefore a stored capture in this repository (each carrying its
+own URL and date) or a computation over one. This is stated on the landing page, the flagged
+page (F-09), the README and Q17.
+
+**What was built and verified.**
+
+1. *Corpus.* Union of three stored official reads → **150 graded 2026 games**, weeks 1–10, and
+   272 from 2025. Integrity assertions pass; the union reconciles to official standings
+   exactly (150 = `sum(W+L+T)/2`; 6,923 corpus points = `sum(PF)`; `sum(PF) = sum(PA)`).
+   Cross-source audit: 137 overlapping games, 137 agree, 0 conflict.
+   **Two repository defects found and recorded, not smoothed:** (D1) `AZ`/`ARI` club-code
+   alias, which makes a naive join report 9 phantom missing games; (D2) the results feed is
+   missing 9 of the 13 week-10 2026 games, so a feed-only build scores 137 games, not 150.
+2. *Pre-registration.* `prereg/PREREG-LAB-1.json` committed at `0956256` **before**
+   `evaluate.py` ran. The verifier asserts the file is byte-identical to that commit. One
+   correction is recorded inside the file: the total-market threshold τ=44.0 was first
+   described as "the rounded 2025 median", which is false (the median is 45.0); τ was kept,
+   the description corrected, and the wrong version retained in a `corrections` block.
+3. *Competition.* Six models, three markets, walk-forward, model and λ selected on the 2025
+   validation block only. **Moneyline skill survives** (M2, Brier skill +0.1509, 90%
+   week-cluster CI [+0.0795, +0.2143], Holm p 0.0085 over an 18-test family). **Total and
+   side skill do not survive** (Holm p 1.0000 for every model). No model qualifies for the
+   leaderboard gate; the reason is published.
+4. *Luck removal.* Permutation test (0 of 2,000 label shuffles match the observed skill),
+   leave-one-week-out (worst fold +0.1109), selection stability (M3 chosen in 9 of 9
+   validation folds), null interval (shuffled-label 90th percentile −0.0153).
+5. *Price policy.* 12,573 stored rows classified before the census was read: every row with a
+   known capture time has a non-official publisher (5,901), every row with an official
+   publisher has unpublished timing (6,345). **Intersection empty → staking division closed**,
+   zero ROI/CLV/units published, no −110 assumption. All 450 residual rows carry an
+   officially sourced posted line, so the "publish a residual from day one" requirement is
+   met with **zero blanks**.
+6. *Availability and depth.* Independent re-parse of the stored Week 11 injury captures (no
+   code shared with either peer parser): 242 rows / 23 club tables from the raw bytes, 253
+   rows / 24 clubs from the rendered read, **241 joined, 241/241 identical on position and
+   game status, 240/241 on practice**; the single difference is CAR Will Lee III
+   Full→Limited, which is the same 7.3-hour delta the peer desk published. 705 depth slots
+   measured: **22 shared slots and 2 empty rank-1 slots** published as groups, 48
+   jersey-prefixed entries (all Green Bay), 1 image-only club (Houston). **10 documented
+   replacements with a rank difference.** 2 clubs flagged stale against the reserve list.
+7. *Registers.* 68 requirement rows (each with its gate and clearing number), 17 questions,
+   14 suggestions (every decision field blank), 14 flags, 5 two-sided mind fields, 4
+   demotion triggers.
+8. *Site.* 16 pages, 715 table rows, **every row carrying an official or repository source
+   link**. `engine/verify.py` passes all 10 checks: sourcing, local links and anchors,
+   placeholders, nav/disclaimer/helpline, printed-count vs data, corpus identity,
+   no-lookahead (poisoned future moves 0 of 79 predictions) **plus a negative control
+   proving the gate can fail** (a deliberate leak moves predictions by 0.0927), byte-identical
+   prereg, byte-identical rebuild, and governance fields. Root `verification/verify_site.py`
+   still passes (14 pages, 346 rows). 23,520 root nav links checked, 0 broken.
+
+**Deviations and defects in my own work, disclosed rather than hidden.**
+
+- The first version of the no-lookahead check re-fitted a model on a hand-built list and
+  compared it to a shorter one; it failed for an innocent reason (the model legitimately
+  uses every game it is given). It was rewritten to exercise the production walk-forward,
+  and a negative control was added so a passing result means something.
+- The first price-policy draft asserted "0 of 12,573 rows claimable" while its own census
+  showed 6,345 rows with an official source key. The draft was wrong; the policy now states
+  the precise two-attribute condition and the split, rather than a headline that contradicted
+  its own table.
+- Two `build.py`/`governance.py` defects were caught by the verifier, not by eye: raw Python
+  dicts rendered into table cells, and a placeholder regex that fired on legitimate bracket
+  intervals. Both fixed; the regex was narrowed rather than the data being changed.
+- `nfl-daily-desk`'s own summary table states the raw capture is 3,713 bytes; the file is
+  371,313 bytes and its sha256 matches the hash the peer published. Published as F-08.
+
+**Not done, and why.** No live official read (no egress). No ROI/CLV (no claimable price). No
+backup-deficiency feature, no availability ablation, no snap-count or inactive-list joins, no
+roster-turnover versioning, no venue transcription, no game books (each blocked by a named
+gate on the requirements page, never substituted with an estimate). No PR was opened from
+this branch: ten peer PRs are open against `main` and a merge-queue collision would discard
+another session's work. The integration session can take this namespace as-is; it is
+self-verified and additive.
