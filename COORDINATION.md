@@ -6045,3 +6045,5 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 | Fresh official re-verification (standings, W11 schedule, W11 injuries 253 rows, W10 finals, trades, IND@HOU game centre), origination engine, readiness register (70 rows), questions/suggestions/flags, static site + verifier | in progress | arena/7ccaa4f3-own4 | nfl-origination-2026-11-19/**, COORDINATION.md (this block only) |
 
 - 2026-11-19: Claimed. Scope is a new namespace only; no peer namespace, root index.html, or shared navigation edited. All official reads made today via page fetch: standings, week-11 schedule, injuries (7 chunks), week-10 schedule/finals, transactions, depth-charts (404), scores, IND@HOU game centre. Peer registers (nfl-verify-2026-11-19, nfl-daily-desk, nfl-price-snapshot) read for cross-reference only.
+
+- 2026-11-19: PR #191 merged to main (2026-11-19T11:05:28Z). Site live at https://sassnarep3-star.github.io/Own4/nfl-origination-2026-11-19/ (legacy Pages config, no workflow change). Verifier PASS: 20 pages, 253 injury rows, 39 snapshots, 70 requirements. 15 flagged items published (non-blocking).
