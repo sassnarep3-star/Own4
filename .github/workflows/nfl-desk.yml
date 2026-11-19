@@ -1,0 +1,58 @@
+name: NFL desk — rebuild and verify
+
+# Gate for nfl-desk/**. Rebuilds every page from the checked-in data, then runs the
+# publication contract: every table row carries an official or repository source link,
+# every local link and anchor resolves, page row counts match the data files, the stored
+# official captures still match their recorded sha256, and a rebuild is byte-identical.
+# It does not deploy: GitHub Pages serves this repository from main//root.
+
+on:
+  push:
+    paths:
+      - 'nfl-desk/**'
+      - '.github/workflows/nfl-desk.yml'
+  pull_request:
+    paths:
+      - 'nfl-desk/**'
+      - '.github/workflows/nfl-desk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild and verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rebuild the data files from their sources
+        run: |
+          python3 nfl-desk/engine/parse_standings.py
+          python3 nfl-desk/engine/parse_injuries.py
+          python3 nfl-desk/engine/census.py
+          python3 nfl-desk/engine/register.py
+
+      - name: Rebuild the site
+        run: python3 nfl-desk/engine/build.py
+
+      - name: Data files must rebuild byte-identically
+        # The parsers read stored artifacts and emit pure literals, so any diff here is a
+        # real defect (edited-by-hand data, or a capture that changed under us).
+        run: |
+          git diff --stat -- nfl-desk/data
+          git diff --exit-code -- nfl-desk/data
+
+      - name: Publication gate (row sources, links, counts, hashes, determinism)
+        run: python3 nfl-desk/engine/verify.py --rebuild
+
+      - name: Pages must rebuild byte-identically
+        run: |
+          git diff --stat -- nfl-desk/index.html nfl-desk/pages
+          git diff --exit-code -- nfl-desk/index.html nfl-desk/pages

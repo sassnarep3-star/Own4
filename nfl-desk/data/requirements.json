@@ -1,0 +1,2210 @@
+{
+ "dataset": "nfl_desk_readiness_register",
+ "title": "One readiness register for the 73-line brief, with every peer register's answer shown",
+ "built_utc": "2026-11-19",
+ "session": "arena/1e2776fd-own4",
+ "method": "Rows are the 73 requirement lines of the 2026-11-15 brief in the readiness register's wording. The three status columns are read from three peer files and never merged into one verdict; 'statuses_agree' is computed by normalising their vocabularies (met=implemented, not_started=open, in_progress=open). Evidence paths are resolved against the tree by engine/register.py.",
+ "inputs": {
+  "readiness": "nfl-readiness-register/data/requirements.json",
+  "round2": "nfl-req-review/data/requirements_2026_11_18.json",
+  "consolidated": "nfl-consolidated/data/requirements.json",
+  "census": "nfl-desk/data/census.json"
+ },
+ "counts": {
+  "agree": 21,
+  "disagree": 29,
+  "unmatched": 23,
+  "no_official_source": 0,
+  "rows_with_exact_evidence": 3,
+  "rows_with_loose_evidence": 8,
+  "rows_with_unresolved_evidence": 2,
+  "rows": 73
+ },
+ "register_disagreement_pairs": 62,
+ "policy": "A row is only 'clear to rely on' when the three registers agree AND its evidence paths resolve AND it names an official source. This file does not upgrade any status; the owner decides which register is authoritative.",
+ "rows": [
+  {
+   "id": "REQ-01",
+   "requirement": "Add a price-snapshot store that records opening and closing numbers for every market we originate",
+   "category": "Market data",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-01",
+    "nfl-req-review/data/requirements_2026_11_18.json#A01",
+    "nfl-consolidated/data/requirements.json#A01"
+   ],
+   "gate": "DR-G1 official/archived pre-kickoff price source for market_open; store itself runs",
+   "clearing_number": "opens+close captured for every originated market per week (2026 target n=284 games x 3 markets)",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "nfl.com schedule = canonical game identity for every snapshot row",
+   "evidence_text": "nfl-book data/price_snapshots.json (39 open/close snapshots, 13 games x 3 markets); nfl-markets price-snapshot store 12,573 rows (4,191 games x side/total/ML) with open/close/diff columns; nfl-core, nfl-marketboard, nfl-price-snapshot, nfl-ledger maintain parallel stores",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "data/price_snapshots.json",
+     "found_at": [
+      "nfl-book/data/price_snapshots.json"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Store exists: nfl-book/data/price_snapshots.json holds 39 open/close pairs (13 Week-11 games x side/total/moneyline). Every market_open_value and market_close_value is null by policy (no official price source). The 'close' value is a model run trained on the 137 feed games, not a market close. Downgraded from met because the market half is blank.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-02",
+   "requirement": "Add a verified results feed so backtests and ROI can be computed at all",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-02",
+    "nfl-req-review/data/requirements_2026_11_18.json#A02",
+    "nfl-consolidated/data/requirements.json#A02"
+   ],
+   "gate": "none blocking for played games; future games enter as PENDING",
+   "clearing_number": "284 scheduled 2026 regular-season games; every settled one carries an official row (Week 10: 9/14 verified at 2026-11-15T~23:45Z)",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-book data/results_feed.json (137 settled 2026 games, V-01/V-02/V-03 checks); nfl-markets verified feed 4,056 played games 2011-2026 with official game-page link per row; THIS SESSION re-verified 9 of 14 Week-10 finals live against nfl.com/schedules",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "data/results_feed.json",
+     "found_at": [
+      "nfl-book/data/results_feed.json"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Round 2 reconciled the feed to the official standings: Weeks 1-9 (136 games) match 32 of 32 clubs on W, L, T, PF and PA (RC-11). The feed holds 1 of the 14 official Week-10 finals (RC-12). 105 of its 137 rows are aggregate-only, not re-read game by game. Downgraded from met until the 13 missing finals are added and the aggregate-only rows are re-read.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-03",
+   "requirement": "Originate the side first, then the total, then the moneyline",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-03",
+    "nfl-req-review/data/requirements_2026_11_18.json#B01",
+    "nfl-consolidated/data/requirements.json#B01"
+   ],
+   "gate": "none",
+   "clearing_number": "origination_order column present on 100% of originated rows",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-book engine/originate.py writes markets in fixed order [side, total, moneyline] with per-row origination_order audit; nfl-markets market_seq 1=side,2=total,3=moneyline",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "engine/originate.py",
+     "found_at": [
+      "nfl-book/engine/originate.py"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: own_lines_open.json origination_order = side, total, moneyline (13 games).",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-04",
+   "requirement": "Publish the model's fair line, the market line, and the difference as separate columns",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-04",
+    "nfl-req-review/data/requirements_2026_11_18.json#B02",
+    "nfl-consolidated/data/requirements.json#B02"
+   ],
+   "gate": "DR-G1: no official pre-kickoff line source exists; NFL publishes no odds (FLAG-M1/FB-01)",
+   "clearing_number": "n=1 licensed line archive (open+close per market per game) ingested; until then market/diff stay blank or THIRD-PARTY-labelled",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-book pages/own-lines.html has all three columns; fair values populated; market+difference blank (FB-01 no official price source); nfl-markets populates market columns from archived third-party lines (labelled THIRD-PARTY, flagged)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "pages/own-lines.html",
+     "found_at": [
+      "nfl-book/pages/own-lines.html"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-05",
+   "requirement": "Separate 'signal' from 'staking' in the leaderboard so a lucky staking run cannot mask a bad signal",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-05",
+    "nfl-req-review/data/requirements_2026_11_18.json#C01",
+    "nfl-consolidated/data/requirements.json#C01"
+   ],
+   "gate": "none",
+   "clearing_number": "0 of 1,000 points paid on assumed prices (current state, by design)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book leaderboard: signal tier ranks first, staking under ASSUMED -110 can never promote or pay (amendment A1: points require verified prices); nfl-markets SIGNAL vs STAKING separate ranks with CIs and permutation p",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: removal_of_luck.json states that signal is separated from staking and that the leaderboard ranks on signal tier.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-06",
+   "requirement": "Track the depth of the replacement, not just the fact of a replacement",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-06",
+    "nfl-req-review/data/requirements_2026_11_18.json#E01",
+    "nfl-consolidated/data/requirements.json#E01"
+   ],
+   "gate": "REQ-51: no official per-club depth order verified for all 32 clubs; depth inferred is forbidden",
+   "clearing_number": "n=32 clubs with verified official depth route (chart page or published snap split)",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "nfl-book data/depth_replacements.json publishes depth ONLY where official text states it (SEA QB: Darnold out, Lock start announced - official news); nfl-markets quantified 10 starter-out rows by replacement depth (7x 2nd string, 3x NONE) from third-party charts (flagged); 24 teams blank",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "data/depth_replacements.json",
+     "found_at": [
+      "nfl-book/data/depth_replacements.json"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-07",
+   "requirement": "Compute correlations only from officially sourced numbers and publish n with each value",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-07",
+    "nfl-req-review/data/requirements_2026_11_18.json#D01",
+    "nfl-consolidated/data/requirements.json#D01"
+   ],
+   "gate": "none",
+   "clearing_number": "n published on 100% of computed values (holds today)",
+   "official_source": "https://www.nfl.com/standings/",
+   "source_note": "",
+   "evidence_text": "nfl-book correlations CR-01..CR-05 computed from official scores only, each with n, r, p, 95% CI; CR-06..09 blank with reasons; nfl-markets CO-group with n=4,056; third-party inputs quarantined in a flagged CT-group",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Correlations publish n and an official URL per row, but they are computed from the 137-row feed, 105 of whose rows are aggregate-only and which omits 13 official Week-10 finals. Downgraded from met until recomputed on the full official set.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-08",
+   "requirement": "Define a demotion gate that sends a live strategy back to paper",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-08",
+    "nfl-req-review/data/requirements_2026_11_18.json#C06",
+    "nfl-consolidated/data/requirements.json#C06"
+   ],
+   "gate": "no strategy currently holds LIVE status, so D1 is armed but unfired",
+   "clearing_number": "first promotion to LIVE will arm it with a real evaluation window",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book gates.json D1 (four firing conditions, auto live->paper, re-promotion needs fresh gates) + data/demotion_eval.json; nfl-markets DM-1..DM-5 weekly state machine demonstrated on real windows",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "data/demotion_eval.json",
+     "found_at": [
+      "nfl-book/data/demotion_eval.json"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: demotion_eval.json holds gate D1 (live-to-paper demotion rule).",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-09",
+   "requirement": "Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-09",
+    "nfl-req-review/data/requirements_2026_11_18.json#C07",
+    "nfl-consolidated/data/requirements.json#C07"
+   ],
+   "gate": "none for pre-registration; enforcement rule missing",
+   "clearing_number": "verifier assertion: leaderboard tables may only contain pre-kickoff-or-walk-forward numbers (to be added to site verifier, n=1 rule)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book strategies S1-S5 pre-registered before evaluation; nfl-markets pre-registrations with frozen versions; NO peer leaderboard displays in-sample backtest numbers today - but the prohibition is practice, not an enforced written rule",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "PREREG-001 exists in the repository. The registration is the git commit hash; this sandbox clone is shallow, so the hash history cannot be checked here (RF-18).",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-10",
+   "requirement": "Build the availability graph as a first-class dataset (who was expected to start, who actually did)",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-10",
+    "nfl-req-review/data/requirements_2026_11_18.json#E02",
+    "nfl-consolidated/data/requirements.json#E02"
+   ],
+   "gate": "REQ-30 inactive capture + REQ-25 game-book starters must land first",
+   "clearing_number": "n=256 team-games with expected_starters and actual_starters both populated from official pages",
+   "official_source": "https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books",
+   "source_note": "",
+   "evidence_text": "no repo artifact joins expected-starter to actual-starter; needs inactive lists + game-book starters; this session captured the live report (28 team tables, 347 rows counted) as the first ledger entry",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-11",
+   "requirement": "Do not model depth from jersey order; model it from playing time",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-11",
+    "nfl-req-review/data/requirements_2026_11_18.json#E03",
+    "nfl-consolidated/data/requirements.json#E03"
+   ],
+   "gate": "verified official snap-count source per game (NGS/game center) wired into the pipeline",
+   "clearing_number": "n=1 full season of snap-share rows per club from an official source",
+   "official_source": "https://operations.nfl.com/gameday/technology/nfl-next-gen-stats",
+   "source_note": "",
+   "evidence_text": "no snap-based depth model exists; official tracking source verified: Next Gen Stats participation (day-after update) and game-center snap counts; jersey/salary/experience shortcuts explicitly rejected (REQ-49)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-12",
+   "requirement": "Make the injury signal a surprise, never a level",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-12",
+    "nfl-req-review/data/requirements_2026_11_18.json#E04",
+    "nfl-consolidated/data/requirements.json#E04"
+   ],
+   "gate": "REQ-54 ledger + REQ-53 cadence feeding a designation-delta series",
+   "clearing_number": "n>=3 weeks of Wed/Thu/Fri deltas before the feature is defined",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "no model feature layer exists yet; the timestamped ledger built this session (deltas between captures) is the substrate the surprise signal needs",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-13",
+   "requirement": "Run the 32-team roster/IR sweep before any team-level model is trusted",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-13",
+    "nfl-req-review/data/requirements_2026_11_18.json#E05",
+    "nfl-consolidated/data/requirements.json#E05"
+   ],
+   "gate": "scheduled capture of reserve list + per-club roster verification",
+   "clearing_number": "n=32/32 clubs with a same-week roster+IR read, hashes retained",
+   "official_source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "source_note": "",
+   "evidence_text": "peers swept 8 teams (nfl-arena) / covered subsets; no automated 32-club sweep exists; this session's workflow adds the league reserve-list capture (first step of the sweep)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-14",
+   "requirement": "Add a fixture-context feature set built only from published schedule facts",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-14",
+    "nfl-req-review/data/requirements_2026_11_18.json#B05",
+    "nfl-consolidated/data/requirements.json#B05"
+   ],
+   "gate": "venue + kickoff + rest transcribed per fixture from the official game centre (REQ-23)",
+   "clearing_number": "n=284 rows (one per 2026 game) with venue, kickoff, rest days, site flag from official pages",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "peers build slates from nfl.com schedule pages (dates, times, networks, byes); rest days and international/neutral-site flags are derivable (Munich game verified live this session); no consolidated fixture-context table exists",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-15",
+   "requirement": "Store every model output as a probability plus its inputs, not just a pick",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-15",
+    "nfl-req-review/data/requirements_2026_11_18.json#B04",
+    "nfl-consolidated/data/requirements.json#B04"
+   ],
+   "gate": "input-hash column on every model output row",
+   "clearing_number": "100% of model output rows carry inputs_hash + model_version (to be enforced in verifier)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book model_card.json + per-row model provenance (train window, version); nfl-markets fair lines carry frozen-model provenance (calibration 1999-2010, no market input); full input-vector logging not yet on every row",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: model_outputs.json rows carry p_home, p_away, and the inputs used (13 rows).",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-16",
+   "requirement": "Compute and publish the \"removal of luck\" panel on the site dashboard",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-16",
+    "nfl-req-review/data/requirements_2026_11_18.json#F01",
+    "nfl-consolidated/data/requirements.json#F01"
+   ],
+   "gate": "pre-registered panel definition (which luck metrics, which windows) frozen in git",
+   "clearing_number": "panel renders on every leaderboard refresh with permutation p + bootstrap CI + baseline deltas for every ranked strategy",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "peers run luck machinery (sign-flip permutation p, placebo baselines, record-baseline comparisons) inside analyses; a standing dashboard panel with a fixed definition does not exist",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: removal_of_luck.json is the panel data; the nfl-book index page carries the panel.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-17",
+   "requirement": "Add a two-sided \"what would change our mind\" field to every strategy entry",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-17",
+    "nfl-req-review/data/requirements_2026_11_18.json#F02",
+    "nfl-consolidated/data/requirements.json#F02"
+   ],
+   "gate": "strategy schema gains required field falsify_if + falsify_if_not",
+   "clearing_number": "100% of strategy entries carry both fields (verifier assertion)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book suggestions include falsifiers for some proposals; the register-level rule 'every strategy entry' is not yet enforced by schema",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-18",
+   "requirement": "Price a line ourselves and publish the residual against the market, on a schedule, from day one",
+   "category": "Market data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-18",
+    "nfl-req-review/data/requirements_2026_11_18.json#B03",
+    "nfl-consolidated/data/requirements.json#B03"
+   ],
+   "gate": "DR-G1 price source + a weekly origination cadence rule",
+   "clearing_number": "n=1 weekly run publishing residuals for every originated market before kickoff",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-markets publishes model-vs-close residuals from archived third-party closes (2021 r=0.786 open-close; model-market r=0.673, flagged THIRD-PARTY); 'on a schedule' (weekly cadence) not implemented",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-19",
+   "requirement": "Turn the 136-game log into the pre-registered backtest corpus",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-19",
+    "nfl-req-review/data/requirements_2026_11_18.json#A07",
+    "nfl-consolidated/data/requirements.json#A07"
+   ],
+   "gate": "DR-G5: corpus freeze (row list + split + price policy) committed before next evaluation",
+   "clearing_number": "corpus manifest committed with sha256 + DR-G5 split config before any new backtest run",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-book own_lines_open.json n_train_games=136 (2026 walk-forward training log) - the referenced log exists; it is a training log, not a frozen, pre-registered corpus with split config",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "The 136-game Weeks 1-9 corpus is correct: it reconciles to official standings for 32 of 32 clubs (RC-07, RC-11). nfl-book/data/holdout_split.json assigns only one Week-10 game ('Week 10 TNF (1 game, 137th)') and leaves 13 official Week-10 finals in no split. Downgraded from met until every completed game is assigned to a named split.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-20",
+   "requirement": "Decide the price-data policy before any backtest is published",
+   "category": "Market data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-20",
+    "nfl-req-review/data/requirements_2026_11_18.json#G02",
+    "nfl-consolidated/data/requirements.json#G02"
+   ],
+   "gate": "owner decision among options on the suggestions page",
+   "clearing_number": "one accepted option recorded in data/price_policy.json with date",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "policy fragments exist (FB-01 no official source; FLAG-M1 third-party labelling; FLAG-M4 -110 assumption) but no single decided policy document; queued as SUG-R3 for owner decision",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-21",
+   "requirement": "Store every injury-hub read with its clock time and publish the delta, never the level",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-21",
+    "nfl-req-review/data/requirements_2026_11_18.json#E12",
+    "nfl-consolidated/data/requirements.json#E12"
+   ],
+   "gate": "DR-G2 cadence; every read hashed and timed",
+   "clearing_number": "n>=2 captures of the same week retained with computed designation deltas",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "peer captures exist but clock-time provenance is inconsistent across namespaces; this session's snapshot ledger stores fetched_at UTC + sha256 per read and computes deltas between captures",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-22",
+   "requirement": "Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it",
+   "category": "Governance & site",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-22",
+    "nfl-req-review/data/requirements_2026_11_18.json#G01",
+    "nfl-consolidated/data/requirements.json#G01"
+   ],
+   "gate": "none",
+   "clearing_number": "68/68 requirement rows rendered on the landing page (holds today)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: nfl-readiness landing page (index.html) renders exactly that table - one row per REQ-01..REQ-68 with status, gate, clearing number, official source",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-23",
+   "requirement": "Transcribe the venue of every fixture from the official game centre and publish it",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-23",
+    "nfl-req-review/data/requirements_2026_11_18.json#A03",
+    "nfl-consolidated/data/requirements.json#A03"
+   ],
+   "gate": "none for transcription itself",
+   "clearing_number": "n=14/14 Week-10 (then 284/284 season) venues transcribed with per-row game-centre links",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION verified Munich as NE@DET Week-10 site from the official schedule page (International Game, Nov 15); all other Week-10 venues left blank - the game centre pages were not read this session and will not be inferred",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Correction: round 1 stated 14 Week-11 fixtures and 'all 137 games'. The official Week-11 schedule read today shows 13 fixtures and 6 clubs on bye, which is consistent with 32 clubs (RC-08, RC-09). The clearing set below is corrected accordingly.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-24",
+   "requirement": "Publish the league's dated schedule announcement beside the live schedule page",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-24",
+    "nfl-req-review/data/requirements_2026_11_18.json#A04",
+    "nfl-consolidated/data/requirements.json#A04"
+   ],
+   "gate": "none",
+   "clearing_number": "announcement text + link stored with fetch timestamp (done, 1/1)",
+   "official_source": "https://www.nfl.com/legal/flexible-scheduling-procedures",
+   "source_note": "",
+   "evidence_text": "THIS SESSION captured the official '2026 TBD Games' announcement (Week 16 decided after Week 14; Week 17 after Week 15; Week 18 after Week 17) and the flexible-scheduling link, published beside the live Week-10 slate on the snapshots page",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-25",
+   "requirement": "Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-25",
+    "nfl-req-review/data/requirements_2026_11_18.json#A05",
+    "nfl-consolidated/data/requirements.json#A05"
+   ],
+   "gate": "REQ-10 (only useful once the availability graph schema exists)",
+   "clearing_number": "n=1 week of game-book PDFs parsed for starters with hash retained",
+   "official_source": "https://support.nfl.com/hc/en-us/articles/35869678028180-Game-Books",
+   "source_note": "",
+   "evidence_text": "official source verified this session: game books (Game Summaries) are PDFs inside NFL.com Game Centers per support.nfl.com; no ingestion built; NFL GSIS (nflgsis.com) is the producing system",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-26",
+   "requirement": "Add injury and personnel ablations instead of fixed penalties",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-26",
+    "",
+    ""
+   ],
+   "gate": "REQ-10 availability graph + DR-G5 holdout protocol",
+   "clearing_number": "n=1 paired ablation run (with/without personnel features) with bootstrap CI on the difference",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "no personnel feature model exists yet (blocked on availability graph); fixed-penalty approach appears in no peer model - the requirement guards against introducing one",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-27",
+   "requirement": "Add injury/depth ablations, not fixed penalties",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-27",
+    "",
+    ""
+   ],
+   "gate": "REQ-11 snap-based depth + DR-G5",
+   "clearing_number": "n=1 paired ablation on chronological holdouts with CI",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "same substrate gap as REQ-26; chronological-holdout machinery exists in peers (walk-forward), the availability features do not",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-28",
+   "requirement": "Automate immutable multi-day availability snapshots",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-28",
+    "",
+    ""
+   ],
+   "gate": "DR-G2 for report+reserve list; REQ-51 for club depth pages",
+   "clearing_number": "n>=3 hashed captures per game week (report+reserve list); club-depth route decided and added",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: scheduled workflow (.github/workflows/nfl-readiness-register.yml) captures the official report + league reserve list Wed/Thu/Fri with sha256 + append-only manifest + drift alarm; club depth pages excluded - no verified official source for all 32 clubs (REQ-51)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [
+    "github/workflows/nfl-readiness-register.yml"
+   ],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-29",
+   "requirement": "Build immutable official availability snapshots",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-29",
+    "",
+    ""
+   ],
+   "gate": "DR-G2 + inactive-list source wiring",
+   "clearing_number": "n=3 source families captured weekly (report, reserve list, inactives) with hashes",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "same machinery as REQ-28 (this session); inactive evidence (game-day inactive lists) not yet captured; conflict flags = verifier cross-checks between capture pairs",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-30",
+   "requirement": "Capture official inactive lists and snap counts",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "blocked",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-30",
+    "nfl-req-review/data/requirements_2026_11_18.json#E06",
+    "nfl-consolidated/data/requirements.json#E06"
+   ],
+   "gate": "per-game inactive article parsing + NGS participation wiring",
+   "clearing_number": "n=14 games x 2 teams inactive lists + snap shares captured for one full week",
+   "official_source": "https://www.nfl.com/news/nfl-week-9-inactives-players-ruled-out-sunday-2026-season",
+   "source_note": "",
+   "evidence_text": "inactive lists are published per game (peers link nfl.com inactives articles, e.g. official 'NFL Week 9 inactives' roundup seen in this session's capture); snap shares via Next Gen Stats (day-after) - neither ingested",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-31",
+   "requirement": "Fix the two depth-parsing failures before widening coverage",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-31",
+    "",
+    ""
+   ],
+   "gate": "capture of the two club pages + parser fixes; Texans needs an authorized structured source",
+   "clearing_number": "n=2 clubs parsed correctly (Packers via number-stripping+raw-string; Texans via authorized source)",
+   "official_source": "https://www.nfl.com/teams/houston-texans/",
+   "source_note": "",
+   "evidence_text": "referenced captures (Texans image depth, Packers jersey-prefixed depth) are not in this repo; cited finding IDs (VR-xx/VQ-xx) belong to the owner's external tracker and cannot be resolved here - flagged",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-32",
+   "requirement": "Model depth slots as groups, not a single starter",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-32",
+    "nfl-req-review/data/requirements_2026_11_18.json#E08",
+    "nfl-consolidated/data/requirements.json#E08"
+   ],
+   "gate": "REQ-51 depth route verified, then schema enforced in parser",
+   "clearing_number": "n=100% of parsed slots carry slot_members + co_rank1_count (no single-starter assumption)",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "slot-group schema defined in this register (co_rank1_count, slot_members[]); the 149-slot figure comes from a capture not present in this repo - flagged unverified here",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-33",
+   "requirement": "Treat roster turnover as a first-class data event",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-33",
+    "nfl-req-review/data/requirements_2026_11_18.json#E09",
+    "nfl-consolidated/data/requirements.json#E09"
+   ],
+   "gate": "transactions ledger join (last_roster_event_id) on depth + availability rows",
+   "clearing_number": "n=100% of depth/availability rows carry last_roster_event_id + date",
+   "official_source": "https://www.nfl.com/transactions/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION captured the official November 2026 trade table (12 dated rows incl. two Colts receiver moves: Keenan Allen IND->SF, Josh Downs IND->KC on 11/10) - the roster-event stream exists; versioning of depth/availability against last event is not implemented",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-34",
+   "requirement": "Start with a singles-only shadow baseline",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-34",
+    "",
+    ""
+   ],
+   "gate": "none - start the run",
+   "clearing_number": "n>=40 prospective singles forecasts settled",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "nfl-book S1 (singles-only, pre-registered, frozen model card) with walk-forward forecasts recorded; a PROSPECTIVE shadow run (forecasts before kickoff, settled weekly) is what remains",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-35",
+   "requirement": "Keep parlays and prop combos behind a joint-evidence gate",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-35",
+    "",
+    ""
+   ],
+   "gate": "DR-G4: validated joint probability + operator rules both on file",
+   "clearing_number": "n>=200 directly observed combo outcomes per combo family before ranking",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-markets CT-2 measured cross-game leg dependence from third-party lines (23.8% observed vs 25.0% implied, n=27,129 pairs, flagged THIRD-PARTY); same-game correlations blank by rule; no operator void/push rules on file",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-36",
+   "requirement": "Use proper-score leaderboard divisions",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-36",
+    "",
+    ""
+   ],
+   "gate": "REQ-35 (combos stay unranked), then divisions schema",
+   "clearing_number": "n=4 divisions rendered with benchmark-relative skill + CI per eligible strategy",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book/nfl-markets split signal vs staking; division-by-market-type not built; benchmark-relative Brier skill specified but not computed on a standing leaderboard",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-37",
+   "requirement": "Rank with proper scores and uncertainty, not win rate",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-37",
+    "",
+    ""
+   ],
+   "gate": "none for singles once n>=100 settled forecasts (G1)",
+   "clearing_number": "n>=100 settled forecasts per ranked strategy with cluster bootstrap lower bound + BH-adjusted p",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "peers publish accuracy CIs + permutation p (nfl-book), bootstrap CI + sign-flip p (nfl-markets); Brier-skill ranking with game-cluster lower bound and multiplicity adjustment not implemented",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-38",
+   "requirement": "Add durable snapshot storage and alerts",
+   "category": "Governance & site",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-38",
+    "",
+    ""
+   ],
+   "gate": "owner decision on external store (SUG-R6)",
+   "clearing_number": "n=1 external (non-repo) durable store receiving captures, or documented decision to accept repo-only",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: snapshots live in nfl-readiness-register/snapshots/ (not rendered into the public site), manifest tracks freshness, capture workflow fails loudly on schema drift (alert = failed scheduled run); external durable store (outside repo) not wired",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-39",
+   "requirement": "Split the site into a public analysis layer and a private data layer",
+   "category": "Governance & site",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-39",
+    "",
+    ""
+   ],
+   "gate": "owner decision: accept repo-approximation or move raw store to private repo/storage",
+   "clearing_number": "n=1 recorded decision in data/decisions.json (DEC-R4)",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "public pages render derived counts/summaries + official links; row-level raw captures sit in nfl-readiness-register/snapshots/ and peer data/ dirs (repo is public, so 'private' is approximated by not rendering raw rows); terms-read review queued as SUG-R7",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-40",
+   "requirement": "Add a per-team view: starters out, replacements named, net injury count",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-40",
+    "nfl-req-review/data/requirements_2026_11_18.json#E18",
+    "nfl-consolidated/data/requirements.json#E18"
+   ],
+   "gate": "REQ-51 for replacements named; counts available now",
+   "clearing_number": "n=32/32 team rows with named replacements from an official source",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: per-team row counts + Out/Doubtful/Questionable counts from the live official report published on the snapshots page; 'replacements named' requires depth data (REQ-51) - left blank, not inferred",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Confirmed in the artifact: per_team_view.json holds 32 rows with starters_out, replacements_named and net_injury_count fields.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-41",
+   "requirement": "Add an announced-starter evidence field (not an inferred replacement)",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-41",
+    "nfl-req-review/data/requirements_2026_11_18.json#E19",
+    "nfl-consolidated/data/requirements.json#E19"
+   ],
+   "gate": "schema change: announced_starter{player, date, official_url} on availability rows",
+   "clearing_number": "n=100% of availability rows expose the field (blank where no announcement exists)",
+   "official_source": "https://www.nfl.com/news/drew-lock-no-injury-designation-seahawks-raiders",
+   "source_note": "",
+   "evidence_text": "THIS SESSION captured dated official starter announcements: 'Drew Lock ... will start for Seahawks vs. Raiders' (nfl.com news), 'Browns to start QB Deshaun Watson vs. Texans', 'Cardinals' Carson Beck to start vs. Rams', 'Kyle McCord in line for first start' - stored as evidence rows; the field is not yet in the strategy/availability schema",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-42",
+   "requirement": "Add an official depth-chart register with date and source per row",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-42",
+    "nfl-req-review/data/requirements_2026_11_18.json#E20",
+    "nfl-consolidated/data/requirements.json#E20"
+   ],
+   "gate": "REQ-51",
+   "clearing_number": "n=32 clubs x dated rows with source_url per row",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "register schema defined (club, unit, position, slot, members, as_of, source_url); no data until REQ-51 route is verified",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-43",
+   "requirement": "Calibrate what \"Questionable\" means empirically instead of using old percentages",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "not_started",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-43",
+    "nfl-req-review/data/requirements_2026_11_18.json#E21",
+    "nfl-consolidated/data/requirements.json#E21"
+   ],
+   "gate": "DR-G3",
+   "clearing_number": "n>=1,000 designation->inactive observations over >=3 seasons, play-rate 95% CI half-width <= 5 pp per designation",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "official report publishes no probabilities (vocabulary verified live this session: Out/Doubtful/Questionable + 'Not injury related' variants); no multi-season designation->inactive join exists in repo",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-44",
+   "requirement": "Interactive Offense vs. Defense Matchup Deficiency Matrix (1st–4th String)",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-44",
+    "nfl-req-review/data/requirements_2026_11_18.json#E22",
+    "nfl-consolidated/data/requirements.json#E22"
+   ],
+   "gate": "REQ-51 verified depth order for all 32 clubs",
+   "clearing_number": "n=32/32 clubs with verified depth before any matrix cell is computed",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "deficiency concept exists in peers (nfl-markets team deficiency index from third-party depth, flagged; nfl-command depth pages) but rests on unverified depth order; interactive matrix blocked behind REQ-51",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-45",
+   "requirement": "Flag stale depth rows against the official transactions log",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-45",
+    "nfl-req-review/data/requirements_2026_11_18.json#E23",
+    "nfl-consolidated/data/requirements.json#E23"
+   ],
+   "gate": "REQ-42 depth register + transactions join",
+   "clearing_number": "n=100% of depth rows cross-checked vs transactions; stale rows flagged with both links",
+   "official_source": "https://www.nfl.com/transactions/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: official November trade table captured (incl. Jacoby Brissett AZ->BAL 11/06) and official roundups confirm Lamar Jackson on IR ('Ravens officially place Lamar Jackson on injured reserve'); cross-check demonstrated on the live injury report: Daiyan Henley listed by LAC on 11/15 despite 11/10 trade LAC->DEN; automated flagging across stored depth rows not built (no depth register yet, REQ-42)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-46",
+   "requirement": "Point-in-Time Snapshot Ledger for Injuries, Depth Charts & Inactives",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-46",
+    "nfl-req-review/data/requirements_2026_11_18.json#E24",
+    "nfl-consolidated/data/requirements.json#E24"
+   ],
+   "gate": "DR-G2 cadence; source families 3/3",
+   "clearing_number": "n=3 source families captured weekly with hashes (report, reserve list, inactives)",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: ledger v1 live (append-only manifest, sha256, fetched_at UTC, delta computation between captures); covers injury report + reserve list; depth charts + inactives pending (REQ-29/30)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-47",
+   "requirement": "Populate the three missing Lions game-status designations",
+   "category": "Availability & injury data",
+   "kind": "fix",
+   "status_readiness_register": "resolved-at-source",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-47",
+    "",
+    ""
+   ],
+   "gate": "none - resolved upstream; monitor via ledger",
+   "clearing_number": "n=3/3 rows with non-blank game status on the official page (holds today)",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION re-read the official Week-10 report live: Kerby Joseph (S, Knee, DNP), Cade Mays (C, Ankle, DNP), D.J. Reed (CB, Hip, DNP) all carry Game Status = Out on the official page as of 2026-11-15 - no repo-side patch is needed or appropriate; the fix must come from the source page",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-48",
+   "requirement": "Re-capture and republish the Week 10 injury tables",
+   "category": "Availability & injury data",
+   "kind": "fix",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-48",
+    "nfl-req-review/data/requirements_2026_11_18.json#E26",
+    "nfl-consolidated/data/requirements.json#E26"
+   ],
+   "gate": "none - re-captured; keep it fresh via REQ-53",
+   "clearing_number": "n=347 rows counted 2026-11-15 (this capture); next capture scheduled Wed/Thu/Fri",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION re-captured the official Week-10 report live (2026-11-15): 28 team tables, 347 player rows, 0 no-injury sections; Seattle 15 rows, Cincinnati 9 rows - published with fetch timestamp, sha256 and per-team counts on the snapshots page; earlier 254/279 numbers were true at earlier capture times, which is exactly why REQ-53's cadence exists",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Round 2 cannot confirm the round-1 totals. The round-1 capture's own totals are 346 players over 28 clubs (RC-13); the round-1 findings text says 326 rows, 14 Out and 11 Questionable. Cincinnati is 9 in the capture; the brief says 4 (RC-14, unresolved). Downgraded from met.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-49",
+   "requirement": "Reject: deriving depth order from jersey number, experience or salary",
+   "category": "Availability & injury data",
+   "kind": "rejected-proposal",
+   "status_readiness_register": "rejected",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-49",
+    "nfl-req-review/data/requirements_2026_11_18.json#E27",
+    "nfl-consolidated/data/requirements.json#E27"
+   ],
+   "gate": "n/a - closed",
+   "clearing_number": "n/a",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "REJECTED - recorded here so it is not re-proposed; consistent with REQ-11 (playing time, not jersey order) and with peers' refusal to infer depth (nfl-book RD rows blank unless official text states depth)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-50",
+   "requirement": "Represent shared and empty depth slots faithfully",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-50",
+    "nfl-req-review/data/requirements_2026_11_18.json#E28",
+    "nfl-consolidated/data/requirements.json#E28"
+   ],
+   "gate": "REQ-51 + REQ-42",
+   "clearing_number": "n=100% of slots carry members[] (empty allowed) once depth capture starts",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "schema answer defined in this register: slot_members[] (0 members = empty slot) + co_rank1_count; needs the depth register (REQ-42) to carry it",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-51",
+   "requirement": "Resolve the depth-order source before building the backup-deficiency feature",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "blocked",
+   "status_consolidated": "blocked",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-51",
+    "nfl-req-review/data/requirements_2026_11_18.json#E13",
+    "nfl-consolidated/data/requirements.json#E13"
+   ],
+   "gate": "DEC-R2 owner/evaluator decision after 32-club verification pass",
+   "clearing_number": "n=32/32 clubs verified on one route, recorded in data/decisions.json",
+   "official_source": "https://operations.nfl.com/gameday/technology/nfl-next-gen-stats",
+   "source_note": "",
+   "evidence_text": "decision queued as DEC-R2 with route (a) then route (b) evaluation order; route (b) source verified to exist officially (Next Gen Stats participation / game-center snap counts, day-after) but per-club coverage is not verified for all 32 clubs",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-52",
+   "requirement": "Score injury-designation reliability before using it as a feature",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "not_started",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-52",
+    "nfl-req-review/data/requirements_2026_11_18.json#E14",
+    "nfl-consolidated/data/requirements.json#E14"
+   ],
+   "gate": "DR-G3 + archive ingestion",
+   "clearing_number": "n>=1,000 rows with play-rate CIs per designation published",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "historical designation archives exist upstream (nflverse/nfldata weekly reports - community-maintained, TRUSTED-NOT-OFFICIAL, flagged); no join exists in repo",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-53",
+   "requirement": "Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-53",
+    "",
+    ""
+   ],
+   "gate": "none - running (verify first scheduled run succeeds)",
+   "clearing_number": "n=3 captures/week; Questionable->Out deltas computed between same-week captures",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: .github/workflows/nfl-readiness-register.yml runs Wed/Thu/Fri 18:00 UTC (+ manual dispatch), appends hashed captures to the ledger; first ledger entry is this session's live capture",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [
+    "github/workflows/nfl-readiness-register.yml"
+   ],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-54",
+   "requirement": "Treat the injury report as a timestamped series, not a weekly snapshot",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-54",
+    "nfl-req-review/data/requirements_2026_11_18.json#E15",
+    "nfl-consolidated/data/requirements.json#E15"
+   ],
+   "gate": "DEC-R5 cadence decision (Wed/Thu/Fri vs Wed-Sat)",
+   "clearing_number": "n>=2 same-week captures with computed evolution table",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "ledger + deltas implemented this session; Wed/Thu/Fri cadence chosen per REQ-53 (the brief asks Wed-Fri in one requirement and Wed-to-kickoff here - recorded as a cadence decision, DEC-R5)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-55",
+   "requirement": "Use snap counts as the starter proxy when the depth chart is unavailable",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-55",
+    "",
+    ""
+   ],
+   "gate": "REQ-30 snap ingestion; leakage rule: proxy is post-hoc only",
+   "clearing_number": "n=1 season of official snap-share rows ingested with game links",
+   "official_source": "https://operations.nfl.com/gameday/technology/nfl-next-gen-stats",
+   "source_note": "",
+   "evidence_text": "official snap-count surface verified to exist (Next Gen Stats participation, day-after; game center) but not ingested; only usable as PROXY after the game - never as pre-kickoff availability",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-56",
+   "requirement": "Add a control baseline (random picks; favorites only) to every leaderboard run",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-56",
+    "nfl-req-review/data/requirements_2026_11_18.json#C05",
+    "nfl-consolidated/data/requirements.json#C05"
+   ],
+   "gate": "none",
+   "clearing_number": "n=2 baseline rows (seeded random; favorites-only) present in every leaderboard render",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book leaderboard carries coin-flip + record-baseline comparisons and a placebo test; a seeded random-picks baseline and favorites-only baseline as permanent leaderboard rows are not implemented",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "A random-pick and a favorites-only baseline exist (control_baseline.json). The favorites baseline uses current standings, i.e. information from after the games it predicts. The file discloses this; a control built on future information is not a valid control. Downgraded from met.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-57",
+   "requirement": "Stadium Roof/Surface & NWS Hourly Wind/Precipitation Overlay",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-57",
+    "nfl-req-review/data/requirements_2026_11_18.json#F03",
+    "nfl-consolidated/data/requirements.json#F03"
+   ],
+   "gate": "fixture-context table (REQ-14) + stadium roof-type register + NWS ingestion",
+   "clearing_number": "n=1 week of outdoor/retractable-roof games with NWS hourly series + roof designation joined pre-kickoff",
+   "official_source": "https://operations.nfl.com/the-rules/",
+   "source_note": "",
+   "evidence_text": "official facts verified this session: NFL Rulebook (Rule 1, Section 2, Article 1(o)) requires the roof decision 90 minutes before kickoff, with mandatory closure triggers (precipitation/lightning in vicinity, <40°F, gusts >40 mph) and no reopening; NWS provides official hourly forecast grids via api.weather.gov; no overlay built",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-58",
+   "requirement": "Two-Stage Skill Leaderboard (Proper-Score Qualification -> Prospective CLV/ROI Escrow)",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-58",
+    "nfl-req-review/data/requirements_2026_11_18.json#C04",
+    "nfl-consolidated/data/requirements.json#C04"
+   ],
+   "gate": "DR-G1 for stage 2; REQ-37 for stage 1",
+   "clearing_number": "stage 1: n>=100 forecasts per strategy with Brier skill CI; stage 2: n=1 price archive with matched open+close",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "stage-1 machinery partially exists (proper-score skill with CIs in peers); stage 2 (CLV escrow) is hard-blocked by DR-G1: CLV requires verified open AND close prices for the same market, which no official source provides",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-59",
+   "requirement": "Vig-Free Market Consensus vs. Originated Fair-Line Decomposition View",
+   "category": "Market data",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "blocked",
+   "status_consolidated": "blocked",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-59",
+    "nfl-req-review/data/requirements_2026_11_18.json#F06",
+    "nfl-consolidated/data/requirements.json#F06"
+   ],
+   "gate": "DR-G1 + consensus source decision (DEC-R3)",
+   "clearing_number": "n>=2 book-derived prices per market to de-vig, or n=1 recorded decision to abandon the view",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "no consensus-line source exists officially; vig-free de-vig method (equal-margin) is defined in peers' methodology but cannot be computed without a multi-book consensus series",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-60",
+   "requirement": "Publish a weekly 'what changed' diff instead of a static snapshot",
+   "category": "Governance & site",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-60",
+    "nfl-req-review/data/requirements_2026_11_18.json#F07",
+    "nfl-consolidated/data/requirements.json#F07"
+   ],
+   "gate": "weekly origination cadence (REQ-18)",
+   "clearing_number": "n=1 weekly diff render covering availability + rank + rating columns",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "availability diff implemented this session (designation deltas between capture pairs, rendered on the snapshots page); rank/rating diff requires a weekly model rerun cadence (not started)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-61",
+   "requirement": "Add a drift alarm to every scraper",
+   "category": "Governance & site",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-61",
+    "",
+    ""
+   ],
+   "gate": "none - running in the scheduled workflow",
+   "clearing_number": "n=1 successful scheduled run + n=1 loud-failure demonstration (drift path coded)",
+   "official_source": "https://www.nfl.com/injuries/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: nfl-readiness-register/capture/snapshot_official_pages.py pins required fields per source (report must contain 32 club tables' markers, date headers, Game Status vocabulary; reserve list must contain table markers) and exits non-zero on drift; peer sites carry their own verifiers",
+   "evidence_paths_exact": [
+    "nfl-readiness-register/capture/snapshot_official_pages.py"
+   ],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-62",
+   "requirement": "Capture the reserve list so 'not listed' never means 'available'",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-62",
+    "nfl-req-review/data/requirements_2026_11_18.json#E17",
+    "nfl-consolidated/data/requirements.json#E17"
+   ],
+   "gate": "none - running",
+   "clearing_number": "n=1 reserve-list capture per report capture, joined so absent-from-report players resolve to reserve status",
+   "official_source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: workflow captures nfl.com/transactions/league/reserve-list monthly ledger on every run; Willis case verified from the official page capture: 'Dolphins place QB Malik Willis (groin) on injured reserve; Kyle McCord in line for first start' (nfl.com news, Nov 11 roundup)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-63",
+   "requirement": "Reject: ranking strategies by season-long ROI",
+   "category": "Strategy & leaderboard",
+   "kind": "rejected-proposal",
+   "status_readiness_register": "rejected",
+   "status_round2_review": "met",
+   "status_consolidated": "met",
+   "statuses_agree": false,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-63",
+    "nfl-req-review/data/requirements_2026_11_18.json#C08",
+    "nfl-consolidated/data/requirements.json#C08"
+   ],
+   "gate": "n/a - closed",
+   "clearing_number": "n/a",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "REJECTED - consistent with REQ-05 (staking never masks signal) and REQ-37 (proper scores over raw returns); season-long ROI remains displayed but never ranks",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-64",
+   "requirement": "Archive weekly injury reports for past seasons (for Q06)",
+   "category": "Availability & injury data",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-64",
+    "",
+    ""
+   ],
+   "gate": "archive ingestion + labelling as TRUSTED-NOT-OFFICIAL",
+   "clearing_number": "n>=3 seasons of weekly designation rows ingested with provenance hashes",
+   "official_source": "https://github.com/nflverse/nfldata",
+   "source_note": "",
+   "evidence_text": "upstream archive identified: nflverse/nfldata publishes historical weekly injury report data (community-maintained from official reports - TRUSTED-NOT-OFFICIAL, flagged); nfl-markets already fetches nfldata for games/lines; ingestion of the injuries tables not done",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-65",
+   "requirement": "Pre-register each strategy (definition frozen before results are seen)",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-65",
+    "",
+    ""
+   ],
+   "gate": "none - standing rule",
+   "clearing_number": "n=100% of strategies carry a pre-registration commit hash",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "nfl-book pre-registration note in gates.json ('Committed BEFORE engine/backtest.py is first run - see git history'); strategies carry frozen versions; COORDINATION.md records pre-registration discipline across sessions",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "engine/backtest.py",
+     "found_at": [
+      "nfl-book/engine/backtest.py"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-66",
+   "requirement": "2026 Kickoff & Declared Onside-Kick Regime Priors Filter",
+   "category": "Origination & model",
+   "kind": "requirement",
+   "status_readiness_register": "open",
+   "status_round2_review": "not_started",
+   "status_consolidated": "not_started",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-66",
+    "nfl-req-review/data/requirements_2026_11_18.json#F04",
+    "nfl-consolidated/data/requirements.json#F04"
+   ],
+   "gate": "model substrate + 2026 special-teams rule summary verified from the rulebook",
+   "clearing_number": "n=1 documented prior set derived from the official 2026 rule text",
+   "official_source": "https://operations.nfl.com/the-rules/",
+   "source_note": "",
+   "evidence_text": "2026 rule changes affect kickoff/onside mechanics; official rule text is the source (operations.nfl.com rulebook); no model layer exists to filter - blocked behind the model substrate",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-67",
+   "requirement": "Freeze a rule before it sees data (pre-registration)",
+   "category": "Strategy & leaderboard",
+   "kind": "requirement",
+   "status_readiness_register": "implemented",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-67",
+    "",
+    ""
+   ],
+   "gate": "none - standing rule",
+   "clearing_number": "n=100% of new rules carry registration commit hashes",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "standing discipline across peer sessions (nfl-book G-gates committed before evaluation; nfl-markets pre-registrations); THIS SESSION extends it to the snapshot cadence (workflow committed before first scheduled run)",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "REQ-68",
+   "requirement": "Split data into train, validation and final holdout seasons",
+   "category": "Results & backtesting",
+   "kind": "requirement",
+   "status_readiness_register": "partial",
+   "status_round2_review": "partial",
+   "status_consolidated": "partial",
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#REQ-68",
+    "nfl-req-review/data/requirements_2026_11_18.json#A08",
+    "nfl-consolidated/data/requirements.json#A08"
+   ],
+   "gate": "DR-G5 freeze",
+   "clearing_number": "n=1 split config committed (e.g., train 2011-2022, validation 2023-2024, holdout 2025-2026) before next evaluation",
+   "official_source": "https://www.nfl.com/schedules/",
+   "source_note": "",
+   "evidence_text": "peers use walk-forward + a 2026 holdout (nfl-markets); an explicit frozen train/validation/holdout config is not published; DR-G5 defines it",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "Retained from round 1 (2026-11-17); not re-read in round 2.",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "PROC-01",
+   "requirement": "Review the repo. Work line by line verifying from official verified trusted sources, and provide links for manual review. Flag any irregularities for review. No hallucinations.",
+   "category": "Governance & site",
+   "kind": "process",
+   "status_readiness_register": "process",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#PROC-01",
+    "",
+    ""
+   ],
+   "gate": "n/a",
+   "clearing_number": "n/a",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "THIS SESSION: line-by-line review results on pages/repo-review.html; irregularities on pages/flagged.html; every table row carries an official source link",
+   "evidence_paths_exact": [
+    "pages/flagged.html"
+   ],
+   "evidence_paths_resolved_elsewhere": [
+    {
+     "quoted": "pages/repo-review.html",
+     "found_at": [
+      "nfl-book/pages/repo-review.html"
+     ]
+    }
+   ],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "PROC-02",
+   "requirement": "Create a github page live site for this repo with a clean landing page and subpages organized by category... all entries and findings in a simple, easy to read table format",
+   "category": "Governance & site",
+   "kind": "process",
+   "status_readiness_register": "process",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#PROC-02",
+    "",
+    ""
+   ],
+   "gate": "n/a",
+   "clearing_number": "n/a",
+   "official_source": "https://pages.github.com/",
+   "source_note": "",
+   "evidence_text": "GitHub Pages serves from main (legacy, root); THIS SESSION adds the nfl-readiness workspace to the root nav via the generator; site remains static, JS-free tables",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "PROC-03",
+   "requirement": "Verify line by line. Every table row must have a source link to an official site. If a value can't be confirmed from an official source, leave it blank and flag it as unverified. Never infer or fill in values.",
+   "category": "Governance & site",
+   "kind": "process",
+   "status_readiness_register": "process",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#PROC-03",
+    "",
+    ""
+   ],
+   "gate": "n/a",
+   "clearing_number": "n/a",
+   "official_source": "https://www.nfl.com/",
+   "source_note": "",
+   "evidence_text": "enforced by nfl-readiness-register/verify.py (row-level source check, blank-value flagging) run before every publish; peer verifiers check their own namespaces",
+   "evidence_paths_exact": [
+    "nfl-readiness-register/verify.py"
+   ],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "PROC-04",
+   "requirement": "Read COORDINATION.md... claim a task by writing your session ID and file scope there, then commit and push that claim immediately...",
+   "category": "Governance & site",
+   "kind": "process",
+   "status_readiness_register": "process",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#PROC-04",
+    "",
+    ""
+   ],
+   "gate": "n/a",
+   "clearing_number": "n/a",
+   "official_source": "https://github.com/sassnarep3-star/Own4/blob/main/COORDINATION.md",
+   "source_note": "",
+   "evidence_text": "claim committed and pushed 2026-11-15 before any implementation (commit cf8b986); branch arena/63ebae0e-own4; shared files additive/append-only only",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  },
+  {
+   "id": "PROC-05",
+   "requirement": "Create a pull request... merge without waiting for approval... confirm GitHub Pages deploys... record the PR link and merge result in COORDINATION.md",
+   "category": "Governance & site",
+   "kind": "process",
+   "status_readiness_register": "process",
+   "status_round2_review": null,
+   "status_consolidated": null,
+   "statuses_agree": true,
+   "status_sources": [
+    "nfl-readiness-register/data/requirements.json#PROC-05",
+    "",
+    ""
+   ],
+   "gate": "n/a",
+   "clearing_number": "n/a",
+   "official_source": "https://github.com/sassnarep3-star/Own4/pulls",
+   "source_note": "",
+   "evidence_text": "executed at end of session; recorded in the completion record below",
+   "evidence_paths_exact": [],
+   "evidence_paths_resolved_elsewhere": [],
+   "evidence_paths_unresolved": [],
+   "round2_evidence": "",
+   "repo_files": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json"
+   ]
+  }
+ ]
+}

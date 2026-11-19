@@ -104,6 +104,24 @@ NAV = [
         ("index.html", "Dashboard", "dash"),
         ("verified/executive-summary.html", "Executive summary", "summary"),
     ]),
+    # Added 2026-11-19 by session arena/1e2776fd-own4 (additive; superset-only edit).
+    # nfl-desk is the single front door over the NFL workspaces: one readiness register with
+    # every peer register's answer shown, the questions/missing-information register, the
+    # suggestions queue, the workspace census and the flagged page. The groups below are
+    # untouched: this adds a group, it does not remove or reorder one.
+    ("NFL Desk · front door (2026-11-19)", [
+        ("nfl-desk/index.html", "Dashboard — start here", "legacy"),
+        ("nfl-desk/pages/executive-summary.html", "Executive summary", "legacy"),
+        ("nfl-desk/pages/requirements.html", "Requirements &amp; gates (73 lines)", "legacy"),
+        ("nfl-desk/pages/questions.html", "Questions &rarr; answers (18)", "legacy"),
+        ("nfl-desk/pages/suggestions.html", "Suggestions (10, undecided)", "legacy"),
+        ("nfl-desk/pages/availability.html", "Availability &amp; depth", "legacy"),
+        ("nfl-desk/pages/corpus.html", "Corpus &amp; standings", "legacy"),
+        ("nfl-desk/pages/census.html", "Workspace census", "legacy"),
+        ("nfl-desk/pages/flagged.html", "⚑ NFL Desk — flagged for review (15)", "legacy"),
+        ("nfl-desk/pages/sources.html", "Official sources read", "legacy"),
+        ("nfl-desk/pages/verify.html", "Verification", "legacy"),
+    ]),
     # Added 2026-11-15 by session arena/e0ed20d1-own4 (additive; superset-only edit).
     # The NFL Decision Desk is the workspace that publishes a decision-readiness table for
     # every requirement line, so it is surfaced ahead of the 21 older NFL namespaces. The

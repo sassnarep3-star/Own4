@@ -1,0 +1,113 @@
+{
+ "dataset": "nfl_desk_official_reads",
+ "title": "Official pages read by this session, with the date and what each read actually showed",
+ "read_utc": "2026-11-19",
+ "session": "arena/1e2776fd-own4",
+ "route": "The sandbox has no direct HTTPS egress to nfl.com (curl fails at TLS connect). Pages were read through the session's page-read tool, which returns the rendered text of the page; the parsed or quoted parts are stored under nfl-desk/evidence/reads/ with a sha256 in data/census.json or in the file itself.",
+ "policy": [
+  "A row exists here only if the page was actually opened in this session.",
+  "Quoted text is copied from the read; nothing is paraphrased into a number.",
+  "A page that could not be read is recorded with status 'not read', not left out."
+ ],
+ "reads": [
+  {
+   "id": "OR-01",
+   "url": "https://www.nfl.com/injuries/",
+   "page_title": "Official Latest NFL Injury Report for Players - Week 11 of the 2026 Season | NFL.com",
+   "status": "read",
+   "what_it_showed": "The live Week 11 injury report, grouped by game and then by club. Only the Thursday game (Colts at Texans) and the first Sunday windows carried game-status designations; most rows show a practice status with a blank Game Status cell.",
+   "counted_from_this_read": null,
+   "counted_from_stored_capture": {
+    "file": "nfl-desk/data/injuries_2026-11-18_parsed.json",
+    "why": "The same page was captured with its raw HTML and sha256 by the nfl-readiness-register workflow at 2026-11-18T23:49:17Z. Counting from that stored, hashed copy is reproducible; counting from a live render is not. The capture's own hash is checked before its counts are used.",
+    "club_tables": 23,
+    "player_rows": 242,
+    "rows_with_game_status": 16,
+    "rows_blank_game_status": 226,
+    "out": 9,
+    "questionable": 7
+   },
+   "corroborated_rows": [
+    {"club": "IND", "player": "Will Mallory", "position": "TE", "injury": "Hamstring", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "IND", "player": "Bernhard Raimann", "position": "T", "injury": "Concussion", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "IND", "player": "Jerry Tillery", "position": "DT", "injury": "Calf", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "IND", "player": "Jalen Travis", "position": "T", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "IND", "player": "Charvarius Ward", "position": "CB", "injury": "Knee", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "IND", "player": "Sauce Gardner", "position": "CB", "injury": "Calf", "practice": "Did Not Participate In Practice", "game_status": "Questionable"},
+    {"club": "HOU", "player": "Marvin Harrison Jr.", "position": "WR", "injury": "Hamstring", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "HOU", "player": "Danielle Hunter", "position": "DE", "injury": "Hamstring", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "HOU", "player": "Brevin Jordan", "position": "TE", "injury": "Foot, Illness", "practice": "Did Not Participate In Practice", "game_status": "Out"},
+    {"club": "HOU", "player": "Woody Marks", "position": "RB", "injury": "Concussion", "practice": "Did Not Participate In Practice", "game_status": "Out"}
+   ],
+   "limit": "One read of one week. It says nothing about how designations evolve, and it cannot reconcile the brief's '6 of 254' figure, whose copy and date are not in the repository."
+  },
+  {
+   "id": "OR-02",
+   "url": "https://www.nfl.com/standings/",
+   "page_title": "2026 NFL Division Standings",
+   "status": "read",
+   "what_it_showed": "All 32 clubs with W/L/T, pct, PF, PA, net points, division and conference records, streak and last five. Two NFC clubs carry a tie (NYG 5-3-1, WAS 3-5-1).",
+   "counted_from_this_read": {
+    "file": "nfl-desk/data/standings_2026-11-19.json",
+    "parser": "nfl-desk/engine/parse_standings.py",
+    "raw": "nfl-desk/evidence/reads/standings_2026-11-19.txt",
+    "clubs": 32,
+    "team_games_played": 300,
+    "implied_league_games_complete": 150,
+    "clubs_with_nine_games": 20
+   },
+   "limit": "Division labels are assigned by this project in the page's own print order (four rows per division block); the page itself does not repeat the division name on every row. The page's home/road and split-record columns are not transcribed."
+  },
+  {
+   "id": "OR-03",
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "page_title": "NFL Week 11 Schedule 2026: Games, Times, Matchups & Tickets",
+   "status": "read",
+   "what_it_showed": "The Week 11 slate: one Thursday game (Colts at Texans, Nov 19, 8:15 PM, Prime Video), a Sunday morning/afternoon block, the international game in Mexico City (Vikings at 49ers, Nov 22, 8:20 PM, NBC), and Monday Night Football (Bengals at Commanders, Nov 23, 8:15 PM, ESPN). The page also prints each club's current record beside the fixture, a 'Teams on Bye' block, and the league's Week 16-18 flexible-scheduling note.",
+   "counted_from_this_read": {
+    "fixtures_named_in_render": 13,
+    "bye_clubs_named": 6,
+    "bye_clubs": ["ATL", "CLE", "GB", "LA", "NE", "SEA"]
+   },
+   "limit": "The rendered read is long and paginated; the fixture list above is the set of game links present in the three read chunks. Bye clubs are the six the page lists under 'Teams on Bye'."
+  },
+  {
+   "id": "OR-04",
+   "url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "page_title": "Indianapolis Colts at Houston Texans 2026 REG 11 - Game Center",
+   "status": "read",
+   "what_it_showed": "The game centre for the Week 11 opener. It publishes venue facts for the fixture: Location HOUSTON, TX; Stadium RELIANT STADIUM. It lists the first four Out designations per club with practice status, and season-to-date team stats for both clubs (points per game, yards per game, time of possession, defensive sacks, interceptions, turnover differential).",
+   "counted_from_this_read": null,
+   "corroborated_rows": [
+    {"club": "IND", "player": "W. Mallory", "position": "TE #86", "designation": "O", "injury": "Hamstring", "practice": "Did not participate"},
+    {"club": "IND", "player": "B. Raimann", "position": "OL #79", "designation": "O", "injury": "Concussion", "practice": "Did not participate"},
+    {"club": "IND", "player": "J. Tillery", "position": "DL #94", "designation": "O", "injury": "Calf", "practice": "Did not participate"},
+    {"club": "IND", "player": "J. Travis", "position": "OL #75", "designation": "O", "injury": "Knee", "practice": "Did not participate"},
+    {"club": "HOU", "player": "M. Harrison", "position": "WR", "designation": "O", "injury": "Hamstring", "practice": "Did not participate"},
+    {"club": "HOU", "player": "D. Hunter", "position": "DL #55", "designation": "O", "injury": "Hamstring", "practice": "Did not participate"},
+    {"club": "HOU", "player": "B. Jordan", "position": "TE #9", "designation": "O", "injury": "Illness", "practice": "Did not participate"},
+    {"club": "HOU", "player": "W. Marks", "position": "RB #4", "designation": "O", "injury": "Concussion", "practice": "Did not participate"}
+   ],
+   "venue_facts": {"city": "HOUSTON, TX", "stadium": "RELIANT STADIUM", "kickoff_local": "Nov 19, 8:15 PM", "network": "Prime Video"},
+   "limit": "The game centre prints only four designations per club ('See All' hides the rest). Stadium name is a venue fact; the page publishes no roof or surface designation, so pitch conditions stay blank."
+  },
+  {
+   "id": "OR-05",
+   "url": "https://operations.nfl.com/the-rules/",
+   "page_title": "",
+   "status": "not read",
+   "what_it_showed": "No body was returned to the read tool. Two peer register rows (REQ-57, REQ-66) cite this page, so those citations remain unverified and are published as such.",
+   "counted_from_this_read": null,
+   "limit": "A failed read is recorded as a failed read."
+  },
+  {
+   "id": "OR-06",
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "page_title": "reserve list capture",
+   "status": "stored capture only, not re-read this session",
+   "what_it_showed": "A 247,942-byte capture exists in nfl-readiness-register/snapshots/2026-11-18/reserve_list-2026-11-18T234918Z.html with its sha256 in that workflow's manifest. This session did not open the live page, so it makes no claim about its current content.",
+   "counted_from_this_read": null,
+   "limit": "Cited as an artifact, not as a read."
+  }
+ ]
+}
