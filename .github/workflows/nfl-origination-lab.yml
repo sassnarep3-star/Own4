@@ -32,6 +32,15 @@ jobs:
       # Print the diff first so a failure names the file and value instead of just refused.
       - name: Rebuild must be byte-identical
         run: |
-          git diff --stat -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
-          git diff -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html | head -60
-          git diff --exit-code -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
+          git diff --stat -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html || true
+          git diff -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html > /tmp/repro.diff || true
+          head -80 /tmp/repro.diff
+          python3 -c "import sys;print('PYTHON',sys.version)"
+          test ! -s /tmp/repro.diff
+      # upload the diff either way, so the exact unstable values are recoverable
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reproducibility-diff
+          path: /tmp/repro.diff
+          if-no-files-found: ignore
