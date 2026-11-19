@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations &amp; controls — NFL daily decision desk</title>
+<link rel="stylesheet" href="assets/desk.css">
+</head><body>
+<header class="top"><div class="brand"><a href="index.html">NFL daily decision desk</a>
+<span class="asof">reads of 2026-11-19 · session arena-92c458e6-own4</span></div>
+<nav class="nav"><a  href="index.html">Desk</a><a  href="readiness.html">Decision readiness</a><a  href="availability.html">Availability</a><a  href="delta.html">What changed</a><a  href="results.html">Results &amp; corpus</a><a class="on" href="statistics.html">Correlations &amp; controls</a><a  href="origination.html">Own lines (shadow)</a><a  href="questions.html">Questions</a><a  href="suggestions.html">Suggestions</a><a  href="repo-review.html">Repo review</a><a  href="flagged.html">Flagged for review</a><a  href="sources.html">Sources</a><a  href="cross-check.html">Cross-session check</a><a  href="executive-summary.html">Executive summary</a></nav></header>
+<main>
+<h1>Correlations &amp; controls</h1>
+<p class='sub'>measured on the 150-game 2026 corpus, n published on every value</p>
+
+
+<section class="card"><h2>Rules on this page</h2><p>Correlations are computed only from numbers that come
+from an official source or a repository row that itself carries an official link, and every value prints its
+n. The recipe is fixed before it runs: Pearson r, a Fisher-z 95% interval (published as a floor on width,
+because games in a week are not fully independent), and a two-sided permutation test with 20,000 shuffles at
+seed 20261119. A relationship that cannot be measured is listed with n=0 and the reason, so the reader sees
+the hole rather than a smoothing of it.</p></section>
+
+<section class="card"><h2>Computed</h2><table class="grid">
+<thead><tr><th>id</th><th>pair</th><th>definition</th><th>n</th><th>r</th><th>95% CI (Fisher z)</th><th>permutation p</th><th>why it matters</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>K01</td><td>game margin ~ game total</td><td>(home - away) points vs (home + away) points, one pair per played game</td><td>150</td><td>-0.1405</td><td>[-0.2941, 0.0202]</td><td>0.086296</td><td>this is the dependence that makes a same-game parlay of side and total invalid when marginals are multiplied; it is measured, never assumed</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>K02</td><td>away points ~ home points</td><td>one pair per played game</td><td>150</td><td>0.0486</td><td>[-0.1125, 0.2073]</td><td>0.557172</td><td>the dependence term for any two-team combination</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>K03</td><td>rest differential (home - away, days) ~ home margin</td><td>rest computed only from the published dates of consecutive fixtures in the corpus</td><td>134</td><td>0.3256</td><td>[0.1651, 0.4693]</td><td>0.00025</td><td>fixture context is a schedule fact, so it is the cheapest legitimate feature to test</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>K04</td><td>previous-game margin (team) ~ next-game margin (team)</td><td>team-level persistence across that club's consecutive games</td><td>268</td><td>0.1359</td><td>[0.0163, 0.2516]</td><td>0.026349</td><td>how much of a rating signal is real persistence rather than noise</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>K05</td><td>practice designation level ~ club margin</td><td>not measured - see the reason column</td><td>0</td><td><span class="blank" title="the repository holds dated reports for 2 weeks (2026-11-15 Week 10, 2026-11-18/19 Week 11). With 2 report-weeks there is no cross-sectional sample of levels, and the value would be invented. n=0 is published instead.">—</span></td><td>—</td><td>—</td><td>the brief requires the availability signal to be a surprise, not a level; a level correlation would need one dated report per club-week</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr>
+<tr><td>K06</td><td>model residual ~ market residual (CLV)</td><td>not measured - see the reason column</td><td>0</td><td><span class="blank" title="no official or licensed opening/closing price exists anywhere in this repository or on any NFL page; a CLV correlation cannot be computed without fabricating prices">—</span></td><td>—</td><td>—</td><td>closing line value is the luck-free market score</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+<tr><td>K07</td><td>snap-share of a replaced starter ~ game total adjustment</td><td>not measured - see the reason column</td><td>0</td><td><span class="blank" title="no official snap-count source has been located and licensed; replacement depth is therefore not modelled - see the suggestion that decides this before any feature is built">—</span></td><td>—</td><td>—</td><td>the depth-of-replacement measure the brief asks for</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Deliberately blank</h2><table class="grid">
+<thead><tr><th>id</th><th>pair</th><th>why the value is blank</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>K05</td><td>practice designation level ~ club margin</td><td>the repository holds dated reports for 2 weeks (2026-11-15 Week 10, 2026-11-18/19 Week 11). With 2 report-weeks there is no cross-sectional sample of levels, and the value would be invented. n=0 is published instead.</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr>
+<tr><td>K06</td><td>model residual ~ market residual (CLV)</td><td>no official or licensed opening/closing price exists anywhere in this repository or on any NFL page; a CLV correlation cannot be computed without fabricating prices</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+<tr><td>K07</td><td>snap-share of a replaced starter ~ game total adjustment</td><td>no official snap-count source has been located and licensed; replacement depth is therefore not modelled - see the suggestion that decides this before any feature is built</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Control baselines — the luck yardsticks</h2>
+<p class="note">The always-home control sits <em>below</em> a coin flip this season. Any page that reports a
+home-leaning model as a success is reporting a negative-skill signal, and that is precisely why the brief
+asks for controls next to every leaderboard run.</p><table class="grid">
+<thead><tr><th>control</th><th>n</th><th>hit rate</th><th>what it means</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>always home</td><td>150</td><td>0.4733</td><td>home 71, away 78, ties 1 in the 2026 corpus</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>coin flip</td><td>150</td><td>0.5</td><td>the null a side pick must beat after the home baseline is taken out</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+<tr><td>favorites only</td><td>0</td><td><span class="blank" title="blank: a favorite is a market object and no market price is available">—</span></td><td>blank: a favorite is a market object and no market price is available</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+<tr><td>week 10 home record (freshness check)</td><td>14</td><td>0.2857</td><td>4 of 14 Week 10 games won at home (Munich counted as published, home column = DET)</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-10" rel="noopener">source</a></td></tr>
+</tbody></table></section>
+
+</main>
+<footer class="foot"><p><strong>Research record, not wagering advice.</strong> No price feed is licensed, so no ROI, CLV or residual is claimed anywhere on this site. If gambling stops being analysis: National Problem Gambling Helpline 1-800-697-3738 (<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>).</p><p>Rendered by <a href="https://github.com/sassnarep3-star/Own4/blob/main/engine/build.py">nfl-daily-desk/engine/build.py</a> from <a href="https://github.com/sassnarep3-star/Own4/blob/main/data">nfl-daily-desk/data</a>. Rebuild is byte-identical.</p></footer>
+</body></html>

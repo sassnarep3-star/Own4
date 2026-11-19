@@ -1,0 +1,119 @@
+{
+ "dataset": "nfl_daily_desk_sources",
+ "title": "Every source this desk used, with what it supports",
+ "built_utc": "2026-11-19T07:45:00Z",
+ "policy": "official NFL pages for values; repository artifacts for inherited numbers, each with its own read date; a value with neither is blank",
+ "official": [
+  {
+   "url": "https://www.nfl.com/injuries/",
+   "title": "Official NFL injury report, Week 11 of the 2026 season",
+   "read_utc": "2026-11-19",
+   "method": "platform-rendered read, 7 chunks, transcribed to captures/2026-11-19/injury-report-week11.md",
+   "supports": "the availability table, the delta panel, the designation coverage numbers, the dated news headlines used as announced-starter evidence"
+  },
+  {
+   "url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "title": "2026 NFL reserve list, November",
+   "read_utc": "2026-11-19",
+   "method": "platform-rendered read, 2 chunks, transcribed to captures/2026-11-19/reserve-list-november-2026.md",
+   "supports": "the 25-row November IR ledger, the per-club counts, the 'not listed is not available' caveat"
+  },
+  {
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "title": "NFL Week 10 schedule 2026 (all games FINAL)",
+   "read_utc": "2026-11-19",
+   "method": "platform-rendered read, 2 chunks, transcribed to captures/2026-11-19/week10-finals.md",
+   "supports": "all 14 Week 10 finals, the byes, the dated schedule-announcement text, the corpus extension"
+  },
+  {
+   "url": "https://www.nfl.com/standings/league/2026/REG",
+   "title": "2026 NFL league standings (regular season)",
+   "read_utc": "2026-11-19",
+   "method": "platform-rendered read, 2 chunks, transcribed to captures/2026-11-19/standings-league-2026-reg.md",
+   "supports": "the 32 standings rows, the games-played identity (150), the points identity (6,923), the shadow record's input verification"
+  },
+  {
+   "url": "https://www.nfl.com/schedules/2026/by-week/week-11",
+   "title": "NFL Week 11 schedule 2026",
+   "read_utc": "2026-11-19",
+   "method": "read as the slate identity for the Week 11 record (fixtures/kickoffs also carried on the report page)",
+   "supports": "the 13-fixture slate, kickoff times, the grading queue's first due time"
+  },
+  {
+   "url": "https://www.nfl.com/legal/flexible-scheduling-procedures",
+   "title": "NFL flexible scheduling procedures",
+   "read_utc": "2026-11-19",
+   "method": "linked from the official week page; not re-read today",
+   "supports": "the dated-announcement requirement's legal source"
+  },
+  {
+   "url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "title": "Colts at Texans game centre (Week 11)",
+   "read_utc": "2026-11-19",
+   "method": "used as the per-game identity link for the Thursday fixture",
+   "supports": "the per-fixture source URL in the shadow record"
+  },
+  {
+   "url": "https://www.nfl.com/injuries/league/2024/reg1",
+   "title": "Per-week injury report URL family (2024 reg1)",
+   "read_utc": "2026-11-19",
+   "method": "not fetched by this session - named as the probe target in Q-03/S-04",
+   "supports": "the historical-archive question that gates designation calibration"
+  }
+ ],
+ "repository": [
+  {
+   "path": "nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html",
+   "sha256": "e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b",
+   "bytes": 371313,
+   "used_for": "the earlier read of the same report, parsed from raw bytes - the authority the day's transcription is reconciled against"
+  },
+  {
+   "path": "nfl-readiness-register/snapshots/2026-11-18/reserve_list-2026-11-18T234918Z.html",
+   "sha256": "afb62a8311e810419a8e6e2cf0bfc907df80b9c131cbac9a448af987d77ed1f5",
+   "bytes": 247942,
+   "used_for": "the earlier reserve-list read for the IR delta"
+  },
+  {
+   "path": "nfl-live-board/data/corpus_rows_only.json",
+   "used_for": "the inherited 149-game 2026 corpus each of whose rows carries its own game-centre URL"
+  },
+  {
+   "path": "nfl-readiness/data/shadow_week11.json",
+   "used_for": "cohort 1 of the shadow record (5 fixtures) and its 8 withheld fixtures with reasons"
+  },
+  {
+   "path": "nfl-readiness/prereg/SHADOW_BASELINE_v1.md",
+   "used_for": "the frozen rule text, re-implemented and reproduced 5 of 5 by this session"
+  },
+  {
+   "path": "nfl-live-board/data/origination_week11.json",
+   "used_for": "the second registered Week 11 record (13 fixtures, three stages, blank market columns)"
+  },
+  {
+   "path": "nfl-markets/data/price_snapshots.csv",
+   "used_for": "the 12,573-row price store, read to establish exactly how much of it is filled and from where (F-DSK-11)"
+  },
+  {
+   "path": "nfl-markets/data/results_feed.csv",
+   "used_for": "the 4,056-game 2011-2026 feed, and the 137-game 2026 count that contradicts the standings identity (F-DSK-08)"
+  },
+  {
+   "path": "nfl-depth-sweep/data/readiness.json",
+   "used_for": "the per-club depth-route state (31 of 32 verified, HOU image-only) and the roster/IR sweep"
+  },
+  {
+   "path": "nfl-depth-sweep/data/parsed/",
+   "used_for": "the parsed depth transcripts re-counted by this session for the shared/empty slot finding"
+  },
+  {
+   "path": "nfl-book/data/price_snapshots.json",
+   "used_for": "the 39-row store of OUR originated open/close numbers with the market columns null by policy"
+  },
+  {
+   "path": "nfl-availability-desk/data/price_snapshots.json",
+   "used_for": "a 0-row store whose why_empty field states the same conclusion independently"
+  }
+ ],
+ "note": "no source outside nfl.com, the repository's own dated artifacts, and github.com was used to produce a number on this site"
+}

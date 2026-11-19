@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-session reconciliation — NFL daily decision desk</title>
+<link rel="stylesheet" href="assets/desk.css">
+</head><body>
+<header class="top"><div class="brand"><a href="index.html">NFL daily decision desk</a>
+<span class="asof">reads of 2026-11-19 · session arena-92c458e6-own4</span></div>
+<nav class="nav"><a  href="index.html">Desk</a><a  href="readiness.html">Decision readiness</a><a  href="availability.html">Availability</a><a  href="delta.html">What changed</a><a  href="results.html">Results &amp; corpus</a><a  href="statistics.html">Correlations &amp; controls</a><a  href="origination.html">Own lines (shadow)</a><a  href="questions.html">Questions</a><a  href="suggestions.html">Suggestions</a><a  href="repo-review.html">Repo review</a><a  href="flagged.html">Flagged for review</a><a  href="sources.html">Sources</a><a class="on" href="cross-check.html">Cross-session check</a><a  href="executive-summary.html">Executive summary</a></nav></header>
+<main>
+<h1>Cross-session reconciliation</h1>
+<p class='sub'>two independent 2026-11-19 reads of the same official pages, joined field by field</p>
+
+
+<section class="card"><h2>Why this page exists</h2><p>A number produced by one reader is a claim. On
+2026-11-19 a second session (arena/6c8bbde6-own4) read the same official pages and published its own artifact set in
+<code>nfl-verify-2026-11-19/</code>. This page joins the two sets field by field with no manual entry, so agreement becomes
+corroboration and disagreement becomes a finding — with both files named in either case.</p>
+<p class="note"><strong>two sessions, one official page, same day: 109 of 111 injury rows agree on every field, and all 10 per-club row counts the peer published match this desk's. 192 of 192 standings fields agree, the reserve ledger reconciles at 25 of 25 rows, and 13 of 13 Week 11 fixtures appear in both. The 2 injury differences and the venue label disagreement are published below rather than reconciled silently.</strong></p></section>
+
+<section class="card"><h2>Where the two reads agree</h2><table class="grid">
+<thead><tr><th>artifact</th><th>this desk's read</th><th>the other session's read</th><th>agreement</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>Injury-report rows (Week 11)</td><td>253 rows across 24 clubs</td><td>111 rows across 10 clubs</td><td>111 of 111 rows joined; 109 identical on every field; all 10 per-club counts equal</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">nfl.com/injuries</a></td></tr>
+<tr><td>Standings: 32 clubs × W/L/T/PF/PA/NET</td><td>32 rows</td><td>32 rows</td><td>192 of 192 fields agree; the two reads imply 150 and 150 league games</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">standings</a></td></tr>
+<tr><td>November reserve ledger (IR)</td><td>25 rows</td><td>25 rows</td><td>25 of 25 rows reconcile on date + player + transaction; the blank Position column is confirmed on all 25 peer rows too</td><td><a class="src" href="https://www.nfl.com/transactions/league/reserve-list/2026/11" rel="noopener">reserve list</a></td></tr>
+<tr><td>Week 11 slate</td><td>13 fixtures, each with a game-centre link</td><td>13 fixtures + 6 byes</td><td>13 of 13 fixtures appear in both; 0 only here, 0 only there</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">week 11 schedule</a></td></tr>
+</tbody></table>
+<p class="note">the peer read exposes conference and division per club; this desk's read of the same page could not establish the split-column order because the rendered header was un-substituted, so those fields are omitted here and carried by the peer artifact under its own read date</p></section>
+
+<section class="card"><h2>Every field the two reads disagree on</h2>
+<p class="note">2 differences out of 111 joined rows. Publishing them is the point of the exercise: a
+reconciliation that hides its differences is not a reconciliation.</p><table class="grid">
+<thead><tr><th>club</th><th>player</th><th>field</th><th>this desk's value</th><th>the peer value</th><th>how this desk reads it</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>CAR</td><td>Will Lee III</td><td>practice</td><td>Limited Participation in Practice</td><td>Full Participation in Practice</td><td>this desk's two dated captures bracket the change (Full at 2026-11-18T23:49:17Z, Limited at 2026-11-19T07:05:00Z); the peer read carries no clock time, so it cannot be placed, and the difference is published rather than adjudicated</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>DET</td><td>Ennis Rakestraw Jr.</td><td>practice</td><td>Limited Participation in Practice</td><td>Limited Participation In Practice</td><td>capitalisation only: the byte-exact official string is 'Limited Participation in Practice' with a lower-case 'in', which is what this desk pins; the peer value is title-cased. A delta built on normalised casing would report this as a status change</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Per-club row counts, club by club</h2>
+<p class="note">The peer read 10 of the 24 club blocks. On each of those 10, its row count equals this
+desk's exactly — which is the form of check a transcription can actually pass.</p><table class="grid">
+<thead><tr><th>club</th><th>this desk's rows</th><th>peer rows</th><th>equal</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>AZ</td><td>12</td><td>12</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>BAL</td><td>6</td><td>6</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>CAR</td><td>13</td><td>13</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>DET</td><td>8</td><td>8</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>HOU</td><td>15</td><td>15</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>IND</td><td>11</td><td>11</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>KC</td><td>15</td><td>15</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>PHI</td><td>15</td><td>15</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>PIT</td><td>10</td><td>10</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>TB</td><td>6</td><td>6</td><td>YES</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Venue: the one place the official pages disagree with each other</h2><table class="grid">
+<thead><tr><th>fixture</th><th>venue on the schedule page</th><th>venue on the game centre</th><th>what this desk does with it</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>IND@HOU</td><td>NRG Stadium</td><td>Reliant Stadium</td><td>the requirement names the game centre as the source, so this desk keeps the venue blank until that is settled (F-DSK-16)</td><td><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">game centre</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>The peer's own flags, and what this desk did with each</h2><table class="grid">
+<thead><tr><th>id</th><th>area</th><th>their finding</th><th>their action</th><th>how this desk treats it</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>VF-01</td><td>venue</td><td>IND@HOU venue discrepancy between two official NFL surfaces: the Week-11 schedule page's stadium/hotel link reads 'NRG Stadium', while the official game centre Game Info reads 'Reliant Stadium' (HOUSTON, TX).</td><td>Game centre treated as authoritative per the brief; discrepancy flagged for owner review.</td><td>carried here as F-DSK-16, because the venue requirement names the game centre as the source</td><td><a class="src" href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" rel="noopener">source</a></td></tr>
+<tr><td>VF-02</td><td>injuries</td><td>The full 32-club Week-11 injury report was not recounted live this session; 10 clubs (IND, HOU, PIT, PHI, AZ, KC, BAL, CAR, TB, DET) were transcribed in full (111 rows). Row counts for the other 22 clubs are not asserted.</td><td>Scope limit disclosed; full recount recommended via the peer scheduled collector.</td><td>the gap it describes is closed on this desk's side: all 24 club blocks with rows were read</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr>
+<tr><td>VF-03</td><td>injuries</td><td>The fetch tool exposes no exact clock time; the injury read is dated 2026-11-19 but no precise timestamp is claimed.</td><td>Recorded as a dated read; clock-time precision requires the peer timestamped collector.</td><td>carried here as F-DSK-17 — a same-day read with no clock time cannot be sequenced</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr>
+<tr><td>VF-04</td><td>prices</td><td>No official NFL source publishes betting lines, odds or closing prices; all market/price fields remain blank by policy.</td><td>Market/price columns intentionally blank; blocks residual/CLV/ROI.</td><td>the same conclusion this desk reached independently (F-DSK-01): no official price source</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+<tr><td>VF-05</td><td>depth</td><td>Houston's official depth chart is published as a static image (not machine-readable); it is not transcribed by eye.</td><td>HOU depth rows left blank; needs an authorized structured source.</td><td>the same HOU image-only depth state this desk reports against R-50</td><td><a class="src" href="https://www.nfl.com/teams/houston-texans/" rel="noopener">source</a></td></tr>
+<tr><td>VF-06</td><td>injuries</td><td>Lions Kerby Joseph, Cade Mays and D.J. Reed were 'Out' in the Week-10 report but appear practicing (full/limited) with blank game-status in the Week-11 report read 2026-11-19.</td><td>Designation change recorded; confirms designations are a timestamped series, not a static level.</td><td>corroborates the delta design: a designation series, not a level</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">source</a></td></tr>
+<tr><td>VF-07</td><td>transactions</td><td>Aidan Hutchinson (DET) placed on Reserve/Injured on 11/18/2026 — a significant defensive player, relevant to DET availability.</td><td>Recorded in the reserve-list table; no value inferred.</td><td>matches this desk's reserve ledger (Hutchinson on the November IR list)</td><td><a class="src" href="https://www.nfl.com/transactions/league/reserve-list/2026/11" rel="noopener">source</a></td></tr>
+<tr><td>VF-08</td><td>venue</td><td>Venue for 12 of 13 Week-11 fixtures was transcribed from the schedule page's own stadium links, not yet from each official game centre.</td><td>TNF venue verified from game centre; remaining 12 flagged for game-centre reads.</td><td>the venue count quoted for R-23 (12 of 13 from the schedule page, 1 of 13 from a game centre)</td><td><a class="src" href="https://www.nfl.com/schedules/2026/by-week/week-11" rel="noopener">source</a></td></tr>
+<tr><td>VF-09</td><td>standings</td><td>Standings reflect records through Week 10 with byes; games-played vary by team (9 or 10 games), so per-team game counts are not uniform.</td><td>Arithmetic reconciles (149 W = 149 L, 150 games); no per-team normalization applied.</td><td>the same games-played variance this desk resolves to 150 with two identities</td><td><a class="src" href="https://www.nfl.com/standings/" rel="noopener">source</a></td></tr>
+<tr><td>VF-10</td><td>depth</td><td>No official snap-count or actual-starter feed exists in the verified corpus; this blocks replacement-depth, deficiency and availability-graph features.</td><td>Features stay blocked until an authorized Game Book / snap-count join is available.</td><td>the same missing join this desk publishes as R-30/R-41 (no inactives, no Game Books)</td><td><a class="src" href="https://www.nfl.com/" rel="noopener">source</a></td></tr>
+</tbody></table></section>
+
+<section class="card"><h2>Peer files as read (digest + commit, so this comparison can be re-run)</h2><table class="grid">
+<thead><tr><th>peer data file</th><th>sha256</th><th>bytes</th><th>last commit touching it</th><th>file</th></tr></thead>
+<tbody>
+<tr><td><code>nfl-verify-2026-11-19/data/flags.json</code></td><td><code>38c699aaeeacd211…</code></td><td>3,918</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/flags.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/injuries_2026_11_19.json</code></td><td><code>287a5d052c9e3416…</code></td><td>28,190</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/injuries_2026_11_19.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/questions.json</code></td><td><code>0158ecf372bc3d92…</code></td><td>4,444</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/questions.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/reconciliation_2026_11_19.json</code></td><td><code>a686d13523ef9f7f…</code></td><td>2,434</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/reconciliation_2026_11_19.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/repo_review.json</code></td><td><code>f6372ace2cae3975…</code></td><td>4,206</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/repo_review.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/requirements.json</code></td><td><code>aff2499443c984f2…</code></td><td>21,892</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/requirements.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/reserve_list_2026_11.json</code></td><td><code>22bb810225596f93…</code></td><td>5,396</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/reserve_list_2026_11.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/schedule_week11_2026_11_19.json</code></td><td><code>fe53d1dbe89831e8…</code></td><td>6,743</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/schedule_week11_2026_11_19.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/sources.json</code></td><td><code>8991fcedb1ddb0c4…</code></td><td>1,665</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/sources.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/standings_2026_11_19.json</code></td><td><code>961c1f90e1be7818…</code></td><td>7,458</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/standings_2026_11_19.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/suggestions.json</code></td><td><code>eaa300d255773c0e…</code></td><td>6,273</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/suggestions.json" rel="noopener">open</a></td></tr>
+<tr><td><code>nfl-verify-2026-11-19/data/trades_2026_11.json</code></td><td><code>af90e64f789fc43a…</code></td><td>2,858</td><td>2026-11-19T16:10:05+09:00</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-verify-2026-11-19/data/trades_2026_11.json" rel="noopener">open</a></td></tr>
+</tbody></table>
+<p class="note">Read-only: no file under <code>nfl-verify-2026-11-19/</code> was edited by this session, and nothing on this
+page is presented as verifying the peer's work beyond what the join itself shows.</p></section>
+
+</main>
+<footer class="foot"><p><strong>Research record, not wagering advice.</strong> No price feed is licensed, so no ROI, CLV or residual is claimed anywhere on this site. If gambling stops being analysis: National Problem Gambling Helpline 1-800-697-3738 (<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>).</p><p>Rendered by <a href="https://github.com/sassnarep3-star/Own4/blob/main/engine/build.py">nfl-daily-desk/engine/build.py</a> from <a href="https://github.com/sassnarep3-star/Own4/blob/main/data">nfl-daily-desk/data</a>. Rebuild is byte-identical.</p></footer>
+</body></html>
