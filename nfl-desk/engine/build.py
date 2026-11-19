@@ -140,7 +140,7 @@ def page(path, title, body, lede=""):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>%s &middot; NFL Desk &middot; Own4</title>
-<meta name="description" content="NFL Desk: one front door over 40 NFL research workspaces — requirement readiness, availability evidence, corpus arithmetic, flagged irregularities and the official sources behind each row.">
+<meta name="description" content="NFL Desk: one front door over the NFL research workspaces — requirement readiness, availability evidence, corpus arithmetic, flagged irregularities and the official sources behind each row.">
 <link rel="stylesheet" href="%s/assets/desk.css">
 </head>
 <body>
@@ -181,7 +181,7 @@ def build_index(req, q, sug, flags, reads, census, inj, st):
 <section class="hero">
   <p class="eyebrow">NFL desk &middot; front door &middot; %s</p>
   <h1>Everything the NFL work claims, on one page &mdash; with the source and the gap beside it.</h1>
-  <p>Forty sibling workspaces were written by different sessions over two weeks. They disagree. This
+  <p>Dozens of sibling workspaces were written by different sessions over two weeks. They disagree. This
   desk does not merge them: it puts the requirement, the blocking gate, the number that would clear it,
   and the three registers' answers side by side so a decision can be made from one screen.</p>
   <p class="hero-links"><a class="primary" href="pages/requirements.html">Open the readiness register</a>
@@ -288,11 +288,10 @@ def build_exec(req, q, sug, flags, census, reads):
 script in this folder and every figure is linked to the file it came from.</p>
 
 <h2>1. What exists</h2>
-<p>Forty NFL workspaces sit beside this one. Between them they hold price stores, results feeds,
-availability captures, depth sweeps, strategy registers, 40 flagged pages and three competing
-requirement registers. Nine of the per-namespace verifiers exit green; there is no verifier that
-compares one workspace with another, which is why the same fact can carry four values and nothing
-fails.</p>
+<p>%d NFL workspaces sit beside this one. Between them they hold price stores, results feeds,
+availability captures, depth sweeps, strategy registers, %d flagged pages and three competing
+requirement registers. %d of them ship a verifier; none compares one workspace with another, which is
+why the same fact can carry four values and nothing fails.</p>
 
 <h2>2. What the evidence supports</h2>
 %s
@@ -319,7 +318,8 @@ the sample floor and multiplicity control.</p>
 <a href="flagged.html">Flagged for review</a> (15 irregularities) &middot;
 <a href="sources.html">Sources read</a> (with what each read showed).</p>
 """ % (
-        STAMP,
+        STAMP, census["namespaces_count"], census["duplication"]["flagged_pages"]["count"],
+        census["namespaces_with_verifier"],
         table("Where the registers agree", ["Count", "Value", "Where it comes from"],
               [["<td>Requirement lines</td>", "<td>%d</td>" % c["rows"], "<td>%s</td>" % repo_link("nfl-readiness-register/data/requirements.json")],
                ["<td>Rows where all three registers agree</td>", "<td>%d</td>" % c["agree"], "<td>%s</td>" % link("requirements.html", "requirements")],
@@ -343,7 +343,7 @@ the sample floor and multiplicity control.</p>
               [["<td>Dated official reads</td>", "<td>Four pages read on %s, each with what it showed and what it could not settle.</td>" % STAMP, "<td>%s</td>" % repo_link("nfl-desk/data/official_reads_2026-11-19.json")],
                ["<td>Standings transcription</td>", "<td>All 32 clubs machine-parsed from the rendered official read; 300 team-games counted.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/standings_2026-11-19.json")],
                ["<td>Injury re-count</td>", "<td>The stored 2026-11-18 capture re-parsed cell by cell, hash checked against its manifest.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/injuries_2026-11-18_parsed.json")],
-               ["<td>Workspace census</td>", "<td>40 namespaces, duplication counts, register disagreement, corpus arithmetic.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/census.json")],
+               ["<td>Workspace census</td>", "<td>Every namespace, duplication counts, register disagreement, corpus arithmetic.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/census.json")],
                ["<td>One readiness register</td>", "<td>73 rows with all three peer statuses shown and every evidence path resolved.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/requirements.json")],
                ["<td>Questions and suggestions</td>", "<td>18 question rows and 10 suggestions, published without a decision being taken.</td>", "<td>%s</td>" % repo_link("nfl-desk/data/questions.json")],
                ["<td>A verifier that fails loudly</td>", "<td>Row-source, link, determinism and no loopback-address checks for every page here.</td>", "<td>%s</td>" % repo_link("nfl-desk/engine/verify.py")]],
@@ -355,7 +355,7 @@ the sample floor and multiplicity control.</p>
                 "<td>%s</td>" % repo_link("nfl-book/data/sources.json", "sources")],
                ["<td>D-3</td>", "<td>May raw captures be served publicly</td>", "<td>%s</td>" % link("pages/questions.html", "Q14"),
                 "<td>%s</td>" % link("https://www.nfl.com/terms", "NFL terms")],
-               ["<td>D-4</td>", "<td>Which of the 40 namespaces are live and which are history</td>", "<td>%s</td>" % link("census.html", "census"),
+               ["<td>D-4</td>", "<td>Which of the %d namespaces are live and which are history</td>" % census["namespaces_count"], "<td>%s</td>" % link("census.html", "census"),
                 "<td>%s</td>" % repo_link("nfl-desk/data/census.json", "census")],
                ["<td>D-5</td>", "<td>One repo-level verifier instead of 40</td>", "<td>%s</td>" % link("pages/questions.html", "Q17"),
                 "<td>%s</td>" % repo_link("nfl-desk/engine/verify.py", "verify.py")]],
@@ -748,7 +748,7 @@ def build_census(census):
     ] for t in census["thin_artifacts"][:20]]
     body = """
 <p class="eyebrow">Workspace census &middot; measured %s</p>
-<h1>Forty workspaces, counted</h1>
+<h1>Every workspace, counted</h1>
 <p class="lede">Nothing here is an opinion: every number is produced by
 <code>nfl-desk/engine/census.py</code> walking the tree. The point is to make duplication and
 disagreement visible so the front door can be simple.</p>
@@ -859,7 +859,7 @@ session, so no compliance claim is made for the public/private split (flag F14).
     page("pages/sources.html", "Sources read", body)
 
 
-def build_verify():
+def build_verify(census):
     body = """
 <p class="eyebrow">Verification &middot; %s</p>
 <h1>What this desk checks before it publishes, and what it does not</h1>
@@ -891,7 +891,7 @@ source. It does not mean the numbers are true, and it does not mean any other wo
             ["Figure", "Computed by", "Input"],
             [["<td>73 requirement rows; agreement and disagreement counts</td>", "<td><code>engine/register.py</code></td>",
               "<td>%s</td>" % repo_link("nfl-desk/data/requirements.json", "requirements.json")],
-             ["<td>62 pairwise register disagreements; 40 workspaces; duplication counts</td>", "<td><code>engine/census.py</code></td>",
+             ["<td>%d pairwise register disagreements; %d workspaces; duplication counts</td>" % (census["register_disagreement_count"], census["namespaces_count"]), "<td><code>engine/census.py</code></td>",
               "<td>%s</td>" % repo_link("nfl-desk/data/census.json", "census.json")],
              ["<td>32 standings rows; 300 team-games; 150 implied games</td>", "<td><code>engine/parse_standings.py</code></td>",
               "<td>%s</td>" % link("https://www.nfl.com/standings/", "nfl.com/standings")],
@@ -930,7 +930,7 @@ def main():
         ("pages", lambda: build_census(census)),
         ("pages", lambda: build_flags(flags)),
         ("pages", lambda: build_sources(reads)),
-        ("pages", build_verify),
+        ("pages", lambda: build_verify(census)),
     ):
         CUR_DIR = cur
         fn()
