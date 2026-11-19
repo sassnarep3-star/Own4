@@ -2,7 +2,8 @@
 """Own4 — nfl-board publication contract. Fails loudly, exits non-zero.
 
 Checks
-  1. every page was written and is well-formed enough (balanced <table>/<tbody>, no unrendered markers)
+  1. every page was written; tables have column headers and matching-width semantic body cells
+     (row headers use <th scope=row>, data use <td>), with no unrendered markers
   2. EVERY data-table row carries at least one link to an official page or to this repository
   3. every local href resolves to a file on disk, and every anchor target exists
   4. no prefilled suggestion verdict (the board belongs to the reviewer)

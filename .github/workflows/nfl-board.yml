@@ -1,0 +1,32 @@
+name: NFL decision board — build and verify
+
+on:
+  push:
+    paths:
+      - 'nfl-board/**'
+      - '.github/workflows/nfl-board.yml'
+  pull_request:
+    paths:
+      - 'nfl-board/**'
+      - '.github/workflows/nfl-board.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Rebuild pages and enforce publication checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild the decision board
+        run: python3 nfl-board/engine/build.py
+      - name: Check table semantics, row sources, local links, and reviewer-only verdicts
+        run: python3 nfl-board/engine/verify.py
+      - name: Generated pages must be deterministic
+        run: git diff --exit-code -- nfl-board/index.html nfl-board/pages

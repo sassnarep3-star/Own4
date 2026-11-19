@@ -4880,12 +4880,12 @@ Read the whole board before starting. No claim was open against the scope below.
 | # | Task | Status | Owner session | File scope |
 |---|------|--------|---------------|------------|
 | N-01 | Official-source re-reads (injury report, reserve list, club depth chart, schedule/finals) | in progress | arena-7fc936d1-own4 | `nfl-board/data/**` |
-| N-02 | Decision-readiness table: one row per requirement line, the gate that blocks it, the number that clears it | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/readiness.html` (generated) |
-| N-03 | Questions / information / answers register + missing-information discovery routes | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/questions.html` (generated) |
-| N-04 | Suggestions board with blank verdicts (reviewer chooses before implementation) | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/suggestions.html` (generated) |
-| N-05 | Line-by-line repo review of the NFL tree, irregularities flagged with file:line | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/repo-review.html` (generated) |
-| N-06 | Executive summary | in progress | arena/ec4e3f48-own4 | `nfl-board/pages/executive-summary.html` (generated) |
-| N-07 | Site build + verifier (every row source-linked, no broken links, deterministic) | in progress | arena/ec4e3f48-own4 | `nfl-board/engine/**`, generated `nfl-board/pages/**` |
+| N-02 | Decision-readiness table: one row per requirement line, the gate that blocks it, the number that clears it | done | arena/ec4e3f48-own4 | `nfl-board/pages/readiness.html` (generated) |
+| N-03 | Questions / information / answers register + missing-information discovery routes | done | arena/ec4e3f48-own4 | `nfl-board/pages/questions.html` (generated) |
+| N-04 | Suggestions board with blank verdicts (reviewer chooses before implementation) | done | arena/ec4e3f48-own4 | `nfl-board/pages/suggestions.html` (generated) |
+| N-05 | Line-by-line repo review of the NFL tree, irregularities flagged with file:line | done | arena/ec4e3f48-own4 | `nfl-board/pages/repo-review.html` (generated) |
+| N-06 | Executive summary | done | arena/ec4e3f48-own4 | `nfl-board/pages/executive-summary.html` (generated) |
+| N-07 | Site build + verifier (every row source-linked, no broken links, deterministic) | done | arena/ec4e3f48-own4 | `nfl-board/engine/**`, `.github/workflows/nfl-board.yml`, generated `nfl-board/pages/**` |
 | N-08 | Root nav integration (additive group only) + regenerate `index.html`/`verified/*` | unclaimed | — | `verification/build.py`, generated `index.html`, `verified/*.html` |
 | N-09 | PR → main → merge → Pages confirmation, recorded here | unclaimed | — | `COORDINATION.md` |
 
@@ -6051,3 +6051,14 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 - Claim: N-02 through N-07 in the `arena-7fc936d1-own4` board. Exclusive scope: `nfl-board/engine/**` and generated `nfl-board/pages/**`; N-01 data and N-08 shared root navigation are untouched.
 - Baseline: `python3 nfl-board/engine/verify.py` passes but emits three source-class warnings. Independent inspection found generated `<tr>` elements contain raw concatenated text/links without `<td>` cells, while the verifier only checks link presence in each `<tr>` and therefore misses invalid table structure.
 - Planned work: make table generation semantic and accessible (`<th scope=row>` for row labels where suitable, `<td>` for data), extend verification to check header/body shape and cell counts, regenerate and test affected pages. Preserve all evidence and do not alter claim statuses or source data.
+
+
+### Completion — NFL Decision Board semantic-table QA (2026-11-19 UTC)
+
+- N-02 through N-07 complete. `nfl-board/engine/build.py` now emits explicit table header cells, a scoped row header, and one `<td>` per remaining data column; row widths and row-ID counts are checked before render. All nine generated pages were rebuilt.
+- The verifier parses table structure and fails on missing headers, width mismatches, text outside cells, incorrectly scoped headers, or invalid body cell roles. The previous generator output had zero `<td>` cells in its generated tables, and the old verifier missed it because it looked only for links within literal `<tr>` patterns; row-ID-bearing rows were skipped.
+- Added `.github/workflows/nfl-board.yml` to rebuild, verify, and require deterministic generated output on changes to this workspace.
+- Verification: `python3 nfl-board/engine/build.py`; `python3 nfl-board/engine/verify.py` (PASS, 9 pages; 70 requirements, 28 questions, 15 suggestions, 17 findings, 17 sources; 11 advisory source-class warnings); `git diff --exit-code -- nfl-board/index.html nfl-board/pages` after rebuilding; `python3 verification/verify_site.py` (PASS, 14 pages / 346 sourced rows); `git diff --check` (PASS).
+- Source irregularity retained for review: 11 rows cite official club sites (Packers, Ravens, Texans) and/or repository artifacts without an `nfl.com` URL, so the existing verifier emits advisory warnings. Those sources are already allowlisted as official-club hosts; no values or citations were edited. This task changed markup/validation only and did not re-read or independently verify the underlying football claims.
+- Rebase reconciliation: while updating this append-only board, origin/main advanced with PR #191. The `COORDINATION.md` conflict was resolved by preserving both the new NFL Origination Lab record and this session's claim/completion; no peer files or lines were removed.
+- PR/deploy record: pending. N-01 remains owned by `arena-7fc936d1-own4`; N-08 (shared root navigation) and N-09 (final integration) remain outside this task and were not edited.
