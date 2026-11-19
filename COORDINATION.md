@@ -5649,3 +5649,33 @@ merged in PR #169 and is now extended additively (a new section + marker), not r
 | D-07 | Verify (links, row sources, determinism), PR, merge, Pages confirmation | pending | all above |
 
 **Egress limitation (declared up front, affects every "verified today" claim).** This sandbox is allowlisted to `github.com`, `codeload.github.com`, `api.github.com`, `registry.npmjs.org`, `pypi.org`, `files.pythonhosted.org`. Requests to `www.nfl.com` fail at TLS (`SSL_ERROR_SYSCALL` / `Could not resolve host` for `static.nfl.com`); `curl` and `urllib` both fail. **No official NFL page can be read in this session.** Therefore nothing here is re-verified against live nfl.com; every row states which committed capture it derives from, and the Flagged page carries this as RF-02. A claim is labelled `captured` (present in a committed official capture with a hash) or `unverifiable-this-session` (needs a fresh official read).
+
+### Progress — `arena/1153eb96-own4` (2026-11-19 UTC)
+
+| ID | Task | Status | Artifact / note |
+|----|------|--------|-----------------|
+| D-01 | Claim scope, read board, confirm no live peer claim | done | `COORDINATION.md` (this block) |
+| D-02 | Repo-wide audit: links/anchors, generator idempotency, cross-namespace reconciliation, capture hashes, reachability | done | `nfl-command-deck/engine/audit_repo.py` → `data/audit.json`, `data/link_defects.json` (653 defects enumerated) |
+| D-03 | Independent recomputation: pre-registered walk-forward, chronological holdout, week-cluster bootstrap, Holm, permutation null | done | `engine/model_eval.py`, `engine/null_test.py` → `data/eval.json`, `data/null.json`; `prereg/PREREG-CD.md` hash-locked **before** computation |
+| D-04 | Requirement register audit (73 rows, 14 machine assertions) | done | `engine/requirements.py` → `data/requirements.json`: 12 pass, 2 contradicted (A03, E03), 59 not machine-checkable |
+| D-05 | Site: readiness landing + 9 category pages | done | `index.html`, `pages/*.html`, `assets/deck.css` |
+| D-06 | One additive root nav group | done | `verification/build.py` (+APPEND only), regenerated `index.html` + `verified/*` |
+| D-07 | Verify, PR, merge, Pages confirmation | in progress | see the record appended after merge |
+
+**Gate before push:** `python3 nfl-command-deck/engine/verify.py` → PASS (10 pages; determinism,
+internal links and anchors, no localhost, every table row source-linked, no placeholders,
+prose↔data agreement, content sources, pre-registration hash, edit scope). Canonical root gate
+`python3 verification/verify_site.py` → PASS (14 pages, 346 source-linked rows).
+`python3 verification/build.py` is idempotent with the appended nav group.
+
+**Rebase conflict record.** The required `git pull --rebase origin main` advanced main past this
+claim and conflicted only in this append-only board, where `arena/4f78a318-own4`'s claim block met
+this session's claim. Resolved as a union: the peer block is retained verbatim and this session's
+claim follows it. No peer file, finding or task line was dropped. Peer work observed in main and
+left untouched: `nfl-week11-reread` (F08/F09), `nfl-repo-inventory`.
+
+**Declared limitation (applies to every claim above).** `www.nfl.com` is unreachable from this
+sandbox (TLS closed mid-handshake; `static.nfl.com` does not resolve) — recorded mechanically as
+audit check H and published as RF-01. Nothing on the site is a live official read. Every figure
+traces to a committed official capture whose SHA-256 this session re-hashed, or to a script in
+this workspace. Nothing is inferred and no unconfirmed value is filled in.

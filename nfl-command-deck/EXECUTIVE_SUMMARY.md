@@ -34,7 +34,7 @@ document.
 
 ## What the repository actually contains
 
-- **41 NFL workspaces**, frozen at ten different dates (2026-11-02 to 2026-11-22), with **601
+- **41 NFL workspaces**, frozen at eleven different dates (2026-11-02 to 2026-11-22), with **601
   broken `#anchor` links and 52 broken file links** across 57 pages. None of those pages belongs
   to this session; the full defect list is published rather than edited.
 - **Two result archives that disagree on scope** (137 vs 149 games) and no score contradiction
@@ -76,7 +76,7 @@ RF-03 legacy dashboard links to 51 dead pages · RF-04 two result archives (137 
 RF-05 club-code drift drops 11 fixtures · RF-06 16 rows cite a week page rather than a game
 page · RF-07 one Week-11 fixture has no venue in the capture · RF-08 no snap-count source
 exists · RF-09 226 of 242 report rows carry no game designation · RF-10 replacement named but
-participation unconfirmed · RF-11 depth is one snapshot, not a time series · RF-12 ten
+participation unconfirmed · RF-11 depth is one snapshot, not a time series · RF-12 eleven
 different namespace dates · RF-13 59 of 73 requirement verdicts are not machine-checkable ·
 RF-14 no price source ⇒ no ROI · RF-15 eleven peer PRs still open.
 

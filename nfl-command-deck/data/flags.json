@@ -8,19 +8,24 @@
    "id": "RF-01",
    "severity": "high",
    "area": "Verification",
-   "title": "No official NFL page could be read in this session — every claim rests on committed captures",
+   "title": "No official NFL page could be read in this session \u2014 every claim rests on committed captures",
    "detail": "This sandbox is allowlisted to github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org and files.pythonhosted.org. Both curl and urllib fail against www.nfl.com: TLS is closed mid-handshake (SSL_ERROR_SYSCALL) and static.nfl.com does not resolve. audit.json check H records the attempt and its exception. Consequence: no figure in this workspace is a fresh official read. Each row names the committed official capture it comes from, with that file's SHA-256. A live re-read remains a separate step that must be performed where nfl.com is reachable.",
    "how_to_confirm": "Re-run `python3 nfl-command-deck/engine/audit_repo.py` on a host with unrestricted egress; check H will then report an HTTP status instead of an exception.",
-   "sources": ["https://www.nfl.com/injuries/", "https://www.nfl.com/schedules/2026/by-week/week-11"]
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "https://www.nfl.com/schedules/2026/by-week/week-11"
+   ]
   },
   {
    "id": "RF-02",
    "severity": "high",
    "area": "Site structure",
    "title": "601 broken #anchor links and 52 broken file links across 57 peer pages",
-   "detail": "Mechanical check A resolves every internal href on every page outside the raw-capture directories. 601 anchors point at ids that do not exist in the target page, and 52 file links point at files that do not exist. Worst offenders: nfl-quant (208 anchors), nfl-readiness-register (99), nfl-sources (71), nfl-origination (39), nfl-price-snapshot (30), verified/ (24 — the root dashboard links verified/own-lines.html#parlays and #props, neither of which exists). Full list: nfl-command-deck/data/link_defects.json. These pages belong to other sessions and were not edited here.",
+   "detail": "Mechanical check A resolves every internal href on every page outside the raw-capture directories. 601 anchors point at ids that do not exist in the target page, and 52 file links point at files that do not exist. Worst offenders: nfl-quant (208 anchors), nfl-readiness-register (99), nfl-sources (71), nfl-origination (39), nfl-price-snapshot (30), verified/ (24 \u2014 the root dashboard links verified/own-lines.html#parlays and #props, neither of which exists). Full list: nfl-command-deck/data/link_defects.json. These pages belong to other sessions and were not edited here.",
    "how_to_confirm": "`python3 nfl-command-deck/engine/audit_repo.py` then open data/link_defects.json; or click the examples on this page.",
-   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/link_defects.json"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/link_defects.json"
+   ]
   },
   {
    "id": "RF-03",
@@ -29,7 +34,9 @@
    "title": "legacy-root-dashboard.html links to 51 pages that do not exist",
    "detail": "The file links to pages/requirements.html, pages/data-standings.html and 49 other targets in a pages/ directory that holds a different, unrelated set of NBA pages. Anyone who navigates there from the repository file list hits a 404 on almost every link.",
    "how_to_confirm": "Check A lists all 51; the file itself is at the repository root.",
-   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/legacy-root-dashboard.html"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/legacy-root-dashboard.html"
+   ]
   },
   {
    "id": "RF-04",
@@ -48,18 +55,23 @@
    "severity": "medium",
    "area": "Data",
    "title": "Club abbreviation drift silently drops 11 fixtures in a naive join",
-   "detail": "nfl-origin-board writes the Rams as LA; nfl-live-board writes LAR. Joining the two archives on the club code without aliasing loses every Rams fixture (11 rows). Any cross-namespace recomputation must alias LA→LAR; this workspace does so in audit check C and states it rather than hiding it.",
+   "detail": "nfl-origin-board writes the Rams as LA; nfl-live-board writes LAR. Joining the two archives on the club code without aliasing loses every Rams fixture (11 rows). Any cross-namespace recomputation must alias LA\u2192LAR; this workspace does so in audit check C and states it rather than hiding it.",
    "how_to_confirm": "audit.json check C, fields only_in_origin_board / only_in_live_board.",
-   "sources": ["https://www.nfl.com/standings/league/2026/REG"]
+   "sources": [
+    "https://www.nfl.com/standings/league/2026/REG"
+   ]
   },
   {
    "id": "RF-06",
    "severity": "medium",
    "area": "Data",
    "title": "16 of 149 corpus rows cite a week page, not a per-game page; all 16 are corroborated by a second peer archive",
-   "detail": "A per-game official URL is the stronger citation. 133 rows carry nfl.com/games/...; the other 16 carry the official week schedule URL. This session cross-checked all 16 against a second, independently captured archive that does carry a per-game URL and the same final score, so none is unconfirmed — but the citation strength is uneven and should be normalised.",
+   "detail": "A per-game official URL is the stronger citation. 133 rows carry nfl.com/games/...; the other 16 carry the official week schedule URL. This session cross-checked all 16 against a second, independently captured archive that does carry a per-game URL and the same final score, so none is unconfirmed \u2014 but the citation strength is uneven and should be normalised.",
    "how_to_confirm": "audit.json check D, rows_with_week_page_url_only and rows_corroborated_by_second_peer_capture.",
-   "sources": ["https://www.nfl.com/schedules/2026/by-week/week-8", "https://www.nfl.com/schedules/2026/by-week/week-9"]
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-8",
+    "https://www.nfl.com/schedules/2026/by-week/week-9"
+   ]
   },
   {
    "id": "RF-07",
@@ -68,7 +80,9 @@
    "title": "One Week-11 fixture has no venue on the official schedule capture",
    "detail": "nfl-origin-board/data/week11_schedule.json holds 13 fixtures; MIN@SF (2026-11-22, NBC) has an empty venue field while the other 12 carry a stadium name. The gap is published blank, not filled from memory. Requirement row A03 in the peer register claims every venue is transcribed and is marked 'contradicted' in this workspace for that reason.",
    "how_to_confirm": "engine/requirements.py assertion A03 prints the gap row and its game URL.",
-   "sources": ["https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"]
+   "sources": [
+    "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+   ]
   },
   {
    "id": "RF-08",
@@ -77,16 +91,20 @@
    "title": "No snap-count source exists anywhere in the repository, so 'model depth from playing time' is not built",
    "detail": "Requirement E03 rejects jersey order and asks for playing time. A full-tree scan for snap-count datasets returns nothing. The only playing-time proxies held are final scores. The requirement is therefore marked 'contradicted' by this workspace's independent check, even though the peer register marks it 'partial'.",
    "how_to_confirm": "engine/requirements.py assertion E03; the scan is a filename-and-content walk over every JSON in the tree.",
-   "sources": ["https://www.nfl.com/stats/player-stats/"]
+   "sources": [
+    "https://www.nfl.com/stats/player-stats/"
+   ]
   },
   {
    "id": "RF-09",
    "severity": "high",
    "area": "Data",
-   "title": "One injury-report capture covers 26 clubs and 242 player rows — and 226 of those rows carry no game designation",
+   "title": "One injury-report capture covers 26 clubs and 242 player rows \u2014 and 226 of those rows carry no game designation",
    "detail": "The Week-11 report captured 2026-11-18T23:49:17Z lists practice status for every row but a game designation for only 16: 9 Out, 7 Questionable, 0 Doubtful. That is expected mid-week (designations are finalised Friday), but it means the capture cannot be used to score designation reliability yet. Six clubs appear in the capture with no table at all (see availability.json counts) and the report does not carry the reserve list, so absence from it does not mean available.",
    "how_to_confirm": "engine/availability.py re-derives every count from the pinned capture hash; nothing is typed in.",
-   "sources": ["https://www.nfl.com/injuries/"]
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ]
   },
   {
    "id": "RF-10",
@@ -95,7 +113,9 @@
    "title": "Replacement is named by the club, but 'the replacement started' cannot be confirmed",
    "detail": "For the 3 rank-1 players carrying an Out designation, the club's own depth chart names the next man. No official inactive list and no snap count are held for Week 11, so actual participation stays blank on every row. The join proves what the club published, never who played.",
    "how_to_confirm": "availability.json, starters_out_detail rows: actual starter fields are intentionally absent.",
-   "sources": ["https://www.nfl.com/injuries/"]
+   "sources": [
+    "https://www.nfl.com/injuries/"
+   ]
   },
   {
    "id": "RF-11",
@@ -104,7 +124,9 @@
    "title": "The depth register is a single dated snapshot per club, so it cannot support a point-in-time backtest",
    "detail": "32 clubs, one capture each, all dated 2026-11-17, 705 slots. HOU publishes its chart only as an image and is flagged rather than transcribed. Fifteen slots list two players in rank 1 and two slots leave rank 1 empty; both are represented faithfully. Without a history, no past game can be evaluated with the depth known at its kickoff.",
    "how_to_confirm": "audit.json check G recomputes slot, shared-slot and empty-slot counts from the register.",
-   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json"
+   ]
   },
   {
    "id": "RF-12",
@@ -113,16 +135,20 @@
    "title": "Peer namespaces are frozen at ten different dates, which is why their numbers disagree",
    "detail": "Landing-page header dates range from 2026-11-02 (nfl/) to 2026-11-22 (nfl-book). A reader who lands on an older workspace sees ratings and counts that later workspaces have revised. This is the root cause behind most cross-namespace disagreements; it is a publication-hygiene problem, not a data error.",
    "how_to_confirm": "audit.json check I lists every namespace's latest displayed date.",
-   "sources": ["https://github.com/sassnarep3-star/Own4"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4"
+   ]
   },
   {
    "id": "RF-13",
    "severity": "low",
    "area": "Verification",
    "title": "59 of 73 peer requirement verdicts cannot be independently checked mechanically",
-   "detail": "This session defines a data assertion for 14 of the 73 rows and evaluates it. 13 pass; 1 (A03) is contradicted. The other 59 rows cite artifacts that exist but whose 'met' or 'partial' claim is prose, and prose cannot be re-derived. They remain as the peer published them and are listed as 'not checkable' rather than silently endorsed.",
+   "detail": "This session defines a data assertion for 14 of the 73 rows and evaluates it itself. 12 pass; 2 are contradicted by the artifact the peer row cites \u2014 A03 (the Week-11 schedule capture is missing a venue for MIN@SF) and E03 (no snap-count dataset exists anywhere in the tree, so 'model depth from playing time' is not built). The other 59 rows cite artifacts that exist but whose 'met' or 'partial' claim is prose, and prose cannot be re-derived. They remain as the peer published them and are listed as 'not checkable' rather than silently endorsed.",
    "how_to_confirm": "engine/requirements.py; the per-row verdict is published on the Requirements page.",
-   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json"
+   ]
   },
   {
    "id": "RF-14",
@@ -131,7 +157,9 @@
    "title": "There is still no official price source, so no ROI, CLV or staking number can be computed",
    "detail": "Every market_open_value and market_close_value in nfl-book/data/price_snapshots.json is null by policy. The NFL publishes no line. This session therefore computes forecast skill only, and the leaderboard awards zero points. An assumed -110 price is deliberately not used: a result produced from an assumed price is not evidence.",
    "how_to_confirm": "eval.json leaderboard_policy.why_zero; peer file nfl-book/data/price_snapshots.json field market_source is null on every row.",
-   "sources": ["https://www.nfl.com/games/colts-at-texans-2026-reg-11"]
+   "sources": [
+    "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+   ]
   },
   {
    "id": "RF-15",
@@ -140,7 +168,9 @@
    "title": "Eleven pull requests from earlier sessions are still open against main",
    "detail": "Open: #150, #132, #127, #119, #93, #59, #56, #47, #43, #39, #29. Several touch NFL namespaces and would re-edit the same pages this repository already serves. They are not merged by this session because their scope overlaps peer work that has since been superseded; they need an owner decision, not another automatic merge.",
    "how_to_confirm": "`gh pr list --state open` on the repository.",
-   "sources": ["https://github.com/sassnarep3-star/Own4/pulls"]
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/pulls"
+   ]
   }
  ]
 }
