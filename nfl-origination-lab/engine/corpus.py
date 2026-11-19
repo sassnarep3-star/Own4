@@ -230,7 +230,7 @@ def main():
 
     # ---- independent arithmetic check: games implied by official standings ----
     st = json.load(open(STANDINGS, encoding="utf-8"))
-    games_implied = sum(r["W"] + r["L"] + r["T"] for r in st["rows"]) / 2
+    games_implied = sum(r["W"] + r["L"] + r["T"] for r in st["rows"]) / 2   # exact ints; no float involved above .5
     if games_implied != by_season[2026]:
         die("union has %d 2026 games but official standings imply %s"
             % (by_season[2026], games_implied))

@@ -500,7 +500,10 @@ def build_correlations(games):
         n = len(xs)
         if n < 4 or len(ys) < 4:
             return None
-        mx, my = statistics.fmean(xs), statistics.fmean(ys)
+        # Deliberately NOT statistics.fmean: it sums exact Fractions internally, so the
+        # last bits of the result can move between CPython versions. A plain left-to-right
+        # float sum is identical everywhere, and six decimals is all this lab publishes.
+        mx, my = sum(xs) / len(xs), sum(ys) / len(ys)
         sx = math.sqrt(sum((x - mx) ** 2 for x in xs) / (n - 1))
         sy = math.sqrt(sum((y - my) ** 2 for y in ys) / (n - 1))
         if sx == 0 or sy == 0:
