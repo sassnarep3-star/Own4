@@ -6161,3 +6161,10 @@ reason.
   navigation and all peer append-only board blocks were retained in full, and this session's additive
   nav link and SR-01 block were re-applied. No peer work was discarded. `engine/verify.py` re-run
   after the rebase passes; the existing `nfl-desk` and `nfl-daily-desk` suites also still pass.
+
+### `nfl-origination-lab` — pre-registered origination competition (session `arena/9a2f55f4-own4`, 2026-11-19 UTC)
+
+- **Claim.** Task: a working origination/backtest competition layer — price-snapshot policy, pre-registered strategies, proper-score leaderboard with uncertainty, correlation with n, removal-of-luck panel, unresolved-question register, suggestions board — plus a site namespace. Status **in progress**, owner `arena/9a2f55f4-own4`.
+- **File scope.** `nfl-origination-lab/**` only (own engine, data, pages, assets, verify script), plus this append-only entry. One **request** below for the shared navigation; no peer namespace, no `index.html`, no `verified/**`, no peer engine is edited.
+- **Source constraint for this session.** This sandbox has **no HTTPS egress to nfl.com or any news host** (`curl -sI https://www.nfl.com/injuries/` returns no response; the egress allowlist is github.com, codeload.github.com, api.github.com, registry.npmjs.org, pypi.org, files.pythonhosted.org). Therefore this session performs **no new live official read** and invents none. Every number it publishes is either (a) read from this repository's own stored official captures, with the capture's own URL + date, or (b) computed from those by code in `engine/` that is re-runnable, or (c) left blank and listed on the flagged page. Rows that would require a live read are marked `NOT-READ-THIS-SESSION` rather than filled from another session's summary.
+- **Claimed at** first commit; `git pull --rebase` before every push; conflicts on this board resolved as append-only unions.
