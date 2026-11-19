@@ -416,8 +416,9 @@ def main():
         "dataset": "nfl_command_deck_audit",
         "built_utc": "2026-11-19",
         "session": "arena/1153eb96-own4",
-        "target_commit": subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
-                                        text=True).stdout.strip(),
+        # NOTE: the audited commit is deliberately NOT embedded. It changes with every
+        # commit, which would make this file non-deterministic across rebuilds. It is
+        # printed to stdout for the CI log instead.
         "checks": [],
     }
     checks = [link_audit(), nav_count_check(), reconciliation(), corpus_integrity(),
@@ -438,7 +439,9 @@ def main():
         json.dump(audit, f, indent=1, sort_keys=True)
     for c in checks:
         print("%-58s %s" % (c["check"][:58], c.get("result")))
-    print("target commit", audit["target_commit"])
+    print("audited at commit",
+          subprocess.run(["git", "rev-parse", "HEAD"], cwd=ROOT, capture_output=True,
+                         text=True).stdout.strip())
 
 
 if __name__ == "__main__":
