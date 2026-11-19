@@ -1,0 +1,54 @@
+{
+ "dataset": "nfl-week11-series/questions",
+ "title": "Questions raised by this session's reads (information needed before decisions)",
+ "session": "arena-23197e9d-own4",
+ "policy": "One row per question: what is known, what is missing, what evidence would answer it. Owner decisions stay blank.",
+ "rows": [
+  {
+   "id": "Q-WS-1",
+   "question": "Is the November reserve ledger authoritative when it contradicts an official news IR announcement (Willis)?",
+   "known": "news says IR (Tuesday, resolves 2026-11-10); three ledgers read 2026-11-19 carry no row",
+   "missing": "league documentation of ledger completeness/latency rules",
+   "discover": "owner reads nfl.com/terms + asks the league data desk; n=1 answer would settle the precedence rule",
+   "blocks": [
+    "REQ-62"
+   ],
+   "decision": ""
+  },
+  {
+   "id": "Q-WS-2",
+   "question": "What latency budget should the pipeline assume between Reserve/Injured posting and practice-table removal?",
+   "known": "four11/18 moves dropped out between 07:05Z and 11:25Z; two 11/17 moves still present at 11:25Z (2 days)",
+   "missing": "per-club publication schedules; inactive lists (REQ-30)",
+   "discover": "capture the report at 2 more clock times before TNF kickoff and measure removal lag per club",
+   "blocks": [
+    "REQ-54",
+    "REQ-62"
+   ],
+   "decision": ""
+  },
+  {
+   "id": "Q-WS-3",
+   "question": "Which capture becomes the frozen Week 10 corpus row set (347 rows today, 279 at brief time, 254 in repo)?",
+   "known": "all three counts are dated; the page is a living document",
+   "missing": "owner decision on the pre-registration timestamp (REQ-19/20)",
+   "discover": "owner picks the registration cut; the commit hash is the registration (REQ-65)",
+   "blocks": [
+    "REQ-19"
+   ],
+   "decision": ""
+  },
+  {
+   "id": "Q-WS-4",
+   "question": "Does an authorized structured depth source exist for Houston (image-only club page)?",
+   "known": "club page publishes one image; brief forbids transcription by eye",
+   "missing": "a licensed/official structured feed covering HOU",
+   "discover": "evaluate route (a) club pages club-by-club and route (b) snap-count derivation (REQ-51) with n=32 coverage counts",
+   "blocks": [
+    "REQ-31",
+    "REQ-51"
+   ],
+   "decision": ""
+  }
+ ]
+}

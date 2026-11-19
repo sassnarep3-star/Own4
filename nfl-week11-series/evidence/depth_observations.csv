@@ -1,0 +1,15 @@
+# Depth-chart observations (REQ-31/49/50) - live reads 2026-11-19 via fetch_page
+# GB source: https://www.packers.com/team/depth-chart (page as-of label as printed: "Unofficial, Nov. 10, 2026")
+# HOU source: https://www.houstontexans.com/team/depth-chart
+# Columns: club,unit,position,raw_rank1,raw_rank2,raw_rank3,raw_rank4,observation,source_url
+club,unit,position,raw_rank1,raw_rank2,raw_rank3,raw_rank4,observation,source_url
+GB,OFF,WR,9 Christian Watson,16 Bo Melton,,,"jersey numbers prepended to every player cell (REQ-31 failure mode confirmed live)",https://www.packers.com/team/depth-chart
+GB,OFF,WR,0 Matthew Golden,87 J. Michael Sturdivant,,,"jersey numbers prepended (REQ-31)",https://www.packers.com/team/depth-chart
+GB,OFF,LG,65 Aaron Banks,79 Travis Glover,67 Donovan Jennings,,"three-deep slot; numbers prepended",https://www.packers.com/team/depth-chart
+GB,OFF,RB,8 Josh Jacobs,32 MarShawn Lloyd,22 Pierre Strong Jr.,"(continuation row: position blank) 26 Kaleb Johnson","4th player published on a continuation row with EMPTY position cell - parser trap; slot is a 4-player group (REQ-50)",https://www.packers.com/team/depth-chart
+GB,OFF,PR,,0 Matthew Golden,,,"rank-1 cell EMPTY; player published at rank 2 - empty-first-slot case (REQ-50)",https://www.packers.com/team/depth-chart
+GB,DEF,S,29 Xavier McKinney,27 Kitan Oladapo,,,"shared player: 27 Kitan Oladapo also listed at the second S slot",https://www.packers.com/team/depth-chart
+GB,DEF,S,33 Evan Williams,27 Kitan Oladapo,,,"same player (Kitan Oladapo) occupies both S slots - shared across slots (REQ-50)",https://www.packers.com/team/depth-chart
+GB,OFF,TE,85 Tucker Kraft,18 Jonnu Smith,86 Mark Redman,,"three-deep slot; numbers prepended",https://www.packers.com/team/depth-chart
+HOU,ALL,ALL,,,,,"Depth Chart section publishes ONE image (https://static.clubs.nfl.com/image/upload/texans/g3gkhdyah3rj1knd6dnz) under heading 'Unofficial Depth Chart' - no structured rows; transcription by eye rejected per REQ-31; needs an authorized structured source",https://www.houstontexans.com/team/depth-chart
+HOU,ALL,venue,,,,,"Club gameday promo on the same page reads 'Week 11 vs Colts ... at Reliant Stadium on November 19' - venue label disagrees with the league schedule label (NRG Stadium) per peer flag F-DSK-16; recorded, not resolved (REQ-23)",https://www.houstontexans.com/team/depth-chart

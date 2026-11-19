@@ -1,0 +1,594 @@
+{
+ "dataset": "nfl-week11-series/series",
+ "title": "Timestamped availability series (REQ-21/53/54): three dated reads of the official injury report",
+ "session": "arena-23197e9d-own4",
+ "policy": "Deltas are the published signal; single levels are context only. Every read carries its clock time and method. Hashes verified before parse; parser shares no code with any transcription.",
+ "points": [
+  {
+   "id": "capture_a",
+   "label": "raw-bytes capture (peer workflow)",
+   "read_utc": "2026-11-18T23:49:17Z",
+   "kind": "immutable raw HTML bytes",
+   "source_url": "https://www.nfl.com/injuries/",
+   "path": "nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html",
+   "sha256": "e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b",
+   "sha256_verified_this_session": true,
+   "summary": {
+    "n_rows": 242,
+    "n_clubs_with_rows": 23,
+    "per_club_rows": {
+     "49ers": 15,
+     "Bears": 5,
+     "Bills": 15,
+     "Broncos": 9,
+     "Buccaneers": 6,
+     "Cardinals": 12,
+     "Chiefs": 15,
+     "Colts": 11,
+     "Cowboys": 14,
+     "Dolphins": 11,
+     "Eagles": 15,
+     "Giants": 6,
+     "Jaguars": 13,
+     "Jets": 8,
+     "Lions": 8,
+     "Panthers": 13,
+     "Raiders": 6,
+     "Ravens": 6,
+     "Saints": 10,
+     "Steelers": 10,
+     "Texans": 15,
+     "Titans": 9,
+     "Vikings": 10
+    },
+    "designation_levels": {
+     "Out": 9,
+     "Questionable": 7
+    },
+    "n_rows_with_game_designation": 16,
+    "practice_levels": {
+     "DNP": 0,
+     "LP": 0,
+     "FP": 0
+    },
+    "no_injuries_reported_clubs": [
+     "Bengals",
+     "Chargers",
+     "Commanders"
+    ]
+   },
+   "peer_published_summary": {
+    "read": "capture_a",
+    "n_rows": 242,
+    "n_clubs_with_rows": 23,
+    "n_clubs_no_injuries_reported": 3,
+    "no_injuries_reported_clubs": [
+     "Chargers",
+     "Bengals",
+     "Commanders"
+    ],
+    "abnormal_blocks": [],
+    "designation_levels": {
+     "Questionable": 7,
+     "Out": 9
+    },
+    "n_rows_with_game_designation": 16,
+    "pct_rows_with_game_designation": 6.61,
+    "practice_levels": {
+     "Did Not Participate In Practice": 77,
+     "Full Participation in Practice": 83,
+     "Limited Participation in Practice": 82
+    },
+    "per_club_rows": {
+     "49ers": 15,
+     "Bears": 5,
+     "Bills": 15,
+     "Broncos": 9,
+     "Buccaneers": 6,
+     "Cardinals": 12,
+     "Chiefs": 15,
+     "Colts": 11,
+     "Cowboys": 14,
+     "Dolphins": 11,
+     "Eagles": 15,
+     "Giants": 6,
+     "Jaguars": 13,
+     "Jets": 8,
+     "Lions": 8,
+     "Panthers": 13,
+     "Raiders": 6,
+     "Ravens": 6,
+     "Saints": 10,
+     "Steelers": 10,
+     "Texans": 15,
+     "Titans": 9,
+     "Vikings": 10
+    }
+   }
+  },
+  {
+   "id": "capture_b",
+   "label": "platform-rendered markdown read (peer session)",
+   "read_utc": "2026-11-19T07:05:00Z",
+   "kind": "rendered markdown transcription",
+   "source_url": "https://www.nfl.com/injuries/",
+   "path": "nfl-daily-desk/captures/2026-11-19/injury-report-week11.md",
+   "sha256": "d2ec7ac360f4f56064554d5af0a6352091a3f8ef81d4001539fddbf865c23676",
+   "sha256_verified_this_session": true,
+   "summary": {
+    "n_rows": 253,
+    "n_clubs_with_rows": 24,
+    "per_club_rows": {
+     "49ers": 15,
+     "Bears": 5,
+     "Bills": 15,
+     "Broncos": 9,
+     "Buccaneers": 6,
+     "Cardinals": 12,
+     "Chargers": 11,
+     "Chiefs": 15,
+     "Colts": 11,
+     "Cowboys": 14,
+     "Dolphins": 11,
+     "Eagles": 15,
+     "Giants": 6,
+     "Jaguars": 13,
+     "Jets": 8,
+     "Lions": 8,
+     "Panthers": 13,
+     "Raiders": 6,
+     "Ravens": 6,
+     "Saints": 10,
+     "Steelers": 10,
+     "Texans": 15,
+     "Titans": 9,
+     "Vikings": 10
+    },
+    "designation_levels": {
+     "Out": 9,
+     "Questionable": 7
+    },
+    "n_rows_with_game_designation": 16,
+    "practice_levels": {
+     "DNP": 0,
+     "LP": 0,
+     "FP": 0
+    },
+    "no_injuries_reported_clubs": [
+     "Bengals",
+     "Commanders"
+    ]
+   }
+  },
+  {
+   "id": "capture_c",
+   "label": "platform-rendered markdown read (this session)",
+   "read_utc": "2026-11-19T11:25:00Z",
+   "kind": "rendered markdown transcription (7 chunks; chunks 5-6 chrome-only, verified)",
+   "source_url": "https://www.nfl.com/injuries/",
+   "path": "nfl-week11-series/evidence/week11_rows.csv",
+   "summary": {
+    "n_rows": 253,
+    "n_clubs_with_rows": 24,
+    "per_club_rows": {
+     "49ers": 15,
+     "Bears": 5,
+     "Bills": 15,
+     "Broncos": 9,
+     "Buccaneers": 6,
+     "Cardinals": 12,
+     "Chargers": 11,
+     "Chiefs": 15,
+     "Colts": 11,
+     "Cowboys": 14,
+     "Dolphins": 11,
+     "Eagles": 15,
+     "Giants": 6,
+     "Jaguars": 13,
+     "Jets": 8,
+     "Lions": 8,
+     "Panthers": 13,
+     "Raiders": 6,
+     "Ravens": 6,
+     "Saints": 10,
+     "Steelers": 10,
+     "Texans": 15,
+     "Titans": 9,
+     "Vikings": 10
+    },
+    "designation_levels": {
+     "Out": 9,
+     "Questionable": 7
+    },
+    "n_rows_with_game_designation": 16,
+    "practice_levels": {
+     "DNP": 86,
+     "LP": 85,
+     "FP": 82
+    },
+    "no_injuries_reported_clubs": [
+     "Bengals",
+     "Commanders"
+    ]
+   }
+  }
+ ],
+ "deltas": [
+  {
+   "from": "capture_a",
+   "to": "capture_b",
+   "hours_apart": 7.25,
+   "n_shared": 241,
+   "appeared": [
+    {
+     "club": "Chargers",
+     "player": "Brenen Thompson",
+     "player_url": "",
+     "position": "WR",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Charlie Kolar",
+     "player_url": "",
+     "position": "TE",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Daiyan Henley",
+     "player_url": "",
+     "position": "LB",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Donte Jackson",
+     "player_url": "",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Isas Waxter",
+     "player_url": "",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Justin Eboigbe",
+     "player_url": "",
+     "position": "DE",
+     "injuries": "",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Kendall Williamson",
+     "player_url": "",
+     "position": "S",
+     "injuries": "",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Khalil Mack",
+     "player_url": "",
+     "position": "DE",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Ladd McConkey",
+     "player_url": "",
+     "position": "WR",
+     "injuries": "",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Rodney Shelley",
+     "player_url": "",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "Did Not Participate In Practice",
+     "game_status": ""
+    },
+    {
+     "club": "Chargers",
+     "player": "Trey Pipkins",
+     "player_url": "",
+     "position": "T",
+     "injuries": "",
+     "practice_status": "Limited Participation in Practice",
+     "game_status": ""
+    }
+   ],
+   "gone": [],
+   "identity_variants": [
+    {
+     "club": "Bills",
+     "name_in_from": "Dee Alford",
+     "name_in_to": "De'Alford, Dee",
+     "player_url": "",
+     "note": "same player, display-name variant between reads; joined by club+name-token subset"
+    }
+   ],
+   "practice_changed": [
+    {
+     "club": "Panthers",
+     "player": "Will Lee III",
+     "from": "FP",
+     "to": "LP",
+     "player_url": "https://www.nfl.com/players/will-lee-iii/"
+    }
+   ],
+   "designation_changed": [],
+   "injury_text_changed": []
+  },
+  {
+   "from": "capture_a",
+   "to": "capture_c",
+   "hours_apart": 11.6,
+   "n_shared": 242,
+   "appeared": [
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Brenen Thompson",
+     "player_url": "https://www.nfl.com/players/brenen-thompson/",
+     "position": "WR",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Charlie Kolar",
+     "player_url": "https://www.nfl.com/players/charlie-kolar/",
+     "position": "TE",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Daiyan Henley",
+     "player_url": "https://www.nfl.com/players/daiyan-henley/",
+     "position": "LB",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Donte Jackson",
+     "player_url": "https://www.nfl.com/players/donte-jackson/",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "LP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Isas Waxter",
+     "player_url": "https://www.nfl.com/players/isas-waxter/",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Justin Eboigbe",
+     "player_url": "https://www.nfl.com/players/justin-eboigbe/",
+     "position": "DE",
+     "injuries": "",
+     "practice_status": "LP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Kendall Williamson",
+     "player_url": "https://www.nfl.com/players/kendall-williamson/",
+     "position": "S",
+     "injuries": "",
+     "practice_status": "LP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Khalil Mack",
+     "player_url": "https://www.nfl.com/players/khalil-mack/",
+     "position": "DE",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Ladd McConkey",
+     "player_url": "https://www.nfl.com/players/ladd-mcconkey/",
+     "position": "WR",
+     "injuries": "",
+     "practice_status": "LP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Rodney Shelley",
+     "player_url": "https://www.nfl.com/players/rodney-shelley/",
+     "position": "CB",
+     "injuries": "",
+     "practice_status": "DNP",
+     "game_status": ""
+    },
+    {
+     "week": "11",
+     "game_date": "2026-11-22",
+     "club": "Chargers",
+     "player": "Trey Pipkins",
+     "player_url": "https://www.nfl.com/players/trey-pipkins/",
+     "position": "T",
+     "injuries": "",
+     "practice_status": "LP",
+     "game_status": ""
+    }
+   ],
+   "gone": [],
+   "identity_variants": [],
+   "practice_changed": [
+    {
+     "club": "Eagles",
+     "player": "Dontayvion Wicks",
+     "from": "LP",
+     "to": "FP",
+     "player_url": "https://www.nfl.com/players/dontayvion-wicks/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jalyx Hunt",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jalyx-hunt/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jihaad Campbell",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jihaad-campbell/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jonathan Greenard",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jonathan-greenard/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Nolan Smith",
+     "from": "LP",
+     "to": "FP",
+     "player_url": "https://www.nfl.com/players/nolan-smith/"
+    }
+   ],
+   "designation_changed": [],
+   "injury_text_changed": []
+  },
+  {
+   "from": "capture_b",
+   "to": "capture_c",
+   "hours_apart": 4.33,
+   "n_shared": 252,
+   "appeared": [],
+   "gone": [],
+   "identity_variants": [
+    {
+     "club": "Bills",
+     "name_in_from": "De'Alford, Dee",
+     "name_in_to": "Dee Alford",
+     "player_url": "https://www.nfl.com/players/deaundre-ford/",
+     "note": "same player, display-name variant between reads; joined by club+name-token subset"
+    }
+   ],
+   "practice_changed": [
+    {
+     "club": "Eagles",
+     "player": "Dontayvion Wicks",
+     "from": "LP",
+     "to": "FP",
+     "player_url": "https://www.nfl.com/players/dontayvion-wicks/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jalyx Hunt",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jalyx-hunt/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jihaad Campbell",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jihaad-campbell/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Jonathan Greenard",
+     "from": "FP",
+     "to": "DNP",
+     "player_url": "https://www.nfl.com/players/jonathan-greenard/"
+    },
+    {
+     "club": "Eagles",
+     "player": "Nolan Smith",
+     "from": "LP",
+     "to": "FP",
+     "player_url": "https://www.nfl.com/players/nolan-smith/"
+    },
+    {
+     "club": "Panthers",
+     "player": "Will Lee III",
+     "from": "LP",
+     "to": "FP",
+     "player_url": "https://www.nfl.com/players/will-lee-iii/"
+    }
+   ],
+   "designation_changed": [],
+   "injury_text_changed": []
+  }
+ ],
+ "peer_delta_arithmetic_note": {
+  "peer_narrative": "capture_a -> capture_b: 241 shared, 11 appeared, 1 gone, 1 status change (nfl-daily-desk/data/availability_delta.json)",
+  "arithmetic": "241 shared + 11 appeared = 252 rows, but the peer's own capture_b summary reports 253 rows; 1 row unexplained",
+  "this_session_finds": "independent parses: a=242 (matches peer summary), b=253 (matches peer summary); the gone/appeared pair in the peer narrative is the De'Alford, Dee <-> Dee Alford display-name variant this session classifies as one identity pair (b->c identity_variants)",
+  "status": "published as a cross-session arithmetic note; nothing edited in the peer namespace"
+ },
+ "cross_checks": {
+  "per_club_b_vs_c_equal": true,
+  "designation_levels_a_b_c_equal": true,
+  "n_designation_rows_a_b_c": [
+   16,
+   16,
+   16
+  ]
+ }
+}

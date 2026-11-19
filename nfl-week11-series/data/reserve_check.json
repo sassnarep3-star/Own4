@@ -1,0 +1,118 @@
+{
+ "dataset": "nfl-week11-series/reserve_check",
+ "title": "Reserve-list vs practice-table cross-check (REQ-62): 'not listed' never means 'available'",
+ "session": "arena-23197e9d-own4",
+ "read_utc": "2026-11-19T11:13:00Z",
+ "sources": {
+  "reserve_november": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+  "reserve_october": "https://www.nfl.com/transactions/league/reserve-list/2026/10",
+  "other_november": "https://www.nfl.com/transactions/league/other/2026/11",
+  "injury_report": "https://www.nfl.com/injuries/"
+ },
+ "ledger_counts": {
+  "november_rows": 25,
+  "october_rows": 25,
+  "other_november_rows": 5,
+  "trades_november_rows": 12
+ },
+ "six_reported_contradictions": [
+  {
+   "player": "Mason McCormick",
+   "club": "Steelers",
+   "reserve_date": "2026-11-18",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": false,
+   "in_capture_b_2026-11-19T07:05Z": false,
+   "in_capture_c_2026-11-19T11:25Z": false,
+   "capture_c_practice": "",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "dropped from the practice table between capture_b and capture_c"
+  },
+  {
+   "player": "Jared Wiley",
+   "club": "Chiefs",
+   "reserve_date": "2026-11-18",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": false,
+   "in_capture_b_2026-11-19T07:05Z": false,
+   "in_capture_c_2026-11-19T11:25Z": false,
+   "capture_c_practice": "",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "dropped from the practice table between capture_b and capture_c"
+  },
+  {
+   "player": "Aidan Hutchinson",
+   "club": "Lions",
+   "reserve_date": "2026-11-18",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": false,
+   "in_capture_b_2026-11-19T07:05Z": false,
+   "in_capture_c_2026-11-19T11:25Z": false,
+   "capture_c_practice": "",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "dropped from the practice table between capture_b and capture_c"
+  },
+  {
+   "player": "Bo Richter",
+   "club": "Vikings",
+   "reserve_date": "2026-11-18",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": false,
+   "in_capture_b_2026-11-19T07:05Z": false,
+   "in_capture_c_2026-11-19T11:25Z": false,
+   "capture_c_practice": "",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "dropped from the practice table between capture_b and capture_c"
+  },
+  {
+   "player": "Azeez Al-Shaair",
+   "club": "Texans",
+   "reserve_date": "2026-11-17",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": true,
+   "in_capture_b_2026-11-19T07:05Z": true,
+   "in_capture_c_2026-11-19T11:25Z": true,
+   "capture_c_practice": "DNP",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "still listed in the practice table 2 days after Reserve/Injured - contradiction live"
+  },
+  {
+   "player": "Jaylon Carlies",
+   "club": "Colts",
+   "reserve_date": "2026-11-17",
+   "reserve_source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "in_capture_a_2026-11-18T23:49Z": true,
+   "in_capture_b_2026-11-19T07:05Z": true,
+   "in_capture_c_2026-11-19T11:25Z": true,
+   "capture_c_practice": "DNP",
+   "capture_c_game_status": "",
+   "table_source_url": "https://www.nfl.com/injuries/",
+   "finding": "still listed in the practice table 2 days after Reserve/Injured - contradiction live"
+  }
+ ],
+ "still_contradictory_at_capture_c": [
+  "Azeez Al-Shaair",
+  "Jaylon Carlies"
+ ],
+ "willis_case": {
+  "player": "Malik Willis",
+  "club": "Dolphins",
+  "position": "QB",
+  "news_says": "placed on injured reserve Tuesday due to a groin injury (Weeks 10-13 missed; eligible to return Dec 13)",
+  "news_source_url": "https://www.nfl.com/news/dolphins-place-qb-malik-willis-groin-on-injured-reserve-kyle-mccord-in-line-for-first-start",
+  "news_date_resolution": "article read 2026-11-19; body says 'Tuesday'; related content dated Nov 10-11 2026 and the referenced Week 10 game was Sun Nov 15 -> Tuesday = 2026-11-10 (resolution published as an inference from the article's own frame, flagged)",
+  "ledger_november_row_found": false,
+  "ledger_october_row_found": false,
+  "other_ledger_november_row_found": false,
+  "other_ledger_source_url": "https://www.nfl.com/transactions/league/other/2026/11",
+  "appears_in_week10_table": false,
+  "appears_in_week11_table": false,
+  "finding": "absence from the weekly report is not availability: Willis is absent from both weeks' tables AND the reserve ledgers do not carry the move the news describes - both surfaces are needed; ledger gap flagged (F-WS-01)"
+ },
+ "policy": "Rows are ledger/table observations only; no availability state is inferred from absence."
+}

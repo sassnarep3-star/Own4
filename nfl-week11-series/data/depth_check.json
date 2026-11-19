@@ -1,0 +1,122 @@
+{
+ "dataset": "nfl-week11-series/depth_check",
+ "title": "Depth-parsing checks (REQ-31/49/50): live club pages read 2026-11-19",
+ "session": "arena-23197e9d-own4",
+ "read_utc": "2026-11-19T11:11:00Z",
+ "gb": {
+  "source_url": "https://www.packers.com/team/depth-chart",
+  "as_of_label_on_page": "Unofficial, Nov. 10, 2026",
+  "n_observation_rows": 8,
+  "jersey_number_strip_rule": "strip ^\\d+ + from every player cell; store raw string alongside",
+  "n_cells_recovered_by_strip_rule": 19,
+  "recoveries": [
+   {
+    "raw": "9 Christian Watson",
+    "recovered": "Christian Watson",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "16 Bo Melton",
+    "recovered": "Bo Melton",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "0 Matthew Golden",
+    "recovered": "Matthew Golden",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "87 J. Michael Sturdivant",
+    "recovered": "J. Michael Sturdivant",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "65 Aaron Banks",
+    "recovered": "Aaron Banks",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "79 Travis Glover",
+    "recovered": "Travis Glover",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "67 Donovan Jennings",
+    "recovered": "Donovan Jennings",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "8 Josh Jacobs",
+    "recovered": "Josh Jacobs",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "32 MarShawn Lloyd",
+    "recovered": "MarShawn Lloyd",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "22 Pierre Strong Jr.",
+    "recovered": "Pierre Strong Jr.",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "(continuation row: position blank) 26 Kaleb Johnson",
+    "recovered": "26 Kaleb Johnson",
+    "rule": "continuation row (position blank)"
+   },
+   {
+    "raw": "0 Matthew Golden",
+    "recovered": "Matthew Golden",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "29 Xavier McKinney",
+    "recovered": "Xavier McKinney",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "27 Kitan Oladapo",
+    "recovered": "Kitan Oladapo",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "33 Evan Williams",
+    "recovered": "Evan Williams",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "27 Kitan Oladapo",
+    "recovered": "Kitan Oladapo",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "85 Tucker Kraft",
+    "recovered": "Tucker Kraft",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "18 Jonnu Smith",
+    "recovered": "Jonnu Smith",
+    "rule": "strip leading jersey number"
+   },
+   {
+    "raw": "86 Mark Redman",
+    "recovered": "Mark Redman",
+    "rule": "strip leading jersey number"
+   }
+  ],
+  "structural_findings": [
+   "PR slot publishes an EMPTY rank-1 cell with the player at rank 2 (empty-first-slot, REQ-50)",
+   "Kitan Oladapo (27) is published in BOTH S slots (shared across slots, REQ-50)",
+   "RB slot's 4th player appears on a continuation row with an EMPTY position cell (parser trap)",
+   "every player cell prepends the jersey number (REQ-31 failure mode confirmed live)"
+  ]
+ },
+ "hou": {
+  "source_url": "https://www.houstontexans.com/team/depth-chart",
+  "finding": "Depth Chart section publishes one image (https://static.clubs.nfl.com/image/upload/texans/g3gkhdyah3rj1knd6dnz) under 'Unofficial Depth Chart'; no structured rows exist to parse; transcription by eye is rejected (REQ-31); an authorized structured source is required",
+  "venue_label_note": "club gameday promo on the same page reads 'at Reliant Stadium on November 19' vs the league schedule label NRG Stadium (peer F-DSK-16); recorded, not resolved (REQ-23)"
+ },
+ "policy": "Depth slots are treated as groups; no starter is inferred from column order (brief rejects jersey/experience/salary derivation)."
+}
