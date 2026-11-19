@@ -1,0 +1,83 @@
+:root{
+  color-scheme:light;
+  --ink:#16212e;--muted:#55606d;--line:#dfe5ec;--paper:#fff;--wash:#f5f7fa;
+  --navy:#132c45;--blue:#0f62a8;--teal:#0a6f68;--amber:#8a5a00;--red:#a3342f;--green:#166b46;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--wash);color:var(--ink);
+  font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+a{color:var(--blue);text-underline-offset:2px;text-decoration-thickness:1px}
+a:hover{color:#0a3f6d}
+a:focus-visible,button:focus-visible{outline:3px solid #e8a825;outline-offset:2px}
+code{font:.86em ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#eef2f6;
+  padding:1px 4px;border-radius:4px;color:#243244;word-break:break-word}
+.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;background:#fff;padding:8px;z-index:9}
+
+.top{background:var(--navy);color:#fff;border-bottom:3px solid #0a6f68}
+.top .wrap{display:flex;gap:18px;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;padding:12px 0}
+.brand{color:#fff;text-decoration:none;font-weight:800;letter-spacing:.06em;font-size:1.02rem;
+  display:flex;flex-direction:column;line-height:1.15}
+.brand span{font-weight:500;letter-spacing:.02em;font-size:.72rem;color:#a9cfe0}
+nav.main{display:flex;gap:4px;flex-wrap:wrap}
+nav.main .nav{color:#dbe9f2;text-decoration:none;font-size:.86rem;padding:6px 9px;border-radius:7px;
+  border:1px solid transparent;white-space:nowrap}
+nav.main .nav:hover{background:#1c3f5e;color:#fff}
+nav.main .nav.on{background:#fff;color:var(--navy);font-weight:700;border-color:#fff}
+
+main{padding:26px 0 60px}
+h1{font-size:clamp(1.75rem,3.4vw,2.55rem);line-height:1.12;margin:.2em 0 .5em;color:var(--navy);
+  letter-spacing:-.01em;max-width:22ch}
+h2{font-size:1.3rem;margin:2.1em 0 .5em;color:var(--navy);padding-bottom:.25em;
+  border-bottom:2px solid var(--line)}
+h3{margin:.2em 0 .5em;font-size:1.02rem;color:var(--navy)}
+p{margin:.6em 0}
+.eyebrow{text-transform:uppercase;letter-spacing:.13em;font-size:.72rem;font-weight:800;
+  color:var(--teal);margin:0}
+.lede{font-size:1.02rem;color:var(--muted);max-width:78ch}
+.legend{font-size:.9rem;color:var(--muted)}
+.small{font-size:.88rem}
+.tiny{font-size:.82rem;color:var(--muted);margin:.35em 0 0;line-height:1.45}
+.note{background:#fdf7e6;border-left:4px solid #c08a15;padding:12px 15px;border-radius:6px;
+  font-size:.9rem;color:#4d3c11;margin:14px 0}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;
+  margin:14px 0}
+.panel ul{margin:.4em 0 0;padding-left:1.1em}
+.panel li{margin:.25em 0}
+
+.hero{background:linear-gradient(128deg,#132c45,#1b4a6e 62%,#0a6f68);color:#fff;
+  border-radius:16px;padding:clamp(22px,4vw,44px);margin:6px 0 18px;box-shadow:0 12px 30px #132c451f}
+.hero h1{color:#fff;max-width:26ch}
+.hero p{color:#e2eef5;max-width:82ch}
+.hero .eyebrow{color:#9fded6}
+.hero-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:16px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px}
+.kpi .n{font-size:1.7rem;font-weight:800;color:var(--navy);line-height:1.1}
+.kpi .l{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:.3em}
+
+.badge{display:inline-block;font-size:.74rem;font-weight:700;padding:2px 8px;border-radius:20px;
+  letter-spacing:.02em;white-space:nowrap}
+.badge.ok{background:#e3f3ea;color:var(--green)}
+.badge.bad{background:#fbe9e7;color:var(--red)}
+.badge.warn{background:#fdf0d6;color:var(--amber)}
+.badge.muted{background:#eef2f6;color:var(--muted)}
+
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:.92rem}
+caption{caption-side:top;text-align:left;font-weight:700;color:var(--navy);padding:6px 0;font-size:.92rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+thead th{background:#f0f4f8;color:var(--navy);font-weight:700;white-space:nowrap}
+tbody tr:nth-child(even){background:#fafbfd}
+td.blank{color:var(--muted)}
+td.small,th.small{font-size:.84rem}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+
+footer{border-top:1px solid var(--line);background:#fff;margin-top:40px}
+footer .wrap{padding:20px 0;color:var(--muted);font-size:.88rem}
+footer a{color:var(--blue)}

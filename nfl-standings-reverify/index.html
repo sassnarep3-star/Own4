@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Standings re-verification · Own4</title>
+<meta name="description" content="NFL standings re-verification — independent re-derivation from the official nfl.com standings page, 2026-11-19.">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="top"><div class="wrap">
+  <a class="brand" href="index.html">Own4 <span>NFL standings re-verification</span></a>
+  <nav class="main" aria-label="Sections"><a class="nav on" href="index.html">Re-verification</a><a class="nav" href="pages/standings.html">Standings</a><a class="nav" href="pages/verification.html">Method</a><a class="nav" href="pages/flagged.html">Flagged</a></nav>
+</div></div>
+<main id="main"><div class="wrap">
+
+<div class="hero">
+  <p class="eyebrow">Independent re-derivation · 2026-11-19</p>
+  <h1>The 2026 NFL standings, re-read from the official page and checked field by field</h1>
+  <p>This workspace takes the stored read of <a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings</a> captured on 2026-11-19 and re-derives every row with a parser that shares no code with the original, then compares the two field by field. The fresh read agrees with the stored read on all 32 rows and all seven fields.</p>
+  <div class="hero-links">
+    <a class="nav on" style="background:#fff;color:var(--navy);font-weight:700" href="pages/standings.html">Standings table ↗</a>
+    <a class="nav" style="background:#1c3f5e;color:#fff" href="pages/verification.html">Method &amp; checks ↗</a>
+    <a class="nav" style="background:#1c3f5e;color:#fff" href="pages/flagged.html">Flagged ↗</a>
+  </div>
+</div>
+<div class="kpis"><div class="kpi"><div class="n">32</div><div class="l">clubs re-read</div></div><div class="kpi"><div class="n">150</div><div class="l">league games</div></div><div class="kpi"><div class="n">0</div><div class="l">disagreements vs stored</div></div><div class="kpi"><div class="n">0</div><div class="l">per-club identity failures</div></div></div>
+
+<h2>What was verified</h2>
+<div class="panel">
+  <p class="lede">The official NFL standings page was read on 2026-11-19 through the session's page-read tool (the sandbox has no direct HTTPS egress to nfl.com). The 32 club rows were parsed independently and the league identities re-derived: <strong>300</strong> team-games, so <strong>150</strong> league games played; wins equal losses (149 = 149); points for equal points against (6923 = 6923), so the league point total reconciles.</p>
+  <p class="small">The stored comparison target is <code>nfl-desk/data/standings_2026-11-19.json</code>, a read of the same official page on the same day. The two parsers share no code; a disagreement on any of W, L, T, PCT, PF, PA or NET would be published, never overwritten.</p>
+</div>
+
+<h2>Agreement with the stored read</h2>
+<div class="tw"><table><caption>Field-by-field comparison · fresh read vs stored nfl-desk read</caption>
+<thead><tr><th scope="col">Check</th><th scope="col">Result</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><td>Fresh rows parsed</td><td><span class="badge ok">32</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>Stored rows compared</td><td><span class="badge ok">32</span></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/standings_2026-11-19.json" target="_blank" rel="noopener">nfl-desk standings</a></td></tr>
+<tr><td>Fields compared per row (W L T PCT PF PA NET)</td><td><span class="badge ok">7</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>Disagreements</td><td><span class="badge ok">0</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>League games (sum(W+L+T)/2)</td><td><span class="badge ok">150</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>Wins = Losses</td><td><span class="badge ok">True</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>Points For = Points Against</td><td><span class="badge ok">True</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+<tr><td>Per-club identity failures (NET, PCT)</td><td><span class="badge ok">0</span></td><td class="small"><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">https://www.nfl.com/standings/</a></td></tr>
+</tbody></table></div>
+
+<div class="note"><strong>Methodological finding (not a data error):</strong> the NFL counts a tie as half a win and half a loss, so a club's published winning percentage is <code>(W + 0.5·T) / (W + L + T)</code>, not <code>W / (W + L + T)</code>. This was caught by the identity check and corrected in the check itself — the published PCT values for the two tied clubs (NYG 0.611, WAS 0.389) are correct under the NFL's rule. See the <a href="pages/flagged.html">Flagged</a> page.</div>
+
+<p class="tiny">Read route: rendered text returned by the session's page-fetch tool. Capture stored at <code>captures/standings_2026-11-19.md</code>; parsed by <code>engine/parse.py</code>; page generated by <code>engine/build.py</code>; publication gate is <code>engine/verify.py</code>.</p>
+
+</div></main>
+<footer><div class="wrap">
+<p><strong>Own4 · NFL standings re-verification</strong> — Research only, not wagering advice. A value that could not be confirmed from an official source is blank and flagged. Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that could not be confirmed is blank and listed on the <a href="pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline</a> · <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG ↗</a></p>
+</div></footer>
+</body>
+</html>

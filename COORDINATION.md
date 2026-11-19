@@ -6095,3 +6095,58 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 
 - PR opened: https://github.com/sassnarep3-star/Own4/pull/193 (arena/a2547367-own4 → main). Merge attempted next in this session; result recorded when confirmed.
 **Publication result.** PR [#190](https://github.com/sassnarep3-star/Own4/pull/190) was merged with merge strategy at 2026-11-19T11:06:30Z; merge commit [`f58d81e`](https://github.com/sassnarep3-star/Own4/commit/f58d81e87ce532283ffee5856c0f089b7c93e727). GitHub Pages build-and-deployment run [44511791022](https://github.com/sassnarep3-star/Own4/actions/runs/44511791022) completed successfully, including the `Deploy to GitHub Pages` job. Post-deploy reads confirmed the NFL portal and latest desk load at https://sassnarep3-star.github.io/Own4/nfl/ and https://sassnarep3-star.github.io/Own4/nfl-daily-desk/; the repository root loads at https://sassnarep3-star.github.io/Own4/.
+
+## Session `arena/3c2c0922-own4` — NFL standings independent re-verification (claim + completion, 2026-11-19 UTC)
+
+Session: `arena/3c2c0922-own4` (fixed for this session). Branch: `arena/3c2c0922-own4`, branched from
+`36447d2` of `main`. Status at claim: `active`.
+
+| # | Task | Status | Owner session | Files touched |
+|---|------|--------|---------------|---------------|
+| SR-01 | Independent re-derivation of the 2026 NFL standings from the official page, field-by-field comparison against the stored nfl-desk read, published as a source-linked site | done | arena/3c2c0922-own4 | `nfl-standings-reverify/**`, `index.html` (additive nav link), `COORDINATION.md` (append-only) |
+
+### Claim (2026-11-19 UTC)
+No other session had claimed an independent standings re-verification. Prior sessions (`nfl-desk`,
+`nfl-daily-desk`, `nfl-verify-2026-11-19`) had each read the official standings, but none had built a
+workspace whose checking parser shares no code with the parser that produced the stored read and that
+publishes the field-by-field comparison as its primary artifact. Claimed SR-01 with file scope
+`nfl-standings-reverify/**` plus one additive navigation link in the root `index.html` (shared
+navigation, edited by this final-integration session because all other tasks were already merged to
+`main`). No other session's scoped files were edited.
+
+### Sources verified (official, read through the session's page-fetch tool)
+- `https://www.nfl.com/standings/` — the 2026 regular-season standings, read 2026-11-19. The rendered
+  text was stored verbatim at `nfl-standings-reverify/captures/standings_2026-11-19.md`. Every value on
+  the site is transcribed from this capture; no value was inferred.
+
+### Verification performed
+- Independent parser (`engine/parse.py`, shares no code with `nfl-desk/engine/parse_standings.py`)
+  parsed **32** club rows from the capture.
+- League identities re-derived: sum(W+L+T) = 300 ⇒ **150** league games; wins = losses (149 = 149);
+  points for = points against (6,923 = 6,923), so PF − PA = 0.
+- Field-by-field comparison against the stored `nfl-desk/data/standings_2026-11-19.json` (same official
+  page, same day): **0 disagreements** on all 32 rows and all 7 fields (W, L, T, PCT, PF, PA, NET).
+- Per-club identity checks (NET = PF − PA; PCT = (W + 0.5·T)/(W+L+T)): **0 failures** after the
+  tie-count rule was applied.
+- `engine/verify.py` passes all six rules (47 data rows, every one source-linked to an approved host;
+  34 local hrefs, 0 broken; counts re-derived from the capture by a second parser; byte-identical
+  rebuild; no banned basis; no TBD/N/A).
+- Existing suites re-run and still pass: `nfl-desk` (PASS), `nfl-daily-desk` (all rules pass, 14
+  pages / 728 data rows).
+
+### Irregularities / methodological finding (published, not a data error)
+- **Tie-count PCT rule.** The identity check first tested PCT against `W/(W+L+T)` and flagged two tied
+  clubs — NYG (5-3-1, PCT 0.611) and WAS (3-5-1, PCT 0.389) — because that naive formula gives 0.556
+  and 0.333. The NFL counts a tie as half a win and half a loss, so the published PCT is
+  `(W + 0.5·T)/(W+L+T)`: NYG = 5.5/9 = 0.611, WAS = 3.5/9 = 0.389, both matching the official page. The
+  check was corrected to use the NFL's rule. The finding is disclosed on `pages/flagged.html` so a
+  reader who re-runs the naive formula sees why two rows appeared and why they are not errors. Status:
+  needs review (methodological, resolved in the check).
+
+### What this session does not claim
+No ROI, CLV, win rate, leaderboard entry or reward. No market line, residual or "beats the close"
+value — there is no licensed or official price source, and no graded games. Those remain blank with a
+reason.
+
+### PR, merge and Pages confirmation
+(to be recorded after merge)

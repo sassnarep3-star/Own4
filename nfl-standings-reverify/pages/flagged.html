@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flagged · Own4</title>
+<meta name="description" content="NFL standings re-verification — independent re-derivation from the official nfl.com standings page, 2026-11-19.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">Skip to content</a>
+<div class="top"><div class="wrap">
+  <a class="brand" href="../index.html">Own4 <span>NFL standings re-verification</span></a>
+  <nav class="main" aria-label="Sections"><a class="nav" href="../index.html">Re-verification</a><a class="nav" href="../pages/standings.html">Standings</a><a class="nav" href="../pages/verification.html">Method</a><a class="nav on" href="../pages/flagged.html">Flagged</a></nav>
+</div></div>
+<main id="main"><div class="wrap">
+
+<p class="eyebrow">Flagged for review · 2026-11-19</p>
+<h1>What could not be settled, or was corrected in the check</h1>
+<p class="lede">These do not block the site. Each is either a methodological point that was resolved in the checking code, or a value that could not be confirmed from an official source and is therefore blank.</p>
+
+<h2>Methodological finding — the tie-count PCT rule</h2>
+<div class="panel">
+  <p class="small">The identity check first tested PCT against <code>W / (W + L + T)</code> and flagged two clubs: <strong>NYG</strong> (5-3-1, published PCT 0.611) and <strong>WAS</strong> (3-5-1, published PCT 0.389). Under <code>W/(W+L+T)</code> those compute to 0.556 and 0.333, which do not match the published values.</p>
+  <p class="small">This is <strong>not a data error</strong>. The NFL counts a tie as half a win and half a loss, so the published PCT is <code>(W + 0.5·T) / (W + L + T)</code>: NYG = 5.5/9 = 0.611, WAS = 3.5/9 = 0.389, both matching the official page. The check was corrected to use the NFL's rule, and both clubs then pass. The finding is recorded here so a reader who re-runs the check with the naive formula sees why two rows appeared and why they are not errors.</p>
+  <p class="small">Source: <a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings</a> (NYG and WAS rows, 2026-11-19 read).</p>
+</div>
+
+<h2>Field disagreements: fresh read vs stored read</h2>
+<div class="panel"><p><span class="badge ok">None</span> The fresh read and the stored read agree on every row and every field. No field disagreement to publish.</p></div>
+
+<h2>Not verified — deliberately blank</h2>
+<div class="panel">
+  <p class="small">No market price, ROI, CLV, win rate, leaderboard entry or reward is published anywhere in this workspace: there is no licensed or official price source, and no graded games. These values are blank with a reason rather than filled in. See the parent <a href="../../nfl-desk/pages/flagged.html">NFL Desk flagged page</a> for the broader register of unverified items across the repository.</p>
+</div>
+
+<p class="tiny">A flag records a conflict or a methodological point; it is not a verdict on the data. Where the check was wrong, the check was corrected and the correction is disclosed here.</p>
+
+</div></main>
+<footer><div class="wrap">
+<p><strong>Own4 · NFL standings re-verification</strong> — Research only, not wagering advice. A value that could not be confirmed from an official source is blank and flagged. Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that could not be confirmed is blank and listed on the <a href="../pages/flagged.html">Flagged for review</a> page.</p>
+<p>Responsible gambling: <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">National Problem Gambling Helpline</a> · <a href="https://www.ncpgambling.org/help-treatment/" target="_blank" rel="noopener">NCPG ↗</a></p>
+</div></footer>
+</body>
+</html>
