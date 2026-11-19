@@ -6035,3 +6035,47 @@ link on an approved host; 19 flags; 14 questions; 12 suggestions all left at "pr
 rules, including byte-identical rebuilds, and the whole chain (`parse → compute → shadow → register →
 register2 → crosscheck → build → verify`) was re-run end to end after the second rebase. No file outside
 `nfl-daily-desk/**` and this board was modified.
+
+---
+
+## Session `arena/6c69aaa2-own4` — final integration: fresh official verification + decision-readiness landing (claim, 2026-11-19 UTC)
+
+**Branch (platform-pinned):** `arena/6c69aaa2-own4`, based on `36447d2` (= `origin/main` tip, PR #189 merged).
+The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch is
+created or pushed. All work is committed to this single branch.
+
+**Board read before claiming.** The most recent completed entries are dated 2026-11-19 (sessions
+`arena/6c8bbde6-own4`, `arena/4f78a318-own4`, `arena/1a2e0e65-own4`, `arena/048562c8-own4`,
+`arena/1153eb96-own4`, `arena/1e2776fd-own4`, `arena/92c458e6-own4` — all merged). Open PRs #29, #39, #43,
+#47, #56, #59, #93, #119, #127, #132, #150, #188 are stale (no commits since 2026-11-17), none of them
+touches the scope below. No active claim on `nfl-final-verify/**`.
+
+**Gap that justifies this session.** The user's brief demands a *decision-readiness table on the landing
+page* (one row per requirement, with the gate that blocks it and the number that would clear it), a clean
+landing page with subpages by category, an executive summary, a questions/answers list, a suggestions
+review surface, and line-by-line verification against official sources with links — published as one
+integrated surface. The registers exist (73 rows, three peer versions), but a *single consolidated
+landing* that merges the three registers, re-verifies each row against an official read taken **today**
+(2026-11-19), and publishes the decision-readiness table does not exist as one namespace. This session
+adds that, self-contained and fully source-linked.
+
+**Namespace claimed (exclusive):** `nfl-final-verify/**` (new). Shared files touched only additively:
+`COORDINATION.md` (append-only), one additive NAV group in `verification/build.py` + the regenerated
+`index.html` / `verified/*.html` it produces. No peer namespace file is edited; peer registers are read
+for merging, not overwritten. Where this session disagrees with a peer number, the disagreement is
+published on the Flagged page, not edited into the peer file.
+
+| ID | Task | Status | Owner | Files touched (scope) |
+|----|------|--------|-------|-----------------------|
+| F1 | Claim scope, read board, confirm no peer claim, commit+push claim | claimed | arena/6c69aaa2-own4 | COORDINATION.md |
+| F2 | Fresh official reads dated 2026-11-19 (standings, Week 11 injuries, Week 11 schedule, game centre sample, reserve list) — structured rows + source URL + fetch timestamp only | claimed | arena/6c69aaa2-own4 | nfl-final-verify/data/official_reads_2026_11_19.json |
+| F3 | Consolidated register: merge the three peer registers (text-matched), carry gate + clearing number + official source per row; re-verify each row against today's official read where the read supports it | claimed | arena/6c69aaa2-own4 | nfl-final-verify/engine/register.py, nfl-final-verify/data/requirements.json |
+| F4 | Decision-readiness table on the landing page + category subpages (requirements, verification, executive summary, questions, suggestions, flagged, sources, repo review); every row source-linked, unverifiable blank + flagged | claimed | arena/6c69aaa2-own4 | nfl-final-verify/index.html, nfl-final-verify/pages/**, nfl-final-verify/engine/build.py |
+| F5 | Verifier (row-source, local links, no localhost, placeholders, determinism) + CI workflow | claimed | arena/6c69aaa2-own4 | nfl-final-verify/engine/verify.py, .github/workflows/nfl-final-verify.yml |
+| F6 | Executive summary + repo review | claimed | arena/6c69aaa2-own4 | nfl-final-verify/EXECUTIVE_SUMMARY.md, nfl-final-verify/pages/repo-review.html |
+| F7 | Final integration: additive root nav, rebuild, PR → main → merge → Pages deploy confirmation, record result here | claimed | arena/6c69aaa2-own4 | verification/build.py, index.html, verified/*.html, COORDINATION.md |
+
+**Rules this session holds.** Official sources only; every published row carries a source link;
+unconfirmable values are blank + flagged, never inferred; no peer namespace file is edited; small
+frequent commits; `git pull --rebase` before every push; conflicts resolved as unions with every peer
+record retained verbatim.
