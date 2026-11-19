@@ -683,10 +683,16 @@ def build_flagged():
     for f in FLAGS:
         sev = {"high": "bad", "medium": "warn", "low": "mute"}.get(f["severity"], "mute")
         rows.append([E(f["id"]), pill(f["severity"], sev), E(f["area"]),
-                     "<strong>%s</strong>" % E(f["title"]), E(f["detail"]), E(f["how_to_confirm"]),
+                     "<strong>%s</strong>" % E(f["title"]),
+                     E(f["detail"]) + (('<br><em>%s</em>' % E(f["status_note"]))
+                                       if f.get("status_note") else ""),
+                     E(f["how_to_confirm"]),
                      " ".join('<a href="%s">source</a>' % E(u) for u in f["sources"])])
     body = """
 <section class="lede">
+  <p class="note">Every count on this page is re-measured at build time by
+  <code>engine/audit_repo.py</code>; none is typed into the prose. If a defect is fixed by a
+  later integration, the entry stays and says so, so the audit trail is not rewritten.</p>
   <p>Everything this session could not confirm, or found broken in someone else's work.
   Flagged items <strong>do not block</strong> the publication of this site; they are the review
   queue. Each states how it was checked, so it can be re-checked in seconds.</p>

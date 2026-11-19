@@ -20,8 +20,8 @@
    "id": "RF-02",
    "severity": "high",
    "area": "Site structure",
-   "title": "601 broken #anchor links and 52 broken file links across 57 peer pages",
-   "detail": "Mechanical check A resolves every internal href on every page outside the raw-capture directories. 601 anchors point at ids that do not exist in the target page, and 52 file links point at files that do not exist. Worst offenders: nfl-quant (208 anchors), nfl-readiness-register (99), nfl-sources (71), nfl-origination (39), nfl-price-snapshot (30), verified/ (24 \u2014 the root dashboard links verified/own-lines.html#parlays and #props, neither of which exists). Full list: nfl-command-deck/data/link_defects.json. These pages belong to other sessions and were not edited here.",
+   "title": "601 broken #anchor links across 57 peer pages (file links now clean)",
+   "detail": "Mechanical check A resolves every internal href on every page outside the raw-capture directories and outside this workspace: 31,017 references checked. 601 #anchor links point at ids that do not exist in the target page. File links are now clean \u2014 an earlier run of the same check on the pre-integration tree found 52 dead file links, 51 of them in legacy-root-dashboard.html, and a peer integration session has since resolved them; the count here is re-measured on every build, never typed. Worst offenders by anchor: nfl-quant (208), nfl-readiness-register (99), nfl-sources (71), nfl-origination (39), nfl-price-snapshot (30), verified/ (24 \u2014 the root dashboard links verified/own-lines.html#parlays and #props, neither of which exists). Full list: nfl-command-deck/data/link_defects.json. These pages belong to other sessions and were not edited here.",
    "how_to_confirm": "`python3 nfl-command-deck/engine/audit_repo.py` then open data/link_defects.json; or click the examples on this page.",
    "sources": [
     "https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/link_defects.json"
@@ -31,12 +31,13 @@
    "id": "RF-03",
    "severity": "medium",
    "area": "Site structure",
-   "title": "legacy-root-dashboard.html links to 51 pages that do not exist",
-   "detail": "The file links to pages/requirements.html, pages/data-standings.html and 49 other targets in a pages/ directory that holds a different, unrelated set of NBA pages. Anyone who navigates there from the repository file list hits a 404 on almost every link.",
+   "title": "legacy-root-dashboard.html linked to 51 pages that did not exist \u2014 resolved by a peer session",
+   "detail": "The file links to pages/requirements.html, pages/data-standings.html and 49 other targets in a pages/ directory that holds a different, unrelated set of NBA pages. The check that found this (audit check A) now reports 0 dead file links, so the defect has been fixed by another session's integration; this entry records what was found and is not deleted, so the audit trail stays intact.",
    "how_to_confirm": "Check A lists all 51; the file itself is at the repository root.",
    "sources": [
     "https://github.com/sassnarep3-star/Own4/blob/main/legacy-root-dashboard.html"
-   ]
+   ],
+   "status_note": "closed since 2026-11-19: the current build reports 0 dead file links; kept for the audit trail"
   },
   {
    "id": "RF-04",
@@ -132,8 +133,8 @@
    "id": "RF-12",
    "severity": "medium",
    "area": "Site structure",
-   "title": "Peer namespaces are frozen at ten different dates, which is why their numbers disagree",
-   "detail": "Landing-page header dates range from 2026-11-02 (nfl/) to 2026-11-22 (nfl-book). A reader who lands on an older workspace sees ratings and counts that later workspaces have revised. This is the root cause behind most cross-namespace disagreements; it is a publication-hygiene problem, not a data error.",
+   "title": "Peer namespaces are frozen at twelve different dates, which is why their numbers disagree",
+   "detail": "Landing-page header dates across 35 namespaces span twelve distinct values, from 2026-11-02 (nfl/) to 2026-11-22 (nfl-book, nfl-collector, nfl-command-deck's siblings). A reader who lands on an older workspace sees ratings and counts that later workspaces have revised. This is the root cause behind most cross-namespace disagreements; it is a publication-hygiene problem, not a data error.",
    "how_to_confirm": "audit.json check I lists every namespace's latest displayed date.",
    "sources": [
     "https://github.com/sassnarep3-star/Own4"

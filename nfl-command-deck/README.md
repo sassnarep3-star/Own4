@@ -12,8 +12,7 @@ It does not re-publish peer numbers as new analysis. It does four things, all re
    file changes.
 2. **A permutation null** (`engine/null_test.py`) that destroys team identity and keeps the
    real schedule, to separate a real signal from a protocol artefact.
-3. **A repository audit** (`engine/audit_repo.py`): link and anchor integrity across the whole
-   tree, cross-namespace result reconciliation, SHA-256 re-check of every committed official
+3. **A repository audit** (`engine/audit_repo.py`): link and anchor integrity across the whole tree (601 broken anchors, measured), cross-namespace result reconciliation, SHA-256 re-check of every committed official
    capture, an independent re-parse of two of them, and an explicit reachability test.
 4. **An availability pipeline** (`engine/availability.py`) that joins the official Week-11
    injury report to each club's own depth chart without inferring anything, plus

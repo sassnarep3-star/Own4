@@ -34,8 +34,10 @@ document.
 
 ## What the repository actually contains
 
-- **41 NFL workspaces**, frozen at eleven different dates (2026-11-02 to 2026-11-22), with **601
-  broken `#anchor` links and 52 broken file links** across 57 pages. None of those pages belongs
+- **43 NFL workspaces**, frozen at twelve different dates (2026-11-02 to 2026-11-22), with
+  **601 broken `#anchor` links across 57 pages**. File links are now clean: the same check found
+  52 dead file links before a peer integration fixed them, and the count is re-measured every
+  build rather than typed. None of those pages belongs
   to this session; the full defect list is published rather than edited.
 - **Two result archives that disagree on scope** (137 vs 149 games) and no score contradiction
   between them once the capture dates are respected. The abbreviation for the Rams differs
@@ -71,7 +73,7 @@ forbids and this workspace does not do.
 
 ## Fifteen flagged items
 
-RF-01 no official page reachable from this environment · RF-02 601 broken anchors ·
+RF-01 no official page reachable from this environment · RF-02 601 broken anchors (file links since fixed) ·
 RF-03 legacy dashboard links to 51 dead pages · RF-04 two result archives (137 vs 149) ·
 RF-05 club-code drift drops 11 fixtures · RF-06 16 rows cite a week page rather than a game
 page · RF-07 one Week-11 fixture has no venue in the capture · RF-08 no snap-count source
