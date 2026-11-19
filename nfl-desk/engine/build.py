@@ -736,10 +736,11 @@ disagreement visible so the front door can be simple.</p>
   <div class="kpi"><span>%d</span><b>NFL workspaces</b><p>plus this one</p></div>
   <div class="kpi"><span>%d</span><b>register disagreements</b><p>counted pairwise, on matched wording</p></div>
   <div class="kpi"><span>%d</span><b>flagged pages</b><p>most unreconciled with each other</p></div>
-  <div class="kpi"><span>%d</span><b>tracked files</b><p>in one commit</p></div>
+  <div class="kpi"><span>%d</span><b>workspaces with a verifier</b><p>of %d; none compares one workspace with another</p></div>
 </section>
 """ % (STAMP, census["namespaces_count"], census["register_disagreement_count"],
-       census["duplication"]["flagged_pages"]["count"], census["git"]["tracked_files"] or 0) + """
+       census["duplication"]["flagged_pages"]["count"], census["namespaces_with_verifier"],
+       census["namespaces_count"]) + """
 <h2>Requirements: three registers, one brief</h2>
 """ + table("The competing registers", ["File", "Rows", "Status counts", "Link"], reg_rows,
           "All three claim to answer the same 73 lines. The pairwise disagreement count is on the "

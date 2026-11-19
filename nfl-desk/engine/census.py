@@ -16,7 +16,6 @@ import csv
 import json
 import os
 import re
-import subprocess
 from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -272,14 +271,10 @@ def main():
                         third.append(rel(p))
     third = sorted(set(third))[:30]
 
-    # --- tracked-file hygiene: are the big archives in git? -------------------
-    try:
-        tracked = subprocess.check_output(["git", "-C", ROOT, "ls-files"], text=True)
-        tracked_n = len(tracked.splitlines())
-        size = subprocess.check_output(["git", "-C", ROOT, "count-objects", "-vH"], text=True)
-        size_kb = [l for l in size.splitlines() if l.startswith("size-pack")]
-    except Exception:
-        tracked_n, size_kb = None, []
+    # Deliberately NOT recording `git count-objects` or a tracked-file count here: both
+    # depend on the clone (shallow vs full, pack layout), so they would make this committed
+    # data file differ between a laptop and CI and break the byte-identical rebuild gate.
+    with_verifier = [n["namespace"] for n in inventory if n["verifiers"]]
 
     out = {
         "dataset": "nfl_desk_census",
@@ -288,6 +283,8 @@ def main():
         "method": ("engine/census.py walks the tree; every count below is measured, not typed. "
                    "Disagreements are recorded with both files and both values."),
         "namespaces_count": len(ns),
+        "namespaces_with_verifier": len(with_verifier),
+        "namespaces_without_verifier": sorted(n["namespace"] for n in inventory if not n["verifiers"]),
         "namespaces": inventory,
         "duplication": {k: {"count": len(v), "paths": v[:60]} for k, v in dup.items()},
         "requirement_registers": regs,
@@ -298,7 +295,6 @@ def main():
         "standings_cross_check": standings_math,
         "thin_artifacts": thin,
         "third_party_citation_files": third,
-        "git": {"tracked_files": tracked_n, "pack_size": size_kb},
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
