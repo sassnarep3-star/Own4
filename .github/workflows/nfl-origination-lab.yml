@@ -35,8 +35,16 @@ jobs:
           git diff --stat -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html || true
           git diff -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html > /tmp/repro.diff || true
           head -80 /tmp/repro.diff
-          python3 -c "import sys;print('PYTHON',sys.version)"
-          test ! -s /tmp/repro.diff
+          if [ -s /tmp/repro.diff ]; then
+            DESC=$(python3 - <<'PYEOF'
+import re
+lines = [l for l in open('/tmp/repro.diff') if l[:1] in '+-' and not l.startswith(('+++','---'))]
+print(' | '.join(re.sub(r'\\s+',' ',l)[:70] for l in lines[:10])[:900] or 'diff present but only context')
+PYEOF
+)
+            echo "::error title=reproducibility::${DESC}"
+            exit 1
+          fi
       # upload the diff either way, so the exact unstable values are recoverable
       - uses: actions/upload-artifact@v4
         if: always()
