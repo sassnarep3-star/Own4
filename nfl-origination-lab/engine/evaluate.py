@@ -40,6 +40,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import models as M
 from corpus import TEAMS
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stable import dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)
 DATA = os.path.join(LAB, "data")
@@ -200,7 +203,7 @@ def main():
           {m: r["lambda"] for m, r in chosen.items()})
 
     with open(os.path.join(DATA, "validation_scores.json"), "w", encoding="utf-8") as fh:
-        json.dump({
+        dump({
             "dataset": "nfl_origination_lab_validation_scores",
             "title": "Selection evidence: every model and lambda, scored on 2025 weeks 10-18 only",
             "blocks": {"train": "2025 weeks 1-9 (%d games)" % len(train),
@@ -303,7 +306,7 @@ def main():
 
     qualified = [r["model"] for r in led_rows if r["stage_1_qualified"]]
     with open(os.path.join(DATA, "leaderboard.json"), "w", encoding="utf-8") as fh:
-        json.dump({
+        dump({
             "dataset": "nfl_origination_lab_leaderboard",
             "title": "Proper-score leaderboard on the untouched 2026 holdout; staking division empty",
             "built": "2026-11-19",
@@ -333,7 +336,7 @@ def main():
 
     # ---------- forecasts store: probability + inputs, not just a pick ----------
     with open(os.path.join(DATA, "forecasts.json"), "w", encoding="utf-8") as fh:
-        json.dump({
+        dump({
             "dataset": "nfl_origination_lab_forecasts",
             "title": "Every model output on the 2026 holdout, with its inputs",
             "selected_model": chosen_model,
@@ -345,12 +348,12 @@ def main():
     # ---------- removal of luck ----------
     luck = build_luck(preds, bench, final_scores, chosen_model)
     with open(os.path.join(DATA, "luck.json"), "w", encoding="utf-8") as fh:
-        json.dump(luck, fh, indent=1)
+        dump(luck, fh, indent=1)
 
     # ---------- correlations with n ----------
     corr = build_correlations(games)
     with open(os.path.join(DATA, "correlations.json"), "w", encoding="utf-8") as fh:
-        json.dump(corr, fh, indent=1)
+        dump(corr, fh, indent=1)
 
     print("final block: %d games, %d weeks" % (len(final), len({g['week'] for g in final})))
     for mid in MODEL_IDS:

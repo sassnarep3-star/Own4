@@ -21,6 +21,10 @@ check the link and a reader can check the claim.
 import json
 import os
 
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stable import dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)
 DATA = os.path.join(LAB, "data")
@@ -517,7 +521,7 @@ def main():
     for r in reqs:
         counts[r["status"]] = counts.get(r["status"], 0) + 1
 
-    json.dump({"dataset": "nfl_origination_lab_requirements",
+    dump({"dataset": "nfl_origination_lab_requirements",
                "title": "Decision-readiness register: one row per requirement in the brief",
                "built": "2026-11-19",
                "status_vocabulary": {
@@ -552,7 +556,7 @@ def main():
                          "drift alarm twice",
             "evidence_path": "data/leaderboard.json",
         })
-    json.dump({"dataset": "nfl_origination_lab_mind",
+    dump({"dataset": "nfl_origination_lab_mind",
                "title": "Two-sided decision fields: what would promote each strategy and what "
                         "would retire it",
                "built": "2026-11-19",
@@ -589,7 +593,7 @@ def main():
                   "source": "data/leaderboard.json"}
                  for r in led["rows"]],
     }
-    json.dump(dem, open(os.path.join(DATA, "demotion.json"), "w", encoding="utf-8"), indent=1)
+    dump(dem, open(os.path.join(DATA, "demotion.json"), "w", encoding="utf-8"), indent=1)
 
     print("requirements: %d rows, counts %s" % (len(reqs), counts))
     print("mind: %d strategies, demotion: %d triggers"

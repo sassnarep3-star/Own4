@@ -48,6 +48,10 @@ import json
 import os
 from collections import Counter, defaultdict
 
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stable import dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)
 ROOT = os.path.dirname(LAB)
@@ -270,7 +274,7 @@ def main():
 
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
-        json.dump(policy, fh, indent=1)
+        dump(policy, fh, indent=1)
         fh.write("\n")
 
     residuals = {
@@ -309,7 +313,7 @@ def main():
                      "title": "per-game official game centre, carried on each row"}],
     }
     with open(OUT_RES, "w", encoding="utf-8") as fh:
-        json.dump(residuals, fh, indent=1)
+        dump(residuals, fh, indent=1)
         fh.write("\n")
 
     print("price store %d rows" % len(rows))

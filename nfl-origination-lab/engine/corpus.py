@@ -51,6 +51,9 @@ import os
 import sys
 from collections import defaultdict
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stable import dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)
 ROOT = os.path.dirname(LAB)
@@ -318,7 +321,7 @@ def main():
     }
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as fh:
-        json.dump(payload, fh, indent=1)
+        dump(payload, fh, indent=1)
         fh.write("\n")
 
     print("corpus: 2025 %d games (weeks %s), 2026 %d games (weeks %s)"

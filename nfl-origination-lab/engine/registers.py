@@ -15,6 +15,10 @@ says so in `do_not_have` rather than hinting at what the answer might be.
 import json
 import os
 
+import sys as _sys
+_sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from stable import dump
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 LAB = os.path.dirname(HERE)
 DATA = os.path.join(LAB, "data")
@@ -196,7 +200,7 @@ def main():
     questions["counts"] = {s: sum(1 for r in questions["rows"] if r["status"] == s)
                            for s in ("blocking", "open", "partial", "settled")}
 
-    json.dump(questions, open(os.path.join(DATA, "questions.json"), "w", encoding="utf-8"),
+    dump(questions, open(os.path.join(DATA, "questions.json"), "w", encoding="utf-8"),
               indent=1)
 
     # ------------------------------------------------------------------
@@ -273,7 +277,7 @@ def main():
             "priority": priority, "decision": None, "decided_on": None,
             "would_touch": page,
         })
-    json.dump(suggestions, open(os.path.join(DATA, "suggestions.json"), "w", encoding="utf-8"),
+    dump(suggestions, open(os.path.join(DATA, "suggestions.json"), "w", encoding="utf-8"),
               indent=1)
 
     # ------------------------------------------------------------------
@@ -358,7 +362,7 @@ def main():
                               "source_url": url, "evidence": path, "effect": effect})
     flags["counts"] = {s: sum(1 for r in flags["rows"] if r["severity"] == s)
                        for s in ("blocking", "material", "minor", "disclosure")}
-    json.dump(flags, open(os.path.join(DATA, "flagged.json"), "w", encoding="utf-8"), indent=1)
+    dump(flags, open(os.path.join(DATA, "flagged.json"), "w", encoding="utf-8"), indent=1)
 
     print("questions %d %s" % (len(questions["rows"]), questions["counts"]))
     print("suggestions %d (all undecided: %s)"
