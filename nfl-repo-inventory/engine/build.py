@@ -134,7 +134,7 @@ def inventory_page(inv):
             f"<td>{esc(r['last_commit'])}</td></tr>")
     body = f"""
 <h1>Namespace inventory</h1>
-<p>One row per <code>nfl*</code> directory. Namespace links go to the GitHub folder (the evidence). "Root" means the root <code>index.html</code> refers to the namespace. The root page is not edited in this session.</p>
+<p>One row per <code>nfl*</code> directory. Namespace links go to the GitHub folder (the evidence). "Root" means the root <code>index.html</code> refers to the namespace. The root page is not edited in this session. "Last commit" is the latest commit touching the folder; for most rows it is e322a32, a sync commit that touched many folders, so it does not show per-namespace history.</p>
 <table>
 <tr><th>Namespace (source)</th><th>Tracked files</th><th>Entry page</th><th>Verifier</th><th>Verifier run</th><th>Linked from root</th><th>Last commit</th></tr>
 {''.join(trs)}
