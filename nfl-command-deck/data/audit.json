@@ -1,0 +1,576 @@
+{
+ "built_utc": "2026-11-19",
+ "checks": [
+  {
+   "broken_anchor_links": 601,
+   "broken_anchors_by_namespace": {
+    "nfl-board": 8,
+    "nfl-decision-gaps": 20,
+    "nfl-hub": 10,
+    "nfl-market": 15,
+    "nfl-origination": 39,
+    "nfl-price-snapshot": 30,
+    "nfl-quant": 208,
+    "nfl-readiness-register": 99,
+    "nfl-sources": 71,
+    "nfl-verify": 10,
+    "rental-f1dbaea0": 54,
+    "verified": 24
+   },
+   "broken_file_links": 52,
+   "broken_files_by_namespace": {
+    "legacy-root-dashboard.html": 51,
+    "verification-2026-11-13": 1
+   },
+   "check": "A. internal link integrity (files and #anchors), excluding committed raw captures",
+   "detail_file": "nfl-command-deck/data/link_defects.json",
+   "examples_anchors": [
+    {
+     "page": "index.html",
+     "target": "verified/own-lines.html#parlays"
+    },
+    {
+     "page": "index.html",
+     "target": "verified/own-lines.html#props"
+    },
+    {
+     "page": "nfl-board/index.html",
+     "target": "pages/repo-review.html#ir-13"
+    },
+    {
+     "page": "nfl-board/index.html",
+     "target": "pages/questions.html#q12"
+    },
+    {
+     "page": "nfl-board/index.html",
+     "target": "pages/suggestions.html#sg-06"
+    },
+    {
+     "page": "nfl-board/pages/executive-summary.html",
+     "target": "questions.html#q02"
+    },
+    {
+     "page": "nfl-board/pages/executive-summary.html",
+     "target": "questions.html#q12"
+    },
+    {
+     "page": "nfl-board/pages/executive-summary.html",
+     "target": "questions.html#q06"
+    },
+    {
+     "page": "nfl-board/pages/executive-summary.html",
+     "target": "questions.html#q21"
+    },
+    {
+     "page": "nfl-board/pages/sources.html",
+     "target": "suggestions.html#sg-05"
+    },
+    {
+     "page": "nfl-decision-gaps/pages/open-questions.html",
+     "target": "suggestions.html#SG-D"
+    },
+    {
+     "page": "nfl-decision-gaps/pages/open-questions.html",
+     "target": "suggestions.html#SG-A"
+    }
+   ],
+   "examples_files": [
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/requirements.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/data-standings.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/data-team-stats.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/data-games.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/data-players.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/lines-single.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/lines-parlays.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/lines-props.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/research-strategies.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/research-validation.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/research-correlations.html"
+    },
+    {
+     "page": "legacy-root-dashboard.html",
+     "target": "pages/research-backtest.html"
+    }
+   ],
+   "internal_refs_checked": 27144,
+   "result": "fail"
+  },
+  {
+   "check": "B. root navigation workspace count vs directories on disk",
+   "finding": "The root nav group title states 39 workspaces; 41 nfl* directories exist. The title is computed from directory count, but the group's own link list is shorter than the directory list, so the title and the group disagree.",
+   "group_title_claims": 39,
+   "nfl_directories_on_disk": 41,
+   "nfl_links_in_root_nav": 958,
+   "result": "fail"
+  },
+  {
+   "abbreviation_drift": [
+    "LA (origin-board) vs LAR (live-board): same club, different code; a join without aliasing silently drops 11 fixtures"
+   ],
+   "check": "C. cross-namespace result reconciliation (origin-board vs live-board corpus)",
+   "common_fixtures": 139,
+   "interpretation": "Common fixtures agree on final scores. The only score disagreement is a Week-10 fixture that was still in progress at the origin-board capture time (2026-11-16) and final by the live-board transcription (2026-11-17) \u2014 a capture-time difference, not a contradiction.",
+   "live_board_rows": 149,
+   "only_in_live_board": [
+    [
+     1,
+     "SF",
+     "LA"
+    ],
+    [
+     2,
+     "NYG",
+     "LA"
+    ],
+    [
+     3,
+     "LA",
+     "DEN"
+    ],
+    [
+     4,
+     "LA",
+     "PHI"
+    ],
+    [
+     5,
+     "BUF",
+     "LA"
+    ],
+    [
+     6,
+     "AZ",
+     "LA"
+    ],
+    [
+     7,
+     "LA",
+     "LV"
+    ],
+    [
+     8,
+     "LAC",
+     "LA"
+    ],
+    [
+     9,
+     "LA",
+     "WAS"
+    ],
+    [
+     10,
+     "LA",
+     "AZ"
+    ]
+   ],
+   "only_in_origin_board": [
+    [
+     1,
+     "SF",
+     "LAR"
+    ],
+    [
+     2,
+     "NYG",
+     "LAR"
+    ],
+    [
+     3,
+     "LAR",
+     "DEN"
+    ],
+    [
+     4,
+     "LAR",
+     "PHI"
+    ],
+    [
+     5,
+     "BUF",
+     "LAR"
+    ],
+    [
+     6,
+     "AZ",
+     "LAR"
+    ],
+    [
+     7,
+     "LAR",
+     "LV"
+    ],
+    [
+     8,
+     "LAC",
+     "LAR"
+    ],
+    [
+     9,
+     "LAR",
+     "WAS"
+    ],
+    [
+     10,
+     "LAC",
+     "BAL"
+    ],
+    [
+     10,
+     "LAR",
+     "AZ"
+    ]
+   ],
+   "origin_board_rows": 150,
+   "result": "pass",
+   "score_mismatches": [
+    {
+     "fixture": [
+      10,
+      "PIT",
+      "CIN"
+     ],
+     "live_board": [
+      18,
+      38
+     ],
+     "origin_board": [
+      null,
+      null
+     ]
+    }
+   ]
+  },
+  {
+   "check": "D. corpus integrity and per-row official-URL coverage",
+   "duplicate_game_ids": 0,
+   "games": 149,
+   "games_per_week": {
+    "1": 16,
+    "10": 13,
+    "2": 16,
+    "3": 16,
+    "4": 16,
+    "5": 15,
+    "6": 14,
+    "7": 14,
+    "8": 14,
+    "9": 15
+   },
+   "implausible_scores": [],
+   "interpretation": "133 of 149 rows carry a per-game official URL. The remaining 16 cite the official week schedule page; 16 of those are independently corroborated by a second peer capture that does carry a per-game URL with the same score. The evaluation in eval.json is conditional on these rows.",
+   "result": "pass",
+   "rows_corroborated_by_second_peer_capture": 16,
+   "rows_not_corroborated": [],
+   "rows_off_official_domain": [],
+   "rows_with_per_game_official_url": 133,
+   "rows_with_week_page_url_only": 16,
+   "team_plays_twice_in_a_week": [],
+   "teams": 32,
+   "ties_in_corpus": [
+    "W05-NYG-WAS"
+   ],
+   "unique_game_ids": 149,
+   "weeks": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+   ]
+  },
+  {
+   "check": "E. committed official capture integrity (sha256 + re-parsed row counts)",
+   "entries": [
+    {
+     "bytes_match": null,
+     "capture_id": "injury-report-2026-11-15T2335Z-rendered",
+     "captured_utc": "2026-11-15T23:35:00Z",
+     "kind": "injury_report",
+     "sha256_match": true,
+     "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "bytes_match": null,
+     "capture_id": "schedule-2026-11-15T2340Z-rendered",
+     "captured_utc": "2026-11-15T23:40:00Z",
+     "kind": "schedule",
+     "sha256_match": true,
+     "source_url": "https://www.nfl.com/schedules/"
+    },
+    {
+     "bytes_match": null,
+     "capture_id": "transactions-2026-11-15T2350Z-rendered",
+     "captured_utc": "2026-11-15T23:50:00Z",
+     "kind": "transactions",
+     "sha256_match": true,
+     "source_url": "https://www.nfl.com/transactions/"
+    },
+    {
+     "bytes_match": true,
+     "capture_id": "injury_report-2026-11-18T234917Z",
+     "captured_utc": "2026-11-18T23:49:17Z",
+     "kind": "injury_report",
+     "sha256_match": true,
+     "source_url": "https://www.nfl.com/injuries/"
+    },
+    {
+     "bytes_match": true,
+     "capture_id": "reserve_list-2026-11-18T234918Z",
+     "captured_utc": "2026-11-18T23:49:18Z",
+     "kind": "reserve_list",
+     "sha256_match": true,
+     "source_url": "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+    }
+   ],
+   "interpretation": "Every committed capture re-hashes to the SHA-256 recorded in the manifest. The injury capture independently re-parses to the counts shown under parsed.",
+   "parsed": {
+    "injury_report_2026_11_18": {
+     "note": "row counts re-derived by this script from the committed bytes; the peer's own parser is not used",
+     "player_rows": 242,
+     "rows_with_unexpected_cell_count": 0,
+     "tables": 23,
+     "team_names": [
+      "Colts",
+      "Texans",
+      "Steelers",
+      "Eagles",
+      "Cardinals",
+      "Chiefs",
+      "Ravens",
+      "Panthers",
+      "Buccaneers",
+      "Lions",
+      "Dolphins",
+      "Bills",
+      "Titans",
+      "Cowboys",
+      "Saints",
+      "Bears",
+      "Jets",
+      "Chargers",
+      "Jaguars",
+      "Giants",
+      "Raiders",
+      "Broncos",
+      "Vikings",
+      "49ers",
+      "Bengals",
+      "Commanders"
+     ],
+     "team_sections": 26,
+     "week_label_shown": "WEEK 11"
+    }
+   },
+   "result": "pass"
+  },
+  {
+   "check": "F. committed reserve-list capture re-parse",
+   "data_rows": 25,
+   "distinct_dates_in_field": [
+    "11/10",
+    "11/12",
+    "11/14",
+    "11/16",
+    "11/17",
+    "11/18"
+   ],
+   "header": [
+    "From",
+    "To",
+    "Date",
+    "Name",
+    "Position",
+    "Transaction"
+   ],
+   "interpretation": "The committed capture is the November reserve-list page and does carry dated transactions with a club column. It is one capture of one month, so it cannot answer 'was this club's reserve list complete at kickoff' for any past game.",
+   "result": "pass",
+   "sample_rows": [
+    [
+     "SteelersSteelers",
+     "SteelersSteelers",
+     "11/18",
+     "Mason McCormick",
+     "",
+     "Reserve/Injured"
+    ],
+    [
+     "ChiefsChiefs",
+     "ChiefsChiefs",
+     "11/18",
+     "Jared Wiley",
+     "",
+     "Reserve/Injured"
+    ],
+    [
+     "LionsLions",
+     "LionsLions",
+     "11/18",
+     "Aidan Hutchinson",
+     "",
+     "Reserve/Injured"
+    ]
+   ]
+  },
+  {
+   "asymmetric_slot_counts": [
+    0,
+    22,
+    23,
+    24
+   ],
+   "check": "G. depth register integrity (32 clubs)",
+   "clubs": 32,
+   "clubs_flagged": [
+    "HOU"
+   ],
+   "clubs_verified_text": 31,
+   "interpretation": "Slot counts differ between clubs ([0, 22, 23, 24]), which is expected: clubs publish different position groupings. This register is a single dated capture per club (2026-11-17), not a time series, so it cannot yet support a point-in-time backtest.",
+   "result": "review",
+   "slots": 705,
+   "slots_per_club": {
+    "ARI": 23,
+    "ATL": 23,
+    "BAL": 23,
+    "BUF": 23,
+    "CAR": 22,
+    "CHI": 22,
+    "CIN": 22,
+    "CLE": 22,
+    "DAL": 24,
+    "DEN": 24,
+    "DET": 22,
+    "GB": 22,
+    "HOU": 0,
+    "IND": 22,
+    "JAX": 23,
+    "KC": 22,
+    "LAC": 22,
+    "LAR": 22,
+    "LV": 22,
+    "MIA": 23,
+    "MIN": 23,
+    "NE": 23,
+    "NO": 23,
+    "NYG": 23,
+    "NYJ": 24,
+    "PHI": 23,
+    "PIT": 24,
+    "SEA": 23,
+    "SF": 23,
+    "TB": 22,
+    "TEN": 23,
+    "WAS": 23
+   },
+   "slots_with_empty_rank1": 2,
+   "slots_with_two_players_in_rank1": 15
+  },
+  {
+   "check": "H. official-source reachability from this environment",
+   "conclusion": "www.nfl.com cannot be read from this sandbox; every 'verified' claim in this workspace is verified against committed official captures only",
+   "github.com": {
+    "http_status": 200,
+    "tcp443": true
+   },
+   "result": "pass",
+   "www.nfl.com": {
+    "http_error": "URLError: <urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>",
+    "tcp443": true
+   }
+  },
+  {
+   "by_latest_date": {
+    "2026-11-02": 1,
+    "2026-11-08": 1,
+    "2026-11-12": 3,
+    "2026-11-13": 2,
+    "2026-11-14": 3,
+    "2026-11-15": 9,
+    "2026-11-16": 3,
+    "2026-11-17": 3,
+    "2026-11-18": 2,
+    "2026-11-19": 2,
+    "2026-11-20": 1,
+    "2026-11-22": 3
+   },
+   "check": "I. namespace freshness (max date shown on landing page header)",
+   "detail": {
+    "nfl": "2026-11-02",
+    "nfl-arena": "2026-11-13",
+    "nfl-audit": "2026-11-12",
+    "nfl-availability-desk": "2026-11-16",
+    "nfl-board": "2026-11-17",
+    "nfl-book": "2026-11-22",
+    "nfl-brief-trace": "2026-11-18",
+    "nfl-collector": "2026-11-20",
+    "nfl-command-deck": "2026-11-19",
+    "nfl-consolidated": "2026-11-15",
+    "nfl-core": "2026-11-15",
+    "nfl-dashboard": "2026-11-15",
+    "nfl-decision-console": "2026-11-16",
+    "nfl-decision-gaps": "2026-11-17",
+    "nfl-decisions": "2026-11-12",
+    "nfl-depth-sweep": "2026-11-17",
+    "nfl-edge": "2026-11-15",
+    "nfl-hub": "2026-11-12",
+    "nfl-integration": "2026-11-13",
+    "nfl-intel": "2026-11-15",
+    "nfl-ledger": "2026-11-14",
+    "nfl-lines": "2026-11-15",
+    "nfl-live-board": "2026-11-22",
+    "nfl-market": "2026-11-14",
+    "nfl-markets": "2026-11-14",
+    "nfl-origin-board": "2026-11-16",
+    "nfl-origination": "2026-11-15",
+    "nfl-price-snapshot": "2026-11-15",
+    "nfl-quant": "2026-11-08",
+    "nfl-readiness": "2026-11-22",
+    "nfl-readiness-register": "2026-11-19",
+    "nfl-req-review": "2026-11-18",
+    "nfl-verify": "2026-11-15"
+   },
+   "interpretation": "Namespaces are frozen at different dates. A reader who opens the oldest one sees numbers that later namespaces have revised; that is the root cause of the disagreements listed in check C and in the peer flags.",
+   "namespaces": 33,
+   "result": "review"
+  }
+ ],
+ "dataset": "nfl_command_deck_audit",
+ "session": "arena/1153eb96-own4",
+ "target_commit": "76c779e279f7a908fb851f02ae8abb041e8bdb6e"
+}

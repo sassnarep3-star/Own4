@@ -1,0 +1,246 @@
+{
+ "dataset": "nfl_command_deck_suggestions",
+ "built_utc": "2026-11-19",
+ "session": "arena/1153eb96-own4",
+ "rule": "Suggestions only. Nothing in this section is implemented by this session except where a row says 'implemented' and links the artifact. The decision field is deliberately blank: choosing a path is the owner's.",
+ "rows": [
+  {
+   "id": "S-01",
+   "title": "Decide the price-data policy before anything else is backtested",
+   "why": "Every money-denominated result — ROI, CLV, staking, parlays, prop combos — is currently uncomputable (RF-14, Q-01). Two peer workspaces still carry an 'assumed -110' column, which produces a number that looks like evidence and is not.",
+   "options": [
+    "(a) Stay price-free: publish forecast skill only, award no money-based reward, and say so on every page.",
+    "(b) Adopt one owner-approved commercial feed, record its terms, and store open/close with a retrieval timestamp per market.",
+    "(c) Derive an implied price from published public probabilities and label it 'modelled', never 'market'."
+   ],
+   "recommended": "(a) now, then (b) once terms are read. (c) risks publishing a proxy as if it were a market.",
+   "effort": "one decision + one data-contract page",
+   "unblocks": "Q-01, Q-09, C04, C09",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Partly: the leaderboard in this workspace awards 0 points and states the reason, and no assumed price is used anywhere in engine/model_eval.py.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/price_snapshots.json"]
+  },
+  {
+   "id": "S-02",
+   "title": "One entry point, everything else frozen and linked — not deleted",
+   "why": "41 NFL directories, 958 nav links, ten different 'latest' dates, 601 broken anchors (RF-02, RF-12, Q-11). A reader cannot tell which page is current. Deleting peer work would destroy audit trail; keeping all of it as navigation destroys comprehension.",
+   "options": [
+    "(a) Leave as is and rely on the reader.",
+    "(b) Designate this deck as the entry point, freeze every peer namespace read-only, and publish one sitemap page listing each peer with its frozen date and what it uniquely contributes.",
+    "(c) Merge the peers into one namespace and retire the rest."
+   ],
+   "recommended": "(b). It keeps the evidence, makes currency explicit, and needs no data migration.",
+   "effort": "one sitemap page + a freeze note in each peer README (owner or integration session)",
+   "unblocks": "Q-11",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Partly: this deck lists peers with their dates on the Sources page and adds exactly one additive nav group to the root dashboard. No peer file was edited.",
+   "sources": ["https://github.com/sassnarep3-star/Own4"]
+  },
+  {
+   "id": "S-03",
+   "title": "Define 'verified' once, and make the label machine-checkable",
+   "why": "Pages currently say 'verified', 'official', and 'captured' interchangeably. In this sandbox no official page can be reached at all (RF-01), so an unqualified 'verified today' would be false.",
+   "options": [
+    "(a) Keep prose labels.",
+    "(b) Three fixed labels: CAPTURED (committed file + SHA-256 + read time), DERIVED (computed by named script from CAPTURED rows), UNVERIFIED (blank, with the reason). Every table cell that is not CAPTURED or DERIVED must render blank.",
+    "(c) Require a live read for the word 'verified'."
+   ],
+   "recommended": "(b). It is what this workspace already does and it survives an offline environment.",
+   "effort": "one legend page + a verifier rule",
+   "unblocks": "Q-12",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes: every table on this site carries its label class and the capture hash is printed in the footer of the sources page.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/audit.json"]
+  },
+  {
+   "id": "S-04",
+   "title": "Adopt the 149-game corpus as canonical and retire the 137-game feed to history",
+   "why": "Two archives, two leaderboards, one word 'verified' (RF-04). No score contradiction exists between them, so this is a naming and policy question, not a data-repair job.",
+   "options": [
+    "(a) Keep both.",
+    "(b) Adopt nfl-live-board/data/corpus_2026.json (149 games, per-game URLs, 16 week-page rows corroborated by a second archive) and mark results_feed.json as superseded with a pointer.",
+    "(c) Rebuild from a fresh capture each week."
+   ],
+   "recommended": "(b) now, then (c) once the capture workflow runs weekly.",
+   "effort": "one pointer page; no data change",
+   "unblocks": "Q-02, C02, C05",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes for this workspace: engine/model_eval.py scores on the 149-game corpus and states it.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json"]
+  },
+  {
+   "id": "S-05",
+   "title": "Publish a reward tier that pays nothing until a prospective season closes",
+   "why": "A 100-forecast, 7-week evaluation can establish that a model beats controls; it cannot establish that it beats a market. Paying on it would convert a research result into a false incentive (Q-15).",
+   "options": [
+    "(a) Pay weekly on the current leaderboard.",
+    "(b) Tier 0 now (recognition only, points 0), Tier 1 when a frozen rule scores prospectively for a full season with the lower bound above zero and a price source exists.",
+    "(c) No rewards ever."
+   ],
+   "recommended": "(b).",
+   "effort": "one policy paragraph, frozen before the season ends",
+   "unblocks": "C09, G12",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes as a default: points_awarded = 0 in eval.json, with the reason published.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json"]
+  },
+  {
+   "id": "S-06",
+   "title": "Capture availability on a schedule, not on demand — and score it before using it",
+   "why": "One injury capture and one depth snapshot cannot support any historical claim (RF-09, RF-11, Q-04). The capture code already exists in nfl-readiness-register/capture; it has run twice.",
+   "options": [
+    "(a) Capture when someone remembers.",
+    "(b) Wednesday, Thursday, Friday and game day; retain raw bytes, hash, and the parsed delta; fail loudly on schema change. Then measure designation reliability before any model uses it.",
+    "(c) Use a third-party scrape."
+   ],
+   "recommended": "(b). (c) is excluded by the official-source rule.",
+   "effort": "schedule already written; needs a full season of runs",
+   "unblocks": "Q-04, Q-05, Q-13, E10",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "No new capture was taken (nfl.com is unreachable here). The existing workflow was read and its committed output re-hashed and re-parsed.",
+   "sources": ["https://www.nfl.com/injuries/"]
+  },
+  {
+   "id": "S-07",
+   "title": "Ship a link-integrity gate, not just a row-source gate",
+   "why": "59 verifiers exist in this repository and none catches the 601 broken anchors (RF-02). Every verifier checks its own namespace in isolation.",
+   "options": [
+    "(a) Fix the anchors by hand and move on.",
+    "(b) Run this deck's link check in CI over the whole tree and fail the build on any new broken link, with the current 653 defects frozen in an allowlist that can only shrink.",
+    "(c) Delete the offending pages."
+   ],
+   "recommended": "(b). It stops the growth without blocking on the backlog.",
+   "effort": "one CI step + a baseline file",
+   "unblocks": "RF-02, RF-03",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "The check itself: engine/audit_repo.py, baseline in data/link_defects.json.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/link_defects.json"]
+  },
+  {
+   "id": "S-08",
+   "title": "Put a decision-readiness line on the landing page, not a status wall",
+   "why": "The brief asks for one row per requirement with the gate that blocks it and the number that would clear it. Several peers publish a status column; a status is not a decision aid unless it names its blocking gate and its clearing number.",
+   "options": [
+    "(a) Status column only.",
+    "(b) Three columns per requirement: STATUS, GATE THAT BLOCKS, NUMBER THAT CLEARS.",
+    "(c) Narrative summary only."
+   ],
+   "recommended": "(b).",
+   "effort": "already the shape of the landing page in this workspace",
+   "unblocks": "G01",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes: index.html renders STATUS / BLOCKING GATE / NUMBER THAT CLEARS for every audited requirement.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/requirements.json"]
+  },
+  {
+   "id": "S-09",
+   "title": "Test every new model against permuted schedules before publishing it",
+   "why": "A positive skill score can come from a protocol artefact. Permuting team identity while keeping the real schedule is a cheap, decisive control: it answers 'could this have happened with no information at all?'",
+   "options": [
+    "(a) Publish the skill score with a bootstrap interval only.",
+    "(b) Add the permutation null to the published table for every model.",
+    "(c) Do nothing extra."
+   ],
+   "recommended": "(b). In this workspace the observed BSS (+0.1362) exceeds all 200 null schedules, whose 95th percentile is +0.0309.",
+   "effort": "one script, two seconds",
+   "unblocks": "Q-06",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes: engine/null_test.py, results in data/null.json.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/null.json"]
+  },
+  {
+   "id": "S-10",
+   "title": "Do not add an injury feature until acting on it would have paid",
+   "why": "The brief explicitly asks for ablations instead of fixed penalties. An ablation needs historical availability; the repository has one week. Meanwhile a 'deduct 3 points for a missing starter' rule reads as analysis and is actually an assumption.",
+   "options": [
+    "(a) Add a fixed penalty now because it is intuitive.",
+    "(b) Add nothing; accumulate point-in-time availability; then run identical models with and without the features on chronological holds and publish the difference with uncertainty.",
+    "(c) Use a published third-party injury-effect estimate."
+   ],
+   "recommended": "(b). This is a restatement of the brief, held against schedule pressure.",
+   "effort": "blocked on S-06",
+   "unblocks": "Q-07, E10",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes as a refusal: eval.json contains no availability term and says so.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json"]
+  },
+  {
+   "id": "S-11",
+   "title": "Publish every total twice, with the gap, until the comparison is decisive",
+   "why": "The two total estimators differ by 0.014 points of MAE with an interval that straddles zero (Q-08). Collapsing to one now would be a coin flip presented as a finding.",
+   "options": [
+    "(a) Pick the lower MAE.",
+    "(b) Keep both, publish the gap and the interval, and collapse only when the interval excludes zero.",
+    "(c) Drop totals entirely."
+   ],
+   "recommended": "(b).",
+   "effort": "already implemented",
+   "unblocks": "B06",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes: eval.json totals block publishes both and the interval.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-command-deck/data/eval.json"]
+  },
+  {
+   "id": "S-12",
+   "title": "Break the 73-row register into a machine-checked spine and a prose remainder",
+   "why": "59 of 73 verdicts cannot be re-derived by any script (RF-13). A register where most cells are prose is a document, not a control. The 14 rows with a definable assertion are the spine: they can fail a build.",
+   "options": [
+    "(a) Keep the register as prose.",
+    "(b) Give every row a machine assertion or a declared 'cannot be machine-checked' flag, and fail CI when a row marked checkable stops passing.",
+    "(c) Delete unchecked rows."
+   ],
+   "recommended": "(b). (c) would hide work that may still be real.",
+   "effort": "about an hour per row for the hard cases; start with the 19 'met' rows",
+   "unblocks": "G07, RF-13",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "Yes, for 14 rows: engine/requirements.py evaluates them and publishes the verdict per row.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json"]
+  },
+  {
+   "id": "S-13",
+   "title": "Resolve the eleven open pull requests before they conflict again",
+   "why": "Eleven PRs from earlier sessions remain open, several against the same NFL namespaces that have since been rewritten (RF-15). Each new merge raises the cost of the next.",
+   "options": [
+    "(a) Merge them all.",
+    "(b) Triage: close the superseded ones with a pointer to the file that supersedes them, rebase the rest, and stop opening parallel work in the same namespace.",
+    "(c) Leave them open."
+   ],
+   "recommended": "(b). This session does not merge or close peer PRs; that is an owner call.",
+   "effort": "one review pass",
+   "unblocks": "RF-15, G11",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "No: the PRs were listed, not touched.",
+   "sources": ["https://github.com/sassnarep3-star/Own4/pulls"]
+  },
+  {
+   "id": "S-14",
+   "title": "Make the private/public split explicit before the next data drop",
+   "why": "242 injury rows, 705 depth slots and 149 result rows are published in raw form. The brief asks for a public analysis layer over a private data store, pending a read of the terms (Q-16).",
+   "options": [
+    "(a) Keep publishing raw rows.",
+    "(b) Public layer = derived indices, model output and links to the official page; raw rows move to a private store until the terms are read.",
+    "(c) Publish nothing until the terms are read."
+   ],
+   "recommended": "(b).",
+   "effort": "one repository split; affects every namespace, so it is an integration decision",
+   "unblocks": "Q-16",
+   "decision_owner": "Owner",
+   "decision": "",
+   "implemented_here": "No. This workspace keeps raw rows only where they are the evidence for a published number, and every such table links the official source. A true split needs an owner decision.",
+   "sources": ["https://www.nfl.com/"]
+  }
+ ]
+}

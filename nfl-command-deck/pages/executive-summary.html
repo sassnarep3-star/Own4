@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary · NFL Command Deck</title>
+<link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body>
+<aside class="side">
+  <a class="brand" href="../index.html">NFL <span>Command Deck</span></a>
+  <div class="tag">Evidence surface · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Command deck</div><a class="nav" href="../index.html">Start here — decision readiness</a><a class="nav active" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/model.html">Model &amp; luck panel</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><div class="grp">Evidence &amp; control</div><a class="nav" href="../pages/requirements.html">Requirement audit (73 rows)</a><a class="nav" href="../pages/repo-audit.html">Repository audit</a><a class="nav" href="../pages/questions.html">Questions before any decision</a><a class="nav" href="../pages/suggestions.html">Suggestions — choose a path</a><a class="nav" href="../pages/flagged.html">⚑ Flagged for review</a><a class="nav" href="../pages/sources.html">Sources &amp; capture hashes</a></nav>
+  <div class="side-note">
+    <strong>No live official read.</strong> nfl.com cannot be reached from this build
+    environment. Every figure comes from a committed official capture whose SHA-256 is
+    re-checked at build time. See <a href="../pages/flagged.html">RF-01</a>.
+  </div>
+  <a class="flag" href="../pages/flagged.html">⚑ 15 items flagged for review</a>
+</aside>
+<main class="main" id="main">
+<header class="head">
+  <h1>Executive summary</h1>
+  <p class="sub">The whole result in one page: what was measured, what it can support, and the four things it deliberately does not claim.</p>
+</header>
+
+<section class="lede">
+  <p><strong>Bottom line.</strong> A simple, opponent-aware point rating does forecast NFL
+  winners better than every control it was pre-registered against, and the result survives a
+  deliberate attempt to destroy it. That is a <em>forecast-skill</em> result. It is not a
+  betting result: the repository holds no price, so no money metric exists and no reward is
+  awarded.</p>
+</section>
+
+<h2>1 · What was measured, and how</h2>
+<p>Rule text, sample window, hyper-parameter grid, metrics and gates were committed and
+hash-locked <em>before</em> the numbers were computed
+(<code>prereg/PREREG-CD.md</code>, SHA-256 <code>77de26eda552edb923cdbae8d090e57bdabfd56adbe8d5b8809b489d2aa0b4e2</code>). The build refuses to run if
+that file changes. Protocol: expanding-window walk-forward, week 4 to week 10, each week
+forecast only from earlier weeks; λ chosen on weeks 4–7 and frozen; weeks 8–10 held out from
+every choice.</p>
+<div class="scroll"><table class="grid"><thead><tr><th>Model</th><th>Definition</th><th>Pre-registered?</th><th>Source</th></tr></thead><tbody><tr><td>CD-1</td><td>ridge on point margin: h + s<sub>home</sub> − s<sub>away</sub>, p = Φ(m/σ)</td><td>yes — PREREG-CD §2</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>CD-2</td><td>constant home edge, no team information</td><td>yes — PREREG-CD §2</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>CD-3</td><td>ridge on game total: μ + o<sub>home</sub> + d<sub>home</sub> + o<sub>away</sub> + d<sub>away</sub></td><td>yes — PREREG-CD §2</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>C-1 / C-2</td><td>coin · always-home controls</td><td>yes — PREREG-CD §2</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>C-3</td><td>climatology benchmark</td><td>yes — PREREG-CD §4</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr></tbody></table></div>
+
+<h2>2 · The result, with uncertainty</h2>
+<p>Skill is stated as a Brier Skill Score against a climatology benchmark (the home-win rate
+of the training window), never as win rate or accuracy. Intervals resample <em>weeks</em>,
+not games, because games inside a week share conditions.</p>
+<div class="scroll"><table class="grid"><thead><tr><th>Model</th><th>n</th><th>Brier</th><th>BSS vs benchmark</th><th>95% week-cluster CI</th><th>Holdout BSS (wk 8–10)</th><th>Permutation p</th><th>Source</th></tr></thead><tbody><tr><td>CD-1</td><td>100</td><td>0.22108</td><td>+0.1362</td><td>[+0.0532, +0.2270]</td><td>+0.2397</td><td>0.0000</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>CD-2</td><td>100</td><td>0.25386</td><td>+0.0082</td><td>[-0.0018, +0.0168]</td><td>+0.0030</td><td>n/a (fails G3)</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>C-1 coin</td><td>100</td><td>0.25000</td><td>+0.0233</td><td>[+0.0233, +0.0233]</td><td>—</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>C-2 always-home</td><td>100</td><td>0.57000</td><td>-1.2269</td><td>[-1.5498, -0.8125]</td><td>—</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>C-3 climatology</td><td>100</td><td>0.25596</td><td>0 (reference)</td><td>—</td><td>—</td><td>—</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr></tbody></table></div>
+
+<h2>3 · Removing the luck</h2>
+<table class="grid"><thead><tr><th>Control</th><th>What it shows</th><th>Source</th></tr></thead><tbody>
+<tr><td>Control floor</td><td>Coin flip (p = 0.50) scores Brier 0.25000; always-home scores
+0.57000. Both are published on every run, as the brief requires.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr>
+<tr><td>Permutation null</td><td>200 schedules with the real fixtures but team identity
+permuted away: mean BSS -0.0305, 95th percentile +0.0309, maximum +0.0841. The
+observed +0.1362 exceeds all 200.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a> <a href="../data/null.json">null.json</a></td></tr>
+<tr><td>Multiplicity</td><td>Holm–Bonferroni over the pre-declared family of 2 scored models.
+Adjusted p: CD-1 = 0.0000, CD-2 = 0.0360.</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr>
+<tr><td>Not removed</td><td>Availability is not in the model, so any injury effect is inside
+the residual. It is flagged, not estimated.</td><td><a href="https://www.nfl.com/injuries/" title="Official NFL injury report — Week 11">S1</a> <a href="flagged.html">RF-09</a></td></tr>
+</tbody></table>
+
+<h2>4 · Gates — CD-1 qualifies on all six, CD-2 fails two</h2>
+<div class="two">
+<div><h3>CD-1 · opponent-aware rating</h3><div class="scroll"><table class="grid"><thead><tr><th>Pre-registered gate</th><th>Result</th><th>Source</th></tr></thead><tbody><tr><td>G1 skill (BSS&gt;0, weeks 4-10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G2 holdout (BSS&gt;0, weeks 8-10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G3 lower bound (week-cluster 95%&gt;0)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G4 multiplicity (Holm p&lt;0.10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G5 sample (n&gt;=90)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G6 controls (Brier &lt; coin and &lt; always-home)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr></tbody></table></div></div>
+<div><h3>CD-2 · constant home edge</h3><div class="scroll"><table class="grid"><thead><tr><th>Pre-registered gate</th><th>Result</th><th>Source</th></tr></thead><tbody><tr><td>G1 skill (BSS&gt;0, weeks 4-10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G2 holdout (BSS&gt;0, weeks 8-10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G3 lower bound (week-cluster 95%&gt;0)</td><td><span class="pill bad">fail</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G4 multiplicity (Holm p&lt;0.10)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G5 sample (n&gt;=90)</td><td><span class="pill ok">pass</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr><tr><td>G6 controls (Brier &lt; coin and &lt; always-home)</td><td><span class="pill bad">fail</span></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-live-board/data/corpus_2026.json" title="2026 results corpus, 149 completed games, weeks 1–10">S11</a></td></tr></tbody></table></div></div>
+</div>
+
+<h2>5 · Totals are a tie, and are published as a tie</h2>
+<p>Total MAE <strong>10.776</strong> against a training-window mean of
+<strong>10.790</strong>: an improvement of 0.014 points with a week-cluster 95%
+interval of [-0.1144, +0.0891]. The interval straddles zero, so neither estimator wins.
+Both stay visible, as the brief asks.</p>
+
+<h2>6 · What the brief asked for that is not here, and why</h2>
+<ul>
+  <li><strong>ROI / CLV / staking.</strong> No official price source. Zero points awarded.</li>
+  <li><strong>Parlay and prop-combo ranking.</strong> Needs a validated joint probability and
+  the operator's void rules. Neither exists.</li>
+  <li><strong>Injury ablations.</strong> Needs point-in-time availability over time; one week
+  is held.</li>
+  <li><strong>Depth from playing time.</strong> No snap-count source exists in the repository.</li>
+</ul>
+<p>Each of those is a question with a named route to an answer on the
+<a href="questions.html">Questions</a> page, and a decision path on the
+<a href="suggestions.html">Suggestions</a> page.</p>
+
+<footer class="foot">
+  <p><strong>Research only — not wagering advice.</strong> No price, ROI or staking result is
+  published anywhere on this site because no official price source exists.</p>
+  <p>If gambling is a problem for you or someone you know, call the National Problem Gambling
+  Helpline at <a href="https://www.ncpgambling.org/help-treatment">1-800-MY-RESET</a>.</p>
+  <p>Every table cell is CAPTURED (committed official capture, hash re-checked) or DERIVED
+  (computed by a named script in this workspace) or blank with a stated reason. Nothing is
+  inferred.</p>
+</footer>
+</main>
+</body>
+</html>
