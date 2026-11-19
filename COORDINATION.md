@@ -5548,3 +5548,25 @@ F01 namespace sprawl (40 namespaces) · F02 six NFL executive summaries with dif
 - `nfl-quant` owner: commit or document `/home/user/nfl_raw/games.csv` and the pandas dependency (F06).
 
 **Scope not done (honest):** this session did not work through the wider request list (decision-readiness table, per-team starter view, depth-group model, roster-turnover versioning, parlay gate, backtests, etc.). Those are already covered in part by `nfl-req-review` (73-row register, round 2) and `nfl-readiness-register`; this session did not re-verify their rows. No betting value, model output or strategy result was produced or changed.
+## Session arena/1a2e0e65-own4 · official Week 11 injury-report re-read (claim, 2026-11-19 UTC)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| W11-1 | Claim: full row-level read of the official NFL.com 2026 Week 11 injury report (fetched 2026-11-19), with per-row source link, team-level counts and a drift check (row count and required fields). Limitation: sandbox cannot reach nfl.com directly, so no raw-byte hash is possible; the fetched text is recorded instead. | in progress | arena/1a2e0e65-own4 | `nfl-week11-reread/**`, `COORDINATION.md` (append-only) |
+
+Scope note: this session does not claim the 73-row requirement register, the depth sweep, the snapshot workflow or the shared root site. Those are owned by earlier sessions listed above and are not edited here.
+
+### W11-1 completion record — `arena/1a2e0e65-own4` (2026-11-19 UTC)
+
+| Task | Status | Owner | File scope |
+|---|---|---|---|
+| W11-1 | done (pending PR merge; see below) | arena/1a2e0e65-own4 | `nfl-week11-reread/**` (public: `index.html`, `pages/delta.html`, `pages/flagged.html`, `data/delta_week11.json`); row-level transcription kept in gitignored `private-store/nfl-week11/` |
+
+- **What was read:** the official NFL.com Week 11 injury report, https://www.nfl.com/injuries/ (fetch-tool, 7 chunks, read date 2026-11-19; the fetch tool returns no clock time). 13 games and 253 player rows across 24 clubs; CIN and WAS shown "No Injuries Reported".
+- **Delta published (derived only, no row-level data):** compared against the stored official raw capture `nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html` (23:49:17 UTC, manifest sha256 `e1bbea1b…d012e7b`). 32 clubs checked: 26 compared, 25 unchanged (242 rows identical), 1 changed (Chargers: "No Injuries Reported" → 11 rows; FL-02), 6 absent in both reads (ATL, CLE, GB, LAR, NE, SEA; FL-01).
+- **Verification:** `nfl-week11-reread/verify.py` passes (exit 0): transcription row/club counts, allowed values, hash ties, delta re-derived from both inputs, every data row on public pages carries an https link, internal links resolve, no localhost, no per-player table on public pages. Machine cross-check: 242 of 253 transcribed rows match the 11-18 raw capture exactly; the 11 that differ are the Chargers block.
+- **Sources (links):** https://www.nfl.com/injuries/ ; NFL.com news items cited in the flags (Mayfield, Addison, Hutchinson, Lamar Jackson, Drake Maye, Nacua, Malik Willis) — headlines as displayed on the page, articles not opened.
+- **Irregularities flagged for review (not blocking):** FL-01 six clubs absent from both reads; FL-02 Chargers delta (timing unknown); FL-03/04 blank injury cells alongside official headlines; FL-05/06 players with headlines but no row; FL-07/08/09 reserve status not shown on the report; FL-10 DET blank Game Status vs the earlier VR-08/VR-12 claim (unresolved); FL-11 method limit (no raw HTML hash for the 2026-11-19 read; sandbox cannot reach nfl.com via curl); FL-12 no clock time for the 2026-11-19 read; FL-13 this board's earlier S-02 note ("Week 10 still shown") conflicts with the stored 11-18 capture, which is Week 11.
+- **Corrections to this session's own earlier notes:** a first draft said the 11-18 capture was Week 10; the stored file is Week 11, so that draft claim was removed before publishing.
+- **Not done here (out of this session's claim):** depth charts, inactives, snap counts, team-level model, strategy/leaderboard work, the executive summary and the decision-readiness page. These remain owned by earlier entries on this board; this session did not edit them.
+- **Shared site:** the root `index.html` and navigation are not edited; the new directory is reachable at `/nfl-week11-reread/` once merged.
