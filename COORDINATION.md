@@ -5877,3 +5877,19 @@ PR link, merge result and Pages status: to be recorded in task INT-6 after the P
 **Scope discipline.** No peer workspace data, page or verifier was edited, deleted or merged; no earlier PR was merged, closed or commented on. The only files outside `nfl-desk/**` touched are the two additive navigation entries and the regenerated root/`verified/` pages those entries flow into. The suggested consolidations (S01, S02, S08) are published as owner decisions, not performed.
 
 **Branch.** All work is on `arena/1e2776fd-own4`; no other branch was created or pushed.
+
+### Publication record — `arena/1153eb96-own4` (2026-11-19 UTC)
+
+| PR | Head → base | Result | Merge commit |
+|----|-------------|--------|--------------|
+| [#180](https://github.com/sassnarep3-star/Own4/pull/180) | `arena/1153eb96-own4` → `main` | **MERGED** 2026-11-19T07:06:48Z — MERGEABLE/CLEAN, 6 checks pass | `67f3098` |
+| [#184](https://github.com/sassnarep3-star/Own4/pull/184) | `arena/1153eb96-own4` → `main` | **MERGED** 2026-11-19T07:15:43Z — MERGEABLE/CLEAN, 7 checks pass (incl. the deck's new CI) | `a537f83` |
+
+- **Pages:** the Pages API reports build commit `a537f83`, status `built`. Pinned tree re-verified locally at that commit: `nfl-command-deck/engine/verify.py` **PASS** (10 pages) and `verification/verify_site.py` **PASS** (14 pages, 346 source-linked rows). Public HTML could not be fetched from this sandbox — `*.github.io` is outside the egress allowlist, the same limitation as RF-01 — so the deployment claim rests on the Pages build API plus a clean local verification of the exact deployed commit, not on an HTTP fetch.
+- **CI added:** `.github/workflows/nfl-command-deck.yml` gates the namespace on the pre-registration hash, a full rebuild, pure-output freshness (hard), tree-dependent freshness (warning), the page verifier, and a re-run of the verifier to prove it carries no state.
+- **Rebase/merge conflicts (4 rounds, all in shared files):** `COORDINATION.md` conflicts were resolved as append-only unions — every peer block retained verbatim, no line dropped. The shared root site (`index.html`, `verified/*`) conflicted because a peer session also regenerated it; resolved by re-running `verification/build.py`, the generator that owns those files, so the merged tree keeps every nav group plus this session's one additive group. Nothing was hand-edited into generated output.
+- **Peer work preserved:** `nfl-verify-2026-11-19`, `nfl-desk`, `nfl-repo-inventory`, `nfl-week11-reread` and the peer integration that fixed the 52 dead file links all landed on main during this session and are untouched. Corrections made to this session's own findings when the tree changed are recorded, not erased: RF-03 now says "resolved by a peer integration" and every link-defect count is re-measured at build time.
+
+### D-01 … D-07 status: all **done**
+
+Result: 149-game corpus, 100 walk-forward forecasts, CD-1 Brier skill **+0.1362** (95% week-cluster CI [+0.0532, +0.2270]), untouched holdout **+0.2397**, 6/6 pre-registered gates, observed skill beyond all 200 permuted schedules, totals published as a tie, **0 points awarded** because no official price source exists. 14 of 73 requirement rows independently re-checked (12 pass, 2 contradicted), 59 marked not machine-checkable rather than endorsed. 16 questions, 14 suggestions with blank decision fields, 15 flags.
