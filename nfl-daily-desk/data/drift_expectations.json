@@ -1,0 +1,31 @@
+{
+ "dataset": "nfl_daily_desk_drift_expectations",
+ "pinned_utc": "2026-11-19T07:05:00Z",
+ "note": "Pinned from the 2026-11-19 official Week 11 read. Floors are deliberately below the observed count so a source that drops one player row still passes, while a source that drops a club table or renames a column fails the build loudly instead of publishing blanks.",
+ "reads": {
+  "capture_a": {
+   "min_rows": 200,
+   "expect_clubs_with_rows": 23,
+   "required_fields": [
+    "player",
+    "pos",
+    "practice",
+    "game_status",
+    "club",
+    "day"
+   ]
+  },
+  "capture_b": {
+   "min_rows": 200,
+   "expect_clubs_with_rows": 24,
+   "required_fields": [
+    "player",
+    "pos",
+    "practice",
+    "game_status",
+    "club",
+    "day"
+   ]
+  }
+ }
+}

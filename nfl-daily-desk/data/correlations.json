@@ -1,0 +1,106 @@
+{
+ "dataset": "nfl_daily_desk_correlations",
+ "title": "Correlations from officially sourced numbers only, with n on every value",
+ "built_utc": "2026-11-19T07:25:00Z",
+ "rows": [
+  {
+   "id": "K01",
+   "pair": "game margin ~ game total",
+   "definition": "(home - away) points vs (home + away) points, one pair per played game",
+   "why": "this is the dependence that makes a same-game parlay of side and total invalid when marginals are multiplied; it is measured, never assumed",
+   "n": 150,
+   "r": -0.1405,
+   "ci95_fisher_z": [
+    -0.2941,
+    0.0202
+   ],
+   "p_permutation": 0.086296,
+   "n_permutations": 20000,
+   "seed": 20261119,
+   "method": "Pearson r on officially sourced numbers only; Fisher-z interval is a floor on width because games inside a week share a slate; two-sided permutation test",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "provenance": "149 rows inherited from nfl-live-board/data/corpus_rows_only.json (each with its own game-centre URL) + 1 rows verified by this session on 2026-11-19"
+  },
+  {
+   "id": "K02",
+   "pair": "away points ~ home points",
+   "definition": "one pair per played game",
+   "why": "the dependence term for any two-team combination",
+   "n": 150,
+   "r": 0.0486,
+   "ci95_fisher_z": [
+    -0.1125,
+    0.2073
+   ],
+   "p_permutation": 0.557172,
+   "n_permutations": 20000,
+   "seed": 20261119,
+   "method": "Pearson r on officially sourced numbers only; Fisher-z interval is a floor on width because games inside a week share a slate; two-sided permutation test",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "provenance": "149 rows inherited from nfl-live-board/data/corpus_rows_only.json (each with its own game-centre URL) + 1 rows verified by this session on 2026-11-19"
+  },
+  {
+   "id": "K03",
+   "pair": "rest differential (home - away, days) ~ home margin",
+   "definition": "rest computed only from the published dates of consecutive fixtures in the corpus",
+   "why": "fixture context is a schedule fact, so it is the cheapest legitimate feature to test",
+   "n": 134,
+   "r": 0.3256,
+   "ci95_fisher_z": [
+    0.1651,
+    0.4693
+   ],
+   "p_permutation": 0.00025,
+   "n_permutations": 20000,
+   "seed": 20261119,
+   "method": "Pearson r on officially sourced numbers only; Fisher-z interval is a floor on width because games inside a week share a slate; two-sided permutation test",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "provenance": "149 rows inherited from nfl-live-board/data/corpus_rows_only.json (each with its own game-centre URL) + 1 rows verified by this session on 2026-11-19"
+  },
+  {
+   "id": "K04",
+   "pair": "previous-game margin (team) ~ next-game margin (team)",
+   "definition": "team-level persistence across that club's consecutive games",
+   "why": "how much of a rating signal is real persistence rather than noise",
+   "n": 268,
+   "r": 0.1359,
+   "ci95_fisher_z": [
+    0.0163,
+    0.2516
+   ],
+   "p_permutation": 0.026349,
+   "n_permutations": 20000,
+   "seed": 20261119,
+   "method": "Pearson r on officially sourced numbers only; Fisher-z interval is a floor on width because games inside a week share a slate; two-sided permutation test",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "provenance": "149 rows inherited from nfl-live-board/data/corpus_rows_only.json (each with its own game-centre URL) + 1 rows verified by this session on 2026-11-19"
+  },
+  {
+   "id": "K05",
+   "pair": "practice designation level ~ club margin",
+   "why": "the brief requires the availability signal to be a surprise, not a level; a level correlation would need one dated report per club-week",
+   "n": 0,
+   "r": null,
+   "blank_reason": "the repository holds dated reports for 2 weeks (2026-11-15 Week 10, 2026-11-18/19 Week 11). With 2 report-weeks there is no cross-sectional sample of levels, and the value would be invented. n=0 is published instead.",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "K06",
+   "pair": "model residual ~ market residual (CLV)",
+   "why": "closing line value is the luck-free market score",
+   "n": 0,
+   "r": null,
+   "blank_reason": "no official or licensed opening/closing price exists anywhere in this repository or on any NFL page; a CLV correlation cannot be computed without fabricating prices",
+   "source_url": "https://www.nfl.com/"
+  },
+  {
+   "id": "K07",
+   "pair": "snap-share of a replaced starter ~ game total adjustment",
+   "why": "the depth-of-replacement measure the brief asks for",
+   "n": 0,
+   "r": null,
+   "blank_reason": "no official snap-count source has been located and licensed; replacement depth is therefore not modelled - see the suggestion that decides this before any feature is built",
+   "source_url": "https://www.nfl.com/"
+  }
+ ]
+}

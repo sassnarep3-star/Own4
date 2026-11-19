@@ -1,0 +1,490 @@
+{
+ "dataset": "nfl_daily_desk_shadow_reconciliation",
+ "title": "Two independently pre-registered Week 11 shadow records, reconciled line by line",
+ "built_utc": "2026-11-19T07:25:00Z",
+ "policy": "both frozen records are published side by side with the gap between them; neither is chosen, tuned or dropped. Ranking needs graded outcomes, and grading starts after kickoff.",
+ "records": {
+  "model_A": {
+   "name": "singles_shadow_baseline_v1",
+   "prereg_file": "nfl-readiness/data/shadow_week11.json",
+   "prereg_sha256": "6b7b37e425ff69d0fc1886ce14b2a307764f9b587844d5809dad67e4750c5d5b",
+   "last_touched": "e322a32e836c70924d9a4ef5971c23b43fb2a07a|2026-11-18T23:49:19+00:00",
+   "sigma": "assumption flag in the file: sigma is a stated constant (13.5), not a number measured from official data - flagged F-DSK-05",
+   "source_url": "https://www.nfl.com/standings/league/2026/REG"
+  },
+  "model_B": {
+   "name": "shrunk points-for / points-against baseline",
+   "prereg_file": "nfl-live-board/data/origination_week11.json",
+   "built_utc": "2026-11-17",
+   "frozen": true,
+   "n_train_games": 149,
+   "last_touched": "e322a32e836c70924d9a4ef5971c23b43fb2a07a|2026-11-18T23:49:19+00:00",
+   "market_columns_policy": "blank - no official price source exists (flagged F-01)",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  }
+ },
+ "n_fixtures_recorded": 13,
+ "n_fixtures_in_official_slate": 13,
+ "coverage": "13 of 13 Week 11 fixtures appear in both records",
+ "rows": [
+  {
+   "away": "AZ",
+   "home": "KC",
+   "kickoff_label": "2026-11-22, 1:00 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": -13.22,
+   "model_B_fair_total": 45.7,
+   "model_B_p_home": 0.8923,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11"
+  },
+  {
+   "away": "BAL",
+   "home": "CAR",
+   "kickoff_label": "2026-11-22, 1:00 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": -1.8,
+   "model_B_fair_total": 48.1,
+   "model_B_p_home": 0.5669,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11"
+  },
+  {
+   "away": "CIN",
+   "home": "WAS",
+   "kickoff_label": "2026-11-23, 8:15 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": 9.13,
+   "model_B_fair_total": 48.4,
+   "model_B_p_home": 0.1963,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11"
+  },
+  {
+   "away": "IND",
+   "home": "HOU",
+   "kickoff_label": "Thu 2026-11-19 8:15 PM ET",
+   "model_A_margin_home": 7.8556,
+   "model_A_p_home": 0.7197,
+   "model_B_fair_spread_home": -5.07,
+   "model_B_fair_total": 48.2,
+   "model_B_p_home": 0.6825,
+   "abs_gap_between_frozen_models": 2.7856,
+   "both_records_present": true,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": true,
+   "input_detail": [
+    {
+     "club": "IND",
+     "recorded_inputs": {
+      "W": 3,
+      "L": 7,
+      "T": 0,
+      "PF": 208,
+      "PA": 271
+     },
+     "official_2026-11-19": {
+      "W": 3,
+      "L": 7,
+      "T": 0,
+      "PF": 208,
+      "PA": 271
+     },
+     "match": true
+    },
+    {
+     "club": "HOU",
+     "recorded_inputs": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 233,
+      "PA": 219
+     },
+     "official_2026-11-19": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 233,
+      "PA": 219
+     },
+     "match": true
+    }
+   ],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+  },
+  {
+   "away": "JAX",
+   "home": "NYG",
+   "kickoff_label": "Sun 2026-11-22 4:25 PM ET",
+   "model_A_margin_home": -13.1111,
+   "model_A_p_home": 0.1657,
+   "model_B_fair_spread_home": 9.59,
+   "model_B_fair_total": 45.4,
+   "model_B_p_home": 0.1845,
+   "abs_gap_between_frozen_models": 3.5211,
+   "both_records_present": true,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": true,
+   "input_detail": [
+    {
+     "club": "JAX",
+     "recorded_inputs": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 269,
+      "PA": 144
+     },
+     "official_2026-11-19": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 269,
+      "PA": 144
+     },
+     "match": true
+    },
+    {
+     "club": "NYG",
+     "recorded_inputs": {
+      "W": 5,
+      "L": 3,
+      "T": 1,
+      "PF": 203,
+      "PA": 196
+     },
+     "official_2026-11-19": {
+      "W": 5,
+      "L": 3,
+      "T": 1,
+      "PF": 203,
+      "PA": 196
+     },
+     "match": true
+    }
+   ],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11"
+  },
+  {
+   "away": "LV",
+   "home": "DEN",
+   "kickoff_label": "2026-11-22, 4:25 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": -3.13,
+   "model_B_fair_total": 47.8,
+   "model_B_p_home": 0.6152,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11"
+  },
+  {
+   "away": "MIA",
+   "home": "BUF",
+   "kickoff_label": "Sun 2026-11-22 1:00 PM ET",
+   "model_A_margin_home": 18.2222,
+   "model_A_p_home": 0.9115,
+   "model_B_fair_spread_home": -12.11,
+   "model_B_fair_total": 47.2,
+   "model_B_p_home": 0.8716,
+   "abs_gap_between_frozen_models": 6.1122,
+   "both_records_present": true,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": true,
+   "input_detail": [
+    {
+     "club": "MIA",
+     "recorded_inputs": {
+      "W": 1,
+      "L": 8,
+      "T": 0,
+      "PF": 148,
+      "PA": 224
+     },
+     "official_2026-11-19": {
+      "W": 1,
+      "L": 8,
+      "T": 0,
+      "PF": 148,
+      "PA": 224
+     },
+     "match": true
+    },
+    {
+     "club": "BUF",
+     "recorded_inputs": {
+      "W": 8,
+      "L": 1,
+      "T": 0,
+      "PF": 287,
+      "PA": 199
+     },
+     "official_2026-11-19": {
+      "W": 8,
+      "L": 1,
+      "T": 0,
+      "PF": 287,
+      "PA": 199
+     },
+     "match": true
+    }
+   ],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11"
+  },
+  {
+   "away": "MIN",
+   "home": "SF",
+   "kickoff_label": "2026-11-22, 8:20 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": -2.69,
+   "model_B_fair_total": 44.2,
+   "model_B_p_home": 0.5996,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11"
+  },
+  {
+   "away": "NO",
+   "home": "CHI",
+   "kickoff_label": "Sun 2026-11-22 1:00 PM ET",
+   "model_A_margin_home": 10.1111,
+   "model_A_p_home": 0.7731,
+   "model_B_fair_spread_home": -6.49,
+   "model_B_fair_total": 47.4,
+   "model_B_p_home": 0.7284,
+   "abs_gap_between_frozen_models": 3.6211,
+   "both_records_present": true,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": true,
+   "input_detail": [
+    {
+     "club": "NO",
+     "recorded_inputs": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 202,
+      "PA": 236
+     },
+     "official_2026-11-19": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 202,
+      "PA": 236
+     },
+     "match": true
+    },
+    {
+     "club": "CHI",
+     "recorded_inputs": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 241,
+      "PA": 184
+     },
+     "official_2026-11-19": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 241,
+      "PA": 184
+     },
+     "match": true
+    }
+   ],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11"
+  },
+  {
+   "away": "NYJ",
+   "home": "LAC",
+   "kickoff_label": "2026-11-22, 4:05 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": 4.39,
+   "model_B_fair_total": 44.5,
+   "model_B_p_home": 0.3404,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11"
+  },
+  {
+   "away": "PIT",
+   "home": "PHI",
+   "kickoff_label": "2026-11-22, 1:00 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": 7.36,
+   "model_B_fair_total": 43.0,
+   "model_B_p_home": 0.2453,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11"
+  },
+  {
+   "away": "TB",
+   "home": "DET",
+   "kickoff_label": "Sun 2026-11-22 1:00 PM ET",
+   "model_A_margin_home": 3.7778,
+   "model_A_p_home": 0.6102,
+   "model_B_fair_spread_home": -2.11,
+   "model_B_fair_total": 46.4,
+   "model_B_p_home": 0.5782,
+   "abs_gap_between_frozen_models": 1.6678,
+   "both_records_present": true,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": true,
+   "input_detail": [
+    {
+     "club": "TB",
+     "recorded_inputs": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 202,
+      "PA": 178
+     },
+     "official_2026-11-19": {
+      "W": 3,
+      "L": 6,
+      "T": 0,
+      "PF": 202,
+      "PA": 178
+     },
+     "match": true
+    },
+    {
+     "club": "DET",
+     "recorded_inputs": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 257,
+      "PA": 199
+     },
+     "official_2026-11-19": {
+      "W": 7,
+      "L": 2,
+      "T": 0,
+      "PF": 257,
+      "PA": 199
+     },
+     "match": true
+    }
+   ],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11"
+  },
+  {
+   "away": "TEN",
+   "home": "DAL",
+   "kickoff_label": "2026-11-22, 1:00 PM",
+   "model_A_margin_home": null,
+   "model_A_p_home": null,
+   "model_B_fair_spread_home": -5.31,
+   "model_B_fair_total": 49.6,
+   "model_B_p_home": 0.6907,
+   "abs_gap_between_frozen_models": null,
+   "both_records_present": false,
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed price source exists; the residual column stays empty rather than being filled with an assumed -110",
+   "residual_vs_market": null,
+   "inputs_verified_against_official_standings_2026-11-19": null,
+   "input_detail": [],
+   "graded": null,
+   "grade_blank_reason": "no Week 11 kickoff has occurred at this read; every row in this table is a pre-kickoff record and stays ungraded",
+   "source_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11"
+  }
+ ],
+ "grading_queue": {
+  "gradeable_now": 0,
+  "why": "no Week 11 game has finished at this read; the first kickoff (IND at HOU) is 2026-11-19 8:15 PM ET (2026-11-20 01:15 UTC)",
+  "first_grade_due_utc": "2026-11-20T02:30:00Z",
+  "rule": "grade both models with the same frozen recipe (Brier vs the always-home baseline from data/controls.json, MAE on the total), one game at a time, and only then rank",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+ },
+ "demotion_gate": {
+  "rule_text": "a live strategy returns to paper when its game-cluster lower bound on benchmark-relative skill falls to or below zero over the trailing 4-week window, or when a required input feed has been stale for more than 1 report cycle",
+  "strategies_live": 0,
+  "demotions_today": 0,
+  "status": "nothing to demote: no strategy has been promoted, because no graded sample exists",
+  "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+ }
+}

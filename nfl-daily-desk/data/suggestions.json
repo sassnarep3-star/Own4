@@ -1,0 +1,260 @@
+{
+ "dataset": "nfl_daily_desk_suggestions",
+ "title": "Suggestions for improving the site and the decisions it supports - for review BEFORE anything is implemented",
+ "built_utc": "2026-11-19T07:45:00Z",
+ "policy": "nothing here is implemented; each row states the problem, the options, the recommended path, the cost, what it unblocks and what breaks if it is skipped. Sorted by what it unblocks, not by how easy it is. review_state becomes accepted / deferred / rejected only by the owner.",
+ "ranking_rule": "expected decisions unblocked per unit of cost, ties broken by whether the current state produces a wrong number rather than no number",
+ "rows": [
+  {
+   "id": "S-01",
+   "problem": "Forty-four NFL namespaces now carry a census (the front door measured 44 with 42 verifiers), and every session so far has added a namespace rather than retiring one. This desk is now one of them and says so.",
+   "suggestion": "Publish a workspace registry on the landing page - namespace, what it is canonical for, last verified date, and a read-only banner for the rest - and stop minting new namespaces for refresh work.",
+   "options": {
+    "A": "Registry table generated from a per-namespace manifest (1 new file, 0 new pages)",
+    "B": "Registry maintained by the integration session only",
+    "C": "Do nothing and keep appending namespaces"
+   },
+   "recommended_path": "A, narrowed: the front door already publishes a census and a three-way status comparison, so this desk should NOT add a fourth registry. The missing piece is smaller and specific \u2014 one id-mapping table across the requirement registers (39 of 73 rows already share identical normalised text), plus the two disagreements found today (results-feed size, shared-slot count) so a reader cannot pick a favourable one.",
+   "cost": "1 session-hour, no new data",
+   "unblocks": [
+    "R-22",
+    "P-01"
+   ],
+   "risk_if_skipped": "Duplicate work, and a reader choosing between 137, 149 and 150 games by accident.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-02",
+   "problem": "The price-data question has been open in every session and it gates seven requirements, yet no capture is running even for the option nobody has rejected.",
+   "suggestion": "Record the decision in one page, and start capturing under whichever option is chosen on the same day - an archive is worth nothing except from the day you begin.",
+   "options": {
+    "A": "Never use market prices: publish fair lines and probabilities, keep ROI/CLV off the roadmap",
+    "B": "Licence a feed, capture open+close per market per game, publish residual from week 1",
+    "C": "Accept a named third-party archive for research, forbid it from the leaderboard and from any 'official' label"
+   },
+   "recommended_path": "B if a licence is obtainable, otherwise C with C's numbers excluded from every competitive surface. Option A is a legitimate answer and is cheaper than the argument; the unacceptable state is an open question while three stores pretend to be ready.",
+   "cost": "1 owner decision + 1 scheduled capture job (small)",
+   "unblocks": [
+    "R-01",
+    "R-04",
+    "R-18",
+    "R-20",
+    "R-55",
+    "R-57",
+    "R-58"
+   ],
+   "risk_if_skipped": "Every ROI-shaped number stays uncomputable, and namespaces keep filling the gap with conventions that look like data.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-03",
+   "problem": "Captures are counted per day, but the report changes per publish event - today's two captures 7h15m apart differ in 1 field out of 241.",
+   "suggestion": "Key capture cadence to the league's publish schedule (after each report release), record the document hash, and treat a repeat hash as 'no new information' rather than as a new data point.",
+   "options": {
+    "A": "Keep daily captures and publish the duplicate as 'no change'",
+    "B": "Publish-anchored capture: fetch at 3 known publication windows per week, alert if a window yields a hash already seen",
+    "C": "Add an independent second observation point (club release) to break ties"
+   },
+   "recommended_path": "B now, C when the desk has spare capacity. 'No change' is a result and should be printed as one, but it must not be counted as three results.",
+   "cost": "config only",
+   "unblocks": [
+    "R-21",
+    "R-52",
+    "R-53"
+   ],
+   "risk_if_skipped": "A freshness panel that reports confidence it has not earned.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-04",
+   "problem": "Two requirements (calibrating 'Questionable', scoring designation reliability) are blocked on the same unknown: whether a past-season weekly report can be retrieved at all.",
+   "suggestion": "Spend one hour on a historical probe of the per-week report URL family for a single past week, and publish the outcome as a dated finding whether it succeeds or fails.",
+   "options": {
+    "A": "Probe one week of one past season; if it renders, probe a full season",
+    "B": "Buy an archive instead of probing",
+    "C": "Accept that designations cannot be calibrated and remove the two requirements from the roadmap"
+   },
+   "recommended_path": "A, because it converts an argument into a measurement for almost no cost, and a published negative result is as valuable as a positive one here.",
+   "cost": "<1 hour",
+   "unblocks": [
+    "R-43",
+    "R-51",
+    "R-64"
+   ],
+   "risk_if_skipped": "The availability feature stays a belief rather than a number, forever.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-05",
+   "problem": "Nothing in the repository stores game-day inactives, so no backup replacing a starter is ever confirmed - and the depth/slot requirements all quietly depend on that confirmation.",
+   "suggestion": "Add an inactive-list capture as a first-class scraper (26 club lists per 13-game week), keyed by game centre, with the drift alarm attached.",
+   "options": {
+    "A": "Capture the inactives from the game centre on game day",
+    "B": "Wait for Game Book access (Q-05) and do nothing meanwhile",
+    "C": "Derive 'did not play' from box-participation fields on the game centre where present"
+   },
+   "recommended_path": "A, with C as a labelled fallback. This is the highest-leverage new source: it turns several 'suspected' columns into 'confirmed' columns without any market data.",
+   "cost": "1 scraper + 1 scheduled job",
+   "unblocks": [
+    "R-10",
+    "R-25",
+    "R-30",
+    "R-46",
+    "R-51"
+   ],
+   "risk_if_skipped": "The availability graph keeps an 'expected' side and no 'actual' side, which is half a dataset.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-06",
+   "problem": "A registered model converts margin to probability with SIGMA = 13.5 points, an assumption the rule file itself says has no source.",
+   "suggestion": "Register a v2 that estimates the residual SD from the 150-game official corpus, run both side by side, and collapse only after a walk-forward comparison - the same rule the totals requirement states.",
+   "options": {
+    "A": "Leave v1 alone, register v2 next to it, publish the gap",
+    "B": "Edit v1's constant (breaks the registration)",
+    "C": "Never measure it"
+   },
+   "recommended_path": "A, unambiguously: B is the failure mode the pre-registration rule exists to prevent. The estimate should carry n and an interval, and the leaderboard should treat 'baseline' as a versioned object.",
+   "cost": "1 hour of code, 1 new file",
+   "unblocks": [
+    "R-34",
+    "R-60",
+    "R-65"
+   ],
+   "risk_if_skipped": "Every probability in the record - and therefore every future Brier score - rests on an unexamined constant.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-07",
+   "problem": "Home-field is treated as common sense, but the official 2026 numbers say home teams are losing more than they win.",
+   "suggestion": "Put the control baselines (always-home, coin flip, favorites-only) on the landing page next to the skill claims, and recompute them weekly from the canonical corpus.",
+   "options": {
+    "A": "Publish the controls as a permanent panel with n and the corpus date",
+    "B": "Keep them in a data file only",
+    "C": "Drop them as obvious"
+   },
+   "recommended_path": "A. Today's measured numbers are always-home 0.473 over 150 games and 4 of 14 in Week 10 - below a coin flip - so a model that leans home is being rewarded for a negative edge unless the control is visible.",
+   "cost": "already computed here; 10 minutes to surface it",
+   "unblocks": [
+    "R-16",
+    "R-55"
+   ],
+   "risk_if_skipped": "A 'good' week that is actually a coin flip, or worse.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-08",
+   "problem": "Two of the three corpora in the repo disagree with the league's own arithmetic, and nobody noticed because each namespace checked itself.",
+   "suggestion": "Declare one canonical 2026 results feed keyed by game_id, and make every namespace's build assert the same identity: row count == sum(W+L+T)/2 from that day's official standings page.",
+   "options": {
+    "A": "One feed + one CI assertion everywhere",
+    "B": "Leave three feeds and add a note",
+    "C": "Recompute each namespace's numbers on its own feed and label the n"
+   },
+   "recommended_path": "A, reusing the assertion already written in this desk's compute step (150 == 150 today, and the points-for identity 6,923 == 6,923 holds).",
+   "cost": "1 integration change",
+   "unblocks": [
+    "R-02",
+    "R-19",
+    "Q-11"
+   ],
+   "risk_if_skipped": "Every backtest, correlation and rating in the repository inherits an off-by-thirteen sample.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-09",
+   "problem": "The depth register's schema drops the states that matter: it recorded 15 shared rank-1 slots and 0 empty slots where the brief describes 149 shared slots and an empty Washington slot.",
+   "suggestion": "Re-parse the stored transcripts under a slot-as-group schema with an explicit empty state, and publish the before/after counts side by side.",
+   "options": {
+    "A": "Re-parse with group + empty semantics, publish both counts",
+    "B": "Keep the flat register and label every 'starter' as 'first name in column 1'",
+    "C": "Delete the depth feature until a licensed structured source exists"
+   },
+   "recommended_path": "A, then B or C depending on what the re-parse shows. The brief's number and the stored number cannot both be right, and 'we measured both' is the only defensible answer.",
+   "cost": "1 session-hour on existing captures",
+   "unblocks": [
+    "R-32",
+    "R-49",
+    "R-50",
+    "F-DSK-09"
+   ],
+   "risk_if_skipped": "A 'starter' that no club ever named, feeding a deficiency feature that looks verified.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-10",
+   "problem": "Club keys are not canonical: one registered record spells Arizona 'ARI' in its withheld list and 'AZ' in its rows, and the two renders of one player name ('Dee Alford' / \"De'Alford, Dee\") do not join at all.",
+   "suggestion": "Freeze an identity layer: one 32-club abbreviation table, and player identity by the official player URL with display name kept as a rendered attribute, never as a key.",
+   "options": {
+    "A": "Canonical club map + player-slug keys in every new store",
+    "B": "Patch each artifact as it is read",
+    "C": "Ignore it and accept silent join losses"
+   },
+   "recommended_path": "A. A 'first name in column 1' style bug is visible; a dropped fixture in a join is not, and the delta panel is exactly the kind of table where a dropped row looks like 'no change'.",
+   "cost": "1 shared module",
+   "unblocks": [
+    "R-10",
+    "R-12",
+    "R-33",
+    "F-DSK-06",
+    "F-DSK-10"
+   ],
+   "risk_if_skipped": "Undercounted deltas and phantom roster events, discovered a month from now.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-11",
+   "problem": "Requirements are satisfied by one-off session artifacts, so 'done' decays: the injury-surprise panel was blank for two days because it needed two captures and had one.",
+   "suggestion": "Turn this desk into the scheduled job (capture, parse, diff, publish) and make the delta panel the landing page's first module, so the site's default view is 'what changed', not 'what someone wrote'.",
+   "options": {
+    "A": "Schedule the desk; keep namespaces as reference layers",
+    "B": "Re-run sessions by hand each week",
+    "C": "Leave the site as a static archive of analyses"
+   },
+   "recommended_path": "A, with one guardrail: a scheduled job may only publish numbers its own parsers produced, and it must fail the build rather than blank a cell (the alarm pattern already exists here).",
+   "cost": "1 workflow file",
+   "unblocks": [
+    "R-12",
+    "R-21",
+    "R-28",
+    "R-38",
+    "R-59"
+   ],
+   "risk_if_skipped": "Every dated claim on the site quietly becomes a historical document.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  },
+  {
+   "id": "S-12",
+   "problem": "Small samples are being read as evidence: the largest pre-kickoff record in the repository is 13 games, and the frozen rule's own floor for a skill claim is 300.",
+   "suggestion": "Add a visible sample-size badge to every number on the site (n, plus 'refused' when n is below the registered floor), and have the generator refuse to render a skill claim without one.",
+   "options": {
+    "A": "Badge every numeric cell with its n",
+    "B": "Badge only leaderboard cells",
+    "C": "Rely on prose caveats"
+   },
+   "recommended_path": "A. It costs a column, and it makes the brief's 'remove luck' instruction enforceable by a reader rather than by trust.",
+   "cost": "1 build change",
+   "unblocks": [
+    "R-07",
+    "R-16",
+    "R-36",
+    "R-37",
+    "R-63"
+   ],
+   "risk_if_skipped": "A lucky fortnight reads as a strategy.",
+   "review_state": "proposed - awaiting owner",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
+  }
+ ]
+}

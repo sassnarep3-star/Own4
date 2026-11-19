@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive summary — NFL daily decision desk</title>
+<link rel="stylesheet" href="assets/desk.css">
+</head><body>
+<header class="top"><div class="brand"><a href="index.html">NFL daily decision desk</a>
+<span class="asof">reads of 2026-11-19 · session arena-92c458e6-own4</span></div>
+<nav class="nav"><a  href="index.html">Desk</a><a  href="readiness.html">Decision readiness</a><a  href="availability.html">Availability</a><a  href="delta.html">What changed</a><a  href="results.html">Results &amp; corpus</a><a  href="statistics.html">Correlations &amp; controls</a><a  href="origination.html">Own lines (shadow)</a><a  href="questions.html">Questions</a><a  href="suggestions.html">Suggestions</a><a  href="repo-review.html">Repo review</a><a  href="flagged.html">Flagged for review</a><a  href="sources.html">Sources</a><a  href="cross-check.html">Cross-session check</a><a class="on" href="executive-summary.html">Executive summary</a></nav></header>
+<main>
+<h1>Executive summary</h1>
+<p class='sub'>what today measured, what it changed, and the one decision that gates seven requirements</p>
+
+
+<section class="card"><h2>1 · State, in five numbers</h2><ol>
+<li><strong>253</strong> — official injury-report rows read at 2026-11-19T07:05:00Z, covering 24 clubs, of
+which <strong>16</strong> carry a game designation (6.32%). Availability is thin by publication, not by
+transcription.</li>
+<li><strong>150</strong> — games in the verified 2026 results corpus after today's extension; the official
+standings imply exactly that number (sum(W+L+T)/2 = 150) and total points reconcile (6,923 = 6,923), which they did
+not before today.</li>
+<li><strong>13</strong> — Week 11 fixtures recorded as a shadow forecast before kickoff (5 reproducing the
+frozen cohort exactly, 8 newly eligible), with 0 graded and a registered floor of 300 graded games before any
+skill claim.</li>
+<li><strong>0.4733</strong> — the always-home control on the 150-game corpus, against a coin flip at 0.5. The
+home baseline is a <em>negative</em> edge this season, and any model that looks good against a home-leaning
+null is not.</li>
+<li><strong>73</strong> — requirement rows in the decision-readiness table, and <strong>19</strong> flagged
+irregularities, 16 of them medium or worse.</li></ol></section>
+
+<section class="card"><h2>2 · What today actually changed</h2>
+<p>The desk did not add an analysis; it closed three specific holes and proved each closure:</p>
+<ul>
+<li><strong>The first real availability delta.</strong> Two dated reads of the same official report now exist,
+and comparing them found 1 designation change and 12 rows appearing in one club block out of 241 shared
+players. Every previous &ldquo;surprise&rdquo; column in this repository was blank for lack of a second
+capture; it is now a number.</li>
+<li><strong>A stale corpus, measured rather than noticed.</strong> Two 2026 feeds disagreed with the league:
+137 and 149 games where the standings imply 150. Monday night's result (LAC 23 at BAL 20) was missing
+everywhere, and is now present with a game-centre link; 13 of 13 inherited Week 10 rows re-read today and
+agree.</li>
+<li><strong>An independent corroboration.</strong> A second session read the same official report on the
+same day and published its own artifact set; joining the two finds 109 of 111 rows identical on every
+field, all 10 per-club counts equal, 192 of 192 standings fields equal, 25 of 25 reserve rows and 13 of 13
+Week 11 fixtures reconciling — with the two differing rows and one venue-label disagreement published
+instead of reconciled away (<a href="cross-check.html">cross-session check</a>).</li>
+<li><strong>A pre-registration, extended under its own rule.</strong> The frozen singles baseline was
+re-implemented from its rule file and reproduced 5 of 5 stored rows, then recorded the 8 fixtures its
+eligibility test had withheld — before kickoff, as a separate cohort, with the rule text untouched.</li>
+</ul></section>
+
+<section class="card"><h2>3 · The decision that gates the rest</h2>
+<p>Seven requirements (price store, residual columns, published residuals, price policy, favourites control,
+two-stage leaderboard, vig-free decomposition) are one decision: <em>do we licence market prices, accept a
+named third-party archive for research only, or never use them?</em> The repository already contains the
+consequence of leaving it open — a 12,573-row price store that is 21% filled on the opening side and 97% on
+the closing side, all of it third-party and labelled as such, next to two stores of zero rows created by
+sessions that reached the opposite reading of the same rules. Both behaviours are defensible; the open
+question is what is being paid for. The cheapest fix is not a model, it is a written decision plus a capture
+job started on the same day.</p></section>
+
+<section class="card"><h2>4 · What the site should do next (short version of the suggestions page)</h2>
+<ol>
+<li><strong>S-08 / S-01</strong> — one canonical results feed with a standings identity assertion in CI, and a
+workspace registry so a reader can tell which namespace is authoritative for what. The repository holds 44, of which 42 carry a verifier, counted by the front door's census before this desk landed — so 45 now
+NFL namespaces and three requirement registers with three id schemes.</li>
+<li><strong>S-05</strong> — capture game-day inactives. Every &ldquo;who replaced whom&rdquo; column in every
+namespace is currently unconfirmed, and this is the one source that fixes it without any market data.</li>
+<li><strong>S-04</strong> — one hour on the historical injury-report URL family. It either unlocks
+designation calibration (two requirements) or retires them honestly.</li>
+<li><strong>S-09</strong> — re-parse the stored depth transcripts under a slot-as-group schema with an empty
+state. The brief says a starter may be a group; the stored register holds 15 shared rank-1 slots, 0 empty
+slots and one club with no parseable depth at all.</li>
+<li><strong>S-11</strong> — schedule this desk. The difference between a research archive and a decision
+tool is that one of them is re-run on a calendar.</li></ol></section>
+
+<section class="card"><h2>5 · What is deliberately absent</h2><ul>
+<li>No ROI, CLV, win-rate ranking or reward anywhere: 0 graded games, no price source (F-DSK-01), and a
+300-game floor that is 287 games away.</li>
+<li>No starter, lineup or depth ranking inferred from a jersey number, a salary or a first column: the
+brief's own rejection, enforced by not reading those fields at all.</li>
+<li>No venue table: a peer read on the same day transcribed 12 of 13 from the schedule page's stadium
+links and 1 of 13 from a game centre, and the two disagree on Thursday's label (F-DSK-16), so this desk
+publishes none rather than picking one silently.</li>
+<li>No weather, roof or snap-count feature: no licensed source is held, and K07/K05/K06 are published as
+n=0 with the reason instead of a proxy.</li></ul></section>
+
+<section class="card"><h2>6 · Verification trail</h2><p>Every table on this site carries an official link
+per row; <code>engine/verify.py</code> fails the build if a row loses one, if a local link breaks, if a
+capture digest stops matching its file, or if a published count disagrees with its data. The three identity
+checks that matter most are recomputed there: 150 = 150 games, 6,923 = 6,923 points, and 241/242 transcription
+agreement between the rendered read and the raw capture.</p></section>
+
+</main>
+<footer class="foot"><p><strong>Research record, not wagering advice.</strong> No price feed is licensed, so no ROI, CLV or residual is claimed anywhere on this site. If gambling stops being analysis: National Problem Gambling Helpline 1-800-697-3738 (<a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org/help-treatment</a>).</p><p>Rendered by <a href="https://github.com/sassnarep3-star/Own4/blob/main/engine/build.py">nfl-daily-desk/engine/build.py</a> from <a href="https://github.com/sassnarep3-star/Own4/blob/main/data">nfl-daily-desk/data</a>. Rebuild is byte-identical.</p></footer>
+</body></html>

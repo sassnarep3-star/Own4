@@ -1,0 +1,982 @@
+{
+ "dataset": "nfl_daily_desk_shadow_cohorts",
+ "title": "Singles shadow baseline v1 - frozen rule re-run on the 2026-11-19 official inputs",
+ "built_utc": "2026-11-19T07:30:35Z",
+ "rule": {
+  "file": "nfl-readiness/prereg/SHADOW_BASELINE_v1.md",
+  "sha256": "6b7b37e425ff69d0fc1886ce14b2a307764f9b587844d5809dad67e4750c5d5b",
+  "last_commit_touching_rule": "e322a32e836c70924d9a4ef5971c23b43fb2a07a 2026-11-18T23:49:19+00:00",
+  "constants": {
+   "SIGMA_points_assumed": 13.5,
+   "HFA": 0.0,
+   "sigma_status": "ASSUMPTION, not measured and not sourced - flagged, may only change in a v2 file"
+  },
+  "eligibility_test": "both clubs' Week 10 result confirmed final (or a Week 10 bye) in the official Week 10 capture at record time",
+  "eligibility_result_2026-11-19": "13 of 13 fixtures eligible: the official week page shows FINAL on all 14 Week 10 games and names CHI, DEN, PHI, TB as the Week 10 byes",
+  "amendment": "this record adds cohort 2 under the same rule text; the rule file is not edited"
+ },
+ "standings_drift_since_cohort1_freeze": {
+  "n_fields_changed": 24,
+  "n_changed_inside_cohort1_clubs": 0,
+  "n_changed_outside_cohort1_clubs": 24,
+  "why_the_split_matters": "cohort 1's eligibility gate existed because the official standings were still moving at its freeze time. Every changed field sits with a club OUTSIDE cohort 1, which is why those 5 rows reproduce exactly and the other 8 fixtures had to wait",
+  "changes": [
+   {
+    "club": "SF",
+    "field": "W",
+    "at_cohort1_freeze": 7,
+    "on_2026-11-19": 8
+   },
+   {
+    "club": "SF",
+    "field": "PF",
+    "at_cohort1_freeze": 235,
+    "on_2026-11-19": 281
+   },
+   {
+    "club": "SF",
+    "field": "PA",
+    "at_cohort1_freeze": 156,
+    "on_2026-11-19": 196
+   },
+   {
+    "club": "CIN",
+    "field": "W",
+    "at_cohort1_freeze": 6,
+    "on_2026-11-19": 7
+   },
+   {
+    "club": "CIN",
+    "field": "PF",
+    "at_cohort1_freeze": 240,
+    "on_2026-11-19": 278
+   },
+   {
+    "club": "CIN",
+    "field": "PA",
+    "at_cohort1_freeze": 175,
+    "on_2026-11-19": 193
+   },
+   {
+    "club": "PIT",
+    "field": "L",
+    "at_cohort1_freeze": 2,
+    "on_2026-11-19": 3
+   },
+   {
+    "club": "PIT",
+    "field": "PF",
+    "at_cohort1_freeze": 180,
+    "on_2026-11-19": 198
+   },
+   {
+    "club": "PIT",
+    "field": "PA",
+    "at_cohort1_freeze": 144,
+    "on_2026-11-19": 182
+   },
+   {
+    "club": "SEA",
+    "field": "W",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "SEA",
+    "field": "PF",
+    "at_cohort1_freeze": 202,
+    "on_2026-11-19": 223
+   },
+   {
+    "club": "SEA",
+    "field": "PA",
+    "at_cohort1_freeze": 162,
+    "on_2026-11-19": 175
+   },
+   {
+    "club": "BAL",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "BAL",
+    "field": "PF",
+    "at_cohort1_freeze": 189,
+    "on_2026-11-19": 209
+   },
+   {
+    "club": "BAL",
+    "field": "PA",
+    "at_cohort1_freeze": 236,
+    "on_2026-11-19": 259
+   },
+   {
+    "club": "DAL",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "DAL",
+    "field": "PF",
+    "at_cohort1_freeze": 246,
+    "on_2026-11-19": 286
+   },
+   {
+    "club": "DAL",
+    "field": "PA",
+    "at_cohort1_freeze": 236,
+    "on_2026-11-19": 282
+   },
+   {
+    "club": "LV",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "LV",
+    "field": "PF",
+    "at_cohort1_freeze": 238,
+    "on_2026-11-19": 251
+   },
+   {
+    "club": "LV",
+    "field": "PA",
+    "at_cohort1_freeze": 268,
+    "on_2026-11-19": 289
+   },
+   {
+    "club": "LAC",
+    "field": "W",
+    "at_cohort1_freeze": 0,
+    "on_2026-11-19": 1
+   },
+   {
+    "club": "LAC",
+    "field": "PF",
+    "at_cohort1_freeze": 121,
+    "on_2026-11-19": 144
+   },
+   {
+    "club": "LAC",
+    "field": "PA",
+    "at_cohort1_freeze": 219,
+    "on_2026-11-19": 239
+   }
+  ],
+  "changes_outside": [
+   {
+    "club": "SF",
+    "field": "W",
+    "at_cohort1_freeze": 7,
+    "on_2026-11-19": 8
+   },
+   {
+    "club": "SF",
+    "field": "PF",
+    "at_cohort1_freeze": 235,
+    "on_2026-11-19": 281
+   },
+   {
+    "club": "SF",
+    "field": "PA",
+    "at_cohort1_freeze": 156,
+    "on_2026-11-19": 196
+   },
+   {
+    "club": "CIN",
+    "field": "W",
+    "at_cohort1_freeze": 6,
+    "on_2026-11-19": 7
+   },
+   {
+    "club": "CIN",
+    "field": "PF",
+    "at_cohort1_freeze": 240,
+    "on_2026-11-19": 278
+   },
+   {
+    "club": "CIN",
+    "field": "PA",
+    "at_cohort1_freeze": 175,
+    "on_2026-11-19": 193
+   },
+   {
+    "club": "PIT",
+    "field": "L",
+    "at_cohort1_freeze": 2,
+    "on_2026-11-19": 3
+   },
+   {
+    "club": "PIT",
+    "field": "PF",
+    "at_cohort1_freeze": 180,
+    "on_2026-11-19": 198
+   },
+   {
+    "club": "PIT",
+    "field": "PA",
+    "at_cohort1_freeze": 144,
+    "on_2026-11-19": 182
+   },
+   {
+    "club": "SEA",
+    "field": "W",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "SEA",
+    "field": "PF",
+    "at_cohort1_freeze": 202,
+    "on_2026-11-19": 223
+   },
+   {
+    "club": "SEA",
+    "field": "PA",
+    "at_cohort1_freeze": 162,
+    "on_2026-11-19": 175
+   },
+   {
+    "club": "BAL",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "BAL",
+    "field": "PF",
+    "at_cohort1_freeze": 189,
+    "on_2026-11-19": 209
+   },
+   {
+    "club": "BAL",
+    "field": "PA",
+    "at_cohort1_freeze": 236,
+    "on_2026-11-19": 259
+   },
+   {
+    "club": "DAL",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "DAL",
+    "field": "PF",
+    "at_cohort1_freeze": 246,
+    "on_2026-11-19": 286
+   },
+   {
+    "club": "DAL",
+    "field": "PA",
+    "at_cohort1_freeze": 236,
+    "on_2026-11-19": 282
+   },
+   {
+    "club": "LV",
+    "field": "L",
+    "at_cohort1_freeze": 5,
+    "on_2026-11-19": 6
+   },
+   {
+    "club": "LV",
+    "field": "PF",
+    "at_cohort1_freeze": 238,
+    "on_2026-11-19": 251
+   },
+   {
+    "club": "LV",
+    "field": "PA",
+    "at_cohort1_freeze": 268,
+    "on_2026-11-19": 289
+   },
+   {
+    "club": "LAC",
+    "field": "W",
+    "at_cohort1_freeze": 0,
+    "on_2026-11-19": 1
+   },
+   {
+    "club": "LAC",
+    "field": "PF",
+    "at_cohort1_freeze": 121,
+    "on_2026-11-19": 144
+   },
+   {
+    "club": "LAC",
+    "field": "PA",
+    "at_cohort1_freeze": 219,
+    "on_2026-11-19": 239
+   }
+  ],
+  "reading": "the official standings are unchanged between the cohort-1 freeze and today, so cohort 1 and cohort 2 share one input state"
+ },
+ "faithfulness_check": {
+  "n_rows_compared": 5,
+  "n_rows_identical": 5,
+  "rows": [
+   {
+    "fixture": "IND at HOU",
+    "fields": {
+     "margin_home": true,
+     "p_home": true,
+     "p_away": true,
+     "rating_away": true,
+     "rating_home": true,
+     "fair_pick_vs_fav_control": true
+    },
+    "all_agree": true,
+    "stored_margin": 7.8556,
+    "recomputed_margin": 7.8556
+   },
+   {
+    "fixture": "MIA at BUF",
+    "fields": {
+     "margin_home": true,
+     "p_home": true,
+     "p_away": true,
+     "rating_away": true,
+     "rating_home": true,
+     "fair_pick_vs_fav_control": true
+    },
+    "all_agree": true,
+    "stored_margin": 18.2222,
+    "recomputed_margin": 18.2222
+   },
+   {
+    "fixture": "NO at CHI",
+    "fields": {
+     "margin_home": true,
+     "p_home": true,
+     "p_away": true,
+     "rating_away": true,
+     "rating_home": true,
+     "fair_pick_vs_fav_control": true
+    },
+    "all_agree": true,
+    "stored_margin": 10.1111,
+    "recomputed_margin": 10.1111
+   },
+   {
+    "fixture": "TB at DET",
+    "fields": {
+     "margin_home": true,
+     "p_home": true,
+     "p_away": true,
+     "rating_away": true,
+     "rating_home": true,
+     "fair_pick_vs_fav_control": true
+    },
+    "all_agree": true,
+    "stored_margin": 3.7778,
+    "recomputed_margin": 3.7778
+   },
+   {
+    "fixture": "JAX at NYG",
+    "fields": {
+     "margin_home": true,
+     "p_home": true,
+     "p_away": true,
+     "rating_away": true,
+     "rating_home": true,
+     "fair_pick_vs_fav_control": true
+    },
+    "all_agree": true,
+    "stored_margin": -13.1111,
+    "recomputed_margin": -13.1111
+   }
+  ],
+  "meaning": "re-deriving the stored rows from the frozen arithmetic and the official inputs must reproduce them exactly; a mismatch would mean either the rule or the stored record drifted"
+ },
+ "rows": [
+  {
+   "away": "IND",
+   "home": "HOU",
+   "kickoff_et": "Thu 2026-11-19 8:15 PM ET",
+   "kickoff_utc": "2026-11-20T01:15:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "re-derivation of the stored cohort-1 registration \u2014 that file publishes no timestamp of its own, so this stamp is when THIS desk reproduced it, not when it was first registered",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "IND": {
+     "W": 3,
+     "L": 7,
+     "T": 0,
+     "PF": 208,
+     "PA": 271
+    },
+    "HOU": {
+     "W": 3,
+     "L": 6,
+     "T": 0,
+     "PF": 233,
+     "PA": 219
+    }
+   },
+   "rating_away": -6.3,
+   "rating_home": 1.5556,
+   "margin_home": 7.8556,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.7197,
+   "p_away": 0.2803,
+   "fair_pick": "HOU",
+   "random_control_pick": "HOU",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-20T01:15:00Z",
+   "source_url": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "cohort": "1 (recorded at the v1 freeze, 8 fixtures withheld)"
+  },
+  {
+   "away": "MIA",
+   "home": "BUF",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "re-derivation of the stored cohort-1 registration \u2014 that file publishes no timestamp of its own, so this stamp is when THIS desk reproduced it, not when it was first registered",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "MIA": {
+     "W": 1,
+     "L": 8,
+     "T": 0,
+     "PF": 148,
+     "PA": 224
+    },
+    "BUF": {
+     "W": 8,
+     "L": 1,
+     "T": 0,
+     "PF": 287,
+     "PA": 199
+    }
+   },
+   "rating_away": -8.4444,
+   "rating_home": 9.7778,
+   "margin_home": 18.2222,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.9115,
+   "p_away": 0.0885,
+   "fair_pick": "BUF",
+   "random_control_pick": "MIA",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/dolphins-at-bills-2026-reg-11",
+   "cohort": "1 (recorded at the v1 freeze, 8 fixtures withheld)"
+  },
+  {
+   "away": "BAL",
+   "home": "CAR",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "BAL": {
+     "W": 4,
+     "L": 6,
+     "T": 0,
+     "PF": 209,
+     "PA": 259
+    },
+    "CAR": {
+     "W": 4,
+     "L": 5,
+     "T": 0,
+     "PF": 219,
+     "PA": 236
+    }
+   },
+   "rating_away": -5.0,
+   "rating_home": -1.8889,
+   "margin_home": 3.1111,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.5911,
+   "p_away": 0.4089,
+   "fair_pick": "CAR",
+   "random_control_pick": "BAL",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/ravens-at-panthers-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "NO",
+   "home": "CHI",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "re-derivation of the stored cohort-1 registration \u2014 that file publishes no timestamp of its own, so this stamp is when THIS desk reproduced it, not when it was first registered",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "NO": {
+     "W": 3,
+     "L": 6,
+     "T": 0,
+     "PF": 202,
+     "PA": 236
+    },
+    "CHI": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 241,
+     "PA": 184
+    }
+   },
+   "rating_away": -3.7778,
+   "rating_home": 6.3333,
+   "margin_home": 10.1111,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.7731,
+   "p_away": 0.2269,
+   "fair_pick": "CHI",
+   "random_control_pick": "CHI",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/saints-at-bears-2026-reg-11",
+   "cohort": "1 (recorded at the v1 freeze, 8 fixtures withheld)"
+  },
+  {
+   "away": "TEN",
+   "home": "DAL",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "TEN": {
+     "W": 1,
+     "L": 8,
+     "T": 0,
+     "PF": 167,
+     "PA": 239
+    },
+    "DAL": {
+     "W": 4,
+     "L": 6,
+     "T": 0,
+     "PF": 286,
+     "PA": 282
+    }
+   },
+   "rating_away": -8.0,
+   "rating_home": 0.4,
+   "margin_home": 8.4,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.7331,
+   "p_away": 0.2669,
+   "fair_pick": "DAL",
+   "random_control_pick": "DAL",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/titans-at-cowboys-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "TB",
+   "home": "DET",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "re-derivation of the stored cohort-1 registration \u2014 that file publishes no timestamp of its own, so this stamp is when THIS desk reproduced it, not when it was first registered",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "TB": {
+     "W": 3,
+     "L": 6,
+     "T": 0,
+     "PF": 202,
+     "PA": 178
+    },
+    "DET": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 257,
+     "PA": 199
+    }
+   },
+   "rating_away": 2.6667,
+   "rating_home": 6.4444,
+   "margin_home": 3.7778,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.6102,
+   "p_away": 0.3898,
+   "fair_pick": "DET",
+   "random_control_pick": "DET",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/buccaneers-at-lions-2026-reg-11",
+   "cohort": "1 (recorded at the v1 freeze, 8 fixtures withheld)"
+  },
+  {
+   "away": "AZ",
+   "home": "KC",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "AZ": {
+     "W": 3,
+     "L": 7,
+     "T": 0,
+     "PF": 184,
+     "PA": 289
+    },
+    "KC": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 237,
+     "PA": 156
+    }
+   },
+   "rating_away": -10.5,
+   "rating_home": 9.0,
+   "margin_home": 19.5,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.9257,
+   "p_away": 0.0743,
+   "fair_pick": "KC",
+   "random_control_pick": "AZ",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/cardinals-at-chiefs-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "PIT",
+   "home": "PHI",
+   "kickoff_et": "Sun 2026-11-22 1:00 PM ET",
+   "kickoff_utc": "2026-11-22T18:00:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "PIT": {
+     "W": 6,
+     "L": 3,
+     "T": 0,
+     "PF": 198,
+     "PA": 182
+    },
+    "PHI": {
+     "W": 2,
+     "L": 7,
+     "T": 0,
+     "PF": 148,
+     "PA": 221
+    }
+   },
+   "rating_away": 1.7778,
+   "rating_home": -8.1111,
+   "margin_home": -9.8889,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.2319,
+   "p_away": 0.7681,
+   "fair_pick": "PIT",
+   "random_control_pick": "PHI",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T18:00:00Z",
+   "source_url": "https://www.nfl.com/games/steelers-at-eagles-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "NYJ",
+   "home": "LAC",
+   "kickoff_et": "Sun 2026-11-22 4:05 PM ET",
+   "kickoff_utc": "2026-11-22T21:05:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "NYJ": {
+     "W": 2,
+     "L": 8,
+     "T": 0,
+     "PF": 194,
+     "PA": 254
+    },
+    "LAC": {
+     "W": 1,
+     "L": 8,
+     "T": 0,
+     "PF": 144,
+     "PA": 239
+    }
+   },
+   "rating_away": -6.0,
+   "rating_home": -10.5556,
+   "margin_home": -4.5556,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.3679,
+   "p_away": 0.6321,
+   "fair_pick": "NYJ",
+   "random_control_pick": "NYJ",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T21:05:00Z",
+   "source_url": "https://www.nfl.com/games/jets-at-chargers-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "JAX",
+   "home": "NYG",
+   "kickoff_et": "Sun 2026-11-22 4:25 PM ET",
+   "kickoff_utc": "2026-11-22T21:25:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "re-derivation of the stored cohort-1 registration \u2014 that file publishes no timestamp of its own, so this stamp is when THIS desk reproduced it, not when it was first registered",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "JAX": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 269,
+     "PA": 144
+    },
+    "NYG": {
+     "W": 5,
+     "L": 3,
+     "T": 1,
+     "PF": 203,
+     "PA": 196
+    }
+   },
+   "rating_away": 13.8889,
+   "rating_home": 0.7778,
+   "margin_home": -13.1111,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.1657,
+   "p_away": 0.8343,
+   "fair_pick": "JAX",
+   "random_control_pick": "JAX",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T21:25:00Z",
+   "source_url": "https://www.nfl.com/games/jaguars-at-giants-2026-reg-11",
+   "cohort": "1 (recorded at the v1 freeze, 8 fixtures withheld)"
+  },
+  {
+   "away": "LV",
+   "home": "DEN",
+   "kickoff_et": "Sun 2026-11-22 4:25 PM ET",
+   "kickoff_utc": "2026-11-22T21:25:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "LV": {
+     "W": 4,
+     "L": 6,
+     "T": 0,
+     "PF": 251,
+     "PA": 289
+    },
+    "DEN": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 198,
+     "PA": 186
+    }
+   },
+   "rating_away": -3.8,
+   "rating_home": 1.3333,
+   "margin_home": 5.1333,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.6481,
+   "p_away": 0.3519,
+   "fair_pick": "DEN",
+   "random_control_pick": "DEN",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-22T21:25:00Z",
+   "source_url": "https://www.nfl.com/games/raiders-at-broncos-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "MIN",
+   "home": "SF",
+   "kickoff_et": "Sun 2026-11-22 8:20 PM ET",
+   "kickoff_utc": "2026-11-23T01:20:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "MIN": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 176,
+     "PA": 126
+    },
+    "SF": {
+     "W": 8,
+     "L": 1,
+     "T": 0,
+     "PF": 281,
+     "PA": 196
+    }
+   },
+   "rating_away": 5.5556,
+   "rating_home": 9.4444,
+   "margin_home": 3.8889,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.6134,
+   "p_away": 0.3866,
+   "fair_pick": "SF",
+   "random_control_pick": "MIN",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-23T01:20:00Z",
+   "source_url": "https://www.nfl.com/games/vikings-at-49ers-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  },
+  {
+   "away": "CIN",
+   "home": "WAS",
+   "kickoff_et": "Mon 2026-11-23 8:15 PM ET",
+   "kickoff_utc": "2026-11-23T01:15:00Z",
+   "recorded_utc": "2026-11-19T07:28:53Z",
+   "registered_at_commit": "not recorded by the version that made this row",
+   "record_kind": "first registration by this desk, made before kickoff",
+   "recorded_immutable": true,
+   "before_kickoff": true,
+   "inputs": {
+    "CIN": {
+     "W": 7,
+     "L": 2,
+     "T": 0,
+     "PF": 278,
+     "PA": 193
+    },
+    "WAS": {
+     "W": 3,
+     "L": 5,
+     "T": 1,
+     "PF": 196,
+     "PA": 223
+    }
+   },
+   "rating_away": 9.4444,
+   "rating_home": -3.0,
+   "margin_home": -12.4444,
+   "sigma": 13.5,
+   "hfa": 0.0,
+   "p_home": 0.1783,
+   "p_away": 0.8217,
+   "fair_pick": "CIN",
+   "random_control_pick": "WAS",
+   "market_line": null,
+   "market_line_blank_reason": "no official or licensed opening price exists (flag F-DSK-01); the residual column is published empty rather than assumed",
+   "residual_fair_minus_market": null,
+   "graded": null,
+   "grade_due_utc": "2026-11-23T01:15:00Z",
+   "source_url": "https://www.nfl.com/games/bengals-at-commanders-2026-reg-11",
+   "cohort": "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+  }
+ ],
+ "counts": {
+  "week11_games": 13,
+  "cohort1": 5,
+  "cohort2": 8,
+  "recorded_before_kickoff": 13,
+  "timestamps_preserved_from_the_original_record": 13,
+  "newly_stamped_this_run": 0
+ },
+ "immutability": {
+  "rule": "a re-run never moves a recorded_utc and never re-cohorts a fixture: the first record stands, and only a fixture seen for the first time takes today's stamp. This is what makes 'recorded before kickoff' a claim about the past rather than about the last time someone ran a script.",
+  "this_run": {
+   "preserved": 13,
+   "newly_stamped": 0
+  }
+ },
+ "grading": {
+  "graded": 0,
+  "why": "no Week 11 game has finished at this record time",
+  "first_grade_due_utc": "2026-11-20T01:15:00Z",
+  "minimum_sample_for_any_skill_claim": 300,
+  "status_at_n13": "SHADOW - no eligibility for reward, no staking, no leaderboard rank"
+ },
+ "irregularities": [
+  "cohort 2 was first recorded at 2026-11-19T07:19:16Z under commit e322a32e; a rebuild before the immutability rule existed re-stamped it to the run time. The rule now preserves the first stamp and records the commit it was made under, so 'recorded before kickoff' cannot be moved by re-running the script \u2014 every row in this file is now stamped at its first registration.",
+  "the cohort-1 record's withheld list names Arizona 'ARI' while its forecast rows name the same club 'AZ': club keys are not canonical across the two lists, so an automated join on abbreviation would silently drop that fixture",
+  "cohort 1's seeded random control cannot be re-derived from the stored file because the fixture iteration order is not recoverable from its output; cohort 2 therefore carries its own seed (20261119) and its own picks"
+ ]
+}

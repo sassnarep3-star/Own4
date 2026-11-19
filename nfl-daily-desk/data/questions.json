@@ -1,0 +1,230 @@
+{
+ "dataset": "nfl_daily_desk_questions",
+ "title": "The questions that must be answered before any of this can be decided",
+ "built_utc": "2026-11-19T07:45:00Z",
+ "policy": "every row separates what we have from what is missing, names the discovery route, and says whether an agent or the owner can answer it; an answer already in the repository is quoted with its artifact, not paraphrased",
+ "n_open": 14,
+ "rows": [
+  {
+   "id": "Q-01",
+   "question": "Do we price from a licensed market feed, from a named third-party archive, or never?",
+   "why_it_matters": "It is the single decision that decides whether ROI, CLV, residuals, vig-free consensus and the staking half of the leaderboard can exist at all. Nine requirements are downstream of it.",
+   "what_we_have": "nfl.com publishes no prices (verified again on the Week 11 slate today: schedules, designations and scores only). nfl-markets already holds 12,573 archive rows whose closing column is filled on 12,246 and whose opening column is filled on 2,587, each labelled to a third-party mirror; two other namespaces hold 0 price rows by policy and say why.",
+   "what_is_missing": "A written policy. Nothing in the repo records an owner decision, and no capture job exists for either candidate source.",
+   "how_to_find_out": "Pick one option, then start the capture before using it: an archive is only worth having from the day you start keeping it. 1 decision record + 1 scheduled capture job.",
+   "who_answers": "owner (licensing and re-use terms), not an agent",
+   "blocks": [
+    "R-01",
+    "R-04",
+    "R-18",
+    "R-20",
+    "R-55",
+    "R-57",
+    "R-58"
+   ],
+   "status": "open - owner decision",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-02",
+   "question": "May official row-level data be re-published in the public site tree, or does it live in a private store?",
+   "why_it_matters": "The brief asks for a public analysis layer and a private data layer. Today every namespace publishes row-level official tables in the Pages tree, so the split does not exist in any form.",
+   "what_we_have": "The injury report page is a public league document (read today: 253 rows for 24 clubs); the club depth pages belong to 32 different club web properties; the Game Book PDFs are a licensed product.",
+   "what_is_missing": "A per-source terms read, and a store the Pages build cannot reach for anything that fails it.",
+   "how_to_find_out": "Classify the 5 source families we actually use (league report, club depth page, game centre, transactions ledger, reserve ledger) as publish/derived-only/private. 5 reads and 1 decision.",
+   "who_answers": "owner, with counsel if the answer must be binding",
+   "blocks": [
+    "R-39"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-03",
+   "question": "Does an official, retrievable weekly injury-report archive exist for past seasons?",
+   "why_it_matters": "Without history, 'Questionable' can never be calibrated and the designation can never be scored for reliability - two requirements that look like modelling work and are really archive work.",
+   "what_we_have": "The live page exposes a per-week URL family (/injuries/league/2026/reg11 is the current week's page and it renders a dated report today), and the year/week selectors are present on the page.",
+   "what_is_missing": "Whether that family resolves for past weeks and past seasons, and whether the render is stable enough to hash.",
+   "how_to_find_out": "Probe 4 URLs for one past week (e.g. 2024 reg1) and publish the result - status code, row count, sha256 of the render - either way. Under an hour, and it either unlocks two requirements or kills them.",
+   "who_answers": "an agent can do this; the owner decides re-use",
+   "blocks": [
+    "R-43",
+    "R-51",
+    "R-64"
+   ],
+   "status": "open - cheapest high-value experiment on the list",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-04",
+   "question": "Is there any official source for playing time (snap counts)?",
+   "why_it_matters": "Three requirements insist depth must come from playing time, not jersey order. If the answer is no, the honest move is to drop the depth-deficiency feature rather than proxy it with rank.",
+   "what_we_have": "Nothing in the repository holds a snap-count table, and no official public snap-count page has been located by the sessions that looked. The parsed depth layer holds 897 slots across 31 clubs and 0 playing-time fields.",
+   "what_is_missing": "A dated statement: which official surface was checked, on what date, with what result - so the absence becomes evidence instead of folklore.",
+   "how_to_find_out": "Either the Game Book participation tables (Q-05) or an explicit 'no official source, feature cancelled' line in the register.",
+   "who_answers": "owner (if a licence is needed), agent (for the negative-evidence log)",
+   "blocks": [
+    "R-06",
+    "R-11",
+    "R-54"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-05",
+   "question": "What is our access to official NFL Game Books, and in what format?",
+   "why_it_matters": "The Game Book is the only official document that states participation - it is what turns 'suspected replacement' into 'confirmed replacement', and it is the correct source for actual starters.",
+   "what_we_have": "The brief instructs that Game Books be used for starters and game-day status; the repository holds zero Game Book files (verified by search of every namespace's data directory today).",
+   "what_is_missing": "Access itself: licence, format (PDF per game), and a storage location that survives the 128 MB artifact cap.",
+   "how_to_find_out": "One week as a pilot: 13 game centres -> 13 Game Books -> parse the inactives and participation tables -> publish one confirmed-replacement row. That is the whole proof.",
+   "who_answers": "owner",
+   "blocks": [
+    "R-25",
+    "R-30",
+    "R-46"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-06",
+   "question": "Where are game-day inactives published, and is that page stable enough to capture?",
+   "why_it_matters": "Every 'who actually did start' claim, and the reliability score of each designation, hangs on a list of 8 names per club that we currently do not store at all.",
+   "what_we_have": "The report page today carries no inactive data; the brief's own count (6 of 254 rows with a designation in a past week) matches what we measure now (16 of 253 today), so the gap is structural, not a one-week accident.",
+   "what_is_missing": "A capture job for the game-day inactives (26 rows per 13-game week) with a hash per capture.",
+   "how_to_find_out": "Add one scheduled capture at 1 hour before each kickoff window and keep it for a week; then the designation-reliability feature has a denominator.",
+   "who_answers": "an agent can build it; owner approves the storage",
+   "blocks": [
+    "R-30",
+    "R-43",
+    "R-46",
+    "R-51"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-07",
+   "question": "What do we do about the one club that publishes depth as an image?",
+   "why_it_matters": "A single club is the difference between 'a feature for 31 teams' and 'a feature that can be trusted league-wide', and the brief forbids transcribing that image by eye.",
+   "what_we_have": "The peer sweep marks HOU as flagged_image_only with 0 parsed slots while 31 clubs parse as text (measured today from nfl-depth-sweep/data/parsed: 897 slots, 31 clubs verified_text).",
+   "what_is_missing": "An authorised structured source for that club, or a decision to exclude it explicitly and label every league-wide statistic as n=31.",
+   "how_to_find_out": "Ask the club, use a licensed feed, or exclude - but publish the choice, because a silent 31/32 is how a league-wide number becomes a lie.",
+   "who_answers": "owner",
+   "blocks": [
+    "R-31",
+    "R-50"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-08",
+   "question": "How should a depth slot be represented when a club lists several names in one slot, or none?",
+   "why_it_matters": "The brief's requirement is to model slots as groups. If the register's schema cannot hold a group or an empty slot, then 'the starter' is a fiction produced by the parser rather than by the club.",
+   "what_we_have": "measured today from the peer parse: 897 slots, 15 rank-1 slots carrying a second name, 22 shared slots at any rank, and 0 empty slots recorded - the brief's figure of 149 multi-rank-1 slots is not reproducible from what is stored, and an empty slot appears to be dropped rather than represented.",
+   "what_is_missing": "A schema decision (slot -> list of names + an explicit empty state) and one re-parse to test it.",
+   "how_to_find_out": "Re-parse the 31 stored transcripts under the group schema and publish both counts side by side; the difference between 15 and 149 is itself a finding about how the earlier number was defined.",
+   "who_answers": "an agent",
+   "blocks": [
+    "R-32",
+    "R-49"
+   ],
+   "status": "open - flagged as a data-quality defect, not a modelling taste",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-09",
+   "question": "Is a repeated identical capture evidence of 'no change', or of a cached fetch?",
+   "why_it_matters": "Every delta panel in the repository inherits this ambiguity. If we cannot tell, the honest cadence is 'per publish event', not 'per day'.",
+   "what_we_have": "Two captures 7h15m apart today: the injury report differs in exactly one club block (11 rows appear) and exactly one player field (1 designation change) out of 241 shared players; the reserve ledger is identical in both (25 rows, 0 new). Neither page publishes its own last-updated marker in the raw document (searched for 'Updated'/'updated' in the 371,313-byte capture: 0 matches).",
+   "what_is_missing": "A second observation point (a different client path, or the club's own release) to break ties.",
+   "how_to_find_out": "Count distinct document hashes per day instead of captures per day, and alert when a full report cycle produces a hash we have already seen on a publish day.",
+   "who_answers": "an agent",
+   "blocks": [
+    "R-21",
+    "R-52",
+    "R-53"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-10",
+   "question": "What exactly is the reward paying for, when staking is not possible?",
+   "why_it_matters": "The brief frames this as a leaderboard competition with rewards for top strategies. If the reward is tied to ROI it pays for luck and for a data source we do not have; if it is tied to proper scores it pays for calibration, which is the thing we can actually measure.",
+   "what_we_have": "Every namespace in the repo that reached a verdict awarded 0 rewards; the frozen rule requires 300 graded pre-kickoff rows before any skill claim, and the largest pre-kickoff sample in the repository is 13 rows recorded by two independent registrations.",
+   "what_is_missing": "A reward definition that a verifier can enforce mechanically (metric, sample floor, multiplicity correction, demotion), instead of a ranking that gets argued about later.",
+   "how_to_find_out": "Write 6 lines into the strategy register: metric, floor, correction, demotion, escrow, and what disqualifies a submission. Then let the leaderboard generator refuse any row that lacks them.",
+   "who_answers": "owner",
+   "blocks": [
+    "R-05",
+    "R-36",
+    "R-57",
+    "R-63"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-11",
+   "question": "Which results feed is canonical for 2026, and what happens to the numbers built on the others?",
+   "why_it_matters": "Two feeds, two sizes, and a league identity that matches neither today. Any backtest inherits the staleness of whichever feed its author picked.",
+   "what_we_have": "measured today: nfl-markets 2026 feed = 137 games (Week 10: 1 game); nfl-live-board corpus = 149; the official standings imply exactly 150 games played (sum(W+L+T)/2 = 150, and 32 rows' points-for total 6,923 equals the corpus total points after adding LAC 23 at BAL 20).",
+   "what_is_missing": "One canonical feed keyed by game_id, plus a CI assertion that its row count equals the standings identity every day.",
+   "how_to_find_out": "Point every namespace's corpus read at one file and make the build fail when the identity breaks - the identity check already exists in this desk's compute step and costs nothing to reuse.",
+   "who_answers": "an agent (integration), owner (if a namespace must be declared obsolete)",
+   "blocks": [
+    "R-02",
+    "R-19"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-12",
+   "question": "Do we keep, measure, or replace the model's assumed SIGMA of 13.5 points?",
+   "why_it_matters": "The registered model converts a margin into a probability through this one constant, so it sets every p_home in the shadow record - and therefore the Brier score the leaderboard will eventually use.",
+   "what_we_have": "the rule file labels it an assumption with no source and forbids editing it after a forecast is recorded; the second registered model derives its own residual SD (10.67 points) from the training corpus instead. The two records disagree on 2 of the 5 shared fixtures by 2.79 and 3.52 points.",
+   "what_is_missing": "A v2 registration that measures the residual SD from the 150-game official corpus, frozen before it sees a Week 11 result.",
+   "how_to_find_out": "Estimate sigma on weeks 1-10 only, publish the estimate with n and an interval, register v2 as a new file, and run v1 and v2 side by side until one wins - which is also what the totals requirement asks for.",
+   "who_answers": "an agent (measurement), owner (which version the leaderboard treats as the baseline)",
+   "blocks": [
+    "R-34",
+    "R-60",
+    "R-65"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-13",
+   "question": "Who transcribes 13 venues, and from which page?",
+   "why_it_matters": "Venue is a published game-centre fact and it feeds rest/travel/roof context; it is also the cheapest requirement on the list to satisfy, and it is still at 1 of 13.",
+   "what_we_have": "one venue (Reliant Stadium, IND at HOU) is in the repository with a game-centre read date of 2026-11-17; today's official Week 11 page lists matchups, times, networks and the Munich venue tag for Week 10, but not a site per game.",
+   "what_is_missing": "13 game-centre reads with a dated capture each.",
+   "how_to_find_out": "One session, 13 fetches, one table, and a rule that a blank venue fails the build - the drift alarm pattern already used for the injury parser.",
+   "who_answers": "an agent",
+   "blocks": [
+    "R-23"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  },
+  {
+   "id": "Q-14",
+   "question": "Do we build the weather/roof overlay from NWS products, and accept the citation burden?",
+   "why_it_matters": "It is the only feature family on the brief with no betting-market dependency, so it can be built and validated while the price question is still open.",
+   "what_we_have": "nothing in the repo: no venue attribute table, no forecast capture, no 90-minute roof designation. The fixture-context work explicitly excludes weather as un-sourced, which is the correct behaviour today.",
+   "what_is_missing": "A venue attribute table (32 rows) + a forecast-capture rule + a stated latency limit (a forecast older than its own issue time is worse than none).",
+   "how_to_find_out": "Start with the venue table only, because a roof designation is a published fact and a forecast is a time series; do not mix them in one release.",
+   "who_answers": "an agent, owner for the source policy",
+   "blocks": [
+    "R-56"
+   ],
+   "status": "open",
+   "source_url": "https://www.nfl.com/injuries/"
+  }
+ ]
+}
