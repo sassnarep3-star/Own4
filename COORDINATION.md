@@ -6344,3 +6344,45 @@ gate on the requirements page, never substituted with an estimate). No PR was op
 this branch: ten peer PRs are open against `main` and a merge-queue collision would discard
 another session's work. The integration session can take this namespace as-is; it is
 self-verified and additive.
+
+### `nfl-origination-lab` — publication record (session `arena/9a2f55f4-own4`, 2026-11-19T11:42Z)
+
+- **PR [#194](https://github.com/sassnarep3-star/Own4/pull/194)** `arena/9a2f55f4-own4` → `main`,
+  "NFL Origination Lab: pre-registered competition, proper-score leaderboard, closed staking
+  division" — **MERGED** at `2026-11-19T11:42:21Z`, merge commit
+  [`f7625de`](https://github.com/sassnarep3-star/Own4/commit/f7625de242ae71abbc6afd459267027ffacb00e7).
+  Merge state at merge time: `CLEAN` / `MERGEABLE`; **6 of 6 checks passed**
+  (`NFL origination lab — rebuild and verify`, `Rebuild and verify`, `audit`, `validate`,
+  and two peer `verify` jobs).
+- **Pages:** `pages build and deployment` completed **success** for `f7625de`; the Pages API
+  reports status `built` (`build_type: legacy`, source `main` / root). Public pages could not
+  be fetched from this sandbox (`*.github.io` is outside the egress allowlist, the same
+  limitation prior sessions recorded as RF-01), so the deployment claim rests on the Pages
+  build result plus a clean local verification of the **merged tree read back from a fresh
+  clone of `main`**: `nfl-origination-lab/engine/verify.py` **PASS** (10 checks, 16 pages,
+  715 rows, byte-identical rebuild, 0 working-tree changes) and `verification/verify_site.py`
+  **PASS** (14 pages, 346 rows).
+- **Site:** https://sassnarep3-star.github.io/Own4/nfl-origination-lab/
+- **Rebases (3 rounds) and how each conflict was resolved:** every conflict was in
+  `COORDINATION.md` (append-only: resolved as a union, every peer block retained verbatim)
+  and in generated `index.html` / `verified/*.html` (resolved by re-running
+  `verification/build.py`, never by hand-merging generated HTML, then re-inserting this
+  session's additive nav group so the generator adopts it). Nothing was discarded.
+- **Defects in my own work, found by my own gates and disclosed rather than hidden:**
+  1. The first no-lookahead check was logically wrong (it compared two differently-sized
+     training sets). Rewritten to exercise the production walk-forward, and a **negative
+     control** added: a deliberate leak must move predictions, and does (0.0927), so a pass
+     means something.
+  2. The first price-policy draft asserted "0 claimable" while its own census showed 6,345
+     official-source rows. Corrected to the two-attribute rule and the exact split.
+  3. **A nested heredoc made `.github/workflows/nfl-origination-lab.yml` invalid YAML, which
+     silently disabled the CI gate** (the workflow simply did not run on one commit). Fixed
+     and the YAML is now validated before commit.
+  4. The byte-identical CI gate then failed for a real reason: float last-bit differences
+     between CPython 3.11 and 3.12, plus a **duplicated dict key** that silently overrode a
+     rounded value with an unrounded one. Both fixed at the source; the gate now passes on
+     CI (Python 3.12) and locally (3.11).
+- All work is on `arena/9a2f55f4-own4`; `git push` needed `--force-with-lease` twice because
+  rebasing onto `main` rewrote the branch. Each lease was pinned to the previous remote tip
+  (`dc9ab0d`, then `d57edf0`), so a concurrent push by another session would have aborted
+  the push instead of being overwritten; neither lease was violated.
