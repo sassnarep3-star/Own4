@@ -49,31 +49,68 @@ def read(path):
 
 
 # ---------------------------------------------------------------- 1 determinism
-GENERATORS = [("engine/model_eval.py", ["data/eval.json"]),
-              ("engine/null_test.py", ["data/null.json"]),
-              ("engine/audit_repo.py", ["data/audit.json", "data/link_defects.json"]),
-              ("engine/availability.py", ["data/availability.json", "data/injury_rows.json"]),
-              ("engine/requirements.py", ["data/requirements.json"]),
-              ("engine/build_site.py", PAGES)]
+# Two different properties are checked, because conflating them produced flaky gates in
+# sibling namespaces:
+#
+#   DETERMINISM (hard fail)  running a generator twice on the SAME tree must produce
+#                            byte-identical output. A failure here is a real defect.
+#   FRESHNESS   (warning)    the committed output of a TREE-DEPENDENT generator (the audit
+#                            walks the repository, so it moves whenever any session adds a
+#                            namespace) may lag the tree. It is reported, never fatal, and
+#                            the audited commit is printed on the page.
+PURE = [("engine/model_eval.py", ["data/eval.json"]),
+        ("engine/null_test.py", ["data/null.json"]),
+        ("engine/availability.py", ["data/availability.json", "data/injury_rows.json"]),
+        ("engine/requirements.py", ["data/requirements.json"])]
+TREE_DEPENDENT = [("engine/audit_repo.py", ["data/audit.json", "data/link_defects.json"]),
+                  ("engine/build_site.py", PAGES)]
+
+warnings = []
+
+
+def hash_file(rel):
+    p = os.path.join(NS, rel)
+    return hashlib.sha256(open(p, "rb").read()).hexdigest() if os.path.exists(p) else None
+
+
+def run(script):
+    r = subprocess.run([sys.executable, os.path.join(NS, script)], cwd=NS,
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        fail("generator %s exited %d: %s" % (script, r.returncode, r.stderr[-400:]))
+        return False
+    return True
 
 
 def check_determinism():
-    before = {}
-    for _, outs in GENERATORS:
+    for script, outs in PURE + TREE_DEPENDENT:
+        if not run(script):
+            continue
+        first = {o: hash_file(o) for o in outs}
+        if not run(script):
+            continue
+        second = {o: hash_file(o) for o in outs}
         for o in outs:
-            p = os.path.join(NS, o)
-            before[o] = hashlib.sha256(open(p, "rb").read()).hexdigest() if os.path.exists(p) else None
-    for script, _ in GENERATORS:
-        r = subprocess.run([sys.executable, os.path.join(NS, script)], cwd=NS,
-                           capture_output=True, text=True)
-        if r.returncode != 0:
-            fail("generator %s exited %d: %s" % (script, r.returncode, r.stderr[-400:]))
-    for _, outs in GENERATORS:
+            if first[o] != second[o]:
+                fail("non-deterministic generator: %s changed %s between two runs on the same tree"
+                     % (script, o))
+
+
+def check_freshness():
+    snapshot = {}
+    for _, outs in PURE + TREE_DEPENDENT:
         for o in outs:
-            p = os.path.join(NS, o)
-            after = hashlib.sha256(open(p, "rb").read()).hexdigest() if os.path.exists(p) else None
-            if before[o] != after:
-                fail("non-deterministic output: %s changed on rebuild" % o)
+            snapshot[o] = hash_file(o)
+    for script, _ in PURE + TREE_DEPENDENT:
+        run(script)
+    for o, before in snapshot.items():
+        if hash_file(o) != before:
+            cls = "PURE" if any(o in outs for _, outs in PURE) else "TREE"
+            if cls == "PURE":
+                fail("committed %s does not match a fresh build (regenerate and commit it)" % o)
+            else:
+                warnings.append("committed %s is stale relative to the current tree "
+                                "(regenerate and commit before publishing)" % o)
 
 
 # ---------------------------------------------------------------- 2 links/anchors
@@ -260,6 +297,7 @@ def check_scope():
 
 def main():
     check_determinism()
+    check_freshness()
     check_links()
     check_localhost()
     check_row_sources()
@@ -268,6 +306,8 @@ def main():
     check_content_sources()
     check_prereg()
     check_scope()
+    for w in warnings:
+        print(" warning:", w)
     if errors:
         print("FAIL — %d problem(s)" % len(errors))
         for e in errors[:60]:
@@ -275,9 +315,10 @@ def main():
         if len(errors) > 60:
             print(" ... and %d more" % (len(errors) - 60))
         sys.exit(1)
-    print("PASS — %d pages; determinism, links, anchors, row sources, placeholders, "
-          "prose/data agreement, content sources, pre-registration hash and edit scope all clean"
-          % len(PAGES))
+    print("PASS — %d pages; determinism, freshness of computed data, links, anchors, row "
+          "sources, placeholders, prose/data agreement, content sources, pre-registration hash "
+          "and edit scope all clean%s" % (len(PAGES),
+                                          "" if not warnings else " (%d freshness warning(s))" % len(warnings)))
 
 
 if __name__ == "__main__":

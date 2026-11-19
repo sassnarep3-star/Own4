@@ -72,16 +72,16 @@
     }
    ],
    "examples_files": [],
-   "internal_refs_checked": 31017,
+   "internal_refs_checked": 31163,
    "result": "fail"
   },
   {
    "check": "B. root navigation workspace count vs directories on disk",
-   "finding": null,
+   "finding": "The root nav group title states 43 workspaces; 44 nfl* directories exist. The title is computed from directory count, but the group's own link list is shorter than the directory list, so the title and the group disagree.",
    "group_title_claims": 43,
-   "nfl_directories_on_disk": 43,
+   "nfl_directories_on_disk": 44,
    "nfl_links_in_root_nav": 1232,
-   "result": "pass"
+   "result": "fail"
   },
   {
    "abbreviation_drift": [
@@ -473,7 +473,7 @@
     "2026-11-16": 3,
     "2026-11-17": 3,
     "2026-11-18": 2,
-    "2026-11-19": 4,
+    "2026-11-19": 5,
     "2026-11-20": 1,
     "2026-11-22": 3
    },
@@ -513,10 +513,11 @@
     "nfl-repo-inventory": "2026-11-19",
     "nfl-req-review": "2026-11-18",
     "nfl-verify": "2026-11-15",
+    "nfl-verify-2026-11-19": "2026-11-19",
     "nfl-week11-reread": "2026-11-19"
    },
    "interpretation": "Namespaces are frozen at different dates. A reader who opens the oldest one sees numbers that later namespaces have revised; that is the root cause of the disagreements listed in check C and in the peer flags.",
-   "namespaces": 35,
+   "namespaces": 36,
    "result": "review"
   }
  ],
