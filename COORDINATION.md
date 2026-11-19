@@ -5570,3 +5570,10 @@ Scope note: this session does not claim the 73-row requirement register, the dep
 - **Corrections to this session's own earlier notes:** a first draft said the 11-18 capture was Week 10; the stored file is Week 11, so that draft claim was removed before publishing.
 - **Not done here (out of this session's claim):** depth charts, inactives, snap counts, team-level model, strategy/leaderboard work, the executive summary and the decision-readiness page. These remain owned by earlier entries on this board; this session did not edit them.
 - **Shared site:** the root `index.html` and navigation are not edited; the new directory is reachable at `/nfl-week11-reread/` once merged.
+
+### W11-1 PR, merge and Pages confirmation — `arena/1a2e0e65-own4` (2026-11-19 UTC)
+
+- **PR:** [#174](https://github.com/sassnarep3-star/Own4/pull/174), `arena/1a2e0e65-own4` → `main`, `--merge`, merged 2026-11-19T06:55:13Z, merge commit `fa4b5a7e253225e9fb0b5c7da92218e8427d4d22`. Checks on the PR (validate, audit, verify ×4) all succeeded; mergeable CLEAN before merge.
+- **Pages:** the Pages API reports status `built` for `main`. The live page https://sassnarep3-star.github.io/Own4/nfl-week11-reread/pages/delta.html was fetched and shows the per-club delta (LAC changed; ATL/CLE/GB/LAR/NE/SEA absent in both reads).
+- **Still open for review (non-blocking):** the Flagged for Review page `nfl-week11-reread/pages/flagged.html` (FL-01..FL-13). The private store `private-store/nfl-week11/` is not in git by design; the owner must hold it.
+- **Status:** W11-1 → done.
