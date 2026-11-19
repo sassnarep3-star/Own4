@@ -1,0 +1,4439 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Injuries &amp; availability</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Week-11 injury report — full read (253 rows)</h2><p class="note">Transcribed from the official injury report 2026-11-19. A blank game-status cell is published as blank — it is not "available" and it is not "Out". Only 16 of 253 rows (TNF IND/HOU) carry a game status. CIN and WAS: No Injuries Reported. Lions Kerby Joseph (Full), Cade Mays (DNP), D.J. Reed (Limited) are all practicing with blank game-status (R-47).</p></div><table><thead><tr>
+<th>Club</th>
+<th>Player</th>
+<th>Pos</th>
+<th>Injury</th>
+<th>Practice</th>
+<th>Game status</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>IND</td>
+<td>Jaylon Carlies</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Sauce Gardner</td>
+<td>CB</td>
+<td>Calf</td>
+<td>Did Not Participate In Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Anthony Gould</td>
+<td>WR</td>
+<td>Toe</td>
+<td>Full Participation in Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Charlie Heck</td>
+<td>T</td>
+<td>Not injury related - personal matter</td>
+<td>Did Not Participate In Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Will Mallory</td>
+<td>TE</td>
+<td>Hamstring</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Bernhard Raimann</td>
+<td>T</td>
+<td>Concussion</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Luke Rhodes</td>
+<td>LS</td>
+<td>Hamstring</td>
+<td>Limited Participation in Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Jerry Tillery</td>
+<td>DT</td>
+<td>Calf</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Jalen Travis</td>
+<td>T</td>
+<td>Knee</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Dalton Tucker</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Charvarius Ward</td>
+<td>CB</td>
+<td>Knee</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Azeez Al-Shaair</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Reed Blankenship</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Tank Dell</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Blake Fisher</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Marvin Harrison Jr.</td>
+<td>WR</td>
+<td>Hamstring</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Jacob Hummel</td>
+<td>LB</td>
+<td>Groin</td>
+<td>Full Participation in Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Danielle Hunter</td>
+<td>DE</td>
+<td>Hamstring</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Brevin Jordan</td>
+<td>TE</td>
+<td>Foot, Illness</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Kamari Lassiter</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Woody Marks</td>
+<td>RB</td>
+<td>Concussion</td>
+<td>Did Not Participate In Practice</td>
+<td>Out</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>David Montgomery</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Febechi Nwaiwu</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Keylan Rutledge</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Jaylin Smith</td>
+<td>CB</td>
+<td>Hamstring</td>
+<td>Full Participation in Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Wyatt Teller</td>
+<td>G</td>
+<td>Back</td>
+<td>Full Participation in Practice</td>
+<td>Questionable</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Gennings Dunker</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>DeShon Elliott</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Nick Herbig</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Cameron Heyward</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Michael Pittman</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Patrick Queen</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Jalen Ramsey</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Darnell Washington</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>T.J. Watt</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Roman Wilson</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Saquon Barkley</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Zack Baun</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jihaad Campbell</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Michael Carter II</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Britain Covey</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jonathan Greenard</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jalyx Hunt</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jonathan Jones</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Tanner McKee</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Smael Mondon Jr.</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Andrew Mukuba</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Will Shipley</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>DeVonta Smith</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Nolan Smith</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Dontayvion Wicks</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Budda Baker</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Zachary Carter</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Hjalte Froholdt</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Jon Gaines II</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Roy Lopez</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Max Melton</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Walter Nolen</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Darius Robinson</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Isaac Seumalo</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Josh Sweat</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Jayden Williams</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Mack Wilson</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jeffrey Bassa</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Nick Bolton</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jadon Canady</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Mansoor Delane</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Justin Fields</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Alohi Gilman</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Travis Kelce</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Patrick Mahomes</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jaylon Moore</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Omarr Norman-Lott</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jaydn Ott</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Rashee Rice</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Trey Smith</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Kenneth Walker III</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Peter Woods</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Mike Green</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Jaylinn Hawkins</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Matthew Hibner</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Olaivavega Ioane</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Nnamdi Madubuike</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Adam Randall</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Jonathon Brooks</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Brady Christensen</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Feleipe Franks</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Trevis Gipson</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Chuba Hubbard</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Mike Jackson</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Jackson Kuwatch</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Will Lee III</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Bobby Okereke</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Isaiah Simmons</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Tommy Tremble</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Darren Waller</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Bryce Young</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Yaya Diaby</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Josh Hayes</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Baker Mayfield</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Cade Otton</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Antoine Winfield Jr.</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Tristan Wirfs</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Joe Bachie</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Khalil Dorsey</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Kerby Joseph</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Tyler Lacy</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Cade Mays</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Ennis Rakestraw Jr.</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>D.J. Reed</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Sione Vaki</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Tucker Addington</td>
+<td>LS</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Darrell Baker Jr.</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Chris Bell</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Julius Brents</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Aaron Brewer</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Caleb Douglas</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Andrew Meyer</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Bradley Pinion</td>
+<td>P</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Jaylin Simpson</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Dante Trader Jr.</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Jared Wayne</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Christian Benford</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Cole Bishop</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Keon Coleman</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Ray Davis</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dee Alford</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Damar Hamlin</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Jackson Hawes</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Amani Hooker</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Ty Johnson</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dalton Kincaid</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Connor McGovern</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>T.J. Sanders</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Tyrell Shavers</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>O&#x27;Cyrus Torrence</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dorian Williams</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Tony Adams</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Cody Barton</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Fernando Carmona</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>John Franklin-Myers</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Kylen Granson</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Anthony Hill Jr.</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Tyjae Spears</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Carnell Tate</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Kevin Winston Jr.</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>DaRon Bland</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Tyler Booker</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Donovan Ezeiruaku</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jake Ferguson</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Malik Hooker</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>James Houston</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>P.J. Locke</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Von Miller</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jonathan Mingo</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Devin Moore</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Otito Ogbonnia</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Joey Porter Jr.</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Juanyeh Thomas</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jalen Thompson</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>CJ Donaldson</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Martin Emerson</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Taliese Fuaga</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Alvin Kamara</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Erik McCoy</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Justin Reid</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Asim Richards</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Decamerion Richardson</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Jordyn Tyson</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Pete Werner</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Luther Burden III</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Kyler Gordon</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Kyle Monangai</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Malik Muhammad</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Jeffery Simmons</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Omar Cooper Jr.</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>David Onyemata</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Joseph Ossai</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Dylan Parham</td>
+<td>G</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Harrison Phillips</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Geno Smith</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Trevin Wallace</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Isaiah Williams</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Justin Eboigbe</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Daiyan Henley</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Donte Jackson</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Charlie Kolar</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Khalil Mack</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Ladd McConkey</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Trey Pipkins</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Rodney Shelley</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Brenen Thompson</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Isas Waxter</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Kendall Williamson</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>LeQuint Allen Jr.</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Arik Armstead</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Matt Dickerson</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>BJ Green II</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Robert Hainsey</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Antonio Johnson</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jalen McLeod</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jakobi Meyers</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jonah Monheim</td>
+<td>C</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Chris Rodriguez Jr.</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Danny Striggow</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Bhayshul Tuten</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Travon Walker</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Deonte Banks</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Malik Harrison</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Nic Jones</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Ben Mann</td>
+<td>LS</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Jason Pinnock</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Cam Skattebo</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Thomas Booker</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Brock Bowers</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Foley Fatukasi</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Matt Gay</td>
+<td>K</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Tonka Hemingway</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Ian Thomas</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Kris Abrams-Draine</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Zach Allen</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Talanoa Hufanga</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Brandon Jones</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Caleb Lohner</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Riley Moss</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Adam Prentice</td>
+<td>FB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Courtland Sutton</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Jaylen Waddle</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jordan Addison</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Blake Cashman</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>T.J. Hockenson</td>
+<td>TE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Tyrion Ingram-Dawkins</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jauan Jennings</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jeshaun Jones</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Kyler Murray</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Andrew Van Ginkel</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Kyle Van Noy</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jay Ward</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Ji&#x27;Ayir Brown</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mike Evans</td>
+<td>WR</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Luke Gifford</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Renardo Green</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Dre Greenlaw</td>
+<td>LB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Nate Hobbs</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mac Jones</td>
+<td>QB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Khalid Kareem</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Christian McCaffrey</td>
+<td>RB</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Siran Neal</td>
+<td>S</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Upton Stout</td>
+<td>CB</td>
+<td><span class="blank">blank</span></td>
+<td>Limited Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Jon Weeks</td>
+<td>LS</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>C.J. West</td>
+<td>DT</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mykel Williams</td>
+<td>DE</td>
+<td><span class="blank">blank</span></td>
+<td>Full Participation in Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Trent Williams</td>
+<td>T</td>
+<td><span class="blank">blank</span></td>
+<td>Did Not Participate In Practice</td>
+<td><span class="blank">blank — not available</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><h2>Per-team view: rows listed, Out, Questionable, DNP, replacements named</h2><p class="note">Replacements named is blank for every club: no official actual-starter feed exists (R-40 blocked). Net injury count = rows listed. Reserve moves (25) are on the Transactions page.</p><table><thead><tr>
+<th>Club</th>
+<th>Rows listed</th>
+<th>Out</th>
+<th>Questionable</th>
+<th>DNP</th>
+<th>Replacements named</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>AZ</td>
+<td>12</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>5</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>14</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>15</td>
+<td>4</td>
+<td>3</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>11</td>
+<td>5</td>
+<td>4</td>
+<td>8</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>13</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>6</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>7</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>8</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>10</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>6</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>9</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CIN</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>WAS</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td><span class="blank">blocked — no starter feed</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><h2>Delta vs the 2026-11-18 capture (delta, never level)</h2><p class="note">Delta of the 2026-11-19 fresh read vs the stored 2026-11-18T23:49:17Z capture (sha256 e1bbea1b…, nfl-desk parse, 242 rows). Published as a delta, never a level. Shared 242 of 242 prior / 253 current rows. Game-status changes: 0. Practice changes: 0. Appeared: 11 (all LAC; absent from the 2026-11-18 capture — cause not verified, flagged OF-04). Gone: 0.</p><table><thead><tr>
+<th>Club</th>
+<th>Player</th>
+<th>Prior</th>
+<th>Current</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>LAC</td>
+<td>Brenen Thompson</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Charlie Kolar</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Daiyan Henley</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Donte Jackson</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Isas Waxter</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Justin Eboigbe</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Kendall Williamson</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Khalil Mack</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Ladd McConkey</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Rodney Shelley</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Trey Pipkins</td>
+<td><span class="blank">absent</span></td>
+<td><span class="blank">present</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><h2>Availability graph (expected vs actual)</h2><p class="note">Expected = injury-report designation (populated). Actual = Game Book starter (blank — no official join, R-10 blocked). The graph is published as a first-class dataset with the actual column blank, not filled.</p><table><thead><tr>
+<th>Club</th>
+<th>Player</th>
+<th>Expected (designation)</th>
+<th>Actual (Game Book starter)</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>IND</td>
+<td>Jaylon Carlies</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Sauce Gardner</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Anthony Gould</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Charlie Heck</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Will Mallory</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Bernhard Raimann</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Luke Rhodes</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Jerry Tillery</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Jalen Travis</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Dalton Tucker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Charvarius Ward</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Azeez Al-Shaair</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Reed Blankenship</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Tank Dell</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Blake Fisher</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Marvin Harrison Jr.</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Jacob Hummel</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Danielle Hunter</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Brevin Jordan</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Kamari Lassiter</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Woody Marks</td>
+<td>Out</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>David Montgomery</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Febechi Nwaiwu</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Keylan Rutledge</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Jaylin Smith</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Wyatt Teller</td>
+<td>Questionable</td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Gennings Dunker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>DeShon Elliott</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Nick Herbig</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Cameron Heyward</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Michael Pittman</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Patrick Queen</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Jalen Ramsey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Darnell Washington</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>T.J. Watt</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Roman Wilson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Saquon Barkley</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Zack Baun</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jihaad Campbell</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Michael Carter II</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Britain Covey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jonathan Greenard</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jalyx Hunt</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Jonathan Jones</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Tanner McKee</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Smael Mondon Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Andrew Mukuba</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Will Shipley</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>DeVonta Smith</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Nolan Smith</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Dontayvion Wicks</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Budda Baker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Zachary Carter</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Hjalte Froholdt</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Jon Gaines II</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Roy Lopez</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Max Melton</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Walter Nolen</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Darius Robinson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Isaac Seumalo</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Josh Sweat</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Jayden Williams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Mack Wilson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jeffrey Bassa</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Nick Bolton</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jadon Canady</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Mansoor Delane</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Justin Fields</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Alohi Gilman</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Travis Kelce</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Patrick Mahomes</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jaylon Moore</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Omarr Norman-Lott</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Jaydn Ott</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Rashee Rice</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Trey Smith</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Kenneth Walker III</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Peter Woods</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Mike Green</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Jaylinn Hawkins</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Matthew Hibner</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Olaivavega Ioane</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Nnamdi Madubuike</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Adam Randall</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Jonathon Brooks</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Brady Christensen</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Feleipe Franks</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Trevis Gipson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Chuba Hubbard</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Mike Jackson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Jackson Kuwatch</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Will Lee III</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Bobby Okereke</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Isaiah Simmons</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Tommy Tremble</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Darren Waller</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Bryce Young</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Yaya Diaby</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Josh Hayes</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Baker Mayfield</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Cade Otton</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Antoine Winfield Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Tristan Wirfs</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Joe Bachie</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Khalil Dorsey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Kerby Joseph</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Tyler Lacy</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Cade Mays</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Ennis Rakestraw Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>D.J. Reed</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Sione Vaki</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Tucker Addington</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Darrell Baker Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Chris Bell</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Julius Brents</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Aaron Brewer</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Caleb Douglas</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Andrew Meyer</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Bradley Pinion</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Jaylin Simpson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Dante Trader Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Jared Wayne</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Christian Benford</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Cole Bishop</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Keon Coleman</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Ray Davis</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dee Alford</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Damar Hamlin</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Jackson Hawes</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Amani Hooker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Ty Johnson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dalton Kincaid</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Connor McGovern</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>T.J. Sanders</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Tyrell Shavers</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>O&#x27;Cyrus Torrence</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BUF</td>
+<td>Dorian Williams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Tony Adams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Cody Barton</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Fernando Carmona</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>John Franklin-Myers</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Kylen Granson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Anthony Hill Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Tyjae Spears</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Carnell Tate</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Kevin Winston Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>DaRon Bland</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Tyler Booker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Donovan Ezeiruaku</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jake Ferguson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Malik Hooker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>James Houston</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>P.J. Locke</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Von Miller</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jonathan Mingo</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Devin Moore</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Otito Ogbonnia</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Joey Porter Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Juanyeh Thomas</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Jalen Thompson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>CJ Donaldson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Martin Emerson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Taliese Fuaga</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Alvin Kamara</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Erik McCoy</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Justin Reid</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Asim Richards</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Decamerion Richardson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Jordyn Tyson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>Pete Werner</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Luther Burden III</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Kyler Gordon</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Kyle Monangai</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Malik Muhammad</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Jeffery Simmons</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Omar Cooper Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>David Onyemata</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Joseph Ossai</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Dylan Parham</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Harrison Phillips</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Geno Smith</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Trevin Wallace</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>Isaiah Williams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Justin Eboigbe</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Daiyan Henley</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Donte Jackson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Charlie Kolar</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Khalil Mack</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Ladd McConkey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Trey Pipkins</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Rodney Shelley</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Brenen Thompson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Isas Waxter</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Kendall Williamson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>LeQuint Allen Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Arik Armstead</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Matt Dickerson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>BJ Green II</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Robert Hainsey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Antonio Johnson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jalen McLeod</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jakobi Meyers</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jonah Monheim</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Chris Rodriguez Jr.</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Danny Striggow</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Bhayshul Tuten</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Travon Walker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Deonte Banks</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Malik Harrison</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Nic Jones</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Ben Mann</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Jason Pinnock</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>Cam Skattebo</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Thomas Booker</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Brock Bowers</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Foley Fatukasi</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Matt Gay</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Tonka Hemingway</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Ian Thomas</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Kris Abrams-Draine</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Zach Allen</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Talanoa Hufanga</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Brandon Jones</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Caleb Lohner</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Riley Moss</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Adam Prentice</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Courtland Sutton</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Jaylen Waddle</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jordan Addison</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Blake Cashman</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>T.J. Hockenson</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Tyrion Ingram-Dawkins</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jauan Jennings</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jeshaun Jones</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Kyler Murray</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Andrew Van Ginkel</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Kyle Van Noy</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Jay Ward</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Ji&#x27;Ayir Brown</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mike Evans</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Luke Gifford</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Renardo Green</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Dre Greenlaw</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Nate Hobbs</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mac Jones</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Khalid Kareem</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Christian McCaffrey</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Siran Neal</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Upton Stout</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Jon Weeks</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>C.J. West</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Mykel Williams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Trent Williams</td>
+<td><span class="blank">blank</span></td>
+<td><span class="blank">blocked — no Game Book join (R-10)</span></td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

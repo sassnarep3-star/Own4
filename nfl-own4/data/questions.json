@@ -1,0 +1,126 @@
+{
+ "note": "Open questions and information gaps. These must be answered before the related decisions can be made. Answers are left blank for the owner; this session records what is known and what is missing. Carried forward from nfl-verify-2026-11-19 and re-verified against the fresh 2026-11-19 reads.",
+ "questions": [
+  {
+   "blocks": [
+    "R-01",
+    "R-04",
+    "R-05",
+    "R-18",
+    "R-57",
+    "R-58"
+   ],
+   "id": "Q-01",
+   "known": "No official NFL source publishes betting lines or closing prices; all market/price fields are blank by policy.",
+   "missing": "A licensed or authorized market price feed (open + close) for every originated market, plus the owner's data-rights decision.",
+   "question": "What is the authorized price-data policy and source for opening/closing lines?",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "blocks": [
+    "R-06",
+    "R-10",
+    "R-11",
+    "R-25",
+    "R-30",
+    "R-54"
+   ],
+   "id": "Q-02",
+   "known": "The NFL Game Book (PDF) is the official source for actual starters/participation; club depth charts are unofficial and often undated; HOU depth is image-only.",
+   "missing": "A scalable, authorized Game Book / snap-count feed joined to every fixture.",
+   "question": "Where do official actual starters and snap counts come from?",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "blocks": [
+    "R-31",
+    "R-44",
+    "R-50"
+   ],
+   "id": "Q-03",
+   "known": "Route (a) per-club official depth pages verified 32/32 by a peer; HOU image-only. Route (b) snap counts require an official source that does not yet exist in the verified corpus.",
+   "missing": "Owner verdict on SG-C; an authorized structured HOU depth source.",
+   "question": "How should the backup-deficiency feature be sourced (route a vs route b)?",
+   "source": "https://www.nfl.com/teams/"
+  },
+  {
+   "blocks": [
+    "R-16",
+    "R-34",
+    "R-37",
+    "R-55"
+   ],
+   "id": "Q-04",
+   "known": "Peer registers use n >= 300 out-of-sample as the validation floor; current corpora are short-sample.",
+   "missing": "A full multi-season official results corpus to reach the floor.",
+   "question": "What is the sample-size floor for publishing a strategy as validated?",
+   "source": "https://www.nfl.com/scores/"
+  },
+  {
+   "blocks": [
+    "R-39"
+   ],
+   "id": "Q-05",
+   "known": "Architecture decision required; derived analysis is publishable, raw row-level data should be gated until terms are read.",
+   "missing": "Owner decision on the data-layer split.",
+   "question": "How should the site split public analysis from private raw data?",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "blocks": [
+    "R-56"
+   ],
+   "id": "Q-06",
+   "known": "No official roof register or NWS overlay exists in the verified corpus; venue is captured from schedule/game-centre.",
+   "missing": "Official 90-minute stadium roof designations and NWS hourly grids.",
+   "question": "Where do stadium roof/surface and NWS weather facts come from?",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "blocks": [
+    "R-23"
+   ],
+   "id": "Q-07",
+   "known": "Found a live discrepancy: schedule page hotel link says 'NRG Stadium' for IND@HOU while the game centre Game Info says 'Reliant Stadium'.",
+   "missing": "Owner decision: game centre is treated as authoritative per the brief; the discrepancy is flagged for review.",
+   "question": "What is the venue-authority rule when the schedule page and game centre disagree?",
+   "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11"
+  },
+  {
+   "blocks": [
+    "R-35"
+   ],
+   "id": "Q-08",
+   "known": "Multiplying marginal probabilities is invalid under dependence; a directly validated joint probability plus operator void/push rules are required.",
+   "missing": "Validated joint probability estimates and operator settlement rules.",
+   "question": "How are joint probabilities for parlays/SGP validated?",
+   "source": "https://www.nfl.com/"
+  },
+  {
+   "blocks": [
+    "R-02",
+    "R-19",
+    "R-26",
+    "R-68"
+   ],
+   "id": "Q-09",
+   "known": "The 136-game log equals Weeks 1-9. Week-10 finals join is partial in peer feeds; standings arithmetic reconciles to 150 games through Week 10 (verified 2026-11-19).",
+   "missing": "A complete, official results join through the current week.",
+   "question": "Where does the 136-game log map to, and is the results feed complete?",
+   "source": "https://www.nfl.com/scores/"
+  },
+  {
+   "blocks": [
+    "R-12",
+    "R-43",
+    "R-51"
+   ],
+   "id": "Q-10",
+   "known": "Peers measured Out/Doubtful/Questionable play-rates with Wilson CIs from a single season's inactive join.",
+   "missing": "Multi-season reliability with confidence intervals before the label becomes a model feature.",
+   "question": "What is the injury-designation reliability threshold for use as a feature?",
+   "source": "https://www.nfl.com/injuries/"
+  }
+ ],
+ "read_date": "2026-11-19"
+}

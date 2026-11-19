@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Leaderboard</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Leaderboard — signal separated from staking</h2><p class="note">Rank is by benchmark-relative Brier skill with a week-cluster lower bound, never by win rate or ROI (R-37). Signal rows are the nfl-origination walk-forward backtest (2018-2025, third-party archive). Staking/CLV/ROI is blank (no closing-price source) — a lucky staking run cannot mask a bad signal (R-05). Backtest numbers never appear as live results (R-09).</p></div><div class="panel"><h2>Brier skill (proper score)</h2><p class="note">Model Brier 0.2417 vs market 0.2104 vs naive 0.2491. Skill vs market -0.148 (95% CI [-0.182, -0.116], n=2126, 141 week-clusters). Skill vs naive 0.030. Favorites-only control: hit rate 66.4% (n=2126). Random control: Brier = naive 0.2491. The model beats naive but loses to the closing line with high confidence — that is the honest result.</p></div><h2>Signal table (flat stakes, assumed −110)</h2><table><thead><tr>
+<th>ID</th>
+<th>Strategy</th>
+<th>Market</th>
+<th>n</th>
+<th>ROI (assumed)</th>
+<th>95% CI</th>
+<th>Hit rate</th>
+<th>p</th>
+<th>FDR</th>
+<th>What would change our mind</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>S1</td>
+<td>Own rating vs closing spread, 2-point margin filter</td>
+<td>spread</td>
+<td>1560</td>
+<td>-0.0320</td>
+<td>[-0.081, 0.015]</td>
+<td>0.5071</td>
+<td>0.2889</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind toward skill; a prospective upper bound below 0 would confirm no skill.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S2</td>
+<td>Always take the home side (benchmark, not a strategy)</td>
+<td>spread</td>
+<td>2126</td>
+<td>-0.0930</td>
+<td>[-0.119, -0.068]</td>
+<td>0.4751</td>
+<td>0.9905</td>
+<td><span class="pill fail">fail</span></td>
+<td>S2 is a benchmark, not a strategy; no evidence changes its role.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S3</td>
+<td>Own total vs closing total, 3-point filter</td>
+<td>total</td>
+<td>1103</td>
+<td>-0.0498</td>
+<td>[-0.106, 0.007]</td>
+<td>0.4977</td>
+<td>0.5712</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind; otherwise it stays rejected.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Away-favoured games: take the home underdog</td>
+<td>spread</td>
+<td>1285</td>
+<td>-0.1235</td>
+<td>[-0.167, -0.086]</td>
+<td>0.4591</td>
+<td>0.9975</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind; otherwise it stays rejected.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Back the home side when it is the more rested team</td>
+<td>spread</td>
+<td>404</td>
+<td>-0.0455</td>
+<td>[-0.126, 0.038]</td>
+<td>0.5000</td>
+<td>0.5167</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind; otherwise it stays rejected.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>P1</td>
+<td>Placebo: bet every third game in date order</td>
+<td>spread</td>
+<td>709</td>
+<td>-0.1033</td>
+<td>[-0.170, -0.032]</td>
+<td>0.4697</td>
+<td>0.9450</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>P2</td>
+<td>Placebo: over in even weeks</td>
+<td>total</td>
+<td>1041</td>
+<td>-0.0537</td>
+<td>[-0.104, -0.008]</td>
+<td>0.4957</td>
+<td>0.6212</td>
+<td><span class="pill fail">fail</span></td>
+<td>A prospective Brier-skill lower bound above 0 over n&gt;=300 would change our mind.</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><h2>Staking table</h2><p class="note">Staking/CLV/ROI cannot be computed: no official or licensed closing-price source exists. This table is intentionally blank; a lucky staking run cannot mask a bad signal because rank is by signal (Brier skill) only.</p><h2>Proper-score divisions</h2><table><thead><tr>
+<th>Division</th>
+<th>Status</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>Singles</td>
+<td>evaluated (archive backtest); 0 qualify</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>Game parlays</td>
+<td>blocked (no archived parlay prices; joint-evidence gate)</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>Same-game parlays</td>
+<td>blocked (no SGP prices; C8 blank)</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>Player-prop combos</td>
+<td>blocked (no official per-game logs or prop prices)</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><h2>Demotion gate & pre-registration</h2><p class="note">Pre-registered: a live strategy is demoted to paper if, after 300 prospective trials, the 95% week-cluster CI on Brier skill includes 0 or the CLV CI includes 0. Model knobs frozen in nfl-origination/data/model_params.json (frozen_utc 2026-11-13T00:00:00Z); backtest numbers never appear on the leaderboard as live results.</p><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

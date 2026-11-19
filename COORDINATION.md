@@ -6055,4 +6055,43 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 
 **Rebase/conflict log.** PR #191 (`arena/7ccaa4f3-own4`, NFL Origination Lab) merged into `main` while this PR was open, so the first merge attempt reported a conflict. Rebased onto its merge commit; only this append-only `COORDINATION.md` claim block conflicted. Resolved as a union, retaining the Origination Lab session's full task record and this integration claim/completion record. No peer data, navigation content, or generated model artifacts were discarded. Re-ran local verification after the rebase.
 
+## Session arena/a2547367-own4 — NFL line-origination canonical build (2026-11-19 UTC)
+
+**Branch (platform-pinned):** arena/a2547367-own4, based on 36447d2 (main == origin/main at session start). No alternate branch created or pushed. All work stays on this single branch.
+
+**Scope (non-overlapping, new namespace only):** `nfl-own4/**` + `.github/workflows/nfl-own4.yml` + this board entry. No peer namespace, root index, or shared output is edited. The namespace is served by the existing legacy Pages config at https://sassnarep3-star.github.io/Own4/nfl-own4/ with no workflow change.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| OWN4-1 | Claim + fresh official re-verification (standings, Week-11 schedule, Week-11 injuries, reserve list, trades, TNF game centre, depth-charts 404) via page-fetch tool, 2026-11-19 | done | arena/a2547367-own4 | nfl-own4/data/official/* |
+| OWN4-2 | Build decision-readiness register (70 requirements: gate + clearing number), questions/information/answers register, suggestions board (verdict blank) | in progress | arena/a2547367-own4 | nfl-own4/data/*.json |
+| OWN4-3 | Originate Week-11 fair lines (side → total → moneyline, two estimators + gap, market/difference blank), signal/staking leaderboard with proper scores + luck panel + controls, correlations with n | in progress | arena/a2547367-own4 | nfl-own4/engine/*, nfl-own4/data/derived/* |
+| OWN4-4 | Build static site (landing + category subpages + Flagged for Review), verify every row source-linked, no broken links, deterministic rebuild | in progress | arena/a2547367-own4 | nfl-own4/index.html, nfl-own4/pages/*, nfl-own4/assets/* |
+| OWN4-5 | PR to main, merge, confirm GitHub Pages deploy, record PR link + merge result here | pending | arena/a2547367-own4 | — |
+
+**Fresh reads this session (2026-11-19, page-fetch tool; sandbox has no direct HTTPS egress to nfl.com):**
+- Standings https://www.nfl.com/standings/ — 32/32 transcribed; matches committed 2026-11-19 reads (nfl-desk, nfl-verify-2026-11-19).
+- Week-11 schedule https://www.nfl.com/schedules/2026/by-week/week-11 — 13 fixtures + 6 byes (ATL, CLE, GB, LAR, NE, SEA); hotel-link venues transcribed.
+- Week-11 injuries https://www.nfl.com/injuries/ — full 26-club read, 253 rows, 16 with game status (TNF only), 2 no-injury sections (CIN, WAS). Matches nfl-daily-desk 253-row read; differs from nfl-desk 242-row 2026-11-18 capture by 11 rows (published as delta).
+- TNF game centre https://www.nfl.com/games/colts-at-texans-2026-reg-11 — Game Info: HOUSTON, TX / RELIANT STADIUM; schedule hotel link: NRG Stadium. Discrepancy flagged, game centre treated as authoritative per brief.
+- Reserve list https://www.nfl.com/transactions/league/reserve-list/2026/11 — 25 November Reserve/Injured moves. Trades https://www.nfl.com/transactions/league/trades/2026/11 — 12 November trades. Both match committed reads.
+- Scores https://www.nfl.com/scores/ — Week 11 upcoming (TNF Nov 19), no finals yet; consistent with standings through Week 10.
+- Depth https://www.nfl.com/depth-charts/ — 404 "Flag on the Play" re-confirmed 2026-11-19. No official league depth chart exists.
+
+**Boundaries (no hallucinations):** No official price source exists (nfl.com publishes no betting lines/odds) — every market/price/ROI/residual/CLV cell is blank + flagged. No official snap-count/actual-starter feed in the verified corpus — replacement-depth/deficiency/availability-graph features stay blocked. HOU club depth is image-only (peer register, not re-read). All computed numbers (ratings, fair lines, correlations, reconciliation) are derived in-engine from the transcribed official inputs and recomputed by verify.py, never typed into prose.
+
+## nfl-own4 — completion record (arena/a2547367-own4, 2026-11-19)
+
+- Scope claimed in OWN4-1..OWN4-5 above; all files live under `nfl-own4/**` plus `.github/workflows/nfl-own4.yml`. No peer-owned file edited.
+- Sources (all read 2026-11-19 via page-fetch): https://www.nfl.com/standings/ · https://www.nfl.com/schedules/2026/by-week/week-11 · https://www.nfl.com/games/colts-at-texans-2026-reg-11 · https://www.nfl.com/injuries/ · https://www.nfl.com/transactions/league/reserve-list/2026/11 · https://www.nfl.com/transactions/league/trades/2026/11 · https://www.nfl.com/scores/ · https://www.nfl.com/depth-charts/ (404). Full register: `nfl-own4/data/official/sources_2026-11-19.json`.
+- Verification: `python3 nfl-own4/engine/verify.py` PASS (18 pages, every data row carries an https source link, all internal links resolve, external hosts on allowlist, rebuild byte-identical). Reconciliation C-01..C-11 PASS (`nfl-own4/data/derived/reconciliation.json`).
+- Irregularities: VF-01 (IND@HOU venue NRG vs Reliant), VF-03..VF-10 carried; OF-01..OF-04 added (injury-row delta, sigma assumption, no 2026 game-level finals feed, 11 LAC rows appeared vs 2026-11-18 capture — cause unverified). All non-blocking; published on `nfl-own4/pages/flagged.html`.
+- Market, price, ROI, CLV and residual cells are blank by policy (no official price source). Brier skill vs closing line is negative (see Verification / Leaderboard pages); no strategy is reward-eligible.
+- Cross-file requests (logged, not edited): root `build_site.py` regenerates NBA-only output and drops NFL navigation — owner of root site to decide; root `index.html` does not link `nfl-own4/`.
+- Status: **needs review** for OWN4-2..OWN4-4 items published on Flagged page; OWN4-1..OWN4-5 marked done for this session.
+- Correction to the claim above: a scoped workflow `.github/workflows/nfl-own4.yml` was added (verify on PR/push; deploy-pages on push to `main`, same pattern as `nfl-decisions.yml`). Peer workflows untouched.
+- Rebase log (2026-11-19): `git pull --rebase origin main` conflicted on this board only (union resolved, all peer blocks kept). A second `pull --rebase` against the session's own remote claim commit `93db5d2` replayed peer history and was aborted; resolved by recording `93db5d2` as an ancestor with an `-s ours` merge (no content discarded, fast-forward push `93db5d2..250ad3c`).
+- Site URL: https://sassnarep3-star.github.io/Own4/nfl-own4/ (landing `index.html`; pages under `pages/`).
+
+- PR opened: https://github.com/sassnarep3-star/Own4/pull/193 (arena/a2547367-own4 → main). Merge attempted next in this session; result recorded when confirmed.
 **Publication result.** PR [#190](https://github.com/sassnarep3-star/Own4/pull/190) was merged with merge strategy at 2026-11-19T11:06:30Z; merge commit [`f58d81e`](https://github.com/sassnarep3-star/Own4/commit/f58d81e87ce532283ffee5856c0f089b7c93e727). GitHub Pages build-and-deployment run [44511791022](https://github.com/sassnarep3-star/Own4/actions/runs/44511791022) completed successfully, including the `Deploy to GitHub Pages` job. Post-deploy reads confirmed the NFL portal and latest desk load at https://sassnarep3-star.github.io/Own4/nfl/ and https://sassnarep3-star.github.io/Own4/nfl-daily-desk/; the repository root loads at https://sassnarep3-star.github.io/Own4/.

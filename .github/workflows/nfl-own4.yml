@@ -1,0 +1,43 @@
+name: NFL own4 canonical build
+on:
+  push:
+    paths: ['nfl-own4/**', '.github/workflows/nfl-own4.yml']
+  pull_request:
+    paths: ['nfl-own4/**', '.github/workflows/nfl-own4.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python3 nfl-own4/engine/build.py
+      - run: python3 nfl-own4/engine/verify.py
+      - run: git diff --exit-code -- nfl-own4
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      - name: Deploy repository (includes nfl-own4 site)
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Overview</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="index.html">Overview</a><a href="pages/executive-summary.html">Executive summary</a><a href="pages/requirements.html">Decision readiness</a><a href="pages/standings.html">Standings</a><a href="pages/schedule.html">Week 11 schedule</a><a href="pages/injuries.html">Injuries &amp; availability</a><a href="pages/transactions.html">Transactions</a><a href="pages/own-lines.html">Own lines · Week 11</a><a href="pages/leaderboard.html">Leaderboard</a><a href="pages/correlations.html">Correlations</a><a href="pages/gates.html">Validation gates</a><a href="pages/depth.html">Depth register</a><a href="pages/questions.html">Questions</a><a href="pages/repo-review.html">Repo review</a><a href="pages/suggestions.html">Suggestions</a><a href="pages/flagged.html">Flagged for review</a><a href="pages/sources.html">Sources</a><a href="pages/verify.html">Verification</a></nav><main><div class="kpis"><div class="kpi"><div class="n">32</div><div class="l">Standings teams</div></div><div class="kpi"><div class="n">13</div><div class="l">Week-11 fixtures</div></div><div class="kpi"><div class="n">253</div><div class="l">Injury rows read</div></div><div class="kpi"><div class="n">16</div><div class="l">Rows with game status</div></div><div class="kpi"><div class="n">25</div><div class="l">Reserve moves</div></div><div class="kpi"><div class="n">12</div><div class="l">November trades</div></div><div class="kpi"><div class="n">70</div><div class="l">Requirements tracked</div></div><div class="kpi"><div class="n">0</div><div class="l">Reward-eligible strategies</div></div></div>
+<div class="panel"><h2 style="margin-top:0">Status summary</h2><p class="note">Requirements: 12 met / 42 partial / 13 blocked / 2 rejected / 1 process. Read date 2026-11-19. No strategy qualifies for rewards; the model loses to the closing line on proper score (Brier skill vs market -0.148, 95% CI [-0.182, -0.116], n=2126). Market/price columns are blank by policy — the NFL publishes no betting odds (VF-04).</p></div>
+<div class="panel"><h2>Removal of luck (dashboard panel)</h2><p class="note">Rank is by benchmark-relative Brier skill with a week-cluster lower bound, never by win rate or ROI. Control baselines run every build: random (Brier 0.2491) and favorites-only (hit rate 66.4%, n=2126). Placebos: 2 pre-registered, 0 pass FDR. Demotion gate: a live strategy returns to paper if the 95% CI on Brier skill includes 0 after 300 prospective trials.</p></div>
+<div class="panel"><h2>Decision-readiness (preview)</h2><p class="note">One row per requirement: status, the gate that blocks it, the number that clears it, and a source link. Full table on the <a href="pages/requirements.html">Decision readiness</a> page.</p>
+<table><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Status</th>
+<th>Gate blocking</th>
+<th>Clearing number</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>R-01</td>
+<td>Add a price-snapshot store that records opening and closing numbers for every market we originate</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official NFL source publishes betting lines/odds/closing prices</td>
+<td>A licensed or authorized market price feed (open + close) for every originated market</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>Add a verified results feed so backtests and ROI can be computed at all</td>
+<td><span class="pill partial">partial</span></td>
+<td>Results feed exists but uses a third-party archive for some rows; not every Week-10 final is joined</td>
+<td>Every settled game joined to an official game-centre/score source</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>Originate the side first, then the total, then the moneyline</td>
+<td><span class="pill partial">partial</span></td>
+<td>Origination engine exists in peer namespaces; ML derived from side, but market line blank (no price source)</td>
+<td>Authorized market line to compare against</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>Publish the model&#x27;s fair line, the market line, and the difference as separate columns</td>
+<td><span class="pill partial">partial</span></td>
+<td>Fair line computable; market line column blank by policy (no official price source)</td>
+<td>Authorized market line</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>Separate &#x27;signal&#x27; from &#x27;staking&#x27; in the leaderboard</td>
+<td><span class="pill partial">partial</span></td>
+<td>Two-stage leaderboard exists; staking/CLV blocked by no closing prices</td>
+<td>Verified closing prices to compute CLV/staking</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>Track the depth of the replacement, not just the fact of a replacement</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count feed or game-day starter designation; depth from club charts only</td>
+<td>Official Game Book / snap-count join or official starter designation</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-07</td>
+<td>Compute correlations only from officially sourced numbers and publish n with each value</td>
+<td><span class="pill partial">partial</span></td>
+<td>Correlation engine exists; official inputs limited to scores/standings; market correlations blank</td>
+<td>Official price history to compute market correlations</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-08</td>
+<td>Define a demotion gate that sends a live strategy back to paper</td>
+<td><span class="pill met">met</span></td>
+<td>none (process gate defined)</td>
+<td>Pre-registered demotion threshold</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-09</td>
+<td>Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard</td>
+<td><span class="pill met">met</span></td>
+<td>none (process gate enforced)</td>
+<td>Committed pre-registration text + hash</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-10</td>
+<td>Build the availability graph as a first-class dataset (who was expected to start, who actually did)</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official actual-starter feed; only expected availability captured</td>
+<td>Official Game Book actual-starter join</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-11</td>
+<td>Do not model depth from jersey order; model it from playing time</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count/playing-time feed</td>
+<td>Official snap-count source</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-12</td>
+<td>Make the injury signal a surprise, never a level</td>
+<td><span class="pill partial">partial</span></td>
+<td>Surprise requires a prior expectation + actual; only a single snapshot exists this season</td>
+<td>Multiple dated availability snapshots to compute surprise vs expectation</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table>
+</div>
+<div class="panel"><h2>Week-11 own lines (preview)</h2><p class="note">Fair lines originated from official standings ratings (side first, then total, then moneyline). Two estimators + gap; market/difference blank (no official price source). Full table on the <a href="pages/own-lines.html">Own lines</a> page.</p>
+<table><thead><tr>
+<th>Fixture</th>
+<th>Fair margin A</th>
+<th>Fair margin B</th>
+<th>Fair total A</th>
+<th>Win prob home A</th>
+<th>Market</th>
+<th>Difference</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>IND @ HOU</td>
+<td>4.32</td>
+<td>7.64</td>
+<td>23.86</td>
+<td>0.626</td>
+<td><span class="blank">no official price</span></td>
+<td><span class="blank">blank</span></td>
+<td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" class="src" rel="noopener" target="_blank">game centre</a></td>
+</tr>
+<tr>
+<td>MIA @ BUF</td>
+<td>9.65</td>
+<td>14.68</td>
+<td>23.48</td>
+<td>0.763</td>
+<td><span class="blank">no official price</span></td>
+<td><span class="blank">blank</span></td>
+<td><a href="https://www.nfl.com/games/dolphins-at-bills-2026-reg-11" class="src" rel="noopener" target="_blank">game centre</a></td>
+</tr>
+<tr>
+<td>BAL @ CAR</td>
+<td>1.78</td>
+<td>4.32</td>
+<td>23.75</td>
+<td>0.552</td>
+<td><span class="blank">no official price</span></td>
+<td><span class="blank">blank</span></td>
+<td><a href="https://www.nfl.com/games/ravens-at-panthers-2026-reg-11" class="src" rel="noopener" target="_blank">game centre</a></td>
+</tr>
+<tr>
+<td>NO @ CHI</td>
+<td>5.35</td>
+<td>9.06</td>
+<td>23.55</td>
+<td>0.654</td>
+<td><span class="blank">no official price</span></td>
+<td><span class="blank">blank</span></td>
+<td><a href="https://www.nfl.com/games/saints-at-bears-2026-reg-11" class="src" rel="noopener" target="_blank">game centre</a></td>
+</tr>
+<tr>
+<td>TEN @ DAL</td>
+<td>4.46</td>
+<td>7.88</td>
+<td>24.42</td>
+<td>0.629</td>
+<td><span class="blank">no official price</span></td>
+<td><span class="blank">blank</span></td>
+<td><a href="https://www.nfl.com/games/titans-at-cowboys-2026-reg-11" class="src" rel="noopener" target="_blank">game centre</a></td>
+</tr>
+</tbody></table>
+</div><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="pages/flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

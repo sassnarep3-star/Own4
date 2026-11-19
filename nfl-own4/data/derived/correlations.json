@@ -1,0 +1,196 @@
+{
+ "id": "correlations-2026-11-19",
+ "items": [
+  {
+   "blank_reason": "",
+   "ci95": [
+    -0.47254939643036264,
+    0.2113315434088937
+   ],
+   "fdr_pass": null,
+   "fdr_threshold": null,
+   "id": "O1",
+   "interpretation": "Officially sourced; n=32. See site for reading.",
+   "market": "team rating (official)",
+   "n": 32,
+   "name": "Points for vs points against, same club (official standings)",
+   "p_value": 0.4114767507638232,
+   "r": -0.14828991575296982,
+   "scope": "32 clubs, 2026 standings through Week 10",
+   "source": "https://www.nfl.com/standings/"
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    0.7582774898807252,
+    0.9378705085097174
+   ],
+   "fdr_pass": null,
+   "fdr_threshold": null,
+   "id": "O2",
+   "interpretation": "Officially sourced; n=32. See site for reading.",
+   "market": "team rating (official)",
+   "n": 32,
+   "name": "Win percentage vs net points, same club (official standings)",
+   "p_value": 3.304723462097763e-23,
+   "r": 0.8754868054725057,
+   "scope": "32 clubs, 2026 standings through Week 10",
+   "source": "https://www.nfl.com/standings/"
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    -0.033504641564666815,
+    0.013003066219411618
+   ],
+   "fdr_pass": false,
+   "fdr_threshold": 0.03333333333333333,
+   "id": "C1",
+   "interpretation": "Near zero, so spread and total angles on the same game are close to independent and may be combined; that is a dependence fact, not an edge.",
+   "market": "single+parlay",
+   "n": 7103,
+   "name": "Closing spread vs closing total, same game",
+   "p_value": 0.38744109764937174,
+   "r": -0.01025633428362335,
+   "scope": "every archived regular-season game with a line",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    -0.017224017867207675,
+    0.029286887081980753
+   ],
+   "fdr_pass": false,
+   "fdr_threshold": 0.041666666666666664,
+   "id": "C2",
+   "interpretation": "Near zero over the whole archive, but this pool mixes every game. The player-prop pairs (C5) are the ones that show real dependence.",
+   "market": "same-game parlay",
+   "n": 7103,
+   "name": "Home cover vs over, same game (2-leg SGP)",
+   "p_value": 0.611092040514641,
+   "r": 0.0060346983880458505,
+   "scope": "every archived game with a line",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    -0.25027398664797745,
+    -0.12367243343008712
+   ],
+   "fdr_pass": true,
+   "fdr_threshold": 0.016666666666666666,
+   "id": "C3",
+   "interpretation": "Weakly negative: a club that scores more tends to concede slightly less, which is the opposite of the naive 'good offence means bad defence' story. Used to justify rating offence and defence separately.",
+   "market": "team rating",
+   "n": 893,
+   "name": "Team points-for vs points-against, same season",
+   "p_value": 1.5755404299527818e-08,
+   "r": -0.18775290473287837,
+   "scope": "club-seasons with at least 8 games",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    0.011389371336721145,
+    0.05784619883792589
+   ],
+   "fdr_pass": true,
+   "fdr_threshold": 0.025000000000000005,
+   "id": "C4",
+   "interpretation": "Statistically detectable (n=7,103) but economically tiny: r=0.035 explains about 0.1%% of margin variance. This is why rest is NOT given its own weight in the model.",
+   "market": "situational",
+   "n": 7103,
+   "name": "Rest differential vs home margin",
+   "p_value": 0.0035059144656490637,
+   "r": 0.034636495962626905,
+   "scope": "games where the archive records both rest values",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    0.2837358114604964,
+    0.4055976409612823
+   ],
+   "fdr_pass": true,
+   "fdr_threshold": 0.008333333333333333,
+   "id": "C5",
+   "interpretation": "Real positive dependence: the legs hit together more often than independence predicts, so an SGP priced as if the legs were independent would underprice this combo. Whether that survives the book's repricing is C8, which is blank.",
+   "market": "player-prop combo",
+   "n": 803,
+   "name": "QB passing yards over proxy line vs WR1 receiving yards over proxy line",
+   "p_value": 5.1415713708827485e-24,
+   "r": 0.34612581064515097,
+   "scope": "803 team-games, seasons 2021, 2022",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "The archived prop file exposes one QB/WR pair only; no second pair can be computed without new data.",
+   "ci95": null,
+   "fdr_pass": null,
+   "fdr_threshold": null,
+   "id": "C6",
+   "interpretation": "",
+   "market": "player-prop combo",
+   "n": 0,
+   "name": "Prop legs within the same team-game (second pair)",
+   "p_value": null,
+   "r": null,
+   "scope": "",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "",
+   "ci95": [
+    -0.09722083617706162,
+    0.08309187684982577
+   ],
+   "fdr_pass": false,
+   "fdr_threshold": 0.05000000000000001,
+   "id": "C7",
+   "interpretation": "Near zero, which supports treating legs from different games as independent when multiplying them.",
+   "market": "cross-game parlay",
+   "n": 473,
+   "name": "Home-cover rate in the first half of a week vs the second half",
+   "p_value": 0.8772206261552777,
+   "r": -0.007122374437041308,
+   "scope": "week-level, 473 week-slates",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "No archived same-game-parlay price exists anywhere in this repository, and the NFL publishes no prices at all. The correlation (C5) is measured; the price it must be compared against is not obtainable.",
+   "ci95": null,
+   "fdr_pass": null,
+   "fdr_threshold": null,
+   "id": "C8",
+   "interpretation": "",
+   "market": "same-game parlay",
+   "n": 0,
+   "name": "Same-game parlay legs vs the sportsbook's repriced SGP price",
+   "p_value": null,
+   "r": null,
+   "scope": "",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  },
+  {
+   "blank_reason": "nfl.com/injuries/ serves only the current week and publishes no historical archive, so an injury effect cannot be estimated at all.",
+   "ci95": null,
+   "fdr_pass": null,
+   "fdr_threshold": null,
+   "id": "C9",
+   "interpretation": "",
+   "market": "injury signal",
+   "n": 0,
+   "name": "Injury designation vs next-game scoring margin",
+   "p_value": null,
+   "r": null,
+   "scope": "",
+   "source": "Third-party archive (nflverse/nfldata) via nfl-origination; reconciled to official standings 160/160. Not an official price source."
+  }
+ ],
+ "method": "O1/O2 computed ONLY from officially sourced numbers (n=32). C1-C9 are the peer archive computations (third-party inputs, labelled). Blank r means the input is not obtainable; it is never estimated.",
+ "read_date": "2026-11-19"
+}

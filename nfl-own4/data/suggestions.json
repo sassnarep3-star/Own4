@@ -1,0 +1,136 @@
+{
+ "note": "Suggestions to discover missing information and improve decision-making. Verdicts are deliberately blank: the owner reviews and chooses the path before any change is implemented. Each suggestion lists alternatives, the gate it must clear, and the information it needs. Carried forward from nfl-verify-2026-11-19.",
+ "read_date": "2026-11-19",
+ "suggestions": [
+  {
+   "alternatives": [
+    "Consolidate into one register with links",
+    "Keep namespaces but add a unified readiness index"
+   ],
+   "gate": "Owner picks one canonical surface (SF-01 / CD-15)",
+   "id": "S-01",
+   "information_needed": "Owner decision on consolidation scope",
+   "problem": "The brief's requirements are split across many namespaces, making the decision-readiness view fragmented.",
+   "source": "https://www.nfl.com/",
+   "suggestion": "Adopt a single canonical NFL decision surface and mark the 40+ nfl-* namespaces as appendices",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Scheduled collector (peer nfl-collector)",
+    "Manual dated reads"
+   ],
+   "gate": "Scheduled capture with retained hashes + drift alarm",
+   "id": "S-02",
+   "information_needed": "Confirm cron cadence and alert owners",
+   "problem": "Availability is point-in-time; surprise and delta require a dated series.",
+   "source": "https://www.nfl.com/injuries/",
+   "suggestion": "Run the scheduled Wed/Thu/Fri availability collector as the standing freshness gate",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Reserve-list parser (one page, one parser)",
+    "Full transactions parser"
+   ],
+   "gate": "Reserve moves joined to availability with dates",
+   "id": "S-03",
+   "information_needed": "None (reserve list is public); schedule the parser",
+   "problem": "'Not listed' can mean injured-reserve rather than available; reserve moves explain missing players.",
+   "source": "https://www.nfl.com/transactions/league/reserve-list/2026/11",
+   "suggestion": "Ingest the official reserve list into the availability join as a first-class event stream",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "License a market feed",
+    "Publish fair-line-only backtests with an explicit no-market caveat"
+   ],
+   "gate": "Owner decision + authorized source",
+   "id": "S-04",
+   "information_needed": "Owner decision on data rights/budget",
+   "problem": "Without an authorized price source, no residual/CLV/ROI can be computed; backtests would be vs a proxy.",
+   "source": "https://www.nfl.com/",
+   "suggestion": "Decide the price-data policy before publishing any backtest",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Per-club official depth pages (verified 32/32; HOU image-only)",
+    "Snap counts if an official source is authorized"
+   ],
+   "gate": "One route verified for all 32 clubs + actual-starter join",
+   "id": "S-05",
+   "information_needed": "Authorized structured HOU source; owner verdict on SG-C",
+   "problem": "Depth is the core of the deficiency signal but has no verified actual-starter/snap join.",
+   "source": "https://www.nfl.com/teams/",
+   "suggestion": "Resolve the depth-order source (route a vs route b) before building the deficiency feature",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Computed control floor from luck-only strategies",
+    "Closed-form variance bound"
+   ],
+   "gate": "n >= 300 out-of-sample + game-cluster CI",
+   "id": "S-06",
+   "information_needed": "Complete official results corpus",
+   "problem": "Raw win rate and short-run ROI cannot separate skill from variance.",
+   "source": "https://www.nfl.com/scores/",
+   "suggestion": "Add a control baseline (random; favorites-only) to every leaderboard run and publish the luck-removal panel",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Game centre is authoritative (per brief)",
+    "Flag and hold blank until reconciled"
+   ],
+   "gate": "Every fixture venue read from the official game centre",
+   "id": "S-07",
+   "information_needed": "Game-centre reads for all 13 Week-11 fixtures",
+   "problem": "IND@HOU shows 'NRG Stadium' on the schedule page but 'Reliant Stadium' on the game centre.",
+   "source": "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+   "suggestion": "Treat venue as game-centre-authoritative and reconcile schedule-vs-centre discrepancies automatically",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Per-session board files + index",
+    "Keep single board with section headers"
+   ],
+   "gate": "No lost entries on concurrent appends",
+   "id": "S-08",
+   "information_needed": "Owner decision on coordination structure",
+   "problem": "The single append-only board is hot; parallel sessions collide on the same tail.",
+   "source": "https://www.nfl.com/",
+   "suggestion": "Give each session its own coordination file under coordination/ with COORDINATION.md as an index",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Paired McNemar on win/loss",
+    "Brier skill with game-cluster CI"
+   ],
+   "gate": "Rule file committed (hash = registration) before data",
+   "id": "S-09",
+   "information_needed": "None (process); freeze the window",
+   "problem": "Model-vs-baseline claims need a pre-registered paired test to avoid post-hoc tuning.",
+   "source": "https://www.nfl.com/",
+   "suggestion": "Pre-register and freeze the McNemar paired test for model-vs-baseline before the evaluation window opens",
+   "verdict": ""
+  },
+  {
+   "alternatives": [
+    "Dual estimators + gap column",
+    "Ensemble with disclosed weights"
+   ],
+   "gate": "Walk-forward comparison with a pre-registered collapse rule",
+   "id": "S-10",
+   "information_needed": "Complete results corpus",
+   "problem": "A single estimator hides model-selection uncertainty.",
+   "source": "https://www.nfl.com/scores/",
+   "suggestion": "Publish every model total twice (two estimators) with a gap column until a walk-forward comparison collapses to one",
+   "verdict": ""
+  }
+ ]
+}

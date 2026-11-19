@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Correlations</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Correlations — n published with each value</h2><p class="note">O1/O2 are computed ONLY from officially sourced numbers (n=32). C1–C9 are the peer archive computations (third-party inputs, labelled). A blank r means the required input is not obtainable from an official source; it is never estimated (R-07).</p></div><table><thead><tr>
+<th>ID</th>
+<th>Pair</th>
+<th>Market</th>
+<th>r</th>
+<th>n</th>
+<th>95% CI</th>
+<th>p</th>
+<th>Interpretation</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>O1</td>
+<td>Points for vs points against, same club (official standings)</td>
+<td>team rating (official)</td>
+<td>-0.1483</td>
+<td>32</td>
+<td>[-0.473, 0.211]</td>
+<td>0.4115</td>
+<td>Officially sourced; n=32. See site for reading.</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">official standings</a></td>
+</tr>
+<tr>
+<td>O2</td>
+<td>Win percentage vs net points, same club (official standings)</td>
+<td>team rating (official)</td>
+<td>0.8755</td>
+<td>32</td>
+<td>[0.758, 0.938]</td>
+<td>0.0000</td>
+<td>Officially sourced; n=32. See site for reading.</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">official standings</a></td>
+</tr>
+<tr>
+<td>C1</td>
+<td>Closing spread vs closing total, same game</td>
+<td>single+parlay</td>
+<td>-0.0103</td>
+<td>7103</td>
+<td>[-0.034, 0.013]</td>
+<td>0.3874</td>
+<td>Near zero, so spread and total angles on the same game are close to independent and may be combined; that is a dependence fact, not an edge.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C2</td>
+<td>Home cover vs over, same game (2-leg SGP)</td>
+<td>same-game parlay</td>
+<td>0.0060</td>
+<td>7103</td>
+<td>[-0.017, 0.029]</td>
+<td>0.6111</td>
+<td>Near zero over the whole archive, but this pool mixes every game. The player-prop pairs (C5) are the ones that show real dependence.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C3</td>
+<td>Team points-for vs points-against, same season</td>
+<td>team rating</td>
+<td>-0.1878</td>
+<td>893</td>
+<td>[-0.250, -0.124]</td>
+<td>0.0000</td>
+<td>Weakly negative: a club that scores more tends to concede slightly less, which is the opposite of the naive &#x27;good offence means bad defence&#x27; story. Used to justify rating offence and defence separately.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C4</td>
+<td>Rest differential vs home margin</td>
+<td>situational</td>
+<td>0.0346</td>
+<td>7103</td>
+<td>[0.011, 0.058]</td>
+<td>0.0035</td>
+<td>Statistically detectable (n=7,103) but economically tiny: r=0.035 explains about 0.1%% of margin variance. This is why rest is NOT given its own weight in the model.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C5</td>
+<td>QB passing yards over proxy line vs WR1 receiving yards over proxy line</td>
+<td>player-prop combo</td>
+<td>0.3461</td>
+<td>803</td>
+<td>[0.284, 0.406]</td>
+<td>0.0000</td>
+<td>Real positive dependence: the legs hit together more often than independence predicts, so an SGP priced as if the legs were independent would underprice this combo. Whether that survives the book&#x27;s repricing is C8, which is blank.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C6</td>
+<td>Prop legs within the same team-game (second pair)</td>
+<td>player-prop combo</td>
+<td><span class="blank">blank — The archived prop file exposes one QB/WR pair only; no second pair can be computed without new data.</span></td>
+<td>0</td>
+<td><span class="blank">unverified</span></td>
+<td><span class="blank">unverified</span></td>
+<td></td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C7</td>
+<td>Home-cover rate in the first half of a week vs the second half</td>
+<td>cross-game parlay</td>
+<td>-0.0071</td>
+<td>473</td>
+<td>[-0.097, 0.083]</td>
+<td>0.8772</td>
+<td>Near zero, which supports treating legs from different games as independent when multiplying them.</td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C8</td>
+<td>Same-game parlay legs vs the sportsbook&#x27;s repriced SGP price</td>
+<td>same-game parlay</td>
+<td><span class="blank">blank — No archived same-game-parlay price exists anywhere in this repository, and the NFL publishes no prices at all. The correlation (C5) is measured; the price it must be compared against is not obtainable.</span></td>
+<td>0</td>
+<td><span class="blank">unverified</span></td>
+<td><span class="blank">unverified</span></td>
+<td></td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+<tr>
+<td>C9</td>
+<td>Injury designation vs next-game scoring margin</td>
+<td>injury signal</td>
+<td><span class="blank">blank — nfl.com/injuries/ serves only the current week and publishes no historical archive, so an injury effect cannot be estimated at all.</span></td>
+<td>0</td>
+<td><span class="blank">unverified</span></td>
+<td><span class="blank">unverified</span></td>
+<td></td>
+<td><a href="https://github.com/sassnarep3-star/Own4/tree/main/nfl-origination" class="src" rel="noopener" target="_blank">repo: peer archive (NOT official)</a></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

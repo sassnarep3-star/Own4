@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Standings</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">2026 standings (through Week 10)</h2><p class="note">Transcribed from the official standings page 2026-11-19. Arithmetic reconciles: 149 W = 149 L, 150 games, PF = PA = 6,923, NET = PF − PA for every team (see Verification page).</p></div><table><thead><tr>
+<th>Abbr</th>
+<th>Club</th>
+<th>Conf</th>
+<th>Div</th>
+<th>W</th>
+<th>L</th>
+<th>T</th>
+<th>Pct</th>
+<th>PF</th>
+<th>PA</th>
+<th>NET</th>
+<th>Div rec</th>
+<th>Conf rec</th>
+<th>Strk</th>
+<th>Last-5</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>BUF</td>
+<td>Buffalo Bills</td>
+<td>AFC</td>
+<td>East</td>
+<td>8</td>
+<td>1</td>
+<td>0</td>
+<td>0.889</td>
+<td>287</td>
+<td>199</td>
+<td>88</td>
+<td>3 - 1 - 0</td>
+<td>5 - 0 - 0</td>
+<td>5W</td>
+<td>5 - 0 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NE</td>
+<td>New England Patriots</td>
+<td>AFC</td>
+<td>East</td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>0.500</td>
+<td>221</td>
+<td>242</td>
+<td>-21</td>
+<td>3 - 1 - 0</td>
+<td>2 - 4 - 0</td>
+<td>2L</td>
+<td>2 - 3 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYJ</td>
+<td>New York Jets</td>
+<td>AFC</td>
+<td>East</td>
+<td>2</td>
+<td>8</td>
+<td>0</td>
+<td>0.200</td>
+<td>194</td>
+<td>254</td>
+<td>-60</td>
+<td>1 - 4 - 0</td>
+<td>1 - 4 - 0</td>
+<td>5L</td>
+<td>0 - 5 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIA</td>
+<td>Miami Dolphins</td>
+<td>AFC</td>
+<td>East</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+<td>0.111</td>
+<td>148</td>
+<td>224</td>
+<td>-76</td>
+<td>0 - 4 - 0</td>
+<td>1 - 4 - 0</td>
+<td>3L</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CIN</td>
+<td>Cincinnati Bengals</td>
+<td>AFC</td>
+<td>North</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>278</td>
+<td>193</td>
+<td>85</td>
+<td>3 - 1 - 0</td>
+<td>4 - 1 - 0</td>
+<td>5W</td>
+<td>5 - 0 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PIT</td>
+<td>Pittsburgh Steelers</td>
+<td>AFC</td>
+<td>North</td>
+<td>6</td>
+<td>3</td>
+<td>0</td>
+<td>0.667</td>
+<td>198</td>
+<td>182</td>
+<td>16</td>
+<td>4 - 0 - 0</td>
+<td>2 - 3 - 0</td>
+<td>1L</td>
+<td>4 - 1 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CLE</td>
+<td>Cleveland Browns</td>
+<td>AFC</td>
+<td>North</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>0.600</td>
+<td>188</td>
+<td>220</td>
+<td>-32</td>
+<td>4 - 0 - 0</td>
+<td>2 - 4 - 0</td>
+<td>1W</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>BAL</td>
+<td>Baltimore Ravens</td>
+<td>AFC</td>
+<td>North</td>
+<td>4</td>
+<td>6</td>
+<td>0</td>
+<td>0.400</td>
+<td>209</td>
+<td>259</td>
+<td>-50</td>
+<td>1 - 4 - 0</td>
+<td>3 - 2 - 0</td>
+<td>5L</td>
+<td>0 - 5 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>JAX</td>
+<td>Jacksonville Jaguars</td>
+<td>AFC</td>
+<td>South</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>269</td>
+<td>144</td>
+<td>125</td>
+<td>4 - 1 - 0</td>
+<td>3 - 1 - 0</td>
+<td>3W</td>
+<td>4 - 1 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>HOU</td>
+<td>Houston Texans</td>
+<td>AFC</td>
+<td>South</td>
+<td>3</td>
+<td>6</td>
+<td>0</td>
+<td>0.333</td>
+<td>233</td>
+<td>219</td>
+<td>14</td>
+<td>0 - 4 - 0</td>
+<td>3 - 2 - 0</td>
+<td>1L</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>IND</td>
+<td>Indianapolis Colts</td>
+<td>AFC</td>
+<td>South</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>0.300</td>
+<td>208</td>
+<td>271</td>
+<td>-63</td>
+<td>2 - 3 - 0</td>
+<td>1 - 4 - 0</td>
+<td>1W</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TEN</td>
+<td>Tennessee Titans</td>
+<td>AFC</td>
+<td>South</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+<td>0.111</td>
+<td>167</td>
+<td>239</td>
+<td>-72</td>
+<td>0 - 5 - 0</td>
+<td>1 - 3 - 0</td>
+<td>3L</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>KC</td>
+<td>Kansas City Chiefs</td>
+<td>AFC</td>
+<td>West</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>237</td>
+<td>156</td>
+<td>81</td>
+<td>4 - 0 - 0</td>
+<td>3 - 2 - 0</td>
+<td>2W</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DEN</td>
+<td>Denver Broncos</td>
+<td>AFC</td>
+<td>West</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>198</td>
+<td>186</td>
+<td>12</td>
+<td>4 - 0 - 0</td>
+<td>3 - 2 - 0</td>
+<td>5W</td>
+<td>5 - 0 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LV</td>
+<td>Las Vegas Raiders</td>
+<td>AFC</td>
+<td>West</td>
+<td>4</td>
+<td>6</td>
+<td>0</td>
+<td>0.400</td>
+<td>251</td>
+<td>289</td>
+<td>-38</td>
+<td>1 - 4 - 0</td>
+<td>3 - 2 - 0</td>
+<td>2L</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LAC</td>
+<td>Los Angeles Chargers</td>
+<td>AFC</td>
+<td>West</td>
+<td>1</td>
+<td>8</td>
+<td>0</td>
+<td>0.111</td>
+<td>144</td>
+<td>239</td>
+<td>-95</td>
+<td>0 - 4 - 0</td>
+<td>1 - 4 - 0</td>
+<td>1W</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NYG</td>
+<td>New York Giants</td>
+<td>NFC</td>
+<td>East</td>
+<td>5</td>
+<td>3</td>
+<td>1</td>
+<td>0.611</td>
+<td>203</td>
+<td>196</td>
+<td>7</td>
+<td>3 - 2 - 0</td>
+<td>2 - 1 - 1</td>
+<td>1L</td>
+<td>2 - 2 - 1</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DAL</td>
+<td>Dallas Cowboys</td>
+<td>NFC</td>
+<td>East</td>
+<td>4</td>
+<td>6</td>
+<td>0</td>
+<td>0.400</td>
+<td>286</td>
+<td>282</td>
+<td>4</td>
+<td>1 - 4 - 0</td>
+<td>3 - 2 - 0</td>
+<td>1L</td>
+<td>2 - 3 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>WAS</td>
+<td>Washington Commanders</td>
+<td>NFC</td>
+<td>East</td>
+<td>3</td>
+<td>5</td>
+<td>1</td>
+<td>0.389</td>
+<td>196</td>
+<td>223</td>
+<td>-27</td>
+<td>2 - 2 - 1</td>
+<td>1 - 3 - 0</td>
+<td>1W</td>
+<td>2 - 2 - 1</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>PHI</td>
+<td>Philadelphia Eagles</td>
+<td>NFC</td>
+<td>East</td>
+<td>2</td>
+<td>7</td>
+<td>0</td>
+<td>0.222</td>
+<td>148</td>
+<td>221</td>
+<td>-73</td>
+<td>1 - 4 - 0</td>
+<td>1 - 3 - 0</td>
+<td>7L</td>
+<td>0 - 5 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>DET</td>
+<td>Detroit Lions</td>
+<td>NFC</td>
+<td>North</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>257</td>
+<td>199</td>
+<td>58</td>
+<td>5 - 0 - 0</td>
+<td>2 - 2 - 0</td>
+<td>5W</td>
+<td>5 - 0 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>MIN</td>
+<td>Minnesota Vikings</td>
+<td>NFC</td>
+<td>North</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>176</td>
+<td>126</td>
+<td>50</td>
+<td>3 - 1 - 0</td>
+<td>4 - 1 - 0</td>
+<td>1W</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CHI</td>
+<td>Chicago Bears</td>
+<td>NFC</td>
+<td>North</td>
+<td>7</td>
+<td>2</td>
+<td>0</td>
+<td>0.778</td>
+<td>241</td>
+<td>184</td>
+<td>57</td>
+<td>4 - 1 - 0</td>
+<td>3 - 1 - 0</td>
+<td>4W</td>
+<td>4 - 1 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>GB</td>
+<td>Green Bay Packers</td>
+<td>NFC</td>
+<td>North</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>0.600</td>
+<td>226</td>
+<td>221</td>
+<td>5</td>
+<td>3 - 2 - 0</td>
+<td>3 - 2 - 0</td>
+<td>1L</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>CAR</td>
+<td>Carolina Panthers</td>
+<td>NFC</td>
+<td>South</td>
+<td>4</td>
+<td>5</td>
+<td>0</td>
+<td>0.444</td>
+<td>219</td>
+<td>236</td>
+<td>-17</td>
+<td>1 - 3 - 0</td>
+<td>3 - 2 - 0</td>
+<td>1W</td>
+<td>2 - 3 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>TB</td>
+<td>Tampa Bay Buccaneers</td>
+<td>NFC</td>
+<td>South</td>
+<td>3</td>
+<td>6</td>
+<td>0</td>
+<td>0.333</td>
+<td>202</td>
+<td>178</td>
+<td>24</td>
+<td>1 - 4 - 0</td>
+<td>2 - 2 - 0</td>
+<td>1L</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>NO</td>
+<td>New Orleans Saints</td>
+<td>NFC</td>
+<td>South</td>
+<td>3</td>
+<td>6</td>
+<td>0</td>
+<td>0.333</td>
+<td>202</td>
+<td>236</td>
+<td>-34</td>
+<td>1 - 5 - 0</td>
+<td>2 - 1 - 0</td>
+<td>1L</td>
+<td>2 - 3 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>ATL</td>
+<td>Atlanta Falcons</td>
+<td>NFC</td>
+<td>South</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>0.300</td>
+<td>201</td>
+<td>258</td>
+<td>-57</td>
+<td>1 - 5 - 0</td>
+<td>2 - 2 - 0</td>
+<td>3L</td>
+<td>1 - 4 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SF</td>
+<td>San Francisco 49ers</td>
+<td>NFC</td>
+<td>West</td>
+<td>8</td>
+<td>1</td>
+<td>0</td>
+<td>0.889</td>
+<td>281</td>
+<td>196</td>
+<td>85</td>
+<td>5 - 0 - 0</td>
+<td>3 - 1 - 0</td>
+<td>2W</td>
+<td>4 - 1 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>SEA</td>
+<td>Seattle Seahawks</td>
+<td>NFC</td>
+<td>West</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>0.600</td>
+<td>223</td>
+<td>175</td>
+<td>48</td>
+<td>4 - 2 - 0</td>
+<td>2 - 2 - 0</td>
+<td>2W</td>
+<td>3 - 2 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>LA</td>
+<td>Los Angeles Rams</td>
+<td>NFC</td>
+<td>West</td>
+<td>6</td>
+<td>4</td>
+<td>0</td>
+<td>0.600</td>
+<td>248</td>
+<td>187</td>
+<td>61</td>
+<td>2 - 3 - 0</td>
+<td>4 - 1 - 0</td>
+<td>4W</td>
+<td>4 - 1 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>AZ</td>
+<td>Arizona Cardinals</td>
+<td>NFC</td>
+<td>West</td>
+<td>3</td>
+<td>7</td>
+<td>0</td>
+<td>0.300</td>
+<td>184</td>
+<td>289</td>
+<td>-105</td>
+<td>0 - 4 - 0</td>
+<td>3 - 3 - 0</td>
+<td>2L</td>
+<td>2 - 3 - 0</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

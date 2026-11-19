@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Repo review</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Repo review — line by line vs the 2026-11-19 read</h2><p class="note">Each row states what the committed snapshot claims, what the fresh read confirms or flags, and the official source for manual review.</p></div><table><thead><tr>
+<th>ID</th>
+<th>Item</th>
+<th>Committed claim</th>
+<th>Verified 2026-11-19</th>
+<th>Flag</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>RR-01</td>
+<td>Standings snapshot (nfl-decision-desk / nfl-availability-desk)</td>
+<td>32-team 2026 standings through Week 10</td>
+<td>Confirmed: 32 teams, 149 W = 149 L, 150 games, ties NYG 5-3-1 and WAS 3-5-1.</td>
+<td>none</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-02</td>
+<td>Week-11 schedule snapshot</td>
+<td>Week-11 fixtures and byes</td>
+<td>Confirmed: 13 fixtures + 6 byes (ATL, CLE, GB, LAR, NE, SEA); TNF IND@HOU, MNF CIN@WAS, MIN@SF in Mexico City.</td>
+<td>VF-08 (12 of 13 venues from schedule links, not game centres)</td>
+<td><a href="https://www.nfl.com/schedules/2026/by-week/week-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-03</td>
+<td>Injury report snapshots (2026-11-15..18)</td>
+<td>Week-10/11 injury designations</td>
+<td>Partially re-verified: 10 clubs transcribed in full (111 rows). Designations are a timestamped series (Lions K. Joseph/C. Mays/D.J. Reed now practicing).</td>
+<td>VF-02 (22 clubs not recounted), VF-03 (no clock time)</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-04</td>
+<td>Reserve-list capture (nfl-availability-desk)</td>
+<td>Reserve/Injured moves tracked so &#x27;not listed&#x27; never means &#x27;available&#x27;</td>
+<td>Confirmed: 25 November Reserve/Injured moves captured from the official reserve-list page.</td>
+<td>none</td>
+<td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-05</td>
+<td>Trade / roster-turnover capture</td>
+<td>Roster turnover as a first-class data event</td>
+<td>Confirmed: 12 November trades captured from the official trades page.</td>
+<td>none</td>
+<td><a href="https://www.nfl.com/transactions/league/trades/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-06</td>
+<td>Venue transcription (schedule page)</td>
+<td>Venue of every fixture transcribed from the official game centre</td>
+<td>TNF venue verified from game centre (Reliant Stadium). Schedule page hotel link disagrees (NRG Stadium).</td>
+<td>VF-01 (venue discrepancy), VF-08 (12 venues not yet from game centre)</td>
+<td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-07</td>
+<td>Depth-chart register (nfl-depth-sweep)</td>
+<td>Official depth-chart register, date + source per row, 32/32 verified</td>
+<td>Not re-read live this session; peer verified 32/32. Houston depth is image-only.</td>
+<td>VF-05 (HOU image-only)</td>
+<td><a href="https://www.nfl.com/teams/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-08</td>
+<td>Price-snapshot store / results feed (nfl-book)</td>
+<td>Opening/closing numbers per market; verified results feed</td>
+<td>Cannot be confirmed: no official NFL source publishes betting lines or closing prices. Market/price cells blank by policy.</td>
+<td>VF-04 (no official price source), inherited partial Week-10 results feed</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-09</td>
+<td>Snap-count / actual-starter join</td>
+<td>Snap counts as starter proxy; Game Books for actual starters</td>
+<td>Cannot be confirmed: no official snap-count or Game-Book-join feed exists in the verified corpus.</td>
+<td>VF-10 (blocks deficiency + availability features)</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-10</td>
+<td>Strategy / leaderboard claims across namespaces</td>
+<td>Strategies with signal/staking split, Brier skill, removal-of-luck</td>
+<td>Not re-verified line by line this round. On the current verified evidence no strategy qualifies for rewards; the model loses to the vig-free market on proper score.</td>
+<td>honest-result caveat; not overstated</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>RR-11</td>
+<td>This workspace (nfl-own4)</td>
+<td>Canonical decision surface: 70-requirement readiness, Week-11 origination, signal/staking leaderboard, correlations with n.</td>
+<td>Fresh official reads this session (standings 32/32, schedule 13+6, injuries 253, reserve 25, trades 12, TNF venue, depth 404). All computed numbers re-derived by engine/model.py and checked by engine/verify.py.</td>
+<td>OF-01/OF-02/OF-03 (see Flagged page)</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>

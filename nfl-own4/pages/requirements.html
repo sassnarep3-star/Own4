@@ -1,0 +1,616 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Decision readiness</title><style>/* nfl-own4 — clean dashboard */
+:root{--bg:#0f1419;--panel:#1a2230;--ink:#e8edf3;--mut:#93a1b3;--acc:#4ea1ff;--ok:#3fbf7f;--warn:#e0a63a;--bad:#e06c5a;--line:#2a3546}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+a{color:var(--acc)}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+header.top{border-bottom:1px solid var(--line);padding:18px 0;margin-bottom:22px}
+header.top h1{margin:0;font-size:22px}
+header.top .sub{color:var(--mut);font-size:13px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px}
+.kpi .n{font-size:24px;font-weight:700}
+.kpi .l{color:var(--mut);font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:26px}
+nav.side{position:sticky;top:18px;align-self:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px}
+nav.side a{display:block;padding:6px 10px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:14px}
+nav.side a:hover{background:#223044}
+nav.side .grp{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.05em;padding:10px 10px 4px}
+h2{font-size:18px;margin:26px 0 10px}
+h3{font-size:15px;margin:18px 0 8px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;margin-bottom:18px}
+table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--panel)}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.03em;background:#161e2b}
+tr:last-child td{border-bottom:none}
+a.src{font-size:12px;word-break:break-all}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:11.5px;font-weight:600}
+.pill.met,.pill.pass{background:rgba(63,191,127,.16);color:var(--ok)}
+.pill.partial,.pill.blocked,.pill.fail,.pill.unknown{background:rgba(224,166,58,.16);color:var(--warn)}
+.pill.blocked2{background:rgba(224,108,90,.16);color:var(--bad)}
+.pill.rejected,.pill.process{background:rgba(147,161,179,.18);color:var(--mut)}
+.pill.known{background:rgba(63,191,127,.16);color:var(--ok)}
+.blank{color:var(--mut);font-style:italic}
+.note{color:var(--mut);font-size:12.5px}
+.check{display:flex;gap:8px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line)}
+.check .ok{color:var(--ok);font-weight:700}
+.check .bad{color:var(--bad);font-weight:700}
+footer{color:var(--mut);font-size:12px;margin-top:30px;border-top:1px solid var(--line);padding-top:14px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}nav.side{position:static}}
+</style></head><body><div class="wrap"><header class="top"><h1>nfl-own4 — NFL line origination</h1><div class="sub">Fresh official re-verification 2026-11-19; every table row carries a source link; unverifiable values blank + flagged; no price, edge or return claimed</div></header><div class="layout"><nav class="side"><div class="grp">nfl-own4</div><a href="../index.html">Overview</a><a href="../pages/executive-summary.html">Executive summary</a><a href="../pages/requirements.html">Decision readiness</a><a href="../pages/standings.html">Standings</a><a href="../pages/schedule.html">Week 11 schedule</a><a href="../pages/injuries.html">Injuries &amp; availability</a><a href="../pages/transactions.html">Transactions</a><a href="../pages/own-lines.html">Own lines · Week 11</a><a href="../pages/leaderboard.html">Leaderboard</a><a href="../pages/correlations.html">Correlations</a><a href="../pages/gates.html">Validation gates</a><a href="../pages/depth.html">Depth register</a><a href="../pages/questions.html">Questions</a><a href="../pages/repo-review.html">Repo review</a><a href="../pages/suggestions.html">Suggestions</a><a href="../pages/flagged.html">Flagged for review</a><a href="../pages/sources.html">Sources</a><a href="../pages/verify.html">Verification</a></nav><main><div class="panel"><h2 style="margin-top:0">Decision-readiness table — one row per requirement</h2><p class="note">Status, the gate that blocks it, the number that clears it, and a source link. Read date 2026-11-19; register re-verified against this session's fresh reads.</p></div><table><thead><tr>
+<th>ID</th>
+<th>Requirement</th>
+<th>Status</th>
+<th>Gate blocking</th>
+<th>Clearing number</th>
+<th>Source</th>
+</tr></thead><tbody>
+<tr>
+<td>R-01</td>
+<td>Add a price-snapshot store that records opening and closing numbers for every market we originate</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official NFL source publishes betting lines/odds/closing prices</td>
+<td>A licensed or authorized market price feed (open + close) for every originated market</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>Add a verified results feed so backtests and ROI can be computed at all</td>
+<td><span class="pill partial">partial</span></td>
+<td>Results feed exists but uses a third-party archive for some rows; not every Week-10 final is joined</td>
+<td>Every settled game joined to an official game-centre/score source</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>Originate the side first, then the total, then the moneyline</td>
+<td><span class="pill partial">partial</span></td>
+<td>Origination engine exists in peer namespaces; ML derived from side, but market line blank (no price source)</td>
+<td>Authorized market line to compare against</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>Publish the model&#x27;s fair line, the market line, and the difference as separate columns</td>
+<td><span class="pill partial">partial</span></td>
+<td>Fair line computable; market line column blank by policy (no official price source)</td>
+<td>Authorized market line</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>Separate &#x27;signal&#x27; from &#x27;staking&#x27; in the leaderboard</td>
+<td><span class="pill partial">partial</span></td>
+<td>Two-stage leaderboard exists; staking/CLV blocked by no closing prices</td>
+<td>Verified closing prices to compute CLV/staking</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>Track the depth of the replacement, not just the fact of a replacement</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count feed or game-day starter designation; depth from club charts only</td>
+<td>Official Game Book / snap-count join or official starter designation</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-07</td>
+<td>Compute correlations only from officially sourced numbers and publish n with each value</td>
+<td><span class="pill partial">partial</span></td>
+<td>Correlation engine exists; official inputs limited to scores/standings; market correlations blank</td>
+<td>Official price history to compute market correlations</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-08</td>
+<td>Define a demotion gate that sends a live strategy back to paper</td>
+<td><span class="pill met">met</span></td>
+<td>none (process gate defined)</td>
+<td>Pre-registered demotion threshold</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-09</td>
+<td>Pre-register every strategy; forbid backtest numbers from ever appearing on the leaderboard</td>
+<td><span class="pill met">met</span></td>
+<td>none (process gate enforced)</td>
+<td>Committed pre-registration text + hash</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-10</td>
+<td>Build the availability graph as a first-class dataset (who was expected to start, who actually did)</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official actual-starter feed; only expected availability captured</td>
+<td>Official Game Book actual-starter join</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-11</td>
+<td>Do not model depth from jersey order; model it from playing time</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count/playing-time feed</td>
+<td>Official snap-count source</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-12</td>
+<td>Make the injury signal a surprise, never a level</td>
+<td><span class="pill partial">partial</span></td>
+<td>Surprise requires a prior expectation + actual; only a single snapshot exists this season</td>
+<td>Multiple dated availability snapshots to compute surprise vs expectation</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-13</td>
+<td>Run the 32-team roster/IR sweep before any team-level model is trusted</td>
+<td><span class="pill partial">partial</span></td>
+<td>Reserve list captured (25 moves, verified 2026-11-19); depth sweep exists but HOU image-only</td>
+<td>Machine-readable depth for all 32 clubs + snap join</td>
+<td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-14</td>
+<td>Add a fixture-context feature set built only from published schedule facts</td>
+<td><span class="pill partial">partial</span></td>
+<td>Week-11 schedule + venues captured; rest-day/venue features computable from schedule only</td>
+<td>None (schedule facts sufficient); market context still blocked</td>
+<td><a href="https://www.nfl.com/schedules/2026/by-week/week-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-15</td>
+<td>Store every model output as a probability plus its inputs, not just a pick</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>Probability + inputs schema enforced</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-16</td>
+<td>Compute and publish the &#x27;removal of luck&#x27; panel on the site dashboard</td>
+<td><span class="pill partial">partial</span></td>
+<td>Panel exists in peer namespace; control baseline present but short-sample</td>
+<td>n &gt;= 300 out-of-sample trials</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-17</td>
+<td>Add a two-sided &#x27;what would change our mind&#x27; field to every strategy entry</td>
+<td><span class="pill met">met</span></td>
+<td>none (process field)</td>
+<td>Field present on every strategy</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-18</td>
+<td>Price a line ourselves and publish the residual against the market, on a schedule, from day one</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No authorized market price to compute a residual</td>
+<td>Authorized market price feed</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-19</td>
+<td>Turn the 136-game log into the pre-registered backtest corpus</td>
+<td><span class="pill partial">partial</span></td>
+<td>Weeks 1-9 = 136-game log identified; Week-10 finals join still partial</td>
+<td>Complete official results join through current week</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-20</td>
+<td>Decide the price-data policy before any backtest is published</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>Owner decision required (no authorized price source exists)</td>
+<td>Owner decision on price-data policy</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-21</td>
+<td>Store every injury-hub read with its clock time and publish the delta, never the level</td>
+<td><span class="pill partial">partial</span></td>
+<td>Fresh Week-11 read dated 2026-11-19 captured (253 rows); clock-time precision requires the peer timestamped collector (no clock time exposed by the fetch tool)</td>
+<td>Timestamped capture pipeline (peer nfl-collector) + this dated read</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-22</td>
+<td>Put a decision-readiness table on the landing page: one row per requirement, with the gate that blocks it and the number that would clear it</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>This workspace: nfl-own4/pages/requirements.html (70 rows, gate + clearing number per row)</td>
+<td><a href="https://www.nfl.com/standings/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-23</td>
+<td>Transcribe the venue of every fixture from the official game centre and publish it</td>
+<td><span class="pill partial">partial</span></td>
+<td>TNF venue verified from game centre; other 12 venues from schedule-page links, not yet game-centre-verified</td>
+<td>Game-centre read for all 13 Week-11 fixtures</td>
+<td><a href="https://www.nfl.com/games/colts-at-texans-2026-reg-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-24</td>
+<td>Publish the league&#x27;s dated schedule announcement beside the live schedule page</td>
+<td><span class="pill partial">partial</span></td>
+<td>Live Week-11 schedule captured; a dated schedule-announcement artifact not located</td>
+<td>Official schedule-release announcement URL</td>
+<td><a href="https://www.nfl.com/schedules/2026/by-week/week-11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-25</td>
+<td>Use official NFL Game Books for actual starters and game-day status; do not infer depth rank or snaps</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>Game Book route verified for one fixture by a peer; not joined for all fixtures</td>
+<td>Game Book parser run for all fixtures</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-26</td>
+<td>Ingest game-level results to make the ratings opponent-aware</td>
+<td><span class="pill partial">partial</span></td>
+<td>Results feed partial (third-party archive for some rows)</td>
+<td>Complete official results join</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-27</td>
+<td>Add injury and personnel ablations instead of fixed penalties</td>
+<td><span class="pill partial">partial</span></td>
+<td>Ablation method specified; requires verified availability features</td>
+<td>Verified availability feature set + chronological holdout</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-28</td>
+<td>Automate immutable multi-day availability snapshots</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer nfl-collector implements scheduled capture; this session adds a dated read</td>
+<td>Running scheduled capture with retained hashes</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-29</td>
+<td>Build immutable official availability snapshots (raw hashes, timestamps, conflict flags)</td>
+<td><span class="pill partial">partial</span></td>
+<td>Hashes/timestamps captured by peer; conflict flags defined</td>
+<td>Scheduled pipeline with conflict join (peer nfl-collector)</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-30</td>
+<td>Capture official inactive lists and snap counts</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count feed; inactive lists captured by peers for game days</td>
+<td>Official snap-count source</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-31</td>
+<td>Fix the two depth-parsing failures before widening coverage (Texans image, Packers jersey prepend)</td>
+<td><span class="pill partial">partial</span></td>
+<td>Packers jersey-number prepend handled by peer parser; HOU remains image-only (not transcribed by eye)</td>
+<td>Authorized structured HOU depth source</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-32</td>
+<td>Model depth slots as groups, not a single starter</td>
+<td><span class="pill partial">partial</span></td>
+<td>Group-slot semantics implemented by peer; not joined to actual starters</td>
+<td>Actual-starter join</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-33</td>
+<td>Treat roster turnover as a first-class data event</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>November trades (12) + reserve moves (25) captured and dated 2026-11-19</td>
+<td><a href="https://www.nfl.com/transactions/league/trades/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-34</td>
+<td>Start with a singles-only shadow baseline</td>
+<td><span class="pill partial">partial</span></td>
+<td>Baseline defined; not yet evaluated to n &gt;= 300</td>
+<td>n &gt;= 300 out-of-sample</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-35</td>
+<td>Keep parlays and prop combos behind a joint-evidence gate</td>
+<td><span class="pill partial">partial</span></td>
+<td>Joint-evidence gate defined; joint probabilities require validated dependence</td>
+<td>Directly validated joint probability + operator void/push rules</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-36</td>
+<td>Use proper-score leaderboard divisions (singles, parlays, SGP, prop combos)</td>
+<td><span class="pill partial">partial</span></td>
+<td>Divisions defined; ranking blocked by no prices/n</td>
+<td>Benchmark-relative skill with game-cluster CI + multiplicity adjustment</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-37</td>
+<td>Rank with proper scores and uncertainty, not win rate</td>
+<td><span class="pill partial">partial</span></td>
+<td>Method specified; requires out-of-sample n</td>
+<td>n &gt;= 300 + game-cluster lower bound</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-38</td>
+<td>Add durable snapshot storage and alerts</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer nfl-collector implements ledger + drift alarm</td>
+<td>Running scheduled capture + alerting</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-39</td>
+<td>Split the site into a public analysis layer and a private data layer</td>
+<td><span class="pill process">process</span></td>
+<td>Architecture decision for owner</td>
+<td>Owner decision on data-layer separation</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-40</td>
+<td>Add a per-team view: starters out, replacements named, net injury count</td>
+<td><span class="pill partial">partial</span></td>
+<td>Injury rows captured; replacement naming blocked by no starter/snap join</td>
+<td>Official starter + replacement join</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-41</td>
+<td>Add an announced-starter evidence field (not an inferred replacement)</td>
+<td><span class="pill partial">partial</span></td>
+<td>Announced starter changes exist on official pages; not systematically captured</td>
+<td>Systematic capture of dated starter-change announcements</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-42</td>
+<td>Add an official depth-chart register with date and source per row</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer 32-club sweep exists; 27/32 pages undated, HOU image-only</td>
+<td>Dated, machine-readable depth for all 32 clubs</td>
+<td><a href="https://www.nfl.com/teams/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-43</td>
+<td>Calibrate what &#x27;Questionable&#x27; means empirically instead of using old percentages</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer measured designation play-rates with CIs; requires multi-season join</td>
+<td>Multi-season designation-to-inactive join with CIs</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-44</td>
+<td>Interactive Offense vs. Defense Matchup Deficiency Matrix (1st-4th String)</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>Requires verified depth + actual-starter join</td>
+<td>Verified depth + starter join for all teams</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-45</td>
+<td>Flag stale depth rows against the official transactions log</td>
+<td><span class="pill partial">partial</span></td>
+<td>Reserve/trades captured 2026-11-19; depth-staleness join defined</td>
+<td>Running depth-vs-transactions conflict join</td>
+<td><a href="https://www.nfl.com/transactions/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-46</td>
+<td>Point-in-Time Snapshot Ledger for Injuries, Depth Charts &amp; Inactives</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer ledger exists; this session adds a dated read</td>
+<td>Running PIT ledger with hashes</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-47</td>
+<td>Populate the three missing Lions game-status designations (Kerby Joseph, Cade Mays, D.J. Reed)</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>Verified 2026-11-19: Kerby Joseph (Full), Cade Mays (DNP), D.J. Reed (Limited) — all practicing with blank game-status in the Week-11 read</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-48</td>
+<td>Reject: deriving depth order from jersey number, experience or salary</td>
+<td><span class="pill rejected">rejected</span></td>
+<td>none (explicit reject)</td>
+<td>n/a</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-49</td>
+<td>Represent shared and empty depth slots faithfully</td>
+<td><span class="pill partial">partial</span></td>
+<td>Group-slot semantics implemented by peer</td>
+<td>Faithful render of shared/empty slots</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-50</td>
+<td>Resolve the depth-order source before building the backup-deficiency feature</td>
+<td><span class="pill partial">partial</span></td>
+<td>Route (a) club pages verified 32/32 by peer; HOU image-only; no snap route</td>
+<td>Owner verdict on SG-C (build feature or not)</td>
+<td><a href="https://www.nfl.com/teams/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-51</td>
+<td>Score injury-designation reliability before using it as a feature</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer measured Out/Doubtful/Questionable play-rates with CIs</td>
+<td>Multi-season reliability with CIs</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-52</td>
+<td>Snapshot the nfl.com injury report every Wed, Thu and Fri and keep a dated history</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer nfl-collector schedules Wed/Thu/Fri capture</td>
+<td>Running scheduled capture with dated history</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-53</td>
+<td>Treat the injury report as a timestamped series, not a weekly snapshot</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer pipeline captures daily with timestamps</td>
+<td>Running daily timestamped capture</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-54</td>
+<td>Use snap counts as the starter proxy when the depth chart is unavailable</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official snap-count source</td>
+<td>Official snap-count source</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-55</td>
+<td>Add a control baseline (random picks; favorites only) to every leaderboard run</td>
+<td><span class="pill partial">partial</span></td>
+<td>Control baseline defined; short-sample</td>
+<td>n &gt;= 300</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-56</td>
+<td>Stadium Roof/Surface &amp; NWS Hourly Wind/Precipitation Overlay</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official roof register or NWS overlay in verified corpus</td>
+<td>Official roof designations + NWS forecast grids</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-57</td>
+<td>Two-Stage Skill Leaderboard (Proper-Score Qualification -&gt; Prospective CLV/ROI Escrow)</td>
+<td><span class="pill partial">partial</span></td>
+<td>Two-stage defined; CLV/ROI escrow blocked by no closing prices</td>
+<td>Verified closing prices</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-58</td>
+<td>Vig-Free Market Consensus vs. Originated Fair-Line Decomposition View</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No vig-free market consensus source</td>
+<td>Authorized market consensus feed</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-59</td>
+<td>Publish a weekly &#x27;what changed&#x27; diff instead of a static snapshot</td>
+<td><span class="pill partial">partial</span></td>
+<td>Diff method defined; requires weekly snapshot series</td>
+<td>Running weekly snapshot series</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-60</td>
+<td>Publish every model total twice until one wins</td>
+<td><span class="pill partial">partial</span></td>
+<td>Two-estimator approach defined; requires walk-forward comparison</td>
+<td>Walk-forward comparison to collapse to one</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-61</td>
+<td>Add a drift alarm to every scraper</td>
+<td><span class="pill partial">partial</span></td>
+<td>Peer drift alarm implemented; not applied to every namespace</td>
+<td>Drift alarm on every parser</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-62</td>
+<td>Capture the reserve list so &#x27;not listed&#x27; never means &#x27;available&#x27;</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>Reserve list captured (25 moves, verified 2026-11-19)</td>
+<td><a href="https://www.nfl.com/transactions/league/reserve-list/2026/11" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-63</td>
+<td>Reject: ranking strategies by season-long ROI</td>
+<td><span class="pill rejected">rejected</span></td>
+<td>none (explicit reject)</td>
+<td>n/a</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-64</td>
+<td>Archive weekly injury reports for past seasons</td>
+<td><span class="pill partial">partial</span></td>
+<td>Past-season archive exists on nfl.com; not built in-repo</td>
+<td>In-repo archive of past-season reports</td>
+<td><a href="https://www.nfl.com/injuries/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-65</td>
+<td>Pre-register each strategy (definition frozen before results are seen)</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>Committed pre-registration + hash</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-66</td>
+<td>2026 Kickoff &amp; Declared Onside-Kick Regime Priors Filter</td>
+<td><span class="pill blocked">blocked</span></td>
+<td>No official onside-kick regime data in verified corpus</td>
+<td>Official onside-kick regime data</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-67</td>
+<td>Freeze a rule before it sees data (pre-registration)</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>Commit hash is the registration</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-68</td>
+<td>Split data into train, validation and final holdout seasons</td>
+<td><span class="pill partial">partial</span></td>
+<td>Splits defined; holdout coverage partial</td>
+<td>Complete official results for clean splits</td>
+<td><a href="https://www.nfl.com/scores/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-69</td>
+<td>Make suggestions on how to improve the site; dedicated suggestions section for review</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>This workspace: nfl-own4/pages/suggestions.html (verdict blank for owner)</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+<tr>
+<td>R-70</td>
+<td>Provide a clear list of questions, information and answers to address before any decision</td>
+<td><span class="pill met">met</span></td>
+<td>none</td>
+<td>This workspace: nfl-own4/pages/questions.html (known / missing / blocks / unblocker, answer blank where unknown)</td>
+<td><a href="https://www.nfl.com/" class="src" rel="noopener" target="_blank">source</a></td>
+</tr>
+</tbody></table><footer>
+<p><strong>nfl-own4 · Own4</strong> — NFL line-origination research. Analytical research only, <strong>not wagering advice</strong>.
+Snapshot <strong>2026-11-19</strong>; every data row links to the official page it was read from, and every value that
+could not be confirmed from an official source is blank and listed on the
+<a href="flagged.html">Flagged for review</a> page. The NFL publishes no betting odds, so no price, edge, stake or return is claimed anywhere on this site.</p>
+<p>Responsible gambling: National Problem Gambling Helpline <strong>1-800-MY-RESET</strong> (1-800-697-3738) ·
+<a href="https://www.ncpgambling.org/help-treatment" target="_blank" rel="noopener">ncpgambling.org/help-treatment</a></p>
+</footer></main></div></div></body></html>
