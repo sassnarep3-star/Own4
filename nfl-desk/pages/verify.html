@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification &middot; NFL Desk &middot; Own4</title>
+<meta name="description" content="NFL Desk: one front door over the NFL research workspaces — requirement readiness, availability evidence, corpus arithmetic, flagged irregularities and the official sources behind each row.">
+<link rel="stylesheet" href="../assets/desk.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html">NFL DESK<span>Own4 &middot; evidence before edge</span></a>
+    <nav class="main" aria-label="Site sections"><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Requirements &amp; gates</a><a class="nav" href="../pages/questions.html">Questions &rarr; answers</a><a class="nav" href="../pages/suggestions.html">Suggestions</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><a class="nav" href="../pages/corpus.html">Corpus &amp; standings</a><a class="nav" href="../pages/census.html">Workspace census</a><a class="nav" href="../pages/flagged.html">&#9873; Flagged for review</a><a class="nav" href="../pages/sources.html">Sources read</a><a class="nav on" href="../pages/verify.html">Verification</a></nav>
+  </div>
+</header>
+<main id="main" class="wrap">
+
+<p class="eyebrow">Verification &middot; %s</p>
+<h1>What this desk checks before it publishes, and what it does not</h1>
+<p class="lede">A green check here means the pages are internally consistent and every row carries a
+source. It does not mean the numbers are true, and it does not mean any other workspace agrees.</p>
+
+<h2>Checks that run</h2>
+<div class="tw"><table><caption>Gates executed by nfl-desk/engine/verify.py</caption><thead><tr><th scope="col">Gate</th><th scope="col">What it tests</th><th scope="col">How to run it</th><th scope="col">Implementation</th></tr></thead><tbody><tr><td>V1</td><td>Every table body row carries an official or repository source link</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V2</td><td>Every local href and anchor resolves to a file and id that exist</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V3</td><td>No link attribute points at a loopback or file-scheme address</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V4</td><td>No unrendered template marker, no sentinel value in a cell</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V5</td><td>Row counts on the pages match the row counts in the data files</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V6</td><td>A rebuild is byte-identical (deterministic output)</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V7</td><td>Every JSON data file parses and carries a source or a stated method</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V8</td><td>Every official read records a status and a limit</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V9</td><td>Every flag links at least one source</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr><tr><td>V10</td><td>The injury and standings captures still match their recorded sha256</td><td><code>python3 nfl-desk/engine/verify.py</code></td><td class="small"><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a></td></tr></tbody></table></div><p class="note">Every gate is implemented in <a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/engine/verify.py" target="_blank" rel="noopener">verify.py</a> and runs in <a href="https://github.com/sassnarep3-star/Own4/blob/main/.github/workflows/nfl-desk.yml" target="_blank" rel="noopener">the workflow</a> on each push.</p>
+<h2>Numbers this desk publishes, and where each is computed</h2>
+<div class="tw"><table><caption>Provenance of every headline figure</caption><thead><tr><th scope="col">Figure</th><th scope="col">Computed by</th><th scope="col">Input</th></tr></thead><tbody><tr><td>73 requirement rows; agreement and disagreement counts</td><td><code>engine/register.py</code></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/requirements.json" target="_blank" rel="noopener">requirements.json</a></td></tr><tr><td>62 pairwise register disagreements; 44 workspaces; duplication counts</td><td><code>engine/census.py</code></td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/census.json" target="_blank" rel="noopener">census.json</a></td></tr><tr><td>32 standings rows; 300 team-games; 150 implied games</td><td><code>engine/parse_standings.py</code></td><td><a href="https://www.nfl.com/standings/" target="_blank" rel="noopener">nfl.com/standings</a></td></tr><tr><td>242 injury rows; 16 designations; 226 blanks</td><td><code>engine/parse_injuries.py</code></td><td><a href="https://www.nfl.com/injuries/" target="_blank" rel="noopener">nfl.com/injuries</a></td></tr><tr><td>18 questions, 10 suggestions, 15 flags</td><td>this workspace's data files</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/questions.json" target="_blank" rel="noopener">questions.json</a></td></tr></tbody></table></div><p class="note">No number on the site is typed into the HTML; the builder reads the JSON.</p>
+<h2>What is not checked</h2>
+<p>This verifier does not fetch the official pages at build time, so it cannot detect that a source has
+changed since the read date. It does not re-verify peer workspaces' claims. It does not check that a
+figure is economically meaningful — only that it is sourced and reproducible.</p>
+
+</main>
+<footer><div class="wrap">
+  <p>Research only, not wagering advice. A value that could not be confirmed from an official source is blank and flagged.</p>
+  <p>Data on this page is dated <strong>2026-11-19</strong>. Official pages were read on that date through the session's page-read tool; raw captures are stored with hashes. <a href="https://www.ncpgambling.org/help-treatment/">National Problem Gambling Helpline</a> &middot; <a href="../index.html">Repository dashboard</a></p>
+</div></footer>
+</body>
+</html>

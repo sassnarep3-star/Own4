@@ -1,0 +1,277 @@
+{
+ "dataset": "nfl_desk_questions",
+ "title": "Questions that must be answered before a decision — what we have, what we do not have, and how to find it",
+ "built_utc": "2026-11-19",
+ "session": "arena/1e2776fd-own4",
+ "how_to_read": [
+  "'have' is evidence that exists in this repository or was read officially in this session, with a link.",
+  "'missing' is the information that does not exist. It is stated as missing, never filled with an estimate.",
+  "'how_to_discover' is the concrete route to obtain the missing information, and who can obtain it.",
+  "'clears_when' is the number that ends the debate. Where no number can be computed yet, it is blank."
+ ],
+ "status_values": {
+  "answerable-now": "the evidence in this repo plus an official read settles it",
+  "blocked-on-missing": "cannot be answered until the named information exists",
+  "owner-decision": "the facts are available; the choice is the owner's and has not been made"
+ },
+ "rows": [
+  {
+   "id": "Q01",
+   "question": "How many 2026 NFL games are actually settled, and therefore how big is the backtest corpus?",
+   "why_it_blocks": "Every sample-size gate, every p-value and every '136-game log' reference depends on this one number.",
+   "have": "Two feeds say 137 finals (nfl-core results_feed_2026.csv FINAL rows; nfl-markets results_feed.csv 2026 rows). A transcription says 150 (nfl-marketboard results_2026_official.csv). The official standings read on 2026-11-19 gives 32 clubs, 300 team-games played, i.e. at most 150 completed games.",
+   "missing": "Which of the three feeds is reconciled line-by-line to the official game pages. nfl-core carries 137 finals and 272 total rows; the brief's '136' matches neither.",
+   "how_to_discover": "Reconcile nfl-core's 272 rows against the official week pages week by week (13 of 18 weeks have 14-16 scheduled games), and publish the count with the reconciled game list. The 150-row transcription should be compared against the same list.",
+   "clears_when": "One count, one file, every row linked to https://www.nfl.com/schedules/2026/by-week/week-N.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/results_feed_2026.csv",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/results_feed.csv",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-marketboard/data/raw/results_2026_official.csv",
+    "https://www.nfl.com/standings/"
+   ]
+  },
+  {
+   "id": "Q02",
+   "question": "Which of the three requirement registers is authoritative when they disagree on 62 statuses?",
+   "why_it_blocks": "If 'implemented' in one file and 'partial' in another both count, no readiness claim means anything.",
+   "have": "All three files exist and are counted: nfl-readiness-register (73 rows), nfl-req-review round 2 (73 rows), nfl-consolidated (73 rows). 21 rows agree, 29 disagree, 23 could not be matched by exact wording.",
+   "missing": "A rule that says which file wins, or a single file that all three defer to.",
+   "how_to_discover": "Adopt the round-2 rule already written in nfl-req-review ('met requires an existing artifact path and an official source'), because it is the only one of the three that states a testable condition, and retire the other two status columns to history.",
+   "clears_when": "One status column, one rule, and a verifier that fails when an 'implemented' row's evidence path does not resolve.",
+   "answer_status": "owner-decision",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/requirements.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-req-review/data/requirements_2026_11_18.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-consolidated/data/requirements.json",
+    "nfl-desk/pages/requirements.html"
+   ]
+  },
+  {
+   "id": "Q03",
+   "question": "Can a market line be published at all, or must every price stay blank?",
+   "why_it_blocks": "Without a market line there is no closing line value, no residual, no ROI — only a model talking to itself.",
+   "have": "No official NFL source publishes odds. The repository's own registers record this (FB-01 / DR-G1) and every price field in nfl-book is null by policy.",
+   "missing": "A licensed, timestamped pre-kickoff price series with terms that permit storage and publication of derived values.",
+   "how_to_discover": "Two routes, in order: (a) an operator or exchange API whose terms permit archival use; (b) a licensed historical odds vendor. Until one is signed, publish only model fair lines and label every market column THIRD-PARTY or blank.",
+   "clears_when": "One signed source, with its terms quoted in the repo, and open+close captured for every originated market.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/sources.json",
+    "https://www.nfl.com/terms"
+   ]
+  },
+  {
+   "id": "Q04",
+   "question": "How often is the official injury report actually captured, and is that often enough to replay a week?",
+   "why_it_blocks": "A designation that is only captured once cannot show a Questionable→Out change, so no injury feature can be backtested without lookahead.",
+   "have": "Two captures in the repository: a rendered summary for Week 10 (2026-11-15T23:35Z) and a raw HTML capture for Week 11 (2026-11-18T23:49:17Z), both hashed in the readiness-register manifest. The brief asks for daily Wednesday-to-kickoff; the gap is visible.",
+   "missing": "Captures for 2026-11-19 through kickoff, and any capture at all for earlier weeks or seasons.",
+   "how_to_discover": "The scheduled capture workflow exists (nfl-readiness-register/capture/snapshot_official_pages.py). Run it on the Wed/Thu/Fri/satellite cadence and keep every file plus its hash; the manifest is already append-only.",
+   "clears_when": "At least three hashed captures per week for every week in the evaluation window, with zero unresolved schema drift.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/snapshots/manifest.jsonl",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/capture/snapshot_official_pages.py",
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "Q05",
+   "question": "What share of injury-report rows carry a game-status designation, and does the brief's '6 of 254' hold?",
+   "why_it_blocks": "If almost no row carries a designation, then designation-based features are being trained on a handful of rows.",
+   "have": "Measured from the stored, hash-verified 2026-11-18 capture: 23 club tables, 242 player rows, 16 with a Game Status (9 Out, 7 Questionable), 226 blank. That is 6.6% designated — the same order as the brief's claim, but on a different copy. Coverage is partial: the capture holds 23 of the 32 clubs (the report's first two windows), so the remaining nine are absent rather than healthy.",
+   "missing": "A recount of the copy the brief used (254 rows, 6 designations) and a series across weeks so the share is not one snapshot.",
+   "how_to_discover": "Re-run nfl-desk/engine/parse_injuries.py over every stored capture, and start capturing earlier weeks. The brief's figure can then be reconciled against a dated file instead of a memory.",
+   "clears_when": "A per-week table of rows/designated/blank with the capture hash beside each count.",
+   "answer_status": "answerable-now",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/injuries_2026-11-18_parsed.json",
+    "https://www.nfl.com/injuries/"
+   ]
+  },
+  {
+   "id": "Q06",
+   "question": "Does 'Questionable' mean anything measurable?",
+   "why_it_blocks": "Every injury adjustment in a model rests on what the designation predicts. If it predicts nothing, the feature is noise.",
+   "have": "No. There is no inactive-list artifact anywhere in the repository, and no join from designation to whether the player played.",
+   "missing": "Official inactive lists (published about 90 minutes before kickoff) joined to designations, for several seasons.",
+   "how_to_discover": "Capture the official inactive list for every game from the game centre page, then join on player. The join is the whole feature; without it the label cannot be used.",
+   "clears_when": "At least 1,000 designation→inactive observations over three or more seasons, with a play-rate confidence interval per designation.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://www.nfl.com/injuries/",
+    "nfl-desk/pages/questions.html"
+   ]
+  },
+  {
+   "id": "Q07",
+   "question": "Is depth order verified for all 32 clubs?",
+   "why_it_blocks": "The backup-deficiency feature, the matchup matrix and every depth-based strategy depend on knowing who is second and third string.",
+   "have": "A 32-club sweep exists: 31 clubs parsed from club pages, Houston published as an image and left blank rather than transcribed. One route (league depth paths) is closed.",
+   "missing": "A structured, dated source for Houston, and an as-of date for the 27 club pages that do not print one.",
+   "how_to_discover": "(a) ask the club for a text version, or (b) derive order from official snap counts if a source exists, or (c) use Game Books for actual starters. Do not build the feature until one route covers all 32.",
+   "clears_when": "32/32 clubs with a dated, text-extractable depth chart, or an official snap-count source that covers the same ground.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/route_c.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-depth-sweep/data/depth_register.json",
+    "nfl-desk/pages/flagged.html"
+   ]
+  },
+  {
+   "id": "Q08",
+   "question": "When a starter is out, did the backup actually replace him on the field?",
+   "why_it_blocks": "This is the difference between 'a replacement happened' and 'the replacement is a liability'. Only the second is a signal.",
+   "have": "Nothing official. No snap counts, no Game Book transcription, no confirmed starter list for any game.",
+   "missing": "Official snap counts or Game Book participation for the games in question.",
+   "how_to_discover": "NFL Game Books (official PDFs) print starters and participation. Capture them per game, then measure the replacement's share of snaps against the starter's season baseline.",
+   "clears_when": "Snap share for the replacement in every game where a starter was inactive, for a full season.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/availability_graph.json",
+    "nfl-desk/pages/flagged.html"
+   ]
+  },
+  {
+   "id": "Q09",
+   "question": "Are the club depth charts stale against the official transactions log?",
+   "why_it_blocks": "A depth chart that still lists a player who is on injured reserve will name the wrong backup.",
+   "have": "The brief reports Baltimore still publishing Lamar Jackson and Tyler Huntley at QB after both went on IR and a replacement was traded in. A transactions artifact exists (nfl-readiness-register/data/transactions_nov2026.json).",
+   "missing": "A per-row 'last verified against transactions on <date>' column on the depth register, and a re-read of the club pages this session (none was performed).",
+   "how_to_discover": "Join every depth row to the reserve list and the transactions page; flag any row whose player appears on either after the row's as-of date.",
+   "clears_when": "Zero depth rows naming a player who is on reserve/injured reserve as of the row's own date.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-readiness-register/data/transactions_nov2026.json",
+    "https://www.nfl.com/transactions/league/reserve-list/2026/11"
+   ]
+  },
+  {
+   "id": "Q10",
+   "question": "Is any strategy currently eligible for reward, and what would make one eligible?",
+   "why_it_blocks": "The whole point of the leaderboard is to pay skill, not luck. If nothing is eligible, that must be visible, not hidden.",
+   "have": "No. 15 strategy rows exist in nfl-lines/data/derived/leaderboard.json (copied with an added Wilson interval into nfl-arena/data/leaderboard_metrics.json); every one has eligible_for_reward false, and each carries its own luck verdict. The best sample is 303 bets with a Benjamini-Hochberg adjusted p of 0.44; the largest gate score is 5 of 8. The gates require a sample floor (n>=300 for a skill claim) and a multiplicity adjustment.",
+   "missing": "A prospective, pre-registered sample that survives the multiplicity gate.",
+   "how_to_discover": "Keep strategies in shadow, record every forecast before kickoff with its inputs, and let the sample accumulate. Do not re-tune a strategy mid-sample.",
+   "clears_when": "A pre-registered strategy reaching its own required n (1148–1290 bets at 80% power for the current effects) with a BH-adjusted p below the pre-set threshold and positive CLV.",
+   "answer_status": "answerable-now",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-arena/data/leaderboard_metrics.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-lines/data/derived/leaderboard.json"
+   ]
+  },
+  {
+   "id": "Q11",
+   "question": "Does the model beat a naive baseline?",
+   "why_it_blocks": "If it does not, no amount of strategy work rescues it and the honest move is to publish that.",
+   "have": "A published walk-forward result: winner accuracy 0.5714 on 35 graded games against a 0.60 home-team baseline (one-sided p 0.70); totals MAE 15.12 vs 15.86 (permutation p 0.026) but failing the 300-game floor and the Benjamini-Hochberg adjustment.",
+   "missing": "A sample large enough to distinguish a small edge from noise, and an opponent-aware rating (the brief's own requirement).",
+   "how_to_discover": "Ingest the settled-game corpus with opponent adjustment, then re-run the same walk-forward with the same gates; the gates are already written and committed.",
+   "clears_when": "n≥300 graded games with a benchmark-relative proper score whose cluster bootstrap lower bound is above zero after multiplicity control.",
+   "answer_status": "answerable-now",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/verification/out/analysis.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/verification/data/gates.json"
+   ]
+  },
+  {
+   "id": "Q12",
+   "question": "Are the published correlations officially sourced, and does each carry its n?",
+   "why_it_blocks": "A correlation from a third-party archive is not the same evidence as one from an official source, and a correlation without n cannot be weighted.",
+   "have": "nfl-markets publishes a third-party correlation group (covers/leg dependence) beside its official group; nfl-core has a correlations_n.csv; the NBA side reports n with every value. The brief asks for official sources only.",
+   "missing": "A rule that keeps third-party numbers off the same page as official ones, and n on every published value.",
+   "how_to_discover": "Split the page: official-source block and third-party block, each labelled, each with n and an interval. Compute from official results only where the official feed supports it.",
+   "clears_when": "Every published correlation row shows its n, its source type and its interval, and no third-party value appears unlabelled.",
+   "answer_status": "answerable-now",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/correlations.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-core/data/correlations_n.csv"
+   ]
+  },
+  {
+   "id": "Q13",
+   "question": "Do the price snapshots contain real market opens and closes?",
+   "why_it_blocks": "If every market value is null, the 'residual against the market' is a residual against a blank.",
+   "have": "nfl-book holds 39 open/close rows (13 Week-11 games × side/total/moneyline) with every market value null by policy; the close value that does exist is a model run, not a market close. nfl-markets holds 12,573 rows from a third-party archive.",
+   "missing": "An official or licensed market series. Nothing else closes this.",
+   "how_to_discover": "Same route as Q03. Until then the snapshot store demonstrates the schema, not the market.",
+   "clears_when": "Non-null market open and close for every originated market, with source and capture time per row.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-book/data/price_snapshots.json",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/price_snapshots.csv"
+   ]
+  },
+  {
+   "id": "Q14",
+   "question": "Is row-level NFL data published within the terms of use?",
+   "why_it_blocks": "Publishing row-level official data without checking terms is the one mistake that could take the site down.",
+   "have": "A public static site publishing derived tables, and a repo holding raw captures. The NFL terms page is linked from the root portal but was not read line-by-line in this session.",
+   "missing": "A read of https://www.nfl.com/terms against what the site actually publishes, and a decision on the public/private split the brief already asks for.",
+   "how_to_discover": "Read the terms; list every published field; classify each as fact-of-the-game, derived, or league-published text; hold raw row-level data private until the classification is signed off.",
+   "clears_when": "A signed data policy row per published field, and no raw capture served publicly before that.",
+   "answer_status": "owner-decision",
+   "sources": [
+    "https://www.nfl.com/terms",
+    "nfl-desk/pages/flagged.html"
+   ]
+  },
+  {
+   "id": "Q15",
+   "question": "Is the 2026 schedule announcement published beside the live schedule, as the brief requires?",
+   "why_it_blocks": "Totals and win-probability models need to know whether a fixture can still move, and the league publishes that in its own words.",
+   "have": "The Week 11 schedule read on 2026-11-19 prints the league's flexible-scheduling note for Weeks 16-18, the '2026 TBD Games' block, and a link to the flexible-scheduling procedures.",
+   "missing": "A dated copy of that announcement stored beside the schedule page, and the same for the season announcement.",
+   "how_to_discover": "Capture https://www.nfl.com/schedules/2026/by-week/week-11 and https://www.nfl.com/legal/flexible-scheduling-procedures with timestamps, and diff them weekly.",
+   "clears_when": "A stored, dated announcement beside every schedule page, with a diff column.",
+   "answer_status": "answerable-now",
+   "sources": [
+    "https://www.nfl.com/schedules/2026/by-week/week-11",
+    "https://www.nfl.com/legal/flexible-scheduling-procedures"
+   ]
+  },
+  {
+   "id": "Q16",
+   "question": "Where is the fixture venue recorded, and can roof/surface be published?",
+   "why_it_blocks": "Totals and passing props move with wind and roof; publishing a stadium guess is worse than publishing nothing.",
+   "have": "The game centre for Colts at Texans prints Location HOUSTON, TX and Stadium RELIANT STADIUM (read 2026-11-19). Roof, surface and weather appear only in a third-party archive.",
+   "missing": "An official roof/surface designation and an official forecast overlay.",
+   "how_to_discover": "Venue facts come from the game centre. Roof designations are a stadium property that the league publishes in its stadium guide; forecast comes from the National Weather Service API. Both need a capture script and a citation per row.",
+   "clears_when": "Venue, roof and surface for all 32 stadiums with an official link per row, and an hourly forecast for each outdoor fixture.",
+   "answer_status": "blocked-on-missing",
+   "sources": [
+    "https://www.nfl.com/games/colts-at-texans-2026-reg-11",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-markets/data/raw/games.csv"
+   ]
+  },
+  {
+   "id": "Q17",
+   "question": "How would we know the site had become wrong?",
+   "why_it_blocks": "Forty namespaces publish overlapping claims with no cross-check, so a single stale number can sit on the site indefinitely.",
+   "have": "Each namespace has its own verifier and several pass. There is no verifier that compares namespaces with each other; this session added that comparison (62 status disagreements, four corpus counts, 40 flagged pages).",
+   "missing": "A single gate that fails when two published files disagree on the same fact.",
+   "how_to_discover": "Promote nfl-desk/engine/verify.py (this workspace) to the repo-level gate and extend it with the census comparisons; a disagreement becomes a build failure, not a paragraph.",
+   "clears_when": "One repo-level verifier that fails on cross-namespace disagreement, run on every push.",
+   "answer_status": "owner-decision",
+   "sources": [
+    "nfl-desk/pages/verify.html",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/census.json"
+   ]
+  },
+  {
+   "id": "Q18",
+   "question": "What is the smallest change that makes this site usable for decisions?",
+   "why_it_blocks": "40 landing pages and 40 flagged pages is not a decision surface; the owner cannot tell which page is current.",
+   "have": "A census of all 40 namespaces, their verifiers and their duplication. One entry point now exists (this workspace) and is linked from the root dashboard and the NFL portal.",
+   "missing": "A retirement decision: which namespaces are history and which are live.",
+   "how_to_discover": "Use the census table: keep the namespaces whose verifier passes and whose data a live page reads; mark the rest 'history' in a single column and stop linking them from the front door.",
+   "clears_when": "One front door, at most one live namespace per function, and every other namespace labelled history.",
+   "answer_status": "owner-decision",
+   "sources": [
+    "nfl-desk/pages/census.html",
+    "https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/census.json"
+   ]
+  }
+ ]
+}
