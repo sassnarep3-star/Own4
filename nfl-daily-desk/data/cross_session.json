@@ -243,6 +243,80 @@
   "note": "the desk records no venue of its own; the peer read transcribed 12 of 13 from the schedule page's stadium links and cross-checked Thursday's against the game centre, which is how the label disagreement surfaced",
   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11"
  },
+ "nfl_desk": {
+  "namespace": "nfl-desk",
+  "owner_session": "arena/1e2776fd-own4",
+  "shared_capture_parse": {
+   "file": "nfl-desk/data/injuries_2026-11-18_parsed.json",
+   "raw_sha256_matches_this_desk": true,
+   "counts_agree": {
+    "player_rows": {
+     "this_desk": 242,
+     "nfl_desk": 242,
+     "equal": true
+    },
+    "club_tables": {
+     "this_desk": 23,
+     "nfl_desk": 23,
+     "equal": true
+    },
+    "rows_with_game_status": {
+     "this_desk": 16,
+     "nfl_desk": 16,
+     "equal": true
+    }
+   },
+   "practice_split": {
+    "Did Not Participate In Practice": 77,
+    "Full Participation in Practice": 83,
+    "Limited Participation in Practice": 82
+   },
+   "game_status_split": {
+    "Out": 9,
+    "Questionable": 7
+   },
+   "reading": "two parsers, one byte-identical raw capture, same counts \u2014 which is the only kind of transcription check that means anything"
+  },
+  "standings_fields_compared": 160,
+  "standings_fields_agree": 160,
+  "standings_fields_mismatch": 0,
+  "games_from_their_read": 150,
+  "columns_they_publish_that_this_desk_omitted": [
+   "division_rec",
+   "conference_rec",
+   "nonconference_rec",
+   "streak",
+   "last5"
+  ],
+  "split_columns_note": "their read carries per-club division/conference/non-conference records and the streak, which this desk could not establish from its own rendered read and therefore did not transcribe (F-DSK-04). The columns exist in a same-day official read; this desk still declines to publish a column it did not verify",
+  "requirement_registers": {
+   "this_desk_rows": 73,
+   "nfl_desk_rows": 73,
+   "exact_text_matches_after_normalisation": 39,
+   "id_schemes": [
+    "R-01\u2026R-68 + P-01\u2026P-05 (this desk, keyed to the 2026-11-19 brief)",
+    "REQ-01\u2026REQ-73 (nfl-desk, keyed to the same brief via three earlier registers)"
+   ],
+   "nfl_desk_disagreement_counts": {
+    "agree": 21,
+    "disagree": 29,
+    "unmatched": 23,
+    "no_official_source": 0,
+    "rows_with_exact_evidence": 3,
+    "rows_with_loose_evidence": 8,
+    "rows_with_unresolved_evidence": 2,
+    "rows": 73
+   },
+   "reading": "the two registers cover the same instruction set but no id mapping exists between them; 39 of 73 rows share the same normalised requirement text, which is the join key both should use"
+  },
+  "namespace_census": {
+   "namespaces": 44,
+   "with_verifier": 42,
+   "file": "nfl-desk/data/census.json",
+   "note": "counted by their census before this desk landed, so the live number is one higher"
+  },
+  "source_url": "https://www.nfl.com/standings/league/2026/REG"
+ },
  "peer_flags": [
   {
    "id": "VF-01",

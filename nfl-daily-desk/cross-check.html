@@ -28,6 +28,26 @@ corroboration and disagreement becomes a finding — with both files named in ei
 </tbody></table>
 <p class="note">the peer read exposes conference and division per club; this desk's read of the same page could not establish the split-column order because the rendered header was un-substituted, so those fields are omitted here and carried by the peer artifact under its own read date</p></section>
 
+<section class="card"><h2>The third reader: the integration front door</h2>
+<p class="note">A third session (<code>nfl-desk</code>, arena/1e2776fd-own4) ran its own parser over the <em>same</em> stored
+2026-11-18 capture this desk parsed, read the standings page the same day, and keys its own requirement
+register on the brief text. Same bytes, same page, different code — the comparison below is the only
+transcription check that means something.</p><table class="grid">
+<thead><tr><th>artifact</th><th>this desk</th><th>the integration front door (nfl-desk)</th><th>agreement</th><th>source</th></tr></thead>
+<tbody>
+<tr><td>player rows in the stored 2026-11-18 capture</td><td>242</td><td>242</td><td>identical</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>club tables in that capture</td><td>23</td><td>23</td><td>identical</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>rows carrying a game status</td><td>16</td><td>16</td><td>identical</td><td><a class="src" href="https://www.nfl.com/injuries/" rel="noopener">report</a></td></tr>
+<tr><td>W/L/T/PF/PA across 32 clubs (their same-day standings read)</td><td>160 fields</td><td>160 of 160 agree, 0 mismatch</td><td>identical</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">standings</a></td></tr>
+<tr><td>league games implied by the standings</td><td>150</td><td>150</td><td>identical</td><td><a class="src" href="https://www.nfl.com/standings/league/2026/REG" rel="noopener">standings</a></td></tr>
+<tr><td>requirement rows in the readiness register</td><td>73 (R-xx + P-xx)</td><td>73 (REQ-xx)</td><td>39 of 73 rows share the same normalised requirement text</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/requirements.json" rel="noopener">their register</a></td></tr>
+<tr><td>NFL namespaces in the repository</td><td>1 (this desk, counted by hand: see the repo review)</td><td>44 measured, 42 with a verifier</td><td>their census ran before this desk landed</td><td><a class="src" href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-desk/data/census.json" rel="noopener">their census</a></td></tr>
+</tbody></table>
+<p class="note">Two things this desk does <em>not</em> take from them, on purpose: their read carries the
+per-club split columns (division_rec, conference_rec, nonconference_rec, streak, last5) that this desk's own rendered read could not order, so F-DSK-04 stays open here
+even though the data exists next door; and their register's 21/29/23 agree-disagree-unmatched split is
+exactly why this desk keeps its verbatim requirement text as the join key rather than an id.</p></section>
+
 <section class="card"><h2>Every field the two reads disagree on</h2>
 <p class="note">2 differences out of 111 joined rows. Publishing them is the point of the exercise: a
 reconciliation that hides its differences is not a reconciliation.</p><table class="grid">

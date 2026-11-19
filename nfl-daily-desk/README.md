@@ -22,7 +22,7 @@ the legacy root publish of `main`, so these files are the published site once me
 | `engine/build.py` | renders the 14 HTML pages from `data/*.json` only — no page is hand-authored |
 | `engine/verify.py` | the publication gate (below) |
 | `data/*.json` | the only place a number is written by hand-free code; pages read from here |
-| `*.html` | the published pages, generated |
+| `*.html` | the published pages, generated (desk, readiness, availability, delta, results, statistics, origination, questions, suggestions, repo review, cross-check, flagged, sources, executive summary) |
 
 ## Publication gate
 
@@ -65,6 +65,20 @@ python3 nfl-daily-desk/engine/build.py && python3 nfl-daily-desk/engine/verify.p
   than plausible.
 * No merged availability across cohorts: cohort 1 (5 fixtures, frozen 2026-11-16) and cohort 2 (8 fixtures,
   recorded 2026-11-19) are kept separate because their eligibility rules differed.
+
+## Cross-session reconciliation
+
+`engine/crosscheck.py` reads (never writes) the two other namespaces that touched the same official pages
+on 2026-11-19 and publishes what the join shows:
+
+* `nfl-verify-2026-11-19` — 111 injury rows joined to this desk's 253: 109 identical on every field, all
+  10 per-club row counts equal, 192/192 standings fields equal, reserve ledger 25/25, Week 11 slate 13/13.
+  Two rows differ; both differences are published (a same-day value with no clock time on one side, a
+  casing normalisation on the other).
+* `nfl-desk` (the integration front door) — its parser over the *same* byte-identical 2026-11-18 capture
+  returns 242 rows / 23 club tables / 16 game-status rows, matching this desk exactly; its standings read
+  agrees on 160/160 fields and implies the same 150 games; its census counts 44 namespaces, 42 with a
+  verifier.
 
 ## Findings a reader should not miss
 

@@ -152,6 +152,81 @@ def slate(mine, theirs):
             "source_url": SCHED11}
 
 
+def nfl_desk_front_door(mine_inj, mine_st, mine_rd):
+    """The integration front door (`nfl-desk`) parsed the SAME stored 2026-11-18 capture with its own
+    parser, read the same standings page today, and keys its own requirement register on the brief text.
+    Three independent agreements worth reporting, and the one place it has data this desk refused to infer."""
+    desk = os.path.join(ROOT, "nfl-desk", "data")
+    if not os.path.isdir(desk):
+        return {"absent": True}
+    cap = jload(os.path.join(desk, "injuries_2026-11-18_parsed.json"))
+    st = jload(os.path.join(desk, "standings_2026-11-19.json"))
+    req = jload(os.path.join(desk, "requirements.json"))
+    cen = jload(os.path.join(desk, "census.json"))
+    a = mine_inj["reads"]["capture_a"]["summary"]
+    counts_agree = {
+        "player_rows": (a["n_rows"], cap["counts"]["player_rows"]),
+        "club_tables": (a["n_clubs_with_rows"], cap["counts"]["club_tables"]),
+        "rows_with_game_status": (a["n_rows_with_game_designation"], cap["counts"]["rows_with_game_status"]),
+    }
+    practice = cap.get("practice_split", {})
+    statuses = cap.get("game_status_split", {})
+    t = {r["abbr"]: r for r in st["rows"]}
+    agree = mism = 0
+    for r in mine_st["rows"]:
+        p = t.get(r["club"])
+        if not p:
+            continue
+        for f in ("W", "L", "T", "PF", "PA"):
+            if r[f] == p.get(f):
+                agree += 1
+            else:
+                mism += 1
+    def norm(x):
+        x = unicodedata.normalize("NFKD", x).encode("ascii", "ignore").decode().lower()
+        return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9 ]", " ", x)).strip()
+    mine_text = {norm(r["verbatim"]) for r in mine_rd["rows"] + mine_rd["process_rows"]}
+    their_text = {norm(x["requirement"]) for x in req["rows"]}
+    return {
+        "namespace": "nfl-desk", "owner_session": "arena/1e2776fd-own4",
+        "shared_capture_parse": {
+            "file": "nfl-desk/data/injuries_2026-11-18_parsed.json",
+            "raw_sha256_matches_this_desk": cap.get("raw_sha256") == mine_inj["reads"]["capture_a"]["sha256"],
+            "counts_agree": {k: {"this_desk": v[0], "nfl_desk": v[1], "equal": v[0] == v[1]}
+                             for k, v in counts_agree.items()},
+            "practice_split": practice, "game_status_split": statuses,
+            "reading": "two parsers, one byte-identical raw capture, same counts — which is the only kind "
+                       "of transcription check that means anything"},
+        "standings_fields_compared": agree + mism, "standings_fields_agree": agree,
+        "standings_fields_mismatch": mism,
+        "games_from_their_read": sum(r["W"] + r["L"] + r.get("T", 0) for r in st["rows"]) // 2,
+        "columns_they_publish_that_this_desk_omitted": [
+            c for c in st["columns"] if c in ("division_rec", "conference_rec", "nonconference_rec",
+                                              "streak", "last5")],
+        "split_columns_note": "their read carries per-club division/conference/non-conference records and "
+                              "the streak, which this desk could not establish from its own rendered read "
+                              "and therefore did not transcribe (F-DSK-04). The columns exist in a same-day "
+                              "official read; this desk still declines to publish a column it did not verify",
+        "requirement_registers": {"this_desk_rows": len(mine_rd["rows"]) + len(mine_rd["process_rows"]),
+                                  "nfl_desk_rows": len(req["rows"]),
+                                  "exact_text_matches_after_normalisation": len(mine_text & their_text),
+                                  "id_schemes": ["R-01…R-68 + P-01…P-05 (this desk, keyed to the 2026-11-19 "
+                                                 "brief)", "REQ-01…REQ-73 (nfl-desk, keyed to the same brief "
+                                                 "via three earlier registers)"],
+                                  "nfl_desk_disagreement_counts": req["counts"],
+                                  "reading": "the two registers cover the same instruction set but no id "
+                                            "mapping exists between them; %d of %d rows share the same "
+                                            "normalised requirement text, which is the join key both should "
+                                            "use" % (len(mine_text & their_text), len(mine_text))},
+        "namespace_census": {"namespaces": cen["namespaces_count"],
+                             "with_verifier": cen["namespaces_with_verifier"],
+                             "file": "nfl-desk/data/census.json",
+                             "note": "counted by their census before this desk landed, so the live number "
+                                     "is one higher"},
+        "source_url": STAND,
+    }
+
+
 def main():
     mine_inj = jload(os.path.join(NS, "data", "availability_delta.json"))
     mine_st = jload(os.path.join(NS, "data", "standings.json"))
@@ -181,6 +256,8 @@ def main():
         "standings": standings(mine_st, jload(os.path.join(PEER_DATA, "standings_2026_11_19.json"))),
         "reserve_list": reserve(mine_res, jload(os.path.join(PEER_DATA, "reserve_list_2026_11.json"))),
         "week11_slate": slate(mine_sh, jload(os.path.join(PEER_DATA, "schedule_week11_2026_11_19.json"))),
+        "nfl_desk": nfl_desk_front_door(mine_inj, mine_st,
+                                         jload(os.path.join(NS, "data", "readiness.json"))),
         "peer_flags": peer_flags,
     }
     ir, st = out["injury_report"], out["standings"]

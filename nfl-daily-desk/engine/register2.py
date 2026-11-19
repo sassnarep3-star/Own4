@@ -186,15 +186,18 @@ def s(i, problem, sug, a, b, c, rec, cost, unblocks, risk):
 
 
 SUGGESTIONS = [
- s("S-01", "Thirty-plus NFL namespaces, and no screen tells a reader which artifact answers which "
-           "question. Every session so far has added a namespace rather than retiring one.",
+ s("S-01", "Forty-four NFL namespaces now carry a census (the front door measured 44 with 42 verifiers), "
+           "and every session so far has added a namespace rather than retiring one. This desk is now one "
+           "of them and says so.",
    "Publish a workspace registry on the landing page - namespace, what it is canonical for, last verified "
    "date, and a read-only banner for the rest - and stop minting new namespaces for refresh work.",
    "Registry table generated from a per-namespace manifest (1 new file, 0 new pages)",
    "Registry maintained by the integration session only",
    "Do nothing and keep appending namespaces",
-   "A, because it can be regenerated and asserted; the registry should also carry the two disagreements "
-   "found today (results feed size, shared-slot count) so a reader cannot pick a favourable one.",
+   "A, narrowed: the front door already publishes a census and a three-way status comparison, so this "
+   "desk should NOT add a fourth registry. The missing piece is smaller and specific — one id-mapping table "
+   "across the requirement registers (39 of 73 rows already share identical normalised text), plus the two "
+   "disagreements found today (results-feed size, shared-slot count) so a reader cannot pick a favourable one.",
    "1 session-hour, no new data", ["R-22", "P-01"],
    "Duplicate work, and a reader choosing between 137, 149 and 150 games by accident."),
  s("S-02", "The price-data question has been open in every session and it gates seven requirements, yet "
@@ -426,6 +429,15 @@ FLAGS = [
    "constant, or a reader who assumes a home baseline beats a coin flip, is wrong for this season: "
    "the always-home control is below 0.5, so a home-leaning pick is a negative-skill signal.",
    "nfl-daily-desk/data/controls.json; nfl-daily-desk/data/corpus_extension.json", SCHED10),
+ f("F-DSK-18", "medium", "Duplication",
+   "Two same-day requirement registers cover the same brief with no id mapping between them",
+   "This desk keys 68 requirement rows + 5 process rows as R-xx/P-xx; the integration front door keys 73 "
+   "rows as REQ-xx. 39 of 73 rows carry identical normalised requirement text, which is the join key both "
+   "should use; the remaining rows differ because this desk's brief copy splits some instructions the "
+   "front door keeps whole. Nobody is wrong, and a reader comparing '73 rows, 21 agree' with '73 rows, "
+   "9 met' has no way to see that the two numbers count different groupings.",
+   "nfl-daily-desk/data/readiness.json; nfl-desk/data/requirements.json (counts: 21 agree / 29 disagree / "
+   "23 unmatched); nfl-daily-desk/data/cross_session.json (nfl_desk.requirement_registers)", SCHED11),
  f("F-DSK-16", "medium", "Venue",
    "Two official NFL pages give different venue names for the same Thursday game",
    "The Week 11 schedule page's stadium link for IND at HOU reads 'NRG Stadium' while the official game "
@@ -626,6 +638,18 @@ def main():
       "notes": "the second same-day read in the repo, which is what makes the cross-session comparison "
                "possible at all; its flags (VF-01 venue label, VF-03 no clock time) are carried into this "
                "desk's own flag list as F-DSK-16 and F-DSK-17 rather than duplicated"},
+     {"namespace": "nfl-desk", "owner_session": "arena/1e2776fd-own4",
+      "canonical_for": "the integration front door: a 73-row register that prints all three earlier "
+                       "registers' statuses side by side, a measured census of the repository's namespaces, "
+                       "a re-parse of the stored 2026-11-18 capture, and the same-day standings read",
+      "verified_by_this_session": "its injury-capture parse agrees with this desk's on all three headline "
+                                  "counts (242 rows, 23 club tables, 16 rows with a game status) from the "
+                                  "same raw bytes; its standings read agrees on 160 of 160 W/L/T/PF/PA "
+                                  "fields and implies the same 150 games; 39 of 73 register rows share "
+                                  "identical normalised requirement text with this desk's register",
+      "notes": "the only namespace that treats register disagreement as the object of study, which is why "
+               "this desk points at it rather than duplicating it; it does not carry the availability delta, "
+               "the shadow cohorts or the correlation work, which is what this desk adds"},
      {"namespace": "nfl-repo-inventory", "owner_session": "arena/4f78a318-own4",
       "canonical_for": "the machine inventory of 40 nfl* namespaces and the record of running every "
                        "namespace verifier on a clean export",

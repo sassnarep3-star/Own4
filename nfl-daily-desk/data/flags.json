@@ -5,7 +5,7 @@
  "policy": "flagged items do not block the merge; they block a claim. A row here is a thing the site refuses to smooth over",
  "severity_counts": {
   "high": 4,
-  "medium-or-worse": 14
+  "medium-or-worse": 15
  },
  "rows": [
   {
@@ -146,6 +146,16 @@
    "detail": "Not an error in the data - an error waiting in the models. Any workspace that treats home as a positive constant, or a reader who assumes a home baseline beats a coin flip, is wrong for this season: the always-home control is below 0.5, so a home-leaning pick is a negative-skill signal.",
    "evidence": "nfl-daily-desk/data/controls.json; nfl-daily-desk/data/corpus_extension.json",
    "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "status": "flagged"
+  },
+  {
+   "id": "F-DSK-18",
+   "severity": "medium",
+   "area": "Duplication",
+   "item": "Two same-day requirement registers cover the same brief with no id mapping between them",
+   "detail": "This desk keys 68 requirement rows + 5 process rows as R-xx/P-xx; the integration front door keys 73 rows as REQ-xx. 39 of 73 rows carry identical normalised requirement text, which is the join key both should use; the remaining rows differ because this desk's brief copy splits some instructions the front door keeps whole. Nobody is wrong, and a reader comparing '73 rows, 21 agree' with '73 rows, 9 met' has no way to see that the two numbers count different groupings.",
+   "evidence": "nfl-daily-desk/data/readiness.json; nfl-desk/data/requirements.json (counts: 21 agree / 29 disagree / 23 unmatched); nfl-daily-desk/data/cross_session.json (nfl_desk.requirement_registers)",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
    "status": "flagged"
   },
   {

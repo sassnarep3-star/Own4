@@ -5971,3 +5971,37 @@ Result: 149-game corpus, 100 walk-forward forecasts, CD-1 Brier skill **+0.1362*
   official or licensed price source (F-DSK-01), and a pre-registered 300-game floor. 17 items are published
   on the flagged page; none blocks the merge, all of them block a claim. Two of them (F-DSK-16 venue label,
   F-DSK-17 same-day disagreement) exist only because the peer read made a comparison possible.
+
+
+### `nfl-daily-desk` — post-rebase reconciliation (2026-11-19 UTC)
+
+Rebasing this branch onto `60a6188` (PR #185) produced one conflict, in this append-only board, against the
+`arena/6c8bbde6-own4` claim/log and the `arena/4f78a318-own4` inventory records. Resolved as a union: both
+peer blocks are retained in full, this session's claim is unchanged above, and no peer line was dropped.
+
+Landing on main after those two sessions surfaced three reconciliations this session had to make against
+work it could not see when it claimed. They are published rather than quietly absorbed:
+
+- **`nfl-verify-2026-11-19` read the same injury page the same day.** Joining the two artifact sets
+  field by field (new `nfl-daily-desk/engine/crosscheck.py`, read-only, new page `cross-check.html`):
+  109 of 111 joined rows identical on every field, all 10 per-club row counts equal, 192 of 192 standings
+  fields equal, both reads implying 150 league games, reserve ledger 25 of 25, Week 11 slate 13 of 13.
+  The two differing rows are published as flags F-DSK-17 (a same-day read with no clock time cannot be
+  sequenced against this desk's two dated captures) and a casing-only difference; nothing was merged or
+  overwritten to make the comparison clean.
+- **`nfl-desk` (the integration front door) re-parsed the same stored 2026-11-18 capture with its own
+  parser.** It returns 242 player rows, 23 club tables and 16 rows with a game status — identical to this
+  desk's parse of the same bytes, which is the only transcription check that means anything. Its census
+  counts 44 namespaces with 42 verifiers, so this session replaced its own hand-waved "30+ namespaces"
+  with that measured number, and narrowed its S-01 suggestion: the front door already publishes a census
+  and a three-way status comparison, so this desk will not add a fourth registry. The remaining gap is an
+  id mapping between the requirement registers (39 of 73 rows share identical normalised text) — recorded
+  as F-DSK-18, not fixed by editing anyone's register.
+- **Venue.** Their same-day read carries 12 of 13 Week 11 venues from the schedule page with a game-centre
+  cross-check, and found the schedule page and the game centre naming Thursday's fixture differently
+  (NRG Stadium vs Reliant Stadium). This desk's R-23 was updated to reflect that state and the disagreement
+  is published as F-DSK-16; this desk still transcribes no venue of its own, because the requirement names
+  the game centre as the source.
+
+Flag count is now 18, review rows 14, and the verifier covers 14 pages / 727 data rows — all rules pass.
+No file outside `nfl-daily-desk/**` was modified by this session other than this append-only board.

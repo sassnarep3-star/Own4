@@ -800,6 +800,58 @@ def build_crosscheck():
                     "<td>%s</td>" % esc(f["last_commit_touching_it"]),
                     "<td>%s</td>" % repo_link("%s/data/%s" % (x["peer_namespace"], n), "open")]
                    for n, f in x["peer_files"].items()])
+    nd = x.get("nfl_desk") or {}
+    if not nd.get("absent"):
+        sc = nd["shared_capture_parse"]
+        ndrows = [["<td>%s</td>" % esc(lbl), "<td>%s</td>" % (sc["counts_agree"][k]["this_desk"]),
+                   "<td>%s</td>" % sc["counts_agree"][k]["nfl_desk"],
+                   "<td>%s</td>" % ("identical" if sc["counts_agree"][k]["equal"] else "DIFFERENT"),
+                   "<td>%s</td>" % link(INJ_URL, "report")]
+                  for k, lbl in [("player_rows", "player rows in the stored 2026-11-18 capture"),
+                                 ("club_tables", "club tables in that capture"),
+                                 ("rows_with_game_status", "rows carrying a game status")]]
+        ndrows.append(["<td>W/L/T/PF/PA across 32 clubs (their same-day standings read)</td>",
+                       "<td>%d fields</td>" % nd["standings_fields_agree"],
+                       "<td>%d of %d agree, %d mismatch</td>" % (nd["standings_fields_agree"],
+                       nd["standings_fields_compared"], nd["standings_fields_mismatch"]),
+                       "<td>%s</td>" % ("identical" if not nd["standings_fields_mismatch"] else "DIFFERENT"),
+                       "<td>%s</td>" % link("https://www.nfl.com/standings/league/2026/REG", "standings")])
+        ndrows.append(["<td>league games implied by the standings</td>",
+                       "<td>%d</td>" % st["games_from_this_desk_read"], "<td>%d</td>" % nd["games_from_their_read"],
+                       "<td>%s</td>" % ("identical" if st["games_from_this_desk_read"] == nd["games_from_their_read"]
+                                        else "DIFFERENT"),
+                       "<td>%s</td>" % link("https://www.nfl.com/standings/league/2026/REG", "standings")])
+        ndrows.append(["<td>requirement rows in the readiness register</td>",
+                       "<td>%d (R-xx + P-xx)</td>" % nd["requirement_registers"]["this_desk_rows"],
+                       "<td>%d (REQ-xx)</td>" % nd["requirement_registers"]["nfl_desk_rows"],
+                       "<td>%d of %d rows share the same normalised requirement text</td>"
+                       % (nd["requirement_registers"]["exact_text_matches_after_normalisation"],
+                          nd["requirement_registers"]["this_desk_rows"]),
+                       "<td>%s</td>" % repo_link("nfl-desk/data/requirements.json", "their register")])
+        ndrows.append(["<td>NFL namespaces in the repository</td>",
+                       "<td>1 (this desk, counted by hand: see the repo review)</td>",
+                       "<td>%d measured, %d with a verifier</td>" % (nd["namespace_census"]["namespaces"],
+                                                                      nd["namespace_census"]["with_verifier"]),
+                       "<td>their census ran before this desk landed</td>",
+                       "<td>%s</td>" % repo_link("nfl-desk/data/census.json", "their census")])
+        front = table(["artifact", "this desk", "the integration front door (nfl-desk)", "agreement", "source"],
+                      ndrows)
+        extra = """
+<section class="card"><h2>The third reader: the integration front door</h2>
+<p class="note">A third session (<code>nfl-desk</code>, %s) ran its own parser over the <em>same</em> stored
+2026-11-18 capture this desk parsed, read the standings page the same day, and keys its own requirement
+register on the brief text. Same bytes, same page, different code — the comparison below is the only
+transcription check that means something.</p>%s
+<p class="note">Two things this desk does <em>not</em> take from them, on purpose: their read carries the
+per-club split columns (%s) that this desk's own rendered read could not order, so F-DSK-04 stays open here
+even though the data exists next door; and their register's %s/%s/%s agree-disagree-unmatched split is
+exactly why this desk keeps its verbatim requirement text as the join key rather than an id.</p></section>
+""" % (esc(nd["owner_session"]), front, ", ".join(nd["columns_they_publish_that_this_desk_omitted"]),
+       nd["requirement_registers"]["nfl_desk_disagreement_counts"]["agree"],
+       nd["requirement_registers"]["nfl_desk_disagreement_counts"]["disagree"],
+       nd["requirement_registers"]["nfl_desk_disagreement_counts"]["unmatched"])
+    else:
+        extra = ""
     body = """
 <section class="card"><h2>Why this page exists</h2><p>A number produced by one reader is a claim. On
 2026-11-19 a second session (%s) read the same official pages and published its own artifact set in
@@ -809,7 +861,7 @@ corroboration and disagreement becomes a finding — with both files named in ei
 
 <section class="card"><h2>Where the two reads agree</h2>%s
 <p class="note">%s</p></section>
-
+%s
 <section class="card"><h2>Every field the two reads disagree on</h2>
 <p class="note">%d differences out of %d joined rows. Publishing them is the point of the exercise: a
 reconciliation that hides its differences is not a reconciliation.</p>%s</section>
@@ -826,7 +878,7 @@ desk's exactly — which is the form of check a transcription can actually pass.
 <p class="note">Read-only: no file under <code>%s/</code> was edited by this session, and nothing on this
 page is presented as verifying the peer's work beyond what the join itself shows.</p></section>
 """ % (esc(x["peer_session"]), esc(x["peer_namespace"]), esc(h["reading"]), summary,
-       esc(x["standings"]["note"]), ir["n_field_differences"], ir["joined_rows"], diffs, perclub,
+       esc(x["standings"]["note"]), extra, ir["n_field_differences"], ir["joined_rows"], diffs, perclub,
        ven, peerflags, files, esc(x["peer_namespace"]))
     return page("Cross-session reconciliation", body, "cross-check.html",
                 sub="two independent 2026-11-19 reads of the same official pages, joined field by field")
@@ -855,6 +907,13 @@ file and states what it was used for. Where a sha256 is published, the desk reco
 
 def build_exec():
     sh = load("shadow_cohorts")
+    xcheck = load("cross_session")
+    nn = xcheck.get("nfl_desk", {})
+    nspace = ("%d, of which %d carry a verifier, counted by the front door's census before this desk "
+              "landed — so %d now" % (nn["namespace_census"]["namespaces"],
+                                      nn["namespace_census"]["with_verifier"],
+                                      nn["namespace_census"]["namespaces"] + 1)
+              if nn and not nn.get("absent") else "not counted by this desk")
     av = load("availability_delta")
     ext = load("corpus_extension")
     ctl = load("controls")
@@ -913,7 +972,7 @@ job started on the same day.</p></section>
 <section class="card"><h2>4 · What the site should do next (short version of the suggestions page)</h2>
 <ol>
 <li><strong>S-08 / S-01</strong> — one canonical results feed with a standings identity assertion in CI, and a
-workspace registry so a reader can tell which namespace is authoritative for what. Today the repo has %s
+workspace registry so a reader can tell which namespace is authoritative for what. The repository holds %s
 NFL namespaces and three requirement registers with three id schemes.</li>
 <li><strong>S-05</strong> — capture game-day inactives. Every &ldquo;who replaced whom&rdquo; column in every
 namespace is currently unconfirmed, and this is the one source that fixes it without any market data.</li>
@@ -949,7 +1008,7 @@ agreement between the rendered read and the raw capture.</p></section>
        sh["counts"]["week11_games"], ctl["rows"][0]["hit_rate"],
        len(rd["rows"]) + len(rd["process_rows"]), len(fl["rows"]), fl["severity_counts"]["medium-or-worse"],
        av["row_level_delta"]["n_changed"], len(av["row_level_delta"]["rows_added_in_later_read"]),
-       av["row_level_delta"]["n_keys_in_both"], "30+",
+       av["row_level_delta"]["n_keys_in_both"], nspace,
        ext["corpus_games_after_extension"], ext["identity"]["league_games_from_standings"],
        "{:,}".format(ext["scoring"]["standings_pf_total"]), "{:,}".format(ext["scoring"]["corpus_total_points"]),
        241, 242)
