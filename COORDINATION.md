@@ -5548,3 +5548,19 @@ F01 namespace sprawl (40 namespaces) · F02 six NFL executive summaries with dif
 - `nfl-quant` owner: commit or document `/home/user/nfl_raw/games.csv` and the pandas dependency (F06).
 
 **Scope not done (honest):** this session did not work through the wider request list (decision-readiness table, per-team starter view, depth-group model, roster-turnover versioning, parlay gate, backtests, etc.). Those are already covered in part by `nfl-req-review` (73-row register, round 2) and `nfl-readiness-register`; this session did not re-verify their rows. No betting value, model output or strategy result was produced or changed.
+## Session `arena/893d26c1-own4` — claim: Week 11 official injury-report delta (2026-11-19 UTC)
+
+**Session ID:** `arena/893d26c1-own4` · **Branch:** `arena/893d26c1-own4` (platform-pinned; the `session-<id>/<task>` naming is not creatable in this harness, same logged deviation as prior sessions) · **Base:** `e322a32` (= `main`).
+
+**Why this task (surveyed before claiming).** The brief asks for injury reports stored with clock time, *the delta and never the level*. The stored Week-11 raw capture (`nfl-readiness-register/snapshots/2026-11-18/injury_report-2026-11-18T234917Z.html`, 23:49:17Z) had 23 club tables; the official page read on 2026-11-19 at ~06:49Z shows 24. `nfl-brief-trace` lists the Week-11 report as "not yet published" (RF-02 in peer registers). No open PR touches a Week-11 injury namespace.
+
+| ID | Task | Status | Owner | File scope |
+|----|------|--------|-------|------------|
+| W1 | Claim + survey (this block) | done | `arena/893d26c1-own4` | `COORDINATION.md` |
+| W2 | Transcribe the 2026-11-19 official read (all 13 Week-11 games) with the read clock recorded | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/data/official_read_2026-11-19_w11.md` |
+| W3 | Parse the stored raw 2026-11-18 HTML (sha256-checked against the manifest) and compute the delta (added / removed / changed rows, per-club state) | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/engine/**`, `nfl-w11-delta/data/delta.json` |
+| W4 | Static site: landing, delta page, per-club page, sources, Flagged for Review; every row source-linked to nfl.com/injuries | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/index.html`, `nfl-w11-delta/pages/**` |
+| W5 | Verifier (stdlib): sha256 check, row-count checks, link checks, no localhost, every table row has an official link | in progress | `arena/893d26c1-own4` | `nfl-w11-delta/engine/verify.py` |
+| W6 | Log results, PR to `main`, merge, Pages check | not started | `arena/893d26c1-own4` | `COORDINATION.md` |
+
+**Shared files:** none edited. The root dashboard, `nfl/`, `nfl-brief-trace/` and the readiness register are read-only inputs for this session.
