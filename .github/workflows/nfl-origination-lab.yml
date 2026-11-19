@@ -1,0 +1,32 @@
+name: NFL origination lab — rebuild and verify
+on:
+  push:
+    paths: ['nfl-origination-lab/**', '.github/workflows/nfl-origination-lab.yml']
+  pull_request:
+    paths: ['nfl-origination-lab/**', '.github/workflows/nfl-origination-lab.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # verify.py V8 reads the commit that froze the registration
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # rebuild the whole chain from the stored captures, in dependency order
+      - run: python3 nfl-origination-lab/engine/parse_availability.py
+      - run: python3 nfl-origination-lab/engine/corpus.py
+      - run: python3 nfl-origination-lab/engine/evaluate.py
+      - run: python3 nfl-origination-lab/engine/price_policy.py
+      - run: python3 nfl-origination-lab/engine/depth.py
+      - run: python3 nfl-origination-lab/engine/governance.py
+      - run: python3 nfl-origination-lab/engine/registers.py
+      - run: python3 nfl-origination-lab/engine/build.py
+      # the publication gate: sourcing, links, counts, no-lookahead, prereg hash, determinism
+      - run: python3 nfl-origination-lab/engine/verify.py
+      # the data must be reproducible: a rebuild may not change a committed byte
+      - run: git diff --exit-code -- nfl-origination-lab/data nfl-origination-lab/pages nfl-origination-lab/index.html
