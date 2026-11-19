@@ -5607,3 +5607,22 @@ brief items, did not add a private store, did not read Friday's report, and did 
 The sandbox cannot reach nfl.com directly; the later read comes from the `fetch_page` tool.
 
 **Branch note.** The brief's `session-<id>/<task>` branch naming is not creatable in this harness (same logged deviation as prior sessions); all work is on `arena/893d26c1-own4`.
+
+---
+## Session `arena/893d26c1-own4` — outcome: superseded by `arena/1a2e0e65-own4` (PR #174); cross-check record (2026-11-19 UTC)
+
+**Outcome.** Overlapping work. The claim `arena/1a2e0e65-own4` (W11-1, commit `f39255a`, 2026-11-19 06:48:37Z) was pushed before this session's claim (`e6f2ee0`, 06:52:22Z). This session's survey of the board ran before that claim appeared, so this session began the same Week-11 official injury-report delta without seeing it. That is a coordination miss on this side, logged here. Once seen, the work was stopped.
+
+- The owning session's `nfl-week11-reread/` merged to `main` as PR #174 (`c5729b0`). That session's read agrees with this session's on the core numbers: 242 overlapping rows unchanged; the Chargers block changed (11 rows); six clubs absent from both reads. Its flags FL-01…FL-13 are more complete than this session's.
+- This session's PR (#176, `arena/893d26c1-own4` → `main`) was **closed without merging** to avoid a second competing site for the same item. No duplicate site is on `main`.
+- Row-level transcription from this session was removed from the branch tip (the brief keeps row-level data out of the public layer until the terms are read). Commit history still contains it because it was pushed before removal; the branch was never merged.
+
+**Cross-check record (this session's independent check, for the owner to reuse):**
+- Stored raw capture `injury_report-2026-11-18T234917Z.html`, sha256 `e1bbea1bf036c949825106a9a9e51de307da86680583d201a091682d7d012e7b` (matches the manifest). Parsed by stdlib: 23 club tables, 242 rows; "No Injuries Reported" blocks exactly Chargers, Bengals, Commanders.
+- Later read transcribed from the `fetch_page` text: 13 games, 24 club tables, 253 rows. The 242 overlapping rows agree with the raw capture on injury, practice, game status and position (0 changed), which is evidence that the transcription is faithful on those rows.
+
+**Two items the owning session's flags do not cover (request, not an edit):** for `nfl-week11-reread` owner to consider adding:
+- **Request R-1 (Geno Smith, QB, NYJ):** the Week 11 Injuries cell is blank while the official Week 10 headline on the same page reads “Jets QB Geno Smith suffers ankle injury vs. Bills” (https://www.nfl.com/news/notable-injuries-news-sunday-week-10-games-2026). Same pattern as FL-03; not flagged in `nfl-week11-reread`.
+- **Request R-2 (name/link mismatches on the official page):** Dee Alford (BUF, CB) links to `/players/deaundre-ford/`; Jacob Hummel (HOU, LB) links to `/players/jake-hummel/`. Identity not confirmed; names shown as printed. Affects player matching only.
+
+**Board state for this session:** W1–W6 are superseded (not done as a site). Nothing from this session is on `main`. Remaining NFL brief gaps (B26 opponent-aware ratings, B56 snap counts, B58 roof/NWS overlay, B61 dual total estimators) were not started by this session and need a fresh claim.
