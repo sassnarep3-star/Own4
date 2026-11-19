@@ -285,7 +285,7 @@ def main():
     payload = {
         "dataset": "nfl_origination_lab_availability_parse",
         "title": "Two stored official Week 11 injury-report captures, parsed independently",
-        "built_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "built_utc": "2026-11-19T00:00:00Z",   # pinned: the build must be byte-reproducible
         "provenance": {
             "A": {"path": os.path.relpath(CAPTURE_A, ROOT),
                   "kind": "raw bytes captured by the nfl-readiness-register workflow",

@@ -61,6 +61,8 @@ EXTENSION = os.path.join(ROOT, "nfl-daily-desk/data/corpus_extension.json")
 STANDINGS = os.path.join(ROOT, "nfl-daily-desk/data/standings.json")
 OUT = os.path.join(LAB, "data", "corpus.json")
 
+BUILD_DATE = "2026-11-19T00:00:00Z"   # the date this lab was built; pinned for determinism
+
 TEAMS = ["ARI", "ATL", "BAL", "BUF", "CAR", "CHI", "CIN", "CLE", "DAL", "DEN",
          "DET", "GB", "HOU", "IND", "JAX", "KC", "LA", "LAC", "LV", "MIA",
          "MIN", "NE", "NO", "NYG", "NYJ", "PHI", "PIT", "SEA", "SF", "TB",
@@ -241,7 +243,7 @@ def main():
     payload = {
         "dataset": "nfl_origination_lab_corpus",
         "title": "Verified results corpus for the pre-registered origination competition",
-        "built_utc": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "built_utc": BUILD_DATE,   # fixed, not wall-clock: the build must be byte-reproducible
         "sources": {
             "feed": {"path": os.path.relpath(FEED, ROOT), "rows_total": feed_total,
                      "used": "2025 (all) and 2026 weeks 1-9",
