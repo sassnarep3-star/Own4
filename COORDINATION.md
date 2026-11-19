@@ -5501,3 +5501,22 @@ Rebasing onto `96668e7` (PR #170) conflicted only in the append-only coordinatio
 - **NFL-P4:** done. The portal change is additive; the peer suggestions page and shared root dashboard were not edited.
 
 
+
+---
+
+## Session `arena/4f78a318-own4` — NFL repo inventory & verifier audit (claim, 2026-11-19 UTC)
+
+**Branch (harness-fixed for this session):** `arena/4f78a318-own4`, based on `e322a32` (`main`). The `session-<id>/<task>` naming in the protocol is superseded by the fixed branch; no other branch is created or pushed.
+
+**Why this scope:** the board already holds a 73-row NFL requirement register (`nfl-req-review`, round 2, verifier PASS), a readiness register, a brief trace, and a root site. Duplicating those would add a second source of truth. What is missing is a single, machine-generated map of the ~50 `nfl-*` namespaces: which publish a page, which have a verifier, what the verifier actually returned on a clean export, and which are not linked from the root site.
+
+**Scope claimed (exclusive):** `nfl-repo-inventory/**` (new namespace only) and this append-only log in `COORDINATION.md`. No other namespace, root `index.html`, workflow or data file is edited. Root navigation is requested in the log below, not edited.
+
+| ID | Task | Status | Files touched |
+|----|------|--------|---------------|
+| INV-01 | Claim scope and push claim | in progress | `COORDINATION.md` |
+| INV-02 | Machine inventory of every `nfl*` namespace (files, index, verifier, root links, last commit) | pending | `nfl-repo-inventory/data/inventory.json` |
+| INV-03 | Run each verifier on a clean `git archive` export (no writes to the repo); record exit codes | pending | `nfl-repo-inventory/data/verifier_runs.json` |
+| INV-04 | Publish inventory + Flagged for Review page; own verifier; PR → merge → Pages check | pending | `nfl-repo-inventory/**`, `COORDINATION.md` |
+
+**Limits (stated up front):** the sandbox cannot fetch nfl.com through bash; official NFL reads go through the fetch tool only. This inventory does not re-verify NFL data values. A PASS from a verifier means the namespace is internally consistent and its links resolve, not that its official-source values are correct.
