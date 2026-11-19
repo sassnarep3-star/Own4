@@ -5825,4 +5825,31 @@ python3 build_site.py (root): pages: 10, PROBLEMS: none, exit 0. The regenerated
 - Merge result: merged without waiting for approval; CI checks (validate, audit, nfl-command verify ×4) all succeeded.
 - Pages: GitHub Pages API status `built` for commit `0312f75`; published site https://sassnarep3-star.github.io/Own4/ live.
 - INT-3/INT-4/INT-5/INT-6: done.
+PR link, merge result and Pages status: to be recorded in task INT-6 after the PR merges.
+
+## Session `arena/1e2776fd-own4` — final integration: single front door + reconciled readiness register (2026-11-19 UTC)
+
+**Session ID:** `arena/1e2776fd-own4` · **Branch (pinned by Arena):** `arena/1e2776fd-own4`, based on `e322a32` (= `origin/main` tip at start). The requested `session-<id>/<task>` branch naming cannot be created in this harness; no other branch is created or pushed. All work is committed to this one branch.
+
+**Surveyed before claiming (not assumed):**
+- `main` = `e322a32`; 40 `nfl-*` namespaces plus `nfl/`; the repo has one commit, so all namespaces arrived together.
+- `git branch -a` shows only `main` + this branch. 11 PRs are open, all opened 2026-11-02…2026-11-17 by sessions that are no longer active; none touches `nfl-desk/**`.
+- Baseline verifiers run green on this tree (re-run in this session before any edit; see completion record).
+- Known integrity problems carried in from earlier sessions: the 73-row readiness register marks rows open/partial where artifacts exist (`nfl-brief-trace` found 50 stale candidates); 8 register references do not resolve; `nfl-markets/data/correlations.json` publishes a third-party correlation group; the root `README.md` still describes the NBA project.
+
+**Namespace claimed (exclusive):** `nfl-desk/**` (new) — the integrated single front door: landing, executive summary, requirements/gates, questions→information→answers, suggestions review surface, namespace census/repo review, official reads, Flagged for Review, verification. Plus these integration-owned shared outputs: one nav block in `nfl/index.html`, one nav entry in `verification/build.py` (nav only) with `index.html` regenerated, and `.github/workflows/nfl-desk.yml`. **Read-only** use of every other namespace; no peer `data/**`, no `verified/**` page content, no deletions. Nothing is merged or closed from earlier sessions.
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| D1 | Board bootstrap + baseline verifier run + claim push | done | arena/1e2776fd-own4 | `COORDINATION.md` |
+| D2 | Namespace census: inventory all `nfl-*` registers, count duplication, compute cross-register disagreements from files (not typed) | in progress | arena/1e2776fd-own4 | `nfl-desk/engine/census.py`, `nfl-desk/data/census.json` |
+| D3 | Dated official reads (nfl.com injuries/schedules/standings/transactions) with fetch timestamps and rendered-evidence capture | in progress | arena/1e2776fd-own4 | `nfl-desk/data/official_reads_2026-11-19.json` |
+| D4 | Decision-readiness register: one row per brief line, status derived from file existence, blocking gate + clearing number + official source carried from the 73-row register, staleness recomputed | in progress | arena/1e2776fd-own4 | `nfl-desk/engine/register.py`, `nfl-desk/data/requirements.json` |
+| D5 | Questions→information→answers register and suggestions review surface (owner decision column, deliberately undecided) | in progress | arena/1e2776fd-own4 | `nfl-desk/data/questions.json`, `nfl-desk/data/suggestions.json` |
+| D6 | Static site (10 pages) + verifier gate + workflow | in progress | arena/1e2776fd-own4 | `nfl-desk/index.html`, `nfl-desk/pages/*.html`, `nfl-desk/engine/build.py`, `nfl-desk/engine/verify.py`, `.github/workflows/nfl-desk.yml` |
+| D7 | Executive summary + README | in progress | arena/1e2776fd-own4 | `nfl-desk/EXECUTIVE_SUMMARY.md`, `nfl-desk/README.md` |
+| D8 | Root/portal navigation integration (additive only) | in progress | arena/1e2776fd-own4 | `nfl/index.html`, `verification/build.py`, `index.html` |
+| D9 | PR to `main`, merge without waiting, Pages deploy confirmation, completion record | unclaimed | — | `COORDINATION.md` |
+
+**Collision rule applied:** the 11 open PRs are older than 2026-11-18 with no commits in that window; per the stale-claim rule none blocks this work. Their namespaces are read-only to this session; where this session disagrees with a peer number, the disagreement is published on the Flagged page and in the census rather than edited into the peer file.
 
