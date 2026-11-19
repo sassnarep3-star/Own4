@@ -80,7 +80,7 @@
    "id": "Q05",
    "question": "What share of injury-report rows carry a game-status designation, and does the brief's '6 of 254' hold?",
    "why_it_blocks": "If almost no row carries a designation, then designation-based features are being trained on a handful of rows.",
-   "have": "Measured from the stored, hash-verified 2026-11-18 capture: 23 club tables, 242 player rows, 16 with a Game Status (9 Out, 7 Questionable), 226 blank. That is 6.6% designated — the same order as the brief's claim, but on a different copy.",
+   "have": "Measured from the stored, hash-verified 2026-11-18 capture: 23 club tables, 242 player rows, 16 with a Game Status (9 Out, 7 Questionable), 226 blank. That is 6.6% designated — the same order as the brief's claim, but on a different copy. Coverage is partial: the capture holds 23 of the 32 clubs (the report's first two windows), so the remaining nine are absent rather than healthy.",
    "missing": "A recount of the copy the brief used (254 rows, 6 designations) and a series across weeks so the share is not one snapshot.",
    "how_to_discover": "Re-run nfl-desk/engine/parse_injuries.py over every stored capture, and start capturing earlier weeks. The brief's figure can then be reconciled against a dated file instead of a memory.",
    "clears_when": "A per-week table of rows/designated/blank with the capture hash beside each count.",

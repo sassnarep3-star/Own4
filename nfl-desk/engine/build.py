@@ -511,6 +511,11 @@ number on a desk where every other number is sourced.</p>
 
 def build_availability(inj, st, census):
     split = inj["game_status_split"]
+    # The injury report names clubs by nickname; the standings carry the abbreviation.
+    # Mapping is by exact nickname suffix of the official club name, and a miss is left blank.
+    nickname = {}
+    for r in st["rows"]:
+        nickname[r["club"].split()[-1]] = r["abbr"]
     rows = []
     for c in inj["clubs"]:
         designated = sum(1 for r in c["rows"] if r["game_status"])
@@ -518,14 +523,16 @@ def build_availability(inj, st, census):
         qs = sum(1 for r in c["rows"] if r["game_status"] == "Questionable")
         blank_inj = sum(1 for r in c["rows"] if not r["injury"])
         rows.append([
-            "<td>%s</td>" % e(c["club"]),
+            "<td>%s %s</td>" % ('<code>%s</code>' % e(nickname[c["club"]]) if c["club"] in nickname else "",
+                               e(c["club"])),
             "<td>%d</td>" % len(c["rows"]),
             "<td>%d</td>" % designated,
             "<td>%d</td>" % outs,
             "<td>%d</td>" % qs,
             "<td>%d</td>" % (len(c["rows"]) - designated),
             "<td>%d</td>" % blank_inj,
-            '<td class="small">%s</td>' % link(inj["source_url"], "injury report"),
+            '<td class="small">%s %s</td>' % (link(inj["source_url"], "injury report"),
+                                             repo_link("nfl-desk/data/injuries_2026-11-18_parsed.json", "parse")),
         ])
     counts = inj["counts"]
     body = """
@@ -555,6 +562,10 @@ workflow's manifest before any count is used.</p>
         rows,
         "Every count is produced by nfl-desk/engine/parse_injuries.py from the stored HTML. Practice "
         "status is not used to infer a game status anywhere on this page.") + """
+<p class="note"><b>Coverage limit: 23 of 32 clubs.</b> The stored capture holds the games in the
+report's first two windows only. The remaining clubs are <em>absent</em> from the artifact, not
+healthy, and this page does not treat absence as availability. That is the same distinction the
+brief draws for the reserve list: "not listed" never means "available".</p>
 <h2>2. What the live read added</h2>
 <p>The same page was read live on %s. It showed the same Week&nbsp;11 structure: the Thursday game and
 the early Sunday windows carry designations, most later rows do not. Ten rows were corroborated against
