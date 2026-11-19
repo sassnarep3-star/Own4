@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Repo review · NFL Origination Lab 2026-11-19</title>
+<style>body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#f6f7f9;color:#1a1d21}
+header{background:#0b2a4a;color:#fff;padding:14px 20px}
+header a{color:#bcd7f5;text-decoration:none;margin-right:14px;font-size:14px}
+header a:hover{text-decoration:underline}
+main{max-width:1100px;margin:0 auto;padding:20px}
+h1{font-size:26px;margin:6px 0}h2{font-size:20px;margin:26px 0 8px}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:13px;margin:10px 0}
+th,td{border:1px solid #d8dde3;padding:6px 8px;text-align:left;vertical-align:top}
+th{background:#0b2a4a;color:#fff}
+tr:nth-child(even){background:#f0f3f7}
+a{color:#0b5cad}
+.note{background:#fff8e1;border:1px solid #e6d48a;padding:10px 14px;border-radius:6px;font-size:14px}
+.flag{background:#fdecea;border:1px solid #e5a09a;padding:10px 14px;border-radius:6px;font-size:14px}
+footer{max-width:1100px;margin:0 auto;padding:20px;font-size:13px;color:#555}
+.blank{color:#888;font-style:italic}
+.kpi{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
+.kpi div{background:#fff;border:1px solid #d8dde3;border-radius:8px;padding:12px 16px;min-width:150px}
+.kpi b{font-size:22px;display:block}</style></head><body>
+<header><b>NFL Origination Lab</b> · 2026-11-19 · <a href="index.html">Dashboard</a><a href="executive-summary.html">Executive summary</a><a href="readiness.html">Decision readiness</a><a href="origination.html">Originated lines</a><a href="price-snapshots.html">Price snapshots</a><a href="results.html">Results feed</a><a href="leaderboard.html">Leaderboard</a><a href="availability.html">Availability & depth</a><a href="injuries.html">Injuries</a><a href="standings.html">Standings</a><a href="schedule.html">Schedule & venues</a><a href="transactions.html">Transactions</a><a href="correlations.html">Correlations</a><a href="gates.html">Gates</a><a href="strategies.html">Strategies</a><a href="questions.html">Questions</a><a href="suggestions.html">Suggestions</a><a href="flagged.html">Flagged for review</a><a href="sources.html">Sources</a><a href="repo-review.html">Repo review</a></header>
+<main><h1>Repository review (this namespace)</h1>
+<table><thead><tr><th>Area</th><th>Finding</th><th>Source</th></tr></thead><tbody>
+<tr><td>Scope</td><td><a href="sources.html">Sources</a> — new namespace only; no peer namespace, root index.html, or shared navigation edited. COORDINATION.md appended (claim block only).</td><td>—</td></tr>
+<tr><td>Data</td><td>7 official JSON files (standings, schedule, injuries, results, trades, game centre, registers). 253 injury rows; 32 standings rows; 13 fixtures; 14 finals; 12 trades.</td><td><a href="sources.html">Source register</a></td></tr>
+<tr><td>Engine</td><td><a href="sources.html">Sources</a> — compute.py (ratings, correlations, origination, snapshots, leaderboard, availability) → derived.json. Deterministic; re-runnable.</td><td>—</td></tr>
+<tr><td>Verifier</td><td><a href="sources.html">Sources</a> — verify.py: link integrity, row counts (drift alarm), source-link coverage, banned-claim scan.</td><td>—</td></tr>
+<tr><td>Site</td><td><a href="sources.html">Sources</a> — 20 static pages under pages/ + index.html. No build step; served by legacy Pages config.</td><td>—</td></tr>
+<tr><td>Irregularities</td><td>15 flagged items (F-01…F-15). Venue disagreement, Lions designation disagreement, no price source, depth 404.</td><td><a href="flagged.html">Flagged</a></td></tr>
+<tr><td>Peer work</td><td><a href="sources.html">Sources</a> — read for cross-reference only (nfl-verify-2026-11-19, nfl-daily-desk, nfl-price-snapshot, nfl-week11-reread). Not edited, not copied.</td><td>—</td></tr>
+</tbody></table></main>
+<footer>Analytical research only, not wagering advice. National Problem Gambling Helpline
+1-800-MY-RESET (1-800-697-3738) — <a href="https://www.ncpgambling.org/help-treatment">ncpgambling.org</a>.
+Every table row carries an official source link; unverifiable values are blank and flagged.
+Session arena/7ccaa4f3-own4 · namespace nfl-origination-2026-11-19.</footer>
+</body></html>
