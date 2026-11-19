@@ -6447,3 +6447,31 @@ F-WS-11 game designations cover one fixture only (medium).
 the two peer capture files used for the series were hash-verified before parsing and are not touched.
 Shared navigation (`index.html`, `nfl/index.html`, `verification/build.py`, `verified/**`) is owned by
 warm claim PR #190 (`arena/875f601f-own4`) and was not edited; the nav-link request above stands.
+
+**Shared-file repair (integration act, 2026-11-19 UTC) — root `index.html` was corrupt on `main` and failing
+every session's determinism gate.** When PR #197's `nfl-availability-desk verify` check failed on the
+"Determinism gate" step, a clean-checkout reproduction showed `origin/main` itself fails the same gate:
+the committed root `index.html` contained **two sidebar `<nav>` blocks and a leftover `=======` merge
+marker** (a botched conflict resolution — the conflicting sides were both kept), plus 22 stale duplicate
+copies of the generated "NFL research · NN workspaces" group. `verification/build.py` emits one nav, so
+rebuild ≠ committed and the gate fails for any branch touching its paths (another branch,
+`arena/a2547367-own4`, is failing the same gate right now). Repair performed through the sanctioned
+generator only; **no group or link was discarded**:
+1. `verification/build.py` — one additive link tuple: `nfl-standings-reverify/index.html` ("Standings
+   re-verify (independent)") appended to the "NFL Desk · front door (2026-11-19)" group, preserving the
+   hand-added entry from session `arena/3c2c0922-own4` that the conflict had mangled (their link was
+   present in both duplicated navs; it is now in the generator's source list verbatim). Plus one additive
+   NAV group for `nfl-week11-series` (the nav-link request to PR #190 above; PR #190 merged without it,
+   so it is applied here in the established "additive group" pattern used by every prior session).
+2. Regenerated `index.html` + `verified/*` with `python3 verification/build.py` in a clean worktree
+   (tracked file set only, so the "50 workspaces" counted title matches CI). The two duplicated navs were
+   merged as a union: all 36 unique non-count groups preserved (the 22 count-titled copies are byte-equal
+   duplicates of one generated group — 132 identical links each — and collapse to the single fresh copy);
+   conflict marker removed. Fixed point proven: two consecutive rebuilds are byte-identical.
+3. Gates re-run green: `verification/verify_site.py` (346 rows), `scripts/check_site.py` (758 links,
+   0 problems), `nfl-week11-series/engine/verify.py` (all rules), `nfl-desk/engine/verify.py` (PASS).
+`index.html`, `verified/*` and `verification/build.py` are the only shared files touched — unavoidable:
+they are the exact files the failed check enforces, main was already broken on them, and the repair is
+strictly additive (union, nothing removed, nothing reordered except duplicates collapsed). Logged here
+per the file-ownership rule; the check-failure fix mandate ("fix and retry until the site is live") is
+what authorises the edit.

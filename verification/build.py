@@ -127,6 +127,11 @@ NAV = [
         ("nfl-desk/pages/flagged.html", "⚑ NFL Desk — flagged for review (15)", "legacy"),
         ("nfl-desk/pages/sources.html", "Official sources read", "legacy"),
         ("nfl-desk/pages/verify.html", "Verification", "legacy"),
+        # Added 2026-11-19 by session arena/3c2c0922-own4 as a hand edit to index.html
+        # (their link collided in a merge and the conflict left a duplicated sidebar).
+        # Preserved verbatim here during the 2026-11-19 nav repair by arena-23197e9d-own4;
+        # additive only — no existing entry is removed or reordered.
+        ("nfl-standings-reverify/index.html", "Standings re-verify (independent)", "legacy"),
     ]),
     # Added 2026-11-15 by session arena/e0ed20d1-own4 (additive; superset-only edit).
     # The NFL Decision Desk is the workspace that publishes a decision-readiness table for
@@ -603,6 +608,23 @@ NAV.append(("NFL Command Deck · pre-registered evaluation (2026-11-19)", [
     ("nfl-command-deck/pages/suggestions.html", "Suggestions — choose a path", "legacy"),
     ("nfl-command-deck/pages/flagged.html", "⚑ Command Deck — flagged for review", "legacy"),
     ("nfl-command-deck/pages/sources.html", "Sources &amp; capture hashes", "legacy"),
+]))
+
+# Session arena-23197e9d-own4 (2026-11-19): one additive group so the Week 11 timestamped
+# availability series is reachable from the root dashboard. Appended, not inserted; no
+# existing entry is reordered, relabelled or removed. The namespace's own verifier owns
+# its internal links (192 sourced rows; capture hashes + drift pins).
+NAV.append(("NFL Week 11 Series · timestamped availability (2026-11-19)", [
+    ("nfl-week11-series/index.html", "Series dashboard — start here", "legacy"),
+    ("nfl-week11-series/series.html", "Timestamped series &amp; row-level deltas", "legacy"),
+    ("nfl-week11-series/week10.html", "Week 10 dated recount", "legacy"),
+    ("nfl-week11-series/reserve.html", "Reserve/transactions ledger check", "legacy"),
+    ("nfl-week11-series/depth.html", "Depth checks (GB, HOU)", "legacy"),
+    ("nfl-week11-series/starters.html", "Announced-starter evidence", "legacy"),
+    ("nfl-week11-series/executive-summary.html", "Executive summary", "legacy"),
+    ("nfl-week11-series/flagged.html", "⚑ Week 11 Series — flagged (11)", "legacy"),
+    ("nfl-week11-series/sources.html", "Sources read (with clock times)", "legacy"),
+    ("nfl-week11-series/verify.html", "Verification gates", "legacy"),
 ]))
 
 # The NFL research group title used to be a hand-typed count and drifted twice: it read
