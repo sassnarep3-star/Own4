@@ -111,7 +111,7 @@ def score_block(preds, model_id, lam, block):
             "brier_total_over_tau": round(bs_total, 10),
             "crps_total": round(crps, 10),
             "crps_margin": round(crps_m, 10),
-            "brier_margin_point": round(brier_margin, 8),
+            "brier_margin_point": round(brier_margin, 6),
             "accuracy_raw_not_a_ranking_metric": acc,
             "per_week": per_week_losses(preds),
             "brier_home_win": bs_home, "brier_total_over_tau": bs_total,
