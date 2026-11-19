@@ -5572,6 +5572,7 @@ Scope note: this session does not claim the 73-row requirement register, the dep
 - **Not done here (out of this session's claim):** depth charts, inactives, snap counts, team-level model, strategy/leaderboard work, the executive summary and the decision-readiness page. These remain owned by earlier entries on this board; this session did not edit them.
 - **Shared site:** the root `index.html` and navigation are not edited; the new directory is reachable at `/nfl-week11-reread/` once merged.
 
+
 ### W11-1 PR, merge and Pages confirmation — `arena/1a2e0e65-own4` (2026-11-19 UTC)
 
 - **PR:** [#174](https://github.com/sassnarep3-star/Own4/pull/174), `arena/1a2e0e65-own4` → `main`, `--merge`, merged 2026-11-19T06:55:13Z, merge commit `fa4b5a7e253225e9fb0b5c7da92218e8427d4d22`. Checks on the PR (validate, audit, verify ×4) all succeeded; mergeable CLEAN before merge.
@@ -5697,3 +5698,57 @@ this workspace. Nothing is inferred and no unconfirmed value is filled in.
   0 localhost/loopback URLs. Flagged irregularities (no live external fetch this session; status values
   taken from owning registers; legacy values are the archived snapshot) are published on this board and
   on the per-workspace "Flagged for Review" pages. Non-blocking; merged.
+
+## Session arena/5f46c098-own4 — final integration, PR, merge and GitHub Pages confirmation (2026-11-19 UTC)
+
+**Branch (platform-pinned):** arena/5f46c098-own4, based on e322a32e836c70924d9a4ef5971c23b43fb2a07a (main == origin/main at session start; no commits ahead of main). The requested task-specific branch naming convention is unavailable in this environment; this harness-assigned branch is used, with no alternate branch created or pushed. All work stays on this single branch; commits and any PR target only arena/5f46c098-own4.
+
+**Scope:** final integration only. Re-verify the combined build (no broken links, every table row source-linked), confirm the site is not broken, open a PR from this branch to main, merge it, confirm GitHub Pages deploys, and record the PR link and merge result here. File scope: COORDINATION.md only — no data, site, or generator files are changed, so no peer session work is overwritten or discarded.
+
+| ID | Task | Status | Owner | File scope |
+|---|---|---|---|---|
+| INT-1 | Re-verify combined root build (python3 build_site.py) and confirm no broken links or unsourced rows | done | arena/5f46c098-own4 | build_site.py, data/*.json, pages/*.html, index.html, assets/canonical.css |
+| INT-2 | Confirm the NFL implementation surface (nfl-core + nfl-decision-desk) against the brief | done | arena/5f46c098-own4 | nfl-core/data/*.csv, nfl-decision-desk/data/*.json |
+| INT-3 | Add this session claim and findings to COORDINATION.md; commit and push | in progress | arena/5f46c098-own4 | COORDINATION.md |
+| INT-4 | Open PR arena/5f46c098-own4 -> main; merge without waiting for approval | unclaimed | arena/5f46c098-own4 | — |
+| INT-5 | Confirm GitHub Pages deploys successfully for the merge commit | unclaimed | arena/5f46c098-own4 | — |
+| INT-6 | Record PR link and merge result plus Pages status in COORDINATION.md; mark tasks done | unclaimed | arena/5f46c098-own4 | COORDINATION.md |
+
+### Findings (repo review where data exists)
+
+The repository already implements the user NFL line-origination brief, mainly in two namespaces:
+
+- nfl-core store of record for the 2026 NFL season:
+  - price_snapshots_2026.csv: opening and closing price per market (SIDE / TOTAL / MONEYLINE), capture timestamps, sources, settlement, per-row game_url (official nfl.com game page) and a flag. Origination order enforced SIDE -> TOTAL -> MONEYLINE. Opening prices for 2026 weeks 1-9 are blank and flagged OPEN-UNVERIFIED (no opening-line capture exists anywhere; flag F-C02).
+  - results_feed_2026.csv: 137 settled games; every row carries an official https://www.nfl.com/games/... URL; scores reconciled cell by cell to the official 32/32 standings in verify.py (OR-01). Backtests and ROI are computable.
+  - originations_2026.csv: side -> total -> moneyline order (origination_seq 1,2,3); model_fair_line, market_line and difference published as separate columns; model output plus third-party market capture identified per row.
+  - leaderboard_signal.csv / leaderboard_staking.csv: signal rank by z_vs_breakeven at flat stakes only; stake-level ROI/drawdown in a separate staking table that cannot alter rank (signal/staking separated).
+  - correlations_n.csv: every value carries n, pearson_r, 95 percent CI, p, inputs and source; player-level pairs blank and flagged (no verified source).
+  - gates.csv: G1-G4; best BH-adjusted p = 0.44; no strategy clears the luck barrier; zero reward-eligible.
+- nfl-decision-desk decision layer: readiness dashboard (pages/index.html), prices/own lines/residual (pages/prices.html), model probability plus inputs (pages/model.html), leaderboard gates luck panel (pages/leaderboard.html), correlations with n (pages/correlations.html), pre-registration and six gates (pages/governance.html), questions register 22 (pages/questions.html), suggestions board 18 unverified verdicts (pages/suggestions.html), repo review irregularities (pages/repo-review.html), flagged for review (pages/flagged.html), sources (pages/sources.html), executive summary (pages/executive-summary.html), fixtures corpus and context (pages/fixtures.html), availability and injuries (pages/availability.html).
+  - data/prices/origination.json: origination order enforced [side, total, moneyline]; price-data policy DEC-1 decided before any backtest; fair line self-computed; market line third-party (NFL publishes no betting prices).
+  - data/leaderboard/leaderboard.json: benchmark-relative Brier skill, weekly-cluster lower bound, BH adjustment; n=104 below the pre-registered 300-game floor so ZERO strategies can qualify; win rate/ROI published but never used to rank; control baselines run every build.
+  - data/correlations/correlations.json: every value carries n and source; 5 computed, 3 blank with reason.
+  - data/fixtures/fixtures.json: 272 rows; fixture-context features from published schedule facts (rest, short week, post-bye, site, travel); venue reads; official NFL Game Book PDF links; schedule source URLs.
+  - data/availability/availability.json: capture with clock time and delta versus prior capture; 347 rows read for 28 clubs Week 10; never infers depth rank, snap share or inactive status; no fixed points penalty for a missing starter.
+
+### Headline result (published, not new)
+No strategy has demonstrated skill rather than luck. Best BH-adjusted p across strategies = 0.44 (nfl-core) / 0.409 (decision-desk governance); both above the 0.05 bar and below the 300-game coverage floor. Leaderboard awards zero rewards. One signal remains under paper tracking (nfl-core: unders in outdoor games with wind >= 15 mph, hit 55.4 percent, z = 1.43, not yet distinguishable from luck).
+
+### Irregularities and deliberate blanks (never inferred; listed on Flagged for Review pages)
+- Opening lines for 2026 weeks 1-9: no capture exists (F-C02); left blank.
+- Market prices are third-party (nfl.com publishes no betting prices); all price rows carry this provenance and a flag.
+- Player props: blocked (no official per-game player logs or prop prices); prop rows and prop correlations blank and flagged.
+- Replacement depth / depth-chart strings: not published by the league (club depth-chart URL returns 404); blank and flagged where a club official chart does not answer.
+- Player-level correlations: blank (no verified inputs).
+
+### Official-source boundary for this session
+No official NFL page was re-fetched in this session (sandbox outbound access is limited to GitHub hosts, PyPI and npm; nfl.com is not reachable). Existing rows cite https://www.nfl.com/... (official game pages, injuries, schedules) and a pinned nflverse archive that is reconciled cell by cell to the official standings. Values that could not be confirmed from an official source are left blank and flagged. No number, price, edge or return is claimed.
+
+### Build verification
+python3 build_site.py (root): pages: 10, PROBLEMS: none, exit 0. The regenerated output is an NBA-only dashboard that would drop the committed NFL-oriented navigation including the nfl-decision-desk links; it was not committed, to avoid regressing peer work. The deployed site (main) is the committed dashboard, already live and category-organized with the NFL Decision Desk linked as the readiness dashboard.
+
+### Claims on this session
+PR link, merge result and Pages status: to be recorded in task INT-6 after the PR merges.
+
+
