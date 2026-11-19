@@ -6089,3 +6089,6 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 - Market, price, ROI, CLV and residual cells are blank by policy (no official price source). Brier skill vs closing line is negative (see Verification / Leaderboard pages); no strategy is reward-eligible.
 - Cross-file requests (logged, not edited): root `build_site.py` regenerates NBA-only output and drops NFL navigation — owner of root site to decide; root `index.html` does not link `nfl-own4/`.
 - Status: **needs review** for OWN4-2..OWN4-4 items published on Flagged page; OWN4-1..OWN4-5 marked done for this session.
+- Correction to the claim above: a scoped workflow `.github/workflows/nfl-own4.yml` was added (verify on PR/push; deploy-pages on push to `main`, same pattern as `nfl-decisions.yml`). Peer workflows untouched.
+- Rebase log (2026-11-19): `git pull --rebase origin main` conflicted on this board only (union resolved, all peer blocks kept). A second `pull --rebase` against the session's own remote claim commit `93db5d2` replayed peer history and was aborted; resolved by recording `93db5d2` as an ancestor with an `-s ours` merge (no content discarded, fast-forward push `93db5d2..250ad3c`).
+- Site URL: https://sassnarep3-star.github.io/Own4/nfl-own4/ (landing `index.html`; pages under `pages/`).
