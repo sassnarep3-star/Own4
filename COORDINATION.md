@@ -6092,3 +6092,5 @@ register2 → crosscheck → build → verify`) was re-run end to end after the 
 - Correction to the claim above: a scoped workflow `.github/workflows/nfl-own4.yml` was added (verify on PR/push; deploy-pages on push to `main`, same pattern as `nfl-decisions.yml`). Peer workflows untouched.
 - Rebase log (2026-11-19): `git pull --rebase origin main` conflicted on this board only (union resolved, all peer blocks kept). A second `pull --rebase` against the session's own remote claim commit `93db5d2` replayed peer history and was aborted; resolved by recording `93db5d2` as an ancestor with an `-s ours` merge (no content discarded, fast-forward push `93db5d2..250ad3c`).
 - Site URL: https://sassnarep3-star.github.io/Own4/nfl-own4/ (landing `index.html`; pages under `pages/`).
+
+- PR opened: https://github.com/sassnarep3-star/Own4/pull/193 (arena/a2547367-own4 → main). Merge attempted next in this session; result recorded when confirmed.
