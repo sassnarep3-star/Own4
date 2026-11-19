@@ -8,13 +8,13 @@ Published at **https://sassnarep3-star.github.io/Own4/nfl-desk/**.
 
 ## What this workspace is for
 
-The repository holds forty sibling NFL workspaces written by different sessions. They
-overlap, and they disagree. Rather than publish a forty-first opinion, this workspace
-does four things:
+The repository holds dozens of sibling NFL workspaces written by different sessions. They
+overlap, and they disagree. Rather than publish one more opinion, this workspace does four
+things:
 
 1. **Measures the disagreement.** `engine/census.py` walks the tree and counts workspaces,
    duplicated registers and pairwise status disagreements between the three requirement
-   registers (62 of them), with no number typed by hand.
+   registers, with no number typed by hand.
 2. **Recounts from stored official captures.** `engine/parse_standings.py` and
    `engine/parse_injuries.py` re-read the 2026-11-19 standings and the stored 2026-11-18
    injury capture, so published counts come from a hashed artifact rather than a

@@ -203,7 +203,7 @@ def build_index(req, q, sug, flags, reads, census, inj, st):
     # decision-readiness preview: the rows where the registers agree and the gate is named
     agree = [r for r in req["rows"] if r["statuses_agree"]]
     preview = []
-    for r in agree[:12]:
+    for r in agree[:14]:
         preview.append([
             "<td><code>%s</code></td>" % e(r["id"]),
             "<td>%s</td>" % e(r["requirement"]),
@@ -217,9 +217,10 @@ def build_index(req, q, sug, flags, reads, census, inj, st):
         "Decision-readiness preview &mdash; the %d of %d lines where all three registers agree" % (len(agree), c["rows"]),
         ["ID", "Requirement (brief wording)", "Status", "Gate that blocks it", "Number that clears it", "Official source", "Register"],
         preview,
-        'Full table, including the %d lines the registers disagree on, is on the '
-        '<a href="pages/requirements.html">requirements page</a>. A row is shown here only because the '
-        'registers agree; agreement is not correctness.' % (c["rows"] - len(agree)))
+        'Full table, including the %d lines the registers disagree on and the %d that could not be '
+        'matched across files at all, is on the <a href="pages/requirements.html">requirements page</a>. '
+        'A row is shown here only because the registers agree; agreement is not correctness.'
+        % (c["disagree"], c["unmatched"]))
 
     posture = table(
         "What is decided, and what is not",
