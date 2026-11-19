@@ -368,7 +368,7 @@
    "status": "met and exercised",
    "gate": "no gate for capture; the gate for USE is cadence, because the report changes on a publish schedule and a capture that lands between publishes duplicates nothing but a byte.",
    "clearing_number": "1 scheduled run x 3 weekdays x 2 sources (report + reserve list) per week, all with sha256 in an append-only manifest; today the manifest holds 5 entries across 2 dates.",
-   "as_of_2026_11_19": "the workflow produced the 2026-11-18T23:49:17Z capture that made this session's first delta possible; the desk's drift alarm (row floor, required fields, official vocabulary, club count) is the companion half.",
+   "as_of_2026_11_19": "the workflow produced the 2026-11-18T23:49:17Z capture that made this session's first delta possible; the desk's drift alarm (row floor, required fields, official vocabulary, club count) is the companion half, and verify.py fails the build if two captures ever share a digest (a cached fetch) or if a recorded digest stops matching its bytes.",
    "evidence": "nfl-readiness-register/capture/snapshot_official_pages.py; .github/workflows/nfl-readiness-register.yml; nfl-readiness-register/snapshots/manifest.jsonl",
    "source_url": "https://www.nfl.com/injuries/"
   },
@@ -434,7 +434,7 @@
    "status": "met and extended this session",
    "gate": "no gate for recording; the 300-game rule gates any claim.",
    "clearing_number": "1 frozen rule file + 1 commit + N pre-kickoff rows, graded later; today: rule frozen, 13 of 13 fixtures recorded before kickoff (5 from the freeze, 8 added now that the results feed is complete), 0 graded.",
-   "as_of_2026_11_19": "the desk re-derived cohort 1 from the frozen arithmetic and today's official standings: 5 of 5 rows identical; 8 fixtures added as cohort 2 with their own stamp, and the two cohorts are never merged.",
+   "as_of_2026_11_19": "the desk re-derived cohort 1 from the frozen arithmetic and today's official standings: 5 of 5 rows identical; 8 fixtures added as cohort 2 with their own stamp, and the two cohorts are never merged. The record is also immutable in the sense that matters: engine/shadow.py preserves a fixture's original recorded_utc and the commit it was recorded under across rebuilds (13 preserved, 0 re-stamped), so re-running the script cannot move a pre-kickoff timestamp.",
    "evidence": "nfl-daily-desk/data/shadow_cohorts.json; nfl-readiness/prereg/shadow_v1.py",
    "source_url": "https://www.nfl.com/standings/league/2026/REG"
   },
@@ -566,7 +566,7 @@
    "status": "half-built",
    "gate": "the injury half now has dated captures with hashes; the depth half has dated captures from the sweep; the inactives half has nothing, so a backtest can still leak exactly where it matters most (who was declared inactive).",
    "clearing_number": "3 ledgers x a dated capture per week; today 2 of 3, and 0 for inactives.",
-   "as_of_2026_11_19": "the desk's manifest pattern (append-only, sha256, per-capture status) is the same one the register workflow uses, so the two ledgers can be merged without changing either.",
+   "as_of_2026_11_19": "the desk's manifest pattern (append-only, sha256, per-capture status) is the same one the register workflow uses, so the two ledgers can be merged without changing either; the registration side now refuses to re-stamp, which closes the same lookahead hole for forecasts as hashes close for captures.",
    "evidence": "nfl-readiness-register/snapshots/manifest.jsonl; nfl-daily-desk/data/availability_delta.json (reads)",
    "source_url": "https://www.nfl.com/injuries/"
   },

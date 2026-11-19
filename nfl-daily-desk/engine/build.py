@@ -82,6 +82,14 @@ def pl(n, sing, plural=None):
     return "%d %s" % (n, sing if n == 1 else plural)
 
 
+def commit_link(sha):
+    """Permalink to the commit the registration was made under, or the note that explains its absence."""
+    if re.fullmatch(r"[0-9a-f]{40}", sha or ""):
+        return ('<a class="src" href="%s/commit/%s" rel="noopener"><code>%s&#8230;</code></a>'
+                % (REPO.rstrip("/").replace("/blob/main", ""), sha, sha[:10]))
+    return esc(sha or "not recorded")
+
+
 def esc(s):
     return (str(s).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;"))
 
@@ -559,10 +567,14 @@ asks for controls next to every leaderboard run.</p>%s</section>
 def build_origination():
     sh = load("shadow_cohorts")
     rec = load("shadow_reconciliation")
-    rows = table(["fixture", "kickoff (UTC)", "recorded (UTC)", "before kickoff", "margin (home)", "p(home)",
+    rows = table(["fixture", "kickoff (UTC)", "recorded (UTC)", "commit it was recorded under",
+                  "before kickoff", "margin (home)", "p(home)",
                   "fair pick", "market line", "residual", "cohort", "source"],
                  [["<td>%s at %s</td>" % (esc(r["away"]), esc(r["home"])), "<td>%s</td>" % esc(r["kickoff_utc"]),
-                   "<td>%s</td>" % esc(r["recorded_utc"]), "<td>%s</td>" % ("YES" if r["before_kickoff"] else "NO"),
+                   "<td>%s<br><span class='ev'>%s</span></td>" % (
+                       esc(r["recorded_utc"]), esc(r.get("record_kind", "first registration"))),
+                   "<td>%s</td>" % commit_link(r.get("registered_at_commit", "")),
+                   "<td>%s</td>" % ("YES" if r["before_kickoff"] else "NO"),
                    "<td>%s</td>" % r["margin_home"], "<td>%s</td>" % r["p_home"], "<td>%s</td>" % esc(r["fair_pick"]),
                    "<td>%s</td>" % ('<span class="blank" title="%s">—</span>' % esc(r["market_line_blank_reason"])),
                    "<td>— <em>needs the market column</em></td>", "<td>%s</td>" % esc(r["cohort"]),
@@ -597,7 +609,8 @@ is now complete. The two cohorts are kept separate and are never merged into one
 <li>last commit that touched the rule: <code>%s</code></li>
 <li>eligibility test, verbatim: %s</li>
 <li>eligibility result today: %s</li>
-<li>amendment note: %s</li></ul></section>
+<li>amendment note: %s</li>
+<li>immutability: %s — this run preserved %s original stamps and newly stamped %s</li></ul></section>
 
 <section class="card"><h2>The shadow record (13 fixtures, all pre-kickoff)</h2>%s</section>
 
@@ -618,6 +631,8 @@ twice&rdquo; rule, applied honestly)</h2>%s</section>
 <section class="card"><h2>Irregularities in this artifact set</h2><ul>%s</ul></section>
 """ % (esc(reg["file"]), reg["sha256"][:16], esc(reg["last_commit_touching_rule"]),
        esc(reg["eligibility_test"]), esc(reg["eligibility_result_2026-11-19"]), esc(reg["amendment"]),
+       esc(sh["immutability"]["rule"]), sh["counts"]["timestamps_preserved_from_the_original_record"],
+       sh["counts"]["newly_stamped_this_run"],
        rows, sh["faithfulness_check"]["n_rows_identical"], sh["faithfulness_check"]["n_rows_compared"], faith,
        sh["standings_drift_since_cohort1_freeze"]["n_fields_changed"],
        sh["standings_drift_since_cohort1_freeze"]["n_changed_inside_cohort1_clubs"],

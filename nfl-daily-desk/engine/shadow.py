@@ -80,8 +80,27 @@ def git_head():
                           text=True).stdout.strip()
 
 
+def previous_record():
+    """A registration is immutable once made: a re-run must not re-stamp recorded_utc, and it must not
+    silently re-cohort a fixture. Whatever was recorded first is what stays; only fixtures seen for the
+    first time get today's stamp."""
+    path = NS + "/data/shadow_cohorts.json"
+    if not os.path.exists(path):
+        return {}
+    try:
+        prev = json.load(open(path, encoding="utf-8"))
+    except Exception:
+        return {}
+    out = {}
+    for r in prev.get("rows", []):
+        out[(r["away"], r["home"])] = r
+    return out
+
+
 def main():
     st = {r["club"]: r for r in json.load(open(NS + "/data/standings.json"))["rows"]}
+    prev = previous_record()
+    preserved = restamped = 0
     c1 = json.load(open(COHORT1))
     inp1 = json.load(open(INPUTS1))
     old_teams = {t["abbr"]: t for t in inp1["standings"]}
@@ -94,6 +113,8 @@ def main():
         for k in ("W", "L", "T", "PF", "PA"):
             if int(t[k]) != int(now[k]):
                 drift.append({"club": abbr, "field": k, "at_cohort1_freeze": t[k], "on_2026-11-19": now[k]})
+    stored = {(f["away"], f["home"]): f for f in c1["forecasts"]}
+    stored_set = set(stored)
     # 2. re-run the frozen arithmetic
     rng = random.Random(SEED_COHORT2)
     rows = []
@@ -101,10 +122,24 @@ def main():
         ra, rh = rating(st[away]), rating(st[home])
         m = rh - ra + HFA
         p = phi(m / SIGMA)
+        was = prev.get((away, home))
+        if was and was.get("recorded_utc"):
+            stamp = was["recorded_utc"]          # a registration keeps the time it was first made at
+            commit = was.get("registered_at_commit") or "not recorded by the version that made this row"
+            preserved += 1
+        else:
+            stamp, commit = RECORDED_UTC, git_head()
+            restamped += 1
         rows.append({
             "away": away, "home": home, "kickoff_et": ko, "kickoff_utc": KICKOFF_UTC[ko],
-            "recorded_utc": RECORDED_UTC,
-            "before_kickoff": RECORDED_UTC < KICKOFF_UTC[ko],
+            "recorded_utc": stamp,
+            "registered_at_commit": commit,
+            "record_kind": ("re-derivation of the stored cohort-1 registration — that file publishes no "
+                            "timestamp of its own, so this stamp is when THIS desk reproduced it, not when "
+                            "it was first registered" if (away, home) in stored_set else
+                            "first registration by this desk, made before kickoff"),
+            "recorded_immutable": bool(was and was.get("recorded_utc")),
+            "before_kickoff": stamp < KICKOFF_UTC[ko],
             "inputs": {k: {f: st[k][f] for f in ("W", "L", "T", "PF", "PA")} for k in (away, home)},
             "rating_away": round(ra, 4), "rating_home": round(rh, 4),
             "margin_home": round(m, 4), "sigma": SIGMA, "hfa": HFA,
@@ -121,7 +156,6 @@ def main():
                           % (TEAM_URL[away], TEAM_URL[home]),
         })
     # 3. faithfulness check against the 5 stored cohort-1 rows
-    stored = {(f["away"], f["home"]): f for f in c1["forecasts"]}
     checks = []
     for r in rows:
         k = (r["away"], r["home"])
@@ -137,9 +171,10 @@ def main():
     cohort = []
     for r in rows:
         k = (r["away"], r["home"])
+        default = ("1 (recorded at the v1 freeze, 8 fixtures withheld)" if k in stored
+                   else "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)")
         r2 = dict(r)
-        r2["cohort"] = "1 (recorded at the v1 freeze, 8 fixtures withheld)" if k in stored else \
-                       "2 (recorded 2026-11-19, after the Week 10 feed completed, still pre-kickoff)"
+        r2["cohort"] = (prev.get(k) or {}).get("cohort") or default
         cohort.append(r2)
     in_cohort1 = {c for f in c1["forecasts"] for c in (f["away"], f["home"])}
     inside = [d for d in drift if d["club"] in in_cohort1]
@@ -186,12 +221,23 @@ def main():
         "rows": cohort,
         "counts": {"week11_games": len(rows), "cohort1": len(stored),
                    "cohort2": len(rows) - len(stored),
-                   "recorded_before_kickoff": sum(1 for r in rows if r["before_kickoff"])},
+                   "recorded_before_kickoff": sum(1 for r in rows if r["before_kickoff"]),
+                   "timestamps_preserved_from_the_original_record": preserved,
+                   "newly_stamped_this_run": restamped},
+        "immutability": {"rule": "a re-run never moves a recorded_utc and never re-cohorts a fixture: "
+                                 "the first record stands, and only a fixture seen for the first time takes "
+                                 "today's stamp. This is what makes 'recorded before kickoff' a claim about "
+                                 "the past rather than about the last time someone ran a script.",
+                         "this_run": {"preserved": preserved, "newly_stamped": restamped}},
         "grading": {"graded": 0, "why": "no Week 11 game has finished at this record time",
                     "first_grade_due_utc": min(r["kickoff_utc"] for r in rows),
                     "minimum_sample_for_any_skill_claim": 300,
                     "status_at_n13": "SHADOW - no eligibility for reward, no staking, no leaderboard rank"},
         "irregularities": [
+            "cohort 2 was first recorded at 2026-11-19T07:19:16Z under commit e322a32e; a rebuild before "
+            "the immutability rule existed re-stamped it to the run time. The rule now preserves the first "
+            "stamp and records the commit it was made under, so 'recorded before kickoff' cannot be moved by "
+            "re-running the script — every row in this file is now stamped at its first registration.",
             "the cohort-1 record's withheld list names Arizona 'ARI' while its forecast rows name the "
             "same club 'AZ': club keys are not canonical across the two lists, so an automated join on "
             "abbreviation would silently drop that fixture",

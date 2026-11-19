@@ -429,6 +429,17 @@ FLAGS = [
    "constant, or a reader who assumes a home baseline beats a coin flip, is wrong for this season: "
    "the always-home control is below 0.5, so a home-leaning pick is a negative-skill signal.",
    "nfl-daily-desk/data/controls.json; nfl-daily-desk/data/corpus_extension.json", SCHED10),
+ f("F-DSK-19", "medium", "Provenance",
+   "Cohort 1's 'recorded before kickoff' claim is inherited, and the file that holds it carries no timestamp",
+   "This desk re-derived the five stored cohort-1 rows and they reproduce exactly, but the stored forecast "
+   "file publishes no recorded_utc and no commit, so the only evidence that they were made pre-kickoff is "
+   "the rule file's own freeze note. The desk therefore stamps its reproduction time on those rows, labels "
+   "them as re-derivations rather than registrations, and refuses to present a re-derivation as if it were "
+   "the original act of registration. Cohort 2 is stamped and commit-pinned by this desk (the commit is "
+   "named per row and survives every rebuild).",
+   "nfl-readiness/data/shadow_week11.json (no timestamp field, confirmed by this session's read); "
+   "nfl-daily-desk/data/shadow_cohorts.json (record_kind, registered_at_commit, immutability)",
+   "https://www.nfl.com/schedules/2026/by-week/week-11"),
  f("F-DSK-18", "medium", "Duplication",
    "Two same-day requirement registers cover the same brief with no id mapping between them",
    "This desk keys 68 requirement rows + 5 process rows as R-xx/P-xx; the integration front door keys 73 "

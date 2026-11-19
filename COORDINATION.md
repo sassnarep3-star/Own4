@@ -6005,3 +6005,33 @@ work it could not see when it claimed. They are published rather than quietly ab
 
 Flag count is now 18, review rows 14, and the verifier covers 14 pages / 727 data rows — all rules pass.
 No file outside `nfl-daily-desk/**` was modified by this session other than this append-only board.
+
+
+### `nfl-daily-desk` — registration immutability and the final publication record (2026-11-19 UTC)
+
+Found while re-running the desk after the second rebase, and fixed rather than left as a cosmetic issue:
+
+- **A re-run used to move the pre-kickoff timestamp.** `engine/shadow.py` stamped `recorded_utc = now()` on
+  every execution, so rebuilding the site on a later date would silently re-date a registration — and after
+  Thursday's kickoff it would flip `before_kickoff` to false, destroying the one property that makes a
+  shadow record worth anything. The engine now preserves each fixture's original `recorded_utc`, keeps the
+  commit it was recorded under per row (`registered_at_commit`, permalinked on the page), and refuses to
+  re-cohort a fixture: the first record stands and only a fixture seen for the first time is stamped. This
+  run: 13 preserved, 0 re-stamped. The defect and the fix are disclosed in the artifact itself
+  (`data/shadow_cohorts.json → irregularities, immutability`).
+- **Cohort 1's claim is inherited, not observed** (new F-DSK-19): the stored `nfl-readiness/data/shadow_week11.json`
+  has no timestamp field at all, so "recorded before kickoff" for those five fixtures rests on the rule file's
+  freeze note. The desk reproduces them exactly (5/5) but labels them as re-derivations instead of presenting
+  a reproduction as an act of registration. Same reasoning applies to `nfl-markets`' synthetic
+  `model_captured_at` convention (F-DSK-11) — a convention is not a timestamp.
+- **A fourth same-day register** (`nfl-desk` front door) and a **fifth** (`nfl-verify-2026-11-19`) were
+  reconciled rather than ignored; see `nfl-daily-desk/cross-check.html`. The front door's parser produced
+  242 rows / 23 club tables / 16 game-status rows from the same bytes as this desk's parser — agreement,
+  published. Its census count (44 namespaces, 42 with verifiers) replaced this desk's hand-waved "30+".
+
+**Final state of this PR.** 14 pages and 15 data files; 728 data rows, every one carrying an https source
+link on an approved host; 19 flags; 14 questions; 12 suggestions all left at "proposed — awaiting owner";
+73 readiness rows (68 requirement + 5 process); 14 repo-review rows. `engine/verify.py` passes all nine
+rules, including byte-identical rebuilds, and the whole chain (`parse → compute → shadow → register →
+register2 → crosscheck → build → verify`) was re-run end to end after the second rebase. No file outside
+`nfl-daily-desk/**` and this board was modified.

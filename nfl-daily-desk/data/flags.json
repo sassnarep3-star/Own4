@@ -5,7 +5,7 @@
  "policy": "flagged items do not block the merge; they block a claim. A row here is a thing the site refuses to smooth over",
  "severity_counts": {
   "high": 4,
-  "medium-or-worse": 15
+  "medium-or-worse": 16
  },
  "rows": [
   {
@@ -146,6 +146,16 @@
    "detail": "Not an error in the data - an error waiting in the models. Any workspace that treats home as a positive constant, or a reader who assumes a home baseline beats a coin flip, is wrong for this season: the always-home control is below 0.5, so a home-leaning pick is a negative-skill signal.",
    "evidence": "nfl-daily-desk/data/controls.json; nfl-daily-desk/data/corpus_extension.json",
    "source_url": "https://www.nfl.com/schedules/2026/by-week/week-10",
+   "status": "flagged"
+  },
+  {
+   "id": "F-DSK-19",
+   "severity": "medium",
+   "area": "Provenance",
+   "item": "Cohort 1's 'recorded before kickoff' claim is inherited, and the file that holds it carries no timestamp",
+   "detail": "This desk re-derived the five stored cohort-1 rows and they reproduce exactly, but the stored forecast file publishes no recorded_utc and no commit, so the only evidence that they were made pre-kickoff is the rule file's own freeze note. The desk therefore stamps its reproduction time on those rows, labels them as re-derivations rather than registrations, and refuses to present a re-derivation as if it were the original act of registration. Cohort 2 is stamped and commit-pinned by this desk (the commit is named per row and survives every rebuild).",
+   "evidence": "nfl-readiness/data/shadow_week11.json (no timestamp field, confirmed by this session's read); nfl-daily-desk/data/shadow_cohorts.json (record_kind, registered_at_commit, immutability)",
+   "source_url": "https://www.nfl.com/schedules/2026/by-week/week-11",
    "status": "flagged"
   },
   {

@@ -60,6 +60,9 @@ python3 nfl-daily-desk/engine/build.py && python3 nfl-daily-desk/engine/verify.p
   because the official pages publish no prices. This is why the desk uses **blanks**, not the `-110`
   convention an earlier namespace applied.
 * No starter inferred from jersey number, experience, salary, or the first name in a depth column.
+* No re-stamped registration: `engine/shadow.py` preserves each fixture's original `recorded_utc` and the
+  commit it was recorded under across rebuilds, so re-running the script cannot move a pre-kickoff timestamp
+  (and cohort 1 is labelled a re-derivation, because the file it came from carries no timestamp — F-DSK-19).
 * No injury *level*: only the change between two dated reads is a signal, and the level is never scored.
 * No venue, roof or weather table: 1 of 13 game centres has been transcribed, so the rest stay absent rather
   than plausible.
