@@ -617,6 +617,7 @@ countable, and refuses the replacement claim because it is not.</p>
 
 def build_corpus(census, st):
     feeds = census["corpus_feeds"]
+    ol = census["originated_lines"]
     rows = []
     for f in feeds:
         extra = []
@@ -680,6 +681,14 @@ week by week, this page publishes all four and settles none.</p>
         "The implied count is a ceiling: it assumes every counted team-game was one half of a normal "
         "two-club game. It is consistent with 150 and inconsistent with 136, but it cannot distinguish "
         "150 from 149 if one game were counted for only one club.") + """
+<p class="note"><b>What the "136" most plausibly is.</b> The only file in the repository with exactly
+136 rows is the originated-line file, <code>nfl-lines/data/derived/own_lines_week10.json</code>
+(%d rows, weeks %d-%d). It is a forward schedule with a fair line on every fixture and a market value
+on only %d of them; %d fixtures have no market number at all. So 136 is a count of <em>fixtures with a
+fair line</em>, not of settled games &mdash; which is why it cannot be compared with the 137 and 150
+settled counts. &rarr; %s</p>
+""" % (ol["rows"], ol["weeks"][0], ol["weeks"][-1], ol["games_with_market_spread"],
+       ol["games_without_market"], link(ol["url"], "the file")) + """
 <p class="note"><b>What this does not prove.</b> 150 is a ceiling derived from the standings, not a
 verified fixture list. It rules out a settled total of 136 only if every completed game appears in both
 clubs' records — which the zero remainder supports but does not certify.</p>

@@ -274,6 +274,30 @@ def main():
     # Deliberately NOT recording `git count-objects` or a tracked-file count here: both
     # depend on the clone (shallow vs full, pack layout), so they would make this committed
     # data file differ between a laptop and CI and break the byte-identical rebuild gate.
+    # --- the originated-line file: what "the 136-game log" actually is -----------
+    ol_path = os.path.join(ROOT, "nfl-lines/data/derived/own_lines_week10.json")
+    own_lines = None
+    if os.path.exists(ol_path):
+        rows = json.load(open(ol_path, encoding="utf-8"))
+        market_cols = [c for c in rows[0] if c.startswith("market_")]
+        own_cols = [c for c in rows[0] if c.startswith("own_")]
+        own_lines = {
+            "path": "nfl-lines/data/derived/own_lines_week10.json",
+            "url": url(ol_path),
+            "rows": len(rows),
+            "weeks": sorted({r.get("week") for r in rows}),
+            "games_with_market_spread": sum(1 for r in rows if r.get("market_spread_line") is not None),
+            "games_with_market_total": sum(1 for r in rows if r.get("market_total_line") is not None),
+            "games_with_own_spread": sum(1 for r in rows if r.get("own_spread_line") is not None),
+            "games_without_market": sum(1 for r in rows if r.get("market_spread_line") is None),
+            "market_columns": market_cols,
+            "own_columns": own_cols,
+            "note": ("This is the only file in the repository with exactly 136 rows, which is where the "
+                     "brief's '136-game log' most plausibly comes from. It is a full-season schedule with "
+                     "a fair line for every fixture and a market value only where a third-party archive "
+                     "had one."),
+        }
+
     with_verifier = [n["namespace"] for n in inventory if n["verifiers"]]
 
     out = {
@@ -292,6 +316,7 @@ def main():
         "register_text_matched_rows": text_matches,
         "register_disagreement_count": len(disagreements),
         "corpus_feeds": corpus,
+        "originated_lines": own_lines,
         "standings_cross_check": standings_math,
         "thin_artifacts": thin,
         "third_party_citation_files": third,
