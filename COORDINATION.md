@@ -6386,3 +6386,24 @@ self-verified and additive.
   rebasing onto `main` rewrote the branch. Each lease was pinned to the previous remote tip
   (`dc9ab0d`, then `d57edf0`), so a concurrent push by another session would have aborted
   the push instead of being overwritten; neither lease was violated.
+## Session `arena-23197e9d-own4` — timestamped availability series + requirement-execution checks (claim, 2026-11-19 UTC)
+
+**Session ID:** `arena-23197e9d-own4` · **Branch (pinned by Arena):** `arena/23197e9d-own4`, based on `36447d2` (PR #189 merge = `origin/main` tip at start). The requested `session-<id>/<task>` naming cannot be created in this harness; work is done on this single branch only.
+
+**Surveyed before claiming:** root landing page already carries the decision-readiness table (REQ-22 satisfied on `index.html`); `nfl-desk` register covers all 73 brief lines; baseline verifiers green on this tree (`nfl-desk/engine/verify.py` PASS 355 rows; `verification/verify_site.py` PASS 346 rows; `nfl-daily-desk/engine/verify.py` PASS 728 rows). PR #190 (`arena/875f601f-own4`, opened 2026-11-19T11:04Z) claims shared navigation files (`index.html`, `nfl/index.html`, `verification/build.py`, `verified/**`) — those files are **out of scope for this session**; a nav-integration request is logged below instead.
+
+**Scope claimed (exclusive):** `nfl-week11-series/**` (new namespace) + this append-only board record. Read-only use of every other namespace. No peer file is edited, deleted or merged.
+
+| ID | Task | Status | Owner | Files (scope) |
+|----|------|--------|-------|---------------|
+| S1 | Board claim push before implementation | done | arena-23197e9d-own4 | `COORDINATION.md` |
+| S2 | Live official reads with fetch timestamps: Week 11 injuries (capture_c, 3rd point in the timestamped series), Week 10 injuries recount, transactions/reserve evidence, club depth pages (GB/HOU) | in progress | arena-23197e9d-own4 | `nfl-week11-series/evidence/**`, `nfl-week11-series/data/sources.json` |
+| S3 | Series deltas published as levels-deltas-only (REQ-21/53/54): capture_c vs capture_b vs capture_a, per-club and per-designation | in progress | arena-23197e9d-own4 | `nfl-week11-series/data/series.json`, `engine/compute.py` |
+| S4 | Week 10 recount vs the brief's stale claims (REQ-48: 254 rows/4 no-injury sections vs live) | in progress | arena-23197e9d-own4 | `nfl-week11-series/data/week10_recount.json` |
+| S5 | Reserve-list check (REQ-62): 'not listed' never means 'available' — six contradictions + Willis case, checked against the live read | in progress | arena-23197e9d-own4 | `nfl-week11-series/data/reserve_check.json` |
+| S6 | Depth-parsing checks (REQ-31/49/50): Packers jersey-number recovery from raw strings, Texans image limitation, shared/empty slots | in progress | arena-23197e9d-own4 | `nfl-week11-series/data/depth_check.json` |
+| S7 | Static site (namespace-scoped) + verifier + executive summary + completion record + PR to main + merge + Pages confirmation | in progress | arena-23197e9d-own4 | `nfl-week11-series/**`, `COORDINATION.md` |
+
+**Requests to owners (logged, not applied):**
+- Session `arena/875f601f-own4` (PR #190, shared nav): please add one additive nav link from the root dashboard to `nfl-week11-series/index.html` when integrating; this session will not edit `index.html`/`nfl/index.html`/`verification/build.py` while that claim is warm.
+- `nfl-depth-sweep`: re-parse stored GB transcript with number-stripping + raw-string retention (slot-as-group schema with explicit empty state per S-09).
