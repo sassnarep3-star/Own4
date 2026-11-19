@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification · NFL Origination Lab</title>
+<meta name="description" content="How to reproduce the build and what the verifier asserts before publication.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NFL origination lab</span></a>
+  <div class="tag">Pre-registered competition · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Decision readiness (68)</a><a class="nav" href="../pages/questions.html">Questions (17)</a><a class="nav" href="../pages/suggestions.html">Suggestions (14, undecided)</a><a class="nav" href="../pages/flagged.html">Flagged for review (14)</a><div class="grp">Origination</div><a class="nav" href="../pages/origination.html">Own line vs official line</a><a class="nav" href="../pages/leaderboard.html">Proper-score leaderboard</a><a class="nav" href="../pages/luck.html">Removal of luck</a><a class="nav" href="../pages/prereg.html">Pre-registration &amp; data ladder</a><div class="grp">Evidence</div><a class="nav" href="../pages/corpus.html">Results corpus (150 games)</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><a class="nav" href="../pages/prices.html">Price-data policy</a><a class="nav" href="../pages/correlations.html">Correlations with n</a><a class="nav" href="../pages/sources.html">Sources</a><a class="nav active" href="../pages/verify.html">Verification</a></nav>
+  <div class="tag egress">No live official read this session: the sandbox has no HTTPS
+  route to nfl.com. Every number is a stored capture with its own date, or a
+  computation over one. <a href="../pages/flagged.html">Details</a>.</div>
+</aside>
+<main id="main">
+<div class="crumb">Evidence · verification</div>
+<h1>Verification</h1>
+
+<div class="panel"><h2>Reproduce every number</h2>
+<p>The whole build is eight commands, in order. Each writes a JSON file that the next one
+reads, and none fetches anything:</p>
+<pre>python3 nfl-origination-lab/engine/parse_availability.py
+python3 nfl-origination-lab/engine/corpus.py
+python3 nfl-origination-lab/engine/evaluate.py
+python3 nfl-origination-lab/engine/price_policy.py
+python3 nfl-origination-lab/engine/depth.py
+python3 nfl-origination-lab/engine/governance.py
+python3 nfl-origination-lab/engine/registers.py
+python3 nfl-origination-lab/engine/build.py
+python3 nfl-origination-lab/engine/verify.py</pre>
+<p>Then <code>verify.py</code> asserts the properties below and exits non-zero if any fails.
+It also re-runs the walk-forward with a poisoned future and asserts the predictions do not
+move — the only test of no-lookahead that means anything.</p></div><div class="tw"><table class=""><caption>The publication gate</caption><thead><tr><th scope='col'>Check</th><th scope='col'>What it asserts</th><th scope='col'>Where it lives</th></tr></thead><tbody><tr><td>V1</td><td>Every data-table row carries an https link to an official host or to this repository</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/verify.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V2</td><td>Every local href and src resolves to a file that exists</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/verify.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V3</td><td>No placeholder text, sentinel or unrendered template marker appears</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/verify.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V4</td><td>Every page carries the navigation, the disclaimer and the helpline</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/verify.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V5</td><td>The printed row counts match the data files behind them</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/verify.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V6</td><td>The corpus reconciles to the official standings (games and points)</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/corpus.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>V7</td><td>The walk-forward uses no game from the week it predicts (poisoned-future test)</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/evaluate.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V8</td><td>The pre-registration file is unmodified since the commit that froze it</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/prereg/PREREG-LAB-1.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>V9</td><td>The build is deterministic: two runs produce identical bytes</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/engine/build.py" target="_blank" rel="noopener">data</a></td></tr><tr><td>V10</td><td>No strategy is published without a blank staking division and a two-sided mind field</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/leaderboard.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div>
+<footer>
+  <p><strong>Own4 · NFL Origination Lab.</strong> Research workspace. Nothing here is a
+  betting recommendation, and no ROI is published because no officially sourced,
+  time-stamped price exists in this repository.</p>
+  <p>If gambling is causing harm: 1-800-MY-RESET ·
+  <a href="https://www.ncpgambling.org/help-treatment/chat/" target="_blank" rel="noopener">ncpgambling.org</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

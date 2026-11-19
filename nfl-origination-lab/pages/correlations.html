@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correlations · NFL Origination Lab</title>
+<meta name="description" content="Measured correlations with n and confidence intervals; price-based correlations are excluded because no official price exists.">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+<aside class="side">
+  <a class="brand" href="../index.html">Own4 <span>NFL origination lab</span></a>
+  <div class="tag">Pre-registered competition · built 2026-11-19</div>
+  <nav aria-label="Site sections"><div class="grp">Overview</div><a class="nav" href="../index.html">Dashboard</a><a class="nav" href="../pages/executive-summary.html">Executive summary</a><a class="nav" href="../pages/requirements.html">Decision readiness (68)</a><a class="nav" href="../pages/questions.html">Questions (17)</a><a class="nav" href="../pages/suggestions.html">Suggestions (14, undecided)</a><a class="nav" href="../pages/flagged.html">Flagged for review (14)</a><div class="grp">Origination</div><a class="nav" href="../pages/origination.html">Own line vs official line</a><a class="nav" href="../pages/leaderboard.html">Proper-score leaderboard</a><a class="nav" href="../pages/luck.html">Removal of luck</a><a class="nav" href="../pages/prereg.html">Pre-registration &amp; data ladder</a><div class="grp">Evidence</div><a class="nav" href="../pages/corpus.html">Results corpus (150 games)</a><a class="nav" href="../pages/availability.html">Availability &amp; depth</a><a class="nav" href="../pages/prices.html">Price-data policy</a><a class="nav active" href="../pages/correlations.html">Correlations with n</a><a class="nav" href="../pages/sources.html">Sources</a><a class="nav" href="../pages/verify.html">Verification</a></nav>
+  <div class="tag egress">No live official read this session: the sandbox has no HTTPS
+  route to nfl.com. Every number is a stored capture with its own date, or a
+  computation over one. <a href="../pages/flagged.html">Details</a>.</div>
+</aside>
+<main id="main">
+<div class="crumb">Evidence · correlations</div>
+<h1>Correlations</h1>
+
+<p>Every correlation is computed from the verified corpus and states its n and 95% interval. No correlation that involves a price is published, because no officially sourced price exists.</p><div class="tw"><table class=""><caption>Correlations from officially sourced numbers, n on every value</caption><thead><tr><th scope='col'>Season</th><th scope='col'>Pair</th><th scope='col'>r</th><th scope='col'>n</th><th scope='col'>95% CI</th><th scope='col'>Uses a price?</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>2025</td><td>margin ~ total</td><td>-0.0197</td><td>272</td><td>[-0.1383, 0.0995]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2025</td><td>abs_margin ~ total</td><td>-0.0174</td><td>272</td><td>[-0.1361, 0.1017]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2025</td><td>rest_diff ~ margin</td><td>0.1093</td><td>256</td><td>[-0.0135, 0.2288]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2025</td><td>club_total_game_k ~ club_total_game_k+1</td><td>0.0216</td><td>512</td><td>[-0.0652, 0.1080]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2026</td><td>margin ~ total</td><td>-0.1405</td><td>150</td><td>[-0.2941, 0.0202]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2026</td><td>abs_margin ~ total</td><td>-0.0188</td><td>150</td><td>[-0.1785, 0.1419]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2026</td><td>rest_diff ~ margin</td><td>0.3038</td><td>150</td><td>[0.1508, 0.4425]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>2026</td><td>club_total_game_k ~ club_total_game_k+1</td><td>0.0718</td><td>268</td><td>[-0.0485, 0.1900]</td><td>no</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div><h2>Deliberately not published</h2><div class="tw"><table class=""><caption>An unavailable correlation is published as unavailable, never estimated from a rule of thumb</caption><thead><tr><th scope='col'>Item</th><th scope='col'>Why not</th><th scope='col'>Source</th></tr></thead><tbody><tr><td>same-game parlay leg correlation</td><td>requires joint prices from an official or licensed source; F-01</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>player prop pair correlation</td><td>requires official player-level prices or per-game logs; neither exists here</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr><tr><td>closing-line correlation</td><td>requires a closing price; the store has none for 2026</td><td><a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/data/correlations.json" target="_blank" rel="noopener">data</a></td></tr></tbody></table></div>
+<footer>
+  <p><strong>Own4 · NFL Origination Lab.</strong> Research workspace. Nothing here is a
+  betting recommendation, and no ROI is published because no officially sourced,
+  time-stamped price exists in this repository.</p>
+  <p>If gambling is causing harm: 1-800-MY-RESET ·
+  <a href="https://www.ncpgambling.org/help-treatment/chat/" target="_blank" rel="noopener">ncpgambling.org</a></p>
+</footer>
+</main>
+</div>
+<script src="../assets/app.js"></script>
+</body>
+</html>

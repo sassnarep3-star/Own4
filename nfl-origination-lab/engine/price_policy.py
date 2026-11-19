@@ -232,6 +232,14 @@ def main():
                 "and, separately, the operator's own void/push rules for combos",
             ],
         },
+        "classification_rule": {
+            "C1": "a line is present for the named market",
+            "C2": "a source key is recorded for that line",
+            "C3": "the source key appears in source_register",
+            "C4": "the register records the key as an official nfl.com publication, and "
+                  "records a known capture time for it",
+            "claimable_requires": "C1 and C2 and C3 and C4",
+        },
         "source_register": SOURCE_REGISTER,
         "census": {
             "rows_total": len(rows),

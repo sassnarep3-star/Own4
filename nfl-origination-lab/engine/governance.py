@@ -32,7 +32,9 @@ def load(name):
 
 
 def repo(path, label="repo"):
-    return {"href": path, "label": label}
+    """An anchor string, rendered here rather than left as a dict for the builder."""
+    return ('<a href="https://github.com/sassnarep3-star/Own4/blob/main/nfl-origination-lab/%s" '
+            'target="_blank" rel="noopener">%s</a>' % (path, label))
 
 
 def main():
